@@ -1,0 +1,262 @@
+    <section id="intro">
+      <h2>Как пользоваться гайдом</h2>
+      <p><strong>Структура документа:</strong></p>
+      <ul>
+        <li><strong>⚡ Раздел 1</strong> — Быстрый старт: минимальный шаблон за 5 минут</li>
+        <li><strong>🏗 Раздел 2</strong> — Архитектура: теория и принципы</li>
+        <li><strong>🧱 Раздел 3</strong> — Core-блоки: Anchors, Examples, Greeting</li>
+        <li><strong>🧠 Раздел 4</strong> — Психология: Spine, Enneagram, OCEAN, MBTI</li>
+        <li><strong>⚙️ Раздел 5</strong> — Технические настройки: Параметры генерации, AN, Лорбук, SP</li>
+        <li><strong>🔧 Раздел 6</strong> — Диагностика и тестирование: 4 тест-сценария, таблица симптомов</li>
+        <li><strong>📎 Приложения</strong> — Справочные таблицы, примеры и референс-карточка</li>
+      </ul>
+      <p><strong>Порядок работы:</strong></p>
+      <ul>
+        <li>Новичок: Раздел 1 → практика → Разделы 3–5 по необходимости</li>
+        <li>Продвинутый: Раздел 2 → пайплайн из 10 шагов → Приложения</li>
+      </ul>
+      <p><strong>Примечание:</strong> В Быстром старте порядок оптимизирован для скорости. В пайплайне (Раздел 2) — для качества.</p>
+
+      <div class="infographic">
+        <div class="infographic-title">IMG_06: ПАЙПЛАЙН СОЗДАНИЯ (10 ШАГОВ)</div>
+        <div class="inf-stepper">
+          <div class="inf-stepper-item"><div class="inf-stepper-num">01.</div><div class="inf-stepper-text">Spine (Психологическое ядро) → WANT / NEED / FLAW / LIE / GHOST</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">02.</div><div class="inf-stepper-text">Enneagram → Тип + крыло + стресс→рост (1–2 строки)</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">03.</div><div class="inf-stepper-text">OCEAN → Только 1–2 экстремальных полюса</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">04.</div><div class="inf-stepper-text">Поведенческие якоря → 5–7 правил Триггер → Действие → Цена</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">05.</div><div class="inf-stepper-text">Первое сообщение → Сенсорика → Поза (FLAW) → Речь (LIE) → Крючок</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">06.</div><div class="inf-stepper-text">Примерные сообщения → 3 блока: нейтральный / стресс / доверие</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">07.</div><div class="inf-stepper-text">System Prompt → Антигодмодинг + стиль + XML-теги</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">08.</div><div class="inf-stepper-text">Параметры генерации → T, Top P, Min P, RepPen=1.05, presence_penalty=0.0–0.15</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">09.</div><div class="inf-stepper-text">Динамика → AN (обновлять каждые 3–5 msg при 8K+) + Лорбук</div></div>
+          <div class="inf-stepper-item"><div class="inf-stepper-num">10.</div><div class="inf-stepper-text">Проверка → 4 тест-сценария → таблица симптомов</div></div>
+        </div>
+      </div>
+      <p><strong>Интерактивные функции (требуют JavaScript):</strong></p>
+      <ul>
+        <li><strong>Ctrl+K</strong> — быстрый поиск по гайду</li>
+        <li>📝 <strong>Блокнот для записей</strong> — плавающая панель для заметок (кнопка на экране)</li>
+        <li>📑 <strong>Навигация</strong> — скрытие/показ оглавления</li>
+        <li>🌙 <strong>Тема</strong> — переключение тёмной/светлой темы</li>
+      </ul>
+      <div class="callout">
+        <p><span class="tag core">Core</span> — обязательный элемент. <span class="tag opt">Optional</span> — подключается по контексту и размеру модели.</p>
+      </div>
+
+      <h2 id="reference">📋 Референс-карточка</h2>
+      <p>В Приложении 6 находится полностью рабочая карточка персонажа <strong>«Выщербленный»</strong>, созданная по методологии этого гайда. Рекомендуется держать открытой при чтении.</p>
+      <p><strong>Почему этот персонаж:</strong></p>
+      <ul>
+        <li>Нестандартный сеттинг (боди-хоррор, не реализм)</li>
+        <li>Все Core-элементы реализованы</li>
+        <li>GHOST распределён по слоям корректно</li>
+        <li>Можно использовать как шаблон: удалить контент, сохранить структуру</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- ==================== РАЗДЕЛ 1 ==================== -->
+    <section id="quick-start">
+      <h2>⚡ Раздел 1: Быстрый старт</h2>
+
+      <h3>🎯 Ключевые термины</h3>
+      <ul>
+        <li><strong><abbr data-tooltip="Изъян персонажа — конкретное поведение, которое мешает ему получить NEED">FLAW</abbr></strong> [рус: Изъян] — изъян персонажа, мешающий ему (конкретное поведение, не прилагательное) <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
+        <li><strong><abbr data-tooltip="Ложная установка — во что персонаж верит, часто мешая себе получить NEED">LIE</abbr></strong> [рус: Ложь] — ложная установка, во что персонаж верит <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
+        <li><strong><abbr data-tooltip="Событие из прошлого, сформировавшее FLAW и LIE. Не дублируется в System Prompt">GHOST</abbr></strong> [рус: Призрак/Тень] — событие из прошлого, формирующее FLAW и LIE <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
+        <li><strong><abbr data-tooltip="Психологическое ядро персонажа из 5 элементов: WANT, NEED, FLAW, LIE, GHOST">Spine</abbr></strong> [рус: Мотивационное ядро] — связка из 5 элементов: WANT, NEED, FLAW, LIE, GHOST</li>
+        <li><strong><abbr data-tooltip="Поведенческие якоря — правила поведения формата Триггер → Действие → Цена">Anchors</abbr></strong> [рус: Поведенческие якоря] — правила поведения в формате «триггер → действие»</li>
+      </ul>
+
+      <h3>⚡ Минимальный шаблон за 5 минут</h3>
+      <!-- SCOPE: Minimal viable card — ~800 tokens. Fields marked * are mandatory. -->
+      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. См. A02 в <a href="#anchors">Разделе 3.1</a>.</p>
+      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> Quick Start (упрощённый, 4 якоря, без Price): ~450 токенов | Полная схема (5 якорей, Price, GHOST): ~850 токенов</p>
+
+      <div class="infographic">
+        <div class="infographic-title">IMG_02: РАСПРЕДЕЛЕНИЕ ТОКЕН-БЮДЖЕТА</div>
+        <div class="inf-bar-chart">
+          <div class="inf-bar-group">
+            <div class="inf-bar-label"><span>4K (Минимум)</span><span>350–450 токенов</span></div>
+            <div class="inf-bar-track">
+              <div class="inf-bar-segment" style="width:100%;background:rgba(234,179,8,0.18);color:#eab308;">~450</div>
+            </div>
+          </div>
+          <div class="inf-bar-group">
+            <div class="inf-bar-label"><span>8K (Стандарт)</span><span>700–900 токенов</span></div>
+            <div class="inf-bar-track">
+              <div class="inf-bar-segment" style="width:50%;background:rgba(56,189,248,0.18);color:var(--accent);">~450</div>
+              <div class="inf-bar-segment" style="width:50%;background:rgba(56,189,248,0.32);color:var(--accent);">+450</div>
+            </div>
+          </div>
+          <div class="inf-bar-group">
+            <div class="inf-bar-label"><span>16K+ (Полная схема)</span><span>1200–1800 токенов</span></div>
+            <div class="inf-bar-track">
+              <div class="inf-bar-segment" style="width:25%;background:rgba(34,197,94,0.12);color:#22c55e;">~450</div>
+              <div class="inf-bar-segment" style="width:25%;background:rgba(34,197,94,0.22);color:#22c55e;">+450</div>
+              <div class="inf-bar-segment" style="width:25%;background:rgba(34,197,94,0.32);color:#22c55e;">+450</div>
+              <div class="inf-bar-segment" style="width:25%;background:rgba(34,197,94,0.42);color:#22c55e;">+450</div>
+            </div>
+          </div>
+          <div class="inf-components-list">
+            <div class="inf-component-item">System Prompt / SP (150–200)</div>
+            <div class="inf-component-item">Первое сообщение / Greeting (150–200)</div>
+            <div class="inf-component-item">Spine / Мотивация (100–150)</div>
+            <div class="inf-component-item">Поведенческие якоря ×5–7 (200–300)</div>
+            <div class="inf-component-item">Примерные сообщения / Examples (200–400)</div>
+          </div>
+          <div class="callout warn" style="margin-top:14px"><strong>AN и Лорбук:</strong> подключаются ТОЛЬКО при контексте ≥ 8K.</div>
+        </div>
+      </div>
+
+      <h4>📊 Таблица токен-распределения по блокам</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Блок</th><th>Минимум</th><th>Стандарт</th><th>Максимум</th><th>Примечание</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>System Prompt</strong></td><td>80–100</td><td>150–200</td><td>300–400</td><td>Антигодмодинг + SPATIAL LOCK + FORMAT LOCK — обязательно</td></tr>
+            <tr><td><strong>Greeting</strong></td><td>80–100</td><td>150–200</td><td>250–300</td><td>Сенсорика → поза → речь → крючок</td></tr>
+            <tr><td><strong>Spine (motivation)</strong></td><td>60–80</td><td>100–150</td><td>200–250</td><td>WANT + NEED + FLAW + LIE + GHOST</td></tr>
+            <tr><td><strong>Behavior (якоря)</strong></td><td>100–150</td><td>200–300</td><td>400–500</td><td>5–7 якорей с ценой для FLAW/GHOST</td></tr>
+            <tr><td><strong>Examples (мин. 2)</strong></td><td>100–150</td><td>200–300</td><td>400–600</td><td>Нейтральный + стресс-сценарий</td></tr>
+            <tr><td><strong>Author's Notes</strong></td><td>—</td><td>50–100</td><td>150–200</td><td>Только для ≥8K контекста</td></tr>
+            <tr><td><strong>Lorebook (GHOST)</strong></td><td>—</td><td>30–50</td><td>100–150</td><td>Опционально, для ≥8K</td></tr>
+            <tr><td><strong>OCEAN (1–2 полюса)</strong></td><td>20–30</td><td>40–60</td><td>80–100</td><td>Только экстремальные значения</td></tr>
+            <tr><td><strong>Enneagram</strong></td><td>20–30</td><td>40–60</td><td>80–100</td><td>Тип + крыло + стресс/рост</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>📊 Токен-бюджет по размеру контекста</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Контекст</th><th>Карточка</th><th>AN/LB</th><th>Диалог</th><th>Итого</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>4K</strong></td><td>300–400</td><td>❌ Нет</td><td>~3500</td><td>~4000</td></tr>
+            <tr><td><strong>8K</strong></td><td>600–800</td><td>100–200</td><td>~7000</td><td>~8000</td></tr>
+            <tr><td><strong>16K</strong></td><td>800–1200</td><td>200–400</td><td>~14000</td><td>~16000</td></tr>
+            <tr><td><strong>32K+</strong></td><td>1500–2500</td><td>300–500</td><td>~30000</td><td>~32000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn" style="margin:1em 0">
+        <strong>⚠️ Важно:</strong> Это оценки. Реальное количество токенов зависит от языка (русский = больше токенов), модели и токенизатора. Всегда проверяй счётчиком.
+      </div>
+
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>💡 Как оценить токены:</strong>
+        <ul style="margin:0.5em 0 0 0">
+          <li>Встроенный счётчик интерфейса (если доступен) — наиболее точный метод</li>
+          <li>Приближение: 1 токен ≈ 4 символа (английский) / 1–2 символа (русский)</li>
+          <li>Онлайн-инструменты: tiktokenizer (OpenAI), HuggingFace Tokenizer</li>
+          <li>Калькуляция: разделите количество символов в блоке на 3–4 для оценки</li>
+        </ul>
+      </div>
+      <p>Ниже — рабочий минимум, на котором можно начать RP прямо сейчас. Каждая строка здесь — обязательный элемент.</p>
+
+      <div class="infographic">
+        <div class="infographic-title">IMG_04: СРАВНЕНИЕ: 4K-FALLBACK VS ПОЛНЫЙ ПАЙПЛАЙН</div>
+        <div class="inf-comparison">
+          <div class="inf-comparison-panel">
+            <div class="inf-panel-tag inf-tag-warning">4K FALLBACK</div>
+            <div class="inf-panel-items">
+              <div class="inf-panel-item">3 базовых якоря (без Price)</div>
+              <div class="inf-panel-item">Статический SP</div>
+              <div class="inf-panel-item">Первое сообщение (сокращённое)</div>
+              <div class="inf-panel-item">❌ Нет AN / Нет Лорбука</div>
+            </div>
+          </div>
+          <div class="inf-comparison-panel">
+            <div class="inf-panel-tag inf-tag-success">ПОЛНЫЙ ПАЙПЛАЙН (32K+)</div>
+            <div class="inf-panel-items">
+              <div class="inf-panel-item">7 якорей с Price</div>
+              <div class="inf-panel-item">Динамика WANT → NEED</div>
+              <div class="inf-panel-item">Примеры: нейтральный / стресс / доверие</div>
+              <div class="inf-panel-item">✅ AN + Лорбук активны</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Шаг 1. 💬 Greeting (100–200 токенов)</h4>
+      <p>Первое сообщение персонажа. Следуй алгоритму из 4 шагов:</p>
+      <ol>
+        <li><strong>Сенсорика</strong> — что персонаж чувствует прямо сейчас (запах, звук, физическое ощущение)</li>
+        <li><strong>Поза/действие</strong> — что он делает (проявление FLAW — изъяна персонажа)</li>
+        <li><strong>Речь</strong> — что говорит (проявление LIE — ложной установки)</li>
+        <li><strong>Крючок</strong> — вопрос или действие, которое передаёт инициативу {{user}}</li>
+      </ol>
+      <div class="callout tip">
+        <strong>💡 Пример:</strong>
+        <p>Зал пахнет кофе и разогретой пиццей. За крайним столиком девушка в мешковатом худи перелистывает страницу, не замечая, что уже пятую. Она подняла взгляд — и тут же отвернулась, чувствуя, как начинает краснеть.</p>
+        <p>«Эм… Ты к кому?»</p>
+      </div>
+
+      <h4>Шаг 2. 🎯 Поведенческие якоря (150–300 токенов)</h4>
+      <p>5–7 правил поведения в формате <strong>«Триггер → Действие»</strong>. Записываются в Description.</p>
+      <p style="font-size:0.9em;color:var(--accent)"><p><strong>КАНОНИЧЕСКИЙ ФОРМАТ:</strong> <code>[Trigger] → [Action] → [Price: &lt;immediate physical/verbal manifestation&gt;]</code><br>
+<span style="font-size:0.85em;color:var(--text-muted)">(Триггер → Действие → Цена: &lt;немедленная физическая или речевая манифестация&gt;)</span></p>
+      <div class="callout tip">
+        <strong>💡 Пример:</strong>
+        <ul>
+          <li>Когда нервничает — грызёт колпачок ручки или подковыривает nail-полировку на большом пальце</li>
+          <li>В компании больше трёх человек — замолкает и слушает, отвечает односложно</li>
+          <li>Если кто-то повышает голос — не отводит взгляд, но поджимает ноги под стул</li>
+          <li>Когда увлечена разговором — забывает про еду и время</li>
+          <li>Увидела собаку на улице — обязательно окликнет и улыбнётся (даже если только что ругалась)</li>
+        </ul>
+        <p style="margin-top:0.8em;font-size:0.9em;">⚠️ В финальной карточке добавьте [Price] к якорям, связанным с FLAW/GHOST, и замените декоративные примеры (например, про собаку) на поведенческие. <strong>Price должен проявляться в той же сцене</strong> — немедленная физическая или вербальная манифестация.</p>
+      </div>
+      <p><strong>Дополнение (Embodiment — телесность персонажа):</strong> Якоря можно дополнить мета-правилом в System Prompt: <code>{{char}} познаёт мир через тело. Внутреннее проявляется через телесность. Окружение активно: сопротивляется, влияет, помнит.</code></p>
+
+      <h4>Шаг 3. 💬 Примерные сообщения (160–240 токенов)</h4>
+      <p>Минимум 2 примера: нейтральный + стресс. Рекомендуется 3: нейтральный + стресс + доверие/рост. Каждый 80–120 токенов. Опционально: добавить пример короткой реакции (10–30 токенов).</p>
+      <div class="callout tip">
+        <strong>💡 Пример (нейтральный):</strong>
+        <pre><code>&lt;START&gt;
+{{char}}: Пальцы замерли над клавиатурой. Она потянулась, хрустнула шеей, почувствовала, как затекла спина — и только тогда оторвала взгляд от экрана. «Ага, щас…» — она промямлила это в третий раз за вечер, не отрываясь от ноутбука. На экране мерцал документ, открытый ещё в полдень. «Не, ладно. Чего ты хотел? Слушаю. По-настоящему.»
+</code></pre>
+        <!-- Пример демонстрирует систему B: действие как проза, диалог в гильеметах. Применяй единую систему во всех блоках. -->
+      </div>
+
+      <h4>Шаг 4. 🎯 WANT vs NEED (20–30 токенов)</h4>
+      <p>Одно предложение, раскрывающее суть конфликта:</p>
+      <div class="callout tip">
+        <strong>💡 Пример:</strong>
+        <p><strong>ХОЧЕТ:</strong> брать все задачи на себя, чтобы не просить помощи → <strong>НУЖНО:</strong> делегировать или озвучить просьбу хотя бы раз в сцене</p>
+      </div>
+
+      <h4>Шаг 5. 🚫 Антигодмодинг в System Prompt (25–30 токенов)</h4>
+      <p><strong>Обязательно.</strong> Добавь в System Prompt:</p>
+      <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
+{{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.</code></pre>
+      <p><em>Полное объяснение: <a href="#antigodmoding">Раздел 5.0.1</a></em></p>
+
+      <h4>Шаг 6. 📊 Настройки сэмплирования</h4>
+      <ul>
+        <li><strong>12B–14B:</strong> temperature=0.7, top_p=0.9, min_p=0.05, repetition_penalty=1.05, top_k=50, <strong>presence_penalty=0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</strong></li>
+        <li><strong>32B+ / API:</strong> temperature=0.95, top_p=0.95, min_p=0.05, repetition_penalty=1.05, top_k=50, presence_penalty=0.0–0.15</li>
+      </ul>
+      <p style="font-size:0.9em;">⚠️ Quick Start — минимальный набор для старта. Цены, полные Enneagram/OCEAN и AN подключаются по мере роста контекста (см. <a href="#anchors">Разделы 3</a>–<a href="#style-fix">5</a>).</p>
+      <p style="font-size:0.85em; color:var(--text-muted);"><em>Примечание:</em> T=0.7 (12B) и T=0.95 (32B+) — среднее значение диапазона. Для тонкой настройки используй диапазоны из <a href="#sampling">Раздел 5.1</a>.</p>
+
+      <h3>⚠️ Топ-3 ошибки, ломающие персонажа</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Персонаж забывает речевые тики</td><td><code>presence_penalty</code> захардкожен на <strong>0.7</strong></td><td><strong>Для 12B:</strong> поставь 0.0 (обязательно). <strong>Для 32B+:</strong> 0.0–0.15. Некоторые интерфейсы хардкодят 0.7 — меняй на ручной.</td></tr>
+            <tr><td>Персонаж пишет за {{user}}</td><td>Нет антигодмодинга в SP</td><td><a href="#antigodmoding">→ Раздел 5.0.1</a></td></tr>
+            <tr><td>Персонаж стал плоским и пресным</td><td>T выше 0.85 для модели 12B</td><td>Снизь T до 0.6–0.8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>

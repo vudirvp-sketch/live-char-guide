@@ -1,0 +1,45 @@
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<button class="hamburger" aria-label="Open navigation" type="button">☰</button>
+<div class="mobile-nav-overlay"></div>
+<div class="fab-group" id="fab-group">
+  <button class="fab-btn" id="fab-theme" aria-label="Toggle theme" title="Тема" type="button">
+    <span class="theme-icon-dark">🌙</span>
+    <span class="theme-icon-light" hidden>☀️</span>
+  </button>
+  <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
+  <button class="fab-btn" id="fab-toc" aria-label="Toggle navigation" title="Навигация" type="button">📑</button>
+  <button class="fab-btn" id="fab-top" aria-label="Scroll to top" title="Наверх" type="button">↑</button>
+</div>
+
+<div id="search-container" hidden>
+  <input type="search" id="search-input" placeholder="Поиск по гайду..." autocomplete="off">
+  <div id="search-results"></div>
+</div>
+
+<header>
+  <h1>📖 Живой персонаж для LLM v5.3.2 — Гайд по созданию RP-карточек</h1>
+  <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
+</header>
+
+<div class="content-wrapper">
+
+<!-- TOC PANEL (NEW) -->
+<div id="toc-panel" class="panel" tabindex="-1" role="navigation" aria-label="Содержание">
+  <div class="panel-header" data-drag-handle>
+    <span class="panel-header-title">📑 Навигация</span>
+    <div class="panel-header-actions">
+      <button class="panel-btn" data-action="collapse" title="Свернуть" aria-label="Свернуть панель">−</button>
+      <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">×</button>
+    </div>
+  </div>
+  <div class="panel-content" id="toc-content">
+    <!-- TOC links will be injected here by JavaScript -->
+  </div>
+  <div class="panel-resize-handle" data-resize-handle></div>
+</div>
+
+<!-- OLD TOC (hidden via CSS, kept for content reference) -->
+<!-- DEPRECATED: Old nav#toc removed — replaced by floating panel system -->
+
+<main id="main-content">

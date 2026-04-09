@@ -1,0 +1,29 @@
+  </main>
+
+  </div><!-- /.content-wrapper -->
+
+<script src="assets/main.js" defer></script>
+
+<!-- NOTEPAD PANEL (NEW) -->
+<div id="notepad-panel" class="panel" tabindex="-1" aria-label="Notepad">
+  <div class="panel-header" data-drag-handle>
+    <span class="panel-header-title">📝 Блокнот</span>
+    <div class="panel-header-actions">
+      <button class="panel-btn" data-action="save" title="Сохранить" aria-label="Сохранить заметки">💾</button>
+      <button class="panel-btn" data-action="clear" title="Очистить" aria-label="Очистить заметки">🗑</button>
+      <button class="panel-btn" data-action="export" title="Экспорт" aria-label="Экспортировать заметки">📋</button>
+      <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">×</button>
+    </div>
+  </div>
+  <textarea
+    class="panel-content panel-textarea"
+    id="notepad-content"
+    placeholder="Ваши заметки..."
+    spellcheck="false"
+    aria-label="Текст заметок"
+  ></textarea>
+  <div class="panel-resize-handle" data-resize-handle></div>
+</div>
+
+</body>
+</html>

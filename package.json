@@ -1,0 +1,30 @@
+{
+  "name": "live-char-guide",
+  "version": "5.3.2",
+  "type": "module",
+  "description": "Live Character Guide for LLM — Engineering pipeline for RP character cards",
+  "scripts": {
+    "build": "node src/scripts/build.mjs",
+    "test": "node scripts/test-interactive.mjs",
+    "test:a11y": "axe http://localhost:3000 --include=#main-content --tags=wcag2a,wcag2aa --exit",
+    "serve": "serve . -l 3000",
+    "dev": "npm run build && npm run serve"
+  },
+  "devDependencies": {
+    "node-html-parser": "^6.1.13",
+    "puppeteer": "^21.0.0",
+    "@axe-core/cli": "^4.8.0",
+    "serve": "^14.2.0",
+    "wait-on": "^7.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vudirvp-sketch/live-char-guide.git"
+  },
+  "keywords": ["llm", "rp", "character-card", "ai", "persona"],
+  "author": "TITAN FUSE Team",
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+{
+  "version": "5.3.2",
+  "encoding": "utf-8",
+  "parts": [
+    { "file": "00_meta.html", "type": "head", "critical": true },
+    { "file": "01_header.html", "type": "body-start" },
+    { "file": "02_quickstart.html", "type": "section", "anchors": ["#quick-start"] },
+    { "file": "03_architecture.html", "type": "section", "anchors": ["#architecture"] },
+    { "file": "04_core_blocks.html", "type": "section", "anchors": ["#anchors", "#examples", "#greeting"] },
+    { "file": "05_psychology.html", "type": "section", "anchors": ["#spine", "#enneagram", "#ocean", "#mbti-section"] },
+    { "file": "06_technical.html", "type": "section", "anchors": ["#sampling", "#an-ghost", "#lorebook"] },
+    { "file": "07_testing.html", "type": "section", "anchors": [] },
+    { "file": "08_appendices.html", "type": "section", "anchors": ["#appendix2", "#appendix4", "#appendix6"] },
+    { "file": "09_footer.html", "type": "body-end", "critical": true },
+    { "file": "styles.css", "type": "style", "inline": true }
+  ],
+  "scripts": {
+    "main": "assets/main.js",
+    "widgets": "assets/widgets.js",
+    "defer": true
+  }
+}
