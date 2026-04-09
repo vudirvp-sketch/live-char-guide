@@ -1,10 +1,23 @@
 #!/usr/bin/env node
 /**
- * TITAN FUSE Build Script for Live Char Guide
- * Version: 1.0.0
+ * @fileoverview TITAN FUSE Build Script for Live Char Guide
+ * @module src/scripts/build
+ * @version 1.1.0
+ * @author TITAN FUSE Team
+ * @license MIT
  * 
+ * @description
  * Performs deterministic assembly of modular HTML parts into index.html
  * with anchor validation, BOM rejection, and cache-busting.
+ * 
+ * @example
+ * // Run from command line
+ * node src/scripts/build.mjs
+ * 
+ * // Or via npm
+ * npm run build
+ * 
+ * @see {@link https://github.com/vudirvp-sketch/live-char-guide|Repository}
  */
 
 import { parse } from 'node-html-parser';
@@ -26,12 +39,24 @@ const HASH_PATH = join(ROOT, 'build.hash');
 // UTILITY FUNCTIONS
 // ============================================================================
 
+/**
+ * Logs a message with timestamp and level indicator
+ * @param {string} level - Log level: 'ERROR', 'WARN', or 'INFO'
+ * @param {string} message - Message to log
+ * @returns {void}
+ */
 function log(level, message) {
   const timestamp = new Date().toISOString();
   const prefix = level === 'ERROR' ? '❌' : level === 'WARN' ? '⚠️' : '✓';
   console.error(`[${timestamp}] ${prefix} ${message}`);
 }
 
+/**
+ * Ensures a directory exists, creating it if necessary
+ * @async
+ * @param {string} dir - Directory path to ensure
+ * @returns {Promise<void>}
+ */
 async function ensureDir(dir) {
   if (!existsSync(dir)) {
     await mkdir(dir, { recursive: true });
@@ -42,6 +67,15 @@ async function ensureDir(dir) {
 // ANCHOR VALIDATION (CROSSREF_VALIDATOR)
 // ============================================================================
 
+/**
+ * Validates that expected anchors exist in HTML content
+ * @param {string} content - HTML content to validate
+ * @param {Object} part - Part definition from manifest
+ * @param {string} part.file - Filename of the part
+ * @param {string[]} [part.anchors] - Array of expected anchor IDs (with # prefix)
+ * @param {Object} manifest - Full manifest object
+ * @returns {Array<{anchor: string, file: string, context: string, line: number}>} Array of validation errors
+ */
 function validateAnchors(content, part, manifest) {
   const root = parse(content);
   const errors = [];
@@ -85,6 +119,11 @@ function validateAnchors(content, part, manifest) {
 // BOM DETECTION
 // ============================================================================
 
+/**
+ * Detects Byte Order Mark (BOM) in a buffer
+ * @param {Buffer} buffer - Buffer to check for BOM
+ * @returns {string|null} BOM type ('UTF-8 BOM', 'UTF-16 LE BOM', 'UTF-16 BE BOM') or null if no BOM
+ */
 function detectBOM(buffer) {
   if (buffer.slice(0, 3).equals(Buffer.from([0xEF, 0xBB, 0xBF]))) {
     return 'UTF-8 BOM';
@@ -102,6 +141,17 @@ function detectBOM(buffer) {
 // MAIN BUILD FUNCTION
 // ============================================================================
 
+/**
+ * Main build function that assembles HTML parts into index.html
+ * @async
+ * @returns {Promise<{hash: string, filesProcessed: number, version: string, sizeKB: number}>}
+ *          Build result containing hash, file count, version, and output size
+ * @throws {Error} If manifest is invalid, files missing, or validation fails
+ * 
+ * @example
+ * const result = await build();
+ * console.log(`Built ${result.filesProcessed} files, hash: ${result.hash}`);
+ */
 async function build() {
   log('INFO', 'Starting build process...');
   

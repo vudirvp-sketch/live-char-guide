@@ -1,9 +1,27 @@
 #!/usr/bin/env node
 /**
- * Artifact Validation Script for Live Char Guide
- * Version: 1.0.0
- *
- * Validates both index.html and zero-install.html artifacts.
+ * @fileoverview Artifact Validation Script for Live Char Guide
+ * @module scripts/validate-artifact
+ * @version 1.1.0
+ * @author TITAN FUSE Team
+ * @license MIT
+ * 
+ * @description
+ * Validates both index.html and zero-install.html artifacts against quality gates:
+ * - File existence and size limits
+ * - Version metadata presence and matching
+ * - Required sections presence
+ * - No external resource references (zero-install only)
+ * - HTML validity checks
+ * 
+ * @example
+ * // Run validation
+ * node scripts/validate-artifact.mjs
+ * 
+ * // Via npm
+ * npm run validate
+ * 
+ * @see {@link https://github.com/vudirvp-sketch/live-char-guide|Repository}
  */
 
 import { readFile, stat } from 'fs/promises';

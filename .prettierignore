@@ -1,0 +1,6 @@
+node_modules/
+coverage/
+*.min.js
+*.min.css
+live-char-guide-zero-install.html
+index.html

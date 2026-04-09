@@ -1,9 +1,32 @@
 #!/usr/bin/env node
 /**
- * Version Sync Checker for Live Char Guide
- * Version: 1.0.0
- *
+ * @fileoverview Version Sync Checker for Live Char Guide
+ * @module scripts/version-sync
+ * @version 1.1.0
+ * @author TITAN FUSE Team
+ * @license MIT
+ * 
+ * @description
  * Detects drift between source version and artifact versions.
+ * Compares version across:
+ * - src/VERSION (source of truth)
+ * - package.json
+ * - index.html meta tag
+ * - live-char-guide-zero-install.html meta tag
+ * 
+ * Exit codes:
+ * - 0: All versions in sync
+ * - 1: Version drift detected (warning)
+ * - 2: Error during check
+ * 
+ * @example
+ * // Run version check
+ * node scripts/version-sync.mjs
+ * 
+ * // Via npm
+ * npm run version:check
+ * 
+ * @see {@link https://github.com/vudirvp-sketch/live-char-guide|Repository}
  */
 
 import { readFile } from 'fs/promises';
@@ -23,6 +46,12 @@ const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 // VERSION EXTRACTION
 // ============================================================================
 
+/**
+ * Extracts version string from HTML content
+ * @param {string} content - HTML content to search
+ * @param {string} name - Name of the file (for error reporting)
+ * @returns {string|null} Version string or null if not found
+ */
 function extractVersionFromHtml(content, name) {
   // Try meta tag first
   const metaMatch = content.match(/<meta name="livechar-version" content="([^"]+)"/);
@@ -49,6 +78,12 @@ function extractVersionFromHtml(content, name) {
 // MAIN FUNCTION
 // ============================================================================
 
+/**
+ * Checks version synchronization across all sources
+ * @async
+ * @returns {Promise<void>}
+ * @throws {Error} If version check fails critically
+ */
 async function checkVersionSync() {
   const versions = {};
   const errors = [];

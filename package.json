@@ -7,18 +7,33 @@
     "build": "node src/scripts/build.mjs",
     "build:zero": "node src/scripts/build-zero-install.mjs",
     "build:all": "npm run build && npm run build:zero",
+    "build:check": "npm run build:all && npm run validate",
+    "build:watch": "chokidar 'src/**/*' -c 'npm run build:all'",
     "validate": "node scripts/validate-artifact.mjs",
     "version:check": "node scripts/version-sync.mjs",
-    "test": "node scripts/test-interactive.mjs",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:unit": "node --test tests/test-*.mjs",
+    "test:integration": "node --test tests/integration/*.mjs",
     "test:a11y": "axe http://localhost:3000 --include=#main-content --tags=wcag2a,wcag2aa --exit",
     "serve": "serve . -l 3000",
     "dev": "npm run build:all && npm run serve",
-    "precommit": "npm run build:all && npm run validate"
+    "precommit": "npm run build:all && npm run validate",
+    "prepare": "husky",
+    "lint": "eslint src/",
+    "lint:fix": "prettier --write .",
+    "clean": "rm -rf node_modules package-lock.json pnpm-lock.yaml",
+    "reinstall": "npm run clean && npm install"
   },
   "devDependencies": {
     "@axe-core/cli": "^4.8.0",
+    "@eslint/js": "^10.0.1",
+    "chokidar-cli": "^3.0.0",
+    "eslint": "^10.2.0",
     "he": "^1.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.0.0",
     "node-html-parser": "^6.1.13",
+    "prettier": "^3.2.0",
     "puppeteer": "^21.0.0",
     "serve": "^14.2.0",
     "wait-on": "^7.2.0"
@@ -38,5 +53,9 @@
     "persona"
   ],
   "author": "TITAN FUSE Team",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vudirvp-sketch/live-char-guide/issues"
+  },
+  "homepage": "https://github.com/vudirvp-sketch/live-char-guide#readme"
 }
