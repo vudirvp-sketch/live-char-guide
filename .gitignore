@@ -2,6 +2,9 @@
 node_modules/
 .pnpm-store/
 
+# npm lockfile (using pnpm)
+package-lock.json
+
 # Build artifacts (generated, but tracked for zero-install)
 # index.html and live-char-guide-zero-install.html are tracked
 # Hash files are tracked for CI comparison

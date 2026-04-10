@@ -13,10 +13,5 @@
     { "file": "08_appendices.html", "type": "section", "anchors": ["#appendix2", "#appendix4", "#appendix6"] },
     { "file": "09_footer.html", "type": "body-end", "critical": true },
     { "file": "styles.css", "type": "style", "inline": true }
-  ],
-  "scripts": {
-    "main": "assets/main.js",
-    "widgets": "assets/widgets.js",
-    "defer": true
-  }
+  ]
 }

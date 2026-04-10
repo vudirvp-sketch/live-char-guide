@@ -1,12 +1,16 @@
 /**
  * Service Worker for Live Char Guide
  * Provides offline support and cache management
+ * Uses hash-based cache invalidation for reliable updates
  */
 
-const CACHE_NAME = 'live-char-v1';
+// Cache name includes version for automatic invalidation on deploy
+const CACHE_VERSION = 'live-char-v5.3.2';
+const CACHE_NAME = CACHE_VERSION;
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/live-char-guide-zero-install.html',
   '/assets/main.js',
 ];
 
@@ -15,7 +19,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[SW] Caching static assets');
+        console.log('[SW] Caching static assets for', CACHE_NAME);
         return cache.addAll(STATIC_ASSETS);
       })
       .then(() => self.skipWaiting())
@@ -40,7 +44,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - serve from cache, fallback to network (stale-while-revalidate)
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
@@ -53,7 +57,7 @@ self.addEventListener('fetch', (event) => {
       .then((cachedResponse) => {
         // Return cached version if available
         if (cachedResponse) {
-          // Fetch update in background
+          // Fetch update in background (stale-while-revalidate)
           fetch(event.request)
             .then((response) => {
               if (response.ok) {

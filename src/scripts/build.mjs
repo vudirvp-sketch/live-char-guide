@@ -22,7 +22,7 @@
 
 import { parse } from 'node-html-parser';
 import { createHash } from 'crypto';
-import { readFile, writeFile, readdir, mkdir } from 'fs/promises';
+import { readFile, writeFile, readdir, mkdir, copyFile, unlink } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -34,6 +34,7 @@ const MANIFEST_PATH = join(ROOT, 'src', 'manifest', 'structure.json');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 const OUTPUT_PATH = join(ROOT, 'index.html');
 const HASH_PATH = join(ROOT, 'build.hash');
+const TOKENS_PATH = join(ROOT, 'src', 'tokens.json');
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -61,6 +62,151 @@ async function ensureDir(dir) {
   if (!existsSync(dir)) {
     await mkdir(dir, { recursive: true });
   }
+}
+
+// ============================================================================
+// DESIGN TOKEN INJECTION
+// ============================================================================
+
+/**
+ * Generates CSS custom property declarations from a design tokens object
+ * @param {Object} tokens - Parsed tokens.json object
+ * @returns {string} Semicolon-separated CSS variable declarations
+ */
+function generateCSSVars(tokens) {
+  const vars = [];
+  const primitives = tokens.primitives || {};
+
+  // Colors: --color-{category}-{name}
+  if (primitives.color) {
+    for (const [category, values] of Object.entries(primitives.color)) {
+      for (const [name, def] of Object.entries(values)) {
+        vars.push(`--color-${category}-${name}: ${def.value}`);
+      }
+    }
+  }
+
+  // Spacing: --spacing-{name}
+  if (primitives.spacing) {
+    for (const [name, def] of Object.entries(primitives.spacing)) {
+      vars.push(`--spacing-${name}: ${def.value}`);
+    }
+  }
+
+  // Typography: --typography-{category}-{name}
+  if (primitives.typography) {
+    for (const [category, values] of Object.entries(primitives.typography)) {
+      if (typeof values === 'object' && values.value !== undefined) {
+        vars.push(`--typography-${category}: ${values.value}`);
+      } else {
+        for (const [name, def] of Object.entries(values)) {
+          vars.push(`--typography-${category}-${name}: ${def.value}`);
+        }
+      }
+    }
+  }
+
+  // Border: --border-{category}-{name}
+  if (primitives.border) {
+    for (const [category, values] of Object.entries(primitives.border)) {
+      for (const [name, def] of Object.entries(values)) {
+        vars.push(`--border-${category}-${name}: ${def.value}`);
+      }
+    }
+  }
+
+  return vars.join(';');
+}
+
+/**
+ * Injects design tokens as CSS custom properties into HTML <head>
+ * @async
+ * @param {string} html - HTML content
+ * @param {string} tokensPath - Path to tokens.json
+ * @returns {Promise<string>} HTML with CSS variables injected, or original HTML if tokens file missing
+ */
+async function injectTokens(html, tokensPath) {
+  if (!existsSync(tokensPath)) {
+    return html; // tokens.json is optional — graceful degradation
+  }
+  const tokens = JSON.parse(await readFile(tokensPath, 'utf-8'));
+  const cssVars = generateCSSVars(tokens);
+  return html.replace('</head>', `<style>:root{${cssVars}}</style></head>`);
+}
+
+// ============================================================================
+// SCRIPT DEFER ATTRIBUTE
+// ============================================================================
+
+/**
+ * Adds defer attribute to external script tags that don't already have defer/async/type=module
+ * @param {string} html - HTML content
+ * @returns {string} HTML with defer added to eligible script tags
+ */
+function addDeferToScripts(html) {
+  return html.replace(
+    /<script(\s[^>]*)?\s+src=["']([^"']+\.js)["']([^>]*)?>/gi,
+    (match, before, src, after) => {
+      const fullAttrs = (before || '') + (after || '');
+      // Skip if already has defer, async, or type="module"
+      if (/\b(defer|async)\b/.test(fullAttrs)) return match;
+      if (/type\s*=\s*["']module["']/i.test(fullAttrs)) return match;
+      // Reconstruct with defer, preserving all attributes
+      const beforeAttrs = before || '';
+      const afterAttrs = after || '';
+      return `<script${beforeAttrs} src="${src}"${afterAttrs} defer>`;
+    }
+  );
+}
+
+// ============================================================================
+// ASSET HASHING (CACHE BUSTING)
+// ============================================================================
+
+/**
+ * Hashes asset files (JS/CSS) by appending content hash to filenames and updating HTML references
+ * @async
+ * @param {string} html - HTML content
+ * @param {string} assetsDir - Path to assets directory
+ * @returns {Promise<string>} HTML with updated asset references
+ */
+async function hashAssets(html, assetsDir) {
+  if (!existsSync(assetsDir)) return html;
+
+  const assetFiles = await readdir(assetsDir);
+  let updatedHtml = html;
+
+  // Clean up old hashed files from previous builds
+  for (const file of assetFiles) {
+    if (/\.[a-f0-9]{8}\.(js|css)$/.test(file)) {
+      await unlink(join(assetsDir, file));
+    }
+  }
+
+  // Re-read directory after cleanup
+  const currentFiles = (await readdir(assetsDir)).filter(
+    f => f.endsWith('.js') || f.endsWith('.css')
+  );
+
+  for (const file of currentFiles) {
+    const filePath = join(assetsDir, file);
+    const content = await readFile(filePath);
+    const hash = createHash('sha256').update(content).digest('hex').slice(0, 8);
+    const ext = file.split('.').pop();
+    const baseName = file.replace(`.${ext}`, '');
+    const newName = `${baseName}.${hash}.${ext}`;
+
+    // Copy (not rename) to preserve source for zero-install build
+    await copyFile(filePath, join(assetsDir, newName));
+
+    // Update HTML references
+    updatedHtml = updatedHtml.replace(
+      new RegExp(file.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
+      newName
+    );
+  }
+
+  return updatedHtml;
 }
 
 // ============================================================================
@@ -288,8 +434,18 @@ ${bodyEndContent}
 </body>
 </html>`;
   
+  // 5.5 Inject design tokens as CSS variables
+  let processedHtml = await injectTokens(finalHtml, TOKENS_PATH);
+
+  // 5.6 Add defer to external script tags
+  processedHtml = addDeferToScripts(processedHtml);
+
+  // 5.7 Hash assets (rename JS/CSS files with content hash for cache busting)
+  const ASSETS_DIR = join(ROOT, 'assets');
+  processedHtml = await hashAssets(processedHtml, ASSETS_DIR);
+
   // 6. Final BOM check
-  const outputBuffer = Buffer.from(finalHtml, 'utf-8');
+  const outputBuffer = Buffer.from(processedHtml, 'utf-8');
   const outputBom = detectBOM(outputBuffer);
   if (outputBom) {
     log('ERROR', `BOM detected in output: ${outputBom}`);
@@ -297,7 +453,7 @@ ${bodyEndContent}
   }
   
   // 7. Check for replacement characters (encoding issues)
-  if (finalHtml.includes('\uFFFD')) {
+  if (processedHtml.includes('\uFFFD')) {
     log('ERROR', 'Replacement characters detected in output - encoding issue');
     process.exit(1);
   }

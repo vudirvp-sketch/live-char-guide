@@ -26,6 +26,7 @@ const ZERO_INSTALL_ADDONS_PATH = join(ROOT, 'src', 'assets', 'zero-install-addon
 const SW_JS_PATH = join(ROOT, 'src', 'assets', 'sw.js');
 const OUTPUT_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const HASH_PATH = join(ROOT, 'build-zero-install.hash');
+const TOKENS_PATH = join(ROOT, 'src', 'tokens.json');
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -35,6 +36,64 @@ function log(level, message) {
   const timestamp = new Date().toISOString();
   const prefix = level === 'ERROR' ? '❌' : level === 'WARN' ? '⚠️' : '✓';
   console.error(`[${timestamp}] ${prefix} ${message}`);
+}
+
+// ============================================================================
+// DESIGN TOKEN INJECTION
+// ============================================================================
+
+function generateCSSVars(tokens) {
+  const vars = [];
+  const primitives = tokens.primitives || {};
+
+  // Colors: --color-{category}-{name}
+  if (primitives.color) {
+    for (const [category, values] of Object.entries(primitives.color)) {
+      for (const [name, def] of Object.entries(values)) {
+        vars.push(`--color-${category}-${name}: ${def.value}`);
+      }
+    }
+  }
+
+  // Spacing: --spacing-{name}
+  if (primitives.spacing) {
+    for (const [name, def] of Object.entries(primitives.spacing)) {
+      vars.push(`--spacing-${name}: ${def.value}`);
+    }
+  }
+
+  // Typography: --typography-{category}-{name}
+  if (primitives.typography) {
+    for (const [category, values] of Object.entries(primitives.typography)) {
+      if (typeof values === 'object' && values.value !== undefined) {
+        vars.push(`--typography-${category}: ${values.value}`);
+      } else {
+        for (const [name, def] of Object.entries(values)) {
+          vars.push(`--typography-${category}-${name}: ${def.value}`);
+        }
+      }
+    }
+  }
+
+  // Border: --border-{category}-{name}
+  if (primitives.border) {
+    for (const [category, values] of Object.entries(primitives.border)) {
+      for (const [name, def] of Object.entries(values)) {
+        vars.push(`--border-${category}-${name}: ${def.value}`);
+      }
+    }
+  }
+
+  return vars.join(';');
+}
+
+async function injectTokens(html, tokensPath) {
+  if (!existsSync(tokensPath)) {
+    return html; // tokens.json is optional — graceful degradation
+  }
+  const tokens = JSON.parse(await readFile(tokensPath, 'utf-8'));
+  const cssVars = generateCSSVars(tokens);
+  return html.replace('</head>', `<style>:root{${cssVars}}</style></head>`);
 }
 
 // ============================================================================
@@ -314,28 +373,31 @@ ${inlineJs}
 </body>
 </html>`;
 
-  // 8. Final BOM check
-  const outputBuffer = Buffer.from(finalHtml, 'utf-8');
+  // 8.5 Inject design tokens as CSS variables
+  let processedHtml = await injectTokens(finalHtml, TOKENS_PATH);
+
+  // 9. Final BOM check
+  const outputBuffer = Buffer.from(processedHtml, 'utf-8');
   const outputBom = detectBOM(outputBuffer);
   if (outputBom) {
     log('ERROR', `BOM detected in output: ${outputBom}`);
     process.exit(1);
   }
 
-  // 9. Check for replacement characters (encoding issues)
-  if (finalHtml.includes('\uFFFD')) {
+  // 10. Check for replacement characters (encoding issues)
+  if (processedHtml.includes('\uFFFD')) {
     log('ERROR', 'Replacement characters detected in output - encoding issue');
     process.exit(1);
   }
 
-  // 10. Validate no external URLs
+  // 11. Validate no external URLs
   const externalUrlPattern = /@import\s+url\(['"]https?:\/\/(?!example\.com)/g;
-  const externalMatches = finalHtml.match(externalUrlPattern);
+  const externalMatches = processedHtml.match(externalUrlPattern);
   if (externalMatches && externalMatches.length > 0) {
     log('WARN', `Found ${externalMatches.length} external URL imports - may affect offline use`);
   }
 
-  // 11. Write output files
+  // 12. Write output files
   await writeFile(OUTPUT_PATH, outputBuffer, { encoding: 'utf-8' });
   await writeFile(HASH_PATH, hash, { encoding: 'utf-8' });
 
@@ -344,7 +406,7 @@ ${inlineJs}
   log('INFO', `Version: ${version}`);
   log('INFO', `Processed ${processedFiles.length} files`);
 
-  // 12. Report file size
+  // 13. Report file size
   const sizeKB = Math.round(outputBuffer.length / 1024);
   log('INFO', `Output size: ${sizeKB} KB`);
 

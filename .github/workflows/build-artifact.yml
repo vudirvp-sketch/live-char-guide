@@ -6,7 +6,6 @@ on:
     paths:
       - 'src/**'
       - 'package.json'
-      - 'package-lock.json'
       - 'pnpm-lock.yaml'
   pull_request:
     branches: [main]
@@ -29,44 +28,48 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build all artifacts
-        run: npm run build:all
+        run: pnpm run build:all
 
       - name: Validate artifacts
-        run: npm run validate
+        run: pnpm run validate
 
       - name: Check version sync
-        run: npm run version:check || true
-        continue-on-error: true
+        # Pre-release versions may fail version check
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: pnpm run version:check
 
       - name: Run tests
-        run: npm test || true
-        continue-on-error: true
+        # Tests may be incomplete during migration
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        run: pnpm test
 
-      - name: Commit changes (main branch only)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          commit_message: "chore(artifact): auto-regenerate HTML files [skip ci]"
-          file_pattern: "index.html live-char-guide-zero-install.html build.hash build-zero-install.hash"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
-          skip_fetch: true
-          skip_checkout: true
-
-      - name: Report PR status
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "::notice::Build completed successfully. Artifacts would be regenerated on merge."
+          name: build-output
+          path: |
+            index.html
+            live-char-guide-zero-install.html
+            404.html
+            assets/
+            build.hash
+            build-zero-install.hash
+          retention-days: 5
 
   pr-comment:
     name: PR Build Info
@@ -113,7 +116,7 @@ jobs:
 
             Build and validation completed successfully.
 
-            > These artifacts will be auto-committed when this PR is merged to \`main\`.`;
+            > These artifacts will be deployed to GitHub Pages when this PR is merged to \`main\`.`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
