@@ -254,9 +254,15 @@ async function build() {
   
   // BUG-012 FIX: Strip external script tags from bodyEndContent for zero-install
   // Zero-install uses inline JS only - external script references cause duplicate loading
+  // BUG-013 FIX: More robust regex that handles all script tag variations
   let cleanBodyEndContent = bodyEndContent
-    .replace(/<script\s+src=["'][^"']+["'][^>]*>\s*<\/script>/gi, '')
-    .replace(/<\/body>\s*<\/html>\s*$/gi, '');
+    // Remove ALL external script tags (with any attributes like defer, async, etc.)
+    .replace(/<script[^>]*\s+src\s*=\s*["'][^"']+["'][^>]*>\s*<\/script>/gi, '')
+    // Also remove self-closing script tags (just in case)
+    .replace(/<script[^>]*\s+src\s*=\s*["'][^"']+["'][^>]*\/>/gi, '')
+    // Remove any </body></html> tags anywhere in the content (they'll be added by template)
+    .replace(/<\/body>/gi, '')
+    .replace(/<\/html>/gi, '');
 
   const inlineJs = jsContent ? `<script>
 // === INLINE JAVASCRIPT FOR ZERO-INSTALL OFFLINE SUPPORT ===

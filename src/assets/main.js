@@ -2133,7 +2133,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initAnchors();
   initTabs();
-  initTocToggle();
+  // BUG-014 FIX: Removed initTocToggle() - conflicts with Panel system
+  // The Panel class (initialized in IIFE below) handles TOC panel via safeRebindFab()
+  // initTocToggle() was adding duplicate listeners and using incompatible CSS classes
+  // initTocToggle();
   initScrollTop();
   initEnneagram();
   initOcean();
