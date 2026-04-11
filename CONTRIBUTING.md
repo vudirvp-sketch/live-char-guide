@@ -146,6 +146,50 @@ Then create a Pull Request on GitHub.
 - Minimize specificity conflicts
 - Test responsive layouts
 
+### CSS Unit Conventions
+
+This project uses a consistent unit system for maintainability:
+
+| Unit | Use Case | Example |
+|------|----------|---------|
+| `ch` | Content width, line length | `--max-width: 85ch` |
+| `rem` | Font sizes, spacing | `font-size: 1.25rem` |
+| `em` | Component-relative sizing | `padding: 0.5em 1em` |
+| `px` | Borders, small precise values | `border: 1px solid` |
+| `vw/vh` | Viewport-relative layouts | `width: 100vw` |
+| `%` | Container-relative sizing | `width: 100%` |
+
+#### Guidelines
+
+1. **Line Length**: Use `ch` for text content width
+   - Optimal reading: 65-85ch
+   - `--line-length: 85ch`
+
+2. **Typography**: Use `rem` for accessibility
+   - Respects user's root font size
+   - `html { font-size: clamp(16px, 3.5vw, 18px); }`
+
+3. **Spacing**: Use `rem` or `em`
+   - Vertical rhythm: multiples of 0.25rem
+   - Component padding: `em` relative to font-size
+
+4. **Borders**: Use `px` for precision
+   - Hairlines: `1px`
+   - Focus rings: `2px`
+
+5. **Full-width Breakout**: Use `calc()` technique
+   ```css
+   .full-width {
+     width: 100vw;
+     margin-left: calc(50% - 50vw);
+   }
+   ```
+
+6. **Avoid**: 
+   - `px` for font sizes (except in `clamp()` bounds)
+   - `pt` (print only)
+   - Fixed `px` for layout dimensions
+
 ### JavaScript
 
 - Use ES modules (import/export)

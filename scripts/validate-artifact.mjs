@@ -37,6 +37,7 @@ const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
 // Validation limits - synchronized with bundle_check.mjs
+// WCAG 1.4.10: Content reflow at 125% zoom (320px viewport)
 const LIMITS = {
   indexMaxKB: 350,
   zeroInstallMaxKB: 500,
@@ -170,6 +171,67 @@ function checkHtmlValidity(content, name) {
   return { pass: true };
 }
 
+/**
+ * Check WCAG 1.4.10 Reflow compliance (v5.4.0 - ITEM-009)
+ * At 125% zoom (320px viewport), content should not require horizontal scrolling
+ * @param {string} content - HTML content
+ * @param {string} name - Artifact name
+ * @returns {{pass: boolean, error?: string, warnings?: string[]}}
+ */
+function checkWCAG1410Reflow(content, name) {
+  const errors = [];
+  const warnings = [];
+
+  // Check viewport meta tag exists
+  const viewportMatch = content.match(/<meta[^>]+viewport[^>]*>/i);
+  if (!viewportMatch) {
+    return { pass: false, error: `${name} missing viewport meta tag` };
+  }
+
+  // Verify viewport allows scaling (not locked)
+  const viewport = viewportMatch[0];
+  if (viewport.includes('user-scalable=no') || viewport.includes('maximum-scale=1')) {
+    errors.push('Viewport prevents user scaling');
+  }
+
+  // Check for fixed-width elements that could cause issues at 320px
+  // Note: This is a heuristic check - full implementation would parse CSS properly
+  const fixedWidthPattern = /width:\s*(\d+)px/g;
+  let match;
+  while ((match = fixedWidthPattern.exec(content)) !== null) {
+    const width = parseInt(match[1]);
+    if (width > 320) {
+      // This is a warning, not error - may be in media query or not affect reflow
+      warnings.push(`Fixed width ${width}px may cause reflow issues`);
+    }
+  }
+
+  // Check for min-width that could prevent reflow
+  const minWidthPattern = /min-width:\s*(\d+)px/g;
+  const problematicallyWideElements = [];
+  while ((match = minWidthPattern.exec(content)) !== null) {
+    const width = parseInt(match[1]);
+    if (width > 320) {
+      problematicallyWideElements.push(width);
+    }
+  }
+
+  if (problematicallyWideElements.length > 0) {
+    warnings.push(`min-width values > 320px: ${problematicallyWideElements.slice(0, 3).join(', ')}px`);
+  }
+
+  // Check for overflow-x: hidden on body (anti-pattern for reflow)
+  if (/body\s*{[^}]*overflow-x:\s*hidden/i.test(content)) {
+    warnings.push('overflow-x: hidden on body may hide reflow issues');
+  }
+
+  if (errors.length > 0) {
+    return { pass: false, error: `${name} WCAG 1.4.10 issues: ${errors.join(', ')}` };
+  }
+
+  return { pass: true, warnings };
+}
+
 // ============================================================================
 // MAIN VALIDATION
 // ============================================================================
@@ -216,6 +278,14 @@ async function validate() {
     const htmlCheck = checkHtmlValidity(indexContent, 'index.html');
     results.push({ gate: 'GATE-4', ...htmlCheck });
     if (!htmlCheck.pass) allPassed = false;
+
+    // v5.4.0: WCAG 1.4.10 Reflow check (ITEM-009)
+    const wcagCheck = checkWCAG1410Reflow(indexContent, 'index.html');
+    results.push({ gate: 'GATE-10', ...wcagCheck });
+    if (!wcagCheck.pass) allPassed = false;
+    if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
+      log('WARN', `GATE-10 warnings: ${wcagCheck.warnings.join('; ')}`);
+    }
   }
 
   // 3. Check zero-install.html
@@ -249,6 +319,14 @@ async function validate() {
     const htmlCheck = checkHtmlValidity(zeroContent, 'zero-install.html');
     results.push({ gate: 'GATE-9', ...htmlCheck });
     if (!htmlCheck.pass) allPassed = false;
+
+    // v5.4.0: WCAG 1.4.10 Reflow check (ITEM-009)
+    const wcagCheck = checkWCAG1410Reflow(zeroContent, 'zero-install.html');
+    results.push({ gate: 'GATE-11', ...wcagCheck });
+    if (!wcagCheck.pass) allPassed = false;
+    if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
+      log('WARN', `GATE-11 warnings: ${wcagCheck.warnings.join('; ')}`);
+    }
   }
 
   // 4. Report results

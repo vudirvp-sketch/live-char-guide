@@ -46,13 +46,33 @@
     }
   };
 
-  // Default panel state
+  // Default panel state - v5.4.0: Compact default (ITEM-007)
   const DEFAULT_STATE = {
     visible: false,
     x: 20,
     y: 20,
     width: 280,
-    height: 400
+    height: Math.min(400, window.innerHeight * 0.6)  // 60vh max, compact default
+  };
+
+  // Panel-specific default positions - v5.4.0: Smart positioning (ITEM-005)
+  const PANEL_DEFAULTS = {
+    'toc-panel': {
+      getDefaultPosition: () => ({
+        x: Math.max(20, window.innerWidth - 320),  // Right side
+        y: 80,
+        width: 280,
+        height: Math.min(400, window.innerHeight * 0.6)
+      })
+    },
+    'notepad-panel': {
+      getDefaultPosition: () => ({
+        x: 20,  // Left side
+        y: 80,
+        width: 280,
+        height: Math.min(400, window.innerHeight * 0.6)
+      })
+    }
   };
 
   // Panel class
@@ -83,7 +103,25 @@
 
     loadState() {
       const saved = storage.get(this.storageKey);
-      return { ...DEFAULT_STATE, ...saved };
+      
+      // v5.4.0: Get panel-specific defaults (ITEM-005)
+      const panelId = this.el.id;
+      const panelDefaults = PANEL_DEFAULTS[panelId]?.getDefaultPosition() || DEFAULT_STATE;
+      
+      // v5.4.0: Validate saved position is still on-screen (ITEM-006)
+      if (saved) {
+        if (saved.x > window.innerWidth - 100 || saved.y > window.innerHeight - 100) {
+          // Position is off-screen, use panel defaults
+          return { ...panelDefaults, visible: false };
+        }
+        // Apply smart offset if other panels are open
+        const openPanels = document.querySelectorAll('.panel.open');
+        if (openPanels.length > 0 && !saved.visible) {
+          saved.y = Math.min(saved.y + 50, window.innerHeight - 200);
+        }
+      }
+      
+      return { ...panelDefaults, ...saved };
     }
 
     saveState = debounce(() => {
@@ -2307,7 +2345,12 @@ document.addEventListener('DOMContentLoaded', () => {
     safeRebindFab('fab-toc', () => { if (tocPanel) tocPanel.toggle(); });
     safeRebindFab('fab-scratchpad', () => { if (notepadPanel) notepadPanel.toggle(); });
 
-    // 3. Global access for debugging + initialization flag
+    // 3. Initialize content width toggle (v5.4.0 - ITEM-004)
+    if (typeof initWidthToggle === 'function') {
+      initWidthToggle();
+    }
+
+    // 4. Global access for debugging + initialization flag
     window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
   });
 })();
@@ -2642,6 +2685,38 @@ function initOcean() {
       });
     });
   }
+}
+
+// ============================================================================
+// v5.4.0: CONTENT WIDTH TOGGLE (ITEM-004)
+// ============================================================================
+/**
+ * Initialize content width toggle button
+ * Toggles between normal (85ch) and wide (95ch) content width
+ * Persists preference in localStorage
+ */
+function initWidthToggle() {
+  const btn = document.getElementById('fab-width');
+  if (!btn) return;
+
+  const STORAGE_KEY = 'content-width-mode';
+  const saved = localStorage.getItem(STORAGE_KEY);
+
+  // Apply saved preference on load
+  if (saved === 'wide') {
+    document.body.classList.add('content-wide');
+    btn.setAttribute('aria-pressed', 'true');
+  } else {
+    btn.setAttribute('aria-pressed', 'false');
+  }
+
+  // Toggle handler
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('content-wide');
+    const isWide = document.body.classList.contains('content-wide');
+    localStorage.setItem(STORAGE_KEY, isWide ? 'wide' : 'normal');
+    btn.setAttribute('aria-pressed', isWide ? 'true' : 'false');
+  });
 }
 
 // ============================================================================

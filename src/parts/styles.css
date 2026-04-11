@@ -1,5 +1,5 @@
     :root {
-      --bg: #050505;
+      --bg: #121212;  /* CHANGED: OLED-optimized dark background (v5.4.0) */
       --bg-surface: #0b0b0f;
       --bg-elevated: #12121a;
       --text: #E8E8E8;        /* APCA validated - less halation */
@@ -16,8 +16,11 @@
       --tip-border: #22c55e;
       --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Liberation Sans", sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-      --max-width: min(900px, 68ch);
-      --max-width-wide: 900px;  /* For tables, diagrams */
+      --max-width: min(1000px, 85ch);  /* CHANGED: Wider for technical docs (v5.4.0) */
+      --max-width-wide: 1000px;  /* For tables, diagrams */
+      --line-length: 85ch;  /* Optimal reading line length (v5.4.0) */
+      --content-width-normal: 85ch;  /* Normal content width for toggle (v5.4.0) */
+      --content-width-wide: 95ch;  /* Wide content width for toggle (v5.4.0) */
       --spacing: clamp(1rem, 2.5vw, 1.5rem);  /* Responsive spacing */
       /* OCEAN Big Five colors */
       --ocean-O: #7c4dff;
@@ -366,12 +369,20 @@
       flex-direction: column;
       min-width: var(--panel-min-width);
       min-height: var(--panel-min-height);
+      max-height: 60vh;  /* CHANGED: Compact default (v5.4.0) */
       opacity: 0;
       visibility: hidden;
       transform: scale(0.95);
       transition: opacity var(--panel-transition),
                   transform var(--panel-transition),
                   visibility 0ms linear var(--panel-transition);
+    }
+    
+    /* Small screens: allow more panel height */
+    @media (max-height: 600px) {
+      .panel {
+        max-height: 80vh;
+      }
     }
 
     .panel.open {
@@ -1216,6 +1227,49 @@
       th, td {
         border: 1px solid #ccc !important;
       }
+    }
+
+    /* ============================================================
+       v5.4.0: CONTENT WIDTH TOGGLE (ITEM-004)
+       ============================================================ */
+    body.content-wide {
+      --max-width: min(1100px, var(--content-width-wide));
+    }
+    
+    body.content-wide .table-wrap,
+    body.content-wide pre {
+      max-width: calc(100vw - 4rem);
+    }
+
+    /* ============================================================
+       v5.4.0: FULL-WIDTH TABLES AND CODE (ITEM-008)
+       ============================================================ */
+    /* Full-width content breakout for tables and code blocks */
+    @media (min-width: 901px) {
+      .table-wrap,
+      pre.pre-wide,
+      .code-block-wide {
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        padding-left: calc(50vw - 42.5ch);  /* Half of 85ch */
+        padding-right: calc(50vw - 42.5ch);
+        border-radius: 0;
+      }
+    }
+    
+    /* Alternative: Screen-width container utility */
+    .full-width-container {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      overflow-x: auto;
+    }
+    
+    /* Utility class for wide code blocks */
+    pre.pre-wide {
+      white-space: pre;
+      overflow-x: auto;
     }
 
     /* ============================================================
