@@ -344,6 +344,7 @@ ${bodyStartContent}
 <main id="main-content" role="main">
 ${sectionsContent}
 </main>
+</div><!-- /.content-wrapper -->
 ${cleanBodyEndContent}
 ${inlineJs}
 </body>

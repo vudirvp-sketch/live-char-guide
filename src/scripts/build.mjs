@@ -311,6 +311,7 @@ ${bodyStartContent}
 <main id="main-content" role="main">
 ${sectionsContent}
 </main>
+</div><!-- /.content-wrapper -->
 ${bodyEndContent}
 </body>
 </html>`;
