@@ -20,9 +20,10 @@ const ROOT = join(__dirname, '..');
 // ============================================================================
 
 describe('Size Validation', () => {
+  // BUG-010 FIX: Synchronized with validate-artifact.mjs LIMITS
   const LIMITS = {
-    indexMaxKB: 400,
-    zeroInstallMaxKB: 600,
+    indexMaxKB: 350,
+    zeroInstallMaxKB: 500,
     minKB: 50
   };
 

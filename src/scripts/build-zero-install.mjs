@@ -15,7 +15,7 @@ import { readFile, writeFile, readdir, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { log, generateCSSVars, injectTokens, validateAnchors, detectBOM } from './build-utils.mjs';
+import { log, validateAnchors, detectBOM } from './build-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -27,7 +27,6 @@ const ZERO_INSTALL_ADDONS_PATH = join(ROOT, 'src', 'assets', 'zero-install-addon
 const SW_JS_PATH = join(ROOT, 'src', 'assets', 'sw.js');
 const OUTPUT_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const HASH_PATH = join(ROOT, 'build-zero-install.hash');
-const TOKENS_PATH = join(ROOT, 'src', 'tokens.json');
 
 // ============================================================================
 // ZERO-INSTALL TRANSFORMATIONS
@@ -297,8 +296,11 @@ ${inlineJs}
 </body>
 </html>`;
 
-  // 8.5 Inject design tokens as CSS variables
-  let processedHtml = await injectTokens(finalHtml, TOKENS_PATH);
+  // BUG-006 FIX: Removed injectTokens() call - tokens.json deleted (unused dead code)
+  let processedHtml = finalHtml;
+
+  // BUG-005 FIX: Replace __VERSION__ placeholder with actual version
+  processedHtml = processedHtml.replace(/__VERSION__/g, version);
 
   // 9. Final BOM check
   const outputBuffer = Buffer.from(processedHtml, 'utf-8');

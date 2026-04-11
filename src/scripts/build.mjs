@@ -25,7 +25,7 @@ import { readFile, writeFile, readdir, mkdir, copyFile, unlink, rm } from 'fs/pr
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { log, generateCSSVars, injectTokens, validateAnchors, detectBOM } from './build-utils.mjs';
+import { log, validateAnchors, detectBOM } from './build-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -35,7 +35,6 @@ const MANIFEST_PATH = join(ROOT, 'src', 'manifest', 'structure.json');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 const OUTPUT_PATH = join(ROOT, 'index.html');
 const HASH_PATH = join(ROOT, 'build.hash');
-const TOKENS_PATH = join(ROOT, 'src', 'tokens.json');
 const ASSETS_SRC = join(SRC_DIR, 'assets');
 const ASSETS_OUT = join(ROOT, 'assets');
 
@@ -316,8 +315,11 @@ ${bodyEndContent}
 </body>
 </html>`;
   
-  // 5.5 Inject design tokens as CSS variables
-  let processedHtml = await injectTokens(finalHtml, TOKENS_PATH);
+  // BUG-006 FIX: Removed injectTokens() call - tokens.json deleted (unused dead code)
+  let processedHtml = finalHtml;
+
+  // BUG-005 FIX: Replace __VERSION__ placeholder with actual version
+  processedHtml = processedHtml.replace(/__VERSION__/g, version);
 
   // 5.6 Add defer to external script tags
   processedHtml = addDeferToScripts(processedHtml);

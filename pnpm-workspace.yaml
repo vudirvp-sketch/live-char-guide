@@ -1,3 +1,0 @@
-allowBuilds:
-  chromedriver: true
-  puppeteer: true
