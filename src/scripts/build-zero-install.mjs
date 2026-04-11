@@ -252,6 +252,12 @@ async function build() {
     log('WARN', 'zero-install-addons.js not found');
   }
   
+  // BUG-012 FIX: Strip external script tags from bodyEndContent for zero-install
+  // Zero-install uses inline JS only - external script references cause duplicate loading
+  let cleanBodyEndContent = bodyEndContent
+    .replace(/<script\s+src=["'][^"']+["'][^>]*>\s*<\/script>/gi, '')
+    .replace(/<\/body>\s*<\/html>\s*$/gi, '');
+
   const inlineJs = jsContent ? `<script>
 // === INLINE JAVASCRIPT FOR ZERO-INSTALL OFFLINE SUPPORT ===
 ${jsContent}
@@ -259,7 +265,7 @@ ${jsContent}
 
   // 8. Assemble final HTML with zero-install optimizations
   const hash = createHash('sha256')
-    .update(headContent + bodyStartContent + sectionsContent + bodyEndContent + transformedStyle + inlineJs)
+    .update(headContent + bodyStartContent + sectionsContent + cleanBodyEndContent + transformedStyle + inlineJs)
     .digest('hex')
     .slice(0, 8);
 
@@ -291,7 +297,7 @@ ${bodyStartContent}
 <main id="main-content" role="main">
 ${sectionsContent}
 </main>
-${bodyEndContent}
+${cleanBodyEndContent}
 ${inlineJs}
 </body>
 </html>`;
@@ -301,10 +307,6 @@ ${inlineJs}
 
   // BUG-005 FIX: Replace __VERSION__ placeholder with actual version
   processedHtml = processedHtml.replace(/__VERSION__/g, version);
-
-  // FIX: Remove external script tags - JS is already inlined for zero-install
-  // This prevents double initialization when both inline and external scripts exist
-  processedHtml = processedHtml.replace(/<script[^>]*src=["'][^"']*\.js["'][^>]*>\s*<\/script>/gi, '');
 
   // 9. Final BOM check
   const outputBuffer = Buffer.from(processedHtml, 'utf-8');
