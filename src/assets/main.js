@@ -225,36 +225,43 @@
     }
 
     bindEvents() {
+      // FIX: Check if events already bound to prevent duplicate handlers
+      if (this.el.dataset.eventsBound === 'true') {
+        console.log('[Panel] Events already bound for:', this.el.id);
+        return;
+      }
+      this.el.dataset.eventsBound = 'true';
+
       // Toggle buttons
       if (this.closeBtn) {
         this.closeBtn.addEventListener('click', () => this.close());
       }
-      
+
       // Drag - mouse
       this.header.addEventListener('mousedown', (e) => this.startDrag(e));
       document.addEventListener('mousemove', (e) => this.onDrag(e));
       document.addEventListener('mouseup', () => this.endDrag());
-      
+
       // Drag - touch
       this.header.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
       document.addEventListener('touchmove', (e) => this.onDrag(e), { passive: false });
       document.addEventListener('touchend', () => this.endDrag());
-      
+
       // Resize - mouse
       if (this.resizeHandle) {
         this.resizeHandle.addEventListener('mousedown', (e) => this.startResize(e));
         document.addEventListener('mousemove', (e) => this.onResize(e));
         document.addEventListener('mouseup', () => this.endResize());
-        
+
         // Resize - touch
         this.resizeHandle.addEventListener('touchstart', (e) => this.startResize(e), { passive: false });
         document.addEventListener('touchmove', (e) => this.onResize(e), { passive: false });
         document.addEventListener('touchend', () => this.endResize());
       }
-      
+
       // Focus on click
       this.el.addEventListener('mousedown', () => this.focus());
-      
+
       // Keyboard
       this.el.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && this.isOpen()) {
@@ -262,7 +269,7 @@
           e.preventDefault();
         }
       });
-      
+
       // Save on window resize
       window.addEventListener('resize', debounce(() => {
         if (this.isOpen()) {
@@ -272,6 +279,8 @@
           }
         }
       }, 100));
+
+      console.log('[Panel] Events bound for:', this.el.id);
     }
 
     setupAccessibility() {
@@ -702,6 +711,13 @@ function initTheme() {
   const toggle = document.getElementById('fab-theme');
   if (!toggle) return;
 
+  // FIX: Check if already initialized by another script instance
+  if (toggle.dataset.themeInit === 'true') {
+    console.log('[Theme] Already initialized, skipping');
+    return;
+  }
+  toggle.dataset.themeInit = 'true';
+
   // IMP-007 FIX: Add ARIA attributes
   toggle.setAttribute('role', 'button');
   toggle.setAttribute('aria-pressed', 'false');
@@ -742,6 +758,8 @@ function initTheme() {
       }
     }, 50);
   });
+
+  console.log('[Theme] Initialized');
 }
 
 // === MOBILE NAVIGATION ===
@@ -2205,12 +2223,22 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // Remove all old event listeners from FAB buttons by cloning them
+  // FIX: Add protection against duplicate execution (happens when both inline and external JS load)
   function safeRebindFab(id, callback) {
     const btn = document.getElementById(id);
-    if (!btn) return;
+    if (!btn) return null;
+
+    // FIX: Check if already processed by another script instance
+    if (btn.dataset.rebound === 'true') {
+      console.log('[Panel] FAB already rebound, skipping:', id);
+      return btn;
+    }
+
     const clone = btn.cloneNode(true);
+    clone.dataset.rebound = 'true';
     btn.parentNode.replaceChild(clone, btn);
     clone.addEventListener('click', (e) => { e.preventDefault(); callback(); });
+    console.log('[Panel] FAB rebound:', id);
     return clone;
   }
 
