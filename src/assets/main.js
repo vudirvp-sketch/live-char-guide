@@ -2190,7 +2190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initAnchors();
   initTabs();
-  initTocToggle();
+  // initTocToggle() removed — now handled by safeRebindFab in panel IIFE below
   initScrollTop();
   initThemeHint();  // THM-001: Theme onboarding hint
   initEnneagram();
@@ -2330,34 +2330,78 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize panels
     const tocPanelEl = document.getElementById('toc-panel');
     let tocPanel = null;
-    if (tocPanelEl && window.Panel) {
-      tocPanel = new window.Panel(tocPanelEl, {
-        storageKey: 'guide_toc_state',
-        onToggle: (isOpen) => {
-          const fab = document.getElementById('fab-toc');
-          if (fab) fab.setAttribute('aria-pressed', isOpen);
-        }
-      });
 
-      // Generate TOC links into panel (guaranteed to run)
+    // DEBUG: Log Panel availability
+    console.log('[Panel] window.Panel available:', !!window.Panel);
+    console.log('[Panel] tocPanelEl found:', !!tocPanelEl);
+
+    if (tocPanelEl) {
+      // Generate TOC links into panel (must run regardless of Panel class)
       generateTOCLinks(tocPanelEl);
+
+      if (window.Panel) {
+        tocPanel = new window.Panel(tocPanelEl, {
+          storageKey: 'guide_toc_state',
+          onToggle: (isOpen) => {
+            const fab = document.getElementById('fab-toc');
+            if (fab) fab.setAttribute('aria-pressed', isOpen);
+          }
+        });
+        console.log('[Panel] TOC Panel created successfully');
+      } else {
+        console.warn('[Panel] window.Panel not defined - using fallback toggle');
+      }
     }
 
     const notepadPanelEl = document.getElementById('notepad-panel');
     let notepadPanel = null;
-    if (notepadPanelEl && window.NotepadPanel) {
-      notepadPanel = new window.NotepadPanel(notepadPanelEl, {
-        storageKey: 'guide_notepad_state',
-        onSave: (content) => console.log(`[Notepad] Saved: ${content.length} chars`)
-      });
+
+    console.log('[Panel] window.NotepadPanel available:', !!window.NotepadPanel);
+    console.log('[Panel] notepadPanelEl found:', !!notepadPanelEl);
+
+    if (notepadPanelEl) {
+      if (window.NotepadPanel) {
+        notepadPanel = new window.NotepadPanel(notepadPanelEl, {
+          storageKey: 'guide_notepad_state',
+          onSave: (content) => console.log(`[Notepad] Saved: ${content.length} chars`)
+        });
+        console.log('[Panel] Notepad Panel created successfully');
+      } else {
+        console.warn('[Panel] window.NotepadPanel not defined - using fallback toggle');
+      }
     }
 
     // 2. Safely rebind FAB buttons (kills old listeners from legacy scratchpad)
-    safeRebindFab('fab-toc', () => { if (tocPanel) tocPanel.toggle(); });
-    safeRebindFab('fab-scratchpad', () => { if (notepadPanel) notepadPanel.toggle(); });
+    // FIX: Add fallback if Panel/NotepadPanel classes not available
+    safeRebindFab('fab-toc', () => {
+      if (tocPanel) {
+        tocPanel.toggle();
+      } else if (tocPanelEl) {
+        // Fallback: toggle 'open' class directly
+        tocPanelEl.classList.toggle('open');
+        const isOpen = tocPanelEl.classList.contains('open');
+        const fab = document.getElementById('fab-toc');
+        if (fab) {
+          fab.setAttribute('aria-pressed', isOpen);
+          fab.textContent = isOpen ? '📋' : '📑';
+        }
+        console.log('[Panel] Fallback TOC toggle, open:', isOpen);
+      }
+    });
+
+    safeRebindFab('fab-scratchpad', () => {
+      if (notepadPanel) {
+        notepadPanel.toggle();
+      } else if (notepadPanelEl) {
+        // Fallback: toggle 'open' class directly
+        notepadPanelEl.classList.toggle('open');
+        console.log('[Panel] Fallback Notepad toggle, open:', notepadPanelEl.classList.contains('open'));
+      }
+    });
 
     // 3. Global access for debugging
     window.guidePanels = { toc: tocPanel, notepad: notepadPanel };
+    console.log('[Panel] guidePanels initialized:', window.guidePanels);
   });
 })();
 

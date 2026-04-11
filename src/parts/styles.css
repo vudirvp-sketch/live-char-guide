@@ -383,6 +383,14 @@
                   visibility 0ms linear 0ms;
     }
 
+    /* FIX: TOC panel collapsed state */
+    #toc-panel.toc-collapsed {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
     .panel.dragging {
       transition: none;
       user-select: none;
