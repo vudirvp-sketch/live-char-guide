@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 /**
  * TITAN FUSE Build Script for Live Char Guide - Zero-Install Version
- * Version: 1.1.0
+ * Version: 1.2.0
  *
  * Creates offline-optimized HTML file that works via file:// protocol.
  * - Replaces Google Fonts with system font fallbacks
  * - Adds CSP meta tags for offline use
  * - Embeds version metadata
  * - BUG-011 FIX: Comprehensive external URL validation
+ * - BUG-013 FIX: Robust external script removal
+ * - BUG-015 FIX: Ensure inline JS is inside <body>, not after </html>
  */
 
 import { createHash } from 'crypto';
@@ -119,6 +121,38 @@ function findExternalURLs(content) {
   }
 
   return externalURLs;
+}
+
+// ============================================================================
+// BUG-013, BUG-015 FIX: CLEAN CONTENT FOR ZERO-INSTALL
+// ============================================================================
+
+/**
+ * Clean bodyEndContent for zero-install build
+ * Removes external scripts and closing HTML tags that would break inline JS placement
+ * 
+ * @param {string} content - Raw body-end content from parts
+ * @returns {string} Cleaned content safe for zero-install
+ */
+function cleanBodyEndForZeroInstall(content) {
+  let cleaned = content;
+  
+  // BUG-013 FIX: Remove ALL external script tags with any attributes
+  // Pattern matches: <script src="..." defer></script> or <script async src="..."></script>
+  cleaned = cleaned.replace(/<script[^>]*\bsrc\s*=\s*["'][^"']+["'][^>]*>\s*<\/script>/gi, '');
+  
+  // Also handle self-closing script tags (invalid but just in case)
+  cleaned = cleaned.replace(/<script[^>]*\bsrc\s*=\s*["'][^"']+["'][^>]*\/>/gi, '');
+  
+  // BUG-015 FIX: Remove ALL closing body and html tags
+  // These will be added by the template, so any in content would cause inline JS to appear after </html>
+  cleaned = cleaned.replace(/<\/body>/gi, '');
+  cleaned = cleaned.replace(/<\/html>/gi, '');
+  
+  // Trim trailing whitespace
+  cleaned = cleaned.trimEnd();
+  
+  return cleaned;
 }
 
 // ============================================================================
@@ -252,17 +286,23 @@ async function build() {
     log('WARN', 'zero-install-addons.js not found');
   }
   
-  // BUG-012 FIX: Strip external script tags from bodyEndContent for zero-install
-  // Zero-install uses inline JS only - external script references cause duplicate loading
-  // BUG-013 FIX: More robust regex that handles all script tag variations
-  let cleanBodyEndContent = bodyEndContent
-    // Remove ALL external script tags (with any attributes like defer, async, etc.)
-    .replace(/<script[^>]*\s+src\s*=\s*["'][^"']+["'][^>]*>\s*<\/script>/gi, '')
-    // Also remove self-closing script tags (just in case)
-    .replace(/<script[^>]*\s+src\s*=\s*["'][^"']+["'][^>]*\/>/gi, '')
-    // Remove any </body></html> tags anywhere in the content (they'll be added by template)
-    .replace(/<\/body>/gi, '')
-    .replace(/<\/html>/gi, '');
+  // BUG-013, BUG-015 FIX: Clean body-end content properly
+  log('INFO', 'Cleaning body-end content for zero-install...');
+  const cleanBodyEndContent = cleanBodyEndForZeroInstall(bodyEndContent);
+  
+  // Verify no external scripts remain
+  if (cleanBodyEndContent.match(/<script[^>]*\bsrc\s*=/i)) {
+    log('ERROR', 'External script tag still present after cleaning!');
+    log('ERROR', 'Content snippet: ' + cleanBodyEndContent.substring(0, 500));
+    process.exit(1);
+  }
+  
+  // Verify no closing body/html tags remain
+  if (cleanBodyEndContent.match(/<\/body>/i) || cleanBodyEndContent.match(/<\/html>/i)) {
+    log('ERROR', 'Closing body/html tags still present after cleaning!');
+    log('ERROR', 'Content snippet: ' + cleanBodyEndContent.substring(0, 500));
+    process.exit(1);
+  }
 
   const inlineJs = jsContent ? `<script>
 // === INLINE JAVASCRIPT FOR ZERO-INSTALL OFFLINE SUPPORT ===
@@ -270,6 +310,7 @@ ${jsContent}
 </script>` : '';
 
   // 8. Assemble final HTML with zero-install optimizations
+  // IMPORTANT: inlineJs MUST be inside <body>, before closing tags
   const hash = createHash('sha256')
     .update(headContent + bodyStartContent + sectionsContent + cleanBodyEndContent + transformedStyle + inlineJs)
     .digest('hex')
@@ -335,6 +376,14 @@ ${inlineJs}
     for (const { type, url, line } of externalURLs) {
       log('ERROR', `  ${type}: ${url} (line ${line})`);
     }
+    process.exit(1);
+  }
+
+  // BUG-015 CHECK: Verify inline JS is inside <body>
+  const bodyCloseIndex = processedHtml.lastIndexOf('</body>');
+  const inlineScriptIndex = processedHtml.indexOf('// === INLINE JAVASCRIPT');
+  if (inlineScriptIndex > bodyCloseIndex) {
+    log('ERROR', 'Inline JavaScript appears AFTER </body> - this will not execute!');
     process.exit(1);
   }
 
