@@ -2675,16 +2675,19 @@
     scroll-behavior: auto !important;
   }
   
-  /* Panel immediate visibility */
+  /* Panel visibility controlled by .open class (no animations) */
   .panel {
     transform: none;
+  }
+
+  .panel.open {
     opacity: 1;
     visibility: visible;
   }
-  
-  .panel.open,
+
   .panel:not(.open) {
-    transform: none;
+    opacity: 0;
+    visibility: hidden;
   }
   
   /* Disable hover transforms */
