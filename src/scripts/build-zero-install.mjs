@@ -302,6 +302,10 @@ ${inlineJs}
   // BUG-005 FIX: Replace __VERSION__ placeholder with actual version
   processedHtml = processedHtml.replace(/__VERSION__/g, version);
 
+  // FIX: Remove external script tags - JS is already inlined for zero-install
+  // This prevents double initialization when both inline and external scripts exist
+  processedHtml = processedHtml.replace(/<script[^>]*src=["'][^"']*\.js["'][^>]*>\s*<\/script>/gi, '');
+
   // 9. Final BOM check
   const outputBuffer = Buffer.from(processedHtml, 'utf-8');
   const outputBom = detectBOM(outputBuffer);
