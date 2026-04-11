@@ -2981,21 +2981,23 @@ body.mode-propeller_workshop {
 /* === VISIBILITY CONTROL === */
 
 /* Quick Start content visible by default */
-[data-mode-visibility="quick_start"] { display: block; }
-[data-mode-visibility="propeller_workshop"] { display: none; }
+/* FIX: Added !important to ensure visibility rules override other display properties */
+[data-mode-visibility="quick_start"] { display: block !important; }
+[data-mode-visibility="propeller_workshop"] { display: none !important; }
 
 /* Propeller Workshop mode visibility */
-body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block; }
+body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none !important; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block !important; }
 
 /* Partial visibility - show simplified in Quick Start, full in Workshop */
-[data-mode-visibility="quick_start-partial"] { display: block; }
-[data-mode-visibility="propeller_workshop-full"] { display: none; }
+[data-mode-visibility="quick_start-partial"] { display: block !important; }
+[data-mode-visibility="propeller_workshop-full"] { display: none !important; }
 
-body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block; }
+body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none !important; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block !important; }
 
 /* === MODE CONTEXT BANNER === */
+/* FIX: mode-context-banner uses flex, but visibility rules with !important take precedence */
 .mode-context-banner {
   display: flex;
   align-items: center;
@@ -3007,6 +3009,11 @@ body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { 
   margin-bottom: 1em;
   flex-wrap: wrap;
 }
+
+/* FIX: Ensure mode-context-banner displays as flex ONLY when visible according to current mode */
+/* Higher specificity (0,2,1,0) to override base visibility rules (0,1,1,0) */
+body:not(.mode-propeller_workshop) [data-mode-visibility="quick_start"].mode-context-banner { display: flex !important; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"].mode-context-banner { display: flex !important; }
 
 .mode-badge {
   font-size: 0.85rem;
