@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 7802e0c7 -->
-<!-- Generated: 2026-04-11T17:34:53.941Z -->
-<!-- Version: 5.3.2 -->
+<!-- Build hash: 19774ba6 -->
+<!-- Generated: 2026-04-11T20:53:54.838Z -->
+<!-- Version: 5.4.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="7802e0c7">
-<meta name="livechar-version" content="5.3.2">
+<meta name="build-hash" content="19774ba6">
+<meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-11">
 <meta http-equiv="Cache-Control" content="no-cache">
-<title>🧠 Live Character for LLM — Guide 5.3.2</title>
+<title>🧠 Live Character for LLM — Guide 5.4.0</title>
 <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
-<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.3.2">
+<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.4.0">
 <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/preview-card.png">
@@ -28,25 +28,28 @@
 
 <style>
     :root {
-      --bg: #050505;
-      --bg-surface: #0b0b0f;
-      --bg-elevated: #12121a;
+      --bg: #121212;  /* CHANGED: OLED-optimized dark background (v5.4.0) */
+      --bg-surface: #1a1a1a;  /* CHANGED: Slightly lighter than bg for surfaces */
+      --bg-elevated: #222222;  /* CHANGED: Elevated surfaces lighter */
       --text: #E8E8E8;        /* APCA validated - less halation */
       --text-muted: #B0B0B0;  /* APCA validated - higher contrast */
       --accent: #38bdf8;
       --accent-soft: rgba(56, 189, 248, 0.12);
       --border: #1f232b;
-      --code-bg: #0f1117;
-      --table-header: #0d1117;
-      --table-row-alt: #0a0c12;
+      --code-bg: #1a1a1a;  /* CHANGED: Match bg-surface */
+      --table-header: #1e1e1e;  /* CHANGED: Match new surface colors */
+      --table-row-alt: #161616;  /* CHANGED: Subtle zebra for tables */
       --warning-bg: rgba(234, 179, 8, 0.08);
       --warning-border: #eab308;
       --tip-bg: rgba(34, 197, 94, 0.08);
       --tip-border: #22c55e;
       --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Liberation Sans", sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-      --max-width: min(900px, 68ch);
-      --max-width-wide: 900px;  /* For tables, diagrams */
+      --max-width: min(1000px, 85ch);  /* CHANGED: Wider for technical docs (v5.4.0) */
+      --max-width-wide: 1000px;  /* For tables, diagrams */
+      --line-length: 85ch;  /* Optimal reading line length (v5.4.0) */
+      --content-width-normal: 85ch;  /* Normal content width for toggle (v5.4.0) */
+      --content-width-wide: 95ch;  /* Wide content width for toggle (v5.4.0) */
       --spacing: clamp(1rem, 2.5vw, 1.5rem);  /* Responsive spacing */
       /* OCEAN Big Five colors */
       --ocean-O: #7c4dff;
@@ -66,6 +69,16 @@
       --text-muted-light: #6b7280;
       --accent-light: #0284c7;
       --border-light: #e5e7eb;
+
+      /* OLED theme colors - true black for OLED displays */
+      --bg-oled: #000000;
+      --bg-surface-oled: #0a0a0a;
+      --bg-elevated-oled: #111111;
+      --border-oled: #1a1a1a;
+      --code-bg-oled: #0a0a0a;
+      --table-header-oled: #0a0a0a;
+      --table-row-alt-oled: #050505;
+      --panel-shadow-oled: 0 8px 32px rgba(0, 0, 0, 0.8);
 
       /* Layout variables */
       --toc-width: 320px;
@@ -114,6 +127,119 @@
       color: #a16207;
       border-color: rgba(234, 179, 8, 0.3);
     }
+
+    /* === OLED THEME === */
+    body.theme-oled {
+      --bg: var(--bg-oled);
+      --bg-surface: var(--bg-surface-oled);
+      --bg-elevated: var(--bg-elevated-oled);
+      --border: var(--border-oled);
+      --code-bg: var(--code-bg-oled);
+      --table-header: var(--table-header-oled);
+      --table-row-alt: var(--table-row-alt-oled);
+      --panel-shadow: var(--panel-shadow-oled);
+      --accent-soft: rgba(56, 189, 248, 0.15);
+    }
+
+    body.theme-oled { color-scheme: dark; }
+
+    body.theme-oled .tag.core {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    body.theme-oled .tag.opt {
+      background: rgba(234, 179, 8, 0.15);
+      color: #fde047;
+      border-color: rgba(234, 179, 8, 0.3);
+    }
+
+    body.theme-oled .tag.risk {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    body.theme-oled .tag.advanced {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    body.theme-oled .tag.tip {
+      background: rgba(34, 197, 94, 0.15);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    body.theme-oled .callout.tip {
+      background: rgba(34, 197, 94, 0.06);
+      border-color: rgba(34, 197, 94, 0.25);
+    }
+
+    body.theme-oled .callout.warn {
+      background: rgba(234, 179, 8, 0.06);
+      border-color: rgba(234, 179, 8, 0.25);
+    }
+
+    body.theme-oled .panel {
+      box-shadow: 0 8px 48px rgba(0, 0, 0, 0.9);
+    }
+
+    body.theme-oled .code-modal {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    body.theme-oled #search-container {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    body.theme-oled #guide-scratchpad-panel {
+      box-shadow: 0 8px 48px rgba(0, 0, 0, 0.9);
+    }
+
+    body.theme-oled details.interactive {
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled details.interactive summary {
+      background: #0a0a0a;
+      border-left-color: var(--accent);
+    }
+
+    body.theme-oled details.interactive summary:hover {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    body.theme-oled .table-wrap {
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled pre {
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled .hamburger {
+      background: #0a0a0a;
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled .mobile-nav-overlay {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    body.theme-oled .table-zebra tbody tr:nth-child(even) {
+      background: #050505;
+    }
+
+    body.theme-oled tbody tr:hover {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    body.theme-oled .fab-btn .theme-icon-dark { display: none; }
+    body.theme-oled .fab-btn .theme-icon-light { display: none; }
+    body.theme-oled .fab-btn .theme-icon-oled { display: inline !important; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { 
@@ -395,12 +521,20 @@
       flex-direction: column;
       min-width: var(--panel-min-width);
       min-height: var(--panel-min-height);
+      max-height: 60vh;  /* CHANGED: Compact default (v5.4.0) */
       opacity: 0;
       visibility: hidden;
       transform: scale(0.95);
       transition: opacity var(--panel-transition),
                   transform var(--panel-transition),
                   visibility 0ms linear var(--panel-transition);
+    }
+    
+    /* Small screens: allow more panel height */
+    @media (max-height: 600px) {
+      .panel {
+        max-height: 80vh;
+      }
     }
 
     .panel.open {
@@ -1245,6 +1379,49 @@
       th, td {
         border: 1px solid #ccc !important;
       }
+    }
+
+    /* ============================================================
+       v5.4.0: CONTENT WIDTH TOGGLE (ITEM-004)
+       ============================================================ */
+    body.content-wide {
+      --max-width: min(1100px, var(--content-width-wide));
+    }
+    
+    body.content-wide .table-wrap,
+    body.content-wide pre {
+      max-width: calc(100vw - 4rem);
+    }
+
+    /* ============================================================
+       v5.4.0: FULL-WIDTH TABLES AND CODE (ITEM-008)
+       ============================================================ */
+    /* Full-width content breakout - OPT-IN via .wide class, not automatic */
+    @media (min-width: 901px) {
+      .table-wrap.wide,
+      pre.pre-wide,
+      .code-block-wide {
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        padding-left: calc(50vw - 42.5ch);  /* Half of 85ch */
+        padding-right: calc(50vw - 42.5ch);
+        border-radius: 0;
+      }
+    }
+    
+    /* Alternative: Screen-width container utility */
+    .full-width-container {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      overflow-x: auto;
+    }
+    
+    /* Utility class for wide code blocks */
+    pre.pre-wide {
+      white-space: pre;
+      overflow-x: auto;
     }
 
     /* ============================================================
@@ -2704,16 +2881,19 @@
     scroll-behavior: auto !important;
   }
   
-  /* Panel immediate visibility */
+  /* Panel visibility controlled by .open class (no animations) */
   .panel {
     transform: none;
+  }
+
+  .panel.open {
     opacity: 1;
     visibility: visible;
   }
-  
-  .panel.open,
+
   .panel:not(.open) {
-    transform: none;
+    opacity: 0;
+    visibility: hidden;
   }
   
   /* Disable hover transforms */
@@ -2767,10 +2947,12 @@
 <button class="hamburger" aria-label="Open navigation" type="button">☰</button>
 <div class="mobile-nav-overlay"></div>
 <div class="fab-group" id="fab-group">
-  <button class="fab-btn" id="fab-theme" aria-label="Toggle theme" title="Тема" type="button">
+  <button class="fab-btn" id="fab-theme" aria-label="Cycle theme" title="Тема (Dark → Light → OLED)" type="button" data-theme="dark">
     <span class="theme-icon-dark">🌙</span>
     <span class="theme-icon-light" hidden>☀️</span>
+    <span class="theme-icon-oled" hidden>⬛</span>
   </button>
+  <button class="fab-btn" id="fab-width" aria-label="Toggle content width" title="Ширина контента" type="button" aria-pressed="false">↔</button>
   <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
   <button class="fab-btn" id="fab-toc" aria-label="Toggle navigation" title="Навигация" type="button">📑</button>
   <button class="fab-btn" id="fab-top" aria-label="Scroll to top" title="Наверх" type="button">↑</button>
@@ -2782,7 +2964,7 @@
 </div>
 
 <header>
-  <h1>📖 Живой персонаж для LLM 5.3.2 — Гайд по созданию RP-карточек</h1>
+  <h1>📖 Живой персонаж для LLM 5.4.0 — Гайд по созданию RP-карточек</h1>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
 </header>
 
@@ -2805,8 +2987,6 @@
 
 <!-- OLD TOC (hidden via CSS, kept for content reference) -->
 <!-- DEPRECATED: Old nav#toc removed — replaced by floating panel system -->
-
-<main id="main-content">
 
 
 <main id="main-content" role="main">
@@ -5837,16 +6017,9 @@ No smart typography. If conflict → default to Examples.</code></pre>
       </p>
     </section>
 
-  </main>
-
 
 </main>
-  </main>
-
-  </div><!-- /.content-wrapper -->
-
-<script src="assets/main.77faa05a.js" defer></script>
-
+</div><!-- /.content-wrapper -->
 <!-- NOTEPAD PANEL (NEW) -->
 <div id="notepad-panel" class="panel" tabindex="-1" aria-label="Notepad">
   <div class="panel-header" data-drag-handle>
@@ -5867,6 +6040,9 @@ No smart typography. If conflict → default to Examples.</code></pre>
   ></textarea>
   <div class="panel-resize-handle" data-resize-handle></div>
 </div>
+
+<!-- Main JavaScript (hashed by build script) -->
+<script src="assets/main.2a08af51.js" defer></script>
 
 </body>
 </html>

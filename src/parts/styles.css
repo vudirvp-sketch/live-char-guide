@@ -41,6 +41,16 @@
       --accent-light: #0284c7;
       --border-light: #e5e7eb;
 
+      /* OLED theme colors - true black for OLED displays */
+      --bg-oled: #000000;
+      --bg-surface-oled: #0a0a0a;
+      --bg-elevated-oled: #111111;
+      --border-oled: #1a1a1a;
+      --code-bg-oled: #0a0a0a;
+      --table-header-oled: #0a0a0a;
+      --table-row-alt-oled: #050505;
+      --panel-shadow-oled: 0 8px 32px rgba(0, 0, 0, 0.8);
+
       /* Layout variables */
       --toc-width: 320px;
       --toc-width-medium: clamp(220px, 20%, 280px);
@@ -88,6 +98,119 @@
       color: #a16207;
       border-color: rgba(234, 179, 8, 0.3);
     }
+
+    /* === OLED THEME === */
+    body.theme-oled {
+      --bg: var(--bg-oled);
+      --bg-surface: var(--bg-surface-oled);
+      --bg-elevated: var(--bg-elevated-oled);
+      --border: var(--border-oled);
+      --code-bg: var(--code-bg-oled);
+      --table-header: var(--table-header-oled);
+      --table-row-alt: var(--table-row-alt-oled);
+      --panel-shadow: var(--panel-shadow-oled);
+      --accent-soft: rgba(56, 189, 248, 0.15);
+    }
+
+    body.theme-oled { color-scheme: dark; }
+
+    body.theme-oled .tag.core {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    body.theme-oled .tag.opt {
+      background: rgba(234, 179, 8, 0.15);
+      color: #fde047;
+      border-color: rgba(234, 179, 8, 0.3);
+    }
+
+    body.theme-oled .tag.risk {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    body.theme-oled .tag.advanced {
+      background: rgba(139, 92, 246, 0.15);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    body.theme-oled .tag.tip {
+      background: rgba(34, 197, 94, 0.15);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    body.theme-oled .callout.tip {
+      background: rgba(34, 197, 94, 0.06);
+      border-color: rgba(34, 197, 94, 0.25);
+    }
+
+    body.theme-oled .callout.warn {
+      background: rgba(234, 179, 8, 0.06);
+      border-color: rgba(234, 179, 8, 0.25);
+    }
+
+    body.theme-oled .panel {
+      box-shadow: 0 8px 48px rgba(0, 0, 0, 0.9);
+    }
+
+    body.theme-oled .code-modal {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    body.theme-oled #search-container {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    body.theme-oled #guide-scratchpad-panel {
+      box-shadow: 0 8px 48px rgba(0, 0, 0, 0.9);
+    }
+
+    body.theme-oled details.interactive {
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled details.interactive summary {
+      background: #0a0a0a;
+      border-left-color: var(--accent);
+    }
+
+    body.theme-oled details.interactive summary:hover {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    body.theme-oled .table-wrap {
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled pre {
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled .hamburger {
+      background: #0a0a0a;
+      border-color: #1a1a1a;
+    }
+
+    body.theme-oled .mobile-nav-overlay {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    body.theme-oled .table-zebra tbody tr:nth-child(even) {
+      background: #050505;
+    }
+
+    body.theme-oled tbody tr:hover {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    body.theme-oled .fab-btn .theme-icon-dark { display: none; }
+    body.theme-oled .fab-btn .theme-icon-light { display: none; }
+    body.theme-oled .fab-btn .theme-icon-oled { display: inline !important; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { 

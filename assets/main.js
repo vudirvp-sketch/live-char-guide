@@ -46,13 +46,33 @@
     }
   };
 
-  // Default panel state
+  // Default panel state - v5.4.0: Compact default (ITEM-007)
   const DEFAULT_STATE = {
     visible: false,
     x: 20,
     y: 20,
     width: 280,
-    height: 400
+    height: Math.min(400, window.innerHeight * 0.6)  // 60vh max, compact default
+  };
+
+  // Panel-specific default positions - v5.4.0: Smart positioning (ITEM-005)
+  const PANEL_DEFAULTS = {
+    'toc-panel': {
+      getDefaultPosition: () => ({
+        x: Math.max(20, window.innerWidth - 320),  // Right side
+        y: 80,
+        width: 280,
+        height: Math.min(400, window.innerHeight * 0.6)
+      })
+    },
+    'notepad-panel': {
+      getDefaultPosition: () => ({
+        x: 20,  // Left side
+        y: 80,
+        width: 280,
+        height: Math.min(400, window.innerHeight * 0.6)
+      })
+    }
   };
 
   // Panel class
@@ -83,7 +103,25 @@
 
     loadState() {
       const saved = storage.get(this.storageKey);
-      return { ...DEFAULT_STATE, ...saved };
+      
+      // v5.4.0: Get panel-specific defaults (ITEM-005)
+      const panelId = this.el.id;
+      const panelDefaults = PANEL_DEFAULTS[panelId]?.getDefaultPosition() || DEFAULT_STATE;
+      
+      // v5.4.0: Validate saved position is still on-screen (ITEM-006)
+      if (saved) {
+        if (saved.x > window.innerWidth - 100 || saved.y > window.innerHeight - 100) {
+          // Position is off-screen, use panel defaults
+          return { ...panelDefaults, visible: false };
+        }
+        // Apply smart offset if other panels are open
+        const openPanels = document.querySelectorAll('.panel.open');
+        if (openPanels.length > 0 && !saved.visible) {
+          saved.y = Math.min(saved.y + 50, window.innerHeight - 200);
+        }
+      }
+      
+      return { ...panelDefaults, ...saved };
     }
 
     saveState = debounce(() => {
@@ -639,39 +677,76 @@ function updateChecklistProgress() {
   if (bar) bar.style.width = `${percent}%`;
 }
 
-// === THEME TOGGLE ===
-// IMP-007 FIX: Add ARIA attributes
+// === THEME TOGGLE (3-state: dark → light → oled) ===
 function initTheme() {
   const toggle = document.getElementById('fab-theme');
   if (!toggle) return;
 
-  // IMP-007 FIX: Add ARIA attributes
-  toggle.setAttribute('role', 'button');
-  toggle.setAttribute('aria-pressed', 'false');
-
+  const themes = ['dark', 'light', 'oled'];
+  const themeLabels = {
+    dark: 'Тёмная',
+    light: 'Светлая', 
+    oled: 'OLED'
+  };
+  
   const iconDark = toggle.querySelector('.theme-icon-dark');
   const iconLight = toggle.querySelector('.theme-icon-light');
-  const stored = localStorage.getItem('theme');
+  const iconOled = toggle.querySelector('.theme-icon-oled');
 
-  // Initial theme from storage or system preference
-  if (stored === 'light' || (!stored && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-    document.body.classList.add('theme-light');
+  // Helper function to apply theme
+  function applyTheme(theme) {
+    // Remove all theme classes
+    document.body.classList.remove('theme-light', 'theme-oled');
+    
+    // Hide all icons
     if (iconDark) iconDark.hidden = true;
-    if (iconLight) iconLight.hidden = false;
+    if (iconLight) iconLight.hidden = true;
+    if (iconOled) iconOled.hidden = true;
+    
+    // Apply theme
+    if (theme === 'light') {
+      document.body.classList.add('theme-light');
+      if (iconLight) iconLight.hidden = false;
+    } else if (theme === 'oled') {
+      document.body.classList.add('theme-oled');
+      if (iconOled) iconOled.hidden = false;
+    } else {
+      // Dark (default) - no class needed
+      if (iconDark) iconDark.hidden = false;
+    }
+    
+    // Update button attributes
+    toggle.setAttribute('role', 'button');
+    toggle.setAttribute('data-theme', theme);
+    const nextTheme = themes[(themes.indexOf(theme) + 1) % 3];
+    toggle.setAttribute('title', `Тема: ${themeLabels[theme]} (→ ${themeLabels[nextTheme]})`);
+    toggle.setAttribute('aria-label', `Тема: ${themeLabels[theme]}`);
   }
 
-  toggle.addEventListener('click', () => {
-    document.body.classList.toggle('theme-light');
-    const isLight = document.body.classList.contains('theme-light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    if (iconDark) iconDark.hidden = isLight;
-    if (iconLight) iconLight.hidden = !isLight;
-    // IMP-007 FIX: Update aria-pressed
-    toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-  });
+  // Initial theme from storage or system preference
+  let stored = localStorage.getItem('theme');
+  if (!stored || !themes.includes(stored)) {
+    // Determine initial theme based on system preference
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      stored = 'light';
+    } else {
+      stored = 'dark';
+    }
+  }
+  
+  applyTheme(stored);
 
-  // Re-initialize SVGs on theme change for proper fill colors
+  // Toggle handler - cycle through themes
   toggle.addEventListener('click', () => {
+    const current = toggle.getAttribute('data-theme') || 'dark';
+    const currentIndex = themes.indexOf(current);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const nextTheme = themes[nextIndex];
+    
+    applyTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
+    
+    // Re-initialize SVGs on theme change for proper fill colors
     setTimeout(() => {
       const enneaSvg = document.getElementById('ennea-svg');
       const oceanSvg = document.getElementById('ocean-svg');
@@ -2133,7 +2208,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initAnchors();
   initTabs();
-  initTocToggle();
+  // BUG-014 FIX: Removed initTocToggle() - conflicts with Panel system
+  // The Panel class (initialized in IIFE below) handles TOC panel via safeRebindFab()
+  // initTocToggle() was adding duplicate listeners and using incompatible CSS classes
+  // initTocToggle();
   initScrollTop();
   initEnneagram();
   initOcean();
@@ -2304,7 +2382,12 @@ document.addEventListener('DOMContentLoaded', () => {
     safeRebindFab('fab-toc', () => { if (tocPanel) tocPanel.toggle(); });
     safeRebindFab('fab-scratchpad', () => { if (notepadPanel) notepadPanel.toggle(); });
 
-    // 3. Global access for debugging + initialization flag
+    // 3. Initialize content width toggle (v5.4.0 - ITEM-004)
+    if (typeof initWidthToggle === 'function') {
+      initWidthToggle();
+    }
+
+    // 4. Global access for debugging + initialization flag
     window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
   });
 })();
@@ -2639,6 +2722,38 @@ function initOcean() {
       });
     });
   }
+}
+
+// ============================================================================
+// v5.4.0: CONTENT WIDTH TOGGLE (ITEM-004)
+// ============================================================================
+/**
+ * Initialize content width toggle button
+ * Toggles between normal (85ch) and wide (95ch) content width
+ * Persists preference in localStorage
+ */
+function initWidthToggle() {
+  const btn = document.getElementById('fab-width');
+  if (!btn) return;
+
+  const STORAGE_KEY = 'content-width-mode';
+  const saved = localStorage.getItem(STORAGE_KEY);
+
+  // Apply saved preference on load
+  if (saved === 'wide') {
+    document.body.classList.add('content-wide');
+    btn.setAttribute('aria-pressed', 'true');
+  } else {
+    btn.setAttribute('aria-pressed', 'false');
+  }
+
+  // Toggle handler
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('content-wide');
+    const isWide = document.body.classList.contains('content-wide');
+    localStorage.setItem(STORAGE_KEY, isWide ? 'wide' : 'normal');
+    btn.setAttribute('aria-pressed', isWide ? 'true' : 'false');
+  });
 }
 
 // ============================================================================
