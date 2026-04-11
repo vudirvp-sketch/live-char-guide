@@ -690,7 +690,7 @@ function initTheme() {
 // === MOBILE NAVIGATION ===
 function initMobileNav() {
   const hamburger = document.querySelector('.hamburger');
-  const toc = document.getElementById('toc');
+  const toc = document.getElementById('toc-panel');
   const overlay = document.querySelector('.mobile-nav-overlay');
 
   if (!hamburger || !toc || !overlay) return;
@@ -777,20 +777,23 @@ function initSearch() {
 }
 
 // === COPYABLE ANCHORS ===
-function initAnchors() {
+async function initAnchors() {
   document.querySelectorAll('h2[id], h3[id], h4[id]').forEach(heading => {
     const anchor = document.createElement('a');
     anchor.href = `#${heading.id}`;
     anchor.className = 'heading-anchor';
     anchor.textContent = '#';
 
-    anchor.addEventListener('click', (e) => {
+    anchor.addEventListener('click', async (e) => {
       e.preventDefault();
       const url = location.href.split('#')[0] + '#' + heading.id;
-      navigator.clipboard.writeText(url).then(() => {
+      const success = await copyToClipboard(url);
+      if (success) {
         anchor.textContent = '✓';
         setTimeout(() => anchor.textContent = '#', 1500);
-      });
+      } else {
+        console.error('Failed to copy anchor URL');
+      }
     });
 
     heading.appendChild(anchor);
@@ -832,7 +835,7 @@ function initTabs() {
 // === TOC COLLAPSE TOGGLE ===
 function initTocToggle() {
   const btn = document.getElementById('fab-toc');
-  const toc = document.getElementById('toc');
+  const toc = document.getElementById('toc-panel');
   if (!btn || !toc) return;
 
   const STORAGE_KEY = 'toc-collapsed';
@@ -2630,4 +2633,15 @@ function initOcean() {
       });
     });
   }
+}
+
+// ============================================================================
+// BUG-007 FIX: SERVICE WORKER REGISTRATION (moved from inline script)
+// ============================================================================
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/assets/sw.js")
+      .then(reg => console.log("[SW] Service Worker registered:", reg.scope))
+      .catch(err => console.warn("[SW] Service Worker registration failed:", err));
+  });
 }

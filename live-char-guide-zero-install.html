@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 4fa3b09f -->
-<!-- Generated: 2026-04-11T01:36:50.001Z -->
+<!-- Build hash: 1430ab00 -->
+<!-- Generated: 2026-04-11T15:17:17.481Z -->
 <!-- Version: 5.3.2 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,16 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="4fa3b09f">
+<meta name="build-hash" content="1430ab00">
 <meta name="livechar-version" content="5.3.2">
 <meta name="livechar-build" content="2026-04-11">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧠 Live Character for LLM — Guide v5.3.2</title>
+<title>🧠 Live Character for LLM — Guide 5.3.2</title>
 <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
-<meta property="og:title" content="🧠 Live Character for LLM — Guide v5.3.2">
+<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.3.2">
 <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/preview-card.png">
@@ -27,6 +25,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
 
 
 <style>
@@ -2587,7 +2587,7 @@
 
 
 </style>
-<style>:root{--color-gray-500: #8B8B8B;--color-gray-600: #6B6B6B;--color-gray-700: #4A4A4A;--color-gray-800: #2A2A2A;--color-gray-900: #121212;--color-brand-primary: #4A90E2;--color-brand-secondary: #7B68EE;--color-semantic-border-accessible: #6B6B6B;--color-semantic-focus-ring: #4A90E2;--color-semantic-error: #DC3545;--color-semantic-success: #28A745;--spacing-1: 4px;--spacing-2: 8px;--spacing-3: 12px;--spacing-4: 16px;--spacing-5: 24px;--spacing-6: 32px;--typography-font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Liberation Sans', sans-serif;--typography-font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;--typography-font-size-xs: 12px;--typography-font-size-sm: 14px;--typography-font-size-base: 16px;--typography-font-size-lg: 18px;--typography-font-size-xl: 24px;--typography-line-height-tight: 1.25;--typography-line-height-base: 1.5;--typography-line-height-relaxed: 1.75;--border-radius-sm: 4px;--border-radius-md: 8px;--border-radius-lg: 12px}</style></head>
+</head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
 
@@ -2609,7 +2609,7 @@
 </div>
 
 <header>
-  <h1>📖 Живой персонаж для LLM v5.3.2 — Гайд по созданию RP-карточек</h1>
+  <h1>📖 Живой персонаж для LLM 5.3.2 — Гайд по созданию RP-карточек</h1>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
 </header>
 
@@ -5674,21 +5674,6 @@ No smart typography. If conflict → default to Examples.</code></pre>
 
 <script src="assets/main.js" defer></script>
 
-<!-- IMP-003 FIX: Service Worker Registration -->
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/assets/sw.js')
-        .then(function(reg) {
-          console.log('[SW] Service Worker registered:', reg.scope);
-        })
-        .catch(function(err) {
-          console.warn('[SW] Service Worker registration failed:', err);
-        });
-    });
-  }
-</script>
-
 <!-- NOTEPAD PANEL (NEW) -->
 <div id="notepad-panel" class="panel" tabindex="-1" aria-label="Notepad">
   <div class="panel-header" data-drag-handle>
@@ -6408,7 +6393,7 @@ function initTheme() {
 // === MOBILE NAVIGATION ===
 function initMobileNav() {
   const hamburger = document.querySelector('.hamburger');
-  const toc = document.getElementById('toc');
+  const toc = document.getElementById('toc-panel');
   const overlay = document.querySelector('.mobile-nav-overlay');
 
   if (!hamburger || !toc || !overlay) return;
@@ -6495,20 +6480,23 @@ function initSearch() {
 }
 
 // === COPYABLE ANCHORS ===
-function initAnchors() {
+async function initAnchors() {
   document.querySelectorAll('h2[id], h3[id], h4[id]').forEach(heading => {
     const anchor = document.createElement('a');
     anchor.href = `#${heading.id}`;
     anchor.className = 'heading-anchor';
     anchor.textContent = '#';
 
-    anchor.addEventListener('click', (e) => {
+    anchor.addEventListener('click', async (e) => {
       e.preventDefault();
       const url = location.href.split('#')[0] + '#' + heading.id;
-      navigator.clipboard.writeText(url).then(() => {
+      const success = await copyToClipboard(url);
+      if (success) {
         anchor.textContent = '✓';
         setTimeout(() => anchor.textContent = '#', 1500);
-      });
+      } else {
+        console.error('Failed to copy anchor URL');
+      }
     });
 
     heading.appendChild(anchor);
@@ -6550,7 +6538,7 @@ function initTabs() {
 // === TOC COLLAPSE TOGGLE ===
 function initTocToggle() {
   const btn = document.getElementById('fab-toc');
-  const toc = document.getElementById('toc');
+  const toc = document.getElementById('toc-panel');
   if (!btn || !toc) return;
 
   const STORAGE_KEY = 'toc-collapsed';
@@ -8350,6 +8338,17 @@ function initOcean() {
   }
 }
 
+// ============================================================================
+// BUG-007 FIX: SERVICE WORKER REGISTRATION (moved from inline script)
+// ============================================================================
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/assets/sw.js")
+      .then(reg => console.log("[SW] Service Worker registered:", reg.scope))
+      .catch(err => console.warn("[SW] Service Worker registration failed:", err));
+  });
+}
+
 
 // === ZERO-INSTALL ADDITIONS ===
 // This code is only included in the zero-install (offline) version
@@ -8429,7 +8428,6 @@ window.__lc_store = {
 
 // Diagnostic panel (Ctrl+Shift+V)
 (function() {
-  var diagnosticMode = false;
   document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.shiftKey && e.key === 'V') {
       e.preventDefault();

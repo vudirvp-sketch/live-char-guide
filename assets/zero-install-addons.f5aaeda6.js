@@ -76,7 +76,6 @@ window.__lc_store = {
 
 // Diagnostic panel (Ctrl+Shift+V)
 (function() {
-  var diagnosticMode = false;
   document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.shiftKey && e.key === 'V') {
       e.preventDefault();
