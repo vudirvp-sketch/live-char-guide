@@ -2269,6 +2269,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === INITIALIZATION ===
   document.addEventListener('DOMContentLoaded', () => {
+    // FIX: Skip if already initialized by another script instance
+    if (window.guidePanels && window.guidePanels._initialized) {
+      console.log('[Panel] Already initialized by another instance, skipping');
+      return;
+    }
+
     // 1. Initialize panels
     const tocPanelEl = document.getElementById('toc-panel');
     let tocPanel = null;
@@ -2298,8 +2304,8 @@ document.addEventListener('DOMContentLoaded', () => {
     safeRebindFab('fab-toc', () => { if (tocPanel) tocPanel.toggle(); });
     safeRebindFab('fab-scratchpad', () => { if (notepadPanel) notepadPanel.toggle(); });
 
-    // 3. Global access for debugging
-    window.guidePanels = { toc: tocPanel, notepad: notepadPanel };
+    // 3. Global access for debugging + initialization flag
+    window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
   });
 })();
 

@@ -225,43 +225,36 @@
     }
 
     bindEvents() {
-      // FIX: Check if events already bound to prevent duplicate handlers
-      if (this.el.dataset.eventsBound === 'true') {
-        console.log('[Panel] Events already bound for:', this.el.id);
-        return;
-      }
-      this.el.dataset.eventsBound = 'true';
-
       // Toggle buttons
       if (this.closeBtn) {
         this.closeBtn.addEventListener('click', () => this.close());
       }
-
+      
       // Drag - mouse
       this.header.addEventListener('mousedown', (e) => this.startDrag(e));
       document.addEventListener('mousemove', (e) => this.onDrag(e));
       document.addEventListener('mouseup', () => this.endDrag());
-
+      
       // Drag - touch
       this.header.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
       document.addEventListener('touchmove', (e) => this.onDrag(e), { passive: false });
       document.addEventListener('touchend', () => this.endDrag());
-
+      
       // Resize - mouse
       if (this.resizeHandle) {
         this.resizeHandle.addEventListener('mousedown', (e) => this.startResize(e));
         document.addEventListener('mousemove', (e) => this.onResize(e));
         document.addEventListener('mouseup', () => this.endResize());
-
+        
         // Resize - touch
         this.resizeHandle.addEventListener('touchstart', (e) => this.startResize(e), { passive: false });
         document.addEventListener('touchmove', (e) => this.onResize(e), { passive: false });
         document.addEventListener('touchend', () => this.endResize());
       }
-
+      
       // Focus on click
       this.el.addEventListener('mousedown', () => this.focus());
-
+      
       // Keyboard
       this.el.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && this.isOpen()) {
@@ -269,7 +262,7 @@
           e.preventDefault();
         }
       });
-
+      
       // Save on window resize
       window.addEventListener('resize', debounce(() => {
         if (this.isOpen()) {
@@ -279,8 +272,6 @@
           }
         }
       }, 100));
-
-      console.log('[Panel] Events bound for:', this.el.id);
     }
 
     setupAccessibility() {
@@ -556,94 +547,37 @@ function initCopyButtons() {
     expandBtn.setAttribute('aria-label', 'Expand code block');
 
     expandBtn.addEventListener('click', () => {
-      // ACC-005: Create accessible modal with ARIA attributes
       const modal = document.createElement('div');
       modal.className = 'code-modal';
-      modal.setAttribute('role', 'dialog');
-      modal.setAttribute('aria-modal', 'true');
-      modal.setAttribute('aria-labelledby', 'code-modal-title');
-      modal.setAttribute('aria-describedby', 'code-modal-desc');
 
       const modalContent = document.createElement('div');
       modalContent.className = 'code-modal-content';
-
-      // ACC-005: Add screen reader title and description
-      const srTitle = document.createElement('h2');
-      srTitle.id = 'code-modal-title';
-      srTitle.className = 'sr-only';
-      srTitle.textContent = 'Code viewer';
-      
-      const srDesc = document.createElement('p');
-      srDesc.id = 'code-modal-desc';
-      srDesc.className = 'sr-only';
-      srDesc.textContent = 'Expanded code block view. Press Escape to close.';
 
       const closeBtn = document.createElement('button');
       closeBtn.className = 'code-modal-close';
       closeBtn.textContent = '✕';
       closeBtn.type = 'button';
-      closeBtn.setAttribute('aria-label', 'Close code viewer');
+      closeBtn.addEventListener('click', () => modal.remove());
 
       const preClone = pre.cloneNode(true);
       preClone.classList.add('pre-raw');
 
-      modalContent.appendChild(srTitle);
-      modalContent.appendChild(srDesc);
       modalContent.appendChild(closeBtn);
       modalContent.appendChild(preClone);
       modal.appendChild(modalContent);
 
-      // ACC-005: Focus trap implementation
-      let previousActiveElement = document.activeElement;
-      
-      function trapFocus(e) {
-        if (e.key === 'Escape') {
-          closeModal();
-          return;
-        }
-        
-        if (e.key !== 'Tab') return;
-        
-        const focusableElements = modalContent.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-        
-        if (e.shiftKey) {
-          if (document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
-      
-      function closeModal() {
-        modal.remove();
-        document.removeEventListener('keydown', trapFocus);
-        // ACC-005: Restore focus to trigger element
-        if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
-          previousActiveElement.focus();
-        }
-      }
-      
-      closeBtn.addEventListener('click', closeModal);
-      
       modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
+        if (e.target === modal) modal.remove();
       });
 
-      document.addEventListener('keydown', trapFocus);
+      document.addEventListener('keydown', function handler(e) {
+        if (e.key === 'Escape') {
+          modal.remove();
+          document.removeEventListener('keydown', handler);
+        }
+      });
 
       document.body.appendChild(modal);
-      
-      // ACC-005: Focus first element
-      closeBtn.focus();
     });
 
     wrapper.appendChild(expandBtn);
@@ -711,13 +645,6 @@ function initTheme() {
   const toggle = document.getElementById('fab-theme');
   if (!toggle) return;
 
-  // FIX: Check if already initialized by another script instance
-  if (toggle.dataset.themeInit === 'true') {
-    console.log('[Theme] Already initialized, skipping');
-    return;
-  }
-  toggle.dataset.themeInit = 'true';
-
   // IMP-007 FIX: Add ARIA attributes
   toggle.setAttribute('role', 'button');
   toggle.setAttribute('aria-pressed', 'false');
@@ -758,8 +685,6 @@ function initTheme() {
       }
     }, 50);
   });
-
-  console.log('[Theme] Initialized');
 }
 
 // === MOBILE NAVIGATION ===
@@ -2208,9 +2133,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initAnchors();
   initTabs();
-  // initTocToggle() removed — now handled by safeRebindFab in panel IIFE below
+  initTocToggle();
   initScrollTop();
-  initThemeHint();  // THM-001: Theme onboarding hint
   initEnneagram();
   initOcean();
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
@@ -2223,22 +2147,12 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // Remove all old event listeners from FAB buttons by cloning them
-  // FIX: Add protection against duplicate execution (happens when both inline and external JS load)
   function safeRebindFab(id, callback) {
     const btn = document.getElementById(id);
-    if (!btn) return null;
-
-    // FIX: Check if already processed by another script instance
-    if (btn.dataset.rebound === 'true') {
-      console.log('[Panel] FAB already rebound, skipping:', id);
-      return btn;
-    }
-
+    if (!btn) return;
     const clone = btn.cloneNode(true);
-    clone.dataset.rebound = 'true';
     btn.parentNode.replaceChild(clone, btn);
     clone.addEventListener('click', (e) => { e.preventDefault(); callback(); });
-    console.log('[Panel] FAB rebound:', id);
     return clone;
   }
 
@@ -2355,7 +2269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === INITIALIZATION ===
   document.addEventListener('DOMContentLoaded', () => {
-    // FIX: Skip if already initialized by another script instance (inline or external)
+    // FIX: Skip if already initialized by another script instance
     if (window.guidePanels && window.guidePanels._initialized) {
       console.log('[Panel] Already initialized by another instance, skipping');
       return;
@@ -2364,82 +2278,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize panels
     const tocPanelEl = document.getElementById('toc-panel');
     let tocPanel = null;
+    if (tocPanelEl && window.Panel) {
+      tocPanel = new window.Panel(tocPanelEl, {
+        storageKey: 'guide_toc_state',
+        onToggle: (isOpen) => {
+          const fab = document.getElementById('fab-toc');
+          if (fab) fab.setAttribute('aria-pressed', isOpen);
+        }
+      });
 
-    // DEBUG: Log Panel availability
-    console.log('[Panel] window.Panel available:', !!window.Panel);
-    console.log('[Panel] tocPanelEl found:', !!tocPanelEl);
-
-    if (tocPanelEl) {
-      // Generate TOC links into panel (must run regardless of Panel class)
+      // Generate TOC links into panel (guaranteed to run)
       generateTOCLinks(tocPanelEl);
-
-      if (window.Panel) {
-        tocPanel = new window.Panel(tocPanelEl, {
-          storageKey: 'guide_toc_state',
-          onToggle: (isOpen) => {
-            const fab = document.getElementById('fab-toc');
-            if (fab) fab.setAttribute('aria-pressed', isOpen);
-          }
-        });
-        console.log('[Panel] TOC Panel created successfully');
-      } else {
-        console.warn('[Panel] window.Panel not defined - using fallback toggle');
-      }
     }
 
     const notepadPanelEl = document.getElementById('notepad-panel');
     let notepadPanel = null;
-
-    console.log('[Panel] window.NotepadPanel available:', !!window.NotepadPanel);
-    console.log('[Panel] notepadPanelEl found:', !!notepadPanelEl);
-
-    if (notepadPanelEl) {
-      if (window.NotepadPanel) {
-        notepadPanel = new window.NotepadPanel(notepadPanelEl, {
-          storageKey: 'guide_notepad_state',
-          onSave: (content) => console.log(`[Notepad] Saved: ${content.length} chars`)
-        });
-        console.log('[Panel] Notepad Panel created successfully');
-      } else {
-        console.warn('[Panel] window.NotepadPanel not defined - using fallback toggle');
-      }
+    if (notepadPanelEl && window.NotepadPanel) {
+      notepadPanel = new window.NotepadPanel(notepadPanelEl, {
+        storageKey: 'guide_notepad_state',
+        onSave: (content) => console.log(`[Notepad] Saved: ${content.length} chars`)
+      });
     }
 
     // 2. Safely rebind FAB buttons (kills old listeners from legacy scratchpad)
-    // FIX: Add fallback if Panel/NotepadPanel classes not available
-    safeRebindFab('fab-toc', () => {
-      if (tocPanel) {
-        tocPanel.toggle();
-      } else if (tocPanelEl) {
-        // Fallback: toggle 'open' class directly
-        tocPanelEl.classList.toggle('open');
-        const isOpen = tocPanelEl.classList.contains('open');
-        const fab = document.getElementById('fab-toc');
-        if (fab) {
-          fab.setAttribute('aria-pressed', isOpen);
-          fab.textContent = isOpen ? '📋' : '📑';
-        }
-        console.log('[Panel] Fallback TOC toggle, open:', isOpen);
-      }
-    });
+    safeRebindFab('fab-toc', () => { if (tocPanel) tocPanel.toggle(); });
+    safeRebindFab('fab-scratchpad', () => { if (notepadPanel) notepadPanel.toggle(); });
 
-    safeRebindFab('fab-scratchpad', () => {
-      if (notepadPanel) {
-        notepadPanel.toggle();
-      } else if (notepadPanelEl) {
-        // Fallback: toggle 'open' class directly
-        notepadPanelEl.classList.toggle('open');
-        console.log('[Panel] Fallback Notepad toggle, open:', notepadPanelEl.classList.contains('open'));
-      }
-    });
-
-    // 3. Global access for debugging - mark as initialized
-    window.guidePanels = { 
-      toc: tocPanel, 
-      notepad: notepadPanel,
-      _initialized: true 
-    };
-    console.log('[Panel] guidePanels initialized:', window.guidePanels);
+    // 3. Global access for debugging + initialization flag
+    window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
   });
 })();
 
@@ -2773,50 +2639,6 @@ function initOcean() {
       });
     });
   }
-}
-
-// ============================================================================
-// THM-001: THEME ONBOARDING HINT
-// ============================================================================
-function initThemeHint() {
-  const STORAGE_KEY = 'theme-hint-dismissed';
-  
-  // Check if user has already seen/dismissed the hint
-  if (localStorage.getItem(STORAGE_KEY) === 'true') return;
-  
-  // Only show hint after a short delay
-  setTimeout(() => {
-    // Create hint element
-    const hint = document.createElement('div');
-    hint.className = 'theme-hint';
-    hint.innerHTML = `
-      Click 🌙/☀️ to toggle dark/light mode
-      <span class="theme-hint-close" role="button" tabindex="0" aria-label="Dismiss hint">✕</span>
-    `;
-    
-    // Add close functionality
-    const closeBtn = hint.querySelector('.theme-hint-close');
-    
-    function dismissHint() {
-      hint.style.opacity = '0';
-      hint.style.transform = 'translateY(10px)';
-      setTimeout(() => hint.remove(), 300);
-      localStorage.setItem(STORAGE_KEY, 'true');
-    }
-    
-    closeBtn.addEventListener('click', dismissHint);
-    closeBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        dismissHint();
-      }
-    });
-    
-    // Auto-dismiss after 10 seconds
-    setTimeout(dismissHint, 10000);
-    
-    document.body.appendChild(hint);
-  }, 3000);  // Wait 3 seconds before showing
 }
 
 // ============================================================================

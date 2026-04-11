@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: e1609d45 -->
-<!-- Generated: 2026-04-11T15:17:17.091Z -->
+<!-- Build hash: 7802e0c7 -->
+<!-- Generated: 2026-04-11T17:16:45.683Z -->
 <!-- Version: 5.3.2 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="e1609d45">
+<meta name="build-hash" content="7802e0c7">
 <meta name="livechar-version" content="5.3.2">
 <meta name="livechar-build" content="2026-04-11">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -31,8 +31,8 @@
       --bg: #050505;
       --bg-surface: #0b0b0f;
       --bg-elevated: #12121a;
-      --text: #e6e6e6;
-      --text-muted: #9ca3af;
+      --text: #E8E8E8;        /* APCA validated - less halation */
+      --text-muted: #B0B0B0;  /* APCA validated - higher contrast */
       --accent: #38bdf8;
       --accent-soft: rgba(56, 189, 248, 0.12);
       --border: #1f232b;
@@ -45,8 +45,9 @@
       --tip-border: #22c55e;
       --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Liberation Sans", sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-      --max-width: 960px;
-      --spacing: 1.5rem;
+      --max-width: min(900px, 68ch);
+      --max-width-wide: 900px;  /* For tables, diagrams */
+      --spacing: clamp(1rem, 2.5vw, 1.5rem);  /* Responsive spacing */
       /* OCEAN Big Five colors */
       --ocean-O: #7c4dff;
       --ocean-C: #4dc3ff;
@@ -78,7 +79,7 @@
       --panel-bg: var(--bg-surface);
       --panel-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       --panel-border-radius: 8px;
-      --panel-header-height: 40px;
+      --panel-header-height: 48px;  /* Increased for 44px touch targets */
       --panel-min-width: 220px;
       --panel-min-height: 150px;
       --panel-z-base: 1000;
@@ -115,7 +116,22 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; color-scheme: dark light; }
+    html { 
+      font-size: clamp(16px, 3.5vw, 18px);  /* Fluid typography */
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;  /* For anchor links with sticky header */
+      color-scheme: dark light;
+    }
+
+    /* Focus management - keyboard visible only */
+    *:focus {
+      outline: none;
+    }
+
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
     body {
       background: var(--bg);
       color: var(--text);
@@ -131,9 +147,9 @@
 
     /* Типографика */
     h1, h2, h3, h4 { color: var(--text); margin: 2.2em 0 0.8em; line-height: 1.25; font-weight: 600; }
-    h1 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5em; }
-    h2 { font-size: 1.6rem; color: var(--accent); }
-    h3 { font-size: 1.25rem; }
+    h1 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5em; letter-spacing: -0.02em; }
+    h2 { font-size: 1.6rem; color: var(--accent); letter-spacing: -0.01em; }
+    h3 { font-size: 1.25rem; letter-spacing: -0.005em; }
     h4 { font-size: 1.1rem; }
     p { margin: 0.8em 0; }
     a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
@@ -150,9 +166,10 @@
       background: var(--code-bg);
       padding: 0.15em 0.35em;
       border-radius: 4px;
-      font-size: 0.88em;
+      font-size: 0.9em;  /* Consistent with pre blocks */
       border: 1px solid var(--border);
       color: #93c5fd;
+      letter-spacing: 0.02em;  /* Better monospace readability */
     }
     pre {
       background: var(--code-bg);
@@ -165,9 +182,10 @@
       white-space: pre-wrap;
       margin: 1.2em 0;
       line-height: 1.5;
-      font-size: 0.85rem;
+      font-size: 0.9rem;  /* 14.4px - WCAG readable minimum */
       tab-size: 2;
       -moz-tab-size: 2;
+      letter-spacing: 0.02em;  /* Better monospace readability */
     }
     pre code { background: none; border: none; padding: 0; color: inherit; }
     pre.pre-raw {
@@ -205,7 +223,9 @@
       position: sticky;
       top: 0;
     }
-    tbody tr:nth-child(even) { background: var(--table-row-alt); }
+    /* Zebra striping is optional via .table-zebra class */
+    .table-zebra tbody tr:nth-child(even) { background: var(--table-row-alt); }
+    tbody tr:nth-child(even) { background: transparent; }  /* Default: no zebra */
     tbody tr:hover { background: var(--accent-soft); }
     td code { white-space: pre-wrap; }
 
@@ -392,6 +412,14 @@
                   visibility 0ms linear 0ms;
     }
 
+    /* FIX: TOC panel collapsed state */
+    #toc-panel.toc-collapsed {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
     .panel.dragging {
       transition: none;
       user-select: none;
@@ -424,8 +452,10 @@
     }
 
     .panel-btn {
-      width: 28px;
-      height: 28px;
+      min-width: 44px;
+      min-height: 44px;
+      width: 44px;
+      height: 44px;
       border: none;
       background: transparent;
       color: var(--text-muted);
@@ -700,7 +730,7 @@
       background: var(--accent-soft);
     }
 
-    details.interactive summary:focus {
+    details.interactive summary:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: -2px;
     }
@@ -826,6 +856,8 @@
       position: absolute;
       top: 0.5rem;
       right: 0.5rem;
+      min-width: 44px;
+      min-height: 44px;
       padding: 0.4em 0.8em;
       background: var(--bg-elevated);
       border: 1px solid var(--border);
@@ -930,6 +962,7 @@
 
     #search-input {
       width: 100%;
+      min-height: 44px;  /* Touch target minimum */
       padding: 0.8em 1em;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -1117,7 +1150,8 @@
       .copy-btn, .expand-btn, .tabs, .code-modal,
       #search-container, .heading-anchor,
       #guide-scratchpad-panel, #fab-scratchpad, #guide-scratchpad-import,
-      #toc-panel, #notepad-panel {
+      #toc-panel, #notepad-panel,
+      .skip-link, .theme-hint {
         display: none !important;
       }
 
@@ -1144,24 +1178,72 @@
         display: block !important;
       }
 
-      /* Optimize layout for print */
+      /* Force light mode for print (PRT-001) */
       body {
-        background: white;
-        color: black;
+        background: white !important;
+        color: black !important;
         padding: 0;
         max-width: none;
+      }
+      
+      body.theme-light,
+      body:not(.theme-light) {
+        --bg: white;
+        --bg-surface: #fafafa;
+        --bg-elevated: #f3f4f6;
+        --text: #1a1a1a;
+        --text-muted: #6b7280;
+        --accent: #0284c7;
+        --border: #e5e7eb;
+        --code-bg: #f3f4f6;
+        background: white !important;
+        color: black !important;
+      }
+      
+      /* Ensure all text is black for print */
+      h1, h2, h3, h4, p, li, td, th, span, div {
+        color: black !important;
+      }
+      
+      /* Accent color visible in print */
+      a, .accent-text {
+        color: #0284c7 !important;
       }
 
       /* Page breaks */
       h2, h3 { page-break-after: avoid; }
       pre, table { page-break-inside: avoid; }
 
-      /* Links */
-      a { color: black; text-decoration: underline; }
+      /* Links with truncated URLs */
+      a { 
+        color: black; 
+        text-decoration: underline; 
+        border-bottom: none !important;
+      }
       a[href^="http"]::after {
         content: " (" attr(href) ")";
         font-size: 0.8em;
         color: gray;
+        word-break: break-all;
+        max-width: 200px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      /* Code blocks readable in print */
+      pre, code {
+        background: #f5f5f5 !important;
+        border-color: #ddd !important;
+        color: #333 !important;
+      }
+      
+      /* Tables print-friendly */
+      table {
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #ccc !important;
       }
     }
 
@@ -2566,19 +2648,114 @@
     .inf-layer-4 { margin-left: 0; margin-right: 0; }
   }
 
-/* === SKIP LINK (Accessibility) === */
+/* === SKIP LINK (Accessibility - WCAG 2.4.1) === */
 .skip-link {
   position: absolute;
-  top: -40px;
-  left: 0;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
   background: var(--accent);
-  color: #000;
-  padding: 8px 16px;
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
   z-index: 10000;
-  transition: top 0.2s;
+  text-decoration: none;
+  border-bottom: none;
+  transition: top 0.15s ease;
 }
+
 .skip-link:focus {
   top: 0;
+  outline: 2px solid var(--bg);
+  outline-offset: 2px;
+}
+
+/* Screen reader only class for additional labels */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === WIDE CONTENT CONTAINERS === */
+/* Tables, diagrams, and embeds use wider container */
+.table-wrap,
+.ennea-layout,
+.mbti-embed,
+.ocean-embed {
+  max-width: var(--max-width-wide);
+}
+
+/* === REDUCED MOTION (Accessibility - WCAG 2.3.3) === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Panel immediate visibility */
+  .panel {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .panel.open,
+  .panel:not(.open) {
+    transform: none;
+  }
+  
+  /* Disable hover transforms */
+  .fab-btn:hover {
+    transform: none;
+  }
+  
+  /* Skip link no animation */
+  .skip-link {
+    transition: none;
+  }
+}
+
+/* === THEME ONBOARDING HINT (THM-001) === */
+.theme-hint {
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8em 1.2em;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  z-index: 999;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  animation: theme-hint-fadein 0.3s ease;
+}
+
+.theme-hint::before {
+  content: '💡 ';
+}
+
+.theme-hint-close {
+  margin-left: 0.5em;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+@keyframes theme-hint-fadein {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 
@@ -5668,7 +5845,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
 
   </div><!-- /.content-wrapper -->
 
-<script src="assets/main.9cbc99ec.js" defer></script>
+<script src="assets/main.77faa05a.js" defer></script>
 
 <!-- NOTEPAD PANEL (NEW) -->
 <div id="notepad-panel" class="panel" tabindex="-1" aria-label="Notepad">
