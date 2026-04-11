@@ -1,15 +1,15 @@
     :root {
       --bg: #121212;  /* CHANGED: OLED-optimized dark background (v5.4.0) */
-      --bg-surface: #0b0b0f;
-      --bg-elevated: #12121a;
+      --bg-surface: #1a1a1a;  /* CHANGED: Slightly lighter than bg for surfaces */
+      --bg-elevated: #222222;  /* CHANGED: Elevated surfaces lighter */
       --text: #E8E8E8;        /* APCA validated - less halation */
       --text-muted: #B0B0B0;  /* APCA validated - higher contrast */
       --accent: #38bdf8;
       --accent-soft: rgba(56, 189, 248, 0.12);
       --border: #1f232b;
-      --code-bg: #0f1117;
-      --table-header: #0d1117;
-      --table-row-alt: #0a0c12;
+      --code-bg: #1a1a1a;  /* CHANGED: Match bg-surface */
+      --table-header: #1e1e1e;  /* CHANGED: Match new surface colors */
+      --table-row-alt: #161616;  /* CHANGED: Subtle zebra for tables */
       --warning-bg: rgba(234, 179, 8, 0.08);
       --warning-border: #eab308;
       --tip-bg: rgba(34, 197, 94, 0.08);
@@ -1244,9 +1244,9 @@
     /* ============================================================
        v5.4.0: FULL-WIDTH TABLES AND CODE (ITEM-008)
        ============================================================ */
-    /* Full-width content breakout for tables and code blocks */
+    /* Full-width content breakout - OPT-IN via .wide class, not automatic */
     @media (min-width: 901px) {
-      .table-wrap,
+      .table-wrap.wide,
       pre.pre-wide,
       .code-block-wide {
         width: 100vw;
