@@ -304,8 +304,65 @@ async function build() {
     process.exit(1);
   }
 
+  // BUG-016 FIX: localStorage and matchMedia polyfills for file:// protocol
+  // In Firefox/Safari, localStorage throws SecurityError when accessed via file://
+  // matchMedia is also unavailable in some contexts, causing Panel constructor to crash
+  const zeroInstallPolyfill = `
+// === ZERO-INSTALL POLYFILLS (file:// protocol compatibility) ===
+(function() {
+  'use strict';
+  // localStorage polyfill - in-memory fallback for file:// protocol
+  try {
+    var testKey = '__lc_probe__';
+    localStorage.setItem(testKey, '1');
+    localStorage.removeItem(testKey);
+  } catch (e) {
+    var memoryStorage = {};
+    window.localStorage = {
+      getItem: function(key) {
+        return Object.prototype.hasOwnProperty.call(memoryStorage, key) ? memoryStorage[key] : null;
+      },
+      setItem: function(key, value) {
+        memoryStorage[key] = String(value);
+      },
+      removeItem: function(key) {
+        delete memoryStorage[key];
+      },
+      clear: function() {
+        memoryStorage = {};
+      },
+      key: function(index) {
+        var keys = Object.keys(memoryStorage);
+        return index >= 0 && index < keys.length ? keys[index] : null;
+      }
+    };
+    Object.defineProperty(window.localStorage, 'length', {
+      get: function() { return Object.keys(memoryStorage).length; }
+    });
+    console.info('[ZeroInstall] localStorage unavailable - using in-memory fallback');
+  }
+  // matchMedia polyfill - required for Panel constructor
+  if (!window.matchMedia) {
+    window.matchMedia = function(query) {
+      return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: function() {},
+        removeListener: function() {},
+        addEventListener: function() {},
+        removeEventListener: function() {},
+        dispatchEvent: function() { return false; }
+      };
+    };
+    console.info('[ZeroInstall] matchMedia unavailable - using stub fallback');
+  }
+})();
+`;
+
   const inlineJs = jsContent ? `<script>
 // === INLINE JAVASCRIPT FOR ZERO-INSTALL OFFLINE SUPPORT ===
+${zeroInstallPolyfill}
 ${jsContent}
 </script>` : '';
 
