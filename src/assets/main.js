@@ -2323,7 +2323,54 @@ function initGuideMode() {
     // Force-clear any static/hardcoded children
     tocContent.replaceChildren();
 
-    const headings = document.querySelectorAll('main h2, main h3');
+    // Get current mode from body class or default
+    const getCurrentMode = () => {
+      if (document.body.classList.contains('mode-propeller_workshop')) return 'propeller_workshop';
+      return 'quick_start';
+    };
+
+    // Check if a heading is visible in current mode
+    function isVisibleInMode(heading) {
+      const currentMode = getCurrentMode();
+      
+      // Check the heading itself
+      const headingVisibility = heading.dataset?.modeVisibility;
+      if (headingVisibility) {
+        return headingVisibility === currentMode ||
+               headingVisibility === 'both';
+      }
+      
+      // Check parent section for data-mode-visibility
+      const parentSection = heading.closest('section[data-mode-visibility]');
+      if (parentSection) {
+        const sectionVisibility = parentSection.dataset.modeVisibility;
+        return sectionVisibility === currentMode ||
+               sectionVisibility === 'both';
+      }
+      
+      // Check parent details/accordion for data-mode-visibility
+      const parentDetails = heading.closest('details[data-mode-visibility]');
+      if (parentDetails) {
+        const detailsVisibility = parentDetails.dataset.modeVisibility;
+        return detailsVisibility === currentMode ||
+               detailsVisibility === 'both';
+      }
+      
+      // Check any parent with data-mode-visibility
+      const parentWithMode = heading.closest('[data-mode-visibility]');
+      if (parentWithMode) {
+        const visibility = parentWithMode.dataset.modeVisibility;
+        return visibility === currentMode ||
+               visibility === 'both';
+      }
+      
+      // No mode restriction - visible in all modes
+      return true;
+    }
+
+    const allHeadings = document.querySelectorAll('main h2, main h3');
+    // Filter headings by mode visibility
+    const headings = Array.from(allHeadings).filter(isVisibleInMode);
     if (!headings.length) return;
 
     /**
@@ -2470,6 +2517,13 @@ function initGuideMode() {
 
     // 4. Global access for debugging + initialization flag
     window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
+
+    // 5. Re-generate TOC on mode change
+    window.addEventListener('modechange', () => {
+      if (tocPanelEl) {
+        generateTOCLinks(tocPanelEl);
+      }
+    });
   });
 })();
 

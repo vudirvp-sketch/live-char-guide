@@ -2984,10 +2984,12 @@ body.mode-propeller_workshop {
 /* FIX: Added !important to ensure visibility rules override other display properties */
 [data-mode-visibility="quick_start"] { display: block !important; }
 [data-mode-visibility="propeller_workshop"] { display: none !important; }
+[data-mode-visibility="both"] { display: block !important; }
 
 /* Propeller Workshop mode visibility */
 body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none !important; }
 body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block !important; }
+body.mode-propeller_workshop [data-mode-visibility="both"] { display: block !important; }
 
 /* Partial visibility - show simplified in Quick Start, full in Workshop */
 [data-mode-visibility="quick_start-partial"] { display: block !important; }
