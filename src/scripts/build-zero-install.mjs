@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
  * TITAN FUSE Build Script for Live Char Guide - Zero-Install Version
- * Version: 1.0.0
+ * Version: 1.1.0
  *
  * Creates offline-optimized HTML file that works via file:// protocol.
  * - Replaces Google Fonts with system font fallbacks
  * - Adds CSP meta tags for offline use
  * - Embeds version metadata
+ * - BUG-011 FIX: Comprehensive external URL validation
  */
 
 import { createHash } from 'crypto';
@@ -69,6 +70,56 @@ function generateZeroInstallHead(version, hash) {
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
 `;
+}
+
+// ============================================================================
+// BUG-011 FIX: COMPREHENSIVE EXTERNAL URL DETECTION
+// ============================================================================
+
+/**
+ * Get line number from content index
+ * @param {string} content - Full content
+ * @param {number} index - Character index
+ * @returns {number} Line number (1-based)
+ */
+function getLineNumber(content, index) {
+  return content.substring(0, index).split('\n').length;
+}
+
+/**
+ * Find all external URLs in HTML content
+ * @param {string} content - HTML content
+ * @returns {Array<{type: string, url: string, line: number}>} Found external URLs
+ */
+function findExternalURLs(content) {
+  const externalURLs = [];
+  let match;
+
+  // Check CSS @import with external URLs
+  const cssImportRegex = /@import\s+url\(\s*['"]?(https?:\/\/[^'")\s]+)/g;
+  while ((match = cssImportRegex.exec(content)) !== null) {
+    externalURLs.push({ type: 'css-import', url: match[1], line: getLineNumber(content, match.index) });
+  }
+
+  // Check <link href="https://...">
+  const linkHrefRegex = /<link[^>]+href\s*=\s*['"](https?:\/\/[^'"]+)['"]/gi;
+  while ((match = linkHrefRegex.exec(content)) !== null) {
+    externalURLs.push({ type: 'link-href', url: match[1], line: getLineNumber(content, match.index) });
+  }
+
+  // Check <script src="https://...">
+  const scriptSrcRegex = /<script[^>]+src\s*=\s*['"](https?:\/\/[^'"]+)['"]/gi;
+  while ((match = scriptSrcRegex.exec(content)) !== null) {
+    externalURLs.push({ type: 'script-src', url: match[1], line: getLineNumber(content, match.index) });
+  }
+
+  // Check <img src="https://...">
+  const imgSrcRegex = /<img[^>]+src\s*=\s*['"](https?:\/\/[^'"]+)['"]/gi;
+  while ((match = imgSrcRegex.exec(content)) !== null) {
+    externalURLs.push({ type: 'img-src', url: match[1], line: getLineNumber(content, match.index) });
+  }
+
+  return externalURLs;
 }
 
 // ============================================================================
@@ -263,11 +314,14 @@ ${inlineJs}
     process.exit(1);
   }
 
-  // 11. Validate no external URLs
-  const externalUrlPattern = /@import\s+url\(['"]https?:\/\/(?!example\.com)/g;
-  const externalMatches = processedHtml.match(externalUrlPattern);
-  if (externalMatches && externalMatches.length > 0) {
-    log('WARN', `Found ${externalMatches.length} external URL imports - may affect offline use`);
+  // BUG-011 FIX: Comprehensive external URL validation
+  const externalURLs = findExternalURLs(processedHtml);
+  if (externalURLs.length > 0) {
+    log('ERROR', `Found ${externalURLs.length} external URL(s) - zero-install must be fully offline:`);
+    for (const { type, url, line } of externalURLs) {
+      log('ERROR', `  ${type}: ${url} (line ${line})`);
+    }
+    process.exit(1);
   }
 
   // 12. Write output files

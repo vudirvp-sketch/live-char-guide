@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 2dd90a7e -->
-<!-- Generated: 2026-04-09T19:48:07.249Z -->
+<!-- Build hash: 4fa3b09f -->
+<!-- Generated: 2026-04-11T01:34:54.828Z -->
 <!-- Version: 5.3.2 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,9 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="2dd90a7e">
+<meta name="build-hash" content="4fa3b09f">
 <meta name="livechar-version" content="5.3.2">
-<meta name="livechar-build" content="2026-04-09">
+<meta name="livechar-build" content="2026-04-11">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
 <meta charset="UTF-8">
@@ -2587,7 +2587,7 @@
 
 
 </style>
-</head>
+<style>:root{--color-gray-500: #8B8B8B;--color-gray-600: #6B6B6B;--color-gray-700: #4A4A4A;--color-gray-800: #2A2A2A;--color-gray-900: #121212;--color-brand-primary: #4A90E2;--color-brand-secondary: #7B68EE;--color-semantic-border-accessible: #6B6B6B;--color-semantic-focus-ring: #4A90E2;--color-semantic-error: #DC3545;--color-semantic-success: #28A745;--spacing-1: 4px;--spacing-2: 8px;--spacing-3: 12px;--spacing-4: 16px;--spacing-5: 24px;--spacing-6: 32px;--typography-font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Liberation Sans', sans-serif;--typography-font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;--typography-font-size-xs: 12px;--typography-font-size-sm: 14px;--typography-font-size-base: 16px;--typography-font-size-lg: 18px;--typography-font-size-xl: 24px;--typography-line-height-tight: 1.25;--typography-line-height-base: 1.5;--typography-line-height-relaxed: 1.75;--border-radius-sm: 4px;--border-radius-md: 8px;--border-radius-lg: 12px}</style></head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
 
@@ -5674,6 +5674,21 @@ No smart typography. If conflict → default to Examples.</code></pre>
 
 <script src="assets/main.js" defer></script>
 
+<!-- IMP-003 FIX: Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/assets/sw.js')
+        .then(function(reg) {
+          console.log('[SW] Service Worker registered:', reg.scope);
+        })
+        .catch(function(err) {
+          console.warn('[SW] Service Worker registration failed:', err);
+        });
+    });
+  }
+</script>
+
 <!-- NOTEPAD PANEL (NEW) -->
 <div id="notepad-panel" class="panel" tabindex="-1" aria-label="Notepad">
   <div class="panel-header" data-drag-handle>
@@ -5789,7 +5804,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
       return { ...DEFAULT_STATE, ...saved };
     }
 
-    saveState = debounce(function() {
+    saveState = debounce(() => {
       const rect = this.el.getBoundingClientRect();
       this.state = {
         visible: this.isOpen(),
@@ -6044,7 +6059,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
       }
     }
 
-    saveContent = debounce(function() {
+    saveContent = debounce(() => {
       if (!this.textarea) return;
       storage.set(`${this.storageKey}_content`, this.textarea.value);
       if (this.saveBtn) {
@@ -6082,11 +6097,19 @@ No smart typography. If conflict → default to Examples.</code></pre>
       URL.revokeObjectURL(url);
     }
 
+    // IMP-009 FIX: Use copyToClipboard with fallback
     copyContent() {
       if (!this.textarea || !this.textarea.value.trim()) return;
-      navigator.clipboard.writeText(this.textarea.value).then(() => {
+      copyToClipboard(this.textarea.value).then((success) => {
         const status = document.getElementById('np-status');
-        if (status) { status.textContent = 'Скопировано в буфер'; setTimeout(() => status.textContent = 'Готово', 1500); }
+        if (status) {
+          if (success) {
+            status.textContent = 'Скопировано в буфер';
+          } else {
+            status.textContent = 'Ошибка копирования';
+          }
+          setTimeout(() => status.textContent = 'Готово', 1500);
+        }
       });
     }
 
@@ -6142,6 +6165,40 @@ No smart typography. If conflict → default to Examples.</code></pre>
   window.Panel = Panel;
   window.NotepadPanel = NotepadPanel;
 })();
+// ============================================================================
+// IMP-009 FIX: CLIPBOARD UTILITY WITH FALLBACK
+// ============================================================================
+
+/**
+ * Copy text to clipboard with fallback for insecure contexts
+ * @param {string} text - Text to copy
+ * @returns {Promise<boolean>} Success status
+ */
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (err) {
+    // Fallback for insecure contexts (http://, file://)
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      textarea.style.top = '0';
+      textarea.setAttribute('readonly', '');
+      document.body.appendChild(textarea);
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // For mobile
+      const success = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      return success;
+    } catch (fallbackErr) {
+      console.warn('[Clipboard] Copy failed:', fallbackErr);
+      return false;
+    }
+  }
+}
 
 // === TOC ACTIVE SECTION HIGHLIGHTING ===
 function initTocHighlight() {
@@ -6182,16 +6239,17 @@ function initCopyButtons() {
     btn.type = 'button';
     btn.setAttribute('aria-label', 'Copy code');
 
+    // IMP-009 FIX: Use copyToClipboard with fallback
     btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(pre.textContent);
+      const success = await copyToClipboard(pre.textContent);
+      if (success) {
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => {
           btn.textContent = 'Copy';
           btn.classList.remove('copied');
         }, 2000);
-      } catch (err) {
+      } else {
         btn.textContent = 'Error';
         setTimeout(() => btn.textContent = 'Copy', 2000);
       }
@@ -6245,11 +6303,27 @@ function initCopyButtons() {
 }
 
 // === CHECKLIST PERSISTENCE ===
+// BUG-003 FIX: Use version-independent storage key with migration
 function initChecklist() {
-  const STORAGE_KEY = 'guide-checklist-v5.3.2';
+  // Read version from meta tag
+  const versionMeta = document.querySelector('meta[name="livechar-version"]');
+  const version = versionMeta ? versionMeta.content : 'unknown';
+  
+  // Use stable storage key
+  const STORAGE_KEY = 'guide-checklist-data';
+  const OLD_KEY = `guide-checklist-v${version}`;
+  
   const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
 
   if (!checkboxes.length) return;
+
+  // Migration: copy data from old versioned key if new key doesn't exist
+  const oldData = localStorage.getItem(OLD_KEY);
+  const newData = localStorage.getItem(STORAGE_KEY);
+  if (oldData && !newData) {
+    localStorage.setItem(STORAGE_KEY, oldData);
+    localStorage.removeItem(OLD_KEY);
+  }
 
   // Load saved state
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -6284,9 +6358,14 @@ function updateChecklistProgress() {
 }
 
 // === THEME TOGGLE ===
+// IMP-007 FIX: Add ARIA attributes
 function initTheme() {
   const toggle = document.getElementById('fab-theme');
   if (!toggle) return;
+
+  // IMP-007 FIX: Add ARIA attributes
+  toggle.setAttribute('role', 'button');
+  toggle.setAttribute('aria-pressed', 'false');
 
   const iconDark = toggle.querySelector('.theme-icon-dark');
   const iconLight = toggle.querySelector('.theme-icon-light');
@@ -6305,6 +6384,8 @@ function initTheme() {
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     if (iconDark) iconDark.hidden = isLight;
     if (iconLight) iconLight.hidden = !isLight;
+    // IMP-007 FIX: Update aria-pressed
+    toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
   });
 
   // Re-initialize SVGs on theme change for proper fill colors
@@ -6474,9 +6555,11 @@ function initTocToggle() {
 
   const STORAGE_KEY = 'toc-collapsed';
 
+  // BUG-004 FIX: Use distinct icons for collapsed/expanded states
   function setCollapsed(collapsed) {
     toc.classList.toggle('toc-collapsed', collapsed);
-    btn.textContent = collapsed ? '📑' : '📑';
+    // BUG-004 FIX: Different icons for different states
+    btn.textContent = collapsed ? '📋' : '📑';
     btn.setAttribute('aria-label', collapsed ? 'Развернуть навигацию' : 'Свернуть навигацию');
     localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
   }
@@ -8272,16 +8355,63 @@ function initOcean() {
 // This code is only included in the zero-install (offline) version
 // Provides diagnostics and storage indicators for file:// protocol usage
 
+// BUG-006 FIX: Implement __lc_store with actual storage detection
+window.__lc_store = {
+  getMode: function() {
+    // Check if Storage API is available for persistent storage detection
+    if (navigator.storage && navigator.storage.persisted) {
+      // This returns a Promise, but for simplicity we check synchronously
+      // Most browsers that support the API will have it
+      try {
+        // If we're in a persistent context, storage will persist
+        if (navigator.storage.persist) {
+          return 'session'; // Default to session, will be updated async
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+    }
+    
+    // Check if localStorage is actually working
+    try {
+      const testKey = '__lc_test_' + Date.now();
+      localStorage.setItem(testKey, 'test');
+      localStorage.removeItem(testKey);
+      return 'session'; // localStorage works but not necessarily persistent
+    } catch (e) {
+      return 'none'; // localStorage not available
+    }
+  },
+  
+  // Async method to check if storage is persistent
+  isPersistent: async function() {
+    if (navigator.storage && navigator.storage.persisted) {
+      return await navigator.storage.persisted();
+    }
+    return false;
+  }
+};
+
+// Update storage mode asynchronously
+(async function() {
+  const isPersistent = await window.__lc_store.isPersistent();
+  if (isPersistent) {
+    window.__lc_store.getMode = function() { return 'persistent'; };
+  }
+})();
+
 // Storage mode indicator
 (function() {
   function updateStorageIndicator() {
     var mode = window.__lc_store && window.__lc_store.getMode ? window.__lc_store.getMode() : 'unknown';
     var indicators = document.querySelectorAll('[data-storage-indicator]');
     indicators.forEach(function(el) {
-      el.textContent = mode === 'persistent' ? '💾' : '🧠';
+      el.textContent = mode === 'persistent' ? '💾' : mode === 'session' ? '🧠' : '❓';
       el.title = mode === 'persistent'
         ? 'Данные сохранены постоянно'
-        : 'Данные сохранятся до закрытия вкладки';
+        : mode === 'session'
+        ? 'Данные сохранятся до закрытия вкладки'
+        : 'Хранилище недоступно';
       el.setAttribute('aria-label', el.title);
     });
   }
@@ -8292,6 +8422,9 @@ function initOcean() {
   } else {
     updateStorageIndicator();
   }
+  
+  // Update again after async check completes
+  setTimeout(updateStorageIndicator, 100);
 })();
 
 // Diagnostic panel (Ctrl+Shift+V)

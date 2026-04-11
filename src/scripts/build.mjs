@@ -2,7 +2,7 @@
 /**
  * @fileoverview TITAN FUSE Build Script for Live Char Guide
  * @module src/scripts/build
- * @version 1.1.0
+ * @version 1.2.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
@@ -21,7 +21,7 @@
  */
 
 import { createHash } from 'crypto';
-import { readFile, writeFile, readdir, mkdir, copyFile, unlink } from 'fs/promises';
+import { readFile, writeFile, readdir, mkdir, copyFile, unlink, rm } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -29,12 +29,15 @@ import { log, generateCSSVars, injectTokens, validateAnchors, detectBOM } from '
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
+const SRC_DIR = join(ROOT, 'src');
 const PARTS_DIR = join(ROOT, 'src', 'parts');
 const MANIFEST_PATH = join(ROOT, 'src', 'manifest', 'structure.json');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 const OUTPUT_PATH = join(ROOT, 'index.html');
 const HASH_PATH = join(ROOT, 'build.hash');
 const TOKENS_PATH = join(ROOT, 'src', 'tokens.json');
+const ASSETS_SRC = join(SRC_DIR, 'assets');
+const ASSETS_OUT = join(ROOT, 'assets');
 
 // ============================================================================
 // UTILITY FUNCTIONS (local only)
@@ -127,7 +130,40 @@ async function hashAssets(html, assetsDir) {
   return updatedHtml;
 }
 
+// ============================================================================
+// BUG-002 FIX: COPY ASSETS TO OUTPUT DIRECTORY
+// ============================================================================
 
+/**
+ * Copies all assets from src/assets to output assets directory
+ * and applies version replacement to sw.js
+ * @async
+ * @param {string} version - Version string to inject into sw.js
+ * @returns {Promise<void>}
+ */
+async function copyAssetsToOutput(version) {
+  // Clean output assets directory
+  if (existsSync(ASSETS_OUT)) {
+    await rm(ASSETS_OUT, { recursive: true });
+  }
+  await ensureDir(ASSETS_OUT);
+
+  // Copy all source assets to output
+  const assetFiles = await readdir(ASSETS_SRC);
+  for (const file of assetFiles) {
+    const srcPath = join(ASSETS_SRC, file);
+    const outPath = join(ASSETS_OUT, file);
+    await copyFile(srcPath, outPath);
+  }
+
+  // BUG-001 FIX: Replace version in output sw.js (not source)
+  const swOutPath = join(ASSETS_OUT, 'sw.js');
+  if (existsSync(swOutPath)) {
+    let swContent = await readFile(swOutPath, 'utf-8');
+    swContent = swContent.replace('__LIVECHAR_VERSION__', version);
+    await writeFile(swOutPath, swContent, { encoding: 'utf-8' });
+  }
+}
 
 // ============================================================================
 // MAIN BUILD FUNCTION
@@ -286,17 +322,12 @@ ${bodyEndContent}
   // 5.6 Add defer to external script tags
   processedHtml = addDeferToScripts(processedHtml);
 
-  // 5.7 Hash assets (rename JS/CSS files with content hash for cache busting)
-  const ASSETS_DIR = join(ROOT, 'assets');
-  processedHtml = await hashAssets(processedHtml, ASSETS_DIR);
+  // BUG-002 FIX: Copy assets to output directory BEFORE hashing
+  log('INFO', 'Copying assets to output directory...');
+  await copyAssetsToOutput(version);
 
-  // 5.8 Replace version placeholder in sw.js
-  const SW_PATH = join(ASSETS_DIR, 'sw.js');
-  if (existsSync(SW_PATH)) {
-    let swContent = await readFile(SW_PATH, 'utf-8');
-    swContent = swContent.replace('__LIVECHAR_VERSION__', version);
-    await writeFile(SW_PATH, swContent, { encoding: 'utf-8' });
-  }
+  // 5.7 Hash assets (rename JS/CSS files with content hash for cache busting)
+  processedHtml = await hashAssets(processedHtml, ASSETS_OUT);
 
   // 6. Final BOM check
   const outputBuffer = Buffer.from(processedHtml, 'utf-8');

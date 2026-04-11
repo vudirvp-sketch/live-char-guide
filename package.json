@@ -28,6 +28,7 @@
   "devDependencies": {
     "@axe-core/cli": "^4.8.0",
     "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.13.0",
     "chokidar-cli": "^3.0.0",
     "eslint": "^10.2.0",
     "he": "^1.2.0",

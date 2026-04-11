@@ -2,7 +2,7 @@
 /**
  * @fileoverview Artifact Validation Script for Live Char Guide
  * @module scripts/validate-artifact
- * @version 1.1.0
+ * @version 1.2.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
@@ -36,10 +36,10 @@ const INDEX_PATH = join(ROOT, 'index.html');
 const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
-// Validation limits
+// Validation limits - synchronized with bundle_check.mjs
 const LIMITS = {
-  indexMaxKB: 400,
-  zeroInstallMaxKB: 600,
+  indexMaxKB: 350,
+  zeroInstallMaxKB: 500,
   minKB: 50
 };
 
@@ -140,8 +140,9 @@ function checkHtmlValidity(content, name) {
   // Basic HTML validity checks
   const errors = [];
 
-  // Check for DOCTYPE
-  if (!content.startsWith('<!DOCTYPE html>')) {
+  // BUG-013 FIX: Check for DOCTYPE within first 500 chars (handles leading comments)
+  const firstLines = content.substring(0, 500);
+  if (!firstLines.includes('<!DOCTYPE html>')) {
     errors.push('Missing DOCTYPE');
   }
 
