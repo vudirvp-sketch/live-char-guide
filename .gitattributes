@@ -1,0 +1,22 @@
+# Enforce LF line endings for all text files
+* text=auto eol=lf
+
+# Explicitly declare text files
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

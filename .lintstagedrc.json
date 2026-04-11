@@ -3,6 +3,5 @@
   "*.css": ["prettier --write"],
   "*.js": ["prettier --write"],
   "*.mjs": ["prettier --write"],
-  "*.json": ["prettier --write"],
-  "src/**/*.{html,css,js,mjs}": ["npm run build:all", "git add index.html live-char-guide-zero-install.html build.hash build-zero-install.hash"]
+  "*.json": ["prettier --write"]
 }

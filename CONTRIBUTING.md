@@ -20,8 +20,8 @@ By participating in this project, you agree to maintain a respectful and inclusi
 
 ### Prerequisites
 
-- Node.js >= 18
-- npm or pnpm
+- Node.js >= 20
+- pnpm (corepack enable if needed)
 - Git
 
 ### Local Setup
@@ -35,14 +35,14 @@ cd live-char-guide
 git remote add upstream https://github.com/vudirvp-sketch/live-char-guide.git
 
 # Install dependencies
-npm install
+pnpm install
 
 # Run initial build
-npm run build:all
+pnpm run build:all
 
 # Verify setup
-npm run validate
-npm test
+pnpm run validate
+pnpm test
 ```
 
 ## Development Workflow
@@ -68,25 +68,26 @@ git checkout -b docs/my-documentation
 
 ```bash
 # Build artifacts
-npm run build:all
+pnpm run build:all
 
 # Validate artifacts
-npm run validate
+pnpm run validate
 
 # Run tests
-npm test
+pnpm test
 
 # Run accessibility tests (requires running server)
-npm run serve &
-npm run test:a11y
+pnpm run serve &
+pnpm run test:a11y
 ```
 
 ### 4. Commit Your Changes
 
 Pre-commit hooks will automatically:
-1. Format your code with Prettier
-2. Build both artifacts
-3. Run validation
+1. Lint source files with ESLint
+2. Build both artifacts (if SKIP_ARTIFACT_BUILD is not set)
+3. Validate generated artifacts
+4. Format staged files with Prettier (via lint-staged)
 
 ```bash
 git add .
@@ -187,7 +188,7 @@ import { execSync } from 'child_process';
 
 describe('Integration Test', () => {
   it('should run full pipeline', () => {
-    execSync('npm run build:all', { stdio: 'inherit' });
+    execSync('pnpm run build:all', { stdio: 'inherit' });
     assert.ok(true);
   });
 });
@@ -197,13 +198,13 @@ describe('Integration Test', () => {
 
 ```bash
 # All tests
-npm test
+pnpm test
 
 # Unit tests only
-npm run test:unit
+pnpm run test:unit
 
 # Integration tests only
-npm run test:integration
+pnpm run test:integration
 
 # Watch mode
 node --test --watch tests/*.mjs

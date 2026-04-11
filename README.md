@@ -4,7 +4,7 @@
 [![Deploy Pages](https://github.com/vudirvp-sketch/live-char-guide/workflows/Deploy%20GitHub%20Pages/badge.svg)](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml)
 [![Version](https://img.shields.io/badge/version-5.3.2-blue.svg)](https://github.com/vudirvp-sketch/live-char-guide/blob/main/src/VERSION)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18-green.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20-green.svg)](https://nodejs.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.
@@ -19,8 +19,8 @@ Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ mod
 
 ### Prerequisites
 
-- Node.js >= 18
-- npm or pnpm
+- Node.js >= 20
+- pnpm (corepack enable if needed)
 
 ### Setup
 
@@ -30,10 +30,10 @@ git clone https://github.com/vudirvp-sketch/live-char-guide.git
 cd live-char-guide
 
 # Install dependencies (including husky for pre-commit hooks)
-npm install
+pnpm install
 
 # Run initial build
-npm run build:all
+pnpm run build:all
 ```
 
 ### Editing the Guide
@@ -59,71 +59,75 @@ src/parts/
 
 ```bash
 # Build index.html only (for web server)
-npm run build
+pnpm run build
 
 # Build zero-install.html only (offline version)
-npm run build:zero
+pnpm run build:zero
 
 # Build both artifacts
-npm run build:all
+pnpm run build:all
 
 # Build and validate in one command
-npm run build:check
+pnpm run build:check
 
 # Watch mode - rebuild on changes
-npm run build:watch
+pnpm run build:watch
 
 # Validate generated artifacts
-npm run validate
+pnpm run validate
 
 # Check version consistency
-npm run version:check
+pnpm run version:check
 
 # Run all tests
-npm test
+pnpm test
 
 # Run unit tests only
-npm run test:unit
+pnpm run test:unit
 
 # Run integration tests only
-npm run test:integration
+pnpm run test:integration
 
-# Format code with prettier
-npm run lint:fix
+# Auto-format all files with Prettier
+pnpm run lint:fix
 
-# Check code formatting
-npm run lint
+# Lint source files with ESLint
+pnpm run lint
 ```
 
 ### Pre-commit Hooks
 
-This project uses Husky to run automated checks before each commit:
+This project uses Husky and lint-staged for automated pre-commit checks:
 
-- **Build**: Automatically builds both artifacts
-- **Validate**: Runs validation gates
-- **Format**: Formats staged files with Prettier
+- **Lint**: Runs ESLint on source files
+- **Build**: Builds both artifacts (index.html + zero-install.html)
+- **Validate**: Validates generated artifacts
+- **Format**: Auto-formats staged files with Prettier (via lint-staged)
 
-To skip pre-commit hooks (not recommended):
+To skip pre-commit hooks entirely (not recommended):
 ```bash
 git commit --no-verify
-# or
+```
+
+To skip artifact build only (still runs lint and format):
+```bash
 SKIP_ARTIFACT_BUILD=1 git commit -m "message"
 ```
 
 ### Workflow
 
 1. **Edit source files** in `src/parts/`
-2. **Test locally**: `npm run build:all && npm run validate`
+2. **Test locally**: `pnpm run build:all && pnpm run validate`
 3. **Commit changes** — pre-commit hooks will build and validate automatically
 4. **Push to main** — GitHub Actions will auto-regenerate if needed
 
 ### Auto-Regeneration
 
 When you push to `main`, GitHub Actions automatically:
-1. Runs `npm run build:all`
+1. Runs `pnpm run build:all`
 2. Validates both artifacts
-3. Commits updated files (if changed) with `[skip ci]` to prevent loops
-4. Comments on PRs with build summary
+3. Deploys to GitHub Pages via separate workflow
+4. Comments on PRs with build summary (PRs only)
 
 ## Dual Artifact System
 
@@ -155,7 +159,7 @@ The version is defined in a single source:
 To update version:
 1. Edit `src/VERSION`
 2. Update `package.json` version field
-3. Run `npm run build:all`
+3. Run `pnpm run build:all`
 4. Commit changes
 
 ## Testing
@@ -176,10 +180,10 @@ Located in `tests/integration/`:
 
 ```bash
 # Start local server
-npm run serve
+pnpm run serve
 
 # In another terminal, run axe accessibility tests
-npm run test:a11y
+pnpm run test:a11y
 ```
 
 ## Project Structure
@@ -197,8 +201,9 @@ live-char-guide/
 │   │   ├── build.mjs                   # Build index.html
 │   │   └── build-zero-install.mjs      # Build zero-install.html
 │   └── assets/
-│       ├── main.js                     # Client-side JavaScript
-│       └── sw.js                       # Service worker
+│       ├── main.js                # Client-side JavaScript
+│       ├── sw.js                  # Service worker
+│       └── zero-install-addons.js # Zero-install diagnostics & storage indicators
 ├── scripts/
 │   ├── validate-artifact.mjs           # Post-build validation
 │   ├── version-sync.mjs                # Version consistency check
@@ -230,22 +235,22 @@ live-char-guide/
 ## Troubleshooting
 
 ### Artifact not updating?
-- Run `npm run build:all` locally
+- Run `pnpm run build:all` locally
 - Check GitHub Actions logs for build job
 - Verify `src/VERSION` matches expected version
 
 ### Build fails?
-- Check Node.js version (requires >= 18)
-- Run `npm ci` to ensure clean dependencies
-- Check validation errors with `npm run validate`
+- Check Node.js version (requires >= 20)
+- Run `pnpm install --frozen-lockfile` to ensure clean dependencies
+- Check validation errors with `pnpm run validate`
 
 ### Version mismatch detected?
-- Run `npm run version:check` for detailed report
+- Run `pnpm run version:check` for detailed report
 - Update `src/VERSION` and `package.json` to match
 
 ### Pre-commit hooks failing?
 - Check the error output from the hook
-- Run `npm run build:check` manually to debug
+- Run `pnpm run build:check` manually to debug
 - Use `git commit --no-verify` to skip hooks (not recommended)
 
 ## Contributing
@@ -253,7 +258,7 @@ live-char-guide/
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/my-feature`
 3. Make your changes in `src/parts/`
-4. Run tests: `npm test`
+4. Run tests: `pnpm test`
 5. Commit changes (hooks will auto-build)
 6. Push to your fork
 7. Open a Pull Request

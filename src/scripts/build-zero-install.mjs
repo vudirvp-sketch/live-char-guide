@@ -9,12 +9,12 @@
  * - Embeds version metadata
  */
 
-import { parse } from 'node-html-parser';
 import { createHash } from 'crypto';
 import { readFile, writeFile, readdir, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { log, generateCSSVars, injectTokens, validateAnchors, detectBOM } from './build-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -27,74 +27,6 @@ const SW_JS_PATH = join(ROOT, 'src', 'assets', 'sw.js');
 const OUTPUT_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const HASH_PATH = join(ROOT, 'build-zero-install.hash');
 const TOKENS_PATH = join(ROOT, 'src', 'tokens.json');
-
-// ============================================================================
-// UTILITY FUNCTIONS
-// ============================================================================
-
-function log(level, message) {
-  const timestamp = new Date().toISOString();
-  const prefix = level === 'ERROR' ? '❌' : level === 'WARN' ? '⚠️' : '✓';
-  console.error(`[${timestamp}] ${prefix} ${message}`);
-}
-
-// ============================================================================
-// DESIGN TOKEN INJECTION
-// ============================================================================
-
-function generateCSSVars(tokens) {
-  const vars = [];
-  const primitives = tokens.primitives || {};
-
-  // Colors: --color-{category}-{name}
-  if (primitives.color) {
-    for (const [category, values] of Object.entries(primitives.color)) {
-      for (const [name, def] of Object.entries(values)) {
-        vars.push(`--color-${category}-${name}: ${def.value}`);
-      }
-    }
-  }
-
-  // Spacing: --spacing-{name}
-  if (primitives.spacing) {
-    for (const [name, def] of Object.entries(primitives.spacing)) {
-      vars.push(`--spacing-${name}: ${def.value}`);
-    }
-  }
-
-  // Typography: --typography-{category}-{name}
-  if (primitives.typography) {
-    for (const [category, values] of Object.entries(primitives.typography)) {
-      if (typeof values === 'object' && values.value !== undefined) {
-        vars.push(`--typography-${category}: ${values.value}`);
-      } else {
-        for (const [name, def] of Object.entries(values)) {
-          vars.push(`--typography-${category}-${name}: ${def.value}`);
-        }
-      }
-    }
-  }
-
-  // Border: --border-{category}-{name}
-  if (primitives.border) {
-    for (const [category, values] of Object.entries(primitives.border)) {
-      for (const [name, def] of Object.entries(values)) {
-        vars.push(`--border-${category}-${name}: ${def.value}`);
-      }
-    }
-  }
-
-  return vars.join(';');
-}
-
-async function injectTokens(html, tokensPath) {
-  if (!existsSync(tokensPath)) {
-    return html; // tokens.json is optional — graceful degradation
-  }
-  const tokens = JSON.parse(await readFile(tokensPath, 'utf-8'));
-  const cssVars = generateCSSVars(tokens);
-  return html.replace('</head>', `<style>:root{${cssVars}}</style></head>`);
-}
 
 // ============================================================================
 // ZERO-INSTALL TRANSFORMATIONS
@@ -137,65 +69,6 @@ function generateZeroInstallHead(version, hash) {
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
 `;
-}
-
-// ============================================================================
-// ANCHOR VALIDATION (same as regular build)
-// ============================================================================
-
-function validateAnchors(content, part, manifest) {
-  const root = parse(content);
-  const errors = [];
-
-  if (!part.anchors) return errors;
-
-  for (const anchor of part.anchors) {
-    const id = anchor.replace('#', '');
-    const found = root.querySelector(`[id="${id}"], a[name="${id}"]`);
-
-    if (!found) {
-      const idx = Math.max(
-        content.indexOf(`id="${id}"`),
-        content.indexOf(`name="${id}"`)
-      );
-
-      if (idx !== -1) {
-        const ctx = content.substring(Math.max(0, idx - 50), Math.min(content.length, idx + 50));
-        errors.push({
-          anchor,
-          file: part.file,
-          context: ctx,
-          line: content.slice(0, idx).split('\n').length
-        });
-      } else {
-        errors.push({
-          anchor,
-          file: part.file,
-          context: 'Anchor not found in content',
-          line: 0
-        });
-      }
-    }
-  }
-
-  return errors;
-}
-
-// ============================================================================
-// BOM DETECTION
-// ============================================================================
-
-function detectBOM(buffer) {
-  if (buffer.slice(0, 3).equals(Buffer.from([0xEF, 0xBB, 0xBF]))) {
-    return 'UTF-8 BOM';
-  }
-  if (buffer.slice(0, 2).equals(Buffer.from([0xFF, 0xFE]))) {
-    return 'UTF-16 LE BOM';
-  }
-  if (buffer.slice(0, 2).equals(Buffer.from([0xFE, 0xFF]))) {
-    return 'UTF-16 BE BOM';
-  }
-  return null;
 }
 
 // ============================================================================

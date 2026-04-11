@@ -182,7 +182,7 @@ async function checkVersionSync() {
     process.exit(0);
   } else if (status === 'outdated') {
     console.log('\n⚠ Version drift detected');
-    console.log('Run `npm run build:all` to sync versions');
+    console.log('Run `pnpm run build:all` to sync versions');
     process.exit(1);
   } else {
     console.log('\n✗ Version check failed');
