@@ -547,37 +547,94 @@ function initCopyButtons() {
     expandBtn.setAttribute('aria-label', 'Expand code block');
 
     expandBtn.addEventListener('click', () => {
+      // ACC-005: Create accessible modal with ARIA attributes
       const modal = document.createElement('div');
       modal.className = 'code-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-labelledby', 'code-modal-title');
+      modal.setAttribute('aria-describedby', 'code-modal-desc');
 
       const modalContent = document.createElement('div');
       modalContent.className = 'code-modal-content';
+
+      // ACC-005: Add screen reader title and description
+      const srTitle = document.createElement('h2');
+      srTitle.id = 'code-modal-title';
+      srTitle.className = 'sr-only';
+      srTitle.textContent = 'Code viewer';
+      
+      const srDesc = document.createElement('p');
+      srDesc.id = 'code-modal-desc';
+      srDesc.className = 'sr-only';
+      srDesc.textContent = 'Expanded code block view. Press Escape to close.';
 
       const closeBtn = document.createElement('button');
       closeBtn.className = 'code-modal-close';
       closeBtn.textContent = '✕';
       closeBtn.type = 'button';
-      closeBtn.addEventListener('click', () => modal.remove());
+      closeBtn.setAttribute('aria-label', 'Close code viewer');
 
       const preClone = pre.cloneNode(true);
       preClone.classList.add('pre-raw');
 
+      modalContent.appendChild(srTitle);
+      modalContent.appendChild(srDesc);
       modalContent.appendChild(closeBtn);
       modalContent.appendChild(preClone);
       modal.appendChild(modalContent);
 
+      // ACC-005: Focus trap implementation
+      let previousActiveElement = document.activeElement;
+      
+      function trapFocus(e) {
+        if (e.key === 'Escape') {
+          closeModal();
+          return;
+        }
+        
+        if (e.key !== 'Tab') return;
+        
+        const focusableElements = modalContent.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+      
+      function closeModal() {
+        modal.remove();
+        document.removeEventListener('keydown', trapFocus);
+        // ACC-005: Restore focus to trigger element
+        if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+          previousActiveElement.focus();
+        }
+      }
+      
+      closeBtn.addEventListener('click', closeModal);
+      
       modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
+        if (e.target === modal) closeModal();
       });
 
-      document.addEventListener('keydown', function handler(e) {
-        if (e.key === 'Escape') {
-          modal.remove();
-          document.removeEventListener('keydown', handler);
-        }
-      });
+      document.addEventListener('keydown', trapFocus);
 
       document.body.appendChild(modal);
+      
+      // ACC-005: Focus first element
+      closeBtn.focus();
     });
 
     wrapper.appendChild(expandBtn);
@@ -2135,6 +2192,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initTocToggle();
   initScrollTop();
+  initThemeHint();  // THM-001: Theme onboarding hint
   initEnneagram();
   initOcean();
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
@@ -2633,6 +2691,50 @@ function initOcean() {
       });
     });
   }
+}
+
+// ============================================================================
+// THM-001: THEME ONBOARDING HINT
+// ============================================================================
+function initThemeHint() {
+  const STORAGE_KEY = 'theme-hint-dismissed';
+  
+  // Check if user has already seen/dismissed the hint
+  if (localStorage.getItem(STORAGE_KEY) === 'true') return;
+  
+  // Only show hint after a short delay
+  setTimeout(() => {
+    // Create hint element
+    const hint = document.createElement('div');
+    hint.className = 'theme-hint';
+    hint.innerHTML = `
+      Click 🌙/☀️ to toggle dark/light mode
+      <span class="theme-hint-close" role="button" tabindex="0" aria-label="Dismiss hint">✕</span>
+    `;
+    
+    // Add close functionality
+    const closeBtn = hint.querySelector('.theme-hint-close');
+    
+    function dismissHint() {
+      hint.style.opacity = '0';
+      hint.style.transform = 'translateY(10px)';
+      setTimeout(() => hint.remove(), 300);
+      localStorage.setItem(STORAGE_KEY, 'true');
+    }
+    
+    closeBtn.addEventListener('click', dismissHint);
+    closeBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        dismissHint();
+      }
+    });
+    
+    // Auto-dismiss after 10 seconds
+    setTimeout(dismissHint, 10000);
+    
+    document.body.appendChild(hint);
+  }, 3000);  // Wait 3 seconds before showing
 }
 
 // ============================================================================
