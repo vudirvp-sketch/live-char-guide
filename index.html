@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 19774ba6 -->
-<!-- Generated: 2026-04-11T20:54:15.498Z -->
+<!-- Build hash: 8d40ef93 -->
+<!-- Generated: 2026-04-11T21:53:59.028Z -->
 <!-- Version: 5.4.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="19774ba6">
+<meta name="build-hash" content="8d40ef93">
 <meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-11">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -57,6 +57,11 @@
       --ocean-E: #ff6b6b;
       --ocean-A: #6bff8c;
       --ocean-N: #ffb84d;
+      /* Mode theming */
+      --mode-quick_start-accent: #22c55e;
+      --mode-propeller_workshop-accent: #8b5cf6;
+      --mode: quick_start;
+      --mode-accent: var(--mode-quick_start-accent);
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -2938,6 +2943,188 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ============================================================
+   DUAL MODE SYSTEM - Quick Start / Propeller Workshop
+   ============================================================ */
+
+/* === MODE MANAGEMENT === */
+
+/* Base state: Quick Start (default) */
+body { 
+  --mode: quick_start; 
+  --mode-accent: var(--mode-quick_start-accent); 
+}
+
+body.mode-propeller_workshop { 
+  --mode: propeller_workshop; 
+  --mode-accent: var(--mode-propeller_workshop-accent); 
+}
+
+/* Mode switcher buttons */
+.mode-switcher {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--bg-surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.mode-btn:hover:not(.active) {
+  border-color: var(--text-muted);
+  background: var(--bg-elevated);
+}
+
+.mode-btn.active {
+  border-color: var(--mode-accent);
+  background: color-mix(in srgb, var(--mode-accent) 15%, var(--bg-surface));
+}
+
+.mode-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.mode-icon {
+  font-size: 1.1em;
+}
+
+.mode-label {
+  font-weight: 500;
+}
+
+/* === VISIBILITY CONTROL === */
+
+/* Quick Start content visible by default */
+[data-mode-visibility="quick_start"] { display: block; }
+[data-mode-visibility="propeller_workshop"] { display: none; }
+
+/* Propeller Workshop mode visibility */
+body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block; }
+
+/* Partial visibility - show simplified in Quick Start, full in Workshop */
+[data-mode-visibility="quick_start-partial"] { display: block; }
+[data-mode-visibility="propeller_workshop-full"] { display: none; }
+
+body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block; }
+
+/* === MODE CONTEXT BANNER === */
+.mode-context-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6em 1em;
+  background: color-mix(in srgb, var(--mode-accent) 10%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--mode-accent) 30%, var(--border));
+  border-radius: 6px;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+
+.mode-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--mode-accent);
+}
+
+.mode-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.mode-switch-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.mode-switch-link:hover {
+  color: var(--mode-accent);
+}
+
+/* === ADAPTIVE TAGS === */
+
+/* In Quick Start mode: hide advanced tags, dim opt tags */
+body:not(.mode-propeller_workshop) .tag.advanced { 
+  display: none; 
+}
+
+body:not(.mode-propeller_workshop) .tag.opt { 
+  opacity: 0.7; 
+}
+
+/* In Propeller Workshop mode: mark forbidden tags */
+body.mode-propeller_workshop .tag.forbidden {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* Light theme adaptations for mode switcher */
+body.theme-light .mode-btn.active {
+  background: color-mix(in srgb, var(--mode-accent) 12%, var(--bg-surface));
+}
+
+/* === CONTEXT CAPABILITY MATRIX === */
+.context-matrix {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1em 0;
+}
+
+.context-matrix h3 {
+  margin-top: 0;
+  margin-bottom: 0.8em;
+  font-size: 1.1rem;
+}
+
+.context-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.8em;
+}
+
+/* Mobile responsive for mode switcher */
+@media (max-width: 640px) {
+  .mode-switcher {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .mode-btn {
+    justify-content: center;
+  }
+  
+  .mode-context-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+}
+
+
 
 </style>
 </head>
@@ -2965,7 +3152,35 @@
 
 <header>
   <h1>📖 Живой персонаж для LLM 5.4.0 — Гайд по созданию RP-карточек</h1>
+  <div class="mode-switcher" role="group" aria-label="Выбор режима">
+    <button class="mode-btn active" data-mode="quick_start" aria-pressed="true">
+      <span class="mode-icon">🚀</span>
+      <span class="mode-label">Quick Start</span>
+    </button>
+    <button class="mode-btn" data-mode="propeller_workshop" aria-pressed="false">
+      <span class="mode-icon">🛠️</span>
+      <span class="mode-label">Propeller Workshop</span>
+    </button>
+  </div>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
+  
+  <!-- CONTEXT CAPABILITY MATRIX -->
+  <div class="context-matrix" id="context-matrix">
+    <h3>📊 Context Capability Matrix</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Context</th><th>Card Budget</th><th>AN</th><th>Lorebook</th><th>CoT</th><th>GHOST Layers</th><th>Recommended Mode</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Single line</td><td>Quick Start</td></tr>
+          <tr><td><strong>8K</strong></td><td>600-800</td><td>✅</td><td>✅</td><td>Limited</td><td>Distributed</td><td>Either</td></tr>
+          <tr><td><strong>16K+</strong></td><td>800-2500</td><td>✅</td><td>✅</td><td>❌ (API)</td><td>Full</td><td>Propeller Workshop</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="context-hint"><em>Detect your context window size and follow the recommended mode.</em></p>
+  </div>
 </header>
 
 <div class="content-wrapper">
@@ -3049,7 +3264,11 @@
     <hr>
 
     <!-- ==================== РАЗДЕЛ 1 ==================== -->
-    <section id="quick-start">
+    <section id="quick-start" data-mode-visibility="quick_start">
+      <div class="mode-context-banner" data-mode-visibility="quick_start">
+        <span class="mode-badge">🚀 Quick Start Mode</span>
+        <span class="mode-hint">Minimal viable card in ~5 minutes. <button class="mode-switch-link" data-target-mode="propeller_workshop">Switch to full pipeline →</button></span>
+      </div>
       <h2>⚡ Раздел 1: Быстрый старт</h2>
 
       <h3>🎯 Ключевые термины</h3>
@@ -3256,7 +3475,11 @@
     <hr>
 
     <!-- ==================== РАЗДЕЛ 2 ==================== -->
-    <section id="architecture">
+    <section id="architecture" data-mode-visibility="propeller_workshop">
+      <div class="mode-context-banner" data-mode-visibility="propeller_workshop">
+        <span class="mode-badge">🛠️ Propeller Workshop Mode</span>
+        <span class="mode-hint">Full pipeline with all features. <button class="mode-switch-link" data-target-mode="quick_start">← Switch to Quick Start</button></span>
+      </div>
       <!-- SCOPE: Complete card — ~2500 tokens. All fields active. -->
       <h2>🏗 Раздел 2: Архитектура системы</h2>
       <div class="callout tip" style="margin-bottom:1em">
@@ -5724,8 +5947,12 @@ No smart typography. If conflict → default to Examples.
     <hr>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 6 ==================== -->
-    <section id="appendix6">
+    <section id="appendix6" data-mode-visibility="propeller_workshop">
       <h2>📎 Приложение 6: Образцовая карточка</h2>
+      <div class="mode-context-banner" data-mode-visibility="propeller_workshop">
+        <span class="mode-badge">🛠️ Propeller Workshop</span>
+        <span class="mode-hint">Полная карточка с GHOST и Price. Доступно только в режиме Propeller Workshop.</span>
+      </div>
       <p>Полностью рабочая карточка персонажа «Выщербленный», созданная по методологии гайда v5.3.2.</p>
       <div class="callout warn" style="margin:1em 0">
         <strong>⚠️ SETTING-LOCKED EXAMPLE:</strong>
@@ -6042,7 +6269,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
 </div>
 
 <!-- Main JavaScript (hashed by build script) -->
-<script src="assets/main.2a08af51.js" defer></script>
+<script src="assets/main.2cbe8fe5.js" defer></script>
 
 </body>
 </html>

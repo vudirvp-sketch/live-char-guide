@@ -2217,8 +2217,89 @@ document.addEventListener('DOMContentLoaded', () => {
   initOcean();
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
   // initGuidePanels() removed — replaced by safe IIFE below
-  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations)');
+  // Initialize Guide Mode Manager
+  initGuideMode();
+  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Dual Mode)');
 });
+
+// === GUIDE MODE MANAGER ===
+function initGuideMode() {
+  'use strict';
+
+  const STORAGE_KEY = 'guide-mode';
+  const DEFAULT_MODE = 'quick_start';
+  const VALID_MODES = ['quick_start', 'propeller_workshop'];
+
+  function getSavedMode() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return VALID_MODES.includes(saved) ? saved : DEFAULT_MODE;
+    } catch (e) {
+      return DEFAULT_MODE;
+    }
+  }
+
+  function setMode(mode) {
+    if (!VALID_MODES.includes(mode)) {
+      console.error('[GuideMode] Invalid mode:', mode);
+      return;
+    }
+
+    // Update body class
+    document.body.classList.remove('mode-quick_start', 'mode-propeller_workshop');
+    document.body.classList.add(`mode-${mode}`);
+
+    // Update buttons
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      const isActive = btn.dataset.mode === mode;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // Update mode switch links
+    document.querySelectorAll('.mode-switch-link').forEach(link => {
+      const targetMode = link.dataset.targetMode;
+      if (targetMode) {
+        link.onclick = (e) => {
+          e.preventDefault();
+          setMode(targetMode);
+        };
+      }
+    });
+
+    // Persist
+    try {
+      localStorage.setItem(STORAGE_KEY, mode);
+    } catch (e) {
+      console.warn('[GuideMode] localStorage unavailable');
+    }
+
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('modechange', { detail: { mode } }));
+
+    console.log('[GuideMode] Mode set to:', mode);
+  }
+
+  function bindEvents() {
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => setMode(btn.dataset.mode));
+    });
+  }
+
+  // Initialize
+  const initialMode = getSavedMode();
+  setMode(initialMode);
+  bindEvents();
+
+  // Expose API
+  window.guideMode = {
+    getMode: getSavedMode,
+    setMode: setMode,
+    VALID_MODES: VALID_MODES
+  };
+
+  return window.guideMode;
+}
 
 // === SAFE FAB REBIND & ENHANCED NOTEPAD INIT ===
 (function() {
