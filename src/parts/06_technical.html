@@ -925,6 +925,144 @@ Total: 0.845 × 100 = 84.5%</code></pre>
           </div>
         </div>
       </details>
+
+      <h3 id="model-capability-tiers">5.15 🏗️ Тiers возможностей моделей</h3>
+      <p><span class="tag core">Core</span></p>
+      <p><strong>Что это:</strong> Классификация моделей по техническим возможностям, а не по брендам. Бренды меняются — capabilities остаются.</p>
+      <p><strong>Зачем:</strong> Документация не должна устаревать при выходе новых моделей. Capability-based подход остаётся актуальным.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>Контекст</th><th>Инструкции</th><th>CoT</th><th>Консистентность</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tier 1: Flagship</strong></td>
+              <td>100K+</td>
+              <td>Сложные вложенные</td>
+              <td>Полный 4-шаговый</td>
+              <td>>90% на 50+ turns</td>
+            </tr>
+            <tr>
+              <td><strong>Tier 2: Efficient</strong></td>
+              <td>32K-100K</td>
+              <td>Многошаговые</td>
+              <td>3-шаговый</td>
+              <td>75-90% на 30+ turns</td>
+            </tr>
+            <tr>
+              <td><strong>Tier 3: Lightweight</strong></td>
+              <td>8K-32K</td>
+              <td>Простые</td>
+              <td>2-шаговый</td>
+              <td>60-75% на 20+ turns</td>
+            </tr>
+            <tr>
+              <td><strong>Tier 4: Edge</strong></td>
+              <td>&lt;8K</td>
+              <td>Однозадачные</td>
+              <td>Без CoT</td>
+              <td>&lt;60% на 10+ turns</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Рекомендуемая конфигурация по Tier</h4>
+      <ul>
+        <li><strong>Tier 1:</strong> Полный SPINE, полные Anchors, CoT Tier 3</li>
+        <li><strong>Tier 2:</strong> Полный SPINE, Enneagram+OCEAN Anchors, CoT Tier 2</li>
+        <li><strong>Tier 3:</strong> Core 4 SPINE (FLAW, WANT, NEED, VOICE), без Anchors, CoT Tier 1</li>
+        <li><strong>Tier 4:</strong> Используй pre-generated fallback_4k от Tier 1/2</li>
+      </ul>
+
+      <div class="callout tip">
+        <strong>💡 Почему не бренды:</strong>
+        <p>«Claude», «GPT», «Llama» — это бренды, которые меняются с каждым релизом. Capability tiers остаются стабильными: модель с 128K контекстом и сложными инструкциями всегда будет Tier 1 или Tier 2, независимо от бренда.</p>
+        <p>Актуальные примеры моделей по tier можно найти в <a href="#appendix2">Приложении 2</a>, но классификация по capabilities — основа.</p>
+      </div>
+
+      <h3 id="implementation-roadmap">5.16 📋 Roadmap внедрения</h3>
+      <p><span class="tag core">Core</span></p>
+      <p><strong>Что это:</strong> Поэтапный план внедрения методологии для новых пользователей.</p>
+
+      <h4>Phase 1: Основы (Неделя 1-2)</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Задача</th><th>Время</th><th>Цель</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Прочитать Quick Start</td><td>30 мин</td><td>Понять базовую структуру</td></tr>
+            <tr><td>Создать первую карточку</td><td>1-2 часа</td><td>SPINE + 3 Anchors + Greeting</td></tr>
+            <tr><td>Протестировать 4 сценария</td><td>1 час</td><td>Выявить проблемы</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Phase 2: Психология (Неделя 3-4)</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Задача</th><th>Время</th><th>Цель</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Определить Enneagram тип</td><td>1 час</td><td>SPINE template</td></tr>
+            <tr><td>Настроить OCEAN профиль</td><td>30 мин</td><td>1-2 экстремальных полюса</td></tr>
+            <tr><td>Добавить Examples для голоса</td><td>1-2 часа</td><td>Изоляция голоса</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Phase 3: Продвинутые техники (Неделя 5-6)</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Задача</th><th>Время</th><th>Цель</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Настроить Лорбук</td><td>1-2 часа</td><td>GHOST-триггеры</td></tr>
+            <tr><td>Добавить AN</td><td>30 мин</td><td>Динамика WANT→NEED</td></tr>
+            <tr><td>Оптимизировать параметры</td><td>1 час</td><td>T, RepPen, presence_penalty</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 id="roadmap-user-testing">Phase 4: User Testing (Неделя 6-7)</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Задача</th><th>Время</th><th>Цель</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Найти 5 тест-пользователей</td><td>1-2 часа</td><td>Разные уровни навыков</td></tr>
+            <tr><td>Провести тестовые сессии</td><td>4-5 часов</td><td>45-60 мин каждая</td></tr>
+            <tr><td>Анализ результатов</td><td>2-3 часа</td><td>Приоритизация исправлений</td></tr>
+            <tr><td>Внедрение критичных исправлений</td><td>2-3 часа</td><td>На основе обратной связи</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip">
+        <strong>💡 Критерии отбора тест-пользователей:</strong>
+        <ul>
+          <li>1-2 полных новичка (без опыта RP)</li>
+          <li>2 intermediate пользователя (некоторый опыт создания персонажей)</li>
+          <li>1-2 продвинутых пользователя (обширный опыт)</li>
+        </ul>
+      </div>
+
+      <div class="callout warn">
+        <strong>⚠️ Критерии успеха User Testing:</strong>
+        <ul>
+          <li>4/5 пользователей завершают экспорт карточки</li>
+          <li>Ни один пользователь не застревает >5 мин без прогресса</li>
+          <li>Путаница в терминологии &lt;3 instances/session</li>
+        </ul>
+      </div>
+
+      <p><strong>Общее время:</strong> 76-97 часов за 7 недель (включая user testing)</p>
     </section>
 
     <hr>

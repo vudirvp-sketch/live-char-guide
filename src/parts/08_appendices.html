@@ -146,6 +146,58 @@
 
       <p><em>4K-Fallback протокол: см. <a href="#four-k-fallback">Раздел 5.12</a>.</em></p>
 
+      <h3 id="metrics-denominators">📎 Метрики качества карточки</h3>
+      <p><strong>Каждая метрика имеет целевое значение и denominator (знаменатель) — что именно измеряется:</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Метрика</th><th>Цель</th><th>Знаменатель (что измеряется)</th><th>Методология</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Завершение выбора трека</td>
+              <td>>70%</td>
+              <td>Все визиты с вовлечённостью >5сек</td>
+              <td>Analytics: interact >5s AND click track</td>
+            </tr>
+            <tr>
+              <td>Опт-ин GHOST</td>
+              <td>30-50%</td>
+              <td>Сессии Track B/C с показанным тизером</td>
+              <td>Count consent_given events</td>
+            </tr>
+            <tr>
+              <td>Оценка когерентности персонажа</td>
+              <td>>4/5</td>
+              <td>Пользователи, завершившие экспорт карточки</td>
+              <td>Post-export survey</td>
+            </tr>
+            <tr>
+              <td>Вопросы поддержки (GHOST)</td>
+              <td>&lt;5/месяц</td>
+              <td>N/A (абсолютный подсчёт)</td>
+              <td>Ticket tagging</td>
+            </tr>
+            <tr>
+              <td>Click-through кросс-ссылок</td>
+              <td>>20%</td>
+              <td>Пользователи, достигшие секции кросс-ссылок</td>
+              <td>Link click tracking</td>
+            </tr>
+            <tr>
+              <td>Использование экспорта карточки</td>
+              <td>>60%</td>
+              <td>Пользователи, достигшие секции шаблона карточки</td>
+              <td>Export button clicks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <strong>💡 Почему знаменатель важен:</strong>
+        <p>Без явного указания того, что измеряется, метрики становятся бессмысленными. Пример: «Завершение выбора трека >70%» — 70% от чего? От всех посетителей? От вовлечённых посетителей? Знаменатель определяет реалистичность цели.</p>
+      </div>
+
       <h3>📎 API-блоки</h3>
       <p><em>Следующие блоки актуальны только для API (Claude, GPT). Локальные модели 12B+ их игнорируют.</em></p>
       <div class="table-wrap">
