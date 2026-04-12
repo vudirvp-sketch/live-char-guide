@@ -123,6 +123,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
         <p>Если твой интерфейс не даёт это поменять — переходи на KoboldCPP/TabbyAPI/vLLM.</p>
       </div>
 
+      <div data-requires-track="B C">
       <h3 id="an-ghost">5.2 📝 Авторские заметки + GHOST по слоям</h3>
       <p><span class="tag opt">Optional</span></p>
       <p><strong>Что это:</strong> Динамический слой контекста, 100–200 токенов.</p>
@@ -218,6 +219,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
         </table>
       </div>
 
+      <div data-requires-track="B C">
       <details class="interactive" id="acc-lorebook">
         <summary><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">5.3 📚 Лорбук</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
@@ -274,6 +276,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
           <hr class="section-divider">
 
+      <div data-requires-track="C">
       <h4 id="lorebook-mechanics">5.3.1 ⚙️ Лорбук: Продвинутые поведенческие механики</h4>
       <p><span class="tag advanced">Advanced</span> <span class="tag opt">Optional</span></p>
       <div class="callout tip" style="margin:1em 0">
@@ -404,8 +407,11 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
 
           </div>
         </div>
+      </div>
       </details>
+      </div>
 
+      <div data-requires-track="B C">
       <details class="interactive" id="acc-cot">
         <summary><span><h3 id="cot" style="margin:0;font-size:inherit;display:inline">5.4 💭 CoT — Цепочка рассуждений</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
@@ -426,7 +432,9 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           </div>
         </div>
       </details>
+      </div>
 
+      <div data-requires-track="C">
       <h3 id="xml-tags">5.5 🏷 XML-теги для Описания персонажа</h3>
       <p><span class="tag core">Core</span> — рекомендация</p>
       <p><strong>Что это:</strong> Использование XML-тегов для структурирования Description.</p>
@@ -478,7 +486,9 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           <li><code># headers</code> → не использовать в Description</li>
         </ul>
       </div>
+      </div>
 
+      <div data-requires-track="B C">
       <h3 id="spatial-lock">5.6 📐 Пространственная и анатомическая фиксация</h3>
       <p><span class="tag core">Core</span> — для физических сцен</p>
       <p><strong>Что это:</strong> Протокол отслеживания пространства и анатомии для предотвращения телепортации и физиологических противоречий.</p>
@@ -501,7 +511,9 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           </tbody>
         </table>
       </div>
+      </div>
 
+      <div data-requires-track="B C">
       <h3 id="pre-gen-filter">5.7 🔍 Предгенерационный фильтр</h3>
       <p><span class="tag core">Core</span> — для 12B</p>
       <p><span class="tag opt">Optional</span> — для 32B+</p>
@@ -532,7 +544,9 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
 
       <p><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Before output: body-first, zero meta, observe {{user}} only.</code></p>
       <p><em>Связано:</em> <a href="#antigodmoding">Раздел 5.0.1 (Антигодмодинг)</a> — оба механизма работают вместе для предотвращения нарушения user agency: Предгенерационный фильтр проверяет реплику перед генерацией, а Антигодмодинг устанавливает базовый запрет на действия за {{user}}.</p>
+      </div>
 
+      <div data-requires-track="C">
       <h3 id="sanitization">5.8 🧹 Протокол очистки</h3>
       <p><span class="tag opt">Optional</span> — для опытных пользователей</p>
       <p><span class="tag core">Core</span> — для пользователей мобильных/Discord-клиентов</p>
@@ -557,7 +571,9 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
         <li>☐ Единообразная глубина астерисков во всех блоках</li>
         <li>☐ Ctrl+F для <code>nbsp</code> и умных кавычек перед финальным сохранением</li>
       </ul>
+      </div>
 
+      <div data-requires-track="B C">
       <h3 id="ultimate-sp">5.9 🛡 Ультимативный SP-блок (опция для 4K и минимальных карточек)</h3>
       <p><strong>Что это:</strong> Компактный System Prompt (~180 токенов), оптимизированный под LLM-парсинг. Содержит все критичные директивы в сжатой форме.</p>
       <p><strong>Когда использовать:</strong></p>
@@ -576,7 +592,9 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
 • INFLUENCE BOUNDARY: React only to observable {{user}} symptoms. Effects manifest as behavioral triggers, not stated facts.
 • CONSEQUENCE DRIVEN: WANT→NEED shifts progressively through the session. Anchor "Price" must manifest physically/psychologically. Dark/deviant outcomes allowed only if contextually earned.
 • PRE-GENERATION FILTER: Verify before output: 1) New sensory/spatial element? 2) Reaction body-anchored? 3) User influence strictly observed? 4) Zero meta? Fail any → restart from body-anchor: begin with physical sensation before speech.</code></pre>
+      </div>
 
+      <div data-requires-track="B C">
       <details class="interactive" id="acc-user-persona">
         <summary><span><h3 id="user-persona" style="margin:0;font-size:inherit;display:inline">5.10 👤 Персона</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
@@ -613,7 +631,9 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
           </div>
         </div>
       </details>
+      </div>
 
+      <div data-requires-track="C">
       <details class="interactive" id="acc-multi-char">
         <summary><span><h3 id="multi-char" style="margin:0;font-size:inherit;display:inline">5.11 🎭 Мультиперсонажные сцены</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
