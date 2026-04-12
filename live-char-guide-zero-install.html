@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 601d0705 -->
-<!-- Generated: 2026-04-11T22:19:32.736Z -->
+<!-- Build hash: fa8c0c0a -->
+<!-- Generated: 2026-04-12T11:00:41.459Z -->
 <!-- Version: 5.4.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,9 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="601d0705">
+<meta name="build-hash" content="fa8c0c0a">
 <meta name="livechar-version" content="5.4.0">
-<meta name="livechar-build" content="2026-04-11">
+<meta name="livechar-build" content="2026-04-12">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
 <title>🧠 Live Character for LLM — Guide 5.4.0</title>
@@ -3014,21 +3014,25 @@ body.mode-propeller_workshop {
 /* === VISIBILITY CONTROL === */
 
 /* Quick Start content visible by default */
-[data-mode-visibility="quick_start"] { display: block; }
-[data-mode-visibility="propeller_workshop"] { display: none; }
+/* FIX: Added !important to ensure visibility rules override other display properties */
+[data-mode-visibility="quick_start"] { display: block !important; }
+[data-mode-visibility="propeller_workshop"] { display: none !important; }
+[data-mode-visibility="both"] { display: block !important; }
 
 /* Propeller Workshop mode visibility */
-body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block; }
+body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none !important; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block !important; }
+body.mode-propeller_workshop [data-mode-visibility="both"] { display: block !important; }
 
 /* Partial visibility - show simplified in Quick Start, full in Workshop */
-[data-mode-visibility="quick_start-partial"] { display: block; }
-[data-mode-visibility="propeller_workshop-full"] { display: none; }
+[data-mode-visibility="quick_start-partial"] { display: block !important; }
+[data-mode-visibility="propeller_workshop-full"] { display: none !important; }
 
-body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block; }
+body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none !important; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block !important; }
 
 /* === MODE CONTEXT BANNER === */
+/* FIX: mode-context-banner uses flex, but visibility rules with !important take precedence */
 .mode-context-banner {
   display: flex;
   align-items: center;
@@ -3040,6 +3044,11 @@ body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { 
   margin-bottom: 1em;
   flex-wrap: wrap;
 }
+
+/* FIX: Ensure mode-context-banner displays as flex ONLY when visible according to current mode */
+/* Higher specificity (0,2,1,0) to override base visibility rules (0,1,1,0) */
+body:not(.mode-propeller_workshop) [data-mode-visibility="quick_start"].mode-context-banner { display: flex !important; }
+body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"].mode-context-banner { display: flex !important; }
 
 .mode-badge {
   font-size: 0.85rem;
@@ -3128,6 +3137,330 @@ body.theme-light .mode-btn.active {
   }
 }
 
+/* ============================================================
+   ITEM-001: TRACK NAVIGATION STYLES
+   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
+   ============================================================ */
+
+/* === VISUALLY HIDDEN (Accessibility) === */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === ENTRY SELECTION CONTAINER === */
+.entry-selection {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* === AUDIENCE SELECTION SECTION === */
+.audience-selection {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5em 2em;
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.audience-intro {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2em;
+}
+
+/* === AUDIENCE CARDS CONTAINER === */
+.audience-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .audience-cards {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* === INDIVIDUAL AUDIENCE CARD === */
+.audience-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  color: var(--text);
+  min-height: 140px;
+}
+
+.audience-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.audience-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === ACTIVE STATE === */
+.audience-card.active,
+.audience-card[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+/* === RECOMMENDED BADGE === */
+.audience-card.recommended {
+  border-color: var(--accent);
+}
+
+.audience-card.recommended::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #22c55e);
+  border-radius: 10px 10px 0 0;
+}
+
+.track-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--accent), #22c55e);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25em 0.8em;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* === TRACK CARD ELEMENTS === */
+.track-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.track-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.track-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.track-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 0.3rem;
+}
+
+/* === UNCERTAIN PATH BUTTON === */
+.uncertain-path {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uncertain-path:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.uncertain-path:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.uncertain-icon {
+  font-size: 1.1rem;
+}
+
+/* === TRACK-BASED CONTENT VISIBILITY === */
+/* Default: Show all content (no track selected or noscript fallback) */
+[data-requires-track] {
+  display: block;
+}
+
+/* Track A: Hide advanced content */
+body[data-track="A"] [data-requires-track~="B"],
+body[data-track="A"] [data-requires-track~="C"] {
+  display: none !important;
+}
+
+/* Track B: Show A and B content, hide C */
+body[data-track="B"] [data-requires-track~="C"] {
+  display: none !important;
+}
+
+/* Track C: Show all content */
+body[data-track="C"] [data-requires-track] {
+  display: block !important;
+}
+
+/* === TRACK A SPECIFIC STYLES === */
+body[data-track="A"] .audience-card[data-track="A"] {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+/* === TRACK B SPECIFIC STYLES === */
+body[data-track="B"] .audience-card[data-track="B"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* === TRACK C SPECIFIC STYLES === */
+body[data-track="C"] .audience-card[data-track="C"] {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+}
+
+body[data-track="C"] .audience-card[data-track="C"] .track-name {
+  color: #8b5cf6;
+}
+
+/* === NOSCRIPT FALLBACK === */
+/* When JavaScript is disabled, show Track B content by default */
+noscript .noscript-notice {
+  display: block;
+  background: rgba(234, 179, 8, 0.1);
+  border: 1px solid #eab308;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 1em 0;
+  color: var(--text);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+noscript .noscript-notice::before {
+  content: '⚠️ ';
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 640px) {
+  .audience-selection {
+    padding: 1em 1.2em;
+  }
+
+  .audience-intro {
+    font-size: 1rem;
+  }
+
+  .audience-card {
+    padding: 1rem;
+    min-height: 120px;
+  }
+
+  .track-icon {
+    font-size: 1.6rem;
+  }
+
+  .track-name {
+    font-size: 0.95rem;
+  }
+
+  .track-label {
+    font-size: 0.85rem;
+  }
+
+  .track-desc {
+    font-size: 0.75rem;
+  }
+
+  .uncertain-path {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* === LIGHT THEME ADJUSTMENTS === */
+body.theme-light .audience-card {
+  background: var(--bg-surface);
+}
+
+body.theme-light .audience-card:hover {
+  background: var(--accent-soft);
+}
+
+body.theme-light .audience-card.active {
+  background: var(--accent-soft);
+}
+
+body.theme-light .audience-card.recommended::before {
+  background: linear-gradient(90deg, #0284c7, #16a34a);
+}
+
+body.theme-light .track-badge {
+  background: linear-gradient(90deg, #0284c7, #16a34a);
+}
+
+/* === OLED THEME ADJUSTMENTS === */
+body.theme-oled .audience-selection {
+  background: var(--bg-surface);
+  border-color: var(--border);
+}
+
+body.theme-oled .audience-card {
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+body.theme-oled .audience-card:hover {
+  background: var(--accent-soft);
+}
+
+body.theme-oled .audience-card.active {
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+}
+
+/* === PRINT STYLES === */
+@media print {
+  .audience-selection {
+    display: none;
+  }
+}
 
 
 </style>
@@ -3186,6 +3519,39 @@ body.theme-light .mode-btn.active {
     <p class="context-hint"><em>Detect your context window size and follow the recommended mode.</em></p>
   </div>
 </header>
+
+<!-- ITEM-001: TRACK NAVIGATION SELECTION -->
+<main class="entry-selection" id="main-content">
+  <section class="audience-selection" aria-labelledby="track-selection-title">
+    <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
+    <p class="audience-intro">Выберите уровень погружения в материал:</p>
+    <div class="audience-cards" role="group" aria-label="Выбор трека">
+      <button class="audience-card" data-track="A" aria-pressed="false">
+        <span class="track-icon">🌱</span>
+        <span class="track-name">Track A</span>
+        <span class="track-label">Начинающий</span>
+        <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
+      </button>
+      <button class="audience-card recommended" data-track="B" aria-pressed="true">
+        <span class="track-badge">Рекомендуется</span>
+        <span class="track-icon">⚡</span>
+        <span class="track-name">Track B</span>
+        <span class="track-label">Практик</span>
+        <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
+      </button>
+      <button class="audience-card" data-track="C" aria-pressed="false">
+        <span class="track-icon">🚀</span>
+        <span class="track-name">Track C</span>
+        <span class="track-label">Продвинутый</span>
+        <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
+      </button>
+    </div>
+    <button class="uncertain-path" data-track="B" type="button">
+      <span class="uncertain-icon">❓</span>
+      <span>Не уверен? Начни с Track B</span>
+    </button>
+  </section>
+</main>
 
 <div class="content-wrapper">
 
@@ -6275,6 +6641,224 @@ No smart typography. If conflict → default to Examples.</code></pre>
 <!-- Main JavaScript (hashed by build script) -->
 <script>
 // === INLINE JAVASCRIPT FOR ZERO-INSTALL OFFLINE SUPPORT ===
+
+// === ZERO-INSTALL POLYFILLS (file:// protocol compatibility) ===
+(function() {
+  'use strict';
+  // localStorage polyfill - in-memory fallback for file:// protocol
+  try {
+    var testKey = '__lc_probe__';
+    localStorage.setItem(testKey, '1');
+    localStorage.removeItem(testKey);
+  } catch (e) {
+    var memoryStorage = {};
+    window.localStorage = {
+      getItem: function(key) {
+        return Object.prototype.hasOwnProperty.call(memoryStorage, key) ? memoryStorage[key] : null;
+      },
+      setItem: function(key, value) {
+        memoryStorage[key] = String(value);
+      },
+      removeItem: function(key) {
+        delete memoryStorage[key];
+      },
+      clear: function() {
+        memoryStorage = {};
+      },
+      key: function(index) {
+        var keys = Object.keys(memoryStorage);
+        return index >= 0 && index < keys.length ? keys[index] : null;
+      }
+    };
+    Object.defineProperty(window.localStorage, 'length', {
+      get: function() { return Object.keys(memoryStorage).length; }
+    });
+    console.info('[ZeroInstall] localStorage unavailable - using in-memory fallback');
+  }
+  // matchMedia polyfill - required for Panel constructor
+  if (!window.matchMedia) {
+    window.matchMedia = function(query) {
+      return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: function() {},
+        removeListener: function() {},
+        addEventListener: function() {},
+        removeEventListener: function() {},
+        dispatchEvent: function() { return false; }
+      };
+    };
+    console.info('[ZeroInstall] matchMedia unavailable - using stub fallback');
+  }
+})();
+
+// ============================================================================
+// ITEM-001: TRACK NAVIGATION STATE MODULE
+// ============================================================================
+/**
+ * NavigationState - Manages track selection (A, B, C) with localStorage persistence
+ * 
+ * Features:
+ * - Loads saved track from localStorage or defaults to 'B'
+ * - Sets data-track attribute on body for CSS-based content filtering
+ * - Dispatches 'trackchange' event for other components to react
+ * - Provides API for getting/setting current track
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'guide-track-selection';
+  const VALID_TRACKS = ['A', 'B', 'C'];
+  const DEFAULT_TRACK = 'B';
+
+  // Private state
+  let currentTrack = DEFAULT_TRACK;
+
+  /**
+   * Load track from localStorage or return default
+   * @returns {string} Track identifier ('A', 'B', or 'C')
+   */
+  function loadTrack() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && VALID_TRACKS.includes(saved.toUpperCase())) {
+        return saved.toUpperCase();
+      }
+    } catch (e) {
+      console.warn('[NavigationState] localStorage unavailable:', e.message);
+    }
+    return DEFAULT_TRACK;
+  }
+
+  /**
+   * Save track to localStorage
+   * @param {string} track - Track identifier
+   */
+  function saveTrack(track) {
+    try {
+      localStorage.setItem(STORAGE_KEY, track);
+    } catch (e) {
+      console.warn('[NavigationState] Failed to save track:', e.message);
+    }
+  }
+
+  /**
+   * Apply track to DOM (set data-track on body)
+   * @param {string} track - Track identifier
+   */
+  function applyTrack(track) {
+    document.body.setAttribute('data-track', track);
+    
+    // Update audience-card button states
+    document.querySelectorAll('.audience-card').forEach(card => {
+      const isActive = card.dataset.track === track;
+      card.classList.toggle('active', isActive);
+      card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
+
+  /**
+   * Set current track
+   * @param {string} track - Track identifier ('A', 'B', or 'C')
+   * @param {boolean} [persist=true] - Whether to save to localStorage
+   */
+  function setTrack(track, persist = true) {
+    const normalizedTrack = track.toUpperCase();
+    
+    if (!VALID_TRACKS.includes(normalizedTrack)) {
+      console.error('[NavigationState] Invalid track:', track);
+      return;
+    }
+
+    if (normalizedTrack === currentTrack) {
+      return; // No change needed
+    }
+
+    const previousTrack = currentTrack;
+    currentTrack = normalizedTrack;
+
+    // Apply to DOM
+    applyTrack(currentTrack);
+
+    // Persist
+    if (persist) {
+      saveTrack(currentTrack);
+    }
+
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('trackchange', {
+      detail: {
+        track: currentTrack,
+        previousTrack: previousTrack
+      }
+    }));
+
+    console.log('[NavigationState] Track changed:', previousTrack, '→', currentTrack);
+  }
+
+  /**
+   * Get current track
+   * @returns {string} Current track identifier
+   */
+  function getTrack() {
+    return currentTrack;
+  }
+
+  /**
+   * Initialize track navigation UI
+   */
+  function initTrackNavigation() {
+    // Load saved track
+    currentTrack = loadTrack();
+    
+    // Apply initial track
+    applyTrack(currentTrack);
+
+    // Bind click handlers to track buttons
+    document.querySelectorAll('.audience-card').forEach(card => {
+      card.addEventListener('click', () => {
+        setTrack(card.dataset.track);
+      });
+
+      // Keyboard support
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setTrack(card.dataset.track);
+        }
+      });
+    });
+
+    // Bind uncertain-path button
+    const uncertainBtn = document.querySelector('.uncertain-path');
+    if (uncertainBtn) {
+      uncertainBtn.addEventListener('click', () => {
+        setTrack(uncertainBtn.dataset.track || DEFAULT_TRACK);
+      });
+    }
+
+    console.log('[NavigationState] Initialized with track:', currentTrack);
+  }
+
+  // Expose API
+  window.NavigationState = {
+    getTrack: getTrack,
+    setTrack: setTrack,
+    VALID_TRACKS: VALID_TRACKS,
+    DEFAULT_TRACK: DEFAULT_TRACK,
+    init: initTrackNavigation
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTrackNavigation);
+  } else {
+    // DOM already loaded
+    initTrackNavigation();
+  }
+})();
+
 // === PANEL SYSTEM ===
 (function() {
   'use strict';
@@ -8600,7 +9184,54 @@ function initGuideMode() {
     // Force-clear any static/hardcoded children
     tocContent.replaceChildren();
 
-    const headings = document.querySelectorAll('main h2, main h3');
+    // Get current mode from body class or default
+    const getCurrentMode = () => {
+      if (document.body.classList.contains('mode-propeller_workshop')) return 'propeller_workshop';
+      return 'quick_start';
+    };
+
+    // Check if a heading is visible in current mode
+    function isVisibleInMode(heading) {
+      const currentMode = getCurrentMode();
+      
+      // Check the heading itself
+      const headingVisibility = heading.dataset?.modeVisibility;
+      if (headingVisibility) {
+        return headingVisibility === currentMode ||
+               headingVisibility === 'both';
+      }
+      
+      // Check parent section for data-mode-visibility
+      const parentSection = heading.closest('section[data-mode-visibility]');
+      if (parentSection) {
+        const sectionVisibility = parentSection.dataset.modeVisibility;
+        return sectionVisibility === currentMode ||
+               sectionVisibility === 'both';
+      }
+      
+      // Check parent details/accordion for data-mode-visibility
+      const parentDetails = heading.closest('details[data-mode-visibility]');
+      if (parentDetails) {
+        const detailsVisibility = parentDetails.dataset.modeVisibility;
+        return detailsVisibility === currentMode ||
+               detailsVisibility === 'both';
+      }
+      
+      // Check any parent with data-mode-visibility
+      const parentWithMode = heading.closest('[data-mode-visibility]');
+      if (parentWithMode) {
+        const visibility = parentWithMode.dataset.modeVisibility;
+        return visibility === currentMode ||
+               visibility === 'both';
+      }
+      
+      // No mode restriction - visible in all modes
+      return true;
+    }
+
+    const allHeadings = document.querySelectorAll('main h2, main h3');
+    // Filter headings by mode visibility
+    const headings = Array.from(allHeadings).filter(isVisibleInMode);
     if (!headings.length) return;
 
     /**
@@ -8747,6 +9378,13 @@ function initGuideMode() {
 
     // 4. Global access for debugging + initialization flag
     window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
+
+    // 5. Re-generate TOC on mode change
+    window.addEventListener('modechange', () => {
+      if (tocPanelEl) {
+        generateTOCLinks(tocPanelEl);
+      }
+    });
   });
 })();
 
