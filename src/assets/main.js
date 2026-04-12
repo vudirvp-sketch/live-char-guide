@@ -1,3 +1,169 @@
+// ============================================================================
+// ITEM-001: TRACK NAVIGATION STATE MODULE
+// ============================================================================
+/**
+ * NavigationState - Manages track selection (A, B, C) with localStorage persistence
+ * 
+ * Features:
+ * - Loads saved track from localStorage or defaults to 'B'
+ * - Sets data-track attribute on body for CSS-based content filtering
+ * - Dispatches 'trackchange' event for other components to react
+ * - Provides API for getting/setting current track
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'guide-track-selection';
+  const VALID_TRACKS = ['A', 'B', 'C'];
+  const DEFAULT_TRACK = 'B';
+
+  // Private state
+  let currentTrack = DEFAULT_TRACK;
+
+  /**
+   * Load track from localStorage or return default
+   * @returns {string} Track identifier ('A', 'B', or 'C')
+   */
+  function loadTrack() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && VALID_TRACKS.includes(saved.toUpperCase())) {
+        return saved.toUpperCase();
+      }
+    } catch (e) {
+      console.warn('[NavigationState] localStorage unavailable:', e.message);
+    }
+    return DEFAULT_TRACK;
+  }
+
+  /**
+   * Save track to localStorage
+   * @param {string} track - Track identifier
+   */
+  function saveTrack(track) {
+    try {
+      localStorage.setItem(STORAGE_KEY, track);
+    } catch (e) {
+      console.warn('[NavigationState] Failed to save track:', e.message);
+    }
+  }
+
+  /**
+   * Apply track to DOM (set data-track on body)
+   * @param {string} track - Track identifier
+   */
+  function applyTrack(track) {
+    document.body.setAttribute('data-track', track);
+    
+    // Update audience-card button states
+    document.querySelectorAll('.audience-card').forEach(card => {
+      const isActive = card.dataset.track === track;
+      card.classList.toggle('active', isActive);
+      card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  }
+
+  /**
+   * Set current track
+   * @param {string} track - Track identifier ('A', 'B', or 'C')
+   * @param {boolean} [persist=true] - Whether to save to localStorage
+   */
+  function setTrack(track, persist = true) {
+    const normalizedTrack = track.toUpperCase();
+    
+    if (!VALID_TRACKS.includes(normalizedTrack)) {
+      console.error('[NavigationState] Invalid track:', track);
+      return;
+    }
+
+    if (normalizedTrack === currentTrack) {
+      return; // No change needed
+    }
+
+    const previousTrack = currentTrack;
+    currentTrack = normalizedTrack;
+
+    // Apply to DOM
+    applyTrack(currentTrack);
+
+    // Persist
+    if (persist) {
+      saveTrack(currentTrack);
+    }
+
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('trackchange', {
+      detail: {
+        track: currentTrack,
+        previousTrack: previousTrack
+      }
+    }));
+
+    console.log('[NavigationState] Track changed:', previousTrack, '→', currentTrack);
+  }
+
+  /**
+   * Get current track
+   * @returns {string} Current track identifier
+   */
+  function getTrack() {
+    return currentTrack;
+  }
+
+  /**
+   * Initialize track navigation UI
+   */
+  function initTrackNavigation() {
+    // Load saved track
+    currentTrack = loadTrack();
+    
+    // Apply initial track
+    applyTrack(currentTrack);
+
+    // Bind click handlers to track buttons
+    document.querySelectorAll('.audience-card').forEach(card => {
+      card.addEventListener('click', () => {
+        setTrack(card.dataset.track);
+      });
+
+      // Keyboard support
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setTrack(card.dataset.track);
+        }
+      });
+    });
+
+    // Bind uncertain-path button
+    const uncertainBtn = document.querySelector('.uncertain-path');
+    if (uncertainBtn) {
+      uncertainBtn.addEventListener('click', () => {
+        setTrack(uncertainBtn.dataset.track || DEFAULT_TRACK);
+      });
+    }
+
+    console.log('[NavigationState] Initialized with track:', currentTrack);
+  }
+
+  // Expose API
+  window.NavigationState = {
+    getTrack: getTrack,
+    setTrack: setTrack,
+    VALID_TRACKS: VALID_TRACKS,
+    DEFAULT_TRACK: DEFAULT_TRACK,
+    init: initTrackNavigation
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTrackNavigation);
+  } else {
+    // DOM already loaded
+    initTrackNavigation();
+  }
+})();
+
 // === PANEL SYSTEM ===
 (function() {
   'use strict';

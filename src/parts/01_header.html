@@ -52,6 +52,39 @@
   </div>
 </header>
 
+<!-- ITEM-001: TRACK NAVIGATION SELECTION -->
+<main class="entry-selection" id="main-content">
+  <section class="audience-selection" aria-labelledby="track-selection-title">
+    <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
+    <p class="audience-intro">Выберите уровень погружения в материал:</p>
+    <div class="audience-cards" role="group" aria-label="Выбор трека">
+      <button class="audience-card" data-track="A" aria-pressed="false">
+        <span class="track-icon">🌱</span>
+        <span class="track-name">Track A</span>
+        <span class="track-label">Начинающий</span>
+        <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
+      </button>
+      <button class="audience-card recommended" data-track="B" aria-pressed="true">
+        <span class="track-badge">Рекомендуется</span>
+        <span class="track-icon">⚡</span>
+        <span class="track-name">Track B</span>
+        <span class="track-label">Практик</span>
+        <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
+      </button>
+      <button class="audience-card" data-track="C" aria-pressed="false">
+        <span class="track-icon">🚀</span>
+        <span class="track-name">Track C</span>
+        <span class="track-label">Продвинутый</span>
+        <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
+      </button>
+    </div>
+    <button class="uncertain-path" data-track="B" type="button">
+      <span class="uncertain-icon">❓</span>
+      <span>Не уверен? Начни с Track B</span>
+    </button>
+  </section>
+</main>
+
 <div class="content-wrapper">
 
 <!-- TOC PANEL (NEW) -->

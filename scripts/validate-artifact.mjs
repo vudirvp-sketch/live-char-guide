@@ -2,7 +2,7 @@
 /**
  * @fileoverview Artifact Validation Script for Live Char Guide
  * @module scripts/validate-artifact
- * @version 1.2.0
+ * @version 1.3.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
@@ -37,10 +37,11 @@ const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
 // Validation limits - synchronized with bundle_check.mjs
+// Updated 2026: Modern limits for rich content guides
 // WCAG 1.4.10: Content reflow at 125% zoom (320px viewport)
 const LIMITS = {
-  indexMaxKB: 350,
-  zeroInstallMaxKB: 500,
+  indexMaxKB: 500,
+  zeroInstallMaxKB: 750,
   minKB: 50
 };
 

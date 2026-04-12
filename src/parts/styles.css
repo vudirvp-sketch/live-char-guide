@@ -3104,3 +3104,327 @@ body.theme-light .mode-btn.active {
   }
 }
 
+/* ============================================================
+   ITEM-001: TRACK NAVIGATION STYLES
+   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
+   ============================================================ */
+
+/* === VISUALLY HIDDEN (Accessibility) === */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === ENTRY SELECTION CONTAINER === */
+.entry-selection {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* === AUDIENCE SELECTION SECTION === */
+.audience-selection {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5em 2em;
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.audience-intro {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2em;
+}
+
+/* === AUDIENCE CARDS CONTAINER === */
+.audience-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .audience-cards {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+/* === INDIVIDUAL AUDIENCE CARD === */
+.audience-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  color: var(--text);
+  min-height: 140px;
+}
+
+.audience-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.audience-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === ACTIVE STATE === */
+.audience-card.active,
+.audience-card[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+/* === RECOMMENDED BADGE === */
+.audience-card.recommended {
+  border-color: var(--accent);
+}
+
+.audience-card.recommended::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #22c55e);
+  border-radius: 10px 10px 0 0;
+}
+
+.track-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--accent), #22c55e);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25em 0.8em;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* === TRACK CARD ELEMENTS === */
+.track-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.track-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.track-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.track-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 0.3rem;
+}
+
+/* === UNCERTAIN PATH BUTTON === */
+.uncertain-path {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uncertain-path:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.uncertain-path:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.uncertain-icon {
+  font-size: 1.1rem;
+}
+
+/* === TRACK-BASED CONTENT VISIBILITY === */
+/* Default: Show all content (no track selected or noscript fallback) */
+[data-requires-track] {
+  display: block;
+}
+
+/* Track A: Hide advanced content */
+body[data-track="A"] [data-requires-track~="B"],
+body[data-track="A"] [data-requires-track~="C"] {
+  display: none !important;
+}
+
+/* Track B: Show A and B content, hide C */
+body[data-track="B"] [data-requires-track~="C"] {
+  display: none !important;
+}
+
+/* Track C: Show all content */
+body[data-track="C"] [data-requires-track] {
+  display: block !important;
+}
+
+/* === TRACK A SPECIFIC STYLES === */
+body[data-track="A"] .audience-card[data-track="A"] {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+/* === TRACK B SPECIFIC STYLES === */
+body[data-track="B"] .audience-card[data-track="B"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* === TRACK C SPECIFIC STYLES === */
+body[data-track="C"] .audience-card[data-track="C"] {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+}
+
+body[data-track="C"] .audience-card[data-track="C"] .track-name {
+  color: #8b5cf6;
+}
+
+/* === NOSCRIPT FALLBACK === */
+/* When JavaScript is disabled, show Track B content by default */
+noscript .noscript-notice {
+  display: block;
+  background: rgba(234, 179, 8, 0.1);
+  border: 1px solid #eab308;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 1em 0;
+  color: var(--text);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+noscript .noscript-notice::before {
+  content: '⚠️ ';
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 640px) {
+  .audience-selection {
+    padding: 1em 1.2em;
+  }
+
+  .audience-intro {
+    font-size: 1rem;
+  }
+
+  .audience-card {
+    padding: 1rem;
+    min-height: 120px;
+  }
+
+  .track-icon {
+    font-size: 1.6rem;
+  }
+
+  .track-name {
+    font-size: 0.95rem;
+  }
+
+  .track-label {
+    font-size: 0.85rem;
+  }
+
+  .track-desc {
+    font-size: 0.75rem;
+  }
+
+  .uncertain-path {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* === LIGHT THEME ADJUSTMENTS === */
+body.theme-light .audience-card {
+  background: var(--bg-surface);
+}
+
+body.theme-light .audience-card:hover {
+  background: var(--accent-soft);
+}
+
+body.theme-light .audience-card.active {
+  background: var(--accent-soft);
+}
+
+body.theme-light .audience-card.recommended::before {
+  background: linear-gradient(90deg, #0284c7, #16a34a);
+}
+
+body.theme-light .track-badge {
+  background: linear-gradient(90deg, #0284c7, #16a34a);
+}
+
+/* === OLED THEME ADJUSTMENTS === */
+body.theme-oled .audience-selection {
+  background: var(--bg-surface);
+  border-color: var(--border);
+}
+
+body.theme-oled .audience-card {
+  background: var(--bg);
+  border-color: var(--border);
+}
+
+body.theme-oled .audience-card:hover {
+  background: var(--accent-soft);
+}
+
+body.theme-oled .audience-card.active {
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+}
+
+/* === PRINT STYLES === */
+@media print {
+  .audience-selection {
+    display: none;
+  }
+}
