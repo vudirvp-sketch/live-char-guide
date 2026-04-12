@@ -164,6 +164,379 @@
   }
 })();
 
+// ============================================================================
+// ITEM-002: GHOST CONSENT MODULE - Layered Disclosure
+// ============================================================================
+/**
+ * GhostConsent - Manages progressive disclosure of GHOST content
+ * 
+ * Layers:
+ * - Layer 0 (Track A): All GHOST content hidden
+ * - Layer 1 (Track B/C, SPINE complete, no consent): Teaser visible, content hidden
+ * - Layer 2 (Consent granted): Full GHOST content visible
+ * 
+ * Features:
+ * - TTL-based consent (30 days)
+ * - localStorage persistence
+ * - Track-aware visibility
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'ghost_consent_data';
+  const TTL_DAYS = 30;
+  const SPINE_STORAGE_KEY = 'guide-checklist-data';
+
+  // Private state
+  let consentData = null;
+
+  /**
+   * Get consent data from localStorage
+   * @returns {Object|null} Consent data or null if expired/missing
+   */
+  function getConsent() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (!data) return null;
+      
+      const parsed = JSON.parse(data);
+      if (!parsed.consent || !parsed.timestamp) return null;
+      
+      // Check TTL
+      const age = Date.now() - parsed.timestamp;
+      const maxAge = TTL_DAYS * 24 * 60 * 60 * 1000;
+      
+      if (age > maxAge) {
+        localStorage.removeItem(STORAGE_KEY);
+        return null;
+      }
+      
+      return parsed;
+    } catch (e) {
+      console.warn('[GhostConsent] Error reading consent:', e.message);
+      return null;
+    }
+  }
+
+  /**
+   * Check if SPINE section is complete (user has interacted with core elements)
+   * @returns {boolean}
+   */
+  function isSpineComplete() {
+    try {
+      const data = localStorage.getItem(SPINE_STORAGE_KEY);
+      if (!data) return false;
+      
+      const parsed = JSON.parse(data);
+      // Check if core SPINE elements are completed
+      const spineKeys = ['spine-want', 'spine-need', 'spine-flaw', 'spine-lie'];
+      return spineKeys.some(key => parsed[key] === true);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /**
+   * Set consent and show full GHOST content
+   */
+  function setConsent() {
+    try {
+      consentData = {
+        consent: true,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(consentData));
+      showFullGhost();
+      console.log('[GhostConsent] Consent granted');
+    } catch (e) {
+      console.error('[GhostConsent] Error saving consent:', e.message);
+    }
+  }
+
+  /**
+   * Revoke consent and hide GHOST content
+   */
+  function revokeConsent() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      consentData = null;
+      applyVisibility();
+      console.log('[GhostConsent] Consent revoked');
+    } catch (e) {
+      console.error('[GhostConsent] Error revoking consent:', e.message);
+    }
+  }
+
+  /**
+   * Set ghost layer on body element
+   * @param {string} layer - '0', '1', or '2'
+   */
+  function setGhostLayer(layer) {
+    document.body.setAttribute('data-ghost-layer', layer);
+    console.log('[GhostConsent] Layer set to:', layer);
+  }
+
+  /**
+   * Show full GHOST content (Layer 2)
+   */
+  function showFullGhost() {
+    setGhostLayer('2');
+  }
+
+  /**
+   * Apply visibility based on current state
+   */
+  function applyVisibility() {
+    const track = window.NavigationState?.getTrack() || 'B';
+    const spineComplete = isSpineComplete();
+    const consent = getConsent();
+
+    // Layer 0: Track A - hide everything
+    if (track === 'A') {
+      setGhostLayer('0');
+      return;
+    }
+
+    // Layer 2: Consent granted - show everything
+    if (consent) {
+      setGhostLayer('2');
+      return;
+    }
+
+    // Layer 1: SPINE complete but no consent - show teaser
+    if (spineComplete) {
+      setGhostLayer('1');
+    } else {
+      // No SPINE completion - hide everything (default to layer 0)
+      setGhostLayer('0');
+    }
+  }
+
+  /**
+   * Bind consent button handlers
+   */
+  function bindConsentButtons() {
+    document.querySelectorAll('[data-ghost-consent-btn]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const action = btn.dataset.ghostConsentBtn;
+        if (action === 'accept') {
+          setConsent();
+        } else if (action === 'decline') {
+          // Just hide the prompt, don't set consent
+          document.querySelectorAll('[data-ghost-consent-prompt]').forEach(el => {
+            el.style.display = 'none';
+          });
+        }
+      });
+    });
+  }
+
+  /**
+   * Initialize GhostConsent module
+   */
+  function init() {
+    consentData = getConsent();
+    applyVisibility();
+    bindConsentButtons();
+
+    // Listen for track changes
+    window.addEventListener('trackchange', () => {
+      applyVisibility();
+    });
+
+    // Listen for checklist changes (SPINE completion)
+    window.addEventListener('storage', (e) => {
+      if (e.key === SPINE_STORAGE_KEY) {
+        applyVisibility();
+      }
+    });
+
+    console.log('[GhostConsent] Initialized');
+  }
+
+  // Expose API
+  window.GhostConsent = {
+    init: init,
+    getConsent: getConsent,
+    setConsent: setConsent,
+    revokeConsent: revokeConsent,
+    applyVisibility: applyVisibility,
+    isSpineComplete: isSpineComplete
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+// ============================================================================
+// ITEM-009: CARD TEMPLATE VALIDATION MODULE
+// ============================================================================
+/**
+ * CardValidator - Validates character card templates before export
+ * 
+ * Features:
+ * - Required field validation (name, flaw, want, need)
+ * - Placeholder pattern detection
+ * - Export blocking for invalid cards
+ */
+(function() {
+  'use strict';
+
+  const PLACEHOLDER_PATTERNS = [
+    /^\[.*\]$/,           // [Description]
+    /^<[a-z]+>$/i,        // <field>
+    /^your\s+\w+$/i       // your name
+  ];
+
+  const REQUIRED_FIELDS = ['name', 'flaw', 'want', 'need'];
+
+  /**
+   * Check if value is a placeholder
+   * @param {string} value - Value to check
+   * @returns {boolean}
+   */
+  function isPlaceholder(value) {
+    if (!value || typeof value !== 'string') return false;
+    const trimmed = value.trim();
+    return PLACEHOLDER_PATTERNS.some(pattern => pattern.test(trimmed));
+  }
+
+  /**
+   * Validate a character card
+   * @param {Object} card - Card data object
+   * @param {string} level - Validation level ('core' or 'full')
+   * @returns {Object} Validation result {valid: boolean, errors: Array}
+   */
+  function validate(card, level = 'core') {
+    const errors = [];
+    
+    for (const field of REQUIRED_FIELDS) {
+      const value = card[field];
+      
+      if (!value || (typeof value === 'string' && value.trim() === '')) {
+        errors.push({ field, message: `${field} is required` });
+        continue;
+      }
+      
+      if (isPlaceholder(value)) {
+        errors.push({ field, message: `${field} contains placeholder text` });
+      }
+    }
+    
+    return { valid: errors.length === 0, errors };
+  }
+
+  /**
+   * Block export if validation fails
+   * @param {Object} validationResult - Result from validate()
+   * @returns {boolean} True if export was blocked
+   */
+  function blockExport(validationResult) {
+    if (!validationResult.valid) {
+      const messages = validationResult.errors.map(e => e.message).join('\n');
+      alert(`Cannot export: ${messages}`);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Update validation UI
+   * @param {Object} result - Validation result
+   */
+  function updateUI(result) {
+    const statusEl = document.getElementById('card-validation-status');
+    const exportBtn = document.getElementById('card-export-btn');
+    
+    if (statusEl) {
+      statusEl.className = `card-validation-status ${result.valid ? 'valid' : 'invalid'}`;
+      statusEl.textContent = result.valid 
+        ? '✓ Card is valid for export' 
+        : `✗ ${result.errors.length} issue(s) found`;
+    }
+    
+    if (exportBtn) {
+      exportBtn.disabled = !result.valid;
+    }
+  }
+
+  /**
+   * Initialize card validation UI
+   */
+  function init() {
+    const validateBtn = document.getElementById('card-validate-btn');
+    const exportBtn = document.getElementById('card-export-btn');
+    
+    if (validateBtn) {
+      validateBtn.addEventListener('click', () => {
+        // Collect card data from form fields
+        const card = collectCardData();
+        const result = validate(card);
+        updateUI(result);
+        
+        if (result.valid) {
+          console.log('[CardValidator] Card validated successfully');
+        } else {
+          console.warn('[CardValidator] Validation errors:', result.errors);
+        }
+      });
+    }
+    
+    if (exportBtn) {
+      exportBtn.addEventListener('click', (e) => {
+        const card = collectCardData();
+        const result = validate(card);
+        
+        if (blockExport(result)) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
+    }
+    
+    console.log('[CardValidator] Initialized');
+  }
+
+  /**
+   * Collect card data from form fields
+   * @returns {Object} Card data
+   */
+  function collectCardData() {
+    const fields = ['name', 'flaw', 'want', 'need', 'lie', 'ghost'];
+    const card = {};
+    
+    for (const field of fields) {
+      const input = document.querySelector(`[data-card-field="${field}"]`) ||
+                    document.getElementById(`card-${field}`);
+      card[field] = input ? input.value : '';
+    }
+    
+    return card;
+  }
+
+  // Expose API
+  window.CardValidator = {
+    validate: validate,
+    isPlaceholder: isPlaceholder,
+    blockExport: blockExport,
+    updateUI: updateUI,
+    collectCardData: collectCardData,
+    REQUIRED_FIELDS: REQUIRED_FIELDS,
+    init: init
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
 // === PANEL SYSTEM ===
 (function() {
   'use strict';
@@ -3376,6 +3749,251 @@ function initWidthToggle() {
     isConsented: () => consentData && consentData.consented,
     isTeaserViewed: () => teaserViewed,
     init: init
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+// ============================================================================
+// ITEM-005: OCEAN VALIDATOR MODULE
+// ============================================================================
+/**
+ * OCEANValidator - Validates OCEAN personality profiles for character distinctiveness
+ * 
+ * Rule: 1-2 extreme poles (values <30 or >70) = optimal memorable character
+ * - 0 extremes = forgettable (warning)
+ * - 1-2 extremes = optimal distinctiveness (green)
+ * - 3+ extremes = inconsistent character (error)
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'ocean_validator_traits';
+
+  // Default trait values (middle of scale)
+  const DEFAULT_TRAITS = { O: 50, C: 50, E: 50, A: 50, N: 50 };
+
+  // Current trait values
+  let traits = { ...DEFAULT_TRAITS };
+
+  /**
+   * Load traits from localStorage
+   */
+  function loadTraits() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Validate all traits exist and are numbers 0-100
+        if (typeof parsed === 'object' && ['O', 'C', 'E', 'A', 'N'].every(k => typeof parsed[k] === 'number')) {
+          traits = {
+            O: Math.max(0, Math.min(100, parsed.O)),
+            C: Math.max(0, Math.min(100, parsed.C)),
+            E: Math.max(0, Math.min(100, parsed.E)),
+            A: Math.max(0, Math.min(100, parsed.A)),
+            N: Math.max(0, Math.min(100, parsed.N))
+          };
+        }
+      }
+    } catch (e) {
+      console.warn('[OCEANValidator] Failed to load traits:', e.message);
+    }
+  }
+
+  /**
+   * Save traits to localStorage
+   */
+  function saveTraits() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(traits));
+    } catch (e) {
+      console.warn('[OCEANValidator] Failed to save traits:', e.message);
+    }
+  }
+
+  /**
+   * Get extreme traits (values <30 or >70)
+   * @returns {Array} Array of { trait, value, direction } objects
+   */
+  function getExtremes() {
+    const extremes = [];
+    const traitNames = { O: 'Открытость', C: 'Добросовестность', E: 'Экстраверсия', A: 'Доброжелательность', N: 'Нейротизм' };
+    
+    for (const [key, value] of Object.entries(traits)) {
+      if (value < 30 || value > 70) {
+        extremes.push({
+          trait: key,
+          name: traitNames[key],
+          value: value,
+          direction: value < 30 ? 'low' : 'high'
+        });
+      }
+    }
+    return extremes;
+  }
+
+  /**
+   * Validate OCEAN profile
+   * @returns {Object} { status, color, message, extremes }
+   */
+  function validate() {
+    const extremes = getExtremes();
+
+    if (extremes.length === 0) {
+      return {
+        status: 'warning',
+        color: 'yellow',
+        message: 'Нет экстремальных полюсов — персонаж может быть забываемым',
+        messageEn: 'No extreme poles — character may be forgettable',
+        extremes: [],
+        suggestion: 'Рекомендуется установить 1-2 значения <30 или >70'
+      };
+    }
+
+    if (extremes.length >= 1 && extremes.length <= 2) {
+      const extremeNames = extremes.map(e => `${e.name} (${e.value})`).join(', ');
+      return {
+        status: 'valid',
+        color: 'green',
+        message: `Оптимальная различимость: ${extremes.length} экстремальный полюс`,
+        messageEn: `Optimal distinctiveness: ${extremes.length} extreme pole(s)`,
+        extremes,
+        details: extremeNames
+      };
+    }
+
+    // 3+ extremes
+    return {
+      status: 'error',
+      color: 'red',
+      message: `Слишком много экстремумов (${extremes.length}) — персонаж может быть непоследовательным`,
+      messageEn: `Too many extremes (${extremes.length}) — may create inconsistent character`,
+      extremes,
+      suggestion: 'Рекомендуется оставить 1-2 экстремальных полюса'
+    };
+  }
+
+  /**
+   * Update UI with validation result
+   * @param {Object} result - Validation result from validate()
+   */
+  function updateUI(result) {
+    const indicator = document.getElementById('ocean-validator-status');
+    const details = document.getElementById('ocean-validator-details');
+    
+    if (indicator) {
+      // Remove all color classes
+      indicator.classList.remove('ocean-validator-green', 'ocean-validator-yellow', 'ocean-validator-red');
+      indicator.classList.add(`ocean-validator-${result.color}`);
+      indicator.textContent = result.message;
+      indicator.setAttribute('data-status', result.status);
+    }
+
+    if (details) {
+      if (result.extremes.length > 0) {
+        const extremeLabels = result.extremes.map(e => 
+          `<span class="ocean-extreme-tag ocean-extreme-${e.direction}">${e.name}: ${e.value}</span>`
+        ).join(' ');
+        details.innerHTML = extremeLabels;
+      } else {
+        details.innerHTML = '<span class="ocean-no-extremes">Все значения в нормальном диапазоне (30-70)</span>';
+      }
+    }
+
+    // Update slider highlights
+    document.querySelectorAll('.ocean-slider').forEach(slider => {
+      const trait = slider.dataset.trait;
+      if (trait && traits[trait] !== undefined) {
+        const value = traits[trait];
+        const isExtreme = value < 30 || value > 70;
+        slider.classList.toggle('ocean-extreme', isExtreme);
+        slider.classList.toggle('ocean-extreme-low', value < 30);
+        slider.classList.toggle('ocean-extreme-high', value > 70);
+      }
+    });
+
+    // Dispatch event for external listeners
+    window.dispatchEvent(new CustomEvent('oceanvalidated', { detail: result }));
+  }
+
+  /**
+   * Set a trait value
+   * @param {string} trait - Trait key (O, C, E, A, N)
+   * @param {number} value - Value (0-100)
+   */
+  function setTrait(trait, value) {
+    if (!['O', 'C', 'E', 'A', 'N'].includes(trait)) {
+      console.warn('[OCEANValidator] Invalid trait:', trait);
+      return;
+    }
+    traits[trait] = Math.max(0, Math.min(100, value));
+    saveTraits();
+    
+    const result = validate();
+    updateUI(result);
+    return result;
+  }
+
+  /**
+   * Get current traits
+   * @returns {Object} Traits object
+   */
+  function getTraits() {
+    return { ...traits };
+  }
+
+  /**
+   * Reset traits to defaults
+   */
+  function resetTraits() {
+    traits = { ...DEFAULT_TRAITS };
+    saveTraits();
+    const result = validate();
+    updateUI(result);
+    return result;
+  }
+
+  /**
+   * Initialize validator UI
+   */
+  function init() {
+    loadTraits();
+    
+    // Set up slider listeners
+    document.querySelectorAll('.ocean-slider').forEach(slider => {
+      const trait = slider.dataset.trait;
+      if (trait) {
+        // Set initial value
+        slider.value = traits[trait] || 50;
+        
+        // Listen for changes
+        slider.addEventListener('input', (e) => {
+          setTrait(trait, parseInt(e.target.value, 10));
+        });
+      }
+    });
+
+    // Initial validation
+    const result = validate();
+    updateUI(result);
+
+    console.log('[OCEANValidator] Initialized - Extremes:', getExtremes().length);
+  }
+
+  // Expose API
+  window.OCEANValidator = {
+    validate,
+    getExtremes,
+    getTraits,
+    setTrait,
+    resetTraits,
+    updateUI,
+    init
   };
 
   // Auto-initialize on DOMContentLoaded

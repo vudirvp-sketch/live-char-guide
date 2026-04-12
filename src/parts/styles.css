@@ -28,11 +28,6 @@
       --ocean-E: #ff6b6b;
       --ocean-A: #6bff8c;
       --ocean-N: #ffb84d;
-      /* Mode theming */
-      --mode-quick_start-accent: #22c55e;
-      --mode-propeller_workshop-accent: #8b5cf6;
-      --mode: quick_start;
-      --mode-accent: var(--mode-quick_start-accent);
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -2915,154 +2910,32 @@
 }
 
 /* ============================================================
-   DUAL MODE SYSTEM - Quick Start / Propeller Workshop
+   ITEM-001: TRACK NAVIGATION STYLES
+   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
    ============================================================ */
 
-/* === MODE MANAGEMENT === */
-
-/* Base state: Quick Start (default) */
-body { 
-  --mode: quick_start; 
-  --mode-accent: var(--mode-quick_start-accent); 
-}
-
-body.mode-propeller_workshop { 
-  --mode: propeller_workshop; 
-  --mode-accent: var(--mode-propeller_workshop-accent); 
-}
-
-/* Mode switcher buttons */
-.mode-switcher {
-  display: flex;
-  gap: 0.5rem;
-  margin: 1rem 0;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.mode-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  border: 2px solid var(--border);
-  border-radius: 0.5rem;
-  background: var(--bg-surface);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
-  font-family: inherit;
-}
-
-.mode-btn:hover:not(.active) {
-  border-color: var(--text-muted);
-  background: var(--bg-elevated);
-}
-
-.mode-btn.active {
-  border-color: var(--mode-accent);
-  background: color-mix(in srgb, var(--mode-accent) 15%, var(--bg-surface));
-}
-
-.mode-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.mode-icon {
-  font-size: 1.1em;
-}
-
-.mode-label {
-  font-weight: 500;
-}
-
-/* === VISIBILITY CONTROL === */
-
-/* Quick Start content visible by default */
-/* FIX: Added !important to ensure visibility rules override other display properties */
-[data-mode-visibility="quick_start"] { display: block !important; }
-[data-mode-visibility="propeller_workshop"] { display: none !important; }
-[data-mode-visibility="both"] { display: block !important; }
-
-/* Propeller Workshop mode visibility */
-body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none !important; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block !important; }
-body.mode-propeller_workshop [data-mode-visibility="both"] { display: block !important; }
-
-/* Partial visibility - show simplified in Quick Start, full in Workshop */
-[data-mode-visibility="quick_start-partial"] { display: block !important; }
-[data-mode-visibility="propeller_workshop-full"] { display: none !important; }
-
-body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none !important; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block !important; }
-
-/* === MODE CONTEXT BANNER === */
-/* FIX: mode-context-banner uses flex, but visibility rules with !important take precedence */
-.mode-context-banner {
+/* === ITEM-019: INFO BANNER (replaces mode-context-banner) === */
+.info-banner {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   padding: 0.6em 1em;
-  background: color-mix(in srgb, var(--mode-accent) 10%, var(--bg-surface));
-  border: 1px solid color-mix(in srgb, var(--mode-accent) 30%, var(--border));
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
   border-radius: 6px;
   margin-bottom: 1em;
   flex-wrap: wrap;
 }
 
-/* FIX: Ensure mode-context-banner displays as flex ONLY when visible according to current mode */
-/* Higher specificity (0,2,1,0) to override base visibility rules (0,1,1,0) */
-body:not(.mode-propeller_workshop) [data-mode-visibility="quick_start"].mode-context-banner { display: flex !important; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"].mode-context-banner { display: flex !important; }
-
-.mode-badge {
+.info-banner .mode-badge {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--mode-accent);
+  color: var(--accent);
 }
 
-.mode-hint {
+.info-banner .mode-hint {
   font-size: 0.85rem;
   color: var(--text-muted);
-}
-
-.mode-switch-link {
-  background: none;
-  border: none;
-  color: var(--accent);
-  cursor: pointer;
-  font-size: inherit;
-  font-family: inherit;
-  text-decoration: underline;
-  padding: 0;
-}
-
-.mode-switch-link:hover {
-  color: var(--mode-accent);
-}
-
-/* === ADAPTIVE TAGS === */
-
-/* In Quick Start mode: hide advanced tags, dim opt tags */
-body:not(.mode-propeller_workshop) .tag.advanced { 
-  display: none; 
-}
-
-body:not(.mode-propeller_workshop) .tag.opt { 
-  opacity: 0.7; 
-}
-
-/* In Propeller Workshop mode: mark forbidden tags */
-body.mode-propeller_workshop .tag.forbidden {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
-
-/* Light theme adaptations for mode switcher */
-body.theme-light .mode-btn.active {
-  background: color-mix(in srgb, var(--mode-accent) 12%, var(--bg-surface));
 }
 
 /* === CONTEXT CAPABILITY MATRIX === */
@@ -3085,29 +2958,6 @@ body.theme-light .mode-btn.active {
   color: var(--text-muted);
   margin-top: 0.8em;
 }
-
-/* Mobile responsive for mode switcher */
-@media (max-width: 640px) {
-  .mode-switcher {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .mode-btn {
-    justify-content: center;
-  }
-  
-  .mode-context-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-}
-
-/* ============================================================
-   ITEM-001: TRACK NAVIGATION STYLES
-   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
-   ============================================================ */
 
 /* === VISUALLY HIDDEN (Accessibility) === */
 .visually-hidden {
