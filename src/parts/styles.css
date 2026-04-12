@@ -28,6 +28,13 @@
       --ocean-E: #ff6b6b;
       --ocean-A: #6bff8c;
       --ocean-N: #ffb84d;
+
+      /* Track icon tokens */
+      --track-a-clr: var(--accent, #38bdf8);
+      --track-b-clr: #8be9fd;
+      --track-c-clr: #a78bfa;
+      --track-icon-speed: 2.5s;
+      --track-icon-glow: 0.5;
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -83,6 +90,10 @@
       --table-header: #e5e7eb;
       --table-row-alt: #f9fafb;
       --accent-soft: rgba(2, 132, 199, 0.08);
+      --track-a-clr: #0284c7;
+      --track-b-clr: #0891b2;
+      --track-c-clr: #7c3aed;
+      --track-icon-glow: 0.25;
     }
 
     body.theme-light { color-scheme: light; }
@@ -110,6 +121,10 @@
       --table-row-alt: var(--table-row-alt-oled);
       --panel-shadow: var(--panel-shadow-oled);
       --accent-soft: rgba(56, 189, 248, 0.15);
+      --track-a-clr: #38bdf8;
+      --track-b-clr: #67e8f9;
+      --track-c-clr: #c4b5fd;
+      --track-icon-glow: 0.7;
     }
 
     body.theme-oled { color-scheme: dark; }
@@ -2876,6 +2891,21 @@
   .skip-link {
     transition: none;
   }
+
+  /* Track icon animations — disable gracefully */
+  .track-icon,
+  .track-icon * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .track-icon-scan {
+    display: none;
+  }
+
+  .core-node {
+    animation-play-state: paused !important;
+  }
 }
 
 /* === THEME ONBOARDING HINT (THM-001) === */
@@ -3079,8 +3109,106 @@
 
 /* === TRACK CARD ELEMENTS === */
 .track-icon {
-  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
   line-height: 1;
+  flex-shrink: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* === TRACK ICON WRAPPER (scan effect container) === */
+.track-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 4px;
+}
+
+.track-icon-scan {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-20deg);
+  animation: track-scan 3s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes track-scan {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* === TRACK A: "Фундамент" — breathe + scale animation === */
+.track-icon--basic {
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+  animation: track-breathe 3s infinite ease-in-out;
+  will-change: opacity, transform;
+}
+
+@keyframes track-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(0.92); }
+  50%      { opacity: 1; transform: scale(1.06); }
+}
+
+/* === TRACK B: "Пульс жизни" — flowing dash + glow pulse === */
+.track-icon--live {
+  filter: drop-shadow(0 0 6px rgba(139, 233, 253, 0.4));
+  animation: track-live-glow 2s infinite ease-in-out;
+  will-change: filter, opacity;
+}
+
+@keyframes track-live-glow {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(139, 233, 253, 0.25)); opacity: 0.8; }
+  50%      { filter: drop-shadow(0 0 12px rgba(139, 233, 253, 0.7)); opacity: 1; }
+}
+
+.pulse-line {
+  stroke-dasharray: 5 3;
+  animation: track-flow 1.2s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+@keyframes track-flow {
+  to { stroke-dashoffset: -8; }
+}
+
+/* === TRACK C: "Ядро сознания" — pulse animation (WCAG 2.3.1 safe) === */
+.track-icon--neural {
+  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.4));
+  animation: track-neural-idle 3s infinite ease-in-out;
+  will-change: filter, opacity;
+}
+
+@keyframes track-neural-idle {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.25)); opacity: 0.8; }
+  50%      { filter: drop-shadow(0 0 10px rgba(167, 139, 250, 0.55)); opacity: 1; }
+}
+
+.core-node {
+  animation: track-pulse 2s infinite ease-in-out;
+  animation-play-state: paused;
+  will-change: opacity, transform;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.track-icon--neural:hover .core-node,
+.track-icon--neural:focus-within .core-node {
+  animation-play-state: running;
+}
+
+@keyframes track-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.25); }
 }
 
 .track-name {
@@ -3211,7 +3339,13 @@ noscript .noscript-notice::before {
   }
 
   .track-icon {
-    font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .track-icon-wrap {
+    width: 1.6rem;
+    height: 1.6rem;
   }
 
   .track-name {
@@ -3272,10 +3406,112 @@ body.theme-oled .audience-card.active {
   box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
 }
 
+/* === LIGHT THEME TRACK ICON ADJUSTMENTS === */
+body.theme-light .track-icon--basic {
+  filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.3));
+}
+
+body.theme-light .track-icon--live {
+  filter: drop-shadow(0 0 6px rgba(8, 145, 178, 0.3));
+}
+
+body.theme-light .track-icon--neural {
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.3));
+}
+
+@keyframes track-breathe-light {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(2, 132, 199, 0.15)); opacity: 0.55; transform: scale(0.92); }
+  50%      { filter: drop-shadow(0 0 8px rgba(2, 132, 199, 0.4)); opacity: 1; transform: scale(1.06); }
+}
+
+body.theme-light .track-icon--basic {
+  animation-name: track-breathe-light;
+}
+
+@keyframes track-live-glow-light {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(8, 145, 178, 0.2)); opacity: 0.8; }
+  50%      { filter: drop-shadow(0 0 8px rgba(8, 145, 178, 0.5)); opacity: 1; }
+}
+
+body.theme-light .track-icon--live {
+  animation-name: track-live-glow-light;
+}
+
+@keyframes track-neural-idle-light {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(124, 58, 237, 0.15)); opacity: 0.8; }
+  50%      { filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.4)); opacity: 1; }
+}
+
+body.theme-light .track-icon--neural {
+  animation-name: track-neural-idle-light;
+}
+
+body.theme-light .track-icon-scan {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+  mix-blend-mode: normal;
+}
+
+/* === OLED THEME TRACK ICON ADJUSTMENTS === */
+body.theme-oled .track-icon--basic {
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+}
+
+body.theme-oled .track-icon--live {
+  filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.5));
+}
+
+body.theme-oled .track-icon--neural {
+  filter: drop-shadow(0 0 10px rgba(196, 181, 253, 0.5));
+}
+
+@keyframes track-breathe-oled {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.35)); opacity: 0.55; transform: scale(0.92); }
+  50%      { filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.7)); opacity: 1; transform: scale(1.06); }
+}
+
+body.theme-oled .track-icon--basic {
+  animation-name: track-breathe-oled;
+}
+
+@keyframes track-live-glow-oled {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(103, 232, 249, 0.3)); opacity: 0.8; }
+  50%      { filter: drop-shadow(0 0 16px rgba(103, 232, 249, 0.8)); opacity: 1; }
+}
+
+body.theme-oled .track-icon--live {
+  animation-name: track-live-glow-oled;
+}
+
+@keyframes track-neural-idle-oled {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(196, 181, 253, 0.3)); opacity: 0.8; }
+  50%      { filter: drop-shadow(0 0 14px rgba(196, 181, 253, 0.65)); opacity: 1; }
+}
+
+body.theme-oled .track-icon--neural {
+  animation-name: track-neural-idle-oled;
+}
+
 /* === PRINT STYLES === */
 @media print {
   .audience-selection {
     display: none;
+  }
+
+  /* Track icons — static for print */
+  .track-icon {
+    filter: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .track-icon-scan {
+    display: none !important;
+  }
+
+  .core-node {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

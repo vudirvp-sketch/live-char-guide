@@ -49,20 +49,48 @@
     <p class="audience-intro">Выберите уровень погружения в материал:</p>
     <div class="audience-cards" role="group" aria-label="Выбор трека">
       <button class="audience-card" data-track="A" aria-pressed="false">
-        <span class="track-icon">🌱</span>
+        <div class="track-icon-wrap">
+          <svg class="track-icon track-icon--basic" viewBox="0 0 24 24" fill="none"
+               stroke="var(--track-a-clr)" stroke-width="1.5"
+               role="img" aria-label="Track A: Фундамент"
+               width="24" height="24">
+            <rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"/>
+            <circle cx="12" cy="12" r="1.5" fill="var(--track-a-clr)"/>
+          </svg>
+          <div class="track-icon-scan" aria-hidden="true"></div>
+        </div>
         <span class="track-name">Track A</span>
         <span class="track-label">Начинающий</span>
         <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
       </button>
       <button class="audience-card recommended" data-track="B" aria-pressed="true">
         <span class="track-badge">Рекомендуется</span>
-        <span class="track-icon">⚡</span>
+        <div class="track-icon-wrap">
+          <svg class="track-icon track-icon--live" viewBox="0 0 24 24" fill="none"
+               stroke="var(--track-b-clr)" stroke-width="2"
+               role="img" aria-label="Track B: Пульс жизни"
+               width="24" height="24">
+            <path class="pulse-line" d="M2 12h3l2-5 3 10 3-5h9"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="track-icon-scan" aria-hidden="true"></div>
+        </div>
         <span class="track-name">Track B</span>
         <span class="track-label">Практик</span>
         <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
       </button>
       <button class="audience-card" data-track="C" aria-pressed="false">
-        <span class="track-icon">🚀</span>
+        <div class="track-icon-wrap">
+          <svg class="track-icon track-icon--neural" viewBox="0 0 24 24" fill="none"
+               stroke="var(--track-c-clr)" stroke-width="1.5"
+               role="img" aria-label="Track C: Ядро сознания"
+               width="24" height="24">
+            <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"/>
+            <circle class="core-node" cx="12" cy="12" r="3" fill="var(--track-c-clr)"/>
+            <path d="M12 12l5-5M12 12l-5 5M12 12v7M12 12L7 7" stroke-width="1"/>
+          </svg>
+          <div class="track-icon-scan" aria-hidden="true"></div>
+        </div>
         <span class="track-name">Track C</span>
         <span class="track-label">Продвинутый</span>
         <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
