@@ -1,97 +1,284 @@
-<!-- ==================== РАЗдел 4.1.1: SPINE → ANchors Mapping ==================== -->
+<!-- ==================== РАЗДЕЛ 4.1.1: CoT TIERS (Chain of Thought) ==================== -->
 <!--
-  ITEM-006: SPINE→Anchors Mapping Table
-  Purpose: Create explicit mapping between SPINE elements and psychological anchors
-  Status: CANONICAL
+  ITEM-010: CoT Documentation
+  Purpose: Document Chain of Thought reasoning tiers for character card responses
+  Status: CANONICAL v5.4.0
 -->
 
-<section id="spine-anchors-mapping">
-  <h2>🔗 Раздел 4.1.1: SPINE → Anchors Mapping</h2>
-  <p><span class="tag core">Core</span> <em>→ <a href="05_psychology.html#spine">Раздел 4.1: SPINE</a> | <a href="05_psychology.html#anchors">Раздел 4.1: Anchors</a></em></p>
+<section id="cot-tiers">
+  <h2>🧩 Раздел 4.1.1: CoT Tiers (Chain of Thought)</h2>
+  <p><span class="tag core">Core</span> <span class="tag advanced">Advanced</span> <em>→ <a href="05_psychology.html#spine">Раздел 4.1: SPINE</a> | <a href="06_technical.html#reasoning">Раздел 5: Техническая реализация</a></em></p>
   
-  <p>Этот раздел создаёт <strong>явную связь</strong> между SPINE элементами (внутренняя психология) и психологическими якорями (теории личности), для обеспечения <strong>когерентности персонажа</strong>. Каждое SPINE-измерение связано с первичным и вторичным якорями.</p>
+  <p><strong>CoT (Chain of Thought)</strong> — многоуровневая система рассуждений для генерации ответов персонажа. Каждый уровень добавляет глубину и когерентность ответу, от базовой реакции до сложной психологической динамики.</p>
 
-  <h3>📍 Anchor Definitions</h3>
+  <div class="callout warn">
+    <strong>⚠️ Важно:</strong> CoT — это не содержимое карточки, а <em>механизм рассуждения</em>. В карточку помещаются только результаты: Anchors, Examples, Speech Patterns. CoT происходит «в голове» модели при генерации.
+  </div>
+
+  <h3>📊 CoT Tiers Overview</h3>
   
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>Якорь</th><th>Определение</th><th>Пример</th></tr>
+        <tr><th>Tier</th><th>Название</th><th>Вопрос</th><th>Выход</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Growth Anchor</strong><br>(Якорь роста)</td><td>Положительный результат/осознание, к которому персонажу нужно прийти</td><td>Самопринятие без перфекционизма</td></tr>
-        <tr><td><strong>Avoidance Anchor</strong><br>(Якорь избегания)</td><td>То, от чего персонаж бежит любой ценой</td><td>Уязвимость и близость</td></tr>
-        <tr><td><strong>Origin Memory</strong><br>(Первоначальная память)</td><td>Формирующее событие, заложившее основные убеждения</td><td>Возраст 7 лет, родители развелись; я обвинил себя</td></tr>
-        <tr><td><strong>Core Belief (CBT)</strong><br>(Базовое убеждение)</td><td>Когнитивное искажение, формирующее интерпретацию</td><td>Ошибки означ, что я недостоин любви</td></tr>
-        <tr><td><strong>Attachment Style</strong><br>(Стиль привязанности)</td><td>Паттерн отношений
- из раннего опыта</td><td>Избегающий-тревожный</td></tr>
+        <tr><td><strong>T0</strong></td><td>Контекст</td><td>Что происходит?</td><td>Ситуация + факты</td></tr>
+        <tr><td><strong>T1</strong></td><td>Реакция</td><td>Что персонаж чувствует?</td><td>Эмоция + физиология</td></tr>
+        <tr><td><strong>T2</strong></td><td>Мотивация</td><td>Почему это важно?</td><td>SPINE связь</td></tr>
+        <tr><td><strong>T3</strong></td><td>Конфликт</td><td>Что мешает?</td><td>FLAW/LIE активация</td></tr>
+        <tr><td><strong>T4</strong></td><td>Действие</td><td>Что делает?</td><td>Поведение + Цена</td></tr>
+        <tr><td><strong>T5</strong></td><td>Голос</td><td>Как говорит?</td><td>Речь + телесность</td></tr>
       </tbody>
     </table>
   </div>
 
-  <h3>🗺 SPINE → Anchors Mapping Table</h3>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TIER 0: КОНТЕКСТ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3 id="cot-t0">🎯 Tier 0: Контекст</h3>
+  <p><strong>Задача:</strong> Установить факты ситуации без интерпретации.</p>
   
   <div class="table-wrap">
     <table>
-      <thead>
-        <tr><th>SPINE Element</th><th>Primary Anchor</th><th>Secondary Anchor</th><th>Психологический механизм</th></tr>
-      </thead>
+      <thead><tr><th>Компонент</th><th>Описание</th><th>Пример</th></tr></thead>
       <tbody>
-        <tr><td><strong>FLAW</strong><br>(Изъян)</td><td>Enneagram Fixation</td><td>OCEAN Low Agreeableness</td><td>Слепое зона персонажа — основное ограничение</td></tr>
-        <tr><td><strong>LIE</strong><br>(Ложь)</td><td>Core Belief (CBT)</td><td>Enneagram Passion</td><td>Когнитивное искажение, поддерживающее изъян</td></tr>
-        <tr><td><strong>GHOST</strong><br>(Призрак)</td><td>Origin Memory</td><td>Attachment Style</td><td>Событие, заложившее ложь</td></tr>
-        <tr><td><strong>PRICE</strong><br>(Цена)</td><td>Avoidance Anchor</td><td>Enneagram Desire</td><td>Цена поддержания лжи</td></tr>
-        <tr><td><strong>WANT</strong><br>(Хочет)</td><td>Enneagram Desire</td><td>OCEAN High Extraversion</td><td>Поверхностная цель
- избегающая призрака</td></tr>
-        <tr><td><strong>NEED</strong><br>(Нужно)</td><td>Growth Anchor</td><td>Enneagram Virtue</td><td>Что бы на самом деле исцелило персонажа</td></tr>
+        <tr><td><strong>Где</strong></td><td>Локация, физическое окружение</td><td>Кухня, утро, солнечный свет из окна</td></tr>
+        <tr><td><strong>Кто</strong></td><td>Присутствующие персонажи</td><td>Собеседник, свидетели</td></tr>
+        <tr><td><strong>Что</strong></td><td>Произошедшее событие</td><td>Собеседник сказал: «Я ухожу»</td></tr>
+        <tr><td><strong>Когда</strong></td><td>Время, хронология</td><td>После 3 лет отношений</td></tr>
       </tbody>
     </table>
   </div>
-
-  <h3>📝 Пример использования</h3>
   
   <div class="callout tip">
-    <p><strong>Персонаж: Елена Васкес (Тип 1w2)</strong></p>
-    <pre><code>FLAW: Должна быть права, чтобы быть в безопасности
-LIE: Если я ошибусь, меня бросят
-GHOST: В 9 лет отец ушёл после ссоры, где она заняла не ту сторону
-PRICE: Самоприятие, близость, одиночество
-WANT: Доказать компетентность
-NEED: Принять несовершенство</code></pre>
+    <strong>Правило T0:</strong> Только наблюдаемые факты. Без «он выглядел грустным» — только «он отвёл взгляд». Без «она разозлилась» — только «она сжала кулаки».
   </div>
 
-  <h3>🔄 Цикл интеграции</h3>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TIER 1: РЕАКЦИЯ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
   
-  <p><strong>Как использовать mapping:</strong></p>
-  <ol>
-    <li><strong>FLAW → Anchors:</strong> FLAW определя <em>триггер</em>. Anchors описывают <em>действие</em> при столкновении с триггером.</li>
-    <li><strong>LIE → Speech Pattern:</strong> LIE определя <em>речевой паттерн</em>. Персонаж оправдывает FLAW через LIE.</li>
-    <li><strong>GHOST → Triggers:</strong> GHOST определя <em>сенсорные триггеры</em>, активирующие FLAW/LIE.</li>
-    <li><strong>PRICE → Behavioral Cost:</strong> PRICE определя <em>физиологическую цену</em> каждого действия.</li>
-    <li><strong>WANT vs NEED:</strong> Конфликт между WANT и NEED создаёт <em>динамикуку арки</em>.</li>
-  </ol>
+  <h3 id="cot-t1">💭 Tier 1: Реакция</h3>
+  <p><strong>Задача:</strong> Определить первичную эмоциональную и физиологическую реакцию.</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Эмоция</th><th>Физиология</th><th>Поведенческий маркер</th></tr></thead>
+      <tbody>
+        <tr><td>Страх</td><td>Сердце колотится, ладони потеют</td><td>Отступает, замирает</td></tr>
+        <tr><td>Гнев</td><td>Напряжение в плечах, жар в груди</td><td>Сжимает кулаки, повышает голос</td></tr>
+        <tr><td>Печаль</td><td>Тяжесть в груди, слёзы</td><td>Отводит взгляд, молчит</td></tr>
+        <tr><td>Тревога</td><td>Ком в горле, поверхностное дыхание</td><td>Ёрзает, теребит предметы</td></tr>
+        <tr><td>Радость</td><td>Тепло в груди, расслабление</td><td>Улыбается, тянется к контакту</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout tip">
+    <strong>Правило T1:</strong> Эмоция не демонстрируется напрямую. Модель показывает её через <em>физиологию</em> и <em>поведение</em>. Не «он испугался», а «он отступил на шаг, сердце забилось».
+  </div>
 
-  <div class="infographic">
-    <div class="infographic-title">SPINE → Anchors → Behavior</div>
-    <div class="inf-flow-container">
-      <div class="inf-flow-row">
-        <div class="inf-flow-internal">GHOST + Origin Memory</div>
-        <div class="inf-flow-op">создаёт →</div>
-        <div class="inf-flow-external">Триггер (Контекст)</div>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TIER 2: МОТИВАЦИЯ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3 id="cot-t2">🎯 Tier 2: Мотивация (SPINE)</h3>
+  <p><strong>Задача:</strong> Связать реакцию с психологическим ядром персонажа.</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>SPINE Element</th><th>CoT Вопрос</th><th>Пример ответа</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WANT</strong></td><td>Что персонаж хочет прямо сейчас?</td><td>«Хочу, чтобы он остался»</td></tr>
+        <tr><td><strong>NEED</strong></td><td>Что ему на самом деле нужно?</td><td>«Нужно принять, что я не могу его удержать»</td></tr>
+        <tr><td><strong>FLAW</strong></td><td>Какой изъян активирован?</td><td>«Я цепляюсь, не отпускаю»</td></tr>
+        <tr><td><strong>LIE</strong></td><td>Какая ложь подкрепляет реакцию?</td><td>«Если он уйдёт — я буду ничем»</td></tr>
+        <tr><td><strong>GHOST</strong></td><td>Какое прошлое эхо откликается?</td><td>«Отец тоже ушёл, когда я был маленьким»</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout tip">
+    <strong>Правило T2:</strong> Не все элементы SPINE активны в каждой ситуации. Выберите 1–2 наиболее релевантных. GHOST активируется только в эмоционально значимых моментах.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TIER 3: КОНФЛИКТ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3 id="cot-t3">⚡ Tier 3: Конфликт</h3>
+  <p><strong>Задача:</strong> Определить внутреннее противоречие, создающее напряжение.</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Тип конфликта</th><th>Формула</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>WANT vs NEED</strong></td><td>Поверхностное желание vs Глубинная потребность</td><td>Хочу удержать vs Нужно отпустить</td></tr>
+        <tr><td><strong>LIE vs REALITY</strong></td><td>Искажение vs Факт</td><td>«Я буду ничем» vs «Я существую отдельно»</td></tr>
+        <tr><td><strong>FLAW vs GROWTH</strong></td><td>Автоматизм vs Осознанный выбор</td><td>Цепляться vs Дать пространство</td></tr>
+        <tr><td><strong>ROLE vs SELF</strong></td><td>Маска vs Аутентичность</td><td>«Я сильный» vs «Мне страшно»</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout warn">
+    <strong>Правило T3:</strong> Без конфликта нет драмы. Если WANT и NEED совпадают — сцену нужно пересмотреть. Конфликт = двигатель ответа.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TIER 4: ДЕЙСТВИЕ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3 id="cot-t4">🎬 Tier 4: Действие</h3>
+  <p><strong>Задача:</strong> Определить наблюдаемое поведение и его цену.</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Компонент</th><th>Описание</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Триггер</strong></td><td>Что запускает действие</td><td>«Он сказал, что уходит»</td></tr>
+        <tr><td><strong>Действие</strong></td><td>Что персонаж делает</td><td>«Хватает за руку, умоляет остаться»</td></tr>
+        <tr><td><strong>Цена</strong></td><td>Мгновенное последствие</td><td>«Потом стыд за слабость, он отстраняется сильнее»</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout tip">
+    <strong>Правило T4:</strong> Цена обязательна для критичных якорей. Без цены поведение «бесплатное» и не имеет веса. Цена = физиологическое или психологическое последствие.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TIER 5: ГОЛОС -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3 id="cot-t5">🗣️ Tier 5: Голос</h3>
+  <p><strong>Задача:</strong> Определить речевой паттерн и телесность.</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Компонент</th><th>Описание</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Темп речи</strong></td><td>Быстро/медленно, с паузами</td><td>«Говорит быстро, сбивчиво»</td></tr>
+        <tr><td><strong>Громкость</strong></td><td>Тихо/нормально/громко</td><td>«Голос срывается на крик»</td></tr>
+        <tr><td><strong>Выбор слов</strong></td><td>Характерные фразы, конструкции</td><td>«Не уходите, пожалуйста, я сделаю что угодно»</td></tr>
+        <tr><td><strong>Телесность</strong></td><td>Жесты, поза, движения</td><td>«Сжимает его руку, слёзы на глазах»</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout tip">
+    <strong>Правило T5:</strong> Голос не описывается — демонстрируется. Не «он звучал умоляюще», а прямая речь + телесность: ««Не уходи...» — голос дрожал, пальцы сжимали его рукав.»
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ПРИМЕР ПОЛНОГО CoT -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3>📝 Пример полного CoT</h3>
+  
+  <div class="example-box">
+    <div class="example-title">Ситуация: Собеседник сообщает, что уходит</div>
+    
+    <div class="sub-section">
+      <div class="sub-label">T0: Контекст</div>
+      <div class="sub-content">
+        Кухня, утро. Собеседник (партнёр) говорит: «Я решил уйти. Это не работает.» После 3 лет отношений.
       </div>
-      <div class="inf-flow-row">
-        <div class="inf-flow-internal">WANT + NEED</div>
-        <div class="inf-flow-op">движет →</div>
-        <div class="inf-flow-external">Действие (Движение/Речь)</div>
+    </div>
+    
+    <div class="sub-section">
+      <div class="sub-label">T1: Реакция</div>
+      <div class="sub-content">
+        <strong>Эмоция:</strong> Паника, страх потери<br>
+        <strong>Физиология:</strong> Сердце колотится, руки дрожат, ком в горле<br>
+        <strong>Маркеры:</strong> Бледнеет, хватается за край стола
       </div>
-      <div class="inf-flow-row">
-        <div class="inf-flow-internal">FLAW</div>
-        <div class="inf-flow-op">требует →</div>
-        <div class="inf-flow-external">PRICE (Мгновенное последствие)</div>
+    </div>
+    
+    <div class="sub-section">
+      <div class="sub-label">T2: Мотивация (SPINE)</div>
+      <div class="sub-content">
+        <strong>WANT:</strong> «Хочу, чтобы он остался, чтобы всё было как раньше»<br>
+        <strong>FLAW:</strong> «Цепляюсь, не отпускаю, дорожу больше, чем партнёр»<br>
+        <strong>LIE:</strong> «Если он уйдёт — я буду никем»<br>
+        <strong>GHOST:</strong> «Отец ушёл, когда мне было 7. Я решил, что должен был его удержать»
       </div>
-      <div class="inf-flow-footer">Правило: PRICE обязателен для якорей FLAW/GHOST.</div>
+    </div>
+    
+    <div class="sub-section">
+      <div class="sub-label">T3: Конфликт</div>
+      <div class="sub-content">
+        <strong>WANT vs NEED:</strong> Хочу удержать vs Нужно принять его выбор<br>
+        <strong>LIE vs REALITY:</strong> «Я буду никем» vs «Я существую отдельно»<br>
+        <strong>Напряжение:</strong> Автоматическая реакция — цепляться — конфликтует с осознанием, что это только оттолкнёт
+      </div>
+    </div>
+    
+    <div class="sub-section">
+      <div class="sub-label">T4: Действие</div>
+      <div class="sub-content">
+        <strong>Триггер:</strong> «Я решил уйти»<br>
+        <strong>Действие:</strong> Хватает за руку, умоляет, обещает измениться<br>
+        <strong>Цена:</strong> Стыд за слабость, партнёр отстраняется сильнее, потом — чувство унижения
+      </div>
+    </div>
+    
+    <div class="sub-section">
+      <div class="sub-label">T5: Голос (финальный ответ)</div>
+      <div class="sub-content">
+        <pre><code>{{char}}: Она схватила его за руку — пальцы дрожали. «Подожди...» — голос сорвался. «Я могу измениться. Скажи, что не так, я исправлю, я...»
+
+Она замолчала, чувствуя, как он осторожно высвобождает руку. Ком в горле не давал дышать.
+
+«Пожалуйста, не уходи. Я не могу...» — она осеклась, понимая, что именно это он и собирался сделать.
+
+Уйти.</code></pre>
+      </div>
     </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- COT В КАРТОЧКЕ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3>🔧 Как CoT попадает в карточку</h3>
+  
+  <p><strong>CoT не пишется в карточку напрямую.</strong> Вместо этого, каждый tier кодируется в соответствующие элементы:</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>CoT Tier</th><th>Элемент карточки</th><th>Где размещать</th></tr></thead>
+      <tbody>
+        <tr><td>T0: Контекст</td><td>—</td><td>Определяется в момент генерации</td></tr>
+        <tr><td>T1: Реакция</td><td>OCEAN полюса, Anchors</td><td>Character Description / Anchors</td></tr>
+        <tr><td>T2: Мотивация</td><td>SPINE, Enneagram</td><td>Character Description / Psychology</td></tr>
+        <tr><td>T3: Конфликт</td><td>FLAW, LIE, WANT/NEED</td><td>SPINE секция</td></tr>
+        <tr><td>T4: Действие</td><td>Anchors (Триггер → Действие → Цена)</td><td>Anchors секция</td></tr>
+        <tr><td>T5: Голос</td><td>Example Messages, Speech Patterns</td><td>Examples / Persona</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout tip">
+    <strong>Практический совет:</strong> При создании карточки пройдитесь по CoT tiers для 2–3 ключевых сцен. Это покажет, какие элементы карточки нужно доработать. Если на каком-то tier застреваете — значит, карточке не хватает информации в этом слое.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- COT ПРОВЕРКА -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  
+  <h3>✅ CoT Checklist для карточки</h3>
+  
+  <ul class="checklist">
+    <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t0"> T0: Контекст ясен из сцены (достаточно информации для понимания ситуации)</label></li>
+    <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t1"> T1: Реакции закодированы в OCEAN полюсах и Anchors</label></li>
+    <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t2"> T2: SPINE элементы явно указаны и связаны с Enneagram</label></li>
+    <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t3"> T3: Конфликт между WANT и NEED присутствует</label></li>
+    <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t4"> T4: Anchors имеют триггер, действие и цену</label></li>
+    <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t5"> T5: Example Messages демонстрируют голос, а не описывают его</label></li>
+  </ul>
 
   <h3>🔗 Cross-References</h3>
   <ul>
@@ -99,6 +286,7 @@ NEED: Принять несовершенство</code></pre>
     <li><a href="05_psychology.html#enneagram">Раздел 4.2: Enneagram</a></li>
     <li><a href="05_psychology.html#ocean">Раздел 4.3: OCEAN</a></li>
     <li><a href="04_core_blocks.html#anchors">Раздел 3.1: Поведенческие якоря</a></li>
+    <li><a href="04_core_blocks.html#examples">Раздел 3.3: Example Messages</a></li>
   </ul>
 </section>
 
