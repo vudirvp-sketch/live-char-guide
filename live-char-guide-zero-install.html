@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 740b5dac -->
-<!-- Generated: 2026-04-12T16:18:19.098Z -->
+<!-- Build hash: 0d1acae6 -->
+<!-- Generated: 2026-04-12T16:53:31.037Z -->
 <!-- Version: 5.4.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="740b5dac">
+<meta name="build-hash" content="0d1acae6">
 <meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-12">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -60,11 +60,6 @@
       --ocean-E: #ff6b6b;
       --ocean-A: #6bff8c;
       --ocean-N: #ffb84d;
-      /* Mode theming */
-      --mode-quick_start-accent: #22c55e;
-      --mode-propeller_workshop-accent: #8b5cf6;
-      --mode: quick_start;
-      --mode-accent: var(--mode-quick_start-accent);
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -2948,154 +2943,32 @@
 }
 
 /* ============================================================
-   DUAL MODE SYSTEM - Quick Start / Propeller Workshop
+   ITEM-001: TRACK NAVIGATION STYLES
+   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
    ============================================================ */
 
-/* === MODE MANAGEMENT === */
-
-/* Base state: Quick Start (default) */
-body { 
-  --mode: quick_start; 
-  --mode-accent: var(--mode-quick_start-accent); 
-}
-
-body.mode-propeller_workshop { 
-  --mode: propeller_workshop; 
-  --mode-accent: var(--mode-propeller_workshop-accent); 
-}
-
-/* Mode switcher buttons */
-.mode-switcher {
-  display: flex;
-  gap: 0.5rem;
-  margin: 1rem 0;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.mode-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  border: 2px solid var(--border);
-  border-radius: 0.5rem;
-  background: var(--bg-surface);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
-  font-family: inherit;
-}
-
-.mode-btn:hover:not(.active) {
-  border-color: var(--text-muted);
-  background: var(--bg-elevated);
-}
-
-.mode-btn.active {
-  border-color: var(--mode-accent);
-  background: color-mix(in srgb, var(--mode-accent) 15%, var(--bg-surface));
-}
-
-.mode-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.mode-icon {
-  font-size: 1.1em;
-}
-
-.mode-label {
-  font-weight: 500;
-}
-
-/* === VISIBILITY CONTROL === */
-
-/* Quick Start content visible by default */
-/* FIX: Added !important to ensure visibility rules override other display properties */
-[data-mode-visibility="quick_start"] { display: block !important; }
-[data-mode-visibility="propeller_workshop"] { display: none !important; }
-[data-mode-visibility="both"] { display: block !important; }
-
-/* Propeller Workshop mode visibility */
-body.mode-propeller_workshop [data-mode-visibility="quick_start"] { display: none !important; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"] { display: block !important; }
-body.mode-propeller_workshop [data-mode-visibility="both"] { display: block !important; }
-
-/* Partial visibility - show simplified in Quick Start, full in Workshop */
-[data-mode-visibility="quick_start-partial"] { display: block !important; }
-[data-mode-visibility="propeller_workshop-full"] { display: none !important; }
-
-body.mode-propeller_workshop [data-mode-visibility="quick_start-partial"] { display: none !important; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop-full"] { display: block !important; }
-
-/* === MODE CONTEXT BANNER === */
-/* FIX: mode-context-banner uses flex, but visibility rules with !important take precedence */
-.mode-context-banner {
+/* === ITEM-019: INFO BANNER (replaces mode-context-banner) === */
+.info-banner {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   padding: 0.6em 1em;
-  background: color-mix(in srgb, var(--mode-accent) 10%, var(--bg-surface));
-  border: 1px solid color-mix(in srgb, var(--mode-accent) 30%, var(--border));
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
   border-radius: 6px;
   margin-bottom: 1em;
   flex-wrap: wrap;
 }
 
-/* FIX: Ensure mode-context-banner displays as flex ONLY when visible according to current mode */
-/* Higher specificity (0,2,1,0) to override base visibility rules (0,1,1,0) */
-body:not(.mode-propeller_workshop) [data-mode-visibility="quick_start"].mode-context-banner { display: flex !important; }
-body.mode-propeller_workshop [data-mode-visibility="propeller_workshop"].mode-context-banner { display: flex !important; }
-
-.mode-badge {
+.info-banner .mode-badge {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--mode-accent);
+  color: var(--accent);
 }
 
-.mode-hint {
+.info-banner .mode-hint {
   font-size: 0.85rem;
   color: var(--text-muted);
-}
-
-.mode-switch-link {
-  background: none;
-  border: none;
-  color: var(--accent);
-  cursor: pointer;
-  font-size: inherit;
-  font-family: inherit;
-  text-decoration: underline;
-  padding: 0;
-}
-
-.mode-switch-link:hover {
-  color: var(--mode-accent);
-}
-
-/* === ADAPTIVE TAGS === */
-
-/* In Quick Start mode: hide advanced tags, dim opt tags */
-body:not(.mode-propeller_workshop) .tag.advanced { 
-  display: none; 
-}
-
-body:not(.mode-propeller_workshop) .tag.opt { 
-  opacity: 0.7; 
-}
-
-/* In Propeller Workshop mode: mark forbidden tags */
-body.mode-propeller_workshop .tag.forbidden {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
-
-/* Light theme adaptations for mode switcher */
-body.theme-light .mode-btn.active {
-  background: color-mix(in srgb, var(--mode-accent) 12%, var(--bg-surface));
 }
 
 /* === CONTEXT CAPABILITY MATRIX === */
@@ -3118,29 +2991,6 @@ body.theme-light .mode-btn.active {
   color: var(--text-muted);
   margin-top: 0.8em;
 }
-
-/* Mobile responsive for mode switcher */
-@media (max-width: 640px) {
-  .mode-switcher {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .mode-btn {
-    justify-content: center;
-  }
-  
-  .mode-context-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-}
-
-/* ============================================================
-   ITEM-001: TRACK NAVIGATION STYLES
-   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
-   ============================================================ */
 
 /* === VISUALLY HIDDEN (Accessibility) === */
 .visually-hidden {
@@ -4087,16 +3937,6 @@ body.theme-oled .ocean-validator-details {
 
 <header>
   <h1>📖 Живой персонаж для LLM 5.4.0 — Гайд по созданию RP-карточек</h1>
-  <div class="mode-switcher" role="group" aria-label="Выбор режима">
-    <button class="mode-btn active" data-mode="quick_start" aria-pressed="true">
-      <span class="mode-icon">🚀</span>
-      <span class="mode-label">Quick Start</span>
-    </button>
-    <button class="mode-btn" data-mode="propeller_workshop" aria-pressed="false">
-      <span class="mode-icon">🛠️</span>
-      <span class="mode-label">Propeller Workshop</span>
-    </button>
-  </div>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
   
   <!-- CONTEXT CAPABILITY MATRIX -->
@@ -4108,9 +3948,9 @@ body.theme-oled .ocean-validator-details {
           <tr><th>Context</th><th>Card Budget</th><th>AN</th><th>Lorebook</th><th>CoT</th><th>GHOST Layers</th><th>Recommended Mode</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Single line</td><td>Quick Start</td></tr>
-          <tr><td><strong>8K</strong></td><td>600-800</td><td>✅</td><td>✅</td><td>Limited</td><td>Distributed</td><td>Either</td></tr>
-          <tr><td><strong>16K+</strong></td><td>800-2500</td><td>✅</td><td>✅</td><td>❌ (API)</td><td>Full</td><td>Propeller Workshop</td></tr>
+          <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Single line</td><td>Track A</td></tr>
+          <tr><td><strong>8K</strong></td><td>600-800</td><td>✅</td><td>✅</td><td>Limited</td><td>Distributed</td><td>Track B</td></tr>
+          <tr><td><strong>16K+</strong></td><td>800-2500</td><td>✅</td><td>✅</td><td>❌ (API)</td><td>Full</td><td>Track C</td></tr>
         </tbody>
       </table>
     </div>
@@ -4255,10 +4095,10 @@ body.theme-oled .ocean-validator-details {
     <hr>
 
     <!-- ==================== РАЗДЕЛ 1 ==================== -->
-    <section id="quick-start" data-mode-visibility="quick_start">
-      <div class="mode-context-banner" data-mode-visibility="quick_start">
+    <section id="quick-start">
+      <div class="info-banner">
         <span class="mode-badge">🚀 Quick Start Mode</span>
-        <span class="mode-hint">Minimal viable card in ~5 minutes. <button class="mode-switch-link" data-target-mode="propeller_workshop">Switch to full pipeline →</button></span>
+        <span class="mode-hint">Minimal viable card in ~5 minutes.</span>
       </div>
       <h2>⚡ Раздел 1: Быстрый старт</h2>
 
@@ -4520,10 +4360,10 @@ Entry: При упоминании семьи или контроля — нап
     <hr>
 
     <!-- ==================== РАЗДЕЛ 2 ==================== -->
-    <section id="architecture" data-mode-visibility="propeller_workshop">
-      <div class="mode-context-banner" data-mode-visibility="propeller_workshop">
+    <section id="architecture" data-track="B C">
+      <div class="info-banner">
         <span class="mode-badge">🛠️ Propeller Workshop Mode</span>
-        <span class="mode-hint">Full pipeline with all features. <button class="mode-switch-link" data-target-mode="quick_start">← Switch to Quick Start</button></span>
+        <span class="mode-hint">Full pipeline with all features.</span>
       </div>
       <!-- SCOPE: Complete card — ~2500 tokens. All fields active. -->
       <h2>🏗 Раздел 2: Архитектура системы</h2>
@@ -7742,11 +7582,11 @@ No smart typography. If conflict → default to Examples.
     <hr>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 6 ==================== -->
-    <section id="appendix6" data-mode-visibility="propeller_workshop">
+    <section id="appendix6" data-track="B C">
       <h2>📎 Приложение 6: Образцовая карточка</h2>
-      <div class="mode-context-banner" data-mode-visibility="propeller_workshop">
+      <div class="info-banner">
         <span class="mode-badge">🛠️ Propeller Workshop</span>
-        <span class="mode-hint">Полная карточка с GHOST и Price. Доступно только в режиме Propeller Workshop.</span>
+        <span class="mode-hint">Полная карточка с GHOST и Price. Доступно в Track B и C.</span>
       </div>
       <p>Полностью рабочая карточка персонажа «Выщербленный», созданная по методологии гайда v5.3.2.</p>
       <div class="callout warn" style="margin:1em 0">
@@ -8236,6 +8076,27 @@ No smart typography. If conflict → default to Examples.</code></pre>
   function initTrackNavigation() {
     // Load saved track
     currentTrack = loadTrack();
+    
+    // ITEM-019: Migrate legacy guide-mode to track
+    (function migrateLegacyMode() {
+      try {
+        const legacyMode = localStorage.getItem('guide-mode');
+        if (legacyMode === 'quick_start' && currentTrack === 'B') {
+          console.log('[NavigationState] Migrating quick_start → Track A');
+          currentTrack = 'A';
+          saveTrack('A');
+        } else if (legacyMode === 'propeller_workshop' && currentTrack === 'B') {
+          // propeller_workshop maps to default Track B, no change needed
+          console.log('[NavigationState] Migrating propeller_workshop → Track B (default)');
+        }
+        // Clean up legacy keys
+        localStorage.removeItem('guide-mode');
+        localStorage.removeItem('workshop_enabled');
+        localStorage.removeItem('workshop_active');
+      } catch (e) {
+        console.warn('[NavigationState] Migration error:', e.message);
+      }
+    })();
     
     // Apply initial track
     applyTrack(currentTrack);
@@ -10876,89 +10737,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initOcean();
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
   // initGuidePanels() removed — replaced by safe IIFE below
-  // Initialize Guide Mode Manager
-  initGuideMode();
-  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Dual Mode)');
+  // initGuideMode() removed — ITEM-019: Mode system migrated to Tracks
+  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Track Navigation)');
 });
-
-// === GUIDE MODE MANAGER ===
-function initGuideMode() {
-  'use strict';
-
-  const STORAGE_KEY = 'guide-mode';
-  const DEFAULT_MODE = 'quick_start';
-  const VALID_MODES = ['quick_start', 'propeller_workshop'];
-
-  function getSavedMode() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return VALID_MODES.includes(saved) ? saved : DEFAULT_MODE;
-    } catch (e) {
-      return DEFAULT_MODE;
-    }
-  }
-
-  function setMode(mode) {
-    if (!VALID_MODES.includes(mode)) {
-      console.error('[GuideMode] Invalid mode:', mode);
-      return;
-    }
-
-    // Update body class
-    document.body.classList.remove('mode-quick_start', 'mode-propeller_workshop');
-    document.body.classList.add(`mode-${mode}`);
-
-    // Update buttons
-    document.querySelectorAll('.mode-btn').forEach(btn => {
-      const isActive = btn.dataset.mode === mode;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-
-    // Update mode switch links
-    document.querySelectorAll('.mode-switch-link').forEach(link => {
-      const targetMode = link.dataset.targetMode;
-      if (targetMode) {
-        link.onclick = (e) => {
-          e.preventDefault();
-          setMode(targetMode);
-        };
-      }
-    });
-
-    // Persist
-    try {
-      localStorage.setItem(STORAGE_KEY, mode);
-    } catch (e) {
-      console.warn('[GuideMode] localStorage unavailable');
-    }
-
-    // Dispatch event for other components
-    window.dispatchEvent(new CustomEvent('modechange', { detail: { mode } }));
-
-    console.log('[GuideMode] Mode set to:', mode);
-  }
-
-  function bindEvents() {
-    document.querySelectorAll('.mode-btn').forEach(btn => {
-      btn.addEventListener('click', () => setMode(btn.dataset.mode));
-    });
-  }
-
-  // Initialize
-  const initialMode = getSavedMode();
-  setMode(initialMode);
-  bindEvents();
-
-  // Expose API
-  window.guideMode = {
-    getMode: getSavedMode,
-    setMode: setMode,
-    VALID_MODES: VALID_MODES
-  };
-
-  return window.guideMode;
-}
 
 // === SAFE FAB REBIND & ENHANCED NOTEPAD INIT ===
 (function() {
@@ -10982,54 +10763,44 @@ function initGuideMode() {
     // Force-clear any static/hardcoded children
     tocContent.replaceChildren();
 
-    // Get current mode from body class or default
-    const getCurrentMode = () => {
-      if (document.body.classList.contains('mode-propeller_workshop')) return 'propeller_workshop';
-      return 'quick_start';
-    };
-
-    // Check if a heading is visible in current mode
-    function isVisibleInMode(heading) {
-      const currentMode = getCurrentMode();
+    // ITEM-019: Simplified visibility check - only Track-based now
+    function isVisibleInTrack(heading) {
+      const currentTrack = window.NavigationState?.getTrack() || 'B';
       
-      // Check the heading itself
-      const headingVisibility = heading.dataset?.modeVisibility;
-      if (headingVisibility) {
-        return headingVisibility === currentMode ||
-               headingVisibility === 'both';
+      // Check the heading itself for data-track
+      const headingTrack = heading.dataset?.track;
+      if (headingTrack) {
+        return headingTrack.includes(currentTrack);
       }
       
-      // Check parent section for data-mode-visibility
-      const parentSection = heading.closest('section[data-mode-visibility]');
+      // Check parent section for data-track
+      const parentSection = heading.closest('section[data-track]');
       if (parentSection) {
-        const sectionVisibility = parentSection.dataset.modeVisibility;
-        return sectionVisibility === currentMode ||
-               sectionVisibility === 'both';
+        const sectionTrack = parentSection.dataset.track;
+        return sectionTrack.includes(currentTrack);
       }
       
-      // Check parent details/accordion for data-mode-visibility
-      const parentDetails = heading.closest('details[data-mode-visibility]');
+      // Check parent details/accordion for data-track
+      const parentDetails = heading.closest('details[data-track]');
       if (parentDetails) {
-        const detailsVisibility = parentDetails.dataset.modeVisibility;
-        return detailsVisibility === currentMode ||
-               detailsVisibility === 'both';
+        const detailsTrack = parentDetails.dataset.track;
+        return detailsTrack.includes(currentTrack);
       }
       
-      // Check any parent with data-mode-visibility
-      const parentWithMode = heading.closest('[data-mode-visibility]');
-      if (parentWithMode) {
-        const visibility = parentWithMode.dataset.modeVisibility;
-        return visibility === currentMode ||
-               visibility === 'both';
+      // Check any parent with data-track
+      const parentWithTrack = heading.closest('[data-track]');
+      if (parentWithTrack) {
+        const track = parentWithTrack.dataset.track;
+        return track.includes(currentTrack);
       }
       
-      // No mode restriction - visible in all modes
+      // No track restriction - visible in all tracks
       return true;
     }
 
     const allHeadings = document.querySelectorAll('main h2, main h3');
-    // Filter headings by mode visibility
-    const headings = Array.from(allHeadings).filter(isVisibleInMode);
+    // Filter headings by track visibility
+    const headings = Array.from(allHeadings).filter(isVisibleInTrack);
     if (!headings.length) return;
 
     /**

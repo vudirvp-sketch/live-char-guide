@@ -117,6 +117,27 @@
     // Load saved track
     currentTrack = loadTrack();
     
+    // ITEM-019: Migrate legacy guide-mode to track
+    (function migrateLegacyMode() {
+      try {
+        const legacyMode = localStorage.getItem('guide-mode');
+        if (legacyMode === 'quick_start' && currentTrack === 'B') {
+          console.log('[NavigationState] Migrating quick_start → Track A');
+          currentTrack = 'A';
+          saveTrack('A');
+        } else if (legacyMode === 'propeller_workshop' && currentTrack === 'B') {
+          // propeller_workshop maps to default Track B, no change needed
+          console.log('[NavigationState] Migrating propeller_workshop → Track B (default)');
+        }
+        // Clean up legacy keys
+        localStorage.removeItem('guide-mode');
+        localStorage.removeItem('workshop_enabled');
+        localStorage.removeItem('workshop_active');
+      } catch (e) {
+        console.warn('[NavigationState] Migration error:', e.message);
+      }
+    })();
+    
     // Apply initial track
     applyTrack(currentTrack);
 
@@ -2756,89 +2777,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initOcean();
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
   // initGuidePanels() removed — replaced by safe IIFE below
-  // Initialize Guide Mode Manager
-  initGuideMode();
-  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Dual Mode)');
+  // initGuideMode() removed — ITEM-019: Mode system migrated to Tracks
+  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Track Navigation)');
 });
-
-// === GUIDE MODE MANAGER ===
-function initGuideMode() {
-  'use strict';
-
-  const STORAGE_KEY = 'guide-mode';
-  const DEFAULT_MODE = 'quick_start';
-  const VALID_MODES = ['quick_start', 'propeller_workshop'];
-
-  function getSavedMode() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return VALID_MODES.includes(saved) ? saved : DEFAULT_MODE;
-    } catch (e) {
-      return DEFAULT_MODE;
-    }
-  }
-
-  function setMode(mode) {
-    if (!VALID_MODES.includes(mode)) {
-      console.error('[GuideMode] Invalid mode:', mode);
-      return;
-    }
-
-    // Update body class
-    document.body.classList.remove('mode-quick_start', 'mode-propeller_workshop');
-    document.body.classList.add(`mode-${mode}`);
-
-    // Update buttons
-    document.querySelectorAll('.mode-btn').forEach(btn => {
-      const isActive = btn.dataset.mode === mode;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-
-    // Update mode switch links
-    document.querySelectorAll('.mode-switch-link').forEach(link => {
-      const targetMode = link.dataset.targetMode;
-      if (targetMode) {
-        link.onclick = (e) => {
-          e.preventDefault();
-          setMode(targetMode);
-        };
-      }
-    });
-
-    // Persist
-    try {
-      localStorage.setItem(STORAGE_KEY, mode);
-    } catch (e) {
-      console.warn('[GuideMode] localStorage unavailable');
-    }
-
-    // Dispatch event for other components
-    window.dispatchEvent(new CustomEvent('modechange', { detail: { mode } }));
-
-    console.log('[GuideMode] Mode set to:', mode);
-  }
-
-  function bindEvents() {
-    document.querySelectorAll('.mode-btn').forEach(btn => {
-      btn.addEventListener('click', () => setMode(btn.dataset.mode));
-    });
-  }
-
-  // Initialize
-  const initialMode = getSavedMode();
-  setMode(initialMode);
-  bindEvents();
-
-  // Expose API
-  window.guideMode = {
-    getMode: getSavedMode,
-    setMode: setMode,
-    VALID_MODES: VALID_MODES
-  };
-
-  return window.guideMode;
-}
 
 // === SAFE FAB REBIND & ENHANCED NOTEPAD INIT ===
 (function() {
@@ -2862,54 +2803,44 @@ function initGuideMode() {
     // Force-clear any static/hardcoded children
     tocContent.replaceChildren();
 
-    // Get current mode from body class or default
-    const getCurrentMode = () => {
-      if (document.body.classList.contains('mode-propeller_workshop')) return 'propeller_workshop';
-      return 'quick_start';
-    };
-
-    // Check if a heading is visible in current mode
-    function isVisibleInMode(heading) {
-      const currentMode = getCurrentMode();
+    // ITEM-019: Simplified visibility check - only Track-based now
+    function isVisibleInTrack(heading) {
+      const currentTrack = window.NavigationState?.getTrack() || 'B';
       
-      // Check the heading itself
-      const headingVisibility = heading.dataset?.modeVisibility;
-      if (headingVisibility) {
-        return headingVisibility === currentMode ||
-               headingVisibility === 'both';
+      // Check the heading itself for data-track
+      const headingTrack = heading.dataset?.track;
+      if (headingTrack) {
+        return headingTrack.includes(currentTrack);
       }
       
-      // Check parent section for data-mode-visibility
-      const parentSection = heading.closest('section[data-mode-visibility]');
+      // Check parent section for data-track
+      const parentSection = heading.closest('section[data-track]');
       if (parentSection) {
-        const sectionVisibility = parentSection.dataset.modeVisibility;
-        return sectionVisibility === currentMode ||
-               sectionVisibility === 'both';
+        const sectionTrack = parentSection.dataset.track;
+        return sectionTrack.includes(currentTrack);
       }
       
-      // Check parent details/accordion for data-mode-visibility
-      const parentDetails = heading.closest('details[data-mode-visibility]');
+      // Check parent details/accordion for data-track
+      const parentDetails = heading.closest('details[data-track]');
       if (parentDetails) {
-        const detailsVisibility = parentDetails.dataset.modeVisibility;
-        return detailsVisibility === currentMode ||
-               detailsVisibility === 'both';
+        const detailsTrack = parentDetails.dataset.track;
+        return detailsTrack.includes(currentTrack);
       }
       
-      // Check any parent with data-mode-visibility
-      const parentWithMode = heading.closest('[data-mode-visibility]');
-      if (parentWithMode) {
-        const visibility = parentWithMode.dataset.modeVisibility;
-        return visibility === currentMode ||
-               visibility === 'both';
+      // Check any parent with data-track
+      const parentWithTrack = heading.closest('[data-track]');
+      if (parentWithTrack) {
+        const track = parentWithTrack.dataset.track;
+        return track.includes(currentTrack);
       }
       
-      // No mode restriction - visible in all modes
+      // No track restriction - visible in all tracks
       return true;
     }
 
     const allHeadings = document.querySelectorAll('main h2, main h3');
-    // Filter headings by mode visibility
-    const headings = Array.from(allHeadings).filter(isVisibleInMode);
+    // Filter headings by track visibility
+    const headings = Array.from(allHeadings).filter(isVisibleInTrack);
     if (!headings.length) return;
 
     /**
