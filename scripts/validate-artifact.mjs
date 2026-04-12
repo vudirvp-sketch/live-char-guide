@@ -39,9 +39,10 @@ const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 // Validation limits - synchronized with bundle_check.mjs
 // Updated 2026: Modern limits for rich content guides
 // WCAG 1.4.10: Content reflow at 125% zoom (320px viewport)
+// v5.4.0: Increased limits for action plan implementation (core principles, glossary, debugging)
 const LIMITS = {
-  indexMaxKB: 500,
-  zeroInstallMaxKB: 750,
+  indexMaxKB: 600,
+  zeroInstallMaxKB: 800,
   minKB: 50
 };
 

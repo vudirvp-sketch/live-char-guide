@@ -4112,3 +4112,232 @@ body.theme-oled .ocean-validator-details {
     color: #333;
   }
 }
+
+/* ============================================================
+   v5.4.0: NEW COMPONENTS (Action Plan Implementation)
+   ============================================================ */
+
+/* === ID: D4 | INTRODUCTION BLOCK === */
+.intro-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1.5em 0;
+}
+
+.intro-block h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.intro-block h3 {
+  margin-top: 1em;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.intro-block ul {
+  margin: 0.5em 0;
+}
+
+/* === ID: D3 | MODEL TOGGLE === */
+.model-toggle {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1em 0;
+}
+
+.model-toggle h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.model-toggle-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.8em 0;
+}
+
+.model-btn {
+  padding: 0.5em 1em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.model-btn:hover {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.model-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.model-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-top: 0.5em;
+}
+
+/* Model-specific content visibility */
+.content[data-model="12B"] { display: none; }
+.content[data-model="32B"] { display: none; }
+
+body.model-12B .content[data-model="12B"] { display: block; }
+body.model-12B .content[data-model="32B"] { display: none; }
+body.model-12B .content[data-model="all"] { display: block; }
+
+body.model-32B .content[data-model="12B"] { display: none; }
+body.model-32B .content[data-model="32B"] { display: block; }
+body.model-32B .content[data-model="all"] { display: block; }
+
+body:not(.model-12B):not(.model-32B) .content[data-model] { display: block; }
+
+/* === ID: A5 | CHECKPOINTS === */
+.checkpoint {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 2em 0;
+}
+
+.checkpoint h4 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.checkpoint ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.8em 0;
+}
+
+.checkpoint li {
+  margin: 0.4em 0;
+  padding-left: 1.5em;
+  position: relative;
+}
+
+.checkpoint li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.checkpoint-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-top: 0.8em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--border);
+}
+
+/* === ID: B4 | TOKEN TABLE LEGENDS === */
+.token-legend {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 0.5em;
+  padding: 0.5em 0.8em;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+
+.token-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.token-legend-item::before {
+  content: '•';
+  color: var(--accent);
+}
+
+.token-badge {
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  font-size: 0.75em;
+  border-radius: 3px;
+  font-weight: 600;
+  margin-left: 0.3em;
+}
+
+.token-badge-12B {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fde047;
+}
+
+.token-badge-32B {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+}
+
+/* === ID: E3 | DEBUG TREE === */
+.debug-tree {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1em 0;
+}
+
+.debug-tree ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.debug-tree > ol > li {
+  margin: 0.8em 0;
+  font-weight: 500;
+}
+
+.debug-tree ul {
+  margin: 0.3em 0;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.debug-tree li strong {
+  color: var(--accent);
+}
+
+/* === CORE REFERENCE LINKS === */
+.core-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  padding: 0.1em 0.4em;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+  margin-left: 0.3em;
+}
+
+.core-ref::before {
+  content: '→';
+  color: var(--accent);
+}

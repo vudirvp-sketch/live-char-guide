@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "canonical_terms": [
+    {
+      "term": "Author's Notes",
+      "abbreviation": "AN",
+      "definition": "Динамический слой контекста для длинных сессий. Обновляется каждые 3–5 сообщений.",
+      "prohibited": ["Авторские заметки", "Авторка", "Авторка Заметки", "Author's Note"]
+    },
+    {
+      "term": "System Prompt",
+      "abbreviation": "SP",
+      "definition": "Системные инструкции для модели: ограничения, запреты, формат.",
+      "prohibited": ["Системный промпт", "Системка", "Системник", "System Prompts"]
+    },
+    {
+      "term": "Lorebook",
+      "abbreviation": "LB",
+      "definition": "База знаний с триггерами для активации контента по ключевым словам.",
+      "prohibited": ["Лорбук", "World Info", "WI"]
+    },
+    {
+      "term": "Description",
+      "abbreviation": null,
+      "definition": "Описание персонажа (Character Description). Содержит Spine, якоря, фактологию.",
+      "prohibited": ["Описание персонажа", "Character Description"]
+    },
+    {
+      "term": "Examples",
+      "abbreviation": null,
+      "definition": "Примерные сообщения. Задают голос персонажа через демонстрацию.",
+      "prohibited": ["Примерные сообщения", "Примеры", "Dialogue Examples"]
+    },
+    {
+      "term": "Greeting",
+      "abbreviation": null,
+      "definition": "Первое сообщение персонажа в чате. Задаёт начальное состояние и голос.",
+      "prohibited": ["Первое сообщение", "First Message", "Приветствие"]
+    },
+    {
+      "term": "Character Card",
+      "abbreviation": null,
+      "definition": "Полный пакет поведенческого движка персонажа.",
+      "prohibited": ["Карточка", "Персонаж"]
+    },
+    {
+      "term": "Spine",
+      "abbreviation": null,
+      "definition": "Мотивационное ядро персонажа из 5 элементов: WANT, NEED, FLAW, LIE, GHOST.",
+      "prohibited": ["Мотивационное ядро"]
+    },
+    {
+      "term": "GHOST",
+      "abbreviation": null,
+      "definition": "Событие из прошлого, сформировавшее FLAW и LIE.",
+      "prohibited": ["Призрак", "Тень", "GHOST-Слой"]
+    },
+    {
+      "term": "Price",
+      "abbreviation": null,
+      "definition": "Немедленная физическая или вербальная манифестация последствия.",
+      "prohibited": ["Цена"]
+    },
+    {
+      "term": "Anchors",
+      "abbreviation": null,
+      "definition": "Поведенческие якоря — правила поведения в формате «Триггер → Действие → Цена».",
+      "prohibited": ["Поведенческие якоря"]
+    }
+  ],
+  "core_rules": [
+    {
+      "id": "ocean-poles",
+      "rule": "OCEAN: Только 1–2 экстремальных полюса",
+      "location": "01_core_principles.html#core-principles"
+    },
+    {
+      "id": "price-mandatory",
+      "rule": "Price обязателен для FLAW/GHOST якорей",
+      "location": "01_core_principles.html#core-principles"
+    },
+    {
+      "id": "voice-isolation",
+      "rule": "Голос только в Examples, никогда в Description (для 12B)",
+      "location": "01_core_principles.html#core-principles"
+    },
+    {
+      "id": "ghost-placement",
+      "rule": "GHOST только в Description, никогда в SP",
+      "location": "01_core_principles.html#core-principles"
+    },
+    {
+      "id": "anchor-format",
+      "rule": "trigger → action → price: Каноническая схема поведения",
+      "location": "01_core_principles.html#core-principles"
+    }
+  ]
+}

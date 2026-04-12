@@ -1,0 +1,200 @@
+<!-- ==================== DEBUGGING SECTION ==================== -->
+<!-- ID: E3 | Troubleshooting decision tree -->
+<section id="debugging">
+  <h2>🔧 Раздел 7: Диагностика и отладка</h2>
+  <p><span class="tag core">Core</span></p>
+  <p><strong>Что это:</strong> Древовидный справочник для диагностики и исправления проблем в карточке персонажа.</p>
+  <p><strong>Как использовать:</strong> Найдите симптом → следуйте по дереву диагностики → примените решение.</p>
+
+  <h3>🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь Spine:</strong> Ясно ли определена мотивация?
+        <ul>
+          <li>Если неоднозначно → <strong>Уточни Spine:</strong> конкретизируй WANT/NEED/FLAW/LIE</li>
+        </ul>
+      </li>
+      <li><strong>Проверь якоря:</strong> Согласованы ли триггеры с личностью?
+        <ul>
+          <li>Если противоречат → <strong>Перестрой якоря:</strong> выровняй по Spine и OCEAN</li>
+        </ul>
+      </li>
+      <li><strong>Проверь SP:</strong> Есть ли явные ограничения?
+        <ul>
+          <li>Если нет → <strong>Добавь PRE-GENERATION FILTER</strong> (для 12B)</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Examples:</strong> Демонстрируют ли они нужное поведение?
+        <ul>
+          <li>Если противоречат → <strong>Перепиши Examples:</strong> они приоритетны для голоса</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Нестабильный голос / голос «плывёт»</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь Examples:</strong> Есть ли минимум 2 блока <code>&lt;START&gt;</code>?
+        <ul>
+          <li>Если нет → <strong>Добавь Examples:</strong> нейтральный + стресс</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Description:</strong> Есть ли стилистические директивы?
+        <ul>
+          <li>Если да → <strong>Удали:</strong> голос должен быть только в Examples (для 12B)</li>
+        </ul>
+      </li>
+      <li><strong>Проверь SP:</strong> Есть ли голосовые директивы?
+        <ul>
+          <li>Если да → <strong>Перемести в Examples:</strong> SP только для ограничений</li>
+        </ul>
+      </li>
+      <li><strong>Проверь разметку:</strong> Единообразна ли во всех блоках?
+        <ul>
+          <li>Если нет → <strong>Унифицируй:</strong> выбери одну систему (A/B/C) для всех</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Галлюцинации / противоречивые факты</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь Лорбук:</strong> Факты противоречат друг другу?
+        <ul>
+          <li>Если да → <strong>Устрани противоречия:</strong> оставь один источник истины</li>
+        </ul>
+      </li>
+      <li><strong>Проверь якоря:</strong> Есть ли Price для FLAW/GHOST?
+        <ul>
+          <li>Если нет → <strong>Добавь Price:</strong> последствия должны быть определены</li>
+        </ul>
+      </li>
+      <li><strong>Проверь OCEAN:</strong> Больше 2 экстремальных полюсов?
+        <ul>
+          <li>Если да → <strong>Сократи:</strong> оставь только 1–2 экстремума</li>
+        </ul>
+      </li>
+      <li><strong>Проверь GHOST:</strong> Дублируется ли в нескольких местах?
+        <ul>
+          <li>Если да → <strong>Устрани дубликаты:</strong> GHOST только в Description, триггеры в LB/AN</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь SP:</strong> Есть ли антигодмодинг?
+        <ul>
+          <li>Если нет → <strong>Добавь:</strong> «Никогда не описывай действия, мысли или чувства {{user}}»</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Examples:</strong> Есть ли действия {{user}} в примерах?
+        <ul>
+          <li>Если да → <strong>Удали:</strong> примеры не должны содержать {{user}} действия</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Лорбук:</strong> Есть ли <code>content</code> с действиями {{user}}?
+        <ul>
+          <li>Если да → <strong>Удали:</strong> это нарушает антигодмодинг</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Персонаж «слишком идеальный»</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь FLAW:</strong> Проявляется ли в поведении?
+        <ul>
+          <li>Если нет → <strong>Добавь якоря с Price:</strong> FLAW должен иметь последствия</li>
+        </ul>
+      </li>
+      <li><strong>Проверь WANT/NEED:</strong> Есть ли конфликт?
+        <ul>
+          <li>Если WANT = NEED → <strong>Переработай:</strong> NEED должен быть противоположен WANT</li>
+        </ul>
+      </li>
+      <li><strong>Проверь GHOST:</strong> Влияет ли на поведение?
+        <ul>
+          <li>Если нет → <strong>Добавь триггеры:</strong> GHOST должен активироваться через сенсорные ключи</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Повторы / зацикливание</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь RepPen:</strong> Значение > 1.10?
+        <ul>
+          <li>Если да → <strong>Снизь до 1.05:</strong> высокий RepPen стирает паттерны</li>
+        </ul>
+      </li>
+      <li><strong>Проверь presence_penalty:</strong> Значение > 0.15?
+        <ul>
+          <li>Если да → <strong>Снизь до 0.0–0.15:</strong> высокие значения убивают тики</li>
+        </ul>
+      </li>
+      <li><strong>Проверь якоря:</strong> Есть ли разнообразие в триггерах?
+        <ul>
+          <li>Если нет → <strong>Расширь покрытие:</strong> добавь ситуации разного типа</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Потеря контекста в длинной сессии</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь AN:</strong> Обновляется ли каждые 3–5 сообщений?
+        <ul>
+          <li>Если нет → <strong>Настрой протокол обновления AN</strong></li>
+        </ul>
+      </li>
+      <li><strong>Проверь контекст:</strong> Какой размер окна?
+        <ul>
+          <li>Если 4K → <strong>Прими ограничения:</strong> используй 4K-Fallback протокол</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Лорбук:</strong> Есть ли Range-cascade для прогрессии?
+        <ul>
+          <li>Если нет → <strong>Добавь:</strong> каскад по диапазону сообщений</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <h3>🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3>
+  <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь SP:</strong> Есть ли SPATIAL LOCK?
+        <ul>
+          <li>Если нет → <strong>Добавь:</strong> «Track distance, posture, object weight, sightlines. No teleportation.»</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Examples:</strong> Демонстрируют ли они пространственную когерентность?
+        <ul>
+          <li>Если нет → <strong>Добавь примеры:</strong> с явным отслеживанием позиции</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout tip" style="margin-top:2em">
+    <strong>💡 Правило одного изменения:</strong>
+    <p>Никогда не меняй более одного параметра за раз. Иначе не узнаешь, что помогло. После каждого изменения запускай соответствующий тест-сценарий.</p>
+  </div>
+
+  <h3>🔗 Кросс-ссылки</h3>
+  <ul>
+    <li><strong><a href="#appendix4">Приложение 4</a>:</strong> Чеклист валидации</li>
+    <li><strong><a href="#diagnostics">Раздел 6</a>:</strong> Тест-сценарии</li>
+    <li><strong><a href="#sampling">Раздел 5.1</a>:</strong> Параметры генерации</li>
+  </ul>
+</section>
+
+<hr>

@@ -135,6 +135,103 @@
 [Отладка] 4 тест-сценария → симптомы → резание → стабильность</code></pre>
 
       <p><strong>Итог:</strong> Система функционально замкнута и внутренне непротиворечива. Карточка — поведенческий движок, а не описание. Рабочий минимум: <code>Spine + Anchors (с ценой) + 3 Examples + SP (с Предгенерационный фильтр)</code>. При 4K — использовать Fallback-протокол. Остальное наращивается по мере контекста.</p>
+
+      <!-- ID: A4 | Mutually Exclusive Responsibility Table -->
+      <h3>📋 Таблица ответственности блоков</h3>
+      <p><strong>ПРАВИЛО:</strong> Каждый тип контента принадлежит строго одному блоку. Если X принадлежит категории Y, он идёт в блок Z. Исключения должны быть документированы.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Блок</th><th>ХРАНИТ</th><th>НЕ ХРАНИТ</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Description</strong></td>
+              <td>Статические факты идентичности (имя, возраст, внешность, биография), Spine (WANT/NEED/FLAW/LIE/GHOST), поведенческие якоря</td>
+              <td>Поведенческие правила, паттерны голоса, ограничения, примеры диалогов</td>
+            </tr>
+            <tr>
+              <td><strong>System Prompt</strong></td>
+              <td>Глобальные поведенческие правила, ограничения, формат вывода, антигодмодинг, SPATIAL LOCK, FORMAT LOCK</td>
+              <td>Идентичность персонажа, примеры диалогов, GHOST</td>
+            </tr>
+            <tr>
+              <td><strong>Author's Notes (AN)</strong></td>
+              <td>Динамика сессии, текущий контекст, немедленные ограничения, состояние GHOST-активации</td>
+              <td>Статическая идентичность, постоянные правила</td>
+            </tr>
+            <tr>
+              <td><strong>Examples</strong></td>
+              <td>Паттерны голоса, стиль диалога, шаблоны ответов, демонстрация поведения</td>
+              <td>Факты идентичности, поведенческие правила (только демонстрация)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <strong>💡 Правило разрешения конфликтов:</strong>
+        <p>При конфликте между блоками побеждают Examples (для голоса) и System Prompt (для ограничений). Description никогда не переопределяет.</p>
+      </div>
+
+      <!-- ID: B1 | GHOST Placement Exception Rules -->
+      <h3 id="ghost-rules">⚠️ Правила исключений: Размещение GHOST</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Приоритет</th><th>Правило</th><th>Условия</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Приоритет 1 (По умолчанию)</strong></td>
+              <td>GHOST размещается только в Description (блок <code>&lt;motivation&gt;</code>)</td>
+              <td>Стандартный случай</td>
+            </tr>
+            <tr>
+              <td><strong>Приоритет 2 (Условное исключение)</strong></td>
+              <td>GHOST может появляться в System Prompt</td>
+              <td>
+                <strong>ТОЛЬКО если:</strong>
+                <ul>
+                  <li>Карточка использует 4K-Fallback конфигурацию (~300 токенов)</li>
+                  <li>Исключение явно документировано в метаданных карточки</li>
+                  <li>Причина указана: [4K-Fallback: GHOST в SP]</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">
+        <strong>⚠️ Маркер исключений:</strong>
+        <p>Все исключения должны отображать ⚠️ иконку со ссылкой на условия исключения: <code>⚠️ [Исключение: 4K-Fallback] → <a href="#ghost-rules">Правила GHOST</a></code></p>
+      </div>
+
+      <!-- Phase Indicators (ID: B2) -->
+      <h3>📊 Фазовые индикаторы</h3>
+      <p>Каждый блок контента должен иметь индикатор фазы:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Индикатор</th><th>Значение</th><th>Применение</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>[PROTOTYPE]</code></td>
+              <td>Опционально — добавляется при тестировании расширенного поведения</td>
+              <td>Quick Start, минимальные карточки</td>
+            </tr>
+            <tr>
+              <td><code>[PRODUCTION]</code></td>
+              <td>Обязательно — требуется перед деплоем</td>
+              <td>Полные карточки, все блоки Core</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">
+        <strong>⚠️ Quick Start = [PROTOTYPE]:</strong>
+        <p>Quick Start описывает MVP-формат: 4 якоря, без Price (опционально), без GHOST. Для полноценной работы используйте полную схему. Price обязателен перед деплоем.</p>
+      </div>
     </section>
 
     <hr>
