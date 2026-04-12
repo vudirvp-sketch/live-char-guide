@@ -3428,3 +3428,302 @@ body.theme-oled .audience-card.active {
     display: none;
   }
 }
+
+/* ============================================================
+   ITEM-002: GHOST CONTENT GATING
+   Three-layer progressive disclosure for GHOST content
+   ============================================================ */
+
+/* === LAYER 0: GHOST HIDDEN (Default / Track A) === */
+/* GHOST content completely hidden */
+body:not([data-ghost-layer]) [data-ghost-content],
+body[data-ghost-layer="0"] [data-ghost-content] {
+  display: none !important;
+}
+
+/* Teaser hidden in layer 0 */
+body:not([data-ghost-layer]) [data-ghost-teaser],
+body[data-ghost-layer="0"] [data-ghost-teaser] {
+  display: none !important;
+}
+
+/* Consent prompt hidden in layer 0 */
+body:not([data-ghost-layer]) [data-ghost-consent-prompt],
+body[data-ghost-layer="0"] [data-ghost-consent-prompt] {
+  display: none !important;
+}
+
+/* === LAYER 1: TEASER VISIBLE === */
+/* GHOST teaser visible, full content hidden */
+body[data-ghost-layer="1"] [data-ghost-teaser] {
+  display: block !important;
+}
+
+body[data-ghost-layer="1"] [data-ghost-content="2"] {
+  display: none !important;
+}
+
+/* Consent prompt visible */
+body[data-ghost-layer="1"] [data-ghost-consent-prompt] {
+  display: block !important;
+}
+
+/* === LAYER 2: FULL GHOST VISIBLE === */
+/* All GHOST content visible */
+body[data-ghost-layer="2"] [data-ghost-content] {
+  display: block !important;
+}
+
+body[data-ghost-layer="2"] [data-ghost-teaser] {
+  display: block !important;
+}
+
+/* Consent prompt hidden after consent given */
+body[data-ghost-layer="2"] [data-ghost-consent-prompt] {
+  display: none !important;
+}
+
+/* === GHOST TEASER STYLES === */
+.ghost-teaser {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.08));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 8px;
+  padding: 1.2em 1.5em;
+  margin: 1.5em 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ghost-teaser::before {
+  content: '👻';
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.5em;
+  right: 0.8em;
+  opacity: 0.3;
+}
+
+.ghost-teaser-title {
+  font-weight: 600;
+  color: #a78bfa;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.ghost-teaser-content {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.ghost-teaser-content code {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* === GHOST CONSENT PROMPT === */
+.ghost-consent-prompt {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2em 1.5em;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.ghost-consent-prompt p {
+  margin-bottom: 1em;
+  color: var(--text-muted);
+}
+
+.ghost-consent-buttons {
+  display: flex;
+  gap: 0.8em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ghost-consent-btn {
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-width: 120px;
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="accept"] {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="accept"]:hover {
+  background: #0ea5e9;
+  transform: translateY(-1px);
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="decline"] {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="decline"]:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.ghost-consent-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === GHOST CONTENT CONTAINER === */
+.ghost-content {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(56, 189, 248, 0.05));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin: 1.5em 0;
+}
+
+.ghost-content-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+  padding-bottom: 0.8em;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.ghost-content-icon {
+  font-size: 1.2rem;
+}
+
+.ghost-content-title {
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+/* === LIGHT THEME GHOST STYLES === */
+body.theme-light .ghost-teaser {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(56, 189, 248, 0.05));
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+body.theme-light .ghost-content {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(56, 189, 248, 0.03));
+  border-color: rgba(139, 92, 246, 0.15);
+}
+
+/* === OLED THEME GHOST STYLES === */
+body.theme-oled .ghost-teaser {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(56, 189, 248, 0.1));
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+body.theme-oled .ghost-content {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.08));
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* ============================================================
+   ITEM-003: NOSCRIPT FALLBACK ENHANCED
+   Enhanced noscript styles for non-JavaScript users
+   ============================================================ */
+
+/* === NOSCRIPT NOTICE === */
+noscript .noscript-notice {
+  display: block !important;
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.12), rgba(251, 191, 36, 0.08));
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  margin: 1em auto;
+  max-width: var(--max-width);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+noscript .noscript-notice-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+noscript .noscript-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+noscript .noscript-text strong {
+  display: block;
+  color: #eab308;
+  margin-bottom: 0.3em;
+  font-size: 1rem;
+}
+
+noscript .noscript-text p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* === NOSCRIPT CONTENT VISIBILITY === */
+/* Without JavaScript, default to Track B content visibility */
+noscript ~ .content-wrapper [data-requires-track~="C"] {
+  display: none !important;
+}
+
+/* === LIGHT THEME NOSCRIPT === */
+body.theme-light noscript .noscript-notice {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(251, 191, 36, 0.05));
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+/* === OLED THEME NOSCRIPT === */
+body.theme-oled noscript .noscript-notice {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(251, 191, 36, 0.1));
+  border-color: rgba(234, 179, 8, 0.5);
+}
+
+/* === MOBILE RESPONSIVE GHOST === */
+@media (max-width: 640px) {
+  .ghost-consent-buttons {
+    flex-direction: column;
+  }
+  
+  .ghost-consent-btn {
+    width: 100%;
+  }
+  
+  noscript .noscript-notice-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  noscript .noscript-icon {
+    align-self: center;
+  }
+}
+
+/* === PRINT STYLES FOR GHOST === */
+@media print {
+  .ghost-teaser,
+  .ghost-consent-prompt,
+  .ghost-content {
+    display: block !important;
+    background: none;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+  
+  .ghost-content-header {
+    border-bottom-color: #ccc;
+  }
+}

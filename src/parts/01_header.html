@@ -85,6 +85,29 @@
   </section>
 </main>
 
+<!-- ITEM-003: NOSCRIPT FALLBACK -->
+<noscript>
+  <div class="noscript-notice" role="alert" aria-live="polite">
+    <div class="noscript-notice-content">
+      <span class="noscript-icon">⚠️</span>
+      <div class="noscript-text">
+        <strong>JavaScript отключён</strong>
+        <p>Просматривается Track B (Практик). Полная навигация по трекам и интерактивные элементы недоступны. Track C контент скрыт.</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide Track C content when JS is disabled */
+    [data-requires-track~="C"] { display: none !important; }
+    /* Show audience selection as static info */
+    .audience-selection { pointer-events: none; opacity: 0.7; }
+    .audience-card { cursor: default; }
+    .audience-card:hover { transform: none; }
+    /* Default to Track B visual state */
+    .audience-card[data-track="B"] { border-color: var(--accent); background: var(--accent-soft); }
+  </style>
+</noscript>
+
 <div class="content-wrapper">
 
 <!-- TOC PANEL (NEW) -->
