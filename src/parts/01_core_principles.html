@@ -73,8 +73,21 @@
       </tbody>
     </table>
   </div>
+
+  <h4 id="ghost-placement-conditions">📋 Условное размещение GHOST</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Условие</th><th>Размещение</th><th>Причина</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>По умолчанию</strong></td><td>Spine (Description) + LB/AN</td><td>Сохраняет SP для основных инструкций</td></tr>
+        <tr><td><strong>context_window ≤ 4K И User Context недоступен</strong></td><td>System Prompt (одно предложение)</td><td>Исключение только для 4K-Fallback</td></tr>
+      </tbody>
+    </table>
+  </div>
   <div class="callout warn">
-    <strong>⚠️ ИСКЛЮЧЕНИЕ (4K-Fallback):</strong> При контексте ~300 токенов GHOST можно уместить в Description как одно предложение. См. <a href="#four-k-fallback">Раздел 5.12 (4K-Fallback)</a>.
+    <strong>⚠️ 4K-Fallback — редкое исключение:</strong> Всегда предпочитайте Spine + LB/AN для GHOST-токенов. GHOST в SP — только при экстремальном лимите контекста (~300 токенов). См. <a href="#four-k-fallback">Раздел 5.12 (4K-Fallback)</a>.
   </div>
   <p style="font-size:0.85em;color:var(--text-muted)">Карта слоёв GHOST: <a href="#an-ghost">Раздел 5.2</a>.</p>
 
