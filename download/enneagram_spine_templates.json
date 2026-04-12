@@ -1,0 +1,139 @@
+{
+  "types": {
+    "TYPE_1": {
+      "name": "The Reformer",
+      "fixation": "Perfectionism",
+      "passion": "Anger",
+      "desire": "To be good/right",
+      "virtue": "Serenity",
+      "spineTemplate": {
+        "flaw": "Critiques others to avoid feeling wrong",
+        "lie": "If I'm not perfect, I'm worthless",
+        "ghost": "Early criticism for mistakes",
+        "price": "Resentment, perfection paralysis, burnout",
+        "want": "To improve everything to be perfect",
+        "need": "To accept that worth is intrinsic, not earned through perfection"
+      }
+    },
+    "TYPE_2": {
+      "name": "The Helper",
+      "fixation": "Flattery",
+      "passion": "Pride",
+      "desire": "To be loved",
+      "virtue": "Humility",
+      "spineTemplate": {
+        "flaw": "Gives to get - helps others to feel needed and avoid own needs",
+        "lie": "If I'm not helpful, I'm worthless",
+        "ghost": "Early experience where love was conditional on being 'good' or helpful",
+        "price": "Resentment when needs unmet, burnout from over-giving",
+        "want": "To be indispensable to others",
+        "need": "To accept that worth is intrinsic, not earned through service"
+      }
+    },
+    "TYPE_3": {
+      "name": "The Achiever",
+      "fixation": "Vanity",
+      "passion": "Deceit",
+      "desire": "To be valuable",
+      "virtue": "Authenticity",
+      "spineTemplate": {
+        "flaw": "Chameleon - adapts persona to gain approval, loses authentic self",
+        "lie": "If I'm not successful, I don't matter",
+        "ghost": "Recognition/validation was tied to achievements, not being",
+        "price": "Chronic emptiness, can't answer 'who am I' without roles",
+        "want": "To be admired and successful",
+        "need": "To discover and accept authentic self beyond achievements"
+      }
+    },
+    "TYPE_4": {
+      "name": "The Individualist",
+      "fixation": "Melancholy",
+      "passion": "Envy",
+      "desire": "To be unique",
+      "virtue": "Equanimity",
+      "spineTemplate": {
+        "flaw": "Exaggerates uniqueness, rejects the ordinary",
+        "lie": "Something is missing that others have",
+        "ghost": "Felt fundamentally different from family, 'black sheep'",
+        "price": "Emotional volatility, chronic dissatisfaction",
+        "want": "To be understood in their uniqueness",
+        "need": "To find connection through commonality, not just difference"
+      }
+    },
+    "TYPE_5": {
+      "name": "The Investigator",
+      "fixation": "Stinginess",
+      "passion": "Avarice",
+      "desire": "To be competent",
+      "virtue": "Non-attachment",
+      "spineTemplate": {
+        "flaw": "Hoarder of self - withdraws to conserve energy, avoids engagement",
+        "lie": "If I share myself, I'll be depleted or invaded",
+        "ghost": "Early experience of intrusion or neglect leading to self-reliance",
+        "price": "Isolation, missing connection, emotional atrophy",
+        "want": "To understand and master without being depleted",
+        "need": "To engage fully without fear of depletion"
+      }
+    },
+    "TYPE_6": {
+      "name": "The Loyalist",
+      "fixation": "Doubt",
+      "passion": "Fear",
+      "desire": "To be safe",
+      "virtue": "Courage",
+      "spineTemplate": {
+        "flaw": "Tests loyalty, anticipates betrayal, seeks external certainty",
+        "lie": "Without vigilance, catastrophe is inevitable",
+        "ghost": "Significant person left/betrayed without explanation",
+        "price": "Chronic anxiety, paralysis in uncertainty",
+        "want": "Security, guarantees, people who won't leave",
+        "need": "To accept uncertainty as given, find inner guidance"
+      }
+    },
+    "TYPE_7": {
+      "name": "The Enthusiast",
+      "fixation": "Planning",
+      "passion": "Gluttony",
+      "desire": "To be satisfied",
+      "virtue": "Sobriety",
+      "spineTemplate": {
+        "flaw": "Escapes pain through constant stimulation and future planning",
+        "lie": "If I stay busy enough, I won't feel pain or emptiness",
+        "ghost": "Early deprivation or pain, learned to escape through fantasy/activity",
+        "price": "Never present, superficial relationships, running from self",
+        "want": "To experience everything, avoid limitation",
+        "need": "To stay present with pain and find depth in limitation"
+      }
+    },
+    "TYPE_8": {
+      "name": "The Challenger",
+      "fixation": "Vengeance",
+      "passion": "Lust",
+      "desire": "To be strong",
+      "virtue": "Innocence",
+      "spineTemplate": {
+        "flaw": "Dominates to prevent being controlled, rejects vulnerability",
+        "lie": "Showing weakness invites exploitation",
+        "ghost": "Was in situation where powerlessness caused pain",
+        "price": "Intimacy barriers, burns bridges, lonely at the top",
+        "want": "Control, strength, protection of territory",
+        "need": "To discover that vulnerability is strength, not weakness"
+      }
+    },
+    "TYPE_9": {
+      "name": "The Peacemaker",
+      "fixation": "Indolence",
+      "passion": "Sloth",
+      "desire": "To have peace",
+      "virtue": "Action",
+      "spineTemplate": {
+        "flaw": "Merges with others, loses self to avoid conflict and maintain harmony",
+        "lie": "If I assert myself, I'll disrupt peace and be rejected",
+        "ghost": "Self-assertion caused conflict or rejection",
+        "price": "Passive aggression, lost identity, resentment from self-abandonment",
+        "want": "To maintain harmony and avoid conflict",
+        "need": "To assert self without destroying connection"
+      }
+    }
+  }
+}

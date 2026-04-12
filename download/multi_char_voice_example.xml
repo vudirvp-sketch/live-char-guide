@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ITEM-015: Multi-Character Voice Isolation Example -->
+<multi-character-scene>
+  <metadata>
+    <title>Multi-Character Voice Isolation</title>
+    <characters>
+      <character id="elena">
+        <name>Elena Vasquez</name>
+        <enneagram>1w2</enneagram>
+        <voice>
+          <style>Precise, measured, formal</style>
+          <signature>Pauses before important statements, uses precise language</signature>
+          <avoids>Slang, emotional language, contractions</avoids>
+        </voice>
+      </character>
+      <character id="marcus">
+        <name>Marcus Chen</name>
+        <enneagram>8w9</enneagram>
+        <voice>
+          <style>Terse, military-influenced, direct</style>
+          <signature>Short sentences, states facts, ends on periods</signature>
+          <avoids>Hedging words ("maybe", "perhaps"), emotional language</avoids>
+        </voice>
+      </character>
+    </characters>
+  </metadata>
+  
+  <comparison>
+    <example type="bad">
+      <title>Voice Bleed (What to Avoid)</title>
+      <text>
+        Elena looked at the report. "I think we should consider the implications carefully," she said thoughtfully.
+        Marcus nodded in agreement. "Yeah, it's pretty strange. We should probably investigate further," he added helpfully.
+      </text>
+      <issue>Both characters sound the same — thoughtful, hedging, similar sentence structure.</issue>
+    </example>
+    
+    <example type="good">
+      <title>Isolated Voices (Target)</title>
+      <text>
+        Elena lifted the report. Her eyes moved across the page.
+        "Consider." She paused. "The Q3 projections show a seventeen percent deviation from expected values."
+        
+        Marcus leaned against the doorframe. Arms crossed.
+        "Deviation's wrong." He jerked his chin at the paper. "Someone cooked the books. You know it. I know it."
+        
+        She didn't look up. "The data requires further analysis pre—"
+        
+        "The data's garbage." He straightened. "Question is what you're gonna do about it."
+      </text>
+      <benefit>Distinct voices: Elena's precision vs Marcus's directness. Each maintains signature patterns.</benefit>
+    </example>
+  </comparison>
+  
+  <implementation-protocol>
+    <step order="1">IDENTIFY speaker before each dialogue exchange</step>
+    <step order="2">APPLY that character's voice constraints</step>
+    <step order="3">MAINTAIN narrative voice in descriptions</step>
+    <step order="4">PREVENT voice bleed: check sentence structure, word choice, emotional display</step>
+  </implementation-protocol>
+</multi-character-scene>

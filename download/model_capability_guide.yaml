@@ -1,0 +1,77 @@
+# Model Capability Guide
+# ITEM-012: Tier classification with capability parameters
+
+capability_tiers:
+  TIER_1_FLAGSHIP:
+    context: "100K+"
+    instructions: "Complex nested"
+    cot: "Full 4-step"
+    consistency: ">90% over 50+ turns"
+    recommended_config: "Full SPINE, Full Anchors, CoT Tier 3"
+    examples:
+      - "Claude 4 Sonnet/Opus"
+      - "GPT-4o"
+      - "Gemini 2.5 Pro"
+      
+  TIER_2_EFFICIENT:
+    context: "32K-100K"
+    instructions: "Multi-step"
+    cot: "3-step"
+    consistency: "75-90% over 30+ turns"
+    recommended_config: "Full SPINE, Enneagram+OCEAN Anchors, CoT Tier 2"
+    examples:
+      - "Llama 3 70B"
+      - "Qwen 2.5 32B/72B"
+      - "Mixtral 8x7B"
+      
+  TIER_3_LIGHTWEIGHT:
+    context: "8K-32K"
+    instructions: "Simple"
+    cot: "2-step"
+    consistency: "60-75% over 20+ turns"
+    recommended_config: "Core 4 SPINE, No Anchors, CoT Tier 1"
+    examples:
+      - "Qwen 2.5 14B"
+      - "Gemma 3 12B"
+      - "Llama 4 Scout 17B"
+      
+  TIER_4_EDGE:
+    context: "<8K"
+    instructions: "Single-task"
+    cot: "No CoT"
+    consistency: "<60% over 10+ turns"
+    recommended_config: "Use pre-generated fallback_4k from Tier 1/2"
+    examples:
+      - "Legacy models with limited context"
+      - "Quantized models under 8B parameters"
+
+sampling_parameters:
+  TIER_1:
+    temperature: "0.85-1.1"
+    top_p: "0.9-0.95"
+    min_p: "0.05"
+    repetition_penalty: "1.05"
+    presence_penalty: "0.0-0.15"
+    
+  TIER_2:
+    temperature: "0.85-1.0"
+    top_p: "0.9-0.95"
+    min_p: "0.05"
+    repetition_penalty: "1.05"
+    presence_penalty: "0.0-0.1"
+    
+  TIER_3:
+    temperature: "0.6-0.8"
+    top_p: "0.9-0.95"
+    min_p: "0.05"
+    repetition_penalty: "1.05"
+    presence_penalty: "0.0 (FIXED)"
+    
+  TIER_4:
+    temperature: "0.5-0.7"
+    top_p: "0.9"
+    min_p: "0.05"
+    repetition_penalty: "1.05"
+    presence_penalty: "0.0 (FIXED)"
+
+brand_names_note: "Brand names listed as 'Current Examples (Q2 2026)'. Always check latest model capabilities."

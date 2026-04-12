@@ -464,6 +464,71 @@ No smart typography. If conflict → default to Examples.
 // Замени [...] на систему разметки из твоих Examples.</code></pre>
         </div>
       </div>
+      
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- ITEM-009: CARD VALIDATION PANEL -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      
+      <div id="card-validator" class="card-validator-panel" style="margin-top: 2em; padding: 1.5em; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-surface);">
+        <h4 style="margin-top: 0;">🎯 Валидация карточки</h4>
+        <p style="font-size: 0.9em; color: var(--text-muted);">Проверьте карточку перед экспортом на наличие пустых полей и placeholder-текста.</p>
+        
+        <div class="card-validator-fields" style="display: grid; gap: 0.8em; margin: 1em 0;">
+          <label style="display: flex; flex-direction: column; gap: 0.3em;">
+            <span style="font-weight: 500;">Имя персонажа <span style="color: #ef4444;">*</span></span>
+            <input type="text" id="card-name" data-card-field="name" placeholder="Имя персонажа" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 0.3em;">
+            <span style="font-weight: 500;">FLAW (Изъян) <span style="color: #ef4444;">*</span></span>
+            <textarea id="card-flaw" data-card-field="flaw" placeholder="Конкретное поведение персонажа..." rows="2" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); resize: vertical;"></textarea>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 0.3em;">
+            <span style="font-weight: 500;">WANT (Хочет) <span style="color: #ef4444;">*</span></span>
+            <input type="text" id="card-want" data-card-field="want" placeholder="Что персонаж осознанно хочет" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 0.3em;">
+            <span style="font-weight: 500;">NEED (Нужно) <span style="color: #ef4444;">*</span></span>
+            <input type="text" id="card-need" data-card-field="need" placeholder="Что персонаж действительно нуждается" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 0.3em;">
+            <span style="font-weight: 500;">LIE (Ложь)</span>
+            <input type="text" id="card-lie" data-card-field="lie" placeholder="Во что персонаж верит (ложная установка)" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 0.3em;">
+            <span style="font-weight: 500;">GHOST (Тень)</span>
+            <textarea id="card-ghost" data-card-field="ghost" placeholder="Событие прошлого, сформировавшее FLAW/LIE..." rows="2" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); resize: vertical;"></textarea>
+          </label>
+        </div>
+        
+        <div class="card-validator-actions" style="display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap;">
+          <button id="card-validate-btn" type="button" style="padding: 0.6em 1.2em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Проверить</button>
+          <button id="card-export-btn" type="button" disabled style="padding: 0.6em 1.2em; background: var(--bg-elevated); color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; cursor: not-allowed; font-weight: 500;">Экспорт</button>
+          <span id="card-validation-status" class="card-validation-status" style="font-size: 0.9em;"></span>
+        </div>
+        
+        <div class="callout tip" style="margin-top: 1em;">
+          <strong>💡 Правила валидации:</strong>
+          <ul style="margin: 0.3em 0 0 0; padding-left: 1.5em;">
+            <li>Обязательные поля: name, flaw, want, need</li>
+            <li>Placeholder-текст (<code>[Описание]</code>, <code>&lt;field&gt;</code>, <code>your name</code>) блокирует экспорт</li>
+            <li>LIE и GHOST опциональны, но рекомендуются для полных карточек</li>
+          </ul>
+        </div>
+      </div>
+      
+      <style>
+        .card-validation-status.valid { color: #22c55e; }
+        .card-validation-status.invalid { color: #ef4444; }
+        #card-export-btn:not(:disabled) { 
+          background: #22c55e; 
+          color: #fff; 
+          cursor: pointer; 
+          border-color: #22c55e; 
+        }
+        #card-export-btn:not(:disabled):hover { 
+          background: #16a34a; 
+        }
+      </style>
     </section>
 
     <hr>
