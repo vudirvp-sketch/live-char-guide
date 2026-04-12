@@ -54,7 +54,7 @@
           </div>
           <div class="inf-layer inf-layer-4">
             <div class="inf-layer-label">КОНТЕКСТ</div>
-            <div class="inf-layer-content">Авторские заметки (AN) + Лорбук (триггеры GHOST, динамика WANT→NEED)</div>
+            <div class="inf-layer-content">AN + LB (триггеры GHOST, динамика WANT→NEED)</div>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
             <tr><td><strong>Процессуальные правила</strong></td><td>Детерминация поведения</td><td>6 правил (см. выше)</td><td>Статика → динамика, абстракция → действие</td></tr>
             <tr><td><strong>Поведенческая оболочка</strong></td><td>Психология → наблюдаемые действия</td><td>Anchors + Examples + Greeting</td><td>Голос не описывается, а демонстрируется</td></tr>
             <tr><td><strong>Технические ограничения</strong></td><td>Защита от «улетания» и поломки стиля</td><td>System Prompt + XML-теги + Параметры генерации</td><td>Антигодмодинг, фиксация лица/времени, пространственная когерентность</td></tr>
-            <tr><td><strong>Динамический контекст</strong></td><td>Живость в длинных сессиях</td><td>Авторские заметки + Лорбук</td><td>Обновление состояния, GHOST-триггеры, WANT→NEED арка</td></tr>
+            <tr><td><strong>Динамический контекст</strong></td><td>Живость в длинных сессиях</td><td>AN + LB</td><td>Обновление состояния, GHOST-триггеры, WANT→NEED арка</td></tr>
             <tr><td><strong>Валидация</strong></td><td>Диагностика сбоев</td><td>Чеклист + Предгенерационный фильтр</td><td>Самовосстановление при деградации</td></tr>
           </tbody>
         </table>
@@ -187,15 +187,16 @@
               <td>Стандартный случай</td>
             </tr>
             <tr>
-              <td><strong>Приоритет 2 (Условное исключение)</strong></td>
-              <td>GHOST может появляться в System Prompt</td>
+              <td><strong>Приоритет 2 (4K-Fallback)</strong></td>
+              <td>GHOST ужимается до одного предложения в Description: <code>[GHOST: &lt;краткая формулировка&gt;]</code></td>
               <td>
                 <strong>ТОЛЬКО если:</strong>
                 <ul>
-                  <li>Карточка использует 4K-Fallback конфигурацию (~300 токенов)</li>
-                  <li>Исключение явно документировано в метаданных карточки</li>
-                  <li>Причина указана: [4K-Fallback: GHOST в SP]</li>
+                  <li>Контекст ≤ 4K — Лорбук и AN недоступны</li>
+                  <li>GHOST <strong>не в SP</strong> — всегда в Description</li>
+                  <li>Причина указана: [4K-Fallback: GHOST в Description]</li>
                 </ul>
+                <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#ghost-placement-conditions">Условное размещение GHOST</a>]</span>
               </td>
             </tr>
           </tbody>

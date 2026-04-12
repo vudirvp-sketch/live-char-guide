@@ -298,8 +298,8 @@ Entry: При упоминании семьи или контроля — нап
 
       <h4>Шаг 6. 📊 Настройки сэмплирования</h4>
       <ul>
-        <li><strong>12B–14B:</strong> temperature=0.7, top_p=0.9, min_p=0.05, repetition_penalty=1.05, top_k=50, <strong>presence_penalty=0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</strong></li>
-        <li><strong>32B+ / API:</strong> temperature=0.95, top_p=0.95, min_p=0.05, repetition_penalty=1.05, top_k=50, presence_penalty=0.0–0.15</li>
+        <li data-model="12B"><strong>12B–14B:</strong> temperature=0.7, top_p=0.9, min_p=0.05, repetition_penalty=1.05, top_k=50, <strong>presence_penalty=0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</strong></li>
+        <li data-model="32B"><strong>32B+ / API:</strong> temperature=0.95, top_p=0.95, min_p=0.05, repetition_penalty=1.05, top_k=50, presence_penalty=0.0–0.15</li>
       </ul>
       <p style="font-size:0.9em;">⚠️ Quick Start — минимальный набор для старта. Цены, полные Enneagram/OCEAN и AN подключаются по мере роста контекста (см. <a href="#anchors">Разделы 3</a>–<a href="#style-fix">5</a>).</p>
       <p style="font-size:0.85em; color:var(--text-muted);"><em>Примечание:</em> T=0.7 (12B) и T=0.95 (32B+) — среднее значение диапазона. Для тонкой настройки используй диапазоны из <a href="#sampling">Раздел 5.1</a>.</p>
@@ -313,7 +313,7 @@ Entry: При упоминании семьи или контроля — нап
           <tbody>
             <tr><td>Персонаж забывает речевые тики</td><td><code>presence_penalty</code> захардкожен на <strong>0.7</strong></td><td><strong>Для 12B:</strong> поставь 0.0 (обязательно). <strong>Для 32B+:</strong> 0.0–0.15. Некоторые интерфейсы хардкодят 0.7 — меняй на ручной.</td></tr>
             <tr><td>Персонаж пишет за {{user}}</td><td>Нет антигодмодинга в SP</td><td><a href="#antigodmoding">→ Раздел 5.0.1</a></td></tr>
-            <tr><td>Персонаж стал плоским и пресным</td><td>T выше 0.85 для модели 12B</td><td>Снизь T до 0.6–0.8</td></tr>
+            <tr data-model="12B"><td>Персонаж стал плоским и пресным</td><td>T выше 0.85 для модели 12B</td><td>Снизь T до 0.6–0.8</td></tr>
           </tbody>
         </table>
       </div>

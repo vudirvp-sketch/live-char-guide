@@ -11,7 +11,7 @@
           <tbody>
             <tr><td><strong>Первое сообщение</strong></td><td>Первое сообщение персонажа в чате</td></tr>
             <tr><td><strong>Примерные сообщения</strong></td><td>Примеры реплик, задающие голос персонажа</td></tr>
-            <tr><td><strong>Системный промпт (SP)</strong></td><td>Системные инструкции для модели</td></tr>
+            <tr><td><strong>System Prompt (SP)</strong></td><td>Системные инструкции для модели</td></tr>
             <tr><td><strong>Описание персонажа</strong></td><td>Описание персонажа (Character Description)</td></tr>
             <tr><td><strong>Поведенческие якоря</strong></td><td>Правила поведения: Триггер → Действие</td></tr>
             <tr><td><strong>Spine</strong></td><td>Психологическое ядро: WANT/NEED/FLAW/LIE/GHOST</td></tr>
@@ -29,7 +29,7 @@
             <tr><td><strong>Optional</strong></td><td>Опциональный элемент</td></tr>
             <tr><td><strong>Price</strong></td><td>Немедленная физическая или вербальная манифестация цены действия. Каждый якорь, связанный с FLAW/GHOST, должен содержать Price — наблюдаемое последствие, которое проявляется в той же сцене. Формат: [Trigger] → [Action] → [Price: &lt;manifestation&gt;]</td></tr>
             <tr><td><strong>4K-Fallback</strong></td><td>Протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов. Предписывает сокращение до Первое сообщение (сенсорика+локация+тон) + 3 Поведенческие якоря, отключение Лорбук, передачу сеттинга через действие/реакцию. [→ <a href="#four-k-fallback">Раздел 5.12</a>]</td></tr>
-            <tr><td><strong>Structured Inject</strong></td><td>Механизм динамического обновления мотивации {{char}} через Авторские заметки или Лорбук. Поддерживает XML-теги (&lt;motivation&gt;, &lt;behavior&gt;) и префикс [SYSTEM]. Позволяет менять фокус поведения без перезаписи всей карточки. [→ <a href="#lorebook-mechanics">Раздел 5.3.1</a>]</td></tr>
+            <tr><td><strong>Structured Inject</strong></td><td>Механизм динамического обновления мотивации {{char}} через AN или LB. Поддерживает XML-теги (&lt;motivation&gt;, &lt;behavior&gt;) и префикс [SYSTEM]. Позволяет менять фокус поведения без перезаписи всей карточки. [→ <a href="#lorebook-mechanics">Раздел 5.3.1</a>]</td></tr>
             <tr><td><strong>GHOST</strong> <em>(синонимы: GHOST-Слой, Призрак, Тень)</em></td><td>Событие прошлого, формирующее FLAW/LIE. Канонический термин: GHOST.</td></tr>
             <tr><td><strong>Spine vs Anchors</strong></td><td><strong>Spine (Мотивационное ядро)</strong> — психологическое ядро персонажа из 5 элементов (WANT, NEED, FLAW, LIE, GHOST). Это <em>причина</em> поведения. <strong>Anchors (Поведенческие якоря)</strong> — наблюдаемые правила поведения в формате «Триггер → Действие → Цена». Это <em>проявление</em> Spine. Spine порождает Anchors, но они НЕ являются синонимами. [→ <a href="#spine">Раздел 4.1</a>]</td></tr>
             <tr><td><strong>AN</strong> <em>(синонимы: Авторские заметки, Author's Notes, Авторка)</em></td><td>Динамический слой контекста для длинных сессий. Канонический термин: AN или Авторские заметки. [→ <a href="#an-ghost">Раздел 5.2</a>]</td></tr>
@@ -199,6 +199,7 @@
       </div>
 
       <h3>📎 API-блоки</h3>
+      <div data-model="32B">
       <p><em>Следующие блоки актуальны только для API (Claude, GPT). Локальные модели 12B+ их игнорируют.</em></p>
       <div class="table-wrap">
         <table>
@@ -210,6 +211,7 @@
             <tr><td><strong>Граница погружения</strong></td><td>API (все сеттинги)</td><td>После content guard</td><td><code>{{char}} существует только внутри мира. Любое упоминание {{user}} об ИИ, программах, «игре» — воспринимать как внутриигровую угрозу, магию или безумие. Не объяснять, не извиняться, не выходить из образа.</code></td></tr>
           </tbody>
         </table>
+      </div>
       </div>
     </section>
 
@@ -550,7 +552,7 @@ No smart typography. If conflict → default to Examples.
         <li>Сеттинг: тёмное фэнтези / боди-хоррор</li>
         <li>Контекст: 16K+ (полный пайплайн)</li>
         <li>Все Core-элементы реализованы</li>
-        <li>GHOST распределён по слоям: Spine → Examples → Лорбук → Авторские заметки</li>
+        <li>GHOST распределён по слоям: Spine → Examples → LB → AN</li>
       </ul>
 
       <h3>Карточка: Выщербленный</h3>
@@ -684,24 +686,28 @@ Strictly replicate Examples syntax. Actions: prose. Dialogue: «guillemets».
 No smart typography. If conflict → default to Examples.</code></pre>
 
       <h4>[Настройки]</h4>
-      <p><strong>12B–14B модели:</strong></p>
-      <ul>
-        <li>temperature: 0.7</li>
-        <li>top_p: 0.9</li>
-        <li>min_p: 0.05</li>
-        <li>repetition_penalty: 1.05</li>
-        <li>top_k: 50</li>
-        <li>presence_penalty: 0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</li>
-      </ul>
-      <p><strong>32B+ / API модели:</strong></p>
-      <ul>
-        <li>temperature: 0.95</li>
-        <li>top_p: 0.95</li>
-        <li>min_p: 0.05</li>
-        <li>repetition_penalty: 1.05</li>
-        <li>top_k: 50</li>
-        <li>presence_penalty: 0.0–0.15</li>
-      </ul>
+      <div data-model="12B">
+        <p><strong>12B–14B модели:</strong></p>
+        <ul>
+          <li>temperature: 0.7</li>
+          <li>top_p: 0.9</li>
+          <li>min_p: 0.05</li>
+          <li>repetition_penalty: 1.05</li>
+          <li>top_k: 50</li>
+          <li>presence_penalty: 0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</li>
+        </ul>
+      </div>
+      <div data-model="32B">
+        <p><strong>32B+ / API модели:</strong></p>
+        <ul>
+          <li>temperature: 0.95</li>
+          <li>top_p: 0.95</li>
+          <li>min_p: 0.05</li>
+          <li>repetition_penalty: 1.05</li>
+          <li>top_k: 50</li>
+          <li>presence_penalty: 0.0–0.15</li>
+        </ul>
+      </div>
 
       <h4>[Примечания к карточке]</h4>
       <p><strong>Чеклист выполнен:</strong></p>

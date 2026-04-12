@@ -124,11 +124,11 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <h3 id="an-ghost">5.2 📝 Авторские заметки + GHOST по слоям</h3>
+      <h3 id="an-ghost">5.2 📝 Author's Notes (AN) + GHOST по слоям</h3>
       <p><span class="tag opt">Optional</span></p>
       <p><strong>Что это:</strong> Динамический слой контекста, 100–200 токенов.</p>
       <p><strong>Зачем:</strong> Единственный механизм «оживления» персонажа в длинных сессиях. Обновляет состояние, подчёркивает слепые зоны, усиливает GHOST-реакции, отслеживает динамику WANT→NEED.</p>
-      <p><strong>Куда класть:</strong> Поле Авторские заметки в интерфейсе. В любом месте system-блока — порядок не критичен.</p>
+      <p><strong>Куда класть:</strong> Поле Author's Notes (AN) в интерфейсе. В любом месте system-блока — порядок не критичен.</p>
       <p><strong>Когда можно выкинуть:</strong> При контексте 4K — AN слишком дорог по токенам. В этом случае используй статический SP + обновляй Description между сессиями. <strong>Исключение для GHOST при 4K:</strong> см. <a href="#four-k-fallback">Раздел 5.12 (4K-Fallback)</a> — GHOST можно уместить в Description как одно предложение.</p>
 
  <p><strong>По размеру контекста:</strong></p>
@@ -213,7 +213,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
             <tr><td>Описание персонажа (Spine)</td><td>Определение</td><td>Что именно произошло / какой паттерн</td></tr>
             <tr><td>Примерные сообщения</td><td>Демонстрация</td><td>Как GHOST проявляется в поведении</td></tr>
             <tr><td>Лорбук</td><td>Триггеры</td><td>Сенсорные ключи (keyword) или сюжетные точки (range), активирующие GHOST</td></tr>
-            <tr><td>Авторские заметки</td><td>Текущее состояние</td><td>Динамический [GHOST-активация]: что сработало в сессии</td></tr>
+            <tr><td>AN</td><td>Текущее состояние</td><td>Динамический [GHOST-активация]: что сработало в сессии</td></tr>
             <tr><td>System Prompt</td><td>❌ Не дублировать</td><td>Здесь — только стиль и запреты</td></tr>
           </tbody>
         </table>
@@ -423,8 +423,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
             <tr><th>Модель</th><th>Стратегия</th></tr>
           </thead>
           <tbody>
-            <tr><td>12B–14B</td><td>Базовая строка в SP: <code>Думай как персонаж, реагируй телом раньше слов</code>. Развёрнутый вариант — через AN (4–5 пунктов; см. <a href="#cot">Раздел 5.4 (CoT)</a> для шаблона)</td></tr>
-            <tr><td>32B+ и API</td><td>Не включать. Модели имеют встроенное рассуждение</td></tr>
+            <tr data-model="12B"><td>12B–14B</td><td>Базовая строка в SP: <code>Думай как персонаж, реагируй телом раньше слов</code>. Развёрнутый вариант — через AN (4–5 пунктов; см. <a href="#cot">Раздел 5.4 (CoT)</a> для шаблона)</td></tr>
+            <tr data-model="32B"><td>32B+ и API</td><td>Не включать. Модели имеют встроенное рассуждение</td></tr>
             <tr><td>4K контекст</td><td>Только базовое правило в SP. CoT в AN конкурирует с диалогом</td></tr>
           </tbody>
         </table>
@@ -473,7 +473,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
   В росте: Fi — эмоциональная открытость.
 &lt;/mbti&gt;  [Optional — для авторов, использующих MBTI-фреймворк]</code></pre>
 
-      <div class="callout warn" data-models="32B">
+      <div class="callout warn" data-model="32B">
         <strong>⚠ Важно:</strong> <code>&lt;speech_style&gt;</code> — <strong>[32B+/API ONLY — remove for 12B/14B]</strong>. Для моделей ≤14B блок удаляется: голос задаётся исключительно через <code>Примерные сообщения</code>. Любые стилистические директивы в Description для 12B конфликтуют с примерами или игнорируются моделью.
       </div>
 
@@ -542,7 +542,7 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
         </table>
       </div>
 
-      <p><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Before output: body-first, zero meta, observe {{user}} only.</code></p>
+      <p data-model="32B"><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Before output: body-first, zero meta, observe {{user}} only.</code></p>
       <p><em>Связано:</em> <a href="#antigodmoding">Раздел 5.0.1 (Антигодмодинг)</a> — оба механизма работают вместе для предотвращения нарушения user agency: Предгенерационный фильтр проверяет реплику перед генерацией, а Антигодмодинг устанавливает базовый запрет на действия за {{user}}.</p>
       </div>
 
@@ -671,7 +671,7 @@ When multiple characters are present, write reactions for ALL active characters 
         <ul>
           <li><strong>Каждый персонаж = свой GHOST</strong>. Не дели один GHOST между несколькими — модель не различит, чья травма.</li>
           <li><strong>GHOST персонажей могут пересекаться</strong> (два героя одной катастрофы), но <strong>формулировки различны</strong>: каждый видит одно событие через свою оптику.</li>
-          <li><strong>Для 12B:</strong> GHOST второстепенных персонажей лучше убрать — оставь только у {{char}}. Второстепенные работают на Anchors alone.</li>
+          <li data-model="12B"><strong>Для 12B:</strong> GHOST второстепенных персонажей лучше убрать — оставь только у {{char}}. Второстепенные работают на Anchors alone.</li>
           <li><strong>Лорбук-стратегия:</strong> GHOST каждого персонажа = отдельная sticky-запись с keyword-триггером на имя персонажа.</li>
         </ul>
       </div>
@@ -710,20 +710,24 @@ When multiple characters are present, write reactions for ALL active characters 
 
       <h4 style="margin-top:1.5em">🤖 Различия для моделей</h4>
       <div class="callout tip">
-        <p><strong>12B модели:</strong></p>
-        <ul>
-          <li>Максимум 2 активных персонажа одновременно</li>
-          <li>Второстепенный персонаж = только Anchors (без Spine/GHOST)</li>
-          <li>Примеры: минимум 3 блока для {{char}}, 1–2 для {{char2}}</li>
-          <li>Явные маркеры в SP: «{{char}} speaks in [X style], {{char2}} speaks in [Y style]»</li>
-        </ul>
-        <p style="margin-top:0.8em"><strong>32B+ модели:</strong></p>
-        <ul>
-          <li>До 4 активных персонажей (но 3 оптимально)</li>
-          <li>Каждый персонаж = полная карточка через Лорбук</li>
-          <li>Примеры: минимум 2 блока для каждого</li>
-          <li>Модель различает голоса автоматически при достаточных Examples</li>
-        </ul>
+        <div data-model="12B">
+          <p><strong>12B модели:</strong></p>
+          <ul>
+            <li>Максимум 2 активных персонажа одновременно</li>
+            <li>Второстепенный персонаж = только Anchors (без Spine/GHOST)</li>
+            <li>Примеры: минимум 3 блока для {{char}}, 1–2 для {{char2}}</li>
+            <li>Явные маркеры в SP: «{{char}} speaks in [X style], {{char2}} speaks in [Y style]»</li>
+          </ul>
+        </div>
+        <div data-model="32B">
+          <p style="margin-top:0.8em"><strong>32B+ модели:</strong></p>
+          <ul>
+            <li>До 4 активных персонажей (но 3 оптимально)</li>
+            <li>Каждый персонаж = полная карточка через Лорбук</li>
+            <li>Примеры: минимум 2 блока для каждого</li>
+            <li>Модель различает голоса автоматически при достаточных Examples</li>
+          </ul>
+        </div>
       </div>
           </div>
         </div>
@@ -747,9 +751,20 @@ When multiple characters are present, write reactions for ALL active characters 
           </tbody>
         </table>
       </div>
-      <div class="callout warn" style="margin-top:1em">
-        <strong>⚠️ GHOST при 4K — исключение из правила:</strong><br>
-        При стандартном пайплайне GHOST <strong>запрещён в SP</strong> [<a href="#an-ghost">→ Раздел 5.2</a>]. Однако при 4K контексте Лорбук и AN недоступны — GHOST можно уместить в Description как <strong>одно предложение</strong>: <code>[GHOST: &lt;краткая формулировка события&gt;]</code>. Это единственное исключение. Стандартная практика: GHOST в Лорбук/AN, никогда в SP.
+      <h4 id="ghost-placement-conditions">📍 Условное размещение GHOST</h4>
+      <div class="table-wrap" style="margin-top:0.5em">
+        <table>
+          <thead>
+            <tr><th>Условие</th><th>Размещение</th><th>Обоснование</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>По умолчанию</strong></td><td>Лорбук / AN (User Context)</td><td>Сохраняет SP для основных инструкций; GHOST активируется по триггеру</td></tr>
+            <tr><td><strong>context_window ≤ 4K</strong> AND Лорбук/AN недоступны</td><td>Описание (Description) — одно предложение: <code>[GHOST: &lt;краткая формулировка&gt;]</code></td><td>Fallback-исключение: при 4K нет Лорбука и AN, поэтому GHOST ужимается до одной строки в Description</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:0.8em">
+        <strong>⚠️ GHOST запрещён в SP</strong> при любом условии. Единственное исключение — 4K-fallback, где GHOST идёт в <em>Description</em>, а не в SP. Стандартная практика: GHOST в Лорбук/AN, никогда в SP. [<a href="#an-ghost">→ Раздел 5.2</a>]
       </div>
       <p><strong>Примечание:</strong> При 4K GHOST входит в token-бюджет Description. Если бюджет критически tight (~300 токенов на всю карточку), GHOST можно опустить — персона работает на Spine без GHOST в прототипном режиме.</p>
           </div>
@@ -830,7 +845,7 @@ top_p: 0.9
           </thead>
           <tbody>
             <tr><td>Персонаж повторяется</td><td>Все</td><td>presence_penalty = 0.0 (не 0.7!)</td></tr>
-            <tr><td>GHOST не активируется</td><td>LM Studio</td><td>Нет Лорбука → добавь в SP или AN</td></tr>
+            <tr><td>GHOST не активируется</td><td>LM Studio</td><td>Нет Лорбука → добавь в Description (одно предложение) или AN <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#ghost-placement-conditions">Условное размещение GHOST</a>]</span></td></tr>
             <tr><td>Голос «усредняется»</td><td>KoboldCPP</td><td>Memory переполнен → сократи AN</td></tr>
             <tr><td>Обрываются реплики</td><td>SillyTavern</td><td>Увеличь max_response_length</td></tr>
             <tr><td>Модель пишет за user</td><td>Все</td><td>Проверь антигодмодинг в SP</td></tr>

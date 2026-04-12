@@ -150,6 +150,7 @@ content: [GHOST-триггер]</code></pre>
       <p><strong>Симптом:</strong> Персонаж «слишком идеальный», FLAW не имеет последствий.</p>
       <p><strong>Решение:</strong> Цена = немедленная физическая или вербальная манифестация. Не «позже», не «навсегда», а сейчас. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#core-principles">Правило §2</a>]</span></p>
 
+      <div data-model="12B">
       <h3>❌ Анти-паттерн 6: Голос в Description (для 12B)</h3>
       <p><strong>Проблема:</strong> Стилистические директивы в Description для моделей ≤14B.</p>
       <div class="table-wrap">
@@ -180,6 +181,7 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Для 12B: конфликт с Examples или игнорирование директив.</p>
       <p><strong>Решение:</strong> Для ≤14B: удали все стилистические директивы из Description. Голос — только в Examples. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#core-principles">Правило §3</a>]</span></p>
+      </div>
 
       <h3>❌ Анти-паттерн 7: Годмодинг в LB content</h3>
       <p><strong>Проблема:</strong> Действия/мысли {{user}} в поле content Лорбука.</p>
@@ -239,7 +241,7 @@ content: [GHOST-триггер]</code></pre>
         <li>☐ Нет вложенных якорей (якорь не триггерит другой якорь)</li>
         <li>☐ Description ≤ 1000 токенов, только поведенчески значимые детали</li>
         <li>☐ Price манифестируется немедленно в сцене</li>
-        <li>☐ Для 12B: нет стилистических директив в Description</li>
+        <li data-model="12B">☐ Для 12B: нет стилистических директив в Description</li>
         <li>☐ Нет действий/мыслей {{user}} в LB content</li>
         <li>☐ RepPen ≤ 1.10</li>
       </ul>
