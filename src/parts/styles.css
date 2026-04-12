@@ -4341,3 +4341,110 @@ body:not(.model-12B):not(.model-32B) .content[data-model] { display: block; }
   content: '→';
   color: var(--accent);
 }
+
+/* === ID: D1 | DEPENDENCY MAP === */
+.dependency-map {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1.5em 0;
+}
+
+.dependency-map h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.dependency-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 1em;
+}
+
+.dependency-graph {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.dependency-graph svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.dependency-graph figcaption {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+.dep-node-link {
+  text-decoration: none;
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.dep-node rect {
+  transition: all var(--transition-fast);
+}
+
+.dep-node:hover rect {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+.dep-node-core:hover rect {
+  stroke-width: 3;
+}
+
+.dep-node-opt:hover rect {
+  stroke-width: 2;
+}
+
+.dep-layer-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dep-quick-ref {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid var(--border);
+}
+
+.dep-quick-ref h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.dep-quick-ref ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.dep-quick-ref li {
+  margin: 0.3em 0;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.dep-quick-ref li strong {
+  color: var(--text);
+}
+
+/* Light theme adjustments for dependency map */
+body.theme-light .dependency-graph svg text {
+  fill: var(--text);
+}
+
+body.theme-light .dep-node-link rect[fill="var(--bg)"] {
+  fill: var(--bg-surface-light);
+}

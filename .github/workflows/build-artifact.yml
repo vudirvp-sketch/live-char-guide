@@ -56,6 +56,18 @@ jobs:
         continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: pnpm test
 
+      # === ID: F1 | CI Duplicate Detection ===
+      - name: Check for duplicates
+        run: |
+          python scripts/check_duplicates.py --parts-dir src/parts --min-length 100 --threshold 0.9
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+
+      # === ID: F2 | CI Terminology Validation ===
+      - name: Validate terminology
+        run: |
+          python scripts/validate_terms.py --glossary src/data/glossary.json --parts-dir src/parts
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
