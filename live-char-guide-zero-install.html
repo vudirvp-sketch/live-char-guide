@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: fa8c0c0a -->
-<!-- Generated: 2026-04-12T11:00:41.459Z -->
+<!-- Build hash: b57d639e -->
+<!-- Generated: 2026-04-12T11:11:56.494Z -->
 <!-- Version: 5.4.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="fa8c0c0a">
+<meta name="build-hash" content="b57d639e">
 <meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-12">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -3462,6 +3462,305 @@ body.theme-oled .audience-card.active {
   }
 }
 
+/* ============================================================
+   ITEM-002: GHOST CONTENT GATING
+   Three-layer progressive disclosure for GHOST content
+   ============================================================ */
+
+/* === LAYER 0: GHOST HIDDEN (Default / Track A) === */
+/* GHOST content completely hidden */
+body:not([data-ghost-layer]) [data-ghost-content],
+body[data-ghost-layer="0"] [data-ghost-content] {
+  display: none !important;
+}
+
+/* Teaser hidden in layer 0 */
+body:not([data-ghost-layer]) [data-ghost-teaser],
+body[data-ghost-layer="0"] [data-ghost-teaser] {
+  display: none !important;
+}
+
+/* Consent prompt hidden in layer 0 */
+body:not([data-ghost-layer]) [data-ghost-consent-prompt],
+body[data-ghost-layer="0"] [data-ghost-consent-prompt] {
+  display: none !important;
+}
+
+/* === LAYER 1: TEASER VISIBLE === */
+/* GHOST teaser visible, full content hidden */
+body[data-ghost-layer="1"] [data-ghost-teaser] {
+  display: block !important;
+}
+
+body[data-ghost-layer="1"] [data-ghost-content="2"] {
+  display: none !important;
+}
+
+/* Consent prompt visible */
+body[data-ghost-layer="1"] [data-ghost-consent-prompt] {
+  display: block !important;
+}
+
+/* === LAYER 2: FULL GHOST VISIBLE === */
+/* All GHOST content visible */
+body[data-ghost-layer="2"] [data-ghost-content] {
+  display: block !important;
+}
+
+body[data-ghost-layer="2"] [data-ghost-teaser] {
+  display: block !important;
+}
+
+/* Consent prompt hidden after consent given */
+body[data-ghost-layer="2"] [data-ghost-consent-prompt] {
+  display: none !important;
+}
+
+/* === GHOST TEASER STYLES === */
+.ghost-teaser {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.08));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 8px;
+  padding: 1.2em 1.5em;
+  margin: 1.5em 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ghost-teaser::before {
+  content: '👻';
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.5em;
+  right: 0.8em;
+  opacity: 0.3;
+}
+
+.ghost-teaser-title {
+  font-weight: 600;
+  color: #a78bfa;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.ghost-teaser-content {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.ghost-teaser-content code {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* === GHOST CONSENT PROMPT === */
+.ghost-consent-prompt {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2em 1.5em;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.ghost-consent-prompt p {
+  margin-bottom: 1em;
+  color: var(--text-muted);
+}
+
+.ghost-consent-buttons {
+  display: flex;
+  gap: 0.8em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ghost-consent-btn {
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-width: 120px;
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="accept"] {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="accept"]:hover {
+  background: #0ea5e9;
+  transform: translateY(-1px);
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="decline"] {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.ghost-consent-btn[data-ghost-consent-btn="decline"]:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.ghost-consent-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* === GHOST CONTENT CONTAINER === */
+.ghost-content {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(56, 189, 248, 0.05));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin: 1.5em 0;
+}
+
+.ghost-content-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+  padding-bottom: 0.8em;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.ghost-content-icon {
+  font-size: 1.2rem;
+}
+
+.ghost-content-title {
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+/* === LIGHT THEME GHOST STYLES === */
+body.theme-light .ghost-teaser {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(56, 189, 248, 0.05));
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+body.theme-light .ghost-content {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(56, 189, 248, 0.03));
+  border-color: rgba(139, 92, 246, 0.15);
+}
+
+/* === OLED THEME GHOST STYLES === */
+body.theme-oled .ghost-teaser {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(56, 189, 248, 0.1));
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+body.theme-oled .ghost-content {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.08));
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* ============================================================
+   ITEM-003: NOSCRIPT FALLBACK ENHANCED
+   Enhanced noscript styles for non-JavaScript users
+   ============================================================ */
+
+/* === NOSCRIPT NOTICE === */
+noscript .noscript-notice {
+  display: block !important;
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.12), rgba(251, 191, 36, 0.08));
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  border-radius: 8px;
+  padding: 1em 1.5em;
+  margin: 1em auto;
+  max-width: var(--max-width);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+noscript .noscript-notice-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+noscript .noscript-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+noscript .noscript-text strong {
+  display: block;
+  color: #eab308;
+  margin-bottom: 0.3em;
+  font-size: 1rem;
+}
+
+noscript .noscript-text p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* === NOSCRIPT CONTENT VISIBILITY === */
+/* Without JavaScript, default to Track B content visibility */
+noscript ~ .content-wrapper [data-requires-track~="C"] {
+  display: none !important;
+}
+
+/* === LIGHT THEME NOSCRIPT === */
+body.theme-light noscript .noscript-notice {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(251, 191, 36, 0.05));
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+/* === OLED THEME NOSCRIPT === */
+body.theme-oled noscript .noscript-notice {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(251, 191, 36, 0.1));
+  border-color: rgba(234, 179, 8, 0.5);
+}
+
+/* === MOBILE RESPONSIVE GHOST === */
+@media (max-width: 640px) {
+  .ghost-consent-buttons {
+    flex-direction: column;
+  }
+  
+  .ghost-consent-btn {
+    width: 100%;
+  }
+  
+  noscript .noscript-notice-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  noscript .noscript-icon {
+    align-self: center;
+  }
+}
+
+/* === PRINT STYLES FOR GHOST === */
+@media print {
+  .ghost-teaser,
+  .ghost-consent-prompt,
+  .ghost-content {
+    display: block !important;
+    background: none;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+  
+  .ghost-content-header {
+    border-bottom-color: #ccc;
+  }
+}
+
 
 </style>
 </head>
@@ -3552,6 +3851,29 @@ body.theme-oled .audience-card.active {
     </button>
   </section>
 </main>
+
+<!-- ITEM-003: NOSCRIPT FALLBACK -->
+<noscript>
+  <div class="noscript-notice" role="alert" aria-live="polite">
+    <div class="noscript-notice-content">
+      <span class="noscript-icon">⚠️</span>
+      <div class="noscript-text">
+        <strong>JavaScript отключён</strong>
+        <p>Просматривается Track B (Практик). Полная навигация по трекам и интерактивные элементы недоступны. Track C контент скрыт.</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Hide Track C content when JS is disabled */
+    [data-requires-track~="C"] { display: none !important; }
+    /* Show audience selection as static info */
+    .audience-selection { pointer-events: none; opacity: 0.7; }
+    .audience-card { cursor: default; }
+    .audience-card:hover { transform: none; }
+    /* Default to Track B visual state */
+    .audience-card[data-track="B"] { border-color: var(--accent); background: var(--accent-soft); }
+  </style>
+</noscript>
 
 <div class="content-wrapper">
 
@@ -9751,6 +10073,335 @@ function initWidthToggle() {
     btn.setAttribute('aria-pressed', isWide ? 'true' : 'false');
   });
 }
+
+// ============================================================================
+// ITEM-002: GHOST CONSENT MODULE
+// ============================================================================
+/**
+ * GhostConsent - Manages GHOST content disclosure with layered progressive approach
+ * 
+ * Layers:
+ * - Layer 0: GHOST hidden in Track A (beginners)
+ * - Layer 1: GHOST teaser appears after SPINE completion (Track B+)
+ * - Layer 2: Full GHOST requires explicit consent with TTL
+ * 
+ * Features:
+ * - Consent persistence with 30-day TTL
+ * - SPINE completion tracking
+ * - Event dispatching for UI updates
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'ghost_consent_data';
+  const TEASER_VIEWED_KEY = 'ghost_teaser_viewed';
+  const SPINE_COMPLETED_KEY = 'spine_sections_completed';
+  const TTL_DAYS = 30;
+  const TTL_MS = TTL_DAYS * 24 * 60 * 60 * 1000;
+
+  // Required SPINE elements for completion check
+  const SPINE_ELEMENTS = ['FLAW', 'LIE', 'WANT', 'NEED'];
+
+  // Private state
+  let consentData = null;
+  let teaserViewed = false;
+  let spineCompleted = false;
+
+  /**
+   * Load consent data from localStorage
+   * @returns {Object|null} Consent data or null if not found/expired
+   */
+  function loadConsentData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+
+      const data = JSON.parse(raw);
+      
+      // Check TTL
+      if (data.timestamp && (Date.now() - data.timestamp > TTL_MS)) {
+        // Expired - clear consent but preserve teaser_viewed flag
+        clearConsent();
+        return null;
+      }
+
+      return data;
+    } catch (e) {
+      console.warn('[GhostConsent] Failed to load consent data:', e.message);
+      return null;
+    }
+  }
+
+  /**
+   * Save consent data to localStorage
+   * @param {boolean} consented - Whether user consented
+   */
+  function saveConsentData(consented) {
+    try {
+      consentData = {
+        consented: consented,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(consentData));
+    } catch (e) {
+      console.warn('[GhostConsent] Failed to save consent:', e.message);
+    }
+  }
+
+  /**
+   * Load teaser viewed state
+   * @returns {boolean}
+   */
+  function loadTeaserViewed() {
+    try {
+      return localStorage.getItem(TEASER_VIEWED_KEY) === 'true';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /**
+   * Save teaser viewed state
+   */
+  function saveTeaserViewed() {
+    try {
+      teaserViewed = true;
+      localStorage.setItem(TEASER_VIEWED_KEY, 'true');
+    } catch (e) {
+      console.warn('[GhostConsent] Failed to save teaser viewed:', e.message);
+    }
+  }
+
+  /**
+   * Check if SPINE sections have been viewed/completed
+   * @returns {boolean}
+   */
+  function checkSpineCompletion() {
+    try {
+      // Check if user has scrolled through SPINE-related sections
+      const spineSections = document.querySelectorAll('[data-spine-element]');
+      if (spineSections.length === 0) {
+        // Fallback: check for sections containing SPINE element IDs
+        const viewed = JSON.parse(localStorage.getItem(SPINE_COMPLETED_KEY) || '[]');
+        return SPINE_ELEMENTS.every(el => viewed.includes(el));
+      }
+      
+      const viewed = [];
+      spineSections.forEach(section => {
+        const element = section.dataset.spineElement;
+        if (element && isElementInViewport(section)) {
+          viewed.push(element);
+        }
+      });
+      
+      return SPINE_ELEMENTS.every(el => viewed.includes(el));
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /**
+   * Check if element is in viewport
+   * @param {HTMLElement} el 
+   * @returns {boolean}
+   */
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  /**
+   * Get current track from NavigationState
+   * @returns {string} 'A', 'B', or 'C'
+   */
+  function getCurrentTrack() {
+    if (window.NavigationState && typeof window.NavigationState.getTrack === 'function') {
+      return window.NavigationState.getTrack();
+    }
+    return 'B'; // Default
+  }
+
+  /**
+   * Check if GHOST content should be visible
+   * @returns {Object} { layer: 0|1|2, canShow: boolean, reason: string }
+   */
+  function getGhostVisibility() {
+    const track = getCurrentTrack();
+    
+    // Layer 0: Track A - always hidden
+    if (track === 'A') {
+      return { layer: 0, canShow: false, reason: 'Track A - GHOST hidden for beginners' };
+    }
+
+    // Check SPINE completion for Track B+
+    const spineComplete = checkSpineCompletion();
+    
+    if (!spineComplete) {
+      return { layer: 0, canShow: false, reason: 'SPINE not completed - prerequisites not met' };
+    }
+
+    // Layer 1: Teaser visible, full content requires consent
+    if (!consentData || !consentData.consented) {
+      return { layer: 1, canShow: true, reason: 'Teaser visible - consent required for full content' };
+    }
+
+    // Layer 2: Full GHOST visible
+    return { layer: 2, canShow: true, reason: 'Full GHOST visible with consent' };
+  }
+
+  /**
+   * Give consent for full GHOST content
+   */
+  function giveConsent() {
+    saveConsentData(true);
+    applyGhostVisibility();
+    
+    window.dispatchEvent(new CustomEvent('ghostconsentchange', {
+      detail: { consented: true, layer: 2 }
+    }));
+
+    console.log('[GhostConsent] Consent given - Layer 2 active');
+  }
+
+  /**
+   * Clear consent (but preserve teaser_viewed flag)
+   */
+  function clearConsent() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      consentData = null;
+      applyGhostVisibility();
+      
+      window.dispatchEvent(new CustomEvent('ghostconsentchange', {
+        detail: { consented: false, layer: teaserViewed ? 1 : 0 }
+      }));
+
+      console.log('[GhostConsent] Consent cleared - teaser_viewed preserved');
+    } catch (e) {
+      console.warn('[GhostConsent] Failed to clear consent:', e.message);
+    }
+  }
+
+  /**
+   * Apply GHOST visibility to DOM
+   */
+  function applyGhostVisibility() {
+    const visibility = getGhostVisibility();
+    const body = document.body;
+
+    // Remove all layer classes
+    body.classList.remove('ghost-layer-0', 'ghost-layer-1', 'ghost-layer-2');
+    
+    // Add current layer class
+    body.classList.add(`ghost-layer-${visibility.layer}`);
+
+    // Update data attribute for CSS targeting
+    body.setAttribute('data-ghost-layer', visibility.layer);
+
+    // Show/hide GHOST content based on layer
+    document.querySelectorAll('[data-ghost-content]').forEach(el => {
+      const requiredLayer = parseInt(el.dataset.ghostContent, 10);
+      el.hidden = visibility.layer < requiredLayer;
+    });
+
+    // Show/hide teaser
+    document.querySelectorAll('[data-ghost-teaser]').forEach(el => {
+      el.hidden = visibility.layer < 1;
+    });
+
+    // Update consent UI if present
+    const consentPrompt = document.querySelector('[data-ghost-consent-prompt]');
+    if (consentPrompt) {
+      consentPrompt.hidden = visibility.layer !== 1;
+    }
+
+    console.log('[GhostConsent] Visibility applied:', visibility);
+  }
+
+  /**
+   * Mark teaser as viewed
+   */
+  function viewTeaser() {
+    saveTeaserViewed();
+    window.dispatchEvent(new CustomEvent('ghostteaserviewed'));
+  }
+
+  /**
+   * Initialize GHOST consent system
+   */
+  function init() {
+    // Load state
+    consentData = loadConsentData();
+    teaserViewed = loadTeaserViewed();
+
+    // Apply initial visibility
+    applyGhostVisibility();
+
+    // Listen for track changes
+    window.addEventListener('trackchange', () => {
+      applyGhostVisibility();
+    });
+
+    // Set up consent button handlers
+    document.querySelectorAll('[data-ghost-consent-btn]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.ghostConsentBtn === 'accept') {
+          giveConsent();
+        } else if (btn.dataset.ghostConsentBtn === 'decline') {
+          viewTeaser(); // Just mark teaser as viewed
+          applyGhostVisibility();
+        }
+      });
+    });
+
+    // Track SPINE section visibility for completion
+    const spineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target.dataset.spineElement;
+          if (element) {
+            try {
+              const viewed = JSON.parse(localStorage.getItem(SPINE_COMPLETED_KEY) || '[]');
+              if (!viewed.includes(element)) {
+                viewed.push(element);
+                localStorage.setItem(SPINE_COMPLETED_KEY, JSON.stringify(viewed));
+              }
+            } catch (e) {}
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-spine-element]').forEach(el => {
+      spineObserver.observe(el);
+    });
+
+    console.log('[GhostConsent] Initialized - Layer:', getGhostVisibility().layer);
+  }
+
+  // Expose API
+  window.GhostConsent = {
+    getVisibility: getGhostVisibility,
+    giveConsent: giveConsent,
+    clearConsent: clearConsent,
+    viewTeaser: viewTeaser,
+    isConsented: () => consentData && consentData.consented,
+    isTeaserViewed: () => teaserViewed,
+    init: init
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 
 // ============================================================================
 // BUG-007 FIX: SERVICE WORKER REGISTRATION (moved from inline script)
