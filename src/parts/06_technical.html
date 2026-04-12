@@ -820,6 +820,111 @@ top_p: 0.9
           </div>
         </div>
       </details>
+
+      <details class="interactive" id="acc-consistency-score">
+        <summary><span><h3 id="consistency-score" style="margin:0;font-size:inherit;display:inline">5.14 📊 Методология Consistency Score</h3> <span class="tag advanced" style="margin-left:0.5em">Advanced</span></span></summary>
+        <div>
+          <div style="padding:0 1.2em 1.2em">
+      <p><strong>Что это:</strong> Стандартизированная методология измерения когерентности персонажа в длинных сессиях. Позволяет объективно оценить, насколько модель следует определению персонажа.</p>
+      <p><strong>Зачем:</strong> Без объективной метрики невозможно определить, работает ли карточка. Consistency Score даёт численную оценку от 0 до 100% с разбивкой по измерениям.</p>
+
+      <h4 style="margin-top:1.5em">📋 Протокол тестирования</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Компонент</th><th>Требование</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Character Card</strong></td><td>Полная карточка с SPINE, Anchors, Examples</td></tr>
+            <tr><td><strong>Test Script</strong></td><td>50+ turns диалога</td></tr>
+            <tr><td><strong>Interaction Types</strong></td><td>questions, challenges, emotional triggers, conflicts</td></tr>
+            <tr><td><strong>Evaluator</strong></td><td>Человек или отдельная LLM-модель</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="margin-top:1.5em">📐 Измерения и веса</h4>
+      <p>Consistency Score вычисляется по 5 измерениям с разными весами:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Измерение</th><th>Вес</th><th>Проверяемые элементы</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Voice Consistency</strong></td><td>25%</td><td>speech patterns, vocabulary, sentence structure</td></tr>
+            <tr><td><strong>Behavioral Consistency</strong></td><td>25%</td><td>FLAW manifestation, WANT-driven decisions, trigger responses</td></tr>
+            <tr><td><strong>Psychological Consistency</strong></td><td>20%</td><td>emotional responses match OCEAN/Enneagram</td></tr>
+            <tr><td><strong>Memory Consistency</strong></td><td>15%</td><td>remembers earlier details, no contradictions</td></tr>
+            <tr><td><strong>Boundary Consistency</strong></td><td>15%</td><td>no fourth-wall breaks, no out-of-character actions</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="margin-top:1.5em">📊 Метод оценки</h4>
+      <p>Каждое измерение оценивается по трёхбалльной шкале:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Оценка</th><th>Значение</th><th>Критерий</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1.0 (Pass)</strong></td><td>Полностью соответствует</td><td>Все проверяемые элементы соответствуют определению персонажа</td></tr>
+            <tr><td><strong>0.5 (Partial)</strong></td><td>Частично соответствует</td><td>Незначительное несоответствие, не ломающее иммерсию</td></tr>
+            <tr><td><strong>0.0 (Fail)</strong></td><td>Не соответствует</td><td>Явное нарушение характера персонажа</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="margin-top:1.5em">🔢 Формула расчёта</h4>
+      <pre><code>Consistency Score = Σ(dimension_score × weight) × 100
+
+Где:
+- dimension_score = среднее всех оценок в измерении
+- weight = вес измерения (из таблицы выше)
+
+Пример:
+Voice: 0.9 × 0.25 = 0.225
+Behavioral: 0.85 × 0.25 = 0.2125
+Psychological: 0.8 × 0.20 = 0.16
+Memory: 0.7 × 0.15 = 0.105
+Boundary: 0.95 × 0.15 = 0.1425
+────────────────────────────
+Total: 0.845 × 100 = 84.5%</code></pre>
+
+      <h4 style="margin-top:1.5em">🎯 Целевые значения</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Score</th><th>Оценка</th><th>Рекомендация</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>90-100%</strong></td><td>Отлично</td><td>Карточка работает стабильно</td></tr>
+            <tr><td><strong>75-89%</strong></td><td>Хорошо</td><td>Минорные улучшения возможны</td></tr>
+            <tr><td><strong>60-74%</strong></td><td>Удовлетворительно</td><td>Требуется доработка SPINE или Anchors</td></tr>
+            <tr><td><strong>&lt;60%</strong></td><td>Неудовлетворительно</td><td>Карточка требует полной переработки</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip" style="margin-top:1em">
+        <strong>💡 Практический пример оценки Voice Consistency:</strong>
+        <p>Персонаж определён с signature phrases: «Consider...», «Precisely.»</p>
+        <p>Оценка 10 случайных реплик из 50-turn сессии:</p>
+        <ul>
+          <li>8 реплик содержат signature phrases или соответствующий стиль → Pass (1.0)</li>
+          <li>1 реплика нейтральна, но не противоречит → Partial (0.5)</li>
+          <li>1 реплика использует сленг (запрещён) → Fail (0.0)</li>
+        </ul>
+        <p>Voice Score = (8×1.0 + 1×0.5 + 1×0.0) / 10 = 0.85</p>
+      </div>
+
+      <div class="callout warn" style="margin-top:1em">
+        <strong>⚠️ ВАЖНО: Автоматизация оценки</strong><br>
+        Для объективности рекомендуется использовать отдельную LLM-модель в роли evaluator. Промпт для evaluator должен включать полное определение персонажа и критерии оценки. Оценка человеком допустима, но может быть субъективной.
+      </div>
+          </div>
+        </div>
+      </details>
     </section>
 
     <hr>
