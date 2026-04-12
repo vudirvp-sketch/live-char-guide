@@ -236,6 +236,60 @@
         <p><strong>ХОЧЕТ:</strong> брать все задачи на себя, чтобы не просить помощи → <strong>НУЖНО:</strong> делегировать или озвучить просьбу хотя бы раз в сцене</p>
       </div>
 
+      <!-- GHOST Content Layer - Hidden for Track A beginners -->
+      <div data-ghost-content="2" data-spine-element="GHOST" style="display: none;">
+        <h4>👻 GHOST: Формирующее событие (Optional — для продвинутых)</h4>
+        <p><span class="tag advanced">Advanced</span> GHOST — событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt, используется в Lorebook или Author's Notes.</p>
+        <div class="callout warn">
+          <strong>⚠️ Правило GHOST:</strong>
+          <p>GHOST = конкретное событие, а не обобщение. Пишется в формате: <code>[Возраст/период] → [Что случилось] → [Что персонаж решил о мире/о себе]</code></p>
+        </div>
+        <div class="callout tip">
+          <strong>💡 Пример GHOST:</strong>
+          <p><strong>Возраст 12:</strong> Отец ушёл, когда мать «перестала его контролировать». <strong>Решение:</strong> «Если я не контролирую — всё развалится». Отсюда FLAW (перехватывает инициативу) и LIE (верит в контроль как защиту).</p>
+        </div>
+        <p style="font-size:0.9em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1 — Мотивационное ядро (Spine)</a></p>
+      </div>
+
+      <!-- GHOST Teaser - Shown after SPINE completion -->
+      <div data-ghost-teaser style="display: none;">
+        <div class="callout tip" style="border-color: var(--accent);">
+          <strong>🔮 Расширенный контент доступен</strong>
+          <p>После изучения базовых элементов (FLAW, LIE, WANT, NEED) вы можете разблокировать продвинутый контент о GHOST — формирующих событиях прошлого.</p>
+          <button class="ghost-consent-btn" data-ghost-consent-btn="accept" style="margin-top: 0.5em; padding: 0.5em 1em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer;">Показать GHOST контент</button>
+        </div>
+      </div>
+
+      <!-- GHOST Consent Prompt -->
+      <div data-ghost-consent-prompt style="display: none;">
+        <div class="callout warn" style="border-color: #eab308;">
+          <strong>⚠️ Продвинутый контент</strong>
+          <p>GHOST содержит материал о травматических событиях прошлого персонажа. Рекомендуется для пользователей, уже ознакомившихся с базовой методологией.</p>
+          <div style="margin-top: 0.5em; display: flex; gap: 0.5em;">
+            <button class="ghost-consent-btn" data-ghost-consent-btn="accept" style="padding: 0.5em 1em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer;">Показать</button>
+            <button class="ghost-consent-btn" data-ghost-consent-btn="decline" style="padding: 0.5em 1em; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">Позже</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GHOST Content - Requires Layer 2 consent -->
+      <div data-ghost-content="2" style="display: none;">
+        <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
+        <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в Лорбук с триггерами.</p>
+        <div class="callout warn">
+          <strong>⚠️ Правило:</strong> GHOST = что случилось, а не психологический вывод. Избегай слов «травма», «пережил» — покажи через конкретное событие.
+        </div>
+        <div class="callout tip">
+          <strong>💡 Пример:</strong>
+          <p><strong>GHOST:</strong> В 12 лет отец ушёл, когда персонаж «не смог удержать семью». С тех пор — вера, что контроль = безопасность.</p>
+          <p style="margin-top:0.5em;font-size:0.85em;">→ Это событие объясняет FLAW (перехватывает контроль) и LIE («если не контролирую — всё развалится»).</p>
+        </div>
+        <p><strong>Триггеры GHOST в Лорбуке:</strong></p>
+        <pre><code>Keywords: отец, семья, уходил, бросал, контроль, безопасность
+Entry: При упоминании семьи или контроля — напряжение в плечах, короткие ответы, избегание темы</code></pre>
+        <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>.</p>
+      </div>
+
       <h4>Шаг 5. 🚫 Антигодмодинг в System Prompt (25–30 токенов)</h4>
       <p><strong>Обязательно.</strong> Добавь в System Prompt:</p>
       <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.

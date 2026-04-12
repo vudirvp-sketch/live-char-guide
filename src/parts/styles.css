@@ -3727,3 +3727,302 @@ body.theme-oled noscript .noscript-notice {
     border-bottom-color: #ccc;
   }
 }
+
+/* ============================================================
+   ITEM-005: OCEAN VALIDATOR STYLES
+   Interactive OCEAN profile validation with 1-2 extremes rule
+   ============================================================ */
+
+/* === OCEAN VALIDATOR PANEL === */
+.ocean-validator-panel {
+  padding: 1.5em;
+  border-radius: 12px;
+  margin-top: 1.5em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+
+.ocean-validator-panel h4 {
+  margin-top: 0;
+  margin-bottom: 1em;
+  color: var(--text);
+}
+
+.ocean-validator-intro {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.ocean-validator-intro p {
+  margin-bottom: 0.8em;
+}
+
+.ocean-validator-intro ul {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.ocean-validator-intro li {
+  margin: 0.4em 0;
+}
+
+/* === OCEAN SLIDER GROUP === */
+.ocean-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+.ocean-slider-label {
+  display: grid;
+  grid-template-columns: 30px 1fr 50px;
+  align-items: center;
+  gap: 1em;
+  padding: 0.8em 1em;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ocean-slider-label:hover {
+  background: var(--accent-soft);
+}
+
+.trait-letter {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.ocean-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--border);
+  appearance: none;
+  cursor: pointer;
+}
+
+.ocean-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.ocean-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.ocean-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+/* === EXTREME SLIDER STATES === */
+.ocean-slider.ocean-extreme {
+  background: linear-gradient(90deg, var(--border), var(--accent));
+}
+
+.ocean-slider.ocean-extreme-low::-webkit-slider-thumb {
+  background: #ef4444;
+}
+
+.ocean-slider.ocean-extreme-high::-webkit-slider-thumb {
+  background: #22c55e;
+}
+
+.slider-value {
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.ocean-slider.ocean-extreme-low + .slider-value {
+  color: #ef4444;
+}
+
+.ocean-slider.ocean-extreme-high + .slider-value {
+  color: #22c55e;
+}
+
+/* === VALIDATOR STATUS === */
+.ocean-validator-status {
+  padding: 1em 1.2em;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.8em;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ocean-validator-green {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.ocean-validator-yellow {
+  color: #eab308;
+  background: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.ocean-validator-red {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* === VALIDATOR DETAILS === */
+.ocean-validator-details {
+  padding: 0.8em 1em;
+  background: var(--bg-surface);
+  border-radius: 6px;
+  text-align: center;
+  min-height: 2em;
+}
+
+.ocean-extreme-tag {
+  display: inline-block;
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0.2em;
+}
+
+.ocean-extreme-low {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.ocean-extreme-high {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.ocean-no-extremes {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* === LIGHT THEME OCEAN VALIDATOR === */
+body.theme-light .ocean-validator-panel {
+  background: #ffffff;
+  border-color: var(--border-light);
+}
+
+body.theme-light .ocean-validator-intro {
+  background: #f9fafb;
+}
+
+body.theme-light .ocean-slider-label {
+  background: #f9fafb;
+}
+
+body.theme-light .ocean-slider-label:hover {
+  background: var(--accent-soft);
+}
+
+body.theme-light .ocean-validator-green {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.25);
+  color: #16a34a;
+}
+
+body.theme-light .ocean-validator-yellow {
+  background: rgba(234, 179, 8, 0.08);
+  border-color: rgba(234, 179, 8, 0.25);
+  color: #a16207;
+}
+
+body.theme-light .ocean-validator-red {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #dc2626;
+}
+
+body.theme-light .ocean-extreme-low {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+body.theme-light .ocean-extreme-high {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+/* === OLED THEME OCEAN VALIDATOR === */
+body.theme-oled .ocean-validator-panel {
+  background: #0a0a0a;
+  border-color: #1a1a1a;
+}
+
+body.theme-oled .ocean-validator-intro {
+  background: #050505;
+}
+
+body.theme-oled .ocean-slider-label {
+  background: #0a0a0a;
+}
+
+body.theme-oled .ocean-validator-details {
+  background: #050505;
+}
+
+/* === MOBILE RESPONSIVE OCEAN VALIDATOR === */
+@media (max-width: 640px) {
+  .ocean-slider-label {
+    grid-template-columns: 25px 1fr 45px;
+    gap: 0.8em;
+    padding: 0.6em 0.8em;
+  }
+  
+  .ocean-validator-status {
+    font-size: 0.9rem;
+    padding: 0.8em 1em;
+  }
+  
+  .ocean-validator-intro ul {
+    padding-left: 1.2em;
+  }
+}
+
+/* === PRINT STYLES FOR OCEAN VALIDATOR === */
+@media print {
+  .ocean-validator-panel {
+    display: block !important;
+    background: none;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+  
+  .ocean-slider-group {
+    display: none;
+  }
+  
+  .ocean-validator-status {
+    border: 1px solid #333;
+    background: none;
+    color: #333;
+  }
+}

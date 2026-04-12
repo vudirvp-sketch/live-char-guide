@@ -3387,6 +3387,251 @@ function initWidthToggle() {
 })();
 
 // ============================================================================
+// ITEM-005: OCEAN VALIDATOR MODULE
+// ============================================================================
+/**
+ * OCEANValidator - Validates OCEAN personality profiles for character distinctiveness
+ * 
+ * Rule: 1-2 extreme poles (values <30 or >70) = optimal memorable character
+ * - 0 extremes = forgettable (warning)
+ * - 1-2 extremes = optimal distinctiveness (green)
+ * - 3+ extremes = inconsistent character (error)
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'ocean_validator_traits';
+
+  // Default trait values (middle of scale)
+  const DEFAULT_TRAITS = { O: 50, C: 50, E: 50, A: 50, N: 50 };
+
+  // Current trait values
+  let traits = { ...DEFAULT_TRAITS };
+
+  /**
+   * Load traits from localStorage
+   */
+  function loadTraits() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Validate all traits exist and are numbers 0-100
+        if (typeof parsed === 'object' && ['O', 'C', 'E', 'A', 'N'].every(k => typeof parsed[k] === 'number')) {
+          traits = {
+            O: Math.max(0, Math.min(100, parsed.O)),
+            C: Math.max(0, Math.min(100, parsed.C)),
+            E: Math.max(0, Math.min(100, parsed.E)),
+            A: Math.max(0, Math.min(100, parsed.A)),
+            N: Math.max(0, Math.min(100, parsed.N))
+          };
+        }
+      }
+    } catch (e) {
+      console.warn('[OCEANValidator] Failed to load traits:', e.message);
+    }
+  }
+
+  /**
+   * Save traits to localStorage
+   */
+  function saveTraits() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(traits));
+    } catch (e) {
+      console.warn('[OCEANValidator] Failed to save traits:', e.message);
+    }
+  }
+
+  /**
+   * Get extreme traits (values <30 or >70)
+   * @returns {Array} Array of { trait, value, direction } objects
+   */
+  function getExtremes() {
+    const extremes = [];
+    const traitNames = { O: 'Открытость', C: 'Добросовестность', E: 'Экстраверсия', A: 'Доброжелательность', N: 'Нейротизм' };
+    
+    for (const [key, value] of Object.entries(traits)) {
+      if (value < 30 || value > 70) {
+        extremes.push({
+          trait: key,
+          name: traitNames[key],
+          value: value,
+          direction: value < 30 ? 'low' : 'high'
+        });
+      }
+    }
+    return extremes;
+  }
+
+  /**
+   * Validate OCEAN profile
+   * @returns {Object} { status, color, message, extremes }
+   */
+  function validate() {
+    const extremes = getExtremes();
+
+    if (extremes.length === 0) {
+      return {
+        status: 'warning',
+        color: 'yellow',
+        message: 'Нет экстремальных полюсов — персонаж может быть забываемым',
+        messageEn: 'No extreme poles — character may be forgettable',
+        extremes: [],
+        suggestion: 'Рекомендуется установить 1-2 значения <30 или >70'
+      };
+    }
+
+    if (extremes.length >= 1 && extremes.length <= 2) {
+      const extremeNames = extremes.map(e => `${e.name} (${e.value})`).join(', ');
+      return {
+        status: 'valid',
+        color: 'green',
+        message: `Оптимальная различимость: ${extremes.length} экстремальный полюс`,
+        messageEn: `Optimal distinctiveness: ${extremes.length} extreme pole(s)`,
+        extremes,
+        details: extremeNames
+      };
+    }
+
+    // 3+ extremes
+    return {
+      status: 'error',
+      color: 'red',
+      message: `Слишком много экстремумов (${extremes.length}) — персонаж может быть непоследовательным`,
+      messageEn: `Too many extremes (${extremes.length}) — may create inconsistent character`,
+      extremes,
+      suggestion: 'Рекомендуется оставить 1-2 экстремальных полюса'
+    };
+  }
+
+  /**
+   * Update UI with validation result
+   * @param {Object} result - Validation result from validate()
+   */
+  function updateUI(result) {
+    const indicator = document.getElementById('ocean-validator-status');
+    const details = document.getElementById('ocean-validator-details');
+    
+    if (indicator) {
+      // Remove all color classes
+      indicator.classList.remove('ocean-validator-green', 'ocean-validator-yellow', 'ocean-validator-red');
+      indicator.classList.add(`ocean-validator-${result.color}`);
+      indicator.textContent = result.message;
+      indicator.setAttribute('data-status', result.status);
+    }
+
+    if (details) {
+      if (result.extremes.length > 0) {
+        const extremeLabels = result.extremes.map(e => 
+          `<span class="ocean-extreme-tag ocean-extreme-${e.direction}">${e.name}: ${e.value}</span>`
+        ).join(' ');
+        details.innerHTML = extremeLabels;
+      } else {
+        details.innerHTML = '<span class="ocean-no-extremes">Все значения в нормальном диапазоне (30-70)</span>';
+      }
+    }
+
+    // Update slider highlights
+    document.querySelectorAll('.ocean-slider').forEach(slider => {
+      const trait = slider.dataset.trait;
+      if (trait && traits[trait] !== undefined) {
+        const value = traits[trait];
+        const isExtreme = value < 30 || value > 70;
+        slider.classList.toggle('ocean-extreme', isExtreme);
+        slider.classList.toggle('ocean-extreme-low', value < 30);
+        slider.classList.toggle('ocean-extreme-high', value > 70);
+      }
+    });
+
+    // Dispatch event for external listeners
+    window.dispatchEvent(new CustomEvent('oceanvalidated', { detail: result }));
+  }
+
+  /**
+   * Set a trait value
+   * @param {string} trait - Trait key (O, C, E, A, N)
+   * @param {number} value - Value (0-100)
+   */
+  function setTrait(trait, value) {
+    if (!['O', 'C', 'E', 'A', 'N'].includes(trait)) {
+      console.warn('[OCEANValidator] Invalid trait:', trait);
+      return;
+    }
+    traits[trait] = Math.max(0, Math.min(100, value));
+    saveTraits();
+    
+    const result = validate();
+    updateUI(result);
+    return result;
+  }
+
+  /**
+   * Get current traits
+   * @returns {Object} Traits object
+   */
+  function getTraits() {
+    return { ...traits };
+  }
+
+  /**
+   * Reset traits to defaults
+   */
+  function resetTraits() {
+    traits = { ...DEFAULT_TRAITS };
+    saveTraits();
+    const result = validate();
+    updateUI(result);
+    return result;
+  }
+
+  /**
+   * Initialize validator UI
+   */
+  function init() {
+    loadTraits();
+    
+    // Set up slider listeners
+    document.querySelectorAll('.ocean-slider').forEach(slider => {
+      const trait = slider.dataset.trait;
+      if (trait) {
+        // Set initial value
+        slider.value = traits[trait] || 50;
+        
+        // Listen for changes
+        slider.addEventListener('input', (e) => {
+          setTrait(trait, parseInt(e.target.value, 10));
+        });
+      }
+    });
+
+    // Initial validation
+    const result = validate();
+    updateUI(result);
+
+    console.log('[OCEANValidator] Initialized - Extremes:', getExtremes().length);
+  }
+
+  // Expose API
+  window.OCEANValidator = {
+    validate,
+    getExtremes,
+    getTraits,
+    setTrait,
+    resetTraits,
+    updateUI,
+    init
+  };
+
+  // Auto-initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+// ============================================================================
 // BUG-007 FIX: SERVICE WORKER REGISTRATION (moved from inline script)
 // ============================================================================
 if ("serviceWorker" in navigator) {

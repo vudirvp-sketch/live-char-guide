@@ -269,6 +269,54 @@ Anchors:
             </div>
           </div>
 
+          <!-- OCEAN VALIDATOR WIDGET -->
+          <div class="ocean-validator-panel" id="ocean-validator">
+            <h4>🎯 OCEAN Validator: Проверка различимости персонажа</h4>
+            <div class="ocean-validator-intro">
+              <p><strong>Правило:</strong> Оптимальный OCEAN профиль имеет <strong>1–2 экстремальных полюса</strong> (значения &lt;30 или &gt;70).</p>
+              <ul>
+                <li><span class="ocean-validator-green">✓ 1–2 экстремума</span> — персонаж запоминающийся</li>
+                <li><span class="ocean-validator-yellow">⚠ 0 экстремумов</span> — персонаж может быть забываемым</li>
+                <li><span class="ocean-validator-red">✗ 3+ экстремума</span> — персонаж может быть непоследовательным</li>
+              </ul>
+            </div>
+            
+            <div class="ocean-slider-group">
+              <label class="ocean-slider-label">
+                <span class="trait-letter" style="color: var(--ocean-O)">O</span> Открытость
+                <input type="range" class="ocean-slider" data-trait="O" min="0" max="100" value="50">
+                <span class="slider-value" id="ocean-value-O">50</span>
+              </label>
+              <label class="ocean-slider-label">
+                <span class="trait-letter" style="color: var(--ocean-C)">C</span> Добросовестность
+                <input type="range" class="ocean-slider" data-trait="C" min="0" max="100" value="50">
+                <span class="slider-value" id="ocean-value-C">50</span>
+              </label>
+              <label class="ocean-slider-label">
+                <span class="trait-letter" style="color: var(--ocean-E)">E</span> Экстраверсия
+                <input type="range" class="ocean-slider" data-trait="E" min="0" max="100" value="50">
+                <span class="slider-value" id="ocean-value-E">50</span>
+              </label>
+              <label class="ocean-slider-label">
+                <span class="trait-letter" style="color: var(--ocean-A)">A</span> Доброжелательность
+                <input type="range" class="ocean-slider" data-trait="A" min="0" max="100" value="50">
+                <span class="slider-value" id="ocean-value-A">50</span>
+              </label>
+              <label class="ocean-slider-label">
+                <span class="trait-letter" style="color: var(--ocean-N)">N</span> Нейротизм
+                <input type="range" class="ocean-slider" data-trait="N" min="0" max="100" value="50">
+                <span class="slider-value" id="ocean-value-N">50</span>
+              </label>
+            </div>
+            
+            <div id="ocean-validator-status" class="ocean-validator-status ocean-validator-yellow">
+              Настройте ползунки для проверки профиля
+            </div>
+            <div id="ocean-validator-details" class="ocean-validator-details">
+              <span class="ocean-no-extremes">Все значения в нормальном диапазоне (30-70)</span>
+            </div>
+          </div>
+
           <!-- PRACTICAL APPLICATION -->
           <div class="ocean-guide-section">
             <h4>📋 Пошаговое применение OCEAN при создании карточки</h4>
