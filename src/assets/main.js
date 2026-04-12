@@ -2798,33 +2798,41 @@ document.addEventListener('DOMContentLoaded', () => {
     tocContent.replaceChildren();
 
     // ITEM-019: Simplified visibility check - only Track-based now
+    // BUG-FIX: Changed data-track to data-requires-track (attributes mismatch)
     function isVisibleInTrack(heading) {
       const currentTrack = window.NavigationState?.getTrack() || 'B';
       
-      // Check the heading itself for data-track
-      const headingTrack = heading.dataset?.track;
+      // Check the heading itself for data-requires-track
+      const headingTrack = heading.dataset?.requiresTrack;
       if (headingTrack) {
         return headingTrack.includes(currentTrack);
       }
       
-      // Check parent section for data-track
-      const parentSection = heading.closest('section[data-track]');
+      // Check parent section for data-requires-track
+      const parentSection = heading.closest('section[data-requires-track]');
       if (parentSection) {
-        const sectionTrack = parentSection.dataset.track;
+        const sectionTrack = parentSection.dataset.requiresTrack;
         return sectionTrack.includes(currentTrack);
       }
       
-      // Check parent details/accordion for data-track
-      const parentDetails = heading.closest('details[data-track]');
+      // Check parent details/accordion for data-requires-track
+      const parentDetails = heading.closest('details[data-requires-track]');
       if (parentDetails) {
-        const detailsTrack = parentDetails.dataset.track;
+        const detailsTrack = parentDetails.dataset.requiresTrack;
         return detailsTrack.includes(currentTrack);
       }
       
-      // Check any parent with data-track
-      const parentWithTrack = heading.closest('[data-track]');
+      // Check any parent div with data-requires-track
+      const parentDiv = heading.closest('div[data-requires-track]');
+      if (parentDiv) {
+        const divTrack = parentDiv.dataset.requiresTrack;
+        return divTrack.includes(currentTrack);
+      }
+      
+      // Check any parent with data-requires-track (generic fallback)
+      const parentWithTrack = heading.closest('[data-requires-track]');
       if (parentWithTrack) {
-        const track = parentWithTrack.dataset.track;
+        const track = parentWithTrack.dataset.requiresTrack;
         return track.includes(currentTrack);
       }
       
@@ -2982,8 +2990,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Global access for debugging + initialization flag
     window.guidePanels = { toc: tocPanel, notepad: notepadPanel, _initialized: true };
 
-    // 5. Re-generate TOC on mode change
-    window.addEventListener('modechange', () => {
+    // 5. Re-generate TOC on track change (BUG-FIX: was 'modechange' - wrong event name)
+    window.addEventListener('trackchange', () => {
       if (tocPanelEl) {
         generateTOCLinks(tocPanelEl);
       }
