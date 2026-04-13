@@ -203,8 +203,10 @@
   const VALID_MODELS = ['all', '12B', '32B'];
 
   function applyModelFilter(model) {
-    document.body.classList.remove('model-12B', 'model-32B');
-    if (model !== 'all') {
+    document.body.classList.remove('model-12B', 'model-32B', 'model-all');
+    if (model === 'all') {
+      document.body.classList.add('model-all');
+    } else {
       document.body.classList.add('model-' + model);
     }
     document.querySelectorAll('.model-btn').forEach(btn => {
@@ -376,6 +378,7 @@
 
     // FIX-004: Track C = advanced users: GHOST available without consent gate
     if (track === 'C') {
+      saveConsent(true);  // Implicit consent - user is advanced
       setGhostLayer('2');
       return;
     }
@@ -2836,7 +2839,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
   // initGuidePanels() removed — replaced by safe IIFE below
   // initGuideMode() removed — ITEM-019: Mode system migrated to Tracks
-  console.log('Guide v5.4.0 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Track Navigation + FIX-001 to FIX-010)');
+  console.log(`Guide v${document.querySelector('meta[name="livechar-version"]')?.content || 'unknown'} initialized`);
 });
 
 // === SAFE FAB REBIND & ENHANCED NOTEPAD INIT ===

@@ -186,6 +186,69 @@
 })();
 
 // ============================================================================
+// FIX-001: MODEL FILTER STATE MODULE
+// ============================================================================
+/**
+ * ModelFilter - Manages model selection (All, 12B, 32B) with localStorage persistence
+ *
+ * Features:
+ * - Loads saved model from localStorage or defaults to 'all'
+ * - Sets model class on body for CSS-based content filtering
+ * - Updates button states and aria-pressed attributes
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'guide-model-filter';
+  const VALID_MODELS = ['all', '12B', '32B'];
+
+  function applyModelFilter(model) {
+    document.body.classList.remove('model-12B', 'model-32B');
+    if (model !== 'all') {
+      document.body.classList.add('model-' + model);
+    }
+    document.querySelectorAll('.model-btn').forEach(btn => {
+      const isActive = btn.dataset.model === model;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, model);
+    } catch (e) {
+      console.warn('[ModelFilter] localStorage unavailable:', e.message);
+    }
+  }
+
+  function initModelFilter() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const initialModel = VALID_MODELS.includes(saved) ? saved : 'all';
+    applyModelFilter(initialModel);
+
+    document.querySelectorAll('.model-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const model = btn.dataset.model;
+        if (VALID_MODELS.includes(model)) {
+          applyModelFilter(model);
+        }
+      });
+    });
+
+    console.log('[ModelFilter] Initialized with model:', initialModel);
+  }
+
+  window.ModelFilter = {
+    apply: applyModelFilter,
+    init: initModelFilter
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModelFilter);
+  } else {
+    initModelFilter();
+  }
+})();
+
+// ============================================================================
 // ITEM-002: GHOST CONSENT MODULE - Layered Disclosure
 // ============================================================================
 /**
@@ -303,7 +366,6 @@
    */
   function applyVisibility() {
     const track = window.NavigationState?.getTrack() || 'B';
-    const spineComplete = isSpineComplete();
     const consent = getConsent();
 
     // Layer 0: Track A - hide everything
@@ -312,19 +374,21 @@
       return;
     }
 
+    // FIX-004: Track C = advanced users: GHOST available without consent gate
+    if (track === 'C') {
+      setGhostLayer('2');
+      return;
+    }
+
+    // Track B: Standard consent flow
     // Layer 2: Consent granted - show everything
     if (consent) {
       setGhostLayer('2');
       return;
     }
 
-    // Layer 1: SPINE complete but no consent - show teaser
-    if (spineComplete) {
-      setGhostLayer('1');
-    } else {
-      // No SPINE completion - hide everything (default to layer 0)
-      setGhostLayer('0');
-    }
+    // Layer 1: Show teaser (spineComplete always true for Track B+ per isSpineComplete())
+    setGhostLayer('1');
   }
 
   /**
@@ -2772,7 +2836,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // initScratchpad() removed — legacy scratchpad killed by CSS isolation + safeRebindFab
   // initGuidePanels() removed — replaced by safe IIFE below
   // initGuideMode() removed — ITEM-019: Mode system migrated to Tracks
-  console.log('Guide v5.3.2 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Track Navigation)');
+  console.log('Guide v5.4.0 initialized - All Phases Complete (1-14 + Content Modifications + OCEAN + Panel System + Mobile Adaptations + Track Navigation + FIX-001 to FIX-010)');
 });
 
 // === SAFE FAB REBIND & ENHANCED NOTEPAD INIT ===

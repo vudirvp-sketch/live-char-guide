@@ -4250,8 +4250,8 @@ body.model-12B [data-model="32B"] { display: none !important; }
 body.model-32B [data-model="12B"] { display: none !important; }
 body.model-32B [data-model="32B"] { display: revert !important; }
 
-/* "All" mode: show all model-specific content */
-body:not(.model-12B):not(.model-32B) [data-model] { display: revert !important; }
+/* "All" mode: show all model-specific content - set by JS when no specific model selected */
+body.model-all [data-model] { display: revert !important; }
 
 /* === ID: A5 | CHECKPOINTS === */
 .checkpoint {
