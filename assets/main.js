@@ -267,171 +267,6 @@
 })();
 
 
-// ============================================================================
-// ITEM-009: CARD TEMPLATE VALIDATION MODULE
-// ============================================================================
-/**
- * CardValidator - Validates character card templates before export
- * 
- * Features:
- * - Required field validation (name, flaw, want, need)
- * - Placeholder pattern detection
- * - Export blocking for invalid cards
- */
-(function() {
-  'use strict';
-
-  const PLACEHOLDER_PATTERNS = [
-    /^\[.*\]$/,           // [Description]
-    /^<[a-z]+>$/i,        // <field>
-    /^your\s+\w+$/i       // your name
-  ];
-
-  const REQUIRED_FIELDS = ['name', 'flaw', 'want', 'need'];
-
-  /**
-   * Check if value is a placeholder
-   * @param {string} value - Value to check
-   * @returns {boolean}
-   */
-  function isPlaceholder(value) {
-    if (!value || typeof value !== 'string') return false;
-    const trimmed = value.trim();
-    return PLACEHOLDER_PATTERNS.some(pattern => pattern.test(trimmed));
-  }
-
-  /**
-   * Validate a character card
-   * @param {Object} card - Card data object
-   * @param {string} level - Validation level ('core' or 'full')
-   * @returns {Object} Validation result {valid: boolean, errors: Array}
-   */
-  function validate(card, level = 'core') {
-    const errors = [];
-    
-    for (const field of REQUIRED_FIELDS) {
-      const value = card[field];
-      
-      if (!value || (typeof value === 'string' && value.trim() === '')) {
-        errors.push({ field, message: `${field} is required` });
-        continue;
-      }
-      
-      if (isPlaceholder(value)) {
-        errors.push({ field, message: `${field} contains placeholder text` });
-      }
-    }
-    
-    return { valid: errors.length === 0, errors };
-  }
-
-  /**
-   * Block export if validation fails
-   * @param {Object} validationResult - Result from validate()
-   * @returns {boolean} True if export was blocked
-   */
-  function blockExport(validationResult) {
-    if (!validationResult.valid) {
-      const messages = validationResult.errors.map(e => e.message).join('\n');
-      alert(`Cannot export: ${messages}`);
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Update validation UI
-   * @param {Object} result - Validation result
-   */
-  function updateUI(result) {
-    const statusEl = document.getElementById('card-validation-status');
-    const exportBtn = document.getElementById('card-export-btn');
-    
-    if (statusEl) {
-      statusEl.className = `card-validation-status ${result.valid ? 'valid' : 'invalid'}`;
-      statusEl.textContent = result.valid 
-        ? '✓ Card is valid for export' 
-        : `✗ ${result.errors.length} issue(s) found`;
-    }
-    
-    if (exportBtn) {
-      exportBtn.disabled = !result.valid;
-    }
-  }
-
-  /**
-   * Initialize card validation UI
-   */
-  function init() {
-    const validateBtn = document.getElementById('card-validate-btn');
-    const exportBtn = document.getElementById('card-export-btn');
-    
-    if (validateBtn) {
-      validateBtn.addEventListener('click', () => {
-        // Collect card data from form fields
-        const card = collectCardData();
-        const result = validate(card);
-        updateUI(result);
-        
-        if (result.valid) {
-          console.log('[CardValidator] Card validated successfully');
-        } else {
-          console.warn('[CardValidator] Validation errors:', result.errors);
-        }
-      });
-    }
-    
-    if (exportBtn) {
-      exportBtn.addEventListener('click', (e) => {
-        const card = collectCardData();
-        const result = validate(card);
-        
-        if (blockExport(result)) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      });
-    }
-    
-    console.log('[CardValidator] Initialized');
-  }
-
-  /**
-   * Collect card data from form fields
-   * @returns {Object} Card data
-   */
-  function collectCardData() {
-    const fields = ['name', 'flaw', 'want', 'need', 'lie', 'ghost'];
-    const card = {};
-    
-    for (const field of fields) {
-      const input = document.querySelector(`[data-card-field="${field}"]`) ||
-                    document.getElementById(`card-${field}`);
-      card[field] = input ? input.value : '';
-    }
-    
-    return card;
-  }
-
-  // Expose API
-  window.CardValidator = {
-    validate: validate,
-    isPlaceholder: isPlaceholder,
-    blockExport: blockExport,
-    updateUI: updateUI,
-    collectCardData: collectCardData,
-    REQUIRED_FIELDS: REQUIRED_FIELDS,
-    init: init
-  };
-
-  // Auto-initialize on DOMContentLoaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-
 // === PANEL SYSTEM ===
 (function() {
   'use strict';
@@ -3507,4 +3342,240 @@ if ("serviceWorker" in navigator) {
     document.body.classList.add('debug-mode');
     console.log('[Debug] Debug mode enabled');
   }
+})();
+
+// ============================================================================
+// GLOSSARY PANEL (P1-4)
+// ============================================================================
+(function() {
+  'use strict';
+
+  const GLOSSARY_STORAGE_KEY = 'glossary-panel-state';
+
+  class GlossaryPanel extends Panel {
+    constructor(element, options = {}) {
+      super(element, { storageKey: GLOSSARY_STORAGE_KEY, ...options });
+      this.searchInput = null;
+      this.glossaryData = null;
+      this.init();
+    }
+
+    async init() {
+      await this.loadGlossaryData();
+      this.setupSearch();
+    }
+
+    async loadGlossaryData() {
+      const content = document.getElementById('glossary-content');
+      if (!content) return;
+
+      // TASK 1C: PRIORITY 1 - Check for inline data (zero-install / file:// protocol)
+      const inlineData = document.getElementById('glossary-data');
+      if (inlineData) {
+        try {
+          this.glossaryData = JSON.parse(inlineData.textContent);
+          this.renderGlossary(this.glossaryData);
+          console.log('[Glossary] Loaded from inline data');
+          return;
+        } catch (e) {
+          console.warn('[Glossary] Failed to parse inline data:', e.message);
+        }
+      }
+
+      // TASK 1C: PRIORITY 2 - Fetch from built data directory (online build)
+      try {
+        const response = await fetch('data/glossary.json');
+        if (response.ok) {
+          this.glossaryData = await response.json();
+          this.renderGlossary(this.glossaryData);
+          console.log('[Glossary] Loaded from data/glossary.json');
+          return;
+        }
+      } catch (e) {
+        // Network error — try dev path
+      }
+
+      // TASK 1C: PRIORITY 3 - Dev fallback (src/data/ path)
+      try {
+        const devResponse = await fetch('src/data/glossary.json');
+        if (devResponse.ok) {
+          this.glossaryData = await devResponse.json();
+          this.renderGlossary(this.glossaryData);
+          console.log('[Glossary] Loaded from src/data/glossary.json (dev)');
+          return;
+        }
+      } catch (e) {
+        // Dev path also failed
+      }
+
+      // All sources failed
+      console.warn('[Glossary] All data sources failed');
+      this.renderFallback();
+    }
+
+    renderGlossary(data) {
+      const content = document.getElementById('glossary-content');
+      if (!content) return;
+
+      let html = '<div class="glossary-search"><input type="search" placeholder="Поиск терминов..." id="glossary-search-input" aria-label="Поиск по глоссарию"></div>';
+      
+      // Canonical Terms section
+      if (data.canonical_terms && data.canonical_terms.length > 0) {
+        html += '<div class="glossary-section"><h4>Каноничные термины</h4><ul>';
+        data.canonical_terms.forEach(term => {
+          const searchTerm = term.term.toLowerCase();
+          const abbr = term.abbreviation ? ` (${term.abbreviation})` : '';
+          html += `<li class="glossary-item" data-term="${searchTerm}">
+            <strong>${term.term}</strong>${abbr}<br>
+            <span class="glossary-def">${term.definition}</span>
+          </li>`;
+        });
+        html += '</ul></div>';
+      }
+
+      // Core Rules section
+      if (data.core_rules && data.core_rules.length > 0) {
+        html += '<div class="glossary-section"><h4>Основные правила</h4><ul>';
+        data.core_rules.forEach(rule => {
+          html += `<li class="glossary-item" data-term="${rule.id}">
+            <strong>${rule.rule}</strong><br>
+            <a href="${rule.location}" class="glossary-link">→ Ссылка</a>
+          </li>`;
+        });
+        html += '</ul></div>';
+      }
+
+      content.innerHTML = html;
+      this.searchInput = document.getElementById('glossary-search-input');
+    }
+
+    setupSearch() {
+      if (!this.searchInput) return;
+      
+      this.searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.glossary-item').forEach(item => {
+          const term = item.dataset.term || '';
+          const text = item.textContent.toLowerCase();
+          const match = term.includes(query) || text.includes(query);
+          item.style.display = match ? '' : 'none';
+        });
+      });
+    }
+
+    renderFallback() {
+      const content = document.getElementById('glossary-content');
+      if (content) {
+        content.innerHTML = '<p style="color:var(--text-muted)">См. <a href="#glossary">Глоссарий</a> для полного списка терминов.</p>';
+      }
+    }
+
+    scrollToTerm(term) {
+      const normalizedTerm = term.toLowerCase();
+      
+      // TASK 6: Try exact data-term match first
+      let item = document.querySelector(`.glossary-item[data-term="${normalizedTerm}"]`);
+      
+      // TASK 6: Try matching by text content (for abbreviations)
+      if (!item) {
+        const allItems = document.querySelectorAll('.glossary-item');
+        item = Array.from(allItems).find(el => {
+          const text = el.textContent.toLowerCase();
+          return text.includes(`(${normalizedTerm})`) || text.startsWith(normalizedTerm);
+        });
+      }
+      
+      if (item) {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        item.classList.add('highlight');
+        setTimeout(() => item.classList.remove('highlight'), 2000);
+      }
+    }
+  }
+
+  // Initialize Glossary Panel
+  document.addEventListener('DOMContentLoaded', () => {
+    const panel = document.getElementById('glossary-panel');
+    const fab = document.getElementById('fab-glossary');
+    
+    if (panel && fab) {
+      const glossaryPanel = new GlossaryPanel(panel);
+      // Store instance for external access
+      panel._panelInstance = glossaryPanel;
+      
+      fab.addEventListener('click', () => {
+        glossaryPanel.toggle();
+        glossaryPanel.focus();
+      });
+
+      // Keyboard shortcut: Alt+G to open glossary
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.key === 'g') {
+          e.preventDefault();
+          glossaryPanel.toggle();
+          if (glossaryPanel.isOpen()) {
+            glossaryPanel.focus();
+            if (glossaryPanel.searchInput) {
+              glossaryPanel.searchInput.focus();
+            }
+          }
+        }
+      });
+
+      // TASK 4C: Side tab click handler
+      const tab = document.getElementById('glossary-tab');
+      if (tab) {
+        tab.addEventListener('click', () => {
+          glossaryPanel.toggle();
+          if (glossaryPanel.isOpen()) {
+            glossaryPanel.focus();
+            if (glossaryPanel.searchInput) {
+              glossaryPanel.searchInput.focus();
+            }
+          }
+        });
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            tab.click();
+          }
+        });
+      }
+
+      console.log('[GlossaryPanel] Initialized');
+    }
+  });
+
+  // Expose for tooltip integration
+  window.GlossaryPanel = GlossaryPanel;
+})();
+
+// ============================================================================
+// P1-5: TOOLTIP INTEGRATION WITH GLOSSARY PANEL
+// ============================================================================
+(function() {
+  'use strict';
+
+  document.addEventListener('click', (e) => {
+    // Check if clicked element is an abbreviation with tooltip
+    if (e.target.matches('abbr[data-tooltip]')) {
+      const term = e.target.textContent;
+      const panel = document.getElementById('glossary-panel');
+      
+      if (panel && window.GlossaryPanel) {
+        const instance = panel._panelInstance;
+        if (instance) {
+          // Open panel if not already open
+          if (!panel.classList.contains('open')) {
+            instance.open();
+          }
+          // Scroll to the term
+          instance.scrollToTerm(term);
+          instance.focus();
+        }
+      }
+    }
+  });
+
+  console.log('[TooltipIntegration] Glossary tooltip integration initialized');
 })();
