@@ -204,7 +204,12 @@
 
       <p><em>4K-Fallback протокол: см. <a href="#four-k-fallback">Раздел 5.12</a>.</em></p>
 
-      <h3 id="metrics-denominators">📎 Метрики качества карточки</h3>
+      <details class="interactive" id="acc-metrics-internal" data-requires-track="C">
+        <summary><span><h3 id="metrics-denominators" style="margin:0;font-size:inherit;display:inline">📊 Quality Metrics (Internal)</h3> <span class="tag advanced" style="margin-left:0.5em">Track C: Internal</span></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+          <div class="callout warn" style="margin:0.5em 0">
+            <strong>⚠️ Internal Reference:</strong> Эти метрики — для мейнтейнеров гайда, не для создателей персонажей. Для пользователей релевантны чеклисты валидации (<a href="#appendix4">Приложение 4</a>).
+          </div>
       <p><strong>Каждая метрика имеет целевое значение и denominator (знаменатель) — что именно измеряется:</strong></p>
       <div class="table-wrap">
         <table>
@@ -255,6 +260,8 @@
         <strong>💡 Почему знаменатель важен:</strong>
         <p>Без явного указания того, что измеряется, метрики становятся бессмысленными. Пример: «Завершение выбора трека >70%» — 70% от чего? От всех посетителей? От вовлечённых посетителей? Знаменатель определяет реалистичность цели.</p>
       </div>
+        </div>
+      </details>
 
       <h3>📎 API-блоки</h3>
       <div data-model="32B">
@@ -554,6 +561,19 @@ No smart typography. If conflict → default to Examples.
     <!-- ==================== ПРИЛОЖЕНИЕ 6 ==================== -->
     <section id="appendix6" data-requires-track="B C">
       <h2>📎 Приложение 6: Образцовая карточка</h2>
+      
+      <div class="callout warn" style="margin:1em 0">
+        <strong>⚠️ RECOMMENDED LEARNING PATH:</strong>
+        <p>Изучай этот пример только после завершения Track B. Использование его как шаблона без понимания методологии приведёт к ошибкам.</p>
+        <p><strong>Рекомендуемый порядок:</strong></p>
+        <ol>
+          <li>Quick Start (<a href="#quick-start">Раздел 1</a>)</li>
+          <li>Architecture (<a href="#architecture">Раздел 2</a>)</li>
+          <li>Core Blocks (<a href="#anchors">Раздел 3</a>)</li>
+          <li>Вернуться сюда для референса</li>
+        </ol>
+      </div>
+      
       <div class="info-banner">
         <span class="mode-badge">🛠️ Propeller Workshop</span>
         <span class="mode-hint">Полная карточка с GHOST и Price. Доступно в Track B и C.</span>
