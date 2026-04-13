@@ -25,6 +25,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved error handling in build scripts
 - Better validation error messages with context
 
+## [5.4.0] - 2026-04-13
+
+### Added
+- Model Filter module (`ModelFilter`) for 12B/32B model-specific content visibility
+- `id="system-prompt"` anchor for SVG dependency graph navigation
+- Card validation panel with placeholder detection and export blocking
+- Reference link to canonical glossary in appendix (deduplication)
+
+### Changed
+- Track C now bypasses GHOST consent gate (advanced users workflow)
+- Model-specific content visibility now uses `display: revert` to preserve native display types (fixes `<tr>` and `<li>` elements)
+- Track-based visibility CSS refactored with explicit positive model
+- Test scenario counts clarified as "4 basic + 2 extended"
+
+### Fixed
+- FIX-001: Model toggle buttons now have JS handler
+- FIX-002: Track B no longer hides `data-requires-track="B C"` elements
+- FIX-003: SVG dependency graph "System Prompt" node now navigates correctly
+- FIX-004: Track C users get immediate GHOST access without consent prompt
+- FIX-005: Removed duplicate glossary (canonical in `02_glossary.html`)
+- FIX-007: README typo `data-models` → `data-model`
+- FIX-008: Console log version now matches VERSION file (5.4.0)
+- FIX-009: Track C display type preserved (merged with FIX-002)
+- FIX-010: Consistent test scenario counts across files
+- FIX-013: Model-specific content preserves native display type for table rows and list items
+
 ## [5.3.2] - 2026-04-09
 
 ### Added
@@ -67,7 +93,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Technical implementation guide
 - Testing strategies
 
-[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.2...HEAD
+[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.4.0...HEAD
+[5.4.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.2...v5.4.0
 [5.3.2]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.1...v5.3.2
 [5.3.1]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.0...v5.3.1
 [5.3.0]: https://github.com/vudirvp-sketch/live-char-guide/releases/tag/v5.3.0
