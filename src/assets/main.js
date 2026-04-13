@@ -3522,6 +3522,26 @@ if ("serviceWorker" in navigator) {
         }
       });
 
+      // TASK 4C: Side tab click handler
+      const tab = document.getElementById('glossary-tab');
+      if (tab) {
+        tab.addEventListener('click', () => {
+          glossaryPanel.toggle();
+          if (glossaryPanel.isOpen()) {
+            glossaryPanel.focus();
+            if (glossaryPanel.searchInput) {
+              glossaryPanel.searchInput.focus();
+            }
+          }
+        });
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            tab.click();
+          }
+        });
+      }
+
       console.log('[GlossaryPanel] Initialized');
     }
   });

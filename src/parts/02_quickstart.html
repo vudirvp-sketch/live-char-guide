@@ -17,21 +17,6 @@
       </ul>
       <p><strong>Примечание:</strong> В Быстром старте порядок оптимизирован для скорости. В пайплайне (Раздел 2) — для качества.</p>
 
-      <div class="infographic">
-        <div class="infographic-title">IMG_06: ПАЙПЛАЙН СОЗДАНИЯ (10 ШАГОВ)</div>
-        <div class="inf-stepper">
-          <div class="inf-stepper-item"><div class="inf-stepper-num">01.</div><div class="inf-stepper-text">Spine (Психологическое ядро) → WANT / NEED / FLAW / LIE / GHOST</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">02.</div><div class="inf-stepper-text">Enneagram → Тип + крыло + стресс→рост (1–2 строки)</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">03.</div><div class="inf-stepper-text">OCEAN → Только 1–2 экстремальных полюса</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">04.</div><div class="inf-stepper-text">Поведенческие якоря → 5–7 правил Триггер → Действие → Цена</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">05.</div><div class="inf-stepper-text">Первое сообщение → Сенсорика → Поза (FLAW) → Речь (LIE) → Крючок</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">06.</div><div class="inf-stepper-text">Примерные сообщения → 3 блока: нейтральный / стресс / доверие</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">07.</div><div class="inf-stepper-text">System Prompt → Антигодмодинг + стиль + XML-теги</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">08.</div><div class="inf-stepper-text">Параметры генерации → T, Top P, Min P, RepPen=1.05, presence_penalty=0.0–0.15</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">09.</div><div class="inf-stepper-text">Динамика → AN (обновлять каждые 3–5 msg при 8K+) + Лорбук</div></div>
-          <div class="inf-stepper-item"><div class="inf-stepper-num">10.</div><div class="inf-stepper-text">Проверка → 4 базовых тест-сценария (+ 2 расширенных) → таблица симптомов</div></div>
-        </div>
-      </div>
       <p><strong>Интерактивные функции (требуют JavaScript):</strong></p>
       <ul>
         <li><strong>Ctrl+K</strong> — быстрый поиск по гайду</li>
@@ -74,11 +59,11 @@
       </ul>
 
       <h3>⚡ Минимальный шаблон за 5 минут</h3>
-      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. См. A02 в <a href="#anchors">Разделе 3.1</a>.</p>
-      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> Quick Start (упрощённый, 4 якоря, без Price): ~450 токенов | Полная схема (5 якорей, Price, GHOST): ~850 токенов</p>
+      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. См. A02 в <a href="#anchors">Разделе 3.1</a>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
+      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> см. <a href="#appendix2">Приложение 2</a></p>
 
       <div class="callout tip">
-        <strong>📊 Detailed token budgets:</strong> See <a href="#appendix2">Appendix 2</a> for complete token distribution tables.
+        <strong>📊 Token-бюджеты:</strong> См. <a href="#appendix2">Приложение 2</a> для полных таблиц распределения токенов.
       </div>
 
       <div class="infographic">
@@ -176,20 +161,22 @@
 
       <h3>⚠️ Топ-3 ошибки, ломающие персонажа</h3>
       <div class="callout warn">
-        <p><strong>1. Персонаж забывает речевые тики</strong> → <code>presence_penalty</code> захардкожен на 0.7. <strong>Решение:</strong> Для 12B поставь 0.0 (обязательно). Для 32B+: 0.0–0.15. <a href="#sampling">→ Раздел 5.1</a></p>
-        <p><strong>2. Персонаж пишет за {{user}}</strong> → Нет антигодмодинга в SP. <strong>Решение:</strong> <a href="#antigodmoding">→ Раздел 5.0.1</a></p>
-        <p><strong>3. Персонаж стал плоским и пресным</strong> → T выше 0.85 для модели 12B. <strong>Решение:</strong> Снизь T до 0.6–0.8. <a href="#sampling">→ Раздел 5.1</a></p>
+        <ol>
+          <li><strong>Персонаж забывает речевые тики</strong> → <code>presence_penalty</code> захардкожен на 0.7 → <a href="#sampling">Раздел 5.1</a></li>
+          <li><strong>Персонаж пишет за {{user}}</strong> → Нет антигодмодинга в SP → <a href="#antigodmoding">Раздел 5.0.1</a></li>
+          <li><strong>Персонаж стал плоским</strong> → T выше 0.85 для модели 12B → <a href="#sampling">Раздел 5.1</a></li>
+        </ol>
       </div>
 
       <!-- Navigation Footer - P0-3 -->
       <div class="callout tip" style="margin-top:2em">
-        <strong>✅ Quick Start Complete</strong>
-        <p>You now have a minimal viable card (~450 tokens). For full implementation:</p>
+        <strong>✅ Quick Start завершён</strong>
+        <p>У вас есть минимальная рабочая карточка (~450 токенов). Для полной реализации:</p>
         <ul>
-          <li>Architecture: <a href="#architecture">Section 2</a></li>
-          <li>Core Blocks: <a href="#anchors">Section 3</a></li>
-          <li>Psychology: <a href="#spine">Section 4</a></li>
-          <li>Token budgets: <a href="#appendix2">Appendix 2</a></li>
+          <li>Архитектура: <a href="#architecture">Раздел 2</a></li>
+          <li>Core-блоки: <a href="#anchors">Раздел 3</a></li>
+          <li>Психология: <a href="#spine">Раздел 4</a></li>
+          <li>Token-бюджеты: <a href="#appendix2">Приложение 2</a></li>
         </ul>
       </div>
     </section>
