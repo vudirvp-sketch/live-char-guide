@@ -3343,3 +3343,184 @@ if ("serviceWorker" in navigator) {
     console.log('[Debug] Debug mode enabled');
   }
 })();
+
+// ============================================================================
+// GLOSSARY PANEL (P1-4)
+// ============================================================================
+(function() {
+  'use strict';
+
+  const GLOSSARY_STORAGE_KEY = 'glossary-panel-state';
+
+  class GlossaryPanel extends Panel {
+    constructor(element, options = {}) {
+      super(element, { storageKey: GLOSSARY_STORAGE_KEY, ...options });
+      this.searchInput = null;
+      this.glossaryData = null;
+      this.init();
+    }
+
+    async init() {
+      await this.loadGlossaryData();
+      this.setupSearch();
+    }
+
+    async loadGlossaryData() {
+      const content = document.getElementById('glossary-content');
+      if (!content) return;
+
+      try {
+        // Try to load from JSON file
+        const response = await fetch('src/data/glossary.json');
+        if (response.ok) {
+          this.glossaryData = await response.json();
+          this.renderGlossary(this.glossaryData);
+        } else {
+          // Fallback: try relative path without src/
+          const fallbackResponse = await fetch('data/glossary.json');
+          if (fallbackResponse.ok) {
+            this.glossaryData = await fallbackResponse.json();
+            this.renderGlossary(this.glossaryData);
+          } else {
+            this.renderFallback();
+          }
+        }
+      } catch (e) {
+        console.warn('[Glossary] Failed to load data:', e.message);
+        this.renderFallback();
+      }
+    }
+
+    renderGlossary(data) {
+      const content = document.getElementById('glossary-content');
+      if (!content) return;
+
+      let html = '<div class="glossary-search"><input type="search" placeholder="Поиск терминов..." id="glossary-search-input" aria-label="Поиск по глоссарию"></div>';
+      
+      // Canonical Terms section
+      if (data.canonical_terms && data.canonical_terms.length > 0) {
+        html += '<div class="glossary-section"><h4>Каноничные термины</h4><ul>';
+        data.canonical_terms.forEach(term => {
+          const searchTerm = term.term.toLowerCase();
+          const abbr = term.abbreviation ? ` (${term.abbreviation})` : '';
+          html += `<li class="glossary-item" data-term="${searchTerm}">
+            <strong>${term.term}</strong>${abbr}<br>
+            <span class="glossary-def">${term.definition}</span>
+          </li>`;
+        });
+        html += '</ul></div>';
+      }
+
+      // Core Rules section
+      if (data.core_rules && data.core_rules.length > 0) {
+        html += '<div class="glossary-section"><h4>Основные правила</h4><ul>';
+        data.core_rules.forEach(rule => {
+          html += `<li class="glossary-item" data-term="${rule.id}">
+            <strong>${rule.rule}</strong><br>
+            <a href="${rule.location}" class="glossary-link">→ Ссылка</a>
+          </li>`;
+        });
+        html += '</ul></div>';
+      }
+
+      content.innerHTML = html;
+      this.searchInput = document.getElementById('glossary-search-input');
+    }
+
+    setupSearch() {
+      if (!this.searchInput) return;
+      
+      this.searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.glossary-item').forEach(item => {
+          const term = item.dataset.term || '';
+          const text = item.textContent.toLowerCase();
+          const match = term.includes(query) || text.includes(query);
+          item.style.display = match ? '' : 'none';
+        });
+      });
+    }
+
+    renderFallback() {
+      const content = document.getElementById('glossary-content');
+      if (content) {
+        content.innerHTML = '<p style="color:var(--text-muted)">См. <a href="#glossary">Глоссарий</a> для полного списка терминов.</p>';
+      }
+    }
+
+    scrollToTerm(term) {
+      const item = document.querySelector(`.glossary-item[data-term="${term.toLowerCase()}"]`);
+      if (item) {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        item.classList.add('highlight');
+        setTimeout(() => item.classList.remove('highlight'), 2000);
+      }
+    }
+  }
+
+  // Initialize Glossary Panel
+  document.addEventListener('DOMContentLoaded', () => {
+    const panel = document.getElementById('glossary-panel');
+    const fab = document.getElementById('fab-glossary');
+    
+    if (panel && fab) {
+      const glossaryPanel = new GlossaryPanel(panel);
+      // Store instance for external access
+      panel._panelInstance = glossaryPanel;
+      
+      fab.addEventListener('click', () => {
+        glossaryPanel.toggle();
+        glossaryPanel.focus();
+      });
+
+      // Keyboard shortcut: Alt+G to open glossary
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && e.key === 'g') {
+          e.preventDefault();
+          glossaryPanel.toggle();
+          if (glossaryPanel.isOpen()) {
+            glossaryPanel.focus();
+            if (glossaryPanel.searchInput) {
+              glossaryPanel.searchInput.focus();
+            }
+          }
+        }
+      });
+
+      console.log('[GlossaryPanel] Initialized');
+    }
+  });
+
+  // Expose for tooltip integration
+  window.GlossaryPanel = GlossaryPanel;
+})();
+
+// ============================================================================
+// P1-5: TOOLTIP INTEGRATION WITH GLOSSARY PANEL
+// ============================================================================
+(function() {
+  'use strict';
+
+  document.addEventListener('click', (e) => {
+    // Check if clicked element is an abbreviation with tooltip
+    if (e.target.matches('abbr[data-tooltip]')) {
+      const term = e.target.textContent;
+      const panel = document.getElementById('glossary-panel');
+      
+      if (panel && window.GlossaryPanel) {
+        const instance = panel._panelInstance;
+        if (instance) {
+          // Open panel if not already open
+          if (!panel.classList.contains('open')) {
+            instance.open();
+          }
+          // Scroll to the term
+          instance.scrollToTerm(term);
+          instance.focus();
+        }
+      }
+    }
+  });
+
+  console.log('[TooltipIntegration] Glossary tooltip integration initialized');
+})();
