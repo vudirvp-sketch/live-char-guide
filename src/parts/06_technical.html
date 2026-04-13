@@ -127,6 +127,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <div data-requires-track="B C">
       <h3 id="an-ghost">5.2 📝 Author's Notes (AN) + GHOST по слоям</h3>
       <p><span class="tag opt">Optional</span></p>
+      <p><em>Canon: <a href="#ghost-placement-conditions">Core Principles §4: GHOST Placement</a></em></p>
+      <p>This section describes the technical implementation. For the canonical rules, see the link above.</p>
       <p><strong>Что это:</strong> Динамический слой контекста, 100–200 токенов.</p>
       <p><strong>Зачем:</strong> Единственный механизм «оживления» персонажа в длинных сессиях. Обновляет состояние, подчёркивает слепые зоны, усиливает GHOST-реакции, отслеживает динамику WANT→NEED.</p>
       <p><strong>Куда класть:</strong> Поле Author's Notes (AN) в интерфейсе. В любом месте system-блока — порядок не критичен.</p>
@@ -218,6 +220,10 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
             <tr><td>System Prompt</td><td>❌ Не дублировать</td><td>Здесь — только стиль и запреты</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="callout tip" style="margin:1em 0">
+        <strong>🔗 Related:</strong> For common GHOST-related anti-patterns, see <a href="#antipatterns">Section 5.5: Anti-patterns</a>.
       </div>
 
       <div data-requires-track="B C">
