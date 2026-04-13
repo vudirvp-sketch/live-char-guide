@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 96686ead -->
-<!-- Generated: 2026-04-13T16:23:05.796Z -->
+<!-- Build hash: e7461d2d -->
+<!-- Generated: 2026-04-13T17:09:59.364Z -->
 <!-- Version: 5.4.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="96686ead">
+<meta name="build-hash" content="e7461d2d">
 <meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-13">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -3132,6 +3132,12 @@
   animation: track-select-pulse 0.4s ease-out;
 }
 
+/* Animate on first load if track is already selected */
+.audience-card[data-track="B"][aria-pressed="true"],
+.audience-card.recommended {
+  animation: track-select-pulse 0.4s ease-out;
+}
+
 /* === RECOMMENDED BADGE === */
 .audience-card.recommended {
   border-color: var(--accent);
@@ -4586,7 +4592,20 @@ body.debug-mode [data-requires-track]::before {
 
 </style>
 </head>
-<body>
+<body data-track="B">
+<script>
+// CRITICAL: Set default track BEFORE CSS renders to prevent FOUC
+(function() {
+  var track = 'B';
+  try {
+    var saved = localStorage.getItem('guide-track-selection');
+    if (saved && ['A','B','C'].indexOf(saved.toUpperCase()) !== -1) {
+      track = saved.toUpperCase();
+    }
+  } catch(e) {}
+  document.body.setAttribute('data-track', track);
+})();
+</script>
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 <button class="hamburger" aria-label="Open navigation" type="button">☰</button>
@@ -4909,17 +4928,27 @@ body.debug-mode [data-requires-track]::before {
     </div>
   </div>
   <style>
-    /* Reveal Track A and B content when JS is disabled (default visible track) */
-    [data-requires-track~="A"] { display: block !important; }
-    [data-requires-track~="B"] { display: block !important; }
+    /* Show Track A and B content when JS is disabled */
+    [data-requires-track~="A"],
+    [data-requires-track~="B"] {
+      display: block !important;
+      opacity: 1 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      pointer-events: auto !important;
+    }
     /* Keep Track C hidden */
-    [data-requires-track~="C"] { display: none !important; }
-    /* Show audience selection as static info */
+    [data-requires-track~="C"] {
+      display: none !important;
+    }
+    /* Visual indication of default track */
     .audience-selection { pointer-events: none; opacity: 0.7; }
     .audience-card { cursor: default; }
     .audience-card:hover { transform: none; }
-    /* Default to Track B visual state */
-    .audience-card[data-track="B"] { border-color: var(--accent); background: var(--accent-soft); }
+    .audience-card[data-track="B"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
   </style>
 </noscript>
 
@@ -10487,6 +10516,16 @@ content: [GHOST-триггер]</code></pre>
     // Apply initial track
     applyTrack(currentTrack);
 
+    // Trigger animation on initial load
+    setTimeout(function() {
+      var activeCard = document.querySelector('.audience-card.active');
+      if (activeCard) {
+        activeCard.classList.remove('active');
+        void activeCard.offsetWidth; // Force reflow
+        activeCard.classList.add('active');
+      }
+    }, 100);
+
     // Bind click handlers to track buttons
     document.querySelectorAll('.audience-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -10511,6 +10550,12 @@ content: [GHOST-триггер]</code></pre>
     }
 
     console.log('[NavigationState] Initialized with track:', currentTrack);
+
+    // Debug: Verify DOM state after initialization
+    console.log('[NavigationState] DOM verification:');
+    console.log('  - body.data-track:', document.body.getAttribute('data-track'));
+    console.log('  - active card:', document.querySelector('.audience-card.active')?.dataset.track);
+    console.log('  - visible B sections:', document.querySelectorAll('body[data-track="B"] [data-requires-track~="B"]').length);
   }
 
   // Expose API
