@@ -7,6 +7,31 @@
       <p><strong>Что это:</strong> Системный подход к выявлению и исправлению проблем в карточке персонажа.</p>
       <p><strong>Зачем:</strong> Даже идеально структурированная карточка может «ломаться» в процессе использования. Этот раздел даёт инструменты диагностики.</p>
 
+      <div class="callout tip">
+        <strong>🔄 Verification Loop — не новая задача:</strong>
+        <p>Эти тест-сценарии <strong>валидируют</strong> твою конфигурацию AN/Lorebook из <a href="#an-ghost">§5.2–5.3</a>. Это проверка, что Dynamics работают как задумано — не отдельная работа.</p>
+        <p style="margin-top:0.5em"><strong>Track A/B:</strong> используй базовые тесты 1–4. Тесты 5–6 требуют AN/LB — пропусти, если не используешь.</p>
+        <p style="margin-top:0.5em"><strong>Track C:</strong> все 6 тестов обязательны для полной валидации.</p>
+      </div>
+
+      <h3>📋 Mapping: Dynamics Elements ↔ Test Scenarios</h3>
+      <p>Таблица показывает связь между элементами конфигурации и тестами, которые их проверяют:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Dynamics Element</th><th>Test Scenario</th><th>Expected Behavior</th><th>Track</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Spine (WANT/NEED/FLAW/LIE/GHOST)</strong></td><td>Test 1: Нейтральный ввод</td><td>Персонаж реагирует характерно, FLAW проявляется косвенно</td><td>A B C</td></tr>
+            <tr><td><strong>Anchors (Trigger→Action→Price)</strong></td><td>Test 2: Стресс-триггер</td><td>Цена манифестируется физически при триггере</td><td>A B C</td></tr>
+            <tr><td><strong>LIE → WANT→NEED динамика</strong></td><td>Test 3: Конфликт/давление</td><td>Персонаж показывает уязвимость, WANT смещается к NEED</td><td>A B C</td></tr>
+            <tr><td><strong>AN (WANT→NEED tracking)</strong></td><td>Test 4: Длинная сессия</td><td>Голос стабилен, GHOST-события помнятся</td><td>B C</td></tr>
+            <tr><td><strong>OCEAN-полюса</strong></td><td>Test 5: OCEAN-консистентность</td><td>Экстремальные полюса проявляются в реакциях</td><td>B C</td></tr>
+            <tr><td><strong>Lorebook / Voice isolation</strong></td><td>Test 6: Изоляция голоса</td><td>Голоса различимы, нет смешения</td><td>B C</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <div data-requires-track="B C">
       <h3>🧪 6 тест-сценариев (4 базовых + 2 расширенных)</h3>
       <div class="table-wrap">
