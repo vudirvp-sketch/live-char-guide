@@ -320,17 +320,27 @@
     </div>
   </div>
   <style>
-    /* Reveal Track A and B content when JS is disabled (default visible track) */
-    [data-requires-track~="A"] { display: block !important; }
-    [data-requires-track~="B"] { display: block !important; }
+    /* Show Track A and B content when JS is disabled */
+    [data-requires-track~="A"],
+    [data-requires-track~="B"] {
+      display: block !important;
+      opacity: 1 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      pointer-events: auto !important;
+    }
     /* Keep Track C hidden */
-    [data-requires-track~="C"] { display: none !important; }
-    /* Show audience selection as static info */
+    [data-requires-track~="C"] {
+      display: none !important;
+    }
+    /* Visual indication of default track */
     .audience-selection { pointer-events: none; opacity: 0.7; }
     .audience-card { cursor: default; }
     .audience-card:hover { transform: none; }
-    /* Default to Track B visual state */
-    .audience-card[data-track="B"] { border-color: var(--accent); background: var(--accent-soft); }
+    .audience-card[data-track="B"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
   </style>
 </noscript>
 

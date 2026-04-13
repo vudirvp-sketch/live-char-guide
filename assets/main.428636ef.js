@@ -3685,3 +3685,13 @@ if ("serviceWorker" in navigator) {
       .catch(err => console.warn("[SW] Service Worker registration failed:", err));
   });
 }
+
+// ============================================================================
+// DEBUG MODE (?debug param)
+// ============================================================================
+(function initDebugMode() {
+  if (new URLSearchParams(window.location.search).has('debug')) {
+    document.body.classList.add('debug-mode');
+    console.log('[Debug] Debug mode enabled');
+  }
+})();

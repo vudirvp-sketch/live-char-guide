@@ -141,6 +141,16 @@
     // Apply initial track
     applyTrack(currentTrack);
 
+    // Trigger animation on initial load
+    setTimeout(function() {
+      var activeCard = document.querySelector('.audience-card.active');
+      if (activeCard) {
+        activeCard.classList.remove('active');
+        void activeCard.offsetWidth; // Force reflow
+        activeCard.classList.add('active');
+      }
+    }, 100);
+
     // Bind click handlers to track buttons
     document.querySelectorAll('.audience-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -165,6 +175,12 @@
     }
 
     console.log('[NavigationState] Initialized with track:', currentTrack);
+
+    // Debug: Verify DOM state after initialization
+    console.log('[NavigationState] DOM verification:');
+    console.log('  - body.data-track:', document.body.getAttribute('data-track'));
+    console.log('  - active card:', document.querySelector('.audience-card.active')?.dataset.track);
+    console.log('  - visible B sections:', document.querySelectorAll('body[data-track="B"] [data-requires-track~="B"]').length);
   }
 
   // Expose API

@@ -3099,6 +3099,12 @@
   animation: track-select-pulse 0.4s ease-out;
 }
 
+/* Animate on first load if track is already selected */
+.audience-card[data-track="B"][aria-pressed="true"],
+.audience-card.recommended {
+  animation: track-select-pulse 0.4s ease-out;
+}
+
 /* === RECOMMENDED BADGE === */
 .audience-card.recommended {
   border-color: var(--accent);

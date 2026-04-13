@@ -306,7 +306,20 @@ ${headContent}
 ${styleContent}
 </style>
 </head>
-<body>
+<body data-track="B">
+<script>
+// CRITICAL: Set default track BEFORE CSS renders to prevent FOUC
+(function() {
+  var track = 'B';
+  try {
+    var saved = localStorage.getItem('guide-track-selection');
+    if (saved && ['A','B','C'].indexOf(saved.toUpperCase()) !== -1) {
+      track = saved.toUpperCase();
+    }
+  } catch(e) {}
+  document.body.setAttribute('data-track', track);
+})();
+</script>
 ${bodyStartContent}
 <main id="main-content" role="main">
 ${sectionsContent}
