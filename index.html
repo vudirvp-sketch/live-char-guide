@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 5cf3b83e -->
-<!-- Generated: 2026-04-13T17:09:58.951Z -->
+<!-- Build hash: 05c0613d -->
+<!-- Generated: 2026-04-13T17:18:42.815Z -->
 <!-- Version: 5.4.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="5cf3b83e">
+<meta name="build-hash" content="05c0613d">
 <meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-13">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -3336,6 +3336,7 @@
 body[data-track="A"] [data-requires-track~="A"] {
   opacity: 1;
   max-height: 9999px;
+  overflow: visible;
   pointer-events: auto;
 }
 
@@ -3344,6 +3345,7 @@ body[data-track="B"] [data-requires-track~="A"],
 body[data-track="B"] [data-requires-track~="B"] {
   opacity: 1;
   max-height: 9999px;
+  overflow: visible;
   pointer-events: auto;
 }
 
@@ -3351,6 +3353,7 @@ body[data-track="B"] [data-requires-track~="B"] {
 body[data-track="C"] [data-requires-track] {
   opacity: 1;
   max-height: 9999px;
+  overflow: visible;
   pointer-events: auto;
 }
 
@@ -3832,10 +3835,9 @@ noscript .noscript-text p {
 }
 
 /* === NOSCRIPT CONTENT VISIBILITY === */
-/* Without JavaScript, default to Track B content visibility */
-noscript ~ .content-wrapper [data-requires-track~="C"] {
-  display: none !important;
-}
+/* MOVED to inline <noscript> style in 01_header.html */
+/* This rule was causing issues - it applied even when JS was enabled */
+/* The noscript fallback is now handled properly inside <noscript> tag */
 
 /* === LIGHT THEME NOSCRIPT === */
 body.theme-light noscript .noscript-notice {

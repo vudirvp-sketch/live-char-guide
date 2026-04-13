@@ -251,29 +251,8 @@
         <p style="font-size:0.9em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1 — Мотивационное ядро (Spine)</a></p>
       </div>
 
-      <!-- GHOST Teaser - Shown after SPINE completion -->
-      <div data-ghost-teaser style="display: none;">
-        <div class="callout tip" style="border-color: var(--accent);">
-          <strong>🔮 Расширенный контент доступен</strong>
-          <p>После изучения базовых элементов (FLAW, LIE, WANT, NEED) вы можете разблокировать продвинутый контент о GHOST — формирующих событиях прошлого.</p>
-          <button class="ghost-consent-btn" data-ghost-consent-btn="accept" style="margin-top: 0.5em; padding: 0.5em 1em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer;">Показать GHOST контент</button>
-        </div>
-      </div>
-
-      <!-- GHOST Consent Prompt -->
-      <div data-ghost-consent-prompt style="display: none;">
-        <div class="callout warn" style="border-color: #eab308;">
-          <strong>⚠️ Продвинутый контент</strong>
-          <p>GHOST содержит материал о травматических событиях прошлого персонажа. Рекомендуется для пользователей, уже ознакомившихся с базовой методологией.</p>
-          <div style="margin-top: 0.5em; display: flex; gap: 0.5em;">
-            <button class="ghost-consent-btn" data-ghost-consent-btn="accept" style="padding: 0.5em 1em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer;">Показать</button>
-            <button class="ghost-consent-btn" data-ghost-consent-btn="decline" style="padding: 0.5em 1em; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">Позже</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- GHOST Content - Requires Layer 2 consent -->
-      <div data-ghost-content="2" style="display: none;">
+      <!-- GHOST Content - Always visible for Track B+ -->
+      <div data-requires-track="B C">
         <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
         <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в Лорбук с триггерами.</p>
         <div class="callout warn">
