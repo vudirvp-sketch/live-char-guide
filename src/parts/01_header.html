@@ -320,8 +320,9 @@
     </div>
   </div>
   <style>
-    /* Reveal Track B content when JS is disabled (default visible track) */
-    [data-requires-track~="B"] { display: revert !important; }
+    /* Reveal Track A and B content when JS is disabled (default visible track) */
+    [data-requires-track~="A"] { display: block !important; }
+    [data-requires-track~="B"] { display: block !important; }
     /* Keep Track C hidden */
     [data-requires-track~="C"] { display: none !important; }
     /* Show audience selection as static info */

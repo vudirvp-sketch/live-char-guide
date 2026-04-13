@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: afe43c6a -->
-<!-- Generated: 2026-04-13T15:18:07.221Z -->
+<!-- Build hash: eaab8817 -->
+<!-- Generated: 2026-04-13T15:42:36.423Z -->
 <!-- Version: 5.4.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="afe43c6a">
+<meta name="build-hash" content="eaab8817">
 <meta name="livechar-version" content="5.4.0">
 <meta name="livechar-build" content="2026-04-13">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -10668,7 +10668,7 @@ content: [GHOST-триггер]</code></pre>
 
     // FIX-004: Track C = advanced users: GHOST available without consent gate
     if (track === 'C') {
-      saveConsent(true);  // Implicit consent - user is advanced
+      setConsent();  // Implicit consent - user is advanced
       setGhostLayer('2');
       return;
     }
