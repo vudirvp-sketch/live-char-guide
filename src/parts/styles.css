@@ -3261,26 +3261,28 @@
   font-size: 1.1rem;
 }
 
-/* === TRACK-BASED CONTENT VISIBILITY === */
-/* Default: Show all content (no track selected or noscript fallback) */
+/* === TRACK-BASED CONTENT VISIBILITY (FIX-002) === */
+/* Explicit positive visibility model */
+
+/* Default: Hide all track-gated content */
 [data-requires-track] {
-  display: block;
-}
-
-/* Track A: Hide advanced content */
-body[data-track="A"] [data-requires-track~="B"],
-body[data-track="A"] [data-requires-track~="C"] {
   display: none !important;
 }
 
-/* Track B: Show A and B content, hide C */
-body[data-track="B"] [data-requires-track~="C"] {
-  display: none !important;
+/* Track A: Show only A-tagged content */
+body[data-track="A"] [data-requires-track~="A"] {
+  display: revert !important;
 }
 
-/* Track C: Show all content */
+/* Track B: Show A and B tagged content */
+body[data-track="B"] [data-requires-track~="A"],
+body[data-track="B"] [data-requires-track~="B"] {
+  display: revert !important;
+}
+
+/* Track C: Show all track-gated content */
 body[data-track="C"] [data-requires-track] {
-  display: block !important;
+  display: revert !important;
 }
 
 /* === TRACK A SPECIFIC STYLES === */

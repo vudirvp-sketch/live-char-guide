@@ -3,49 +3,8 @@
     <!-- ==================== ПРИЛОЖЕНИЕ 1 ==================== -->
     <section id="appendix1">
       <h2>📎 Приложение 1: Глоссарий</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Термин</th><th>Значение</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Первое сообщение</strong></td><td>Первое сообщение персонажа в чате</td></tr>
-            <tr><td><strong>Примерные сообщения</strong></td><td>Примеры реплик, задающие голос персонажа</td></tr>
-            <tr><td><strong>System Prompt (SP)</strong></td><td>Системные инструкции для модели</td></tr>
-            <tr><td><strong>Описание персонажа</strong></td><td>Описание персонажа (Character Description)</td></tr>
-            <tr><td><strong>Поведенческие якоря</strong></td><td>Правила поведения: Триггер → Действие</td></tr>
-            <tr><td><strong>Spine</strong></td><td>Психологическое ядро: WANT/NEED/FLAW/LIE/GHOST</td></tr>
-            <tr><td><strong>FLAW</strong></td><td>Изъян персонажа (конкретное поведение)</td></tr>
-            <tr><td><strong>LIE</strong></td><td>Ложная установка, во что персонаж верит</td></tr>
-            <tr><td><strong>GHOST</strong></td><td>Событие прошлого, формирующее FLAW/LIE</td></tr>
-            <tr><td><strong>Авторские заметки (AN)</strong></td><td>Динамический слой контекста</td></tr>
-            <tr><td><strong>Лорбук (LB)</strong></td><td>База знаний с триггерами</td></tr>
-            <tr><td><strong>Параметры генерации</strong></td><td>Настройки генерации текста (T, Top P, RepPen и др.)</td></tr>
-            <tr><td><strong>RepPen</strong></td><td>Repetition Penalty — штраф за повторы</td></tr>
-            <tr><td><strong>CoT</strong></td><td>Цепочка рассуждений</td></tr>
-            <tr><td><strong>годмодинг</strong></td><td>Модель пишет за пользователя</td></tr>
-            <tr><td><strong>OOC</strong></td><td>Out of Character — выход из образа</td></tr>
-            <tr><td><strong>Core</strong></td><td>Обязательный элемент системы</td></tr>
-            <tr><td><strong>Optional</strong></td><td>Опциональный элемент</td></tr>
-            <tr><td><strong>Price</strong></td><td>Немедленная физическая или вербальная манифестация цены действия. Каждый якорь, связанный с FLAW/GHOST, должен содержать Price — наблюдаемое последствие, которое проявляется в той же сцене. Формат: [Trigger] → [Action] → [Price: &lt;manifestation&gt;]</td></tr>
-            <tr><td><strong>4K-Fallback</strong></td><td>Протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов. Предписывает сокращение до Первое сообщение (сенсорика+локация+тон) + 3 Поведенческие якоря, отключение Лорбук, передачу сеттинга через действие/реакцию. [→ <a href="#four-k-fallback">Раздел 5.12</a>]</td></tr>
-            <tr><td><strong>Structured Inject</strong></td><td>Механизм динамического обновления мотивации {{char}} через AN или LB. Поддерживает XML-теги (&lt;motivation&gt;, &lt;behavior&gt;) и префикс [SYSTEM]. Позволяет менять фокус поведения без перезаписи всей карточки. [→ <a href="#lorebook-mechanics">Раздел 5.3.1</a>]</td></tr>
-            <tr><td><strong>GHOST</strong> <em>(синонимы: GHOST-Слой, Призрак, Тень)</em></td><td>Событие прошлого, формирующее FLAW/LIE. Канонический термин: GHOST.</td></tr>
-            <tr><td><strong>Spine vs Anchors</strong></td><td><strong>Spine (Мотивационное ядро)</strong> — психологическое ядро персонажа из 5 элементов (WANT, NEED, FLAW, LIE, GHOST). Это <em>причина</em> поведения. <strong>Anchors (Поведенческие якоря)</strong> — наблюдаемые правила поведения в формате «Триггер → Действие → Цена». Это <em>проявление</em> Spine. Spine порождает Anchors, но они НЕ являются синонимами. [→ <a href="#spine">Раздел 4.1</a>]</td></tr>
-            <tr><td><strong>AN</strong> <em>(синонимы: Авторские заметки, Author's Notes, Авторка)</em></td><td>Динамический слой контекста для длинных сессий. Канонический термин: AN или Авторские заметки. [→ <a href="#an-ghost">Раздел 5.2</a>]</td></tr>
-            <tr><td><strong>LB</strong> <em>(синонимы: Лорбук, Lorebook, World Info)</em></td><td>База знаний с триггерами для активации контента по ключевым словам. Канонический термин: LB или Лорбук. [→ <a href="#lorebook">Раздел 5.3</a>]</td></tr>
-            <tr><td><strong>SP</strong> <em>(синонимы: System Prompt, Системный промпт, Системка)</em></td><td>Системные инструкции для модели. Канонический термин: SP или System Prompt.</td></tr>
-            <tr><td><strong>Examples</strong> <em>(синонимы: Примерные сообщения, Примеры, Dialogue Examples)</em></td><td>Примеры реплик, задающие голос персонажа. Канонический термин: Examples или Примерные сообщения. [→ <a href="#examples">Раздел 3.2</a>]</td></tr>
-            <tr><td><strong>Greeting</strong> <em>(синонимы: Первое сообщение, First Message, Приветствие)</em></td><td>Первое сообщение персонажа в чате. Канонический термин: Greeting или Первое сообщение. [→ <a href="#greeting">Раздел 3.3</a>]</td></tr>
-            <tr><td><strong>Description</strong> <em>(синонимы: Описание персонажа, Character Card, Карточка)</em></td><td>Описание персонажа (Character Description). Канонический термин: Description.</td></tr>
-            <tr><td><strong>WANT</strong></td><td>То, что персонаж <em>осознанно</em> хочет достичь. Внешняя, поверхностная цель.</td></tr>
-            <tr><td><strong>NEED</strong></td><td>То, что персонаж <em>действительно</em> нуждается. Глубинная, часто неосознаваемая потребность.</td></tr>
-            <tr><td><strong>Триггер</strong></td><td>Ситуация или стимул, активирующий поведенческий якорь.</td></tr>
-            <tr><td><strong>Действие</strong></td><td>Наблюдаемое поведение персонажа в ответ на триггер.</td></tr>
-            <tr><td><strong>Цена</strong> <em>(синоним: Price)</em></td><td>Немедленная физическая или вербальная манифестация последствия. Обязательна для FLAW/GHOST якорей.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <p>Полный глоссарий терминов: <a href="#glossary">Раздел 0.1: Глоссарий</a></p>
+      <p><em>Канонические определения всех терминов (SPINE, GHOST, AN, LB, OCEAN, Enneagram, и др.) находятся в основном глоссарии.</em></p>
     </section>
 
     <hr>

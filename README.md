@@ -60,7 +60,7 @@ Before submitting changes, ensure:
 1. `pnpm run build` succeeds without errors
 2. Python validation scripts pass
 3. No duplicate rule definitions outside canonical locations
-4. All model-specific content has `data-models` attributes
+4. All model-specific content has `data-model` attributes
 
 ## Project Structure
 
