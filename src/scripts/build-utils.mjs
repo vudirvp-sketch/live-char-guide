@@ -11,12 +11,13 @@
  * Eliminates code duplication between the two build scripts.
  *
  * @example
- * import { log, generateCSSVars, injectTokens, validateAnchors, detectBOM } from './build-utils.mjs';
+ * import { log, generateCSSVars, injectTokens, validateAnchors, detectBOM, validateDataFiles } from './build-utils.mjs';
  */
 
 import { parse } from 'node-html-parser';
 import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
+import { join } from 'path';
 
 // ============================================================================
 // LOGGING
@@ -179,7 +180,27 @@ function detectBOM(buffer) {
 }
 
 // ============================================================================
+// TASK 7: DATA FILES VALIDATION
+// ============================================================================
+
+/**
+ * Validates that required data files exist in the data directory
+ * @param {string} dataDir - Path to src/data/ directory
+ * @param {string[]} requiredFiles - Array of required filenames
+ * @returns {string[]} Array of missing file names
+ */
+function validateDataFiles(dataDir, requiredFiles) {
+  const missing = [];
+  for (const file of requiredFiles) {
+    if (!existsSync(join(dataDir, file))) {
+      missing.push(file);
+    }
+  }
+  return missing;
+}
+
+// ============================================================================
 // EXPORTS
 // ============================================================================
 
-export { log, generateCSSVars, injectTokens, validateAnchors, detectBOM };
+export { log, generateCSSVars, injectTokens, validateAnchors, detectBOM, validateDataFiles };

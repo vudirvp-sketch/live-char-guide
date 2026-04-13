@@ -7,6 +7,7 @@
  * - Replaces Google Fonts with system font fallbacks
  * - Adds CSP meta tags for offline use
  * - Embeds version metadata
+ * - TASK 7: Inlines all data files for offline support
  * - BUG-011 FIX: Comprehensive external URL validation
  * - BUG-013 FIX: Robust external script removal
  * - BUG-015 FIX: Ensure inline JS is inside <body>, not after </html>
@@ -17,10 +18,11 @@ import { readFile, writeFile, readdir, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { log, validateAnchors, detectBOM } from './build-utils.mjs';
+import { log, validateAnchors, detectBOM, validateDataFiles } from './build-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
+const SRC_DIR = join(ROOT, 'src');
 const PARTS_DIR = join(ROOT, 'src', 'parts');
 const MANIFEST_PATH = join(ROOT, 'src', 'manifest', 'structure.json');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
@@ -29,6 +31,7 @@ const ZERO_INSTALL_ADDONS_PATH = join(ROOT, 'src', 'assets', 'zero-install-addon
 const SW_JS_PATH = join(ROOT, 'src', 'assets', 'sw.js');
 const OUTPUT_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const HASH_PATH = join(ROOT, 'build-zero-install.hash');
+const DATA_SRC = join(SRC_DIR, 'data');
 
 // ============================================================================
 // ZERO-INSTALL TRANSFORMATIONS
@@ -156,6 +159,37 @@ function cleanBodyEndForZeroInstall(content) {
 }
 
 // ============================================================================
+// TASK 7: INLINE DATA FILES FOR ZERO-INSTALL
+// ============================================================================
+
+/**
+ * Inlines all JSON data files as script tags for zero-install builds
+ * Generic function that handles any JSON files in the data directory
+ * @async
+ * @returns {Promise<string>} HTML string with inline data script tags
+ */
+async function inlineDataFiles() {
+  if (!existsSync(DATA_SRC)) {
+    log('WARN', 'src/data/ directory not found');
+    return '';
+  }
+
+  const files = await readdir(DATA_SRC);
+  let html = '';
+  
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      const dataId = file.replace('.json', '-data');
+      const content = await readFile(join(DATA_SRC, file), 'utf-8');
+      html += `<script type="application/json" id="${dataId}">${content}</script>\n`;
+      log('INFO', `Inlined data: ${file}`);
+    }
+  }
+  
+  return html;
+}
+
+// ============================================================================
 // MAIN BUILD FUNCTION
 // ============================================================================
 
@@ -170,6 +204,14 @@ async function build() {
   } else {
     log('WARN', 'VERSION file not found, using "unknown"');
   }
+
+  // TASK 7D: Validate required data files exist
+  const missingData = validateDataFiles(DATA_SRC, ['glossary.json', 'test_scenarios.json']);
+  if (missingData.length > 0) {
+    log('ERROR', `Missing required data files: ${missingData.join(', ')}`);
+    process.exit(1);
+  }
+  log('INFO', 'Data files validation passed');
 
   // 2. Load manifest
   log('INFO', `Loading manifest from ${MANIFEST_PATH}`);
@@ -286,6 +328,10 @@ async function build() {
     log('WARN', 'zero-install-addons.js not found');
   }
   
+  // TASK 7: Load and inline data files
+  log('INFO', 'Loading data files for inline embedding...');
+  const inlineDataHtml = await inlineDataFiles();
+  
   // BUG-013, BUG-015 FIX: Clean body-end content properly
   log('INFO', 'Cleaning body-end content for zero-install...');
   const cleanBodyEndContent = cleanBodyEndForZeroInstall(bodyEndContent);
@@ -368,8 +414,9 @@ ${jsContent}
 
   // 8. Assemble final HTML with zero-install optimizations
   // IMPORTANT: inlineJs MUST be inside <body>, before closing tags
+  // TASK 7: inlineDataHtml is inserted before inlineJs
   const hash = createHash('sha256')
-    .update(headContent + bodyStartContent + sectionsContent + cleanBodyEndContent + transformedStyle + inlineJs)
+    .update(headContent + bodyStartContent + sectionsContent + cleanBodyEndContent + transformedStyle + inlineDataHtml + inlineJs)
     .digest('hex')
     .slice(0, 8);
 
@@ -382,6 +429,7 @@ ${jsContent}
 <!-- Version: ${version} -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
+<!-- Data files: INLINED for offline support -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -416,6 +464,7 @@ ${sectionsContent}
 </main>
 </div><!-- /.content-wrapper -->
 ${cleanBodyEndContent}
+${inlineDataHtml}
 ${inlineJs}
 </body>
 </html>`;
@@ -455,6 +504,13 @@ ${inlineJs}
   const inlineScriptIndex = processedHtml.indexOf('// === INLINE JAVASCRIPT');
   if (inlineScriptIndex > bodyCloseIndex) {
     log('ERROR', 'Inline JavaScript appears AFTER </body> - this will not execute!');
+    process.exit(1);
+  }
+
+  // TASK 7 CHECK: Verify inline data is inside <body>
+  const inlineDataIndex = processedHtml.indexOf('id="glossary-data"');
+  if (inlineDataIndex > bodyCloseIndex) {
+    log('ERROR', 'Inline data appears AFTER </body> - this will not be accessible!');
     process.exit(1);
   }
 

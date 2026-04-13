@@ -3369,26 +3369,48 @@ if ("serviceWorker" in navigator) {
       const content = document.getElementById('glossary-content');
       if (!content) return;
 
+      // TASK 1C: PRIORITY 1 - Check for inline data (zero-install / file:// protocol)
+      const inlineData = document.getElementById('glossary-data');
+      if (inlineData) {
+        try {
+          this.glossaryData = JSON.parse(inlineData.textContent);
+          this.renderGlossary(this.glossaryData);
+          console.log('[Glossary] Loaded from inline data');
+          return;
+        } catch (e) {
+          console.warn('[Glossary] Failed to parse inline data:', e.message);
+        }
+      }
+
+      // TASK 1C: PRIORITY 2 - Fetch from built data directory (online build)
       try {
-        // Try to load from JSON file
-        const response = await fetch('src/data/glossary.json');
+        const response = await fetch('data/glossary.json');
         if (response.ok) {
           this.glossaryData = await response.json();
           this.renderGlossary(this.glossaryData);
-        } else {
-          // Fallback: try relative path without src/
-          const fallbackResponse = await fetch('data/glossary.json');
-          if (fallbackResponse.ok) {
-            this.glossaryData = await fallbackResponse.json();
-            this.renderGlossary(this.glossaryData);
-          } else {
-            this.renderFallback();
-          }
+          console.log('[Glossary] Loaded from data/glossary.json');
+          return;
         }
       } catch (e) {
-        console.warn('[Glossary] Failed to load data:', e.message);
-        this.renderFallback();
+        // Network error — try dev path
       }
+
+      // TASK 1C: PRIORITY 3 - Dev fallback (src/data/ path)
+      try {
+        const devResponse = await fetch('src/data/glossary.json');
+        if (devResponse.ok) {
+          this.glossaryData = await devResponse.json();
+          this.renderGlossary(this.glossaryData);
+          console.log('[Glossary] Loaded from src/data/glossary.json (dev)');
+          return;
+        }
+      } catch (e) {
+        // Dev path also failed
+      }
+
+      // All sources failed
+      console.warn('[Glossary] All data sources failed');
+      this.renderFallback();
     }
 
     renderGlossary(data) {
@@ -3449,7 +3471,20 @@ if ("serviceWorker" in navigator) {
     }
 
     scrollToTerm(term) {
-      const item = document.querySelector(`.glossary-item[data-term="${term.toLowerCase()}"]`);
+      const normalizedTerm = term.toLowerCase();
+      
+      // TASK 6: Try exact data-term match first
+      let item = document.querySelector(`.glossary-item[data-term="${normalizedTerm}"]`);
+      
+      // TASK 6: Try matching by text content (for abbreviations)
+      if (!item) {
+        const allItems = document.querySelectorAll('.glossary-item');
+        item = Array.from(allItems).find(el => {
+          const text = el.textContent.toLowerCase();
+          return text.includes(`(${normalizedTerm})`) || text.startsWith(normalizedTerm);
+        });
+      }
+      
       if (item) {
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
         item.classList.add('highlight');

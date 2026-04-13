@@ -29,9 +29,10 @@
     { "stage": 2, "name": "Architecture", "description": "System design and assembly rules", "phase": "production" },
     { "stage": 3, "name": "Core Blocks", "description": "Anchors, Examples, Greeting" },
     { "stage": 4, "name": "Psychology", "description": "Spine, Enneagram, OCEAN" },
-    { "stage": 5, "name": "Implementation", "description": "Technical settings, parameters" },
-    { "stage": 6, "name": "Validation", "description": "Testing and diagnostics" },
-    { "stage": 7, "name": "Debugging", "description": "Troubleshooting guide" }
+    { "stage": 5, "name": "Implementation", "description": "Technical settings, CoT tiers, parameters" },
+    { "stage": 6, "name": "Anti-patterns", "description": "Common mistakes to avoid BEFORE diagnostics" },
+    { "stage": 7, "name": "Diagnostics", "description": "Test scenarios and symptom table" },
+    { "stage": 8, "name": "Debugging", "description": "Troubleshooting decision tree" }
   ],
   "validation": {
     "ci_scripts": [

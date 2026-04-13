@@ -25,7 +25,7 @@ import { readFile, writeFile, readdir, mkdir, copyFile, unlink, rm } from 'fs/pr
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { log, validateAnchors, detectBOM } from './build-utils.mjs';
+import { log, validateAnchors, detectBOM, validateDataFiles } from './build-utils.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -37,6 +37,8 @@ const OUTPUT_PATH = join(ROOT, 'index.html');
 const HASH_PATH = join(ROOT, 'build.hash');
 const ASSETS_SRC = join(SRC_DIR, 'assets');
 const ASSETS_OUT = join(ROOT, 'assets');
+const DATA_SRC = join(SRC_DIR, 'data');
+const DATA_OUT = join(ROOT, 'data');
 
 // ============================================================================
 // UTILITY FUNCTIONS (local only)
@@ -165,6 +167,35 @@ async function copyAssetsToOutput(version) {
 }
 
 // ============================================================================
+// TASK 7: COPY DATA FILES TO OUTPUT DIRECTORY
+// ============================================================================
+
+/**
+ * Copies all JSON data files from src/data to output data directory
+ * Generic function that handles any JSON files in the data directory
+ * @async
+ * @returns {Promise<void>}
+ */
+async function copyDataToOutput() {
+  if (!existsSync(DATA_SRC)) {
+    log('WARN', 'src/data/ directory not found, skipping data copy');
+    return;
+  }
+
+  await ensureDir(DATA_OUT);
+
+  const dataFiles = await readdir(DATA_SRC);
+  for (const file of dataFiles) {
+    if (file.endsWith('.json')) {
+      const srcPath = join(DATA_SRC, file);
+      const outPath = join(DATA_OUT, file);
+      await copyFile(srcPath, outPath);
+      log('INFO', `Copied data: ${file}`);
+    }
+  }
+}
+
+// ============================================================================
 // MAIN BUILD FUNCTION
 // ============================================================================
 
@@ -190,6 +221,14 @@ async function build() {
   } else {
     log('WARN', 'VERSION file not found, using "unknown"');
   }
+  
+  // TASK 7D: Validate required data files exist
+  const missingData = validateDataFiles(DATA_SRC, ['glossary.json', 'test_scenarios.json']);
+  if (missingData.length > 0) {
+    log('ERROR', `Missing required data files: ${missingData.join(', ')}`);
+    process.exit(1);
+  }
+  log('INFO', 'Data files validation passed');
   
   // 2. Load manifest
   log('INFO', `Loading manifest from ${MANIFEST_PATH}`);
@@ -341,6 +380,10 @@ ${bodyEndContent}
   // BUG-002 FIX: Copy assets to output directory BEFORE hashing
   log('INFO', 'Copying assets to output directory...');
   await copyAssetsToOutput(version);
+
+  // TASK 7: Copy data files to output directory
+  log('INFO', 'Copying data files to output directory...');
+  await copyDataToOutput();
 
   // 5.7 Hash assets (rename JS/CSS files with content hash for cache busting)
   processedHtml = await hashAssets(processedHtml, ASSETS_OUT);
