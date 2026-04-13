@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 05c0613d -->
-<!-- Generated: 2026-04-13T17:18:42.815Z -->
-<!-- Version: 5.4.0 -->
+<!-- Build hash: 3c9d3a37 -->
+<!-- Generated: 2026-04-13T18:01:58.780Z -->
+<!-- Version: 5.5.1 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="05c0613d">
-<meta name="livechar-version" content="5.4.0">
+<meta name="build-hash" content="3c9d3a37">
+<meta name="livechar-version" content="5.5.1">
 <meta name="livechar-build" content="2026-04-13">
 <meta http-equiv="Cache-Control" content="no-cache">
-<title>🧠 Live Character for LLM — Guide 5.4.0</title>
+<title>🧠 Live Character for LLM — Guide 5.5.1</title>
 <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
-<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.4.0">
+<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.5.1">
 <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/preview-card.png">
@@ -293,6 +293,9 @@
     h3 { font-size: 1.25rem; letter-spacing: -0.005em; }
     h4 { font-size: 1.1rem; }
     p { margin: 0.8em 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; clear: both; }
+    /* FIX-004: Prevent consecutive hr from creating excessive spacing */
+    hr + hr { display: none; }
     a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
     a:hover { border-bottom-style: solid; }
 
@@ -905,6 +908,22 @@
     /* Remove default marker */
     details.interactive summary::-webkit-details-marker { display: none; }
     details.interactive summary::marker { display: none; content: ''; }
+
+    /* ============================================================
+       FIX-001: ACCORDION OVERFLOW FIX (v5.5.1)
+       Prevents layout overlap when details.interactive is inside
+       [data-requires-track] with animated max-height.
+       Issue: OCEAN/MBTI tools overlapping subsequent sections.
+       ============================================================ */
+    details.interactive[open] > div,
+    details.interactive[open] > .accordion-content {
+      overflow: visible !important;
+    }
+
+    /* Ensure details container doesn't trap content during animation */
+    details.interactive[open] {
+      overflow: visible;
+    }
 
     /* === COPY BUTTON === */
     .pre-wrapper {
@@ -2885,6 +2904,25 @@
   max-width: var(--max-width-wide);
 }
 
+/* ============================================================
+   FIX-003: FLEX CONTAINER BFC FIX (v5.5.1)
+   Creates Block Formatting Context for interactive tool layouts.
+   Prevents margin collapse and overlap with subsequent sections.
+   ============================================================ */
+.ocean-layout,
+.mbti-layout,
+.ennea-layout {
+  display: flow-root;  /* Creates BFC, prevents margin collapse */
+}
+
+/* Ensure interactive embeds don't create stacking issues */
+.ocean-embed,
+.mbti-embed,
+.ennea-embed {
+  position: relative;
+  z-index: 1;
+}
+
 /* === REDUCED MOTION (Accessibility - WCAG 2.3.3) === */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -3589,208 +3627,6 @@ body.theme-oled .track-icon--neural {
   }
 }
 
-/* ============================================================
-   ITEM-002: GHOST CONTENT GATING
-   Three-layer progressive disclosure for GHOST content
-   ============================================================ */
-
-/* === LAYER 0: GHOST HIDDEN (Default / Track A) === */
-/* GHOST content completely hidden */
-body:not([data-ghost-layer]) [data-ghost-content],
-body[data-ghost-layer="0"] [data-ghost-content] {
-  display: none !important;
-}
-
-/* Teaser hidden in layer 0 */
-body:not([data-ghost-layer]) [data-ghost-teaser],
-body[data-ghost-layer="0"] [data-ghost-teaser] {
-  display: none !important;
-}
-
-/* Consent prompt hidden in layer 0 */
-body:not([data-ghost-layer]) [data-ghost-consent-prompt],
-body[data-ghost-layer="0"] [data-ghost-consent-prompt] {
-  display: none !important;
-}
-
-/* === LAYER 1: TEASER VISIBLE === */
-/* GHOST teaser visible, full content hidden */
-body[data-ghost-layer="1"] [data-ghost-teaser] {
-  display: block !important;
-}
-
-body[data-ghost-layer="1"] [data-ghost-content="2"] {
-  display: none !important;
-}
-
-/* Consent prompt visible */
-body[data-ghost-layer="1"] [data-ghost-consent-prompt] {
-  display: block !important;
-}
-
-/* === LAYER 2: FULL GHOST VISIBLE === */
-/* All GHOST content visible */
-body[data-ghost-layer="2"] [data-ghost-content] {
-  display: block !important;
-}
-
-body[data-ghost-layer="2"] [data-ghost-teaser] {
-  display: block !important;
-}
-
-/* Consent prompt hidden after consent given */
-body[data-ghost-layer="2"] [data-ghost-consent-prompt] {
-  display: none !important;
-}
-
-/* === GHOST TEASER STYLES === */
-.ghost-teaser {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.08));
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: 8px;
-  padding: 1.2em 1.5em;
-  margin: 1.5em 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.ghost-teaser::before {
-  content: '👻';
-  font-size: 1.5rem;
-  position: absolute;
-  top: 0.5em;
-  right: 0.8em;
-  opacity: 0.3;
-}
-
-.ghost-teaser-title {
-  font-weight: 600;
-  color: #a78bfa;
-  margin-bottom: 0.5em;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
-.ghost-teaser-content {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.ghost-teaser-content code {
-  background: rgba(139, 92, 246, 0.15);
-  border-color: rgba(139, 92, 246, 0.3);
-}
-
-/* === GHOST CONSENT PROMPT === */
-.ghost-consent-prompt {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.2em 1.5em;
-  margin: 1em 0;
-  text-align: center;
-}
-
-.ghost-consent-prompt p {
-  margin-bottom: 1em;
-  color: var(--text-muted);
-}
-
-.ghost-consent-buttons {
-  display: flex;
-  gap: 0.8em;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.ghost-consent-btn {
-  padding: 0.6em 1.2em;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: inherit;
-  min-width: 120px;
-}
-
-.ghost-consent-btn[data-ghost-consent-btn="accept"] {
-  background: var(--accent);
-  color: var(--bg);
-  border: none;
-}
-
-.ghost-consent-btn[data-ghost-consent-btn="accept"]:hover {
-  background: #0ea5e9;
-  transform: translateY(-1px);
-}
-
-.ghost-consent-btn[data-ghost-consent-btn="decline"] {
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-}
-
-.ghost-consent-btn[data-ghost-consent-btn="decline"]:hover {
-  border-color: var(--text-muted);
-  color: var(--text);
-}
-
-.ghost-consent-btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* === GHOST CONTENT CONTAINER === */
-.ghost-content {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(56, 189, 248, 0.05));
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  border-radius: 8px;
-  padding: 1.5em;
-  margin: 1.5em 0;
-}
-
-.ghost-content-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-bottom: 1em;
-  padding-bottom: 0.8em;
-  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
-}
-
-.ghost-content-icon {
-  font-size: 1.2rem;
-}
-
-.ghost-content-title {
-  font-weight: 600;
-  color: #a78bfa;
-}
-
-/* === LIGHT THEME GHOST STYLES === */
-body.theme-light .ghost-teaser {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(56, 189, 248, 0.05));
-  border-color: rgba(139, 92, 246, 0.2);
-}
-
-body.theme-light .ghost-content {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(56, 189, 248, 0.03));
-  border-color: rgba(139, 92, 246, 0.15);
-}
-
-/* === OLED THEME GHOST STYLES === */
-body.theme-oled .ghost-teaser {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(56, 189, 248, 0.1));
-  border-color: rgba(139, 92, 246, 0.4);
-}
-
-body.theme-oled .ghost-content {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.08));
-  border-color: rgba(139, 92, 246, 0.3);
-}
 
 /* ============================================================
    ITEM-003: NOSCRIPT FALLBACK ENHANCED
@@ -3851,41 +3687,6 @@ body.theme-oled noscript .noscript-notice {
   border-color: rgba(234, 179, 8, 0.5);
 }
 
-/* === MOBILE RESPONSIVE GHOST === */
-@media (max-width: 640px) {
-  .ghost-consent-buttons {
-    flex-direction: column;
-  }
-  
-  .ghost-consent-btn {
-    width: 100%;
-  }
-  
-  noscript .noscript-notice-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  noscript .noscript-icon {
-    align-self: center;
-  }
-}
-
-/* === PRINT STYLES FOR GHOST === */
-@media print {
-  .ghost-teaser,
-  .ghost-consent-prompt,
-  .ghost-content {
-    display: block !important;
-    background: none;
-    border: 1px solid #ccc;
-    page-break-inside: avoid;
-  }
-  
-  .ghost-content-header {
-    border-bottom-color: #ccc;
-  }
-}
 
 /* ============================================================
    ITEM-005: OCEAN VALIDATOR STYLES
@@ -4626,7 +4427,7 @@ body.debug-mode [data-requires-track]::before {
 </div>
 
 <header>
-  <h1>📖 Живой персонаж для LLM 5.4.0 — Гайд по созданию RP-карточек</h1>
+  <h1>📖 Живой персонаж для LLM 5.5.1 — Гайд по созданию RP-карточек</h1>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
 
   <!-- ID: D4 | Introduction Block -->
@@ -5574,29 +5375,8 @@ body.debug-mode [data-requires-track]::before {
         <p style="font-size:0.9em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1 — Мотивационное ядро (Spine)</a></p>
       </div>
 
-      <!-- GHOST Teaser - Shown after SPINE completion -->
-      <div data-ghost-teaser style="display: none;">
-        <div class="callout tip" style="border-color: var(--accent);">
-          <strong>🔮 Расширенный контент доступен</strong>
-          <p>После изучения базовых элементов (FLAW, LIE, WANT, NEED) вы можете разблокировать продвинутый контент о GHOST — формирующих событиях прошлого.</p>
-          <button class="ghost-consent-btn" data-ghost-consent-btn="accept" style="margin-top: 0.5em; padding: 0.5em 1em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer;">Показать GHOST контент</button>
-        </div>
-      </div>
-
-      <!-- GHOST Consent Prompt -->
-      <div data-ghost-consent-prompt style="display: none;">
-        <div class="callout warn" style="border-color: #eab308;">
-          <strong>⚠️ Продвинутый контент</strong>
-          <p>GHOST содержит материал о травматических событиях прошлого персонажа. Рекомендуется для пользователей, уже ознакомившихся с базовой методологией.</p>
-          <div style="margin-top: 0.5em; display: flex; gap: 0.5em;">
-            <button class="ghost-consent-btn" data-ghost-consent-btn="accept" style="padding: 0.5em 1em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer;">Показать</button>
-            <button class="ghost-consent-btn" data-ghost-consent-btn="decline" style="padding: 0.5em 1em; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">Позже</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- GHOST Content - Requires Layer 2 consent -->
-      <div data-ghost-content="2" style="display: none;">
+      <!-- GHOST Content - Always visible for Track B+ -->
+      <div data-requires-track="B C">
         <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
         <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в Лорбук с триггерами.</p>
         <div class="callout warn">
@@ -7061,8 +6841,6 @@ Anchors:
 
     <!-- ==================== РАЗДЕЛ 5 ==================== -->
     <!-- Accordion policy: Core sections = always visible. Optional/Advanced = collapsed by default (details.interactive). -->
-
-    <hr>
 
     <!-- ==================== SPINE→ANCHORS MAPPING ==================== -->
     <section id="spine-anchors-mapping" data-requires-track="B C">
@@ -10317,7 +10095,7 @@ content: [GHOST-триггер]</code></pre>
 </div>
 
 <!-- Main JavaScript (hashed by build script) -->
-<script src="assets/main.9bd49f7b.js" defer></script>
+<script src="assets/main.e3ca3d3c.js" defer></script>
 
 </body>
 </html>

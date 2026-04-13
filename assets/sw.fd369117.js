@@ -8,7 +8,7 @@
  */
 
 // Cache name includes version for automatic invalidation on deploy
-const CACHE_VERSION = 'live-char-v5.4.0';
+const CACHE_VERSION = 'live-char-v5.5.1';
 const CACHE_NAME = CACHE_VERSION;
 const STATIC_ASSETS = [
   '/',
