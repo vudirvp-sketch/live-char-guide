@@ -264,7 +264,9 @@
     h3 { font-size: 1.25rem; letter-spacing: -0.005em; }
     h4 { font-size: 1.1rem; }
     p { margin: 0.8em 0; }
-    hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; clear: both; }
+    /* FIX-004: Prevent consecutive hr from creating excessive spacing */
+    hr + hr { display: none; }
     a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
     a:hover { border-bottom-style: solid; }
 
@@ -877,6 +879,22 @@
     /* Remove default marker */
     details.interactive summary::-webkit-details-marker { display: none; }
     details.interactive summary::marker { display: none; content: ''; }
+
+    /* ============================================================
+       FIX-001: ACCORDION OVERFLOW FIX (v5.5.1)
+       Prevents layout overlap when details.interactive is inside
+       [data-requires-track] with animated max-height.
+       Issue: OCEAN/MBTI tools overlapping subsequent sections.
+       ============================================================ */
+    details.interactive[open] > div,
+    details.interactive[open] > .accordion-content {
+      overflow: visible !important;
+    }
+
+    /* Ensure details container doesn't trap content during animation */
+    details.interactive[open] {
+      overflow: visible;
+    }
 
     /* === COPY BUTTON === */
     .pre-wrapper {
@@ -2855,6 +2873,25 @@
 .mbti-embed,
 .ocean-embed {
   max-width: var(--max-width-wide);
+}
+
+/* ============================================================
+   FIX-003: FLEX CONTAINER BFC FIX (v5.5.1)
+   Creates Block Formatting Context for interactive tool layouts.
+   Prevents margin collapse and overlap with subsequent sections.
+   ============================================================ */
+.ocean-layout,
+.mbti-layout,
+.ennea-layout {
+  display: flow-root;  /* Creates BFC, prevents margin collapse */
+}
+
+/* Ensure interactive embeds don't create stacking issues */
+.ocean-embed,
+.mbti-embed,
+.ennea-embed {
+  position: relative;
+  z-index: 1;
 }
 
 /* === REDUCED MOTION (Accessibility - WCAG 2.3.3) === */
