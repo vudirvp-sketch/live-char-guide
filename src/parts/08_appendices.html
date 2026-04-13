@@ -16,13 +16,65 @@
     <!-- ==================== ПРИЛОЖЕНИЕ 2 ==================== -->
     <section id="appendix2" data-requires-track="C">
       <details class="interactive" id="acc-appendix2">
-        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— полные таблицы OCEAN, Enneagram, моделей</small></span></summary>
+        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— Token Budgets, OCEAN, Enneagram, модели</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
 
       <div class="callout tip">
         <strong>📋 Как использовать этот Appendix:</strong>
         <p>Это справочный репозиторий. Для инструкций по применению см.: <a href="#enneagram">Раздел 4.2 (Enneagram)</a> и <a href="#ocean">Раздел 4.3 (OCEAN)</a>.</p>
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.3em">Полные таблицы здесь; алгоритмы интеграции и примеры — в основных разделах.</p>
+      </div>
+
+      <h3>Token Budget Reference Tables</h3>
+      <p><em>Moved from Quick Start for reference. For quick estimates, use the simplified guide in Section 1.</em></p>
+
+      <h4>📊 Token Distribution by Block</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Блок</th><th>Минимум</th><th>Стандарт</th><th>Максимум</th><th>Примечание</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>System Prompt</strong></td><td>80–100</td><td>150–200</td><td>300–400</td><td>Антигодмодинг + SPATIAL LOCK + FORMAT LOCK — обязательно</td></tr>
+            <tr><td><strong>Greeting</strong></td><td>80–100</td><td>150–200</td><td>250–300</td><td>Сенсорика → поза → речь → крючок</td></tr>
+            <tr><td><strong>Spine (motivation)</strong></td><td>60–80</td><td>100–150</td><td>200–250</td><td>WANT + NEED + FLAW + LIE + GHOST</td></tr>
+            <tr><td><strong>Behavior (якоря)</strong></td><td>100–150</td><td>200–300</td><td>400–500</td><td>5–7 якорей с ценой для FLAW/GHOST</td></tr>
+            <tr><td><strong>Examples (мин. 2)</strong></td><td>100–150</td><td>200–300</td><td>400–600</td><td>Нейтральный + стресс-сценарий</td></tr>
+            <tr><td><strong>Author's Notes</strong></td><td>—</td><td>50–100</td><td>150–200</td><td>Только для ≥8K контекста</td></tr>
+            <tr><td><strong>Lorebook (GHOST)</strong></td><td>—</td><td>30–50</td><td>100–150</td><td>Опционально, для ≥8K</td></tr>
+            <tr><td><strong>OCEAN (1–2 полюса)</strong></td><td>20–30</td><td>40–60</td><td>80–100</td><td>Только экстремальные значения</td></tr>
+            <tr><td><strong>Enneagram</strong></td><td>20–30</td><td>40–60</td><td>80–100</td><td>Тип + крыло + стресс/рост</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>📊 Token Budget by Context Size</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Контекст</th><th>Карточка</th><th>AN/LB</th><th>Диалог</th><th>Итого</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>4K</strong></td><td>300–400</td><td>❌ Нет</td><td>~3500</td><td>~4000</td></tr>
+            <tr><td><strong>8K</strong></td><td>600–800</td><td>100–200</td><td>~7000</td><td>~8000</td></tr>
+            <tr><td><strong>16K</strong></td><td>800–1200</td><td>200–400</td><td>~14000</td><td>~16000</td></tr>
+            <tr><td><strong>32K+</strong></td><td>1500–2500</td><td>300–500</td><td>~30000</td><td>~32000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn" style="margin:1em 0">
+        <strong>⚠️ Важно:</strong> Это оценки. Реальное количество токенов зависит от языка (русский = больше токенов), модели и токенизатора. Всегда проверяй счётчиком.
+      </div>
+
+      <div class="callout tip">
+        <strong>💡 Как оценить токены:</strong>
+        <ul style="margin:0.5em 0 0 0">
+          <li>Встроенный счётчик интерфейса (если доступен) — наиболее точный метод</li>
+          <li>Приближение: 1 токен ≈ 4 символа (английский) / 1–2 символа (русский)</li>
+          <li>Онлайн-инструменты: tiktokenizer (OpenAI), HuggingFace Tokenizer</li>
+          <li>Калькуляция: разделите количество символов в блоке на 3–4 для оценки</li>
+        </ul>
       </div>
 
       <h3>📎 Полная таблица OCEAN</h3>
