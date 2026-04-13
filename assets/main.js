@@ -376,6 +376,7 @@
 
     // FIX-004: Track C = advanced users: GHOST available without consent gate
     if (track === 'C') {
+      setConsent();  // Implicit consent - user is advanced
       setGhostLayer('2');
       return;
     }
