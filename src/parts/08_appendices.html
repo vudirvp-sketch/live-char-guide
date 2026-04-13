@@ -2,16 +2,22 @@
 
     <!-- ==================== ПРИЛОЖЕНИЕ 1 ==================== -->
     <section id="appendix1">
-      <h2>📎 Приложение 1: Глоссарий</h2>
-      <p>Полный глоссарий терминов: <a href="#glossary">Раздел 0.1: Глоссарий</a></p>
-      <p><em>Канонические определения всех терминов (SPINE, GHOST, AN, LB, OCEAN, Enneagram, и др.) находятся в основном глоссарии.</em></p>
+      <details class="interactive" id="acc-appendix1">
+        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 1: Глоссарий</h2> <small style="color:var(--text-muted)">— ссылка на основной глоссарий</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+          <p>Полный глоссарий терминов: <a href="#glossary">Раздел 0.1: Глоссарий</a></p>
+          <p><em>Канонические определения всех терминов (SPINE, GHOST, AN, LB, OCEAN, Enneagram, и др.) находятся в основном глоссарии.</em></p>
+        </div>
+      </details>
     </section>
 
     <hr>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 2 ==================== -->
     <section id="appendix2" data-requires-track="C">
-      <h2>📎 Приложение 2: Справочные таблицы</h2>
+      <details class="interactive" id="acc-appendix2">
+        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— полные таблицы OCEAN, Enneagram, моделей</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
 
       <div class="callout tip">
         <strong>📋 Как использовать этот Appendix:</strong>
@@ -213,13 +219,18 @@
         </table>
       </div>
       </div>
+
+        </div>
+      </details>
     </section>
 
     <hr>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 3 ==================== -->
     <section id="appendix3">
-      <h2>📎 Приложение 3: Пример карточки (Макс)</h2>
+      <details class="interactive" id="acc-appendix3">
+        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 3: Пример карточки (Макс)</h2> <small style="color:var(--text-muted)">— полный пример с System Prompt и Description</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
       <p><strong>Имя:</strong> Макс<br>
       <strong>Возраст:</strong> 19 лет<br>
       <strong>Тип Enneagram:</strong> 6w5<br>
@@ -302,6 +313,8 @@ No smart typography. If conflict → default to Examples.</code></pre>
           </tbody>
         </table>
       </div>
+        </div>
+      </details>
     </section>
 
     <hr>
@@ -359,7 +372,9 @@ No smart typography. If conflict → default to Examples.</code></pre>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 5 ==================== -->
     <section id="appendix5">
-      <h2>📎 Приложение 5: Шаблоны карточек</h2>
+      <details class="interactive" id="acc-appendix5">
+        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 5: Шаблоны карточек</h2> <small style="color:var(--text-muted)">— минимальный и стандартный шаблоны</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
 
       <div class="tabs" role="tablist" aria-label="Шаблоны карточек">
         <button role="tab" data-tab="tpl-minimal" aria-selected="true">⚡ Минимальный</button>
@@ -477,71 +492,9 @@ No smart typography. If conflict → default to Examples.
 // Замени [...] на систему разметки из твоих Examples.</code></pre>
         </div>
       </div>
-      
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      <!-- ITEM-009: CARD VALIDATION PANEL -->
-      <!-- ═══════════════════════════════════════════════════════════════ -->
-      
-      <div id="card-validator" class="card-validator-panel" style="margin-top: 2em; padding: 1.5em; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-surface);">
-        <h4 style="margin-top: 0;">🎯 Валидация карточки</h4>
-        <p style="font-size: 0.9em; color: var(--text-muted);">Проверьте карточку перед экспортом на наличие пустых полей и placeholder-текста.</p>
-        
-        <div class="card-validator-fields" style="display: grid; gap: 0.8em; margin: 1em 0;">
-          <label style="display: flex; flex-direction: column; gap: 0.3em;">
-            <span style="font-weight: 500;">Имя персонажа <span style="color: #ef4444;">*</span></span>
-            <input type="text" id="card-name" data-card-field="name" placeholder="Имя персонажа" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
-          </label>
-          <label style="display: flex; flex-direction: column; gap: 0.3em;">
-            <span style="font-weight: 500;">FLAW (Изъян) <span style="color: #ef4444;">*</span></span>
-            <textarea id="card-flaw" data-card-field="flaw" placeholder="Конкретное поведение персонажа..." rows="2" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); resize: vertical;"></textarea>
-          </label>
-          <label style="display: flex; flex-direction: column; gap: 0.3em;">
-            <span style="font-weight: 500;">WANT (Хочет) <span style="color: #ef4444;">*</span></span>
-            <input type="text" id="card-want" data-card-field="want" placeholder="Что персонаж осознанно хочет" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
-          </label>
-          <label style="display: flex; flex-direction: column; gap: 0.3em;">
-            <span style="font-weight: 500;">NEED (Нужно) <span style="color: #ef4444;">*</span></span>
-            <input type="text" id="card-need" data-card-field="need" placeholder="Что персонаж действительно нуждается" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
-          </label>
-          <label style="display: flex; flex-direction: column; gap: 0.3em;">
-            <span style="font-weight: 500;">LIE (Ложь)</span>
-            <input type="text" id="card-lie" data-card-field="lie" placeholder="Во что персонаж верит (ложная установка)" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text);">
-          </label>
-          <label style="display: flex; flex-direction: column; gap: 0.3em;">
-            <span style="font-weight: 500;">GHOST (Тень)</span>
-            <textarea id="card-ghost" data-card-field="ghost" placeholder="Событие прошлого, сформировавшее FLAW/LIE..." rows="2" style="padding: 0.5em; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); resize: vertical;"></textarea>
-          </label>
+
         </div>
-        
-        <div class="card-validator-actions" style="display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap;">
-          <button id="card-validate-btn" type="button" style="padding: 0.6em 1.2em; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 500;">Проверить</button>
-          <button id="card-export-btn" type="button" disabled style="padding: 0.6em 1.2em; background: var(--bg-elevated); color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; cursor: not-allowed; font-weight: 500;">Экспорт</button>
-          <span id="card-validation-status" class="card-validation-status" style="font-size: 0.9em;"></span>
-        </div>
-        
-        <div class="callout tip" style="margin-top: 1em;">
-          <strong>💡 Правила валидации:</strong>
-          <ul style="margin: 0.3em 0 0 0; padding-left: 1.5em;">
-            <li>Обязательные поля: name, flaw, want, need</li>
-            <li>Placeholder-текст (<code>[Описание]</code>, <code>&lt;field&gt;</code>, <code>your name</code>) блокирует экспорт</li>
-            <li>LIE и GHOST опциональны, но рекомендуются для полных карточек</li>
-          </ul>
-        </div>
-      </div>
-      
-      <style>
-        .card-validation-status.valid { color: #22c55e; }
-        .card-validation-status.invalid { color: #ef4444; }
-        #card-export-btn:not(:disabled) { 
-          background: #22c55e; 
-          color: #fff; 
-          cursor: pointer; 
-          border-color: #22c55e; 
-        }
-        #card-export-btn:not(:disabled):hover { 
-          background: #16a34a; 
-        }
-      </style>
+      </details>
     </section>
 
     <hr>
@@ -686,67 +639,12 @@ depth: 7, probability: 70%, cooldown: 8</code></pre>
 Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
 {{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.
 
-[Стиль]
-Пиши от 3-го лица, прошедшее время. Регистр: сдержанный, фрагментированный, с паузами на "потерю" слов. Голос персонажа — циничный, усталый, с редкими вспышками чего-то человеческого.
-
-[Тон сеттинга]
-Тёмное фэнтези/боди-хоррор. Вель — город-организм, переваривающий людей как клетки. Ошметки — выброшенные пространства, где время не работает линейно. Сангвис — сопротивление замене. Боль калибрует, но не исцеляет. Мир болен, не механистичен.
-
 [FORMAT LOCK]
 Strictly replicate Examples syntax. Actions: prose. Dialogue: «guillemets».
-No smart typography. If conflict → default to Examples.</code></pre>
+No smart typography. If conflict → default to Examples.
 
-      <h4>[Настройки]</h4>
-      <div data-model="12B">
-        <p><strong>12B–14B модели:</strong></p>
-        <ul>
-          <li>temperature: 0.7</li>
-          <li>top_p: 0.9</li>
-          <li>min_p: 0.05</li>
-          <li>repetition_penalty: 1.05</li>
-          <li>top_k: 50</li>
-          <li>presence_penalty: 0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</li>
-        </ul>
-      </div>
-      <div data-model="32B">
-        <p><strong>32B+ / API модели:</strong></p>
-        <ul>
-          <li>temperature: 0.95</li>
-          <li>top_p: 0.95</li>
-          <li>min_p: 0.05</li>
-          <li>repetition_penalty: 1.05</li>
-          <li>top_k: 50</li>
-          <li>presence_penalty: 0.0–0.15</li>
-        </ul>
-      </div>
-
-      <h4>[Примечания к карточке]</h4>
-      <p><strong>Чеклист выполнен:</strong></p>
-      <ul>
-        <li>☑ Антигодмодинг в System Prompt</li>
-        <li>☑ Spine заполнен (все 5 элементов)</li>
-        <li>☑ Цепочка GHOST → LIE → FLAW → NEED → WANT проводится</li>
-        <li>☑ Все якоря = наблюдаемые действия; цена есть у якорей с FLAW/GHOST</li>
-        <li>☑ Greeting: сенсорика → поза(FLAW) → речь(LIE) → крючок для {{user}}</li>
-        <li>☑ Examples содержат тело до речи; стилистика только в Examples</li>
-        <li>☑ GHOST не дублируется в System Prompt</li>
-        <li>☑ Нарративный стиль согласован: 3-е лицо + прошедшее время везде</li>
-        <li>☑ Пространственная и анатомическая фиксация в SP</li>
-        <li>☑ Предгенерационный фильтр в SP</li>
-        <li>☑ XML-теги в Description; Markdown убран из Description</li>
-        <li>☑ SP и директивы на английском; RP-контент на русском</li>
-        <li>☑ Тональный фрейм: первая строка SP задаёт сеттинг без нарушения платформенных правил</li>
-        <li>☑ SP: счётчики ходов убраны из директив (ENVIRONMENTAL REACTIVITY, CONSEQUENCE DRIVEN)</li>
-        <li>☑ FORMAT LOCK добавлен в конец SP (система B: проза + гильеметы)</li>
-        <details style="margin-top:0.5em">
-          <summary style="font-size:0.85em;color:var(--text-muted);cursor:pointer">Changelog v5.3.1</summary>
-          <ul style="margin-top:0.5em;font-size:0.9em">
-            <li>☑ Предгенерационный фильтр: «recompile pattern» заменён на «restart from body-anchor»</li>
-            <li>☑ AN: [GHOST-реакция] и [Поведение] убраны как дубли <code>&lt;behavior&gt;</code>; введён динамический [GHOST-активация]</li>
-            <li>☑ Examples: добавлен 4-й пример — короткая реакция (без монолога)</li>
-          </ul>
-        </details>
-      </ul>
+[TEMPORAL LOCK]
+Ошметки не подчиняются линейному времени. Описывай время как нелинейное, застывшее или циклическое. События могут повторяться, налагаться друг на друга, существовать одновременно.</code></pre>
 
       <blockquote><strong>Итого:</strong> Выбирай уровень детализации, заполняй обязательные блоки, добавляй optional по потребности, тестируй, иди RP.</blockquote>
     </section>
