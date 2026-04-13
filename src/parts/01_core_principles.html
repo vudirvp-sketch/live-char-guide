@@ -8,10 +8,9 @@
   <h2>📌 Раздел 0: Основные принципы</h2>
   <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
 
-  <details class="interactive" open id="acc-principle-ocean">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3></span></summary>
+  <details class="interactive" id="acc-principle-ocean">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
-  <p><strong>КАНОНИЧЕСКОЕ ПРАВИЛО:</strong> В карточку идёт только <strong>1–2 экстремальных полюса</strong> OCEAN (значения &lt;30 или &gt;70).</p>
   <ul>
     <li><span class="ocean-validator-green">✓ 1–2 экстремума</span> — персонаж запоминающийся, поведение последовательное</li>
     <li><span class="ocean-validator-yellow">⚠ 0 экстремумов</span> — персонаж может быть забываемым, «усреднённым»</li>
@@ -25,10 +24,9 @@
     </div>
   </details>
 
-  <details class="interactive" open id="acc-principle-price">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§2. Price: Обязательность цены</h3></span></summary>
+  <details class="interactive" id="acc-principle-price">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§2. Price: Обязательность цены</h3> <small style="color:var(--text-muted)">— Price — обязательный элемент для критичных якорей, рекомендуемый для остальных</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
-  <p><strong>КАНОНИЧЕСКОЕ ПРАВИЛО:</strong> <code>Price</code> — обязательный элемент для критичных якорей, рекомендуемый для остальных.</p>
   <p><strong>КАНОНИЧЕСКИЙ ФОРМАТ ЯКОРЕЙ:</strong></p>
   <pre><code>[Trigger] → [Action] → [Price: &lt;immediate physical/verbal manifestation&gt;]
 (рус: [Внешний стимул → Наблюдаемая реакция → Мгновенное физическое или речевое последствие в текущей сцене])</code></pre>
@@ -45,10 +43,9 @@
     </div>
   </details>
 
-  <details class="interactive" open id="acc-principle-voice">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3></span></summary>
+  <details class="interactive" id="acc-principle-voice">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3> <small style="color:var(--text-muted)">— Голос персонажа задаётся исключительно в Примерных сообщениях</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
-  <p><strong>КАНОНИЧЕСКОЕ ПРАВИЛО:</strong> Голос персонажа (тембр, ритм, синтаксис, лексика) задаётся <strong>исключительно</strong> в <code>Примерные сообщения</code>.</p>
   <div class="table-wrap">
     <table>
       <thead>
@@ -69,10 +66,9 @@
     </div>
   </details>
 
-  <details class="interactive" open id="acc-principle-ghost">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3></span></summary>
+  <details class="interactive" id="acc-principle-ghost">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
-  <p><strong>КАНОНИЧЕСКОЕ ПРАВИЛО:</strong> GHOST (событие прошлого, формирующее FLAW/LIE) размещается по слоям:</p>
   <div class="table-wrap">
     <table>
       <thead>
@@ -107,8 +103,8 @@
     </div>
   </details>
 
-  <details class="interactive" open id="acc-principle-anchors">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§5. trigger → action → price: Каноническая схема</h3></span></summary>
+  <details class="interactive" id="acc-principle-anchors">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§5. trigger → action → price: Каноническая схема</h3> <small style="color:var(--text-muted)">— Протокол якорей: Триггер → Действие → Цена (мгновенная манифестация)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>КАНОНИЧЕСКАЯ СХЕМА ПОВЕДЕНИЯ:</strong></p>
   <div class="infographic">
@@ -139,10 +135,10 @@
     </div>
   </details>
 
-  <details class="interactive" open id="acc-principle-antigodmoding">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3></span></summary>
+  <details class="interactive" id="acc-principle-antigodmoding">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3> <small style="color:var(--text-muted)">— Обязательные строки в System Prompt против управления {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
-  <p><strong>КАНОНИЧЕСКОЕ ПРАВИЛО:</strong> Обязательные строки в System Prompt:</p>
+  <p><strong>Обязательные строки в System Prompt:</strong></p>
   <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
 {{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.</code></pre>
   <p>Положительная формулировка работает лучше чисто негативной: модель понимает не только что запрещено, но и что разрешено.</p>

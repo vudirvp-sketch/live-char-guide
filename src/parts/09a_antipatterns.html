@@ -13,8 +13,10 @@
         <strong>⚠️ Зачем этот раздел:</strong> Гайд показывает правильные подходы, но не менее важно избегать распространённых ошибок. Каждый анти-паттерн здесь — из реального опыта отладки карточек.
       </div>
 
-      <h3>❌ Анти-паттерн 1: Перегрузка OCEAN</h3>
-      <p><strong>Проблема:</strong> Использование всех 5 полюсов OCEAN вместо 1–2 экстремумов.</p>
+      <details class="interactive" id="acc-antipattern1">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Использование всех 5 полюсов OCEAN вместо 1–2 экстремумов.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -38,9 +40,13 @@ O:72 C:85 E:28 A:45 N:62</code></pre>
       </div>
       <p><strong>Симптом:</strong> Персонаж «усреднённый», без характерных черт, голос «плывёт».</p>
       <p><strong>Решение:</strong> Оставь только 1–2 полюса с крайними значениями (&lt;30 или &gt;70). Удали остальные. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#core-principles">Правило §1</a>]</span></p>
+        </div>
+      </details>
 
-      <h3>❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3>
-      <p><strong>Проблема:</strong> Размещение GHOST в System Prompt в стандартной конфигурации.</p>
+      <details class="interactive" id="acc-antipattern2">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Размещение GHOST в System Prompt в стандартной конфигурации.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -71,9 +77,13 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Модель «спамит» GHOST-реакциями, поведение нестабильное, путает приоритеты.</p>
       <p><strong>Решение:</strong> Следуй карте слоёв GHOST. SP = только стиль и запреты. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#ghost-placement-conditions">Условное размещение GHOST</a>]</span></p>
+        </div>
+      </details>
 
-      <h3>❌ Анти-паттерн 3: Вложенные якоря</h3>
-      <p><strong>Проблема:</strong> Множественные якоря, триггирующие друг друга.</p>
+      <details class="interactive" id="acc-antipattern3">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Множественные якоря, триггирующие друг друга.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -97,9 +107,13 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Непредсказуемое поведение, модель «зацикливается» на триггерах.</p>
       <p><strong>Решение:</strong> Каждый якорь — атомарная единица. Нет цепочек триггеров. Цена = конечная точка.</p>
+        </div>
+      </details>
 
-      <h3>❌ Анти-паттерн 4: Token Bloat</h3>
-      <p><strong>Проблема:</strong> Description более 1000 токенов с избыточными деталями.</p>
+      <details class="interactive" id="acc-antipattern4">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Token Bloat</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Description более 1000 токенов с избыточными деталями.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -127,9 +141,13 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Модель теряет фокус, голос «плывёт», приоритет инструкций снижается.</p>
       <p><strong>Решение:</strong> Удаляй всё, что не генерирует наблюдаемое действие, реакцию или цену.</p>
+        </div>
+      </details>
 
-      <h3>❌ Анти-паттерн 5: Отложенная цена</h3>
-      <p><strong>Проблема:</strong> Price не манифестируется немедленно в сцене.</p>
+      <details class="interactive" id="acc-antipattern5">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Price не манифестируется немедленно в сцене.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -153,10 +171,14 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Персонаж «слишком идеальный», FLAW не имеет последствий.</p>
       <p><strong>Решение:</strong> Цена = немедленная физическая или вербальная манифестация. Не «позже», не «навсегда», а сейчас. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#core-principles">Правило §2</a>]</span></p>
+        </div>
+      </details>
 
       <div data-model="12B">
-      <h3>❌ Анти-паттерн 6: Голос в Description (для 12B)</h3>
-      <p><strong>Проблема:</strong> Стилистические директивы в Description для моделей ≤14B.</p>
+      <details class="interactive" id="acc-antipattern6">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Стилистические директивы в Description для моделей ≤14B.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -185,10 +207,14 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Для 12B: конфликт с Examples или игнорирование директив.</p>
       <p><strong>Решение:</strong> Для ≤14B: удали все стилистические директивы из Description. Голос — только в Examples. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#core-principles">Правило §3</a>]</span></p>
+        </div>
+      </details>
       </div>
 
-      <h3>❌ Анти-паттерн 7: Годмодинг в LB content</h3>
-      <p><strong>Проблема:</strong> Действия/мысли {{user}} в поле content Лорбука.</p>
+      <details class="interactive" id="acc-antipattern7">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content Лорбука → нарушение user agency</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Действия/мысли {{user}} в поле content Лорбука.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -212,9 +238,13 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Нарушение user agency, модель контролирует {{user}}.</p>
       <p><strong>Решение:</strong> Никогда не вставляй действия/мысли {{user}} в Лорбук. Это антигодмодинг. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#antigodmoding">Антигодмодинг</a>]</span></p>
+        </div>
+      </details>
 
-      <h3>❌ Анти-паттерн 8: RepPen > 1.10</h3>
-      <p><strong>Проблема:</strong> Высокий RepPen стирает легитимные паттерны.</p>
+      <details class="interactive" id="acc-antipattern8">
+        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
+        <div style="padding:0 1.2em 1.2em">
+        <p><strong>Проблема:</strong> Высокий RepPen стирает легитимные паттерны.</p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -237,6 +267,8 @@ content: [GHOST-триггер]</code></pre>
       </div>
       <p><strong>Симптом:</strong> Персонаж избегает собственных паттернов речи, теряет характерные фразы.</p>
       <p><strong>Решение:</strong> Старт с 1.05. Повышение только при явных повторах. Никогда выше 1.10 без крайней необходимости. <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#sampling">Раздел 5.1</a>]</span></p>
+        </div>
+      </details>
 
       <h3>📋 Чеклист проверки на анти-паттерны</h3>
       <ul>

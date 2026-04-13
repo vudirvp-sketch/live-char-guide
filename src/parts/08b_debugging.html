@@ -6,8 +6,10 @@
   <p><strong>Что это:</strong> Древовидный справочник для диагностики и исправления проблем в карточке персонажа.</p>
   <p><strong>Как использовать:</strong> Найдите симптом → следуйте по дереву диагностики → примените решение.</p>
 
-  <h3>🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-role">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь Spine:</strong> Ясно ли определена мотивация?
         <ul>
@@ -31,9 +33,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Нестабильный голос / голос «плывёт»</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-voice">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь Examples:</strong> Есть ли минимум 2 блока <code>&lt;START&gt;</code>?
         <ul>
@@ -57,9 +63,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Галлюцинации / противоречивые факты</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-hallucinations">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь Лорбук, якоря, OCEAN и GHOST на противоречия</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь Лорбук:</strong> Факты противоречат друг другу?
         <ul>
@@ -83,9 +93,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-godmoding">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и Лорбук на наличие действий {{user}}</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь SP:</strong> Есть ли антигодмодинг?
         <ul>
@@ -104,9 +118,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Персонаж «слишком идеальный»</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-perfect">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж «слишком идеальный»</h3> <small style="color:var(--text-muted)">— Проверь FLAW, WANT/NEED конфликт и GHOST на поведенческие проявления</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь FLAW:</strong> Проявляется ли в поведении?
         <ul>
@@ -125,9 +143,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Повторы / зацикливание</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-repeats">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Повторы / зацикливание</h3> <small style="color:var(--text-muted)">— Проверь RepPen, presence_penalty и разнообразие триггеров</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь RepPen:</strong> Значение > 1.10?
         <ul>
@@ -146,9 +168,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Потеря контекста в длинной сессии</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-context">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Потеря контекста в длинной сессии</h3> <small style="color:var(--text-muted)">— Проверь AN, размер окна и Lorebook Range-cascade</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь AN:</strong> Обновляется ли каждые 3–5 сообщений?
         <ul>
@@ -167,9 +193,13 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
-  <h3>🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3>
-  <div class="debug-tree">
+  <details class="interactive" id="acc-debug-physical">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3> <small style="color:var(--text-muted)">— Проверь SPATIAL LOCK и Examples на пространственную когерентность</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
     <ol>
       <li><strong>Проверь SP:</strong> Есть ли SPATIAL LOCK?
         <ul>
@@ -183,6 +213,8 @@
       </li>
     </ol>
   </div>
+    </div>
+  </details>
 
   <div class="callout tip" style="margin-top:2em">
     <strong>💡 Правило одного изменения:</strong>
