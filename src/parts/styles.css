@@ -881,19 +881,23 @@
     details.interactive summary::marker { display: none; content: ''; }
 
     /* ============================================================
-       FIX-001: ACCORDION OVERFLOW FIX (v5.5.1)
-       Prevents layout overlap when details.interactive is inside
-       [data-requires-track] with animated max-height.
-       Issue: OCEAN/MBTI tools overlapping subsequent sections.
+       FIX-001: ACCORDION OVERFLOW FIX (v5.5.3)
+       Works with content-visibility based track system.
+       Ensures accordions expand properly inside track-gated sections.
        ============================================================ */
     details.interactive[open] > div,
     details.interactive[open] > .accordion-content {
       overflow: visible !important;
     }
 
-    /* Ensure details container doesn't trap content during animation */
+    /* Ensure details container doesn't trap content */
     details.interactive[open] {
       overflow: visible;
+    }
+
+    /* Ensure accordions don't collapse parent section height */
+    details.interactive {
+      min-height: fit-content;
     }
 
     /* === COPY BUTTON === */
@@ -2876,9 +2880,9 @@
 }
 
 /* ============================================================
-   FIX-003: FLEX CONTAINER BFC FIX (v5.5.1)
+   FIX-003: FLEX CONTAINER BFC FIX (v5.5.3)
    Creates Block Formatting Context for interactive tool layouts.
-   Prevents margin collapse and overlap with subsequent sections.
+   Works with content-visibility track system.
    ============================================================ */
 .ocean-layout,
 .mbti-layout,
@@ -3328,41 +3332,36 @@
   font-size: 1.1rem;
 }
 
-/* === TRACK-BASED CONTENT VISIBILITY (v5.5.0) === */
-/* Animated reveal using opacity + max-height (no display:none) */
+/* === TRACK-BASED CONTENT VISIBILITY (v5.5.3) === */
+/* Using content-visibility for proper dynamic content support */
+/* FIX: max-height animation caused layout issues with accordions */
 
 [data-requires-track] {
+  content-visibility: hidden;  /* Skip rendering, preserve layout space = 0 */
   opacity: 0;
-  max-height: 0;
-  overflow: hidden;
   pointer-events: none;
-  transition:
-    opacity 0.3s ease,
-    max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease;
 }
 
 /* Track A: Show only A-tagged content */
 body[data-track="A"] [data-requires-track~="A"] {
+  content-visibility: visible;
   opacity: 1;
-  max-height: 9999px;
-  overflow: visible;
   pointer-events: auto;
 }
 
 /* Track B: Show A and B tagged content (CUMULATIVE MODEL) */
 body[data-track="B"] [data-requires-track~="A"],
 body[data-track="B"] [data-requires-track~="B"] {
+  content-visibility: visible;
   opacity: 1;
-  max-height: 9999px;
-  overflow: visible;
   pointer-events: auto;
 }
 
 /* Track C: Show all track-gated content */
 body[data-track="C"] [data-requires-track] {
+  content-visibility: visible;
   opacity: 1;
-  max-height: 9999px;
-  overflow: visible;
   pointer-events: auto;
 }
 
