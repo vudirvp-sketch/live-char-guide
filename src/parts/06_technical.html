@@ -221,8 +221,12 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
+      <p style="font-size:0.95em;color:var(--accent);margin-top:1em"><strong>📌 Track A/B users:</strong> Core settings (5.0–5.2) are sufficient. Track C sections below are for local models, complex frontends, and advanced tuning — expand only if needed.</p>
+      </div>
+
+      <div data-requires-track="B C">
       <details class="interactive" id="acc-lorebook">
-        <summary><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">5.3 📚 Лорбук</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
+        <summary><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">🔓 5.3 📚 Лорбук</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced Tuning</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p>Динамическая база знаний, которая фильтруется и вставляется в промпт перед каждым запросом к ИИ. Система активирует только релевантные записи на основе триггеров, вероятности и состояния чата — не скармливает весь лор целиком, экономя токены и повышая контекстуальную точность.</p>
@@ -436,8 +440,10 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="C">
-      <h3 id="xml-tags">5.5 🏷 XML-теги для Описания персонажа</h3>
-      <p><span class="tag core">Core</span> — рекомендация</p>
+      <details class="interactive" id="acc-xml-tags">
+        <summary><span><h3 id="xml-tags" style="margin:0;font-size:inherit;display:inline">🔓 5.5 🏷 XML-теги для Описания персонажа</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag advanced" style="margin-left:0.5em">Track C: Advanced</span></span></summary>
+        <div>
+          <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Использование XML-тегов для структурирования Description.</p>
       <p><strong>Зачем:</strong> Современные LLM лучше понимают XML-теги, чем Markdown. Теги разделяют блоки чётко, модель не генерирует лишние символы.</p>
       <p><strong>Когда можно выкинуть:</strong> Если используешь простой Description без разделения на блоки. Но для 12B+ XML-теги дают заметный буст.</p>
@@ -487,11 +493,16 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           <li><code># headers</code> → не использовать в Description</li>
         </ul>
       </div>
+          </div>
+        </div>
+      </details>
       </div>
 
       <div data-requires-track="B C">
-      <h3 id="spatial-lock">5.6 📐 Пространственная и анатомическая фиксация</h3>
-      <p><span class="tag core">Core</span> — для физических сцен</p>
+      <details class="interactive" id="acc-spatial-lock">
+        <summary><span><h3 id="spatial-lock" style="margin:0;font-size:inherit;display:inline">🔓 5.6 📐 Пространственная и анатомическая фиксация</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C</span></span></summary>
+        <div>
+          <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Протокол отслеживания пространства и анатомии для предотвращения телепортации и физиологических противоречий.</p>
       <p><strong>Зачем:</strong> Модели склонны «забывать» где находятся персонажи и как они физически взаимодействуют. Это ломает иммерсивность.</p>
       <p><strong>Директива для System Prompt:</strong></p>
@@ -512,12 +523,16 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           </tbody>
         </table>
       </div>
+          </div>
+        </div>
+      </details>
       </div>
 
       <div data-requires-track="B C">
-      <h3 id="pre-gen-filter">5.7 🔍 Предгенерационный фильтр</h3>
-      <p><span class="tag core">Core</span> — для 12B</p>
-      <p><span class="tag opt">Optional</span> — для 32B+</p>
+      <details class="interactive" id="acc-pre-gen-filter">
+        <summary><span><h3 id="pre-gen-filter" style="margin:0;font-size:inherit;display:inline">🔓 5.7 🔍 Предгенерационный фильтр</h3> <span class="tag core" style="margin-left:0.5em">Core (12B)</span> <span class="tag opt" style="margin-left:0.5em">Optional (32B+)</span></span></summary>
+        <div>
+          <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Чеклист, который модель должна пройти перед генерацией каждой реплики.</p>
       <p><strong>Зачем:</strong> 12B-модели склонны «забывать» правила в процессе генерации. Фильтр напоминает о критичных элементах перед выводом.</p>
       <p><strong>Формулировка для System Prompt:</strong></p>
@@ -545,12 +560,16 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
 
       <p data-model="32B"><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Before output: body-first, zero meta, observe {{user}} only.</code></p>
       <p><em>Связано:</em> <a href="#antigodmoding">Раздел 5.0.1 (Антигодмодинг)</a> — оба механизма работают вместе для предотвращения нарушения user agency: Предгенерационный фильтр проверяет реплику перед генерацией, а Антигодмодинг устанавливает базовый запрет на действия за {{user}}.</p>
+          </div>
+        </div>
+      </details>
       </div>
 
       <div data-requires-track="C">
-      <h3 id="sanitization">5.8 🧹 Протокол очистки</h3>
-      <p><span class="tag opt">Optional</span> — для опытных пользователей</p>
-      <p><span class="tag core">Core</span> — для пользователей мобильных/Discord-клиентов</p>
+      <details class="interactive" id="acc-sanitization">
+        <summary><span><h3 id="sanitization" style="margin:0;font-size:inherit;display:inline">🔓 5.8 🧹 Протокол очистки</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced</span></span></summary>
+        <div>
+          <div style="padding:0 1.2em 1.2em">
       <div class="callout warn" style="margin:1em 0">
         <strong>⚠️ ВЫПОЛНЯТЬ ДО ГЕНЕРАЦИИ.</strong> Sanitization — это шаг пре-генерации, несмотря на позицию в документе.
       </div>
@@ -572,10 +591,16 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
         <li>☐ Единообразная глубина астерисков во всех блоках</li>
         <li>☐ Ctrl+F для <code>nbsp</code> и умных кавычек перед финальным сохранением</li>
       </ul>
+          </div>
+        </div>
+      </details>
       </div>
 
       <div data-requires-track="B C">
-      <h3 id="ultimate-sp">5.9 🛡 Ультимативный SP-блок (опция для 4K и минимальных карточек)</h3>
+      <details class="interactive" id="acc-ultimate-sp">
+        <summary><span><h3 id="ultimate-sp" style="margin:0;font-size:inherit;display:inline">🔓 5.9 🛡 Ультимативный SP-блок</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C: 4K-Fallback</span></span></summary>
+        <div>
+          <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Компактный System Prompt (~180 токенов), оптимизированный под LLM-парсинг. Содержит все критичные директивы в сжатой форме.</p>
       <p><strong>Когда использовать:</strong></p>
       <ul>
@@ -593,11 +618,14 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
 • INFLUENCE BOUNDARY: React only to observable {{user}} symptoms. Effects manifest as behavioral triggers, not stated facts.
 • CONSEQUENCE DRIVEN: WANT→NEED shifts progressively through the session. Anchor "Price" must manifest physically/psychologically. Dark/deviant outcomes allowed only if contextually earned.
 • PRE-GENERATION FILTER: Verify before output: 1) New sensory/spatial element? 2) Reaction body-anchored? 3) User influence strictly observed? 4) Zero meta? Fail any → restart from body-anchor: begin with physical sensation before speech.</code></pre>
+          </div>
+        </div>
+      </details>
       </div>
 
       <div data-requires-track="B C">
       <details class="interactive" id="acc-user-persona">
-        <summary><span><h3 id="user-persona" style="margin:0;font-size:inherit;display:inline">5.10 👤 Персона</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
+        <summary><span><h3 id="user-persona" style="margin:0;font-size:inherit;display:inline">🔓 5.10 👤 Персона</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p>Без Персона модель заполняет образ <code>{{user}}</code> собственными шаблонами — «вежливый собеседник», «терапевт», «герой». Персонаж реагирует на стереотип, а не на конкретного пользователя.</p>
