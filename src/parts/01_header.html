@@ -318,6 +318,53 @@
   </div>
 </div>
 
+<!-- PHASE 2.2: PER-TRACK ASSEMBLY CHECKLIST -->
+<div id="track-checklist" class="track-checklist">
+  <!-- Populated by JavaScript -->
+</div>
+
+<!-- PHASE 3.2: TRACK COMPARISON MATRIX -->
+<section id="track-comparison" data-requires-track="A B C" class="track-comparison-section" style="margin:1.5rem 0;">
+  <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
+  <div class="table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Цель</th>
+          <th>Рекомендуемый трек</th>
+          <th>Время</th>
+          <th>Результат</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Быстрый прототип / Тест концепции</td>
+          <td><span class="badge-track-a">Track A</span></td>
+          <td>~15 мин</td>
+          <td>Функциональный прототип (450-600 токенов)</td>
+        </tr>
+        <tr>
+          <td>Полный персонаж с психологией</td>
+          <td><span class="badge-track-b">Track B</span></td>
+          <td>~30 мин</td>
+          <td>Полная поведенческая карточка (600-1200 токенов)</td>
+        </tr>
+        <tr>
+          <td>Профессиональный RP движок / Сложные сценарии</td>
+          <td><span class="badge-track-c">Track C</span></td>
+          <td>~60 мин</td>
+          <td>Оптимизированный движок (800-2500+ токенов)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PHASE 3.1: 4K-FALLBACK MENTION ON TRACK A -->
+<p data-requires-track="A B C" style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
+  <strong>Лимит контекста?</strong> Если достигаете потолка токенов, доступен протокол оптимизации: <span class="badge-track-b">Track B+</span> → 4K-Fallback Protocol.
+</p>
+
 <!-- ITEM-003: NOSCRIPT FALLBACK -->
 <noscript>
   <div class="noscript-notice" role="alert" aria-live="polite">

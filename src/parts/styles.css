@@ -4768,3 +4768,179 @@ body.theme-oled .prototype-banner {
     left: 1rem !important;
   }
 }
+
+/* ============================================================
+   PHASE 2.2: TRACK CHECKLIST STYLES
+   ============================================================ */
+.track-checklist {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.track-checklist h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.track-checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.4rem;
+}
+
+.track-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+}
+
+.track-checklist-item.available {
+  color: #88ff88;
+}
+
+.track-checklist-item.unavailable {
+  color: #666;
+}
+
+.track-checklist-item .check {
+  width: 1.1rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Light theme overrides */
+body.theme-light .track-checklist-item.available {
+  color: #16a34a;
+}
+
+body.theme-light .track-checklist-item.unavailable {
+  color: #9ca3af;
+}
+
+/* OLED theme overrides */
+body.theme-oled .track-checklist {
+  background: #0a0a0a;
+  border-color: #1a1a1a;
+}
+
+/* ============================================================
+   PHASE 3.3: TRACK UPGRADE MODAL STYLES
+   ============================================================ */
+.track-upgrade-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+body.theme-light .track-upgrade-modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.track-upgrade-modal .modal-content {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.track-upgrade-modal h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.track-upgrade-modal p {
+  margin: 0 0 1.25rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.modal-buttons button:first-child {
+  background: #4488cc;
+  color: #fff;
+}
+
+.modal-buttons button:first-child:hover {
+  background: #5599dd;
+}
+
+.modal-buttons button:last-child {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.modal-buttons button:last-child:hover {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* ============================================================
+   PHASE 3.2: TRACK COMPARISON MATRIX STYLES
+   ============================================================ */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.comparison-table th {
+  background: var(--bg-elevated);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.comparison-table td {
+  background: var(--bg-surface);
+}
+
+/* ============================================================
+   PHASE 4.1: STORAGE FALLBACK (localStorage fallback for private browsing)
+   ============================================================ */
+/* Note: This is implemented in JS, but we add visibility styles */
+body.storage-fallback .track-checklist,
+body.storage-fallback .audience-selection {
+  opacity: 0.8;
+}
+echo '<<exit>>'

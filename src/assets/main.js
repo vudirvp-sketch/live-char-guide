@@ -3625,3 +3625,188 @@ if ("serviceWorker" in navigator) {
 
   console.log('[TooltipIntegration] Glossary tooltip integration initialized');
 })();
+
+// ============================================================================
+// PHASE 2.2: PER-TRACK ASSEMBLY CHECKLIST
+// ============================================================================
+(function() {
+  'use strict';
+
+  const TRACK_CHECKLISTS = {
+    A: {
+      title: "Доступно на Track A",
+      items: [
+        { name: "Greeting (sensory → posture → speech → hook)", available: true },
+        { name: "WANT / NEED (basic)", available: true },
+        { name: "Anchors (3-5, behavioral only)", available: true },
+        { name: "Examples (neutral + stress)", available: true },
+        { name: "Anti-godmoding SP", available: true },
+        { name: "Price (psychological)", available: false, requires: "B" },
+        { name: "FLAW / LIE", available: false, requires: "B" },
+        { name: "GHOST (formative event)", available: false, requires: "B" },
+        { name: "Full Spine (5 elements)", available: false, requires: "B" },
+        { name: "AN / LB", available: false, requires: "B" }
+      ]
+    },
+    B: {
+      title: "Доступно на Track B",
+      items: [
+        { name: "Greeting (sensory → posture → speech → hook)", available: true },
+        { name: "WANT / NEED", available: true },
+        { name: "Anchors (5-7, with Price)", available: true },
+        { name: "Examples (neutral + stress + reaction)", available: true },
+        { name: "Anti-godmoding SP", available: true },
+        { name: "FLAW / LIE", available: true },
+        { name: "GHOST", available: true },
+        { name: "Full Spine (5 elements)", available: true },
+        { name: "AN / LB (basic)", available: true },
+        { name: "Enneagram (basic)", available: true },
+        { name: "OCEAN (1-2 poles)", available: true },
+        { name: "CoT Tiers", available: false, requires: "C" },
+        { name: "4K-Fallback Protocol", available: false, requires: "C" },
+        { name: "Multi-character scenes", available: false, requires: "C" }
+      ]
+    },
+    C: {
+      title: "Доступно на Track C",
+      items: [
+        { name: "All Track B features", available: true },
+        { name: "Advanced Anchors (7-12)", available: true },
+        { name: "Enneagram (full)", available: true },
+        { name: "OCEAN (full + validator)", available: true },
+        { name: "MBTI", available: true },
+        { name: "AN / LB (full)", available: true },
+        { name: "Lorebook Range-Cascade", available: true },
+        { name: "CoT Tiers", available: true },
+        { name: "4K-Fallback Protocol", available: true },
+        { name: "Structured Inject", available: true },
+        { name: "Spatial & Anatomical Lock", available: true },
+        { name: "Multi-character scenes", available: true },
+        { name: "Consistency Score", available: true },
+        { name: "Anti-patterns (full analysis)", available: true }
+      ]
+    }
+  };
+
+  function renderTrackChecklist() {
+    const container = document.getElementById('track-checklist');
+    if (!container) return;
+
+    const currentTrack = window.NavigationState?.getTrack() || 'B';
+    const checklistData = TRACK_CHECKLISTS[currentTrack];
+
+    if (!checklistData) return;
+
+    let html = `<h3 style="margin:0 0 0.75rem 0;font-size:0.95rem;color:var(--text)">${checklistData.title}</h3>`;
+    html += '<ul class="track-checklist-items" style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.4rem;">';
+
+    checklistData.items.forEach(item => {
+      if (item.available) {
+        html += `<li class="track-checklist-item available" style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#88ff88;"><span style="width:1.1rem;text-align:center;">✓</span> ${item.name}</li>`;
+      } else {
+        const badgeClass = item.requires === 'C' ? 'badge-track-c' : 'badge-track-b';
+        html += `<li class="track-checklist-item unavailable" style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#666;"><span style="width:1.1rem;text-align:center;">○</span> ${item.name} <span class="${badgeClass}" style="font-size:0.7em;margin-left:0.25rem;">Track ${item.requires}+</span></li>`;
+      }
+    });
+
+    html += '</ul>';
+    container.innerHTML = html;
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderTrackChecklist);
+  } else {
+    renderTrackChecklist();
+  }
+
+  // Re-render on track change
+  window.addEventListener('trackchange', renderTrackChecklist);
+
+  console.log('[TrackChecklist] Initialized');
+})();
+
+// ============================================================================
+// PHASE 3.3: SOFT-REDIRECT MODAL FOR HIDDEN SECTIONS
+// ============================================================================
+(function() {
+  'use strict';
+
+  function showTrackUpgradeModal(requiredTrack, sectionId) {
+    // Remove any existing modal
+    const existing = document.querySelector('.track-upgrade-modal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.className = 'track-upgrade-modal';
+    modal.innerHTML = `
+      <div class="modal-content" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem;max-width:380px;text-align:center;">
+        <h3 style="margin:0 0 0.75rem 0;color:var(--text);font-size:1.1rem;">Требуется повышение трека</h3>
+        <p style="margin:0 0 1.25rem 0;color:var(--text-muted);font-size:0.9rem;">Этот раздел требует <span class="badge-track-${requiredTrack.toLowerCase()}" style="font-size:0.8em;">Track ${requiredTrack}</span> или выше.</p>
+        <div class="modal-buttons" style="display:flex;gap:0.75rem;justify-content:center;">
+          <button id="switch-track-btn" style="padding:0.5rem 1rem;background:#4488cc;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.9rem;">Переключиться на Track ${requiredTrack}</button>
+          <button id="stay-here-btn" style="padding:0.5rem 1rem;background:var(--bg-elevated);color:var(--text-muted);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.9rem;">Остаться</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Focus the switch button
+    const switchBtn = modal.querySelector('#switch-track-btn');
+    if (switchBtn) switchBtn.focus();
+
+    modal.querySelector('#switch-track-btn').onclick = () => {
+      if (window.NavigationState) {
+        window.NavigationState.setTrack(requiredTrack);
+      }
+      modal.remove();
+      // Scroll to section after a brief delay
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    };
+
+    modal.querySelector('#stay-here-btn').onclick = () => modal.remove();
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.remove();
+    });
+
+    // Close on Escape
+    const escHandler = (e) => {
+      if (e.key === 'Escape') {
+        modal.remove();
+        document.removeEventListener('keydown', escHandler);
+      }
+    };
+    document.addEventListener('keydown', escHandler);
+  }
+
+  // Intercept clicks on anchor links
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const targetId = link.getAttribute('href').slice(1);
+    if (!targetId) return;
+
+    const targetSection = document.getElementById(targetId);
+    if (!targetSection) return;
+
+    const requiresTrack = targetSection.dataset.requiresTrack;
+    if (!requiresTrack) return;
+
+    const currentTrack = window.NavigationState?.getTrack() || 'B';
+    const allowedTracks = requiresTrack.split(' ');
+
+    if (!allowedTracks.includes(currentTrack)) {
+      e.preventDefault();
+      showTrackUpgradeModal(allowedTracks[0], targetId);
+    }
+  });
+
+  console.log('[SoftRedirectModal] Initialized');
+})();
