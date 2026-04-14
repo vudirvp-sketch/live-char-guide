@@ -542,12 +542,12 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <p><strong>Что это:</strong> Чеклист, который модель должна пройти перед генерацией каждой реплики.</p>
       <p><strong>Зачем:</strong> 12B-модели склонны «забывать» правила в процессе генерации. Фильтр напоминает о критичных элементах перед выводом.</p>
       <p><strong>Формулировка для System Prompt:</strong></p>
-      <pre><code>PRE-GENERATION FILTER: Verify before output:
-1) New sensory/spatial element?
-2) Reaction body-anchored?
-3) User influence strictly observed?
-4) Zero meta?
-Fail any → restart from body-anchor: begin with physical sensation before speech.</code></pre>
+      <pre><code>ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ: Проверь перед выводом:
+1) Новый сенсорный/пространственный элемент?
+2) Реакция идёт через тело?
+3) Влияние на {{user}} только через наблюдаемое?
+4) Никакого мета?
+Ошибка → начни с тела: физическое ощущение до речи.</code></pre>
 
       <p><strong>Разбор пунктов:</strong></p>
       <div class="table-wrap">
@@ -556,15 +556,15 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
             <tr><th>#</th><th>Проверка</th><th>Что означает</th></tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>New sensory/spatial element?</td><td>Добавлен ли новый сенсорный или пространственный элемент в этой реплике</td></tr>
-            <tr><td>2</td><td>Reaction body-anchored?</td><td>Реакция идёт через тело (поза, жест, дыхание) до речи</td></tr>
-            <tr><td>3</td><td>User influence strictly observed?</td><td>Влияние на {{user}} только через наблюдаемые симптомы, не напрямую</td></tr>
-            <tr><td>4</td><td>Zero meta?</td><td>Нет мета-комментариев, объяснений, выхода из образа</td></tr>
+            <tr><td>1</td><td>Новый сенсорный/пространственный элемент?</td><td>Добавлен ли новый сенсорный или пространственный элемент в этой реплике</td></tr>
+            <tr><td>2</td><td>Реакция идёт через тело?</td><td>Реакция идёт через тело (поза, жест, дыхание) до речи</td></tr>
+            <tr><td>3</td><td>Влияние на {{user}} только через наблюдаемое?</td><td>Влияние на {{user}} только через наблюдаемые симптомы, не напрямую</td></tr>
+            <tr><td>4</td><td>Никакого мета?</td><td>Нет мета-комментариев, объяснений, выхода из образа</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p data-model="32B"><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Before output: body-first, zero meta, observe {{user}} only.</code></p>
+      <p data-model="32B"><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Перед выводом: сначала тело, никакого мета, {{user}} только наблюдаем.</code></p>
       <p><em>Связано:</em> <a href="#antigodmoding">Раздел 5.0.1 (Антигодмодинг)</a> — оба механизма работают вместе для предотвращения нарушения user agency: Предгенерационный фильтр проверяет реплику перед генерацией, а Антигодмодинг устанавливает базовый запрет на действия за {{user}}.</p>
           </div>
         </div>
