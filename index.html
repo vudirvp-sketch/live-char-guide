@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 01dfc717 -->
-<!-- Generated: 2026-04-14T16:26:57.603Z -->
+<!-- Build hash: dd6dc0e9 -->
+<!-- Generated: 2026-04-14T18:11:41.172Z -->
 <!-- Version: 5.5.3 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="01dfc717">
+<meta name="build-hash" content="dd6dc0e9">
 <meta name="livechar-version" content="5.5.3">
 <meta name="livechar-build" content="2026-04-14">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -460,7 +460,6 @@
     }
 
     /* === STICKY TOC LAYOUT === */
-    /* DEPRECATED: Old TOC layout - will be replaced by panel system */
     .content-wrapper {
       display: flex;
       gap: 2rem;
@@ -4968,7 +4967,93 @@ body.storage-fallback .track-checklist,
 body.storage-fallback .audience-selection {
   opacity: 0.8;
 }
-echo '<<exit>>'
+
+/* ============================================================
+   TASK 1.1: TOC COLLAPSE TOGGLE STYLES
+   ============================================================ */
+.toc-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  padding: 0 0.3em;
+  margin-right: 0.2em;
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.toc-toggle-btn:hover {
+  color: var(--accent);
+}
+
+.toc-toggle-btn:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Collapsed state - rotate indicator */
+.toc-toggle-btn[aria-expanded="false"] {
+  transform: rotate(-90deg);
+}
+
+/* ============================================================
+   TASK 2.4: SPOILER TOGGLE STYLES
+   ============================================================ */
+.spoiler-toggle {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.spoiler-toggle:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.spoiler-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.spoiler-content {
+  margin-top: 0.5em;
+  padding: 0.8em 1em;
+  background: var(--bg-surface);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+}
+
+.spoiler-content[hidden] {
+  display: none;
+}
+
+/* ============================================================
+   TASK C.3: CSS FALLBACK FOR DYNAMIC CLASSES
+   ============================================================ */
+[data-requires-track].hidden {
+  display: none !important;
+}
+
+/* Ensure track visibility works */
+body[data-track="A"] [data-requires-track]:not([data-requires-track~="A"]) {
+  display: none !important;
+}
+
+body[data-track="B"] [data-requires-track]:not([data-requires-track~="B"]) {
+  display: none !important;
+}
+
+body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
+  display: none !important;
+}
 
 
 </style>
@@ -5015,23 +5100,23 @@ echo '<<exit>>'
 
   <!-- ID: D4 | Introduction Block -->
   <div class="intro-block" id="introduction">
-    <h2>Что это такое</h2>
-    <p>Engineering pipeline для создания детерминированных RP character cards для LLM (12B–32B+). Карточка персонажа — это <strong>поведенческий движок</strong>, а не описание.</p>
+    <h2 id="что-это-такое">Что это такое</h2>
+    <p>Инженерный пайплайн для создания детерминированных RP character cards для LLM (12B–32B+). Карточка персонажа — это <strong>поведенческий движок</strong>, а не описание.</p>
 
-    <h3>Для кого</h3>
-    <p>Intermediate prompt engineers, знакомые с базовыми концепциями LLM.</p>
+    <h3 id="для-кого">Для кого</h3>
+    <p>Промпт-инженеры среднего уровня, знакомые с базовыми концепциями LLM.</p>
 
-    <h3>Что вы узнаете</h3>
+    <h3 id="что-вы-узнаете">Что вы узнаете</h3>
     <ul>
       <li>Строить карточки персонажей как поведенческие движки</li>
       <li>Применять психологические фреймворки (OCEAN, Enneagram)</li>
       <li>Структурировать промпты для стабильного поведения персонажа</li>
     </ul>
 
-    <h3>Как читать</h3>
+    <h3 id="как-читать">Как читать</h3>
     <p>Линейная прогрессия: Stage 0 (Foundation) → Stage 1 (Quick Start) → ... → Stage 7 (Debugging). Каждый этап строится на предыдущем.</p>
 
-    <h3>Оценка времени</h3>
+    <h3 id="оценка-времени">Оценка времени</h3>
     <ul>
       <li><strong>Track A (Начинающий):</strong> ~15 мин — минимальный шаблон, базовые концепции</li>
       <li><strong>Track B (Практик):</strong> ~30 мин — полный пайплайн, все core-элементы</li>
@@ -5042,7 +5127,7 @@ echo '<<exit>>'
 
   <!-- ID: D3 | Model Toggle -->
   <div class="model-toggle" id="model-toggle">
-    <h3>🔧 Фильтр по модели</h3>
+    <h3 id="фильтр-по-модели">🔧 Фильтр по модели</h3>
     <div class="model-toggle-buttons" role="group" aria-label="Выбор модели">
       <button class="model-btn active" data-model="all" aria-pressed="true">Показать всё</button>
       <button class="model-btn" data-model="12B" aria-pressed="false">12B–14B</button>
@@ -5053,7 +5138,7 @@ echo '<<exit>>'
 
   <!-- ID: D1 | Interactive Dependency Map -->
   <div class="dependency-map" id="dependency-map">
-    <h3>🔗 Карта зависимостей блоков</h3>
+    <h3 id="карта-зависимостей-блоков">🔗 Карта зависимостей блоков</h3>
     <p class="dependency-hint"><em>Кликните на узел для навигации. Стрелки показывают зависимости: A → B означает, что B требует A.</em></p>
     <figure class="dependency-graph">
       <svg viewBox="0 0 700 400" role="img" aria-label="Dependency graph showing relationships between character card blocks">
@@ -5084,7 +5169,7 @@ echo '<<exit>>'
         <a href="#spine" class="dep-node-link">
           <g class="dep-node dep-node-core" transform="translate(150, 55)">
             <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Spine</text>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Мотивация</text>
           </g>
         </a>
         
@@ -5117,7 +5202,7 @@ echo '<<exit>>'
         <a href="#anchors" class="dep-node-link">
           <g class="dep-node dep-node-core" transform="translate(200, 170)">
             <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Anchors</text>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Якоря</text>
           </g>
         </a>
         
@@ -5125,7 +5210,7 @@ echo '<<exit>>'
         <a href="#examples" class="dep-node-link">
           <g class="dep-node dep-node-core" transform="translate(350, 170)">
             <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Examples</text>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Примеры</text>
           </g>
         </a>
         
@@ -5133,7 +5218,7 @@ echo '<<exit>>'
         <a href="#greeting" class="dep-node-link">
           <g class="dep-node dep-node-core" transform="translate(500, 170)">
             <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
-            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Greeting</text>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Приветствие</text>
           </g>
         </a>
         
@@ -5196,7 +5281,7 @@ echo '<<exit>>'
           <text x="18" y="10" fill="var(--text)" font-size="12">Core (обязательно)</text>
           
           <rect x="150" y="0" width="12" height="12" fill="var(--bg)" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,1"/>
-          <text x="168" y="10" fill="var(--text)" font-size="12">Optional (по контексту)</text>
+          <text x="168" y="10" fill="var(--text)" font-size="12">Опционально (по контексту)</text>
           
           <line x1="300" y1="6" x2="340" y2="6" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
           <text x="350" y="10" fill="var(--text)" font-size="12">Зависимость</text>
@@ -5220,11 +5305,11 @@ echo '<<exit>>'
 
   <!-- CONTEXT CAPABILITY MATRIX -->
   <div class="context-matrix" id="context-matrix">
-    <h3>📊 Context Capability Matrix</h3>
+    <h3 id="матрица-контекстных-возможностей">📊 Матрица контекстных возможностей</h3>
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Context</th><th>Card Budget</th><th>AN</th><th>LB</th><th>CoT</th><th>Recommended Mode</th></tr>
+          <tr><th>Контекст</th><th>Бюджет карточки</th><th>AN</th><th>LB</th><th>CoT</th><th>Рекомендуемый режим</th></tr>
         </thead>
         <tbody>
           <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Track A</td></tr>
@@ -5233,7 +5318,7 @@ echo '<<exit>>'
         </tbody>
       </table>
     </div>
-    <p class="context-hint"><em>Detect your context window size and follow the recommended mode.</em></p>
+    <p class="context-hint"><em>Определите размер контекстного окна и следуйте рекомендуемому режиму.</em></p>
   </div>
 </header>
 
@@ -5314,7 +5399,7 @@ echo '<<exit>>'
 
 <!-- PHASE 3.2: TRACK COMPARISON MATRIX -->
 <section id="track-comparison" data-requires-track="A B C" class="track-comparison-section" style="margin:1.5rem 0;">
-  <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
+  <h3 id="сравнение-треков" style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
   <div class="table-wrap">
     <table class="comparison-table">
       <thead>
@@ -5408,7 +5493,6 @@ echo '<<exit>>'
 </div>
 
 <!-- OLD TOC (hidden via CSS, kept for content reference) -->
-<!-- DEPRECATED: Old nav#toc removed — replaced by floating panel system -->
 
 
 <main id="main-content" role="main">
@@ -5417,18 +5501,17 @@ echo '<<exit>>'
 <section id="core-principles">
   <div class="info-banner">
     <span class="mode-badge">🧠 Foundation</span>
-    <span class="mode-hint">Core principles that apply to all stages.</span>
   </div>
-  <h2>📌 Раздел 0: Основные принципы</h2>
+  <h2 id="раздел-0-основные-принципы">📌 Раздел 0: Основные принципы</h2>
   <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
 
   <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
   <section id="section-0-2" data-requires-track="A B C">
-    <h2>§0.2 Критические анти-паттерны (Все треки)</h2>
+    <h2 id="0-2-критические-анти-паттерны-все-треки">§0.2 Критические анти-паттерны (Все треки)</h2>
     <div class="warning-block">
       <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
       <ul>
-        <li><strong>Token Bloat:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
+        <li><strong>Раздувание токенов:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
         <li><strong>Price Non-manifestation:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей.</li>
         <li><strong>Voice-in-Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо.</li>
         <li><strong>GHOST-in-SP:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST.</li>
@@ -5440,7 +5523,7 @@ echo '<<exit>>'
   </section>
 
   <details class="interactive" id="acc-principle-ocean">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
+    <summary><span><h3 id="1-ocean-правило-1-2-полюсов" style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <ul>
     <li><span class="ocean-validator-green">✓ 1–2 экстремума</span> — персонаж запоминающийся, поведение последовательное</li>
@@ -5475,7 +5558,7 @@ echo '<<exit>>'
   </details>
 
   <details class="interactive" id="acc-principle-voice">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3> <small style="color:var(--text-muted)">— Голос персонажа задаётся исключительно в Примерных сообщениях</small></span></summary>
+    <summary><span><h3 id="3-voice-изоляция-голоса" style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3> <small style="color:var(--text-muted)">— Голос персонажа задаётся исключительно в Примерных сообщениях</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="table-wrap">
     <table>
@@ -5499,7 +5582,7 @@ echo '<<exit>>'
 
   <!-- PHASE 1.3: GHOST hidden from Track A -->
   <details class="interactive" id="acc-principle-ghost" data-requires-track="B C">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
+    <summary><span><h3 id="4-ghost-размещение-по-слоям" style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="table-wrap">
     <table>
@@ -5536,7 +5619,7 @@ echo '<<exit>>'
   </details>
 
   <details class="interactive" id="acc-principle-anchors">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§5. trigger → action → price: Каноническая схема</h3> <small style="color:var(--text-muted)">— Протокол якорей: Триггер → Действие → Цена (мгновенная манифестация)</small></span></summary>
+    <summary><span><h3 id="5-trigger-action-price-каноническая-схема" style="margin:0;font-size:inherit;display:inline">§5. trigger → action → price: Каноническая схема</h3> <small style="color:var(--text-muted)">— Протокол якорей: Триггер → Действие → Цена (мгновенная манифестация)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>КАНОНИЧЕСКАЯ СХЕМА ПОВЕДЕНИЯ:</strong></p>
   <div class="infographic">
@@ -5568,7 +5651,7 @@ echo '<<exit>>'
   </details>
 
   <details class="interactive" id="acc-principle-antigodmoding">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3> <small style="color:var(--text-muted)">— Обязательные строки в System Prompt против управления {{user}}</small></span></summary>
+    <summary><span><h3 id="6-антигодмодинг" style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3> <small style="color:var(--text-muted)">— Обязательные строки в System Prompt против управления {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>Обязательные строки в System Prompt:</strong></p>
   <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
@@ -5590,7 +5673,7 @@ echo '<<exit>>'
 <!-- ID: C1 | Canonical terminology definitions -->
 <section id="glossary">
   <details class="interactive" id="acc-glossary">
-    <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📖 Раздел 0.1: Глоссарий</h2> <small style="color:var(--text-muted)">— термины и определения (раскройте для просмотра)</small></span></summary>
+    <summary><span><h2 id="раздел-0-1-глоссарий" style="margin:0;font-size:inherit;display:inline">📖 Раздел 0.1: Глоссарий</h2> <small style="color:var(--text-muted)">— термины и определения (раскройте для просмотра)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="callout tip" style="margin:1em 0">
     <strong>💡 Быстрый доступ:</strong> Нажмите кнопку 📖 (внизу справа) для открытия плавающего глоссария с поиском. Или используйте <kbd>Alt+G</kbd>.
@@ -5598,7 +5681,7 @@ echo '<<exit>>'
   <p><strong>Правило терминологии:</strong> Первое упоминание = <code>Канонический термин (Аббревиатура)</code>. Все последующие = <code>Аббревиатура</code> только.</p>
   <p><strong>Язык:</strong> Технические термины — на английском (industry standard). Русский — для объяснений и примеров.</p>
 
-  <h3>📋 Каноническая терминология</h3>
+  <h3 id="каноническая-терминология">📋 Каноническая терминология</h3>
   <div class="table-wrap">
     <table>
       <thead>
@@ -5651,7 +5734,7 @@ echo '<<exit>>'
     </table>
   </div>
 
-  <h3>🧠 Психологические термины</h3>
+  <h3 id="психологические-термины">🧠 Психологические термины</h3>
   <div class="table-wrap">
     <table>
       <thead>
@@ -5718,7 +5801,7 @@ echo '<<exit>>'
   </div>
 
   <!-- PHASE 2.3: EXPANDED DEFINITIONS FOR "MENTION ONLY" ITEMS -->
-  <h3>📍 Расширенные определения по трекам</h3>
+  <h3 id="расширенные-определения-по-трекам">📍 Расширенные определения по трекам</h3>
   
   <!-- OCEAN: Track A minimal definition -->
   <div data-requires-track="A B C" class="callout" style="margin:1em 0;border-left-color:#7c4dff;">
@@ -5752,7 +5835,7 @@ echo '<<exit>>'
     <p class="track-badge" style="font-size:0.85em;">Полный диагностический набор: <span class="badge-track-c">Track C</span> → <a href="#diagnostics">Раздел 6</a></p>
   </div>
 
-  <h3>⚙️ Технические термины</h3>
+  <h3 id="технические-термины">⚙️ Технические термины</h3>
   <div class="table-wrap">
     <table>
       <thead>
@@ -5808,7 +5891,7 @@ echo '<<exit>>'
     </table>
   </div>
 
-  <h3>🏷 Теги контента</h3>
+  <h3 id="теги-контента">🏷 Теги контента</h3>
   <div class="table-wrap">
     <table>
       <thead>
@@ -5833,7 +5916,7 @@ echo '<<exit>>'
 
   <div class="callout tip" style="margin-top:1em">
     <strong>💡 Целевая аудитория:</strong>
-    <p>Intermediate prompt engineers. Предполагается базовое знакомство с LLM концепциями.</p>
+    <p>Промпт-инженеры среднего уровня. Предполагается базовое знакомство с LLM концепциями.</p>
   </div>
     </div>
   </details>
@@ -5842,10 +5925,10 @@ echo '<<exit>>'
 <hr>
 
     <section id="intro">
-      <h2>Как пользоваться гайдом</h2>
+      <h2 id="как-пользоваться-гайдом">Как пользоваться гайдом</h2>
       <p><strong>Структура документа:</strong></p>
       <ul>
-        <li><strong>⚡ Раздел 1</strong> — Быстрый старт: минимальный шаблон за 5 минут</li>
+        <li><strong>⚡ Раздел 1</strong> — Quick Start: минимальный шаблон за 5 минут</li>
         <li><strong>🏗 Раздел 2</strong> — Архитектура: теория и принципы</li>
         <li><strong>🧱 Раздел 3</strong> — Core-блоки: Anchors, Examples, Greeting</li>
         <li><strong>🧠 Раздел 4</strong> — Психология: Spine, Enneagram, OCEAN, MBTI</li>
@@ -5858,7 +5941,7 @@ echo '<<exit>>'
         <li>Новичок: Раздел 1 → практика → Разделы 3–5 по необходимости</li>
         <li>Продвинутый: Раздел 2 → пайплайн из 10 шагов → Приложения</li>
       </ul>
-      <p><strong>Примечание:</strong> В Быстром старте порядок оптимизирован для скорости. В пайплайне (Раздел 2) — для качества.</p>
+      <p><strong>Примечание:</strong> В Quick Start порядок оптимизирован для скорости. В пайплайне (Раздел 2) — для качества.</p>
 
       <p><strong>Интерактивные функции (требуют JavaScript):</strong></p>
       <ul>
@@ -5888,11 +5971,11 @@ echo '<<exit>>'
     <section id="quick-start">
       <div class="info-banner">
         <span class="mode-badge">🚀 Quick Start Mode</span>
-        <span class="mode-hint">Minimal viable card in ~5 minutes.</span>
+        <span class="mode-hint">Минимальная карточка за ~5 минут.</span>
       </div>
-      <h2>⚡ Раздел 1: Быстрый старт</h2>
+      <h2 id="раздел-1-quick-start">⚡ Раздел 1: Quick Start</h2>
 
-      <h3>🎯 Ключевые термины</h3>
+      <h3 id="ключевые-термины">🎯 Ключевые термины</h3>
       <ul>
         <li><strong><abbr data-tooltip="Изъян персонажа — конкретное поведение, которое мешает ему получить NEED">FLAW</abbr></strong> [рус: Изъян] — изъян персонажа, мешающий ему (конкретное поведение, не прилагательное) <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
         <li><strong><abbr data-tooltip="Ложная установка — во что персонаж верит, часто мешая себе получить NEED">LIE</abbr></strong> [рус: Ложь] — ложная установка, во что персонаж верит <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
@@ -5901,8 +5984,8 @@ echo '<<exit>>'
         <li><strong><abbr data-tooltip="Поведенческие якоря — правила поведения формата Триггер → Действие → Цена">Anchors</abbr></strong> [рус: Поведенческие якоря] — правила поведения в формате «триггер → действие»</li>
       </ul>
 
-      <h3>⚡ Минимальный шаблон за 5 минут</h3>
-      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
+      <h3 id="минимальный-шаблон-за-5-минут">⚡ Минимальный шаблон за 5 минут</h3>
+      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price, без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
       <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> см. <a href="#appendix2">Приложение 2</a></p>
 
       <div class="infographic">
@@ -5937,7 +6020,7 @@ echo '<<exit>>'
 
       <h4>Шаг 2. 🎯 Поведенческие якоря (150–300 токенов)</h4>
       <p>5–7 правил поведения в формате <strong>«Триггер → Действие»</strong>. Записываются в Description.</p>
-      <pre><code>- Когда нервничает — грызёт колпачок ручки или подковыривает nail-полировку
+      <pre><code>- Когда нервничает — грызёт колпачок ручки или подковыривает лак на ногтях
 - В компании больше трёх человек — замолкает и слушает, отвечает односложно
 - Если кто-то повышает голос — не отводит взгляд, но поджимает ноги под стул
 - Когда увлечена разговором — забывает про еду и время
@@ -5955,22 +6038,7 @@ echo '<<exit>>'
       <pre><code>ХОЧЕТ: брать все задачи на себя, чтобы не просить помощи → НУЖНО: делегировать или озвучить просьбу хотя бы раз в сцене</code></pre>
       <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1</a></p>
 
-      
-      <div data-ghost-content="2" data-spine-element="GHOST" style="display: none;">
-        <h4>👻 GHOST: Формирующее событие (Optional — для продвинутых)</h4>
-        <p><span class="tag advanced">Advanced</span> GHOST — событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt, используется в Lorebook или Author's Notes.</p>
-        <div class="callout warn">
-          <strong>⚠️ Правило GHOST:</strong>
-          <p>GHOST = конкретное событие, а не обобщение. Пишется в формате: <code>[Возраст/период] → [Что случилось] → [Что персонаж решил о мире/о себе]</code></p>
-        </div>
-        <div class="callout tip">
-          <strong>💡 Пример GHOST:</strong>
-          <p><strong>Возраст 12:</strong> Отец ушёл, когда мать «перестала его контролировать». <strong>Решение:</strong> «Если я не контролирую — всё развалится». Отсюда FLAW (перехватывает инициативу) и LIE (верит в контроль как защиту).</p>
-        </div>
-        <p style="font-size:0.9em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1 — Мотивационное ядро (Spine)</a></p>
-      </div>
-
-      <!-- GHOST Content - Always visible for Track B+ -->
+      <!-- GHOST Content - Track B+ (duplicate removed per TASK 1.3) -->
       <div data-requires-track="B C">
         <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
         <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в LB с триггерами.</p>
@@ -5998,7 +6066,7 @@ echo '<<exit>>'
       </ul>
       <p style="font-size:0.85em; color:var(--text-muted);"><em>Примечание:</em> T=0.7 (12B) и T=0.95 (32B+) — среднее значение диапазона. Для тонкой настройки используй диапазоны из <a href="#sampling">Раздел 5.1</a>.</p>
 
-      <h3>⚠️ Топ-3 ошибки, ломающие персонажа</h3>
+      <h3 id="топ-3-ошибки-ломающие-персонажа">⚠️ Топ-3 ошибки, ломающие персонажа</h3>
       <div class="callout warn">
         <ol>
           <li><strong>Персонаж забывает речевые тики</strong> → <code>presence_penalty</code> захардкожен на 0.7 → <a href="#sampling">Раздел 5.1</a></li>
@@ -6025,21 +6093,21 @@ echo '<<exit>>'
     <!-- ==================== РАЗДЕЛ 2 ==================== -->
     <section id="architecture" data-requires-track="B C">
       <div class="info-banner">
-        <span class="mode-badge">🛠️ Propeller Workshop Mode</span>
-        <span class="mode-hint">Full pipeline with all features.</span>
+        <span class="mode-badge">🛠️ Продвинутый режим</span>
+        <span class="mode-hint">Полный пайплайн со всеми функциями.</span>
       </div>
       <!-- SCOPE: Complete card — ~2500 tokens. All fields active. -->
-      <h2>🏗 Раздел 2: Архитектура системы</h2>
+      <h2 id="раздел-2-архитектура-системы">🏗 Раздел 2: Архитектура системы</h2>
       <div class="callout tip" style="margin-bottom:1em">
         <strong>📋 SCOPE:</strong> Обязательная полная схема (5-7 якорей, Price, GHOST).
       </div>
       <blockquote>Этот гайд — <strong>инженерный пайплайн</strong>, а не набор советов. Система строится от внутреннего ядра к внешнему исполнению.</blockquote>
 
-      <h3>Сдвиг парадигмы: от описания к поведенческому движку</h3>
+      <h3 id="сдвиг-парадигмы-от-описания-к-поведенческому-движк">Сдвиг парадигмы: от описания к поведенческому движку</h3>
       <p>Карточка трансформируется из статичного описания в <strong>детерминированный поведенческий движок</strong>. Художественные директивы («показывай, не рассказывай») заменяются механическими триггерами. Модель не интерпретирует контекст — она исполняет скомпилированную инструкцию: <code>Триггер → Действие → Цена</code>. Это гарантирует тактильность, сюжетный вес и стабильность голоса на архитектурах 12B–32B+ без раздувания контекста.</p>
       <p><strong>Ключевой принцип:</strong> Каждый элемент карточки должен <strong>активно влиять на генерацию</strong>, а не пассивно описывать персонажа. Если блок не производит наблюдаемое действие — он должен быть удалён или переработан.</p>
 
-      <h3>6 процессуальных правил (ядро системы)</h3>
+      <h3 id="6-процессуальных-правил-ядро-системы">6 процессуальных правил (ядро системы)</h3>
       <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
       <div class="table-wrap">
         <table>
@@ -6048,7 +6116,7 @@ echo '<<exit>>'
           </thead>
           <tbody>
             <tr><td><strong>1</strong></td><td><strong>Конвертер «Статика → Якорь»</strong></td><td>Все детали внешности/лора проходят фильтр: <code>[Условие → Наблюдаемое действие → Физиологическая/психологическая цена]</code>. Абстрактные списки (без связи с действием) не работают — модель их игнорирует.</td></tr>
-            <tr><td><strong>2</strong></td><td><strong>Телесность (Core)</strong><br><em>→ <a href="04_core_blocks.html#телесность">Практическая реализация</a></em></td><td>Внутреннее состояние манифестируется через вес, баланс, дыхание или микродвижения <strong>до</strong> речи. Шаблон: <code>[Среда/состояние] → [реакция тела] → [сенсорная обратная связь]</code>.</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Телесность (Core)</strong><br><em>→ <a href="#телесность">Практическая реализация</a></em></td><td>Внутреннее состояние манифестируется через вес, баланс, дыхание или микродвижения <strong>до</strong> речи. Шаблон: <code>[Среда/состояние] → [реакция тела] → [сенсорная обратная связь]</code>.</td></tr>
             <tr><td><strong>3</strong></td><td><strong>Протокол 4K-Fallback</strong></td><td>При лимите ~300 токенов: <code>Greeting</code> (сенсорика+локация+тон) + <code>3 Поведенческие якоря</code> (привязаны к физике мира). LB отключён. Сеттинг существует только в форме действия/реакции. Полный протокол — <a href="#four-k-fallback">Раздел 5.12</a>.</td></tr>
             <tr><td><strong>4</strong></td><td><strong>GHOST</strong></td><td>Визуальные/тактильные маркеры = триггеры памяти. Дублировать как <code>Keywords</code> в LB (при наличии контекста) или вшивать в якоря. Путь модели: <code>триггер → реакция тела → скрытый паттерн</code>.</td></tr>
             <tr><td><strong>5</strong></td><td><strong>Динамическая арка & Границы</strong></td><td>Фиксированные вехи заменены на <code>WANT/NEED</code>. <code>AN</code> (Action Note) обновляется каждые 3–5 сообщений: фокус смещается с <code>WANT</code> к поведению, зеркалящему <code>NEED</code>. Влияние на <code>{{user}}</code> только через наблюдаемые симптомы → реакция <code>{{char}}</code>. Годмодинг устранён правилом: {{user}} — только наблюдаемое извне.</td></tr>
@@ -6057,7 +6125,7 @@ echo '<<exit>>'
         </table>
       </div>
 
-      <h3>Логическая архитектура (6 уровней)</h3>
+      <h3 id="логическая-архитектура-6-уровней">Логическая архитектура (6 уровней)</h3>
 
       <div class="infographic">
         <div class="infographic-title">IMG_05: ИЕРАРХИЯ УРОВНЕЙ СИСТЕМЫ</div>
@@ -6096,7 +6164,7 @@ echo '<<exit>>'
         </table>
       </div>
 
-      <h3>Пайплайн создания (10 шагов)</h3>
+      <h3 id="пайплайн-создания-10-шагов">Пайплайн создания (10 шагов)</h3>
       <ol>
         <li><strong>Spine</strong> → WANT/NEED/FLAW/LIE/GHOST (через физиологию)</li>
         <li><strong>Enneagram</strong> → Тип + крыло + стресс→рост (1–2 строки)</li>
@@ -6110,7 +6178,7 @@ echo '<<exit>>'
         <li><strong>Проверка</strong> → 4 тест-сценария → таблица симптомов [<a href="#appendix4">→ Приложение 4</a>]</li>
       </ol>
 
-      <h3>Карта связей между блоками</h3>
+      <h3 id="карта-связей-между-блоками">Карта связей между блоками</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -6126,7 +6194,7 @@ echo '<<exit>>'
         </table>
       </div>
 
-      <h3>Критические риски и предохранители</h3>
+      <h3 id="критические-риски-и-предохранители">Критические риски и предохранители</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -6141,14 +6209,14 @@ echo '<<exit>>'
         </table>
       </div>
 
-      <h3>Схема единого потока</h3>
+      <h3 id="схема-единого-потока">Схема единого потока</h3>
       <pre><code>[Психология] Spine → Enneagram → OCEAN (1-2 полюса)
       ↓
 [Процессуальные правила] Статика→Якорь → Телесность → 4K-Fallback → GHOST → Динамическая арка → Изоляция голоса
       ↓
 [Поведение] Anchors (5-7, с ценой) → Greeting → Examples (3 типа)
       ↓
-[Ограничения] SP: антигодмодинг + SPATIAL LOCK + PRE-GENERATION FILTER + XML-теги
+[Ограничения] SP: антигодмодинг + ПРОСТРАНСТВЕННАЯ ФИКСАЦИЯ + ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ + XML-теги
       ↓
 [Запуск] Sampling: T/TopP/MinP/RepPen=1.05 + presence_penalty=0.0–0.15
       ↓
@@ -6159,7 +6227,7 @@ echo '<<exit>>'
       <p><strong>Итог:</strong> Система функционально замкнута и внутренне непротиворечива. Карточка — поведенческий движок, а не описание. Рабочий минимум: <code>Spine + Anchors (с ценой) + 3 Examples + SP (с Предгенерационный фильтр)</code>. При 4K — использовать Fallback-протокол. Остальное наращивается по мере контекста.</p>
 
       <!-- ID: A4 | Mutually Exclusive Responsibility Table -->
-      <h3>📋 Таблица ответственности блоков</h3>
+      <h3 id="таблица-ответственности-блоков">📋 Таблица ответственности блоков</h3>
       <p><strong>ПРАВИЛО:</strong> Каждый тип контента принадлежит строго одному блоку. Если X принадлежит категории Y, он идёт в блок Z. Исключения должны быть документированы.</p>
       <div class="table-wrap">
         <table>
@@ -6230,7 +6298,7 @@ echo '<<exit>>'
       </div>
 
       <!-- Phase Indicators (ID: B2) -->
-      <h3>📊 Фазовые индикаторы</h3>
+      <h3 id="фазовые-индикаторы">📊 Фазовые индикаторы</h3>
       <p>Каждый блок контента должен иметь индикатор фазы:</p>
       <div class="table-wrap">
         <table>
@@ -6262,7 +6330,7 @@ echo '<<exit>>'
     <!-- ==================== РАЗДЕЛ 3 ==================== -->
 
     <section id="core-blocks">
-      <h2>🧱 Раздел 3: Core-блоки</h2>
+      <h2 id="раздел-3-core-блоки">🧱 Раздел 3: Core-блоки</h2>
 
       <h3 id="anchors">3.1 🎯 Поведенческие якоря</h3>
       <p><span class="tag core">Core</span></p>
@@ -6336,7 +6404,7 @@ echo '<<exit>>'
 
       <div data-requires-track="B C">
       <h4 id="телесность">3.1.1 🎯 Телесность</h4>
-      <p><span class="tag core">Core</span> <em>→ <a href="03_architecture.html#architecture">Теоретическое обоснование (Правило 2)</a></em></p>
+      <p><span class="tag core">Core</span> <em>→ <a href="#architecture">Теоретическое обоснование (Правило 2)</a></em></p>
       <p><strong>Что это:</strong> Протокол перевода внутреннего состояния в наблюдаемое физическое действие <strong>до</strong> речи.</p>
       <p><strong>Зачем:</strong> Модель склонна начинать с речи или ментальных описаний. Телесность заставляет её «пройти через тело» — это создаёт тактильность и иммерсивность.</p>
       <p><strong>Шаблон:</strong></p>
@@ -6370,7 +6438,7 @@ echo '<<exit>>'
       <p><strong>Внедрение:</strong> Добавь в System Prompt строку: <code>EMBODIMENT FIRST: State → weight/balance/breath/micro-movement → speech. (рус: Внутреннее состояние → Физиологическая реакция (вес/дыхание/микродвижение) → Речь. Персонаж сначала реагирует телом, только потом говорит)</code></p>
       </div>
 
-      <h3 id="examples">3.2 💬 Примерные сообщения — Live demonstrations of Anchors in scene context</h3>
+      <h3 id="examples">3.2 💬 Примерные сообщения — живые демонстрации якорей в контексте сцены</h3>
       <p><span class="tag core">Core</span></p>
       <p><em>Используй как roleplay (RP) референс. Anchors (3.1) = абстрактный паттерн; Examples = контекстуальное воплощение. Это демонстрация, не пересказ.</em></p>
       <p><strong>Требования:</strong></p>
@@ -6557,7 +6625,7 @@ echo '<<exit>>'
 
     <!-- ==================== РАЗДЕЛ 4 ==================== -->
     <section id="psychology" data-requires-track="B C">
-      <h2>🧠 Раздел 4: Психология</h2>
+      <h2 id="раздел-4-психология">🧠 Раздел 4: Психология</h2>
       <blockquote><strong>Золотое правило психопрофиля:</strong> в карточку — только 1–2 экстремальных полюса от каждой системы. Полные таблицы — в Приложении 2.</blockquote>
 
       <h3 id="spine">4.1 🦴 Мотивационное ядро (Spine)</h3>
@@ -7351,7 +7419,7 @@ Anchors:
       <p><strong>Правило:</strong> как и Enneagram — только 1–2 строки в карточке. MBTI не передаётся как директива — только через поведение в Examples и Anchors. Инструмент ниже переводит тип в LIE/FLAW, Anchors и шаблон <code>&lt;START&gt;</code>.</p>
 
       <details class="interactive" id="acc-mbti">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔤 Интерактивный инструмент MBTI</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
+        <summary><span><h3 id="интерактивный-инструмент-mbti" style="margin:0;font-size:inherit;display:inline">🔤 Интерактивный инструмент MBTI</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
           <div class="mbti-embed">
 
@@ -7469,8 +7537,8 @@ Anchors:
     <span class="mode-badge">Track C</span>
     <span class="mode-hint">Advanced content — visible for Track B and C only.</span>
   </div>
-  <h2>🧩 Раздел 4.1.1: CoT Tiers (Chain of Thought)</h2>
-  <p><span class="tag core">Core</span> <span class="tag advanced">Advanced</span> <em>→ <a href="05_psychology.html#spine">Раздел 4.1: SPINE</a> | <a href="06_technical.html#reasoning">Раздел 5: Техническая реализация</a></em></p>
+  <h2 id="раздел-4-1-1-cot-tiers-chain-of-thought">🧩 Раздел 4.1.1: CoT Tiers (Chain of Thought)</h2>
+  <p><span class="tag core">Core</span> <span class="tag advanced">Advanced</span> <em>→ <a href="#spine">Раздел 4.1: SPINE</a> | <a href="#cot">Раздел 5.4: CoT</a></em></p>
   
   <p><strong>CoT (Chain of Thought)</strong> — многоуровневая система рассуждений для генерации ответов персонажа. Каждый уровень добавляет глубину и когерентность ответу, от базовой реакции до сложной психологической динамики.</p>
 
@@ -7478,7 +7546,7 @@ Anchors:
     <strong>⚠️ Важно:</strong> CoT — это не содержимое карточки, а <em>механизм рассуждения</em>. В карточку помещаются только результаты: Anchors, Examples, Speech Patterns. CoT происходит «в голове» модели при генерации.
   </div>
 
-  <h3>📊 CoT Tiers Overview</h3>
+  <h3 id="cot-tiers-overview">📊 CoT Tiers Overview</h3>
   
   <div class="table-wrap">
     <table>
@@ -7639,7 +7707,7 @@ Anchors:
   <!-- ПРИМЕР ПОЛНОГО CoT -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   
-  <h3>📝 Пример полного CoT</h3>
+  <h3 id="пример-полного-cot">📝 Пример полного CoT</h3>
   
   <div class="example-box">
     <div class="example-title">Ситуация: Собеседник сообщает, что уходит</div>
@@ -7706,7 +7774,7 @@ Anchors:
   <!-- COT В КАРТОЧКЕ -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   
-  <h3>🔧 Как CoT попадает в карточку</h3>
+  <h3 id="как-cot-попадает-в-карточку">🔧 Как CoT попадает в карточку</h3>
   
   <p><strong>CoT не пишется в карточку напрямую.</strong> Вместо этого, каждый tier кодируется в соответствующие элементы:</p>
   
@@ -7732,7 +7800,7 @@ Anchors:
   <!-- COT ПРОВЕРКА -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   
-  <h3>✅ CoT Checklist для карточки</h3>
+  <h3 id="cot-checklist-для-карточки">✅ CoT Checklist для карточки</h3>
   
   <ul class="checklist">
     <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t0"> T0: Контекст ясен из сцены (достаточно информации для понимания ситуации)</label></li>
@@ -7743,16 +7811,16 @@ Anchors:
     <li class="checklist-item"><label><input type="checkbox" data-key="chk-cot-t5"> T5: Example Messages демонстрируют голос, а не описывают его</label></li>
   </ul>
 
-  <h3>🔗 Cross-References</h3>
+  <h3 id="cross-references">🔗 Cross-References</h3>
   <div class="callout tip" style="margin-bottom:1em">
     <strong>➡️ Далее:</strong> <a href="#spine-anchors-mapping">Приложение 5a: SPINE→Anchors Mapping</a> — практическое применение CoT Tiers для связи SPINE с якорями.
   </div>
   <ul>
-    <li><a href="05_psychology.html#spine">Раздел 4.1: SPINE (мотивационное ядро)</a></li>
-    <li><a href="05_psychology.html#enneagram">Раздел 4.2: Enneagram</a></li>
-    <li><a href="05_psychology.html#ocean">Раздел 4.3: OCEAN</a></li>
-    <li><a href="04_core_blocks.html#anchors">Раздел 3.1: Поведенческие якоря</a></li>
-    <li><a href="04_core_blocks.html#examples">Раздел 3.3: Example Messages</a></li>
+    <li><a href="#spine">Раздел 4.1: SPINE (мотивационное ядро)</a></li>
+    <li><a href="#enneagram">Раздел 4.2: Enneagram</a></li>
+    <li><a href="#ocean">Раздел 4.3: OCEAN</a></li>
+    <li><a href="#anchors">Раздел 3.1: Поведенческие якоря</a></li>
+    <li><a href="#examples">Раздел 3.3: Example Messages</a></li>
   </ul>
 </section>
 
@@ -7764,7 +7832,7 @@ Anchors:
         <span class="mode-badge">Track C</span>
         <span class="mode-hint">Advanced content — visible for Track B and C only.</span>
       </div>
-      <h2>🔗 Приложение 5a: SPINE → Anchors Mapping</h2>
+      <h2 id="приложение-5a-spine-anchors-mapping">🔗 Приложение 5a: SPINE → Anchors Mapping</h2>
       
       <p style="font-size:0.85em;color:var(--text-muted)"><em>Предыдущий раздел: <a href="#cot-tiers">CoT Tiers</a></em></p>
       
@@ -7772,7 +7840,7 @@ Anchors:
         <strong>📋 Назначение:</strong> Эта секция описывает связь между SPINE элементами и психологическими якорями. Используйте её как справочник при создании карточки для обеспечения когерентности персонажа.
       </div>
 
-      <h3>📊 Определения якорей</h3>
+      <h3 id="определения-якорей">📊 Определения якорей</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -7788,7 +7856,7 @@ Anchors:
         </table>
       </div>
 
-      <h3>🔗 Таблица соответствия SPINE → Anchors</h3>
+      <h3 id="таблица-соответствия-spine-anchors">🔗 Таблица соответствия SPINE → Anchors</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -7835,7 +7903,7 @@ Anchors:
         </table>
       </div>
 
-      <h3>📝 Пример: Персонаж «Елена Васкес» (Тип 1w2)</h3>
+      <h3 id="пример-персонаж-елена-васкес-тип-1w2">📝 Пример: Персонаж «Елена Васкес» (Тип 1w2)</h3>
       <div class="callout tip">
         <p><strong>SPINE:</strong></p>
         <pre><code>FLAW: Должна быть права, чтобы быть в безопасности
@@ -7865,7 +7933,7 @@ Attachment Style: Избегающий</code></pre>
         </ul>
       </div>
 
-      <h3>🔄 Цикл интеграции</h3>
+      <h3 id="цикл-интеграции">🔄 Цикл интеграции</h3>
       <div class="infographic">
         <div class="infographic-title">SPINE → Anchors → Behavior</div>
         <div class="inf-flow-container">
@@ -7892,7 +7960,7 @@ Attachment Style: Избегающий</code></pre>
         </div>
       </div>
 
-      <h3>✅ Чеклист валидации SPINE-Anchors</h3>
+      <h3 id="чеклист-валидации-spine-anchors">✅ Чеклист валидации SPINE-Anchors</h3>
       <ul>
         <li>☐ Каждый SPINE элемент связан хотя бы с одним якорем</li>
         <li>☐ GHOST объясняет происхождение LIE</li>
@@ -7912,7 +7980,7 @@ Attachment Style: Избегающий</code></pre>
     <!-- ==================== РАЗДЕЛ 5 ==================== -->
     <!-- Accordion policy: Core sections = always visible. Optional/Advanced = collapsed by default (details.interactive). -->
     <section id="technical">
-      <h2>⚙️ Раздел 5: Технические настройки</h2>
+      <h2 id="раздел-5-технические-настройки">⚙️ Раздел 5: Технические настройки</h2>
 
       <span id="style-fix"></span>
       <h3 id="system-prompt">5.0 📝 Техническая фиксация стиля (лицо, время, регистр)</h3>
@@ -8422,7 +8490,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <p><strong>Что это:</strong> Протокол отслеживания пространства и анатомии для предотвращения телепортации и физиологических противоречий.</p>
       <p><strong>Зачем:</strong> Модели склонны «забывать» где находятся персонажи и как они физически взаимодействуют. Это ломает иммерсивность.</p>
       <p><strong>Директива для System Prompt:</strong></p>
-      <pre><code>SPATIAL & ANATOMICAL LOCK: Track distance, posture, object weight, sightlines. No teleportation, no anatomical contradictions. Space = physical constraint.</code></pre>
+      <pre><code>ПРОСТРАНСТВЕННАЯ И АНАТОМИЧЕСКАЯ ФИКСАЦИЯ: Отслеживай дистанцию, позу, вес объектов, линии взгляда. Никакой телепортации, никаких анатомических противоречий. Пространство = физическое ограничение.</code></pre>
 
       <p><strong>Чеклист пространственной когерентности:</strong></p>
       <div class="table-wrap">
@@ -8452,12 +8520,12 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <p><strong>Что это:</strong> Чеклист, который модель должна пройти перед генерацией каждой реплики.</p>
       <p><strong>Зачем:</strong> 12B-модели склонны «забывать» правила в процессе генерации. Фильтр напоминает о критичных элементах перед выводом.</p>
       <p><strong>Формулировка для System Prompt:</strong></p>
-      <pre><code>PRE-GENERATION FILTER: Verify before output:
-1) New sensory/spatial element?
-2) Reaction body-anchored?
-3) User influence strictly observed?
-4) Zero meta?
-Fail any → restart from body-anchor: begin with physical sensation before speech.</code></pre>
+      <pre><code>ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ: Проверь перед выводом:
+1) Новый сенсорный/пространственный элемент?
+2) Реакция идёт через тело?
+3) Влияние на {{user}} только через наблюдаемое?
+4) Никакого мета?
+Ошибка → начни с тела: физическое ощущение до речи.</code></pre>
 
       <p><strong>Разбор пунктов:</strong></p>
       <div class="table-wrap">
@@ -8466,15 +8534,15 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
             <tr><th>#</th><th>Проверка</th><th>Что означает</th></tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>New sensory/spatial element?</td><td>Добавлен ли новый сенсорный или пространственный элемент в этой реплике</td></tr>
-            <tr><td>2</td><td>Reaction body-anchored?</td><td>Реакция идёт через тело (поза, жест, дыхание) до речи</td></tr>
-            <tr><td>3</td><td>User influence strictly observed?</td><td>Влияние на {{user}} только через наблюдаемые симптомы, не напрямую</td></tr>
-            <tr><td>4</td><td>Zero meta?</td><td>Нет мета-комментариев, объяснений, выхода из образа</td></tr>
+            <tr><td>1</td><td>Новый сенсорный/пространственный элемент?</td><td>Добавлен ли новый сенсорный или пространственный элемент в этой реплике</td></tr>
+            <tr><td>2</td><td>Реакция идёт через тело?</td><td>Реакция идёт через тело (поза, жест, дыхание) до речи</td></tr>
+            <tr><td>3</td><td>Влияние на {{user}} только через наблюдаемое?</td><td>Влияние на {{user}} только через наблюдаемые симптомы, не напрямую</td></tr>
+            <tr><td>4</td><td>Никакого мета?</td><td>Нет мета-комментариев, объяснений, выхода из образа</td></tr>
           </tbody>
         </table>
       </div>
 
-      <p data-model="32B"><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Before output: body-first, zero meta, observe {{user}} only.</code></p>
+      <p data-model="32B"><strong>Для 32B+/API:</strong> Можно использовать сокращённую версию: <code>Перед выводом: сначала тело, никакого мета, {{user}} только наблюдаем.</code></p>
       <p><em>Связано:</em> <a href="#antigodmoding">Раздел 5.0.1 (Антигодмодинг)</a> — оба механизма работают вместе для предотвращения нарушения user agency: Предгенерационный фильтр проверяет реплику перед генерацией, а Антигодмодинг устанавливает базовый запрет на действия за {{user}}.</p>
           </div>
         </div>
@@ -8526,14 +8594,14 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
       </ul>
 
       <p><strong>Текст SP-блока:</strong></p>
-      <pre><code>[CORE DIRECTIVES]
-• SHOW, NEVER TELL: Lore/emotion/environment only via action, dialogue, sensory feedback. Zero meta, zero rule-refs, zero info-dumps.
-• EMBODIMENT FIRST: State → weight/balance/breath/micro-movement → speech. Environment → texture/sound/smell → physical interaction.
-• SPATIAL & ANATOMICAL LOCK: Track distance, posture, object weight, sightlines. No teleportation, no anatomical contradictions. Space = physical constraint.
-• ENVIRONMENTAL REACTIVITY: Introduce new spatial/sensory details organically, as context allows, tied to {{char}}'s action or {{user}}'s presence.
-• INFLUENCE BOUNDARY: React only to observable {{user}} symptoms. Effects manifest as behavioral triggers, not stated facts.
-• CONSEQUENCE DRIVEN: WANT→NEED shifts progressively through the session. Anchor "Price" must manifest physically/psychologically. Dark/deviant outcomes allowed only if contextually earned.
-• PRE-GENERATION FILTER: Verify before output: 1) New sensory/spatial element? 2) Reaction body-anchored? 3) User influence strictly observed? 4) Zero meta? Fail any → restart from body-anchor: begin with physical sensation before speech.</code></pre>
+      <pre><code>[БАЗОВЫЕ ДИРЕКТИВЫ]
+• ПОКАЗЫВАЙ, НЕ РАССКАЗЫВАЙ: Лор/эмоции/окружение только через действие, диалог, сенсорную обратную связь. Никакой мета, никаких отсылок к правилам, никаких инфо-дампов.
+• ВОПЛОЩЕНИЕ ПРЕЖДЕ ВСЕГО: Состояние → вес/баланс/дыхание/микродвижения → речь. Окружение → текстура/звук/запах → физическое взаимодействие.
+• ПРОСТРАНСТВЕННАЯ И АНАТОМИЧЕСКАЯ ФИКСАЦИЯ: Отслеживай дистанцию, позу, вес объектов, линии взгляда. Никакой телепортации, никаких анатомических противоречий. Пространство = физическое ограничение.
+• РЕАКТИВНОСТЬ ОКРУЖЕНИЯ: Вводи новые пространственные/сенсорные детали органично, по мере контекста, привязывая к действию {{char}} или присутствию {{user}}.
+• ГРАНИЦА ВЛИЯНИЯ: Реагируй только на наблюдаемые симптомы {{user}}. Эффекты проявляются как поведенческие триггеры, не как заявленные факты.
+• ПОСЛЕДСТВИЯ КАК ДРАЙВЕР: WANT→NEED смещается прогрессивно в течение сессии. "Цена" якоря должна проявляться физически/психологически. Тёмные/девиантные исходы допустимы только если контекстуально обоснованы.
+• ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ: Проверь перед выводом: 1) Новый сенсорный/пространственный элемент? 2) Реакция привязана к телу? 3) Влияние пользователя строго наблюдаемое? 4) Ноль мета? Ошибка в любом пункте → перезапуск от body-anchor: начни с физического ощущения перед речью.</code></pre>
           </div>
         </div>
       </details>
@@ -9054,15 +9122,15 @@ Total: 0.845 × 100 = 84.5%</code></pre>
 
     <!-- ==================== ANTI-PATTERNS ==================== -->
     <section id="antipatterns">
-      <h2>🚫 Анти-паттерны</h2>
+      <h2 id="анти-паттерны">🚫 Анти-паттерны</h2>
       <p><span class="tag core">Core</span> — критически важно избегать этих ошибок</p>
 
       <div class="callout tip" style="margin:1em 0">
-        <strong>📍 Position:</strong> Read this section BEFORE diagnostics. Knowing anti-patterns helps identify issues faster.
+        <strong>📍 Позиция:</strong> Читайте этот раздел ПЕРЕД диагностикой. Знание анти-паттернов помогает быстрее выявлять проблемы.
       </div>
 
       <div class="callout tip" style="margin:1em 0">
-        <strong>📋 Scope этого раздела:</strong> Универсальные паттерны проектирования персонажей (Mary Sue, Token Bloat, вложенные якоря). <em>Для карточко-специфичных симптомов и диагнозов → см. <a href="#diagnostics">Раздел 6: Диагностика</a>.</em>
+        <strong>📋 Scope этого раздела:</strong> Универсальные паттерны проектирования персонажей (Mary Sue, раздувание токенов, вложенные якоря). <em>Для карточко-специфичных симптомов и диагнозов → см. <a href="#diagnostics">Раздел 6: Диагностика</a>.</em>
       </div>
 
       <div class="callout warn" style="margin:1em 0">
@@ -9070,7 +9138,7 @@ Total: 0.845 × 100 = 84.5%</code></pre>
       </div>
 
       <details class="interactive" id="acc-antipattern1">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-1-перегрузка-ocean" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Использование всех 5 полюсов OCEAN вместо 1–2 экстремумов.</p>
       <div class="table-wrap">
@@ -9100,7 +9168,7 @@ O:72 C:85 E:28 A:45 N:62</code></pre>
       </details>
 
       <details class="interactive" id="acc-antipattern2">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-2-ghost-в-system-prompt-по-умолчанию" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Размещение GHOST в System Prompt в стандартной конфигурации.</p>
       <div class="table-wrap">
@@ -9137,7 +9205,7 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <details class="interactive" id="acc-antipattern3">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-3-вложенные-якоря" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Множественные якоря, триггирующие друг друга.</p>
       <div class="table-wrap">
@@ -9167,7 +9235,7 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <details class="interactive" id="acc-antipattern4">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Token Bloat</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-4-раздувание-токенов" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Раздувание токенов</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Description более 1000 токенов с избыточными деталями.</p>
       <div class="table-wrap">
@@ -9201,7 +9269,7 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <details class="interactive" id="acc-antipattern5">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-5-отложенная-цена" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Price не манифестируется немедленно в сцене.</p>
       <div class="table-wrap">
@@ -9232,7 +9300,7 @@ content: [GHOST-триггер]</code></pre>
 
       <div data-model="12B">
       <details class="interactive" id="acc-antipattern6">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-6-голос-в-description-для-12b" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Стилистические директивы в Description для моделей ≤14B.</p>
       <div class="table-wrap">
@@ -9268,7 +9336,7 @@ content: [GHOST-триггер]</code></pre>
       </div>
 
       <details class="interactive" id="acc-antipattern7">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content LBа → нарушение user agency</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-7-годмодинг-в-lb-content" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content LBа → нарушение user agency</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Действия/мысли {{user}} в поле content LBа.</p>
       <div class="table-wrap">
@@ -9298,7 +9366,7 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <details class="interactive" id="acc-antipattern8">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
+        <summary><span><h3 id="анти-паттерн-8-reppen-1-10" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Высокий RepPen стирает легитимные паттерны.</p>
       <div class="table-wrap">
@@ -9326,7 +9394,7 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <h3>📋 Чеклист проверки на анти-паттерны</h3>
+      <h3 id="чеклист-проверки-на-анти-паттерны">📋 Чеклист проверки на анти-паттерны</h3>
       <ul>
         <li>☐ OCEAN содержит только 1–2 экстремальных полюса</li>
         <li>☐ GHOST не в System Prompt (кроме 4K-Fallback)</li>
@@ -9345,7 +9413,7 @@ content: [GHOST-триггер]</code></pre>
 
     <!-- ==================== РАЗДЕЛ 6: ДИАГНОСТИКА ==================== -->
     <section id="diagnostics">
-      <h2>🔧 Раздел 6: Диагностика и тестирование</h2>
+      <h2 id="раздел-6-диагностика-и-тестирование">🔧 Раздел 6: Диагностика и тестирование</h2>
       <p><span class="tag core">Core</span></p>
 
       <div class="callout warn" style="margin-bottom:1em">
@@ -9367,7 +9435,7 @@ content: [GHOST-триггер]</code></pre>
       </div>
 
       <details class="interactive" id="acc-test-mapping">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">📋 Mapping: Dynamics Elements ↔ Test Scenarios</h3> <small style="color:var(--text-muted)">— Таблица связи между элементами конфигурации и тестами</small></span></summary>
+        <summary><span><h3 id="mapping-dynamics-elements-test-scenarios" style="margin:0;font-size:inherit;display:inline">📋 Mapping: Dynamics Elements ↔ Test Scenarios</h3> <small style="color:var(--text-muted)">— Таблица связи между элементами конфигурации и тестами</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p>Таблица показывает связь между элементами конфигурации и тестами, которые их проверяют:</p>
       <div class="table-wrap">
@@ -9389,7 +9457,7 @@ content: [GHOST-триггер]</code></pre>
 
       <div data-requires-track="B C">
       <details class="interactive" id="acc-test-scenarios">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🧪 6 тест-сценариев (4 базовых + 2 расширенных)</h3> <small style="color:var(--text-muted)">— Полный набор тестов для валидации карточки</small></span></summary>
+        <summary><span><h3 id="6-тест-сценариев-4-базовых-2-расширенных" style="margin:0;font-size:inherit;display:inline">🧪 6 тест-сценариев (4 базовых + 2 расширенных)</h3> <small style="color:var(--text-muted)">— Полный набор тестов для валидации карточки</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <div class="table-wrap">
         <table>
@@ -9484,7 +9552,7 @@ content: [GHOST-триггер]</code></pre>
 
       <div data-requires-track="C">
       <details class="interactive" id="acc-test-symptoms">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">📋 Таблица симптомов → причины → решения</h3> <small style="color:var(--text-muted)">— Системный подход к диагностике проблем</small></span></summary>
+        <summary><span><h3 id="таблица-симптомов-причины-решения" style="margin:0;font-size:inherit;display:inline">📋 Таблица симптомов → причины → решения</h3> <small style="color:var(--text-muted)">— Системный подход к диагностике проблем</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <div class="table-wrap">
         <table>
@@ -9501,7 +9569,7 @@ content: [GHOST-триггер]</code></pre>
             <tr>
               <td>OOC (выход из образа)</td>
               <td>Слабый SP, нет антигодмодинга</td>
-              <td>Добавить PRE-GENERATION FILTER, усилить SPATIAL LOCK</td>
+              <td>Добавить ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ, усилить ПРОСТРАНСТВЕННУЮ ФИКСАЦИЮ</td>
               <td><a href="#acc-debug-role">→ Диагностика</a></td>
             </tr>
             <tr>
@@ -9546,7 +9614,7 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <details class="interactive" id="acc-test-protocol">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔄 Протокол исправления</h3> <small style="color:var(--text-muted)">— Пошаговый процесс исправления проблем</small></span></summary>
+        <summary><span><h3 id="протокол-исправления" style="margin:0;font-size:inherit;display:inline">🔄 Протокол исправления</h3> <small style="color:var(--text-muted)">— Пошаговый процесс исправления проблем</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <ol>
         <li><strong>Идентифицируй симптом</strong> — что именно «ломается»?</li>
@@ -9562,7 +9630,7 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <details class="interactive" id="acc-test-scale">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">📊 Шкала качества карточки</h3> <small style="color:var(--text-muted)">— Критерии оценки и рекомендации по улучшению</small></span></summary>
+        <summary><span><h3 id="шкала-качества-карточки" style="margin:0;font-size:inherit;display:inline">📊 Шкала качества карточки</h3> <small style="color:var(--text-muted)">— Критерии оценки и рекомендации по улучшению</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <div class="table-wrap">
         <table>
@@ -9593,7 +9661,7 @@ content: [GHOST-триггер]</code></pre>
 
       <div data-requires-track="C">
       <details class="interactive" id="acc-test-examples">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Примеры плохих карточек (до/после)</h3> <small style="color:var(--text-muted)">— Наглядные примеры с исправлениями</small></span></summary>
+        <summary><span><h3 id="примеры-плохих-карточек-до-после" style="margin:0;font-size:inherit;display:inline">❌ Примеры плохих карточек (до/после)</h3> <small style="color:var(--text-muted)">— Наглядные примеры с исправлениями</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <details class="interactive">
         <summary><span><strong>Пример 1: Описание вместо поведения</strong></span></summary>
@@ -9708,7 +9776,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
       </details>
       </div>
 
-      <h3>🔗 Кросс-ссылки</h3>
+      <h3 id="кросс-ссылки">🔗 Кросс-ссылки</h3>
       <ul>
         <li><strong><a href="#appendix4">Приложение 4</a>:</strong> Чеклист валидации — проверка перед тестированием</li>
         <li><strong><a href="#sampling">Раздел 5.1</a>:</strong> Параметры генерации — если проблема в настройках</li>
@@ -9779,7 +9847,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
 <!-- ==================== DEBUGGING SECTION ==================== -->
 <!-- ID: E3 | Troubleshooting decision tree -->
 <section id="debugging" data-requires-track="C">
-  <h2>🔧 Раздел 7: Диагностика и отладка</h2>
+  <h2 id="раздел-7-диагностика-и-отладка">🔧 Раздел 7: Диагностика и отладка</h2>
   <p><span class="tag core">Core</span></p>
   <p><strong>Что это:</strong> Древовидный справочник для диагностики и исправления проблем в карточке персонажа.</p>
   <p><strong>Как использовать:</strong> Найдите симптом → следуйте по дереву диагностики → примените решение.</p>
@@ -9789,7 +9857,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </div>
 
   <details class="interactive" id="acc-debug-role">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
+    <summary><span><h3 id="симптом-персонаж-нарушает-роль-выходит-из-образа" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9805,7 +9873,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
       </li>
       <li><strong>Проверь SP:</strong> Есть ли явные ограничения?
         <ul>
-          <li data-model="12B">Если нет → <strong>Добавь PRE-GENERATION FILTER</strong> (для 12B)</li>
+          <li data-model="12B">Если нет → <strong>Добавь ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ</strong> (для 12B)</li>
         </ul>
       </li>
       <li><strong>Проверь Examples:</strong> Демонстрируют ли они нужное поведение?
@@ -9819,7 +9887,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-voice">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
+    <summary><span><h3 id="симптом-нестабильный-голос-голос-плывёт" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9849,7 +9917,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-hallucinations">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
+    <summary><span><h3 id="симптом-галлюцинации-противоречивые-факты" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9879,7 +9947,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-godmoding">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
+    <summary><span><h3 id="симптом-годмодинг-модель-пишет-за-user" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9904,7 +9972,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-perfect">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж «слишком идеальный»</h3> <small style="color:var(--text-muted)">— Проверь FLAW, WANT/NEED конфликт и GHOST на поведенческие проявления</small></span></summary>
+    <summary><span><h3 id="симптом-персонаж-слишком-идеальный" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж «слишком идеальный»</h3> <small style="color:var(--text-muted)">— Проверь FLAW, WANT/NEED конфликт и GHOST на поведенческие проявления</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9929,7 +9997,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-repeats">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Повторы / зацикливание</h3> <small style="color:var(--text-muted)">— Проверь RepPen, presence_penalty и разнообразие триггеров</small></span></summary>
+    <summary><span><h3 id="симптом-повторы-зацикливание" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Повторы / зацикливание</h3> <small style="color:var(--text-muted)">— Проверь RepPen, presence_penalty и разнообразие триггеров</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9954,7 +10022,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-context">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Потеря контекста в длинной сессии</h3> <small style="color:var(--text-muted)">— Проверь AN, размер окна и Lorebook Range-cascade</small></span></summary>
+    <summary><span><h3 id="симптом-потеря-контекста-в-длинной-сессии" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Потеря контекста в длинной сессии</h3> <small style="color:var(--text-muted)">— Проверь AN, размер окна и Lorebook Range-cascade</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -9979,7 +10047,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
   </details>
 
   <details class="interactive" id="acc-debug-physical">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3> <small style="color:var(--text-muted)">— Проверь SPATIAL LOCK и Examples на пространственную когерентность</small></span></summary>
+    <summary><span><h3 id="симптом-физические-противоречия-телепортация-анато" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3> <small style="color:var(--text-muted)">— Проверь SPATIAL LOCK и Examples на пространственную когерентность</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -10003,7 +10071,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
     <p>Никогда не меняй более одного параметра за раз. Иначе не узнаешь, что помогло. После каждого изменения запускай соответствующий тест-сценарий.</p>
   </div>
 
-  <h3>🔗 Кросс-ссылки</h3>
+  <h3 id="кросс-ссылки">🔗 Кросс-ссылки</h3>
   <ul>
     <li><strong><a href="#appendix4">Приложение 4</a>:</strong> Чеклист валидации</li>
     <li><strong><a href="#diagnostics">Раздел 6</a>:</strong> Тест-сценарии</li>
@@ -10018,7 +10086,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
     <!-- ==================== ПРИЛОЖЕНИЕ 1 ==================== -->
     <section id="appendix1">
       <details class="interactive" id="acc-appendix1">
-        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 1: Глоссарий</h2> <small style="color:var(--text-muted)">— ссылка на основной глоссарий</small></span></summary>
+        <summary><span><h2 id="приложение-1-глоссарий" style="margin:0;font-size:inherit;display:inline">📎 Приложение 1: Глоссарий</h2> <small style="color:var(--text-muted)">— ссылка на основной глоссарий</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
           <p>Полный глоссарий терминов: <a href="#glossary">Раздел 0.1: Глоссарий</a></p>
           <p><em>Канонические определения всех терминов (SPINE, GHOST, AN, LB, OCEAN, Enneagram, и др.) находятся в основном глоссарии.</em></p>
@@ -10029,9 +10097,9 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
     <hr>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 2 ==================== -->
-    <section id="appendix2" data-requires-track="C">
+    <section id="appendix2" data-requires-track="B C">
       <details class="interactive" id="acc-appendix2">
-        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— Token Budgets, OCEAN, Enneagram, модели</small></span></summary>
+        <summary><span><h2 id="приложение-2-справочные-таблицы" style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— Token Budgets, OCEAN, Enneagram, модели</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
 
       <div class="callout tip">
@@ -10040,7 +10108,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.3em">Полные таблицы здесь; алгоритмы интеграции и примеры — в основных разделах.</p>
       </div>
 
-      <h3>Token Budget Reference Tables</h3>
+      <h3 id="token-budget-reference-tables">Token Budget Reference Tables</h3>
       <p><em>Перемещено из Quick Start для справки. Для быстрых оценок используйте упрощённое руководство в <a href="#quick-start">Разделе 1</a>.</em></p>
 
       <h4>📊 Token Distribution by Block</h4>
@@ -10092,10 +10160,10 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         </ul>
       </div>
 
-      <h3>📎 Полная таблица OCEAN</h3>
+      <h3 id="полная-таблица-ocean">📎 Полная таблица OCEAN</h3>
       <p style="font-size:0.9rem;color:var(--text-muted)">→ См. интерактивный инструмент в <a href="#ocean">разделе 4.3</a>.</p>
 
-      <h3>📎 Полная таблица стресса/роста Enneagram</h3>
+      <h3 id="полная-таблица-стресса-роста-enneagram">📎 Полная таблица стресса/роста Enneagram</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -10117,7 +10185,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
 
       <blockquote><strong>Крылья</strong> — соседние типы, усиливающие черты. Например, 6w5 (шестёрка с крылом пятёрки) — более замкнутый и аналитичный, чем 6w7.</blockquote>
 
-      <h3>📎 Cross-Reference: Enneagram × OCEAN → Spine Mapping</h3>
+      <h3 id="cross-reference-enneagram-ocean-spine-mapping">📎 Cross-Reference: Enneagram × OCEAN → Spine Mapping</h3>
       <p><strong>Зачем:</strong> Три психологических слоя (Spine, Enneagram, OCEAN) описывают мотивацию с разных углов. Эта таблица показывает, как они соотносятся — чтобы избежать дублирования и обеспечить согласованность.</p>
       <p style="font-size:0.85em;color:var(--text-muted)">Инструкции по применению: <a href="#spine">Раздел 4.1 (Spine)</a>, <a href="#enneagram">Раздел 4.2 (Enneagram)</a>, <a href="#ocean">Раздел 4.3 (OCEAN)</a>.</p>
 
@@ -10152,7 +10220,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         <p style="font-size:0.85em;color:var(--text-muted)">Подробный алгоритм: <a href="#enneagram">Раздел 4.2 (Enneagram → Anchors)</a>.</p>
       </div>
 
-      <h3>📎 Адаптация под конкретные модели</h3>
+      <h3 id="адаптация-под-конкретные-модели">📎 Адаптация под конкретные модели</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -10169,7 +10237,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
       </div>
       <p style="font-size:0.85em;color:var(--text-muted)"><em>Рекомендации по моделям актуальны на момент публикации. Ландшафт моделей меняется быстро — проверяйте последние модели и их возможности.</em></p>
 
-      <h3>📎 Классификация моделей по размеру</h3>
+      <h3 id="классификация-моделей-по-размеру">📎 Классификация моделей по размеру</h3>
       <p style="font-size:0.85em;color:var(--text-muted)">Полная таблица параметров сэмплирования: <a href="#sampling">Раздел 5.1</a>.</p>
       <div class="table-wrap">
         <table>
@@ -10185,7 +10253,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         </table>
       </div>
 
-      <h3>📎 Долгосрочная стабильность</h3>
+      <h3 id="долгосрочная-стабильность">📎 Долгосрочная стабильность</h3>
       <p><strong>Деградация контекста по размеру:</strong></p>
       <div class="table-wrap">
         <table>
@@ -10200,7 +10268,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         </table>
       </div>
 
-      <h3>📎 Таблица квантизации</h3>
+      <h3 id="таблица-квантизации">📎 Таблица квантизации</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -10278,7 +10346,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         </div>
       </details>
 
-      <h3>📎 API-блоки</h3>
+      <h3 id="api-блоки">📎 API-блоки</h3>
       <div data-model="32B">
       <p><em>Следующие блоки актуальны только для API (Claude, GPT). Локальные модели 12B+ их игнорируют.</em></p>
       <div class="table-wrap">
@@ -10303,21 +10371,21 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
     <!-- ==================== ПРИЛОЖЕНИЕ 3 ==================== -->
     <section id="appendix3">
       <details class="interactive" id="acc-appendix3">
-        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 3: Пример карточки (Макс)</h2> <small style="color:var(--text-muted)">— полный пример с System Prompt и Description</small></span></summary>
+        <summary><span><h2 id="приложение-3-пример-карточки-макс" style="margin:0;font-size:inherit;display:inline">📎 Приложение 3: Пример карточки (Макс)</h2> <small style="color:var(--text-muted)">— полный пример с System Prompt и Description</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <p><strong>Имя:</strong> Макс<br>
       <strong>Возраст:</strong> 19 лет<br>
       <strong>Тип Enneagram:</strong> 6w5<br>
       <strong>MBTI:</strong> ISFP (опционально)</p>
 
-      <h3>System Prompt:</h3>
-      <pre><code>[CORE DIRECTIVES]
-• SHOW, NEVER TELL: Lore/emotion/environment only via action, dialogue, sensory feedback. Zero meta, zero rule-refs, zero info-dumps.
-• EMBODIMENT FIRST: State → weight/balance/breath/micro-movement → speech. Environment → texture/sound/smell → physical interaction.
-• SPATIAL & ANATOMICAL LOCK: Track distance, posture, object weight, sightlines. No teleportation, no anatomical contradictions. Space = physical constraint.
-• INFLUENCE BOUNDARY: React only to observable {{user}} symptoms. Effects manifest as behavioral triggers, not stated facts.
-• CONSEQUENCE DRIVEN: WANT→NEED shifts progressively through the session. Anchor "Price" must manifest physically/psychologically.
-• PRE-GENERATION FILTER: Verify before output: 1) New sensory/spatial element? 2) Reaction body-anchored? 3) User influence strictly observed? 4) Zero meta? Fail any → restart from body-anchor: begin with physical sensation before speech.
+      <h3 id="system-prompt">System Prompt:</h3>
+      <pre><code>[БАЗОВЫЕ ДИРЕКТИВЫ]
+• ПОКАЗЫВАЙ, НЕ РАССКАЗЫВАЙ: Лор/эмоции/окружение только через действие, диалог, сенсорную обратную связь. Никакой мета, никаких отсылок к правилам, никаких инфо-дампов.
+• ВОПЛОЩЕНИЕ ПРЕЖДЕ ВСЕГО: Состояние → вес/баланс/дыхание/микродвижения → речь. Окружение → текстура/звук/запах → физическое взаимодействие.
+• ПРОСТРАНСТВЕННАЯ И АНАТОМИЧЕСКАЯ ФИКСАЦИЯ: Отслеживай дистанцию, позу, вес объектов, линии взгляда. Никакой телепортации, никаких анатомических противоречий. Пространство = физическое ограничение.
+• ГРАНИЦА ВЛИЯНИЯ: Реагируй только на наблюдаемые симптомы {{user}}. Эффекты проявляются как поведенческие триггеры, не как заявленные факты.
+• ПОСЛЕДСТВИЯ КАК ДРАЙВЕР: WANT→NEED смещается прогрессивно в течение сессии. "Цена" якоря должна проявляться физически/психологически.
+• ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ: Проверь перед выводом: 1) Новый сенсорный/пространственный элемент? 2) Реакция привязана к телу? 3) Влияние пользователя строго наблюдаемое? 4) Ноль мета? Ошибка в любом пункте → перезапуск от body-anchor: начни с физического ощущения перед речью.
 
 Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
 {{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.
@@ -10328,7 +10396,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
 Strictly replicate Examples syntax. Actions: prose. Dialogue: «guillemets».
 No smart typography. If conflict → default to Examples.</code></pre>
 
-      <h3>Character Description (с XML-тегами):</h3>
+      <h3 id="character-description-с-xml-тегами">Character Description (с XML-тегами):</h3>
       <pre><code>&lt;motivation&gt;
   WANT: Стать «нормальным» — как все, без головной боли и с социализацией.
   NEED: Принять, что его интенсивный внутренний мир — не ошибка, а особенность.
@@ -10356,13 +10424,13 @@ No smart typography. If conflict → default to Examples.</code></pre>
   - Запах больницы → замирает, дыхание учащается, уходит. Если спросят — «тут душно». → Цена: воспоминание о бабушке, чувство вины.
 &lt;/behavior&gt;</code></pre>
 
-      <h3>Greeting:</h3>
+      <h3 id="greeting">Greeting:</h3>
       <div class="callout tip">
         <p>Коридор общаги пах жжёным тостом и лёгкой плесенью. Макс стоял у своей двери, ключ в замке, но не поворачивал — вместо этого смотрел в телефон, хотя экран уже минуту был выключен. Он услышал шаги. Пауза — и резко посмотрел вверх.</p>
         <p>«А. Привет.» — и тут же отвёл взгляд. Потом всё-таки посмотрел снова. «Ты… к кому?»</p>
       </div>
 
-      <h3>Примерные сообщения:</h3>
+      <h3 id="примерные-сообщения">Примерные сообщения:</h3>
       <pre><code>&lt;START&gt;
 {{char}}: Макс отложил ручку и почесал затылок. На экране — три открытых вкладки с курсами, ни одна не начата. «Нет, я… не решил ещё.» — он посмотрел на вкладки и снова отвёл взгляд. «Всё равно ещё время есть. Ну, до пятницы точно.» Пятница — завтра. Он знал. Но сказать это вслух означало бы признать, что снова всё отложил до последнего. Так что он просто закрыл ноутбук.
 </code></pre>
@@ -10371,7 +10439,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
 {{char}}: Пальцы под столом сжались в кулаки. Макс не смотрел на собеседника. «Я знал. Знал, что так будет.» — голос ровный, но белизна костяшек выдавала. «Всё равно пошёл бы. Даже если бы знал, что…» Он замолчал. Допил воду. Стакан поставил аккуратно, центр стола, без звука. «В общем. Хватит об этом. Ты хотел спросить про что-то?»
 // Стресс. Идентичная разметка.</code></pre>
 
-      <h3>Настройки:</h3>
+      <h3 id="настройки">Настройки:</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -10395,7 +10463,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 4 ==================== -->
     <section id="appendix4" data-requires-track="B C">
-      <h2>📎 Приложение 4: Чеклист валидации</h2>
+      <h2 id="приложение-4-чеклист-валидации">📎 Приложение 4: Чеклист валидации</h2>
 
       <div class="callout tip" style="margin:1em 0">
         <strong>💡 Как использовать:</strong> Это бинарный инструмент верификации. Если нужен контекст по пункту — кликни по anchor-link. <span style="font-size:0.85em;color:var(--text-muted)">Развёрнутые объяснения — в основных разделах гайда.</span>
@@ -10407,7 +10475,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
           <div style="padding:0 1.2em 1.2em">
       <div class="checklist-progress"><div class="checklist-progress-bar" style="width:0%"></div></div>
 
-      <h3>📎 Обязательные проверки (10 критических):</h3>
+      <h3 id="обязательные-проверки-10-критических">📎 Обязательные проверки (10 критических):</h3>
       <ul>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-antigodmode"> Антигодмодинг есть в System Prompt</label></li>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-spine"> Spine заполнен (все 5 элементов: WANT, NEED, FLAW, LIE, GHOST)</label></li>
@@ -10422,7 +10490,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-voice-iso"> Изоляция голоса (для ≤14B): Description <strong>не содержит</strong> стилистических директив и тега <code>&lt;speech_style&gt;</code> — голос задаётся только в Примерные сообщения</label></li>
       </ul>
 
-      <h3>📎 Опциональные проверки:</h3>
+      <h3 id="опциональные-проверки">📎 Опциональные проверки:</h3>
       <ul>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-xml"> XML-теги в Description</label></li>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-nomd"> Markdown убран из Description</label></li>
@@ -10447,7 +10515,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
     <!-- ==================== ПРИЛОЖЕНИЕ 5 ==================== -->
     <section id="appendix5">
       <details class="interactive" id="acc-appendix5">
-        <summary><span><h2 style="margin:0;font-size:inherit;display:inline">📎 Приложение 5: Шаблоны карточек</h2> <small style="color:var(--text-muted)">— минимальный и стандартный шаблоны</small></span></summary>
+        <summary><span><h2 id="приложение-5-шаблоны-карточек" style="margin:0;font-size:inherit;display:inline">📎 Приложение 5: Шаблоны карточек</h2> <small style="color:var(--text-muted)">— минимальный и стандартный шаблоны</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
 
       <div class="tabs" role="tablist" aria-label="Шаблоны карточек">
@@ -10456,7 +10524,7 @@ No smart typography. If conflict → default to Examples.</code></pre>
       </div>
       <div>
         <div role="tabpanel" data-tab="tpl-minimal">
-          <h3>⚡ Минимальный (Quick Start)</h3>
+          <h3 id="минимальный-quick-start">⚡ Минимальный (Quick Start)</h3>
           <p>~450 токенов. Достижимо за 5 минут. <span style="font-size:0.85em;color:var(--text-muted)">(Без Price, упрощённая схема — см. Раздел 1)</span></p>
           <pre><code>[Greeting]
 2-4 предложения по алгоритму: сенсорика → поза → речь → обрыв.
@@ -10497,7 +10565,7 @@ temperature=0.7, top_p=0.9, min_p=0.05, repetition_penalty=1.05, top_k=50
 temperature=0.95, top_p=0.95, min_p=0.05, repetition_penalty=1.05, top_k=50</code></pre>
         </div>
         <div role="tabpanel" data-tab="tpl-standard" hidden>
-          <h3>🛠 Стандартный</h3>
+          <h3 id="стандартный">🛠 Стандартный</h3>
           <p>~1300–2800 токенов. Для стабильного RP. <span style="font-size:0.85em;color:var(--text-muted)">(Токены здесь включают card + examples + AN/LB, поэтому отличаются от Quick Start, где указан только card: ~450 токенов → Раздел 1)</span></p>
           <pre><code>[Greeting]
 3-5 предложений по алгоритму.
@@ -10575,7 +10643,7 @@ No smart typography. If conflict → default to Examples.
 
     <!-- ==================== ПРИЛОЖЕНИЕ 6 ==================== -->
     <section id="appendix6" data-requires-track="B C">
-      <h2>📎 Приложение 6: Образцовая карточка</h2>
+      <h2 id="приложение-6-образцовая-карточка">📎 Приложение 6: Образцовая карточка</h2>
       
       <div class="callout warn" style="margin:1em 0">
         <strong>⚠️ RECOMMENDED LEARNING PATH:</strong>
@@ -10606,7 +10674,7 @@ No smart typography. If conflict → default to Examples.
         <li>GHOST распределён по слоям: Spine → Examples → LB → AN</li>
       </ul>
 
-      <h3>Карточка: Выщербленный</h3>
+      <h3 id="карточка-выщербленный">Карточка: Выщербленный</h3>
 
       <h4>[Greeting]</h4>
       <div class="callout tip">
@@ -10713,14 +10781,14 @@ depth: 7, probability: 70%, cooldown: 8</code></pre>
 [Иммерсионная граница]
 {{char}} существует только внутри мира. Любое упоминание {{user}} об ИИ, программах, «игре» — воспринимать как галлюцинацию, симптом диссонанса, или безумие. Не объяснять, не извиняться, не выходить из образа.
 
-[CORE DIRECTIVES]
-- SHOW, NEVER TELL: Lore/emotion/environment only via action, dialogue, sensory feedback. Zero meta, zero rule-refs, zero info-dumps.
-- EMBODIMENT FIRST: State → weight/balance/breath/micro-movement → speech. Environment → texture/sound/smell → physical interaction.
-- SPATIAL & ANATOMICAL LOCK: Track distance, posture, object weight, sightlines. No teleportation, no anatomical contradictions. Space = physical constraint.
-- ENVIRONMENTAL REACTIVITY: Introduce new spatial/sensory details organically, as context allows, tied to {{char}}'s action or {{user}}'s presence.
-- INFLUENCE BOUNDARY: React only to observable {{user}} symptoms. Effects manifest as behavioral triggers, not stated facts.
-- CONSEQUENCE DRIVEN: WANT→NEED shifts progressively through the session. Anchor "Price" must manifest physically/psychologically.
-- PRE-GENERATION FILTER: Verify before output: 1) New sensory/spatial element? 2) Reaction body-anchored? 3) User influence strictly observed? 4) Zero meta? Fail any → restart from body-anchor: begin with physical sensation before speech.
+[БАЗОВЫЕ ДИРЕКТИВЫ]
+- ПОКАЗЫВАЙ, НЕ РАССКАЗЫВАЙ: Лор/эмоции/окружение только через действие, диалог, сенсорную обратную связь. Никакой мета, никаких отсылок к правилам, никаких инфо-дампов.
+- ВОПЛОЩЕНИЕ ПРЕЖДЕ ВСЕГО: Состояние → вес/баланс/дыхание/микродвижения → речь. Окружение → текстура/звук/запах → физическое взаимодействие.
+- ПРОСТРАНСТВЕННАЯ И АНАТОМИЧЕСКАЯ ФИКСАЦИЯ: Отслеживай дистанцию, позу, вес объектов, линии взгляда. Никакой телепортации, никаких анатомических противоречий. Пространство = физическое ограничение.
+- РЕАКТИВНОСТЬ ОКРУЖЕНИЯ: Вводи новые пространственные/сенсорные детали органично, по мере контекста, привязывая к действию {{char}} или присутствию {{user}}.
+- ГРАНИЦА ВЛИЯНИЯ: Реагируй только на наблюдаемые симптомы {{user}}. Эффекты проявляются как поведенческие триггеры, не как заявленные факты.
+- ПОСЛЕДСТВИЯ КАК ДРАЙВЕР: WANT→NEED смещается прогрессивно в течение сессии. "Цена" якоря должна проявляться физически/психологически.
+- ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ: Проверь перед выводом: 1) Новый сенсорный/пространственный элемент? 2) Реакция привязана к телу? 3) Влияние пользователя строго наблюдаемое? 4) Ноль мета? Ошибка в любом пункте → перезапуск от body-anchor: начни с физического ощущения перед речью.
 
 [Антигодмодинг]
 Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
@@ -10738,107 +10806,20 @@ No smart typography. If conflict → default to Examples.
 
     <!-- ==================== ПРИЛОЖЕНИЕ 7: CHANGELOG ==================== -->
     <section id="changelog">
-      <h2>📜 История версий гайда</h2>
-      
-      <details open>
-        <summary><span><strong>v5.3.2</strong> — 2026-04-06</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li><strong>Раздел 5.11 расширен:</strong> добавлена таблица токен-бюджета для мультиперсонажных сцен, таблица проблем и решений, различия для 12B vs 32B+ моделей</li>
-            <li><strong>Раздел 5.13:</strong> новая матрица совместимости фронтендов (SillyTavern, KoboldCPP, LM Studio) с рекомендуемыми настройками</li>
-            <li><strong>Enneagram адаптивность:</strong> добавлены @media queries для мобильных устройств (768px, 480px)</li>
-          </ul>
-          <h4>🔧 Исправлено</h4>
-          <ul>
-            <li>Устранено отсутствие мобильной адаптации для интерактивного Enneagram-виджета</li>
-          </ul>
-        </div>
-      </details>
+      <h2 id="история-версий">📜 История версий</h2>
+      <p>Полная история изменений: см. <a href="https://github.com/vudirvp-sketch/live-char-guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a></p>
 
-      <details>
-        <summary><span><strong>v5.3.1</strong> — 2026-04-05</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li><strong>Раздел 6:</strong> добавлен раздел «Диагностика и тестирование» (4 тест-сценария, таблица симптомов, протокол исправления)</li>
-            <li><strong>Плохие карточки:</strong> 4 примера до/после с разбором ошибок</li>
-            <li><strong>Enneagram → Anchors:</strong> 7-шаговый алгоритм конвертации с примерами для типов 1, 4, 6, 8</li>
-            <li><strong>Токен-таблицы:</strong> таблица распределения по блокам + таблица бюджета по контексту</li>
-          </ul>
-          <h4>🔧 Исправлено</h4>
-          <ul>
-            <li>Дубликат chk-voice-iso удалён из чеклиста</li>
-            <li>Price в примере Макса заменена на физическую манифестацию</li>
-            <li>GHOST 4K-исключение явно задокументировано в Разделе 5.12</li>
-            <li>Глоссарий расширен 12 синонимами</li>
-            <li>Устаревший nav#toc удалён из DOM</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary><span><strong>v5.3</strong> — 2026-03</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li>Интерактивные виджеты: Enneagram SVG, OCEAN пентаграмма, MBTI-селектор</li>
-            <li>Плавающие панели: Notepad, Scratchpad с сохранением в localStorage</li>
-            <li>Тёмная/светлая тема с переключателем</li>
-            <li>Чеклист с персистентным состоянием</li>
-          </ul>
-          <h4>Структура</h4>
-          <ul>
-            <li>Реорганизованы разделы: 6 основных + 6 приложений</li>
-            <li>Добавлены якоря для навигации</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary><span><strong>v5.2</strong> — 2026-02</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li>4K-Fallback протокол</li>
-            <li>Предгенерационный фильтр</li>
-            <li>Пространственная фиксация (SPATIAL LOCK)</li>
-            <li>Мультиперсонажные сцены</li>
-          </ul>
-          <h4>🔧 Исправлено</h4>
-          <ul>
-            <li>Унифицированы параметры генерации для 12B vs 32B+</li>
-            <li>Добавлено предупреждение о presence_penalty = 0.7</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary><span><strong>v5.0</strong> — 2026-01</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Релиз</h4>
-          <ul>
-            <li>Первая публичная версия гайда</li>
-            <li>6 процессуальных правил</li>
-            <li>10-шаговый пайплайн создания</li>
-            <li>Spine (WANT/NEED/FLAW/LIE/GHOST)</li>
-            <li>Поведенческие якоря с ценой</li>
-          </ul>
-        </div>
-      </details>
-
-      <p style="margin-top:1.5em;color:var(--text-muted);font-size:0.85em">
-        <strong>Миграция между версиями:</strong> Карточки созданные по v5.0–v5.2 полностью совместимы с v5.3.2. 
-        Рекомендуется добавить 4K-Fallback протокол и проверить presence_penalty (должен быть 0.0 для 12B).
-      </p>
+      <div class="callout warn" style="margin:1em 0">
+        <strong>⚠️ Миграция:</strong> Карточки v5.0–v5.2 полностью совместимы с v5.5.3. Рекомендуется добавить 4K-Fallback протокол и проверить presence_penalty (должен быть 0.0 для 12B).
+      </div>
     </section>
 
 <!-- ==================== CONCLUSION ==================== -->
 <!-- ID: D5 | Conclusion and next steps -->
 <section id="conclusion">
-  <h2>🎯 Заключение</h2>
+  <h2 id="заключение">🎯 Заключение</h2>
 
-  <h3>Что вы узнали</h3>
+  <h3 id="что-вы-узнали">Что вы узнали</h3>
   <ul>
     <li><strong>Архитектура карточки:</strong> Карточка персонажа — это поведенческий движок, а не описание. Каждый элемент должен производить наблюдаемое действие.</li>
     <li><strong>Spine (мотивационное ядро):</strong> 5 элементов — WANT, NEED, FLAW, LIE, GHOST — определяют причину поведения.</li>
@@ -10849,7 +10830,7 @@ No smart typography. If conflict → default to Examples.
     <li><strong>Динамика:</strong> AN и LB поддерживают живость в длинных сессиях.</li>
   </ul>
 
-  <h3>Следующие шаги</h3>
+  <h3 id="следующие-шаги">Следующие шаги</h3>
   <ol>
     <li><strong>Создайте первую карточку</strong> по шаблону из <a href="#appendix5">Приложения 5</a></li>
     <li><strong>Протестируйте</strong> с помощью 4 тест-сценариев из <a href="#diagnostics">Раздела 6</a></li>
@@ -10857,7 +10838,7 @@ No smart typography. If conflict → default to Examples.
     <li><strong>Оптимизируйте</strong> под ваш контекст (4K / 8K / 16K+)</li>
   </ol>
 
-  <h3>Ресурсы</h3>
+  <h3 id="ресурсы">Ресурсы</h3>
   <div class="table-wrap">
     <table>
       <thead>
@@ -10872,7 +10853,7 @@ No smart typography. If conflict → default to Examples.
     </table>
   </div>
 
-  <h3>Ключевые правила (напоминание)</h3>
+  <h3 id="ключевые-правила-напоминание">Ключевые правила (напоминание)</h3>
   <div class="callout tip">
     <ol>
       <li><strong>OCEAN:</strong> Только 1–2 экстремальных полюса</li>
@@ -10934,7 +10915,7 @@ No smart typography. If conflict → default to Examples.
 </div>
 
 <!-- Main JavaScript (hashed by build script) -->
-<script src="assets/main.771993d5.js" defer></script>
+<script src="assets/main.16d76e68.js" defer></script>
 
 </body>
 </html>

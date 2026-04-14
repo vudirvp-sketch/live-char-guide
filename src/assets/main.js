@@ -821,6 +821,39 @@ async function copyToClipboard(text) {
   }
 }
 
+// === SPOILER TOGGLE ===
+function initSpoilers() {
+  const spoilers = document.querySelectorAll('[data-spoiler]');
+  spoilers.forEach(spoiler => {
+    // Check if already initialized
+    if (spoiler.dataset.spoilerInit === 'true') return;
+    
+    // Create toggle button
+    const toggle = document.createElement('button');
+    toggle.className = 'spoiler-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = '▼ Показать';
+    
+    // Insert before spoiler content
+    spoiler.parentNode.insertBefore(toggle, spoiler);
+    spoiler.hidden = true;
+    
+    // Mark as initialized
+    spoiler.dataset.spoilerInit = 'true';
+    
+    toggle.addEventListener('click', () => {
+      const isExpanded = !spoiler.hidden;
+      spoiler.hidden = isExpanded;
+      toggle.textContent = isExpanded ? '▼ Показать' : '▲ Скрыть';
+      toggle.setAttribute('aria-expanded', String(!isExpanded));
+    });
+  });
+}
+
+// Call on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initSpoilers);
+
 // === TOC ACTIVE SECTION HIGHLIGHTING ===
 function initTocHighlight() {
   const sections = document.querySelectorAll('section[id]');
