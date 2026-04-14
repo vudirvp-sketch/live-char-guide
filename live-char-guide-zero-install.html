@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: dd4edfe4 -->
-<!-- Generated: 2026-04-14T21:41:54.308Z -->
+<!-- Build hash: 5103870c -->
+<!-- Generated: 2026-04-14T21:58:13.049Z -->
 <!-- Version: 5.6.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="dd4edfe4">
+<meta name="build-hash" content="5103870c">
 <meta name="livechar-version" content="5.6.0">
 <meta name="livechar-build" content="2026-04-14">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -1193,6 +1193,72 @@
 
     .heading-anchor:hover {
       color: var(--accent);
+    }
+
+    /* === TASK 3.8: TRACK PREREQUISITE WARNINGS === */
+    .track-prerequisite-warning {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, rgba(245, 158, 11, 0.12) 100%);
+      border: 1px solid var(--warning-border);
+      border-radius: 8px;
+      padding: 1em 1.2em;
+      margin: 1em 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8em;
+    }
+
+    .track-prerequisite-warning::before {
+      content: '⚠️';
+      font-size: 1.2em;
+      flex-shrink: 0;
+    }
+
+    .track-prerequisite-warning strong {
+      color: var(--text);
+      display: inline;
+    }
+
+    .track-prerequisite-warning a.track-link {
+      background: var(--accent-soft);
+      padding: 0.3em 0.7em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      border-bottom: none;
+    }
+
+    .track-prerequisite-warning a.track-link:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .track-prerequisite-warning button.dismiss-warning {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85em;
+      margin-left: auto;
+      transition: all var(--transition-fast);
+    }
+
+    .track-prerequisite-warning button.dismiss-warning:hover {
+      background: var(--accent-soft);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    /* Light theme variant */
+    body.theme-light .track-prerequisite-warning {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.06) 0%, rgba(245, 158, 11, 0.1) 100%);
+      border-color: rgba(234, 179, 8, 0.5);
+    }
+
+    /* OLED theme variant */
+    body.theme-oled .track-prerequisite-warning {
+      background: linear-gradient(135deg, rgba(234, 179, 8, 0.1) 0%, rgba(245, 158, 11, 0.15) 100%);
     }
 
     /* === TABS === */
@@ -6897,6 +6963,18 @@ body.theme-light .track-prerequisite-warning .track-link {
         </div>
       </section>
 
+      <!-- Task 3.3: Inline Mini-Checkpoint -->
+      <div class="stage-checkpoint" data-stage="1" style="margin:2em 0; padding:1em; background:var(--bg-secondary); border-left:4px solid var(--accent); border-radius:0 0.5em 0.5em 0;">
+        <h4 style="margin-top:0;">✓ Stage 1 Checkpoint: Quick Start</h4>
+        <ol style="margin:0.5em 0; padding-left:1.5em;">
+          <li>☐ Greeting содержит сенсорику → позу → речь → крючок?</li>
+          <li>☐ 5–7 якорей с наблюдаемыми действиями?</li>
+          <li>☐ 2+ примера (нейтральный + стресс)?</li>
+          <li>☐ Антигодмодинг добавлен в SP?</li>
+        </ol>
+        <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">→ <a href="#checkpoint-spine">Полный чеклист Stage 1</a></p>
+      </div>
+
       <!-- Navigation Footer - P0-3 -->
       <div class="callout tip" style="margin-top:2em">
         <strong>✅ Quick Start завершён</strong>
@@ -7117,6 +7195,17 @@ body.theme-light .track-prerequisite-warning .track-link {
       <div class="callout warn">
         <strong>⚠️ Маркер исключений:</strong>
         <p>Все исключения должны отображать ⚠️ иконку со ссылкой на условия исключения: <code>⚠️ [Исключение: 4K-Fallback] → <a href="#ghost-rules">Правила GHOST</a></code></p>
+      </div>
+
+      <!-- Task 3.3: Inline Mini-Checkpoint -->
+      <div class="stage-checkpoint" data-stage="2" style="margin:2em 0; padding:1em; background:var(--bg-secondary); border-left:4px solid var(--accent); border-radius:0 0.5em 0.5em 0;">
+        <h4 style="margin-top:0;">✓ Stage 2 Checkpoint: Архитектура</h4>
+        <ol style="margin:0.5em 0; padding-left:1.5em;">
+          <li>☐ 6 процессуальных правил применены?</li>
+          <li>☐ GHOST размещён только в Description?</li>
+          <li>☐ Блоки не дублируют ответственность?</li>
+        </ol>
+        <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">→ <a href="#checkpoint-architecture">Полный чеклист Stage 2</a></p>
       </div>
 
     </section>
@@ -7450,6 +7539,18 @@ body.theme-light .track-prerequisite-warning .track-link {
           </table>
         </div>
       </section>
+
+      <!-- Task 3.3: Inline Mini-Checkpoint -->
+      <div class="stage-checkpoint" data-stage="3" style="margin:2em 0; padding:1em; background:var(--bg-secondary); border-left:4px solid var(--accent); border-radius:0 0.5em 0.5em 0;">
+        <h4 style="margin-top:0;">✓ Stage 3 Checkpoint: Core-блоки</h4>
+        <ol style="margin:0.5em 0; padding-left:1.5em;">
+          <li>☐ Якоря имеют Trigger → Action → Price?</li>
+          <li>☐ Price манифестируется в той же сцене?</li>
+          <li>☐ Examples демонстрируют голос?</li>
+          <li>☐ Greeting содержит сенсорику → позу → речь → крючок?</li>
+        </ol>
+        <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">→ <a href="#checkpoint-anchors">Полный чеклист Stage 3</a></p>
+      </div>
 
       <h3 id="greeting">3.3 👋 Первое сообщение</h3>
       <p><span class="tag core">Core</span></p>
@@ -13891,6 +13992,58 @@ async function initAnchors() {
     heading.appendChild(anchor);
   });
 }
+
+// ============================================================================
+// TASK 3.4: LEGACY ID REDIRECT HANDLER
+// ============================================================================
+/**
+ * LegacyRedirect - Handles redirects from old non-semantic IDs to new semantic IDs
+ * 
+ * Maps legacy patch-based IDs (4.1.1, 5.5a, 08b, 09a) to semantic IDs
+ */
+(function initLegacyRedirects() {
+  'use strict';
+
+  // Legacy ID to semantic ID mapping
+  const LEGACY_REDIRECTS = {
+    // Section redirects
+    '#05b_cot_tiers': '#cot-tiers',
+    '#08b_debugging': '#debugging',
+    '#09a_antipatterns': '#antipatterns',
+    '#06a_antipatterns_core': '#antipatterns-core',
+    '#06a_integration': '#integration-checklist',
+    // Add more as needed
+  };
+
+  function handleLegacyRedirect() {
+    const hash = window.location.hash;
+    if (hash && LEGACY_REDIRECTS[hash]) {
+      const newHash = LEGACY_REDIRECTS[hash];
+      console.log('[LegacyRedirect] Redirecting:', hash, '→', newHash);
+      
+      // Update URL without adding to history
+      history.replaceState(null, '', newHash);
+      
+      // Scroll to element
+      const target = document.querySelector(newHash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  // Handle on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleLegacyRedirect);
+  } else {
+    handleLegacyRedirect();
+  }
+
+  // Handle hash changes
+  window.addEventListener('hashchange', handleLegacyRedirect);
+
+  console.log('[LegacyRedirect] Initialized with', Object.keys(LEGACY_REDIRECTS).length, 'redirects');
+})();
 
 // === TABS ===
 function initTabs() {
