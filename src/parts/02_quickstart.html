@@ -1,43 +1,76 @@
     <section id="intro">
       <h2>Как пользоваться гайдом</h2>
-      <p><strong>Структура документа:</strong></p>
-      <ul>
-        <li><strong>⚡ Раздел 1</strong> — Quick Start: минимальный шаблон за 5 минут</li>
-        <li><strong>🏗 Раздел 2</strong> — Архитектура: теория и принципы</li>
-        <li><strong>🧱 Раздел 3</strong> — Core-блоки: Anchors, Examples, Greeting</li>
-        <li><strong>🧠 Раздел 4</strong> — Психология: Spine, Enneagram, OCEAN, MBTI</li>
-        <li><strong>⚙️ Раздел 5</strong> — Технические настройки: Параметры генерации, AN, LB, SP</li>
-        <li><strong>🔧 Раздел 6</strong> — Диагностика и тестирование: 4 базовых тест-сценария (+ 2 расширенных), таблица симптомов</li>
-        <li><strong>📎 Приложения</strong> — Справочные таблицы, примеры и референс-карточка</li>
-      </ul>
-      <p><strong>Порядок работы:</strong></p>
-      <ul>
-        <li>Новичок: Раздел 1 → практика → Разделы 3–5 по необходимости</li>
-        <li>Продвинутый: Раздел 2 → пайплайн из 10 шагов → Приложения</li>
-      </ul>
-      <p><strong>Примечание:</strong> В Quick Start порядок оптимизирован для скорости. В пайплайне (Раздел 2) — для качества.</p>
 
-      <p><strong>Интерактивные функции (требуют JavaScript):</strong></p>
-      <ul>
-        <li><strong>Ctrl+K</strong> — быстрый поиск по гайду</li>
-        <li>📝 <strong>Блокнот для записей</strong> — плавающая панель для заметок (кнопка на экране)</li>
-        <li>📑 <strong>Навигация</strong> — скрытие/показ оглавления</li>
-        <li>🌙 <strong>Тема</strong> — переключение: тёмная / светлая / OLED</li>
-        <li>📖 <strong>Глоссарий</strong> — интерактивные определения терминов (наведение на термин)</li>
-      </ul>
-      <div class="callout">
-        <p><span class="tag core">Core</span> — обязательный элемент. <span class="tag opt">Optional</span> — подключается по контексту и размеру модели.</p>
+      <h3>🎯 Выберите ваш Track</h3>
+      <div class="track-selector-intro">
+        <div class="track-card track-a">
+          <strong>Track A — Начинающий</strong>
+          <p>~15 мин • Прототип без GHOST, без Price</p>
+          <p>Цель: минимальная рабочая карточка</p>
+        </div>
+        <div class="track-card track-b">
+          <strong>Track B — Практик</strong>
+          <p>~30 мин • Полный пайплайн с Price</p>
+          <p>Цель: карточка для деплоя</p>
+        </div>
+        <div class="track-card track-c">
+          <strong>Track C — Продвинутый</strong>
+          <p>~60 мин • GHOST по слоям, CoT, LB/AN</p>
+          <p>Цель: сложные персонажи и сеттинги</p>
+        </div>
       </div>
 
-      <h2 id="reference">📋 Референс-карточка</h2>
-      <p>В Приложении 6 находится полностью рабочая карточка персонажа <strong>«Выщербленный»</strong>, созданная по методологии этого гайда. Рекомендуется держать открытой при чтении.</p>
-      <p><strong>Почему этот персонаж:</strong></p>
+      <h3>📖 Структура по Track</h3>
+      <div class="table-wrap">
+        <table class="track-structure">
+          <thead>
+            <tr><th>Stage</th><th>Раздел</th><th>Track A</th><th>Track B</th><th>Track C</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>Core Principles + Глоссарий</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>1</td><td>Quick Start</td><td>✅ основной</td><td>✅</td><td>✅</td></tr>
+            <tr><td>2</td><td>Архитектура</td><td>⏭️ после практики</td><td>✅</td><td>✅</td></tr>
+            <tr><td>3</td><td>Core-блоки</td><td>✅ Anchors, Greeting</td><td>✅</td><td>✅</td></tr>
+            <tr><td>4</td><td>Психология (SPINE)</td><td>✅ WANT/NEED/FLAW/LIE</td><td>✅ + Enneagram</td><td>✅ + GHOST</td></tr>
+            <tr><td>5</td><td>Технические</td><td>⏭️ минимально</td><td>✅</td><td>✅ + CoT tiers</td></tr>
+            <tr><td>6</td><td>Анти-паттерны</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>7</td><td>Диагностика</td><td>⏭️ при проблемах</td><td>✅</td><td>✅</td></tr>
+            <tr><td>8</td><td>Debugging</td><td>—</td><td>—</td><td>✅</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>📋 Примеры карточек по Track</h3>
+      <div class="reference-cards">
+        <div class="ref-card">
+          <strong><a href="#appendix3">Приложение 3: Макс</a></strong>
+          <span class="badge-track-a">Track A+</span>
+          <p>Реалистичный сеттинг • Прототип • ~800 токенов</p>
+          <p>Подходит для: первый персонаж, копирование структуры</p>
+        </div>
+        <div class="ref-card" data-requires-track="B C">
+          <strong><a href="#appendix6">Приложение 6: Выщербленный</a></strong>
+          <span class="badge-track-b">Track B+</span>
+          <span class="badge-track-c">Track C</span>
+          <p>Боди-хоррор • Полный пайплайн • GHOST по слоям • ~2000 токенов</p>
+          <p>Подходит для: сложные сеттинги, изучение распределения GHOST</p>
+        </div>
+      </div>
+      <p class="hint"><em>Примеры карточек кликабельны — открываются в соответствующих Приложениях.</em></p>
+
+      <h3>🔧 Интерактивные функции</h3>
       <ul>
-        <li>Нестандартный сеттинг (боди-хоррор, не реализм)</li>
-        <li>Все Core-элементы реализованы</li>
-        <li>GHOST распределён по слоям корректно</li>
-        <li>Можно использовать как шаблон: удалить контент, сохранить структуру</li>
+        <li><strong>Ctrl+K</strong> — быстрый поиск</li>
+        <li>📝 <strong>Блокнот</strong> — заметки (кнопка на экране)</li>
+        <li>📑 <strong>Навигация</strong> — оглавление</li>
+        <li>🌙 <strong>Тема</strong> — тёмная / светлая / OLED</li>
+        <li>📖 <strong>Глоссарий</strong> — определения при наведении</li>
       </ul>
+
+      <div class="callout">
+        <p><span class="tag core">Core</span> — обязательный элемент.<br>
+        <span class="tag opt">Optional</span> — подключается по Track и контексту.</p>
+      </div>
     </section>
 
     <hr>

@@ -5025,3 +5025,154 @@ body[data-track="B"] [data-requires-track]:not([data-requires-track~="B"]) {
 body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
   display: none !important;
 }
+
+/* ============================================================
+   INTRO SECTION: TRACK SELECTOR AND REFERENCE CARDS
+   ============================================================ */
+
+/* Track selector cards for intro section */
+.track-selector-intro {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1em 0;
+}
+
+.track-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 1em;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.track-card strong {
+  display: block;
+  margin-bottom: 0.3em;
+  font-size: 0.95em;
+}
+
+.track-card.track-a {
+  border-left: 3px solid var(--track-a-clr, #38bdf8);
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.track-card.track-a strong {
+  color: var(--track-a-clr, #38bdf8);
+}
+
+.track-card.track-b {
+  border-left: 3px solid var(--track-b-clr, #8be9fd);
+  background: rgba(139, 233, 253, 0.05);
+}
+
+.track-card.track-b strong {
+  color: var(--track-b-clr, #8be9fd);
+}
+
+.track-card.track-c {
+  border-left: 3px solid var(--track-c-clr, #a78bfa);
+  background: rgba(167, 139, 250, 0.05);
+}
+
+.track-card.track-c strong {
+  color: var(--track-c-clr, #a78bfa);
+}
+
+.track-card p {
+  margin: 0.3em 0;
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+/* Reference cards section */
+.reference-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1em 0;
+}
+
+.ref-card {
+  padding: 1em;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.ref-card strong {
+  font-size: 0.95em;
+}
+
+.ref-card strong a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.ref-card strong a:hover {
+  text-decoration: underline;
+}
+
+.ref-card p {
+  margin: 0.3em 0;
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+/* Track structure table */
+.track-structure {
+  font-size: 0.9em;
+}
+
+.track-structure th,
+.track-structure td {
+  text-align: center;
+  padding: 0.5em 0.75em;
+}
+
+.track-structure td:first-child,
+.track-structure td:nth-child(2) {
+  text-align: left;
+}
+
+.track-structure th:nth-child(3),
+.track-structure th:nth-child(4),
+.track-structure th:nth-child(5) {
+  min-width: 80px;
+}
+
+/* Hint text */
+.hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* Light theme adaptations for track cards */
+body.theme-light .track-card.track-a {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+body.theme-light .track-card.track-b {
+  background: rgba(139, 233, 253, 0.08);
+}
+
+body.theme-light .track-card.track-c {
+  background: rgba(167, 139, 250, 0.08);
+}
+
+/* OLED theme adaptations for track cards */
+body.theme-oled .track-card.track-a {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+body.theme-oled .track-card.track-b {
+  background: rgba(139, 233, 253, 0.1);
+}
+
+body.theme-oled .track-card.track-c {
+  background: rgba(167, 139, 250, 0.1);
+}
