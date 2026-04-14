@@ -322,6 +322,29 @@
             </tbody>
           </table>
         </div>
+
+      <!-- Voice Isolation Validation Anti-Example -->
+      <div class="callout warn" style="margin:2em 0; padding:1.5em; border:2px solid var(--accent); border-radius:0.5em;">
+        <h4 style="margin-top:0;">⚠️ Voice Isolation Validation: Анти-пример</h4>
+        <p>Неправильно настроенные модели (низкий <code>frequency_penalty</code> или отсутствующий <code>FORMAT LOCK</code>) могут производить <strong>"красноречивого Jesse"</strong> — критический провал протокола Voice Isolation.</p>
+
+        <div class="table-wrap" style="margin-top:1em;">
+          <table>
+            <thead>
+              <tr><th>❌ Провал (Voice Leak)</th><th>✅ Успех (Intended Output)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><em>"Я пытаюсь справиться с глубоким чувством моральной вины и экзистенциальным страхом относительно произошедших событий."</em></td>
+                <td><em>"Я не могу... Я не могу это делать, yo. Просто... заткнись об этом, ладно?"</em> (Пинает половицу, избегает взгляда.)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:1em;font-size:0.9em;">Это контрастное сравнение валидирует использование <code>frequency_penalty: 0.3</code> и строгое следование синтаксису Example Messages.</p>
+        <p style="font-size:0.85em;color:var(--text-muted);">См. пример: <a href="#appendix3b">Приложение 3B: Jesse Pinkman</a></p>
+      </div>
       </section>
 
       <!-- Task 3.3: Inline Mini-Checkpoint -->
