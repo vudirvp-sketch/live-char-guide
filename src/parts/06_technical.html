@@ -201,7 +201,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <div class="callout tip" style="margin:1em 0">
         <strong>💡 Если dynamic AN недоступен в вашем фронтенде:</strong>
         <ul style="margin-top:0.5em">
-          <li><strong>Option A:</strong> Используйте Лорбук (sticky-запись, activation depth 1) как замену AN.</li>
+          <li><strong>Option A:</strong> Используйте LB (sticky-запись, activation depth 1) как замену AN.</li>
           <li><strong>Option B:</strong> Обновляйте поле Description между сессиями для сохранения состояния.</li>
         </ul>
       </div>
@@ -215,7 +215,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           <tbody>
             <tr><td>Описание персонажа (Spine)</td><td>Определение</td><td>Что именно произошло / какой паттерн</td></tr>
             <tr><td>Примерные сообщения</td><td>Демонстрация</td><td>Как GHOST проявляется в поведении</td></tr>
-            <tr><td>Лорбук</td><td>Триггеры</td><td>Сенсорные ключи (keyword) или сюжетные точки (range), активирующие GHOST</td></tr>
+            <tr><td>LB</td><td>Триггеры</td><td>Сенсорные ключи (keyword) или сюжетные точки (range), активирующие GHOST</td></tr>
             <tr><td>AN</td><td>Текущее состояние</td><td>Динамический [GHOST-активация]: что сработало в сессии</td></tr>
             <tr><td>System Prompt</td><td>❌ Не дублировать</td><td>Здесь — только стиль и запреты</td></tr>
           </tbody>
@@ -232,7 +232,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
 
       <div data-requires-track="B C">
       <details class="interactive" id="acc-lorebook">
-        <summary><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">🔓 5.3 📚 Лорбук</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced Tuning</span></span></summary>
+        <summary><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">🔓 5.3 📚 LB</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced Tuning</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p>Динамическая база знаний, которая фильтруется и вставляется в промпт перед каждым запросом к ИИ. Система активирует только релевантные записи на основе триггеров, вероятности и состояния чата — не скармливает весь лор целиком, экономя токены и повышая контекстуальную точность.</p>
@@ -242,8 +242,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
                   <li><strong>Soul of Waifu:</strong> есть аналоги и даже лучше</li>
           <li><strong>SillyTavern:</strong> Полная поддержка EVENT:, SECONDARY_KEYS, selective activation</li>
           <li><strong>KoboldAI:</strong> Альтернатива — использовать conditionals в entry content, KEYWORD-триггеры без EVENT:</li>
-          <li><strong>Oobabooga/text-gen-webui:</strong> Лорбук не поддерживается нативно. Используйте World Info (аналог) или встройте триггеры прямо в Description/AN</li>
-          <li><strong>Faraday.dev / Agnai:</strong> Поддержка World Info/Лорбук ограниченная. Проверяйте документацию конкретного фронтенда</li>
+          <li><strong>Oobabooga/text-gen-webui:</strong> LB не поддерживается нативно. Используйте World Info (аналог) или встройте триггеры прямо в Description/AN</li>
+          <li><strong>Faraday.dev / Agnai:</strong> Поддержка World Info/LB ограниченная. Проверяйте документацию конкретного фронтенда</li>
         </ul>
       </div>
 
@@ -288,10 +288,10 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
           <hr class="section-divider">
 
       <div data-requires-track="C">
-      <h4 id="lorebook-mechanics">5.3.1 ⚙️ Лорбук: Продвинутые поведенческие механики</h4>
+      <h4 id="lorebook-mechanics">5.3.1 ⚙️ LB: Продвинутые поведенческие механики</h4>
       <p><span class="tag advanced">Advanced</span> <span class="tag opt">Optional</span></p>
       <div class="callout tip" style="margin:1em 0">
-        <strong>📋 Область применения:</strong> Каждая запись Лорбук = поведенческий триггер, а не хранилище лора. <strong>Бюджет активации:</strong> 2–3 механики на сессию. Остальные отключить через <code>probability: 0</code> или удалить.
+        <strong>📋 Область применения:</strong> Каждая запись LB = поведенческий триггер, а не хранилище лора. <strong>Бюджет активации:</strong> 2–3 механики на сессию. Остальные отключить через <code>probability: 0</code> или удалить.
       </div>
       <div class="callout warn" style="margin:1em 0">
         <strong>⚠️ ОГРАНИЧЕНИЕ:</strong> Никогда не вставляй действия/мысли <code>{{user}}</code> в поле <code>content</code>. Это не техническое ограничение, а принцип антигодмодинга (см. <a href="#antigodmoding">Раздел 5.0.1</a>).
@@ -351,7 +351,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div class="callout tip" style="margin-top:1em">
-        <strong>💡 Пример Structured Inject в content-поле Лорбук:</strong>
+        <strong>💡 Пример Structured Inject в content-поле LB:</strong>
         <pre style="margin-top:0.5em"><code>[SYSTEM]
 &lt;motivation&gt;{{char}} помнит предыдущую ссору и боится повторения.&lt;/motivation&gt;
 [CONDITION] Если {{user}} повышает голос
@@ -393,7 +393,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
             </tr>
             <tr>
               <td><strong>16K+ / API</strong></td>
-              <td>Все механики активны. Лорбук + AN работают как парная система.</td>
+              <td>Все механики активны. LB + AN работают как парная система.</td>
             </tr>
           </tbody>
         </table>
@@ -401,9 +401,9 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
 
       <h4 style="font-size:1.05rem;margin-top:1.5em">Чеклист интеграции (дополнение к <a href="#appendix4">Приложению 4</a>)</h4>
       <ul>
-        <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-depth"> Лорбук: depth/exclude_key/probability фильтры активны</label></li>
+        <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-depth"> LB: depth/exclude_key/probability фильтры активны</label></li>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-structured"> content структурирован (XML или [SYSTEM]-префикс для сложных записей)</label></li>
-        <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-nodup"> Нет дублирования между Spine / AN / записями Лорбук</label></li>
+        <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-nodup"> Нет дублирования между Spine / AN / записями LB</label></li>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-fatigue"> Fatigue-запись: GHOST-якоря явно пересказаны в content</label></li>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-falsemem"> False Memory: отмечена как одноразовая, с согласия пользователя</label></li>
         <li class="checklist-item"><label><input type="checkbox" data-key="chk-lb-nouser"> Действия/мысли <code>{{user}}</code> отсутствуют во всех content-полях</label></li>
@@ -412,7 +412,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <h4 style="font-size:1.05rem;margin-top:1.5em">Кросс-ссылки</h4>
       <ul>
         <li><strong><a href="#an-ghost">Раздел 5.2 (AN)</a>:</strong> Для длинных сессий комбинируй AN с Range-cascade + Sticky-состояниями (→ 5.3.1).</li>
-        <li><strong><a href="#xml-tags">Раздел 5.5а (XML-теги)</a>:</strong> Structured Inject использует ту же логику тегов <em>внутри</em> content-полей Лорбук, а не только на уровне system-prompt.</li>
+        <li><strong><a href="#xml-tags">Раздел 5.5а (XML-теги)</a>:</strong> Structured Inject использует ту же логику тегов <em>внутри</em> content-полей LB, а не только на уровне system-prompt.</li>
         <li><strong><a href="#spine">Раздел 4.1 (GHOST-якоря)</a>:</strong> Fatigue Emulation <strong>не сохраняет</strong> якоря автоматически — пересказывай явно.</li>
       </ul>
 
@@ -676,7 +676,7 @@ Fail any → restart from body-anchor: begin with physical sensation before spee
       <p><strong>Принципы:</strong></p>
       <ul>
         <li><strong>Порядок POV в SP:</strong> укажи, в каком порядке модель пишет за персонажей</li>
-        <li><strong>Каждый персонаж = отдельный AN</strong> через Лорбук (sticky-записи)</li>
+        <li><strong>Каждый персонаж = отдельный AN</strong> через LB (sticky-записи)</li>
         <li><strong>Разделяй голоса:</strong> у каждого персонажа свои Примерные сообщения</li>
         <li>Не ставь больше 3 активных персонажей одновременно — модель начнёт путать голоса</li>
       </ul>
@@ -707,7 +707,7 @@ When multiple characters are present, write reactions for ALL active characters 
           <li><strong>Каждый персонаж = свой GHOST</strong>. Не дели один GHOST между несколькими — модель не различит, чья травма.</li>
           <li><strong>GHOST персонажей могут пересекаться</strong> (два героя одной катастрофы), но <strong>формулировки различны</strong>: каждый видит одно событие через свою оптику.</li>
           <li data-model="12B"><strong>Для 12B:</strong> GHOST второстепенных персонажей лучше убрать — оставь только у {{char}}. Второстепенные работают на Anchors alone.</li>
-          <li><strong>Лорбук-стратегия:</strong> GHOST каждого персонажа = отдельная sticky-запись с keyword-триггером на имя персонажа.</li>
+          <li><strong>LB-стратегия:</strong> GHOST каждого персонажа = отдельная sticky-запись с keyword-триггером на имя персонажа.</li>
         </ul>
       </div>
 
@@ -736,7 +736,7 @@ When multiple characters are present, write reactions for ALL active characters 
             <tr><td>Модель путает голоса персонажей</td><td>Недостаточно различимые Examples</td><td>Добавь 2–3 примера диалога для каждого персонажа с явными маркерами стиля</td></tr>
             <tr><td>Персонажи говорят одинаково</td><td>Одинаковые Anchors</td><td>Создай уникальные телесные паттерны: тики, позы, реакции для каждого</td></tr>
             <tr><td>Один персонаж доминирует</td><td>Порядок в SP не соблюдается</td><td>Добавь в SP: «Каждый персонаж отвечает 1–2 репликами, затем ход передаётся»</td></tr>
-            <tr><td>Потеря GHOST второстепенного</td><td>Нет триггера в Лорбуке</td><td>Добавь keyword-триггер на имя персонажа в его GHOST-запись</td></tr>
+            <tr><td>Потеря GHOST второстепенного</td><td>Нет триггера в LBе</td><td>Добавь keyword-триггер на имя персонажа в его GHOST-запись</td></tr>
             <tr><td>Конфликт POV</td><td>Не указан порядок</td><td>Явно пропиши: «POV order: [{{char}}, {{char2}}] — строго соблюдать»</td></tr>
             <tr><td>Модель пишет за {{user}}</td><td>Ослаблен антигодмодинг</td><td>Усили: «NEVER write for {{user}}. {{user}} exists only as observable input.»</td></tr>
           </tbody>
@@ -758,7 +758,7 @@ When multiple characters are present, write reactions for ALL active characters 
           <p style="margin-top:0.8em"><strong>32B+ модели:</strong></p>
           <ul>
             <li>До 4 активных персонажей (но 3 оптимально)</li>
-            <li>Каждый персонаж = полная карточка через Лорбук</li>
+            <li>Каждый персонаж = полная карточка через LB</li>
             <li>Примеры: минимум 2 блока для каждого</li>
             <li>Модель различает голоса автоматически при достаточных Examples</li>
           </ul>
@@ -794,13 +794,13 @@ When multiple characters are present, write reactions for ALL active characters 
             <tr><th>Условие</th><th>Размещение</th><th>Обоснование</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>По умолчанию</strong></td><td>Лорбук / AN (User Context)</td><td>Сохраняет SP для основных инструкций; GHOST активируется по триггеру</td></tr>
-            <tr><td><strong>context_window ≤ 4K</strong> AND Лорбук/AN недоступны</td><td>Описание (Description) — одно предложение: <code>[GHOST: &lt;краткая формулировка&gt;]</code></td><td>Fallback-исключение: при 4K нет Лорбука и AN, поэтому GHOST ужимается до одной строки в Description</td></tr>
+            <tr><td><strong>По умолчанию</strong></td><td>LB / AN (User Context)</td><td>Сохраняет SP для основных инструкций; GHOST активируется по триггеру</td></tr>
+            <tr><td><strong>context_window ≤ 4K</strong> AND LB/AN недоступны</td><td>Описание (Description) — одно предложение: <code>[GHOST: &lt;краткая формулировка&gt;]</code></td><td>Fallback-исключение: при 4K нет LBа и AN, поэтому GHOST ужимается до одной строки в Description</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout warn" style="margin-top:0.8em">
-        <strong>⚠️ GHOST запрещён в SP</strong> при любом условии. Единственное исключение — 4K-fallback, где GHOST идёт в <em>Description</em>, а не в SP. Стандартная практика: GHOST в Лорбук/AN, никогда в SP. [<a href="#an-ghost">→ Раздел 5.2</a>]
+        <strong>⚠️ GHOST запрещён в SP</strong> при любом условии. Единственное исключение — 4K-fallback, где GHOST идёт в <em>Description</em>, а не в SP. Стандартная практика: GHOST в LB/AN, никогда в SP. [<a href="#an-ghost">→ Раздел 5.2</a>]
       </div>
       <p><strong>Примечание:</strong> При 4K GHOST входит в token-бюджет Description. Если бюджет критически tight (~300 токенов на всю карточку), GHOST можно опустить — персона работает на Spine без GHOST в прототипном режиме.</p>
           </div>
@@ -820,7 +820,7 @@ When multiple characters are present, write reactions for ALL active characters 
           </thead>
           <tbody>
             <tr><td><strong>Author's Notes</strong></td><td>✅ Полная поддержка</td><td>✅ Через `memory`</td><td>⚠️ Через System Prompt</td><td>В LM Studio AN = часть SP</td></tr>
-            <tr><td><strong>Лорбук</strong></td><td>✅ Полная поддержка</td><td>✅ World Info</td><td>❌ Нет</td><td>В LM Studio эмулируй через SP</td></tr>
+            <tr><td><strong>LB</strong></td><td>✅ Полная поддержка</td><td>✅ World Info</td><td>❌ Нет</td><td>В LM Studio эмулируй через SP</td></tr>
             <tr><td><strong>Примерные сообщения</strong></td><td>✅ Отдельное поле</td><td>✅ В карточке</td><td>✅ В карточке</td><td>Универсальная поддержка</td></tr>
             <tr><td><strong>CoT в AN</strong></td><td>✅ Работает</td><td>✅ Работает</td><td>⚠️ Ограничено</td><td>LM Studio режет длинные AN</td></tr>
             <tr><td><strong>presence_penalty</strong></td><td>✅ Настраивается</td><td>✅ Настраивается</td><td>⚠️ Скрыто в Advanced</td><td>Дефолт часто 0.7 — меняй на 0.0!</td></tr>
@@ -856,7 +856,7 @@ min_p: 0.05
 presence_penalty: 0.0
 rep_pen: 1.05
 
-// World Info = Лорбук
+// World Info = LB
 // Memory = Author's Notes (ограничено по токенам)</code></pre>
       </div>
 
@@ -868,7 +868,7 @@ top_p: 0.9
 // presence_penalty: Settings → Advanced → Presence Penalty
 
 // ⚠️ Ограничения LM Studio:
-// - Нет Лорбука → эмулируй через SP
+// - Нет LBа → эмулируй через SP
 // - AN ограничен → объединяй с SP для 4K
 // - {{char}}/{{user}} могут не заменяться → проверь вручную</code></pre>
       </div>
@@ -881,7 +881,7 @@ top_p: 0.9
           </thead>
           <tbody>
             <tr><td>Персонаж повторяется</td><td>Все</td><td>presence_penalty = 0.0 (не 0.7!)</td></tr>
-            <tr><td>GHOST не активируется</td><td>LM Studio</td><td>Нет Лорбука → добавь в Description (одно предложение) или AN <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#ghost-placement-conditions">Условное размещение GHOST</a>]</span></td></tr>
+            <tr><td>GHOST не активируется</td><td>LM Studio</td><td>Нет LBа → добавь в Description (одно предложение) или AN <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#ghost-placement-conditions">Условное размещение GHOST</a>]</span></td></tr>
             <tr><td>Голос «усредняется»</td><td>KoboldCPP</td><td>Memory переполнен → сократи AN</td></tr>
             <tr><td>Обрываются реплики</td><td>SillyTavern</td><td>Увеличь max_response_length</td></tr>
             <tr><td>Модель пишет за user</td><td>Все</td><td>Проверь антигодмодинг в SP</td></tr>
@@ -1093,7 +1093,7 @@ Total: 0.845 × 100 = 84.5%</code></pre>
             <tr><th>Задача</th><th>Время</th><th>Цель</th></tr>
           </thead>
           <tbody>
-            <tr><td>Настроить Лорбук</td><td>1-2 часа</td><td>GHOST-триггеры</td></tr>
+            <tr><td>Настроить LB</td><td>1-2 часа</td><td>GHOST-триггеры</td></tr>
             <tr><td>Добавить AN</td><td>30 мин</td><td>Динамика WANT→NEED</td></tr>
             <tr><td>Оптимизировать параметры</td><td>1 час</td><td>T, RepPen, presence_penalty</td></tr>
           </tbody>

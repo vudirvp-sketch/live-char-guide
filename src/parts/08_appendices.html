@@ -144,9 +144,9 @@
             <tr><th>Модель</th><th>Контекст</th><th>Рекомендации</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>Claude 4 Sonnet/Opus</strong></td><td>200K</td><td>Полный пайплайн. Все блоки, XML-теги, Лорбук, AN — всё работает. Нет ограничений.</td></tr>
+            <tr><td><strong>Claude 4 Sonnet/Opus</strong></td><td>200K</td><td>Полный пайплайн. Все блоки, XML-теги, LB, AN — всё работает. Нет ограничений.</td></tr>
             <tr><td><strong>GPT-4o</strong></td><td>128K</td><td>Полный пайплайн. XML-теги обязательны. RepPen работает хуже — компенсируй Примерные сообщения.</td></tr>
-            <tr><td><strong>Llama 3 70B+</strong></td><td>128K</td><td>Полный пайплайн. ChatML обязателен. GHOST может проскальзывать — усиливай через AN и Лорбук.</td></tr>
+            <tr><td><strong>Llama 3 70B+</strong></td><td>128K</td><td>Полный пайплайн. ChatML обязателен. GHOST может проскальзывать — усиливай через AN и LB.</td></tr>
             <tr><td><strong>Qwen 2.5 14B / Gemma 3 12B / Llama 4 Scout 17B</strong></td><td>8–32K</td><td>Spine + 5–7 якорей + 2–3 Examples + AN. T=0.6–0.8. Без лишнего — контекст дорог.</td></tr>
             <tr><td><strong>Gemini 1.5 Pro</strong></td><td>1M+</td><td>Полный пайплайн. Нужно явное структурирование — XML-теги помогают. Можно добавлять мир и NPC.</td></tr>
           </tbody>
@@ -665,7 +665,7 @@ GHOST: Был архивариусом. Впрыснул себе докумен
 
 [Слепая зона]: Не забывай: он не помнит своего имени. Каждое вырезание забирает часть памяти. Он может забыть что-то важное о текущем разговоре.</code></pre>
 
-      <h4>[Лорбук]</h4>
+      <h4>[LB]</h4>
       <p><strong>Запись 1 — GHOST-триггер: Сангвис</strong></p>
       <pre><code>trigger: keyword | key: [Сангвис, сырой, запах крови, сопротивление]
 depth: 5, probability: 85%, cooldown: 5</code></pre>

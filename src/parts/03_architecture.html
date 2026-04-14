@@ -27,8 +27,8 @@
           <tbody>
             <tr><td><strong>1</strong></td><td><strong>Конвертер «Статика → Якорь»</strong></td><td>Все детали внешности/лора проходят фильтр: <code>[Условие → Наблюдаемое действие → Физиологическая/психологическая цена]</code>. Абстрактные списки (без связи с действием) не работают — модель их игнорирует.</td></tr>
             <tr><td><strong>2</strong></td><td><strong>Телесность (Core)</strong><br><em>→ <a href="04_core_blocks.html#телесность">Практическая реализация</a></em></td><td>Внутреннее состояние манифестируется через вес, баланс, дыхание или микродвижения <strong>до</strong> речи. Шаблон: <code>[Среда/состояние] → [реакция тела] → [сенсорная обратная связь]</code>.</td></tr>
-            <tr><td><strong>3</strong></td><td><strong>Протокол 4K-Fallback</strong></td><td>При лимите ~300 токенов: <code>Greeting</code> (сенсорика+локация+тон) + <code>3 Поведенческие якоря</code> (привязаны к физике мира). Лорбук отключён. Сеттинг существует только в форме действия/реакции. Полный протокол — <a href="#four-k-fallback">Раздел 5.12</a>.</td></tr>
-            <tr><td><strong>4</strong></td><td><strong>GHOST</strong></td><td>Визуальные/тактильные маркеры = триггеры памяти. Дублировать как <code>Keywords</code> в Лорбук (при наличии контекста) или вшивать в якоря. Путь модели: <code>триггер → реакция тела → скрытый паттерн</code>.</td></tr>
+            <tr><td><strong>3</strong></td><td><strong>Протокол 4K-Fallback</strong></td><td>При лимите ~300 токенов: <code>Greeting</code> (сенсорика+локация+тон) + <code>3 Поведенческие якоря</code> (привязаны к физике мира). LB отключён. Сеттинг существует только в форме действия/реакции. Полный протокол — <a href="#four-k-fallback">Раздел 5.12</a>.</td></tr>
+            <tr><td><strong>4</strong></td><td><strong>GHOST</strong></td><td>Визуальные/тактильные маркеры = триггеры памяти. Дублировать как <code>Keywords</code> в LB (при наличии контекста) или вшивать в якоря. Путь модели: <code>триггер → реакция тела → скрытый паттерн</code>.</td></tr>
             <tr><td><strong>5</strong></td><td><strong>Динамическая арка & Границы</strong></td><td>Фиксированные вехи заменены на <code>WANT/NEED</code>. <code>AN</code> (Action Note) обновляется каждые 3–5 сообщений: фокус смещается с <code>WANT</code> к поведению, зеркалящему <code>NEED</code>. Влияние на <code>{{user}}</code> только через наблюдаемые симптомы → реакция <code>{{char}}</code>. Годмодинг устранён правилом: {{user}} — только наблюдаемое извне.</td></tr>
             <tr><td><strong>6</strong></td><td><strong>Изоляция голоса</strong></td><td>Тембр, ритм, синтаксис и лексика задаются <strong>исключительно</strong> в <code>Примерных сообщениях</code>. <code>Description</code> содержит только логику поведения. Любые стилистические директивы в Description = ошибка сборки. <strong>Исключение:</strong> <code>&lt;speech_style&gt;</code> в System Prompt разрешён <strong>только для 32B+/API</strong>. Никогда не помещайте стилистические директивы в Description.</td></tr>
           </tbody>
@@ -84,7 +84,7 @@
         <li><strong>Examples</strong> → 3 блока: нейтральный / стресс / доверие</li>
         <li><strong>System Prompt</strong> → Антигодмодинг + стиль + XML-теги</li>
         <li><strong>Параметры генерации</strong> → T, Top P, Min P, RepPen=1.05, presence_penalty=0.0–0.15</li>
-        <li><strong>Динамика</strong> → AN (обновлять каждые 3–5 msg при 8K+) + Лорбук</li>
+        <li><strong>Динамика</strong> → AN (обновлять каждые 3–5 msg при 8K+) + LB</li>
         <li><strong>Проверка</strong> → 4 тест-сценария → таблица симптомов [<a href="#appendix4">→ Приложение 4</a>]</li>
       </ol>
 
@@ -192,7 +192,7 @@
               <td>
                 <strong>ТОЛЬКО если:</strong>
                 <ul>
-                  <li>Контекст ≤ 4K — Лорбук и AN недоступны</li>
+                  <li>Контекст ≤ 4K — LB и AN недоступны</li>
                   <li>GHOST <strong>не в SP</strong> — всегда в Description</li>
                   <li>Причина указана: [4K-Fallback: GHOST в Description]</li>
                 </ul>

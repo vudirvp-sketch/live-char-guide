@@ -3,7 +3,22 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
+
+## [5.5.5] - 2026-04-14
+
+### Changed
+- **Terminology standardization**: Replaced all "Лорбук" with "LB" across all files
+- Simplified Context Capability Matrix: removed "GHOST Layers" column (over-engineering)
+- Renamed "Lorebook" to "LB" in table headers for consistency
+
+### Removed
+- "GHOST Content Layer" comment from 02_quickstart.html (over-engineering cleanup)
+- "GHOST Layers" concept from Context Capability Matrix table
+
+### Fixed
+- Phase 6 (Terminology Standardization) now fully implemented
+- Phase 8 (Remove Over-Engineering) now fully implemented
 
 ## [5.5.4] - 2026-04-14
 
@@ -115,7 +130,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Technical implementation guide
 - Testing strategies
 
-[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.4.0...HEAD
+[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.4...HEAD
+[5.5.5]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.4...v5.5.5
+[5.5.4]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.4.0...v5.5.4
 [5.4.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.2...v5.4.0
 [5.3.2]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.1...v5.3.2
 [5.3.1]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.0...v5.3.1
