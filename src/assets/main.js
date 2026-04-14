@@ -2708,8 +2708,13 @@ document.addEventListener('DOMContentLoaded', () => {
           li.insertBefore(toggleBtn, link);
         }
         
-        // Collapse state
-        let isCollapsed = false;
+        // Collapse state - collapsed by default per IMPLEMENTATION_PLAN
+        let isCollapsed = true;
+        nestedUl.style.display = 'none';
+        toggleBtn.textContent = '▸';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.setAttribute('aria-label', 'Развернуть подразделы');
+        toggleBtn.style.transform = 'rotate(0deg)';
         
         toggleBtn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -2717,7 +2722,7 @@ document.addEventListener('DOMContentLoaded', () => {
           isCollapsed = !isCollapsed;
           nestedUl.style.display = isCollapsed ? 'none' : '';
           toggleBtn.textContent = isCollapsed ? '▸' : '▾';
-          toggleBtn.setAttribute('aria-expanded', !isCollapsed);
+          toggleBtn.setAttribute('aria-expanded', String(!isCollapsed));
           toggleBtn.setAttribute('aria-label', isCollapsed ? 'Развернуть подразделы' : 'Свернуть подразделы');
           toggleBtn.style.transform = isCollapsed ? 'rotate(0deg)' : '';
         });

@@ -91,16 +91,25 @@ function addDeferToScripts(html) {
  * @returns {string} HTML with ID attributes added to headers without them
  */
 function ensureHeaderIds(html) {
-  return html.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/gi, (match, level, attrs, content) => {
+  return html.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/gis, (match, level, attrs, content) => {
     // Skip if already has id
     if (attrs.includes('id=')) return match;
-    // Generate ID from content: lowercase, replace non-alphanumeric with dash
-    const id = content
+    
+    // Strip HTML tags from content to get plain text for ID
+    const plainText = content
+      .replace(/<[^>]+>/g, '')  // Remove HTML tags
+      .replace(/&[^;]+;/g, '')  // Remove HTML entities
+      .trim();
+    
+    const id = plainText
       .toLowerCase()
-      .replace(/<[^>]*>/g, '') // Remove HTML tags
       .replace(/[^a-zа-яё0-9]+/g, '-')
       .replace(/^-|-$/g, '')
       .substring(0, 50);
+    
+    // Only add id if we generated one
+    if (!id) return match;
+    
     return `<h${level} id="${id}"${attrs}>${content}</h${level}>`;
   });
 }
