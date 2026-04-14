@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: b893a484 -->
-<!-- Generated: 2026-04-13T23:36:04.708Z -->
+<!-- Build hash: 3baa1ddb -->
+<!-- Generated: 2026-04-14T14:12:08.943Z -->
 <!-- Version: 5.5.3 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,9 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="b893a484">
+<meta name="build-hash" content="3baa1ddb">
 <meta name="livechar-version" content="5.5.3">
-<meta name="livechar-build" content="2026-04-13">
+<meta name="livechar-build" content="2026-04-14">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;">
 <title>🧠 Live Character for LLM — Guide 5.5.3</title>
@@ -108,6 +108,12 @@
       --panel-min-height: 150px;
       --panel-z-base: 1000;
       --panel-transition: 200ms ease;
+
+      /* Z-index hierarchy (v5.4.0 - R2 fix) */
+      --z-glossary-tab: 999;
+      --z-fab-group: 1000;
+      --z-panel: 1001;
+      --z-modal: 9999;
     }
 
     /* === LIGHT THEME === */
@@ -1351,6 +1357,13 @@
     .glossary-tab:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: -2px;
+    }
+
+    /* === GLOSSARY TAB MOBILE (R3 fix - v5.4.0) === */
+    @media (max-width: 768px) {
+      .glossary-tab {
+        display: none;  /* Hidden on mobile - glossary accessible via FAB button */
+      }
     }
 
     /* === GLOSSARY ITEM HIGHLIGHT === */
@@ -4434,6 +4447,213 @@ body.debug-mode [data-requires-track]::before {
 }
 
 /* ============================================================
+   PHASE 1.1: WARNING BLOCK FOR CRITICAL ANTI-PATTERNS
+   ============================================================ */
+
+.warning-block {
+  background: linear-gradient(135deg, #2a1a1a 0%, #1a1a1a 100%);
+  border-left: 4px solid #ff4444;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.warning-block ul {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.warning-block li {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.warning-block strong {
+  color: #fca5a5;
+}
+
+/* Light theme warning block */
+body.theme-light .warning-block {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.04) 100%);
+  border-left-color: #dc2626;
+}
+
+body.theme-light .warning-block strong {
+  color: #b91c1c;
+}
+
+/* OLED theme warning block */
+body.theme-oled .warning-block {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(0, 0, 0, 0.9) 100%);
+  border-left-color: #ef4444;
+}
+
+/* ============================================================
+   PHASE 1.1: TRACK BADGES FOR VISUAL INDICATORS
+   ============================================================ */
+
+.badge-track-a,
+.badge-track-b,
+.badge-track-c {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+
+.badge-track-a {
+  background: #2a4a2a;
+  color: #88ff88;
+  border: 1px solid #44aa44;
+}
+
+.badge-track-b {
+  background: #2a3a4a;
+  color: #88ccff;
+  border: 1px solid #4488cc;
+}
+
+.badge-track-c {
+  background: #4a2a4a;
+  color: #ff88ff;
+  border: 1px solid #aa44aa;
+}
+
+/* Light theme badges */
+body.theme-light .badge-track-a {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+body.theme-light .badge-track-b {
+  background: rgba(56, 189, 248, 0.15);
+  color: #0284c7;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+body.theme-light .badge-track-c {
+  background: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* OLED theme badges */
+body.theme-oled .badge-track-a {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+body.theme-oled .badge-track-b {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+body.theme-oled .badge-track-c {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Auto-badge for headers */
+h2[data-requires-track~="B"]:not([data-requires-track~="A"])::after,
+h3[data-requires-track~="B"]:not([data-requires-track~="A"])::after {
+  content: " [B+]";
+  font-size: 0.7em;
+  color: #88ccff;
+  font-weight: normal;
+}
+
+h2[data-requires-track~="C"]:not([data-requires-track~="B"])::after,
+h3[data-requires-track~="C"]:not([data-requires-track~="B"])::after {
+  content: " [C]";
+  font-size: 0.7em;
+  color: #ff88ff;
+  font-weight: normal;
+}
+
+/* ============================================================
+   PHASE 1.2: PROTOTYPE BANNER FOR TRACK A
+   ============================================================ */
+
+.prototype-banner {
+  display: none;
+  background: linear-gradient(135deg, #1a2a1a 0%, #1a1a1a 100%);
+  border: 1px solid #44aa44;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+body[data-track="A"] .prototype-banner {
+  display: flex;
+}
+
+.banner-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.banner-content strong {
+  color: #88ff88;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.banner-content p {
+  margin: 0.5rem 0 0 0;
+  color: #aaa;
+}
+
+.track-switch-btn {
+  background: #44aa44;
+  border: none;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+  transition: background 0.15s ease;
+}
+
+.track-switch-btn:hover {
+  background: #55bb55;
+}
+
+.track-switch-btn:focus-visible {
+  outline: 2px solid #88ff88;
+  outline-offset: 2px;
+}
+
+/* Light theme prototype banner */
+body.theme-light .prototype-banner {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%);
+  border-color: #16a34a;
+}
+
+body.theme-light .banner-content strong {
+  color: #16a34a;
+}
+
+body.theme-light .track-switch-btn {
+  background: #16a34a;
+}
+
+body.theme-light .track-switch-btn:hover {
+  background: #22c55e;
+}
+
+/* OLED theme prototype banner */
+body.theme-oled .prototype-banner {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(0, 0, 0, 0.95) 100%);
+}
+
+/* ============================================================
    GLOSSARY PANEL STYLES (P1-3)
    ============================================================ */
 
@@ -4582,6 +4802,182 @@ body.debug-mode [data-requires-track]::before {
     left: 1rem !important;
   }
 }
+
+/* ============================================================
+   PHASE 2.2: TRACK CHECKLIST STYLES
+   ============================================================ */
+.track-checklist {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.track-checklist h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.track-checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.4rem;
+}
+
+.track-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+}
+
+.track-checklist-item.available {
+  color: #88ff88;
+}
+
+.track-checklist-item.unavailable {
+  color: #666;
+}
+
+.track-checklist-item .check {
+  width: 1.1rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Light theme overrides */
+body.theme-light .track-checklist-item.available {
+  color: #16a34a;
+}
+
+body.theme-light .track-checklist-item.unavailable {
+  color: #9ca3af;
+}
+
+/* OLED theme overrides */
+body.theme-oled .track-checklist {
+  background: #0a0a0a;
+  border-color: #1a1a1a;
+}
+
+/* ============================================================
+   PHASE 3.3: TRACK UPGRADE MODAL STYLES
+   ============================================================ */
+.track-upgrade-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+body.theme-light .track-upgrade-modal {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.track-upgrade-modal .modal-content {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.track-upgrade-modal h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.track-upgrade-modal p {
+  margin: 0 0 1.25rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.modal-buttons button:first-child {
+  background: #4488cc;
+  color: #fff;
+}
+
+.modal-buttons button:first-child:hover {
+  background: #5599dd;
+}
+
+.modal-buttons button:last-child {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.modal-buttons button:last-child:hover {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* ============================================================
+   PHASE 3.2: TRACK COMPARISON MATRIX STYLES
+   ============================================================ */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.comparison-table th {
+  background: var(--bg-elevated);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.comparison-table td {
+  background: var(--bg-surface);
+}
+
+/* ============================================================
+   PHASE 4.1: STORAGE FALLBACK (localStorage fallback for private browsing)
+   ============================================================ */
+/* Note: This is implemented in JS, but we add visibility styles */
+body.storage-fallback .track-checklist,
+body.storage-fallback .audience-selection {
+  opacity: 0.8;
+}
+echo '<<exit>>'
 
 
 </style>
@@ -4911,6 +5307,62 @@ body.debug-mode [data-requires-track]::before {
   </section>
 </main>
 
+<!-- PHASE 1.2: PROTOTYPE BANNER FOR TRACK A -->
+<div id="track-a-banner" data-requires-track="A" class="prototype-banner">
+  <span class="banner-icon">📋</span>
+  <div class="banner-content">
+    <strong>TRACK A: ПРОТОТИПНЫЙ РЕЖИМ</strong>
+    <p>Создаёт функциональную минимальную карточку. Для полной психологической глубины, продвинутых якорей и оптимизаций → <button class="track-switch-btn" data-target="B" type="button">Переключиться на Track B</button></p>
+  </div>
+</div>
+
+<!-- PHASE 2.2: PER-TRACK ASSEMBLY CHECKLIST -->
+<div id="track-checklist" class="track-checklist">
+  <!-- Populated by JavaScript -->
+</div>
+
+<!-- PHASE 3.2: TRACK COMPARISON MATRIX -->
+<section id="track-comparison" data-requires-track="A B C" class="track-comparison-section" style="margin:1.5rem 0;">
+  <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
+  <div class="table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Цель</th>
+          <th>Рекомендуемый трек</th>
+          <th>Время</th>
+          <th>Результат</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Быстрый прототип / Тест концепции</td>
+          <td><span class="badge-track-a">Track A</span></td>
+          <td>~15 мин</td>
+          <td>Функциональный прототип (450-600 токенов)</td>
+        </tr>
+        <tr>
+          <td>Полный персонаж с психологией</td>
+          <td><span class="badge-track-b">Track B</span></td>
+          <td>~30 мин</td>
+          <td>Полная поведенческая карточка (600-1200 токенов)</td>
+        </tr>
+        <tr>
+          <td>Профессиональный RP движок / Сложные сценарии</td>
+          <td><span class="badge-track-c">Track C</span></td>
+          <td>~60 мин</td>
+          <td>Оптимизированный движок (800-2500+ токенов)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PHASE 3.1: 4K-FALLBACK MENTION ON TRACK A -->
+<p data-requires-track="A B C" style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
+  <strong>Лимит контекста?</strong> Если достигаете потолка токенов, доступен протокол оптимизации: <span class="badge-track-b">Track B+</span> → 4K-Fallback Protocol.
+</p>
+
 <!-- ITEM-003: NOSCRIPT FALLBACK -->
 <noscript>
   <div class="noscript-notice" role="alert" aria-live="polite">
@@ -4979,6 +5431,23 @@ body.debug-mode [data-requires-track]::before {
   <h2>📌 Раздел 0: Основные принципы</h2>
   <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
 
+  <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
+  <section id="section-0-2" data-requires-track="A B C">
+    <h2>§0.2 Критические анти-паттерны (Все треки)</h2>
+    <div class="warning-block">
+      <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
+      <ul>
+        <li><strong>Token Bloat:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
+        <li><strong>Price Non-manifestation:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей.</li>
+        <li><strong>Voice-in-Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо.</li>
+        <li><strong>GHOST-in-SP:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST.</li>
+        <li><strong>RepPen &gt; 1.10:</strong> Repetition Penalty выше 1.10 → вызывает несвязный вывод. Рекомендуется: 1.0–1.05.</li>
+        <li><strong>Godmoding in LB:</strong> Записи Лорбука, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока.</li>
+      </ul>
+      <p class="track-badge">Полный анализ с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Анти-паттерны</a></p>
+    </div>
+  </section>
+
   <details class="interactive" id="acc-principle-ocean">
     <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
@@ -5037,8 +5506,9 @@ body.debug-mode [data-requires-track]::before {
     </div>
   </details>
 
-  <details class="interactive" id="acc-principle-ghost">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small></span></summary>
+  <!-- PHASE 1.3: GHOST hidden from Track A -->
+  <details class="interactive" id="acc-principle-ghost" data-requires-track="B C">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="table-wrap">
     <table>
@@ -5256,6 +5726,41 @@ body.debug-mode [data-requires-track]::before {
     </table>
   </div>
 
+  <!-- PHASE 2.3: EXPANDED DEFINITIONS FOR "MENTION ONLY" ITEMS -->
+  <h3>📍 Расширенные определения по трекам</h3>
+  
+  <!-- OCEAN: Track A minimal definition -->
+  <div data-requires-track="A B C" class="callout" style="margin:1em 0;border-left-color:#7c4dff;">
+    <strong style="color:#7c4dff;">OCEAN (Big Five) — Track A</strong>
+    <p style="font-size:0.9em;">Модель личности из пяти измерений: <strong>O</strong>penness (открытость), <strong>C</strong>onscientiousness (добросовестность), <strong>E</strong>xtraversion (экстраверсия), <strong>A</strong>greeableness (доброжелательность), <strong>N</strong>euroticism (нейротизм).</p>
+    <p style="font-size:0.85em;color:var(--text-muted);"><strong>Track A:</strong> Определите 1-2 экстремальных полюса (значения &lt;30 или &gt;70) для поведенческой последовательности.</p>
+    <p class="track-badge" style="font-size:0.85em;">Полная конфигурация с валидатором: <span class="badge-track-b">Track B+</span> → <a href="#ocean">Раздел 4.3</a></p>
+  </div>
+  
+  <!-- Enneagram: Track B "basic" scope -->
+  <div data-requires-track="B C" class="callout" style="margin:1em 0;border-left-color:#8be9fd;">
+    <strong style="color:#8be9fd;">Enneagram (базовая конфигурация) — Track B <span class="badge-track-b">Track B+</span></strong>
+    <p style="font-size:0.9em;"><strong>Track B включает:</strong></p>
+    <ul style="font-size:0.85em;margin:0.5rem 0;padding-left:1.5rem;">
+      <li>Идентификация доминантного типа (1-9)</li>
+      <li>Влияние крыла (adjacent types)</li>
+      <li>Базовая мотивация + базовый страх</li>
+    </ul>
+    <p style="font-size:0.85em;color:var(--text-muted);"><strong>Track C добавляет:</strong> Пути интеграции/дезинтеграции, инстинктивные варианты, полная матрица взаимодействия 9 типов.</p>
+    <p class="track-badge" style="font-size:0.85em;">Полная документация: <a href="#enneagram">Раздел 4.2</a></p>
+  </div>
+  
+  <!-- Diagnostic Scenarios: Track B example -->
+  <div data-requires-track="B C" class="callout" style="margin:1em 0;border-left-color:#a78bfa;">
+    <strong style="color:#a78bfa;">Диагностический сценарий (пример) — Track B+ <span class="badge-track-b">Track B+</span></strong>
+    <div class="example-block" style="background:var(--bg);padding:0.75rem;border-radius:4px;margin:0.5rem 0;font-size:0.85em;">
+      <p><strong>Сценарий:</strong> Сообщение пользователя противоречит установленному трейту персонажа.</p>
+      <p><strong>Обнаружение:</strong> LB триггер проверяет флаг консистенции трейта.</p>
+      <p><strong>Ответ:</strong> Персонаж признаёт расхождение в-характере, сохраняя установленные трейты.</p>
+    </div>
+    <p class="track-badge" style="font-size:0.85em;">Полный диагностический набор: <span class="badge-track-c">Track C</span> → <a href="#diagnostics">Раздел 6</a></p>
+  </div>
+
   <h3>⚙️ Технические термины</h3>
   <div class="table-wrap">
     <table>
@@ -5408,10 +5913,6 @@ body.debug-mode [data-requires-track]::before {
       <h3>⚡ Минимальный шаблон за 5 минут</h3>
       <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. См. A02 в <a href="#anchors">Разделе 3.1</a>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
       <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> см. <a href="#appendix2">Приложение 2</a></p>
-
-      <div class="callout tip">
-        <strong>📊 Token-бюджеты:</strong> См. <a href="#appendix2">Приложение 2</a> для полных таблиц распределения токенов.
-      </div>
 
       <div class="infographic">
         <div class="infographic-title">IMG_04: СРАВНЕНИЕ: 4K-FALLBACK VS ПОЛНЫЙ ПАЙПЛАЙН</div>
@@ -7636,7 +8137,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div class="callout tip" style="margin:1em 0">
-        <strong>🔗 Связано:</strong> О распространённых GHOST-анти-паттернах см. <a href="#antipatterns">Раздел 5.5: Анти-паттерны</a>.
+        <strong>🔗 Связано:</strong> О распространённых GHOST-анти-паттернах см. <a href="#antipatterns">Анти-паттерны</a>.
       </div>
 
       <div data-requires-track="B C">
@@ -7825,7 +8326,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       <h4 style="font-size:1.05rem;margin-top:1.5em">Кросс-ссылки</h4>
       <ul>
         <li><strong><a href="#an-ghost">Раздел 5.2 (AN)</a>:</strong> Для длинных сессий комбинируй AN с Range-cascade + Sticky-состояниями (→ 5.3.1).</li>
-        <li><strong><a href="#xml-tags">Раздел 5.5 (Structured Prompting)</a>:</strong> Structured Inject использует ту же логику тегов <em>внутри</em> content-полей Лорбук, а не только на уровне system-prompt.</li>
+        <li><strong><a href="#xml-tags">Раздел 5.5а (XML-теги)</a>:</strong> Structured Inject использует ту же логику тегов <em>внутри</em> content-полей Лорбук, а не только на уровне system-prompt.</li>
         <li><strong><a href="#spine">Раздел 4.1 (GHOST-якоря)</a>:</strong> Fatigue Emulation <strong>не сохраняет</strong> якоря автоматически — пересказывай явно.</li>
       </ul>
 
@@ -7860,7 +8361,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
 
       <div data-requires-track="C">
       <details class="interactive" id="acc-xml-tags">
-        <summary><span><h3 id="xml-tags" style="margin:0;font-size:inherit;display:inline">🔓 5.5 🏷 XML-теги для Описания персонажа</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag advanced" style="margin-left:0.5em">Track C: Advanced</span></span></summary>
+        <summary><span><h3 id="xml-tags" style="margin:0;font-size:inherit;display:inline">🔓 5.5а 🏷 XML-теги для Описания персонажа</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag advanced" style="margin-left:0.5em">Track C: Advanced</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Использование XML-тегов для структурирования Description.</p>
@@ -8557,7 +9058,7 @@ Total: 0.845 × 100 = 84.5%</code></pre>
 
     <!-- ==================== ANTI-PATTERNS ==================== -->
     <section id="antipatterns">
-      <h2>🚫 Раздел 5.5: Анти-паттерны</h2>
+      <h2>🚫 Анти-паттерны</h2>
       <p><span class="tag core">Core</span> — критически важно избегать этих ошибок</p>
 
       <div class="callout tip" style="margin:1em 0">
@@ -8852,11 +9353,11 @@ content: [GHOST-триггер]</code></pre>
       <p><span class="tag core">Core</span></p>
 
       <div class="callout warn" style="margin-bottom:1em">
-        <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Раздел 5.5: Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
+        <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
       </div>
 
       <div class="callout tip" style="margin-bottom:1em">
-        <strong>📋 Scope этого раздела:</strong> Карточко-специфичные symptom→fix pairs. «Персонаж забывает FLAW → проверь Anchor cost logic». <em>Для универсальных паттернов проектирования (Mary Sue, Cardboard Villain) → см. <a href="#antipatterns">Раздел 5.5: Анти-паттерны</a> (прочитать перед диагностикой).</em>
+        <strong>📋 Scope этого раздела:</strong> Карточко-специфичные symptom→fix pairs. «Персонаж забывает FLAW → проверь Anchor cost logic». <em>Для универсальных паттернов проектирования (Mary Sue, Cardboard Villain) → см. <a href="#antipatterns">Анти-паттерны</a> (прочитать перед диагностикой).</em>
       </div>
 
       <p><strong>Что это:</strong> Системный подход к выявлению и исправлению проблем в карточке персонажа.</p>
@@ -8992,48 +9493,56 @@ content: [GHOST-триггер]</code></pre>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Симптом</th><th>Вероятная причина</th><th>Решение</th></tr>
+            <tr><th>Симптом</th><th>Вероятная причина</th><th>Решение</th><th>Детали</th></tr>
           </thead>
           <tbody>
             <tr>
               <td>Персонаж «плывёт», меняет голос</td>
               <td>Недостаточно Examples, голос не изолирован</td>
               <td>Добавить 2-3 примера, убрать стилистические директивы из Description</td>
+              <td><a href="#acc-debug-voice">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>OOC (выход из образа)</td>
               <td>Слабый SP, нет антигодмодинга</td>
               <td>Добавить PRE-GENERATION FILTER, усилить SPATIAL LOCK</td>
+              <td><a href="#acc-debug-role">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Нет эмоциональной глубины</td>
               <td>GHOST не активируется или дублируется</td>
               <td>Проверить карту слоёв: SP ❌, LB/AN — GHOST там</td>
+              <td><a href="#acc-debug-hallucinations">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Повторы / зацикливание</td>
               <td>RepPen слишком высок</td>
               <td>Снизить до 1.05, проверить наличие якорей</td>
+              <td><a href="#acc-debug-repeats">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Персонаж «слишком идеальный»</td>
               <td>FLAW не проявляется в поведении</td>
               <td>Добавить Price к FLAW-якорям, проверить триггеры</td>
+              <td><a href="#acc-debug-perfect">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Годмодинг (контроль {{user}})</td>
               <td>Отсутствует антигодмодинг в SP</td>
               <td>Добавить: «Никогда не описывай действия {{user}}»</td>
+              <td><a href="#acc-debug-godmoding">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Потеря контекста в длинной сессии</td>
               <td>AN не обновляется, нет LB-механик</td>
               <td>Обновлять AN каждые 3-5 сообщений, добавить Range-cascade</td>
+              <td><a href="#acc-debug-context">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Физические противоречия</td>
               <td>Нет SPATIAL LOCK</td>
               <td>Добавить пространственную фиксацию в SP</td>
+              <td><a href="#acc-debug-physical">→ Диагностика</a></td>
             </tr>
           </tbody>
         </table>
@@ -9273,14 +9782,14 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
 
 <!-- ==================== DEBUGGING SECTION ==================== -->
 <!-- ID: E3 | Troubleshooting decision tree -->
-<section id="debugging">
+<section id="debugging" data-requires-track="C">
   <h2>🔧 Раздел 7: Диагностика и отладка</h2>
   <p><span class="tag core">Core</span></p>
   <p><strong>Что это:</strong> Древовидный справочник для диагностики и исправления проблем в карточке персонажа.</p>
   <p><strong>Как использовать:</strong> Найдите симптом → следуйте по дереву диагностики → примените решение.</p>
 
   <div class="callout warn" style="margin-bottom:1em">
-    <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Раздел 5.5: Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
+    <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
   </div>
 
   <details class="interactive" id="acc-debug-role">
@@ -9530,7 +10039,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
         <div style="padding:0 1.2em 1.2em">
 
       <div class="callout tip">
-        <strong>📋 Как использовать этот Appendix:</strong>
+        <strong>📋 Как использовать это Приложение:</strong>
         <p>Это справочный репозиторий. Для инструкций по применению см.: <a href="#enneagram">Раздел 4.2 (Enneagram)</a> и <a href="#ocean">Раздел 4.3 (OCEAN)</a>.</p>
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.3em">Полные таблицы здесь; алгоритмы интеграции и примеры — в основных разделах.</p>
       </div>
@@ -10738,73 +11247,133 @@ No smart typography. If conflict → default to Examples.
 }
 </script>
 <script type="application/json" id="glossary-data">{
-  "version": "1.0.0",
+  "version": "1.1.0",
   "canonical_terms": [
     {
       "term": "Author's Notes",
       "abbreviation": "AN",
+      "aliases": ["AN", "Author Note", "Authors Notes", "Author's Note"],
       "definition": "Динамический слой контекста для длинных сессий. Обновляется каждые 3–5 сообщений.",
-      "prohibited": ["Авторские заметки", "Авторка", "Авторка Заметки", "Author's Note"]
+      "prohibited": ["Авторские заметки", "Авторка", "Авторка Заметки"]
     },
     {
       "term": "System Prompt",
       "abbreviation": "SP",
+      "aliases": ["SP", "System Prompt", "System Prompts"],
       "definition": "Системные инструкции для модели: ограничения, запреты, формат.",
-      "prohibited": ["Системный промпт", "Системка", "Системник", "System Prompts"]
+      "prohibited": ["Системный промпт", "Системка", "Системник"]
     },
     {
       "term": "Lorebook",
       "abbreviation": "LB",
+      "aliases": ["LB", "Lorebook", "Lore Book", "World Info", "WI"],
       "definition": "База знаний с триггерами для активации контента по ключевым словам.",
-      "prohibited": ["Лорбук", "World Info", "WI"]
+      "prohibited": ["Лорбук"]
     },
     {
       "term": "Description",
       "abbreviation": null,
+      "aliases": ["Description", "Character Description"],
       "definition": "Описание персонажа (Character Description). Содержит Spine, якоря, фактологию.",
-      "prohibited": ["Описание персонажа", "Character Description"]
+      "prohibited": ["Описание персонажа"]
     },
     {
       "term": "Examples",
       "abbreviation": null,
+      "aliases": ["Examples", "Dialogue Examples", "Примеры"],
       "definition": "Примерные сообщения. Задают голос персонажа через демонстрацию.",
-      "prohibited": ["Примерные сообщения", "Примеры", "Dialogue Examples"]
+      "prohibited": ["Примерные сообщения"]
     },
     {
       "term": "Greeting",
       "abbreviation": null,
+      "aliases": ["Greeting", "First Message", "Приветствие"],
       "definition": "Первое сообщение персонажа в чате. Задаёт начальное состояние и голос.",
-      "prohibited": ["Первое сообщение", "First Message", "Приветствие"]
+      "prohibited": ["Первое сообщение"]
     },
     {
       "term": "Character Card",
       "abbreviation": null,
+      "aliases": ["Character Card", "Card", "Карточка"],
       "definition": "Полный пакет поведенческого движка персонажа.",
-      "prohibited": ["Карточка", "Персонаж"]
+      "prohibited": ["Персонаж"]
     },
     {
       "term": "Spine",
       "abbreviation": null,
+      "aliases": ["Spine", "Мотивационное ядро"],
       "definition": "Мотивационное ядро персонажа из 5 элементов: WANT, NEED, FLAW, LIE, GHOST.",
-      "prohibited": ["Мотивационное ядро"]
+      "prohibited": []
     },
     {
       "term": "GHOST",
       "abbreviation": null,
+      "aliases": ["GHOST", "Ghost", "Призрак", "Тень"],
       "definition": "Событие из прошлого, сформировавшее FLAW и LIE.",
-      "prohibited": ["Призрак", "Тень", "GHOST-Слой"]
+      "prohibited": ["GHOST-Слой"]
     },
     {
       "term": "Price",
       "abbreviation": null,
+      "aliases": ["Price", "Цена"],
       "definition": "Немедленная физическая или вербальная манифестация последствия.",
-      "prohibited": ["Цена"]
+      "prohibited": []
     },
     {
       "term": "Anchors",
       "abbreviation": null,
+      "aliases": ["Anchors", "Anchor", "Якоря", "Поведенческие якоря"],
       "definition": "Поведенческие якоря — правила поведения в формате «Триггер → Действие → Цена».",
-      "prohibited": ["Поведенческие якоря"]
+      "prohibited": []
+    },
+    {
+      "term": "FLAW",
+      "abbreviation": null,
+      "aliases": ["FLAW", "Flaw", "Изъян"],
+      "definition": "Изъян персонажа — конкретное поведение, которое мешает ему получить NEED.",
+      "prohibited": []
+    },
+    {
+      "term": "LIE",
+      "abbreviation": null,
+      "aliases": ["LIE", "Lie", "Ложь", "Ложная установка"],
+      "definition": "Ложная установка — во что персонаж верит, часто мешая себе получить NEED.",
+      "prohibited": []
+    },
+    {
+      "term": "WANT",
+      "abbreviation": null,
+      "aliases": ["WANT", "Want", "Хочет"],
+      "definition": "Осознанное желание персонажа — то, что он думает, что ему нужно.",
+      "prohibited": []
+    },
+    {
+      "term": "NEED",
+      "abbreviation": null,
+      "aliases": ["NEED", "Need", "Нужно"],
+      "definition": "Истинная потребность персонажа — то, что ему на самом деле нужно для роста.",
+      "prohibited": []
+    },
+    {
+      "term": "OCEAN",
+      "abbreviation": null,
+      "aliases": ["OCEAN", "Ocean", "Big Five", "Большая пятёрка"],
+      "definition": "Модель личности из 5 измерений: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.",
+      "prohibited": []
+    },
+    {
+      "term": "Enneagram",
+      "abbreviation": null,
+      "aliases": ["Enneagram", "Эннеаграмма", "Эннеа"],
+      "definition": "Система типов личности из 9 типов со стрессом, ростом и крыльями.",
+      "prohibited": []
+    },
+    {
+      "term": "MBTI",
+      "abbreviation": null,
+      "aliases": ["MBTI", "MBTI", "Myers-Briggs", "16 типов"],
+      "definition": "Типология личности Майерс-Бриггс из 16 типов на основе 4 осей.",
+      "prohibited": []
     }
   ],
   "core_rules": [
@@ -11159,6 +11728,38 @@ No smart typography. If conflict → default to Examples.
   } else {
     // DOM already loaded
     initTrackNavigation();
+  }
+})();
+
+// ============================================================================
+// PHASE 1.2: TRACK SWITCH BUTTON HANDLER
+// ============================================================================
+/**
+ * TrackSwitchButtons - Handles track-switch-btn clicks from prototype banner
+ * 
+ * Binds to buttons with data-target attribute and switches to that track
+ */
+(function() {
+  'use strict';
+
+  function initTrackSwitchButtons() {
+    document.querySelectorAll('.track-switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTrack = btn.dataset.target;
+        if (targetTrack && window.NavigationState) {
+          window.NavigationState.setTrack(targetTrack);
+          // Optional: scroll to top after track switch
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+    console.log('[TrackSwitchButtons] Initialized');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTrackSwitchButtons);
+  } else {
+    initTrackSwitchButtons();
   }
 })();
 
@@ -14386,7 +14987,8 @@ if ("serviceWorker" in navigator) {
         data.canonical_terms.forEach(term => {
           const searchTerm = term.term.toLowerCase();
           const abbr = term.abbreviation ? ` (${term.abbreviation})` : '';
-          html += `<li class="glossary-item" data-term="${searchTerm}">
+          const aliasesAttr = term.aliases ? ` data-aliases="${term.aliases.join(',')}"` : '';
+          html += `<li class="glossary-item" data-term="${searchTerm}"${aliasesAttr}>
             <strong>${term.term}</strong>${abbr}<br>
             <span class="glossary-def">${term.definition}</span>
           </li>`;
@@ -14432,20 +15034,33 @@ if ("serviceWorker" in navigator) {
     }
 
     scrollToTerm(term) {
-      const normalizedTerm = term.toLowerCase();
-      
-      // TASK 6: Try exact data-term match first
+      const normalizedTerm = term.toLowerCase().trim();
+
+      // PRIORITY 1: Exact data-term match
       let item = document.querySelector(`.glossary-item[data-term="${normalizedTerm}"]`);
-      
-      // TASK 6: Try matching by text content (for abbreviations)
+
+      // PRIORITY 2: Exact data-aliases match (for abbreviations)
+      if (!item) {
+        const allItems = document.querySelectorAll('.glossary-item');
+        item = Array.from(allItems).find(el => {
+          const aliases = el.dataset.aliases;
+          if (aliases) {
+            const aliasList = aliases.toLowerCase().split(',').map(a => a.trim());
+            return aliasList.includes(normalizedTerm);
+          }
+          return false;
+        });
+      }
+
+      // PRIORITY 3: Match by abbreviation in parentheses (e.g., "Author's Notes (AN)")
       if (!item) {
         const allItems = document.querySelectorAll('.glossary-item');
         item = Array.from(allItems).find(el => {
           const text = el.textContent.toLowerCase();
-          return text.includes(`(${normalizedTerm})`) || text.startsWith(normalizedTerm);
+          return text.includes(`(${normalizedTerm})`);
         });
       }
-      
+
       if (item) {
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
         item.classList.add('highlight');
@@ -14539,6 +15154,191 @@ if ("serviceWorker" in navigator) {
   });
 
   console.log('[TooltipIntegration] Glossary tooltip integration initialized');
+})();
+
+// ============================================================================
+// PHASE 2.2: PER-TRACK ASSEMBLY CHECKLIST
+// ============================================================================
+(function() {
+  'use strict';
+
+  const TRACK_CHECKLISTS = {
+    A: {
+      title: "Доступно на Track A",
+      items: [
+        { name: "Greeting (sensory → posture → speech → hook)", available: true },
+        { name: "WANT / NEED (basic)", available: true },
+        { name: "Anchors (3-5, behavioral only)", available: true },
+        { name: "Examples (neutral + stress)", available: true },
+        { name: "Anti-godmoding SP", available: true },
+        { name: "Price (psychological)", available: false, requires: "B" },
+        { name: "FLAW / LIE", available: false, requires: "B" },
+        { name: "GHOST (formative event)", available: false, requires: "B" },
+        { name: "Full Spine (5 elements)", available: false, requires: "B" },
+        { name: "AN / LB", available: false, requires: "B" }
+      ]
+    },
+    B: {
+      title: "Доступно на Track B",
+      items: [
+        { name: "Greeting (sensory → posture → speech → hook)", available: true },
+        { name: "WANT / NEED", available: true },
+        { name: "Anchors (5-7, with Price)", available: true },
+        { name: "Examples (neutral + stress + reaction)", available: true },
+        { name: "Anti-godmoding SP", available: true },
+        { name: "FLAW / LIE", available: true },
+        { name: "GHOST", available: true },
+        { name: "Full Spine (5 elements)", available: true },
+        { name: "AN / LB (basic)", available: true },
+        { name: "Enneagram (basic)", available: true },
+        { name: "OCEAN (1-2 poles)", available: true },
+        { name: "CoT Tiers", available: false, requires: "C" },
+        { name: "4K-Fallback Protocol", available: false, requires: "C" },
+        { name: "Multi-character scenes", available: false, requires: "C" }
+      ]
+    },
+    C: {
+      title: "Доступно на Track C",
+      items: [
+        { name: "All Track B features", available: true },
+        { name: "Advanced Anchors (7-12)", available: true },
+        { name: "Enneagram (full)", available: true },
+        { name: "OCEAN (full + validator)", available: true },
+        { name: "MBTI", available: true },
+        { name: "AN / LB (full)", available: true },
+        { name: "Lorebook Range-Cascade", available: true },
+        { name: "CoT Tiers", available: true },
+        { name: "4K-Fallback Protocol", available: true },
+        { name: "Structured Inject", available: true },
+        { name: "Spatial & Anatomical Lock", available: true },
+        { name: "Multi-character scenes", available: true },
+        { name: "Consistency Score", available: true },
+        { name: "Anti-patterns (full analysis)", available: true }
+      ]
+    }
+  };
+
+  function renderTrackChecklist() {
+    const container = document.getElementById('track-checklist');
+    if (!container) return;
+
+    const currentTrack = window.NavigationState?.getTrack() || 'B';
+    const checklistData = TRACK_CHECKLISTS[currentTrack];
+
+    if (!checklistData) return;
+
+    let html = `<h3 style="margin:0 0 0.75rem 0;font-size:0.95rem;color:var(--text)">${checklistData.title}</h3>`;
+    html += '<ul class="track-checklist-items" style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.4rem;">';
+
+    checklistData.items.forEach(item => {
+      if (item.available) {
+        html += `<li class="track-checklist-item available" style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#88ff88;"><span style="width:1.1rem;text-align:center;">✓</span> ${item.name}</li>`;
+      } else {
+        const badgeClass = item.requires === 'C' ? 'badge-track-c' : 'badge-track-b';
+        html += `<li class="track-checklist-item unavailable" style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#666;"><span style="width:1.1rem;text-align:center;">○</span> ${item.name} <span class="${badgeClass}" style="font-size:0.7em;margin-left:0.25rem;">Track ${item.requires}+</span></li>`;
+      }
+    });
+
+    html += '</ul>';
+    container.innerHTML = html;
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderTrackChecklist);
+  } else {
+    renderTrackChecklist();
+  }
+
+  // Re-render on track change
+  window.addEventListener('trackchange', renderTrackChecklist);
+
+  console.log('[TrackChecklist] Initialized');
+})();
+
+// ============================================================================
+// PHASE 3.3: SOFT-REDIRECT MODAL FOR HIDDEN SECTIONS
+// ============================================================================
+(function() {
+  'use strict';
+
+  function showTrackUpgradeModal(requiredTrack, sectionId) {
+    // Remove any existing modal
+    const existing = document.querySelector('.track-upgrade-modal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.className = 'track-upgrade-modal';
+    modal.innerHTML = `
+      <div class="modal-content" style="background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem;max-width:380px;text-align:center;">
+        <h3 style="margin:0 0 0.75rem 0;color:var(--text);font-size:1.1rem;">Требуется повышение трека</h3>
+        <p style="margin:0 0 1.25rem 0;color:var(--text-muted);font-size:0.9rem;">Этот раздел требует <span class="badge-track-${requiredTrack.toLowerCase()}" style="font-size:0.8em;">Track ${requiredTrack}</span> или выше.</p>
+        <div class="modal-buttons" style="display:flex;gap:0.75rem;justify-content:center;">
+          <button id="switch-track-btn" style="padding:0.5rem 1rem;background:#4488cc;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.9rem;">Переключиться на Track ${requiredTrack}</button>
+          <button id="stay-here-btn" style="padding:0.5rem 1rem;background:var(--bg-elevated);color:var(--text-muted);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-size:0.9rem;">Остаться</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Focus the switch button
+    const switchBtn = modal.querySelector('#switch-track-btn');
+    if (switchBtn) switchBtn.focus();
+
+    modal.querySelector('#switch-track-btn').onclick = () => {
+      if (window.NavigationState) {
+        window.NavigationState.setTrack(requiredTrack);
+      }
+      modal.remove();
+      // Scroll to section after a brief delay
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    };
+
+    modal.querySelector('#stay-here-btn').onclick = () => modal.remove();
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.remove();
+    });
+
+    // Close on Escape
+    const escHandler = (e) => {
+      if (e.key === 'Escape') {
+        modal.remove();
+        document.removeEventListener('keydown', escHandler);
+      }
+    };
+    document.addEventListener('keydown', escHandler);
+  }
+
+  // Intercept clicks on anchor links
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const targetId = link.getAttribute('href').slice(1);
+    if (!targetId) return;
+
+    const targetSection = document.getElementById(targetId);
+    if (!targetSection) return;
+
+    const requiresTrack = targetSection.dataset.requiresTrack;
+    if (!requiresTrack) return;
+
+    const currentTrack = window.NavigationState?.getTrack() || 'B';
+    const allowedTracks = requiresTrack.split(' ');
+
+    if (!allowedTracks.includes(currentTrack)) {
+      e.preventDefault();
+      showTrackUpgradeModal(allowedTracks[0], targetId);
+    }
+  });
+
+  console.log('[SoftRedirectModal] Initialized');
 })();
 
 
