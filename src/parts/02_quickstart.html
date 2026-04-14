@@ -179,19 +179,45 @@
       <pre><code>ХОЧЕТ: брать все задачи на себя, чтобы не просить помощи → НУЖНО: делегировать или озвучить просьбу хотя бы раз в сцене</code></pre>
       <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1</a></p>
 
-      <!-- GHOST Content - Track B+ (duplicate removed per TASK 1.3) -->
+      <!-- TASK 1.4: GHOST Basics - Visible to all tracks -->
+      <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
+      <p><span class="tag core">Core</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE персонажа.</p>
+
+      <!-- Basic GHOST application - visible to all tracks -->
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>📋 Базовое применение GHOST:</strong>
+        <ol style="margin-top:0.5em">
+          <li>Определи GHOST как <strong>конкретное событие</strong>, а не психологический вывод</li>
+          <li>Размести GHOST в Description (блок <code>&lt;motivation&gt;</code>)</li>
+          <li>Свяжи GHOST → FLAW → LIE в логическую цепочку</li>
+        </ol>
+      </div>
+
+      <div class="callout warn" style="margin-bottom:1em">
+        <strong>⚠️ Правило:</strong> GHOST = что случилось, а не психологический вывод. Избегай слов «травма», «пережил» — покажи через конкретное событие.
+      </div>
+
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>💡 Пример:</strong>
+        <p><strong>GHOST:</strong> В 12 лет отец ушёл, когда персонаж «не смог удержать семью». С тех пор — вера, что контроль = безопасность.</p>
+        <p style="margin-top:0.5em;font-size:0.85em;">→ Это событие объясняет FLAW (перехватывает контроль) и LIE («если не контролирую — всё развалится»).</p>
+      </div>
+
+      <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>. Размещение по слоям: <a href="#rule-ghost-placement">Правило GHOST Placement</a>.</p>
+
+      <!-- Advanced GHOST content - Track B+ only -->
       <div data-requires-track="B C">
-        <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
-        <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в LB с триггерами.</p>
-        <div class="callout warn">
-          <strong>⚠️ Правило:</strong> GHOST = что случилось, а не психологический вывод. Избегай слов «травма», «пережил» — покажи через конкретное событие.
+        <div class="callout info" style="margin-top:1em">
+          <strong>🔧 Продвинутое размещение GHOST (Track B/C):</strong>
+          <p style="margin-top:0.5em">При контексте ≥8K можно использовать Lorebook для триггеров GHOST и Author's Notes для динамического состояния.</p>
+          <ul style="margin-top:0.5em;font-size:0.9em">
+            <li><strong>Description</strong> — определение GHOST (что случилось)</li>
+            <li><strong>Examples</strong> — демонстрация проявлений GHOST</li>
+            <li><strong>Lorebook</strong> — сенсорные ключи для активации</li>
+            <li><strong>Author's Notes</strong> — динамическое состояние [GHOST-активация]</li>
+          </ul>
+          <p style="margin-top:0.5em;font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#an-ghost">Раздел 5.2</a>.</p>
         </div>
-        <div class="callout tip">
-          <strong>💡 Пример:</strong>
-          <p><strong>GHOST:</strong> В 12 лет отец ушёл, когда персонаж «не смог удержать семью». С тех пор — вера, что контроль = безопасность.</p>
-          <p style="margin-top:0.5em;font-size:0.85em;">→ Это событие объясняет FLAW (перехватывает контроль) и LIE («если не контролирую — всё развалится»).</p>
-        </div>
-        <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>.</p>
       </div>
 
       <h4>Шаг 5. 🚫 Антигодмодинг в System Prompt (25–30 токенов)</h4>

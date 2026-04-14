@@ -1,7 +1,7 @@
 {
-  "version": "5.7.0",
+  "version": "5.8.0",
   "encoding": "utf-8",
-  "description": "Live Character Guide - Phase 2 implementation: Layered onboarding, testing/debugging split, integration checklist, content deduplication",
+  "description": "Live Character Guide - Phase 2-3 implementation: GHOST visibility fix, layered onboarding, content organization fixes",
   "parts": [
     { "file": "00_meta.html", "type": "head", "critical": true },
     { "file": "01_header.html", "type": "body-start" },
