@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.5.4] - 2026-04-14
+
+### Changed
+- Refactored section IDs to semantic naming (antipatterns, xml-tags)
+- Integrated debugging decision trees into main guide structure
+- Consolidated Price definition to canonical location with cross-references
+- Standardized terminology mapping in glossary.json
+
+### Fixed
+- Track filtering visibility via `isVisibleInTrack()` utility
+- Cross-references from symptom table to decision trees
+- All internal anchor links verified and working
+
+### Added
+- Cross-references between symptom table and decision trees
+- download/README.md with resource documentation
+- `data-requires-track` attributes on checkpoint items
+
+### Removed
+- Unused CSS variables (track-icon-speed, track-icon-glow)
+- Legacy duplicate checks in JS (consolidated to utility)
+
 ## [Unreleased]
 
 ### Added

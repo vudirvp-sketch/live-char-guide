@@ -1,0 +1,422 @@
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<button class="hamburger" aria-label="Open navigation" type="button">☰</button>
+<div class="mobile-nav-overlay"></div>
+<div class="fab-group" id="fab-group">
+  <button class="fab-btn" id="fab-theme" aria-label="Cycle theme" title="Тема (Dark → Light → OLED)" type="button" data-theme="dark">
+    <span class="theme-icon-dark">🌙</span>
+    <span class="theme-icon-light" hidden>☀️</span>
+    <span class="theme-icon-oled" hidden>⬛</span>
+  </button>
+  <button class="fab-btn" id="fab-width" aria-label="Toggle content width" title="Ширина контента" type="button" aria-pressed="false">↔</button>
+  <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
+  <button class="fab-btn" id="fab-glossary" aria-label="Open glossary" title="Глоссарий" type="button">📖</button>
+  <button class="fab-btn" id="fab-toc" aria-label="Toggle navigation" title="Навигация" type="button">📑</button>
+  <button class="fab-btn" id="fab-top" aria-label="Scroll to top" title="Наверх" type="button">↑</button>
+</div>
+
+<div id="search-container" hidden>
+  <input type="search" id="search-input" placeholder="Поиск по гайду..." autocomplete="off">
+  <div id="search-results"></div>
+</div>
+
+<header>
+  <h1>📖 Живой персонаж для LLM __VERSION__ — Гайд по созданию RP-карточек</h1>
+  <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
+
+  <!-- ID: D4 | Introduction Block -->
+  <div class="intro-block" id="introduction">
+    <h2>Что это такое</h2>
+    <p>Engineering pipeline для создания детерминированных RP character cards для LLM (12B–32B+). Карточка персонажа — это <strong>поведенческий движок</strong>, а не описание.</p>
+
+    <h3>Для кого</h3>
+    <p>Intermediate prompt engineers, знакомые с базовыми концепциями LLM.</p>
+
+    <h3>Что вы узнаете</h3>
+    <ul>
+      <li>Строить карточки персонажей как поведенческие движки</li>
+      <li>Применять психологические фреймворки (OCEAN, Enneagram)</li>
+      <li>Структурировать промпты для стабильного поведения персонажа</li>
+    </ul>
+
+    <h3>Как читать</h3>
+    <p>Линейная прогрессия: Stage 0 (Foundation) → Stage 1 (Quick Start) → ... → Stage 7 (Debugging). Каждый этап строится на предыдущем.</p>
+
+    <h3>Оценка времени</h3>
+    <ul>
+      <li><strong>Track A (Начинающий):</strong> ~15 мин — минимальный шаблон, базовые концепции</li>
+      <li><strong>Track B (Практик):</strong> ~30 мин — полный пайплайн, все core-элементы</li>
+      <li><strong>Track C (Продвинутый):</strong> ~60 мин — расширенная теория, все опциональные элементы</li>
+    </ul>
+    <p>Полный гайд: ~2–3 часа (все треки последовательно).</p>
+  </div>
+
+  <!-- ID: D3 | Model Toggle -->
+  <div class="model-toggle" id="model-toggle">
+    <h3>🔧 Фильтр по модели</h3>
+    <div class="model-toggle-buttons" role="group" aria-label="Выбор модели">
+      <button class="model-btn active" data-model="all" aria-pressed="true">Показать всё</button>
+      <button class="model-btn" data-model="12B" aria-pressed="false">12B–14B</button>
+      <button class="model-btn" data-model="32B" aria-pressed="false">32B+ / API</button>
+    </div>
+    <p class="model-hint"><em>Фильтрует контент по размеру модели. Рекомендации для 12B помечены <code>[12B]</code>, для 32B+ — <code>[32B+]</code>.</em></p>
+  </div>
+
+  <!-- ID: D1 | Interactive Dependency Map -->
+  <div class="dependency-map" id="dependency-map">
+    <h3>🔗 Карта зависимостей блоков</h3>
+    <p class="dependency-hint"><em>Кликните на узел для навигации. Стрелки показывают зависимости: A → B означает, что B требует A.</em></p>
+    <figure class="dependency-graph">
+      <svg viewBox="0 0 700 400" role="img" aria-label="Dependency graph showing relationships between character card blocks">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="var(--text-muted)"/>
+          </marker>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <!-- Layer labels -->
+        <text x="50" y="30" class="dep-layer-label" fill="var(--text-muted)">Психология</text>
+        <text x="50" y="150" class="dep-layer-label" fill="var(--text-muted)">Поведение</text>
+        <text x="50" y="280" class="dep-layer-label" fill="var(--text-muted)">Техническое</text>
+        
+        <!-- Horizontal dividers -->
+        <line x1="40" y1="100" x2="660" y2="100" stroke="var(--border)" stroke-dasharray="4,4"/>
+        <line x1="40" y1="220" x2="660" y2="220" stroke="var(--border)" stroke-dasharray="4,4"/>
+        
+        <!-- PSYCHOLOGY LAYER -->
+        <!-- Spine node -->
+        <a href="#spine" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(150, 55)">
+            <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Spine</text>
+          </g>
+        </a>
+        
+        <!-- Enneagram node -->
+        <a href="#enneagram" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(300, 55)">
+            <rect x="-55" y="-20" width="110" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Enneagram</text>
+          </g>
+        </a>
+        
+        <!-- OCEAN node -->
+        <a href="#ocean" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(450, 55)">
+            <rect x="-45" y="-20" width="90" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">OCEAN</text>
+          </g>
+        </a>
+        
+        <!-- MBTI node (optional) -->
+        <a href="#mbti-section" class="dep-node-link">
+          <g class="dep-node dep-node-opt" transform="translate(590, 55)">
+            <rect x="-40" y="-20" width="80" height="40" rx="6" fill="var(--bg)" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--text-muted)" font-weight="400">MBTI</text>
+          </g>
+        </a>
+        
+        <!-- BEHAVIOR LAYER -->
+        <!-- Anchors node -->
+        <a href="#anchors" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(200, 170)">
+            <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Anchors</text>
+          </g>
+        </a>
+        
+        <!-- Examples node -->
+        <a href="#examples" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(350, 170)">
+            <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Examples</text>
+          </g>
+        </a>
+        
+        <!-- Greeting node -->
+        <a href="#greeting" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(500, 170)">
+            <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">Greeting</text>
+          </g>
+        </a>
+        
+        <!-- TECHNICAL LAYER -->
+        <!-- System Prompt node -->
+        <a href="#system-prompt" class="dep-node-link">
+          <g class="dep-node dep-node-core" transform="translate(150, 300)">
+            <rect x="-60" y="-20" width="120" height="40" rx="6" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--accent)" font-weight="600">System Prompt</text>
+          </g>
+        </a>
+        
+        <!-- AN node -->
+        <a href="#an-ghost" class="dep-node-link">
+          <g class="dep-node dep-node-opt" transform="translate(330, 300)">
+            <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--bg)" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--text-muted)" font-weight="400">AN</text>
+          </g>
+        </a>
+        
+        <!-- Lorebook node -->
+        <a href="#lorebook" class="dep-node-link">
+          <g class="dep-node dep-node-opt" transform="translate(510, 300)">
+            <rect x="-50" y="-20" width="100" height="40" rx="6" fill="var(--bg)" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="0" y="5" text-anchor="middle" fill="var(--text-muted)" font-weight="400">Lorebook</text>
+          </g>
+        </a>
+        
+        <!-- DEPENDENCY ARROWS -->
+        <!-- Spine → Anchors -->
+        <path d="M 150 75 L 150 100 L 200 140" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Enneagram → Anchors -->
+        <path d="M 300 75 L 300 120 L 200 140" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- OCEAN → Anchors -->
+        <path d="M 420 75 L 420 120 L 230 150" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- MBTI → Examples (optional) -->
+        <path d="M 590 75 L 590 120 L 380 150" fill="none" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Spine → Greeting -->
+        <path d="M 170 75 L 500 140" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Anchors → Examples -->
+        <path d="M 250 170 L 300 170" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Anchors → System Prompt -->
+        <path d="M 200 190 L 150 280" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Examples → System Prompt -->
+        <path d="M 320 190 L 170 280" fill="none" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Spine → Lorebook (GHOST) -->
+        <path d="M 170 75 L 510 280" fill="none" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Legend -->
+        <g transform="translate(50, 370)">
+          <rect x="0" y="0" width="12" height="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="18" y="10" fill="var(--text)" font-size="12">Core (обязательно)</text>
+          
+          <rect x="150" y="0" width="12" height="12" fill="var(--bg)" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3,1"/>
+          <text x="168" y="10" fill="var(--text)" font-size="12">Optional (по контексту)</text>
+          
+          <line x1="300" y1="6" x2="340" y2="6" stroke="var(--text-muted)" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+          <text x="350" y="10" fill="var(--text)" font-size="12">Зависимость</text>
+        </g>
+      </svg>
+      <figcaption>Кликните на любой узел для навигации к соответствующему разделу</figcaption>
+    </figure>
+    
+    <div class="dep-quick-ref">
+      <h4>📋 Краткая справка зависимостей</h4>
+      <ul>
+        <li><strong>Spine → Anchors:</strong> WANT/NEED/FLAW/LIE/GHOST определяют триггеры и действия</li>
+        <li><strong>Enneagram → Anchors:</strong> Тип определяет страхи и мотивации для якорей</li>
+        <li><strong>OCEAN → Anchors:</strong> Экстремальные полюса определяют поведенческие паттерны</li>
+        <li><strong>Anchors → Examples:</strong> Якоря демонстрируются в примерах диалогов</li>
+        <li><strong>Anchors → System Prompt:</strong> Глобальные правила поведения</li>
+        <li><strong>Spine (GHOST) → Lorebook:</strong> Формирующие события хранятся в Lorebook</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONTEXT CAPABILITY MATRIX -->
+  <div class="context-matrix" id="context-matrix">
+    <h3>📊 Context Capability Matrix</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Context</th><th>Card Budget</th><th>AN</th><th>Lorebook</th><th>CoT</th><th>GHOST Layers</th><th>Recommended Mode</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Single line</td><td>Track A</td></tr>
+          <tr><td><strong>8K</strong></td><td>600-800</td><td>✅</td><td>✅</td><td>Limited</td><td>Distributed</td><td>Track B</td></tr>
+          <tr><td><strong>16K+</strong></td><td>800-2500</td><td>✅</td><td>✅</td><td>❌ (API)</td><td>Full</td><td>Track C</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="context-hint"><em>Detect your context window size and follow the recommended mode.</em></p>
+  </div>
+</header>
+
+<!-- ITEM-001: TRACK NAVIGATION SELECTION -->
+<main class="entry-selection" id="main-content">
+  <section class="audience-selection" aria-labelledby="track-selection-title">
+    <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
+    <p class="audience-intro">Выберите уровень погружения в материал:</p>
+    <div class="audience-cards" role="group" aria-label="Выбор трека">
+      <button class="audience-card" data-track="A" aria-pressed="false">
+        <div class="track-icon-wrap">
+          <svg class="track-icon track-icon--basic" viewBox="0 0 24 24" fill="none"
+               stroke="var(--track-a-clr)" stroke-width="1.5"
+               role="img" aria-label="Track A: Фундамент"
+               width="24" height="24">
+            <rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"/>
+            <circle cx="12" cy="12" r="1.5" fill="var(--track-a-clr)"/>
+          </svg>
+          <div class="track-icon-scan" aria-hidden="true"></div>
+        </div>
+        <span class="track-name">Track A</span>
+        <span class="track-label">Начинающий</span>
+        <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
+      </button>
+      <button class="audience-card recommended" data-track="B" aria-pressed="true">
+        <span class="track-badge">Рекомендуется</span>
+        <div class="track-icon-wrap">
+          <svg class="track-icon track-icon--live" viewBox="0 0 24 24" fill="none"
+               stroke="var(--track-b-clr)" stroke-width="2"
+               role="img" aria-label="Track B: Пульс жизни"
+               width="24" height="24">
+            <path class="pulse-line" d="M2 12h3l2-5 3 10 3-5h9"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="track-icon-scan" aria-hidden="true"></div>
+        </div>
+        <span class="track-name">Track B</span>
+        <span class="track-label">Практик</span>
+        <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
+      </button>
+      <button class="audience-card" data-track="C" aria-pressed="false">
+        <div class="track-icon-wrap">
+          <svg class="track-icon track-icon--neural" viewBox="0 0 24 24" fill="none"
+               stroke="var(--track-c-clr)" stroke-width="1.5"
+               role="img" aria-label="Track C: Ядро сознания"
+               width="24" height="24">
+            <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"/>
+            <circle class="core-node" cx="12" cy="12" r="3" fill="var(--track-c-clr)"/>
+            <path d="M12 12l5-5M12 12l-5 5M12 12v7M12 12L7 7" stroke-width="1"/>
+          </svg>
+          <div class="track-icon-scan" aria-hidden="true"></div>
+        </div>
+        <span class="track-name">Track C</span>
+        <span class="track-label">Продвинутый</span>
+        <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
+      </button>
+    </div>
+    <button class="uncertain-path" data-default-track="B" type="button">
+      <span class="uncertain-icon">❓</span>
+      <span>Не уверен? Начни с Track B</span>
+    </button>
+  </section>
+</main>
+
+<!-- PHASE 1.2: PROTOTYPE BANNER FOR TRACK A -->
+<div id="track-a-banner" data-requires-track="A" class="prototype-banner">
+  <span class="banner-icon">📋</span>
+  <div class="banner-content">
+    <strong>TRACK A: ПРОТОТИПНЫЙ РЕЖИМ</strong>
+    <p>Создаёт функциональную минимальную карточку. Для полной психологической глубины, продвинутых якорей и оптимизаций → <button class="track-switch-btn" data-target="B" type="button">Переключиться на Track B</button></p>
+  </div>
+</div>
+
+<!-- PHASE 2.2: PER-TRACK ASSEMBLY CHECKLIST -->
+<div id="track-checklist" class="track-checklist">
+  <!-- Populated by JavaScript -->
+</div>
+
+<!-- PHASE 3.2: TRACK COMPARISON MATRIX -->
+<section id="track-comparison" data-requires-track="A B C" class="track-comparison-section" style="margin:1.5rem 0;">
+  <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
+  <div class="table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Цель</th>
+          <th>Рекомендуемый трек</th>
+          <th>Время</th>
+          <th>Результат</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Быстрый прототип / Тест концепции</td>
+          <td><span class="badge-track-a">Track A</span></td>
+          <td>~15 мин</td>
+          <td>Функциональный прототип (450-600 токенов)</td>
+        </tr>
+        <tr>
+          <td>Полный персонаж с психологией</td>
+          <td><span class="badge-track-b">Track B</span></td>
+          <td>~30 мин</td>
+          <td>Полная поведенческая карточка (600-1200 токенов)</td>
+        </tr>
+        <tr>
+          <td>Профессиональный RP движок / Сложные сценарии</td>
+          <td><span class="badge-track-c">Track C</span></td>
+          <td>~60 мин</td>
+          <td>Оптимизированный движок (800-2500+ токенов)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PHASE 3.1: 4K-FALLBACK MENTION ON TRACK A -->
+<p data-requires-track="A B C" style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
+  <strong>Лимит контекста?</strong> Если достигаете потолка токенов, доступен протокол оптимизации: <span class="badge-track-b">Track B+</span> → 4K-Fallback Protocol.
+</p>
+
+<!-- ITEM-003: NOSCRIPT FALLBACK -->
+<noscript>
+  <div class="noscript-notice" role="alert" aria-live="polite">
+    <div class="noscript-notice-content">
+      <span class="noscript-icon">⚠️</span>
+      <div class="noscript-text">
+        <strong>JavaScript отключён</strong>
+        <p>Просматривается Track B (Практик). Полная навигация по трекам и интерактивные элементы недоступны. Track C контент скрыт.</p>
+      </div>
+    </div>
+  </div>
+  <style>
+    /* Show Track A and B content when JS is disabled */
+    [data-requires-track~="A"],
+    [data-requires-track~="B"] {
+      display: block !important;
+      opacity: 1 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      pointer-events: auto !important;
+    }
+    /* Keep Track C hidden */
+    [data-requires-track~="C"] {
+      display: none !important;
+    }
+    /* Visual indication of default track */
+    .audience-selection { pointer-events: none; opacity: 0.7; }
+    .audience-card { cursor: default; }
+    .audience-card:hover { transform: none; }
+    .audience-card[data-track="B"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+  </style>
+</noscript>
+
+<div class="content-wrapper">
+
+<!-- TOC PANEL (NEW) -->
+<div id="toc-panel" class="panel" tabindex="-1" role="navigation" aria-label="Содержание">
+  <div class="panel-header" data-drag-handle>
+    <span class="panel-header-title">📑 Навигация</span>
+    <div class="panel-header-actions">
+      <button class="panel-btn" data-action="collapse" title="Свернуть" aria-label="Свернуть панель">−</button>
+      <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">×</button>
+    </div>
+  </div>
+  <div class="panel-content" id="toc-content">
+    <!-- TOC links will be injected here by JavaScript -->
+  </div>
+  <div class="panel-resize-handle" data-resize-handle></div>
+</div>
+
+<!-- OLD TOC (hidden via CSS, kept for content reference) -->
+<!-- DEPRECATED: Old nav#toc removed — replaced by floating panel system -->

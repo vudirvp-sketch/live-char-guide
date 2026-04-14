@@ -1,0 +1,44 @@
+<!-- GLOSSARY SIDE TAB -->
+<div class="glossary-tab" id="glossary-tab" tabindex="0" role="button" aria-label="Открыть глоссарий">📖 Глоссарий</div>
+
+<!-- NOTEPAD PANEL (NEW) -->
+<div id="notepad-panel" class="panel" tabindex="-1" aria-label="Notepad">
+  <div class="panel-header" data-drag-handle>
+    <span class="panel-header-title">📝 Блокнот</span>
+    <div class="panel-header-actions">
+      <button class="panel-btn" data-action="save" title="Сохранить" aria-label="Сохранить заметки">💾</button>
+      <button class="panel-btn" data-action="clear" title="Очистить" aria-label="Очистить заметки">🗑</button>
+      <button class="panel-btn" data-action="export" title="Экспорт" aria-label="Экспортировать заметки">📋</button>
+      <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">×</button>
+    </div>
+  </div>
+  <textarea
+    class="panel-content panel-textarea"
+    id="notepad-content"
+    placeholder="Ваши заметки..."
+    spellcheck="false"
+    aria-label="Текст заметок"
+  ></textarea>
+  <div class="panel-resize-handle" data-resize-handle></div>
+</div>
+
+<!-- GLOSSARY PANEL -->
+<div id="glossary-panel" class="panel" tabindex="-1" aria-label="Glossary">
+  <div class="panel-header" data-drag-handle>
+    <span class="panel-header-title">📖 Глоссарий</span>
+    <div class="panel-header-actions">
+      <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">✕</button>
+    </div>
+  </div>
+  <div class="panel-content" id="glossary-content">
+    <!-- Populated by JavaScript from glossary.json -->
+    <div class="glossary-loading">Загрузка терминов...</div>
+  </div>
+  <div class="panel-resize-handle" data-resize-handle></div>
+</div>
+
+<!-- Main JavaScript (hashed by build script) -->
+<script src="assets/main.js" defer></script>
+
+</body>
+</html>

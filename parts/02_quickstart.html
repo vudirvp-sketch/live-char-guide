@@ -1,0 +1,178 @@
+    <section id="intro">
+      <h2>Как пользоваться гайдом</h2>
+      <p><strong>Структура документа:</strong></p>
+      <ul>
+        <li><strong>⚡ Раздел 1</strong> — Быстрый старт: минимальный шаблон за 5 минут</li>
+        <li><strong>🏗 Раздел 2</strong> — Архитектура: теория и принципы</li>
+        <li><strong>🧱 Раздел 3</strong> — Core-блоки: Anchors, Examples, Greeting</li>
+        <li><strong>🧠 Раздел 4</strong> — Психология: Spine, Enneagram, OCEAN, MBTI</li>
+        <li><strong>⚙️ Раздел 5</strong> — Технические настройки: Параметры генерации, AN, Лорбук, SP</li>
+        <li><strong>🔧 Раздел 6</strong> — Диагностика и тестирование: 4 базовых тест-сценария (+ 2 расширенных), таблица симптомов</li>
+        <li><strong>📎 Приложения</strong> — Справочные таблицы, примеры и референс-карточка</li>
+      </ul>
+      <p><strong>Порядок работы:</strong></p>
+      <ul>
+        <li>Новичок: Раздел 1 → практика → Разделы 3–5 по необходимости</li>
+        <li>Продвинутый: Раздел 2 → пайплайн из 10 шагов → Приложения</li>
+      </ul>
+      <p><strong>Примечание:</strong> В Быстром старте порядок оптимизирован для скорости. В пайплайне (Раздел 2) — для качества.</p>
+
+      <p><strong>Интерактивные функции (требуют JavaScript):</strong></p>
+      <ul>
+        <li><strong>Ctrl+K</strong> — быстрый поиск по гайду</li>
+        <li>📝 <strong>Блокнот для записей</strong> — плавающая панель для заметок (кнопка на экране)</li>
+        <li>📑 <strong>Навигация</strong> — скрытие/показ оглавления</li>
+        <li>🌙 <strong>Тема</strong> — переключение тёмной/светлой темы</li>
+      </ul>
+      <div class="callout">
+        <p><span class="tag core">Core</span> — обязательный элемент. <span class="tag opt">Optional</span> — подключается по контексту и размеру модели.</p>
+      </div>
+
+      <h2 id="reference">📋 Референс-карточка</h2>
+      <p>В Приложении 6 находится полностью рабочая карточка персонажа <strong>«Выщербленный»</strong>, созданная по методологии этого гайда. Рекомендуется держать открытой при чтении.</p>
+      <p><strong>Почему этот персонаж:</strong></p>
+      <ul>
+        <li>Нестандартный сеттинг (боди-хоррор, не реализм)</li>
+        <li>Все Core-элементы реализованы</li>
+        <li>GHOST распределён по слоям корректно</li>
+        <li>Можно использовать как шаблон: удалить контент, сохранить структуру</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- ==================== РАЗДЕЛ 1 ==================== -->
+    <section id="quick-start">
+      <div class="info-banner">
+        <span class="mode-badge">🚀 Quick Start Mode</span>
+        <span class="mode-hint">Minimal viable card in ~5 minutes.</span>
+      </div>
+      <h2>⚡ Раздел 1: Быстрый старт</h2>
+
+      <h3>🎯 Ключевые термины</h3>
+      <ul>
+        <li><strong><abbr data-tooltip="Изъян персонажа — конкретное поведение, которое мешает ему получить NEED">FLAW</abbr></strong> [рус: Изъян] — изъян персонажа, мешающий ему (конкретное поведение, не прилагательное) <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
+        <li><strong><abbr data-tooltip="Ложная установка — во что персонаж верит, часто мешая себе получить NEED">LIE</abbr></strong> [рус: Ложь] — ложная установка, во что персонаж верит <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
+        <li><strong><abbr data-tooltip="Событие из прошлого, сформировавшее FLAW и LIE. Не дублируется в System Prompt">GHOST</abbr></strong> [рус: Призрак/Тень] — событие из прошлого, формирующее FLAW и LIE <span style="font-size:0.85em;color:var(--text-muted)"><a href="#spine">→ Раздел 4.1</a></span></li>
+        <li><strong><abbr data-tooltip="Психологическое ядро персонажа из 5 элементов: WANT, NEED, FLAW, LIE, GHOST">Spine</abbr></strong> [рус: Мотивационное ядро] — связка из 5 элементов: WANT, NEED, FLAW, LIE, GHOST</li>
+        <li><strong><abbr data-tooltip="Поведенческие якоря — правила поведения формата Триггер → Действие → Цена">Anchors</abbr></strong> [рус: Поведенческие якоря] — правила поведения в формате «триггер → действие»</li>
+      </ul>
+
+      <h3>⚡ Минимальный шаблон за 5 минут</h3>
+      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
+      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> см. <a href="#appendix2">Приложение 2</a></p>
+
+      <div class="infographic">
+        <div class="infographic-title">IMG_04: СРАВНЕНИЕ: 4K-FALLBACK VS ПОЛНЫЙ ПАЙПЛАЙН</div>
+        <div class="inf-comparison">
+          <div class="inf-comparison-panel">
+            <div class="inf-panel-tag inf-tag-warning">4K FALLBACK</div>
+            <div class="inf-panel-items">
+              <div class="inf-panel-item">3 базовых якоря (без Price)</div>
+              <div class="inf-panel-item">Статический SP</div>
+              <div class="inf-panel-item">Первое сообщение (сокращённое)</div>
+              <div class="inf-panel-item">❌ Нет AN / Нет Лорбука</div>
+            </div>
+          </div>
+          <div class="inf-comparison-panel">
+            <div class="inf-panel-tag inf-tag-success">ПОЛНЫЙ ПАЙПЛАЙН (32K+)</div>
+            <div class="inf-panel-items">
+              <div class="inf-panel-item">7 якорей с Price</div>
+              <div class="inf-panel-item">Динамика WANT → NEED</div>
+              <div class="inf-panel-item">Примеры: нейтральный / стресс / доверие</div>
+              <div class="inf-panel-item">✅ AN + Лорбук активны</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Шаг 1. 💬 Greeting (100–200 токенов)</h4>
+      <p>Первое сообщение персонажа. Алгоритм: <strong>Сенсорика → Поза → Речь → Крючок</strong></p>
+      <pre><code>Зал пахнет кофе и разогретой пиццей. За крайним столиком девушка в мешковатом худи перелистывает страницу, не замечая, что уже пятую. Она подняла взгляд — и тут же отвернулась, чувствуя, как начинает краснеть.
+«Эм… Ты к кому?»</code></pre>
+      <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#greeting">Раздел 3.3</a></p>
+
+      <h4>Шаг 2. 🎯 Поведенческие якоря (150–300 токенов)</h4>
+      <p>5–7 правил поведения в формате <strong>«Триггер → Действие»</strong>. Записываются в Description.</p>
+      <pre><code>- Когда нервничает — грызёт колпачок ручки или подковыривает nail-полировку
+- В компании больше трёх человек — замолкает и слушает, отвечает односложно
+- Если кто-то повышает голос — не отводит взгляд, но поджимает ноги под стул
+- Когда увлечена разговором — забывает про еду и время
+- Увидела собаку на улице — обязательно окликнет и улыбнётся</code></pre>
+      <p style="font-size:0.85em;color:var(--text-muted)">Формат с Price: <a href="#anchors">Раздел 3.1</a></p>
+
+      <h4>Шаг 3. 💬 Примерные сообщения (160–240 токенов)</h4>
+      <p>Минимум 2 примера: нейтральный + стресс. Каждый 80–120 токенов.</p>
+      <pre><code>&lt;START&gt;
+{{char}}: Пальцы замерли над клавиатурой. Она потянулась, хрустнула шеей, почувствовала, как затекла спина — и только тогда оторвала взгляд от экрана. «Ага, щас…» — она промямлила это в третий раз за вечер, не отрываясь от ноутбука. На экране мерцал документ, открытый ещё в полдень. «Не, ладно. Чего ты хотел? Слушаю. По-настоящему.»</code></pre>
+      <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#examples">Раздел 3.2</a></p>
+
+      <h4>Шаг 4. 🎯 WANT vs NEED (20–30 токенов)</h4>
+      <p>Одно предложение, раскрывающее суть конфликта:</p>
+      <pre><code>ХОЧЕТ: брать все задачи на себя, чтобы не просить помощи → НУЖНО: делегировать или озвучить просьбу хотя бы раз в сцене</code></pre>
+      <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1</a></p>
+
+      <!-- GHOST Content Layer - Hidden for Track A beginners -->
+      <div data-ghost-content="2" data-spine-element="GHOST" style="display: none;">
+        <h4>👻 GHOST: Формирующее событие (Optional — для продвинутых)</h4>
+        <p><span class="tag advanced">Advanced</span> GHOST — событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt, используется в Lorebook или Author's Notes.</p>
+        <div class="callout warn">
+          <strong>⚠️ Правило GHOST:</strong>
+          <p>GHOST = конкретное событие, а не обобщение. Пишется в формате: <code>[Возраст/период] → [Что случилось] → [Что персонаж решил о мире/о себе]</code></p>
+        </div>
+        <div class="callout tip">
+          <strong>💡 Пример GHOST:</strong>
+          <p><strong>Возраст 12:</strong> Отец ушёл, когда мать «перестала его контролировать». <strong>Решение:</strong> «Если я не контролирую — всё развалится». Отсюда FLAW (перехватывает инициативу) и LIE (верит в контроль как защиту).</p>
+        </div>
+        <p style="font-size:0.9em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1 — Мотивационное ядро (Spine)</a></p>
+      </div>
+
+      <!-- GHOST Content - Always visible for Track B+ -->
+      <div data-requires-track="B C">
+        <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
+        <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в Лорбук с триггерами.</p>
+        <div class="callout warn">
+          <strong>⚠️ Правило:</strong> GHOST = что случилось, а не психологический вывод. Избегай слов «травма», «пережил» — покажи через конкретное событие.
+        </div>
+        <div class="callout tip">
+          <strong>💡 Пример:</strong>
+          <p><strong>GHOST:</strong> В 12 лет отец ушёл, когда персонаж «не смог удержать семью». С тех пор — вера, что контроль = безопасность.</p>
+          <p style="margin-top:0.5em;font-size:0.85em;">→ Это событие объясняет FLAW (перехватывает контроль) и LIE («если не контролирую — всё развалится»).</p>
+        </div>
+        <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>.</p>
+      </div>
+
+      <h4>Шаг 5. 🚫 Антигодмодинг в System Prompt (25–30 токенов)</h4>
+      <p><strong>Обязательно.</strong> Добавь в System Prompt:</p>
+      <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
+{{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.</code></pre>
+      <p><em>Полное объяснение: <a href="#antigodmoding">Раздел 5.0.1</a></em></p>
+
+      <h4>Шаг 6. 📊 Настройки сэмплирования</h4>
+      <ul>
+        <li data-model="12B"><strong>12B–14B:</strong> temperature=0.7, top_p=0.9, min_p=0.05, repetition_penalty=1.05, top_k=50, <strong>presence_penalty=0.0 (фиксированный, НЕ ИЗМЕНЯТЬ)</strong></li>
+        <li data-model="32B"><strong>32B+ / API:</strong> temperature=0.95, top_p=0.95, min_p=0.05, repetition_penalty=1.05, top_k=50, presence_penalty=0.0–0.15</li>
+      </ul>
+      <p style="font-size:0.85em; color:var(--text-muted);"><em>Примечание:</em> T=0.7 (12B) и T=0.95 (32B+) — среднее значение диапазона. Для тонкой настройки используй диапазоны из <a href="#sampling">Раздел 5.1</a>.</p>
+
+      <h3>⚠️ Топ-3 ошибки, ломающие персонажа</h3>
+      <div class="callout warn">
+        <ol>
+          <li><strong>Персонаж забывает речевые тики</strong> → <code>presence_penalty</code> захардкожен на 0.7 → <a href="#sampling">Раздел 5.1</a></li>
+          <li><strong>Персонаж пишет за {{user}}</strong> → Нет антигодмодинга в SP → <a href="#antigodmoding">Раздел 5.0.1</a></li>
+          <li><strong>Персонаж стал плоским</strong> → T выше 0.85 для модели 12B → <a href="#sampling">Раздел 5.1</a></li>
+        </ol>
+      </div>
+
+      <!-- Navigation Footer - P0-3 -->
+      <div class="callout tip" style="margin-top:2em">
+        <strong>✅ Quick Start завершён</strong>
+        <p>У вас есть минимальная рабочая карточка (~450 токенов). Для полной реализации:</p>
+        <ul>
+          <li>Архитектура: <a href="#architecture">Раздел 2</a></li>
+          <li>Core-блоки: <a href="#anchors">Раздел 3</a></li>
+          <li>Психология: <a href="#spine">Раздел 4</a></li>
+          <li>Token-бюджеты: <a href="#appendix2">Приложение 2</a></li>
+        </ul>
+      </div>
+    </section>

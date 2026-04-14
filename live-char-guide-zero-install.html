@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 3baa1ddb -->
-<!-- Generated: 2026-04-14T14:22:22.088Z -->
+<!-- Build hash: 7323f6c7 -->
+<!-- Generated: 2026-04-14T14:50:04.086Z -->
 <!-- Version: 5.5.3 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="3baa1ddb">
+<meta name="build-hash" content="7323f6c7">
 <meta name="livechar-version" content="5.5.3">
 <meta name="livechar-build" content="2026-04-14">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -66,8 +66,6 @@
       --track-a-clr: var(--accent, #38bdf8);
       --track-b-clr: #8be9fd;
       --track-c-clr: #a78bfa;
-      --track-icon-speed: 2.5s;
-      --track-icon-glow: 0.5;
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -132,7 +130,6 @@
       --track-a-clr: #0284c7;
       --track-b-clr: #0891b2;
       --track-c-clr: #7c3aed;
-      --track-icon-glow: 0.25;
     }
 
     body.theme-light { color-scheme: light; }
@@ -163,7 +160,6 @@
       --track-a-clr: #38bdf8;
       --track-b-clr: #67e8f9;
       --track-c-clr: #c4b5fd;
-      --track-icon-glow: 0.7;
     }
 
     body.theme-oled { color-scheme: dark; }
@@ -5465,7 +5461,7 @@ echo '<<exit>>'
   </details>
 
   <details class="interactive" id="acc-principle-price">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§2. Price: Обязательность цены</h3> <small style="color:var(--text-muted)">— Price — обязательный элемент для критичных якорей, рекомендуемый для остальных</small></span></summary>
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline" id="price-definition">§2. Price: Обязательность цены</h3> <small style="color:var(--text-muted)">— Price — обязательный элемент для критичных якорей, рекомендуемый для остальных</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>КАНОНИЧЕСКИЙ ФОРМАТ ЯКОРЕЙ:</strong></p>
   <pre><code>[Trigger] → [Action] → [Price: &lt;immediate physical/verbal manifestation&gt;]
@@ -5911,7 +5907,7 @@ echo '<<exit>>'
       </ul>
 
       <h3>⚡ Минимальный шаблон за 5 минут</h3>
-      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. См. A02 в <a href="#anchors">Разделе 3.1</a>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
+      <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price [рус: мгновенное последствие], без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
       <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> см. <a href="#appendix2">Приложение 2</a></p>
 
       <div class="infographic">
@@ -6277,7 +6273,7 @@ echo '<<exit>>'
       <p><span class="tag core">Core</span></p>
       <p><strong>КАНОНИЧЕСКИЙ ФОРМАТ:</strong></p>
       <pre><code>[Trigger] → [Action] → [Price: &lt;immediate physical/verbal manifestation&gt;] (рус: [Внешний стимул → Наблюдаемая реакция → Мгновенное физическое или речевое последствие в текущей сцене])</code></pre>
-      <p><strong>Цена</strong> — обязательный элемент для критичных якорей, рекомендуемый для остальных. Это связывает поведение с последствиями и придаёт действиям сюжетный вес. Цена может быть физиологической (усталость, боль, напряжение) или психологической (вина, стыд, сожаление).</p>
+      <p><strong>Цена</strong> — обязательный элемент для критичных якорей, рекомендуемый для остальных. Это связывает поведение с последствиями и придаёт действиям сюжетный вес. Цена может быть физиологической (усталость, боль, напряжение) или психологической (вина, стыд, сожаление). <em>См. каноническое определение: <a href="#price-definition">§2. Price</a></em></p>
       <div class="callout warn" style="margin:1em 0">
         <strong>⚠️ ПРАВИЛО: Цена должна разрешаться в той же сцене.</strong>
         <p>Price — это немедленная физическая или вербальная манифестация, а не отложенное последствие. Будущие состояния ("позже будет жалеть", "навсегда запомнит") — НЕ валидный Price.</p>
@@ -7466,154 +7462,6 @@ Anchors:
     <!-- ==================== РАЗДЕЛ 5 ==================== -->
     <!-- Accordion policy: Core sections = always visible. Optional/Advanced = collapsed by default (details.interactive). -->
 
-    <!-- ==================== SPINE→ANCHORS MAPPING ==================== -->
-    <section id="spine-anchors-mapping" data-requires-track="B C">
-      <div class="info-banner">
-        <span class="mode-badge">Track C</span>
-        <span class="mode-hint">Advanced content — visible for Track B and C only.</span>
-      </div>
-      <h2>🔗 Приложение 5a: SPINE → Anchors Mapping</h2>
-      
-      <div class="callout tip">
-        <strong>📋 Назначение:</strong> Эта секция описывает связь между SPINE элементами и психологическими якорями. Используйте её как справочник при создании карточки для обеспечения когерентности персонажа.
-      </div>
-
-      <h3>📊 Определения якорей</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Якорь</th><th>Определение</th><th>Пример</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Growth Anchor</strong><br>(Якорь роста)</td><td>Положительный результат/осознание, к которому персонажу нужно прийти</td><td>Самопринятие без перфекционизма</td></tr>
-            <tr><td><strong>Avoidance Anchor</strong><br>(Якорь избегания)</td><td>То, от чего персонаж бежит любой ценой</td><td>Уязвимость и близость</td></tr>
-            <tr><td><strong>Origin Memory</strong><br>(Первоначальная память)</td><td>Формирующее событие, которое заложило базовые убеждения</td><td>В 7 лет родители развелись; персонаж винил себя</td></tr>
-            <tr><td><strong>Core Belief (CBT)</strong><br>(Базовое убеждение)</td><td>Когнитивное искажение, формирующее интерпретацию</td><td>Ошибки означают, что я недостоин любви</td></tr>
-            <tr><td><strong>Attachment Style</strong><br>(Стиль привязанности)</strong></td><td>Паттерн отношений из раннего ухода</td><td>Тревожно-избегающий</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>🔗 Таблица соответствия SPINE → Anchors</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>SPINE Элемент</th><th>Первичный якорь</th><th>Вторичный якорь</th><th>Психологический механизм</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>FLAW</strong><br>(Изъян)</td>
-              <td><strong>Enneagram Fixation</strong><br>Фиксация эннеаграммы</td>
-              <td><strong>OCEAN Low Agreeableness</strong><br>Низкая доброжелательность</td>
-              <td>Основная слепая зона персонажа. Поведение, которое повторяется и мешает росту.</td>
-            </tr>
-            <tr>
-              <td><strong>LIE</strong><br>(Ложная установка)</td>
-              <td><strong>Core Belief (CBT)</strong><br>Базовое убеждение</td>
-              <td><strong>Enneagram Passion</strong><br>Страсть эннеаграммы</td>
-              <td>Когнитивное искажение, поддерживающее изъян. То, во что персонаж верит, но это неправда.</td>
-            </tr>
-            <tr>
-              <td><strong>GHOST</strong><br>(Призрак/Тень)</td>
-              <td><strong>Origin Memory</strong><br>Первоначальная память</td>
-              <td><strong>Attachment Style</strong><br>Стиль привязанности</td>
-              <td>Событие из прошлого, которое заложило изъян и ложную установку.</td>
-            </tr>
-            <tr>
-              <td><strong>PRICE</strong><br>(Цена)</td>
-              <td><strong>Avoidance Anchor</strong><br>Якорь избегания</td>
-              <td><strong>Enneagram Desire</strong><br>Желание эннеаграммы</td>
-              <td>Цена поддержания лжи. То, чем персонаж жертвует, чтобы не сталкиваться с призраком.</td>
-            </tr>
-            <tr>
-              <td><strong>WANT</strong><br>(Хочет)</td>
-              <td><strong>Enneagram Desire</strong><br>Желание эннеаграммы</td>
-              <td><strong>OCEAN High Extraversion</strong><br>Высокая экстраверсия</td>
-              <td>Поверхностная цель. Персонаж избегает столкновения с призраком через погоню за этим.</td>
-            </tr>
-            <tr>
-              <td><strong>NEED</strong><br>(Нужно)</td>
-              <td><strong>Growth Anchor</strong><br>Якорь роста</td>
-              <td><strong>Enneagram Virtue</strong><br>Добродетель эннеаграммы</td>
-              <td>Что бы на самом деле исцелило персонажа. Часто противоположно WANT.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>📝 Пример: Персонаж «Елена Васкес» (Тип 1w2)</h3>
-      <div class="callout tip">
-        <p><strong>SPINE:</strong></p>
-        <pre><code>FLAW: Должна быть права, чтобы быть в безопасности
-LIE: Если я ошибусь, меня бросят
-GHOST: В 9 лет отец ушёл после ссоры, где она заняла не ту сторону
-PRICE: Самопроизвольность, радость, близкие отношения
-WANT: Доказать свою незаменимость через компетентность
-NEED: Принять, что ошибки не означают отсутствие любви</code></pre>
-
-        <p><strong>OCEAN:</strong> O:72 C:85 E:28 A:45 N:62</p>
-        
-        <p><strong>Anchors:</strong></p>
-        <pre><code>Growth Anchor: Отпустить потребность быть правой
-Avoidance Anchor: Уязвимость, ошибаться
-Origin Memory: Ночь, когда ушёл отец
-Core Belief: Ошибки = Одиночество
-Attachment Style: Избегающий</code></pre>
-
-        <p><strong>Mapping:</strong></p>
-        <ul>
-          <li><strong>FLAW → Enneagram Fixation (Тип 1: Перфекционизм)</strong> + <strong>OCEAN Low E (Избегание внимания)</strong></li>
-          <li><strong>LIE → Core Belief (Ошибки = Одиночество)</strong> + <strong>Enneagram Passion (Гнев)</strong></li>
-          <li><strong>GHOST → Origin Memory (Уход отца)</strong> + <strong>Attachment Style (Избегающий)</strong></li>
-          <li><strong>PRICE → Avoidance Anchor (Уязвимость)</strong> + <strong>Enneagram Desire (Быть хорошей)</strong></li>
-          <li><strong>WANT → Enneagram Desire (Быть хорошей)</strong> + <strong>OCEAN High C (Контроль через компетентность)</strong></li>
-          <li><strong>NEED → Growth Anchor (Принятие несовершенства)</strong> + <strong>Enneagram Virtue (Спокойствие)</strong></li>
-        </ul>
-      </div>
-
-      <h3>🔄 Цикл интеграции</h3>
-      <div class="infographic">
-        <div class="infographic-title">SPINE → Anchors → Behavior</div>
-        <div class="inf-flow-container">
-          <div class="inf-flow-row">
-            <div class="inf-flow-internal">GHOST + Origin Memory</div>
-            <div class="inf-flow-op">создаёт →</div>
-            <div class="inf-flow-external">Core Belief (LIE)</div>
-          </div>
-          <div class="inf-flow-row">
-            <div class="inf-flow-internal">Core Belief (LIE)</div>
-            <div class="inf-flow-op">порождает →</div>
-            <div class="inf-flow-external">FLAW (поведенческий паттерн)</div>
-          </div>
-          <div class="inf-flow-row">
-            <div class="inf-flow-internal">FLAW + Avoidance Anchor</div>
-            <div class="inf-flow-op">блокирует →</div>
-            <div class="inf-flow-external">NEED (Growth Anchor)</div>
-          </div>
-          <div class="inf-flow-row">
-            <div class="inf-flow-internal">WANT</div>
-            <div class="inf-flow-op">отвлекает на →</div>
-            <div class="inf-flow-external">Поверхностные цели</div>
-          </div>
-        </div>
-      </div>
-
-      <h3>✅ Чеклист валидации SPINE-Anchors</h3>
-      <ul>
-        <li>☐ Каждый SPINE элемент связан хотя бы с одним якорем</li>
-        <li>☐ GHOST объясняет происхождение LIE</li>
-        <li>☐ LIE поддерживает FLAW</li>
-        <li>☐ FLAW блокирует NEED</li>
-        <li>☐ WANT противоположно или конфликтует с NEED</li>
-        <li>☐ Avoidance Anchor связан с FLAW или GHOST</li>
-        <li>☐ Growth Anchor описывает результат принятия NEED</li>
-        <li>☐ OCEAN экстремальные полюса поддерживают FLAW или WANT</li>
-        <li>☐ Enneagram тип соответствует паттерну SPINE</li>
-      </ul>
-
-      <p style="font-size:0.85em;color:var(--text-muted)">→ Подробнее о SPINE см. <a href="#spine">Раздел 4.1</a>. Подробнее об Anchors см. <a href="#anchors">Раздел 3.1</a>. Подробнее о Enneagram см. <a href="#enneagram">Раздел 4.2</a>.</p>
-    </section>
-
 <!-- ==================== РАЗДЕЛ 4.1.1: CoT TIERS (Chain of Thought) ==================== -->
 <!--
   ITEM-010: CoT Documentation
@@ -7901,6 +7749,9 @@ Attachment Style: Избегающий</code></pre>
   </ul>
 
   <h3>🔗 Cross-References</h3>
+  <div class="callout tip" style="margin-bottom:1em">
+    <strong>➡️ Далее:</strong> <a href="#spine-anchors-mapping">Приложение 5a: SPINE→Anchors Mapping</a> — практическое применение CoT Tiers для связи SPINE с якорями.
+  </div>
   <ul>
     <li><a href="05_psychology.html#spine">Раздел 4.1: SPINE (мотивационное ядро)</a></li>
     <li><a href="05_psychology.html#enneagram">Раздел 4.2: Enneagram</a></li>
@@ -7911,6 +7762,156 @@ Attachment Style: Избегающий</code></pre>
 </section>
 
 <hr>
+
+    <!-- ==================== SPINE→ANCHORS MAPPING ==================== -->
+    <section id="spine-anchors-mapping" data-requires-track="B C">
+      <div class="info-banner">
+        <span class="mode-badge">Track C</span>
+        <span class="mode-hint">Advanced content — visible for Track B and C only.</span>
+      </div>
+      <h2>🔗 Приложение 5a: SPINE → Anchors Mapping</h2>
+      
+      <p style="font-size:0.85em;color:var(--text-muted)"><em>Предыдущий раздел: <a href="#cot-tiers">CoT Tiers</a></em></p>
+      
+      <div class="callout tip">
+        <strong>📋 Назначение:</strong> Эта секция описывает связь между SPINE элементами и психологическими якорями. Используйте её как справочник при создании карточки для обеспечения когерентности персонажа.
+      </div>
+
+      <h3>📊 Определения якорей</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Якорь</th><th>Определение</th><th>Пример</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Growth Anchor</strong><br>(Якорь роста)</td><td>Положительный результат/осознание, к которому персонажу нужно прийти</td><td>Самопринятие без перфекционизма</td></tr>
+            <tr><td><strong>Avoidance Anchor</strong><br>(Якорь избегания)</td><td>То, от чего персонаж бежит любой ценой</td><td>Уязвимость и близость</td></tr>
+            <tr><td><strong>Origin Memory</strong><br>(Первоначальная память)</td><td>Формирующее событие, которое заложило базовые убеждения</td><td>В 7 лет родители развелись; персонаж винил себя</td></tr>
+            <tr><td><strong>Core Belief (CBT)</strong><br>(Базовое убеждение)</td><td>Когнитивное искажение, формирующее интерпретацию</td><td>Ошибки означают, что я недостоин любви</td></tr>
+            <tr><td><strong>Attachment Style</strong><br>(Стиль привязанности)</strong></td><td>Паттерн отношений из раннего ухода</td><td>Тревожно-избегающий</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>🔗 Таблица соответствия SPINE → Anchors</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>SPINE Элемент</th><th>Первичный якорь</th><th>Вторичный якорь</th><th>Психологический механизм</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FLAW</strong><br>(Изъян)</td>
+              <td><strong>Enneagram Fixation</strong><br>Фиксация эннеаграммы</td>
+              <td><strong>OCEAN Low Agreeableness</strong><br>Низкая доброжелательность</td>
+              <td>Основная слепая зона персонажа. Поведение, которое повторяется и мешает росту.</td>
+            </tr>
+            <tr>
+              <td><strong>LIE</strong><br>(Ложная установка)</td>
+              <td><strong>Core Belief (CBT)</strong><br>Базовое убеждение</td>
+              <td><strong>Enneagram Passion</strong><br>Страсть эннеаграммы</td>
+              <td>Когнитивное искажение, поддерживающее изъян. То, во что персонаж верит, но это неправда.</td>
+            </tr>
+            <tr>
+              <td><strong>GHOST</strong><br>(Призрак/Тень)</td>
+              <td><strong>Origin Memory</strong><br>Первоначальная память</td>
+              <td><strong>Attachment Style</strong><br>Стиль привязанности</td>
+              <td>Событие из прошлого, которое заложило изъян и ложную установку.</td>
+            </tr>
+            <tr>
+              <td><strong>PRICE</strong><br>(Цена)</td>
+              <td><strong>Avoidance Anchor</strong><br>Якорь избегания</td>
+              <td><strong>Enneagram Desire</strong><br>Желание эннеаграммы</td>
+              <td>Цена поддержания лжи. То, чем персонаж жертвует, чтобы не сталкиваться с призраком.</td>
+            </tr>
+            <tr>
+              <td><strong>WANT</strong><br>(Хочет)</td>
+              <td><strong>Enneagram Desire</strong><br>Желание эннеаграммы</td>
+              <td><strong>OCEAN High Extraversion</strong><br>Высокая экстраверсия</td>
+              <td>Поверхностная цель. Персонаж избегает столкновения с призраком через погоню за этим.</td>
+            </tr>
+            <tr>
+              <td><strong>NEED</strong><br>(Нужно)</td>
+              <td><strong>Growth Anchor</strong><br>Якорь роста</td>
+              <td><strong>Enneagram Virtue</strong><br>Добродетель эннеаграммы</td>
+              <td>Что бы на самом деле исцелило персонажа. Часто противоположно WANT.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>📝 Пример: Персонаж «Елена Васкес» (Тип 1w2)</h3>
+      <div class="callout tip">
+        <p><strong>SPINE:</strong></p>
+        <pre><code>FLAW: Должна быть права, чтобы быть в безопасности
+LIE: Если я ошибусь, меня бросят
+GHOST: В 9 лет отец ушёл после ссоры, где она заняла не ту сторону
+PRICE: Самопроизвольность, радость, близкие отношения
+WANT: Доказать свою незаменимость через компетентность
+NEED: Принять, что ошибки не означают отсутствие любви</code></pre>
+
+        <p><strong>OCEAN:</strong> O:72 C:85 E:28 A:45 N:62</p>
+        
+        <p><strong>Anchors:</strong></p>
+        <pre><code>Growth Anchor: Отпустить потребность быть правой
+Avoidance Anchor: Уязвимость, ошибаться
+Origin Memory: Ночь, когда ушёл отец
+Core Belief: Ошибки = Одиночество
+Attachment Style: Избегающий</code></pre>
+
+        <p><strong>Mapping:</strong></p>
+        <ul>
+          <li><strong>FLAW → Enneagram Fixation (Тип 1: Перфекционизм)</strong> + <strong>OCEAN Low E (Избегание внимания)</strong></li>
+          <li><strong>LIE → Core Belief (Ошибки = Одиночество)</strong> + <strong>Enneagram Passion (Гнев)</strong></li>
+          <li><strong>GHOST → Origin Memory (Уход отца)</strong> + <strong>Attachment Style (Избегающий)</strong></li>
+          <li><strong>PRICE → Avoidance Anchor (Уязвимость)</strong> + <strong>Enneagram Desire (Быть хорошей)</strong></li>
+          <li><strong>WANT → Enneagram Desire (Быть хорошей)</strong> + <strong>OCEAN High C (Контроль через компетентность)</strong></li>
+          <li><strong>NEED → Growth Anchor (Принятие несовершенства)</strong> + <strong>Enneagram Virtue (Спокойствие)</strong></li>
+        </ul>
+      </div>
+
+      <h3>🔄 Цикл интеграции</h3>
+      <div class="infographic">
+        <div class="infographic-title">SPINE → Anchors → Behavior</div>
+        <div class="inf-flow-container">
+          <div class="inf-flow-row">
+            <div class="inf-flow-internal">GHOST + Origin Memory</div>
+            <div class="inf-flow-op">создаёт →</div>
+            <div class="inf-flow-external">Core Belief (LIE)</div>
+          </div>
+          <div class="inf-flow-row">
+            <div class="inf-flow-internal">Core Belief (LIE)</div>
+            <div class="inf-flow-op">порождает →</div>
+            <div class="inf-flow-external">FLAW (поведенческий паттерн)</div>
+          </div>
+          <div class="inf-flow-row">
+            <div class="inf-flow-internal">FLAW + Avoidance Anchor</div>
+            <div class="inf-flow-op">блокирует →</div>
+            <div class="inf-flow-external">NEED (Growth Anchor)</div>
+          </div>
+          <div class="inf-flow-row">
+            <div class="inf-flow-internal">WANT</div>
+            <div class="inf-flow-op">отвлекает на →</div>
+            <div class="inf-flow-external">Поверхностные цели</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>✅ Чеклист валидации SPINE-Anchors</h3>
+      <ul>
+        <li>☐ Каждый SPINE элемент связан хотя бы с одним якорем</li>
+        <li>☐ GHOST объясняет происхождение LIE</li>
+        <li>☐ LIE поддерживает FLAW</li>
+        <li>☐ FLAW блокирует NEED</li>
+        <li>☐ WANT противоположно или конфликтует с NEED</li>
+        <li>☐ Avoidance Anchor связан с FLAW или GHOST</li>
+        <li>☐ Growth Anchor описывает результат принятия NEED</li>
+        <li>☐ OCEAN экстремальные полюса поддерживают FLAW или WANT</li>
+        <li>☐ Enneagram тип соответствует паттерну SPINE</li>
+      </ul>
+
+      <p style="font-size:0.85em;color:var(--text-muted)">→ Подробнее о SPINE см. <a href="#spine">Раздел 4.1</a>. Подробнее об Anchors см. <a href="#anchors">Раздел 3.1</a>. Подробнее о Enneagram см. <a href="#enneagram">Раздел 4.2</a>.</p>
+    </section>
 
 
     <!-- ==================== РАЗДЕЛ 5 ==================== -->

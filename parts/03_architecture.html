@@ -1,0 +1,240 @@
+    <hr>
+
+    <!-- ==================== РАЗДЕЛ 2 ==================== -->
+    <section id="architecture" data-requires-track="B C">
+      <div class="info-banner">
+        <span class="mode-badge">🛠️ Propeller Workshop Mode</span>
+        <span class="mode-hint">Full pipeline with all features.</span>
+      </div>
+      <!-- SCOPE: Complete card — ~2500 tokens. All fields active. -->
+      <h2>🏗 Раздел 2: Архитектура системы</h2>
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>📋 SCOPE:</strong> Обязательная полная схема (5-7 якорей, Price, GHOST).
+      </div>
+      <blockquote>Этот гайд — <strong>инженерный пайплайн</strong>, а не набор советов. Система строится от внутреннего ядра к внешнему исполнению.</blockquote>
+
+      <h3>Сдвиг парадигмы: от описания к поведенческому движку</h3>
+      <p>Карточка трансформируется из статичного описания в <strong>детерминированный поведенческий движок</strong>. Художественные директивы («показывай, не рассказывай») заменяются механическими триггерами. Модель не интерпретирует контекст — она исполняет скомпилированную инструкцию: <code>Триггер → Действие → Цена</code>. Это гарантирует тактильность, сюжетный вес и стабильность голоса на архитектурах 12B–32B+ без раздувания контекста.</p>
+      <p><strong>Ключевой принцип:</strong> Каждый элемент карточки должен <strong>активно влиять на генерацию</strong>, а не пассивно описывать персонажа. Если блок не производит наблюдаемое действие — он должен быть удалён или переработан.</p>
+
+      <h3>6 процессуальных правил (ядро системы)</h3>
+      <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Правило</th><th>Суть</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td><strong>Конвертер «Статика → Якорь»</strong></td><td>Все детали внешности/лора проходят фильтр: <code>[Условие → Наблюдаемое действие → Физиологическая/психологическая цена]</code>. Абстрактные списки (без связи с действием) не работают — модель их игнорирует.</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Телесность (Core)</strong><br><em>→ <a href="04_core_blocks.html#телесность">Практическая реализация</a></em></td><td>Внутреннее состояние манифестируется через вес, баланс, дыхание или микродвижения <strong>до</strong> речи. Шаблон: <code>[Среда/состояние] → [реакция тела] → [сенсорная обратная связь]</code>.</td></tr>
+            <tr><td><strong>3</strong></td><td><strong>Протокол 4K-Fallback</strong></td><td>При лимите ~300 токенов: <code>Greeting</code> (сенсорика+локация+тон) + <code>3 Поведенческие якоря</code> (привязаны к физике мира). Лорбук отключён. Сеттинг существует только в форме действия/реакции. Полный протокол — <a href="#four-k-fallback">Раздел 5.12</a>.</td></tr>
+            <tr><td><strong>4</strong></td><td><strong>GHOST</strong></td><td>Визуальные/тактильные маркеры = триггеры памяти. Дублировать как <code>Keywords</code> в Лорбук (при наличии контекста) или вшивать в якоря. Путь модели: <code>триггер → реакция тела → скрытый паттерн</code>.</td></tr>
+            <tr><td><strong>5</strong></td><td><strong>Динамическая арка & Границы</strong></td><td>Фиксированные вехи заменены на <code>WANT/NEED</code>. <code>AN</code> (Action Note) обновляется каждые 3–5 сообщений: фокус смещается с <code>WANT</code> к поведению, зеркалящему <code>NEED</code>. Влияние на <code>{{user}}</code> только через наблюдаемые симптомы → реакция <code>{{char}}</code>. Годмодинг устранён правилом: {{user}} — только наблюдаемое извне.</td></tr>
+            <tr><td><strong>6</strong></td><td><strong>Изоляция голоса</strong></td><td>Тембр, ритм, синтаксис и лексика задаются <strong>исключительно</strong> в <code>Примерных сообщениях</code>. <code>Description</code> содержит только логику поведения. Любые стилистические директивы в Description = ошибка сборки. <strong>Исключение:</strong> <code>&lt;speech_style&gt;</code> в System Prompt разрешён <strong>только для 32B+/API</strong>. Никогда не помещайте стилистические директивы в Description.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Логическая архитектура (6 уровней)</h3>
+
+      <div class="infographic">
+        <div class="infographic-title">IMG_05: ИЕРАРХИЯ УРОВНЕЙ СИСТЕМЫ</div>
+        <div class="inf-layers">
+          <div class="inf-layer inf-layer-1">
+            <div class="inf-layer-label">ЯДРО</div>
+            <div class="inf-layer-content">Spine — WANT / NEED / FLAW / LIE / GHOST</div>
+          </div>
+          <div class="inf-layer inf-layer-2">
+            <div class="inf-layer-label">ПОВЕДЕНИЕ</div>
+            <div class="inf-layer-content">Поведенческие якоря (Anchors) + Первое сообщение (Greeting) + Примеры (Examples)</div>
+          </div>
+          <div class="inf-layer inf-layer-3">
+            <div class="inf-layer-label">ТЕХНИЧЕСКИЕ</div>
+            <div class="inf-layer-content">System Prompt — Spatial Lock, Format Lock, антигодмодинг, XML-теги</div>
+          </div>
+          <div class="inf-layer inf-layer-4">
+            <div class="inf-layer-label">КОНТЕКСТ</div>
+            <div class="inf-layer-content">AN + LB (триггеры GHOST, динамика WANT→NEED)</div>
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Уровень</th><th>Функция</th><th>Размещение</th><th>Принцип</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Психологическое ядро</strong></td><td>Мотивация, конфликт, слепые зоны</td><td>Spine + Enneagram + 1–2 полюса OCEAN</td><td>Без причины нет поведения</td></tr>
+            <tr><td><strong>Процессуальные правила</strong></td><td>Детерминация поведения</td><td>6 правил (см. выше)</td><td>Статика → динамика, абстракция → действие</td></tr>
+            <tr><td><strong>Поведенческая оболочка</strong></td><td>Психология → наблюдаемые действия</td><td>Anchors + Examples + Greeting</td><td>Голос не описывается, а демонстрируется</td></tr>
+            <tr><td><strong>Технические ограничения</strong></td><td>Защита от «улетания» и поломки стиля</td><td>System Prompt + XML-теги + Параметры генерации</td><td>Антигодмодинг, фиксация лица/времени, пространственная когерентность</td></tr>
+            <tr><td><strong>Динамический контекст</strong></td><td>Живость в длинных сессиях</td><td>AN + LB</td><td>Обновление состояния, GHOST-триггеры, WANT→NEED арка</td></tr>
+            <tr><td><strong>Валидация</strong></td><td>Диагностика сбоев</td><td>Чеклист + Предгенерационный фильтр</td><td>Самовосстановление при деградации</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Пайплайн создания (10 шагов)</h3>
+      <ol>
+        <li><strong>Spine</strong> → WANT/NEED/FLAW/LIE/GHOST (через физиологию)</li>
+        <li><strong>Enneagram</strong> → Тип + крыло + стресс→рост (1–2 строки)</li>
+        <li><strong>OCEAN</strong> → Только 1–2 экстремальных полюса</li>
+        <li><strong>Anchors</strong> → 5–7 правил <code>Триггер → Действие</code></li>
+        <li><strong>Первое сообщение</strong> → Сенсорика → Поза(FLAW) → Речь(LIE) → Крючок</li>
+        <li><strong>Examples</strong> → 3 блока: нейтральный / стресс / доверие</li>
+        <li><strong>System Prompt</strong> → Антигодмодинг + стиль + XML-теги</li>
+        <li><strong>Параметры генерации</strong> → T, Top P, Min P, RepPen=1.05, presence_penalty=0.0–0.15</li>
+        <li><strong>Динамика</strong> → AN (обновлять каждые 3–5 msg при 8K+) + Лорбук</li>
+        <li><strong>Проверка</strong> → 4 тест-сценария → таблица симптомов [<a href="#appendix4">→ Приложение 4</a>]</li>
+      </ol>
+
+      <h3>Карта связей между блоками</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Связка</th><th>Механика</th><th>Где описано</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Spine → Anchors</code></td><td>FLAW = триггер, LIE = реакция</td><td><a href="#anchors">Раздел 3.1</a>, <a href="#spine">Раздел 4.1</a></td></tr>
+            <tr><td><code>GHOST → LB + AN</code></td><td>Определение в Spine → триггеры LB → состояние AN</td><td><a href="#an-ghost">Раздел 5.2</a></td></tr>
+            <tr><td><code>Examples → Voice</code></td><td>Голос = лексика/ритм/тики в <code>&lt;START&gt;</code></td><td><a href="#examples">Раздел 3.2</a></td></tr>
+            <tr><td><code>SP ↔ Greeting ↔ Examples</code></td><td>При конфликте побеждают Examples</td><td><a href="#style-fix">Раздел 5.0</a></td></tr>
+            <tr><td><code>Context → Strategy</code></td><td>4K: нет AN. 8–32K: AN + LB. 32K+: полный пайплайн</td><td><a href="#an-ghost">Раздел 5.2</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Критические риски и предохранители</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Риск</th><th>Решение</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>RepPen > 1.10 стирает паттерны</td><td>Старт 1.05, повышение только при повторах <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#sampling">Раздел 5.1</a>]</span></td></tr>
+            <tr><td>CoT съедает 4K контекст</td><td>Разрешён только для 12B, запрещён для 32B+/API [→ <a href="#cot">Раздел 5.4</a>]</td></tr>
+            <tr><td>Полный OCEAN + 7 якорей → перегруз контекста (модель теряет фокус, голос «плывёт»)</td><td>Правило: бери только 1–2 экстремальных полюса OCEAN. Приоритет резания: удаляй всё, что не генерирует наблюдаемое действие, реакцию или цену.</td></tr>
+            <tr><td>GHOST дублируется</td><td>Карта слоёв: SP ❌, Spine = что, Examples = как, LB = когда, AN = сейчас</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Схема единого потока</h3>
+      <pre><code>[Психология] Spine → Enneagram → OCEAN (1-2 полюса)
+      ↓
+[Процессуальные правила] Статика→Якорь → Телесность → 4K-Fallback → GHOST → Динамическая арка → Изоляция голоса
+      ↓
+[Поведение] Anchors (5-7, с ценой) → Greeting → Examples (3 типа)
+      ↓
+[Ограничения] SP: антигодмодинг + SPATIAL LOCK + PRE-GENERATION FILTER + XML-теги
+      ↓
+[Запуск] Sampling: T/TopP/MinP/RepPen=1.05 + presence_penalty=0.0–0.15
+      ↓
+[Поддержка] AN (обновление 3-5 msg, WANT→NEED) + Lorebook (GHOST/мир/NPC)
+      ↓
+[Отладка] 4 тест-сценария → симптомы → резание → стабильность</code></pre>
+
+      <p><strong>Итог:</strong> Система функционально замкнута и внутренне непротиворечива. Карточка — поведенческий движок, а не описание. Рабочий минимум: <code>Spine + Anchors (с ценой) + 3 Examples + SP (с Предгенерационный фильтр)</code>. При 4K — использовать Fallback-протокол. Остальное наращивается по мере контекста.</p>
+
+      <!-- ID: A4 | Mutually Exclusive Responsibility Table -->
+      <h3>📋 Таблица ответственности блоков</h3>
+      <p><strong>ПРАВИЛО:</strong> Каждый тип контента принадлежит строго одному блоку. Если X принадлежит категории Y, он идёт в блок Z. Исключения должны быть документированы.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Блок</th><th>ХРАНИТ</th><th>НЕ ХРАНИТ</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Description</strong></td>
+              <td>Статические факты идентичности (имя, возраст, внешность, биография), Spine (WANT/NEED/FLAW/LIE/GHOST), поведенческие якоря</td>
+              <td>Поведенческие правила, паттерны голоса, ограничения, примеры диалогов</td>
+            </tr>
+            <tr>
+              <td><strong>System Prompt</strong></td>
+              <td>Глобальные поведенческие правила, ограничения, формат вывода, антигодмодинг, SPATIAL LOCK, FORMAT LOCK</td>
+              <td>Идентичность персонажа, примеры диалогов, GHOST</td>
+            </tr>
+            <tr>
+              <td><strong>Author's Notes (AN)</strong></td>
+              <td>Динамика сессии, текущий контекст, немедленные ограничения, состояние GHOST-активации</td>
+              <td>Статическая идентичность, постоянные правила</td>
+            </tr>
+            <tr>
+              <td><strong>Examples</strong></td>
+              <td>Паттерны голоса, стиль диалога, шаблоны ответов, демонстрация поведения</td>
+              <td>Факты идентичности, поведенческие правила (только демонстрация)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <strong>💡 Правило разрешения конфликтов:</strong>
+        <p>При конфликте между блоками побеждают Examples (для голоса) и System Prompt (для ограничений). Description никогда не переопределяет.</p>
+      </div>
+
+      <!-- ID: B1 | GHOST Placement Exception Rules -->
+      <h3 id="ghost-rules">⚠️ Правила исключений: Размещение GHOST</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Приоритет</th><th>Правило</th><th>Условия</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Приоритет 1 (По умолчанию)</strong></td>
+              <td>GHOST размещается только в Description (блок <code>&lt;motivation&gt;</code>)</td>
+              <td>Стандартный случай</td>
+            </tr>
+            <tr>
+              <td><strong>Приоритет 2 (4K-Fallback)</strong></td>
+              <td>GHOST ужимается до одного предложения в Description: <code>[GHOST: &lt;краткая формулировка&gt;]</code></td>
+              <td>
+                <strong>ТОЛЬКО если:</strong>
+                <ul>
+                  <li>Контекст ≤ 4K — Лорбук и AN недоступны</li>
+                  <li>GHOST <strong>не в SP</strong> — всегда в Description</li>
+                  <li>Причина указана: [4K-Fallback: GHOST в Description]</li>
+                </ul>
+                <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#ghost-placement-conditions">Условное размещение GHOST</a>]</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">
+        <strong>⚠️ Маркер исключений:</strong>
+        <p>Все исключения должны отображать ⚠️ иконку со ссылкой на условия исключения: <code>⚠️ [Исключение: 4K-Fallback] → <a href="#ghost-rules">Правила GHOST</a></code></p>
+      </div>
+
+      <!-- Phase Indicators (ID: B2) -->
+      <h3>📊 Фазовые индикаторы</h3>
+      <p>Каждый блок контента должен иметь индикатор фазы:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Индикатор</th><th>Значение</th><th>Применение</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>[PROTOTYPE]</code></td>
+              <td>Опционально — добавляется при тестировании расширенного поведения</td>
+              <td>Quick Start, минимальные карточки</td>
+            </tr>
+            <tr>
+              <td><code>[PRODUCTION]</code></td>
+              <td>Обязательно — требуется перед деплоем</td>
+              <td>Полные карточки, все блоки Core</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">
+        <strong>⚠️ Quick Start = [PROTOTYPE]:</strong>
+        <p>Quick Start описывает MVP-формат: 4 якоря, без Price (опционально), без GHOST. Для полноценной работы используйте полную схему. Price обязателен перед деплоем.</p>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ==================== РАЗДЕЛ 3 ==================== -->
