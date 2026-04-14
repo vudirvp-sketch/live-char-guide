@@ -33,8 +33,6 @@
       --track-a-clr: var(--accent, #38bdf8);
       --track-b-clr: #8be9fd;
       --track-c-clr: #a78bfa;
-      --track-icon-speed: 2.5s;
-      --track-icon-glow: 0.5;
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -99,7 +97,6 @@
       --track-a-clr: #0284c7;
       --track-b-clr: #0891b2;
       --track-c-clr: #7c3aed;
-      --track-icon-glow: 0.25;
     }
 
     body.theme-light { color-scheme: light; }
@@ -130,7 +127,6 @@
       --track-a-clr: #38bdf8;
       --track-b-clr: #67e8f9;
       --track-c-clr: #c4b5fd;
-      --track-icon-glow: 0.7;
     }
 
     body.theme-oled { color-scheme: dark; }
