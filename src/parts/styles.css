@@ -75,6 +75,12 @@
       --panel-min-height: 150px;
       --panel-z-base: 1000;
       --panel-transition: 200ms ease;
+
+      /* Z-index hierarchy (v5.4.0 - R2 fix) */
+      --z-glossary-tab: 999;
+      --z-fab-group: 1000;
+      --z-panel: 1001;
+      --z-modal: 9999;
     }
 
     /* === LIGHT THEME === */
@@ -1318,6 +1324,13 @@
     .glossary-tab:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: -2px;
+    }
+
+    /* === GLOSSARY TAB MOBILE (R3 fix - v5.4.0) === */
+    @media (max-width: 768px) {
+      .glossary-tab {
+        display: none;  /* Hidden on mobile - glossary accessible via FAB button */
+      }
     }
 
     /* === GLOSSARY ITEM HIGHLIGHT === */

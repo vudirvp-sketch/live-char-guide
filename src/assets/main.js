@@ -3425,7 +3425,8 @@ if ("serviceWorker" in navigator) {
         data.canonical_terms.forEach(term => {
           const searchTerm = term.term.toLowerCase();
           const abbr = term.abbreviation ? ` (${term.abbreviation})` : '';
-          html += `<li class="glossary-item" data-term="${searchTerm}">
+          const aliasesAttr = term.aliases ? ` data-aliases="${term.aliases.join(',')}"` : '';
+          html += `<li class="glossary-item" data-term="${searchTerm}"${aliasesAttr}>
             <strong>${term.term}</strong>${abbr}<br>
             <span class="glossary-def">${term.definition}</span>
           </li>`;
@@ -3471,20 +3472,33 @@ if ("serviceWorker" in navigator) {
     }
 
     scrollToTerm(term) {
-      const normalizedTerm = term.toLowerCase();
-      
-      // TASK 6: Try exact data-term match first
+      const normalizedTerm = term.toLowerCase().trim();
+
+      // PRIORITY 1: Exact data-term match
       let item = document.querySelector(`.glossary-item[data-term="${normalizedTerm}"]`);
-      
-      // TASK 6: Try matching by text content (for abbreviations)
+
+      // PRIORITY 2: Exact data-aliases match (for abbreviations)
+      if (!item) {
+        const allItems = document.querySelectorAll('.glossary-item');
+        item = Array.from(allItems).find(el => {
+          const aliases = el.dataset.aliases;
+          if (aliases) {
+            const aliasList = aliases.toLowerCase().split(',').map(a => a.trim());
+            return aliasList.includes(normalizedTerm);
+          }
+          return false;
+        });
+      }
+
+      // PRIORITY 3: Match by abbreviation in parentheses (e.g., "Author's Notes (AN)")
       if (!item) {
         const allItems = document.querySelectorAll('.glossary-item');
         item = Array.from(allItems).find(el => {
           const text = el.textContent.toLowerCase();
-          return text.includes(`(${normalizedTerm})`) || text.startsWith(normalizedTerm);
+          return text.includes(`(${normalizedTerm})`);
         });
       }
-      
+
       if (item) {
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
         item.classList.add('highlight');
