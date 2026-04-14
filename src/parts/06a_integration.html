@@ -1,0 +1,116 @@
+<!-- ==================== STAGE 6: TECHNICAL INTEGRATION CHECKLIST ==================== -->
+<!-- ID: INT-CHECK | Task 2.3: Integration checklist for Stage 6 -->
+<section id="integration-checklist" data-track="A B C">
+  <div class="info-banner">
+    <span class="mode-badge">⚙️ Stage 6</span>
+  </div>
+  <h2>📋 Раздел 5.0a: Чеклист технической интеграции</h2>
+  <p><span class="tag core">Core</span> — применяйте эти настройки на Stage 6. Полные детали: <a href="#technical">Раздел 5: Технические настройки</a>.</p>
+
+  <div class="callout tip" style="margin-bottom:1em">
+    <strong>🎯 Назначение:</strong> Это action-чеклист для быстрой настройки. Для глубокого понимания параметров используйте <a href="#sampling">Раздел 5.1</a>.
+  </div>
+
+  <!-- 12B Models -->
+  <div class="tier-checklist" data-tier="12B" style="margin:1.5em 0; padding:1em; border:2px solid #ef4444; border-radius:0.5em;">
+    <h4 style="color:#ef4444;margin-top:0">🔶 12B–14B Models</h4>
+    <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:1em;">Критически: следуйте точно. Модели 12B чувствительны к настройкам.</p>
+    <ul class="checklist" style="list-style:none;padding:0;">
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-temp"> <strong>Temperature:</strong> 0.6–0.8 (дефолт: 0.7)</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-presence"> <strong>presence_penalty:</strong> 0.0 <span style="color:#ef4444;font-weight:bold;">⚠️ ФИКСИРОВАННЫЙ — НЕ ИЗМЕНЯТЬ</span></label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-voice"> <strong>Voice:</strong> Только в Examples блок. <span style="color:#ef4444;">❌ Никакого голоса в Description</span></label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-xml"> <strong>XML в Description:</strong> ❌ Не использовать. Plain text только.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-4k"> <strong>Если ≤4K контекст:</strong> Применить <a href="#four-k-fallback">4K-Fallback Protocol</a></label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 32B+ Models -->
+  <div class="tier-checklist" data-tier="32B" style="margin:1.5em 0; padding:1em; border:2px solid #22c55e; border-radius:0.5em;">
+    <h4 style="color:#22c55e;margin-top:0">🟢 32B+ Models</h4>
+    <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:1em;">Больше гибкости, но следуйте рекомендациям для стабильности.</p>
+    <ul class="checklist" style="list-style:none;padding:0;">
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-temp"> <strong>Temperature:</strong> 0.85–1.1 (дефолт: 0.95)</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-presence"> <strong>presence_penalty:</strong> 0.0–0.15 <span style="color:#22c55e;">(рекомендуется)</span></label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-voice"> <strong>Voice:</strong> Examples OR <code>&lt;speech_style&gt;</code> в SP. Description — минимально.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-xml"> <strong>XML в Description:</strong> ✅ Приемлемо. Рекомендуется для структуры.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-cot"> <strong>CoT:</strong> T2 опционально. См. <a href="#cot">Раздел 5.4</a></label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- API Models -->
+  <div class="tier-checklist" data-tier="API" style="margin:1.5em 0; padding:1em; border:2px solid #3b82f6; border-radius:0.5em;">
+    <h4 style="color:#3b82f6;margin-top:0">🔵 API Models (Claude, GPT, etc.)</h4>
+    <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:1em;">Полная гибкость. Модели имеют встроенное рассуждение.</p>
+    <ul class="checklist" style="list-style:none;padding:0;">
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-temp"> <strong>Temperature:</strong> 0.8–1.0</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-presence"> <strong>presence_penalty:</strong> 0.0–0.15 (или эквивалент)</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-voice"> <strong>Voice:</strong> Все опции доступны. Examples предпочтительнее.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-cot"> <strong>CoT:</strong> T2-T3 опционально. Встроенное рассуждение обычно достаточно.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-xml"> <strong>Full XML support:</strong> ✅ Все XML-теги работают.</label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Common Settings -->
+  <h3 style="margin-top:2em;">📊 Общие настройки (все модели)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Параметр</th><th>Значение</th><th>Комментарий</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>top_p</strong></td><td>0.9–0.95</td><td>Основной фильтр вероятностей</td></tr>
+        <tr><td><strong>min_p</strong></td><td>0.05</td><td>Фильтр хвостов</td></tr>
+        <tr><td><strong>repetition_penalty</strong></td><td>1.05</td><td>Стартовое. Повышать только при явных повторах. <strong>Макс: 1.10</strong></td></tr>
+        <tr><td><strong>top_k</strong></td><td>40–50</td><td>Второстепенный. Оставьте по умолчанию</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Deep-dive References -->
+  <h3 style="margin-top:2em;">📚 Ссылки на глубокое изучение</h3>
+  <ul>
+    <li><a href="#sampling">Раздел 5.1</a> — Полная документация параметров генерации</li>
+    <li><a href="#an-ghost">Раздел 5.2</a> — Author's Notes и GHOST по слоям</li>
+    <li><a href="#lorebook">Раздел 5.3</a> — Lorebook интеграция</li>
+    <li><a href="#xml-tags">Раздел 5.5а</a> — XML-теги для Description</li>
+    <li><a href="#four-k-fallback">Раздел 5.12</a> — 4K-Fallback Protocol</li>
+  </ul>
+
+  <div class="callout warn" style="margin-top:1.5em;">
+    <strong>⚠️ Критическая ошибка: presence_penalty = 0.7</strong>
+    <p>Некоторые интерфейсы хардкодят presence_penalty на 0.7. Это убивает речевые тики и стабильность голоса.</p>
+    <p><strong>Правильные значения:</strong> 12B = 0.0 (обязательно), 32B+/API = 0.0–0.15</p>
+  </div>
+</section>
+
+<hr>

@@ -200,68 +200,18 @@
       </ul>
       </div>
 
+      <!-- TASK 2.2: Reactive troubleshooting moved to Debugging section -->
       <div data-requires-track="C">
-      <details class="interactive" id="acc-test-symptoms">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">📋 Таблица симптомов → причины → решения</h3> <small style="color:var(--text-muted)">— Системный подход к диагностике проблем</small></span></summary>
-        <div style="padding:0 1.2em 1.2em">
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Симптом</th><th>Вероятная причина</th><th>Решение</th><th>Детали</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Персонаж «плывёт», меняет голос</td>
-              <td>Недостаточно Examples, голос не изолирован</td>
-              <td>Добавить 2-3 примера, убрать стилистические директивы из Description</td>
-              <td><a href="#acc-debug-voice">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>OOC (выход из образа)</td>
-              <td>Слабый SP, нет антигодмодинга</td>
-              <td>Добавить ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ, усилить ПРОСТРАНСТВЕННУЮ ФИКСАЦИЮ</td>
-              <td><a href="#acc-debug-role">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Нет эмоциональной глубины</td>
-              <td>GHOST не активируется или дублируется</td>
-              <td>Проверить карту слоёв: SP ❌, LB/AN — GHOST там</td>
-              <td><a href="#acc-debug-hallucinations">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Повторы / зацикливание</td>
-              <td>RepPen слишком высок</td>
-              <td>Снизить до 1.05, проверить наличие якорей</td>
-              <td><a href="#acc-debug-repeats">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Персонаж «слишком идеальный»</td>
-              <td>FLAW не проявляется в поведении</td>
-              <td>Добавить Price к FLAW-якорям, проверить триггеры</td>
-              <td><a href="#acc-debug-perfect">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Годмодинг (контроль {{user}})</td>
-              <td>Отсутствует антигодмодинг в SP</td>
-              <td>Добавить: «Никогда не описывай действия {{user}}»</td>
-              <td><a href="#acc-debug-godmoding">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Потеря контекста в длинной сессии</td>
-              <td>AN не обновляется, нет LB-механик</td>
-              <td>Обновлять AN каждые 3-5 сообщений, добавить Range-cascade</td>
-              <td><a href="#acc-debug-context">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Физические противоречия</td>
-              <td>Нет SPATIAL LOCK</td>
-              <td>Добавить пространственную фиксацию в SP</td>
-              <td><a href="#acc-debug-physical">→ Диагностика</a></td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-      </details>
+      <div class="callout info" style="margin:1.5em 0; padding:1em; border-left:4px solid var(--accent);">
+        <strong>🔧 Если тесты не проходят:</strong>
+        <p style="margin-top:0.5em">Полное дерево диагностики симптомов и решений: <a href="#debugging">Раздел 7: Диагностика и отладка</a></p>
+        <ul style="margin-top:0.5em;font-size:0.9em;">
+          <li><a href="#acc-debug-voice">Голос «плывёт»</a> → проверь Examples и Voice Isolation</li>
+          <li><a href="#acc-debug-godmoding">Годмодинг</a> → проверь Anti-Godmodding в SP</li>
+          <li><a href="#acc-debug-perfect">Персонаж «слишком идеальный»</a> → проверь FLAW и Price</li>
+          <li><a href="#acc-debug-repeats">Повторы</a> → проверь RepPen и presence_penalty</li>
+        </ul>
+      </div>
 
       <details class="interactive" id="acc-test-protocol">
         <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔄 Протокол исправления</h3> <small style="color:var(--text-muted)">— Пошаговый процесс исправления проблем</small></span></summary>
