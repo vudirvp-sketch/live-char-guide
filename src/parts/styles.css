@@ -5176,3 +5176,250 @@ body.theme-oled .track-card.track-b {
 body.theme-oled .track-card.track-c {
   background: rgba(167, 139, 250, 0.1);
 }
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TASK 3.7: PREREQUISITE WARNING STYLES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.track-prerequisite-warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.08) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.track-prerequisite-warning::before {
+  content: '⚠️';
+  font-size: 1.2em;
+}
+
+.track-prerequisite-warning strong {
+  color: #fbbf24;
+}
+
+.track-prerequisite-warning .track-link {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  padding: 0.3em 0.7em;
+  border-radius: 4px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: all 0.15s ease;
+}
+
+.track-prerequisite-warning .track-link:hover {
+  background: rgba(251, 191, 36, 0.25);
+}
+
+.track-prerequisite-warning .dismiss-warning {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  margin-left: auto;
+  transition: all 0.15s ease;
+}
+
+.track-prerequisite-warning .dismiss-warning:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+/* Light theme prerequisite warning */
+body.theme-light .track-prerequisite-warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.05) 100%);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+body.theme-light .track-prerequisite-warning strong {
+  color: #b45309;
+}
+
+body.theme-light .track-prerequisite-warning .track-link {
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TASK 3.6: EXAMPLE QUALITY TIERS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.quality-tier {
+  margin: 1em 0;
+  padding: 1em 1.2em;
+  border-radius: 6px;
+  background: var(--bg-surface);
+}
+
+.quality-tier[data-tier="tier-1"] {
+  border-left: 4px solid #22c55e;
+}
+
+.quality-tier[data-tier="tier-2"] {
+  border-left: 4px solid #f59e0b;
+}
+
+.quality-tier[data-tier="tier-3"] {
+  border-left: 4px solid #ef4444;
+}
+
+.quality-tier h5 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 1rem;
+}
+
+.quality-tier ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.quality-tier pre {
+  font-size: 0.85rem;
+  margin: 0.5em 0;
+}
+
+/* Upgrade path styles */
+.upgrade-path {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin: 1.5em 0;
+}
+
+.upgrade-path h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.upgrade-checklist {
+  background: var(--bg-elevated);
+  border-radius: 6px;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.upgrade-checklist h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.upgrade-checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upgrade-checklist li {
+  margin: 0.5em 0;
+  padding: 0.5em;
+  background: var(--bg-surface);
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.upgrade-checklist li:hover {
+  background: var(--accent-soft);
+}
+
+.upgrade-checklist input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: var(--accent);
+}
+
+.upgrade-steps {
+  margin: 1em 0;
+}
+
+.upgrade-steps ol {
+  padding-left: 1.5em;
+}
+
+.upgrade-steps li {
+  margin: 0.75em 0;
+}
+
+.track-comparison {
+  margin: 1.5em 0;
+}
+
+.track-comparison th,
+.track-comparison td {
+  text-align: center;
+  padding: 0.6em 0.8em;
+}
+
+.track-comparison td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+.track-comparison tbody tr:nth-child(odd) {
+  background: var(--bg-surface);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TASK 3.4: INLINE CHECKPOINT STYLES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.checkpoint {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 1em 1.2em;
+  margin: 1.5em 0;
+}
+
+.checkpoint h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.checkpoint ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0;
+}
+
+.checkpoint li {
+  margin: 0.4em 0;
+  padding: 0.4em 0.6em;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.checkpoint li label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
+.checkpoint input[type="checkbox"] {
+  accent-color: var(--accent);
+  margin-top: 0.2em;
+}
+
+.checkpoint-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  border-top: 1px dashed var(--border);
+}

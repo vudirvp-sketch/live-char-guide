@@ -245,6 +245,85 @@
 </code></pre>
       </div>
 
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- TASK 3.6: Example Quality Tiers -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <section id="example-quality-tiers" data-track="A B C" style="margin:2em 0; padding:1.5em; background:var(--bg-secondary); border-radius:0.5em;">
+        <h4>📊 Уровни качества примеров (Example Quality Tiers)</h4>
+        <p>Классификация примеров по качеству и их влияние на голос персонажа.</p>
+
+        <div class="quality-tier" data-tier="tier-1" style="margin:1em 0; padding:1em; border-left:4px solid #22c55e;">
+          <h5 style="color:#22c55e;margin-top:0;">✅ Tier 1: Образцовый пример</h5>
+          <ul style="margin:0.5em 0;">
+            <li><strong>Голос:</strong> Уникальный, узнаваемый, неповторимый ритм</li>
+            <li><strong>Структура:</strong> Телесность → действие → речь (EMBODIMENT FIRST)</li>
+            <li><strong>Демонстрация:</strong> Показывает FLAW/LIE/GHOST через поведение, не называя их</li>
+            <li><strong>Длина:</strong> 80-120 токенов, одно эмоциональное состояние</li>
+            <li><strong>Формат:</strong> Идентичен Greeting и другим Examples</li>
+          </ul>
+          <div class="callout tip" style="margin-top:0.5em;font-size:0.9em;">
+            <strong>Пример:</strong>
+            <pre><code>&lt;START&gt;
+{{char}}: Пальцы замерли над клавиатурой. Она потянулась, хрустнула шеей. «Ага, щас...» — промямлила в третий раз за вечер, не отрываясь от экрана. На мониторе — документ, открытый с полудня. «Не, ладно. Чего ты хотел? Слушаю. По-настоящему.»</code></pre>
+          </div>
+        </div>
+
+        <div class="quality-tier" data-tier="tier-2" style="margin:1em 0; padding:1em; border-left:4px solid #f59e0b;">
+          <h5 style="color:#f59e0b;margin-top:0;">⚠️ Tier 2: Приемлемый пример</h5>
+          <ul style="margin:0.5em 0;">
+            <li><strong>Голос:</strong> Различимый, но без уникальных сигнатур</li>
+            <li><strong>Структура:</strong> Есть телесность, но порядок нарушен</li>
+            <li><strong>Демонстрация:</strong> Показывает поведение, но частично объясняет</li>
+            <li><strong>Длина:</strong> 60-150 токенов (слишком короткий или длинный)</li>
+            <li><strong>Формат:</strong> Незначительные отличия от Greeting</li>
+          </ul>
+          <div class="callout warn" style="margin-top:0.5em;font-size:0.9em;">
+            <strong>Пример:</strong>
+            <pre><code>&lt;START&gt;
+{{char}}: Она выглядела усталой. «Да, я слушаю.» — сказала она, продолжая печатать. Потом остановилась и повернулась. «Что нужно?»</code></pre>
+            <p style="font-size:0.85em;margin-top:0.5em;">Проблема: «выглядела усталой» — tell, не show. Нет уникального голоса.</p>
+          </div>
+        </div>
+
+        <div class="quality-tier" data-tier="tier-3" style="margin:1em 0; padding:1em; border-left:4px solid #ef4444;">
+          <h5 style="color:#ef4444;margin-top:0;">❌ Tier 3: Проблемный пример</h5>
+          <ul style="margin:0.5em 0;">
+            <li><strong>Голос:</strong> Generic, как рассказчик или NPC</li>
+            <li><strong>Структура:</strong> Начинается с речи, нет телесности</li>
+            <li><strong>Демонстрация:</strong> Объясняет состояние словами («была счастлива»)</li>
+            <li><strong>Длина:</strong> Слишком длинный (&gt;150) или перегруженный</li>
+            <li><strong>Формат:</strong> Отличается от Greeting (смешение систем разметки)</li>
+          </ul>
+          <div class="callout warn" style="margin-top:0.5em;font-size:0.9em;">
+            <strong>Пример:</strong>
+            <pre><code>&lt;START&gt;
+{{char}}: «Привет! Я так рада тебя видеть!» — она была очень счастлива. «Как дела? Я давно хотела поговорить. У меня было столько мыслей...»</code></pre>
+            <p style="font-size:0.85em;margin-top:0.5em;">Проблема: Generic голос, tell вместо show, начинается с речи.</p>
+          </div>
+        </div>
+
+        <div class="callout tip" style="margin-top:1em;">
+          <strong>💡 Целевая метрика:</strong>
+          <p>Минимум <strong>2 примера Tier 1</strong> (нейтральный + стресс). Tier 2 допустим для коротких реакций. Tier 3 — переделать.</p>
+        </div>
+
+        <div class="table-wrap" style="margin-top:1em;">
+          <table>
+            <thead>
+              <tr><th>Критерий</th><th>Tier 1 ✅</th><th>Tier 2 ⚠️</th><th>Tier 3 ❌</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Уникальность голоса</strong></td><td>Высокая</td><td>Средняя</td><td>Отсутствует</td></tr>
+              <tr><td><strong>Телесность до речи</strong></td><td>Всегда</td><td>Иногда</td><td>Нет</td></tr>
+              <tr><td><strong>Show vs Tell</strong></td><td>100% show</td><td>70% show</td><td>Рассказ</td></tr>
+              <tr><td><strong>Связь с FLAW/LIE</strong></td><td>Проявляется</td><td>Упомянуто</td><td>Отсутствует</td></tr>
+              <tr><td><strong>Длина</strong></td><td>80-120 токенов</td><td>60-150</td><td>&gt;150 или &lt;60</td></tr>
+              <tr><td><strong>Формат</strong></td><td>Идентичен Greeting</td><td>Незначительные отличия</td><td>Разный</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <h3 id="greeting">3.3 👋 Первое сообщение</h3>
       <p><span class="tag core">Core</span></p>
       <p><strong>Алгоритм (4 шага):</strong></p>
