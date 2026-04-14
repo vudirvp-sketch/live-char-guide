@@ -6,10 +6,13 @@ A comprehensive guide for creating character cards and system prompts for LLM ro
 
 Live Character Guide is an engineering pipeline for building deterministic behavioral engines for AI roleplay characters. Instead of static descriptions, it transforms character cards into trigger-action-price systems that produce consistent, observable behavior across 12B-32B+ models.
 
-## How to read
+## Quick Navigation
 
-- **Online:** https://vudirvp-sketch.github.io/live-char-guide/
-- **Offline:** Download `live-char-guide-zero-install.html` and open in any browser (no internet required)
+**Track A (15 min)** - Essentials for beginners — minimal template, basic concepts  
+**Track B (30 min)** - Full pipeline for card builders — all core elements  
+**Track C (60 min)** - All features for power users — advanced techniques
+
+[→ Open Full Guide](https://vudirvp-sketch.github.io/live-char-guide/) | [→ Download Offline Version](https://vudirvp-sketch.github.io/live-char-guide/live-char-guide-zero-install.html)
 
 ## Key Concepts
 
@@ -126,7 +129,7 @@ The project uses GitHub Pages with automatic deployment via GitHub Actions:
 
 ## Version
 
-Current version: 5.4.0 (build 2026-04-12)
+Current version: 6.0.0 (build 2026-04-15)
 
 ## License
 

@@ -1209,6 +1209,58 @@ async function initAnchors() {
   });
 }
 
+// ============================================================================
+// TASK 3.4: LEGACY ID REDIRECT HANDLER
+// ============================================================================
+/**
+ * LegacyRedirect - Handles redirects from old non-semantic IDs to new semantic IDs
+ * 
+ * Maps legacy patch-based IDs (4.1.1, 5.5a, 08b, 09a) to semantic IDs
+ */
+(function initLegacyRedirects() {
+  'use strict';
+
+  // Legacy ID to semantic ID mapping
+  const LEGACY_REDIRECTS = {
+    // Section redirects
+    '#05b_cot_tiers': '#cot-tiers',
+    '#08b_debugging': '#debugging',
+    '#09a_antipatterns': '#antipatterns',
+    '#06a_antipatterns_core': '#antipatterns-core',
+    '#06a_integration': '#integration-checklist',
+    // Add more as needed
+  };
+
+  function handleLegacyRedirect() {
+    const hash = window.location.hash;
+    if (hash && LEGACY_REDIRECTS[hash]) {
+      const newHash = LEGACY_REDIRECTS[hash];
+      console.log('[LegacyRedirect] Redirecting:', hash, '→', newHash);
+      
+      // Update URL without adding to history
+      history.replaceState(null, '', newHash);
+      
+      // Scroll to element
+      const target = document.querySelector(newHash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  // Handle on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleLegacyRedirect);
+  } else {
+    handleLegacyRedirect();
+  }
+
+  // Handle hash changes
+  window.addEventListener('hashchange', handleLegacyRedirect);
+
+  console.log('[LegacyRedirect] Initialized with', Object.keys(LEGACY_REDIRECTS).length, 'redirects');
+})();
+
 // === TABS ===
 function initTabs() {
   document.querySelectorAll('.tabs').forEach(tablist => {

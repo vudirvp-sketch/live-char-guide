@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 9e3d9191 -->
-<!-- Generated: 2026-04-14T20:55:02.387Z -->
+<!-- Build hash: dd4edfe4 -->
+<!-- Generated: 2026-04-14T21:41:54.308Z -->
 <!-- Version: 5.6.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="9e3d9191">
+<meta name="build-hash" content="dd4edfe4">
 <meta name="livechar-version" content="5.6.0">
 <meta name="livechar-build" content="2026-04-14">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -5211,6 +5211,253 @@ body.theme-oled .track-card.track-c {
   background: rgba(167, 139, 250, 0.1);
 }
 
+/* ═══════════════════════════════════════════════════════════════ */
+/* TASK 3.7: PREREQUISITE WARNING STYLES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.track-prerequisite-warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.08) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  margin: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.track-prerequisite-warning::before {
+  content: '⚠️';
+  font-size: 1.2em;
+}
+
+.track-prerequisite-warning strong {
+  color: #fbbf24;
+}
+
+.track-prerequisite-warning .track-link {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  padding: 0.3em 0.7em;
+  border-radius: 4px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: all 0.15s ease;
+}
+
+.track-prerequisite-warning .track-link:hover {
+  background: rgba(251, 191, 36, 0.25);
+}
+
+.track-prerequisite-warning .dismiss-warning {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  margin-left: auto;
+  transition: all 0.15s ease;
+}
+
+.track-prerequisite-warning .dismiss-warning:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+/* Light theme prerequisite warning */
+body.theme-light .track-prerequisite-warning {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.05) 100%);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+body.theme-light .track-prerequisite-warning strong {
+  color: #b45309;
+}
+
+body.theme-light .track-prerequisite-warning .track-link {
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TASK 3.6: EXAMPLE QUALITY TIERS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.quality-tier {
+  margin: 1em 0;
+  padding: 1em 1.2em;
+  border-radius: 6px;
+  background: var(--bg-surface);
+}
+
+.quality-tier[data-tier="tier-1"] {
+  border-left: 4px solid #22c55e;
+}
+
+.quality-tier[data-tier="tier-2"] {
+  border-left: 4px solid #f59e0b;
+}
+
+.quality-tier[data-tier="tier-3"] {
+  border-left: 4px solid #ef4444;
+}
+
+.quality-tier h5 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 1rem;
+}
+
+.quality-tier ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.quality-tier pre {
+  font-size: 0.85rem;
+  margin: 0.5em 0;
+}
+
+/* Upgrade path styles */
+.upgrade-path {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin: 1.5em 0;
+}
+
+.upgrade-path h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.upgrade-checklist {
+  background: var(--bg-elevated);
+  border-radius: 6px;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.upgrade-checklist h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.upgrade-checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upgrade-checklist li {
+  margin: 0.5em 0;
+  padding: 0.5em;
+  background: var(--bg-surface);
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.upgrade-checklist li:hover {
+  background: var(--accent-soft);
+}
+
+.upgrade-checklist input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: var(--accent);
+}
+
+.upgrade-steps {
+  margin: 1em 0;
+}
+
+.upgrade-steps ol {
+  padding-left: 1.5em;
+}
+
+.upgrade-steps li {
+  margin: 0.75em 0;
+}
+
+.track-comparison {
+  margin: 1.5em 0;
+}
+
+.track-comparison th,
+.track-comparison td {
+  text-align: center;
+  padding: 0.6em 0.8em;
+}
+
+.track-comparison td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+.track-comparison tbody tr:nth-child(odd) {
+  background: var(--bg-surface);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* TASK 3.4: INLINE CHECKPOINT STYLES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.checkpoint {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 1em 1.2em;
+  margin: 1.5em 0;
+}
+
+.checkpoint h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.checkpoint ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0;
+}
+
+.checkpoint li {
+  margin: 0.4em 0;
+  padding: 0.4em 0.6em;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.checkpoint li label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
+.checkpoint input[type="checkbox"] {
+  accent-color: var(--accent);
+  margin-top: 0.2em;
+}
+
+.checkpoint-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  border-top: 1px dashed var(--border);
+}
+
 
 </style>
 </head>
@@ -5744,10 +5991,32 @@ body.theme-oled .track-card.track-c {
 
   <!-- RULE: Anchor Format -->
   <article id="rule-anchor-format" class="canonical-rule">
-    <h3 id="r6-anchor-format-канонический-формат-якорей">§R6. Anchor Format: Канонический формат якорей</h3>
+    <h3 id="r6-anchor-format-формат-якорей-по-стадиям">§R6. Anchor Format: Формат якорей по стадиям</h3>
     <div class="rule-definition">
-      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Все якоря следуют формату A02: [Trigger] → [Action] → [Price: &lt;manifestation&gt;]</p>
-      <div class="infographic">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Формат якорей зависит от стадии разработки.</p>
+      
+      <div class="format-stage" data-stage="prototype" style="margin:1em 0; padding:1em; background:var(--bg-secondary); border-left:4px solid #f59e0b;">
+        <h4 style="margin-top:0;color:#f59e0b;">📋 Прототипный формат (Stages 1–4)</h4>
+        <code style="font-size:1.1em;">[Trigger] → [Action] → [Price: TBD]</code>
+        <p style="margin-top:0.5em;font-size:0.9em;">Позволяет быструю итерацию. Цена помечается как TBD, не опускается.</p>
+      </div>
+      
+      <div class="format-stage" data-stage="production" style="margin:1em 0; padding:1em; background:var(--bg-secondary); border-left:4px solid #22c55e;">
+        <h4 style="margin-top:0;color:#22c55e;">✅ Канонический формат (Stages 5–7)</h4>
+        <code style="font-size:1.1em;">[Trigger] → [Action] → [Price: &lt;immediate manifestation&gt;]</code>
+        <p style="margin-top:0.5em;font-size:0.9em;">Обязательно для production. Все TBD должны быть разрешены.</p>
+      </div>
+      
+      <div class="upgrade-checklist" style="margin:1em 0; padding:1em; border:1px solid var(--border); border-radius:0.5em;">
+        <h4 style="margin-top:0;">📋 Чеклист перехода на Stage 5</h4>
+        <ul class="checklist" style="list-style:none;padding:0;">
+          <li><label><input type="checkbox" data-key="chk-upg-price"> Все якоря имеют определённый Price</label></li>
+          <li><label><input type="checkbox" data-key="chk-upg-tbd"> Нет оставшихся `[Price: TBD]`</label></li>
+          <li><label><input type="checkbox" data-key="chk-upg-immediate"> Каждый Price немедленный и наблюдаемый</label></li>
+        </ul>
+      </div>
+      
+      <div class="infographic" style="margin-top:1em;">
         <div class="infographic-title">ПРОТОКОЛ ЯКОРЕЙ — ФОРМАТ A02</div>
         <div class="inf-pipeline">
           <div class="inf-pipeline-step">
@@ -5774,6 +6043,160 @@ body.theme-oled .track-card.track-c {
   <div class="callout tip" style="margin-top:2em">
     <strong>💡 Назначение реестра:</strong>
     <p>Этот раздел содержит авторитетные определения всех правил гайда. При возникновении противоречий между разделами, приоритет имеет данное определение.</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ==================== TRACK UPGRADE PATHS ==================== -->
+<!-- ID: TUP | Task 3.5: Track upgrade paths documentation -->
+<section id="track-upgrade-paths" data-track="A B C">
+  <div class="info-banner">
+    <span class="mode-badge">🔄 Upgrade Paths</span>
+  </div>
+  <h2 id="раздел-0-3-пути-перехода-между-track">📌 Раздел 0.3: Пути перехода между Track</h2>
+  <p><span class="tag core">Core</span> — инструкции по расширению карточки при переходе на более высокий Track.</p>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TRACK A → TRACK B -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <article id="track-a-to-b" class="upgrade-path" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em;">
+    <h3 id="track-a-track-b-расширение-прототипа">🚀 Track A → Track B: Расширение прототипа</h3>
+    <p class="intro"><strong>Когда переходить:</strong> когда прототип работает стабильно, и вы готовы добавить глубину.</p>
+    
+    <div class="upgrade-checklist" style="margin:1em 0;">
+      <h4>📋 Чеклист перехода</h4>
+      <ul class="checklist" style="list-style:none;padding:0;">
+        <li><label><input type="checkbox" data-key="chk-upg-a1"> Прототип протестирован: голос стабилен, якоря срабатывают</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-a2"> Все TBD в якорях заменены на конкретные Price</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-a3"> Spine расширен: WANT/NEED/FLAW/LIE связаны в логическую цепочку</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-a4"> Добавлен Enneagram-тип с направлением стресс/рост</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-a5"> Примеры дополнены: нейтральный + стресс + доверие</label></li>
+      </ul>
+    </div>
+    
+    <div class="upgrade-steps" style="margin:1em 0;">
+      <h4>🔧 Шаги перехода</h4>
+      <ol>
+        <li><strong>Добавьте Price</strong> к каждому якорю — см. <a href="#rule-price">§R1. Price</a></li>
+        <li><strong>Расширьте Spine</strong> — добавьте GHOST и LIE, если их не было — см. <a href="#spine">Раздел 4.1</a></li>
+        <li><strong>Определите Enneagram</strong> — тип + крыло + стресс → рост — см. <a href="#enneagram">Раздел 4.2</a></li>
+        <li><strong>Дополните Examples</strong> — минимум 3 примера (нейтральный, стресс, доверие) — см. <a href="#examples">Раздел 3.2</a></li>
+        <li><strong>Настройте параметры</strong> — T=0.85-1.1, presence_penalty=0.0-0.15 — см. <a href="#sampling">Раздел 5.1</a></li>
+      </ol>
+    </div>
+
+    <div class="callout tip" style="margin-top:1em">
+      <strong>💡 Ожидаемый результат:</strong>
+      <p>Карточка ~800-1200 токенов с глубокой психологией и наблюдаемыми реакциями.</p>
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TRACK B → TRACK C -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <article id="track-b-to-c" class="upgrade-path" data-requires-track="B C" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em;">
+    <h3 id="track-b-track-c-продвинутые-техники">🎯 Track B → Track C: Продвинутые техники</h3>
+    <p class="intro"><strong>Когда переходить:</strong> когда карточка готова к деплою, и вы хотите добавить сложные механики.</p>
+    
+    <div class="upgrade-checklist" style="margin:1em 0;">
+      <h4>📋 Чеклист перехода</h4>
+      <ul class="checklist" style="list-style:none;padding:0;">
+        <li><label><input type="checkbox" data-key="chk-upg-b1"> Track B карточка протестирована по всем 6 тестам</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-b2"> Контекстное окно ≥8K (для продвинутых техник)</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-b3"> GHOST распределён по слоям: Description + LB/AN триггеры</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-b4"> OCEAN проверен на соответствие Enneagram</label></li>
+        <li><label><input type="checkbox" data-key="chk-upg-b5"> Добавлены CoT tiers для внутреннего монолога (опционально)</label></li>
+      </ul>
+    </div>
+    
+    <div class="upgrade-steps" style="margin:1em 0;">
+      <h4>🔧 Шаги перехода</h4>
+      <ol>
+        <li><strong>Распределите GHOST по слоям</strong> — Description (определение) + LB (триггеры) + AN (состояние) — см. <a href="#rule-ghost-placement">§R3. GHOST Placement</a></li>
+        <li><strong>Добавьте Lorebook</strong> — сенсорные ключи, сюжетные точки — см. <a href="#lorebook">Раздел 5.3</a></li>
+        <li><strong>Настройте Author's Notes</strong> — динамическое состояние [GHOST-активация] — см. <a href="#an-ghost">Раздел 5.2</a></li>
+        <li><strong>Добавьте CoT</strong> — T2 или T3 для внутреннего монолога — см. <a href="#cot-tiers">Раздел 5.5</a></li>
+        <li><strong>Интегрируйте MBTI</strong> — кросс-референс с Enneagram — см. <a href="#mbti-section">Раздел 4.4</a></li>
+      </ol>
+    </div>
+
+    <div class="callout tip" style="margin-top:1em">
+      <strong>💡 Ожидаемый результат:</strong>
+      <p>Карточка ~1500-2500 токенов с полной психологической моделью, динамическим состоянием и сложными триггерами.</p>
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- TRACK SUMMARY TABLE -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div class="table-wrap" style="margin:2em 0;">
+    <table class="track-comparison">
+      <thead>
+        <tr><th>Элемент</th><th>Track A</th><th>Track B</th><th>Track C</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Token-бюджет</strong></td>
+          <td>~450-800</td>
+          <td>~800-1500</td>
+          <td>~1500-2500+</td>
+        </tr>
+        <tr>
+          <td><strong>Spine</strong></td>
+          <td>WANT/NEED</td>
+          <td>+ FLAW/LIE/GHOST</td>
+          <td>+ распределение по слоям</td>
+        </tr>
+        <tr>
+          <td><strong>Якоря</strong></td>
+          <td>3-5, без Price</td>
+          <td>5-7, с Price</td>
+          <td>7+, с Price + LB триггеры</td>
+        </tr>
+        <tr>
+          <td><strong>Enneagram</strong></td>
+          <td>—</td>
+          <td>Тип + крыло</td>
+          <td>+ стресс/рост, wing variants</td>
+        </tr>
+        <tr>
+          <td><strong>OCEAN</strong></td>
+          <td>—</td>
+          <td>1-2 полюса</td>
+          <td>2-4 полюса, с контекст-скейлингом</td>
+        </tr>
+        <tr>
+          <td><strong>Lorebook</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>GHOST триггеры</td>
+        </tr>
+        <tr>
+          <td><strong>Author's Notes</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Динамическое состояние</td>
+        </tr>
+        <tr>
+          <td><strong>CoT Tiers</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>T2-T3 для внутреннего монолога</td>
+        </tr>
+        <tr>
+          <td><strong>Тесты</strong></td>
+          <td>1-3 (обязательно)</td>
+          <td>1-4 + 5-6 (опционально)</td>
+          <td>Все 6 (обязательно)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn" style="margin-top:1em">
+    <strong>⚠️ Важно:</strong>
+    <p>Переход на более высокий Track не означает, что предыдущий был «неправильным». Каждый Track — это осознанный выбор уровня сложности. Оставайтесь на Track A, если персонаж работает как нужно.</p>
   </div>
 </section>
 
@@ -6215,6 +6638,39 @@ body.theme-oled .track-card.track-c {
     <section id="intro">
       <h2 id="как-пользоваться-гайдом">Как пользоваться гайдом</h2>
 
+      <!-- TASK 2.1: Mini-Glossary for Quick Start -->
+      <details class="mini-glossary" style="margin-bottom:1.5em; padding:1em; background:var(--bg-secondary); border-radius:0.5em;">
+        <summary style="cursor:pointer; font-weight:600;"><strong>📖 Ключевые термины (нажмите для раскрытия)</strong></summary>
+        <dl style="margin-top:1em;">
+          <dt><strong>Price (Цена)</strong></dt>
+          <dd>Наблюдаемая реакция, которая показывает, что якорь сработал. <a href="#rule-price">→ Полное определение</a></dd>
+          
+          <dt><strong>Anchor (Якорь)</strong></dt>
+          <dd>Правило поведения: Триггер → Действие → Цена. <a href="#anchors">→ Раздел 3.1</a></dd>
+          
+          <dt><strong>Voice (Голос)</strong></dt>
+          <dd>Уникальный стиль речи персонажа. Задаётся в Examples. <a href="#rule-voice-isolation">→ Изоляция голоса</a></dd>
+          
+          <dt><strong>FLAW (Изъян)</strong></dt>
+          <dd>Конкретное поведение, мешающее персонажу получить NEED. <a href="#spine">→ Раздел 4.1</a></dd>
+          
+          <dt><strong>GHOST (Тень)</strong></dt>
+          <dd>Событие из прошлого, формирующее FLAW и LIE. <a href="#rule-ghost-placement">→ Размещение GHOST</a></dd>
+        </dl>
+        <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">Полный глоссарий: <a href="#glossary">Раздел 0.2</a></p>
+      </details>
+
+      <!-- TASK 2.1: Collapsed Core Principles Quick Reference -->
+      <details class="core-principles-quick" style="margin-bottom:1.5em; padding:1em; border:1px solid var(--border); border-radius:0.5em;">
+        <summary style="cursor:pointer; font-weight:600;"><strong>📋 3 ключевых правила (нажмите для раскрытия)</strong></summary>
+        <ol style="margin-top:1em;">
+          <li><strong><a href="#rule-price">Price Rule</a></strong> — Каждый якорь требует наблюдаемой манифестации</li>
+          <li><strong><a href="#rule-voice-isolation">Voice Isolation</a></strong> — Голос изолирован от инструкций, задаётся в Examples</li>
+          <li><strong><a href="#rule-anti-godmodding">Anti-Godmodding</a></strong> — Никогда не описывать действия {{user}}</li>
+        </ol>
+        <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">Полные принципы: <a href="#core-principles">Раздел 0</a></p>
+      </details>
+
       <h3 id="выберите-ваш-track">🎯 Выберите ваш Track</h3>
       <div class="track-selector-intro">
         <div class="track-card track-a">
@@ -6360,19 +6816,45 @@ body.theme-oled .track-card.track-c {
       <pre><code>ХОЧЕТ: брать все задачи на себя, чтобы не просить помощи → НУЖНО: делегировать или озвучить просьбу хотя бы раз в сцене</code></pre>
       <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#spine">Раздел 4.1</a></p>
 
-      <!-- GHOST Content - Track B+ (duplicate removed per TASK 1.3) -->
+      <!-- TASK 1.4: GHOST Basics - Visible to all tracks -->
+      <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
+      <p><span class="tag core">Core</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE персонажа.</p>
+
+      <!-- Basic GHOST application - visible to all tracks -->
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>📋 Базовое применение GHOST:</strong>
+        <ol style="margin-top:0.5em">
+          <li>Определи GHOST как <strong>конкретное событие</strong>, а не психологический вывод</li>
+          <li>Размести GHOST в Description (блок <code>&lt;motivation&gt;</code>)</li>
+          <li>Свяжи GHOST → FLAW → LIE в логическую цепочку</li>
+        </ol>
+      </div>
+
+      <div class="callout warn" style="margin-bottom:1em">
+        <strong>⚠️ Правило:</strong> GHOST = что случилось, а не психологический вывод. Избегай слов «травма», «пережил» — покажи через конкретное событие.
+      </div>
+
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>💡 Пример:</strong>
+        <p><strong>GHOST:</strong> В 12 лет отец ушёл, когда персонаж «не смог удержать семью». С тех пор — вера, что контроль = безопасность.</p>
+        <p style="margin-top:0.5em;font-size:0.85em;">→ Это событие объясняет FLAW (перехватывает контроль) и LIE («если не контролирую — всё развалится»).</p>
+      </div>
+
+      <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>. Размещение по слоям: <a href="#rule-ghost-placement">Правило GHOST Placement</a>.</p>
+
+      <!-- Advanced GHOST content - Track B+ only -->
       <div data-requires-track="B C">
-        <h4>👻 GHOST: Формирующее событие (50–100 токенов)</h4>
-        <p><span class="tag advanced">Advanced</span> Конкретное событие из прошлого, которое сформировало FLAW и LIE. Не дублируется в System Prompt — помещается в LB с триггерами.</p>
-        <div class="callout warn">
-          <strong>⚠️ Правило:</strong> GHOST = что случилось, а не психологический вывод. Избегай слов «травма», «пережил» — покажи через конкретное событие.
+        <div class="callout info" style="margin-top:1em">
+          <strong>🔧 Продвинутое размещение GHOST (Track B/C):</strong>
+          <p style="margin-top:0.5em">При контексте ≥8K можно использовать Lorebook для триггеров GHOST и Author's Notes для динамического состояния.</p>
+          <ul style="margin-top:0.5em;font-size:0.9em">
+            <li><strong>Description</strong> — определение GHOST (что случилось)</li>
+            <li><strong>Examples</strong> — демонстрация проявлений GHOST</li>
+            <li><strong>Lorebook</strong> — сенсорные ключи для активации</li>
+            <li><strong>Author's Notes</strong> — динамическое состояние [GHOST-активация]</li>
+          </ul>
+          <p style="margin-top:0.5em;font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#an-ghost">Раздел 5.2</a>.</p>
         </div>
-        <div class="callout tip">
-          <strong>💡 Пример:</strong>
-          <p><strong>GHOST:</strong> В 12 лет отец ушёл, когда персонаж «не смог удержать семью». С тех пор — вера, что контроль = безопасность.</p>
-          <p style="margin-top:0.5em;font-size:0.85em;">→ Это событие объясняет FLAW (перехватывает контроль) и LIE («если не контролирую — всё развалится»).</p>
-        </div>
-        <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>.</p>
       </div>
 
       <h4>Шаг 5. 🚫 Антигодмодинг в System Prompt (25–30 токенов)</h4>
@@ -6650,10 +7132,10 @@ body.theme-oled .track-card.track-c {
       <p><span class="tag core">Core</span></p>
       <p><strong>КАНОНИЧЕСКИЙ ФОРМАТ:</strong></p>
       <pre><code>[Trigger] → [Action] → [Price: &lt;immediate physical/verbal manifestation&gt;] (рус: [Внешний стимул → Наблюдаемая реакция → Мгновенное физическое или речевое последствие в текущей сцене])</code></pre>
-      <p><strong>Цена</strong> — обязательный элемент для критичных якорей, рекомендуемый для остальных. Это связывает поведение с последствиями и придаёт действиям сюжетный вес. Цена может быть физиологической (усталость, боль, напряжение) или психологической (вина, стыд, сожаление). <em>См. каноническое определение: <a href="#price-definition">§2. Price</a></em></p>
+      <p><strong>Цена</strong> — обязательный элемент для критичных якорей, рекомендуемый для остальных. Это связывает поведение с последствиями и придаёт действиям сюжетный вес. Цена может быть физиологической (усталость, боль, напряжение) или психологической (вина, стыд, сожаление). <em>Каноническое определение: <a href="#rule-price">Price Rule</a> в <a href="#rules-registry">Реестре правил</a></em></p>
       <div class="callout warn" style="margin:1em 0">
         <strong>⚠️ ПРАВИЛО: Цена должна разрешаться в той же сцене.</strong>
-        <p>Price — это немедленная физическая или вербальная манифестация, а не отложенное последствие. Будущие состояния ("позже будет жалеть", "навсегда запомнит") — НЕ валидный Price.</p>
+        <p>Price — это немедленная физическая или вербальная манифестация, а не отложенное последствие. Будущие состояния ("позже будет жалеть", "навсегда запомнит") — НЕ валидный Price. <em>Подробнее: <a href="#rule-price">Price Rule</a></em></p>
       </div>
 
       <div class="infographic">
@@ -6778,8 +7260,8 @@ body.theme-oled .track-card.track-c {
         <li>Обязательно оборачивать тегом <code>&lt;START&gt;</code> (стандартный формат). Другие фронтенды используют свои разделители</li>
         <li>Стиль должен <strong>точно совпадать</strong> с System Prompt (лицо, время, регистр)</li>
         <li>Не объясняй голос — <strong>покажи</strong> его</li>
-        <li data-model="12B"><strong>Принцип изоляции голоса (для 12B):</strong> Тембр, ритм, синтаксис и лексика задаются <strong>только</strong> в Примерные сообщения. Description содержит только логику поведения. Стилистические директивы в Description = ошибка сборки.</li>
-        <li data-model="32B"><strong>Гибридный подход (для 32B+/API):</strong> Допустимо частичное задание голоса через XML-теги в Description (<code>&lt;speech_style&gt;</code>). Examples всё равно приоритетны.</li>
+        <li data-model="12B"><strong>Принцип изоляции голоса (для 12B):</strong> Тембр, ритм, синтаксис и лексика задаются <strong>только</strong> в Примерные сообщения. Description содержит только логику поведения. Стилистические директивы в Description = ошибка сборки. <em>Каноническое правило: <a href="#rule-voice-isolation">Voice Isolation Rule</a></em></li>
+        <li data-model="32B"><strong>Гибридный подход (для 32B+/API):</strong> Допустимо частичное задание голоса через XML-теги в Description (<code>&lt;speech_style&gt;</code>). Examples всё равно приоритетны. <em>См. также: <a href="#rule-voice-description-conditional">Voice in Description (Conditional)</a></em></li>
         <li>⚠️ <strong>Источник формата (демонстрация):</strong> Разметка прямой речи и описательной части должна быть идентичной во всех блоках <code>&lt;START&gt;</code> и в Greeting. Это единственный надёжный способ зафиксировать формат вывода. Выбери систему (A/B/C — см. 5.0.3) и применяй единообразно.</li>
         <li>⚠️ <strong>ЗАРАЖЕНИЕ ГОЛОСА:</strong> Внешние блоки <code>&lt;START&gt;</code> из других карточек привносят чужой ритм, каденцию и систему разметки. Копируй только структуру/логику — переписывай текст с нуля под целевой голос. Вставка сырых внешних примеров = источник фрагментации голоса на 12B.</li>
       </ul>
@@ -6889,6 +7371,85 @@ body.theme-oled .track-card.track-c {
 {{char}}: Пожала плечами. «Не знаю.» — и отвернулась.
 </code></pre>
       </div>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- TASK 3.6: Example Quality Tiers -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <section id="example-quality-tiers" data-track="A B C" style="margin:2em 0; padding:1.5em; background:var(--bg-secondary); border-radius:0.5em;">
+        <h4>📊 Уровни качества примеров (Example Quality Tiers)</h4>
+        <p>Классификация примеров по качеству и их влияние на голос персонажа.</p>
+
+        <div class="quality-tier" data-tier="tier-1" style="margin:1em 0; padding:1em; border-left:4px solid #22c55e;">
+          <h5 style="color:#22c55e;margin-top:0;">✅ Tier 1: Образцовый пример</h5>
+          <ul style="margin:0.5em 0;">
+            <li><strong>Голос:</strong> Уникальный, узнаваемый, неповторимый ритм</li>
+            <li><strong>Структура:</strong> Телесность → действие → речь (EMBODIMENT FIRST)</li>
+            <li><strong>Демонстрация:</strong> Показывает FLAW/LIE/GHOST через поведение, не называя их</li>
+            <li><strong>Длина:</strong> 80-120 токенов, одно эмоциональное состояние</li>
+            <li><strong>Формат:</strong> Идентичен Greeting и другим Examples</li>
+          </ul>
+          <div class="callout tip" style="margin-top:0.5em;font-size:0.9em;">
+            <strong>Пример:</strong>
+            <pre><code>&lt;START&gt;
+{{char}}: Пальцы замерли над клавиатурой. Она потянулась, хрустнула шеей. «Ага, щас...» — промямлила в третий раз за вечер, не отрываясь от экрана. На мониторе — документ, открытый с полудня. «Не, ладно. Чего ты хотел? Слушаю. По-настоящему.»</code></pre>
+          </div>
+        </div>
+
+        <div class="quality-tier" data-tier="tier-2" style="margin:1em 0; padding:1em; border-left:4px solid #f59e0b;">
+          <h5 style="color:#f59e0b;margin-top:0;">⚠️ Tier 2: Приемлемый пример</h5>
+          <ul style="margin:0.5em 0;">
+            <li><strong>Голос:</strong> Различимый, но без уникальных сигнатур</li>
+            <li><strong>Структура:</strong> Есть телесность, но порядок нарушен</li>
+            <li><strong>Демонстрация:</strong> Показывает поведение, но частично объясняет</li>
+            <li><strong>Длина:</strong> 60-150 токенов (слишком короткий или длинный)</li>
+            <li><strong>Формат:</strong> Незначительные отличия от Greeting</li>
+          </ul>
+          <div class="callout warn" style="margin-top:0.5em;font-size:0.9em;">
+            <strong>Пример:</strong>
+            <pre><code>&lt;START&gt;
+{{char}}: Она выглядела усталой. «Да, я слушаю.» — сказала она, продолжая печатать. Потом остановилась и повернулась. «Что нужно?»</code></pre>
+            <p style="font-size:0.85em;margin-top:0.5em;">Проблема: «выглядела усталой» — tell, не show. Нет уникального голоса.</p>
+          </div>
+        </div>
+
+        <div class="quality-tier" data-tier="tier-3" style="margin:1em 0; padding:1em; border-left:4px solid #ef4444;">
+          <h5 style="color:#ef4444;margin-top:0;">❌ Tier 3: Проблемный пример</h5>
+          <ul style="margin:0.5em 0;">
+            <li><strong>Голос:</strong> Generic, как рассказчик или NPC</li>
+            <li><strong>Структура:</strong> Начинается с речи, нет телесности</li>
+            <li><strong>Демонстрация:</strong> Объясняет состояние словами («была счастлива»)</li>
+            <li><strong>Длина:</strong> Слишком длинный (&gt;150) или перегруженный</li>
+            <li><strong>Формат:</strong> Отличается от Greeting (смешение систем разметки)</li>
+          </ul>
+          <div class="callout warn" style="margin-top:0.5em;font-size:0.9em;">
+            <strong>Пример:</strong>
+            <pre><code>&lt;START&gt;
+{{char}}: «Привет! Я так рада тебя видеть!» — она была очень счастлива. «Как дела? Я давно хотела поговорить. У меня было столько мыслей...»</code></pre>
+            <p style="font-size:0.85em;margin-top:0.5em;">Проблема: Generic голос, tell вместо show, начинается с речи.</p>
+          </div>
+        </div>
+
+        <div class="callout tip" style="margin-top:1em;">
+          <strong>💡 Целевая метрика:</strong>
+          <p>Минимум <strong>2 примера Tier 1</strong> (нейтральный + стресс). Tier 2 допустим для коротких реакций. Tier 3 — переделать.</p>
+        </div>
+
+        <div class="table-wrap" style="margin-top:1em;">
+          <table>
+            <thead>
+              <tr><th>Критерий</th><th>Tier 1 ✅</th><th>Tier 2 ⚠️</th><th>Tier 3 ❌</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Уникальность голоса</strong></td><td>Высокая</td><td>Средняя</td><td>Отсутствует</td></tr>
+              <tr><td><strong>Телесность до речи</strong></td><td>Всегда</td><td>Иногда</td><td>Нет</td></tr>
+              <tr><td><strong>Show vs Tell</strong></td><td>100% show</td><td>70% show</td><td>Рассказ</td></tr>
+              <tr><td><strong>Связь с FLAW/LIE</strong></td><td>Проявляется</td><td>Упомянуто</td><td>Отсутствует</td></tr>
+              <tr><td><strong>Длина</strong></td><td>80-120 токенов</td><td>60-150</td><td>&gt;150 или &lt;60</td></tr>
+              <tr><td><strong>Формат</strong></td><td>Идентичен Greeting</td><td>Незначительные отличия</td><td>Разный</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <h3 id="greeting">3.3 👋 Первое сообщение</h3>
       <p><span class="tag core">Core</span></p>
@@ -9468,6 +10029,123 @@ Total: 0.845 × 100 = 84.5%</code></pre>
 
     <!-- ==================== РАЗДЕЛ 6: ДИАГНОСТИКА ==================== -->
 
+<!-- ==================== STAGE 6: TECHNICAL INTEGRATION CHECKLIST ==================== -->
+<!-- ID: INT-CHECK | Task 2.3: Integration checklist for Stage 6 -->
+<section id="integration-checklist" data-track="A B C">
+  <div class="info-banner">
+    <span class="mode-badge">⚙️ Stage 6</span>
+  </div>
+  <h2 id="раздел-5-0a-чеклист-технической-интеграции">📋 Раздел 5.0a: Чеклист технической интеграции</h2>
+  <p><span class="tag core">Core</span> — применяйте эти настройки на Stage 6. Полные детали: <a href="#technical">Раздел 5: Технические настройки</a>.</p>
+
+  <div class="callout tip" style="margin-bottom:1em">
+    <strong>🎯 Назначение:</strong> Это action-чеклист для быстрой настройки. Для глубокого понимания параметров используйте <a href="#sampling">Раздел 5.1</a>.
+  </div>
+
+  <!-- 12B Models -->
+  <div class="tier-checklist" data-tier="12B" style="margin:1.5em 0; padding:1em; border:2px solid #ef4444; border-radius:0.5em;">
+    <h4 style="color:#ef4444;margin-top:0">🔶 12B–14B Models</h4>
+    <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:1em;">Критически: следуйте точно. Модели 12B чувствительны к настройкам.</p>
+    <ul class="checklist" style="list-style:none;padding:0;">
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-temp"> <strong>Temperature:</strong> 0.6–0.8 (дефолт: 0.7)</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-presence"> <strong>presence_penalty:</strong> 0.0 <span style="color:#ef4444;font-weight:bold;">⚠️ ФИКСИРОВАННЫЙ — НЕ ИЗМЕНЯТЬ</span></label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-voice"> <strong>Voice:</strong> Только в Examples блок. <span style="color:#ef4444;">❌ Никакого голоса в Description</span></label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-xml"> <strong>XML в Description:</strong> ❌ Не использовать. Plain text только.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-12b-4k"> <strong>Если ≤4K контекст:</strong> Применить <a href="#four-k-fallback">4K-Fallback Protocol</a></label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 32B+ Models -->
+  <div class="tier-checklist" data-tier="32B" style="margin:1.5em 0; padding:1em; border:2px solid #22c55e; border-radius:0.5em;">
+    <h4 style="color:#22c55e;margin-top:0">🟢 32B+ Models</h4>
+    <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:1em;">Больше гибкости, но следуйте рекомендациям для стабильности.</p>
+    <ul class="checklist" style="list-style:none;padding:0;">
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-temp"> <strong>Temperature:</strong> 0.85–1.1 (дефолт: 0.95)</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-presence"> <strong>presence_penalty:</strong> 0.0–0.15 <span style="color:#22c55e;">(рекомендуется)</span></label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-voice"> <strong>Voice:</strong> Examples OR <code>&lt;speech_style&gt;</code> в SP. Description — минимально.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-xml"> <strong>XML в Description:</strong> ✅ Приемлемо. Рекомендуется для структуры.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-32b-cot"> <strong>CoT:</strong> T2 опционально. См. <a href="#cot">Раздел 5.4</a></label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- API Models -->
+  <div class="tier-checklist" data-tier="API" style="margin:1.5em 0; padding:1em; border:2px solid #3b82f6; border-radius:0.5em;">
+    <h4 style="color:#3b82f6;margin-top:0">🔵 API Models (Claude, GPT, etc.)</h4>
+    <p style="font-size:0.9em;color:var(--text-muted);margin-bottom:1em;">Полная гибкость. Модели имеют встроенное рассуждение.</p>
+    <ul class="checklist" style="list-style:none;padding:0;">
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-temp"> <strong>Temperature:</strong> 0.8–1.0</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-presence"> <strong>presence_penalty:</strong> 0.0–0.15 (или эквивалент)</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-voice"> <strong>Voice:</strong> Все опции доступны. Examples предпочтительнее.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-cot"> <strong>CoT:</strong> T2-T3 опционально. Встроенное рассуждение обычно достаточно.</label>
+      </li>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+        <label><input type="checkbox" data-key="chk-int-api-xml"> <strong>Full XML support:</strong> ✅ Все XML-теги работают.</label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Common Settings -->
+  <h3 id="общие-настройки-все-модели" style="margin-top:2em;">📊 Общие настройки (все модели)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Параметр</th><th>Значение</th><th>Комментарий</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>top_p</strong></td><td>0.9–0.95</td><td>Основной фильтр вероятностей</td></tr>
+        <tr><td><strong>min_p</strong></td><td>0.05</td><td>Фильтр хвостов</td></tr>
+        <tr><td><strong>repetition_penalty</strong></td><td>1.05</td><td>Стартовое. Повышать только при явных повторах. <strong>Макс: 1.10</strong></td></tr>
+        <tr><td><strong>top_k</strong></td><td>40–50</td><td>Второстепенный. Оставьте по умолчанию</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Deep-dive References -->
+  <h3 id="ссылки-на-глубокое-изучение" style="margin-top:2em;">📚 Ссылки на глубокое изучение</h3>
+  <ul>
+    <li><a href="#sampling">Раздел 5.1</a> — Полная документация параметров генерации</li>
+    <li><a href="#an-ghost">Раздел 5.2</a> — Author's Notes и GHOST по слоям</li>
+    <li><a href="#lorebook">Раздел 5.3</a> — Lorebook интеграция</li>
+    <li><a href="#xml-tags">Раздел 5.5а</a> — XML-теги для Description</li>
+    <li><a href="#four-k-fallback">Раздел 5.12</a> — 4K-Fallback Protocol</li>
+  </ul>
+
+  <div class="callout warn" style="margin-top:1.5em;">
+    <strong>⚠️ Критическая ошибка: presence_penalty = 0.7</strong>
+    <p>Некоторые интерфейсы хардкодят presence_penalty на 0.7. Это убивает речевые тики и стабильность голоса.</p>
+    <p><strong>Правильные значения:</strong> 12B = 0.0 (обязательно), 32B+/API = 0.0–0.15</p>
+  </div>
+</section>
+
+<hr>
+
 <!-- ==================== CORE ANTI-PATTERNS (All Tracks) ==================== -->
 <!-- ID: AP-CORE | Critical anti-patterns visible to all tracks -->
 <section id="antipatterns-core">
@@ -10111,68 +10789,18 @@ content: [GHOST-триггер]</code></pre>
       </ul>
       </div>
 
+      <!-- TASK 2.2: Reactive troubleshooting moved to Debugging section -->
       <div data-requires-track="C">
-      <details class="interactive" id="acc-test-symptoms">
-        <summary><span><h3 id="таблица-симптомов-причины-решения" style="margin:0;font-size:inherit;display:inline">📋 Таблица симптомов → причины → решения</h3> <small style="color:var(--text-muted)">— Системный подход к диагностике проблем</small></span></summary>
-        <div style="padding:0 1.2em 1.2em">
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Симптом</th><th>Вероятная причина</th><th>Решение</th><th>Детали</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Персонаж «плывёт», меняет голос</td>
-              <td>Недостаточно Examples, голос не изолирован</td>
-              <td>Добавить 2-3 примера, убрать стилистические директивы из Description</td>
-              <td><a href="#acc-debug-voice">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>OOC (выход из образа)</td>
-              <td>Слабый SP, нет антигодмодинга</td>
-              <td>Добавить ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ, усилить ПРОСТРАНСТВЕННУЮ ФИКСАЦИЮ</td>
-              <td><a href="#acc-debug-role">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Нет эмоциональной глубины</td>
-              <td>GHOST не активируется или дублируется</td>
-              <td>Проверить карту слоёв: SP ❌, LB/AN — GHOST там</td>
-              <td><a href="#acc-debug-hallucinations">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Повторы / зацикливание</td>
-              <td>RepPen слишком высок</td>
-              <td>Снизить до 1.05, проверить наличие якорей</td>
-              <td><a href="#acc-debug-repeats">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Персонаж «слишком идеальный»</td>
-              <td>FLAW не проявляется в поведении</td>
-              <td>Добавить Price к FLAW-якорям, проверить триггеры</td>
-              <td><a href="#acc-debug-perfect">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Годмодинг (контроль {{user}})</td>
-              <td>Отсутствует антигодмодинг в SP</td>
-              <td>Добавить: «Никогда не описывай действия {{user}}»</td>
-              <td><a href="#acc-debug-godmoding">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Потеря контекста в длинной сессии</td>
-              <td>AN не обновляется, нет LB-механик</td>
-              <td>Обновлять AN каждые 3-5 сообщений, добавить Range-cascade</td>
-              <td><a href="#acc-debug-context">→ Диагностика</a></td>
-            </tr>
-            <tr>
-              <td>Физические противоречия</td>
-              <td>Нет SPATIAL LOCK</td>
-              <td>Добавить пространственную фиксацию в SP</td>
-              <td><a href="#acc-debug-physical">→ Диагностика</a></td>
-            </tr>
-          </tbody>
-        </table>
-        </div>
-      </details>
+      <div class="callout info" style="margin:1.5em 0; padding:1em; border-left:4px solid var(--accent);">
+        <strong>🔧 Если тесты не проходят:</strong>
+        <p style="margin-top:0.5em">Полное дерево диагностики симптомов и решений: <a href="#debugging">Раздел 7: Диагностика и отладка</a></p>
+        <ul style="margin-top:0.5em;font-size:0.9em;">
+          <li><a href="#acc-debug-voice">Голос «плывёт»</a> → проверь Examples и Voice Isolation</li>
+          <li><a href="#acc-debug-godmoding">Годмодинг</a> → проверь Anti-Godmodding в SP</li>
+          <li><a href="#acc-debug-perfect">Персонаж «слишком идеальный»</a> → проверь FLAW и Price</li>
+          <li><a href="#acc-debug-repeats">Повторы</a> → проверь RepPen и presence_penalty</li>
+        </ul>
+      </div>
 
       <details class="interactive" id="acc-test-protocol">
         <summary><span><h3 id="протокол-исправления" style="margin:0;font-size:inherit;display:inline">🔄 Протокол исправления</h3> <small style="color:var(--text-muted)">— Пошаговый процесс исправления проблем</small></span></summary>
