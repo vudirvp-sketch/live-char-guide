@@ -82,6 +82,43 @@ function addDeferToScripts(html) {
 }
 
 // ============================================================================
+// TASK 1.2: ENSURE HEADER IDs FOR ANCHORS
+// ============================================================================
+
+/**
+ * Ensures all H2 and H3 headers have ID attributes for anchor linking
+ * @param {string} html - HTML content
+ * @returns {string} HTML with ID attributes added to headers without them
+ */
+function ensureHeaderIds(html) {
+  return html.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/gi, (match, level, attrs, content) => {
+    // Skip if already has id
+    if (attrs.includes('id=')) return match;
+    // Generate ID from content: lowercase, replace non-alphanumeric with dash
+    const id = content
+      .toLowerCase()
+      .replace(/<[^>]*>/g, '') // Remove HTML tags
+      .replace(/[^a-zа-яё0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .substring(0, 50);
+    return `<h${level} id="${id}"${attrs}>${content}</h${level}>`;
+  });
+}
+
+// ============================================================================
+// TASK 2.5: FIX CROSS-FILE ANCHOR REFERENCES
+// ============================================================================
+
+/**
+ * Converts cross-file anchor references to internal anchors
+ * @param {string} html - HTML content
+ * @returns {string} HTML with internal anchor references
+ */
+function fixCrossFileAnchors(html) {
+  return html.replace(/href="[^"]+\.html#([^"]+)"/g, 'href="#$1"');
+}
+
+// ============================================================================
 // ASSET HASHING (CACHE BUSTING)
 // ============================================================================
 
@@ -373,6 +410,12 @@ ${bodyEndContent}
 
   // BUG-005 FIX: Replace __VERSION__ placeholder with actual version
   processedHtml = processedHtml.replace(/__VERSION__/g, version);
+
+  // TASK 1.2: Ensure all H2/H3 headers have ID attributes
+  processedHtml = ensureHeaderIds(processedHtml);
+
+  // TASK 2.5: Fix cross-file anchor references
+  processedHtml = fixCrossFileAnchors(processedHtml);
 
   // 5.6 Add defer to external script tags
   processedHtml = addDeferToScripts(processedHtml);

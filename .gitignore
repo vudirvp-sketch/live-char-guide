@@ -1,68 +1,36 @@
+# Build artifacts
+build-*.hash
+
+# Duplicate directories (keep only src/ versions)
+parts/
+assets/
+src_VERSION
+VERSION
+
 # Dependencies
 node_modules/
 .pnpm-store/
 
-# npm lockfile (using pnpm)
-package-lock.json
-
-# Build artifacts (generated, but tracked for zero-install)
-# index.html and live-char-guide-zero-install.html are tracked
-# Hash files are tracked for CI comparison
-
-# IDE and editors
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
+
+# OS
 .DS_Store
 Thumbs.db
 
 # Logs
-logs/
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 
-# Testing
+# Test coverage
 coverage/
-.nyc_output/
-test-results/
 
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-
-# Build temp files
+# Temporary files
+tmp/
+temp/
 *.tmp
-*.temp
-.tmp/
-.temp/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Husky (generated files)
-.husky/_/
-
-# Documentation build
-docs/_build/
-
-# Puppeteer
-.local-chromium/
-.local-browser/
-node_modules/

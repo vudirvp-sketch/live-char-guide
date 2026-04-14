@@ -4939,4 +4939,90 @@ body.storage-fallback .track-checklist,
 body.storage-fallback .audience-selection {
   opacity: 0.8;
 }
-echo '<<exit>>'
+
+/* ============================================================
+   TASK 1.1: TOC COLLAPSE TOGGLE STYLES
+   ============================================================ */
+.toc-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85em;
+  color: var(--text-muted);
+  padding: 0 0.3em;
+  margin-right: 0.2em;
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.toc-toggle-btn:hover {
+  color: var(--accent);
+}
+
+.toc-toggle-btn:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Collapsed state - rotate indicator */
+.toc-toggle-btn[aria-expanded="false"] {
+  transform: rotate(-90deg);
+}
+
+/* ============================================================
+   TASK 2.4: SPOILER TOGGLE STYLES
+   ============================================================ */
+.spoiler-toggle {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.spoiler-toggle:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.spoiler-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.spoiler-content {
+  margin-top: 0.5em;
+  padding: 0.8em 1em;
+  background: var(--bg-surface);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+}
+
+.spoiler-content[hidden] {
+  display: none;
+}
+
+/* ============================================================
+   TASK C.3: CSS FALLBACK FOR DYNAMIC CLASSES
+   ============================================================ */
+[data-requires-track].hidden {
+  display: none !important;
+}
+
+/* Ensure track visibility works */
+body[data-track="A"] [data-requires-track]:not([data-requires-track~="A"]) {
+  display: none !important;
+}
+
+body[data-track="B"] [data-requires-track]:not([data-requires-track~="B"]) {
+  display: none !important;
+}
+
+body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
+  display: none !important;
+}

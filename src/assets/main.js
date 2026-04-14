@@ -2689,6 +2689,41 @@ document.addEventListener('DOMContentLoaded', () => {
       if (nested.children.length === 0) nested.remove();
     });
 
+    // TASK 1.1: TOC COLLAPSE - Add collapse toggle for H2 items with H3 children
+    rootUl.querySelectorAll(':scope > li').forEach(li => {
+      const nestedUl = li.querySelector(':scope > ul');
+      if (nestedUl && nestedUl.children.length > 0) {
+        // Create collapse toggle button
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'toc-toggle-btn';
+        toggleBtn.type = 'button';
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        toggleBtn.setAttribute('aria-label', 'Свернуть подразделы');
+        toggleBtn.textContent = '▾';
+        toggleBtn.style.cssText = 'background:none;border:none;cursor:pointer;padding:0 0.3em;margin-right:0.3em;font-size:0.8em;color:var(--text-muted);transition:transform 0.2s;';
+        
+        // Insert toggle button before the link
+        const link = li.querySelector('a');
+        if (link) {
+          li.insertBefore(toggleBtn, link);
+        }
+        
+        // Collapse state
+        let isCollapsed = false;
+        
+        toggleBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          isCollapsed = !isCollapsed;
+          nestedUl.style.display = isCollapsed ? 'none' : '';
+          toggleBtn.textContent = isCollapsed ? '▸' : '▾';
+          toggleBtn.setAttribute('aria-expanded', !isCollapsed);
+          toggleBtn.setAttribute('aria-label', isCollapsed ? 'Развернуть подразделы' : 'Свернуть подразделы');
+          toggleBtn.style.transform = isCollapsed ? 'rotate(0deg)' : '';
+        });
+      }
+    });
+
     tocContent.appendChild(rootUl);
   }
 
