@@ -1,10 +1,11 @@
 {
-  "version": "5.5.3",
+  "version": "5.6.0",
   "encoding": "utf-8",
-  "description": "Live Character Guide - Updated structure with core principles, glossary, checkpoints, and debugging section",
+  "description": "Live Character Guide - Updated structure with canonical rules registry, core anti-patterns, checkpoints, and debugging section",
   "parts": [
     { "file": "00_meta.html", "type": "head", "critical": true },
     { "file": "01_header.html", "type": "body-start" },
+    { "file": "00_rules_registry.html", "type": "section", "anchors": ["#rules-registry", "#rule-price", "#rule-voice-isolation", "#rule-ghost-placement", "#rule-anti-godmodding", "#rule-voice-description-conditional", "#rule-anchor-format"], "stage": 0 },
     { "file": "01_core_principles.html", "type": "section", "anchors": ["#core-principles", "#price-definition"], "stage": 0 },
     { "file": "02_glossary.html", "type": "section", "anchors": ["#glossary"], "stage": 0 },
     { "file": "02_quickstart.html", "type": "section", "anchors": ["#intro", "#quick-start"], "stage": 1, "phase": "prototype" },
@@ -14,6 +15,7 @@
     { "file": "05b_cot_tiers.html", "type": "section", "anchors": ["#cot-tiers"], "stage": 5 },
     { "file": "05a_spine_anchors.html", "type": "section", "anchors": ["#spine-anchors-mapping"], "stage": 5 },
     { "file": "06_technical.html", "type": "section", "anchors": ["#sampling", "#an-ghost", "#lorebook", "#xml-tags"], "stage": 5 },
+    { "file": "06a_antipatterns_core.html", "type": "section", "anchors": ["#antipatterns-core", "#ap-token-bloat", "#ap-missing-price", "#ap-voice-description", "#ap-ghost-sp", "#ap-reppen-overdose", "#ap-godmoding-lb", "#ap-ocean-overload"], "stage": 6 },
     { "file": "09a_antipatterns.html", "type": "section", "anchors": ["#antipatterns"], "stage": 6 },
     { "file": "07_testing.html", "type": "section", "anchors": ["#diagnostics"], "stage": 7 },
     { "file": "08b_debugging.html", "type": "section", "anchors": ["#debugging", "#acc-debug-role", "#acc-debug-voice", "#acc-debug-hallucinations", "#acc-debug-godmoding", "#acc-debug-perfect", "#acc-debug-repeats", "#acc-debug-context", "#acc-debug-physical"], "stage": 8, "track_visibility": "C" },
@@ -24,13 +26,13 @@
     { "file": "checkpoints.html", "type": "fragments", "description": "Embedded checkpoints after each stage" }
   ],
   "stage_order": [
-    { "stage": 0, "name": "Foundation", "description": "Core principles and terminology" },
+    { "stage": 0, "name": "Foundation", "description": "Core principles, terminology, and canonical rules" },
     { "stage": 1, "name": "Quick Start", "description": "Minimal viable card in ~5 minutes", "phase": "prototype" },
     { "stage": 2, "name": "Architecture", "description": "System design and assembly rules", "phase": "production" },
     { "stage": 3, "name": "Core Blocks", "description": "Anchors, Examples, Greeting" },
     { "stage": 4, "name": "Psychology", "description": "Spine, Enneagram, OCEAN" },
     { "stage": 5, "name": "Implementation", "description": "Technical settings, CoT tiers, parameters" },
-    { "stage": 6, "name": "Anti-patterns", "description": "Common mistakes to avoid BEFORE diagnostics" },
+    { "stage": 6, "name": "Anti-patterns", "description": "Critical mistakes to avoid BEFORE diagnostics" },
     { "stage": 7, "name": "Diagnostics", "description": "Test scenarios and symptom table" },
     { "stage": 8, "name": "Debugging", "description": "Troubleshooting decision tree" }
   ],

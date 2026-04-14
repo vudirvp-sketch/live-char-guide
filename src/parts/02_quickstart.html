@@ -183,6 +183,24 @@
         </ol>
       </div>
 
+      <!-- Task 1.5: 12B/4K Context Warning for Track A -->
+      <section class="track-a-warnings" data-track="A B C">
+        <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
+          <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>
+          <p>Если ваша модель имеет <strong>контекстное окно ≤4K токенов</strong>, вы ДОЛЖНЫ применить <a href="#four-k-fallback">4K-Fallback Protocol</a> для корректной работы персонажа.</p>
+          <details style="margin-top:0.5em">
+            <summary><strong>Быстрая справка 4K-Fallback</strong></summary>
+            <ul style="margin-top:0.5em">
+              <li>Сократи якоря до 1 полюсного + маркерный</li>
+              <li>Перемести GHOST в SP (исключение из обычного правила)</li>
+              <li>Сожми Examples до базовых паттернов</li>
+              <li>Отключи AN/LB — они недоступны</li>
+            </ul>
+            <p style="font-size:0.85em;color:var(--text-muted)">Полный протокол: <a href="#four-k-fallback">Раздел 5.12</a></p>
+          </details>
+        </div>
+      </section>
+
       <!-- Navigation Footer - P0-3 -->
       <div class="callout tip" style="margin-top:2em">
         <strong>✅ Quick Start завершён</strong>

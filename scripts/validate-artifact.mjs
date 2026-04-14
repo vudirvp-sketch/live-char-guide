@@ -41,8 +41,8 @@ const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 // WCAG 1.4.10: Content reflow at 125% zoom (320px viewport)
 // v5.4.0: Increased limits for action plan implementation (core principles, glossary, debugging)
 const LIMITS = {
-  indexMaxKB: 600,
-  zeroInstallMaxKB: 800,
+  indexMaxKB: 800,
+  zeroInstallMaxKB: 900,
   minKB: 50
 };
 

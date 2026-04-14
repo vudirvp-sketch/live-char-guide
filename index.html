@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: e9968b2a -->
-<!-- Generated: 2026-04-14T19:07:49.952Z -->
-<!-- Version: 5.5.3 -->
+<!-- Build hash: b33313bc -->
+<!-- Generated: 2026-04-14T20:55:01.958Z -->
+<!-- Version: 5.6.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="e9968b2a">
-<meta name="livechar-version" content="5.5.3">
+<meta name="build-hash" content="b33313bc">
+<meta name="livechar-version" content="5.6.0">
 <meta name="livechar-build" content="2026-04-14">
 <meta http-equiv="Cache-Control" content="no-cache">
-<title>🧠 Live Character for LLM — Guide 5.5.3</title>
+<title>🧠 Live Character for LLM — Guide 5.6.0</title>
 <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
-<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.5.3">
+<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.6.0">
 <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/preview-card.png">
@@ -5246,7 +5246,7 @@ body.theme-oled .track-card.track-c {
 </div>
 
 <header>
-  <h1>📖 Живой персонаж для LLM 5.5.3 — Гайд по созданию RP-карточек</h1>
+  <h1>📖 Живой персонаж для LLM 5.6.0 — Гайд по созданию RP-карточек</h1>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
 
   <!-- ID: D4 | Introduction Block -->
@@ -5647,27 +5647,159 @@ body.theme-oled .track-card.track-c {
 
 
 <main id="main-content" role="main">
+<!-- ==================== CANONICAL RULES REGISTRY ==================== -->
+<!-- ID: RREG | Authoritative definitions for all guide rules -->
+<section id="rules-registry">
+  <div class="info-banner">
+    <span class="mode-badge">📚 Registry</span>
+  </div>
+  <h2 id="раздел-0-1-канонический-реестр-правил">📌 Раздел 0.1: Канонический реестр правил</h2>
+  <p><span class="tag core">Core</span> — авторитетные определения правил, на которые ссылаются все разделы гайда.</p>
+
+  <!-- RULE: Price -->
+  <article id="rule-price" class="canonical-rule">
+    <h3 id="r1-price-обязательность-цены">§R1. Price: Обязательность цены</h3>
+    <div class="rule-definition">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Price — немедленная физическая или вербальная манифестация триггера, разрешающаяся в той же сцене.</p>
+      <div class="callout warn">
+        <strong>⚠️ КРИТИЧЕСКИ:</strong> Будущие состояния («позже будет жалеть», «навсегда запомнит») — НЕ валидный Price.
+      </div>
+      <pre><code>Формат: [Trigger] → [Action] → [Price: &lt;immediate manifestation&gt;]</code></pre>
+    </div>
+    <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#price-definition">Раздел 0 §2</a></p>
+  </article>
+
+  <!-- RULE: Voice Isolation -->
+  <article id="rule-voice-isolation" class="canonical-rule">
+    <h3 id="r2-voice-isolation-изоляция-голоса">§R2. Voice Isolation: Изоляция голоса</h3>
+    <div class="rule-definition">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Голос персонажа задаётся исключительно в Примерных сообщениях (Examples) для моделей 12B–14B, и преимущественно там для 32B+/API.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Блок</th><th>12B–14B</th><th>32B+ / API</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Description</strong></td><td>❌ Никаких стилистических директив</td><td>❌ Только через <code>&lt;speech_style&gt;</code> (опционально)</td></tr>
+            <tr><td><strong>Examples</strong></td><td>✅ Единственный источник голоса</td><td>✅ Приоритетный источник голоса</td></tr>
+            <tr><td><strong>Greeting</strong></td><td>✅ Поддерживающий референс</td><td>✅ Поддерживающий референс</td></tr>
+            <tr><td><strong>System Prompt</strong></td><td>❌ Только запреты, не голос</td><td>❌ Только запреты, не голос</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#acc-principle-voice">Раздел 0 §3</a></p>
+  </article>
+
+  <!-- RULE: GHOST Placement -->
+  <article id="rule-ghost-placement" class="canonical-rule">
+    <h3 id="r3-ghost-placement-размещение-по-слоям">§R3. GHOST Placement: Размещение по слоям</h3>
+    <div class="rule-definition">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> GHOST размещается в Description (определение) + LB/AN (триггеры). System Prompt — только для 4K-Fallback.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Слой</th><th>Роль</th><th>Что писать</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Description (Spine)</strong></td><td>Определение</td><td>Что произошло / какой паттерн</td></tr>
+            <tr><td><strong>Examples</strong></td><td>Демонстрация</td><td>Как GHOST проявляется</td></tr>
+            <tr><td><strong>LB</strong></td><td>Триггеры</td><td>Сенсорные ключи / сюжетные точки</td></tr>
+            <tr><td><strong>AN</strong></td><td>Состояние</td><td>Динамический [GHOST-активация]</td></tr>
+            <tr><td><strong>System Prompt</strong></td><td>❌ НЕ ДУБЛИРОВАТЬ</td><td>Только стиль и запреты</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#acc-principle-ghost">Раздел 0 §4</a></p>
+  </article>
+
+  <!-- RULE: Anti-Godmodding -->
+  <article id="rule-anti-godmodding" class="canonical-rule">
+    <h3 id="r4-anti-godmodding-антигодмодинг">§R4. Anti-Godmodding: Антигодмодинг</h3>
+    <div class="rule-definition">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Обязательные строки в System Prompt против управления {{user}}.</p>
+      <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
+{{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.</code></pre>
+    </div>
+    <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#acc-principle-antigodmoding">Раздел 0 §6</a></p>
+  </article>
+
+  <!-- RULE: Voice in Description (Conditional) -->
+  <article id="rule-voice-description-conditional" class="canonical-rule">
+    <h3 id="r5-voice-in-description-conditional">§R5. Voice in Description (Conditional)</h3>
+    <div class="rule-definition">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Голос в Description разрешён ТОЛЬКО для моделей 32B+/API через тег <code>&lt;speech_style&gt;</code>. Для 12B–14B — запрещён.</p>
+      <div class="callout warn">
+        <strong>⚠️ УСЛОВИЕ:</strong> Для 12B–14B любые стилистические директивы в Description конфликтуют с примерами или игнорируются моделью.
+      </div>
+    </div>
+    <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#acc-principle-voice">Раздел 0 §3</a></p>
+  </article>
+
+  <!-- RULE: Anchor Format -->
+  <article id="rule-anchor-format" class="canonical-rule">
+    <h3 id="r6-anchor-format-канонический-формат-якорей">§R6. Anchor Format: Канонический формат якорей</h3>
+    <div class="rule-definition">
+      <p><strong>ОПРЕДЕЛЕНИЕ:</strong> Все якоря следуют формату A02: [Trigger] → [Action] → [Price: &lt;manifestation&gt;]</p>
+      <div class="infographic">
+        <div class="infographic-title">ПРОТОКОЛ ЯКОРЕЙ — ФОРМАТ A02</div>
+        <div class="inf-pipeline">
+          <div class="inf-pipeline-step">
+            <div class="inf-step-id">01</div>
+            <div class="inf-step-label">ТРИГГЕР</div>
+            <div class="inf-step-desc">Внешний стимул</div>
+          </div>
+          <div class="inf-pipeline-step">
+            <div class="inf-step-id">02</div>
+            <div class="inf-step-label">ДЕЙСТВИЕ</div>
+            <div class="inf-step-desc">Наблюдаемая реакция</div>
+          </div>
+          <div class="inf-pipeline-step">
+            <div class="inf-step-id">03</div>
+            <div class="inf-step-label">PRICE</div>
+            <div class="inf-step-desc">Мгновенная манифестация</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#anchors">Раздел 3.1</a></p>
+  </article>
+
+  <div class="callout tip" style="margin-top:2em">
+    <strong>💡 Назначение реестра:</strong>
+    <p>Этот раздел содержит авторитетные определения всех правил гайда. При возникновении противоречий между разделами, приоритет имеет данное определение.</p>
+  </div>
+</section>
+
+<hr>
+
 <!-- ==================== CORE PRINCIPLES ==================== -->
-<!-- ID: A1 | This file contains canonical rules that are referenced throughout the guide -->
+<!-- ID: A1 | This file contains core principles with references to canonical rules -->
 <section id="core-principles">
   <div class="info-banner">
     <span class="mode-badge">🧠 Foundation</span>
   </div>
   <h2 id="раздел-0-основные-принципы">📌 Раздел 0: Основные принципы</h2>
   <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
+  
+  <div class="callout tip" style="margin-bottom:1em">
+    <strong>📋 Канонические определения:</strong> Авторитетные определения всех основных правил см. в <a href="#canonical-rules-registry">Реестре канонических правил</a>.
+  </div>
 
   <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
   <section id="section-0-2" data-requires-track="A B C">
     <h2 id="0-2-критические-анти-паттерны-все-треки">§0.2 Критические анти-паттерны (Все треки)</h2>
+    <p>Краткий список критических ошибок. Полный анализ с примерами: <a href="#core-antipatterns">Критические анти-паттерны</a>.</p>
     <div class="warning-block">
       <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
       <ul>
         <li><strong>Раздувание токенов:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
-        <li><strong>Непроявление Price:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей.</li>
-        <li><strong>Голос в Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо.</li>
-        <li><strong>GHOST в System Prompt:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST.</li>
+        <li><strong>Непроявление Price:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей. <a href="#rule-price">→ Правило цены</a></li>
+        <li><strong>Голос в Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо. <a href="#rule-voice-isolation">→ Изоляция голоса</a></li>
+        <li><strong>GHOST в System Prompt:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST. <a href="#rule-ghost-placement">→ Размещение GHOST</a></li>
         <li><strong>RepPen &gt; 1.10:</strong> Repetition Penalty выше 1.10 → вызывает несвязный вывод. Рекомендуется: 1.0–1.05.</li>
-        <li><strong>Godmoding в LB:</strong> Записи LB, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока.</li>
+        <li><strong>Godmoding в LB:</strong> Записи LB, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока. <a href="#rule-anti-godmodding">→ Антигодмодинг</a></li>
       </ul>
       <p class="track-badge">Полный анализ с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Анти-паттерны</a></p>
     </div>
@@ -6171,7 +6303,7 @@ body.theme-oled .track-card.track-c {
 
       <h3 id="минимальный-шаблон-за-5-минут">⚡ Минимальный шаблон за 5 минут</h3>
       <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price, без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
-      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> см. <a href="#appendix2">Приложение 2</a></p>
+      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> <span data-requires-track="B C">см. <a href="#appendix2">Приложение 2</a></span><span data-requires-track="A">~450 токенов для прототипа. Полные таблицы — в Приложении 2 (Track B+).</span></p>
 
       <div class="infographic">
         <div class="infographic-title">IMG_04: СРАВНЕНИЕ: 4K-FALLBACK VS ПОЛНЫЙ ПАЙПЛАЙН</div>
@@ -6260,6 +6392,24 @@ body.theme-oled .track-card.track-c {
         </ol>
       </div>
 
+      <!-- Task 1.5: 12B/4K Context Warning for Track A -->
+      <section class="track-a-warnings" data-track="A B C">
+        <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
+          <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>
+          <p>Если ваша модель имеет <strong>контекстное окно ≤4K токенов</strong>, вы ДОЛЖНЫ применить <a href="#four-k-fallback">4K-Fallback Protocol</a> для корректной работы персонажа.</p>
+          <details style="margin-top:0.5em">
+            <summary><strong>Быстрая справка 4K-Fallback</strong></summary>
+            <ul style="margin-top:0.5em">
+              <li>Сократи якоря до 1 полюсного + маркерный</li>
+              <li>Перемести GHOST в SP (исключение из обычного правила)</li>
+              <li>Сожми Examples до базовых паттернов</li>
+              <li>Отключи AN/LB — они недоступны</li>
+            </ul>
+            <p style="font-size:0.85em;color:var(--text-muted)">Полный протокол: <a href="#four-k-fallback">Раздел 5.12</a></p>
+          </details>
+        </div>
+      </section>
+
       <!-- Navigation Footer - P0-3 -->
       <div class="callout tip" style="margin-top:2em">
         <strong>✅ Quick Start завершён</strong>
@@ -6268,7 +6418,7 @@ body.theme-oled .track-card.track-c {
           <li>Архитектура: <a href="#architecture">Раздел 2</a></li>
           <li>Core-блоки: <a href="#anchors">Раздел 3</a></li>
           <li>Психология: <a href="#spine">Раздел 4</a></li>
-          <li>Token-бюджеты: <a href="#appendix2">Приложение 2</a></li>
+          <li>Token-бюджеты: <span data-requires-track="B C"><a href="#appendix2">Приложение 2</a></span><span data-requires-track="A">Приложение 2 (Track B+)</span></li>
         </ul>
       </div>
     </section>
@@ -6783,7 +6933,7 @@ body.theme-oled .track-card.track-c {
     <hr>
 
     <!-- ==================== РАЗДЕЛ 4 ==================== -->
-    <section id="psychology" data-requires-track="B C">
+    <section id="psychology">
       <h2 id="раздел-4-психология">🧠 Раздел 4: Психология</h2>
       <blockquote><strong>Золотое правило психопрофиля:</strong> в карточку — только 1–2 экстремальных полюса от каждой системы. Полные таблицы — в Приложении 2.</blockquote>
 
@@ -6861,6 +7011,7 @@ body.theme-oled .track-card.track-c {
         </div>
       </div>
 
+      <div data-requires-track="B C">
       <h3 id="enneagram">4.2 🔢 Enneagram</h3>
       <p><span class="tag core">Core</span> — 1–2 строки в карточке <span style="font-size:0.85em;color:var(--text-muted)">[→ <a href="#mbti-section">Таблица MBTI↔Enneagram: Раздел 4.4</a>, интерактивный инструмент]</span></p>
 
@@ -7268,9 +7419,43 @@ Anchors:
       </details>
 
       <p style="margin-top:1em;font-size:0.9rem;color:var(--text-muted)">Для корреляции с MBTI — см. таблицу MBTI↔Enneagram в разделе <a href="#mbti-section">4.4</a>. OCEAN↔Enneagram — в <a href="#ocean">разделе 4.3</a>.</p>
+      </div>
 
+      <div data-requires-track="B C">
       <h3 id="ocean">4.3 🌊 OCEAN <span class="tag core">Core</span></h3>
-      <p>OCEAN (Big Five) — модель личности, описывающая поведение через 5 измерений. В карточку идёт <strong>только 1–2 экстремальных полюса</strong>.</p>
+      <p>OCEAN (Big Five) — модель личности, описывающая поведение через 5 измерений. В карточку идёт <strong>1–2 экстремальных полюса</strong> по умолчанию.</p>
+
+      <!-- Task 1.6: Context-scaled OCEAN pole guidelines -->
+      <section id="ocean-pole-guidelines">
+        <h4>📋 Правила количества полюсов OCEAN</h4>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Размер контекста</th><th>Макс. полюсов</th><th>Обоснование</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>≤4K</strong></td><td>1–2</td><td>Ограниченный контекст требует фокуса</td></tr>
+              <tr><td><strong>8K</strong></td><td>2–3</td><td>Умеренная ёмкость</td></tr>
+              <tr><td><strong>16K+</strong></td><td>3–4</td><td>Значительная ёмкость</td></tr>
+              <tr><td><strong>32K+</strong></td><td>Полный OCEAN возможен</td><td>Всё равно рекомендуется 3–4 для ясности</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout tip" style="margin:1em 0">
+          <strong>💡 Рекомендация по умолчанию:</strong>
+          <p><strong>1–2 экстремальных полюса</strong> для большинства персонажей. Больше полюсов = разбавленная идентичность.</p>
+        </div>
+
+        <div class="callout warn" style="margin:1em 0">
+          <strong>⚠️ Когда можно превысить умолчание:</strong>
+          <ul style="margin-top:0.5em">
+            <li>Персонаж имеет сложную личность (например, злодей с скрытой глубиной)</li>
+            <li>Контекстное окно поддерживает это (16K+)</li>
+            <li>Якоря хорошо структурированы (не перегружены)</li>
+          </ul>
+        </div>
+      </section>
 
       <div class="callout tip">
         <strong>📋 Инструкция по применению:</strong>
@@ -7678,6 +7863,7 @@ Anchors:
 </div></noscript>
         </div>
       </details>
+      </div>
 
     </section>
 
@@ -9277,12 +9463,162 @@ Total: 0.845 × 100 = 84.5%</code></pre>
 
     <!-- ==================== РАЗДЕЛ 6: ДИАГНОСТИКА ==================== -->
 
+<!-- ==================== CORE ANTI-PATTERNS (All Tracks) ==================== -->
+<!-- ID: AP-CORE | Critical anti-patterns visible to all tracks -->
+<section id="antipatterns-core">
+  <div class="info-banner">
+    <span class="mode-badge">⚠️ Critical</span>
+  </div>
+  <h2 id="раздел-6a-критические-анти-паттерны">📌 Раздел 6a: Критические анти-паттерны</h2>
+  <p><span class="tag warn">Warning</span> — эти 7 ошибок критически влияют на качество персонажа на ЛЮБОМ треке.</p>
+
+  <!-- AP-1: Token Bloat -->
+  <article id="ap-token-bloat" class="antipattern-card">
+    <h3 id="ap-1-раздувание-токенов">❌ AP-1: Раздувание токенов</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> Description превышает 800 токенов → вызывает переполнение контекста, модель теряет фокус.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> Держите Description под 600 токенов. Удаляйте всё, что не генерирует наблюдаемое действие, реакцию или цену.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>ПРИМЕР:</strong></p>
+        <pre><code>❌ Плохо: 1200 токенов с детальной биографией, историей мира, описанием одежды
+✅ Хорошо: 450 токенов с Spine, 2-3 якорями, кратким GHOST</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <!-- AP-2: Missing Price -->
+  <article id="ap-missing-price" class="antipattern-card">
+    <h3 id="ap-2-непроявление-price">❌ AP-2: Непроявление Price</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> Цена указана в якоре, но никогда не триггерится в диалоге → ломает логику психологических якорей.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> Price должен быть наблюдаемым физическим или вербальным проявлением в той же сцене.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>ПРИМЕР:</strong></p>
+        <pre><code>❌ Плохо: "Её доверие будет подорвано навсегда" (отложенное, не наблюдаемое)
+✅ Хорошо: "Дрожат руки, голос срывается на шёпот" (мгновенное, наблюдаемое)</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <!-- AP-3: Voice in Description -->
+  <article id="ap-voice-description" class="antipattern-card">
+    <h3 id="ap-3-голос-в-description">❌ AP-3: Голос в Description</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> Речь от первого лица или стилистические директивы в Description для 12B–14B → конфликтует с голосом из SP/Examples.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> Description — только третье лицо, факты. Голос задаётся в Examples.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>ПРИМЕР:</strong></p>
+        <pre><code>❌ Плохо: "Я говорю с сарказмом и использую слово 'чувак'"
+✅ Хорошо: "Елена — саркастичный журналист, использует неформальный тон"</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <!-- AP-4: GHOST in System Prompt -->
+  <article id="ap-ghost-sp" class="antipattern-card">
+    <h3 id="ap-4-ghost-в-system-prompt">❌ AP-4: GHOST в System Prompt</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> Формирующее событие помещено в System Prompt вместо отдельного поля → переполнение, потеря приоритета.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> GHOST размещается в Description (определение) + LB/AN (триггеры). SP — только для 4K-Fallback.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>ИСКЛЮЧЕНИЕ:</strong> 4K-Fallback — при context_window ≤ 4K и недоступности User Context, можно одно предложение в SP.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- AP-5: RepPen Overdose -->
+  <article id="ap-reppen-overdose" class="antipattern-card">
+    <h3 id="ap-5-reppen-1-10">❌ AP-5: RepPen > 1.10</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> Repetition Penalty выше 1.10 → вызывает несвязный вывод, потерю стиля.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> Диапазон 1.0–1.05. Для решения проблем с повторами лучше добавить вариативность в Examples.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>РЕКОМЕНДАЦИЯ:</strong></p>
+        <pre><code>✅ 1.0–1.05 — оптимальный диапазон
+⚠️ 1.05–1.10 — допустимо при проблемах с повторами
+❌ > 1.10 — вызывает деградацию качества</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <!-- AP-6: Godmoding in LB -->
+  <article id="ap-godmoding-lb" class="antipattern-card">
+    <h3 id="ap-6-godmoding-в-lorebook">❌ AP-6: Godmoding в Lorebook</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> Записи LB, управляющие действиями пользователя → нарушает согласие RP, ломает автономию игрока.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> LB описывает только реакцию персонажа, не действия {{user}}.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>ПРИМЕР:</strong></p>
+        <pre><code>❌ Плохо: "{{user}} чувствует страх и убегает"
+✅ Хорошо: "При приближении {{user}} отступает на шаг, сжимает оружие"</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <!-- AP-7: OCEAN Overload -->
+  <article id="ap-ocean-overload" class="antipattern-card">
+    <h3 id="ap-7-ocean-overload">❌ AP-7: OCEAN Overload</h3>
+    <div class="antipattern-content">
+      <div class="problem-block">
+        <p><strong>ПРОБЛЕМА:</strong> 3+ экстремальных полюса OCEAN → персонаж непоследовательный, конфликтующий.</p>
+      </div>
+      <div class="solution-block">
+        <p><strong>РЕШЕНИЕ:</strong> Только 1–2 экстремальных полюса (значения <30 или >70). 0 экстремумов = забываемый персонаж.</p>
+      </div>
+      <div class="example-block">
+        <p><strong>ПРИМЕР:</strong></p>
+        <pre><code>✅ 1–2 экстремума — запоминающийся, последовательный
+⚠️ 0 экстремумов — может быть "усреднённым"
+❌ 3+ экстремума — непоследовательный</code></pre>
+      </div>
+    </div>
+  </article>
+
+  <div class="callout info" style="margin-top:2em">
+    <p class="track-badge">Полный каталог анти-паттернов с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Раздел 9a: Анти-паттерны (полный)</a></p>
+  </div>
+</section>
+
+<hr>
+
     <hr>
 
     <!-- ==================== ANTI-PATTERNS ==================== -->
-    <section id="antipatterns">
-      <h2 id="анти-паттерны">🚫 Анти-паттерны</h2>
+    <section id="antipatterns" data-requires-track="C" class="advanced-content">
+      <div class="info-banner">
+        <span class="mode-badge">🚀 Track C</span>
+        <span class="mode-hint">Extended anti-patterns catalog for advanced users.</span>
+      </div>
+      <h2 id="продвинутые-анти-паттерны">🚫 Продвинутые анти-паттерны</h2>
       <p><span class="tag core">Core</span> — критически важно избегать этих ошибок</p>
+
+      <div class="callout tip" style="margin:1em 0">
+        <strong>📌 Для всех tracks:</strong> Критические анти-паттерны, видимые всем пользователям, см. в <a href="#core-antipatterns">Критических анти-паттернах</a>. Этот раздел содержит расширенный каталог для Track C.
+      </div>
 
       <div class="callout tip" style="margin:1em 0">
         <strong>📍 Позиция:</strong> Читайте этот раздел ПЕРЕД диагностикой. Знание анти-паттернов помогает быстрее выявлять проблемы.
@@ -9576,11 +9912,11 @@ content: [GHOST-триггер]</code></pre>
       <p><span class="tag core">Core</span></p>
 
       <div class="callout warn" style="margin-bottom:1em">
-        <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
+        <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#core-antipatterns">Критические анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
       </div>
 
       <div class="callout tip" style="margin-bottom:1em">
-        <strong>📋 Scope этого раздела:</strong> Карточко-специфичные symptom→fix pairs. «Персонаж забывает FLAW → проверь Anchor cost logic». <em>Для универсальных паттернов проектирования (Mary Sue, Cardboard Villain) → см. <a href="#antipatterns">Анти-паттерны</a> (прочитать перед диагностикой).</em>
+        <strong>📋 Scope этого раздела:</strong> Карточко-специфичные symptom→fix pairs. «Персонаж забывает FLAW → проверь Anchor cost logic». <em>Для универсальных паттернов проектирования (Mary Sue, Cardboard Villain) → см. <a href="#core-antipatterns">Критические анти-паттерны</a> (прочитать перед диагностикой).</em>
       </div>
 
       <p><strong>Что это:</strong> Системный подход к выявлению и исправлению проблем в карточке персонажа.</p>
@@ -9589,9 +9925,70 @@ content: [GHOST-триггер]</code></pre>
       <div class="callout tip">
         <strong>🔄 Verification Loop — не новая задача:</strong>
         <p>Эти тест-сценарии <strong>валидируют</strong> твою конфигурацию AN/Lorebook из <a href="#an-ghost">§5.2–5.3</a>. Это проверка, что Dynamics работают как задумано — не отдельная работа.</p>
-        <p style="margin-top:0.5em"><strong>Track A/B:</strong> используй базовые тесты 1–4. Тесты 5–6 требуют AN/LB — пропусти, если не используешь.</p>
-        <p style="margin-top:0.5em"><strong>Track C:</strong> все 6 тестов обязательны для полной валидации.</p>
       </div>
+
+      <!-- Task 1.2: Clear test requirements by track -->
+      <section id="test-requirements">
+        <h3 id="требования-к-тестам-по-track">📋 Требования к тестам по Track</h3>
+        <div class="table-wrap">
+          <table class="test-matrix">
+            <thead>
+              <tr>
+                <th>Тест</th>
+                <th>Track A</th>
+                <th>Track B</th>
+                <th>Track C</th>
+                <th>Описание</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Тест 1: Голос</strong></td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td>Базовое поведение и голос</td>
+              </tr>
+              <tr>
+                <td><strong>Тест 2: Стресс</strong></td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td>GHOST-якоря, FLAW-реакции</td>
+              </tr>
+              <tr>
+                <td><strong>Тест 3: Конфликт</strong></td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td>WANT→NEED динамика</td>
+              </tr>
+              <tr>
+                <td><strong>Тест 4: Антигодмодинг</strong></td>
+                <td class="optional">РЕКОМЕНДУЕТСЯ</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td>Нет контроля {{user}}</td>
+              </tr>
+              <tr data-requires-track="B C">
+                <td><strong>Тест 5: OCEAN</strong></td>
+                <td class="na">Н/Д</td>
+                <td class="optional">ОПЦИОНАЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td>Экстремальные полюса проявляются</td>
+              </tr>
+              <tr data-requires-track="B C">
+                <td><strong>Тест 6: Изоляция голоса</strong></td>
+                <td class="na">Н/Д</td>
+                <td class="optional">ОПЦИОНАЛЬНО</td>
+                <td class="required">ОБЯЗАТЕЛЬНО</td>
+                <td>Голоса различимы в мультиперсонаж</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note"><strong>Track A:</strong> Тесты 1-3 обязательны. Тест 4 рекомендуется, но не блокирует. Тесты 5-6 не применяются к Track A.</p>
+      </section>
 
       <details class="interactive" id="acc-test-mapping">
         <summary><span><h3 id="mapping-dynamics-elements-test-scenarios" style="margin:0;font-size:inherit;display:inline">📋 Mapping: Dynamics Elements ↔ Test Scenarios</h3> <small style="color:var(--text-muted)">— Таблица связи между элементами конфигурации и тестами</small></span></summary>

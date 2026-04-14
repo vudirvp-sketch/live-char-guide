@@ -1,24 +1,29 @@
 <!-- ==================== CORE PRINCIPLES ==================== -->
-<!-- ID: A1 | This file contains canonical rules that are referenced throughout the guide -->
+<!-- ID: A1 | This file contains core principles with references to canonical rules -->
 <section id="core-principles">
   <div class="info-banner">
     <span class="mode-badge">🧠 Foundation</span>
   </div>
   <h2>📌 Раздел 0: Основные принципы</h2>
   <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
+  
+  <div class="callout tip" style="margin-bottom:1em">
+    <strong>📋 Канонические определения:</strong> Авторитетные определения всех основных правил см. в <a href="#canonical-rules-registry">Реестре канонических правил</a>.
+  </div>
 
   <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
   <section id="section-0-2" data-requires-track="A B C">
     <h2>§0.2 Критические анти-паттерны (Все треки)</h2>
+    <p>Краткий список критических ошибок. Полный анализ с примерами: <a href="#core-antipatterns">Критические анти-паттерны</a>.</p>
     <div class="warning-block">
       <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
       <ul>
         <li><strong>Раздувание токенов:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
-        <li><strong>Непроявление Price:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей.</li>
-        <li><strong>Голос в Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо.</li>
-        <li><strong>GHOST в System Prompt:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST.</li>
+        <li><strong>Непроявление Price:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей. <a href="#rule-price">→ Правило цены</a></li>
+        <li><strong>Голос в Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо. <a href="#rule-voice-isolation">→ Изоляция голоса</a></li>
+        <li><strong>GHOST в System Prompt:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST. <a href="#rule-ghost-placement">→ Размещение GHOST</a></li>
         <li><strong>RepPen &gt; 1.10:</strong> Repetition Penalty выше 1.10 → вызывает несвязный вывод. Рекомендуется: 1.0–1.05.</li>
-        <li><strong>Godmoding в LB:</strong> Записи LB, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока.</li>
+        <li><strong>Godmoding в LB:</strong> Записи LB, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока. <a href="#rule-anti-godmodding">→ Антигодмодинг</a></li>
       </ul>
       <p class="track-badge">Полный анализ с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Анти-паттерны</a></p>
     </div>
