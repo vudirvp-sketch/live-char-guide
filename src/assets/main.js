@@ -202,6 +202,38 @@
 })();
 
 // ============================================================================
+// PHASE 1.2: TRACK SWITCH BUTTON HANDLER
+// ============================================================================
+/**
+ * TrackSwitchButtons - Handles track-switch-btn clicks from prototype banner
+ * 
+ * Binds to buttons with data-target attribute and switches to that track
+ */
+(function() {
+  'use strict';
+
+  function initTrackSwitchButtons() {
+    document.querySelectorAll('.track-switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetTrack = btn.dataset.target;
+        if (targetTrack && window.NavigationState) {
+          window.NavigationState.setTrack(targetTrack);
+          // Optional: scroll to top after track switch
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+    console.log('[TrackSwitchButtons] Initialized');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTrackSwitchButtons);
+  } else {
+    initTrackSwitchButtons();
+  }
+})();
+
+// ============================================================================
 // FIX-001: MODEL FILTER STATE MODULE
 // ============================================================================
 /**

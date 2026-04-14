@@ -8,6 +8,23 @@
   <h2>📌 Раздел 0: Основные принципы</h2>
   <p><span class="tag core">Core</span> — эти правила — фундамент поведенческого движка. Они применяются ко всем элементам карточки.</p>
 
+  <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
+  <section id="section-0-2" data-requires-track="A B C">
+    <h2>§0.2 Критические анти-паттерны (Все треки)</h2>
+    <div class="warning-block">
+      <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
+      <ul>
+        <li><strong>Token Bloat:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
+        <li><strong>Price Non-manifestation:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей.</li>
+        <li><strong>Voice-in-Description:</strong> Речь от первого лица в поле Description → конфликтует с голосом SP. Используйте только третье лицо.</li>
+        <li><strong>GHOST-in-SP:</strong> Формирующее событие помещено в System Prompt → должно быть в отдельном поле GHOST.</li>
+        <li><strong>RepPen &gt; 1.10:</strong> Repetition Penalty выше 1.10 → вызывает несвязный вывод. Рекомендуется: 1.0–1.05.</li>
+        <li><strong>Godmoding in LB:</strong> Записи Лорбука, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока.</li>
+      </ul>
+      <p class="track-badge">Полный анализ с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">§5.5</a></p>
+    </div>
+  </section>
+
   <details class="interactive" id="acc-principle-ocean">
     <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
@@ -66,8 +83,9 @@
     </div>
   </details>
 
-  <details class="interactive" id="acc-principle-ghost">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small></span></summary>
+  <!-- PHASE 1.3: GHOST hidden from Track A -->
+  <details class="interactive" id="acc-principle-ghost" data-requires-track="B C">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="table-wrap">
     <table>

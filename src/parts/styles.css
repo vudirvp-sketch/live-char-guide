@@ -4413,6 +4413,213 @@ body.debug-mode [data-requires-track]::before {
 }
 
 /* ============================================================
+   PHASE 1.1: WARNING BLOCK FOR CRITICAL ANTI-PATTERNS
+   ============================================================ */
+
+.warning-block {
+  background: linear-gradient(135deg, #2a1a1a 0%, #1a1a1a 100%);
+  border-left: 4px solid #ff4444;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.warning-block ul {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.warning-block li {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.warning-block strong {
+  color: #fca5a5;
+}
+
+/* Light theme warning block */
+body.theme-light .warning-block {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.04) 100%);
+  border-left-color: #dc2626;
+}
+
+body.theme-light .warning-block strong {
+  color: #b91c1c;
+}
+
+/* OLED theme warning block */
+body.theme-oled .warning-block {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(0, 0, 0, 0.9) 100%);
+  border-left-color: #ef4444;
+}
+
+/* ============================================================
+   PHASE 1.1: TRACK BADGES FOR VISUAL INDICATORS
+   ============================================================ */
+
+.badge-track-a,
+.badge-track-b,
+.badge-track-c {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+
+.badge-track-a {
+  background: #2a4a2a;
+  color: #88ff88;
+  border: 1px solid #44aa44;
+}
+
+.badge-track-b {
+  background: #2a3a4a;
+  color: #88ccff;
+  border: 1px solid #4488cc;
+}
+
+.badge-track-c {
+  background: #4a2a4a;
+  color: #ff88ff;
+  border: 1px solid #aa44aa;
+}
+
+/* Light theme badges */
+body.theme-light .badge-track-a {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+body.theme-light .badge-track-b {
+  background: rgba(56, 189, 248, 0.15);
+  color: #0284c7;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+body.theme-light .badge-track-c {
+  background: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* OLED theme badges */
+body.theme-oled .badge-track-a {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+body.theme-oled .badge-track-b {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+body.theme-oled .badge-track-c {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Auto-badge for headers */
+h2[data-requires-track~="B"]:not([data-requires-track~="A"])::after,
+h3[data-requires-track~="B"]:not([data-requires-track~="A"])::after {
+  content: " [B+]";
+  font-size: 0.7em;
+  color: #88ccff;
+  font-weight: normal;
+}
+
+h2[data-requires-track~="C"]:not([data-requires-track~="B"])::after,
+h3[data-requires-track~="C"]:not([data-requires-track~="B"])::after {
+  content: " [C]";
+  font-size: 0.7em;
+  color: #ff88ff;
+  font-weight: normal;
+}
+
+/* ============================================================
+   PHASE 1.2: PROTOTYPE BANNER FOR TRACK A
+   ============================================================ */
+
+.prototype-banner {
+  display: none;
+  background: linear-gradient(135deg, #1a2a1a 0%, #1a1a1a 100%);
+  border: 1px solid #44aa44;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+body[data-track="A"] .prototype-banner {
+  display: flex;
+}
+
+.banner-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.banner-content strong {
+  color: #88ff88;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.banner-content p {
+  margin: 0.5rem 0 0 0;
+  color: #aaa;
+}
+
+.track-switch-btn {
+  background: #44aa44;
+  border: none;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+  transition: background 0.15s ease;
+}
+
+.track-switch-btn:hover {
+  background: #55bb55;
+}
+
+.track-switch-btn:focus-visible {
+  outline: 2px solid #88ff88;
+  outline-offset: 2px;
+}
+
+/* Light theme prototype banner */
+body.theme-light .prototype-banner {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0.04) 100%);
+  border-color: #16a34a;
+}
+
+body.theme-light .banner-content strong {
+  color: #16a34a;
+}
+
+body.theme-light .track-switch-btn {
+  background: #16a34a;
+}
+
+body.theme-light .track-switch-btn:hover {
+  background: #22c55e;
+}
+
+/* OLED theme prototype banner */
+body.theme-oled .prototype-banner {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(0, 0, 0, 0.95) 100%);
+}
+
+/* ============================================================
    GLOSSARY PANEL STYLES (P1-3)
    ============================================================ */
 
