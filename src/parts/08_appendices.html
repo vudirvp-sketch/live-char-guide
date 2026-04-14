@@ -723,97 +723,10 @@ No smart typography. If conflict → default to Examples.
 
     <!-- ==================== ПРИЛОЖЕНИЕ 7: CHANGELOG ==================== -->
     <section id="changelog">
-      <h2>📜 История версий гайда</h2>
-      
-      <details open>
-        <summary><span><strong>v5.3.2</strong> — 2026-04-06</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li><strong>Раздел 5.11 расширен:</strong> добавлена таблица токен-бюджета для мультиперсонажных сцен, таблица проблем и решений, различия для 12B vs 32B+ моделей</li>
-            <li><strong>Раздел 5.13:</strong> новая матрица совместимости фронтендов (SillyTavern, KoboldCPP, LM Studio) с рекомендуемыми настройками</li>
-            <li><strong>Enneagram адаптивность:</strong> добавлены @media queries для мобильных устройств (768px, 480px)</li>
-          </ul>
-          <h4>🔧 Исправлено</h4>
-          <ul>
-            <li>Устранено отсутствие мобильной адаптации для интерактивного Enneagram-виджета</li>
-          </ul>
-        </div>
-      </details>
+      <h2>📜 История версий</h2>
+      <p>Полная история изменений: см. <a href="https://github.com/vudirvp-sketch/live-char-guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md</a></p>
 
-      <details>
-        <summary><span><strong>v5.3.1</strong> — 2026-04-05</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li><strong>Раздел 6:</strong> добавлен раздел «Диагностика и тестирование» (4 тест-сценария, таблица симптомов, протокол исправления)</li>
-            <li><strong>Плохие карточки:</strong> 4 примера до/после с разбором ошибок</li>
-            <li><strong>Enneagram → Anchors:</strong> 7-шаговый алгоритм конвертации с примерами для типов 1, 4, 6, 8</li>
-            <li><strong>Токен-таблицы:</strong> таблица распределения по блокам + таблица бюджета по контексту</li>
-          </ul>
-          <h4>🔧 Исправлено</h4>
-          <ul>
-            <li>Дубликат chk-voice-iso удалён из чеклиста</li>
-            <li>Price в примере Макса заменена на физическую манифестацию</li>
-            <li>GHOST 4K-исключение явно задокументировано в Разделе 5.12</li>
-            <li>Глоссарий расширен 12 синонимами</li>
-            <li>Устаревший nav#toc удалён из DOM</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary><span><strong>v5.3</strong> — 2026-03</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li>Интерактивные виджеты: Enneagram SVG, OCEAN пентаграмма, MBTI-селектор</li>
-            <li>Плавающие панели: Notepad, Scratchpad с сохранением в localStorage</li>
-            <li>Тёмная/светлая тема с переключателем</li>
-            <li>Чеклист с персистентным состоянием</li>
-          </ul>
-          <h4>Структура</h4>
-          <ul>
-            <li>Реорганизованы разделы: 6 основных + 6 приложений</li>
-            <li>Добавлены якоря для навигации</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary><span><strong>v5.2</strong> — 2026-02</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Новое</h4>
-          <ul>
-            <li>4K-Fallback протокол</li>
-            <li>Предгенерационный фильтр</li>
-            <li>Пространственная фиксация (SPATIAL LOCK)</li>
-            <li>Мультиперсонажные сцены</li>
-          </ul>
-          <h4>🔧 Исправлено</h4>
-          <ul>
-            <li>Унифицированы параметры генерации для 12B vs 32B+</li>
-            <li>Добавлено предупреждение о presence_penalty = 0.7</li>
-          </ul>
-        </div>
-      </details>
-
-      <details>
-        <summary><span><strong>v5.0</strong> — 2026-01</span></summary>
-        <div style="padding:1em 0">
-          <h4>✨ Релиз</h4>
-          <ul>
-            <li>Первая публичная версия гайда</li>
-            <li>6 процессуальных правил</li>
-            <li>10-шаговый пайплайн создания</li>
-            <li>Spine (WANT/NEED/FLAW/LIE/GHOST)</li>
-            <li>Поведенческие якоря с ценой</li>
-          </ul>
-        </div>
-      </details>
-
-      <p style="margin-top:1.5em;color:var(--text-muted);font-size:0.85em">
-        <strong>Миграция между версиями:</strong> Карточки созданные по v5.0–v5.2 полностью совместимы с v5.3.2. 
-        Рекомендуется добавить 4K-Fallback протокол и проверить presence_penalty (должен быть 0.0 для 12B).
-      </p>
+      <div class="callout warn" style="margin:1em 0">
+        <strong>⚠️ Миграция:</strong> Карточки v5.0–v5.2 полностью совместимы с v5.5.3. Рекомендуется добавить 4K-Fallback протокол и проверить presence_penalty (должен быть 0.0 для 12B).
+      </div>
     </section>

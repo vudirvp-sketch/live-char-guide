@@ -431,7 +431,6 @@
     }
 
     /* === STICKY TOC LAYOUT === */
-    /* DEPRECATED: Old TOC layout - will be replaced by panel system */
     .content-wrapper {
       display: flex;
       gap: 2rem;
