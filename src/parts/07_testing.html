@@ -6,11 +6,11 @@
       <p><span class="tag core">Core</span></p>
 
       <div class="callout warn" style="margin-bottom:1em">
-        <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Раздел 5.5: Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
+        <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
       </div>
 
       <div class="callout tip" style="margin-bottom:1em">
-        <strong>📋 Scope этого раздела:</strong> Карточко-специфичные symptom→fix pairs. «Персонаж забывает FLAW → проверь Anchor cost logic». <em>Для универсальных паттернов проектирования (Mary Sue, Cardboard Villain) → см. <a href="#antipatterns">Раздел 5.5: Анти-паттерны</a> (прочитать перед диагностикой).</em>
+        <strong>📋 Scope этого раздела:</strong> Карточко-специфичные symptom→fix pairs. «Персонаж забывает FLAW → проверь Anchor cost logic». <em>Для универсальных паттернов проектирования (Mary Sue, Cardboard Villain) → см. <a href="#antipatterns">Анти-паттерны</a> (прочитать перед диагностикой).</em>
       </div>
 
       <p><strong>Что это:</strong> Системный подход к выявлению и исправлению проблем в карточке персонажа.</p>
@@ -146,48 +146,56 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Симптом</th><th>Вероятная причина</th><th>Решение</th></tr>
+            <tr><th>Симптом</th><th>Вероятная причина</th><th>Решение</th><th>Детали</th></tr>
           </thead>
           <tbody>
             <tr>
               <td>Персонаж «плывёт», меняет голос</td>
               <td>Недостаточно Examples, голос не изолирован</td>
               <td>Добавить 2-3 примера, убрать стилистические директивы из Description</td>
+              <td><a href="#acc-debug-voice">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>OOC (выход из образа)</td>
               <td>Слабый SP, нет антигодмодинга</td>
               <td>Добавить PRE-GENERATION FILTER, усилить SPATIAL LOCK</td>
+              <td><a href="#acc-debug-role">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Нет эмоциональной глубины</td>
               <td>GHOST не активируется или дублируется</td>
               <td>Проверить карту слоёв: SP ❌, LB/AN — GHOST там</td>
+              <td><a href="#acc-debug-hallucinations">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Повторы / зацикливание</td>
               <td>RepPen слишком высок</td>
               <td>Снизить до 1.05, проверить наличие якорей</td>
+              <td><a href="#acc-debug-repeats">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Персонаж «слишком идеальный»</td>
               <td>FLAW не проявляется в поведении</td>
               <td>Добавить Price к FLAW-якорям, проверить триггеры</td>
+              <td><a href="#acc-debug-perfect">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Годмодинг (контроль {{user}})</td>
               <td>Отсутствует антигодмодинг в SP</td>
               <td>Добавить: «Никогда не описывай действия {{user}}»</td>
+              <td><a href="#acc-debug-godmoding">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Потеря контекста в длинной сессии</td>
               <td>AN не обновляется, нет LB-механик</td>
               <td>Обновлять AN каждые 3-5 сообщений, добавить Range-cascade</td>
+              <td><a href="#acc-debug-context">→ Диагностика</a></td>
             </tr>
             <tr>
               <td>Физические противоречия</td>
               <td>Нет SPATIAL LOCK</td>
               <td>Добавить пространственную фиксацию в SP</td>
+              <td><a href="#acc-debug-physical">→ Диагностика</a></td>
             </tr>
           </tbody>
         </table>
