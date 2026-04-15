@@ -21,8 +21,8 @@
         <strong>⚠️ Зачем этот раздел:</strong> Гайд показывает правильные подходы, но не менее важно избегать распространённых ошибок. Каждый анти-паттерн здесь — из реального опыта отладки карточек.
       </div>
 
-      <details class="interactive" id="acc-antipattern1">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
+      <details class="interactive" id="acc-antipattern1" aria-labelledby="acc-antipattern1-summary">
+  <summary id="acc-antipattern1-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Использование всех 5 полюсов OCEAN вместо 1–2 экстремумов.</p>
       <div class="table-wrap">
@@ -51,8 +51,8 @@ O:72 C:85 E:28 A:45 N:62</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern2">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
+      <details class="interactive" id="acc-antipattern2" aria-labelledby="acc-antipattern2-summary">
+  <summary id="acc-antipattern2-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Размещение GHOST в System Prompt в стандартной конфигурации.</p>
       <div class="table-wrap">
@@ -88,8 +88,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern3">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
+      <details class="interactive" id="acc-antipattern3" aria-labelledby="acc-antipattern3-summary">
+  <summary id="acc-antipattern3-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Множественные якоря, триггирующие друг друга.</p>
       <div class="table-wrap">
@@ -118,8 +118,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern4">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Раздувание токенов</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
+      <details class="interactive" id="acc-antipattern4" aria-labelledby="acc-antipattern4-summary">
+  <summary id="acc-antipattern4-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Раздувание токенов</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Description более 1000 токенов с избыточными деталями.</p>
       <div class="table-wrap">
@@ -152,8 +152,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern5">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
+      <details class="interactive" id="acc-antipattern5" aria-labelledby="acc-antipattern5-summary">
+  <summary id="acc-antipattern5-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Price не манифестируется немедленно в сцене.</p>
       <div class="table-wrap">
@@ -183,8 +183,8 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <div data-model="12B">
-      <details class="interactive" id="acc-antipattern6">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
+      <details class="interactive" id="acc-antipattern6" aria-labelledby="acc-antipattern6-summary">
+  <summary id="acc-antipattern6-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Стилистические директивы в Description для моделей ≤14B.</p>
       <div class="table-wrap">
@@ -219,8 +219,8 @@ content: [GHOST-триггер]</code></pre>
       </details>
       </div>
 
-      <details class="interactive" id="acc-antipattern7">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content LBа → нарушение user agency</small></span></summary>
+      <details class="interactive" id="acc-antipattern7" aria-labelledby="acc-antipattern7-summary">
+  <summary id="acc-antipattern7-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content LBа → нарушение user agency</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Действия/мысли {{user}} в поле content LBа.</p>
       <div class="table-wrap">
@@ -249,8 +249,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern8">
-        <summary><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
+      <details class="interactive" id="acc-antipattern8" aria-labelledby="acc-antipattern8-summary">
+  <summary id="acc-antipattern8-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Высокий RepPen стирает легитимные паттерны.</p>
       <div class="table-wrap">

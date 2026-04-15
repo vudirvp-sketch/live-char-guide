@@ -1,4 +1,28 @@
+    /* ============================================
+       LAYER 5: CSS DESIGN TOKENS (v5.9.1)
+       ============================================ */
+
     :root {
+      /* === SEMANTIC COLORS === */
+      --color-primary: #38bdf8;
+      --color-success: #22c55e;
+      --color-warning: #f59e0b;
+      --color-error: #ef4444;
+      --color-info: #06b6d4;
+
+      /* === SPACING SCALE === */
+      --space-xs: 0.25em;
+      --space-sm: 0.5em;
+      --space-md: 1em;
+      --space-lg: 1.5em;
+      --space-xl: 2em;
+
+      /* === BORDER RADIUS === */
+      --radius-sm: 0.25em;
+      --radius-md: 0.5em;
+      --radius-lg: 1em;
+
+      /* === BASE THEME COLORS === */
       --bg: #121212;  /* CHANGED: OLED-optimized dark background (v5.4.0) */
       --bg-surface: #1a1a1a;  /* CHANGED: Slightly lighter than bg for surfaces */
       --bg-elevated: #222222;  /* CHANGED: Elevated surfaces lighter */
@@ -6049,4 +6073,184 @@ body.theme-light .track-result {
   font-size: 0.85em;
   color: var(--text-muted);
   margin-bottom: 0;
+}
+
+/* ============================================
+   LAYER 5: ACCESSIBILITY - SKIP NAVIGATION (v5.9.1)
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0.5em;
+  left: 0.5em;
+  width: auto;
+  height: auto;
+  padding: 1em 1.5em;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  overflow: visible;
+  outline: 3px solid var(--bg);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   LAYER 5: PRINT STYLESHEET (v5.9.1)
+   ============================================ */
+
+@media print {
+  /* Base print styles */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  /* Hide interactive elements */
+  .info-banner,
+  .mode-badge,
+  .track-selector,
+  .interactive > summary,
+  noscript,
+  .context-trail,
+  .breadcrumbs,
+  .fab-group,
+  .hamburger,
+  .mobile-nav-overlay,
+  #search-container,
+  .glossary-tab,
+  .panel,
+  .audience-selection,
+  .prototype-banner,
+  .track-checklist,
+  #theme-toggle,
+  .copy-btn,
+  .expand-btn {
+    display: none !important;
+  }
+
+  /* Show all interactive content when printing */
+  .interactive {
+    display: block !important;
+  }
+
+  .interactive > div,
+  .interactive > .accordion-content {
+    display: block !important;
+  }
+
+  details.interactive[open] > div,
+  details.interactive[open] > .accordion-content {
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Track visibility - show all content when printing */
+  [data-track-exclusive],
+  [data-requires-track] {
+    display: block !important;
+  }
+
+  [hidden] {
+    display: block !important;
+  }
+
+  /* Show links after text for print */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Don't show anchor links */
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  /* Table styles */
+  .table-wrap {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  table {
+    min-width: auto;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+  }
+
+  /* Code blocks */
+  pre {
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    page-break-inside: avoid;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+
+  code {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+
+  /* Headings - avoid page breaks after */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: #000;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* Callouts */
+  .callout {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  /* Details/accordion */
+  details {
+    page-break-inside: avoid;
+  }
+
+  details summary {
+    font-weight: 600;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Hide decorative elements */
+  .track-icon-wrap,
+  .track-icon-scan,
+  .dependency-graph,
+  .dep-quick-ref {
+    display: none !important;
+  }
+
+  /* Footer and header adjustments */
+  header, footer {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+  }
 }

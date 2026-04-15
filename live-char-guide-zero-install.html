@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: b046af7b -->
-<!-- Generated: 2026-04-15T21:19:02.016Z -->
+<!-- Build hash: cd408125 -->
+<!-- Generated: 2026-04-15T21:33:58.549Z -->
 <!-- Version: 5.9.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="b046af7b">
+<meta name="build-hash" content="cd408125">
 <meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-15">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -5976,6 +5976,115 @@ body.theme-light .track-result {
   }
 }
 
+/* ============================================================
+   LAYER 4: BREADCRUMBS AND CONTEXT TRAIL NAVIGATION
+   ============================================================ */
+
+/* === BREADCRUMBS === */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  margin-bottom: 1em;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+  margin: 0 0.25em;
+  color: var(--text-muted);
+}
+
+.breadcrumbs .current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* === CONTEXT TRAIL === */
+.context-trail {
+  margin-bottom: 1em;
+  padding: 0.75em;
+  background: var(--bg-secondary);
+  border-radius: 0.5em;
+  font-size: 0.9em;
+}
+
+.context-trail .trail-label {
+  color: var(--text-muted);
+  margin-right: 0.5em;
+}
+
+.context-trail a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--text-muted);
+  margin: 0 0.25em;
+}
+
+.context-trail a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.context-trail .current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* === SELF-ASSESSMENT CHECKPOINTS === */
+.self-assessment {
+  margin: 2em 0;
+  padding: 1em;
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+.self-assessment h4 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.self-assessment ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0;
+}
+
+.self-assessment li {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+  position: relative;
+}
+
+.self-assessment li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.self-assessment input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+.self-assessment .time-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
 
 </style>
 </head>
@@ -6772,6 +6881,18 @@ body.theme-light .track-result {
   <div class="callout tip" style="margin-top:2em">
     <strong>💡 Как использовать этот раздел:</strong>
     <p>Все последующие разделы ссылаются на эти принципы. При возникновении вопросов возвращайтесь сюда за каноническими определениями.</p>
+  </div>
+
+  <!-- L4-6: Self-Assessment Checkpoint -->
+  <div class="self-assessment">
+    <h4>✓ Перед переходом дальше</h4>
+    <ul>
+      <li><label><input type="checkbox"> Я понимаю правило 1–2 полюсов OCEAN</label></li>
+      <li><label><input type="checkbox"> Я знаю, что Price обязателен для критичных якорей</label></li>
+      <li><label><input type="checkbox"> Я понимаю, что голос задаётся только в Examples</label></li>
+      <li><label><input type="checkbox"> Я знаю, где размещать GHOST (Description, не SP)</label></li>
+    </ul>
+    <p class="time-hint">⏱️ Рассчитанное время: ~15 минут</p>
   </div>
 </section>
 
@@ -8161,6 +8282,41 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
         <h3 id="карта-зависимостей-разделов">🗺️ Карта зависимостей разделов</h3>
         <p>Что нужно прочитать перед каждым разделом:</p>
         
+        <!-- L4-2: Section Dependency Diagram (Mermaid) -->
+        <div class="mermaid-diagram" style="margin:1.5em 0;">
+          <pre class="mermaid">
+graph TD
+    A[Rules Registry] --> B[Core Principles]
+    B --> C[Quick Start]
+    C --> D[Architecture]
+    D --> E[Core Blocks]
+    E --> F[Psychology]
+    F --> G[Technical]
+    G --> H[Antipatterns]
+    H --> I[Testing]
+    I --> J[Debugging]
+    
+    A -.-> E
+    B -.-> F
+    E -.-> H
+    
+    style A fill:#f9f,stroke:#333
+    style B fill:#bbf,stroke:#333
+    style C fill:#bfb,stroke:#333
+          </pre>
+        </div>
+
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>Зависимости разделов:</strong></p>
+            <ul>
+              <li>Rules Registry → Core Principles → Quick Start → Architecture</li>
+              <li>Architecture → Core Blocks → Psychology → Technical</li>
+              <li>Technical → Antipatterns → Testing → Debugging</li>
+            </ul>
+          </div>
+        </noscript>
+        
         <div class="dependency-tree">
           <ul style="list-style:none; padding-left:0;">
             <li style="margin:0.5em 0;"><strong>Quickstart</strong> → самодостаточен</li>
@@ -8652,6 +8808,18 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
         <li>❌ Слова «травма», «вспомнил», «прошлое» — показывай через сенсорику</li>
         <li>❌ Открытый конец без крючка для {{user}}</li>
       </ul>
+
+      <!-- L4-6: Self-Assessment Checkpoint -->
+      <div class="self-assessment">
+        <h4>✓ Перед переходом дальше</h4>
+        <ul>
+          <li><label><input type="checkbox"> Якоря имеют формат Trigger → Action → Price?</label></li>
+          <li><label><input type="checkbox"> Price манифестируется в той же сцене?</label></li>
+          <li><label><input type="checkbox"> Examples демонстрируют голос, а не описывают?</label></li>
+          <li><label><input type="checkbox"> Greeting содержит сенсорику → позу → речь → крючок?</label></li>
+        </ul>
+        <p class="time-hint">⏱️ Рассчитанное время: ~20 минут</p>
+      </div>
     </section>
 
     <hr>
@@ -9774,6 +9942,17 @@ Anchors:
       </details>
       </div>
 
+      <!-- L4-6: Self-Assessment Checkpoint -->
+      <div class="self-assessment">
+        <h4>✓ Перед переходом дальше</h4>
+        <ul>
+          <li><label><input type="checkbox"> Я понимаю структуру SPINE (WANT/NEED/FLAW/LIE/GHOST)</label></li>
+          <li><label><input type="checkbox"> Я знаю свой Enneagram тип и крыло</label></li>
+          <li><label><input type="checkbox"> Я выбираю только 1-2 экстремальных полюса OCEAN</label></li>
+          <li><label><input type="checkbox"> Я связал SPINE с Enneagram/OCEAN</label></li>
+        </ul>
+        <p class="time-hint">⏱️ Рассчитанное время: ~25 минут</p>
+      </div>
     </section>
 
     <!-- ==================== РАЗДЕЛ 5 ==================== -->
@@ -9791,6 +9970,16 @@ Anchors:
     <span class="mode-badge">Track C</span>
     <span class="mode-hint">Продвинутый контент — виден только для Track B и C.</span>
   </div>
+  
+  <!-- L4-4: Context Trail -->
+  <aside class="context-trail" style="margin-bottom:1em;">
+    <span class="trail-label">Контекст:</span>
+    <a href="#spine">SPINE</a> → 
+    <a href="#anchors">Anchors</a> → 
+    <a href="#rule-price">Price</a> → 
+    <span class="current">CoT Tiers</span>
+  </aside>
+  
   <h2 id="раздел-4-1-1-cot-tiers-chain-of-thought">🧩 Раздел 4.1.1: CoT Tiers (Chain of Thought)</h2>
   <p><span class="tag core">Core</span> <span class="tag advanced">Advanced</span> <em>→ <a href="#spine">Раздел 4.1: SPINE</a> | <a href="#cot">Раздел 5.4: CoT</a></em></p>
   
@@ -9801,6 +9990,84 @@ Anchors:
   </div>
 
   <h3 id="cot-tiers-overview">📊 CoT Tiers Overview</h3>
+  
+  <!-- L4-3: CoT Tiers Flowchart -->
+  <div class="svg-infographic" style="margin:1.5em 0;">
+    <div class="svg-infographic-title">CoT Tier Flow</div>
+    <svg id="cot-flow" viewBox="0 0 450 400" role="img" aria-label="Chain of Thought tiers flowchart">
+      <!-- Arrow marker definition -->
+      <defs>
+        <marker id="cot-arrow-marker" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L9,3 z" fill="var(--text-muted)"/>
+        </marker>
+      </defs>
+      
+      <!-- T0: КОНТЕКСТ -->
+      <rect x="125" y="10" width="200" height="45" rx="6" fill="#3b82f6"/>
+      <text x="225" y="28" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T0: КОНТЕКСТ</text>
+      <text x="225" y="45" text-anchor="middle" font-size="10" fill="white">Что происходит? → Ситуация</text>
+      
+      <!-- Arrow -->
+      <path d="M225 55 L225 70" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T1: РЕАКЦИЯ -->
+      <rect x="125" y="75" width="200" height="45" rx="6" fill="#22c55e"/>
+      <text x="225" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T1: РЕАКЦИЯ</text>
+      <text x="225" y="110" text-anchor="middle" font-size="10" fill="white">Что чувствует? → Эмоция</text>
+      
+      <!-- Arrow -->
+      <path d="M225 120 L225 135" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T2: МОТИВАЦИЯ -->
+      <rect x="125" y="140" width="200" height="45" rx="6" fill="#f59e0b"/>
+      <text x="225" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T2: МОТИВАЦИЯ</text>
+      <text x="225" y="175" text-anchor="middle" font-size="10" fill="white">Почему важно? → SPINE</text>
+      
+      <!-- Arrow -->
+      <path d="M225 185 L225 200" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T3: КОНФЛИКТ -->
+      <rect x="125" y="205" width="200" height="45" rx="6" fill="#ef4444"/>
+      <text x="225" y="223" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T3: КОНФЛИКТ</text>
+      <text x="225" y="240" text-anchor="middle" font-size="10" fill="white">Что мешает? → FLAW/LIE</text>
+      
+      <!-- Arrow -->
+      <path d="M225 250 L225 265" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T4: ДЕЙСТВИЕ -->
+      <rect x="125" y="270" width="200" height="45" rx="6" fill="#8b5cf6"/>
+      <text x="225" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T4: ДЕЙСТВИЕ</text>
+      <text x="225" y="305" text-anchor="middle" font-size="10" fill="white">Что делает? → Поведение</text>
+      
+      <!-- Arrow -->
+      <path d="M225 315 L225 330" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T5: ГОЛОС -->
+      <rect x="125" y="335" width="200" height="45" rx="6" fill="#ec4899"/>
+      <text x="225" y="353" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T5: ГОЛОС</text>
+      <text x="225" y="370" text-anchor="middle" font-size="10" fill="white">Как говорит? → Речь</text>
+      
+      <!-- Legend -->
+      <g transform="translate(10, 380)">
+        <text x="0" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">
+          Каждый tier добавляет глубину ответу. T0-T2 = база, T3-T5 = драма.
+        </text>
+      </g>
+    </svg>
+    <noscript>
+      <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+        <p><strong>CoT Tier Flow:</strong></p>
+        <ol style="margin-top:0.5em;padding-left:1.5em;">
+          <li><strong>T0: КОНТЕКСТ</strong> — Что происходит? → Ситуация</li>
+          <li><strong>T1: РЕАКЦИЯ</strong> — Что чувствует? → Эмоция</li>
+          <li><strong>T2: МОТИВАЦИЯ</strong> — Почему важно? → SPINE</li>
+          <li><strong>T3: КОНФЛИКТ</strong> — Что мешает? → FLAW/LIE</li>
+          <li><strong>T4: ДЕЙСТВИЕ</strong> — Что делает? → Поведение</li>
+          <li><strong>T5: ГОЛОС</strong> — Как говорит? → Речь</li>
+        </ol>
+      </div>
+    </noscript>
+  </div>
   
   <div class="table-wrap">
     <table>
@@ -10086,6 +10353,14 @@ Anchors:
         <span class="mode-badge">Track C</span>
         <span class="mode-hint">Продвинутый контент — виден только для Track B и C.</span>
       </div>
+      
+      <!-- L4-4: Context Trail -->
+      <aside class="context-trail" style="margin-bottom:1em;">
+        <span class="trail-label">Контекст:</span>
+        <a href="#spine">SPINE</a> → 
+        <span class="current">Anchors Mapping</span>
+      </aside>
+      
       <h2 id="приложение-5a-spine-anchors-mapping">🔗 Приложение 5a: SPINE → Anchors Mapping</h2>
       
       <p style="font-size:0.85em;color:var(--text-muted)"><em>Предыдущий раздел: <a href="#cot-tiers">CoT Tiers</a></em></p>
@@ -10442,6 +10717,57 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <p><strong>GHOST: размещение по слоям:</strong> См. каноническую таблицу: <a href="#rule-ghost-placement">§R3. GHOST Placement</a> в Реестре правил.</p>
+
+      <!-- L4-1: GHOST Layers Diagram -->
+      <div class="svg-infographic" style="margin:1.5em 0;">
+        <div class="svg-infographic-title">GHOST Layers Distribution</div>
+        <svg id="ghost-layers" viewBox="0 0 600 280" role="img" aria-label="GHOST layers distribution diagram">
+          <!-- Background -->
+          <rect x="50" y="20" width="500" height="230" rx="8" fill="var(--bg-surface)" stroke="var(--border)"/>
+          
+          <!-- Title -->
+          <text x="300" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="var(--text)">GHOST LAYERS</text>
+          
+          <!-- Layer bars -->
+          <!-- Description -->
+          <rect x="70" y="70" width="300" height="32" rx="4" fill="#3b82f6"/>
+          <text x="80" y="91" font-size="12" fill="white">Description (Spine)</text>
+          <text x="380" y="91" font-size="11" fill="var(--text-muted)">Определение (что)</text>
+          
+          <!-- Examples -->
+          <rect x="70" y="108" width="240" height="32" rx="4" fill="#22c55e"/>
+          <text x="80" y="129" font-size="12" fill="white">Examples</text>
+          <text x="320" y="129" font-size="11" fill="var(--text-muted)">Демонстрация (как)</text>
+          
+          <!-- Lorebook -->
+          <rect x="70" y="146" width="270" height="32" rx="4" fill="#f59e0b"/>
+          <text x="80" y="167" font-size="12" fill="white">Lorebook</text>
+          <text x="350" y="167" font-size="11" fill="var(--text-muted)">Триггеры (когда)</text>
+          
+          <!-- Author's Notes -->
+          <rect x="70" y="184" width="330" height="32" rx="4" fill="#8b5cf6"/>
+          <text x="80" y="205" font-size="12" fill="white">Author's Notes</text>
+          <text x="410" y="205" font-size="11" fill="var(--text-muted)">Состояние</text>
+          
+          <!-- System Prompt - crossed out -->
+          <rect x="70" y="222" width="110" height="28" rx="4" fill="#ef4444" opacity="0.5"/>
+          <text x="80" y="240" font-size="11" fill="white">System Prompt</text>
+          <line x1="70" y1="222" x2="180" y2="250" stroke="#ef4444" stroke-width="3"/>
+          <text x="190" y="240" font-size="10" fill="#ef4444">❌ НЕ ДУБЛИРОВАТЬ</text>
+        </svg>
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>Распределение GHOST по слоям:</strong></p>
+            <ul style="margin-top:0.5em;padding-left:1.5em;">
+              <li><strong>Description (Spine):</strong> Определение — что случилось</li>
+              <li><strong>Examples:</strong> Демонстрация — как GHOST проявляется</li>
+              <li><strong>Lorebook:</strong> Триггеры — когда активируется</li>
+              <li><strong>Author's Notes:</strong> Состояние — текущий статус</li>
+              <li><strong>System Prompt:</strong> ❌ НЕ ДУБЛИРОВАТЬ</li>
+            </ul>
+          </div>
+        </noscript>
+      </div>
 
       <div class="callout tip" style="margin:1em 0">
         <strong>🔗 Связано:</strong> О распространённых GHOST-анти-паттернах см. <a href="#antipatterns">Анти-паттерны</a>.
@@ -11487,6 +11813,15 @@ Total: 0.845 × 100 = 84.5%</code></pre>
   <div class="info-banner">
     <span class="mode-badge">⚠️ Critical</span>
   </div>
+  
+  <!-- L4-4: Context Trail -->
+  <aside class="context-trail" style="margin-bottom:1em;">
+    <span class="trail-label">Контекст:</span>
+    <a href="#rules-registry">Rules Registry</a> → 
+    <a href="#core-principles">Core Principles</a> → 
+    <span class="current">Antipatterns</span>
+  </aside>
+  
   <h2 id="раздел-6a-критические-анти-паттерны">📌 Раздел 6a: Критические анти-паттерны</h2>
   <p><span class="tag warn">Warning</span> — эти 7 ошибок критически влияют на качество персонажа на ЛЮБОМ треке.</p>
 
@@ -12399,6 +12734,14 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
 <!-- ID: E3 | Troubleshooting decision tree -->
 <!-- L2-5: Extended access for Track B -->
 <!-- L3-3: 12B-Specific Troubleshooting added -->
+
+<!-- L4-4: Context Trail -->
+<aside class="context-trail" style="margin-bottom:1em;">
+  <span class="trail-label">Контекст:</span>
+  <a href="#antipatterns">Antipatterns</a> → 
+  <a href="#testing">Testing</a> → 
+  <span class="current">Debugging</span>
+</aside>
 
 <!-- 12B-Specific Troubleshooting Section -->
 <section id="debugging-12b" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em; background:var(--bg-secondary);">

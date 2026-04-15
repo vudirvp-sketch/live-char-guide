@@ -2,8 +2,8 @@
       <h2>Как пользоваться гайдом</h2>
 
       <!-- TASK 2.1: Mini-Glossary for Quick Start -->
-      <details class="mini-glossary" style="margin-bottom:1.5em; padding:1em; background:var(--bg-secondary); border-radius:0.5em;">
-        <summary style="cursor:pointer; font-weight:600;"><strong>📖 Ключевые термины (нажмите для раскрытия)</strong></summary>
+      <details id="details-02_quickstart-0" aria-labelledby="details-02_quickstart-0-summary" class="mini-glossary" style="margin-bottom:1.5em; padding:1em; background:var(--bg-secondary); border-radius:0.5em;">
+  <summary id="details-02_quickstart-0-summary" role="button" aria-expanded="false" style="cursor:pointer; font-weight:600;"><strong>📖 Ключевые термины (нажмите для раскрытия)</strong></summary>
         <dl style="margin-top:1em;">
           <dt><strong>Price (Цена)</strong></dt>
           <dd>Наблюдаемая реакция, которая показывает, что якорь сработал. <a href="#rule-price">→ Полное определение</a></dd>
@@ -24,8 +24,8 @@
       </details>
 
       <!-- TASK 2.1: Collapsed Core Principles Quick Reference -->
-      <details class="core-principles-quick" style="margin-bottom:1.5em; padding:1em; border:1px solid var(--border); border-radius:0.5em;">
-        <summary style="cursor:pointer; font-weight:600;"><strong>📋 3 ключевых правила (нажмите для раскрытия)</strong></summary>
+      <details id="details-02_quickstart-1" aria-labelledby="details-02_quickstart-1-summary" class="core-principles-quick" style="margin-bottom:1.5em; padding:1em; border:1px solid var(--border); border-radius:0.5em;">
+  <summary id="details-02_quickstart-1-summary" role="button" aria-expanded="false" style="cursor:pointer; font-weight:600;"><strong>📋 3 ключевых правила (нажмите для раскрытия)</strong></summary>
         <ol style="margin-top:1em;">
           <li><strong><a href="#rule-price">Price Rule</a></strong> — Каждый якорь требует наблюдаемой манифестации</li>
           <li><strong><a href="#rule-voice-isolation">Voice Isolation</a></strong> — Голос изолирован от инструкций, задаётся в Examples</li>
@@ -364,8 +364,8 @@
         <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
           <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>
           <p>Если ваша модель имеет <strong>контекстное окно ≤4K токенов</strong>, вы ДОЛЖНЫ применить <a href="#four-k-fallback">4K-Fallback Protocol</a> для корректной работы персонажа.</p>
-          <details style="margin-top:0.5em">
-            <summary><strong>Быстрая справка 4K-Fallback</strong></summary>
+          <details id="details-02_quickstart-2" aria-labelledby="details-02_quickstart-2-summary" style="margin-top:0.5em">
+  <summary id="details-02_quickstart-2-summary" role="button" aria-expanded="false"><strong>Быстрая справка 4K-Fallback</strong></summary>
             <ul style="margin-top:0.5em">
               <li>Сократи якоря до 1 полюсного + маркерный</li>
               <li>Перемести GHOST в SP (исключение из обычного правила)</li>
