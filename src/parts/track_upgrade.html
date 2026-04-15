@@ -8,6 +8,89 @@
   <p><span class="tag core">Core</span> — инструкции по расширению карточки при переходе на более высокий Track.</p>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- MIGRATION v4.x -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section id="migration-v4" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em; background:var(--bg-secondary);">
+    <h3>📋 Миграция с v4.x</h3>
+    
+    <div class="callout warn" style="margin:1em 0">
+      <strong>⚠️ Важно:</strong> Версия 5.0 ввела SPINE-структуру и Voice Isolation. 
+      Карты v4.x требуют адаптации для корректной работы.
+    </div>
+    
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Элемент v4.x</th><th>Элемент v5.x</th><th>Действие</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Personality traits</td>
+            <td>SPINE</td>
+            <td>Разбить на WANT/NEED/FLAW/LIE/GHOST</td>
+          </tr>
+          <tr>
+            <td>Speech patterns</td>
+            <td>Examples</td>
+            <td>Перенести в <code>&lt;START&gt;</code> блоки</td>
+          </tr>
+          <tr>
+            <td>Background</td>
+            <td>GHOST</td>
+            <td>Выделить формирующее событие</td>
+          </tr>
+          <tr>
+            <td>Description голос</td>
+            <td>—</td>
+            <td>УДАЛИТЬ, заменить Examples</td>
+          </tr>
+          <tr>
+            <td>System Prompt叙事</td>
+            <td>SP ограничения</td>
+            <td>Оставить только запреты + антигодмодинг</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <details class="interactive" style="margin-top:1em">
+      <summary><span>📝 Пример миграции карточки</span></summary>
+      <div class="example-block" style="padding:1em">
+        <h4>v4.x карточка:</h4>
+        <pre><code>Personality: Тревожный, избегает решений, любит животных.
+Speech: Говорит быстро, переспрашивает, использует слова-паразиты.
+Background: В детстве потерял бабушку, чувствует вину.</code></pre>
+        
+        <h4>v5.x карточка:</h4>
+        <pre><code>&lt;motivation&gt;
+WANT: Быть "нормальным" — без тревоги и социофобии.
+NEED: Принять свой интенсивный внутренний мир.
+FLAW: Избегает решений, откладывает до последнего.
+LIE: "Если подожду — всё само решится."
+GHOST: В 14 лет не пошёл к умирающей бабушке.
+&lt;/motivation&gt;
+
+&lt;behavior&gt;
+- Когда нужно решение → откладывает → Цена: тревога растёт
+- Если кто-то ждёт ответа → грызёт ручку → Цена: выглядит нервным
+&lt;/behavior&gt;
+
+&lt;!-- Voice в Examples, не в Description --&gt;</code></pre>
+      </div>
+    </details>
+    
+    <div class="callout tip" style="margin-top:1em">
+      <strong>💡 Ключевые изменения v5.x:</strong>
+      <ul>
+        <li><strong>SPINE</strong> — 5 элементов вместо списка trait'ов</li>
+        <li><strong>Voice Isolation</strong> — голос только в Examples <a href="#rule-voice-isolation">→ §R2</a></li>
+        <li><strong>Price</strong> — обязателен для FLAW/GHOST якорей <a href="#rule-price">→ §R1</a></li>
+        <li><strong>GHOST Placement</strong> — в Description, не в SP <a href="#rule-ghost-placement">→ §R3</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
   <!-- TRACK A → TRACK B -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <article id="track-a-to-b" class="upgrade-path" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em;">

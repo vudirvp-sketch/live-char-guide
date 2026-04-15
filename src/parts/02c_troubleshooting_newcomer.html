@@ -1,0 +1,132 @@
+<!-- ==================== NEWCOMER TROUBLESHOOTING SECTION ==================== -->
+<!-- ID: TROUB | L3-4: Quick symptom→cause lookup for users following the guide -->
+<section id="troubleshooting-newcomer">
+  <div class="info-banner">
+    <span class="mode-badge">🔧 Troubleshooting</span>
+    <span class="mode-hint">«Я сделал всё по гайду, но...»</span>
+  </div>
+  
+  <h2>🚨 Quick Troubleshooting</h2>
+  
+  <p><span class="tag core">Core</span> — быстрый справочник симптомов и решений для начинающих.</p>
+  
+  <div class="callout tip" style="margin:1em 0">
+    <strong>💡 Как использовать:</strong> Найди симптом → проверь причину → примени Quick Fix → переходи к разделу для деталей.
+  </div>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Симптом</th><th>Причина</th><th>Где проверить</th><th>Quick Fix</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Персонаж OOC</strong><br><em>Выходит из образа</em></td>
+          <td>GHOST в SP<br><em>или</em> противоречия в лоре</td>
+          <td><a href="#an-ghost">Technical §5.2</a><br><a href="#rule-ghost-placement">§R3</a></td>
+          <td>Перемести GHOST в Description (блок <code>&lt;motivation&gt;</code>)</td>
+        </tr>
+        <tr>
+          <td><strong>Голос «плывёт»</strong><br><em>Теряется стиль речи</em></td>
+          <td>Voice Leak в Description<br><em>или</em> противоречия Examples</td>
+          <td><a href="#rule-voice-isolation">§R2</a><br><a href="#examples">§3.2</a></td>
+          <td>Удали стилистические директивы из Description. Голос только в Examples.</td>
+        </tr>
+        <tr>
+          <td><strong>Годмодинг</strong><br><em>Модель пишет за {{user}}</em></td>
+          <td>Нет антигодмодинга в SP</td>
+          <td><a href="#rule-anti-godmodding">§R4</a><br><a href="#antigodmoding">§5.0.1</a></td>
+          <td>Добавь блок: «Никогда не описывай действия, мысли или чувства {{user}}»</td>
+        </tr>
+        <tr>
+          <td><strong>Игнорирует SPINE</strong><br><em>Не следует мотивации</em></td>
+          <td>Якоря без Price<br><em>или</em> нет триггеров для GHOST</td>
+          <td><a href="#anchors">§3.1</a><br><a href="#rule-price">§R1</a></td>
+          <td>Добавь Price к якорям FLAW/GHOST: <code>→ Цена: ...</code></td>
+        </tr>
+        <tr>
+          <td><strong>Повторяет фразы</strong><br><em>Зацикливание</em></td>
+          <td>Token bloat<br><em>или</em> RepPen > 1.10</td>
+          <td><a href="#sampling">§5.1</a><br><a href="#appendix2">Приложение 2</a></td>
+          <td>Сократи Description до &lt;600 токенов. Проверь repetition_penalty = 1.05</td>
+        </tr>
+        <tr>
+          <td><strong>«Плоский» персонаж</strong><br><em>Без глубины</em></td>
+          <td>T слишком высок<br><em>или</em> WANT = NEED</td>
+          <td><a href="#sampling">§5.1</a><br><a href="#spine">§4.1</a></td>
+          <td>Для 12B: T = 0.6–0.8. Проверь конфликт WANT/NEED</td>
+        </tr>
+        <tr>
+          <td><strong>Теряет тики</strong><br><em>Персонаж перестал использовать сленг/паттерны</em></td>
+          <td>presence_penalty > 0<br><em>или</em> Voice Leak в Description</td>
+          <td><a href="#sampling">§5.1</a><br><a href="#rule-voice-isolation">§R2</a></td>
+          <td>Для 12B: <code>presence_penalty = 0.0</code> (зафиксируй!)</td>
+        </tr>
+        <tr>
+          <td><strong>Анатомические ошибки</strong><br><em>Телепортация, лишние конечности</em></td>
+          <td>Нет SPATIAL LOCK</td>
+          <td><a href="#sampling">§5.1</a></td>
+          <td>Добавь в SP: «Track distance, posture, object weight. No teleportation.»</td>
+        </tr>
+        <tr>
+          <td><strong>Забывает факты</strong><br><em>Контекст теряется</em></td>
+          <td>Контекст ≤4K<br><em>или</em> противоречия в LB</td>
+          <td><a href="#four-k-fallback">§5.12</a><br><a href="#lorebook">§5.3</a></td>
+          <td>Если 4K → примени 4K-Fallback протокол</td>
+        </tr>
+        <tr>
+          <td><strong>«Умный» персонаж</strong><br><em>Говорит как ИИ/рассказчик</em></td>
+          <td>Голос в Description<br><em>или</em> Examples конфликтуют</td>
+          <td><a href="#rule-voice-isolation">§R2</a><br><a href="#example-quality-tiers">§3.2.1</a></td>
+          <td>Удали описания речи из Description. Проверь Examples на Tier 1 качество.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <h3>🔍 Расширенная диагностика</h3>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Если...</th><th>Переходи к</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Симптом не найден в таблице</td>
+          <td><a href="#debugging">Раздел 7: Диагностика</a> (Track B+)</td>
+        </tr>
+        <tr>
+          <td>Нужно проверить все элементы карточки</td>
+          <td><a href="#appendix4">Приложение 4: Чеклист валидации</a></td>
+        </tr>
+        <tr>
+          <td>Не понимаешь, что пошло не так</td>
+          <td><a href="#antipatterns-core">Критические анти-паттерны</a></td>
+        </tr>
+        <tr>
+          <td>Модель 12B и проблемы</td>
+          <td><a href="#debugging-12b">Диагностика для 12B–14B</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="callout warn" style="margin:1.5em 0">
+    <strong>⚠️ Самые частые ошибки новичков:</strong>
+    <ol>
+      <li><strong>presence_penalty = 0.7</strong> → сбрось на 0.0 (для 12B это критично)</li>
+      <li><strong>Голос в Description</strong> → удали, перенеси в Examples</li>
+      <li><strong>GHOST в SP</strong> → перенеси в Description</li>
+      <li><strong>temperature > 0.85</strong> → снизь до 0.6–0.8 (для 12B)</li>
+      <li><strong>Нет антигодмодинга</strong> → добавь обязательный блок</li>
+    </ol>
+  </div>
+  
+  <div class="callout tip" style="margin-top:1em">
+    <strong>💡 Правило одного изменения:</strong>
+    <p>Меняй только один параметр за раз. Иначе не узнаешь, что помогло.</p>
+  </div>
+</section>
+
+<hr>

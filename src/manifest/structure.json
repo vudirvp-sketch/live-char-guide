@@ -7,9 +7,10 @@
     { "file": "01_header.html", "type": "body-start" },
     { "file": "00_rules_registry.html", "type": "section", "anchors": ["#rules-registry", "#rule-price", "#rule-voice-isolation", "#rule-ghost-placement", "#rule-anti-godmodding", "#rule-voice-description-conditional", "#rule-anchor-format"], "stage": 0 },
     { "file": "01_core_principles.html", "type": "section", "anchors": ["#core-principles", "#price-definition"], "stage": 0 },
-    { "file": "track_upgrade.html", "type": "section", "anchors": ["#track-upgrade-paths", "#track-a-to-b", "#track-b-to-c"], "stage": 0 },
+    { "file": "track_upgrade.html", "type": "section", "anchors": ["#track-upgrade-paths", "#track-a-to-b", "#track-b-to-c", "#migration-v4"], "stage": 0 },
     { "file": "02_glossary.html", "type": "section", "anchors": ["#glossary"], "stage": 0 },
     { "file": "02_quickstart.html", "type": "section", "anchors": ["#intro", "#quick-start"], "stage": 1, "phase": "prototype", "phase_extensions": ["B: advanced_ghost"], "extension_note": "Stage 1 contains advanced GHOST content (Lorebook/AN integration) intended for Track B+ users. Basic GHOST definition is available to all tracks." },
+    { "file": "02c_troubleshooting_newcomer.html", "type": "section", "anchors": ["#troubleshooting-newcomer"], "stage": 1, "description": "Quick symptom→cause lookup for newcomers following the guide" },
     { "file": "03_architecture.html", "type": "section", "anchors": ["#architecture", "#ghost-rules"], "stage": 2, "phase": "production" },
     { "file": "04_core_blocks.html", "type": "section", "anchors": ["#anchors", "#examples", "#example-quality-tiers", "#greeting"], "stage": 3 },
     { "file": "05_psychology.html", "type": "section", "anchors": ["#spine", "#enneagram", "#ocean", "#ocean-pole-guidelines", "#mbti-section"], "stage": 4 },
@@ -20,8 +21,8 @@
     { "file": "06a_antipatterns_core.html", "type": "section", "anchors": ["#antipatterns-core", "#ap-token-bloat", "#ap-missing-price", "#ap-voice-description", "#ap-ghost-sp", "#ap-reppen-overdose", "#ap-godmoding-lb", "#ap-ocean-overload"], "stage": 6 },
     { "file": "06b_antipatterns_advanced.html", "type": "section", "anchors": ["#antipatterns"], "stage": 6 },
     { "file": "07_testing.html", "type": "section", "anchors": ["#diagnostics", "#test-requirements"], "stage": 7 },
-    { "file": "08b_debugging.html", "type": "section", "anchors": ["#debugging", "#acc-debug-role", "#acc-debug-voice", "#acc-debug-hallucinations", "#acc-debug-godmoding", "#acc-debug-perfect", "#acc-debug-repeats", "#acc-debug-context", "#acc-debug-physical"], "stage": 8 },
-    { "file": "08_appendices.html", "type": "section", "anchors": ["#appendix2", "#appendix3", "#appendix4", "#appendix5", "#appendix6"] },
+    { "file": "08b_debugging.html", "type": "section", "anchors": ["#debugging", "#debugging-12b", "#acc-debug-role", "#acc-debug-voice", "#acc-debug-hallucinations", "#acc-debug-godmoding", "#acc-debug-perfect", "#acc-debug-repeats", "#acc-debug-context", "#acc-debug-physical"], "stage": 8 },
+    { "file": "08_appendices.html", "type": "section", "anchors": ["#appendix2", "#appendix3", "#appendix3b", "#appendix4", "#appendix5", "#appendix6"] },
     { "file": "09_conclusion.html", "type": "section", "anchors": ["#conclusion"] },
     { "file": "09_footer.html", "type": "body-end", "critical": true },
     { "file": "styles.css", "type": "style", "inline": true },
@@ -29,14 +30,14 @@
   ],
   "stage_order": [
     { "stage": 0, "name": "Foundation", "description": "Core principles, terminology, canonical rules, and track upgrade paths" },
-    { "stage": 1, "name": "Quick Start", "description": "Minimal viable card in ~5 minutes", "phase": "prototype" },
+    { "stage": 1, "name": "Quick Start", "description": "Minimal viable card in ~5 minutes + troubleshooting", "phase": "prototype" },
     { "stage": 2, "name": "Architecture", "description": "System design and assembly rules", "phase": "production" },
     { "stage": 3, "name": "Core Blocks", "description": "Anchors, Examples, Quality Tiers, Greeting" },
     { "stage": 4, "name": "Psychology", "description": "Spine, Enneagram, OCEAN (with context-scaled guidelines)" },
     { "stage": 5, "name": "Implementation", "description": "Technical settings, CoT tiers, parameters" },
     { "stage": 6, "name": "Anti-patterns", "description": "Critical mistakes to avoid BEFORE diagnostics" },
     { "stage": 7, "name": "Diagnostics", "description": "Test scenarios and symptom table" },
-    { "stage": 8, "name": "Debugging", "description": "Troubleshooting decision tree" }
+    { "stage": 8, "name": "Debugging", "description": "Troubleshooting decision tree + 12B-specific diagnostics" }
   ],
   "validation": {
     "ci_scripts": [
