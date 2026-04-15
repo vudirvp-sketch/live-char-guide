@@ -16,9 +16,9 @@
       "08b_debugging.html": ["07_testing.html", "06b_antipatterns_advanced.html"]
     },
     "track_matrix": {
-      "A": ["02_quickstart.html", "04_core_blocks.html:basic", "06a_antipatterns_core.html"],
-      "B": ["03_architecture.html", "05_psychology.html", "05a_spine_anchors.html", "05b_cot_tiers.html", "06_technical.html"],
-      "C": ["06b_antipatterns_advanced.html", "08b_debugging.html"]
+      "A": ["track_upgrade.html", "02_quickstart.html", "04_core_blocks.html:basic", "06a_antipatterns_core.html"],
+      "B": ["track_upgrade.html", "03_architecture.html", "05_psychology.html", "05a_spine_anchors.html", "05b_cot_tiers.html", "06_technical.html"],
+      "C": ["track_upgrade.html", "06b_antipatterns_advanced.html", "08b_debugging.html"]
     }
   },
   "aliases": {
@@ -27,6 +27,9 @@
     "spine": "05_psychology.html#spine",
     "anchors": "04_core_blocks.html#anchors",
     "antipatterns": "06a_antipatterns_core.html",
-    "advanced_antipatterns": "06b_antipatterns_advanced.html"
+    "advanced_antipatterns": "06b_antipatterns_advanced.html",
+    "upgrade": "track_upgrade.html",
+    "track-a-to-b": "track_upgrade.html#track-a-to-b",
+    "track-b-to-c": "track_upgrade.html#track-b-to-c"
   }
 }

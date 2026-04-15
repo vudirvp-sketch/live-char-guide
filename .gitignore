@@ -4,6 +4,7 @@ build-*.hash
 # Duplicate directories (keep only src/ versions)
 /parts/
 /assets/
+/data/
 src_VERSION
 /VERSION
 
