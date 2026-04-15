@@ -62,6 +62,7 @@
             <tr><td>Незнакомцы</td><td>Впервые в компании</td><td>Здоровается тихо, занимает место у стены, наблюдает</td><td>Устаёт от напряжения</td></tr>
             <tr><td>Угроза</td><td>Кто-то вторгается в личное пространство</td><td>Отшатывается, голос становится резче</td><td>Вина за «неадекватную» реакцию</td></tr>
             <tr><td>Стресс</td><td>Срок или давление</td><td>Начинает ходить, перебирает вещи на столе</td><td>Не может сосредоточиться, теряет время</td></tr>
+            <tr><td><strong>Lie/Concealment</strong></td><td>Walter White (Breaking Bad)</td><td>Two-second pause, thumb rubbing glasses frame — micro-expression of deception</td><td>Even «strong» characters have visible Price</td></tr>
           </tbody>
         </table>
       </div>
@@ -344,6 +345,42 @@
 
         <p style="margin-top:1em;font-size:0.9em;">Это контрастное сравнение валидирует использование <code>frequency_penalty: 0.3</code> и строгое следование синтаксису Example Messages.</p>
         <p style="font-size:0.85em;color:var(--text-muted);">См. пример: <a href="#appendix3b">Приложение 3B: Jesse Pinkman</a></p>
+
+      <h4>Extreme Case: Joker (The Dark Knight)</h4>
+      <div class="example-block">
+      <p>Joker's voice cannot be described.
+      It can only be reproduced through absurd actions and pauses.</p>
+
+      <div class="comparison-block">
+      <div class="wrong">
+      <p><strong>❌ WRONG APPROACH (in Description):</strong></p>
+      <p>"Joker speaks chaotically, laughs at inappropriate moments,
+      uses pauses for dramatic effect."</p>
+      <p><em>This description doesn't work. The model will ignore it or
+      interpret it as "eccentric villain" — a generic conclusion.</em></p>
+      </div>
+
+      <div class="correct">
+      <p><strong>✅ CORRECT APPROACH (in Example Messages):</strong></p>
+      <pre><code>&lt;START&gt;
+{{char}}: *Tongue licks scars on lip. Hand twirls knife,
+blade scratches countertop — scraping sound. Quiet chuckle.*
+"Why... so... serious?"</code></pre>
+      <p><em>The model learns:</em></p>
+      <ul>
+      <li>Pauses between words ("why... so... serious")</li>
+      <li>Action-speech connection (licks scar → speaks)</li>
+      <li>Absurdity (knife scraping + chuckle + philosophical question)</li>
+      </ul>
+      </div>
+      </div>
+
+      <div class="callout tip">
+      <strong>This is ironclad proof of the "Voice Only in Examples" rule.</strong><br>
+      If you can teach AI to sound like Joker without verbal instructions
+      in Description — you've mastered the guide.
+      </div>
+      </div>
       </div>
       </section>
 
@@ -390,6 +427,33 @@
         <li>Речь/LIE: «Я бы помнил» — верит, что поглощение восстановит цельность</li>
         <li>Крючок: вопрос собеседнику</li>
       </ul>
+
+      <h4>Alternative Example: Paul Atreides (Dune)</h4>
+      <div class="example-block">
+      <pre><code>Greeting:
+The air in the sietch is thick, smelling of cinnamon and sweat.
+Paul sits cross-legged, eyes closed, but eyelids tremble —
+he sees the flows of time.
+Fingers clench a handful of sand, sand sifts through fingers with a quiet hiss.
+
+"I knew you would come."
+
+Eyes open — blue-in-blue.
+Awakening from trance, but attention is already here, in the present.</code></pre>
+
+      <div class="callout tip">
+      <strong>Algorithm Breakdown:</strong>
+      <ul>
+      <li><strong>Sensory:</strong> thick air, cinnamon smell (spice), sweat</li>
+      <li><strong>Pose/FLAW:</strong> sitting in trance, trembling eyelids — obsession with visions</li>
+      <li><strong>Speech/LIE:</strong> "I knew" — belief in prophetic mission</li>
+      <li><strong>Hook:</strong> confident statement + blue eyes gaze</li>
+      </ul>
+      <p><strong>Pedagogical Note:</strong> Dune teaches that environment dictates behavior.
+      Sensory elements here are not decoration — they <em>set the trance state</em> (spice).
+      Sensory Anchor = preliminary setup for character perception.</p>
+      </div>
+      </div>
 
       <p><strong>Чего избегать в Greeting:</strong></p>
       <ul>
