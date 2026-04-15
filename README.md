@@ -120,6 +120,10 @@ The guide supports three reading tracks:
 - **Track B (Full Pipeline):** ~30 min — Complete card building process
 - **Track C (Advanced):** ~60 min — All features, including lorebook mechanics and advanced techniques
 
+### Track Limitations
+
+- **Track B:** Диагностика доступна. Debugging (decision tree) → Track C
+
 ## Deployment
 
 The project uses GitHub Pages with automatic deployment via GitHub Actions:

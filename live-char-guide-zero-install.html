@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 3f8f32a0 -->
-<!-- Generated: 2026-04-15T04:58:37.062Z -->
+<!-- Build hash: 340e859b -->
+<!-- Generated: 2026-04-15T05:31:35.956Z -->
 <!-- Version: 5.6.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="3f8f32a0">
+<meta name="build-hash" content="340e859b">
 <meta name="livechar-version" content="5.6.0">
 <meta name="livechar-build" content="2026-04-15">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -6082,26 +6082,7 @@ body.theme-light .track-prerequisite-warning .track-link {
         </ul>
       </div>
       
-      <div class="infographic" style="margin-top:1em;">
-        <div class="infographic-title">ПРОТОКОЛ ЯКОРЕЙ — ФОРМАТ A02</div>
-        <div class="inf-pipeline">
-          <div class="inf-pipeline-step">
-            <div class="inf-step-id">01</div>
-            <div class="inf-step-label">ТРИГГЕР</div>
-            <div class="inf-step-desc">Внешний стимул</div>
-          </div>
-          <div class="inf-pipeline-step">
-            <div class="inf-step-id">02</div>
-            <div class="inf-step-label">ДЕЙСТВИЕ</div>
-            <div class="inf-step-desc">Наблюдаемая реакция</div>
-          </div>
-          <div class="inf-pipeline-step">
-            <div class="inf-step-id">03</div>
-            <div class="inf-step-label">PRICE</div>
-            <div class="inf-step-desc">Мгновенная манифестация</div>
-          </div>
-        </div>
-      </div>
+      <p><strong>Визуальный протокол:</strong> См. инфографику в <a href="#anchors">Раздел 3.1</a>.</p>
     </div>
     <p style="font-size:0.85em;color:var(--text-muted)">Подробнее: <a href="#anchors">Раздел 3.1</a></p>
   </article>
@@ -6360,6 +6341,7 @@ body.theme-light .track-prerequisite-warning .track-link {
   <details class="interactive" id="acc-principle-voice">
     <summary><span><h3 id="3-voice-изоляция-голоса" style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3> <small style="color:var(--text-muted)">— Голос персонажа задаётся исключительно в Примерных сообщениях</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
+  <p class="registry-ref" style="margin-bottom:0.5em;font-size:0.9em;color:var(--text-muted)">📋 Каноническое определение: <a href="#rule-voice-isolation">§R2. Voice Isolation</a> в Реестре правил.</p>
   <div class="table-wrap">
     <table>
       <thead>
@@ -6384,19 +6366,9 @@ body.theme-light .track-prerequisite-warning .track-link {
   <details class="interactive" id="acc-principle-ghost" data-requires-track="B C">
     <summary><span><h3 id="4-ghost-размещение-по-слоям" style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>Слой</th><th>Роль</th><th>Что писать</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><strong>Описание персонажа (Spine)</strong></td><td>Определение</td><td>Что именно произошло / какой паттерн</td></tr>
-        <tr><td><strong>Примерные сообщения</strong></td><td>Демонстрация</td><td>Как GHOST проявляется в поведении</td></tr>
-        <tr><td><strong>LB</strong></td><td>Триггеры</td><td>Сенсорные ключи (keyword) или сюжетные точки (range)</td></tr>
-        <tr><td><strong>AN (Author's Notes)</strong></td><td>Текущее состояние</td><td>Динамический [GHOST-активация]</td></tr>
-        <tr><td><strong>System Prompt</strong></td><td>❌ <strong>НЕ ДУБЛИРОВАТЬ</strong></td><td>Здесь — только стиль и запреты</td></tr>
-      </tbody>
-    </table>
+  <div class="callout tip">
+    <strong>📋 Каноническая таблица размещения GHOST:</strong>
+    <p>См. <a href="#rule-ghost-placement">§R3. GHOST Placement</a> в Реестре правил.</p>
   </div>
 
   <h4 id="ghost-placement-conditions">📋 Условное размещение GHOST</h4>
@@ -6482,8 +6454,7 @@ body.theme-light .track-prerequisite-warning .track-link {
     <summary><span><h3 id="6-антигодмодинг" style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3> <small style="color:var(--text-muted)">— Обязательные строки в System Prompt против управления {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>Обязательные строки в System Prompt:</strong></p>
-  <pre><code>Никогда не описывай действия, мысли или чувства {{user}}. Пиши только за {{char}}.
-{{user}} — только наблюдаемое извне: жесты, речь, дыхание, поза, выражение лица.</code></pre>
+  <p>См. канонический блок: <a href="#rule-anti-godmodding">§R4. Anti-Godmodding</a> в Реестре правил.</p>
   <p>Положительная формулировка работает лучше чисто негативной: модель понимает не только что запрещено, но и что разрешено.</p>
   <p style="font-size:0.85em;color:var(--text-muted)">Полный протокол: <a href="#antigodmoding">Раздел 5.0.1</a>.</p>
     </div>
@@ -7960,7 +7931,7 @@ GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные 
             </tr>
             <tr>
               <td><strong>7</strong></td>
-              <td><strong>Триггер → Действие → Цена</strong><br>Сформулируй якоря</td>
+              <td><strong>Триггер → Действие → Цена</strong><br>Сформулируй якоря по каноническому протоколу. См. <a href="#rule-anchor-format">§R6. Anchor Format</a></td>
               <td>«Кто-то опаздывает → проверяет телефон каждые 2 минуты, придумывает сценарии → Цена: не может сосредоточиться, раздражён»</td>
             </tr>
           </tbody>
@@ -9419,21 +9390,7 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
         </ul>
       </div>
 
-      <p><strong>GHOST: размещение по слоям:</strong></p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Слой</th><th>Роль</th><th>Что писать</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Описание персонажа (Spine)</td><td>Определение</td><td>Что именно произошло / какой паттерн</td></tr>
-            <tr><td>Примерные сообщения</td><td>Демонстрация</td><td>Как GHOST проявляется в поведении</td></tr>
-            <tr><td>LB</td><td>Триггеры</td><td>Сенсорные ключи (keyword) или сюжетные точки (range), активирующие GHOST</td></tr>
-            <tr><td>AN</td><td>Текущее состояние</td><td>Динамический [GHOST-активация]: что сработало в сессии</td></tr>
-            <tr><td>System Prompt</td><td>❌ Не дублировать</td><td>Здесь — только стиль и запреты</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <p><strong>GHOST: размещение по слоям:</strong> См. каноническую таблицу: <a href="#rule-ghost-placement">§R3. GHOST Placement</a> в Реестре правил.</p>
 
       <div class="callout tip" style="margin:1em 0">
         <strong>🔗 Связано:</strong> О распространённых GHOST-анти-паттернах см. <a href="#antipatterns">Анти-паттерны</a>.
