@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 980b8275 -->
-<!-- Generated: 2026-04-15T05:50:11.711Z -->
+<!-- Build hash: 027ed2ff -->
+<!-- Generated: 2026-04-15T06:39:15.717Z -->
 <!-- Version: 5.6.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="980b8275">
+<meta name="build-hash" content="027ed2ff">
 <meta name="livechar-version" content="5.6.0">
 <meta name="livechar-build" content="2026-04-15">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -4130,57 +4130,6 @@ body.theme-oled .ocean-validator-details {
   margin: 0.5em 0;
 }
 
-/* === ID: D3 | MODEL TOGGLE === */
-.model-toggle {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1em 1.2em;
-  margin: 1em 0;
-}
-
-.model-toggle h3 {
-  margin-top: 0;
-  font-size: 1rem;
-  color: var(--text);
-}
-
-.model-toggle-buttons {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin: 0.8em 0;
-}
-
-.model-btn {
-  padding: 0.5em 1em;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  font-family: inherit;
-}
-
-.model-btn:hover {
-  background: var(--accent-soft);
-  color: var(--text);
-}
-
-.model-btn.active {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
-
-.model-hint {
-  font-size: 0.85em;
-  color: var(--text-muted);
-  margin-top: 0.5em;
-}
-
 /* === STICKY TABLE HEADERS (P3 3.3) === */
 /* Keeps column headers visible when scrolling through long tables */
 .table-wrap {
@@ -4222,25 +4171,6 @@ body.theme-oled .ocean-validator-details {
 .mini-toc a:hover {
   color: var(--accent, #6c63ff);
 }
-
-/* === MODEL-SPECIFIC CONTENT VISIBILITY (v5.5.0) === */
-/* Default: hide model-specific content */
-[data-model="12B"], [data-model="32B"] { display: none !important; }
-
-/* When 12B mode active: show 12B content, keep 32B hidden */
-body.model-12B [data-model="12B"] { display: block !important; }
-body.model-12B [data-model="32B"] { display: none !important; }
-
-/* When 32B mode active: show 32B content, keep 12B hidden */
-body.model-32B [data-model="12B"] { display: none !important; }
-body.model-32B [data-model="32B"] { display: block !important; }
-
-/* "All" mode: show all model-specific content */
-body.model-all [data-model] { display: block !important; }
-
-/* Handle inline elements */
-body.model-12B [data-model="12B"].inline,
-body.model-32B [data-model="32B"].inline { display: inline !important; }
 
 /* === ID: A5 | CHECKPOINTS === */
 .checkpoint {
@@ -5589,17 +5519,6 @@ body.theme-light .track-prerequisite-warning .track-link {
     <p>Полный гайд: ~2–3 часа (все треки последовательно).</p>
   </div>
 
-  <!-- ID: D3 | Model Toggle -->
-  <div class="model-toggle" id="model-toggle">
-    <h3 id="фильтр-по-модели">🔧 Фильтр по модели</h3>
-    <div class="model-toggle-buttons" role="group" aria-label="Выбор модели">
-      <button class="model-btn active" data-model="all" aria-pressed="true">Показать всё</button>
-      <button class="model-btn" data-model="12B" aria-pressed="false">12B–14B</button>
-      <button class="model-btn" data-model="32B" aria-pressed="false">32B+ / API</button>
-    </div>
-    <p class="model-hint"><em>Фильтрует контент по размеру модели. Рекомендации для 12B помечены <code>[12B]</code>, для 32B+ — <code>[32B+]</code>.</em></p>
-  </div>
-
   <!-- ID: D1 | Interactive Dependency Map -->
   <div class="dependency-map" id="dependency-map">
     <h3 id="карта-зависимостей-блоков">🔗 Карта зависимостей блоков</h3>
@@ -6938,6 +6857,12 @@ body.theme-light .track-prerequisite-warning .track-link {
 
       <p style="font-size:0.85em;color:var(--text-muted)">Полное описание GHOST и его интеграции: <a href="#spine">Раздел 4.1</a>. Размещение по слоям: <a href="#rule-ghost-placement">Правило GHOST Placement</a>.</p>
 
+      <!-- TASK-004-A: Advanced GHOST Content Notice -->
+      <div class="callout info" style="margin:1em 0">
+        <strong>📐 Продвинутый контент:</strong> Следующая секция содержит расширенные материалы по GHOST (интеграция с Lorebook и Author's Notes) для Track B+.
+        Базовая версия GHOST доступна всем трекам выше. Для полного погружения: <a href="#an-ghost">Раздел 5.2 (GHOST в Lorebook)</a>.
+      </div>
+
       <!-- Advanced GHOST content - Track B+ only -->
       <div data-requires-track="B C">
         <div class="callout info" style="margin-top:1em">
@@ -7003,7 +6928,11 @@ body.theme-light .track-prerequisite-warning .track-link {
           <li>☐ 2+ примера (нейтральный + стресс)?</li>
           <li>☐ Антигодмодинг добавлен в SP?</li>
         </ol>
-        <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">→ <a href="#checkpoint-spine">Полный чеклист Stage 1</a></p>
+        <!-- TASK-004-I: Checkpoint footer with link to extended checklist -->
+        <div class="checkpoint-footer" style="margin-top:0.75em; padding-top:0.5em; border-top:1px solid var(--border);">
+          ✅ <strong>Мини-проверка завершена?</strong> 
+          <a href="#checkpoint-spine">Полный чеклист валидации Stage 1</a> →
+        </div>
       </div>
 
       <!-- Navigation Footer - P0-3 -->
@@ -10605,9 +10534,6 @@ Total: 0.845 × 100 = 84.5%</code></pre>
     </div>
   </article>
 
-  <div class="callout info" style="margin-top:2em">
-    <p class="track-badge">Полный каталог анти-паттернов с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Раздел 9a: Анти-паттерны (полный)</a></p>
-  </div>
 </section>
 
 <hr>
@@ -12557,7 +12483,7 @@ No smart typography. If conflict → default to Examples.
 </div>
 
 <!-- Main JavaScript (hashed by build script) -->
-<script src="assets/main.4971e35d.js" defer></script>
+<script src="assets/main.962c664d.js" defer></script>
 
 </body>
 </html>
