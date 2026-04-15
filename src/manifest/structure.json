@@ -9,7 +9,7 @@
     { "file": "track_upgrade.html", "type": "section", "anchors": ["#track-upgrade-paths", "#track-a-to-b", "#track-b-to-c"], "stage": 0 },
     { "file": "01_core_principles.html", "type": "section", "anchors": ["#core-principles", "#price-definition"], "stage": 0 },
     { "file": "02_glossary.html", "type": "section", "anchors": ["#glossary"], "stage": 0 },
-    { "file": "02_quickstart.html", "type": "section", "anchors": ["#intro", "#quick-start"], "stage": 1, "phase": "prototype" },
+    { "file": "02_quickstart.html", "type": "section", "anchors": ["#intro", "#quick-start"], "stage": 1, "phase": "prototype", "phase_extensions": ["B: advanced_ghost"], "extension_note": "Stage 1 contains advanced GHOST content (Lorebook/AN integration) intended for Track B+ users. Basic GHOST definition is available to all tracks." },
     { "file": "03_architecture.html", "type": "section", "anchors": ["#architecture", "#ghost-rules"], "stage": 2, "phase": "production" },
     { "file": "04_core_blocks.html", "type": "section", "anchors": ["#anchors", "#examples", "#example-quality-tiers", "#greeting"], "stage": 3 },
     { "file": "05_psychology.html", "type": "section", "anchors": ["#spine", "#enneagram", "#ocean", "#ocean-pole-guidelines", "#mbti-section"], "stage": 4 },
@@ -25,7 +25,7 @@
     { "file": "09_conclusion.html", "type": "section", "anchors": ["#conclusion"] },
     { "file": "09_footer.html", "type": "body-end", "critical": true },
     { "file": "styles.css", "type": "style", "inline": true },
-    { "file": "checkpoints.html", "type": "fragments", "description": "Embedded checkpoints after each stage" }
+    { "file": "checkpoints.html", "type": "fragments", "description": "Extended validation checklists for final verification", "architecture_note": "Two-level checkpoint system: (1) Inline mini-checkpoints in sections provide quick verification in context. (2) This file contains extended checklists for final validation. Both serve different purposes - inline for quick self-check during learning, extended for thorough validation before deployment." }
   ],
   "stage_order": [
     { "stage": 0, "name": "Foundation", "description": "Core principles, terminology, canonical rules, and track upgrade paths" },

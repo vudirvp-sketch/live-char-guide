@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: d3c2d381 -->
-<!-- Generated: 2026-04-15T05:31:35.527Z -->
+<!-- Build hash: 980b8275 -->
+<!-- Generated: 2026-04-15T05:50:11.711Z -->
 <!-- Version: 5.6.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="d3c2d381">
+<meta name="build-hash" content="980b8275">
 <meta name="livechar-version" content="5.6.0">
 <meta name="livechar-build" content="2026-04-15">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -6114,6 +6114,7 @@ body.theme-light .track-prerequisite-warning .track-link {
         <li><label><input type="checkbox" data-key="chk-upg-a3"> Spine расширен: WANT/NEED/FLAW/LIE связаны в логическую цепочку</label></li>
         <li><label><input type="checkbox" data-key="chk-upg-a4"> Добавлен Enneagram-тип с направлением стресс/рост</label></li>
         <li><label><input type="checkbox" data-key="chk-upg-a5"> Примеры дополнены: нейтральный + стресс + доверие</label></li>
+        <li class="track-limitation" style="margin-top:0.5em;color:var(--text-muted);">⚠️ Debugging decision tree требует перехода на Track C</li>
       </ul>
     </div>
     
@@ -6260,7 +6261,7 @@ body.theme-light .track-prerequisite-warning .track-link {
   <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
   <section id="section-0-2" data-requires-track="A B C">
     <h2 id="0-2-критические-анти-паттерны-все-треки">§0.2 Критические анти-паттерны (Все треки)</h2>
-    <p>Краткий список критических ошибок. Полный анализ с примерами: <a href="#core-antipatterns">Критические анти-паттерны</a>.</p>
+    <p>Краткий список критических ошибок. Полный анализ с примерами: <a href="#antipatterns-core">Критические анти-паттерны</a>.</p>
     <div class="warning-block">
       <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
       <ul>
@@ -6272,6 +6273,12 @@ body.theme-light .track-prerequisite-warning .track-link {
         <li><strong>Godmoding в LB:</strong> Записи LB, управляющие действиями пользователя → нарушает согласие RP. Только автономия игрока. <a href="#rule-anti-godmodding">→ Антигодмодинг</a></li>
       </ul>
       <p class="track-badge">Полный анализ с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Анти-паттерны</a></p>
+    </div>
+
+    <!-- TASK-003-A: Track A Users Warning -->
+    <div class="track-prerequisite-warning">
+      <strong>⚠️ Track A Users:</strong> Полный каталог анти-паттернов с примерами требует Track C.
+      Для базовых исправлений используйте <a href="#diagnostics">Диагностику (Раздел 7)</a>.
     </div>
   </section>
 
@@ -6958,6 +6965,7 @@ body.theme-light .track-prerequisite-warning .track-link {
         <li data-model="32B"><strong>32B+ / API:</strong> temperature=0.95, top_p=0.95, min_p=0.05, repetition_penalty=1.05, top_k=50, presence_penalty=0.0–0.15</li>
       </ul>
       <p style="font-size:0.85em; color:var(--text-muted);"><em>Примечание:</em> T=0.7 (12B) и T=0.95 (32B+) — среднее значение диапазона. Для тонкой настройки используй диапазоны из <a href="#sampling">Раздел 5.1</a>.</p>
+      <p class="progressive-disclosure" style="margin-top:0.5em;font-size:0.9em;color:var(--text-muted);">⚠️ Это базовые настройки. Полная таблица с диапазонами и комментариями: <a href="#sampling">Раздел 5.1 (Параметры генерации)</a>.</p>
 
       <h3 id="топ-3-ошибки-ломающие-персонажа">⚠️ Топ-3 ошибки, ломающие персонажа</h3>
       <div class="callout warn">
@@ -8164,6 +8172,12 @@ Anchors:
       </details>
       </div>
 
+      <!-- Note about Wing Variants coverage -->
+      <div class="callout tip" style="margin:1.5em 0;">
+        <strong>💡 Примечание:</strong> Wing Variants для типов 6 и 8 показаны как примеры.
+        Аналогичный анализ применим к другим типам. Полные таблицы — в <a href="#appendix2">Приложении 2</a>.
+      </div>
+
       <details class="interactive">
         <summary><span><strong>Тип 2 (Помощник)</strong> — забота, самопожертвование</span></summary>
         <div class="accordion-content">
@@ -9232,8 +9246,11 @@ Attachment Style: Избегающий</code></pre>
 
       <h4 id="style-fix-demo">5.0.3 📐 Фиксация разметки через демонстрацию</h4>
       <p><span class="tag core">Core</span></p>
-      <p><strong>Принцип:</strong> LLM = Pattern Matcher, не Rule Executor (Модель копирует паттерны из примеров, а не исполняет правила из инструкций. Хочешь формат — покажи его в <START>, а не пиши в правилах)</p>
-      <p>Система разметки (символы прямой речи, блоки описания, астериски, тире, кавычки) фиксируется <strong>единственным методом</strong>: демонстрация в каждом блоке <code>&lt;START&gt;</code> и в Greeting. Директива в SP без паттерна в Examples нестабильна на ≤14B (~40–60% compliance).</p>
+      <div class="callout tip" style="margin:1em 0;">
+        <strong>💡 Простыми словами:</strong>
+        <p>Модель — не исполнитель инструкций, а копировщик паттернов. Хочешь результат — покажи его в Examples, а не пиши в правилах.</p>
+      </div>
+      <p><strong>Принцип:</strong> LLM = Pattern Matcher, не Rule Executor. Система разметки (символы прямой речи, блоки описания, астериски, тире, кавычки) фиксируется <strong>единственным методом</strong>: демонстрация в каждом блоке <code>&lt;START&gt;</code> и в Greeting. Директива в SP без паттерна в Examples нестабильна на ≤14B (~40–60% compliance).</p>
       <p><strong>Правило:</strong> Какую систему разметки используешь в Examples — ту и получишь в генерации.</p>
       <p><strong>Три распространённые системы:</strong></p>
       <ul>
@@ -10604,11 +10621,7 @@ Total: 0.845 × 100 = 84.5%</code></pre>
         <span class="mode-hint">Extended anti-patterns catalog for advanced users.</span>
       </div>
       <h2 id="продвинутые-анти-паттерны">🚫 Продвинутые анти-паттерны</h2>
-      <p><span class="tag core">Core</span> — критически важно избегать этих ошибок</p>
-
-      <div class="callout tip" style="margin:1em 0">
-        <strong>📌 Для всех tracks:</strong> Критические анти-паттерны, видимые всем пользователям, см. в <a href="#core-antipatterns">Критических анти-паттернах</a>. Этот раздел содержит расширенный каталог для Track C.
-      </div>
+      <p><span class="tag advanced">Advanced</span> <span class="tag core">Core</span> для Track C — критически важно избегать этих ошибок. <span style="font-size:0.85em;color:var(--text-muted)">Базовые анти-паттерны для всех треков см. в <a href="#antipatterns-core">§0.2 Критические анти-паттерны</a>.</span></p>
 
       <div class="callout tip" style="margin:1em 0">
         <strong>📍 Позиция:</strong> Читайте этот раздел ПЕРЕД диагностикой. Знание анти-паттернов помогает быстрее выявлять проблемы.
