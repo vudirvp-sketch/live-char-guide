@@ -7,7 +7,7 @@
     { "file": "01_header.html", "type": "body-start" },
     { "file": "00_rules_registry.html", "type": "section", "anchors": ["#rules-registry", "#rule-price", "#rule-voice-isolation", "#rule-ghost-placement", "#rule-anti-godmodding", "#rule-voice-description-conditional", "#rule-anchor-format"], "stage": 0 },
     { "file": "01_core_principles.html", "type": "section", "anchors": ["#core-principles", "#price-definition"], "stage": 0 },
-    { "file": "track_upgrade.html", "type": "section", "anchors": ["#track-upgrade-paths", "#track-a-to-b", "#track-b-to-c", "#migration-v4"], "stage": 0 },
+    { "file": "track_upgrade.html", "type": "section", "anchors": ["#track-upgrade-paths", "#track-a-to-b", "#track-b-to-c"], "stage": 0 },
     { "file": "02_glossary.html", "type": "section", "anchors": ["#glossary"], "stage": 0 },
     { "file": "02_quickstart.html", "type": "section", "anchors": ["#intro", "#quick-start"], "stage": 1, "phase": "prototype", "phase_extensions": ["B: advanced_ghost"], "extension_note": "Stage 1 contains advanced GHOST content (Lorebook/AN integration) intended for Track B+ users. Basic GHOST definition is available to all tracks." },
     { "file": "02c_troubleshooting_newcomer.html", "type": "section", "anchors": ["#troubleshooting-newcomer"], "stage": 1, "description": "Quick symptom→cause lookup for newcomers following the guide" },
