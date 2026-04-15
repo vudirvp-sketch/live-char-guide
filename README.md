@@ -129,7 +129,7 @@ The project uses GitHub Pages with automatic deployment via GitHub Actions:
 
 ## Version
 
-Current version: 6.0.0 (build 2026-04-15)
+Current version: 5.8.0 (build 2026-04-15)
 
 ## License
 
