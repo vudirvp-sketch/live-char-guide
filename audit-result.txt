@@ -1,0 +1,754 @@
+=== СЕЛЕКТОРЫ ТРЕКОВ ===
+src/assets/main.js:9: * - Sets data-track attribute on body for CSS-based content filtering
+src/assets/main.js:52:   * Apply track to DOM (set data-track on body)
+src/assets/main.js:56:    document.body.setAttribute('data-track', track);
+src/assets/main.js:181:    console.log('  - body.data-track:', document.body.getAttribute('data-track'));
+src/assets/main.js:183:    console.log('  - visible B sections:', document.querySelectorAll('body[data-track="B"] [data-requires-track~="B"]').length);
+src/assets/main.js:2568:    // BUG-FIX: Changed data-track to data-requires-track (attributes mismatch)
+src/assets/main.js:3881: * - Uses data-track-exclusive="A" for content visible ONLY for Track A
+src/assets/main.js:3936:    document.querySelectorAll('[data-track-exclusive], [data-requires-track]').forEach(el => {
+src/assets/main.js:3941:    document.querySelectorAll(`[data-track-exclusive="${currentTrack}"]`).forEach(el => {
+src/assets/main.js:3967:    const startSection = document.querySelector(`[data-track-start="${track}"]`);
+src/assets/main.js:3980:    document.querySelectorAll('[data-track-selector]').forEach(el => {
+src/assets/main.js:3995:      const selector = e.target.closest('[data-track-selector]');
+src/parts/01_header.html:246:      <button class="audience-card" data-track="A" aria-pressed="false">
+src/parts/01_header.html:261:      <button class="audience-card recommended" data-track="B" aria-pressed="true">
+src/parts/01_header.html:277:      <button class="audience-card" data-track="C" aria-pressed="false">
+src/parts/01_header.html:386:    .audience-card[data-track="B"] {
+src/parts/02_quickstart.html:41:        <button data-track-selector="A" class="track-btn track-a" role="radio" aria-checked="true">
+src/parts/02_quickstart.html:45:        <button data-track-selector="B" class="track-btn track-b" role="radio" aria-checked="false">
+src/parts/02_quickstart.html:49:        <button data-track-selector="C" class="track-btn track-c" role="radio" aria-checked="false">
+src/parts/02_quickstart.html:363:      <section class="track-a-warnings" data-track="A B C">
+src/parts/03_architecture.html:6:    <section id="architecture-summary" data-track-exclusive="A" hidden>
+src/parts/04_core_blocks.html:252:      <section id="example-quality-tiers" data-track="A B C" style="margin:2em 0; padding:1.5em; background:var(--bg-secondary); border-radius:0.5em;">
+src/parts/06a_integration.html:4:<section id="integration-checklist" data-track="A B C">
+src/parts/styles.css:1436:    [data-track-exclusive],
+src/parts/styles.css:1445:    [data-track-exclusive]:not([hidden]),
+src/parts/styles.css:1451:    [data-track-exclusive]:not([hidden]).flex-display,
+src/parts/styles.css:1456:    [data-track-exclusive]:not([hidden]).grid-display,
+src/parts/styles.css:1462:    [data-track-exclusive]:not([hidden]).inline-display,
+src/parts/styles.css:1470:    [data-track-exclusive="A"] {
+src/parts/styles.css:3434:.audience-card[data-track="B"][aria-pressed="true"],
+src/parts/styles.css:3636:body[data-track="A"] [data-requires-track~="A"] {
+src/parts/styles.css:3643:body[data-track="B"] [data-requires-track~="A"],
+src/parts/styles.css:3644:body[data-track="B"] [data-requires-track~="B"] {
+src/parts/styles.css:3651:body[data-track="C"] [data-requires-track] {
+src/parts/styles.css:3658:body[data-track="A"] .audience-card[data-track="A"] {
+src/parts/styles.css:3664:body[data-track="B"] .audience-card[data-track="B"] {
+src/parts/styles.css:3670:body[data-track="C"] .audience-card[data-track="C"] {
+src/parts/styles.css:3675:body[data-track="C"] .audience-card[data-track="C"] .track-name {
+src/parts/styles.css:4723:body[data-track="A"] .prototype-banner {
+src/parts/styles.css:5187:body[data-track="A"] [data-requires-track]:not([data-requires-track~="A"]) {
+src/parts/styles.css:5191:body[data-track="B"] [data-requires-track]:not([data-requires-track~="B"]) {
+src/parts/styles.css:5195:body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
+src/parts/styles.css:5892:  content: attr(data-track-hint);
+src/parts/styles.css:6164:  [data-track-exclusive],
+src/parts/track_upgrade.html:3:<section id="track-upgrade-paths" data-track="A B C">
+src/scripts/build-zero-install.mjs:474:<body data-track="B">
+src/scripts/build-zero-install.mjs:485:  document.body.setAttribute('data-track', track);
+src/scripts/build.mjs:394:<body data-track="B">
+src/scripts/build.mjs:405:  document.body.setAttribute('data-track', track);
+src/assets/main.js:58:    // Update audience-card button states
+src/assets/main.js:59:    document.querySelectorAll('.audience-card').forEach(card => {
+src/assets/main.js:146:      var activeCard = document.querySelector('.audience-card.active');
+src/assets/main.js:155:    document.querySelectorAll('.audience-card').forEach(card => {
+src/assets/main.js:182:    console.log('  - active card:', document.querySelector('.audience-card.active')?.dataset.track);
+src/assets/main.js:3980:    document.querySelectorAll('[data-track-selector]').forEach(el => {
+src/assets/main.js:3995:      const selector = e.target.closest('[data-track-selector]');
+src/parts/01_header.html:242:  <section class="audience-selection" aria-labelledby="track-selection-title">
+src/parts/01_header.html:245:    <div class="audience-cards" role="group" aria-label="Выбор трека">
+src/parts/01_header.html:246:      <button class="audience-card" data-track="A" aria-pressed="false">
+src/parts/01_header.html:261:      <button class="audience-card recommended" data-track="B" aria-pressed="true">
+src/parts/01_header.html:277:      <button class="audience-card" data-track="C" aria-pressed="false">
+src/parts/01_header.html:383:    .audience-selection { pointer-events: none; opacity: 0.7; }
+src/parts/01_header.html:384:    .audience-card { cursor: default; }
+src/parts/01_header.html:385:    .audience-card:hover { transform: none; }
+src/parts/01_header.html:386:    .audience-card[data-track="B"] {
+src/parts/02_quickstart.html:40:      <div class="track-selector" role="radiogroup" aria-label="Select your track">
+src/parts/02_quickstart.html:41:        <button data-track-selector="A" class="track-btn track-a" role="radio" aria-checked="true">
+src/parts/02_quickstart.html:45:        <button data-track-selector="B" class="track-btn track-b" role="radio" aria-checked="false">
+src/parts/02_quickstart.html:49:        <button data-track-selector="C" class="track-btn track-c" role="radio" aria-checked="false">
+src/parts/02_quickstart.html:58:        <svg id="track-selector-flow" viewBox="0 0 550 280" class="track-flowchart" role="img" aria-label="Схема выбора трека: решение на основе размера контекста и потребности в продвинутых функциях">
+src/parts/02_quickstart.html:142:      <div class="track-selector-intro">
+src/parts/styles.css:1483:    .track-selector {
+src/parts/styles.css:3343:.audience-selection {
+src/parts/styles.css:3359:.audience-cards {
+src/parts/styles.css:3367:  .audience-cards {
+src/parts/styles.css:3374:.audience-card {
+src/parts/styles.css:3391:.audience-card:hover {
+src/parts/styles.css:3397:.audience-card:focus-visible {
+src/parts/styles.css:3403:.audience-card.active,
+src/parts/styles.css:3404:.audience-card[aria-pressed="true"] {
+src/parts/styles.css:3426:.audience-card.active {
+src/parts/styles.css:3434:.audience-card[data-track="B"][aria-pressed="true"],
+src/parts/styles.css:3435:.audience-card.recommended {
+src/parts/styles.css:3440:.audience-card.recommended {
+src/parts/styles.css:3444:.audience-card.recommended::before {
+src/parts/styles.css:3658:body[data-track="A"] .audience-card[data-track="A"] {
+src/parts/styles.css:3664:body[data-track="B"] .audience-card[data-track="B"] {
+src/parts/styles.css:3670:body[data-track="C"] .audience-card[data-track="C"] {
+src/parts/styles.css:3675:body[data-track="C"] .audience-card[data-track="C"] .track-name {
+src/parts/styles.css:3699:  .audience-selection {
+src/parts/styles.css:3707:  .audience-card {
+src/parts/styles.css:3741:body.theme-light .audience-card {
+src/parts/styles.css:3745:body.theme-light .audience-card:hover {
+src/parts/styles.css:3749:body.theme-light .audience-card.active {
+src/parts/styles.css:3753:body.theme-light .audience-card.recommended::before {
+src/parts/styles.css:3762:body.theme-oled .audience-selection {
+src/parts/styles.css:3767:body.theme-oled .audience-card {
+src/parts/styles.css:3772:body.theme-oled .audience-card:hover {
+src/parts/styles.css:3776:body.theme-oled .audience-card.active {
+src/parts/styles.css:3867:  .audience-selection {
+src/parts/styles.css:5108:body.storage-fallback .audience-selection {
+src/parts/styles.css:5204:.track-selector-intro {
+src/parts/styles.css:6127:  .track-selector,
+src/parts/styles.css:6138:  .audience-selection,
+
+=== JS ОБРАБОТЧИКИ ===
+src/assets/main.js:5: * NavigationState - Manages track selection (A, B, C) with localStorage persistence
+src/assets/main.js:8: * - Loads saved track from localStorage or defaults to 'B'
+src/assets/main.js:9: * - Sets data-track attribute on body for CSS-based content filtering
+src/assets/main.js:10: * - Dispatches 'trackchange' event for other components to react
+src/assets/main.js:11: * - Provides API for getting/setting current track
+src/assets/main.js:16:  const STORAGE_KEY = 'guide-track-selection';
+src/assets/main.js:21:  let currentTrack = DEFAULT_TRACK;
+src/assets/main.js:24:   * Load track from localStorage or return default
+src/assets/main.js:25:   * @returns {string} Track identifier ('A', 'B', or 'C')
+src/assets/main.js:27:  function loadTrack() {
+src/assets/main.js:40:   * Save track to localStorage
+src/assets/main.js:41:   * @param {string} track - Track identifier
+src/assets/main.js:43:  function saveTrack(track) {
+src/assets/main.js:45:      localStorage.setItem(STORAGE_KEY, track);
+src/assets/main.js:47:      console.warn('[NavigationState] Failed to save track:', e.message);
+src/assets/main.js:52:   * Apply track to DOM (set data-track on body)
+src/assets/main.js:53:   * @param {string} track - Track identifier
+src/assets/main.js:55:  function applyTrack(track) {
+src/assets/main.js:56:    document.body.setAttribute('data-track', track);
+src/assets/main.js:60:      const isActive = card.dataset.track === track;
+src/assets/main.js:67:   * Set current track
+src/assets/main.js:68:   * @param {string} track - Track identifier ('A', 'B', or 'C')
+src/assets/main.js:71:  function setTrack(track, persist = true) {
+src/assets/main.js:72:    const normalizedTrack = track.toUpperCase();
+src/assets/main.js:74:    if (!VALID_TRACKS.includes(normalizedTrack)) {
+src/assets/main.js:75:      console.error('[NavigationState] Invalid track:', track);
+src/assets/main.js:79:    if (normalizedTrack === currentTrack) {
+src/assets/main.js:83:    const previousTrack = currentTrack;
+src/assets/main.js:84:    currentTrack = normalizedTrack;
+src/assets/main.js:87:    applyTrack(currentTrack);
+src/assets/main.js:91:      saveTrack(currentTrack);
+src/assets/main.js:95:    window.dispatchEvent(new CustomEvent('trackchange', {
+src/assets/main.js:97:        track: currentTrack,
+src/assets/main.js:98:        previousTrack: previousTrack
+src/assets/main.js:102:    console.log('[NavigationState] Track changed:', previousTrack, '→', currentTrack);
+src/assets/main.js:106:   * Get current track
+src/assets/main.js:107:   * @returns {string} Current track identifier
+src/assets/main.js:109:  function getTrack() {
+src/assets/main.js:110:    return currentTrack;
+src/assets/main.js:114:   * Initialize track navigation UI
+src/assets/main.js:116:  function initTrackNavigation() {
+src/assets/main.js:117:    // Load saved track
+src/assets/main.js:118:    currentTrack = loadTrack();
+src/assets/main.js:120:    // ITEM-019: Migrate legacy guide-mode to track
+src/assets/main.js:124:        if (legacyMode === 'quick_start' && currentTrack === 'B') {
+src/assets/main.js:125:          console.log('[NavigationState] Migrating quick_start → Track A');
+src/assets/main.js:126:          currentTrack = 'A';
+src/assets/main.js:127:          saveTrack('A');
+src/assets/main.js:128:        } else if (legacyMode === 'propeller_workshop' && currentTrack === 'B') {
+src/assets/main.js:129:          // propeller_workshop maps to default Track B, no change needed
+src/assets/main.js:130:          console.log('[NavigationState] Migrating propeller_workshop → Track B (default)');
+src/assets/main.js:141:    // Apply initial track
+src/assets/main.js:142:    applyTrack(currentTrack);
+src/assets/main.js:154:    // Bind click handlers to track buttons
+src/assets/main.js:157:        setTrack(card.dataset.track);
+src/assets/main.js:164:          setTrack(card.dataset.track);
+src/assets/main.js:173:        setTrack(uncertainBtn.dataset.defaultTrack || DEFAULT_TRACK);
+src/assets/main.js:177:    console.log('[NavigationState] Initialized with track:', currentTrack);
+src/assets/main.js:181:    console.log('  - body.data-track:', document.body.getAttribute('data-track'));
+src/assets/main.js:182:    console.log('  - active card:', document.querySelector('.audience-card.active')?.dataset.track);
+src/assets/main.js:183:    console.log('  - visible B sections:', document.querySelectorAll('body[data-track="B"] [data-requires-track~="B"]').length);
+src/assets/main.js:188:    getTrack: getTrack,
+src/assets/main.js:189:    setTrack: setTrack,
+src/assets/main.js:192:    init: initTrackNavigation
+src/assets/main.js:197:    document.addEventListener('DOMContentLoaded', initTrackNavigation);
+src/assets/main.js:200:    initTrackNavigation();
+src/assets/main.js:208: * TrackSwitchButtons - Handles track-switch-btn clicks from prototype banner
+src/assets/main.js:210: * Binds to buttons with data-target attribute and switches to that track
+src/assets/main.js:215:  function initTrackSwitchButtons() {
+src/assets/main.js:216:    document.querySelectorAll('.track-switch-btn').forEach(btn => {
+src/assets/main.js:218:        const targetTrack = btn.dataset.target;
+src/assets/main.js:219:        if (targetTrack && window.NavigationState) {
+src/assets/main.js:220:          window.NavigationState.setTrack(targetTrack);
+src/assets/main.js:221:          // Optional: scroll to top after track switch
+src/assets/main.js:226:    console.log('[TrackSwitchButtons] Initialized');
+src/assets/main.js:230:    document.addEventListener('DOMContentLoaded', initTrackSwitchButtons);
+src/assets/main.js:232:    initTrackSwitchButtons();
+src/assets/main.js:2541:  // initGuideMode() removed — ITEM-019: Mode system migrated to Tracks
+src/assets/main.js:2567:    // ITEM-019: Simplified visibility check - only Track-based now
+src/assets/main.js:2568:    // BUG-FIX: Changed data-track to data-requires-track (attributes mismatch)
+src/assets/main.js:2569:    function isVisibleInTrack(heading) {
+src/assets/main.js:2570:      const currentTrack = window.NavigationState?.getTrack() || 'B';
+src/assets/main.js:2572:      // Check the heading itself for data-requires-track
+src/assets/main.js:2573:      const headingTrack = heading.dataset?.requiresTrack;
+src/assets/main.js:2574:      if (headingTrack) {
+src/assets/main.js:2575:        return headingTrack.includes(currentTrack);
+src/assets/main.js:2578:      // Check parent section for data-requires-track
+src/assets/main.js:2579:      const parentSection = heading.closest('section[data-requires-track]');
+src/assets/main.js:2581:        const sectionTrack = parentSection.dataset.requiresTrack;
+src/assets/main.js:2582:        return sectionTrack.includes(currentTrack);
+src/assets/main.js:2585:      // Check parent details/accordion for data-requires-track
+src/assets/main.js:2586:      const parentDetails = heading.closest('details[data-requires-track]');
+src/assets/main.js:2588:        const detailsTrack = parentDetails.dataset.requiresTrack;
+src/assets/main.js:2589:        return detailsTrack.includes(currentTrack);
+src/assets/main.js:2592:      // Check any parent div with data-requires-track
+src/assets/main.js:2593:      const parentDiv = heading.closest('div[data-requires-track]');
+src/assets/main.js:2595:        const divTrack = parentDiv.dataset.requiresTrack;
+src/assets/main.js:2596:        return divTrack.includes(currentTrack);
+src/assets/main.js:2599:      // Check any parent with data-requires-track (generic fallback)
+src/assets/main.js:2600:      const parentWithTrack = heading.closest('[data-requires-track]');
+src/assets/main.js:2601:      if (parentWithTrack) {
+src/assets/main.js:2602:        const track = parentWithTrack.dataset.requiresTrack;
+src/assets/main.js:2603:        return track.includes(currentTrack);
+src/assets/main.js:2606:      // No track restriction - visible in all tracks
+src/assets/main.js:2611:    // Filter headings by track visibility
+src/assets/main.js:2612:    const headings = Array.from(allHeadings).filter(isVisibleInTrack);
+src/assets/main.js:2800:    // 5. Re-generate TOC on track change (BUG-FIX: was 'modechange' - wrong event name)
+src/assets/main.js:2801:    window.addEventListener('trackchange', () => {
+src/assets/main.js:3697:      title: "Доступно на Track A",
+src/assets/main.js:3712:      title: "Доступно на Track B",
+src/assets/main.js:3731:      title: "Доступно на Track C",
+src/assets/main.js:3733:        { name: "All Track B features", available: true },
+src/assets/main.js:3751:  function renderTrackChecklist() {
+src/assets/main.js:3752:    const container = document.getElementById('track-checklist');
+src/assets/main.js:3755:    const currentTrack = window.NavigationState?.getTrack() || 'B';
+src/assets/main.js:3756:    const checklistData = TRACK_CHECKLISTS[currentTrack];
+src/assets/main.js:3761:    html += '<ul class="track-checklist-items" style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.4rem;">';
+src/assets/main.js:3765:        html += `<li class="track-checklist-item available" style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#88ff88;"><span style="width:1.1rem;text-align:center;">✓</span> ${item.name}</li>`;
+src/assets/main.js:3767:        const badgeClass = item.requires === 'C' ? 'badge-track-c' : 'badge-track-b';
+src/assets/main.js:3768:        html += `<li class="track-checklist-item unavailable" style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#666;"><span style="width:1.1rem;text-align:center;">○</span> ${item.name} <span class="${badgeClass}" style="font-size:0.7em;margin-left:0.25rem;">Track ${item.requires}+</span></li>`;
+src/assets/main.js:3778:    document.addEventListener('DOMContentLoaded', renderTrackChecklist);
+src/assets/main.js:3780:    renderTrackChecklist();
+src/assets/main.js:3783:  // Re-render on track change
+src/assets/main.js:3784:  window.addEventListener('trackchange', renderTrackChecklist);
+src/assets/main.js:3786:  console.log('[TrackChecklist] Initialized');
+src/assets/main.js:3795:  function showTrackUpgradeModal(requiredTrack, sectionId) {
+src/assets/main.js:3797:    const existing = document.querySelector('.track-upgrade-modal');
+src/assets/main.js:3801:    modal.className = 'track-upgrade-modal';
+src/assets/main.js:3805:        <p style="margin:0 0 1.25rem 0;color:var(--text-muted);font-size:0.9rem;">Этот раздел требует <span class="badge-track-${requiredTrack.toLowerCase()}" style="font-size:0.8em;">Track ${requiredTrack}</span> или выше.</p>
+src/assets/main.js:3807:          <button id="switch-track-btn" style="padding:0.5rem 1rem;background:#4488cc;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.9rem;">Переключиться на Track ${requiredTrack}</button>
+src/assets/main.js:3816:    const switchBtn = modal.querySelector('#switch-track-btn');
+src/assets/main.js:3819:    modal.querySelector('#switch-track-btn').onclick = () => {
+src/assets/main.js:3821:        window.NavigationState.setTrack(requiredTrack);
+src/assets/main.js:3859:    const requiresTrack = targetSection.dataset.requiresTrack;
+src/assets/main.js:3860:    if (!requiresTrack) return;
+src/assets/main.js:3862:    const currentTrack = window.NavigationState?.getTrack() || 'B';
+src/assets/main.js:3863:    const allowedTracks = requiresTrack.split(' ');
+src/assets/main.js:3865:    if (!allowedTracks.includes(currentTrack)) {
+src/assets/main.js:3867:      showTrackUpgradeModal(allowedTracks[0], targetId);
+src/assets/main.js:3878: * TrackVisibility - Manages content visibility based on selected track
+src/assets/main.js:3881: * - Uses data-track-exclusive="A" for content visible ONLY for Track A
+src/assets/main.js:3882: * - Uses data-requires-track="B C" for content visible for Track B and C
+src/assets/main.js:3889:  const STORAGE_KEY = 'guide-track-selection';
+src/assets/main.js:3894:   * Get currently selected track
+src/assets/main.js:3896:  function getCurrentTrack() {
+src/assets/main.js:3903:      console.warn('[TrackVisibility] localStorage unavailable:', e.message);
+src/assets/main.js:3909:   * Set selected track
+src/assets/main.js:3911:  function setTrack(track) {
+src/assets/main.js:3912:    if (!VALID_TRACKS.includes(track)) {
+src/assets/main.js:3913:      console.error('[TrackVisibility] Invalid track:', track);
+src/assets/main.js:3918:      localStorage.setItem(STORAGE_KEY, track);
+src/assets/main.js:3920:      console.warn('[TrackVisibility] Failed to save track:', e.message);
+src/assets/main.js:3923:    applyTrackVisibility(track);
+src/assets/main.js:3926:    window.dispatchEvent(new CustomEvent('trackchange', { detail: { track } }));
+src/assets/main.js:3928:    console.log('[TrackVisibility] Track set to:', track);
+src/assets/main.js:3932:   * Apply visibility rules for current track
+src/assets/main.js:3934:  function applyTrackVisibility(currentTrack) {
+src/assets/main.js:3935:    // 1. Hide all track-controlled content first
+src/assets/main.js:3936:    document.querySelectorAll('[data-track-exclusive], [data-requires-track]').forEach(el => {
+src/assets/main.js:3940:    // 2. Show exclusive content for current track ONLY
+src/assets/main.js:3941:    document.querySelectorAll(`[data-track-exclusive="${currentTrack}"]`).forEach(el => {
+src/assets/main.js:3945:    // 3. Show content allowed for current track
+src/assets/main.js:3946:    document.querySelectorAll('[data-requires-track]').forEach(el => {
+src/assets/main.js:3947:      const allowedTracks = el.dataset.requiresTrack.split(' ');
+src/assets/main.js:3948:      if (allowedTracks.includes(currentTrack)) {
+src/assets/main.js:3954:    document.body.className = document.body.className.replace(/track-[ABC]/g, '');
+src/assets/main.js:3955:    document.body.classList.add(`track-${currentTrack}`);
+src/assets/main.js:3957:    // 5. Update track selector UI if present
+src/assets/main.js:3958:    updateTrackSelectorUI(currentTrack);
+src/assets/main.js:3960:    console.log('[TrackVisibility] Applied visibility for track:', currentTrack);
+src/assets/main.js:3964:   * Scroll to track start section
+src/assets/main.js:3966:  function scrollToTrackStart(track) {
+src/assets/main.js:3967:    const startSection = document.querySelector(`[data-track-start="${track}"]`);
+src/assets/main.js:3977:   * Update track selector UI state
+src/assets/main.js:3979:  function updateTrackSelectorUI(currentTrack) {
+src/assets/main.js:3980:    document.querySelectorAll('[data-track-selector]').forEach(el => {
+src/assets/main.js:3981:      el.classList.toggle('active', el.dataset.trackSelector === currentTrack);
+src/assets/main.js:3982:      el.setAttribute('aria-checked', el.dataset.trackSelector === currentTrack ? 'true' : 'false');
+src/assets/main.js:3990:    const savedTrack = getCurrentTrack();
+src/assets/main.js:3991:    applyTrackVisibility(savedTrack);
+src/assets/main.js:3993:    // Listen for track selector clicks
+src/assets/main.js:3995:      const selector = e.target.closest('[data-track-selector]');
+src/assets/main.js:3997:        const track = selector.dataset.trackSelector;
+src/assets/main.js:3998:        setTrack(track);
+src/assets/main.js:3999:        scrollToTrackStart(track);
+src/assets/main.js:4008:        // Check if element is track-gated
+src/assets/main.js:4009:        const requiresTrack = targetElement.dataset.requiresTrack;
+src/assets/main.js:4010:        if (requiresTrack) {
+src/assets/main.js:4011:          const allowedTracks = requiresTrack.split(' ');
+src/assets/main.js:4012:          if (!allowedTracks.includes(savedTrack)) {
+src/assets/main.js:4013:            // Switch to required track
+src/assets/main.js:4014:            setTrack(allowedTracks[0]);
+src/assets/main.js:4020:    console.log('[TrackVisibility] Initialized with track:', savedTrack);
+src/assets/main.js:4031:  window.TrackVisibility = {
+src/assets/main.js:4032:    getCurrentTrack,
+src/assets/main.js:4033:    setTrack,
+src/assets/main.js:4034:    applyTrackVisibility,
+src/assets/main.js:4035:    scrollToTrackStart,
+
+=== АТРИБУТЫ ВИДИМОСТИ ===
+src/parts/01_core_principles.html:15:  <section id="section-0-2" data-requires-track="A B C">
+src/parts/01_core_principles.html:31:    <div class="track-prerequisite-warning" data-requires-track="A">
+src/parts/01_core_principles.html:137:  <details class="interactive" id="acc-principle-ghost" data-requires-track="B C" hidden aria-labelledby="acc-principle-ghost-summary">
+src/parts/01_header.html:8:    <span class="theme-icon-light" hidden>☀️</span>
+src/parts/01_header.html:9:    <span class="theme-icon-oled" hidden>⬛</span>
+src/parts/01_header.html:18:<div id="search-container" hidden>
+src/parts/01_header.html:243:    <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
+src/parts/01_header.html:255:          <div class="track-icon-scan" aria-hidden="true"></div>
+src/parts/01_header.html:271:          <div class="track-icon-scan" aria-hidden="true"></div>
+src/parts/01_header.html:287:          <div class="track-icon-scan" aria-hidden="true"></div>
+src/parts/01_header.html:302:<div id="track-a-banner" data-requires-track="A" class="prototype-banner">
+src/parts/01_header.html:316:<section id="track-comparison" data-requires-track="A B C" class="track-comparison-section" style="margin:1.5rem 0;">
+src/parts/01_header.html:353:<p data-requires-track="A B C" style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
+src/parts/01_header.html:370:    [data-requires-track~="A"],
+src/parts/01_header.html:371:    [data-requires-track~="B"] {
+src/parts/01_header.html:378:    /* Keep Track C hidden */
+src/parts/01_header.html:379:    [data-requires-track~="C"] {
+src/parts/01_header.html:410:<!-- OLD TOC (hidden via CSS, kept for content reference) -->
+src/parts/02_glossary.html:136:  <div data-requires-track="A B C" class="callout" style="margin:1em 0;border-left-color:#7c4dff;">
+src/parts/02_glossary.html:144:  <div data-requires-track="B C" class="callout" style="margin:1em 0;border-left-color:#8be9fd;">
+src/parts/02_glossary.html:157:  <div data-requires-track="B C" class="callout" style="margin:1em 0;border-left-color:#a78bfa;">
+src/parts/02_quickstart.html:188:        <div class="ref-card" data-requires-track="B C">
+src/parts/02_quickstart.html:195:        <div class="ref-card" data-requires-track="B C">
+src/parts/02_quickstart.html:240:      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> <span data-requires-track="B C">см. <a href="#appendix2">Приложение 2</a></span><span data-requires-track="A">~450 токенов для прототипа. Полные таблицы — в Приложении 2 (Track B+).</span></p>
+src/parts/02_quickstart.html:325:      <div data-requires-track="B C">
+src/parts/02_quickstart.html:404:          <li>Token-бюджеты: <span data-requires-track="B C"><a href="#appendix2">Приложение 2</a></span><span data-requires-track="A">Приложение 2 (Track B+)</span></li>
+src/parts/03_architecture.html:6:    <section id="architecture-summary" data-track-exclusive="A" hidden>
+src/parts/03_architecture.html:49:    <section id="architecture" data-requires-track="B C" hidden>
+src/parts/04_core_blocks.html:75:      <div data-requires-track="B C">
+src/parts/04_core_blocks.html:161:      <div data-requires-track="C">
+src/parts/04_core_blocks.html:196:      <div data-requires-track="B C">
+src/parts/04_core_blocks.html:232:      <div data-requires-track="B C">
+src/parts/05_psychology.html:206:      <div data-requires-track="B C">
+src/parts/05_psychology.html:413:      <div data-requires-track="C">
+src/parts/05_psychology.html:485:      <div data-requires-track="C">
+src/parts/05_psychology.html:643:      <div data-requires-track="B C">
+src/parts/05a_spine_anchors.html:2:    <section id="spine-anchors-mapping" data-requires-track="B C">
+src/parts/05b_cot_tiers.html:8:<section id="cot-tiers" data-requires-track="B C">
+src/parts/06_technical.html:130:      <div data-requires-track="B C">
+src/parts/06_technical.html:269:      <div data-requires-track="B C">
+src/parts/06_technical.html:273:      <div data-requires-track="B C">
+src/parts/06_technical.html:330:      <div data-requires-track="C">
+src/parts/06_technical.html:465:      <div data-requires-track="B C">
+src/parts/06_technical.html:488:      <div data-requires-track="C">
+src/parts/06_technical.html:547:      <div data-requires-track="B C">
+src/parts/06_technical.html:577:      <div data-requires-track="B C">
+src/parts/06_technical.html:614:      <div data-requires-track="C">
+src/parts/06_technical.html:645:      <div data-requires-track="B C">
+src/parts/06_technical.html:672:      <div data-requires-track="B C">
+src/parts/06_technical.html:711:      <div data-requires-track="C">
+src/parts/06a_integration.html:56:      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C" hidden>
+src/parts/06a_integration.html:77:      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C" hidden>
+src/parts/06b_antipatterns_advanced.html:4:    <section id="antipatterns" data-requires-track="C" class="advanced-content">
+src/parts/07_testing.html:67:              <tr data-requires-track="B C">
+src/parts/07_testing.html:74:              <tr data-requires-track="B C">
+src/parts/07_testing.html:108:      <div data-requires-track="B C">
+src/parts/07_testing.html:204:      <div data-requires-track="C">
+src/parts/07_testing.html:262:      <div data-requires-track="C">
+src/parts/08_appendices.html:4:    <section id="appendix2" data-requires-track="B C">
+src/parts/08_appendices.html:262:      <details class="interactive" id="acc-metrics-internal" data-requires-track="C" aria-labelledby="acc-metrics-internal-summary">
+src/parts/08_appendices.html:344:    <section id="appendix3" data-requires-track="A B C">
+src/parts/08_appendices.html:437:    <section id="appendix3b" data-requires-track="B C">
+src/parts/08_appendices.html:583:    <section id="appendix4" data-requires-track="B C">
+src/parts/08_appendices.html:685:        <div role="tabpanel" data-tab="tpl-standard" hidden>
+src/parts/08_appendices.html:763:    <section id="appendix6" data-requires-track="B C">
+src/parts/08b_debugging.html:96:<section id="debugging-basic" class="debug-section-basic" data-requires-track="B C" hidden>
+src/parts/08b_debugging.html:226:<section id="debugging" class="debug-section-advanced" data-requires-track="C" hidden>
+src/parts/checkpoints.html:81:    <li data-requires-track="A B C"><label><input type="checkbox" data-key="chk-val-test1"> Тест 1 (Голос): ОБЯЗАТЕЛЬНО для всех tracks</label></li>
+src/parts/checkpoints.html:82:    <li data-requires-track="A B C"><label><input type="checkbox" data-key="chk-val-test2"> Тест 2 (Стресс): ОБЯЗАТЕЛЬНО для всех tracks</label></li>
+src/parts/checkpoints.html:83:    <li data-requires-track="A B C"><label><input type="checkbox" data-key="chk-val-test3"> Тест 3 (Конфликт): ОБЯЗАТЕЛЬНО для всех tracks</label></li>
+src/parts/checkpoints.html:84:    <li data-requires-track="A B C"><label><input type="checkbox" data-key="chk-val-test4"> Тест 4 (Антигодмодинг): РЕКОМЕНДУЕТСЯ для Track A, ОБЯЗАТЕЛЬНО для B/C</label></li>
+src/parts/checkpoints.html:85:    <li data-requires-track="B C"><label><input type="checkbox" data-key="chk-val-test5"> Тест 5 (OCEAN): Track B опционально, Track C обязательно</label></li>
+src/parts/checkpoints.html:86:    <li data-requires-track="B C"><label><input type="checkbox" data-key="chk-val-test6"> Тест 6 (Изоляция голоса): Track B опционально, Track C обязательно</label></li>
+src/parts/track_upgrade.html:132:  <article id="track-b-to-c" class="upgrade-path" data-requires-track="B C" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em;">
+
+=== CSS ВИДИМОСТИ ===
+57:      --track-a-clr: var(--accent, #38bdf8);
+58:      --track-b-clr: #8be9fd;
+59:      --track-c-clr: #a78bfa;
+121:      --track-a-clr: #0284c7;
+122:      --track-b-clr: #0891b2;
+123:      --track-c-clr: #7c3aed;
+151:      --track-a-clr: #38bdf8;
+152:      --track-b-clr: #67e8f9;
+153:      --track-c-clr: #c4b5fd;
+252:    body.theme-oled .fab-btn .theme-icon-dark { display: none; }
+253:    body.theme-oled .fab-btn .theme-icon-light { display: none; }
+295:    hr + hr { display: none; }
+320:      overflow-x: hidden;
+476:        overflow-x: hidden;
+487:        overflow: hidden;
+533:      overflow: hidden;
+540:      visibility: hidden;
+566:      visibility: hidden;
+725:      overflow: hidden;
+771:        display: none;
+798:      display: none;
+819:        display: none;
+851:    body.theme-light .fab-btn .theme-icon-dark { display: none; }
+860:      overflow: hidden;
+905:    details.interactive summary::-webkit-details-marker { display: none; }
+906:    details.interactive summary::marker { display: none; content: ''; }
+910:       Works with content-visibility based track system.
+911:       Ensures accordions expand properly inside track-gated sections.
+1067:      overflow: hidden;
+1077:    body.theme-light .theme-icon-dark { display: none; }
+1079:    body.theme-light .theme-icon-light[hidden] { display: inline !important; }
+1082:      #theme-toggle, .fab-group { display: none !important; }
+1087:      display: none;
+1104:      display: none;
+1190:    .track-prerequisite-warning {
+1202:    .track-prerequisite-warning::before {
+1208:    .track-prerequisite-warning strong {
+1213:    .track-prerequisite-warning a.track-link {
+1221:    .track-prerequisite-warning a.track-link:hover {
+1226:    .track-prerequisite-warning button.dismiss-warning {
+1238:    .track-prerequisite-warning button.dismiss-warning:hover {
+1245:    body.theme-light .track-prerequisite-warning {
+1251:    body.theme-oled .track-prerequisite-warning {
+1285:    [role="tabpanel"][hidden] {
+1286:      display: none;
+1335:      overflow: hidden;
+1417:        display: none;  /* Hidden on mobile - glossary accessible via FAB button */
+1434:     * Hide all track-controlled content by default until JS applies visibility
+1436:    [data-track-exclusive],
+1437:    [data-requires-track] {
+1438:      display: none !important;
+1442:     * Show content when JS removes hidden attribute
+1445:    [data-track-exclusive]:not([hidden]),
+1446:    [data-requires-track]:not([hidden]) {
+1451:    [data-track-exclusive]:not([hidden]).flex-display,
+1452:    [data-requires-track]:not([hidden]).flex-display {
+1456:    [data-track-exclusive]:not([hidden]).grid-display,
+1457:    [data-requires-track]:not([hidden]).grid-display {
+1462:    [data-track-exclusive]:not([hidden]).inline-display,
+1463:    [data-requires-track]:not([hidden]).inline-display {
+1470:    [data-track-exclusive="A"] {
+1474:    [data-requires-track~="B"] {
+1478:    [data-requires-track~="C"] {
+1483:    .track-selector {
+1490:    .track-btn {
+1504:    .track-btn:hover {
+1509:    .track-btn.active {
+1514:    .track-btn.track-a.active {
+1515:      border-color: var(--track-a-clr);
+1519:    .track-btn.track-b.active {
+1520:      border-color: var(--track-b-clr);
+1524:    .track-btn.track-c.active {
+1525:      border-color: var(--track-c-clr);
+1529:    .track-btn .track-label {
+1534:    .track-btn .track-desc {
+1587:        display: none !important;
+1594:      details > summary { display: none !important; }
+1662:        overflow: hidden;
+1773:      overflow: hidden;
+2172:      overflow: hidden;
+2499:        display: none;
+2606:      overflow: hidden;
+2875:      visibility: hidden;
+2878:      overflow: hidden;
+2947:      overflow: hidden;
+3038:      display: none !important;
+3039:      visibility: hidden !important;
+3076:  .inf-bar-track { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; height: 30px; overflow: hidden; display: flex; }
+3156:  overflow: hidden;
+3174:   Works with content-visibility track system.
+3213:    visibility: hidden;
+3227:  .track-icon,
+3228:  .track-icon * {
+3233:  .track-icon-scan {
+3234:    display: none;
+3275:   Three-button track selection: A (Beginner), B (Practitioner), C (Advanced)
+3324:.visually-hidden {
+3330:  overflow: hidden;
+3411:@keyframes track-select-pulse {
+3430:  animation: track-select-pulse 0.4s ease-out;
+3433:/* Animate on first load if track is already selected */
+3434:.audience-card[data-track="B"][aria-pressed="true"],
+3436:  animation: track-select-pulse 0.4s ease-out;
+3455:.track-badge {
+3471:.track-icon {
+3481:.track-icon-wrap {
+3484:  overflow: hidden;
+3490:.track-icon-scan {
+3498:  animation: track-scan 3s ease-in-out infinite;
+3504:@keyframes track-scan {
+3510:.track-icon--basic {
+3513:  animation: track-breathe 3s infinite ease-in-out;
+3517:@keyframes track-breathe {
+3523:.track-icon--live {
+3525:  animation: track-live-glow 2s infinite ease-in-out;
+3529:@keyframes track-live-glow {
+3536:  animation: track-flow 1.2s linear infinite;
+3540:@keyframes track-flow {
+3545:.track-icon--neural {
+3547:  animation: track-neural-idle 3s infinite ease-in-out;
+3551:@keyframes track-neural-idle {
+3557:  animation: track-pulse 2s infinite ease-in-out;
+3564:.track-icon--neural:hover .core-node,
+3565:.track-icon--neural:focus-within .core-node {
+3569:@keyframes track-pulse {
+3574:.track-name {
+3580:.track-label {
+3586:.track-desc {
+3628:[data-requires-track] {
+3629:  content-visibility: hidden;  /* Skip rendering, preserve layout space = 0 */
+3636:body[data-track="A"] [data-requires-track~="A"] {
+3643:body[data-track="B"] [data-requires-track~="A"],
+3644:body[data-track="B"] [data-requires-track~="B"] {
+3650:/* Track C: Show all track-gated content */
+3651:body[data-track="C"] [data-requires-track] {
+3658:body[data-track="A"] .audience-card[data-track="A"] {
+3664:body[data-track="B"] .audience-card[data-track="B"] {
+3670:body[data-track="C"] .audience-card[data-track="C"] {
+3675:body[data-track="C"] .audience-card[data-track="C"] .track-name {
+3712:  .track-icon {
+3717:  .track-icon-wrap {
+3722:  .track-name {
+3726:  .track-label {
+3730:  .track-desc {
+3757:body.theme-light .track-badge {
+3781:body.theme-light .track-icon--basic {
+3785:body.theme-light .track-icon--live {
+3789:body.theme-light .track-icon--neural {
+3793:@keyframes track-breathe-light {
+3798:body.theme-light .track-icon--basic {
+3799:  animation-name: track-breathe-light;
+3802:@keyframes track-live-glow-light {
+3807:body.theme-light .track-icon--live {
+3808:  animation-name: track-live-glow-light;
+3811:@keyframes track-neural-idle-light {
+3816:body.theme-light .track-icon--neural {
+3817:  animation-name: track-neural-idle-light;
+3820:body.theme-light .track-icon-scan {
+3826:body.theme-oled .track-icon--basic {
+3830:body.theme-oled .track-icon--live {
+3834:body.theme-oled .track-icon--neural {
+3838:@keyframes track-breathe-oled {
+3843:body.theme-oled .track-icon--basic {
+3844:  animation-name: track-breathe-oled;
+3847:@keyframes track-live-glow-oled {
+3852:body.theme-oled .track-icon--live {
+3853:  animation-name: track-live-glow-oled;
+3856:@keyframes track-neural-idle-oled {
+3861:body.theme-oled .track-icon--neural {
+3862:  animation-name: track-neural-idle-oled;
+3868:    display: none;
+3872:  .track-icon {
+3878:  .track-icon-scan {
+3879:    display: none !important;
+4239:    display: none;
+4563:body.debug-mode [data-requires-track] {
+4570:body.debug-mode [data-requires-track]::before {
+4571:  content: 'track:' attr(data-requires-track);
+4626:.badge-track-a,
+4627:.badge-track-b,
+4628:.badge-track-c {
+4638:.badge-track-a {
+4644:.badge-track-b {
+4650:.badge-track-c {
+4657:body.theme-light .badge-track-a {
+4663:body.theme-light .badge-track-b {
+4669:body.theme-light .badge-track-c {
+4676:body.theme-oled .badge-track-a {
+4681:body.theme-oled .badge-track-b {
+4686:body.theme-oled .badge-track-c {
+4692:h2[data-requires-track~="B"]:not([data-requires-track~="A"])::after,
+4693:h3[data-requires-track~="B"]:not([data-requires-track~="A"])::after {
+4700:h2[data-requires-track~="C"]:not([data-requires-track~="B"])::after,
+4701:h3[data-requires-track~="C"]:not([data-requires-track~="B"])::after {
+4713:  display: none;
+4723:body[data-track="A"] .prototype-banner {
+4743:.track-switch-btn {
+4755:.track-switch-btn:hover {
+4759:.track-switch-btn:focus-visible {
+4774:body.theme-light .track-switch-btn {
+4778:body.theme-light .track-switch-btn:hover {
+4920:    display: none; /* Hide on mobile, use FAB instead */
+4940:.track-checklist {
+4948:.track-checklist h3 {
+4954:.track-checklist ul {
+4963:.track-checklist-item {
+4971:.track-checklist-item.available {
+4975:.track-checklist-item.unavailable {
+4979:.track-checklist-item .check {
+4986:body.theme-light .track-checklist-item.available {
+4990:body.theme-light .track-checklist-item.unavailable {
+4995:body.theme-oled .track-checklist {
+5003:.track-upgrade-modal {
+5013:body.theme-light .track-upgrade-modal {
+5017:.track-upgrade-modal .modal-content {
+5027:.track-upgrade-modal h3 {
+5033:.track-upgrade-modal p {
+5107:body.storage-fallback .track-checklist,
+5175:.spoiler-content[hidden] {
+5176:  display: none;
+5182:[data-requires-track].hidden {
+5183:  display: none !important;
+5186:/* Ensure track visibility works */
+5187:body[data-track="A"] [data-requires-track]:not([data-requires-track~="A"]) {
+5188:  display: none !important;
+5191:body[data-track="B"] [data-requires-track]:not([data-requires-track~="B"]) {
+5192:  display: none !important;
+5195:body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
+5196:  display: none !important;
+5204:.track-selector-intro {
+5211:.track-card {
+5220:.track-card strong {
+5226:.track-card.track-a {
+5227:  border-left: 3px solid var(--track-a-clr, #38bdf8);
+5231:.track-card.track-a strong {
+5232:  color: var(--track-a-clr, #38bdf8);
+5235:.track-card.track-b {
+5236:  border-left: 3px solid var(--track-b-clr, #8be9fd);
+5240:.track-card.track-b strong {
+5241:  color: var(--track-b-clr, #8be9fd);
+5244:.track-card.track-c {
+5245:  border-left: 3px solid var(--track-c-clr, #a78bfa);
+5249:.track-card.track-c strong {
+5250:  color: var(--track-c-clr, #a78bfa);
+5253:.track-card p {
+5295:.track-structure {
+5299:.track-structure th,
+5300:.track-structure td {
+5305:.track-structure td:first-child,
+5306:.track-structure td:nth-child(2) {
+5310:.track-structure th:nth-child(3),
+5311:.track-structure th:nth-child(4),
+5312:.track-structure th:nth-child(5) {
+5324:/* Light theme adaptations for track cards */
+5325:body.theme-light .track-card.track-a {
+5329:body.theme-light .track-card.track-b {
+5333:body.theme-light .track-card.track-c {
+5337:/* OLED theme adaptations for track cards */
+5338:body.theme-oled .track-card.track-a {
+5342:body.theme-oled .track-card.track-b {
+5346:body.theme-oled .track-card.track-c {
+5354:.track-prerequisite-warning {
+5366:.track-prerequisite-warning::before {
+5371:.track-prerequisite-warning strong {
+5375:.track-prerequisite-warning .track-link {
+5386:.track-prerequisite-warning .track-link:hover {
+5390:.track-prerequisite-warning .dismiss-warning {
+5402:.track-prerequisite-warning .dismiss-warning:hover {
+5408:body.theme-light .track-prerequisite-warning {
+5413:body.theme-light .track-prerequisite-warning strong {
+5417:body.theme-light .track-prerequisite-warning .track-link {
+5523:.track-comparison {
+5527:.track-comparison th,
+5528:.track-comparison td {
+5533:.track-comparison td:first-child {
+5538:.track-comparison tbody tr:nth-child(odd) {
+5803:.track-flowchart {
+5810:.track-decision {
+5817:.track-decision:hover {
+5821:.track-decision-text {
+5828:.track-result {
+5836:.track-result:hover {
+5841:.track-result.track-a { stroke: var(--track-a-clr); }
+5842:.track-result.track-b { stroke: var(--track-b-clr); }
+5843:.track-result.track-c { stroke: var(--track-c-clr); }
+5845:.track-result-label {
+5853:.track-arrow {
+5857:  marker-end: url(#track-arrow-marker);
+5860:.track-branch-label {
+5866:/* Light theme track flowchart */
+5867:body.theme-light .track-decision {
+5871:body.theme-light .track-result {
+5876:.track-locked {
+5882:.track-locked::before {
+5891:.track-locked::after {
+5892:  content: attr(data-track-hint);
+5908:.track-locked:hover::after {
+5913:.track-hint-badge {
+5948:  .track-flowchart {
+6088:  overflow: hidden;
+6127:  .track-selector,
+6140:  .track-checklist,
+6144:    display: none !important;
+6164:  [data-track-exclusive],
+6165:  [data-requires-track] {
+6169:  [hidden] {
+6243:  .track-icon-wrap,
+6244:  .track-icon-scan,
+6247:    display: none !important;
+
+=== STORAGE KEY ===
+src/assets/main.js:5: * NavigationState - Manages track selection (A, B, C) with localStorage persistence
+src/assets/main.js:8: * - Loads saved track from localStorage or defaults to 'B'
+src/assets/main.js:24:   * Load track from localStorage or return default
+src/assets/main.js:29:      const saved = localStorage.getItem(STORAGE_KEY);
+src/assets/main.js:34:      console.warn('[NavigationState] localStorage unavailable:', e.message);
+src/assets/main.js:40:   * Save track to localStorage
+src/assets/main.js:45:      localStorage.setItem(STORAGE_KEY, track);
+src/assets/main.js:69:   * @param {boolean} [persist=true] - Whether to save to localStorage
+src/assets/main.js:123:        const legacyMode = localStorage.getItem('guide-mode');
+src/assets/main.js:133:        localStorage.removeItem('guide-mode');
+src/assets/main.js:134:        localStorage.removeItem('workshop_enabled');
+src/assets/main.js:135:        localStorage.removeItem('workshop_active');
+src/assets/main.js:254:  // Safe localStorage with fallback
+src/assets/main.js:260:        const item = localStorage.getItem(key);
+src/assets/main.js:263:        console.warn('[Panel] localStorage read error:', e.message);
+src/assets/main.js:270:        localStorage.setItem(key, JSON.stringify(value));
+src/assets/main.js:275:          console.warn('[Panel] localStorage quota exceeded, using memory fallback');
+src/assets/main.js:278:          console.error('[Panel] localStorage write error:', e.message);
+src/assets/main.js:910:  const oldData = localStorage.getItem(OLD_KEY);
+src/assets/main.js:911:  const newData = localStorage.getItem(STORAGE_KEY);
+src/assets/main.js:913:    localStorage.setItem(STORAGE_KEY, oldData);
+src/assets/main.js:914:    localStorage.removeItem(OLD_KEY);
+src/assets/main.js:918:  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+src/assets/main.js:931:      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+src/assets/main.js:996:  let stored = localStorage.getItem('theme');
+src/assets/main.js:1016:    localStorage.setItem('theme', nextTheme);
+src/assets/main.js:1245:    localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0');
+src/assets/main.js:1249:  if (localStorage.getItem(STORAGE_KEY) === '1') {
+src/assets/main.js:2081:  /* ---- Safe localStorage wrappers ---- */
+src/assets/main.js:2083:    try { return localStorage.getItem(key); } catch { return null; }
+src/assets/main.js:2086:    try { localStorage.setItem(key, val); } catch { /* storage unavailable */ }
+src/assets/main.js:2089:    try { localStorage.removeItem(key); } catch { /* storage unavailable */ }
+src/assets/main.js:2228:      var raw = localStorage.getItem(GEOMETRY_KEY);
+src/assets/main.js:2236:      localStorage.setItem(GEOMETRY_KEY, JSON.stringify({
+src/assets/main.js:3147: * Persists preference in localStorage
+src/assets/main.js:3154:  const saved = localStorage.getItem(STORAGE_KEY);
+src/assets/main.js:3168:    localStorage.setItem(STORAGE_KEY, isWide ? 'wide' : 'normal');
+src/assets/main.js:3196:   * Load traits from localStorage
+src/assets/main.js:3200:      const saved = localStorage.getItem(STORAGE_KEY);
+src/assets/main.js:3220:   * Save traits to localStorage
+src/assets/main.js:3224:      localStorage.setItem(STORAGE_KEY, JSON.stringify(traits));
+src/assets/main.js:3898:      const saved = localStorage.getItem(STORAGE_KEY);
+src/assets/main.js:3903:      console.warn('[TrackVisibility] localStorage unavailable:', e.message);
+src/assets/main.js:3918:      localStorage.setItem(STORAGE_KEY, track);
+src/assets/zero-install-addons.js:22:    // Check if localStorage is actually working
+src/assets/zero-install-addons.js:25:      localStorage.setItem(testKey, 'test');
+src/assets/zero-install-addons.js:26:      localStorage.removeItem(testKey);
+src/assets/zero-install-addons.js:27:      return 'session'; // localStorage works but not necessarily persistent
+src/assets/zero-install-addons.js:29:      return 'none'; // localStorage not available
+src/parts/styles.css:5104:   PHASE 4.1: STORAGE FALLBACK (localStorage fallback for private browsing)
+src/scripts/build-zero-install.mjs:380:  // BUG-016 FIX: localStorage and matchMedia polyfills for file:// protocol
+src/scripts/build-zero-install.mjs:381:  // In Firefox/Safari, localStorage throws SecurityError when accessed via file://
+src/scripts/build-zero-install.mjs:387:  // localStorage polyfill - in-memory fallback for file:// protocol
+src/scripts/build-zero-install.mjs:390:    localStorage.setItem(testKey, '1');
+src/scripts/build-zero-install.mjs:391:    localStorage.removeItem(testKey);
+src/scripts/build-zero-install.mjs:394:    window.localStorage = {
+src/scripts/build-zero-install.mjs:412:    Object.defineProperty(window.localStorage, 'length', {
+src/scripts/build-zero-install.mjs:415:    console.info('[ZeroInstall] localStorage unavailable - using in-memory fallback');
+src/scripts/build-zero-install.mjs:480:    var saved = localStorage.getItem('guide-track-selection');
+src/scripts/build.mjs:400:    var saved = localStorage.getItem('guide-track-selection');

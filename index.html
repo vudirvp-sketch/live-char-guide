@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 3bc1609f -->
-<!-- Generated: 2026-04-15T21:34:16.014Z -->
+<!-- Build hash: 2e1d481e -->
+<!-- Generated: 2026-04-15T23:01:24.883Z -->
 <!-- Version: 5.9.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="3bc1609f">
+<meta name="build-hash" content="2e1d481e">
 <meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-15">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -27,7 +27,31 @@
 
 
 <style>
+    /* ============================================
+       LAYER 5: CSS DESIGN TOKENS (v5.9.1)
+       ============================================ */
+
     :root {
+      /* === SEMANTIC COLORS === */
+      --color-primary: #38bdf8;
+      --color-success: #22c55e;
+      --color-warning: #f59e0b;
+      --color-error: #ef4444;
+      --color-info: #06b6d4;
+
+      /* === SPACING SCALE === */
+      --space-xs: 0.25em;
+      --space-sm: 0.5em;
+      --space-md: 1em;
+      --space-lg: 1.5em;
+      --space-xl: 2em;
+
+      /* === BORDER RADIUS === */
+      --radius-sm: 0.25em;
+      --radius-md: 0.5em;
+      --radius-lg: 1em;
+
+      /* === BASE THEME COLORS === */
       --bg: #121212;  /* CHANGED: OLED-optimized dark background (v5.4.0) */
       --bg-surface: #1a1a1a;  /* CHANGED: Slightly lighter than bg for surfaces */
       --bg-elevated: #222222;  /* CHANGED: Elevated surfaces lighter */
@@ -1428,118 +1452,6 @@
       background: var(--accent-soft);
       border-left: 3px solid var(--accent);
       transition: background 0.3s ease, border-left 0.3s ease;
-    }
-
-    /* ============================================
-       LAYER 2: TRACK VISIBILITY ENGINE
-       ============================================ */
-
-    /*
-     * Protection against FOUC (Flash of Unstyled Content)
-     * Hide all track-controlled content by default until JS applies visibility
-     */
-    [data-track-exclusive],
-    [data-requires-track] {
-      display: none !important;
-    }
-
-    /*
-     * Show content when JS removes hidden attribute
-     * Using !important to override any inline styles
-     */
-    [data-track-exclusive]:not([hidden]),
-    [data-requires-track]:not([hidden]) {
-      display: block;
-    }
-
-    /* Context-specific display modes */
-    [data-track-exclusive]:not([hidden]).flex-display,
-    [data-requires-track]:not([hidden]).flex-display {
-      display: flex;
-    }
-
-    [data-track-exclusive]:not([hidden]).grid-display,
-    [data-requires-track]:not([hidden]).grid-display {
-      display: grid;
-    }
-
-    /* Inline elements */
-    [data-track-exclusive]:not([hidden]).inline-display,
-    [data-requires-track]:not([hidden]).inline-display {
-      display: inline;
-    }
-
-    /*
-     * Track-specific styling
-     */
-    [data-track-exclusive="A"] {
-      /* Track A specific styles if needed */
-    }
-
-    [data-requires-track~="B"] {
-      /* Track B specific styles if needed */
-    }
-
-    [data-requires-track~="C"] {
-      /* Track C specific styles if needed */
-    }
-
-    /* === TRACK SELECTOR BUTTONS === */
-    .track-selector {
-      display: flex;
-      gap: 0.5rem;
-      margin: 1em 0;
-      flex-wrap: wrap;
-    }
-
-    .track-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0.75em 1.25em;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-surface);
-      color: var(--text);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      min-width: 100px;
-    }
-
-    .track-btn:hover {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-    }
-
-    .track-btn.active {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-    }
-
-    .track-btn.track-a.active {
-      border-color: var(--track-a-clr);
-      background: rgba(56, 189, 248, 0.15);
-    }
-
-    .track-btn.track-b.active {
-      border-color: var(--track-b-clr);
-      background: rgba(139, 233, 253, 0.15);
-    }
-
-    .track-btn.track-c.active {
-      border-color: var(--track-c-clr);
-      background: rgba(167, 139, 250, 0.15);
-    }
-
-    .track-btn .track-label {
-      font-weight: 600;
-      font-size: 0.95em;
-    }
-
-    .track-btn .track-desc {
-      font-size: 0.75em;
-      color: var(--text-muted);
-      margin-top: 0.25em;
     }
 
     /* === GHOST BASIC SECTION FOR TRACK A === */
@@ -6080,6 +5992,185 @@ body.theme-light .track-result {
   margin-bottom: 0;
 }
 
+/* ============================================
+   LAYER 5: ACCESSIBILITY - SKIP NAVIGATION (v5.9.1)
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0.5em;
+  left: 0.5em;
+  width: auto;
+  height: auto;
+  padding: 1em 1.5em;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  overflow: visible;
+  outline: 3px solid var(--bg);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   LAYER 5: PRINT STYLESHEET (v5.9.1)
+   ============================================ */
+
+@media print {
+  /* Base print styles */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  /* Hide interactive elements */
+  .info-banner,
+  .mode-badge,
+  .track-selector,
+  .interactive > summary,
+  noscript,
+  .context-trail,
+  .breadcrumbs,
+  .fab-group,
+  .hamburger,
+  .mobile-nav-overlay,
+  #search-container,
+  .glossary-tab,
+  .panel,
+  .audience-selection,
+  .prototype-banner,
+  .track-checklist,
+  #theme-toggle,
+  .copy-btn,
+  .expand-btn {
+    display: none !important;
+  }
+
+  /* Show all interactive content when printing */
+  .interactive {
+    display: block !important;
+  }
+
+  .interactive > div,
+  .interactive > .accordion-content {
+    display: block !important;
+  }
+
+  details.interactive[open] > div,
+  details.interactive[open] > .accordion-content {
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Track visibility - show all content when printing */
+  [data-requires-track] {
+    display: block !important;
+  }
+
+  [hidden] {
+    display: block !important;
+  }
+
+  /* Show links after text for print */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Don't show anchor links */
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  /* Table styles */
+  .table-wrap {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  table {
+    min-width: auto;
+  }
+
+  th, td {
+    border: 1px solid #ccc;
+  }
+
+  /* Code blocks */
+  pre {
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    page-break-inside: avoid;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+
+  code {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+
+  /* Headings - avoid page breaks after */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: #000;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* Callouts */
+  .callout {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  /* Details/accordion */
+  details {
+    page-break-inside: avoid;
+  }
+
+  details summary {
+    font-weight: 600;
+    border-bottom: 1px solid #ccc;
+  }
+
+  /* Hide decorative elements */
+  .track-icon-wrap,
+  .track-icon-scan,
+  .dependency-graph,
+  .dep-quick-ref {
+    display: none !important;
+  }
+
+  /* Footer and header adjustments */
+  header, footer {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+  }
+}
+
 
 </style>
 </head>
@@ -6676,8 +6767,8 @@ body.theme-light .track-result {
     </div>
   </section>
 
-  <details class="interactive" id="acc-principle-ocean">
-    <summary><span><h3 id="1-ocean-правило-1-2-полюсов" style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
+  <details class="interactive" id="acc-principle-ocean" aria-labelledby="acc-principle-ocean-summary">
+  <summary id="acc-principle-ocean-summary" role="button" aria-expanded="false"><span><h3 id="1-ocean-правило-1-2-полюсов" style="margin:0;font-size:inherit;display:inline">§1. OCEAN: Правило 1–2 полюсов</h3> <small style="color:var(--text-muted)">— В карточку идёт только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <ul>
     <li><span class="ocean-validator-green">✓ 1–2 экстремума</span> — персонаж запоминающийся, поведение последовательное</li>
@@ -6692,8 +6783,8 @@ body.theme-light .track-result {
     </div>
   </details>
 
-  <details class="interactive" id="acc-principle-price">
-    <summary><span><h3 style="margin:0;font-size:inherit;display:inline" id="price-definition">§2. Price: Обязательность цены</h3> <small style="color:var(--text-muted)">— Price — обязательный элемент для критичных якорей, рекомендуемый для остальных</small></span></summary>
+  <details class="interactive" id="acc-principle-price" aria-labelledby="acc-principle-price-summary">
+  <summary id="acc-principle-price-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline" id="price-definition">§2. Price: Обязательность цены</h3> <small style="color:var(--text-muted)">— Price — обязательный элемент для критичных якорей, рекомендуемый для остальных</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>КАНОНИЧЕСКИЙ ФОРМАТ ЯКОРЕЙ:</strong></p>
   <pre><code>[Trigger] → [Action] → [Price: &lt;immediate physical/verbal manifestation&gt;]
@@ -6734,8 +6825,8 @@ body.theme-light .track-result {
     </div>
   </details>
 
-  <details class="interactive" id="acc-principle-voice">
-    <summary><span><h3 id="3-voice-изоляция-голоса" style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3> <small style="color:var(--text-muted)">— Голос персонажа задаётся исключительно в Примерных сообщениях</small></span></summary>
+  <details class="interactive" id="acc-principle-voice" aria-labelledby="acc-principle-voice-summary">
+  <summary id="acc-principle-voice-summary" role="button" aria-expanded="false"><span><h3 id="3-voice-изоляция-голоса" style="margin:0;font-size:inherit;display:inline">§3. Voice: Изоляция голоса</h3> <small style="color:var(--text-muted)">— Голос персонажа задаётся исключительно в Примерных сообщениях</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p class="registry-ref" style="margin-bottom:0.5em;font-size:0.9em;color:var(--text-muted)">📋 Каноническое определение: <a href="#rule-voice-isolation">§R2. Voice Isolation</a> в Реестре правил.</p>
   <div class="table-wrap">
@@ -6776,8 +6867,8 @@ body.theme-light .track-result {
   </section>
 
   <!-- PHASE 1.3: GHOST Advanced - Track B+ ONLY -->
-  <details class="interactive" id="acc-principle-ghost" data-requires-track="B C" hidden>
-    <summary><span><h3 id="4-ghost-размещение-по-слоям" style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
+  <details class="interactive" id="acc-principle-ghost" data-requires-track="B C" aria-labelledby="acc-principle-ghost-summary">
+  <summary id="acc-principle-ghost-summary" role="button" aria-expanded="false"><span><h3 id="4-ghost-размещение-по-слоям" style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="callout tip">
     <strong>📋 Каноническая таблица размещения GHOST:</strong>
@@ -6831,8 +6922,8 @@ body.theme-light .track-result {
     </div>
   </details>
 
-  <details class="interactive" id="acc-principle-anchors">
-    <summary><span><h3 id="5-trigger-action-price-каноническая-схема" style="margin:0;font-size:inherit;display:inline">§5. trigger → action → price: Каноническая схема</h3> <small style="color:var(--text-muted)">— Протокол якорей: Триггер → Действие → Цена (мгновенная манифестация)</small></span></summary>
+  <details class="interactive" id="acc-principle-anchors" aria-labelledby="acc-principle-anchors-summary">
+  <summary id="acc-principle-anchors-summary" role="button" aria-expanded="false"><span><h3 id="5-trigger-action-price-каноническая-схема" style="margin:0;font-size:inherit;display:inline">§5. trigger → action → price: Каноническая схема</h3> <small style="color:var(--text-muted)">— Протокол якорей: Триггер → Действие → Цена (мгновенная манифестация)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>КАНОНИЧЕСКАЯ СХЕМА ПОВЕДЕНИЯ:</strong></p>
   <div class="infographic">
@@ -6863,8 +6954,8 @@ body.theme-light .track-result {
     </div>
   </details>
 
-  <details class="interactive" id="acc-principle-antigodmoding">
-    <summary><span><h3 id="6-антигодмодинг" style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3> <small style="color:var(--text-muted)">— Обязательные строки в System Prompt против управления {{user}}</small></span></summary>
+  <details class="interactive" id="acc-principle-antigodmoding" aria-labelledby="acc-principle-antigodmoding-summary">
+  <summary id="acc-principle-antigodmoding-summary" role="button" aria-expanded="false"><span><h3 id="6-антигодмодинг" style="margin:0;font-size:inherit;display:inline">§6. Антигодмодинг</h3> <small style="color:var(--text-muted)">— Обязательные строки в System Prompt против управления {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <p><strong>Обязательные строки в System Prompt:</strong></p>
   <p>См. канонический блок: <a href="#rule-anti-godmodding">§R4. Anti-Godmodding</a> в Реестре правил.</p>
@@ -6901,89 +6992,6 @@ body.theme-light .track-result {
   </div>
   <h2 id="раздел-0-3-пути-перехода-между-track">📌 Раздел 0.3: Пути перехода между Track</h2>
   <p><span class="tag core">Core</span> — инструкции по расширению карточки при переходе на более высокий Track.</p>
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- MIGRATION v4.x -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <section id="migration-v4" style="margin:1.5em 0; padding:1.5em; border:1px solid var(--border); border-radius:0.5em; background:var(--bg-secondary);">
-    <h3 id="миграция-с-v4-x">📋 Миграция с v4.x</h3>
-    
-    <div class="callout warn" style="margin:1em 0">
-      <strong>⚠️ Важно:</strong> Версия 5.0 ввела SPINE-структуру и Voice Isolation. 
-      Карты v4.x требуют адаптации для корректной работы.
-    </div>
-    
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Элемент v4.x</th><th>Элемент v5.x</th><th>Действие</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Personality traits</td>
-            <td>SPINE</td>
-            <td>Разбить на WANT/NEED/FLAW/LIE/GHOST</td>
-          </tr>
-          <tr>
-            <td>Speech patterns</td>
-            <td>Examples</td>
-            <td>Перенести в <code>&lt;START&gt;</code> блоки</td>
-          </tr>
-          <tr>
-            <td>Background</td>
-            <td>GHOST</td>
-            <td>Выделить формирующее событие</td>
-          </tr>
-          <tr>
-            <td>Description голос</td>
-            <td>—</td>
-            <td>УДАЛИТЬ, заменить Examples</td>
-          </tr>
-          <tr>
-            <td>System Prompt叙事</td>
-            <td>SP ограничения</td>
-            <td>Оставить только запреты + антигодмодинг</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <details class="interactive" style="margin-top:1em">
-      <summary><span>📝 Пример миграции карточки</span></summary>
-      <div class="example-block" style="padding:1em">
-        <h4>v4.x карточка:</h4>
-        <pre><code>Personality: Тревожный, избегает решений, любит животных.
-Speech: Говорит быстро, переспрашивает, использует слова-паразиты.
-Background: В детстве потерял бабушку, чувствует вину.</code></pre>
-        
-        <h4>v5.x карточка:</h4>
-        <pre><code>&lt;motivation&gt;
-WANT: Быть "нормальным" — без тревоги и социофобии.
-NEED: Принять свой интенсивный внутренний мир.
-FLAW: Избегает решений, откладывает до последнего.
-LIE: "Если подожду — всё само решится."
-GHOST: В 14 лет не пошёл к умирающей бабушке.
-&lt;/motivation&gt;
-
-&lt;behavior&gt;
-- Когда нужно решение → откладывает → Цена: тревога растёт
-- Если кто-то ждёт ответа → грызёт ручку → Цена: выглядит нервным
-&lt;/behavior&gt;
-
-&lt;!-- Voice в Examples, не в Description --&gt;</code></pre>
-      </div>
-    </details>
-    
-    <div class="callout tip" style="margin-top:1em">
-      <strong>💡 Ключевые изменения v5.x:</strong>
-      <ul>
-        <li><strong>SPINE</strong> — 5 элементов вместо списка trait'ов</li>
-        <li><strong>Voice Isolation</strong> — голос только в Examples <a href="#rule-voice-isolation">→ §R2</a></li>
-        <li><strong>Price</strong> — обязателен для FLAW/GHOST якорей <a href="#rule-price">→ §R1</a></li>
-        <li><strong>GHOST Placement</strong> — в Description, не в SP <a href="#rule-ghost-placement">→ §R3</a></li>
-      </ul>
-    </div>
-  </section>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!-- TRACK A → TRACK B -->
@@ -7134,8 +7142,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
 <!-- ==================== GLOSSARY ==================== -->
 <!-- ID: C1 | Canonical terminology definitions -->
 <section id="glossary">
-  <details class="interactive" id="acc-glossary">
-    <summary><span><h2 id="раздел-0-1-глоссарий" style="margin:0;font-size:inherit;display:inline">📖 Раздел 0.1: Глоссарий</h2> <small style="color:var(--text-muted)">— термины и определения (раскройте для просмотра)</small></span></summary>
+  <details class="interactive" id="acc-glossary" aria-labelledby="acc-glossary-summary">
+  <summary id="acc-glossary-summary" role="button" aria-expanded="false"><span><h2 id="раздел-0-1-глоссарий" style="margin:0;font-size:inherit;display:inline">📖 Раздел 0.1: Глоссарий</h2> <small style="color:var(--text-muted)">— термины и определения (раскройте для просмотра)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="callout tip" style="margin:1em 0">
     <strong>💡 Быстрый доступ:</strong> Нажмите кнопку 📖 (внизу справа) для открытия плавающего глоссария с поиском. Или используйте <kbd>Alt+G</kbd>.
@@ -7390,8 +7398,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
       <h2 id="как-пользоваться-гайдом">Как пользоваться гайдом</h2>
 
       <!-- TASK 2.1: Mini-Glossary for Quick Start -->
-      <details class="mini-glossary" style="margin-bottom:1.5em; padding:1em; background:var(--bg-secondary); border-radius:0.5em;">
-        <summary style="cursor:pointer; font-weight:600;"><strong>📖 Ключевые термины (нажмите для раскрытия)</strong></summary>
+      <details id="details-02_quickstart-0" aria-labelledby="details-02_quickstart-0-summary" class="mini-glossary" style="margin-bottom:1.5em; padding:1em; background:var(--bg-secondary); border-radius:0.5em;">
+  <summary id="details-02_quickstart-0-summary" role="button" aria-expanded="false" style="cursor:pointer; font-weight:600;"><strong>📖 Ключевые термины (нажмите для раскрытия)</strong></summary>
         <dl style="margin-top:1em;">
           <dt><strong>Price (Цена)</strong></dt>
           <dd>Наблюдаемая реакция, которая показывает, что якорь сработал. <a href="#rule-price">→ Полное определение</a></dd>
@@ -7412,8 +7420,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
       </details>
 
       <!-- TASK 2.1: Collapsed Core Principles Quick Reference -->
-      <details class="core-principles-quick" style="margin-bottom:1.5em; padding:1em; border:1px solid var(--border); border-radius:0.5em;">
-        <summary style="cursor:pointer; font-weight:600;"><strong>📋 3 ключевых правила (нажмите для раскрытия)</strong></summary>
+      <details id="details-02_quickstart-1" aria-labelledby="details-02_quickstart-1-summary" class="core-principles-quick" style="margin-bottom:1.5em; padding:1em; border:1px solid var(--border); border-radius:0.5em;">
+  <summary id="details-02_quickstart-1-summary" role="button" aria-expanded="false" style="cursor:pointer; font-weight:600;"><strong>📋 3 ключевых правила (нажмите для раскрытия)</strong></summary>
         <ol style="margin-top:1em;">
           <li><strong><a href="#rule-price">Price Rule</a></strong> — Каждый якорь требует наблюдаемой манифестации</li>
           <li><strong><a href="#rule-voice-isolation">Voice Isolation</a></strong> — Голос изолирован от инструкций, задаётся в Examples</li>
@@ -7423,22 +7431,6 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
       </details>
 
       <h3 id="выберите-ваш-track">🎯 Выберите ваш Track</h3>
-      
-      <!-- L2-1: Track Selector Buttons -->
-      <div class="track-selector" role="radiogroup" aria-label="Select your track">
-        <button data-track-selector="A" class="track-btn track-a" role="radio" aria-checked="true">
-          <span class="track-label">Track A</span>
-          <span class="track-desc">Начинающий</span>
-        </button>
-        <button data-track-selector="B" class="track-btn track-b" role="radio" aria-checked="false">
-          <span class="track-label">Track B</span>
-          <span class="track-desc">Практик</span>
-        </button>
-        <button data-track-selector="C" class="track-btn track-c" role="radio" aria-checked="false">
-          <span class="track-label">Track C</span>
-          <span class="track-desc">Продвинутый</span>
-        </button>
-      </div>
       
       <!-- Track Selection Decision Flowchart -->
       <div class="svg-infographic" style="margin-bottom:1.5em;">
@@ -7752,8 +7744,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
         <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
           <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>
           <p>Если ваша модель имеет <strong>контекстное окно ≤4K токенов</strong>, вы ДОЛЖНЫ применить <a href="#four-k-fallback">4K-Fallback Protocol</a> для корректной работы персонажа.</p>
-          <details style="margin-top:0.5em">
-            <summary><strong>Быстрая справка 4K-Fallback</strong></summary>
+          <details id="details-02_quickstart-2" aria-labelledby="details-02_quickstart-2-summary" style="margin-top:0.5em">
+  <summary id="details-02_quickstart-2-summary" role="button" aria-expanded="false"><strong>Быстрая справка 4K-Fallback</strong></summary>
             <ul style="margin-top:0.5em">
               <li>Сократи якоря до 1 полюсного + маркерный</li>
               <li>Перемести GHOST в SP (исключение из обычного правила)</li>
@@ -7932,7 +7924,7 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
     <!-- ==================== РАЗДЕЛ 2 ==================== -->
     
     <!-- L2-4: Architecture Summary - VISIBLE TO TRACK A -->
-    <section id="architecture-summary" data-track-exclusive="A" hidden>
+    <section id="architecture-summary" data-requires-track="A">
       <div class="info-banner">
         <span class="mode-badge">🏗️ Track A: Architecture Overview</span>
       </div>
@@ -7975,7 +7967,7 @@ GHOST: В 14 лет не пошёл к умирающей бабушке.
     </section>
 
     <!-- Full Architecture - Track B+ ONLY -->
-    <section id="architecture" data-requires-track="B C" hidden>
+    <section id="architecture" data-requires-track="B C">
       <div class="info-banner">
         <span class="mode-badge">🛠️ Продвинутый режим</span>
         <span class="mode-hint">Полный пайплайн со всеми функциями.</span>
@@ -9053,8 +9045,8 @@ GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные 
       </ol>
 
       <!-- ─── Enneagram Interactive Tool ─── -->
-      <details class="interactive" id="acc-ennea" style="margin-top:1.2em">
-        <summary><span style="font-size:0.95rem;font-weight:600">🎯 Интерактивная схема — клик по типу, чтобы увидеть страх / желание / крылья</span></summary>
+      <details class="interactive" id="acc-ennea" style="margin-top:1.2em" aria-labelledby="acc-ennea-summary">
+  <summary id="acc-ennea-summary" role="button" aria-expanded="false"><span style="font-size:0.95rem;font-weight:600">🎯 Интерактивная схема — клик по типу, чтобы увидеть страх / желание / крылья</span></summary>
         <div>
           <div class="ennea-embed">
 
@@ -9145,8 +9137,8 @@ GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные 
 
       <h4>📋 Примеры по типам</h4>
       
-      <details class="interactive">
-        <summary><span><strong>Тип 1 (Реформатор)</strong> — перфекционизм, критика</span></summary>
+      <details class="interactive" id="acc-auto-72" aria-labelledby="acc-auto-72-summary">
+  <summary id="acc-auto-72-summary" role="button" aria-expanded="false"><span><strong>Тип 1 (Реформатор)</strong> — перфекционизм, критика</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Быть плохим/неправильным
 GHOST: «В детстве критиковали за каждую ошибку»
@@ -9161,8 +9153,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 4 (Индивидуалист)</strong> — уникальность, меланхолия</span></summary>
+      <details class="interactive" id="acc-auto-73" aria-labelledby="acc-auto-73-summary">
+  <summary id="acc-auto-73-summary" role="button" aria-expanded="false"><span><strong>Тип 4 (Индивидуалист)</strong> — уникальность, меланхолия</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Не иметь идентичности, быть обычным
 GHOST: «Чувствовал себя чужим в семье, "чёрная овца"»
@@ -9177,8 +9169,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 6 (Лоялист)</strong> — тревога, лояльность</span></summary>
+      <details class="interactive" id="acc-auto-74" aria-labelledby="acc-auto-74-summary">
+  <summary id="acc-auto-74-summary" role="button" aria-expanded="false"><span><strong>Тип 6 (Лоялист)</strong> — тревога, лояльность</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Предательство, неопределённость
 GHOST: «Значимый человек ушёл/предал без объяснений»
@@ -9214,8 +9206,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 8 (Челленджер)</strong> — контроль, сила</span></summary>
+      <details class="interactive" id="acc-auto-75" aria-labelledby="acc-auto-75-summary">
+  <summary id="acc-auto-75-summary" role="button" aria-expanded="false"><span><strong>Тип 8 (Челленджер)</strong> — контроль, сила</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Слабость, быть под контролем
 GHOST: «Был в ситуации, где бессилие причинило боль»
@@ -9234,8 +9226,8 @@ Anchors:
       <!-- ITEM-008: WING VARIANTS FOR TYPE 6 -->
       <!-- ═══════════════════════════════════════════════════════════════ -->
       <div data-requires-track="C">
-      <details class="interactive" id="type6-wing-variants">
-        <summary><span><strong>🔷 Wing Variants Типа 6</strong> — детальные различия 6w5 vs 6w7</span></summary>
+      <details class="interactive" id="type6-wing-variants" aria-labelledby="type6-wing-variants-summary">
+  <summary id="type6-wing-variants-summary" role="button" aria-expanded="false"><span><strong>🔷 Wing Variants Типа 6</strong> — детальные различия 6w5 vs 6w7</span></summary>
         <div class="accordion-content">
           <h4 style="color:var(--accent);margin-top:0.5em">6w5 «Защитник» (Шестёрка с крылом Пятёрки)</h4>
           <p><em>Интровертный, аналитичный, стратегически готовится к угрозам</em></p>
@@ -9306,8 +9298,8 @@ Anchors:
       <!-- ITEM-008: WING VARIANTS FOR TYPE 8 -->
       <!-- ═══════════════════════════════════════════════════════════════ -->
       <div data-requires-track="C">
-      <details class="interactive" id="type8-wing-variants">
-        <summary><span><strong>🔶 Wing Variants Типа 8</strong> — детальные различия 8w7 vs 8w9</span></summary>
+      <details class="interactive" id="type8-wing-variants" aria-labelledby="type8-wing-variants-summary">
+  <summary id="type8-wing-variants-summary" role="button" aria-expanded="false"><span><strong>🔶 Wing Variants Типа 8</strong> — детальные различия 8w7 vs 8w9</span></summary>
         <div class="accordion-content">
           <h4 style="color:var(--accent);margin-top:0.5em">8w7 «Берсерк» (Восьмёрка с крылом Семёрки)</h4>
           <p><em>Экспансивный, авантюрный, энергичный — «действую, потом думаю»</em></p>
@@ -9380,8 +9372,8 @@ Anchors:
         Аналогичный анализ применим к другим типам. Полные таблицы — в <a href="#appendix2">Приложении 2</a>.
       </div>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 2 (Помощник)</strong> — забота, самопожертвование</span></summary>
+      <details class="interactive" id="acc-auto-78" aria-labelledby="acc-auto-78-summary">
+  <summary id="acc-auto-78-summary" role="button" aria-expanded="false"><span><strong>Тип 2 (Помощник)</strong> — забота, самопожертвование</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Быть ненужным, нелюбимым
 GHOST: «Любовь была условной — получал только когда был полезен»
@@ -9396,8 +9388,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 3 (Деятель)</strong> — успех, имидж</span></summary>
+      <details class="interactive" id="acc-auto-79" aria-labelledby="acc-auto-79-summary">
+  <summary id="acc-auto-79-summary" role="button" aria-expanded="false"><span><strong>Тип 3 (Деятель)</strong> — успех, имидж</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Быть ничем, провалом, отсутствием ценности
 GHOST: «Признание давали только за достижения, не за личность»
@@ -9412,8 +9404,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 5 (Исследователь)</strong> — знание, изоляция</span></summary>
+      <details class="interactive" id="acc-auto-80" aria-labelledby="acc-auto-80-summary">
+  <summary id="acc-auto-80-summary" role="button" aria-expanded="false"><span><strong>Тип 5 (Исследователь)</strong> — знание, изоляция</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Бесполезность, некомпетентность, истощение
 GHOST: «Вторжение в личное пространство было нормой — научился закрываться»
@@ -9428,8 +9420,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 7 (Энтузиаст)</strong> — свобода, разнообразие</span></summary>
+      <details class="interactive" id="acc-auto-81" aria-labelledby="acc-auto-81-summary">
+  <summary id="acc-auto-81-summary" role="button" aria-expanded="false"><span><strong>Тип 7 (Энтузиаст)</strong> — свобода, разнообразие</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Скука, ограничения, боль
 GHOST: «Был лишён радости или пережил травму, от которой убежал в фантазии»
@@ -9444,8 +9436,8 @@ Anchors:
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Тип 9 (Миротворец)</strong> — гармония, слияние</span></summary>
+      <details class="interactive" id="acc-auto-82" aria-labelledby="acc-auto-82-summary">
+  <summary id="acc-auto-82-summary" role="button" aria-expanded="false"><span><strong>Тип 9 (Миротворец)</strong> — гармония, слияние</span></summary>
         <div class="accordion-content">
           <pre><code>Страх: Конфликт, потеря связи, разделение
 GHOST: «Самоутверждение вызывало конфликт или отвержение»
@@ -9535,8 +9527,8 @@ Anchors:
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.3em">Этот раздел содержит инструкции и интерактивные инструменты; полные справочные таблицы — в Приложении 2.</p>
       </div>
 
-      <details class="interactive" id="acc-ocean">
-        <summary><span>🌊 Интерактивный инструмент OCEAN</span></summary>
+      <details class="interactive" id="acc-ocean" aria-labelledby="acc-ocean-summary">
+  <summary id="acc-ocean-summary" role="button" aria-expanded="false"><span>🌊 Интерактивный инструмент OCEAN</span></summary>
         <div>
           <!-- OCEAN INTERACTIVE WIDGET -->
           <div class="ocean-embed">
@@ -9834,8 +9826,8 @@ Anchors:
 В росте: развивает спонтанность, принимает неопределённость.</code></pre>
       <p><strong>Правило:</strong> как и Enneagram — только 1–2 строки в карточке. MBTI не передаётся как директива — только через поведение в Examples и Anchors. Инструмент ниже переводит тип в LIE/FLAW, Anchors и шаблон <code>&lt;START&gt;</code>.</p>
 
-      <details class="interactive" id="acc-mbti">
-        <summary><span><h3 id="интерактивный-инструмент-mbti" style="margin:0;font-size:inherit;display:inline">🔤 Интерактивный инструмент MBTI</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
+      <details class="interactive" id="acc-mbti" aria-labelledby="acc-mbti-summary">
+  <summary id="acc-mbti-summary" role="button" aria-expanded="false"><span><h3 id="интерактивный-инструмент-mbti" style="margin:0;font-size:inherit;display:inline">🔤 Интерактивный инструмент MBTI</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
           <div class="mbti-embed">
 
@@ -10773,8 +10765,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-lorebook">
-        <summary><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">🔓 5.3 📚 LB</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced Tuning</span></span></summary>
+      <details class="interactive" id="acc-lorebook" aria-labelledby="acc-lorebook-summary">
+  <summary id="acc-lorebook-summary" role="button" aria-expanded="false"><span><h3 id="lorebook" style="margin:0;font-size:inherit;display:inline">🔓 5.3 📚 LB</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced Tuning</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p>Динамическая база знаний, которая фильтруется и вставляется в промпт перед каждым запросом к ИИ. Система активирует только релевантные записи на основе триггеров, вероятности и состояния чата — не скармливает весь лор целиком, экономя токены и повышая контекстуальную точность.</p>
@@ -10965,8 +10957,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-cot">
-        <summary><span><h3 id="cot" style="margin:0;font-size:inherit;display:inline">5.4 💭 CoT — Цепочка рассуждений</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
+      <details class="interactive" id="acc-cot" aria-labelledby="acc-cot-summary">
+  <summary id="acc-cot-summary" role="button" aria-expanded="false"><span><h3 id="cot" style="margin:0;font-size:inherit;display:inline">5.4 💭 CoT — Цепочка рассуждений</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>По модели:</strong></p>
@@ -10988,8 +10980,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="C">
-      <details class="interactive" id="acc-xml-tags">
-        <summary><span><h3 id="xml-tags" style="margin:0;font-size:inherit;display:inline">🔓 5.5а 🏷 XML-теги для Описания персонажа</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag advanced" style="margin-left:0.5em">Track C: Advanced</span></span></summary>
+      <details class="interactive" id="acc-xml-tags" aria-labelledby="acc-xml-tags-summary">
+  <summary id="acc-xml-tags-summary" role="button" aria-expanded="false"><span><h3 id="xml-tags" style="margin:0;font-size:inherit;display:inline">🔓 5.5а 🏷 XML-теги для Описания персонажа</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag advanced" style="margin-left:0.5em">Track C: Advanced</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Использование XML-тегов для структурирования Description.</p>
@@ -11047,8 +11039,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-spatial-lock">
-        <summary><span><h3 id="spatial-lock" style="margin:0;font-size:inherit;display:inline">🔓 5.6 📐 Пространственная и анатомическая фиксация</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C</span></span></summary>
+      <details class="interactive" id="acc-spatial-lock" aria-labelledby="acc-spatial-lock-summary">
+  <summary id="acc-spatial-lock-summary" role="button" aria-expanded="false"><span><h3 id="spatial-lock" style="margin:0;font-size:inherit;display:inline">🔓 5.6 📐 Пространственная и анатомическая фиксация</h3> <span class="tag core" style="margin-left:0.5em">Core</span> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Протокол отслеживания пространства и анатомии для предотвращения телепортации и физиологических противоречий.</p>
@@ -11077,8 +11069,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-pre-gen-filter">
-        <summary><span><h3 id="pre-gen-filter" style="margin:0;font-size:inherit;display:inline">🔓 5.7 🔍 Предгенерационный фильтр</h3> <span class="tag core" style="margin-left:0.5em">Core (12B)</span> <span class="tag opt" style="margin-left:0.5em">Optional (32B+)</span></span></summary>
+      <details class="interactive" id="acc-pre-gen-filter" aria-labelledby="acc-pre-gen-filter-summary">
+  <summary id="acc-pre-gen-filter-summary" role="button" aria-expanded="false"><span><h3 id="pre-gen-filter" style="margin:0;font-size:inherit;display:inline">🔓 5.7 🔍 Предгенерационный фильтр</h3> <span class="tag core" style="margin-left:0.5em">Core (12B)</span> <span class="tag opt" style="margin-left:0.5em">Optional (32B+)</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Чеклист, который модель должна пройти перед генерацией каждой реплики.</p>
@@ -11114,8 +11106,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="C">
-      <details class="interactive" id="acc-sanitization">
-        <summary><span><h3 id="sanitization" style="margin:0;font-size:inherit;display:inline">🔓 5.8 🧹 Протокол очистки</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced</span></span></summary>
+      <details class="interactive" id="acc-sanitization" aria-labelledby="acc-sanitization-summary">
+  <summary id="acc-sanitization-summary" role="button" aria-expanded="false"><span><h3 id="sanitization" style="margin:0;font-size:inherit;display:inline">🔓 5.8 🧹 Протокол очистки</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track C: Advanced</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <div class="callout warn" style="margin:1em 0">
@@ -11145,8 +11137,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-ultimate-sp">
-        <summary><span><h3 id="ultimate-sp" style="margin:0;font-size:inherit;display:inline">🔓 5.9 🛡 Ультимативный SP-блок</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C: 4K-Fallback</span></span></summary>
+      <details class="interactive" id="acc-ultimate-sp" aria-labelledby="acc-ultimate-sp-summary">
+  <summary id="acc-ultimate-sp-summary" role="button" aria-expanded="false"><span><h3 id="ultimate-sp" style="margin:0;font-size:inherit;display:inline">🔓 5.9 🛡 Ультимативный SP-блок</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C: 4K-Fallback</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Компактный System Prompt (~180 токенов), оптимизированный под LLM-парсинг. Содержит все критичные директивы в сжатой форме.</p>
@@ -11172,8 +11164,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-user-persona">
-        <summary><span><h3 id="user-persona" style="margin:0;font-size:inherit;display:inline">🔓 5.10 👤 Персона</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C</span></span></summary>
+      <details class="interactive" id="acc-user-persona" aria-labelledby="acc-user-persona-summary">
+  <summary id="acc-user-persona-summary" role="button" aria-expanded="false"><span><h3 id="user-persona" style="margin:0;font-size:inherit;display:inline">🔓 5.10 👤 Персона</h3> <span class="tag opt" style="margin-left:0.5em">Optional — Track B/C</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p>Без Персона модель заполняет образ <code>{{user}}</code> собственными шаблонами — «вежливый собеседник», «терапевт», «герой». Персонаж реагирует на стереотип, а не на конкретного пользователя.</p>
@@ -11211,8 +11203,8 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
       </div>
 
       <div data-requires-track="C">
-      <details class="interactive" id="acc-multi-char">
-        <summary><span><h3 id="multi-char" style="margin:0;font-size:inherit;display:inline">5.11 🎭 Мультиперсонажные сцены</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
+      <details class="interactive" id="acc-multi-char" aria-labelledby="acc-multi-char-summary">
+  <summary id="acc-multi-char-summary" role="button" aria-expanded="false"><span><h3 id="multi-char" style="margin:0;font-size:inherit;display:inline">5.11 🎭 Мультиперсонажные сцены</h3> <span class="tag opt" style="margin-left:0.5em">Optional</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Принципы:</strong></p>
@@ -11310,8 +11302,8 @@ When multiple characters are present, write reactions for ALL active characters 
         </div>
       </details>
 
-      <details class="interactive" id="acc-4k-fallback">
-        <summary><span><h3 id="four-k-fallback" style="margin:0;font-size:inherit;display:inline">5.12 📋 4K-Fallback протокол</h3> <span class="tag tip" style="margin-left:0.5em">Edge Case</span></span></summary>
+      <details class="interactive" id="acc-4k-fallback" aria-labelledby="acc-4k-fallback-summary">
+  <summary id="acc-4k-fallback-summary" role="button" aria-expanded="false"><span><h3 id="four-k-fallback" style="margin:0;font-size:inherit;display:inline">5.12 📋 4K-Fallback протокол</h3> <span class="tag tip" style="margin-left:0.5em">Edge Case</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Когда применять:</strong> При лимите ~300 токенов на карточку (4K контекст с длинным диалогом).</p>
@@ -11349,8 +11341,8 @@ When multiple characters are present, write reactions for ALL active characters 
         </div>
       </details>
 
-      <details class="interactive" id="acc-frontend-matrix">
-        <summary><span><h3 id="frontend-matrix" style="margin:0;font-size:inherit;display:inline">5.13 🖥️ Матрица совместимости фронтендов</h3> <span class="tag opt" style="margin-left:0.5em">Reference</span></span></summary>
+      <details class="interactive" id="acc-frontend-matrix" aria-labelledby="acc-frontend-matrix-summary">
+  <summary id="acc-frontend-matrix-summary" role="button" aria-expanded="false"><span><h3 id="frontend-matrix" style="margin:0;font-size:inherit;display:inline">5.13 🖥️ Матрица совместимости фронтендов</h3> <span class="tag opt" style="margin-left:0.5em">Reference</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Зачем:</strong> Разные фронтенды имеют разные ограничения и дефолтные настройки. Эта матрица помогает быстро найти нужные параметры.</p>
@@ -11434,8 +11426,8 @@ top_p: 0.9
         </div>
       </details>
 
-      <details class="interactive" id="acc-consistency-score">
-        <summary><span><h3 id="consistency-score" style="margin:0;font-size:inherit;display:inline">5.14 📊 Методология Consistency Score</h3> <span class="tag advanced" style="margin-left:0.5em">Advanced</span></span></summary>
+      <details class="interactive" id="acc-consistency-score" aria-labelledby="acc-consistency-score-summary">
+  <summary id="acc-consistency-score-summary" role="button" aria-expanded="false"><span><h3 id="consistency-score" style="margin:0;font-size:inherit;display:inline">5.14 📊 Методология Consistency Score</h3> <span class="tag advanced" style="margin-left:0.5em">Advanced</span></span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <p><strong>Что это:</strong> Стандартизированная методология измерения когерентности персонажа в длинных сессиях. Позволяет объективно оценить, насколько модель следует определению персонажа.</p>
@@ -11737,7 +11729,7 @@ Total: 0.845 × 100 = 84.5%</code></pre>
         <label><input type="checkbox" data-key="chk-int-32b-xml"> <strong>XML в Description:</strong> ✅ Приемлемо. Рекомендуется для структуры.</label>
       </li>
       <!-- L2-6: CoT link visible only for Track B+ -->
-      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C" hidden>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C">
         <label><input type="checkbox" data-key="chk-int-32b-cot"> <strong>CoT:</strong> T2 опционально. См. <a href="#cot">Раздел 5.4</a></label>
       </li>
     </ul>
@@ -11758,7 +11750,7 @@ Total: 0.845 × 100 = 84.5%</code></pre>
         <label><input type="checkbox" data-key="chk-int-api-voice"> <strong>Voice:</strong> Все опции доступны. Examples предпочтительнее.</label>
       </li>
       <!-- L2-6: CoT link visible only for Track B+ -->
-      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C" hidden>
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C">
         <label><input type="checkbox" data-key="chk-int-api-cot"> <strong>CoT:</strong> T2-T3 опционально. Встроенное рассуждение обычно достаточно.</label>
       </li>
       <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
@@ -11977,9 +11969,6 @@ Total: 0.845 × 100 = 84.5%</code></pre>
     </div>
   </article>
 
-  <div class="callout info" style="margin-top:2em">
-    <p class="track-badge">Полный каталог анти-паттернов с примерами: <span class="badge-track-c">Track C</span> → <a href="#antipatterns">Раздел 9a: Анти-паттерны (полный)</a></p>
-  </div>
 </section>
 
 <hr>
@@ -12007,8 +11996,8 @@ Total: 0.845 × 100 = 84.5%</code></pre>
         <strong>⚠️ Зачем этот раздел:</strong> Гайд показывает правильные подходы, но не менее важно избегать распространённых ошибок. Каждый анти-паттерн здесь — из реального опыта отладки карточек.
       </div>
 
-      <details class="interactive" id="acc-antipattern1">
-        <summary><span><h3 id="анти-паттерн-1-перегрузка-ocean" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
+      <details class="interactive" id="acc-antipattern1" aria-labelledby="acc-antipattern1-summary">
+  <summary id="acc-antipattern1-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-1-перегрузка-ocean" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 1: Перегрузка OCEAN</h3> <small style="color:var(--text-muted)">— Использование всех 5 полюсов вместо 1–2 экстремумов → «усреднённый» персонаж</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Использование всех 5 полюсов OCEAN вместо 1–2 экстремумов.</p>
       <div class="table-wrap">
@@ -12037,8 +12026,8 @@ O:72 C:85 E:28 A:45 N:62</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern2">
-        <summary><span><h3 id="анти-паттерн-2-ghost-в-system-prompt-по-умолчанию" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
+      <details class="interactive" id="acc-antipattern2" aria-labelledby="acc-antipattern2-summary">
+  <summary id="acc-antipattern2-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-2-ghost-в-system-prompt-по-умолчанию" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 2: GHOST в System Prompt по умолчанию</h3> <small style="color:var(--text-muted)">— Размещение GHOST в SP → утечка инструкций, нестабильное поведение</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Размещение GHOST в System Prompt в стандартной конфигурации.</p>
       <div class="table-wrap">
@@ -12074,8 +12063,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern3">
-        <summary><span><h3 id="анти-паттерн-3-вложенные-якоря" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
+      <details class="interactive" id="acc-antipattern3" aria-labelledby="acc-antipattern3-summary">
+  <summary id="acc-antipattern3-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-3-вложенные-якоря" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 3: Вложенные якоря</h3> <small style="color:var(--text-muted)">— Множественные якоря, триггирующие друг друга → непредсказуемость</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Множественные якоря, триггирующие друг друга.</p>
       <div class="table-wrap">
@@ -12104,8 +12093,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern4">
-        <summary><span><h3 id="анти-паттерн-4-раздувание-токенов" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Раздувание токенов</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
+      <details class="interactive" id="acc-antipattern4" aria-labelledby="acc-antipattern4-summary">
+  <summary id="acc-antipattern4-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-4-раздувание-токенов" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 4: Раздувание токенов</h3> <small style="color:var(--text-muted)">— Description более 1000 токенов с избыточными деталями → потеря фокуса</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Description более 1000 токенов с избыточными деталями.</p>
       <div class="table-wrap">
@@ -12138,8 +12127,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern5">
-        <summary><span><h3 id="анти-паттерн-5-отложенная-цена" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
+      <details class="interactive" id="acc-antipattern5" aria-labelledby="acc-antipattern5-summary">
+  <summary id="acc-antipattern5-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-5-отложенная-цена" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 5: Отложенная цена</h3> <small style="color:var(--text-muted)">— Price не манифестируется немедленно → «слишком идеальный» персонаж</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Price не манифестируется немедленно в сцене.</p>
       <div class="table-wrap">
@@ -12169,8 +12158,8 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <div data-model="12B">
-      <details class="interactive" id="acc-antipattern6">
-        <summary><span><h3 id="анти-паттерн-6-голос-в-description-для-12b" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
+      <details class="interactive" id="acc-antipattern6" aria-labelledby="acc-antipattern6-summary">
+  <summary id="acc-antipattern6-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-6-голос-в-description-для-12b" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 6: Голос в Description (для 12B)</h3> <small style="color:var(--text-muted)">— Стилистические директивы в Description для ≤14B → конфликт с Examples</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Стилистические директивы в Description для моделей ≤14B.</p>
       <div class="table-wrap">
@@ -12205,8 +12194,8 @@ content: [GHOST-триггер]</code></pre>
       </details>
       </div>
 
-      <details class="interactive" id="acc-antipattern7">
-        <summary><span><h3 id="анти-паттерн-7-годмодинг-в-lb-content" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content LBа → нарушение user agency</small></span></summary>
+      <details class="interactive" id="acc-antipattern7" aria-labelledby="acc-antipattern7-summary">
+  <summary id="acc-antipattern7-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-7-годмодинг-в-lb-content" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 7: Годмодинг в LB content</h3> <small style="color:var(--text-muted)">— Действия/мысли {{user}} в поле content LBа → нарушение user agency</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Действия/мысли {{user}} в поле content LBа.</p>
       <div class="table-wrap">
@@ -12235,8 +12224,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-antipattern8">
-        <summary><span><h3 id="анти-паттерн-8-reppen-1-10" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
+      <details class="interactive" id="acc-antipattern8" aria-labelledby="acc-antipattern8-summary">
+  <summary id="acc-antipattern8-summary" role="button" aria-expanded="false"><span><h3 id="анти-паттерн-8-reppen-1-10" style="margin:0;font-size:inherit;display:inline">❌ Анти-паттерн 8: RepPen > 1.10</h3> <small style="color:var(--text-muted)">— Высокий RepPen стирает легитимные паттерны → потеря характерных фраз</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p><strong>Проблема:</strong> Высокий RepPen стирает легитимные паттерны.</p>
       <div class="table-wrap">
@@ -12365,8 +12354,8 @@ content: [GHOST-триггер]</code></pre>
         <p class="note"><strong>Track A:</strong> Тесты 1-3 обязательны. Тест 4 рекомендуется, но не блокирует. Тесты 5-6 не применяются к Track A.</p>
       </section>
 
-      <details class="interactive" id="acc-test-mapping">
-        <summary><span><h3 id="mapping-dynamics-elements-test-scenarios" style="margin:0;font-size:inherit;display:inline">📋 Mapping: Dynamics Elements ↔ Test Scenarios</h3> <small style="color:var(--text-muted)">— Таблица связи между элементами конфигурации и тестами</small></span></summary>
+      <details class="interactive" id="acc-test-mapping" aria-labelledby="acc-test-mapping-summary">
+  <summary id="acc-test-mapping-summary" role="button" aria-expanded="false"><span><h3 id="mapping-dynamics-elements-test-scenarios" style="margin:0;font-size:inherit;display:inline">📋 Mapping: Dynamics Elements ↔ Test Scenarios</h3> <small style="color:var(--text-muted)">— Таблица связи между элементами конфигурации и тестами</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
         <p>Таблица показывает связь между элементами конфигурации и тестами, которые их проверяют:</p>
       <div class="table-wrap">
@@ -12387,8 +12376,8 @@ content: [GHOST-триггер]</code></pre>
       </details>
 
       <div data-requires-track="B C">
-      <details class="interactive" id="acc-test-scenarios">
-        <summary><span><h3 id="6-тест-сценариев-4-базовых-2-расширенных" style="margin:0;font-size:inherit;display:inline">🧪 6 тест-сценариев (4 базовых + 2 расширенных)</h3> <small style="color:var(--text-muted)">— Полный набор тестов для валидации карточки</small></span></summary>
+      <details class="interactive" id="acc-test-scenarios" aria-labelledby="acc-test-scenarios-summary">
+  <summary id="acc-test-scenarios-summary" role="button" aria-expanded="false"><span><h3 id="6-тест-сценариев-4-базовых-2-расширенных" style="margin:0;font-size:inherit;display:inline">🧪 6 тест-сценариев (4 базовых + 2 расширенных)</h3> <small style="color:var(--text-muted)">— Полный набор тестов для валидации карточки</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <div class="table-wrap">
         <table>
@@ -12494,8 +12483,8 @@ content: [GHOST-триггер]</code></pre>
         </ul>
       </div>
 
-      <details class="interactive" id="acc-test-protocol">
-        <summary><span><h3 id="протокол-исправления" style="margin:0;font-size:inherit;display:inline">🔄 Протокол исправления</h3> <small style="color:var(--text-muted)">— Пошаговый процесс исправления проблем</small></span></summary>
+      <details class="interactive" id="acc-test-protocol" aria-labelledby="acc-test-protocol-summary">
+  <summary id="acc-test-protocol-summary" role="button" aria-expanded="false"><span><h3 id="протокол-исправления" style="margin:0;font-size:inherit;display:inline">🔄 Протокол исправления</h3> <small style="color:var(--text-muted)">— Пошаговый процесс исправления проблем</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <ol>
         <li><strong>Идентифицируй симптом</strong> — что именно «ломается»?</li>
@@ -12510,8 +12499,8 @@ content: [GHOST-триггер]</code></pre>
         </div>
       </details>
 
-      <details class="interactive" id="acc-test-scale">
-        <summary><span><h3 id="шкала-качества-карточки" style="margin:0;font-size:inherit;display:inline">📊 Шкала качества карточки</h3> <small style="color:var(--text-muted)">— Критерии оценки и рекомендации по улучшению</small></span></summary>
+      <details class="interactive" id="acc-test-scale" aria-labelledby="acc-test-scale-summary">
+  <summary id="acc-test-scale-summary" role="button" aria-expanded="false"><span><h3 id="шкала-качества-карточки" style="margin:0;font-size:inherit;display:inline">📊 Шкала качества карточки</h3> <small style="color:var(--text-muted)">— Критерии оценки и рекомендации по улучшению</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <div class="table-wrap">
         <table>
@@ -12541,11 +12530,11 @@ content: [GHOST-триггер]</code></pre>
       </div>
 
       <div data-requires-track="C">
-      <details class="interactive" id="acc-test-examples">
-        <summary><span><h3 id="примеры-плохих-карточек-до-после" style="margin:0;font-size:inherit;display:inline">❌ Примеры плохих карточек (до/после)</h3> <small style="color:var(--text-muted)">— Наглядные примеры с исправлениями</small></span></summary>
+      <details class="interactive" id="acc-test-examples" aria-labelledby="acc-test-examples-summary">
+  <summary id="acc-test-examples-summary" role="button" aria-expanded="false"><span><h3 id="примеры-плохих-карточек-до-после" style="margin:0;font-size:inherit;display:inline">❌ Примеры плохих карточек (до/после)</h3> <small style="color:var(--text-muted)">— Наглядные примеры с исправлениями</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
-      <details class="interactive">
-        <summary><span><strong>Пример 1: Описание вместо поведения</strong></span></summary>
+      <details class="interactive" id="acc-auto-62" aria-labelledby="acc-auto-62-summary">
+  <summary id="acc-auto-62-summary" role="button" aria-expanded="false"><span><strong>Пример 1: Описание вместо поведения</strong></span></summary>
         <div class="accordion-content">
           <h4 style="color:#ef4444;margin-top:0">❌ До (неправильно):</h4>
           <pre><code>Макс — тревожный парень, который боится принимать решения. 
@@ -12571,8 +12560,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке. Она
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Пример 2: Голос в Description</strong></span></summary>
+      <details class="interactive" id="acc-auto-63" aria-labelledby="acc-auto-63-summary">
+  <summary id="acc-auto-63-summary" role="button" aria-expanded="false"><span><strong>Пример 2: Голос в Description</strong></span></summary>
         <div class="accordion-content">
           <h4 style="color:#ef4444;margin-top:0">❌ До (неправильно):</h4>
           <pre><code>&lt;speech_style&gt;
@@ -12600,8 +12589,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке. Она
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Пример 3: Price не манифестируется</strong></span></summary>
+      <details class="interactive" id="acc-auto-64" aria-labelledby="acc-auto-64-summary">
+  <summary id="acc-auto-64-summary" role="button" aria-expanded="false"><span><strong>Пример 3: Price не манифестируется</strong></span></summary>
         <div class="accordion-content">
           <h4 style="color:#ef4444;margin-top:0">❌ До (неправильно):</h4>
           <pre><code>- Когда ему лгут → чувствует, но не говорит прямо. Отдаляется. 
@@ -12615,8 +12604,8 @@ GHOST: В 14 лет не пошёл к умирающей бабушке. Она
         </div>
       </details>
 
-      <details class="interactive">
-        <summary><span><strong>Пример 4: GHOST дублируется</strong></span></summary>
+      <details class="interactive" id="acc-auto-65" aria-labelledby="acc-auto-65-summary">
+  <summary id="acc-auto-65-summary" role="button" aria-expanded="false"><span><strong>Пример 4: GHOST дублируется</strong></span></summary>
         <div class="accordion-content">
           <h4 style="color:#ef4444;margin-top:0">❌ До (неправильно):</h4>
           <pre><code>[System Prompt]
@@ -12803,8 +12792,8 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
     <p style="margin-top:0.5em">Каноническое правило: <a href="#rule-voice-isolation">§R2. Voice Isolation</a></p>
   </div>
   
-  <details class="interactive" style="margin-top:1em">
-    <summary><span>🔧 Рекомендуемые настройки для 12B–14B</span></summary>
+  <details class="interactive" id="acc-auto-13" aria-labelledby="acc-auto-13-summary" style="margin-top:1em">
+  <summary id="acc-auto-13-summary" role="button" aria-expanded="false"><span>🔧 Рекомендуемые настройки для 12B–14B</span></summary>
     <div style="padding:1em">
       <pre><code>temperature = 0.6–0.8      # НЕ выше 0.85
 top_p = 0.9
@@ -12820,7 +12809,7 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
 </section>
 
 <!-- Basic Debugging Symptoms - Track B and C -->
-<section id="debugging-basic" class="debug-section-basic" data-requires-track="B C" hidden>
+<section id="debugging-basic" class="debug-section-basic" data-requires-track="B C">
   <h2 id="раздел-7-диагностика-и-отладка-базовая">🔧 Раздел 7: Диагностика и отладка (Базовая)</h2>
   <p><span class="tag core">Core</span></p>
   <p><strong>Что это:</strong> Базовые симптомы и решения для Track B.</p>
@@ -12829,8 +12818,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns-core">Критические анти-паттерны</a> перед этим разделом.
   </div>
 
-  <details class="interactive" id="acc-debug-role">
-    <summary><span><h3 id="симптом-1-персонаж-нарушает-роль-выходит-из-образа" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 1: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
+  <details class="interactive" id="acc-debug-role" aria-labelledby="acc-debug-role-summary">
+  <summary id="acc-debug-role-summary" role="button" aria-expanded="false"><span><h3 id="симптом-1-персонаж-нарушает-роль-выходит-из-образа" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 1: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -12859,8 +12848,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-voice">
-    <summary><span><h3 id="симптом-2-нестабильный-голос-голос-плывёт" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 2: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
+  <details class="interactive" id="acc-debug-voice" aria-labelledby="acc-debug-voice-summary">
+  <summary id="acc-debug-voice-summary" role="button" aria-expanded="false"><span><h3 id="симптом-2-нестабильный-голос-голос-плывёт" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 2: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -12889,8 +12878,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-hallucinations">
-    <summary><span><h3 id="симптом-3-галлюцинации-противоречивые-факты" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 3: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
+  <details class="interactive" id="acc-debug-hallucinations" aria-labelledby="acc-debug-hallucinations-summary">
+  <summary id="acc-debug-hallucinations-summary" role="button" aria-expanded="false"><span><h3 id="симптом-3-галлюцинации-противоречивые-факты" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 3: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -12919,8 +12908,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-godmoding">
-    <summary><span><h3 id="симптом-4-годмодинг-модель-пишет-за-user" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 4: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
+  <details class="interactive" id="acc-debug-godmoding" aria-labelledby="acc-debug-godmoding-summary">
+  <summary id="acc-debug-godmoding-summary" role="button" aria-expanded="false"><span><h3 id="симптом-4-годмодинг-модель-пишет-за-user" style="margin:0;font-size:inherit;display:inline">🔀 Симптом 4: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -12950,7 +12939,7 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
 </section>
 
 <!-- Advanced Debugging Symptoms - Track C ONLY -->
-<section id="debugging" class="debug-section-advanced" data-requires-track="C" hidden>
+<section id="debugging" class="debug-section-advanced" data-requires-track="C">
   <h2 id="раздел-7-диагностика-и-отладка">🔧 Раздел 7: Диагностика и отладка</h2>
   <p><span class="tag core">Core</span></p>
   <p><strong>Что это:</strong> Древовидный справочник для диагностики и исправления проблем в карточке персонажа.</p>
@@ -12960,8 +12949,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns">Анти-паттерны</a> перед этим разделом. Знание типичных ошибок ускоряет диагностику.
   </div>
 
-  <details class="interactive" id="acc-debug-role-c">
-    <summary><span><h3 id="симптом-персонаж-нарушает-роль-выходит-из-образа" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
+  <details class="interactive" id="acc-debug-role-c" aria-labelledby="acc-debug-role-c-summary">
+  <summary id="acc-debug-role-c-summary" role="button" aria-expanded="false"><span><h3 id="симптом-персонаж-нарушает-роль-выходит-из-образа" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -12990,8 +12979,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-voice-c">
-    <summary><span><h3 id="симптом-нестабильный-голос-голос-плывёт" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
+  <details class="interactive" id="acc-debug-voice-c" aria-labelledby="acc-debug-voice-c-summary">
+  <summary id="acc-debug-voice-c-summary" role="button" aria-expanded="false"><span><h3 id="симптом-нестабильный-голос-голос-плывёт" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13020,8 +13009,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-hallucinations-c">
-    <summary><span><h3 id="симптом-галлюцинации-противоречивые-факты" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
+  <details class="interactive" id="acc-debug-hallucinations-c" aria-labelledby="acc-debug-hallucinations-c-summary">
+  <summary id="acc-debug-hallucinations-c-summary" role="button" aria-expanded="false"><span><h3 id="симптом-галлюцинации-противоречивые-факты" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13050,8 +13039,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-godmoding-c">
-    <summary><span><h3 id="симптом-годмодинг-модель-пишет-за-user" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
+  <details class="interactive" id="acc-debug-godmoding-c" aria-labelledby="acc-debug-godmoding-c-summary">
+  <summary id="acc-debug-godmoding-c-summary" role="button" aria-expanded="false"><span><h3 id="симптом-годмодинг-модель-пишет-за-user" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13075,8 +13064,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-perfect">
-    <summary><span><h3 id="симптом-персонаж-слишком-идеальный" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж «слишком идеальный»</h3> <small style="color:var(--text-muted)">— Проверь FLAW, WANT/NEED конфликт и GHOST на поведенческие проявления</small></span></summary>
+  <details class="interactive" id="acc-debug-perfect" aria-labelledby="acc-debug-perfect-summary">
+  <summary id="acc-debug-perfect-summary" role="button" aria-expanded="false"><span><h3 id="симптом-персонаж-слишком-идеальный" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Персонаж «слишком идеальный»</h3> <small style="color:var(--text-muted)">— Проверь FLAW, WANT/NEED конфликт и GHOST на поведенческие проявления</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13100,8 +13089,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-repeats">
-    <summary><span><h3 id="симптом-повторы-зацикливание" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Повторы / зацикливание</h3> <small style="color:var(--text-muted)">— Проверь RepPen, presence_penalty и разнообразие триггеров</small></span></summary>
+  <details class="interactive" id="acc-debug-repeats" aria-labelledby="acc-debug-repeats-summary">
+  <summary id="acc-debug-repeats-summary" role="button" aria-expanded="false"><span><h3 id="симптом-повторы-зацикливание" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Повторы / зацикливание</h3> <small style="color:var(--text-muted)">— Проверь RepPen, presence_penalty и разнообразие триггеров</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13125,8 +13114,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-context">
-    <summary><span><h3 id="симптом-потеря-контекста-в-длинной-сессии" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Потеря контекста в длинной сессии</h3> <small style="color:var(--text-muted)">— Проверь AN, размер окна и Lorebook Range-cascade</small></span></summary>
+  <details class="interactive" id="acc-debug-context" aria-labelledby="acc-debug-context-summary">
+  <summary id="acc-debug-context-summary" role="button" aria-expanded="false"><span><h3 id="симптом-потеря-контекста-в-длинной-сессии" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Потеря контекста в длинной сессии</h3> <small style="color:var(--text-muted)">— Проверь AN, размер окна и Lorebook Range-cascade</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13150,8 +13139,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     </div>
   </details>
 
-  <details class="interactive" id="acc-debug-physical">
-    <summary><span><h3 id="симптом-физические-противоречия-телепортация-анато" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3> <small style="color:var(--text-muted)">— Проверь SPATIAL LOCK и Examples на пространственную когерентность</small></span></summary>
+  <details class="interactive" id="acc-debug-physical" aria-labelledby="acc-debug-physical-summary">
+  <summary id="acc-debug-physical-summary" role="button" aria-expanded="false"><span><h3 id="симптом-физические-противоречия-телепортация-анато" style="margin:0;font-size:inherit;display:inline">🔀 Симптом: Физические противоречия (телепортация, анатомия)</h3> <small style="color:var(--text-muted)">— Проверь SPATIAL LOCK и Examples на пространственную когерентность</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
     <div class="debug-tree">
     <ol>
@@ -13189,8 +13178,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
 
     <!-- ==================== ПРИЛОЖЕНИЕ 2 ==================== -->
     <section id="appendix2" data-requires-track="B C">
-      <details class="interactive" id="acc-appendix2">
-        <summary><span><h2 id="приложение-2-справочные-таблицы" style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— Token Budgets, OCEAN, Enneagram, модели</small></span></summary>
+      <details class="interactive" id="acc-appendix2" aria-labelledby="acc-appendix2-summary">
+  <summary id="acc-appendix2-summary" role="button" aria-expanded="false"><span><h2 id="приложение-2-справочные-таблицы" style="margin:0;font-size:inherit;display:inline">📎 Приложение 2: Справочные таблицы</h2> <small style="color:var(--text-muted)">— Token Budgets, OCEAN, Enneagram, модели</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
 
       <div class="callout tip">
@@ -13446,8 +13435,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
 
       <p><em>4K-Fallback протокол: см. <a href="#four-k-fallback">Раздел 5.12</a>.</em></p>
 
-      <details class="interactive" id="acc-metrics-internal" data-requires-track="C">
-        <summary><span><h3 id="metrics-denominators" style="margin:0;font-size:inherit;display:inline">📊 Quality Metrics (Internal)</h3> <span class="tag advanced" style="margin-left:0.5em">Track C: Internal</span></span></summary>
+      <details class="interactive" id="acc-metrics-internal" data-requires-track="C" aria-labelledby="acc-metrics-internal-summary">
+  <summary id="acc-metrics-internal-summary" role="button" aria-expanded="false"><span><h3 id="metrics-denominators" style="margin:0;font-size:inherit;display:inline">📊 Quality Metrics (Internal)</h3> <span class="tag advanced" style="margin-left:0.5em">Track C: Internal</span></span></summary>
         <div style="padding:0 1.2em 1.2em">
           <div class="callout warn" style="margin:0.5em 0">
             <strong>⚠️ Internal Reference:</strong> Эти метрики — для мейнтейнеров гайда, не для создателей персонажей. Для пользователей релевантны чеклисты валидации (<a href="#appendix4">Приложение 4</a>).
@@ -13529,8 +13518,8 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
 
     <!-- ==================== ПРИЛОЖЕНИЕ 3 ==================== -->
     <section id="appendix3" data-requires-track="A B C">
-      <details class="interactive" id="acc-appendix3">
-        <summary><span><h2 id="приложение-3-пример-карточки-макс" style="margin:0;font-size:inherit;display:inline">📎 Приложение 3: Пример карточки (Макс)</h2> <span class="badge-track-a">Track A+</span> <small style="color:var(--text-muted)">— опорный пример для начинающих</small></span></summary>
+      <details class="interactive" id="acc-appendix3" aria-labelledby="acc-appendix3-summary">
+  <summary id="acc-appendix3-summary" role="button" aria-expanded="false"><span><h2 id="приложение-3-пример-карточки-макс" style="margin:0;font-size:inherit;display:inline">📎 Приложение 3: Пример карточки (Макс)</h2> <span class="badge-track-a">Track A+</span> <small style="color:var(--text-muted)">— опорный пример для начинающих</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <p><strong>Имя:</strong> Макс<br>
       <strong>Возраст:</strong> 19 лет<br>
@@ -13622,8 +13611,8 @@ No smart typography. If conflict → default to Examples.</code></pre>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 3B ==================== -->
     <section id="appendix3b" data-requires-track="B C">
-      <details class="interactive" id="acc-appendix3b">
-        <summary><span><h2 id="приложение-3b-пример-карточки-jesse-pinkman" style="margin:0;font-size:inherit;display:inline">📎 Приложение 3B: Пример карточки (Jesse Pinkman)</h2> <span class="badge-track-b">Track B+</span> <small style="color:var(--text-muted)">— полный пайплайн, Voice Isolation, физикальность</small></span></summary>
+      <details class="interactive" id="acc-appendix3b" aria-labelledby="acc-appendix3b-summary">
+  <summary id="acc-appendix3b-summary" role="button" aria-expanded="false"><span><h2 id="приложение-3b-пример-карточки-jesse-pinkman" style="margin:0;font-size:inherit;display:inline">📎 Приложение 3B: Пример карточки (Jesse Pinkman)</h2> <span class="badge-track-b">Track B+</span> <small style="color:var(--text-muted)">— полный пайплайн, Voice Isolation, физикальность</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
       <p><strong>Персонаж:</strong> Jesse Pinkman<br>
       <strong>Источник:</strong> Breaking Bad (AMC)<br>
@@ -13774,8 +13763,8 @@ Voice is defined ONLY in Example Messages through demonstration.</code></pre>
         <strong>💡 Как использовать:</strong> Это бинарный инструмент верификации. Если нужен контекст по пункту — кликни по anchor-link. <span style="font-size:0.85em;color:var(--text-muted)">Развёрнутые объяснения — в основных разделах гайда.</span>
       </div>
 
-      <details class="interactive" id="acc-validation-checklist">
-        <summary><span>📋 Validation Checklist (expand if needed)</span></summary>
+      <details class="interactive" id="acc-validation-checklist" aria-labelledby="acc-validation-checklist-summary">
+  <summary id="acc-validation-checklist-summary" role="button" aria-expanded="false"><span>📋 Validation Checklist (expand if needed)</span></summary>
         <div>
           <div style="padding:0 1.2em 1.2em">
       <div class="checklist-progress"><div class="checklist-progress-bar" style="width:0%"></div></div>
@@ -13819,8 +13808,8 @@ Voice is defined ONLY in Example Messages through demonstration.</code></pre>
 
     <!-- ==================== ПРИЛОЖЕНИЕ 5 ==================== -->
     <section id="appendix5">
-      <details class="interactive" id="acc-appendix5">
-        <summary><span><h2 id="приложение-5-шаблоны-карточек" style="margin:0;font-size:inherit;display:inline">📎 Приложение 5: Шаблоны карточек</h2> <small style="color:var(--text-muted)">— минимальный и стандартный шаблоны</small></span></summary>
+      <details class="interactive" id="acc-appendix5" aria-labelledby="acc-appendix5-summary">
+  <summary id="acc-appendix5-summary" role="button" aria-expanded="false"><span><h2 id="приложение-5-шаблоны-карточек" style="margin:0;font-size:inherit;display:inline">📎 Приложение 5: Шаблоны карточек</h2> <small style="color:var(--text-muted)">— минимальный и стандартный шаблоны</small></span></summary>
         <div style="padding:0 1.2em 1.2em">
 
       <div class="tabs" role="tablist" aria-label="Шаблоны карточек">
@@ -14220,7 +14209,7 @@ No smart typography. If conflict → default to Examples.
 </div>
 
 <!-- Main JavaScript (hashed by build script) -->
-<script src="assets/main.b1eca98a.js" defer></script>
+<script src="assets/main.49e1095f.js" defer></script>
 
 </body>
 </html>
