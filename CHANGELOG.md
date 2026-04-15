@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [5.9.0] - 2026-04-15
+
+### Changed
+- Version synchronized across all project files (README, CHANGELOG, CHANGES.md)
+- Track B description clarified: "production baseline" not "all core elements"
+- Consolidated validate-artifact.mjs to single file (scripts/)
+- Renamed 09a_antipatterns.html to 06b_antipatterns_advanced.html for stage alignment
+- Removed track_visibility attribute from structure.json (using HTML data-requires-track)
+- Added nav_map.json for navigation integrity
+
+### Fixed
+- Version drift between structure.json, README, CHANGELOG, and CHANGES.md
+- CI instability from duplicate validation scripts with conflicting limits
+- validate-artifact.mjs VERSION path corrected
+
+### Added
+- validate_anchors.py CI script for anchor validation
+- Section dependency map in architecture
+- Track migration checklist in download/
+
+### Removed
+- Duplicate src/scripts/validate-artifact.mjs
+- build.hash from version control (already in .gitignore)
+
 ## [5.5.5] - 2026-04-14
 
 ### Changed
@@ -130,7 +154,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - Technical implementation guide
 - Testing strategies
 
-[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.4...HEAD
+[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.9.0...HEAD
+[5.9.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.5...v5.9.0
 [5.5.5]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.4...v5.5.5
 [5.5.4]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.4.0...v5.5.4
 [5.4.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.3.2...v5.4.0

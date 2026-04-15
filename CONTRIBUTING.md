@@ -139,6 +139,10 @@ Then create a Pull Request on GitHub.
 - Maintain accessibility (ARIA attributes, labels)
 - Follow existing indentation (2 spaces)
 
+### Non-Standard Section Types
+
+- **fragments**: Checkpoints file containing extended validation checklists. Not a standard reading section, but a reference for final verification.
+
 ### CSS
 
 - Use BEM naming convention where appropriate

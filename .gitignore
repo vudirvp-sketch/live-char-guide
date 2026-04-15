@@ -5,7 +5,7 @@ build-*.hash
 /parts/
 /assets/
 src_VERSION
-VERSION
+/VERSION
 
 # Dependencies
 node_modules/

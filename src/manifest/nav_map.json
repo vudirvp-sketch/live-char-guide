@@ -1,0 +1,32 @@
+{
+  "version": "5.9.0",
+  "generated": "2026-04-15T00:00:00Z",
+  "navigation": {
+    "entry_points": {
+      "users": "02_quickstart.html",
+      "reference": "00_rules_registry.html",
+      "advanced": "06b_antipatterns_advanced.html"
+    },
+    "section_dependencies": {
+      "04_core_blocks.html": ["01_core_principles.html", "00_rules_registry.html"],
+      "05_psychology.html": ["04_core_blocks.html"],
+      "05a_spine_anchors.html": ["05_psychology.html"],
+      "06b_antipatterns_advanced.html": ["04_core_blocks.html", "05_psychology.html"],
+      "07_testing.html": ["06a_antipatterns_core.html"],
+      "08b_debugging.html": ["07_testing.html", "06b_antipatterns_advanced.html"]
+    },
+    "track_matrix": {
+      "A": ["02_quickstart.html", "04_core_blocks.html:basic", "06a_antipatterns_core.html"],
+      "B": ["03_architecture.html", "05_psychology.html", "05a_spine_anchors.html", "05b_cot_tiers.html", "06_technical.html"],
+      "C": ["06b_antipatterns_advanced.html", "08b_debugging.html"]
+    }
+  },
+  "aliases": {
+    "quickstart": "02_quickstart.html",
+    "rules": "00_rules_registry.html",
+    "spine": "05_psychology.html#spine",
+    "anchors": "04_core_blocks.html#anchors",
+    "antipatterns": "06a_antipatterns_core.html",
+    "advanced_antipatterns": "06b_antipatterns_advanced.html"
+  }
+}

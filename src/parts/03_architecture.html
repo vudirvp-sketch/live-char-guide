@@ -218,6 +218,32 @@
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">→ <a href="#checkpoint-architecture">Полный чеклист Stage 2</a></p>
       </div>
 
+      <!-- TASK 3.5: Section Dependency Map -->
+      <section id="section-dependencies" style="margin:2em 0; padding:1.5em; background:var(--bg-secondary); border-radius:0.5em;">
+        <h3>🗺️ Карта зависимостей разделов</h3>
+        <p>Что нужно прочитать перед каждым разделом:</p>
+        
+        <div class="dependency-tree">
+          <ul style="list-style:none; padding-left:0;">
+            <li style="margin:0.5em 0;"><strong>Quickstart</strong> → самодостаточен</li>
+            <li style="margin:0.5em 0;"><strong>Architecture</strong> → требует Quickstart</li>
+            <li style="margin:0.5em 0;"><strong>Core Blocks</strong> → требует Core Principles + Architecture</li>
+            <li style="margin:0.5em 0;"><strong>Psychology</strong> → требует Core Blocks</li>
+            <li style="margin:0.5em 0;"><strong>Technical</strong> → требует Psychology</li>
+            <li style="margin:0.5em 0;"><strong>Antipatterns</strong> → требует Core Blocks + Psychology</li>
+            <li style="margin:0.5em 0;"><strong>Diagnostics</strong> → требует Antipatterns (core)</li>
+            <li style="margin:0.5em 0;"><strong>Debugging</strong> → требует Diagnostics + Antipatterns (advanced)</li>
+          </ul>
+        </div>
+        
+        <div class="callout tip" style="margin-top:1em;">
+          <strong>💡 Рекомендуемый порядок чтения:</strong>
+          <p style="margin:0.5em 0;">Track A: Quickstart → Core Blocks (basic) → Antipatterns (core)</p>
+          <p style="margin:0.5em 0;">Track B: + Architecture → Psychology → Technical</p>
+          <p style="margin:0.5em 0;">Track C: + Advanced Antipatterns → Debugging</p>
+        </div>
+      </section>
+
     </section>
 
     <hr>

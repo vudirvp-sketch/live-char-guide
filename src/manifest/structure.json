@@ -18,9 +18,9 @@
     { "file": "06_technical.html", "type": "section", "anchors": ["#sampling", "#an-ghost", "#lorebook", "#xml-tags"], "stage": 5 },
     { "file": "06a_integration.html", "type": "section", "anchors": ["#integration-checklist"], "stage": 6 },
     { "file": "06a_antipatterns_core.html", "type": "section", "anchors": ["#antipatterns-core", "#ap-token-bloat", "#ap-missing-price", "#ap-voice-description", "#ap-ghost-sp", "#ap-reppen-overdose", "#ap-godmoding-lb", "#ap-ocean-overload"], "stage": 6 },
-    { "file": "09a_antipatterns.html", "type": "section", "anchors": ["#antipatterns"], "stage": 6 },
+    { "file": "06b_antipatterns_advanced.html", "type": "section", "anchors": ["#antipatterns"], "stage": 6 },
     { "file": "07_testing.html", "type": "section", "anchors": ["#diagnostics", "#test-requirements"], "stage": 7 },
-    { "file": "08b_debugging.html", "type": "section", "anchors": ["#debugging", "#acc-debug-role", "#acc-debug-voice", "#acc-debug-hallucinations", "#acc-debug-godmoding", "#acc-debug-perfect", "#acc-debug-repeats", "#acc-debug-context", "#acc-debug-physical"], "stage": 8, "track_visibility": "C" },
+    { "file": "08b_debugging.html", "type": "section", "anchors": ["#debugging", "#acc-debug-role", "#acc-debug-voice", "#acc-debug-hallucinations", "#acc-debug-godmoding", "#acc-debug-perfect", "#acc-debug-repeats", "#acc-debug-context", "#acc-debug-physical"], "stage": 8 },
     { "file": "08_appendices.html", "type": "section", "anchors": ["#appendix2", "#appendix3", "#appendix4", "#appendix5", "#appendix6"] },
     { "file": "09_conclusion.html", "type": "section", "anchors": ["#conclusion"] },
     { "file": "09_footer.html", "type": "body-end", "critical": true },
@@ -41,8 +41,10 @@
   "validation": {
     "ci_scripts": [
       "scripts/check_duplicates.py",
-      "scripts/validate_terms.py"
+      "scripts/validate_terms.py",
+      "scripts/validate_anchors.py"
     ],
-    "glossary_file": "src/data/glossary.json"
+    "glossary_file": "src/data/glossary.json",
+    "nav_map_file": "src/manifest/nav_map.json"
   }
 }

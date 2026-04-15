@@ -8,9 +8,9 @@ Live Character Guide is an engineering pipeline for building deterministic behav
 
 ## Quick Navigation
 
-**Track A (15 min)** - Essentials for beginners — minimal template, basic concepts  
-**Track B (30 min)** - Full pipeline for card builders — all core elements  
-**Track C (60 min)** - All features for power users — advanced techniques
+**Track A (15 min)** - Draft prototype (черновой прототип) — essentials for beginners
+**Track B (30 min)** - Production baseline (базовый продакшн) — core pipeline with intermediate features
+**Track C (60 min)** - Advanced dynamics / tuning (продвинутая динамика / тюнинг) — all features for power users
 
 [→ Open Full Guide](https://vudirvp-sketch.github.io/live-char-guide/) | [→ Download Offline Version](https://vudirvp-sketch.github.io/live-char-guide/live-char-guide-zero-install.html)
 
@@ -120,6 +120,12 @@ The guide supports three reading tracks:
 - **Track B (Full Pipeline):** ~30 min — Complete card building process
 - **Track C (Advanced):** ~60 min — All features, including lorebook mechanics and advanced techniques
 
+### Track Scope Clarification
+
+- **Track A:** Quickstart, basic anchors, WANT/NEED only
+- **Track B:** Full pipeline, SPINE, GHOST basics, CoT tiers, LB/AN visible
+- **Track C:** Advanced antipatterns, debugging decision tree, deep GHOST layering
+
 ### Track Limitations
 
 - **Track B:** Диагностика доступна. Debugging (decision tree) → Track C
@@ -133,7 +139,7 @@ The project uses GitHub Pages with automatic deployment via GitHub Actions:
 
 ## Version
 
-Current version: 5.8.0 (build 2026-04-15)
+Current version: 5.9.0 (build 2026-04-15)
 
 ## License
 
