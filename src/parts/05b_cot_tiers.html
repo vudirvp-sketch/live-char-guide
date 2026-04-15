@@ -10,6 +10,16 @@
     <span class="mode-badge">Track C</span>
     <span class="mode-hint">Продвинутый контент — виден только для Track B и C.</span>
   </div>
+  
+  <!-- L4-4: Context Trail -->
+  <aside class="context-trail" style="margin-bottom:1em;">
+    <span class="trail-label">Контекст:</span>
+    <a href="#spine">SPINE</a> → 
+    <a href="#anchors">Anchors</a> → 
+    <a href="#rule-price">Price</a> → 
+    <span class="current">CoT Tiers</span>
+  </aside>
+  
   <h2>🧩 Раздел 4.1.1: CoT Tiers (Chain of Thought)</h2>
   <p><span class="tag core">Core</span> <span class="tag advanced">Advanced</span> <em>→ <a href="#spine">Раздел 4.1: SPINE</a> | <a href="#cot">Раздел 5.4: CoT</a></em></p>
   
@@ -20,6 +30,84 @@
   </div>
 
   <h3>📊 CoT Tiers Overview</h3>
+  
+  <!-- L4-3: CoT Tiers Flowchart -->
+  <div class="svg-infographic" style="margin:1.5em 0;">
+    <div class="svg-infographic-title">CoT Tier Flow</div>
+    <svg id="cot-flow" viewBox="0 0 450 400" role="img" aria-label="Chain of Thought tiers flowchart">
+      <!-- Arrow marker definition -->
+      <defs>
+        <marker id="cot-arrow-marker" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L9,3 z" fill="var(--text-muted)"/>
+        </marker>
+      </defs>
+      
+      <!-- T0: КОНТЕКСТ -->
+      <rect x="125" y="10" width="200" height="45" rx="6" fill="#3b82f6"/>
+      <text x="225" y="28" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T0: КОНТЕКСТ</text>
+      <text x="225" y="45" text-anchor="middle" font-size="10" fill="white">Что происходит? → Ситуация</text>
+      
+      <!-- Arrow -->
+      <path d="M225 55 L225 70" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T1: РЕАКЦИЯ -->
+      <rect x="125" y="75" width="200" height="45" rx="6" fill="#22c55e"/>
+      <text x="225" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T1: РЕАКЦИЯ</text>
+      <text x="225" y="110" text-anchor="middle" font-size="10" fill="white">Что чувствует? → Эмоция</text>
+      
+      <!-- Arrow -->
+      <path d="M225 120 L225 135" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T2: МОТИВАЦИЯ -->
+      <rect x="125" y="140" width="200" height="45" rx="6" fill="#f59e0b"/>
+      <text x="225" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T2: МОТИВАЦИЯ</text>
+      <text x="225" y="175" text-anchor="middle" font-size="10" fill="white">Почему важно? → SPINE</text>
+      
+      <!-- Arrow -->
+      <path d="M225 185 L225 200" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T3: КОНФЛИКТ -->
+      <rect x="125" y="205" width="200" height="45" rx="6" fill="#ef4444"/>
+      <text x="225" y="223" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T3: КОНФЛИКТ</text>
+      <text x="225" y="240" text-anchor="middle" font-size="10" fill="white">Что мешает? → FLAW/LIE</text>
+      
+      <!-- Arrow -->
+      <path d="M225 250 L225 265" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T4: ДЕЙСТВИЕ -->
+      <rect x="125" y="270" width="200" height="45" rx="6" fill="#8b5cf6"/>
+      <text x="225" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T4: ДЕЙСТВИЕ</text>
+      <text x="225" y="305" text-anchor="middle" font-size="10" fill="white">Что делает? → Поведение</text>
+      
+      <!-- Arrow -->
+      <path d="M225 315 L225 330" stroke="var(--text-muted)" stroke-width="2" marker-end="url(#cot-arrow-marker)"/>
+      
+      <!-- T5: ГОЛОС -->
+      <rect x="125" y="335" width="200" height="45" rx="6" fill="#ec4899"/>
+      <text x="225" y="353" text-anchor="middle" font-size="12" font-weight="bold" fill="white">T5: ГОЛОС</text>
+      <text x="225" y="370" text-anchor="middle" font-size="10" fill="white">Как говорит? → Речь</text>
+      
+      <!-- Legend -->
+      <g transform="translate(10, 380)">
+        <text x="0" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">
+          Каждый tier добавляет глубину ответу. T0-T2 = база, T3-T5 = драма.
+        </text>
+      </g>
+    </svg>
+    <noscript>
+      <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+        <p><strong>CoT Tier Flow:</strong></p>
+        <ol style="margin-top:0.5em;padding-left:1.5em;">
+          <li><strong>T0: КОНТЕКСТ</strong> — Что происходит? → Ситуация</li>
+          <li><strong>T1: РЕАКЦИЯ</strong> — Что чувствует? → Эмоция</li>
+          <li><strong>T2: МОТИВАЦИЯ</strong> — Почему важно? → SPINE</li>
+          <li><strong>T3: КОНФЛИКТ</strong> — Что мешает? → FLAW/LIE</li>
+          <li><strong>T4: ДЕЙСТВИЕ</strong> — Что делает? → Поведение</li>
+          <li><strong>T5: ГОЛОС</strong> — Как говорит? → Речь</li>
+        </ol>
+      </div>
+    </noscript>
+  </div>
   
   <div class="table-wrap">
     <table>

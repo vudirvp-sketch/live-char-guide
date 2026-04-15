@@ -348,6 +348,41 @@
         <h3>🗺️ Карта зависимостей разделов</h3>
         <p>Что нужно прочитать перед каждым разделом:</p>
         
+        <!-- L4-2: Section Dependency Diagram (Mermaid) -->
+        <div class="mermaid-diagram" style="margin:1.5em 0;">
+          <pre class="mermaid">
+graph TD
+    A[Rules Registry] --> B[Core Principles]
+    B --> C[Quick Start]
+    C --> D[Architecture]
+    D --> E[Core Blocks]
+    E --> F[Psychology]
+    F --> G[Technical]
+    G --> H[Antipatterns]
+    H --> I[Testing]
+    I --> J[Debugging]
+    
+    A -.-> E
+    B -.-> F
+    E -.-> H
+    
+    style A fill:#f9f,stroke:#333
+    style B fill:#bbf,stroke:#333
+    style C fill:#bfb,stroke:#333
+          </pre>
+        </div>
+
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>Зависимости разделов:</strong></p>
+            <ul>
+              <li>Rules Registry → Core Principles → Quick Start → Architecture</li>
+              <li>Architecture → Core Blocks → Psychology → Technical</li>
+              <li>Technical → Antipatterns → Testing → Debugging</li>
+            </ul>
+          </div>
+        </noscript>
+        
         <div class="dependency-tree">
           <ul style="list-style:none; padding-left:0;">
             <li style="margin:0.5em 0;"><strong>Quickstart</strong> → самодостаточен</li>

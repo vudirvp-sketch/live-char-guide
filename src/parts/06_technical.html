@@ -211,6 +211,57 @@ No smart typography, no zero-width chars, no mixed formatting. If conflict → d
 
       <p><strong>GHOST: размещение по слоям:</strong> См. каноническую таблицу: <a href="#rule-ghost-placement">§R3. GHOST Placement</a> в Реестре правил.</p>
 
+      <!-- L4-1: GHOST Layers Diagram -->
+      <div class="svg-infographic" style="margin:1.5em 0;">
+        <div class="svg-infographic-title">GHOST Layers Distribution</div>
+        <svg id="ghost-layers" viewBox="0 0 600 280" role="img" aria-label="GHOST layers distribution diagram">
+          <!-- Background -->
+          <rect x="50" y="20" width="500" height="230" rx="8" fill="var(--bg-surface)" stroke="var(--border)"/>
+          
+          <!-- Title -->
+          <text x="300" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="var(--text)">GHOST LAYERS</text>
+          
+          <!-- Layer bars -->
+          <!-- Description -->
+          <rect x="70" y="70" width="300" height="32" rx="4" fill="#3b82f6"/>
+          <text x="80" y="91" font-size="12" fill="white">Description (Spine)</text>
+          <text x="380" y="91" font-size="11" fill="var(--text-muted)">Определение (что)</text>
+          
+          <!-- Examples -->
+          <rect x="70" y="108" width="240" height="32" rx="4" fill="#22c55e"/>
+          <text x="80" y="129" font-size="12" fill="white">Examples</text>
+          <text x="320" y="129" font-size="11" fill="var(--text-muted)">Демонстрация (как)</text>
+          
+          <!-- Lorebook -->
+          <rect x="70" y="146" width="270" height="32" rx="4" fill="#f59e0b"/>
+          <text x="80" y="167" font-size="12" fill="white">Lorebook</text>
+          <text x="350" y="167" font-size="11" fill="var(--text-muted)">Триггеры (когда)</text>
+          
+          <!-- Author's Notes -->
+          <rect x="70" y="184" width="330" height="32" rx="4" fill="#8b5cf6"/>
+          <text x="80" y="205" font-size="12" fill="white">Author's Notes</text>
+          <text x="410" y="205" font-size="11" fill="var(--text-muted)">Состояние</text>
+          
+          <!-- System Prompt - crossed out -->
+          <rect x="70" y="222" width="110" height="28" rx="4" fill="#ef4444" opacity="0.5"/>
+          <text x="80" y="240" font-size="11" fill="white">System Prompt</text>
+          <line x1="70" y1="222" x2="180" y2="250" stroke="#ef4444" stroke-width="3"/>
+          <text x="190" y="240" font-size="10" fill="#ef4444">❌ НЕ ДУБЛИРОВАТЬ</text>
+        </svg>
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>Распределение GHOST по слоям:</strong></p>
+            <ul style="margin-top:0.5em;padding-left:1.5em;">
+              <li><strong>Description (Spine):</strong> Определение — что случилось</li>
+              <li><strong>Examples:</strong> Демонстрация — как GHOST проявляется</li>
+              <li><strong>Lorebook:</strong> Триггеры — когда активируется</li>
+              <li><strong>Author's Notes:</strong> Состояние — текущий статус</li>
+              <li><strong>System Prompt:</strong> ❌ НЕ ДУБЛИРОВАТЬ</li>
+            </ul>
+          </div>
+        </noscript>
+      </div>
+
       <div class="callout tip" style="margin:1em 0">
         <strong>🔗 Связано:</strong> О распространённых GHOST-анти-паттернах см. <a href="#antipatterns">Анти-паттерны</a>.
       </div>

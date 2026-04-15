@@ -5941,3 +5941,112 @@ body.theme-light .track-result {
     font-size: 8px;
   }
 }
+
+/* ============================================================
+   LAYER 4: BREADCRUMBS AND CONTEXT TRAIL NAVIGATION
+   ============================================================ */
+
+/* === BREADCRUMBS === */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  margin-bottom: 1em;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+  margin: 0 0.25em;
+  color: var(--text-muted);
+}
+
+.breadcrumbs .current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* === CONTEXT TRAIL === */
+.context-trail {
+  margin-bottom: 1em;
+  padding: 0.75em;
+  background: var(--bg-secondary);
+  border-radius: 0.5em;
+  font-size: 0.9em;
+}
+
+.context-trail .trail-label {
+  color: var(--text-muted);
+  margin-right: 0.5em;
+}
+
+.context-trail a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--text-muted);
+  margin: 0 0.25em;
+}
+
+.context-trail a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.context-trail .current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* === SELF-ASSESSMENT CHECKPOINTS === */
+.self-assessment {
+  margin: 2em 0;
+  padding: 1em;
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+.self-assessment h4 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.self-assessment ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0;
+}
+
+.self-assessment li {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+  position: relative;
+}
+
+.self-assessment li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.self-assessment input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+.self-assessment .time-hint {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
