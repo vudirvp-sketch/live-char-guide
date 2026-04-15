@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 ## [5.9.0] - 2026-04-15
 
 ### Changed
-- Version synchronized across all project files (README, CHANGELOG, CHANGES.md)
+- Version synchronized across all project files (README, CHANGELOG, SPRINT_LOG.md)
 - Track B description clarified: "production baseline" not "all core elements"
 - Consolidated validate-artifact.mjs to single file (scripts/)
 - Renamed 09a_antipatterns.html to 06b_antipatterns_advanced.html for stage alignment
@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - Added nav_map.json for navigation integrity
 
 ### Fixed
-- Version drift between structure.json, README, CHANGELOG, and CHANGES.md
+- Version drift between structure.json, README, CHANGELOG, and SPRINT_LOG.md
 - CI instability from duplicate validation scripts with conflicting limits
 - validate-artifact.mjs VERSION path corrected
 

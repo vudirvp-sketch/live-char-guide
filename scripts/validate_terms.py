@@ -139,9 +139,14 @@ def validate_file(file_path: Path, glossary: Dict) -> List[Dict]:
 def main():
     import argparse
     
+    # Derive repo root from script location
+    repo_root = Path(__file__).parent.parent
+    default_parts_dir = str(repo_root / 'src' / 'parts')
+    default_glossary = str(repo_root / 'src' / 'data' / 'glossary.json')
+    
     parser = argparse.ArgumentParser(description='Validate terminology against glossary')
-    parser.add_argument('--glossary', type=str, default='src/data/glossary.json', help='Glossary JSON file')
-    parser.add_argument('--parts-dir', type=str, default='src/parts', help='Directory containing HTML parts')
+    parser.add_argument('--glossary', type=str, default=default_glossary, help='Glossary JSON file')
+    parser.add_argument('--parts-dir', type=str, default=default_parts_dir, help='Directory containing HTML parts')
     parser.add_argument('--verbose', '-v', action='store_true', help='Verbose output')
     
     args = parser.parse_args()

@@ -1160,7 +1160,6 @@ async function initAnchors() {
     // Section redirects
     '#05b_cot_tiers': '#cot-tiers',
     '#08b_debugging': '#debugging',
-    '#09a_antipatterns': '#antipatterns',
     '#06b_antipatterns_advanced': '#antipatterns',
     '#06a_antipatterns_core': '#antipatterns-core',
     '#06a_integration': '#integration-checklist',

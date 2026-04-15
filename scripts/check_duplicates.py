@@ -93,10 +93,16 @@ def find_duplicates(parts_dir: Path, min_length: int = 100, threshold: float = 0
     return duplicates
 
 def main():
+    import argparse
+    
+    # Derive repo root from script location
+    repo_root = Path(__file__).parent.parent
+    default_parts_dir = str(repo_root / 'src' / 'parts')
+    
     parser = argparse.ArgumentParser(description='Check for duplicate content in HTML parts')
     parser.add_argument('--min-length', type=int, default=100, help='Minimum text length to check')
     parser.add_argument('--threshold', type=float, default=0.9, help='Similarity threshold (0-1)')
-    parser.add_argument('--parts-dir', type=str, default='src/parts', help='Directory containing HTML parts')
+    parser.add_argument('--parts-dir', type=str, default=default_parts_dir, help='Directory containing HTML parts')
     parser.add_argument('--verbose', '-v', action='store_true', help='Verbose output')
     
     args = parser.parse_args()
@@ -134,5 +140,4 @@ def main():
         sys.exit(0)
 
 if __name__ == '__main__':
-    import argparse
     main()
