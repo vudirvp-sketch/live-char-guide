@@ -16,6 +16,74 @@
       <p><em>Перемещено из Quick Start для справки. Для быстрых оценок используйте упрощённое руководство в <a href="#quick-start">Разделе 1</a>.</em></p>
 
       <h4>📊 Token Distribution by Block</h4>
+      
+      <!-- Token Budget Visualization -->
+      <div class="svg-infographic" style="margin:1.5em 0;">
+        <div class="svg-infographic-title">IMG_08: РАСПРЕДЕЛЕНИЕ ТОКЕНОВ ПО БЛОКАМ</div>
+        <svg id="token-budget" viewBox="0 0 600 140" class="token-bar" role="img" aria-label="Горизонтальная диаграмма распределения токенов: Description 30%, Anchors 20%, Examples 25%, SP 15%, Buffer 10%">
+          <!-- Background bar -->
+          <rect x="50" y="30" width="500" height="40" rx="4" fill="var(--bg-surface)" stroke="var(--border)"/>
+          
+          <!-- Segments -->
+          <!-- Description: ~30% -->
+          <rect x="50" y="30" width="150" height="40" rx="4" class="token-segment token-desc"/>
+          <text x="125" y="55" class="token-segment-label" text-anchor="middle">Description</text>
+          <text x="125" y="68" class="token-segment-value" text-anchor="middle">~30%</text>
+          
+          <!-- Anchors: ~20% -->
+          <rect x="200" y="30" width="100" height="40" class="token-segment token-anchors"/>
+          <text x="250" y="55" class="token-segment-label" text-anchor="middle">Anchors</text>
+          <text x="250" y="68" class="token-segment-value" text-anchor="middle">~20%</text>
+          
+          <!-- Examples: ~25% -->
+          <rect x="300" y="30" width="125" height="40" class="token-segment token-examples"/>
+          <text x="362" y="55" class="token-segment-label" text-anchor="middle">Examples</text>
+          <text x="362" y="68" class="token-segment-value" text-anchor="middle">~25%</text>
+          
+          <!-- System Prompt: ~15% -->
+          <rect x="425" y="30" width="75" height="40" class="token-segment token-sp"/>
+          <text x="462" y="55" class="token-segment-label" text-anchor="middle">SP</text>
+          <text x="462" y="68" class="token-segment-value" text-anchor="middle">~15%</text>
+          
+          <!-- Buffer: ~10% -->
+          <rect x="500" y="30" width="50" height="40" rx="0 4 4 0" class="token-segment token-buffer"/>
+          <text x="525" y="55" class="token-segment-label" text-anchor="middle">Buffer</text>
+          <text x="525" y="68" class="token-segment-value" text-anchor="middle">~10%</text>
+          
+          <!-- Labels below -->
+          <g transform="translate(0, 95)">
+            <text x="50" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">Внешность, био, Spine</text>
+            <text x="200" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">5-7 правил</text>
+            <text x="300" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">3 примера диалогов</text>
+            <text x="425" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">Ограничения</text>
+            <text x="500" y="0" style="font-size:9px;fill:var(--text-muted);font-family:var(--font-sans);">Резерв</text>
+          </g>
+          
+          <!-- Legend -->
+          <g transform="translate(50, 115)">
+            <rect x="0" y="0" width="12" height="12" rx="2" class="token-desc"/>
+            <text x="16" y="10" style="font-size:9px;fill:var(--text);font-family:var(--font-sans);">Description</text>
+            
+            <rect x="90" y="0" width="12" height="12" rx="2" class="token-anchors"/>
+            <text x="106" y="10" style="font-size:9px;fill:var(--text);font-family:var(--font-sans);">Anchors</text>
+            
+            <rect x="170" y="0" width="12" height="12" rx="2" class="token-examples"/>
+            <text x="186" y="10" style="font-size:9px;fill:var(--text);font-family:var(--font-sans);">Examples</text>
+            
+            <rect x="255" y="0" width="12" height="12" rx="2" class="token-sp"/>
+            <text x="271" y="10" style="font-size:9px;fill:var(--text);font-family:var(--font-sans);">System Prompt</text>
+            
+            <rect x="360" y="0" width="12" height="12" rx="2" class="token-buffer"/>
+            <text x="376" y="10" style="font-size:9px;fill:var(--text);font-family:var(--font-sans);">Buffer</text>
+          </g>
+        </svg>
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>Бюджет токенов:</strong> Description (~30%), Anchors (~20%), Examples (~25%), SP (~15%), Buffer (~10%)</p>
+          </div>
+        </noscript>
+      </div>
+      
       <div class="table-wrap">
         <table>
           <thead>

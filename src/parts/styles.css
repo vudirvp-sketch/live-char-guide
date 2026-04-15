@@ -5419,3 +5419,375 @@ body.theme-light .track-prerequisite-warning .track-link {
   padding-top: 0.75em;
   border-top: 1px dashed var(--border);
 }
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* VISUALIZATION IMPLEMENTATION: SVG STYLES (v5.9.0) */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* === PIPELINE FLOWCHART STYLES === */
+.pipeline-svg {
+  width: 100%;
+  max-width: 650px;
+  margin: 1.5em auto;
+  display: block;
+}
+
+.pipeline-stage {
+  fill: var(--bg-surface);
+  stroke: var(--border);
+  stroke-width: 1.5;
+  rx: 8;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.pipeline-stage:hover {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+
+.pipeline-stage.core {
+  fill: rgba(56, 189, 248, 0.1);
+  stroke: var(--accent);
+}
+
+.pipeline-stage-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+
+.pipeline-stage-content {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  fill: var(--text-muted);
+}
+
+.pipeline-arrow {
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  fill: none;
+  marker-end: url(#pipeline-arrow-marker);
+}
+
+.pipeline-arrow-marker {
+  fill: var(--text-muted);
+}
+
+/* Light theme pipeline */
+body.theme-light .pipeline-stage {
+  fill: var(--bg-surface);
+  stroke: var(--border);
+}
+
+body.theme-light .pipeline-stage:hover {
+  fill: var(--accent-soft);
+}
+
+body.theme-light .pipeline-stage.core {
+  fill: rgba(2, 132, 199, 0.1);
+}
+
+/* === SPINE RADIAL DIAGRAM STYLES === */
+.spine-diagram {
+  width: 100%;
+  max-width: 500px;
+  margin: 1.5em auto;
+  display: block;
+}
+
+.spine-node {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.spine-node:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+
+.spine-node-circle {
+  stroke-width: 2;
+  transition: stroke 0.2s ease, fill 0.2s ease;
+}
+
+.spine-node-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--text);
+  text-anchor: middle;
+}
+
+.spine-node-sublabel {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  fill: var(--text-muted);
+  text-anchor: middle;
+}
+
+.spine-connection {
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 5, 3;
+  animation: spine-dash 30s linear infinite;
+}
+
+@keyframes spine-dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.spine-arrow {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  fill: none;
+  marker-end: url(#spine-arrow-marker);
+}
+
+.spine-center {
+  fill: var(--bg-elevated);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+/* SPINE node colors */
+.spine-node-want { fill: rgba(59, 130, 246, 0.2); stroke: #3b82f6; }
+.spine-node-need { fill: rgba(34, 197, 94, 0.2); stroke: #22c55e; }
+.spine-node-flaw { fill: rgba(239, 68, 68, 0.2); stroke: #ef4444; }
+.spine-node-lie { fill: rgba(139, 92, 246, 0.2); stroke: #8b5cf6; }
+.spine-node-ghost { fill: rgba(107, 114, 128, 0.2); stroke: #6b7280; }
+
+/* Light theme SPINE */
+body.theme-light .spine-node-label {
+  fill: var(--text);
+}
+
+body.theme-light .spine-node-sublabel {
+  fill: var(--text-muted);
+}
+
+body.theme-light .spine-center {
+  fill: var(--bg-elevated);
+}
+
+/* === TOKEN BUDGET BAR STYLES === */
+.token-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 1.5em auto;
+  display: block;
+}
+
+.token-segment {
+  transition: opacity 0.2s ease;
+}
+
+.token-segment:hover {
+  opacity: 0.85;
+}
+
+.token-segment-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  fill: var(--text);
+  font-weight: 500;
+}
+
+.token-segment-value {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  fill: var(--text-muted);
+}
+
+.token-bar-title {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  fill: var(--text);
+  font-weight: 600;
+}
+
+/* Token segment colors */
+.token-desc { fill: #3b82f6; }
+.token-anchors { fill: #22c55e; }
+.token-examples { fill: #f59e0b; }
+.token-sp { fill: #8b5cf6; }
+.token-buffer { fill: #6b7280; }
+
+/* Light theme token bar */
+body.theme-light .token-segment-label {
+  fill: var(--text);
+}
+
+body.theme-light .token-bar-title {
+  fill: var(--text);
+}
+
+/* === TRACK SELECTION FLOWCHART STYLES === */
+.track-flowchart {
+  width: 100%;
+  max-width: 550px;
+  margin: 1.5em auto;
+  display: block;
+}
+
+.track-decision {
+  fill: var(--bg-elevated);
+  stroke: var(--accent);
+  stroke-width: 2;
+  transition: fill 0.2s ease;
+}
+
+.track-decision:hover {
+  fill: var(--accent-soft);
+}
+
+.track-decision-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  fill: var(--text);
+  text-anchor: middle;
+}
+
+.track-result {
+  fill: var(--bg-surface);
+  stroke: var(--border);
+  stroke-width: 1.5;
+  rx: 6;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.track-result:hover {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+
+.track-result.track-a { stroke: var(--track-a-clr); }
+.track-result.track-b { stroke: var(--track-b-clr); }
+.track-result.track-c { stroke: var(--track-c-clr); }
+
+.track-result-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text);
+  text-anchor: middle;
+}
+
+.track-arrow {
+  stroke: var(--text-muted);
+  stroke-width: 1.5;
+  fill: none;
+  marker-end: url(#track-arrow-marker);
+}
+
+.track-branch-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  fill: var(--text-muted);
+}
+
+/* Light theme track flowchart */
+body.theme-light .track-decision {
+  fill: var(--bg-elevated);
+}
+
+body.theme-light .track-result {
+  fill: var(--bg-surface);
+}
+
+/* === TRACK LOCK INDICATORS (Task 6) === */
+.track-locked {
+  position: relative;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.track-locked::before {
+  content: '🔒';
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  font-size: 1em;
+  z-index: 10;
+}
+
+.track-locked::after {
+  content: attr(data-track-hint);
+  position: absolute;
+  top: 2em;
+  right: 0.5em;
+  background: var(--bg-secondary, var(--bg-surface));
+  color: var(--text-muted);
+  padding: 0.3em 0.6em;
+  border-radius: 0.3em;
+  font-size: 0.75em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+  border: 1px solid var(--border);
+}
+
+.track-locked:hover::after {
+  opacity: 1;
+}
+
+/* Track visibility hint badges */
+.track-hint-badge {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.7em;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+/* === INFOGRAPHIC CONTAINER FOR SVG === */
+.svg-infographic {
+  margin: 1.5em 0;
+  padding: 1em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.svg-infographic-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Responsive SVG containers */
+@media (max-width: 600px) {
+  .pipeline-svg,
+  .spine-diagram,
+  .token-bar,
+  .track-flowchart {
+    max-width: 100%;
+  }
+  
+  .pipeline-stage-label {
+    font-size: 10px;
+  }
+  
+  .pipeline-stage-content {
+    font-size: 9px;
+  }
+  
+  .spine-node-label {
+    font-size: 10px;
+  }
+  
+  .spine-node-sublabel {
+    font-size: 8px;
+  }
+}

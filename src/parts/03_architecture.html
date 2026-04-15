@@ -120,19 +120,103 @@
       </div>
 
       <h3>Схема единого потока</h3>
-      <pre><code>[Психология] Spine → Enneagram → OCEAN (1-2 полюса)
-      ↓
-[Процессуальные правила] Статика→Якорь → Телесность → 4K-Fallback → GHOST → Динамическая арка → Изоляция голоса
-      ↓
-[Поведение] Anchors (5-7, с ценой) → Greeting → Examples (3 типа)
-      ↓
-[Ограничения] SP: антигодмодинг + ПРОСТРАНСТВЕННАЯ ФИКСАЦИЯ + ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ + XML-теги
-      ↓
-[Запуск] Sampling: T/TopP/MinP/RepPen=1.05 + presence_penalty=0.0–0.15
-      ↓
-[Поддержка] AN (обновление 3-5 msg, WANT→NEED) + Lorebook (GHOST/мир/NPC)
-      ↓
-[Отладка] 4 тест-сценария → симптомы → резание → стабильность</code></pre>
+      <div class="svg-infographic">
+        <div class="svg-infographic-title">IMG_06: ПАЙПЛАЙН СОЗДАНИЯ ПЕРСОНАЖА</div>
+        <svg id="pipeline-flow" viewBox="0 0 600 720" class="pipeline-svg" role="img" aria-label="Схема пайплайна создания персонажа: 7 этапов от психологии до отладки">
+          <!-- Arrow marker definition -->
+          <defs>
+            <marker id="pipeline-arrow-marker" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" class="pipeline-arrow-marker"/>
+            </marker>
+          </defs>
+          
+          <!-- Stage 1: Психология -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="10" width="400" height="75" rx="8" class="pipeline-stage core"/>
+            <text x="300" y="35" class="pipeline-stage-label" text-anchor="middle">ПСИХОЛОГИЯ</text>
+            <text x="300" y="52" class="pipeline-stage-content" text-anchor="middle">Spine → Enneagram → OCEAN (1-2 полюса)</text>
+            <text x="300" y="68" class="pipeline-stage-content" text-anchor="middle">WANT / NEED / FLAW / LIE / GHOST</text>
+          </g>
+          
+          <!-- Arrow 1 -->
+          <line x1="300" y1="85" x2="300" y2="110" class="pipeline-arrow"/>
+          
+          <!-- Stage 2: Процессуальные правила -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="115" width="400" height="85" rx="8" class="pipeline-stage core"/>
+            <text x="300" y="140" class="pipeline-stage-label" text-anchor="middle">ПРОЦЕССУАЛЬНЫЕ ПРАВИЛА</text>
+            <text x="300" y="158" class="pipeline-stage-content" text-anchor="middle">Статика→Якорь → Телесность → 4K-Fallback</text>
+            <text x="300" y="175" class="pipeline-stage-content" text-anchor="middle">GHOST → Динамическая арка → Изоляция голоса</text>
+            <text x="300" y="192" class="pipeline-stage-content" text-anchor="middle">6 правил ядра системы</text>
+          </g>
+          
+          <!-- Arrow 2 -->
+          <line x1="300" y1="200" x2="300" y2="225" class="pipeline-arrow"/>
+          
+          <!-- Stage 3: Поведение -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="230" width="400" height="75" rx="8" class="pipeline-stage"/>
+            <text x="300" y="255" class="pipeline-stage-label" text-anchor="middle">ПОВЕДЕНИЕ</text>
+            <text x="300" y="272" class="pipeline-stage-content" text-anchor="middle">Anchors (5-7, с ценой) → Greeting → Examples</text>
+            <text x="300" y="289" class="pipeline-stage-content" text-anchor="middle">Нейтральный / Стресс / Доверие</text>
+          </g>
+          
+          <!-- Arrow 3 -->
+          <line x1="300" y1="305" x2="300" y2="330" class="pipeline-arrow"/>
+          
+          <!-- Stage 4: Ограничения -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="335" width="400" height="75" rx="8" class="pipeline-stage"/>
+            <text x="300" y="360" class="pipeline-stage-label" text-anchor="middle">ОГРАНИЧЕНИЯ (System Prompt)</text>
+            <text x="300" y="377" class="pipeline-stage-content" text-anchor="middle">Антигодмодинг + SPATIAL LOCK + FORMAT LOCK</text>
+            <text x="300" y="394" class="pipeline-stage-content" text-anchor="middle">ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ + XML-теги</text>
+          </g>
+          
+          <!-- Arrow 4 -->
+          <line x1="300" y1="410" x2="300" y2="435" class="pipeline-arrow"/>
+          
+          <!-- Stage 5: Запуск -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="440" width="400" height="65" rx="8" class="pipeline-stage"/>
+            <text x="300" y="465" class="pipeline-stage-label" text-anchor="middle">ЗАПУСК (Sampling)</text>
+            <text x="300" y="482" class="pipeline-stage-content" text-anchor="middle">T / TopP / MinP / RepPen=1.05 / presence_penalty=0.0–0.15</text>
+          </g>
+          
+          <!-- Arrow 5 -->
+          <line x1="300" y1="505" x2="300" y2="530" class="pipeline-arrow"/>
+          
+          <!-- Stage 6: Поддержка -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="535" width="400" height="65" rx="8" class="pipeline-stage"/>
+            <text x="300" y="560" class="pipeline-stage-label" text-anchor="middle">ПОДДЕРЖКА</text>
+            <text x="300" y="577" class="pipeline-stage-content" text-anchor="middle">AN (обновление 3-5 msg, WANT→NEED) + Lorebook</text>
+          </g>
+          
+          <!-- Arrow 6 -->
+          <line x1="300" y1="600" x2="300" y2="625" class="pipeline-arrow"/>
+          
+          <!-- Stage 7: Отладка -->
+          <g class="pipeline-stage-group">
+            <rect x="100" y="630" width="400" height="65" rx="8" class="pipeline-stage"/>
+            <text x="300" y="655" class="pipeline-stage-label" text-anchor="middle">ОТЛАДКА</text>
+            <text x="300" y="672" class="pipeline-stage-content" text-anchor="middle">4 тест-сценария → симптомы → резание → стабильность</text>
+          </g>
+        </svg>
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>Пайплайн создания персонажа:</strong></p>
+            <ol style="margin-top:0.5em;padding-left:1.5em;">
+              <li><strong>Психология:</strong> Spine → Enneagram → OCEAN (1-2 полюса)</li>
+              <li><strong>Правила:</strong> 6 процессуальных правил (Статика→Якорь, Телесность, 4K-Fallback, GHOST, Динамическая арка, Изоляция голоса)</li>
+              <li><strong>Поведение:</strong> Anchors (5-7) → Greeting → Examples (3 типа)</li>
+              <li><strong>Ограничения:</strong> SP с антигодмодингом, SPATIAL LOCK, FORMAT LOCK, XML-теги</li>
+              <li><strong>Запуск:</strong> Sampling: T/TopP/MinP/RepPen=1.05</li>
+              <li><strong>Поддержка:</strong> AN + Lorebook</li>
+              <li><strong>Отладка:</strong> 4 тест-сценария → симптомы → резание</li>
+            </ol>
+          </div>
+        </noscript>
+      </div>
 
       <p><strong>Итог:</strong> Система функционально замкнута и внутренне непротиворечива. Карточка — поведенческий движок, а не описание. Рабочий минимум: <code>Spine + Anchors (с ценой) + 3 Examples + SP (с Предгенерационный фильтр)</code>. При 4K — использовать Fallback-протокол. Остальное наращивается по мере контекста.</p>
 

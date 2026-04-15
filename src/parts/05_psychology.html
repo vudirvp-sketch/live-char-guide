@@ -84,6 +84,102 @@ GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные 
       <p>Страх Enneagram → LIE → FLAW → блокирует NEED → заменяется WANT.</p>
       <p>Проверка: если ты не можешь провести эту цепочку — Spine не связан, нужно переработать.</p>
 
+      <!-- SPINE Radial Diagram -->
+      <div class="svg-infographic" style="margin:1.5em 0;">
+        <div class="svg-infographic-title">IMG_07: СТРУКТУРА SPINE — ВЗАИМОСВЯЗИ 5 ЭЛЕМЕНТОВ</div>
+        <svg id="spine-radial" viewBox="0 0 500 450" class="spine-diagram" role="img" aria-label="Радиальная диаграмма SPINE: взаимосвязи между WANT, NEED, FLAW, LIE, GHOST">
+          <!-- Arrow marker -->
+          <defs>
+            <marker id="spine-arrow-marker" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent, #38bdf8)"/>
+            </marker>
+          </defs>
+          
+          <!-- Center circle - Character -->
+          <circle cx="250" cy="200" r="35" class="spine-center"/>
+          <text x="250" y="195" class="spine-node-label" text-anchor="middle" style="font-size:10px;">ПЕРСОНАЖ</text>
+          <text x="250" y="210" class="spine-node-sublabel" text-anchor="middle">ядро</text>
+          
+          <!-- WANT Node (top-right) -->
+          <g class="spine-node" transform="translate(370, 100)">
+            <circle cx="0" cy="0" r="45" class="spine-node-circle spine-node-want"/>
+            <text x="0" y="-8" class="spine-node-label" text-anchor="middle">WANT</text>
+            <text x="0" y="8" class="spine-node-sublabel" text-anchor="middle">Хочет</text>
+            <text x="0" y="22" class="spine-node-sublabel" text-anchor="middle">прямо сейчас</text>
+          </g>
+          
+          <!-- NEED Node (top-left) -->
+          <g class="spine-node" transform="translate(130, 100)">
+            <circle cx="0" cy="0" r="45" class="spine-node-circle spine-node-need"/>
+            <text x="0" y="-8" class="spine-node-label" text-anchor="middle">NEED</text>
+            <text x="0" y="8" class="spine-node-sublabel" text-anchor="middle">Нужно</text>
+            <text x="0" y="22" class="spine-node-sublabel" text-anchor="middle">для роста</text>
+          </g>
+          
+          <!-- FLAW Node (right) -->
+          <g class="spine-node" transform="translate(400, 230)">
+            <circle cx="0" cy="0" r="45" class="spine-node-circle spine-node-flaw"/>
+            <text x="0" y="-8" class="spine-node-label" text-anchor="middle">FLAW</text>
+            <text x="0" y="8" class="spine-node-sublabel" text-anchor="middle">Изъян</text>
+            <text x="0" y="22" class="spine-node-sublabel" text-anchor="middle">поведение</text>
+          </g>
+          
+          <!-- LIE Node (left) -->
+          <g class="spine-node" transform="translate(100, 230)">
+            <circle cx="0" cy="0" r="45" class="spine-node-circle spine-node-lie"/>
+            <text x="0" y="-8" class="spine-node-label" text-anchor="middle">LIE</text>
+            <text x="0" y="8" class="spine-node-sublabel" text-anchor="middle">Ложь</text>
+            <text x="0" y="22" class="spine-node-sublabel" text-anchor="middle">установка</text>
+          </g>
+          
+          <!-- GHOST Node (bottom) -->
+          <g class="spine-node" transform="translate(250, 340)">
+            <circle cx="0" cy="0" r="50" class="spine-node-circle spine-node-ghost"/>
+            <text x="0" y="-8" class="spine-node-label" text-anchor="middle">GHOST</text>
+            <text x="0" y="8" class="spine-node-sublabel" text-anchor="middle">Тень</text>
+            <text x="0" y="22" class="spine-node-sublabel" text-anchor="middle">событие прошлого</text>
+          </g>
+          
+          <!-- Connection lines with arrows -->
+          <!-- GHOST → LIE -->
+          <path d="M 200 310 Q 150 280 130 260" class="spine-arrow" marker-end="url(#spine-arrow-marker)"/>
+          <text x="145" y="285" class="track-branch-label" style="font-size:9px;fill:var(--text-muted);">создаёт</text>
+          
+          <!-- LIE → FLAW -->
+          <path d="M 145 230 Q 250 200 355 230" class="spine-arrow" marker-end="url(#spine-arrow-marker)"/>
+          <text x="250" y="205" class="track-branch-label" style="font-size:9px;fill:var(--text-muted);text-anchor:middle;">поддерживает</text>
+          
+          <!-- FLAW → blocks NEED -->
+          <path d="M 355 200 Q 280 120 175 100" class="spine-connection" style="stroke:var(--accent);stroke-dasharray:4,4;"/>
+          <text x="270" y="130" class="track-branch-label" style="font-size:9px;fill:var(--accent);">блокирует</text>
+          
+          <!-- WANT conflicts NEED -->
+          <line x1="175" y1="100" x2="325" y2="100" class="spine-connection" style="stroke:#f59e0b;stroke-width:2;"/>
+          <text x="250" y="85" class="track-branch-label" style="font-size:9px;fill:#f59e0b;text-anchor:middle;">конфликт</text>
+          
+          <!-- Legend -->
+          <g transform="translate(20, 400)">
+            <text x="0" y="0" style="font-size:10px;fill:var(--text-muted);font-family:var(--font-sans);">
+              <tspan x="0" dy="0">→ сплошная линия: причинная связь</tspan>
+              <tspan x="0" dy="14">⇢ пунктир: блокировка/конфликт</tspan>
+            </text>
+          </g>
+        </svg>
+        <noscript>
+          <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
+            <p><strong>SPINE элементы:</strong></p>
+            <ul style="margin-top:0.5em;padding-left:1.5em;">
+              <li><strong>WANT</strong> (Хочет) — что персонаж хочет прямо сейчас</li>
+              <li><strong>NEED</strong> (Нужно) — что реально нужно для роста</li>
+              <li><strong>FLAW</strong> (Изъян) — поведение, мешающее получить NEED</li>
+              <li><strong>LIE</strong> (Ложь) — ложная установка</li>
+              <li><strong>GHOST</strong> (Тень) — событие из прошлого, формирующее FLAW/LIE</li>
+            </ul>
+            <p style="margin-top:0.5em;"><strong>Связи:</strong> GHOST → LIE → FLAW → блокирует NEED; WANT конфликтует с NEED</p>
+          </div>
+        </noscript>
+      </div>
+
       <div class="infographic">
         <div class="infographic-title">IMG_01: ПЕРЕВОД ЯДРА — SPINE В ANCHORS</div>
         <div class="inf-flow-container">
