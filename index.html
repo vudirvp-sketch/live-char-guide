@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: ef7f37d5 -->
-<!-- Generated: 2026-04-15T06:46:58.004Z -->
-<!-- Version: 5.6.0 -->
+<!-- Build hash: f459b7ca -->
+<!-- Generated: 2026-04-15T11:07:47.027Z -->
+<!-- Version: 5.9.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="ef7f37d5">
-<meta name="livechar-version" content="5.6.0">
+<meta name="build-hash" content="f459b7ca">
+<meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-15">
 <meta http-equiv="Cache-Control" content="no-cache">
-<title>🧠 Live Character for LLM — Guide 5.6.0</title>
+<title>🧠 Live Character for LLM — Guide 5.9.0</title>
 <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
-<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.6.0">
+<meta property="og:title" content="🧠 Live Character for LLM — Guide 5.9.0">
 <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/preview-card.png">
@@ -5489,7 +5489,7 @@ body.theme-light .track-prerequisite-warning .track-link {
 </div>
 
 <header>
-  <h1>📖 Живой персонаж для LLM 5.6.0 — Гайд по созданию RP-карточек</h1>
+  <h1>📖 Живой персонаж для LLM 5.9.0 — Гайд по созданию RP-карточек</h1>
   <p><strong>Базовая модель:</strong> 12B+ (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B) | <strong>Принцип:</strong> самодостаточность, поведенческий движок, никаких внешних ссылок.</p>
 
   <!-- ID: D4 | Introduction Block -->
@@ -7166,6 +7166,32 @@ body.theme-light .track-prerequisite-warning .track-link {
         </ol>
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">→ <a href="#checkpoint-architecture">Полный чеклист Stage 2</a></p>
       </div>
+
+      <!-- TASK 3.5: Section Dependency Map -->
+      <section id="section-dependencies" style="margin:2em 0; padding:1.5em; background:var(--bg-secondary); border-radius:0.5em;">
+        <h3 id="карта-зависимостей-разделов">🗺️ Карта зависимостей разделов</h3>
+        <p>Что нужно прочитать перед каждым разделом:</p>
+        
+        <div class="dependency-tree">
+          <ul style="list-style:none; padding-left:0;">
+            <li style="margin:0.5em 0;"><strong>Quickstart</strong> → самодостаточен</li>
+            <li style="margin:0.5em 0;"><strong>Architecture</strong> → требует Quickstart</li>
+            <li style="margin:0.5em 0;"><strong>Core Blocks</strong> → требует Core Principles + Architecture</li>
+            <li style="margin:0.5em 0;"><strong>Psychology</strong> → требует Core Blocks</li>
+            <li style="margin:0.5em 0;"><strong>Technical</strong> → требует Psychology</li>
+            <li style="margin:0.5em 0;"><strong>Antipatterns</strong> → требует Core Blocks + Psychology</li>
+            <li style="margin:0.5em 0;"><strong>Diagnostics</strong> → требует Antipatterns (core)</li>
+            <li style="margin:0.5em 0;"><strong>Debugging</strong> → требует Diagnostics + Antipatterns (advanced)</li>
+          </ul>
+        </div>
+        
+        <div class="callout tip" style="margin-top:1em;">
+          <strong>💡 Рекомендуемый порядок чтения:</strong>
+          <p style="margin:0.5em 0;">Track A: Quickstart → Core Blocks (basic) → Antipatterns (core)</p>
+          <p style="margin:0.5em 0;">Track B: + Architecture → Psychology → Technical</p>
+          <p style="margin:0.5em 0;">Track C: + Advanced Antipatterns → Debugging</p>
+        </div>
+      </section>
 
     </section>
 
@@ -12485,7 +12511,7 @@ No smart typography. If conflict → default to Examples.
 </div>
 
 <!-- Main JavaScript (hashed by build script) -->
-<script src="assets/main.962c664d.js" defer></script>
+<script src="assets/main.12ebf687.js" defer></script>
 
 </body>
 </html>
