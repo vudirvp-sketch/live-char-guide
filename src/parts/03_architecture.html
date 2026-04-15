@@ -1,7 +1,52 @@
     <hr>
 
     <!-- ==================== РАЗДЕЛ 2 ==================== -->
-    <section id="architecture" data-requires-track="B C">
+    
+    <!-- L2-4: Architecture Summary - VISIBLE TO TRACK A -->
+    <section id="architecture-summary" data-track-exclusive="A" hidden>
+      <div class="info-banner">
+        <span class="mode-badge">🏗️ Track A: Architecture Overview</span>
+      </div>
+      
+      <h2>📌 Архитектура: Краткий обзор</h2>
+      
+      <div class="callout tip" style="margin-bottom:1em">
+        <strong>Для Track A:</strong> Полная архитектура доступна для Track B+. Вот ключевые принципы для прототипа:
+      </div>
+      
+      <div class="key-principles">
+        <div class="principle-card">
+          <h3>1️⃣ Static → Anchor</h3>
+          <p>Преобразуй статичные черты в поведенческие якоря:</p>
+          <pre><code>НЕ: "Она тревожная"
+ДА: "Когда нервничает — грызёт колпачок ручки"</code></pre>
+        </div>
+        
+        <div class="principle-card">
+          <h3>2️⃣ Voice Isolation</h3>
+          <p>Голос только в Examples, не в Description:</p>
+          <pre><code>НЕ: "Говорит быстро, использует сленг"
+ДА: Примеры диалогов с нужным голосом</code></pre>
+        </div>
+        
+        <div class="principle-card">
+          <h3>3️⃣ Token Budget</h3>
+          <p>Для 12B-14B моделей:</p>
+          <ul>
+            <li>Description: &lt;600 токенов</li>
+            <li>Examples: &lt;400 токенов</li>
+            <li>SP: &lt;200 токенов</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="callout info">
+        <p>Для полного понимания архитектуры: <a href="#track-a-to-b">Upgrade to Track B</a></p>
+      </div>
+    </section>
+
+    <!-- Full Architecture - Track B+ ONLY -->
+    <section id="architecture" data-requires-track="B C" hidden>
       <div class="info-banner">
         <span class="mode-badge">🛠️ Продвинутый режим</span>
         <span class="mode-hint">Полный пайплайн со всеми функциями.</span>

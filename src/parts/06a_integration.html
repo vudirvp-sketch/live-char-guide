@@ -1,5 +1,6 @@
 <!-- ==================== STAGE 6: TECHNICAL INTEGRATION CHECKLIST ==================== -->
 <!-- ID: INT-CHECK | Task 2.3: Integration checklist for Stage 6 -->
+<!-- L2-6: Fixed CoT links with track visibility -->
 <section id="integration-checklist" data-track="A B C">
   <div class="info-banner">
     <span class="mode-badge">⚙️ Stage 6</span>
@@ -51,7 +52,8 @@
       <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
         <label><input type="checkbox" data-key="chk-int-32b-xml"> <strong>XML в Description:</strong> ✅ Приемлемо. Рекомендуется для структуры.</label>
       </li>
-      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+      <!-- L2-6: CoT link visible only for Track B+ -->
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C" hidden>
         <label><input type="checkbox" data-key="chk-int-32b-cot"> <strong>CoT:</strong> T2 опционально. См. <a href="#cot">Раздел 5.4</a></label>
       </li>
     </ul>
@@ -71,7 +73,8 @@
       <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
         <label><input type="checkbox" data-key="chk-int-api-voice"> <strong>Voice:</strong> Все опции доступны. Examples предпочтительнее.</label>
       </li>
-      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">
+      <!-- L2-6: CoT link visible only for Track B+ -->
+      <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;" data-requires-track="B C" hidden>
         <label><input type="checkbox" data-key="chk-int-api-cot"> <strong>CoT:</strong> T2-T3 опционально. Встроенное рассуждение обычно достаточно.</label>
       </li>
       <li class="checklist-item" style="margin:0.5em 0;padding:0.5em;background:var(--bg-secondary);border-radius:0.3em;">

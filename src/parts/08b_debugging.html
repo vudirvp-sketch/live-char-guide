@@ -1,6 +1,139 @@
 <!-- ==================== DEBUGGING SECTION ==================== -->
 <!-- ID: E3 | Troubleshooting decision tree -->
-<section id="debugging" data-requires-track="C">
+<!-- L2-5: Extended access for Track B -->
+
+<!-- Basic Debugging Symptoms - Track B and C -->
+<section id="debugging-basic" class="debug-section-basic" data-requires-track="B C" hidden>
+  <h2>🔧 Раздел 7: Диагностика и отладка (Базовая)</h2>
+  <p><span class="tag core">Core</span></p>
+  <p><strong>Что это:</strong> Базовые симптомы и решения для Track B.</p>
+  
+  <div class="callout warn" style="margin-bottom:1em">
+    <strong>⚠️ Обязательно:</strong> Прочитайте <a href="#antipatterns-core">Критические анти-паттерны</a> перед этим разделом.
+  </div>
+
+  <details class="interactive" id="acc-debug-role">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом 1: Персонаж нарушает роль / выходит из образа</h3> <small style="color:var(--text-muted)">— Проверь Spine, якоря, SP и Examples на согласованность</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь Spine:</strong> Ясно ли определена мотивация?
+        <ul>
+          <li>Если неоднозначно → <strong>Уточни Spine:</strong> конкретизируй WANT/NEED/FLAW/LIE</li>
+        </ul>
+      </li>
+      <li><strong>Проверь якоря:</strong> Согласованы ли триггеры с личностью?
+        <ul>
+          <li>Если противоречат → <strong>Перестрой якоря:</strong> выровняй по Spine и OCEAN</li>
+        </ul>
+      </li>
+      <li><strong>Проверь SP:</strong> Есть ли явные ограничения?
+        <ul>
+          <li data-model="12B">Если нет → <strong>Добавь ФИЛЬТР ПЕРЕД ГЕНЕРАЦИЕЙ</strong> (для 12B)</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Examples:</strong> Демонстрируют ли они нужное поведение?
+        <ul>
+          <li>Если противоречат → <strong>Перепиши Examples:</strong> они приоритетны для голоса</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+    </div>
+  </details>
+
+  <details class="interactive" id="acc-debug-voice">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом 2: Нестабильный голос / голос «плывёт»</h3> <small style="color:var(--text-muted)">— Проверь Examples, Description, SP и разметку на единообразие</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь Examples:</strong> Есть ли минимум 2 блока <code>&lt;START&gt;</code>?
+        <ul>
+          <li>Если нет → <strong>Добавь Examples:</strong> нейтральный + стресс</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Description:</strong> Есть ли стилистические директивы?
+        <ul>
+          <li data-model="12B">Если да → <strong>Удали:</strong> голос должен быть только в Examples (для 12B)</li>
+        </ul>
+      </li>
+      <li><strong>Проверь SP:</strong> Есть ли голосовые директивы?
+        <ul>
+          <li>Если да → <strong>Перемести в Examples:</strong> SP только для ограничений</li>
+        </ul>
+      </li>
+      <li><strong>Проверь разметку:</strong> Единообразна ли во всех блоках?
+        <ul>
+          <li>Если нет → <strong>Унифицируй:</strong> выбери одну систему (A/B/C) для всех</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+    </div>
+  </details>
+
+  <details class="interactive" id="acc-debug-hallucinations">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом 3: Галлюцинации / противоречивые факты</h3> <small style="color:var(--text-muted)">— Проверь LB, якоря, OCEAN и GHOST на противоречия</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь LB:</strong> Факты противоречат друг другу?
+        <ul>
+          <li>Если да → <strong>Устрани противоречия:</strong> оставь один источник истины</li>
+        </ul>
+      </li>
+      <li><strong>Проверь якоря:</strong> Есть ли Price для FLAW/GHOST?
+        <ul>
+          <li>Если нет → <strong>Добавь Price:</strong> последствия должны быть определены</li>
+        </ul>
+      </li>
+      <li><strong>Проверь OCEAN:</strong> Больше 2 экстремальных полюсов?
+        <ul>
+          <li>Если да → <strong>Сократи:</strong> оставь только 1–2 экстремума</li>
+        </ul>
+      </li>
+      <li><strong>Проверь GHOST:</strong> Дублируется ли в нескольких местах?
+        <ul>
+          <li>Если да → <strong>Устрани дубликаты:</strong> GHOST только в Description, триггеры в LB/AN</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+    </div>
+  </details>
+
+  <details class="interactive" id="acc-debug-godmoding">
+    <summary><span><h3 style="margin:0;font-size:inherit;display:inline">🔀 Симптом 4: Годмодинг (модель пишет за {{user}})</h3> <small style="color:var(--text-muted)">— Проверь SP, Examples и LB на наличие действий {{user}}</small></span></summary>
+    <div style="padding:0 1.2em 1.2em">
+    <div class="debug-tree">
+    <ol>
+      <li><strong>Проверь SP:</strong> Есть ли антигодмодинг?
+        <ul>
+          <li>Если нет → <strong>Добавь:</strong> «Никогда не описывай действия, мысли или чувства {{user}}»</li>
+        </ul>
+      </li>
+      <li><strong>Проверь Examples:</strong> Есть ли действия {{user}} в примерах?
+        <ul>
+          <li>Если да → <strong>Удали:</strong> примеры не должны содержать {{user}} действия</li>
+        </ul>
+      </li>
+      <li><strong>Проверь LB:</strong> Есть ли <code>content</code> с действиями {{user}}?
+        <ul>
+          <li>Если да → <strong>Удали:</strong> это нарушает антигодмодинг</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+    </div>
+  </details>
+
+  <div class="callout info" style="margin-top:1.5em">
+    <strong>📐 Продвинутые симптомы 5-8:</strong> Доступны для Track C. <a href="#track-a-to-b">Upgrade to Track C</a>
+  </div>
+</section>
+
+<!-- Advanced Debugging Symptoms - Track C ONLY -->
+<section id="debugging" class="debug-section-advanced" data-requires-track="C" hidden>
   <h2>🔧 Раздел 7: Диагностика и отладка</h2>
   <p><span class="tag core">Core</span></p>
   <p><strong>Что это:</strong> Древовидный справочник для диагностики и исправления проблем в карточке персонажа.</p>

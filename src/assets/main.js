@@ -3870,3 +3870,170 @@ if ("serviceWorker" in navigator) {
 
   console.log('[SoftRedirectModal] Initialized');
 })();
+
+// ============================================================================
+// LAYER 2: TRACK VISIBILITY ENGINE
+// ============================================================================
+/**
+ * TrackVisibility - Manages content visibility based on selected track
+ * 
+ * Features:
+ * - Uses data-track-exclusive="A" for content visible ONLY for Track A
+ * - Uses data-requires-track="B C" for content visible for Track B and C
+ * - Uses native `hidden` attribute for accessibility
+ * - CSS protection against FOUC (Flash of Unstyled Content)
+ */
+(function() {
+  'use strict';
+
+  const STORAGE_KEY = 'guide-track-selection';
+  const DEFAULT_TRACK = 'B';
+  const VALID_TRACKS = ['A', 'B', 'C'];
+
+  /**
+   * Get currently selected track
+   */
+  function getCurrentTrack() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && VALID_TRACKS.includes(saved.toUpperCase())) {
+        return saved.toUpperCase();
+      }
+    } catch (e) {
+      console.warn('[TrackVisibility] localStorage unavailable:', e.message);
+    }
+    return DEFAULT_TRACK;
+  }
+
+  /**
+   * Set selected track
+   */
+  function setTrack(track) {
+    if (!VALID_TRACKS.includes(track)) {
+      console.error('[TrackVisibility] Invalid track:', track);
+      return;
+    }
+
+    try {
+      localStorage.setItem(STORAGE_KEY, track);
+    } catch (e) {
+      console.warn('[TrackVisibility] Failed to save track:', e.message);
+    }
+
+    applyTrackVisibility(track);
+
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('trackchange', { detail: { track } }));
+
+    console.log('[TrackVisibility] Track set to:', track);
+  }
+
+  /**
+   * Apply visibility rules for current track
+   */
+  function applyTrackVisibility(currentTrack) {
+    // 1. Hide all track-controlled content first
+    document.querySelectorAll('[data-track-exclusive], [data-requires-track]').forEach(el => {
+      el.hidden = true;
+    });
+
+    // 2. Show exclusive content for current track ONLY
+    document.querySelectorAll(`[data-track-exclusive="${currentTrack}"]`).forEach(el => {
+      el.hidden = false;
+    });
+
+    // 3. Show content allowed for current track
+    document.querySelectorAll('[data-requires-track]').forEach(el => {
+      const allowedTracks = el.dataset.requiresTrack.split(' ');
+      if (allowedTracks.includes(currentTrack)) {
+        el.hidden = false;
+      }
+    });
+
+    // 4. Update body class for CSS hooks
+    document.body.className = document.body.className.replace(/track-[ABC]/g, '');
+    document.body.classList.add(`track-${currentTrack}`);
+
+    // 5. Update track selector UI if present
+    updateTrackSelectorUI(currentTrack);
+
+    console.log('[TrackVisibility] Applied visibility for track:', currentTrack);
+  }
+
+  /**
+   * Scroll to track start section
+   */
+  function scrollToTrackStart(track) {
+    const startSection = document.querySelector(`[data-track-start="${track}"]`);
+    if (startSection) {
+      // Small delay to ensure visibility is applied
+      setTimeout(() => {
+        startSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+
+  /**
+   * Update track selector UI state
+   */
+  function updateTrackSelectorUI(currentTrack) {
+    document.querySelectorAll('[data-track-selector]').forEach(el => {
+      el.classList.toggle('active', el.dataset.trackSelector === currentTrack);
+      el.setAttribute('aria-checked', el.dataset.trackSelector === currentTrack ? 'true' : 'false');
+    });
+  }
+
+  /**
+   * Initialize visibility engine
+   */
+  function init() {
+    const savedTrack = getCurrentTrack();
+    applyTrackVisibility(savedTrack);
+
+    // Listen for track selector clicks
+    document.addEventListener('click', (e) => {
+      const selector = e.target.closest('[data-track-selector]');
+      if (selector) {
+        const track = selector.dataset.trackSelector;
+        setTrack(track);
+        scrollToTrackStart(track);
+      }
+    });
+
+    // Handle URL hash for direct links - reveal content if needed
+    if (window.location.hash) {
+      const targetId = window.location.hash.slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        // Check if element is track-gated
+        const requiresTrack = targetElement.dataset.requiresTrack;
+        if (requiresTrack) {
+          const allowedTracks = requiresTrack.split(' ');
+          if (!allowedTracks.includes(savedTrack)) {
+            // Switch to required track
+            setTrack(allowedTracks[0]);
+          }
+        }
+      }
+    }
+
+    console.log('[TrackVisibility] Initialized with track:', savedTrack);
+  }
+
+  // Auto-initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Expose API
+  window.TrackVisibility = {
+    getCurrentTrack,
+    setTrack,
+    applyTrackVisibility,
+    scrollToTrackStart,
+    VALID_TRACKS,
+    DEFAULT_TRACK
+  };
+})();
