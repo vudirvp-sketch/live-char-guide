@@ -1425,118 +1425,6 @@
       transition: background 0.3s ease, border-left 0.3s ease;
     }
 
-    /* ============================================
-       LAYER 2: TRACK VISIBILITY ENGINE
-       ============================================ */
-
-    /*
-     * Protection against FOUC (Flash of Unstyled Content)
-     * Hide all track-controlled content by default until JS applies visibility
-     */
-    [data-track-exclusive],
-    [data-requires-track] {
-      display: none !important;
-    }
-
-    /*
-     * Show content when JS removes hidden attribute
-     * Using !important to override any inline styles
-     */
-    [data-track-exclusive]:not([hidden]),
-    [data-requires-track]:not([hidden]) {
-      display: block;
-    }
-
-    /* Context-specific display modes */
-    [data-track-exclusive]:not([hidden]).flex-display,
-    [data-requires-track]:not([hidden]).flex-display {
-      display: flex;
-    }
-
-    [data-track-exclusive]:not([hidden]).grid-display,
-    [data-requires-track]:not([hidden]).grid-display {
-      display: grid;
-    }
-
-    /* Inline elements */
-    [data-track-exclusive]:not([hidden]).inline-display,
-    [data-requires-track]:not([hidden]).inline-display {
-      display: inline;
-    }
-
-    /*
-     * Track-specific styling
-     */
-    [data-track-exclusive="A"] {
-      /* Track A specific styles if needed */
-    }
-
-    [data-requires-track~="B"] {
-      /* Track B specific styles if needed */
-    }
-
-    [data-requires-track~="C"] {
-      /* Track C specific styles if needed */
-    }
-
-    /* === TRACK SELECTOR BUTTONS === */
-    .track-selector {
-      display: flex;
-      gap: 0.5rem;
-      margin: 1em 0;
-      flex-wrap: wrap;
-    }
-
-    .track-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0.75em 1.25em;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      background: var(--bg-surface);
-      color: var(--text);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      min-width: 100px;
-    }
-
-    .track-btn:hover {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-    }
-
-    .track-btn.active {
-      background: var(--accent-soft);
-      border-color: var(--accent);
-    }
-
-    .track-btn.track-a.active {
-      border-color: var(--track-a-clr);
-      background: rgba(56, 189, 248, 0.15);
-    }
-
-    .track-btn.track-b.active {
-      border-color: var(--track-b-clr);
-      background: rgba(139, 233, 253, 0.15);
-    }
-
-    .track-btn.track-c.active {
-      border-color: var(--track-c-clr);
-      background: rgba(167, 139, 250, 0.15);
-    }
-
-    .track-btn .track-label {
-      font-weight: 600;
-      font-size: 0.95em;
-    }
-
-    .track-btn .track-desc {
-      font-size: 0.75em;
-      color: var(--text-muted);
-      margin-top: 0.25em;
-    }
-
     /* === GHOST BASIC SECTION FOR TRACK A === */
     .ghost-basic-section {
       margin: 1.5em 0;
@@ -6161,7 +6049,6 @@ body.theme-light .track-result {
   }
 
   /* Track visibility - show all content when printing */
-  [data-track-exclusive],
   [data-requires-track] {
     display: block !important;
   }
