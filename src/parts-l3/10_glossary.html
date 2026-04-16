@@ -1,0 +1,163 @@
+<section id="glossary-full">
+<h2>Полный глоссарий (Layer 3)</h2>
+
+<p>Все термины Layer 1 + Layer 2 + Layer 3:</p>
+
+<h3>Базовые термины</h3>
+
+<dl>
+  <dt><strong>Character Card</strong></dt>
+  <dd>Структурированная инструкция для LLM, определяющая поведение персонажа.</dd>
+
+  <dt><strong>System Prompt (SP)</strong></dt>
+  <dd>Блок с правилами поведения. Задаёт ограничения, не голос.</dd>
+
+  <dt><strong>Description</strong></dt>
+  <dd>Основной блок: SPINE, якоря, факты. Только факты, не стилистика.</dd>
+
+  <dt><strong>Anchor (Якорь)</strong></dt>
+  <dd>Правило поведения: Триггер → Действие → Цена.</dd>
+
+  <dt><strong>Price (Цена)</strong></dt>
+  <dd>Мгновенная физическая реакция в той же сцене.</dd>
+
+  <dt><strong>Examples</strong></dt>
+  <dd>Демонстрация голоса персонажа. Минимум 2-3.</dd>
+
+  <dt><strong>Greeting</strong></dt>
+  <dd>Первое сообщение персонажа.</dd>
+
+  <dt><strong>Voice Isolation</strong></dt>
+  <dd>Правило: голос только в Examples/Greeting, не в Description.</dd>
+
+  <dt><strong>Anti-Godmoding</strong></dt>
+  <dd>Запрет модели описывать действия {{user}}.</dd>
+</dl>
+
+<h3>SPINE Framework</h3>
+
+<dl>
+  <dt><strong>SPINE</strong></dt>
+  <dd>Психологическое ядро персонажа: WANT, NEED, FLAW, LIE, GHOST.</dd>
+
+  <dt><strong>WANT</strong></dt>
+  <dd>Что персонаж хочет прямо сейчас.</dd>
+
+  <dt><strong>NEED</strong></dt>
+  <dd>Что персонажу нужно для роста.</dd>
+
+  <dt><strong>FLAW</strong></dt>
+  <dd>Изъян характера — поведение, мешающее NEED.</dd>
+
+  <dt><strong>LIE</strong></dt>
+  <dd>Ложная установка персонажа.</dd>
+
+  <dt><strong>GHOST</strong></dt>
+  <dd>Событие из прошлого, сформировавшее FLAW/LIE.</dd>
+
+  <dt><strong>GHOST Layers</strong></dt>
+  <dd>Многоуровневая архитектура прошлого: GHOST-1 (детство), GHOST-2 (юность), GHOST-3 (недавнее).</dd>
+</dl>
+
+<h3>CoT (Chain of Thought)</h3>
+
+<dl>
+  <dt><strong>Chain of Thought (CoT)</strong></dt>
+  <dd>Техника добавления внутреннего процесса персонажа перед реакцией.</dd>
+
+  <dt><strong>CoT Tier 1</strong></dt>
+  <dd>[Эмоция] → Реакция</dd>
+
+  <dt><strong>CoT Tier 2</strong></dt>
+  <dd>[GHOST-связь] → Реакция</dd>
+
+  <dt><strong>CoT Tier 3</strong></dt>
+  <dd>[Полный процесс] → Реакция</dd>
+</dl>
+
+<h3>Технические термины</h3>
+
+<dl>
+  <dt><strong>Embodiment (Телесность)</strong></dt>
+  <dd>Протокол перевода состояния в физическое действие до речи.</dd>
+
+  <dt><strong>Format Lock</strong></dt>
+  <dd>Инструкция в конце SP, фиксирующая систему разметки.</dd>
+
+  <dt><strong>Author's Note (AN)</strong></dt>
+  <dd>Короткая инструкция в конце контекста для временных изменений.</dd>
+
+  <dt><strong>Lorebook</strong></dt>
+  <dd>База знаний, вставляемая в контекст по триггерам.</dd>
+
+  <dt><strong>XML Tags</strong></dt>
+  <dd>Структурированные теги для организации Description.</dd>
+
+  <dt><strong>API Blocks</strong></dt>
+  <dd>Специфичные блоки для Claude/GPT.</dd>
+
+  <dt><strong>4K-Fallback Protocol</strong></dt>
+  <dd>Минимальная конфигурация для контекста ≤4K токенов.</dd>
+</dl>
+
+<h3>Параметры генерации</h3>
+
+<dl>
+  <dt><strong>Temperature</strong></dt>
+  <dd>Параметр креативности. 0.6-0.8 для 12B, 0.8-1.0 для 32B+.</dd>
+
+  <dt><strong>Repetition Penalty</strong></dt>
+  <dd>Штраф за повторы. 1.05, не выше 1.10.</dd>
+
+  <dt><strong>Presence Penalty</strong></dt>
+  <dd>Штраф за присутствие токена. Критично: 0.0 для character cards.</dd>
+
+  <dt><strong>Top P</strong></dt>
+  <dd>Nucleus sampling. 0.9-0.95.</dd>
+
+  <dt><strong>Min P</strong></dt>
+  <dd>Минимальная вероятность токена. 0.02-0.05.</dd>
+
+  <dt><strong>Top K</strong></dt>
+  <dd>Количество кандидатов на токен. 40-60.</dd>
+</dl>
+
+<h3>Анти-паттерны</h3>
+
+<dl>
+  <dt><strong>Token Bloat</strong></dt>
+  <dd>Раздувание Description выше 800 токенов.</dd>
+
+  <dt><strong>Voice in Description</strong></dt>
+  <dd>Стилистические директивы в Description.</dd>
+
+  <dt><strong>Missing Price</strong></dt>
+  <dd>Отсутствие или отложенность Price в якоре.</dd>
+
+  <dt><strong>SPINE Broken</strong></dt>
+  <dd>Элементы SPINE не связаны логически.</dd>
+
+  <dt><strong>CoT Overload</strong></dt>
+  <dd>Слишком много CoT в якорях.</dd>
+
+  <dt><strong>Voice Bleed</strong></dt>
+  <dd>Смешивание голосов персонажей в multi-char.</dd>
+
+  <dt><strong>Context Window Violation</strong></dt>
+  <dd>Превышение лимита контекста.</dd>
+</dl>
+
+<h3>Multi-character</h3>
+
+<dl>
+  <dt><strong>Multi-char Card</strong></dt>
+  <dd>Карточка с несколькими персонажами.</dd>
+
+  <dt><strong>Voice Bleed</strong></dt>
+  <dd>Смешивание голосов между персонажами.</dd>
+
+  <dt><strong>Character Marker</strong></dt>
+  <dd>Явный маркер персонажа в Examples: [ИМЯ].</dd>
+</dl>
+
+</section>

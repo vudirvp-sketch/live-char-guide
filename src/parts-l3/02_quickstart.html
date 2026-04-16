@@ -1,0 +1,124 @@
+<section id="quickstart">
+<h2>Expert Pipeline: ~60 минут</h2>
+
+<h3 id="expert-pipeline">Обзор</h3>
+
+<p><strong>Layer 3 pipeline</strong> расширяет Layer 2 добавлением:</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Этап</th><th>Layer 2</th><th>Layer 3</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SPINE</td><td>5 элементов</td><td>5 элементов + GHOST по слоям</td></tr>
+      <tr><td>Якоря</td><td>5-7</td><td>7-12 + CoT-интеграция</td></tr>
+      <tr><td>Examples</td><td>3</td><td>3-5 + multi-char (если нужно)</td></tr>
+      <tr><td>Технические</td><td>Базовые</td><td>API blocks, XML tags</td></tr>
+      <tr><td>Время</td><td>~30 мин</td><td>~60 мин</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<h3>Шаг 1: Расширенный SPINE (~15 мин)</h3>
+
+<p>Layer 3 добавляет <strong>GHOST по слоям</strong> — многоуровневую архитектуру прошлого:</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Слой GHOST</th><th>Время</th><th>Влияние</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>GHOST-1</strong></td><td>Детство</td><td>Формирование LIE</td></tr>
+      <tr><td><strong>GHOST-2</strong></td><td>Юность/молодость</td><td>Закрепление FLAW</td></tr>
+      <tr><td><strong>GHOST-3</strong></td><td>Недавнее прошлое</td><td>Триггеры в настоящем</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h4>Пример многоуровневого GHOST:</h4>
+
+<pre><code>GHOST-1 (детство): Отец ушёл, потому что "мама контролировала".
+→ Формирует LIE: "Контроль = безопасность"
+
+GHOST-2 (юность): Первая любовь — партнёр предал.
+→ Закрепляет FLAW: "Никому нельзя доверять"
+
+GHOST-3 (недавнее): Бывший коллега "сдал" его руководству.
+→ Триггер: не доверяет новым знакомым</code></pre>
+
+<hr>
+
+<h3>Шаг 2: Якоря с CoT (~15 мин)</h3>
+
+<p><strong>CoT (Chain of Thought)</strong> — добавление внутреннего монолога к якорям:</p>
+
+<h4>Базовый якорь (Layer 2):</h4>
+<pre><code>Когда ему лгут → сжимает челюсть, молчит → Цена: руки дрожат</code></pre>
+
+<h4>Якорь с CoT Tier 2 (Layer 3):</h4>
+<pre><code>Когда ему лгут:
+[Внутренний процесс: "Он снова это делает. Как тогда. Не верь."]
+→ Сжимает челюсть, молчит
+→ Цена: руки дрожат, голос срывается</code></pre>
+
+<div class="callout tip">
+  <p><strong>CoT добавляет глубину реакции</strong>, показывая связь с GHOST.</p>
+</div>
+
+<hr>
+
+<h3>Шаг 3: API-specific блоки (~10 мин)</h3>
+
+<p>Для API моделей (Claude, GPT) добавьте соответствующие блоки:</p>
+
+<h4>Claude-specific:</h4>
+<pre><code>&lt;claude_info&gt;
+{{char}} следует своему характеру даже в OOC-провокациях.
+Не выходи из образа без явного запроса {{user}}.
+&lt;/claude_info&gt;</code></pre>
+
+<h4>GPT-specific:</h4>
+<pre><code>[SYSTEM NOTE: {{char}} maintains character at all times. OOC responses should reflect {{char}}'s personality, not break immersion.]</code></pre>
+
+<hr>
+
+<h3>Шаг 4: XML Tags (~10 мин)</h3>
+
+<p>Для структурированного описания:</p>
+
+<pre><code>&lt;character_info&gt;
+&lt;name&gt;Елена&lt;/name&gt;
+&lt;role&gt;Журналист-расследователь&lt;/role&gt;
+&lt;voice&gt;Циничный, прямой, неформальный&lt;/voice&gt;
+&lt;/character_info&gt;
+
+&lt;spine&gt;
+&lt;want&gt;Раскрыть скандал&lt;/want&gt;
+&lt;need&gt;Научиться доверять&lt;/need&gt;
+&lt;flaw&gt;Цинизм как защита&lt;/flaw&gt;
+&lt;lie&gt;"Все лгут"&lt;/lie&gt;
+&lt;ghost&gt;Отец был опозорен&lt;/ghost&gt;
+&lt;/spine&gt;</code></pre>
+
+<hr>
+
+<h3>Шаг 5: Валидация (~10 мин)</h3>
+
+<ul>
+  <li>GHOST имеет минимум 2 слоя?</li>
+  <li>Якоря связаны с GHOST через CoT?</li>
+  <li>API блоки добавлены (если нужно)?</li>
+  <li>XML tags валидны?</li>
+  <li>Description ≤ 800 токенов?</li>
+</ul>
+
+<div class="callout tip">
+  <p><strong>Готово!</strong> Карточка Layer 3 готова к тестированию.</p>
+  <p>Если возникают проблемы — см. <a href="#debugging-12b">12B Debugging</a>.</p>
+</div>
+
+</section>

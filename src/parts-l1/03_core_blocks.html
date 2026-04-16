@@ -1,0 +1,174 @@
+<section id="core-blocks">
+<h2>Основные блоки карточки</h2>
+
+<h3 id="anchors">3.1 Поведенческие якоря</h3>
+
+<p><strong>Якорь</strong> — это правило поведения: <strong>Триггер → Действие → Цена</strong></p>
+
+<div class="infographic">
+  <div class="infographic-title">Формат якоря</div>
+  <div class="inf-pipeline">
+    <div class="inf-pipeline-step">
+      <div class="inf-step-id">01</div>
+      <div class="inf-step-label">ТРИГГЕР</div>
+      <div class="inf-step-desc">Внешний стимул</div>
+      <div class="inf-step-code">Кто-то лжёт</div>
+    </div>
+    <div class="inf-pipeline-step">
+      <div class="inf-step-id">02</div>
+      <div class="inf-step-label">ДЕЙСТВИЕ</div>
+      <div class="inf-step-desc">Наблюдаемая реакция</div>
+      <div class="inf-step-code">Сжимает челюсть</div>
+    </div>
+    <div class="inf-pipeline-step">
+      <div class="inf-step-id">03</div>
+      <div class="inf-step-label">ЦЕНА</div>
+      <div class="inf-step-desc">Физическая реакция</div>
+      <div class="inf-step-code">Дрожат руки</div>
+    </div>
+  </div>
+</div>
+
+<h4>Правила якорей</h4>
+
+<ul>
+  <li><strong>3-5 якорей</strong> минимум (до 7 для сложных персонажей)</li>
+  <li>Каждое действие = <strong>наблюдаемое</strong>, не внутреннее состояние</li>
+  <li><strong>Цена обязательна</strong> для важных якорей</li>
+  <li>Покройте ключевые ситуации: спокойствие, стресс, радость, общение</li>
+</ul>
+
+<h4>Примеры якорей</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Ситуация</th><th>Триггер</th><th>Действие</th><th>Цена</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Ложь</td><td>Когда ему лгут в глаза</td><td>Сжимает челюсть, молчит</td><td>Руки дрожат, голос срывается</td></tr>
+      <tr><td>Радость</td><td>Когда что-то получается</td><td>Улыбается, говорит быстро</td><td>Краснеет, смеётся</td></tr>
+      <tr><td>Стресс</td><td>Давление, сроки</td><td>Ходит из угла в угол</td><td>Головная боль, усталость</td></tr>
+      <tr><td>Опасность</td><td>Угроза безопасности</td><td>Замирает, оценивает</td><td>Сердце колотится</td></tr>
+      <tr><td>Доверие</td><td>Откровенный разговор</td><td>Расслабляет плечи, говорит тише</td><td>Чувствует уязвимость</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout warn">
+  <p><strong>❌ Плохо:</strong> "Он неуверенный и тревожный"</p>
+  <p><strong>✅ Хорошо:</strong> "Ожидая результата, грызёт ногти и перечитывает сообщение трижды"</p>
+  <p><em>Конкретные действия, не абстрактные прилагательные.</em></p>
+</div>
+
+<hr>
+
+<h3 id="examples">3.2 Примеры сообщений</h3>
+
+<p><strong>Примеры</strong> — это демонстрация голоса персонажа в действии. Не описание, а <em>показ</em>.</p>
+
+<h4>Минимум 2 примера</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Тип</th><th>Зачем</th><th>Токены</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Нейтральный</strong></td><td>Базовый голос персонажа</td><td>80-120</td></tr>
+      <tr><td><strong>Стресс</strong></td><td>Как ведёт себя под давлением</td><td>80-120</td></tr>
+      <tr><td>Доверие (опционально)</td><td>Уязвимость, открытость</td><td>80-120</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h4>Пример нейтрального сообщения</h4>
+
+<pre><code>&lt;START&gt;
+Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.
+"Опять. Третий день подряд."</code></pre>
+
+<h4>Пример стрессового сообщения</h4>
+
+<pre><code>&lt;START&gt;
+Елена резко обернулась. Пальцы сжались на спинке стула.
+"Ты сказал что? Повтори."</code></pre>
+
+<h4>Правила написания примеров</h4>
+
+<ul>
+  <li>Каждый блок: <strong>80-120 токенов</strong>, одна сцена, одно состояние</li>
+  <li>Обязательно <code>&lt;START&gt;</code> в начале каждого блока</li>
+  <li>Стиль должен <strong>совпадать</strong> с Greeting</li>
+  <li>Не объясняй голос — <strong>покажи</strong> его</li>
+</ul>
+
+<hr>
+
+<h3 id="greeting">3.3 Greeting (Первое сообщение)</h3>
+
+<p><strong>Greeting</strong> — первое сообщение персонажа. Задаёт место, время и тон.</p>
+
+<h4>Структура Greeting</h4>
+
+<ol>
+  <li><strong>Сцена</strong> — где мы, что происходит (1-2 предложения)</li>
+  <li><strong>Действие</strong> — что делает персонаж</li>
+  <li><strong>Реплика</strong> — что он говорит</li>
+</ol>
+
+<h4>Пример</h4>
+
+<pre><code>Библиотека погружена в вечерний полумрак. Елена сидит за столом, окружённая стопками книг. Услышав шаги, она подняла голову и сняла очки.
+
+"О, посетитель? Редкость в это время суток."</code></pre>
+
+<h4>Правила</h4>
+
+<ul>
+  <li>Длина: <strong>50-100 токенов</strong></li>
+  <li>Тот же стиль разметки, что в Examples</li>
+  <li>Не начинайте с вопроса о том, что хочет пользователь</li>
+</ul>
+
+<hr>
+
+<h3 id="voice-isolation">3.4 Изоляция голоса</h3>
+
+<div class="callout important">
+  <p><strong>Правило:</strong> Голос персонажа задаётся ТОЛЬКО в Examples и Greeting.</p>
+  <p>Description — только факты и якоря. Никаких стилистических директив.</p>
+</div>
+
+<h4>Почему это важно</h4>
+
+<p>Модель — копировщик паттернов, не исполнитель инструкций. Если вы напишете в Description "говорит саркастично" — модель это проигнорирует. Но если в Examples персонаж говорит саркастично — модель скопирует стиль.</p>
+
+<h4>Иерархия влияния на голос</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Источник</th><th>Влияние</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Последние сообщения в чате</td><td>~85%</td></tr>
+      <tr><td>Примеры (Examples)</td><td><strong>Ключевое</strong></td></tr>
+      <tr><td>Greeting</td><td>Поддерживающее</td></tr>
+      <tr><td>Description</td><td>0% для голоса</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout warn">
+  <p><strong>❌ Ошибка:</strong></p>
+  <pre><code>Description: "Елена говорит с сарказмом, использует слово 'чувак'"</code></pre>
+  <p><strong>✅ Правильно:</strong></p>
+  <pre><code>Description: "Елена — журналист, циничный, недоверчивый."
+
+Example:
+&lt;START&gt;
+Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
+</div>
+
+</section>

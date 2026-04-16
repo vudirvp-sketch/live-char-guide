@@ -1,0 +1,98 @@
+<section id="troubleshooting">
+<h2>Траблшутинг</h2>
+
+<h3 id="symptoms-table">Топ-5 проблем и решения</h3>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Персонаж "плывёт", теряет характер</strong></td>
+        <td>Нет Examples или голос в Description</td>
+        <td>Добавь 2 примера. Убери стилистику из Description.</td>
+      </tr>
+      <tr>
+        <td><strong>Персонаж пишет за {{user}}</strong></td>
+        <td>Нет анти-годмодинга</td>
+        <td>Добавь в System Prompt:<br><code>Никогда не описывай действия {{user}}.</code></td>
+      </tr>
+      <tr>
+        <td><strong>Повторяет одни и те же фразы</strong></td>
+        <td>Слишком длинное Description</td>
+        <td>Сократи Description до &lt;600 токенов.</td>
+      </tr>
+      <tr>
+        <td><strong>Игнорирует якоря</strong></td>
+        <td>Якоря без Цены</td>
+        <td>Добавь физическую реакцию к каждому якорю.</td>
+      </tr>
+      <tr>
+        <td><strong>Слишком роботизированный</strong></td>
+        <td>Temperature слишком низкая</td>
+        <td>Увеличь Temperature до 0.7-0.85</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<h3>Чеклист диагностики</h3>
+
+<p>Если персонаж работает некорректно, проверьте по порядку:</p>
+
+<ol>
+  <li><strong>System Prompt</strong>
+    <ul>
+      <li>Есть анти-годмодинг?</li>
+      <li>Указано лицо (1-е/3-е) и время?</li>
+    </ul>
+  </li>
+  <li><strong>Description</strong>
+    <ul>
+      <li>≤ 600 токенов?</li>
+      <li>Нет стилистических директив?</li>
+      <li>Есть 3-5 якорей с Ценой?</li>
+    </ul>
+  </li>
+  <li><strong>Examples</strong>
+    <ul>
+      <li>Есть минимум 2 примера?</li>
+      <li>Каждый с <code>&lt;START&gt;</code>?</li>
+      <li>Стиль совпадает с Greeting?</li>
+    </ul>
+  </li>
+  <li><strong>Greeting</strong>
+    <ul>
+      <li>Задаёт сцену и действие?</li>
+      <li>Тот же стиль разметки?</li>
+    </ul>
+  </li>
+  <li><strong>Параметры</strong>
+    <ul>
+      <li>Temperature: 0.7-0.85?</li>
+      <li>Repetition Penalty: ~1.05?</li>
+    </ul>
+  </li>
+</ol>
+
+<hr>
+
+<h3>Когда перейти на Layer 2?</h3>
+
+<ul>
+  <li>Базовая карточка работает, но нужна <strong>более глубокая психология</strong> персонажа</li>
+  <li>Хотите использовать <strong>SPINE framework</strong> (WANT, NEED, FLAW, LIE, GHOST)</li>
+  <li>Нужны <strong>расширенные технические настройки</strong> (Lorebook, Author's Note)</li>
+  <li>Персонаж сложный, требует <strong>более детальной проработки</strong></li>
+</ul>
+
+<div class="callout tip">
+  <p><strong>Layer 2</strong> добавляет SPINE framework, расширенные параметры, и продвинутые техники.</p>
+  <p><strong>Layer 3</strong> — полный справочник для экспертов с GHOST layers, CoT, и модель-специфичным дебагом.</p>
+</div>
+
+</section>
