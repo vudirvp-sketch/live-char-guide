@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: e1bfab58 -->
-<!-- Generated: 2026-04-16T01:41:21.173Z -->
+<!-- Build hash: 29433957 -->
+<!-- Generated: 2026-04-16T02:27:27.092Z -->
 <!-- Version: 5.9.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="e1bfab58">
+<meta name="build-hash" content="29433957">
 <meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-16">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -6350,18 +6350,28 @@ body.theme-light .track-result {
 
 </style>
 </head>
-<body data-track="B">
+<body data-layer="2">
 <script>
-// CRITICAL: Set default track BEFORE CSS renders to prevent FOUC
+// CRITICAL: Set default layer BEFORE CSS renders to prevent FOUC
+// Phase 5: Layer system migration (A/B/C → 1/2/3)
 (function() {
-  var track = 'B';
+  var layer = '2';
   try {
-    var saved = localStorage.getItem('guide-track-selection');
-    if (saved && ['A','B','C'].indexOf(saved.toUpperCase()) !== -1) {
-      track = saved.toUpperCase();
+    var saved = localStorage.getItem('guide-layer-selection');
+    if (saved && ['1','2','3'].indexOf(saved) !== -1) {
+      layer = saved;
+    }
+    
+    // Migration from old track system (A → 1, B → 2, C → 3)
+    var oldTrack = localStorage.getItem('guide-track-selection');
+    if (oldTrack) {
+      var map = { 'A': '1', 'B': '2', 'C': '3' };
+      layer = map[oldTrack.toUpperCase()] || layer;
+      localStorage.setItem('guide-layer-selection', layer);
+      localStorage.removeItem('guide-track-selection');
     }
   } catch(e) {}
-  document.body.setAttribute('data-track', track);
+  document.body.setAttribute('data-layer', layer);
 })();
 </script>
 <a href="#main-content" class="skip-link">Skip to content</a>
@@ -6604,7 +6614,7 @@ body.theme-light .track-result {
 </header>
 
 <!-- ITEM-001: TRACK NAVIGATION SELECTION -->
-<main class="entry-selection" id="main-content">
+<main class="entry-selection" id="layer-selection">
   <section class="audience-selection" aria-labelledby="track-selection-title">
     <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
     <p class="audience-intro">Выберите уровень погружения в материал:</p>
@@ -15045,9 +15055,10 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     
     // Also support legacy audience-card for backward compatibility
     document.querySelectorAll('.audience-card').forEach(card => {
-      const cardTrack = card.dataset.track;
+      // BUGFIX: Read data-layer directly (new system), fallback to data-track (legacy)
+      const cardLayerAttr = card.dataset.layer || card.dataset.track;
       const layerMap = { 'A': '1', 'B': '2', 'C': '3' };
-      const cardLayer = layerMap[cardTrack] || cardTrack;
+      const cardLayer = layerMap[cardLayerAttr] || cardLayerAttr;
       const isActive = cardLayer === layer;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
@@ -15173,18 +15184,22 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     // Also support legacy audience-card buttons for backward compatibility
     document.querySelectorAll('.audience-card').forEach(card => {
       card.addEventListener('click', () => {
+        // BUGFIX: Read data-layer directly (new system), fallback to data-track (legacy)
+        const layer = card.dataset.layer || card.dataset.track;
+        // If legacy track (A/B/C), convert to layer (1/2/3)
         const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-        const layer = trackMap[card.dataset.track] || card.dataset.track;
-        setLayer(layer);
+        const finalLayer = trackMap[layer] || layer;
+        setLayer(finalLayer);
       });
 
       // Keyboard support
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          const layer = card.dataset.layer || card.dataset.track;
           const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-          const layer = trackMap[card.dataset.track] || card.dataset.track;
-          setLayer(layer);
+          const finalLayer = trackMap[layer] || layer;
+          setLayer(finalLayer);
         }
       });
     });

@@ -1107,6 +1107,13 @@
       transition: opacity var(--transition-fast);
     }
 
+    /* FIX: Never hide body, even if it has data-layer attribute */
+    body[data-layer] {
+      content-visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
     /* Layer 1: Basic - show ONLY on Layer 1 */
     body[data-layer="1"] [data-layer="1"] {
       content-visibility: visible;
