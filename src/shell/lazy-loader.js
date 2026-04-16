@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - LAZY LOADER v5.12.0
+ * LIVE CHARACTER GUIDE - LAZY LOADER v5.12.1
  * ============================================================================
  * 
  * Dynamic layer loading system:
@@ -8,10 +8,18 @@
  * 2. Insert content into #content container
  * 3. Handle anchor navigation and browser history
  * 
+ * Features:
+ * - Panel system (drag, resize, save state)
+ * - Notepad with persistence
+ * - Glossary panel
+ * - Theme toggle (dark/light/oled)
+ * - Content width toggle
+ * - Scroll to top
+ * 
  * Architecture:
  * - Shell (this file) loads once
  * - Layer content fetched on demand
- * - localStorage remembers last selected layer
+ * - localStorage remembers preferences
  */
 
 (function() {
@@ -41,34 +49,475 @@
   let loadedParts = new Set();
 
   // ============================================================================
-  // DOM ELEMENTS
+  // DOM UTILITIES
   // ============================================================================
   
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => document.querySelectorAll(sel);
 
   // ============================================================================
+  // STORAGE UTILITY
+  // ============================================================================
+
+  const storage = {
+    memoryFallback: new Map(),
+    
+    get(key) {
+      try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : null;
+      } catch (e) {
+        console.warn('[Storage] Read error:', e.message);
+        return this.memoryFallback.get(key) || null;
+      }
+    },
+    
+    set(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        this.memoryFallback.set(key, value);
+        return true;
+      } catch (e) {
+        if (e.name === 'QuotaExceededError' || e.code === 22) {
+          console.warn('[Storage] Quota exceeded, using memory fallback');
+          this.memoryFallback.set(key, value);
+        } else {
+          console.error('[Storage] Write error:', e.message);
+        }
+        return false;
+      }
+    }
+  };
+
+  // ============================================================================
+  // DEBOUNCE UTILITY
+  // ============================================================================
+
+  function debounce(fn, delay) {
+    let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
+  // ============================================================================
+  // CLIPBOARD UTILITY
+  // ============================================================================
+
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (err) {
+      // Fallback for insecure contexts (http://, file://)
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.cssText = 'position:fixed;left:-9999px;top:0;';
+        textarea.setAttribute('readonly', '');
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, 99999);
+        const success = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        return success;
+      } catch (fallbackErr) {
+        console.warn('[Clipboard] Copy failed:', fallbackErr);
+        return false;
+      }
+    }
+  }
+
+  // ============================================================================
+  // PANEL SYSTEM
+  // ============================================================================
+
+  let globalZIndex = 1000;
+  const MAX_Z_INDEX = 10000;
+
+  const DEFAULT_PANEL_STATE = {
+    visible: false,
+    x: 20,
+    y: 80,
+    width: 280,
+    height: Math.min(400, window.innerHeight * 0.6)
+  };
+
+  const PANEL_DEFAULTS = {
+    'toc-panel': () => ({
+      x: Math.max(20, window.innerWidth - 320),
+      y: 80,
+      width: 280,
+      height: Math.min(400, window.innerHeight * 0.6)
+    }),
+    'notepad-panel': () => ({
+      x: 20,
+      y: 80,
+      width: 280,
+      height: Math.min(400, window.innerHeight * 0.6)
+    }),
+    'glossary-panel': () => ({
+      x: Math.max(20, window.innerWidth - 340),
+      y: 100,
+      width: 300,
+      height: Math.min(450, window.innerHeight * 0.6)
+    })
+  };
+
+  class Panel {
+    constructor(element, options = {}) {
+      this.el = element;
+      this.storageKey = options.storageKey || `panel_${element.id}`;
+      this.onToggle = options.onToggle || null;
+      this.onSave = options.onSave || null;
+      
+      this.state = this.loadState();
+      this.isDragging = false;
+      this.isResizing = false;
+      this.dragOffset = { x: 0, y: 0 };
+      
+      this.header = this.el.querySelector('[data-drag-handle]');
+      this.resizeHandle = this.el.querySelector('[data-resize-handle]');
+      this.closeBtn = this.el.querySelector('[data-action="close"]');
+      
+      this.applyState();
+      this.bindEvents();
+      this.setupAccessibility();
+    }
+
+    loadState() {
+      const saved = storage.get(this.storageKey);
+      const panelDefaults = PANEL_DEFAULTS[this.el.id]?.() || DEFAULT_PANEL_STATE;
+      
+      if (saved) {
+        if (saved.x > window.innerWidth - 100 || saved.y > window.innerHeight - 100) {
+          return { ...panelDefaults, visible: false };
+        }
+        const openPanels = document.querySelectorAll('.panel.open');
+        if (openPanels.length > 0 && !saved.visible) {
+          saved.y = Math.min(saved.y + 50, window.innerHeight - 200);
+        }
+      }
+      
+      return { ...panelDefaults, ...saved };
+    }
+
+    saveState = debounce(() => {
+      const rect = this.el.getBoundingClientRect();
+      this.state = {
+        visible: this.isOpen(),
+        x: Math.round(rect.left),
+        y: Math.round(rect.top),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height)
+      };
+      storage.set(this.storageKey, this.state);
+    }, 300);
+
+    applyState() {
+      const x = Math.max(0, Math.min(this.state.x, window.innerWidth - 100));
+      const y = Math.max(0, Math.min(this.state.y, window.innerHeight - 100));
+      
+      this.el.style.left = `${x}px`;
+      this.el.style.top = `${y}px`;
+      this.el.style.width = `${Math.max(220, this.state.width)}px`;
+      this.el.style.height = `${Math.max(150, this.state.height)}px`;
+      
+      if (this.state.visible) {
+        this.el.classList.add('open');
+      }
+    }
+
+    isOpen() { return this.el.classList.contains('open'); }
+
+    open() {
+      this.el.classList.add('open');
+      this.state.visible = true;
+      this.saveState();
+      if (this.onToggle) this.onToggle(true);
+    }
+
+    close() {
+      this.el.classList.remove('open');
+      this.state.visible = false;
+      this.saveState();
+      if (this.onToggle) this.onToggle(false);
+    }
+
+    toggle() {
+      if (this.isOpen()) this.close();
+      else this.open();
+    }
+
+    focus() {
+      globalZIndex++;
+      if (globalZIndex > MAX_Z_INDEX) globalZIndex = 1000;
+      this.el.style.zIndex = globalZIndex;
+      this.el.focus();
+    }
+
+    startDrag(e) {
+      if (e.target.closest('.panel-btn')) return;
+      
+      this.isDragging = true;
+      this.el.classList.add('dragging');
+      
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const rect = this.el.getBoundingClientRect();
+      
+      this.dragOffset = { x: clientX - rect.left, y: clientY - rect.top };
+      this.focus();
+      e.preventDefault();
+    }
+
+    onDrag(e) {
+      if (!this.isDragging) return;
+      
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      
+      let newX = clientX - this.dragOffset.x;
+      let newY = clientY - this.dragOffset.y;
+      
+      const rect = this.el.getBoundingClientRect();
+      newX = Math.max(0, Math.min(newX, window.innerWidth - rect.width));
+      newY = Math.max(0, Math.min(newY, window.innerHeight - rect.height));
+      
+      this.el.style.left = `${newX}px`;
+      this.el.style.top = `${newY}px`;
+    }
+
+    endDrag() {
+      if (!this.isDragging) return;
+      this.isDragging = false;
+      this.el.classList.remove('dragging');
+      this.saveState();
+    }
+
+    startResize(e) {
+      this.isResizing = true;
+      this.el.classList.add('dragging');
+      this.focus();
+      e.preventDefault();
+    }
+
+    onResize(e) {
+      if (!this.isResizing) return;
+      
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      
+      const rect = this.el.getBoundingClientRect();
+      const newWidth = Math.max(220, clientX - rect.left);
+      const newHeight = Math.max(150, clientY - rect.top);
+      
+      this.el.style.width = `${newWidth}px`;
+      this.el.style.height = `${newHeight}px`;
+    }
+
+    endResize() {
+      if (!this.isResizing) return;
+      this.isResizing = false;
+      this.el.classList.remove('dragging');
+      this.saveState();
+    }
+
+    bindEvents() {
+      if (this.closeBtn) {
+        this.closeBtn.addEventListener('click', () => this.close());
+      }
+      
+      // Drag - mouse
+      this.header?.addEventListener('mousedown', (e) => this.startDrag(e));
+      document.addEventListener('mousemove', (e) => this.onDrag(e));
+      document.addEventListener('mouseup', () => this.endDrag());
+      
+      // Drag - touch
+      this.header?.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
+      document.addEventListener('touchmove', (e) => this.onDrag(e), { passive: false });
+      document.addEventListener('touchend', () => this.endDrag());
+      
+      // Resize - mouse
+      this.resizeHandle?.addEventListener('mousedown', (e) => this.startResize(e));
+      document.addEventListener('mousemove', (e) => this.onResize(e));
+      document.addEventListener('mouseup', () => this.endResize());
+      
+      // Resize - touch
+      this.resizeHandle?.addEventListener('touchstart', (e) => this.startResize(e), { passive: false });
+      document.addEventListener('touchmove', (e) => this.onResize(e), { passive: false });
+      document.addEventListener('touchend', () => this.endResize());
+      
+      // Focus on click
+      this.el.addEventListener('mousedown', () => this.focus());
+      
+      // Keyboard
+      this.el.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen()) {
+          this.close();
+          e.preventDefault();
+        }
+      });
+      
+      // Save on window resize
+      window.addEventListener('resize', debounce(() => {
+        if (this.isOpen()) {
+          const rect = this.el.getBoundingClientRect();
+          if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
+            this.applyState();
+          }
+        }
+      }, 100));
+    }
+
+    setupAccessibility() {
+      this.el.setAttribute('role', 'dialog');
+      this.el.setAttribute('aria-modal', 'false');
+    }
+  }
+
+  // ============================================================================
+  // NOTEPAD PANEL (extends Panel)
+  // ============================================================================
+
+  class NotepadPanel extends Panel {
+    constructor(element, options = {}) {
+      super(element, options);
+      this.textarea = this.el.querySelector('textarea');
+      this.saveBtn = this.el.querySelector('[data-action="save"]');
+      this.clearBtn = this.el.querySelector('[data-action="clear"]');
+      this.exportBtn = this.el.querySelector('[data-action="export"]');
+      
+      this.createStatusBar();
+      this.bindNotepadEvents();
+      this.loadContent();
+    }
+
+    createStatusBar() {
+      if (this.el.querySelector('.panel-statusbar')) return;
+      
+      const statusBar = document.createElement('div');
+      statusBar.className = 'panel-statusbar';
+      statusBar.style.cssText = 'padding:4px 10px; font-size:0.75rem; color:var(--text-muted); background:var(--bg-elevated); border-top:1px solid var(--border); display:flex; justify-content:space-between;';
+      statusBar.innerHTML = '<span id="np-status">Готово</span><span id="np-count">0 симв.</span>';
+      this.el.appendChild(statusBar);
+    }
+
+    loadContent() {
+      const content = storage.get(`${this.storageKey}_content`) || '';
+      if (this.textarea) {
+        this.textarea.value = content;
+        this.updateCount();
+      }
+    }
+
+    saveContent = debounce(() => {
+      if (!this.textarea) return;
+      storage.set(`${this.storageKey}_content`, this.textarea.value);
+      if (this.saveBtn) {
+        this.saveBtn.textContent = '✓';
+        setTimeout(() => { this.saveBtn.textContent = '💾'; }, 800);
+      }
+      const status = $('#np-status');
+      if (status) status.textContent = 'Сохранено';
+    }, 250);
+
+    clearContent() {
+      if (!this.textarea || !this.textarea.value.trim()) return;
+      if (confirm('Очистить все заметки? Это действие нельзя отменить.')) {
+        this.textarea.value = '';
+        this.updateCount();
+        this.saveContent();
+      }
+    }
+
+    exportContent() {
+      if (!this.textarea || !this.textarea.value.trim()) {
+        alert('Блокнот пуст. Нечего экспортировать.');
+        return;
+      }
+      const blob = new Blob([this.textarea.value], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `notes_${new Date().toISOString().slice(0,10)}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    copyContent() {
+      if (!this.textarea || !this.textarea.value.trim()) return;
+      copyToClipboard(this.textarea.value).then((success) => {
+        const status = $('#np-status');
+        if (status) {
+          status.textContent = success ? 'Скопировано' : 'Ошибка копирования';
+          setTimeout(() => status.textContent = 'Готово', 1500);
+        }
+      });
+    }
+
+    updateCount() {
+      if (!this.textarea) return;
+      const len = this.textarea.value.length;
+      const words = this.textarea.value.trim() ? this.textarea.value.trim().split(/\s+/).length : 0;
+      const countEl = $('#np-count');
+      if (countEl) countEl.textContent = `${len} симв. · ${words} слов`;
+    }
+
+    bindNotepadEvents() {
+      if (this.textarea) {
+        this.textarea.addEventListener('input', () => {
+          this.saveContent();
+          this.updateCount();
+        });
+        this.textarea.addEventListener('keydown', (e) => {
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            const start = this.textarea.selectionStart;
+            const end = this.textarea.selectionEnd;
+            this.textarea.value = this.textarea.value.substring(0, start) + '  ' + this.textarea.value.substring(end);
+            this.textarea.selectionStart = this.textarea.selectionEnd = start + 2;
+            this.saveContent();
+          }
+        });
+      }
+
+      this.saveBtn?.addEventListener('click', () => this.saveContent());
+      this.clearBtn?.addEventListener('click', () => this.clearContent());
+      this.exportBtn?.addEventListener('click', () => this.exportContent());
+      
+      // Add copy button
+      let copyBtn = this.el.querySelector('[data-action="copy"]');
+      if (!copyBtn) {
+        copyBtn = document.createElement('button');
+        copyBtn.className = 'panel-btn';
+        copyBtn.dataset.action = 'copy';
+        copyBtn.textContent = '📋';
+        copyBtn.title = 'Копировать всё';
+        this.el.querySelector('.panel-header-actions')?.prepend(copyBtn);
+      }
+      copyBtn.addEventListener('click', () => this.copyContent());
+    }
+  }
+
+  // Panel instances storage
+  const panelInstances = {};
+
+  // ============================================================================
   // LAYER SELECTION
   // ============================================================================
 
-  /**
-   * Load saved layer from localStorage or return default
-   */
   function getSavedLayer() {
     try {
       const saved = localStorage.getItem(CONFIG.STORAGE_KEY);
-      if (saved && CONFIG.LAYERS.includes(saved)) {
-        return saved;
-      }
+      if (saved && CONFIG.LAYERS.includes(saved)) return saved;
     } catch (e) {
       console.warn('[LazyLoader] localStorage unavailable:', e.message);
     }
-    return null; // No saved layer = show modal
+    return null;
   }
 
-  /**
-   * Save layer to localStorage
-   */
   function saveLayer(layer) {
     try {
       localStorage.setItem(CONFIG.STORAGE_KEY, layer);
@@ -77,54 +526,31 @@
     }
   }
 
-  /**
-   * Check URL for layer parameter (for sharing links)
-   */
   function getLayerFromURL() {
     const params = new URLSearchParams(window.location.search);
     const layer = params.get('layer');
-    if (layer && CONFIG.LAYERS.includes(layer)) {
-      return layer;
-    }
-    return null;
+    return layer && CONFIG.LAYERS.includes(layer) ? layer : null;
   }
 
   // ============================================================================
   // CONTENT LOADING
   // ============================================================================
 
-  /**
-   * Show loading overlay
-   */
   function showLoading() {
-    const overlay = $('#loading-overlay');
-    if (overlay) {
-      overlay.classList.remove('hidden');
-    }
+    $('#loading-overlay')?.classList.remove('hidden');
   }
 
-  /**
-   * Hide loading overlay
-   */
   function hideLoading() {
-    const overlay = $('#loading-overlay');
-    if (overlay) {
-      overlay.classList.add('hidden');
-    }
+    $('#loading-overlay')?.classList.add('hidden');
   }
 
-  /**
-   * Fetch a single HTML part
-   */
   async function fetchPart(layer, filename) {
     const dir = CONFIG.PARTS_DIR[layer];
     const url = `${dir}/${filename}`;
     
     try {
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       return await response.text();
     } catch (e) {
       console.error(`[LazyLoader] Failed to fetch ${url}:`, e.message);
@@ -132,9 +558,6 @@
     }
   }
 
-  /**
-   * Load all parts for a layer
-   */
   async function loadLayerContent(layer) {
     if (isLoading) {
       console.warn('[LazyLoader] Already loading');
@@ -152,15 +575,12 @@
       return;
     }
 
-    // Clear previous content
     content.innerHTML = '';
     loadedParts.clear();
 
     try {
-      // Load manifest for this layer
       const dir = CONFIG.PARTS_DIR[layer];
-      const manifestUrl = `${dir}/manifest.json`;
-      const manifestResponse = await fetch(manifestUrl);
+      const manifestResponse = await fetch(`${dir}/manifest.json`);
       
       if (!manifestResponse.ok) {
         throw new Error(`Failed to load manifest: HTTP ${manifestResponse.status}`);
@@ -171,30 +591,16 @@
       
       console.log(`[LazyLoader] Loading layer ${layer}: ${parts.length} parts`);
       
-      // Fetch all parts
       const fetchPromises = parts.map(part => fetchPart(layer, part.file));
       const results = await Promise.all(fetchPromises);
       
-      // Combine all parts
-      const combinedHTML = results.join('\n');
-      content.innerHTML = combinedHTML;
-
-      // Set layer attribute on body for CSS visibility
+      content.innerHTML = results.join('\n');
       document.body.setAttribute('data-layer', layer);
-      
-      // Show content
       content.classList.remove('content-hidden');
       
-      // Update switcher buttons
       updateSwitcherButtons(layer);
-      
-      // Initialize interactive elements
       initInteractiveElements();
-      
-      // Generate TOC
       generateTOC();
-      
-      // Handle anchor if present
       handleAnchor();
       
       console.log(`[LazyLoader] Layer ${layer} loaded successfully`);
@@ -212,92 +618,45 @@
   // UI UPDATES
   // ============================================================================
 
-  /**
-   * Hide layer selection modal
-   */
-  function hideModal() {
-    const modal = $('#layer-modal');
-    if (modal) {
-      modal.classList.add('hidden');
-    }
-  }
+  function hideModal() { $('#layer-modal')?.classList.add('hidden'); }
+  function showModal() { $('#layer-modal')?.classList.remove('hidden'); }
+  function showSwitcher() { $('#layer-switcher')?.classList.remove('hidden'); }
 
-  /**
-   * Show layer selection modal
-   */
-  function showModal() {
-    const modal = $('#layer-modal');
-    if (modal) {
-      modal.classList.remove('hidden');
-    }
-  }
-
-  /**
-   * Show layer switcher
-   */
-  function showSwitcher() {
-    const switcher = $('#layer-switcher');
-    if (switcher) {
-      switcher.classList.remove('hidden');
-    }
-  }
-
-  /**
-   * Update switcher button states
-   */
   function updateSwitcherButtons(activeLayer) {
     $$('.layer-switch-btn').forEach(btn => {
-      const layer = btn.dataset.layer;
-      btn.classList.toggle('active', layer === activeLayer);
+      btn.classList.toggle('active', btn.dataset.layer === activeLayer);
     });
   }
 
-  /**
-   * Show FAB buttons
-   */
   function showFABs() {
     const fabs = $('#fab-group');
-    if (fabs) {
-      fabs.style.display = 'flex';
-    }
+    if (fabs) fabs.style.display = 'flex';
   }
 
   // ============================================================================
   // LAYER SWITCHING
   // ============================================================================
 
-  /**
-   * Switch to a different layer
-   */
   async function switchLayer(layer) {
     if (!CONFIG.LAYERS.includes(layer)) {
       console.error('[LazyLoader] Invalid layer:', layer);
       return;
     }
 
-    if (layer === currentLayer) {
-      return; // Already on this layer
-    }
+    if (layer === currentLayer) return;
 
     currentLayer = layer;
     saveLayer(layer);
     
-    // Update URL without reload
     const url = new URL(window.location);
     url.searchParams.set('layer', layer);
-    url.hash = ''; // Clear hash on layer switch
+    url.hash = '';
     history.pushState({ layer }, '', url);
     
-    // Load content
     await loadLayerContent(layer);
-    
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /**
-   * Select layer (first time or from modal)
-   */
   async function selectLayer(layer) {
     hideModal();
     showSwitcher();
@@ -309,19 +668,13 @@
   // ANCHOR HANDLING
   // ============================================================================
 
-  /**
-   * Handle anchor navigation after content load
-   */
   function handleAnchor() {
     const hash = window.location.hash;
     if (hash && hash.length > 1) {
       const targetId = hash.substring(1);
       const target = document.getElementById(targetId);
       if (target) {
-        // Delay to ensure content is rendered
-        setTimeout(() => {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 100);
       }
     }
   }
@@ -330,9 +683,6 @@
   // TOC GENERATION
   // ============================================================================
 
-  /**
-   * Generate Table of Contents from loaded content
-   */
   function generateTOC() {
     const tocContent = $('#toc-content');
     if (!tocContent) return;
@@ -369,13 +719,10 @@
   // INTERACTIVE ELEMENTS
   // ============================================================================
 
-  /**
-   * Initialize interactive elements after content load
-   */
   function initInteractiveElements() {
     // Copy buttons
     $$('pre').forEach(pre => {
-      if (pre.closest('.pre-wrapper')) return; // Already wrapped
+      if (pre.closest('.pre-wrapper')) return;
       
       const wrapper = document.createElement('div');
       wrapper.className = 'pre-wrapper';
@@ -389,30 +736,17 @@
       btn.setAttribute('aria-label', 'Copy code');
       
       btn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(pre.textContent);
-          btn.textContent = 'Copied!';
-          btn.classList.add('copied');
-          setTimeout(() => {
-            btn.textContent = 'Copy';
-            btn.classList.remove('copied');
-          }, 2000);
-        } catch (e) {
-          btn.textContent = 'Error';
-          setTimeout(() => btn.textContent = 'Copy', 2000);
-        }
+        const success = await copyToClipboard(pre.textContent);
+        btn.textContent = success ? 'Copied!' : 'Error';
+        btn.classList.toggle('copied', success);
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
       });
       
       wrapper.appendChild(btn);
     });
-
-    // Initialize any embedded SVG diagrams
-    if (typeof initEnneagram === 'function') {
-      initEnneagram();
-    }
-    if (typeof initOcean === 'function') {
-      initOcean();
-    }
   }
 
   // ============================================================================
@@ -431,9 +765,7 @@
     function applyTheme(theme) {
       document.body.classList.remove('theme-light', 'theme-oled');
       
-      if (iconDark) iconDark.hidden = true;
-      if (iconLight) iconLight.hidden = true;
-      if (iconOled) iconOled.hidden = true;
+      [iconDark, iconLight, iconOled].forEach(icon => { if (icon) icon.hidden = true; });
       
       if (theme === 'light') {
         document.body.classList.add('theme-light');
@@ -457,40 +789,166 @@
 
     toggle.addEventListener('click', () => {
       const current = toggle.getAttribute('data-theme') || 'dark';
-      const nextIndex = (themes.indexOf(current) + 1) % themes.length;
-      const nextTheme = themes[nextIndex];
+      const nextTheme = themes[(themes.indexOf(current) + 1) % themes.length];
       applyTheme(nextTheme);
       localStorage.setItem('theme', nextTheme);
     });
   }
 
   // ============================================================================
-  // PANEL SYSTEM
+  // WIDTH TOGGLE
+  // ============================================================================
+
+  function initWidthToggle() {
+    const btn = $('#fab-width');
+    if (!btn) return;
+
+    // Load saved preference
+    const saved = localStorage.getItem('content-width');
+    if (saved === 'wide') {
+      document.body.classList.add('content-wide');
+      btn.setAttribute('aria-pressed', 'true');
+    }
+
+    btn.addEventListener('click', () => {
+      const isWide = document.body.classList.toggle('content-wide');
+      btn.setAttribute('aria-pressed', isWide ? 'true' : 'false');
+      localStorage.setItem('content-width', isWide ? 'wide' : 'normal');
+    });
+  }
+
+  // ============================================================================
+  // SCROLL TO TOP
+  // ============================================================================
+
+  function initScrollTop() {
+    const btn = $('#fab-top');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ============================================================================
+  // GLOSSARY
+  // ============================================================================
+
+  function initGlossary() {
+    const glossaryTab = $('#glossary-tab');
+    const fabGlossary = $('#fab-glossary');
+    const glossaryPanel = $('#glossary-panel');
+
+    // Initialize glossary panel
+    if (glossaryPanel && !panelInstances['glossary-panel']) {
+      panelInstances['glossary-panel'] = new Panel(glossaryPanel, {
+        storageKey: 'glossary_panel_state'
+      });
+    }
+
+    // Glossary tab click
+    glossaryTab?.addEventListener('click', () => {
+      const panel = panelInstances['glossary-panel'];
+      if (panel) {
+        panel.toggle();
+        panel.focus();
+      }
+    });
+
+    glossaryTab?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        glossaryTab.click();
+      }
+    });
+
+    // FAB glossary click
+    fabGlossary?.addEventListener('click', () => {
+      const panel = panelInstances['glossary-panel'];
+      if (panel) {
+        panel.toggle();
+        panel.focus();
+      }
+    });
+
+    // Load glossary content
+    loadGlossaryContent();
+  }
+
+  async function loadGlossaryContent() {
+    const glossaryContent = $('#glossary-content');
+    if (!glossaryContent) return;
+
+    // Try to find glossary section in loaded content
+    const glossarySection = document.getElementById('glossary') || document.querySelector('[id*="glossary"]');
+    
+    if (glossarySection) {
+      // Extract glossary terms from content
+      const terms = glossarySection.querySelectorAll('dt, .glossary-term');
+      if (terms.length > 0) {
+        const html = Array.from(terms).map(term => {
+          const id = term.id || '';
+          const text = term.textContent;
+          return `<div class="glossary-item" ${id ? `id="glossary-ref-${id}"` : ''}>${text}</div>`;
+        }).join('');
+        glossaryContent.innerHTML = html;
+        return;
+      }
+    }
+
+    // Default: show placeholder
+    glossaryContent.innerHTML = '<p style="color:var(--text-muted);">Термины появятся после загрузки контента.</p>';
+  }
+
+  // ============================================================================
+  // PANEL INITIALIZATION
   // ============================================================================
 
   function initPanels() {
+    // TOC Panel
     const tocPanel = $('#toc-panel');
-    const tocBtn = $('#fab-toc');
-    const tocCloseBtn = tocPanel?.querySelector('[data-action="close"]');
-
-    if (tocBtn && tocPanel) {
-      tocBtn.addEventListener('click', () => {
-        tocPanel.classList.toggle('open');
+    const fabToc = $('#fab-toc');
+    
+    if (tocPanel && !panelInstances['toc-panel']) {
+      panelInstances['toc-panel'] = new Panel(tocPanel, {
+        storageKey: 'toc_panel_state'
       });
     }
 
-    if (tocCloseBtn && tocPanel) {
-      tocCloseBtn.addEventListener('click', () => {
-        tocPanel.classList.remove('open');
-      });
-    }
-
-    // Close on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && tocPanel?.classList.contains('open')) {
-        tocPanel.classList.remove('open');
+    fabToc?.addEventListener('click', () => {
+      const panel = panelInstances['toc-panel'];
+      if (panel) {
+        panel.toggle();
+        panel.focus();
       }
     });
+
+    // Notepad Panel
+    const notepadPanel = $('#notepad-panel');
+    const fabNotepad = $('#fab-scratchpad');
+    
+    if (notepadPanel && !panelInstances['notepad-panel']) {
+      panelInstances['notepad-panel'] = new NotepadPanel(notepadPanel, {
+        storageKey: 'notepad_panel_state'
+      });
+    }
+
+    fabNotepad?.addEventListener('click', () => {
+      const panel = panelInstances['notepad-panel'];
+      if (panel) {
+        panel.toggle();
+        panel.focus();
+      }
+    });
+
+    // Close TOC on link click
+    $$('#toc-panel a').forEach(link => {
+      link.addEventListener('click', () => {
+        panelInstances['toc-panel']?.close();
+      });
+    });
+
+    console.log('[Panels] FAB buttons initialized');
   }
 
   // ============================================================================
@@ -498,8 +956,8 @@
   // ============================================================================
 
   function bindEvents() {
-    // Layer modal buttons (support both old and new classes)
-    $$('.audience-card, .layer-card-btn').forEach(btn => {
+    // Layer modal buttons
+    $$('.audience-card').forEach(btn => {
       btn.addEventListener('click', () => {
         const layer = btn.dataset.layer;
         if (layer) selectLayer(layer);
@@ -509,8 +967,7 @@
     // Uncertain path button
     $$('.uncertain-path').forEach(btn => {
       btn.addEventListener('click', () => {
-        const layer = btn.dataset.defaultLayer || CONFIG.DEFAULT_LAYER;
-        selectLayer(layer);
+        selectLayer(btn.dataset.defaultLayer || CONFIG.DEFAULT_LAYER);
       });
     });
 
@@ -524,18 +981,20 @@
 
     // Browser history
     window.addEventListener('popstate', (e) => {
-      if (e.state && e.state.layer) {
+      if (e.state?.layer) {
         loadLayerContent(e.state.layer);
         currentLayer = e.state.layer;
         updateSwitcherButtons(e.state.layer);
       }
     });
 
-    // Close TOC on link click
-    $$('#toc-panel a').forEach(link => {
-      link.addEventListener('click', () => {
-        $('#toc-panel')?.classList.remove('open');
-      });
+    // Keyboard: close panels on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        Object.values(panelInstances).forEach(panel => {
+          if (panel.isOpen()) panel.close();
+        });
+      }
     });
   }
 
@@ -546,16 +1005,9 @@
   async function init() {
     console.log('[LazyLoader] Initializing...');
 
-    // Check for URL parameter first
-    let layer = getLayerFromURL();
-    
-    // Then check localStorage
-    if (!layer) {
-      layer = getSavedLayer();
-    }
+    let layer = getLayerFromURL() || getSavedLayer();
 
     if (layer) {
-      // Auto-load saved/URL layer
       hideModal();
       showSwitcher();
       showFABs();
@@ -563,13 +1015,14 @@
       await loadLayerContent(layer);
       updateSwitcherButtons(layer);
     } else {
-      // Show modal for selection
       hideLoading();
     }
 
-    // Initialize other features
     initTheme();
+    initWidthToggle();
+    initScrollTop();
     initPanels();
+    initGlossary();
     bindEvents();
 
     console.log('[LazyLoader] Ready');
@@ -578,7 +1031,8 @@
   // Expose API
   window.LazyLoader = {
     switchLayer,
-    get currentLayer() { return currentLayer; }
+    get currentLayer() { return currentLayer; },
+    panels: panelInstances
   };
 
   // Auto-initialize
