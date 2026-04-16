@@ -44,11 +44,11 @@
 
     <h3>Оценка времени</h3>
     <ul>
-      <li><strong>Track A (Начинающий):</strong> ~15 мин — минимальный шаблон, базовые концепции</li>
-      <li><strong>Track B (Практик):</strong> ~30 мин — полный пайплайн, все core-элементы</li>
-      <li><strong>Track C (Продвинутый):</strong> ~60 мин — расширенная теория, все опциональные элементы</li>
+      <li><strong>Layer 1 (Minimum):</strong> ~15 мин — минимальный шаблон, базовые концепции</li>
+      <li><strong>Layer 2 (Optimal):</strong> ~30 мин — полный пайплайн, все core-элементы</li>
+      <li><strong>Layer 3 (Pro):</strong> ~60 мин — расширенная теория, все опциональные элементы</li>
     </ul>
-    <p>Полный гайд: ~2–3 часа (все треки последовательно).</p>
+    <p>Полный гайд: ~2–3 часа (все слои последовательно).</p>
   </div>
 
   <!-- ID: D1 | Interactive Dependency Map -->
@@ -227,9 +227,9 @@
           <tr><th>Контекст</th><th>Бюджет карточки</th><th>AN</th><th>LB</th><th>CoT</th><th>Рекомендуемый режим</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Track A</td></tr>
-          <tr><td><strong>8K</strong></td><td>600-800</td><td>✅</td><td>✅</td><td>Limited</td><td>Track B</td></tr>
-          <tr><td><strong>16K+</strong></td><td>800-2500</td><td>✅</td><td>✅</td><td>❌ (API)</td><td>Track C</td></tr>
+          <tr><td><strong>4K</strong></td><td>300-400</td><td>❌</td><td>❌</td><td>❌</td><td>Layer 1</td></tr>
+          <tr><td><strong>8K</strong></td><td>600-800</td><td>✅</td><td>✅</td><td>Limited</td><td>Layer 2</td></tr>
+          <tr><td><strong>16K+</strong></td><td>800-2500</td><td>✅</td><td>✅</td><td>❌ (API)</td><td>Layer 3</td></tr>
         </tbody>
       </table>
     </div>
@@ -237,73 +237,73 @@
   </div>
 </header>
 
-<!-- ITEM-001: TRACK NAVIGATION SELECTION -->
+<!-- ITEM-001: LAYER NAVIGATION SELECTION -->
 <main class="entry-selection" id="main-content">
   <section class="audience-selection" aria-labelledby="track-selection-title">
     <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
     <p class="audience-intro">Выберите уровень погружения в материал:</p>
-    <div class="audience-cards" role="group" aria-label="Выбор трека">
+    <div class="audience-cards" role="group" aria-label="Выбор слоя">
       <button class="audience-card" data-layer="1" aria-pressed="false">
         <div class="track-icon-wrap">
           <svg class="track-icon track-icon--basic" viewBox="0 0 24 24" fill="none"
-               stroke="var(--track-a-clr)" stroke-width="1.5"
-               role="img" aria-label="Track A: Фундамент"
+               stroke="var(--layer-1-clr)" stroke-width="1.5"
+               role="img" aria-label="Layer 1: Фундамент"
                width="24" height="24">
             <rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"/>
-            <circle cx="12" cy="12" r="1.5" fill="var(--track-a-clr)"/>
+            <circle cx="12" cy="12" r="1.5" fill="var(--layer-1-clr)"/>
           </svg>
           <div class="track-icon-scan" aria-hidden="true"></div>
         </div>
-        <span class="track-name">Track A</span>
-        <span class="track-label">Начинающий</span>
+        <span class="track-name">Layer 1</span>
+        <span class="track-label">Minimum</span>
         <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
       </button>
       <button class="audience-card recommended" data-layer="2" aria-pressed="true">
         <span class="track-badge">Рекомендуется</span>
         <div class="track-icon-wrap">
           <svg class="track-icon track-icon--live" viewBox="0 0 24 24" fill="none"
-               stroke="var(--track-b-clr)" stroke-width="2"
-               role="img" aria-label="Track B: Пульс жизни"
+               stroke="var(--layer-2-clr)" stroke-width="2"
+               role="img" aria-label="Layer 2: Пульс жизни"
                width="24" height="24">
             <path class="pulse-line" d="M2 12h3l2-5 3 10 3-5h9"
                   stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <div class="track-icon-scan" aria-hidden="true"></div>
         </div>
-        <span class="track-name">Track B</span>
-        <span class="track-label">Практик</span>
+        <span class="track-name">Layer 2</span>
+        <span class="track-label">Optimal</span>
         <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
       </button>
       <button class="audience-card" data-layer="3" aria-pressed="false">
         <div class="track-icon-wrap">
           <svg class="track-icon track-icon--neural" viewBox="0 0 24 24" fill="none"
-               stroke="var(--track-c-clr)" stroke-width="1.5"
-               role="img" aria-label="Track C: Ядро сознания"
+               stroke="var(--layer-3-clr)" stroke-width="1.5"
+               role="img" aria-label="Layer 3: Ядро сознания"
                width="24" height="24">
             <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"/>
-            <circle class="core-node" cx="12" cy="12" r="3" fill="var(--track-c-clr)"/>
+            <circle class="core-node" cx="12" cy="12" r="3" fill="var(--layer-3-clr)"/>
             <path d="M12 12l5-5M12 12l-5 5M12 12v7M12 12L7 7" stroke-width="1"/>
           </svg>
           <div class="track-icon-scan" aria-hidden="true"></div>
         </div>
-        <span class="track-name">Track C</span>
-        <span class="track-label">Продвинутый</span>
+        <span class="track-name">Layer 3</span>
+        <span class="track-label">Pro</span>
         <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
       </button>
     </div>
-    <button class="uncertain-path" data-default-track="B" type="button">
+    <button class="uncertain-path" data-default-layer="2" type="button">
       <span class="uncertain-icon">❓</span>
-      <span>Не уверен? Начни с Track B</span>
+      <span>Не уверен? Начни с Layer 2</span>
     </button>
   </section>
 </main>
 
-<!-- PHASE 1.2: PROTOTYPE BANNER FOR TRACK A -->
+<!-- PHASE 1.2: PROTOTYPE BANNER FOR Layer 1 -->
 <div id="track-a-banner" data-layer="1" class="prototype-banner">
   <span class="banner-icon">📋</span>
   <div class="banner-content">
-    <strong>TRACK A: ПРОТОТИПНЫЙ РЕЖИМ</strong>
-    <p>Создаёт функциональную минимальную карточку. Для полной психологической глубины, продвинутых якорей и оптимизаций → <button class="track-switch-btn" data-target="B" type="button">Переключиться на Track B</button></p>
+    <strong>LAYER 1: ПРОТОТИПНЫЙ РЕЖИМ</strong>
+    <p>Создаёт функциональную минимальную карточку. Для полной психологической глубины, продвинутых якорей и оптимизаций → <button class="layer-switch-btn" data-target-layer="2" type="button">Переключиться на Layer 2</button></p>
   </div>
 </div>
 
@@ -312,15 +312,15 @@
   <!-- Populated by JavaScript -->
 </div>
 
-<!-- PHASE 3.2: TRACK COMPARISON MATRIX -->
+<!-- PHASE 3.2: LAYER COMPARISON MATRIX -->
 <section id="track-comparison"  class="track-comparison-section" style="margin:1.5rem 0;">
-  <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
+  <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение слоёв</h3>
   <div class="table-wrap">
     <table class="comparison-table">
       <thead>
         <tr>
           <th>Цель</th>
-          <th>Рекомендуемый трек</th>
+          <th>Рекомендуемый слой</th>
           <th>Время</th>
           <th>Результат</th>
         </tr>
@@ -328,19 +328,19 @@
       <tbody>
         <tr>
           <td>Быстрый прототип / Тест концепции</td>
-          <td><span class="badge-track-a">Track A</span></td>
+          <td><span class="layer-badge layer-1">Layer 1</span></td>
           <td>~15 мин</td>
           <td>Функциональный прототип (450-600 токенов)</td>
         </tr>
         <tr>
           <td>Полный персонаж с психологией</td>
-          <td><span class="badge-track-b">Track B</span></td>
+          <td><span class="layer-badge layer-2">Layer 2</span></td>
           <td>~30 мин</td>
           <td>Полная поведенческая карточка (600-1200 токенов)</td>
         </tr>
         <tr>
           <td>Профессиональный RP движок / Сложные сценарии</td>
-          <td><span class="badge-track-c">Track C</span></td>
+          <td><span class="layer-badge layer-3">Layer 3</span></td>
           <td>~60 мин</td>
           <td>Оптимизированный движок (800-2500+ токенов)</td>
         </tr>
@@ -349,9 +349,9 @@
   </div>
 </section>
 
-<!-- PHASE 3.1: 4K-FALLBACK MENTION ON TRACK A -->
+<!-- PHASE 3.1: 4K-FALLBACK MENTION ON Layer 1 -->
 <p  style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
-  <strong>Лимит контекста?</strong> Если достигаете потолка токенов, доступен протокол оптимизации: <span class="badge-track-b">Track B+</span> → 4K-Fallback Protocol.
+  <strong>Лимит контекста?</strong> Если достигаете потолка токенов, доступен протокол оптимизации: <span class="layer-badge layer-2">Layer 2+</span> → 4K-Fallback Protocol.
 </p>
 
 <!-- ITEM-003: NOSCRIPT FALLBACK -->
@@ -361,7 +361,7 @@
       <span class="noscript-icon">⚠️</span>
       <div class="noscript-text">
         <strong>JavaScript отключён</strong>
-        <p>Просматривается Track B (Практик). Полная навигация по трекам и интерактивные элементы недоступны. Track C контент скрыт.</p>
+        <p>Просматривается Layer 2 (Optimal). Полная навигация по слоям и интерактивные элементы недоступны. Layer 3 контент скрыт.</p>
       </div>
     </div>
   </div>

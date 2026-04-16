@@ -1,6 +1,7 @@
 <!-- ==================== CORE PRINCIPLES ==================== -->
 <!-- ID: A1 | This file contains core principles with references to canonical rules -->
-<section id="core-principles">
+<!-- LAYER: 0 (Reference - basic definitions always visible) -->
+<section id="core-principles" data-layer="0">
   <div class="info-banner">
     <span class="mode-badge">🧠 Foundation</span>
   </div>
@@ -13,10 +14,10 @@
 
   <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
   <section id="section-0-2" >
-    <h2>§0.2 Критические анти-паттерны (Все треки)</h2>
+    <h2>§0.2 Критические анти-паттерны (Все слои)</h2>
     <p>Краткий список критических ошибок. Полный анализ с примерами: <a href="#antipatterns-core">Критические анти-паттерны</a>.</p>
     <div class="warning-block">
-      <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ ТРЕКЕ:</strong></p>
+      <p><strong>ИЗБЕГАЙТЕ ЭТИХ ОШИБОК НА ЛЮБОМ СЛОЕ:</strong></p>
       <ul>
         <li><strong>Раздувание токенов:</strong> Описание превышает 800 токенов → вызывает переполнение контекста. Держите под 600.</li>
         <li><strong>Непроявление Price:</strong> Цена указана, но никогда не триггерится в диалоге → ломает логику психологических якорей. <a href="#rule-price">→ Правило цены</a></li>
@@ -27,9 +28,9 @@
       </ul>
     </div>
 
-    <!-- TASK-003-A: Track A Users Warning -->
+    <!-- TASK-003-A: Layer 1 Users Warning -->
     <div class="track-prerequisite-warning" data-layer="1">
-      <strong>⚠️ Track A Users:</strong> Полный каталог анти-паттернов с примерами требует Track C.
+      <strong>⚠️ Layer 1 Users:</strong> Полный каталог анти-паттернов с примерами требует Layer 3.
       Для базовых исправлений используйте <a href="#diagnostics">Диагностику (Раздел 7)</a>.
     </div>
   </section>
@@ -133,9 +134,9 @@
     <p><strong>Размещение:</strong> Description, блок <code>&lt;motivation&gt;</code></p>
   </section>
 
-  <!-- PHASE 1.3: GHOST Advanced - Track B+ ONLY -->
+  <!-- PHASE 1.3: GHOST Advanced - Layer 2+ ONLY -->
   <details class="interactive" id="acc-principle-ghost" data-layer="2" aria-labelledby="acc-principle-ghost-summary">
-  <summary id="acc-principle-ghost-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
+  <summary id="acc-principle-ghost-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="layer-badge layer-2">Layer 2+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="callout tip">
     <strong>📋 Каноническая таблица размещения GHOST:</strong>

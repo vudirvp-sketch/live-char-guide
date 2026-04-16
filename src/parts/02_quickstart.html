@@ -34,11 +34,11 @@
         <p style="font-size:0.85em;color:var(--text-muted);margin-top:0.5em;">Полные принципы: <a href="#core-principles">Раздел 0</a></p>
       </details>
 
-      <h3>🎯 Выберите ваш Track</h3>
+      <h3>🎯 Выберите ваш Layer</h3>
       
       <!-- Track Selection Decision Flowchart -->
       <div class="svg-infographic" style="margin-bottom:1.5em;">
-        <div class="svg-infographic-title">IMG_09: ДЕРЕВО ВЫБОРА TRACK</div>
+        <div class="svg-infographic-title">IMG_09: ДЕРЕВО ВЫБОРА LAYER</div>
         <svg id="track-selector-flow" viewBox="0 0 550 280" class="track-flowchart" role="img" aria-label="Схема выбора трека: решение на основе размера контекста и потребности в продвинутых функциях">
           <!-- Arrow marker -->
           <defs>
@@ -62,11 +62,11 @@
           <path d="M 325 60 L 420 60 L 420 100" class="track-arrow" fill="none" stroke="var(--text-muted)" marker-end="url(#track-arrow-marker)"/>
           <text x="370" y="50" class="track-branch-label">Нет</text>
           
-          <!-- Track A Result -->
+          <!-- Layer 1 Result -->
           <g transform="translate(25, 110)">
             <rect x="0" y="0" width="150" height="60" rx="6" class="track-result track-a"/>
-            <text x="75" y="25" class="track-result-label" text-anchor="middle">Track A</text>
-            <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Начинающий</text>
+            <text x="75" y="25" class="track-result-label" text-anchor="middle">Layer 1</text>
+            <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Minimum</text>
             <text x="75" y="55" class="pipeline-stage-content" text-anchor="middle" style="font-size:8px;">~15 мин • Прототип</text>
           </g>
           
@@ -88,19 +88,19 @@
           <!-- Adjusted arrows for proper placement -->
           <path d="M 420 210 L 420 230" class="track-arrow" fill="none" stroke="var(--text-muted)" marker-end="url(#track-arrow-marker)"/>
           
-          <!-- Track B Result -->
+          <!-- Layer 2 Result -->
           <g transform="translate(175, 210)">
             <rect x="0" y="0" width="150" height="60" rx="6" class="track-result track-b"/>
-            <text x="75" y="25" class="track-result-label" text-anchor="middle">Track B</text>
-            <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Практик</text>
+            <text x="75" y="25" class="track-result-label" text-anchor="middle">Layer 2</text>
+            <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Optimal</text>
             <text x="75" y="55" class="pipeline-stage-content" text-anchor="middle" style="font-size:8px;">~30 мин • Полный пайплайн</text>
           </g>
           
-          <!-- Track C Result -->
+          <!-- Layer 3 Result -->
           <g transform="translate(345, 210)">
             <rect x="0" y="0" width="150" height="60" rx="6" class="track-result track-c"/>
-            <text x="75" y="25" class="track-result-label" text-anchor="middle">Track C</text>
-            <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Продвинутый</text>
+            <text x="75" y="25" class="track-result-label" text-anchor="middle">Layer 3</text>
+            <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Pro</text>
             <text x="75" y="55" class="pipeline-stage-content" text-anchor="middle" style="font-size:8px;">~60 мин • GHOST по слоям</text>
           </g>
           
@@ -115,9 +115,9 @@
           <div style="padding:1em;background:var(--bg-surface);border-radius:4px;">
             <p><strong>Выбор Track:</strong></p>
             <ul style="margin-top:0.5em;padding-left:1.5em;">
-              <li>Контекст ≤4K? → <strong>Track A</strong> (Начинающий)</li>
-              <li>Контекст ≥8K + нужен GHOST по слоям? → <strong>Track C</strong> (Продвинутый)</li>
-              <li>Контекст ≥8K + базовый пайплайн? → <strong>Track B</strong> (Практик)</li>
+              <li>Контекст ≤4K? → <strong>Layer 1</strong> (Minimum)</li>
+              <li>Контекст ≥8K + нужен GHOST по слоям? → <strong>Layer 3</strong> (Pro)</li>
+              <li>Контекст ≥8K + базовый пайплайн? → <strong>Layer 2</strong> (Optimal)</li>
             </ul>
           </div>
         </noscript>
@@ -125,27 +125,27 @@
       
       <div class="track-selector-intro">
         <div class="track-card track-a">
-          <strong>Track A — Начинающий</strong>
+          <strong>Layer 1 — Minimum</strong>
           <p>~15 мин • Прототип без GHOST, без Price</p>
           <p>Цель: минимальная рабочая карточка</p>
         </div>
         <div class="track-card track-b">
-          <strong>Track B — Практик</strong>
+          <strong>Layer 2 — Optimal</strong>
           <p>~30 мин • Полный пайплайн с Price</p>
           <p>Цель: карточка для деплоя</p>
         </div>
         <div class="track-card track-c">
-          <strong>Track C — Продвинутый</strong>
+          <strong>Layer 3 — Pro</strong>
           <p>~60 мин • GHOST по слоям, CoT, LB/AN</p>
           <p>Цель: сложные персонажи и сеттинги</p>
         </div>
       </div>
 
-      <h3>📖 Структура по Track</h3>
+      <h3>📖 Структура по Layer</h3>
       <div class="table-wrap">
         <table class="track-structure">
           <thead>
-            <tr><th>Stage</th><th>Раздел</th><th>Track A</th><th>Track B</th><th>Track C</th></tr>
+            <tr><th>Stage</th><th>Раздел</th><th>Layer 1</th><th>Layer 2</th><th>Layer 3</th></tr>
           </thead>
           <tbody>
             <tr><td>0</td><td>Core Principles + Глоссарий</td><td>✅</td><td>✅</td><td>✅</td></tr>
@@ -161,24 +161,24 @@
         </table>
       </div>
 
-      <h3>📋 Примеры карточек по Track</h3>
+      <h3>📋 Примеры карточек по Layer</h3>
       <div class="reference-cards">
         <div class="ref-card">
           <strong><a href="#appendix3">Приложение 3: Макс</a></strong>
-          <span class="badge-track-a">Track A+</span>
+          <span class="layer-badge layer-1">Layer 1+</span>
           <p>Реалистичный сеттинг • Прототип • ~800 токенов</p>
           <p>Подходит для: первый персонаж, копирование структуры</p>
         </div>
         <div class="ref-card" data-layer="2">
           <strong><a href="#appendix6">Приложение 6: Выщербленный</a></strong>
-          <span class="badge-track-b">Track B+</span>
-          <span class="badge-track-c">Track C</span>
+          <span class="layer-badge layer-2">Layer 2+</span>
+          <span class="layer-badge layer-3">Layer 3</span>
           <p>Боди-хоррор • Полный пайплайн • GHOST по слоям • ~2000 токенов</p>
           <p>Подходит для: сложные сеттинги, изучение распределения GHOST</p>
         </div>
         <div class="ref-card" data-layer="2">
           <strong><a href="#appendix3b">Приложение 3B: Jesse Pinkman</a></strong>
-          <span class="badge-track-b">Track B+</span>
+          <span class="layer-badge layer-2">Layer 2+</span>
           <p>Каноничный персонаж • Полный пайплайн • Voice Isolation • ~1500 токенов</p>
           <p>Подходит для: изучение физикальности, Price, Voice Isolation, GHOST-триггеров</p>
         </div>
@@ -196,7 +196,7 @@
 
       <div class="callout">
         <p><span class="tag core">Core</span> — обязательный элемент.<br>
-        <span class="tag opt">Optional</span> — подключается по Track и контексту.</p>
+        <span class="tag opt">Optional</span> — подключается по Layer и контексту.</p>
       </div>
     </section>
 
@@ -221,7 +221,7 @@
 
       <h3>⚡ Минимальный шаблон за 5 минут</h3>
       <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price, без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
-      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> <span data-layer="2">см. <a href="#appendix2">Приложение 2</a></span><span data-layer="1">~450 токенов для прототипа. Полные таблицы — в Приложении 2 (Track B+).</span></p>
+      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> <span data-layer="2">см. <a href="#appendix2">Приложение 2</a></span><span data-layer="1">~450 токенов для прототипа. Полные таблицы — в Приложении 2 (Layer 2+).</span></p>
 
       <div class="infographic">
         <div class="infographic-title">IMG_04: СРАВНЕНИЕ: 4K-FALLBACK VS ПОЛНЫЙ ПАЙПЛАЙН</div>
@@ -301,14 +301,14 @@
 
       <!-- TASK-004-A: Advanced GHOST Content Notice -->
       <div class="callout info" style="margin:1em 0">
-        <strong>📐 Продвинутый контент:</strong> Следующая секция содержит расширенные материалы по GHOST (интеграция с Lorebook и Author's Notes) для Track B+.
-        Базовая версия GHOST доступна всем трекам выше. Для полного погружения: <a href="#an-ghost">Раздел 5.2 (GHOST в Lorebook)</a>.
+        <strong>📐 Продвинутый контент:</strong> Следующая секция содержит расширенные материалы по GHOST (интеграция с Lorebook и Author's Notes) для Layer 2+.
+        Базовая версия GHOST доступна всем слоям выше. Для полного погружения: <a href="#an-ghost">Раздел 5.2 (GHOST в Lorebook)</a>.
       </div>
 
-      <!-- Advanced GHOST content - Track B+ only -->
+      <!-- Advanced GHOST content - Layer 2+ only -->
       <div data-layer="2">
         <div class="callout info" style="margin-top:1em">
-          <strong>🔧 Продвинутое размещение GHOST (Track B/C):</strong>
+          <strong>🔧 Продвинутое размещение GHOST (Layer 2/3):</strong>
           <p style="margin-top:0.5em">При контексте ≥8K можно использовать Lorebook для триггеров GHOST и Author's Notes для динамического состояния.</p>
           <ul style="margin-top:0.5em;font-size:0.9em">
             <li><strong>Description</strong> — определение GHOST (что случилось)</li>
@@ -343,7 +343,7 @@
         </ol>
       </div>
 
-      <!-- Task 1.5: 12B/4K Context Warning for Track A -->
+      <!-- Task 1.5: 12B/4K Context Warning for Layer 1 -->
       <section class="track-a-warnings" >
         <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
           <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>

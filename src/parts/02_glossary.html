@@ -1,6 +1,7 @@
 <!-- ==================== GLOSSARY ==================== -->
 <!-- ID: C1 | Canonical terminology definitions -->
-<section id="glossary">
+<!-- LAYER: 0 (Reference - always visible) -->
+<section id="glossary" data-layer="0">
   <details class="interactive" id="acc-glossary" aria-labelledby="acc-glossary-summary">
   <summary id="acc-glossary-summary" role="button" aria-expanded="false"><span><h2 style="margin:0;font-size:inherit;display:inline">📖 Раздел 0.1: Глоссарий</h2> <small style="color:var(--text-muted)">— термины и определения (раскройте для просмотра)</small></span></summary>
     <div style="padding:0 1.2em 1.2em">
@@ -17,43 +18,43 @@
         <tr><th>Канонический термин</th><th>Аббревиатура</th><th>Определение</th><th>Запрещённые варианты</th></tr>
       </thead>
       <tbody>
-        <tr>
+        <tr id="layer-0-term-authors-notes">
           <td><strong>Author's Notes</strong></td>
           <td>AN</td>
           <td>Динамический слой контекста для длинных сессий. Обновляется каждые 3–5 сообщений.</td>
           <td>«Авторские заметки», «Авторка», «Авторка Заметки»</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-system-prompt">
           <td><strong>System Prompt</strong></td>
           <td>SP</td>
           <td>Системные инструкции для модели: ограничения, запреты, формат.</td>
           <td>«Системный промпт», «Системка», «Системник»</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-lorebook">
           <td><strong>Lorebook</strong></td>
           <td>LB</td>
           <td>База знаний с триггерами для активации контента по ключевым словам.</td>
           <td>«LB», «World Info», «WI»</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-character-card">
           <td><strong>Character Card</strong></td>
           <td>—</td>
           <td>Полный пакет поведенческого движка персонажа.</td>
           <td>«Карточка», «Персонаж»</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-description">
           <td><strong>Description</strong></td>
           <td>—</td>
           <td>Описание персонажа (Character Description). Содержит Spine, якоря, фактологию.</td>
           <td>«Описание», «Character Description»</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-examples">
           <td><strong>Examples</strong></td>
           <td>—</td>
           <td>Примерные сообщения. Задают голос персонажа через демонстрацию.</td>
           <td>«Примерные сообщения», «Примеры», «Dialogue Examples»</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-greeting">
           <td><strong>Greeting</strong></td>
           <td>—</td>
           <td>Первое сообщение персонажа в чате. Задаёт начальное состояние и голос.</td>
@@ -80,27 +81,27 @@
           <td>Large Language Model — AI-система, генерирующая текст.</td>
           <td>—</td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-spine">
           <td><strong>Spine</strong></td>
           <td>Мотивационное ядро персонажа из 5 элементов: WANT, NEED, FLAW, LIE, GHOST.</td>
           <td><a href="#spine">Раздел 4.1</a></td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-ocean">
           <td><strong>OCEAN</strong></td>
           <td>Five Factor Model — Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism. Модель личности.</td>
           <td><a href="#ocean">Раздел 4.3</a></td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-enneagram">
           <td><strong>Enneagram</strong></td>
           <td>Типология личности из 9 типов. Определяет страхи, желания, поведение под стрессом.</td>
           <td><a href="#enneagram">Раздел 4.2</a></td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-want">
           <td><strong>WANT</strong></td>
           <td>То, что персонаж <em>осознанно</em> хочет достичь. Внешняя, поверхностная цель.</td>
           <td><a href="#spine">Раздел 4.1</a></td>
         </tr>
-        <tr>
+        <tr id="layer-0-term-need">
           <td><strong>NEED</strong></td>
           <td>То, что персонаж <em>действительно</em> нуждается. Глубинная, часто неосознаваемая потребность.</td>
           <td><a href="#spine">Раздел 4.1</a></td>
@@ -130,38 +131,38 @@
   </div>
 
   <!-- PHASE 2.3: EXPANDED DEFINITIONS FOR "MENTION ONLY" ITEMS -->
-  <h3>📍 Расширенные определения по трекам</h3>
+  <h3>📍 Расширенные определения по слоям</h3>
   
-  <!-- OCEAN: Track A minimal definition -->
+  <!-- OCEAN: Layer 1 minimal definition -->
   <div  class="callout" style="margin:1em 0;border-left-color:#7c4dff;">
-    <strong style="color:#7c4dff;">OCEAN (Big Five) — Track A</strong>
+    <strong style="color:#7c4dff;">OCEAN (Big Five) — Layer 1</strong>
     <p style="font-size:0.9em;">Модель личности из пяти измерений: <strong>O</strong>penness (открытость), <strong>C</strong>onscientiousness (добросовестность), <strong>E</strong>xtraversion (экстраверсия), <strong>A</strong>greeableness (доброжелательность), <strong>N</strong>euroticism (нейротизм).</p>
-    <p style="font-size:0.85em;color:var(--text-muted);"><strong>Track A:</strong> Определите 1-2 экстремальных полюса (значения &lt;30 или &gt;70) для поведенческой последовательности.</p>
-    <p class="track-badge" style="font-size:0.85em;">Полная конфигурация с валидатором: <span class="badge-track-b">Track B+</span> → <a href="#ocean">Раздел 4.3</a></p>
+    <p style="font-size:0.85em;color:var(--text-muted);"><strong>Layer 1:</strong> Определите 1-2 экстремальных полюса (значения &lt;30 или &gt;70) для поведенческой последовательности.</p>
+    <p class="layer-badge" style="font-size:0.85em;">Полная конфигурация с валидатором: <span class="layer-badge layer-2">Layer 2+</span> → <a href="#ocean">Раздел 4.3</a></p>
   </div>
   
-  <!-- Enneagram: Track B "basic" scope -->
+  <!-- Enneagram: Layer 2 "basic" scope -->
   <div data-layer="2" class="callout" style="margin:1em 0;border-left-color:#8be9fd;">
-    <strong style="color:#8be9fd;">Enneagram (базовая конфигурация) — Track B <span class="badge-track-b">Track B+</span></strong>
-    <p style="font-size:0.9em;"><strong>Track B включает:</strong></p>
+    <strong style="color:#8be9fd;">Enneagram (базовая конфигурация) — Layer 2 <span class="layer-badge layer-2">Layer 2+</span></strong>
+    <p style="font-size:0.9em;"><strong>Layer 2 включает:</strong></p>
     <ul style="font-size:0.85em;margin:0.5rem 0;padding-left:1.5rem;">
       <li>Идентификация доминантного типа (1-9)</li>
       <li>Влияние крыла (adjacent types)</li>
       <li>Базовая мотивация + базовый страх</li>
     </ul>
-    <p style="font-size:0.85em;color:var(--text-muted);"><strong>Track C добавляет:</strong> Пути интеграции/дезинтеграции, инстинктивные варианты, полная матрица взаимодействия 9 типов.</p>
+    <p style="font-size:0.85em;color:var(--text-muted);"><strong>Layer 3 добавляет:</strong> Пути интеграции/дезинтеграции, инстинктивные варианты, полная матрица взаимодействия 9 типов.</p>
     <p class="track-badge" style="font-size:0.85em;">Полная документация: <a href="#enneagram">Раздел 4.2</a></p>
   </div>
   
-  <!-- Diagnostic Scenarios: Track B example -->
+  <!-- Diagnostic Scenarios: Layer 2 example -->
   <div data-layer="2" class="callout" style="margin:1em 0;border-left-color:#a78bfa;">
-    <strong style="color:#a78bfa;">Диагностический сценарий (пример) — Track B+ <span class="badge-track-b">Track B+</span></strong>
+    <strong style="color:#a78bfa;">Диагностический сценарий (пример) — Layer 2+ <span class="layer-badge layer-2">Layer 2+</span></strong>
     <div class="example-block" style="background:var(--bg);padding:0.75rem;border-radius:4px;margin:0.5rem 0;font-size:0.85em;">
       <p><strong>Сценарий:</strong> Сообщение пользователя противоречит установленной черте характера (трейту) персонажа.</p>
       <p><strong>Обнаружение:</strong> LB триггер проверяет флаг консистенции черты характера.</p>
       <p><strong>Ответ:</strong> Персонаж признаёт расхождение в-характере, сохраняя установленные черты.</p>
     </div>
-    <p class="track-badge" style="font-size:0.85em;">Полный диагностический набор: <span class="badge-track-c">Track C</span> → <a href="#diagnostics">Раздел 6</a></p>
+    <p class="layer-badge" style="font-size:0.85em;">Полный диагностический набор: <span class="layer-badge layer-3">Layer 3</span> → <a href="#diagnostics">Раздел 6</a></p>
   </div>
 
   <h3>⚙️ Технические термины</h3>
