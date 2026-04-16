@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 6ac44079 -->
-<!-- Generated: 2026-04-16T20:23:05.479Z -->
+<!-- Build hash: 3adb9df6 -->
+<!-- Generated: 2026-04-16T22:18:25.551Z -->
 <!-- Version: 5.12.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="6ac44079">
+<meta name="build-hash" content="3adb9df6">
 <meta name="livechar-version" content="5.12.0">
 <meta name="livechar-build" content="2026-04-16">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -15410,6 +15410,7 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
   const STORAGE_KEY = 'guide-layer-selection';
   const VALID_LAYERS = ['1', '2', '3'];
   const DEFAULT_LAYER = '2';  // Was: 'B'
+  const LAYER_LABELS = { '1': 'Minimum', '2': 'Optimal', '3': 'Pro' };
 
   // Private state
   let currentLayer = DEFAULT_LAYER;
@@ -15462,6 +15463,21 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
       const isActive = cardLayer === layer;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    
+    // Update layer indicator
+    var numberEl = document.getElementById('current-layer-number');
+    var labelEl = document.getElementById('current-layer-label');
+    var indicator = document.querySelector('.layer-indicator');
+    if (numberEl) numberEl.textContent = layer;
+    if (labelEl) labelEl.textContent = LAYER_LABELS[layer] || 'Unknown';
+    if (indicator) indicator.style.display = 'flex';
+    
+    // Update layer-switch-btn active states
+    document.querySelectorAll('.layer-switch-btn').forEach(btn => {
+      const btnLayer = btn.dataset.layer;
+      const isActive = btnLayer === layer;
+      btn.classList.toggle('active', isActive);
     });
   }
 
@@ -15614,7 +15630,7 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     // Bind to .layer-switch-btn buttons
     document.querySelectorAll('.layer-switch-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const target = btn.dataset.target;
+        const target = btn.dataset.layer || btn.dataset.target;
         if (target && window.LayerState) {
           window.LayerState.setLayer(target);
           // Optional: scroll to top after layer switch

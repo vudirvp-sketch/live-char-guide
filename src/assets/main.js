@@ -889,6 +889,150 @@ function initTocHighlight() {
   sections.forEach(section => observer.observe(section));
 }
 
+// === GLOSSARY CONTENT GENERATION ===
+/**
+ * Loads and populates glossary panel with terms from JSON data
+ * Supports both inline JSON script tag and external JSON file
+ */
+async function initGlossaryContent() {
+  const glossaryContent = document.getElementById('glossary-content');
+  if (!glossaryContent) {
+    console.warn('[Glossary] #glossary-content element not found');
+    return;
+  }
+
+  let glossaryData = null;
+
+  // Try to load from inline JSON script tag first
+  const inlineData = document.getElementById('glossary-data');
+  if (inlineData) {
+    try {
+      glossaryData = JSON.parse(inlineData.textContent);
+      console.log('[Glossary] Loaded data from inline JSON');
+    } catch (e) {
+      console.warn('[Glossary] Failed to parse inline JSON:', e.message);
+    }
+  }
+
+  // Fallback: try to fetch external JSON file
+  if (!glossaryData) {
+    try {
+      const response = await fetch('src/data/glossary.json');
+      if (response.ok) {
+        glossaryData = await response.json();
+        console.log('[Glossary] Loaded data from external JSON');
+      }
+    } catch (e) {
+      // Try relative path for zero-install version
+      try {
+        const response2 = await fetch('./src/data/glossary.json');
+        if (response2.ok) {
+          glossaryData = await response2.json();
+          console.log('[Glossary] Loaded data from external JSON (relative)');
+        }
+      } catch (e2) {
+        console.warn('[Glossary] Could not load external glossary.json');
+      }
+    }
+  }
+
+  // If no data found, show error message
+  if (!glossaryData || !glossaryData.canonical_terms) {
+    glossaryContent.innerHTML = '<p style="color:var(--text-muted);padding:1em;">Глоссарий недоступен. Данные не найдены.</p>';
+    console.error('[Glossary] No glossary data available');
+    return;
+  }
+
+  // Get current layer for filtering
+  const currentLayer = parseInt(document.body.getAttribute('data-layer') || '2', 10);
+
+  // Build glossary HTML
+  const terms = glossaryData.canonical_terms;
+  const layerMarkers = glossaryData.layer_markers || {
+    '📘': 'Определение',
+    '🔁': 'Layer 1',
+    '⚙️': 'Layer 2',
+    '🔍': 'Layer 3'
+  };
+
+  let html = '<div class="glossary-search"><input type="text" id="glossary-search-input" placeholder="Поиск терминов..." aria-label="Поиск в глоссарии"></div>';
+
+  // Group terms by first letter
+  const groupedTerms = {};
+  terms.forEach(term => {
+    const firstLetter = term.term.charAt(0).toUpperCase();
+    if (!groupedTerms[firstLetter]) {
+      groupedTerms[firstLetter] = [];
+    }
+    groupedTerms[firstLetter].push(term);
+  });
+
+  // Sort and render
+  const sortedLetters = Object.keys(groupedTerms).sort();
+
+  sortedLetters.forEach(letter => {
+    html += `<div class="glossary-section"><h4>${letter}</h4><ul>`;
+
+    groupedTerms[letter].forEach(term => {
+      const layers = term.applicable_layers || [0, 1, 2, 3];
+      const layerStr = layers.join(' ');
+
+      // Get layer-specific context if available
+      let definition = term.definition;
+      if (term.layer_context && term.layer_context[String(currentLayer)]) {
+        definition = term.layer_context[String(currentLayer)];
+      }
+
+      // Build layer markers
+      const markers = layers.map(l => {
+        const markerMap = { 0: '📘', 1: '🔁', 2: '⚙️', 3: '🔍' };
+        return markerMap[l] || '';
+      }).filter(m => m).join(' ');
+
+      html += `<li class="glossary-item" data-layers="${layerStr}" data-term="${term.term.toLowerCase()}">`;
+      html += `<strong>${term.term}</strong>`;
+      if (term.abbreviation) {
+        html += ` <small style="color:var(--accent);">(${term.abbreviation})</small>`;
+      }
+      html += `<br><span class="glossary-def">${definition}</span>`;
+      if (markers) {
+        html += `<br><small style="color:var(--text-muted);">${markers}</small>`;
+      }
+      if (term.anchor_id) {
+        html += ` <a href="#${term.anchor_id}" class="glossary-link" title="Перейти к разделу">→</a>`;
+      }
+      html += '</li>';
+    });
+
+    html += '</ul></div>';
+  });
+
+  glossaryContent.innerHTML = html;
+  console.log(`[Glossary] Loaded ${terms.length} terms`);
+
+  // Initialize search functionality
+  const searchInput = document.getElementById('glossary-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+      const items = glossaryContent.querySelectorAll('.glossary-item');
+
+      items.forEach(item => {
+        const termText = item.dataset.term || '';
+        const content = item.textContent.toLowerCase();
+        const matches = termText.includes(query) || content.includes(query);
+        item.style.display = matches ? '' : 'none';
+      });
+
+      // Show/hide section headers based on visible items
+      glossaryContent.querySelectorAll('.glossary-section').forEach(section => {
+        const visibleItems = section.querySelectorAll('.glossary-item[style=""], .glossary-item:not([style])');
+        section.style.display = visibleItems.length ? '' : 'none';
+      });
+    });
+  }
+}
+
 // === COPY BUTTONS ===
 function initCopyButtons() {
   document.querySelectorAll('pre').forEach(pre => {
@@ -1722,6 +1866,7 @@ function initPanels() {
 document.addEventListener('DOMContentLoaded', () => {
   initTocContent();        // Generate TOC content first
   initTocHighlight();      // Then highlight active section
+  initGlossaryContent();   // Load glossary terms (async)
   initCopyButtons();
   initChecklist();
   initTheme();
