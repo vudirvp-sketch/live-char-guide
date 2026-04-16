@@ -8,6 +8,9 @@ build-*.hash
 src_VERSION
 /VERSION
 
+# Build output - НЕ коммитим dist
+/dist/
+
 # Dependencies
 node_modules/
 .pnpm-store/

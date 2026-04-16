@@ -32,7 +32,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
-const INDEX_PATH = join(ROOT, 'index.html');
+const INDEX_PATH = join(ROOT, 'dist', 'index.html');
 const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
@@ -99,6 +99,32 @@ async function checkVersion(content, name, expectedVersion) {
 }
 
 function checkRequiredSections(content, name) {
+  // For shell architecture (dist/index.html), check shell elements
+  // For zero-install, check content sections
+  const isShell = content.includes('lazy-loader.js') || content.includes('layer-modal');
+
+  if (isShell) {
+    // Shell architecture: check shell-specific elements
+    const requiredShellElements = [
+      { pattern: /id="content"/i, name: 'Content container' },
+      { pattern: /id="layer-modal"|class="layer-modal"/i, name: 'Layer selector' },
+      { pattern: /lazy-loader\.js/i, name: 'Lazy loader script' }
+    ];
+
+    const missing = [];
+    for (const element of requiredShellElements) {
+      if (!element.pattern.test(content)) {
+        missing.push(element.name);
+      }
+    }
+
+    if (missing.length > 0) {
+      return { pass: false, error: `${name} missing shell elements: ${missing.join(', ')}` };
+    }
+    return { pass: true };
+  }
+
+  // Zero-install: check content sections
   const requiredSections = [
     { pattern: /id="quick-start"|id="quickstart"/i, name: 'Quick Start' },
     { pattern: /id="architecture"/i, name: 'Architecture' },
@@ -253,7 +279,7 @@ async function validate() {
     log('WARN', 'VERSION file not found');
   }
 
-  // 2. Check index.html
+  // 2. Check index.html (shell or full)
   log('INFO', 'Validating index.html...');
 
   let indexResult = await checkFileExists(INDEX_PATH, 'index.html');
@@ -262,7 +288,12 @@ async function validate() {
     allPassed = false;
   } else {
     const indexContent = await readFile(INDEX_PATH, 'utf-8');
-    const indexSize = await checkFileSize(INDEX_PATH, 'index.html', LIMITS.minKB, LIMITS.indexMaxKB);
+
+    // Check if this is a shell architecture (smaller minimum size)
+    const isShell = indexContent.includes('lazy-loader.js') || indexContent.includes('layer-modal');
+    const minSize = isShell ? 2 : LIMITS.minKB; // Shell only needs 2KB, full needs 50KB
+
+    const indexSize = await checkFileSize(INDEX_PATH, 'index.html', minSize, LIMITS.indexMaxKB);
 
     results.push({ gate: 'GATE-1', ...indexSize });
     if (!indexSize.pass) allPassed = false;

@@ -1,0 +1,49 @@
+<footer id="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Layer 1 — Basic</h4>
+      <p>Минимальная рабочая карточка за ~15 минут.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Навигация</h4>
+      <nav>
+        <a href="#intro">Введение</a> |
+        <a href="#quickstart">Быстрый старт</a> |
+        <a href="#core-blocks">Основные блоки</a> |
+        <a href="#troubleshooting">Траблшутинг</a> |
+        <a href="#glossary">Глоссарий</a> |
+        <a href="#appendix">Приложение</a>
+      </nav>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Блокнот</h4>
+      <textarea id="notes-panel" placeholder="Ваши заметки..." rows="4"></textarea>
+      <button id="save-notes">Сохранить</button>
+    </div>
+  </div>
+  
+  <div class="footer-meta">
+    <p>Live Character Guide v6.0 — Layer Separation Architecture</p>
+  </div>
+</footer>
+
+<script>
+  // Notes persistence
+  const notesPanel = document.getElementById('notes-panel');
+  const saveBtn = document.getElementById('save-notes');
+  
+  // Load saved notes
+  const savedNotes = localStorage.getItem('guide-notes-l1');
+  if (savedNotes) {
+    notesPanel.value = savedNotes;
+  }
+  
+  // Save notes
+  saveBtn.addEventListener('click', () => {
+    localStorage.setItem('guide-notes-l1', notesPanel.value);
+    saveBtn.textContent = 'Сохранено!';
+    setTimeout(() => saveBtn.textContent = 'Сохранить', 1500);
+  });
+</script>

@@ -1,0 +1,103 @@
+<section id="glossary">
+<h2>Глоссарий (Layer 2)</h2>
+
+<p>Все термины Layer 1 + термины Layer 2:</p>
+
+<h3>Базовые термины (из Layer 1)</h3>
+
+<dl>
+  <dt><strong>Character Card</strong></dt>
+  <dd>Инструкция для ИИ-модели, определяющая поведение персонажа.</dd>
+
+  <dt><strong>System Prompt (SP)</strong></dt>
+  <dd>Блок с правилами поведения. Задаёт ограничения, не голос.</dd>
+
+  <dt><strong>Description</strong></dt>
+  <dd>Основной блок: SPINE, якоря, факты. Только факты, не стилистика.</dd>
+
+  <dt><strong>Anchor (Якорь)</strong></dt>
+  <dd>Правило поведения: Триггер → Действие → Цена.</dd>
+
+  <dt><strong>Price (Цена)</strong></dt>
+  <dd>Мгновенная физическая реакция в той же сцене.</dd>
+
+  <dt><strong>Examples</strong></dt>
+  <dd>Демонстрация голоса персонажа. Минимум 3 для Layer 2.</dd>
+
+  <dt><strong>Greeting</strong></dt>
+  <dd>Первое сообщение персонажа. Задаёт сцену, действие, тон.</dd>
+
+  <dt><strong>Voice Isolation</strong></dt>
+  <dd>Правило: голос только в Examples/Greeting, не в Description.</dd>
+
+  <dt><strong>Anti-Godmoding</strong></dt>
+  <dd>Запрет модели описывать действия {{user}}.</dd>
+</dl>
+
+<h3>SPINE Framework (Layer 2)</h3>
+
+<dl>
+  <dt><strong>SPINE</strong></dt>
+  <dd>Психологическое ядро персонажа: WANT, NEED, FLAW, LIE, GHOST.</dd>
+
+  <dt><strong>WANT</strong></dt>
+  <dd>Что персонаж хочет прямо сейчас. Конкретная цель или действие.</dd>
+
+  <dt><strong>NEED</strong></dt>
+  <dd>Что персонажу нужно для роста. Часто противоположно WANT.</dd>
+
+  <dt><strong>FLAW</strong></dt>
+  <dd>Изъян характера — поведение, мешающее получить NEED.</dd>
+
+  <dt><strong>LIE</strong></dt>
+  <dd>Ложная установка, во которую верит персонаж.</dd>
+
+  <dt><strong>GHOST</strong></dt>
+  <dd>Событие или паттерн из прошлого, сформировавший FLAW и LIE.</dd>
+</dl>
+
+<h3>Технические термины (Layer 2)</h3>
+
+<dl>
+  <dt><strong>Embodiment (Телесность)</strong></dt>
+  <dd>Протокол перевода состояния в физическое действие до речи.</dd>
+
+  <dt><strong>Format Lock</strong></dt>
+  <dd>Инструкция в конце SP, фиксирующая систему разметки.</dd>
+
+  <dt><strong>Author's Note (AN)</strong></dt>
+  <dd>Короткая инструкция, вставляемая в конец контекста. Для временных изменений.</dd>
+
+  <dt><strong>Lorebook</strong></dt>
+  <dd>База знаний, вставляемая в контекст по триггерам.</dd>
+
+  <dt><strong>Temperature</strong></dt>
+  <dd>Параметр креативности. 0.7-0.85 для character cards.</dd>
+
+  <dt><strong>Repetition Penalty</strong></dt>
+  <dd>Штраф за повторы. 1.05, не выше 1.10.</dd>
+
+  <dt><strong>Presence Penalty</strong></dt>
+  <dd>Штраф за присутствие токена. Должен быть 0.0 для сохранения голоса.</dd>
+
+  <dt><strong>Top P</strong></dt>
+  <dd>Вероятностное ядро (nucleus sampling). 0.9-0.95.</dd>
+
+  <dt><strong>Min P</strong></dt>
+  <dd>Минимальная вероятность токена. 0.05.</dd>
+</dl>
+
+<h3>Анти-паттерны</h3>
+
+<dl>
+  <dt><strong>Token Bloat</strong></dt>
+  <dd>Раздувание Description выше 800 токенов. Вызывает повторы и потерю фокуса.</dd>
+
+  <dt><strong>Voice in Description</strong></dt>
+  <dd>Стилистические директивы в Description. Конфликтуют с Examples.</dd>
+
+  <dt><strong>Missing Price</strong></dt>
+  <dd>Отсутствие или отложенность Price в якоре.</dd>
+</dl>
+
+</section>

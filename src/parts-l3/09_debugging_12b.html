@@ -1,0 +1,165 @@
+<section id="debugging-12b">
+<h2>12B-14B Debugging</h2>
+
+<div class="callout info">
+  <p><strong>Контекст:</strong> Модели 12B-14B (Qwen 2.5 14B, Gemma 3 12B, Llama 4 Scout 17B, Mistral 12B) имеют ограниченный контекст и меньшую способность следовать сложным инструкциям.</p>
+</div>
+
+<hr>
+
+<h3 id="symptom-table-12b">Таблица симптомов 12B-14B</h3>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Голос "плывёт"</strong></td>
+        <td>Voice Leak в Description</td>
+        <td>Удали стилистические директивы из Description. Голос только в Examples. <a href="#rule-voice-isolation">→ §R2</a></td>
+      </tr>
+      <tr>
+        <td><strong>Персонаж OOC</strong></td>
+        <td>Temperature > 0.85</td>
+        <td>Снизь temperature до 0.6-0.8</td>
+      </tr>
+      <tr>
+        <td><strong>Годмодинг</strong></td>
+        <td>Нет анти-годмодинга</td>
+        <td>Добавь блок в System Prompt <a href="#antigodmoding">→ §5.0.1</a></td>
+      </tr>
+      <tr>
+        <td><strong>Повторяет фразы</strong></td>
+        <td>Token bloat</td>
+        <td>Сократи Description до &lt;600 токенов</td>
+      </tr>
+      <tr>
+        <td><strong>Игнорирует якоря</strong></td>
+        <td>Нет Price</td>
+        <td>Добавь Price к критичным якорям</td>
+      </tr>
+      <tr>
+        <td><strong>Забывает контекст</strong></td>
+        <td>Контекст ≤4K</td>
+        <td>Примени 4K-Fallback Protocol (ниже)</td>
+      </tr>
+      <tr>
+        <td><strong>Теряет стиль речи</strong></td>
+        <td>presence_penalty > 0</td>
+        <td>Установи presence_penalty = 0.0 (зафиксируй!)</td>
+      </tr>
+      <tr>
+        <td><strong>"Умный" персонаж</strong></td>
+        <td>Голос в Description</td>
+        <td>Удали любые описания речи. Только демонстрация в Examples.</td>
+      </tr>
+      <tr>
+        <td><strong>Формат дрейфует</strong></td>
+        <td>Нет Format Lock</td>
+        <td>Добавь Format Lock в конец SP</td>
+      </tr>
+      <tr>
+        <td><strong>Смешивает персонажей</strong></td>
+        <td>Multi-char без маркеров</td>
+        <td>Добавь явные маркеры [ИМЯ] в Examples</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<h3 id="parameter-fixes">Рекомендуемые параметры для 12B-14B</h3>
+
+<pre><code>temperature = 0.6-0.8      # НЕ выше 0.85!
+top_p = 0.9
+min_p = 0.05
+repetition_penalty = 1.05   # НЕ выше 1.10!
+top_k = 50
+presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Критично!</code></pre>
+
+<div class="callout warn">
+  <p><strong>⚠️ Presence Penalty = 0.0 КРИТИЧНО для 12B</strong></p>
+  <p>Значения > 0 "убивают" речевые тики и уникальный голос. Это необратимо для малых моделей.</p>
+</div>
+
+<hr>
+
+<h3>4K-Fallback Protocol</h3>
+
+<p>Для контекста ≤4K токенов:</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Блок</th><th>Обычный</th><th>4K Fallback</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>System Prompt</td><td>~100</td><td>~50 (минимум)</td></tr>
+      <tr><td>Description</td><td>~500</td><td>~250 (только якоря)</td></tr>
+      <tr><td>Examples</td><td>~300</td><td>~150 (2 примера)</td></tr>
+      <tr><td>Greeting</td><td>~80</td><td>~50</td></tr>
+      <tr><td><strong>Итого</strong></td><td>~980</td><td>~500</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h4>Минимальный System Prompt для 4K:</h4>
+
+<pre><code>Ты — [ИМЯ].
+3-е лицо, настоящее время.
+Не пиши за {{user}}.</code></pre>
+
+<h4>Минимальное Description для 4K:</h4>
+
+<pre><code>[ИМЯ] — [роль]. [2 ключевые черты].
+
+Якоря:
+• [Триггер] → [Действие] → Цена: [реакция]
+• [Триггер] → [Действие] → Цена: [реакция]
+• [Триггер] → [Действие] → Цена: [реакция]</code></pre>
+
+<hr>
+
+<h3>Voice Isolation для 12B</h3>
+
+<p><strong>Критичное правило:</strong> На 12B голос в Description = гарантированный дрейф.</p>
+
+<div class="callout important">
+  <p><strong>Правило 12B:</strong></p>
+  <ul>
+    <li>Description: ТОЛЬКО факты и якоря</li>
+    <li>Examples: ВСЯ стилистика</li>
+    <li>Никаких "говорит саркастично" в Description</li>
+  </ul>
+</div>
+
+<h4>Почему это критично для 12B:</h4>
+
+<ul>
+  <li>12B хуже следует инструкциям → стилистика в Description игнорируется</li>
+  <li>12B сильнее копирует паттерны → Examples = 85% влияния</li>
+  <li>При конфликте Description vs Examples → Examples побеждает</li>
+</ul>
+
+<hr>
+
+<h3>Диагностика по шагам</h3>
+
+<ol>
+  <li><strong>Проверь Temperature</strong> — должна быть 0.6-0.8</li>
+  <li><strong>Проверь Presence Penalty</strong> — должна быть 0.0</li>
+  <li><strong>Проверь Description</strong> — нет ли голоса?</li>
+  <li><strong>Проверь Examples</strong> — есть минимум 2?</li>
+  <li><strong>Проверь токен-бюджет</strong> — Description ≤ 600?</li>
+  <li><strong>Проверь Format Lock</strong> — есть в конце SP?</li>
+</ol>
+
+<div class="callout tip">
+  <p><strong>Если все параметры ОК, но персонаж "плывёт":</strong></p>
+  <p>→ Перепиши Examples с более ярко выраженным голосом. 12B учится через копирование.</p>
+</div>
+
+</section>
