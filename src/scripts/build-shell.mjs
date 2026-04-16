@@ -162,6 +162,17 @@ async function buildShell() {
     }
     log('INFO', `Copied ${assetFiles.length} assets → dist/assets/`);
   }
+
+  // 5b. Copy data files (glossary.json, etc.) → dist/data/
+  const DATA_SRC = join(SRC_DIR, 'data');
+  const DATA_DIST = join(DIST_DIR, 'data');
+  if (existsSync(DATA_SRC)) {
+    await copyDir(DATA_SRC, DATA_DIST);
+    const dataFiles = await readdir(DATA_DIST);
+    log('INFO', `Copied src/data/ → dist/data/ (${dataFiles.length} files)`);
+  } else {
+    log('WARN', 'src/data/ not found, skipping');
+  }
   
   // 6. Create build hash file
   const hash = createHash('sha256')

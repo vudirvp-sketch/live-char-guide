@@ -917,7 +917,7 @@ async function initGlossaryContent() {
   // Fallback: try to fetch external JSON file
   if (!glossaryData) {
     try {
-      const response = await fetch('src/data/glossary.json');
+      const response = await fetch('data/glossary.json');
       if (response.ok) {
         glossaryData = await response.json();
         console.log('[Glossary] Loaded data from external JSON');
@@ -925,13 +925,22 @@ async function initGlossaryContent() {
     } catch (e) {
       // Try relative path for zero-install version
       try {
-        const response2 = await fetch('./src/data/glossary.json');
+        const response2 = await fetch('./data/glossary.json');
         if (response2.ok) {
           glossaryData = await response2.json();
           console.log('[Glossary] Loaded data from external JSON (relative)');
         }
       } catch (e2) {
-        console.warn('[Glossary] Could not load external glossary.json');
+        // Try legacy path as last resort
+        try {
+          const response3 = await fetch('src/data/glossary.json');
+          if (response3.ok) {
+            glossaryData = await response3.json();
+            console.log('[Glossary] Loaded data from legacy path');
+          }
+        } catch (e3) {
+          console.warn('[Glossary] Could not load external glossary.json');
+        }
       }
     }
   }
