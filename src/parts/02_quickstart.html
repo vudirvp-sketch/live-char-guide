@@ -54,7 +54,7 @@
             <text x="50" y="50" class="track-decision-text" text-anchor="middle">≤4K?</text>
           </g>
           
-          <!-- Arrow from Decision 1 to Track A (Yes) -->
+          <!-- Arrow from Decision 1 to Layer 1 (Yes) -->
           <path d="M 225 60 L 100 60 L 100 100" class="track-arrow" fill="none" stroke="var(--text-muted)" marker-end="url(#track-arrow-marker)"/>
           <text x="160" y="50" class="track-branch-label">Да</text>
           
@@ -64,7 +64,7 @@
           
           <!-- Layer 1 Result -->
           <g transform="translate(25, 110)">
-            <rect x="0" y="0" width="150" height="60" rx="6" class="track-result track-a"/>
+            <rect x="0" y="0" width="150" height="60" rx="6" class="track-result layer-1"/>
             <text x="75" y="25" class="track-result-label" text-anchor="middle">Layer 1</text>
             <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Minimum</text>
             <text x="75" y="55" class="pipeline-stage-content" text-anchor="middle" style="font-size:8px;">~15 мин • Прототип</text>
@@ -77,11 +77,11 @@
             <text x="75" y="58" class="track-decision-text" text-anchor="middle">по слоям?</text>
           </g>
           
-          <!-- Arrow from Decision 2 to Track B (No) -->
+          <!-- Arrow from Decision 2 to Layer 2 (No) -->
           <path d="M 345 160 L 250 160 L 250 200" class="track-arrow" fill="none" stroke="var(--text-muted)" marker-end="url(#track-arrow-marker)"/>
           <text x="290" y="150" class="track-branch-label">Нет</text>
           
-          <!-- Arrow from Decision 2 to Track C (Yes) -->
+          <!-- Arrow from Decision 2 to Layer 3 (Yes) -->
           <path d="M 420 210 L 420 230 L 420 200" class="track-arrow" fill="none" stroke="var(--text-muted)" marker-end="url(#track-arrow-marker)"/>
           <text x="430" y="175" class="track-branch-label">Да</text>
           
@@ -90,7 +90,7 @@
           
           <!-- Layer 2 Result -->
           <g transform="translate(175, 210)">
-            <rect x="0" y="0" width="150" height="60" rx="6" class="track-result track-b"/>
+            <rect x="0" y="0" width="150" height="60" rx="6" class="track-result layer-2"/>
             <text x="75" y="25" class="track-result-label" text-anchor="middle">Layer 2</text>
             <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Optimal</text>
             <text x="75" y="55" class="pipeline-stage-content" text-anchor="middle" style="font-size:8px;">~30 мин • Полный пайплайн</text>
@@ -98,7 +98,7 @@
           
           <!-- Layer 3 Result -->
           <g transform="translate(345, 210)">
-            <rect x="0" y="0" width="150" height="60" rx="6" class="track-result track-c"/>
+            <rect x="0" y="0" width="150" height="60" rx="6" class="track-result layer-3"/>
             <text x="75" y="25" class="track-result-label" text-anchor="middle">Layer 3</text>
             <text x="75" y="42" class="pipeline-stage-content" text-anchor="middle" style="font-size:9px;">Pro</text>
             <text x="75" y="55" class="pipeline-stage-content" text-anchor="middle" style="font-size:8px;">~60 мин • GHOST по слоям</text>
@@ -124,17 +124,17 @@
       </div>
       
       <div class="track-selector-intro">
-        <div class="track-card track-a">
+        <div class="layer-card layer-1">
           <strong>Layer 1 — Minimum</strong>
           <p>~15 мин • Прототип без GHOST, без Price</p>
           <p>Цель: минимальная рабочая карточка</p>
         </div>
-        <div class="track-card track-b">
+        <div class="layer-card layer-2">
           <strong>Layer 2 — Optimal</strong>
           <p>~30 мин • Полный пайплайн с Price</p>
           <p>Цель: карточка для деплоя</p>
         </div>
-        <div class="track-card track-c">
+        <div class="layer-card layer-3">
           <strong>Layer 3 — Pro</strong>
           <p>~60 мин • GHOST по слоям, CoT, LB/AN</p>
           <p>Цель: сложные персонажи и сеттинги</p>
@@ -344,7 +344,7 @@
       </div>
 
       <!-- Task 1.5: 12B/4K Context Warning for Layer 1 -->
-      <section class="track-a-warnings" >
+      <section class="layer-1-warnings" >
         <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
           <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>
           <p>Если ваша модель имеет <strong>контекстное окно ≤4K токенов</strong>, вы ДОЛЖНЫ применить <a href="#four-k-fallback">4K-Fallback Protocol</a> для корректной работы персонажа.</p>
@@ -385,7 +385,7 @@
           <li>Архитектура: <a href="#architecture">Раздел 2</a></li>
           <li>Core-блоки: <a href="#anchors">Раздел 3</a></li>
           <li>Психология: <a href="#spine">Раздел 4</a></li>
-          <li>Token-бюджеты: <span data-layer="2"><a href="#appendix2">Приложение 2</a></span><span data-layer="1">Приложение 2 (Track B+)</span></li>
+          <li>Token-бюджеты: <span data-layer="2"><a href="#appendix2">Приложение 2</a></span><span data-layer="1">Приложение 2 (Layer 2+)</span></li>
         </ul>
       </div>
     </section>

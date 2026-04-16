@@ -23,15 +23,15 @@
 
       <!-- Task 1.2: Clear test requirements by track -->
       <section id="test-requirements">
-        <h3>📋 Требования к тестам по Track</h3>
+        <h3>📋 Требования к тестам по Layer</h3>
         <div class="table-wrap">
           <table class="test-matrix">
             <thead>
               <tr>
                 <th>Тест</th>
-                <th>Track A</th>
-                <th>Track B</th>
-                <th>Track C</th>
+                <th>Layer 1</th>
+                <th>Layer 2</th>
+                <th>Layer 3</th>
                 <th>Описание</th>
               </tr>
             </thead>
@@ -81,7 +81,7 @@
             </tbody>
           </table>
         </div>
-        <p class="note"><strong>Track A:</strong> Тесты 1-3 обязательны. Тест 4 рекомендуется, но не блокирует. Тесты 5-6 не применяются к Track A.</p>
+        <p class="note"><strong>Layer 1:</strong> Тесты 1-3 обязательны. Тест 4 рекомендуется, но не блокирует. Тесты 5-6 не применяются к Layer 1.</p>
       </section>
 
       <details class="interactive" id="acc-test-mapping" aria-labelledby="acc-test-mapping-summary">
@@ -91,15 +91,15 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Dynamics Element</th><th>Test Scenario</th><th>Expected Behavior</th><th>Track</th></tr>
+            <tr><th>Dynamics Element</th><th>Test Scenario</th><th>Expected Behavior</th><th>Layer</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>Spine (WANT/NEED/FLAW/LIE/GHOST)</strong></td><td>Test 1: Нейтральный ввод</td><td>Персонаж реагирует характерно, FLAW проявляется косвенно</td><td>A B C</td></tr>
-            <tr><td><strong>Anchors (Trigger→Action→Price)</strong></td><td>Test 2: Стресс-триггер</td><td>Цена манифестируется физически при триггере</td><td>A B C</td></tr>
-            <tr><td><strong>LIE → WANT→NEED динамика</strong></td><td>Test 3: Конфликт/давление</td><td>Персонаж показывает уязвимость, WANT смещается к NEED</td><td>A B C</td></tr>
-            <tr><td><strong>AN (WANT→NEED tracking)</strong></td><td>Test 4: Длинная сессия</td><td>Голос стабилен, GHOST-события помнятся</td><td>B C</td></tr>
-            <tr><td><strong>OCEAN-полюса</strong></td><td>Test 5: OCEAN-консистентность</td><td>Экстремальные полюса проявляются в реакциях</td><td>B C</td></tr>
-            <tr><td><strong>Lorebook / Voice isolation</strong></td><td>Test 6: Изоляция голоса</td><td>Голоса различимы, нет смешения</td><td>B C</td></tr>
+            <tr><td><strong>Spine (WANT/NEED/FLAW/LIE/GHOST)</strong></td><td>Test 1: Нейтральный ввод</td><td>Персонаж реагирует характерно, FLAW проявляется косвенно</td><td>1 2 3</td></tr>
+            <tr><td><strong>Anchors (Trigger→Action→Price)</strong></td><td>Test 2: Стресс-триггер</td><td>Цена манифестируется физически при триггере</td><td>1 2 3</td></tr>
+            <tr><td><strong>LIE → WANT→NEED динамика</strong></td><td>Test 3: Конфликт/давление</td><td>Персонаж показывает уязвимость, WANT смещается к NEED</td><td>1 2 3</td></tr>
+            <tr><td><strong>AN (WANT→NEED tracking)</strong></td><td>Test 4: Длинная сессия</td><td>Голос стабилен, GHOST-события помнятся</td><td>2 3</td></tr>
+            <tr><td><strong>OCEAN-полюса</strong></td><td>Test 5: OCEAN-консистентность</td><td>Экстремальные полюса проявляются в реакциях</td><td>2 3</td></tr>
+            <tr><td><strong>Lorebook / Voice isolation</strong></td><td>Test 6: Изоляция голоса</td><td>Голоса различимы, нет смешения</td><td>2 3</td></tr>
           </tbody>
         </table>
         </div>
