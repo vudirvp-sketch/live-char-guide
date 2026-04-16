@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 29433957 -->
-<!-- Generated: 2026-04-16T02:27:27.092Z -->
+<!-- Build hash: aa6c49f7 -->
+<!-- Generated: 2026-04-16T02:56:47.478Z -->
 <!-- Version: 5.9.0 -->
 <!-- Zero-Install: Works via file:// protocol -->
 <!-- JavaScript: INLINED for offline support -->
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="29433957">
+<meta name="build-hash" content="aa6c49f7">
 <meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-16">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -1138,6 +1138,13 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--transition-fast);
+    }
+
+    /* FIX: Never hide body, even if it has data-layer attribute */
+    body[data-layer] {
+      content-visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
     }
 
     /* Layer 1: Basic - show ONLY on Layer 1 */
@@ -6614,7 +6621,7 @@ body.theme-light .track-result {
 </header>
 
 <!-- ITEM-001: TRACK NAVIGATION SELECTION -->
-<main class="entry-selection" id="layer-selection">
+<main class="entry-selection" id="main-content">
   <section class="audience-selection" aria-labelledby="track-selection-title">
     <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
     <p class="audience-intro">Выберите уровень погружения в материал:</p>
@@ -12950,7 +12957,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
           <text x="462" y="68" class="token-segment-value" text-anchor="middle">~15%</text>
           
           <!-- Buffer: ~10% -->
-          <rect x="500" y="30" width="50" height="40" rx="0 4 4 0" class="token-segment token-buffer"/>
+          <rect x="500" y="30" width="50" height="40" rx="4" class="token-segment token-buffer"/>
           <text x="525" y="55" class="token-segment-label" text-anchor="middle">Buffer</text>
           <text x="525" y="68" class="token-segment-value" text-anchor="middle">~10%</text>
           
@@ -15055,10 +15062,9 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     
     // Also support legacy audience-card for backward compatibility
     document.querySelectorAll('.audience-card').forEach(card => {
-      // BUGFIX: Read data-layer directly (new system), fallback to data-track (legacy)
-      const cardLayerAttr = card.dataset.layer || card.dataset.track;
+      const cardTrack = card.dataset.track;
       const layerMap = { 'A': '1', 'B': '2', 'C': '3' };
-      const cardLayer = layerMap[cardLayerAttr] || cardLayerAttr;
+      const cardLayer = layerMap[cardTrack] || cardTrack;
       const isActive = cardLayer === layer;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
@@ -15184,22 +15190,18 @@ presence_penalty = 0.0      # ЗАФИКСИРОВАНО! Не менять</cod
     // Also support legacy audience-card buttons for backward compatibility
     document.querySelectorAll('.audience-card').forEach(card => {
       card.addEventListener('click', () => {
-        // BUGFIX: Read data-layer directly (new system), fallback to data-track (legacy)
-        const layer = card.dataset.layer || card.dataset.track;
-        // If legacy track (A/B/C), convert to layer (1/2/3)
         const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-        const finalLayer = trackMap[layer] || layer;
-        setLayer(finalLayer);
+        const layer = trackMap[card.dataset.track] || card.dataset.track;
+        setLayer(layer);
       });
 
       // Keyboard support
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          const layer = card.dataset.layer || card.dataset.track;
           const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-          const finalLayer = trackMap[layer] || layer;
-          setLayer(finalLayer);
+          const layer = trackMap[card.dataset.track] || card.dataset.track;
+          setLayer(layer);
         }
       });
     });

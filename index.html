@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 7d2d91c9 -->
-<!-- Generated: 2026-04-16T01:50:55.671Z -->
+<!-- Build hash: 72c860ed -->
+<!-- Generated: 2026-04-16T02:56:47.021Z -->
 <!-- Version: 5.9.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="7d2d91c9">
+<meta name="build-hash" content="72c860ed">
 <meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-16">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -1134,6 +1134,13 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--transition-fast);
+    }
+
+    /* FIX: Never hide body, even if it has data-layer attribute */
+    body[data-layer] {
+      content-visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
     }
 
     /* Layer 1: Basic - show ONLY on Layer 1 */
@@ -12945,7 +12952,7 @@ content: [GHOST: {{char}} вспоминает бабушку — запах б�
           <text x="462" y="68" class="token-segment-value" text-anchor="middle">~15%</text>
           
           <!-- Buffer: ~10% -->
-          <rect x="500" y="30" width="50" height="40" rx="0 4 4 0" class="token-segment token-buffer"/>
+          <rect x="500" y="30" width="50" height="40" rx="4" class="token-segment token-buffer"/>
           <text x="525" y="55" class="token-segment-label" text-anchor="middle">Buffer</text>
           <text x="525" y="68" class="token-segment-value" text-anchor="middle">~10%</text>
           
