@@ -27,6 +27,8 @@ const MANIFEST_PATH = join(ROOT, 'src', 'manifest', 'structure.json');
 const NAV_MAP_PATH = join(ROOT, 'src', 'manifest', 'nav_map.json');
 const STYLES_PATH = join(ROOT, 'src', 'parts', 'styles.css');
 const MAIN_JS_PATH = join(ROOT, 'src', 'assets', 'main.js');
+const GLOSSARY_JSON_PATH = join(ROOT, 'src', 'data', 'glossary.json');
+const GLOSSARY_HTML_PATH = join(ROOT, 'src', 'parts', '02_glossary.html');
 
 // Colors for console output
 const COLORS = {
@@ -335,6 +337,108 @@ async function validateLayerDistribution() {
   return { passed: allPassed };
 }
 
+/**
+ * Validates glossary HTML and JSON consistency (Phase 2.9)
+ * Ensures all terms in glossary.json have corresponding anchor IDs in 02_glossary.html
+ */
+async function validateGlossaryConsistency() {
+  log('SECTION', 'Validating glossary.json ↔ 02_glossary.html consistency...');
+  
+  const results = { passed: true, issues: [], warnings: [] };
+  
+  // Read glossary.json
+  let glossaryJson;
+  try {
+    const jsonContent = await readFile(GLOSSARY_JSON_PATH, 'utf-8');
+    glossaryJson = JSON.parse(jsonContent);
+  } catch (err) {
+    results.passed = false;
+    results.issues.push(`Failed to read glossary.json: ${err.message}`);
+    return results;
+  }
+  
+  // Read 02_glossary.html
+  let htmlContent;
+  try {
+    htmlContent = await readFile(GLOSSARY_HTML_PATH, 'utf-8');
+  } catch (err) {
+    results.passed = false;
+    results.issues.push(`Failed to read 02_glossary.html: ${err.message}`);
+    return results;
+  }
+  
+  // Extract anchor IDs from HTML
+  const htmlAnchorPattern = /id="(layer-0-term-[^"]+)"/g;
+  const htmlAnchors = new Set();
+  let anchorMatch;
+  while ((anchorMatch = htmlAnchorPattern.exec(htmlContent)) !== null) {
+    htmlAnchors.add(anchorMatch[1]);
+  }
+  
+  // Extract data-layers attributes from HTML
+  const dataLayersPattern = /data-layers="([^"]+)"/g;
+  const htmlDataLayers = new Set();
+  let layersMatch;
+  while ((layersMatch = dataLayersPattern.exec(htmlContent)) !== null) {
+    htmlDataLayers.add(layersMatch[1]);
+  }
+  
+  // Check each term in JSON has corresponding anchor in HTML
+  const jsonTerms = glossaryJson.canonical_terms || [];
+  const jsonAnchorIds = new Set();
+  
+  for (const term of jsonTerms) {
+    if (term.anchor_id) {
+      jsonAnchorIds.add(term.anchor_id);
+      
+      if (!htmlAnchors.has(term.anchor_id)) {
+        results.passed = false;
+        results.issues.push(`JSON term "${term.term}" has anchor_id="${term.anchor_id}" but not found in HTML`);
+      }
+      
+      // Check applicable_layers field exists
+      if (!term.applicable_layers || !Array.isArray(term.applicable_layers)) {
+        results.warnings.push(`JSON term "${term.term}" missing applicable_layers array`);
+      }
+    }
+  }
+  
+  // Check for orphaned anchors in HTML (not in JSON)
+  for (const anchor of htmlAnchors) {
+    if (!jsonAnchorIds.has(anchor)) {
+      results.warnings.push(`HTML has anchor "${anchor}" with no corresponding JSON entry`);
+    }
+  }
+  
+  // Check version field
+  if (!glossaryJson.version) {
+    results.warnings.push('glossary.json missing version field');
+  }
+  
+  // Check layer_markers field
+  if (!glossaryJson.layer_markers) {
+    results.warnings.push('glossary.json missing layer_markers field (for 📘/🔁/⚙️/🔍)');
+  }
+  
+  // Summary
+  log('INFO', `JSON terms: ${jsonTerms.length}`);
+  log('INFO', `HTML anchors: ${htmlAnchors.size}`);
+  log('INFO', `HTML data-layers attributes: ${htmlDataLayers.size}`);
+  
+  if (results.passed && results.issues.length === 0) {
+    log('PASS', 'Glossary JSON and HTML are consistent');
+    if (results.warnings.length > 0) {
+      results.warnings.forEach(w => log('WARN', w));
+    }
+  } else {
+    log('FAIL', 'Glossary consistency issues:');
+    results.issues.forEach(issue => console.log(`   ${issue}`));
+    results.warnings.forEach(w => log('WARN', w));
+  }
+  
+  return results;
+}
+
 // ============================================================================
 // MAIN
 // ============================================================================
@@ -353,6 +457,7 @@ async function main() {
   allResults.push(await validateJavaScript());
   allResults.push(await validateManifests());
   allResults.push(await validateLayerDistribution());
+  allResults.push(await validateGlossaryConsistency());
   
   // Summary
   console.log('\n' + '='.repeat(60));

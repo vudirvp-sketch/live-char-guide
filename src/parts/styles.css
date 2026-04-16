@@ -1202,6 +1202,81 @@
       border: 1px solid rgba(139, 92, 246, 0.3);
     }
 
+    /* Layer 0 badge - Reference layer (Phase 2.6/2.7) */
+    .layer-badge.layer-0 {
+      background: rgba(156, 163, 175, 0.15);
+      color: var(--layer-0-clr, #9ca3af);
+      border: 1px solid rgba(156, 163, 175, 0.3);
+      font-size: 0.7em;
+      margin-right: 0.2em;
+    }
+
+    /* Layer remark styling for cross-references (Phase 2.7) */
+    .layer-remark {
+      display: block;
+      padding: 0.5em 0.75em;
+      margin: 0.5em 0;
+      background: rgba(156, 163, 175, 0.08);
+      border-left: 2px solid var(--border);
+      border-radius: 0 4px 4px 0;
+      font-size: 0.85em;
+      color: var(--text-muted);
+    }
+
+    .layer-remark .remark-icon {
+      font-size: 1em;
+      margin-right: 0.3em;
+      vertical-align: middle;
+    }
+
+    .layer-remark a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .layer-remark a:hover {
+      text-decoration: underline;
+    }
+
+    /* Glossary term highlighting by layer (Phase 2.6) */
+    body[data-layer="1"] .glossary-term[data-layers~="1"] {
+      border-left-color: var(--layer-1-clr);
+      background: rgba(34, 197, 94, 0.05);
+    }
+
+    body[data-layer="2"] .glossary-term[data-layers~="2"] {
+      border-left-color: var(--layer-2-clr);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    body[data-layer="3"] .glossary-term[data-layers~="3"] {
+      border-left-color: var(--layer-3-clr);
+      background: rgba(139, 92, 246, 0.05);
+    }
+
+    /* Dim irrelevant terms (still accessible) */
+    body[data-layer="1"] .glossary-term:not([data-layers~="1"]):not([data-layers~="0"]) {
+      opacity: 0.5;
+    }
+
+    body[data-layer="2"] .glossary-term:not([data-layers~="2"]):not([data-layers~="0"]) {
+      opacity: 0.5;
+    }
+
+    body[data-layer="3"] .glossary-term:not([data-layers~="3"]):not([data-layers~="0"]) {
+      opacity: 0.5;
+    }
+
+    /* Table styling for data-layers column */
+    table th:last-child,
+    table td:last-child {
+      white-space: nowrap;
+    }
+
+    table .layer-badge {
+      margin: 0 0.1em;
+    }
+
     /* Layer badge hover tooltips (Phase 3.7) */
     .layer-badge[data-tooltip] {
       position: relative;
