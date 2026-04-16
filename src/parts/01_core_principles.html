@@ -12,7 +12,7 @@
   </div>
 
   <!-- PHASE 1.1: §0.2 Critical Anti-patterns - VISIBLE ON ALL TRACKS -->
-  <section id="section-0-2" data-requires-track="A B C">
+  <section id="section-0-2" >
     <h2>§0.2 Критические анти-паттерны (Все треки)</h2>
     <p>Краткий список критических ошибок. Полный анализ с примерами: <a href="#antipatterns-core">Критические анти-паттерны</a>.</p>
     <div class="warning-block">
@@ -28,7 +28,7 @@
     </div>
 
     <!-- TASK-003-A: Track A Users Warning -->
-    <div class="track-prerequisite-warning" data-requires-track="A">
+    <div class="track-prerequisite-warning" data-layer="1">
       <strong>⚠️ Track A Users:</strong> Полный каталог анти-паттернов с примерами требует Track C.
       Для базовых исправлений используйте <a href="#diagnostics">Диагностику (Раздел 7)</a>.
     </div>
@@ -134,7 +134,7 @@
   </section>
 
   <!-- PHASE 1.3: GHOST Advanced - Track B+ ONLY -->
-  <details class="interactive" id="acc-principle-ghost" data-requires-track="B C" aria-labelledby="acc-principle-ghost-summary">
+  <details class="interactive" id="acc-principle-ghost" data-layer="2" aria-labelledby="acc-principle-ghost-summary">
   <summary id="acc-principle-ghost-summary" role="button" aria-expanded="false"><span><h3 style="margin:0;font-size:inherit;display:inline">§4. GHOST: Размещение по слоям</h3> <small style="color:var(--text-muted)">— GHOST размещается по слоям: Description для определения, LB/AN для триггеров</small> <span class="badge-track-b">Track B+</span></span></summary>
     <div style="padding:0 1.2em 1.2em">
   <div class="callout tip">

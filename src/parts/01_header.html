@@ -243,7 +243,7 @@
     <h2 id="track-selection-title" class="visually-hidden">Выберите уровень сложности</h2>
     <p class="audience-intro">Выберите уровень погружения в материал:</p>
     <div class="audience-cards" role="group" aria-label="Выбор трека">
-      <button class="audience-card" data-track="A" aria-pressed="false">
+      <button class="audience-card" data-layer="1" aria-pressed="false">
         <div class="track-icon-wrap">
           <svg class="track-icon track-icon--basic" viewBox="0 0 24 24" fill="none"
                stroke="var(--track-a-clr)" stroke-width="1.5"
@@ -258,7 +258,7 @@
         <span class="track-label">Начинающий</span>
         <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
       </button>
-      <button class="audience-card recommended" data-track="B" aria-pressed="true">
+      <button class="audience-card recommended" data-layer="2" aria-pressed="true">
         <span class="track-badge">Рекомендуется</span>
         <div class="track-icon-wrap">
           <svg class="track-icon track-icon--live" viewBox="0 0 24 24" fill="none"
@@ -274,7 +274,7 @@
         <span class="track-label">Практик</span>
         <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
       </button>
-      <button class="audience-card" data-track="C" aria-pressed="false">
+      <button class="audience-card" data-layer="3" aria-pressed="false">
         <div class="track-icon-wrap">
           <svg class="track-icon track-icon--neural" viewBox="0 0 24 24" fill="none"
                stroke="var(--track-c-clr)" stroke-width="1.5"
@@ -299,7 +299,7 @@
 </main>
 
 <!-- PHASE 1.2: PROTOTYPE BANNER FOR TRACK A -->
-<div id="track-a-banner" data-requires-track="A" class="prototype-banner">
+<div id="track-a-banner" data-layer="1" class="prototype-banner">
   <span class="banner-icon">📋</span>
   <div class="banner-content">
     <strong>TRACK A: ПРОТОТИПНЫЙ РЕЖИМ</strong>
@@ -313,7 +313,7 @@
 </div>
 
 <!-- PHASE 3.2: TRACK COMPARISON MATRIX -->
-<section id="track-comparison" data-requires-track="A B C" class="track-comparison-section" style="margin:1.5rem 0;">
+<section id="track-comparison"  class="track-comparison-section" style="margin:1.5rem 0;">
   <h3 style="margin:0 0 1rem 0;font-size:1rem;color:var(--text);">📊 Сравнение треков</h3>
   <div class="table-wrap">
     <table class="comparison-table">
@@ -350,7 +350,7 @@
 </section>
 
 <!-- PHASE 3.1: 4K-FALLBACK MENTION ON TRACK A -->
-<p data-requires-track="A B C" style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
+<p  style="margin:1rem 0;font-size:0.9rem;color:var(--text-muted);">
   <strong>Лимит контекста?</strong> Если достигаете потолка токенов, доступен протокол оптимизации: <span class="badge-track-b">Track B+</span> → 4K-Fallback Protocol.
 </p>
 
@@ -383,7 +383,7 @@
     .audience-selection { pointer-events: none; opacity: 0.7; }
     .audience-card { cursor: default; }
     .audience-card:hover { transform: none; }
-    .audience-card[data-track="B"] {
+    .audience-card[data-layer="2"] {
       border-color: var(--accent);
       background: var(--accent-soft);
     }

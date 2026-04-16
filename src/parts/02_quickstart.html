@@ -169,14 +169,14 @@
           <p>Реалистичный сеттинг • Прототип • ~800 токенов</p>
           <p>Подходит для: первый персонаж, копирование структуры</p>
         </div>
-        <div class="ref-card" data-requires-track="B C">
+        <div class="ref-card" data-layer="2">
           <strong><a href="#appendix6">Приложение 6: Выщербленный</a></strong>
           <span class="badge-track-b">Track B+</span>
           <span class="badge-track-c">Track C</span>
           <p>Боди-хоррор • Полный пайплайн • GHOST по слоям • ~2000 токенов</p>
           <p>Подходит для: сложные сеттинги, изучение распределения GHOST</p>
         </div>
-        <div class="ref-card" data-requires-track="B C">
+        <div class="ref-card" data-layer="2">
           <strong><a href="#appendix3b">Приложение 3B: Jesse Pinkman</a></strong>
           <span class="badge-track-b">Track B+</span>
           <p>Каноничный персонаж • Полный пайплайн • Voice Isolation • ~1500 токенов</p>
@@ -221,7 +221,7 @@
 
       <h3>⚡ Минимальный шаблон за 5 минут</h3>
       <p class="callout warn" style="margin-bottom:1em"><strong>⚠️ ПРОТОТИПНЫЙ ФОРМАТ:</strong> Quick Start = 4-anchor прототип, без Price, без GHOST. Для полноценной работы используйте полную схему (<a href="#architecture">→ Раздел 2</a>). Price обязателен перед деплоем. <em>Определение: <a href="#price-definition">§2. Price</a></em>. При контексте ≤4K — см. <a href="#four-k-fallback">протокол 4K-Fallback</a>.</p>
-      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> <span data-requires-track="B C">см. <a href="#appendix2">Приложение 2</a></span><span data-requires-track="A">~450 токенов для прототипа. Полные таблицы — в Приложении 2 (Track B+).</span></p>
+      <p style="font-size:0.9em;margin-bottom:1em"><strong>Token-бюджет:</strong> <span data-layer="2">см. <a href="#appendix2">Приложение 2</a></span><span data-layer="1">~450 токенов для прототипа. Полные таблицы — в Приложении 2 (Track B+).</span></p>
 
       <div class="infographic">
         <div class="infographic-title">IMG_04: СРАВНЕНИЕ: 4K-FALLBACK VS ПОЛНЫЙ ПАЙПЛАЙН</div>
@@ -306,7 +306,7 @@
       </div>
 
       <!-- Advanced GHOST content - Track B+ only -->
-      <div data-requires-track="B C">
+      <div data-layer="2">
         <div class="callout info" style="margin-top:1em">
           <strong>🔧 Продвинутое размещение GHOST (Track B/C):</strong>
           <p style="margin-top:0.5em">При контексте ≥8K можно использовать Lorebook для триггеров GHOST и Author's Notes для динамического состояния.</p>
@@ -344,7 +344,7 @@
       </div>
 
       <!-- Task 1.5: 12B/4K Context Warning for Track A -->
-      <section class="track-a-warnings" data-track="A B C">
+      <section class="track-a-warnings" >
         <div class="warning-box critical" style="margin:1.5em 0; padding:1em; border:2px solid var(--accent); border-radius:0.5em;">
           <h4>⚠️ Внимание пользователям моделей 12B с контекстом ≤4K</h4>
           <p>Если ваша модель имеет <strong>контекстное окно ≤4K токенов</strong>, вы ДОЛЖНЫ применить <a href="#four-k-fallback">4K-Fallback Protocol</a> для корректной работы персонажа.</p>
@@ -385,7 +385,7 @@
           <li>Архитектура: <a href="#architecture">Раздел 2</a></li>
           <li>Core-блоки: <a href="#anchors">Раздел 3</a></li>
           <li>Психология: <a href="#spine">Раздел 4</a></li>
-          <li>Token-бюджеты: <span data-requires-track="B C"><a href="#appendix2">Приложение 2</a></span><span data-requires-track="A">Приложение 2 (Track B+)</span></li>
+          <li>Token-бюджеты: <span data-layer="2"><a href="#appendix2">Приложение 2</a></span><span data-layer="1">Приложение 2 (Track B+)</span></li>
         </ul>
       </div>
     </section>
