@@ -53,10 +53,20 @@
       --ocean-A: #6bff8c;
       --ocean-N: #ffb84d;
 
-      /* Track icon tokens */
+      /* Track icon tokens (legacy - kept for backward compatibility) */
       --track-a-clr: var(--accent, #38bdf8);
       --track-b-clr: #8be9fd;
       --track-c-clr: #a78bfa;
+
+      /* === LAYER SYSTEM COLORS (v5.10.0) === */
+      /* Layer 0: Common - neutral gray */
+      --layer-0-clr: #B0B0B0;
+      /* Layer 1: Basic - green for beginners */
+      --layer-1-clr: #22c55e;
+      /* Layer 2: Advanced - blue for practitioners */
+      --layer-2-clr: #38bdf8;
+      /* Layer 3: Expert - purple for experts */
+      --layer-3-clr: #8b5cf6;
     }
 
     /* === LIGHT THEME VARIABLES === */
@@ -1077,6 +1087,167 @@
     body.theme-light .theme-icon-dark { display: none; }
     body.theme-light .theme-icon-light { display: inline !important; }
     body.theme-light .theme-icon-light[hidden] { display: inline !important; }
+
+    /* ============================================
+       LAYER SYSTEM: EXCLUSIVE VISIBILITY MODEL (v5.10.0)
+       ============================================ */
+    /**
+     * Principle: Each layer shows ONLY its content + Layer 0 (common)
+     * Layer 0: visible ALWAYS (content WITHOUT data-layer attribute)
+     * Layer 1: visible ONLY on Layer 1
+     * Layer 2: visible ONLY on Layer 2
+     * Layer 3: visible ONLY on Layer 3
+     */
+
+    /* Base state: hide all layer-specific content */
+    [data-layer] {
+      content-visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-fast);
+    }
+
+    /* Layer 1: Basic - show ONLY on Layer 1 */
+    body[data-layer="1"] [data-layer="1"] {
+      content-visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Layer 2: Advanced - show ONLY on Layer 2 */
+    body[data-layer="2"] [data-layer="2"] {
+      content-visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Layer 3: Expert - show ONLY on Layer 3 */
+    body[data-layer="3"] [data-layer="3"] {
+      content-visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Fallback: display:none for older browsers */
+    body[data-layer="1"] [data-layer]:not([data-layer="1"]) {
+      display: none !important;
+    }
+    body[data-layer="2"] [data-layer]:not([data-layer="2"]) {
+      display: none !important;
+    }
+    body[data-layer="3"] [data-layer]:not([data-layer="3"]) {
+      display: none !important;
+    }
+
+    /* === LAYER SELECTOR UI === */
+    .layer-selector-intro {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1em 0;
+    }
+
+    .layer-card {
+      flex: 1;
+      min-width: 200px;
+      padding: 1em;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: var(--bg-surface);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .layer-card.layer-1 {
+      border-color: var(--layer-1-clr);
+    }
+    .layer-card.layer-2 {
+      border-color: var(--layer-2-clr);
+    }
+    .layer-card.layer-3 {
+      border-color: var(--layer-3-clr);
+    }
+
+    /* Active states */
+    body[data-layer="1"] .layer-card.layer-1 {
+      background: rgba(34, 197, 94, 0.1);
+    }
+    body[data-layer="2"] .layer-card.layer-2 {
+      background: rgba(56, 189, 248, 0.1);
+    }
+    body[data-layer="3"] .layer-card.layer-3 {
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    /* Layer badges */
+    .layer-badge {
+      display: inline-block;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.75em;
+      font-weight: 600;
+    }
+
+    .layer-badge.layer-1 {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--layer-1-clr);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .layer-badge.layer-2 {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--layer-2-clr);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .layer-badge.layer-3 {
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--layer-3-clr);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    /* Light theme layer badge variants */
+    body.theme-light .layer-badge.layer-1 {
+      background: rgba(34, 197, 94, 0.1);
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+    body.theme-light .layer-badge.layer-2 {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    body.theme-light .layer-badge.layer-3 {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: rgba(139, 92, 246, 0.3);
+    }
+
+    /* OLED theme layer badge variants */
+    body.theme-oled .layer-badge.layer-1 {
+      background: rgba(34, 197, 94, 0.2);
+    }
+    body.theme-oled .layer-badge.layer-2 {
+      background: rgba(56, 189, 248, 0.2);
+    }
+    body.theme-oled .layer-badge.layer-3 {
+      background: rgba(139, 92, 246, 0.2);
+    }
+
+    /* === LEGACY TRACK SUPPORT (backward compatibility) === */
+    /* These rules are kept for gradual migration */
+    body[data-track="A"] [data-requires-track~="A"] {
+      content-visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    body[data-track="B"] [data-requires-track~="B"] {
+      content-visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    body[data-track="C"] [data-requires-track~="C"] {
+      content-visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
 
     @media print {
       #theme-toggle, .fab-group { display: none !important; }

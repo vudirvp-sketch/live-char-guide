@@ -1,11 +1,12 @@
 {
-  "version": "5.9.0",
-  "generated": "2026-04-15T00:00:00Z",
+  "version": "5.10.0",
+  "generated": "2026-04-16T00:00:00Z",
   "navigation": {
     "entry_points": {
-      "users": "02_quickstart.html",
+      "beginners": "02_quickstart.html",
       "reference": "00_rules_registry.html",
-      "advanced": "06b_antipatterns_advanced.html"
+      "practitioners": "05a_spine_anchors.html",
+      "experts": "06a_antipatterns_core.html"
     },
     "section_dependencies": {
       "04_core_blocks.html": ["01_core_principles.html", "00_rules_registry.html"],
@@ -15,11 +16,40 @@
       "07_testing.html": ["06a_antipatterns_core.html"],
       "08b_debugging.html": ["07_testing.html", "06b_antipatterns_advanced.html"]
     },
-    "track_matrix": {
-      "A": ["track_upgrade.html", "02_quickstart.html", "04_core_blocks.html:basic", "06a_antipatterns_core.html"],
-      "B": ["track_upgrade.html", "03_architecture.html", "05_psychology.html", "05a_spine_anchors.html", "05b_cot_tiers.html", "06_technical.html"],
-      "C": ["track_upgrade.html", "06b_antipatterns_advanced.html", "08b_debugging.html"]
-    }
+    "layer_matrix": {
+      "1": [
+        "02_quickstart.html",
+        "03_architecture.html",
+        "04_core_blocks.html",
+        "05_psychology.html",
+        "06_technical.html",
+        "checkpoints.html",
+        "02c_troubleshooting_newcomer.html"
+      ],
+      "2": [
+        "05a_spine_anchors.html",
+        "05b_cot_tiers.html",
+        "06a_integration.html",
+        "07_testing.html",
+        "06b_antipatterns_advanced.html"
+      ],
+      "3": [
+        "06a_antipatterns_core.html",
+        "08_appendices.html",
+        "08b_debugging.html",
+        "09_conclusion.html"
+      ]
+    },
+    "layer_common": [
+      "00_meta.html",
+      "01_header.html",
+      "00_rules_registry.html",
+      "01_core_principles.html",
+      "track_upgrade.html",
+      "02_glossary.html",
+      "09_footer.html",
+      "styles.css"
+    ]
   },
   "aliases": {
     "quickstart": "02_quickstart.html",
@@ -29,7 +59,8 @@
     "antipatterns": "06a_antipatterns_core.html",
     "advanced_antipatterns": "06b_antipatterns_advanced.html",
     "upgrade": "track_upgrade.html",
-    "track-a-to-b": "track_upgrade.html#track-a-to-b",
-    "track-b-to-c": "track_upgrade.html#track-b-to-c"
-  }
+    "layer-1-to-2": "track_upgrade.html#track-a-to-b",
+    "layer-2-to-3": "track_upgrade.html#track-b-to-c"
+  },
+  "migration_note": "track_matrix replaced with layer_matrix. Track A → Layer 1, Track B → Layer 2, Track C → Layer 3. Content visibility is now exclusive per layer instead of cumulative."
 }
