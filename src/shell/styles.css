@@ -478,43 +478,44 @@ tbody tr:hover { background: var(--accent-soft); }
 }
 
 /* === LAYER VISIBILITY (CUMULATIVE MODEL) === */
-[data-layer="1"], [data-layer="2"], [data-layer="3"] {
+/* Scoped to #content to avoid hiding modal buttons with data-layer attributes */
+#content [data-layer="1"], #content [data-layer="2"], #content [data-layer="3"] {
   content-visibility: hidden;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-fast);
 }
 
-[data-layer="0"] {
+#content [data-layer="0"] {
   content-visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
 }
 
-body[data-layer="1"] [data-layer="1"] {
+body[data-layer="1"] #content [data-layer="1"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
-body[data-layer="2"] [data-layer="1"],
-body[data-layer="2"] [data-layer="2"] {
+body[data-layer="2"] #content [data-layer="1"],
+body[data-layer="2"] #content [data-layer="2"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
-body[data-layer="3"] [data-layer="1"],
-body[data-layer="3"] [data-layer="2"],
-body[data-layer="3"] [data-layer="3"] {
+body[data-layer="3"] #content [data-layer="1"],
+body[data-layer="3"] #content [data-layer="2"],
+body[data-layer="3"] #content [data-layer="3"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
-body[data-layer="1"] [data-layer="2"],
-body[data-layer="1"] [data-layer="3"] { display: none !important; }
-body[data-layer="2"] [data-layer="3"] { display: none !important; }
+body[data-layer="1"] #content [data-layer="2"],
+body[data-layer="1"] #content [data-layer="3"] { display: none !important; }
+body[data-layer="2"] #content [data-layer="3"] { display: none !important; }
 
 /* Layer badges */
 .layer-badge {

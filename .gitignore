@@ -38,3 +38,9 @@ coverage/
 tmp/
 temp/
 *.tmp
+
+# Generated files (add these if not present)
+/dist/
+src/index.html
+src/build.hash
+download/
