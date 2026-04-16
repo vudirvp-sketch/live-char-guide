@@ -1137,13 +1137,14 @@
     }
 
     /* Fallback: display:none for older browsers */
-    body[data-layer="1"] [data-layer]:not([data-layer="1"]) {
+    /* NOTE: .audience-card excluded - these are layer selector buttons, always visible */
+    body[data-layer="1"] [data-layer]:not([data-layer="1"]):not(.audience-card) {
       display: none !important;
     }
-    body[data-layer="2"] [data-layer]:not([data-layer="2"]) {
+    body[data-layer="2"] [data-layer]:not([data-layer="2"]):not(.audience-card) {
       display: none !important;
     }
-    body[data-layer="3"] [data-layer]:not([data-layer="3"]) {
+    body[data-layer="3"] [data-layer]:not([data-layer="3"]):not(.audience-card) {
       display: none !important;
     }
 
