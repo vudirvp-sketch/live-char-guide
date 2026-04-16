@@ -1262,6 +1262,187 @@ async function initAnchors() {
   console.log('[LegacyRedirect] Initialized with', Object.keys(LEGACY_REDIRECTS).length, 'redirects');
 })();
 
+// ============================================================================
+// PHASE 3.9: HIDDEN LAYER ANCHOR NAVIGATION HANDLER
+// ============================================================================
+/**
+ * HiddenLayerNavigator - Handles direct links to anchors in hidden layers
+ * 
+ * When a user navigates to an anchor in a layer that is currently hidden,
+ * this module shows a remark offering to switch to that layer.
+ */
+(function initHiddenLayerNavigator() {
+  'use strict';
+
+  const LAYER_LABELS = {
+    '1': 'Minimum',
+    '2': 'Optimal',
+    '3': 'Pro'
+  };
+
+  /**
+   * Check if a target element is in a hidden layer
+   * @param {HTMLElement} target - The target element
+   * @returns {Object|null} - { layer: string, element: HTMLElement } or null
+   */
+  function getTargetLayerInfo(target) {
+    if (!target) return null;
+    
+    // Find the closest parent with data-layer attribute
+    const layerParent = target.closest('[data-layer]');
+    if (!layerParent) return { layer: '0', element: target }; // Layer 0 is always visible
+    
+    const targetLayer = layerParent.getAttribute('data-layer');
+    const currentLayer = document.body.getAttribute('data-layer');
+    
+    if (targetLayer === currentLayer || targetLayer === '0') {
+      return null; // Already visible
+    }
+    
+    return { layer: targetLayer, element: target };
+  }
+
+  /**
+   * Show overlay remark asking user to switch layers
+   * @param {string} targetLayer - The layer to switch to
+   * @param {string} anchor - The anchor ID
+   */
+  function showLayerSwitchRemark(targetLayer, anchor) {
+    // Remove any existing overlay
+    const existing = document.querySelector('.layer-redirect-remark');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'layer-redirect-remark';
+    overlay.innerHTML = `
+      <p>This section belongs to <span class="layer-badge layer-${targetLayer}" data-tooltip="Recipe: ${LAYER_LABELS[targetLayer]}">Layer ${targetLayer}</span>.</p>
+      <div class="layer-redirect-buttons">
+        <button class="layer-redirect-switch" type="button">
+          Switch to Layer ${targetLayer}
+        </button>
+        <button class="layer-redirect-stay" type="button">
+          Stay on current layer
+        </button>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // Bind button handlers
+    overlay.querySelector('.layer-redirect-switch').addEventListener('click', () => {
+      if (window.LayerState) {
+        window.LayerState.setLayer(targetLayer);
+      }
+      overlay.remove();
+      // Scroll to target after layer switch
+      setTimeout(() => {
+        const target = document.getElementById(anchor);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    });
+
+    overlay.querySelector('.layer-redirect-stay').addEventListener('click', () => {
+      overlay.remove();
+    });
+
+    // Close on Escape
+    const escHandler = (e) => {
+      if (e.key === 'Escape') {
+        overlay.remove();
+        document.removeEventListener('keydown', escHandler);
+      }
+    };
+    document.addEventListener('keydown', escHandler);
+  }
+
+  /**
+   * Handle hashchange for hidden layer navigation
+   */
+  function handleHiddenLayerNavigation() {
+    const hash = window.location.hash.substring(1);
+    if (!hash) return;
+
+    const target = document.getElementById(hash);
+    if (!target) return;
+
+    const layerInfo = getTargetLayerInfo(target);
+    if (layerInfo && layerInfo.layer !== '0') {
+      showLayerSwitchRemark(layerInfo.layer, hash);
+    }
+  }
+
+  // Check on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Small delay to let LayerState initialize
+      setTimeout(handleHiddenLayerNavigation, 200);
+    });
+  } else {
+    setTimeout(handleHiddenLayerNavigation, 200);
+  }
+
+  // Handle hash changes
+  window.addEventListener('hashchange', handleHiddenLayerNavigation);
+
+  console.log('[HiddenLayerNavigator] Initialized');
+})();
+
+// ============================================================================
+// PHASE 3.8: LAYER INDICATOR CONTROLLER
+// ============================================================================
+/**
+ * LayerIndicatorController - Updates the layer indicator in the header
+ */
+(function initLayerIndicatorController() {
+  'use strict';
+
+  const LAYER_LABELS = {
+    '1': 'Minimum',
+    '2': 'Optimal',
+    '3': 'Pro'
+  };
+
+  const LAYER_DESCRIPTIONS = {
+    '1': 'Minimum: Basic recipe, prototype mode, ~15 min',
+    '2': 'Optimal: Full pipeline with Price, ~30 min',
+    '3': 'Pro: GHOST layers, CoT, advanced tuning, ~60 min'
+  };
+
+  function updateIndicator(layer) {
+    const indicator = document.querySelector('.layer-indicator');
+    const numberEl = document.getElementById('current-layer-number');
+    const labelEl = document.getElementById('current-layer-label');
+
+    if (!indicator || !numberEl || !labelEl) return;
+
+    numberEl.textContent = layer;
+    labelEl.textContent = LAYER_LABELS[layer] || 'Unknown';
+    indicator.style.display = 'flex';
+  }
+
+  // Listen for layer changes
+  window.addEventListener('layerchange', (e) => {
+    updateIndicator(e.detail.layer);
+  });
+
+  // Initial update
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        if (window.LayerState) {
+          updateIndicator(window.LayerState.getLayer());
+        }
+      }, 100);
+    });
+  } else {
+    if (window.LayerState) {
+      updateIndicator(window.LayerState.getLayer());
+    }
+  }
+
+  console.log('[LayerIndicatorController] Initialized');
+})();
+
 // === TABS ===
 function initTabs() {
   document.querySelectorAll('.tabs').forEach(tablist => {

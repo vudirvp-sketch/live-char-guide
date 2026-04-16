@@ -1213,6 +1213,41 @@
       border: 1px solid rgba(139, 92, 246, 0.3);
     }
 
+    /* Layer badge hover tooltips (Phase 3.7) */
+    .layer-badge[data-tooltip] {
+      position: relative;
+      cursor: help;
+    }
+
+    .layer-badge[data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.3em 0.6em;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-weight: 400;
+      white-space: nowrap;
+      color: var(--text);
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+    }
+
+    .layer-badge.layer-1[data-tooltip]:hover::after {
+      border-color: var(--layer-1-clr);
+    }
+    .layer-badge.layer-2[data-tooltip]:hover::after {
+      border-color: var(--layer-2-clr);
+    }
+    .layer-badge.layer-3[data-tooltip]:hover::after {
+      border-color: var(--layer-3-clr);
+    }
+
     /* Light theme layer badge variants */
     body.theme-light .layer-badge.layer-1 {
       background: rgba(34, 197, 94, 0.1);
@@ -1236,6 +1271,113 @@
     }
     body.theme-oled .layer-badge.layer-3 {
       background: rgba(139, 92, 246, 0.2);
+    }
+
+    /* === LAYER INDICATOR (Phase 3.8) === */
+    .layer-indicator {
+      position: fixed;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.4em 0.8em;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    body[data-layer="1"] .layer-indicator { border-color: var(--layer-1-clr); }
+    body[data-layer="2"] .layer-indicator { border-color: var(--layer-2-clr); }
+    body[data-layer="3"] .layer-indicator { border-color: var(--layer-3-clr); }
+
+    .layer-indicator-tooltip {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.75rem;
+      cursor: help;
+      color: var(--text-muted);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .layer-indicator-tooltip:hover {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      .layer-indicator {
+        top: auto;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* === LAYER REDIRECT REMARK (Phase 3.9) === */
+    .layer-redirect-remark {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      background: var(--bg-surface);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.5em;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .layer-redirect-remark p {
+      margin: 0 0 1em 0;
+    }
+
+    .layer-redirect-buttons {
+      display: flex;
+      gap: 0.5em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .layer-redirect-switch,
+    .layer-redirect-stay {
+      padding: 0.5em 1em;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .layer-redirect-switch {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+    }
+
+    .layer-redirect-switch:hover {
+      filter: brightness(1.1);
+    }
+
+    .layer-redirect-stay {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .layer-redirect-stay:hover {
+      background: var(--accent-soft);
+      color: var(--text);
     }
 
     /* === REMOVED: LEGACY TRACK SUPPORT === */
