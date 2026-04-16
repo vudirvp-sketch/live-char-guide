@@ -1,13 +1,12 @@
 {
-  "version": "5.10.0",
+  "version": "5.11.0",
   "encoding": "utf-8",
-  "description": "Live Character Guide - Layer-based content model: exclusive visibility per complexity level",
+  "description": "Live Character Guide - Layer-based content model: cumulative visibility per complexity level",
   "parts": [
     { "file": "00_meta.html", "type": "head", "critical": true, "layer": 0 },
     { "file": "01_header.html", "type": "body-start", "layer": 0 },
     { "file": "00_rules_registry.html", "type": "section", "anchors": ["#rules-registry", "#rule-price", "#rule-voice-isolation", "#rule-ghost-placement", "#rule-anti-godmodding", "#rule-voice-description-conditional", "#rule-anchor-format"], "stage": 0, "layer": 0 },
     { "file": "01_core_principles.html", "type": "section", "anchors": ["#core-principles", "#price-definition"], "stage": 0, "layer": 0 },
-    { "file": "track_upgrade.html", "type": "section", "anchors": ["#track-upgrade-paths", "#track-a-to-b", "#track-b-to-c"], "stage": 0, "layer": 0 },
     { "file": "02_glossary.html", "type": "section", "anchors": ["#glossary"], "stage": 0, "layer": 0 },
     { "file": "02_quickstart.html", "type": "section", "anchors": ["#intro", "#quick-start"], "stage": 1, "layer": 1, "phase": "prototype", "description": "Layer 1: Basic quickstart for beginners" },
     { "file": "02c_troubleshooting_newcomer.html", "type": "section", "anchors": ["#troubleshooting-newcomer"], "stage": 1, "layer": 1, "description": "Layer 1: Quick symptom→cause lookup for newcomers" },

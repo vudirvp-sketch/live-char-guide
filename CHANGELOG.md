@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [5.11.0] - 2026-04-16
+
+### Changed
+- **BREAKING:** Layer visibility model changed from EXCLUSIVE to CUMULATIVE
+  - Layer 3 now shows content from Layer 1, 2, and 3
+  - Layer 2 now shows content from Layer 1 and 2
+  - This fixes missing content on higher layers
+
+### Fixed
+- TOC panel now generates navigation content dynamically via `initTocContent()`
+- Glossary buttons now reliably scroll to glossary section with `scrollToGlossary()`
+- Reference cards with `data-layer="2"` are now visible on Layer 3
+- CSS cumulative visibility rules properly cascade from lower to higher layers
+
+### Removed
+- `track_upgrade.html` reference from manifest (file was already deleted)
+
+### Deprecated
+- `.track-card.track-a/b/c` CSS classes - use `.track-card.layer-1/2/3` instead
+
 ## [5.10.0] - 2026-04-16
 
 ### Changed
@@ -173,7 +193,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - Technical implementation guide
 - Testing strategies
 
-[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.10.0...HEAD
+[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.11.0...HEAD
+[5.11.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.10.0...v5.11.0
 [5.10.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.9.0...v5.10.0
 [5.9.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.5...v5.9.0
 [5.5.5]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.4...v5.5.5

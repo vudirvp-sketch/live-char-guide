@@ -129,16 +129,16 @@ async function validateLayerAttributes() {
  */
 async function validateCSSRules() {
   log('SECTION', 'Validating CSS layer rules...');
-  
+
   const content = await readFile(STYLES_PATH, 'utf-8');
   const results = { passed: true, issues: [] };
-  
-  // Check for Layer System comment header
-  if (!content.includes('LAYER SYSTEM: EXCLUSIVE VISIBILITY MODEL')) {
+
+  // Check for Layer System comment header (CUMULATIVE model)
+  if (!content.includes('LAYER SYSTEM: CUMULATIVE VISIBILITY MODEL')) {
     results.passed = false;
-    results.issues.push('Missing Layer System header comment');
+    results.issues.push('Missing Layer System CUMULATIVE VISIBILITY MODEL header comment');
   }
-  
+
   // Check for layer color variables
   const requiredVars = ['--layer-0-clr', '--layer-1-clr', '--layer-2-clr', '--layer-3-clr'];
   for (const varName of requiredVars) {
@@ -147,31 +147,37 @@ async function validateCSSRules() {
       results.issues.push(`Missing CSS variable: ${varName}`);
     }
   }
-  
-  // Check for exclusive visibility rules
+
+  // Check for cumulative visibility rules
   const requiredRules = [
     'body[data-layer="1"] [data-layer="1"]',
+    'body[data-layer="2"] [data-layer="1"]',
     'body[data-layer="2"] [data-layer="2"]',
-    'body[data-layer="3"] [data-layer="3"]',
-    'body[data-layer="1"] [data-layer]:not([data-layer="1"])',
-    'body[data-layer="2"] [data-layer]:not([data-layer="2"])',
-    'body[data-layer="3"] [data-layer]:not([data-layer="3"])'
+    'body[data-layer="3"] [data-layer="1"]',
+    'body[data-layer="3"] [data-layer="2"]',
+    'body[data-layer="3"] [data-layer="3"]'
   ];
-  
+
   for (const rule of requiredRules) {
     if (!content.includes(rule)) {
       results.passed = false;
-      results.issues.push(`Missing CSS rule: ${rule}`);
+      results.issues.push(`Missing cumulative CSS rule: ${rule}`);
     }
   }
-  
+
+  // Check that exclusive hiding rules are NOT present (deprecated)
+  if (content.includes('body[data-layer="3"] [data-layer]:not([data-layer="3"])')) {
+    results.passed = false;
+    results.issues.push('DEPRECATED: Exclusive hiding rule found for Layer 3 - should use cumulative model');
+  }
+
   if (results.passed) {
-    log('PASS', 'CSS layer rules are correctly defined');
+    log('PASS', 'CSS layer rules are correctly defined (cumulative model)');
   } else {
     log('FAIL', 'CSS validation issues:');
     results.issues.forEach(issue => console.log(`   ${issue}`));
   }
-  
+
   return results;
 }
 
@@ -219,7 +225,18 @@ async function validateJavaScript() {
     results.passed = false;
     results.issues.push('Missing VALID_LAYERS constant');
   }
-  
+
+  // Check for initTocContent function (Phase 3 migration)
+  if (!content.includes('initTocContent')) {
+    results.passed = false;
+    results.issues.push('Missing initTocContent function (required for TOC generation)');
+  }
+
+  // Check for scrollToGlossary function (Phase 4 migration)
+  if (!content.includes('scrollToGlossary')) {
+    results.issues.push('WARN: scrollToGlossary function not found (enhanced glossary buttons)');
+  }
+
   if (results.passed) {
     log('PASS', 'JavaScript LayerState module is correctly implemented');
   } else {
@@ -470,7 +487,7 @@ async function main() {
   if (passed === total) {
     log('PASS', `All ${total} validation checks passed!`);
     console.log('\n✅ Phase 5: Layer System is correctly implemented.');
-    console.log('   - Exclusive visibility model is working');
+    console.log('   - Cumulative visibility model is working');
     console.log('   - Migration from track system is complete');
     console.log('   - All manifests and files are properly configured');
     process.exit(0);

@@ -795,6 +795,59 @@ function initSpoilers() {
 // Call on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', initSpoilers);
 
+// === TOC CONTENT GENERATION ===
+/**
+ * Generates TOC navigation links from section headers
+ * Populates #toc-content with clickable links
+ */
+function initTocContent() {
+  const tocContent = document.getElementById('toc-content');
+  if (!tocContent) {
+    console.warn('[TOC] #toc-content element not found');
+    return;
+  }
+
+  // Find all section headers (H2 and H3 with IDs)
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = [];
+
+  sections.forEach(section => {
+    const h2 = section.querySelector('h2');
+    const h3s = section.querySelectorAll('h3[id]');
+
+    // Add H2 link
+    if (h2 && section.id) {
+      const h2Text = h2.textContent.replace(/^[0-9.]+\s*/, '').trim();
+      tocLinks.push({
+        level: 2,
+        id: section.id,
+        text: h2Text.substring(0, 50)
+      });
+    }
+
+    // Add H3 links
+    h3s.forEach(h3 => {
+      if (h3.id) {
+        const h3Text = h3.textContent.replace(/^[0-9.]+\s*/, '').trim();
+        tocLinks.push({
+          level: 3,
+          id: h3.id,
+          text: h3Text.substring(0, 50)
+        });
+      }
+    });
+  });
+
+  // Build TOC HTML
+  const tocHtml = tocLinks.map(link => {
+    const indent = link.level === 3 ? 'toc-indent' : '';
+    return `<li class="${indent}"><a href="#${link.id}">${link.text}</a></li>`;
+  }).join('\n');
+
+  tocContent.innerHTML = `<ul>${tocHtml}</ul>`;
+  console.log(`[TOC] Generated ${tocLinks.length} navigation links`);
+}
+
 // === TOC ACTIVE SECTION HIGHLIGHTING ===
 function initTocHighlight() {
   const sections = document.querySelectorAll('section[id]');
@@ -1582,31 +1635,40 @@ function initPanels() {
     }
   }
 
-  // Initialize Glossary Tab
+  // Initialize Glossary Tab with enhanced reliability
   const glossaryTab = document.getElementById('glossary-tab');
   const fabGlossary = document.getElementById('fab-glossary');
+
+  function scrollToGlossary() {
+    // Try multiple selectors for robustness
+    const glossarySection =
+      document.getElementById('glossary') ||
+      document.querySelector('section[id*="glossary"]') ||
+      document.querySelector('[data-layer="0"] section[id]');
+
+    if (glossarySection) {
+      glossarySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      console.log('[Glossary] Scrolled to glossary section');
+    } else {
+      console.warn('[Glossary] Glossary section not found');
+    }
+  }
+
   if (glossaryTab) {
-    glossaryTab.addEventListener('click', () => {
-      const glossarySection = document.getElementById('glossary') || document.querySelector('[id*="glossary"]');
-      if (glossarySection) {
-        glossarySection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+    glossaryTab.addEventListener('click', scrollToGlossary);
     glossaryTab.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        glossaryTab.click();
+        scrollToGlossary();
       }
     });
   }
+
   if (fabGlossary) {
-    fabGlossary.addEventListener('click', () => {
-      const glossarySection = document.getElementById('glossary') || document.querySelector('[id*="glossary"]');
-      if (glossarySection) {
-        glossarySection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+    fabGlossary.addEventListener('click', scrollToGlossary);
   }
+
+  console.log('[Panels] Glossary buttons initialized');
 
   // Initialize Scroll to Top
   const fabTop = document.getElementById('fab-top');
@@ -1642,7 +1704,8 @@ function initPanels() {
 
 // === INIT ALL ON DOMContentLoaded ===
 document.addEventListener('DOMContentLoaded', () => {
-  initTocHighlight();
+  initTocContent();        // Generate TOC content first
+  initTocHighlight();      // Then highlight active section
   initCopyButtons();
   initChecklist();
   initTheme();
