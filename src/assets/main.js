@@ -63,11 +63,13 @@
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
     
-    // Also support legacy audience-card for backward compatibility
+    // Also support audience-card (now uses data-layer, fallback to data-track for compat)
     document.querySelectorAll('.audience-card').forEach(card => {
-      const cardTrack = card.dataset.track;
-      const layerMap = { 'A': '1', 'B': '2', 'C': '3' };
-      const cardLayer = layerMap[cardTrack] || cardTrack;
+      // FIX: Check data-layer first (new system), fallback to data-track (legacy)
+      const cardLayer = card.dataset.layer || (function() {
+        const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
+        return trackMap[card.dataset.track] || card.dataset.track;
+      })();
       const isActive = cardLayer === layer;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
@@ -190,11 +192,12 @@
       });
     });
 
-    // Also support legacy audience-card buttons for backward compatibility
+    // Also support audience-card buttons (now uses data-layer, fallback to data-track)
     document.querySelectorAll('.audience-card').forEach(card => {
       card.addEventListener('click', () => {
+        // FIX: Check data-layer first (new system), fallback to data-track (legacy)
         const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-        const layer = trackMap[card.dataset.track] || card.dataset.track;
+        const layer = card.dataset.layer || trackMap[card.dataset.track] || card.dataset.track;
         setLayer(layer);
       });
 
@@ -203,7 +206,7 @@
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-          const layer = trackMap[card.dataset.track] || card.dataset.track;
+          const layer = card.dataset.layer || trackMap[card.dataset.track] || card.dataset.track;
           setLayer(layer);
         }
       });
@@ -1430,6 +1433,92 @@ function initOcean() {
   container.appendChild(svg);
 }
 
+// === INIT PANELS & FAB BUTTONS ===
+function initPanels() {
+  // Initialize TOC Panel
+  const tocPanel = document.getElementById('toc-panel');
+  const fabToc = document.getElementById('fab-toc');
+  if (tocPanel && window.Panel) {
+    const tocPanelInstance = new window.Panel(tocPanel, { storageKey: 'toc_panel_state' });
+    if (fabToc) {
+      fabToc.addEventListener('click', () => {
+        tocPanelInstance.toggle();
+        tocPanelInstance.focus();
+      });
+    }
+  }
+
+  // Initialize Notepad Panel
+  const notepadPanel = document.getElementById('notepad-panel');
+  const fabNotepad = document.getElementById('fab-scratchpad');
+  if (notepadPanel && window.NotepadPanel) {
+    const notepadInstance = new window.NotepadPanel(notepadPanel, { storageKey: 'notepad_panel_state' });
+    if (fabNotepad) {
+      fabNotepad.addEventListener('click', () => {
+        notepadInstance.toggle();
+        notepadInstance.focus();
+      });
+    }
+  }
+
+  // Initialize Glossary Tab
+  const glossaryTab = document.getElementById('glossary-tab');
+  const fabGlossary = document.getElementById('fab-glossary');
+  if (glossaryTab) {
+    glossaryTab.addEventListener('click', () => {
+      const glossarySection = document.getElementById('glossary') || document.querySelector('[id*="glossary"]');
+      if (glossarySection) {
+        glossarySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    glossaryTab.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        glossaryTab.click();
+      }
+    });
+  }
+  if (fabGlossary) {
+    fabGlossary.addEventListener('click', () => {
+      const glossarySection = document.getElementById('glossary') || document.querySelector('[id*="glossary"]');
+      if (glossarySection) {
+        glossarySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Initialize Scroll to Top
+  const fabTop = document.getElementById('fab-top');
+  if (fabTop) {
+    fabTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Initialize Width Toggle
+  const fabWidth = document.getElementById('fab-width');
+  if (fabWidth) {
+    fabWidth.addEventListener('click', () => {
+      const body = document.body;
+      const isWide = body.classList.toggle('content-wide');
+      fabWidth.setAttribute('aria-pressed', isWide ? 'true' : 'false');
+      try {
+        localStorage.setItem('content-width', isWide ? 'wide' : 'normal');
+      } catch (e) {}
+    });
+    // Load saved width preference
+    try {
+      const savedWidth = localStorage.getItem('content-width');
+      if (savedWidth === 'wide') {
+        document.body.classList.add('content-wide');
+        fabWidth.setAttribute('aria-pressed', 'true');
+      }
+    } catch (e) {}
+  }
+
+  console.log('[Panels] FAB buttons initialized');
+}
+
 // === INIT ALL ON DOMContentLoaded ===
 document.addEventListener('DOMContentLoaded', () => {
   initTocHighlight();
@@ -1442,6 +1531,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initEnneagram();
   initOcean();
+  initPanels();
   console.log('[Main] All components initialized');
 });
 

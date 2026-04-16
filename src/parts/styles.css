@@ -1238,23 +1238,9 @@
       background: rgba(139, 92, 246, 0.2);
     }
 
-    /* === LEGACY TRACK SUPPORT (backward compatibility) === */
-    /* These rules are kept for gradual migration */
-    body[data-track="A"] [data-requires-track~="A"] {
-      content-visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    body[data-track="B"] [data-requires-track~="B"] {
-      content-visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    body[data-track="C"] [data-requires-track~="C"] {
-      content-visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-    }
+    /* === REMOVED: LEGACY TRACK SUPPORT === */
+    /* Track A/B/C system replaced by Layer 1/2/3 system */
+    /* All [data-requires-track] rules removed - use [data-layer] instead */
 
     @media print {
       #theme-toggle, .fab-group { display: none !important; }
