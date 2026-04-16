@@ -391,18 +391,28 @@ ${headContent}
 ${styleContent}
 </style>
 </head>
-<body data-track="B">
+<body data-layer="2">
 <script>
-// CRITICAL: Set default track BEFORE CSS renders to prevent FOUC
+// CRITICAL: Set default layer BEFORE CSS renders to prevent FOUC
+// Phase 3: Layer system migration (A/B/C → 1/2/3)
 (function() {
-  var track = 'B';
+  var layer = '2';
   try {
-    var saved = localStorage.getItem('guide-track-selection');
-    if (saved && ['A','B','C'].indexOf(saved.toUpperCase()) !== -1) {
-      track = saved.toUpperCase();
+    var saved = localStorage.getItem('guide-layer-selection');
+    if (saved && ['1','2','3'].indexOf(saved) !== -1) {
+      layer = saved;
+    }
+    
+    // Migration from old track system (A → 1, B → 2, C → 3)
+    var oldTrack = localStorage.getItem('guide-track-selection');
+    if (oldTrack) {
+      var map = { 'A': '1', 'B': '2', 'C': '3' };
+      layer = map[oldTrack.toUpperCase()] || layer;
+      localStorage.setItem('guide-layer-selection', layer);
+      localStorage.removeItem('guide-track-selection');
     }
   } catch(e) {}
-  document.body.setAttribute('data-track', track);
+  document.body.setAttribute('data-layer', layer);
 })();
 </script>
 ${bodyStartContent}
