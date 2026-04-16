@@ -1103,6 +1103,18 @@
       pointer-events: auto !important;
     }
 
+    /* FIX: Audience cards (layer selector buttons) should ALWAYS be visible
+       They use data-layer to indicate WHICH layer they select, not for content filtering */
+    .audience-card,
+    .audience-card[data-layer="1"],
+    .audience-card[data-layer="2"],
+    .audience-card[data-layer="3"] {
+      content-visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      display: flex !important;
+    }
+
     /* Layer 1: Basic - show ONLY on Layer 1 */
     body[data-layer="1"] [data-layer="1"] {
       content-visibility: visible;
