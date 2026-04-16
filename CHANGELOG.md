@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [5.10.0] - 2026-04-16
+
+### Changed
+- **Design Unification**: Implemented "One Semantic → One Visual Pattern" principle
+  - Removed `.tag.tip` CSS definition (duplicates `.callout.tip`)
+  - Converted all `.tag.tip` HTML instances to appropriate alternatives
+  - Restricted `.tag.risk` usage to avoid duplication with `.callout.warn`
+
+### Added
+- `.dependency-map` and `.infographic` CSS classes for diagram containers
+- Mobile-responsive overflow handling for `.dependency-map` containers
+- Consistent link styling across all components including diagrams
+
+### Fixed
+- Duplicate visual signals eliminated (no more `.tag.tip` + `.callout.tip` confusion)
+- "Edge Case" badge changed from `.tag.tip` to `.tag.opt` (correct semantic)
+- "Хорошо" status badge changed from `.tag.tip` to `.tag.opt` (correct semantic)
+- Removed redundant `.tag.risk` inside `.callout.warn` (was duplicate warning signal)
+
 ## [5.9.0] - 2026-04-15
 
 ### Changed
@@ -154,7 +173,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - Technical implementation guide
 - Testing strategies
 
-[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.9.0...HEAD
+[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.10.0...HEAD
+[5.10.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.9.0...v5.10.0
 [5.9.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.5...v5.9.0
 [5.5.5]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.4...v5.5.5
 [5.5.4]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.4.0...v5.5.4
