@@ -3811,7 +3811,7 @@
 /* See lines 1088-1148 for the current Layer visibility implementation. */
 
 /* === NOSCRIPT FALLBACK === */
-/* When JavaScript is disabled, show Track B content by default */
+/* When JavaScript is disabled, show Layer 1 and Layer 2 content by default */
 noscript .noscript-notice {
   display: block;
   background: rgba(234, 179, 8, 0.1);
@@ -5245,30 +5245,31 @@ body.storage-fallback .audience-selection {
   font-size: 0.95em;
 }
 
-.track-card.track-a {
+/* Track cards updated to use layer system */
+.track-card.track-a, .track-card.layer-1 {
   border-left: 3px solid var(--layer-1-clr, #22c55e);
   background: rgba(34, 197, 94, 0.05);
 }
 
-.track-card.track-a strong {
+.track-card.track-a strong, .track-card.layer-1 strong {
   color: var(--layer-1-clr, #22c55e);
 }
 
-.track-card.track-b {
+.track-card.track-b, .track-card.layer-2 {
   border-left: 3px solid var(--layer-2-clr, #38bdf8);
   background: rgba(56, 189, 248, 0.05);
 }
 
-.track-card.track-b strong {
+.track-card.track-b strong, .track-card.layer-2 strong {
   color: var(--layer-2-clr, #38bdf8);
 }
 
-.track-card.track-c {
+.track-card.track-c, .track-card.layer-3 {
   border-left: 3px solid var(--layer-3-clr, #8b5cf6);
   background: rgba(139, 92, 246, 0.05);
 }
 
-.track-card.track-c strong {
+.track-card.track-c strong, .track-card.layer-3 strong {
   color: var(--layer-3-clr, #8b5cf6);
 }
 
@@ -5343,29 +5344,35 @@ body.storage-fallback .audience-selection {
   font-style: italic;
 }
 
-/* Light theme adaptations for track cards */
-body.theme-light .track-card.track-a {
+/* Light theme adaptations for track/layer cards */
+body.theme-light .track-card.track-a,
+body.theme-light .track-card.layer-1 {
   background: rgba(34, 197, 94, 0.08);
 }
 
-body.theme-light .track-card.track-b {
+body.theme-light .track-card.track-b,
+body.theme-light .track-card.layer-2 {
   background: rgba(56, 189, 248, 0.08);
 }
 
-body.theme-light .track-card.track-c {
+body.theme-light .track-card.track-c,
+body.theme-light .track-card.layer-3 {
   background: rgba(139, 92, 246, 0.08);
 }
 
-/* OLED theme adaptations for track cards */
-body.theme-oled .track-card.track-a {
+/* OLED theme adaptations for track/layer cards */
+body.theme-oled .track-card.track-a,
+body.theme-oled .track-card.layer-1 {
   background: rgba(34, 197, 94, 0.1);
 }
 
-body.theme-oled .track-card.track-b {
+body.theme-oled .track-card.track-b,
+body.theme-oled .track-card.layer-2 {
   background: rgba(56, 189, 248, 0.1);
 }
 
-body.theme-oled .track-card.track-c {
+body.theme-oled .track-card.track-c,
+body.theme-oled .track-card.layer-3 {
   background: rgba(139, 92, 246, 0.1);
 }
 
@@ -5860,9 +5867,10 @@ body.theme-light .token-bar-title {
   stroke: var(--accent);
 }
 
-.track-result.track-a { stroke: var(--track-a-clr); }
-.track-result.track-b { stroke: var(--track-b-clr); }
-.track-result.track-c { stroke: var(--track-c-clr); }
+/* Updated to use layer system colors */
+.track-result.track-a, .track-result.layer-1 { stroke: var(--layer-1-clr); }
+.track-result.track-b, .track-result.layer-2 { stroke: var(--layer-2-clr); }
+.track-result.track-c, .track-result.layer-3 { stroke: var(--layer-3-clr); }
 
 .track-result-label {
   font-family: var(--font-sans);

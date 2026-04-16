@@ -99,10 +99,10 @@ async function validateLayerAttributes() {
       layerCounts[match[1]]++;
     }
     
-    // Check for invalid layer values (anything other than 1, 2, 3)
+    // Check for invalid layer values (anything other than 0, 1, 2, 3)
     const allLayerPattern = /data-layer=["']([^"']+)["']/g;
     while ((match = allLayerPattern.exec(content)) !== null) {
-      if (!['1', '2', '3'].includes(match[1])) {
+      if (!['0', '1', '2', '3'].includes(match[1])) {
         layerCounts.invalid.push(`${file}: data-layer="${match[1]}"`);
       }
     }
@@ -118,7 +118,7 @@ async function validateLayerAttributes() {
     return { passed: false };
   }
   
-  log('PASS', 'All data-layer attributes use valid values (1, 2, 3)');
+  log('PASS', 'All data-layer attributes use valid values (0, 1, 2, 3)');
   return { passed: true };
 }
 
@@ -200,10 +200,10 @@ async function validateJavaScript() {
     }
   }
   
-  // Check for migration function
-  if (!content.includes('migrateFromTracks')) {
+  // Check that migration function has been REMOVED (Phase 4)
+  if (content.includes('migrateFromTracks')) {
     results.passed = false;
-    results.issues.push('Missing migrateFromTracks function');
+    results.issues.push('DEPRECATED: migrateFromTracks function should be removed (Phase 4)');
   }
   
   // Check for localStorage key
