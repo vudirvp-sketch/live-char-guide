@@ -14,7 +14,7 @@ Thank you for your interest in contributing to the Live Character Guide! This do
 
 ## Code of Conduct
 
-By participating in this project, you agree to maintain a respectful and inclusive environment. Please be considerate of others and follow standard open-source community guidelines.
+By participating in this project, you agree to maintain a respectful. Please be considerate of others and follow standard open-source community guidelines.
 
 ## Getting Started
 
