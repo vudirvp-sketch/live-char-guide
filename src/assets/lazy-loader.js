@@ -498,11 +498,19 @@
   // ============================================================================
 
   function bindEvents() {
-    // Layer modal buttons
-    $$('.layer-card-btn').forEach(btn => {
+    // Layer modal buttons (support both old and new classes)
+    $$('.audience-card, .layer-card-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const layer = btn.dataset.layer;
         if (layer) selectLayer(layer);
+      });
+    });
+
+    // Uncertain path button
+    $$('.uncertain-path').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const layer = btn.dataset.defaultLayer || CONFIG.DEFAULT_LAYER;
+        selectLayer(layer);
       });
     });
 

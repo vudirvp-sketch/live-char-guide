@@ -17,6 +17,7 @@
   const STORAGE_KEY = 'guide-layer-selection';
   const VALID_LAYERS = ['1', '2', '3'];
   const DEFAULT_LAYER = '2';  // Was: 'B'
+  const LAYER_LABELS = { '1': 'Minimum', '2': 'Optimal', '3': 'Pro' };
 
   // Private state
   let currentLayer = DEFAULT_LAYER;
@@ -69,6 +70,21 @@
       const isActive = cardLayer === layer;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    
+    // Update layer indicator
+    var numberEl = document.getElementById('current-layer-number');
+    var labelEl = document.getElementById('current-layer-label');
+    var indicator = document.querySelector('.layer-indicator');
+    if (numberEl) numberEl.textContent = layer;
+    if (labelEl) labelEl.textContent = LAYER_LABELS[layer] || 'Unknown';
+    if (indicator) indicator.style.display = 'flex';
+    
+    // Update layer-switch-btn active states
+    document.querySelectorAll('.layer-switch-btn').forEach(btn => {
+      const btnLayer = btn.dataset.layer;
+      const isActive = btnLayer === layer;
+      btn.classList.toggle('active', isActive);
     });
   }
 
@@ -221,7 +237,7 @@
     // Bind to .layer-switch-btn buttons
     document.querySelectorAll('.layer-switch-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const target = btn.dataset.target;
+        const target = btn.dataset.layer || btn.dataset.target;
         if (target && window.LayerState) {
           window.LayerState.setLayer(target);
           // Optional: scroll to top after layer switch

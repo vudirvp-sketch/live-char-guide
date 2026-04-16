@@ -30,38 +30,54 @@
   <div id="layer-modal" class="layer-modal">
     <div class="layer-modal-content">
       <h1 class="modal-title">🧠 Live Character Guide</h1>
-      <p class="modal-subtitle">Выберите уровень сложности</p>
+      <p class="audience-intro">Выберите уровень погружения в материал:</p>
       
-      <div class="layer-cards">
-        <button class="layer-card-btn" data-layer="1">
-          <span class="layer-icon">🟢</span>
-          <span class="layer-title">Layer 1</span>
-          <span class="layer-subtitle">Базовый</span>
-          <span class="layer-time">~15 мин</span>
-          <span class="layer-desc">Для новичков. Создание простой карточки с основными элементами.</span>
+      <div class="audience-cards" role="group" aria-label="Выбор слоя">
+        <button class="audience-card" data-layer="1" aria-pressed="false">
+          <div class="track-icon-wrap">
+            <svg class="track-icon track-icon--basic" viewBox="0 0 24 24" fill="none" stroke="var(--layer-1-clr)" stroke-width="1.5" role="img" aria-label="Layer 1: Фундамент" width="24" height="24">
+              <rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"></rect>
+              <circle cx="12" cy="12" r="1.5" fill="var(--layer-1-clr)"></circle>
+            </svg>
+            <div class="track-icon-scan" aria-hidden="true"></div>
+          </div>
+          <span class="track-name">Layer 1</span>
+          <span class="track-label">Minimum</span>
+          <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
         </button>
         
-        <button class="layer-card-btn" data-layer="2">
-          <span class="layer-icon">🔵</span>
-          <span class="layer-title">Layer 2</span>
-          <span class="layer-subtitle">Продвинутый</span>
-          <span class="layer-time">~30 мин</span>
-          <span class="layer-desc">Для практиков. Полный пайплайн с SPINE и техническими настройками.</span>
-          <span class="layer-badge recommended">Рекомендуется</span>
+        <button class="audience-card recommended" data-layer="2" aria-pressed="false">
+          <span class="track-badge">Рекомендуется</span>
+          <div class="track-icon-wrap">
+            <svg class="track-icon track-icon--live" viewBox="0 0 24 24" fill="none" stroke="var(--layer-2-clr)" stroke-width="2" role="img" aria-label="Layer 2: Пульс жизни" width="24" height="24">
+              <path class="pulse-line" d="M2 12h3l2-5 3 10 3-5h9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <div class="track-icon-scan" aria-hidden="true"></div>
+          </div>
+          <span class="track-name">Layer 2</span>
+          <span class="track-label">Optimal</span>
+          <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
         </button>
         
-        <button class="layer-card-btn" data-layer="3">
-          <span class="layer-icon">🟣</span>
-          <span class="layer-title">Layer 3</span>
-          <span class="layer-subtitle">Эксперт</span>
-          <span class="layer-time">~60 мин</span>
-          <span class="layer-desc">Для экспертов. Все возможности, включая продвинутые техники.</span>
+        <button class="audience-card" data-layer="3" aria-pressed="false">
+          <div class="track-icon-wrap">
+            <svg class="track-icon track-icon--neural" viewBox="0 0 24 24" fill="none" stroke="var(--layer-3-clr)" stroke-width="1.5" role="img" aria-label="Layer 3: Ядро сознания" width="24" height="24">
+              <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"></path>
+              <circle class="core-node" cx="12" cy="12" r="3" fill="var(--layer-3-clr)"></circle>
+              <path d="M12 12l5-5M12 12l-5 5M12 12v7M12 12L7 7" stroke-width="1"></path>
+            </svg>
+            <div class="track-icon-scan" aria-hidden="true"></div>
+          </div>
+          <span class="track-name">Layer 3</span>
+          <span class="track-label">Pro</span>
+          <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
         </button>
       </div>
       
-      <div class="layer-footer">
-        <p>Слой можно переключить в любой момент</p>
-      </div>
+      <button class="uncertain-path" data-default-layer="2" type="button">
+        <span class="uncertain-icon">❓</span>
+        <span>Не уверен? Начни с Layer 2</span>
+      </button>
     </div>
   </div>
 
@@ -70,18 +86,24 @@
 
   <!-- Layer switcher (visible after layer selected) -->
   <div id="layer-switcher" class="layer-switcher hidden">
-    <button class="layer-switch-btn" data-layer="1" title="Layer 1: Базовый">
+    <button class="layer-switch-btn" data-layer="1" title="Layer 1: Minimum">
       <span class="switch-icon">🟢</span>
       <span class="switch-label">L1</span>
     </button>
-    <button class="layer-switch-btn" data-layer="2" title="Layer 2: Продвинутый">
+    <button class="layer-switch-btn" data-layer="2" title="Layer 2: Optimal">
       <span class="switch-icon">🔵</span>
       <span class="switch-label">L2</span>
     </button>
-    <button class="layer-switch-btn" data-layer="3" title="Layer 3: Эксперт">
+    <button class="layer-switch-btn" data-layer="3" title="Layer 3: Pro">
       <span class="switch-icon">🟣</span>
       <span class="switch-label">L3</span>
     </button>
+  </div>
+
+  <!-- Layer indicator (fixed position) -->
+  <div class="layer-indicator" aria-live="polite" role="status" style="display: none;">
+    Layer <span id="current-layer-number">2</span>: <span id="current-layer-label">Optimal</span>
+    <button class="layer-indicator-tooltip" aria-label="What does this level add?" type="button">?</button>
   </div>
 
   <!-- FAB buttons (theme, TOC, etc.) -->
