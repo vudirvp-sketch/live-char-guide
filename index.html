@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!-- AUTO-GENERATED: DO NOT EDIT [S-5 VETO] -->
-<!-- Build hash: 80d3e376 -->
-<!-- Generated: 2026-04-16T01:32:40.030Z -->
+<!-- Build hash: 7d2d91c9 -->
+<!-- Generated: 2026-04-16T01:41:06.817Z -->
 <!-- Version: 5.9.0 -->
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="build-hash" content="80d3e376">
+<meta name="build-hash" content="7d2d91c9">
 <meta name="livechar-version" content="5.9.0">
 <meta name="livechar-build" content="2026-04-16">
 <meta http-equiv="Cache-Control" content="no-cache">
@@ -6737,17 +6737,19 @@ body.theme-light .track-result {
     </div>
   </div>
   <style>
-    /* Show Track A and B content when JS is disabled */
-    [data-requires-track~="A"],
-    [data-requires-track~="B"] {
+    /* PHASE 4: Show Layer 1 and Layer 2 content when JS is disabled */
+    /* Layer 0 (common) is always visible - no data-layer attribute */
+    [data-layer="1"],
+    [data-layer="2"] {
       display: block !important;
       opacity: 1 !important;
+      content-visibility: visible !important;
       max-height: none !important;
       overflow: visible !important;
       pointer-events: auto !important;
     }
-    /* Keep Track C hidden */
-    [data-requires-track~="C"] {
+    /* Keep Layer 3 hidden */
+    [data-layer="3"] {
       display: none !important;
     }
     /* Visual indication of default track */
