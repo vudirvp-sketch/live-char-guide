@@ -63,13 +63,9 @@
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
     
-    // Also support audience-card (now uses data-layer, fallback to data-track for compat)
+    // Also support audience-card (now uses data-layer only)
     document.querySelectorAll('.audience-card').forEach(card => {
-      // FIX: Check data-layer first (new system), fallback to data-track (legacy)
-      const cardLayer = card.dataset.layer || (function() {
-        const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-        return trackMap[card.dataset.track] || card.dataset.track;
-      })();
+      const cardLayer = card.dataset.layer;
       const isActive = cardLayer === layer;
       card.classList.toggle('active', isActive);
       card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
@@ -122,44 +118,9 @@
   }
 
   /**
-   * Migrate from old track system to layer system
-   * Maps: A → 1, B → 2, C → 3
-   */
-  function migrateFromTracks() {
-    try {
-      const oldTrack = localStorage.getItem('guide-track-selection');
-      if (oldTrack) {
-        const mapping = { 'A': '1', 'B': '2', 'C': '3' };
-        const newLayer = mapping[oldTrack.toUpperCase()];
-        if (newLayer) {
-          localStorage.setItem(STORAGE_KEY, newLayer);
-          localStorage.removeItem('guide-track-selection');
-          console.log('[LayerState] Migrated track', oldTrack, '→ layer', newLayer);
-        }
-      }
-      
-      // Also migrate legacy guide-mode
-      const legacyMode = localStorage.getItem('guide-mode');
-      if (legacyMode === 'quick_start') {
-        localStorage.setItem(STORAGE_KEY, '1');
-        console.log('[LayerState] Migrated quick_start → Layer 1');
-      }
-      
-      // Clean up legacy keys
-      localStorage.removeItem('guide-mode');
-      localStorage.removeItem('workshop_enabled');
-      localStorage.removeItem('workshop_active');
-    } catch (e) {
-      console.warn('[LayerState] Migration error:', e.message);
-    }
-  }
-
-  /**
    * Initialize layer navigation UI
    */
   function initLayerNavigation() {
-    // First, migrate from old track system
-    migrateFromTracks();
     
     // Load saved layer
     currentLayer = loadLayer();
@@ -192,22 +153,19 @@
       });
     });
 
-    // Also support audience-card buttons (now uses data-layer, fallback to data-track)
+    // Also support audience-card buttons (now uses data-layer only)
     document.querySelectorAll('.audience-card').forEach(card => {
       card.addEventListener('click', () => {
-        // FIX: Check data-layer first (new system), fallback to data-track (legacy)
-        const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-        const layer = card.dataset.layer || trackMap[card.dataset.track] || card.dataset.track;
-        setLayer(layer);
+        const layer = card.dataset.layer;
+        if (layer) setLayer(layer);
       });
 
       // Keyboard support
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-          const layer = card.dataset.layer || trackMap[card.dataset.track] || card.dataset.track;
-          setLayer(layer);
+          const layer = card.dataset.layer;
+          if (layer) setLayer(layer);
         }
       });
     });
@@ -238,21 +196,6 @@
     DEFAULT_LAYER: DEFAULT_LAYER,
     init: initLayerNavigation
   };
-  
-  // Backward compatibility alias
-  window.NavigationState = {
-    getTrack: () => {
-      const layerMap = { '1': 'A', '2': 'B', '3': 'C' };
-      return layerMap[getLayer()] || 'B';
-    },
-    setTrack: (track) => {
-      const layerMap = { 'A': '1', 'B': '2', 'C': '3' };
-      setLayer(layerMap[track.toUpperCase()] || '2');
-    },
-    VALID_TRACKS: ['A', 'B', 'C'],
-    DEFAULT_TRACK: 'B',
-    init: initLayerNavigation
-  };
 
   // Auto-initialize on DOMContentLoaded
   if (document.readyState === 'loading') {
@@ -275,15 +218,12 @@
   'use strict';
 
   function initLayerSwitchButtons() {
-    // Support both .layer-switch-btn and legacy .track-switch-btn
-    document.querySelectorAll('.layer-switch-btn, .track-switch-btn').forEach(btn => {
+    // Bind to .layer-switch-btn buttons
+    document.querySelectorAll('.layer-switch-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const target = btn.dataset.target;
         if (target && window.LayerState) {
-          // Check if target is a track (A/B/C) or layer (1/2/3)
-          const trackMap = { 'A': '1', 'B': '2', 'C': '3' };
-          const layer = trackMap[target.toUpperCase()] || target;
-          window.LayerState.setLayer(layer);
+          window.LayerState.setLayer(target);
           // Optional: scroll to top after layer switch
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }

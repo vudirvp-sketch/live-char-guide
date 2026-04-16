@@ -45,7 +45,6 @@
       "01_header.html",
       "00_rules_registry.html",
       "01_core_principles.html",
-      "track_upgrade.html",
       "02_glossary.html",
       "09_footer.html",
       "styles.css"
@@ -57,10 +56,7 @@
     "spine": "05_psychology.html#spine",
     "anchors": "04_core_blocks.html#anchors",
     "antipatterns": "06a_antipatterns_core.html",
-    "advanced_antipatterns": "06b_antipatterns_advanced.html",
-    "upgrade": "track_upgrade.html",
-    "layer-1-to-2": "track_upgrade.html#track-a-to-b",
-    "layer-2-to-3": "track_upgrade.html#track-b-to-c"
+    "advanced_antipatterns": "06b_antipatterns_advanced.html"
   },
-  "migration_note": "track_matrix replaced with layer_matrix. Track A → Layer 1, Track B → Layer 2, Track C → Layer 3. Content visibility is now exclusive per layer instead of cumulative."
+  "migration_note": "Phase 4 complete: Track system fully removed. Layer 1/2/3 system is now the only system. All legacy Track CSS variables and JS backward compatibility code deleted."
 }

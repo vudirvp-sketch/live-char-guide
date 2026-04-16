@@ -53,11 +53,6 @@
       --ocean-A: #6bff8c;
       --ocean-N: #ffb84d;
 
-      /* Track icon tokens (legacy - kept for backward compatibility) */
-      --track-a-clr: var(--accent, #38bdf8);
-      --track-b-clr: #8be9fd;
-      --track-c-clr: #a78bfa;
-
       /* === LAYER SYSTEM COLORS (v5.10.0) === */
       /* Layer 0: Common - neutral gray */
       --layer-0-clr: #B0B0B0;
@@ -128,9 +123,6 @@
       --table-header: #e5e7eb;
       --table-row-alt: #f9fafb;
       --accent-soft: rgba(2, 132, 199, 0.08);
-      --track-a-clr: #0284c7;
-      --track-b-clr: #0891b2;
-      --track-c-clr: #7c3aed;
     }
 
     body.theme-light { color-scheme: light; }
@@ -158,9 +150,6 @@
       --table-row-alt: var(--table-row-alt-oled);
       --panel-shadow: var(--panel-shadow-oled);
       --accent-soft: rgba(56, 189, 248, 0.15);
-      --track-a-clr: #38bdf8;
-      --track-b-clr: #67e8f9;
-      --track-c-clr: #c4b5fd;
     }
 
     body.theme-oled { color-scheme: dark; }
@@ -3624,8 +3613,7 @@
   animation: track-select-pulse 0.4s ease-out;
 }
 
-/* Animate on first load if track is already selected */
-.audience-card[data-track="B"][aria-pressed="true"],
+/* Animate on first load if recommended */
 .audience-card.recommended {
   animation: track-select-pulse 0.4s ease-out;
 }
@@ -3815,60 +3803,12 @@
   font-size: 1.1rem;
 }
 
-/* === TRACK-BASED CONTENT VISIBILITY (v5.5.3) === */
-/* Using content-visibility for proper dynamic content support */
-/* FIX: max-height animation caused layout issues with accordions */
-
-[data-requires-track] {
-  content-visibility: hidden;  /* Skip rendering, preserve layout space = 0 */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-/* Track A: Show only A-tagged content */
-body[data-track="A"] [data-requires-track~="A"] {
-  content-visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Track B: Show A and B tagged content (CUMULATIVE MODEL) */
-body[data-track="B"] [data-requires-track~="A"],
-body[data-track="B"] [data-requires-track~="B"] {
-  content-visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Track C: Show all track-gated content */
-body[data-track="C"] [data-requires-track] {
-  content-visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* === TRACK A SPECIFIC STYLES === */
-body[data-track="A"] .audience-card[data-track="A"] {
-  border-color: #22c55e;
-  background: rgba(34, 197, 94, 0.1);
-}
-
-/* === TRACK B SPECIFIC STYLES === */
-body[data-track="B"] .audience-card[data-track="B"] {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-}
-
-/* === TRACK C SPECIFIC STYLES === */
-body[data-track="C"] .audience-card[data-track="C"] {
-  border-color: #8b5cf6;
-  background: rgba(139, 92, 246, 0.1);
-}
-
-body[data-track="C"] .audience-card[data-track="C"] .track-name {
-  color: #8b5cf6;
-}
+/* ============================================================
+   DELETED: LEGACY TRACK-BASED CONTENT VISIBILITY (v5.5.3)
+   ============================================================ */
+/* All [data-requires-track] and body[data-track="A/B/C"] rules removed. */
+/* Use the Layer System (data-layer="1/2/3") instead. */
+/* See lines 1088-1148 for the current Layer visibility implementation. */
 
 /* === NOSCRIPT FALLBACK === */
 /* When JavaScript is disabled, show Track B content by default */
@@ -4753,24 +4693,6 @@ body.theme-light .dep-node-link rect[fill="var(--bg)"] {
   fill: var(--bg-surface-light);
 }
 
-/* === DEBUG MODE === */
-body.debug-mode [data-requires-track] {
-  opacity: 0.5 !important;
-  max-height: 9999px !important;
-  pointer-events: auto !important;
-  outline: 2px dashed rgba(239, 68, 68, 0.5);
-}
-
-body.debug-mode [data-requires-track]::before {
-  content: 'track:' attr(data-requires-track);
-  display: block;
-  background: rgba(239, 68, 68, 0.8);
-  color: white;
-  font-size: 0.7rem;
-  padding: 2px 6px;
-  margin-bottom: 4px;
-}
-
 /* ============================================================
    PHASE 1.1: WARNING BLOCK FOR CRITICAL ANTI-PATTERNS
    ============================================================ */
@@ -4814,93 +4736,13 @@ body.theme-oled .warning-block {
 }
 
 /* ============================================================
-   PHASE 1.1: TRACK BADGES FOR VISUAL INDICATORS
+   DELETED: LEGACY TRACK BADGES (Phase 4)
    ============================================================ */
-
-.badge-track-a,
-.badge-track-b,
-.badge-track-c {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  margin-left: 0.25rem;
-  vertical-align: middle;
-}
-
-.badge-track-a {
-  background: #2a4a2a;
-  color: #88ff88;
-  border: 1px solid #44aa44;
-}
-
-.badge-track-b {
-  background: #2a3a4a;
-  color: #88ccff;
-  border: 1px solid #4488cc;
-}
-
-.badge-track-c {
-  background: #4a2a4a;
-  color: #ff88ff;
-  border: 1px solid #aa44aa;
-}
-
-/* Light theme badges */
-body.theme-light .badge-track-a {
-  background: rgba(34, 197, 94, 0.15);
-  color: #16a34a;
-  border-color: rgba(34, 197, 94, 0.4);
-}
-
-body.theme-light .badge-track-b {
-  background: rgba(56, 189, 248, 0.15);
-  color: #0284c7;
-  border-color: rgba(56, 189, 248, 0.4);
-}
-
-body.theme-light .badge-track-c {
-  background: rgba(139, 92, 246, 0.15);
-  color: #7c3aed;
-  border-color: rgba(139, 92, 246, 0.4);
-}
-
-/* OLED theme badges */
-body.theme-oled .badge-track-a {
-  background: rgba(34, 197, 94, 0.2);
-  border-color: rgba(34, 197, 94, 0.5);
-}
-
-body.theme-oled .badge-track-b {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: rgba(56, 189, 248, 0.5);
-}
-
-body.theme-oled .badge-track-c {
-  background: rgba(139, 92, 246, 0.2);
-  border-color: rgba(139, 92, 246, 0.5);
-}
-
-/* Auto-badge for headers */
-h2[data-requires-track~="B"]:not([data-requires-track~="A"])::after,
-h3[data-requires-track~="B"]:not([data-requires-track~="A"])::after {
-  content: " [B+]";
-  font-size: 0.7em;
-  color: #88ccff;
-  font-weight: normal;
-}
-
-h2[data-requires-track~="C"]:not([data-requires-track~="B"])::after,
-h3[data-requires-track~="C"]:not([data-requires-track~="B"])::after {
-  content: " [C]";
-  font-size: 0.7em;
-  color: #ff88ff;
-  font-weight: normal;
-}
+/* All .badge-track-a/b/c styles removed. */
+/* Use .layer-badge.layer-1/2/3 instead. See lines 1189-1275. */
 
 /* ============================================================
-   PHASE 1.2: PROTOTYPE BANNER FOR TRACK A
+   PHASE 1.2: PROTOTYPE BANNER FOR LAYER 1
    ============================================================ */
 
 .prototype-banner {
@@ -4914,7 +4756,7 @@ h3[data-requires-track~="C"]:not([data-requires-track~="B"])::after {
   gap: 1rem;
 }
 
-body[data-track="A"] .prototype-banner {
+body[data-layer="1"] .prototype-banner {
   display: flex;
 }
 
@@ -4934,7 +4776,7 @@ body[data-track="A"] .prototype-banner {
   color: #aaa;
 }
 
-.track-switch-btn {
+.layer-switch-btn {
   background: #44aa44;
   border: none;
   color: #fff;
@@ -4946,11 +4788,11 @@ body[data-track="A"] .prototype-banner {
   transition: background 0.15s ease;
 }
 
-.track-switch-btn:hover {
+.layer-switch-btn:hover {
   background: #55bb55;
 }
 
-.track-switch-btn:focus-visible {
+.layer-switch-btn:focus-visible {
   outline: 2px solid #88ff88;
   outline-offset: 2px;
 }
@@ -4965,11 +4807,11 @@ body.theme-light .banner-content strong {
   color: #16a34a;
 }
 
-body.theme-light .track-switch-btn {
+body.theme-light .layer-switch-btn {
   background: #16a34a;
 }
 
-body.theme-light .track-switch-btn:hover {
+body.theme-light .layer-switch-btn:hover {
   background: #22c55e;
 }
 
@@ -5371,27 +5213,13 @@ body.storage-fallback .audience-selection {
 }
 
 /* ============================================================
-   TASK C.3: CSS FALLBACK FOR DYNAMIC CLASSES
+   DELETED: LEGACY TASK C.3 FALLBACK RULES
    ============================================================ */
-[data-requires-track].hidden {
-  display: none !important;
-}
-
-/* Ensure track visibility works */
-body[data-track="A"] [data-requires-track]:not([data-requires-track~="A"]) {
-  display: none !important;
-}
-
-body[data-track="B"] [data-requires-track]:not([data-requires-track~="B"]) {
-  display: none !important;
-}
-
-body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
-  display: none !important;
-}
+/* All [data-requires-track].hidden and body[data-track] fallback rules removed. */
+/* Use the Layer System (data-layer="1/2/3") instead. */
 
 /* ============================================================
-   INTRO SECTION: TRACK SELECTOR AND REFERENCE CARDS
+   INTRO SECTION: LAYER SELECTOR AND REFERENCE CARDS
    ============================================================ */
 
 /* Track selector cards for intro section */
@@ -5418,30 +5246,30 @@ body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
 }
 
 .track-card.track-a {
-  border-left: 3px solid var(--track-a-clr, #38bdf8);
-  background: rgba(56, 189, 248, 0.05);
+  border-left: 3px solid var(--layer-1-clr, #22c55e);
+  background: rgba(34, 197, 94, 0.05);
 }
 
 .track-card.track-a strong {
-  color: var(--track-a-clr, #38bdf8);
+  color: var(--layer-1-clr, #22c55e);
 }
 
 .track-card.track-b {
-  border-left: 3px solid var(--track-b-clr, #8be9fd);
-  background: rgba(139, 233, 253, 0.05);
+  border-left: 3px solid var(--layer-2-clr, #38bdf8);
+  background: rgba(56, 189, 248, 0.05);
 }
 
 .track-card.track-b strong {
-  color: var(--track-b-clr, #8be9fd);
+  color: var(--layer-2-clr, #38bdf8);
 }
 
 .track-card.track-c {
-  border-left: 3px solid var(--track-c-clr, #a78bfa);
-  background: rgba(167, 139, 250, 0.05);
+  border-left: 3px solid var(--layer-3-clr, #8b5cf6);
+  background: rgba(139, 92, 246, 0.05);
 }
 
 .track-card.track-c strong {
-  color: var(--track-c-clr, #a78bfa);
+  color: var(--layer-3-clr, #8b5cf6);
 }
 
 .track-card p {
@@ -5517,28 +5345,28 @@ body[data-track="C"] [data-requires-track]:not([data-requires-track~="C"]) {
 
 /* Light theme adaptations for track cards */
 body.theme-light .track-card.track-a {
-  background: rgba(56, 189, 248, 0.08);
+  background: rgba(34, 197, 94, 0.08);
 }
 
 body.theme-light .track-card.track-b {
-  background: rgba(139, 233, 253, 0.08);
+  background: rgba(56, 189, 248, 0.08);
 }
 
 body.theme-light .track-card.track-c {
-  background: rgba(167, 139, 250, 0.08);
+  background: rgba(139, 92, 246, 0.08);
 }
 
 /* OLED theme adaptations for track cards */
 body.theme-oled .track-card.track-a {
-  background: rgba(56, 189, 248, 0.1);
+  background: rgba(34, 197, 94, 0.1);
 }
 
 body.theme-oled .track-card.track-b {
-  background: rgba(139, 233, 253, 0.1);
+  background: rgba(56, 189, 248, 0.1);
 }
 
 body.theme-oled .track-card.track-c {
-  background: rgba(167, 139, 250, 0.1);
+  background: rgba(139, 92, 246, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════════════════ */
@@ -6066,14 +5894,14 @@ body.theme-light .track-result {
   fill: var(--bg-surface);
 }
 
-/* === TRACK LOCK INDICATORS (Task 6) === */
-.track-locked {
+/* === LAYER LOCK INDICATORS (Task 6) === */
+.layer-locked {
   position: relative;
   opacity: 0.6;
   pointer-events: none;
 }
 
-.track-locked::before {
+.layer-locked::before {
   content: '🔒';
   position: absolute;
   top: 0.5em;
@@ -6082,8 +5910,8 @@ body.theme-light .track-result {
   z-index: 10;
 }
 
-.track-locked::after {
-  content: attr(data-track-hint);
+.layer-locked::after {
+  content: attr(data-layer-hint);
   position: absolute;
   top: 2em;
   right: 0.5em;
@@ -6099,12 +5927,12 @@ body.theme-light .track-result {
   border: 1px solid var(--border);
 }
 
-.track-locked:hover::after {
+.layer-locked:hover::after {
   opacity: 1;
 }
 
-/* Track visibility hint badges */
-.track-hint-badge {
+/* Layer visibility hint badges */
+.layer-hint-badge {
   display: inline-block;
   padding: 0.15em 0.5em;
   background: var(--accent-soft);
@@ -6354,8 +6182,8 @@ body.theme-light .track-result {
     overflow: visible !important;
   }
 
-  /* Track visibility - show all content when printing */
-  [data-requires-track] {
+  /* Layer visibility - show all content when printing */
+  [data-layer] {
     display: block !important;
   }
 
