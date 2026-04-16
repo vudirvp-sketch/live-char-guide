@@ -84,10 +84,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
+          path: .
 
       - name: Start server for quality checks
         run: |
-          pnpm exec serve build-output -l 3000 &
+          pnpm exec serve dist -l 3000 &
           npx wait-on http://localhost:3000/ --timeout 30000
 
       - name: Lighthouse CI
@@ -115,7 +116,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: build-output
+          path: .
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
@@ -123,7 +124,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build-output
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
