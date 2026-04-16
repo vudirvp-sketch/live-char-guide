@@ -56,12 +56,8 @@ jobs:
         with:
           name: build-output
           path: |
-            index.html
+            dist/
             live-char-guide-zero-install.html
-            404.html
-            assets/
-            build.hash
-            build-zero-install.hash
           retention-days: 5
 
   # Quality gate job
@@ -91,7 +87,7 @@ jobs:
 
       - name: Start server for quality checks
         run: |
-          pnpm exec serve . -l 3000 &
+          pnpm exec serve build-output -l 3000 &
           npx wait-on http://localhost:3000/ --timeout 30000
 
       - name: Lighthouse CI
@@ -102,7 +98,7 @@ jobs:
       - name: Full-Page Accessibility Audit
         continue-on-error: true  # Don't fail the build on axe errors
         run: |
-          npx @axe-core/cli http://localhost:3000/ --load-delay=1000 --exit || echo "Axe audit completed with warnings"
+          npx @axe-core/cli http://localhost:3000/ --load-delay=2000 --exit || echo "Axe audit completed with warnings"
 
   # Deployment job
   deploy:
@@ -136,7 +132,9 @@ jobs:
       - name: Smoke Test
         run: |
           PAGE_URL="${{ steps.deployment.outputs.page_url }}"
-          curl -s "$PAGE_URL" | grep -q "build-hash" || echo "WARN: build-hash not found"
+          curl -s "$PAGE_URL" | grep -q "shell-styles.css" || echo "WARN: shell not found"
+          curl -s "$PAGE_URL/assets/lazy-loader.js" | head -1 | grep -q "LAZY LOADER" || echo "WARN: lazy-loader not found"
+          curl -s "$PAGE_URL/parts-l2/01_intro.html" | grep -q "intro" || echo "WARN: parts-l2 not found"
 
       - name: Create Deploy Tag
         if: success()

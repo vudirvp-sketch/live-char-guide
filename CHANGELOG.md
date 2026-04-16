@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [5.12.0] - 2026-04-17
+
+### Added
+- **NEW ARCHITECTURE:** Lazy-loading shell system for faster initial load
+  - `src/shell/index.html` — minimal shell with layer selector UI
+  - `src/shell/lazy-loader.js` — dynamic layer content loading via fetch
+  - `src/shell/styles.css` — shell-specific styles
+- `build:shell` script for building lazy-loading architecture
+- Layer content now loads on-demand from `parts-l1/`, `parts-l2/`, `parts-l3/`
+- User selects layer on first visit, choice saved to localStorage
+- Direct linking via `?layer=2` URL parameter for sharing
+- Zero-install version preserved for offline use
+
+### Changed
+- **BREAKING:** Build output now goes to `dist/` directory
+  - `dist/index.html` is now the shell (not inline content)
+  - `dist/parts-l{1,2,3}/` contain layer HTML files
+  - `dist/assets/` contain shell-styles.css and lazy-loader.js
+- Default `pnpm run build` now uses shell architecture
+- Use `pnpm run build:inline` for old inline build (deprecated)
+- GitHub Pages deploys from `dist/` directory
+
+### Fixed
+- Single URL architecture: no page reloads when switching layers
+- Browser history works correctly (back/forward)
+- Anchor navigation works after content load
+
 ## [5.11.0] - 2026-04-16
 
 ### Changed
@@ -193,7 +220,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - Technical implementation guide
 - Testing strategies
 
-[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.11.0...HEAD
+[Unreleased]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.12.0...HEAD
+[5.12.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.11.0...v5.12.0
 [5.11.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.10.0...v5.11.0
 [5.10.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.9.0...v5.10.0
 [5.9.0]: https://github.com/vudirvp-sketch/live-char-guide/compare/v5.5.5...v5.9.0
