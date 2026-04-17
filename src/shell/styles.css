@@ -1743,3 +1743,220 @@ ennea-embed {
     filter: none;
   }
 }
+
+
+/* ============================================
+   OCEAN SVG INTERACTIVE STYLES (from plan)
+   ============================================ */
+
+#ocean-svg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+#ocean-svg .ocean-pentagon {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  opacity: 0.4;
+  fill: none;
+}
+
+#ocean-svg .ocean-profile {
+  stroke-width: 2;
+  fill: none;
+  opacity: 0.6;
+  transition: d 200ms ease;
+}
+
+#ocean-svg .ocean-connections {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  opacity: 0.25;
+}
+
+#ocean-svg .ocean-node {
+  cursor: pointer;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+#ocean-svg .ocean-node:hover circle,
+#ocean-svg .ocean-node.active circle {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+#ocean-svg .ocean-node:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+#ocean-svg .ocean-node.active circle {
+  r: 26;
+  stroke-width: 3;
+}
+
+#ocean-svg .ocean-node circle {
+  fill: var(--bg-elevated);
+  stroke-width: 2;
+  transition: stroke-width var(--transition-fast), r var(--transition-fast);
+}
+
+#ocean-svg .ocean-letter {
+  font-size: 14px;
+  font-weight: 700;
+  fill: var(--text);
+  pointer-events: none;
+  user-select: none;
+}
+
+#ocean-svg .ocean-label {
+  font-size: 10px;
+  fill: var(--text-muted);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* OCEAN trait-specific colors */
+#ocean-svg .ocean-node[data-trait="O"] circle { stroke: var(--ocean-O); }
+#ocean-svg .ocean-node[data-trait="O"] .ocean-letter { fill: var(--ocean-O); }
+#ocean-svg .ocean-node[data-trait="C"] circle { stroke: var(--ocean-C); }
+#ocean-svg .ocean-node[data-trait="C"] .ocean-letter { fill: var(--ocean-C); }
+#ocean-svg .ocean-node[data-trait="E"] circle { stroke: var(--ocean-E); }
+#ocean-svg .ocean-node[data-trait="E"] .ocean-letter { fill: var(--ocean-E); }
+#ocean-svg .ocean-node[data-trait="A"] circle { stroke: var(--ocean-A); }
+#ocean-svg .ocean-node[data-trait="A"] .ocean-letter { fill: var(--ocean-A); }
+#ocean-svg .ocean-node[data-trait="N"] circle { stroke: var(--ocean-N); }
+#ocean-svg .ocean-node[data-trait="N"] .ocean-letter { fill: var(--ocean-N); }
+
+/* OCEAN panel styles */
+.ocean-panel .trait-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ocean-panel .trait-low,
+.ocean-panel .trait-high {
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.ocean-panel .trait-low {
+  background: rgba(255,107,107,0.1);
+  border-left: 3px solid var(--ocean-E);
+}
+
+.ocean-panel .trait-high {
+  background: rgba(107,255,140,0.1);
+  border-left: 3px solid var(--ocean-A);
+}
+
+/* OCEAN quick links */
+.ocean-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ocean-quick-links .trait-link {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  text-decoration: none;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.ocean-quick-links .trait-link:hover {
+  background: var(--bg-surface);
+}
+
+/* OCEAN trait reference sections */
+.ocean-trait-reference {
+  margin-top: 24px;
+}
+
+.trait-details {
+  margin: 8px 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.trait-details summary {
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trait-details summary:hover {
+  background: var(--bg-elevated);
+}
+
+.trait-badge {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  border: 2px solid var(--trait-color, var(--accent));
+  color: var(--trait-color, var(--accent));
+}
+
+.trait-content {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* OCEAN validator panel enhanced */
+.ocean-validator-panel .validator-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.ocean-validator-panel .validator-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.ocean-validator-panel .validator-actions button:hover {
+  background: var(--bg-surface);
+}
+
+.ocean-validator-panel .validator-actions button.btn-primary {
+  background: var(--accent);
+  color: var(--bg-elevated);
+}
+
+.ocean-validator-details {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ocean-svg .ocean-node,
+  #ocean-svg .ocean-profile {
+    transition: none;
+  }
+  #ocean-svg .ocean-node:hover circle,
+  #ocean-svg .ocean-node.active circle {
+    filter: none;
+  }
+}
