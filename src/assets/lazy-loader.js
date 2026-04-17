@@ -638,24 +638,45 @@
   // LAYER SWITCHING
   // ============================================================================
 
-  async function switchLayer(layer) {
+  async function switchLayer(layer, anchor = null) {
     if (!CONFIG.LAYERS.includes(layer)) {
       console.error('[LazyLoader] Invalid layer:', layer);
       return;
     }
 
-    if (layer === currentLayer) return;
+    // If same layer, just scroll to anchor if provided
+    if (layer === currentLayer) {
+      if (anchor) {
+        scrollToAnchor(anchor);
+      }
+      return;
+    }
 
     currentLayer = layer;
     saveLayer(layer);
     
     const url = new URL(window.location);
     url.searchParams.set('layer', layer);
-    url.hash = '';
-    history.pushState({ layer }, '', url);
+    url.hash = anchor || '';
+    history.pushState({ layer, anchor }, '', url);
     
     await loadLayerContent(layer);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Scroll to anchor or top
+    if (anchor) {
+      scrollToAnchor(anchor);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function scrollToAnchor(anchor) {
+    const element = document.getElementById(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.warn('[LazyLoader] Anchor not found:', anchor);
+    }
   }
 
   async function selectLayer(layer) {
@@ -748,6 +769,13 @@
       
       wrapper.appendChild(btn);
     });
+
+    // Re-initialize interactive tools after layer switch
+    // (content is replaced, so event listeners are lost)
+    initOcean();
+    initOceanValidator();
+    initEnneagram();
+    initLayerSwitch();
   }
 
   // ============================================================================
@@ -1535,11 +1563,18 @@
 
   function initLayerSwitch() {
     document.querySelectorAll('[data-layer-switch]').forEach(link => {
-      link.addEventListener('click', (e) => {
+      link.addEventListener('click', async (e) => {
         e.preventDefault();
-        const targetLayer = link.getAttribute('data-layer-switch');
+        const rawValue = link.getAttribute('data-layer-switch');
+        // Support formats: "3", "3#anchor", "Layer 3: #anchor"
+        const match = rawValue.match(/^(\d+)(?:[#:]?\s*#?\s*(.+))?$/);
+        if (!match) return;
+
+        const targetLayer = match[1];
+        const targetAnchor = match[2] ? match[2].trim() : null;
+
         if (window.LazyLoader && window.LazyLoader.switchLayer) {
-          window.LazyLoader.switchLayer(targetLayer);
+          await window.LazyLoader.switchLayer(targetLayer, targetAnchor);
         }
       });
     });

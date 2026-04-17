@@ -106,25 +106,20 @@
     <button class="layer-indicator-tooltip" aria-label="What does this level add?" type="button">?</button>
   </div>
 
-  <!-- GLOSSARY SIDE TAB -->
-  <div class="glossary-tab" id="glossary-tab" tabindex="0" role="button" aria-label="Открыть глоссарий">📖 Глоссарий</div>
-
-  <!-- FAB BUTTONS GROUP -->
+  <!-- FAB buttons (theme, TOC, etc.) -->
   <div class="fab-group" id="fab-group" style="display: none;">
-    <button class="fab-btn" id="fab-theme" title="Тема (Dark → Light → OLED)" aria-label="Переключить тему" type="button">
+    <button class="fab-btn" id="fab-toc" title="Содержание" aria-label="Открыть содержание">
+      📑
+    </button>
+    <button class="fab-btn" id="fab-theme" title="Тема" aria-label="Переключить тему">
       <span class="theme-icon-dark">🌙</span>
       <span class="theme-icon-light" hidden>☀️</span>
       <span class="theme-icon-oled" hidden>⬛</span>
     </button>
-    <button class="fab-btn" id="fab-width" aria-label="Toggle content width" title="Ширина контента" type="button" aria-pressed="false">↔</button>
-    <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
-    <button class="fab-btn" id="fab-glossary" aria-label="Open glossary" title="Глоссарий" type="button">📖</button>
-    <button class="fab-btn" id="fab-toc" title="Содержание" aria-label="Открыть содержание" type="button">📑</button>
-    <button class="fab-btn" id="fab-top" aria-label="Scroll to top" title="Наверх" type="button">↑</button>
   </div>
 
-  <!-- TOC PANEL -->
-  <div id="toc-panel" class="panel" role="dialog" aria-label="Содержание" tabindex="-1">
+  <!-- TOC Panel -->
+  <div id="toc-panel" class="panel" role="dialog" aria-label="Содержание">
     <div class="panel-header" data-drag-handle>
       <span class="panel-header-title">📑 Содержание</span>
       <div class="panel-header-actions">
@@ -132,42 +127,6 @@
       </div>
     </div>
     <div class="panel-content" id="toc-content"></div>
-    <div class="panel-resize-handle" data-resize-handle></div>
-  </div>
-
-  <!-- NOTEPAD PANEL -->
-  <div id="notepad-panel" class="panel" tabindex="-1" aria-label="Блокнот">
-    <div class="panel-header" data-drag-handle>
-      <span class="panel-header-title">📝 Блокнот</span>
-      <div class="panel-header-actions">
-        <button class="panel-btn" data-action="save" title="Сохранить" aria-label="Сохранить заметки">💾</button>
-        <button class="panel-btn" data-action="clear" title="Очистить" aria-label="Очистить заметки">🗑</button>
-        <button class="panel-btn" data-action="export" title="Экспорт" aria-label="Экспортировать заметки">📋</button>
-        <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">×</button>
-      </div>
-    </div>
-    <textarea
-      class="panel-content panel-textarea"
-      id="notepad-content"
-      placeholder="Ваши заметки..."
-      spellcheck="false"
-      aria-label="Текст заметок"
-    ></textarea>
-    <div class="panel-resize-handle" data-resize-handle></div>
-  </div>
-
-  <!-- GLOSSARY PANEL -->
-  <div id="glossary-panel" class="panel" tabindex="-1" aria-label="Глоссарий">
-    <div class="panel-header" data-drag-handle>
-      <span class="panel-header-title">📖 Глоссарий</span>
-      <div class="panel-header-actions">
-        <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">✕</button>
-      </div>
-    </div>
-    <div class="panel-content" id="glossary-content">
-      <div class="glossary-loading">Загрузка терминов...</div>
-    </div>
-    <div class="panel-resize-handle" data-resize-handle></div>
   </div>
 
   <script src="assets/lazy-loader.js"></script>
