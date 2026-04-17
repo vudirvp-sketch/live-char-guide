@@ -1669,52 +1669,119 @@
   // ============================================================================
 
   function initMBTI() {
-    const sliders = document.querySelectorAll('.mbti-slider');
-    if (sliders.length === 0) return;
+    const AXES = ['EI', 'SN', 'TF', 'JP'];
 
-    const mbtiTypes = {
-      'INTJ': { name: 'Архитектор', desc: 'Стратег, видит паттерны, решителен' },
-      'INTP': { name: 'Логик', desc: 'Аналитик, ищет истину, абстрактный' },
-      'ENTJ': { name: 'Командир', desc: 'Лидер, системный, решительный' },
-      'ENTP': { name: 'Дебатер', desc: 'Инноватор, видит возможности' },
-      'INFJ': { name: 'Адвокат', desc: 'Визионер, эмпатичный, глубокий' },
-      'INFP': { name: 'Посредник', desc: 'Идеалист, ценности-драйвен' },
-      'ENFJ': { name: 'Протагонист', desc: 'Харизматичный лидер, эмпат' },
-      'ENFP': { name: 'Кампейнер', desc: 'Энтузиаст, вдохновляет' },
-      'ISTJ': { name: 'Логист', desc: 'Надёжный, детальный, dutiful' },
-      'ISFJ': { name: 'Защитник', desc: 'Заботливый, традиционный' },
-      'ESTJ': { name: 'Исполнитель', desc: 'Организованный, решительный' },
-      'ESFJ': { name: 'Консул', desc: 'Социальный, заботливый' },
-      'ISTP': { name: 'Виртуоз', desc: 'Прагматичный, hands-on' },
-      'ISFP': { name: 'Артист', desc: 'Чувствительный, эстетичный' },
-      'ESTP': { name: 'Предприниматель', desc: 'Действие-драйвен, рисковый' },
-      'ESFP': { name: 'Развлекатель', desc: 'Спонтанный, fun-loving' }
+    // Mapping slider values to letters
+    const axisLetterMap = {
+      EI: { '-1': 'E', '0': null, '1': 'I' },
+      SN: { '-1': 'S', '0': null, '1': 'N' },
+      TF: { '-1': 'T', '0': null, '1': 'F' },
+      JP: { '-1': 'J', '0': null, '1': 'P' }
     };
 
-    function updateMBTI() {
-      let type = '';
-      sliders.forEach(slider => {
-        const axis = slider.dataset.axis;
-        const value = parseInt(slider.value, 10);
-        
-        if (axis === 'EI') type += value < 0 ? 'E' : 'I';
-        else if (axis === 'SN') type += value < 0 ? 'S' : 'N';
-        else if (axis === 'TF') type += value < 0 ? 'T' : 'F';
-        else if (axis === 'JP') type += value < 0 ? 'J' : 'P';
+    // Type database (names and hints)
+    const typesDB = {
+      INTJ: { name: 'Архитектор', hint: 'Стратег, видит системы', temperament: 'NT' },
+      INTP: { name: 'Логик', hint: 'Аналитик, ищет истину', temperament: 'NT' },
+      ENTJ: { name: 'Командир', hint: 'Лидер, системный', temperament: 'NT' },
+      ENTP: { name: 'Дебатёр', hint: 'Инноватор, любит споры', temperament: 'NT' },
+      INFJ: { name: 'Адвокат', hint: 'Визионер, эмпатичный', temperament: 'NF' },
+      INFP: { name: 'Посредник', hint: 'Идеалист, ценности-драйвен', temperament: 'NF' },
+      ENFJ: { name: 'Протагонист', hint: 'Харизматичный лидер', temperament: 'NF' },
+      ENFP: { name: 'Борец', hint: 'Энтузиаст, вдохновляет', temperament: 'NF' },
+      ISTJ: { name: 'Администратор', hint: 'Надёжный, долг', temperament: 'SJ' },
+      ISFJ: { name: 'Защитник', hint: 'Заботливый, преданный', temperament: 'SJ' },
+      ESTJ: { name: 'Менеджер', hint: 'Организованный', temperament: 'SJ' },
+      ESFJ: { name: 'Консул', hint: 'Социальный, заботливый', temperament: 'SJ' },
+      ISTP: { name: 'Виртуоз', hint: 'Прагматичный, в моменте', temperament: 'SP' },
+      ISFP: { name: 'Артист', hint: 'Чувствительный, эстетичный', temperament: 'SP' },
+      ESTP: { name: 'Предприниматель', hint: 'Действие-ориентированный', temperament: 'SP' },
+      ESFP: { name: 'Развлекатель', hint: 'Спонтанный, социальный', temperament: 'SP' }
+    };
+
+    // Get current selection for an axis (radio takes priority over slider)
+    function getAxisValue(axis) {
+      const radio = document.querySelector(`input[name="axis-${axis}"]:checked`);
+      if (radio) return radio.value;
+
+      const slider = document.getElementById(`slider-${axis}`);
+      if (slider) {
+        const val = slider.value;
+        return axisLetterMap[axis][val];
+      }
+      return null;
+    }
+
+    // Update result display
+    function updateResult() {
+      const letters = AXES.map(getAxisValue);
+      const type = letters.every(Boolean) ? letters.join('') : null;
+      const data = type ? typesDB[type] : null;
+
+      const resultType = document.getElementById('result-type');
+      const resultName = document.getElementById('result-name');
+      const resultHint = document.getElementById('result-hint');
+
+      if (resultType) {
+        resultType.textContent = type || '—';
+      }
+
+      if (resultName) {
+        resultName.textContent = data ? data.name : 'Выберите все 4 оси';
+      }
+
+      if (resultHint) {
+        resultHint.textContent = data ? data.hint : '';
+      }
+
+      // Highlight matching card
+      document.querySelectorAll('.type-card').forEach(card => {
+        card.classList.toggle('highlighted', card.dataset.type === type);
       });
 
-      const resultEl = document.getElementById('mbti-result');
-      if (resultEl && mbtiTypes[type]) {
-        resultEl.innerHTML = `
-          <span class="mbti-type-display">${type}</span>
-          <span class="mbti-type-name">${mbtiTypes[type].name} — ${mbtiTypes[type].desc}</span>
-        `;
+      // Open corresponding temperament group
+      if (data) {
+        const group = document.querySelector(`#mbti-group-${data.temperament.toLowerCase()}`);
+        if (group && !group.open) {
+          group.open = true;
+        }
       }
     }
 
-    sliders.forEach(slider => {
-      slider.addEventListener('input', updateMBTI);
+    // Sync slider with radio
+    function syncSliderToRadio(axis, value) {
+      const slider = document.getElementById(`slider-${axis}`);
+      if (!slider) return;
+
+      const letterToValue = { E: -1, I: 1, S: -1, N: 1, T: -1, F: 1, J: -1, P: 1 };
+      slider.value = letterToValue[value] || 0;
+    }
+
+    // Initialize event listeners
+    AXES.forEach(axis => {
+      // Slider change
+      const slider = document.getElementById(`slider-${axis}`);
+      if (slider) {
+        slider.addEventListener('input', () => {
+          // Clear radios when slider moves
+          document.querySelectorAll(`input[name="axis-${axis}"]`).forEach(r => {
+            r.checked = false;
+          });
+          updateResult();
+        });
+      }
+
+      // Radio change
+      document.querySelectorAll(`input[name="axis-${axis}"]`).forEach(radio => {
+        radio.addEventListener('change', () => {
+          syncSliderToRadio(axis, radio.value);
+          updateResult();
+        });
+      });
     });
+
+    // Initial update
+    updateResult();
   }
 
   // ============================================================================
