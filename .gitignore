@@ -43,4 +43,4 @@ temp/
 /dist/
 src/index.html
 src/build.hash
-download/
+download/# lazy-loader.js должен быть только в src/shell/

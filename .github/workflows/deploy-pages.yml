@@ -57,7 +57,6 @@ jobs:
           name: build-output
           path: |
             dist/
-            live-char-guide-zero-install.html
           retention-days: 5
 
   # Quality gate job

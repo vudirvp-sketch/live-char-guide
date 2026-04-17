@@ -2,17 +2,17 @@
 /**
  * @fileoverview Artifact Validation Script for Live Char Guide
  * @module scripts/validate-artifact
- * @version 1.3.0
+ * @version 1.4.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
  * @description
- * Validates both index.html and zero-install.html artifacts against quality gates:
+ * Validates shell architecture artifacts against quality gates:
  * - File existence and size limits
  * - Version metadata presence and matching
- * - Required sections presence
- * - No external resource references (zero-install only)
+ * - Required shell elements presence
  * - HTML validity checks
+ * - WCAG 1.4.10 Reflow compliance
  * 
  * @example
  * // Run validation
@@ -33,17 +33,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
 const INDEX_PATH = join(ROOT, 'dist', 'index.html');
-const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
-// Validation limits - synchronized with bundle_check.mjs
-// Updated 2026: Modern limits for rich content guides
+// Validation limits for shell architecture
+// Shell is lightweight: ~10KB index.html + lazy-loaded parts
 // WCAG 1.4.10: Content reflow at 125% zoom (320px viewport)
-// v5.4.0: Increased limits for action plan implementation (core principles, glossary, debugging)
 const LIMITS = {
   indexMaxKB: 1000,
-  zeroInstallMaxKB: 1200,
-  minKB: 50
+  shellMinKB: 2     // Shell HTML is small, content loaded via fetch
 };
 
 // ============================================================================
@@ -99,69 +96,23 @@ async function checkVersion(content, name, expectedVersion) {
 }
 
 function checkRequiredSections(content, name) {
-  // For shell architecture (dist/index.html), check shell elements
-  // For zero-install, check content sections
-  const isShell = content.includes('lazy-loader.js') || content.includes('layer-modal');
-
-  if (isShell) {
-    // Shell architecture: check shell-specific elements
-    const requiredShellElements = [
-      { pattern: /id="content"/i, name: 'Content container' },
-      { pattern: /id="layer-modal"|class="layer-modal"/i, name: 'Layer selector' },
-      { pattern: /lazy-loader\.js/i, name: 'Lazy loader script' }
-    ];
-
-    const missing = [];
-    for (const element of requiredShellElements) {
-      if (!element.pattern.test(content)) {
-        missing.push(element.name);
-      }
-    }
-
-    if (missing.length > 0) {
-      return { pass: false, error: `${name} missing shell elements: ${missing.join(', ')}` };
-    }
-    return { pass: true };
-  }
-
-  // Zero-install: check content sections
-  const requiredSections = [
-    { pattern: /id="quick-start"|id="quickstart"/i, name: 'Quick Start' },
-    { pattern: /id="architecture"/i, name: 'Architecture' },
-    { pattern: /id="anchor"|id="anchors"/i, name: 'Anchors' }
+  // Shell architecture: check shell-specific elements
+  const requiredShellElements = [
+    { pattern: /id="content"/i, name: 'Content container' },
+    { pattern: /id="layer-modal"|class="layer-modal"/i, name: 'Layer selector' },
+    { pattern: /lazy-loader\.js/i, name: 'Lazy loader script' }
   ];
 
   const missing = [];
-  for (const section of requiredSections) {
-    if (!section.pattern.test(content)) {
-      missing.push(section.name);
+  for (const element of requiredShellElements) {
+    if (!element.pattern.test(content)) {
+      missing.push(element.name);
     }
   }
 
   if (missing.length > 0) {
-    return { pass: false, error: `${name} missing sections: ${missing.join(', ')}` };
+    return { pass: false, error: `${name} missing shell elements: ${missing.join(', ')}` };
   }
-  return { pass: true };
-}
-
-function checkNoExternalUrls(content, name) {
-  // Check for external font imports (should not exist in zero-install)
-  const googleFontsPattern = /@import\s+url\(['"]https:\/\/fonts\.googleapis\.com/i;
-  if (googleFontsPattern.test(content)) {
-    return { pass: false, error: `${name} contains Google Fonts imports - not suitable for offline use` };
-  }
-
-  // Check for external CDN URLs
-  const cdnPattern = /href=["']https?:\/\/(?!fonts\.googleapis\.com)[^"']+\.css|src=["']https?:\/\/[^"']+\.js/g;
-  const matches = content.match(cdnPattern);
-  if (matches && matches.length > 0) {
-    // Filter out common allowed external references (like og:image)
-    const problematic = matches.filter(m => !m.includes('og:image') && !m.includes('twitter:'));
-    if (problematic.length > 0) {
-      return { pass: false, error: `${name} contains external resource references: ${problematic.slice(0, 3).join(', ')}` };
-    }
-  }
-
   return { pass: true };
 }
 
@@ -169,18 +120,11 @@ function checkHtmlValidity(content, name) {
   // Basic HTML validity checks
   const errors = [];
 
-  // BUG-013 FIX: Check for DOCTYPE within first 500 chars (handles leading comments)
+  // Check for DOCTYPE within first 500 chars (handles leading comments)
   const firstLines = content.substring(0, 500);
   if (!firstLines.includes('<!DOCTYPE html>')) {
     errors.push('Missing DOCTYPE');
   }
-
-  // Check for unclosed tags (basic check)
-  const openTags = content.match(/<(div|section|article|main|header|footer|nav|aside)[^>]*>/gi) || [];
-  const closeTags = content.match(/<\/(div|section|article|main|header|footer|nav|aside)>/gi) || [];
-
-  // This is a rough check - may have false positives for self-closing or nested tags
-  // We'll just warn, not error
 
   // Check for html, head, body tags
   if (!/<html[^>]*>/i.test(content)) {
@@ -200,7 +144,7 @@ function checkHtmlValidity(content, name) {
 }
 
 /**
- * Check WCAG 1.4.10 Reflow compliance (v5.4.0 - ITEM-009)
+ * Check WCAG 1.4.10 Reflow compliance
  * At 125% zoom (320px viewport), content should not require horizontal scrolling
  * @param {string} content - HTML content
  * @param {string} name - Artifact name
@@ -279,8 +223,8 @@ async function validate() {
     log('WARN', 'VERSION file not found');
   }
 
-  // 2. Check index.html (shell or full)
-  log('INFO', 'Validating index.html...');
+  // 2. Validate dist/index.html (shell architecture)
+  log('INFO', 'Validating dist/index.html (shell architecture)...');
 
   let indexResult = await checkFileExists(INDEX_PATH, 'index.html');
   if (!indexResult.pass) {
@@ -289,11 +233,8 @@ async function validate() {
   } else {
     const indexContent = await readFile(INDEX_PATH, 'utf-8');
 
-    // Check if this is a shell architecture (smaller minimum size)
-    const isShell = indexContent.includes('lazy-loader.js') || indexContent.includes('layer-modal');
-    const minSize = isShell ? 2 : LIMITS.minKB; // Shell only needs 2KB, full needs 50KB
-
-    const indexSize = await checkFileSize(INDEX_PATH, 'index.html', minSize, LIMITS.indexMaxKB);
+    // Shell is lightweight - only needs 2KB minimum
+    const indexSize = await checkFileSize(INDEX_PATH, 'index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
 
     results.push({ gate: 'GATE-1', ...indexSize });
     if (!indexSize.pass) allPassed = false;
@@ -312,57 +253,16 @@ async function validate() {
     results.push({ gate: 'GATE-4', ...htmlCheck });
     if (!htmlCheck.pass) allPassed = false;
 
-    // v5.4.0: WCAG 1.4.10 Reflow check (ITEM-009)
+    // WCAG 1.4.10 Reflow check
     const wcagCheck = checkWCAG1410Reflow(indexContent, 'index.html');
-    results.push({ gate: 'GATE-10', ...wcagCheck });
+    results.push({ gate: 'GATE-5', ...wcagCheck });
     if (!wcagCheck.pass) allPassed = false;
     if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
-      log('WARN', `GATE-10 warnings: ${wcagCheck.warnings.join('; ')}`);
+      log('WARN', `GATE-5 warnings: ${wcagCheck.warnings.join('; ')}`);
     }
   }
 
-  // 3. Check zero-install.html
-  log('INFO', 'Validating live-char-guide-zero-install.html...');
-
-  let zeroResult = await checkFileExists(ZERO_INSTALL_PATH, 'zero-install.html');
-  if (!zeroResult.pass) {
-    results.push({ gate: 'GATE-5', ...zeroResult });
-    allPassed = false;
-  } else {
-    const zeroContent = await readFile(ZERO_INSTALL_PATH, 'utf-8');
-    const zeroSize = await checkFileSize(ZERO_INSTALL_PATH, 'zero-install.html', LIMITS.minKB, LIMITS.zeroInstallMaxKB);
-
-    results.push({ gate: 'GATE-5', ...zeroSize });
-    if (!zeroSize.pass) allPassed = false;
-
-    if (version !== 'unknown') {
-      const versionCheck = await checkVersion(zeroContent, 'zero-install.html', version);
-      results.push({ gate: 'GATE-6', ...versionCheck });
-      if (!versionCheck.pass) allPassed = false;
-    }
-
-    const sectionsCheck = checkRequiredSections(zeroContent, 'zero-install.html');
-    results.push({ gate: 'GATE-7', ...sectionsCheck });
-    if (!sectionsCheck.pass) allPassed = false;
-
-    const externalCheck = checkNoExternalUrls(zeroContent, 'zero-install.html');
-    results.push({ gate: 'GATE-8', ...externalCheck });
-    if (!externalCheck.pass) allPassed = false;
-
-    const htmlCheck = checkHtmlValidity(zeroContent, 'zero-install.html');
-    results.push({ gate: 'GATE-9', ...htmlCheck });
-    if (!htmlCheck.pass) allPassed = false;
-
-    // v5.4.0: WCAG 1.4.10 Reflow check (ITEM-009)
-    const wcagCheck = checkWCAG1410Reflow(zeroContent, 'zero-install.html');
-    results.push({ gate: 'GATE-11', ...wcagCheck });
-    if (!wcagCheck.pass) allPassed = false;
-    if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
-      log('WARN', `GATE-11 warnings: ${wcagCheck.warnings.join('; ')}`);
-    }
-  }
-
-  // 4. Report results
+  // 3. Report results
   console.log('\n============================================');
   console.log('VALIDATION RESULTS');
   console.log('============================================');
