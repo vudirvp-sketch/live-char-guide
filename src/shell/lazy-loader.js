@@ -1143,67 +1143,71 @@
   // OCEAN PENTAGON SVG
   // ============================================================================
 
+  // Trait data shared between functions
+  const OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
+  const OCEAN_NAMES = {
+    'O': 'Открытость',
+    'C': 'Добросовестность',
+    'E': 'Экстраверсия',
+    'A': 'Доброжелательность',
+    'N': 'Нейротизм'
+  };
+  const OCEAN_COLORS = {
+    'O': 'var(--ocean-O, #7c4dff)',
+    'C': 'var(--ocean-C, #4dc3ff)',
+    'E': 'var(--ocean-E, #ff6b6b)',
+    'A': 'var(--ocean-A, #6bff8c)',
+    'N': 'var(--ocean-N, #ffb84d)'
+  };
+
   function initOcean() {
     const container = document.getElementById('ocean-svg');
     if (!container) return;
-    container.innerHTML = '';
-
-    const svgNS = 'http://www.w3.org/2000/svg';
     
-    // Pentagon points (top, clockwise)
-    const cx = 150, cy = 150, r = 120;
-    const angles = [-90, -18, 54, 126, 198].map(a => a * Math.PI / 180);
-    const points = angles.map(a => ({
-      x: cx + r * Math.cos(a),
-      y: cy + r * Math.sin(a)
-    }));
+    // DO NOT clear innerHTML - use existing static SVG from HTML
+    // Just bind event handlers to existing nodes
+    const nodes = container.querySelectorAll('.ocean-node');
+    
+    nodes.forEach(node => {
+      const trait = node.getAttribute('data-trait');
+      if (!trait) return;
 
-    const labels = ['O', 'C', 'E', 'A', 'N'];
-    const names = ['Открытость', 'Добросовестность', 'Экстраверсия', 'Доброжелательность', 'Нейротизм'];
-    const colors = [
-      'var(--ocean-O, #7c4dff)',
-      'var(--ocean-C, #4dc3ff)',
-      'var(--ocean-E, #ff6b6b)',
-      'var(--ocean-A, #6bff8c)',
-      'var(--ocean-N, #ffb84d)'
-    ];
+      const name = OCEAN_NAMES[trait];
+      const color = OCEAN_COLORS[trait];
 
-    // Draw pentagon outline
-    const polygon = document.createElementNS(svgNS, 'polygon');
-    polygon.setAttribute('points', points.map(p => `${p.x},${p.y}`).join(' '));
-    polygon.setAttribute('fill', 'none');
-    polygon.setAttribute('stroke', 'var(--text-muted, #666)');
-    polygon.setAttribute('stroke-width', '1');
-    polygon.setAttribute('opacity', '0.4');
-    container.appendChild(polygon);
+      // Click handler
+      node.addEventListener('click', () => {
+        // Remove active from all nodes
+        container.querySelectorAll('.ocean-node').forEach(n => n.classList.remove('active'));
+        // Add active to clicked node
+        node.classList.add('active');
+        showOceanPanel(trait, name, color);
+        
+        // Open corresponding details section
+        const details = document.getElementById(`ocean-detail-${trait}`);
+        if (details) {
+          details.open = true;
+          details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
 
-    // Draw nodes
-    points.forEach((p, i) => {
-      const group = document.createElementNS(svgNS, 'g');
-      group.classList.add('pentagon-node');
-      group.setAttribute('data-trait', labels[i]);
-
-      const circle = document.createElementNS(svgNS, 'circle');
-      circle.setAttribute('cx', p.x);
-      circle.setAttribute('cy', p.y);
-      circle.setAttribute('r', '20');
-      circle.setAttribute('fill', 'var(--bg-elevated, #222)');
-      circle.setAttribute('stroke', colors[i]);
-      circle.setAttribute('stroke-width', '2');
-      group.appendChild(circle);
-
-      const text = document.createElementNS(svgNS, 'text');
-      text.setAttribute('x', p.x);
-      text.setAttribute('y', p.y + 5);
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('fill', colors[i]);
-      text.setAttribute('font-size', '14');
-      text.setAttribute('font-weight', '600');
-      text.textContent = labels[i];
-      group.appendChild(text);
-
-      group.addEventListener('click', () => showOceanPanel(labels[i], names[i], colors[i]));
-      container.appendChild(group);
+      // Keyboard handler for accessibility
+      node.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          node.click();
+        }
+      });
+    });
+    
+    // Quick link handlers
+    document.querySelectorAll('.ocean-quick-links .trait-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const trait = link.dataset.trait;
+        const node = document.querySelector(`#ocean-trait-${trait}`);
+        if (node) node.click();
+      });
     });
   }
 
@@ -1286,12 +1290,56 @@
   // OCEAN VALIDATOR
   // ============================================================================
 
+  // Enneagram type suggestions based on OCEAN extremes
+  const ENNEAGRAM_SUGGESTIONS = {
+    'O': { low: [1, 6, 9], high: [4, 5, 7] },
+    'C': { low: [7, 9], high: [1, 3, 5] },
+    'E': { low: [4, 5, 9], high: [2, 3, 7, 8] },
+    'A': { low: [3, 8], high: [2, 6, 9] },
+    'N': { low: [3, 9], high: [4, 6] }
+  };
+
+  function updateProfilePolygon() {
+    const svg = document.getElementById('ocean-svg');
+    const profile = document.getElementById('ocean-profile');
+    if (!svg || !profile) return;
+
+    // Pentagon geometry: center (200, 185), radius 145
+    const cx = 200, cy = 185;
+    const baseRadius = 145;
+    const innerRadius = 50; // minimum radius at value 0
+
+    const points = OCEAN_TRAITS.map((trait, i) => {
+      const slider = document.getElementById(`slider-${trait}`);
+      const val = slider ? parseInt(slider.value, 10) : 50;
+      const r = innerRadius + (val / 100) * (baseRadius - innerRadius);
+      const angle = (-90 + i * 72) * Math.PI / 180;
+      const x = Math.round(cx + r * Math.cos(angle));
+      const y = Math.round(cy + r * Math.sin(angle));
+      return `${x},${y}`;
+    });
+
+    profile.setAttribute('points', points.join(' '));
+
+    // Color based on dominant trait
+    const values = OCEAN_TRAITS.map(t => {
+      const slider = document.getElementById(`slider-${t}`);
+      return slider ? parseInt(slider.value, 10) : 50;
+    });
+    const maxIdx = values.indexOf(Math.max(...values));
+    const colors = ['var(--ocean-O)', 'var(--ocean-C)', 'var(--ocean-E)', 'var(--ocean-A)', 'var(--ocean-N)'];
+    profile.setAttribute('stroke', colors[maxIdx]);
+  }
+
   function initOceanValidator() {
     const sliders = document.querySelectorAll('.ocean-slider');
     if (sliders.length === 0) return;
 
-    const statusEl = document.getElementById('ocean-validator-status');
-    const detailsEl = document.getElementById('ocean-validator-details');
+    // FIXED: Use correct IDs from HTML
+    const statusEl = document.getElementById('validator-status');
+    const detailsEl = document.getElementById('validator-details');
+    const extremesListEl = document.getElementById('extremes-list');
+    const enneagramSuggestionEl = document.getElementById('enneagram-suggestion');
 
     // Safety check: if required elements don't exist, skip initialization
     if (!statusEl || !detailsEl) {
@@ -1299,22 +1347,19 @@
       return;
     }
 
-    const traitNames = {
-      'O': 'Открытость',
-      'C': 'Добросовестность',
-      'E': 'Экстраверсия',
-      'A': 'Доброжелательность',
-      'N': 'Нейротизм'
-    };
-
     function updateValidator() {
       const extremes = [];
 
       sliders.forEach(slider => {
         const trait = slider.dataset.trait;
         const value = parseInt(slider.value, 10);
-        const valueEl = document.getElementById(`ocean-value-${trait}`);
+        
+        // FIXED: Use correct ID format value-{trait} instead of ocean-value-{trait}
+        const valueEl = document.getElementById(`value-${trait}`);
         if (valueEl) valueEl.textContent = value;
+
+        // Update aria-valuenow
+        slider.setAttribute('aria-valuenow', value);
 
         const label = slider.closest('.ocean-slider-label');
         if (label) {
@@ -1322,41 +1367,98 @@
         }
 
         if (value < 30) {
-          extremes.push({ trait, value, type: 'low', name: traitNames[trait] });
+          extremes.push({ trait, value, type: 'low', name: OCEAN_NAMES[trait] });
           if (label) label.classList.add('ocean-extreme', 'ocean-extreme-low');
         } else if (value > 70) {
-          extremes.push({ trait, value, type: 'high', name: traitNames[trait] });
+          extremes.push({ trait, value, type: 'high', name: OCEAN_NAMES[trait] });
           if (label) label.classList.add('ocean-extreme', 'ocean-extreme-high');
         }
       });
 
-      // Update status - with null safety
-      if (!statusEl || !detailsEl) return;
-
+      // Update status
       statusEl.classList.remove('validator-green', 'validator-yellow', 'validator-red');
 
       if (extremes.length === 0) {
         statusEl.textContent = '⚠ 0 экстремумов — персонаж может быть забываемым';
         statusEl.classList.add('validator-yellow');
-        detailsEl.innerHTML = '<span class="ocean-no-extremes">Все значения в нормальном диапазоне (30-70)</span>';
+        if (extremesListEl) {
+          extremesListEl.textContent = 'Все значения в нормальном диапазоне (30–70).';
+        }
+        if (enneagramSuggestionEl) {
+          enneagramSuggestionEl.textContent = '';
+        }
       } else if (extremes.length <= 2) {
         statusEl.textContent = `✓ ${extremes.length} экстремум(а) — персонаж запоминающийся`;
         statusEl.classList.add('validator-green');
-        detailsEl.innerHTML = extremes.map(e => 
-          `<span class="ocean-extreme-tag extreme-${e.type}">${e.trait}: ${e.value} (${e.type === 'low' ? 'Low' : 'High'})</span>`
-        ).join(' ');
+        if (extremesListEl) {
+          const parts = extremes.map(e => {
+            const dir = e.type === 'low' ? 'низкая' : 'высокая';
+            return `${e.trait}: ${e.value} (${dir})`;
+          });
+          extremesListEl.textContent = 'Экстремумы: ' + parts.join(', ');
+        }
       } else {
         statusEl.textContent = `✗ ${extremes.length} экстремумов — риск внутренней противоречивости`;
         statusEl.classList.add('validator-red');
-        detailsEl.innerHTML = extremes.map(e => 
-          `<span class="ocean-extreme-tag extreme-${e.type}">${e.trait}: ${e.value}</span>`
-        ).join(' ');
+        if (extremesListEl) {
+          const parts = extremes.map(e => `${e.trait}: ${e.value}`);
+          extremesListEl.textContent = 'Экстремумы: ' + parts.join(', ');
+        }
       }
+
+      // Enneagram suggestions
+      if (enneagramSuggestionEl && extremes.length > 0) {
+        const suggestedTypes = new Set();
+        extremes.forEach(e => {
+          const types = e.type === 'low' ? ENNEAGRAM_SUGGESTIONS[e.trait].low : ENNEAGRAM_SUGGESTIONS[e.trait].high;
+          types.forEach(type => suggestedTypes.add(type));
+        });
+        if (suggestedTypes.size > 0) {
+          enneagramSuggestionEl.textContent = 'Рекомендуемые типы Enneagram: ' + [...suggestedTypes].sort().join(', ');
+        } else {
+          enneagramSuggestionEl.textContent = '';
+        }
+      }
+
+      // Update profile polygon
+      updateProfilePolygon();
     }
 
+    // Bind slider events
     sliders.forEach(slider => {
       slider.addEventListener('input', updateValidator);
     });
+
+    // Reset button
+    const resetBtn = document.getElementById('ocean-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        sliders.forEach(slider => {
+          const trait = slider.dataset.trait;
+          slider.value = 50;
+          slider.setAttribute('aria-valuenow', '50');
+          const valueEl = document.getElementById(`value-${trait}`);
+          if (valueEl) valueEl.textContent = '50';
+        });
+        updateValidator();
+      });
+    }
+
+    // Copy button
+    const copyBtn = document.getElementById('ocean-copy');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const profile = OCEAN_TRAITS.map(t => {
+          const slider = document.getElementById(`slider-${t}`);
+          return `${t}:${slider ? slider.value : 50}`;
+        }).join(' ');
+        copyToClipboard(profile).then((success) => {
+          const original = copyBtn.textContent;
+          copyBtn.textContent = success ? 'Скопировано!' : 'Ошибка';
+          setTimeout(() => { copyBtn.textContent = original; }, 1500);
+        });
+      });
+    }
 
     // Initial update
     updateValidator();
