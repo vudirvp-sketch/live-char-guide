@@ -1068,6 +1068,466 @@ body.content-wide pre {
   background: linear-gradient(135deg, transparent 50%, var(--accent) 50%);
 }
 
+/* === LAYER REMARK === */
+.layer-remark {
+  display: block;
+  padding: 0.5em 0.75em;
+  margin: 0.5em 0;
+  background: rgba(156, 163, 175, 0.08);
+  border-left: 2px solid var(--border);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+.layer-remark .remark-icon {
+  font-size: 1em;
+  margin-right: 0.3em;
+  vertical-align: middle;
+}
+
+.layer-remark a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.layer-remark a:hover {
+  text-decoration: underline;
+}
+
+/* === OCEAN CSS VARIABLES === */
+:root {
+  --ocean-O: #7c4dff;
+  --ocean-C: #4dc3ff;
+  --ocean-E: #ff6b6b;
+  --ocean-A: #6bff8c;
+  --ocean-N: #ffb84d;
+}
+
+/* === OCEAN EMBED === */
+.ocean-embed {
+  padding: 0.4em 0.8em 1.4em;
+}
+
+.ocean-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.diagram-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.ocean-embed svg#ocean-svg {
+  width: min(420px, 90vw);
+  height: min(420px, 90vw);
+  display: block;
+}
+
+.pentagon-node {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pentagon-node circle {
+  stroke-width: 2;
+  transition: all 0.25s;
+}
+
+.pentagon-node:hover circle,
+.pentagon-node.active circle {
+  filter: drop-shadow(0 0 12px currentColor);
+  stroke-width: 3;
+}
+
+.pentagon-node text {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 16px;
+  fill: #fff;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-weight: 700;
+}
+
+.pentagon-axis {
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  opacity: 0.25;
+}
+
+.pentagon-outline {
+  fill: none;
+  stroke-width: 1.5;
+  opacity: 0.4;
+}
+
+.ocean-panel {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.ocean-panel .panel-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ocean-panel .panel-header .trait-letter {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ocean-panel .panel-header .trait-name {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ocean-panel .panel-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ocean-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* === OCEAN VALIDATOR === */
+.ocean-validator-panel {
+  margin: 1.5em 0;
+  padding: 1em 1.2em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.ocean-validator-panel h4 {
+  margin: 0 0 0.8em;
+  color: var(--text);
+}
+
+.ocean-validator-intro {
+  margin-bottom: 1em;
+  font-size: 0.85rem;
+}
+
+.ocean-validator-intro ul {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.ocean-validator-green { color: #22c55e; font-weight: 600; }
+.ocean-validator-yellow { color: #f59e0b; font-weight: 600; }
+.ocean-validator-red { color: #ef4444; font-weight: 600; }
+
+.ocean-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.ocean-slider-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  font-size: 0.85rem;
+}
+
+.ocean-slider-label .trait-letter {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 24px;
+}
+
+.ocean-slider {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  border-radius: 3px;
+  outline: none;
+}
+
+.ocean-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.ocean-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.slider-value {
+  min-width: 30px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.ocean-validator-status {
+  margin-top: 1em;
+  padding: 0.6em 0.8em;
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.ocean-validator-status.validator-green {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #22c55e;
+}
+
+.ocean-validator-status.validator-yellow {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #f59e0b;
+}
+
+.ocean-validator-status.validator-red {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+.ocean-validator-details {
+  margin-top: 0.5em;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.ocean-extreme-tag {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  margin: 0.15em;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ocean-extreme-tag.extreme-low {
+  background: rgba(107, 255, 140, 0.15);
+  color: #6bff8c;
+}
+
+.ocean-extreme-tag.extreme-high {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+}
+
+/* === STEPS GRID === */
+.steps-grid {
+  display: grid;
+  gap: 0.8em;
+  margin: 1.2em 0;
+}
+
+.step-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1em 1.2em;
+  border-left: 3px solid var(--accent);
+}
+
+.step-card .step-num {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 0.2em;
+}
+
+/* === ENNEAGRAM EMBED === */
+ennea-embed {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  padding: 0.4em 0.8em 1.4em;
+}
+
+.ennea-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.ennea-embed svg#ennea-svg {
+  width: min(380px, 100%);
+  height: min(380px, 100%);
+  display: block;
+  flex-shrink: 0;
+}
+
+.ennea-embed .node {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ennea-embed .node circle {
+  stroke-width: 2;
+  transition: all 0.25s;
+}
+
+.ennea-embed .node:hover circle,
+.ennea-embed .node.active circle {
+  filter: drop-shadow(0 0 10px currentColor);
+  stroke-width: 3;
+}
+
+.ennea-embed .node text {
+  pointer-events: none;
+}
+
+.ennea-embed .inner-lines line {
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  opacity: 0.3;
+}
+
+.ennea-panel {
+  flex: 1;
+  min-width: 230px;
+  max-width: 360px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.ennea-panel-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ennea-type-num {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.ennea-type-name {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ennea-panel-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ennea-row-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.ennea-fear-val { font-size: 0.78rem; line-height: 1.5; color: #e87a7a; }
+.ennea-desire-val { font-size: 0.78rem; line-height: 1.5; color: #7ae89a; }
+
+.ennea-wings-row { display: flex; gap: 8px; margin-top: 2px; }
+
+.ennea-wing-chip {
+  flex: 1;
+  border-radius: 3px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.ennea-wing-chip .wn {
+  font-size: 0.9rem;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  margin-bottom: 2px;
+}
+
+.ennea-wing-chip .wd {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.ennea-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .ocean-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ocean-panel {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .ennea-embed .ennea-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .ennea-embed svg#ennea-svg {
+    width: min(320px, 90vw);
+    height: min(320px, 90vw);
+  }
+
+  .ennea-panel {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 /* === GLOSSARY ITEMS === */
 .glossary-item {
   padding: 0.5em 0;

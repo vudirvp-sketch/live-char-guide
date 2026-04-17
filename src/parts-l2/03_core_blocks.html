@@ -32,6 +32,53 @@
 • После момента близости → становится резким, уходит → Цена: руки дрожат, когда关门
 • Когда спрашивают о чувствах → переводит тему, шутит → Цена: голос становится тише</code></pre>
 
+<h4>Таблица якорей по триггерам:</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Триггер</th><th>Действие</th><th>Цена (физическая)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Проявление искренней заботы</td>
+        <td>Отшучивается, отстраняется</td>
+        <td>Укол вины в груди</td>
+      </tr>
+      <tr>
+        <td>Момент близости</td>
+        <td>Становится резким, уходит</td>
+        <td>Руки дрожат</td>
+      </tr>
+      <tr>
+        <td>Вопрос о чувствах</td>
+        <td>Переводит тему, шутит</td>
+        <td>Голос тише</td>
+      </tr>
+      <tr>
+        <td>Deception/Concealment (Уолтер)</td>
+        <td>Касается виска, поправляет очки</td>
+        <td>Двухсекундная пауза, рука сжимает подлокотник</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<details class="interactive">
+  <summary>Walter White: Full Anchor Breakdown</summary>
+  <p>
+    <strong>Trigger:</strong> Уолтер чувствует, что его обман вот-вот раскроется.<br>
+    <strong>Action:</strong> Касается виска, поправляет очки — микрожесты "думающего человека".<br>
+    <strong>Price:</strong> Двухсекундная пауза, больша́я рука сжимает подлокотник — 
+    тело выдаёт напряжение, которое голос скрывает.
+  </p>
+  <p>
+    <strong>Почему работает:</strong> Даже "сильные" персонажи имеют видимый Price.
+    §R1: Price = immediate physical reaction. Уолтер контролирует голос, 
+    но не контролирует хватку на подлокотнике.
+  </p>
+</details>
+
 <hr>
 
 <h3 id="examples">3.2 Примеры сообщений</h3>
@@ -52,6 +99,119 @@
     </tbody>
   </table>
 </div>
+
+<h4 id="example-quality">Качество примеров</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Название</th>
+        <th>Характеристики</th>
+        <th>Tokens</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tip">✓ Tier 1</span></td>
+        <td>Образцовый</td>
+        <td>Уникальный голос, тело-первым, показывает FLAW</td>
+        <td>80-120</td>
+      </tr>
+      <tr>
+        <td><span class="tag opt">⚠ Tier 2</span></td>
+        <td>Приемлемый</td>
+        <td>Отличимый голос, но без уникальных сигнатур</td>
+        <td>60-150</td>
+      </tr>
+      <tr>
+        <td><span class="tag risk">✗ Tier 3</span></td>
+        <td>Проблемный</td>
+        <td>Generic голос, начинается с речи, tell-not-show</td>
+        <td>&gt;150</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Target:</strong> минимум 2 примера на Tier 1.</p>
+
+<details class="interactive" aria-labelledby="quality-details-summary">
+  <summary id="quality-details-summary">📊 Full Comparison Table (6 criteria × 3 tiers)</summary>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th>Tier 1 ✅</th>
+          <th>Tier 2 ⚠️</th>
+          <th>Tier 3 ❌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Voice uniqueness</strong></td>
+          <td>Immediately recognizable</td>
+          <td>Distinguishable</td>
+          <td>Generic/any character</td>
+        </tr>
+        <tr>
+          <td><strong>Body first</strong></td>
+          <td>Physical action before every line</td>
+          <td>Mostly</td>
+          <td>Speech-first</td>
+        </tr>
+        <tr>
+          <td><strong>FLAW visibility</strong></td>
+          <td>FLAW manifests naturally</td>
+          <td>Hinted</td>
+          <td>Absent</td>
+        </tr>
+        <tr>
+          <td><strong>Token count</strong></td>
+          <td>80-120</td>
+          <td>60-150</td>
+          <td>&gt;150</td>
+        </tr>
+        <tr>
+          <td><strong>Dialogue style</strong></td>
+          <td>Unique syntax/vocabulary</td>
+          <td>Standard</td>
+          <td>Template phrases</td>
+        </tr>
+        <tr>
+          <td><strong>Show vs Tell</strong></td>
+          <td>100% show</td>
+          <td>Mostly show</td>
+          <td>Tell-heavy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Примеры по Tier</h4>
+
+  <h5>Tier 1 ✅ — Образцовый</h5>
+  <pre><code>*finger taps the rim of the whiskey glass, three times, always three times*
+"Another one? Nah."
+*slides glass forward, knuckles pale against the bar counter*
+"Got somewhere to be. Someone to be."</code></pre>
+  <p><em>Голос уникален, тело первым, 78 токенов, FLAW виден (ритуал тремя постукиваниями = compulsion)</em></p>
+
+  <h5>Tier 2 ⚠️ — Приемлемый</h5>
+  <pre><code>*glances at the whiskey bottle*
+"I shouldn't."
+*sighs, pushes glass away*
+"Fine. One more."</code></pre>
+  <p><em>Отличимый голос, тело присутствует, но нет уникальных сигнатур, 45 токенов</em></p>
+
+  <h5>Tier 3 ❌ — Проблемный</h5>
+  <pre><code>"I don't think I should have another drink. I've been struggling with alcohol and I'm trying to quit."
+*looks sad*</code></pre>
+  <p><em>Generic голос, речь первой, tell-not-show, >50 токенов, FLAW объясняется вместо демонстрации</em></p>
+</details>
 
 <h4>Пример: Геральт (нейтральный)</h4>
 
@@ -142,6 +302,31 @@
   <li>Стиль разметки = Examples</li>
 </ul>
 
+<h5>Альтернативный пример: Пол Атрейдес</h5>
+<p>
+  Greeting может диктоваться средой, а не только внутренним состоянием.
+  Пример: <strong>Пол Атрейдес</strong> — пустыня Арракиса определяет первый контакт:
+</p>
+
+<details class="interactive">
+  <summary>Пол Атрейдес: Full Greeting</summary>
+  <pre><code>*The sand whispers underfoot. A shadow passes overhead—another ornithopter patrol. I lower my body closer to the dune's crest, feeling the heat through my stillsuit.*
+
+*Eyes scan the horizon. Nothing but endless golden waves and the promise of water somewhere beneath.*
+
+"I am a Fremen." *The words come out before I can stop them, tasting the lie.* "I seek Shai-Hulud."
+
+*My hand drifts to the crysknife at my belt—Father's knife, now mine.* "I am Paul Muad'Dib. I come in peace."</code></pre>
+  <p>
+    <strong>Breakdown:</strong><br>
+    environment (песок, жара, патруль) → action (понижается, сканирует) → speech (ложь о Fremen) → hint at FLAW (слова приходят сами, рука к ножу = готовность к бою vs. слова о мире)
+  </p>
+  <p>
+    <strong>Педагогический вывод:</strong> Dune учит, что среда диктует поведение.
+    Сенсорные элементы — не декорация, они ЗАДАЮТ состояние.
+  </p>
+</details>
+
 <hr>
 
 <h3 id="voice-isolation">3.5 Изоляция голоса</h3>
@@ -177,5 +362,44 @@
 ✅ Example:
 &lt;START&gt;
 Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
+
+<div class="callout tip">
+  <strong>Экстремальный кейс: Джокер</strong><br>
+  Если голос невозможно описать словами — его МОЖНО только воспроизвести в Examples.<br><br>
+  <strong>Пример:</strong> Джокер — невозможно описать "хаотично, со смехом" 
+  (модель поймёт "эксцентричный злодей" → generic).<br><br>
+  Но воспроизвести в Example:
+  <pre><code>*tongue licks scars on lip... slow, deliberate*
+
+"Why... so... serious?"
+
+*tilts head, giggles bubble up from somewhere deep*</code></pre>
+  — модель УЧИТСЯ паузам, связкам действие→речь, абсурду.
+</div>
+
+<p class="layer-remark">
+  <span class="remark-icon">→</span>
+  Полный разбор кейса Джокера → <a href="javascript:void(0)" data-layer-switch="3">Layer 3</a>
+</p>
+
+<div class="callout warn">
+  <strong>⚠️ Anti-Example: "Красноречивый Джесси"</strong><br>
+  Контрастная пара:
+  <pre><code>❌ Voice Leak:
+"Я пытаюсь справиться с глубоким чувством моральной вины за то, что я сделал..."
+(слишком красноречивый для Джесси — модель produces "eloquent Jesse")</code></pre>
+
+  <pre><code>✅ Intended:
+"Я не могу... Я не могу это делать, yo. Просто... заткнись об этом, ладно?"
+*пинает половицу, отводит взгляд*</code></pre>
+
+  <strong>Вывод:</strong> Для 12B моделей, голос в Description = модель генерирует "красноречивую" версию
+  вместо аутентичного голоса. Голос ДОЛЖЕН жить только в Examples.
+</div>
+
+<p class="layer-remark">
+  <span class="remark-icon">→</span>
+  Полная карточка Джесси Пинкмана → <a href="javascript:void(0)" data-layer-switch="3">Layer 3: Appendix</a>
+</p>
 
 </section>
