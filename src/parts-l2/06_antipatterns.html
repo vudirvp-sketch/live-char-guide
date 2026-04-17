@@ -1,7 +1,7 @@
 <section id="antipatterns">
 <h2>Критические анти-паттерны</h2>
 
-<p><span class="tag warn">Warning</span> — эти 7 ошибок критически влияют на качество персонажа.</p>
+<p><span class="tag warn">Warning</span> — эти 8 ошибок критически влияют на качество персонажа.</p>
 
 <hr>
 
@@ -138,12 +138,53 @@
 
 <hr>
 
+<h3 id="ap-ocean-overload">❌ AP-15: OCEAN Overload</h3>
+
+<div class="antipattern-card">
+  <div class="problem-block">
+    <p><strong>ПРОБЛЕМА:</strong> 3+ экстремальных полюса OCEAN (значения &lt;30 или &gt;70) → персонаж противоречив, конфликтующие поведения, модель путается.</p>
+  </div>
+  <div class="solution-block">
+    <p><strong>РЕШЕНИЕ:</strong> Ограничь 1-2 полюсами максимум. Если 3-й полюс кажется необходимым → добавь GHOST обоснование. Каждый полюс должен поддерживать FLAW или объяснять LIE.</p>
+  </div>
+  <div class="example-block">
+    <p><strong>ПРИМЕР:</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Scenario</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>High E + Low C + High N</td>
+            <td>Тайлер с тревогой = тревожный хаотичный = generic villain (Тайлер "работает" именно потому, что он NOT anxious — он представляет свободу ОТ тревоги)</td>
+          </tr>
+          <tr>
+            <td>High O + High C + Low A</td>
+            <td>Творческий перфекционист-эгоист = внутренний конфликт</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pre><code>❌ OCEAN: O:75 C:20 E:85 A:35 N:80 → 4 экстремума → персонаж непоследователен
+✅ OCEAN: O:45 C:15 E:85 A:40 N:30 → 2 экстремума (Low C, High E) → запоминающийся персонаж</code></pre>
+  </div>
+</div>
+
+<p class="layer-remark">
+  <span class="remark-icon">→</span>
+  Полная кросс-таблица OCEAN×Enneagram → 
+  <a href="javascript:void(0)" data-layer-switch="3">Layer 3: #ocean-anchor-algorithm</a>
+</p>
+
+<hr>
+
 <h3>Сводная таблица</h3>
 
 <div class="table-wrap">
   <table>
     <thead>
-      <tr><th>Анти-паттерн</th><h>Симптом</th><th>Быстрое решение</th></tr>
+      <tr><th>Анти-паттерн</th><th>Симптом</th><th>Быстрое решение</th></tr>
     </thead>
     <tbody>
       <tr><td>Token Bloat</td><td>Повторы, потеря фокуса</td><td>Description ≤ 600 токенов</td></tr>
@@ -153,6 +194,7 @@
       <tr><td>RepPen > 1.10</td><td>Потеря голоса</td><td>RepPen = 1.05</td></tr>
       <tr><td>No Anti-Godmoding</td><td>Модель пишет за {{user}}</td><td>Добавь блок в SP</td></tr>
       <tr><td>Presence Penalty > 0</td><td>Теряются signature обороты</td><td>PP = 0.0</td></tr>
+      <tr><td>OCEAN Overload</td><td>Персонаж противоречив</td><td>Ограничь 1-2 полюсами</td></tr>
     </tbody>
   </table>
 </div>

@@ -131,6 +131,139 @@
 
 <hr>
 
+<h4 id="ap-ocean-overload">❌ AP-15: OCEAN Overload</h4>
+
+<div class="antipattern-card">
+  <div class="problem-block">
+    <p><strong>ПРОБЛЕМА:</strong> 3+ экстремальных полюса OCEAN (значения &lt;30 или &gt;70) → персонаж противоречив, конфликтующие поведения, модель путается.</p>
+  </div>
+  <div class="solution-block">
+    <p><strong>РЕШЕНИЕ:</strong> Ограничь 1-2 полюсами максимум. Если 3-й полюс кажется необходимым → добавь GHOST обоснование. Каждый полюс должен поддерживать FLAW или объяснять LIE.</p>
+  </div>
+  <div class="example-block">
+    <p><strong>ДЕТАЛЬНЫЙ АНАЛИЗ:</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Scenario</th><th>Проблема</th><th>Почему не работает</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>High E + Low C + High N</td>
+            <td>Тайлер Дёрден с тревогой = тревожный хаотичный = generic villain</td>
+            <td>Тайлер "работает" именно потому, что он NOT anxious — он представляет свободу ОТ тревоги. Добавление High N разрушает архетип.</td>
+          </tr>
+          <tr>
+            <td>High O + High C + Low A</td>
+            <td>Творческий перфекционист-эгоист</td>
+            <td>High O (открытость к опыту) + High C (структура) + Low A (конкуренция) = внутренний конфликт между эксплорацией и контролем</td>
+          </tr>
+          <tr>
+            <td>Low E + High A + High N</td>
+            <td>Интровертный альтруист с тревогой</td>
+            <td>Low E (уход от людей) + High A (желание помочь) + High N (тревога) = парализующий конфликт между социальной тревогой и потребностью помогать</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>ПРАВИЛО 1-2 ПОЛЮСОВ:</strong></p>
+    <pre><code>❌ OCEAN: O:75 C:20 E:85 A:35 N:80 → 4 экстремума → персонаж непоследователен, модель выбирает случайное поведение
+
+✅ OCEAN: O:45 C:15 E:85 A:40 N:30 → 2 экстремума (Low C, High E) → запоминающийся, последовательный персонаж
+
+✅ С GHOST-обоснованием для 3-го полюса:
+   OCEAN: O:45 C:15 E:85 A:40 N:72
+   GHOST: "После инцидента развил гипервигильность" → High N обоснован</code></pre>
+  </div>
+</div>
+
+<details class="interactive">
+  <summary>📊 OCEAN×Enneagram Correlation Matrix</summary>
+  
+  <p>Используйте эту таблицу для согласования OCEAN полюсов с Enneagram типом:</p>
+  
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Enneagram</th>
+          <th>Core Fear → LIE</th>
+          <th>OCEAN Correlate</th>
+          <th>Spine FLAW Pattern</th>
+          <th>Spine NEED Direction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Corruption → "I must be perfect"</td>
+          <td>High C, Low A</td>
+          <td>Perfectionism, criticism</td>
+          <td>Accept imperfection</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Worthlessness → "I must be needed"</td>
+          <td>High A, High E</td>
+          <td>People-pleasing, self-sacrifice</td>
+          <td>Own needs matter</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Failure → "I am my achievements"</td>
+          <td>High C, High E, Low A</td>
+          <td>Image-focused, overwork</td>
+          <td>Authentic self-worth</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Insignificance → "I must be unique"</td>
+          <td>High O, Low E, High N</td>
+          <td>Uniqueness-seeking, melancholy</td>
+          <td>Find meaning in ordinary</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Incompetence → "I must understand"</td>
+          <td>High O, Low E, Low A</td>
+          <td>Withdrawal, intellectualization</td>
+          <td>Engage with world</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Betrayal → "The world is dangerous"</td>
+          <td>High N, Low E</td>
+          <td>Anxiety, loyalty-testing</td>
+          <td>Trust own judgment</td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Deprivation → "I must have options"</td>
+          <td>High O, High E, Low N</td>
+          <td>Escapism, commitment issues</td>
+          <td>Stay present</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>Vulnerability → "I must be strong"</td>
+          <td>High E, Low A</td>
+          <td>Control, aggression</td>
+          <td>Show vulnerability</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>Conflict → "Peace at any cost"</td>
+          <td>Low E, High A, Low N</td>
+          <td>Passive, self-forgetting</td>
+          <td>Assert own needs</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+
+<hr>
+
 <h3>Сводная таблица Layer 3 Antipatterns</h3>
 
 <div class="table-wrap">
@@ -146,6 +279,7 @@
       <tr><td>AP-12</td><td>XML Malformed</td><td>Структура не работает</td></tr>
       <tr><td>AP-13</td><td>Lorebook Conflict</td><td>Противоречивая информация</td></tr>
       <tr><td>AP-14</td><td>Context Window Violation</td><td>Персонаж "забывает"</td></tr>
+      <tr><td>AP-15</td><td>OCEAN Overload</td><td>Персонаж противоречив</td></tr>
     </tbody>
   </table>
 </div>

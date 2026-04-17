@@ -8,10 +8,10 @@
   "parts": [
     { "file": "01_intro.html", "title": "Introduction", "anchors": ["intro", "what-is-card", "layer-choice"] },
     { "file": "02_quickstart.html", "title": "Quick Start", "anchors": ["quickstart", "full-pipeline"] },
-    { "file": "03_core_blocks.html", "title": "Core Blocks", "anchors": ["anchors", "examples", "greeting", "voice-isolation", "embodiment"] },
-    { "file": "04_spine.html", "title": "SPINE Framework", "anchors": ["spine", "want", "need", "flaw", "lie", "ghost", "spine-anchors-mapping"] },
+    { "file": "03_core_blocks.html", "title": "Core Blocks", "anchors": ["anchors", "examples", "example-quality", "greeting", "voice-isolation", "embodiment"] },
+    { "file": "04_spine.html", "title": "SPINE Framework", "anchors": ["spine", "want", "need", "flaw", "lie", "ghost", "spine-anchors-mapping", "ocean", "ocean-pole-guidelines", "enneagram"] },
     { "file": "05_technical.html", "title": "Technical Settings", "anchors": ["technical", "sampling", "authors-note", "lorebook", "format-lock"] },
-    { "file": "06_antipatterns.html", "title": "Critical Antipatterns", "anchors": ["antipatterns", "ap-token-bloat", "ap-missing-price", "ap-voice-description", "ap-ghost-sp", "ap-reppen-overdose"] },
+    { "file": "06_antipatterns.html", "title": "Critical Antipatterns", "anchors": ["antipatterns", "ap-token-bloat", "ap-missing-price", "ap-voice-description", "ap-ghost-sp", "ap-reppen-overdose", "ap-ocean-overload"] },
     { "file": "07_testing.html", "title": "Testing & Diagnostics", "anchors": ["testing", "test-scenarios", "symptom-table"] },
     { "file": "08_glossary.html", "title": "Glossary", "anchors": ["glossary"] },
     { "file": "09_appendix.html", "title": "Appendix", "anchors": ["appendix", "parameter-table", "examples"] },
