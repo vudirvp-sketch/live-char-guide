@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "architecture": "shell",
+  "description": "Live Character Guide - Shell Architecture with Lazy-Loading Layers",
+  "layers": {
+    "l1": {
+      "name": "Basic",
+      "description": "Beginner-friendly content — minimal working card in ~15 minutes",
+      "token_budget": "400-800",
+      "color": "#22c55e",
+      "manifest": "src/parts-l1/manifest.json",
+      "parts_dir": "src/parts-l1"
+    },
+    "l2": {
+      "name": "Optimal",
+      "description": "Full pipeline, all core elements, ready to work",
+      "token_budget": "800-1200",
+      "color": "#3b82f6",
+      "manifest": "src/parts-l2/manifest.json",
+      "parts_dir": "src/parts-l2",
+      "recommended": true
+    },
+    "l3": {
+      "name": "Expert",
+      "description": "Extended theory, advanced techniques, all optional elements",
+      "token_budget": "1500+",
+      "color": "#8b5cf6",
+      "manifest": "src/parts-l3/manifest.json",
+      "parts_dir": "src/parts-l3"
+    }
+  },
+  "shell": {
+    "index": "src/shell/index.html",
+    "styles": "src/shell/styles.css",
+    "loader": "src/shell/lazy-loader.js"
+  },
+  "build": {
+    "output_dir": "dist",
+    "script": "src/scripts/build-shell.mjs"
+  }
+}

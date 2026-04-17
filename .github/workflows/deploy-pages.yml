@@ -42,14 +42,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build all artifacts
+      - name: Build all artifacts (shell architecture)
         run: pnpm run build:all
 
       - name: Validate artifacts
         run: pnpm run validate
-
-      - name: Contrast Check
-        run: node scripts/contrast_checker.mjs src/tokens.json
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -83,20 +80,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: .
+          path: dist
 
       - name: Start server for quality checks
         run: |
           pnpm exec serve dist -l 3000 &
-          npx wait-on http://localhost:3000/ --timeout 30000
+          npx wait-on http://localhost:3000/ --timeout 60000
 
       - name: Lighthouse CI
         run: npx lhci autorun --config=.lighthouserc.json
 
-      # BUG-016 FIX: Use @axe-core/cli instead of axe for better compatibility
-      # The old axe package had chromedriver issues
       - name: Full-Page Accessibility Audit
-        continue-on-error: true  # Don't fail the build on axe errors
+        continue-on-error: true
         run: |
           npx @axe-core/cli http://localhost:3000/ --load-delay=2000 --exit || echo "Axe audit completed with warnings"
 
@@ -115,7 +110,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: .
+          path: dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

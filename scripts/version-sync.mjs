@@ -2,7 +2,7 @@
 /**
  * @fileoverview Version Sync Checker for Live Char Guide
  * @module scripts/version-sync
- * @version 1.1.0
+ * @version 2.0.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
@@ -11,22 +11,12 @@
  * Compares version across:
  * - src/VERSION (source of truth)
  * - package.json
- * - index.html meta tag
- * - live-char-guide-zero-install.html meta tag
+ * - dist/index.html meta tag (shell architecture)
  * 
  * Exit codes:
  * - 0: All versions in sync
  * - 1: Version drift detected (warning)
  * - 2: Error during check
- * 
- * @example
- * // Run version check
- * node scripts/version-sync.mjs
- * 
- * // Via npm
- * npm run version:check
- * 
- * @see {@link https://github.com/vudirvp-sketch/live-char-guide|Repository}
  */
 
 import { readFile } from 'fs/promises';
@@ -39,8 +29,7 @@ const ROOT = join(__dirname, '..');
 
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 const PACKAGE_PATH = join(ROOT, 'package.json');
-const INDEX_PATH = join(ROOT, 'index.html');
-const ZERO_INSTALL_PATH = join(ROOT, 'live-char-guide-zero-install.html');
+const INDEX_PATH = join(ROOT, 'dist', 'index.html');
 
 // ============================================================================
 // VERSION EXTRACTION
@@ -66,7 +55,7 @@ function extractVersionFromHtml(content, name) {
   }
 
   // Try build hash comment (less reliable)
-  const hashMatch = content.match(/<!-- Build hash: ([a-f0-9]+) -->/);
+  const hashMatch = content.match(/<!-- Build: ([a-f0-9]+) -->/);
   if (hashMatch) {
     return `hash:${hashMatch[1]}`;
   }
@@ -78,12 +67,6 @@ function extractVersionFromHtml(content, name) {
 // MAIN FUNCTION
 // ============================================================================
 
-/**
- * Checks version synchronization across all sources
- * @async
- * @returns {Promise<void>}
- * @throws {Error} If version check fails critically
- */
 async function checkVersionSync() {
   const versions = {};
   const errors = [];
@@ -119,35 +102,21 @@ async function checkVersionSync() {
     console.log('✗ package.json: NOT FOUND');
   }
 
-  // 3. Extract version from index.html
+  // 3. Extract version from dist/index.html (shell architecture)
   if (existsSync(INDEX_PATH)) {
     const content = await readFile(INDEX_PATH, 'utf-8');
-    versions.index = extractVersionFromHtml(content, 'index.html');
+    versions.index = extractVersionFromHtml(content, 'dist/index.html');
     if (versions.index) {
-      console.log(`✓ index.html: ${versions.index}`);
+      console.log(`✓ dist/index.html: ${versions.index}`);
     } else {
-      console.log('⚠ index.html: No version found');
+      console.log('⚠ dist/index.html: No version found');
     }
   } else {
-    console.log('⚠ index.html: NOT FOUND');
+    console.log('⚠ dist/index.html: NOT FOUND (run build first)');
     versions.index = null;
   }
 
-  // 4. Extract version from zero-install.html
-  if (existsSync(ZERO_INSTALL_PATH)) {
-    const content = await readFile(ZERO_INSTALL_PATH, 'utf-8');
-    versions.zeroInstall = extractVersionFromHtml(content, 'zero-install.html');
-    if (versions.zeroInstall) {
-      console.log(`✓ zero-install.html: ${versions.zeroInstall}`);
-    } else {
-      console.log('⚠ zero-install.html: No version found');
-    }
-  } else {
-    console.log('⚠ zero-install.html: NOT FOUND');
-    versions.zeroInstall = null;
-  }
-
-  // 5. Compare versions
+  // 4. Compare versions
   console.log('\n============================================');
   console.log('VERSION SYNC ANALYSIS');
   console.log('============================================');
@@ -169,14 +138,13 @@ async function checkVersionSync() {
     sourceVersion: versions.source,
     packageVersion: versions.package,
     indexVersion: versions.index,
-    zeroInstallVersion: versions.zeroInstall,
     status,
     errors: errors.length > 0 ? errors : undefined
   };
 
   console.log(JSON.stringify(result, null, 2));
 
-  // 6. Exit with appropriate code
+  // 5. Exit with appropriate code
   if (status === 'sync') {
     console.log('\n✓ All versions are in sync');
     process.exit(0);

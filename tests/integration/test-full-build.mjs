@@ -2,7 +2,13 @@
 /**
  * @fileoverview Integration tests for full build pipeline
  * @module tests/integration/test-full-build
- * @version 1.0.0
+ * @version 2.0.0
+ * 
+ * @description
+ * Tests for shell architecture:
+ * - Source files in src/parts-l{1,2,3}/
+ * - Build output in dist/
+ * - Root fallback files for CI compatibility
  */
 
 import { describe, it } from 'node:test';
@@ -17,25 +23,51 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
 
 // ============================================================================
-// CLEAN SOURCE TO ARTIFACT TESTS
+// SOURCE FILES TESTS
 // ============================================================================
 
-describe('Clean Source to Artifact Build', () => {
-  it('should have source files present', () => {
+describe('Source Files Structure', () => {
+  it('should have src directory', () => {
     const srcDir = join(ROOT, 'src');
     assert.strictEqual(existsSync(srcDir), true, 'src/ directory should exist');
-
-    const partsDir = join(ROOT, 'src', 'parts');
-    assert.strictEqual(existsSync(partsDir), true, 'src/parts/ directory should exist');
   });
 
-  it('should have manifest file', () => {
-    const manifestPath = join(ROOT, 'src', 'manifest', 'structure.json');
-    assert.strictEqual(existsSync(manifestPath), true, 'manifest should exist');
+  it('should have parts-l1 directory', () => {
+    const partsDir = join(ROOT, 'src', 'parts-l1');
+    assert.strictEqual(existsSync(partsDir), true, 'src/parts-l1/ directory should exist');
   });
 
-  it('should generate valid index.html', async () => {
-    const indexPath = join(ROOT, 'index.html');
+  it('should have parts-l2 directory', () => {
+    const partsDir = join(ROOT, 'src', 'parts-l2');
+    assert.strictEqual(existsSync(partsDir), true, 'src/parts-l2/ directory should exist');
+  });
+
+  it('should have parts-l3 directory', () => {
+    const partsDir = join(ROOT, 'src', 'parts-l3');
+    assert.strictEqual(existsSync(partsDir), true, 'src/parts-l3/ directory should exist');
+  });
+
+  it('should have shell directory', () => {
+    const shellDir = join(ROOT, 'src', 'shell');
+    assert.strictEqual(existsSync(shellDir), true, 'src/shell/ directory should exist');
+  });
+
+  it('should have manifest files in each layer', () => {
+    const layers = ['1', '2', '3'];
+    for (const layer of layers) {
+      const manifestPath = join(ROOT, 'src', `parts-l${layer}`, 'manifest.json');
+      assert.strictEqual(existsSync(manifestPath), true, `parts-l${layer}/manifest.json should exist`);
+    }
+  });
+});
+
+// ============================================================================
+// BUILD OUTPUT TESTS
+// ============================================================================
+
+describe('Build Output', () => {
+  it('should generate valid dist/index.html', async () => {
+    const indexPath = join(ROOT, 'dist', 'index.html');
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
 
@@ -45,13 +77,65 @@ describe('Clean Source to Artifact Build', () => {
     }
   });
 
-  it('should generate valid zero-install.html', async () => {
-    const zeroPath = join(ROOT, 'live-char-guide-zero-install.html');
-    if (existsSync(zeroPath)) {
-      const content = await readFile(zeroPath, 'utf-8');
+  it('should have dist/parts-l1 directory', () => {
+    const partsDir = join(ROOT, 'dist', 'parts-l1');
+    assert.strictEqual(existsSync(partsDir), true, 'dist/parts-l1/ should exist after build');
+  });
 
-      assert.ok(content.startsWith('<!DOCTYPE html>'), 'Should have DOCTYPE');
-      assert.ok(content.includes('<html'), 'Should have html tag');
+  it('should have dist/parts-l2 directory', () => {
+    const partsDir = join(ROOT, 'dist', 'parts-l2');
+    assert.strictEqual(existsSync(partsDir), true, 'dist/parts-l2/ should exist after build');
+  });
+
+  it('should have dist/parts-l3 directory', () => {
+    const partsDir = join(ROOT, 'dist', 'parts-l3');
+    assert.strictEqual(existsSync(partsDir), true, 'dist/parts-l3/ should exist after build');
+  });
+
+  it('should have dist/assets directory', () => {
+    const assetsDir = join(ROOT, 'dist', 'assets');
+    assert.strictEqual(existsSync(assetsDir), true, 'dist/assets/ should exist after build');
+  });
+
+  it('should have lazy-loader.js in dist/assets', () => {
+    const lazyLoader = join(ROOT, 'dist', 'assets', 'lazy-loader.js');
+    assert.strictEqual(existsSync(lazyLoader), true, 'dist/assets/lazy-loader.js should exist');
+  });
+
+  it('should have shell-styles.css in dist/assets', () => {
+    const styles = join(ROOT, 'dist', 'assets', 'shell-styles.css');
+    assert.strictEqual(existsSync(styles), true, 'dist/assets/shell-styles.css should exist');
+  });
+});
+
+// ============================================================================
+// ROOT FALLBACK FILES TESTS (CI Compatibility)
+// ============================================================================
+
+describe('Root Fallback Files', () => {
+  it('should have index.html in root', () => {
+    const indexPath = join(ROOT, 'index.html');
+    assert.strictEqual(existsSync(indexPath), true, 'index.html should exist in root (fallback)');
+  });
+
+  it('should have build.hash in root', () => {
+    const hashPath = join(ROOT, 'build.hash');
+    assert.strictEqual(existsSync(hashPath), true, 'build.hash should exist in root (fallback)');
+  });
+
+  it('should have assets directory in root', () => {
+    const assetsDir = join(ROOT, 'assets');
+    assert.strictEqual(existsSync(assetsDir), true, 'assets/ should exist in root (fallback)');
+  });
+
+  it('root index.html should match dist/index.html', async () => {
+    const rootIndex = join(ROOT, 'index.html');
+    const distIndex = join(ROOT, 'dist', 'index.html');
+    
+    if (existsSync(rootIndex) && existsSync(distIndex)) {
+      const rootContent = await readFile(rootIndex, 'utf-8');
+      const distContent = await readFile(distIndex, 'utf-8');
+      assert.strictEqual(rootContent, distContent, 'Root index.html should match dist/index.html');
     }
   });
 });
@@ -62,25 +146,20 @@ describe('Clean Source to Artifact Build', () => {
 
 describe('Build Hash Consistency', () => {
   it('should have build.hash file', () => {
-    const hashPath = join(ROOT, 'build.hash');
-    assert.strictEqual(existsSync(hashPath), true, 'build.hash should exist');
+    const hashPath = join(ROOT, 'dist', 'build.hash');
+    assert.strictEqual(existsSync(hashPath), true, 'dist/build.hash should exist');
   });
 
-  it('should have build-zero-install.hash file', () => {
-    const hashPath = join(ROOT, 'build-zero-install.hash');
-    assert.strictEqual(existsSync(hashPath), true, 'build-zero-install.hash should exist');
-  });
-
-  it('build.hash should match index.html meta', async () => {
-    const hashPath = join(ROOT, 'build.hash');
-    const indexPath = join(ROOT, 'index.html');
+  it('build.hash should match dist/index.html meta', async () => {
+    const hashPath = join(ROOT, 'dist', 'build.hash');
+    const indexPath = join(ROOT, 'dist', 'index.html');
 
     if (existsSync(hashPath) && existsSync(indexPath)) {
       const hash = (await readFile(hashPath, 'utf-8')).trim();
       const content = await readFile(indexPath, 'utf-8');
 
-      assert.ok(content.includes(`content="${hash}"`),
-        'index.html should contain matching build hash');
+      assert.ok(content.includes(`Build: ${hash}`),
+        'dist/index.html should contain matching build hash');
     }
   });
 });
@@ -98,7 +177,6 @@ describe('Validation Integration', () => {
         timeout: 30000
       });
     } catch (error) {
-      // If validation fails, we still want to know what went wrong
       assert.fail(`Validation failed: ${error.stdout?.toString() || error.message}`);
     }
   });
@@ -112,7 +190,7 @@ describe('Version Sync Integration', () => {
   it('all versions should be synchronized', async () => {
     const versionPath = join(ROOT, 'src', 'VERSION');
     const packagePath = join(ROOT, 'package.json');
-    const indexPath = join(ROOT, 'index.html');
+    const indexPath = join(ROOT, 'dist', 'index.html');
 
     if (!existsSync(versionPath)) {
       return; // Skip if no VERSION file
@@ -126,12 +204,12 @@ describe('Version Sync Integration', () => {
       assert.strictEqual(pkg.version, expectedVersion, 'package.json version mismatch');
     }
 
-    // Check index.html
+    // Check dist/index.html
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       const match = content.match(/<meta name="livechar-version" content="([^"]+)"/);
       if (match) {
-        assert.strictEqual(match[1], expectedVersion, 'index.html version mismatch');
+        assert.strictEqual(match[1], expectedVersion, 'dist/index.html version mismatch');
       }
     }
   });
@@ -141,4 +219,4 @@ describe('Version Sync Integration', () => {
 // RUN TESTS
 // ============================================================================
 
-console.log('Running full build integration tests...\n');
+console.log('Running full build integration tests (shell architecture)...\n');

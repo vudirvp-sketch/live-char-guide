@@ -40,32 +40,30 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build all artifacts
+      - name: Build all artifacts (shell architecture)
         run: pnpm run build:all
 
       - name: Validate artifacts
         run: pnpm run validate
 
       - name: Check version sync
-        # Pre-release versions may fail version check
         continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: pnpm run version:check
 
       - name: Run tests
-        # Tests may be incomplete during migration
         continue-on-error: ${{ github.event_name == 'pull_request' }}
         run: pnpm test
 
       # === ID: F1 | CI Duplicate Detection ===
       - name: Check for duplicates
         run: |
-          python scripts/check_duplicates.py --parts-dir src/parts --min-length 100 --threshold 0.9
+          python scripts/check_duplicates.py --min-length 100 --threshold 0.9
         continue-on-error: ${{ github.event_name == 'pull_request' }}
 
       # === ID: F2 | CI Terminology Validation ===
       - name: Validate terminology
         run: |
-          python scripts/validate_terms.py --glossary src/data/glossary.json --parts-dir src/parts
+          python scripts/validate_terms.py --glossary src/data/glossary.json
         continue-on-error: ${{ github.event_name == 'pull_request' }}
 
       - name: Upload build artifact
@@ -73,12 +71,10 @@ jobs:
         with:
           name: build-output
           path: |
+            dist/
             index.html
-            live-char-guide-zero-install.html
-            404.html
-            assets/
             build.hash
-            build-zero-install.hash
+            assets/
           retention-days: 5
 
   pr-comment:
@@ -96,10 +92,8 @@ jobs:
       - name: Get artifact sizes
         id: sizes
         run: |
-          INDEX_SIZE=$(stat -c%s "index.html" 2>/dev/null || echo "0")
-          ZERO_SIZE=$(stat -c%s "live-char-guide-zero-install.html" 2>/dev/null || echo "0")
+          INDEX_SIZE=$(stat -c%s "dist/index.html" 2>/dev/null || stat -c%s "index.html" 2>/dev/null || echo "0")
           echo "index_size=$((INDEX_SIZE / 1024))" >> $GITHUB_OUTPUT
-          echo "zero_size=$((ZERO_SIZE / 1024))" >> $GITHUB_OUTPUT
 
       - name: Get version info
         id: version
@@ -112,21 +106,19 @@ jobs:
         with:
           script: |
             const indexSize = '${{ steps.sizes.outputs.index_size }}';
-            const zeroSize = '${{ steps.sizes.outputs.zero_size }}';
             const version = '${{ steps.version.outputs.version }}';
 
-            const body = `## Build Summary
+            const body = `## Build Summary (Shell Architecture)
 
             | Artifact | Size |
             |----------|------|
-            | \`index.html\` | ${indexSize} KB |
-            | \`live-char-guide-zero-install.html\` | ${zeroSize} KB |
+            | \`dist/index.html\` | ${indexSize} KB |
 
             **Version:** ${version}
 
             Build and validation completed successfully.
 
-            > These artifacts will be deployed to GitHub Pages when this PR is merged to \`main\`.`;
+            > Shell architecture with lazy-loading parts-l{1,2,3}.`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,

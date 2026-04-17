@@ -2,7 +2,10 @@
 /**
  * @fileoverview Unit tests for version-sync.mjs
  * @module tests/test-version-sync
- * @version 1.0.0
+ * @version 2.0.0
+ * 
+ * @description
+ * Tests for version synchronization in shell architecture
  */
 
 import { describe, it } from 'node:test';
@@ -36,8 +39,8 @@ describe('Version Extraction', () => {
     }
   });
 
-  it('should extract version from index.html meta tag', async () => {
-    const indexPath = join(ROOT, 'index.html');
+  it('should extract version from dist/index.html meta tag', async () => {
+    const indexPath = join(ROOT, 'dist', 'index.html');
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       const match = content.match(/<meta name="livechar-version" content="([^"]+)"/);
@@ -66,7 +69,23 @@ describe('Sync State Detection', () => {
     }
   });
 
-  it('index.html version should match VERSION file', async () => {
+  it('dist/index.html version should match VERSION file', async () => {
+    const versionPath = join(ROOT, 'src', 'VERSION');
+    const indexPath = join(ROOT, 'dist', 'index.html');
+
+    if (existsSync(versionPath) && existsSync(indexPath)) {
+      const expectedVersion = (await readFile(versionPath, 'utf-8')).trim();
+      const content = await readFile(indexPath, 'utf-8');
+
+      const match = content.match(/<meta name="livechar-version" content="([^"]+)"/);
+      if (match) {
+        assert.strictEqual(match[1], expectedVersion,
+          'dist/index.html version should match VERSION file');
+      }
+    }
+  });
+
+  it('root index.html version should match VERSION file', async () => {
     const versionPath = join(ROOT, 'src', 'VERSION');
     const indexPath = join(ROOT, 'index.html');
 
@@ -77,23 +96,7 @@ describe('Sync State Detection', () => {
       const match = content.match(/<meta name="livechar-version" content="([^"]+)"/);
       if (match) {
         assert.strictEqual(match[1], expectedVersion,
-          'index.html version should match VERSION file');
-      }
-    }
-  });
-
-  it('zero-install.html version should match VERSION file', async () => {
-    const versionPath = join(ROOT, 'src', 'VERSION');
-    const zeroPath = join(ROOT, 'live-char-guide-zero-install.html');
-
-    if (existsSync(versionPath) && existsSync(zeroPath)) {
-      const expectedVersion = (await readFile(versionPath, 'utf-8')).trim();
-      const content = await readFile(zeroPath, 'utf-8');
-
-      const match = content.match(/<meta name="livechar-version" content="([^"]+)"/);
-      if (match) {
-        assert.strictEqual(match[1], expectedVersion,
-          'zero-install.html version should match VERSION file');
+          'root index.html version should match VERSION file');
       }
     }
   });
@@ -104,11 +107,6 @@ describe('Sync State Detection', () => {
 // ============================================================================
 
 describe('Semantic Version Parsing', () => {
-  /**
-   * Parses a semantic version string
-   * @param {string} version - Version string (e.g., "5.3.2")
-   * @returns {{major: number, minor: number, patch: number}}
-   */
   function parseVersion(version) {
     const match = version.match(/^(\d+)\.(\d+)\.(\d+)$/);
     if (!match) {
@@ -121,12 +119,6 @@ describe('Semantic Version Parsing', () => {
     };
   }
 
-  /**
-   * Compares two versions
-   * @param {string} v1 - First version
-   * @param {string} v2 - Second version
-   * @returns {number} -1 if v1 < v2, 0 if equal, 1 if v1 > v2
-   */
   function compareVersions(v1, v2) {
     const p1 = parseVersion(v1);
     const p2 = parseVersion(v2);
@@ -138,8 +130,8 @@ describe('Semantic Version Parsing', () => {
   }
 
   it('should parse valid semantic versions', () => {
-    const parsed = parseVersion('5.3.2');
-    assert.deepStrictEqual(parsed, { major: 5, minor: 3, patch: 2 });
+    const parsed = parseVersion('5.12.0');
+    assert.deepStrictEqual(parsed, { major: 5, minor: 12, patch: 0 });
   });
 
   it('should compare versions correctly', () => {
@@ -163,9 +155,8 @@ describe('Semantic Version Parsing', () => {
 
 describe('Outdated Detection', () => {
   it('should detect if artifact version is older than source', async () => {
-    // This test checks that artifact version >= source version
     const versionPath = join(ROOT, 'src', 'VERSION');
-    const indexPath = join(ROOT, 'index.html');
+    const indexPath = join(ROOT, 'dist', 'index.html');
 
     if (existsSync(versionPath) && existsSync(indexPath)) {
       const sourceVersion = (await readFile(versionPath, 'utf-8')).trim();
@@ -187,4 +178,4 @@ describe('Outdated Detection', () => {
 // RUN TESTS
 // ============================================================================
 
-console.log('🧪 Running version-sync.mjs unit tests...\n');
+console.log('🧪 Running version-sync.mjs unit tests (shell architecture)...\n');

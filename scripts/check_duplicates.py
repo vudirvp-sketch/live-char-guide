@@ -5,6 +5,8 @@ CI Script: Check for duplicate content across HTML parts.
 ID: F1
 Purpose: Detect text blocks >100 chars appearing in multiple files.
 Exit: 0 if no duplicates, 1 if duplicates found.
+
+Updated for shell architecture: works with src/parts-l{1,2,3}/
 """
 
 import os
@@ -44,20 +46,24 @@ def similarity_ratio(a: str, b: str) -> float:
     """Calculate similarity ratio between two strings."""
     return SequenceMatcher(None, a, b).ratio()
 
-def find_duplicates(parts_dir: Path, min_length: int = 100, threshold: float = 0.9) -> list:
-    """Find duplicate text blocks across files."""
-    files = list(parts_dir.glob('*.html'))
-    
+def find_duplicates(parts_dirs: list, min_length: int = 100, threshold: float = 0.9) -> list:
+    """Find duplicate text blocks across files in multiple directories."""
     # Store all blocks with their source files
     all_blocks = []
     
-    for file_path in files:
-        content = file_path.read_text(encoding='utf-8')
-        blocks = extract_text_blocks(content, min_length)
+    for parts_dir in parts_dirs:
+        if not parts_dir.exists():
+            continue
+            
+        files = list(parts_dir.glob('*.html'))
         
-        for block in blocks:
-            block['file'] = file_path.name
-            all_blocks.append(block)
+        for file_path in files:
+            content = file_path.read_text(encoding='utf-8')
+            blocks = extract_text_blocks(content, min_length)
+            
+            for block in blocks:
+                block['file'] = f"{parts_dir.name}/{file_path.name}"
+                all_blocks.append(block)
     
     # Find duplicates
     duplicates = []
@@ -97,27 +103,41 @@ def main():
     
     # Derive repo root from script location
     repo_root = Path(__file__).parent.parent
-    default_parts_dir = str(repo_root / 'src' / 'parts')
+    
+    # Default: check all layer directories
+    default_parts_dirs = [
+        repo_root / 'src' / 'parts-l1',
+        repo_root / 'src' / 'parts-l2',
+        repo_root / 'src' / 'parts-l3',
+    ]
     
     parser = argparse.ArgumentParser(description='Check for duplicate content in HTML parts')
     parser.add_argument('--min-length', type=int, default=100, help='Minimum text length to check')
     parser.add_argument('--threshold', type=float, default=0.9, help='Similarity threshold (0-1)')
-    parser.add_argument('--parts-dir', type=str, default=default_parts_dir, help='Directory containing HTML parts')
+    parser.add_argument('--parts-dir', type=str, help='Single directory containing HTML parts (for backward compat)')
     parser.add_argument('--verbose', '-v', action='store_true', help='Verbose output')
     
     args = parser.parse_args()
     
-    parts_dir = Path(args.parts_dir)
+    # Support both old single-dir and new multi-dir modes
+    if args.parts_dir:
+        parts_dirs = [Path(args.parts_dir)]
+    else:
+        parts_dirs = default_parts_dirs
     
-    if not parts_dir.exists():
-        print(f"Error: Parts directory not found: {parts_dir}")
+    # Verify at least one directory exists
+    existing_dirs = [d for d in parts_dirs if d.exists()]
+    if not existing_dirs:
+        print(f"Error: No parts directories found")
         sys.exit(1)
     
-    print(f"Checking for duplicates in {parts_dir}...")
+    print(f"Checking for duplicates...")
+    for d in existing_dirs:
+        print(f"  Directory: {d}")
     print(f"  Min length: {args.min_length} chars")
     print(f"  Threshold: {args.threshold}")
     
-    duplicates = find_duplicates(parts_dir, args.min_length, args.threshold)
+    duplicates = find_duplicates(existing_dirs, args.min_length, args.threshold)
     
     if duplicates:
         print(f"\n❌ Found {len(duplicates)} duplicate(s):\n")
@@ -131,8 +151,8 @@ def main():
                 print(f"  Text 2: {dup['text2_preview']}")
             print()
         
-        print("ACTION REQUIRED: Extract duplicate content to src/parts/01_core_principles.html")
-        print("and replace with reference: <span class=\"core-ref\">→ See <a href=\"#core-principles\">Core Principles</a></span>")
+        print("ACTION REQUIRED: Extract duplicate content to a shared file")
+        print("and replace with reference: <span class=\"core-ref\">→ See <a href=\"#shared-section\">Shared Section</a></span>")
         
         sys.exit(1)
     else:

@@ -2,7 +2,10 @@
 /**
  * @fileoverview Unit tests for build.mjs
  * @module tests/test-build
- * @version 1.0.0
+ * @version 2.0.0
+ * 
+ * @description
+ * Tests for shell architecture build system
  */
 
 import { describe, it, before, after, beforeEach } from 'node:test';
@@ -20,11 +23,6 @@ const FIXTURES_DIR = join(__dirname, 'fixtures');
 // TEST UTILITIES
 // ============================================================================
 
-/**
- * Creates a temporary test environment
- * @param {string} name - Name of the test fixture
- * @returns {Promise<string>} Path to the test directory
- */
 async function createTestEnv(name) {
   const testDir = join(FIXTURES_DIR, name);
   if (existsSync(testDir)) {
@@ -34,10 +32,6 @@ async function createTestEnv(name) {
   return testDir;
 }
 
-/**
- * Cleans up a test environment
- * @param {string} testDir - Path to the test directory
- */
 async function cleanupTestEnv(testDir) {
   if (existsSync(testDir)) {
     await rm(testDir, { recursive: true });
@@ -158,68 +152,66 @@ describe('Anchor Validation', () => {
 // ============================================================================
 
 describe('Manifest Structure', () => {
-  it('should have valid manifest.json', async () => {
-    const manifestPath = join(ROOT, 'src', 'manifest', 'structure.json');
+  it('should have valid manifest.json in parts-l2', async () => {
+    const manifestPath = join(ROOT, 'src', 'parts-l2', 'manifest.json');
     if (existsSync(manifestPath)) {
       const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
 
-      assert.ok(manifest.version, 'Manifest should have version');
+      assert.ok(manifest.layer, 'Manifest should have layer');
       assert.ok(Array.isArray(manifest.parts), 'Manifest should have parts array');
       assert.ok(manifest.parts.length > 0, 'Parts array should not be empty');
     }
   });
 
   it('should have required part properties', async () => {
-    const manifestPath = join(ROOT, 'src', 'manifest', 'structure.json');
+    const manifestPath = join(ROOT, 'src', 'parts-l2', 'manifest.json');
     if (existsSync(manifestPath)) {
       const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
 
       for (const part of manifest.parts) {
         assert.ok(part.file, 'Part should have file property');
-        assert.ok(part.type, 'Part should have type property');
-        assert.ok(['head', 'body-start', 'section', 'body-end', 'style'].includes(part.type),
-          `Part type "${part.type}" should be valid`);
+        assert.ok(part.title, 'Part should have title property');
       }
     }
   });
 });
 
 // ============================================================================
-// OUTPUT FILE TESTS
+// OUTPUT FILE TESTS (SHELL ARCHITECTURE)
 // ============================================================================
 
 describe('Output File Validation', () => {
-  it('should have index.html after build', () => {
-    const indexPath = join(ROOT, 'index.html');
-    assert.strictEqual(existsSync(indexPath), true, 'index.html should exist');
+  it('should have dist/index.html after build', () => {
+    const indexPath = join(ROOT, 'dist', 'index.html');
+    assert.strictEqual(existsSync(indexPath), true, 'dist/index.html should exist');
   });
 
-  it('should have zero-install.html after build', () => {
-    const zeroPath = join(ROOT, 'live-char-guide-zero-install.html');
-    assert.strictEqual(existsSync(zeroPath), true, 'zero-install.html should exist');
+  it('should have root index.html fallback', () => {
+    const indexPath = join(ROOT, 'index.html');
+    assert.strictEqual(existsSync(indexPath), true, 'index.html should exist in root');
   });
 
-  it('index.html should have DOCTYPE', async () => {
-    const indexPath = join(ROOT, 'index.html');
+  it('dist/index.html should have DOCTYPE', async () => {
+    const indexPath = join(ROOT, 'dist', 'index.html');
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       assert.ok(content.startsWith('<!DOCTYPE html>'), 'Should start with DOCTYPE');
     }
   });
 
-  it('index.html should have version meta tag', async () => {
-    const indexPath = join(ROOT, 'index.html');
+  it('dist/index.html should have version meta tag', async () => {
+    const indexPath = join(ROOT, 'dist', 'index.html');
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       assert.match(content, /<meta name="livechar-version"/, 'Should have version meta');
     }
   });
 
-  it('index.html should have build hash', async () => {
-    const indexPath = join(ROOT, 'index.html');
+  it('dist/index.html should have build hash in comment', async () => {
+    const indexPath = join(ROOT, 'dist', 'index.html');
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
-      assert.match(content, /<meta name="build-hash"/, 'Should have build hash meta');
+      assert.match(content, /<!-- Build: [a-f0-9]+ -->/, 'Should have build hash comment');
     }
   });
 });
@@ -228,4 +220,4 @@ describe('Output File Validation', () => {
 // RUN TESTS
 // ============================================================================
 
-console.log('🧪 Running build.mjs unit tests...\n');
+console.log('🧪 Running build.mjs unit tests (shell architecture)...\n');

@@ -2,7 +2,7 @@
 /**
  * @fileoverview Artifact Validation Script for Live Char Guide
  * @module scripts/validate-artifact
- * @version 1.4.0
+ * @version 2.0.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
@@ -13,15 +13,6 @@
  * - Required shell elements presence
  * - HTML validity checks
  * - WCAG 1.4.10 Reflow compliance
- * 
- * @example
- * // Run validation
- * node scripts/validate-artifact.mjs
- * 
- * // Via npm
- * npm run validate
- * 
- * @see {@link https://github.com/vudirvp-sketch/live-char-guide|Repository}
  */
 
 import { readFile, stat } from 'fs/promises';
@@ -145,10 +136,6 @@ function checkHtmlValidity(content, name) {
 
 /**
  * Check WCAG 1.4.10 Reflow compliance
- * At 125% zoom (320px viewport), content should not require horizontal scrolling
- * @param {string} content - HTML content
- * @param {string} name - Artifact name
- * @returns {{pass: boolean, error?: string, warnings?: string[]}}
  */
 function checkWCAG1410Reflow(content, name) {
   const errors = [];
@@ -167,13 +154,11 @@ function checkWCAG1410Reflow(content, name) {
   }
 
   // Check for fixed-width elements that could cause issues at 320px
-  // Note: This is a heuristic check - full implementation would parse CSS properly
   const fixedWidthPattern = /width:\s*(\d+)px/g;
   let match;
   while ((match = fixedWidthPattern.exec(content)) !== null) {
     const width = parseInt(match[1]);
     if (width > 320) {
-      // This is a warning, not error - may be in media query or not affect reflow
       warnings.push(`Fixed width ${width}px may cause reflow issues`);
     }
   }
@@ -205,6 +190,44 @@ function checkWCAG1410Reflow(content, name) {
 }
 
 // ============================================================================
+// SHELL ARCHITECTURE CHECKS
+// ============================================================================
+
+function checkShellArchitecture() {
+  const results = [];
+  const layers = ['1', '2', '3'];
+  
+  for (const layer of layers) {
+    const partsDir = join(ROOT, 'dist', `parts-l${layer}`);
+    const exists = existsSync(partsDir);
+    results.push({
+      gate: `SHELL-L${layer}`,
+      pass: exists,
+      error: exists ? undefined : `dist/parts-l${layer}/ not found`
+    });
+  }
+  
+  // Check assets
+  const assetsDir = join(ROOT, 'dist', 'assets');
+  const lazyLoader = join(assetsDir, 'lazy-loader.js');
+  const shellStyles = join(assetsDir, 'shell-styles.css');
+  
+  results.push({
+    gate: 'SHELL-LOADER',
+    pass: existsSync(lazyLoader),
+    error: existsSync(lazyLoader) ? undefined : 'dist/assets/lazy-loader.js not found'
+  });
+  
+  results.push({
+    gate: 'SHELL-STYLES',
+    pass: existsSync(shellStyles),
+    error: existsSync(shellStyles) ? undefined : 'dist/assets/shell-styles.css not found'
+  });
+  
+  return results;
+}
+
+// ============================================================================
 // MAIN VALIDATION
 // ============================================================================
 
@@ -212,7 +235,7 @@ async function validate() {
   const results = [];
   let allPassed = true;
 
-  log('INFO', 'Starting artifact validation...');
+  log('INFO', 'Starting artifact validation (shell architecture)...');
 
   // 1. Load version
   let version = 'unknown';
@@ -226,7 +249,7 @@ async function validate() {
   // 2. Validate dist/index.html (shell architecture)
   log('INFO', 'Validating dist/index.html (shell architecture)...');
 
-  let indexResult = await checkFileExists(INDEX_PATH, 'index.html');
+  let indexResult = await checkFileExists(INDEX_PATH, 'dist/index.html');
   if (!indexResult.pass) {
     results.push({ gate: 'GATE-1', ...indexResult });
     allPassed = false;
@@ -234,27 +257,27 @@ async function validate() {
     const indexContent = await readFile(INDEX_PATH, 'utf-8');
 
     // Shell is lightweight - only needs 2KB minimum
-    const indexSize = await checkFileSize(INDEX_PATH, 'index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
+    const indexSize = await checkFileSize(INDEX_PATH, 'dist/index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
 
     results.push({ gate: 'GATE-1', ...indexSize });
     if (!indexSize.pass) allPassed = false;
 
     if (version !== 'unknown') {
-      const versionCheck = await checkVersion(indexContent, 'index.html', version);
+      const versionCheck = await checkVersion(indexContent, 'dist/index.html', version);
       results.push({ gate: 'GATE-2', ...versionCheck });
       if (!versionCheck.pass) allPassed = false;
     }
 
-    const sectionsCheck = checkRequiredSections(indexContent, 'index.html');
+    const sectionsCheck = checkRequiredSections(indexContent, 'dist/index.html');
     results.push({ gate: 'GATE-3', ...sectionsCheck });
     if (!sectionsCheck.pass) allPassed = false;
 
-    const htmlCheck = checkHtmlValidity(indexContent, 'index.html');
+    const htmlCheck = checkHtmlValidity(indexContent, 'dist/index.html');
     results.push({ gate: 'GATE-4', ...htmlCheck });
     if (!htmlCheck.pass) allPassed = false;
 
     // WCAG 1.4.10 Reflow check
-    const wcagCheck = checkWCAG1410Reflow(indexContent, 'index.html');
+    const wcagCheck = checkWCAG1410Reflow(indexContent, 'dist/index.html');
     results.push({ gate: 'GATE-5', ...wcagCheck });
     if (!wcagCheck.pass) allPassed = false;
     if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
@@ -262,9 +285,16 @@ async function validate() {
     }
   }
 
-  // 3. Report results
+  // 3. Shell architecture checks
+  const shellResults = checkShellArchitecture();
+  for (const result of shellResults) {
+    results.push(result);
+    if (!result.pass) allPassed = false;
+  }
+
+  // 4. Report results
   console.log('\n============================================');
-  console.log('VALIDATION RESULTS');
+  console.log('VALIDATION RESULTS (SHELL ARCHITECTURE)');
   console.log('============================================');
 
   for (const result of results) {

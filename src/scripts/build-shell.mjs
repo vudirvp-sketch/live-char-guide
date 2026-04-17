@@ -2,7 +2,7 @@
 /**
  * @fileoverview Shell Build Script for Live Char Guide
  * @module src/scripts/build-shell
- * @version 1.0.0
+ * @version 2.0.1
  * 
  * @description
  * Builds the lazy-loading shell architecture:
@@ -11,6 +11,7 @@
  * - Copies shell/lazy-loader.js → dist/assets/lazy-loader.js
  * - Copies parts-l1/, parts-l2/, parts-l3/ → dist/parts-l{N}/
  * - Copies assets → dist/assets/
+ * - Creates root files for backward compatibility with CI
  */
 
 import { createHash } from 'crypto';
@@ -83,14 +84,15 @@ async function buildShell() {
   
   // 1. Copy shell index.html
   const shellIndex = join(SHELL_DIR, 'index.html');
+  let buildHash;
   if (existsSync(shellIndex)) {
     let indexContent = await readFile(shellIndex, 'utf-8');
     
     // Replace version placeholder
     indexContent = indexContent.replace(/5\.12\.0/g, version);
     
-    // Calculate hash for cache busting
-    const hash = createHash('sha256')
+    // Calculate hash for cache busting (before adding hash to content)
+    buildHash = createHash('sha256')
       .update(indexContent)
       .digest('hex')
       .slice(0, 8);
@@ -98,7 +100,7 @@ async function buildShell() {
     // Add build metadata
     indexContent = indexContent.replace(
       '<!-- Live Character Guide - Shell v5.12.0 -->',
-      `<!-- Live Character Guide - Shell v${version} -->\n<!-- Build: ${hash} -->\n<!-- Generated: ${new Date().toISOString()} -->`
+      `<!-- Live Character Guide - Shell v${version} -->\n<!-- Build: ${buildHash} -->\n<!-- Generated: ${new Date().toISOString()} -->`
     );
     
     await writeFile(join(DIST_DIR, 'index.html'), indexContent);
@@ -174,12 +176,8 @@ async function buildShell() {
     log('WARN', 'src/data/ not found, skipping');
   }
   
-  // 6. Create build hash file
-  const hash = createHash('sha256')
-    .update(Date.now().toString())
-    .digest('hex')
-    .slice(0, 8);
-  await writeFile(join(DIST_DIR, 'build.hash'), hash);
+  // 6. Create build hash file (use the same hash as in HTML)
+  await writeFile(join(DIST_DIR, 'build.hash'), buildHash);
   
   // 7. Copy 404.html if exists
   const notFound = join(ROOT, '404.html');
@@ -188,9 +186,25 @@ async function buildShell() {
     log('INFO', 'Copied 404.html');
   }
   
-  log('INFO', `Shell build complete! Hash: ${hash}`);
+  // 8. Create root index.html for backward compatibility (GitHub Pages fallback)
+  await copyFile(join(DIST_DIR, 'index.html'), join(ROOT, 'index.html'));
+  log('INFO', 'Copied dist/index.html → index.html (root fallback)');
   
-  return { hash, version };
+  // 9. Create root build.hash for CI compatibility
+  await copyFile(join(DIST_DIR, 'build.hash'), join(ROOT, 'build.hash'));
+  log('INFO', 'Copied dist/build.hash → build.hash (root fallback)');
+  
+  // 10. Create root assets/ for backward compatibility
+  const rootAssets = join(ROOT, 'assets');
+  if (existsSync(rootAssets)) {
+    await rm(rootAssets, { recursive: true });
+  }
+  await copyDir(ASSETS_DIST, rootAssets);
+  log('INFO', 'Copied dist/assets/ → assets/ (root fallback)');
+  
+  log('INFO', `Shell build complete! Hash: ${buildHash}`);
+  
+  return { hash: buildHash, version };
 }
 
 // ============================================================================
