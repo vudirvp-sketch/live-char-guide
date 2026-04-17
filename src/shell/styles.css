@@ -1528,6 +1528,116 @@ ennea-embed {
   }
 }
 
+/* === MBTI EMBED === */
+.mbti-embed {
+  padding: 0.4em 0.8em 1.4em;
+}
+
+.mbti-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  max-width: 600px;
+  margin: 1em auto;
+}
+
+.mbti-axis {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.8em 1em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.mbti-label {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+}
+
+.mbti-slider {
+  flex: 1;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  border-radius: 4px;
+  outline: none;
+}
+
+.mbti-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.mbti-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.mbti-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.mbti-result {
+  text-align: center;
+  padding: 1.5em;
+  margin-top: 1em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.mbti-type-display {
+  display: block;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.mbti-type-name {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.3em;
+}
+
+/* Enneagram anchor example style */
+.ennea-anchor-val {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.ennea-anchor-val code {
+  background: var(--bg-elevated);
+  padding: 0.3em 0.5em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+@media (max-width: 768px) {
+  .mbti-filter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* === GLOSSARY ITEMS === */
 .glossary-item {
   padding: 0.5em 0;
