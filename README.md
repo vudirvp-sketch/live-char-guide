@@ -9,7 +9,6 @@ A comprehensive guide for creating character cards and system prompts for LLM ro
 | Resource | Link |
 |----------|------|
 | **Online Guide** | [vudirvp-sketch.github.io/live-char-guide](https://vudirvp-sketch.github.io/live-char-guide/) |
-| **Offline Version** | [Download HTML](https://vudirvp-sketch.github.io/live-char-guide/live-char-guide-zero-install.html) |
 | **Changelog** | [CHANGELOG.md](./CHANGELOG.md) |
 | **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
 
@@ -67,12 +66,21 @@ The guide uses a minimal shell architecture for faster initial load:
 User visits → Layer selector → Load selected layer content on-demand
 ```
 
-Benefits:
+**Benefits:**
 - Fast first paint (~50% smaller initial payload)
 - User chooses depth before loading content
 - Single-page app — no reloads when switching layers
 - Browser history works correctly (back/forward)
 - Anchor navigation works after content load
+
+### Build Flow
+
+```
+src/shell/index.html  →  dist/index.html (shell)
+src/parts-l{1,2,3}/   →  dist/parts-l{1,2,3}/ (lazy-loaded content)
+src/assets/           →  dist/assets/
+src/data/             →  dist/data/
+```
 
 ## Project Structure
 
@@ -88,70 +96,80 @@ live-char-guide/
 ├── sitemap.xml                         # SEO
 │
 ├── src/
+│   ├── VERSION                         # Source of truth for version
+│   │
 │   ├── shell/                          # Lazy-loading shell
 │   │   ├── index.html                  # Minimal shell with layer selector
 │   │   ├── lazy-loader.js              # Dynamic layer loading
 │   │   └── styles.css                  # Shell-specific styles
 │   │
-│   ├── parts/                          # Content sections (Layer 2 base)
-│   │   ├── 00_meta.html
-│   │   ├── 01_header.html
-│   │   ├── 01_core_principles.html     # Canonical rules
-│   │   ├── 02_glossary.html
+│   ├── parts-l1/                       # Layer 1 content
+│   │   ├── manifest.json               # Layer 1 structure
+│   │   ├── 01_intro.html
 │   │   ├── 02_quickstart.html
-│   │   ├── 03_architecture.html
-│   │   ├── 04_core_blocks.html
-│   │   ├── 05_psychology.html          # SPINE, Enneagram, OCEAN
-│   │   ├── 05a_spine_anchors.html
-│   │   ├── 05b_cot_tiers.html
-│   │   ├── 06_technical.html
-│   │   ├── 06b_antipatterns_advanced.html
-│   │   ├── 07_testing.html
-│   │   ├── 08_appendices.html
-│   │   ├── 08b_debugging.html
-│   │   ├── 09_conclusion.html
-│   │   ├── 09_footer.html
-│   │   ├── checkpoints.html
-│   │   └── styles.css
+│   │   └── ...
 │   │
-│   ├── parts-l1/                       # Layer 1 specific content
-│   ├── parts-l2/                       # Layer 2 specific content
-│   ├── parts-l3/                       # Layer 3 specific content
+│   ├── parts-l2/                       # Layer 2 content (recommended)
+│   │   ├── manifest.json               # Layer 2 structure
+│   │   ├── 01_intro.html
+│   │   ├── 02_quickstart.html
+│   │   └── ...
+│   │
+│   ├── parts-l3/                       # Layer 3 content (expert)
+│   │   ├── manifest.json               # Layer 3 structure
+│   │   ├── 01_intro.html
+│   │   ├── 02_quickstart.html
+│   │   └── ...
 │   │
 │   ├── data/
 │   │   ├── glossary.json               # Term definitions
+│   │   ├── character_schema.json       # JSON schema for cards
 │   │   └── test_scenarios.json         # Test scenarios
 │   │
-│   └── scripts/
-│       ├── build-shell.mjs             # Shell build (default)
-│       ├── build-layers.mjs            # Layer content build
-│       ├── build-zero-install.mjs      # Offline version
-│       ├── build.mjs                   # Inline build (deprecated)
-│       └── build-utils.mjs             # Shared utilities
+│   ├── assets/
+│   │   ├── favicon.svg
+│   │   └── preview-card.png
+│   │
+│   ├── scripts/
+│   │   ├── build-shell.mjs             # Main build script
+│   │   └── build-utils.mjs             # Shared utilities
+│   │
+│   └── manifest/
+│       └── structure.json              # Overall project structure
 │
 ├── scripts/                            # Validation scripts
 │   ├── validate-artifact.mjs           # Build validation
-│   └── version-sync.mjs                # Version consistency check
+│   ├── version-sync.mjs                # Version consistency check
+│   ├── check_duplicates.py             # Duplicate content detector
+│   ├── validate_terms.py               # Terminology validator
+│   ├── validate_downward_links.py      # Link validator
+│   └── contrast_checker.mjs            # Accessibility contrast
 │
 ├── tests/                              # Test suites
-│   ├── test-build.mjs
-│   ├── test-validate-artifact.mjs
-│   ├── test-version-sync.mjs
+│   ├── test-build.mjs                  # Build unit tests
+│   ├── test-validate-artifact.mjs      # Validation tests
+│   ├── test-version-sync.mjs           # Version sync tests
 │   └── integration/
-│       └── test-full-build.mjs
+│       └── test-full-build.mjs         # Integration tests
 │
 ├── dist/                               # Build output (gitignored)
 │   ├── index.html                      # Shell entry point
+│   ├── build.hash                      # Build hash
 │   ├── parts-l1/                       # Layer 1 HTML
 │   ├── parts-l2/                       # Layer 2 HTML
 │   ├── parts-l3/                       # Layer 3 HTML
-│   └── assets/
-│       ├── shell-styles.css
-│       └── lazy-loader.js
+│   ├── assets/
+│   │   ├── shell-styles.css
+│   │   ├── lazy-loader.js
+│   │   └── ...
+│   └── data/
+│       └── glossary.json
 │
 ├── .github/                            # GitHub Actions
 │   └── workflows/
-│       └── ci.yml
+│       ├── build-artifact.yml          # Build & validate
+│       ├── deploy-pages.yml            # Deploy to GitHub Pages
+│       └── validate.yml                # Validation checks
 │
 ├── .husky/                             # Pre-commit hooks
 ├── .lighthouserc.json                  # Lighthouse CI
@@ -167,23 +185,11 @@ live-char-guide/
 # Install dependencies
 pnpm install
 
-# Build all (shell + zero-install)
-pnpm run build:all
-
-# Build shell version (default)
+# Build shell (dist/)
 pnpm run build
 
-# Build offline version
-pnpm run build:zero
-
-# Build layer content only
-pnpm run build:layers
-
-# Legacy inline build (deprecated)
-pnpm run build:inline
-
-# Watch mode for development
-pnpm run build:watch
+# Build all (same as build:shell)
+pnpm run build:all
 
 # Validate build output
 pnpm run validate
@@ -192,7 +198,7 @@ pnpm run validate
 pnpm run version:check
 
 # Run tests
-pnpm run test
+pnpm test
 
 # Run linting
 pnpm run lint
@@ -207,6 +213,7 @@ pnpm run dev
 
 - Node.js >= 20 (see `.nvmrc`)
 - pnpm 10.x
+- Python 3.10+ (for validation scripts)
 
 ### Quick Start
 
@@ -229,10 +236,10 @@ Before submitting changes, ensure:
 
 1. `pnpm run build:all` succeeds without errors
 2. `pnpm run validate` passes
-3. `pnpm run test` passes
+3. `pnpm test` passes (all 62 tests)
 4. No duplicate rule definitions outside canonical locations
 5. All model-specific content has `data-model` attributes
-6. Version numbers are synchronized
+6. Version numbers are synchronized (`src/VERSION` = `package.json`)
 
 ## Deployment
 
@@ -242,7 +249,13 @@ The project uses GitHub Pages with automatic deployment:
 2. GitHub Actions builds and deploys automatically
 3. Live at: https://vudirvp-sketch.github.io/live-char-guide/
 
-The deployment uses the `dist/` directory (built via `build:shell`).
+### CI/CD Pipeline
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `build-artifact.yml` | Push to main, PR | Build, validate, run tests |
+| `deploy-pages.yml` | Push to main | Deploy to GitHub Pages |
+| `validate.yml` | Push/PR | Run validation scripts |
 
 ## Version
 
