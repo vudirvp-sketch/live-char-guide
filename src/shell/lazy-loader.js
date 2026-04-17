@@ -1361,74 +1361,24 @@
   function initEnneagram() {
     const container = document.getElementById('ennea-svg');
     if (!container) return;
-    container.innerHTML = '';
 
-    const svgNS = 'http://www.w3.org/2000/svg';
+    // SVG is now static in HTML - just bind event handlers to existing nodes
+    const nodes = container.querySelectorAll('.node');
+    
+    nodes.forEach(node => {
+      const typeNum = node.getAttribute('data-type');
+      if (!typeNum) return;
 
-    // Points arranged: 9(top), 1, 2, 3, 4, 5, 6, 7, 8
-    const points = [
-      { x: 150, y: 20, num: 9 },
-      { x: 280, y: 60, num: 1 },
-      { x: 280, y: 180, num: 2 },
-      { x: 200, y: 280, num: 3 },
-      { x: 100, y: 280, num: 4 },
-      { x: 20, y: 180, num: 5 },
-      { x: 20, y: 60, num: 6 },
-      { x: 100, y: 20, num: 7 },
-      { x: 200, y: 20, num: 8 }
-    ];
+      // Click handler
+      node.addEventListener('click', () => showEnneaPanel(typeNum));
 
-    // Inner connections (Enneagram lines)
-    const connections = [
-      [0, 4], [0, 5],  // 9 connects to 4 and 5
-      [1, 3], [1, 7],  // 1 connects to 3 and 7
-      [2, 4], [2, 8],  // 2 connects to 4 and 8
-      [3, 6],          // 3 connects to 6
-      [5, 7],          // 5 connects to 7
-      [6, 8]           // 6 connects to 8
-    ];
-
-    // Draw inner lines
-    connections.forEach(([from, to]) => {
-      const line = document.createElementNS(svgNS, 'line');
-      line.classList.add('inner-lines');
-      line.setAttribute('x1', points[from].x);
-      line.setAttribute('y1', points[from].y);
-      line.setAttribute('x2', points[to].x);
-      line.setAttribute('y2', points[to].y);
-      line.setAttribute('stroke', 'var(--text-muted, #666)');
-      line.setAttribute('stroke-width', '1');
-      line.setAttribute('opacity', '0.4');
-      container.appendChild(line);
-    });
-
-    // Draw nodes
-    points.forEach((p) => {
-      const group = document.createElementNS(svgNS, 'g');
-      group.classList.add('node');
-      group.setAttribute('data-type', p.num);
-
-      const circle = document.createElementNS(svgNS, 'circle');
-      circle.setAttribute('cx', p.x);
-      circle.setAttribute('cy', p.y);
-      circle.setAttribute('r', '18');
-      circle.setAttribute('fill', 'var(--bg-elevated, #222)');
-      circle.setAttribute('stroke', 'var(--accent, #38bdf8)');
-      circle.setAttribute('stroke-width', '2');
-      group.appendChild(circle);
-
-      const text = document.createElementNS(svgNS, 'text');
-      text.setAttribute('x', p.x);
-      text.setAttribute('y', p.y + 5);
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('fill', 'var(--text, #e8e8e8)');
-      text.setAttribute('font-size', '14');
-      text.setAttribute('font-weight', '600');
-      text.textContent = p.num;
-      group.appendChild(text);
-
-      group.addEventListener('click', () => showEnneaPanel(p.num));
-      container.appendChild(group);
+      // Keyboard handler for accessibility
+      node.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showEnneaPanel(typeNum);
+        }
+      });
     });
   }
 
@@ -1466,14 +1416,14 @@
                        'Цена: Едва заметная улыбка, ждёт благодарности'
       },
       3: {
-        name: 'Достигатор',
+        name: 'Деятель',
         fear: 'Быть никчёмным, неудачником',
         desire: 'Быть ценным, успешным, admired',
         stress: 9,
         growth: 6,
         wings: [
-          { num: '2w3', desc: 'Помощник-достигатор' },
-          { num: '4w3', desc: 'Индивидуалист-достигатор' }
+          { num: '2w3', desc: 'Помощник-деятель' },
+          { num: '4w3', desc: 'Индивидуалист-деятель' }
         ],
         anchorExample: 'Триггер: Появляется возможность проявить себя\n' +
                        'Действие: Берёт ответственность, демонстрирует результат\n' +
@@ -1536,14 +1486,14 @@
                        'Цена: Блеск в глазах, не заканчивает начатое'
       },
       8: {
-        name: 'Челленджер',
+        name: 'Босс',
         fear: 'Быть слабым, уязвимым, контролируемым',
         desire: 'Быть сильным, защищённым, влиятельным',
         stress: 5,
         growth: 2,
         wings: [
-          { num: '7w8', desc: 'Энтузиаст-челленджер' },
-          { num: '9w8', desc: 'Миротворец-челленджер' }
+          { num: '7w8', desc: 'Энтузиаст-босс' },
+          { num: '9w8', desc: 'Миротворец-босс' }
         ],
         anchorExample: 'Триггер: Кто-то пытается доминировать\n' +
                        'Действие: Демонстрирует силу, не отступает\n' +

@@ -1674,3 +1674,72 @@ ennea-embed {
   transition: none;
   user-select: none;
 }
+
+/* ============================================
+   ENNEAGRAM SVG INTERACTIVE STYLES
+   ============================================ */
+
+#ennea-svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+#ennea-svg .inner-lines {
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  opacity: 0.35;
+  transition: opacity var(--transition-fast);
+}
+
+#ennea-svg:hover .inner-lines {
+  opacity: 0.55;
+}
+
+#ennea-svg .node {
+  cursor: pointer;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+#ennea-svg .node:hover circle {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+
+#ennea-svg .node:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+#ennea-svg .node circle {
+  fill: var(--bg-elevated);
+  stroke: var(--accent);
+  stroke-width: 2;
+  transition: stroke-width var(--transition-fast);
+}
+
+#ennea-svg .node-num {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--text);
+  pointer-events: none;
+  user-select: none;
+}
+
+#ennea-svg .node-label {
+  font-size: 10px;
+  fill: var(--text-muted);
+  opacity: 0.85;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ennea-svg .node,
+  #ennea-svg .inner-lines {
+    transition: none;
+  }
+  #ennea-svg .node:hover circle {
+    filter: none;
+  }
+}
