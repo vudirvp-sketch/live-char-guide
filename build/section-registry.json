@@ -1,0 +1,392 @@
+{
+  "p1_card_overview": {
+    "layer": "l1",
+    "part": 1,
+    "topic": "Базовые блоки карточки"
+  },
+  "p1_core_rules": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_layer_comparison": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_l1_quickstart": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_elena_minimal": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_top3_problems": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p2_basic_anchors": {
+    "layer": "l1",
+    "part": 2,
+    "topic": "Поведенческие якоря"
+  },
+  "p2_anchor_rules": {
+    "layer": "l1",
+    "part": 2,
+    "topic": ""
+  },
+  "p2_anchor_examples": {
+    "layer": "l1",
+    "part": 2,
+    "topic": ""
+  },
+  "p2_flaw_anchors": {
+    "layer": "l2",
+    "part": 2,
+    "topic": ""
+  },
+  "p2_embodiment": {
+    "layer": "l2",
+    "part": 2,
+    "topic": ""
+  },
+  "p2_sensory_anchors": {
+    "layer": "l3",
+    "part": 2,
+    "topic": ""
+  },
+  "p2_cot_anchors": {
+    "layer": "l3",
+    "part": 2,
+    "topic": ""
+  },
+  "p3_voice_isolation": {
+    "layer": "l1",
+    "part": 3,
+    "topic": "Голос и изоляция"
+  },
+  "p3_influence_hierarchy": {
+    "layer": "l1",
+    "part": 3,
+    "topic": ""
+  },
+  "p3_examples_rules": {
+    "layer": "l2",
+    "part": 3,
+    "topic": ""
+  },
+  "p3_tier_quality": {
+    "layer": "l2",
+    "part": 3,
+    "topic": ""
+  },
+  "p3_greeting": {
+    "layer": "l2",
+    "part": 3,
+    "topic": ""
+  },
+  "p3_voice_leak": {
+    "layer": "l2",
+    "part": 3,
+    "topic": ""
+  },
+  "p3_joker_case": {
+    "layer": "l2",
+    "part": 3,
+    "topic": ""
+  },
+  "p4_spine_overview": {
+    "layer": "l2",
+    "part": 4,
+    "topic": "SPINE Framework"
+  },
+  "p4_want": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_need": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_flaw": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_lie": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_ghost": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_spine_mapping": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_ghost_layers": {
+    "layer": "l3",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_spine_check": {
+    "layer": "l3",
+    "part": 4,
+    "topic": ""
+  },
+  "p5_ocean_basics": {
+    "layer": "l2",
+    "part": 5,
+    "topic": "Психологический инструментарий"
+  },
+  "p5_ocean_poles": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_ocean_validator": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_enneagram_basics": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_enneagram_widget": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_enneagram_to_spine": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_enneagram_wings": {
+    "layer": "l3",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_cross_matrix": {
+    "layer": "l3",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_mbti_basics": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p6_cot_basics": {
+    "layer": "l2",
+    "part": 6,
+    "topic": "Chain of Thought (CoT)"
+  },
+  "p6_cot_tiers": {
+    "layer": "l2",
+    "part": 6,
+    "topic": ""
+  },
+  "p6_cot_tier2": {
+    "layer": "l3",
+    "part": 6,
+    "topic": ""
+  },
+  "p6_cot_tier3": {
+    "layer": "l3",
+    "part": 6,
+    "topic": ""
+  },
+  "p6_cot_anchors": {
+    "layer": "l3",
+    "part": 6,
+    "topic": ""
+  },
+  "p7_system_prompt": {
+    "layer": "l2",
+    "part": 7,
+    "topic": "Техническая реализация"
+  },
+  "p7_format_lock": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_authors_note": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_structured_inject": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_lorebook": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_xml_tags": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_api_blocks": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_4k_fallback": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p8_antipatterns_overview": {
+    "layer": "l2",
+    "part": 8,
+    "topic": "Анти-паттерны"
+  },
+  "p8_ap1_token_bloat": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap2_missing_price": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap3_voice_in_description": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap4_ghost_in_sp": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap5_reppen_high": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap6_no_anti_godmoding": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap7_presence_penalty": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap8_ghost_no_anchors": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap9_spine_broken": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap10_cot_overload": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap11_voice_bleed": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap12_xml_malformed": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap13_lorebook_conflict": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap14_context_violation": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap15_basic": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p9_troubleshooting": {
+    "layer": "l1",
+    "part": 9,
+    "topic": "Диагностика и отладка"
+  },
+  "p9_basic_checklist": {
+    "layer": "l1",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_top5_problems": {
+    "layer": "l1",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_symptom_table": {
+    "layer": "l2",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_test_scenarios": {
+    "layer": "l2",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_12b_issues": {
+    "layer": "l3",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_layer_transition": {
+    "layer": "l3",
+    "part": 9,
+    "topic": ""
+  },
+  "p10_elena_l1": {
+    "layer": "l1",
+    "part": 10,
+    "topic": "Полные примеры карточек"
+  },
+  "p10_elena_l2": {
+    "layer": "l2",
+    "part": 10,
+    "topic": ""
+  },
+  "p10_geralt_l2": {
+    "layer": "l2",
+    "part": 10,
+    "topic": ""
+  },
+  "p10_vysherblenny_l3": {
+    "layer": "l3",
+    "part": 10,
+    "topic": ""
+  }
+}

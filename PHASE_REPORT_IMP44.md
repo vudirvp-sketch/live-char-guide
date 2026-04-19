@@ -1,10 +1,10 @@
-# PHASE_REPORT: Live Character Guide v6 — Stage 1 Complete + Stage 2 Full
+# PHASE_REPORT: Live Character Guide v6 — Stage 3 (Layer Assembly) Partial
 
 > **Generated:** 2026-04-20
 > **Protocol:** IMP-44 (First-Run Read Protocol)
 > **Repository:** https://github.com/vudirvp-sketch/live-char-guide
-> **Current Version:** v5.12.0 → v6.0 (Stage 2 COMPLETE)
-> **Target Version:** v6.0
+> **Current Version:** v6.0.0 (Stage 3 IN PROGRESS — first half complete)
+> **Target Version:** v6.0.0
 
 ---
 
@@ -24,152 +24,118 @@
 
 ---
 
-## Stage 1 Final Status: ✅ COMPLETE (with fixes applied)
+## Stage 3: Layer Assembly — Status: IN PROGRESS (first half complete)
 
-### Stage 1 Bug Fixes Applied (2026-04-20)
+### What Was Done
 
-| # | Fix | File | Description |
-|---|-----|------|-------------|
-| 1 | IMP-23: Inline styles removed | part_05_psych_toolkit.html | Replaced 4 `style="background:..."` with CSS classes `temperament-nt/nf/sj/sp` |
-| 2 | Broken link fixed | part_06_cot.html | Changed `href="#p8_antipattern_ocean"` to `data-layer-switch="3#p8_ap10_cot_overload"` |
-| 3 | Chinese character removed | part_05_psych_toolkit.html | Replaced "推导" with "выведения" |
-| 4 | English → Russian in noscript | part_05_psych_toolkit.html | Translated OCEAN and Enneagram `<noscript>` tables to Russian |
-| 5 | English terms → Russian | part_05_psych_toolkit.html | Replaced "withdrawn"→"замкнутый", "reactive"→"реактивный", "expansionary"→"экспансивный", "Peacemaker"→"Миротворец", "Investigator"→"Исследователь", "Enthusiast"→"Энтузиаст", "protective"→"защитный" |
-| 6 | MBTI group names → Russian | part_05_psych_toolkit.html | "Analysts"→"Аналитики", "Diplomats"→"Дипломаты", "Sentinels"→"Стражи", "Explorers"→"Исследователи" |
-| 7 | CSS temperament cell classes added | styles.css | Added `td.temperament-nt/nf/sj/sp` rules for MBTI table background colors |
+Stage 3 requires two runs:
+1. ✅ `build-layers.mjs` — generate per-layer HTML from master
+2. ✅ `build-shell.mjs` — copy shell + generated parts + data → dist/
 
-### CSS Changes
+Both stages have been implemented and verified. The full build pipeline now works end-to-end.
 
-| File | Change |
-|------|--------|
-| `src/shell/styles.css` | Added `td.temperament-nt`, `td.temperament-nf`, `td.temperament-sj`, `td.temperament-sp` CSS rules (lines 1729-1741) |
+### build-layers.mjs v2.0.0 Changes (complete rewrite)
 
-### Build Verification After Stage 1 Fixes
+| # | Change | Description |
+|---|--------|-------------|
+| 1 | Add `id` attributes to output sections | `<section id="p1_card_overview" data-layer="l1" data-section="p1_card_overview">` — enables TOC navigation and anchor links |
+| 2 | Generate proper per-layer `manifest.json` | Matches lazy-loader.js format: `{ layer, name, label, description, token_budget, color, parts: [{file, title, anchors}], inherits }` |
+| 3 | Extract `title` and `anchors` from section content | Title from first `<h2>`, anchors from `<h3 id="...">` and `data-section` values |
+| 4 | Fix glossary generation | Uses `canonical_terms` (actual glossary.json format) instead of `terms` |
+| 5 | Improve cross-layer link processing | Handles both `data-layer-switch="2#section-id"` (v6 format) and `data-layer-switch="2"` (v5.12 format) |
+| 6 | Generate footer.html per layer | Version, layer navigation (← L1 | L2 →), GitHub link |
+| 7 | Generate build-manifest.json | Top-level build metadata: version, timestamps, section count, layer hashes |
+| 8 | Duplicate data-section ID detection | Build error if same ID appears in multiple sections |
+| 9 | Layer config validation | Reads `build/layer-config.json` for canonical layer names |
+
+### build-shell.mjs v3.0.0 Changes
+
+| # | Change | Description |
+|---|--------|-------------|
+| 1 | **Use `build/parts-l{N}/` instead of `src/parts-l{N}/`** | Critical: parts now come from build-layers output, not manual v5.12 files |
+| 2 | **Use root `data/` instead of `src/data/`** | Data files (glossary, ocean, enneagram, mbti) are at repo root per §0.5 |
+| 3 | Add pre-build validation | Checks that `build-layers.mjs` has been run before proceeding |
+| 4 | Layer config validation (§0.17) | Validates canonical names, labels, and colors against expected values |
+| 5 | Copy sitemap.xml and robots.txt | SEO files needed for GitHub Pages |
+| 6 | Version bump to 6.0.0 | `src/VERSION` and `package.json` both updated |
+
+### Build Verification Results
 
 ```
-Build: ✅ PASSED (78 sections, 0 errors)
+Build: ✅ PASSED (78 sections, 0 errors, 10 parts)
 Layer hashes:
-  L1: updated after fix
-  L2: updated after fix
-  L3: updated after fix
+  L1: sha256:4342be219304623e
+  L2: sha256:19c63e5ba8af8088
+  L3: sha256:cb96eb7332847f9f
+
+dist/ output:
+  parts-l1/: 7 parts (5 content + glossary + footer), 9 files total
+  parts-l2/: 12 parts (10 content + glossary + footer), 14 files total
+  parts-l3/: 12 parts (10 content + glossary + footer), 14 files total
+  data/: 6 files (glossary, ocean, enneagram, mbti, character_schema, test_scenarios)
+  assets/: shell-styles.css, lazy-loader.js, favicon.svg, preview-card.png
 ```
 
----
-
-## Stage 2: Master Validation — FULL Status: ✅ COMPLETE
-
-### All Checks Implemented in validate-master.mjs (13 total)
-
-| # | Check | Result | Details |
-|---|-------|--------|---------|
-| 1 | All sections have correct data-layer and data-section attributes | ✅ PASS | 78 sections, all valid, all IDs unique |
-| 2 | All data-layer-switch references are valid | ✅ PASS | 7 references, all target sections exist in correct layers |
-| 3 | All cross-references (href="#id") resolve | ✅ PASS | 0 broken internal references |
-| 4 | No prohibited elements in master HTML | ✅ PASS | No `<style>`, `<script>`, `<link>`, `<meta>` found |
-| 5 | No content outside `<section data-layer>` blocks | ✅ PASS | Only HTML comments found outside sections (acceptable per plan) |
-| 6 | Glossary terms used in at least one Part | ✅ PASS (1 warning) | 1 term "Spine" uses alias "SPINE" — not an error, just case difference |
-| 7 | Heading hierarchy (no h4 without h3 parent) | ✅ PASS | All 20 previous violations FIXED in this batch |
-| 8 | No prohibited translations | ✅ PASS | No "Авторские заметки", "Лорбук", "Описание персонажа" found |
-| 9 | Visual components from registry (CSS class check) | ✅ PASS | No `.callout.info`, `.tag.warn`, or other prohibited classes |
-| 10 | Character examples match Character Bible | ✅ PASS | No Paul Atreides, Shinji Ikari, or "Макс" placeholder found |
-| 11 | IMP-27: layer visibility bridges | ✅ PASS (with warnings) | Parts with L2/L3 content should have data-layer-switch bridges — noted for future improvement |
-| 12 | IMP-28: no orphan sections | ✅ PASS | All 78 sections have h2/h3 headings (reachable via TOC) |
-| 13 | Callout emoji markers (IMP-56) | ✅ PASS (with warnings) | Some callouts in Part 03/08 use ❌/✅ instead of ⚠️/💡 — acceptable for anti-pattern examples |
-
-### Stage 2 Batch 2 Fixes Applied (2026-04-20)
-
-| # | Fix | File | Description |
-|---|-----|------|-------------|
-| 1 | h4→h3 heading fix | part_03_voice.html | "Tier Quality System" → h3 + Russian: "Система уровней качества (Tier Quality)" |
-| 2 | h4→h3 heading fix | part_05_psych_toolkit.html | "5 измерений OCEAN" h4→h3 |
-| 3 | English→Russian table headers | part_05_psych_toolkit.html | "Type"→"Тип", "Core Fear"→"Ключевой страх", "Core Desire"→"Ключевое желание", "Stress Direction"→"Направление стресса", "Growth Direction"→"Направление роста", "Core Type"→"Основной тип", "Type N"→"Тип N" |
-| 4 | h4→h3 heading fix | part_06_cot.html | "Зачем нужен CoT" h4→h3 |
-| 5 | h4→h3 heading fix (3x) | part_07_technical.html | "Обязательные элементы SP", "Шаблон SP (L1)", "Шаблон SP (L2)" h4→h3 |
-| 6 | h4→h3 heading fix (15x) | part_08_antipatterns.html | All AP-1 through AP-15 headings h4→h3 |
-
-### Additional Scripts Updated
-
-| File | Change |
-|------|--------|
-| `scripts/validate-master.mjs` | Added checks 6-13 (heading hierarchy, prohibited translations, visual components, character Bible, IMP-27, IMP-28, callout emoji) |
-| `scripts/check_duplicates.py` | Added `src/master/` to default parts directories |
-| `scripts/validate_terms.py` | Added `src/master/` to default parts directories; fixed glossary path to `data/glossary.json` |
-| `build/section-registry.json` | **Created** — 78 sections with full metadata per §0.20 schema |
-
-### Warnings Summary (29 total, 0 errors)
-
-| Category | Count | Severity | Action Needed |
-|----------|-------|----------|---------------|
-| HTML comments outside sections | 10 | Low | Acceptable per plan — comments are not content |
-| Glossary term "Spine" not found | 1 | Low | "SPINE" (uppercase) is used — case sensitivity issue, not a real gap |
-| IMP-27 L2 bridge missing | 4 | Medium | Consider adding data-layer-switch references in Parts 02, 03, 09, 10 |
-| IMP-27 L3 bridge missing | 8 | Medium | Consider adding data-layer-switch references from L2→L3 content |
-| Callout emoji variation | 6 | Low | ❌/✅ used in anti-pattern examples instead of ⚠️/💡 — acceptable per context |
-
----
-
-## Master HTML Files — Final State
-
-| # | File | Sections | Layer Coverage | Est. Words | Quality | Issues |
-|---|------|----------|----------------|------------|---------|--------|
-| 1 | part_01_basic_blocks.html | 6 | l1 | ~420 | Good | 0 |
-| 2 | part_02_anchors.html | 7 | l1, l2, l3 | ~400 | Good | 0 |
-| 3 | part_03_voice.html | 7 | l1, l2 | ~380 | Good | 0 (heading fixed) |
-| 4 | part_04_spine.html | 9 | l2, l3 | ~500 | Good | 0 |
-| 5 | part_05_psych_toolkit.html | 9 | l2, l3 | ~520 | Good | 0 (all fixed) |
-| 6 | part_06_cot.html | 5 | l2, l3 | ~200 | Medium | 0 (heading fixed; content thin — noted) |
-| 7 | part_07_technical.html | 8 | l2, l3 | ~350 | Good | 0 (headings fixed) |
-| 8 | part_08_antipatterns.html | 16 | l2, l3 | ~460 | Good | 0 (all 15 headings fixed) |
-| 9 | part_09_diagnostics.html | 7 | l1, l2, l3 | ~290 | Good | 0 |
-| 10 | part_10_examples.html | 4 | l1, l2, l3 | ~800 | Good | 0 |
-| **TOTAL** | | **78** | | **~4320** | | **0** |
-
----
-
-## Files Modified in This Phase (Stage 2 Complete)
+### Files Modified
 
 | File Path | Change Type | Description |
 |-----------|-------------|-------------|
-| `src/master/part_03_voice.html` | Modified | Fixed h3 heading: "Tier Quality System" → "Система уровней качества (Tier Quality)" |
-| `src/master/part_05_psych_toolkit.html` | Modified | Fixed h4→h3 for OCEAN dimensions; translated 6 English table headers to Russian |
-| `src/master/part_06_cot.html` | Modified | Fixed h4→h3 for "Зачем нужен CoT" |
-| `src/master/part_07_technical.html` | Modified | Fixed 3x h4→h3 for SP elements and templates |
-| `src/master/part_08_antipatterns.html` | Modified | Fixed 15x h4→h3 for all AP headings |
-| `scripts/validate-master.mjs` | Modified | Added checks 6-13 (8 new validation functions) |
-| `scripts/check_duplicates.py` | Modified | Added `src/master/` to search paths |
-| `scripts/validate_terms.py` | Modified | Added `src/master/` to search paths; fixed glossary path |
-| `build/section-registry.json` | **Created** | 78 sections with full metadata per §0.20 schema |
+| `scripts/build-layers.mjs` | **Rewritten** | v1.0.0 → v2.0.0: added id attrs, proper manifests, anchor extraction, glossary fix, footer gen, duplicate detection |
+| `src/scripts/build-shell.mjs` | **Rewritten** | v2.0.1 → v3.0.0: use build/ instead of src/, fix data path, add validation, SEO files |
+| `package.json` | Modified | Version 5.12.0 → 6.0.0; added `build:layers` script; updated build/dev/precommit scripts |
+| `src/VERSION` | Modified | 5.12.0 → 6.0.0 |
+
+### Files Generated (in build/)
+
+| File Path | Description |
+|-----------|-------------|
+| `build/parts-l1/manifest.json` | L1 manifest (7 parts) |
+| `build/parts-l1/part_01.html` — `part_10.html` | L1 assembled parts (5 files) |
+| `build/parts-l1/glossary.html` | L1 no-JS glossary |
+| `build/parts-l1/footer.html` | L1 footer |
+| `build/parts-l2/manifest.json` | L2 manifest (12 parts) |
+| `build/parts-l2/part_01.html` — `part_10.html` | L2 assembled parts (10 files) |
+| `build/parts-l2/glossary.html` | L2 no-JS glossary |
+| `build/parts-l2/footer.html` | L2 footer |
+| `build/parts-l3/manifest.json` | L3 manifest (12 parts) |
+| `build/parts-l3/part_01.html` — `part_10.html` | L3 assembled parts (10 files) |
+| `build/parts-l3/glossary.html` | L3 no-JS glossary |
+| `build/parts-l3/footer.html` | L3 footer |
+| `build/section-registry.json` | 78 sections with full metadata |
+| `build/build-manifest.json` | Top-level build metadata |
+| `build/parts-l{1,2,3}/.hash` | Layer content hashes |
 
 ---
 
-## Section Registry (78 sections)
+## What Remains for Stage 3 (second half)
 
-All 78 sections verified in `build/section-registry.json`. Distribution:
-- L1: 15 sections (Parts: 01, 02, 09, 10)
-- L2: 41 sections (all 10 Parts)
-- L3: 22 sections (8 Parts: 02, 04, 05, 06, 07, 08, 09, 10)
+The following items from the plan's Stage 3 specification still need to be addressed:
+
+1. **`initLayerSwitch()` implementation in lazy-loader.js (BUG-1)** — The build now generates correct `data-layer-switch` attributes, but lazy-loader.js still needs the `initLayerSwitch()` function implemented. Currently it's called in `initInteractiveElements()` (line 779) but not defined (BUG-1 from §0.5.1).
+
+2. **BUG-2 fix: OCEAN validator typo** — `colorsaxIdx]` → `colors[maxIdx]` in lazy-loader.js.
+
+3. **BUG fixes in styles.css** (BUG-3, BUG-5, BUG-9, BUG-10) — `.callout.important`, `.antipattern-card`, stray `}`, malformed selector.
+
+4. **BUG-8 fix: YAML workflows** — `branches: ain]` → `branches: [main]` in `.github/workflows/*.yml`.
+
+5. **BUG-11 fix: Enneagram Type 3 name** — Already fixed in `data/enneagram.json`, need to verify SVG.
+
+6. **Anchor redirect map (§0.18)** — `handleLegacyAnchor()` with ANCHOR_REDIRECTS in lazy-loader.js.
+
+7. **Widget data extraction from lazy-loader.js to JSON fetch** (Stage 1.5 items) — `showOceanPanel()`, `showEnneaPanel()`, `initMBTI()` still use hardcoded data.
+
+8. **persona-cross.js spec** (§0.8) — OCEAN×Enneagram correlation widget.
+
+9. **Stage 4: Layer Validation** — Verify L2 contains all L1 text, L3 contains all L2, no duplications, all links resolve.
 
 ---
 
-## Data Files Status
+## Previous Stage Status
 
-| File | Status | Notes |
-|------|--------|-------|
-| `data/glossary.json` | ✅ Good | v1.2.0, 24 terms, layer contexts |
-| `data/ocean.json` | ✅ Good | v1.0.0, 5 traits, Russian descriptions |
-| `data/enneagram.json` | ✅ Good | v1.0.0, 9 types, "Достигатель" for Type 3 (BUG-11 fixed) |
-| `data/mbti.json` | ✅ Good | v1.0.0, 16 types, 4 temperaments |
-
----
-
-## Gaps and Recommendations for Next Phase
-
-| ID | Gap | Reason | Action Needed |
-|----|-----|--------|---------------|
-| gap:imp27_bridges | 12 Parts missing data-layer-switch bridges between layers | IMP-27 requires L2 sections have L1 mentions; most Parts only have bridges in Part 01 and Part 05 | Add layer-remark references in Parts 02-04, 06-10 for L1→L2 and L2→L3 bridges |
-| gap:part_06_thin | Part 6 (CoT) is thinnest file (~200 words) | May need more examples and explanation | Consider expanding in future phase with more CoT tier examples |
-| gap:callout_emoji_variation | Some callouts in Part 03/08 use ❌/✅ instead of canonical ⚠️/💡/📌 | Anti-pattern examples use ❌ for "wrong" and ✅ for "correct" — functionally different from warning/tip | Consider if anti-pattern callouts should have their own emoji convention |
-| gap:spine_term_case | Glossary term "Spine" vs used "SPINE" | Case sensitivity — SPINE is always uppercase per dictionary | Update check to be case-insensitive for glossary term matching |
+### Stage 1: ✅ COMPLETE (with fixes applied)
+### Stage 2: ✅ COMPLETE (13 validation checks passed)
+### Stage 3: IN PROGRESS (build pipeline working, runtime fixes remaining)
 
 ---
 
@@ -177,33 +143,50 @@ All 78 sections verified in `build/section-registry.json`. Distribution:
 
 ```
 PHASE_REPORT:
-phase: 2-complete (Stage 1 fixes + Stage 2 full validation)
+phase: 3-partial (Stage 3 first half: build pipeline)
 files_created:
+  - build/parts-l1/manifest.json
+  - build/parts-l1/part_01.html
+  - build/parts-l1/part_02.html
+  - build/parts-l1/part_03.html
+  - build/parts-l1/part_09.html
+  - build/parts-l1/part_10.html
+  - build/parts-l1/glossary.html
+  - build/parts-l1/footer.html
+  - build/parts-l2/manifest.json
+  - build/parts-l2/part_01.html — part_10.html
+  - build/parts-l2/glossary.html
+  - build/parts-l2/footer.html
+  - build/parts-l3/manifest.json
+  - build/parts-l3/part_01.html — part_10.html
+  - build/parts-l3/glossary.html
+  - build/parts-l3/footer.html
   - build/section-registry.json
+  - build/build-manifest.json
+  - build/parts-l{1,2,3}/.hash
 files_modified:
-  - src/master/part_03_voice.html
-  - src/master/part_05_psych_toolkit.html
-  - src/master/part_06_cot.html
-  - src/master/part_07_technical.html
-  - src/master/part_08_antipatterns.html
-  - scripts/validate-master.mjs
-  - scripts/check_duplicates.py
-  - scripts/validate_terms.py
-sections_added: [] (no new sections — fixes only)
+  - scripts/build-layers.mjs (v1.0.0 → v2.0.0)
+  - src/scripts/build-shell.mjs (v2.0.1 → v3.0.0)
+  - package.json (5.12.0 → 6.0.0, new scripts)
+  - src/VERSION (5.12.0 → 6.0.0)
+sections_added: [] (no new sections — assembly only)
 characters_used: [Elena, Geralt, Walter White, Joker, Jesse Pinkman, Edward Elric, Tyler Durden, Выщербленный, Elliot Alderson]
 terms_added_to_glossary: []
-cross_refs_out: [] (no new cross-references)
+cross_refs_out: [] (preserved from master HTML)
 cross_refs_in_expected: []
-layer_hashes: {l1: "updated", l2: "updated", l3: "updated"}
+layer_hashes: {l1: "sha256:4342be219304623e", l2: "sha256:19c63e5ba8af8088", l3: "sha256:cb96eb7332847f9f"}
 gaps:
-  - id: gap:imp27_bridges | item: 12 Parts missing data-layer-switch bridges | reason: IMP-27 requires inter-layer visibility | action: add layer-remark references
-  - id: gap:part_06_thin | item: Part 6 thin content | reason: only ~200 words | action: consider expanding
-  - id: gap:callout_emoji_variation | item: callout emoji convention for anti-patterns | reason: ❌/✅ used instead of ⚠️/💡 in AP examples | action: decide on convention
-  - id: gap:spine_term_case | item: "Spine" vs "SPINE" case mismatch | reason: glossary uses "Spine", master uses "SPINE" | action: make check case-insensitive
+  - id: gap:initLayerSwitch | item: initLayerSwitch() not implemented in lazy-loader.js | reason: BUG-1 — function is called but not defined | action: implement in Stage 1.5
+  - id: gap:bug2_ocean | item: OCEAN validator typo | reason: colorsaxIdx] should be colors[maxIdx] | action: fix in lazy-loader.js
+  - id: gap:css_bugs | item: BUG-3/5/9/10 CSS fixes not applied | reason: styles.css needs .callout.important, .antipattern-card, stray }, malformed selector | action: fix in styles.css
+  - id: gap:yaml_bugs | item: BUG-8 YAML workflows | reason: branches: ain] instead of [main] | action: fix in .github/workflows/*.yml
+  - id: gap:widget_data | item: Widget data still hardcoded in JS | reason: showOceanPanel/showEnneaPanel/initMBTI use hardcoded data | action: extract to JSON fetch (Stage 1.5)
+  - id: gap:persona_cross | item: persona-cross.js not written | reason: OCEAN×Enneagram correlation widget spec not implemented | action: write widget spec
+  - id: gap:anchor_redirects | item: handleLegacyAnchor() not implemented | reason: v5.12 → v6 URL backward compatibility | action: implement in lazy-loader.js
 issues: []
 ```
 
 ---
 
 *Report generated by IMP-44 Protocol execution for Live Character Guide v6 rebuild project*
-*Stage 1: COMPLETE | Stage 2 full: COMPLETE | Stage 3 (Layer Assembly): NEXT*
+*Stage 1: COMPLETE | Stage 2: COMPLETE | Stage 3 (first half): COMPLETE | Stage 3 (second half): PENDING*
