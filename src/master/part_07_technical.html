@@ -11,9 +11,9 @@
 
 <h3>Обязательные элементы SP</h3>
 <ul>
-<li><strong>Identity:</strong> "You are {{char}}"</li>
-<li><strong>Anti-godmoding:</strong> "Never speak or act for {{user}}"</li>
-<li><strong>Character constraints:</strong> Только L1 — минимальные</li>
+<li><strong>Identity:</strong> "You are {{char}}" — кто персонаж</li>
+<li><strong>Anti-godmoding:</strong> "Never speak or act for {{user}}" — запрет действий за пользователя</li>
+<li><strong>Character constraints:</strong> На L1 — только базовые ограничения (stay in character, не ломать 4-ю стену). На L2 — добавляются голосовые и поведенческие ограничения. На L3 — полный набор с CoT и XML-структурой.</li>
 </ul>
 
 <h3>Шаблон SP (L1)</h3>
@@ -40,6 +40,49 @@ Constraints:
 Format Lock:
 - Dialogue: *action* "speech"
 - Internal thoughts: [INTERNAL]...[/INTERNAL] (L3 only)</code></pre>
+
+</section>
+
+<section data-layer="l2" data-section="p7_sampling_params">
+<h3>Параметры генерации (Sampling)</h3>
+
+<p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для character cards рекомендации отличаются от обычного чата — голос персонажа требует повторяемых паттернов.</p>
+
+<h4>Базовые параметры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>L1 (12B)</th><th>L2 (12B-32B)</th><th>L3 (32B+ / API)</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Temperature</strong></td><td>0.6-0.8</td><td>0.7-0.9</td><td>0.7-1.0</td><td>Ниже = предсказуемее, выше = разнообразнее</td></tr>
+<tr><td><strong>Top P</strong></td><td>0.9</td><td>0.9-0.95</td><td>0.9-0.95</td><td>Nucleus sampling, обычно не трогать</td></tr>
+<tr><td><strong>Min P</strong></td><td>0.05</td><td>0.05-0.1</td><td>0.05-0.1</td><td>Отсечение маловероятных токенов</td></tr>
+<tr><td><strong>RepPen</strong></td><td>1.0-1.05</td><td>1.05-1.10</td><td>1.05-1.10</td><td>Никогда > 1.10 — убьёт голос (AP-5)</td></tr>
+<tr><td><strong>Top K</strong></td><td>40</td><td>40-80</td><td>40-100</td><td>Ограничение выбора токенов</td></tr>
+<tr><td><strong>Presence Penalty</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td>Обязательно 0 — иначе голос дрейфует (AP-7)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Важно:</strong> Presence Penalty = 0.0 для ВСЕХ character cards. Это не рекомендация, а правило. Любое значение > 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
+</div>
+
+<h4>Модель-специфичные рекомендации (L3)</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Модель</th><th>Temperature</th><th>RepPen</th><th>Особенности</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>12B (4K)</strong></td><td>0.6-0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback</td></tr>
+<tr><td><strong>32B+</strong></td><td>0.7-0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
+<tr><td><strong>Claude API</strong></td><td>0.8-1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt;</td></tr>
+<tr><td><strong>GPT API</strong></td><td>0.8-1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций</td></tr>
+</tbody>
+</table>
+</div>
 
 </section>
 

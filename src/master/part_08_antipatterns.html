@@ -17,7 +17,7 @@
 
 <section data-layer="l2" data-section="p8_ap1_token_bloat">
 <div class="antipattern-card">
-<h3>AP-1: Token Bloat</h3>
+<h3>AP-1: Раздувание токенов (Token Bloat)</h3>
 <p><strong>Симптом:</strong> Description > 800 токенов</p>
 <p><strong>Причина:</strong> Избыточное описание, дублирование, голос в Description</p>
 <p><strong>Решение:</strong></p>
@@ -34,7 +34,7 @@
 
 <section data-layer="l2" data-section="p8_ap2_missing_price">
 <div class="antipattern-card">
-<h3>AP-2: Missing Price</h3>
+<h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Якорь без физической цены</p>
 <p><strong>Причина:</strong> Неверное понимание формата якоря</p>
 <p><strong>Решение:</strong> Каждый важный якорь = Триггер → Действие → <strong>Цена</strong></p>
@@ -49,7 +49,7 @@
 
 <section data-layer="l2" data-section="p8_ap3_voice_in_description">
 <div class="antipattern-card">
-<h3>AP-3: Voice in Description</h3>
+<h3>AP-3: Голос в Description (Voice in Description)</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
 <p><strong>Причина:</strong> Непонимание иерархии влияния на голос</p>
 <p><strong>Решение:</strong> Голос = только в Examples и Greeting. Description = только факты.</p>
@@ -70,7 +70,7 @@ Example:
 
 <section data-layer="l2" data-section="p8_ap4_ghost_in_sp">
 <div class="antipattern-card">
-<h3>AP-4: GHOST in System Prompt</h3>
+<h3>AP-4: GHOST в System Prompt</h3>
 <p><strong>Симптом:</strong> Психология (SPINE, GHOST) в SP</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
 <p><strong>Решение:</strong> SPINE/GHOST = только в Description. SP = только инструкции и запреты.</p>
@@ -82,7 +82,7 @@ Example:
 
 <section data-layer="l2" data-section="p8_ap5_reppen_high">
 <div class="antipattern-card">
-<h3>AP-5: RepPen > 1.10</h3>
+<h3>AP-5: RepPen > 1.10 (Высокий штраф повторений)</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
 <p><strong>Причина:</strong> Попытка бороться с повторами через параметр</p>
 <p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Высокий RepPen убивает голос.</p>
@@ -94,7 +94,7 @@ Example:
 
 <section data-layer="l2" data-section="p8_ap6_no_anti_godmoding">
 <div class="antipattern-card">
-<h3>AP-6: No Anti-Godmoding</h3>
+<h3>AP-6: Нет анти-годмодинга (No Anti-Godmoding)</h3>
 <p><strong>Симптом:</strong> Модель пишет за {{user}}</p>
 <p><strong>Причина:</strong> Нет инструкции "Never speak or act for {{user}}" в SP</p>
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
@@ -104,7 +104,7 @@ Example:
 
 <section data-layer="l2" data-section="p8_ap7_presence_penalty">
 <div class="antipattern-card">
-<h3>AP-7: Presence Penalty > 0</h3>
+<h3>AP-7: Presence Penalty > 0 (Штраф за присутствие)</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
 <p><strong>Причина:</strong> Использование параметров для chat для roleplay</p>
 <p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards.</p>
@@ -116,7 +116,7 @@ Example:
 
 <section data-layer="l3" data-section="p8_ap8_ghost_no_anchors">
 <div class="antipattern-card">
-<h3>AP-8: GHOST without Anchors (L3)</h3>
+<h3>AP-8: GHOST без якорей (GHOST without Anchors, L3)</h3>
 <p><strong>Симптом:</strong> GHOST описан, но нет якорей, связанных с ним</p>
 <p><strong>Причина:</strong> GHOST как описание, не как поведенческий драйвер</p>
 <p><strong>Решение:</strong> Каждый GHOST = минимум 1 якорь-триггер</p>
@@ -128,7 +128,7 @@ Example:
 
 <section data-layer="l3" data-section="p8_ap9_spine_broken">
 <div class="antipattern-card">
-<h3>AP-9: Broken SPINE (L3)</h3>
+<h3>AP-9: Сломанный SPINE (Broken SPINE, L3)</h3>
 <p><strong>Симптом:</strong> SPINE элементы не связаны логически</p>
 <p><strong>Причина:</strong> WANT, NEED, FLAW, LIE, GHOST написаны независимо</p>
 <p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT</p>
@@ -140,7 +140,7 @@ Example:
 
 <section data-layer="l3" data-section="p8_ap10_cot_overload">
 <div class="antipattern-card">
-<h3>AP-10: CoT Overload (L3)</h3>
+<h3>AP-10: Перегрузка CoT (CoT Overload, L3)</h3>
 <p><strong>Симптом:</strong> > 3 CoT якорей в карточке</p>
 <p><strong>Причина:</strong> Попытка задать весь внутренний процесс</p>
 <p><strong>Решение:</strong> 2-3 CoT якоря максимум. Остальное — обычные якоря.</p>
@@ -152,7 +152,7 @@ Example:
 
 <section data-layer="l3" data-section="p8_ap11_voice_bleed">
 <div class="antipattern-card">
-<h3>AP-11: Multi-char Voice Bleed (L3)</h3>
+<h3>AP-11: Переплетение голосов (Voice Bleed, L3)</h3>
 <p><strong>Симптом:</strong> В мульти-персонажных сценах голоса смешиваются</p>
 <p><strong>Причина:</strong> Недостаточное различение голосов персонажей</p>
 <p><strong>Решение:</strong> Character Markers — явные маркеры уникальности голоса</p>
@@ -173,7 +173,7 @@ Jesse markers:
 
 <section data-layer="l3" data-section="p8_ap12_xml_malformed">
 <div class="antipattern-card">
-<h3>AP-12: XML Malformed (L3)</h3>
+<h3>AP-12: Невалидный XML (XML Malformed, L3)</h3>
 <p><strong>Симптом:</strong> Невалидные XML теги в Description</p>
 <p><strong>Причина:</strong> Опечатки, незакрытые теги</p>
 <p><strong>Решение:</strong> Валидация XML перед использованием</p>
@@ -194,7 +194,7 @@ WANT: {{want}}
 
 <section data-layer="l3" data-section="p8_ap13_lorebook_conflict">
 <div class="antipattern-card">
-<h3>AP-13: Lorebook Conflict (L3)</h3>
+<h3>AP-13: Конфликт Lorebook (Lorebook Conflict, L3)</h3>
 <p><strong>Симптом:</strong> Lorebook записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
 <p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description</p>
@@ -203,7 +203,7 @@ WANT: {{want}}
 
 <section data-layer="l3" data-section="p8_ap14_context_violation">
 <div class="antipattern-card">
-<h3>AP-14: Context Window Violation (L3)</h3>
+<h3>AP-14: Нарушение контекстного окна (Context Window Violation, L3)</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> L3 карточка для 4K модели</p>
 <p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом</p>
@@ -212,7 +212,7 @@ WANT: {{want}}
 
 <section data-layer="l2" data-section="p8_ap15_basic">
 <div class="antipattern-card">
-<h3>AP-15: OCEAN Overload</h3>
+<h3>AP-15: Перегрузка OCEAN (OCEAN Overload)</h3>
 <p><strong>Симптом:</strong> > 2 экстремальных OCEAN полюсов</p>
 <p><strong>Причина:</strong> Попытка сделать персонажа "интересным" через противоречия</p>
 <p><strong>Решение:</strong> 1-2 экстремальных полюса. Больше — внутренняя противоречивость.</p>

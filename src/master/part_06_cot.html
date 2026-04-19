@@ -130,3 +130,56 @@ resolution: отступить
 </div>
 
 </section>
+
+<section data-layer="l3" data-section="p6_l3_quickstart">
+<h3>L3 Quickstart: 60-минутный конвейер</h3>
+
+<p>Экспертная карточка с GHOST Layers, CoT, API-блоками и XML-структурой. Ориентировочное время: 60 минут.</p>
+
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">01</div>
+<div class="inf-step-label">Расширенный SPINE</div>
+<div class="inf-step-desc">GHOST Layers (3 уровня) + валидация цепочки</div>
+<div class="inf-step-code">~15 мин</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">02</div>
+<div class="inf-step-label">CoT якоря</div>
+<div class="inf-step-desc">2-3 CoT якоря Tier 2 (рекомендовано)</div>
+<div class="inf-step-code">~15 мин</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">03</div>
+<div class="inf-step-label">API блоки</div>
+<div class="inf-step-desc">Claude / GPT блоки, если используете API</div>
+<div class="inf-step-code">~10 мин</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">04</div>
+<div class="inf-step-label">XML теги</div>
+<div class="inf-step-desc">Структурируйте Description через XML</div>
+<div class="inf-step-code">~10 мин</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">05</div>
+<div class="inf-step-label">Валидация</div>
+<div class="inf-step-desc">6 тестовых сценариев + Layer transition check</div>
+<div class="inf-step-code">~10 мин</div>
+</div>
+</div>
+
+<h4>Чек-лист L3</h4>
+<ul>
+<li>☐ GHOST Layers: 3 уровня связаны с LIE, FLAW, триггерами</li>
+<li>☐ 2-3 CoT якоря (Tier 2 рекомендовано для 32B+)</li>
+<li>☐ Сенсорные якоря: минимум 2 канала из 5</li>
+<li>☐ XML Description: &lt;identity&gt;, &lt;spine&gt;, &lt;ocean&gt;, &lt;anchors&gt;</li>
+<li>☐ API блоки: Claude или GPT, если используете API-модель</li>
+<li>☐ Lorebook: GHOST-факты с триггерами</li>
+<li>☐ 4K-Fallback: если контекст 4K — используйте минимальный протокол</li>
+<li>☐ Токены: 1500+</li>
+<li>☐ Валидация: 6 сценариев из <a data-layer-switch="2#p9_test_scenarios">Part 9</a></li>
+</ul>
+
+</section>

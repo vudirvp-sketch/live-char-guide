@@ -1,5 +1,5 @@
 /* ============================================
-   LIVE CHARACTER GUIDE - SHELL STYLES v5.12.0
+   LIVE CHARACTER GUIDE - SHELL STYLES v6.0.0
    ============================================ */
 
 /* === CSS DESIGN TOKENS === */
@@ -1371,7 +1371,7 @@ body.content-wide pre {
 }
 
 /* === ENNEAGRAM EMBED === */
-ennea-embed {
+.ennea-embed {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   padding: 0.4em 0.8em 1.4em;
 }

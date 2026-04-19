@@ -144,6 +144,11 @@
     "part": 4,
     "topic": ""
   },
+  "p4_l2_quickstart": {
+    "layer": "l2",
+    "part": 4,
+    "topic": "L2 Quickstart 30-минутный конвейер"
+  },
   "p5_ocean_basics": {
     "layer": "l2",
     "part": 5,
@@ -214,10 +219,20 @@
     "part": 6,
     "topic": ""
   },
+  "p6_l3_quickstart": {
+    "layer": "l3",
+    "part": 6,
+    "topic": "L3 Quickstart 60-минутный конвейер"
+  },
   "p7_system_prompt": {
     "layer": "l2",
     "part": 7,
     "topic": "Техническая реализация"
+  },
+  "p7_sampling_params": {
+    "layer": "l2",
+    "part": 7,
+    "topic": "Параметры генерации (Sampling)"
   },
   "p7_format_lock": {
     "layer": "l2",
