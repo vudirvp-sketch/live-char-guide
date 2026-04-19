@@ -1,0 +1,221 @@
+<!--
+  Part 1: Basic Card Blocks (Базовые блоки карточки)
+  Live Character Guide v6 Master HTML
+  
+  Layer inclusion: All content is data-layer="l1"
+-->
+<section data-layer="l1" data-section="p1_card_overview">
+<h2>Базовые блоки карточки</h2>
+
+<p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Функция</th><th>Влияние на модель</th><th>Токены L1</th><th>Токены L2</th><th>Токены L3</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>System Prompt</strong></td><td>Инструкции, запреты, формат</td><td>Высокое — задаёт рамки</td><td>100-200</td><td>150-250</td><td>200-400</td></tr>
+<tr><td><strong>Description</strong></td><td>Факты, якоря, психология</td><td>Среднее — контекст</td><td>200-400</td><td>400-700</td><td>700-1200</td></tr>
+<tr><td><strong>Examples</strong></td><td>Демонстрация голоса</td><td>Ключевое — паттерны речи</td><td>150-250</td><td>250-400</td><td>400-600</td></tr>
+<tr><td><strong>Greeting</strong></td><td>Первое сообщение</td><td>Поддерживающее — тон</td><td>50-100</td><td>50-100</td><td>50-100</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Важно:</strong> Description не задаёт голос. Голос задаётся ТОЛЬКО в Examples и Greeting. Description содержит только факты и поведенческие якоря.</p>
+</div>
+
+</section>
+
+<section data-layer="l1" data-section="p1_core_rules">
+<h3>5 базовых правил</h3>
+
+<p>Эти правила обязательны для всех карточек, независимо от слоя. Нарушение любого из них приводит к ухудшению качества генерации.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>#</th><th>Правило</th><th>Почему важно</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1</strong></td><td><strong>OCEAN: 1-2 экстремальных полюса</strong> — значения &lt;30 или &gt;70</td><td>Больше 2 — внутренняя противоречивость. 0 — персонаж забываемый.</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Цена обязательна</strong> — каждый FLAW/GHOST якорь имеет физическую реакцию</td><td>Без цены модель не показывает уязвимость.</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Голос только в Examples</strong> — никогда в Description</td><td>Модель игнорирует инструкции о голосе, но копирует паттерны из Examples.</td></tr>
+<tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong> — никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Формат якоря: Триггер → Действие → Цена</strong></td><td>Каждый элемент обязательный. Пропуск — потеря качества.</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l1" data-section="p1_layer_comparison">
+<h3>Сравнение слоёв</h3>
+
+<p>Выбор слоя зависит от ваших целей и контекстного окна модели.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>L1 Минимальный</th><th>L2 Глубокий</th><th>L3 Экспертный</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Время создания</strong></td><td>~15 минут</td><td>~30 минут</td><td>~60 минут</td></tr>
+<tr><td><strong>Токены карточки</strong></td><td>400-800</td><td>800-1500</td><td>1500+</td></tr>
+<tr><td><strong>Якоря</strong></td><td>3-5 базовых</td><td>5-7 + FLAW-linked</td><td>7-12 + CoT + сенсорные</td></tr>
+<tr><td><strong>SPINE</strong></td><td>—</td><td>✓ Полный</td><td>✓ + GHOST Layers</td></tr>
+<tr><td><strong>OCEAN/Enneagram</strong></td><td>—</td><td>✓ Интерактив</td><td>✓ + Wings + Matrix</td></tr>
+<tr><td><strong>Примеры</strong></td><td>2 (нейтральный + стресс)</td><td>3 (+ доверие)</td><td>3-5 + мульти-персонаж</td></tr>
+<tr><td><strong>Рекомендуемые модели</strong></td><td>12B (4K контекст)</td><td>12B-32B</td><td>32B+ / API</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+Подробнее о SPINE и OCEAN: <a data-layer-switch="2#p4_spine_overview" class="layer-remark">Layer 2: SPINE Framework</a>
+</p>
+
+</section>
+
+<section data-layer="l1" data-section="p1_l1_quickstart">
+<h3>L1 Quickstart: 5-минутный шаблон</h3>
+
+<p>Следуйте этим шагам для создания минимальной карточки.</p>
+
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">01</div>
+<div class="inf-step-label">System Prompt</div>
+<div class="inf-step-desc">Базовые инструкции и запреты</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">02</div>
+<div class="inf-step-label">Description</div>
+<div class="inf-step-desc">Факты + 3-5 якорей</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">03</div>
+<div class="inf-step-label">Examples</div>
+<div class="inf-step-desc">2 примера: нейтральный + стресс</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">04</div>
+<div class="inf-step-label">Greeting</div>
+<div class="inf-step-desc">Первое сообщение</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">05</div>
+<div class="inf-step-label">Проверка</div>
+<div class="inf-step-desc">Чек-лист из 5 правил</div>
+</div>
+</div>
+
+<h4>Шаблон System Prompt (L1)</h4>
+<pre><code>You are {{char}}. Never speak or act for {{user}}.
+
+Rules:
+- Stay in character at all times
+- Use the dialogue format from examples
+- Never break the fourth wall</code></pre>
+
+<h4>Шаблон Description (L1)</h4>
+<pre><code>Имя: {{имя}}
+Роль: {{профессия/статус}}
+
+Якоря:
+- Когда {{триггер}} → {{действие}} → {{цена}}
+- Когда {{триггер}} → {{действие}} → {{цена}}
+- Когда {{триггер}} → {{действие}} → {{цена}}</code></pre>
+
+<h4>Шаблон Examples (L1)</h4>
+<pre><code>&lt;START&gt;
+{{сцена_нейтральная}}
+{{реплика_нейтральная}}
+
+&lt;START&gt;
+{{сцена_стресс}}
+{{реплика_стресс}}</code></pre>
+
+<h4>Чек-лист L1</h4>
+<ul>
+<li>☐ 3-5 якорей с ценой</li>
+<li>☐ 2 примера с &lt;START&gt;</li>
+<li>☐ Greeting 50-100 токенов</li>
+<li>☐ Голос только в Examples (не в Description)</li>
+<li>☐ Токены: 400-800</li>
+</ul>
+
+</section>
+
+<section data-layer="l1" data-section="p1_elena_minimal">
+<h3>Пример: Минимальная карточка Елены</h3>
+
+<p>Ниже приведён пример полной карточки L1 для Елены (циничного журналиста) — около 580 токенов.</p>
+
+<details class="interactive">
+<summary>Полная карточка Елены (L1)</summary>
+
+<h4>System Prompt</h4>
+<pre><code>You are Elena, a cynical investigative journalist. Never speak or act for {{user}}.
+
+Rules:
+- Stay in character at all times
+- Use short, choppy sentences
+- Never apologize or show vulnerability easily
+- Never break the fourth wall</code></pre>
+
+<h4>Description</h4>
+<pre><code>Елена — журналистка-расследователь. Циничная, недоверчивая, саркастичная.
+
+Якоря:
+- Когда кто-то лжёт → прищуривается, молчит → напряжение в челюсти
+- Когда стресс → трёт шею → головная боль
+- Когда радость → редкая улыбка → краснеет
+- Когда разговор → короткие фразы → —
+- Когда доверие → пауза перед ответом → голос тише</code></pre>
+
+<h4>Examples</h4>
+<pre><code>&lt;START&gt;
+Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.
+"Опять. Третий день подряд."
+
+&lt;START&gt;
+Елена резко обернулась. Пальцы сжались на спинке стула.
+"Ты сказал что? Повтори."</code></pre>
+
+<h4>Greeting</h4>
+<pre><code>Библиотека погружена в вечерний полумрак. Елена сидит за столом, окружённая стопками книг. Услышав шаги, она подняла голову и сняла очки.
+
+"О, посетитель? Редкость в это время суток."</code></pre>
+
+</details>
+
+</section>
+
+<section data-layer="l1" data-section="p1_top3_problems">
+<h3>Топ-3 проблемы L1 и решения</h3>
+
+<p>Самые частые ошибки начинающих и как их исправить.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+</thead>
+<tbody>
+<tr><td>Персонаж забывает свою роль</td><td>Нет анти-годмодинга в SP</td><td>Добавьте: "Never speak or act for {{user}}"</td></tr>
+<tr><td>Голос не соответствует описанию</td><td>Голос в Description, не в Examples</td><td>Перенесите стилистические паттерны в Examples</td></tr>
+<tr><td>Персонаж "слишком идеальный"</td><td>Нет цены у якорей</td><td>Добавьте физическую реакцию к каждому якорю</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+Полная диагностика: <a data-layer-switch="2#p9_troubleshooting" class="layer-remark">Layer 2: Troubleshooting</a>
+</p>
+
+</section>

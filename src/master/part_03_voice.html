@@ -1,0 +1,202 @@
+<!--
+  Part 3: Voice and Isolation (Голос и изоляция)
+  Live Character Guide v6 Master HTML
+  
+  Layer inclusion: l1 (Voice Isolation rule), l2 (Examples, Greeting, Tier quality)
+-->
+<section data-layer="l1" data-section="p3_voice_isolation">
+<h2>Голос и изоляция</h2>
+
+<p><strong>Voice Isolation</strong> — правило разделения голоса персонажа и описания. Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.</p>
+
+<div class="callout important">
+<p><strong>📌 Ключевое правило:</strong></p>
+<p>Модель — копировщик паттернов, не исполнитель инструкций. Если вы напишете в Description "говорит саркастично" — модель это проигнорирует. Но если в Examples персонаж говорит саркастично — модель скопирует стиль.</p>
+</div>
+
+</section>
+
+<section data-layer="l1" data-section="p3_influence_hierarchy">
+<h3>Иерархия влияния на голос</h3>
+
+<p>Не все части карточки влияют на голос одинаково. Вот реальная иерархия:</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Источник</th><th>Влияние на голос</th><th>Почему</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Последние сообщения в чате</strong></td><td>~85%</td><td>Модель копирует ближайший контекст</td></tr>
+<tr><td><strong>Examples</strong></td><td>Ключевое</td><td>Паттерны речи усваиваются напрямую</td></tr>
+<tr><td><strong>Greeting</strong></td><td>Поддерживающее</td><td>Задаёт начальный тон</td></tr>
+<tr><td><strong>Author's Note</strong></td><td>Минимальное</td><td>Может задать контекст сцены</td></tr>
+<tr><td><strong>Description</strong></td><td>0% для голоса</td><td>Только факты, не паттерны</td></tr>
+<tr><td><strong>System Prompt</strong></td><td>0% для голоса</td><td>Инструкции, не стиль</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Типичная ошибка:</strong></p>
+<pre><code>❌ WRONG (Voice in Description):
+Description: "Елена говорит с сарказмом, использует слово 'чувак', короткие фразы"</code></pre>
+<pre><code>✅ CORRECT (Voice in Examples):
+Description: "Елена — журналист, циничный, недоверчивый."
+
+Example:
+&lt;START&gt;
+Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p3_examples_rules">
+<h3>Правила написания Examples</h3>
+
+<h4>Минимум примеров по слою</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Слой</th><th>Количество</th><th>Типы</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>L1</strong></td><td>2</td><td>Нейтральный, Стресс</td></tr>
+<tr><td><strong>L2</strong></td><td>3</td><td>+ Доверие/рост</td></tr>
+<tr><td><strong>L3</strong></td><td>3-5</td><td>+ Мульти-персонаж</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Структура каждого Example</h4>
+<ul>
+<li><strong>Длина:</strong> 80-120 токенов, одна сцена, одно состояние</li>
+<li><strong>Обязательно:</strong> <code>&lt;START&gt;</code> в начале каждого блока</li>
+<li><strong>Стиль:</strong> Должен совпадать с Greeting</li>
+<li><strong>Embodiment:</strong> Минимум одна физическая реакция на блок</li>
+</ul>
+
+<h4>Формат Examples</h4>
+<pre><code>&lt;START&gt;
+{{сцена}} — где мы, что происходит (1-2 предложения)
+{{действие}} — что делает персонаж
+{{реплика}} — что он говорит</code></pre>
+
+</section>
+
+<section data-layer="l2" data-section="p3_tier_quality">
+<h3>Tier Quality System</h3>
+
+<p>Система оценки качества Examples по 6 критериям.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Критерий</th><th>Tier 1 (✓)</th><th>Tier 2 (⚠)</th><th>Tier 3 (✗)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Голос</strong></td><td>Уникальный, узнаваемый</td><td>Узнаваем, но с чужими паттернами</td><td>Генерический, без характера</td></tr>
+<tr><td><strong>Embodiment</strong></td><td>Физическая реакция в каждом</td><td>Есть, но не всегда</td><td>Отсутствует</td></tr>
+<tr><td><strong>Цена якоря</strong></td><td>Видимая, физическая</td><td>Абстрактная</td><td>Нет</td></tr>
+<tr><td><strong>FLAW проявление</strong></td><td>Видно в поведении</td><td>Упомянуто, но не действует</td><td>Нет</td></tr>
+<tr><td><strong>Разнообразие</strong></td><td>Разные эмоции = разный голос</td><td>Монотонный</td><td>Клон</td></tr>
+<tr><td><strong>Длина</strong></td><td>2-4 абзаца, плотные</td><td>Слишком длинные/короткие</td><td>Неподходящие</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p3_greeting">
+<h3>Greeting (Первое сообщение)</h3>
+
+<p><strong>Greeting</strong> — первое сообщение персонажа. Задаёт место, время и тон.</p>
+
+<h4>Структура Greeting</h4>
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">01</div>
+<div class="inf-step-label">СЦЕНА</div>
+<div class="inf-step-desc">Где мы, что происходит</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">02</div>
+<div class="inf-step-label">ДЕЙСТВИЕ</div>
+<div class="inf-step-desc">Что делает персонаж</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">03</div>
+<div class="inf-step-label">РЕПЛИКА</div>
+<div class="inf-step-desc">Что он говорит</div>
+</div>
+</div>
+
+<h4>Пример: Елена</h4>
+<pre><code>Библиотека погружена в вечерний полумрак. Елена сидит за столом, окружённая стопками книг. Услышав шаги, она подняла голову и сняла очки.
+
+"О, посетитель? Редкость в это время суток."</code></pre>
+
+<h4>Правила Greeting</h4>
+<ul>
+<li>Длина: <strong>50-100 токенов</strong></li>
+<li>Тот же стиль разметки, что в Examples</li>
+<li>Не начинайте с вопроса о том, что хочет пользователь</li>
+<li>Задайте место, но не сюжет</li>
+</ul>
+
+</section>
+
+<section data-layer="l2" data-section="p3_voice_leak">
+<h3>Voice Leak (Утечка голоса)</h3>
+
+<p><strong>Voice Leak</strong> — ошибка, при которой модель генерирует голос, не соответствующий персонажу. Чаще всего — "красноречивый персонаж", который должен говорить просто.</p>
+
+<h4>Пример: Jesse Pinkman</h4>
+<div class="callout warn">
+<p><strong>❌ Voice Leak (неверный Jesse):</strong></p>
+<pre><code>"Я пытаюсь справиться с глубоким чувством моральной вины за то, что я сделал..."</code></pre>
+<p><em>Слишком красноречиво для Jesse — модель производит "элоквентного Jesse".</em></p>
+</div>
+
+<div class="callout tip">
+<p><strong>✅ Правильный Jesse:</strong></p>
+<pre><code>"Я не могу... Я не могу это делать, yo. Просто... заткнись об этом, ладно?"
+*пинает половицу, отводит взгляд*</code></pre>
+</div>
+
+<h4>Причины Voice Leak</h4>
+<ul>
+<li>Недостаточно Examples с правильным голосом</li>
+<li>Examples слишком короткие</li>
+<li>Голос в Description, не в Examples</li>
+<li>Модель слишком "умная" для персонажа (32B для простого характера)</li>
+</ul>
+
+</section>
+
+<section data-layer="l2" data-section="p3_joker_case">
+<h3>Экстремальный случай: Joker</h3>
+
+<p><strong>Joker (The Dark Knight)</strong> — пример персонажа, голос которого <strong>невозможно описать</strong>, можно только воспроизвести.</p>
+
+<div class="callout important">
+<p><strong>📌 Правило Joker:</strong> Вы НЕ можете описать голос Joker в Description. Вы ДОЛЖНЫ воспроизвести его в Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности.</p>
+</div>
+
+<h4>Пример: Joker Voice Isolation</h4>
+<pre><code>&lt;START&gt;
+*tongue licks scars on lip... slow, deliberate*
+
+"Why... so... serious?"
+
+*tilts head, giggles bubble up from somewhere deep*
+
+"You look nervous. Nervous... like a man who's about to learn something."
+
+*giggles harder, voice cracks upward*
+
+"Would you like to know which of your friends... are the most... delicious?"</code></pre>
+
+<p>Паузы, действия, срывы голоса — всё это часть голоса, не описание.</p>
+
+</section>

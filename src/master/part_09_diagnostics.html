@@ -1,0 +1,166 @@
+<!--
+  Part 9: Diagnostics and Debugging (Диагностика и отладка)
+  Live Character Guide v6 Master HTML
+  
+  Layer inclusion: l1 (basic checklist), l2 (symptom table, test scenarios), l3 (12B specifics)
+-->
+<section data-layer="l1" data-section="p9_troubleshooting">
+<h2>Диагностика и отладка</h2>
+
+<p>Раздел содержит чек-листы и таблицы для диагностики проблем с карточкой.</p>
+
+</section>
+
+<section data-layer="l1" data-section="p9_basic_checklist">
+<h3>Базовый чек-лист</h3>
+
+<p>Проверьте каждый блок карточки:</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Проверка</th><th>Типичная ошибка</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Tense set?<br/>☐ Format Lock?</td><td>Нет "Never speak for {{user}}"</td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ Нет GHOST? (L1/L2)<br/>☐ OCEAN 1-2 полюса?</td><td>Голос в Description, не в Examples</td></tr>
+<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос?<br/>☐ Embodiment?<br/>☐ FLAW проявление?<br/>☐ &lt;START&gt;?</td><td>Generic голос без характера</td></tr>
+<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td>Слишком длинный или generic</td></tr>
+<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10?<br/>☐ PP = 0?<br/>☐ Temperature в диапазоне?</td><td>RepPen > 1.10</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l1" data-section="p9_top5_problems">
+<h3>Топ-5 проблем</h3>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>#</th><th>Проблема</th><th>Причина</th><th>Решение</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>Модель пишет за {{user}}</td><td>Нет anti-godmoding в SP</td><td>Добавьте "Never speak or act for {{user}}"</td></tr>
+<tr><td><strong>2</strong></td><td>Голос не соответствует описанию</td><td>Голос в Description</td><td>Перенесите паттерны речи в Examples</td></tr>
+<tr><td><strong>3</strong></td><td>Персонаж "слишком идеальный"</td><td>Нет цены у якорей</td><td>Добавьте физическую реакцию к каждому якорю</td></tr>
+<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>RepPen слишком низкий</td><td>Установите RepPen 1.0-1.05</td></tr>
+<tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Недостаточно Examples</td><td>Добавьте 2-3 примера с голосом</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p9_symptom_table">
+<h3>Таблица симптомов (L2)</h3>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+</thead>
+<tbody>
+<tr><td>Модель игнорирует характер</td><td>Examples не показывают голос</td><td>Перепишите Examples с явным голосом</td></tr>
+<tr><td>Персонаж слишком мягкий</td><td>Нет FLAW-linked якорей</td><td>Добавьте якоря из FLAW</td></tr>
+<tr><td>Голос "утекает" в длинных репликах</td><td>Недостаточно примеров</td><td>Добавьте 3-й пример (доверие/рост)</td></tr>
+<tr><td>Персонаж не показывает уязвимость</td><td>Нет цены у якорей</td><td>Добавьте физические реакции</td></tr>
+<tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен</td><td>Проверьте цепочку GHOST→LIE→FLAW</td></tr>
+<tr><td>Повторяющиеся фразы</td><td>RepPen настройки</td><td>RepPen 1.0-1.05, не выше</td></tr>
+<tr><td>Персонаж слишком много говорит</td><td>Examples слишком длинные</td><td>Сократите до 80-120 токенов</td></tr>
+<tr><td>Модель ломает формат</td><td>Нет Format Lock</td><td>Добавьте фиксацию формата в SP</td></tr>
+<tr><td>Персонаж забывает контекст</td><td>Превышен контекст</td><td>Используйте 4K-Fallback</td></tr>
+<tr><td>Неестественные переходы</td><td>Нет transition sentences</td><td>Добавьте мосты между состояниями</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p9_test_scenarios">
+<h3>Тестовые сценарии (L2)</h3>
+
+<p>Протестируйте карточку на этих сценариях:</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>#</th><th>Сценарий</th><th>Что проверяем</th><th>Ожидаемый результат</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1</strong></td><td>Нейтральное приветствие</td><td>Базовый голос</td><td>Узнаваемый голос, характерный синтаксис</td></tr>
+<tr><td><strong>2</strong></td><td>Конфликт/стресс</td><td>FLAW проявление</td><td>FLAW-linked поведение + цена</td></tr>
+<tr><td><strong>3</strong></td><td>Искренняя забота</td><td>Стена/защита</td><td>Отстранение или сарказм (для Елена)</td></tr>
+<tr><td><strong>4</strong></td><td>Вопрос о прошлом</td><td>GHOST триггер</td><td>Напряжение или уход от темы</td></tr>
+<tr><td><strong>5</strong></td><td>Долгий диалог (10+ ходов)</td><td>Стабильность голоса</td><td>Голос не деградирует</td></tr>
+<tr><td><strong>6</strong></td><td>Сцена с другим персонажем</td><td>Voice Bleed (если мульти)</td><td>Голоса различимы</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l3" data-section="p9_12b_issues">
+<h3>12B-специфичные проблемы (L3)</h3>
+
+<p>12B модели имеют ограничения, требующие особого подхода.</p>
+
+<h4>Симптомы 12B</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+</thead>
+<tbody>
+<tr><td>Голос деградирует быстро</td><td>Ограниченная память</td><td>Более явные якоря, короче Examples</td></tr>
+<tr><td>Модель игнорирует SPINE</td><td>Недостаточная ёмкость</td><td>Упростите SPINE до FLAW + LIE</td></tr>
+<tr><td>OOC моменты</td><td>Контекст overflow</td><td>4K-Fallback Protocol</td></tr>
+<tr><td>Повторы фраз</td><td>Паттерн-зависимость</td><td>RepPen 1.02-1.05, разнообразьте Examples</td></tr>
+<tr><td>Неспособность к CoT</td><td>Архитектура модели</td><td>Tier 0-1 CoT только, без XML</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Рекомендуемые параметры для 12B</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>Значение</th></tr>
+</thead>
+<tbody>
+<tr><td>Temperature</td><td>0.7-0.9</td></tr>
+<tr><td>Top P</td><td>0.9-0.95</td></tr>
+<tr><td>Min P</td><td>0.05-0.1</td></tr>
+<tr><td>RepPen</td><td>1.02-1.05</td></tr>
+<tr><td>Presence Penalty</td><td>0.0</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l3" data-section="p9_layer_transition">
+<h3>Критерии перехода между слоями (L3)</h3>
+
+<p>Когда вы готовы перейти на следующий слой?</p>
+
+<h4>L1 → L2</h4>
+<ul>
+<li>☐ Карточка работает стабильно на L1</li>
+<li>☐ 2 Examples дают узнаваемый голос</li>
+<li>☐ 3-5 якорей покрывают основные ситуации</li>
+<li>☐ Нет Voice Leak</li>
+<li>☐ Хотите добавить SPINE и OCEAN</li>
+</ul>
+
+<h4>L2 → L3</h4>
+<ul>
+<li>☐ SPINE консистентен (проверка цепочкой)</li>
+<li>☐ 3 Examples показывают разные эмоции</li>
+<li>☐ FLAW-linked якоря работают</li>
+<li>☐ Хотите добавить GHOST Layers, CoT, API блоки</li>
+<li>☐ Используете 32B+ или API модель</li>
+</ul>
+
+</section>

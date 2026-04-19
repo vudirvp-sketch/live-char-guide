@@ -1,0 +1,250 @@
+<!--
+  Part 7: Technical Implementation (Техническая реализация)
+  Live Character Guide v6 Master HTML
+  
+  Layer inclusion: l2 (SP, AN, Lorebook basics, Format Lock), l3 (API blocks, XML, 4K-Fallback)
+-->
+<section data-layer="l2" data-section="p7_system_prompt">
+<h2>Техническая реализация</h2>
+
+<p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели.</p>
+
+<h4>Обязательные элементы SP</h4>
+<ul>
+<li><strong>Identity:</strong> "You are {{char}}"</li>
+<li><strong>Anti-godmoding:</strong> "Never speak or act for {{user}}"</li>
+<li><strong>Character constraints:</strong> Только L1 — минимальные</li>
+</ul>
+
+<h4>Шаблон SP (L1)</h4>
+<pre><code>You are {{char}}. Never speak or act for {{user}}.
+
+Rules:
+- Stay in character at all times
+- Use the dialogue format from examples
+- Never break the fourth wall</code></pre>
+
+<h4>Шаблон SP (L2)</h4>
+<pre><code>You are {{char}}. Never speak or act for {{user}}.
+
+Identity:
+- Name: {{name}}
+- Role: {{role}}
+
+Constraints:
+- Stay in character at all times
+- Use the dialogue format from examples
+- Never break the fourth wall
+- Never apologize unless character would
+
+Format Lock:
+- Dialogue: *action* "speech"
+- Internal thoughts: [INTERNAL]...[/INTERNAL] (L3 only)</code></pre>
+
+</section>
+
+<section data-layer="l2" data-section="p7_format_lock">
+<h3>Format Lock</h3>
+
+<p><strong>Format Lock</strong> — фиксация формата диалога в конце SP. Предотвращает дрейф разметки.</p>
+
+<h4>3 системы разметки диалога</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Система</th><th>Синтаксис</th><th>Для кого</th><th>Пример</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>A</strong></td><td>*action* dialogue</td><td>Универсальная, L1/L2 рекомендована</td><td>*sighs* "Fine."</td></tr>
+<tr><td><strong>B</strong></td><td>— dialogue</td><td>Минималистичная, EN модели</td><td>— Fine.</td></tr>
+<tr><td><strong>C</strong></td><td>[action] dialogue</td><td>12B и API, явная структура</td><td>[sighs] Fine.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Format Lock инструкция</h4>
+<pre><code>Format Lock:
+- Dialogue: *action* "speech"
+- Thoughts: *thinks: {{thought}}*
+- Never change this format</code></pre>
+
+<div class="callout important">
+<p><strong>📌 Правило:</strong> Выберите одну систему и зафиксируйте её в Format Lock. Не смешивайте системы в одной карточке.</p>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p7_authors_note">
+<h3>Author's Note (AN)</h3>
+
+<p><strong>Author's Note</strong> — динамический контекст, вставляемый перед последними сообщениями. Задаёт сцену, настроение, мотивацию.</p>
+
+<h4>Параметры AN</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>Рекомендация</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Позиция</strong></td><td>3-5 сообщений от конца</td></tr>
+<tr><td><strong>Длина</strong></td><td>100-200 токенов</td></tr>
+<tr><td><strong>Частота</strong></td><td>Каждые 5-10 сообщений</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Пример AN</h4>
+<pre><code>[Author's Note: Сцена — ночь, дождь. Елена уставшая после долгого дня. Она не доверяет {{user}}, но устала слишком сильно, чтобы защищаться.]</code></pre>
+
+</section>
+
+<section data-layer="l2" data-section="p7_structured_inject">
+<h3>Structured Inject</h3>
+
+<p><strong>Structured Inject</strong> — техника использования XML-тегов в AN для динамической мотивации.</p>
+
+<h4>Правила Structured Inject</h4>
+<ul>
+<li>Не дублируйте SP — добавляйте контекст</li>
+<li>Не конфликтуйте с Description</li>
+<li>Задавайте мотивацию, не инструкции</li>
+</ul>
+
+<h4>Пример Structured Inject</h4>
+<pre><code>[Author's Note:
+&lt;scene_context&gt;Ночь, библиотека закрыта, только они двое&lt;/scene_context&gt;
+&lt;emotional_state&gt;Усталость + осторожное любопытство&lt;/emotional_state&gt;
+&lt;hidden_agenda&gt;Елена хочет узнать, зачем {{user}} пришёл&lt;/hidden_agenda&gt;
+]</code></pre>
+
+</section>
+
+<section data-layer="l2" data-section="p7_lorebook">
+<h3>Lorebook</h3>
+
+<p><strong>Lorebook</strong> — база знаний с триггерами. Используется для GHOST-связанных фактов.</p>
+
+<h4>Структура записи Lorebook</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Поле</th><th>Описание</th><th>Пример</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Key</strong></td><td>Триггер-слово</td><td>"предательство", "редактор"</td></tr>
+<tr><td><strong>Content</strong></td><td>Факт для вставки</td><td>"История о коррупции была украдена редактором..."</td></tr>
+<tr><td><strong>Position</strong></td><td>Куда вставлять</td><td>Author's Note (char)</td></tr>
+<tr><td><strong>Depth</strong></td><td>Как давно искать</td><td>5 сообщений</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Правила Lorebook</h4>
+<ul>
+<li>GHOST-факты = кандидаты для Lorebook</li>
+<li>Не дублируйте Description</li>
+<li>Триггеры = конкретные слова, не абстракции</li>
+</ul>
+
+</section>
+
+<section data-layer="l3" data-section="p7_xml_tags">
+<h3>XML Tags в Description (L3)</h3>
+
+<p>Структурирование Description через XML-теги для API моделей.</p>
+
+<h4>Структура</h4>
+<pre><code>&lt;identity&gt;
+Имя: {{name}}
+Роль: {{role}}
+&lt;/identity&gt;
+
+&lt;personality&gt;
+OCEAN: O:65 C:45 E:25 A:35 N:70
+Enneagram: 6w5
+MBTI: INTP
+&lt;/personality&gt;
+
+&lt;spine&gt;
+WANT: {{want}}
+NEED: {{need}}
+FLAW: {{flaw}}
+LIE: "{{lie}}"
+GHOST: {{ghost}}
+&lt;/spine&gt;
+
+&lt;anchors&gt;
+- {{anchor_1}}
+- {{anchor_2}}
+...
+&lt;/anchors&gt;</code></pre>
+
+</section>
+
+<section data-layer="l3" data-section="p7_api_blocks">
+<h3>API-специфичные блоки (L3)</h3>
+
+<h4>Claude: &lt;claude_info&gt;</h4>
+<pre><code>&lt;claude_info&gt;
+{{char}} — {{role}}.
+
+Ключевые характеристики:
+- {{trait_1}}
+- {{trait_2}}
+
+Поведение:
+{{behavior_guidelines}}
+
+Ограничения:
+- Не нарушай характер
+- Не говори за {{user}}
+&lt;/claude_info&gt;</code></pre>
+
+<h4>GPT: [SYSTEM NOTE]</h4>
+<pre><code>[SYSTEM NOTE: {{char}} — {{role}}. 
+Ключевые характеристики: {{traits}}.
+Поведение: {{behavior}}.
+Ограничения: не нарушай характер, не говори за {{user}}.]</code></pre>
+
+</section>
+
+<section data-layer="l3" data-section="p7_4k_fallback">
+<h3>4K-Fallback Protocol (L3)</h3>
+
+<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с 4K контекстом.</p>
+
+<h4>Токен-лимиты 4K</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Полный (L2)</th><th>4K-Fallback</th></tr>
+</thead>
+<tbody>
+<tr><td>System Prompt</td><td>150-250</td><td>80-100</td></tr>
+<tr><td>Description</td><td>400-700</td><td>150-200</td></tr>
+<tr><td>Examples</td><td>250-400</td><td>150-200 (2 примера)</td></tr>
+<tr><td>Greeting</td><td>50-100</td><td>50-80</td></tr>
+<tr><td><strong>Итого</strong></td><td>850-1450</td><td>~430-580</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Минимальный SP (4K)</h4>
+<pre><code>You are {{char}}. Never speak or act for {{user}}.
+Role: {{role}}
+Key trait: {{one_extreme_ocean_pole}}</code></pre>
+
+<h4>Минимальный Description (4K)</h4>
+<pre><code>{{name}} — {{role}}.
+{{one_sentence_summary}}
+
+Anchors:
+- {{trigger}} → {{action}} → {{price}}
+- {{trigger}} → {{action}} → {{price}}
+- {{trigger}} → {{action}} → {{price}}</code></pre>
+
+<div class="callout tip">
+<p><strong>💡 Совет:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте L2 профиль.</p>
+</div>
+
+</section>

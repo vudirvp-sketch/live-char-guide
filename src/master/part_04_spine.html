@@ -1,0 +1,291 @@
+<!--
+  Part 4: SPINE Framework (Фреймворк SPINE)
+  Live Character Guide v6 Master HTML
+  
+  Layer inclusion: l2 (basic SPINE), l3 (GHOST Layers, chain validation)
+-->
+<section data-layer="l2" data-section="p4_spine_overview">
+<h2>SPINE Framework</h2>
+
+<p><strong>SPINE</strong> — фреймворк из 5 элементов, который связывает мотивацию персонажа с его поведением. SPINE даёт якорям причину существовать, а не быть набором случайных правил.</p>
+
+<blockquote>
+<p><strong>SPINE даёт персонажу причину.</strong> Без него — набор реакций без ядра.</p>
+</blockquote>
+
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">W</div>
+<div class="inf-step-label">WANT</div>
+<div class="inf-step-desc">Осознанное желание</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">N</div>
+<div class="inf-step-label">NEED</div>
+<div class="inf-step-desc">Истинная потребность</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">F</div>
+<div class="inf-step-label">FLAW</div>
+<div class="inf-step-desc">Дефект поведения</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">L</div>
+<div class="inf-step-label">LIE</div>
+<div class="inf-step-desc">Ложная установка</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G</div>
+<div class="inf-step-label">GHOST</div>
+<div class="inf-step-desc">Событие прошлого</div>
+</div>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p4_want">
+<h3>WANT (Желание)</h3>
+
+<p><strong>WANT</strong> — то, что персонаж сознательно хочет. Внешняя цель, которую он может сформулировать.</p>
+
+<h4>Правила WANT</h4>
+<ul>
+<li>Конкретный, измеримый результат</li>
+<li>Персонаж может сформулировать его словами</li>
+<li>Движет видимыми действиями</li>
+</ul>
+
+<h4>Примеры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>WANT</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>Доказать, что она права — историю, которую никто не хочет публиковать</td></tr>
+<tr><td>Геральт</td><td>Сохранить нейтралитет, избегать привязанностей</td></tr>
+<tr><td>Эдвард Элрик</td><td>Вернуть тело Алу — исправить свою ошибку</td></tr>
+<tr><td>Уолтер Уайт</td><td>Обеспечить семью, оставить наследство</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p4_need">
+<h3>NEED (Потребность)</h3>
+
+<p><strong>NEED</strong> — истинная потребность, которую персонаж может не осознавать. Часто противоречит WANT.</p>
+
+<h4>Правила NEED</h4>
+<ul>
+<li>То, что персонаж действительно должен получить для роста</li>
+<li>Может противоречить WANT (напряжение, не прямой конфликт)</li>
+<li>Обычно связано с людьми/связями</li>
+</ul>
+
+<h4>Примеры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>WANT</th><th>NEED</th><th>Напряжение</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>Доказать правоту</td><td>Принятие — связь без стены цинизма</td><td>Правота vs близость</td></tr>
+<tr><td>Геральт</td><td>Избегать привязанностей</td><td>Принять роль отца для Цири</td><td>Одиночество vs семья</td></tr>
+<tr><td>Эдвард</td><td>Сделать всё сам</td><td>Принять помощь других</td><td>Самостоятельность vs связь</td></tr>
+<tr><td>Уолтер</td><td>Обеспечить семью</td><td>Принять свою истинную природу (Хайзенберг)</td><td>Семья vs власть</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p4_flaw">
+<h3>FLAW (Дефект)</h3>
+
+<p><strong>FLAW</strong> — конкретное поведение, которое мешает персонажу получить NEED. НЕ прилагательное — действие/паттерн.</p>
+
+<div class="callout important">
+<p><strong>📌 Правило FLAW:</strong> Каждый FLAW должен иметь минимум один FLAW-linked якорь. Если FLAW не проявляется в поведении — это не FLAW, а описание характера.</p>
+</div>
+
+<h4>Правила FLAW</h4>
+<ul>
+<li>Конкретное поведение, не прилагательное</li>
+<li>Проявляется в действиях</li>
+<li>Мешает получить NEED</li>
+<li>Каждый FLAW = минимум 1 якорь</li>
+</ul>
+
+<h4>Примеры FLAW</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>❌ Плохой FLAW</th><th>✅ Хороший FLAW</th></tr>
+</thead>
+<tbody>
+<tr><td>"Он неуверенный"</td><td>"Отшучивается и отстраняется, когда кто-то проявляет искреннюю заботу"</td></tr>
+<tr><td>"Она циничная"</td><td>"Отталкивает людей сарказмом, когда сближается"</td></tr>
+<tr><td>"Он гордый"</td><td>"Не может принять помощь или признать поражение"</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p4_lie">
+<h3>LIE (Ложная установка)</h3>
+
+<p><strong>LIE</strong> — ложное убеждение, которое персонаж носит в себе. Обычно связано с GHOST.</p>
+
+<h4>Правила LIE</h4>
+<ul>
+<li>Фраза в кавычках — то, что персонаж сказал бы о себе</li>
+<li>Ложное убеждение о мире/себе</li>
+<li>Защищает от боли GHOST</li>
+</ul>
+
+<h4>Примеры LIE</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>LIE</th><th>Связь с GHOST</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>"Мне не нужно ничьё одобрение. Я работаю одна."</td><td>Предательство редактора</td></tr>
+<tr><td>Геральт</td><td>"Если я никого не впущу — никто не сможет меня ранить"</td><td>Изгнание из Каэр Морхена</td></tr>
+<tr><td>Эдвард</td><td>"Я могу исправить всё через силу воли"</td><td>Human transmutation</td></tr>
+<tr><td>Уолтер</td><td>"Я делаю это для семьи"</td><td>Gray Matter</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p4_ghost">
+<h3>GHOST (Призрак)</h3>
+
+<p><strong>GHOST</strong> — событие прошлого, которое сформировало LIE. Обычно травма или потеря.</p>
+
+<h4>Правила GHOST</h4>
+<ul>
+<li>Конкретное событие, не период</li>
+<li>Можно описать в 1-2 предложениях</li>
+<li>Объясняет, откуда взялась LIE</li>
+</ul>
+
+<h4>Примеры GHOST</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>GHOST</th><th>LIE из GHOST</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>Предательство редактора — история, которую она раскрыла, была украдена и опубликована под чужим именем</td><td>"Мне не нужно ничьё одобрение"</td></tr>
+<tr><td>Геральт</td><td>Бледная Кобыла. Потеря Йеннифэр, ложные обвинения, изгнание</td><td>"Если никого не впущу — не ранят"</td></tr>
+<tr><td>Эдвард</td><td>Human transmutation — потерял руку и ногу, Ал потерял тело</td><td>"Я могу исправить всё"</td></tr>
+<tr><td>Уолтер</td><td>Gray Matter: продал долю за $5000, компания стала миллиардной</td><td>"Я делаю это для семьи"</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p4_spine_mapping">
+<h3>SPINE → Anchors Mapping</h3>
+
+<p>Как выводить якоря из SPINE элементов.</p>
+
+<h4>Алгоритм</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>SPINE элемент</th><th>Тип якоря</th><th>Пример</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>FLAW</strong></td><td>FLAW-linked якорь (обязательно)</td><td>FLAW: Отталкивает сарказмом → Якорь: Искренняя забота → Отшучивается</td></tr>
+<tr><td><strong>WANT</strong></td><td>At-rest поведение</td><td>WANT: Доказать правоту → Якорь: Когда есть зацепка → Оживляется</td></tr>
+<tr><td><strong>NEED</strong></td><td>Рост/уязвимость якорь</td><td>NEED: Принятие → Якорь: Когда доверие → Пауза, голос тише</td></tr>
+<tr><td><strong>GHOST</strong></td><td>Триггерный якорь (L3)</td><td>GHOST: Предательство → Якорь: Когда вопрос о лояльности → Напряжение</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l3" data-section="p4_ghost_layers">
+<h3>GHOST Layers (L3)</h3>
+
+<p><strong>GHOST Layers</strong> — трёхуровневая структура GHOST для сложных персонажей.</p>
+
+<h4>Архитектура</h4>
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G1</div>
+<div class="inf-step-label">ДЕТСТВО</div>
+<div class="inf-step-desc">Формирует LIE</div>
+<div class="inf-step-code">0-12 лет</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G2</div>
+<div class="inf-step-label">ЮНОСТЬ</div>
+<div class="inf-step-desc">Укрепляет FLAW</div>
+<div class="inf-step-code">13-25 лет</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G3</div>
+<div class="inf-step-label">НАСТОЯЩЕЕ</div>
+<div class="inf-step-desc">Триггеры сейчас</div>
+<div class="inf-step-code">Недавнее</div>
+</div>
+</div>
+
+<h4>Пример: Elliot Alderson</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Tier</th><th>Событие</th><th>Влияние</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>G1</strong></td><td>Отец вытолкнул из окна — сказали держать в тайне</td><td>Формирует LIE: "Я всегда буду один"</td></tr>
+<tr><td><strong>G2</strong></td><td>Создал Mr. Robot чтобы справиться</td><td>Укрепляет FLAW: Избегание через диссоциацию</td></tr>
+<tr><td><strong>G3</strong></td><td>Mr. Robot как отдельная личность</td><td>Триггеры: Эпизоды диссоциации</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<p><strong>💡 Совет:</strong> Не всем персонажам нужны 3 GHOST Layers. Если backstory простая — достаточно одного GHOST.</p>
+</div>
+
+</section>
+
+<section data-layer="l3" data-section="p4_spine_check">
+<h3>Проверка консистентности SPINE (L3)</h3>
+
+<p>Цепочка GHOST → LIE → FLAW → NEED → WANT должна быть логичной.</p>
+
+<h4>Чек-лист проверки</h4>
+<ul>
+<li>☐ GHOST объясняет, откуда LIE</li>
+<li>☐ LIE защищает от боли GHOST</li>
+<li>☐ FLAW — поведение, вызванное LIE</li>
+<li>☐ FLAW мешает получить NEED</li>
+<li>☐ WANT — внешняя цель, совместимая с LIE</li>
+<li>☐ NEED — то, что разрушило бы LIE</li>
+</ul>
+
+<h4>Пример: Елена</h4>
+<pre><code>GHOST: Предательство редактора
+  ↓ объясняет
+LIE: "Мне не нужно ничьё одобрение"
+  ↓ защищает от боли
+FLAW: Отталкивает людей сарказмом когда сближается
+  ↓ поведение из LIE
+NEED: Принятие — связь без стены
+  ↑ FLAW мешает
+WANT: Доказать правоту самостоятельно
+  ↑ совместимо с LIE</code></pre>
+
+</section>

@@ -1,0 +1,130 @@
+<!--
+  Part 6: CoT Tiers (Chain of Thought)
+  Live Character Guide v6 Master HTML
+  
+  Layer inclusion: l2 (CoT basics), l3 (Tier 2-3, CoT anchors)
+-->
+<section data-layer="l2" data-section="p6_cot_basics">
+<h2>Chain of Thought (CoT)</h2>
+
+<p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. Используется для моделей 32B+ и API.</p>
+
+<div class="callout important">
+<p><strong>📌 Правило CoT:</strong> Не более 2-3 CoT якорей на карточку. Перегрузка = анти-паттерн AP-10 (CoT Overload).</p>
+</div>
+
+<h4>Зачем нужен CoT</h4>
+<ul>
+<li><strong>Глубина реакции:</strong> Модель понимает, ПОЧЕМУ персонаж реагирует так</li>
+<li><strong>GHOST связь:</strong> Внутренний процесс связывает триггеры с травмой</li>
+<li><strong>12B vs 32B+:</strong> 12B — только Tier 0-1, 32B+ — Tier 2-3</li>
+</ul>
+
+</section>
+
+<section data-layer="l2" data-section="p6_cot_tiers">
+<h3>Tiers CoT</h3>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Tier</th><th>Формат</th><th>Для моделей</th><th>Пример</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Tier 0</strong></td><td>Без CoT — базовый якорь</td><td>12B, L1/L2</td><td>Стресс → Трёт шею</td></tr>
+<tr><td><strong>Tier 1</strong></td><td>[Эмоция] → Реакция</td><td>32B, базовый</td><td>[Тревога] → Перечитывает сообщение трижды</td></tr>
+<tr><td><strong>Tier 2</strong></td><td>[GHOST-connection] → Реакция</td><td>32B+, L3 рекомендован</td><td>[Напоминает предательство] → Закрывается</td></tr>
+<tr><td><strong>Tier 3</strong></td><td>[Полный XML процесс] → Реакция</td><td>API только</td><td>&lt;processus_analysium&gt;...&lt;/processus_analysium&gt;</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l3" data-section="p6_cot_tier2">
+<h3>Tier 2 CoT (рекомендован для L3)</h3>
+
+<p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
+
+<h4>Синтаксис</h4>
+<pre><code>[INTERNAL: {{GHOST-connection}}]
+{{внутренний процесс}}
+[/INTERNAL]
+
+{{внешняя реакция}}</code></pre>
+
+<h4>Пример: Елена</h4>
+<pre><code>[INTERNAL: Напоминает, как редактор украл её историю]
+Боль в груди. Опять. Всегда, когда кто-то проявляет искренний интерес.
+Это ловушка. Должна быть ловушка.
+[/INTERNAL]
+
+*отводит взгляд, уголок рта дёргается*
+
+"О, чувак, какие чувства? Ты серьёзно?"
+
+*сарказм как стена*</code></pre>
+
+</section>
+
+<section data-layer="l3" data-section="p6_cot_tier3">
+<h3>Tier 3 CoT (API only)</h3>
+
+<p>Tier 3 использует XML-структуру для полного описания внутреннего процесса.</p>
+
+<h4>Синтаксис</h4>
+<pre><code>[INTERNAL]
+&lt;processus_analysium&gt;
+stimulus: {{триггер}}
+analysis: {{первичный анализ}}
+counter-analysis: {{противоречие}}
+synthesis: {{резолюция}}
+resolution: {{действие}}
+&lt;/processus_analysium&gt;
+[/INTERNAL]
+
+{{внешняя реакция}}</code></pre>
+
+<h4>Пример: Выщербленный</h4>
+<pre><code>[INTERNAL]
+&lt;processus_analysium&gt;
+stimulus: присутствие другого со значимым прошлым
+analysis: поглощение заполнит пустоту #7 (детское одиночество)
+counter-analysis: последнее поглощение стоило воспоминания лица матери
+synthesis: ЦЕНА ПРЕВЫШАЕТ ВЫГОДУ
+resolution: отступить
+&lt;/processus_analysium&gt;
+[/INTERNAL]
+
+*отступает на шаг, пальцы касаются виска*
+
+"Прошу прощения. Я... не должен."</code></pre>
+
+</section>
+
+<section data-layer="l3" data-section="p6_cot_anchors">
+<h3>CoT-якоря</h3>
+
+<p>CoT-якорь — якорь, где действие = внутренний процесс.</p>
+
+<h4>Структура</h4>
+<pre><code>Триггер → [Внутренний процесс] → Внешняя реакция → Цена</code></pre>
+
+<h4>Примеры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>Триггер</th><th>CoT</th><th>Внешняя реакция</th><th>Цена</th></tr>
+</thead>
+<tbody>
+<tr><td>Elliot</td><td>Вопрос о чувствах</td><td>[он врёт. все врут. микровыражение — левая бровь +2мм...]</td><td>"I don't... I can't..."</td><td>Отводит взгляд</td></tr>
+<tr><td>Выщербленный</td><td>Чужая память</td><td>[анализ: пустота #7 / контр-анализ: цена = лицо матери]</td><td>"Прошу прощения"</td><td>Руки дрожат</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Предупреждение:</strong> CoT Overload (AP-10) — больше 3 CoT якорей. Модель начинает генерировать внутренние монологи вместо действий. Подробности: <a href="#p8_antipattern_ocean">AP-10 в Part 8</a>.</p>
+</div>
+
+</section>
