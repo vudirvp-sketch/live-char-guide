@@ -1,0 +1,32 @@
+{
+  "version": "6.0.0",
+  "layers": [
+    {
+      "id": 1,
+      "name": "Basic",
+      "label": "Минимальный",
+      "color": "#22c55e",
+      "description": "~15 мин, 400-800 токенов карточки",
+      "token_budget": "400-800",
+      "reading_time": "15 min"
+    },
+    {
+      "id": 2,
+      "name": "Deep",
+      "label": "Глубокий",
+      "color": "#38bdf8",
+      "description": "~30 мин, 800-1500 токенов карточки",
+      "token_budget": "800-1500",
+      "reading_time": "30 min"
+    },
+    {
+      "id": 3,
+      "name": "Expert",
+      "label": "Экспертный",
+      "color": "#8b5cf6",
+      "description": "~60 мин, 1500+ токенов карточки",
+      "token_budget": "1500+",
+      "reading_time": "60 min"
+    }
+  ]
+}

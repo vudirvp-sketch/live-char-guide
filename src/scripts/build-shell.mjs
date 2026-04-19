@@ -179,11 +179,13 @@ async function buildShell() {
   // 6. Create build hash file (use the same hash as in HTML)
   await writeFile(join(DIST_DIR, 'build.hash'), buildHash);
   
-  // 7. Copy 404.html if exists
-  const notFound = join(ROOT, '404.html');
+  // 7. Copy 404.html if exists (src/404.html, not root)
+  const notFound = join(SRC_DIR, '404.html');
   if (existsSync(notFound)) {
     await copyFile(notFound, join(DIST_DIR, '404.html'));
-    log('INFO', 'Copied 404.html');
+    log('INFO', 'Copied src/404.html → dist/404.html');
+  } else {
+    log('WARN', 'src/404.html not found, skipping');
   }
   
   // 8. Create root index.html for backward compatibility (GitHub Pages fallback)
