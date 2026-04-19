@@ -6,7 +6,7 @@ ID: F2
 Purpose: Check all HTML parts against glossary for prohibited term variants.
 Exit: 0 if all terms valid, 1 if prohibited variants found.
 
-Updated for shell architecture: works with src/parts-l{1,2,3}/
+Updated for v6: works with src/master/ and src/parts-l{1,2,3}/
 """
 
 import os
@@ -110,10 +110,11 @@ def main():
     
     # Derive repo root from script location
     repo_root = Path(__file__).parent.parent
-    default_glossary = str(repo_root / 'src' / 'data' / 'glossary.json')
+    default_glossary = str(repo_root / 'data' / 'glossary.json')
     
     # Default: check all layer directories
     default_parts_dirs = [
+        repo_root / 'src' / 'master',
         repo_root / 'src' / 'parts-l1',
         repo_root / 'src' / 'parts-l2',
         repo_root / 'src' / 'parts-l3',

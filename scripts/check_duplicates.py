@@ -6,7 +6,7 @@ ID: F1
 Purpose: Detect text blocks >100 chars appearing in multiple files.
 Exit: 0 if no duplicates, 1 if duplicates found.
 
-Updated for shell architecture: works with src/parts-l{1,2,3}/
+Updated for v6: works with src/master/ and src/parts-l{1,2,3}/
 """
 
 import os
@@ -106,6 +106,7 @@ def main():
     
     # Default: check all layer directories
     default_parts_dirs = [
+        repo_root / 'src' / 'master',
         repo_root / 'src' / 'parts-l1',
         repo_root / 'src' / 'parts-l2',
         repo_root / 'src' / 'parts-l3',
