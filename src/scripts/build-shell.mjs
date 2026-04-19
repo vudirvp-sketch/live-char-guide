@@ -186,6 +186,17 @@ async function buildShell() {
     process.exit(1);
   }
 
+  // 3b. Copy shell/widgets/ → dist/widgets/ (persona-cross.js etc.)
+  const widgetsSrc = join(SHELL_DIR, 'widgets');
+  const widgetsDist = join(DIST_DIR, 'widgets');
+  if (existsSync(widgetsSrc)) {
+    await copyDir(widgetsSrc, widgetsDist);
+    const widgetFiles = await readdir(widgetsDist);
+    log('INFO', `Copied shell/widgets/ → dist/widgets/ (${widgetFiles.length} files)`);
+  } else {
+    log('WARN', 'shell/widgets/ not found, skipping');
+  }
+
   // 4. Copy generated parts from build/parts-l{N}/ (instead of src/parts-l{N}/)
   const layers = ['1', '2', '3'];
   for (const layer of layers) {
