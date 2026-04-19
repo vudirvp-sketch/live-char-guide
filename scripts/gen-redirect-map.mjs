@@ -17,7 +17,8 @@
  *   node scripts/gen-redirect-map.mjs
  */
 
-import { readFile, writeFile, existsSync } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
+import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -25,6 +26,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const MIGRATION_MAP_PATH = join(ROOT, 'docs', 'migration_map.md');
 const OUTPUT_PATH = join(ROOT, 'build', 'anchor-redirects.json');
+const DATA_OUTPUT_PATH = join(ROOT, 'data', 'anchor-redirects.json');
 
 // ============================================================================
 // FALLBACK REDIRECT MAP
@@ -200,6 +202,11 @@ async function generateRedirectMap() {
 
   await writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2));
   console.log(`✓ Generated: ${OUTPUT_PATH}`);
+  
+  // Also write to data/ directory so it gets included in dist/ via build-shell
+  await writeFile(DATA_OUTPUT_PATH, JSON.stringify(output, null, 2));
+  console.log(`✓ Generated: ${DATA_OUTPUT_PATH}`);
+  
   console.log(`  ${Object.keys(redirects).length} redirect mappings`);
 
   // Also generate JavaScript module

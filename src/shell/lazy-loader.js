@@ -85,9 +85,8 @@
   // ANCHOR REDIRECT MAP (§0.18: v5.12 → v6 backward compatibility)
   // ============================================================================
 
-  const ANCHOR_REDIRECTS = {
-    // v5.12 anchor → v6 data-section ID
-    // Generated from migration_map.md
+  // Hardcoded fallback — used if data/anchor-redirects.json is not available
+  const ANCHOR_REDIRECTS_FALLBACK = {
     '03_core_blocks': 'p2_basic_anchors',
     '04_spine': 'p4_spine_overview',
     '05_ocean': 'p5_ocean_basics',
@@ -99,6 +98,25 @@
     '02_voice': 'p3_voice_isolation',
     '10_examples': 'p10_elena_l1'
   };
+
+  // Active redirect map — initialized from JSON fetch or fallback
+  let ANCHOR_REDIRECTS = { ...ANCHOR_REDIRECTS_FALLBACK };
+
+  // Try to load auto-generated redirects from data/anchor-redirects.json
+  async function loadAnchorRedirects() {
+    try {
+      const response = await fetch('data/anchor-redirects.json');
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.redirects) {
+          ANCHOR_REDIRECTS = { ...ANCHOR_REDIRECTS_FALLBACK, ...data.redirects };
+          console.log(`[AnchorRedirect] Loaded ${Object.keys(data.redirects).length} redirects from JSON`);
+        }
+      }
+    } catch (e) {
+      console.warn('[AnchorRedirect] Using hardcoded fallback redirects');
+    }
+  }
 
   function handleLegacyAnchor() {
     const hash = window.location.hash.slice(1);
@@ -470,17 +488,26 @@
       this.el.appendChild(statusBar);
     }
 
+    // IMP-52: Global notepad — single key `lcg-notepad-v1` shared across layers
+    // Format: { "notes": "...", "anchors": ["#spine", "#ocean"] }
+    static GLOBAL_NOTEPAD_KEY = 'lcg-notepad-v1';
+
     loadContent() {
-      const content = storage.get(`${this.storageKey}_content`) || '';
+      const data = storage.get(NotepadPanel.GLOBAL_NOTEPAD_KEY) || { notes: '', anchors: [] };
       if (this.textarea) {
-        this.textarea.value = content;
+        this.textarea.value = data.notes || '';
         this.updateCount();
       }
+      this.currentAnchors = data.anchors || [];
     }
 
     saveContent = debounce(() => {
       if (!this.textarea) return;
-      storage.set(`${this.storageKey}_content`, this.textarea.value);
+      const data = {
+        notes: this.textarea.value,
+        anchors: this.currentAnchors || []
+      };
+      storage.set(NotepadPanel.GLOBAL_NOTEPAD_KEY, data);
       if (this.saveBtn) {
         this.saveBtn.textContent = '✓';
         setTimeout(() => { this.saveBtn.textContent = '💾'; }, 800);
@@ -493,8 +520,23 @@
       if (!this.textarea || !this.textarea.value.trim()) return;
       if (confirm('Очистить все заметки? Это действие нельзя отменить.')) {
         this.textarea.value = '';
+        this.currentAnchors = [];
         this.updateCount();
         this.saveContent();
+      }
+    }
+
+    // IMP-52: Auto-anchor insertion on heading click
+    addAnchor(anchorId) {
+      if (!anchorId || !this.currentAnchors) return;
+      if (!this.currentAnchors.includes('#' + anchorId)) {
+        this.currentAnchors.push('#' + anchorId);
+        this.saveContent();
+        const status = $('#np-status');
+        if (status) {
+          status.textContent = `Якорь: #${anchorId}`;
+          setTimeout(() => status.textContent = 'Готово', 1500);
+        }
       }
     }
 
@@ -564,6 +606,21 @@
         this.el.querySelector('.panel-header-actions')?.prepend(copyBtn);
       }
       copyBtn.addEventListener('click', () => this.copyContent());
+
+      // IMP-52: Auto-anchor insertion on heading click while notepad is open
+      this.bindAutoAnchorInsertion();
+    }
+
+    // IMP-52: When user clicks a heading while the notepad is open,
+    // auto-insert the section anchor into the anchors array
+    bindAutoAnchorInsertion() {
+      document.addEventListener('click', (e) => {
+        if (!this.isOpen()) return;
+        const heading = e.target.closest('h2[id], h3[id], h4[id]');
+        if (heading && heading.id) {
+          this.addAnchor(heading.id);
+        }
+      });
     }
   }
 
@@ -707,6 +764,73 @@
   }
 
   // ============================================================================
+  // IMP-47: WIDGET DISAPPEARANCE TOAST
+  // ============================================================================
+
+  // Widget containers that only exist on L2+ or L3
+  const WIDGET_SELECTORS = {
+    '#ocean-embed': { minLayer: 2, name: 'OCEAN' },
+    '#enneagram-embed': { minLayer: 2, name: 'Эннеаграмма' },
+    '#mbti-embed': { minLayer: 2, name: 'MBTI' },
+    '#persona-cross': { minLayer: 3, name: 'OCEAN×Эннеаграмма' }
+  };
+
+  function checkWidgetDisappearance(oldLayer, newLayer) {
+    if (!oldLayer || parseInt(newLayer, 10) >= parseInt(oldLayer, 10)) return;
+
+    const oldLayerNum = parseInt(oldLayer, 10);
+    const newLayerNum = parseInt(newLayer, 10);
+
+    // Find which widgets existed in the old layer but don't exist in the new layer
+    const disappearedWidgets = [];
+    Object.entries(WIDGET_SELECTORS).forEach(([selector, info]) => {
+      if (oldLayerNum >= info.minLayer && newLayerNum < info.minLayer) {
+        // Only show toast if the widget actually existed in the old content
+        // (some parts don't have widgets at all)
+        disappearedWidgets.push(info);
+      }
+    });
+
+    if (disappearedWidgets.length === 0) return;
+
+    // Show toast
+    const toast = document.createElement('div');
+    toast.className = 'widget-toast';
+    toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);' +
+      'background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border);' +
+      'border-radius:8px;padding:12px 20px;z-index:9999;display:flex;align-items:center;gap:12px;' +
+      'box-shadow:0 4px 12px rgba(0,0,0,0.3);font-size:0.9rem;max-width:90vw;';
+
+    const targetLayer = disappearedWidgets[0].minLayer;
+    const targetLabel = CONFIG.LAYER_LABELS[String(targetLayer)];
+
+    const message = document.createElement('span');
+    message.textContent = `Интерактивный инструмент доступен на ${targetLabel} слое`;
+
+    const switchBtn = document.createElement('button');
+    switchBtn.textContent = `Перейти → ${targetLabel}`;
+    switchBtn.style.cssText = 'background:var(--accent);color:#fff;border:none;border-radius:4px;' +
+      'padding:6px 12px;cursor:pointer;font-size:0.85rem;white-space:nowrap;';
+    switchBtn.addEventListener('click', () => {
+      toast.remove();
+      switchLayer(String(targetLayer));
+    });
+
+    toast.appendChild(message);
+    toast.appendChild(switchBtn);
+    document.body.appendChild(toast);
+
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.style.transition = 'opacity 0.3s';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }
+    }, 3000);
+  }
+
+  // ============================================================================
   // UI UPDATES
   // ============================================================================
 
@@ -743,6 +867,7 @@
       return;
     }
 
+    const previousLayer = currentLayer; // IMP-47: track previous layer
     currentLayer = layer;
     saveLayer(layer);
     
@@ -752,6 +877,9 @@
     history.pushState({ layer, anchor }, '', url);
     
     await loadLayerContent(layer);
+    
+    // IMP-47: Show toast if widgets disappeared on layer downgrade
+    checkWidgetDisappearance(previousLayer, layer);
     
     // Scroll to anchor or top
     if (anchor) {
@@ -1195,7 +1323,9 @@
     
     if (notepadPanel && !panelInstances['notepad-panel']) {
       panelInstances['notepad-panel'] = new NotepadPanel(notepadPanel, {
-        storageKey: 'notepad_panel_state'
+        storageKey: 'notepad_panel_state',
+        // IMP-52: Notepad content is global — uses lcg-notepad-v1 internally,
+        // position/size still uses per-panel storageKey
       });
     }
 
@@ -2082,6 +2212,9 @@
   async function init() {
     console.log('[LazyLoader] Initializing v' + CONFIG.VERSION + '...');
 
+    // Load auto-generated anchor redirects (§0.18) before handling legacy anchors
+    await loadAnchorRedirects();
+    
     // Handle v5.12 legacy anchor redirects (§0.18)
     handleLegacyAnchor();
 
