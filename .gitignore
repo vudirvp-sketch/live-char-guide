@@ -51,3 +51,5 @@ temp/
 
 # Download directory (user-generated, keep local)
 download/
+
+# Allow layer-config.json in build
