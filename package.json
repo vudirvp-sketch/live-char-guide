@@ -37,7 +37,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "node-html-parser": "^7.1.0",
-    "prettier": "^3.2.0",
+    "prettier": "^3.8.3",
     "puppeteer": "^21.0.0",
     "serve": "^14.2.0"
   },
