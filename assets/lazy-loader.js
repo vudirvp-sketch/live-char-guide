@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - LAZY LOADER v5.12.1
+ * LIVE CHARACTER GUIDE - LAZY LOADER v6.0.0
  * ============================================================================
  * 
  * Dynamic layer loading system:
@@ -31,7 +31,13 @@
   
   const CONFIG = {
     STORAGE_KEY: 'guide-layer-selection',
+    VERSION: '6.0.0',
     LAYERS: ['1', '2', '3'],
+    LAYER_LABELS: {
+      '1': '\u041c\u0438\u043d\u0438\u043c\u0430\u043b\u044c\u043d\u044b\u0439',
+      '2': '\u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439',
+      '3': '\u042d\u043a\u0441\u043f\u0435\u0440\u0442\u043d\u044b\u0439'
+    },
     DEFAULT_LAYER: '2',
     PARTS_DIR: {
       '1': 'parts-l1',
@@ -47,6 +53,66 @@
   let currentLayer = null;
   let isLoading = false;
   let loadedParts = new Set();
+  let lastVisibleSection = null; // IMP-46: scroll preservation
+
+  // ============================================================================
+  // WIDGET DATA CACHE (Stage 1.5: JSON fetch instead of hardcode)
+  // ============================================================================
+
+  const widgetDataCache = {
+    ocean: null,
+    enneagram: null,
+    mbti: null
+  };
+
+  async function fetchWidgetData(type) {
+    if (widgetDataCache[type]) return widgetDataCache[type];
+    const url = `data/${type}.json`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      widgetDataCache[type] = data;
+      console.log(`[WidgetData] Loaded ${type} from ${url}`);
+      return data;
+    } catch (e) {
+      console.warn(`[WidgetData] Failed to fetch ${url}:`, e.message);
+      return null;
+    }
+  }
+
+  // ============================================================================
+  // ANCHOR REDIRECT MAP (§0.18: v5.12 → v6 backward compatibility)
+  // ============================================================================
+
+  const ANCHOR_REDIRECTS = {
+    // v5.12 anchor → v6 data-section ID
+    // Generated from migration_map.md
+    '03_core_blocks': 'p2_basic_anchors',
+    '04_spine': 'p4_spine_overview',
+    '05_ocean': 'p5_ocean_basics',
+    '06_cot': 'p6_cot_basics',
+    '07_tech': 'p7_system_prompt',
+    '08_anti': 'p8_antipatterns_overview',
+    '09_diag': 'p9_troubleshooting',
+    '01_intro': 'p1_card_overview',
+    '02_voice': 'p3_voice_isolation',
+    '10_examples': 'p10_elena_l1'
+  };
+
+  function handleLegacyAnchor() {
+    const hash = window.location.hash.slice(1);
+    if (hash && ANCHOR_REDIRECTS[hash]) {
+      const target = ANCHOR_REDIRECTS[hash];
+      history.replaceState(null, '', '#' + target);
+      // If content is loaded, scroll to the new anchor
+      const targetEl = document.getElementById(target);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+      console.log(`[AnchorRedirect] ${hash} → ${target}`);
+    }
+  }
 
   // ============================================================================
   // DOM UTILITIES
@@ -575,6 +641,21 @@
       return;
     }
 
+    // IMP-46: Record nearest visible data-section before clearing content
+    lastVisibleSection = null;
+    const allSections = $$('section[data-section]');
+    const viewportMiddle = window.scrollY + window.innerHeight / 2;
+    let minDistance = Infinity;
+    allSections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      const secMiddle = rect.top + window.scrollY + rect.height / 2;
+      const dist = Math.abs(secMiddle - viewportMiddle);
+      if (dist < minDistance) {
+        minDistance = dist;
+        lastVisibleSection = sec.getAttribute('data-section') || sec.id;
+      }
+    });
+
     content.innerHTML = '';
     loadedParts.clear();
 
@@ -603,6 +684,16 @@
       generateTOC();
       handleAnchor();
       loadGlossaryContent();
+      updateGlossaryForLayer(layer);
+      handleLegacyAnchor();
+      
+      // IMP-46: Scroll to previously visible section after layer switch
+      if (lastVisibleSection) {
+        const targetEl = document.getElementById(lastVisibleSection);
+        if (targetEl) {
+          setTimeout(() => targetEl.scrollIntoView({ behavior: 'smooth' }), 100);
+        }
+      }
       
       console.log(`[LazyLoader] Layer ${layer} loaded successfully`);
       
@@ -727,14 +818,52 @@
           tocLinks.push({ level: 3, id: h3.id, text: h3Text.substring(0, 50) });
         }
       });
+
+      // IMP-46/Stage 1.5: Include h4 for L3 sections with data-toc-level="4"
+      if (section.getAttribute('data-toc-level') === '4') {
+        section.querySelectorAll('h4[id]').forEach(h4 => {
+          const h4Text = h4.textContent.replace(/^[0-9.]+\s*/, '').trim();
+          tocLinks.push({ level: 4, id: h4.id, text: h4Text.substring(0, 50) });
+        });
+      }
     });
 
     const tocHtml = tocLinks.map(link => {
-      const indent = link.level === 3 ? 'toc-indent' : '';
-      return `<li class="${indent}"><a href="#${link.id}">${link.text}</a></li>`;
+      const indentClass = link.level === 3 ? 'toc-indent' : link.level === 4 ? 'toc-indent-2' : '';
+      return `<li class="${indentClass}"><a href="#${link.id}">${link.text}</a></li>`;
     }).join('\n');
 
     tocContent.innerHTML = `<ul>${tocHtml}</ul>`;
+  }
+
+  // ============================================================================
+  // GLOSSARY LAYER FILTERING (IMP-51)
+  // ============================================================================
+
+  function updateGlossaryForLayer(layer) {
+    const layerNum = parseInt(layer, 10);
+    const glossaryItems = $$('.glossary-item');
+    
+    glossaryItems.forEach(item => {
+      const layers = (item.dataset.layers || '').split(' ').map(Number);
+      const isAvailable = layers.some(l => l === 0 || l === layerNum);
+      
+      // Show badge for terms not available at current layer
+      const existingBadge = item.querySelector('.glossary-layer-badge');
+      if (existingBadge) existingBadge.remove();
+      
+      if (!isAvailable && layers.length > 0) {
+        // Find the lowest layer where this term is available
+        const nextLayer = layers.find(l => l > 0 && l > layerNum);
+        if (nextLayer) {
+          const badge = document.createElement('span');
+          badge.className = 'glossary-layer-badge';
+          badge.style.cssText = 'font-size:0.7em;color:var(--accent);margin-left:0.5em;';
+          badge.textContent = `Доступно на ${CONFIG.LAYER_LABELS[String(nextLayer)]} слое`;
+          item.appendChild(badge);
+        }
+      }
+    });
   }
 
   // ============================================================================
@@ -1123,6 +1252,8 @@
         currentLayer = e.state.layer;
         updateSwitcherButtons(e.state.layer);
       }
+      // §0.18: Handle legacy anchor redirects on popstate too
+      handleLegacyAnchor();
     });
 
     // Keyboard: close panels on Escape
@@ -1211,10 +1342,63 @@
     });
   }
 
-  function showOceanPanel(letter, name, color) {
+  async function showOceanPanel(letter, name, color) {
     const panel = document.getElementById('ocean-panel');
     if (!panel) return;
 
+    // Stage 1.5: Try fetching from data/ocean.json first
+    const oceanData = await fetchWidgetData('ocean');
+    if (oceanData && oceanData.traits) {
+      const traitObj = oceanData.traits.find(t => t.id === letter);
+      if (traitObj) {
+        const anchorKey = `${letter === 'N' ? 'high' : 'low'}_${letter}`;
+        const anchorExamples = (oceanData.anchor_examples && oceanData.anchor_examples[anchorKey]) || [];
+        const anchorText = anchorExamples.map(a => 
+          `Триггер: ${a.trigger}\nДействие: ${a.action}\nЦена: ${a.price}`
+        ).join('\n\n');
+
+        // Fallback to hardcoded anchor text if no matching examples
+        const fallbackAnchors = {
+          'O': 'Низкий O \u2192 предпочитает рутину, подозрение к новому\nПример: "Когда сталкивается с новым, колеблется, задаёт уточняющие вопросы \u2192 Цена: затянутая пауза"\n\nВысокий O \u2192 ищет разнообразие, открыт нестандартным идеям\nПример: "Когда скучно, сразу предлагает новое занятие \u2192 Цена: не может усидеть на месте"',
+          'C': 'Низкий C \u2192 решения в последний момент, гибкие дедлайны\nПример: "Когда есть план, сразу ищет исключения \u2192 Цена: опаздывает на 5 минут"\n\nВысокий C \u2192 планирует заранее, структурированные рутины\nПример: "Когда детали не совпадают с планом, перепроверяет \u2192 Цена: напряжение в челюсти"',
+          'E': 'Низкий E \u2192 сольные активности, внутренний монолог\nПример: "Когда все идут на вечеринку, находит повод остаться \u2192 Цена: едва заметный вздох облегчения"\n\nВысокий E \u2192 инициирует разговор, ищет стимуляцию\nПример: "Когда тишина, первым начинает разговор \u2192 Цена: не замечает чужой дискомфорт"',
+          'A': 'Низкий A \u2192 конкурентный драйв, скептицизм\nПример: "Когда кто-то предлагает помощь, спрашивает \u201cчто тебе с этого?\u201d \u2192 Цена: короткий прищур"\n\nВысокий A \u2192 помогает без просьбы, избегает конфликта\nПример: "Когда видит проблему, предлагает помощь без запроса \u2192 Цена: не замечает манипуляцию"',
+          'N': 'Низкий N \u2192 готов к кризису, стабилен под давлением\nПример: "Когда всё рушится, сначала действует \u2192 Цена: пауза только после решения проблемы"\n\nВысокий N \u2192 стресс-реакции видимы, нуждается в поддержке\nПример: "Когда неопределённость, переспрашивает, ищет подтверждения \u2192 Цена: теребит край одежды"'
+        };
+
+        const anchorDisplay = anchorText || fallbackAnchors[letter] || '';
+
+        panel.innerHTML = `
+          <div class="panel-header">
+            <div class="trait-letter" style="color: ${color}">${letter}</div>
+            <div class="trait-name">${name}</div>
+          </div>
+          <div class="panel-body">
+            <div class="section">
+              <div class="section-label">Низкий полюс (&lt;30)</div>
+              <ul class="marker-list">
+                <li>${traitObj.low.label}</li>
+                <li>${traitObj.low.description}</li>
+              </ul>
+            </div>
+            <div class="section">
+              <div class="section-label">Высокий полюс (&gt;70)</div>
+              <ul class="marker-list">
+                <li>${traitObj.high.label}</li>
+                <li>${traitObj.high.description}</li>
+              </ul>
+            </div>
+            <div class="section rp-section">
+              <div class="section-label">Примеры якорей</div>
+              <div class="rp-content"><code>${anchorDisplay.replace(/\n/g, '<br>')}</code></div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+    }
+
+    // Fallback: hardcoded data (preserved for offline/no-JS)
     const data = {
       'O': {
         low: ['Практичный', 'Предпочитает знакомое', 'Консервативный подход'],
@@ -1492,10 +1676,65 @@
     });
   }
 
-  function showEnneaPanel(typeNum) {
+  async function showEnneaPanel(typeNum) {
     const panel = document.getElementById('ennea-panel');
     if (!panel) return;
 
+    // Stage 1.5: Try fetching from data/enneagram.json first
+    const enneagramData = await fetchWidgetData('enneagram');
+    if (enneagramData && enneagramData.types) {
+      const typeObj = enneagramData.types.find(t => t.id === parseInt(typeNum, 10));
+      if (typeObj) {
+        const anchorText = (typeObj.anchor_examples || []).map(a => 
+          `Триггер: ${a.trigger}\nДействие: ${a.action}\nЦена: ${a.price}`
+        ).join('\n\n');
+
+        panel.innerHTML = `
+          <div class="ennea-panel-header">
+            <div class="ennea-type-num">${typeNum}</div>
+            <div class="ennea-type-name">${typeObj.name}</div>
+          </div>
+          <div class="ennea-panel-body">
+            <div class="section">
+              <div class="ennea-row-label">Core Fear</div>
+              <div class="ennea-fear-val">${typeObj.core_fear}</div>
+            </div>
+            <div class="section">
+              <div class="ennea-row-label">Core Desire</div>
+              <div class="ennea-desire-val">${typeObj.core_desire}</div>
+            </div>
+            <div class="section">
+              <div class="ennea-row-label">Стресс → ${typeObj.stress_direction} | Рост → ${typeObj.growth_direction}</div>
+            </div>
+            <div class="section">
+              <div class="ennea-row-label">Шаблон лжи</div>
+              <div>${typeObj.lie_template}</div>
+            </div>
+            <div class="section">
+              <div class="ennea-row-label">Паттерн изъяна</div>
+              <div>${typeObj.flaw_pattern}</div>
+            </div>
+            ${typeObj.wings ? `<div class="section">
+              <div class="ennea-row-label">Wings</div>
+              <div class="ennea-wings-row">
+                ${typeObj.wings.map(w => `
+                  <div class="ennea-wing-chip">
+                    <div class="wn">${w}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>` : ''}
+            ${anchorText ? `<div class="section">
+              <div class="ennea-row-label">Примеры якорей</div>
+              <div class="ennea-anchor-val"><code>${anchorText.replace(/\n/g, '<br>')}</code></div>
+            </div>` : ''}
+          </div>
+        `;
+        return;
+      }
+    }
+
+    // Fallback: hardcoded data (preserved for offline/no-JS)
     const enneaData = {
       1: {
         name: 'Перфекционист',
@@ -1526,7 +1765,7 @@
                        'Цена: Едва заметная улыбка, ждёт благодарности'
       },
       3: {
-        name: 'Деятель',
+        name: 'Достигатель',
         fear: 'Быть никчёмным, неудачником',
         desire: 'Быть ценным, успешным, admired',
         stress: 9,
@@ -1668,8 +1907,21 @@
   // MBTI FILTER
   // ============================================================================
 
-  function initMBTI() {
+  async function initMBTI() {
     const AXES = ['EI', 'SN', 'TF', 'JP'];
+
+    // Stage 1.5: Try fetching from data/mbti.json
+    let typesDB = null;
+    const mbtiData = await fetchWidgetData('mbti');
+    if (mbtiData && mbtiData.types) {
+      typesDB = {};
+      mbtiData.types.forEach(t => {
+        typesDB[t.code] = { name: t.name, hint: t.hint, temperament: t.temperament };
+      });
+    }
+
+    // Fallback: hardcoded types database
+    if (!typesDB) {
 
     // Mapping slider values to letters
     const axisLetterMap = {
@@ -1697,6 +1949,15 @@
       ISFP: { name: 'Артист', hint: 'Чувствительный, эстетичный', temperament: 'SP' },
       ESTP: { name: 'Предприниматель', hint: 'Действие-ориентированный', temperament: 'SP' },
       ESFP: { name: 'Развлекатель', hint: 'Спонтанный, социальный', temperament: 'SP' }
+    };
+    } // end fallback typesDB
+
+    // Mapping slider values to letters
+    const axisLetterMap = {
+      EI: { '-1': 'E', '0': null, '1': 'I' },
+      SN: { '-1': 'S', '0': null, '1': 'N' },
+      TF: { '-1': 'T', '0': null, '1': 'F' },
+      JP: { '-1': 'J', '0': null, '1': 'P' }
     };
 
     // Get current selection for an axis (radio takes priority over slider)
@@ -1819,7 +2080,10 @@
   }
 
   async function init() {
-    console.log('[LazyLoader] Initializing...');
+    console.log('[LazyLoader] Initializing v' + CONFIG.VERSION + '...');
+
+    // Handle v5.12 legacy anchor redirects (§0.18)
+    handleLegacyAnchor();
 
     let layer = getLayerFromURL() || getSavedLayer();
 
@@ -1844,14 +2108,21 @@
     // Initialize interactive tools after content is loaded
     initInteractiveTools();
 
-    console.log('[LazyLoader] Ready');
+    // Pre-fetch widget data for faster panel display
+    fetchWidgetData('ocean');
+    fetchWidgetData('enneagram');
+    fetchWidgetData('mbti');
+
+    console.log('[LazyLoader] Ready (v' + CONFIG.VERSION + ')');
   }
 
   // Expose API
   window.LazyLoader = {
     switchLayer,
+    scrollToAnchor,
     get currentLayer() { return currentLayer; },
-    panels: panelInstances
+    panels: panelInstances,
+    version: CONFIG.VERSION
   };
 
   // Auto-initialize

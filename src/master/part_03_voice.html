@@ -10,7 +10,7 @@
 <p><strong>Voice Isolation</strong> — правило разделения голоса персонажа и описания. Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.</p>
 
 <div class="callout important">
-<p><strong>📌 Ключевое правило:</strong></p>
+<p><strong>📌 Важно:</strong></p>
 <p>Модель — копировщик паттернов, не исполнитель инструкций. Если вы напишете в Description "говорит саркастично" — модель это проигнорирует. Но если в Examples персонаж говорит саркастично — модель скопирует стиль.</p>
 </div>
 
@@ -38,7 +38,7 @@
 </div>
 
 <div class="callout warn">
-<p><strong>⚠️ Типичная ошибка:</strong></p>
+<p><strong>⚠️ Предупреждение:</strong></p>
 <pre><code>❌ WRONG (Voice in Description):
 Description: "Елена говорит с сарказмом, использует слово 'чувак', короткие фразы"</code></pre>
 <pre><code>✅ CORRECT (Voice in Examples):
@@ -48,6 +48,8 @@ Example:
 &lt;START&gt;
 Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
 </div>
+
+<a data-layer-switch="2#p3_voice_leak" class="layer-remark">Подробнее об утечке голоса → Глубокий слой<span class="remark-icon">→</span></a>
 
 </section>
 
@@ -153,13 +155,13 @@ Example:
 
 <h4>Пример: Jesse Pinkman</h4>
 <div class="callout warn">
-<p><strong>❌ Voice Leak (неверный Jesse):</strong></p>
+<p><strong>⚠️ Предупреждение:</strong></p>
 <pre><code>"Я пытаюсь справиться с глубоким чувством моральной вины за то, что я сделал..."</code></pre>
 <p><em>Слишком красноречиво для Jesse — модель производит "элоквентного Jesse".</em></p>
 </div>
 
 <div class="callout tip">
-<p><strong>✅ Правильный Jesse:</strong></p>
+<p><strong>💡 Совет:</strong></p>
 <pre><code>"Я не могу... Я не могу это делать, yo. Просто... заткнись об этом, ладно?"
 *пинает половицу, отводит взгляд*</code></pre>
 </div>
@@ -180,7 +182,7 @@ Example:
 <p><strong>Joker (The Dark Knight)</strong> — пример персонажа, голос которого <strong>невозможно описать</strong>, можно только воспроизвести.</p>
 
 <div class="callout important">
-<p><strong>📌 Правило Joker:</strong> Вы НЕ можете описать голос Joker в Description. Вы ДОЛЖНЫ воспроизвести его в Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности.</p>
+<p><strong>📌 Важно:</strong> Вы НЕ можете описать голос Joker в Description. Вы ДОЛЖНЫ воспроизвести его в Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности.</p>
 </div>
 
 <h4>Пример: Joker Voice Isolation</h4>

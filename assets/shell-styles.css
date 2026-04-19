@@ -1,5 +1,5 @@
 /* ============================================
-   LIVE CHARACTER GUIDE - SHELL STYLES v5.12.0
+   LIVE CHARACTER GUIDE - SHELL STYLES v6.0.0
    ============================================ */
 
 /* === CSS DESIGN TOKENS === */
@@ -841,6 +841,7 @@ body[data-layer="2"] #content [data-layer="3"] { display: none !important; }
 .panel-content a { color: var(--text-muted); text-decoration: none; border-bottom: none; }
 .panel-content a:hover { color: var(--accent); }
 .panel-content .toc-indent { padding-left: 0.9em; font-size: 0.92em; opacity: 0.9; }
+.panel-content .toc-indent-2 { padding-left: 1.8em; font-size: 0.88em; opacity: 0.85; }
 
 #toc-panel .panel-content ul ul { padding-left: 1.2em; margin-top: 0.15em; }
 #toc-panel .panel-content ul ul li a { font-size: 0.88em; opacity: 0.88; padding-left: 0.4em; border-left: 2px solid var(--border); }
@@ -1138,6 +1139,28 @@ body.content-wide pre {
 
 .layer-remark a:hover {
   text-decoration: underline;
+}
+
+/* === LAYER LINK DISABLED (§0.9: links to sections not in current layer) === */
+.layer-link-disabled {
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  font-style: italic;
+}
+
+.layer-link-disabled:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: var(--bg-elevated);
+  color: var(--text);
+  padding: 0.3em 0.6em;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+  white-space: nowrap;
+  z-index: 10;
+  border: 1px solid var(--border);
 }
 
 /* === OCEAN CSS VARIABLES === */
@@ -2214,5 +2237,141 @@ td.temperament-sp {
   #ocean-svg .ocean-node:hover circle,
   #ocean-svg .ocean-node.active circle {
     filter: none;
+  }
+}
+
+/* ============================================================================
+   PERSONA-CROSS — OCEAN×Enneagram Correlation Matrix (§0.8)
+   ============================================================================ */
+
+#persona-cross {
+  margin: 1.5em 0;
+}
+
+.cross-header h4 {
+  margin: 0 0 0.3em;
+  font-size: 1.1em;
+  color: var(--text);
+}
+
+.cross-legend {
+  display: flex;
+  gap: 1em;
+  margin: 0 0 1em;
+  font-size: 0.85em;
+}
+
+.legend-item {
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+}
+
+.cross-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cross-matrix {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85em;
+}
+
+.cross-matrix th,
+.cross-matrix td {
+  padding: 0.5em 0.7em;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: background 0.15s ease;
+}
+
+.cross-trait-header {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--bg-elevated);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.cross-trait-header small {
+  display: block;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+.cross-type-header {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg-elevated);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.cross-type-header small {
+  display: block;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.75em;
+}
+
+.cross-cell {
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  min-width: 3.5em;
+}
+
+.cross-cell:hover {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.cross-cell.hover-col {
+  outline: 1px solid var(--accent);
+  opacity: 0.85;
+}
+
+.cross-cell.hover-row {
+  outline: 1px solid var(--accent);
+  opacity: 0.85;
+}
+
+.cross-cell.selected {
+  outline: 3px solid var(--accent);
+  outline-offset: -2px;
+  font-weight: 700;
+}
+
+.cross-trait-header.selected,
+.cross-type-header.selected {
+  background: var(--accent-soft);
+}
+
+.cross-strong {
+  font-weight: 700;
+}
+
+.cross-moderate {
+  font-weight: 500;
+}
+
+.cross-weak {
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .cross-matrix {
+    font-size: 0.75em;
+  }
+  
+  .cross-matrix th,
+  .cross-matrix td {
+    padding: 0.3em 0.4em;
   }
 }
