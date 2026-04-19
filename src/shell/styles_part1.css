@@ -74,12 +74,6 @@
   --z-panel: 1001;
   --z-modal: 9999;
   --z-loading: 10000;
-
-  /* MBTI Temperament colors */
-  --temperament-nt: #7c4dff;   /* Analysts - purple */
-  --temperament-nf: #ff6b9d;   /* Diplomats - pink */
-  --temperament-sj: #4dc3ff;   /* Sentinels - blue */
-  --temperament-sp: #ffb84d;   /* Explorers - orange */
 }
 
 /* === LIGHT THEME VARIABLES === */
@@ -232,7 +226,6 @@ tbody tr:hover { background: var(--accent-soft); }
 }
 .callout.tip { border-color: var(--tip-border); background: var(--tip-bg); }
 .callout.warn { border-color: var(--warning-border); background: var(--warning-bg); }
-.callout.important { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
 .callout strong { display: block; margin-bottom: 0.4em; }
 
 /* Tags */
@@ -1075,43 +1068,6 @@ body.content-wide pre {
   background: linear-gradient(135deg, transparent 50%, var(--accent) 50%);
 }
 
-/* === ANTIPATTERN CARD === */
-.antipattern-card {
-  margin: 1.5em 0;
-  padding: 1em;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-surface);
-}
-
-.antipattern-card .problem-block {
-  padding: 0.75em;
-  margin-bottom: 0.75em;
-  border-left: 3px solid #ef4444;
-  background: rgba(239, 68, 68, 0.05);
-  border-radius: 0 4px 4px 0;
-}
-
-.antipattern-card .solution-block {
-  padding: 0.75em;
-  margin-bottom: 0.75em;
-  border-left: 3px solid #22c55e;
-  background: rgba(34, 197, 94, 0.05);
-  border-radius: 0 4px 4px 0;
-}
-
-.antipattern-card .example-block {
-  padding: 0.75em;
-  border-left: 3px solid #3b82f6;
-  background: rgba(59, 130, 246, 0.05);
-  border-radius: 0 4px 4px 0;
-}
-
-.antipattern-card h4 {
-  margin: 0 0 0.5em;
-  font-size: 0.9em;
-}
-
 /* === LAYER REMARK === */
 .layer-remark {
   display: block;
@@ -1572,314 +1528,116 @@ ennea-embed {
   }
 }
 
+/* === MBTI EMBED === */
+.mbti-embed {
+  padding: 0.4em 0.8em 1.4em;
+}
 
-/* ============================================
-   MBTI INTERACTIVE STYLES
-   ============================================ */
-
-/* MBTI filter grid */
 .mbti-filter-grid {
   display: grid;
-  gap: 16px;
-  margin: 16px 0;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  max-width: 600px;
+  margin: 1em auto;
 }
 
 .mbti-axis {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  background: var(--bg-elevated);
-  border-radius: 8px;
+  gap: 0.8em;
+  padding: 0.8em 1em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
 }
 
-.mbti-axis .axis-label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 60px;
-}
-
-.mbti-axis .pole-label {
+.mbti-label {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 24px;
   text-align: center;
-  font-size: 0.9em;
-  line-height: 1.2;
-}
-
-.mbti-axis .pole-label small {
-  font-size: 0.75em;
-  color: var(--text-muted);
-}
-
-.mbti-axis .axis-track {
-  flex: 1;
-  display: flex;
-  justify-content: center;
 }
 
 .mbti-slider {
-  width: 100%;
-  max-width: 200px;
-  accent-color: var(--accent);
-}
-
-.mbti-axis input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.mbti-axis label {
-  cursor: pointer;
-  padding: 4px 8px;
+  flex: 1;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
   border-radius: 4px;
-  transition: background var(--transition-fast);
+  outline: none;
 }
 
-.mbti-axis label:hover {
-  background: var(--bg-surface);
-}
-
-.mbti-axis input[type="radio"]:checked + .pole-label {
+.mbti-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
   background: var(--accent);
-  color: var(--bg-elevated);
-  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s;
 }
 
-/* MBTI result display */
+.mbti-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.mbti-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
 .mbti-result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
-  margin-top: 16px;
-  background: var(--bg-surface);
-  border-radius: 8px;
-  border: 1px solid var(--border);
   text-align: center;
+  padding: 1.5em;
+  margin-top: 1em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .mbti-type-display {
-  font-size: 2em;
+  display: block;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--accent);
-  font-family: monospace;
+  letter-spacing: 0.1em;
 }
 
 .mbti-type-name {
-  font-size: 1.1em;
-  margin-top: 4px;
-}
-
-.mbti-type-hint {
-  font-size: 0.9em;
+  display: block;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  margin-top: 8px;
+  margin-top: 0.3em;
 }
 
-/* Temperament groups */
-.temperament-group {
-  margin: 16px 0;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
+/* Enneagram anchor example style */
+.ennea-anchor-val {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-muted);
 }
 
-.temperament-group > summary {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  cursor: pointer;
+.ennea-anchor-val code {
   background: var(--bg-elevated);
-}
-
-.temperament-group > summary:hover {
-  background: var(--bg-surface);
-}
-
-.temperament-badge {
-  padding: 4px 10px;
+  padding: 0.3em 0.5em;
   border-radius: 4px;
   font-size: 0.85em;
-  font-weight: 600;
 }
 
-.temperament-badge.temperament-nt {
-  background: rgba(124, 77, 255, 0.15);
-  color: var(--temperament-nt);
-}
-
-.temperament-badge.temperament-nf {
-  background: rgba(255, 107, 157, 0.15);
-  color: var(--temperament-nf);
-}
-
-.temperament-badge.temperament-sj {
-  background: rgba(77, 195, 255, 0.15);
-  color: var(--temperament-sj);
-}
-
-.temperament-badge.temperament-sp {
-  background: rgba(255, 184, 77, 0.15);
-  color: var(--temperament-sp);
-}
-
-.temperament-desc {
-  font-size: 0.9em;
-  color: var(--text-muted);
-}
-
-/* Types grid inside temperament */
-.types-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 12px;
-  padding: 12px;
-}
-
-/* Type card */
-.type-card {
-  padding: 12px;
-  background: var(--bg-surface);
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
-}
-
-.type-card:hover {
-  border-color: var(--accent);
-}
-
-.type-card.highlighted {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
-}
-
-.type-header {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.type-code {
-  font-size: 1.1em;
-  font-weight: 700;
-  font-family: monospace;
-  margin: 0;
-}
-
-.type-name {
-  font-weight: 500;
-}
-
-.type-short {
-  font-size: 0.9em;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.type-details {
-  margin-top: 8px;
-  font-size: 0.9em;
-}
-
-.type-details summary {
-  cursor: pointer;
-  color: var(--accent);
-  padding: 4px 0;
-}
-
-.type-details summary:hover {
-  text-decoration: underline;
-}
-
-.type-content {
-  padding: 8px 0;
-  border-top: 1px solid var(--border);
-  margin-top: 8px;
-}
-
-.type-content p {
-  margin: 4px 0;
-}
-
-.type-content ul {
-  margin: 8px 0;
-  padding-left: 20px;
-}
-
-.type-content code {
-  background: var(--bg-elevated);
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 0.9em;
-}
-
-/* MBTI table improvements */
-.mbti-fallback-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.mbti-fallback-table th,
-.mbti-fallback-table td {
-  padding: 8px 12px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-
-.mbti-fallback-table th {
-  background: var(--bg-elevated);
-  font-weight: 600;
-}
-
-.mbti-fallback-table tr:hover td {
-  background: var(--bg-surface);
-}
-
-/* Cross-link styling */
-.cross-link {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 0.9em;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.cross-link:hover {
-  text-decoration: underline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .mbti-axis {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .mbti-axis .axis-track {
-    width: 100%;
-  }
-
-  .mbti-slider {
-    max-width: 100%;
-  }
-
-  .types-grid {
+@media (max-width: 768px) {
+  .mbti-filter-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .type-card,
-  .temperament-group > summary,
-  .mbti-axis label {
-    transition: none;
-  }
-}
 /* === GLOSSARY ITEMS === */
 .glossary-item {
   padding: 0.5em 0;
@@ -1940,265 +1698,3 @@ ennea-embed {
 
 #ennea-svg .node {
   cursor: pointer;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
-}
-
-#ennea-svg .node:hover circle {
-  stroke-width: 3;
-  filter: drop-shadow(0 0 8px var(--accent));
-}
-
-#ennea-svg .node:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
-
-#ennea-svg .node circle {
-  fill: var(--bg-elevated);
-  stroke: var(--accent);
-  stroke-width: 2;
-  transition: stroke-width var(--transition-fast);
-}
-
-#ennea-svg .node-num {
-  font-size: 13px;
-  font-weight: 700;
-  fill: var(--text);
-  pointer-events: none;
-  user-select: none;
-}
-
-#ennea-svg .node-label {
-  font-size: 10px;
-  fill: var(--text-muted);
-  opacity: 0.85;
-  pointer-events: none;
-  user-select: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #ennea-svg .node,
-  #ennea-svg .inner-lines {
-    transition: none;
-  }
-  #ennea-svg .node:hover circle {
-    filter: none;
-  }
-}
-
-
-/* ============================================
-   OCEAN SVG INTERACTIVE STYLES (from plan)
-   ============================================ */
-
-#ocean-svg {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-}
-
-#ocean-svg .ocean-pentagon {
-  stroke: var(--text-muted);
-  stroke-width: 1;
-  opacity: 0.4;
-  fill: none;
-}
-
-#ocean-svg .ocean-profile {
-  stroke-width: 2;
-  fill: none;
-  opacity: 0.6;
-  transition: d 200ms ease;
-}
-
-#ocean-svg .ocean-connections {
-  stroke: var(--text-muted);
-  stroke-width: 1;
-  opacity: 0.25;
-}
-
-#ocean-svg .ocean-node {
-  cursor: pointer;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
-}
-
-#ocean-svg .ocean-node:hover circle,
-#ocean-svg .ocean-node.active circle {
-  stroke-width: 3;
-  filter: drop-shadow(0 0 8px currentColor);
-}
-
-#ocean-svg .ocean-node:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
-
-#ocean-svg .ocean-node.active circle {
-  r: 26;
-  stroke-width: 3;
-}
-
-#ocean-svg .ocean-node circle {
-  fill: var(--bg-elevated);
-  stroke-width: 2;
-  transition: stroke-width var(--transition-fast), r var(--transition-fast);
-}
-
-#ocean-svg .ocean-letter {
-  font-size: 14px;
-  font-weight: 700;
-  fill: var(--text);
-  pointer-events: none;
-  user-select: none;
-}
-
-#ocean-svg .ocean-label {
-  font-size: 10px;
-  fill: var(--text-muted);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* OCEAN trait-specific colors */
-#ocean-svg .ocean-node[data-trait="O"] circle { stroke: var(--ocean-O); }
-#ocean-svg .ocean-node[data-trait="O"] .ocean-letter { fill: var(--ocean-O); }
-#ocean-svg .ocean-node[data-trait="C"] circle { stroke: var(--ocean-C); }
-#ocean-svg .ocean-node[data-trait="C"] .ocean-letter { fill: var(--ocean-C); }
-#ocean-svg .ocean-node[data-trait="E"] circle { stroke: var(--ocean-E); }
-#ocean-svg .ocean-node[data-trait="E"] .ocean-letter { fill: var(--ocean-E); }
-#ocean-svg .ocean-node[data-trait="A"] circle { stroke: var(--ocean-A); }
-#ocean-svg .ocean-node[data-trait="A"] .ocean-letter { fill: var(--ocean-A); }
-#ocean-svg .ocean-node[data-trait="N"] circle { stroke: var(--ocean-N); }
-#ocean-svg .ocean-node[data-trait="N"] .ocean-letter { fill: var(--ocean-N); }
-
-/* OCEAN panel styles */
-.ocean-panel .trait-title {
-  font-size: 1.1em;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.ocean-panel .trait-low,
-.ocean-panel .trait-high {
-  margin: 8px 0;
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.ocean-panel .trait-low {
-  background: rgba(255,107,107,0.1);
-  border-left: 3px solid var(--ocean-E);
-}
-
-.ocean-panel .trait-high {
-  background: rgba(107,255,140,0.1);
-  border-left: 3px solid var(--ocean-A);
-}
-
-/* OCEAN quick links */
-.ocean-quick-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.ocean-quick-links .trait-link {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.85em;
-  text-decoration: none;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-
-.ocean-quick-links .trait-link:hover {
-  background: var(--bg-surface);
-}
-
-/* OCEAN trait reference sections */
-.ocean-trait-reference {
-  margin-top: 24px;
-}
-
-.trait-details {
-  margin: 8px 0;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-
-.trait-details summary {
-  padding: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.trait-details summary:hover {
-  background: var(--bg-elevated);
-}
-
-.trait-badge {
-  display: inline-flex;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 12px;
-  border: 2px solid var(--trait-color, var(--accent));
-  color: var(--trait-color, var(--accent));
-}
-
-.trait-content {
-  padding: 12px 16px;
-  border-top: 1px solid var(--border);
-}
-
-/* OCEAN validator panel enhanced */
-.ocean-validator-panel .validator-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.ocean-validator-panel .validator-actions button {
-  padding: 8px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--bg-elevated);
-  color: var(--text);
-  cursor: pointer;
-  transition: background var(--transition-fast);
-}
-
-.ocean-validator-panel .validator-actions button:hover {
-  background: var(--bg-surface);
-}
-
-.ocean-validator-panel .validator-actions button.btn-primary {
-  background: var(--accent);
-  color: var(--bg-elevated);
-}
-
-.ocean-validator-details {
-  margin-top: 12px;
-  padding: 12px;
-  background: var(--bg-elevated);
-  border-radius: 4px;
-  font-size: 0.9em;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #ocean-svg .ocean-node,
-  #ocean-svg .ocean-profile {
-    transition: none;
-  }
-  #ocean-svg .ocean-node:hover circle,
-  #ocean-svg .ocean-node.active circle {
-    filter: none;
-  }
-}

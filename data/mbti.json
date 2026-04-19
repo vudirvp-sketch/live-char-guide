@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "temperaments": {
+    "NT": {"name": "Рационалы", "color": "#8b5cf6", "description": "Аналитики, стратеги, инноваторы"},
+    "NF": {"name": "Идеалисты", "color": "#ec4899", "description": "Эмпаты, визионеры, гармонизаторы"},
+    "SJ": {"name": "Стражи", "color": "#3b82f6", "description": "Организаторы, традиционалисты, надёжные"},
+    "SP": {"name": "Ремесленники", "color": "#f97316", "description": "Практики, адаптивные, спонтанные"}
+  },
+  "types": [
+    {
+      "code": "INTJ",
+      "name": "Стратег",
+      "temperament": "NT",
+      "hint": "Визионер, стратег, независимый мыслитель",
+      "cognitive_functions": ["Ni", "Te", "Fi", "Se"],
+      "description": "Долгосрочное планирование, системное мышление, независимость"
+    },
+    {
+      "code": "INTP",
+      "name": "Учёный",
+      "temperament": "NT",
+      "hint": "Логик, аналитик, искатель истины",
+      "cognitive_functions": ["Ti", "Ne", "Si", "Fe"],
+      "description": "Теоретизирование, анализ систем, поиск понимания"
+    },
+    {
+      "code": "ENTJ",
+      "name": "Командир",
+      "temperament": "NT",
+      "hint": "Лидер, организатор, эффективный",
+      "cognitive_functions": ["Te", "Ni", "Se", "Fi"],
+      "description": "Стратегическое лидерство, эффективность, реализация"
+    },
+    {
+      "code": "ENTP",
+      "name": "Новатор",
+      "temperament": "NT",
+      "hint": "Визионер, дебатёр, генератор идей",
+      "cognitive_functions": ["Ne", "Ti", "Fe", "Si"],
+      "description": "Инновации, мозговой штурм, адаптивность"
+    },
+    {
+      "code": "INFJ",
+      "name": "Адвокат",
+      "temperament": "NF",
+      "hint": "Идеалист, защитник, глубокий эмпат",
+      "cognitive_functions": ["Ni", "Fe", "Ti", "Se"],
+      "description": "Глубокое понимание людей, альтруизм, видение"
+    },
+    {
+      "code": "INFP",
+      "name": "Посредник",
+      "temperament": "NF",
+      "hint": "Идеалист, мечтатель, аутентичный",
+      "cognitive_functions": ["Fi", "Ne", "Si", "Te"],
+      "description": "Поиск смысла, аутентичность, творчество"
+    },
+    {
+      "code": "ENFJ",
+      "name": "Тренер",
+      "temperament": "NF",
+      "hint": "Харизматичный лидер, эмпат, вдохновитель",
+      "cognitive_functions": ["Fe", "Ni", "Se", "Ti"],
+      "description": "Вдохновение других, гармония, лидерство"
+    },
+    {
+      "code": "ENFP",
+      "name": "Борец",
+      "temperament": "NF",
+      "hint": "Энтузиаст, творец, свободный дух",
+      "cognitive_functions": ["Ne", "Fi", "Te", "Si"],
+      "description": "Энтузиазм, возможности, связь с людьми"
+    },
+    {
+      "code": "ISTJ",
+      "name": "Инспектор",
+      "temperament": "SJ",
+      "hint": "Надёжный, организованный, ответственный",
+      "cognitive_functions": ["Si", "Te", "Fi", "Ne"],
+      "description": "Порядок, ответственность, традиции"
+    },
+    {
+      "code": "ISFJ",
+      "name": "Защитник",
+      "temperament": "SJ",
+      "hint": "Заботливый, преданный, тихий труженик",
+      "cognitive_functions": ["Si", "Fe", "Ti", "Ne"],
+      "description": "Забота о других, надёжность, лояльность"
+    },
+    {
+      "code": "ESTJ",
+      "name": "Менеджер",
+      "temperament": "SJ",
+      "hint": "Организованный, прямой, исполнительный",
+      "cognitive_functions": ["Te", "Si", "Ne", "Fi"],
+      "description": "Управление, структура, эффективность"
+    },
+    {
+      "code": "ESFJ",
+      "name": "Консул",
+      "temperament": "SJ",
+      "hint": "Общительный, заботливый, организатор",
+      "cognitive_functions": ["Fe", "Si", "Ne", "Ti"],
+      "description": "Социальная гармония, забота, традиция"
+    },
+    {
+      "code": "ISTP",
+      "name": "Виртуоз",
+      "temperament": "SP",
+      "hint": "Практик, аналитик, мастер",
+      "cognitive_functions": ["Ti", "Se", "Ni", "Fe"],
+      "description": "Практические навыки, анализ, адаптивность"
+    },
+    {
+      "code": "ISFP",
+      "name": "Артист",
+      "temperament": "SP",
+      "hint": "Чувствительный, эстет, свободный",
+      "cognitive_functions": ["Fi", "Se", "Ni", "Te"],
+      "description": "Эстетика, аутентичность, спонтанность"
+    },
+    {
+      "code": "ESTP",
+      "name": "Предприниматель",
+      "temperament": "SP",
+      "hint": "Деятель, рискованный, прямой",
+      "cognitive_functions": ["Se", "Ti", "Fe", "Ni"],
+      "description": "Действие, риск, момент"
+    },
+    {
+      "code": "ESFP",
+      "name": "Развлекатель",
+      "temperament": "SP",
+      "hint": "Энтузиаст, спонтанный, жизнерадостный",
+      "cognitive_functions": ["Se", "Fi", "Te", "Ni"],
+      "description": "Жизнь в моменте, развлечение, люди"
+    }
+  ],
+  "axes": [
+    {
+      "id": "EI",
+      "name": "Экстраверсия — Интроверсия",
+      "left": {"code": "E", "name": "Экстраверсия", "description": "Внешний мир, люди, действие"},
+      "right": {"code": "I", "name": "Интроверсия", "description": "Внутренний мир, идеи, рефлексия"}
+    },
+    {
+      "id": "SN",
+      "name": "Сенсорика — Интуиция",
+      "left": {"code": "S", "name": "Сенсорика", "description": "Факты, детали, настоящее"},
+      "right": {"code": "N", "name": "Интуиция", "description": "Паттерны, возможности, будущее"}
+    },
+    {
+      "id": "TF",
+      "name": "Мышление — Чувство",
+      "left": {"code": "T", "name": "Мышление", "description": "Логика, анализ, объективность"},
+      "right": {"code": "F", "name": "Чувство", "description": "Ценности, гармония, эмпатия"}
+    },
+    {
+      "id": "JP",
+      "name": "Суждение — Восприятие",
+      "left": {"code": "J", "name": "Суждение", "description": "Структура, планы, завершение"},
+      "right": {"code": "P", "name": "Восприятие", "description": "Гибкость, спонтанность, открытость"}
+    }
+  ]
+}
