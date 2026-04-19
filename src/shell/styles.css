@@ -1726,6 +1726,20 @@ ennea-embed {
   color: var(--temperament-sp);
 }
 
+/* Temperament cell colors (MBTI table in Part 5) */
+td.temperament-nt {
+  background: rgba(124, 77, 255, 0.2);
+}
+td.temperament-nf {
+  background: rgba(255, 107, 157, 0.2);
+}
+td.temperament-sj {
+  background: rgba(77, 195, 255, 0.2);
+}
+td.temperament-sp {
+  background: rgba(255, 184, 77, 0.2);
+}
+
 .temperament-desc {
   font-size: 0.9em;
   color: var(--text-muted);
