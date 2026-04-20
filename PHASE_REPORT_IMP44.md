@@ -391,4 +391,91 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 
 ---
 
-*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–5 COMPLETED. Phases 6–14 pending.*
+*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–6 COMPLETED. Phases 7–14 pending.*
+
+---
+
+## Content Restoration — Phase 6 (2026-04-21)
+
+> **Plan Reference:** `content-restoration-implementation-plan-v2.1.md`
+> **Date:** 2026-04-21
+> **Session Status:** Content Restoration Phases 0–6 COMPLETED.
+
+### Phase 6: Part 7 — CORE DIRECTIVES System ✅
+
+**File modified:** `src/master/part_07_technical.html`
+
+**Sections Added:**
+- `p7_core_directives` (l2) — Unified 5-directive system (SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY, INFLUENCE BOUNDARY) with detailed explanations + SPATIAL LOCK antipattern-card + IMP-48 bidirectional sync callout
+- `p7_core_directives_l3` (l3) — Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER) with cross-references to Part 4 and Part 7
+- `p7_tone_frame` (l2) — Tone Frame definition with 4 setting examples (Мрачный, Фэнтези, Современный реализм, Абсурд) + dual-function callout.tip
+- `p7_ooc_protection` (l3) — OOC Protection SP block (~15 tokens)
+- `p7_immersion_boundary` (l3) — Advanced OOC protection with antipattern-card (with vs without Immersion Boundary)
+- `p7_authors_note_l3` (l3) — 4-section AN template with GHOST-activation
+- `p7_sp_template_l3` (l3) — Full L3 SP template with all 7 directives + Tone Frame + OOC Protection
+- `p7_model_checklist` (l2) — Summary table by model type (12B–14B / 32B+ / API)
+
+**Sections Modified:**
+- `p7_system_prompt` — Replaced L2 SP template with unified version including CORE_DIRECTIVES block + two-line anti-godmoding (negative + positive). Added positive formulation justification (+15–20% compliance on 12B). Added SP Template Unification Rule (F2) with complete structure. Added layer-remark reference to p7_sp_template_l3. Updated layer inclusion comment.
+- `p7_sampling_params` — Added Ollama/LM Studio warning callout.warn (hardcoded PP=0.7, recommended alternatives: KoboldCPP, TabbyAPI, vLLM)
+- `p7_format_lock` — Replaced 3-column table with 4-column table (System / Формат действия / Формат речи / Пример) with Russian examples. Added callout.important "Почему нельзя смешивать" with Pattern Matcher explanation. Added callout.important "Правило разрешения конфликта" (Examples > SP directives).
+- `p7_authors_note` — Added 3-section AN template (State / WANT→NEED / Blind Spot). Updated example AN to match template structure. Added layer-remark reference to p7_authors_note_l3.
+- `p7_lorebook` — Added recommended parameter table (Depth / Probability / Cooldown for GHOST-факты vs Мировые записи). Added interactive details block with Elena GHOST-fact Lorebook example. Replaced inline layer-switch with layer-remark format.
+
+**Actions performed:**
+1. Added p7_core_directives section after p7_system_prompt (5 directives with detailed explanations, cross-references to Part 2 and Part 4)
+2. Added p7_core_directives_l3 section after p7_core_directives (directives 6–7)
+3. Replaced L2 SP template with unified version containing CORE_DIRECTIVES block
+4. Added positive anti-godmoding formulation justification
+5. Added SP Template Unification Rule (F2)
+6. Added p7_tone_frame section (4 examples + dual-function explanation)
+7. Added p7_ooc_protection section (L3)
+8. Added p7_immersion_boundary section with antipattern-card (L3)
+9. Expanded p7_format_lock with 3 markup system details + Pattern Matcher explanation + conflict resolution
+10. Added 3-section AN template to p7_authors_note
+11. Added p7_authors_note_l3 section (4-section with GHOST-activation)
+12. Added p7_sp_template_l3 section (complete L3 SP template)
+13. Added Lorebook recommended parameters table + Elena GHOST-fact example
+14. Added Ollama/LM Studio PP=0.7 warning to p7_sampling_params
+15. Added p7_model_checklist section (model-type summary table)
+
+### Build & Validation Results
+
+| Check | Status |
+|-------|--------|
+| Build passes (103 sections) | ✅ |
+| No duplicate data-section IDs | ✅ |
+| No prohibited elements | ✅ |
+| No prohibited translations | ✅ |
+| Visual components from registry | ✅ |
+| Heading hierarchy correct | ✅ |
+| Character examples match Bible | ✅ |
+| data-layer-switch references valid | ✅ (fixed p4_spine_mapping: changed 3#→href) |
+| Forward references from Phase 2 now resolved | ✅ (p7_core_directives exists at L2) |
+| Markdown syntax check | ⚠️ False positive: `*действие*` in Format Lock table = format notation, not Markdown |
+| Duplicate content check | ⚠️ L1 SP template appears in both Part 1 and Part 7 — expected, per architectural design |
+
+### SELF-CHECK
+
+- [x] No duplication beyond one-sentence references (IMP-5)
+- [x] All new data-section IDs unique across entire guide
+- [x] All cross-references follow DAG direction
+- [x] No Markdown syntax in HTML (IMP-41) — false positive only
+- [x] No inline styles (IMP-23)
+- [x] Only registry components used
+- [x] Language rules followed (Russian prose, English SP directives per terminology_dictionary)
+- [x] Card examples use bracket format where applicable (IMP-46) — no card examples in this phase
+- [x] Content layer assignments follow layer-restructure-plan-v3 (IMP-47)
+- [x] All new cross-references are bidirectional (IMP-48):
+  - p7_core_directives ↔ p2_embodiment (both link to each other)
+  - p7_core_directives ↔ p2_env_reactivity (both link to each other)
+  - p7_core_directives ↔ p2_anchor_rules / INFLUENCE BOUNDARY (both link)
+  - p7_core_directives_l3 ↔ p4_spine_mapping (p4 references CONSEQUENCE DRIVEN, p7_l3 links back)
+- [x] Build passes: YES
+
+### Section Count Update
+
+| Part | Before (Phases 0–5) | After (Phase 6) | Change |
+|------|---------------------|-----------------|--------|
+| Part 7 | 10 sections | 18 sections | +8 (p7_core_directives, p7_core_directives_l3, p7_tone_frame, p7_ooc_protection, p7_immersion_boundary, p7_authors_note_l3, p7_sp_template_l3, p7_model_checklist) |
+| **Total** | **95 sections** | **103 sections** | **+8 sections** |
