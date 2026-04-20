@@ -391,7 +391,7 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 
 ---
 
-*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–6 COMPLETED. Phases 7–14 pending.*
+*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–7 COMPLETED. Phases 8–14 pending.*
 
 ---
 
@@ -479,3 +479,55 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 |------|---------------------|-----------------|--------|
 | Part 7 | 10 sections | 18 sections | +8 (p7_core_directives, p7_core_directives_l3, p7_tone_frame, p7_ooc_protection, p7_immersion_boundary, p7_authors_note_l3, p7_sp_template_l3, p7_model_checklist) |
 | **Total** | **95 sections** | **103 sections** | **+8 sections** |
+
+---
+
+## Content Restoration — Phase 7 (2026-04-21)
+
+> **Plan Reference:** `content-restoration-implementation-plan-v2.1.md`
+> **Date:** 2026-04-21
+> **Session Status:** Content Restoration Phases 0–7 COMPLETED.
+
+### Phase 7: Part 6 — CoT Enhancements ✅
+
+**File modified:** `src/master/part_06_cot.html`
+
+**Sections Modified:**
+- `p6_cot_tier3` — Added dissociation variant for Эллиот Алдерсон as `<details class="interactive">` block. The existing Tier 3 example (trust/paranoia scenario: "он врёт. все врут.") was preserved; the new dissociation variant (Mr. Robot / multiple personality scenario) was added as a supplementary example per plan §9.1.
+
+**Actions performed:**
+1. Added `<details class="interactive">` block with Эллиот Алдерсон dissociation CoT Tier 3 example after the existing trust/paranoia example in p6_cot_tier3
+
+### Build & Validation Results
+
+| Check | Status |
+|-------|--------|
+| Build passes (103 sections) | ✅ |
+| No duplicate data-section IDs | ✅ |
+| No prohibited elements | ✅ |
+| No prohibited translations | ✅ |
+| Visual components from registry | ✅ |
+| Heading hierarchy correct | ✅ |
+| Character examples match Bible | ✅ |
+| data-layer-switch references valid | ✅ |
+| No duplication between Tier 3 examples | ✅ (different scenarios: trust/paranoia vs dissociation) |
+
+### SELF-CHECK
+
+- [x] No duplication beyond one-sentence references (IMP-5)
+- [x] All new data-section IDs unique across entire guide
+- [x] All cross-references follow DAG direction
+- [x] No Markdown syntax in HTML (IMP-41)
+- [x] No inline styles (IMP-23)
+- [x] Only registry components used
+- [x] Language rules followed (Russian prose, English terms per terminology_dictionary)
+- [x] Card examples use bracket format where applicable (IMP-46) — no card examples in this phase
+- [x] Content layer assignments follow layer-restructure-plan-v3 (IMP-47)
+- [x] Build passes: YES
+
+### Section Count Update
+
+| Part | Before (Phases 0–6) | After (Phase 7) | Change |
+|------|---------------------|-----------------|--------|
+| Part 6 | 6 sections | 6 sections | 0 (modified only, no new sections) |
+| **Total** | **103 sections** | **103 sections** | **+0 sections** |
