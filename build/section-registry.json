@@ -29,6 +29,16 @@
     "part": 1,
     "topic": ""
   },
+  "p1_l2_bridge": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_l3_bridge": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
   "p2_basic_anchors": {
     "layer": "l1",
     "part": 2,
@@ -55,11 +65,6 @@
     "topic": ""
   },
   "p2_sensory_anchors": {
-    "layer": "l3",
-    "part": 2,
-    "topic": ""
-  },
-  "p2_cot_anchors": {
     "layer": "l3",
     "part": 2,
     "topic": ""
@@ -99,6 +104,11 @@
     "part": 3,
     "topic": ""
   },
+  "p3_multi_char": {
+    "layer": "l3",
+    "part": 3,
+    "topic": ""
+  },
   "p4_spine_overview": {
     "layer": "l2",
     "part": 4,
@@ -120,12 +130,12 @@
     "topic": ""
   },
   "p4_lie": {
-    "layer": "l2",
+    "layer": "l3",
     "part": 4,
     "topic": ""
   },
   "p4_ghost": {
-    "layer": "l2",
+    "layer": "l3",
     "part": 4,
     "topic": ""
   },
@@ -144,10 +154,20 @@
     "part": 4,
     "topic": ""
   },
+  "p4_l1_bridge": {
+    "layer": "l1",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_l3_spine_full": {
+    "layer": "l3",
+    "part": 4,
+    "topic": ""
+  },
   "p4_l2_quickstart": {
     "layer": "l2",
     "part": 4,
-    "topic": "L2 Quickstart 30-минутный конвейер"
+    "topic": ""
   },
   "p5_ocean_basics": {
     "layer": "l2",
@@ -194,13 +214,23 @@
     "part": 5,
     "topic": ""
   },
+  "p5_l1_bridge": {
+    "layer": "l1",
+    "part": 5,
+    "topic": ""
+  },
+  "p6_l1_bridge": {
+    "layer": "l1",
+    "part": 6,
+    "topic": ""
+  },
   "p6_cot_basics": {
-    "layer": "l2",
+    "layer": "l3",
     "part": 6,
     "topic": "Chain of Thought (CoT)"
   },
   "p6_cot_tiers": {
-    "layer": "l2",
+    "layer": "l3",
     "part": 6,
     "topic": ""
   },
@@ -222,7 +252,12 @@
   "p6_l3_quickstart": {
     "layer": "l3",
     "part": 6,
-    "topic": "L3 Quickstart 60-минутный конвейер"
+    "topic": ""
+  },
+  "p7_l1_bridge": {
+    "layer": "l1",
+    "part": 7,
+    "topic": ""
   },
   "p7_system_prompt": {
     "layer": "l2",
@@ -232,7 +267,7 @@
   "p7_sampling_params": {
     "layer": "l2",
     "part": 7,
-    "topic": "Параметры генерации (Sampling)"
+    "topic": ""
   },
   "p7_format_lock": {
     "layer": "l2",
@@ -349,6 +384,16 @@
     "part": 8,
     "topic": ""
   },
+  "p8_l1_bridge": {
+    "layer": "l1",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap15_extended": {
+    "layer": "l3",
+    "part": 8,
+    "topic": ""
+  },
   "p9_troubleshooting": {
     "layer": "l1",
     "part": 9,
@@ -395,6 +440,11 @@
     "topic": ""
   },
   "p10_geralt_l2": {
+    "layer": "l2",
+    "part": 10,
+    "topic": ""
+  },
+  "p10_edward_l2": {
     "layer": "l2",
     "part": 10,
     "topic": ""

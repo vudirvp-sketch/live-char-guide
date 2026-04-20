@@ -1438,7 +1438,7 @@ body.content-wide pre {
 }
 
 /* === ENNEAGRAM EMBED === */
-ennea-embed {
+.ennea-embed {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   padding: 0.4em 0.8em 1.4em;
 }
