@@ -5,14 +5,34 @@ on:
     branches: [main]
     paths:
       - 'src/**'
+      - 'assets/**'
+      - 'build/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - 'index.html'
+      - 'layer-config.json'
+      - 'eslint.config.js'
   pull_request:
     branches: [main]
     paths:
       - 'src/**'
+      - 'assets/**'
+      - 'build/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/**'
       - 'package.json'
-      - '.github/workflows/build-artifact.yml'
+      - 'pnpm-lock.yaml'
+      - 'index.html'
+      - 'layer-config.json'
+      - 'eslint.config.js'
   workflow_dispatch:
 
 jobs:

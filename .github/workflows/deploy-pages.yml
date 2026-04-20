@@ -5,9 +5,18 @@ on:
     branches: [main]
     paths:
       - 'src/**'
+      - 'assets/**'
+      - 'build/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - 'tests/**'
       - '.github/workflows/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - 'index.html'
+      - 'layer-config.json'
+      - 'eslint.config.js'
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
