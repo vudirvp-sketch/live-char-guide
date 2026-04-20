@@ -1,8 +1,8 @@
 # Live Character Guide Architecture
 
-> **Version:** 6.1
-> **Last Updated:** 2026-04-20
-> **Status:** Draft for Stage 0a
+> **Version:** 6.2
+> **Last Updated:** 2026-04-21
+> **Status:** Draft for Stage 0a (synced with Content Restoration Phases 0–13)
 
 ---
 
@@ -54,7 +54,7 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files with `data-layer` markup (91 sections post-restructure) | Authors writing Parts |
+| `src/master/` | Author | Master guide HTML files with `data-layer` markup (109 sections post-content-restoration) | Authors writing Parts |
 | `src/shell/` | Infrastructure | HTML/CSS/JS shell (loader, styles, panels) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
 | `docs/` | Author | Documentation (not included in build) | Authors |
@@ -126,8 +126,8 @@ L1 ⊂ L2 ⊂ L3
 ```
 
 - **L1 (Минимальный/Basic):** ~15 min read, 400-800 tokens/card — basic blocks, anchors, Voice Isolation, Quickstart + bridges to ALL other topics
-- **L2 (Глубокий/Deep):** ~30 min read, 800-1500 tokens/card (includes all L1 content) — SPINE (WANT/NEED/FLAW), FLAW-linked anchors, OCEAN/Enneagram/MBTI, AP-1–AP-7 + AP-15 basic
-- **L3 (Экспертный/Expert):** ~60 min read, 1500+ tokens/card (includes all L1 + L2 content) — +LIE/GHOST/GHOST Layers, CoT all Tiers, XML/API/4K-Fallback, AP-8–AP-14, AP-15 extended, multi-character
+- **L2 (Глубокий/Deep):** ~30 min read, 800-1500 tokens/card (includes all L1 content) — SPINE (WANT/NEED/FLAW), FLAW-linked anchors, OCEAN/Enneagram/MBTI, CORE DIRECTIVES (5 directives), Tone Frame, AP-1–AP-7 + AP-15 basic + AP-16
+- **L3 (Экспертный/Expert):** ~60 min read, 1500+ tokens/card (includes all L1 + L2 content) — +LIE/GHOST/GHOST Layers, CoT all Tiers, CORE DIRECTIVES 6–7, OOC Protection, Immersion Boundary, XML/API/4K-Fallback, AP-8–AP-14, AP-15 extended, multi-character, Pre-Deploy Validation
 
 ### Layer Markup in Master HTML
 
@@ -164,9 +164,33 @@ Examples:
 
 ---
 
+## CORE DIRECTIVES Architecture
+
+CORE DIRECTIVES is a unified directive system for the System Prompt, consisting of 7 items:
+
+| # | Directive | Layer | Function |
+|---|-----------|-------|----------|
+| 1 | SHOW NEVER TELL | L2 | Demonstrate through behavior, don't describe |
+| 2 | EMBODIMENT FIRST | L2 | State → Body → Sensor → Speech |
+| 3 | SPATIAL & ANATOMICAL LOCK | L2 | Prevent teleportation/anatomical errors |
+| 4 | ENVIRONMENTAL REACTIVITY | L2 | Sensory details only through character action |
+| 5 | INFLUENCE BOUNDARY | L2 | React to observable symptoms only |
+| 6 | CONSEQUENCE DRIVEN | L3 | WANT→NEED shift as Price accumulates |
+| 7 | PRE-GENERATION FILTER | L3 | 4-item self-check before response |
+
+**Directive Language Rule:** All directives in the CORE_DIRECTIVES block of the System Prompt are written in **English**, per terminology_dictionary.md convention. Guide prose explaining these directives is in **Russian**.
+
+**Bracket Format (IMP-46):** All character card examples across ALL layers use bracket format `[SYSTEM]/[DESCRIPTION]/[EXAMPLES]/[ANCHORS]`. XML tags (`<spine>`, `<ghost_layers>`, etc.) are used INSIDE Description for structural markup at L2+, but the outer block delimiters are always brackets.
+
+**Layer-Flexibility Principle (IMP-47):** Content layer assignments follow `layer-restructure-plan-v3.md`, not the original v6-plan. Content is never rejected based on prior layer assignments. If layer-restructure moved a concept to L3, the content is restored AT L3.
+
+**Bidirectional Cross-Reference (IMP-48):** When section A references section B, section B MUST reference back to A. Unidirectional references create orphan knowledge. Verified in Phase 11 sync-audit and maintained in `docs/cross_reference_sync.md`.
+
+---
+
 ## Link Direction (DAG Model)
 
-Links flow **unidirectionally from complex to simple**:
+Links flow **unidirectionally from complex to simple** (with IMP-48 bidirectional cross-references for navigation):
 
 ```
 Part 4 (SPINE) ──can reference──▶ Part 2 (Anchors)
@@ -332,8 +356,11 @@ live-char-guide/
 │   ├── architecture.md
 │   ├── character_bible.md
 │   ├── content_map.md
+│   ├── content_restoration_changelog.md
+│   ├── cross_reference_sync.md
 │   ├── user_journeys.md
 │   ├── components.md
+│   ├── migration_map.md
 │   ├── shell-components.md
 │   └── terminology_dictionary.md
 ├── scripts/              # Build and validation scripts
@@ -365,8 +392,8 @@ A layer restructure was performed to create qualitative differences between laye
 | LIE, GHOST | `data-layer="l2"` | `data-layer="l3"` |
 | CoT basics, CoT tiers | `data-layer="l2"` | `data-layer="l3"` |
 | Part 6 (CoT) | Mixed L2+L3 | L3-only content (+ L1 bridge) |
-| L1 sections | ~6 (5 Parts had zero L1) | 23 (all 10 Parts have L1 via bridges) |
-| Total sections | 81 | 91 |
+| L1 sections | ~6 (5 Parts had zero L1) | 27 (all 10 Parts have L1 via bridges + new content) |
+| Total sections | 81 | 109 (91 after restructure + 18 after content restoration) |
 
 **SPINE split rule:** On L2, SPINE = WANT/NEED/FLAW only. LIE and GHOST are L3-only. L1 bridge sections exist in all 10 Parts so readers know these topics exist.
 

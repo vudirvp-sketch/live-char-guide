@@ -1,8 +1,8 @@
 # Migration Map — Live Character Guide v5.12 → v6
 
-> **Version:** 3.0
-> **Last Updated:** 2026-04-20
-> **Status:** Tracking Document (updated for layer restructure)
+> **Version:** 3.1
+> **Last Updated:** 2026-04-21
+> **Status:** Tracking Document (updated for content restoration Phases 0–13)
 
 ---
 
@@ -321,3 +321,96 @@ After Stage 4 (Layer Validation):
 
 *Document prepared for Live Character Guide v6 rebuild project*
 *Updated 2026-04-20: synchronized with actual master HTML data-section IDs*
+*Updated 2026-04-21: Content Restoration entries added (Phases 0–13)*
+
+---
+
+## Content Restoration Entries
+
+The following changes were made during the content restoration (`content-restoration-implementation-plan-v2.1.md`, Phases 0–13):
+
+### New Sections Added (Content Restoration)
+
+| data-section ID | Layer | Part | Description | Phase | Cross-refs |
+|-----------------|-------|------|-------------|-------|------------|
+| p1_token_pipeline | l1 | Part 1 | 10-step token budget pipeline table + context size budget table | Phase 1 | → p1_block_budget, ← p1_layer_comparison |
+| p1_block_budget | l1 | Part 1 | Min/Standard/Max budget table per block + per layer | Phase 1 | → p1_token_pipeline, ← p1_layer_comparison |
+| p1_conclusion | l1 | Part 1 | Key rules reminder table + "what you now know" list by layer | Phase 1 | ← p1_l3_bridge, → p9_basic_checklist |
+| p2_env_reactivity | l2 | Part 2 | ENVIRONMENTAL REACTIVITY directive: sensory details only through action | Phase 2 | → p7_core_directives, ← p7_core_directives |
+| p7_core_directives | l2 | Part 7 | Unified 5-directive system (SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, ENVIRONMENTAL REACTIVITY, INFLUENCE BOUNDARY) | Phase 6 | → p2_embodiment, p2_anchor_rules, p4_spine_mapping; ← p2_env_reactivity, p2_anchor_rules, p4_spine_mapping |
+| p7_core_directives_l3 | l3 | Part 7 | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER) | Phase 6 | → p4_spine_mapping, p7_core_directives; ← p4_spine_mapping |
+| p7_tone_frame | l2 | Part 7 | Tone Frame definition with 4 setting examples | Phase 6 | ← p7_system_prompt |
+| p7_ooc_protection | l3 | Part 7 | OOC Protection SP block (~15 tokens) | Phase 6 | ← p7_system_prompt |
+| p7_immersion_boundary | l3 | Part 7 | Advanced OOC protection with antipattern-card | Phase 6 | ← p7_system_prompt |
+| p7_authors_note_l3 | l3 | Part 7 | 4-section AN template with GHOST-activation | Phase 6 | ← p7_authors_note |
+| p7_sp_template_l3 | l3 | Part 7 | Full L3 System Prompt template with all 7 directives | Phase 6 | ← p7_system_prompt |
+| p7_model_checklist | l2 | Part 7 | Summary table by model type (12B/32B+/API) | Phase 6 | ← p7_sampling_params |
+| p8_ap16_nested_anchors | l2 | Part 8 | AP-16: Nested Anchors — anchor chains → unpredictability | Phase 8 | ← p8_l1_bridge |
+| p9_one_change_rule | l1 | Part 9 | Rule: never change >1 parameter at a time | Phase 9 | → p9_decision_tree, ← p1_conclusion |
+| p9_decision_tree | l2 | Part 9 | Branching symptom→check→fix table (7 paths) | Phase 9 | ← p9_symptom_table |
+| p9_element_scenario_map | l2 | Part 9 | Dynamic element → test scenario + verification mapping | Phase 9 | ← p9_test_scenarios |
+| p9_test_requirements | l2 | Part 9 | Per-layer minimum test scenarios + 6 success metrics | Phase 9 | ← p9_element_scenario_map |
+| p9_pre_deploy | l3 | Part 9 | Quick Check (5 items) + Full Check (14 items) | Phase 9 | ← p9_layer_transition |
+| p10_walter_l2 | l2 | Part 10 | Уолтер Уайт L2 card (~950 tokens) with WANT/NEED/FLAW | Phase 10 | ← character_bible #3 |
+
+### Modified Sections (Content Restoration)
+
+| data-section ID | Layer | Part | Change Description | Phase |
+|-----------------|-------|------|--------------------|-------|
+| p1_card_overview | l1 | Part 1 | Added "поведенческий движок" metaphor | Phase 1 |
+| p1_core_rules | l1 | Part 1 | Added Pattern Matcher foundational principle + explanation table | Phase 1 |
+| p1_top3_problems | l1 | Part 1 | Fixed data-layer-switch validation error | Phase 1 |
+| p2_anchor_rules | l1/l2 | Part 2 | Expanded Price definition, added counter-example, Price typology, INFLUENCE BOUNDARY | Phase 2 |
+| p2_embodiment | l2 | Part 2 | Replaced basic pipeline with expanded EMBODIMENT FIRST protocol | Phase 2 |
+| p4_ghost | l3 | Part 4 | Fixed GHOST definition (removed "травма"), added prohibited words, antipattern-card | Phase 3 |
+| p4_flaw | l2 | Part 4 | Added transformation examples table (Прилагательное → Поведение) | Phase 3 |
+| p4_spine_overview | l2 | Part 4 | Added motivational phrase, "наблюдаемые единицы" table, CONSEQUENCE DRIVEN | Phase 3 |
+| p4_spine_mapping | l2 | Part 4 | Added mnemonic infographic, L3 bridge link, CONSEQUENCE DRIVEN callout | Phase 3 |
+| p3_influence_hierarchy | l1 | Part 3 | Replaced simple table with 3-column model-size table (12B/32B+/API) | Phase 4 |
+| p3_voice_isolation | l1 | Part 3 | Added imperative formula: "Не объясняй голос — покажи его" | Phase 4 |
+| p3_examples_rules | l2 | Part 3 | Added Voice Contamination warning | Phase 4 |
+| p3_voice_leak | l2 | Part 3 | Added Narrator Bleed sub-category with table and antipattern-card | Phase 4 |
+| p3_joker_case | l2 | Part 3 | Added "Тест мастеринга" pedagogical enhancement | Phase 4 |
+| p3_greeting | l2 | Part 3 | Expanded from 3-step to 4-step pipeline, added sensory anchor concept | Phase 4 |
+| p5_ocean_basics | l2 | Part 5 | Strengthened golden rule, renamed to "Золотое правило профиля", added AP-15 cross-ref | Phase 5 |
+| p5_enneagram_wings | l3 | Part 5 | Added wing selection algorithm table with decision rule | Phase 5 |
+| p7_system_prompt | l2 | Part 7 | Replaced SP template with unified version (CORE_DIRECTIVES + positive anti-godmoding) | Phase 6 |
+| p7_sampling_params | l2 | Part 7 | Added Ollama/LM Studio PP=0.7 warning | Phase 6 |
+| p7_format_lock | l2 | Part 7 | Replaced with 4-column table, added Pattern Matcher explanation, conflict resolution | Phase 6 |
+| p7_authors_note | l2 | Part 7 | Added 3-section AN template, updated example | Phase 6 |
+| p7_lorebook | l2 | Part 7 | Added recommended parameter table + Elena GHOST-fact example | Phase 6 |
+| p6_cot_tier3 | l3 | Part 6 | Added dissociation variant for Эллиот Алдерсон | Phase 7 |
+| p8_ap6_no_anti_godmoding | l2 | Part 8 | Added visual example pair (antipattern-card) | Phase 8 |
+| p8_ap9_spine_broken | l3 | Part 8 | Added visual example pair | Phase 8 |
+| p8_ap10_cot_overload | l3 | Part 8 | Added visual example pair | Phase 8 |
+| p8_ap11_voice_bleed | l3 | Part 8 | Added bidirectional back-reference (IMP-48) to p3_multi_char | Phase 8 |
+| p8_ap15_basic | l2 | Part 8 | Added bidirectional back-reference (IMP-48) to p5_ocean_poles | Phase 8 |
+| p8_l1_bridge | l1 | Part 8 | Updated bridge text from "15 анти-паттернов" to "16 анти-паттернов" | Phase 8 |
+
+### Layer Changes (IMP-47 Note)
+
+Content moved between layers by `layer-restructure-plan-v3` (pre-dating content restoration):
+
+| data-section ID | Old Layer | New Layer | Type |
+|-----------------|-----------|-----------|------|
+| p4_lie | l2 | l3 | Layer change (restructure) |
+| p4_ghost | l2 | l3 | Layer change (restructure) |
+| p6_cot_basics | l2 | l3 | Layer change (restructure) |
+| p6_cot_tiers | l2 | l3 | Layer change (restructure) |
+
+These are NOT new sections — they are repositioned. If you read the guide before the restructure: GHOST and LIE are now on the Expert layer (L3), CoT basics and tiers are now L3-only.
+
+### Documentation Files Updated
+
+| File | Update Description |
+|------|--------------------|
+| docs/character_bible.md | Added Card refs (IMP-48), bracket format examples (IMP-46), AN template + Lorebook for Выщербленный |
+| docs/content_map.md | Fully rewritten with all 109 sections, statistics updated |
+| docs/terminology_dictionary.md | Added 14 new terms, (L3-only) annotations |
+| docs/migration_map.md | Added Content Restoration entries, this section |
+| docs/user_journeys.md | Updated with CORE DIRECTIVES, Voice Contamination, Pre-Deploy steps |
+| docs/architecture.md | Added CORE DIRECTIVES, IMP-46/47/48, section count update |
+| data/glossary.json | Added 12 new glossary entries |
+| data/character_schema.json | Added core_directives, tone_frame, ooc_protection, immersion_boundary, directive_language |
+| layer-config.json | Updated descriptions for L2/L3 |
+| docs/content_restoration_changelog.md | Created with 45-item traceability table |

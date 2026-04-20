@@ -1,8 +1,8 @@
 # User Journeys — Live Character Guide v6
 
-> **Version:** 2.0
-> **Last Updated:** 2026-04-20
-> **Status:** Draft (validated after Stage 1)
+> **Version:** 2.1
+> **Last Updated:** 2026-04-21
+> **Status:** Draft (synced with Content Restoration Phases 0–13)
 
 ---
 
@@ -50,6 +50,7 @@ This document describes what a reader **DOES** at each layer — not what conten
 │      • Test with one scenario                                   │
 │                                                                  │
 │  [6] Problem? → Part 9 Top-3 troubleshooting                    │
+│      • One Change Rule: change only 1 parameter at a time        │
 │      • If fixed → done                                          │
 │      • If deeper issue → data-layer-switch → L2                 │
 │                                                                  │
@@ -107,10 +108,13 @@ This document describes what a reader **DOES** at each layer — not what conten
 │      • FLAW-linked anchors                                      │
 │      • Embodiment protocol                                      │
 │      • 5-7 anchors with Price                                   │
+│      • ENVIRONMENTAL REACTIVITY directive                       │
+│      • INFLUENCE BOUNDARY: react only to observable symptoms    │
 │                                                                  │
 │  [4] Part 3 L2 sections → Write 3 Examples                      │
 │      • Neutral + Stress + Trust                                 │
 │      • Apply Tier quality criteria                              │
+│      • Voice Contamination check: never copy foreign <START>    │
 │                                                                  │
 │  [5] Part 5 (Psych Toolkit) → OCEAN Interactive Tool            │
 │      • Validate 1-2 extreme poles                               │
@@ -120,7 +124,13 @@ This document describes what a reader **DOES** at each layer — not what conten
 │  [6] L2 Quickstart → 30-minute pipeline                         │
 │      • Card ~950 tokens                                         │
 │                                                                  │
-│  [7] Test with 6 scenarios → Part 9 diagnostics                 │
+│  [7] Part 7 L2 → CORE DIRECTIVES in System Prompt               │
+│      • Add CORE_DIRECTIVES block to SP (5 directives)            │
+│      • Add Tone Frame for atmosphere (~25-30 tokens)             │
+│      • Verify Model Type Checklist for your model size           │
+│                                                                  │
+│  [8] Test with 6 scenarios → Part 9 diagnostics                 │
+│      • Decision Tree for structured debugging                    │
 │      • If model-specific issue → data-layer-switch → L3         │
 │                                                                  │
 │  EXIT: Working deep card (~950 tokens)                          │
@@ -180,6 +190,9 @@ This document describes what a reader **DOES** at each layer — not what conten
 │      • API blocks (Claude/GPT)                                  │
 │      • XML tags for structured Description                      │
 │      • Advanced Lorebook triggers                               │
+│      • CORE DIRECTIVES 6–7 (CONSEQUENCE DRIVEN, PRE-GEN FILTER) │
+│      • OOC Protection + Immersion Boundary                      │
+│      • L3 SP Template + L3 AN Template with GHOST-activation    │
 │                                                                  │
 │  [5] Part 5 L3 sections → OCEAN×Enneagram Matrix                │
 │      • Validate cross-correlations                              │
@@ -190,6 +203,11 @@ This document describes what a reader **DOES** at each layer — not what conten
 │                                                                  │
 │  [7] If 12B model → Part 9 diagnostics                          │
 │      • 4K-Fallback protocol if needed                           │
+│                                                                  │
+│  [8] Pre-Deploy Validation → Part 9 L3                          │
+│      • Quick Check (5 items: PP=0.0, voice only in Examples,    │
+│        Price in every anchor, Format Lock, anti-godmoding)       │
+│      • Full Check (14 items) if Quick Check passes              │
 │                                                                  │
 │  EXIT: Working expert card (~1500+ tokens)                      │
 │  NEXT: Can return to L1/L2 for simpler cards                    │
@@ -213,7 +231,14 @@ This document describes what a reader **DOES** at each layer — not what conten
 - Has GHOST Layers
 - Has CoT anchors
 - Has API blocks / XML tags
+- Has all 7 CORE DIRECTIVES in SP
+- Has OOC Protection and/or Immersion Boundary
+- Has passed Pre-Deploy Validation checklist
 - Can diagnose 12B-specific issues
+
+### IMP-47 Note: Repositioned Content
+
+Если вы читали гайд до реструктуризации: GHOST и LIE теперь на Экспертном слое (L3). CoT basics и tiers также перемещены на L3. Это не новое содержание — оно перемещено для создания качественного различия между слоями. L2 SPINE теперь содержит только WANT/NEED/FLAW.
 
 ---
 
@@ -239,6 +264,15 @@ Every L2 section must have an L1 mention or `data-layer-switch`. Every L3 sectio
 | L2 Part 4 (SPINE) | L3 Part 4 (full chain) | data-layer-switch | "Полный СПИН из 5 элементов → L3" |
 | L2 Part 5 (OCEAN) | L3 Part 5 (cross-matrix) | data-layer-switch | "OCEAN×Enneagram correlation → L3" |
 | L2 Part 7 (technical) | L3 Part 7 (4K-Fallback) | data-layer-switch | "Low-context adaptation → L3" |
+| L2 Part 2 (anchors) | L2 Part 7 (CORE DIRECTIVES) | data-layer-switch | "INFLUENCE BOUNDARY directive → Part 7" |
+| L2 Part 2 (env reactivity) | L2 Part 7 (CORE DIRECTIVES) | data-layer-switch | "ENVIRONMENTAL REACTIVITY directive → Part 7" |
+| L2 Part 4 (SPINE mapping) | L2 Part 7 (CORE DIRECTIVES) | data-layer-switch | "CONSEQUENCE DRIVEN → Part 7" |
+| L2 Part 4 (SPINE mapping) | L2 Part 7 (AN) | data-layer-switch | "WANT→NEED in AN → Part 7" |
+| L2 Part 7 (CORE DIRECTIVES) | L3 Part 7 (CD L3) | data-layer-switch | "Directives 6–7 (L3 extension) → L3" |
+| L1 Part 9 (troubleshooting) | L1 Part 9 (One Change Rule) | href | "Debugging principle → p9_one_change_rule" |
+| L3 Part 7 (OOC Protection) | L3 Part 7 (Immersion Boundary) | data-layer-switch | "Advanced OOC → L3" |
+| L2 Part 8 (AP-11 voice bleed) | L3 Part 3 (multi-char) | data-layer-switch | "Multi-char examples → L3" |
+| L2 Part 8 (AP-15 basic) | L2 Part 5 (OCEAN poles) | data-layer-switch | "Golden rule OCEAN → Part 5" |
 
 ### Dead End Check
 

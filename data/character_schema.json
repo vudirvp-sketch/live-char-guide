@@ -3,7 +3,7 @@
   "$id": "https://vudirvp-sketch.github.io/live-char-guide/schemas/character_schema.json",
   "title": "Live Character Guide - Character Card Schema",
   "description": "JSON Schema for character cards built according to the Live Character Guide methodology",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "type": "object",
   "properties": {
     "metadata": {
@@ -213,6 +213,12 @@
             "enabled": { "type": "boolean", "default": false, "description": "Enable Immersion Boundary in SP (L3-only)" },
             "content": { "type": "string", "description": "Immersion Boundary text — character denies meta-reality" }
           }
+        },
+        "directive_language": {
+          "type": "string",
+          "enum": ["english", "card_language"],
+          "default": "english",
+          "description": "Language for CORE_DIRECTIVES in SP. English is recommended for 12B models (better compliance)."
         }
       }
     },
@@ -323,9 +329,10 @@
   ],
 
   "token_budgets": {
-    "4K": { "card_budget": "300-400", "an": false, "lorebook": false, "cot": false },
-    "8K": { "card_budget": "600-800", "an": true, "lorebook": true, "cot": "limited" },
-    "16K": { "card_budget": "800-2500", "an": true, "lorebook": true, "cot": false }
+    "4K": { "card_budget": "430-580", "an": false, "lorebook": false, "cot": false, "notes": "L1 only, minimal SP" },
+    "8K": { "card_budget": "580-830", "an": true, "lorebook": false, "cot": false, "notes": "L1+L2 basics" },
+    "16K": { "card_budget": "800-1500", "an": true, "lorebook": true, "cot": false, "notes": "Full L2" },
+    "32K": { "card_budget": "1500+", "an": true, "lorebook": true, "cot": "limited", "notes": "Full L3" }
   },
 
   "test_scenarios": {
