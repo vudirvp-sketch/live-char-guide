@@ -30,7 +30,7 @@
     "validate:all": "node scripts/validate-master.mjs && node scripts/validate-layers.mjs && node scripts/validate-artifact.mjs"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.8.0",
+    "@axe-core/cli": "^4.11.2",
     "@eslint/js": "^10.0.1",
     "chokidar-cli": "^3.0.0",
     "eslint": "^10.2.0",
