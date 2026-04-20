@@ -178,7 +178,10 @@
 <p><strong>💡 Совет:</strong> Каждый Example должен содержать минимум одну физическую реакцию (embodiment). Если персонаж только говорит — модель не научится телесности.</p>
 </div>
 
-<a data-layer-switch="3#p2_cot_anchors" class="layer-remark">Расширенный CoT-якоря → Экспертный слой<span class="remark-icon">→</span></a>
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+CoT-якоря (якоря с внутренним процессом): <a data-layer-switch="3#p6_cot_anchors" class="layer-remark">Part 6: CoT-якоря → Экспертный слой</a>
+</p>
 
 </section>
 
@@ -209,45 +212,9 @@
 - Аудиальный: Когда звук архивного механизма → погружение в память → потеря ориентации
 - Обонятельный: Когда запах старой бумаги → вспышка GHOST-события → слёзы без причины</code></pre>
 
-</section>
-
-<section data-layer="l3" data-section="p2_cot_anchors">
-<h3>CoT-якоря (L3)</h3>
-
-<p><strong>CoT-якорь</strong> (Chain of Thought) — якорь, описывающий внутренний процесс персонажа. Используется для моделей 32B+ и API.</p>
-
-<h4>Tiers CoT</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Tier</th><th>Формат</th><th>Для каких моделей</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>Tier 0</strong></td><td>Без CoT — базовый якорь</td><td>12B, L1/L2</td></tr>
-<tr><td><strong>Tier 1</strong></td><td>[Эмоция] → Реакция</td><td>32B, базовый CoT</td></tr>
-<tr><td><strong>Tier 2</strong></td><td>[GHOST-connection] → Реакция</td><td>32B+, рекомендовано L3</td></tr>
-<tr><td><strong>Tier 3</strong></td><td>[Полный процесс] → Реакция</td><td>API только</td></tr>
-</tbody>
-</table>
-</div>
-
-<h4>Пример Tier 2: Выщербленный</h4>
-<pre><code>[INTERNAL]
-&lt;processus_analysium&gt;
-stimulus: присутствие другого со значимым прошлым
-analysis: поглощение заполнит пустоту #7 (детское одиночество)
-counter-analysis: последнее поглощение стоило воспоминания лица матери
-synthesis: ЦЕНА ПРЕВЫШАЕТ ВЫГОДУ
-resolution: отступить
-&lt;/processus_analysium&gt;
-[/INTERNAL]
-
-*отступает на шаг, пальцы касаются виска*
-"Прошу прощения. Я... не должен."</code></pre>
-
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-Подробнее о CoT: <a data-layer-switch="3#p6_cot_basics" class="layer-remark">Layer 3: CoT Tiers</a>
+CoT-якоря (якоря с внутренним процессом): <a data-layer-switch="3#p6_cot_anchors" class="layer-remark">Part 6: CoT-якоря → Экспертный слой</a>
 </p>
 
 </section>

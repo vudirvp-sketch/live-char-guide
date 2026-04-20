@@ -7,7 +7,7 @@
 <section data-layer="l2" data-section="p4_spine_overview">
 <h2>SPINE Framework</h2>
 
-<p><strong>SPINE</strong> — фреймворк из 5 элементов, который связывает мотивацию персонажа с его поведением. SPINE даёт якорям причину существовать, а не быть набором случайных правил.</p>
+<p><strong>SPINE</strong> — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. SPINE даёт якорям причину существовать, а не быть набором случайных правил.</p>
 
 <blockquote>
 <p><strong>SPINE даёт персонажу причину.</strong> Без него — набор реакций без ядра.</p>
@@ -29,17 +29,12 @@
 <div class="inf-step-label">FLAW</div>
 <div class="inf-step-desc">Дефект поведения</div>
 </div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">L</div>
-<div class="inf-step-label">LIE</div>
-<div class="inf-step-desc">Ложная установка</div>
 </div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G</div>
-<div class="inf-step-label">GHOST</div>
-<div class="inf-step-desc">Событие прошлого</div>
-</div>
-</div>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+LIE (ложная установка) и GHOST (событие прошлого) — продвинутые элементы СПИН, доступные на Экспертном слое: <a data-layer-switch="3#p4_l3_spine_full" class="layer-remark">Полный СПИН из 5 элементов → Экспертный слой</a>
+</p>
 
 </section>
 
@@ -134,7 +129,7 @@
 
 </section>
 
-<section data-layer="l2" data-section="p4_lie">
+<section data-layer="l3" data-section="p4_lie">
 <h3>LIE (Ложная установка)</h3>
 
 <p><strong>LIE</strong> — ложное убеждение, которое персонаж носит в себе. Обычно связано с GHOST.</p>
@@ -163,7 +158,7 @@
 
 </section>
 
-<section data-layer="l2" data-section="p4_ghost">
+<section data-layer="l3" data-section="p4_ghost">
 <h3>GHOST (Призрак)</h3>
 
 <p><strong>GHOST</strong> — событие прошлого, которое сформировало LIE. Обычно травма или потеря.</p>
@@ -207,7 +202,8 @@
 <tr><td><strong>FLAW</strong></td><td>FLAW-linked якорь (обязательно)</td><td>FLAW: Отталкивает сарказмом → Якорь: Искренняя забота → Отшучивается</td></tr>
 <tr><td><strong>WANT</strong></td><td>At-rest поведение</td><td>WANT: Доказать правоту → Якорь: Когда есть зацепка → Оживляется</td></tr>
 <tr><td><strong>NEED</strong></td><td>Рост/уязвимость якорь</td><td>NEED: Принятие → Якорь: Когда доверие → Пауза, голос тише</td></tr>
-<tr><td><strong>GHOST</strong></td><td>Триггерный якорь (L3)</td><td>GHOST: Предательство → Якорь: Когда вопрос о лояльности → Напряжение</td></tr>
+<tr><td><strong>GHOST</strong></td><td>Триггерный якорь (L3)</td><td>Доступно на Экспертном слое — <a data-layer-switch="3#p4_ghost">GHOST → L3</a></td></tr>
+<tr><td><strong>LIE</strong></td><td>Психологический якорь (L3)</td><td>Доступно на Экспертном слое — <a data-layer-switch="3#p4_lie">LIE → L3</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -292,6 +288,71 @@ WANT: Доказать правоту самостоятельно
 
 </section>
 
+<section data-layer="l1" data-section="p4_l1_bridge">
+<h3>SPINE — что дальше?</h3>
+
+<p>СПИН (SPINE) — фреймворк, который даёт якорям причину существовать. Без СПИН якоря — набор реакций без ядра. Три базовых элемента: WANT (желание), NEED (потребность), FLAW (дефект) — определяют, почему персонаж реагирует именно так.</p>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+СПИН: WANT/NEED/FLAW + якоря из психологии: <a data-layer-switch="2#p4_spine_overview" class="layer-remark">SPINE Framework → Глубокий слой</a>
+</p>
+</section>
+
+<section data-layer="l3" data-section="p4_l3_spine_full">
+<h3>Полный СПИН: цепочка из 5 элементов (L3)</h3>
+
+<p>На Экспертном слое СПИН расширяется с 3 до 5 элементов. <a href="#p4_lie">LIE</a> (ложная установка) и <a href="#p4_ghost">GHOST</a> (событие прошлого) добавляют глубину: они объясняют, <strong>почему</strong> FLAW существует и <strong>откуда</strong> он взялся.</p>
+
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G</div>
+<div class="inf-step-label">GHOST</div>
+<div class="inf-step-desc">Событие прошлого</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">L</div>
+<div class="inf-step-label">LIE</div>
+<div class="inf-step-desc">Ложная установка</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">F</div>
+<div class="inf-step-label">FLAW</div>
+<div class="inf-step-desc">Дефект поведения</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">N</div>
+<div class="inf-step-label">NEED</div>
+<div class="inf-step-desc">Истинная потребность</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">W</div>
+<div class="inf-step-label">WANT</div>
+<div class="inf-step-desc">Осознанное желание</div>
+</div>
+</div>
+
+<h4>Цепочка: GHOST → LIE → FLAW → NEED → WANT</h4>
+<p>Каждый элемент объясняется предыдущим. GHOST порождает LIE (определение и примеры — в <a href="#p4_ghost">секции GHOST</a>), LIE защищает от боли, FLAW — поведение из LIE (определение и примеры — в <a href="#p4_lie">секции LIE</a>), FLAW мешает NEED, WANT совместимо с LIE.</p>
+
+<h4>Пример полной цепочки: Эллиот Алдерсон (Mr. Robot)</h4>
+<pre><code>GHOST: Отец вытолкнул из окна — сказали держать в тайне
+  ↓ объясняет
+LIE: "Я всегда буду один. Людям нельзя доверять."
+  ↓ защищает от боли
+FLAW: Избегание — прячется за Mr. Robot, избегает близости
+  ↓ поведение из LIE
+NEED: Настоящая связь с людьми без масок
+  ↑ FLAW мешает
+WANT: Разрушить систему, которая контролирует людей
+  ↑ совместимо с LIE ("я один, поэтому должен действовать сам")</code></pre>
+
+<div class="callout important">
+<p><strong>📌 Правило:</strong> LIE и GHOST — не обязательны для L2. Но если вы на Экспертном слое — цепочка из 5 элементов должна быть логически связана. Проверьте: GHOST объясняет LIE? LIE защищает от боли GHOST? FLAW — прямое поведение из LIE?</p>
+</div>
+
+</section>
+
 <section data-layer="l2" data-section="p4_l2_quickstart">
 <h3>L2 Quickstart: 30-минутный конвейер</h3>
 
@@ -301,7 +362,7 @@ WANT: Доказать правоту самостоятельно
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
 <div class="inf-step-label">SPINE</div>
-<div class="inf-step-desc">Определите 5 элементов SPINE</div>
+<div class="inf-step-desc">Определите WANT/NEED/FLAW</div>
 <div class="inf-step-code">~10 мин</div>
 </div>
 <div class="inf-pipeline-step">
@@ -326,7 +387,8 @@ WANT: Доказать правоту самостоятельно
 
 <h4>Чек-лист L2</h4>
 <ul>
-<li>☐ SPINE: все 5 элементов связаны логически (GHOST→LIE→FLAW→NEED→WANT)</li>
+<li>☐ SPINE: WANT/NEED/FLAW связаны логически (FLAW мешает NEED, WANT совместимо с FLAW)</li>
+<li>☐ Хотите добавить LIE/GHOST? → Перейдите на Экспертный слой</li>
 <li>☐ 5-7 якорей: минимум 2 FLAW-linked</li>
 <li>☐ Embodiment: в каждом Example есть физическая реакция</li>
 <li>☐ 3 Examples: нейтральный, стресс, доверие/рост</li>

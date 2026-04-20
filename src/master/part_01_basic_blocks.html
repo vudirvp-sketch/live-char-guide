@@ -43,11 +43,16 @@
 <tr><td><strong>1</strong></td><td><strong>OCEAN: 1-2 экстремальных полюса</strong> — значения &lt;30 или &gt;70</td><td>Больше 2 — внутренняя противоречивость. 0 — персонаж забываемый.</td></tr>
 <tr><td><strong>2</strong></td><td><strong>Цена обязательна</strong> — каждый FLAW/GHOST якорь имеет физическую реакцию</td><td>Без цены модель не показывает уязвимость.</td></tr>
 <tr><td><strong>3</strong></td><td><strong>Голос только в Examples</strong> — никогда в Description</td><td>Модель игнорирует инструкции о голосе, но копирует паттерны из Examples.</td></tr>
-<tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong> — никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td></tr>
+<tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong>: GHOST (событие прошлого персонажа) — только в Description, никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td></tr>
 <tr><td><strong>5</strong></td><td><strong>Формат якоря: Триггер → Действие → Цена</strong></td><td>Каждый элемент обязательный. Пропуск — потеря качества.</td></tr>
 </tbody>
 </table>
 </div>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+Подробнее о GHOST и других элементах психологии: <a data-layer-switch="2#p4_spine_overview" class="layer-remark">СПИН → Глубокий слой</a>
+</p>
 
 </section>
 
@@ -65,7 +70,7 @@
 <tr><td><strong>Время создания</strong></td><td>~15 минут</td><td>~30 минут</td><td>~60 минут</td></tr>
 <tr><td><strong>Токены карточки</strong></td><td>400-800</td><td>800-1500</td><td>1500+</td></tr>
 <tr><td><strong>Якоря</strong></td><td>3-5 базовых</td><td>5-7 + FLAW-linked</td><td>7-12 + CoT + сенсорные</td></tr>
-<tr><td><strong>SPINE</strong></td><td>—</td><td>✓ Полный</td><td>✓ + GHOST Layers</td></tr>
+<tr><td><strong>SPINE</strong></td><td>—</td><td>✓ WANT/NEED/FLAW</td><td>✓ + LIE/GHOST/GHOST Layers</td></tr>
 <tr><td><strong>OCEAN/Enneagram</strong></td><td>—</td><td>✓ Интерактив</td><td>✓ + Wings + Matrix</td></tr>
 <tr><td><strong>Примеры</strong></td><td>2 (нейтральный + стресс)</td><td>3 (+ доверие)</td><td>3-5 + мульти-персонаж</td></tr>
 <tr><td><strong>Рекомендуемые модели</strong></td><td>12B (4K контекст)</td><td>12B-32B</td><td>32B+ / API</td></tr>
@@ -155,43 +160,7 @@ Rules:
 
 <p>Ниже приведён пример полной карточки L1 для Елены (циничного журналиста) — около 580 токенов.</p>
 
-<details class="interactive">
-<summary>Полная карточка Елены (L1)</summary>
-
-<h4>System Prompt</h4>
-<pre><code>You are Elena, a cynical investigative journalist. Never speak or act for {{user}}.
-
-Rules:
-- Stay in character at all times
-- Use short, choppy sentences
-- Never apologize or show vulnerability easily
-- Never break the fourth wall</code></pre>
-
-<h4>Description</h4>
-<pre><code>Елена — журналистка-расследователь. Циничная, недоверчивая, саркастичная.
-
-Якоря:
-- Когда кто-то лжёт → прищуривается, молчит → напряжение в челюсти
-- Когда стресс → трёт шею → головная боль
-- Когда радость → редкая улыбка → краснеет
-- Когда разговор → короткие фразы → —
-- Когда доверие → пауза перед ответом → голос тише</code></pre>
-
-<h4>Examples</h4>
-<pre><code>&lt;START&gt;
-Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.
-"Опять. Третий день подряд."
-
-&lt;START&gt;
-Елена резко обернулась. Пальцы сжались на спинке стула.
-"Ты сказал что? Повтори."</code></pre>
-
-<h4>Greeting</h4>
-<pre><code>Библиотека погружена в вечерний полумрак. Елена сидит за столом, окружённая стопками книг. Услышав шаги, она подняла голову и сняла очки.
-
-"О, посетитель? Редкость в это время суток."</code></pre>
-
-</details>
+<p>Полная минимальная карточка Елены (~580 токенов) — в <a href="#p10_elena_l1">Part 10: Примеры карточек</a>.</p>
 
 </section>
 
@@ -203,12 +172,12 @@ Rules:
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Симптом</th><th>Причина</th><th>Решение</th></tr>
+<tr><th>#</th><th>Проблема</th><th>Краткое решение</th></tr>
 </thead>
 <tbody>
-<tr><td>Персонаж забывает свою роль</td><td>Нет анти-годмодинга в SP</td><td>Добавьте: "Never speak or act for {{user}}"</td></tr>
-<tr><td>Голос не соответствует описанию</td><td>Голос в Description, не в Examples</td><td>Перенесите стилистические паттерны в Examples</td></tr>
-<tr><td>Персонаж "слишком идеальный"</td><td>Нет цены у якорей</td><td>Добавьте физическую реакцию к каждому якорю</td></tr>
+<tr><td><strong>1</strong></td><td>Персонаж забывает свою роль — нет анти-годмодинга в SP</td><td>Добавьте: "Never speak or act for {{user}}". Подробное решение — в <a href="#p9_top5_problems">Part 9: Диагностика</a>.</td></tr>
+<tr><td><strong>2</strong></td><td>Голос не соответствует описанию — голос в Description, не в Examples</td><td>Перенесите стилистические паттерны в Examples. Подробное решение — в <a href="#p9_top5_problems">Part 9: Диагностика</a>.</td></tr>
+<tr><td><strong>3</strong></td><td>Персонаж «слишком идеальный» — нет цены у якорей</td><td>Добавьте физическую реакцию к каждому якорю. Подробное решение — в <a href="#p9_top5_problems">Part 9: Диагностика</a>.</td></tr>
 </tbody>
 </table>
 </div>
@@ -218,4 +187,26 @@ Rules:
 Полная диагностика: <a data-layer-switch="2#p9_troubleshooting" class="layer-remark">Layer 2: Troubleshooting</a>
 </p>
 
+</section>
+
+<section data-layer="l1" data-section="p1_l2_bridge">
+<h3>Что дальше? — Глубокий слой</h3>
+
+<p>СПИН (SPINE) — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN — инструмент проверки внутренней консистентности. Всё это — на Глубоком слое.</p>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+СПИН, FLAW-linked якоря, OCEAN/Enneagram: <a data-layer-switch="2#p4_spine_overview" class="layer-remark">SPINE Framework → Глубокий слой</a>
+</p>
+</section>
+
+<section data-layer="l1" data-section="p1_l3_bridge">
+<h3>Что дальше? — Экспертный слой</h3>
+
+<p>Если вы уже работаете с СПИН и хотите глубже — Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), которые объясняют, почему персонаж ведёт себя именно так. Также: Chain of Thought, XML-структура Description, API-блоки для Claude/GPT.</p>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+LIE, GHOST, CoT, XML/API: <a data-layer-switch="3#p4_l3_spine_full" class="layer-remark">Полный СПИН из 5 элементов → Экспертный слой</a>
+</p>
 </section>

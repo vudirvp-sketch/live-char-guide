@@ -2,9 +2,20 @@
   Part 6: CoT Tiers (Chain of Thought)
   Live Character Guide v6 Master HTML
   
-  Layer inclusion: l2 (CoT basics), l3 (Tier 2-3, CoT anchors)
+  Layer inclusion: l3 (all CoT content)
 -->
-<section data-layer="l2" data-section="p6_cot_basics">
+<section data-layer="l1" data-section="p6_l1_bridge">
+<h3>Chain of Thought — что дальше?</h3>
+
+<p>CoT (Chain of Thought) — техника добавления внутреннего процесса персонажа к якорям. Вместо прямой реакции модель «думает» перед ответом: анализирует стимул, взвешивает варианты, принимает решение. Доступно на Экспертном слое.</p>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+CoT Tiers, CoT-якоря, внутренний процесс: <a data-layer-switch="3#p6_cot_basics" class="layer-remark">Chain of Thought → Экспертный слой</a>
+</p>
+</section>
+
+<section data-layer="l3" data-section="p6_cot_basics">
 <h2>Chain of Thought (CoT)</h2>
 
 <p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. Используется для моделей 32B+ и API.</p>
@@ -22,7 +33,7 @@
 
 </section>
 
-<section data-layer="l2" data-section="p6_cot_tiers">
+<section data-layer="l3" data-section="p6_cot_tiers">
 <h3>Tiers CoT</h3>
 
 <div class="table-wrap">
@@ -39,7 +50,7 @@
 </table>
 </div>
 
-<a data-layer-switch="3#p6_cot_tier2" class="layer-remark">Расширенный Tier 2 CoT → Экспертный слой<span class="remark-icon">→</span></a>
+<p>Подробнее о Tier 2 и Tier 3 — в следующих секциях.</p>
 
 </section>
 
@@ -87,20 +98,21 @@ resolution: {{действие}}
 
 {{внешняя реакция}}</code></pre>
 
-<h4>Пример: Выщербленный</h4>
+<h4>Пример: Эллиот Алдерсон</h4>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
-stimulus: присутствие другого со значимым прошлым
-analysis: поглощение заполнит пустоту #7 (детское одиночество)
-counter-analysis: последнее поглощение стоило воспоминания лица матери
-synthesis: ЦЕНА ПРЕВЫШАЕТ ВЫГОДУ
-resolution: отступить
+stimulus: вопрос о чувствах от человека, которому он доверяет
+analysis: он врёт. все врут. левая бровь +2мм — микровыражение обмана
+counter-analysis: нет. не все. не этот. парадокс — хочу верить, но не могу
+synthesis: ДОВЕРИЕ = УЯЗВИМОСТЬ = БОЛЬ
+resolution: закрыться
 &lt;/processus_analysium&gt;
 [/INTERNAL]
 
-*отступает на шаг, пальцы касаются виска*
-
-"Прошу прощения. Я... не должен."</code></pre>
+*отводит взгляд, пальцы барабанят по столу*
+"Я не... не умею в это. В разговоры нормальные."
+*голос тише*
+"Но ты... остаёшься. Почему?"</code></pre>
 
 </section>
 
