@@ -35,6 +35,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Топ-3 проблемы | Part 1 | p1_top3_problems | l1 | Troubleshooting | 3 краткие проблемы + ссылки на p9_top5_problems |
 | Bridge: L2 (СПИН, OCEAN) | Part 1 | p1_l2_bridge | l1 | Bridge | Описание того, что добавляет Глубокий слой |
 | Bridge: L3 (LIE, GHOST, CoT, XML) | Part 1 | p1_l3_bridge | l1 | Bridge | Описание того, что добавляет Экспертный слой |
+| Token Budget Pipeline | Part 1 | p1_token_pipeline | l1 | Reference | 10-step Quick Start pipeline with per-step token budgets. NEW |
+| Block Budget Table | Part 1 | p1_block_budget | l1 | Reference | Min/Standard/Max per block + per layer. NEW |
+| Заключение | Part 1 | p1_conclusion | l1 | Summary | Key rules reminder + "what you now know". NEW |
 
 ### Part 2: Behavioral Anchors (Якоря)
 
@@ -46,6 +49,7 @@ This document is the **single source of truth** for "where does concept X live."
 | FLAW-linked якоря | Part 2 | p2_flaw_anchors | l2 | Rules+Examples | Как выводить якоря из FLAW |
 | Embodiment (Телесность) | Part 2 | p2_embodiment | l2 | Full treatment | Протокол: Состояние→Тело→Сенсор→Речь |
 | Сенсорные якоря | Part 2 | p2_sensory_anchors | l3 | Full treatment | Сенсорные якоря для GHOST. Ссылка на CoT-якоря → Part 6 |
+| ENVIRONMENTAL REACTIVITY | Part 2 | p2_env_reactivity | l2 | Directive | Sensory details only through character action. NEW |
 
 ### Part 3: Voice and Isolation (Голос)
 
@@ -118,6 +122,14 @@ This document is the **single source of truth** for "where does concept X live."
 | XML tags | Part 7 | p7_xml_tags | l3 | Full treatment | Синтаксис и применение XML для Description |
 | API blocks | Part 7 | p7_api_blocks | l3 | Template | Claude/GPT specifics |
 | 4K-Fallback | Part 7 | p7_4k_fallback | l3 | Protocol | Адаптация для ≤4K контекста |
+| CORE DIRECTIVES | Part 7 | p7_core_directives | l2 | System | Unified 7-directive system in English. L2 = directives 1–5, L3 = all 7. NEW |
+| Tone Frame | Part 7 | p7_tone_frame | l2 | Technique | Dual-function SP element (~25-30 tokens). NEW |
+| OOC Protection | Part 7 | p7_ooc_protection | l3 | Technique | SP block for OOC reaction (~15 tokens). NEW |
+| Immersion Boundary | Part 7 | p7_immersion_boundary | l3 | Technique | Advanced OOC protection: deny meta-reality. NEW |
+| L3 CORE DIRECTIVES Extension | Part 7 | p7_core_directives_l3 | l3 | System | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER). Cross-ref to p7_core_directives for 1–5. NEW |
+| Model Type Checklist | Part 7 | p7_model_checklist | l2 | Reference | Summary table by model type (12B/32B+/API). NEW |
+| L3 SP Template | Part 7 | p7_sp_template_l3 | l3 | Template | Full L3 System Prompt template with all 7 directives. NEW |
+| L3 AN Template | Part 7 | p7_authors_note_l3 | l3 | Template | 4-section AN with GHOST-activation. NEW |
 
 ### Part 8: Anti-patterns (Анти-паттерны)
 
@@ -141,6 +153,7 @@ This document is the **single source of truth** for "where does concept X live."
 | AP-14: Context violation | Part 8 | p8_ap14_context_violation | l3 | Anti-pattern | Нарушение контекстного окна |
 | AP-15: OCEAN overload (basic) | Part 8 | p8_ap15_basic | l2 | Anti-pattern | Базовое правило: не больше 1–2 экстремальных полюсов |
 | AP-15: OCEAN overload (extended) | Part 8 | p8_ap15_extended | l3 | Extended treatment | 3 сценария конфликта полюсов + OCEAN×Enneagram ссылка |
+| AP-16: Nested Anchors | Part 8 | p8_ap16_nested_anchors | l2 | Anti-pattern | Anchor chains → unpredictability. NEW |
 
 ### Part 9: Diagnostics and Debugging (Диагностика)
 
@@ -153,6 +166,12 @@ This document is the **single source of truth** for "where does concept X live."
 | Test scenarios | Part 9 | p9_test_scenarios | l2 | Protocol | 6 тестовых сценариев |
 | 12B-specific issues | Part 9 | p9_12b_issues | l3 | Special | Диагностика для 12B моделей |
 | Layer transition | Part 9 | p9_layer_transition | l3 | Criteria | Критерии перехода L1→L2, L2→L3. Добавлены LIE/GHOST и CoT |
+| One Change Rule | Part 9 | p9_one_change_rule | l1 | Rule | Never change >1 parameter at a time. NEW |
+| Decision Tree | Part 9 | p9_decision_tree | l2 | Diagnostic | Branching symptom→check→fix logic. NEW |
+| Element→Scenario Mapping | Part 9 | p9_element_scenario_map | l2 | Reference | Dynamic element → test scenario + verification. NEW |
+| Test Requirements by Layer | Part 9 | p9_test_requirements | l2 | Reference | Min scenarios per layer + 6 success metrics. NEW |
+| Pre-Deploy Validation | Part 9 | p9_pre_deploy | l3 | Checklist | Quick Check (5 items) + Full Check (14 items). NEW |
+| Шкала качества карточки | Part 9 | p9_quality_scale | l1 | Reference | 3-level quality table (Critical / Bad / Good). NEW |
 
 ### Part 10: Full Card Examples (Примеры карточек)
 
@@ -163,6 +182,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Геральт (L2) | Part 10 | p10_geralt_l2 | l2 | Complete card | WANT/NEED/FLAW только (LIE/GHOST удалены при реструктуризации) |
 | Эдвард Элрик (L2) | Part 10 | p10_edward_l2 | l2 | Complete card | Кристально ясный СПИН. WANT/NEED/FLAW только. Новый раздел |
 | Выщербленный (L3) | Part 10 | p10_vysherblenny_l3 | l3 | Complete card | GHOST Layers + CoT + XML (~1500+ токенов) |
+| Уолтер Уайт (L2) | Part 10 | p10_walter_l2 | l2 | Complete card | Realistic modern character, WANT/NEED/FLAW. NEW |
 
 ---
 
@@ -170,22 +190,24 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | L1 | L2 | L3 | Total |
 |------|----|----|-----|-------|
-| Part 1 (Basic Blocks) | 8 | 0 | 0 | 8 |
-| Part 2 (Anchors) | 3 | 2 | 1 | 6 |
+| Part 1 (Basic Blocks) | 8+3=11 | 0 | 0 | 11 |
+| Part 2 (Anchors) | 3 | 2+1=3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
 | Part 4 (SPINE) | 1 | 5 | 4 | 10 |
 | Part 5 (Psych Toolkit) | 1 | 7 | 2 | 10 |
 | Part 6 (CoT) | 1 | 0 | 6 | 7 |
-| Part 7 (Technical) | 1 | 6 | 3 | 10 |
-| Part 8 (Anti-patterns) | 1 | 8 | 8 | 17 |
-| Part 9 (Diagnostics) | 3 | 2 | 2 | 7 |
-| Part 10 (Examples) | 1 | 3 | 1 | 5 |
-| **Total** | **23** | **39** | **29** | **91** |
+| Part 7 (Technical) | 1 | 6+3=9 | 3+5=8 | 18 |
+| Part 8 (Anti-patterns) | 1 | 8+1=9 | 8 | 18 |
+| Part 9 (Diagnostics) | 3+2=5 | 2+3=5 | 2+1=3 | 13 |
+| Part 10 (Examples) | 1 | 3+1=4 | 1 | 6 |
+| **Total** | **27** | **47** | **34** | **108** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 23 sections** (ALL 10 Parts have at least one section — IMP-27 satisfied)
-- **L2 sees: 62 sections** (+39 to L1)
-- **L3 sees: 91 sections** (+29 to L2)
+- **L1 sees: 27 sections** (ALL 10 Parts have at least one section — IMP-27 satisfied)
+- **L2 sees: 74 sections** (+47 to L1)
+- **L3 sees: 108 sections** (+34 to L2)
+
+**Note:** Part 7 L2 count is 9 (6 existing + 3 new: p7_core_directives, p7_tone_frame, p7_model_checklist). The original plan v2.1 listed 10; discrepancy is due to only 3 new L2 entries being specified in §2.1 vs 4 implied by the plan's statistics. Phase 13 (sync) will reconcile.
 
 ---
 

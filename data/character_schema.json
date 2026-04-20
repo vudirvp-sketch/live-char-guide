@@ -177,6 +177,42 @@
         "custom_instructions": { 
           "type": "string",
           "description": "Additional custom instructions" 
+        },
+        "core_directives": {
+          "type": "object",
+          "description": "CORE DIRECTIVES system — unified directive system in SP",
+          "properties": {
+            "enabled": { "type": "boolean", "default": false, "description": "Enable CORE DIRECTIVES in SP" },
+            "items": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of enabled directives (e.g. SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, INFLUENCE BOUNDARY, ENVIRONMENTAL REACTIVITY, CONSEQUENCE DRIVEN, PRE-GENERATION FILTER)"
+            }
+          }
+        },
+        "tone_frame": {
+          "type": "object",
+          "description": "Tone Frame — dual-function SP element (~25-30 tokens)",
+          "properties": {
+            "enabled": { "type": "boolean", "default": false, "description": "Enable Tone Frame in SP" },
+            "content": { "type": "string", "description": "Tone Frame text (English, ~25-30 tokens)" }
+          }
+        },
+        "ooc_protection": {
+          "type": "object",
+          "description": "OOC Protection — SP block for OOC reaction (~15 tokens)",
+          "properties": {
+            "enabled": { "type": "boolean", "default": false, "description": "Enable OOC Protection in SP" },
+            "content": { "type": "string", "description": "OOC Protection text (~15 tokens)" }
+          }
+        },
+        "immersion_boundary": {
+          "type": "object",
+          "description": "Immersion Boundary — advanced OOC protection: deny meta-reality (L3-only)",
+          "properties": {
+            "enabled": { "type": "boolean", "default": false, "description": "Enable Immersion Boundary in SP (L3-only)" },
+            "content": { "type": "string", "description": "Immersion Boundary text — character denies meta-reality" }
+          }
         }
       }
     },

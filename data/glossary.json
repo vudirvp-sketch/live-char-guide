@@ -420,6 +420,172 @@
       },
       "anchor_id": "layer-0-term-action",
       "cross_refs": ["#anchors"]
+    },
+    {
+      "term": "CORE DIRECTIVES",
+      "abbreviation": "CD",
+      "aliases": ["CD", "Core Directives", "Основные директивы"],
+      "definition": "Унифицированная система из 7 директив в System Prompt. L2 = директивы 1–5, L3 = все 7. Пишутся на английском в SP.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Добавьте директивы 1–5: SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, INFLUENCE BOUNDARY, ENVIRONMENTAL REACTIVITY",
+        "3": "Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER"
+      },
+      "anchor_id": "layer-2-term-core-directives",
+      "cross_refs": ["#p7_core_directives", "#system-prompt"]
+    },
+    {
+      "term": "Tone Frame",
+      "abbreviation": "TF",
+      "aliases": ["TF", "Tone Frame", "Тональный фрейм"],
+      "definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Добавьте Tone Frame в SP для фиксации тона персонажа",
+        "3": "Отладка: проверьте конфликт Tone Frame с AN"
+      },
+      "anchor_id": "layer-2-term-tone-frame",
+      "cross_refs": ["#p7_tone_frame", "#system-prompt"]
+    },
+    {
+      "term": "SPATIAL LOCK",
+      "abbreviation": null,
+      "aliases": ["SPATIAL LOCK", "Пространственная блокировка", "Spatial Lock"],
+      "definition": "Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Добавьте SPATIAL LOCK в SP для фиксации положения персонажа в пространстве",
+        "3": "Отладка: проверьте активацию при сложных сценах"
+      },
+      "anchor_id": "layer-2-term-spatial-lock",
+      "cross_refs": ["#p7_core_directives"]
+    },
+    {
+      "term": "PRE-GENERATION FILTER",
+      "abbreviation": null,
+      "aliases": ["PRE-GENERATION FILTER", "Фильтр предгенерации", "Pre-Generation Filter"],
+      "definition": "Директива SP: 4-пунктная самопроверка перед генерацией ответа. L3-only. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [3],
+      "layer_context": {
+        "3": "Добавьте PRE-GENERATION FILTER в SP для 12B моделей"
+      },
+      "anchor_id": "layer-3-term-pre-generation-filter",
+      "cross_refs": ["#p7_core_directives_l3"]
+    },
+    {
+      "term": "ENVIRONMENTAL REACTIVITY",
+      "abbreviation": null,
+      "aliases": ["ENVIRONMENTAL REACTIVITY", "Реактивность среды", "Environmental Reactivity"],
+      "definition": "Директива SP: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Добавьте ENVIRONMENTAL REACTIVITY для органичного описания среды",
+        "3": "Диагностика: проверьте, не генерирует ли модель декоративные описания"
+      },
+      "anchor_id": "layer-2-term-environmental-reactivity",
+      "cross_refs": ["#p2_env_reactivity", "#p7_core_directives"]
+    },
+    {
+      "term": "INFLUENCE BOUNDARY",
+      "abbreviation": null,
+      "aliases": ["INFLUENCE BOUNDARY", "Граница влияния", "Influence Boundary"],
+      "definition": "Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Добавьте INFLUENCE BOUNDARY для предотвращения годмодинга",
+        "3": "Диагностика: проверьте, не декларирует ли модель эмоции {{user}}"
+      },
+      "anchor_id": "layer-2-term-influence-boundary",
+      "cross_refs": ["#p2_anchor_rules", "#p7_core_directives"]
+    },
+    {
+      "term": "CONSEQUENCE DRIVEN",
+      "abbreviation": null,
+      "aliases": ["CONSEQUENCE DRIVEN", "Последовательность следствий", "Consequence Driven"],
+      "definition": "Директива SP: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [3],
+      "layer_context": {
+        "3": "Добавьте CONSEQUENCE DRIVEN в SP для динамического развития персонажа"
+      },
+      "anchor_id": "layer-3-term-consequence-driven",
+      "cross_refs": ["#p7_core_directives_l3", "#p4_spine_mapping"]
+    },
+    {
+      "term": "SHOW NEVER TELL",
+      "abbreviation": null,
+      "aliases": ["SHOW NEVER TELL", "Показывай, не рассказывай", "Show Never Tell"],
+      "definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "SHOW NEVER TELL — директива #1 в CORE DIRECTIVES",
+        "3": "Диагностика: проверьте, не рассказывает ли модель вместо демонстрации"
+      },
+      "anchor_id": "layer-2-term-show-never-tell",
+      "cross_refs": ["#p7_core_directives"]
+    },
+    {
+      "term": "EMBODIMENT FIRST",
+      "abbreviation": null,
+      "aliases": ["EMBODIMENT FIRST", "Телесность прежде всего", "Embodiment First"],
+      "definition": "Директива SP: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "EMBODIMENT FIRST — директива #2 в CORE DIRECTIVES, связана с протоколом телесности",
+        "3": "Диагностика: проверьте, не пропускает ли модель телесный шаг"
+      },
+      "anchor_id": "layer-2-term-embodiment-first",
+      "cross_refs": ["#p2_embodiment", "#p7_core_directives"]
+    },
+    {
+      "term": "Immersion Boundary",
+      "abbreviation": null,
+      "aliases": ["Immersion Boundary", "Иммерсионная граница"],
+      "definition": "Продвинутая OOC-защита: отрицание мета-реальности. L3-only. Персонаж не признаёт существование «игры» или «роли».",
+      "prohibited": [],
+      "applicable_layers": [3],
+      "layer_context": {
+        "3": "Добавьте Immersion Boundary для максимальной иммерсии; персонаж отрицает мета-реальность"
+      },
+      "anchor_id": "layer-3-term-immersion-boundary",
+      "cross_refs": ["#p7_immersion_boundary"]
+    },
+    {
+      "term": "Voice Contamination",
+      "abbreviation": null,
+      "aliases": ["Voice Contamination", "Заражение голоса"],
+      "definition": "Копирование чужих <START> примеров ломает голос на 12B. Каждый блок должен быть написан с нуля под персонажа.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Предупреждение: никогда не копируйте Examples из чужих карточек",
+        "3": "Диагностика: если голос «плывёт», проверьте источник Examples"
+      },
+      "anchor_id": "layer-2-term-voice-contamination",
+      "cross_refs": ["#p3_examples_rules"]
+    },
+    {
+      "term": "One Change Rule",
+      "abbreviation": null,
+      "aliases": ["One Change Rule", "Правило одного изменения"],
+      "definition": "При отладке меняйте только один параметр за раз. Иначе невозможно определить, что помогло.",
+      "prohibited": [],
+      "applicable_layers": [1, 2, 3],
+      "layer_context": {
+        "1": "Базовое правило диагностики: один параметр за раз",
+        "2": "Применяйте при систематической отладке",
+        "3": "Формализуйте: логируйте каждое изменение и результат"
+      },
+      "anchor_id": "layer-1-term-one-change-rule",
+      "cross_refs": ["#p9_one_change_rule"]
     }
   ],
   "layer_markers": {

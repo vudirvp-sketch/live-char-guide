@@ -225,6 +225,14 @@ async function checkLayerSwitchRefs(allSections, sectionIds) {
       if (actualLayerNum > targetLayerNum) {
         warnings.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section is in layer ${targetActualLayer}, deeper than referenced layer ${targetLayer}`);
       }
+
+      // NEW: Check that data-layer-switch target layer matches section's actual layer
+      // If a link targets data-layer-switch="2#section" but the section has data-layer="l1",
+      // that is an error — the section is already available at L1, no need to switch layers
+      if (actualLayerNum < targetLayerNum) {
+        errors.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section is in layer ${targetActualLayer} (L${actualLayerNum}), but link implies layer ${targetLayer}. Section is already available at a lower layer; no layer switch needed.`);
+        errorCount++;
+      }
     }
   }
 

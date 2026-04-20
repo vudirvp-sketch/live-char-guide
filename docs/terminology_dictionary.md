@@ -48,6 +48,20 @@
 | **Context** | Контекст | — | technical | Контекстное окно |
 | **Poles** | Полюса | — | technical | Полюса OCEAN |
 | **Rationale** | Обоснование | — | technical | — |
+| **CORE DIRECTIVES** | Основные директивы | CD | technique | Unified directive system in SP. 7 items. English in SP |
+| **Tone Frame** | Тональный фрейм | TF | technique | Dual-function SP element (~25-30 tokens). English in SP |
+| **SPATIAL LOCK** | Пространственная блокировка | — | directive | Prevent teleportation/anatomical errors. English in SP |
+| **PRE-GENERATION FILTER** | Фильтр предгенерации | — | directive | 4-item self-check before response. English in SP |
+| **ENVIRONMENTAL REACTIVITY** | Реактивность среды | — | directive | Sensory details only through action. English in SP |
+| **INFLUENCE BOUNDARY** | Граница влияния | — | directive | React to observable symptoms only. English in SP |
+| **CONSEQUENCE DRIVEN** | Последовательность следствий | — | directive | WANT→NEED shift as Price accumulates. English in SP |
+| **SHOW NEVER TELL** | Показывай, не рассказывай | — | directive | Meta-principle: demonstrate through behavior. English in SP |
+| **EMBODIMENT FIRST** | Телесность прежде всего | — | directive | State→Body→Sensor→Speech. English in SP |
+| **Immersion Boundary** | Иммерсионная граница | — | technique | Advanced OOC: deny meta-reality. L3-only |
+| **Voice Contamination** | Заражение голоса | — | diagnostic | Copying foreign `<START>` examples breaks voice on 12B |
+| **Narrator Bleed** | Утечка рассказчика | — | diagnostic | Mixing narrator voice with character voice in Examples |
+| **One Change Rule** | Правило одного изменения | — | diagnostic | Never change >1 parameter at a time when debugging |
+| **Nested Anchors** | Вложенные якоря | — | diagnostic | Anchor chains with nested conditions → unpredictability |
 
 ---
 
@@ -71,6 +85,9 @@
 - Format Lock, 4K-Fallback
 - Top P, Min P, Top K
 - {{user}}, {{char}}
+- CORE DIRECTIVES, Tone Frame, SPATIAL LOCK, PRE-GENERATION FILTER
+- ENVIRONMENTAL REACTIVITY, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN
+- SHOW NEVER TELL, EMBODIMENT FIRST, Immersion Boundary
 
 ### 3. Аббревиатуры
 Использовать аббревиатуры после первого упоминания:
@@ -79,6 +96,8 @@
 - Lorebook → LB
 - Chain of Thought → CoT
 - Repetition Penalty → RepPen
+- CORE DIRECTIVES → CD
+- Tone Frame → TF
 
 ### 4. Первое упоминание
 При первом упоминании термина в разделе:
