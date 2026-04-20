@@ -298,4 +298,97 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 
 ---
 
-*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–3 COMPLETED. Phases 4–14 pending.*
+## Content Restoration — Phases 4–5 (2026-04-21)
+
+> **Plan Reference:** `content-restoration-implementation-plan-v2.1.md`
+> **Date:** 2026-04-21
+> **Session Status:** Content Restoration Phases 0–5 COMPLETED.
+
+### Phase 4: Part 3 — Voice Hierarchy + Greeting + Contamination ✅
+
+**File modified:** `src/master/part_03_voice.html`
+
+**Sections Modified:**
+- `p3_influence_hierarchy` — Replaced simple single-column hierarchy table with 3-column table (12B / 32B+ / API), added `.callout.warn` for 12B Description=0%, added L1 bridge paragraph with data-layer-switch to p3_examples_rules, replaced `<a>` layer-remark with `<p class="layer-remark">` format
+- `p3_voice_isolation` — Added imperative formula: "Не объясняй голос — покажи его. Голос = ритм + лексика + синтаксис + парадоксы."
+- `p3_examples_rules` — Added Voice Contamination (Заражение голоса) warning as `.callout.warn` at section start
+- `p3_voice_leak` — Added Narrator Bleed (Утечка рассказчика) as sub-category: types table (Voice Leak / Narrator Bleed), antipattern-card with problem/solution examples. Changed "Jesse Pinkman" to "Джесси Пинкман" per language rules
+- `p3_joker_case` — Added pedagogical enhancement: "Тест мастеринга" callout.important + explanation paragraph about why Joker is the limiting case
+- `p3_greeting` — Expanded from 3-step to 4-step pipeline (СЕНСОРНЫЙ ЯКОРЬ → ТЕЛО/FLAW → РЕПЛИКА → КРЮЧОК), added Sensory Anchor concept explanation, added interactive `<details>` block with annotated Greeting example for Елена, removed old simple example
+
+**Actions performed:**
+1. Replaced p3_influence_hierarchy table with 3-column model-size table (12B/32B+/API)
+2. Added `.callout.warn` for 12B Description=0% influence on voice
+3. Added L1 bridge paragraph at end of p3_influence_hierarchy
+4. Added imperative formula to p3_voice_isolation
+5. Added Voice Contamination warning to p3_examples_rules
+6. Added Narrator Bleed variant table + antipattern-card to p3_voice_leak
+7. Changed "Jesse Pinkman" to "Джесси Пинкман" per language rules
+8. Added "Тест мастеринга" callout + explanation to p3_joker_case
+9. Replaced 3-step Greeting pipeline with 4-step algorithm
+10. Added Sensory Anchor concept + annotated Greeting example in `<details>` block
+
+### Phase 5: Part 5 — OCEAN/Enneagram Enhancements ✅
+
+**File modified:** `src/master/part_05_psych_toolkit.html`
+
+**Sections Modified:**
+- `p5_ocean_basics` — Strengthened golden rule: renamed from "Правило OCEAN" to "Золотое правило профиля", added AP-15 cross-reference, added layer-remark link to p8_ap15_extended (L3)
+- `p5_enneagram_wings` — Added wing selection algorithm: 2-column criteria table (Первичное крыло / Вторичное крыло) with Функция and Пример (Тип 6) rows, added decision rule explanation paragraph, replaced simple bullet-list rules with structured algorithm
+
+**Actions performed:**
+1. Replaced p5_ocean_basics callout with stronger "Золотое правило профиля" formulation
+2. Added AP-15 (OCEAN Overload) reference in the callout
+3. Added layer-remark cross-reference to p8_ap15_extended at L3
+4. Added wing selection algorithm table to p5_enneagram_wings
+5. Added decision rule explanation paragraph for wing selection
+6. Replaced simple bullet-list wing rules with structured algorithm
+
+### Build & Validation Results
+
+| Check | Status |
+|-------|--------|
+| Build passes (95 sections) | ✅ |
+| No duplicate data-section IDs | ✅ |
+| No prohibited elements | ✅ |
+| No prohibited translations | ✅ |
+| Visual components from registry | ✅ |
+| Heading hierarchy correct | ✅ |
+| Character examples match Bible | ✅ |
+| data-layer-switch to p7_core_directives | ⚠️ Forward reference — section will be created in Phase 6 |
+| data-layer-switch to p8_ap15_extended | ✅ Target exists at L3 |
+| Part 03 IMP-27 bridge (L2→L3) | ⚠️ p3_multi_char at L3 has no incoming L2 link — acceptable, L3 section is accessible |
+
+**Known forward references (will resolve after Phase 6):**
+- `p2_anchor_rules` → `data-layer-switch="2#p7_core_directives"` (Phase 6 creates this section)
+- `p2_env_reactivity` → `data-layer-switch="2#p7_core_directives"` (Phase 6 creates this section)
+
+### SELF-CHECK
+
+- [x] No duplication beyond one-sentence references (IMP-5)
+- [x] All new data-section IDs unique across entire guide
+- [x] All cross-references follow DAG direction
+- [x] No Markdown syntax in HTML (IMP-41)
+- [x] No inline styles (IMP-23)
+- [x] Only registry components used
+- [x] Language rules followed (Russian prose, English terms per terminology_dictionary)
+- [x] Card examples use bracket format where applicable (IMP-46) — no card examples in these phases
+- [x] Content layer assignments follow layer-restructure-plan-v3 (IMP-47)
+- [x] Forward references to p7_core_directives documented (IMP-33)
+- [x] Narrator Bleed defined in canonical location (Part 3, Voice Leak section) per IMP-5
+- [x] Voice Contamination defined in canonical location (Part 3, Examples Rules) per IMP-5
+- [x] AP-15 cross-reference from p5_ocean_basics uses data-layer-switch="3#p8_ap15_extended" — target at L3, correct
+- [x] Wing selection algorithm added at L3 (p5_enneagram_wings) per IMP-47
+- [x] Build passes: YES (2 forward-reference validation errors expected until Phase 6)
+
+### Section Count Update
+
+| Part | Before (Phases 0–3) | After (Phases 4–5) | Change |
+|------|---------------------|---------------------|--------|
+| Part 3 | 6 sections | 6 sections | 0 (modified only, no new sections) |
+| Part 5 | 7 sections | 7 sections | 0 (modified only, no new sections) |
+| **Total** | **95 sections** | **95 sections** | **+0 sections** |
+
+---
+
+*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–5 COMPLETED. Phases 6–14 pending.*

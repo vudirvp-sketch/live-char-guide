@@ -9,6 +9,8 @@
 
 <p><strong>Voice Isolation</strong> — правило разделения голоса персонажа и описания. Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.</p>
 
+<p><strong>Не объясняй голос — покажи его.</strong> Голос = ритм + лексика + синтаксис + парадоксы. Ни один из этих компонентов не описывается прилагательными — только демонстрируется через Examples.</p>
+
 <div class="callout important">
 <p><strong>📌 Важно:</strong></p>
 <p>Модель — копировщик паттернов, не исполнитель инструкций. Если вы напишете в Description "говорит саркастично" — модель это проигнорирует. Но если в Examples персонаж говорит саркастично — модель скопирует стиль.</p>
@@ -19,22 +21,26 @@
 <section data-layer="l1" data-section="p3_influence_hierarchy">
 <h3>Иерархия влияния на голос</h3>
 
-<p>Не все части карточки влияют на голос одинаково. Вот реальная иерархия:</p>
+<p>Не все части карточки влияют на голос одинаково. Иерархия зависит от размера модели:</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Источник</th><th>Влияние на голос</th><th>Почему</th></tr>
+<tr><th>Источник</th><th>12B</th><th>32B+</th><th>API</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Последние сообщения в чате</strong></td><td>~85%</td><td>Модель копирует ближайший контекст</td></tr>
-<tr><td><strong>Examples</strong></td><td>Ключевое</td><td>Паттерны речи усваиваются напрямую</td></tr>
-<tr><td><strong>Greeting</strong></td><td>Поддерживающее</td><td>Задаёт начальный тон</td></tr>
-<tr><td><strong>Author's Note</strong></td><td>Минимальное</td><td>Может задать контекст сцены</td></tr>
-<tr><td><strong>Description</strong></td><td>0% для голоса</td><td>Только факты, не паттерны</td></tr>
-<tr><td><strong>System Prompt</strong></td><td>0% для голоса</td><td>Инструкции, не стиль</td></tr>
+<tr><td>Recent chat</td><td>~85%</td><td>~80%</td><td>~75%</td></tr>
+<tr><td>Examples</td><td>~10%</td><td>~12%</td><td>~15%</td></tr>
+<tr><td>Greeting</td><td>~3%</td><td>~5%</td><td>~5%</td></tr>
+<tr><td>Author's Note</td><td>~2%</td><td>~3%</td><td>~5%</td></tr>
+<tr><td><strong class="tag risk">Description</strong></td><td><strong class="tag risk">0% (ЗАПРЕЩЕНО)</strong></td><td>~3%</td><td>~5%</td></tr>
+<tr><td>System Prompt</td><td>0%</td><td>~1%</td><td>~2%</td></tr>
 </tbody>
 </table>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Для 12B: Description = 0% влияния на голос.</strong> Стилистические директивы в Description — ошибка сборки. Голос устанавливается ТОЛЬКО в Examples. Токены, потраченные на голос в Description — потеряны или вредят.</p>
 </div>
 
 <div class="callout warn">
@@ -51,10 +57,16 @@ Example:
 
 <a data-layer-switch="2#p3_voice_leak" class="layer-remark">Подробнее об утечке голоса → Глубокий слой<span class="remark-icon">→</span></a>
 
+<p class="layer-remark"><span class="remark-icon">→</span> Голос — только первый шаг. На Глубоком слое вы научитесь писать Examples, Greeting и избегать Voice Leak: <a data-layer-switch="2#p3_examples_rules" class="layer-remark">Examples и Greeting → Глубокий слой</a></p>
+
 </section>
 
 <section data-layer="l2" data-section="p3_examples_rules">
 <h3>Правила написания Examples</h3>
+
+<div class="callout warn">
+<p><strong>⚠️ Заражение голоса (Voice Contamination):</strong> Никогда не копируйте Examples из чужих карточек. Чужой ритм и разметка ломают голос на 12B. Каждый <code>&lt;START&gt;</code>-блок пишите с нуля под вашего персонажа.</p>
+</div>
 
 <h4>Минимум примеров по слою</h4>
 <div class="table-wrap">
@@ -114,29 +126,45 @@ Example:
 
 <p><strong>Greeting</strong> — первое сообщение персонажа. Задаёт место, время и тон.</p>
 
-<h4>Структура Greeting</h4>
-<div class="infographic inf-pipeline">
+<div class="infographic">
+<div class="infographic-title">Алгоритм Greeting</div>
+<div class="inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
-<div class="inf-step-label">СЦЕНА</div>
-<div class="inf-step-desc">Где мы, что происходит</div>
+<div class="inf-step-label">СЕНСОРНЫЙ ЯКОРЬ</div>
+<div class="inf-step-desc">Пред-настройка восприятия персонажа</div>
+<div class="inf-step-code">Запах → Звук → Ощущение</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">02</div>
-<div class="inf-step-label">ДЕЙСТВИЕ</div>
-<div class="inf-step-desc">Что делает персонаж</div>
+<div class="inf-step-label">ТЕЛО / FLAW</div>
+<div class="inf-step-desc">Физическое проявление через FLAW</div>
+<div class="inf-step-code">Поза → Напряжение → Привычка</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">03</div>
 <div class="inf-step-label">РЕПЛИКА</div>
-<div class="inf-step-desc">Что он говорит</div>
+<div class="inf-step-desc">Первая фраза персонажа</div>
+<div class="inf-step-code">Голос → Тон → Лексика</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">04</div>
+<div class="inf-step-label">КРЮЧОК</div>
+<div class="inf-step-desc">Вовлечение {{user}} в сцену</div>
+<div class="inf-step-code">Открытый вопрос → Действие → Провокация</div>
+</div>
 </div>
 </div>
 
-<h4>Пример: Елена</h4>
-<pre><code>Библиотека погружена в вечерний полумрак. Елена сидит за столом, окружённая стопками книг. Услышав шаги, она подняла голову и сняла очки.
+<p><strong>Sensory Anchor</strong> — приём пред-настройки восприятия: персонаж уже в состоянии до первого слова. Пример: Елена за барной стойкой слышит звон бокалов и чувствует запах виски — прежде чем произнести реплику.</p>
 
-"О, посетитель? Редкость в это время суток."</code></pre>
+<details class="interactive">
+<summary>📝 Разобранный пример: Greeting Елены</summary>
+<pre><code>[ШАГ 1: СЕНСОРНЫЙ ЯКОРЬ] *Звон бокалов. Запах виски и усталости.*
+[ШАГ 2: ТЕЛО / FLAW] *Она сидит за стойкой, пальцы машинально крутят салфетку — привычка, выдающая напряжение.*
+[ШАГ 3: РЕПЛИКА] «Заказывай или уходи. Я не в настроении.»
+[ШАГ 4: КРЮЧОК] *Пауза. Взгляд скользит по твоему лицу.* «Хотя... ты не похож на остальных.»</code></pre>
+</details>
 
 <h4>Правила Greeting</h4>
 <ul>
@@ -153,7 +181,29 @@ Example:
 
 <p><strong>Voice Leak</strong> — ошибка, при которой модель генерирует голос, не соответствующий персонажу. Чаще всего — "красноречивый персонаж", который должен говорить просто.</p>
 
-<h4>Пример: Jesse Pinkman</h4>
+<h4>Варианты утечки голоса</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Тип</th><th>Описание</th><th>Пример</th></tr></thead>
+<tbody>
+<tr><td>Voice Leak</td><td>Описание голоса в Description вместо демонстрации в Examples</td><td>«Говорит тихо и задумчиво» в Description</td></tr>
+<tr><td>Narrator Bleed</td><td>Голос рассказчика смешивается с голосом персонажа в Examples</td><td>«Комната была в беспорядке, что говорило о борьбе»</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="antipattern-card">
+<div class="problem-block">
+<h4>❌ Narrator Bleed</h4>
+<p><code>*Комната была в беспорядке, что говорило о произошедшей борьбе. Кресло стояло опрокинутое.*</code></p>
+</div>
+<div class="solution-block">
+<h4>✅ Голос персонажа</h4>
+<p><code>*Она переступила через опрокинутое кресло. Взгляд зацепился за осколки.* «…Пошли.»</code></p>
+</div>
+</div>
+
+<h4>Пример: Джесси Пинкман</h4>
 <div class="callout warn">
 <p><strong>⚠️ Предупреждение:</strong></p>
 <pre><code>"Я пытаюсь справиться с глубоким чувством моральной вины за то, что я сделал..."</code></pre>
@@ -184,6 +234,12 @@ Example:
 <div class="callout important">
 <p><strong>📌 Важно:</strong> Вы НЕ можете описать голос Joker в Description. Вы ДОЛЖНЫ воспроизвести его в Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности.</p>
 </div>
+
+<div class="callout important">
+<p><strong>📌 Тест мастеринга:</strong> Если вы можете создать карточку Джокера, где голос узнаваем без единого описательного слова — вы освоили гайд.</p>
+</div>
+
+<p>Почему Джокер — предельный случай: голос = ритм + парадокс + непредсказуемость. Ни один компонент не описывается прилагательными. «Нестабильный» — описывает 1000 персонажей. Джокер — только через демонстрацию.</p>
 
 <h4>Пример: Joker — Voice Isolation</h4>
 <pre><code>&lt;START&gt;
