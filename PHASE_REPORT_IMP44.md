@@ -391,7 +391,7 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 
 ---
 
-*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–7 COMPLETED. Phases 8–14 pending.*
+*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–9 COMPLETED. Phases 10–14 pending.*
 
 ---
 
@@ -531,3 +531,98 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 |------|---------------------|-----------------|--------|
 | Part 6 | 6 sections | 6 sections | 0 (modified only, no new sections) |
 | **Total** | **103 sections** | **103 sections** | **+0 sections** |
+
+---
+
+## Content Restoration — Phases 8–9 (2026-04-21)
+
+> **Plan Reference:** `content-restoration-implementation-plan-v2.1.md`
+> **Date:** 2026-04-21
+> **Session Status:** Content Restoration Phases 0–9 COMPLETED.
+
+### Phase 8: Part 8 — Anti-Patterns Enhancement ✅
+
+**File modified:** `src/master/part_08_antipatterns.html`
+
+**Sections Added:**
+- `p8_ap16_nested_anchors` (l2) — AP-16: Nested Anchors antipattern-card with problem/solution/example blocks. Principle of atomicity: one anchor = one T→A→P link.
+
+**Sections Modified:**
+- `p8_ap6_no_anti_godmoding` — Added ❌/✅ visual example pair (antipattern-card with problem-block showing godmoding and solution-block showing correct anti-godmoding behavior)
+- `p8_ap9_spine_broken` — Added ❌/✅ visual example pair (broken SPINE: WANT/NEED/FLAW logically disconnected vs intact SPINE: WANT and NEED incompatible due to FLAW)
+- `p8_ap10_cot_overload` — Added ❌/✅ visual example pair (5 CoT anchors → >50% response on internal process vs 2–3 CoT anchors for key triggers only)
+- `p8_ap11_voice_bleed` — Added bidirectional back-reference (IMP-48): layer-remark link to p3_multi_char in Part 3 (multi-character examples with Voice Bleed)
+- `p8_ap15_basic` — Added bidirectional back-reference (IMP-48): layer-remark link to p5_ocean_poles in Part 5 (golden rule OCEAN)
+- `p8_l1_bridge` — Updated bridge text from "15 анти-паттернов" to "16 анти-паттернов"
+
+**Actions performed:**
+1. Updated layer inclusion comment to reflect AP-16 and L1 bridge
+2. Added ❌/✅ example pair to AP-6 (no anti-godmoding)
+3. Added ❌/✅ example pair to AP-9 (broken SPINE)
+4. Added ❌/✅ example pair to AP-10 (CoT overload)
+5. Added bidirectional back-reference from AP-11 to p3_multi_char (Part 3)
+6. Added bidirectional back-reference from AP-15 basic to p5_ocean_poles (Part 5)
+7. Added p8_ap16_nested_anchors section after p8_ap15_extended
+8. Updated p8_l1_bridge text to mention 16 anti-patterns
+
+### Phase 9: Part 9 — Diagnostics Overhaul ✅
+
+**File modified:** `src/master/part_09_diagnostics.html`
+
+**Sections Added:**
+- `p9_one_change_rule` (l1) — Rule: never change >1 parameter at a time. callout.important with step-by-step debugging protocol.
+- `p9_decision_tree` (l2) — Branching symptom→check→fix table with 7 decision paths for voice loss, godmoding, too-perfect character, and repetition issues. Includes Ollama/LM Studio PP=0.7 hardcode check.
+- `p9_element_scenario_map` (l2) — 6-row mapping table: element (SPINE/Anchors/Voice Isolation/AN/Lorebook/OCEAN) → test scenario → expected → observed → diagnosis.
+- `p9_test_requirements` (l2) — Per-layer minimum test scenarios (L1=2, L2=4, L3=6) + 6 success metrics table (voice stability, Price frequency, FLAW visibility, no godmoding, no voice leak, AN influence).
+- `p9_pre_deploy` (l3) — Quick Check (5 items: PP=0.0, voice only in Examples, Price in every anchor, Format Lock, anti-godmoding) + Full Check (14 items in `<details class="interactive">` block: all Quick Check + CORE DIRECTIVES, SPATIAL LOCK, English directives, Immersion Boundary, GHOST chain, Tone Frame, OCEAN ≤ 2 poles, Lorebook params, CoT ≤ 3).
+
+**Actions performed:**
+1. Updated layer inclusion comment to reflect new sections
+2. Added p9_one_change_rule section before p9_troubleshooting
+3. Added p9_decision_tree section after p9_symptom_table
+4. Added p9_element_scenario_map section after p9_test_scenarios
+5. Added p9_test_requirements section after p9_element_scenario_map
+6. Added p9_pre_deploy section after p9_layer_transition
+
+### Build & Validation Results
+
+| Check | Status |
+|-------|--------|
+| Build passes (109 sections) | ✅ |
+| No duplicate data-section IDs | ✅ |
+| All data-layer-switch references valid | ✅ (49 references, all valid) |
+| No prohibited elements | ✅ |
+| No prohibited translations | ✅ |
+| Visual components from registry | ✅ |
+| Heading hierarchy correct | ✅ |
+| Character examples match Bible | ✅ |
+| IMP-27 layer visibility bridges | ✅ |
+| IMP-28 no orphan sections | ✅ |
+| Markdown syntax check | ⚠️ Pre-existing false positive in part_07_technical.html (format notation, not Markdown) |
+| Duplicate content check | ⚠️ Pre-existing: L1 SP template in Part 1 + Part 7 (expected) + anchors/spine overlap |
+
+### SELF-CHECK
+
+- [x] No duplication beyond one-sentence references (IMP-5)
+- [x] All new data-section IDs unique across entire guide
+- [x] All cross-references follow DAG direction
+- [x] No Markdown syntax in HTML (IMP-41) — no new issues
+- [x] No inline styles (IMP-23)
+- [x] Only registry components used
+- [x] Language rules followed (Russian prose, English terms per terminology_dictionary)
+- [x] Card examples use bracket format where applicable (IMP-46) — no card examples in these phases
+- [x] Content layer assignments follow layer-restructure-plan-v3 (IMP-47)
+- [x] All new cross-references are bidirectional (IMP-48):
+  - p8_ap11_voice_bleed → p3_multi_char (Part 3 references back to AP-11) ✅
+  - p8_ap15_basic → p5_ocean_poles (Part 5 references back to AP-15) ✅
+- [x] Decision tree does not duplicate symptom table (different structure: branching vs flat) ✅
+- [x] Pre-Deploy Quick Check items consistent with basic checklist in p9_basic_checklist ✅
+- [x] Build passes: YES
+
+### Section Count Update
+
+| Part | Before (Phases 0–7) | After (Phases 8–9) | Change |
+|------|---------------------|---------------------|--------|
+| Part 8 | 17 sections | 18 sections | +1 (p8_ap16_nested_anchors) |
+| Part 9 | 7 sections | 12 sections | +5 (p9_one_change_rule, p9_decision_tree, p9_element_scenario_map, p9_test_requirements, p9_pre_deploy) |
+| **Total** | **103 sections** | **109 sections** | **+6 sections** |

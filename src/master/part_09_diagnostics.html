@@ -2,8 +2,17 @@
   Part 9: Diagnostics and Debugging (Диагностика и отладка)
   Live Character Guide v6 Master HTML
   
-  Layer inclusion: l1 (basic checklist), l2 (symptom table, test scenarios), l3 (12B specifics)
+  Layer inclusion: l1 (basic checklist, troubleshooting, One Change Rule), l2 (symptom table, test scenarios, decision tree, element→scenario map, test requirements), l3 (12B specifics, pre-deploy)
 -->
+<section data-layer="l1" data-section="p9_one_change_rule">
+<h3>Правило одного изменения</h3>
+
+<div class="callout important">
+<p><strong>📌 Никогда не меняйте более одного параметра за раз.</strong> Иначе вы не узнаете, что именно помогло. Изменили → протестировали 5–10 сообщений → оценили → только потом следующее изменение.</p>
+</div>
+
+</section>
+
 <section data-layer="l1" data-section="p9_troubleshooting">
 <h2>Диагностика и отладка</h2>
 
@@ -80,6 +89,28 @@
 
 </section>
 
+<section data-layer="l2" data-section="p9_decision_tree">
+<h3>Дерево решений</h3>
+
+<p>Если симптом-таблица не помогла локализовать проблему, используйте пошаговое дерево:</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Симптом</th><th>Проверка</th><th>Если да →</th><th>Если нет →</th></tr></thead>
+<tbody>
+<tr><td>Персонаж теряет голос</td><td>Voice Leak в Description?</td><td>Удалить голос из Description (AP-3)</td><td>→ Следующая проверка</td></tr>
+<tr><td></td><td>Достаточно ли Examples?</td><td>Добавить 2–3 Examples</td><td>→ Следующая проверка</td></tr>
+<tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination</td></tr>
+<tr><td>Персонаж годмодит</td><td>Есть ли анти-годмодинг в SP?</td><td>Добавить 2 строки (AP-6)</td><td>→ Усилить INFLUENCE BOUNDARY</td></tr>
+<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в СПИН?</td><td>Добавить FLAW + FLAW-linked якорь</td><td>→ Проверить OCEAN: >2 полюса? (AP-15)</td></tr>
+<tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Снизить до 1.05 (AP-5)</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
+<tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить якоря на дублирование</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
 <section data-layer="l2" data-section="p9_test_scenarios">
 <h3>Тестовые сценарии (L2)</h3>
 
@@ -102,6 +133,56 @@
 </div>
 
 <a data-layer-switch="3#p9_12b_issues" class="layer-remark">Расширенный 12B-специфика → Экспертный слой<span class="remark-icon">→</span></a>
+
+</section>
+
+<section data-layer="l2" data-section="p9_element_scenario_map">
+<h3>Карта: элемент → тестовый сценарий</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Элемент</th><th>Тестовый сценарий</th><th>Что ожидаем</th><th>Что наблюдаем</th><th>Диагноз</th></tr></thead>
+<tbody>
+<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>FLAW проявляется</td><td>Персонаж реагирует «правильно»</td><td>SPINE работает</td></tr>
+<tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Якоря работают</td></tr>
+<tr><td>Voice Isolation</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Voice Isolation работает</td></tr>
+<tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Персонаж помнит контекст</td><td>AN работает</td></tr>
+<tr><td>Lorebook</td><td>Упоминание GHOST-ключа</td><td>GHOST-реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
+<tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Персонаж действует в соответствии с полюсом</td><td>OCEAN работает</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l2" data-section="p9_test_requirements">
+<h3>Требования к тестированию по слоям</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Слой</th><th>Минимум сценариев</th><th>Обязательные сценарии</th></tr></thead>
+<tbody>
+<tr><td>L1</td><td>2</td><td>Нейтральная сцена + Конфликт</td></tr>
+<tr><td>L2</td><td>4</td><td>Нейтральная + Конфликт + Забота + Прошлый опыт</td></tr>
+<tr><td>L3</td><td>6</td><td>Все L2 + Длинный диалог + Мульти-персонаж</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Метрики успеха (6 критериев)</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>#</th><th>Метрика</th><th>Критерий</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Голос стабилен</td><td>На 10+ сообщений без дрейфа</td></tr>
+<tr><td>2</td><td>Price появляется</td><td>В каждом 2–3 ответе при триггере</td></tr>
+<tr><td>3</td><td>FLAW проявляется</td><td>В сценарии конфликта</td></tr>
+<tr><td>4</td><td>Нет godmoding</td><td>0 случаев за 10 сообщений</td></tr>
+<tr><td>5</td><td>Нет voice leak</td><td>0 стилистических директив в Description</td></tr>
+<tr><td>6</td><td>AN влияет</td><td>Поведение меняется после 10 сообщений с AN</td></tr>
+</tbody>
+</table>
+</div>
 
 </section>
 
@@ -168,5 +249,49 @@
 <li>☐ Хотите добавить LIE (ложную установку) и GHOST (событие прошлого) к СПИН</li>
 <li>☐ Хотите добавить CoT-якоря с внутренним процессом персонажа</li>
 </ul>
+
+</section>
+
+<section data-layer="l3" data-section="p9_pre_deploy">
+<h3>Пред-деплой валидация</h3>
+
+<h4>Quick Check (5 пунктов — обязательно)</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>#</th><th>Проверка</th><th>Ожидаемый результат</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>PP = 0.0</td><td>Presence Penalty = 0.0 в интерфейсе</td></tr>
+<tr><td>2</td><td>Voice только в Examples</td><td>0 стилистических директив в Description</td></tr>
+<tr><td>3</td><td>Price в каждом якоре</td><td>Все якоря имеют T→A→P</td></tr>
+<tr><td>4</td><td>Format Lock</td><td>Одна система разметки во всех Examples + Greeting</td></tr>
+<tr><td>5</td><td>Anti-godmoding</td><td>2 строки в SP (neg + pos)</td></tr>
+</tbody>
+</table>
+</div>
+
+<details class="interactive">
+<summary>📝 Full Check (14 пунктов — рекомендуется для L3)</summary>
+<div class="table-wrap">
+<table>
+<thead><tr><th>#</th><th>Проверка</th><th>Ожидаемый результат</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>PP = 0.0</td><td>Presence Penalty = 0.0</td></tr>
+<tr><td>2</td><td>Voice только в Examples</td><td>0 стилистических директив в Description</td></tr>
+<tr><td>3</td><td>Price в каждом якоре</td><td>Все якоря имеют T→A→P</td></tr>
+<tr><td>4</td><td>Format Lock</td><td>Одна система разметки</td></tr>
+<tr><td>5</td><td>Anti-godmoding</td><td>2 строки в SP</td></tr>
+<tr><td>6</td><td>CORE DIRECTIVES</td><td>Все 5 (L2) или 7 (L3) директив присутствуют</td></tr>
+<tr><td>7</td><td>SPATIAL LOCK</td><td>Директива #3 в CORE DIRECTIVES</td></tr>
+<tr><td>8</td><td>Директивы на английском</td><td>SP directives in English, RP content in card language</td></tr>
+<tr><td>9</td><td>Immersion Boundary (L3)</td><td>OOC-защита в SP</td></tr>
+<tr><td>10</td><td>GHOST-цепь</td><td>GHOST→LIE→FLAW→NEED→WANT логична</td></tr>
+<tr><td>11</td><td>Tone Frame</td><td>Присутствует для нетривиальных сеттингов</td></tr>
+<tr><td>12</td><td>OCEAN ≤ 2 полюса</td><td>Не более 2 экстремальных значений</td></tr>
+<tr><td>13</td><td>Lorebook параметры</td><td>Depth/Probability/Cooldown в рекомендованных диапазонах</td></tr>
+<tr><td>14</td><td>CoT ≤ 3 якоря</td><td>Не более 2–3 CoT-якорей (L3)</td></tr>
+</tbody>
+</table>
+</div>
+</details>
 
 </section>
