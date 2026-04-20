@@ -235,4 +235,67 @@ Phase 0 was already completed during IMP-44 work. All documentation files (conte
 
 ---
 
-*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–2 COMPLETED. Phases 3–14 pending.*
+## Content Restoration — Phase 3 (2026-04-21)
+
+> **Plan Reference:** `content-restoration-implementation-plan-v2.1.md`
+> **Date:** 2026-04-21
+> **Session Status:** Content Restoration Phases 0–3 COMPLETED.
+
+### Phase 3: Part 4 — GHOST + SPINE Rules ✅
+
+**File modified:** `src/master/part_04_spine.html`
+
+**Sections Modified:**
+- `p4_ghost` — Fixed GHOST definition (removed "травма или потеря", replaced with "конкретное событие из прошлого, сформировавшее LIE. НЕ психологический вывод."), added prohibited words callout.warn, added antipattern-card with abstract label vs concrete event
+- `p4_flaw` — Added transformation examples table (Прилагательное → Поведение) with 3 rows (замкнутый, агрессивный, недоверчивый), restructured opening paragraph to "FLAW = конкретное поведение, блокирующее NEED. НЕ прилагательное."
+- `p4_spine_overview` — Added motivational phrase ("Без СПИНа ваши якоря — набор реакций без причины"), added "Правило СПИН: наблюдаемые единицы" table with 3 rows (WANT/NEED/FLAW: Абстракция vs Наблюдаемая единица), added layer-remark cross-reference to L3 LIE/GHOST
+- `p4_spine_mapping` — Added mnemonic infographic (СПИН → Якоря: FLAW→ЦЕНА, WANT→ДЕЙСТВИЕ В ПОКОЕ, NEED→НАПРАВЛЕНИЕ РОСТА), added L3 bridge link for +2 GHOST/LIE connections, added CONSEQUENCE DRIVEN callout.tip, added Author's Note cross-reference with data-layer-switch to Part 7
+
+**Actions performed:**
+1. Changed GHOST definition from "событие прошлого, которое сформировало LIE. Обычно травма или потеря." to "конкретное событие из прошлого, сформировавшее LIE. НЕ психологический вывод."
+2. Added callout.warn with prohibited words: «травма», «пережил», «СТОЛКНУЛСЯ С»
+3. Added antipattern-card: abstract label vs concrete event
+4. Added FLAW transformation table (Прилагательное → Поведение) before existing FLAW examples
+5. Restructured FLAW opening paragraph
+6. Added motivational phrase to p4_spine_overview after blockquote
+7. Added "Правило СПИН: наблюдаемые единицы" table with L3 cross-reference
+8. Added mnemonic infographic to p4_spine_mapping before algorithm table
+9. Added CONSEQUENCE DRIVEN callout.tip in p4_spine_mapping
+10. Added Author's Note cross-reference (data-layer-switch to Part 7)
+
+### Build & Validation Results
+
+| Check | Status |
+|-------|--------|
+| Build passes (95 sections) | ✅ |
+| No duplicate data-section IDs | ✅ |
+| No prohibited elements | ✅ |
+| No prohibited translations | ✅ |
+| Visual components from registry | ✅ |
+| Heading hierarchy correct | ✅ |
+| Character examples match Bible | ✅ |
+| data-layer-switch to p7_core_directives | ⚠️ Forward reference — section will be created in Phase 6 |
+| data-layer-switch to p7_authors_note | ⚠️ Forward reference — section already exists |
+
+**Known forward references:**
+- `p2_anchor_rules` → `data-layer-switch="2#p7_core_directives"` (Phase 6 creates this section)
+- `p2_env_reactivity` → `data-layer-switch="2#p7_core_directives"` (Phase 6 creates this section)
+
+### SELF-CHECK
+
+- [x] No duplication beyond one-sentence references (IMP-5)
+- [x] All new data-section IDs unique across entire guide
+- [x] All cross-references follow DAG direction
+- [x] No Markdown syntax in HTML (IMP-41)
+- [x] No inline styles (IMP-23)
+- [x] Only registry components used
+- [x] Language rules followed (Russian prose, English terms per terminology_dictionary)
+- [x] Card examples use bracket format where applicable (IMP-46) — no card examples in this phase
+- [x] Content layer assignments follow layer-restructure-plan-v3 (IMP-47)
+- [x] Forward references to p7_core_directives documented (IMP-33)
+- [x] CONSEQUENCE DRIVEN defined as one-sentence cross-reference per IMP-5
+- [x] Build passes: YES (2 forward-reference validation errors expected until Phase 6)
+
+---
+
+*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–3 COMPLETED. Phases 4–14 pending.*
