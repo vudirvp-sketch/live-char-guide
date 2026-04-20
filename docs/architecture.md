@@ -1,7 +1,7 @@
 # Live Character Guide Architecture
 
-> **Version:** 6.0
-> **Last Updated:** 2026-04-19
+> **Version:** 6.1
+> **Last Updated:** 2026-04-20
 > **Status:** Draft for Stage 0a
 
 ---
@@ -54,7 +54,7 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files with `data-layer` markup | Authors writing Parts |
+| `src/master/` | Author | Master guide HTML files with `data-layer` markup (91 sections post-restructure) | Authors writing Parts |
 | `src/shell/` | Infrastructure | HTML/CSS/JS shell (loader, styles, panels) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
 | `docs/` | Author | Documentation (not included in build) | Authors |
@@ -125,9 +125,9 @@ dist/ (deployed to GitHub Pages)
 L1 ⊂ L2 ⊂ L3
 ```
 
-- **L1 (Минимальный/Basic):** ~15 min read, 400-800 tokens/card
-- **L2 (Глубокий/Deep):** ~30 min read, 800-1500 tokens/card (includes all L1 content)
-- **L3 (Экспертный/Expert):** ~60 min read, 1500+ tokens/card (includes all L1 + L2 content)
+- **L1 (Минимальный/Basic):** ~15 min read, 400-800 tokens/card — basic blocks, anchors, Voice Isolation, Quickstart + bridges to ALL other topics
+- **L2 (Глубокий/Deep):** ~30 min read, 800-1500 tokens/card (includes all L1 content) — SPINE (WANT/NEED/FLAW), FLAW-linked anchors, OCEAN/Enneagram/MBTI, AP-1–AP-7 + AP-15 basic
+- **L3 (Экспертный/Expert):** ~60 min read, 1500+ tokens/card (includes all L1 + L2 content) — +LIE/GHOST/GHOST Layers, CoT all Tiers, XML/API/4K-Fallback, AP-8–AP-14, AP-15 extended, multi-character
 
 ### Layer Markup in Master HTML
 
@@ -140,8 +140,8 @@ L1 ⊂ L2 ⊂ L3
   <!-- Content added starting from L2 -->
 </section>
 
-<section data-layer="l3" data-section="p2_cot_anchors">
-  <!-- Content added starting from L3 -->
+<section data-layer="l3" data-section="p4_lie">
+  <!-- LIE (ложная установка) — L3-only after restructure -->
 </section>
 ```
 
@@ -355,6 +355,21 @@ live-char-guide/
 
 ---
 
+## Layer Restructure (v6 → v6.1)
+
+A layer restructure was performed to create qualitative differences between layers:
+
+| Aspect | Before Restructure | After Restructure |
+|--------|--------------------|-------------------|
+| SPINE on L2 | 5 elements (WANT/NEED/FLAW/LIE/GHOST) | 3 elements (WANT/NEED/FLAW) |
+| LIE, GHOST | `data-layer="l2"` | `data-layer="l3"` |
+| CoT basics, CoT tiers | `data-layer="l2"` | `data-layer="l3"` |
+| Part 6 (CoT) | Mixed L2+L3 | L3-only content (+ L1 bridge) |
+| L1 sections | ~6 (5 Parts had zero L1) | 23 (all 10 Parts have L1 via bridges) |
+| Total sections | 81 | 91 |
+
+**SPINE split rule:** On L2, SPINE = WANT/NEED/FLAW only. LIE and GHOST are L3-only. L1 bridge sections exist in all 10 Parts so readers know these topics exist.
+
 ## Migration from v5.12
 
 v6 is a **rebuild with reference to v5.12**, not an in-place evolution.
@@ -368,6 +383,8 @@ Key differences:
 | Widget data | Hardcoded in JS | `data/*.json` files |
 | Cross-layer links | Layer only (`data-layer-switch="2"`) | Layer + section (`data-layer-switch="2#id"`) |
 | Layer names | Inconsistent | Canonical from `layer-config.json` |
+| SPINE model | All 5 elements on L2 | WANT/NEED/FLAW (L2) + LIE/GHOST (L3) |
+| Part 6 (CoT) | Mixed L2+L3 | L3-only + L1 bridge |
 
 ### Zero Degradation Principle
 

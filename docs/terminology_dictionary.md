@@ -1,7 +1,7 @@
 # Терминологический словарь Live Character Guide
 
-**Версия:** 1.0  
-**Дата:** 2026-04-18  
+**Версия:** 2.0  
+**Дата:** 2026-04-20  
 
 ---
 
@@ -22,14 +22,14 @@
 | **WANT** | Хочет | — | framework | Элемент SPINE |
 | **NEED** | Нужно | — | framework | Элемент SPINE |
 | **FLAW** | Изъян | — | framework | Элемент SPINE |
-| **LIE** | Ложная установка | — | framework | Элемент SPINE |
-| **GHOST** | Призрак | — | framework | Элемент SPINE, можно оставить GHOST |
+| **LIE** | Ложная установка | — | framework | Элемент SPINE (L3-only после реструктуризации) |
+| **GHOST** | Призрак | — | framework | Элемент SPINE (L3-only после реструктуризации), можно оставить GHOST |
 | **OCEAN** | OCEAN | — | framework | Большая пятёрка, без перевода |
 | **Enneagram** | Эннеаграмма | — | framework | Типология личности |
 | **MBTI** | MBTI | — | framework | Myers-Briggs, без перевода |
 | **Author's Note** | Author's Note | AN | parameter | НЕ "Авторские заметки" |
 | **Lorebook** | Lorebook | LB | parameter | НЕ "Лорбук" |
-| **Chain of Thought** | Цепочка рассуждений | CoT | technique | CoT — аббревиатура |
+| **Chain of Thought** | Цепочка рассуждений | CoT | technique | CoT — аббревиатура (L3-only после реструктуризации) |
 | **Voice Isolation** | Изоляция голоса | — | technique | — |
 | **Embodiment** | Телесность | — | technique | — |
 | **Format Lock** | Format Lock | — | technique | Без перевода |

@@ -2,7 +2,7 @@
 
 > **Date:** 2026-04-20
 > **Plan Reference:** `layer-restructure-plan-v3.md`
-> **Session Status:** Phases 1–4 COMPLETED. Phases 5–6 REMAINING.
+> **Session Status:** Phases 1–6 ALL COMPLETED.
 
 ---
 
@@ -68,32 +68,43 @@
 8. **part_10_examples.html — `p10_elena_l2`**: Removed LIE and GHOST from `<spine>` block, kept WANT/NEED/FLAW only
 9. **part_10_examples.html — `p10_geralt_l2`**: Removed LIE and GHOST from `<spine>` block, kept WANT/NEED/FLAW only
 
+### Phase 5: Update content_map.md ✅
+
+**File modified:** `docs/content_map.md`
+
+**Actions performed:**
+1. **Step 5a — Audit:** Extracted all 91 `data-section` IDs from 10 master-HTML files. Identified 25+ phantom IDs from old content_map and 35+ missing IDs. Complete mismatch required full rewrite.
+2. **Step 5b — Full rewrite:** Completely rewrote `docs/content_map.md` with:
+   - All 91 sections accurately listed with correct layer values
+   - All phantom IDs removed (p1_minimal_card, p1_version, p2_anchor_format, p2_trigger, p2_action, p2_anchor_validation, p3_examples, p3_dialogue_markup, p6_cot_tier1, p8_antipattern_godmoding, p8_antipattern_ooc, p8_antipattern_voice, p8_antipattern_ocean, p8_antipattern_anchors, p8_antipattern_spine, p9_decision_tree, p9_token_budget, p10_elena_l3, etc.)
+   - All missing IDs added (p7_sampling_params, p9_basic_checklist, p9_layer_transition, all bridge sections, p8_ap15_extended, p3_multi_char, etc.)
+   - All layer values match post-restructure state (LIE→l3, GHOST→l3, CoT basics→l3, CoT tiers→l3)
+   - Statistics table: L1=23, L2=39, L3=29, Total=91
+   - All character names in Notes column use Russian forms
+
+### Phase 6: Synchronize Documentation ✅
+
+**Files modified:** 7 files
+
+**Actions performed:**
+
+1. **docs/character_bible.md** — Added `(L3-only)` annotations to all LIE and GHOST entries in SPINE blocks for all 10 characters. Updated Эллиот Алдерсон entry with `Used in` field referencing `p6_cot_tier3` and `p4_l3_spine_full`. Updated Эдвард Элрик entry with `Card` field referencing `p10_edward_l2`. Added SPINE Layer Rules section explaining L2 vs L3 card usage. Translated English character references to Russian in Jesse and Tyler entries. Updated "When Adding New Characters" rule from "all 5 elements" to "at least WANT/NEED/FLAW (L2)".
+
+2. **docs/architecture.md** — Updated layer descriptions to reflect SPINE split. Updated Layer Markup example from p2_cot_anchors to p4_lie. Added "Layer Restructure (v6 → v6.1)" section with before/after comparison table. Updated migration table with SPINE model and Part 6 rows. Added section count (91 sections) to directory ownership.
+
+3. **docs/user_journeys.md** — Added step [7] to L1 journey for bridge sections. Updated L2 journey step [2] from "5 elements" to "3 elements (WANT/NEED/FLAW)" + LIE/GHOST bridge. Updated L3 journey step [2] to include explicit LIE/GHOST sections and p4_l3_spine_full validation. Updated L3 journey step [3] to note CoT basics/tiers now on L3. Updated Bridge Inventory with all new L1 bridge sections. Updated validation points for SPINE and CoT changes.
+
+4. **docs/migration_map.md** — Added "Layer Restructure Entries" section with 4 subsections: Moved Sections (l2→l3), Deleted Sections, New Sections (11 entries), Rewritten Sections (13 entries). Updated existing migration entries for p4_lie, p4_ghost, p6_cot_basics, p6_cot_tiers to show new l3 layer. Updated p2_cot_anchors as DELETED. Added p10_edward_l2 as NEW.
+
+5. **docs/terminology_dictionary.md** — Added `(L3-only после реструктуризации)` annotation to LIE, GHOST, and CoT term entries.
+
+6. **layer-config.json** (root) — Updated L2 description to include "СПИН: WANT/NEED/FLAW". Updated L3 description to include "+LIE/GHOST/CoT/XML/API".
+
+7. **build/layer-config.json** — Updated to match root layer-config.json: added `token_budget` and `reading_time` fields for L2 and L3, updated descriptions identically.
+
 ---
 
-## Remaining Phases
-
-### Phase 5: Update content_map.md (NOT STARTED)
-
-**What needs to be done:**
-- Step 5a: Audit all `data-section` IDs against current master-HTML files post-Phases 1–4
-- Step 5b: Completely rewrite `docs/content_map.md` to match the actual post-restructure state
-- Must include all new sections, remove deleted ones, fix layer mismatches
-- Known phantoms to remove: `p1_minimal_card`, `p1_version`, `p2_anchor_format`, `p2_trigger`, `p2_action`, `p2_anchor_validation`, `p3_examples`, `p3_dialogue_markup`, `p6_cot_tier1`, `p8_antipattern_godmoding`, `p8_antipattern_ooc`, `p8_antipattern_voice`, `p8_antipattern_ocean`, `p8_antipattern_anchors`, `p8_antipattern_spine`, `p9_decision_tree`, `p9_token_budget`, `p10_elena_l3`, etc.
-- Known missing to add: `p7_sampling_params`, `p9_basic_checklist`, `p9_layer_transition`, all new bridge sections, etc.
-
-### Phase 6: Synchronize Documentation (NOT STARTED)
-
-**What needs to be done:**
-1. `docs/character_bible.md` — Add (L3-only) annotations to LIE/GHOST in SPINE blocks, update Эллиот/Эдвард entries
-2. `docs/architecture.md` — Update SPINE description to "WANT/NEED/FLAW (L2) + LIE/GHOST (L3)", update Part 6 as "L3-only"
-3. `docs/user_journeys.md` — Update L1/L2/L3 journeys with bridge sections and SPINE split
-4. `docs/migration_map.md` — Add restructure entries for all moves, deletions, new sections, rewrites
-5. `docs/terminology_dictionary.md` — Add (L3-only) annotations to LIE, GHOST, CoT entries
-6. `layer-config.json` (root + build/) — Update L2/L3 descriptions to reflect SPINE split
-
----
-
-## Post-Phase 4 Verification Checklist
+## Post-Phase 6 Verification Checklist
 
 | Check | Status |
 |-------|--------|
@@ -104,6 +115,13 @@
 | L2 SPINE cards contain only WANT/NEED/FLAW | ✅ Verified (Elena, Geralt, Edward) |
 | L3 contains LIE, GHOST, GHOST Layers, CoT basics/tiers | ✅ Verified |
 | No duplication between p2_cot_anchors (deleted) and p6_cot_anchors | ✅ Verified |
+| content_map.md matches actual master-HTML (zero phantom, zero missing) | ✅ Verified |
+| character_bible.md LIE/GHOST marked (L3-only) | ✅ Verified |
+| architecture.md reflects SPINE split and Part 6 L3-only | ✅ Verified |
+| user_journeys.md updated for SPINE split and bridge sections | ✅ Verified |
+| migration_map.md has restructure entries | ✅ Verified |
+| terminology_dictionary.md has (L3-only) annotations | ✅ Verified |
+| layer-config.json (root + build/) descriptions updated and synchronized | ✅ Verified |
 | Build check needs to be run | ⚠️ Run `node scripts/build-layers.mjs` before merging |
 
 ---
@@ -115,12 +133,13 @@
 | SPINE on L2 | 5 elements (WANT/NEED/FLAW/LIE/GHOST) | 3 elements (WANT/NEED/FLAW) |
 | LIE, GHOST | `data-layer="l2"` | `data-layer="l3"` |
 | CoT basics, CoT tiers | `data-layer="l2"` | `data-layer="l3"` |
-| L1 sections total | ~6 (5 Parts had zero L1) | ~12 (all 10 Parts have L1) |
+| L1 sections total | ~6 (5 Parts had zero L1) | 23 (all 10 Parts have L1) |
 | p2_cot_anchors | Existed (duplicate of Part 6) | Deleted, replaced with reference link |
 | p6_cot_tier3 example | Выщербленный (duplicate of p6_cot_anchors) | Эллиот Алдерсон (new unique example) |
 | p10_edward_l2 | Did not exist | Created with full card template |
 | p8_ap15_extended | Did not exist | Created with 3 OCEAN conflict scenarios |
+| Total sections | 81 | 91 |
 
 ---
 
-*Next session should start with Phase 5 (content_map.md rewrite) and Phase 6 (documentation synchronization).*
+*All 6 phases COMPLETED. Layer restructure is finished.*

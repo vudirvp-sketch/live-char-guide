@@ -1,8 +1,8 @@
 # Migration Map — Live Character Guide v5.12 → v6
 
-> **Version:** 2.0
+> **Version:** 3.0
 > **Last Updated:** 2026-04-20
-> **Status:** Tracking Document (updated for actual v6 section IDs)
+> **Status:** Tracking Document (updated for layer restructure)
 
 ---
 
@@ -73,7 +73,7 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `embodiment` | `p2_embodiment` | l2 | Embodiment protocol (full treatment) |
 | `flaw-anchors` | `p2_flaw_anchors` | l2 | FLAW-linked anchors |
 | `sensory-anchors` | `p2_sensory_anchors` | l3 | Sensory anchors for GHOST |
-| — | `p2_cot_anchors` | l3 | CoT anchors (advanced format) |
+| — | `p2_cot_anchors` | — | **DELETED during restructure** — duplicated p6_cot_anchors. Replaced with reference link |
 
 ### Part 3: Voice and Isolation
 
@@ -97,8 +97,8 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `want` | `p4_want` | l2 | WANT definition |
 | `need` | `p4_need` | l2 | NEED definition |
 | `flaw` | `p4_flaw` | l2 | FLAW definition |
-| `lie` | `p4_lie` | l2 | LIE definition |
-| `ghost` | `p4_ghost` | l2 | GHOST definition |
+| `lie` | `p4_lie` | l3 (was l2) | LIE definition — **moved l2→l3 during restructure** |
+| `ghost` | `p4_ghost` | l3 (was l2) | GHOST definition — **moved l2→l3 during restructure** |
 | `ghost-layers` | `p4_ghost_layers` | l3 | 3-tier GHOST |
 | `spine-mapping` | `p4_spine_mapping` | l2 | SPINE → Anchors protocol |
 | — | `p4_spine_check` | l3 | SPINE chain validation (GHOST→LIE→FLAW→NEED→WANT) |
@@ -122,8 +122,8 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 
 | v5.12 Anchor | v6 data-section | Layer | Migration Notes |
 |--------------|-----------------|-------|-----------------|
-| `cot-tiers` | `p6_cot_basics` | l2 | CoT overview + Tier 0/1 (merged) |
-| `cot-tier1` | `p6_cot_tiers` | l2 | Tier definitions (0/1/2/3) |
+| `cot-tiers` | `p6_cot_basics` | l3 (was l2) | CoT overview — **moved l2→l3 during restructure** |
+| `cot-tier1` | `p6_cot_tiers` | l3 (was l2) | Tier definitions — **moved l2→l3 during restructure** |
 | `cot-tier2` | `p6_cot_tier2` | l3 | Structured internal process |
 | `cot-tier3` | `p6_cot_tier3` | l3 | Full XML blocks |
 | `cot-anchors` | `p6_cot_anchors` | l3 | Internal process anchors |
@@ -185,7 +185,63 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `elena-full` | `p10_elena_l2` | l2 | Elena deep card (~950 tokens) |
 | `geralt-card` | `p10_geralt_l2` | l2 | Geralt SPINE demo |
 | `chipped-card` | `p10_vysherblenny_l3` | l3 | Выщербленный expert card (~1500+ tokens) |
+| — | `p10_edward_l2` | l2 | **NEW during restructure** — Эдвард Элрик L2 card (WANT/NEED/FLAW only) |
 | `elena-expert` | _(no separate section)_ | — | No separate L3 Elena card; Part 10 uses partial card examples per plan §3.10 |
+
+---
+
+## Layer Restructure Entries
+
+The following changes were made during the layer restructure (`layer-restructure-plan-v3.md`, Phases 1–6):
+
+### Moved Sections (l2 → l3)
+
+| data-section ID | Old Layer | New Layer | Rationale |
+|-----------------|-----------|-----------|-----------|
+| p4_lie | l2 | l3 | SPINE split: LIE is deep psychology, L3-only |
+| p4_ghost | l2 | l3 | SPINE split: GHOST is deep psychology, L3-only |
+| p6_cot_basics | l2 | l3 | CoT is advanced technique, L3-only |
+| p6_cot_tiers | l2 | l3 | CoT tier definitions moved with CoT basics |
+
+### Deleted Sections
+
+| data-section ID | Old Layer | Replacement |
+|-----------------|-----------|-------------|
+| p2_cot_anchors | l3 | Reference link in p2_sensory_anchors → p6_cot_anchors (was duplicate) |
+
+### New Sections
+
+| data-section ID | Layer | Part | Description |
+|-----------------|-------|------|-------------|
+| p1_l2_bridge | l1 | Part 1 | Bridge: СПИН, OCEAN, FLAW-linked anchors → L2 |
+| p1_l3_bridge | l1 | Part 1 | Bridge: LIE, GHOST, CoT, XML, API → L3 |
+| p4_l1_bridge | l1 | Part 4 | Bridge: SPINE = WANT/NEED/FLAW → L2 |
+| p4_l3_spine_full | l3 | Part 4 | Full 5-element SPINE chain (GHOST→LIE→FLAW→NEED→WANT) |
+| p5_l1_bridge | l1 | Part 5 | Bridge: OCEAN, Enneagram, MBTI → L2 |
+| p6_l1_bridge | l1 | Part 6 | Bridge: CoT internal process → L3 |
+| p7_l1_bridge | l1 | Part 7 | Bridge: SP, Format Lock, AN, Lorebook → L2 |
+| p8_l1_bridge | l1 | Part 8 | Bridge: AP-1–AP-15 catalog → L2+L3 |
+| p8_ap15_extended | l3 | Part 8 | AP-15 extended: 3 OCEAN conflict scenarios |
+| p3_multi_char | l3 | Part 3 | Multi-character: Уолтер Уайт + Джесси Пинкман |
+| p10_edward_l2 | l2 | Part 10 | Эдвард Элрик L2 card (WANT/NEED/FLAW only) |
+
+### Rewritten Sections
+
+| data-section ID | Layer | Change Description |
+|-----------------|-------|--------------------|
+| p1_core_rules | l1 | Added GHOST inline definition + layer-remark bridge |
+| p1_elena_minimal | l1 | Replaced duplicated card text with reference to p10_elena_l1 |
+| p1_top3_problems | l1 | Shortened + added links to p9_top5_problems |
+| p1_layer_comparison | l1 | Updated SPINE row: L2 = WANT/NEED/FLAW, L3 = +LIE/GHOST |
+| p4_spine_overview | l2 | Removed L/G from pipeline, added L3 bridge |
+| p4_spine_mapping | l2 | Marked GHOST/LIE rows as L3-only with data-layer-switch |
+| p4_l2_quickstart | l2 | Replaced 5-element checklist with WANT/NEED/FLAW + L3 bridge |
+| p5_enneagram_to_spine | l2 | LIE marked as L3-only, Эллиот example shows only WANT/NEED/FLAW |
+| p6_cot_tier3 | l3 | Replaced duplicate Выщербленный example with Эллиот Алдерсон |
+| p8_ap11_voice_bleed | l3 | English names → Russian (Уолтер Уайт, Джесси Пинкман) |
+| p9_layer_transition | l3 | Added LIE/GHOST and CoT criteria for L2→L3 |
+| p10_elena_l2 | l2 | Removed LIE/GHOST from `<spine>` block |
+| p10_geralt_l2 | l2 | Removed LIE/GHOST from `<spine>` block |
 
 ---
 

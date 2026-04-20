@@ -15,7 +15,7 @@
       "name": "Deep",
       "label": "Глубокий",
       "color": "#38bdf8",
-      "description": "~30 мин, 800-1500 токенов карточки",
+      "description": "~30 мин, 800-1500 токенов карточки, СПИН: WANT/NEED/FLAW",
       "token_budget": "800-1500",
       "reading_time": "30 min"
     },
@@ -24,7 +24,7 @@
       "name": "Expert",
       "label": "Экспертный",
       "color": "#8b5cf6",
-      "description": "~60 мин, 1500+ токенов карточки",
+      "description": "~60 мин, 1500+ токенов карточки, +LIE/GHOST/CoT/XML/API",
       "token_budget": "1500+",
       "reading_time": "60 min"
     }

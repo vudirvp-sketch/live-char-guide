@@ -1,7 +1,7 @@
 # User Journeys — Live Character Guide v6
 
-> **Version:** 1.0
-> **Last Updated:** 2026-04-19
+> **Version:** 2.0
+> **Last Updated:** 2026-04-20
 > **Status:** Draft (validated after Stage 1)
 
 ---
@@ -53,6 +53,9 @@ This document describes what a reader **DOES** at each layer — not what conten
 │      • If fixed → done                                          │
 │      • If deeper issue → data-layer-switch → L2                 │
 │                                                                  │
+│  [7] Bridge sections in Parts 4–8 → Know SPINE/OCEAN/CoT/      │
+│      Technical/Anti-patterns exist → Can switch to L2/L3        │
+│                                                                  │
 │  EXIT: Working minimal card (~500 tokens)                       │
 │  NEXT: See OCEAN/SPINE mentions → know they exist in L2         │
 └─────────────────────────────────────────────────────────────────┘
@@ -68,12 +71,14 @@ This document describes what a reader **DOES** at each layer — not what conten
 | 4 | Voice Isolation rule | ✅ Rule stated clearly |
 | 5 | Quickstart exists | ✅ Template available |
 | 6 | Troubleshooting accessible | ✅ Part 9 link works |
+| 7 | Bridge sections visible | ✅ All 10 Parts have L1 content, bridges to L2/L3 |
 
 ### Expected Outcome
 - Reader produces a **minimal working card** (~500 tokens)
 - Understands the 4 blocks structure
 - Knows core rules (OCEAN poles, Voice Isolation, etc.)
-- Knows L2 exists for deeper content
+- Knows L2 exists for deeper content (SPINE, OCEAN, FLAW-linked anchors)
+- Knows L3 exists for advanced content (LIE, GHOST, CoT, XML, API) via bridge sections
 
 ---
 
@@ -94,8 +99,9 @@ This document describes what a reader **DOES** at each layer — not what conten
 │      • Knows what was added vs L1                               │
 │                                                                  │
 │  [2] Part 4 (SPINE) → Fill SPINE for character                  │
-│      • WANT/NEED/FLAW/LIE/GHOST                                 │
+│      • WANT/NEED/FLAW (3 elements on L2)                         │
 │      • Derive anchors from psychology                           │
+│      • If you want LIE/GHOST → bridge to L3                    │
 │                                                                  │
 │  [3] Part 2 L2 sections → Expand anchors                        │
 │      • FLAW-linked anchors                                      │
@@ -127,7 +133,7 @@ This document describes what a reader **DOES** at each layer — not what conten
 | Step | Check | Pass Criteria |
 |------|-------|---------------|
 | 1 | "What's New" visible | ✅ Table shows L2 additions |
-| 2 | SPINE sections exist | ✅ All 5 elements explained |
+| 2 | SPINE sections exist | ✅ WANT/NEED/FLAW explained (LIE/GHOST on L3) |
 | 3 | FLAW-linked anchors | ✅ Protocol documented |
 | 4 | Tier quality criteria | ✅ Tier 1/2/3 defined |
 | 5 | OCEAN tool works | ✅ Pentagon + sliders functional |
@@ -136,7 +142,7 @@ This document describes what a reader **DOES** at each layer — not what conten
 
 ### Expected Outcome
 - Reader produces a **deep card** (~950 tokens)
-- Has complete SPINE
+- Has complete SPINE (WANT/NEED/FLAW). LIE/GHOST available on L3 via bridge
 - Has 5-7 anchors with Price
 - Has OCEAN + Enneagram notation
 - Understands FLAW-linked anchors
@@ -159,11 +165,14 @@ This document describes what a reader **DOES** at each layer — not what conten
 │  [1] Switch to L3 → See "What's New" table                      │
 │      • Knows what was added vs L2                               │
 │                                                                  │
-│  [2] Part 4 L3 sections → Add GHOST Layers                      │
-│      • 3-tier structure                                         │
-│      • Link each to anchors                                     │
+│  [2] Part 4 L3 sections → Add LIE and GHOST to SPINE           │
+│      • LIE (ложная установка) → see p4_lie                      │
+│      • GHOST (событие прошлого) → see p4_ghost                  │
+│      • 3-tier GHOST Layers → link each to anchors               │
+│      • Validate full SPINE chain via p4_l3_spine_full           │
 │                                                                  │
 │  [3] Part 6 (CoT Tiers) → Add 2-3 CoT anchors                   │
+│      • CoT basics + Tier definitions now on L3                  │
 │      • Tier 2 recommended for most                              │
 │      • Internal process anchors                                 │
 │                                                                  │
@@ -192,8 +201,8 @@ This document describes what a reader **DOES** at each layer — not what conten
 | Step | Check | Pass Criteria |
 |------|-------|---------------|
 | 1 | "What's New" visible | ✅ Table shows L3 additions |
-| 2 | GHOST Layers explained | ✅ 3-tier structure documented |
-| 3 | CoT tiers documented | ✅ Tier 1/2/3 templates available |
+| 2 | LIE + GHOST + GHOST Layers | ✅ LIE/GHOST sections on L3, full chain in p4_l3_spine_full |
+| 3 | CoT tiers documented | ✅ CoT basics + tiers now on L3, Tier 1/2/3 templates available |
 | 4 | API blocks documented | ✅ Claude/GPT specifics |
 | 5 | Cross-matrix works | ✅ 5×9 interactive table |
 | 6 | L3 Quickstart exists | ✅ 60-min template available |
@@ -217,11 +226,17 @@ Every L2 section must have an L1 mention or `data-layer-switch`. Every L3 sectio
 
 | From | To | Type | Purpose |
 |------|-----|------|---------|
-| L1 Part 2 (anchors) | L2 Part 4 (SPINE) | data-layer-switch | "Want anchors from psychology? → L2" |
+| L1 Part 1 (bridges) | L2 Part 4 (SPINE) | data-layer-switch | "Want anchors from psychology? → L2" |
+| L1 Part 4 (bridge) | L2 Part 4 (SPINE) | data-layer-switch | "SPINE = WANT/NEED/FLAW → L2" |
+| L1 Part 5 (bridge) | L2 Part 5 (OCEAN) | data-layer-switch | "OCEAN/Enneagram tools → L2" |
+| L1 Part 6 (bridge) | L3 Part 6 (CoT) | data-layer-switch | "CoT internal process → L3" |
+| L1 Part 7 (bridge) | L2 Part 7 (Technical) | data-layer-switch | "SP/Format Lock/AN/Lorebook → L2" |
+| L1 Part 8 (bridge) | L2 Part 8 (Anti-patterns) | data-layer-switch | "AP-1–AP-15 catalog → L2" |
 | L1 Part 3 (voice) | L2 Part 3 (embodiment) | data-layer-switch | "Want body-first protocol? → L2" |
 | L1 Part 9 | L2 Part 4 | data-layer-switch | "Deeper diagnostics → L2" |
 | L2 Part 2 (anchors) | L3 Part 6 (CoT) | data-layer-switch | "Internal process anchors → L3" |
-| L2 Part 4 (SPINE) | L3 Part 4 (GHOST Layers) | data-layer-switch | "Multi-tier GHOST → L3" |
+| L2 Part 4 (SPINE) | L3 Part 4 (LIE+GHOST) | data-layer-switch | "LIE/GHOST/GHOST Layers → L3" |
+| L2 Part 4 (SPINE) | L3 Part 4 (full chain) | data-layer-switch | "Полный СПИН из 5 элементов → L3" |
 | L2 Part 5 (OCEAN) | L3 Part 5 (cross-matrix) | data-layer-switch | "OCEAN×Enneagram correlation → L3" |
 | L2 Part 7 (technical) | L3 Part 7 (4K-Fallback) | data-layer-switch | "Low-context adaptation → L3" |
 
