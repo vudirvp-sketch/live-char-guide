@@ -142,4 +142,97 @@
 
 ---
 
-*All 6 phases COMPLETED. Layer restructure is finished.*
+## Content Restoration — Phases 0–2 (2026-04-21)
+
+> **Plan Reference:** `content-restoration-implementation-plan-v2.1.md`
+> **Date:** 2026-04-21
+> **Session Status:** Content Restoration Phases 0–2 COMPLETED.
+
+### Phase 0: Documentation Pre-Flight ✅ (Pre-existing)
+
+Phase 0 was already completed during IMP-44 work. All documentation files (content_map.md, terminology_dictionary.md, glossary.json, character_schema.json, validate-master.mjs, content_restoration_changelog.md) already contain the new entries and validation rules specified in the plan.
+
+### Phase 1: Part 1 — Token Budgets + Foundational Principles ✅
+
+**File modified:** `src/master/part_01_basic_blocks.html`
+
+**Sections Added:**
+- `p1_token_pipeline` (l1) — 10-step token budget pipeline table + context size budget table
+- `p1_block_budget` (l1) — Min/Standard/Max budget table per block + per layer
+- `p1_conclusion` (l1) — Key rules reminder table + "what you now know" list by layer
+
+**Sections Modified:**
+- `p1_card_overview` — Added "поведенческий движок" metaphor per Item 1.3
+- `p1_core_rules` — Added Pattern Matcher foundational principle callout + 5-row explanation table per Item 1.4
+- `p1_top3_problems` — Fixed pre-existing data-layer-switch error: changed `2#p9_troubleshooting` to `href="#p9_troubleshooting"` (p9_troubleshooting is already L1)
+
+**Actions performed:**
+1. Expanded p1_card_overview opening paragraph with behavioral engine metaphor
+2. Inserted p1_token_pipeline section between p1_layer_comparison and p1_l1_quickstart
+3. Inserted p1_block_budget section after p1_token_pipeline
+4. Added Pattern Matcher callout before 5 core rules in p1_core_rules
+5. Added Pattern Matcher explanation table after core rules in p1_core_rules
+6. Added p1_conclusion section after p1_l3_bridge
+7. Fixed data-layer-switch validation error in p1_top3_problems
+
+### Phase 2: Part 2 — Anchor Format + Price + Directives ✅
+
+**File modified:** `src/master/part_02_anchors.html`
+
+**Sections Added:**
+- `p2_env_reactivity` (l2) — ENVIRONMENTAL REACTIVITY directive with decorative vs action examples + cross-reference to Part 7 CORE DIRECTIVES
+
+**Sections Modified:**
+- `p2_anchor_rules` — Expanded Price definition with canonical format, added Price counter-example (antipattern-card), added Price typology table, added INFLUENCE BOUNDARY callout with cross-reference
+- `p2_embodiment` — Replaced basic pipeline with expanded EMBODIMENT FIRST protocol with detailed step descriptions (Вес/Баланс/Дыхание etc.), added explanatory note about sensor layer
+
+**Actions performed:**
+1. Expanded Price definition line in p2_anchor_rules with canonical format
+2. Added Price counter-example callout + antipattern-card
+3. Added Price typology table (Физиологический/Психологический)
+4. Added INFLUENCE BOUNDARY callout with cross-reference to Part 7
+5. Replaced p2_embodiment infographic with expanded EMBODIMENT FIRST protocol
+6. Added explanatory note about sensor layer
+7. Inserted p2_env_reactivity section after p2_embodiment
+
+### Build & Validation Results
+
+| Check | Status |
+|-------|--------|
+| Build passes (95 sections) | ✅ |
+| No duplicate data-section IDs | ✅ |
+| No prohibited elements | ✅ |
+| No prohibited translations | ✅ |
+| Visual components from registry | ✅ |
+| Heading hierarchy correct | ✅ |
+| Character examples match Bible | ✅ |
+| data-layer-switch to p7_core_directives | ⚠️ Forward reference — section will be created in Phase 6 |
+
+**Known forward references (will resolve after Phase 6):**
+- `p2_anchor_rules` → `data-layer-switch="2#p7_core_directives"` (Phase 6 creates this section)
+- `p2_env_reactivity` → `data-layer-switch="2#p7_core_directives"` (Phase 6 creates this section)
+
+### SELF-CHECK
+
+- [x] No duplication beyond one-sentence references (IMP-5)
+- [x] All new data-section IDs unique across entire guide
+- [x] All cross-references follow DAG direction
+- [x] No Markdown syntax in HTML (IMP-41)
+- [x] No inline styles (IMP-23)
+- [x] Only registry components used
+- [x] Language rules followed (Russian prose, English terms per terminology_dictionary)
+- [x] Content layer assignments follow layer-restructure-plan-v3 (IMP-47)
+- [x] Forward references to p7_core_directives documented (IMP-33)
+- [x] Build passes: YES (2 forward-reference validation errors expected until Phase 6)
+
+### Section Count Update
+
+| Part | Before (IMP-44) | After (Phases 0–2) | Change |
+|------|-----------------|---------------------|--------|
+| Part 1 | 8 sections | 11 sections | +3 (p1_token_pipeline, p1_block_budget, p1_conclusion) |
+| Part 2 | 6 sections | 7 sections | +1 (p2_env_reactivity) |
+| **Total** | **91 sections** | **95 sections** | **+4 sections** |
+
+---
+
+*IMP-44 Layer Restructure phases 1–6 COMPLETED. Content Restoration Phases 0–2 COMPLETED. Phases 3–14 pending.*

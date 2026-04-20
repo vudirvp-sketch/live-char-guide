@@ -53,7 +53,7 @@
 <ul>
 <li><strong>Действие наблюдаемое</strong> — можно увидеть/услышать, не внутреннее состояние</li>
 <li><strong>Цена физическая</strong> — телесная реакция, не эмоция</li>
-<li><strong>Цена в той же сцене</strong> — немедленная, не отложенная</li>
+<li><strong>Цена в той же сцене</strong> — немедленная, не отложенная. Формат: [Trigger] → [Action] → [Price: физический/вербальный маркер в той же сцене]</li>
 <li><strong>Триггер конкретный</strong> — не "когда ему грустно", а "когда ему задают вопрос о прошлом"</li>
 </ul>
 
@@ -63,6 +63,37 @@
 <p><strong>✅ Хорошо:</strong> "Ожидая результата, грызёт ногти и перечитывает сообщение трижды"</p>
 <p><em>Конкретные действия, не абстрактные прилагательные.</em></p>
 </div>
+
+<div class="callout warn">
+<p><strong>⚠️ «Потом будет жалеть» — НЕ валидный Price.</strong> Price = наблюдаемый маркер в той же сцене. Если Price не появляется в ответе модели — якорь не работает.</p>
+</div>
+
+<div class="antipattern-card">
+<div class="problem-block">
+<h4>❌ Отложенная цена</h4>
+<p>Когда кто-то лжёт → отшучивается → <strong>потом будет жалеть</strong></p>
+</div>
+<div class="solution-block">
+<h4>✅ Немедленная цена</h4>
+<p>Когда кто-то лжёт → отшучивается, отстраняется → <strong>укол вины: вздрагивает, сжимает кулаки, голос становится тише</strong></p>
+</div>
+</div>
+
+<p><strong>Типы Price:</strong></p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Тип</th><th>Механика</th><th>Пример</th></tr></thead>
+<tbody>
+<tr><td>Физиологический</td><td>Ограничивает действия тела</td><td>Усталость, боль, потеря равновесия → не может действовать так же</td></tr>
+<tr><td>Психологический</td><td>Ограничивает выбор реакций</td><td>Вина, стыд, гнев → не может реагировать рационально</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Граница влияния (INFLUENCE BOUNDARY):</strong> Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, а не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напуган.</p>
+</div>
+<p class="layer-remark"><span class="remark-icon">→</span> INFLUENCE BOUNDARY как директива SP → <a data-layer-switch="2#p7_core_directives" class="layer-remark">Part 7: CORE DIRECTIVES</a></p>
 
 </section>
 
@@ -132,33 +163,37 @@
 
 <p><strong>Embodiment</strong> — протокол связи эмоционального состояния с телесной реакцией. Каждая эмоция должна проявляться физически.</p>
 
-<h4>Протокол Embodiment</h4>
-<div class="infographic inf-pipeline">
+<p>Протокол телесности (EMBODIMENT FIRST):</p>
+<div class="infographic">
+<div class="infographic-title">EMBODIMENT FIRST: Протокол телесности</div>
+<div class="inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
 <div class="inf-step-label">СОСТОЯНИЕ</div>
-<div class="inf-step-desc">Эмоция</div>
-<div class="inf-step-code">Тревога</div>
+<div class="inf-step-desc">Внутренний сигнал</div>
+<div class="inf-step-code">Вес / Баланс / Дыхание / Микро-движение</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">02</div>
 <div class="inf-step-label">ТЕЛО</div>
 <div class="inf-step-desc">Физическая реакция</div>
-<div class="inf-step-code">Сжимает кулаки</div>
+<div class="inf-step-code">Напряжение / Расслабление / Дрожь</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">03</div>
 <div class="inf-step-label">СЕНСОР</div>
-<div class="inf-step-desc">Ощущение</div>
-<div class="inf-step-code">Холод в груди</div>
+<div class="inf-step-desc">Контакт со средой</div>
+<div class="inf-step-code">Текстура / Звук / Запах / Температура</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">04</div>
 <div class="inf-step-label">РЕЧЬ</div>
-<div class="inf-step-desc">Влияние на голос</div>
-<div class="inf-step-code">Короткие фразы</div>
+<div class="inf-step-desc">Вербальная реакция</div>
+<div class="inf-step-code">Тон / Темп / Объём / Лексика</div>
 </div>
 </div>
+</div>
+<p>Сенсорный слой (шаг 3) — результат телесного контакта со средой, не отдельная цепь. Персонаж ощущает текстуру ЧЕРЕЗ действие тела, а не декоративно.</p>
 
 <h4>Примеры Embodiment</h4>
 <div class="table-wrap">
@@ -182,6 +217,21 @@
 <span class="remark-icon">→</span>
 CoT-якоря (якоря с внутренним процессом): <a data-layer-switch="3#p6_cot_anchors" class="layer-remark">Part 6: CoT-якоря → Экспертный слой</a>
 </p>
+
+</section>
+
+<section data-layer="l2" data-section="p2_env_reactivity">
+<h3>Реактивность среды (ENVIRONMENTAL REACTIVITY)</h3>
+
+<p>Сенсорные и пространственные детали должны вводиться органично, через действие персонажа или присутствие {{user}}, никогда — декоративно. Среда раскрывается через действие, а не описывается отдельно от персонажа.</p>
+
+<div class="callout warn">
+<p><strong>⚠️ Декоративное описание vs действие:</strong></p>
+<p><strong>❌ Декорация без персонажа:</strong> «Комната была украшена гобеленами с изображениями охотничьих сцен. Камин потрескивал.» — чистая декорация, персонаж не присутствует.</p>
+<p><strong>✅ Среда через действие:</strong> «Геральт провёл пальцами по шершавой ткани гобелена — пыль. Давно никто не заходил.» — среда раскрывается через действие персонажа.</p>
+</div>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Полная директива в SP: Part 7, <a data-layer-switch="2#p7_core_directives" class="layer-remark">CORE DIRECTIVES</a></p>
 
 </section>
 

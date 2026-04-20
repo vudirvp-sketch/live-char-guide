@@ -7,7 +7,7 @@
 <section data-layer="l1" data-section="p1_card_overview">
 <h2>Базовые блоки карточки</h2>
 
-<p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
+<p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Но думать о ней нужно как о <strong>поведенческом движке</strong>: каждый элемент должен производить наблюдаемое действие, а не украшать описание. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
 
 <div class="table-wrap">
 <table>
@@ -34,6 +34,10 @@
 
 <p>Эти правила обязательны для всех карточек, независимо от слоя. Нарушение любого из них приводит к ухудшению качества генерации.</p>
 
+<div class="callout important">
+<p><strong>📌 Фундаментальный принцип:</strong> LLM = Pattern Matcher, не Rule Executor. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% compliance). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
+</div>
+
 <div class="table-wrap">
 <table>
 <thead>
@@ -53,6 +57,20 @@
 <span class="remark-icon">→</span>
 Подробнее о GHOST и других элементах психологии: <a data-layer-switch="2#p4_spine_overview" class="layer-remark">СПИН → Глубокий слой</a>
 </p>
+
+<p>Все 5 правил вытекают из принципа Pattern Matcher:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Правило</th><th>Почему (Pattern Matcher)</th></tr></thead>
+<tbody>
+<tr><td>1. OCEAN: 1–2 полюса</td><td>3+ противоречивых полюса → модель «осциллирует» между паттернами</td></tr>
+<tr><td>2. Price обязателен</td><td>Без Price якорь = инструкция без паттерна → ≤60% compliance</td></tr>
+<tr><td>3. Голос только в Examples</td><td>Description = логика (~0% voice compliance на 12B); Examples = паттерн (~85% compliance)</td></tr>
+<tr><td>4. GHOST только в Description</td><td>SP = инструкции (модель игнорирует); Description = логика поведения</td></tr>
+<tr><td>5. Якорь: T→A→P</td><td>Каждый элемент = паттерн для копирования. Пропущенный элемент = слепая зона</td></tr>
+</tbody>
+</table>
+</div>
 
 </section>
 
@@ -82,6 +100,83 @@
 <span class="remark-icon">→</span>
 Подробнее о SPINE и OCEAN: <a data-layer-switch="2#p4_spine_overview" class="layer-remark">Layer 2: SPINE Framework</a>
 </p>
+
+</section>
+
+<section data-layer="l1" data-section="p1_token_pipeline">
+<h3>Token-бюджет: конвейер сборки</h3>
+
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Ниже — пошаговая разбивка для L1 слоя.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Шаг</th><th>Блок</th><th>L1 (4K)</th><th>L1 (8K+)</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>System Prompt</td><td>50–80</td><td>80–120</td><td>Базовые запреты + формат</td></tr>
+<tr><td>2</td><td>Core Rules</td><td>20–30</td><td>20–30</td><td>5 правил (встроены в SP)</td></tr>
+<tr><td>3</td><td>SPINE (WANT/NEED/FLAW)</td><td>skip</td><td>skip</td><td>Не используется на L1</td></tr>
+<tr><td>4</td><td>Description</td><td>150–200</td><td>200–300</td><td>Факты + якоря</td></tr>
+<tr><td>5</td><td>Anchors</td><td>40–60</td><td>60–80</td><td>3–5 якорей T→A→P</td></tr>
+<tr><td>6</td><td>Examples (2x)</td><td>80–100</td><td>100–140</td><td>Нейтральный + стресс</td></tr>
+<tr><td>7</td><td>Greeting</td><td>40–60</td><td>50–80</td><td>Первое сообщение</td></tr>
+<tr><td>8</td><td>Anti-godmoding</td><td>15–20</td><td>15–20</td><td>Встроено в SP</td></tr>
+<tr><td>9</td><td>Format Lock</td><td>10–15</td><td>10–15</td><td>Фиксация формата</td></tr>
+<tr><td>10</td><td>Reserve</td><td>20–30</td><td>30–50</td><td>Буфер на непредвиденное</td></tr>
+<tr><td><strong>Итого</strong></td><td></td><td><strong>~430–580</strong></td><td><strong>~580–830</strong></td><td></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<p><strong>💡 Для 4K контекста:</strong> каждый токен на счету. Начните с минимальных значений и расширяйте по результатам тестирования.</p>
+</div>
+
+<h4>Бюджет по размеру контекста</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Контекст</th><th>Бюджет карточки</th><th>AN</th><th>Lorebook</th><th>CoT</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td>4K</td><td>430–580</td><td>✗</td><td>✗</td><td>✗</td><td>L1 only, минимальный SP</td></tr>
+<tr><td>8K</td><td>580–830</td><td>✓</td><td>✗</td><td>✗</td><td>L1+L2 basics</td></tr>
+<tr><td>16K</td><td>800–1500</td><td>✓</td><td>✓</td><td>✗</td><td>Full L2</td></tr>
+<tr><td>32K+</td><td>1500+</td><td>✓</td><td>✓</td><td>✓ (L3)</td><td>Full L3</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section data-layer="l1" data-section="p1_block_budget">
+<h3>Бюджет по блокам: минимум / стандарт / максимум</h3>
+
+<p>Каждый блок карточки имеет три уровня бюджета: минимальный (4K), стандартный (8K+), и максимальный (16K+). Превышение максимального значения — признак раздувания, который ведёт к потере контекста.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Слой</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td>System Prompt</td><td>50</td><td>100</td><td>200</td><td>L1</td><td>Больше = не лучше</td></tr>
+<tr><td>Description</td><td>150</td><td>300</td><td>700</td><td>L1–L3</td><td>Растёт с глубиной слоя</td></tr>
+<tr><td>Examples (каждый)</td><td>40</td><td>60</td><td>80</td><td>L1–L3</td><td>2 на L1, 3 на L2, 3–5 на L3</td></tr>
+<tr><td>Greeting</td><td>40</td><td>60</td><td>100</td><td>L1–L3</td><td>Не раздувайте</td></tr>
+<tr><td>Author's Note</td><td>—</td><td>50</td><td>100</td><td>L2+</td><td>Не нужен на L1</td></tr>
+<tr><td>Lorebook entry</td><td>—</td><td>50</td><td>150</td><td>L2+</td><td>Зависит от триггера</td></tr>
+<tr><td>OCEAN notation</td><td>—</td><td>20</td><td>30</td><td>L2</td><td>5 значений + 1–2 полюса</td></tr>
+<tr><td>SPINE block</td><td>—</td><td>60</td><td>100</td><td>L2–L3</td><td>WANT/NEED/FLAW (+LIE/GHOST на L3)</td></tr>
+<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>L1–L3</td><td>T→A→P, компактно</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет своего слоя. Если блок не помещается — сокращайте, а не раздувайте.</p>
+</div>
 
 </section>
 
@@ -184,7 +279,7 @@ Rules:
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-Полная диагностика: <a data-layer-switch="2#p9_troubleshooting" class="layer-remark">Layer 2: Troubleshooting</a>
+Полная диагностика: <a href="#p9_troubleshooting" class="layer-remark">Part 9: Диагностика и отладка</a>
 </p>
 
 </section>
@@ -209,4 +304,31 @@ Rules:
 <span class="remark-icon">→</span>
 LIE, GHOST, CoT, XML/API: <a data-layer-switch="3#p4_l3_spine_full" class="layer-remark">Полный СПИН из 5 элементов → Экспертный слой</a>
 </p>
+</section>
+
+<section data-layer="l1" data-section="p1_conclusion">
+<h3>Заключение</h3>
+
+<p>Вы изучили базовые принципы создания карточки персонажа. Вот ключевые правила, которые нельзя нарушать:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Правило</th><th>Суть</th></tr></thead>
+<tbody>
+<tr><td>Pattern Matcher</td><td>Модель копирует паттерны, не исполняет инструкции. Examples — главный инструмент.</td></tr>
+<tr><td>Price немедленный</td><td>Каждый якорь должен иметь наблюдаемую цену в той же сцене. «Потом будет жалеть» — не Price.</td></tr>
+<tr><td>Голос только в Examples</td><td>Для 12B: Description = 0% влияния на голос. Стилистика — исключительно через Examples.</td></tr>
+<tr><td>Правило одного изменения</td><td>При отладке меняйте только один параметр за раз. Иначе не узнаете, что помогло.</td></tr>
+<tr><td>presence_penalty = 0.0</td><td>PP > 0 ломает якоря и голос. Проверьте интерфейс — Ollama/LM Studio хардкодят PP=0.7.</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Что вы теперь умеете:</p>
+<ul>
+<li><strong>Минимальный слой (L1):</strong> Собрать рабочую карточку за 15 минут, заполнить 4 базовых блока, написать 2 Examples и Greeting.</li>
+<li><strong>Глубокий слой (L2):</strong> Построить СПИН (WANT/NEED/FLAW), вывести якоря из психологии, проверить OCEAN, добавить CORE DIRECTIVES.</li>
+<li><strong>Экспертный слой (L3):</strong> Добавить GHOST/LIE, CoT-якоря, XML-структуру, Lorebook, Tone Frame.</li>
+</ul>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Если персонаж «не работает» — <a data-layer-switch="1#p9_basic_checklist" class="layer-remark">Диагностика → Part 9</a></p>
 </section>
