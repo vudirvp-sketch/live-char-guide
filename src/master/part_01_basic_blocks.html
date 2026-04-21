@@ -35,7 +35,7 @@
 <p>Эти правила обязательны для всех карточек, независимо от слоя. Нарушение любого из них приводит к ухудшению качества генерации.</p>
 
 <div class="callout important">
-<p><strong>📌 Фундаментальный принцип:</strong> LLM = Pattern Matcher, не Rule Executor. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% compliance). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
+<p><strong>📌 Фундаментальный принцип:</strong> LLM = Pattern Matcher, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
 </div>
 
 <div class="table-wrap">
@@ -64,8 +64,8 @@
 <thead><tr><th>Правило</th><th>Почему (Pattern Matcher)</th></tr></thead>
 <tbody>
 <tr><td>1. OCEAN: 1–2 полюса</td><td>3+ противоречивых полюса → модель «осциллирует» между паттернами</td></tr>
-<tr><td>2. Price обязателен</td><td>Без Price якорь = инструкция без паттерна → ≤60% compliance</td></tr>
-<tr><td>3. Голос только в Examples</td><td>Description = логика (~0% voice compliance на 12B); Examples = паттерн (~85% compliance)</td></tr>
+<tr><td>2. Price обязателен</td><td>Без Price якорь = инструкция без паттерна → ≤60% следование директивам</td></tr>
+<tr><td>3. Голос только в Examples</td><td>Description = логика (~0% следование голосу на 12B); Examples = паттерн (~85% следование директивам)</td></tr>
 <tr><td>4. GHOST только в Description</td><td>SP = инструкции (модель игнорирует); Description = логика поведения</td></tr>
 <tr><td>5. Якорь: T→A→P</td><td>Каждый элемент = паттерн для копирования. Пропущенный элемент = слепая зона</td></tr>
 </tbody>
@@ -116,14 +116,14 @@
 <tbody>
 <tr><td>1</td><td>System Prompt</td><td>50–80</td><td>80–120</td><td>Базовые запреты + формат</td></tr>
 <tr><td>2</td><td>Core Rules</td><td>20–30</td><td>20–30</td><td>5 правил (встроены в SP)</td></tr>
-<tr><td>3</td><td>SPINE (WANT/NEED/FLAW)</td><td>skip</td><td>skip</td><td>Не используется на L1</td></tr>
+<tr><td>3</td><td>SPINE (WANT/NEED/FLAW)</td><td>—</td><td>—</td><td>Не используется на L1</td></tr>
 <tr><td>4</td><td>Description</td><td>150–200</td><td>200–300</td><td>Факты + якоря</td></tr>
 <tr><td>5</td><td>Anchors</td><td>40–60</td><td>60–80</td><td>3–5 якорей T→A→P</td></tr>
 <tr><td>6</td><td>Examples (2x)</td><td>80–100</td><td>100–140</td><td>Нейтральный + стресс</td></tr>
 <tr><td>7</td><td>Greeting</td><td>40–60</td><td>50–80</td><td>Первое сообщение</td></tr>
 <tr><td>8</td><td>Anti-godmoding</td><td>15–20</td><td>15–20</td><td>Встроено в SP</td></tr>
 <tr><td>9</td><td>Format Lock</td><td>10–15</td><td>10–15</td><td>Фиксация формата</td></tr>
-<tr><td>10</td><td>Reserve</td><td>20–30</td><td>30–50</td><td>Буфер на непредвиденное</td></tr>
+<tr><td>10</td><td>Резерв</td><td>20–30</td><td>30–50</td><td>Буфер на непредвиденное</td></tr>
 <tr><td><strong>Итого</strong></td><td></td><td><strong>~430–580</strong></td><td><strong>~580–830</strong></td><td></td></tr>
 </tbody>
 </table>
@@ -214,12 +214,7 @@
 </div>
 
 <h4>Шаблон System Prompt (L1)</h4>
-<pre><code>You are {{char}}. Never speak or act for {{user}}.
-
-Rules:
-- Stay in character at all times
-- Use the dialogue format from examples
-- Never break the fourth wall</code></pre>
+<p>→ Полный шаблон SP: <a data-layer-switch="2#p7_system_prompt">Part 7: Техническая реализация</a></p>
 
 <h4>Шаблон Description (L1)</h4>
 <pre><code>Имя: {{имя}}

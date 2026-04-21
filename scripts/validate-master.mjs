@@ -682,7 +682,7 @@ async function checkIMP27(allSections) {
     if (l3Sections.length > 0 && l2Sections.length > 0) {
       const hasLayerSwitch = l2Content.includes('data-layer-switch="3#');
       if (!hasLayerSwitch && l2Content.length > 0) {
-        warnings.push(`Part ${partNum}: L2 content has no data-layer-switch references to L3 — IMP-27 bridge missing`);
+        errors.push(`Part ${partNum}: L2 content has no data-layer-switch references to L3 — IMP-27 bridge missing`);
       }
     }
   }

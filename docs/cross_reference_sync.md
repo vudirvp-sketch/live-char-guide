@@ -24,14 +24,14 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 5 | p4_spine_mapping | p7_authors_note (WANT→NEED tracking) | `data-layer-switch="2#p7_authors_note"` | ✅ p7_authors_note references SPINE via AN template |
 | 6 | p3_multi_char | p8_ap11_voice_bleed | `data-layer-switch="3#p8_ap11_voice_bleed"` | ✅ p8_ap11_voice_bleed references p3_multi_char (IMP-48 bidirectional) |
 | 7 | p5_ocean_poles | p8_ap15_extended | Referenced via cross-ref | ✅ p8_ap15_extended references p5_ocean_poles (IMP-48 bidirectional) |
-| 8 | p1_conclusion | p9_basic_checklist | `data-layer-switch="1#p9_basic_checklist"` | ❌ p9_basic_checklist does not reference back to p1_conclusion |
+| 8 | p1_conclusion | p9_basic_checklist | `data-layer-switch="1#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_conclusion via layer-remark back-link |
 | 9 | p10_edward_l2 | p4_l3_spine_full | `data-layer-switch="3#p4_l3_spine_full"` | ✅ p4_l3_spine_full uses Эллиот example, not Edward — cross-ref is one-way by design |
 | 10 | p3_voice_leak | p9_symptom_table | Linked from L1 layer-remark | ✅ p9_symptom_table references Voice Leak in row 1 |
 | 11 | p1_conclusion | p9_one_change_rule | Rule #4 in conclusion table | ✅ p9_one_change_rule is standalone rule; implicit back-link via shared content |
 | 12 | p9_quality_scale | p9_decision_tree | `data-layer-switch="2#p9_decision_tree"` | ✅ p9_decision_tree is downstream; forward link sufficient |
 | 13 | p7_system_prompt | p7_core_directives | Internal href "#p7_core_directives" | ✅ p7_core_directives referenced as sub-section |
 | 14 | p7_system_prompt | p7_tone_frame | Internal href "#p7_tone_frame" | ✅ p7_tone_frame is sub-section of p7 |
-| 15 | p9_top5_problems | p9_symptom_table | `data-layer-switch="2#p9_symptom_table"` | ✅ p9_symptom_table does not reference back — REMEDIATION NEEDED for pair #8 |
+| 15 | p9_top5_problems | p9_symptom_table | `data-layer-switch="2#p9_symptom_table"` | ✅ p9_symptom_table references p9_top5_problems via layer-remark back-link |
 
 ---
 
@@ -53,22 +53,18 @@ These were discovered by scanning all `data-layer-switch` attributes in master H
 
 ### Pair #8: p1_conclusion ↔ p9_basic_checklist
 
-**Status:** ❌ Missing back-link
+**Status:** ✅ Resolved
 
-**Issue:** p1_conclusion references p9_basic_checklist via `data-layer-switch="1#p9_basic_checklist"`, but p9_basic_checklist does not contain a reference back to p1_conclusion.
-
-**Recommended Fix:** Add a `layer-remark` at the end of p9_basic_checklist:
+**Fix Applied:** Added `layer-remark` at the end of p9_basic_checklist:
 ```html
 <p class="layer-remark"><span class="remark-icon">→</span> Напоминание ключевых правил: <a data-layer-switch="1#p1_conclusion" class="layer-remark">Заключение → Part 1</a></p>
 ```
 
 ### Pair #15: p9_top5_problems ↔ p9_symptom_table
 
-**Status:** ❌ Missing back-link (partial)
+**Status:** ✅ Resolved
 
-**Issue:** p9_top5_problems links forward to p9_symptom_table, but p9_symptom_table does not contain a reference back to p9_top5_problems.
-
-**Recommended Fix:** Add a `layer-remark` at the end of p9_symptom_table:
+**Fix Applied:** Added `layer-remark` at the end of p9_symptom_table:
 ```html
 <p class="layer-remark"><span class="remark-icon">→</span> Краткий обзор топ-5 проблем: <a data-layer-switch="1#p9_top5_problems" class="layer-remark">Топ-5 проблем → Минимальный слой</a></p>
 ```
@@ -78,9 +74,9 @@ These were discovered by scanning all `data-layer-switch` attributes in master H
 ## Validation
 
 After all remediation items are resolved:
-- [ ] Every forward link has a corresponding back link (✅ or acceptable)
-- [ ] No ❌ items remain
-- [ ] All `data-layer-switch` targets resolve to existing sections
+- [x] Every forward link has a corresponding back link (✅ or acceptable)
+- [x] No ❌ items remain
+- [x] All `data-layer-switch` targets resolve to existing sections
 - [ ] `validate-master.mjs` passes with 0 errors
 
 ---

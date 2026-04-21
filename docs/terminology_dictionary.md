@@ -62,6 +62,7 @@
 | **Narrator Bleed** | Утечка рассказчика | — | diagnostic | Mixing narrator voice with character voice in Examples |
 | **One Change Rule** | Правило одного изменения | — | diagnostic | Never change >1 parameter at a time when debugging |
 | **Nested Anchors** | Вложенные якоря | — | diagnostic | Anchor chains with nested conditions → unpredictability |
+| **Lorebook Entry** | Запись Lorebook | LE | technique | A single entry in the Lorebook with Key/Content/Position/Depth/Probability/Cooldown |
 
 ---
 

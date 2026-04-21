@@ -600,6 +600,20 @@
       },
       "anchor_id": "p3_voice_leak",
       "cross_refs": ["Voice Leak", "Voice Isolation"]
+    },
+    {
+      "term": "Lorebook Entry",
+      "abbreviation": "LE",
+      "aliases": ["Lorebook Entry", "Запись Lorebook", "LB Entry"],
+      "definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Настройте записи для GHOST-фактов с триггерами",
+        "3": "Добавьте мировые записи для углубления сеттинга"
+      },
+      "anchor_id": "layer-2-term-lorebook-entry",
+      "cross_refs": ["#p7_lorebook"]
     }
   ],
   "layer_markers": {
