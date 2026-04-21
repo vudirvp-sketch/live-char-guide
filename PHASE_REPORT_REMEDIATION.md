@@ -76,7 +76,7 @@ All 20 remediation tasks (R-01 through R-20) have been executed. Build passes wi
 - part_03: "Embodiment" (standalone) → "Телесность", "Character Markers" → "Маркеры персонажа"
 - part_07: "compliance" → "следование (директивам)", "character cards" → "карточки персонажей", "SP Template Unification Rule" → "Правило унификации SP-шаблона"
 - part_08: English parentheticals → Russian (агрессивный, доминирующий, тревожный, etc.)
-- Remaining English hits (59) are all in `<pre><code>` blocks or Tone Frame SP examples (expected)
+- Remaining English hits (61) are all in `<pre><code>` blocks or Tone Frame SP examples (expected)
 
 ### R-13: Resolve check_duplicates.py findings (IMP-5) ✅
 **Status:** Fixed
@@ -129,7 +129,7 @@ All 20 remediation tasks (R-01 through R-20) have been executed. Build passes wi
 | validate-layers.mjs | ✅ PASSED (0 errors, 0 warnings) |
 | check_duplicates.py | ✅ 0 duplicates |
 | check_syntax_mix.py | ✅ No Markdown patterns |
-| check_english.py | ⚠️ 59 hits (all in `<pre><code>` or SP examples — expected) |
+| check_english.py | ⚠️ 61 hits (all in `<pre><code>` or SP examples — expected, includes Walter L2 card) |
 
 ---
 

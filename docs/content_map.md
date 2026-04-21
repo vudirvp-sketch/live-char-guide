@@ -1,8 +1,8 @@
 # Content Ownership Map — Live Character Guide v6
 
-> **Version:** 2.0
-> **Last Updated:** 2026-04-20
-> **Status:** Canonical Reference (post-layer-restructure)
+> **Version:** 2.1
+> **Last Updated:** 2026-04-22
+> **Status:** Canonical Reference (post-layer-restructure, post-remediation)
 
 ---
 
@@ -17,7 +17,9 @@ This document is the **single source of truth** for "where does concept X live."
 - Read this BEFORE writing any Part
 - Updated after each phase by appending new rows
 
-**Post-restructure note (Phase 5):** This version was completely rewritten after the layer restructure (Phases 1–4 of `layer-restructure-plan-v3.md`). All phantom IDs removed, all missing IDs added, all layer values updated to match post-restructure state. Total: 91 sections across 10 Parts.
+**Post-restructure note (Phase 5):** This version was completely rewritten after the layer restructure (Phases 1–4 of `layer-restructure-plan-v3.md`). All phantom IDs removed, all missing IDs added, all layer values updated to match post-restructure state.
+
+**Post-remediation note (Phase 6):** Statistics corrected after L1 Remediation Plan v3 execution and Content Restoration phases. L1 section count updated from 17 → 18 (Part 1 has 8 L1 sections, not 7). Total section count aligned with build output (102 sections from build-layers.mjs, including p10_walter_l2).
 
 ---
 
@@ -181,7 +183,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | L1 | L2 | L3 | Total |
 |------|----|----|-----|-------|
-| Part 1 (Basic Blocks) | 7 | 0 | 0 | 7 |
+| Part 1 (Basic Blocks) | 8 | 0 | 0 | 8 |
 | Part 2 (Anchors) | 3 | 3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
 | Part 4 (SPINE) | 0 | 6 | 5 | 11 |
@@ -191,12 +193,12 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
 | Part 10 (Examples) | 1 | 4 | 1 | 6 |
-| **Total** | **17** | **49** | **35** | **101** |
+| **Total** | **18** | **49** | **35** | **102** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 17 sections** (down from 27 — 10 sections removed/merged by L1 Remediation Plan v3)
-- **L2 sees: 66 sections** (+49 to L1)
-- **L3 sees: 101 sections** (+35 to L2)
+- **L1 sees: 18 sections** (down from 27 — 9 sections removed/merged by L1 Remediation Plan v3)
+- **L2 sees: 67 sections** (+49 to L1)
+- **L3 sees: 102 sections** (+35 to L2)
 
 **Note:** Part 7 L2 count is 9 (p7_system_prompt, p7_core_directives, p7_tone_frame, p7_sampling_params, p7_format_lock, p7_authors_note, p7_structured_inject, p7_lorebook, p7_model_checklist) — verified correct. The original plan v2.1 listed 10; the discrepancy was due to only 3 new L2 entries being specified in §2.1 vs 4 implied by the plan's statistics. Decision: 9 is the verified correct count based on actual HTML content.
 
@@ -255,4 +257,5 @@ Before finalizing any Part, verify:
 ---
 
 *Document prepared for Live Character Guide v6 rebuild project*
+*Updated 2026-04-22: statistics corrected to match build output (v2.1)*
 *Updated 2026-04-20: complete rewrite post-layer-restructure (Phases 1–4)*

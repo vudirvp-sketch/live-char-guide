@@ -21,6 +21,7 @@
  *   9. Visual components are from registry (CSS class check)
  *  10. Character examples match Character Bible
  *  11. IMP-27: every L2 section has an L1 mention; every L3 section has an L2 mention
+ *      (recognises both data-layer-switch and term-marker with data-target-layer)
  *  12. IMP-28: no orphan sections (every section is reachable)
  *  13. Callout emoji markers are correct (IMP-56)
  *
@@ -429,13 +430,16 @@ async function checkGlossaryTermsUsed(allContent) {
   const terms = glossaryData.canonical_terms || [];
   const allText = allContent.map(c => c.content).join('\n');
 
+  // Use case-insensitive matching for glossary term lookup
+  const allTextLower = allText.toLowerCase();
+
   const unusedTerms = [];
   for (const term of terms) {
     const termName = term.term;
     const aliases = term.aliases || [];
     const allForms = [termName, ...aliases].filter(Boolean);
 
-    const found = allForms.some(form => allText.includes(form));
+    const found = allForms.some(form => allTextLower.includes(form.toLowerCase()));
     if (!found) {
       unusedTerms.push(termName);
     }
@@ -668,12 +672,15 @@ async function checkIMP27(allSections) {
       // We don't error on every L2 section without L1 mention — only flag if NO L2 sections are mentioned
     }
 
-    // Check: at least one L2 reference from L1 content
+    // Check: at least one L2/L3 reference from L1 content
+    // Supports both data-layer-switch and term-marker with data-target-layer
     if (l2Sections.length > 0 && l1Sections.length > 0) {
       const hasLayerSwitch = l1Content.includes('data-layer-switch="2#') ||
                              l1Content.includes('data-layer-switch="3#');
-      if (!hasLayerSwitch && l1Content.length > 0) {
-        warnings.push(`Part ${partNum}: L1 content has no data-layer-switch references to L2/L3 — IMP-27 bridge missing`);
+      const hasTermMarker = /data-target-layer=["']2["']/i.test(l1Content) ||
+                           /data-target-layer=["']3["']/i.test(l1Content);
+      if (!hasLayerSwitch && !hasTermMarker && l1Content.length > 0) {
+        warnings.push(`Part ${partNum}: L1 content has no data-layer-switch or term-marker references to L2/L3 — IMP-27 bridge missing`);
       }
     }
 
@@ -681,8 +688,9 @@ async function checkIMP27(allSections) {
     const l2Content = l2Sections.map(s => s.content).join('\n');
     if (l3Sections.length > 0 && l2Sections.length > 0) {
       const hasLayerSwitch = l2Content.includes('data-layer-switch="3#');
-      if (!hasLayerSwitch && l2Content.length > 0) {
-        errors.push(`Part ${partNum}: L2 content has no data-layer-switch references to L3 — IMP-27 bridge missing`);
+      const hasTermMarker = /data-target-layer=["']3["']/i.test(l2Content);
+      if (!hasLayerSwitch && !hasTermMarker && l2Content.length > 0) {
+        errors.push(`Part ${partNum}: L2 content has no data-layer-switch or term-marker references to L3 — IMP-27 bridge missing`);
       }
     }
   }

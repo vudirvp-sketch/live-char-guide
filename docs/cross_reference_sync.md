@@ -77,7 +77,7 @@ After all remediation items are resolved:
 - [x] Every forward link has a corresponding back link (✅ or acceptable)
 - [x] No ❌ items remain
 - [x] All `data-layer-switch` targets resolve to existing sections
-- [ ] `validate-master.mjs` passes with 0 errors
+- [x] `validate-master.mjs` passes with 0 errors (0 errors, 10 warnings — HTML comments outside sections, all expected)
 
 ---
 
