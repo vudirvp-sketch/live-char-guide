@@ -24,7 +24,7 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 5 | p4_spine_mapping | p7_authors_note (WANT→NEED tracking) | `data-layer-switch="2#p7_authors_note"` | ✅ p7_authors_note references SPINE via AN template |
 | 6 | p3_multi_char | p8_ap11_voice_bleed | `data-layer-switch="3#p8_ap11_voice_bleed"` | ✅ p8_ap11_voice_bleed references p3_multi_char (IMP-48 bidirectional) |
 | 7 | p5_ocean_poles | p8_ap15_extended | Referenced via cross-ref | ✅ p8_ap15_extended references p5_ocean_poles (IMP-48 bidirectional) |
-| 8 | p1_conclusion | p9_basic_checklist | `data-layer-switch="1#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_conclusion via layer-remark back-link |
+| 8 | p1_conclusion | p9_basic_checklist | `href="#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_core_rules via layer-remark back-link |
 | 9 | p10_edward_l2 | p4_l3_spine_full | `data-layer-switch="3#p4_l3_spine_full"` | ✅ p4_l3_spine_full uses Эллиот example, not Edward — cross-ref is one-way by design |
 | 10 | p3_voice_leak | p9_symptom_table | Linked from L1 layer-remark | ✅ p9_symptom_table references Voice Leak in row 1 |
 | 11 | p1_conclusion | p9_one_change_rule | Rule #4 in conclusion table | ✅ p9_one_change_rule is standalone rule; implicit back-link via shared content |

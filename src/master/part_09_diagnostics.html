@@ -35,51 +35,44 @@
 
 </section>
 
-<section data-layer="l1" data-section="p9_troubleshooting">
-<h2>Диагностика и отладка</h2>
-
-<p>Раздел содержит чек-листы и таблицы для диагностики проблем с карточкой.</p>
-
-</section>
-
 <section data-layer="l1" data-section="p9_basic_checklist">
-<h3>Базовый чек-лист</h3>
+<h2>Диагностика и чек-лист</h2>
 
-<p>Проверьте каждый блок карточки:</p>
+<p>Если персонаж «не работает» — начните с этого чек-листа. Проверьте каждый блок карточки и сравните с типичными ошибками.</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Блок</th><th>Проверка</th><th>Типичная ошибка</th></tr>
+<tr><th>Блок</th><th>Проверка</th><th>Ссылка</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Tense set?<br/>☐ Format Lock?</td><td>Нет "Never speak for {{user}}"</td></tr>
-<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ Нет GHOST? (L1/L2)<br/>☐ OCEAN 1-2 полюса?</td><td>Голос в Description, не в Examples</td></tr>
-<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос?<br/>☐ Embodiment?<br/>☐ FLAW проявление?<br/>☐ &lt;START&gt;?</td><td>Generic голос без характера</td></tr>
-<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td>Слишком длинный или generic</td></tr>
-<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10?<br/>☐ PP = 0?<br/>☐ Temperature в диапазоне?</td><td>RepPen > 1.10</td></tr>
+<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Tense set?<br/>☐ Format Lock?</td><td><a href="#p1_core_rules">Правило #3</a></td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ OCEAN 1-2 полюса?</td><td><a href="#p1_core_rules">Правила #2, #5</a></td></tr>
+<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос?<br/>☐ Embodiment?<br/>☐ &lt;START&gt;?</td><td><a href="#p1_core_rules">Правило #3</a></td></tr>
+<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p1_token_budget">Токен-бюджет</a></td></tr>
+<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10?<br/>☐ PP = 0?<br/>☐ Temperature в диапазоне?</td><td><a href="#p9_top5_problems">Проблема #4</a></td></tr>
 </tbody>
 </table>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Напоминание ключевых правил: <a data-layer-switch="1#p1_conclusion" class="layer-remark">Заключение → Part 1</a></p>
+<p class="layer-remark"><span class="remark-icon">→</span> Полные правила: <a href="#p1_core_rules" class="layer-remark">5 базовых правил → Part 1</a></p>
 
 </section>
 
 <section data-layer="l1" data-section="p9_top5_problems">
-<h3>Топ-5 проблем</h3>
+<h3>Топ-5 проблем: краткий справочник</h3>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>#</th><th>Проблема</th><th>Причина</th><th>Решение</th></tr>
+<tr><th>#</th><th>Проблема</th><th>Решение</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>1</strong></td><td>Модель пишет за {{user}}</td><td>Нет anti-godmoding в SP</td><td>Добавьте "Never speak or act for {{user}}"</td></tr>
-<tr><td><strong>2</strong></td><td>Голос не соответствует описанию</td><td>Голос в Description</td><td>Перенесите паттерны речи в Examples</td></tr>
-<tr><td><strong>3</strong></td><td>Персонаж "слишком идеальный"</td><td>Нет цены у якорей</td><td>Добавьте физическую реакцию к каждому якорю</td></tr>
-<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>RepPen слишком низкий</td><td>Установите RepPen 1.0-1.05</td></tr>
-<tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Недостаточно Examples</td><td>Добавьте 2-3 примера с голосом</td></tr>
+<tr><td><strong>1</strong></td><td>Модель пишет за {{user}}</td><td>SP: "Never speak or act for {{user}}" + "Only describe {{char}}'s actions" <a href="#p1_top3_problems">→ Подробно</a></td></tr>
+<tr><td><strong>2</strong></td><td>Голос не соответствует описанию</td><td>Перенесите голос из Description в Examples <a href="#p1_top3_problems">→ Подробно</a></td></tr>
+<tr><td><strong>3</strong></td><td>Персонаж «слишком идеальный»</td><td>Добавьте физическую цену к каждому якорю <a href="#p1_top3_problems">→ Подробно</a></td></tr>
+<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>Установите RepPen 1.0–1.05; проверьте PP = 0.0</td></tr>
+<tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Добавьте 2–3 Examples с уникальным голосом</td></tr>
 </tbody>
 </table>
 </div>

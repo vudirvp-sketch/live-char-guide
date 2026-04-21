@@ -14,40 +14,26 @@
     "part": 1,
     "topic": ""
   },
-  "p1_token_pipeline": {
+  "p1_token_budget": {
     "layer": "l1",
     "part": 1,
-    "topic": ""
-  },
-  "p1_block_budget": {
-    "layer": "l1",
-    "part": 1,
-    "topic": ""
+    "topic": "Токен-бюджет"
   },
   "p1_l1_quickstart": {
     "layer": "l1",
     "part": 1,
     "topic": ""
   },
-  "p1_elena_minimal": {
-    "layer": "l1",
-    "part": 1,
-    "topic": ""
-  },
+
   "p1_top3_problems": {
     "layer": "l1",
     "part": 1,
     "topic": ""
   },
-  "p1_l2_bridge": {
+  "p1_next_layers": {
     "layer": "l1",
     "part": 1,
-    "topic": ""
-  },
-  "p1_l3_bridge": {
-    "layer": "l1",
-    "part": 1,
-    "topic": ""
+    "topic": "Следующие шаги"
   },
   "p1_conclusion": {
     "layer": "l1",
@@ -174,11 +160,7 @@
     "part": 4,
     "topic": ""
   },
-  "p4_l1_bridge": {
-    "layer": "l1",
-    "part": 4,
-    "topic": ""
-  },
+
   "p4_l3_spine_full": {
     "layer": "l3",
     "part": 4,
@@ -234,16 +216,8 @@
     "part": 5,
     "topic": ""
   },
-  "p5_l1_bridge": {
-    "layer": "l1",
-    "part": 5,
-    "topic": ""
-  },
-  "p6_l1_bridge": {
-    "layer": "l1",
-    "part": 6,
-    "topic": ""
-  },
+
+
   "p6_cot_basics": {
     "layer": "l3",
     "part": 6,
@@ -274,11 +248,7 @@
     "part": 6,
     "topic": ""
   },
-  "p7_l1_bridge": {
-    "layer": "l1",
-    "part": 7,
-    "topic": ""
-  },
+
   "p7_system_prompt": {
     "layer": "l2",
     "part": 7,
@@ -444,11 +414,7 @@
     "part": 8,
     "topic": ""
   },
-  "p8_l1_bridge": {
-    "layer": "l1",
-    "part": 8,
-    "topic": ""
-  },
+
   "p8_ap15_extended": {
     "layer": "l3",
     "part": 8,
@@ -469,15 +435,11 @@
     "part": 9,
     "topic": ""
   },
-  "p9_troubleshooting": {
-    "layer": "l1",
-    "part": 9,
-    "topic": "Диагностика и отладка"
-  },
+
   "p9_basic_checklist": {
     "layer": "l1",
     "part": 9,
-    "topic": ""
+    "topic": "Диагностика и чек-лист"
   },
   "p9_top5_problems": {
     "layer": "l1",

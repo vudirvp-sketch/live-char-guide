@@ -30,14 +30,11 @@ This document is the **single source of truth** for "where does concept X live."
 | Карточка персонажа | Part 1 | p1_card_overview | l1 | Definition | 4 блока карточки: SP, Description, Examples, Greeting |
 | Core Rules (5 правил) | Part 1 | p1_core_rules | l1 | Rules | GHOST inline definition + layer-remark bridge. Перенесено из glossary.json → Part 1 |
 | Сравнение слоёв | Part 1 | p1_layer_comparison | l1 | Reference | L1 vs L2 vs L3 comparison table. SPINE row: L2 = WANT/NEED/FLAW, L3 = +LIE/GHOST |
-| L1 Quickstart | Part 1 | p1_l1_quickstart | l1 | Template | 5-minute template → minimal card |
-| Елена (минимальная карточка) | Part 1 | p1_elena_minimal | l1 | Reference | Ссылка на p10_elena_l1. Без дублирования текста карточки |
-| Топ-3 проблемы | Part 1 | p1_top3_problems | l1 | Troubleshooting | 3 краткие проблемы + ссылки на p9_top5_problems |
-| Bridge: L2 (СПИН, OCEAN) | Part 1 | p1_l2_bridge | l1 | Bridge | Описание того, что добавляет Глубокий слой |
-| Bridge: L3 (LIE, GHOST, CoT, XML) | Part 1 | p1_l3_bridge | l1 | Bridge | Описание того, что добавляет Экспертный слой |
-| Token Budget Pipeline | Part 1 | p1_token_pipeline | l1 | Reference | 10-step Quick Start pipeline with per-step token budgets. NEW |
-| Block Budget Table | Part 1 | p1_block_budget | l1 | Reference | Min/Standard/Max per block + per layer. NEW |
-| Заключение | Part 1 | p1_conclusion | l1 | Summary | Key rules reminder + "what you now know". NEW |
+| L1 Quickstart | Part 1 | p1_l1_quickstart | l1 | Template | 5-minute template → minimal card. Ссылка на p10_elena_l1 вместо отдельной секции p1_elena_minimal. Чек-лист минимальный (3 пункта) |
+| Топ-3 критичные ошибки | Part 1 | p1_top3_problems | l1 | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_top5_problems |
+| Следующие шаги | Part 1 | p1_next_layers | l1 | Bridge (consolidated) | Консолидация 7 bridge секций (p1_l2_bridge, p1_l3_bridge, p4-p8_l1_bridge). 2 subsections: L2 и L3 |
+| Токен-бюджет | Part 1 | p1_token_budget | l1 | Reference | Мерж p1_token_pipeline + p1_block_budget. 2 subsections: конвейер сборки + лимиты по блокам. Только L1 блоки. Без подтаблицы AN/Lorebook/CoT |
+| Заключение | Part 1 | p1_conclusion | l1 | Summary | Резюме L1 + ссылка на p1_core_rules (без дублирования правил) + ссылка на p1_next_layers. Без L2/L3 capabilities |
 
 ### Part 2: Behavioral Anchors (Якоря)
 
@@ -45,7 +42,7 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|---------------|-----------------|-------|--------------|-------|
 | Якорь (Anchor) | Part 2 | p2_basic_anchors | l1 | Definition+Rules | Формат: T→A→P |
 | Правила якорей | Part 2 | p2_anchor_rules | l1 | Rules | Цена обязательна, формат T→A→P |
-| Примеры якорей | Part 2 | p2_anchor_examples | l1 | Examples | Таблица примеров по триггерам |
+| Примеры якорей | Part 2 | p2_anchor_examples | l1 | Examples | Таблица примеров + wrong/correct пример перед таблицей |
 | FLAW-linked якоря | Part 2 | p2_flaw_anchors | l2 | Rules+Examples | Как выводить якоря из FLAW |
 | Embodiment (Телесность) | Part 2 | p2_embodiment | l2 | Full treatment | Протокол: Состояние→Тело→Сенсор→Речь |
 | Сенсорные якоря | Part 2 | p2_sensory_anchors | l3 | Full treatment | Сенсорные якоря для GHOST. Ссылка на CoT-якоря → Part 6 |
@@ -68,7 +65,6 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
-| Bridge: СПИН | Part 4 | p4_l1_bridge | l1 | Bridge | SPINE = WANT/NEED/FLAW. Даёт якорям причину |
 | SPINE (обзор) | Part 4 | p4_spine_overview | l2 | Framework | WANT/NEED/FLAW (L2). LIE/GHOST — bridge → L3 |
 | WANT | Part 4 | p4_want | l2 | Definition+Examples | Осознанное желание |
 | NEED | Part 4 | p4_need | l2 | Definition+Examples | Истинная потребность |
@@ -85,7 +81,6 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
-| Bridge: OCEAN, Enneagram | Part 5 | p5_l1_bridge | l1 | Bridge | Описание инструментов психологии |
 | OCEAN (Big Five) | Part 5 | p5_ocean_basics | l2 | Tool+Interactive | Pentagon widget + золотое правило `.callout.important` («Только 1–2 экстремальных полюса»). План указывал p5_ocean_poles, но реализация помещает правило в p5_ocean_basics для лучшего педагогического потока |
 | OCEAN poles | Part 5 | p5_ocean_poles | l2 | Rules | Контекстно-зависимое количество полюсов + 5 шагов OCEAN→карточка |
 | OCEAN validator | Part 5 | p5_ocean_validator | l2 | Interactive | Слайдеры + polygon + suggestions |
@@ -100,7 +95,6 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
-| Bridge: CoT | Part 6 | p6_l1_bridge | l1 | Bridge | CoT = внутренний процесс. Доступно на L3 |
 | CoT basics | Part 6 | p6_cot_basics | l3 | Definition | Перемещено из L2 → L3. Для 12B vs 32B+ |
 | CoT Tier definitions | Part 6 | p6_cot_tiers | l3 | Reference | Tier 0/1/2/3 определения. Перемещено из L2 → L3 |
 | CoT Tier 2 | Part 6 | p6_cot_tier2 | l3 | Template | Structured internal process |
@@ -112,7 +106,6 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
-| Bridge: Технические параметры | Part 7 | p7_l1_bridge | l1 | Bridge | SP, Format Lock, AN, Lorebook |
 | System Prompt (SP) | Part 7 | p7_system_prompt | l2 | Template+Rules | Базовые запреты |
 | Sampling parameters | Part 7 | p7_sampling_params | l2 | Reference | Temperature, RepPen, Top P, etc. |
 | Format Lock | Part 7 | p7_format_lock | l2 | Rule | Фиксация формата диалога + системы A/B/C |
@@ -135,7 +128,6 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
-| Bridge: Анти-паттерны | Part 8 | p8_l1_bridge | l1 | Bridge | Частые ошибки + ссылка на каталог AP-1–AP-15 |
 | Anti-pattern overview | Part 8 | p8_antipatterns_overview | l2 | Catalog | Классификация анти-паттернов |
 | AP-1: Token bloat | Part 8 | p8_ap1_token_bloat | l2 | Anti-pattern | Раздувание токенов |
 | AP-2: Missing price | Part 8 | p8_ap2_missing_price | l2 | Anti-pattern | Отсутствие цены у якоря |
@@ -159,9 +151,8 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
-| Troubleshooting | Part 9 | p9_troubleshooting | l1 | Catalog | Обзор проблем и решений |
-| Basic checklist | Part 9 | p9_basic_checklist | l1 | Checklist | SP→Description→Examples→Greeting→Parameters |
-| Топ-5 проблем | Part 9 | p9_top5_problems | l1 | Troubleshooting | 5 проблем с полными решениями |
+| Диагностика и чек-лист | Part 9 | p9_basic_checklist | l1 | Checklist | Мерж p9_troubleshooting + p9_basic_checklist. Чек-лист с cross-references на p1_core_rules |
+| Топ-5 проблем | Part 9 | p9_top5_problems | l1 | Quick reference | Краткий справочник: 5 строк, 1 колонка решения. Ссылки на p1_top3_problems для первых 3 |
 | Symptom table | Part 9 | p9_symptom_table | l2 | Diagnostic | 10 строк симптом→диагноз→решение |
 | Test scenarios | Part 9 | p9_test_scenarios | l2 | Protocol | 6 тестовых сценариев |
 | 12B-specific issues | Part 9 | p9_12b_issues | l3 | Special | Диагностика для 12B моделей |
@@ -190,22 +181,22 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | L1 | L2 | L3 | Total |
 |------|----|----|-----|-------|
-| Part 1 (Basic Blocks) | 11 | 0 | 0 | 11 |
+| Part 1 (Basic Blocks) | 7 | 0 | 0 | 7 |
 | Part 2 (Anchors) | 3 | 3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
-| Part 4 (SPINE) | 1 | 6 | 5 | 12 |
-| Part 5 (Psych Toolkit) | 1 | 7 | 2 | 10 |
-| Part 6 (CoT) | 1 | 0 | 6 | 7 |
-| Part 7 (Technical) | 1 | 9 | 8 | 18 |
-| Part 8 (Anti-patterns) | 1 | 10 | 8 | 19 |
-| Part 9 (Diagnostics) | 5 | 5 | 3 | 13 |
+| Part 4 (SPINE) | 0 | 6 | 5 | 11 |
+| Part 5 (Psych Toolkit) | 0 | 7 | 2 | 9 |
+| Part 6 (CoT) | 0 | 0 | 6 | 6 |
+| Part 7 (Technical) | 0 | 9 | 8 | 17 |
+| Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
+| Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
 | Part 10 (Examples) | 1 | 4 | 1 | 6 |
-| **Total** | **27** | **49** | **35** | **111** |
+| **Total** | **17** | **49** | **35** | **101** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 27 sections** (ALL 10 Parts have at least one section — IMP-27 satisfied)
-- **L2 sees: 76 sections** (+49 to L1)
-- **L3 sees: 111 sections** (+35 to L2)
+- **L1 sees: 17 sections** (down from 27 — 10 sections removed/merged by L1 Remediation Plan v3)
+- **L2 sees: 66 sections** (+49 to L1)
+- **L3 sees: 101 sections** (+35 to L2)
 
 **Note:** Part 7 L2 count is 9 (p7_system_prompt, p7_core_directives, p7_tone_frame, p7_sampling_params, p7_format_lock, p7_authors_note, p7_structured_inject, p7_lorebook, p7_model_checklist) — verified correct. The original plan v2.1 listed 10; the discrepancy was due to only 3 new L2 entries being specified in §2.1 vs 4 implied by the plan's statistics. Decision: 9 is the verified correct count based on actual HTML content.
 
