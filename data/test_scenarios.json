@@ -11,25 +11,29 @@
           "id": "core-1",
           "name": "Basic Response",
           "description": "Character responds to neutral input in character",
-          "type": "basic"
+          "type": "basic",
+          "layer": 2
         },
         {
           "id": "core-2",
           "name": "Stress Trigger",
           "description": "Character reacts to stress trigger with appropriate FLAW behavior",
-          "type": "stress"
+          "type": "stress",
+          "layer": 2
         },
         {
           "id": "core-3",
           "name": "Voice Consistency",
           "description": "Character maintains speech patterns and verbal tics",
-          "type": "consistency"
+          "type": "consistency",
+          "layer": 2
         },
         {
           "id": "core-4",
           "name": "Anti-Godmode",
           "description": "Character does not write for {{user}}",
-          "type": "boundary"
+          "type": "boundary",
+          "layer": 2
         }
       ]
     },
@@ -42,6 +46,7 @@
           "name": "GHOST Trigger",
           "description": "Character responds to GHOST-related triggers with appropriate behavior",
           "type": "psychology",
+          "layer": 3,
           "requires": ["GHOST", "Lorebook"]
         },
         {
@@ -49,6 +54,7 @@
           "name": "Dynamic Evolution",
           "description": "Character shows WANT → NEED progression over multiple exchanges",
           "type": "growth",
+          "layer": 3,
           "requires": ["AN", "multi-turn"]
         }
       ]

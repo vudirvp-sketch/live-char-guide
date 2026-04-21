@@ -4,7 +4,7 @@
     "NT": {"name": "Рационалы", "color": "#8b5cf6", "description": "Аналитики, стратеги, инноваторы"},
     "NF": {"name": "Идеалисты", "color": "#ec4899", "description": "Эмпаты, визионеры, гармонизаторы"},
     "SJ": {"name": "Стражи", "color": "#3b82f6", "description": "Организаторы, традиционалисты, надёжные"},
-    "SP": {"name": "Ремесленники", "color": "#f97316", "description": "Практики, адаптивные, спонтанные"}
+    "SP-темперамент": {"name": "Ремесленники", "color": "#f97316", "description": "Практики, адаптивные, спонтанные (здесь SP = темперамент Keirsey, не System Prompt)"}
   },
   "types": [
     {
@@ -106,7 +106,7 @@
     {
       "code": "ISTP",
       "name": "Виртуоз",
-      "temperament": "SP",
+      "temperament": "SP-темперамент",
       "hint": "Практик, аналитик, мастер",
       "cognitive_functions": ["Ti", "Se", "Ni", "Fe"],
       "description": "Практические навыки, анализ, адаптивность"
@@ -114,7 +114,7 @@
     {
       "code": "ISFP",
       "name": "Артист",
-      "temperament": "SP",
+      "temperament": "SP-темперамент",
       "hint": "Чувствительный, эстет, свободный",
       "cognitive_functions": ["Fi", "Se", "Ni", "Te"],
       "description": "Эстетика, аутентичность, спонтанность"
@@ -122,7 +122,7 @@
     {
       "code": "ESTP",
       "name": "Предприниматель",
-      "temperament": "SP",
+      "temperament": "SP-темперамент",
       "hint": "Деятель, рискованный, прямой",
       "cognitive_functions": ["Se", "Ti", "Fe", "Ni"],
       "description": "Действие, риск, момент"
@@ -130,7 +130,7 @@
     {
       "code": "ESFP",
       "name": "Развлекатель",
-      "temperament": "SP",
+      "temperament": "SP-темперамент",
       "hint": "Энтузиаст, спонтанный, жизнерадостный",
       "cognitive_functions": ["Se", "Fi", "Te", "Ni"],
       "description": "Жизнь в моменте, развлечение, люди"

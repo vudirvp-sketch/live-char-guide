@@ -37,9 +37,16 @@ Never speak, act, or decide for {{user}}.
 3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
 4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
 5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
-&lt;/CORE_DIRECTIVES&gt;</code></pre>
+&lt;/CORE_DIRECTIVES&gt;
 
-<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. На 12B позитивная инструкция повышает следование директивам на ~15–20%.</p>
+{{TONE_FRAME}}
+
+Format Lock:
+- Dialogue: *action* "speech"
+- Narrative tense: [past/present]
+- Never change this format</code></pre>
+
+<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. На 12B позитивная инструкция повышает следование директивам на ~15–20%. Укажите время повествования (прошедшее/настоящее) в Format Lock — это фиксирует нарративную перспективу для модели.</p>
 
 <div class="callout important">
 <p><strong>📌 Правило унификации SP-шаблона:</strong> Все SP-шаблоны в гайде следуют единой структуре:</p>
@@ -54,6 +61,7 @@ Never speak, act, or decide for {{user}}.
 &lt;/CORE_DIRECTIVES&gt;
 
 {{TONE_FRAME}}     ← L2+ only
+{{FORMAT_LOCK}}    ← L2+ only
 {{OOC_PROTECTION}} ← L3 only</code></pre>
 </div>
 
@@ -66,7 +74,7 @@ Never speak, act, or decide for {{user}}.
 
 <h3>CORE DIRECTIVES — единая система директив</h3>
 
-<p>CORE DIRECTIVES — единая система из 7 директив на английском языке, размещаемая в System Prompt. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
+<p>CORE DIRECTIVES — единая система директив на английском языке, размещаемая в System Prompt. Для L2 (Глубокий слой) — директивы 1–5. Для L3 (Экспертный слой) — все 7. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
 
 <div class="callout important">
 <p><strong>📌 Правило языка директив:</strong> Директивы SP и CORE DIRECTIVES — на английском. RP-контент (Description, Examples, Greeting) — на языке карточки. На 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам), потому что обучающая выборка содержит больше английских паттернов инструкций.</p>
@@ -87,7 +95,7 @@ Never speak, act, or decide for {{user}}.
 <p>Мета-принцип: демонстрируйте всё через наблюдаемое поведение. Запрет на мета-комментарии, эмоциональные декларации, информационные свалки. Из него вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
 
 <h4>2. EMBODIMENT FIRST</h4>
-<p>State → Body → Sensor → Speech. Always. → Part 2: <a href="#p2_embodiment" class="layer-remark">Телесность</a></p>
+<p>State → Body → Sensor → Speech. Always. → Полный протокол → Part 2: <a href="#p2_embodiment" class="layer-remark">Телесность</a></p>
 
 <h4>3. SPATIAL & ANATOMICAL LOCK</h4>
 <p>Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации. Никаких анатомических противоречий. Если {{user}} через комнату — вы не можете коснуться его без пересечения пространства.</p>
@@ -106,10 +114,10 @@ Never speak, act, or decide for {{user}}.
 <p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → Part 2: <a href="#p2_env_reactivity" class="layer-remark">Реактивность среды</a></p>
 
 <h4>5. INFLUENCE BOUNDARY</h4>
-<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напуган. Подробно — в Part 2, section <a href="#p2_anchor_rules">p2_anchor_rules</a>.</p>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напяган. Подробно — в Part 2, section <a href="#p2_anchor_rules">p2_anchor_rules</a> → Подробное объяснение → <a href="#p2_anchor_rules">p2_anchor_rules</a></p>
 
 <div class="callout tip">
-<p><strong>💡 IMP-48 Синхронизация:</strong> Каждая директива из CORE DIRECTIVES имеет каноническое описание в другой Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
+<p><strong>💡 Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
 
@@ -558,11 +566,13 @@ Anchors:
 <tr><td>Voice Placement</td><td>Examples ONLY</td><td>Examples + Greeting</td><td>Examples + Greeting + AN</td></tr>
 <tr><td>XML Tags</td><td><span class="tag risk">⚠️ нестабильны</span></td><td><span class="tag tip">✓ стабильны</span></td><td><span class="tag tip">✓ стабильны</span></td></tr>
 <tr><td>CoT Tier</td><td><span class="tag risk">✗</span></td><td>Tier 1</td><td>Tier 2–3</td></tr>
-<tr><td>SP Language</td><td>English (критично)</td><td>English</td><td>English</td></tr>
+<tr><td>SP Language</td><td>English (критично)<sup>1</sup></td><td>English</td><td>English</td></tr>
 <tr><td>Anti-godmoding</td><td>2 lines (neg+pos)</td><td>2 lines</td><td>1 line</td></tr>
 </tbody>
 </table>
 </div>
+
+<p><sup>1</sup> SP на английском: на 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам). Подробнее → <a href="#p7_core_directives">p7_core_directives</a></p>
 
 
 </section>
