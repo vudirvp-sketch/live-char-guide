@@ -223,7 +223,8 @@ async function checkLayerSwitchRefs(allSections, sectionIds) {
       const actualLayerNum = layerNums[targetActualLayer] || 0;
 
       if (actualLayerNum > targetLayerNum) {
-        warnings.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section is in layer ${targetActualLayer}, deeper than referenced layer ${targetLayer}`);
+        errors.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section is in layer ${targetActualLayer}, deeper than referenced layer ${targetLayer}. Link targets a section invisible at the switch layer.`);
+        errorCount++;
       }
 
       // NEW: Check that data-layer-switch target layer matches section's actual layer

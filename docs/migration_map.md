@@ -352,6 +352,7 @@ The following changes were made during the content restoration (`content-restora
 | p9_test_requirements | l2 | Part 9 | Per-layer minimum test scenarios + 6 success metrics | Phase 9 | ← p9_element_scenario_map |
 | p9_pre_deploy | l3 | Part 9 | Quick Check (5 items) + Full Check (14 items) | Phase 9 | ← p9_layer_transition |
 | p10_walter_l2 | l2 | Part 10 | Уолтер Уайт L2 card (~950 tokens) with WANT/NEED/FLAW | Phase 10 | ← character_bible #3 |
+| p9_quality_scale | l1 | Part 9 | 3-level quality table (Critical / Bad / Good) | Phase 9 | Content Restoration — quality scale table |
 
 ### Modified Sections (Content Restoration)
 

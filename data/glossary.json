@@ -114,9 +114,9 @@
       "cross_refs": ["#card-structure"]
     },
     {
-      "term": "Spine",
+      "term": "SPINE",
       "abbreviation": null,
-      "aliases": ["Spine", "Мотивационное ядро"],
+      "aliases": ["SPINE", "Spine", "Спин", "Мотивационное ядро"],
       "definition": "Мотивационное ядро персонажа из 5 элементов: WANT, NEED, FLAW, LIE, GHOST.",
       "prohibited": [],
       "applicable_layers": [0, 1, 2, 3],
@@ -586,6 +586,20 @@
       },
       "anchor_id": "layer-1-term-one-change-rule",
       "cross_refs": ["#p9_one_change_rule"]
+    },
+    {
+      "term": "Narrator Bleed",
+      "abbreviation": null,
+      "aliases": ["Narrator Bleed", "Утечка рассказчика"],
+      "definition": "Смешивание голоса рассказчика с голосом персонажа в Examples. Диагностический термин.",
+      "prohibited": [],
+      "applicable_layers": [2, 3],
+      "layer_context": {
+        "2": "Диагностика: проверьте, не описывает ли модель от третьего лица вместо демонстрации через персонажа",
+        "3": "Отладка: сравните Examples с Greeting — голос должен быть единым"
+      },
+      "anchor_id": "p3_voice_leak",
+      "cross_refs": ["Voice Leak", "Voice Isolation"]
     }
   ],
   "layer_markers": {

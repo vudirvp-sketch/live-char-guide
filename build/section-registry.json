@@ -14,6 +14,16 @@
     "part": 1,
     "topic": ""
   },
+  "p1_token_pipeline": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_block_budget": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
   "p1_l1_quickstart": {
     "layer": "l1",
     "part": 1,
@@ -39,6 +49,11 @@
     "part": 1,
     "topic": ""
   },
+  "p1_conclusion": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
   "p2_basic_anchors": {
     "layer": "l1",
     "part": 2,
@@ -60,6 +75,11 @@
     "topic": ""
   },
   "p2_embodiment": {
+    "layer": "l2",
+    "part": 2,
+    "topic": ""
+  },
+  "p2_env_reactivity": {
     "layer": "l2",
     "part": 2,
     "topic": ""
@@ -264,6 +284,31 @@
     "part": 7,
     "topic": "Техническая реализация"
   },
+  "p7_core_directives": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_core_directives_l3": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_tone_frame": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_ooc_protection": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_immersion_boundary": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
   "p7_sampling_params": {
     "layer": "l2",
     "part": 7,
@@ -276,6 +321,16 @@
   },
   "p7_authors_note": {
     "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_authors_note_l3": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_sp_template_l3": {
+    "layer": "l3",
     "part": 7,
     "topic": ""
   },
@@ -301,6 +356,11 @@
   },
   "p7_4k_fallback": {
     "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_model_checklist": {
+    "layer": "l2",
     "part": 7,
     "topic": ""
   },
@@ -394,6 +454,21 @@
     "part": 8,
     "topic": ""
   },
+  "p8_ap16_nested_anchors": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p9_quality_scale": {
+    "layer": "l1",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_one_change_rule": {
+    "layer": "l1",
+    "part": 9,
+    "topic": ""
+  },
   "p9_troubleshooting": {
     "layer": "l1",
     "part": 9,
@@ -414,7 +489,22 @@
     "part": 9,
     "topic": ""
   },
+  "p9_decision_tree": {
+    "layer": "l2",
+    "part": 9,
+    "topic": ""
+  },
   "p9_test_scenarios": {
+    "layer": "l2",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_element_scenario_map": {
+    "layer": "l2",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_test_requirements": {
     "layer": "l2",
     "part": 9,
     "topic": ""
@@ -425,6 +515,11 @@
     "topic": ""
   },
   "p9_layer_transition": {
+    "layer": "l3",
+    "part": 9,
+    "topic": ""
+  },
+  "p9_pre_deploy": {
     "layer": "l3",
     "part": 9,
     "topic": ""

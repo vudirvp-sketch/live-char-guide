@@ -198,16 +198,16 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 6 (CoT) | 1 | 0 | 6 | 7 |
 | Part 7 (Technical) | 1 | 6+3=9 | 3+5=8 | 18 |
 | Part 8 (Anti-patterns) | 1 | 8+1=9 | 8 | 18 |
-| Part 9 (Diagnostics) | 3+2=5 | 2+3=5 | 2+1=3 | 13 |
+| Part 9 (Diagnostics) | 3+3=6 | 2+3=5 | 2+1=3 | 14 |
 | Part 10 (Examples) | 1 | 3+1=4 | 1 | 6 |
-| **Total** | **27** | **47** | **34** | **108** |
+| **Total** | **28** | **47** | **34** | **109** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 27 sections** (ALL 10 Parts have at least one section — IMP-27 satisfied)
-- **L2 sees: 74 sections** (+47 to L1)
-- **L3 sees: 108 sections** (+34 to L2)
+- **L1 sees: 28 sections** (ALL 10 Parts have at least one section — IMP-27 satisfied)
+- **L2 sees: 75 sections** (+47 to L1)
+- **L3 sees: 109 sections** (+34 to L2)
 
-**Note:** Part 7 L2 count is 9 (6 existing + 3 new: p7_core_directives, p7_tone_frame, p7_model_checklist). The original plan v2.1 listed 10; discrepancy is due to only 3 new L2 entries being specified in §2.1 vs 4 implied by the plan's statistics. Phase 13 (sync) will reconcile.
+**Note:** Part 7 L2 count is 9 (6 existing + 3 new: p7_core_directives, p7_tone_frame, p7_model_checklist). The original plan v2.1 listed 10; discrepancy is due to only 3 new L2 entries being specified in §2.1 vs 4 implied by the plan's statistics. Decision: 9 is the correct count based on actual content. Total updated to 109 after adding p9_quality_scale (R-01).
 
 ---
 

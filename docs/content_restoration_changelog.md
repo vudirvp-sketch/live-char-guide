@@ -77,8 +77,9 @@ This document maps every item from the Консолидированный пер
 
 ## Statistics
 
-- **Total items:** 45
-- **✅ Covered by plan:** 45
+- **Total core items:** 45
+- **Total with supplementary:** 55 (45 core + 10 supplementary from X.1–X.5 and 11.1, 12.1, 13.1, 14.1, 15.1)
+- **✅ Covered by plan:** 45 core + 10 supplementary
 - **❌ Not covered:** 0
 
 All items from the Консолидированный перечень are mapped to specific phases and sections.

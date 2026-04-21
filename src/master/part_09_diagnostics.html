@@ -4,6 +4,28 @@
   
   Layer inclusion: l1 (basic checklist, troubleshooting, One Change Rule), l2 (symptom table, test scenarios, decision tree, element→scenario map, test requirements), l3 (12B specifics, pre-deploy)
 -->
+<section data-layer="l1" data-section="p9_quality_scale">
+<h3>Шкала качества карточки</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Уровень</th><th>Признаки</th><th>Примеры</th></tr></thead>
+<tbody>
+<tr><td><strong>Критический</strong></td><td>Карточка нарушает ≥2 базовых правила (нет Price, голос в Description, PP&gt;0)</td><td>Якоря без T→A→P, OCEAN с 4+ полюсами, нет анти-годмодинга</td></tr>
+<tr><td><strong>Плохой</strong></td><td>Карточка собрана по правилам, но персонаж «плывёт» после 5–10 сообщений</td><td>FLAW = прилагательное, Examples не демонстрируют голос, SPINE не связан с якорями</td></tr>
+<tr><td><strong>Хороший</strong></td><td>Карточка стабильна на 10+ сообщений, голос узнаваем, Price появляется</td><td>FLAW = поведение, ≥2 Examples с голосом, SPINE→якоря связь</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<p><strong>💡 Цель — «Хороший» уровень.</strong> «Критический» = переписать. «Плохой» = точечные доработки по Decision Tree.</p>
+</div>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Пошаговая диагностика: <a data-layer-switch="2#p9_decision_tree" class="layer-remark">Дерево решений → Глубокий слой</a></p>
+
+</section>
+
 <section data-layer="l1" data-section="p9_one_change_rule">
 <h3>Правило одного изменения</h3>
 
