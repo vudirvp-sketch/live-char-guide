@@ -154,4 +154,130 @@ All 20 remediation tasks (R-01 through R-20) have been executed. Build passes wi
 
 ---
 
-*Remediation plan execution completed: 2026-04-21*
+## L2 Remediation Plan V2 — Batch 1 Execution (18/55 tasks)
+
+> **Date:** 2026-04-22
+> **Agent:** Super Z (L2 remediation executor)
+> **Plan:** L2-REMEDIATION-PLAN-V2.md
+> **Scope:** Batch 1 — approximately 1/3 of all R2 tasks
+> **Delivery:** L2-remediation-batch1.tar.gz
+
+### R2-02 [EN] Voice Isolation без русского пояснения ✅
+**Status:** Fixed
+**File Modified:** src/master/part_03_voice.html, build/parts-l2/part_03.html
+**Content:** «Voice Isolation» → «Voice Isolation (Изоляция голоса)» — устоявшийся RP-термин, английский первым
+
+### R2-03 [EN] Sensory Anchor без перевода ✅
+**Status:** Fixed
+**File Modified:** src/master/part_03_voice.html, build/parts-l2/part_03.html
+**Content:** «Sensory Anchor» → «Сенсорный якорь (Sensory Anchor)» — неустоявшийся термин, русский первым
+
+### R2-04 [EN] CONSEQUENCE DRIVEN — L3-утечка ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html, build/parts-l2/part_04.html
+**Content:** «💡 CONSEQUENCE DRIVEN: WANT сдвигается... Директива для SP → Part 7» → «💡 Динамика SPINE: WANT сдвигается к NEED по мере накопления Price в сессии. Подробнее → Экспертный слой»
+
+### R2-05 [FIX] Тип Price «Психологический» противоречит правилу ✅
+**Status:** Fixed
+**File Modified:** src/master/part_02_anchors.html, build/parts-l2/part_02.html
+**Content:** «Психологический | Ограничивает выбор реакций | Вина, стыд, гнев → не может реагировать рационально» → «Вербально-поведенческий | Наблюдаемый вербальный маркер | голос становится тише, обрывание фразы, лексика упрощается»
+
+### R2-06 [EN] SPINE → Anchors Mapping — заголовок на английском ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html, build/parts-l2/part_04.html
+**Content:** «SPINE → Anchors Mapping» → «SPINE → Карта якорей»
+
+### R2-14 [ORD] manifest.json Part 09 title = «Part 09» ✅
+**Status:** Fixed
+**File Modified:** build/parts-l2/manifest.json
+**Content:** title: «Part 09» → «Диагностика и тестирование»
+
+### R2-19 [FIX] Цена «в той же сцене» — рассинхронизация формулировки ✅
+**Status:** Fixed
+**File Modified:** src/master/part_02_anchors.html, build/parts-l2/part_02.html
+**Content:** «физический/вербальный маркер» → «наблюдаемый физический или вербально-поведенческий маркер» (в 3 местах: критерии, callout, формат)
+
+### R2-20 [FIX] GHOST→LIE→FLAW — L3-утечка в p9 ✅
+**Status:** Fixed
+**File Modified:** src/master/part_09_diagnostics.html, build/parts-l2/part_09.html
+**Content:** «Проверьте цепочку GHOST→LIE→FLAW» → «Проверьте консистентность WANT/NEED/FLAW → каждый элемент должен иметь якорь»
+
+### R2-21 [FIX] glossary.json: LIE и GHOST — bridge-подход ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** LIE layer_context["2"] → «Доступно на Экспертном слое → bridge»; GHOST layer_context["2"] → «Доступно на Экспертном слое → bridge»; applicable_layers сохранены как [0, 2, 3]
+
+### R2-22 [FIX] glossary.json: SPINE — bridge для L1 ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** SPINE layer_context["1"] → «SPINE доступен на Глубоком слое → bridge»; applicable_layers сохранён как [0, 1, 2, 3]
+
+### R2-23 [FIX] SPINE vs СПИН — несогласованность терминологии ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html, build/parts-l2/part_04.html
+**Content:** 8 замен «СПИН» → «SPINE» в running text (Без СПИНа → Без SPINE, СПИН даёт → SPINE даёт, Правило СПИН → Правило SPINE, и т.д.). «СПИН» сохранён только как произносимая форма в инфографике
+
+### R2-35 [EN] IMP-48 Синхронизация — утечка разработки ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l2/part_07.html
+**Content:** «💡 IMP-48 Синхронизация» → «💡 Двусторонняя синхронизация»; «в другой Part» → «в соответствующей Part»
+
+### R2-36 [EN] OCEAN: пять измерений только на английском ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** «Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism» → «Открытость (O), Добросовестность (C), Экстраверсия (E), Доброжелательность (A), Нейротизм (N)»
+
+### R2-37 [EN] body-first approach — неупотребимый английский ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** «Добавьте телесность (body-first approach) и расширенные якоря» → «Добавьте телесность и расширенные якоря»
+
+### R2-38 [DUP] Глоссарий GHOST: описание противоречит Правилу #4 ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** GHOST layer_context["0"] → «Событие прошлого персонажа, сформировавшее FLAW и LIE. На L2: размещается только в Description (см. Правило #4). На L3: распределение по слоям карточки → Экспертный слой»
+
+### R2-42 [ORD] p7_core_directives: «7 директив» без уточнения для L2 ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l2/part_07.html
+**Content:** «единая система из 7 директив» → «единая система директив... Для L2 (Глубокий слой) — директивы 1–5. Для L3 (Экспертный слой) — все 7.»
+
+### R2-44 [FIX] Уолтер: OCEAN C=80 vs C=85 ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html, build/parts-l2/part_10.html
+**Content:** C: 80 → C: 85 (унифицировано с аннотацией экстремумов)
+
+### R2-50 [FIX] «Укол вины» как Price — не физический маркер ✅
+**Status:** Fixed
+**File Modified:** src/master/part_02_anchors.html, src/master/part_10_examples.html, build/parts-l2/part_02.html, build/parts-l2/part_10.html
+**Content:** Елена: «укол вины» → «вздрагивает, голос становится тише, сжимает кулаки»; Геральт: «укол вины» → «стискивает зубы, кулак сжимается»
+
+---
+
+### L2 Batch 1 — Files Modified
+
+| File | Tasks |
+|------|-------|
+| data/glossary.json | R2-21, R2-22, R2-36, R2-37, R2-38 |
+| src/master/part_02_anchors.html | R2-05, R2-19, R2-50 |
+| src/master/part_03_voice.html | R2-02, R2-03 |
+| src/master/part_04_spine.html | R2-04, R2-06, R2-23 |
+| src/master/part_07_technical.html | R2-35, R2-42 |
+| src/master/part_09_diagnostics.html | R2-20 |
+| src/master/part_10_examples.html | R2-44, R2-50 |
+| build/parts-l2/manifest.json | R2-14 |
+| build/parts-l2/part_02.html | R2-05, R2-19, R2-50 |
+| build/parts-l2/part_03.html | R2-02, R2-03 |
+| build/parts-l2/part_04.html | R2-04, R2-06, R2-23 |
+| build/parts-l2/part_07.html | R2-35, R2-42 |
+| build/parts-l2/part_09.html | R2-20 |
+| build/parts-l2/part_10.html | R2-44, R2-50 |
+
+### L2 Batch 1 — Task Status Summary
+
+| Status | Count |
+|--------|-------|
+| ✅ Completed | 18 |
+| ⏳ Remaining (Batch 2+3) | 37 |
+
+*L2 Remediation V2 Batch 1 execution completed: 2026-04-22*

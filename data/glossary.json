@@ -59,7 +59,7 @@
       "layer_context": {
         "0": "Определение, назначение, расположение в карточке",
         "1": "Разместите Spine и базовые якоря",
-        "2": "Добавьте телесность (body-first approach) и расширенные якоря",
+        "2": "Добавьте телесность и расширенные якоря",
         "3": "Оптимизация: проверьте баланс фактологии vs поведенческих инструкций"
       },
       "anchor_id": "layer-0-term-description",
@@ -122,7 +122,7 @@
       "applicable_layers": [0, 1, 2, 3],
       "layer_context": {
         "0": "Определение, 5 элементов, формула GHOST → FLAW → LIE",
-        "1": "Определите WANT и NEED для базовой мотивации",
+        "1": "SPINE доступен на Глубоком слое → bridge",
         "2": "Добавьте FLAW, LIE, GHOST для глубины",
         "3": "Диагностика: проверьте внутреннюю консистентность Spine"
       },
@@ -137,8 +137,8 @@
       "prohibited": ["GHOST-Слой"],
       "applicable_layers": [0, 2, 3],
       "layer_context": {
-        "0": "Определение, формула, правило размещения",
-        "2": "Распределите GHOST по слоям карточки: Description, Examples, LB",
+        "0": "Событие прошлого персонажа, сформировавшее FLAW и LIE. На L2: размещается только в Description (см. Правило #4). На L3: распределение по слоям карточки → Экспертный слой",
+        "2": "Доступно на Экспертном слое → bridge",
         "3": "Диагностика: проверьте активацию GHOST через LB триггеры"
       },
       "anchor_id": "layer-0-term-ghost",
@@ -199,7 +199,7 @@
       "applicable_layers": [0, 2, 3],
       "layer_context": {
         "0": "Определение, связь с GHOST и FLAW",
-        "2": "Сформулируйте LIE как ложное убеждение",
+        "2": "Доступно на Экспертном слое → bridge",
         "3": "Проверьте: LIE должен объяснять, почему FLAW существует"
       },
       "anchor_id": "layer-0-term-lie",
@@ -241,7 +241,7 @@
       "term": "OCEAN",
       "abbreviation": null,
       "aliases": ["OCEAN", "Ocean", "Big Five", "Большая пятёрка"],
-      "definition": "Модель личности из 5 измерений: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.",
+      "definition": "Модель личности из 5 измерений: Открытость (O), Добросовестность (C), Экстраверсия (E), Доброжелательность (A), Нейротизм (N).",
       "prohibited": [],
       "applicable_layers": [0, 1, 2, 3],
       "layer_context": {
@@ -637,7 +637,7 @@
     },
     {
       "id": "voice-isolation",
-      "rule": "Голос только в Examples, никогда в Description (для 12B)",
+      "rule": "Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.",
       "location": "01_core_principles.html#core-principles",
       "layer": 0
     },
