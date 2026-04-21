@@ -13,13 +13,10 @@
         "p1_card_overview",
         "p1_core_rules",
         "p1_layer_comparison",
-        "p1_token_pipeline",
-        "p1_block_budget",
+        "p1_token_budget",
         "p1_l1_quickstart",
-        "p1_elena_minimal",
         "p1_top3_problems",
-        "p1_l2_bridge",
-        "p1_l3_bridge",
+        "p1_next_layers",
         "p1_conclusion"
       ]
     },
@@ -63,7 +60,6 @@
         "p4_spine_mapping",
         "p4_ghost_layers",
         "p4_spine_check",
-        "p4_l1_bridge",
         "p4_l3_spine_full",
         "p4_l2_quickstart"
       ]
@@ -80,15 +76,13 @@
         "p5_enneagram_to_spine",
         "p5_enneagram_wings",
         "p5_cross_matrix",
-        "p5_mbti_basics",
-        "p5_l1_bridge"
+        "p5_mbti_basics"
       ]
     },
     {
       "file": "part_06.html",
-      "title": "Part 06",
+      "title": "Chain of Thought (CoT)",
       "anchors": [
-        "p6_l1_bridge",
         "p6_cot_basics",
         "p6_cot_tiers",
         "p6_cot_tier2",
@@ -99,9 +93,8 @@
     },
     {
       "file": "part_07.html",
-      "title": "Part 07",
+      "title": "Техническая реализация",
       "anchors": [
-        "p7_l1_bridge",
         "p7_system_prompt",
         "p7_core_directives",
         "p7_core_directives_l3",
@@ -141,7 +134,6 @@
         "p8_ap13_lorebook_conflict",
         "p8_ap14_context_violation",
         "p8_ap15_basic",
-        "p8_l1_bridge",
         "p8_ap15_extended",
         "p8_ap16_nested_anchors"
       ]
@@ -152,7 +144,6 @@
       "anchors": [
         "p9_quality_scale",
         "p9_one_change_rule",
-        "p9_troubleshooting",
         "p9_basic_checklist",
         "p9_top5_problems",
         "p9_symptom_table",

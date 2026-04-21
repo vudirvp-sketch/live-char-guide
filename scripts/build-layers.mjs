@@ -227,11 +227,13 @@ function assembleLayer(sections, layer) {
 // ============================================================================
 
 /**
- * Process data-layer-switch attributes and regular anchor links.
+ * Process data-layer-switch attributes, term-marker elements, and regular anchor links.
  *
- * Rules (per §0.9 and §0.12):
+ * Rules (per §0.9, §0.12, and Phase 3 tooltip system):
  * - data-layer-switch="X#id" where X > current layer → keep as layer-switch button
  * - data-layer-switch="X#id" where X <= current layer → convert to anchor link #id
+ * - term-marker with data-tooltip-ref="#id" where target is in current layer → convert to anchor link
+ * - term-marker with data-tooltip-ref="#id" where target is NOT in current layer → keep as tooltip
  * - href="#id" where target exists in this layer → anchor link (unchanged)
  * - href="#id" where target doesn't exist in this layer → .layer-link-disabled span
  *   with tooltip "Available on Layer N"
@@ -265,12 +267,33 @@ function processCrossLayerLinks(content, currentLayerNum, layerSectionIds) {
     }
   });
 
+  // 1c. Process term-marker elements (Phase 3 tooltip system)
+  // If the referenced section exists in the current layer, convert term-marker to a regular link
+  // If not, keep the term-marker tooltip as-is (it will show a popup with "Подробнее →" link)
+  const termMarkerRegex = /(<span\s+class="term-marker"\s+data-tooltip-ref=")(#?[^"]+)("\s+data-target-layer=")(\d+)("\s+data-tooltip-summary="[^"]*">)([^<]*)(<\/span>)/g;
+  result = result.replace(termMarkerRegex, (match, open1, refId, open2, targetLayer, open3, termText, close) => {
+    const sectionId = refId.startsWith('#') ? refId.slice(1) : refId;
+    const targetNum = parseInt(targetLayer);
+
+    if (targetNum <= currentLayerNum && layerSectionIds.has(sectionId)) {
+      // Target section is in current layer - convert to regular anchor link
+      return `<a href="#${sectionId}">${termText}</a>`;
+    }
+    // Target is in deeper layer - keep term-marker as tooltip
+    return match;
+  });
+
   // 2. Process regular anchor links - check if target exists in current layer
   const anchorRegex = /href=["']#([^"']+)["']/g;
   result = result.replace(anchorRegex, (match, targetId) => {
     // Skip if part of a data-layer-switch (just converted)
     const contextBefore = result.slice(Math.max(0, result.lastIndexOf(match) - 30), result.lastIndexOf(match));
     if (contextBefore.includes('data-layer-switch')) {
+      return match;
+    }
+
+    // Skip if part of a term-marker noscript fallback
+    if (contextBefore.includes('term-marker-noscript-link')) {
       return match;
     }
 

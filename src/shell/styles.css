@@ -1163,6 +1163,138 @@ body.content-wide pre {
   border: 1px solid var(--border);
 }
 
+/* === TERM MARKER TOOLTIP (Phase 3: replaces inline data-layer-switch) === */
+.term-marker {
+  position: relative;
+  display: inline;
+  color: var(--accent);
+  border-bottom: 1px dotted var(--accent);
+  cursor: help;
+  font-weight: 500;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.term-marker:hover {
+  color: var(--text);
+  border-bottom-style: solid;
+}
+
+.term-marker:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Tooltip popup */
+.term-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 280px;
+  min-width: 180px;
+  padding: 0.75em 1em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  color: var(--text);
+  font-size: 0.85em;
+  font-weight: 400;
+  line-height: 1.5;
+  z-index: var(--z-modal);
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0ms linear 0.15s;
+}
+
+.term-marker:hover .term-tooltip,
+.term-marker:focus-within .term-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.15s ease, visibility 0ms linear 0ms;
+}
+
+/* Tooltip arrow (pointing down to marker) */
+.term-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--bg-elevated);
+}
+
+/* Tooltip content */
+.term-tooltip-summary {
+  margin-bottom: 0.5em;
+  color: var(--text);
+}
+
+.term-tooltip-link {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.9em;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.term-tooltip-link:hover {
+  text-decoration: underline;
+  border-bottom-style: none;
+}
+
+/* Layer badge inside tooltip */
+.term-tooltip .layer-badge {
+  margin-left: 0.3em;
+  vertical-align: middle;
+}
+
+/* Prevent tooltip from going off-screen on left/right edges */
+.term-marker:first-child .term-tooltip,
+.term-tooltip.term-tooltip-left {
+  left: 0;
+  transform: none;
+}
+
+.term-marker:last-child .term-tooltip,
+.term-tooltip.term-tooltip-right {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* Mobile: tap to show tooltip (no hover) */
+@media (max-width: 768px) {
+  .term-tooltip {
+    position: fixed;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    z-index: var(--z-modal);
+  }
+
+  .term-tooltip::after {
+    display: none;
+  }
+
+  .term-marker.tooltip-active .term-tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* No-JS fallback: hide tooltip, show noscript link */
+noscript .term-marker-noscript-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+}
+
 /* === OCEAN CSS VARIABLES === */
 :root {
   --ocean-O: #7c4dff;

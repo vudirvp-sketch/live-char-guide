@@ -1034,6 +1034,171 @@
     initEnneagram();
     initMBTI();
     initLayerSwitch();
+    initTooltips();
+  }
+
+  // ============================================================================
+  // TOOLTIP SYSTEM (Phase 3: term-marker hover tooltips)
+  // ============================================================================
+
+  /**
+   * Initialize tooltip behavior for .term-marker elements.
+   * On mouseenter: fetch first paragraph from referenced section and show tooltip.
+   * On mouseleave: remove tooltip.
+   * On mobile: tap to toggle tooltip.
+   */
+  function initTooltips() {
+    const markers = $$('.term-marker');
+    if (markers.length === 0) return;
+
+    console.log(`[Tooltip] Initializing ${markers.length} term-markers`);
+
+    // Tooltip summary cache — avoids re-fetching the same section content
+    const tooltipCache = {};
+
+    /**
+     * Get a short summary (1-2 sentences) from a section element.
+     * Tries: first <p> inside the section, then first list item, then h2 subtitle.
+     */
+    function getSectionSummary(sectionEl) {
+      // Try first <p> that has actual text content
+      const paragraphs = sectionEl.querySelectorAll('p');
+      for (const p of paragraphs) {
+        const text = p.textContent.trim();
+        if (text.length > 20 && text.length < 500) {
+          // Truncate to ~2 sentences
+          const sentences = text.match(/[^.!?]+[.!?]+/g);
+          if (sentences && sentences.length > 2) {
+            return sentences.slice(0, 2).join(' ').trim();
+          }
+          return text.length > 200 ? text.slice(0, 200) + '...' : text;
+        }
+      }
+
+      // Fallback: first <li>
+      const firstLi = sectionEl.querySelector('li');
+      if (firstLi) {
+        const text = firstLi.textContent.trim();
+        return text.length > 150 ? text.slice(0, 150) + '...' : text;
+      }
+
+      // Fallback: h2 text
+      const h2 = sectionEl.querySelector('h2');
+      if (h2) {
+        return h2.textContent.trim();
+      }
+
+      return 'Подробнее — перейдите по ссылке';
+    }
+
+    /**
+     * Determine which layer a section belongs to.
+     */
+    function getLayerForTooltip(sectionEl) {
+      const layer = sectionEl.getAttribute('data-layer');
+      if (layer === 'l1') return 1;
+      if (layer === 'l2') return 2;
+      if (layer === 'l3') return 3;
+      return 0;
+    }
+
+    /**
+     * Create and attach tooltip element to a marker.
+     */
+    async function createTooltip(marker) {
+      const ref = marker.getAttribute('data-tooltip-ref');
+      if (!ref) return;
+
+      // Don't create duplicate tooltips
+      if (marker.querySelector('.term-tooltip')) return;
+
+      const sectionId = ref.startsWith('#') ? ref.slice(1) : ref;
+
+      // Try to find the section in current DOM first
+      const sectionEl = document.getElementById(sectionId);
+
+      let summary;
+      let targetLayer;
+      const isAvailableInCurrentLayer = !!sectionEl;
+
+      if (sectionEl) {
+        targetLayer = getLayerForTooltip(sectionEl);
+
+        // Check cache
+        if (tooltipCache[sectionId]) {
+          summary = tooltipCache[sectionId];
+        } else {
+          summary = getSectionSummary(sectionEl);
+          tooltipCache[sectionId] = summary;
+        }
+      } else {
+        // Section not in current layer — build generic tooltip
+        // Determine target layer from tooltip-ref data attribute or from section registry
+        const targetLayerAttr = marker.getAttribute('data-target-layer');
+        if (targetLayerAttr) {
+          targetLayer = parseInt(targetLayerAttr, 10);
+        } else {
+          // Default: if not found in current layer, it's likely L2 or L3
+          targetLayer = 2;
+        }
+
+        summary = marker.getAttribute('data-tooltip-summary') || 'Доступно на более глубоком слое';
+      }
+
+      // Build tooltip HTML
+      const tooltip = document.createElement('span');
+      tooltip.className = 'term-tooltip';
+      tooltip.setAttribute('role', 'tooltip');
+
+      let layerBadge = '';
+      if (!isAvailableInCurrentLayer && targetLayer > 0) {
+        const layerLabels = { 1: 'Минимальный', 2: 'Глубокий', 3: 'Экспертный' };
+        const layerClass = `layer-${targetLayer}`;
+        layerBadge = ` <span class="layer-badge ${layerClass}">${layerLabels[targetLayer] || 'L' + targetLayer}</span>`;
+      }
+
+      tooltip.innerHTML = `<span class="term-tooltip-summary">${summary}</span>` +
+        `<a class="term-tooltip-link" href="${ref}" data-layer-switch="${targetLayer}#${sectionId}">Подробнее →</a>${layerBadge}`;
+
+      marker.appendChild(tooltip);
+    }
+
+    // Bind events to each marker
+    markers.forEach(marker => {
+      // Hover: create tooltip on mouseenter (lazy)
+      marker.addEventListener('mouseenter', () => {
+        createTooltip(marker);
+      });
+
+      // Focus: create tooltip for keyboard users
+      marker.addEventListener('focus', () => {
+        createTooltip(marker);
+      });
+
+      // Mobile: tap to toggle
+      marker.addEventListener('click', (e) => {
+        // Only for touch devices or small screens
+        if (window.innerWidth <= 768 || ('ontouchstart' in window)) {
+          e.preventDefault();
+          marker.classList.toggle('tooltip-active');
+          createTooltip(marker);
+        }
+      });
+    });
+
+    // Close tooltips on outside click (mobile)
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.term-marker')) {
+        $$('.term-marker.tooltip-active').forEach(m => m.classList.remove('tooltip-active'));
+      }
+    });
+
+    // Close tooltips on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        $$('.term-marker.tooltip-active').forEach(m => m.classList.remove('tooltip-active'));
+      }
+    });
   }
 
   // ============================================================================

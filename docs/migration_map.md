@@ -1,7 +1,7 @@
 # Migration Map — Live Character Guide v5.12 → v6
 
-> **Version:** 3.1
-> **Last Updated:** 2026-04-21
+> **Version:** 3.2
+> **Last Updated:** 2026-04-22
 > **Status:** Tracking Document (updated for content restoration Phases 0–13)
 
 ---
@@ -415,3 +415,61 @@ These are NOT new sections — they are repositioned. If you read the guide befo
 | data/character_schema.json | Added core_directives, tone_frame, ooc_protection, immersion_boundary, directive_language |
 | layer-config.json | Updated descriptions for L2/L3 |
 | docs/content_restoration_changelog.md | Created with 45-item traceability table |
+
+---
+
+## Phase 3: Tooltip System (L1 Remediation)
+
+The following changes implement the tooltip system per L1-REMEDIATION-PLAN-V3.md Phase 3.
+
+### Tooltip CSS Added
+
+| File | Description |
+|------|-------------|
+| assets/shell-styles.css | Added `.term-marker`, `.term-tooltip`, `.term-tooltip-summary`, `.term-tooltip-link`, mobile adaptations, no-JS fallback styles |
+| src/shell/styles.css | Same as above (mirror) |
+
+### Tooltip JS Added
+
+| File | Description |
+|------|-------------|
+| assets/lazy-loader.js | Added `initTooltips()` function: mouseenter/focus → create tooltip with section summary + "Подробнее →" link; mobile tap-to-toggle; Escape/outside-click close |
+| src/shell/lazy-loader.js | Same as above (mirror) |
+
+### data-layer-switch → term-marker Conversions (L1 only)
+
+11 `data-layer-switch` elements in L1 sections were converted to `<span class="term-marker">` with tooltip support:
+
+| File | Section | Old Element | New Term | Target Layer |
+|------|---------|-------------|----------|--------------|
+| part_01_basic_blocks.html | p1_core_rules | `data-layer-switch="2#p4_spine_overview"` | СПИН | L2 |
+| part_01_basic_blocks.html | p1_layer_comparison | `data-layer-switch="2#p4_spine_overview"` | SPINE Framework | L2 |
+| part_01_basic_blocks.html | p1_l1_quickstart | `data-layer-switch="2#p7_system_prompt"` | Техническая реализация | L2 |
+| part_01_basic_blocks.html | p1_next_layers | `data-layer-switch="2#p4_spine_overview"` | SPINE Framework | L2 |
+| part_01_basic_blocks.html | p1_next_layers | `data-layer-switch="3#p4_l3_spine_full"` | Полный СПИН из 5 элементов | L3 |
+| part_02_anchors.html | p2_anchor_examples | `data-layer-switch="2#p2_flaw_anchors"` | FLAW-linked якоря | L2 |
+| part_03_voice.html | p3_influence_hierarchy | `data-layer-switch="2#p3_voice_leak"` | утечка голоса | L2 |
+| part_03_voice.html | p3_influence_hierarchy | `data-layer-switch="2#p3_examples_rules"` | Examples и Greeting | L2 |
+| part_09_diagnostics.html | p9_quality_scale | `data-layer-switch="2#p9_decision_tree"` | Дерево решений | L2 |
+| part_09_diagnostics.html | p9_basic_checklist | `data-layer-switch="2#p9_symptom_table"` | таблица симптомов | L2 |
+| part_10_examples.html | p10_elena_l1 | `data-layer-switch="2#p10_elena_l2"` | карточка Елены L2 | L2 |
+
+**Note:** All L2/L3 `data-layer-switch` elements remain unchanged. Only L1 sections were converted.
+
+### build-layers.mjs Updated
+
+- Added step 1c: `processCrossLayerLinks()` now handles `term-marker` elements
+- When target section is in current layer: term-marker → regular `<a>` link
+- When target is in deeper layer: term-marker kept as tooltip (popup with summary)
+- Added `term-marker-noscript-link` skip in anchor link processing
+
+### Build Validation Results (2026-04-22)
+
+| Validation | Result |
+|------------|--------|
+| build-layers.mjs | ✅ 102 sections, 0 errors |
+| validate-master.mjs | ✅ PASSED (13 checks, 15 warnings — expected) |
+| validate-layers.mjs | ✅ PASSED (7 checks, 0 warnings) |
+| check_duplicates.py | ✅ No duplicates found |
+| check_english.py | 61 hits — all in `<pre><code>` blocks or allowed technical terms (expected per plan) |
+| validate-build.mjs | ✅ PASSED |

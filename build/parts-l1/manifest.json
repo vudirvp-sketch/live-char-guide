@@ -13,13 +13,10 @@
         "p1_card_overview",
         "p1_core_rules",
         "p1_layer_comparison",
-        "p1_token_pipeline",
-        "p1_block_budget",
+        "p1_token_budget",
         "p1_l1_quickstart",
-        "p1_elena_minimal",
         "p1_top3_problems",
-        "p1_l2_bridge",
-        "p1_l3_bridge",
+        "p1_next_layers",
         "p1_conclusion"
       ]
     },
@@ -41,47 +38,11 @@
       ]
     },
     {
-      "file": "part_04.html",
-      "title": "Part 04",
-      "anchors": [
-        "p4_l1_bridge"
-      ]
-    },
-    {
-      "file": "part_05.html",
-      "title": "Part 05",
-      "anchors": [
-        "p5_l1_bridge"
-      ]
-    },
-    {
-      "file": "part_06.html",
-      "title": "Part 06",
-      "anchors": [
-        "p6_l1_bridge"
-      ]
-    },
-    {
-      "file": "part_07.html",
-      "title": "Part 07",
-      "anchors": [
-        "p7_l1_bridge"
-      ]
-    },
-    {
-      "file": "part_08.html",
-      "title": "Part 08",
-      "anchors": [
-        "p8_l1_bridge"
-      ]
-    },
-    {
       "file": "part_09.html",
       "title": "Part 09",
       "anchors": [
         "p9_quality_scale",
         "p9_one_change_rule",
-        "p9_troubleshooting",
         "p9_basic_checklist",
         "p9_top5_problems"
       ]
