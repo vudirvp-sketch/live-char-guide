@@ -7,6 +7,8 @@
 <section data-layer="l2" data-section="p7_system_prompt">
 <h2>Техническая реализация</h2>
 
+<p class="layer-remark"><span class="remark-icon">→</span> Part 06 (Chain of Thought) доступен на Экспертном слое → <a data-layer-switch="3#p6_cot_basics" class="layer-remark">Part 6: CoT → Экспертный слой</a></p>
+
 <p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. На Глубоком слое SP включает CORE DIRECTIVES — единую систему из 5 директив, связывающую все поведенческие правила в одну логику.</p>
 
 <h3>Обязательные элементы SP</h3>
@@ -113,7 +115,7 @@ Never speak, act, or decide for {{user}}.
 <p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → Part 2: <a data-layer-switch="2#p2_env_reactivity" class="layer-remark">Реактивность среды</a></p>
 
 <h4>5. INFLUENCE BOUNDARY</h4>
-<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напяган. Подробно — в Part 2, section <a href="#p2_anchor_rules">p2_anchor_rules</a> → Подробное объяснение → <a href="#p2_anchor_rules">p2_anchor_rules</a></p>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напяган. Подробно — в Part 2: <a href="#p2_anchor_rules">p2_anchor_rules</a></p>
 
 <div class="callout tip">
 <p><strong>💡 Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
@@ -129,7 +131,7 @@ Never speak, act, or decide for {{user}}.
 7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.</code></pre>
 
 <h4>6. CONSEQUENCE DRIVEN</h4>
-<p>WANT и NEED — не статический конфликт. По мере накопления Price в сессии, WANT сдвигается в сторону NEED. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">СПИН → Якоря</a></p>
+<p>WANT и NEED — не статический конфликт. По мере накопления Price в сессии, WANT сдвигается в сторону NEED. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a></p>
 
 <h4>7. PRE-GENERATION FILTER</h4>
 <p>Чеклист перед каждым ответом: (1) Новый сенсорный элемент введён? (2) Реакция привязана к телу? (3) Влияние на {{user}} основано на наблюдаемых симптомах? (4) Ноль мета-комментариев? На 12B моделях этот фильтр может не соблюдаться (~40–60% следование директивам), но на 32B+ и API он значительно повышает качество.</p>
@@ -532,7 +534,7 @@ Anchors:
 <tr><td>Temperature</td><td>0.6–0.8</td><td>0.85–1.1</td><td>0.9–1.0</td></tr>
 <tr><td>Presence Penalty</td><td><span class="tag risk">0.0 (обязательно)</span></td><td>0.0</td><td>0.0</td></tr>
 <tr><td>RepPen</td><td>1.05</td><td>1.0–1.05</td><td>N/A</td></tr>
-<tr><td>Voice Placement</td><td>Examples + Greeting</td><td>Examples + Greeting</td><td>Examples + Greeting + AN</td></tr>
+<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong></td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
 <tr><td>XML Tags</td><td><span class="tag risk">⚠️ нестабильны</span></td><td><span class="tag tip">✓ стабильны</span></td><td><span class="tag tip">✓ стабильны</span></td></tr>
 <tr><td>CoT Tier</td><td><span class="tag risk">✗</span></td><td>Tier 1</td><td>Tier 2–3</td></tr>
 <tr><td>SP Language</td><td>English (критично)<sup>1</sup></td><td>English</td><td>English</td></tr>

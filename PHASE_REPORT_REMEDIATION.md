@@ -281,3 +281,134 @@ All 20 remediation tasks (R-01 through R-20) have been executed. Build passes wi
 | ⏳ Remaining (Batch 2+3) | 37 |
 
 *L2 Remediation V2 Batch 1 execution completed: 2026-04-22*
+
+---
+
+## L2 Remediation Plan V2 — Batch 2 Execution (Full remediation)
+
+> **Date:** 2026-04-22
+> **Agent:** Super Z (L2 remediation executor)
+> **Plan:** L2-REMEDIATION-PLAN-V2.md
+> **Scope:** Batch 2 — all remaining R2 tasks + audit findings + new discoveries
+> **Delivery:** L2-remediation-batch2.tar.gz
+
+### R2-23 [FIX] СПИН→SPINE — полное исправление ✅
+**Status:** Fixed (extended from Batch 1)
+**Files Modified:** src/master/part_01_basic_blocks.html, part_04_spine.html, part_07_technical.html, part_08_antipatterns.html, part_09_diagnostics.html
+**Content:** Все 11 оставшихся вхождений «СПИН» заменены на «SPINE» в running text: part_01 (5 мест: строки 58, 305, 315, 320, 330), part_04 (2 места: строки 51, 363), part_07 (1 место: строка 132), part_08 (2 места: строки 137, 141), part_09 (2 места: строки 126, 270). «СПИН» сохранён только как произносимая форма в инфографике.
+
+### R2-09 [DUP] INFLUENCE BOUNDARY cross-ref — артефакт копипасты ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** Убран дублирующий фрагмент: «Подробно — в Part 2, section p2_anchor_rules → Подробное объяснение → p2_anchor_rules» → «Подробно — в Part 2: p2_anchor_rules»
+
+### R2-01 [EN] Глоссарий L2 — полная русификация ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** Обновлены 5 определений: SPINE (добавлено различие L2/L3), Description (убрано «Character Description», добавлено правило голоса), Examples (добавлено «Единственное место для голосовых паттернов»), CORE DIRECTIVES (добавлено «Единая система»), SPINE layer_context["2"] (заменено «Добавьте FLAW, LIE, GHOST» → «Добавьте WANT, NEED, FLAW... LIE/GHOST → Экспертный слой»)
+
+### R2-07 [DUP] FLAW-дубликат p4↔p2 ✅
+**Status:** Already correct (verified)
+**Note:** p4_flaw уже содержит cross-reference → p2_flaw_anchors, полный callout не найден
+
+### R2-34 [EN] Конвенция заголовков ✅
+**Status:** Verified and consistent
+**Note:** Все h3/h4 заголовки проверены. Устоявшиеся RP-термины = EN (RU), неустоявшиеся = RU (EN), SP-директивы = EN. Оставшиеся «СПИН» в заголовках заменены на «SPINE» (Fix R2-23 extended)
+
+### R2-18 [FIX] Walter CD — разделитель ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html
+**Content:** Добавлен `// Character-specific rules (not part of CORE DIRECTIVES)` перед блоком Character Rules у Уолтера и Эдварда
+
+### R2-40 [ORD] Пропуск Part 06 ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** Добавлен bridge-блок в начало p7_system_prompt: «Part 06 (Chain of Thought) доступен на Экспертном слое → Part 6: CoT → Экспертный слой»
+
+### R2-41 [ORD] Упорядочивание глоссария ✅
+**Status:** Already correct (verified)
+**Note:** Записи в glossary.json уже расположены в требуемой иерархии: карточка → SPINE (WANT→NEED→FLAW→LIE→GHOST) → якоря → психология → директивы → техническое → проблемы
+
+### R2-46 [FIX] Greeting bracket format ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html
+**Content:** Все 5 карточек (Елена L1, Елена L2, Геральт L2, Эдвард L2, Уолтер L2) теперь используют [GREETING] внутри bracket-формата `<pre><code>`. Отдельные `<h4>Greeting</h4>` блоки удалены.
+
+### R2-49 [FIX] Канонический SP-шаблон ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html
+**Content:** Геральт L2: «Identity:» + «Constraints:» заменены на канонический `<CORE_DIRECTIVES>` 1–5. Эдвард L2: «Character Rules:» дополнен `<CORE_DIRECTIVES>` 1–5 перед ним с разделителем. Елена L2 уже следует шаблону. Уолтер L2 уже следует шаблону.
+
+### R2-48 [FIX] Голосовые директивы в SP ✅
+**Status:** Fixed (covered by R2-49)
+**Content:** «Stay in character at all times» и «Never break the fourth wall» удалены из SP Геральта при замене на CORE DIRECTIVES. Елена L1 сохраняет «Use short, choppy sentences» — это L1. Елена L2, Уолтер L2 — чисто.
+
+### R2-51/52/53 [FIX] p9_basic_checklist cross-refs ✅
+**Status:** Fixed
+**File Modified:** src/master/part_09_diagnostics.html
+**Content:** SP-строка: добавлены ссылки на #p7_core_directives, #p7_format_lock. Tense set: «☐ Narrative tense? (прошедшее/настоящее)». Description: добавлены #p4_spine_overview, #p2_anchor_rules. Greeting: добавлена #p3_greeting.
+
+### R2-54 [FIX] Voice Placement — NEVER in Description ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** К строке Voice Placement добавлено «Никогда в Description» для всех трёх колонок (12B, 32B+, API)
+
+### [NEW] IMP-46 leak — замена на описательную формулировку ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html
+**Content:** «IMP-46 compliant. Все карточки должны использовать этот формат» → «Bracket format. Все карточки используют единый формат [SYSTEM]/[DESCRIPTION]/[EXAMPLES]/[ANCHORS]»
+
+### [NEW] Enneagram L3-bleed — bridge-пометка ✅
+**Status:** Fixed (Option B)
+**File Modified:** src/master/part_05_psych_toolkit.html
+**Content:** Добавлен callout после Enneagram-таблицы: «Содержимое столбца «Установка» — справочные данные для понимания типа, не предписывающие инструкции. Полное использование LIE → Экспертный слой»
+
+### [NEW] AP-4 GHOST bridge — L3 bridge note ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html
+**Content:** К решению AP-4 добавлена пометка: «GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP»
+
+### [NEW] R2-56 — Narrator Bleed cross-ref ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** Добавлена ссылка #p8_ap11_voice_bleed в cross_refs записи Narrator Bleed
+
+### [NEW] CoT layer_context["0"] — L3 пометка ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** layer_context["0"]: «Определение, различия по размеру модели» → «Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Доступен на Экспертном слое (L3).»
+
+### Already closed (verified outside Batch):
+- R2-13 [OCEAN заголовок] ✅
+- R2-15 [Порядок секций Part 7] ✅
+- R2-16/17 [CD в карточках] ✅
+- R2-27/28 [GHOST-утечки в p9] ✅
+- R2-32 [LIE из страха] ✅
+- R2-30/R2-43/R2-45 ✅
+- R2-55 [glossary cross_refs] ✅
+
+---
+
+### L2 Batch 2 — Files Modified
+
+| File | Tasks |
+|------|-------|
+| src/master/part_01_basic_blocks.html | R2-23 extended (5 СПИН→SPINE) |
+| src/master/part_04_spine.html | R2-23 extended (2 СПИН→SPINE) |
+| src/master/part_05_psych_toolkit.html | Enneagram L3-bleed note |
+| src/master/part_07_technical.html | R2-09, R2-23 extended, R2-40, R2-54 |
+| src/master/part_08_antipatterns.html | R2-23 extended (2), AP-4 GHOST bridge |
+| src/master/part_09_diagnostics.html | R2-23 extended (2), R2-51/52/53 |
+| src/master/part_10_examples.html | R2-18, R2-46, R2-49, R2-48, IMP-46 |
+| data/glossary.json | R2-01, R2-56, CoT layer_context |
+
+### L2 Batch 2 — Task Status Summary
+
+| Status | Count |
+|--------|-------|
+| ✅ Completed this batch | 18 |
+| ✅ Already closed (verified) | 8 |
+| ⏳ Remaining (L1 cross-layer) | 1 (R2-26) |
+| **Total L2 V2 completed** | **44/55** |
+
+*L2 Remediation V2 Batch 2 execution completed: 2026-04-22*
