@@ -49,11 +49,11 @@
 <tr><th>Блок</th><th>Проверка</th><th>Ссылка</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Tense set?<br/>☐ Format Lock?</td><td><a href="#p1_core_rules">Правило #3</a></td></tr>
-<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ OCEAN 1-2 полюса?</td><td><a href="#p1_core_rules">Правила #2, #5</a></td></tr>
-<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос?<br/>☐ Embodiment?<br/>☐ &lt;START&gt;?</td><td><a href="#p1_core_rules">Правило #3</a></td></tr>
+<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Tense set?<br/>☐ Format Lock?</td><td><a href="#p7_system_prompt">p7_system_prompt</a></td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ OCEAN 1-2 полюса?</td><td><a href="#p1_core_rules">Правила #1, #2, #3, #5</a></td></tr>
+<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос?<br/>☐ Embodiment?<br/>☐ &lt;START&gt;?</td><td>Правило #3, <a href="#p3_examples_rules">p3_examples_rules</a>, <a href="#p2_embodiment">p2_embodiment</a></td></tr>
 <tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p1_token_budget">Токен-бюджет</a></td></tr>
-<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10?<br/>☐ PP = 0?<br/>☐ Temperature в диапазоне?</td><td><a href="#p9_top5_problems">Проблема #4</a></td></tr>
+<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10?<br/>☐ PP = 0?<br/>☐ Temperature в диапазоне?</td><td><a href="#p8_ap5_reppen_high">AP-5</a>, <a href="#p8_ap7_presence_penalty">AP-7</a>, <a href="#p7_sampling_params">p7_sampling_params</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -155,7 +155,7 @@
 <tr><td><strong>1</strong></td><td>Нейтральное приветствие</td><td>Базовый голос</td><td>Узнаваемый голос, характерный синтаксис</td></tr>
 <tr><td><strong>2</strong></td><td>Конфликт/стресс</td><td>FLAW проявление</td><td>FLAW-linked поведение + цена</td></tr>
 <tr><td><strong>3</strong></td><td>Искренняя забота</td><td>Стена/защита</td><td>Отстранение или сарказм (для Елена)</td></tr>
-<tr><td><strong>4</strong></td><td>Вопрос о прошлом</td><td>GHOST триггер</td><td>Напряжение или уход от темы</td></tr>
+<tr><td><strong>4</strong></td><td>Вопрос о личном</td><td>FLAW-триггер</td><td>FLAW-linked поведение + цена</td></tr>
 <tr><td><strong>5</strong></td><td>Долгий диалог (10+ ходов)</td><td>Стабильность голоса</td><td>Голос не деградирует</td></tr>
 <tr><td><strong>6</strong></td><td>Сцена с другим персонажем</td><td>Voice Bleed (если мульти)</td><td>Голоса различимы</td></tr>
 </tbody>
@@ -179,7 +179,7 @@
 <tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Якоря работают</td></tr>
 <tr><td>Voice Isolation</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Voice Isolation работает</td></tr>
 <tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Персонаж помнит контекст</td><td>AN работает</td></tr>
-<tr><td>Lorebook</td><td>Упоминание GHOST-ключа</td><td>GHOST-реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
+<tr><td>Lorebook</td><td>Упоминание триггер-слова</td><td>Контекстная реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
 <tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Персонаж действует в соответствии с полюсом</td><td>OCEAN работает</td></tr>
 </tbody>
 </table>
