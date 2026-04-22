@@ -1,8 +1,8 @@
 # Content Ownership Map — Live Character Guide v6
 
-> **Version:** 2.1
-> **Last Updated:** 2026-04-22
-> **Status:** Canonical Reference (post-layer-restructure, post-remediation)
+> **Version:** 2.2
+> **Last Updated:** 2026-04-23
+> **Status:** Canonical Reference (post-layer-restructure, post-remediation, post-lorebook-enhancement)
 
 ---
 
@@ -113,7 +113,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Format Lock | Part 7 | p7_format_lock | l2 | Rule | Фиксация формата диалога + системы A/B/C |
 | Author's Note (AN) | Part 7 | p7_authors_note | l2 | Template+Rules | Динамический контекст |
 | Structured Inject | Part 7 | p7_structured_inject | l2 | Technique | XML-теги для мотивации в AN |
-| Lorebook (LB) | Part 7 | p7_lorebook | l2 | Template+Rules | Триггеры для GHOST |
+| Lorebook (LB) | Part 7 | p7_lorebook | l2 | Template+Rules | Триггеры для GHOST + таблица совместимости фронтендов |
+| Lorebook Mechanics | Part 7 | p7_lorebook_mechanics | l2 | Full treatment | Каскад по диапазону, комбинированный триггер, контекстный фильтр. NEW |
+| Lorebook Advanced | Part 7 | p7_lorebook_advanced | l3 | Full treatment | Эмуляция усталости, мета-лор, ложная память. NEW |
 | XML tags | Part 7 | p7_xml_tags | l3 | Full treatment | Синтаксис и применение XML для Description |
 | API blocks | Part 7 | p7_api_blocks | l3 | Template | Claude/GPT specifics |
 | 4K-Fallback | Part 7 | p7_4k_fallback | l3 | Protocol | Адаптация для ≤4K контекста |
@@ -189,18 +191,18 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 4 (SPINE) | 0 | 6 | 5 | 11 |
 | Part 5 (Psych Toolkit) | 0 | 7 | 2 | 9 |
 | Part 6 (CoT) | 0 | 0 | 6 | 6 |
-| Part 7 (Technical) | 0 | 9 | 8 | 17 |
+| Part 7 (Technical) | 0 | 10 | 9 | 19 |
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
 | Part 10 (Examples) | 1 | 4 | 1 | 6 |
-| **Total** | **18** | **49** | **35** | **102** |
+| **Total** | **18** | **50** | **36** | **104** |
 
 **Cumulative (as reader sees it):**
 - **L1 sees: 18 sections** (down from 27 — 9 sections removed/merged by L1 Remediation Plan v3)
-- **L2 sees: 67 sections** (+49 to L1)
-- **L3 sees: 102 sections** (+35 to L2)
+- **L2 sees: 68 sections** (+50 to L1)
+- **L3 sees: 104 sections** (+36 to L2)
 
-**Note:** Part 7 L2 count is 9 (p7_system_prompt, p7_core_directives, p7_tone_frame, p7_sampling_params, p7_format_lock, p7_authors_note, p7_structured_inject, p7_lorebook, p7_model_checklist) — verified correct. The original plan v2.1 listed 10; the discrepancy was due to only 3 new L2 entries being specified in §2.1 vs 4 implied by the plan's statistics. Decision: 9 is the verified correct count based on actual HTML content.
+**Note:** Part 7 counts updated in v2.2: L2 = 10, L3 = 9. Added p7_lorebook_mechanics (L2) and p7_lorebook_advanced (L3) per Lorebook Enhancement Plan v1.1.
 
 ---
 
@@ -257,5 +259,6 @@ Before finalizing any Part, verify:
 ---
 
 *Document prepared for Live Character Guide v6 rebuild project*
+*Updated 2026-04-23: added p7_lorebook_mechanics and p7_lorebook_advanced (v2.2)*
 *Updated 2026-04-22: statistics corrected to match build output (v2.1)*
 *Updated 2026-04-20: complete rewrite post-layer-restructure (Phases 1–4)*

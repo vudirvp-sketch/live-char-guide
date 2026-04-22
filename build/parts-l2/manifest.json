@@ -72,17 +72,11 @@
     },
     {
       "file": "part_07.html",
-      "title": "Техническая реализация",
+      "title": "Part 07",
       "anchors": [
-        "p7_system_prompt",
-        "p7_core_directives",
-        "p7_tone_frame",
-        "p7_format_lock",
-        "p7_authors_note",
-        "p7_structured_inject",
-        "p7_sampling_params",
         "p7_lorebook",
-        "p7_model_checklist"
+        "p7_lorebook",
+        "lorebook"
       ]
     },
     {

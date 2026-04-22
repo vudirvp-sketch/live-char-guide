@@ -1,12 +1,12 @@
 {
   "version": "6.0.0",
-  "builtAt": "2026-04-22T13:33:29.054Z",
-  "sectionCount": 102,
+  "builtAt": "2026-04-22T17:40:36.730Z",
+  "sectionCount": 107,
   "partCount": 10,
   "layerHashes": {
     "l1": "sha256:97b1d411105ba54c",
-    "l2": "sha256:b1e18de9cb6a8a85",
-    "l3": "sha256:7a16d1b1ac720a95"
+    "l2": "sha256:8f0d93a8d98832ff",
+    "l3": "sha256:fe8727a4437f2715"
   },
-  "errors": 0
+  "errors": 1
 }

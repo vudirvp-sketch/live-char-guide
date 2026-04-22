@@ -1,9 +1,9 @@
 # Cross-Reference Synchronization — Live Character Guide v6
 
-> **Version:** 1.0
-> **Date:** 2026-04-21
-> **Status:** Remediation R-05 Deliverable
-> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14
+> **Version:** 1.1
+> **Date:** 2026-04-23
+> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement
+> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md
 
 ---
 
@@ -32,6 +32,10 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 13 | p7_system_prompt | p7_core_directives | Internal href "#p7_core_directives" | ✅ p7_core_directives referenced as sub-section |
 | 14 | p7_system_prompt | p7_tone_frame | Internal href "#p7_tone_frame" | ✅ p7_tone_frame is sub-section of p7 |
 | 15 | p9_top5_problems | p9_symptom_table | `data-layer-switch="2#p9_symptom_table"` | ✅ p9_symptom_table references p9_top5_problems via layer-remark back-link |
+| 16 | p7_lorebook | p7_lorebook_mechanics | `href="#p7_lorebook_mechanics"` | ✅ p7_lorebook_mechanics references p7_lorebook via callout link |
+| 17 | p7_lorebook_mechanics | p7_lorebook_advanced | `data-layer-switch="3#p7_lorebook_advanced"` | ✅ p7_lorebook_advanced does not reference back — acceptable (layer progression) |
+| 18 | p7_authors_note | p7_lorebook_mechanics | `href="#p7_lorebook_mechanics"` | ✅ p7_lorebook_mechanics does not reference back — acceptable (AN is upstream) |
+| 19 | p4_ghost | p7_lorebook_advanced | Referenced in fatigue emulation warning | ✅ p7_lorebook_advanced references p4_ghost via href in callout warning |
 
 ---
 
@@ -41,11 +45,11 @@ These were discovered by scanning all `data-layer-switch` attributes in master H
 
 | # | Source Section | Target Section | Layer Switch | Back Link Status |
 |---|---------------|----------------|-------------|-----------------|
-| 16 | p3_influence_hierarchy | p3_voice_leak | `data-layer-switch="2#p3_voice_leak"` | ✅ p3_voice_leak references hierarchy concepts implicitly |
-| 17 | p3_influence_hierarchy | p3_examples_rules | `data-layer-switch="2#p3_examples_rules"` | ✅ p3_examples_rules builds on hierarchy |
-| 18 | p9_test_scenarios | p9_12b_issues | `data-layer-switch="3#p9_12b_issues"` | ✅ p9_12b_issues references test scenarios implicitly |
-| 19 | p10_elena_l1 | p10_elena_l2 | `data-layer-switch="2#p10_elena_l2"` | ✅ p10_elena_l2 does not reference back — acceptable (card progression) |
-| 20 | p10_geralt_l2 | p10_vysherblenny_l3 | `data-layer-switch="3#p10_vysherblenny_l3"` | ✅ p10_vysherblenny_l3 does not reference back — acceptable (card progression) |
+| 20 | p3_influence_hierarchy | p3_voice_leak | `data-layer-switch="2#p3_voice_leak"` | ✅ p3_voice_leak references hierarchy concepts implicitly |
+| 21 | p3_influence_hierarchy | p3_examples_rules | `data-layer-switch="2#p3_examples_rules"` | ✅ p3_examples_rules builds on hierarchy |
+| 22 | p9_test_scenarios | p9_12b_issues | `data-layer-switch="3#p9_12b_issues"` | ✅ p9_12b_issues references test scenarios implicitly |
+| 23 | p10_elena_l1 | p10_elena_l2 | `data-layer-switch="2#p10_elena_l2"` | ✅ p10_elena_l2 does not reference back — acceptable (card progression) |
+| 24 | p10_geralt_l2 | p10_vysherblenny_l3 | `data-layer-switch="3#p10_vysherblenny_l3"` | ✅ p10_vysherblenny_l3 does not reference back — acceptable (card progression) |
 
 ---
 
@@ -83,3 +87,4 @@ After all remediation items are resolved:
 
 *Document prepared for Live Character Guide v6 Content Restoration project*
 *Created: 2026-04-21 (Remediation R-05)*
+*Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-19)*

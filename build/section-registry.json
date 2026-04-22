@@ -309,6 +309,16 @@
     "part": 7,
     "topic": ""
   },
+  "p7_lorebook_mechanics": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_lorebook_advanced": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
   "p7_xml_tags": {
     "layer": "l3",
     "part": 7,

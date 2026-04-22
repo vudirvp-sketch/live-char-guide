@@ -267,6 +267,8 @@ WANT→NEED: WANT доминирует, NEED подавлен
 Blind Spot: Не видит, что её сарказм отталкивает тех, кто искренен
 Сцена — ночь, дождь. Елена уставшая после долгого дня.]</code></pre>
 
+<p class="layer-remark"><span class="remark-icon">→</span> Комбинирование AN с Lorebook-механиками (каскад по диапазону, sticky-состояния) → <a href="#p7_lorebook_mechanics">Механики Lorebook</a></p>
+
 </section>
 
 <section data-layer="l3" data-section="p7_authors_note_l3">
@@ -464,7 +466,174 @@ Never speak, act, or decide for {{user}}.
 </div>
 </details>
 
+<details class="interactive">
+<summary>📋 Совместимость EVENT: по фронтендам</summary>
+<p>Синтаксис <code>EVENT:</code> для range-триггеров поддерживается не всеми фронтендами:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Фронтенд</th><th>Поддержка</th><th>Примечание</th></tr></thead>
+<tbody>
+<tr><td>SillyTavern</td><td><span class="tag tip">Полная</span></td><td>EVENT:, SECONDARY_KEYS, selective activation</td></tr>
+<tr><td>Soul of Waifu</td><td><span class="tag tip">Есть аналоги</span></td><td>Расширенные возможности</td></tr>
+<tr><td>KoboldAI</td><td><span class="tag opt">Частичная</span></td><td>Использовать conditionals в entry content, KEYWORD без EVENT:</td></tr>
+<tr><td>Oobabooga</td><td><span class="tag risk">Нет</span></td><td>Использовать World Info или встройте триггеры в Description/AN</td></tr>
+<tr><td>Faraday.dev / Agnai</td><td><span class="tag opt">Ограниченная</span></td><td>Проверяйте документацию конкретного фронтенда</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Поведенческие механики Lorebook (каскад по диапазону, комбинированный триггер, контекстный фильтр) → <a href="#p7_lorebook_mechanics" class="layer-remark">Механики Lorebook</a></p>
+
 <p class="layer-remark"><span class="remark-icon">→</span> XML-теги для Description: <a data-layer-switch="3#p7_xml_tags" class="layer-remark">Расширенный XML → Экспертный слой</a></p>
+
+</section>
+
+<section data-layer="l2" data-section="p7_lorebook_mechanics">
+<h3>Lorebook: поведенческие механики</h3>
+
+<p>Каждая запись Lorebook — это поведенческий триггер, а не хранилище лора. Рекомендуемый бюджет активации: 2–3 механики на сессию. Остальные отключить через <code>probability: 0</code> или удалить.</p>
+
+<div class="callout tip">
+<p><strong>💡 Область применения:</strong> Параметры механик работают вместе с базовой структурой записи. Сначала изучите <a href="#p7_lorebook">структуру Lorebook</a>.</p>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Ограничение:</strong> Никогда не вставляйте действия или мысли <code>{{user}}</code> в поле <code>content</code>. Это не техническое ограничение, а принцип анти-годмодинга. Подробнее → <a href="#p1_core_rules">Правила</a>.</p>
+</div>
+
+<h4>Таблица механик</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Механика</th><th>Параметры</th><th>Применение</th><th>Почему работает для LLM</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Каскад по диапазону</strong> (Range-Cascade)</td>
+<td><code>trigger_type: range</code><br><code>min_msg/max_msg</code>: 1–10 → 11–40 → 50+</td>
+<td>Автоматическая прогрессия: завязка → нагнетание → кульминация → развязка. Заменяет ручное обновление AN.</td>
+<td>Индекс сообщения выступает временной меткой. Каскад автоматически смещает фокус с WANT на NEED без вмешательства автора.</td>
+</tr>
+<tr>
+<td><strong>Комбинированный триггер</strong> (Combo-Trigger)</td>
+<td><code>trigger_type: keyword</code><br><code>sticky: 3–5</code><br><code>cooldown: 20–30</code></td>
+<td>Срабатывание ключевого слова → персонаж переходит в изменённый режим поведения на N реплик → возвращается к базовому состоянию.</td>
+<td><code>sticky</code> закрепляет переходное состояние; <code>cooldown</code> предотвращает зацикливание. Создаёт иллюзию смены режима без дрейфа личности.</td>
+</tr>
+<tr>
+<td><strong>Контекстный фильтр</strong> (Context Filter)</td>
+<td><code>depth: 3–5</code><br><code>exclude_key: ["aside", "joke", "not_"]</code><br><code>probability: 80%</code></td>
+<td>Реагирует только на целевой ввод в последних сообщениях; отсекает фоновый шум и ложные срабатывания.</td>
+<td>Связка <code>depth</code> и <code>exclude_key</code> блокирует случайные триггеры. Модель получает чёткий сигнал → снижается риск выхода из образа.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h4>Практика — быстрая таблица</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Задача</th><th>Тип</th><th>Ключевые параметры</th></tr>
+</thead>
+<tbody>
+<tr><td>Лор мира / NPC</td><td><code>keyword</code></td><td><code>sticky: 0</code> — подтягивается только при упоминании</td></tr>
+<tr><td>Временное состояние (ранен, держит предмет)</td><td><code>keyword</code></td><td><code>sticky: 3–5</code> — не теряет контекст несколько реплик</td></tr>
+<tr><td>Сюжетный поворот</td><td><code>range</code></td><td><code>min_msg / max_msg</code> — срабатывает в нужный момент</td></tr>
+<tr><td>Пасхалка / точечное событие</td><td><code>range</code></td><td><code>min_msg == max_msg</code> — ровно на одном сообщении</td></tr>
+<tr><td>Редкий глюк / экзистенциальный момент</td><td><code>keyword</code></td><td><code>probability: 10–20%</code>, <code>cooldown: 20</code> — не спамит</td></tr>
+<tr><td>Блокировка нежелательного лора</td><td><code>keyword</code></td><td><code>exclude_key: ["стоп", "отмена"]</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<details class="interactive">
+<summary>📝 Пример: Структурированная инъекция (Structured Inject) в поле content</summary>
+<p>Чёткое разделение системных инструкций и реплик персонажа внутри поля <code>content</code>:</p>
+<pre><code>[SYSTEM]
+&lt;motivation&gt;{{char}} помнит предыдущую ссору и боится повторения.&lt;/motivation&gt;
+[CONDITION] Если {{user}} повышает голос
+[OUTPUT] {{char}} отступает на полшага, сжимает кисти и говорит тише обычного.</code></pre>
+<p>Альтернатива через XML-теги:</p>
+<pre><code>&lt;instruction&gt;
+  &lt;trigger&gt;{{user}} задаёт личный вопрос&lt;/trigger&gt;
+  &lt;response&gt;{{char}} уходит от ответа — меняет тему.&lt;/response&gt;
+  &lt;cost&gt;Пауза, нервный тик — дёрнул плечом.&lt;/cost&gt;
+&lt;/instruction&gt;</code></pre>
+</details>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Продвинутые механики (эмуляция усталости, мета-лор, ложная память) — на Экспертном слое → <a data-layer-switch="3#p7_lorebook_advanced" class="layer-remark">Продвинутые механики → Экспертный слой</a></p>
+
+</section>
+
+<section data-layer="l3" data-section="p7_lorebook_advanced">
+<h3>Lorebook: продвинутые механики</h3>
+
+<p><span class="tag advanced">Продвинуто</span> <span class="tag opt">Опционально</span></p>
+
+<h4>Таблица продвинутых механик</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Механика</th><th>Параметры</th><th>Применение</th><th>Почему работает для LLM</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Эмуляция усталости</strong> (Fatigue Emulation)</td>
+<td><code>trigger_type: range</code><br><code>min_msg: 100+</code><br><code>sticky: 1</code><br><code>content: [SYSTEM: CONTEXT_FATIGUE]</code></td>
+<td>После 100+ сообщений: персонаж начинает забывать детали, путать имена, речь становится фрагментированной.</td>
+<td>Превращает техническую деградацию контекстного окна в нарративную особенность.</td>
+</tr>
+<tr>
+<td><strong>Мета-лор</strong> (Meta-Lore)</td>
+<td><code>keyword: ["config", "log", "bug", "prompt"]</code><br><code>probability: 10–15%</code><br><code>cooldown: 25+</code></td>
+<td>Персонаж интерпретирует технические термины как внутриигровые артефакты, магию или психические симптомы.</td>
+<td>Низкая вероятность + высокий <code>cooldown</code> обеспечивают редкость события. Модель переосмысляет технический язык через призму сеттинга.</td>
+</tr>
+<tr>
+<td><strong>Ложная память</strong> (False Memory)</td>
+<td><code>range: 42</code> или <code>keyword: "you remember"</code><br><code>content</code>: псевдо-цитата из «прошлого»</td>
+<td>Персонаж ссылается на событие, которого не было. Создаёт психологическое напряжение и элемент непредсказуемости.</td>
+<td>Модель способна правдоподобно конфабулировать — механика применяется строго дозированно.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Эмуляция усталости — критическое предупреждение:</strong><br>
+При использовании этой механики GHOST-якоря (<a href="#p4_ghost">Раздел 4</a>) <strong>обязательно</strong> должны быть явно пересказаны внутри <code>content</code> этой записи. Без этого якоря деградируют вместе с поверхностными поведениями.</p>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Ложная память — только для экспертов:</strong><br>
+<span class="tag risk">Риск</span> Одиночное использование. Требует предварительного согласия пользователя. Злоупотребление разрушает достоверность лора. Конфликтует с принципом психологического ядра при повторном использовании.</p>
+</div>
+
+<h4>Контекстные бюджеты</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Контекстное окно</th><th>Допустимые механики</th></tr></thead>
+<tbody>
+<tr><td><strong>4K</strong></td><td>Только <code>keyword</code> + <code>sticky</code>. Отключить <code>range</code> и <code>probability</code>.</td></tr>
+<tr><td><strong>8K</strong></td><td>Каскад по диапазону (2–3 стадии) + keyword-фильтры. Обновлять AN каждые 3–5 сообщений.</td></tr>
+<tr><td><strong>16K+ / API</strong></td><td>Все механики активны. Lorebook + AN работают как парная система.</td></tr>
+</tbody>
+</table>
+</div>
+
+<details class="interactive">
+<summary>✅ Чеклист проверки перед деплоем продвинутых механик</summary>
+<ul>
+<li>Каждая механика имеет явный триггер (keyword или range)</li>
+<li><code>cooldown</code> установлен ≥ 15 для редких событий</li>
+<li>Нет конфликтов между записями (один keyword не должен триггерить 2+ записи с разными целями)</li>
+<li>GHOST-якоря пересказаны в content записей с эмуляцией усталости</li>
+<li>Ложная память согласована с пользователем</li>
+<li>Протестировано на 50+ сообщений для проверки каскадов</li>
+</ul>
+</details>
 
 </section>
 
