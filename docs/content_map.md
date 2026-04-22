@@ -1,8 +1,8 @@
 # Content Ownership Map — Live Character Guide v6
 
-> **Version:** 2.2
+> **Version:** 2.3
 > **Last Updated:** 2026-04-23
-> **Status:** Canonical Reference (post-layer-restructure, post-remediation, post-lorebook-enhancement)
+> **Status:** Canonical Reference (post-layer-restructure, post-remediation, post-lorebook-enhancement, post-TP-11-20)
 
 ---
 
@@ -72,10 +72,11 @@ This document is the **single source of truth** for "where does concept X live."
 | NEED | Part 4 | p4_need | l2 | Definition+Examples | Истинная потребность |
 | FLAW | Part 4 | p4_flaw | l2 | Definition+Examples | Конкретное поведение |
 | SPINE → Anchors mapping | Part 4 | p4_spine_mapping | l2 | Protocol | WANT/NEED/FLAW → якоря. GHOST/LIE отмечены как L3-only |
-| L2 Quickstart (СПИН) | Part 4 | p4_l2_quickstart | l2 | Checklist | WANT/NEED/FLAW + bridge к LIE/GHOST на L3 |
+| *(moved)* L2 Quickstart | Part 4 | p4_l2_quickstart | l2 | Note | ⚠ Moved to Part 5 as p5_l2_quickstart. See navigational link below |
 | LIE (Ложная установка) | Part 4 | p4_lie | l3 | Definition+Examples | Перемещено из L2 → L3 при реструктуризации |
 | GHOST (Событие прошлого) | Part 4 | p4_ghost | l3 | Definition+Examples | Перемещено из L2 → L3 при реструктуризации |
 | GHOST Layers | Part 4 | p4_ghost_layers | l3 | Full treatment | 3-tier структура GHOST |
+| L3 Learning Path | Part 4 | p4_l3_learning_path | l3 | Navigation | Навигационная карта L3 (from GHOST to full card) |
 | SPINE consistency check | Part 4 | p4_spine_check | l3 | Diagnostic | Внутренняя консистентность |
 | Полный СПИН (5 элементов) | Part 4 | p4_l3_spine_full | l3 | Chain-connection | GHOST→LIE→FLAW→NEED→WANT + Эллиот Алдерсон. НЕ переопределяет LIE/GHOST |
 
@@ -90,6 +91,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Enneagram interactive | Part 5 | p5_enneagram_widget | l2 | Interactive | SVG diagram + detail panel |
 | Enneagram → SPINE | Part 5 | p5_enneagram_to_spine | l2 | Protocol | Страх→LIE (L3 ref), Желание→WANT, Стресс→FLAW, Рост→NEED |
 | MBTI | Part 5 | p5_mbti_basics | l2 | Tool+Interactive | 16 типов, filter grid |
+| L2 Quickstart | Part 5 | p5_l2_quickstart | l2 | Checklist | L2 Quickstart (moved from Part 4, now after OCEAN/Enneagram) |
 | Enneagram wings | Part 5 | p5_enneagram_wings | l3 | Full treatment | Выбор крыла |
 | OCEAN×Enneagram matrix | Part 5 | p5_cross_matrix | l3 | Interactive | Корреляция 5×9 |
 
@@ -178,6 +180,10 @@ This document is the **single source of truth** for "where does concept X live."
 | Эдвард Элрик (L2) | Part 10 | p10_edward_l2 | l2 | Complete card | Кристально ясный СПИН. WANT/NEED/FLAW только. Новый раздел |
 | Выщербленный (L3) | Part 10 | p10_vysherblenny_l3 | l3 | Complete card | GHOST Layers + CoT + XML (~1500+ токенов) |
 | Уолтер Уайт (L2) | Part 10 | p10_walter_l2 | l2 | Complete card | Realistic modern character, WANT/NEED/FLAW. NEW |
+| Voice Warning (L2) | Part 10 | p10_l2_voice_warning | l2 | Rule | Общее предупреждение о голосе для L2 примеров |
+| Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Tech-Priest, Adeptus Mechanicus) |
+| Омнис-Зета 7-Квин (L2) | Part 10 | p10_omnis_l2_card | l2 | Complete card | L2 карточка Омнис-Зета 7-Квин (SPINE + OCEAN + FLAW-linked anchors) |
+| Омнис-Зета 7-Квин (L3) | Part 10 | p10_omnis_l3_card | l3 | Complete card | L3 карточка Омнис-Зета 7-Квин (GHOST Layers + CoT + XML) |
 
 ---
 
@@ -188,19 +194,19 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 1 (Basic Blocks) | 8 | 0 | 0 | 8 |
 | Part 2 (Anchors) | 3 | 3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
-| Part 4 (SPINE) | 0 | 6 | 5 | 11 |
-| Part 5 (Psych Toolkit) | 0 | 7 | 2 | 9 |
+| Part 4 (SPINE) | 0 | 6 | 6 | 12 |
+| Part 5 (Psych Toolkit) | 0 | 8 | 2 | 10 |
 | Part 6 (CoT) | 0 | 0 | 6 | 6 |
 | Part 7 (Technical) | 0 | 10 | 9 | 19 |
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
-| Part 10 (Examples) | 1 | 4 | 1 | 6 |
-| **Total** | **18** | **50** | **36** | **104** |
+| Part 10 (Examples) | 2 | 6 | 2 | 10 |
+| **Total** | **20** | **54** | **38** | **112** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 18 sections** (down from 27 — 9 sections removed/merged by L1 Remediation Plan v3)
-- **L2 sees: 68 sections** (+50 to L1)
-- **L3 sees: 104 sections** (+36 to L2)
+- **L1 sees: 20 sections** (down from 27 — 9 sections removed/merged by L1 Remediation Plan v3)
+- **L2 sees: 74 sections** (+54 to L1)
+- **L3 sees: 112 sections** (+38 to L2)
 
 **Note:** Part 7 counts updated in v2.2: L2 = 10, L3 = 9. Added p7_lorebook_mechanics (L2) and p7_lorebook_advanced (L3) per Lorebook Enhancement Plan v1.1.
 
@@ -259,6 +265,7 @@ Before finalizing any Part, verify:
 ---
 
 *Document prepared for Live Character Guide v6 rebuild project*
+*Updated 2026-04-23: TP-11–20 changes — added p4_l3_learning_path, p5_l2_quickstart, p10_l2_voice_warning, p10_omnis_l1/l2/l3_card; moved p4_l2_quickstart to Part 5 (v2.3)*
 *Updated 2026-04-23: added p7_lorebook_mechanics and p7_lorebook_advanced (v2.2)*
 *Updated 2026-04-22: statistics corrected to match build output (v2.1)*
 *Updated 2026-04-20: complete rewrite post-layer-restructure (Phases 1–4)*

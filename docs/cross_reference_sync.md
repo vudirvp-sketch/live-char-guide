@@ -1,9 +1,9 @@
 # Cross-Reference Synchronization — Live Character Guide v6
 
-> **Version:** 1.2
+> **Version:** 1.3
 > **Date:** 2026-04-23
-> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement (Complete)
-> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md
+> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement + TP-11–20 (Complete)
+> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md, TP-11–20 task changes
 
 ---
 
@@ -38,6 +38,16 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 19 | p4_ghost | p7_lorebook_advanced | Referenced in fatigue emulation warning | ✅ p7_lorebook_advanced references p4_ghost via href in callout warning |
 | 20 | p7_lorebook_advanced | p7_authors_note | `href="#p7_authors_note"` in Кросс-ссылки section | ✅ p7_authors_note references p7_lorebook_mechanics via layer-remark (upstream) |
 | 21 | p7_lorebook_advanced | p7_structured_inject | `href="#p7_structured_inject"` in Кросс-ссылки section | ✅ Forward link only — p7_structured_inject is technique reference (acceptable) |
+| 22 | p4_l3_learning_path | p4_ghost_layers | Pipeline step 1 | ✅ p4_ghost_layers is downstream |
+| 23 | p4_l3_learning_path | p6_cot_basics | Pipeline step 2 via data-layer-switch | ✅ p6_cot_basics is downstream |
+| 24 | p4_l3_learning_path | p7_xml_tags | Pipeline step 3 via href | ✅ p7_xml_tags is downstream |
+| 25 | p4_l3_learning_path | p10_omnis_l3_card | Pipeline step 4 via data-layer-switch | ✅ p10_omnis_l3_card is downstream |
+| 26 | p4_l3_spine_full | p10_omnis_l3_card | `data-layer-switch="3#p10_omnis_l3_card"` | ✅ p10_omnis_l3_card references back via `href="#p4_ghost_layers"` |
+| 27 | p10_l2_voice_warning | p3_voice_isolation | term-marker `data-tooltip-ref="#p3_voice_isolation"` | ✅ p3_voice_isolation is upstream |
+| 28 | p10_omnis_l1_card | p10_omnis_l2_card | `data-layer-switch="2#p10_omnis_l2_card"` | ✅ card progression — no back link needed |
+| 29 | p10_omnis_l2_card | p10_omnis_l3_card | `data-layer-switch="3#p10_omnis_l3_card"` | ✅ card progression — no back link needed |
+| 30 | p10_omnis_l3_card | p4_ghost_layers | `href="#p4_ghost_layers"` | ✅ p4_ghost_layers references via layer-remark added in TP-15 |
+| 31 | p5_l2_quickstart | p4_l2_quickstart | (relocated) Formerly p4_l2_quickstart | ✅ Part 4 has navigational link to p5_l2_quickstart |
 
 ---
 
@@ -90,3 +100,4 @@ After all remediation items are resolved:
 *Document prepared for Live Character Guide v6 Content Restoration project*
 *Created: 2026-04-21 (Remediation R-05)*
 *Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-21, fixed checklist and cross-refs)*
+*Updated: 2026-04-23 (Tech-Priest TP-11 through TP-20 changes)*
