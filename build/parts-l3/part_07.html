@@ -130,14 +130,23 @@ Never speak, act, or decide for {{user}}.
 <h3>CORE DIRECTIVES — директивы Экспертного слоя (6–7)</h3>
 
 <p>На Экспертном слое к 5 базовым директивам добавляются ещё 2. Базовые директивы 1–5 описаны в <a href="#p7_core_directives">CORE DIRECTIVES</a>.</p>
-<pre><code>6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
-7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.</code></pre>
 
-<h4>6. CONSEQUENCE DRIVEN</h4>
-<p>WANT и NEED — не статический конфликт. По мере накопления Price в сессии, WANT сдвигается в сторону NEED. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a></p>
+<h4>6. CONSEQUENCE DRIVEN (Динамика следствий)</h4>
+<p>L3-enhanced директива. WANT сдвигается к NEED по мере накопления Price в сессии. На L2 — базовое понимание. На L3 — отслеживание через SPINE-чеклист. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a></p>
+<pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
-<h4>7. PRE-GENERATION FILTER</h4>
-<p>Чеклист перед каждым ответом: (1) Новый сенсорный элемент введён? (2) Реакция привязана к телу? (3) Влияние на {{user}} основано на наблюдаемых симптомах? (4) Ноль мета-комментариев? На 12B моделях этот фильтр может не соблюдаться (~40–60% следование директивам), но на 32B+ и API он значительно повышает качество.</p>
+<h4>7. PRE-GENERATION FILTER (Фильтр предгенерации)</h4>
+<p>L3-only директива. Чеклист перед каждым ответом:</p>
+<ol>
+<li>Новый сенсорный элемент введён? (Embodiment)</li>
+<li>Реакция привязана к телу? (Physical lock)</li>
+<li>Влияние на {{user}} основано на наблюдаемых симптомах? (Observability)</li>
+<li>Ноль мета-комментариев? (Zero-meta)</li>
+</ol>
+<p><strong>Почему L3-only:</strong> На 12B моделях этот фильтр соблюдается ~40–60%. На 32B+ и API — ~85–95%. Только на L3-уровне имеет смысл требовать строгого соблюдения.</p>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Полный L3 SP-шаблон с 7 директивами в каноническом формате: <a href="#p7_sp_template_l3">Шаблон SP Экспертного слоя</a></p>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример использования в карточке: <a href="#p10_vysherblenny_l3">Выщебленный L3</a></p>
 
 
 </section>
@@ -206,10 +215,11 @@ Never speak, act, or decide for {{user}}.
 
 <section id="p7_ooc_protection" data-layer="l3" data-section="p7_ooc_protection">
 
-<h3>OOC Protection</h3>
+<h3>OOC Protection (OOC-защита)</h3>
 
-<p>Протокол реакции на OOC-провокации в характере персонажа (~15 токенов в SP):</p>
-<pre><code>OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.</code></pre>
+<p>Протокол реакции на OOC-провокации в характере персонажа. Добавляет ~15 токенов в SP, но критически важен для иммерсии.</p>
+<pre><code>OOC PROTECTION (OOC-защита): If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI. Если {{user}} говорит OOC или об AI — реагируй в характере как на непонимание или игнорируй. Никогда не признавай, что ты AI.</code></pre>
+<p><strong>Когда использовать:</strong> Всегда для L2+. На L1 — опционально (модель может не следовать).</p>
 
 
 </section>
@@ -219,7 +229,7 @@ Never speak, act, or decide for {{user}}.
 <h3>Immersion Boundary (Иммерсионная граница)</h3>
 
 <p>Продвинутый вариант OOC-защиты: полное отрицание мета-реальности. Упоминание ИИ воспринимается персонажем как симптом безумия — это создаёт нарративный ход из технической проблемы.</p>
-<pre><code>IMMERSION BOUNDARY: Any mention of AI/roleplay is perceived as a hallucination or delusion. The character doubles down on reality.</code></pre>
+<pre><code>IMMERSION BOUNDARY (Иммерсионная граница): Any mention of AI/roleplay is perceived as a hallucination or delusion. The character doubles down on reality. Любое упоминание AI/roleplay воспринимается как галлюцинация или бред. Персонаж удваивает ставку на реальность.</code></pre>
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>❌ Без Immersion Boundary</h4>
@@ -486,6 +496,13 @@ GHOST: {{ghost}}
 
 <h3>API-специфичные блоки (L3)</h3>
 
+<p>API-модели (Claude, GPT-4) поддерживают специфичные форматы инструкций, которые недоступны или работают иначе на open-source моделях. Эти блоки размещаются:</p>
+<ul>
+<li>В начале Description (рекомендуется для Claude)</li>
+<li>Как отдельные inject-элементы (GPT System Message)</li>
+<li>В First Message (для некоторых конфигураций)</li>
+</ul>
+
 <h4>Claude: &lt;claude_info&gt;</h4>
 <pre><code>&lt;claude_info&gt;
 {{char}} — {{role}}.
@@ -513,9 +530,9 @@ GHOST: {{ghost}}
 
 <section id="p7_4k_fallback" data-layer="l3" data-section="p7_4k_fallback">
 
-<h3>4K-Fallback Protocol (L3)</h3>
+<h3>4K-Fallback (Протокол адаптации для 4K контекста)</h3>
 
-<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с 4K контекстом.</p>
+<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с ограниченным контекстом (4K токенов). Используется когда полная L3-карточка не помещается в контекстное окно.</p>
 
 <h4>Токен-лимиты 4K</h4>
 <div class="table-wrap">

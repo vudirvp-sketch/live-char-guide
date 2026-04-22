@@ -472,3 +472,151 @@ L2-remediation-final/
 ```
 
 *Final L2 Remediation V2 execution completed: 2026-04-22*
+
+---
+
+## L3 Remediation Plan V2 Improved — Execution (14 tasks)
+
+> **Date:** 2026-04-22
+> **Agent:** Super Z (L3 remediation executor)
+> **Plan:** L3-REMEDIATION-PLAN-V2-IMPROVED.md
+> **Scope:** 14 L3-specific tasks — русификация, замена примеров, расширение описаний
+> **Delivery:** L3-remediation-batch1.tar.gz
+
+### R3-01 [L3-EX] GHOST Layers — заменить Elliot Alderson пример на Выщебленный ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html, build/parts-l3/part_04.html
+**Content:** GHOST Layers таблица: Elliot → Выщебленный (G1: брошен в архиве, G2: инъекция живого документа, G3: каждое поглощение заполняет дыру). Добавлена cross-ref ссылка на полную карточку.
+
+### R3-17 [L3-EN] GHOST Layers — добавить русский перевод «Слои призрака» ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html, build/parts-l3/part_04.html
+**Content:** «GHOST Layers» → «GHOST Layers (Слои призрака)»
+
+### R3-18 [L3-EX] GHOST→LIE→FLAW→NEED→WANT — заменить Elliot на Выщебленный + cross-ref ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html, build/parts-l3/part_04.html
+**Content:** Полная цепочка SPINE заменена на Выщебленного. Добавлена layer-remark cross-ref → p10_vysherblenny_l3.
+
+### R3-03 [L3-EX] Enneagram 6w5 — заменить Elliot на Выщебленный ✅
+**Status:** Fixed
+**File Modified:** src/master/part_05_psych_toolkit.html, build/parts-l3/part_05.html
+**Content:** Пример Enneagram Type 6w5 переписан для Выщебленного. Добавлены WANT/FLAW/NEED/LIE. Добавлена cross-ref → p10_vysherblenny_l3.
+
+### R3-26 [L3-ORD] OCEAN×Enneagram Matrix — добавить описание перед таблицей ✅
+**Status:** Fixed
+**File Modified:** src/master/part_05_psych_toolkit.html, build/parts-l3/part_05.html
+**Content:** Добавлены 2 описательных параграфа: расшифровка строк (OCEAN) и столбцов (Enneagram 1–9), обозначения (+/-/0).
+
+### R3-02 [L3-ORD] CoT Tiers — добавить вводный параграф + русифицировать Tier descriptions ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html, build/parts-l3/part_06.html
+**Content:** Добавлен вводный параграф о 4 уровнях CoT. Tier descriptions русифицированы: «GHOST-connection» → «GHOST-связь», «Полный XML процесс» → «Полный XML-процесс», «API только» → «Только API», «базовый» → «базовый уровень».
+
+### R3-04 [L3-FIX] processus_analysium — расширить placeholder descriptions ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html, build/parts-l3/part_06.html
+**Content:** Каждый placeholder расширено: stimulus = «триггер из сцены», analysis = «что персонаж замечает», counter-analysis = «альтернативная интерпретация», synthesis = «вывод из анализа и контр-анализа», resolution = «действие персонажа». Добавлена физическая реакция + диалог + доп. реакция в шаблон.
+
+### R3-09 [L3-EX] CoT Tier 3 пример — заменить Elliot на Выщебленный ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html, build/parts-l3/part_06.html
+**Content:** Пример processus_analysium переписан для Выщебленного (stimulus: присутствие другого со значимым прошлым; counter-analysis: цена = лицо матери; resolution: отступить). Добавлена cross-ref → p10_vysherblenny_l3.
+
+### R3-15 [L3-FIX] CoT синтаксис — добавить физическую реакцию и диалог ✅
+**Status:** Fixed (includes R3-19)
+**File Modified:** src/master/part_06_cot.html, build/parts-l3/part_06.html
+**Content:** Шаблон CoT расширен: после [/INTERNAL] добавлены `{{физическая реакция}}`, `"{{диалог}}"`, `{{дополнительная физическая реакция}}`.
+
+### R3-19 [L3-ORD] Убрать дублирующий CoT Tier 3 details блок (диссоциация Elliot) ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html, build/parts-l3/part_06.html
+**Content:** Удалён `<details class="interactive">` с примером диссоциации Эллиота. Пример заменён на cross-ref к полной карточке.
+
+### R3-20 [L3-EX] CoT Tier comparison table — русифицировать + заменить Elliot ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html, build/parts-l3/part_06.html
+**Content:** Заголовки: «Внешняя реакция» → «Диалог», «Цена» → «Физика». Строки: Elliot убран, добавлена вторая строка Выщебленного (вопрос о прошлом).
+
+### R3-05 [L3-FIX] CORE DIRECTIVES 6–7 — расширить с L3-пометками ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l3/part_07.html
+**Content:** Директива 6: добавлен русский заголовок «Динамика следствий», расширен кодовый блок с 3 отслеживаемыми вопросами. Директива 7: добавлен русский заголовок «Фильтр предгенерации», преобразован в ol-список с 4 пунктами + объяснение «Почему L3-only». Добавлены cross-ref к SP-шаблону и карточке.
+
+### R3-06 [L3-EN] OOC Protection — добавить русский перевод ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l3/part_07.html
+**Content:** Заголовок: «OOC Protection» → «OOC Protection (OOC-защита)». Код: добавлена русская версия. Добавлен параграф «Когда использовать: Всегда для L2+. На L1 — опционально».
+
+### R3-07 [L3-EN] Immersion Boundary — добавить русский перевод ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l3/part_07.html
+**Content:** Кодовый блок: добавлена русская версия «Любое упоминание AI/roleplay воспринимается как галлюцинация или бред. Персонаж удваивает ставку на реальность.»
+
+### R3-10 [L3-ORD] API-специфичные блоки — добавить вводный параграф ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l3/part_07.html
+**Content:** Добавлен вводный параграф с объяснением размещения API-блоков (Description, inject-элементы, First Message) + ul-список из 3 пунктов.
+
+### R3-11 [L3-EN] 4K-Fallback — добавить русский перевод заголовка ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html, build/parts-l3/part_07.html
+**Content:** «4K-Fallback Protocol (L3)» → «4K-Fallback (Протокол адаптации для 4K контекста)». Описание расширено: «минимальная конфигурация для моделей с 4K контекстом» → «для моделей с ограниченным контекстом (4K токенов)».
+
+### R3-08 [L3-FIX] AP-11 Voice Bleed — добавить примеры Character Markers ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html, build/parts-l3/part_08.html
+**Content:** «Character Markers — явные маркеры уникальности голоса» → «Character Markers (Маркеры персонажа) — явные маркеры уникальности голоса. Примеры: специфичная лексика, синтаксические паттерны, телесные реакции, catchphrases.»
+
+### R3-16 [L3-EN] AP-14 OCEAN triple poles — русифицировать сценарии ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html, build/parts-l3/part_08.html
+**Content:** 3 сценария: заголовки русифицированы (Low→Низкая, High→Высокая). Добавлен «Расшифровка» параграф к каждому. Добавлены решения (уберите экстремум/добавьте FLAW/максимум экстремумов).
+
+### R3-13 [L3-FIX] Выщебленный L3 — CORE DIRECTIVES вместо Identity/Constraints ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html, build/parts-l3/part_10.html
+**Content:** «Identity: / Constraints:» заменены на канонический `<CORE_DIRECTIVES>` 1–7 + добавлен `{{user}}'s inner state is inaccessible`. Tone Frame переписан. OOC Protection добавлен в SP.
+
+### R3-14 [L3-FIX] Author's Note Выщебленного — русифицировать + контекст ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html, build/parts-l3/part_10.html
+**Content:** AN полностью русифицирован. Добавлен контекст сцены: «Сцена — Архив, полумрак, присутствие посетителя со значимым прошлым.»
+
+---
+
+### L3 Batch — Files Modified
+
+| File | Tasks |
+|------|-------|
+| src/master/part_04_spine.html | R3-01, R3-17, R3-18 |
+| src/master/part_05_psych_toolkit.html | R3-03, R3-26 |
+| src/master/part_06_cot.html | R3-02, R3-04, R3-09, R3-15, R3-19, R3-20 |
+| src/master/part_07_technical.html | R3-05, R3-06, R3-07, R3-10, R3-11 |
+| src/master/part_08_antipatterns.html | R3-08, R3-16 |
+| src/master/part_10_examples.html | R3-13, R3-14 |
+| build/parts-l3/part_04.html | R3-01, R3-17, R3-18 |
+| build/parts-l3/part_05.html | R3-03, R3-26 |
+| build/parts-l3/part_06.html | R3-02, R3-04, R3-09, R3-15, R3-19, R3-20 |
+| build/parts-l3/part_07.html | R3-05, R3-06, R3-07, R3-10, R3-11 |
+| build/parts-l3/part_08.html | R3-08, R3-16 |
+| build/parts-l3/part_10.html | R3-13, R3-14 |
+
+### L3 Batch — Validation Results
+
+| Check | Result |
+|-------|--------|
+| build-layers.mjs | ✅ 102 sections, 0 errors |
+| validate-master.mjs | ✅ PASSED (0 errors, 10 warnings = HTML comments) |
+| validate-layers.mjs | ✅ PASSED (0 errors, 0 warnings) |
+| validate-artifact.mjs | ✅ All gates passed |
+| Layer hashes | L1: sha256:97b1d411105ba54c, L2: sha256:832bc2ad4c687ef6, L3: sha256:94be98a2f90c5a4f |
+
+### L3 Batch — Task Status Summary
+
+| Status | Count |
+|--------|-------|
+| ✅ Completed | 14 |
+| ⏳ Remaining | Per L3-REMEDIATION-PLAN-V2-IMPROVED.md |
+
+*L3 Remediation V2 Improved execution completed: 2026-04-22*
