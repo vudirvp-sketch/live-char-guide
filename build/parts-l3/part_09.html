@@ -287,7 +287,15 @@
 <li>☐ Хотите добавить GHOST Layers, CoT, API блоки</li>
 <li>☐ Используете 32B+ или API модель</li>
 <li>☐ Хотите добавить LIE (ложную установку) и GHOST (событие прошлого) к SPINE</li>
-<li>☐ Хотите добавить CoT-якоря с внутренним процессом персонажа</li>
+<li>☐ Готовы добавить: CoT-якоря (2-3 максимум)</li>
+<li>☐ Готовы добавить: XML-структуру Description</li>
+</ul>
+
+<p><strong>Не переходите на L3, если:</strong></p>
+<ul>
+<li>Используете 12B модель (L3-фичи не будут работать стабильно)</li>
+<li>L2-карточка ещё не протестирована</li>
+<li>Не понимаете, зачем нужен GHOST/LIE</li>
 </ul>
 
 
@@ -335,6 +343,39 @@
 </table>
 </div>
 </details>
+
+<h4>Пример: Pre-Deploy для Выщебленного L3</h4>
+
+<h5>Quick Check (5 items, L1/L2)</h5>
+<table>
+<thead><tr><th>Проверка</th><th>Результат</th></tr></thead>
+<tbody>
+<tr><td>☐ SP содержит анти-годмодинг</td><td>✓ "Never speak or act for {{user}}"</td></tr>
+<tr><td>☐ SP содержит Format Lock</td><td>✓ "Dialogue: *action* \"speech\""</td></tr>
+<tr><td>☐ Description ≤ 800 токенов</td><td>✓ ~650 токенов</td></tr>
+<tr><td>☐ Examples содержат ≥ 2 примера</td><td>✓ 3 примера + CoT</td></tr>
+<tr><td>☐ Greeting демонстрирует голос</td><td>✓ "Добро пожаловать в Архив. Чего ищете... в других?"</td></tr>
+</tbody>
+</table>
+
+<h5>Full Check (L3-specific)</h5>
+<table>
+<thead><tr><th>Проверка</th><th>Результат</th></tr></thead>
+<tbody>
+<tr><td>☐ CORE DIRECTIVES: 7 директив</td><td>✓ Все 7 в формате &lt;CORE_DIRECTIVES&gt;</td></tr>
+<tr><td>☐ SPINE: 5 элементов связаны</td><td>✓ GHOST→LIE→FLAW→NEED→WANT цепь логична</td></tr>
+<tr><td>☐ GHOST Layers: 3 tier</td><td>✓ G1/G2/G3 определены с якорями</td></tr>
+<tr><td>☐ CoT якоря: ≤ 3</td><td>✓ 2 CoT-якоря (Tier 2 + Tier 3)</td></tr>
+<tr><td>☐ Lorebook: консистентен</td><td>✓ 5 записей без конфликтов с Description</td></tr>
+<tr><td>☐ XML: валиден</td><td>✓ Все теги закрыты, структура корректна</td></tr>
+<tr><td>☐ Tone Frame: присутствует</td><td>✓ "archival, detached. Memory is currency."</td></tr>
+<tr><td>☐ Author's Note: L3 format</td><td>✓ State + WANT→NEED + GHOST-activation + Blind Spot + Scene</td></tr>
+<tr><td>☐ OCEAN: 1-2 экстремума</td><td>✓ Высокая O, Низкая E</td></tr>
+<tr><td>☐ Immersion Boundary</td><td>✓ Присутствует (L3-only)</td></tr>
+</tbody>
+</table>
+
+<p><strong>Итог:</strong> Выщебленный L3 проходит Pre-Deploy полностью.</p>
 
 
 </section>

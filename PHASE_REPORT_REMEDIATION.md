@@ -620,3 +620,168 @@ L2-remediation-final/
 | ⏳ Remaining | Per L3-REMEDIATION-PLAN-V2-IMPROVED.md |
 
 *L3 Remediation V2 Improved execution completed: 2026-04-22*
+
+---
+
+## L3 Remediation Plan V2 Improved — Batch 2 Execution (24 tasks)
+
+> **Date:** 2026-04-22
+> **Agent:** Super Z (L3 remediation executor)
+> **Plan:** L3-REMEDIATION-PLAN-V2-IMPROVED.md
+> **Scope:** R3-21 through R3-45 — remaining L3 tasks (FIX, ORD, ADD, ENHANCE)
+> **Delivery:** L3-remediation-batch2.tar.gz
+
+### R3-21 [FIX] p8_ap9_spine_broken — противоречивая логика ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html
+**Content:** Заменён confusing "broken/fixed" SPINE пример. Добавлен `<div class="problem-block">` с полным 5-element примером (отсутствующий GHOST/LIE → цепь не замкнута) + `<div class="solution-block">` с правильной цепочкой (GHOST→LIE→FLAW→NEED→WANT). Каждый блок имеет «Почему сломано/работает» с 5 пунктами.
+
+### R3-22 [FIX] p8_ap11_voice_bleed — примеры не связаны ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html
+**Content:** Добавлена cross-ref ссылка → #p3_multi_char для мульти-персонажных примеров.
+
+### R3-23 [FIX] p7_core_directives_l3 — нет ссылки на L3 SP template ✅
+**Status:** Already present (verified)
+**File Modified:** src/master/part_07_technical.html
+**Content:** Ссылки на p7_sp_template_l3 и p10_vysherblenny_l3 уже существовали в предыдущем batch.
+
+### R3-24 [FIX] p7_sp_template_l3 — нет ссылки на пример карточки ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** Добавлена layer-remark cross-ref → #p10_vysherblenny_l3 с инструкцией по сравнению элементов шаблона с фактической карточкой.
+
+### R3-25 [FIX] p9_layer_transition — нет упоминания CoT ✅
+**Status:** Fixed
+**File Modified:** src/master/part_09_diagnostics.html
+**Content:** Добавлены 2 пункта в L2→L3 критерии: «Готовы добавить: CoT-якоря (2-3 максимум)» и «Готовы добавить: XML-структуру Description». Добавлен раздел «Не переходите на L3, если:» с 3 предупреждениями.
+
+### R3-27 [FIX] p10_vysherblenny_l3 — нет аннотации выбора ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html
+**Content:** Расширена аннотация выбора с 7 до 10 строк: добавлены CoT якоря, OCEAN, Author's Note. Расширены описания в существующих строках.
+
+### R3-28 [ORD] manifest.json Part 06 title — несоответствие ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html (h2 заголовок)
+**Content:** «Chain of Thought (CoT)» → «Цепочка рассуждений (CoT)». Manifest генерируется из h2, пересобран.
+
+### R3-29 [ORD] p4_l3_spine_full порядок секций ✅
+**Status:** Fixed (layer marker approach)
+**File Modified:** src/master/part_04_spine.html
+**Content:** Добавлен layer-remark маркер между L2 (p4_flaw) и L3 (p4_lie) секциями: «Следующие секции — Экспертный слой (L3): LIE, GHOST, GHOST Layers, проверка SPINE.»
+
+### R3-30 [ORD] p7 sections — L3 sections dispersed ✅
+**Status:** Fixed (layer marker approach)
+**File Modified:** src/master/part_07_technical.html
+**Content:** Добавлен layer-remark маркер перед p7_core_directives_l3: «Следующие секции — Экспертный слой (L3): расширенные директивы, OOC Protection, Immersion Boundary, XML, API-блоки.»
+
+### R3-31 [ORD] p8_antipatterns — L3 anti-patterns не сгруппированы ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html
+**Content:** Добавлен layer-remark маркер перед AP-8: «Следующие анти-паттерны (AP-8–AP-14) — только для Экспертного слоя (L3)...»
+
+### R3-32 [ORD] p5_enneagram_wings placement ✅
+**Status:** Fixed (layer marker approach)
+**File Modified:** src/master/part_05_psych_toolkit.html
+**Content:** Добавлен layer-remark маркер между p5_enneagram_to_spine (L2) и p5_enneagram_wings (L3): «Следующие секции — Экспертный слой (L3): Enneagram Wings, OCEAN×Enneagram Matrix.»
+
+### R3-33 [ORD] p10 card examples — L3 card at end ✅
+**Status:** Fixed
+**File Modified:** src/master/part_10_examples.html
+**Content:** Добавлен layer-remark параграф + L3 additions list (5 пунктов) перед p10_vysherblenny_l3.
+
+### R3-34 [ORD] glossary.json L3 entries — не отмечены ✅
+**Status:** Fixed
+**File Modified:** data/glossary.json
+**Content:** Обновлены 5 записей: Immersion Boundary (L3-only layer_context), GHOST (L3-only 3-tier), processus_analysium (NEW, L3-only), PRE-GENERATION FILTER (L3-only layer_context + cross_refs), CONSEQUENCE DRIVEN (L3-enhanced layer_context).
+
+### R3-35 [ORD] p9 L3 sections — не сгруппированы ✅
+**Status:** Fixed
+**File Modified:** src/master/part_09_diagnostics.html
+**Content:** Добавлены 2 layer-remark маркера: L1→L2 (после p9_basic_checklist) и L2→L3 (после p9_test_requirements).
+
+### R3-36 [ADD] L3 SP Template — пример использования ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** Добавлен `<div class="callout tip">` с 5-пунктным чеклистом сравнения (SP identity, CORE_DIRECTIVES, Tone Frame, OOC Protection, Format Lock) и ссылкой на Выщебленного L3.
+
+### R3-37 [ADD] CoT — почему 2-3 максимум ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html
+**Content:** Расширен callout: «Почему ограничение» (4 причины: токены, баланс, качество, утомляемость) + «Как выбрать 2-3 якоря» (3 практических совета).
+
+### R3-38 [ADD] GHOST Layers — когда использовать ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html
+**Content:** Расширен tip callout: «Когда использовать 3-tier GHOST Layers» (4 критерия) + «Когда достаточно 1 GHOST» (4 критерия) + пример Выщебленного G1/G2/G3.
+
+### R3-39 [ADD] XML Description — пример полной структуры ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** Добавлен полный пример XML Description Выщебленного L3 с `<identity>`, `<spine>`, `<ghost_layers>`, `<ocean>`, `<anchors>` (включая L3-only сенсорные и CoT якоря).
+
+### R3-40 [ADD] AP-8 through AP-14 — примеры карточек ✅
+**Status:** Fixed
+**File Modified:** src/master/part_08_antipatterns.html
+**Content:** Добавлены cross-refs к p10_vysherblenny_l3 в AP-8 (GHOST anchors), AP-9 (SPINE chain), AP-10 (CoT rule), AP-12 (XML validity), AP-13 (Lorebook consistency), AP-14 (OOC+IB). AP-11 пропущен (уже покрыт R3-22).
+
+### R3-41 [ADD] L3 Quickstart — ссылка на полную карточку ✅
+**Status:** Fixed
+**File Modified:** src/master/part_06_cot.html
+**Content:** Добавлены layer-remark cross-ref → p10_vysherblenny_l3 + 5-пунктный чеклист сравнения (SPINE, CoT, GHOST, CD, XML).
+
+### R3-42 [ENHANCE] p4_spine_check — добавить пример проверки ✅
+**Status:** Fixed
+**File Modified:** src/master/part_04_spine.html
+**Content:** Добавлен «Чек-лист проверки L3 SPINE» с 7 пунктами (GHOST→LIE, LIE→FLAW, FLAW→NEED, NEED←WANT, WANT↔LIE, GHOST Layers anchors, Lorebook consistency).
+
+### R3-43 [ENHANCE] p7_authors_note_l3 — пример для Vysherblenny ✅
+**Status:** Fixed
+**File Modified:** src/master/part_07_technical.html
+**Content:** Добавлен конкретный пример Author's Note для Выщебленного (5 секций) + пояснения к каждой секции (State, WANT→NEED, GHOST-activation, Blind Spot, Сцена).
+
+### R3-44 [ENHANCE] p5_cross_matrix — практическое применение ✅
+**Status:** Fixed
+**File Modified:** src/master/part_05_psych_toolkit.html
+**Content:** Добавлен раздел «Практическое применение» (4-шаговый алгоритм валидации) + полный пример Type 6w5 (Выщебленный) с expected vs actual OCEAN values.
+
+### R3-45 [ENHANCE] p9_pre_deploy — Vysherblenny example ✅
+**Status:** Fixed
+**File Modified:** src/master/part_09_diagnostics.html
+**Content:** Добавлен «Пример: Pre-Deploy для Выщебленного L3» с Quick Check (5 items) и Full Check (10 L3-specific items) таблицами.
+
+---
+
+### L3 Batch 2 — Files Modified
+
+| File | Tasks |
+|------|-------|
+| src/master/part_04_spine.html | R3-29, R3-38, R3-42 |
+| src/master/part_05_psych_toolkit.html | R3-32, R3-44 |
+| src/master/part_06_cot.html | R3-28, R3-37, R3-41 |
+| src/master/part_07_technical.html | R3-23, R3-24, R3-30, R3-36, R3-39, R3-43 |
+| src/master/part_08_antipatterns.html | R3-21, R3-22, R3-31, R3-40 |
+| src/master/part_09_diagnostics.html | R3-25, R3-35, R3-45 |
+| src/master/part_10_examples.html | R3-27, R3-33 |
+| data/glossary.json | R3-34 |
+
+### L3 Batch 2 — Validation Results
+
+| Check | Result |
+|-------|--------|
+| build-layers.mjs | ✅ 102 sections, 0 errors |
+| validate-master.mjs | ✅ PASSED (0 errors, 17 warnings = HTML comments + layer-remark markers) |
+| check_english.py | ⚠️ Hits in `<pre><code>` and SP examples only (expected) |
+| check_duplicates.py | ⚠️ 6 duplicates (p10↔p07 — expected: instructional examples mirror card content by design) |
+| Layer hashes | L1: sha256:97b1d411105ba54c, L2: sha256:b1e18de9cb6a8a85, L3: sha256:8022b4e56c24f9d7 |
+
+### L3 Batch 2 — Task Status Summary
+
+| Status | Count |
+|--------|-------|
+| ✅ Completed this batch | 24 |
+| ✅ Previously completed (Batch 1) | 21 (R3-01 through R3-20, R3-26) |
+| **Total L3 V2 completed** | **45/45** |
+
+*L3 Remediation V2 Improved Batch 2 execution completed: 2026-04-22*

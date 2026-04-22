@@ -81,7 +81,7 @@
     },
     {
       "file": "part_06.html",
-      "title": "Chain of Thought (CoT)",
+      "title": "Цепочка рассуждений (CoT)",
       "anchors": [
         "p6_cot_basics",
         "p6_cot_tiers",

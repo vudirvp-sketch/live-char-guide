@@ -136,6 +136,7 @@
 <div class="example-block">
 <p><strong>Пример:</strong> GHOST "предательство редактора" → Якорь "Когда вопрос о лояльности → напрягается"</p>
 </div>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — каждый GHOST tier имеет минимум один якорь-триггер в Lorebook и Examples.</p>
 </div>
 
 </section>
@@ -152,12 +153,47 @@
 </div>
 <div class="problem-block">
 <h4>❌ Сломанный SPINE</h4>
-<p>WANT: «хочет быть любимым» ← NEED: «нуждается в контроле» ← FLAW: «избегает близости»<br/>FLAW блокирует NEED, но WANT и NEED не противоречат друг другу логически → цепь разорвана.</p>
+<p><strong>Пример:</strong></p>
+<pre><code>GHOST: (отсутствует)
+LIE: (отсутствует)
+FLAW: Избегает близости
+NEED: Нуждается в доверии
+WANT: Хочет быть любимым</code></pre>
+
+<p><strong>Почему сломано:</strong></p>
+<ul>
+<li>WANT (быть любимым) совместим с NEED (доверие) — нет конфликта</li>
+<li>FLAW (избегает близости) блокирует BOTH — но откуда FLAW?</li>
+<li>Нет LIE → непонятно, почему FLAW существует</li>
+<li>Нет GHOST → непонятно, откуда LIE</li>
+<li><strong>Итог:</strong> Цепь не замкнута — элементы не объясняют друг друга</li>
+</ul>
 </div>
+
 <div class="solution-block">
 <h4>✅ Цельный SPINE</h4>
-<p>WANT: «хочет быть любимым» ← NEED: «нуждается в доверии» ← FLAW: «избегает близости»<br/>WANT и NEED несовместимы из-за FLAW → цепь замкнута.</p>
+<p><strong>Пример:</strong></p>
+<pre><code>GHOST: Предательство близкого человека
+  ↓ объясняет
+LIE: "Любовь = уязвимость = боль"
+  ↓ защищает от боли
+FLAW: Отталкивает людей, когда сближается
+  ↓ поведение из LIE (близость = боль)
+NEED: Доверие без стен
+  ↑ FLAW мешает (стены мешают доверию)
+WANT: Быть любимым
+  ↑ совместимо с LIE ("я хочу любви, но не подпущу близко")</code></pre>
+
+<p><strong>Почему работает:</strong></p>
+<ul>
+<li>GHOST объясняет LIE — предательство → страх уязвимости</li>
+<li>LIE объясняет FLAW — "любовь = боль" → отталкивание</li>
+<li>FLAW блокирует NEED — стены мешают доверию</li>
+<li>WANT совместим с LIE — "хочу любви, но боюсь близости"</li>
+<li><strong>Итог:</strong> Цепь замкнута — каждый элемент объясняется предыдущим</li>
+</ul>
 </div>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — GHOST→LIE→FLAW→NEED→WANT цепочка логически связана. См. также <a href="#p4_l3_spine_full">пример полной цепочки</a>.</p>
 </div>
 
 </section>
@@ -180,6 +216,7 @@
 <h4>✅ Максимум 2–3 CoT-якоря</h4>
 <p>Оставьте только ключевые триггеры (GHOST-связь, критический конфликт). Остальные якоря — обычные T→A→P без CoT.</p>
 </div>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — только 2 CoT-якоря по правилу (см. <a href="#p6_cot_basics">правило CoT</a>).</p>
 </div>
 
 </section>
@@ -203,7 +240,7 @@
 - Эмоциональная реактивность
 - Неполные предложения</code></pre>
 </div>
-<p class="layer-remark"><span class="remark-icon">→</span> Мульти-персонажные примеры с Voice Bleed → <a href="#p3_multi_char" class="layer-remark">Part 3: Мульти-персонажные примеры</a></p>
+<p class="layer-remark"><span class="remark-icon">→</span> Мульти-персонажные примеры с Voice Bleed и Character Markers: <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
 </div>
 
 </section>
@@ -227,6 +264,7 @@ WANT: {{want}}
 WANT: {{want}}
 &lt;/spine&gt;</code></pre>
 </div>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — все XML-теги валидны, закрыты правильно. См. также <a href="#p7_xml_tags">полный XML-пример</a>.</p>
 </div>
 
 </section>
@@ -238,6 +276,7 @@ WANT: {{want}}
 <p><strong>Симптом:</strong> Lorebook записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
 <p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description</p>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>
 </div>
 
 </section>
@@ -249,6 +288,7 @@ WANT: {{want}}
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> L3 карточка для 4K модели</p>
 <p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом</p>
+<p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — OOC Protection + Immersion Boundary предотвращают утечку.</p>
 </div>
 
 </section>

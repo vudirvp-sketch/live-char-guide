@@ -374,7 +374,7 @@
       "layer_context": {
         "0": "Событие прошлого персонажа, сформировавшее FLAW и LIE. На L2: размещается только в Description (см. Правило #4). На L3: распределение по слоям карточки → Экспертный слой",
         "2": "Доступно на Экспертном слое → bridge",
-        "3": "Диагностика: проверьте активацию GHOST через LB триггеры"
+        "3": "L3-only: 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры"
       },
       "anchor_id": "layer-0-term-ghost",
       "cross_refs": [
@@ -765,13 +765,15 @@
         "Последовательность следствий",
         "Consequence Driven"
       ],
-      "definition": "Директива SP: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only. Пишется на английском.",
+      "definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only CORE DIRECTIVE. Пишется на английском.",
       "prohibited": [],
       "applicable_layers": [
+        2,
         3
       ],
       "layer_context": {
-        "3": "Добавьте CONSEQUENCE DRIVEN в SP для динамического развития персонажа"
+        "2": "Базовая динамика SPINE: WANT конфликтует с NEED. Отслеживание не формализовано.",
+        "3": "L3-enhanced: полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY."
       },
       "anchor_id": "layer-3-term-consequence-driven",
       "cross_refs": [
@@ -787,17 +789,20 @@
         "Фильтр предгенерации",
         "Pre-Generation Filter"
       ],
-      "definition": "Директива SP: 4-пунктная самопроверка перед генерацией ответа. L3-only. Пишется на английском.",
+      "definition": "L3-only CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
       "prohibited": [],
       "applicable_layers": [
         3
       ],
       "layer_context": {
-        "3": "Добавьте PRE-GENERATION FILTER в SP для 12B моделей"
+        "1": "Недоступно.",
+        "2": "Недоступно. Директивы 1-5 для L2.",
+        "3": "L3-only: директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN."
       },
       "anchor_id": "layer-3-term-pre-generation-filter",
       "cross_refs": [
-        "#p7_core_directives_l3"
+        "#p7_core_directives_l3",
+        "#p7_sp_template_l3"
       ]
     },
     {
@@ -813,7 +818,9 @@
         3
       ],
       "layer_context": {
-        "3": "Добавьте Immersion Boundary для максимальной иммерсии; персонаж отрицает мета-реальность"
+        "1": "Недоступно. Используйте базовый OOC Protection.",
+        "2": "Недоступно. Используйте базовый OOC Protection.",
+        "3": "L3-only: добавьте Immersion Boundary для максимальной иммерсии. На L2 используйте базовый OOC Protection."
       },
       "anchor_id": "layer-3-term-immersion-boundary",
       "cross_refs": [
@@ -914,6 +921,27 @@
       "anchor_id": "layer-0-term-cot",
       "cross_refs": [
         "#p6_cot_basics"
+      ]
+    },
+    {
+      "term": "processus_analysium",
+      "aliases": [
+        "processus_analysium",
+        "внутренний процесс XML"
+      ],
+      "category": "technique",
+      "definition": "L3-only. Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4).",
+      "layer_context": {
+        "1": "Недоступно.",
+        "2": "Недоступно.",
+        "3": "L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL]...[/INTERNAL]."
+      },
+      "applicable_layers": [
+        3
+      ],
+      "anchor_id": "layer-3-term-processus-analysium",
+      "cross_refs": [
+        "#p6_cot_tier3"
       ]
     },
     {

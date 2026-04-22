@@ -217,7 +217,7 @@
   "p6_cot_basics": {
     "layer": "l3",
     "part": 6,
-    "topic": "Chain of Thought (CoT)"
+    "topic": "Цепочка рассуждений (CoT)"
   },
   "p6_cot_tiers": {
     "layer": "l3",
