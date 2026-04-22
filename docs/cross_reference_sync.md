@@ -1,8 +1,8 @@
 # Cross-Reference Synchronization — Live Character Guide v6
 
-> **Version:** 1.1
+> **Version:** 1.2
 > **Date:** 2026-04-23
-> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement
+> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement (Complete)
 > **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md
 
 ---
@@ -36,6 +36,8 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 17 | p7_lorebook_mechanics | p7_lorebook_advanced | `data-layer-switch="3#p7_lorebook_advanced"` | ✅ p7_lorebook_advanced does not reference back — acceptable (layer progression) |
 | 18 | p7_authors_note | p7_lorebook_mechanics | `href="#p7_lorebook_mechanics"` | ✅ p7_lorebook_mechanics does not reference back — acceptable (AN is upstream) |
 | 19 | p4_ghost | p7_lorebook_advanced | Referenced in fatigue emulation warning | ✅ p7_lorebook_advanced references p4_ghost via href in callout warning |
+| 20 | p7_lorebook_advanced | p7_authors_note | `href="#p7_authors_note"` in Кросс-ссылки section | ✅ p7_authors_note references p7_lorebook_mechanics via layer-remark (upstream) |
+| 21 | p7_lorebook_advanced | p7_structured_inject | `href="#p7_structured_inject"` in Кросс-ссылки section | ✅ Forward link only — p7_structured_inject is technique reference (acceptable) |
 
 ---
 
@@ -87,4 +89,4 @@ After all remediation items are resolved:
 
 *Document prepared for Live Character Guide v6 Content Restoration project*
 *Created: 2026-04-21 (Remediation R-05)*
-*Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-19)*
+*Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-21, fixed checklist and cross-refs)*

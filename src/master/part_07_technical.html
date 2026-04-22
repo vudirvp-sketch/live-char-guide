@@ -624,16 +624,23 @@ Never speak, act, or decide for {{user}}.
 </div>
 
 <details class="interactive">
-<summary>✅ Чеклист проверки перед деплоем продвинутых механик</summary>
+<summary>✅ Чеклист интеграции Lorebook</summary>
 <ul>
-<li>Каждая механика имеет явный триггер (keyword или range)</li>
-<li><code>cooldown</code> установлен ≥ 15 для редких событий</li>
-<li>Нет конфликтов между записями (один keyword не должен триггерить 2+ записи с разными целями)</li>
-<li>GHOST-якоря пересказаны в content записей с эмуляцией усталости</li>
-<li>Ложная память согласована с пользователем</li>
-<li>Протестировано на 50+ сообщений для проверки каскадов</li>
+<li><label><input type="checkbox"> depth/exclude_key/probability фильтры активны</label></li>
+<li><label><input type="checkbox"> content структурирован (XML или [SYSTEM]-префикс для сложных записей)</label></li>
+<li><label><input type="checkbox"> Нет дублирования между SPINE / AN / записями Lorebook</label></li>
+<li><label><input type="checkbox"> Эмуляция усталости: GHOST-якоря явно пересказаны в content</label></li>
+<li><label><input type="checkbox"> Ложная память: отмечена как одноразовая, с согласия пользователя</label></li>
+<li><label><input type="checkbox"> Действия/мысли <code>{{user}}</code> отсутствуют во всех content-полях</label></li>
 </ul>
 </details>
+
+<h4>Кросс-ссылки</h4>
+<ul>
+<li><strong>Author's Note (AN):</strong> Для длинных сессий комбинируйте AN с каскадом по диапазону + sticky-состояниями → <a href="#p7_authors_note">Author's Note</a>.</li>
+<li><strong>Структурированная инъекция (Structured Inject):</strong> Использует ту же логику тегов внутри content-полей Lorebook → <a href="#p7_structured_inject">Structured Inject</a>.</li>
+<li><strong>GHOST-якоря:</strong> Эмуляция усталости <strong>не сохраняет</strong> якоря автоматически — пересказывайте явно → <a href="#p4_ghost">Раздел GHOST</a>.</li>
+</ul>
 
 </section>
 
