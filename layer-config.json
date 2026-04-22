@@ -15,7 +15,7 @@
       "name": "Deep",
       "label": "Глубокий",
       "color": "#38bdf8",
-      "description": "~30 мин, 800-1500 токенов карточки, СПИН: WANT/NEED/FLAW",
+      "description": "~30 мин, 800-1500 токенов карточки, SPINE: WANT/NEED/FLAW",
       "token_budget": "800-1500",
       "reading_time": "30 min"
     },

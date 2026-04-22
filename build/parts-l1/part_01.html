@@ -23,7 +23,7 @@
 </div>
 
 <div class="callout important">
-<p><strong>📌 Важно:</strong> Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description. Description содержит только факты и поведенческие якоря.</p>
+<p>📌 Правило голоса → <a href="#p1_core_rules">5 базовых правил</a></p>
 </div>
 
 
@@ -56,7 +56,7 @@
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-Подробнее о GHOST и других элементах психологии: <span class="term-marker" data-tooltip-ref="#p4_spine_overview" data-target-layer="2" data-tooltip-summary="SPINE — фреймворк из 3-5 элементов (WANT, NEED, FLAW...), определяющий глубинную мотивацию персонажа. Доступен на Глубоком слое.">СПИН</span><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">СПИН</a></noscript>
+Подробнее о GHOST и других элементах психологии: <span class="term-marker" data-tooltip-ref="#p4_spine_overview" data-target-layer="2" data-tooltip-summary="SPINE — фреймворк из 3-5 элементов (WANT, NEED, FLAW...), определяющий глубинную мотивацию персонажа. Доступен на Глубоком слое.">SPINE</span><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE</a></noscript>
 </p>
 
 <p>Все 5 правил вытекают из принципа Pattern Matcher:</p>
@@ -228,10 +228,10 @@
 <ul>
 <li>☐ 3-5 якорей с ценой</li>
 <li>☐ 2 примера с &lt;START&gt;</li>
-<li>☐ Голос только в Examples (не в Description)</li>
+<li>☐ Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</li>
 </ul>
 
-<p>Посмотрите полный пример готовой карточки → <a href="#p10_elena_l1">Елена (L1, ~580 токенов)</a></p>
+<p>Посмотрите полный пример готовой карточки → <a href="#p10_elena_l1">Елена (L1, ~440 токенов)</a></p>
 
 
 </section>
@@ -274,11 +274,11 @@
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>❌ До (голос в Description)</h4>
-<p>Description: "Елена — циничный журналист. Говорит короткими, колкими фразами."<br/>Examples: generic реплики без характера<br/>Результат: модель игнорирует стиль, отвечает «нейтрально».</p>
+<p>Description: "Маркус — детектив. Говорит отрывисто, командным тоном."<br/>Examples: generic реплики без характера<br/>Результат: модель игнорирует стиль, отвечает «нейтрально».</p>
 </div>
 <div class="solution-block">
 <h4>✅ После (голос в Examples)</h4>
-<p>Description: "Елена — журналист. Якоря: ..."<br/>Examples: "Не твоё дело." / "Я видела достаточно трупов, чтобы не впечатляться."<br/>Результат: модель копирует краткий, циничный паттерн (~85% следование).</p>
+<p>Description: "Маркус — детектив. Якоря: ..."<br/>Examples: "Где был в восемь?" / "Не тяни время. Мне нужны факты, не истории."<br/>Результат: модель копирует отрывистый, командный паттерн (~85% следование).</p>
 </div>
 </div>
 
@@ -313,7 +313,7 @@
 
 <h4>Глубокий слой (L2)</h4>
 
-<p>СПИН (SPINE) — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности с интерактивным пентагоном. Enneagram — модель из 9 типов для выведения СПИН из типа личности. System Prompt получает CORE DIRECTIVES — единую систему из 5 директив. Также: Author's Note, Lorebook, Format Lock, анти-паттерны AP-1–AP-7 + AP-15 + AP-16.</p>
+<p>SPINE — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности с интерактивным пентагоном. Enneagram — модель из 9 типов для выведения SPINE из типа личности. System Prompt получает CORE DIRECTIVES — единую систему из 5 директив. Также: Author's Note, Lorebook, Format Lock, анти-паттерны AP-1–AP-7 + AP-15 + AP-16.</p>
 
 <ul>
 <li>Критерии перехода: карточка стабильна на L1, 2 Examples дают узнаваемый голос, 3–5 якорей покрывают основные ситуации</li>
@@ -323,12 +323,12 @@
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-СПИН, FLAW-linked якоря, OCEAN/Enneagram: <span class="term-marker" data-tooltip-ref="#p4_spine_overview" data-target-layer="2" data-tooltip-summary="SPINE — фреймворк глубинной мотивации (WANT, NEED, FLAW). Доступен на Глубоком слое.">SPINE Framework</span><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE Framework</a></noscript>
+SPINE, FLAW-linked якоря, OCEAN/Enneagram: <span class="term-marker" data-tooltip-ref="#p4_spine_overview" data-target-layer="2" data-tooltip-summary="SPINE — фреймворк глубинной мотивации (WANT, NEED, FLAW). Доступен на Глубоком слое.">SPINE Framework</span><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE Framework</a></noscript>
 </p>
 
 <h4>Экспертный слой (L3)</h4>
 
-<p>Если вы уже работаете с СПИН и хотите глубже — Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), которые объясняют, почему персонаж ведёт себя именно так. Chain of Thought (CoT) — техника внутреннего процесса персонажа. XML-структура Description и API-блоки для Claude/GPT. Расширенные анти-паттерны AP-8–AP-14 и 12B-специфичная диагностика.</p>
+<p>Если вы уже работаете с SPINE и хотите глубже — Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), которые объясняют, почему персонаж ведёт себя именно так. Chain of Thought (CoT) — техника внутреннего процесса персонажа. XML-структура Description и API-блоки для Claude/GPT. Расширенные анти-паттерны AP-8–AP-14 и 12B-специфичная диагностика.</p>
 
 <ul>
 <li>Критерии перехода: SPINE консистентен, 3 Examples показывают разные эмоции, FLAW-linked якоря работают, используете 32B+ или API модель</li>
@@ -338,7 +338,7 @@
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-LIE, GHOST, CoT, XML/API: <span class="term-marker" data-tooltip-ref="#p4_l3_spine_full" data-target-layer="3" data-tooltip-summary="Полный СПИН из 5 элементов (WANT, NEED, FLAW, LIE, GHOST) для максимальной проработки персонажа. Доступен на Экспертном слое.">Полный СПИН из 5 элементов</span><noscript><a href="#p4_l3_spine_full" class="term-marker-noscript-link">Полный СПИН из 5 элементов</a></noscript>
+LIE, GHOST, CoT, XML/API: <span class="term-marker" data-tooltip-ref="#p4_l3_spine_full" data-target-layer="3" data-tooltip-summary="Полный SPINE из 5 элементов (WANT, NEED, FLAW, LIE, GHOST) для максимальной проработки персонажа. Доступен на Экспертном слое.">Полный SPINE из 5 элементов</span><noscript><a href="#p4_l3_spine_full" class="term-marker-noscript-link">Полный SPINE из 5 элементов</a></noscript>
 </p>
 
 </section>

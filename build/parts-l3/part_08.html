@@ -57,19 +57,8 @@
 <h3>AP-3: Голос в Description (Voice in Description)</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
 <p><strong>Причина:</strong> Непонимание иерархии влияния на голос</p>
-<p><strong>Решение:</strong> Голос = только в Examples и Greeting. Description = только факты. → Подробно: <a href="#p1_top3_problems">Ошибка 2 в Part 1</a></p>
-<div class="problem-block">
-<p><strong>❌ Неправильно:</strong></p>
-<pre><code>Description: "Елена говорит с сарказмом, использует слово 'чувак', короткие фразы"</code></pre>
-</div>
-<div class="solution-block">
-<p><strong>✅ Правильно:</strong></p>
-<pre><code>Description: "Елена — журналист, циничный, недоверчивый."
-
-Example:
-&lt;START&gt;
-Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
-</div>
+<p><strong>Решение:</strong> Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description. Description = только факты.</p>
+<p>📌 Канонический пример → <a href="#p3_influence_hierarchy">p3_influence_hierarchy</a></p>
 </div>
 
 </section>
@@ -80,7 +69,7 @@ Example:
 <h3>AP-4: GHOST в System Prompt</h3>
 <p><strong>Симптом:</strong> Психология (SPINE, GHOST) в SP</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
-<p><strong>Решение:</strong> SPINE/GHOST = только в Description. SP = только инструкции и запреты.</p>
+<p><strong>Решение:</strong> SPINE/GHOST = только в Description. SP = только инструкции и запреты. <span class="layer-remark">GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP.</span></p>
 <div class="callout warn">
 <p><strong>⚠️ Предупреждение:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
 </div>
@@ -110,7 +99,7 @@ Example:
 <p><strong>Причина:</strong> Нет инструкции "Never speak or act for {{user}}" в SP</p>
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
 <pre><code>Never speak or act for {{user}}.</code></pre>
-<p>→ Подробный разбор: <a href="#p1_top3_problems">Ошибка 1 в Part 1</a></p>
+<p>Подробный разбор → <a href="#p1_top3_problems">p1_top3_problems</a></p>
 <div class="problem-block">
 <h4>❌ Без анти-годмодинга</h4>
 <p><code>{{user}} подошёл ближе. *Она почувствовала, как сердце user забилось чаще от волнения.*</code></p>
@@ -162,11 +151,11 @@ Example:
 <p><strong>💡 Совет:</strong> Каждый элемент должен объясняться предыдущим. Если связь разорвана — пересмотрите SPINE.</p>
 </div>
 <div class="problem-block">
-<h4>❌ Сломанный СПИН</h4>
+<h4>❌ Сломанный SPINE</h4>
 <p>WANT: «хочет быть любимым» ← NEED: «нуждается в контроле» ← FLAW: «избегает близости»<br/>FLAW блокирует NEED, но WANT и NEED не противоречат друг другу логически → цепь разорвана.</p>
 </div>
 <div class="solution-block">
-<h4>✅ Цельный СПИН</h4>
+<h4>✅ Цельный SPINE</h4>
 <p>WANT: «хочет быть любимым» ← NEED: «нуждается в доверии» ← FLAW: «избегает близости»<br/>WANT и NEED несовместимы из-за FLAW → цепь замкнута.</p>
 </div>
 </div>

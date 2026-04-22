@@ -264,6 +264,11 @@
     "part": 7,
     "topic": ""
   },
+  "p7_format_lock": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
   "p7_ooc_protection": {
     "layer": "l3",
     "part": 7,
@@ -271,16 +276,6 @@
   },
   "p7_immersion_boundary": {
     "layer": "l3",
-    "part": 7,
-    "topic": ""
-  },
-  "p7_sampling_params": {
-    "layer": "l2",
-    "part": 7,
-    "topic": ""
-  },
-  "p7_format_lock": {
-    "layer": "l2",
     "part": 7,
     "topic": ""
   },
@@ -294,12 +289,17 @@
     "part": 7,
     "topic": ""
   },
+  "p7_structured_inject": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
   "p7_sp_template_l3": {
     "layer": "l3",
     "part": 7,
     "topic": ""
   },
-  "p7_structured_inject": {
+  "p7_sampling_params": {
     "layer": "l2",
     "part": 7,
     "topic": ""
@@ -422,7 +422,7 @@
   "p9_quality_scale": {
     "layer": "l1",
     "part": 9,
-    "topic": ""
+    "topic": "Диагностика и тестирование"
   },
   "p9_one_change_rule": {
     "layer": "l1",
@@ -432,7 +432,7 @@
   "p9_basic_checklist": {
     "layer": "l1",
     "part": 9,
-    "topic": "Диагностика и чек-лист"
+    "topic": ""
   },
   "p9_top5_problems": {
     "layer": "l1",

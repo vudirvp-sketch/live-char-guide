@@ -51,10 +51,10 @@
 <tr><th>Блок</th><th>Проверка</th><th>Ссылка</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Tense set?<br/>☐ Format Lock?</td><td><a href="#p7_system_prompt">p7_system_prompt</a></td></tr>
-<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ OCEAN 1-2 полюса?</td><td><a href="#p1_core_rules">Правила #1, #2, #3, #5</a></td></tr>
+<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding?<br/>☐ Person defined?<br/>☐ Narrative tense? (прошедшее/настоящее)<br/>☐ Format Lock?</td><td><a href="#p7_system_prompt">p7_system_prompt</a>, <a href="#p7_core_directives">#p7_core_directives</a>, <a href="#p7_format_lock">#p7_format_lock</a></td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой?<br/>☐ Нет голоса?<br/>☐ OCEAN 1-2 полюса?</td><td><a href="#p1_core_rules">Правила #1, #2, #3, #5</a>, <a href="#p4_spine_overview">#p4_spine_overview</a>, <a href="#p2_anchor_rules">#p2_anchor_rules</a></td></tr>
 <tr><td><strong>Examples</strong></td><td>☐ Уникальный голос?<br/>☐ Embodiment?<br/>☐ &lt;START&gt;?</td><td>Правило #3, <a href="#p3_examples_rules">p3_examples_rules</a>, <a href="#p2_embodiment">p2_embodiment</a></td></tr>
-<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p1_token_budget">Токен-бюджет</a></td></tr>
+<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p3_greeting">#p3_greeting</a>, <a href="#p1_token_budget">Токен-бюджет</a></td></tr>
 <tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10?<br/>☐ PP = 0?<br/>☐ Temperature в диапазоне?</td><td><a href="#p8_ap5_reppen_high">AP-5</a>, <a href="#p8_ap7_presence_penalty">AP-7</a>, <a href="#p7_sampling_params">p7_sampling_params</a></td></tr>
 </tbody>
 </table>
@@ -132,7 +132,7 @@
 <tr><td></td><td>Достаточно ли Examples?</td><td>Добавить 2–3 Examples</td><td>→ Следующая проверка</td></tr>
 <tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination</td></tr>
 <tr><td>Персонаж годмодит</td><td>Есть ли анти-годмодинг в SP?</td><td>Добавить 2 строки (AP-6)</td><td>→ Усилить INFLUENCE BOUNDARY</td></tr>
-<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в СПИН?</td><td>Добавить FLAW + FLAW-linked якорь</td><td>→ Проверить OCEAN: >2 полюса? (AP-15)</td></tr>
+<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked якорь</td><td>→ Проверить OCEAN: >2 полюса? (AP-15)</td></tr>
 <tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Снизить до 1.05 (AP-5)</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
 <tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить якоря на дублирование</td></tr>
 </tbody>
