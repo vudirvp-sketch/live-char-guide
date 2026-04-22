@@ -924,50 +924,133 @@
   // TOC GENERATION
   // ============================================================================
 
+  /**
+   * NAV-01: Two-Tier Collapsible TOC
+   * 
+   * Tier 1: Part-level entries (h2 titles), always visible, ~10 items max
+   * Tier 2: Section-level entries from NAV sections (data-toc-nav), hidden by default
+   *
+   * Mechanism:
+   * - Group sections by Part (using data-section prefix p{N}_)
+   * - First section of each Part (containing <h2>) becomes Tier 1 entry
+   * - Sections with data-toc-nav attribute become Tier 2 entries
+   * - Sections with data-toc-exclude or id="glossary" are skipped entirely
+   * - Text truncation removed (NAV-01): CSS text-overflow:ellipsis handles overflow
+   */
   function generateTOC() {
     const tocContent = $('#toc-content');
     if (!tocContent) return;
 
     const sections = $$('section[id]');
-    const tocLinks = [];
+
+    // Group sections by Part number
+    const partGroups = {};
+    const partOrder = [];
 
     sections.forEach(section => {
-      const h2 = section.querySelector('h2');
-      const h3s = section.querySelectorAll('h3[id]');
+      // Skip glossary and data-toc-exclude sections (NAV-01 §2.4, §3.6)
+      if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return;
 
-      if (h2 && section.id) {
-        const h2Text = h2.textContent.replace(/^[0-9.]+\s*/, '').trim();
-        tocLinks.push({ level: 2, id: section.id, text: h2Text.substring(0, 50) });
+      // Extract part number from data-section (format: p{N}_{topic})
+      const sectionId = section.getAttribute('data-section') || section.id;
+      const partMatch = sectionId.match(/^p(\d+)_/);
+      if (!partMatch) return;
+
+      const partNum = partMatch[1];
+      if (!partGroups[partNum]) {
+        partGroups[partNum] = [];
+        partOrder.push(partNum);
       }
-
-      h3s.forEach(h3 => {
-        if (h3.id) {
-          const h3Text = h3.textContent.replace(/^[0-9.]+\s*/, '').trim();
-          tocLinks.push({ level: 3, id: h3.id, text: h3Text.substring(0, 50) });
-        }
-      });
-
-      // IMP-46/Stage 1.5: Include h4 for L3 sections with data-toc-level="4"
-      if (section.getAttribute('data-toc-level') === '4') {
-        section.querySelectorAll('h4[id]').forEach(h4 => {
-          const h4Text = h4.textContent.replace(/^[0-9.]+\s*/, '').trim();
-          tocLinks.push({ level: 4, id: h4.id, text: h4Text.substring(0, 50) });
-        });
-      }
+      partGroups[partNum].push(section);
     });
 
-    const tocHtml = tocLinks.map(link => {
-      const indentClass = link.level === 3 ? 'toc-indent' : link.level === 4 ? 'toc-indent-2' : '';
-      return `<li class="${indentClass}"><a href="#${link.id}">${link.text}</a></li>`;
-    }).join('\n');
+    // Build two-tier TOC HTML
+    let tocHtml = '<ul class="toc-list">';
 
-    tocContent.innerHTML = `<ul>${tocHtml}</ul>`;
+    partOrder.forEach(partNum => {
+      const partSections = partGroups[partNum];
+      if (partSections.length === 0) return;
+
+      // Tier 1: Find h2 in first section of this Part
+      const firstSection = partSections[0];
+      const h2 = firstSection.querySelector('h2');
+      if (!h2) return;
+
+      const partTitle = h2.textContent.replace(/^[0-9.]+\s*/, '').trim();
+      const partId = firstSection.id;
+
+      // Collect Tier 2 entries (sections with data-toc-nav)
+      const navSections = partSections.filter(s => s.hasAttribute('data-toc-nav'));
+
+      // Build Part entry with toggle button
+      tocHtml += `<li class="toc-part">`;
+      tocHtml += `<button class="toc-part-toggle" data-part="part_${partNum.padStart(2, '0')}" aria-expanded="false">`;
+      tocHtml += `<span class="toc-part-arrow">\u25B8</span>`;
+      tocHtml += `<span class="toc-part-title">${partTitle}</span>`;
+      tocHtml += `</button>`;
+
+      // Tier 2: NAV section links (hidden by default)
+      if (navSections.length > 0) {
+        tocHtml += `<ul class="toc-sections hidden">`;
+        navSections.forEach(navSection => {
+          // Display text: first h3 textContent, cleaned
+          const h3 = navSection.querySelector('h3');
+          let linkText;
+          if (h3) {
+            linkText = h3.textContent.replace(/^[0-9.]+\s*/, '').trim();
+          } else {
+            // Fallback: use data-section ID as slug-derived label
+            linkText = navSection.getAttribute('data-section')
+              .replace(/^p\d+_/, '')
+              .replace(/_/g, ' ');
+          }
+          tocHtml += `<li class="toc-indent"><a href="#${navSection.id}">${linkText}</a></li>`;
+        });
+        tocHtml += `</ul>`;
+      }
+
+      tocHtml += `</li>`;
+    });
+
+    tocHtml += '</ul>';
+    tocContent.innerHTML = tocHtml;
+
+    // Bind toggle behavior (accordion: one Part expanded at a time)
+    const toggleButtons = $$('.toc-part-toggle');
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        const sectionsList = btn.nextElementSibling;
+
+        // Accordion: collapse all other Parts
+        toggleButtons.forEach(otherBtn => {
+          if (otherBtn !== btn) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            const otherSections = otherBtn.nextElementSibling;
+            if (otherSections) otherSections.classList.add('hidden');
+          }
+        });
+
+        // Toggle current Part
+        if (isExpanded) {
+          btn.setAttribute('aria-expanded', 'false');
+          if (sectionsList) sectionsList.classList.add('hidden');
+        } else {
+          btn.setAttribute('aria-expanded', 'true');
+          if (sectionsList) sectionsList.classList.remove('hidden');
+        }
+      });
+    });
   }
 
   // ============================================================================
   // GLOSSARY LAYER FILTERING (IMP-51)
   // ============================================================================
 
+  /**
+   * FIX-04/§3.4: Hide glossary terms not applicable to current layer.
+   * Uses CSS class toggle (.glossary-item-hidden) instead of inline styles.
+   */
   function updateGlossaryForLayer(layer) {
     const layerNum = parseInt(layer, 10);
     const glossaryItems = $$('.glossary-item');
@@ -976,20 +1059,10 @@
       const layers = (item.dataset.layers || '').split(' ').map(Number);
       const isAvailable = layers.some(l => l === 0 || l === layerNum);
       
-      // Show badge for terms not available at current layer
-      const existingBadge = item.querySelector('.glossary-layer-badge');
-      if (existingBadge) existingBadge.remove();
-      
       if (!isAvailable && layers.length > 0) {
-        // Find the lowest layer where this term is available
-        const nextLayer = layers.find(l => l > 0 && l > layerNum);
-        if (nextLayer) {
-          const badge = document.createElement('span');
-          badge.className = 'glossary-layer-badge';
-          badge.style.cssText = 'font-size:0.7em;color:var(--accent);margin-left:0.5em;';
-          badge.textContent = `Доступно на ${CONFIG.LAYER_LABELS[String(nextLayer)]} слое`;
-          item.appendChild(badge);
-        }
+        item.classList.add('glossary-item-hidden');
+      } else {
+        item.classList.remove('glossary-item-hidden');
       }
     });
   }

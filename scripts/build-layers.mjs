@@ -95,6 +95,25 @@ function parseMasterHTML(content, filename) {
     const layerMatch = attrs.match(/data-layer=["']([^"']+)["']/i);
     const sectionMatch = attrs.match(/data-section=["']([^"']+)["']/i);
 
+    // Capture ALL data-* attributes (BLD-01: preserve arbitrary data-* attrs)
+    const dataAttrs = {};
+    // Match data-xxx="value" or data-xxx='value'
+    const dataAttrRegex = /data-([a-z][-a-z0-9]*)=["']([^"']*)["']/gi;
+    let dataMatch;
+    while ((dataMatch = dataAttrRegex.exec(attrs)) !== null) {
+      dataAttrs[dataMatch[1]] = dataMatch[2];
+    }
+    // Also capture boolean data-* attributes without values (e.g. data-toc-nav)
+    // These appear as bare "data-xxx" without = sign, at word boundary
+    const booleanAttrRegex = /(^|\s)(data-([a-z][-a-z0-9]*))(?=\s|$)/gi;
+    let boolMatch;
+    while ((boolMatch = booleanAttrRegex.exec(attrs)) !== null) {
+      const key = boolMatch[3];
+      if (!(key in dataAttrs)) {
+        dataAttrs[key] = '';
+      }
+    }
+
     if (!layerMatch) {
       continue; // Not a layer section, skip
     }
@@ -175,6 +194,7 @@ function parseMasterHTML(content, filename) {
     sections.push({
       layer,
       sectionId,
+      dataAttrs,  // BLD-01: all data-* attributes
       content: sectionContent,
       title: h2Match ? h2Match[1].trim() : '',
       anchors: h3Ids,
@@ -362,7 +382,7 @@ async function generateNoJSGlossary(layer) {
     return '';
   }
 
-  let html = `<section id="glossary" class="no-js-only">
+  let html = `<section id="glossary" class="no-js-only" data-toc-exclude>
 <h2>Глоссарий</h2>
 <dl>
 `;
@@ -376,7 +396,7 @@ async function generateNoJSGlossary(layer) {
 
     html += `<dt>${termName}`;
     if (term.abbreviation) {
-      html += ` <small style="color:var(--accent);">(${term.abbreviation})</small>`;
+      html += ` <small class="glossary-abbr">(${term.abbreviation})</small>`;
     }
     html += `</dt>
 <dd>${definition}</dd>
@@ -627,7 +647,15 @@ async function buildLayers() {
 
 `;
       for (const section of processedSections) {
-        html += `<section id="${section.sectionId}" data-layer="${section.layer}" data-section="${section.sectionId}">
+        // BLD-01: preserve all data-* attributes from master HTML
+        let dataAttrsStr = '';
+        if (section.dataAttrs) {
+          for (const [key, value] of Object.entries(section.dataAttrs)) {
+            if (key === 'layer' || key === 'section') continue; // already handled via id/data-layer/data-section
+            dataAttrsStr += value === '' ? ` data-${key}` : ` data-${key}="${value}"`;
+          }
+        }
+        html += `<section id="${section.sectionId}" data-layer="${section.layer}" data-section="${section.sectionId}"${dataAttrsStr}>
 ${section.processedContent}
 </section>
 

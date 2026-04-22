@@ -4,7 +4,7 @@
   
   Layer inclusion: l2 (SP, AN, Lorebook basics, Format Lock, CORE DIRECTIVES, Tone Frame), l3 (API blocks, XML, 4K-Fallback, OOC Protection, Immersion Boundary, L3 directives)
 -->
-<section data-layer="l2" data-section="p7_system_prompt">
+<section data-layer="l2" data-section="p7_system_prompt" data-toc-nav>
 <h2>Техническая реализация</h2>
 
 <p class="layer-remark"><span class="remark-icon">→</span> Part 06 (Chain of Thought) доступен на Экспертном слое → <a data-layer-switch="3#p6_cot_basics" class="layer-remark">Part 6: CoT → Экспертный слой</a></p>
@@ -72,7 +72,7 @@ Never speak, act, or decide for {{user}}.
 
 </section>
 
-<section data-layer="l2" data-section="p7_core_directives">
+<section data-layer="l2" data-section="p7_core_directives" data-toc-nav>
 <h3>CORE DIRECTIVES — единая система директив</h3>
 
 <p>CORE DIRECTIVES — единая система директив на английском языке, размещаемая в System Prompt. Для L2 (Глубокий слой) — директивы 1–5. Для L3 (Экспертный слой) — все 7. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
@@ -121,9 +121,8 @@ Never speak, act, or decide for {{user}}.
 <p><strong>💡 Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
-</section>
-
 <p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — Экспертный слой (L3): расширенные директивы, OOC Protection, Immersion Boundary, XML, API-блоки.</p>
+</section>
 
 <section data-layer="l3" data-section="p7_core_directives_l3">
 <h3>CORE DIRECTIVES — директивы Экспертного слоя (6–7)</h3>
@@ -149,7 +148,7 @@ Never speak, act, or decide for {{user}}.
 
 </section>
 
-<section data-layer="l2" data-section="p7_tone_frame">
+<section data-layer="l2" data-section="p7_tone_frame" data-toc-nav>
 <h3>Tone Frame (Тональный фрейм)</h3>
 
 <p>Tone Frame — элемент SP (~25-30 токенов) с двойной функцией: задаёт тональность И защищает от контентного дрейфа. Обязателен для нетривиальных сеттингов.</p>
@@ -174,7 +173,7 @@ Never speak, act, or decide for {{user}}.
 
 </section>
 
-<section data-layer="l2" data-section="p7_format_lock">
+<section data-layer="l2" data-section="p7_format_lock" data-toc-nav>
 <h3>Format Lock</h3>
 
 <p><strong>Format Lock</strong> — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Модель — Pattern Matcher: два паттерна разметки в одной карточке = произвольное переключение между ними.</p>
@@ -207,7 +206,7 @@ Never speak, act, or decide for {{user}}.
 
 </section>
 
-<section data-layer="l3" data-section="p7_ooc_protection">
+<section data-layer="l3" data-section="p7_ooc_protection" data-toc-nav>
 <h3>OOC Protection (OOC-защита)</h3>
 
 <p>Протокол реакции на OOC-провокации в характере персонажа. Добавляет ~15 токенов в SP, но критически важен для иммерсии.</p>
@@ -234,7 +233,7 @@ Never speak, act, or decide for {{user}}.
 
 </section>
 
-<section data-layer="l2" data-section="p7_authors_note">
+<section data-layer="l2" data-section="p7_authors_note" data-toc-nav>
 <h3>Author's Note (AN)</h3>
 
 <p><strong>Author's Note</strong> — динамический контекст, вставляемый перед последними сообщениями. Задаёт сцену, настроение, мотивацию.</p>
@@ -410,7 +409,7 @@ Never speak, act, or decide for {{user}}.
 
 </section>
 
-<section data-layer="l2" data-section="p7_lorebook">
+<section data-layer="l2" data-section="p7_lorebook" data-toc-nav>
 <h3>Lorebook</h3>
 
 <p><strong>Lorebook</strong> — база знаний с триггерами. Используется для GHOST-связанных фактов.</p>

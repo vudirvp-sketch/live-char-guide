@@ -847,6 +847,107 @@ body[data-layer="2"] #content [data-layer="3"] { display: none !important; }
 #toc-panel .panel-content ul ul li a { font-size: 0.88em; opacity: 0.88; padding-left: 0.4em; border-left: 2px solid var(--border); }
 #toc-panel .panel-content li.active > a { color: var(--accent); font-weight: 600; }
 
+/* === Two-Tier Collapsible TOC (NAV-03) === */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-part {
+  margin: 0;
+  padding: 0;
+}
+
+.toc-part-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary, var(--text));
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.toc-part-toggle:hover {
+  background: var(--bg-elevated);
+}
+
+.toc-part-arrow {
+  display: inline-block;
+  width: 1.2em;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  font-size: 0.8em;
+}
+
+.toc-part-toggle[aria-expanded="true"] .toc-part-arrow {
+  transform: rotate(90deg);
+}
+
+.toc-part-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toc-sections {
+  list-style: none;
+  padding: 0 0 4px 16px;
+  margin: 0;
+}
+
+.toc-sections.hidden {
+  display: none;
+}
+
+.toc-sections li a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 3px 8px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.toc-sections li a:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary, var(--text));
+}
+
+/* TOC text overflow (replaces JS substring truncation) */
+#toc-content li a,
+.toc-part-title {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Glossary abbreviation style (replaces inline style, FIX-03) */
+.no-js-only .glossary-abbr {
+  color: var(--accent);
+}
+
+.glossary-abbr {
+  color: var(--accent);
+}
+
+/* Glossary item hidden (replaces inline style, FIX-04/§3.4) */
+.glossary-item-hidden {
+  display: none;
+}
+
 /* === FAB BUTTON GROUP === */
 .fab-group {
   position: fixed;
