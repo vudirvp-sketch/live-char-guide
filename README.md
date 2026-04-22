@@ -1,272 +1,305 @@
 # Live Character Guide
 
-> **Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.**
+> **Инженерный пайплайн для RP-карточек персонажей. От SPINE до деплоя. Для моделей 12B–32B+.**
 
-A comprehensive guide for creating character cards and system prompts for LLM roleplay. Instead of static descriptions, it transforms character cards into trigger-action-price systems that produce consistent, observable behavior.
+![Version](https://img.shields.io/badge/version-6.0.0-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 
-## Quick Links
+## Ссылки
 
-| Resource | Link |
-|----------|------|
-| **Online Guide** | [vudirvp-sketch.github.io/live-char-guide](https://vudirvp-sketch.github.io/live-char-guide/) |
+| Ресурс | Ссылка |
+|--------|--------|
+| **Онлайн-гайд** | [vudirvp-sketch.github.io/live-char-guide](https://vudirvp-sketch.github.io/live-char-guide/) |
 | **Changelog** | [CHANGELOG.md](./CHANGELOG.md) |
 | **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
 
-## Layer System
+---
 
-The guide supports three depth levels with **cumulative visibility**:
+## Система слоёв
 
-| Layer | Name | Time | Description |
-|-------|------|------|-------------|
-| **Layer 1** | Minimum | ~15 min | Essential concepts, basic templates, minimal depth |
-| **Layer 2** | Optimal | ~30 min | Full pipeline, all core elements, recommended baseline |
-| **Layer 3** | Pro | ~60 min | Advanced theory, deep techniques, all optional elements |
+Гайд поддерживает три уровня глубины с **кумулятивной видимостью**:
 
-### Cumulative Visibility Model
+```
+L1 ⊂ L2 ⊂ L3
+```
 
-- **Layer 3** shows content from Layer 1 + 2 + 3
-- **Layer 2** shows content from Layer 1 + 2
-- **Layer 1** shows only Layer 1 content
+| Слой | Название | Токены | Время | Для кого | Что добавляет |
+|------|----------|--------|-------|----------|---------------|
+| **L1** | Минимальный | 400-800 | ~15 мин | Новички, 4K контекст, 12B модели | Базовые блоки, 3-5 якорей, 2 примера |
+| **L2** | Глубокий | 800-1500 | ~30 мин | Опытные, 8K+ контекст, 12B-32B | +SPINE (WANT/NEED/FLAW), OCEAN/Enneagram, FLAW-якоря, 5-7 якорей |
+| **L3** | Экспертный | 1500+ | ~60 мин | Эксперты, 32K+ контекст, API | +LIE/GHOST/GHOST Layers, CoT, XML/API, 7-12 якорей |
 
-### Direct Linking
+### Принцип кумулятивности
 
-Share specific layers via URL parameter:
+- **L3** показывает контент L1 + L2 + L3
+- **L2** показывает контент L1 + L2
+- **L1** показывает только контент L1
+
+### Прямые ссылки на слои
+
 ```
 https://vudirvp-sketch.github.io/live-char-guide/?layer=2
 ```
 
-## Key Concepts
+---
+
+## Ключевые концепции
 
 ### SPINE Framework
 
-Five core elements that define character psychology:
+Фреймворк глубинной мотивации персонажа:
 
-| Element | Description |
-|---------|-------------|
-| **WANT** | What the character actively pursues |
-| **NEED** | What would actually heal them (often opposite to WANT) |
-| **FLAW** | Behavioral blind spot blocking NEED |
-| **LIE** | False belief sustaining the FLAW |
-| **GHOST** | Past event that formed the FLAW/LIE |
+| Элемент | Описание | Слой |
+|---------|----------|------|
+| **WANT** | Осознанное желание персонажа | L2+ |
+| **NEED** | Истинная потребность (часто противоречит WANT) | L2+ |
+| **FLAW** | Поведенческий дефект, блокирующий NEED | L2+ |
+| **LIE** | Ложная установка о себе/мире | L3 |
+| **GHOST** | Событие прошлого, сформировавшее LIE | L3 |
 
-### Core Rules
+### 5 базовых правил
 
-1. **OCEAN 1-2 Poles:** Use only 1-2 extreme OCEAN poles (<30 or >70) for memorable characters
-2. **Price Mandatory:** Every anchor needs immediate physical/verbal manifestation
-3. **Voice Isolation:** Voice patterns defined ONLY in Examples, never in Description
-4. **GHOST Layering:** SP = never, Spine = definition, Examples = demonstration, LB/AN = triggers/state
-
-## Architecture
-
-### Lazy-Loading Shell (v5.12.0+)
-
-The guide uses a minimal shell architecture for faster initial load:
-
-```
-User visits → Layer selector → Load selected layer content on-demand
-```
-
-**Benefits:**
-- Fast first paint (~50% smaller initial payload)
-- User chooses depth before loading content
-- Single-page app — no reloads when switching layers
-- Browser history works correctly (back/forward)
-- Anchor navigation works after content load
-
-### Build Flow
-
-```
-src/shell/index.html  →  dist/index.html (shell)
-src/parts-l{1,2,3}/   →  dist/parts-l{1,2,3}/ (lazy-loaded content)
-src/assets/           →  dist/assets/
-src/data/             →  dist/data/
-```
-
-## Project Structure
-
-```
-live-char-guide/
-├── README.md                           # This file
-├── CHANGELOG.md                        # Version history
-├── CONTRIBUTING.md                     # Contribution guidelines
-├── LICENSE                             # MIT License
-├── package.json                        # Dependencies & scripts
-├── manifest.json                       # PWA manifest
-├── robots.txt                          # SEO
-├── sitemap.xml                         # SEO
-│
-├── src/
-│   ├── VERSION                         # Source of truth for version
-│   │
-│   ├── shell/                          # Lazy-loading shell
-│   │   ├── index.html                  # Minimal shell with layer selector
-│   │   ├── lazy-loader.js              # Dynamic layer loading
-│   │   └── styles.css                  # Shell-specific styles
-│   │
-│   ├── parts-l1/                       # Layer 1 content
-│   │   ├── manifest.json               # Layer 1 structure
-│   │   ├── 01_intro.html
-│   │   ├── 02_quickstart.html
-│   │   └── ...
-│   │
-│   ├── parts-l2/                       # Layer 2 content (recommended)
-│   │   ├── manifest.json               # Layer 2 structure
-│   │   ├── 01_intro.html
-│   │   ├── 02_quickstart.html
-│   │   └── ...
-│   │
-│   ├── parts-l3/                       # Layer 3 content (expert)
-│   │   ├── manifest.json               # Layer 3 structure
-│   │   ├── 01_intro.html
-│   │   ├── 02_quickstart.html
-│   │   └── ...
-│   │
-│   ├── data/
-│   │   ├── glossary.json               # Term definitions
-│   │   ├── character_schema.json       # JSON schema for cards
-│   │   └── test_scenarios.json         # Test scenarios
-│   │
-│   ├── assets/
-│   │   ├── favicon.svg
-│   │   └── preview-card.png
-│   │
-│   ├── scripts/
-│   │   ├── build-shell.mjs             # Main build script
-│   │   └── build-utils.mjs             # Shared utilities
-│   │
-│   └── manifest/
-│       └── structure.json              # Overall project structure
-│
-├── scripts/                            # Validation scripts
-│   ├── validate-artifact.mjs           # Build validation
-│   ├── version-sync.mjs                # Version consistency check
-│   ├── check_duplicates.py             # Duplicate content detector
-│   ├── validate_terms.py               # Terminology validator
-│   ├── validate_downward_links.py      # Link validator
-│   └── contrast_checker.mjs            # Accessibility contrast
-│
-├── tests/                              # Test suites
-│   ├── test-build.mjs                  # Build unit tests
-│   ├── test-validate-artifact.mjs      # Validation tests
-│   ├── test-version-sync.mjs           # Version sync tests
-│   └── integration/
-│       └── test-full-build.mjs         # Integration tests
-│
-├── dist/                               # Build output (gitignored)
-│   ├── index.html                      # Shell entry point
-│   ├── build.hash                      # Build hash
-│   ├── parts-l1/                       # Layer 1 HTML
-│   ├── parts-l2/                       # Layer 2 HTML
-│   ├── parts-l3/                       # Layer 3 HTML
-│   ├── assets/
-│   │   ├── shell-styles.css
-│   │   ├── lazy-loader.js
-│   │   └── ...
-│   └── data/
-│       └── glossary.json
-│
-├── .github/                            # GitHub Actions
-│   └── workflows/
-│       ├── build-artifact.yml          # Build & validate
-│       ├── deploy-pages.yml            # Deploy to GitHub Pages
-│       └── validate.yml                # Validation checks
-│
-├── .husky/                             # Pre-commit hooks
-├── .lighthouserc.json                  # Lighthouse CI
-├── .lintstagedrc.json                  # Lint-staged config
-├── .prettierrc                         # Prettier config
-├── eslint.config.js                    # ESLint config
-└── .nvmrc                              # Node version
-```
-
-## Build Commands
-
-```bash
-# Install dependencies
-pnpm install
-
-# Build shell (dist/)
-pnpm run build
-
-# Build all (same as build:shell)
-pnpm run build:all
-
-# Validate build output
-pnpm run validate
-
-# Check version consistency
-pnpm run version:check
-
-# Run tests
-pnpm test
-
-# Run linting
-pnpm run lint
-
-# Local development server
-pnpm run dev
-```
-
-## Development Workflow
-
-### Prerequisites
-
-- Node.js >= 20 (see `.nvmrc`)
-- pnpm 10.x
-- Python 3.10+ (for validation scripts)
-
-### Quick Start
-
-```bash
-# Clone repository
-git clone https://github.com/vudirvp-sketch/live-char-guide.git
-cd live-char-guide
-
-# Install dependencies
-pnpm install
-
-# Build and serve locally
-pnpm run dev
-# Opens at http://localhost:3000
-```
-
-### Validation Checklist
-
-Before submitting changes, ensure:
-
-1. `pnpm run build:all` succeeds without errors
-2. `pnpm run validate` passes
-3. `pnpm test` passes (all 62 tests)
-4. No duplicate rule definitions outside canonical locations
-5. All model-specific content has `data-model` attributes
-6. Version numbers are synchronized (`src/VERSION` = `package.json`)
-
-## Deployment
-
-The project uses GitHub Pages with automatic deployment:
-
-1. Push to `main` branch
-2. GitHub Actions builds and deploys automatically
-3. Live at: https://vudirvp-sketch.github.io/live-char-guide/
-
-### CI/CD Pipeline
-
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| `build-artifact.yml` | Push to main, PR | Build, validate, run tests |
-| `deploy-pages.yml` | Push to main | Deploy to GitHub Pages |
-| `validate.yml` | Push/PR | Run validation scripts |
-
-## Version
-
-**Current version:** 5.12.0 (2026-04-17)
-
-See [CHANGELOG.md](./CHANGELOG.md) for full version history.
-
-## License
-
-MIT License — see [LICENSE](LICENSE) for details.
+| # | Правило | Почему важно |
+|---|---------|--------------|
+| 1 | **OCEAN: 1-2 экстремальных полюса** — значения <30 или >70 | 3+ полюса = внутренняя противоречивость |
+| 2 | **Цена обязательна** — каждый якорь имеет физическую реакцию | Без цены модель не показывает уязвимость |
+| 3 | **Голос только в Examples** — никогда в Description | Модель копирует паттерны, не следует инструкциям |
+| 4 | **GHOST только в Description** — никогда в System Prompt | Психология в SP ломает поведение |
+| 5 | **Формат якоря: Триггер → Действие → Цена** | Каждый элемент обязателен |
 
 ---
 
-**Author:** TITAN FUSE Team
+## Архитектура проекта
+
+### Как работает билд
+
+```
+src/master/part_*.html (авторский контент)
+        │
+        ▼
+┌─────────────────────────────────────┐
+│  Stage 1: build-layers.mjs          │
+│  Парсит HTML, извлекает по data-layer│
+│  Генерирует parts-l1/l2/l3          │
+└─────────────────────────────────────┘
+        │
+        ▼
+build/parts-l{1,2,3}/*.html + manifest.json
+        │
+        ▼
+┌─────────────────────────────────────┐
+│  Stage 2: build-shell.mjs           │
+│  Копирует shell + parts + data      │
+│  → dist/ для GitHub Pages           │
+└─────────────────────────────────────┘
+```
+
+### Структура репозитория
+
+```
+live-char-guide/
+├── src/
+│   ├── master/              # ← АВТОРЫ: редактируют тут
+│   │   └── part_*.html      # Master-файлы с data-layer разметкой
+│   ├── shell/               # ← ИНФРАСТРУКТУРА: не трогать
+│   │   ├── index.html       # Shell с layer selector
+│   │   ├── styles.css       # Стили
+│   │   └── lazy-loader.js   # Динамическая загрузка слоёв
+│   ├── scripts/             # Build-скрипты
+│   └── VERSION              # Источник версии
+│
+├── data/                    # Данные виджетов
+│   ├── glossary.json        # Глоссарий
+│   ├── ocean.json           # OCEAN пентагон
+│   ├── enneagram.json       # Эннеаграмма
+│   └── mbti.json            # MBTI типы
+│
+├── build/                   # Сгенерированные слои (gitignored)
+│   ├── parts-l1/
+│   ├── parts-l2/
+│   ├── parts-l3/
+│   ├── manifest.json
+│   └── section-registry.json
+│
+├── dist/                    # Деплой на GitHub Pages (gitignored)
+│
+├── scripts/                 # Скрипты валидации
+│   ├── validate-artifact.mjs
+│   ├── version-sync.mjs
+│   └── *.py                 # Python-валидаторы
+│
+├── tests/                   # Тесты
+├── docs/                    # Документация (не входит в билд)
+│   ├── architecture.md
+│   ├── components.md
+│   └── ...
+│
+└── layer-config.json        # Конфигурация слоёв
+```
+
+### Владение директориями
+
+| Директория | Владелец | Кто редактирует |
+|------------|----------|-----------------|
+| `src/master/` | Автор | Авторы контента |
+| `src/shell/` | Инфраструктура | Только через request |
+| `data/` | Shared | Авторы (данные), Инфраструктура (схемы) |
+| `docs/` | Автор | Авторы |
+| `build/` | Generated | Авто-генерация |
+| `dist/` | Generated | Авто-генерация |
+| `scripts/` | Инфраструктура | Инфраструктура |
+
+---
+
+## Авторский workflow
+
+### Разметка мастер-файлов
+
+Каждый `src/master/part_*.html` содержит секции с атрибутами:
+
+```html
+<section data-layer="l1" data-section="p1_card_overview">
+  <h2>Заголовок секции</h2>
+  <!-- Контент виден на L1, L2, L3 -->
+</section>
+
+<section data-layer="l2" data-section="p4_spine_overview">
+  <!-- Контент виден только на L2 и L3 -->
+</section>
+
+<section data-layer="l3" data-section="p4_lie">
+  <!-- Контент виден только на L3 -->
+</section>
+```
+
+### Атрибуты секций
+
+| Атрибут | Обязателен | Формат | Пример |
+|---------|------------|--------|--------|
+| `data-layer` | Да | `l1` \| `l2` \| `l3` | `data-layer="l2"` |
+| `data-section` | Да | `p{N}_{topic}` | `data-section="p4_spine_overview"` |
+
+### Запрещено в мастер-файлах
+
+- `<style>` блоки → все стили в `src/shell/styles.css`
+- `<script>` блоки → все скрипты в `src/shell/lazy-loader.js`
+- `<link>` элементы
+- `<meta>` элементы
+- Контент вне `<section data-layer>`
+
+### Пошаговый workflow
+
+```bash
+# 1. Редактируете мастер-файл
+vim src/master/part_01_basic_blocks.html
+
+# 2. Запускаете билд
+pnpm run build
+
+# 3. Проверяете валидацию
+pnpm run validate
+
+# 4. Запускаете локально для проверки
+pnpm run dev
+# Откроется http://localhost:3000
+
+# 5. Коммитите изменения
+git add src/master/part_01_basic_blocks.html
+git commit -m "feat: update Part 1 content"
+git push
+```
+
+---
+
+## Разработка
+
+### Требования
+
+- Node.js >= 20 (см. `.nvmrc`)
+- pnpm 10.x
+- Python 3.10+ (для скриптов валидации)
+
+### Установка
+
+```bash
+git clone https://github.com/vudirvp-sketch/live-char-guide.git
+cd live-char-guide
+pnpm install
+```
+
+### Команды
+
+```bash
+# Билд
+pnpm run build          # Полный билд (layers + shell)
+pnpm run build:layers   # Только Stage 1
+pnpm run build:shell    # Только Stage 2
+pnpm run build:watch    # Watch-режим
+
+# Валидация
+pnpm run validate       # Валидация билда
+pnpm run validate:all   # Все проверки
+pnpm run version:check  # Проверка синхронизации версий
+
+# Тесты
+pnpm test               # Все тесты
+pnpm run test:unit      # Unit-тесты
+pnpm run test:integration  # Интеграционные тесты
+
+# Разработка
+pnpm run dev            # Билд + локальный сервер (port 3000)
+pnpm run serve          # Только сервер
+pnpm run lint           # ESLint
+```
+
+### Чек-лист перед PR
+
+- [ ] `pnpm run build` завершается без ошибок
+- [ ] `pnpm run validate` проходит
+- [ ] `pnpm test` проходит
+- [ ] Все секции имеют `data-layer` и `data-section`
+- [ ] Нет запрещённых элементов в мастер-файлах
+- [ ] Версии синхронизированы (`src/VERSION` = `package.json`)
+
+---
+
+## Деплой
+
+Проект использует GitHub Pages с автоматическим деплоем:
+
+1. Push в `main` ветку
+2. GitHub Actions собирает и деплоит автоматически
+3. Доступно на: https://vudirvp-sketch.github.io/live-char-guide/
+
+### CI/CD Pipeline
+
+| Workflow | Триггер | Назначение |
+|----------|---------|------------|
+| `build-artifact.yml` | Push to main, PR | Билд, валидация, тесты |
+| `deploy-pages.yml` | Push to main | Деплой на GitHub Pages |
+| `validate.yml` | Push/PR | Скрипты валидации |
+
+---
+
+## Версия
+
+**Текущая версия:** 6.0.0
+
+См. [CHANGELOG.md](./CHANGELOG.md) для истории изменений.
+
+Версия синхронизируется в 4 местах:
+1. `package.json` — поле `version`
+2. `src/VERSION` — plain text файл
+3. `data/character_schema.json` — поле `version`
+4. `src/shell/lazy-loader.js` — комментарий в шапке
+
+---
+
+## Лицензия
+
+MIT License — см. [LICENSE](LICENSE) для деталей.
+
+---
+
+**Автор:** TITAN FUSE Team
