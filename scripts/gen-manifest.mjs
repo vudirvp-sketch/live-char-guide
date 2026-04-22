@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// STANDALONE UTILITY: Not part of the main build pipeline.
+// Use for manual manifest regeneration only.
+// The main build uses build-layers.mjs for manifest generation.
 /**
  * @fileoverview Generate manifests from master HTML files
  * @module scripts/gen-manifest

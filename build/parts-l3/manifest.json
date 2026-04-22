@@ -15,6 +15,9 @@
         "p1_layer_comparison",
         "p1_token_budget",
         "p1_l1_quickstart",
+        "p1_assembly_pipeline",
+        "p1_mini_example",
+        "p1_next_steps",
         "p1_top3_problems",
         "p1_next_layers",
         "p1_conclusion"
@@ -49,19 +52,19 @@
     },
     {
       "file": "part_04.html",
-      "title": "SPINE Framework",
+      "title": "Part 04",
       "anchors": [
         "p4_spine_overview",
         "p4_want",
         "p4_need",
         "p4_flaw",
+        "p4_l3_learning_path",
         "p4_lie",
         "p4_ghost",
         "p4_spine_mapping",
         "p4_ghost_layers",
         "p4_spine_check",
-        "p4_l3_spine_full",
-        "p4_l2_quickstart"
+        "p4_l3_spine_full"
       ]
     },
     {
@@ -76,7 +79,8 @@
         "p5_enneagram_to_spine",
         "p5_enneagram_wings",
         "p5_cross_matrix",
-        "p5_mbti_basics"
+        "p5_mbti_basics",
+        "p5_l2_quickstart"
       ]
     },
     {
@@ -163,10 +167,14 @@
       "title": "Полные примеры карточек",
       "anchors": [
         "p10_elena_l1",
+        "p10_l2_voice_warning",
         "p10_elena_l2",
         "p10_geralt_l2",
         "p10_edward_l2",
         "p10_walter_l2",
+        "p10_omnis_l1_card",
+        "p10_omnis_l2_card",
+        "p10_omnis_l3_card",
         "p10_vysherblenny_l3"
       ]
     },

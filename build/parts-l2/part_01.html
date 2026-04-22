@@ -56,7 +56,7 @@
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-Подробнее о GHOST и других элементах психологии: <a href="#p4_spine_overview">SPINE</a><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE</a></noscript>
+Подробнее об инструментах углубления: <a href="#p1_next_steps" class="layer-remark">Что дальше? →</a>
 </p>
 
 <p>Все 5 правил вытекают из принципа Pattern Matcher:</p>
@@ -101,7 +101,7 @@
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-Подробнее о SPINE и OCEAN: <a href="#p4_spine_overview">SPINE Framework</a><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE Framework</a></noscript>
+Об инструментах L2/L3: <a href="#p1_next_steps" class="layer-remark">Что дальше? →</a>
 </p>
 
 <div class="callout tip">
@@ -134,7 +134,7 @@
 <tr><td>7</td><td>Anti-godmoding</td><td>15–20</td><td>15–20</td><td>Встроено в SP</td></tr>
 <tr><td>8</td><td>Format Lock</td><td>10–15</td><td>10–15</td><td>Фиксация формата</td></tr>
 <tr><td>9</td><td>Резерв</td><td>20–30</td><td>30–50</td><td>Буфер на непредвиденное</td></tr>
-<tr><td><strong>Итого</strong></td><td></td><td><strong>~430–580</strong></td><td><strong>~580–830</strong></td><td></td></tr>
+<tr><td><strong>Итого</strong></td><td></td><td><strong>~430–580</strong></td><td><strong>~580–830</strong></td><td>Типичный результат сборки: ~430–580 (целевой диапазон: 400–800)</td></tr>
 </tbody>
 </table>
 </div>
@@ -228,10 +228,121 @@
 <ul>
 <li>☐ 3-5 якорей с ценой</li>
 <li>☐ 2 примера с &lt;START&gt;</li>
-<li>☐ Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</li>
+<li>☐ Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description <a href="#p1_core_rules">правило голоса</a></li>
 </ul>
 
-<p>Посмотрите полный пример готовой карточки → <a href="#p10_elena_l1">Елена (L1, ~440 токенов)</a></p>
+<p>Посмотрите полный пример готовой карточки → <a href="#p10_elena_l1">Елена (L1, ~440 токенов)</a> | Мини-пример → <a href="#p1_mini_example">Омнис-Зета (L1)</a></p>
+
+
+</section>
+
+<section id="p1_assembly_pipeline" data-layer="l1" data-section="p1_assembly_pipeline" data-toc-nav>
+
+<h3>Конвейер сборки L1‑карточки</h3>
+
+<p>Ниже — пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены. Конвейер иллюстрируется на персонаже Омнис-Зета 7-Квин — тех-жреце Adeptus Mechanicus.</p>
+
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">01</div>
+<div class="inf-step-label">SP</div>
+<div class="inf-step-desc">Запишите базовую роль и 3–5 ключевых правил поведения</div>
+<div class="inf-step-code">Омнис-Зета: «Тех-Жрец Кузницы Меадия-Прайм. Не выражает эмоции в тексте повествования.»</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">02</div>
+<div class="inf-step-label">Description</div>
+<div class="inf-step-desc">Опишите внешность, контекст и мотивацию без голоса персонажа</div>
+<div class="inf-step-code">Омнис-Зета: «Тех-жрец третьего уровня с множественными аугментациями. Левый глаз заменён линзой...»</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">03</div>
+<div class="inf-step-label">Examples</div>
+<div class="inf-step-desc">Напишите 3–5 примеров диалога ГОЛОСОМ персонажа</div>
+<div class="inf-step-code">Омнис-Зета: «01010100 — Механикум свидетельствует. Назовите цель визита.»</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">04</div>
+<div class="inf-step-label">Greeting</div>
+<div class="inf-step-desc">Создайте первое сообщение, которое задаёт тон</div>
+<div class="inf-step-code">Омнис-Зета: ритуальное благословение + Binary Cant</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">05</div>
+<div class="inf-step-label">Проверка</div>
+<div class="inf-step-desc">Убедитесь, что токен-бюджет в пределах 400–800 и голос не протёк в SP/Description</div>
+<div class="inf-step-code">~450–580 токенов, голос только в Examples/Greeting</div>
+</div>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Важно:</strong> Если голос персонажа появляется в SP или Description — карточка не работает корректно на 12B моделях. Голос задаётся ТОЛЬКО через Examples и Greeting. <a href="#p1_core_rules">5 базовых правил</a></p>
+</div>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+Полный фреймворк SPINE для более глубоких персонажей: <a href="#p4_spine_overview">SPINE</a> → <a href="#p4_spine_overview" class="layer-remark">Слой 2</a>
+</p>
+
+
+</section>
+
+<section id="p1_mini_example" data-layer="l1" data-section="p1_mini_example" data-toc-nav>
+
+<h3>Мини‑пример: L1‑карточка</h3>
+
+<p>Ниже — минимальная рабочая L1-карточка. Используйте её как шаблон: каждый блок следует правилам, голос не протекает, якоря имеют цену. Персонаж — Омнис-Зета 7-Квин в базовой версии (только L1).</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Содержание</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>SP</strong></td><td>Тех-Жрец Кузницы Меадия-Прайм. Специализация: ксенотех. Следует ритуалам Механикум. Не выражает эмоции в тексте повествования.</td></tr>
+<tr><td><strong>Description</strong></td><td>Омнис-Зета — тех-жрец третьего уровня с множественными аугментациями. Левый глаз заменён линзой, правая половина лица — металлическая пластина. Пальцы-щупальца заменяют левую руку. Носит ритуальные красные робы Механикум.</td></tr>
+<tr><td><strong>Examples</strong></td><td>3 коротких примера: нейтральный (ритуальное приветствие + Binary Cant), стресс (повреждение механизма — «превышение температурного порога»), доверие (довоенное воспоминание — «файл повреждён»)</td></tr>
+<tr><td><strong>Greeting</strong></td><td>1 приветствие: ритуальное благословение + Binary Cant + сканирование незнакомца</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Каждый блок следует правилам: SP и Description содержат только поведенческие инструкции и описание — без голоса персонажа. Examples и Greeting демонстрируют голос через Binary Cant, flesh-weakness motif и ритмические паузы. Якоря в формате Триггер → Действие → Цена видны в SP как поведенческие правила.</p>
+
+<div class="callout tip">
+<p><strong>💡 Совет:</strong> Это минимальная карточка. Для глубины персонажа добавьте <a href="#p4_spine_overview">SPINE-якоря</a> на Слое 2.</p>
+</div>
+
+<p class="layer-remark">
+<span class="remark-icon">→</span>
+Полная L2-карточка с SPINE-якорями: <a href="#p10_omnis_l2_card" class="layer-remark">Слой 2</a>
+</p>
+
+
+</section>
+
+<section id="p1_next_steps" data-layer="l1" data-section="p1_next_steps" data-toc-nav>
+
+<h3>Что дальше? Инструменты для углубления</h3>
+
+<p>Вы освоили минимальный слой L1 — этого достаточно для создания рабочей карточки. Если вы хотите углубить персонажа, три инструмента открывают новые возможности на более глубоких слоях.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Инструмент</th><th>Что даёт</th><th>Доступен на</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>SPINE</strong> (WANT/NEED/FLAW)</td><td>Внутренняя логика персонажа — почему он действует именно так <a href="#p4_spine_overview">→ SPINE</a></td><td><a href="#p4_spine_overview" class="layer-remark">Слой 2</a></td></tr>
+<tr><td><strong>OCEAN</strong> / Enneagram</td><td>Психологический профиль — экстремальные черты, которые делают персонажа уникальным <a href="#p5_ocean_basics">→ OCEAN</a></td><td><a href="#p5_ocean_basics" class="layer-remark">Слой 2</a></td></tr>
+<tr><td><strong>GHOST</strong> / LIE / CoT</td><td>Скрытые противоречия и цепочка рассуждений — персонаж, который живёт в конфликте с собой <span class="term-marker" data-tooltip-ref="#p4_l3_spine_full" data-target-layer="3" data-tooltip-summary="Скрытый страх, питающий WANT и создающий внутреннее напряжение">→ GHOST</span></td><td><a data-layer-switch="3#p4_l3_spine_full" class="layer-remark">Слой 3</a></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<p><strong>💡 Совет:</strong> Все инструменты опциональны. L1-карточка уже работает — углубление добавляет глубину, но не является обязательным.</p>
+</div>
 
 
 </section>
@@ -264,7 +375,7 @@
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально. Стилистика реплик не совпадает с Description.</p>
-<p><strong>Причина:</strong> Голос помещён в Description вместо Examples. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description (0% влияние на 12B моделях).</p>
+<p><strong>Причина:</strong> Голос помещён в Description вместо Examples. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description (<a href="#p1_core_rules">правило голоса</a>).</p>
 <p><strong>Исправление:</strong></p>
 <ol>
 <li>Удалите все стилистические инструкции из Description («говорит коротко», «использует сарказм»)</li>
@@ -313,7 +424,7 @@
 
 <h4>Глубокий слой (L2)</h4>
 
-<p>SPINE — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности с интерактивным пентагоном. Enneagram — модель из 9 типов для выведения SPINE из типа личности. System Prompt получает CORE DIRECTIVES — единую систему из 5 директив. Также: Author's Note, Lorebook, Format Lock, анти-паттерны AP-1–AP-7 + AP-15 + AP-16.</p>
+<p>SPINE — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. CORE DIRECTIVES — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
 
 <ul>
 <li>Критерии перехода: карточка стабильна на L1, 2 Examples дают узнаваемый голос, 3–5 якорей покрывают основные ситуации</li>
@@ -323,12 +434,12 @@
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-SPINE, FLAW-linked якоря, OCEAN/Enneagram: <a href="#p4_spine_overview">SPINE Framework</a><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE Framework</a></noscript>
+Подробнее: <a href="#p1_next_steps" class="layer-remark">Что дальше? Инструменты для углубления →</a>
 </p>
 
 <h4>Экспертный слой (L3)</h4>
 
-<p>Если вы уже работаете с SPINE и хотите глубже — Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), которые объясняют, почему персонаж ведёт себя именно так. Chain of Thought (CoT) — техника внутреннего процесса персонажа. XML-структура Description и API-блоки для Claude/GPT. Расширенные анти-паттерны AP-8–AP-14 и 12B-специфичная диагностика.</p>
+<p>Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), Chain of Thought (CoT), XML-структуру Description и расширенные анти-паттерны.</p>
 
 <ul>
 <li>Критерии перехода: SPINE консистентен, 3 Examples показывают разные эмоции, FLAW-linked якоря работают, используете 32B+ или API модель</li>
@@ -338,7 +449,7 @@ SPINE, FLAW-linked якоря, OCEAN/Enneagram: <a href="#p4_spine_overview">SPI
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
-LIE, GHOST, CoT, XML/API: <span class="term-marker" data-tooltip-ref="#p4_l3_spine_full" data-target-layer="3" data-tooltip-summary="Полный SPINE из 5 элементов (WANT, NEED, FLAW, LIE, GHOST) для максимальной проработки персонажа. Доступен на Экспертном слое.">Полный SPINE из 5 элементов</span><noscript><a href="#p4_l3_spine_full" class="term-marker-noscript-link">Полный SPINE из 5 элементов</a></noscript>
+Подробнее: <a href="#p1_next_steps" class="layer-remark">Что дальше? Инструменты для углубления →</a>
 </p>
 
 </section>

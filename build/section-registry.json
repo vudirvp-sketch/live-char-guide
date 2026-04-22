@@ -24,6 +24,21 @@
     "part": 1,
     "topic": ""
   },
+  "p1_assembly_pipeline": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_mini_example": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_next_steps": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
   "p1_top3_problems": {
     "layer": "l1",
     "part": 1,
@@ -117,7 +132,7 @@
   "p4_spine_overview": {
     "layer": "l2",
     "part": 4,
-    "topic": "SPINE Framework"
+    "topic": ""
   },
   "p4_want": {
     "layer": "l2",
@@ -131,6 +146,11 @@
   },
   "p4_flaw": {
     "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
+  "p4_l3_learning_path": {
+    "layer": "l3",
     "part": 4,
     "topic": ""
   },
@@ -161,11 +181,6 @@
   },
   "p4_l3_spine_full": {
     "layer": "l3",
-    "part": 4,
-    "topic": ""
-  },
-  "p4_l2_quickstart": {
-    "layer": "l2",
     "part": 4,
     "topic": ""
   },
@@ -210,6 +225,11 @@
     "topic": ""
   },
   "p5_mbti_basics": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_l2_quickstart": {
     "layer": "l2",
     "part": 5,
     "topic": ""
@@ -494,6 +514,11 @@
     "part": 10,
     "topic": "Полные примеры карточек"
   },
+  "p10_l2_voice_warning": {
+    "layer": "l2",
+    "part": 10,
+    "topic": ""
+  },
   "p10_elena_l2": {
     "layer": "l2",
     "part": 10,
@@ -511,6 +536,21 @@
   },
   "p10_walter_l2": {
     "layer": "l2",
+    "part": 10,
+    "topic": ""
+  },
+  "p10_omnis_l1_card": {
+    "layer": "l1",
+    "part": 10,
+    "topic": ""
+  },
+  "p10_omnis_l2_card": {
+    "layer": "l2",
+    "part": 10,
+    "topic": ""
+  },
+  "p10_omnis_l3_card": {
+    "layer": "l3",
     "part": 10,
     "topic": ""
   },

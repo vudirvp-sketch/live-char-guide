@@ -22,7 +22,7 @@
 <p><strong>Причина:</strong> Избыточное описание, дублирование, голос в Description</p>
 <p><strong>Решение:</strong></p>
 <ul>
-<li>Вынесите голос в Examples</li>
+<li><span class="term-marker" data-tooltip-ref="#p3_voice_isolation" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">Вынесите голос в Examples</span><noscript><a href="#p3_voice_isolation" class="term-marker-noscript-link">Вынесите голос в Examples</a></noscript></li>
 <li>Удалите дубликаты</li>
 <li>Оставьте только факты и якоря</li>
 </ul>
@@ -37,7 +37,7 @@
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Якорь без физической цены</p>
 <p><strong>Причина:</strong> Неверное понимание формата якоря</p>
-<p><strong>Решение:</strong> Каждый важный якорь = Триггер → Действие → <strong>Цена</strong></p>
+<p><strong>Решение:</strong> Каждый важный якорь = <span class="term-marker" data-tooltip-ref="#p2_anchor_rules" data-target-layer="1" data-tooltip-summary="Формат якоря: Триггер → Действие → Цена, цена обязательна">Триггер → Действие → <strong>Цена</strong></span><noscript><a href="#p2_anchor_rules" class="term-marker-noscript-link">Триггер → Действие → Цена</a></noscript></p>
 <div class="problem-block">
 <p><strong>❌ Неправильно:</strong> "Когда стресс → ходит из угла в угол"</p>
 </div>
@@ -62,7 +62,7 @@
 <h3>AP-4: GHOST в System Prompt</h3>
 <p><strong>Симптом:</strong> Психология (SPINE, GHOST) в SP</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
-<p><strong>Решение:</strong> SPINE/GHOST = только в Description. SP = только инструкции и запреты. <span class="layer-remark">GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP.</span></p>
+<p><strong>Решение:</strong> SPINE/<span class="term-marker" data-tooltip-ref="#p4_ghost" data-target-layer="3" data-tooltip-summary="Событие из прошлого, сформировавшее FLAW и LIE. Доступно на Экспертном слое">GHOST</span><noscript><a href="#p4_ghost" class="term-marker-noscript-link">GHOST</a></noscript> = только в Description. SP = только инструкции и запреты. <span class="layer-remark">GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP.</span></p>
 <div class="callout warn">
 <p><strong>⚠️ Предупреждение:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
 </div>
@@ -252,7 +252,7 @@ WANT: {{want}}
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict, L3)</h3>
 <p><strong>Симптом:</strong> Lorebook записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
-<p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description</p>
+<p><strong>Решение:</strong> Проверяйте консистентность всех <span class="term-marker" data-tooltip-ref="#p7_lorebook" data-target-layer="2" data-tooltip-summary="База знаний с триггерами для активации контента по ключевым словам">Lorebook</span><noscript><a href="#p7_lorebook" class="term-marker-noscript-link">Lorebook</a></noscript> записей с Description</p>
 <p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>
 </div>
 </section>
@@ -262,7 +262,7 @@ WANT: {{want}}
 <h3>AP-14: Нарушение контекстного окна (Context Window Violation, L3)</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> L3 карточка для 4K модели</p>
-<p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом</p>
+<p><strong>Решение:</strong> Используйте <span class="term-marker" data-tooltip-ref="#p7_4k_fallback" data-target-layer="3" data-tooltip-summary="Протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов">4K-Fallback Protocol</span><noscript><a href="#p7_4k_fallback" class="term-marker-noscript-link">4K-Fallback Protocol</a></noscript> или выберите модель с большим контекстом</p>
 <p class="layer-remark"><span class="remark-icon">→</span> Пример правильной реализации: <a href="#p10_vysherblenny_l3">Выщебленный L3</a> — OOC Protection + Immersion Boundary предотвращают утечку.</p>
 </div>
 </section>
@@ -319,7 +319,7 @@ WANT: {{want}}
 </div>
 <div class="solution-block">
 <h4>✅ Решение</h4>
-<p>Разбить на атомарные якоря: один якорь = одна связь T→A→P. Принцип атомарности.</p>
+<p>Разбить на атомарные <span class="term-marker" data-tooltip-ref="#p2_anchor_rules" data-target-layer="1" data-tooltip-summary="Формат якоря: Триггер → Действие → Цена, цена обязательна">якоря</span><noscript><a href="#p2_anchor_rules" class="term-marker-noscript-link">якоря</a></noscript>: один якорь = одна связь T→A→P. Принцип атомарности.</p>
 </div>
 <div class="example-block">
 <h4>📝 Пример</h4>
