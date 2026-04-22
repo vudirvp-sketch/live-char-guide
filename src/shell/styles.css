@@ -635,6 +635,12 @@ body[data-layer="3"] .layer-indicator { border-color: var(--layer-3-clr); }
   color: var(--text);
 }
 
+/* === UTILITY: HIDDEN CLASS === */
+/* Generic hidden class — used by showFABs(), showLayerIndicator(), etc. */
+.hidden {
+  display: none !important;
+}
+
 /* Вспомогательный класс для скрытия заголовка */
 .visually-hidden {
   position: absolute;

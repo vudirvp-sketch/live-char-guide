@@ -843,6 +843,16 @@
     if (fabs) fabs.classList.remove('hidden');
   }
 
+  function showLayerIndicator(layer) {
+    const indicator = $('.layer-indicator');
+    if (!indicator) return;
+    indicator.classList.remove('hidden');
+    const numEl = $('#current-layer-number');
+    const labelEl = $('#current-layer-label');
+    if (numEl) numEl.textContent = layer;
+    if (labelEl) labelEl.textContent = CONFIG.LAYER_LABELS[layer] || '';
+  }
+
   // ============================================================================
   // LAYER SWITCHING
   // ============================================================================
@@ -872,6 +882,9 @@
     
     await loadLayerContent(layer);
     
+    // Update layer indicator with new layer
+    showLayerIndicator(layer);
+    
     // IMP-47: Show toast if widgets disappeared on layer downgrade
     checkWidgetDisappearance(previousLayer, layer);
     
@@ -896,6 +909,7 @@
     hideModal();
     showSwitcher();
     showFABs();
+    showLayerIndicator(layer);
     await switchLayer(layer);
   }
 
@@ -2533,6 +2547,7 @@
       hideModal();
       showSwitcher();
       showFABs();
+      showLayerIndicator(layer);
       currentLayer = layer;
       await loadLayerContent(layer);
       updateSwitcherButtons(layer);
