@@ -844,9 +844,6 @@
   }
 
   function showLayerIndicator(layer) {
-    const indicator = $('.layer-indicator');
-    if (!indicator) return;
-    indicator.classList.remove('hidden');
     const numEl = $('#current-layer-number');
     const labelEl = $('#current-layer-label');
     if (numEl) numEl.textContent = layer;

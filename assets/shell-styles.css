@@ -593,39 +593,37 @@ tbody tr:hover { background: var(--accent-soft); }
   font-size: 1.1rem;
 }
 
-/* ===== ИНДИКАТОР ТЕКУЩЕГО СЛОЯ ===== */
+/* ===== ИНДИКАТОР ТЕКУЩЕГО СЛОЯ (внутри layer-switcher) ===== */
 .layer-indicator {
-  position: fixed;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.4em 0.8em;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 0.85rem;
-  color: var(--text);
-  z-index: 999;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  gap: 0.4em;
+  padding: 0.3em 0.7em;
+  border-left: 1px solid var(--border);
+  margin-left: 0.3em;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
-body[data-layer="1"] .layer-indicator { border-color: var(--layer-1-clr); }
-body[data-layer="2"] .layer-indicator { border-color: var(--layer-2-clr); }
-body[data-layer="3"] .layer-indicator { border-color: var(--layer-3-clr); }
+.layer-indicator-label {
+  white-space: nowrap;
+}
+
+body[data-layer="1"] .layer-indicator { border-left-color: var(--layer-1-clr); color: var(--layer-1-clr); }
+body[data-layer="2"] .layer-indicator { border-left-color: var(--layer-2-clr); color: var(--layer-2-clr); }
+body[data-layer="3"] .layer-indicator { border-left-color: var(--layer-3-clr); color: var(--layer-3-clr); }
 
 .layer-indicator-tooltip {
   background: transparent;
   border: 1px solid var(--border);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  font-size: 0.75rem;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
   cursor: help;
   color: var(--text-muted);
   padding: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -638,6 +636,11 @@ body[data-layer="3"] .layer-indicator { border-color: var(--layer-3-clr); }
 /* === UTILITY: HIDDEN CLASS === */
 /* Generic hidden class — used by showFABs(), showLayerIndicator(), etc. */
 .hidden {
+  display: none !important;
+}
+
+/* Hide no-JS fallback content when JS is active (class added by inline <script>) */
+.js .no-js-only {
   display: none !important;
 }
 
@@ -1138,8 +1141,8 @@ details.interactive summary::marker { display: none; content: ''; }
   .fab-group { right: 1rem; bottom: 1rem; }
   
   .layer-indicator {
-    font-size: 0.75rem;
-    padding: 0.3em 0.6em;
+    font-size: 0.7rem;
+    padding: 0.2em 0.5em;
   }
 }
 
@@ -1155,10 +1158,11 @@ details.interactive summary::marker { display: none; content: ''; }
   .switch-label { display: none; }
   
   .layer-indicator {
-    top: auto;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    left: auto;
+    font-size: 0.7rem;
+  }
+  
+  .layer-indicator-label {
+    display: none;
   }
 }
 

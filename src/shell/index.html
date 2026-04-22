@@ -18,6 +18,7 @@
   <link rel="apple-touch-icon" href="assets/favicon.svg">
   <title>Live Character for LLM — Guide</title>
   <link rel="stylesheet" href="assets/shell-styles.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-layer="">
   <!-- Loading overlay -->
@@ -84,7 +85,7 @@
   <!-- Main content area (hidden until layer selected) -->
   <main id="content" class="content-hidden"></main>
 
-  <!-- Layer switcher (visible after layer selected) -->
+  <!-- Layer switcher with inline indicator (visible after layer selected) -->
   <div id="layer-switcher" class="layer-switcher hidden">
     <button class="layer-switch-btn" data-layer="1" title="Layer 1: Минимальный">
       <span class="switch-icon">🟢</span>
@@ -98,12 +99,10 @@
       <span class="switch-icon">🟣</span>
       <span class="switch-label">L3</span>
     </button>
-  </div>
-
-  <!-- Layer indicator (fixed position) -->
-  <div class="layer-indicator hidden" aria-live="polite" role="status">
-    Layer <span id="current-layer-number">2</span>: <span id="current-layer-label">Глубокий</span>
-    <button class="layer-indicator-tooltip" aria-label="What does this level add?" type="button">?</button>
+    <span class="layer-indicator" aria-live="polite" role="status">
+      <span class="layer-indicator-label">Layer <span id="current-layer-number">2</span>: <span id="current-layer-label">Глубокий</span></span>
+      <button class="layer-indicator-tooltip" aria-label="What does this level add?" type="button">?</button>
+    </span>
   </div>
 
   <!-- GLOSSARY SIDE TAB -->
