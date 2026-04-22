@@ -2,106 +2,489 @@
 <!-- Layer: L2 (Глубокий) -->
 <!-- Part: 07 -->
 
-<section id="p7_lorebook" data-layer="l2" data-section="p7_lorebook">
-...
+<section id="p7_system_prompt" data-layer="l2" data-section="p7_system_prompt" data-toc-nav>
+
+<h2>Техническая реализация</h2>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Part 06 (Chain of Thought) доступен на Экспертном слое → <a data-layer-switch="3#p6_cot_basics" class="layer-remark">Part 6: CoT → Экспертный слой</a></p>
+
+<p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. На Глубоком слое SP включает CORE DIRECTIVES — единую систему из 5 директив, связывающую все поведенческие правила в одну логику.</p>
+
+<h3>Обязательные элементы SP</h3>
+<ul>
+<li><strong>Identity:</strong> "You are {{char}}" — кто персонаж</li>
+<li><strong>Anti-godmoding:</strong> две строки — запрет + позитивная формулировка</li>
+<li><strong>CORE DIRECTIVES:</strong> 5 директив (L2) или 7 директив (L3) — <a href="#p7_core_directives">подробно ниже</a></li>
+<li><strong>Tone Frame:</strong> тональность + ограничение сеттинга — <a href="#p7_tone_frame">Tone Frame</a></li>
+</ul>
+
+<h3>Шаблон SP (L1)</h3>
+<pre><code>You are {{char}}. Never speak or act for {{user}}.
+
+Rules:
+- Stay in character at all times
+- Use the dialogue format from examples
+- Never break the fourth wall</code></pre>
+
+<h3>Шаблон SP (L2)</h3>
+<pre><code>[System Prompt]
+You are {{char}}. {{brief_identity}}
+
+Never speak, act, or decide for {{user}}.
+{{user}}'s inner state is inaccessible; respond only to observable actions and words.
+
+&lt;CORE_DIRECTIVES&gt;
+1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
+2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
+3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
+4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
+5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
+&lt;/CORE_DIRECTIVES&gt;
+
+{{TONE_FRAME}}
+
+Format Lock:
+- Dialogue: *action* "speech"
+- Narrative tense: [past/present]
+- Never change this format</code></pre>
+
+<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. На 12B позитивная инструкция повышает следование директивам на ~15–20%. Укажите время повествования (прошедшее/настоящее) в Format Lock — это фиксирует нарративную перспективу для модели.</p>
+
+<div class="callout important">
+<p><strong>📌 Правило унификации SP-шаблона:</strong> Все SP-шаблоны в гайде следуют единой структуре:</p>
+<pre><code>[System Prompt]
+You are {{char}}. {{brief_identity}}
+
+Never speak, act, or decide for {{user}}.
+{{user}}'s inner state is inaccessible; respond only to observable actions and words.
+
+&lt;CORE_DIRECTIVES&gt;
+1–5 (L2) or 1–7 (L3)
+&lt;/CORE_DIRECTIVES&gt;
+
+{{TONE_FRAME}}     ← L2+ only
+{{FORMAT_LOCK}}    ← L2+ only
+{{OOC_PROTECTION}} ← L3 only</code></pre>
+</div>
+
+<p class="layer-remark"><span class="remark-icon">→</span> L3 SP-шаблон с 7 директивами + Tone Frame + OOC Protection: <a data-layer-switch="3#p7_sp_template_l3" class="layer-remark">Шаблон SP Экспертного слоя</a></p>
+
+
 </section>
 
-<section id="p7_lorebook" data-layer="l2" data-section="p7_lorebook">
+<section id="p7_core_directives" data-layer="l2" data-section="p7_core_directives" data-toc-nav>
 
-<h3 id="lorebook">📚 Лорбук</h3>
-<span class="tag opt" style="margin-left:0.5em">Опционально</span>
+<h3>CORE DIRECTIVES — единая система директив</h3>
 
-<p><strong>Лорбук</strong> — динамическая база знаний, которая фильтруется и вставляется в промпт перед каждым запросом к ИИ. Система активирует только релевантные записи на основе триггеров, вероятности и состояния чата — не скармливает весь лор целиком, экономя токены и повышая контекстуальную точность.</p>
+<p>CORE DIRECTIVES — единая система директив на английском языке, размещаемая в System Prompt. Для L2 (Глубокий слой) — директивы 1–5. Для L3 (Экспертный слой) — все 7. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
 
-<div class="callout warn" style="margin:1em 0">
-<strong>⚠️ Совместимость EVENT: по фронтендам:</strong>
-<ul style="margin:0.5em 0 0 0">
-  <li><strong>Soul of Waifu:</strong> есть аналоги и даже лучше</li>
-  <li><strong>SillyTavern:</strong> Полная поддержка EVENT:, SECONDARY_KEYS, selective activation</li>
-  <li><strong>KoboldAI:</strong> Альтернатива — использовать conditionals в entry content, KEYWORD-триггеры без EVENT:</li>
-  <li><strong>Oobabooga/text-gen-webui:</strong> Лорбук не поддерживается нативно. Используйте World Info (аналог) или встройте триггеры прямо в Description/AN</li>
-  <li><strong>Faraday.dev / Agnai:</strong> Поддержка World Info/Лорбук ограниченная. Проверяйте документацию конкретного фронтенда</li>
+<div class="callout important">
+<p><strong>📌 Правило языка директив:</strong> Директивы SP и CORE DIRECTIVES — на английском. RP-контент (Description, Examples, Greeting) — на языке карточки. На 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам), потому что обучающая выборка содержит больше английских паттернов инструкций.</p>
+</div>
+
+<p>Для L2 (Глубокий слой) — директивы 1–5:</p>
+<pre><code>&lt;CORE_DIRECTIVES&gt;
+1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
+2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
+3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
+4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
+5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
+&lt;/CORE_DIRECTIVES&gt;</code></pre>
+
+<p>Каждая директива подробно:</p>
+
+<h4>1. SHOW NEVER TELL</h4>
+<p>Мета-принцип: демонстрируйте всё через наблюдаемое поведение. Запрет на мета-комментарии, эмоциональные декларации, информационные свалки. Из него вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
+
+<h4>2. EMBODIMENT FIRST</h4>
+<p>State → Body → Sensor → Speech. Always. → Полный протокол → Part 2: <a href="#p2_embodiment" class="layer-remark">Телесность</a></p>
+
+<h4>3. SPATIAL & ANATOMICAL LOCK</h4>
+<p>Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации. Никаких анатомических противоречий. Если {{user}} через комнату — вы не можете коснуться его без пересечения пространства.</p>
+<div class="antipattern-card">
+<div class="problem-block">
+<h4>❌ Нарушение SPATIAL LOCK</h4>
+<p><code>*Она сидела у окна, глядя на дождь.* «Иди сюда.» *Она обняла его.*</code></p>
+</div>
+<div class="solution-block">
+<h4>✅ SPATIAL LOCK соблюдён</h4>
+<p><code>*Она сидела у окна, глядя на дождь.* «Иди сюда.» *Она похлопала по месту рядом на подоконнике, дожидаясь, пока он пересечёт комнату.*</code></p>
+</div>
+</div>
+
+<h4>4. ENVIRONMENTAL REACTIVITY</h4>
+<p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → Part 2: <a href="#p2_env_reactivity" class="layer-remark">Реактивность среды</a></p>
+
+<h4>5. INFLUENCE BOUNDARY</h4>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напяган. Подробно — в Part 2: <a href="#p2_anchor_rules">p2_anchor_rules</a></p>
+
+<div class="callout tip">
+<p><strong>💡 Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
+</div>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — Экспертный слой (L3): расширенные директивы, OOC Protection, Immersion Boundary, XML, API-блоки.</p>
+
+</section>
+
+<section id="p7_tone_frame" data-layer="l2" data-section="p7_tone_frame" data-toc-nav>
+
+<h3>Tone Frame (Тональный фрейм)</h3>
+
+<p>Tone Frame — элемент SP (~25-30 токенов) с двойной функцией: задаёт тональность И защищает от контентного дрейфа. Обязателен для нетривиальных сеттингов.</p>
+<pre><code>Tone: [тональность]. [ограничение].</code></pre>
+
+<h4>Примеры Tone Frame</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Сеттинг</th><th>Tone Frame</th></tr></thead>
+<tbody>
+<tr><td>Мрачный</td><td>Tone: oppressive, claustrophobic. No levity. No hope without cost.</td></tr>
+<tr><td>Фэнтези</td><td>Tone: mythic, weighted. Every word echoes. The old ways watch.</td></tr>
+<tr><td>Современный реализм</td><td>Tone: grounded, understated. No melodrama. Silence speaks.</td></tr>
+<tr><td>Абсурд</td><td>Tone: erratic, unpredictable. Logic is optional. Chaos is honest.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout tip">
+<p><strong>💡 Двойная функция:</strong> (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
+</div>
+
+
+</section>
+
+<section id="p7_format_lock" data-layer="l2" data-section="p7_format_lock" data-toc-nav>
+
+<h3>Format Lock</h3>
+
+<p><strong>Format Lock</strong> — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Модель — Pattern Matcher: два паттерна разметки в одной карточке = произвольное переключение между ними.</p>
+
+<h4>Три системы разметки</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Система</th><th>Формат действия</th><th>Формат речи</th><th>Пример</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Имя: <code>*действие*</code></td><td>«речь»</td><td>Елена: <code>*отводит взгляд*</code> «Не сейчас.»</td></tr>
+<tr><td>B</td><td>— <code>*действие*</code></td><td>— речь</td><td>— <code>*отводит взгляд*</code> — Не сейчас.</td></tr>
+<tr><td>C</td><td>[действие]</td><td>речь</td><td>[отводит взгляд] Не сейчас.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Почему нельзя смешивать:</strong> Модель — Pattern Matcher. Два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Правило разрешения конфликта:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
+</div>
+
+<h4>Format Lock инструкция</h4>
+<pre><code>Format Lock:
+- Dialogue: *action* "speech"
+- Thoughts: *thinks: {{thought}}*
+- Never change this format</code></pre>
+
+
+</section>
+
+<section id="p7_authors_note" data-layer="l2" data-section="p7_authors_note" data-toc-nav>
+
+<h3>Author's Note (AN)</h3>
+
+<p><strong>Author's Note</strong> — динамический контекст, вставляемый перед последними сообщениями. Задаёт сцену, настроение, мотивацию.</p>
+
+<h4>Параметры AN</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>Рекомендация</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Позиция</strong></td><td>3-5 сообщений от конца</td></tr>
+<tr><td><strong>Длина</strong></td><td>100-200 токенов</td></tr>
+<tr><td><strong>Частота</strong></td><td>Каждые 5-10 сообщений</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Шаблон Author's Note (3 секции — L2)</h4>
+<pre><code>[State: {current emotional/physical state}]
+[WANT→NEED: {current position on axis}]
+[Blind Spot: {what character cannot see about themselves}]</code></pre>
+
+<p class="layer-remark"><span class="remark-icon">→</span> L3: добавляется секция GHOST-activation → <a data-layer-switch="3#p7_authors_note_l3" class="layer-remark">AN для Экспертного слоя</a></p>
+
+<h4>Пример AN</h4>
+<pre><code>[Author's Note:
+State: Усталость + осторожное любопытство
+WANT→NEED: WANT доминирует, NEED подавлен
+Blind Spot: Не видит, что её сарказм отталкивает тех, кто искренен
+Сцена — ночь, дождь. Елена уставшая после долгого дня.]</code></pre>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Комбинирование AN с Lorebook-механиками (каскад по диапазону, sticky-состояния) → <a href="#p7_lorebook_mechanics">Механики Lorebook</a></p>
+
+
+</section>
+
+<section id="p7_structured_inject" data-layer="l2" data-section="p7_structured_inject">
+
+<h3>Structured Inject</h3>
+
+<p><strong>Structured Inject</strong> — техника использования XML-тегов в AN для динамической мотивации.</p>
+
+<h4>Правила Structured Inject</h4>
+<ul>
+<li>Не дублируйте SP — добавляйте контекст</li>
+<li>Не конфликтуйте с Description</li>
+<li>Задавайте мотивацию, не инструкции</li>
 </ul>
-</div>
 
-<h4>Параметры записи (компактно)</h4>
+<h4>Пример Structured Inject</h4>
+<pre><code>[Author's Note:
+&lt;scene_context&gt;Ночь, библиотека закрыта, только они двое&lt;/scene_context&gt;
+&lt;emotional_state&gt;Усталость + осторожное любопытство&lt;/emotional_state&gt;
+&lt;hidden_agenda&gt;Елена хочет узнать, зачем {{user}} пришёл&lt;/hidden_agenda&gt;
+]</code></pre>
+
+
+</section>
+
+<section id="p7_sampling_params" data-layer="l2" data-section="p7_sampling_params">
+
+<h3>Параметры генерации (Sampling)</h3>
+
+<p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — голос персонажа требует повторяемых паттернов.</p>
+
+<h4>Базовые параметры</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Параметр</th><th>Суть</th><th>Пример</th></tr>
+<tr><th>Параметр</th><th>L1 (12B)</th><th>L2 (12B-32B)</th><th>L3 (32B+ / API)</th><th>Примечание</th></tr>
 </thead>
 <tbody>
-<tr><td><code>trigger_type</code></td><td><code>keyword</code> — по словам, <code>range</code> — по номеру сообщения</td><td><code>keyword</code></td></tr>
-<tr><td><code>key</code> / <code>exclude_key</code></td><td>Триггеры и антитриггеры</td><td><code>["огонь", "пожар"]</code></td></tr>
-<tr><td><code>depth</code></td><td>Сколько последних сообщений сканировать</td><td><code>3</code></td></tr>
-<tr><td><code>probability</code></td><td>Шанс срабатывания, %</td><td><code>90%</code></td></tr>
-<tr><td><code>delay</code></td><td>Минимальный номер сообщения до первого срабатывания</td><td><code>5</code></td></tr>
-<tr><td><code>cooldown</code></td><td>Пауза между повторными активациями (в сообщениях)</td><td><code>7</code></td></tr>
-<tr><td><code>sticky</code></td><td>Сколько сообщений запись держится активной после срабатывания</td><td><code>3</code></td></tr>
-<tr><td><code>content</code></td><td>Текст для модели. Поддерживает <code>{{user}}</code>, <code>{{char}}</code></td><td>Текст факта</td></tr>
+<tr><td><strong>Temperature</strong></td><td>0.6-0.8</td><td>0.7-0.9</td><td>0.7-1.0</td><td>Ниже = предсказуемее, выше = разнообразнее</td></tr>
+<tr><td><strong>Top P</strong></td><td>0.9</td><td>0.9-0.95</td><td>0.9-0.95</td><td>Nucleus sampling, обычно не трогать</td></tr>
+<tr><td><strong>Min P</strong></td><td>0.05</td><td>0.05-0.1</td><td>0.05-0.1</td><td>Отсечение маловероятных токенов</td></tr>
+<tr><td><strong>RepPen</strong></td><td>1.0-1.05</td><td>1.05-1.10</td><td>1.05-1.10</td><td>Никогда &gt; 1.10 — убьёт голос (AP-5)</td></tr>
+<tr><td><strong>Top K</strong></td><td>40</td><td>40-80</td><td>40-100</td><td>Ограничение выбора токенов</td></tr>
+<tr><td><strong>Presence Penalty</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td>Обязательно 0 — иначе голос дрейфует (AP-7)</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><code>keyword</code> → вставляется в системный промпт (фоновый лор, факты, реакции).<br>
-<code>range</code> → вставляется в реплику пользователя как <code>EVENT: ...</code> — требует немедленной реакции.</p>
-
-<div class="callout tip" style="margin:1em 0">
-<strong>💡 EVENT-формат:</strong> При типе <code>range</code> content оборачивается в <code>EVENT: {текст события} (Требуется реакция на это событие в ответе)</code>. Это сигнал модели: данное событие должно получить непосредственный отклик в текущей реплике.
+<div class="callout important">
+<p><strong>📌 Важно:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
 </div>
 
-<!-- Практическая таблица в спойлере -->
-<details class="interactive" style="margin:1em 0">
-<summary><strong>📋 Практика — быстрая таблица по задачам</strong></summary>
-<div style="padding:0 1em">
+<div class="callout warn">
+<p><strong>⚠️ Ollama и LM Studio:</strong> Эти интерфейсы имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
+</div>
+
+<h4>Модель-специфичные рекомендации (L3)</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Задача</th><th>Тип</th><th>Ключевые параметры</th></tr>
+<tr><th>Модель</th><th>Temperature</th><th>RepPen</th><th>Особенности</th></tr>
 </thead>
 <tbody>
-<tr><td>Лор мира / NPC</td><td>keyword</td><td><code>sticky: 0</code> — подтягивается только при упоминании</td></tr>
-<tr><td>Временное состояние (ранен, держит предмет)</td><td>keyword</td><td><code>sticky: 3–5</code> — не теряет контекст несколько реплик</td></tr>
-<tr><td>Сюжетный поворот</td><td>range</td><td><code>min_msg / max_msg</code> — срабатывает в нужный момент</td></tr>
-<tr><td>Пасхалка / точечное событие</td><td>range</td><td><code>min_msg == max_msg</code> — ровно на одном сообщении</td></tr>
-<tr><td>Редкий глюк / экзистенциальный момент</td><td>keyword</td><td><code>probability: 10–20%, cooldown: 20</code> — не спамит</td></tr>
-<tr><td>Блокировка нежелательного лора</td><td>keyword</td><td><code>exclude_key: ["стоп", "отмена"]</code></td></tr>
+<tr><td><strong>12B (4K)</strong></td><td>0.6-0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback</td></tr>
+<tr><td><strong>32B+</strong></td><td>0.7-0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
+<tr><td><strong>Claude API</strong></td><td>0.8-1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt;</td></tr>
+<tr><td><strong>GPT API</strong></td><td>0.8-1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций</td></tr>
 </tbody>
 </table>
 </div>
-</div>
-</details>
 
-<!-- Пример базовой записи -->
-<details class="interactive" style="margin:1em 0">
-<summary>📝 Пример: запись Lorebook для GHOST-факта Елены</summary>
-<div class="table-wrap" style="padding:0 1em">
+
+</section>
+
+<section id="p7_lorebook" data-layer="l2" data-section="p7_lorebook" data-toc-nav>
+
+<h3>Lorebook</h3>
+
+<p><strong>Lorebook</strong> — база знаний с триггерами. Используется для GHOST-связанных фактов.</p>
+
+<h4>Структура записи Lorebook</h4>
+<div class="table-wrap">
 <table>
-<thead><tr><th>Поле</th><th>Значение</th></tr></thead>
+<thead>
+<tr><th>Поле</th><th>Описание</th><th>Пример</th></tr>
+</thead>
 <tbody>
-<tr><td>trigger_type</td><td>keyword</td></tr>
-<tr><td>key</td><td>пожар, огонь, горел, сгорел</td></tr>
-<tr><td>exclude_key</td><td>костёр, свеча, зажигалка</td></tr>
-<tr><td>content</td><td>Елена помнит запах горящего дерева. В семь лет она стояла во дворе и смотрела, как пламя охватывает крышу. Пожарные приехали слишком поздно.</td></tr>
-<tr><td>position</td><td>Author's Note (char)</td></tr>
-<tr><td>depth</td><td>3</td></tr>
-<tr><td>probability</td><td>90%</td></tr>
-<tr><td>cooldown</td><td>7</td></tr>
-<tr><td>sticky</td><td>2</td></tr>
+<tr><td><strong>Key</strong></td><td>Триггер-слово</td><td>"предательство", "редактор"</td></tr>
+<tr><td><strong>Content</strong></td><td>Факт для вставки</td><td>"История о коррупции была украдена редактором..."</td></tr>
+<tr><td><strong>Position</strong></td><td>Куда вставлять</td><td>Author's Note (char)</td></tr>
+<tr><td><strong>Depth</strong></td><td>Как давно искать</td><td>5 сообщений</td></tr>
 </tbody>
 </table>
 </div>
-</details>
+
+<h4>Рекомендованные параметры Lorebook</h4>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Параметр</th><th>GHOST-факты</th><th>Мировые записи</th><th>Обоснование</th></tr></thead>
+<tbody>
+<tr><td>Depth</td><td>2–4</td><td>0–1</td><td>GHOST-факты нужны в недавнем контексте для активации</td></tr>
+<tr><td>Probability</td><td>80–100%</td><td>30–50%</td><td>GHOST-факты критичны; мировые — атмосферны</td></tr>
+<tr><td>Cooldown</td><td>5–10 сообщений</td><td>15–20 сообщений</td><td>Предотвращает спам GHOST-реакций</td></tr>
+</tbody>
+</table>
+</div>
 
 <h4>Правила Lorebook</h4>
 <ul>
 <li>GHOST-факты = кандидаты для Lorebook</li>
 <li>Не дублируйте Description</li>
 <li>Триггеры = конкретные слова, не абстракции</li>
-<li>Никогда не вставляйте действия/мысли <code>{{user}}</code> в поле <code>content</code> — это принцип антигодмодинга</li>
 </ul>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Продвинутые поведенческие механики Лорбук (Range-Cascade, Fatigue Emulation, False Memory): <a data-layer-switch="3#p7_lorebook_advanced" class="layer-remark">Экспертный слой →</a></p>
+<details class="interactive">
+<summary>📝 Пример: запись Lorebook для GHOST-факта Елены</summary>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Поле</th><th>Значение</th></tr></thead>
+<tbody>
+<tr><td>Key</td><td>пожар, огонь, горел, сгорел</td></tr>
+<tr><td>Content</td><td>Елена помнит запах горящего дерева. В семь лет она стояла во дворе и смотрела, как пламя охватывает крышу. Пожарные приехали слишком поздно.</td></tr>
+<tr><td>Position</td><td>Before char</td></tr>
+<tr><td>Depth</td><td>3</td></tr>
+<tr><td>Probability</td><td>90%</td></tr>
+<tr><td>Cooldown</td><td>7</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<details class="interactive">
+<summary>📋 Совместимость EVENT: по фронтендам</summary>
+<p>Синтаксис <code>EVENT:</code> для range-триггеров поддерживается не всеми фронтендами:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Фронтенд</th><th>Поддержка</th><th>Примечание</th></tr></thead>
+<tbody>
+<tr><td>SillyTavern</td><td><span class="tag tip">Полная</span></td><td>EVENT:, SECONDARY_KEYS, selective activation</td></tr>
+<tr><td>Soul of Waifu</td><td><span class="tag tip">Есть аналоги</span></td><td>Расширенные возможности</td></tr>
+<tr><td>KoboldAI</td><td><span class="tag opt">Частичная</span></td><td>Использовать conditionals в entry content, KEYWORD без EVENT:</td></tr>
+<tr><td>Oobabooga</td><td><span class="tag risk">Нет</span></td><td>Использовать World Info или встройте триггеры в Description/AN</td></tr>
+<tr><td>Faraday.dev / Agnai</td><td><span class="tag opt">Ограниченная</span></td><td>Проверяйте документацию конкретного фронтенда</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Поведенческие механики Lorebook (каскад по диапазону, комбинированный триггер, контекстный фильтр) → <a href="#p7_lorebook_mechanics" class="layer-remark">Механики Lorebook</a></p>
+
+<p class="layer-remark"><span class="remark-icon">→</span> XML-теги для Description: <a data-layer-switch="3#p7_xml_tags" class="layer-remark">Расширенный XML → Экспертный слой</a></p>
+
+
+</section>
+
+<section id="p7_lorebook_mechanics" data-layer="l2" data-section="p7_lorebook_mechanics">
+
+<h3>Lorebook: поведенческие механики</h3>
+
+<p>Каждая запись Lorebook — это поведенческий триггер, а не хранилище лора. Рекомендуемый бюджет активации: 2–3 механики на сессию. Остальные отключить через <code>probability: 0</code> или удалить.</p>
+
+<div class="callout tip">
+<p><strong>💡 Область применения:</strong> Параметры механик работают вместе с базовой структурой записи. Сначала изучите <a href="#p7_lorebook">структуру Lorebook</a>.</p>
+</div>
+
+<div class="callout warn">
+<p><strong>⚠️ Ограничение:</strong> Никогда не вставляйте действия или мысли <code>{{user}}</code> в поле <code>content</code>. Это не техническое ограничение, а принцип анти-годмодинга. Подробнее → <a href="#p1_core_rules">Правила</a>.</p>
+</div>
+
+<h4>Таблица механик</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Механика</th><th>Параметры</th><th>Применение</th><th>Почему работает для LLM</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Каскад по диапазону</strong> (Range-Cascade)</td>
+<td><code>trigger_type: range</code><br><code>min_msg/max_msg</code>: 1–10 → 11–40 → 50+</td>
+<td>Автоматическая прогрессия: завязка → нагнетание → кульминация → развязка. Заменяет ручное обновление AN.</td>
+<td>Индекс сообщения выступает временной меткой. Каскад автоматически смещает фокус с WANT на NEED без вмешательства автора.</td>
+</tr>
+<tr>
+<td><strong>Комбинированный триггер</strong> (Combo-Trigger)</td>
+<td><code>trigger_type: keyword</code><br><code>sticky: 3–5</code><br><code>cooldown: 20–30</code></td>
+<td>Срабатывание ключевого слова → персонаж переходит в изменённый режим поведения на N реплик → возвращается к базовому состоянию.</td>
+<td><code>sticky</code> закрепляет переходное состояние; <code>cooldown</code> предотвращает зацикливание. Создаёт иллюзию смены режима без дрейфа личности.</td>
+</tr>
+<tr>
+<td><strong>Контекстный фильтр</strong> (Context Filter)</td>
+<td><code>depth: 3–5</code><br><code>exclude_key: ["aside", "joke", "not_"]</code><br><code>probability: 80%</code></td>
+<td>Реагирует только на целевой ввод в последних сообщениях; отсекает фоновый шум и ложные срабатывания.</td>
+<td>Связка <code>depth</code> и <code>exclude_key</code> блокирует случайные триггеры. Модель получает чёткий сигнал → снижается риск выхода из образа.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h4>Практика — быстрая таблица</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Задача</th><th>Тип</th><th>Ключевые параметры</th></tr>
+</thead>
+<tbody>
+<tr><td>Лор мира / NPC</td><td><code>keyword</code></td><td><code>sticky: 0</code> — подтягивается только при упоминании</td></tr>
+<tr><td>Временное состояние (ранен, держит предмет)</td><td><code>keyword</code></td><td><code>sticky: 3–5</code> — не теряет контекст несколько реплик</td></tr>
+<tr><td>Сюжетный поворот</td><td><code>range</code></td><td><code>min_msg / max_msg</code> — срабатывает в нужный момент</td></tr>
+<tr><td>Пасхалка / точечное событие</td><td><code>range</code></td><td><code>min_msg == max_msg</code> — ровно на одном сообщении</td></tr>
+<tr><td>Редкий глюк / экзистенциальный момент</td><td><code>keyword</code></td><td><code>probability: 10–20%</code>, <code>cooldown: 20</code> — не спамит</td></tr>
+<tr><td>Блокировка нежелательного лора</td><td><code>keyword</code></td><td><code>exclude_key: ["стоп", "отмена"]</code></td></tr>
+</tbody>
+</table>
+</div>
+
+<details class="interactive">
+<summary>📝 Пример: Структурированная инъекция (Structured Inject) в поле content</summary>
+<p>Чёткое разделение системных инструкций и реплик персонажа внутри поля <code>content</code>:</p>
+<pre><code>[SYSTEM]
+&lt;motivation&gt;{{char}} помнит предыдущую ссору и боится повторения.&lt;/motivation&gt;
+[CONDITION] Если {{user}} повышает голос
+[OUTPUT] {{char}} отступает на полшага, сжимает кисти и говорит тише обычного.</code></pre>
+<p>Альтернатива через XML-теги:</p>
+<pre><code>&lt;instruction&gt;
+  &lt;trigger&gt;{{user}} задаёт личный вопрос&lt;/trigger&gt;
+  &lt;response&gt;{{char}} уходит от ответа — меняет тему.&lt;/response&gt;
+  &lt;cost&gt;Пауза, нервный тик — дёрнул плечом.&lt;/cost&gt;
+&lt;/instruction&gt;</code></pre>
+</details>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Продвинутые механики (эмуляция усталости, мета-лор, ложная память) — на Экспертном слое → <a data-layer-switch="3#p7_lorebook_advanced" class="layer-remark">Продвинутые механики → Экспертный слой</a></p>
+
+
+</section>
+
+<section id="p7_model_checklist" data-layer="l2" data-section="p7_model_checklist">
+
+<h3>Чеклист по типу модели</h3>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Параметр</th><th>12B–14B</th><th>32B+</th><th>API (Claude/GPT)</th></tr></thead>
+<tbody>
+<tr><td>Temperature</td><td>0.6–0.8</td><td>0.85–1.1</td><td>0.9–1.0</td></tr>
+<tr><td>Presence Penalty</td><td><span class="tag risk">0.0 (обязательно)</span></td><td>0.0</td><td>0.0</td></tr>
+<tr><td>RepPen</td><td>1.05</td><td>1.0–1.05</td><td>N/A</td></tr>
+<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong></td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
+<tr><td>XML Tags</td><td><span class="tag risk">⚠️ нестабильны</span></td><td><span class="tag tip">✓ стабильны</span></td><td><span class="tag tip">✓ стабильны</span></td></tr>
+<tr><td>CoT Tier</td><td><span class="tag risk">✗</span></td><td>Tier 1</td><td>Tier 2–3</td></tr>
+<tr><td>SP Language</td><td>English (критично)<sup>1</sup></td><td>English</td><td>English</td></tr>
+<tr><td>Anti-godmoding</td><td>2 lines (neg+pos)</td><td>2 lines</td><td>1 line</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><sup>1</sup> SP на английском: на 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам). Подробнее → <a href="#p7_core_directives">p7_core_directives</a></p>
+
+<div class="callout tip">
+<p><strong>💡 AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос.</p>
+</div>
 
 
 </section>

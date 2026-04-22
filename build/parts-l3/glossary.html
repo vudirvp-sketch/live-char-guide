@@ -1,7 +1,7 @@
-<section id="glossary" class="no-js-only">
+<section id="glossary" class="no-js-only" data-toc-exclude>
 <h2>Глоссарий</h2>
 <dl>
-<dt>System Prompt (Системный промпт) <small style="color:var(--accent);">(SP)</small></dt>
+<dt>System Prompt (Системный промпт) <small class="glossary-abbr">(SP)</small></dt>
 <dd>Отладка: проверьте конфликты с карточкой персонажа</dd>
 <dt>Description (Описание персонажа)</dt>
 <dd>Оптимизация: проверьте баланс фактологии vs поведенческих инструкций</dd>
@@ -9,7 +9,7 @@
 <dd>Отладка: проверьте contamination от внешних <START> блоков</dd>
 <dt>Greeting (Первое сообщение)</dt>
 <dd>Диагностика: проверьте соответствие Examples vs Greeting</dd>
-<dt>Author's Notes (Динамический контекст) <small style="color:var(--accent);">(AN)</small></dt>
+<dt>Author's Notes (Динамический контекст) <small class="glossary-abbr">(AN)</small></dt>
 <dd>Отладка: проверьте приоритет инъекции и конфликт с LB</dd>
 <dt>Character Card (Карточка персонажа)</dt>
 <dd>Продвинутая конфигурация с CoT и AN</dd>
@@ -43,9 +43,9 @@
 <dd>Добавьте пути интеграции/дезинтеграции, инстинктивные варианты</dd>
 <dt>MBTI (Типология Майерс-Бриггс)</dt>
 <dd>Добавьте когнитивные функции для глубины</dd>
-<dt>CORE DIRECTIVES (Основные директивы) <small style="color:var(--accent);">(CD)</small></dt>
+<dt>CORE DIRECTIVES (Основные директивы) <small class="glossary-abbr">(CD)</small></dt>
 <dd>Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER</dd>
-<dt>Tone Frame (Тональный фрейм) <small style="color:var(--accent);">(TF)</small></dt>
+<dt>Tone Frame (Тональный фрейм) <small class="glossary-abbr">(TF)</small></dt>
 <dd>Отладка: проверьте конфликт Tone Frame с AN</dd>
 <dt>SHOW NEVER TELL (Показывай, не рассказывай)</dt>
 <dd>Диагностика: проверьте, не рассказывает ли модель вместо демонстрации</dd>
@@ -67,13 +67,13 @@
 <dd>Диагностика: проверьте, что все Examples и Greeting используют одну систему разметки</dd>
 <dt>RepPen (Штраф за повторы)</dt>
 <dd>Диагностика: >1.10 убивает signature phrases</dd>
-<dt>Presence Penalty (Штраф за присутствие) <small style="color:var(--accent);">(PP)</small></dt>
+<dt>Presence Penalty (Штраф за присутствие) <small class="glossary-abbr">(PP)</small></dt>
 <dd>Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7</dd>
 <dt>CoT (Цепочка рассуждений)</dt>
 <dd>Настройте CoT tier 3 для сложных сценариев</dd>
 <dt>processus_analysium</dt>
 <dd>L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL]...[/INTERNAL].</dd>
-<dt>Lorebook (База знаний) <small style="color:var(--accent);">(LB)</small></dt>
+<dt>Lorebook (База знаний) <small class="glossary-abbr">(LB)</small></dt>
 <dd>Диагностика: проверьте приоритет и конфликт записей</dd>
 <dt>Structured Inject (Структурированная инъекция)</dt>
 <dd>Диагностика: проверьте приоритет и конфликт инъекций</dd>
@@ -91,7 +91,7 @@
 <dd>Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples</dd>
 <dt>One Change Rule (Правило одного изменения)</dt>
 <dd>Формализуйте: логируйте каждое изменение и результат</dd>
-<dt>Lorebook Entry (Запись Lorebook) <small style="color:var(--accent);">(LE)</small></dt>
+<dt>Lorebook Entry (Запись Lorebook) <small class="glossary-abbr">(LE)</small></dt>
 <dd>Добавьте мировые записи для углубления сеттинга</dd>
 </dl>
 </section>

@@ -198,7 +198,7 @@
       try {
         const textarea = document.createElement('textarea');
         textarea.value = text;
-        textarea.style.cssText = 'position:fixed;left:-9999px;top:0;';
+        textarea.className = 'clipboard-fallback-textarea';
         textarea.setAttribute('readonly', '');
         document.body.appendChild(textarea);
         textarea.select();
@@ -483,7 +483,6 @@
       
       const statusBar = document.createElement('div');
       statusBar.className = 'panel-statusbar';
-      statusBar.style.cssText = 'padding:4px 10px; font-size:0.75rem; color:var(--text-muted); background:var(--bg-elevated); border-top:1px solid var(--border); display:flex; justify-content:space-between;';
       statusBar.innerHTML = '<span id="np-status">Готово</span><span id="np-count">0 симв.</span>';
       this.el.appendChild(statusBar);
     }
@@ -739,6 +738,7 @@
       updateSwitcherButtons(layer);
       initInteractiveElements();
       generateTOC();
+      initActivePartHighlighting();
       handleAnchor();
       loadGlossaryContent();
       updateGlossaryForLayer(layer);
@@ -796,10 +796,6 @@
     // Show toast
     const toast = document.createElement('div');
     toast.className = 'widget-toast';
-    toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);' +
-      'background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border);' +
-      'border-radius:8px;padding:12px 20px;z-index:9999;display:flex;align-items:center;gap:12px;' +
-      'box-shadow:0 4px 12px rgba(0,0,0,0.3);font-size:0.9rem;max-width:90vw;';
 
     const targetLayer = disappearedWidgets[0].minLayer;
     const targetLabel = CONFIG.LAYER_LABELS[String(targetLayer)];
@@ -809,8 +805,7 @@
 
     const switchBtn = document.createElement('button');
     switchBtn.textContent = `Перейти → ${targetLabel}`;
-    switchBtn.style.cssText = 'background:var(--accent);color:#fff;border:none;border-radius:4px;' +
-      'padding:6px 12px;cursor:pointer;font-size:0.85rem;white-space:nowrap;';
+    switchBtn.className = 'widget-toast-btn';
     switchBtn.addEventListener('click', () => {
       toast.remove();
       switchLayer(String(targetLayer));
@@ -823,8 +818,7 @@
     // Auto-remove after 3 seconds
     setTimeout(() => {
       if (toast.parentNode) {
-        toast.style.transition = 'opacity 0.3s';
-        toast.style.opacity = '0';
+        toast.classList.add('widget-toast-fadeout');
         setTimeout(() => toast.remove(), 300);
       }
     }, 3000);
@@ -846,7 +840,7 @@
 
   function showFABs() {
     const fabs = $('#fab-group');
-    if (fabs) fabs.style.display = 'flex';
+    if (fabs) fabs.classList.remove('hidden');
   }
 
   // ============================================================================
@@ -1041,6 +1035,75 @@
         }
       });
     });
+  }
+
+  // ============================================================================
+  // ACTIVE PART HIGHLIGHTING (FIX-07, P3)
+  // ============================================================================
+
+  /**
+   * FIX-07: Intersection Observer that highlights the currently visible
+   * Part's toggle button in the TOC with .toc-part-active class.
+   * Detects which Part's first section (containing <h2>) is in the viewport
+   * and applies the highlight. Cleans up previous observer on re-init.
+   */
+  let tocActiveObserver = null;
+
+  function initActivePartHighlighting() {
+    // Disconnect previous observer if it exists (layer switch re-init)
+    if (tocActiveObserver) {
+      tocActiveObserver.disconnect();
+      tocActiveObserver = null;
+    }
+
+    const sections = $$('section[id]');
+    const partSections = []; // first section of each Part (contains h2)
+
+    sections.forEach(section => {
+      if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return;
+      const sectionId = section.getAttribute('data-section') || section.id;
+      const partMatch = sectionId.match(/^p(\d+)_/);
+      if (!partMatch) return;
+      const partNum = partMatch[1];
+      // Only track the first section of each Part
+      if (partSections.find(ps => ps.partNum === partNum)) return;
+      const h2 = section.querySelector('h2');
+      if (h2) {
+        partSections.push({ partNum, section });
+      }
+    });
+
+    if (partSections.length === 0) return;
+
+    // Track which part is currently active
+    let currentActivePart = null;
+
+    tocActiveObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const partInfo = partSections.find(ps => ps.section === entry.target);
+        if (!partInfo) return;
+
+        if (entry.isIntersecting) {
+          // New part entered viewport — update highlight
+          if (currentActivePart !== partInfo.partNum) {
+            // Remove highlight from previous active part
+            $$('.toc-part-toggle.toc-part-active').forEach(btn => btn.classList.remove('toc-part-active'));
+            // Add highlight to new active part
+            const toggleBtn = $(`.toc-part-toggle[data-part="part_${partInfo.partNum.padStart(2, '0')}"]`);
+            if (toggleBtn) {
+              toggleBtn.classList.add('toc-part-active');
+            }
+            currentActivePart = partInfo.partNum;
+          }
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px', // Trigger when section is in top 20-40% of viewport
+      threshold: 0
+    });
+
+    partSections.forEach(ps => tocActiveObserver.observe(ps.section));
   }
 
   // ============================================================================
@@ -1520,13 +1583,21 @@
           const termText = item.dataset.term || '';
           const content = item.textContent.toLowerCase();
           const matches = termText.includes(query) || content.includes(query);
-          item.style.display = matches ? '' : 'none';
+          if (matches) {
+            item.classList.remove('glossary-item-hidden');
+          } else {
+            item.classList.add('glossary-item-hidden');
+          }
         });
 
         // Show/hide section headers
         glossaryContent.querySelectorAll('.glossary-section').forEach(section => {
-          const visibleItems = section.querySelectorAll('.glossary-item:not([style*="display: none"])');
-          section.style.display = visibleItems.length ? '' : 'none';
+          const visibleItems = section.querySelectorAll('.glossary-item:not(.glossary-item-hidden)');
+          if (visibleItems.length) {
+            section.classList.remove('glossary-section-hidden');
+          } else {
+            section.classList.add('glossary-section-hidden');
+          }
         });
       });
     }
