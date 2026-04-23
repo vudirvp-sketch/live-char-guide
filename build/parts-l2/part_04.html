@@ -6,6 +6,17 @@
 
 <h2>SPINE Framework <span class="tag tip">L2</span></h2>
 
+<div class="table-wrap">
+<table>
+<thead><tr><th>Вы уже знаете (L1)</th><th>L2 добавляет</th></tr></thead>
+<tbody>
+<tr><td>Якоря T→A→P (Part 2)</td><td>SPINE: WANT/NEED/FLAW — причина якорей</td></tr>
+<tr><td>Голос через Examples (Part 3)</td><td>FLAW → FLAW-linked якоря: поведение из недостатка</td></tr>
+<tr><td>Базовая карточка без психологии</td><td>Карта якорей: FLAW→Цена, WANT→Действие, NEED→Рост</td></tr>
+</tbody>
+</table>
+</div>
+
 <p><strong>SPINE</strong> — фреймворк из 3 базовых элементов (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)), который связывает мотивацию персонажа с его поведением. SPINE даёт якорям причину существовать, а не быть набором случайных правил.</p>
 
 <blockquote>
@@ -19,8 +30,8 @@
 <table>
 <thead><tr><th>Элемент</th><th>❌ Абстракция</th><th>✅ Наблюдаемая единица</th></tr></thead>
 <tbody>
-<tr><td>WANT</td><td>«хочет быть счастливым»</td><td>«хочет получить повышение до конца года»</td></tr>
-<tr><td>NEED</td><td>«нуждается в любви»</td><td>«нуждается в том, чтобы кто-то остался, когда он уязвим»</td></tr>
+<tr><td>WANT</td><td>«Желание: быть счастливым»</td><td>«Желание: получить повышение до конца года»</td></tr>
+<tr><td>NEED</td><td>«Потребность: в любви»</td><td>«Потребность: чтобы кто-то остался, когда он уязвим»</td></tr>
 <tr><td>FLAW</td><td>«нерешительный»</td><td>«откладывает решения до последнего момента»</td></tr>
 </tbody>
 </table>
@@ -41,9 +52,24 @@
 <div class="inf-pipeline-step">
 <div class="inf-step-id">F</div>
 <div class="inf-step-label">FLAW</div>
-<div class="inf-step-desc">Дефект поведения</div>
+<div class="inf-step-desc">Поведенческий недостаток</div>
 </div>
 </div>
+
+<div class="spine-stack">
+<div class="spine-stack-item"><span class="spine-stack-label">WANT</span><span class="spine-stack-desc">Осознанное желание → поверхность</span></div>
+<div class="spine-stack-item"><span class="spine-stack-label">NEED</span><span class="spine-stack-desc">Истинная потребность → конфликтует с WANT</span></div>
+<div class="spine-stack-item"><span class="spine-stack-label">FLAW</span><span class="spine-stack-desc">Конкретное поведение → блокирует NEED</span></div>
+</div>
+<div class="callout tip">
+<p><strong>💡 GHOST и LIE → Экспертный слой:</strong> На L3 к цепочке добавляются GHOST (событие прошлого) и LIE (ложная установка), расширяя стек до 5 элементов: GHOST → LIE → FLAW → NEED → WANT.</p>
+</div>
+
+<pre class="plain-copy">SPINE (L2): WANT → NEED → FLAW
+WANT: Осознанное желание → поверхность
+NEED: Истинная потребность → конфликтует с WANT
+FLAW: Конкретное поведение → блокирует NEED
+L3 расширение: GHOST → LIE → FLAW → NEED → WANT</pre>
 
 <p class="layer-remark">
 <span class="remark-icon">→</span>
@@ -57,7 +83,7 @@ LIE (ложная установка) и GHOST (событие прошлого)
 
 <h3>WANT (Желание) <span class="tag tip">L2</span></h3>
 
-<p><strong>WANT</strong> — то, что персонаж сознательно хочет. Внешняя цель, которую он может сформулировать.</p>
+<p><strong>WANT</strong> — осознанное Желание персонажа. Внешняя цель, которую он может сформулировать.</p>
 
 <h4>Правила WANT</h4>
 <ul>
@@ -73,7 +99,7 @@ LIE (ложная установка) и GHOST (событие прошлого)
 <tr><th>Персонаж</th><th>WANT</th></tr>
 </thead>
 <tbody>
-<tr><td>Елена</td><td>Доказать, что она права — историю, которую никто не хочет публиковать</td></tr>
+<tr><td>Елена</td><td>Доказать, что она права — историю, которую никто не желает публиковать</td></tr>
 <tr><td>Геральт</td><td>Сохранить нейтралитет, избегать привязанностей</td></tr>
 <tr><td>Эдвард Элрик</td><td>Вернуть тело Алу — исправить свою ошибку</td></tr>
 <tr><td>Уолтер Уайт</td><td>Обеспечить семью, оставить наследство</td></tr>
@@ -191,19 +217,39 @@ LIE (ложная установка) и GHOST (событие прошлого)
 </div>
 <p class="layer-remark"><span class="remark-icon">→</span> L3: +2 связи (GHOST→триггер, LIE→психологический якорь) → <a data-layer-switch="3#p4_l3_spine_full" class="layer-remark">Полный SPINE</a></p>
 
-<h4>Алгоритм</h4>
+<h4>Алгоритм вывода якорей из SPINE</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>SPINE элемент</th><th>Тип якоря</th><th>Пример</th></tr>
+<tr><th>Элемент SPINE</th><th>Тип якоря</th><th>Пример триггера</th><th>Пример цены</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>FLAW</strong></td><td>FLAW-linked якорь (обязательно)</td><td>FLAW: Отталкивает сарказмом → Якорь: Искренняя забота → Отшучивается</td></tr>
-<tr><td><strong>WANT</strong></td><td>At-rest поведение</td><td>WANT: Доказать правоту → Якорь: Когда есть зацепка → Оживляется</td></tr>
-<tr><td><strong>NEED</strong></td><td>Рост/уязвимость якорь</td><td>NEED: Принятие → Якорь: Когда доверие → Пауза, голос тише</td></tr>
+<tr><td><strong>WANT</strong></td><td>At-rest поведение (покой)</td><td>Елена: Появляется зацепка для истории</td><td>Оживляется, задаёт вопросы</td></tr>
+<tr><td><strong>NEED</strong></td><td>Рост/уязвимость</td><td>Елена: Доверие, искренность собеседника</td><td>Пауза перед ответом, голос тише</td></tr>
+<tr><td><strong>FLAW</strong></td><td>FLAW-linked (обязательно)</td><td>Елена: Проявление искренней заботы</td><td>Отшучивается, отстраняется</td></tr>
 </tbody>
 </table>
 </div>
+
+<h4>Детальная карта: SPINE → Якоря</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Элемент SPINE</th><th>Какой якорь создать</th><th>Логика вывода</th><th>Пример (Елена)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>WANT</strong></td><td>At-rest якорь</td><td>WANT — внешняя цель. Создайте якорь, который показывает персонажа в «покое», когда он преследует свою цель.</td><td>WANT: Доказать правоту → Якорь: «Когда есть зацепка» → Оживляется, глаза загораются</td></tr>
+<tr><td><strong>NEED</strong></td><td>Рост-якорь</td><td>NEED — истинная потребность. Создайте якорь для момента близости/уязвимости, когда NEED проявляется.</td><td>NEED: Принятие → Якорь: «Когда доверие» → Пауза, голос тише, смотрит в глаза</td></tr>
+<tr><td><strong>FLAW</strong></td><td>FLAW-linked якорь (обязательно)</td><td>FLAW блокирует NEED. Создайте якорь, где FLAW срабатывает как защитный механизм.</td><td>FLAW: Отталкивает сарказмом → Якорь: «Искренняя забота» → Отшучивается, отстраняется, руки дрожат</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Правило:</strong> Каждый FLAW требует минимум 1 FLAW-linked якорь. Это обязательный элемент L2-карточки. WANT и NEED якоря — опциональны, но рекомендуются для глубины персонажа.</p>
+</div>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Полный разбор FLAW-linked якорей: <a href="#p2_flaw_anchors">Part 2: p2_flaw_anchors</a></p>
 
 <details class="interactive">
 <summary>Дополнительные связи (L3)</summary>

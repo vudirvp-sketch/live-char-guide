@@ -2662,6 +2662,266 @@
     initOceanValidator();
     initEnneagram();
     initLayerSwitch();
+    initLayerToggle();
+    initSpineValidator();
+  }
+
+  // ============================================================================
+  // LAYER TOGGLE (V-14: Quick Reference toggle)
+  // ============================================================================
+
+  const LAYER_TOGGLE_KEY = 'guide-layer-toggle-state';
+
+  function initLayerToggle() {
+    // Create toggle UI
+    const switcher = $('#layer-switcher');
+    if (!switcher) return;
+
+    // Check if already exists
+    if ($('#layer-toggle-wrap')) return;
+
+    // Create toggle container
+    const toggleWrap = document.createElement('span');
+    toggleWrap.className = 'layer-toggle-wrap';
+    toggleWrap.id = 'layer-toggle-wrap';
+    toggleWrap.setAttribute('aria-label', 'Переключение видимости слоёв');
+
+    // Create toggle buttons for each layer
+    ['1', '2', '3'].forEach(layer => {
+      const btn = document.createElement('button');
+      btn.className = 'layer-toggle-btn active';
+      btn.dataset.toggleLayer = layer;
+      btn.textContent = `L${layer}`;
+      btn.title = `Переключить видимость L${layer}`;
+      btn.setAttribute('aria-pressed', 'true');
+      btn.type = 'button';
+      toggleWrap.appendChild(btn);
+    });
+
+    // Insert after layer indicator
+    const indicator = switcher.querySelector('.layer-indicator');
+    if (indicator) {
+      indicator.after(toggleWrap);
+    } else {
+      switcher.appendChild(toggleWrap);
+    }
+
+    // Load saved state
+    const savedState = storage.get(LAYER_TOGGLE_KEY);
+    if (savedState) {
+      applyToggleState(savedState);
+    }
+
+    // Bind events
+    toggleWrap.querySelectorAll('.layer-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => toggleLayerVisibility(btn.dataset.toggleLayer));
+    });
+
+    console.log('[LayerToggle] Initialized');
+  }
+
+  function toggleLayerVisibility(layer) {
+    const btn = $(`.layer-toggle-btn[data-toggle-layer="${layer}"]`);
+    if (!btn) return;
+
+    const isActive = btn.classList.toggle('active');
+    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+
+    // Get current state
+    const state = getToggleState();
+    state[layer] = isActive;
+
+    // Apply and save
+    applyToggleState(state);
+    storage.set(LAYER_TOGGLE_KEY, state);
+
+    console.log(`[LayerToggle] Layer ${layer} visibility: ${isActive ? 'visible' : 'dimmed'}`);
+  }
+
+  function getToggleState() {
+    const state = { '1': true, '2': true, '3': true };
+    $$('.layer-toggle-btn').forEach(btn => {
+      const layer = btn.dataset.toggleLayer;
+      state[layer] = btn.classList.contains('active');
+    });
+    return state;
+  }
+
+  function applyToggleState(state) {
+    const body = document.body;
+
+    // Update button states
+    Object.entries(state).forEach(([layer, active]) => {
+      const btn = $(`.layer-toggle-btn[data-toggle-layer="${layer}"]`);
+      if (btn) {
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+    });
+
+    // Check if we're in toggle mode (not all visible)
+    const allVisible = state['1'] && state['2'] && state['3'];
+
+    if (allVisible) {
+      // Normal cumulative layer mode
+      body.classList.remove('layer-toggle-mode', 'layer-hide-1', 'layer-hide-2', 'layer-hide-3');
+    } else {
+      // Toggle mode - show all layers but dim hidden ones
+      body.classList.add('layer-toggle-mode');
+      body.classList.toggle('layer-hide-1', !state['1']);
+      body.classList.toggle('layer-hide-2', !state['2']);
+      body.classList.toggle('layer-hide-3', !state['3']);
+    }
+  }
+
+  // ============================================================================
+  // SPINE VALIDATOR (V-15)
+  // ============================================================================
+
+  const SPINE_CHECKS = [
+    {
+      id: 'ghost-lie',
+      name: 'GHOST → LIE',
+      descCheck: (ghost, lie) => {
+        if (!ghost || !lie) return { pass: false, reason: 'Не заполнены GHOST или LIE' };
+        if (ghost.length < 10 || lie.length < 5) return { pass: false, reason: 'GHOST или LIE слишком короткие' };
+        return { pass: true, reason: 'GHOST объясняет, откуда взялась LIE' };
+      },
+      hint: 'GHOST — событие, которое формирует ложную установку (LIE)'
+    },
+    {
+      id: 'lie-protects',
+      name: 'LIE защищает от боли',
+      descCheck: (ghost, lie, flaw) => {
+        if (!lie || !flaw) return { pass: false, reason: 'Не заполнены LIE или FLAW' };
+        // Check if LIE is a quoted phrase (indicates it's an internal belief)
+        const isQuoted = lie.includes('"') || lie.includes('«');
+        if (!isQuoted) return { pass: null, reason: 'LIE не в кавычках — рекомендуется фраза от первого лица' };
+        return { pass: true, reason: 'LIE — внутреннее убеждение, защищающее от боли' };
+      },
+      hint: 'LIE должна быть фразой в кавычках — тем, что персонаж говорит себе'
+    },
+    {
+      id: 'lie-flaw',
+      name: 'LIE → FLAW',
+      descCheck: (lie, flaw) => {
+        if (!lie || !flaw) return { pass: false, reason: 'Не заполнены LIE или FLAW' };
+        if (flaw.length < 10) return { pass: false, reason: 'FLAW слишком короткий' };
+        // Check if FLAW is behavior, not adjective
+        const actionWords = ['когда', 'если', 'при', 'от', 'после', 'всегда', 'никогда'];
+        const hasAction = actionWords.some(w => flaw.toLowerCase().includes(w));
+        if (!hasAction && !flaw.includes('→') && !flaw.includes('—')) {
+          return { pass: null, reason: 'FLAW должен описывать поведение, а не прилагательное' };
+        }
+        return { pass: true, reason: 'FLAW — поведение, вызванное LIE' };
+      },
+      hint: 'FLAW = конкретное поведение, не прилагательное'
+    },
+    {
+      id: 'flaw-need',
+      name: 'FLAW блокирует NEED',
+      descCheck: (flaw, need) => {
+        if (!flaw || !need) return { pass: false, reason: 'Не заполнены FLAW или NEED' };
+        return { pass: true, reason: 'FLAW мешает персонажу получить NEED' };
+      },
+      hint: 'FLAW должен активно мешать удовлетворению NEED'
+    },
+    {
+      id: 'want-lie',
+      name: 'WANT совместим с LIE',
+      descCheck: (want, lie) => {
+        if (!want || !lie) return { pass: false, reason: 'Не заполнены WANT или LIE' };
+        return { pass: true, reason: 'WANT совместим с ложной установкой (LIE)' };
+      },
+      hint: 'WANT не должен противоречить LIE напрямую'
+    },
+    {
+      id: 'need-destroys-lie',
+      name: 'NEED разрушает LIE',
+      descCheck: (need, lie) => {
+        if (!need || !lie) return { pass: false, reason: 'Не заполнены NEED или LIE' };
+        return { pass: true, reason: 'NEED — то, что разрушило бы LIE при достижении' };
+      },
+      hint: 'Если NEED реализуется, LIE перестаёт быть истинной'
+    }
+  ];
+
+  function initSpineValidator() {
+    const validator = $('#spine-validator');
+    if (!validator) return;
+
+    const validateBtn = $('#spine-validate-btn');
+    const clearBtn = $('#spine-clear-btn');
+    const resultDiv = $('#spine-validator-result');
+
+    if (!validateBtn || !clearBtn || !resultDiv) return;
+
+    validateBtn.addEventListener('click', () => {
+      const ghost = $('#spine-ghost')?.value?.trim() || '';
+      const lie = $('#spine-lie')?.value?.trim() || '';
+      const flaw = $('#spine-flaw')?.value?.trim() || '';
+      const need = $('#spine-need')?.value?.trim() || '';
+      const want = $('#spine-want')?.value?.trim() || '';
+
+      const results = SPINE_CHECKS.map(check => {
+        const result = check.descCheck(ghost, lie, flaw, need, want);
+        return {
+          id: check.id,
+          name: check.name,
+          pass: result.pass,
+          reason: result.reason,
+          hint: check.hint
+        };
+      });
+
+      // Render results
+      let html = '<div class="spine-result-items">';
+      results.forEach(r => {
+        const icon = r.pass === true ? '✓' : r.pass === false ? '✗' : '⚠';
+        const iconClass = r.pass === true ? 'pass' : r.pass === false ? 'fail' : 'warn';
+        html += `
+          <div class="spine-result-item">
+            <span class="spine-result-icon ${iconClass}">${icon}</span>
+            <div class="spine-result-text">
+              <div class="spine-result-label">${r.name}</div>
+              <div class="spine-result-desc">${r.reason}</div>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div>';
+
+      // Summary
+      const passes = results.filter(r => r.pass === true).length;
+      const fails = results.filter(r => r.pass === false).length;
+      const warns = results.filter(r => r.pass === null).length;
+
+      let summaryClass = 'needs-work';
+      let summaryText = `${passes}/${results.length} проверок пройдено`;
+      if (fails === 0 && warns === 0) {
+        summaryClass = 'valid';
+        summaryText = `✓ ${summaryText} — SPINE консистентен`;
+      } else if (fails > 0) {
+        summaryClass = 'invalid';
+        summaryText = `✗ ${summaryText} — ${fails} ошибок, ${warns} предупреждений`;
+      }
+
+      html += `<div class="spine-result-summary ${summaryClass}">${summaryText}</div>`;
+
+      resultDiv.innerHTML = html;
+      resultDiv.classList.remove('hidden');
+    });
+
+    clearBtn.addEventListener('click', () => {
+      ['#spine-ghost', '#spine-lie', '#spine-flaw', '#spine-need', '#spine-want'].forEach(sel => {
+        const el = $(sel);
+        if (el) el.value = '';
+      });
+      resultDiv.classList.add('hidden');
+      resultDiv.innerHTML = '';
+    });
+
+    console.log('[SpineValidator] Initialized');
   }
 
   async function init() {

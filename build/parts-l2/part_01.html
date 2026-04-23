@@ -168,6 +168,44 @@
 <p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет своего слоя. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) доступны на более глубоких слоях — см. <a href="#p1_next_layers">Следующие шаги</a>.</p>
 </div>
 
+<h4>Калькулятор токен-бюджета</h4>
+
+<div class="token-calc" id="token-calc" data-toc-exclude>
+<div class="token-calc-inputs">
+<div class="token-calc-row">
+<label class="token-calc-label">System Prompt</label>
+<input type="range" min="50" max="500" value="150" id="calc-sp" class="token-calc-range">
+<span class="token-calc-val" id="calc-sp-val">150</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Description</label>
+<input type="range" min="100" max="1000" value="400" id="calc-desc" class="token-calc-range">
+<span class="token-calc-val" id="calc-desc-val">400</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Examples</label>
+<input type="range" min="100" max="800" value="300" id="calc-ex" class="token-calc-range">
+<span class="token-calc-val" id="calc-ex-val">300</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Якоря</label>
+<input type="range" min="0" max="400" value="100" id="calc-anc" class="token-calc-range">
+<span class="token-calc-val" id="calc-anc-val">100</span>
+</div>
+</div>
+<div class="token-calc-result">
+<span>Итого: <strong id="calc-total">950</strong> токенов</span>
+<span class="tag" id="calc-layer-tag">L2 (800–1500)</span>
+</div>
+<noscript>
+<p class="callout tip">Для интерактивного калькулятора включите JavaScript.</p>
+</noscript>
+</div>
+
+<pre class="plain-copy">Калькулятор токенов (пример L2):
+SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
+Итого: 950 токенов → Рекомендуемый слой: L2 (800–1500 токенов)</pre>
+
 
 </section>
 
@@ -266,7 +304,7 @@
 <div class="inf-pipeline-step">
 <div class="inf-step-id">04</div>
 <div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">Создайте первое сообщение, которое задаёт тон</div>
+<div class="inf-step-desc">Создайте Greeting, которое задаёт тон</div>
 <div class="inf-step-code">Омнис-Зета: ритуальное благословение + Бинарный кант</div>
 </div>
 <div class="inf-pipeline-step">
