@@ -21,39 +21,15 @@
 (function() {
   'use strict';
 
-  const OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
-  const OCEAN_NAMES = {
-    'O': '\u041e\u0442\u043a\u0440\u044b\u0442\u043e\u0441\u0442\u044c',
-    'C': '\u0414\u043e\u0431\u0440\u043e\u0441\u043e\u0432\u0435\u0441\u0442\u043d\u043e\u0441\u0442\u044c',
-    'E': '\u042d\u043a\u0441\u0442\u0440\u0430\u0432\u0435\u0440\u0441\u0438\u044f',
-    'A': '\u0414\u043e\u0431\u0440\u043e\u0436\u0435\u043b\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c',
-    'N': '\u041d\u0435\u0439\u0440\u043e\u0442\u0438\u0437\u043c'
-  };
+  // OCEAN constants provided by WidgetUtils
+  const OCEAN_TRAITS = window.WidgetUtils.OCEAN_TRAITS;
+  const OCEAN_NAMES = window.WidgetUtils.OCEAN_NAMES;
 
   // Data cache
   let oceanDataCache = null;
   let enneagramDataCache = null;
 
-  /**
-   * Fetch and cache JSON data
-   */
-  async function fetchData(type) {
-    if (type === 'ocean' && oceanDataCache) return oceanDataCache;
-    if (type === 'enneagram' && enneagramDataCache) return enneagramDataCache;
-    
-    const url = `data/${type}.json`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      if (type === 'ocean') oceanDataCache = data;
-      else enneagramDataCache = data;
-      return data;
-    } catch (e) {
-      console.warn(`[PersonaCross] Failed to fetch ${url}:`, e.message);
-      return null;
-    }
-  }
+  // Data fetching delegated to WidgetUtils.fetchJson
 
   /**
    * Get color for a correlation value (-1.0 to 1.0)
@@ -126,11 +102,11 @@
     const container = document.getElementById('persona-cross');
     if (!container) return;
 
-    // Fetch both data sources
-    const [oceanData, enneagramData] = await Promise.all([
-      fetchData('ocean'),
-      fetchData('enneagram')
-    ]);
+    // Fetch both data sources using WidgetUtils.fetchJson
+    oceanDataCache = await window.WidgetUtils.fetchJson('data/ocean.json');
+    enneagramDataCache = await window.WidgetUtils.fetchJson('data/enneagram.json');
+    const oceanData = oceanDataCache;
+    const enneagramData = enneagramDataCache;
 
     if (!oceanData || !enneagramData) {
       console.warn('[PersonaCross] Missing data, widget not initialized');

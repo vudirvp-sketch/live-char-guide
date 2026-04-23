@@ -204,12 +204,17 @@
     "part": 5,
     "topic": ""
   },
-  "p5_enneagram_widget": {
+  "p5_enneagram_to_spine": {
     "layer": "l2",
     "part": 5,
     "topic": ""
   },
-  "p5_enneagram_to_spine": {
+  "p5_mbti_basics": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_l2_quickstart": {
     "layer": "l2",
     "part": 5,
     "topic": ""
@@ -221,16 +226,6 @@
   },
   "p5_cross_matrix": {
     "layer": "l3",
-    "part": 5,
-    "topic": ""
-  },
-  "p5_mbti_basics": {
-    "layer": "l2",
-    "part": 5,
-    "topic": ""
-  },
-  "p5_l2_quickstart": {
-    "layer": "l2",
     "part": 5,
     "topic": ""
   },

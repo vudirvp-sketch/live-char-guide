@@ -143,18 +143,6 @@
       }
     ]
   },
-  "enneagram_suggestions": {
-    "O_high": [4, 5, 7],
-    "O_low": [1, 6, 9],
-    "C_high": [1, 3, 5],
-    "C_low": [7, 9],
-    "E_high": [2, 3, 7, 8],
-    "E_low": [4, 5, 9],
-    "A_high": [2, 6, 9],
-    "A_low": [3, 8],
-    "N_high": [4, 6],
-    "N_low": [3, 9]
-  },
   "extremum_thresholds": {
     "low": 30,
     "high": 70,

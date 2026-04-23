@@ -66,7 +66,8 @@
     'GHOST': 'purple'
   };
 
-  var OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
+  // OCEAN_TRAITS provided by WidgetUtils
+  var OCEAN_TRAITS = window.WidgetUtils.OCEAN_TRAITS;
 
   var SPINE_FIELDS = ['WANT', 'FLAW', 'LIE', 'GHOST'];
 
@@ -97,21 +98,7 @@
   // DATA LOADING
   // ============================================================================
 
-  async function fetchMbtiData() {
-    if (mbtiDataCache) return mbtiDataCache;
-    var url = 'data/mbti.json';
-    try {
-      var response = await fetch(url);
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      var data = await response.json();
-      mbtiDataCache = data;
-      console.log('[MBTI] Loaded data v' + (data.version || '?') + ' from ' + url);
-      return data;
-    } catch (e) {
-      console.warn('[MBTI] Failed to fetch ' + url + ':', e.message);
-      return null;
-    }
-  }
+  // fetchMbtiData delegated to WidgetUtils.fetchJson
 
   // ============================================================================
   // HELPERS
@@ -152,14 +139,7 @@
     return e + s + t + j;
   }
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
+  // escapeHtml provided by WidgetUtils
 
   function getLevelBadge() {
     if (currentWidgetLevel >= 3) return 'M3';
@@ -217,7 +197,7 @@
           var color = SPINE_FIELD_COLORS[field] || 'inherit';
           html += '<div class="mbti-spine-field">' +
             '<span class="mbti-spine-field-label" style="color:' + color + '">' + field + '</span>' +
-            '<span class="mbti-spine-field-value">' + escapeHtml(val) + '</span>' +
+            '<span class="mbti-spine-field-value">' + window.WidgetUtils.escapeHtml(val) + '</span>' +
             '<button class="mbti-spine-copy-btn" type="button" data-spine-field="' + field + '" data-type-code="' + typeCode + '" title="Копировать">\uD83D\uDCCB</button>' +
           '</div>';
         });
@@ -263,7 +243,7 @@
       var suggestions = mbtiDataCache.enneagram_suggestions[typeCode];
       if (suggestions && suggestions.length > 0) {
         html += '<div class="mbti-enneagram-links">';
-        html += '<span class="mbti-enneagram-links-label">Типы Эннеаграммы для ' + escapeHtml(typeCode) + ':</span>';
+        html += '<span class="mbti-enneagram-links-label">Типы Эннеаграммы для ' + window.WidgetUtils.escapeHtml(typeCode) + ':</span>';
         suggestions.forEach(function(typeId) {
           var isMatch = lastEnneagramType && typeId === lastEnneagramType;
           html += '<button class="mbti-enneagram-link-btn' + (isMatch ? ' enneagram-match-highlight' : '') + '" type="button" data-enneagram-emit="' + typeId + '">Тип ' + typeId + '</button>';
@@ -338,7 +318,7 @@
   function buildResultCard(typeCode) {
     var typeInfo = getTypeInfo(typeCode);
     if (!typeInfo) {
-      return '<div class="mbti-empty-state">Тип ' + escapeHtml(typeCode) + ' не найден</div>';
+      return '<div class="mbti-empty-state">Тип ' + window.WidgetUtils.escapeHtml(typeCode) + ' не найден</div>';
     }
 
     var temp = normalizeTemperament(typeInfo.temperament);
@@ -347,11 +327,11 @@
     var functions = (typeInfo.cognitive_functions || []).join(' \u2192 ');
 
     var html = '<div class="mbti-result-card">' +
-      '<div class="mbti-result-code">' + escapeHtml(typeInfo.code) + '</div>' +
-      '<div class="mbti-result-name">' + escapeHtml(typeInfo.name) + '</div>' +
-      '<div class="mbti-result-temperament">' + escapeHtml(temp) + ' \u2014 ' + escapeHtml(tempName) + '</div>' +
-      (functions ? '<div class="mbti-result-functions">' + escapeHtml(functions) + '</div>' : '') +
-      '<div class="mbti-result-hint">' + escapeHtml(typeInfo.hint) + '</div>';
+      '<div class="mbti-result-code">' + window.WidgetUtils.escapeHtml(typeInfo.code) + '</div>' +
+      '<div class="mbti-result-name">' + window.WidgetUtils.escapeHtml(typeInfo.name) + '</div>' +
+      '<div class="mbti-result-temperament">' + window.WidgetUtils.escapeHtml(temp) + ' \u2014 ' + window.WidgetUtils.escapeHtml(tempName) + '</div>' +
+      (functions ? '<div class="mbti-result-functions">' + window.WidgetUtils.escapeHtml(functions) + '</div>' : '') +
+      '<div class="mbti-result-hint">' + window.WidgetUtils.escapeHtml(typeInfo.hint) + '</div>';
 
     // M2+ extended sections
     if (currentWidgetLevel >= 2) {
@@ -402,9 +382,9 @@
       var types = grouped[temp] || [];
       types.forEach(function(type) {
         var isSelected = selectedType === type.code ? ' selected' : '';
-        html += '<div class="mbti-grid-cell' + isSelected + '" data-temperament="' + temp + '" data-type="' + type.code + '" tabindex="0" role="button" aria-label="' + escapeHtml(type.code) + ': ' + escapeHtml(type.name) + '">' +
-          '<span class="mbti-cell-code">' + escapeHtml(type.code) + '</span>' +
-          '<span class="mbti-cell-name">' + escapeHtml(type.name) + '</span>' +
+        html += '<div class="mbti-grid-cell' + isSelected + '" data-temperament="' + temp + '" data-type="' + type.code + '" tabindex="0" role="button" aria-label="' + window.WidgetUtils.escapeHtml(type.code) + ': ' + window.WidgetUtils.escapeHtml(type.name) + '">' +
+          '<span class="mbti-cell-code">' + window.WidgetUtils.escapeHtml(type.code) + '</span>' +
+          '<span class="mbti-cell-name">' + window.WidgetUtils.escapeHtml(type.name) + '</span>' +
         '</div>';
       });
     });
@@ -423,9 +403,9 @@
     AXIS_CONFIG.forEach(function(axis) {
       var val = axisValues[axis.id];
       html += '<div class="mbti-axis-row">' +
-        '<span class="mbti-axis-label mbti-axis-label-left" title="' + escapeHtml(axis.leftLabel) + '">' + axis.left + '</span>' +
-        '<input type="range" min="0" max="100" value="' + val + '" class="mbti-axis-input" data-axis="' + axis.id + '" aria-label="' + escapeHtml(axis.leftLabel) + ' \u2014 ' + escapeHtml(axis.rightLabel) + '" />' +
-        '<span class="mbti-axis-label mbti-axis-label-right" title="' + escapeHtml(axis.rightLabel) + '">' + axis.right + '</span>' +
+        '<span class="mbti-axis-label mbti-axis-label-left" title="' + window.WidgetUtils.escapeHtml(axis.leftLabel) + '">' + axis.left + '</span>' +
+        '<input type="range" min="0" max="100" value="' + val + '" class="mbti-axis-input" data-axis="' + axis.id + '" aria-label="' + window.WidgetUtils.escapeHtml(axis.leftLabel) + ' \u2014 ' + window.WidgetUtils.escapeHtml(axis.rightLabel) + '" />' +
+        '<span class="mbti-axis-label mbti-axis-label-right" title="' + window.WidgetUtils.escapeHtml(axis.rightLabel) + '">' + axis.right + '</span>' +
       '</div>';
     });
 
@@ -829,7 +809,8 @@
     currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
 
     // Fetch data
-    var mbtiData = await fetchMbtiData();
+    mbtiDataCache = await window.WidgetUtils.fetchJson('data/mbti.json');
+    var mbtiData = mbtiDataCache;
     if (!mbtiData) {
       container.innerHTML = '<div class="mbti-widget"><p class="mbti-empty-state">MBTI \u0434\u0430\u043D\u043D\u044B\u0435 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B</p></div>';
       return;

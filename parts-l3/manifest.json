@@ -75,12 +75,11 @@
         "p5_ocean_poles",
         "p5_ocean_validator",
         "p5_enneagram_basics",
-        "p5_enneagram_widget",
         "p5_enneagram_to_spine",
-        "p5_enneagram_wings",
-        "p5_cross_matrix",
         "p5_mbti_basics",
-        "p5_l2_quickstart"
+        "p5_l2_quickstart",
+        "p5_enneagram_wings",
+        "p5_cross_matrix"
       ]
     },
     {

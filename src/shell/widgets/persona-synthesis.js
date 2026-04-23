@@ -31,14 +31,9 @@
   'use strict';
 
   // ─── Constants ───────────────────────────────────────────────────────
-  const OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
-  const OCEAN_LABELS = {
-    'O': '\u041e\u0442\u043a\u0440\u044b\u0442\u043e\u0441\u0442\u044c',
-    'C': '\u0414\u043e\u0431\u0440\u043e\u0441\u043e\u0432\u0435\u0441\u0442\u043d\u043e\u0441\u0442\u044c',
-    'E': '\u042d\u043a\u0441\u0442\u0440\u0430\u0432\u0435\u0440\u0441\u0438\u044f',
-    'A': '\u0414\u043e\u0431\u0440\u043e\u0436\u0435\u043b\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c',
-    'N': '\u041d\u0435\u0439\u0440\u043e\u0442\u0438\u0437\u043c'
-  };
+  // OCEAN constants provided by WidgetUtils
+  const OCEAN_TRAITS = window.WidgetUtils.OCEAN_TRAITS;
+  const OCEAN_LABELS = window.WidgetUtils.OCEAN_NAMES;
 
   // ─── State ───────────────────────────────────────────────────────────
   const synthesisState = {
@@ -57,44 +52,8 @@
 
   // ─── Data Fetching ───────────────────────────────────────────────────
 
-  async function fetchEnneagramData() {
-    if (enneagramDataCache) return enneagramDataCache;
-    try {
-      const resp = await fetch('data/enneagram.json');
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      enneagramDataCache = await resp.json();
-      return enneagramDataCache;
-    } catch (_e) {
-      console.warn('[PersonaSynthesis] Failed to fetch enneagram.json');
-      return null;
-    }
-  }
-
-  async function fetchMbtiData() {
-    if (mbtiDataCache) return mbtiDataCache;
-    try {
-      const resp = await fetch('data/mbti.json');
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      mbtiDataCache = await resp.json();
-      return mbtiDataCache;
-    } catch (_e) {
-      console.warn('[PersonaSynthesis] Failed to fetch mbti.json');
-      return null;
-    }
-  }
-
-  async function fetchOceanData() {
-    if (oceanDataCache) return oceanDataCache;
-    try {
-      const resp = await fetch('data/ocean.json');
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      oceanDataCache = await resp.json();
-      return oceanDataCache;
-    } catch (_e) {
-      console.warn('[PersonaSynthesis] Failed to fetch ocean.json');
-      return null;
-    }
-  }
+  // Data fetching delegated to WidgetUtils.fetchJson
+  // Local caches are still populated for direct access
 
   // ─── Layer Check ─────────────────────────────────────────────────────
 
@@ -109,71 +68,25 @@
   // ─── Conflict Detection (§5.1) ──────────────────────────────────────
 
   /**
-   * OCEAN x Enneagram conflict detection
-   * Uses enneagram.json.types[].ocean_correlation (array format)
+   * OCEAN x Enneagram conflict detection — delegated to WidgetUtils
    */
   function checkOceanEnneagramConflicts(oceanProfile, enneagramTypeId) {
     if (!enneagramDataCache || !oceanProfile || !enneagramTypeId) return [];
     const type = enneagramDataCache.types.find(function(t) { return t.id === enneagramTypeId; });
     if (!type || !type.ocean_correlation) return [];
-
-    const correlation = type.ocean_correlation;
-    const conflicts = [];
-
-    OCEAN_TRAITS.forEach(function(trait, i) {
-      const expectedCorrelation = correlation[i];
-      const actualValue = oceanProfile[trait];
-      const actualNormalized = actualValue / 100;
-      const expectedPosition = (expectedCorrelation + 1) / 2 * 0.6 + 0.2;
-      const deviation = Math.abs(actualNormalized - expectedPosition);
-
-      if (deviation > 0.35) {
-        var expectedLabel = expectedCorrelation > 0.3 ? '\u0432\u044b\u0441\u043e\u043a\u0438\u0439' :
-                            expectedCorrelation < -0.3 ? '\u043d\u0438\u0437\u043a\u0438\u0439' : '\u0443\u043c\u0435\u0440\u0435\u043d\u043d\u044b\u0439';
-        var actualLabel = actualValue > 70 ? '\u0432\u044b\u0441\u043e\u043a\u0438\u0439' :
-                          actualValue < 30 ? '\u043d\u0438\u0437\u043a\u0438\u0439' : '\u0443\u043c\u0435\u0440\u0435\u043d\u043d\u044b\u0439';
-        conflicts.push({
-          trait: trait,
-          expected: expectedLabel,
-          actual: actualLabel,
-          deviation: deviation.toFixed(2),
-          message: trait + ': \u043e\u0436\u0438\u0434\u0430\u0435\u0442\u0441\u044f ' + expectedLabel +
-                   ' (\u043a\u043e\u0440\u0440\u0435\u043b\u044f\u0446\u0438\u044f ' + expectedCorrelation.toFixed(2) +
-                   '), \u0444\u0430\u043a\u0442\u0438\u0447\u0435\u0441\u043a\u0438 ' + actualLabel + ' (' + actualValue + ')'
-        });
-      }
-    });
-
-    return conflicts;
+    return window.WidgetUtils.checkOceanEnneagramConflicts(oceanProfile, type.ocean_correlation);
   }
 
   /**
-   * MBTI x Enneagram compatibility check
-   * Uses enneagram.json.mbti_suggestions and mbti.json.enneagram_suggestions
+   * MBTI x Enneagram compatibility check — delegated to WidgetUtils
    */
   function checkMbtiEnneagramCompatibility(mbtiCode, enneagramTypeId) {
     if (!mbtiCode || !enneagramTypeId) return null;
-
-    var enneagramSuggestsMbti = false;
-    var mbtiSuggestsEnneagram = false;
-
-    if (enneagramDataCache && enneagramDataCache.mbti_suggestions) {
-      var suggested = enneagramDataCache.mbti_suggestions[String(enneagramTypeId)];
-      if (suggested && suggested.indexOf(mbtiCode) !== -1) {
-        enneagramSuggestsMbti = true;
-      }
-    }
-
-    if (mbtiDataCache && mbtiDataCache.enneagram_suggestions) {
-      var suggestedTypes = mbtiDataCache.enneagram_suggestions[mbtiCode];
-      if (suggestedTypes && suggestedTypes.indexOf(enneagramTypeId) !== -1) {
-        mbtiSuggestsEnneagram = true;
-      }
-    }
-
-    if (enneagramSuggestsMbti && mbtiSuggestsEnneagram) return 'strong';
-    if (enneagramSuggestsMbti || mbtiSuggestsEnneagram) return 'partial';
-    return 'conflict';
+    return window.WidgetUtils.checkMbtiEnneagramCompatibility(
+      mbtiCode, enneagramTypeId,
+      enneagramDataCache?.mbti_suggestions,
+      mbtiDataCache?.enneagram_suggestions
+    );
   }
 
   // ─── Narrative Generation (§4.4) ─────────────────────────────────────
@@ -522,7 +435,7 @@
     // Preview
     var card = generateCharacterCard();
     var previewLines = card.split('\n').slice(0, 10);
-    html += '<div class="synthesis-export-preview"><pre>' + escapeHtml(previewLines.join('\n')) + '\n\u2026</pre></div>';
+    html += '<div class="synthesis-export-preview"><pre>' + window.WidgetUtils.escapeHtml(previewLines.join('\n')) + '\n\u2026</pre></div>';
 
     // Export buttons
     html += '<div class="synthesis-export-actions">';
@@ -534,11 +447,7 @@
     return html;
   }
 
-  function escapeHtml(text) {
-    var div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
+  // escapeHtml provided by WidgetUtils
 
   function bindExportButton() {
     if (!dashboardEl) return;
@@ -568,14 +477,7 @@
             setTimeout(function() { btn.textContent = '\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c'; }, 1500);
           }).catch(function() {
             // Fallback for older browsers
-            var textarea = document.createElement('textarea');
-            textarea.value = content;
-            textarea.style.position = 'fixed';
-            textarea.style.left = '-9999px';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try { document.execCommand('copy'); } catch (_e) { /* ignore */ }
-            document.body.removeChild(textarea);
+            window.WidgetUtils.fallbackCopy(content);
           });
         } else {
           // Download file
@@ -700,12 +602,10 @@
       }
     }
 
-    // Fetch all data in parallel
-    await Promise.all([
-      fetchEnneagramData(),
-      fetchMbtiData(),
-      fetchOceanData()
-    ]);
+    // Fetch all data in parallel using WidgetUtils.fetchJson
+    enneagramDataCache = await window.WidgetUtils.fetchJson('data/enneagram.json');
+    mbtiDataCache = await window.WidgetUtils.fetchJson('data/mbti.json');
+    oceanDataCache = await window.WidgetUtils.fetchJson('data/ocean.json');
 
     // Subscribe to events (with last-value replay from EventBus v2)
     subscribeToEvents();

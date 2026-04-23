@@ -71,15 +71,9 @@
     { id: 'export', label: 'Экспорт' }
   ];
 
-  // OCEAN trait metadata
-  var OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
-  var OCEAN_NAMES = {
-    'O': 'Открытость',
-    'C': 'Добросовестность',
-    'E': 'Экстраверсия',
-    'A': 'Доброжелательность',
-    'N': 'Нейротизм'
-  };
+  // OCEAN trait metadata — provided by WidgetUtils
+  var OCEAN_TRAITS = window.WidgetUtils.OCEAN_TRAITS;
+  var OCEAN_NAMES = window.WidgetUtils.OCEAN_NAMES;
 
   // Data caches
   var enneagramDataCache = null;
@@ -102,37 +96,8 @@
   // DATA LOADING
   // ============================================================================
 
-  async function fetchEnneagramData() {
-    if (enneagramDataCache) return enneagramDataCache;
-    var url = 'data/enneagram.json';
-    try {
-      var response = await fetch(url);
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      var data = await response.json();
-      enneagramDataCache = data;
-      console.log('[EnneagramBuilder] Loaded data v' + (data.version || '?') + ' from ' + url);
-      return data;
-    } catch (e) {
-      console.warn('[EnneagramBuilder] Failed to fetch ' + url + ':', e.message);
-      return null;
-    }
-  }
-
-  async function fetchOceanData() {
-    if (oceanDataCache) return oceanDataCache;
-    var url = 'data/ocean.json';
-    try {
-      var response = await fetch(url);
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      var data = await response.json();
-      oceanDataCache = data;
-      console.log('[EnneagramBuilder] Loaded OCEAN data v' + (data.version || '?') + ' from ' + url);
-      return data;
-    } catch (e) {
-      console.warn('[EnneagramBuilder] Failed to fetch ' + url + ':', e.message);
-      return null;
-    }
-  }
+  // Data loading delegated to WidgetUtils.fetchJson (with internal cache)
+  // Local caches are still populated for direct access within this widget
 
   // ============================================================================
   // STATE HELPERS
@@ -313,10 +278,10 @@
       var typeInfo = getTypeInfo(selectedTypeId);
       if (typeInfo) {
         html += '<div class="enneagram-type-info">';
-        html += '<div class="enneagram-type-name">Тип ' + selectedTypeId + ': ' + escapeHtml(typeInfo.name) + '</div>';
-        html += '<div class="enneagram-type-alt">' + escapeHtml(typeInfo.name_alt) + '</div>';
-        html += '<div class="enneagram-type-fear"><strong>Страх:</strong> ' + escapeHtml(typeInfo.core_fear) + '</div>';
-        html += '<div class="enneagram-type-desire"><strong>Желание:</strong> ' + escapeHtml(typeInfo.core_desire) + '</div>';
+        html += '<div class="enneagram-type-name">Тип ' + selectedTypeId + ': ' + window.WidgetUtils.escapeHtml(typeInfo.name) + '</div>';
+        html += '<div class="enneagram-type-alt">' + window.WidgetUtils.escapeHtml(typeInfo.name_alt) + '</div>';
+        html += '<div class="enneagram-type-fear"><strong>Страх:</strong> ' + window.WidgetUtils.escapeHtml(typeInfo.core_fear) + '</div>';
+        html += '<div class="enneagram-type-desire"><strong>Желание:</strong> ' + window.WidgetUtils.escapeHtml(typeInfo.core_desire) + '</div>';
 
         // Growth/Stress directions
         var growthTarget = GROWTH_LINES[selectedTypeId];
@@ -343,7 +308,7 @@
             mbtiSuggestions.forEach(function(mbtiType, idx) {
               if (idx > 0) html += ', ';
               var isMatch = lastMbtiSelected && mbtiType === lastMbtiSelected;
-              html += '<span class="enneagram-mbti-type' + (isMatch ? ' mbti-match-highlight' : '') + '" tabindex="0" role="button" data-mbti="' + escapeHtml(mbtiType) + '">' + escapeHtml(mbtiType) + '</span>';
+              html += '<span class="enneagram-mbti-type' + (isMatch ? ' mbti-match-highlight' : '') + '" tabindex="0" role="button" data-mbti="' + window.WidgetUtils.escapeHtml(mbtiType) + '">' + window.WidgetUtils.escapeHtml(mbtiType) + '</span>';
             });
             html += '</div>';
           }
@@ -353,7 +318,7 @@
         if (currentWidgetLevel >= 3 && lastMbtiSelected && confirmedType === selectedTypeId) {
           html += '<div class="enneagram-mbti-live">';
           html += '<span class="enneagram-mbti-live-label">\uD83D\uDD17 Выбранный MBTI: </span>';
-          html += '<span class="enneagram-mbti-live-value">' + escapeHtml(lastMbtiSelected) + '</span>';
+          html += '<span class="enneagram-mbti-live-value">' + window.WidgetUtils.escapeHtml(lastMbtiSelected) + '</span>';
           var suggestions = getMbtiSuggestions(selectedTypeId) || [];
           var isCompatible = suggestions.indexOf(lastMbtiSelected) !== -1;
           html += '<span class="enneagram-mbti-compat ' + (isCompatible ? 'compat-yes' : 'compat-no') + '">' +
@@ -400,7 +365,7 @@
 
         html += '<div class="enneagram-ocean-slider-row">';
         html += '<span class="enneagram-ocean-trait-letter">' + trait + '</span>';
-        html += '<span class="enneagram-ocean-trait-name">' + escapeHtml(OCEAN_NAMES[trait]) + '</span>';
+        html += '<span class="enneagram-ocean-trait-name">' + window.WidgetUtils.escapeHtml(OCEAN_NAMES[trait]) + '</span>';
         html += '<div class="enneagram-ocean-bar-container">';
         html += '<div class="enneagram-ocean-bar" style="width:' + barPercent + '%;background:' + barColor + ';"></div>';
         html += '</div>';
@@ -417,7 +382,7 @@
         conflictWarnings.forEach(function(w) {
           html += '<div class="conflict-warning">';
           html += '<span class="warning-icon">\u26A0\uFE0F</span>';
-          html += '<span class="warning-text">' + escapeHtml(w.message) + '</span>';
+          html += '<span class="warning-text">' + window.WidgetUtils.escapeHtml(w.message) + '</span>';
           html += '<span class="warning-question">Это осознанный конфликт?</span>';
           html += '</div>';
         });
@@ -527,9 +492,9 @@
 
       relevantAnchors.forEach(function(anchor) {
         html += '<div class="enneagram-flaw-anchor">';
-        html += '<div class="anchor-trigger">' + escapeHtml(anchor.trigger) + '</div>';
-        html += '<div class="anchor-action">' + escapeHtml(anchor.action) + '</div>';
-        html += '<div class="anchor-cost">' + escapeHtml(anchor.cost) + '</div>';
+        html += '<div class="anchor-trigger">' + window.WidgetUtils.escapeHtml(anchor.trigger) + '</div>';
+        html += '<div class="anchor-action">' + window.WidgetUtils.escapeHtml(anchor.action) + '</div>';
+        html += '<div class="anchor-cost">' + window.WidgetUtils.escapeHtml(anchor.cost) + '</div>';
 
         // M2+ ocean_tags badges
         if (isM2 && anchor.ocean_tags && anchor.ocean_tags.length > 0) {
@@ -537,7 +502,7 @@
           anchor.ocean_tags.forEach(function(tag) {
             var parts = tag.split('_');
             var tagColor = parts[1] === 'high' ? 'var(--accent)' : (parts[1] === 'low' ? 'var(--danger, #ef4444)' : 'var(--text-muted)');
-            html += '<span class="ocean-tag-badge" style="background:' + tagColor + ';color:var(--bg);font-size:0.7em;padding:0.1em 0.4em;border-radius:3px;margin-right:0.3em;">' + escapeHtml(tag) + '</span>';
+            html += '<span class="ocean-tag-badge" style="background:' + tagColor + ';color:var(--bg);font-size:0.7em;padding:0.1em 0.4em;border-radius:3px;margin-right:0.3em;">' + window.WidgetUtils.escapeHtml(tag) + '</span>';
           });
           html += '</div>';
         }
@@ -562,7 +527,7 @@
     var labelClass = 'label-' + fieldName;
     return '<div class="enneagram-spine-field">' +
       '<label class="enneagram-spine-label ' + labelClass + '" for="enneagram-spine-' + fieldName.toLowerCase() + '">' + fieldName + '</label>' +
-      '<textarea class="enneagram-spine-input" id="enneagram-spine-' + fieldName.toLowerCase() + '" data-field="' + fieldName + '" rows="2">' + escapeHtml(value || '') + '</textarea>' +
+      '<textarea class="enneagram-spine-input" id="enneagram-spine-' + fieldName.toLowerCase() + '" data-field="' + fieldName + '" rows="2">' + window.WidgetUtils.escapeHtml(value || '') + '</textarea>' +
       '</div>';
   }
 
@@ -576,29 +541,31 @@
     }
 
     var typeInfo = getTypeInfo(selectedTypeId);
-    if (!typeInfo || !typeInfo.anchor_examples || typeInfo.anchor_examples.length === 0) {
+    var anchors = getFlawAnchors(selectedTypeId);
+    if ((!typeInfo || !anchors || anchors.length === 0) && (!typeInfo || !typeInfo.anchor_examples || typeInfo.anchor_examples.length === 0)) {
       return '<p class="enneagram-hint">Примеры не найдены для типа ' + selectedTypeId + '</p>';
     }
 
+    // M1: use flaw_anchors instead of typeData.anchor_examples
+    var examples = anchors.length > 0 ? anchors : (typeInfo.anchor_examples || []);
+
     var html = '<div class="enneagram-examples-list">';
 
-    typeInfo.anchor_examples.forEach(function(example) {
+    examples.forEach(function(example) {
       html += '<div class="enneagram-example-card">';
 
       // Trigger → Action → Cost
-      html += '<div class="example-row"><span class="example-label">Триггер:</span> ' + escapeHtml(example.trigger) + '</div>';
-      html += '<div class="example-row"><span class="example-label">Действие:</span> ' + escapeHtml(example.action) + '</div>';
-      html += '<div class="example-row"><span class="example-label">Цена:</span> ' + escapeHtml(example.price) + '</div>';
+      html += '<div class="example-row"><span class="example-label">Триггер:</span> ' + window.WidgetUtils.escapeHtml(example.trigger) + '</div>';
+      html += '<div class="example-row"><span class="example-label">Действие:</span> ' + window.WidgetUtils.escapeHtml(example.action) + '</div>';
+      html += '<div class="example-row"><span class="example-label">Цена:</span> ' + window.WidgetUtils.escapeHtml(example.price || example.cost) + '</div>';
 
       // Ocean tags badges (if present on examples from flaw_anchors)
-      var anchors = getFlawAnchors(selectedTypeId);
-      var matchingAnchor = anchors.find(function(a) { return a.trigger === example.trigger; });
-      if (matchingAnchor && matchingAnchor.ocean_tags && matchingAnchor.ocean_tags.length > 0) {
+      if (example.ocean_tags && example.ocean_tags.length > 0) {
         html += '<div class="example-ocean-tags">';
-        matchingAnchor.ocean_tags.forEach(function(tag) {
+        example.ocean_tags.forEach(function(tag) {
           var parts = tag.split('_');
           var tagColor = parts[1] === 'high' ? 'var(--accent)' : (parts[1] === 'low' ? 'var(--danger, #ef4444)' : 'var(--text-muted)');
-          html += '<span class="ocean-tag-badge" style="background:' + tagColor + ';color:var(--bg);font-size:0.7em;padding:0.1em 0.4em;border-radius:3px;margin-right:0.3em;">' + escapeHtml(tag) + '</span>';
+          html += '<span class="ocean-tag-badge" style="background:' + tagColor + ';color:var(--bg);font-size:0.7em;padding:0.1em 0.4em;border-radius:3px;margin-right:0.3em;">' + window.WidgetUtils.escapeHtml(tag) + '</span>';
         });
         html += '</div>';
       }
@@ -629,7 +596,7 @@
     html += '</select>';
     html += '</div>';
 
-    html += '<div class="enneagram-export-preview" id="enneagram-export-preview">' + escapeHtml(preview) + '</div>';
+    html += '<div class="enneagram-export-preview" id="enneagram-export-preview">' + window.WidgetUtils.escapeHtml(preview) + '</div>';
 
     html += '<div class="enneagram-export-actions">';
     html += '<button class="enneagram-copy-btn" id="enneagram-copy-export" type="button">📋 Копировать</button>';
@@ -706,14 +673,7 @@
   // UTILITY
   // ============================================================================
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
+  // escapeHtml provided by WidgetUtils
 
   // ============================================================================
   // WIDGET BUILDER
@@ -900,14 +860,14 @@
               copyBtn.textContent = '📋 Копировать';
             }, 1500);
           }).catch(function() {
-            fallbackCopy(content);
+            window.WidgetUtils.fallbackCopy(content);
             copyBtn.textContent = '✓ Скопировано';
             setTimeout(function() {
               copyBtn.textContent = '📋 Копировать';
             }, 1500);
           });
         } else {
-          fallbackCopy(content);
+          window.WidgetUtils.fallbackCopy(content);
           copyBtn.textContent = '✓ Скопировано';
           setTimeout(function() {
             copyBtn.textContent = '📋 Копировать';
@@ -917,20 +877,7 @@
     }
   }
 
-  function fallbackCopy(text) {
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-    } catch (_e) {
-      console.warn('[EnneagramBuilder] Fallback copy failed');
-    }
-    document.body.removeChild(ta);
-  }
+  // fallbackCopy provided by WidgetUtils
 
   // ============================================================================
   // EVENT SUBSCRIPTION (M2+)
@@ -952,7 +899,7 @@
 
       // M3: Run conflict validator if type is confirmed
       if (currentWidgetLevel >= 3 && confirmedType) {
-        conflictWarnings = checkOceanEnneagramConflicts(confirmedType, currentOceanProfile);
+        conflictWarnings = runConflictCheck(confirmedType, currentOceanProfile);
       }
 
       // Re-render active tab (SPINE for FLAW filtering, OCEAN for conflict warnings)
@@ -977,46 +924,11 @@
    * Returns array of conflict objects { trait, expected, actual, message }.
    * Per spec §5.1 and §4.2 M3.
    */
-  function checkOceanEnneagramConflicts(typeId, profile) {
+  function runConflictCheck(typeId, profile) {
     if (!enneagramDataCache || !enneagramDataCache.types) return [];
     var typeInfo = getTypeInfo(typeId);
     if (!typeInfo || !typeInfo.ocean_correlation) return [];
-
-    var correlation = typeInfo.ocean_correlation;
-    var conflicts = [];
-
-    OCEAN_TRAITS.forEach(function(trait, i) {
-      var expectedCorrelation = correlation[i]; // -1.0 to 1.0
-      var actualValue = profile[trait]; // 0-100
-
-      // Normalize actual to 0-1
-      var actualNormalized = actualValue / 100;
-
-      // Convert correlation to expected position
-      // -1.0 = low (0.2), 0 = moderate (0.5), 1.0 = high (0.8)
-      var expectedPosition = (expectedCorrelation + 1) / 2 * 0.6 + 0.2;
-
-      // Check for significant deviation
-      var deviation = Math.abs(actualNormalized - expectedPosition);
-      if (deviation > 0.35) {
-        var expectedLabel = expectedCorrelation > 0.3 ? 'высокий' :
-          expectedCorrelation < -0.3 ? 'низкий' : 'умеренный';
-        var actualLabel = actualValue > 70 ? 'высокий' :
-          actualValue < 30 ? 'низкий' : 'умеренный';
-
-        conflicts.push({
-          trait: trait,
-          expected: expectedLabel,
-          actual: actualLabel,
-          deviation: deviation.toFixed(2),
-          message: trait + ': ожидается ' + expectedLabel +
-            ' (корреляция ' + expectedCorrelation.toFixed(2) +
-            '), фактически ' + actualLabel + ' (' + actualValue + ')'
-        });
-      }
-    });
-
-    return conflicts;
+    return window.WidgetUtils.checkOceanEnneagramConflicts(profile, typeInfo.ocean_correlation);
   }
 
   // ============================================================================
@@ -1066,7 +978,8 @@
     currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
 
     // Fetch data
-    var enneagramData = await fetchEnneagramData();
+    enneagramDataCache = await window.WidgetUtils.fetchJson('data/enneagram.json');
+    var enneagramData = enneagramDataCache;
     if (!enneagramData) {
       container.innerHTML = '<div class="enneagram-widget"><p class="enneagram-error">Enneagram данные недоступны</p></div>';
       return;
@@ -1074,7 +987,7 @@
 
     // M2+: fetch OCEAN data for extremum thresholds
     if (currentWidgetLevel >= 2) {
-      await fetchOceanData();
+      oceanDataCache = await window.WidgetUtils.fetchJson('data/ocean.json');
     }
 
     // Build widget
