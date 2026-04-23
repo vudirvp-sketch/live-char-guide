@@ -184,7 +184,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Выщербленный (L3) | Part 10 | p10_vysherblenny_l3 | l3 | Complete card | GHOST Layers + CoT + XML (~1500+ токенов) |
 | Уолтер Уайт (L2) | Part 10 | p10_walter_l2 | l2 | Complete card | Realistic modern character, WANT/NEED/FLAW. NEW |
 | Voice Warning (L2) | Part 10 | p10_l2_voice_warning | l2 | Rule | Общее предупреждение о голосе для L2 примеров |
-| Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Тех-Жрец, Адептус Механикус) |
+| Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Тех-Жрец (Tech-Priest), Адептус Механикус (Adeptus Mechanicus)) |
 | Омнис-Зета 7-Квин (L2) | Part 10 | p10_omnis_l2_card | l2 | Complete card | L2 карточка Омнис-Зета 7-Квин (SPINE + OCEAN + FLAW-linked anchors) |
 | Омнис-Зета 7-Квин (L3) | Part 10 | p10_omnis_l3_card | l3 | Complete card | L3 карточка Омнис-Зета 7-Квин (GHOST Layers + CoT + XML) |
 
@@ -197,7 +197,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 1 (Basic Blocks) | 11 | 0 | 0 | 11 |
 | Part 2 (Anchors) | 3 | 3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
-| Part 4 (SPINE) | 0 | 6 | 6 | 12 |
+| Part 4 (SPINE) | 0 | 5 | 6 | 11 |
 | Part 5 (Psych Toolkit) | 0 | 8 | 2 | 10 |
 | Part 6 (CoT) | 0 | 0 | 6 | 6 |
 | Part 7 (Technical) | 0 | 10 | 9 | 19 |

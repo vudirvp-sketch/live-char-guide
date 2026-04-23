@@ -15,6 +15,18 @@ import sys
 from pathlib import Path
 from difflib import SequenceMatcher
 
+# Pairs of files where duplication is intentional (template → implementation)
+ALLOWED_DUPLICATE_PAIRS = [
+    ("part_07_technical.html", "part_10_examples.html"),
+]
+
+def is_allowed_pair(file1, file2):
+    """Check if a duplicate pair is in the allowlist."""
+    for a, b in ALLOWED_DUPLICATE_PAIRS:
+        if (a in file1 and b in file2) or (b in file1 and a in file2):
+            return True
+    return False
+
 def normalize_text(text: str) -> str:
     """Normalize text for comparison."""
     # Remove HTML tags
@@ -140,10 +152,13 @@ def main():
     
     duplicates = find_duplicates(existing_dirs, args.min_length, args.threshold)
     
-    if duplicates:
-        print(f"\n❌ Found {len(duplicates)} duplicate(s):\n")
-        
-        for dup in duplicates:
+    # Split duplicates into warnings (allowlisted) and errors
+    warnings = [d for d in duplicates if is_allowed_pair(d['file1'], d['file2'])]
+    errors = [d for d in duplicates if not is_allowed_pair(d['file1'], d['file2'])]
+
+    if warnings:
+        print(f"\n⚠️  Found {len(warnings)} allowed duplicate(s) (intentional template → implementation):\n")
+        for dup in warnings:
             print(f"Similarity: {dup['similarity']:.1%}")
             print(f"  File 1: {dup['file1']}")
             print(f"  File 2: {dup['file2']}")
@@ -151,11 +166,25 @@ def main():
                 print(f"  Text 1: {dup['text1_preview']}")
                 print(f"  Text 2: {dup['text2_preview']}")
             print()
-        
+
+    if errors:
+        print(f"\n❌ Found {len(errors)} duplicate(s):\n")
+        for dup in errors:
+            print(f"Similarity: {dup['similarity']:.1%}")
+            print(f"  File 1: {dup['file1']}")
+            print(f"  File 2: {dup['file2']}")
+            if args.verbose:
+                print(f"  Text 1: {dup['text1_preview']}")
+                print(f"  Text 2: {dup['text2_preview']}")
+            print()
+
         print("ACTION REQUIRED: Extract duplicate content to a shared file")
         print("and replace with reference: <span class=\"core-ref\">→ See <a href=\"#shared-section\">Shared Section</a></span>")
-        
+
         sys.exit(1)
+    elif warnings:
+        print("✅ No disallowed duplicates found (only intentional duplicates remain)")
+        sys.exit(0)
     else:
         print("✅ No duplicates found")
         sys.exit(0)

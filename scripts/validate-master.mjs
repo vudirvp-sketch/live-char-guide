@@ -326,11 +326,9 @@ async function checkContentOutsideSections(allContent) {
   let errorCount = 0;
 
   for (const { file, content } of allContent) {
-    // Remove all sections with data-layer
-    let remaining = content;
-
-    // Remove HTML comments
-    remaining = remaining.replace(/<!--[\s\S]*?-->/g, '');
+    // Strip HTML comments BEFORE section boundary analysis so they
+    // don't get flagged as "content outside sections" (RP-10 fix).
+    const contentNoComments = content.replace(/<!--[\s\S]*?-->/g, '');
 
     // Remove all sections (including their content)
     // We'll use a different approach: find what's NOT inside sections
@@ -341,19 +339,19 @@ async function checkContentOutsideSections(allContent) {
     const sectionRegex = /<section\s+[^>]*data-layer[^>]*>/gi;
     let match;
 
-    while ((match = sectionRegex.exec(content)) !== null) {
+    while ((match = sectionRegex.exec(contentNoComments)) !== null) {
       sectionStarts.push(match.index);
     }
 
     // For each section start, find its matching end
     for (const startIdx of sectionStarts) {
-      const startTagEnd = content.indexOf('>', startIdx) + 1;
+      const startTagEnd = contentNoComments.indexOf('>', startIdx) + 1;
       let depth = 1;
       let searchPos = startTagEnd;
 
-      while (depth > 0 && searchPos < content.length) {
-        const nextOpen = content.indexOf('<section', searchPos);
-        const nextClose = content.indexOf('</section>', searchPos);
+      while (depth > 0 && searchPos < contentNoComments.length) {
+        const nextOpen = contentNoComments.indexOf('<section', searchPos);
+        const nextClose = contentNoComments.indexOf('</section>', searchPos);
 
         if (nextClose === -1) break;
 
@@ -376,7 +374,7 @@ async function checkContentOutsideSections(allContent) {
 
     for (let i = 0; i < sectionStarts.length; i++) {
       if (i < sectionEnds.length) {
-        const betweenContent = content.slice(lastEnd, sectionStarts[i]).trim();
+        const betweenContent = contentNoComments.slice(lastEnd, sectionStarts[i]).trim();
         if (betweenContent.length > 0) {
           outsideRanges.push(betweenContent);
         }
@@ -385,7 +383,7 @@ async function checkContentOutsideSections(allContent) {
     }
 
     // Check after last section
-    const afterContent = content.slice(lastEnd).trim();
+    const afterContent = contentNoComments.slice(lastEnd).trim();
     if (afterContent.length > 0) {
       outsideRanges.push(afterContent);
     }
