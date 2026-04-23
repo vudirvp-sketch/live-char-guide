@@ -24,6 +24,34 @@
 <p><strong>📌 Важно:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
 </div>
 
+<h3>Сводная таблица анти-паттернов</h3>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>AP</th><th>Название</th><th>Слой</th><th>Критичность</th><th>Быстрый фикс</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#p8_ap1_token_bloat">AP-1</a></td><td>Token Bloat</td><td><span class="tag opt">L2</span></td><td><span class="tag risk">Высокая</span></td><td>Удалить повторы из Description</td></tr>
+<tr><td><a href="#p8_ap2_missing_price">AP-2</a></td><td>Missing Price</td><td><span class="tag opt">L2</span></td><td><span class="tag risk">Высокая</span></td><td>Добавить физическую цену к якорю</td></tr>
+<tr><td><a href="#p8_ap3_voice_in_description">AP-3</a></td><td>Voice in Description</td><td><span class="tag opt">L2</span></td><td><span class="tag risk">Высокая</span></td><td>Перенести голос в Examples</td></tr>
+<tr><td><a href="#p8_ap4_ghost_in_sp">AP-4</a></td><td>GHOST в SP</td><td><span class="tag opt">L2</span></td><td><span class="tag risk">Высокая</span></td><td>Перенести SPINE в Description</td></tr>
+<tr><td><a href="#p8_ap5_reppen_high">AP-5</a></td><td>RepPen > 1.10</td><td><span class="tag opt">L2</span></td><td><span class="tag tip">Средняя</span></td><td>Установить RepPen ≤ 1.10</td></tr>
+<tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-Godmoding</td><td><span class="tag opt">L2</span></td><td><span class="tag risk">Высокая</span></td><td>Добавить "Never speak for {{user}}"</td></tr>
+<tr><td><a href="#p8_ap7_presence_penalty">AP-7</a></td><td>Presence Penalty > 0</td><td><span class="tag opt">L2</span></td><td><span class="tag tip">Средняя</span></td><td>Установить Presence Penalty = 0</td></tr>
+<tr><td><a href="#p8_ap15_basic">AP-15</a></td><td>OCEAN Overload</td><td><span class="tag opt">L2</span></td><td><span class="tag tip">Средняя</span></td><td>Оставить 1–2 экстремальных полюса</td></tr>
+<tr><td><a href="#p8_ap16_nested_anchors">AP-16</a></td><td>Nested Anchors</td><td><span class="tag opt">L2</span></td><td><span class="tag tip">Средняя</span></td><td>Разбить на атомарные якоря</td></tr>
+<tr><td><a href="#p8_ap8_ghost_no_anchors">AP-8</a></td><td>GHOST без якорей</td><td><span class="tag advanced">L3</span></td><td><span class="tag tip">Средняя</span></td><td>Добавить минимум 1 GHOST-якорь</td></tr>
+<tr><td><a href="#p8_ap9_spine_broken">AP-9</a></td><td>Broken SPINE</td><td><span class="tag advanced">L3</span></td><td><span class="tag risk">Высокая</span></td><td>Проверить цепочку G→L→F→N→W</td></tr>
+<tr><td><a href="#p8_ap10_cot_overload">AP-10</a></td><td>CoT Overload</td><td><span class="tag advanced">L3</span></td><td><span class="tag tip">Средняя</span></td><td>Оставить 2–3 CoT-якоря</td></tr>
+<tr><td><a href="#p8_ap11_voice_bleed">AP-11</a></td><td>Voice Bleed</td><td><span class="tag advanced">L3</span></td><td><span class="tag risk">Высокая</span></td><td>Добавить Character Markers</td></tr>
+<tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td><span class="tag advanced">L3</span></td><td><span class="tag tip">Средняя</span></td><td>Валидировать XML-теги</td></tr>
+<tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td><span class="tag advanced">L3</span></td><td><span class="tag tip">Средняя</span></td><td>Проверить консистентность записей</td></tr>
+<tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td><span class="tag advanced">L3</span></td><td><span class="tag risk">Высокая</span></td><td>Использовать 4K-Fallback Protocol</td></tr>
+</tbody>
+</table>
+</div>
+
 </section>
 
 <section data-layer="l2" data-section="p8_ap1_token_bloat">

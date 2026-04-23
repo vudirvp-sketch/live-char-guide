@@ -2781,3 +2781,114 @@ td.temperament-sp {
   color: var(--text-muted);
   font-size: 0.9em;
 }
+
+/* === TOKEN CALCULATOR (V-08) === */
+.token-calc {
+  margin: 1.5em 0;
+  padding: 1.2em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.token-calc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-bottom: 1em;
+}
+
+.token-calc-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.token-calc-label {
+  min-width: 100px;
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+.token-calc-range {
+  flex: 1;
+  min-width: 100px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.token-calc-range::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.token-calc-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.token-calc-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.token-calc-val {
+  min-width: 45px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+.token-calc-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--border);
+  font-size: 0.95em;
+}
+
+.token-calc-result strong {
+  color: var(--accent);
+  font-size: 1.2em;
+}
+
+.token-calc-result .tag {
+  font-size: 0.8em;
+}
+
+.token-calc-result .tag.layer-1 { background: rgba(34, 197, 94, 0.2); color: var(--layer-1-clr); }
+.token-calc-result .tag.layer-2 { background: rgba(56, 189, 248, 0.2); color: var(--layer-2-clr); }
+.token-calc-result .tag.layer-3 { background: rgba(139, 92, 246, 0.2); color: var(--layer-3-clr); }
+.token-calc-result .tag.over { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+/* === PROGRESS BAR (V-09) === */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  z-index: 1002;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--layer-1-clr), var(--layer-2-clr), var(--layer-3-clr));
+  transition: width 0.1s ease;
+}

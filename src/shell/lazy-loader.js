@@ -1182,6 +1182,8 @@
     initMBTI();
     initLayerSwitch();
     initTooltips();
+    initTokenCalc();
+    initProgressBar();
   }
 
   // ============================================================================
@@ -1612,6 +1614,139 @@
         });
       });
     }
+  }
+
+  // ============================================================================
+  // TOKEN CALCULATOR (V-08)
+  // ============================================================================
+
+  /**
+   * Initialize the token budget calculator widget.
+   * Updates total and layer recommendation in real-time as user adjusts sliders.
+   * Progressive enhancement: without JS, static table remains functional.
+   */
+  function initTokenCalc() {
+    const calcEl = $('#token-calc');
+    if (!calcEl) return;
+
+    const spSlider = $('#calc-sp');
+    const descSlider = $('#calc-desc');
+    const exSlider = $('#calc-ex');
+    const ancSlider = $('#calc-anc');
+    const totalEl = $('#calc-total');
+    const layerTagEl = $('#calc-layer-tag');
+
+    if (!spSlider || !descSlider || !exSlider || !ancSlider || !totalEl || !layerTagEl) return;
+
+    const spValEl = $('#calc-sp-val');
+    const descValEl = $('#calc-desc-val');
+    const exValEl = $('#calc-ex-val');
+    const ancValEl = $('#calc-anc-val');
+
+    function updateCalc() {
+      const sp = parseInt(spSlider.value, 10);
+      const desc = parseInt(descSlider.value, 10);
+      const ex = parseInt(exSlider.value, 10);
+      const anc = parseInt(ancSlider.value, 10);
+      const total = sp + desc + ex + anc;
+
+      // Update value displays
+      if (spValEl) spValEl.textContent = sp;
+      if (descValEl) descValEl.textContent = desc;
+      if (exValEl) exValEl.textContent = ex;
+      if (ancValEl) ancValEl.textContent = anc;
+
+      // Update total
+      totalEl.textContent = total;
+
+      // Update layer tag
+      layerTagEl.className = 'tag';
+      if (total < 400) {
+        layerTagEl.textContent = 'Минимум (<400)';
+        layerTagEl.classList.add('over');
+      } else if (total <= 800) {
+        layerTagEl.textContent = 'L1 (400–800)';
+        layerTagEl.classList.add('layer-1');
+      } else if (total <= 1500) {
+        layerTagEl.textContent = 'L2 (800–1500)';
+        layerTagEl.classList.add('layer-2');
+      } else if (total <= 2500) {
+        layerTagEl.textContent = 'L3 (1500–2500)';
+        layerTagEl.classList.add('layer-3');
+      } else {
+        layerTagEl.textContent = 'Перегруз (>2500)';
+        layerTagEl.classList.add('over');
+      }
+    }
+
+    // Bind slider events
+    spSlider.addEventListener('input', updateCalc);
+    descSlider.addEventListener('input', updateCalc);
+    exSlider.addEventListener('input', updateCalc);
+    ancSlider.addEventListener('input', updateCalc);
+
+    // Initial update
+    updateCalc();
+
+    console.log('[TokenCalc] Initialized');
+  }
+
+  // ============================================================================
+  // PROGRESS BAR (V-09)
+  // ============================================================================
+
+  /**
+   * Initialize the reading progress bar.
+   * Uses IntersectionObserver to track which sections are visible.
+   * Progressive enhancement: without JS, progress bar is hidden (no loss of functionality).
+   */
+  function initProgressBar() {
+    // Check if progress bar already exists
+    let progressBar = $('.progress-bar');
+    
+    if (!progressBar) {
+      // Create progress bar element
+      progressBar = document.createElement('div');
+      progressBar.className = 'progress-bar';
+      progressBar.setAttribute('role', 'progressbar');
+      progressBar.setAttribute('aria-valuenow', '0');
+      progressBar.setAttribute('aria-valuemin', '0');
+      progressBar.setAttribute('aria-valuemax', '100');
+      progressBar.innerHTML = '<div class="progress-fill"></div>';
+      document.body.appendChild(progressBar);
+    }
+
+    const progressFill = progressBar.querySelector('.progress-fill');
+    if (!progressFill) return;
+
+    let sections = $$('section[data-section]');
+    if (sections.length === 0) return;
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      
+      progressFill.style.width = progress + '%';
+      progressBar.setAttribute('aria-valuenow', Math.round(progress));
+    }
+
+    // Throttled scroll handler
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial update
+    updateProgress();
+
+    console.log('[ProgressBar] Initialized');
   }
 
   // ============================================================================
