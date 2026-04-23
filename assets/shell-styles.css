@@ -3195,3 +3195,860 @@ td.temperament-sp {
 .spine-result-summary.needs-work {
   color: var(--warning-border);
 }
+
+/* === OCEAN INSIGHT WIDGET (§4.1 Persona Synthesis Framework) === */
+.ocean-widget {
+  margin: 1.5em 0;
+  padding: 1.2em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.ocean-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.ocean-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+}
+
+.ocean-level-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.ocean-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1em;
+}
+
+.ocean-pentagon-container {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+}
+
+.ocean-pentagon-svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+/* Pentagon frame */
+.ocean-outer-frame {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 4 2;
+}
+
+/* Axis lines */
+.ocean-axis {
+  stroke: var(--border);
+  stroke-width: 0.5;
+  opacity: 0.5;
+}
+
+/* Inner shape (current profile) */
+.ocean-inner-shape {
+  fill: rgba(56, 189, 248, 0.12);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  transition: all 0.2s ease;
+}
+
+/* Vertex dots */
+.ocean-vertex {
+  cursor: pointer;
+  stroke: var(--bg);
+  stroke-width: 2;
+  transition: all 0.15s ease;
+}
+
+.ocean-vertex:hover {
+  transform-origin: center;
+  filter: brightness(1.3);
+  stroke-width: 3;
+}
+
+.ocean-vertex-low {
+  fill: #ef4444;
+}
+
+.ocean-vertex-medium {
+  fill: #6b7280;
+}
+
+.ocean-vertex-high {
+  fill: #22c55e;
+}
+
+/* State labels */
+.ocean-label {
+  font-size: 9px;
+  font-family: var(--font-sans);
+  pointer-events: none;
+  transition: fill 0.15s ease;
+}
+
+.ocean-label-low {
+  fill: #fca5a5;
+  font-weight: 600;
+}
+
+.ocean-label-medium {
+  fill: var(--text-muted);
+}
+
+.ocean-label-high {
+  fill: #86efac;
+  font-weight: 600;
+}
+
+/* Trait letter labels */
+.ocean-trait-letter {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--text);
+  font-family: var(--font-sans);
+  pointer-events: none;
+}
+
+/* Legend */
+.ocean-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 0.8em;
+  flex-wrap: wrap;
+}
+
+.ocean-legend-item {
+  font-size: 0.8rem;
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.ocean-legend-low {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.ocean-legend-medium {
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+}
+
+.ocean-legend-high {
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.08);
+}
+
+/* Error state */
+.ocean-error {
+  color: var(--color-error);
+  text-align: center;
+  padding: 1em;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .ocean-pentagon-svg {
+    max-width: 260px;
+  }
+  .ocean-legend {
+    gap: 0.5em;
+  }
+  .ocean-legend-item {
+    font-size: 0.75rem;
+  }
+}
+
+/* === OCEAN INSIGHT M2 STYLES === */
+.ocean-widget-m2 .ocean-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em 0;
+}
+
+.ocean-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.ocean-slider-label {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  min-width: 2em;
+  font-weight: 600;
+}
+
+.ocean-slider-name {
+  font-size: 0.75em;
+  color: var(--text);
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.ocean-slider-input {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  border-radius: 3px;
+  outline: none;
+}
+
+.ocean-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ocean-slider-input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.ocean-slider-value {
+  font-size: 0.75em;
+  min-width: 2.5em;
+  text-align: right;
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+.ocean-slider-value.ocean-value-low { color: var(--color-error); }
+.ocean-slider-value.ocean-value-high { color: var(--color-success); }
+
+.ocean-extremum-counter {
+  padding: 0.4em 0.6em;
+  font-size: 0.8em;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 0.3em;
+}
+
+.ocean-extremum-warning {
+  color: var(--color-warning);
+  font-weight: 500;
+  margin-top: 0.3em;
+}
+
+.ocean-forecast {
+  padding: 0.5em 0.6em;
+  font-size: 0.8em;
+  border-top: 1px solid var(--border);
+}
+
+.ocean-forecast-title {
+  font-weight: 600;
+  margin-bottom: 0.3em;
+  color: var(--text);
+}
+
+.ocean-forecast-types {
+  color: var(--text-muted);
+  margin-bottom: 0.3em;
+}
+
+.ocean-forecast-types strong {
+  color: var(--accent);
+}
+
+.ocean-actions {
+  padding: 0.5em 0;
+  border-top: 1px solid var(--border);
+}
+
+.ocean-copy-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4em 1em;
+  color: var(--text);
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.ocean-copy-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.ocean-copy-btn.ocean-copied {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+
+/* === ENNEAGRAM SMART BUILDER STYLES === */
+.enneagram-widget {
+  max-width: 320px;
+  margin: 1em auto;
+  padding: 0.8em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.enneagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.enneagram-title {
+  font-size: 1em;
+  margin: 0;
+  color: var(--accent);
+}
+
+.enneagram-level-badge {
+  font-size: 0.7em;
+  padding: 0.15em 0.5em;
+  background: var(--accent-soft);
+  border-radius: 4px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.enneagram-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5em;
+}
+
+.enneagram-tab {
+  padding: 0.4em 0.8em;
+  font-size: 0.8em;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.enneagram-tab:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.enneagram-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.enneagram-tab-content {
+  display: none;
+}
+
+.enneagram-tab-content.active {
+  display: block;
+}
+
+/* Ring diagram */
+.enneagram-ring-svg {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.enneagram-ring-point {
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.enneagram-ring-point:hover circle {
+  r: 14;
+  fill: var(--accent);
+}
+
+.enneagram-ring-point.selected circle {
+  fill: var(--accent);
+  r: 14;
+}
+
+.enneagram-ring-point text {
+  font-size: 12px;
+  fill: var(--text);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+.enneagram-ring-point.selected text {
+  fill: var(--bg);
+}
+
+.enneagram-connection-line {
+  stroke: var(--border);
+  stroke-width: 1;
+  fill: none;
+  opacity: 0.4;
+}
+
+.enneagram-connection-line.active {
+  stroke: var(--accent);
+  opacity: 0.8;
+  stroke-width: 2;
+}
+
+/* Type info */
+.enneagram-type-info {
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+
+.enneagram-type-name {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+.enneagram-type-alt {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  margin-bottom: 0.3em;
+}
+
+.enneagram-type-fear,
+.enneagram-type-desire {
+  font-size: 0.8em;
+  margin-bottom: 0.2em;
+}
+
+.enneagram-type-directions {
+  display: flex;
+  gap: 0.8em;
+  margin-top: 0.3em;
+  font-size: 0.75em;
+}
+
+.enneagram-growth {
+  color: var(--color-success);
+}
+
+.enneagram-stress {
+  color: var(--color-error);
+}
+
+.enneagram-type-wings {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  margin-top: 0.2em;
+}
+
+.enneagram-confirm-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85em;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.enneagram-confirm-btn:hover {
+  opacity: 0.9;
+}
+
+.enneagram-confirm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.enneagram-hint {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.5em;
+}
+
+.enneagram-error {
+  color: var(--color-error);
+  font-size: 0.85em;
+  text-align: center;
+}
+
+/* SPINE fields */
+.enneagram-spine-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.enneagram-spine-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.enneagram-spine-label {
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.enneagram-spine-label.label-WANT { color: var(--color-success); }
+.enneagram-spine-label.label-NEED { color: var(--color-info); }
+.enneagram-spine-label.label-FLAW { color: var(--color-error); }
+.enneagram-spine-label.label-LIE { color: var(--color-warning); }
+.enneagram-spine-label.label-GHOST { color: #a78bfa; }
+
+.enneagram-spine-input {
+  padding: 0.4em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85em;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 2em;
+}
+
+.enneagram-spine-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* FLAW anchors */
+.enneagram-flaw-anchors {
+  margin-top: 0.5em;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5em;
+}
+
+.enneagram-flaw-anchors h5 {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  margin-bottom: 0.3em;
+}
+
+.enneagram-flaw-anchor {
+  padding: 0.4em;
+  margin-bottom: 0.3em;
+  background: var(--bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-error);
+}
+
+.anchor-trigger {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.anchor-action {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  margin-top: 0.15em;
+}
+
+.anchor-cost {
+  font-size: 0.7em;
+  color: var(--color-warning);
+  margin-top: 0.1em;
+  font-style: italic;
+}
+
+.enneagram-l3-hint {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+/* Export */
+.enneagram-export-format {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.enneagram-export-preview {
+  padding: 0.5em;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 0.8em;
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+}
+
+.enneagram-export-actions {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
+.enneagram-copy-btn {
+  padding: 0.3em 0.8em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 0.8em;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.enneagram-copy-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+/* === MBTI COMPOSER === */
+.mbti-widget{max-width:360px;margin:1em auto;padding:.8em;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px}
+.mbti-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5em}
+.mbti-title{font-size:1em;margin:0;color:var(--accent)}
+.mbti-level-badge{font-size:.7em;padding:.15em .5em;background:var(--accent-soft);border-radius:4px;color:var(--accent);font-weight:600}
+.mbti-mode-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:.8em}
+.mbti-mode-btn{flex:1;padding:.4em .6em;border:none;background:var(--bg);color:var(--text-muted);font-size:.8em;cursor:pointer;font-family:inherit}
+.mbti-mode-btn.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.mbti-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.mbti-grid-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5em .3em;border-radius:4px;cursor:pointer;transition:all .15s;min-height:50px}
+.mbti-grid-cell:hover{transform:scale(1.05);filter:brightness(1.2)}
+.mbti-grid-cell.selected{outline:2px solid var(--accent);outline-offset:2px}
+.mbti-grid-cell[data-temperament="NT"]{background:rgba(124,77,255,.2)}
+.mbti-grid-cell[data-temperament="NF"]{background:rgba(255,107,157,.2)}
+.mbti-grid-cell[data-temperament="SJ"]{background:rgba(77,195,255,.2)}
+.mbti-grid-cell[data-temperament="SP"]{background:rgba(255,184,77,.2)}
+.mbti-cell-code{font-size:.85em;font-weight:700;color:var(--text)}
+.mbti-cell-name{font-size:.6em;color:var(--text-muted);text-align:center;line-height:1.2;margin-top:.15em}
+.mbti-axis-sliders{display:flex;flex-direction:column;gap:.6em}
+.mbti-axis-row{display:flex;align-items:center;gap:.4em}
+.mbti-axis-label{font-size:.75em;font-weight:600;min-width:14px;text-align:center}
+.mbti-axis-label-left{color:var(--text-muted)}
+.mbti-axis-label-right{color:var(--accent)}
+.mbti-axis-input{flex:1;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none}
+.mbti-axis-input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--accent);border-radius:50%;cursor:pointer}
+.mbti-axis-input::-moz-range-thumb{width:14px;height:14px;background:var(--accent);border-radius:50%;cursor:pointer;border:none}
+.mbti-result-card{margin-top:.8em;padding:.8em;background:var(--bg-elevated);border-radius:6px;border:1px solid var(--border);text-align:center}
+.mbti-result-code{font-size:1.4em;font-weight:700;color:var(--accent);letter-spacing:.05em}
+.mbti-result-name{font-size:.95em;color:var(--text);margin-top:.2em}
+.mbti-result-temperament{font-size:.8em;color:var(--text-muted);margin-top:.15em}
+.mbti-result-functions{font-size:.8em;font-family:var(--font-mono);color:var(--accent);margin-top:.3em;letter-spacing:.03em}
+.mbti-result-hint{font-size:.8em;color:var(--text-muted);margin-top:.3em;font-style:italic}
+.mbti-empty-state{text-align:center;padding:1.5em;color:var(--text-muted);font-size:.85em}
+
+/* ============================================================
+   PHASE 3: M2/M3 WIDGET CSS ADDITIONS
+   ============================================================ */
+
+/* --- Enneagram Builder M2: OCEAN Tab --- */
+.enneagram-ocean-tab { padding: 0.5em 0; }
+.enneagram-ocean-defaults { margin: 0.5em 0; }
+.enneagram-ocean-bar-row { display: flex; align-items: center; gap: 0.4em; margin: 0.3em 0; }
+.enneagram-ocean-bar-label { font-size: 0.8em; font-weight: 700; width: 1.2em; text-align: center; }
+.enneagram-ocean-bar-track { flex: 1; height: 8px; background: var(--bg-elevated); border-radius: 4px; position: relative; overflow: hidden; }
+.enneagram-ocean-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+.enneagram-ocean-bar-value { font-size: 0.75em; color: var(--text-muted); width: 2.5em; text-align: right; }
+.enneagram-ocean-fill-O { background: var(--ocean-O); }
+.enneagram-ocean-fill-C { background: var(--ocean-C); }
+.enneagram-ocean-fill-E { background: var(--ocean-E); }
+.enneagram-ocean-fill-A { background: var(--ocean-A); }
+.enneagram-ocean-fill-N { background: var(--ocean-N); }
+.enneagram-ocean-correlation { margin: 0.8em 0 0.4em; font-size: 0.8em; }
+.enneagram-ocean-correlation table { min-width: auto; width: 100%; border-collapse: collapse; }
+.enneagram-ocean-correlation th, .enneagram-ocean-correlation td { padding: 0.3em 0.5em; font-size: 0.85em; border-bottom: 1px solid var(--border); }
+.enneagram-ocean-fill-btn { display: inline-block; margin: 0.5em 0; padding: 0.4em 0.8em; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 4px; color: var(--accent); font-size: 0.8em; cursor: pointer; transition: all var(--transition-fast); }
+.enneagram-ocean-fill-btn:hover { background: var(--accent); color: #fff; }
+
+/* --- Enneagram Builder M2: FLAW Anchor Tags & Toggle --- */
+.enneagram-flaw-toggle { display: inline-block; margin: 0.5em 0; padding: 0.3em 0.7em; background: transparent; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 0.8em; cursor: pointer; transition: all var(--transition-fast); }
+.enneagram-flaw-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.enneagram-flaw-toggle.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.ocean-tag { display: inline-block; padding: 0.1em 0.35em; border-radius: 3px; font-size: 0.7em; font-weight: 600; margin: 0 0.15em; }
+.ocean-tag-high { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+.ocean-tag-low { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
+.ocean-tag-moderate { background: rgba(156, 163, 175, 0.15); color: #d1d5db; border: 1px solid rgba(156, 163, 175, 0.3); }
+
+/* --- Enneagram Builder M2: MBTI Hints --- */
+.enneagram-mbti-hints { margin: 0.6em 0; padding: 0.5em; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
+.enneagram-mbti-hints-title { font-size: 0.8em; color: var(--text-muted); margin-bottom: 0.3em; }
+.enneagram-mbti-hint-chip { display: inline-block; padding: 0.2em 0.5em; margin: 0.15em; background: var(--accent-soft); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 4px; font-size: 0.8em; color: var(--accent); cursor: default; transition: background var(--transition-fast); }
+.enneagram-mbti-hint-chip:hover { background: rgba(56, 189, 248, 0.2); }
+
+/* --- Enneagram Builder M2: Examples Tab --- */
+.enneagram-examples-tab { padding: 0.5em 0; }
+.enneagram-example-item { padding: 0.5em; margin: 0.4em 0; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
+.enneagram-example-trigger { font-size: 0.85em; color: var(--accent); margin-bottom: 0.2em; }
+.enneagram-example-action { font-size: 0.8em; color: var(--text); }
+.enneagram-example-cost { font-size: 0.75em; color: var(--text-muted); margin-top: 0.15em; }
+
+/* --- MBTI Composer M2: OCEAN Cross-Reference --- */
+.mbti-ocean-section { margin: 0.8em 0; padding: 0.6em; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; }
+.mbti-ocean-checkbox { display: flex; align-items: center; gap: 0.4em; cursor: pointer; font-size: 0.85em; color: var(--text); margin-bottom: 0.4em; }
+.mbti-ocean-checkbox input { accent-color: var(--accent); }
+.mbti-ocean-bars { margin-top: 0.4em; }
+.mbti-ocean-bar-row { display: flex; align-items: center; gap: 0.4em; margin: 0.2em 0; }
+.mbti-ocean-bar-label { font-size: 0.75em; font-weight: 700; width: 1.2em; text-align: center; }
+.mbti-ocean-bar-track { flex: 1; height: 6px; background: var(--bg-elevated); border-radius: 3px; position: relative; overflow: hidden; }
+.mbti-ocean-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
+.mbti-ocean-bar-fill-O { background: var(--ocean-O); }
+.mbti-ocean-bar-fill-C { background: var(--ocean-C); }
+.mbti-ocean-bar-fill-E { background: var(--ocean-E); }
+.mbti-ocean-bar-fill-A { background: var(--ocean-A); }
+.mbti-ocean-bar-fill-N { background: var(--ocean-N); }
+.mbti-ocean-bar-value { font-size: 0.7em; color: var(--text-muted); width: 2.5em; text-align: right; }
+.mbti-ocean-apply-btn { display: inline-block; margin-top: 0.5em; padding: 0.4em 0.8em; background: var(--accent); color: #fff; border: none; border-radius: 4px; font-size: 0.8em; cursor: pointer; transition: opacity var(--transition-fast); }
+.mbti-ocean-apply-btn:hover { opacity: 0.85; }
+
+/* --- MBTI Composer M2: SPINE Patterns --- */
+.mbti-spine-section { margin: 0.8em 0; padding: 0.6em; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; }
+.mbti-spine-checkbox { display: flex; align-items: center; gap: 0.4em; cursor: pointer; font-size: 0.85em; color: var(--text); margin-bottom: 0.4em; }
+.mbti-spine-checkbox input { accent-color: var(--accent); }
+.mbti-spine-field { display: flex; align-items: flex-start; gap: 0.4em; margin: 0.3em 0; }
+.mbti-spine-field-label { font-size: 0.75em; font-weight: 700; min-width: 3.5em; padding: 0.2em 0; border-radius: 3px; text-align: center; }
+.mbti-spine-field-label.label-WANT { background: rgba(34, 197, 94, 0.15); color: #86efac; }
+.mbti-spine-field-label.label-FLAW { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+.mbti-spine-field-label.label-LIE { background: rgba(234, 179, 8, 0.15); color: #fde047; }
+.mbti-spine-field-label.label-GHOST { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; }
+.mbti-spine-field-value { font-size: 0.8em; color: var(--text); flex: 1; line-height: 1.4; }
+.mbti-spine-copy-btn { background: transparent; border: 1px solid var(--border); border-radius: 3px; color: var(--text-muted); font-size: 0.7em; cursor: pointer; padding: 0.15em 0.3em; transition: all var(--transition-fast); flex-shrink: 0; }
+.mbti-spine-copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* --- MBTI Composer M2: Enneagram Hints --- */
+.mbti-enneagram-hints { margin: 0.6em 0; padding: 0.5em; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
+.mbti-enneagram-hints-title { font-size: 0.8em; color: var(--text-muted); margin-bottom: 0.3em; }
+.mbti-enneagram-hint-chip { display: inline-block; padding: 0.2em 0.5em; margin: 0.15em; background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 4px; font-size: 0.8em; color: #c4b5fd; cursor: default; transition: background var(--transition-fast); }
+.mbti-enneagram-hint-chip:hover { background: rgba(139, 92, 246, 0.2); }
+
+/* --- OCEAN Insight M3: Comfort Zones & Conflict Markers --- */
+.ocean-slider-track-wrapper { position: relative; margin: 0.2em 0; }
+.ocean-comfort-zone { position: absolute; top: 50%; transform: translateY(-50%); height: 100%; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 2px; pointer-events: none; z-index: 1; transition: left 0.3s ease, width 0.3s ease; }
+.ocean-conflict-marker { position: absolute; top: -2px; width: 4px; height: calc(100% + 4px); border-radius: 2px; pointer-events: none; z-index: 2; }
+.ocean-conflict-marker-marker-orange { background: #f59e0b; }
+.ocean-conflict-marker-marker-red { background: #ef4444; }
+.ocean-comfort-tooltip { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 4px; padding: 0.4em 0.6em; font-size: 0.75em; color: var(--text); white-space: nowrap; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.ocean-slider-track-wrapper:hover .ocean-comfort-tooltip { opacity: 1; }
+
+/* --- OCEAN Insight M3: Comment Fields --- */
+.ocean-comment-row { margin: 0.15em 0 0.4em; padding-left: 2em; }
+.ocean-comment-input { width: 100%; padding: 0.3em 0.5em; font-size: 0.75em; font-family: var(--font-sans); background: var(--bg-elevated); color: var(--text); border: 1px solid var(--border); border-radius: 4px; resize: none; transition: border-color var(--transition-fast); }
+.ocean-comment-input:focus { outline: none; border-color: var(--accent); }
+.ocean-comment-input::placeholder { color: var(--text-muted); opacity: 0.5; }
+
+/* --- OCEAN Insight M3: Highlight Notification --- */
+.ocean-highlight-notification { position: relative; margin: 0.5em 0; padding: 0.5em 0.8em; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 6px; font-size: 0.8em; color: var(--color-success); text-align: center; animation: ocean-notification-fadein 0.3s ease; }
+@keyframes ocean-notification-fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.ocean-highlight-notification.fadeout { opacity: 0; transition: opacity 0.5s ease; }
+
+/* ============================================================
+   PHASE 4 — M3 EXTENSIONS
+   ============================================================ */
+
+/* --- Enneagram Builder M3: Conflict Warnings --- */
+.enneagram-conflict-warnings { margin: 0.6em 0; padding: 0.5em; background: var(--warning-bg); border-radius: 6px; }
+.enneagram-conflict-warnings h5 { font-size: 0.85em; color: var(--warning-border); margin: 0 0 0.4em; }
+
+.conflict-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(251, 191, 36, 0.15);
+  border-left: 3px solid #f59e0b;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 0.9em;
+}
+
+.conflict-warning .warning-icon { flex-shrink: 0; }
+.conflict-warning .warning-question { font-style: italic; opacity: 0.8; color: var(--text-muted); }
+
+/* --- Enneagram Builder M3: MBTI Live Compatibility --- */
+.enneagram-mbti-live { margin: 0.5em 0; padding: 0.5em; background: var(--accent-soft); border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3); }
+.enneagram-mbti-live-label { font-size: 0.8em; color: var(--text-muted); }
+.enneagram-mbti-live-value { font-weight: bold; color: var(--accent); margin-left: 0.3em; }
+.enneagram-mbti-compat { display: inline-block; margin-left: 0.5em; padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+.enneagram-mbti-compat.compat-yes { background: rgba(34, 197, 94, 0.15); color: var(--color-success); border: 1px solid rgba(34, 197, 94, 0.3); }
+.enneagram-mbti-compat.compat-no { background: rgba(239, 68, 68, 0.15); color: var(--color-error); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+/* --- Enneagram Builder M3: MBTI Match Highlight --- */
+.mbti-match-highlight { box-shadow: 0 0 0 2px var(--accent) !important; background: rgba(56, 189, 248, 0.2) !important; }
+
+/* --- MBTI Composer M3: Enneagram Link Section --- */
+.mbti-enneagram-link-section { margin: 0.6em 0; padding: 0.5em; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
+.mbti-enneagram-checkbox { display: flex; align-items: center; gap: 0.4em; font-size: 0.85em; color: var(--text); cursor: pointer; }
+.mbti-enneagram-checkbox input[type="checkbox"] { accent-color: #c4b5fd; }
+.mbti-enneagram-links { margin-top: 0.5em; padding-top: 0.5em; border-top: 1px solid var(--border); }
+.mbti-enneagram-links-label { font-size: 0.8em; color: var(--text-muted); display: block; margin-bottom: 0.3em; }
+.mbti-enneagram-link-btn { display: inline-block; padding: 0.25em 0.6em; margin: 0.15em; background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 4px; font-size: 0.8em; color: #c4b5fd; cursor: pointer; transition: all var(--transition-fast); }
+.mbti-enneagram-link-btn:hover { background: rgba(139, 92, 246, 0.25); border-color: rgba(139, 92, 246, 0.5); }
+.mbti-enneagram-link-btn.enneagram-match-highlight { box-shadow: 0 0 0 2px #c4b5fd; background: rgba(139, 92, 246, 0.3); }
+
+/* --- MBTI Composer M3: Enneagram Compatibility --- */
+.mbti-enneagram-compat { margin-top: 0.4em; padding: 0.4em; background: rgba(139, 92, 246, 0.08); border-radius: 4px; }
+.mbti-enneagram-compat-label { font-size: 0.8em; color: var(--text-muted); }
+.mbti-enneagram-compat-status { display: inline-block; margin-left: 0.4em; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.8em; font-weight: bold; }
+.mbti-enneagram-compat-status.compat-yes { background: rgba(34, 197, 94, 0.15); color: var(--color-success); }
+.mbti-enneagram-compat-status.compat-no { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
+
+/* --- MBTI Composer M3: OCEAN Compatibility --- */
+.mbti-ocean-compat { margin: 0.6em 0; padding: 0.5em; background: var(--accent-soft); border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.2); }
+.mbti-ocean-compat-label { font-size: 0.8em; color: var(--text-muted); }
+.mbti-ocean-compat-value { display: inline-block; margin-left: 0.4em; padding: 0.15em 0.5em; border-radius: 4px; font-size: 1em; font-weight: bold; }
+.mbti-ocean-compat-value.compat-yes { background: rgba(34, 197, 94, 0.15); color: var(--color-success); }
+.mbti-ocean-compat-value.compat-partial { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
+.mbti-ocean-compat-value.compat-no { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
+.mbti-ocean-compat-traits { margin-top: 0.4em; display: flex; flex-wrap: wrap; gap: 0.3em; }
+.mbti-ocean-compat-trait { display: inline-flex; align-items: center; gap: 0.2em; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.75em; }
+.mbti-ocean-compat-trait.trait-match { background: rgba(34, 197, 94, 0.1); color: var(--color-success); }
+.mbti-ocean-compat-trait.trait-partial { background: rgba(245, 158, 11, 0.1); color: var(--color-warning); }
+.mbti-ocean-compat-trait.trait-conflict { background: rgba(239, 68, 68, 0.1); color: var(--color-error); }
+.compat-trait-letter { font-weight: bold; }
+.compat-trait-arrow { color: var(--text-muted); font-size: 0.8em; }
+
+/* --- MBTI Composer M3: Enneagram Hint Match --- */
+.mbti-enneagram-hint-chip.enneagram-match-highlight { box-shadow: 0 0 0 2px #c4b5fd; background: rgba(139, 92, 246, 0.3); }
+
+/* --- MBTI Composer M3: Full Export --- */
+.mbti-export-section { margin: 0.6em 0; padding-top: 0.5em; border-top: 1px solid var(--border); }
+.mbti-export-btn { width: 100%; padding: 0.5em; background: var(--accent-soft); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; color: var(--accent); font-size: 0.85em; cursor: pointer; transition: all var(--transition-fast); }
+.mbti-export-btn:hover { background: rgba(56, 189, 248, 0.2); border-color: var(--accent); }

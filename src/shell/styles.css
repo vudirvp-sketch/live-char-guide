@@ -3978,3 +3978,77 @@ td.temperament-sp {
 .ocean-highlight-notification { position: relative; margin: 0.5em 0; padding: 0.5em 0.8em; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 6px; font-size: 0.8em; color: var(--color-success); text-align: center; animation: ocean-notification-fadein 0.3s ease; }
 @keyframes ocean-notification-fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 .ocean-highlight-notification.fadeout { opacity: 0; transition: opacity 0.5s ease; }
+
+/* ============================================================
+   PHASE 4 — M3 EXTENSIONS
+   ============================================================ */
+
+/* --- Enneagram Builder M3: Conflict Warnings --- */
+.enneagram-conflict-warnings { margin: 0.6em 0; padding: 0.5em; background: var(--warning-bg); border-radius: 6px; }
+.enneagram-conflict-warnings h5 { font-size: 0.85em; color: var(--warning-border); margin: 0 0 0.4em; }
+
+.conflict-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(251, 191, 36, 0.15);
+  border-left: 3px solid #f59e0b;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 0.9em;
+}
+
+.conflict-warning .warning-icon { flex-shrink: 0; }
+.conflict-warning .warning-question { font-style: italic; opacity: 0.8; color: var(--text-muted); }
+
+/* --- Enneagram Builder M3: MBTI Live Compatibility --- */
+.enneagram-mbti-live { margin: 0.5em 0; padding: 0.5em; background: var(--accent-soft); border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3); }
+.enneagram-mbti-live-label { font-size: 0.8em; color: var(--text-muted); }
+.enneagram-mbti-live-value { font-weight: bold; color: var(--accent); margin-left: 0.3em; }
+.enneagram-mbti-compat { display: inline-block; margin-left: 0.5em; padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+.enneagram-mbti-compat.compat-yes { background: rgba(34, 197, 94, 0.15); color: var(--color-success); border: 1px solid rgba(34, 197, 94, 0.3); }
+.enneagram-mbti-compat.compat-no { background: rgba(239, 68, 68, 0.15); color: var(--color-error); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+/* --- Enneagram Builder M3: MBTI Match Highlight --- */
+.mbti-match-highlight { box-shadow: 0 0 0 2px var(--accent) !important; background: rgba(56, 189, 248, 0.2) !important; }
+
+/* --- MBTI Composer M3: Enneagram Link Section --- */
+.mbti-enneagram-link-section { margin: 0.6em 0; padding: 0.5em; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
+.mbti-enneagram-checkbox { display: flex; align-items: center; gap: 0.4em; font-size: 0.85em; color: var(--text); cursor: pointer; }
+.mbti-enneagram-checkbox input[type="checkbox"] { accent-color: #c4b5fd; }
+.mbti-enneagram-links { margin-top: 0.5em; padding-top: 0.5em; border-top: 1px solid var(--border); }
+.mbti-enneagram-links-label { font-size: 0.8em; color: var(--text-muted); display: block; margin-bottom: 0.3em; }
+.mbti-enneagram-link-btn { display: inline-block; padding: 0.25em 0.6em; margin: 0.15em; background: rgba(139, 92, 246, 0.12); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 4px; font-size: 0.8em; color: #c4b5fd; cursor: pointer; transition: all var(--transition-fast); }
+.mbti-enneagram-link-btn:hover { background: rgba(139, 92, 246, 0.25); border-color: rgba(139, 92, 246, 0.5); }
+.mbti-enneagram-link-btn.enneagram-match-highlight { box-shadow: 0 0 0 2px #c4b5fd; background: rgba(139, 92, 246, 0.3); }
+
+/* --- MBTI Composer M3: Enneagram Compatibility --- */
+.mbti-enneagram-compat { margin-top: 0.4em; padding: 0.4em; background: rgba(139, 92, 246, 0.08); border-radius: 4px; }
+.mbti-enneagram-compat-label { font-size: 0.8em; color: var(--text-muted); }
+.mbti-enneagram-compat-status { display: inline-block; margin-left: 0.4em; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.8em; font-weight: bold; }
+.mbti-enneagram-compat-status.compat-yes { background: rgba(34, 197, 94, 0.15); color: var(--color-success); }
+.mbti-enneagram-compat-status.compat-no { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
+
+/* --- MBTI Composer M3: OCEAN Compatibility --- */
+.mbti-ocean-compat { margin: 0.6em 0; padding: 0.5em; background: var(--accent-soft); border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.2); }
+.mbti-ocean-compat-label { font-size: 0.8em; color: var(--text-muted); }
+.mbti-ocean-compat-value { display: inline-block; margin-left: 0.4em; padding: 0.15em 0.5em; border-radius: 4px; font-size: 1em; font-weight: bold; }
+.mbti-ocean-compat-value.compat-yes { background: rgba(34, 197, 94, 0.15); color: var(--color-success); }
+.mbti-ocean-compat-value.compat-partial { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
+.mbti-ocean-compat-value.compat-no { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
+.mbti-ocean-compat-traits { margin-top: 0.4em; display: flex; flex-wrap: wrap; gap: 0.3em; }
+.mbti-ocean-compat-trait { display: inline-flex; align-items: center; gap: 0.2em; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.75em; }
+.mbti-ocean-compat-trait.trait-match { background: rgba(34, 197, 94, 0.1); color: var(--color-success); }
+.mbti-ocean-compat-trait.trait-partial { background: rgba(245, 158, 11, 0.1); color: var(--color-warning); }
+.mbti-ocean-compat-trait.trait-conflict { background: rgba(239, 68, 68, 0.1); color: var(--color-error); }
+.compat-trait-letter { font-weight: bold; }
+.compat-trait-arrow { color: var(--text-muted); font-size: 0.8em; }
+
+/* --- MBTI Composer M3: Enneagram Hint Match --- */
+.mbti-enneagram-hint-chip.enneagram-match-highlight { box-shadow: 0 0 0 2px #c4b5fd; background: rgba(139, 92, 246, 0.3); }
+
+/* --- MBTI Composer M3: Full Export --- */
+.mbti-export-section { margin: 0.6em 0; padding-top: 0.5em; border-top: 1px solid var(--border); }
+.mbti-export-btn { width: 100%; padding: 0.5em; background: var(--accent-soft); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 6px; color: var(--accent); font-size: 0.85em; cursor: pointer; transition: all var(--transition-fast); }
+.mbti-export-btn:hover { background: rgba(56, 189, 248, 0.2); border-color: var(--accent); }

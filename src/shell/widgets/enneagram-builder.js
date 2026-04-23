@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - ENNEAGRAM SMART BUILDER WIDGET v2.0.0
+ * LIVE CHARACTER GUIDE - ENNEAGRAM SMART BUILDER WIDGET v3.0.0
  * ============================================================================
  *
  * Interactive Enneagram type selector with SPINE autofill.
@@ -8,21 +8,23 @@
  *
  * Milestone Levels:
  *   M1 — Type selection, ring diagram, SPINE/FLAW fields, export
- *   M2 — OCEAN tab, OCEAN-filtered FLAW anchors, MBTI hints, examples (current)
- *   M3 — Advanced features (TODO)
+ *   M2 — OCEAN tab, OCEAN-filtered FLAW anchors, MBTI hints, examples
+ *   M3 — OCEAN×Enneagram conflict validator, mbti:selected subscription, red borders (current)
  *
  * Activation: Only at L2+ guide layer (isWidgetAllowed())
  * Event Emission: enneagram:selected via EventBus (on "Подтвердить" click)
  * Event Subscription: ocean:updated via EventBus (M2+, for FLAW filtering)
+ * Event Subscription: mbti:selected via EventBus (M3, for live MBTI hints)
  *
  * Contract:
  *   - Reads: data/enneagram.json (v2.0.0)
  *   - Reads: data/ocean.json (v2.0.0 — for extremum thresholds)
  *   - Emits: enneagram:selected { typeId, wings } via window.EventBus
  *   - Subscribes: ocean:updated { O, C, E, A, N } via window.EventBus (M2+)
+ *   - Subscribes: mbti:selected { typeCode, temperament } via window.EventBus (M3)
  *   - Fallback: if JSON missing → shows static placeholder
  *
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 (function() {
@@ -92,6 +94,9 @@
   var showAllAnchors = true; // FLAW anchor filter toggle (default: show all)
   var currentOceanProfile = { O: 50, C: 50, E: 50, A: 50, N: 50 };
   var oceanEventSubscribed = false; // Track if we subscribed to avoid duplicates
+  var mbtiEventSubscribed = false; // M3: track mbti:selected subscription
+  var conflictWarnings = []; // M3: current OCEAN×Enneagram conflicts
+  var lastMbtiSelected = null; // M3: last selected MBTI type for live hints
 
   // ============================================================================
   // DATA LOADING
@@ -167,6 +172,7 @@
   }
 
   function getLevelBadge() {
+    if (currentWidgetLevel >= 3) return 'M3';
     return currentWidgetLevel >= 2 ? 'M2' : 'M1';
   }
 
@@ -336,10 +342,23 @@
             html += '<span class="enneagram-mbti-label">Наиболее вероятные MBTI-типы: </span>';
             mbtiSuggestions.forEach(function(mbtiType, idx) {
               if (idx > 0) html += ', ';
-              html += '<span class="enneagram-mbti-type" tabindex="0" role="button" data-mbti="' + escapeHtml(mbtiType) + '">' + escapeHtml(mbtiType) + '</span>';
+              var isMatch = lastMbtiSelected && mbtiType === lastMbtiSelected;
+              html += '<span class="enneagram-mbti-type' + (isMatch ? ' mbti-match-highlight' : '') + '" tabindex="0" role="button" data-mbti="' + escapeHtml(mbtiType) + '">' + escapeHtml(mbtiType) + '</span>';
             });
             html += '</div>';
           }
+        }
+
+        // M3: Live MBTI compatibility from mbti:selected event
+        if (currentWidgetLevel >= 3 && lastMbtiSelected && confirmedType === selectedTypeId) {
+          html += '<div class="enneagram-mbti-live">';
+          html += '<span class="enneagram-mbti-live-label">\uD83D\uDD17 Выбранный MBTI: </span>';
+          html += '<span class="enneagram-mbti-live-value">' + escapeHtml(lastMbtiSelected) + '</span>';
+          var suggestions = getMbtiSuggestions(selectedTypeId) || [];
+          var isCompatible = suggestions.indexOf(lastMbtiSelected) !== -1;
+          html += '<span class="enneagram-mbti-compat ' + (isCompatible ? 'compat-yes' : 'compat-no') + '">' +
+            (isCompatible ? 'Совместим' : 'Нетипичное сочетание') + '</span>';
+          html += '</div>';
         }
 
         html += '</div>';
@@ -390,6 +409,20 @@
       });
 
       html += '</div>';
+
+      // M3: Conflict warnings (OCEAN×Enneagram)
+      if (currentWidgetLevel >= 3 && conflictWarnings.length > 0) {
+        html += '<div class="enneagram-conflict-warnings">';
+        html += '<h5>Конфликты OCEAN×Эннеаграмма</h5>';
+        conflictWarnings.forEach(function(w) {
+          html += '<div class="conflict-warning">';
+          html += '<span class="warning-icon">\u26A0\uFE0F</span>';
+          html += '<span class="warning-text">' + escapeHtml(w.message) + '</span>';
+          html += '<span class="warning-question">Это осознанный конфликт?</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+      }
 
       // Button to suggest OCEAN fill — emits event, does NOT auto-fill per sovereignty §0.1
       html += '<div class="enneagram-ocean-actions">';
@@ -915,8 +948,14 @@
         A: profile.A,
         N: profile.N
       };
-      // Re-render SPINE tab if active (to update FLAW filtering)
-      if (currentTab === 'spine') {
+
+      // M3: Run conflict validator if type is confirmed
+      if (currentWidgetLevel >= 3 && confirmedType) {
+        conflictWarnings = checkOceanEnneagramConflicts(confirmedType, currentOceanProfile);
+      }
+
+      // Re-render active tab (SPINE for FLAW filtering, OCEAN for conflict warnings)
+      if (currentTab === 'spine' || currentTab === 'ocean') {
         var containerEl = document.getElementById('enneagram-embed');
         if (containerEl) {
           reRender(containerEl);
@@ -926,6 +965,82 @@
 
     oceanEventSubscribed = true;
     console.log('[EnneagramBuilder] Subscribed to ocean:updated events (M2+)');
+  }
+
+  // ============================================================================
+  // M3: OCEAN×ENNEAGRAM CONFLICT VALIDATOR
+  // ============================================================================
+
+  /**
+   * Checks OCEAN profile against enneagram type's ocean_correlation.
+   * Returns array of conflict objects { trait, expected, actual, message }.
+   * Per spec §5.1 and §4.2 M3.
+   */
+  function checkOceanEnneagramConflicts(typeId, profile) {
+    if (!enneagramDataCache || !enneagramDataCache.types) return [];
+    var typeInfo = getTypeInfo(typeId);
+    if (!typeInfo || !typeInfo.ocean_correlation) return [];
+
+    var correlation = typeInfo.ocean_correlation;
+    var conflicts = [];
+
+    OCEAN_TRAITS.forEach(function(trait, i) {
+      var expectedCorrelation = correlation[i]; // -1.0 to 1.0
+      var actualValue = profile[trait]; // 0-100
+
+      // Normalize actual to 0-1
+      var actualNormalized = actualValue / 100;
+
+      // Convert correlation to expected position
+      // -1.0 = low (0.2), 0 = moderate (0.5), 1.0 = high (0.8)
+      var expectedPosition = (expectedCorrelation + 1) / 2 * 0.6 + 0.2;
+
+      // Check for significant deviation
+      var deviation = Math.abs(actualNormalized - expectedPosition);
+      if (deviation > 0.35) {
+        var expectedLabel = expectedCorrelation > 0.3 ? 'высокий' :
+          expectedCorrelation < -0.3 ? 'низкий' : 'умеренный';
+        var actualLabel = actualValue > 70 ? 'высокий' :
+          actualValue < 30 ? 'низкий' : 'умеренный';
+
+        conflicts.push({
+          trait: trait,
+          expected: expectedLabel,
+          actual: actualLabel,
+          deviation: deviation.toFixed(2),
+          message: trait + ': ожидается ' + expectedLabel +
+            ' (корреляция ' + expectedCorrelation.toFixed(2) +
+            '), фактически ' + actualLabel + ' (' + actualValue + ')'
+        });
+      }
+    });
+
+    return conflicts;
+  }
+
+  // ============================================================================
+  // M3: MBTI:SELECTED SUBSCRIPTION
+  // ============================================================================
+
+  function subscribeMbtiSelected() {
+    if (mbtiEventSubscribed) return;
+    if (!window.EventBus || !window.GuideEvents) return;
+    if (currentWidgetLevel < 3) return;
+
+    window.EventBus.on(window.GuideEvents.MBTI_SELECTED, function(data) {
+      lastMbtiSelected = data.typeCode || null;
+
+      // Re-render Эннеатип tab if active (to show live MBTI hint)
+      if (currentTab === 'enneatype') {
+        var containerEl = document.getElementById('enneagram-embed');
+        if (containerEl) {
+          reRender(containerEl);
+        }
+      }
+    });
+
+    mbtiEventSubscribed = true;
+    console.log('[EnneagramBuilder] Subscribed to mbti:selected events (M3)');
   }
 
   // ============================================================================
@@ -969,6 +1084,11 @@
       subscribeOceanUpdates(container);
     }
 
+    // M3: subscribe to MBTI selected events
+    if (currentWidgetLevel >= 3) {
+      subscribeMbtiSelected();
+    }
+
     console.log('[EnneagramBuilder] Widget initialized at M' + currentWidgetLevel + ' level');
   }
 
@@ -980,7 +1100,7 @@
     init: initEnneagramBuilder,
     getSelectedType: function() { return selectedTypeId; },
     getLevel: function() { return currentWidgetLevel; },
-    getVersion: function() { return '2.0.0'; }
+    getVersion: function() { return '3.0.0'; }
   };
 
   // Auto-init after layer content is loaded
