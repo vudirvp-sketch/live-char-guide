@@ -26,7 +26,7 @@ This document is the **single source of truth** for all character examples used 
 | 8 | **Выщербленный** | L3 card: GHOST Layers, CoT, sensory anchors, XML | L3 | ✅ Active |
 | 9 | **Elliot Alderson** (Mr. Robot) | Complex psychology, CoT-ideal character | L3 | 🆕 NEW (replaces Shinji Ikari) |
 | 10 | **The Nameless One** (Planescape: Torment) | GHOST Layers: amnesia (optional) | L3 | ⚪ Optional |
-| 11 | **Омнис-Зета 7-Квин** (Adeptus Mechanicus) | Primary demonstration character for new sections, L1/L2/L3 pipeline, assembly pipeline illustration | L1, L2, L3 | 🆕 NEW |
+| 11 | **Омнис-Зета 7-Квин** (Адептус Механикус) | Primary demonstration character for new sections, L1/L2/L3 pipeline, assembly pipeline illustration | L1, L2, L3 | 🆕 NEW |
 
 ---
 
@@ -642,7 +642,7 @@ Tier 3 (Current): Wakes in mortuary, no memory, only journal
 
 ---
 
-## 11. Омнис-Зета 7-Квин (Adeptus Mechanicus)
+## 11. Омнис-Зета 7-Квин (Адептус Механикус)
 
 ### Мета-информация
 - **Layer**: L1, L2, L3
@@ -680,7 +680,7 @@ N: 65 (Повышенный — скрытая тревожность из-за 
 
 ### Сигнатура голоса
 - **General tone**: Холодный, расчётливый, с ритмическими паузами (как у машины, обрабатывающей данные). Использует техно-ритуальные формулировки.
-- **Binary Cant**: Вставки бинарного пения: «01010100 — Механикум свидетельствует», «Бинарная хвала — сигнальный импульс подтверждён». Используется только в Examples и Greeting.
+- **Бинарный кант (Binary Cant)**: Вставки бинарного пения: «01010100 — Механикум свидетельствует», «Бинарная хвала — сигнальный импульс подтверждён». Используется только в Examples и Greeting.
 - **Flesh-weakness motif**: Пренебрежительные ссылки на органику: «биологический сбой» вместо «страх», «химический дисбаланс» вместо «гнев».
 - **Ritual speech**: Перед любым действием с техникой — формула благословения: «Омниссия направит руку, Машинный Дух простит вторжение».
 - **Emotional bleed**: Редкие моменты, когда довоенные воспоминания прорываются: неуловимая пауза, замена «не помню» на «файл повреждён».
@@ -745,7 +745,7 @@ N: 65 (Повышенный — скрытая тревожность из-за 
 
 ### Ошибки
 - ❌ Never make Омнис-Зета emotionally expressive in SP or Description — voice ONLY in Examples/Greeting
-- ❌ Never use generic sci-fi technobabble — Binary Cant follows specific ritual patterns defined above
+- ❌ Never use generic sci-fi technobabble — Бинарный кант follows specific ritual patterns defined above
 - ❌ Never resolve GHOST tension in the card itself — LIE/GHOST are internal contradictions, not problems to solve
 - ❌ Never make Омнис-Зета a robot — they are a human who replaced their humanity piece by piece. The tragedy is the remnant.
 - ❌ Never use «Омнис-Зета» without the hyphen — canonical form is «Омнис-Зета 7-Квин»

@@ -23,7 +23,7 @@
 <p><strong>Причина:</strong> Избыточное описание, дублирование, голос в Description</p>
 <p><strong>Решение:</strong></p>
 <ul>
-<li>Вынесите голос в Examples</li>
+<li><a href="#p3_voice_isolation">Вынесите голос в Examples</a><noscript><a href="#p3_voice_isolation" class="term-marker-noscript-link">Вынесите голос в Examples</a></noscript></li>
 <li>Удалите дубликаты</li>
 <li>Оставьте только факты и якоря</li>
 </ul>
@@ -40,7 +40,7 @@
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Якорь без физической цены</p>
 <p><strong>Причина:</strong> Неверное понимание формата якоря</p>
-<p><strong>Решение:</strong> Каждый важный якорь = Триггер → Действие → <strong>Цена</strong></p>
+<p><strong>Решение:</strong> Каждый важный якорь = <span class="term-marker" data-tooltip-ref="#p2_anchor_rules" data-target-layer="1" data-tooltip-summary="Формат якоря: Триггер → Действие → Цена, цена обязательна">Триггер → Действие → <strong>Цена</strong></span><noscript><a href="#p2_anchor_rules" class="term-marker-noscript-link">Триггер → Действие → Цена</a></noscript></p>
 <div class="problem-block">
 <p><strong>❌ Неправильно:</strong> "Когда стресс → ходит из угла в угол"</p>
 </div>
@@ -57,7 +57,7 @@
 <h3>AP-3: Голос в Description (Voice in Description)</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
 <p><strong>Причина:</strong> Непонимание иерархии влияния на голос</p>
-<p><strong>Решение:</strong> <a href="#p3_voice_isolation">Правило голоса</a>: голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description. Description = только факты.</p>
+<p><strong>Решение:</strong> <a href="#p3_voice_isolation">Правило голоса</a>: Description = только факты и наблюдаемые характеристики.</p>
 <p>📌 Канонический пример → <a href="#p3_influence_hierarchy">p3_influence_hierarchy</a></p>
 </div>
 
@@ -69,7 +69,7 @@
 <h3>AP-4: GHOST в System Prompt</h3>
 <p><strong>Симптом:</strong> Психология (SPINE, GHOST) в SP</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
-<p><strong>Решение:</strong> SPINE/GHOST = только в Description. SP = только инструкции и запреты. <span class="layer-remark">GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP.</span></p>
+<p><strong>Решение:</strong> SPINE/<span class="term-marker" data-tooltip-ref="#p4_ghost" data-target-layer="3" data-tooltip-summary="Событие из прошлого, сформировавшее FLAW и LIE. Доступно на Экспертном слое">GHOST</span><noscript><a href="#p4_ghost" class="term-marker-noscript-link">GHOST</a></noscript> = только в Description. SP = только инструкции и запреты. <span class="layer-remark">GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP.</span></p>
 <div class="callout warn">
 <p><strong>⚠️ Предупреждение:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
 </div>
@@ -155,7 +155,7 @@
 </div>
 <div class="solution-block">
 <h4>✅ Решение</h4>
-<p>Разбить на атомарные якоря: один якорь = одна связь T→A→P. Принцип атомарности.</p>
+<p>Разбить на атомарные <a href="#p2_anchor_rules">якоря</a><noscript><a href="#p2_anchor_rules" class="term-marker-noscript-link">якоря</a></noscript>: один якорь = одна связь T→A→P. Принцип атомарности.</p>
 </div>
 <div class="example-block">
 <h4>📝 Пример</h4>

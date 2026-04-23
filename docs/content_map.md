@@ -36,6 +36,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Топ-3 критичные ошибки | Part 1 | p1_top3_problems | l1 | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_top5_problems |
 | Следующие шаги | Part 1 | p1_next_layers | l1 | Bridge (consolidated) | Консолидация 7 bridge секций (p1_l2_bridge, p1_l3_bridge, p4-p8_l1_bridge). 2 subsections: L2 и L3 |
 | Токен-бюджет | Part 1 | p1_token_budget | l1 | Reference | Мерж p1_token_pipeline + p1_block_budget. 2 subsections: конвейер сборки + лимиты по блокам. Только L1 блоки. Без подтаблицы AN/Lorebook/CoT |
+| Конвейер сборки L1-карточки | Part 1 | p1_assembly_pipeline | l1 | Pipeline | Конвейер сборки L1-карточки |
+| Мини-пример L1-карточки | Part 1 | p1_mini_example | l1 | Example | Мини-пример L1-карточки (Омнис-Зета) |
+| Что дальше? | Part 1 | p1_next_steps | l1 | Navigation | Что дальше? Инструменты для углубления |
 | Заключение | Part 1 | p1_conclusion | l1 | Summary | Резюме L1 + ссылка на p1_core_rules (без дублирования правил) + ссылка на p1_next_layers. Без L2/L3 capabilities |
 
 ### Part 2: Behavioral Anchors (Якоря)
@@ -72,7 +75,7 @@ This document is the **single source of truth** for "where does concept X live."
 | NEED | Part 4 | p4_need | l2 | Definition+Examples | Истинная потребность |
 | FLAW | Part 4 | p4_flaw | l2 | Definition+Examples | Конкретное поведение |
 | SPINE → Anchors mapping | Part 4 | p4_spine_mapping | l2 | Protocol | WANT/NEED/FLAW → якоря. GHOST/LIE отмечены как L3-only |
-| *(moved)* L2 Quickstart | Part 4 | p4_l2_quickstart | l2 | Note | ⚠ Moved to Part 5 as p5_l2_quickstart. See navigational link below |
+| *(moved to Part 5 as p5_l2_quickstart)* | Part 4 | p4_l2_quickstart | l2 | Note | ⚠ Moved to Part 5 as p5_l2_quickstart. See navigational link below |
 | LIE (Ложная установка) | Part 4 | p4_lie | l3 | Definition+Examples | Перемещено из L2 → L3 при реструктуризации |
 | GHOST (Событие прошлого) | Part 4 | p4_ghost | l3 | Definition+Examples | Перемещено из L2 → L3 при реструктуризации |
 | GHOST Layers | Part 4 | p4_ghost_layers | l3 | Full treatment | 3-tier структура GHOST |
@@ -181,7 +184,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Выщербленный (L3) | Part 10 | p10_vysherblenny_l3 | l3 | Complete card | GHOST Layers + CoT + XML (~1500+ токенов) |
 | Уолтер Уайт (L2) | Part 10 | p10_walter_l2 | l2 | Complete card | Realistic modern character, WANT/NEED/FLAW. NEW |
 | Voice Warning (L2) | Part 10 | p10_l2_voice_warning | l2 | Rule | Общее предупреждение о голосе для L2 примеров |
-| Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Tech-Priest, Adeptus Mechanicus) |
+| Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Тех-Жрец, Адептус Механикус) |
 | Омнис-Зета 7-Квин (L2) | Part 10 | p10_omnis_l2_card | l2 | Complete card | L2 карточка Омнис-Зета 7-Квин (SPINE + OCEAN + FLAW-linked anchors) |
 | Омнис-Зета 7-Квин (L3) | Part 10 | p10_omnis_l3_card | l3 | Complete card | L3 карточка Омнис-Зета 7-Квин (GHOST Layers + CoT + XML) |
 
@@ -191,7 +194,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | L1 | L2 | L3 | Total |
 |------|----|----|-----|-------|
-| Part 1 (Basic Blocks) | 8 | 0 | 0 | 8 |
+| Part 1 (Basic Blocks) | 11 | 0 | 0 | 11 |
 | Part 2 (Anchors) | 3 | 3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
 | Part 4 (SPINE) | 0 | 6 | 6 | 12 |
@@ -201,11 +204,11 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
 | Part 10 (Examples) | 2 | 6 | 2 | 10 |
-| **Total** | **20** | **54** | **38** | **112** |
+| **Total** | **22** | **52** | **38** | **112** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 20 sections** (down from 27 — 9 sections removed/merged by L1 Remediation Plan v3)
-- **L2 sees: 74 sections** (+54 to L1)
+- **L1 sees: 22 sections** (Part 1 now includes p1_assembly_pipeline, p1_mini_example, p1_next_steps)
+- **L2 sees: 74 sections** (+52 to L1)
 - **L3 sees: 112 sections** (+38 to L2)
 
 **Note:** Part 7 counts updated in v2.2: L2 = 10, L3 = 9. Added p7_lorebook_mechanics (L2) and p7_lorebook_advanced (L3) per Lorebook Enhancement Plan v1.1.

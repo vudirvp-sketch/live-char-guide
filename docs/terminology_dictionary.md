@@ -19,9 +19,9 @@
 | **Action** | Действие | — | structure | Наблюдаемая реакция |
 | **Price** | Цена | — | structure | Физическая реакция |
 | **SPINE** | SPINE | — | framework | Оставить без перевода |
-| **WANT** | Хочет | — | framework | Элемент SPINE |
-| **NEED** | Нужно | — | framework | Элемент SPINE |
-| **FLAW** | Изъян | — | framework | Элемент SPINE |
+| **WANT** | Желание | — | framework | Элемент SPINE |
+| **NEED** | Потребность | — | framework | Элемент SPINE |
+| **FLAW** | Дефект | — | framework | Элемент SPINE |
 | **LIE** | Ложная установка | — | framework | Элемент SPINE (L3-only после реструктуризации) |
 | **GHOST** | Призрак | — | framework | Элемент SPINE (L3-only после реструктуризации), можно оставить GHOST |
 | **OCEAN** | OCEAN | — | framework | Большая пятёрка, без перевода |
@@ -79,7 +79,7 @@
 
 ### 2. Оставить без перевода
 Не переводятся (технические термины):
-- SPINE, GHOST, WANT, NEED, FLAW, LIE
+- SPINE, GHOST, WANT (Желание), NEED (Потребность), FLAW (Дефект), LIE
 - OCEAN, Enneagram (частично), MBTI
 - Author's Note (AN), Lorebook (LB)
 - CoT, OOC, годмодинг

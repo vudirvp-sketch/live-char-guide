@@ -96,7 +96,7 @@ Format Lock:
 <h3>Важно: правила голоса для примеров L2</h3>
 
 <div class="callout important">
-<p><strong>📌 Голосовые инструкции в SP не работают на 12B моделях</strong> — голос персонажа устанавливается ТОЛЬКО через Examples и Greeting. Все L2-карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса. <span class="term-marker" data-tooltip-ref="#p3_voice_isolation" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">Подробнее о Voice Isolation</span><noscript><a href="#p3_voice_isolation" class="term-marker-noscript-link">Подробнее о Voice Isolation</a></noscript></p>
+<p><strong>📌 Голосовые инструкции в SP не работают на 12B моделях</strong> — голос персонажа устанавливается ТОЛЬКО через Examples и Greeting. Все L2-карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса. SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)) размещается в Description, не в SP. <span class="term-marker" data-tooltip-ref="#p3_voice_isolation" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">Подробнее о Voice Isolation</span><noscript><a href="#p3_voice_isolation" class="term-marker-noscript-link">Подробнее о Voice Isolation</a></noscript></p>
 </div>
 
 </section>
@@ -973,8 +973,6 @@ CoT (2 якоря максимум):
 
 <p class="layer-remark">Теория GHOST Layers → <a href="#p4_ghost_layers">Part 4</a></p>
 
-</section>
-
 <p class="layer-remark"><span class="remark-icon">→</span> Следующая карточка — <strong>Экспертный слой (L3)</strong>. Все предыдущие примеры — L1/L2.</p>
 <p class="layer-remark">L3 добавляет:</p>
 <ul class="layer-remark">
@@ -984,6 +982,8 @@ CoT (2 якоря максимум):
 <li>XML-структуру Description</li>
 <li>7 CORE DIRECTIVES (включая PRE-GENERATION FILTER)</li>
 </ul>
+
+</section>
 
 <section data-layer="l3" data-section="p10_vysherblenny_l3" data-toc-nav>
 <h3>Выщебленный (L3) — Экспертная карточка</h3>
