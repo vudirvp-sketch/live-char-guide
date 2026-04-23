@@ -171,6 +171,29 @@ This document defines the **complete set of CSS classes and HTML structures** av
 </div>
 ```
 
+### Vertical Pipeline Variant
+
+| Class | Purpose |
+|-------|---------|
+| `.inf-pipeline-vertical` | Vertical step pipeline (mobile-friendly) |
+
+### HTML Structure
+
+```html
+<div class="infographic">
+  <div class="infographic-title">Vertical Pipeline Title</div>
+  <div class="inf-pipeline-vertical">
+    <div class="inf-pipeline-step">
+      <div class="inf-step-id">01</div>
+      <div class="inf-step-label">STEP ONE</div>
+      <div class="inf-step-desc">Description here</div>
+      <div class="inf-step-code">Code example</div>
+    </div>
+    <!-- More steps -->
+  </div>
+</div>
+```
+
 ---
 
 ## 4. TABLE — Responsive Table Wrapper
@@ -379,6 +402,69 @@ Copy buttons are **automatically added** by `lazy-loader.js` to all `<pre>` bloc
   color: var(--accent);
   margin-right: 0.5rem;
 }
+```
+
+---
+
+## 9. DIFF VIEW — Before→After Comparison
+
+### Available Variants
+
+| Class | Purpose | Visual |
+|-------|---------|--------|
+| `.diff-view` | Grid container for before/after | Two-column grid |
+| `.diff-card` | Individual card in diff view | Bordered card |
+| `.diff-del` | "Before" (removed) card | Red border and background |
+| `.diff-add` | "After" (added) card | Green border and background |
+| `.diff-label` | Label inside diff card | Uppercase, colored |
+
+### HTML Structure
+
+```html
+<div class="diff-view">
+  <div class="diff-card diff-del">
+    <div class="diff-label">До (ошибка)</div>
+    <p>Content showing the problem...</p>
+  </div>
+  <div class="diff-card diff-add">
+    <div class="diff-label">После (исправлено)</div>
+    <p>Content showing the solution...</p>
+  </div>
+</div>
+```
+
+### CSS Specification
+
+```css
+.diff-view { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
+.diff-card { padding: 1em; border: 1px solid var(--border); border-radius: 8px; }
+.diff-del { border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.05); }
+.diff-add { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.05); }
+```
+
+---
+
+## 10. SPINE STACK — Layered SPINE Diagram
+
+### Available Variants
+
+| Class | Purpose |
+|-------|---------|
+| `.spine-stack` | Vertical stack container |
+| `.spine-stack-item` | Individual SPINE element row |
+| `.spine-stack-label` | Element name (GHOST/LIE/FLAW/NEED/WANT) |
+| `.spine-stack-desc` | Element description |
+
+### HTML Structure
+
+```html
+<div class="spine-stack">
+  <div class="spine-stack-item"><span class="spine-stack-label">GHOST</span><span class="spine-stack-desc">Событие прошлого → формирует LIE</span></div>
+  <div class="spine-stack-item"><span class="spine-stack-label">LIE</span><span class="spine-stack-desc">Ложная установка → порождает FLAW</span></div>
+  <div class="spine-stack-item"><span class="spine-stack-label">FLAW</span><span class="spine-stack-desc">Конкретное поведение → блокирует NEED</span></div>
+  <div class="spine-stack-item"><span class="spine-stack-label">NEED</span><span class="spine-stack-desc">Истинная потребность → конфликтует с WANT</span></div>
+  <div class="spine-stack-item"><span class="spine-stack-label">WANT</span><span class="spine-stack-desc">Осознанное желание → поверхность</span></div>
+</div>
 ```
 
 ---
