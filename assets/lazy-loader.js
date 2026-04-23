@@ -1185,6 +1185,56 @@
   }
 
   // ============================================================================
+  // LAYER SWITCH LINKS (data-layer-switch in-content navigation)
+  // ============================================================================
+
+  /**
+   * Initialize the layer switch UI state (sync switcher buttons with current layer).
+   * This is called after each layer content load to ensure the layer-switcher
+   * reflects the current layer and that its buttons are properly highlighted.
+   */
+  function initLayerSwitch() {
+    const switcher = $('#layer-switcher');
+    if (!switcher) return;
+    // Ensure switcher is visible after content replacement
+    if (currentLayer) {
+      switcher.classList.remove('hidden');
+      updateSwitcherButtons(currentLayer);
+      showLayerIndicator(currentLayer);
+    }
+  }
+
+  /**
+   * Bind click handlers to [data-layer-switch] links inside loaded content.
+   * Format: data-layer-switch="3#p8_ap15_extended" → switch to layer 3, scroll to #p8_ap15_extended
+   * Format: data-layer-switch="2#p5_ocean_validator" → switch to layer 2, scroll to #p5_ocean_validator
+   */
+  function bindDataLayerSwitchLinks() {
+    $$('[data-layer-switch]').forEach(link => {
+      // Remove previous handler to avoid duplicates on re-init
+      link.removeEventListener('click', handleLayerSwitchClick);
+      link.addEventListener('click', handleLayerSwitchClick);
+    });
+  }
+
+  function handleLayerSwitchClick(e) {
+    e.preventDefault();
+    const attr = e.currentTarget.getAttribute('data-layer-switch');
+    if (!attr) return;
+
+    // Parse format: "{layer}#{anchor}" or just "{layer}"
+    const [layerPart, anchorPart] = attr.split('#');
+    const targetLayer = layerPart;
+    const anchor = anchorPart || null;
+
+    if (CONFIG.LAYERS.includes(targetLayer)) {
+      switchLayer(targetLayer, anchor);
+    } else {
+      console.warn('[LazyLoader] Invalid layer in data-layer-switch:', targetLayer);
+    }
+  }
+
+  // ============================================================================
   // INTERACTIVE ELEMENTS
   // ============================================================================
 
@@ -1241,6 +1291,7 @@
     initTooltips();
     initTokenCalc();
     initProgressBar();
+    bindDataLayerSwitchLinks();
 
     // EventBus integration (§0.3): ensure EventBus is available after layer switch
     // event-bus.js is loaded before lazy-loader.js, so window.EventBus should exist

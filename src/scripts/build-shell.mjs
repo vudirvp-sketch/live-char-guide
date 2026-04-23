@@ -293,6 +293,42 @@ async function buildShell() {
     log('INFO', 'Copied dist/event-bus.js → event-bus.js (root fallback)');
   }
 
+  // 13. Copy widgets/ to root for backward compatibility (index.html references widgets/*.js)
+  const rootWidgets = join(ROOT, 'widgets');
+  if (existsSync(rootWidgets)) {
+    await rm(rootWidgets, { recursive: true });
+  }
+  if (existsSync(widgetsDist)) {
+    await copyDir(widgetsDist, rootWidgets);
+    const widgetRootFiles = await readdir(rootWidgets);
+    log('INFO', `Copied dist/widgets/ → widgets/ (root fallback, ${widgetRootFiles.length} files)`);
+  }
+
+  // 14. Copy data/ to root for backward compatibility (lazy-loader fetches data/*.json)
+  const rootData = join(ROOT, 'data');
+  if (existsSync(rootData)) {
+    await rm(rootData, { recursive: true });
+  }
+  if (existsSync(DATA_DIST)) {
+    await copyDir(DATA_DIST, rootData);
+    const dataRootFiles = await readdir(rootData);
+    log('INFO', `Copied dist/data/ → data/ (root fallback, ${dataRootFiles.length} files)`);
+  }
+
+  // 15. Copy parts-l{N}/ to root for backward compatibility (lazy-loader fetches parts-l{N}/*.html)
+  for (const layer of layers) {
+    const rootPartsDir = join(ROOT, `parts-l${layer}`);
+    if (existsSync(rootPartsDir)) {
+      await rm(rootPartsDir, { recursive: true });
+    }
+    const distPartsDir = join(DIST_DIR, `parts-l${layer}`);
+    if (existsSync(distPartsDir)) {
+      await copyDir(distPartsDir, rootPartsDir);
+      const partRootFiles = await readdir(rootPartsDir);
+      log('INFO', `Copied dist/parts-l${layer}/ → parts-l${layer}/ (root fallback, ${partRootFiles.length} files)`);
+    }
+  }
+
   log('INFO', `Shell build complete! Hash: ${buildHash}`);
 
   return { hash: buildHash, version };
