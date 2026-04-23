@@ -37,10 +37,10 @@
   var TEMPERAMENT_ORDER = ['NT', 'NF', 'SJ', 'SP'];
 
   var TEMPERAMENT_NAMES = {
-    'NT': 'Аналитики',
-    'NF': 'Дипломаты',
+    'NT': 'Рационалы',
+    'NF': 'Идеалисты',
     'SJ': 'Стражи',
-    'SP': 'Исследователи'
+    'SP': 'Ремесленники'
   };
 
   // Normalize temperament keys from mbti.json

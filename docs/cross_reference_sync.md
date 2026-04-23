@@ -1,9 +1,9 @@
 # Cross-Reference Synchronization — Live Character Guide v6
 
-> **Version:** 1.3
-> **Date:** 2026-04-23
-> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement + TP-11–20 (Complete)
-> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md, TP-11–20 task changes
+> **Version:** 1.4
+> **Date:** 2026-04-24
+> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement + TP-11–20 + Terminology Sync (Complete)
+> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md, TP-11–20 task changes, terminology-dedup-2026-04-24
 
 ---
 
@@ -23,7 +23,7 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 4 | p4_spine_mapping | p7_core_directives (CONSEQUENCE DRIVEN) | `data-layer-switch="2#p7_core_directives"` | ✅ p7_core_directives_l3 references p4_spine_mapping via href |
 | 5 | p4_spine_mapping | p7_authors_note (WANT→NEED tracking) | `data-layer-switch="2#p7_authors_note"` | ✅ p7_authors_note references SPINE via AN template |
 | 6 | p3_multi_char | p8_ap11_voice_bleed | `data-layer-switch="3#p8_ap11_voice_bleed"` | ✅ p8_ap11_voice_bleed references p3_multi_char (IMP-48 bidirectional) |
-| 7 | p5_ocean_poles | p8_ap15_extended | Referenced via cross-ref | ✅ p8_ap15_extended references p5_ocean_poles (IMP-48 bidirectional) |
+| 7 | p5_ocean_poles | p8_ap15_extended | `data-layer-switch="3#p8_ap15_extended"` (line 38 of part_05) | ✅ p8_ap15_extended references p5_ocean_poles via `data-layer-switch="2#p5_ocean_poles"` (line 330 of part_08). Verified 2026-04-24: bidirectional links intact after temperament name unification. |
 | 8 | p1_conclusion | p9_basic_checklist | `href="#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_core_rules via layer-remark back-link |
 | 9 | p10_edward_l2 | p4_l3_spine_full | `data-layer-switch="3#p4_l3_spine_full"` | ✅ p4_l3_spine_full uses Эллиот example, not Edward — cross-ref is one-way by design |
 | 10 | p3_voice_leak | p9_symptom_table | Linked from L1 layer-remark | ✅ p9_symptom_table references Voice Leak in row 1 |
@@ -62,6 +62,8 @@ These were discovered by scanning all `data-layer-switch` attributes in master H
 | 22 | p9_test_scenarios | p9_12b_issues | `data-layer-switch="3#p9_12b_issues"` | ✅ p9_12b_issues references test scenarios implicitly |
 | 23 | p10_elena_l1 | p10_elena_l2 | `data-layer-switch="2#p10_elena_l2"` | ✅ p10_elena_l2 does not reference back — acceptable (card progression) |
 | 24 | p10_geralt_l2 | p10_vysherblenny_l3 | `data-layer-switch="3#p10_vysherblenny_l3"` | ✅ p10_vysherblenny_l3 does not reference back — acceptable (card progression) |
+| 25 | p8_ap15_extended | p5_cross_matrix | `data-layer-switch="3#p5_cross_matrix"` (line 355 of part_08) | ✅ p5_cross_matrix is downstream validation tool. Forward link sufficient — p5_cross_matrix is within Part 5 |
+| 26 | p8_ap15_extended | p5_ocean_poles | `data-layer-switch="2#p5_ocean_poles"` (line 330 of part_08) | ✅ Bidirectional with pair #7 — verified 2026-04-24 |
 
 ---
 
@@ -100,4 +102,4 @@ After all remediation items are resolved:
 *Document prepared for Live Character Guide v6 Content Restoration project*
 *Created: 2026-04-21 (Remediation R-05)*
 *Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-21, fixed checklist and cross-refs)*
-*Updated: 2026-04-23 (Тех-Жрец TP-11 through TP-20 changes)*
+*Updated: 2026-04-24 (Terminology dedup: verified p5↔p8 cross-refs, added pairs 25-26)*
