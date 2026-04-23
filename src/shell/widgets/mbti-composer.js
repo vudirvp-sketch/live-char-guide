@@ -847,6 +847,35 @@
     console.log('[MBTI] Widget initialized at M' + currentWidgetLevel + ' level');
   }
 
+  // ─── Layer Change Handler ────────────────────────────────────────────
+
+  function handleLayerChange() {
+    // Re-evaluate widget level on layer change
+    var newLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
+    if (newLevel !== currentWidgetLevel) {
+      currentWidgetLevel = newLevel;
+      // If upgraded to M3, subscribe to events that weren't available at M2
+      if (currentWidgetLevel >= 3) {
+        subscribeOceanUpdates();
+        subscribeEnneagramSelected();
+      }
+    }
+  }
+
+  // Listen for layer changes
+  document.addEventListener('layer-changed', function() {
+    handleLayerChange();
+  });
+
+  var mbtiLayerObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName === 'data-layer') {
+        handleLayerChange();
+      }
+    });
+  });
+  mbtiLayerObserver.observe(document.body, { attributes: true });
+
   // ============================================================================
   // PUBLIC API
   // ============================================================================

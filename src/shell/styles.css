@@ -3512,7 +3512,8 @@ td.temperament-sp {
 
 /* === ENNEAGRAM SMART BUILDER STYLES === */
 .enneagram-widget {
-  max-width: 320px;
+  max-width: 480px;
+  width: 100%;
   margin: 1em auto;
   padding: 0.8em;
   background: var(--bg-surface);
@@ -3544,8 +3545,12 @@ td.temperament-sp {
 
 .enneagram-tabs {
   display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid var(--border);
   margin-bottom: 0.5em;
+  scrollbar-width: thin;
 }
 
 .enneagram-tab {
@@ -3558,6 +3563,8 @@ td.temperament-sp {
   border-bottom: 2px solid transparent;
   transition: all 0.15s;
   font-family: inherit;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .enneagram-tab:hover {
@@ -3581,7 +3588,7 @@ td.temperament-sp {
 /* Ring diagram */
 .enneagram-ring-svg {
   width: 100%;
-  max-width: 200px;
+  max-width: 260px;
   margin: 0 auto;
   display: block;
 }
@@ -3843,7 +3850,7 @@ td.temperament-sp {
 }
 
 /* === MBTI COMPOSER === */
-.mbti-widget{max-width:360px;margin:1em auto;padding:.8em;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px}
+.mbti-widget{max-width:480px;width:100%;margin:1em auto;padding:.8em;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px}
 .mbti-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5em}
 .mbti-title{font-size:1em;margin:0;color:var(--accent)}
 .mbti-level-badge{font-size:.7em;padding:.15em .5em;background:var(--accent-soft);border-radius:4px;color:var(--accent);font-weight:600}
@@ -3898,6 +3905,17 @@ td.temperament-sp {
 .enneagram-ocean-correlation th, .enneagram-ocean-correlation td { padding: 0.3em 0.5em; font-size: 0.85em; border-bottom: 1px solid var(--border); }
 .enneagram-ocean-fill-btn { display: inline-block; margin: 0.5em 0; padding: 0.4em 0.8em; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 4px; color: var(--accent); font-size: 0.8em; cursor: pointer; transition: all var(--transition-fast); }
 .enneagram-ocean-fill-btn:hover { background: var(--accent); color: #fff; }
+/* --- Enneagram Builder M2: OCEAN Tab (JS-generated class aliases) --- */
+.enneagram-ocean-sliders { padding: 0.5em 0; }
+.enneagram-ocean-slider-row { display: flex; align-items: center; gap: 0.4em; margin: 0.3em 0; }
+.enneagram-ocean-trait-letter { font-size: 0.8em; font-weight: 700; width: 1.2em; text-align: center; color: var(--accent); }
+.enneagram-ocean-trait-name { font-size: 0.8em; color: var(--text-muted); min-width: 7em; }
+.enneagram-ocean-bar-container { flex: 1; height: 8px; background: var(--bg-elevated); border-radius: 4px; position: relative; overflow: hidden; }
+.enneagram-ocean-bar { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+.enneagram-ocean-value { font-size: 0.75em; color: var(--text-muted); width: 2.5em; text-align: right; }
+.enneagram-ocean-actions { margin-top: 0.5em; text-align: center; }
+.enneagram-ocean-suggest-btn { display: inline-block; padding: 0.4em 0.8em; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 4px; color: var(--accent); font-size: 0.8em; cursor: pointer; transition: all var(--transition-fast); }
+.enneagram-ocean-suggest-btn:hover { background: var(--accent); color: #fff; }
 
 /* --- Enneagram Builder M2: FLAW Anchor Tags & Toggle --- */
 .enneagram-flaw-toggle { display: inline-block; margin: 0.5em 0; padding: 0.3em 0.7em; background: transparent; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 0.8em; cursor: pointer; transition: all var(--transition-fast); }
@@ -3916,10 +3934,21 @@ td.temperament-sp {
 
 /* --- Enneagram Builder M2: Examples Tab --- */
 .enneagram-examples-tab { padding: 0.5em 0; }
+.enneagram-examples-list { display: flex; flex-direction: column; gap: 0.5em; }
 .enneagram-example-item { padding: 0.5em; margin: 0.4em 0; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
 .enneagram-example-trigger { font-size: 0.85em; color: var(--accent); margin-bottom: 0.2em; }
 .enneagram-example-action { font-size: 0.8em; color: var(--text); }
 .enneagram-example-cost { font-size: 0.75em; color: var(--text-muted); margin-top: 0.15em; }
+/* JS-generated example card classes */
+.enneagram-example-card { padding: 0.5em; margin: 0.4em 0; background: var(--bg-elevated); border-radius: 6px; border: 1px solid var(--border); }
+.enneagram-example-row { font-size: 0.8em; margin: 0.15em 0; }
+.enneagram-example-row .example-label { font-weight: 600; color: var(--text-muted); }
+.enneagram-example-ocean-tags { margin-top: 0.3em; }
+.ocean-tag-badge { display: inline-block; padding: 0.1em 0.35em; border-radius: 3px; font-size: 0.7em; font-weight: 600; margin: 0 0.15em; }
+/* JS-generated anchor toggle button */
+.enneagram-anchor-toggle-btn { display: inline-block; margin: 0.5em 0; padding: 0.3em 0.7em; background: transparent; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 0.8em; cursor: pointer; transition: all var(--transition-fast); }
+.enneagram-anchor-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+.anchor-ocean-tags { margin-top: 0.2em; }
 
 /* --- MBTI Composer M2: OCEAN Cross-Reference --- */
 .mbti-ocean-section { margin: 0.8em 0; padding: 0.6em; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; }
@@ -4380,4 +4409,20 @@ body[data-layer="3"] .persona-synthesis-widget { display: block; }
 .persona-synthesis-embed {
   margin: 1.5rem 0;
   min-height: 100px;
+}
+
+/* === WIDGET RESPONSIVE BREAKPOINTS === */
+@media (max-width: 768px) {
+  .enneagram-widget { max-width: 100%; }
+  .mbti-widget { max-width: 100%; }
+  .enneagram-ring-svg { max-width: 220px; }
+  .enneagram-type-directions { flex-direction: column; gap: 0.3em; }
+}
+@media (max-width: 480px) {
+  .enneagram-widget { padding: 0.5em; }
+  .mbti-widget { padding: 0.5em; }
+  .enneagram-tab { padding: 0.3em 0.5em; font-size: 0.7em; }
+  .enneagram-ring-svg { max-width: 180px; }
+  .mbti-grid-cell { min-height: 40px; }
+  .mbti-cell-name { font-size: 0.5em; }
 }

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - EVENT BUS v1.0.0
+ * LIVE CHARACTER GUIDE - EVENT BUS v2.0.0
  * ============================================================================
  * 
  * Centralized event bus for widget communication.
@@ -12,6 +12,11 @@
  * - Each widget works autonomously
  * - Events go into void if no subscribers
  * - Event naming: source:action (e.g., ocean:updated, mbti:selected)
+ * 
+ * v2.0.0 additions:
+ * - Last-value cache: late subscribers receive the most recent emission
+ * - getLast() method for explicit state queries
+ * - Prevents the "missed event" race condition between widgets
  * 
  * Event Contract (§2.1-2.2):
  * 
@@ -26,7 +31,7 @@
  *   Loaded by lazy-loader.js before any widget initialization.
  *   Access: window.EventBus, window.GuideEvents
  * 
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 (function() {
@@ -34,17 +39,22 @@
 
   const EventBus = {
     _handlers: new Map(),
+    _lastEmitted: new Map(),
     
     /**
      * Emit an event with payload data.
      * All registered handlers for this event will be called.
      * If no handlers exist, nothing happens (safe void).
      * Handler errors are caught and logged, never propagated.
+     * The last emitted payload is cached for late subscribers.
      * 
      * @param {string} event - Event name (format: source:action)
      * @param {*} detail - Payload data passed to handlers
      */
     emit(event, detail) {
+      // Cache the last emitted value for late subscribers
+      this._lastEmitted.set(event, { detail: detail, ts: Date.now() });
+      
       const handlers = this._handlers.get(event) || [];
       if (handlers.length === 0) return; // void — safe
       handlers.forEach(h => {
@@ -59,6 +69,8 @@
     /**
      * Subscribe to an event.
      * Multiple handlers can subscribe to the same event.
+     * If the event was previously emitted, the handler is immediately
+     * called with the last cached value (last-value replay).
      * 
      * @param {string} event - Event name to subscribe to
      * @param {Function} handler - Callback function receiving payload
@@ -72,6 +84,15 @@
         this._handlers.set(event, []);
       }
       this._handlers.get(event).push(handler);
+      
+      // Replay last emitted value to late subscriber
+      if (this._lastEmitted.has(event)) {
+        try {
+          handler(this._lastEmitted.get(event).detail);
+        } catch (e) {
+          console.warn(`[EventBus] Replay error on "${event}":`, e);
+        }
+      }
     },
     
     /**
@@ -87,13 +108,28 @@
     },
 
     /**
+     * Get the last emitted payload for an event.
+     * Returns null if the event was never emitted.
+     * 
+     * @param {string} event - Event name to query
+     * @returns {*} Last emitted payload or null
+     */
+    getLast(event) {
+      if (!this._lastEmitted.has(event)) return null;
+      return this._lastEmitted.get(event).detail;
+    },
+
+    /**
      * Debug: list all registered events and their handler counts.
      * @returns {Object} Map of event names to handler counts
      */
     debug() {
       const info = {};
       this._handlers.forEach((handlers, event) => {
-        info[event] = handlers.length;
+        info[event] = {
+          handlers: handlers.length,
+          lastEmitted: this._lastEmitted.has(event)
+        };
       });
       return info;
     }
@@ -117,6 +153,6 @@
     window.GuideEvents = GuideEvents;
   }
 
-  console.log('[EventBus] Initialized with events:', Object.values(GuideEvents).join(', '));
+  console.log('[EventBus] Initialized v2.0.0 with events:', Object.values(GuideEvents).join(', '));
 
 })();

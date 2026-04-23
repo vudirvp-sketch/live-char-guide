@@ -620,6 +620,62 @@
     });
   }
 
+  // ─── State Reconciliation ─────────────────────────────────────────────
+
+  function reconcileState() {
+    // Read current state from widget public APIs + EventBus last-value cache
+    // This handles the race condition where widgets emit events before
+    // PersonaSynthesis subscribes
+
+    // OCEAN: check EventBus cache first, then widget API
+    if (!synthesisState.ocean) {
+      if (window.EventBus && typeof window.EventBus.getLast === 'function') {
+        var cachedOcean = window.EventBus.getLast(window.GuideEvents.OCEAN_UPDATED);
+        if (cachedOcean && typeof cachedOcean.O === 'number') {
+          synthesisState.ocean = cachedOcean;
+        }
+      }
+      if (!synthesisState.ocean && window.OceanInsight && typeof window.OceanInsight.getProfile === 'function') {
+        var profile = window.OceanInsight.getProfile();
+        if (profile && (profile.O + profile.C + profile.E + profile.A + profile.N) > 0) {
+          synthesisState.ocean = profile;
+        }
+      }
+    }
+
+    // MBTI: check EventBus cache first, then widget API
+    if (!synthesisState.mbti) {
+      if (window.EventBus && typeof window.EventBus.getLast === 'function') {
+        var cachedMbti = window.EventBus.getLast(window.GuideEvents.MBTI_SELECTED);
+        if (cachedMbti && cachedMbti.typeCode) {
+          synthesisState.mbti = cachedMbti;
+        }
+      }
+      if (!synthesisState.mbti && window.MBTIComposer && typeof window.MBTIComposer.getSelectedType === 'function') {
+        var mbtiType = window.MBTIComposer.getSelectedType();
+        if (mbtiType) {
+          synthesisState.mbti = { typeCode: mbtiType, temperament: '' };
+        }
+      }
+    }
+
+    // Enneagram: check EventBus cache first, then widget API
+    if (!synthesisState.enneagram) {
+      if (window.EventBus && typeof window.EventBus.getLast === 'function') {
+        var cachedEnneagram = window.EventBus.getLast(window.GuideEvents.ENNEAGRAM_SELECTED);
+        if (cachedEnneagram && cachedEnneagram.typeId) {
+          synthesisState.enneagram = cachedEnneagram;
+        }
+      }
+      if (!synthesisState.enneagram && window.EnneagramBuilder && typeof window.EnneagramBuilder.getSelectedType === 'function') {
+        var enneagramType = window.EnneagramBuilder.getSelectedType();
+        if (enneagramType) {
+          synthesisState.enneagram = { typeId: enneagramType, wings: [] };
+        }
+      }
+    }
+  }
+
   // ─── Initialization ──────────────────────────────────────────────────
 
   async function init() {
@@ -651,8 +707,13 @@
       fetchOceanData()
     ]);
 
-    // Subscribe to events
+    // Subscribe to events (with last-value replay from EventBus v2)
     subscribeToEvents();
+
+    // State reconciliation: read current state from already-initialized widgets
+    // This ensures PersonaSynthesis sees OCEAN/Enneagram/MBTI even if
+    // they were set before this widget initialized
+    reconcileState();
 
     // Initial render
     updateDashboard();
@@ -668,6 +729,8 @@
         init();
       } else {
         dashboardEl.style.display = '';
+        // Re-reconcile state when becoming visible (widgets may have been updated)
+        reconcileState();
         updateDashboard();
       }
     } else {

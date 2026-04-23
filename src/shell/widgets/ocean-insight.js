@@ -106,6 +106,10 @@
   // Highlight notification auto-dismiss timer
   let highlightNotifTimer = null;
 
+  // Subscription guards to prevent double-registration on re-init
+  let m2EventSubscribed = false;
+  let m3EventSubscribed = false;
+
   // ============================================================================
   // UTILITY
   // ============================================================================
@@ -847,6 +851,7 @@
   // ============================================================================
 
   function setupM2EventSubscriptions() {
+    if (m2EventSubscribed) return;
     // M2+: mbti:ocean-apply — highlight recommended poles (NOT auto-replace sliders)
     if (window.EventBus && window.GuideEvents && window.GuideEvents.MBTI_OCEAN_APPLY) {
       window.EventBus.on(window.GuideEvents.MBTI_OCEAN_APPLY, function(detail) {
@@ -855,11 +860,13 @@
           showHighlightNotification('Рекомендованные значения MBTI подсвечены на слайдерах');
         }
       });
+      m2EventSubscribed = true;
       console.log('[OCEAN] Subscribed to mbti:ocean-apply (M2+)');
     }
   }
 
   function setupM3EventSubscriptions() {
+    if (m3EventSubscribed) return;
     if (!window.EventBus || !window.GuideEvents) return;
 
     // M3: enneagram:selected — read ocean_defaults, highlight comfort zones
@@ -889,6 +896,8 @@
       });
       console.log('[OCEAN] Subscribed to mbti:selected (M3)');
     }
+
+    m3EventSubscribed = true;
   }
 
   // ============================================================================
@@ -938,6 +947,13 @@
     }
     if (currentWidgetLevel >= 3) {
       setupM3EventSubscriptions();
+    }
+
+    // Emit initial OCEAN state so late subscribers (PersonaSynthesis) can see it
+    // This fixes the race condition where OCEAN initializes but never emits
+    // until the user manually moves a slider
+    if (currentWidgetLevel >= 2) {
+      debounceEmit();
     }
 
     console.log(`[OCEAN] Widget initialized at M${currentWidgetLevel} level`);
