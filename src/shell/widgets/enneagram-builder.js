@@ -516,7 +516,7 @@
     // L3 hint for hidden fields
     if (guideLayer < 3) {
       html += '<div class="enneagram-l3-hint">';
-      html += '<small style="color: var(--text-muted);">Поля LIE и GHOST доступны на Layer 3</small>';
+      html += '<span class="tag opt" style="font-size:0.75em;margin-left:0.3em;">L3</span>';
       html += '</div>';
     }
 
@@ -542,12 +542,12 @@
 
     var typeInfo = getTypeInfo(selectedTypeId);
     var anchors = getFlawAnchors(selectedTypeId);
-    if ((!typeInfo || !anchors || anchors.length === 0) && (!typeInfo || !typeInfo.anchor_examples || typeInfo.anchor_examples.length === 0)) {
+    if (!anchors || anchors.length === 0) {
       return '<p class="enneagram-hint">Примеры не найдены для типа ' + selectedTypeId + '</p>';
     }
 
-    // M1: use flaw_anchors instead of typeData.anchor_examples
-    var examples = anchors.length > 0 ? anchors : (typeInfo.anchor_examples || []);
+    // Use flaw_anchors exclusively (anchor_examples removed from enneagram.json in A2)
+    var examples = anchors;
 
     var html = '<div class="enneagram-examples-list">';
 

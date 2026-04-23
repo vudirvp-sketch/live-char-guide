@@ -73,6 +73,7 @@
 
   // Data cache
   var mbtiDataCache = null;
+  var enneagramDataCache = null; // Needed for WidgetUtils.checkMbtiEnneagramCompatibility
 
   // State
   var selectedType = null;
@@ -252,13 +253,17 @@
       }
 
       // M3: Show live OCEAN compatibility if both OCEAN and Enneagram are active
-      if (lastEnneagramType) {
+      if (lastEnneagramType && enneagramDataCache) {
+        var compatLevel = window.WidgetUtils.checkMbtiEnneagramCompatibility(
+          typeCode, lastEnneagramType,
+          enneagramDataCache.mbti_suggestions || {},
+          mbtiDataCache.enneagram_suggestions || {}
+        );
+        var compatLabel = compatLevel === 'strong' ? 'Сильная совместимость' : compatLevel === 'partial' ? 'Частичная совместимость' : 'Нетипичное сочетание';
+        var compatClass = compatLevel === 'strong' ? 'compat-yes' : compatLevel === 'partial' ? 'compat-partial' : 'compat-no';
         html += '<div class="mbti-enneagram-compat">';
         html += '<span class="mbti-enneagram-compat-label">\uD83D\uDD17 Выбранный тип Эннеаграммы: ' + lastEnneagramType + '</span>';
-        var enneagramSuggestions = mbtiDataCache.enneagram_suggestions[typeCode] || [];
-        var isCompatible = enneagramSuggestions.indexOf(lastEnneagramType) !== -1;
-        html += '<span class="mbti-enneagram-compat-status ' + (isCompatible ? 'compat-yes' : 'compat-no') + '">' +
-          (isCompatible ? 'Совместим' : 'Нетипичное сочетание') + '</span>';
+        html += '<span class="mbti-enneagram-compat-status ' + compatClass + '">' + compatLabel + '</span>';
         html += '</div>';
       }
     }
@@ -776,10 +781,15 @@
       lines.push('**Совместимость с OCEAN:** ' + compatPct + '%');
     }
 
-    // Enneagram compatibility
-    if (lastEnneagramType && mbtiDataCache && mbtiDataCache.enneagram_suggestions && mbtiDataCache.enneagram_suggestions[selectedType]) {
-      var isCompat = mbtiDataCache.enneagram_suggestions[selectedType].indexOf(lastEnneagramType) !== -1;
-      lines.push('**Совместимость с Эннеаграммой тип ' + lastEnneagramType + ':** ' + (isCompat ? 'Совместим' : 'Нетипичное сочетание'));
+    // Enneagram compatibility (using WidgetUtils.checkMbtiEnneagramCompatibility)
+    if (lastEnneagramType && enneagramDataCache) {
+      var compatLevel = window.WidgetUtils.checkMbtiEnneagramCompatibility(
+        selectedType, lastEnneagramType,
+        enneagramDataCache.mbti_suggestions || {},
+        mbtiDataCache.enneagram_suggestions || {}
+      );
+      var compatLabel = compatLevel === 'strong' ? 'Сильная совместимость' : compatLevel === 'partial' ? 'Частичная совместимость' : 'Нетипичное сочетание';
+      lines.push('**Совместимость с Эннеаграммой тип ' + lastEnneagramType + ':** ' + compatLabel);
     }
 
     return lines.join('\n');
@@ -810,6 +820,7 @@
 
     // Fetch data
     mbtiDataCache = await window.WidgetUtils.fetchJson('data/mbti.json');
+    enneagramDataCache = await window.WidgetUtils.fetchJson('data/enneagram.json');
     var mbtiData = mbtiDataCache;
     if (!mbtiData) {
       container.innerHTML = '<div class="mbti-widget"><p class="mbti-empty-state">MBTI \u0434\u0430\u043D\u043D\u044B\u0435 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B</p></div>';

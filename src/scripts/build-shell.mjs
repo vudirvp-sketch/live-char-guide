@@ -186,13 +186,14 @@ async function buildShell() {
     process.exit(1);
   }
 
-  // 3b. Copy shell/widgets/ → dist/widgets/ (persona-cross.js etc.)
+  // 3b. Copy shell/widgets/ → dist/widgets/ (all widgets including widget-utils.js)
+  // E1: Auto-sync prevents DC18-style divergence between src/shell/widgets/ and root widgets/
   const widgetsSrc = join(SHELL_DIR, 'widgets');
   const widgetsDist = join(DIST_DIR, 'widgets');
   if (existsSync(widgetsSrc)) {
     await copyDir(widgetsSrc, widgetsDist);
     const widgetFiles = await readdir(widgetsDist);
-    log('INFO', `Copied shell/widgets/ → dist/widgets/ (${widgetFiles.length} files)`);
+    log('INFO', `Copied shell/widgets/ → dist/widgets/ (${widgetFiles.length} files: ${widgetFiles.join(', ')})`);
   } else {
     log('WARN', 'shell/widgets/ not found, skipping');
   }

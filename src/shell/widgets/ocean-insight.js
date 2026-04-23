@@ -156,7 +156,7 @@
       if (profile[id] <= thresholds.low) extremePoles.push(id + '_low');
     });
 
-    // Look up ocean.json.enneagram_suggestions for these poles
+    // Compute enneagram suggestions from traits[].enneagram_correlation (A1 migration: enneagram_suggestions removed from ocean.json)
     var suggestions = window.WidgetUtils.getEnneagramSuggestionsFromTraits(oceanData) || {};
     var typeCounts = {};
     extremePoles.forEach(function(pole) {
