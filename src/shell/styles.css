@@ -3195,3 +3195,187 @@ td.temperament-sp {
 .spine-result-summary.needs-work {
   color: var(--warning-border);
 }
+
+/* === OCEAN INSIGHT WIDGET (§4.1 Persona Synthesis Framework) === */
+.ocean-widget {
+  margin: 1.5em 0;
+  padding: 1.2em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.ocean-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.ocean-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+}
+
+.ocean-level-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.ocean-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1em;
+}
+
+.ocean-pentagon-container {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+}
+
+.ocean-pentagon-svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+/* Pentagon frame */
+.ocean-outer-frame {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 4 2;
+}
+
+/* Axis lines */
+.ocean-axis {
+  stroke: var(--border);
+  stroke-width: 0.5;
+  opacity: 0.5;
+}
+
+/* Inner shape (current profile) */
+.ocean-inner-shape {
+  fill: rgba(56, 189, 248, 0.12);
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  transition: all 0.2s ease;
+}
+
+/* Vertex dots */
+.ocean-vertex {
+  cursor: pointer;
+  stroke: var(--bg);
+  stroke-width: 2;
+  transition: all 0.15s ease;
+}
+
+.ocean-vertex:hover {
+  transform-origin: center;
+  filter: brightness(1.3);
+  stroke-width: 3;
+}
+
+.ocean-vertex-low {
+  fill: #ef4444;
+}
+
+.ocean-vertex-medium {
+  fill: #6b7280;
+}
+
+.ocean-vertex-high {
+  fill: #22c55e;
+}
+
+/* State labels */
+.ocean-label {
+  font-size: 9px;
+  font-family: var(--font-sans);
+  pointer-events: none;
+  transition: fill 0.15s ease;
+}
+
+.ocean-label-low {
+  fill: #fca5a5;
+  font-weight: 600;
+}
+
+.ocean-label-medium {
+  fill: var(--text-muted);
+}
+
+.ocean-label-high {
+  fill: #86efac;
+  font-weight: 600;
+}
+
+/* Trait letter labels */
+.ocean-trait-letter {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--text);
+  font-family: var(--font-sans);
+  pointer-events: none;
+}
+
+/* Legend */
+.ocean-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 0.8em;
+  flex-wrap: wrap;
+}
+
+.ocean-legend-item {
+  font-size: 0.8rem;
+  padding: 0.2em 0.6em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.ocean-legend-low {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.ocean-legend-medium {
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+}
+
+.ocean-legend-high {
+  color: #86efac;
+  border-color: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.08);
+}
+
+/* Error state */
+.ocean-error {
+  color: var(--color-error);
+  text-align: center;
+  padding: 1em;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .ocean-pentagon-svg {
+    max-width: 260px;
+  }
+  .ocean-legend {
+    gap: 0.5em;
+  }
+  .ocean-legend-item {
+    font-size: 0.75rem;
+  }
+}

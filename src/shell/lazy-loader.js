@@ -186,6 +186,43 @@
   }
 
   // ============================================================================
+  // GUIDE LAYER VISIBILITY HELPERS (§0.6)
+  // ============================================================================
+
+  /**
+   * Get current guide layer from data-layer attribute or URL param.
+   * Widgets use this to determine visibility and functionality level.
+   * @returns {number} Layer number (1, 2, or 3)
+   */
+  function getGuideLayer() {
+    return parseInt(document.body.getAttribute('data-layer') || '2', 10);
+  }
+
+  /**
+   * Check if psychological tools (OCEAN, Enneagram, MBTI) are allowed.
+   * These tools are only available at L2+ guide layer.
+   * @returns {boolean}
+   */
+  function isWidgetAllowed() {
+    return getGuideLayer() >= 2;
+  }
+
+  /**
+   * Get widget functionality level (M1/M2/M3).
+   * M1 = quick preset, M2 = full config, M3 = expert validation.
+   * Only meaningful at L2+ guide layer.
+   * @returns {number} Widget level (1, 2, or 3)
+   */
+  function getWidgetLevel() {
+    // M3 — expert mode (can be toggled by user preference)
+    if (window.userExpertMode) return 3;
+    // M2 — default for L2+
+    if (getGuideLayer() >= 2) return 2;
+    // M1 — fallback (shouldn't happen at L2+)
+    return 1;
+  }
+
+  // ============================================================================
   // CLIPBOARD UTILITY
   // ============================================================================
 
@@ -1184,6 +1221,12 @@
     initTooltips();
     initTokenCalc();
     initProgressBar();
+
+    // EventBus integration (§0.3): ensure EventBus is available after layer switch
+    // event-bus.js is loaded before lazy-loader.js, so window.EventBus should exist
+    if (typeof window.EventBus === 'undefined') {
+      console.warn('[LazyLoader] EventBus not found — widgets will work standalone');
+    }
   }
 
   // ============================================================================

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "traits": [
     {
       "id": "O",
@@ -154,5 +154,10 @@
     "A_low": [3, 8],
     "N_high": [4, 6],
     "N_low": [3, 9]
+  },
+  "extremum_thresholds": {
+    "low": 30,
+    "high": 70,
+    "description": "Values below 'low' or above 'high' are considered extrema"
   }
 }
