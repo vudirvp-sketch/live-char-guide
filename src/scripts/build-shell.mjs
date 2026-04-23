@@ -197,6 +197,16 @@ async function buildShell() {
     log('WARN', 'shell/widgets/ not found, skipping');
   }
 
+  // 3c. Copy event-bus.js to dist root (required by index.html)
+  const eventBusSrc = join(SHELL_DIR, 'event-bus.js');
+  if (existsSync(eventBusSrc)) {
+    await copyFile(eventBusSrc, join(DIST_DIR, 'event-bus.js'));
+    log('INFO', 'Copied shell/event-bus.js → dist/event-bus.js');
+  } else {
+    log('ERROR', 'shell/event-bus.js not found');
+    process.exit(1);
+  }
+
   // 4. Copy generated parts from build/parts-l{N}/ (instead of src/parts-l{N}/)
   const layers = ['1', '2', '3'];
   for (const layer of layers) {
@@ -276,6 +286,12 @@ async function buildShell() {
   }
   await copyDir(ASSETS_DIST, rootAssets);
   log('INFO', 'Copied dist/assets/ → assets/ (root fallback)');
+
+  // 12. Copy event-bus.js to root for backward compatibility
+  if (existsSync(join(DIST_DIR, 'event-bus.js'))) {
+    await copyFile(join(DIST_DIR, 'event-bus.js'), join(ROOT, 'event-bus.js'));
+    log('INFO', 'Copied dist/event-bus.js → event-bus.js (root fallback)');
+  }
 
   log('INFO', `Shell build complete! Hash: ${buildHash}`);
 
