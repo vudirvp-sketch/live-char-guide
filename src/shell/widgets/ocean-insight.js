@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - OCEAN INSIGHT WIDGET v1.0.0
+ * LIVE CHARACTER GUIDE - OCEAN INSIGHT WIDGET v2.0.0
  * ============================================================================
  * 
  * Interactive OCEAN Big Five personality profiler.
@@ -8,7 +8,7 @@
  * 
  * Functionality Levels:
  *   M1 — Clickable pentagon vertices, 3 states (low/medium/high), auto-labels
- *   M2 — Sliders 0–100, live pentagon, extremum counter, passive forecast (TODO)
+ *   M2 — Sliders 0–100, live pentagon, extremum counter, passive forecast
  *   M3 — Manual comments, event subscriptions, comfort zone highlights (TODO)
  * 
  * Activation: Only at L2+ guide layer (isWidgetAllowed())
@@ -16,11 +16,12 @@
  * 
  * Contract:
  *   - Reads: data/ocean.json (v2.0.0 — includes extremum_thresholds)
+ *   - Reads: data/mbti.json (v2.0.0 — includes ocean_suggestions)
  *   - Emits: ocean:updated { O, C, E, A, N } via window.EventBus
  *   - Subscribes: enneagram:selected, mbti:selected, mbti:ocean-apply (M3 only)
  *   - Fallback: if JSON missing → shows static placeholder
  * 
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 (function() {
@@ -72,6 +73,7 @@
 
   // Data cache
   let oceanDataCache = null;
+  let mbtiDataCache = null;
 
   // Current profile state
   const oceanProfile = {
@@ -80,6 +82,9 @@
 
   // Widget level (determined by guide layer)
   let currentWidgetLevel = 1;
+
+  // Debounce timer for EventBus emission
+  let debounceTimer = null;
 
   // ============================================================================
   // DATA LOADING
@@ -101,8 +106,24 @@
     }
   }
 
+  async function fetchMbtiData() {
+    if (mbtiDataCache) return mbtiDataCache;
+    const url = 'data/mbti.json';
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      mbtiDataCache = data;
+      console.log(`[OCEAN] Loaded MBTI data v${data.version || '?'} from ${url}`);
+      return data;
+    } catch (e) {
+      console.warn(`[OCEAN] Failed to fetch ${url}:`, e.message);
+      return null;
+    }
+  }
+
   // ============================================================================
-  // STATE HELPERS
+  // STATE HELPERS (M1)
   // ============================================================================
 
   function getState(value) {
@@ -121,6 +142,120 @@
     if (state === STATE_LOW) return `Низкая ${TRAIT_NAMES[traitId].toLowerCase()}`;
     if (state === STATE_HIGH) return `Высокая ${TRAIT_NAMES[traitId].toLowerCase()}`;
     return `${TRAIT_NAMES[traitId]}: средняя`;
+  }
+
+  // ============================================================================
+  // M2 HELPERS
+  // ============================================================================
+
+  function getTraitLabel(traitId, value) {
+    if (value <= 30) return TRAIT_LABELS_LOW[traitId];
+    if (value >= 70) return TRAIT_LABELS_HIGH[traitId];
+    return 'Умеренная';
+  }
+
+  function countExtrema(profile, thresholds) {
+    let count = 0;
+    const extremaList = [];
+    TRAIT_IDS.forEach(function(id) {
+      if (profile[id] >= thresholds.high) { count++; extremaList.push(id + '_high'); }
+      if (profile[id] <= thresholds.low) { count++; extremaList.push(id + '_low'); }
+    });
+    return { count: count, extremaList: extremaList };
+  }
+
+  function getEnneagramForecast(oceanData, profile, thresholds) {
+    // Check which poles are extreme
+    var extremePoles = [];
+    TRAIT_IDS.forEach(function(id) {
+      if (profile[id] >= thresholds.high) extremePoles.push(id + '_high');
+      if (profile[id] <= thresholds.low) extremePoles.push(id + '_low');
+    });
+
+    // Look up ocean.json.enneagram_suggestions for these poles
+    var suggestions = oceanData.enneagram_suggestions || {};
+    var typeCounts = {};
+    extremePoles.forEach(function(pole) {
+      var types = suggestions[pole] || [];
+      types.forEach(function(t) { typeCounts[t] = (typeCounts[t] || 0) + 1; });
+    });
+
+    // Sort by frequency
+    return Object.entries(typeCounts)
+      .sort(function(a, b) { return b[1] - a[1]; })
+      .slice(0, 3)
+      .map(function(entry) { return entry[0]; });
+  }
+
+  function getMBTIForecast(mbtiData, profile) {
+    if (!mbtiData || !mbtiData.ocean_suggestions) return [];
+    var suggestions = mbtiData.ocean_suggestions;
+
+    // Calculate distance between current profile and each type's suggestion
+    var distances = Object.entries(suggestions).map(function(entry) {
+      var typeCode = entry[0];
+      var suggested = entry[1];
+      var dist = 0;
+      TRAIT_IDS.forEach(function(id) {
+        dist += Math.abs(profile[id] - suggested[id]);
+      });
+      return { typeCode: typeCode, distance: dist };
+    });
+
+    distances.sort(function(a, b) { return a.distance - b.distance; });
+    return distances.slice(0, 3).map(function(d) { return d.typeCode; });
+  }
+
+  function debounceEmit() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {
+      if (window.EventBus && window.GuideEvents) {
+        window.EventBus.emit(window.GuideEvents.OCEAN_UPDATED, { O: oceanProfile.O, C: oceanProfile.C, E: oceanProfile.E, A: oceanProfile.A, N: oceanProfile.N });
+      }
+    }, 300);
+  }
+
+  function generateCopyText(profile, thresholds) {
+    var lines = ['**OCEAN Profile:**'];
+    TRAIT_IDS.forEach(function(id) {
+      var val = profile[id];
+      var label = getTraitLabel(id, val);
+      lines.push('- ' + TRAIT_NAMES[id] + ' (' + id + '): ' + val + ' — ' + label);
+    });
+
+    // Extrema summary
+    var extResult = countExtrema(profile, thresholds);
+    if (extResult.count > 0) {
+      var extParts = [];
+      TRAIT_IDS.forEach(function(id) {
+        if (profile[id] >= thresholds.high) extParts.push(id + ':' + profile[id] + ' (высокий)');
+        if (profile[id] <= thresholds.low) extParts.push(id + ':' + profile[id] + ' (низкий)');
+      });
+      lines.push('');
+      lines.push('Экстремумы: ' + extParts.join(', '));
+    }
+
+    return lines.join('\n');
+  }
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function() {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.className = 'clipboard-fallback-textarea';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand('copy'); } catch (_e) { /* ignore */ }
+    document.body.removeChild(textarea);
   }
 
   // ============================================================================
@@ -210,6 +345,60 @@
     </svg>`;
   }
 
+  // M2 SVG builder — vertices are clickable to focus sliders, no state cycling
+  function buildM2PentagonSVG() {
+    // Outer polygon (fixed frame)
+    let outerPoints = '';
+    for (let i = 0; i < 5; i++) {
+      const pos = getOuterVertexPosition(i);
+      outerPoints += `${pos.x},${pos.y} `;
+    }
+
+    // Inner polygon (current values)
+    let innerPoints = '';
+    for (let i = 0; i < 5; i++) {
+      const pos = getVertexPosition(i, oceanProfile[TRAIT_IDS[i]]);
+      innerPoints += `${pos.x},${pos.y} `;
+    }
+
+    // Axis lines
+    let axisLines = '';
+    for (let i = 0; i < 5; i++) {
+      const outer = getOuterVertexPosition(i);
+      axisLines += `<line x1="${PENTAGON_CENTER}" y1="${PENTAGON_CENTER}" x2="${outer.x}" y2="${outer.y}" class="ocean-axis" />`;
+    }
+
+    // Vertex dots (clickable to focus slider)
+    let vertices = '';
+    for (let i = 0; i < 5; i++) {
+      const traitId = TRAIT_IDS[i];
+      const value = oceanProfile[traitId];
+      const state = getState(value);
+      const pos = getVertexPosition(i, value);
+      const labelPos = getLabelPosition(i, 22);
+      const traitLabel = getTraitLabel(traitId, value);
+
+      const stateClass = `ocean-vertex ocean-vertex-${state}`;
+      vertices += `<circle cx="${pos.x}" cy="${pos.y}" r="8" class="${stateClass}" data-trait="${traitId}" data-index="${i}" tabindex="0" role="button" aria-label="${TRAIT_NAMES[traitId]}: ${value} — ${traitLabel}" />`;
+      vertices += `<text x="${labelPos.x}" y="${labelPos.y}" class="ocean-label ocean-label-${state}" data-trait="${traitId}" text-anchor="middle" dominant-baseline="middle">${traitLabel}</text>`;
+    }
+
+    // Trait letter labels at outer edge
+    let traitLetters = '';
+    for (let i = 0; i < 5; i++) {
+      const letterPos = getLabelPosition(i, 38);
+      traitLetters += `<text x="${letterPos.x}" y="${letterPos.y}" class="ocean-trait-letter" text-anchor="middle" dominant-baseline="middle">${TRAIT_IDS[i]}</text>`;
+    }
+
+    return `<svg class="ocean-pentagon-svg" viewBox="0 0 ${PENTAGON_SIZE} ${PENTAGON_SIZE}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OCEAN Profile Pentagon">
+      <polygon points="${outerPoints}" class="ocean-outer-frame" />
+      ${axisLines}
+      <polygon points="${innerPoints}" class="ocean-inner-shape" />
+      ${vertices}
+      ${traitLetters}
+    </svg>`;
+  }
+
   // ============================================================================
   // M1 WIDGET — CLICKABLE PENTAGON
   // ============================================================================
@@ -270,6 +459,168 @@
   }
 
   // ============================================================================
+  // M2 WIDGET — SLIDERS + LIVE PENTAGON + EXTREMUM + FORECAST + COPY
+  // ============================================================================
+
+  function buildM2Widget(container, oceanData, mbtiData) {
+    const thresholds = oceanData?.extremum_thresholds || { low: 30, high: 70 };
+
+    // Build sliders HTML
+    let slidersHTML = '';
+    TRAIT_IDS.forEach(function(id) {
+      const val = oceanProfile[id];
+      const valClass = val <= thresholds.low ? 'ocean-value-low' : (val >= thresholds.high ? 'ocean-value-high' : '');
+      slidersHTML += `
+        <div class="ocean-slider-row">
+          <span class="ocean-slider-label">${id}</span>
+          <span class="ocean-slider-name">${TRAIT_NAMES[id]}</span>
+          <input type="range" min="0" max="100" value="${val}" class="ocean-slider-input" data-trait="${id}" aria-label="${TRAIT_NAMES[id]}: ${val}" />
+          <span class="ocean-slider-value ${valClass}" data-value-trait="${id}">${val}</span>
+        </div>`;
+    });
+
+    container.innerHTML = `
+      <div class="ocean-widget ocean-widget-m2">
+        <div class="ocean-header">
+          <h4 class="ocean-title">OCEAN Profile</h4>
+          <span class="ocean-level-badge">M2</span>
+        </div>
+        <div class="ocean-pentagon-container" id="ocean-pentagon">
+          ${buildM2PentagonSVG()}
+        </div>
+        <div class="ocean-sliders">
+          ${slidersHTML}
+        </div>
+        <div class="ocean-extremum-counter" id="ocean-extremum">
+        </div>
+        <div class="ocean-forecast" id="ocean-forecast">
+        </div>
+        <div class="ocean-actions">
+          <button class="ocean-copy-btn" id="ocean-copy-btn">Copy for card</button>
+        </div>
+      </div>
+    `;
+
+    // Update extremum & forecast sections
+    updateExtremum(container, oceanData, mbtiData, thresholds);
+    updateForecast(container, oceanData, mbtiData, thresholds);
+
+    // Bind slider events
+    const sliders = container.querySelectorAll('.ocean-slider-input');
+    sliders.forEach(function(slider) {
+      slider.addEventListener('input', function() {
+        const traitId = this.dataset.trait;
+        const value = parseInt(this.value, 10);
+        oceanProfile[traitId] = value;
+
+        // Update value display
+        const valueEl = container.querySelector(`[data-value-trait="${traitId}"]`);
+        if (valueEl) {
+          valueEl.textContent = value;
+          valueEl.className = 'ocean-slider-value';
+          if (value <= thresholds.low) valueEl.classList.add('ocean-value-low');
+          else if (value >= thresholds.high) valueEl.classList.add('ocean-value-high');
+        }
+
+        // Update slider aria
+        this.setAttribute('aria-label', TRAIT_NAMES[traitId] + ': ' + value);
+
+        // Re-render pentagon
+        const pentagonEl = container.querySelector('#ocean-pentagon');
+        if (pentagonEl) {
+          pentagonEl.innerHTML = buildM2PentagonSVG();
+        }
+
+        // Update extremum & forecast
+        updateExtremum(container, oceanData, mbtiData, thresholds);
+        updateForecast(container, oceanData, mbtiData, thresholds);
+
+        // Debounced EventBus emission
+        debounceEmit();
+      });
+    });
+
+    // Bind pentagon vertex click → focus slider
+    const pentagonEl = container.querySelector('#ocean-pentagon');
+    if (pentagonEl) {
+      pentagonEl.addEventListener('click', function(e) {
+        const vertex = e.target.closest('.ocean-vertex');
+        if (!vertex) return;
+        const traitId = vertex.dataset.trait;
+        if (!traitId) return;
+        const slider = container.querySelector(`.ocean-slider-input[data-trait="${traitId}"]`);
+        if (slider) slider.focus();
+      });
+
+      pentagonEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const vertex = e.target.closest('.ocean-vertex');
+          if (vertex) {
+            e.preventDefault();
+            const traitId = vertex.dataset.trait;
+            if (!traitId) return;
+            const slider = container.querySelector(`.ocean-slider-input[data-trait="${traitId}"]`);
+            if (slider) slider.focus();
+          }
+        }
+      });
+    }
+
+    // Bind copy button
+    const copyBtn = container.querySelector('#ocean-copy-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        const text = generateCopyText(oceanProfile, thresholds);
+        copyToClipboard(text);
+        copyBtn.textContent = 'Скопировано!';
+        copyBtn.classList.add('ocean-copied');
+        setTimeout(function() {
+          copyBtn.textContent = 'Copy for card';
+          copyBtn.classList.remove('ocean-copied');
+        }, 1500);
+      });
+    }
+  }
+
+  function updateExtremum(container, oceanData, mbtiData, thresholds) {
+    const el = container.querySelector('#ocean-extremum');
+    if (!el) return;
+
+    const result = countExtrema(oceanProfile, thresholds);
+    let html = `Экстремумы: ${result.count}`;
+
+    if (result.count >= 3) {
+      html += `<div class="ocean-extremum-warning">⚠ 3+ экстремальных полюса могут создавать внутреннюю противоречивость</div>`;
+    }
+
+    el.innerHTML = html;
+  }
+
+  function updateForecast(container, oceanData, mbtiData, thresholds) {
+    const el = container.querySelector('#ocean-forecast');
+    if (!el) return;
+
+    const enneagramTypes = getEnneagramForecast(oceanData, oceanProfile, thresholds);
+    const mbtiTypes = getMBTIForecast(mbtiData, oceanProfile);
+
+    let html = '<div class="ocean-forecast-title">Вероятные типы</div>';
+
+    if (enneagramTypes.length > 0) {
+      html += `<div class="ocean-forecast-types">На основе OCEAN наиболее вероятные типы Эннеаграммы: <strong>${enneagramTypes.join(', ')}</strong></div>`;
+    } else {
+      html += '<div class="ocean-forecast-types">На основе OCEAN нет выраженных экстремумов для прогноза Эннеаграммы</div>';
+    }
+
+    if (mbtiTypes.length > 0) {
+      html += `<div class="ocean-forecast-types">На основе OCEAN наиболее вероятные MBTI-типы: <strong>${mbtiTypes.join(', ')}</strong></div>`;
+    } else {
+      html += '<div class="ocean-forecast-types">MBTI-данные недоступны для прогноза</div>';
+    }
+
+    el.innerHTML = html;
+  }
+
+  // ============================================================================
   // INITIALIZATION
   // ============================================================================
 
@@ -278,7 +629,7 @@
     if (!container) return;
 
     // Check guide layer — widgets only at L2+
-    if (typeof isWidgetAllowed === 'function' && !isWidgetAllowed()) {
+    if (typeof window.isWidgetAllowed === 'function' && !window.isWidgetAllowed()) {
       container.innerHTML = '';
       container.style.display = 'none';
       console.log('[OCEAN] Widget hidden — L1 guide layer');
@@ -286,7 +637,7 @@
     }
 
     // Determine widget level
-    currentWidgetLevel = (typeof getWidgetLevel === 'function') ? getWidgetLevel() : 1;
+    currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
 
     // Fetch data
     const oceanData = await fetchOceanData();
@@ -295,14 +646,19 @@
       return;
     }
 
-    // Build widget based on level
-    // M1 — always available at L2+
-    buildM1Widget(container, oceanData);
-
-    // M2+ features will be added in future phases
+    // Fetch MBTI data (optional, for M2+ forecast)
+    let mbtiData = null;
     if (currentWidgetLevel >= 2) {
-      // TODO: Add sliders, extremum counter, passive forecast
-      console.log('[OCEAN] M2+ features — TODO (future phase)');
+      mbtiData = await fetchMbtiData();
+    }
+
+    // Build widget based on level
+    if (currentWidgetLevel >= 2) {
+      // M2 — Full configuration
+      buildM2Widget(container, oceanData, mbtiData);
+    } else {
+      // M1 — Clickable pentagon (fallback)
+      buildM1Widget(container, oceanData);
     }
 
     if (currentWidgetLevel >= 3) {
@@ -321,7 +677,7 @@
     init: initOceanInsight,
     getProfile: () => ({ ...oceanProfile }),
     getLevel: () => currentWidgetLevel,
-    getVersion: () => '1.0.0'
+    getVersion: () => '2.0.0'
   };
 
   // Auto-init after layer content is loaded

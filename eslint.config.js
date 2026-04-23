@@ -53,14 +53,24 @@ export default [
         __dirname: 'readonly',
         __filename: 'readonly',
         Buffer: 'readonly',
-        URLSearchParams: 'readonly'
+        URLSearchParams: 'readonly',
+        confirm: 'readonly',
+        alert: 'readonly',
+        HTMLElement: 'readonly',
+        SVGElement: 'readonly',
+        Element: 'readonly',
+        NodeList: 'readonly',
+        DOMParser: 'readonly',
+        XMLSerializer: 'readonly',
+        DOMTokenList: 'readonly'
       }
     },
     rules: {
-      'no-unused-vars': 'warn',
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
       // DEP-007 FIX: Enable meaningful rules
       'no-undef': 'warn',
-      'no-empty': 'warn'
+      'no-empty': 'warn',
+      'no-console': 'off'  // Debugging is important during v2/v3 development
     }
   }
 ];

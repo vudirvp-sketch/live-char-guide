@@ -3379,3 +3379,499 @@ td.temperament-sp {
     font-size: 0.75rem;
   }
 }
+
+/* === OCEAN INSIGHT M2 STYLES === */
+.ocean-widget-m2 .ocean-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em 0;
+}
+
+.ocean-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.ocean-slider-label {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  min-width: 2em;
+  font-weight: 600;
+}
+
+.ocean-slider-name {
+  font-size: 0.75em;
+  color: var(--text);
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.ocean-slider-input {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  border-radius: 3px;
+  outline: none;
+}
+
+.ocean-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ocean-slider-input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.ocean-slider-value {
+  font-size: 0.75em;
+  min-width: 2.5em;
+  text-align: right;
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+.ocean-slider-value.ocean-value-low { color: var(--color-error); }
+.ocean-slider-value.ocean-value-high { color: var(--color-success); }
+
+.ocean-extremum-counter {
+  padding: 0.4em 0.6em;
+  font-size: 0.8em;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 0.3em;
+}
+
+.ocean-extremum-warning {
+  color: var(--color-warning);
+  font-weight: 500;
+  margin-top: 0.3em;
+}
+
+.ocean-forecast {
+  padding: 0.5em 0.6em;
+  font-size: 0.8em;
+  border-top: 1px solid var(--border);
+}
+
+.ocean-forecast-title {
+  font-weight: 600;
+  margin-bottom: 0.3em;
+  color: var(--text);
+}
+
+.ocean-forecast-types {
+  color: var(--text-muted);
+  margin-bottom: 0.3em;
+}
+
+.ocean-forecast-types strong {
+  color: var(--accent);
+}
+
+.ocean-actions {
+  padding: 0.5em 0;
+  border-top: 1px solid var(--border);
+}
+
+.ocean-copy-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4em 1em;
+  color: var(--text);
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.ocean-copy-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.ocean-copy-btn.ocean-copied {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+
+/* === ENNEAGRAM SMART BUILDER STYLES === */
+.enneagram-widget {
+  max-width: 320px;
+  margin: 1em auto;
+  padding: 0.8em;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.enneagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.enneagram-title {
+  font-size: 1em;
+  margin: 0;
+  color: var(--accent);
+}
+
+.enneagram-level-badge {
+  font-size: 0.7em;
+  padding: 0.15em 0.5em;
+  background: var(--accent-soft);
+  border-radius: 4px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.enneagram-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5em;
+}
+
+.enneagram-tab {
+  padding: 0.4em 0.8em;
+  font-size: 0.8em;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.enneagram-tab:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.enneagram-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.enneagram-tab-content {
+  display: none;
+}
+
+.enneagram-tab-content.active {
+  display: block;
+}
+
+/* Ring diagram */
+.enneagram-ring-svg {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.enneagram-ring-point {
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.enneagram-ring-point:hover circle {
+  r: 14;
+  fill: var(--accent);
+}
+
+.enneagram-ring-point.selected circle {
+  fill: var(--accent);
+  r: 14;
+}
+
+.enneagram-ring-point text {
+  font-size: 12px;
+  fill: var(--text);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+.enneagram-ring-point.selected text {
+  fill: var(--bg);
+}
+
+.enneagram-connection-line {
+  stroke: var(--border);
+  stroke-width: 1;
+  fill: none;
+  opacity: 0.4;
+}
+
+.enneagram-connection-line.active {
+  stroke: var(--accent);
+  opacity: 0.8;
+  stroke-width: 2;
+}
+
+/* Type info */
+.enneagram-type-info {
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+
+.enneagram-type-name {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+.enneagram-type-alt {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  margin-bottom: 0.3em;
+}
+
+.enneagram-type-fear,
+.enneagram-type-desire {
+  font-size: 0.8em;
+  margin-bottom: 0.2em;
+}
+
+.enneagram-type-directions {
+  display: flex;
+  gap: 0.8em;
+  margin-top: 0.3em;
+  font-size: 0.75em;
+}
+
+.enneagram-growth {
+  color: var(--color-success);
+}
+
+.enneagram-stress {
+  color: var(--color-error);
+}
+
+.enneagram-type-wings {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  margin-top: 0.2em;
+}
+
+.enneagram-confirm-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85em;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.enneagram-confirm-btn:hover {
+  opacity: 0.9;
+}
+
+.enneagram-confirm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.enneagram-hint {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.5em;
+}
+
+.enneagram-error {
+  color: var(--color-error);
+  font-size: 0.85em;
+  text-align: center;
+}
+
+/* SPINE fields */
+.enneagram-spine-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.enneagram-spine-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.enneagram-spine-label {
+  font-size: 0.75em;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.enneagram-spine-label.label-WANT { color: var(--color-success); }
+.enneagram-spine-label.label-NEED { color: var(--color-info); }
+.enneagram-spine-label.label-FLAW { color: var(--color-error); }
+.enneagram-spine-label.label-LIE { color: var(--color-warning); }
+.enneagram-spine-label.label-GHOST { color: #a78bfa; }
+
+.enneagram-spine-input {
+  padding: 0.4em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85em;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 2em;
+}
+
+.enneagram-spine-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* FLAW anchors */
+.enneagram-flaw-anchors {
+  margin-top: 0.5em;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5em;
+}
+
+.enneagram-flaw-anchors h5 {
+  font-size: 0.8em;
+  color: var(--text-muted);
+  margin-bottom: 0.3em;
+}
+
+.enneagram-flaw-anchor {
+  padding: 0.4em;
+  margin-bottom: 0.3em;
+  background: var(--bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--color-error);
+}
+
+.anchor-trigger {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.anchor-action {
+  font-size: 0.75em;
+  color: var(--text-muted);
+  margin-top: 0.15em;
+}
+
+.anchor-cost {
+  font-size: 0.7em;
+  color: var(--color-warning);
+  margin-top: 0.1em;
+  font-style: italic;
+}
+
+.enneagram-l3-hint {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+/* Export */
+.enneagram-export-format {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.enneagram-export-preview {
+  padding: 0.5em;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 0.8em;
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+}
+
+.enneagram-export-actions {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
+.enneagram-copy-btn {
+  padding: 0.3em 0.8em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 0.8em;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.enneagram-copy-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+/* === MBTI COMPOSER === */
+.mbti-widget{max-width:360px;margin:1em auto;padding:.8em;background:var(--bg-surface);border:1px solid var(--border);border-radius:8px}
+.mbti-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5em}
+.mbti-title{font-size:1em;margin:0;color:var(--accent)}
+.mbti-level-badge{font-size:.7em;padding:.15em .5em;background:var(--accent-soft);border-radius:4px;color:var(--accent);font-weight:600}
+.mbti-mode-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:.8em}
+.mbti-mode-btn{flex:1;padding:.4em .6em;border:none;background:var(--bg);color:var(--text-muted);font-size:.8em;cursor:pointer;font-family:inherit}
+.mbti-mode-btn.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.mbti-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.mbti-grid-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5em .3em;border-radius:4px;cursor:pointer;transition:all .15s;min-height:50px}
+.mbti-grid-cell:hover{transform:scale(1.05);filter:brightness(1.2)}
+.mbti-grid-cell.selected{outline:2px solid var(--accent);outline-offset:2px}
+.mbti-grid-cell[data-temperament="NT"]{background:rgba(124,77,255,.2)}
+.mbti-grid-cell[data-temperament="NF"]{background:rgba(255,107,157,.2)}
+.mbti-grid-cell[data-temperament="SJ"]{background:rgba(77,195,255,.2)}
+.mbti-grid-cell[data-temperament="SP"]{background:rgba(255,184,77,.2)}
+.mbti-cell-code{font-size:.85em;font-weight:700;color:var(--text)}
+.mbti-cell-name{font-size:.6em;color:var(--text-muted);text-align:center;line-height:1.2;margin-top:.15em}
+.mbti-axis-sliders{display:flex;flex-direction:column;gap:.6em}
+.mbti-axis-row{display:flex;align-items:center;gap:.4em}
+.mbti-axis-label{font-size:.75em;font-weight:600;min-width:14px;text-align:center}
+.mbti-axis-label-left{color:var(--text-muted)}
+.mbti-axis-label-right{color:var(--accent)}
+.mbti-axis-input{flex:1;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none}
+.mbti-axis-input::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--accent);border-radius:50%;cursor:pointer}
+.mbti-axis-input::-moz-range-thumb{width:14px;height:14px;background:var(--accent);border-radius:50%;cursor:pointer;border:none}
+.mbti-result-card{margin-top:.8em;padding:.8em;background:var(--bg-elevated);border-radius:6px;border:1px solid var(--border);text-align:center}
+.mbti-result-code{font-size:1.4em;font-weight:700;color:var(--accent);letter-spacing:.05em}
+.mbti-result-name{font-size:.95em;color:var(--text);margin-top:.2em}
+.mbti-result-temperament{font-size:.8em;color:var(--text-muted);margin-top:.15em}
+.mbti-result-functions{font-size:.8em;font-family:var(--font-mono);color:var(--accent);margin-top:.3em;letter-spacing:.03em}
+.mbti-result-hint{font-size:.8em;color:var(--text-muted);margin-top:.3em;font-style:italic}
+.mbti-empty-state{text-align:center;padding:1.5em;color:var(--text-muted);font-size:.85em}

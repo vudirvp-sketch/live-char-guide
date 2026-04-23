@@ -113,7 +113,7 @@
           console.log(`[AnchorRedirect] Loaded ${Object.keys(data.redirects).length} redirects from JSON`);
         }
       }
-    } catch (e) {
+    } catch (_e) {
       console.warn('[AnchorRedirect] Using hardcoded fallback redirects');
     }
   }
@@ -222,6 +222,11 @@
     return 1;
   }
 
+  // Expose on window for widgets (loaded outside this IIFE)
+  window.getGuideLayer = getGuideLayer;
+  window.isWidgetAllowed = isWidgetAllowed;
+  window.getWidgetLevel = getWidgetLevel;
+
   // ============================================================================
   // CLIPBOARD UTILITY
   // ============================================================================
@@ -230,7 +235,7 @@
     try {
       await navigator.clipboard.writeText(text);
       return true;
-    } catch (err) {
+    } catch (_err) {
       // Fallback for insecure contexts (http://, file://)
       try {
         const textarea = document.createElement('textarea');
@@ -820,7 +825,7 @@
 
     // Find which widgets existed in the old layer but don't exist in the new layer
     const disappearedWidgets = [];
-    Object.entries(WIDGET_SELECTORS).forEach(([selector, info]) => {
+    Object.entries(WIDGET_SELECTORS).forEach(([_selector, info]) => {
       if (oldLayerNum >= info.minLayer && newLayerNum < info.minLayer) {
         // Only show toast if the widget actually existed in the old content
         // (some parts don't have widgets at all)
@@ -866,7 +871,8 @@
   // ============================================================================
 
   function hideModal() { $('#layer-modal')?.classList.add('hidden'); }
-  function showModal() { $('#layer-modal')?.classList.remove('hidden'); }
+  // Reserved for future use
+  function _showModal() { $('#layer-modal')?.classList.remove('hidden'); }
   function showSwitcher() { $('#layer-switcher')?.classList.remove('hidden'); }
 
   function updateSwitcherButtons(activeLayer) {
@@ -1019,7 +1025,7 @@
       if (!h2) return;
 
       const partTitle = h2.textContent.replace(/^[0-9.]+\s*/, '').trim();
-      const partId = firstSection.id;
+      // partId intentionally not used — data-part attribute uses partNum directly
 
       // Collect Tier 2 entries (sections with data-toc-nav)
       const navSections = partSections.filter(s => s.hasAttribute('data-toc-nav'));
@@ -1554,7 +1560,7 @@
             console.log('[Glossary] Loaded data from', url);
             break;
           }
-        } catch (e) {
+        } catch (_e) {
           // try next URL
         }
       }
@@ -1571,7 +1577,8 @@
     const currentLayerNum = parseInt(document.body.getAttribute('data-layer') || '2', 10);
 
     const terms = glossaryData.canonical_terms;
-    const layerMarkers = glossaryData.layer_markers || {
+    // TODO: Use layer markers in glossary term rendering
+    const _layerMarkers = glossaryData.layer_markers || {
       '0': '📘', '1': '🔁', '2': '⚙️', '3': '🔍'
     };
 
@@ -2551,16 +2558,8 @@
     // Fallback: hardcoded types database
     if (!typesDB) {
 
-    // Mapping slider values to letters
-    const axisLetterMap = {
-      EI: { '-1': 'E', '0': null, '1': 'I' },
-      SN: { '-1': 'S', '0': null, '1': 'N' },
-      TF: { '-1': 'T', '0': null, '1': 'F' },
-      JP: { '-1': 'J', '0': null, '1': 'P' }
-    };
-
     // Type database (names and hints)
-    const typesDB = {
+    typesDB = {
       INTJ: { name: 'Архитектор', hint: 'Стратег, видит системы', temperament: 'NT' },
       INTP: { name: 'Логик', hint: 'Аналитик, ищет истину', temperament: 'NT' },
       ENTJ: { name: 'Командир', hint: 'Лидер, системный', temperament: 'NT' },
