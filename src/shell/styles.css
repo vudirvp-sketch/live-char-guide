@@ -756,23 +756,30 @@ body[data-layer="3"] .layer-indicator { border-left-color: var(--layer-3-clr); c
 }
 
 /* Layer toggle mode: show/hide sections by layer */
+/* Support both formats: data-layer="1" and data-layer="l1" */
 body.layer-toggle-mode #content [data-layer="1"],
 body.layer-toggle-mode #content [data-layer="2"],
-body.layer-toggle-mode #content [data-layer="3"] {
+body.layer-toggle-mode #content [data-layer="3"],
+body.layer-toggle-mode #content [data-layer="l1"],
+body.layer-toggle-mode #content [data-layer="l2"],
+body.layer-toggle-mode #content [data-layer="l3"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
-body.layer-toggle-mode.layer-hide-1 #content [data-layer="1"] {
+body.layer-toggle-mode.layer-hide-1 #content [data-layer="1"],
+body.layer-toggle-mode.layer-hide-1 #content [data-layer="l1"] {
   opacity: 0.3;
   pointer-events: none;
 }
-body.layer-toggle-mode.layer-hide-2 #content [data-layer="2"] {
+body.layer-toggle-mode.layer-hide-2 #content [data-layer="2"],
+body.layer-toggle-mode.layer-hide-2 #content [data-layer="l2"] {
   opacity: 0.3;
   pointer-events: none;
 }
-body.layer-toggle-mode.layer-hide-3 #content [data-layer="3"] {
+body.layer-toggle-mode.layer-hide-3 #content [data-layer="3"],
+body.layer-toggle-mode.layer-hide-3 #content [data-layer="l3"] {
   opacity: 0.3;
   pointer-events: none;
 }
@@ -788,27 +795,32 @@ body.layer-toggle-mode.layer-hide-3 #content [data-layer="3"] {
 
 /* === LAYER VISIBILITY (CUMULATIVE MODEL) === */
 /* Scoped to #content to avoid hiding modal buttons with data-layer attributes */
-#content [data-layer="1"], #content [data-layer="2"], #content [data-layer="3"] {
+/* Support both formats: data-layer="1" and data-layer="l1" */
+#content [data-layer="1"], #content [data-layer="2"], #content [data-layer="3"],
+#content [data-layer="l1"], #content [data-layer="l2"], #content [data-layer="l3"] {
   content-visibility: hidden;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-fast);
 }
 
-#content [data-layer="0"] {
+#content [data-layer="0"], #content [data-layer="l0"] {
   content-visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
 }
 
-body[data-layer="1"] #content [data-layer="1"] {
+body[data-layer="1"] #content [data-layer="1"],
+body[data-layer="1"] #content [data-layer="l1"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
 body[data-layer="2"] #content [data-layer="1"],
-body[data-layer="2"] #content [data-layer="2"] {
+body[data-layer="2"] #content [data-layer="2"],
+body[data-layer="2"] #content [data-layer="l1"],
+body[data-layer="2"] #content [data-layer="l2"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
@@ -816,15 +828,21 @@ body[data-layer="2"] #content [data-layer="2"] {
 
 body[data-layer="3"] #content [data-layer="1"],
 body[data-layer="3"] #content [data-layer="2"],
-body[data-layer="3"] #content [data-layer="3"] {
+body[data-layer="3"] #content [data-layer="3"],
+body[data-layer="3"] #content [data-layer="l1"],
+body[data-layer="3"] #content [data-layer="l2"],
+body[data-layer="3"] #content [data-layer="l3"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
 body[data-layer="1"] #content [data-layer="2"],
-body[data-layer="1"] #content [data-layer="3"] { display: none !important; }
-body[data-layer="2"] #content [data-layer="3"] { display: none !important; }
+body[data-layer="1"] #content [data-layer="3"],
+body[data-layer="1"] #content [data-layer="l2"],
+body[data-layer="1"] #content [data-layer="l3"] { display: none !important; }
+body[data-layer="2"] #content [data-layer="3"],
+body[data-layer="2"] #content [data-layer="l3"] { display: none !important; }
 
 /* Layer badges */
 .layer-badge {
@@ -1390,6 +1408,38 @@ body.content-wide pre {
 
 .layer-remark a:hover {
   text-decoration: underline;
+}
+
+/* Fix nested layer-remark links (link inside layer-remark paragraph should be inline) */
+p.layer-remark a.layer-remark,
+td a.layer-remark {
+  display: inline;
+  padding: 0.1em 0.3em;
+  margin: 0;
+  background: rgba(56, 189, 248, 0.1);
+  border-left: none;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+/* Inline layer-remark link (used inside paragraphs, not as block) */
+.layer-remark-link {
+  display: inline;
+  padding: 0.15em 0.4em;
+  margin: 0;
+  background: rgba(56, 189, 248, 0.1);
+  border-left: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+  transition: all var(--transition-fast);
+}
+
+.layer-remark-link:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-bottom-style: solid;
 }
 
 /* === LAYER LINK DISABLED (§0.9: links to sections not in current layer) === */

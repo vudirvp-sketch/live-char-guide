@@ -705,6 +705,85 @@ body[data-layer="3"] .layer-indicator { border-left-color: var(--layer-3-clr); c
 
 .switch-icon { font-size: 1.2em; }
 
+/* === LAYER TOGGLE (V-14: Quick Reference toggle) === */
+.layer-toggle-wrap {
+  display: flex;
+  gap: 0.25em;
+  padding: 0.25em;
+  border-left: 1px solid var(--border);
+  margin-left: 0.3em;
+}
+
+.layer-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  opacity: 0.5;
+}
+
+.layer-toggle-btn:hover {
+  background: var(--accent-soft);
+  opacity: 0.8;
+}
+
+.layer-toggle-btn.active {
+  opacity: 1;
+  background: var(--accent-soft);
+}
+
+.layer-toggle-btn[data-toggle-layer="1"].active { 
+  border-color: var(--layer-1-clr); 
+  color: var(--layer-1-clr); 
+}
+.layer-toggle-btn[data-toggle-layer="2"].active { 
+  border-color: var(--layer-2-clr); 
+  color: var(--layer-2-clr); 
+}
+.layer-toggle-btn[data-toggle-layer="3"].active { 
+  border-color: var(--layer-3-clr); 
+  color: var(--layer-3-clr); 
+}
+
+/* Layer toggle mode: show/hide sections by layer */
+/* Support both formats: data-layer="1" and data-layer="l1" */
+body.layer-toggle-mode #content [data-layer="1"],
+body.layer-toggle-mode #content [data-layer="2"],
+body.layer-toggle-mode #content [data-layer="3"],
+body.layer-toggle-mode #content [data-layer="l1"],
+body.layer-toggle-mode #content [data-layer="l2"],
+body.layer-toggle-mode #content [data-layer="l3"] {
+  content-visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.layer-toggle-mode.layer-hide-1 #content [data-layer="1"],
+body.layer-toggle-mode.layer-hide-1 #content [data-layer="l1"] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+body.layer-toggle-mode.layer-hide-2 #content [data-layer="2"],
+body.layer-toggle-mode.layer-hide-2 #content [data-layer="l2"] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+body.layer-toggle-mode.layer-hide-3 #content [data-layer="3"],
+body.layer-toggle-mode.layer-hide-3 #content [data-layer="l3"] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 /* === CONTENT AREA === */
 #content {
   transition: opacity 0.3s ease;
@@ -716,27 +795,32 @@ body[data-layer="3"] .layer-indicator { border-left-color: var(--layer-3-clr); c
 
 /* === LAYER VISIBILITY (CUMULATIVE MODEL) === */
 /* Scoped to #content to avoid hiding modal buttons with data-layer attributes */
-#content [data-layer="1"], #content [data-layer="2"], #content [data-layer="3"] {
+/* Support both formats: data-layer="1" and data-layer="l1" */
+#content [data-layer="1"], #content [data-layer="2"], #content [data-layer="3"],
+#content [data-layer="l1"], #content [data-layer="l2"], #content [data-layer="l3"] {
   content-visibility: hidden;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-fast);
 }
 
-#content [data-layer="0"] {
+#content [data-layer="0"], #content [data-layer="l0"] {
   content-visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
 }
 
-body[data-layer="1"] #content [data-layer="1"] {
+body[data-layer="1"] #content [data-layer="1"],
+body[data-layer="1"] #content [data-layer="l1"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
 body[data-layer="2"] #content [data-layer="1"],
-body[data-layer="2"] #content [data-layer="2"] {
+body[data-layer="2"] #content [data-layer="2"],
+body[data-layer="2"] #content [data-layer="l1"],
+body[data-layer="2"] #content [data-layer="l2"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
@@ -744,15 +828,21 @@ body[data-layer="2"] #content [data-layer="2"] {
 
 body[data-layer="3"] #content [data-layer="1"],
 body[data-layer="3"] #content [data-layer="2"],
-body[data-layer="3"] #content [data-layer="3"] {
+body[data-layer="3"] #content [data-layer="3"],
+body[data-layer="3"] #content [data-layer="l1"],
+body[data-layer="3"] #content [data-layer="l2"],
+body[data-layer="3"] #content [data-layer="l3"] {
   content-visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
 body[data-layer="1"] #content [data-layer="2"],
-body[data-layer="1"] #content [data-layer="3"] { display: none !important; }
-body[data-layer="2"] #content [data-layer="3"] { display: none !important; }
+body[data-layer="1"] #content [data-layer="3"],
+body[data-layer="1"] #content [data-layer="l2"],
+body[data-layer="1"] #content [data-layer="l3"] { display: none !important; }
+body[data-layer="2"] #content [data-layer="3"],
+body[data-layer="2"] #content [data-layer="l3"] { display: none !important; }
 
 /* Layer badges */
 .layer-badge {
@@ -1318,6 +1408,38 @@ body.content-wide pre {
 
 .layer-remark a:hover {
   text-decoration: underline;
+}
+
+/* Fix nested layer-remark links (link inside layer-remark paragraph should be inline) */
+p.layer-remark a.layer-remark,
+td a.layer-remark {
+  display: inline;
+  padding: 0.1em 0.3em;
+  margin: 0;
+  background: rgba(56, 189, 248, 0.1);
+  border-left: none;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+/* Inline layer-remark link (used inside paragraphs, not as block) */
+.layer-remark-link {
+  display: inline;
+  padding: 0.15em 0.4em;
+  margin: 0;
+  background: rgba(56, 189, 248, 0.1);
+  border-left: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+  transition: all var(--transition-fast);
+}
+
+.layer-remark-link:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-bottom-style: solid;
 }
 
 /* === LAYER LINK DISABLED (§0.9: links to sections not in current layer) === */
@@ -2685,4 +2807,391 @@ td.temperament-sp {
   .cross-matrix td {
     padding: 0.3em 0.4em;
   }
+}
+
+/* === VERTICAL PIPELINE (V-02) === */
+.inf-pipeline-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  position: relative;
+}
+.inf-pipeline-vertical .inf-pipeline-step {
+  display: flex;
+  gap: 1em;
+  align-items: flex-start;
+  padding: 1em;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+  position: relative;
+}
+.inf-pipeline-vertical .inf-pipeline-step::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 100%;
+  width: 3px;
+  height: 0.5em;
+  background: var(--accent);
+  opacity: 0.3;
+}
+.inf-pipeline-vertical .inf-pipeline-step:last-child::before {
+  display: none;
+}
+
+/* === DIFF VIEW (V-03) === */
+.diff-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin: 1.5em 0;
+}
+@media (max-width: 768px) {
+  .diff-view {
+    grid-template-columns: 1fr;
+  }
+}
+.diff-card {
+  padding: 1em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+.diff-del {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.05);
+}
+.diff-del .diff-label { color: #ef4444; }
+.diff-add {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.05);
+}
+.diff-add .diff-label { color: #22c55e; }
+.diff-label {
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* === SPINE STACK (V-06) === */
+.spine-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5em 0;
+}
+.spine-stack-item {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.8em 1em;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-elevated);
+}
+.spine-stack-item + .spine-stack-item {
+  border-top: 1px solid var(--border);
+}
+.spine-stack-label {
+  font-weight: 700;
+  min-width: 80px;
+  color: var(--accent);
+}
+.spine-stack-desc {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+/* === TOKEN CALCULATOR (V-08) === */
+.token-calc {
+  margin: 1.5em 0;
+  padding: 1.2em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.token-calc-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-bottom: 1em;
+}
+
+.token-calc-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.token-calc-label {
+  min-width: 100px;
+  font-size: 0.9em;
+  color: var(--text-muted);
+}
+
+.token-calc-range {
+  flex: 1;
+  min-width: 100px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.token-calc-range::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.token-calc-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.token-calc-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.token-calc-val {
+  min-width: 45px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+.token-calc-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--border);
+  font-size: 0.95em;
+}
+
+.token-calc-result strong {
+  color: var(--accent);
+  font-size: 1.2em;
+}
+
+.token-calc-result .tag {
+  font-size: 0.8em;
+}
+
+.token-calc-result .tag.layer-1 { background: rgba(34, 197, 94, 0.2); color: var(--layer-1-clr); }
+.token-calc-result .tag.layer-2 { background: rgba(56, 189, 248, 0.2); color: var(--layer-2-clr); }
+.token-calc-result .tag.layer-3 { background: rgba(139, 92, 246, 0.2); color: var(--layer-3-clr); }
+.token-calc-result .tag.over { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+/* === PROGRESS BAR (V-09) === */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  z-index: 1002;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--layer-1-clr), var(--layer-2-clr), var(--layer-3-clr));
+  transition: width 0.1s ease;
+}
+
+/* === SPINE VALIDATOR (V-15) === */
+.spine-validator {
+  padding: 1em;
+  margin-top: 1em;
+}
+
+.spine-validator-intro {
+  margin-bottom: 1em;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.spine-validator-intro p {
+  margin: 0;
+}
+
+.spine-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.spine-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.spine-input-group label {
+  font-weight: 600;
+  font-size: 0.85em;
+  color: var(--text);
+}
+
+.spine-input-group label::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.4em;
+}
+
+.spine-input-group:nth-child(1) label::before { background: var(--layer-3-clr); }
+.spine-input-group:nth-child(2) label::before { background: #a855f7; }
+.spine-input-group:nth-child(3) label::before { background: #f59e0b; }
+.spine-input-group:nth-child(4) label::before { background: #22c55e; }
+.spine-input-group:nth-child(5) label::before { background: var(--layer-1-clr); }
+
+.spine-input-group textarea {
+  width: 100%;
+  padding: 0.6em 0.8em;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9em;
+  resize: vertical;
+  min-height: 50px;
+  transition: border-color var(--transition-fast);
+}
+
+.spine-input-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.spine-input-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.spine-validator-actions {
+  display: flex;
+  gap: 0.6em;
+  margin-top: 1em;
+}
+
+.spine-validate-btn,
+.spine-clear-btn {
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid var(--border);
+}
+
+.spine-validate-btn {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.spine-validate-btn:hover {
+  background: #0ea5e9;
+}
+
+.spine-clear-btn {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.spine-clear-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+.spine-validator-result {
+  margin-top: 1em;
+  padding: 1em;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.spine-validator-result.hidden {
+  display: none;
+}
+
+.spine-result-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+  padding: 0.5em 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.spine-result-item:last-child {
+  border-bottom: none;
+}
+
+.spine-result-icon {
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.spine-result-icon.pass { color: var(--tip-border); }
+.spine-result-icon.warn { color: var(--warning-border); }
+.spine-result-icon.fail { color: #ef4444; }
+
+.spine-result-text {
+  flex: 1;
+}
+
+.spine-result-label {
+  font-weight: 600;
+  margin-bottom: 0.2em;
+}
+
+.spine-result-desc {
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.spine-result-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.8em;
+  margin-top: 0.5em;
+  border-top: 2px solid var(--border);
+  font-weight: 600;
+}
+
+.spine-result-summary.valid {
+  color: var(--tip-border);
+}
+
+.spine-result-summary.invalid {
+  color: #ef4444;
+}
+
+.spine-result-summary.needs-work {
+  color: var(--warning-border);
 }
