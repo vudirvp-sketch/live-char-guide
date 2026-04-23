@@ -97,7 +97,7 @@ Format Lock:
 <h3>Важно: правила голоса для примеров L2</h3>
 
 <div class="callout important">
-<p><strong>📌 Голосовые инструкции в SP не работают на 12B моделях</strong> — голос персонажа устанавливается ТОЛЬКО через Examples и Greeting. Все L2-карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса. <a href="#p3_voice_isolation">Подробнее о Voice Isolation</a><noscript><a href="#p3_voice_isolation" class="term-marker-noscript-link">Подробнее о Voice Isolation</a></noscript></p>
+<p><strong>📌 Голосовые инструкции в SP не работают на 12B моделях</strong> — голос персонажа устанавливается ТОЛЬКО через Examples и Greeting. Все L2-карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса. SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)) размещается в Description, не в SP. <a href="#p3_voice_isolation">Подробнее о Voice Isolation</a><noscript><a href="#p3_voice_isolation" class="term-marker-noscript-link">Подробнее о Voice Isolation</a></noscript></p>
 </div>
 
 
@@ -783,6 +783,16 @@ FLAW-linked:
 <div class="callout tip">
 <p><strong>💡 Совет:</strong> На L3 Омнис-Зета получает полный SPINE с LIE и GHOST, CoT-якоря и Lorebook — внутренний конфликт становится видимым модели. <a data-layer-switch="3#p10_omnis_l3_card" class="layer-remark">Омнис-Зета L3 → Экспертный слой</a></p>
 </div>
+
+<p class="layer-remark"><span class="remark-icon">→</span> Следующая карточка — <strong>Экспертный слой (L3)</strong>. Все предыдущие примеры — L1/L2.</p>
+<p class="layer-remark">L3 добавляет:</p>
+<ul class="layer-remark">
+<li>Полный SPINE (5 элементов: GHOST→LIE→FLAW→NEED→WANT)</li>
+<li>CoT-якоря (2-3 максимум)</li>
+<li>GHOST Layers (3-tier структура травмы)</li>
+<li>XML-структуру Description</li>
+<li>7 CORE DIRECTIVES (включая PRE-GENERATION FILTER)</li>
+</ul>
 
 
 </section>

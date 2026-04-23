@@ -100,4 +100,4 @@ After all remediation items are resolved:
 *Document prepared for Live Character Guide v6 Content Restoration project*
 *Created: 2026-04-21 (Remediation R-05)*
 *Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-21, fixed checklist and cross-refs)*
-*Updated: 2026-04-23 (Tech-Priest TP-11 through TP-20 changes)*
+*Updated: 2026-04-23 (Тех-Жрец TP-11 through TP-20 changes)*

@@ -693,6 +693,105 @@ async function checkIMP27(allSections) {
     }
   }
 
+  // ── Cross-Part IMP-27 bridge check ──────────────────────────────────
+  // Parts 4/5/7/8 have no L1 sections — their L2 sections rely on
+  // cross-Part data-layer-switch bridges from Part 1 (p1_next_layers).
+  // Part 6 has no L2 sections — its L3 sections rely on cross-Part bridges.
+  // The within-Part loop above skips these, so we check cross-Part here.
+
+  // Collect L2 sections whose Part has no L1 sections (need cross-Part L1 bridge)
+  const l2WithoutL1Bridge = new Map(); // sectionId → { file, partNum }
+  for (const [partNum, sections] of partSections) {
+    const l1Sections = sections.filter(s => s.layer === 'l1');
+    const l2Sections = sections.filter(s => s.layer === 'l2');
+    if (l1Sections.length === 0 && l2Sections.length > 0) {
+      for (const l2 of l2Sections) {
+        l2WithoutL1Bridge.set(l2.sectionId, { file: l2.file, partNum });
+      }
+    }
+  }
+
+  // Check cross-Part L1→L2 bridges
+  for (const [sectionId, info] of l2WithoutL1Bridge) {
+    let found = false;
+
+    // Scan all sections in OTHER Parts for data-layer-switch pointing to this L2 section
+    for (const section of allSections) {
+      if (section.partNum === info.partNum) continue; // Skip same Part (already checked)
+
+      // Check data-layer-switch="2#<sectionId>"
+      const layerSwitchRegex = /data-layer-switch=["']2#([^"']+)["']/gi;
+      let match;
+      while ((match = layerSwitchRegex.exec(section.content)) !== null) {
+        if (match[1] === sectionId) {
+          found = true;
+          break;
+        }
+      }
+      if (found) break;
+
+      // Check term-marker with data-target-layer="2" (soft bridge)
+      const termMarkerRegex = /data-target-layer=["']2["'][^>]*data-tooltip-ref=["']#[^"']*["']/gi;
+      while ((match = termMarkerRegex.exec(section.content)) !== null) {
+        found = true;
+        break;
+      }
+      if (found) break;
+    }
+
+    if (!found) {
+      warnings.push(`Part ${info.partNum} (${sectionId}): L2 section has no within-Part or cross-Part L1 bridge — IMP-27 bridge may be missing`);
+    }
+  }
+
+  // Collect L3 sections whose Part has no L2 sections (need cross-Part L2 bridge)
+  const l3WithoutL2Bridge = new Map(); // sectionId → { file, partNum }
+  for (const [partNum, sections] of partSections) {
+    const l2Sections = sections.filter(s => s.layer === 'l2');
+    const l3Sections = sections.filter(s => s.layer === 'l3');
+    if (l2Sections.length === 0 && l3Sections.length > 0) {
+      for (const l3 of l3Sections) {
+        l3WithoutL2Bridge.set(l3.sectionId, { file: l3.file, partNum });
+      }
+    }
+  }
+
+  // Check cross-Part L2→L3 bridges
+  for (const [sectionId, info] of l3WithoutL2Bridge) {
+    let found = false;
+
+    for (const section of allSections) {
+      if (section.partNum === info.partNum) continue;
+
+      // Check data-layer-switch="3#<sectionId>"
+      const layerSwitchRegex = /data-layer-switch=["']3#([^"']+)["']/gi;
+      let match;
+      while ((match = layerSwitchRegex.exec(section.content)) !== null) {
+        if (match[1] === sectionId) {
+          found = true;
+          break;
+        }
+      }
+      if (found) break;
+
+      // Check term-marker with data-target-layer="3" (soft bridge)
+      const termMarkerRegex = /data-target-layer=["']3["'][^>]*data-tooltip-ref=["']#[^"']*["']/gi;
+      while ((match = termMarkerRegex.exec(section.content)) !== null) {
+        found = true;
+        break;
+      }
+      if (found) break;
+    }
+
+    if (!found) {
+      warnings.push(`Part ${info.partNum} (${sectionId}): L3 section has no within-Part or cross-Part L2 bridge — IMP-27 bridge may be missing`);
+    }
+  }
+
+  if (l2WithoutL1Bridge.size > 0 || l3WithoutL2Bridge.size > 0) {
+    log('INFO', `Cross-Part IMP-27 check: ${l2WithoutL1Bridge.size} L2 sections without within-Part L1, ${l3WithoutL2Bridge.size} L3 sections without within-Part L2`);
+  }
+
   if (errorCount === 0) {
     log('INFO', 'IMP-27 layer visibility bridges checked');
   }

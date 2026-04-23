@@ -317,7 +317,7 @@ The following checks run before each commit:
 1. `validate_terms.py` — No prohibited translations
 2. `check_english.py` — No English leaks (3+ words outside allowed contexts)
 3. `check_duplicates.py` — No duplicate concepts across Parts
-4. `validate_anchors.py` — All anchor links resolve
+4. `validate-master.mjs` Check 3 — All anchor links resolve
 5. `data-layer`/`data-section` validation — All sections have required attributes
 6. Master HTML content restriction check — No prohibited elements
 7. CSS class check — All classes are from registry

@@ -57,9 +57,39 @@ def load_glossary(glossary_path: Path) -> Dict:
     
     return json.loads(glossary_path.read_text(encoding='utf-8'))
 
+def _strip_code_blocks(content: str) -> str:
+    """Remove <pre><code>...</code></pre> blocks from content for validation."""
+    return re.sub(r'<pre><code>.*?</code></pre>', '', content, flags=re.DOTALL)
+
+
+def _overlaps_canonical(match, canonical_matches) -> bool:
+    """Check if a prohibited match overlaps with any canonical match."""
+    for cm in canonical_matches:
+        # Overlap if match start is within canonical span or vice versa
+        if match.start() >= cm.start() and match.start() < cm.end():
+            return True
+        if match.end() > cm.start() and match.end() <= cm.end():
+            return True
+    return False
+
+
+def _is_whole_word(content: str, start: int, end: int) -> bool:
+    """Check if the match at [start, end) is a whole word (not a substring of a longer word)."""
+    import unicodedata
+    def is_letter(ch):
+        return unicodedata.category(ch).startswith('L')
+    
+    if start > 0 and is_letter(content[start - 1]):
+        return False
+    if end < len(content) and is_letter(content[end]):
+        return False
+    return True
+
+
 def validate_file(file_path: Path, glossary: Dict) -> List[Dict]:
     """Validate a single file against glossary."""
-    content = file_path.read_text(encoding='utf-8')
+    raw_content = file_path.read_text(encoding='utf-8')
+    content = _strip_code_blocks(raw_content)
     
     issues = []
     
@@ -77,6 +107,14 @@ def validate_file(file_path: Path, glossary: Dict) -> List[Dict]:
             matches = list(pattern.finditer(content))
             
             for match in matches:
+                # Skip if this prohibited match is part of a canonical term (overlap)
+                if _overlaps_canonical(match, canonical_matches):
+                    continue
+                
+                # Skip if this is a substring of a longer word (not a whole-word match)
+                if not _is_whole_word(content, match.start(), match.end()):
+                    continue
+                
                 # Check if this is after the first canonical occurrence
                 if canonical_matches:
                     first_canonical_pos = canonical_matches[0].start()

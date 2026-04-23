@@ -19,7 +19,7 @@
 <tr><td><strong>System Prompt</strong></td><td>Инструкции, запреты, формат</td><td>Высокое — задаёт рамки</td><td>100-200</td><td>150-250</td><td>200-400</td></tr>
 <tr><td><strong>Description</strong></td><td>Факты, якоря, психология</td><td>Среднее — контекст</td><td>200-400</td><td>400-700</td><td>700-1200</td></tr>
 <tr><td><strong>Examples</strong></td><td>Демонстрация голоса</td><td>Ключевое — паттерны речи</td><td>150-250</td><td>250-400</td><td>400-600</td></tr>
-<tr><td><strong>Greeting</strong></td><td>Первое сообщение</td><td>Поддерживающее — тон</td><td>50-100</td><td>50-100</td><td>50-100</td></tr>
+<tr><td><strong>Greeting</strong></td><td>Greeting (Первое сообщение)</td><td>Поддерживающее — тон</td><td>50-100</td><td>50-100</td><td>50-100</td></tr>
 </tbody>
 </table>
 </div>
@@ -48,7 +48,7 @@
 </thead>
 <tbody>
 <tr><td><strong>1</strong></td><td><strong>OCEAN: 1-2 экстремальных полюса</strong> — значения &lt;30 или &gt;70</td><td>Больше 2 — внутренняя противоречивость. 0 — персонаж забываемый.</td></tr>
-<tr><td><strong>2</strong></td><td><strong>Цена обязательна</strong> — каждый FLAW/GHOST якорь имеет физическую реакцию</td><td>Без цены модель не показывает уязвимость.</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Цена обязательна</strong> — каждый FLAW (Дефект)/GHOST якорь имеет физическую реакцию</td><td>Без цены модель не показывает уязвимость.</td></tr>
 <tr><td><strong>3</strong></td><td><strong>Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</strong></td><td>Модель игнорирует инструкции о голосе, но копирует паттерны из Examples.</td></tr>
 <tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong>: GHOST (событие прошлого персонажа) — только в Description, никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td></tr>
 <tr><td><strong>5</strong></td><td><strong>Формат якоря: Триггер → Действие → Цена</strong></td><td>Каждый элемент обязательный. Пропуск — потеря качества.</td></tr>
@@ -93,7 +93,7 @@
 <tr><td><strong>Время создания</strong></td><td>~15 минут</td><td>~30 минут</td><td>~60 минут</td></tr>
 <tr><td><strong>Токены карточки</strong></td><td>400-800</td><td>800-1500</td><td>1500+</td></tr>
 <tr><td><strong>Якоря</strong></td><td>3-5 базовых</td><td>5-7 + FLAW-linked</td><td>7-12 + CoT + сенсорные</td></tr>
-<tr><td><strong>SPINE</strong></td><td>—</td><td>✓ WANT/NEED/FLAW</td><td>✓ + LIE/GHOST/GHOST Layers</td></tr>
+<tr><td><strong>SPINE</strong></td><td>—</td><td>✓ WANT (Желание)/NEED (Потребность)/FLAW</td><td>✓ + LIE/GHOST/GHOST Layers</td></tr>
 <tr><td><strong>OCEAN/Enneagram</strong></td><td>—</td><td>✓ Интерактив</td><td>✓ + Wings + Matrix</td></tr>
 <tr><td><strong>Примеры</strong></td><td>2 (нейтральный + стресс)</td><td>3 (+ доверие)</td><td>3-5 + мульти-персонаж</td></tr>
 <tr><td><strong>Рекомендуемые модели</strong></td><td>12B (4K контекст)</td><td>12B-32B</td><td>32B+ / API</td></tr>
@@ -132,7 +132,7 @@
 <tr><td>3</td><td>Description</td><td>150–200</td><td>200–300</td><td>Факты + якоря</td></tr>
 <tr><td>4</td><td>Anchors</td><td>40–60</td><td>60–80</td><td>3–5 якорей T→A→P</td></tr>
 <tr><td>5</td><td>Examples (2x)</td><td>80–100</td><td>100–140</td><td>Нейтральный + стресс</td></tr>
-<tr><td>6</td><td>Greeting</td><td>40–60</td><td>50–80</td><td>Первое сообщение</td></tr>
+<tr><td>6</td><td>Greeting</td><td>40–60</td><td>50–80</td><td>Greeting</td></tr>
 <tr><td>7</td><td>Anti-godmoding</td><td>15–20</td><td>15–20</td><td>Встроено в SP</td></tr>
 <tr><td>8</td><td>Format Lock</td><td>10–15</td><td>10–15</td><td>Фиксация формата</td></tr>
 <tr><td>9</td><td>Резерв</td><td>20–30</td><td>30–50</td><td>Буфер на непредвиденное</td></tr>
@@ -196,7 +196,7 @@
 <div class="inf-pipeline-step">
 <div class="inf-step-id">04</div>
 <div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">Первое сообщение</div>
+<div class="inf-step-desc">Greeting (Первое сообщение)</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">05</div>
@@ -426,7 +426,7 @@
 
 <h4>Глубокий слой (L2)</h4>
 
-<p>SPINE — фреймворк из 3 базовых элементов (WANT/NEED/FLAW), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. <a href="#p7_core_directives">CORE DIRECTIVES</a> — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
+<p>SPINE — фреймворк из 3 базовых элементов (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. <a href="#p7_core_directives">CORE DIRECTIVES</a> — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
 
 <ul>
 <li>Критерии перехода: карточка стабильна на L1, 2 Examples дают узнаваемый голос, 3–5 якорей покрывают основные ситуации</li>

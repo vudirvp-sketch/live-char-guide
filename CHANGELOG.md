@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - Use `pnpm run build:inline` for old inline build (deprecated)
 - GitHub Pages deploys from `dist/` directory
 
+### Removed
+- `validate_anchors.py` CI script (dead code — validate-master.mjs Check 3 already validates anchors)
+
 ### Fixed
 - Single URL architecture: no page reloads when switching layers
 - Browser history works correctly (back/forward)
@@ -87,7 +90,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.
 - validate-artifact.mjs VERSION path corrected
 
 ### Added
-- validate_anchors.py CI script for anchor validation
 - Section dependency map in architecture
 - Track migration checklist in download/
 
