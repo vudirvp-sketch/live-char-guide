@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - OCEAN INSIGHT WIDGET v2.0.0
+ * LIVE CHARACTER GUIDE - OCEAN INSIGHT WIDGET v3.0.0
  * ============================================================================
  * 
  * Interactive OCEAN Big Five personality profiler.
@@ -9,19 +9,23 @@
  * Functionality Levels:
  *   M1 — Clickable pentagon vertices, 3 states (low/medium/high), auto-labels
  *   M2 — Sliders 0–100, live pentagon, extremum counter, passive forecast
- *   M3 — Manual comments, event subscriptions, comfort zone highlights (TODO)
+ *   M3 — Manual comments, event subscriptions, comfort zone highlights
  * 
  * Activation: Only at L2+ guide layer (isWidgetAllowed())
  * Event Emission (M2+): ocean:updated via EventBus
+ * Event Subscriptions:
+ *   M2+: mbti:ocean-apply
+ *   M3:  enneagram:selected, mbti:selected
  * 
  * Contract:
  *   - Reads: data/ocean.json (v2.0.0 — includes extremum_thresholds)
  *   - Reads: data/mbti.json (v2.0.0 — includes ocean_suggestions)
+ *   - Reads: data/enneagram.json (v3.0.0 — includes ocean_defaults)
  *   - Emits: ocean:updated { O, C, E, A, N } via window.EventBus
- *   - Subscribes: enneagram:selected, mbti:selected, mbti:ocean-apply (M3 only)
+ *   - Subscribes: enneagram:selected (M3), mbti:selected (M3), mbti:ocean-apply (M2+)
  *   - Fallback: if JSON missing → shows static placeholder
  * 
- * @version 2.0.0
+ * @version 3.0.0
  */
 
 (function() {
@@ -54,6 +58,13 @@
     'N': 'Реактивный'
   };
 
+  // Comfort zone source labels for tooltips
+  const COMFORT_SOURCE_LABELS = {
+    'enneagram': 'Тип Эннеаграммы',
+    'mbti': 'MBTI-тип',
+    'mbti-apply': 'MBTI-тип'
+  };
+
   // Pentagon geometry
   const PENTAGON_SIZE = 200; // viewBox size
   const PENTAGON_CENTER = PENTAGON_SIZE / 2;
@@ -74,10 +85,16 @@
   // Data cache
   let oceanDataCache = null;
   let mbtiDataCache = null;
+  let enneagramDataCache = null;
 
   // Current profile state
   const oceanProfile = {
     O: 50, C: 50, E: 50, A: 50, N: 50
+  };
+
+  // M3: Manual comment fields per trait
+  const oceanComments = {
+    O: '', C: '', E: '', A: '', N: ''
   };
 
   // Widget level (determined by guide layer)
@@ -85,6 +102,23 @@
 
   // Debounce timer for EventBus emission
   let debounceTimer = null;
+
+  // Highlight notification auto-dismiss timer
+  let highlightNotifTimer = null;
+
+  // ============================================================================
+  // UTILITY
+  // ============================================================================
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
   // ============================================================================
   // DATA LOADING
@@ -118,6 +152,21 @@
       return data;
     } catch (e) {
       console.warn(`[OCEAN] Failed to fetch ${url}:`, e.message);
+      return null;
+    }
+  }
+
+  // M3: Fetch enneagram data for ocean_defaults
+  async function fetchEnneagramDataForM3() {
+    if (enneagramDataCache) return enneagramDataCache;
+    try {
+      const response = await fetch('data/enneagram.json');
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      enneagramDataCache = data;
+      return data;
+    } catch (e) {
+      console.warn('[OCEAN] Failed to fetch enneagram data:', e.message);
       return null;
     }
   }
@@ -221,6 +270,11 @@
       var val = profile[id];
       var label = getTraitLabel(id, val);
       lines.push('- ' + TRAIT_NAMES[id] + ' (' + id + '): ' + val + ' — ' + label);
+
+      // M3: Include comments if present
+      if (currentWidgetLevel >= 3 && oceanComments[id]) {
+        lines.push('  Комментарий: ' + oceanComments[id]);
+      }
     });
 
     // Extrema summary
@@ -256,6 +310,99 @@
     textarea.select();
     try { document.execCommand('copy'); } catch (_e) { /* ignore */ }
     document.body.removeChild(textarea);
+  }
+
+  // ============================================================================
+  // M3 HELPERS
+  // ============================================================================
+
+  /**
+   * Adds a green bar overlay on each slider showing the "typical zone"
+   * for the selected type. Adds orange/red conflict marker if current value
+   * deviates by >30 from reference.
+   *
+   * @param {Object} referenceProfile - { O: num, C: num, E: num, A: num, N: num }
+   * @param {string} source - 'enneagram' | 'mbti' | 'mbti-apply'
+   */
+  function highlightComfortZones(referenceProfile, source) {
+    var container = document.getElementById('ocean-embed');
+    if (!container) return;
+
+    TRAIT_IDS.forEach(function(id) {
+      var refValue = referenceProfile[id];
+      if (refValue === undefined) return;
+
+      // --- Comfort zone green bar ---
+      var comfortZone = container.querySelector('.ocean-comfort-zone[data-trait="' + id + '"]');
+      if (comfortZone) {
+        var left = Math.max(0, refValue - 10);
+        var right = Math.min(100, refValue + 10);
+        var width = right - left;
+        comfortZone.style.left = left + '%';
+        comfortZone.style.width = width + '%';
+        comfortZone.style.display = 'block';
+      }
+
+      // --- Conflict marker (deviation > 30) ---
+      var conflictMarker = container.querySelector('.ocean-conflict-marker[data-trait="' + id + '"]');
+      if (!conflictMarker) return;
+
+      var currentValue = oceanProfile[id];
+      var deviation = Math.abs(currentValue - refValue);
+
+      if (deviation > 30) {
+        conflictMarker.style.left = currentValue + '%';
+        conflictMarker.style.display = 'block';
+
+        // Build tooltip
+        var sourceLabel = COMFORT_SOURCE_LABELS[source] || source;
+        var comparison;
+        if (refValue > currentValue) {
+          comparison = id + ' > ' + Math.round(refValue - 10);
+        } else {
+          comparison = id + ' < ' + Math.round(refValue + 10);
+        }
+        var tooltip = sourceLabel + ' обычно имеет ' + comparison + '. Текущее: ' + currentValue + '. Это осознанный конфликт?';
+        conflictMarker.title = tooltip;
+      } else {
+        conflictMarker.style.display = 'none';
+        conflictMarker.title = '';
+      }
+    });
+  }
+
+  /**
+   * Shows a small toast notification at the bottom of the widget.
+   * Auto-dismisses after 3 seconds.
+   *
+   * @param {string} message
+   */
+  function showHighlightNotification(message) {
+    var container = document.getElementById('ocean-embed');
+    if (!container) return;
+
+    var notifContainer = container.querySelector('.ocean-highlight-notification-container');
+    if (!notifContainer) return;
+
+    // Clear any existing notification
+    if (highlightNotifTimer) {
+      clearTimeout(highlightNotifTimer);
+      highlightNotifTimer = null;
+    }
+
+    var notif = document.createElement('div');
+    notif.className = 'ocean-highlight-notification';
+    notif.innerHTML = escapeHtml(message);
+    notifContainer.innerHTML = '';
+    notifContainer.appendChild(notif);
+
+    // Auto-dismiss after 3 seconds
+    highlightNotifTimer = setTimeout(function() {
+      if (notif.parentNode) {
+        notif.parentNode.removeChild(notif);
+      }
+      highlightNotifTimer = null;
+    }, 3000);
   }
 
   // ============================================================================
@@ -621,6 +768,130 @@
   }
 
   // ============================================================================
+  // M3 WIDGET — COMMENTS + COMFORT ZONES + EVENT SUBSCRIPTIONS
+  // ============================================================================
+
+  function buildM3Widget(container, oceanData, mbtiData) {
+    // Build M2 base first
+    buildM2Widget(container, oceanData, mbtiData);
+
+    const widgetEl = container.querySelector('.ocean-widget');
+    if (!widgetEl) return;
+
+    // Update badge to M3
+    const badge = widgetEl.querySelector('.ocean-level-badge');
+    if (badge) badge.textContent = 'M3';
+    widgetEl.classList.remove('ocean-widget-m2');
+    widgetEl.classList.add('ocean-widget-m3');
+
+    // Add M3-specific elements to each slider row
+    TRAIT_IDS.forEach(function(id) {
+      const sliderInput = widgetEl.querySelector('.ocean-slider-input[data-trait="' + id + '"]');
+      if (!sliderInput) return;
+      const sliderRow = sliderInput.closest('.ocean-slider-row');
+      if (!sliderRow) return;
+
+      // Wrap the slider input in a track wrapper for comfort zone overlays
+      const wrapper = document.createElement('div');
+      wrapper.className = 'ocean-slider-track-wrapper';
+      sliderInput.parentNode.insertBefore(wrapper, sliderInput);
+      wrapper.appendChild(sliderInput);
+
+      // Add comfort zone overlay (hidden until subscription fires)
+      const comfortZone = document.createElement('div');
+      comfortZone.className = 'ocean-comfort-zone';
+      comfortZone.style.display = 'none';
+      comfortZone.dataset.trait = id;
+      wrapper.appendChild(comfortZone);
+
+      // Add conflict marker (hidden until deviation detected)
+      const conflictMarker = document.createElement('div');
+      conflictMarker.className = 'ocean-conflict-marker';
+      conflictMarker.style.display = 'none';
+      conflictMarker.dataset.trait = id;
+      wrapper.appendChild(conflictMarker);
+
+      // Add comment input below slider row
+      const commentDiv = document.createElement('div');
+      commentDiv.className = 'ocean-comment-row';
+      const commentInput = document.createElement('input');
+      commentInput.type = 'text';
+      commentInput.className = 'ocean-comment-input';
+      commentInput.placeholder = 'Комментарий к ' + TRAIT_NAMES[id] + '...';
+      commentInput.dataset.trait = id;
+      commentInput.setAttribute('aria-label', 'Комментарий к ' + TRAIT_NAMES[id]);
+      commentInput.value = oceanComments[id] || '';
+      commentDiv.appendChild(commentInput);
+
+      // Insert comment row after slider row
+      if (sliderRow.nextSibling) {
+        sliderRow.parentNode.insertBefore(commentDiv, sliderRow.nextSibling);
+      } else {
+        sliderRow.parentNode.appendChild(commentDiv);
+      }
+
+      // Bind comment input to oceanComments state
+      commentInput.addEventListener('input', function() {
+        oceanComments[id] = this.value;
+      });
+    });
+
+    // Add notification container at the bottom of the widget
+    const notifContainer = document.createElement('div');
+    notifContainer.className = 'ocean-highlight-notification-container';
+    widgetEl.appendChild(notifContainer);
+  }
+
+  // ============================================================================
+  // EVENT SUBSCRIPTIONS
+  // ============================================================================
+
+  function setupM2EventSubscriptions() {
+    // M2+: mbti:ocean-apply — highlight recommended poles (NOT auto-replace sliders)
+    if (window.EventBus && window.GuideEvents && window.GuideEvents.MBTI_OCEAN_APPLY) {
+      window.EventBus.on(window.GuideEvents.MBTI_OCEAN_APPLY, function(detail) {
+        if (detail && detail.suggestions) {
+          highlightComfortZones(detail.suggestions, 'mbti-apply');
+          showHighlightNotification('Рекомендованные значения MBTI подсвечены на слайдерах');
+        }
+      });
+      console.log('[OCEAN] Subscribed to mbti:ocean-apply (M2+)');
+    }
+  }
+
+  function setupM3EventSubscriptions() {
+    if (!window.EventBus || !window.GuideEvents) return;
+
+    // M3: enneagram:selected — read ocean_defaults, highlight comfort zones
+    if (window.GuideEvents.ENNEAGRAM_SELECTED) {
+      window.EventBus.on(window.GuideEvents.ENNEAGRAM_SELECTED, function(detail) {
+        if (!detail) return;
+        var typeId = detail.typeId;
+        fetchEnneagramDataForM3().then(function(enneagramData) {
+          if (!enneagramData || !enneagramData.ocean_defaults) return;
+          var defaults = enneagramData.ocean_defaults[String(typeId)];
+          if (!defaults) return;
+          highlightComfortZones(defaults, 'enneagram');
+        });
+      });
+      console.log('[OCEAN] Subscribed to enneagram:selected (M3)');
+    }
+
+    // M3: mbti:selected — read ocean_suggestions, highlight comfort zones
+    if (window.GuideEvents.MBTI_SELECTED) {
+      window.EventBus.on(window.GuideEvents.MBTI_SELECTED, function(detail) {
+        if (!detail) return;
+        var typeCode = detail.typeCode;
+        if (!mbtiDataCache || !mbtiDataCache.ocean_suggestions) return;
+        var suggestions = mbtiDataCache.ocean_suggestions[typeCode];
+        if (!suggestions) return;
+        highlightComfortZones(suggestions, 'mbti');
+      });
+      console.log('[OCEAN] Subscribed to mbti:selected (M3)');
+    }
+  }
+
+  // ============================================================================
   // INITIALIZATION
   // ============================================================================
 
@@ -653,17 +924,20 @@
     }
 
     // Build widget based on level
-    if (currentWidgetLevel >= 2) {
-      // M2 — Full configuration
+    if (currentWidgetLevel >= 3) {
+      buildM3Widget(container, oceanData, mbtiData);
+    } else if (currentWidgetLevel >= 2) {
       buildM2Widget(container, oceanData, mbtiData);
     } else {
-      // M1 — Clickable pentagon (fallback)
       buildM1Widget(container, oceanData);
     }
 
+    // Event subscriptions: M2+ for mbti:ocean-apply, M3 for enneagram/mbti selected
+    if (currentWidgetLevel >= 2) {
+      setupM2EventSubscriptions();
+    }
     if (currentWidgetLevel >= 3) {
-      // TODO: Add event subscriptions, comfort zone highlights
-      console.log('[OCEAN] M3 features — TODO (future phase)');
+      setupM3EventSubscriptions();
     }
 
     console.log(`[OCEAN] Widget initialized at M${currentWidgetLevel} level`);
@@ -676,8 +950,9 @@
   window.OceanInsight = {
     init: initOceanInsight,
     getProfile: () => ({ ...oceanProfile }),
+    getComments: () => ({ ...oceanComments }),
     getLevel: () => currentWidgetLevel,
-    getVersion: () => '2.0.0'
+    getVersion: () => '3.0.0'
   };
 
   // Auto-init after layer content is loaded

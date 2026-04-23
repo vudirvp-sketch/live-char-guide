@@ -1,25 +1,28 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - ENNEAGRAM SMART BUILDER WIDGET v1.0.0
+ * LIVE CHARACTER GUIDE - ENNEAGRAM SMART BUILDER WIDGET v2.0.0
  * ============================================================================
  *
  * Interactive Enneagram type selector with SPINE autofill.
  * Part of the Persona Synthesis Framework (§4.2).
  *
  * Milestone Levels:
- *   M1 — Type selection, ring diagram, SPINE/FLAW fields, export (current)
- *   M2 — OCEAN tab, OCEAN-filtered FLAW anchors, examples (TODO)
+ *   M1 — Type selection, ring diagram, SPINE/FLAW fields, export
+ *   M2 — OCEAN tab, OCEAN-filtered FLAW anchors, MBTI hints, examples (current)
  *   M3 — Advanced features (TODO)
  *
  * Activation: Only at L2+ guide layer (isWidgetAllowed())
  * Event Emission: enneagram:selected via EventBus (on "Подтвердить" click)
+ * Event Subscription: ocean:updated via EventBus (M2+, for FLAW filtering)
  *
  * Contract:
  *   - Reads: data/enneagram.json (v2.0.0)
+ *   - Reads: data/ocean.json (v2.0.0 — for extremum thresholds)
  *   - Emits: enneagram:selected { typeId, wings } via window.EventBus
+ *   - Subscribes: ocean:updated { O, C, E, A, N } via window.EventBus (M2+)
  *   - Fallback: if JSON missing → shows static placeholder
  *
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 (function() {
@@ -31,44 +34,64 @@
 
   // Enneagram ring positions: 9 points on a circle
   // Traditional order clockwise from top: 9, 1, 2, 3, 4, 5, 6, 7, 8
-  const ENNEAGRAM_ORDER = [9, 1, 2, 3, 4, 5, 6, 7, 8];
-  const RING_RADIUS = 80;
-  const RING_CENTER = 100;
-  const RING_SIZE = 200;
+  var ENNEAGRAM_ORDER = [9, 1, 2, 3, 4, 5, 6, 7, 8];
+  var RING_RADIUS = 80;
+  var RING_CENTER = 100;
+  var RING_SIZE = 200;
 
   // Enneagram connection lines (traditional hex + triangle)
   // Hex: 1↔4↔2↔8↔5↔7↔1
-  const HEX_PATH = [1, 4, 2, 8, 5, 7, 1];
+  var HEX_PATH = [1, 4, 2, 8, 5, 7, 1];
   // Triangle: 3↔6↔9↔3
-  const TRIANGLE_PATH = [3, 6, 9, 3];
+  var TRIANGLE_PATH = [3, 6, 9, 3];
 
   // Integration (growth) and Disintegration (stress) directions
-  const GROWTH_LINES = {
+  var GROWTH_LINES = {
     1: 7, 2: 4, 3: 6, 4: 1, 5: 8, 6: 9, 7: 5, 8: 2, 9: 3
   };
-  const STRESS_LINES = {
+  var STRESS_LINES = {
     1: 4, 2: 8, 3: 9, 4: 2, 5: 7, 6: 3, 7: 1, 8: 5, 9: 6
   };
 
   // M1 visible tabs
-  const M1_TABS = [
+  var M1_TABS = [
     { id: 'enneatype', label: 'Эннеатип' },
     { id: 'spine', label: 'SPINE & FLAW' },
     { id: 'export', label: 'Экспорт' }
   ];
-  // M2+ tabs (hidden at M1)
-  // { id: 'ocean', label: 'OCEAN' }
-  // { id: 'examples', label: 'Примеры' }
 
-  // Data cache
-  let enneagramDataCache = null;
+  // M2+ tabs (5 total)
+  var M2_TABS = [
+    { id: 'enneatype', label: 'Эннеатип' },
+    { id: 'ocean', label: 'OCEAN' },
+    { id: 'spine', label: 'SPINE & FLAW' },
+    { id: 'examples', label: 'Примеры' },
+    { id: 'export', label: 'Экспорт' }
+  ];
+
+  // OCEAN trait metadata
+  var OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
+  var OCEAN_NAMES = {
+    'O': 'Открытость',
+    'C': 'Добросовестность',
+    'E': 'Экстраверсия',
+    'A': 'Доброжелательность',
+    'N': 'Нейротизм'
+  };
+
+  // Data caches
+  var enneagramDataCache = null;
+  var oceanDataCache = null;
 
   // State
-  let selectedTypeId = null;
-  let currentWidgetLevel = 1;
-  let confirmedType = null;
-  let currentTab = 'enneatype';
-  let exportFormat = 'markdown';
+  var selectedTypeId = null;
+  var currentWidgetLevel = 1;
+  var confirmedType = null;
+  var currentTab = 'enneatype';
+  var exportFormat = 'markdown';
+  var showAllAnchors = true; // FLAW anchor filter toggle (default: show all)
+  var currentOceanProfile = { O: 50, C: 50, E: 50, A: 50, N: 50 };
+  var oceanEventSubscribed = false; // Track if we subscribed to avoid duplicates
 
   // ============================================================================
   // DATA LOADING
@@ -76,16 +99,32 @@
 
   async function fetchEnneagramData() {
     if (enneagramDataCache) return enneagramDataCache;
-    const url = 'data/enneagram.json';
+    var url = 'data/enneagram.json';
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
+      var response = await fetch(url);
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      var data = await response.json();
       enneagramDataCache = data;
-      console.log(`[EnneagramBuilder] Loaded data v${data.version || '?'} from ${url}`);
+      console.log('[EnneagramBuilder] Loaded data v' + (data.version || '?') + ' from ' + url);
       return data;
     } catch (e) {
-      console.warn(`[EnneagramBuilder] Failed to fetch ${url}:`, e.message);
+      console.warn('[EnneagramBuilder] Failed to fetch ' + url + ':', e.message);
+      return null;
+    }
+  }
+
+  async function fetchOceanData() {
+    if (oceanDataCache) return oceanDataCache;
+    var url = 'data/ocean.json';
+    try {
+      var response = await fetch(url);
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      var data = await response.json();
+      oceanDataCache = data;
+      console.log('[EnneagramBuilder] Loaded OCEAN data v' + (data.version || '?') + ' from ' + url);
+      return data;
+    } catch (e) {
+      console.warn('[EnneagramBuilder] Failed to fetch ' + url + ':', e.message);
       return null;
     }
   }
@@ -100,7 +139,6 @@
   }
 
   function getWings(typeId) {
-    // Wings are adjacent types on the ring: [left, right]
     var index = ENNEAGRAM_ORDER.indexOf(typeId);
     if (index === -1) return [];
     var left = ENNEAGRAM_ORDER[(index - 1 + 9) % 9];
@@ -116,6 +154,24 @@
   function getFlawAnchors(typeId) {
     if (!enneagramDataCache || !enneagramDataCache.flaw_anchors) return [];
     return enneagramDataCache.flaw_anchors[String(typeId)] || [];
+  }
+
+  function getOceanDefaults(typeId) {
+    if (!enneagramDataCache || !enneagramDataCache.ocean_defaults) return null;
+    return enneagramDataCache.ocean_defaults[String(typeId)] || null;
+  }
+
+  function getMbtiSuggestions(typeId) {
+    if (!enneagramDataCache || !enneagramDataCache.mbti_suggestions) return null;
+    return enneagramDataCache.mbti_suggestions[String(typeId)] || null;
+  }
+
+  function getLevelBadge() {
+    return currentWidgetLevel >= 2 ? 'M2' : 'M1';
+  }
+
+  function getActiveTabs() {
+    return currentWidgetLevel >= 2 ? M2_TABS : M1_TABS;
   }
 
   // ============================================================================
@@ -210,10 +266,11 @@
   // ============================================================================
 
   function buildTabsHTML() {
+    var tabs = getActiveTabs();
     var tabButtons = '';
     var tabContents = '';
 
-    M1_TABS.forEach(function(tab) {
+    tabs.forEach(function(tab) {
       var isActive = currentTab === tab.id;
       tabButtons += '<button class="enneagram-tab' + (isActive ? ' active' : '') + '" data-tab="' + tab.id + '" type="button">' + tab.label + '</button>';
       tabContents += '<div class="enneagram-tab-content' + (isActive ? ' active' : '') + '" id="enneagram-tab-' + tab.id + '">';
@@ -226,7 +283,9 @@
 
   function buildTabContent(tabId) {
     if (tabId === 'enneatype') return buildEnneatypeTab();
+    if (tabId === 'ocean') return buildOceanTab();
     if (tabId === 'spine') return buildSpineTab();
+    if (tabId === 'examples') return buildExamplesTab();
     if (tabId === 'export') return buildExportTab();
     return '';
   }
@@ -248,10 +307,10 @@
       var typeInfo = getTypeInfo(selectedTypeId);
       if (typeInfo) {
         html += '<div class="enneagram-type-info">';
-        html += '<div class="enneagram-type-name">Тип ' + selectedTypeId + ': ' + typeInfo.name + '</div>';
-        html += '<div class="enneagram-type-alt">' + typeInfo.name_alt + '</div>';
-        html += '<div class="enneagram-type-fear"><strong>Страх:</strong> ' + typeInfo.core_fear + '</div>';
-        html += '<div class="enneagram-type-desire"><strong>Желание:</strong> ' + typeInfo.core_desire + '</div>';
+        html += '<div class="enneagram-type-name">Тип ' + selectedTypeId + ': ' + escapeHtml(typeInfo.name) + '</div>';
+        html += '<div class="enneagram-type-alt">' + escapeHtml(typeInfo.name_alt) + '</div>';
+        html += '<div class="enneagram-type-fear"><strong>Страх:</strong> ' + escapeHtml(typeInfo.core_fear) + '</div>';
+        html += '<div class="enneagram-type-desire"><strong>Желание:</strong> ' + escapeHtml(typeInfo.core_desire) + '</div>';
 
         // Growth/Stress directions
         var growthTarget = GROWTH_LINES[selectedTypeId];
@@ -269,6 +328,20 @@
           html += '<div class="enneagram-type-wings">Крылья: ' + typeInfo.wings.join(', ') + '</div>';
         }
 
+        // M2+ MBTI hints (passive connection)
+        if (currentWidgetLevel >= 2 && confirmedType === selectedTypeId) {
+          var mbtiSuggestions = getMbtiSuggestions(selectedTypeId);
+          if (mbtiSuggestions && mbtiSuggestions.length > 0) {
+            html += '<div class="enneagram-mbti-hints">';
+            html += '<span class="enneagram-mbti-label">Наиболее вероятные MBTI-типы: </span>';
+            mbtiSuggestions.forEach(function(mbtiType, idx) {
+              if (idx > 0) html += ', ';
+              html += '<span class="enneagram-mbti-type" tabindex="0" role="button" data-mbti="' + escapeHtml(mbtiType) + '">' + escapeHtml(mbtiType) + '</span>';
+            });
+            html += '</div>';
+          }
+        }
+
         html += '</div>';
       }
 
@@ -280,6 +353,71 @@
         '</button>';
     } else {
       html += '<p class="enneagram-hint">Нажмите на тип на диаграмме для выбора</p>';
+    }
+
+    return html;
+  }
+
+  // ============================================================================
+  // OCEAN TAB (M2+)
+  // ============================================================================
+
+  function buildOceanTab() {
+    if (!selectedTypeId) {
+      return '<p class="enneagram-hint">Сначала выберите тип на вкладке «Эннеатип»</p>';
+    }
+
+    var html = '';
+    var oceanDefaults = getOceanDefaults(selectedTypeId);
+
+    if (oceanDefaults) {
+      html += '<div class="enneagram-ocean-sliders">';
+
+      OCEAN_TRAITS.forEach(function(trait) {
+        var value = oceanDefaults[trait];
+        if (typeof value === 'undefined') value = 50;
+        var barPercent = value;
+        var barColor = value >= 70 ? 'var(--accent)' : (value <= 30 ? 'var(--danger, #ef4444)' : 'var(--border)');
+
+        html += '<div class="enneagram-ocean-slider-row">';
+        html += '<span class="enneagram-ocean-trait-letter">' + trait + '</span>';
+        html += '<span class="enneagram-ocean-trait-name">' + escapeHtml(OCEAN_NAMES[trait]) + '</span>';
+        html += '<div class="enneagram-ocean-bar-container">';
+        html += '<div class="enneagram-ocean-bar" style="width:' + barPercent + '%;background:' + barColor + ';"></div>';
+        html += '</div>';
+        html += '<span class="enneagram-ocean-value">' + value + '</span>';
+        html += '</div>';
+      });
+
+      html += '</div>';
+
+      // Button to suggest OCEAN fill — emits event, does NOT auto-fill per sovereignty §0.1
+      html += '<div class="enneagram-ocean-actions">';
+      html += '<button class="enneagram-ocean-suggest-btn" id="enneagram-ocean-suggest" type="button">Заполнить по типу</button>';
+      html += '</div>';
+    } else {
+      html += '<p class="enneagram-hint">OCEAN данные не найдены для типа ' + selectedTypeId + '</p>';
+    }
+
+    // Correlation table
+    var typeInfo = getTypeInfo(selectedTypeId);
+    if (typeInfo && typeInfo.ocean_correlation) {
+      html += '<div class="enneagram-ocean-correlation">';
+      html += '<h5>Корреляция с OCEAN</h5>';
+      html += '<table class="enneagram-ocean-correlation-table">';
+      html += '<tr>';
+      OCEAN_TRAITS.forEach(function(trait) {
+        html += '<th>' + trait + '</th>';
+      });
+      html += '</tr><tr>';
+      typeInfo.ocean_correlation.forEach(function(val) {
+        var pct = Math.round(val * 100);
+        var cellColor = val >= 0.7 ? 'var(--accent)' : (val <= 0.3 ? 'var(--danger, #ef4444)' : 'var(--text-muted)');
+        html += '<td style="color:' + cellColor + ';">' + pct + '%</td>';
+      });
+      html += '</tr>';
+      html += '</table>';
+      html += '</div>';
     }
 
     return html;
@@ -321,17 +459,55 @@
 
     html += '</div>';
 
-    // FLAW anchors (M1: without OCEAN filter)
+    // FLAW anchors
     var anchors = getFlawAnchors(selectedTypeId);
     if (anchors.length > 0) {
+      // M2+ FLAW anchors filtering by OCEAN extrema
+      var relevantAnchors = anchors;
+      var isM2 = currentWidgetLevel >= 2;
+
+      if (isM2 && !showAllAnchors) {
+        relevantAnchors = anchors.filter(function(anchor) {
+          return anchor.ocean_tags.every(function(tag) {
+            var parts = tag.split('_'); // e.g., "N_high" → ["N", "high"]
+            var trait = parts[0];
+            var level = parts[1];
+            var value = currentOceanProfile[trait];
+            if (typeof value === 'undefined') return true;
+            if (level === 'high') return value >= 70;
+            if (level === 'low') return value <= 30;
+            if (level === 'moderate') return value > 30 && value < 70;
+            return true;
+          });
+        });
+      }
+
       html += '<div class="enneagram-flaw-anchors">';
       html += '<h5>Триггеры FLAW</h5>';
 
-      anchors.forEach(function(anchor) {
+      // M2+ toggle button for OCEAN filtering
+      if (isM2) {
+        var toggleLabel = showAllAnchors ? 'Показать по OCEAN' : 'Показать все';
+        html += '<button class="enneagram-anchor-toggle-btn" id="enneagram-anchor-toggle" type="button">' + toggleLabel + '</button>';
+      }
+
+      relevantAnchors.forEach(function(anchor) {
         html += '<div class="enneagram-flaw-anchor">';
         html += '<div class="anchor-trigger">' + escapeHtml(anchor.trigger) + '</div>';
         html += '<div class="anchor-action">' + escapeHtml(anchor.action) + '</div>';
         html += '<div class="anchor-cost">' + escapeHtml(anchor.cost) + '</div>';
+
+        // M2+ ocean_tags badges
+        if (isM2 && anchor.ocean_tags && anchor.ocean_tags.length > 0) {
+          html += '<div class="anchor-ocean-tags">';
+          anchor.ocean_tags.forEach(function(tag) {
+            var parts = tag.split('_');
+            var tagColor = parts[1] === 'high' ? 'var(--accent)' : (parts[1] === 'low' ? 'var(--danger, #ef4444)' : 'var(--text-muted)');
+            html += '<span class="ocean-tag-badge" style="background:' + tagColor + ';color:var(--bg);font-size:0.7em;padding:0.1em 0.4em;border-radius:3px;margin-right:0.3em;">' + escapeHtml(tag) + '</span>';
+          });
+          html += '</div>';
+        }
+
         html += '</div>';
       });
 
@@ -354,6 +530,50 @@
       '<label class="enneagram-spine-label ' + labelClass + '" for="enneagram-spine-' + fieldName.toLowerCase() + '">' + fieldName + '</label>' +
       '<textarea class="enneagram-spine-input" id="enneagram-spine-' + fieldName.toLowerCase() + '" data-field="' + fieldName + '" rows="2">' + escapeHtml(value || '') + '</textarea>' +
       '</div>';
+  }
+
+  // ============================================================================
+  // EXAMPLES TAB (M2+)
+  // ============================================================================
+
+  function buildExamplesTab() {
+    if (!selectedTypeId) {
+      return '<p class="enneagram-hint">Сначала выберите тип на вкладке «Эннеатип»</p>';
+    }
+
+    var typeInfo = getTypeInfo(selectedTypeId);
+    if (!typeInfo || !typeInfo.anchor_examples || typeInfo.anchor_examples.length === 0) {
+      return '<p class="enneagram-hint">Примеры не найдены для типа ' + selectedTypeId + '</p>';
+    }
+
+    var html = '<div class="enneagram-examples-list">';
+
+    typeInfo.anchor_examples.forEach(function(example) {
+      html += '<div class="enneagram-example-card">';
+
+      // Trigger → Action → Cost
+      html += '<div class="example-row"><span class="example-label">Триггер:</span> ' + escapeHtml(example.trigger) + '</div>';
+      html += '<div class="example-row"><span class="example-label">Действие:</span> ' + escapeHtml(example.action) + '</div>';
+      html += '<div class="example-row"><span class="example-label">Цена:</span> ' + escapeHtml(example.price) + '</div>';
+
+      // Ocean tags badges (if present on examples from flaw_anchors)
+      var anchors = getFlawAnchors(selectedTypeId);
+      var matchingAnchor = anchors.find(function(a) { return a.trigger === example.trigger; });
+      if (matchingAnchor && matchingAnchor.ocean_tags && matchingAnchor.ocean_tags.length > 0) {
+        html += '<div class="example-ocean-tags">';
+        matchingAnchor.ocean_tags.forEach(function(tag) {
+          var parts = tag.split('_');
+          var tagColor = parts[1] === 'high' ? 'var(--accent)' : (parts[1] === 'low' ? 'var(--danger, #ef4444)' : 'var(--text-muted)');
+          html += '<span class="ocean-tag-badge" style="background:' + tagColor + ';color:var(--bg);font-size:0.7em;padding:0.1em 0.4em;border-radius:3px;margin-right:0.3em;">' + escapeHtml(tag) + '</span>';
+        });
+        html += '</div>';
+      }
+
+      html += '</div>';
+    });
+
+    html += '</div>';
+    return html;
   }
 
   // ============================================================================
@@ -410,6 +630,15 @@
       }
       md += '- Рост → ' + GROWTH_LINES[selectedTypeId] + '\n';
       md += '- Стресс → ' + STRESS_LINES[selectedTypeId] + '\n';
+
+      // M2+ OCEAN data in export
+      if (currentWidgetLevel >= 2) {
+        var oceanDefaults = getOceanDefaults(selectedTypeId);
+        if (oceanDefaults) {
+          md += '\n**OCEAN defaults:** O=' + oceanDefaults.O + ' C=' + oceanDefaults.C + ' E=' + oceanDefaults.E + ' A=' + oceanDefaults.A + ' N=' + oceanDefaults.N + '\n';
+        }
+      }
+
       return md;
     }
 
@@ -430,6 +659,12 @@
       obj.enneagram.spine.LIE = fields.LIE;
       obj.enneagram.spine.GHOST = fields.GHOST;
     }
+    if (currentWidgetLevel >= 2) {
+      var oceanDefaultsJson = getOceanDefaults(selectedTypeId);
+      if (oceanDefaultsJson) {
+        obj.enneagram.oceanDefaults = oceanDefaultsJson;
+      }
+    }
     return JSON.stringify(obj, null, 2);
   }
 
@@ -447,17 +682,18 @@
   }
 
   // ============================================================================
-  // M1 WIDGET BUILDER
+  // WIDGET BUILDER
   // ============================================================================
 
-  function buildM1Widget(container, enneagramData) {
+  function buildWidget(container, enneagramData) {
     var version = enneagramData.version || '?';
+    var badge = getLevelBadge();
 
     container.innerHTML =
       '<div class="enneagram-widget">' +
         '<div class="enneagram-header">' +
           '<h4 class="enneagram-title">Enneagram Builder</h4>' +
-          '<span class="enneagram-level-badge">M1</span>' +
+          '<span class="enneagram-level-badge">' + badge + '</span>' +
         '</div>' +
         buildTabsHTML() +
         '<small style="display:block;margin-top:0.5em;color:var(--text-muted);font-size:0.7em;">Enneagram v' + version + '</small>' +
@@ -479,11 +715,12 @@
     });
 
     var version = enneagramDataCache ? (enneagramDataCache.version || '?') : '?';
+    var badge = getLevelBadge();
 
     widgetEl.innerHTML =
       '<div class="enneagram-header">' +
         '<h4 class="enneagram-title">Enneagram Builder</h4>' +
-        '<span class="enneagram-level-badge">M1</span>' +
+        '<span class="enneagram-level-badge">' + badge + '</span>' +
       '</div>' +
       buildTabsHTML() +
       '<small style="display:block;margin-top:0.5em;color:var(--text-muted);font-size:0.7em;">Enneagram v' + version + '</small>';
@@ -560,6 +797,51 @@
       });
     }
 
+    // M2+ OCEAN suggest button
+    var oceanSuggestBtn = container.querySelector('#enneagram-ocean-suggest');
+    if (oceanSuggestBtn) {
+      oceanSuggestBtn.addEventListener('click', function() {
+        var oceanDefaults = getOceanDefaults(selectedTypeId);
+        if (!oceanDefaults) return;
+
+        // Emit event suggestion — does NOT auto-fill OCEAN widget per sovereignty §0.1
+        if (window.EventBus && window.GuideEvents) {
+          window.EventBus.emit(window.GuideEvents.OCEAN_UPDATED, {
+            O: oceanDefaults.O,
+            C: oceanDefaults.C,
+            E: oceanDefaults.E,
+            A: oceanDefaults.A,
+            N: oceanDefaults.N
+          });
+          console.log('[EnneagramBuilder] Emitted ocean:updated suggestion for type ' + selectedTypeId);
+        }
+
+        oceanSuggestBtn.textContent = '✓ Предложение отправлено';
+        oceanSuggestBtn.disabled = true;
+        setTimeout(function() {
+          oceanSuggestBtn.textContent = 'Заполнить по типу';
+          oceanSuggestBtn.disabled = false;
+        }, 1500);
+      });
+    }
+
+    // M2+ Anchor toggle button
+    var anchorToggleBtn = container.querySelector('#enneagram-anchor-toggle');
+    if (anchorToggleBtn) {
+      anchorToggleBtn.addEventListener('click', function() {
+        showAllAnchors = !showAllAnchors;
+        reRender(container);
+      });
+    }
+
+    // M2+ MBTI hint type clicks (informational only)
+    container.querySelectorAll('.enneagram-mbti-type').forEach(function(mbtiEl) {
+      mbtiEl.addEventListener('click', function() {
+        // Informational only — no navigation
+        console.log('[EnneagramBuilder] MBTI type info:', mbtiEl.dataset.mbti);
+      });
+    });
+
     // Export format selector
     var formatSelect = container.querySelector('#enneagram-export-format');
     if (formatSelect) {
@@ -617,6 +899,36 @@
   }
 
   // ============================================================================
+  // EVENT SUBSCRIPTION (M2+)
+  // ============================================================================
+
+  function subscribeOceanUpdates(_container) {
+    if (oceanEventSubscribed) return;
+    if (!window.EventBus || !window.GuideEvents) return;
+    if (currentWidgetLevel < 2) return;
+
+    window.EventBus.on(window.GuideEvents.OCEAN_UPDATED, function(profile) {
+      currentOceanProfile = {
+        O: profile.O,
+        C: profile.C,
+        E: profile.E,
+        A: profile.A,
+        N: profile.N
+      };
+      // Re-render SPINE tab if active (to update FLAW filtering)
+      if (currentTab === 'spine') {
+        var containerEl = document.getElementById('enneagram-embed');
+        if (containerEl) {
+          reRender(containerEl);
+        }
+      }
+    });
+
+    oceanEventSubscribed = true;
+    console.log('[EnneagramBuilder] Subscribed to ocean:updated events (M2+)');
+  }
+
+  // ============================================================================
   // INITIALIZATION
   // ============================================================================
 
@@ -644,8 +956,18 @@
       return;
     }
 
+    // M2+: fetch OCEAN data for extremum thresholds
+    if (currentWidgetLevel >= 2) {
+      await fetchOceanData();
+    }
+
     // Build widget
-    buildM1Widget(container, enneagramData);
+    buildWidget(container, enneagramData);
+
+    // M2+: subscribe to OCEAN updates
+    if (currentWidgetLevel >= 2) {
+      subscribeOceanUpdates(container);
+    }
 
     console.log('[EnneagramBuilder] Widget initialized at M' + currentWidgetLevel + ' level');
   }
@@ -658,7 +980,7 @@
     init: initEnneagramBuilder,
     getSelectedType: function() { return selectedTypeId; },
     getLevel: function() { return currentWidgetLevel; },
-    getVersion: function() { return '1.0.0'; }
+    getVersion: function() { return '2.0.0'; }
   };
 
   // Auto-init after layer content is loaded

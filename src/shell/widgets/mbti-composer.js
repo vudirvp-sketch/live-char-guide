@@ -1,25 +1,28 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - MBTI COMPOSER WIDGET v1.0.0
+ * LIVE CHARACTER GUIDE - MBTI COMPOSER WIDGET v2.0.0
  * ============================================================================
  *
  * Interactive MBTI type selector with grid and axis slider modes.
  * Part of the Persona Synthesis Framework (§4.3).
  *
  * Milestone Levels:
- *   M1 — Quick Selection: grid mode + axis slider mode, result card (current)
- *   M2 — Extended configuration, OCEAN cross-ref (TODO)
+ *   M1 — Quick Selection: grid mode + axis slider mode, result card
+ *   M2 — Extended configuration, OCEAN cross-ref, SPINE patterns, Enneagram hints (current)
  *   M3 — Advanced features (TODO)
  *
  * Activation: Only at L2+ guide layer (isWidgetAllowed())
- * Event Emission: mbti:selected via EventBus (on type selection)
+ * Event Emission:
+ *   mbti:selected     via EventBus (on type selection)
+ *   mbti:ocean-apply  via EventBus (on "Apply to OCEAN" button click)
  *
  * Contract:
  *   - Reads: data/mbti.json (v2.0.0)
  *   - Emits: mbti:selected { typeCode, temperament } via window.EventBus
+ *   - Emits: mbti:ocean-apply { suggestions: { O, C, E, A, N } } via window.EventBus
  *   - Fallback: if JSON missing → shows static placeholder
  *
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 (function() {
@@ -54,6 +57,17 @@
     { id: 'JP', left: 'J', right: 'P', leftLabel: 'Суждение', rightLabel: 'Восприятие', default: 50 }
   ];
 
+  var SPINE_FIELD_COLORS = {
+    'WANT': 'green',
+    'FLAW': 'red',
+    'LIE': '#b8a000',
+    'GHOST': 'purple'
+  };
+
+  var OCEAN_TRAITS = ['O', 'C', 'E', 'A', 'N'];
+
+  var SPINE_FIELDS = ['WANT', 'FLAW', 'LIE', 'GHOST'];
+
   // Data cache
   var mbtiDataCache = null;
 
@@ -61,6 +75,8 @@
   var selectedType = null;
   var currentMode = 'grid'; // 'grid' or 'sliders'
   var currentWidgetLevel = 1;
+  var showOceanRef = false;       // OCEAN checkbox state
+  var showSpinePatterns = false;  // SPINE checkbox state
 
   // Slider values
   var axisValues = {
@@ -138,6 +154,91 @@
       .replace(/"/g, '&quot;');
   }
 
+  function getLevelBadge() {
+    return currentWidgetLevel >= 2 ? 'M2' : 'M1';
+  }
+
+  // ============================================================================
+  // BUILD RESULT CARD — OCEAN SECTION (M2+)
+  // ============================================================================
+
+  function buildOceanSection(typeCode) {
+    var html = '<div class="mbti-ocean-section">';
+    html += '<label class="mbti-ocean-checkbox">' +
+      '<input type="checkbox"' + (showOceanRef ? ' checked' : '') + ' data-toggle="ocean" /> ' +
+      '\uD83D\uDD17 Связать с OCEAN' +
+    '</label>';
+
+    if (showOceanRef && mbtiDataCache && mbtiDataCache.ocean_suggestions) {
+      var suggestions = mbtiDataCache.ocean_suggestions[typeCode];
+      if (suggestions) {
+        html += '<div class="mbti-ocean-bars">';
+        OCEAN_TRAITS.forEach(function(trait) {
+          var val = suggestions[trait] || 0;
+          html += '<div class="mbti-ocean-bar-row">' +
+            '<span class="mbti-ocean-bar-label">' + trait + '</span>' +
+            '<div class="mbti-ocean-bar-track"><div class="mbti-ocean-bar-fill" style="width:' + val + '%"></div></div>' +
+            '<span class="mbti-ocean-bar-value">' + val + '</span>' +
+          '</div>';
+        });
+        html += '</div>';
+        html += '<button class="mbti-ocean-apply-btn" type="button">Применить к OCEAN-виджету</button>';
+      }
+    }
+
+    html += '</div>';
+    return html;
+  }
+
+  // ============================================================================
+  // BUILD RESULT CARD — SPINE SECTION (M2+)
+  // ============================================================================
+
+  function buildSpineSection(typeCode) {
+    var html = '<div class="mbti-spine-section">';
+    html += '<label class="mbti-spine-checkbox">' +
+      '<input type="checkbox"' + (showSpinePatterns ? ' checked' : '') + ' data-toggle="spine" /> ' +
+      '\uD83D\uDD17 Показать подсказки SPINE' +
+    '</label>';
+
+    if (showSpinePatterns && mbtiDataCache && mbtiDataCache.spine_patterns) {
+      var patterns = mbtiDataCache.spine_patterns[typeCode];
+      if (patterns) {
+        SPINE_FIELDS.forEach(function(field) {
+          var val = patterns[field] || '';
+          var color = SPINE_FIELD_COLORS[field] || 'inherit';
+          html += '<div class="mbti-spine-field">' +
+            '<span class="mbti-spine-field-label" style="color:' + color + '">' + field + '</span>' +
+            '<span class="mbti-spine-field-value">' + escapeHtml(val) + '</span>' +
+            '<button class="mbti-spine-copy-btn" type="button" data-spine-field="' + field + '" data-type-code="' + typeCode + '" title="Копировать">\uD83D\uDCCB</button>' +
+          '</div>';
+        });
+      }
+    }
+
+    html += '</div>';
+    return html;
+  }
+
+  // ============================================================================
+  // BUILD RESULT CARD — ENNEAGRAM HINTS (M2+)
+  // ============================================================================
+
+  function buildEnneagramHints(typeCode) {
+    var html = '<div class="mbti-enneagram-hints">';
+    if (mbtiDataCache && mbtiDataCache.enneagram_suggestions) {
+      var suggestions = mbtiDataCache.enneagram_suggestions[typeCode];
+      if (suggestions && suggestions.length > 0) {
+        html += 'Наиболее вероятные типы Эннеаграммы: ';
+        suggestions.forEach(function(typeId) {
+          html += '<span class="mbti-enneagram-hint-chip" tabindex="0" role="button" aria-label="Эннеаграмма тип ' + typeId + '">' + typeId + '</span>';
+        });
+      }
+    }
+    html += '</div>';
+    return html;
+  }
+
   // ============================================================================
   // BUILD RESULT CARD
   // ============================================================================
@@ -153,13 +254,22 @@
     var tempName = tempInfo ? tempInfo.name : TEMPERAMENT_NAMES[temp] || temp;
     var functions = (typeInfo.cognitive_functions || []).join(' \u2192 ');
 
-    return '<div class="mbti-result-card">' +
+    var html = '<div class="mbti-result-card">' +
       '<div class="mbti-result-code">' + escapeHtml(typeInfo.code) + '</div>' +
       '<div class="mbti-result-name">' + escapeHtml(typeInfo.name) + '</div>' +
       '<div class="mbti-result-temperament">' + escapeHtml(temp) + ' \u2014 ' + escapeHtml(tempName) + '</div>' +
       (functions ? '<div class="mbti-result-functions">' + escapeHtml(functions) + '</div>' : '') +
-      '<div class="mbti-result-hint">' + escapeHtml(typeInfo.hint) + '</div>' +
-    '</div>';
+      '<div class="mbti-result-hint">' + escapeHtml(typeInfo.hint) + '</div>';
+
+    // M2+ extended sections
+    if (currentWidgetLevel >= 2) {
+      html += buildOceanSection(typeCode);
+      html += buildSpineSection(typeCode);
+      html += buildEnneagramHints(typeCode);
+    }
+
+    html += '</div>';
+    return html;
   }
 
   // ============================================================================
@@ -239,11 +349,28 @@
   }
 
   // ============================================================================
-  // M1 WIDGET BUILDER
+  // EMIT OCEAN APPLY EVENT
   // ============================================================================
 
-  function buildM1Widget(container) {
+  function emitOceanApply() {
+    if (window.EventBus && window.GuideEvents && mbtiDataCache && mbtiDataCache.ocean_suggestions) {
+      var suggestions = mbtiDataCache.ocean_suggestions[selectedType];
+      if (suggestions) {
+        window.EventBus.emit(window.GuideEvents.MBTI_OCEAN_APPLY, {
+          suggestions: { O: suggestions.O, C: suggestions.C, E: suggestions.E, A: suggestions.A, N: suggestions.N }
+        });
+        console.log('[MBTI] Emitted mbti:ocean-apply', { typeCode: selectedType });
+      }
+    }
+  }
+
+  // ============================================================================
+  // WIDGET BUILDER (M1 / M2)
+  // ============================================================================
+
+  function buildWidget(container) {
     var version = mbtiDataCache ? (mbtiDataCache.version || '?') : '?';
+    var badge = getLevelBadge();
 
     var modeContent = currentMode === 'grid' ? buildGrid() : buildAxisSliders();
     var resultHtml = selectedType ? buildResultCard(selectedType) : '<div class="mbti-empty-state">\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0438\u043F \u0434\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430</div>';
@@ -252,7 +379,7 @@
       '<div class="mbti-widget">' +
         '<div class="mbti-header">' +
           '<h4 class="mbti-title">MBTI Composer</h4>' +
-          '<span class="mbti-level-badge">M1</span>' +
+          '<span class="mbti-level-badge">' + badge + '</span>' +
         '</div>' +
         buildModeToggle() +
         '<div id="mbti-mode-content">' + modeContent + '</div>' +
@@ -268,13 +395,14 @@
     if (!widgetEl) return;
 
     var version = mbtiDataCache ? (mbtiDataCache.version || '?') : '?';
+    var badge = getLevelBadge();
     var modeContent = currentMode === 'grid' ? buildGrid() : buildAxisSliders();
     var resultHtml = selectedType ? buildResultCard(selectedType) : '<div class="mbti-empty-state">\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0438\u043F \u0434\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430</div>';
 
     widgetEl.innerHTML =
       '<div class="mbti-header">' +
         '<h4 class="mbti-title">MBTI Composer</h4>' +
-        '<span class="mbti-level-badge">M1</span>' +
+        '<span class="mbti-level-badge">' + badge + '</span>' +
       '</div>' +
       buildModeToggle() +
       '<div id="mbti-mode-content">' + modeContent + '</div>' +
@@ -289,6 +417,62 @@
     if (!resultEl) return;
     var resultHtml = selectedType ? buildResultCard(selectedType) : '<div class="mbti-empty-state">\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0442\u0438\u043F \u0434\u043B\u044F \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430</div>';
     resultEl.innerHTML = resultHtml;
+    bindResultCardEvents(container);
+  }
+
+  // ============================================================================
+  // RESULT CARD EVENT BINDING (M2+)
+  // ============================================================================
+
+  function bindResultCardEvents(container) {
+    if (currentWidgetLevel < 2) return;
+
+    var resultEl = container.querySelector('#mbti-result');
+    if (!resultEl) return;
+
+    // OCEAN checkbox toggle
+    var oceanCheckbox = resultEl.querySelector('[data-toggle="ocean"]');
+    if (oceanCheckbox) {
+      oceanCheckbox.addEventListener('change', function() {
+        showOceanRef = oceanCheckbox.checked;
+        updateResultOnly(container);
+      });
+    }
+
+    // SPINE checkbox toggle
+    var spineCheckbox = resultEl.querySelector('[data-toggle="spine"]');
+    if (spineCheckbox) {
+      spineCheckbox.addEventListener('change', function() {
+        showSpinePatterns = spineCheckbox.checked;
+        updateResultOnly(container);
+      });
+    }
+
+    // OCEAN apply button
+    var applyBtn = resultEl.querySelector('.mbti-ocean-apply-btn');
+    if (applyBtn) {
+      applyBtn.addEventListener('click', function() {
+        emitOceanApply();
+      });
+    }
+
+    // SPINE copy buttons
+    resultEl.querySelectorAll('.mbti-spine-copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var field = btn.dataset.spineField;
+        var typeCode = btn.dataset.typeCode;
+        if (mbtiDataCache && mbtiDataCache.spine_patterns && mbtiDataCache.spine_patterns[typeCode]) {
+          var text = mbtiDataCache.spine_patterns[typeCode][field] || '';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+              console.log('[MBTI] Copied SPINE ' + field + ' to clipboard');
+            });
+          } else {
+            console.warn('[MBTI] Clipboard API not available');
+          }
+        }
+      });
+    });
   }
 
   // ============================================================================
@@ -355,6 +539,9 @@
         });
       });
     }
+
+    // Result card events (M2+ sections)
+    bindResultCardEvents(container);
   }
 
   // ============================================================================
@@ -388,7 +575,7 @@
     }
 
     // Build widget
-    buildM1Widget(container);
+    buildWidget(container);
 
     console.log('[MBTI] Widget initialized at M' + currentWidgetLevel + ' level');
   }
@@ -401,7 +588,7 @@
     init: initMBTIComposer,
     getSelectedType: function() { return selectedType; },
     getLevel: function() { return currentWidgetLevel; },
-    getVersion: function() { return '1.0.0'; }
+    getVersion: function() { return '2.0.0'; }
   };
 
   // Auto-init after layer content is loaded
