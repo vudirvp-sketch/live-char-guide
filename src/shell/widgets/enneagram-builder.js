@@ -500,6 +500,7 @@
       var isM2 = currentWidgetLevel >= 2;
 
       if (isM2 && !showAllAnchors) {
+        var thresholds = oceanDataCache?.extremum_thresholds || { low: 30, high: 70 };
         relevantAnchors = anchors.filter(function(anchor) {
           return anchor.ocean_tags.every(function(tag) {
             var parts = tag.split('_'); // e.g., "N_high" → ["N", "high"]
@@ -507,9 +508,9 @@
             var level = parts[1];
             var value = currentOceanProfile[trait];
             if (typeof value === 'undefined') return true;
-            if (level === 'high') return value >= 70;
-            if (level === 'low') return value <= 30;
-            if (level === 'moderate') return value > 30 && value < 70;
+            if (level === 'high') return value >= thresholds.high;
+            if (level === 'low') return value <= thresholds.low;
+            if (level === 'moderate') return value > thresholds.low && value < thresholds.high;
             return true;
           });
         });
