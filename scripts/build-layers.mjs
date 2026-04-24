@@ -177,7 +177,10 @@ function parseMasterHTML(content, filename) {
     lastIndex = endIndex + 10; // After </section>
 
     // Extract title from h2 (for manifest) and h3 IDs (for anchors)
-    const h2Match = sectionContent.match(/<h2[^>]*>([^<]+)<\/h2>/i);
+    // Use [\s\S] to match across nested HTML tags (e.g. <span> inside <h2>), then strip tags
+    const h2RawMatch = sectionContent.match(/<h2[^>]*>([\s\S]+?)<\/h2>/i);
+    const h2Title = h2RawMatch ? h2RawMatch[1].replace(/<[^>]+>/g, '').trim() : '';
+    const h2Match = h2RawMatch ? [h2RawMatch[0], h2Title] : null;
     const h3Ids = [];
     const h3Regex = /<h3\s+[^>]*id=["']([^"']+)["']/gi;
     let h3Match;

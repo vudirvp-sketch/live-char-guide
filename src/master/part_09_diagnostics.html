@@ -101,7 +101,7 @@
 <tr><td>Голос "утекает" в длинных репликах</td><td>Недостаточно примеров</td><td>Добавьте 3-й пример (доверие/рост)</td></tr>
 <tr><td>Персонаж не показывает уязвимость</td><td>Нет цены у якорей</td><td>Добавьте физические реакции</td></tr>
 <tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен</td><td>Проверьте консистентность WANT (Желание)/NEED (Потребность)/FLAW (Дефект) → каждый элемент должен иметь якорь</td></tr>
-<tr><td>Повторяющиеся фразы</td><td>RepPen настройки</td><td>RepPen 1.0-1.05, не выше</td></tr>
+<tr><td>Повторяющиеся фразы</td><td>RepPen настройки</td><td>RepPen → <a href="#p7_sampling_params">параметры сэмплинга</a></td></tr>
 <tr><td>Персонаж слишком много говорит</td><td>Examples слишком длинные</td><td>Сократите до 80-120 токенов</td></tr>
 <tr><td>Модель ломает формат</td><td>Нет Format Lock</td><td>Добавьте фиксацию формата в SP</td></tr>
 <tr><td>Персонаж забывает контекст</td><td>Превышен контекст</td><td>Адаптируйте карточку для контекста 4K → <a data-layer-switch="3#p7_sampling_params">4K-Fallback → Экспертный слой</a></td></tr>
@@ -128,7 +128,7 @@
 <tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination (заражение голоса из чужих Examples → <a href="#p3_voice_leak">Voice Leak → Part 3</a>)</td></tr>
 <tr><td>Персонаж годмодит</td><td>Есть ли анти-годмодинг в SP?</td><td>Добавить 2 строки (AP-6)</td><td>→ Усилить INFLUENCE BOUNDARY</td></tr>
 <tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked якорь</td><td>→ Проверить OCEAN: >2 полюса? (AP-15)</td></tr>
-<tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Снизить до 1.05 (AP-5)</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
+<tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Снизить → <a href="#p7_sampling_params">параметры сэмплинга</a> (AP-5)</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
 <tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить якоря на дублирование</td></tr>
 </tbody>
 </table>
