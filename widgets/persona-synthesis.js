@@ -487,7 +487,7 @@
           a.href = url;
           a.download = 'character-card.' + (format === 'json' ? 'json' : 'md');
           a.click();
-          URL.revokeObjectURL(url);
+          setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
         }
 
         // Emit synthesis:exported event (§2.1)

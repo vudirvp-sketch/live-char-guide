@@ -22,7 +22,7 @@
 <div class="callout important">
 <p><strong>📌 Золотое правило профиля:</strong> Только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70). Каждый дополнительный экстремальный полюс снижает стабильность поведения. Нарушение = AP-15 (OCEAN Overload).</p>
 </div>
-<p class="layer-remark"><span class="remark-icon">→</span> Подробный разбор 3 сценариев конфликта полюсов → <a href="#p8_ap15_extended" class="layer-remark">AP-15 расширенный (Part 8, L3)</a></p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Подробный разбор 3 сценариев конфликта полюсов → <a href="#p8_ap15_extended" class="layer-remark">AP-15 расширенный (Part 8, L3)</a></p>
 
 <h3>5 измерений OCEAN</h3>
 <div class="table-wrap">
@@ -58,10 +58,11 @@
 <details class="interactive">
 <summary>OCEAN Interactive Pentagon</summary>
 
-<div id="ocean-embed" class="ocean-embed">
+<!-- Статический fallback — виден при медленной загрузке, скрывается виджетом -->
+<div id="ocean-static" class="ocean-static-fallback">
 <div class="ocean-layout">
 <div class="diagram-wrap">
-<svg id="ocean-svg" viewBox="0 0 400 370">
+<svg id="ocean-svg" viewBox="0 0 400 370" role="img" aria-label="OCEAN-пентагон: 5 измерений личности — Открытость, Добросовестность, Экстраверсия, Доброжелательность, Нейротизм">
 <!-- Pentagon outline -->
 <polygon class="pentagon-outline" points="200,40 340,130 285,290 115,290 60,130" fill="none" stroke="var(--border)" stroke-width="1.5"/>
 <polygon class="pentagon-outline" points="200,85 300,155 255,265 145,265 100,155" fill="none" stroke="var(--border)" stroke-width="1"/>
@@ -78,25 +79,25 @@
 <polygon id="ocean-profile" fill="rgba(56,189,248,0.2)" stroke="var(--accent)" stroke-width="2" points="200,130 260,180 230,240 170,240 140,180"/>
 
 <!-- Nodes -->
-<g class="pentagon-node ocean-node" data-trait="O" tabindex="0">
+<g class="pentagon-node ocean-node" data-trait="O" tabindex="0" role="button" aria-label="Открытость (O) — нажмите для описания">
 <circle cx="200" cy="40" r="18" fill="var(--ocean-O)"/>
-<text x="200" y="40">O</text>
+<text x="200" y="40" text-anchor="middle" dominant-baseline="central" class="ocean-trait-letter">O</text>
 </g>
-<g class="pentagon-node ocean-node" data-trait="C" tabindex="0">
+<g class="pentagon-node ocean-node" data-trait="C" tabindex="0" role="button" aria-label="Добросовестность (C) — нажмите для описания">
 <circle cx="340" cy="130" r="18" fill="var(--ocean-C)"/>
-<text x="340" y="130">C</text>
+<text x="340" y="130" text-anchor="middle" dominant-baseline="central" class="ocean-trait-letter">C</text>
 </g>
-<g class="pentagon-node ocean-node" data-trait="E" tabindex="0">
+<g class="pentagon-node ocean-node" data-trait="E" tabindex="0" role="button" aria-label="Экстраверсия (E) — нажмите для описания">
 <circle cx="285" cy="290" r="18" fill="var(--ocean-E)"/>
-<text x="285" y="290">E</text>
+<text x="285" y="290" text-anchor="middle" dominant-baseline="central" class="ocean-trait-letter">E</text>
 </g>
-<g class="pentagon-node ocean-node" data-trait="A" tabindex="0">
+<g class="pentagon-node ocean-node" data-trait="A" tabindex="0" role="button" aria-label="Доброжелательность (A) — нажмите для описания">
 <circle cx="115" cy="290" r="18" fill="var(--ocean-A)"/>
-<text x="115" y="290">A</text>
+<text x="115" y="290" text-anchor="middle" dominant-baseline="central" class="ocean-trait-letter">A</text>
 </g>
-<g class="pentagon-node ocean-node" data-trait="N" tabindex="0">
+<g class="pentagon-node ocean-node" data-trait="N" tabindex="0" role="button" aria-label="Нейротизм (N) — нажмите для описания">
 <circle cx="60" cy="130" r="18" fill="var(--ocean-N)"/>
-<text x="60" y="130">N</text>
+<text x="60" y="130" text-anchor="middle" dominant-baseline="central" class="ocean-trait-letter">N</text>
 </g>
 </svg>
 </div>
@@ -109,13 +110,16 @@
 </div>
 </div>
 
+<!-- Виджет-контейнер — заменяет static fallback при инициализации -->
+<div id="ocean-embed" class="ocean-embed"></div>
+
 <noscript>
 <p><em>Описания полюсов OCEAN см. в таблице выше (секция «5 измерений OCEAN»).</em></p>
 </noscript>
 
 </details>
 
-<p class="layer-remark"><span class="remark-icon">→</span>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span>
 Как применить OCEAN при сборке карточки → <a href="#p5_l2_quickstart">L2 Quickstart</a>
 </p>
 
@@ -152,51 +156,14 @@
 <p><strong>💡 L3-контент:</strong> Столбец «LIE» — справочные данные для понимания типа. Полное использование LIE и GHOST → Экспертный слой (Part 4, L3).</p>
 </div>
 
-<details class="interactive">
-<summary>Enneagram SVG Diagram</summary>
-
-<div class="ennea-embed">
-<div class="ennea-layout">
-<svg id="ennea-svg" viewBox="0 0 400 400">
-<!-- Outer circle -->
-<circle cx="200" cy="200" r="180" fill="none" stroke="var(--border)" stroke-width="1"/>
-
-<!-- Triangle (3-6-9) -->
-<polygon class="inner-lines" points="200,20 40,310 360,310" fill="none" stroke="var(--border)" stroke-dasharray="4 3"/>
-
-<!-- Hexad (1-4-2-8-5-7) -->
-<polygon class="inner-lines" points="340,110 250,350 150,350 60,110 140,50 260,50" fill="none" stroke="var(--border)" stroke-dasharray="4 3"/>
-
-<!-- Nodes -->
-<g class="node" data-type="1" tabindex="0"><circle cx="340" cy="110" r="24"/><text x="340" y="110">1</text></g>
-<g class="node" data-type="2" tabindex="0"><circle cx="260" cy="50" r="24"/><text x="260" y="50">2</text></g>
-<g class="node" data-type="3" tabindex="0"><circle cx="200" cy="20" r="24"/><text x="200" y="20">3</text></g>
-<g class="node" data-type="4" tabindex="0"><circle cx="140" cy="50" r="24"/><text x="140" y="50">4</text></g>
-<g class="node" data-type="5" tabindex="0"><circle cx="60" cy="110" r="24"/><text x="60" y="110">5</text></g>
-<g class="node" data-type="6" tabindex="0"><circle cx="40" cy="310" r="24"/><text x="40" y="310">6</text></g>
-<g class="node" data-type="7" tabindex="0"><circle cx="250" cy="350" r="24"/><text x="250" y="350">7</text></g>
-<g class="node" data-type="8" tabindex="0"><circle cx="360" cy="310" r="24"/><text x="360" y="310">8</text></g>
-<g class="node" data-type="9" tabindex="0"><circle cx="150" cy="350" r="24"/><text x="150" y="350">9</text></g>
-</svg>
-
-<div id="ennea-panel" class="ennea-panel">
-<div class="ennea-placeholder">
-Нажмите на узел<br>для просмотра типа
-</div>
-</div>
-</div>
-</div>
-
 <noscript>
-<p><em>Описания всех 9 типов Enneagram см. в таблице выше.</em></p>
+<p><em>Интерактивная диаграмма Enneagram доступна при включённом JavaScript. Описания всех 9 типов см. в таблице выше.</em></p>
 </noscript>
-
-</details>
 
 <div id="enneagram-embed" class="enneagram-embed"></div>
 
 <p class="layer-remark">
-<span class="remark-icon">→</span>
+<span class="remark-icon" aria-hidden="true">→</span>
 Подробнее о маппинге Enneagram→SPINE: <a href="#p5_cross_instrument_map" class="layer-remark">Связь инструментов</a>
 </p>
 
@@ -234,12 +201,12 @@
 <tr><td><strong>NT</strong> (Аналитики)</td><td>INTJ, INTP, ENTJ, ENTP</td><td class="temperament-nt">Фиолетовый</td></tr>
 <tr><td><strong>NF</strong> (Дипломаты)</td><td>INFJ, INFP, ENFJ, ENFP</td><td class="temperament-nf">Розовый</td></tr>
 <tr><td><strong>SJ</strong> (Стражи)</td><td>ISTJ, ISFJ, ESTJ, ESFJ</td><td class="temperament-sj">Голубой</td></tr>
-<tr><td><strong>SP</strong> (Исследователи)</td><td>ISTP, ISFP, ESTP, ESFP</td><td class="temperament-sp">Оранжевый</td></tr>
+<tr><td><strong>S·P</strong> (Исследователи)</td><td>ISTP, ISFP, ESTP, ESFP</td><td class="temperament-sp">Оранжевый</td></tr>
 </tbody>
 </table>
 </div>
 
-<p class="layer-remark"><em>(здесь SP = темперамент Keirsey (Sensing-Perceiving), не System Prompt)</em></p>
+<p class="layer-remark"><em>(S·P = темперамент Keirsey <strong>S</strong>ensing-<strong>P</strong>erceiving, не <abbr title="System Prompt">SP</abbr>)</em></p>
 
 <div id="mbti-embed" class="mbti-embed"></div>
 
@@ -247,12 +214,12 @@
 <p><strong>💡 MBTI на L2 = справочный инструмент.</strong> Для создания карточки используйте OCEAN (полюса → якоря) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.</p>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — L3: <a href="#p5_enneagram_wings">Enneagram Wings</a>, <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix</a>.</p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — L3: <a href="#p5_enneagram_wings" >Enneagram Wings</a>, <a href="#p5_cross_matrix" >OCEAN×Enneagram Matrix</a>.</p>
 
 
 </section>
 
-<section id="p5_cross_instrument_map" data-layer="l2" data-section="p5_cross_instrument_map">
+<section id="p5_cross_instrument_map" data-layer="l2" data-section="p5_cross_instrument_map" data-toc-nav>
 
 <h3>Связь инструментов: OCEAN ↔ Enneagram ↔ MBTI</h3>
 
@@ -272,7 +239,7 @@
 </table>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span>
 Интерактивный выбор типа с автозаполнением SPINE → <a href="#p5_enneagram_basics">Enneagram Builder</a>
 </p>
 
@@ -289,6 +256,8 @@
 <h3>L2 Quickstart: 30-минутный конвейер</h3>
 
 <p>Следуйте этим шагам для создания глубокой карточки с SPINE, FLAW-linked якорями, OCEAN и Enneagram. Ориентировочное время: 30 минут.</p>
+
+<p><strong>📌 Предполагается, что L1-часть уже выполнена.</strong> L1 чек-лист → <a href="#p1_l1_quickstart">L1 Quickstart</a></p>
 
 <div class="callout important">
 <p><strong>📌 Перед выполнением этого Quickstart вы должны прочитать:</strong></p>
@@ -340,11 +309,11 @@
 </ul>
 
 <p class="layer-remark">
-<span class="remark-icon">→</span>
+<span class="remark-icon" aria-hidden="true">→</span>
 Если нужно глубже — <a href="#p6_cot_basics" class="layer-remark">L3: CoT и внутренний процесс</a>
 </p>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — L3.</p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — L3: <a href="#p5_enneagram_wings" >Enneagram Wings</a>, <a href="#p5_cross_matrix" >OCEAN×Enneagram Matrix</a>.</p>
 
 
 </section>

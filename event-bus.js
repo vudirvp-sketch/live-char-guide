@@ -139,6 +139,7 @@
   const GuideEvents = {
     OCEAN_UPDATED: 'ocean:updated',           // Emitted by OCEAN Insight
     ENNEAGRAM_SELECTED: 'enneagram:selected',  // Emitted by Enneagram Builder
+    ENNEAGRAM_OCEAN_SUGGEST: 'enneagram:ocean-suggest', // Emitted by Enneagram Builder (suggestion, not command)
     MBTI_SELECTED: 'mbti:selected',            // Emitted by MBTI Composer
     MBTI_OCEAN_APPLY: 'mbti:ocean-apply',      // Emitted by MBTI Composer
     SYNTHESIS_EXPORTED: 'synthesis:exported'    // Emitted by Persona Synthesis

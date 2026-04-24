@@ -548,12 +548,14 @@
     TRAIT_IDS.forEach(function(id) {
       const val = oceanProfile[id];
       const valClass = val <= thresholds.low ? 'ocean-value-low' : (val >= thresholds.high ? 'ocean-value-high' : '');
+      // fix 10.4: add directional arrow for accessibility (not color-only indicator)
+      const arrow = val <= thresholds.low ? '↓' : (val >= thresholds.high ? '↑' : '');
       slidersHTML += `
         <div class="ocean-slider-row">
           <span class="ocean-slider-label">${id}</span>
           <span class="ocean-slider-name">${TRAIT_NAMES[id]}</span>
           <input type="range" min="0" max="100" value="${val}" class="ocean-slider-input" data-trait="${id}" aria-label="${TRAIT_NAMES[id]}: ${val}" />
-          <span class="ocean-slider-value ${valClass}" data-value-trait="${id}">${val}</span>
+          <span class="ocean-slider-value ${valClass}" data-value-trait="${id}">${arrow}${val}</span>
         </div>`;
     });
 

@@ -70,12 +70,14 @@
         const display = val.toFixed(2);
         const bg = getCorrelationColor(val);
         const strength = Math.abs(val) > 0.5 ? 'strong' : Math.abs(val) > 0.2 ? 'moderate' : 'weak';
+        // fix 10.4: add text symbol for accessibility (not color-only indicator)
+        const symbol = val > 0.3 ? '+' : (val < -0.3 ? '−' : '0');
         rows += `<td class="cross-cell cross-${strength}" 
                      style="background:${bg}" 
                      data-trait="${trait}" 
                      data-type="${type.id}" 
                      data-value="${val}"
-                     title="${OCEAN_NAMES[trait]} × ${name}: ${display}">${display}</td>`;
+                     title="${OCEAN_NAMES[trait]} × ${name}: ${display}">${symbol} ${display}</td>`;
       });
       
       rows += `</tr>`;

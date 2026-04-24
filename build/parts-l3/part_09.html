@@ -23,7 +23,7 @@
 <p><strong>💡 Цель — «Хороший» уровень.</strong> «Критический» = переписать. «Плохой» = точечные доработки по Decision Tree.</p>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Пошаговая диагностика: <a href="#p9_decision_tree">Дерево решений</a><noscript><a href="#p9_decision_tree" class="term-marker-noscript-link">Дерево решений</a></noscript></p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Пошаговая диагностика: <a href="#p9_decision_tree">Дерево решений</a><noscript><a href="#p9_decision_tree" class="term-marker-noscript-link">Дерево решений</a></noscript></p>
 
 
 </section>
@@ -60,7 +60,7 @@
 </table>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Полные правила: <a href="#p1_core_rules" class="layer-remark">5 базовых правил → Part 1</a></p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Полные правила: <a href="#p1_core_rules" class="layer-remark">5 базовых правил → Part 1</a></p>
 
 
 </section>
@@ -86,7 +86,7 @@
 
 <a href="#p9_symptom_table">таблица симптомов</a><noscript><a href="#p9_symptom_table" class="term-marker-noscript-link">таблица симптомов</a></noscript>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — Глубокий слой (L2): таблица симптомов, дерево решений, тест-сценарии.</p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — Глубокий слой (L2): таблица симптомов, дерево решений, тест-сценарии.</p>
 
 
 </section>
@@ -95,16 +95,7 @@
 
 <h3>Таблица симптомов (L2)</h3>
 
-<div class="table-wrap">
-<table>
-<thead><tr><th>Вы уже знаете (L1)</th><th>L2 добавляет</th></tr></thead>
-<tbody>
-<tr><td>Симптомы: модель пишет за user, голос не соответствует</td><td>Диагностика: таблица симптомов → причина → решение</td></tr>
-<tr><td>Чек-лист: SP, Description, Examples, Greeting</td><td>Дерево решений: пошаговый алгоритм поиска проблемы</td></tr>
-<tr><td>Топ-5 проблем (краткий справочник)</td><td>6 тестовых сценариев + метрики успеха</td></tr>
-</tbody>
-</table>
-</div>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Обзор L2→L3 → <a href="#p4_l3_learning_path">Путь изучения L3</a></p>
 
 <div class="table-wrap">
 <table>
@@ -126,7 +117,7 @@
 </table>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Краткий обзор топ-5 проблем: <a href="#p9_top5_problems" class="layer-remark">Топ-5 проблем → Минимальный слой</a></p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Краткий обзор топ-5 проблем: <a href="#p9_top5_problems" class="layer-remark">Топ-5 проблем → Минимальный слой</a></p>
 
 
 </section>
@@ -177,7 +168,7 @@
 </table>
 </div>
 
-<a href="#p9_12b_issues" class="layer-remark">Расширенный 12B-специфика → Экспертный слой<span class="remark-icon">→</span></a>
+<a href="#p9_12b_issues" class="layer-remark">Расширенный 12B-специфика → Экспертный слой<span class="remark-icon" aria-hidden="true">→</span></a>
 
 
 </section>
@@ -233,7 +224,7 @@
 </table>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — Экспертный слой (L3): 12B-специфичные проблемы, критерии перехода L2→L3, Pre-Deploy валидация.</p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — Экспертный слой (L3): 12B-специфичные проблемы, критерии перехода L2→L3, Pre-Deploy валидация.</p>
 
 
 </section>
@@ -242,16 +233,7 @@
 
 <h3>12B-специфичные проблемы (L3)</h3>
 
-<div class="table-wrap">
-<table>
-<thead><tr><th>Вы уже знаете (L2)</th><th>L3 добавляет</th></tr></thead>
-<tbody>
-<tr><td>Таблица симптомов + дерево решений</td><td>12B-специфичные проблемы и их решения</td></tr>
-<tr><td>6 тестовых сценариев</td><td>Критерии перехода L2→L3: когда добавлять GHOST/CoT</td></tr>
-<tr><td>Метрики успеха (6 критериев)</td><td>Pre-Deploy валидация: Quick Check (5) + Full Check (14)</td></tr>
-</tbody>
-</table>
-</div>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Обзор L2→L3 → <a href="#p4_l3_learning_path">Путь изучения L3</a></p>
 
 <p>12B модели имеют ограничения, требующие особого подхода.</p>
 
@@ -332,6 +314,9 @@
 <h3>Пред-деплой валидация</h3>
 
 <h4>Quick Check (5 пунктов — обязательно)</h4>
+
+<p>Базовая версия → <a href="#p9_basic_checklist">Чек-лист диагностики</a></p>
+
 <div class="table-wrap">
 <table>
 <thead><tr><th>#</th><th>Проверка</th><th>Ожидаемый результат</th></tr></thead>
@@ -347,15 +332,11 @@
 
 <details class="interactive">
 <summary>📝 Full Check (14 пунктов — рекомендуется для L3)</summary>
+<p>Пункты 1–5: см. <a href="#p9_pre_deploy">Quick Check</a> выше.</p>
 <div class="table-wrap">
 <table>
 <thead><tr><th>#</th><th>Проверка</th><th>Ожидаемый результат</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>PP = 0.0</td><td>Presence Penalty = 0.0</td></tr>
-<tr><td>2</td><td>Voice только в Examples</td><td>0 стилистических директив в Description</td></tr>
-<tr><td>3</td><td>Price в каждом якоре</td><td>Все якоря имеют T→A→P</td></tr>
-<tr><td>4</td><td>Format Lock</td><td>Одна система разметки</td></tr>
-<tr><td>5</td><td>Anti-godmoding</td><td>2 строки в SP</td></tr>
 <tr><td>6</td><td>CORE DIRECTIVES</td><td>Все 5 (L2) или 7 (L3) директив присутствуют</td></tr>
 <tr><td>7</td><td>SPATIAL LOCK</td><td>Директива #3 в CORE DIRECTIVES</td></tr>
 <tr><td>8</td><td>Директивы на английском</td><td>SP directives in English, RP content in card language</td></tr>
