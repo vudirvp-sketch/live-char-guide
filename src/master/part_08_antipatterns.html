@@ -73,31 +73,22 @@
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Якорь без физической цены</p>
-<p><strong>Причина:</strong> Неверное понимание формата якоря</p>
-<p><strong>Решение:</strong> Каждый важный якорь = <span class="term-marker" data-tooltip-ref="#p2_anchor_rules" data-target-layer="1" data-tooltip-summary="Формат якоря: Триггер → Действие → Цена, цена обязательна">Триггер → Действие → <strong>Цена</strong></span><noscript><a href="#p2_anchor_rules" class="term-marker-noscript-link">Триггер → Действие → Цена</a></noscript></p>
-<div class="problem-block">
-<p><strong>❌ Неправильно:</strong> "Когда стресс → ходит из угла в угол"</p>
-</div>
-<div class="solution-block">
-<p><strong>✅ Правильно:</strong> "Когда стресс → ходит из угла в угол → головная боль к вечеру"</p>
-</div>
+<p><strong>Решение:</strong> <a href="#p2_anchor_rules">Формат якоря: Триггер → Действие → Цена</a></p>
 </div>
 </section>
 <section data-layer="l2" data-section="p8_ap3_voice_in_description">
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
-<p><strong>Причина:</strong> Непонимание иерархии влияния на голос</p>
-<p><strong>Решение:</strong> <span class="term-marker" data-tooltip-ref="#p3_voice_isolation" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">Правило голоса</span>: Description = только факты и наблюдаемые характеристики.</p>
-<p>📌 Канонический пример → <a href="#p3_influence_hierarchy">p3_influence_hierarchy</a></p>
+<p><strong>Решение:</strong> <a href="#p3_voice_isolation">Правило голоса</a>: Description = только факты. Голос → Examples/Greeting.</p>
 </div>
 </section>
 <section data-layer="l2" data-section="p8_ap4_ghost_in_sp">
 <div class="antipattern-card">
-<h3>AP-4: GHOST в System Prompt</h3>
-<p><strong>Симптом:</strong> Психология (SPINE, GHOST) в SP</p>
+<h3>AP-4: Психология в SP</h3>
+<p><strong>Симптом:</strong> Психологический анализ (SPINE, на L3 — GHOST) помещён в System Prompt</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
-<p><strong>Решение:</strong> SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект))/<span class="term-marker" data-tooltip-ref="#p4_ghost" data-target-layer="3" data-tooltip-summary="Событие из прошлого, сформировавшее FLAW и LIE. Доступно на Экспертном слое">GHOST</span><noscript><a href="#p4_ghost" class="term-marker-noscript-link">GHOST</a></noscript> = только в Description. SP = только инструкции и запреты. <span class="layer-remark">GHOST → Экспертный слой. На L2: проверьте, что SPINE (WANT/NEED/FLAW) не попадает в SP.</span></p>
+<p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты.</p>
 <div class="callout warn">
 <p><strong>⚠️ Предупреждение:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
 </div>
@@ -105,13 +96,9 @@
 </section>
 <section data-layer="l2" data-section="p8_ap5_reppen_high">
 <div class="antipattern-card">
-<h3>AP-5: RepPen > 1.10 (Высокий штраф повторений)</h3>
+<h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
-<p><strong>Причина:</strong> Попытка бороться с повторами через параметр</p>
-<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Высокий RepPen убивает голос. Подробные рекомендуемые значения — <span class="term-marker" data-tooltip-ref="#p7_sampling_params" data-target-layer="2" data-tooltip-summary="Параметры генерации: Presence Penalty, RepPen, Top P, Min P">параметры сэмплинга</span><noscript><a href="#p7_sampling_params" class="term-marker-noscript-link">параметры сэмплинга</a></noscript>.</p>
-<div class="callout important">
-<p><strong>📌 Важно:</strong> RepPen 1.0-1.05 для 12B, 1.05-1.10 для 32B+. Никогда > 1.10 для персонажей.</p>
-</div>
+<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Рекомендуемые значения → <a href="#p7_sampling_params">параметры сэмплинга</a>.</p>
 </div>
 </section>
 <section data-layer="l2" data-section="p8_ap6_no_anti_godmoding">
@@ -134,15 +121,9 @@
 </section>
 <section data-layer="l2" data-section="p8_ap7_presence_penalty">
 <div class="antipattern-card">
-<h3>AP-7: Presence Penalty > 0 (Штраф за присутствие)</h3>
+<h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
-<p><strong>Причина:</strong> Использование параметров для chat для roleplay</p>
-<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Подробное обоснование — <span class="term-marker" data-tooltip-ref="#p7_sampling_params" data-target-layer="2" data-tooltip-summary="Параметры генерации: Presence Penalty, RepPen, Top P, Min P">параметры сэмплинга</span><noscript><a href="#p7_sampling_params" class="term-marker-noscript-link">параметры сэмплинга</a></noscript>.</p>
-<div class="callout warn">
-<p><strong>⚠️ Предупреждение:</strong> Presence Penalty > 0 заставляет модель избегать повторения тем — убивает характерные паттерны речи персонажа.</p>
-</div>
-
-<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Следующие анти-паттерны (AP-8–AP-14) — только для Экспертного слоя (L3). Они касаются GHOST, LIE, CoT и XML — инструментов, которые добавляются на L3.</p>
+<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Обоснование → <a href="#p7_sampling_params">параметры сэмплинга</a>.</p>
 </div>
 </section>
 <section data-layer="l2" data-section="p8_ap15_basic">
@@ -154,7 +135,7 @@
 <div class="callout important">
 <p><strong>📌 Важно:</strong> 0 экстремумов = забываемый персонаж. 1-2 = запоминающийся. 3+ = inconsistent.</p>
 </div>
-<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Золотое правило профиля OCEAN → <a data-layer-switch="2#p5_ocean_poles" class="layer-remark">Part 5: Полюса OCEAN</a></p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Золотое правило профиля OCEAN → <a data-layer-switch="2#p5_ocean_basics" class="layer-remark">Part 5: OCEAN</a></p>
 </div>
 
 <a data-layer-switch="3#p8_ap8_ghost_no_anchors" class="layer-remark">Расширенный AP-8–AP-14 → Экспертный слой<span class="remark-icon" aria-hidden="true">→</span></a>
@@ -179,6 +160,8 @@
            + "Когда обнаруживает ложь повторно → хлопает дверью → уходит в другую комнату"</code></pre>
 </div>
 </div>
+
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Анти-паттерны проверены. Протестируйте карточку → <a href="#p9_symptom_table">Диагностика (Part 9)</a></p>
 
 </section>
 <section data-layer="l3" data-section="p8_ap8_ghost_no_anchors">
