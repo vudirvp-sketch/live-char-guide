@@ -49,8 +49,8 @@
   };
 
   // Pentagon geometry
-  const PENTAGON_SIZE = 200; // viewBox size
-  const PENTAGON_CENTER = PENTAGON_SIZE / 2;
+  const PENTAGON_SIZE = 340; // viewBox size — enlarged for label clipping fix (was 200)
+  const PENTAGON_CENTER = PENTAGON_SIZE / 2; // 170
   const PENTAGON_RADIUS = 80;
 
   // State thresholds (M1: 3 states)
@@ -498,6 +498,10 @@
       </div>
     `;
 
+    // Hide static fallback when widget takes over
+    var staticFallback = document.getElementById('ocean-static');
+    if (staticFallback) staticFallback.style.display = 'none';
+
     // Bind vertex click events
     const pentagonEl = container.querySelector('#ocean-pentagon');
     if (pentagonEl) {
@@ -574,6 +578,10 @@
         </div>
       </div>
     `;
+
+    // Hide static fallback when widget takes over
+    var staticFallback = document.getElementById('ocean-static');
+    if (staticFallback) staticFallback.style.display = 'none';
 
     // Update extremum & forecast sections
     updateExtremum(container, oceanData, mbtiData, thresholds);
@@ -783,9 +791,50 @@
           showHighlightNotification('Рекомендованные значения MBTI подсвечены на слайдерах');
         }
       });
-      m2EventSubscribed = true;
       console.log('[OCEAN] Subscribed to mbti:ocean-apply (M2+)');
     }
+    // M2+: enneagram:ocean-suggest — accept suggested OCEAN values from Enneagram Builder
+    if (window.EventBus) {
+      window.EventBus.on('enneagram:ocean-suggest', function(data) {
+        if (!data) return;
+        TRAIT_IDS.forEach(function(trait) {
+          if (data[trait] !== undefined) {
+            oceanProfile[trait] = data[trait];
+          }
+        });
+        // Re-render the active widget
+        var container = document.getElementById('ocean-embed');
+        if (container) {
+          var pentagonEl = container.querySelector('#ocean-pentagon');
+          if (pentagonEl) {
+            if (currentWidgetLevel >= 2) {
+              pentagonEl.innerHTML = buildM2PentagonSVG();
+            } else {
+              pentagonEl.innerHTML = buildPentagonSVG();
+            }
+          }
+          // Update slider values if M2+
+          if (currentWidgetLevel >= 2) {
+            TRAIT_IDS.forEach(function(trait) {
+              var slider = container.querySelector('.ocean-slider-input[data-trait="' + trait + '"]');
+              if (slider) slider.value = oceanProfile[trait];
+              var valueEl = container.querySelector('[data-value-trait="' + trait + '"]');
+              if (valueEl) valueEl.textContent = oceanProfile[trait];
+            });
+            // Update extremum & forecast
+            var oceanData = oceanDataCache;
+            var mbtiData = mbtiDataCache;
+            var thresholds = oceanData?.extremum_thresholds || { low: 30, high: 70 };
+            updateExtremum(container, oceanData, mbtiData, thresholds);
+            updateForecast(container, oceanData, mbtiData, thresholds);
+          }
+        }
+        debounceEmit();
+        console.log('[OCEAN] Applied enneagram:ocean-suggest values');
+      });
+      console.log('[OCEAN] Subscribed to enneagram:ocean-suggest (M2+)');
+    }
+    m2EventSubscribed = true;
   }
 
   function setupM3EventSubscriptions() {

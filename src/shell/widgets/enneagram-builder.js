@@ -221,7 +221,7 @@
       var title = typeInfo ? ('Тип ' + typeId + ': ' + typeInfo.name) : ('Тип ' + typeId);
       points += '<g class="enneagram-ring-point' + (isSelected ? ' selected' : '') + '" data-type="' + typeId + '" tabindex="0" role="button" aria-label="' + title + '">';
       points += '<circle cx="' + pos.x + '" cy="' + pos.y + '" r="' + (isSelected ? 14 : 12) + '" fill="' + (isSelected ? 'var(--accent)' : 'var(--bg-elevated)') + '" stroke="' + (isSelected ? 'var(--accent)' : 'var(--border)') + '" stroke-width="2" />';
-      points += '<text x="' + pos.x + '" y="' + pos.y + '">' + typeId + '</text>';
+      points += '<text x="' + pos.x + '" y="' + pos.y + '" text-anchor="middle" dominant-baseline="central">' + typeId + '</text>';
       points += '</g>';
     });
 
@@ -798,16 +798,17 @@
         var oceanDefaults = getOceanDefaults(selectedTypeId);
         if (!oceanDefaults) return;
 
-        // Emit event suggestion — does NOT auto-fill OCEAN widget per sovereignty §0.1
+        // Emit suggestion event — does NOT auto-fill OCEAN widget per sovereignty §0.1
         if (window.EventBus && window.GuideEvents) {
-          window.EventBus.emit(window.GuideEvents.OCEAN_UPDATED, {
+          window.EventBus.emit('enneagram:ocean-suggest', {
             O: oceanDefaults.O,
             C: oceanDefaults.C,
             E: oceanDefaults.E,
             A: oceanDefaults.A,
-            N: oceanDefaults.N
+            N: oceanDefaults.N,
+            source: 'enneagram-builder'
           });
-          console.log('[EnneagramBuilder] Emitted ocean:updated suggestion for type ' + selectedTypeId);
+          console.log('[EnneagramBuilder] Emitted enneagram:ocean-suggest suggestion for type ' + selectedTypeId);
         }
 
         oceanSuggestBtn.textContent = '✓ Предложение отправлено';
