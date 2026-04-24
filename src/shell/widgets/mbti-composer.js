@@ -369,9 +369,11 @@
   function buildModeToggle() {
     var gridActive = currentMode === 'grid' ? ' active' : '';
     var sliderActive = currentMode === 'sliders' ? ' active' : '';
-    return '<div class="mbti-mode-toggle">' +
-      '<button class="mbti-mode-btn' + gridActive + '" data-mode="grid" type="button">\u0417\u043D\u0430\u044E \u0441\u0432\u043E\u0439 \u0442\u0438\u043F</button>' +
-      '<button class="mbti-mode-btn' + sliderActive + '" data-mode="sliders" type="button">\u041F\u043E\u0434\u043E\u0431\u0440\u0430\u0442\u044C \u0442\u0438\u043F</button>' +
+    var gridSelected = currentMode === 'grid' ? 'true' : 'false';
+    var sliderSelected = currentMode === 'sliders' ? 'true' : 'false';
+    return '<div class="mbti-mode-toggle" role="tablist">' +
+      '<button class="mbti-mode-btn' + gridActive + '" data-mode="grid" type="button" role="tab" aria-selected="' + gridSelected + '" aria-controls="mbti-tabpanel-grid" id="mbti-tab-grid">\u0417\u043D\u0430\u044E \u0441\u0432\u043E\u0439 \u0442\u0438\u043F</button>' +
+      '<button class="mbti-mode-btn' + sliderActive + '" data-mode="sliders" type="button" role="tab" aria-selected="' + sliderSelected + '" aria-controls="mbti-tabpanel-sliders" id="mbti-tab-sliders">\u041F\u043E\u0434\u043E\u0431\u0440\u0430\u0442\u044C \u0442\u0438\u043F</button>' +
     '</div>';
   }
 
@@ -472,7 +474,7 @@
           '<span class="mbti-level-badge">' + badge + '</span>' +
         '</div>' +
         buildModeToggle() +
-        '<div id="mbti-mode-content">' + modeContent + '</div>' +
+        '<div id="mbti-mode-content" role="tabpanel" aria-labelledby="mbti-tab-' + currentMode + '">' + modeContent + '</div>' +
         '<div id="mbti-result">' + resultHtml + '</div>' +
         '<small style="display:block;margin-top:0.5em;color:var(--text-muted);font-size:0.7em;">MBTI v' + version + '</small>' +
       '</div>';
@@ -495,7 +497,7 @@
         '<span class="mbti-level-badge">' + badge + '</span>' +
       '</div>' +
       buildModeToggle() +
-      '<div id="mbti-mode-content">' + modeContent + '</div>' +
+      '<div id="mbti-mode-content" role="tabpanel" aria-labelledby="mbti-tab-' + currentMode + '">' + modeContent + '</div>' +
       '<div id="mbti-result">' + resultHtml + '</div>' +
       '<small style="display:block;margin-top:0.5em;color:var(--text-muted);font-size:0.7em;">MBTI v' + version + '</small>';
 
@@ -889,10 +891,10 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(autoInit, 800);
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 800));
     });
   } else {
-    setTimeout(autoInit, 800);
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 800));
   }
 
 })();

@@ -374,6 +374,16 @@
     "part": 8,
     "topic": ""
   },
+  "p8_ap15_basic": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
+  "p8_ap16_nested_anchors": {
+    "layer": "l2",
+    "part": 8,
+    "topic": ""
+  },
   "p8_ap8_ghost_no_anchors": {
     "layer": "l3",
     "part": 8,
@@ -409,18 +419,8 @@
     "part": 8,
     "topic": ""
   },
-  "p8_ap15_basic": {
-    "layer": "l2",
-    "part": 8,
-    "topic": ""
-  },
   "p8_ap15_extended": {
     "layer": "l3",
-    "part": 8,
-    "topic": ""
-  },
-  "p8_ap16_nested_anchors": {
-    "layer": "l2",
     "part": 8,
     "topic": ""
   },
@@ -489,6 +489,11 @@
     "part": 10,
     "topic": "Полные примеры карточек"
   },
+  "p10_omnis_l1_card": {
+    "layer": "l1",
+    "part": 10,
+    "topic": ""
+  },
   "p10_elena_l2": {
     "layer": "l2",
     "part": 10,
@@ -506,11 +511,6 @@
   },
   "p10_walter_l2": {
     "layer": "l2",
-    "part": 10,
-    "topic": ""
-  },
-  "p10_omnis_l1_card": {
-    "layer": "l1",
     "part": 10,
     "topic": ""
   },

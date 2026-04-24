@@ -132,6 +132,25 @@
         };
       });
       return info;
+    },
+
+    /**
+     * Execute a function when the page is fully loaded.
+     * Uses requestAnimationFrame for smooth initialization.
+     * Replaces staggered setTimeout delays in widget initialization.
+     * 
+     * @param {Function} fn - Function to execute when ready
+     */
+    whenReady(fn) {
+      if (typeof fn !== 'function') {
+        console.warn('[EventBus] whenReady: non-function argument');
+        return;
+      }
+      if (document.readyState === 'complete') {
+        requestAnimationFrame(fn);
+      } else {
+        window.addEventListener('load', function() { requestAnimationFrame(fn); });
+      }
     }
   };
 

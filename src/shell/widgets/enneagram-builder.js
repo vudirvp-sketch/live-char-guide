@@ -36,34 +36,34 @@
 
   // Enneagram ring positions: 9 points on a circle
   // Traditional order clockwise from top: 9, 1, 2, 3, 4, 5, 6, 7, 8
-  var ENNEAGRAM_ORDER = [9, 1, 2, 3, 4, 5, 6, 7, 8];
-  var RING_RADIUS = 80;
-  var RING_CENTER = 100;
-  var RING_SIZE = 200;
+  const ENNEAGRAM_ORDER = [9, 1, 2, 3, 4, 5, 6, 7, 8];
+  const RING_RADIUS = 80;
+  const RING_CENTER = 100;
+  const RING_SIZE = 200;
 
   // Enneagram connection lines (traditional hex + triangle)
   // Hex: 1↔4↔2↔8↔5↔7↔1
-  var HEX_PATH = [1, 4, 2, 8, 5, 7, 1];
+  const HEX_PATH = [1, 4, 2, 8, 5, 7, 1];
   // Triangle: 3↔6↔9↔3
-  var TRIANGLE_PATH = [3, 6, 9, 3];
+  const TRIANGLE_PATH = [3, 6, 9, 3];
 
   // Integration (growth) and Disintegration (stress) directions
-  var GROWTH_LINES = {
+  const GROWTH_LINES = {
     1: 7, 2: 4, 3: 6, 4: 1, 5: 8, 6: 9, 7: 5, 8: 2, 9: 3
   };
-  var STRESS_LINES = {
+  const STRESS_LINES = {
     1: 4, 2: 8, 3: 9, 4: 2, 5: 7, 6: 3, 7: 1, 8: 5, 9: 6
   };
 
   // M1 visible tabs
-  var M1_TABS = [
+  const M1_TABS = [
     { id: 'enneatype', label: 'Эннеатип' },
     { id: 'spine', label: 'SPINE & FLAW' },
     { id: 'export', label: 'Экспорт' }
   ];
 
   // M2+ tabs (5 total)
-  var M2_TABS = [
+  const M2_TABS = [
     { id: 'enneatype', label: 'Эннеатип' },
     { id: 'ocean', label: 'OCEAN' },
     { id: 'spine', label: 'SPINE & FLAW' },
@@ -72,25 +72,25 @@
   ];
 
   // OCEAN trait metadata — provided by WidgetUtils
-  var OCEAN_TRAITS = window.WidgetUtils.OCEAN_TRAITS;
-  var OCEAN_NAMES = window.WidgetUtils.OCEAN_NAMES;
+  const OCEAN_TRAITS = window.WidgetUtils.OCEAN_TRAITS;
+  const OCEAN_NAMES = window.WidgetUtils.OCEAN_NAMES;
 
   // Data caches
-  var enneagramDataCache = null;
-  var oceanDataCache = null;
+  let enneagramDataCache = null;
+  let oceanDataCache = null;
 
   // State
-  var selectedTypeId = null;
-  var currentWidgetLevel = 1;
-  var confirmedType = null;
-  var currentTab = 'enneatype';
-  var exportFormat = 'markdown';
-  var showAllAnchors = true; // FLAW anchor filter toggle (default: show all)
-  var currentOceanProfile = { O: 50, C: 50, E: 50, A: 50, N: 50 };
-  var oceanEventSubscribed = false; // Track if we subscribed to avoid duplicates
-  var mbtiEventSubscribed = false; // M3: track mbti:selected subscription
-  var conflictWarnings = []; // M3: current OCEAN×Enneagram conflicts
-  var lastMbtiSelected = null; // M3: last selected MBTI type for live hints
+  let selectedTypeId = null;
+  let currentWidgetLevel = 1;
+  let confirmedType = null;
+  let currentTab = 'enneatype';
+  let exportFormat = 'markdown';
+  let showAllAnchors = true; // FLAW anchor filter toggle (default: show all)
+  let currentOceanProfile = { O: 50, C: 50, E: 50, A: 50, N: 50 };
+  let oceanEventSubscribed = false; // Track if we subscribed to avoid duplicates
+  let mbtiEventSubscribed = false; // M3: track mbti:selected subscription
+  let conflictWarnings = []; // M3: current OCEAN×Enneagram conflicts
+  let lastMbtiSelected = null; // M3: last selected MBTI type for live hints
 
   // ============================================================================
   // DATA LOADING
@@ -243,13 +243,13 @@
 
     tabs.forEach(function(tab) {
       var isActive = currentTab === tab.id;
-      tabButtons += '<button class="enneagram-tab' + (isActive ? ' active' : '') + '" data-tab="' + tab.id + '" type="button">' + tab.label + '</button>';
-      tabContents += '<div class="enneagram-tab-content' + (isActive ? ' active' : '') + '" id="enneagram-tab-' + tab.id + '">';
+      tabButtons += '<button class="enneagram-tab' + (isActive ? ' active' : '') + '" data-tab="' + tab.id + '" type="button" role="tab" aria-selected="' + (isActive ? 'true' : 'false') + '" aria-controls="enneagram-tabpanel-' + tab.id + '">' + tab.label + '</button>';
+      tabContents += '<div class="enneagram-tab-content' + (isActive ? ' active' : '') + '" id="enneagram-tabpanel-' + tab.id + '" role="tabpanel" aria-labelledby="enneagram-tab-' + tab.id + '">';
       tabContents += buildTabContent(tab.id);
       tabContents += '</div>';
     });
 
-    return '<div class="enneagram-tabs">' + tabButtons + '</div>' + tabContents;
+    return '<div class="enneagram-tabs" role="tablist">' + tabButtons + '</div>' + tabContents;
   }
 
   function buildTabContent(tabId) {
@@ -743,6 +743,29 @@
       });
     });
 
+    // Arrow key navigation for tabs
+    var tabs = container.querySelectorAll('.enneagram-tab');
+    if (tabs.length > 0) {
+      tabs.forEach(function(tab, index) {
+        tab.addEventListener('keydown', function(e) {
+          var tabList = Array.from(tabs);
+          var currentIdx = tabList.indexOf(e.target);
+          var newIdx = -1;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            newIdx = (currentIdx + 1) % tabList.length;
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            newIdx = (currentIdx - 1 + tabList.length) % tabList.length;
+          }
+          if (newIdx >= 0) {
+            tabList[newIdx].focus();
+            tabList[newIdx].click();
+          }
+        });
+      });
+    }
+
     // Ring point selection
     var ringContainer = container.querySelector('#enneagram-ring');
     if (ringContainer) {
@@ -1029,10 +1052,10 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(autoInit, 700);
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 700));
     });
   } else {
-    setTimeout(autoInit, 700);
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 700));
   }
 
 })();

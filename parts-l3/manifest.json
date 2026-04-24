@@ -127,6 +127,8 @@
         "p8_ap5_reppen_high",
         "p8_ap6_no_anti_godmoding",
         "p8_ap7_presence_penalty",
+        "p8_ap15_basic",
+        "p8_ap16_nested_anchors",
         "p8_ap8_ghost_no_anchors",
         "p8_ap9_spine_broken",
         "p8_ap10_cot_overload",
@@ -134,9 +136,7 @@
         "p8_ap12_xml_malformed",
         "p8_ap13_lorebook_conflict",
         "p8_ap14_context_violation",
-        "p8_ap15_basic",
-        "p8_ap15_extended",
-        "p8_ap16_nested_anchors"
+        "p8_ap15_extended"
       ]
     },
     {
@@ -162,11 +162,11 @@
       "title": "Полные примеры карточек",
       "anchors": [
         "p10_elena_l1",
+        "p10_omnis_l1_card",
         "p10_elena_l2",
         "p10_geralt_l2",
         "p10_edward_l2",
         "p10_walter_l2",
-        "p10_omnis_l1_card",
         "p10_omnis_l2_card",
         "p10_omnis_l3_card",
         "p10_vysherblenny_l3"

@@ -815,6 +815,31 @@
       ]
     },
     {
+      "term": "SP (MBTI temperament)",
+      "abbreviation": "SP",
+      "aliases": [
+        "SP (MBTI)",
+        "Sensing-Perceiving",
+        "S·P",
+        "Исследователи (MBTI)"
+      ],
+      "definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения.",
+      "prohibited": [],
+      "applicable_layers": [
+        2,
+        3
+      ],
+      "layer_context": {
+        "2": "В таблице темпераментов SP = Sensing-Perceiving, не System Prompt",
+        "3": "При анализе кросс-типов уточняйте, какой SP имеется в виду"
+      },
+      "anchor_id": "layer-2-term-sp-mbti",
+      "cross_refs": [
+        "#p5_mbti_basics",
+        "#p1_core_rules"
+      ]
+    },
+    {
       "term": "Immersion Boundary (Иммерсионная граница)",
       "abbreviation": null,
       "aliases": [
@@ -833,7 +858,7 @@
       },
       "anchor_id": "layer-3-term-immersion-boundary",
       "cross_refs": [
-        "#p7_immersion_boundary"
+        "#p7_ooc_protection"
       ]
     },
     {

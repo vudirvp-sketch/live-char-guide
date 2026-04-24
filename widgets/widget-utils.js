@@ -145,6 +145,28 @@
     return suggestions;
   }
 
+  // ── JSON Structure Validation (fix 6.5) ──
+
+  /**
+   * Validate that a JSON data object has all required keys.
+   * @param {Object|null} data - Parsed JSON data
+   * @param {string[]} requiredKeys - Keys that must exist
+   * @param {string} context - Widget name for logging
+   * @returns {boolean} true if valid
+   */
+  function validateData(data, requiredKeys, context) {
+    if (!data) {
+      console.warn('[' + context + '] Data is null');
+      return false;
+    }
+    var missing = requiredKeys.filter(function(k) { return !(k in data); });
+    if (missing.length > 0) {
+      console.warn('[' + context + '] Missing keys:', missing.join(', '));
+      return false;
+    }
+    return true;
+  }
+
   // ── Export ──
 
   window.WidgetUtils = {
@@ -156,6 +178,7 @@
     escapeHtml,
     fallbackCopy,
     fetchJson,
+    validateData,
     checkOceanEnneagramConflicts,
     checkMbtiEnneagramCompatibility,
     getEnneagramSuggestionsFromTraits
