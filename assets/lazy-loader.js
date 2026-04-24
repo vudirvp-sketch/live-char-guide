@@ -56,32 +56,6 @@
   let lastVisibleSection = null; // IMP-46: scroll preservation
 
   // ============================================================================
-  // WIDGET DATA CACHE (Stage 1.5: JSON fetch instead of hardcode)
-  // ============================================================================
-
-  const widgetDataCache = {
-    ocean: null,
-    enneagram: null,
-    mbti: null
-  };
-
-  async function fetchWidgetData(type) {
-    if (widgetDataCache[type]) return widgetDataCache[type];
-    const url = `data/${type}.json`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      widgetDataCache[type] = data;
-      console.log(`[WidgetData] Loaded ${type} from ${url}`);
-      return data;
-    } catch (e) {
-      console.warn(`[WidgetData] Failed to fetch ${url}:`, e.message);
-      return null;
-    }
-  }
-
-  // ============================================================================
   // ANCHOR REDIRECT MAP (§0.18: v5.12 → v6 backward compatibility)
   // ============================================================================
 
@@ -2109,11 +2083,6 @@
     bindEvents();
     initLayerToggle();
     
-    // Pre-fetch widget data for faster panel display
-    fetchWidgetData('ocean');
-    fetchWidgetData('enneagram');
-    fetchWidgetData('mbti');
-
     console.log('[LazyLoader] Ready (v' + CONFIG.VERSION + ')');
   }
 

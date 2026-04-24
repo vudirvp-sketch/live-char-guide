@@ -35,28 +35,11 @@
   // CONSTANTS
   // ============================================================================
 
-  const TRAIT_IDS = ['O', 'C', 'E', 'A', 'N'];
-  const TRAIT_NAMES = {
-    'O': 'Открытость',
-    'C': 'Добросовестность',
-    'E': 'Экстраверсия',
-    'A': 'Доброжелательность',
-    'N': 'Нейротизм'
-  };
-  const TRAIT_LABELS_LOW = {
-    'O': 'Практичный',
-    'C': 'Спонтанный',
-    'E': 'Интроверт',
-    'A': 'Конкурентный',
-    'N': 'Стабильный'
-  };
-  const TRAIT_LABELS_HIGH = {
-    'O': 'Любопытный',
-    'C': 'Организованный',
-    'E': 'Экстраверт',
-    'A': 'Кооперативный',
-    'N': 'Реактивный'
-  };
+  // OCEAN constants now provided by WidgetUtils (loaded before this file)
+  var TRAIT_IDS = window.WidgetUtils.OCEAN_TRAITS;
+  var TRAIT_NAMES = window.WidgetUtils.OCEAN_NAMES;
+  var TRAIT_LABELS_LOW = window.WidgetUtils.OCEAN_LABELS_LOW;
+  var TRAIT_LABELS_HIGH = window.WidgetUtils.OCEAN_LABELS_HIGH;
 
   // Comfort zone source labels for tooltips
   const COMFORT_SOURCE_LABELS = {
@@ -114,66 +97,14 @@
   // UTILITY
   // ============================================================================
 
-  function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
+  // escapeHtml provided by WidgetUtils
 
   // ============================================================================
   // DATA LOADING
   // ============================================================================
 
-  async function fetchOceanData() {
-    if (oceanDataCache) return oceanDataCache;
-    const url = 'data/ocean.json';
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      oceanDataCache = data;
-      console.log(`[OCEAN] Loaded data v${data.version || '?'} from ${url}`);
-      return data;
-    } catch (e) {
-      console.warn(`[OCEAN] Failed to fetch ${url}:`, e.message);
-      return null;
-    }
-  }
-
-  async function fetchMbtiData() {
-    if (mbtiDataCache) return mbtiDataCache;
-    const url = 'data/mbti.json';
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      mbtiDataCache = data;
-      console.log(`[OCEAN] Loaded MBTI data v${data.version || '?'} from ${url}`);
-      return data;
-    } catch (e) {
-      console.warn(`[OCEAN] Failed to fetch ${url}:`, e.message);
-      return null;
-    }
-  }
-
-  // M3: Fetch enneagram data for ocean_defaults
-  async function fetchEnneagramDataForM3() {
-    if (enneagramDataCache) return enneagramDataCache;
-    try {
-      const response = await fetch('data/enneagram.json');
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      const data = await response.json();
-      enneagramDataCache = data;
-      return data;
-    } catch (e) {
-      console.warn('[OCEAN] Failed to fetch enneagram data:', e.message);
-      return null;
-    }
-  }
+  // Data loading delegated to WidgetUtils.fetchJson (with internal cache)
+  // Local caches are still populated for direct access within this widget
 
   // ============================================================================
   // STATE HELPERS (M1)
@@ -225,8 +156,8 @@
       if (profile[id] <= thresholds.low) extremePoles.push(id + '_low');
     });
 
-    // Look up ocean.json.enneagram_suggestions for these poles
-    var suggestions = oceanData.enneagram_suggestions || {};
+    // Compute enneagram suggestions from traits[].enneagram_correlation (A1 migration: enneagram_suggestions removed from ocean.json)
+    var suggestions = window.WidgetUtils.getEnneagramSuggestionsFromTraits(oceanData) || {};
     var typeCounts = {};
     extremePoles.forEach(function(pole) {
       var types = suggestions[pole] || [];
@@ -299,22 +230,14 @@
   function copyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).catch(function() {
-        fallbackCopy(text);
+        window.WidgetUtils.fallbackCopy(text);
       });
     } else {
-      fallbackCopy(text);
+      window.WidgetUtils.fallbackCopy(text);
     }
   }
 
-  function fallbackCopy(text) {
-    var textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.className = 'clipboard-fallback-textarea';
-    document.body.appendChild(textarea);
-    textarea.select();
-    try { document.execCommand('copy'); } catch (_e) { /* ignore */ }
-    document.body.removeChild(textarea);
-  }
+  // fallbackCopy provided by WidgetUtils
 
   // ============================================================================
   // M3 HELPERS
@@ -396,7 +319,7 @@
 
     var notif = document.createElement('div');
     notif.className = 'ocean-highlight-notification';
-    notif.innerHTML = escapeHtml(message);
+    notif.innerHTML = window.WidgetUtils.escapeHtml(message);
     notifContainer.innerHTML = '';
     notifContainer.appendChild(notif);
 
@@ -874,7 +797,8 @@
       window.EventBus.on(window.GuideEvents.ENNEAGRAM_SELECTED, function(detail) {
         if (!detail) return;
         var typeId = detail.typeId;
-        fetchEnneagramDataForM3().then(function(enneagramData) {
+        window.WidgetUtils.fetchJson('data/enneagram.json').then(function(enneagramData) {
+          enneagramDataCache = enneagramData;
           if (!enneagramData || !enneagramData.ocean_defaults) return;
           var defaults = enneagramData.ocean_defaults[String(typeId)];
           if (!defaults) return;
@@ -920,7 +844,8 @@
     currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
 
     // Fetch data
-    const oceanData = await fetchOceanData();
+    oceanDataCache = await window.WidgetUtils.fetchJson('data/ocean.json');
+    const oceanData = oceanDataCache;
     if (!oceanData) {
       container.innerHTML = '<div class="ocean-widget"><p class="ocean-error">OCEAN данные недоступны</p></div>';
       return;
@@ -929,7 +854,8 @@
     // Fetch MBTI data (optional, for M2+ forecast)
     let mbtiData = null;
     if (currentWidgetLevel >= 2) {
-      mbtiData = await fetchMbtiData();
+      mbtiDataCache = await window.WidgetUtils.fetchJson('data/mbti.json');
+      mbtiData = mbtiDataCache;
     }
 
     // Build widget based on level

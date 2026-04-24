@@ -204,12 +204,22 @@
     "part": 5,
     "topic": ""
   },
-  "p5_enneagram_to_spine": {
+  "p5_enneagram_builder": {
     "layer": "l2",
     "part": 5,
     "topic": ""
   },
   "p5_mbti_basics": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_mbti_composer": {
+    "layer": "l2",
+    "part": 5,
+    "topic": ""
+  },
+  "p5_cross_instrument_map": {
     "layer": "l2",
     "part": 5,
     "topic": ""

@@ -67,8 +67,10 @@
         "p5_ocean_poles",
         "p5_ocean_validator",
         "p5_enneagram_basics",
-        "p5_enneagram_to_spine",
+        "p5_enneagram_builder",
         "p5_mbti_basics",
+        "p5_mbti_composer",
+        "p5_cross_instrument_map",
         "p5_l2_quickstart"
       ]
     },
