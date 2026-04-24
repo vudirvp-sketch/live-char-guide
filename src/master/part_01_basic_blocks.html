@@ -43,14 +43,14 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>#</th><th>Правило</th><th>Почему важно</th></tr>
+<tr><th>#</th><th>Правило</th><th>Почему важно</th><th>Pattern Matcher</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>1</strong></td><td><strong>OCEAN: 1-2 экстремальных полюса</strong> — значения &lt;30 или &gt;70</td><td>Больше 2 — внутренняя противоречивость. 0 — персонаж забываемый.</td></tr>
-<tr><td><strong>2</strong></td><td><strong>Цена обязательна</strong> — каждый FLAW (Дефект)/GHOST якорь имеет физическую реакцию</td><td>Без цены модель не показывает уязвимость.</td></tr>
-<tr><td><strong>3</strong></td><td><strong>Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</strong></td><td>Модель игнорирует инструкции о голосе, но копирует паттерны из Examples.</td></tr>
-<tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong>: GHOST (событие прошлого персонажа) — только в Description, никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td></tr>
-<tr><td><strong>5</strong></td><td><strong>Формат якоря: Триггер → Действие → Цена</strong></td><td>Каждый элемент обязательный. Пропуск — потеря качества.</td></tr>
+<tr><td><strong>1</strong></td><td><strong>OCEAN: 1-2 экстремальных полюса</strong> — значения &lt;30 или &gt;70</td><td>Больше 2 — внутренняя противоречивость. 0 — персонаж забываемый.</td><td>3+ противоречивых полюса → модель «осциллирует» между паттернами</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Цена обязательна</strong> — каждый FLAW (Дефект)/GHOST якорь имеет физическую реакцию</td><td>Без цены модель не показывает уязвимость.</td><td>Без Price якорь = инструкция без паттерна → ≤60% следование директивам</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</strong></td><td>Модель игнорирует инструкции о голосе, но копирует паттерны из Examples.</td><td>Description = логика (~0% следование голосу на 12B); Examples = паттерн (~85% следование директивам)</td></tr>
+<tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong>: GHOST (событие прошлого персонажа) — только в Description, никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td><td>SP = инструкции (модель игнорирует); Description = логика поведения</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Формат якоря: Триггер → Действие → Цена</strong></td><td>Каждый элемент обязательный. Пропуск — потеря качества.</td><td>Каждый элемент = паттерн для копирования. Пропущенный элемент = слепая зона</td></tr>
 </tbody>
 </table>
 </div>
@@ -60,19 +60,7 @@
 Подробнее об инструментах углубления: <a href="#p1_next_steps" class="layer-remark">Что дальше? →</a>
 </p>
 
-<p>Все 5 правил вытекают из принципа Pattern Matcher:</p>
-<div class="table-wrap">
-<table>
-<thead><tr><th>Правило</th><th>Почему (Pattern Matcher)</th></tr></thead>
-<tbody>
-<tr><td>1. OCEAN: 1–2 полюса</td><td>3+ противоречивых полюса → модель «осциллирует» между паттернами</td></tr>
-<tr><td>2. Price обязателен</td><td>Без Price якорь = инструкция без паттерна → ≤60% следование директивам</td></tr>
-<tr><td>3. Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</td><td>Description = логика (~0% следование голосу на 12B); Examples = паттерн (~85% следование директивам)</td></tr>
-<tr><td>4. GHOST только в Description</td><td>SP = инструкции (модель игнорирует); Description = логика поведения</td></tr>
-<tr><td>5. Якорь: T→A→P</td><td>Каждый элемент = паттерн для копирования. Пропущенный элемент = слепая зона</td></tr>
-</tbody>
-</table>
-</div>
+
 
 </section>
 
@@ -112,7 +100,7 @@
 <section data-layer="l1" data-section="p1_token_budget">
 <h3>Токен-бюджет</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Ниже — две таблицы: конвейер сборки (пошаговая разбивка) и лимиты по блокам (минимум / стандарт / максимум). Обе таблицы содержат только L1-блоки — инструменты более глубоких слоёв описаны в <a href="#p1_next_layers">Следующих шагах</a>.</p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Ниже — две таблицы: конвейер сборки (пошаговая разбивка) и лимиты по блокам (минимум / стандарт / максимум). Обе таблицы содержат только L1-блоки — инструменты более глубоких слоёв описаны в <a href="#p1_next_steps">Следующих шагах</a>.</p>
 
 <h4>Конвейер сборки</h4>
 
@@ -160,7 +148,7 @@
 </div>
 
 <div class="callout important">
-<p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет своего слоя. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) доступны на более глубоких слоях — см. <a href="#p1_next_layers">Следующие шаги</a>.</p>
+<p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет своего слоя. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) доступны на более глубоких слоях — см. <a href="#p1_next_steps">Следующие шаги</a>.</p>
 </div>
 
 <h4>Калькулятор токен-бюджета</h4>
@@ -208,33 +196,7 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 
 <p>Следуйте этим шагам для создания минимальной карточки. Подробности токен-бюджета — в <a href="#p1_token_budget">Токен-бюджет</a>.</p>
 
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">System Prompt</div>
-<div class="inf-step-desc">Базовые инструкции и запреты</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">Description</div>
-<div class="inf-step-desc">Факты + 3-5 якорей</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">Examples</div>
-<div class="inf-step-desc">2 примера: нейтральный + стресс</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">Greeting (Первое сообщение)</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">05</div>
-<div class="inf-step-label">Проверка</div>
-<div class="inf-step-desc">Чек-лист из 5 правил</div>
-</div>
-</div>
+<p>Порядок сборки: <a href="#p1_assembly_pipeline">Конвейер L1 →</a></p>
 
 <h4>Шаблон System Prompt (L1)</h4>
 <p>→ Полный шаблон SP: <span class="term-marker" data-tooltip-ref="#p7_system_prompt" data-target-layer="2" data-tooltip-summary="Техническая реализация: SP, AN, Lorebook и форматирование. Доступно на Глубоком слое.">Техническая реализация</span><noscript><a href="#p7_system_prompt" class="term-marker-noscript-link">Техническая реализация</a></noscript></p>
@@ -261,7 +223,7 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 <ul>
 <li>☐ 3-5 якорей с ценой</li>
 <li>☐ 2 примера с &lt;START&gt;</li>
-<li>☐ Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description <span class="term-marker" data-tooltip-ref="#p1_core_rules" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">правило голоса</span></li>
+<li>☐ Голос только в Examples/Greeting (<a href="#p1_core_rules">правило #3</a>)</li>
 </ul>
 
 <p>Посмотрите полный пример готовой карточки → <a href="#p10_elena_l1">Елена (L1, ~440 токенов)</a> | Мини-пример → <a href="#p1_mini_example">Омнис-Зета (L1)</a></p>
@@ -307,7 +269,7 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 </div>
 
 <div class="callout important">
-<p><strong>📌 Важно:</strong> Если голос персонажа появляется в SP или Description — карточка не работает корректно на 12B моделях. Голос задаётся ТОЛЬКО через Examples и Greeting. <span class="term-marker" data-tooltip-ref="#p1_core_rules" data-target-layer="1" data-tooltip-summary="5 базовых правил, включая правило голоса">5 базовых правил</span></p>
+<p><strong>📌 Важно:</strong> Если голос в SP/Description — карточка не работает на 12B. <a href="#p1_core_rules">Правило #3</a></p>
 </div>
 
 <p class="layer-remark">
@@ -371,6 +333,22 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 <p><strong>💡 Совет:</strong> Все инструменты опциональны. L1-карточка уже работает — углубление добавляет глубину, но не является обязательным.</p>
 </div>
 
+<h4>Глубокий слой (L2)</h4>
+<p>SPINE — фреймворк из 3 базовых элементов (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. <span class="term-marker" data-tooltip-ref="#p7_core_directives" data-target-layer="2" data-tooltip-summary="Единая система из 5 директив для System Prompt на Слое 2">CORE DIRECTIVES</span> — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
+<ul>
+<li>Критерии перехода: карточка стабильна на L1, 2 Examples дают узнаваемый голос, 3–5 якорей покрывают основные ситуации</li>
+<li>Время создания: ~30 минут (вместо ~15 на L1)</li>
+<li>Токены: 800–1500 (вместо 400–800 на L1)</li>
+</ul>
+
+<h4>Экспертный слой (L3)</h4>
+<p>Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), Chain of Thought (CoT), XML-структуру Description и расширенные анти-паттерны.</p>
+<ul>
+<li>Критерии перехода: SPINE консистентен, 3 Examples показывают разные эмоции, FLAW-linked якоря работают, используете 32B+ или API модель</li>
+<li>Время создания: ~60 минут</li>
+<li>Токены: 1500+</li>
+</ul>
+
 </section>
 
 <section data-layer="l1" data-section="p1_top3_problems">
@@ -400,7 +378,7 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально. Стилистика реплик не совпадает с Description.</p>
-<p><strong>Причина:</strong> Голос помещён в Description вместо Examples. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description (<span class="term-marker" data-tooltip-ref="#p1_core_rules" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">правило голоса</span>).</p>
+<p><strong>Причина:</strong> Голос помещён в Description вместо Examples — <a href="#p1_core_rules">правило #3</a>. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
 <p><strong>Исправление:</strong></p>
 <ol>
 <li>Удалите все стилистические инструкции из Description («говорит коротко», «использует сарказм»)</li>
@@ -440,55 +418,20 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 
 </section>
 
-<section data-layer="l1" data-section="p1_next_layers">
-<h3>Следующие шаги</h3>
 
-<p>Вы освоили минимальный слой L1 — этого достаточно для создания рабочей карточки. Если вы хотите углубить персонажа, два следующих слоя добавляют новые инструменты.</p>
-
-<h4>Глубокий слой (L2)</h4>
-
-<p>SPINE — фреймворк из 3 базовых элементов (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)), который связывает мотивацию персонажа с его поведением. Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. <span class="term-marker" data-tooltip-ref="#p7_core_directives" data-target-layer="2" data-tooltip-summary="Единая система из 5 директив для System Prompt на Слое 2">CORE DIRECTIVES</span> — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
-
-<ul>
-<li>Критерии перехода: карточка стабильна на L1, 2 Examples дают узнаваемый голос, 3–5 якорей покрывают основные ситуации</li>
-<li>Время создания: ~30 минут (вместо ~15 на L1)</li>
-<li>Токены: 800–1500 (вместо 400–800 на L1)</li>
-</ul>
-
-<p class="layer-remark">
-<span class="remark-icon">→</span>
-Подробнее: <a href="#p1_next_steps" class="layer-remark">Что дальше? Инструменты для углубления →</a>
-</p>
-
-<h4>Экспертный слой (L3)</h4>
-
-<p>Экспертный слой добавляет LIE (ложную установку) и GHOST (событие прошлого), Chain of Thought (CoT), XML-структуру Description и расширенные анти-паттерны.</p>
-
-<ul>
-<li>Критерии перехода: SPINE консистентен, 3 Examples показывают разные эмоции, FLAW-linked якоря работают, используете 32B+ или API модель</li>
-<li>Время создания: ~60 минут</li>
-<li>Токены: 1500+</li>
-</ul>
-
-<p class="layer-remark">
-<span class="remark-icon">→</span>
-Подробнее: <a href="#p1_next_steps" class="layer-remark">Что дальше? Инструменты для углубления →</a>
-</p>
-</section>
 
 <section data-layer="l1" data-section="p1_conclusion">
-<h3>Заключение</h3>
+<h3>Готовы к практике?</h3>
 
-<p>Вы изучили базовые принципы создания карточки персонажа на минимальном слое L1. Ключевые правила, которые нельзя нарушать, собраны в <a href="#p1_core_rules">5 базовых правилах</a> — запомните их, прежде чем двигаться дальше.</p>
-
-<p>Что вы теперь умеете на L1:</p>
+<p>Перед переходом к Part 2 убедитесь, что можете ответить на эти вопросы:</p>
 <ul>
-<li>Собрать рабочую карточку за 15 минут, заполнив 4 базовых блока (SP, Description, Examples, Greeting)</li>
-<li>Написать 3–5 якорей в формате Триггер → Действие → Цена с обязательной физической ценой</li>
-<li>Разместить голос персонажа только в Examples и Greeting, оставив Description для фактов и якорей (<span class="term-marker" data-tooltip-ref="#p1_core_rules" data-target-layer="1" data-tooltip-summary="Голос персонажа задаётся только через Examples и Greeting, никогда в SP/Description">правило голоса</span>)</li>
-<li>Соблюдать токен-бюджет: 400–800 токенов для L1 карточки</li>
+<li>Какие 4 блока обязательны в карточке и зачем каждый?</li>
+<li>Где задаётся голос персонажа, а где — факты?</li>
+<li>Почему якорь без цены не работает?</li>
+<li>Сколько токенов допустимо для L1-карточки?</li>
 </ul>
+<p>Если все ответы ясны — переходите к <a href="#p2_basic_anchors">Якорям (Part 2)</a>. Если сомневаетесь — перечитайте <a href="#p1_core_rules">5 базовых правил</a>.</p>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Готовы углубить персонажа? <a href="#p1_next_layers" class="layer-remark">Следующие шаги →</a></p>
+<p class="layer-remark"><span class="remark-icon">→</span> Готовы углубить персонажа? <a href="#p1_next_steps" class="layer-remark">Следующие шаги →</a></p>
 <p class="layer-remark"><span class="remark-icon">→</span> Если персонаж «не работает» — <a href="#p9_basic_checklist" class="layer-remark">Диагностика → Part 9</a></p>
 </section>
