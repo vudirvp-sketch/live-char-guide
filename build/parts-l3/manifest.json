@@ -19,7 +19,6 @@
         "p1_mini_example",
         "p1_next_steps",
         "p1_top3_problems",
-        "p1_next_layers",
         "p1_conclusion"
       ]
     },
@@ -58,10 +57,10 @@
         "p4_want",
         "p4_need",
         "p4_flaw",
+        "p4_spine_mapping",
         "p4_l3_learning_path",
         "p4_lie",
         "p4_ghost",
-        "p4_spine_mapping",
         "p4_ghost_layers",
         "p4_spine_check",
         "p4_l3_spine_full"
@@ -72,12 +71,8 @@
       "title": "Психологический инструментарий",
       "anchors": [
         "p5_ocean_basics",
-        "p5_ocean_poles",
-        "p5_ocean_validator",
         "p5_enneagram_basics",
-        "p5_enneagram_builder",
         "p5_mbti_basics",
-        "p5_mbti_composer",
         "p5_cross_instrument_map",
         "p5_l2_quickstart",
         "p5_enneagram_wings",
@@ -102,23 +97,22 @@
       "anchors": [
         "p7_system_prompt",
         "p7_core_directives",
-        "p7_core_directives_l3",
         "p7_tone_frame",
         "p7_format_lock",
-        "p7_ooc_protection",
-        "p7_immersion_boundary",
         "p7_authors_note",
-        "p7_authors_note_l3",
         "p7_structured_inject",
-        "p7_sp_template_l3",
         "p7_sampling_params",
         "p7_lorebook",
         "p7_lorebook_mechanics",
+        "p7_model_checklist",
+        "p7_core_directives_l3",
+        "p7_ooc_protection",
+        "p7_authors_note_l3",
+        "p7_sp_template_l3",
         "p7_lorebook_advanced",
         "p7_xml_tags",
         "p7_api_blocks",
-        "p7_4k_fallback",
-        "p7_model_checklist"
+        "p7_4k_fallback"
       ]
     },
     {

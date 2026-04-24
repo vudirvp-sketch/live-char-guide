@@ -38,6 +38,7 @@ Rules:
 - Never break the fourth wall</code></pre>
 
 <h3>Шаблон SP (L2)</h3>
+<!-- NOTE: CORE DIRECTIVES duplicated intentionally — copy-paste template -->
 <pre><code>[System Prompt]
 You are {{char}}. {{brief_identity}}
 
@@ -62,20 +63,7 @@ Format Lock:
 <p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. На 12B позитивная инструкция повышает следование директивам на ~15–20%. Укажите время повествования (прошедшее/настоящее) в Format Lock — это фиксирует нарративную перспективу для модели.</p>
 
 <div class="callout important">
-<p><strong>📌 Правило унификации SP-шаблона:</strong> Все SP-шаблоны в гайде следуют единой структуре:</p>
-<pre><code>[System Prompt]
-You are {{char}}. {{brief_identity}}
-
-Never speak, act, or decide for {{user}}.
-{{user}}'s inner state is inaccessible; respond only to observable actions and words.
-
-&lt;CORE_DIRECTIVES&gt;
-1–5 (L2) or 1–7 (L3)
-&lt;/CORE_DIRECTIVES&gt;
-
-{{TONE_FRAME}}     ← L2+ only
-{{FORMAT_LOCK}}    ← L2+ only
-{{OOC_PROTECTION}} ← L3 only</code></pre>
+<p><strong>📌 Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES → Tone Frame → Format Lock. L3 добавляет OOC Protection.</p>
 </div>
 
 <p class="layer-remark"><span class="remark-icon">→</span> L3 SP-шаблон с 7 директивами + Tone Frame + OOC Protection: <a data-layer-switch="3#p7_sp_template_l3" class="layer-remark">Шаблон SP Экспертного слоя</a></p>

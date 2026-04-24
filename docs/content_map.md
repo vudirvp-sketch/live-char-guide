@@ -34,12 +34,12 @@ This document is the **single source of truth** for "where does concept X live."
 | Сравнение слоёв | Part 1 | p1_layer_comparison | l1 | Reference | L1 vs L2 vs L3 comparison table. SPINE row: L2 = WANT/NEED/FLAW, L3 = +LIE/GHOST |
 | L1 Quickstart | Part 1 | p1_l1_quickstart | l1 | Template | 5-minute template → minimal card. Ссылка на p10_elena_l1 вместо отдельной секции p1_elena_minimal. Чек-лист минимальный (3 пункта) |
 | Топ-3 критичные ошибки | Part 1 | p1_top3_problems | l1 | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_top5_problems |
-| Следующие шаги | Part 1 | p1_next_layers | l1 | Bridge (consolidated) | Консолидация 7 bridge секций (p1_l2_bridge, p1_l3_bridge, p4-p8_l1_bridge). 2 subsections: L2 и L3 |
+| Следующие шаги | Part 1 | p1_next_steps | l1 | Merged | ← MERGED p1_next_layers into p1_next_steps. L2/L3 критерии как подсекции |
 | Токен-бюджет | Part 1 | p1_token_budget | l1 | Reference | Мерж p1_token_pipeline + p1_block_budget. 2 subsections: конвейер сборки + лимиты по блокам. Только L1 блоки. Без подтаблицы AN/Lorebook/CoT |
 | Конвейер сборки L1-карточки | Part 1 | p1_assembly_pipeline | l1 | Pipeline | Конвейер сборки L1-карточки |
 | Мини-пример L1-карточки | Part 1 | p1_mini_example | l1 | Example | Мини-пример L1-карточки (Омнис-Зета) |
 | Что дальше? | Part 1 | p1_next_steps | l1 | Navigation | Что дальше? Инструменты для углубления |
-| Заключение | Part 1 | p1_conclusion | l1 | Summary | Резюме L1 + ссылка на p1_core_rules (без дублирования правил) + ссылка на p1_next_layers. Без L2/L3 capabilities |
+| Заключение | Part 1 | p1_conclusion | l1 | Readiness checklist | Готовы к практике? Вопросы для самопроверки + ссылки |
 
 ### Part 2: Behavioral Anchors (Якоря)
 
@@ -88,12 +88,11 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
 | OCEAN (Big Five) | Part 5 | p5_ocean_basics | l2 | Tool+Interactive | Pentagon widget + золотое правило `.callout.important` («Только 1–2 экстремальных полюса»). План указывал p5_ocean_poles, но реализация помещает правило в p5_ocean_basics для лучшего педагогического потока |
-| OCEAN poles | Part 5 | p5_ocean_poles | l2 | Rules | Контекстно-зависимое количество полюсов + 5 шагов OCEAN→карточка |
-| OCEAN validator | Part 5 | p5_ocean_validator | l2 | Interactive | Слайдеры + polygon + suggestions |
+| OCEAN poles + validator | Part 5 | p5_ocean_basics | l2 | Merged | ← MERGED into p5_ocean_basics. Контекстные лимиты + пентагон виджет |
 | Enneagram basics | Part 5 | p5_enneagram_basics | l2 | Tool+Interactive | 9 типов, SVG widget |
-| Enneagram interactive | Part 5 | p5_enneagram_widget | l2 | Interactive | SVG diagram + detail panel |
-| Enneagram → SPINE | Part 5 | p5_enneagram_to_spine | l2 | Protocol | Страх→LIE (L3 ref), Желание→WANT, Стресс→FLAW, Рост→NEED |
-| MBTI | Part 5 | p5_mbti_basics | l2 | Tool+Interactive | 16 типов, filter grid |
+| Enneagram interactive | Part 5 | p5_enneagram_basics | l2 | Merged | ← MERGED into p5_enneagram_basics (enneagram-embed) |
+| Enneagram → SPINE | Part 5 | p5_cross_instrument_map | l2 | Protocol | Страх→LIE (L3 ref), Желание→WANT, Стресс→FLAW, Рост→NEED. Renamed from p5_enneagram_to_spine |
+| MBTI | Part 5 | p5_mbti_basics | l2 | Tool+Interactive | 16 типов, filter grid. ← MERGED p5_mbti_composer (mbti-embed) |
 | L2 Quickstart | Part 5 | p5_l2_quickstart | l2 | Checklist | L2 Quickstart (moved from Part 4, now after OCEAN/Enneagram) |
 | Enneagram wings | Part 5 | p5_enneagram_wings | l3 | Full treatment | Выбор крыла |
 | OCEAN×Enneagram matrix | Part 5 | p5_cross_matrix | l3 | Interactive | Корреляция 5×9 |
@@ -127,7 +126,7 @@ This document is the **single source of truth** for "where does concept X live."
 | CORE DIRECTIVES | Part 7 | p7_core_directives | l2 | System | Unified 7-directive system in English. L2 = directives 1–5, L3 = all 7. NEW |
 | Tone Frame | Part 7 | p7_tone_frame | l2 | Technique | Dual-function SP element (~25-30 tokens). NEW |
 | OOC Protection | Part 7 | p7_ooc_protection | l3 | Technique | SP block for OOC reaction (~15 tokens). NEW |
-| Immersion Boundary | Part 7 | p7_immersion_boundary | l3 | Technique | Advanced OOC protection: deny meta-reality. NEW |
+| Immersion Boundary | Part 7 | p7_ooc_protection | l3 | Merged | ← MERGED into p7_ooc_protection as subsection. NEW |
 | L3 CORE DIRECTIVES Extension | Part 7 | p7_core_directives_l3 | l3 | System | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER). Cross-ref to p7_core_directives for 1–5. NEW |
 | Model Type Checklist | Part 7 | p7_model_checklist | l2 | Reference | Summary table by model type (12B/32B+/API). NEW |
 | L3 SP Template | Part 7 | p7_sp_template_l3 | l3 | Template | Full L3 System Prompt template with all 7 directives. NEW |
@@ -183,7 +182,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Эдвард Элрик (L2) | Part 10 | p10_edward_l2 | l2 | Complete card | Кристально ясный СПИН. WANT/NEED/FLAW только. Новый раздел |
 | Выщербленный (L3) | Part 10 | p10_vysherblenny_l3 | l3 | Complete card | GHOST Layers + CoT + XML (~1500+ токенов) |
 | Уолтер Уайт (L2) | Part 10 | p10_walter_l2 | l2 | Complete card | Realistic modern character, WANT/NEED/FLAW. NEW |
-| Voice Warning (L2) | Part 10 | p10_l2_voice_warning | l2 | Rule | Общее предупреждение о голосе для L2 примеров |
+| Voice Warning (L2) | Part 10 | p10_elena_l2 | l2 | Merged | ← MERGED into p10_elena_l2 as callout. Was p10_l2_voice_warning |
 | Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Тех-Жрец, Адептус Механикус) |
 | Омнис-Зета 7-Квин (L2) | Part 10 | p10_omnis_l2_card | l2 | Complete card | L2 карточка Омнис-Зета 7-Квин (SPINE + OCEAN + FLAW-linked anchors) |
 | Омнис-Зета 7-Квин (L3) | Part 10 | p10_omnis_l3_card | l3 | Complete card | L3 карточка Омнис-Зета 7-Квин (GHOST Layers + CoT + XML) |
@@ -194,24 +193,24 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | L1 | L2 | L3 | Total |
 |------|----|----|-----|-------|
-| Part 1 (Basic Blocks) | 11 | 0 | 0 | 11 |
+| Part 1 (Basic Blocks) | 9 | 0 | 0 | 9 |
 | Part 2 (Anchors) | 3 | 3 | 1 | 7 |
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
 | Part 4 (SPINE) | 0 | 5 | 6 | 11 |
-| Part 5 (Psych Toolkit) | 0 | 8 | 2 | 10 |
-| Part 6 (CoT) | 0 | 0 | 6 | 6 |
-| Part 7 (Technical) | 0 | 10 | 9 | 19 |
+| Part 5 (Psych Toolkit) | 0 | 5 | 2 | 7 |
+| Part 6 (CoT) | 0 | 0 | 5 | 5 |
+| Part 7 (Technical) | 0 | 10 | 8 | 18 |
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
-| Part 10 (Examples) | 2 | 6 | 2 | 10 |
-| **Total** | **22** | **52** | **38** | **112** |
+| Part 10 (Examples) | 2 | 5 | 2 | 9 |
+| **Total** | **20** | **48** | **36** | **104** |
 
 **Cumulative (as reader sees it):**
-- **L1 sees: 22 sections** (Part 1 now includes p1_assembly_pipeline, p1_mini_example, p1_next_steps)
-- **L2 sees: 74 sections** (+52 to L1)
-- **L3 sees: 112 sections** (+38 to L2)
+- **L1 sees: 20 sections** (Part 1 has 9 L1 sections after p1_next_layers merged into p1_next_steps)
+- **L2 sees: 68 sections** (+48 to L1)
+- **L3 sees: 104 sections** (+36 to L2)
 
-**Note:** Part 7 counts updated in v2.2: L2 = 10, L3 = 9. Added p7_lorebook_mechanics (L2) and p7_lorebook_advanced (L3) per Lorebook Enhancement Plan v1.1.
+**Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 reduced from 6→5 (persona-synthesis moved to Part 5), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten).
 
 ---
 

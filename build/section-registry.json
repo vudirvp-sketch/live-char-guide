@@ -44,11 +44,6 @@
     "part": 1,
     "topic": ""
   },
-  "p1_next_layers": {
-    "layer": "l1",
-    "part": 1,
-    "topic": ""
-  },
   "p1_conclusion": {
     "layer": "l1",
     "part": 1,
@@ -149,6 +144,11 @@
     "part": 4,
     "topic": ""
   },
+  "p4_spine_mapping": {
+    "layer": "l2",
+    "part": 4,
+    "topic": ""
+  },
   "p4_l3_learning_path": {
     "layer": "l3",
     "part": 4,
@@ -161,11 +161,6 @@
   },
   "p4_ghost": {
     "layer": "l3",
-    "part": 4,
-    "topic": ""
-  },
-  "p4_spine_mapping": {
-    "layer": "l2",
     "part": 4,
     "topic": ""
   },
@@ -189,32 +184,12 @@
     "part": 5,
     "topic": "Психологический инструментарий"
   },
-  "p5_ocean_poles": {
-    "layer": "l2",
-    "part": 5,
-    "topic": ""
-  },
-  "p5_ocean_validator": {
-    "layer": "l2",
-    "part": 5,
-    "topic": ""
-  },
   "p5_enneagram_basics": {
     "layer": "l2",
     "part": 5,
     "topic": ""
   },
-  "p5_enneagram_builder": {
-    "layer": "l2",
-    "part": 5,
-    "topic": ""
-  },
   "p5_mbti_basics": {
-    "layer": "l2",
-    "part": 5,
-    "topic": ""
-  },
-  "p5_mbti_composer": {
     "layer": "l2",
     "part": 5,
     "topic": ""
@@ -279,11 +254,6 @@
     "part": 7,
     "topic": ""
   },
-  "p7_core_directives_l3": {
-    "layer": "l3",
-    "part": 7,
-    "topic": ""
-  },
   "p7_tone_frame": {
     "layer": "l2",
     "part": 7,
@@ -294,33 +264,13 @@
     "part": 7,
     "topic": ""
   },
-  "p7_ooc_protection": {
-    "layer": "l3",
-    "part": 7,
-    "topic": ""
-  },
-  "p7_immersion_boundary": {
-    "layer": "l3",
-    "part": 7,
-    "topic": ""
-  },
   "p7_authors_note": {
     "layer": "l2",
     "part": 7,
     "topic": ""
   },
-  "p7_authors_note_l3": {
-    "layer": "l3",
-    "part": 7,
-    "topic": ""
-  },
   "p7_structured_inject": {
     "layer": "l2",
-    "part": 7,
-    "topic": ""
-  },
-  "p7_sp_template_l3": {
-    "layer": "l3",
     "part": 7,
     "topic": ""
   },
@@ -336,6 +286,31 @@
   },
   "p7_lorebook_mechanics": {
     "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_model_checklist": {
+    "layer": "l2",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_core_directives_l3": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_ooc_protection": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_authors_note_l3": {
+    "layer": "l3",
+    "part": 7,
+    "topic": ""
+  },
+  "p7_sp_template_l3": {
+    "layer": "l3",
     "part": 7,
     "topic": ""
   },
@@ -356,11 +331,6 @@
   },
   "p7_4k_fallback": {
     "layer": "l3",
-    "part": 7,
-    "topic": ""
-  },
-  "p7_model_checklist": {
-    "layer": "l2",
     "part": 7,
     "topic": ""
   },

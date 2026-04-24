@@ -40,20 +40,7 @@
 </table>
 </div>
 
-<p class="layer-remark">
-<span class="remark-icon">→</span>
-Интерактивный инструмент: <a href="#p5_ocean_validator" class="layer-remark">OCEAN Pentagon + Validator</a>
-</p>
-
-
-</section>
-
-<section id="p5_ocean_poles" data-layer="l2" data-section="p5_ocean_poles">
-
-<h3>OCEAN: полюса и контекст</h3>
-
-<p>Количество экстремальных полюсов зависит от контекстного окна модели.</p>
-
+<h3>Контекстные лимиты полюсов</h3>
 <div class="table-wrap">
 <table>
 <thead>
@@ -67,24 +54,6 @@
 </tbody>
 </table>
 </div>
-
-<h4>5 шагов от OCEAN к карточке</h4>
-<ol>
-<li>Выберите экстремальные полюса (см. <a href="#p5_ocean_basics">золотое правило</a>)</li>
-<li>Проверьте поддержку FLAW</li>
-<li>Конвертируйте в якоря</li>
-<li>Напишите Examples с голосом</li>
-<li>Добавьте Enneagram нотацию</li>
-</ol>
-
-
-</section>
-
-<section id="p5_ocean_validator" data-layer="l2" data-section="p5_ocean_validator">
-
-<h3>OCEAN Validator</h3>
-
-<p>Интерактивный инструмент для проверки профиля персонажа.</p>
 
 <details class="interactive">
 <summary>OCEAN Interactive Pentagon</summary>
@@ -145,6 +114,10 @@
 </noscript>
 
 </details>
+
+<p class="layer-remark"><span class="remark-icon">→</span>
+Как применить OCEAN при сборке карточки → <a href="#p5_l2_quickstart">L2 Quickstart</a>
+</p>
 
 
 </section>
@@ -220,23 +193,13 @@
 
 </details>
 
-<p class="layer-remark">
-<span class="remark-icon">→</span>
-Интерактивный Enneagram Builder с SPINE-автозаполнением: <a href="#p5_enneagram_widget" class="layer-remark">Виджет Enneagram Builder</a>
-</p>
-
-
-</section>
-
-<section id="p5_enneagram_builder" data-layer="l2" data-section="p5_enneagram_builder">
-
-<h3>Enneagram Builder</h3>
-<p>Интерактивный инструмент для выбора типа Enneagram с автозаполнением SPINE.</p>
 <div id="enneagram-embed" class="enneagram-embed"></div>
+
 <p class="layer-remark">
 <span class="remark-icon">→</span>
 Подробнее о маппинге Enneagram→SPINE: <a href="#p5_cross_instrument_map" class="layer-remark">Связь инструментов</a>
 </p>
+
 
 </section>
 
@@ -278,20 +241,14 @@
 
 <p class="layer-remark"><em>(здесь SP = темперамент Keirsey (Sensing-Perceiving), не System Prompt)</em></p>
 
+<div id="mbti-embed" class="mbti-embed"></div>
+
 <div class="callout tip">
 <p><strong>💡 MBTI на L2 = справочный инструмент.</strong> Для создания карточки используйте OCEAN (полюса → якоря) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.</p>
 </div>
 
-<p class="layer-remark"><span class="remark-icon">→</span> Продолжение: Part 06 (Chain of Thought) → <a data-layer-switch="3#p6_cot_basics" class="layer-remark">L3</a></p>
+<p class="layer-remark"><span class="remark-icon">→</span> Следующие секции — L3: <a href="#p5_enneagram_wings">Enneagram Wings</a>, <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix</a>.</p>
 
-
-</section>
-
-<section id="p5_mbti_composer" data-layer="l2" data-section="p5_mbti_composer">
-
-<h3>MBTI Composer</h3>
-<p>Интерактивный инструмент для выбора MBTI-типа с подсказками связей.</p>
-<div id="mbti-embed" class="mbti-embed"></div>
 
 </section>
 
@@ -315,41 +272,14 @@
 </table>
 </div>
 
-<h4>Пример: Type 6w5 (Выщербленный)</h4>
-<pre><code>Enneagram Type 6: Лоялист
-Основное желание: Безопасность, поддержка
-Основной страх: Без поддержки, быть пустым
+<p class="layer-remark"><span class="remark-icon">→</span>
+Интерактивный выбор типа с автозаполнением SPINE → <a href="#p5_enneagram_basics">Enneagram Builder</a>
+</p>
 
-  ↓ Движение от желания к WANT
-WANT: Стать цельным — заполнить пустоты внутри
-
-  ↓ Направление стресса → Type 3 (обман, избегание)
-FLAW: Поглощает чужое прошлое, теряя своё
-
-  ↓ Направление роста → Type 9 (спокойствие, принятие)
-NEED: Принять утраты как часть себя
-
-  ↓ Основной страх → LIE
-LIE: "Если я поглощу достаточно — стану цельным"</code></pre>
-
-<p class="layer-remark"><span class="remark-icon">→</span> Полная карточка: <a href="#p10_vysherblenny_l3">Выщебленный L3</a></p>
-
-<h4>OCEAN ↔ MBTI</h4>
-<p>OCEAN полюса коррелируют с MBTI-осями. Виджет MBTI (M2+) показывает рекомендованные OCEAN-значения для выбранного типа.</p>
-<div class="table-wrap">
-<table>
-<thead><tr><th>MBTI ось</th><th>OCEAN корреляция</th></tr></thead>
-<tbody>
-<tr><td>E ↔ I</td><td>Экстраверсия (E): высокий E → Extraversion, низкий E → Introversion</td></tr>
-<tr><td>N ↔ S</td><td>Открытость (O): высокий O → Intuition, низкий O → Sensing</td></tr>
-<tr><td>T ↔ F</td><td>Доброжелательность (A): высокий A → Feeling, низкий A → Thinking</td></tr>
-<tr><td>J ↔ P</td><td>Добросовестность (C): высокий C → Judging, низкий C → Perceiving</td></tr>
-</tbody>
-</table>
-</div>
+<p>OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+) показывает рекомендованные OCEAN-значения для выбранного типа; OCEAN Insight (M2+) прогнозирует вероятные MBTI-типы на основе профиля.</p>
 
 <h4>Enneagram ↔ MBTI</h4>
-<p>Каждый Enneagram-тип имеет вероятные MBTI-типы (и наоборот). Виджеты показывают эти подсказки при M2+.</p>
+<p>Каждый Enneagram-тип имеет вероятные MBTI-типы (и наоборот). Enneagram Builder и MBTI Composer показывают эти подсказки при M2+.</p>
 
 
 </section>
