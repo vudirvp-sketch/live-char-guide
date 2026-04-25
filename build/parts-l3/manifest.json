@@ -14,11 +14,10 @@
         "p1_core_rules",
         "p1_layer_comparison",
         "p1_token_budget",
-        "p1_l1_quickstart",
         "p1_assembly_pipeline",
-        "p1_mini_example",
-        "p1_next_steps",
+        "p1_l1_quickstart",
         "p1_top3_problems",
+        "p1_next_steps",
         "p1_conclusion"
       ]
     },

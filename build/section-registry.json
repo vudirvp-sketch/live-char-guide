@@ -19,27 +19,22 @@
     "part": 1,
     "topic": ""
   },
-  "p1_l1_quickstart": {
-    "layer": "l1",
-    "part": 1,
-    "topic": ""
-  },
   "p1_assembly_pipeline": {
     "layer": "l1",
     "part": 1,
     "topic": ""
   },
-  "p1_mini_example": {
-    "layer": "l1",
-    "part": 1,
-    "topic": ""
-  },
-  "p1_next_steps": {
+  "p1_l1_quickstart": {
     "layer": "l1",
     "part": 1,
     "topic": ""
   },
   "p1_top3_problems": {
+    "layer": "l1",
+    "part": 1,
+    "topic": ""
+  },
+  "p1_next_steps": {
     "layer": "l1",
     "part": 1,
     "topic": ""

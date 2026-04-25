@@ -9,10 +9,10 @@
 
 <p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Но думать о ней нужно как о <strong>поведенческом движке</strong>: каждый элемент должен производить наблюдаемое действие, а не украшать описание. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
 
-<p>Вы на Глубоком слое (L2). Этот раздел — краткий обзор базовых блоков. Порядок чтения L2: ① <a href="#p2_flaw_anchors">FLAW-linked якоря</a> (Part 2) → ② <a href="#p3_examples_rules">Examples L2</a> (Part 3) → ③ <a href="#p4_spine_overview">SPINE</a> (Part 4) → ④ <a href="#p5_ocean_basics">OCEAN/Enneagram</a> (Part 5) → ⑤ <a href="#p5_l2_quickstart">L2 Quickstart</a> (Part 5).</p>
+<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые якоря (Part 2) → ② Голос и изоляция (Part 3). Для углублённого маршрута (Глубокий слой): <a data-layer-switch="2#p2_flaw_anchors">FLAW-linked якоря</a> → <a data-layer-switch="2#p3_examples_rules">Examples L2</a> → <a data-layer-switch="2#p4_spine_overview">SPINE</a> → <a data-layer-switch="2#p5_ocean_basics">OCEAN/Enneagram</a> → <a data-layer-switch="2#p5_l2_quickstart">L2 Quickstart</a></p>
 
 <div class="callout tip">
-<p><strong>💡 Хотите сразу к делу?</strong> Пошаговый конвейер сборки L2-карточки за 30 минут → <a href="#p5_l2_quickstart">L2 Quickstart</a>. Рекомендуется сначала прочитать Parts 2–5 для понимания инструментов.</p>
+<p><strong>💡 Хотите сразу к делу?</strong> Пошаговый конвейер сборки L1-карточки за 15 минут → <a href="#p1_l1_quickstart">L1 Quickstart</a>. Для сборки L2-карточки за 30 минут → <a data-layer-switch="2#p5_l2_quickstart" class="layer-remark">L2 Quickstart (Глубокий слой)</a></p>
 </div>
 
 <div class="table-wrap">
@@ -98,16 +98,12 @@
 <p><strong>💡 На L1 вы изучаете базовые блоки.</strong> SPINE, OCEAN, Enneagram и другие инструменты, указанные в столбцах L2/L3, доступны на более глубоких слоях. Эта таблица — обзор для планирования: вы видите, что добавляет каждый слой, но для начала вам достаточно L1.</p>
 </div>
 
-<div class="callout tip">
-<p><strong>💡 На L2</strong> вы уже имеете доступ к SPINE, OCEAN, Enneagram и CORE DIRECTIVES. Колонка L2 таблицы выше — ваш текущий уровень. Колонка L3 (CoT, LIE/GHOST, Immersion Boundary) доступна при переходе на Экспертный слой.</p>
-</div>
-
 </section>
 
 <section data-layer="l1" data-section="p1_token_budget">
 <h3>Токен-бюджет</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает бюджет для L2-карточки (SP + Description + Examples + Greeting). Дополнительные блоки (Tone Frame, Format Lock, AN, Lorebook) описаны в Part 7.</p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает бюджет для L1-карточки (SP + Description + Examples + Greeting). Дополнительные блоки (Tone Frame, Format Lock, AN, Lorebook) описаны в Part 7 на Глубоком слое.</p>
 
 <h4>Конвейер сборки</h4>
 
@@ -169,37 +165,37 @@
 <div class="token-calc-inputs">
 <div class="token-calc-row">
 <label class="token-calc-label">System Prompt</label>
-<input type="range" min="50" max="500" value="150" id="calc-sp" class="token-calc-range">
-<span class="token-calc-val" id="calc-sp-val">150</span>
+<input type="range" min="50" max="500" value="80" id="calc-sp" class="token-calc-range">
+<span class="token-calc-val" id="calc-sp-val">80</span>
 </div>
 <div class="token-calc-row">
 <label class="token-calc-label">Description</label>
-<input type="range" min="100" max="1000" value="400" id="calc-desc" class="token-calc-range">
-<span class="token-calc-val" id="calc-desc-val">400</span>
+<input type="range" min="100" max="1000" value="200" id="calc-desc" class="token-calc-range">
+<span class="token-calc-val" id="calc-desc-val">200</span>
 </div>
 <div class="token-calc-row">
 <label class="token-calc-label">Examples</label>
-<input type="range" min="100" max="800" value="300" id="calc-ex" class="token-calc-range">
-<span class="token-calc-val" id="calc-ex-val">300</span>
+<input type="range" min="100" max="800" value="90" id="calc-ex" class="token-calc-range">
+<span class="token-calc-val" id="calc-ex-val">90</span>
 </div>
 <div class="token-calc-row">
 <label class="token-calc-label">Якоря</label>
-<input type="range" min="0" max="400" value="100" id="calc-anc" class="token-calc-range">
-<span class="token-calc-val" id="calc-anc-val">100</span>
+<input type="range" min="0" max="400" value="50" id="calc-anc" class="token-calc-range">
+<span class="token-calc-val" id="calc-anc-val">50</span>
 </div>
 </div>
 <div class="token-calc-result">
-<span>Итого: <strong id="calc-total">950</strong> токенов</span>
-<span class="tag" id="calc-layer-tag">L2 (800–1500)</span>
+<span>Итого: <strong id="calc-total">420</strong> токенов</span>
+<span class="tag" id="calc-layer-tag">L1 (400–800)</span>
 </div>
 <noscript>
 <p class="callout tip">Для интерактивного калькулятора включите JavaScript.</p>
 </noscript>
 </div>
 
-<pre class="plain-copy">Калькулятор токенов (пример L2):
-SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
-Итого: 950 токенов → Рекомендуемый слой: L2 (800–1500 токенов)</pre>
+<pre class="plain-copy">Калькулятор токенов (пример L1):
+SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
+Итого: 420 токенов → Рекомендуемый слой: L1 (400–800 токенов)</pre>
 
 </section>
 
@@ -315,7 +311,7 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
 <p><strong>Причина:</strong> В System Prompt нет анти-годмодинга.</p>
-<p><strong>Исправление:</strong> <a href="#p7_system_prompt">Шаблон SP → Part 7</a> | <a href="#p8_ap6_no_anti_godmoding">AP-6: Нет анти-годмодинга → Part 8</a></p>
+<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» <span class="layer-remark">(Подробный разбор → <a data-layer-switch="2#p7_system_prompt" class="layer-remark">Шаблон SP → Part 7</a> | <a data-layer-switch="2#p8_ap6_no_anti_godmoding" class="layer-remark">AP-6 → Part 8</a> — Глубокий слой)</span></p>
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
@@ -354,7 +350,7 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 </div>
 
 <h4>Глубокий слой (L2)</h4>
-<p>SPINE — фреймворк мотивации персонажа (WANT/NEED/FLAW), который связывает внутренний конфликт с поведением через якоря. <a href="#p4_spine_overview">Полный разбор → Part 4</a> Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. <span class="term-marker" data-tooltip-ref="#p7_core_directives" data-target-layer="2" data-tooltip-summary="Единая система из 5 директив для System Prompt на Слое 2">CORE DIRECTIVES</span> — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
+<p>SPINE — фреймворк мотивации персонажа (WANT/NEED/FLAW), который связывает внутренний конфликт с поведением через якоря. <a data-layer-switch="2#p4_spine_overview" class="layer-remark">Полный разбор → Part 4</a> Якоря перестают быть случайным набором правил и получают причину. OCEAN (Big Five) — инструмент проверки внутренней консистентности. Enneagram — модель из 9 типов. <span class="term-marker" data-tooltip-ref="#p7_core_directives" data-target-layer="2" data-tooltip-summary="Единая система из 5 директив для System Prompt на Слое 2">CORE DIRECTIVES</span> — единая система из 5 директив для SP. Также: Author's Note, Lorebook, Format Lock, анти-паттерны.</p>
 <ul>
 <li>Критерии перехода: карточка стабильна на L1, 2 Examples дают узнаваемый голос, 3–5 якорей покрывают основные ситуации</li>
 <li>Время и токены: см. <a href="#p1_layer_comparison">сравнительную таблицу слоёв</a></li>
@@ -372,21 +368,24 @@ SP: 150 | Description: 400 | Examples: 300 | Anchors: 100
 <section data-layer="l1" data-section="p1_conclusion">
 <h3>Готовы к практике?</h3>
 <p>Перед переходом к Part 2 убедитесь, что можете ответить на эти вопросы:</p>
+
+<h4>Вопросы для самопроверки (L1):</h4>
 <ul>
 <li>Какие 4 блока обязательны в карточке и зачем каждый?</li>
-<li>Где задаётся голос персонажа, а где — факты?</li>
+<li>Где задаётся голос персонажа, а где — факты? (<a href="#p3_influence_hierarchy">Part 3</a>)</li>
 <li>Какой формат якоря и почему цена обязательна? (<a href="#p2_basic_anchors">Part 2</a>)</li>
 <li>Какой блок имеет 0% влияния на голос для 12B? (<a href="#p3_influence_hierarchy">Part 3</a>)</li>
 <li>Сколько якорей минимум нужно на L1? (<a href="#p2_anchor_rules">Part 2</a>)</li>
 <li>Что делать, если персонаж «не работает»? (<a href="#p9_basic_checklist">Part 9</a>)</li>
 </ul>
-<h4>Для Глубокого слоя (L2)</h4>
+
+<h4>Если планируете переход на Глубокий слой (L2):</h4>
 <ul>
 <li>Что такое FLAW-linked якорь и чем он отличается от базового?</li>
 <li>Как SPINE связывает якоря с мотивацией?</li>
 <li>Сколько Examples нужно на L2 и какого типа?</li>
 </ul>
-<p>Готовы углубить персонажа? → <a href="#p4_spine_overview">SPINE (Part 4)</a> | <a href="#p5_l2_quickstart">L2 Quickstart (Part 5)</a></p>
+<p>Эти темы раскрываются на Глубоком слое → <a data-layer-switch="2#p4_spine_overview" class="layer-remark">SPINE (Part 4)</a> | <a data-layer-switch="2#p5_l2_quickstart" class="layer-remark">L2 Quickstart (Part 5)</a></p>
 
-<p>Если все ответы ясны — переходите к <a href="#p2_basic_anchors">Поведенческим якорям (Part 2)</a>. Если сомневаетесь — перечитайте <a href="#p1_core_rules">4 базовых правила</a> или <a href="#p5_l2_quickstart">L2 Quickstart</a>.</p>
+<p>Если все ответы ясны — переходите к <a href="#p2_basic_anchors">Поведенческим якорям (Part 2)</a>. Если сомневаетесь — перечитайте <a href="#p1_core_rules">4 базовых правила</a>.</p>
 </section>
