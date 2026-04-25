@@ -67,10 +67,7 @@
 </ul>
 
 <div class="callout warn">
-<p><strong>⚠️ Предупреждение:</strong></p>
-<p><strong>❌ Плохо:</strong> "Он неуверенный и тревожный"</p>
-<p><strong>✅ Хорошо:</strong> "Ожидая результата, грызёт ногти и перечитывает сообщение трижды"</p>
-<p><em>Конкретные действия, не абстрактные прилагательные.</em></p>
+<p><strong>⚠️ Якоря и FLAW — конкретные действия, не прилагательные.</strong> «Он неуверенный» ≠ якорь. «Грызёт ногти и перечитывает сообщение трижды» = якорь. Подробнее → <a href="#p4_flaw">FLAW: поведение vs прилагательное</a></p>
 </div>
 
 <div class="callout warn">
@@ -112,19 +109,6 @@
 
 <p>Ниже — таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Обратите внимание: цена — всегда физическая реакция, наблюдаемая в той же сцене.</p>
 
-<div class="antipattern-card">
-<div class="problem-block">
-<h4>❌ Неправильный якорь</h4>
-<p>Когда кто-то лжёт → прищуривается → <strong>чувствует недоверие</strong></p>
-<p><em>Цена «чувствует недоверие» — внутреннее состояние, модель его не показывает.</em></p>
-</div>
-<div class="solution-block">
-<h4>✅ Правильный якорь</h4>
-<p>Когда кто-то лжёт → прищуривается, молчит → <strong>напряжение в челюсти</strong></p>
-<p><em>Физическая реакция, которую модель может воспроизвести в тексте.</em></p>
-</div>
-</div>
-
 <div class="table-wrap">
 <table>
 <thead>
@@ -163,7 +147,7 @@
 
 <p>Вы на Глубоком слое (L2). Порядок чтения: ① <a href="#p4_spine_overview">SPINE</a><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">SPINE</a></noscript> (Part 4) → ② <a href="#p5_ocean_basics">OCEAN</a><noscript><a href="#p5_ocean_basics" class="term-marker-noscript-link">OCEAN</a></noscript>/Enneagram (Part 5) → ③ <a href="#p7_system_prompt">Технические блоки</a> (Part 7) → ④ <a href="#p8_antipatterns_overview">Анти-паттерны</a> (Part 8).</p>
 
-<p><strong>FLAW-linked якорь</strong> — якорь, привязанный к внутреннему противоречию персонажа через SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)). <a href="#p4_spine_overview">Подробнее о SPINE</a><noscript><a href="#p4_spine_overview" class="term-marker-noscript-link">Подробнее о SPINE</a></noscript></p>
+<p><strong>FLAW-linked якорь</strong> — якорь, выведенный из FLAW (поведенческого недостатка персонажа). FLAW — конкретное саморазрушительное поведение, блокирующее истинную потребность (NEED). Пример: «Отталкивает людей сарказмом, когда сближается» — это FLAW; якорь «Когда искренняя забота → отшучивается → руки дрожат» — выведен из этого FLAW. <a href="#p4_spine_overview">Полный разбор SPINE → Part 4</a></p>
 
 <p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Правило FLAW: каждый FLAW должен иметь минимум один FLAW-linked якорь — <a href="#p4_flaw" class="layer-remark">Part 4: FLAW</a></p>
 
@@ -253,6 +237,8 @@
 <p><strong>💡 Совет:</strong> Каждый Example должен содержать минимум одну физическую реакцию (embodiment). Если персонаж только говорит — модель не научится телесности.</p>
 </div>
 
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>EMBODIMENT FIRST</strong> в System Prompt: <a href="#p7_core_directives" class="layer-remark">CORE DIRECTIVES #2 → Part 7</a></p>
+
 <p class="layer-remark">
 <span class="remark-icon" aria-hidden="true">→</span>
 CoT-якоря (якоря с внутренним процессом): <a data-layer-switch="3#p6_cot_anchors" class="layer-remark">Part 6: CoT-якоря → Экспертный слой</a>
@@ -273,7 +259,7 @@ CoT-якоря (якоря с внутренним процессом): <a data-
 <p><strong>✅ Среда через действие:</strong> «Геральт провёл пальцами по шершавой ткани гобелена — пыль. Давно никто не заходил.» — среда раскрывается через действие персонажа.</p>
 </div>
 
-<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Полная директива в SP: Part 7, <a href="#p7_core_directives" class="layer-remark">CORE DIRECTIVES</a></p>
+<p class="layer-remark"><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>ENVIRONMENTAL REACTIVITY</strong> в System Prompt: <a href="#p7_core_directives" class="layer-remark">CORE DIRECTIVES #4 → Part 7</a></p>
 
 
 </section>

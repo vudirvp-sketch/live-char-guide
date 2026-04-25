@@ -660,10 +660,10 @@
   function autoInit() {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(init, 800);
+        (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(init) : setTimeout(init, 800));
       });
     } else {
-      setTimeout(init, 800);
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(init) : setTimeout(init, 800));
     }
   }
 

@@ -37,7 +37,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Следующие шаги | Part 1 | p1_next_steps | l1 | Merged | ← MERGED p1_next_layers into p1_next_steps. L2/L3 критерии как подсекции |
 | Токен-бюджет | Part 1 | p1_token_budget | l1 | Reference | Мерж p1_token_pipeline + p1_block_budget. 2 subsections: конвейер сборки + лимиты по блокам. Только L1 блоки. Без подтаблицы AN/Lorebook/CoT |
 | Конвейер сборки L1-карточки | Part 1 | p1_assembly_pipeline | l1 | Pipeline | Конвейер сборки L1-карточки |
-| Мини-пример L1-карточки | Part 1 | p1_mini_example | l1 | Example | Мини-пример L1-карточки (Омнис-Зета) |
+| ~~Мини-пример L1-карточки~~ | Part 1 | ~~p1_mini_example~~ | ~~l1~~ | REMOVED | Удалён — дублировал p10_omnis_l1_card. Результат встроен в p1_assembly_pipeline (шаг 06) |
 | Что дальше? | Part 1 | p1_next_steps | l1 | Navigation | Что дальше? Инструменты для углубления |
 | Заключение | Part 1 | p1_conclusion | l1 | Readiness checklist | Готовы к практике? Вопросы для самопроверки + ссылки |
 

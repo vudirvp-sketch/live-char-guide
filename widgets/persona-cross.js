@@ -210,10 +210,10 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       // Wait a tick for lazy-loader to finish
-      setTimeout(autoInit, 500);
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
     });
   } else {
-    setTimeout(autoInit, 500);
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
   }
 
 })();
