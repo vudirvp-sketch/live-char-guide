@@ -223,7 +223,7 @@ async function buildShell() {
     }
   }
 
-  // 5. Copy assets (favicon, preview-card, etc.)
+  // 5. Copy assets (favicon, preview-card, fonts, etc.)
   if (existsSync(ASSETS_SRC)) {
     const assetFiles = await readdir(ASSETS_SRC);
     for (const file of assetFiles) {
@@ -233,6 +233,8 @@ async function buildShell() {
 
       if (s.isFile()) {
         await copyFile(srcPath, destPath);
+      } else if (s.isDirectory()) {
+        await copyDir(srcPath, destPath);
       }
     }
     log('INFO', `Copied ${assetFiles.length} assets → dist/assets/`);
