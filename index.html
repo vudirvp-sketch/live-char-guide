@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- Live Character Guide - Shell v6.0.0 -->
+<!-- Minimal shell that lazy-loads layer content -->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="livechar-version" content="6.0.0">
+  <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
+  <meta property="og:title" content="Live Character for LLM — Guide">
+  <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/preview-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <title>Live Character for LLM — Guide</title>
+  <link rel="stylesheet" href="assets/shell-styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body data-layer="">
+  <!-- Loading overlay -->
+  <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Загрузка...</div>
+  </div>
+
+  <!-- Layer selector modal (shown on first visit) -->
+  <div id="layer-modal" class="layer-modal">
+    <div class="layer-modal-content">
+      <h1 class="modal-title">🧠 Live Character Guide</h1>
+      <p class="audience-intro">Выберите уровень погружения в материал:</p>
+      
+      <div class="audience-cards" role="group" aria-label="Выбор слоя">
+        <button class="audience-card" data-layer="1" aria-pressed="false">
+          <div class="track-icon-wrap">
+            <svg class="track-icon track-icon--basic" viewBox="0 0 24 24" fill="none" stroke="var(--layer-1-clr)" stroke-width="1.5" role="img" aria-label="Layer 1: Фундамент" width="24" height="24">
+              <rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"></rect>
+              <circle cx="12" cy="12" r="1.5" fill="var(--layer-1-clr)"></circle>
+            </svg>
+            <div class="track-icon-scan" aria-hidden="true"></div>
+          </div>
+          <span class="track-name">Layer 1</span>
+          <span class="track-label">Минимальный</span>
+          <span class="track-desc">Минимальный шаблон, базовые концепции, без углублённых тем</span>
+        </button>
+        
+        <button class="audience-card recommended" data-layer="2" aria-pressed="false">
+          <span class="track-badge">Рекомендуется</span>
+          <div class="track-icon-wrap">
+            <svg class="track-icon track-icon--live" viewBox="0 0 24 24" fill="none" stroke="var(--layer-2-clr)" stroke-width="2" role="img" aria-label="Layer 2: Пульс жизни" width="24" height="24">
+              <path class="pulse-line" d="M2 12h3l2-5 3 10 3-5h9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <div class="track-icon-scan" aria-hidden="true"></div>
+          </div>
+          <span class="track-name">Layer 2</span>
+          <span class="track-label">Глубокий</span>
+          <span class="track-desc">Полный пайплайн, все core-элементы, готов к работе</span>
+        </button>
+        
+        <button class="audience-card" data-layer="3" aria-pressed="false">
+          <div class="track-icon-wrap">
+            <svg class="track-icon track-icon--neural" viewBox="0 0 24 24" fill="none" stroke="var(--layer-3-clr)" stroke-width="1.5" role="img" aria-label="Layer 3: Ядро сознания" width="24" height="24">
+              <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z"></path>
+              <circle class="core-node" cx="12" cy="12" r="3" fill="var(--layer-3-clr)"></circle>
+              <path d="M12 12l5-5M12 12l-5 5M12 12v7M12 12L7 7" stroke-width="1"></path>
+            </svg>
+            <div class="track-icon-scan" aria-hidden="true"></div>
+          </div>
+          <span class="track-name">Layer 3</span>
+          <span class="track-label">Экспертный</span>
+          <span class="track-desc">Расширенная теория, продвинутые техники, все опциональные элементы</span>
+        </button>
+      </div>
+      
+      <button class="uncertain-path" data-default-layer="2" type="button">
+        <span class="uncertain-icon">❓</span>
+        <span>Не уверен? Начни с Layer 2</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main content area (hidden until layer selected) -->
+  <main id="content" class="content-hidden"></main>
+
+  <!-- Layer switcher with inline indicator (visible after layer selected) -->
+  <div id="layer-switcher" class="layer-switcher hidden">
+    <button class="layer-switch-btn" data-layer="1" title="Layer 1: Минимальный">
+      <span class="switch-icon">🟢</span>
+      <span class="switch-label">L1</span>
+    </button>
+    <button class="layer-switch-btn" data-layer="2" title="Layer 2: Глубокий">
+      <span class="switch-icon">🔵</span>
+      <span class="switch-label">L2</span>
+    </button>
+    <button class="layer-switch-btn" data-layer="3" title="Layer 3: Экспертный">
+      <span class="switch-icon">🟣</span>
+      <span class="switch-label">L3</span>
+    </button>
+    <span class="layer-indicator" aria-live="polite" role="status">
+      <span class="layer-indicator-label">Layer <span id="current-layer-number">2</span>: <span id="current-layer-label">Глубокий</span></span>
+      <button class="layer-indicator-tooltip" aria-label="What does this level add?" type="button">?</button>
+    </span>
+  </div>
+
+  <!-- GLOSSARY SIDE TAB -->
+  <div class="glossary-tab" id="glossary-tab" tabindex="0" role="button" aria-label="Открыть глоссарий">📖 Глоссарий</div>
+
+  <!-- FAB BUTTONS GROUP -->
+  <div class="fab-group hidden" id="fab-group">
+    <button class="fab-btn" id="fab-theme" title="Тема (Dark → Light → OLED)" aria-label="Переключить тему" type="button">
+      <span class="theme-icon-dark">🌙</span>
+      <span class="theme-icon-light" hidden>☀️</span>
+      <span class="theme-icon-oled" hidden>⬛</span>
+    </button>
+    <button class="fab-btn" id="fab-width" aria-label="Toggle content width" title="Ширина контента" type="button" aria-pressed="false">↔</button>
+    <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
+    <button class="fab-btn" id="fab-glossary" aria-label="Open glossary" title="Глоссарий" type="button">📖</button>
+    <button class="fab-btn" id="fab-toc" title="Содержание" aria-label="Открыть содержание" type="button">📑</button>
+    <button class="fab-btn" id="fab-top" aria-label="Scroll to top" title="Наверх" type="button">↑</button>
+  </div>
+
+  <!-- TOC PANEL -->
+  <div id="toc-panel" class="panel" role="dialog" aria-label="Содержание" tabindex="-1">
+    <div class="panel-header" data-drag-handle>
+      <span class="panel-header-title">📑 Содержание</span>
+      <div class="panel-header-actions">
+        <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть">✕</button>
+      </div>
+    </div>
+    <div class="panel-content" id="toc-content"></div>
+    <div class="panel-resize-handle" data-resize-handle></div>
+  </div>
+
+  <!-- NOTEPAD PANEL -->
+  <div id="notepad-panel" class="panel" tabindex="-1" aria-label="Блокнот">
+    <div class="panel-header" data-drag-handle>
+      <span class="panel-header-title">📝 Блокнот</span>
+      <div class="panel-header-actions">
+        <button class="panel-btn" data-action="save" title="Сохранить" aria-label="Сохранить заметки">💾</button>
+        <button class="panel-btn" data-action="clear" title="Очистить" aria-label="Очистить заметки">🗑</button>
+        <button class="panel-btn" data-action="export" title="Экспорт" aria-label="Экспортировать заметки">📋</button>
+        <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">×</button>
+      </div>
+    </div>
+    <textarea
+      class="panel-content panel-textarea"
+      id="notepad-content"
+      placeholder="Ваши заметки..."
+      spellcheck="false"
+      aria-label="Текст заметок"
+    ></textarea>
+    <div class="panel-resize-handle" data-resize-handle></div>
+  </div>
+
+  <!-- GLOSSARY PANEL -->
+  <div id="glossary-panel" class="panel" tabindex="-1" aria-label="Глоссарий">
+    <div class="panel-header" data-drag-handle>
+      <span class="panel-header-title">📖 Глоссарий</span>
+      <div class="panel-header-actions">
+        <button class="panel-btn" data-action="close" title="Закрыть" aria-label="Закрыть панель">✕</button>
+      </div>
+    </div>
+    <div class="panel-content" id="glossary-content">
+      <div class="glossary-loading">Загрузка терминов...</div>
+    </div>
+    <div class="panel-resize-handle" data-resize-handle></div>
+  </div>
+
+  <script src="event-bus.js"></script>
+  <script src="widgets/widget-utils.js"></script>
+  <script src="assets/lazy-loader.js"></script>
+  <script src="widgets/persona-cross.js"></script>
+  <script src="widgets/ocean-insight.js"></script>
+  <script src="widgets/enneagram-builder.js"></script>
+  <script src="widgets/mbti-composer.js"></script>
+  <script src="widgets/persona-synthesis.js"></script>
+</body>
+</html>

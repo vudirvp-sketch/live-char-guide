@@ -1,0 +1,91 @@
+<section id="glossary" class="no-js-only" data-toc-exclude>
+<h2>Глоссарий</h2>
+<dl>
+<dt>System Prompt (Системный промпт) <small class="glossary-abbr">(SP)</small></dt>
+<dd>Настройте FORMAT LOCK для консистентного вывода</dd>
+<dt>Description (Описание персонажа)</dt>
+<dd>Добавьте телесность и расширенные якоря</dd>
+<dt>Examples (Примеры диалогов)</dt>
+<dd>Добавьте 3-й пример: сцена доверия/роста; включите телесность</dd>
+<dt>Greeting (Первое сообщение)</dt>
+<dd>Интегрируйте SPINE (WANT/NEED/FLAW) и начальное состояние персонажа</dd>
+<dt>Author's Notes (Динамический контекст) <small class="glossary-abbr">(AN)</small></dt>
+<dd>Настройте Structured Inject с базовыми XML-тегами (`<motivation>`, `<state>`) для динамической мотивации. Расширенные XML → Экспертный слой</dd>
+<dt>Character Card (Карточка персонажа)</dt>
+<dd>Оптимальная конфигурация с WANT/NEED/FLAW</dd>
+<dt>Voice Isolation (Изоляция голоса)</dt>
+<dd>Проверьте отсутствие голосовых директив в Description</dd>
+<dt>SPINE (Мотивационное ядро)</dt>
+<dd>Добавьте WANT, NEED, FLAW для глубины персонажа. LIE/GHOST → Экспертный слой</dd>
+<dt>WANT (Желание)</dt>
+<dd>Проверьте конфликт WANT vs NEED</dd>
+<dt>NEED (Потребность)</dt>
+<dd>Проверьте: NEED — это то, что разрешит внутренний конфликт</dd>
+<dt>FLAW (Дефект)</dt>
+<dd>Сформулируйте FLAW как конкретное поведение</dd>
+<dt>LIE (Ложная установка)</dt>
+<dd>Доступно на Экспертном слое (L3). Перейдите на L3 для доступа.</dd>
+<dt>GHOST (Призрак)</dt>
+<dd>Доступно на Экспертном слое (L3). Перейдите на L3 для доступа.</dd>
+<dt>Anchors (Поведенческие якоря)</dt>
+<dd>Добавьте Price: [Trigger → Action → Price]</dd>
+<dt>Триггер (Trigger)</dt>
+<dd>Уточните триггер для специфичности</dd>
+<dt>Действие (Action)</dt>
+<dd>Уточните действие с телесностью</dd>
+<dt>Price (Цена)</dt>
+<dd>Добавьте Price к каждому FLAW/GHOST якорю</dd>
+<dt>Nested Anchors (Вложенные якоря)</dt>
+<dd>⚠️ Вложенные якоря часто становятся анти-паттерном (AP-16). Рассмотрите атомарные якоря. Если используете — один триггер, разные действия в зависимости от контекста</dd>
+<dt>OCEAN (Большая пятёрка)</dt>
+<dd>Полная конфигурация с валидатором</dd>
+<dt>Enneagram (Эннеаграмма)</dt>
+<dd>Идентифицируйте доминантный тип, крыло, базовую мотивацию</dd>
+<dt>MBTI (Типология Майерс-Бриггс)</dt>
+<dd>Определите тип для базового понимания</dd>
+<dt>CORE DIRECTIVES (Основные директивы) <small class="glossary-abbr">(CD)</small></dt>
+<dd>Добавьте директивы 1–5: SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, INFLUENCE BOUNDARY, ENVIRONMENTAL REACTIVITY</dd>
+<dt>Tone Frame (Тональный фрейм) <small class="glossary-abbr">(TF)</small></dt>
+<dd>Добавьте Tone Frame в SP для фиксации тона персонажа</dd>
+<dt>SHOW NEVER TELL (Показывай, не рассказывай)</dt>
+<dd>SHOW NEVER TELL — директива #1 в CORE DIRECTIVES</dd>
+<dt>EMBODIMENT FIRST (Телесность прежде всего)</dt>
+<dd>EMBODIMENT FIRST — директива #2 в CORE DIRECTIVES, связана с протоколом телесности</dd>
+<dt>SPATIAL LOCK (Пространственная блокировка)</dt>
+<dd>Добавьте SPATIAL LOCK в SP для фиксации положения персонажа в пространстве</dd>
+<dt>ENVIRONMENTAL REACTIVITY (Реактивность среды)</dt>
+<dd>Добавьте ENVIRONMENTAL REACTIVITY для органичного описания среды</dd>
+<dt>INFLUENCE BOUNDARY (Граница влияния)</dt>
+<dd>Добавьте INFLUENCE BOUNDARY для предотвращения годмодинга</dd>
+<dt>CONSEQUENCE DRIVEN (Последовательность следствий)</dt>
+<dd>Базовая динамика SPINE: WANT конфликтует с NEED. Отслеживание не формализовано.</dd>
+<dt>SP (MBTI temperament) <small class="glossary-abbr">(SP)</small></dt>
+<dd>В таблице темпераментов SP = Sensing-Perceiving, не System Prompt</dd>
+<dt>Format Lock (Фиксация формата)</dt>
+<dd>Добавьте Format Lock в SP: выберите одну систему разметки и используйте её во всех Examples и Greeting</dd>
+<dt>RepPen (Штраф за повторы)</dt>
+<dd>Настройте RepPen 1.05 для баланса</dd>
+<dt>Presence Penalty (Штраф за присутствие) <small class="glossary-abbr">(PP)</small></dt>
+<dd>Установите Presence Penalty = 0.0. Любое значение > 0 ломает голос персонажа (AP-7)</dd>
+<dt>CoT (Цепочка рассуждений)</dt>
+<dd>CoT доступен на Экспертном слое (L3). Перейдите на L3 для доступа.</dd>
+<dt>Lorebook (База знаний) <small class="glossary-abbr">(LB)</small></dt>
+<dd>Настройте триггеры для сенсорных активаций и контекстных фактов. Активация через GHOST-события доступна на Экспертном слое (L3)</dd>
+<dt>Structured Inject (Структурированная инъекция)</dt>
+<dd>Настройте Structured Inject для динамической мотивации. GHOST-активация доступна на Экспертном слое (L3)</dd>
+<dt>4K-Fallback (Протокол адаптации)</dt>
+<dd>Определение, назначение</dd>
+<dt>годмодинг (Godmoding)</dt>
+<dd>Настройте анти-годмодинг паттерны</dd>
+<dt>OOC (Вне образа)</dt>
+<dd>Добавьте запрет в SP и примеры</dd>
+<dt>Voice Contamination (Заражение голоса)</dt>
+<dd>Предупреждение: никогда не копируйте Examples из чужих карточек</dd>
+<dt>Narrator Bleed (Утечка рассказчика)</dt>
+<dd>Диагностика: проверьте, не описывает ли модель от третьего лица вместо демонстрации через персонажа</dd>
+<dt>One Change Rule (Правило одного изменения)</dt>
+<dd>Применяйте при систематической отладке</dd>
+<dt>Lorebook Entry (Запись Lorebook) <small class="glossary-abbr">(LE)</small></dt>
+<dd>Настройте записи для GHOST-фактов с триггерами</dd>
+</dl>
+</section>

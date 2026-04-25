@@ -1,0 +1,99 @@
+<section id="glossary" class="no-js-only" data-toc-exclude>
+<h2>Глоссарий</h2>
+<dl>
+<dt>System Prompt (Системный промпт) <small class="glossary-abbr">(SP)</small></dt>
+<dd>Отладка: проверьте конфликты с карточкой персонажа</dd>
+<dt>Description (Описание персонажа)</dt>
+<dd>Оптимизация: проверьте баланс фактологии vs поведенческих инструкций</dd>
+<dt>Examples (Примеры диалогов)</dt>
+<dd>Отладка: проверьте contamination от внешних <START> блоков</dd>
+<dt>Greeting (Первое сообщение)</dt>
+<dd>Диагностика: проверьте соответствие Examples vs Greeting</dd>
+<dt>Author's Notes (Динамический контекст) <small class="glossary-abbr">(AN)</small></dt>
+<dd>Отладка: проверьте приоритет инъекции и конфликт с LB</dd>
+<dt>Character Card (Карточка персонажа)</dt>
+<dd>Продвинутая конфигурация с CoT и AN</dd>
+<dt>Voice Isolation (Изоляция голоса)</dt>
+<dd>Диагностика: отладка voice contamination</dd>
+<dt>SPINE (Мотивационное ядро)</dt>
+<dd>Диагностика: проверьте внутреннюю консистентность SPINE</dd>
+<dt>WANT (Желание)</dt>
+<dd>Диагностика: WANT должен вести к FLAW</dd>
+<dt>NEED (Потребность)</dt>
+<dd>Диагностика: NEED должен требовать преодоления FLAW</dd>
+<dt>FLAW (Дефект)</dt>
+<dd>Проверьте: FLAW должен быть поведением, не чертой характера</dd>
+<dt>LIE (Ложная установка)</dt>
+<dd>Проверьте: LIE должен объяснять, почему FLAW существует</dd>
+<dt>GHOST (Призрак)</dt>
+<dd>L3-only: 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры</dd>
+<dt>Anchors (Поведенческие якоря)</dt>
+<dd>Диагностика: отладка false positives и nested anchors</dd>
+<dt>Триггер (Trigger)</dt>
+<dd>Диагностика: проверьте, не слишком ли широкий триггер</dd>
+<dt>Действие (Action)</dt>
+<dd>Диагностика: проверьте, не является ли действие слишком общим</dd>
+<dt>Price (Цена)</dt>
+<dd>Диагностика: проверьте специфичность Price</dd>
+<dt>Nested Anchors (Вложенные якоря)</dt>
+<dd>Диагностика: проверьте, что вложенные якоря не создают противоречий</dd>
+<dt>OCEAN (Большая пятёрка)</dt>
+<dd>Диагностика: проверьте соответствие OCEAN поведению</dd>
+<dt>Enneagram (Эннеаграмма)</dt>
+<dd>Добавьте пути интеграции/дезинтеграции, инстинктивные варианты</dd>
+<dt>MBTI (Типология Майерс-Бриггс)</dt>
+<dd>Добавьте когнитивные функции для глубины</dd>
+<dt>CORE DIRECTIVES (Основные директивы) <small class="glossary-abbr">(CD)</small></dt>
+<dd>Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER</dd>
+<dt>Tone Frame (Тональный фрейм) <small class="glossary-abbr">(TF)</small></dt>
+<dd>Отладка: проверьте конфликт Tone Frame с AN</dd>
+<dt>SHOW NEVER TELL (Показывай, не рассказывай)</dt>
+<dd>Диагностика: проверьте, не рассказывает ли модель вместо демонстрации</dd>
+<dt>EMBODIMENT FIRST (Телесность прежде всего)</dt>
+<dd>Диагностика: проверьте, не пропускает ли модель телесный шаг</dd>
+<dt>SPATIAL LOCK (Пространственная блокировка)</dt>
+<dd>Отладка: проверьте активацию при сложных сценах</dd>
+<dt>ENVIRONMENTAL REACTIVITY (Реактивность среды)</dt>
+<dd>Диагностика: проверьте, не генерирует ли модель декоративные описания</dd>
+<dt>INFLUENCE BOUNDARY (Граница влияния)</dt>
+<dd>Диагностика: проверьте, не декларирует ли модель эмоции {{user}}</dd>
+<dt>CONSEQUENCE DRIVEN (Последовательность следствий)</dt>
+<dd>L3-enhanced: полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY.</dd>
+<dt>PRE-GENERATION FILTER (Фильтр предгенерации)</dt>
+<dd>L3-only: директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN.</dd>
+<dt>SP (MBTI temperament) <small class="glossary-abbr">(SP)</small></dt>
+<dd>При анализе кросс-типов уточняйте, какой SP имеется в виду</dd>
+<dt>Immersion Boundary (Иммерсионная граница)</dt>
+<dd>L3-only: добавьте Immersion Boundary для максимальной иммерсии. На L2 используйте базовый OOC Protection.</dd>
+<dt>Format Lock (Фиксация формата)</dt>
+<dd>Диагностика: проверьте, что все Examples и Greeting используют одну систему разметки</dd>
+<dt>RepPen (Штраф за повторы)</dt>
+<dd>Диагностика: >1.10 убивает signature phrases</dd>
+<dt>Presence Penalty (Штраф за присутствие) <small class="glossary-abbr">(PP)</small></dt>
+<dd>Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7</dd>
+<dt>CoT (Цепочка рассуждений)</dt>
+<dd>Настройте CoT tier 3 для сложных сценариев</dd>
+<dt>processus_analysium</dt>
+<dd>L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL]...[/INTERNAL].</dd>
+<dt>Lorebook (База знаний) <small class="glossary-abbr">(LB)</small></dt>
+<dd>Диагностика: проверьте приоритет и конфликт записей</dd>
+<dt>Structured Inject (Структурированная инъекция)</dt>
+<dd>Диагностика: проверьте приоритет и конфликт инъекций</dd>
+<dt>4K-Fallback (Протокол адаптации)</dt>
+<dd>Примените fallback для старых моделей</dd>
+<dt>годмодинг (Godmoding)</dt>
+<dd>Диагностика: отладка persistent годмодинг</dd>
+<dt>OOC (Вне образа)</dt>
+<dd>Диагностика: определение и исправление OOC</dd>
+<dt>Voice Contamination (Заражение голоса)</dt>
+<dd>Диагностика: если голос «плывёт», проверьте источник Examples</dd>
+<dt>Narrator Bleed (Утечка рассказчика)</dt>
+<dd>Отладка: сравните Examples с Greeting — голос должен быть единым</dd>
+<dt>Voice Bleed (Утечка голоса между персонажами)</dt>
+<dd>Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples</dd>
+<dt>One Change Rule (Правило одного изменения)</dt>
+<dd>Формализуйте: логируйте каждое изменение и результат</dd>
+<dt>Lorebook Entry (Запись Lorebook) <small class="glossary-abbr">(LE)</small></dt>
+<dd>Добавьте мировые записи для углубления сеттинга</dd>
+</dl>
+</section>
