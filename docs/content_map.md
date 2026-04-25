@@ -30,15 +30,15 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
 | Карточка персонажа | Part 1 | p1_card_overview | l1 | Definition | 4 блока карточки: SP, Description, Examples, Greeting |
-| Core Rules (5 правил) | Part 1 | p1_core_rules | l1 | Rules | GHOST inline definition + layer-remark bridge. Перенесено из glossary.json → Part 1 |
+| Core Rules (4 базовых правила) | Part 1 | p1_core_rules | l1 | Rules | GHOST inline definition + layer-remark bridge. Перенесено из glossary.json → Part 1 |
 | Сравнение слоёв | Part 1 | p1_layer_comparison | l1 | Reference | L1 vs L2 vs L3 comparison table. SPINE row: L2 = WANT/NEED/FLAW, L3 = +LIE/GHOST |
 | L1 Quickstart | Part 1 | p1_l1_quickstart | l1 | Template | 5-minute template → minimal card. Ссылка на p10_elena_l1 вместо отдельной секции p1_elena_minimal. Чек-лист минимальный (3 пункта) |
 | Топ-3 критичные ошибки | Part 1 | p1_top3_problems | l1 | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_top5_problems |
-| Следующие шаги | Part 1 | p1_next_steps | l1 | Merged | ← MERGED p1_next_layers into p1_next_steps. L2/L3 критерии как подсекции |
+| Что дальше? / Следующие шаги | Part 1 | p1_next_steps | l1 | Navigation | ← MERGED p1_next_layers into p1_next_steps. L2/L3 критерии как подсекции. Навигационный мостик к Part 2+ |
 | Токен-бюджет | Part 1 | p1_token_budget | l1 | Reference | Мерж p1_token_pipeline + p1_block_budget. 2 subsections: конвейер сборки + лимиты по блокам. Только L1 блоки. Без подтаблицы AN/Lorebook/CoT |
 | Конвейер сборки L1-карточки | Part 1 | p1_assembly_pipeline | l1 | Pipeline | Конвейер сборки L1-карточки |
 | ~~Мини-пример L1-карточки~~ | Part 1 | ~~p1_mini_example~~ | ~~l1~~ | REMOVED | Удалён — дублировал p10_omnis_l1_card. Результат встроен в p1_assembly_pipeline (шаг 06) |
-| Что дальше? | Part 1 | p1_next_steps | l1 | Navigation | Что дальше? Инструменты для углубления |
+
 | Заключение | Part 1 | p1_conclusion | l1 | Readiness checklist | Готовы к практике? Вопросы для самопроверки + ссылки |
 
 ### Part 2: Behavioral Anchors (Якоря)
