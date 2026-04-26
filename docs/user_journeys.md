@@ -251,12 +251,11 @@ Every L2 section must have an L1 mention or `data-layer-switch`. Every L3 sectio
 
 | From | To | Type | Purpose |
 |------|-----|------|---------|
-| L1 Part 1 (bridges) | L2 Part 4 (SPINE) | data-layer-switch | "Want anchors from psychology? → L2" |
-| L1 Part 4 (bridge) | L2 Part 4 (SPINE) | data-layer-switch | "SPINE = WANT/NEED/FLAW → L2" |
-| L1 Part 5 (bridge) | L2 Part 5 (OCEAN) | data-layer-switch | "OCEAN/Enneagram tools → L2" |
-| L1 Part 6 (bridge) | L3 Part 6 (CoT) | data-layer-switch | "CoT internal process → L3" |
-| L1 Part 7 (bridge) | L2 Part 7 (Technical) | data-layer-switch | "SP/Format Lock/AN/Lorebook → L2" |
-| L1 Part 8 (bridge) | L2 Part 8 (Anti-patterns) | data-layer-switch | "AP-1–AP-15 catalog → L2" |
+| L1 Part 1 (p1_next_steps) | L2 Part 4 (SPINE) | data-layer-switch | "Want anchors from psychology? → L2" |
+| L1 Part 1 (p1_next_steps) | L2 Part 5 (OCEAN) | data-layer-switch | "OCEAN/Enneagram tools → L2" |
+| L1 Part 1 (p1_next_steps) | L3 Part 6 (CoT) | data-layer-switch | "CoT internal process → L3" |
+| L1 Part 1 (p1_next_steps) | L2 Part 7 (Technical) | data-layer-switch | "SP/Format Lock/AN/Lorebook → L2" |
+| L1 Part 1 (p1_next_steps) | L2 Part 8 (Anti-patterns) | data-layer-switch | "AP-1–AP-15 catalog → L2" |
 | L1 Part 3 (voice) | L2 Part 3 (embodiment) | data-layer-switch | "Want body-first protocol? → L2" |
 | L1 Part 9 | L2 Part 4 | data-layer-switch | "Deeper diagnostics → L2" |
 | L2 Part 2 (anchors) | L3 Part 6 (CoT) | data-layer-switch | "Internal process anchors → L3" |

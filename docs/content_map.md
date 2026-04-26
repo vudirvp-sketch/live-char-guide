@@ -198,19 +198,21 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
 | Part 4 (SPINE) | 0 | 5 | 6 | 11 |
 | Part 5 (Psych Toolkit) | 0 | 5 | 2 | 7 |
-| Part 6 (CoT) | 0 | 0 | 5 | 5 |
+| Part 6 (CoT) | 0 | 0 | 6 | 6 |
 | Part 7 (Technical) | 0 | 10 | 8 | 18 |
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
 | Part 10 (Examples) | 2 | 5 | 2 | 9 |
-| **Total** | **20** | **48** | **36** | **104** |
+| **Total** | **20** | **48** | **37** | **105** |
 
 **Cumulative (as reader sees it):**
 - **L1 sees: 20 sections** (Part 1 has 9 L1 sections after p1_next_layers merged into p1_next_steps)
 - **L2 sees: 68 sections** (+48 to L1)
-- **L3 sees: 104 sections** (+36 to L2)
+- **L3 sees: 105 sections** (+37 to L2)
 
-**Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 reduced from 6→5 (persona-synthesis moved to Part 5), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten).
+**Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 has 6 L3 sections (p6_l3_quickstart added during content restoration), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 8 has 18 sections (AP-15 basic+extended split), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten). Total = 105 matching section-registry.json.
+
+**L1 Bridge Note:** L1 bridge sections for Parts 4–8 are implemented as navigational links within `p1_next_steps` (Part 1), not as separate `data-section` elements. Readers on L1 see bridge mentions pointing to L2/L3 content via `data-layer-switch` or `term-marker` elements inside `p1_next_steps`.
 
 ---
 

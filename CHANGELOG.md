@@ -5,6 +5,72 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [6.2.0] - 2026-04-27
+
+### Added
+- **Section counter fix:** content_map.md statistics now correctly reflect 105 unique sections from section-registry.json (was 104)
+- **Migration map cleanup:** Added "Merged Sections" table, marked all obsolete IDs as `[MERGED → new_id]` or `[REMOVED → reason]`
+- **p9_quality_scale** added to content_map.md Part 9 table (was present in section-registry but missing from content_map)
+- **AP-11 Voice Bleed layer fix:** Corrected from l2 to l3 in migration_map.md Part 3 anchor mapping
+- **Phantom bridge records removed:** Deleted p4_l1_bridge, p5_l1_bridge, p6_l1_bridge, p7_l1_bridge, p8_l1_bridge from migration_map New Sections table (these are navigational links in p1_next_steps, not separate data-sections)
+- **IMP-48 cross-references:** Added 5 missing bidirectional cross-references (p9_top5_problems↔p1_top3_problems, p10_elena_l1↔p2_anchor_examples, p4_spine_mapping↔p5_cross_instrument_map, p7_core_directives↔p9_pre_deploy)
+- **cross_reference_sync.md** updated with pairs #32–#35
+
+### Changed
+- Version synchronized across all 4 canonical locations: package.json, src/VERSION, data/character_schema.json, src/shell/lazy-loader.js
+- README.md version badge updated to 6.2.0
+- docs/architecture.md version header updated from 6.2 to 6.2.0
+- BUG-1 (initLayerSwitch) and BUG-2 (colors[maxIdx]) verified as resolved in current codebase
+
+## [6.1.0] - 2026-04-22
+
+### Added
+- **Layer restructure completed:** LIE/GHOST moved from L2 to L3, CoT basics/tiers moved from L2 to L3
+- **Content Restoration Phases 0–13:** 45+ new and modified sections across all 10 Parts
+- **CORE DIRECTIVES system:** Unified 7-directive system (5 on L2, all 7 on L3)
+- **Tooltip system (Phase 3 L1 Remediation):** 11 data-layer-switch elements in L1 converted to term-marker tooltips
+- **build-layers.mjs** updated: processCrossLayerLinks() handles term-marker elements
+- **Lorebook Enhancement:** p7_lorebook_mechanics (L2) and p7_lorebook_advanced (L3) added
+- **New card examples:** p10_walter_l2, p10_omnis_l1_card, p10_omnis_l2_card, p10_omnis_l3_card
+- **New diagnostics:** p9_decision_tree, p9_element_scenario_map, p9_test_requirements, p9_pre_deploy, p9_quality_scale
+
+### Changed
+- SPINE on L2 now shows only WANT/NEED/FLAW; LIE/GHOST available on L3
+- content_map.md fully rewritten (v2.3) with all 105 sections
+- migration_map.md updated with Content Restoration entries
+- cross_reference_sync.md updated (v1.4) with 31 pairs
+- character_bible.md updated with IMP-48 refs, AN template, Lorebook
+
+### Fixed
+- Build validation: 102→105 sections, 0 errors
+- validate-master.mjs passes (13 checks)
+- validate-layers.mjs passes (7 checks)
+- BUG-3 through BUG-11 all resolved
+
+## [6.0.0] - 2026-04-19
+
+### Added
+- **NEW ARCHITECTURE:** Layer-based build system with cumulative visibility (L1 ⊂ L2 ⊂ L3)
+- **build-layers.mjs:** Automated layer extraction from master HTML files
+- **build-shell.mjs:** Shell + layer content assembly for GitHub Pages
+- **10 master HTML files:** src/master/part_01 through part_10
+- **Lazy-loading shell:** Dynamic layer content loading with panel system
+- **Panel system:** Draggable, resizable TOC, Notepad, Glossary panels
+- **Widget architecture:** Markup in HTML, data in JSON (ocean.json, enneagram.json, mbti.json, glossary.json)
+- **Anchor redirect system:** Backward compatibility from v5.12 anchors to v6 data-section IDs
+
+### Changed
+- **BREAKING:** Complete rebuild from v5.12 — not an in-place evolution
+- Content source: `src/parts-l{N}/` → `src/master/part_*.html` with `data-layer` markup
+- Layer assembly: Manual → Automated via build-layers.mjs
+- Cross-layer links: Layer only → Layer + section (`data-layer-switch="2#id"`)
+- Layer names: Inconsistent → Canonical from layer-config.json
+- SPINE model: All 5 elements on L2 → WANT/NEED/FLAW (L2) + LIE/GHOST (L3)
+
+### Removed
+- Old src/parts-l{N}/ directory structure (replaced by src/master/ + build output)
+- validate_anchors.py CI script (replaced by validate-master.mjs)
+
 ## [5.12.0] - 2026-04-17
 
 ### Added

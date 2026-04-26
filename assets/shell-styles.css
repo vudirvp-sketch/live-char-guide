@@ -2,6 +2,25 @@
    LIVE CHARACTER GUIDE - SHELL STYLES v6.0.0
    ============================================ */
 
+/* === FONT FACES === */
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('fonts/NotoSans-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('fonts/NotoSans-Italic-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62.5% 100%;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* === CSS DESIGN TOKENS === */
 :root {
   /* Semantic colors */
@@ -41,7 +60,7 @@
   --tip-border: #22c55e;
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Liberation Sans", sans-serif;
+  --font-sans: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Liberation Sans", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --max-width: min(1000px, 85ch);
   --spacing: clamp(1rem, 2.5vw, 1.5rem);

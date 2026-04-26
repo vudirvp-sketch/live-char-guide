@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - LAZY LOADER v6.0.0
+ * LIVE CHARACTER GUIDE - LAZY LOADER v6.2.0
  * ============================================================================
  * 
  * Dynamic layer loading system:
@@ -31,7 +31,7 @@
   
   const CONFIG = {
     STORAGE_KEY: 'guide-layer-selection',
-    VERSION: '6.0.0',
+    VERSION: '6.2.0',
     LAYERS: ['1', '2', '3'],
     LAYER_LABELS: {
       '1': '\u041c\u0438\u043d\u0438\u043c\u0430\u043b\u044c\u043d\u044b\u0439',

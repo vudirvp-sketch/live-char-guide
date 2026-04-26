@@ -55,7 +55,7 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `what-is-card` | `p1_card_overview` | l1 | Merged into overview |
 | `when-to-use` | `p1_card_overview` | l1 | Merged into overview |
 | `quickstart` | `p1_l1_quickstart` | l1 | L1 Quickstart template |
-| `5-minute-template` | `p1_elena_minimal` | l1 | Minimal Elena card template |
+| `5-minute-template` | `p1_elena_minimal` | l1 | **[REMOVED → p10_elena_l1]** Minimal Elena card template now lives in Part 10 |
 | `core_rules` | `p1_core_rules` | l1 | Moved from glossary to Part 1 |
 | — | `p1_layer_comparison` | l1 | Layer comparison table (from Part 9 layer-comparison) |
 | — | `p1_top3_problems` | l1 | Top-3 L1 problems (quick fixes) |
@@ -87,7 +87,7 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `tier-quality` | `p3_tier_quality` | l2 | Tier 1/2/3 criteria |
 | `joker-case` | `p3_joker_case` | l2 | Extreme voice isolation |
 | `dialogue-markup` | `p7_format_lock` | l2 | Dialogue markup systems A/B/C moved to Part 7 Format Lock section |
-| `multi-char` | `p8_ap11_voice_bleed` | l2 | Multi-char voice bleed handled as AP-11 in Part 8 |
+| `multi-char` | `p8_ap11_voice_bleed` | l3 | Multi-char voice bleed handled as AP-11 in Part 8 (L3, not L2) |
 
 ### Part 4: SPINE Framework
 
@@ -108,12 +108,12 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | v5.12 Anchor | v6 data-section | Layer | Migration Notes |
 |--------------|-----------------|-------|-----------------|
 | `ocean` | `p5_ocean_basics` | l2 | OCEAN tool |
-| `ocean-poles` | `p5_ocean_poles` | l2 | Pole guidelines |
-| `ocean-validator` | `p5_ocean_validator` | l2 | Interactive validator |
+| `ocean-poles` | `p5_ocean_basics` | l2 | **[MERGED → p5_ocean_basics]** Pole guidelines merged into ocean_basics |
+| `ocean-validator` | `p5_ocean_basics` | l2 | **[MERGED → p5_ocean_basics]** Interactive validator merged into ocean_basics |
 | `enneagram` | `p5_enneagram_basics` | l2 | Enneagram widget + types table (merged) |
 | `enneagram-types` | `p5_enneagram_basics` | l2 | Types table merged into enneagram basics |
-| — | `p5_enneagram_widget` | l2 | Enneagram interactive SVG (split from basics) |
-| — | `p5_enneagram_to_spine` | l2 | 7-step algorithm: Enneagram → OCEAN → Anchors |
+| — | `p5_enneagram_widget` | l2 | **[MERGED → p5_enneagram_basics]** Enneagram interactive SVG merged into basics |
+| — | `p5_enneagram_to_spine` | l2 | **[RENAMED → p5_cross_instrument_map]** 7-step algorithm: Enneagram → OCEAN → Anchors |
 | `enneagram-wings` | `p5_enneagram_wings` | l3 | Wing selection algorithm [NEW] |
 | `mbti` | `p5_mbti_basics` | l2 | MBTI filter grid |
 | `cross-matrix` | `p5_cross_matrix` | l3 | OCEAN×Enneagram matrix (deduplicated from L3/03+L3/08) |
@@ -215,15 +215,12 @@ The following changes were made during the layer restructure (`layer-restructure
 |-----------------|-------|------|-------------|
 | p1_l2_bridge | l1 | Part 1 | Bridge: СПИН, OCEAN, FLAW-linked anchors → L2 |
 | p1_l3_bridge | l1 | Part 1 | Bridge: LIE, GHOST, CoT, XML, API → L3 |
-| p4_l1_bridge | l1 | Part 4 | Bridge: SPINE = WANT/NEED/FLAW → L2 |
 | p4_l3_spine_full | l3 | Part 4 | Full 5-element SPINE chain (GHOST→LIE→FLAW→NEED→WANT) |
-| p5_l1_bridge | l1 | Part 5 | Bridge: OCEAN, Enneagram, MBTI → L2 |
-| p6_l1_bridge | l1 | Part 6 | Bridge: CoT internal process → L3 |
-| p7_l1_bridge | l1 | Part 7 | Bridge: SP, Format Lock, AN, Lorebook → L2 |
-| p8_l1_bridge | l1 | Part 8 | Bridge: AP-1–AP-15 catalog → L2+L3 |
 | p8_ap15_extended | l3 | Part 8 | AP-15 extended: 3 OCEAN conflict scenarios |
 | p3_multi_char | l3 | Part 3 | Multi-character: Уолтер Уайт + Джесси Пинкман |
 | p10_edward_l2 | l2 | Part 10 | Эдвард Элрик L2 card (WANT/NEED/FLAW only) |
+| p4_l3_learning_path | l3 | Part 4 | L3 Learning Path — navigational map from GHOST to full card |
+| p6_l3_quickstart | l3 | Part 6 | L3 Quickstart (CoT) — 60-minute pipeline |
 
 ### Rewritten Sections
 
@@ -289,8 +286,8 @@ Status: ✅ Complete — validate-migration.mjs confirms all 7 references use v6
 
 | Bug ID | Fix Location | Status |
 |--------|--------------|--------|
-| BUG-1 | lazy-loader.js | ⏳ Stage 1.5 (initLayerSwitch implementation) |
-| BUG-2 | lazy-loader.js | ⏳ Stage 1.5 (colors[maxIdx] fix) |
+| BUG-1 | lazy-loader.js | ✅ Resolved — initLayerSwitch() implemented (updates switcher UI), bindDataLayerSwitchLinks() handles data-layer-switch click events |
+| BUG-2 | lazy-loader.js | ✅ Resolved — colors[maxIdx] pattern not present in current codebase; no off-by-one errors found |
 | BUG-3 | styles.css | ✅ Fixed in Stage 0a |
 | BUG-4 | HTML migration | ✅ Verified — no .callout.info in master HTML |
 | BUG-5 | styles.css | ✅ Fixed in Stage 0a |
@@ -325,6 +322,25 @@ After Stage 4 (Layer Validation):
 
 ---
 
+## Merged Sections
+
+The following sections were merged or removed during the layer restructure and content restoration. Their old IDs may still appear in some migration records but should not be used as targets.
+
+| Old data-section ID | New data-section ID | Layer | Reason |
+|---------------------|---------------------|-------|--------|
+| p1_token_pipeline | p1_token_budget | l1 | Merged: pipeline + block budget unified into single section |
+| p1_block_budget | p1_token_budget | l1 | Merged: pipeline + block budget unified into single section |
+| p1_mini_example | _(removed)_ | l1 | REMOVED: duplicated p10_omnis_l1_card. Content built into p1_assembly_pipeline step 06 |
+| p1_elena_minimal | p10_elena_l1 | l1 | REMOVED: minimal Elena card moved to Part 10 as canonical example |
+| p5_ocean_poles | p5_ocean_basics | l2 | Merged: pole guidelines integrated into ocean basics for better pedagogical flow |
+| p5_ocean_validator | p5_ocean_basics | l2 | Merged: validator widget integrated into ocean basics |
+| p5_enneagram_widget | p5_enneagram_basics | l2 | Merged: interactive SVG merged into enneagram basics (enneagram-embed) |
+| p5_enneagram_to_spine | p5_cross_instrument_map | l2 | RENAMED: broader cross-instrument mapping (not just Enneagram→SPINE) |
+| p7_immersion_boundary | p7_ooc_protection | l3 | Merged: Immersion Boundary is now a subsection of OOC Protection |
+| p10_l2_voice_warning | p10_elena_l2 | l2 | Merged: Voice Warning is now a callout inside Elena L2 card section |
+
+---
+
 ## Content Restoration Entries
 
 The following changes were made during the content restoration (`content-restoration-implementation-plan-v2.1.md`, Phases 0–13):
@@ -333,15 +349,15 @@ The following changes were made during the content restoration (`content-restora
 
 | data-section ID | Layer | Part | Description | Phase | Cross-refs |
 |-----------------|-------|------|-------------|-------|------------|
-| p1_token_pipeline | l1 | Part 1 | 10-step token budget pipeline table + context size budget table | Phase 1 | → p1_block_budget, ← p1_layer_comparison |
-| p1_block_budget | l1 | Part 1 | Min/Standard/Max budget table per block + per layer | Phase 1 | → p1_token_pipeline, ← p1_layer_comparison |
+| p1_token_pipeline | l1 | Part 1 | **[MERGED → p1_token_budget]** 10-step token budget pipeline table + context size budget table | Phase 1 | → p1_block_budget, ← p1_layer_comparison |
+| p1_block_budget | l1 | Part 1 | **[MERGED → p1_token_budget]** Min/Standard/Max budget table per block + per layer | Phase 1 | → p1_token_pipeline, ← p1_layer_comparison |
 | p1_conclusion | l1 | Part 1 | Key rules reminder table + "what you now know" list by layer | Phase 1 | ← p1_l3_bridge, → p9_basic_checklist |
 | p2_env_reactivity | l2 | Part 2 | ENVIRONMENTAL REACTIVITY directive: sensory details only through action | Phase 2 | → p7_core_directives, ← p7_core_directives |
 | p7_core_directives | l2 | Part 7 | Unified 5-directive system (SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, ENVIRONMENTAL REACTIVITY, INFLUENCE BOUNDARY) | Phase 6 | → p2_embodiment, p2_anchor_rules, p4_spine_mapping; ← p2_env_reactivity, p2_anchor_rules, p4_spine_mapping |
 | p7_core_directives_l3 | l3 | Part 7 | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER) | Phase 6 | → p4_spine_mapping, p7_core_directives; ← p4_spine_mapping |
 | p7_tone_frame | l2 | Part 7 | Tone Frame definition with 4 setting examples | Phase 6 | ← p7_system_prompt |
-| p7_ooc_protection | l3 | Part 7 | OOC Protection SP block (~15 tokens) | Phase 6 | ← p7_system_prompt |
-| p7_immersion_boundary | l3 | Part 7 | Advanced OOC protection with antipattern-card | Phase 6 | ← p7_system_prompt |
+| p7_ooc_protection | l3 | Part 7 | OOC Protection SP block (~15 tokens) + Immersion Boundary as subsection | Phase 6 | ← p7_system_prompt |
+| p7_immersion_boundary | l3 | Part 7 | **[MERGED → p7_ooc_protection]** Advanced OOC protection now a subsection of OOC Protection | Phase 6 | ← p7_system_prompt |
 | p7_authors_note_l3 | l3 | Part 7 | 4-section AN template with GHOST-activation | Phase 6 | ← p7_authors_note |
 | p7_sp_template_l3 | l3 | Part 7 | Full L3 System Prompt template with all 7 directives | Phase 6 | ← p7_system_prompt |
 | p7_model_checklist | l2 | Part 7 | Summary table by model type (12B/32B+/API) | Phase 6 | ← p7_sampling_params |

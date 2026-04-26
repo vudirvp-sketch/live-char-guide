@@ -139,8 +139,11 @@ async function buildShell() {
   if (existsSync(shellIndex)) {
     let indexContent = await readFile(shellIndex, 'utf-8');
 
-    // Replace version placeholder
-    indexContent = indexContent.replace(/5\.12\.0/g, version);
+    // Replace version in meta tag and comment (robust: matches any version, not just 5.12.0)
+    indexContent = indexContent.replace(
+      /(<meta name="livechar-version" content=")[^"]*(">)/g,
+      `$1${version}$2`
+    );
 
     // Calculate hash for cache busting (before adding hash to content)
     buildHash = createHash('sha256')
@@ -148,9 +151,9 @@ async function buildShell() {
       .digest('hex')
       .slice(0, 8);
 
-    // Add build metadata
+    // Add build metadata (robust: matches any version in the shell comment)
     indexContent = indexContent.replace(
-      '<!-- Live Character Guide - Shell v5.12.0 -->',
+      /<!-- Live Character Guide - Shell v\d+\.\d+\.\d+ -->/,
       `<!-- Live Character Guide - Shell v${version} -->\n<!-- Build: ${buildHash} -->\n<!-- Generated: ${new Date().toISOString()} -->`
     );
 
@@ -176,8 +179,11 @@ async function buildShell() {
   if (existsSync(lazyLoader)) {
     let loaderContent = await readFile(lazyLoader, 'utf-8');
 
-    // Replace version
-    loaderContent = loaderContent.replace(/5\.12\.0/g, version);
+    // Replace version (robust: matches any X.Y.Z version in the VERSION constant)
+    loaderContent = loaderContent.replace(
+      /(VERSION:\s*['"])\d+\.\d+\.\d+(['"])/,
+      `$1${version}$2`
+    );
 
     await writeFile(join(ASSETS_DIST, 'lazy-loader.js'), loaderContent);
     log('INFO', 'Copied shell/lazy-loader.js → dist/assets/lazy-loader.js');

@@ -48,6 +48,10 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 29 | p10_omnis_l2_card | p10_omnis_l3_card | `data-layer-switch="3#p10_omnis_l3_card"` | ✅ card progression — no back link needed |
 | 30 | p10_omnis_l3_card | p4_ghost_layers | `href="#p4_ghost_layers"` | ✅ p4_ghost_layers references via layer-remark added in TP-15 |
 | 31 | p5_l2_quickstart | p4_l2_quickstart | (relocated) Formerly p4_l2_quickstart | ✅ Part 4 has navigational link to p5_l2_quickstart |
+| 32 | p9_top5_problems | p1_top3_problems | `href="#p1_top3_problems"` (layer-remark) | ✅ Added per T-9.1: p9_top5_problems references p1_top3_problems via layer-remark «Подробный разбор первых 3 проблем → p1_top3_problems» |
+| 33 | p10_elena_l1 | p2_anchor_examples | `href="#p2_anchor_examples"` (layer-remark) | ✅ Added per T-9.2: p10_elena_l1 references p2_anchor_examples via layer-remark «Формат якорей объяснён → p2_anchor_examples» |
+| 34 | p4_spine_mapping | p5_cross_instrument_map | `data-layer-switch="2#p5_cross_instrument_map"` | ✅ Added per T-9.3: p4_spine_mapping references p5_cross_instrument_map via layer-remark «Инструментальная карта Enneagram→SPINE → p5_cross_instrument_map» |
+| 35 | p7_core_directives | p9_pre_deploy | `data-layer-switch="3#p9_pre_deploy"` | ✅ Added per T-9.4: p7_core_directives mentions p9_pre_deploy «Pre-Deploy Validation включает проверку CORE DIRECTIVES → p9_pre_deploy» |
 
 ---
 
