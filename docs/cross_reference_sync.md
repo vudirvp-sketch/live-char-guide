@@ -1,8 +1,8 @@
 # Cross-Reference Synchronization — Live Character Guide v6
 
-> **Version:** 1.5
+> **Version:** 1.6
 > **Date:** 2026-04-27
-> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement + TP-11–20 + Terminology Sync (Complete)
+> **Status:** Remediation R-05 Deliverable + Lorebook Enhancement + TP-11–20 + Terminology Sync + v6.2.3 Validation Fixes (Complete)
 > **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md, TP-11–20 task changes, terminology-dedup-2026-04-24
 
 ---
@@ -107,7 +107,18 @@ After all remediation items are resolved:
 - [x] Every forward link has a corresponding back link (✅ or acceptable)
 - [x] No ❌ items remain
 - [x] All `data-layer-switch` targets resolve to existing sections
-- [x] `validate-master.mjs` passes with 0 errors (0 errors, 10 warnings — HTML comments outside sections, all expected)
+- [x] `validate-master.mjs` passes with 0 errors (0 errors, 20 warnings — IMP-27 bridge + IMP-56 emoji, all expected per design)
+
+---
+
+## v6.2.3 Amendment
+
+Pairs #33–#35 were originally claimed as implemented in v6.2.0 but the actual HTML cross-references were **not present** in master HTML files. This was a phantom completion — cross_reference_sync.md documented the intent but the HTML was never updated.
+
+**v6.2.3 actual implementation:**
+- **#33:** p10_elena_l1 now has `href="#p2_anchor_examples"` layer-remark (p2_anchor_examples is L1, same layer)
+- **#34:** p4_spine_mapping now has `data-layer-switch="2#p5_cross_instrument_map"` layer-remark
+- **#35:** p7_core_directives now has `data-layer-switch="3#p9_pre_deploy"` layer-remark
 
 ---
 
@@ -115,3 +126,4 @@ After all remediation items are resolved:
 *Created: 2026-04-21 (Remediation R-05)*
 *Updated: 2026-04-23 (Lorebook Enhancement - added pairs 16-21, fixed checklist and cross-refs)*
 *Updated: 2026-04-24 (Terminology dedup: verified p5↔p8 cross-refs, added pairs 25-26)*
+*Updated: 2026-04-27 (v6.2.3: actually implemented pairs #33-35 in master HTML, fixed validation errors)*

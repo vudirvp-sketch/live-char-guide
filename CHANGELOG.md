@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [6.2.3] - 2026-04-27
+
+### Fixed
+- **Validation Error 1:** part_07_technical.html p7_lorebook `data-layer-switch="3#p7_lorebook"` → `3#p7_lorebook_advanced` (target was l2, not l3; link intent was always to advanced lorebook)
+- **Validation Error 2:** part_09_diagnostics.html p9_symptom_table `data-layer-switch="3#p7_sampling_params"` → `2#p7_sampling_params` (target is l2, not l3; no layer switch needed)
+- **Validation Error 3:** part_05_psych_toolkit.html p5_cross_matrix `href="#persona-synthesis"` → replaced with plain text (persona-synthesis is a div ID, not a data-section; validator requires section IDs only)
+- **T-9.2 (actual):** Added layer-remark in p10_elena_l1 referencing p2_anchor_examples via `href="#p2_anchor_examples"` (was claimed in v6.2.0 but missing from HTML)
+- **T-9.3 (actual):** Added layer-remark in p4_spine_mapping referencing p5_cross_instrument_map via `data-layer-switch="2#p5_cross_instrument_map"` (was claimed in v6.2.0 but missing from HTML)
+- **T-9.4 (actual):** Added layer-remark in p7_core_directives referencing p9_pre_deploy via `data-layer-switch="3#p9_pre_deploy"` (was claimed in v6.2.0 but missing from HTML)
+- **Content outside sections:** Moved orphan `<p class="layer-remark">` in part_04_spine.html from between sections into p4_l3_learning_path section
+
+### Changed
+- Version bumped to 6.2.3 across all 4 canonical locations + README badge
+- docs/cross_reference_sync.md updated to v1.6 with v6.2.3 amendment documenting actual HTML implementation of pairs #33-35
+- validate-master.mjs now passes with 0 errors (was 3 errors)
+
+### Verified
+- Build validation: 105 sections, 0 errors, 20 warnings (all expected per design)
+- validate-master.mjs: PASSED (13 checks, 0 errors)
+- validate-layers.mjs: PASSED (7 checks, 0 warnings)
+- validate-artifact.mjs: PASSED (all 5 gates)
+
 ## [6.2.2] - 2026-04-27
 
 ### Fixed

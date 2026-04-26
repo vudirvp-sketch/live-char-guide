@@ -1,6 +1,6 @@
 # Live Character Guide Architecture
 
-> **Version:** 6.2.2
+> **Version:** 6.2.3
 > **Last Updated:** 2026-04-27
 > **Status:** Draft for Stage 0a (synced with Content Restoration Phases 0–13)
 

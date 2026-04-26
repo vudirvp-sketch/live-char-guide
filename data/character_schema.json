@@ -3,7 +3,7 @@
   "$id": "https://vudirvp-sketch.github.io/live-char-guide/schemas/character_schema.json",
   "title": "Live Character Guide - Character Card Schema",
   "description": "JSON Schema for character cards built according to the Live Character Guide methodology",
-  "version": "6.2.2",
+  "version": "6.2.3",
   "type": "object",
   "properties": {
     "metadata": {

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - LAZY LOADER v6.2.2
+ * LIVE CHARACTER GUIDE - LAZY LOADER v6.2.3
  * ============================================================================
  * 
  * Dynamic layer loading system:
