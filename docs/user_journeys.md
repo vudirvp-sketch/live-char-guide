@@ -1,7 +1,7 @@
 # User Journeys — Live Character Guide v6
 
-> **Version:** 2.1
-> **Last Updated:** 2026-04-21
+> **Version:** 2.2
+> **Last Updated:** 2026-04-27
 > **Status:** Draft (synced with Content Restoration Phases 0–13)
 
 ---

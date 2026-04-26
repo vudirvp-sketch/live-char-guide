@@ -1,7 +1,7 @@
 # Live Character Guide Architecture
 
-> **Version:** 6.2.0
-> **Last Updated:** 2026-04-21
+> **Version:** 6.2.1
+> **Last Updated:** 2026-04-27
 > **Status:** Draft for Stage 0a (synced with Content Restoration Phases 0–13)
 
 ---
@@ -305,6 +305,16 @@ Semantic versioning: `MAJOR.MINOR.PATCH`
 - **MAJOR:** Architecture changes (v5 → v6)
 - **MINOR:** New features, new Parts
 - **PATCH:** Bug fixes, content corrections
+
+### Documentation Version Sync Rule
+
+When content changes are made (content restoration phase, new TP, layer restructure), the following MUST be updated:
+
+1. **Version bump:** Each affected `docs/*.md` file must have its version incremented by +0.1 in the header
+2. **Date update:** The `Last Updated` field in the header must reflect the date of the change
+3. **Scope:** This applies to all files listed in `docs/` that have version headers
+
+**Rationale:** Documentation drift is the primary source of section count mismatches, stale migration records, and broken cross-references. Enforcing version bumps on docs makes it auditable which documents were reviewed after each change.
 
 ---
 

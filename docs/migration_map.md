@@ -1,7 +1,7 @@
 # Migration Map — Live Character Guide v5.12 → v6
 
-> **Version:** 3.2
-> **Last Updated:** 2026-04-22
+> **Version:** 3.3
+> **Last Updated:** 2026-04-27
 > **Status:** Tracking Document (updated for content restoration Phases 0–13)
 
 ---

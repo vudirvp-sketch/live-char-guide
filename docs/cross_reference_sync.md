@@ -1,7 +1,7 @@
 # Cross-Reference Synchronization — Live Character Guide v6
 
-> **Version:** 1.4
-> **Date:** 2026-04-24
+> **Version:** 1.5
+> **Date:** 2026-04-27
 > **Status:** Remediation R-05 Deliverable + Lorebook Enhancement + TP-11–20 + Terminology Sync (Complete)
 > **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14, lorebook-enhancement-plan-v1.1.md, TP-11–20 task changes, terminology-dedup-2026-04-24
 
@@ -52,6 +52,14 @@ This document tracks all bidirectional cross-reference pairs in the guide. Per I
 | 33 | p10_elena_l1 | p2_anchor_examples | `href="#p2_anchor_examples"` (layer-remark) | ✅ Added per T-9.2: p10_elena_l1 references p2_anchor_examples via layer-remark «Формат якорей объяснён → p2_anchor_examples» |
 | 34 | p4_spine_mapping | p5_cross_instrument_map | `data-layer-switch="2#p5_cross_instrument_map"` | ✅ Added per T-9.3: p4_spine_mapping references p5_cross_instrument_map via layer-remark «Инструментальная карта Enneagram→SPINE → p5_cross_instrument_map» |
 | 35 | p7_core_directives | p9_pre_deploy | `data-layer-switch="3#p9_pre_deploy"` | ✅ Added per T-9.4: p7_core_directives mentions p9_pre_deploy «Pre-Deploy Validation включает проверку CORE DIRECTIVES → p9_pre_deploy» |
+| 36 | p4_spine_mapping | p4_l3_spine_full (LIE/GHOST callout) | `data-layer-switch="3#p4_l3_spine_full"` | ✅ Added per T-8.1: p4_spine_mapping .callout.important about LIE/GHOST L3-only status with link to p4_l3_spine_full |
+| 37 | p4_spine_mapping | p7_core_directives_l3 (CONSEQUENCE DRIVEN) | `data-layer-switch="3#p7_core_directives_l3"` | ✅ Added per T-8.4: CONSEQUENCE DRIVEN callout in p4_spine_mapping links to p7_core_directives_l3 |
+| 38 | p9_decision_tree | p6_cot_basics | `data-layer-switch="3#p6_cot_basics"` | ✅ Added per T-8.2: new row «модель теряет внутреннюю логику» → CoT L3 |
+| 39 | p9_symptom_table | p6_cot_basics | `data-layer-switch="3#p6_cot_basics"` | ✅ Added per T-8.3: new symptom row «Потеря внутренней логики» → CoT Tier 2 L3 |
+| 40 | p5_ocean_basics | p8_ap15_basic | `data-layer-switch="2#p8_ap15_basic"` | ✅ Added per T-8.5: .callout.tip about AP-15 violation with link to p8_ap15_basic |
+| 41 | p7_lorebook_mechanics | p7_lorebook_advanced | `data-layer-switch="3#p7_lorebook_advanced"` | ✅ Added per T-8.6: .callout.tip about GHOST-linked triggers with link to p7_lorebook_advanced |
+| 42 | p2_embodiment | p2_sensory_anchors | `data-layer-switch="3#p2_sensory_anchors"` | ✅ Added per T-8.7: layer-remark about sensory anchors for GHOST characters |
+| 43 | p3_voice_leak | p8_ap11_voice_bleed | `data-layer-switch="3#p8_ap11_voice_bleed"` | ✅ Added per T-8.8: layer-remark about Voice Bleed AP-11 for multi-char scenarios |
 
 ---
 

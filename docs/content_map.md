@@ -1,7 +1,7 @@
 # Content Ownership Map — Live Character Guide v6
 
-> **Version:** 2.3
-> **Last Updated:** 2026-04-23
+> **Version:** 2.4
+> **Last Updated:** 2026-04-27
 > **Status:** Canonical Reference (post-layer-restructure, post-remediation, post-lorebook-enhancement, post-TP-11-20)
 
 ---
