@@ -3,29 +3,53 @@
   "$id": "https://vudirvp-sketch.github.io/live-char-guide/schemas/character_schema.json",
   "title": "Live Character Guide - Character Card Schema",
   "description": "JSON Schema for character cards built according to the Live Character Guide methodology",
-  "version": "6.2.0",
+  "version": "6.2.2",
   "type": "object",
   "properties": {
     "metadata": {
       "type": "object",
       "properties": {
-        "name": { "type": "string", "description": "Character name" },
-        "version": { "type": "string", "description": "Card version" },
-        "author": { "type": "string", "description": "Card author" },
-        "created": { "type": "string", "format": "date-time" },
-        "modified": { "type": "string", "format": "date-time" },
-        "tags": { 
-          "type": "array", 
-          "items": { "type": "string" },
+        "name": {
+          "type": "string",
+          "description": "Character name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Card version"
+        },
+        "author": {
+          "type": "string",
+          "description": "Card author"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "description": "Tags for categorization"
         },
         "target_model": {
           "type": "string",
-          "enum": ["12B", "32B+", "API", "all"],
+          "enum": [
+            "12B",
+            "32B+",
+            "API",
+            "all"
+          ],
           "description": "Target model size for optimization"
         }
       },
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
     "spine": {
       "type": "object",
@@ -52,7 +76,12 @@
           "description": "Past event that formed the FLAW/LIE"
         }
       },
-      "required": ["want", "need", "flaw", "lie"]
+      "required": [
+        "want",
+        "need",
+        "flaw",
+        "lie"
+      ]
     },
     "psychology": {
       "type": "object",
@@ -62,11 +91,36 @@
           "type": "object",
           "description": "OCEAN (Big Five) personality - use only 1-2 extreme poles",
           "properties": {
-            "O": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Openness" },
-            "C": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Conscientiousness" },
-            "E": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Extraversion" },
-            "A": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Agreeableness" },
-            "N": { "type": "integer", "minimum": 0, "maximum": 100, "description": "Neuroticism" }
+            "O": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Openness"
+            },
+            "C": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Conscientiousness"
+            },
+            "E": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Extraversion"
+            },
+            "A": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Agreeableness"
+            },
+            "N": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Neuroticism"
+            }
           },
           "additionalProperties": false
         },
@@ -74,21 +128,44 @@
           "type": "object",
           "description": "Enneagram type",
           "properties": {
-            "type": { "type": "integer", "minimum": 1, "maximum": 9 },
-            "wing": { "type": "integer", "minimum": 1, "maximum": 9 },
-            "stress_direction": { "type": "integer", "minimum": 1, "maximum": 9 },
-            "growth_direction": { "type": "integer", "minimum": 1, "maximum": 9 }
+            "type": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9
+            },
+            "wing": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9
+            },
+            "stress_direction": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9
+            },
+            "growth_direction": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9
+            }
           },
-          "required": ["type"]
+          "required": [
+            "type"
+          ]
         },
         "mbti": {
           "type": "object",
           "description": "MBTI type - advanced, optional",
           "properties": {
-            "type": { "type": "string", "pattern": "^[EI][SN][TF][JP]$" },
+            "type": {
+              "type": "string",
+              "pattern": "^[EI][SN][TF][JP]$"
+            },
             "cognitive_functions": {
               "type": "array",
-              "items": { "type": "string" },
+              "items": {
+                "type": "string"
+              },
               "description": "Cognitive function stack"
             }
           }
@@ -101,17 +178,38 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": { "type": "string" },
-          "trigger": { "type": "string", "description": "External stimulus" },
-          "action": { "type": "string", "description": "Observable reaction" },
-          "price": { "type": "string", "description": "Immediate physical/verbal manifestation" },
+          "id": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "string",
+            "description": "External stimulus"
+          },
+          "action": {
+            "type": "string",
+            "description": "Observable reaction"
+          },
+          "price": {
+            "type": "string",
+            "description": "Immediate physical/verbal manifestation"
+          },
           "type": {
             "type": "string",
-            "enum": ["FLAW", "GHOST", "GROWTH", "AVOIDANCE", "CORE"],
+            "enum": [
+              "FLAW",
+              "GHOST",
+              "GROWTH",
+              "AVOIDANCE",
+              "CORE"
+            ],
             "description": "Anchor type for categorization"
           }
         },
-        "required": ["trigger", "action", "price"]
+        "required": [
+          "trigger",
+          "action",
+          "price"
+        ]
       },
       "minItems": 3,
       "maxItems": 7
@@ -124,13 +222,27 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["neutral", "stress", "trust", "conflict"],
+            "enum": [
+              "neutral",
+              "stress",
+              "trust",
+              "conflict"
+            ],
             "description": "Scenario type"
           },
-          "content": { "type": "string", "description": "Full example text with <START> wrapper" },
-          "tokens_estimate": { "type": "integer", "description": "Approximate token count" }
+          "content": {
+            "type": "string",
+            "description": "Full example text with <START> wrapper"
+          },
+          "tokens_estimate": {
+            "type": "integer",
+            "description": "Approximate token count"
+          }
         },
-        "required": ["type", "content"]
+        "required": [
+          "type",
+          "content"
+        ]
       },
       "minItems": 3
     },
@@ -138,54 +250,71 @@
       "type": "object",
       "description": "First message",
       "properties": {
-        "content": { "type": "string", "description": "Greeting text" },
+        "content": {
+          "type": "string",
+          "description": "Greeting text"
+        },
         "elements": {
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["sensory", "location", "tone", "flaw_hint", "hook"]
+            "enum": [
+              "sensory",
+              "location",
+              "tone",
+              "flaw_hint",
+              "hook"
+            ]
           },
           "description": "Elements present in greeting"
         }
       },
-      "required": ["content"]
+      "required": [
+        "content"
+      ]
     },
     "system_prompt": {
       "type": "object",
       "description": "System prompt configuration",
       "properties": {
-        "antigodmoding": { 
-          "type": "boolean", 
+        "antigodmoding": {
+          "type": "boolean",
           "default": true,
-          "description": "Include anti-godmoding rules" 
+          "description": "Include anti-godmoding rules"
         },
-        "spatial_lock": { 
-          "type": "boolean", 
+        "spatial_lock": {
+          "type": "boolean",
           "default": true,
-          "description": "Include spatial/anatomical lock" 
+          "description": "Include spatial/anatomical lock"
         },
-        "format_lock": { 
-          "type": "boolean", 
+        "format_lock": {
+          "type": "boolean",
           "default": false,
-          "description": "Include format lock" 
+          "description": "Include format lock"
         },
-        "pre_generation_filter": { 
-          "type": "boolean", 
+        "pre_generation_filter": {
+          "type": "boolean",
           "default": true,
-          "description": "Include pre-generation filter (for 12B)" 
+          "description": "Include pre-generation filter (for 12B)"
         },
-        "custom_instructions": { 
+        "custom_instructions": {
           "type": "string",
-          "description": "Additional custom instructions" 
+          "description": "Additional custom instructions"
         },
         "core_directives": {
           "type": "object",
           "description": "CORE DIRECTIVES system — unified directive system in SP",
           "properties": {
-            "enabled": { "type": "boolean", "default": false, "description": "Enable CORE DIRECTIVES in SP" },
+            "enabled": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable CORE DIRECTIVES in SP"
+            },
             "items": {
               "type": "array",
-              "items": { "type": "string" },
+              "items": {
+                "type": "string"
+              },
               "description": "List of enabled directives (e.g. SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, INFLUENCE BOUNDARY, ENVIRONMENTAL REACTIVITY, CONSEQUENCE DRIVEN, PRE-GENERATION FILTER)"
             }
           }
@@ -194,29 +323,53 @@
           "type": "object",
           "description": "Tone Frame — dual-function SP element (~25-30 tokens)",
           "properties": {
-            "enabled": { "type": "boolean", "default": false, "description": "Enable Tone Frame in SP" },
-            "content": { "type": "string", "description": "Tone Frame text (English, ~25-30 tokens)" }
+            "enabled": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable Tone Frame in SP"
+            },
+            "content": {
+              "type": "string",
+              "description": "Tone Frame text (English, ~25-30 tokens)"
+            }
           }
         },
         "ooc_protection": {
           "type": "object",
           "description": "OOC Protection — SP block for OOC reaction (~15 tokens)",
           "properties": {
-            "enabled": { "type": "boolean", "default": false, "description": "Enable OOC Protection in SP" },
-            "content": { "type": "string", "description": "OOC Protection text (~15 tokens)" }
+            "enabled": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable OOC Protection in SP"
+            },
+            "content": {
+              "type": "string",
+              "description": "OOC Protection text (~15 tokens)"
+            }
           }
         },
         "immersion_boundary": {
           "type": "object",
           "description": "Immersion Boundary — advanced OOC protection: deny meta-reality (L3-only)",
           "properties": {
-            "enabled": { "type": "boolean", "default": false, "description": "Enable Immersion Boundary in SP (L3-only)" },
-            "content": { "type": "string", "description": "Immersion Boundary text — character denies meta-reality" }
+            "enabled": {
+              "type": "boolean",
+              "default": false,
+              "description": "Enable Immersion Boundary in SP (L3-only)"
+            },
+            "content": {
+              "type": "string",
+              "description": "Immersion Boundary text — character denies meta-reality"
+            }
           }
         },
         "directive_language": {
           "type": "string",
-          "enum": ["english", "card_language"],
+          "enum": [
+            "english",
+            "card_language"
+          ],
           "default": "english",
           "description": "Language for CORE_DIRECTIVES in SP. English is recommended for 12B models (better compliance)."
         }
@@ -228,50 +381,107 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": { "type": "string" },
+          "id": {
+            "type": "string"
+          },
           "trigger_type": {
             "type": "string",
-            "enum": ["keyword", "range"]
+            "enum": [
+              "keyword",
+              "range"
+            ]
           },
           "keys": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Trigger keywords"
           },
           "exclude_keys": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Exclusion keywords"
           },
-          "content": { "type": "string" },
-          "depth": { "type": "integer", "default": 5 },
-          "probability": { "type": "integer", "minimum": 0, "maximum": 100, "default": 100 },
-          "sticky": { "type": "integer", "default": 0 },
-          "cooldown": { "type": "integer", "default": 0 }
+          "content": {
+            "type": "string"
+          },
+          "depth": {
+            "type": "integer",
+            "default": 5
+          },
+          "probability": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100,
+            "default": 100
+          },
+          "sticky": {
+            "type": "integer",
+            "default": 0
+          },
+          "cooldown": {
+            "type": "integer",
+            "default": 0
+          }
         },
-        "required": ["trigger_type", "content"]
+        "required": [
+          "trigger_type",
+          "content"
+        ]
       }
     },
     "generation_params": {
       "type": "object",
       "description": "Recommended generation parameters",
       "properties": {
-        "temperature_12B": { "type": "number", "minimum": 0.6, "maximum": 0.8, "default": 0.7 },
-        "temperature_32B": { "type": "number", "minimum": 0.85, "maximum": 1.1, "default": 0.95 },
-        "top_p": { "type": "number", "minimum": 0.9, "maximum": 0.95, "default": 0.95 },
-        "min_p": { "type": "number", "default": 0.05 },
-        "repetition_penalty": { "type": "number", "default": 1.05 },
-        "presence_penalty_12B": { "type": "number", "default": 0.0 },
-        "presence_penalty_32B": { "type": "number", "minimum": 0.0, "maximum": 0.15, "default": 0.0 }
+        "temperature_12B": {
+          "type": "number",
+          "minimum": 0.6,
+          "maximum": 0.8,
+          "default": 0.7
+        },
+        "temperature_32B": {
+          "type": "number",
+          "minimum": 0.85,
+          "maximum": 1.1,
+          "default": 0.95
+        },
+        "top_p": {
+          "type": "number",
+          "minimum": 0.9,
+          "maximum": 0.95,
+          "default": 0.95
+        },
+        "min_p": {
+          "type": "number",
+          "default": 0.05
+        },
+        "repetition_penalty": {
+          "type": "number",
+          "default": 1.05
+        },
+        "presence_penalty_12B": {
+          "type": "number",
+          "default": 0.0
+        },
+        "presence_penalty_32B": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 0.15,
+          "default": 0.0
+        }
       }
     },
     "validation": {
       "type": "object",
       "description": "Validation checklist status",
       "properties": {
-        "ocean_extremes_count": { 
-          "type": "integer", 
-          "minimum": 0, 
+        "ocean_extremes_count": {
+          "type": "integer",
+          "minimum": 0,
           "maximum": 2,
           "description": "Number of OCEAN extreme poles (should be 1-2)"
         },
@@ -291,28 +501,65 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["basic_role", "voice_drift", "anchor_trigger", "memory_continuity", "long_session", "context_overflow", "ocean_consistency", "voice_isolation"]
+            "enum": [
+              "basic_role",
+              "voice_drift",
+              "anchor_trigger",
+              "memory_continuity",
+              "long_session",
+              "context_overflow",
+              "ocean_consistency",
+              "voice_isolation"
+            ]
           }
         }
       }
     }
   },
-  "required": ["metadata", "spine"],
+  "required": [
+    "metadata",
+    "spine"
+  ],
   "additionalProperties": true,
-
   "ocean_enneagram_mapping": {
     "description": "Reference mapping between OCEAN extreme poles and Enneagram types",
-    "type_1": { "ocean_hint": "High C, Low A", "flaw_pattern": "Perfectionism, criticism" },
-    "type_2": { "ocean_hint": "High A, High E", "flaw_pattern": "People-pleasing, self-sacrifice" },
-    "type_3": { "ocean_hint": "High C, High E, Low A", "flaw_pattern": "Image-focused, overwork" },
-    "type_4": { "ocean_hint": "High O, Low E, High N", "flaw_pattern": "Uniqueness-seeking, melancholy" },
-    "type_5": { "ocean_hint": "High O, Low E, Low A", "flaw_pattern": "Withdrawal, intellectualization" },
-    "type_6": { "ocean_hint": "High N, Low E", "flaw_pattern": "Anxiety, loyalty-testing" },
-    "type_7": { "ocean_hint": "High O, High E, Low N", "flaw_pattern": "Escapism, commitment issues" },
-    "type_8": { "ocean_hint": "High E, Low A", "flaw_pattern": "Control, aggression" },
-    "type_9": { "ocean_hint": "Low E, High A, Low N", "flaw_pattern": "Passive, self-forgetting" }
+    "type_1": {
+      "ocean_hint": "High C, Low A",
+      "flaw_pattern": "Perfectionism, criticism"
+    },
+    "type_2": {
+      "ocean_hint": "High A, High E",
+      "flaw_pattern": "People-pleasing, self-sacrifice"
+    },
+    "type_3": {
+      "ocean_hint": "High C, High E, Low A",
+      "flaw_pattern": "Image-focused, overwork"
+    },
+    "type_4": {
+      "ocean_hint": "High O, Low E, High N",
+      "flaw_pattern": "Uniqueness-seeking, melancholy"
+    },
+    "type_5": {
+      "ocean_hint": "High O, Low E, Low A",
+      "flaw_pattern": "Withdrawal, intellectualization"
+    },
+    "type_6": {
+      "ocean_hint": "High N, Low E",
+      "flaw_pattern": "Anxiety, loyalty-testing"
+    },
+    "type_7": {
+      "ocean_hint": "High O, High E, Low N",
+      "flaw_pattern": "Escapism, commitment issues"
+    },
+    "type_8": {
+      "ocean_hint": "High E, Low A",
+      "flaw_pattern": "Control, aggression"
+    },
+    "type_9": {
+      "ocean_hint": "Low E, High A, Low N",
+      "flaw_pattern": "Passive, self-forgetting"
+    }
   },
-
   "anchor_templates": [
     {
       "type": "FLAW",
@@ -327,24 +574,70 @@
       "template": "When [opportunity for growth] → [behavior toward NEED] → Price: [vulnerability]"
     }
   ],
-
   "token_budgets": {
-    "4K": { "card_budget": "430-580", "an": false, "lorebook": false, "cot": false, "notes": "L1 only, minimal SP" },
-    "8K": { "card_budget": "580-830", "an": true, "lorebook": false, "cot": false, "notes": "L1+L2 basics" },
-    "16K": { "card_budget": "800-1500", "an": true, "lorebook": true, "cot": false, "notes": "Full L2" },
-    "32K": { "card_budget": "1500+", "an": true, "lorebook": true, "cot": "limited", "notes": "Full L3" }
+    "4K": {
+      "card_budget": "430-580",
+      "an": false,
+      "lorebook": false,
+      "cot": false,
+      "notes": "L1 only, minimal SP"
+    },
+    "8K": {
+      "card_budget": "580-830",
+      "an": true,
+      "lorebook": false,
+      "cot": false,
+      "notes": "L1+L2 basics"
+    },
+    "16K": {
+      "card_budget": "800-1500",
+      "an": true,
+      "lorebook": true,
+      "cot": false,
+      "notes": "Full L2"
+    },
+    "32K": {
+      "card_budget": "1500+",
+      "an": true,
+      "lorebook": true,
+      "cot": "limited",
+      "notes": "Full L3"
+    }
   },
-
   "test_scenarios": {
     "core": [
-      { "id": "basic_role", "name": "Basic Role Maintenance", "description": "Test if model maintains character role" },
-      { "id": "voice_drift", "name": "Voice Drift Detection", "description": "Test for consistency of voice patterns" },
-      { "id": "anchor_trigger", "name": "Anchor Trigger Response", "description": "Test if anchors trigger correctly" },
-      { "id": "memory_continuity", "name": "Memory Continuity", "description": "Test if GHOST events are remembered" }
+      {
+        "id": "basic_role",
+        "name": "Basic Role Maintenance",
+        "description": "Test if model maintains character role"
+      },
+      {
+        "id": "voice_drift",
+        "name": "Voice Drift Detection",
+        "description": "Test for consistency of voice patterns"
+      },
+      {
+        "id": "anchor_trigger",
+        "name": "Anchor Trigger Response",
+        "description": "Test if anchors trigger correctly"
+      },
+      {
+        "id": "memory_continuity",
+        "name": "Memory Continuity",
+        "description": "Test if GHOST events are remembered"
+      }
     ],
     "extended": [
-      { "id": "long_session", "name": "Long Session (50+ messages)", "description": "Test stability in extended sessions" },
-      { "id": "context_overflow", "name": "Context Window Overflow", "description": "Test behavior at context limits" }
+      {
+        "id": "long_session",
+        "name": "Long Session (50+ messages)",
+        "description": "Test stability in extended sessions"
+      },
+      {
+        "id": "context_overflow",
+        "name": "Context Window Overflow",
+        "description": "Test behavior at context limits"
+      }
     ]
   }
 }

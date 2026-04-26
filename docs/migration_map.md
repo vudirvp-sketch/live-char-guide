@@ -1,6 +1,6 @@
 # Migration Map — Live Character Guide v5.12 → v6
 
-> **Version:** 3.3
+> **Version:** 3.4
 > **Last Updated:** 2026-04-27
 > **Status:** Tracking Document (updated for content restoration Phases 0–13)
 
@@ -162,7 +162,7 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | — | `p8_ap13_lorebook_conflict` | l3 | Lorebook conflict (AP-13) |
 | — | `p8_ap14_context_violation` | l3 | Context window violation (AP-14) |
 | `ap-ocean-overload` | `p8_ap15_basic` | l2 | OCEAN overload basic (AP-15, L2 section) |
-| — | _(not yet created)_ | l3 | AP-15 extended treatment planned per §0.19 but not yet separate section |
+| — | p8_ap15_extended | l3 | AP-15 extended: 3 OCEAN conflict scenarios. **Now exists as p8_ap15_extended** |
 
 ### Part 9: Diagnostics and Debugging
 
@@ -213,8 +213,8 @@ The following changes were made during the layer restructure (`layer-restructure
 
 | data-section ID | Layer | Part | Description |
 |-----------------|-------|------|-------------|
-| p1_l2_bridge | l1 | Part 1 | Bridge: СПИН, OCEAN, FLAW-linked anchors → L2 |
-| p1_l3_bridge | l1 | Part 1 | Bridge: LIE, GHOST, CoT, XML, API → L3 |
+| p1_l2_bridge | l1 | Part 1 | **[MERGED → p1_next_steps]** Bridge content merged into p1_next_steps as navigation hub |
+| p1_l3_bridge | l1 | Part 1 | **[MERGED → p1_next_steps]** Bridge content merged into p1_next_steps as navigation hub |
 | p4_l3_spine_full | l3 | Part 4 | Full 5-element SPINE chain (GHOST→LIE→FLAW→NEED→WANT) |
 | p8_ap15_extended | l3 | Part 8 | AP-15 extended: 3 OCEAN conflict scenarios |
 | p3_multi_char | l3 | Part 3 | Multi-character: Уолтер Уайт + Джесси Пинкман |
@@ -338,6 +338,8 @@ The following sections were merged or removed during the layer restructure and c
 | p5_enneagram_to_spine | p5_cross_instrument_map | l2 | RENAMED: broader cross-instrument mapping (not just Enneagram→SPINE) |
 | p7_immersion_boundary | p7_ooc_protection | l3 | Merged: Immersion Boundary is now a subsection of OOC Protection |
 | p10_l2_voice_warning | p10_elena_l2 | l2 | Merged: Voice Warning is now a callout inside Elena L2 card section |
+| p1_l2_bridge | p1_next_steps | l1 | Merged: L2 bridge content integrated into p1_next_steps as navigation hub (СПИН, OCEAN, FLAW-linked anchors) |
+| p1_l3_bridge | p1_next_steps | l1 | Merged: L3 bridge content integrated into p1_next_steps as navigation hub (LIE, GHOST, CoT, XML, API) |
 
 ---
 
@@ -402,7 +404,7 @@ The following changes were made during the content restoration (`content-restora
 | p8_ap10_cot_overload | l3 | Part 8 | Added visual example pair | Phase 8 |
 | p8_ap11_voice_bleed | l3 | Part 8 | Added bidirectional back-reference (IMP-48) to p3_multi_char | Phase 8 |
 | p8_ap15_basic | l2 | Part 8 | Added bidirectional back-reference (IMP-48) to p5_ocean_poles | Phase 8 |
-| p8_l1_bridge | l1 | Part 8 | Updated bridge text from "15 анти-паттернов" to "16 анти-паттернов" | Phase 8 |
+| p8_l1_bridge | l1 | Part 8 | **[PHANTOM — no separate data-section]** Bridge for Part 8 is implemented as navigational links within p1_next_steps, not as a separate section. Updated text about "16 анти-паттернов" | Phase 8 |
 
 ### Layer Changes (IMP-47 Note)
 

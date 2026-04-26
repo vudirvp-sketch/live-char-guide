@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/2.0.0.html).
 
+## [6.2.2] - 2026-04-27
+
+### Fixed
+- **T-10.1:** architecture.md now correctly references `build/build-manifest.json` (was `build/manifest.json` which doesn't exist)
+- **migration_map.md:** p1_l2_bridge and p1_l3_bridge marked as `[MERGED → p1_next_steps]` in New Sections table and added to Merged Sections table
+- **migration_map.md:** AP-15 extended entry updated from `_(not yet created)_` to `p8_ap15_extended` (section exists)
+- **migration_map.md:** p8_l1_bridge in Content Restoration Entries marked as `[PHANTOM — no separate data-section]`
+- **T-11.3:** Added SP clarification in p7_system_prompt: "SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI"
+
+### Changed
+- Version bumped to 6.2.2 across all 4 canonical locations + README badge
+- docs/architecture.md version updated to 6.2.2
+- docs/migration_map.md version updated to 3.4
+
+### Verified
+- T-11.1: enneagram.json Type 3 = "Достигатель" (canonical, confirmed)
+- T-11.2: validate_terms.py — all terminology valid; check_english.py — no English leaks
+- Build validation: 105 sections, 0 errors, 0 warnings
+- validate-master.mjs: PASSED (13 checks)
+- validate-layers.mjs: PASSED (7 checks, 0 warnings)
+
+## [6.2.1] - 2026-04-27
+
+### Added
+- **T-8.1:** p4_spine_mapping `.callout.important` about LIE/GHOST L3-only status with data-layer-switch to p4_l3_spine_full
+- **T-8.2:** p9_decision_tree new row for CoT (internal logic loss) with data-layer-switch to p6_cot_basics
+- **T-8.3:** p9_symptom_table new symptom row for CoT with data-layer-switch to p6_cot_basics
+- **T-8.4:** p4_spine_mapping CONSEQUENCE DRIVEN callout with data-layer-switch to p7_core_directives_l3
+- **T-8.5:** p5_ocean_basics `.callout.tip` about AP-15 basic cross-ref with data-layer-switch to p8_ap15_basic
+- **T-8.6:** p7_lorebook_mechanics `.callout.tip` about GHOST-linked triggers with data-layer-switch to p7_lorebook_advanced
+- **T-8.7:** p2_embodiment layer-remark about sensory anchors for GHOST with data-layer-switch to p2_sensory_anchors
+- **T-8.8:** p3_voice_leak layer-remark about Voice Bleed AP-11 with data-layer-switch to p8_ap11_voice_bleed
+- **T-7.1:** Documentation Version Sync Rule added to architecture.md
+- **T-7.2:** New scripts/check-doc-versions.mjs for docs version drift detection
+- cross_reference_sync.md updated with pairs #36–#43
+
 ## [6.2.0] - 2026-04-27
 
 ### Added

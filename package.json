@@ -1,6 +1,6 @@
 {
   "name": "live-char-guide",
-  "version": "6.2.0",
+  "version": "6.2.2",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "description": "Live Character Guide for LLM \u2014 Engineering pipeline for RP character cards",

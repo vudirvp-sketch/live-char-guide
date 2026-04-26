@@ -1,6 +1,6 @@
 # Live Character Guide Architecture
 
-> **Version:** 6.2.1
+> **Version:** 6.2.2
 > **Last Updated:** 2026-04-27
 > **Status:** Draft for Stage 0a (synced with Content Restoration Phases 0–13)
 
@@ -32,7 +32,7 @@ src/master/part_*.html (author content)
 build/parts-l1/*.html
 build/parts-l2/*.html
 build/parts-l3/*.html
-build/manifest.json
+build/build-manifest.json
 build/section-registry.json
         │
         ▼
@@ -97,7 +97,7 @@ dist/ (deployed to GitHub Pages)
 - `build/parts-l1/*.html` — Layer 1 HTML files
 - `build/parts-l2/*.html` — Layer 2 HTML files
 - `build/parts-l3/*.html` — Layer 3 HTML files
-- `build/manifest.json` — Top-level manifest
+- `build/build-manifest.json` — Top-level build manifest (version, section count, layer hashes)
 - `build/parts-l{N}/manifest.json` — Per-layer manifest for lazy-loader
 - `build/section-registry.json` — All `data-section` IDs for cross-phase validation
 - `build/glossary.html` — Per-layer no-JS glossary
@@ -352,7 +352,7 @@ live-char-guide/
 │   ├── parts-l1/
 │   ├── parts-l2/
 │   ├── parts-l3/
-│   ├── manifest.json
+│   ├── build-manifest.json
 │   ├── section-registry.json
 │   └── layer-config.json
 ├── data/                 # Widget data + glossary
