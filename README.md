@@ -119,7 +119,7 @@ live-char-guide/
 │   ├── parts-l1/
 │   ├── parts-l2/
 │   ├── parts-l3/
-│   ├── manifest.json
+│   ├── build-manifest.json
 │   └── section-registry.json
 │
 ├── dist/                    # Деплой на GitHub Pages (gitignored)
@@ -284,7 +284,7 @@ pnpm run lint           # ESLint
 
 ## Версия
 
-**Текущая версия:** 6.2.0
+**Текущая версия:** 6.2.3
 
 См. [CHANGELOG.md](./CHANGELOG.md) для истории изменений.
 

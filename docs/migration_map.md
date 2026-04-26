@@ -424,7 +424,7 @@ These are NOT new sections — they are repositioned. If you read the guide befo
 | File | Update Description |
 |------|--------------------|
 | docs/character_bible.md | Added Card refs (IMP-48), bracket format examples (IMP-46), AN template + Lorebook for Выщербленный |
-| docs/content_map.md | Fully rewritten with all 109 sections, statistics updated |
+| docs/content_map.md | Fully rewritten with all 105 sections, statistics updated |
 | docs/terminology_dictionary.md | Added 14 new terms, (L3-only) annotations |
 | docs/migration_map.md | Added Content Restoration entries, this section |
 | docs/user_journeys.md | Updated with CORE DIRECTIVES, Voice Contamination, Pre-Deploy steps |
