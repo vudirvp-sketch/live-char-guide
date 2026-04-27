@@ -69,18 +69,19 @@
         },
         "lie": {
           "type": "string",
-          "description": "False belief sustaining the FLAW"
+          "description": "False belief sustaining the FLAW",
+          "x-layer": "l3"
         },
         "ghost": {
           "type": "string",
-          "description": "Past event that formed the FLAW/LIE"
+          "description": "Past event that formed the FLAW/LIE",
+          "x-layer": "l3"
         }
       },
       "required": [
         "want",
         "need",
-        "flaw",
-        "lie"
+        "flaw"
       ]
     },
     "psychology": {
@@ -175,6 +176,11 @@
     "anchors": {
       "type": "array",
       "description": "Behavioral anchors - trigger → action → price",
+      "x-layer-ranges": {
+        "l1": {"minItems": 3, "maxItems": 5},
+        "l2": {"minItems": 5, "maxItems": 7},
+        "l3": {"minItems": 7, "maxItems": 12}
+      },
       "items": {
         "type": "object",
         "properties": {
@@ -212,7 +218,7 @@
         ]
       },
       "minItems": 3,
-      "maxItems": 7
+      "maxItems": 12
     },
     "examples": {
       "type": "array",
@@ -244,7 +250,12 @@
           "content"
         ]
       },
-      "minItems": 3
+      "minItems": 2,
+      "x-layer-ranges": {
+        "l1": {"minItems": 2},
+        "l2": {"minItems": 3},
+        "l3": {"minItems": 3}
+      }
     },
     "greeting": {
       "type": "object",

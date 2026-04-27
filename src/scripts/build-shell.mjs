@@ -72,7 +72,7 @@ function log(level, message) {
 // ============================================================================
 
 async function validateLayerConfig() {
-  const configPath = join(BUILD_DIR, 'layer-config.json');
+  const configPath = join(ROOT, 'layer-config.json');
   if (!existsSync(configPath)) {
     log('WARN', 'build/layer-config.json not found, skipping layer name validation');
     return null;

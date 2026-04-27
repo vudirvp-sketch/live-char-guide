@@ -34,7 +34,7 @@ const MASTER_DIR = join(ROOT, 'src', 'master');
 const DATA_DIR = join(ROOT, 'data');
 const BUILD_DIR = join(ROOT, 'build');
 const GLOSSARY_PATH = join(DATA_DIR, 'glossary.json');
-const LAYER_CONFIG_PATH = join(BUILD_DIR, 'layer-config.json');
+const LAYER_CONFIG_PATH = join(ROOT, 'layer-config.json');
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -504,17 +504,17 @@ async function buildLayers() {
   const layerConfig = await loadLayerConfig();
   log('INFO', `Layer config loaded: v${layerConfig.version}`);
 
-  // Clean build directory (preserve layer-config.json)
+  // Clean build directory
   if (existsSync(BUILD_DIR)) {
-    const keepFiles = ['layer-config.json'];
     const entries = await readdir(BUILD_DIR);
     for (const entry of entries) {
-      if (!keepFiles.includes(entry)) {
-        await rm(join(BUILD_DIR, entry), { recursive: true, force: true });
-      }
+      await rm(join(BUILD_DIR, entry), { recursive: true, force: true });
     }
   }
   await ensureDir(BUILD_DIR);
+
+  // Sync config to build/ for backward compatibility
+  await writeFile(join(BUILD_DIR, 'layer-config.json'), JSON.stringify(layerConfig, null, 2));
   await ensureDir(join(BUILD_DIR, 'parts-l1'));
   await ensureDir(join(BUILD_DIR, 'parts-l2'));
   await ensureDir(join(BUILD_DIR, 'parts-l3'));

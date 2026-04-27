@@ -101,6 +101,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
 |---------|---------------|-----------------|-------|--------------|-------|
+| CoT bridge (обзор) | Part 6 | p6_cot_bridge | l2 | Bridge | Навигационный мостик к L3-контенту CoT. NEW |
 | CoT basics | Part 6 | p6_cot_basics | l3 | Definition | Перемещено из L2 → L3. Для 12B vs 32B+ |
 | CoT Tier definitions | Part 6 | p6_cot_tiers | l3 | Reference | Tier 0/1/2/3 определения. Перемещено из L2 → L3 |
 | CoT Tier 2 | Part 6 | p6_cot_tier2 | l3 | Template | Structured internal process |
@@ -198,17 +199,17 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 3 (Voice) | 2 | 5 | 1 | 8 |
 | Part 4 (SPINE) | 0 | 5 | 6 | 11 |
 | Part 5 (Psych Toolkit) | 0 | 5 | 2 | 7 |
-| Part 6 (CoT) | 0 | 0 | 6 | 6 |
+| Part 6 (CoT) | 0 | 1 | 6 | 7 |
 | Part 7 (Technical) | 0 | 10 | 8 | 18 |
 | Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
 | Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
 | Part 10 (Examples) | 2 | 5 | 2 | 9 |
-| **Total** | **20** | **48** | **37** | **105** |
+| **Total** | **20** | **49** | **37** | **106** |
 
 **Cumulative (as reader sees it):**
 - **L1 sees: 20 sections** (Part 1 has 9 L1 sections after p1_next_layers merged into p1_next_steps)
-- **L2 sees: 68 sections** (+48 to L1)
-- **L3 sees: 105 sections** (+37 to L2)
+- **L2 sees: 69 sections** (+49 to L1)
+- **L3 sees: 106 sections** (+37 to L2)
 
 **Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 has 6 L3 sections (p6_l3_quickstart added during content restoration), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 8 has 18 sections (AP-15 basic+extended split), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten). Total = 105 matching section-registry.json.
 
