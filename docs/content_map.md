@@ -211,7 +211,7 @@ This document is the **single source of truth** for "where does concept X live."
 - **L2 sees: 69 sections** (+49 to L1)
 - **L3 sees: 106 sections** (+37 to L2)
 
-**Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 has 6 L3 sections (p6_l3_quickstart added during content restoration), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 8 has 18 sections (AP-15 basic+extended split), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten). Total = 105 matching section-registry.json.
+**Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 has 1 L2 bridge section (p6_cot_bridge) + 6 L3 sections (p6_l3_quickstart added during content restoration), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 8 has 18 sections (AP-15 basic+extended split), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten). Total = 106 matching section-registry.json (updated after p6_cot_bridge addition: L2 48→49, Total 105→106).
 
 **L1 Bridge Note:** L1 bridge sections for Parts 4–8 are implemented as navigational links within `p1_next_steps` (Part 1), not as separate `data-section` elements. Readers on L1 see bridge mentions pointing to L2/L3 content via `data-layer-switch` or `term-marker` elements inside `p1_next_steps`.
 
