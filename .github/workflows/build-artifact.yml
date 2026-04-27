@@ -83,7 +83,7 @@ jobs:
       # === ID: F2 | CI Terminology Validation ===
       - name: Validate terminology
         run: |
-          python scripts/validate_terms.py --glossary src/data/glossary.json
+          python scripts/validate_terms.py --glossary data/glossary.json
         continue-on-error: ${{ github.event_name == 'pull_request' }}
 
       - name: Upload build artifact

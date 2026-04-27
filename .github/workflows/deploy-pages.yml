@@ -138,7 +138,7 @@ jobs:
           PAGE_URL="${{ steps.deployment.outputs.page_url }}"
           curl -s "$PAGE_URL" | grep -q "shell-styles.css" || echo "WARN: shell not found"
           curl -s "$PAGE_URL/assets/lazy-loader.js" | head -1 | grep -q "LAZY LOADER" || echo "WARN: lazy-loader not found"
-          curl -s "$PAGE_URL/parts-l2/01_intro.html" | grep -q "intro" || echo "WARN: parts-l2 not found"
+          curl -s "$PAGE_URL/parts-l2/part_01.html" | grep -q "p1" || echo "WARN: parts-l2 not found"
 
       - name: Create Deploy Tag
         if: success()

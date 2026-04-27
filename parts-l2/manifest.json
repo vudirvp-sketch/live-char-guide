@@ -69,6 +69,13 @@
       ]
     },
     {
+      "file": "part_06.html",
+      "title": "Цепочка рассуждений (CoT)",
+      "anchors": [
+        "p6_cot_bridge"
+      ]
+    },
+    {
       "file": "part_07.html",
       "title": "Техническая реализация",
       "anchors": [

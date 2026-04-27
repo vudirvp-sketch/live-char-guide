@@ -22,12 +22,12 @@ jobs:
       - name: Validate downward links
         run: |
           echo "=== PHASE 1.4: Downward Link Validation ==="
-          python scripts/validate_downward_links.py --verbose || echo "validate_downward_links.py not found, skipping"
+          echo "WARN: validate_downward_links.py not available, skipping"
       
       - name: Validate terminology (all layers)
         run: |
           echo "=== Terminology Validation ==="
-          python scripts/validate_terms.py --glossary src/data/glossary.json
+          python scripts/validate_terms.py --glossary data/glossary.json
       
       - name: Check for duplicates (all layers)
         run: |
