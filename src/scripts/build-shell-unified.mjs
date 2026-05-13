@@ -5,7 +5,7 @@
  * @version 7.0.0
  *
  * @description
- * Shell build for the unified guide. Copies shell-unified + generated parts + data → dist-unified/
+ * Shell build for the unified guide. Copies shell + generated parts + data → dist/
  *
  * Usage:
  *   node src/scripts/build-shell-unified.mjs
@@ -20,10 +20,10 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
 const SRC_DIR = join(ROOT, 'src');
-const SHELL_DIR = join(SRC_DIR, 'shell-unified');
+const SHELL_DIR = join(SRC_DIR, 'shell');
 const BUILD_DIR = join(ROOT, 'build');
 const DATA_DIR = join(ROOT, 'data');
-const DIST_DIR = join(ROOT, 'dist-unified');
+const DIST_DIR = join(ROOT, 'dist');
 const ASSETS_SRC = join(SRC_DIR, 'assets');
 const ASSETS_DIST = join(DIST_DIR, 'assets');
 
@@ -101,9 +101,9 @@ async function buildShell() {
     );
 
     await writeFile(join(DIST_DIR, 'index.html'), indexContent);
-    log('INFO', 'Copied shell-unified/index.html → dist-unified/index.html');
+    log('INFO', 'Copied shell/index.html → dist/index.html');
   } else {
-    log('ERROR', 'shell-unified/index.html not found');
+    log('ERROR', 'shell/index.html not found');
     process.exit(1);
   }
 
@@ -111,9 +111,9 @@ async function buildShell() {
   const shellStyles = join(SHELL_DIR, 'styles.css');
   if (existsSync(shellStyles)) {
     await copyFile(shellStyles, join(ASSETS_DIST, 'shell-styles.css'));
-    log('INFO', 'Copied shell-unified/styles.css → dist-unified/assets/shell-styles.css');
+    log('INFO', 'Copied shell/styles.css → dist/assets/shell-styles.css');
   } else {
-    log('ERROR', 'shell-unified/styles.css not found');
+    log('ERROR', 'shell/styles.css not found');
     process.exit(1);
   }
 
@@ -121,30 +121,30 @@ async function buildShell() {
   const lazyLoader = join(SHELL_DIR, 'lazy-loader.js');
   if (existsSync(lazyLoader)) {
     await copyFile(lazyLoader, join(ASSETS_DIST, 'lazy-loader.js'));
-    log('INFO', 'Copied shell-unified/lazy-loader.js → dist-unified/assets/lazy-loader.js');
+    log('INFO', 'Copied shell/lazy-loader.js → dist/assets/lazy-loader.js');
   } else {
-    log('ERROR', 'shell-unified/lazy-loader.js not found');
+    log('ERROR', 'shell/lazy-loader.js not found');
     process.exit(1);
   }
 
-  // 3b. Copy shell-unified/widgets/ → dist-unified/widgets/
+  // 3b. Copy shell/widgets/ → dist/widgets/
   const widgetsSrc = join(SHELL_DIR, 'widgets');
   const widgetsDist = join(DIST_DIR, 'widgets');
   if (existsSync(widgetsSrc)) {
     await copyDir(widgetsSrc, widgetsDist);
     const widgetFiles = await readdir(widgetsDist);
-    log('INFO', `Copied shell-unified/widgets/ → dist-unified/widgets/ (${widgetFiles.length} files)`);
+    log('INFO', `Copied shell/widgets/ → dist/widgets/ (${widgetFiles.length} files)`);
   } else {
-    log('WARN', 'shell-unified/widgets/ not found, skipping');
+    log('WARN', 'shell/widgets/ not found, skipping');
   }
 
   // 3c. Copy event-bus.js to dist root
   const eventBusSrc = join(SHELL_DIR, 'event-bus.js');
   if (existsSync(eventBusSrc)) {
     await copyFile(eventBusSrc, join(DIST_DIR, 'event-bus.js'));
-    log('INFO', 'Copied shell-unified/event-bus.js → dist-unified/event-bus.js');
+    log('INFO', 'Copied shell/event-bus.js → dist/event-bus.js');
   } else {
-    log('ERROR', 'shell-unified/event-bus.js not found');
+    log('ERROR', 'shell/event-bus.js not found');
     process.exit(1);
   }
 
@@ -154,7 +154,7 @@ async function buildShell() {
   if (existsSync(buildPartsDir)) {
     await copyDir(buildPartsDir, destPartsDir);
     const files = await readdir(destPartsDir);
-    log('INFO', `Copied build/parts/ → dist-unified/parts/ (${files.length} files)`);
+    log('INFO', `Copied build/parts/ → dist/parts/ (${files.length} files)`);
   } else {
     log('ERROR', 'build/parts/ not found. Run build-unified.mjs first.');
     process.exit(1);
@@ -174,38 +174,27 @@ async function buildShell() {
         await copyDir(srcPath, destPath);
       }
     }
-    log('INFO', `Copied ${assetFiles.length} assets → dist-unified/assets/`);
+    log('INFO', `Copied ${assetFiles.length} assets → dist/assets/`);
   }
 
-  // 5b. Copy data files (glossary-unified.json is the canonical glossary source per SB-8)
+  // 5b. Copy data files
   const DATA_DIST = join(DIST_DIR, 'data');
   await ensureDir(DATA_DIST);
 
-  // Copy all data files
-  // Per SB-8: glossary-unified.json is renamed to glossary.json in dist output
-  // Skip glossary-old.json and the original glossary.json (if any) from data/
+  // Copy all data files (skip glossary-old.json if present)
   if (existsSync(DATA_DIR)) {
     const dataFiles = await readdir(DATA_DIR);
     for (const file of dataFiles) {
       if (file === 'glossary-old.json') {
         // Skip old glossary
         continue;
-      } else if (file === 'glossary-unified.json') {
-        // Rename glossary-unified.json → glossary.json in dist per SB-8
-        const srcPath = join(DATA_DIR, file);
-        const destPath = join(DATA_DIST, 'glossary.json');
-        await copyFile(srcPath, destPath);
-      } else if (file === 'glossary.json') {
-        // Skip original glossary.json — replaced by glossary-unified.json per SB-8
-        continue;
-      } else {
-        const srcPath = join(DATA_DIR, file);
-        const destPath = join(DATA_DIST, file);
-        await copyFile(srcPath, destPath);
       }
+      const srcPath = join(DATA_DIR, file);
+      const destPath = join(DATA_DIST, file);
+      await copyFile(srcPath, destPath);
     }
     const dataDistFiles = await readdir(DATA_DIST);
-    log('INFO', `Copied data/ → dist-unified/data/ (${dataDistFiles.length} files)`);
+    log('INFO', `Copied data/ → dist/data/ (${dataDistFiles.length} files)`);
   } else {
     log('WARN', 'data/ directory not found, skipping');
   }
@@ -217,7 +206,7 @@ async function buildShell() {
   const notFound = join(SRC_DIR, '404.html');
   if (existsSync(notFound)) {
     await copyFile(notFound, join(DIST_DIR, '404.html'));
-    log('INFO', 'Copied src/404.html → dist-unified/404.html');
+    log('INFO', 'Copied src/404.html → dist/404.html');
   }
 
   // 8. Copy sitemap.xml and robots.txt for SEO
@@ -225,22 +214,22 @@ async function buildShell() {
   const robots = join(ROOT, 'robots.txt');
   if (existsSync(sitemap)) {
     await copyFile(sitemap, join(DIST_DIR, 'sitemap.xml'));
-    log('INFO', 'Copied sitemap.xml → dist-unified/sitemap.xml');
+    log('INFO', 'Copied sitemap.xml → dist/sitemap.xml');
   }
   if (existsSync(robots)) {
     await copyFile(robots, join(DIST_DIR, 'robots.txt'));
-    log('INFO', 'Copied robots.txt → dist-unified/robots.txt');
+    log('INFO', 'Copied robots.txt → dist/robots.txt');
   }
 
   // === ROOT FALLBACK COPIES ===
 
   // 9. Create root index.html for backward compatibility
   await copyFile(join(DIST_DIR, 'index.html'), join(ROOT, 'index.html'));
-  log('INFO', 'Copied dist-unified/index.html → index.html (root fallback)');
+  log('INFO', 'Copied dist/index.html → index.html (root fallback)');
 
   // 10. Create root build.hash
   await copyFile(join(DIST_DIR, 'build.hash'), join(ROOT, 'build.hash'));
-  log('INFO', 'Copied dist-unified/build.hash → build.hash (root fallback)');
+  log('INFO', 'Copied dist/build.hash → build.hash (root fallback)');
 
   // 11. Create root assets/ for backward compatibility
   const rootAssets = join(ROOT, 'assets');
@@ -248,12 +237,12 @@ async function buildShell() {
     await rm(rootAssets, { recursive: true });
   }
   await copyDir(ASSETS_DIST, rootAssets);
-  log('INFO', 'Copied dist-unified/assets/ → assets/ (root fallback)');
+  log('INFO', 'Copied dist/assets/ → assets/ (root fallback)');
 
   // 12. Copy event-bus.js to root
   if (existsSync(join(DIST_DIR, 'event-bus.js'))) {
     await copyFile(join(DIST_DIR, 'event-bus.js'), join(ROOT, 'event-bus.js'));
-    log('INFO', 'Copied dist-unified/event-bus.js → event-bus.js (root fallback)');
+    log('INFO', 'Copied dist/event-bus.js → event-bus.js (root fallback)');
   }
 
   // 13. Copy widgets/ to root
@@ -264,28 +253,18 @@ async function buildShell() {
   if (existsSync(widgetsDist)) {
     await copyDir(widgetsDist, rootWidgets);
     const widgetRootFiles = await readdir(rootWidgets);
-    log('INFO', `Copied dist-unified/widgets/ → widgets/ (root fallback, ${widgetRootFiles.length} files)`);
+    log('INFO', `Copied dist/widgets/ → widgets/ (root fallback, ${widgetRootFiles.length} files)`);
   }
 
-  // 14. Copy data/ to root (preserve glossary-unified.json source file for future builds)
-  // Save the source glossary-unified.json before overwriting root data/
+  // 14. Copy data/ to root
   const rootData = join(ROOT, 'data');
-  const glossaryUnifiedSrc = join(DATA_DIR, 'glossary-unified.json');
-  const glossaryUnifiedSaved = existsSync(glossaryUnifiedSrc)
-    ? await readFile(glossaryUnifiedSrc, 'utf-8')
-    : null;
   if (existsSync(rootData)) {
     await rm(rootData, { recursive: true });
   }
   if (existsSync(DATA_DIST)) {
     await copyDir(DATA_DIST, rootData);
     const dataRootFiles = await readdir(rootData);
-    log('INFO', `Copied dist-unified/data/ → data/ (root fallback, ${dataRootFiles.length} files)`);
-  }
-  // Preserve glossary-unified.json in root data/ so subsequent builds can find it
-  if (glossaryUnifiedSaved) {
-    await writeFile(join(rootData, 'glossary-unified.json'), glossaryUnifiedSaved);
-    log('INFO', 'Preserved glossary-unified.json in root data/ for future builds');
+    log('INFO', `Copied dist/data/ → data/ (root fallback, ${dataRootFiles.length} files)`);
   }
 
   // 15. Copy parts/ to root (SB-6: single parts/ instead of parts-l{N}/)
@@ -297,7 +276,7 @@ async function buildShell() {
   if (existsSync(distPartsSrc)) {
     await copyDir(distPartsSrc, rootPartsDir);
     const partRootFiles = await readdir(rootPartsDir);
-    log('INFO', `Copied dist-unified/parts/ → parts/ (root fallback, ${partRootFiles.length} files)`);
+    log('INFO', `Copied dist/parts/ → parts/ (root fallback, ${partRootFiles.length} files)`);
   }
 
   log('INFO', `Shell build complete! Hash: ${buildHash}`);

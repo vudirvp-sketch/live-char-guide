@@ -2,7 +2,7 @@
   Part 6: CoT Tiers (Chain of Thought)
   Live Character Guide v6 Master HTML
 
-  Layer inclusion: l2 (bridge), l3 (all CoT content)
+  Unified content: all layers merged
 -->
 <section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>
 <h2>Цепочка рассуждений (CoT)</h2>
@@ -10,7 +10,7 @@
 <p><strong>Chain of Thought (CoT)</strong> — техника, при которой модель «думает вслух» перед тем как ответить. Это позволяет моделям 32B+ и API лучше следовать якорям и SPINE-логике персонажа.</p>
 
 <div class="callout tip">
-<p><strong>CoT доступен в Part 6.</strong> Этот инструмент предназначен для моделей 32B+ и API, где контекстное окно позволяет добавить внутренние рассуждения персонажа. На Глубоком слое вы уже имеете SPINE, OCEAN и CORE DIRECTIVES — этого достаточно для стабильной карточки.</p>
+<p><strong>CoT доступен в Part 6.</strong> Этот инструмент предназначен для моделей 32B+ и API, где контекстное окно позволяет добавить внутренние рассуждения персонажа. SPINE, OCEAN и CORE DIRECTIVES — этого достаточно для стабильной карточки и без CoT.</p>
 </div>
 
 <p>Что добавляет CoT в Part 6:</p>
@@ -29,7 +29,7 @@
 
 <div class="table-wrap">
 <table>
-<thead><tr><th>Вы уже знаете</th><th>L3 добавляет</th></tr></thead>
+<thead><tr><th>Основы</th><th>Расширенные правила</th></tr></thead>
 <tbody>
 <tr><td>Якоря T→A→P и FLAW-linked якоря</td><td>CoT-якоря: Триггер → [Внутренний процесс] → Реакция → Цена</td></tr>
 <tr><td>Embodiment: Состояние→Тело→Сенсор→Речь</td><td>Reasoning blocks: Tier 0–3 по сложности модели</td></tr>
@@ -81,9 +81,9 @@
 <tr><th>Tier</th><th>Формат</th><th>Для моделей</th><th>Пример</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Tier 0</strong></td><td>Без CoT — базовый якорь</td><td>12B, L1/L2</td><td>Стресс → Трёт шею</td></tr>
+<tr><td><strong>Tier 0</strong></td><td>Без CoT — базовый якорь</td><td>12B, базовый/стандартный</td><td>Стресс → Трёт шею</td></tr>
 <tr><td><strong>Tier 1</strong></td><td>[Эмоция] → Реакция</td><td>32B, базовый уровень</td><td>[Тревога] → Перечитывает сообщение трижды</td></tr>
-<tr><td><strong>Tier 2</strong></td><td>[GHOST-связь] → Реакция</td><td>32B+, L3 рекомендован</td><td>[Напоминает предательство] → Закрывается</td></tr>
+<tr><td><strong>Tier 2</strong></td><td>[GHOST-связь] → Реакция</td><td>32B+, рекомендован</td><td>[Напоминает предательство] → Закрывается</td></tr>
 <tr><td><strong>Tier 3</strong></td><td>Полный XML-процесс</td><td>Только API</td><td>&lt;processus_analysium&gt;...&lt;/processus_analysium&gt;</td></tr>
 </tbody>
 </table>
@@ -94,7 +94,7 @@
 </section>
 
 <section  data-section="p6_cot_tier2">
-<h3>Tier 2 CoT (рекомендован для L3)</h3>
+<h3>Tier 2 CoT (рекомендован для 32B+)</h3>
 
 <p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
 
@@ -155,7 +155,7 @@ resolution: отступить
 *отступает на шаг, пальцы касаются виска*
 "Прошу прощения. Я... не должен."</code></pre>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Этот пример повторяет CoT из полной карточки: <a href="#p10_vysherblenny_l3">Выщербленный L3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Этот пример повторяет CoT из полной карточки: <a href="#p10_vysherblenny_l3">Выщербленный</a></p>
 
 </section>
 
@@ -181,7 +181,7 @@ resolution: отступить
 </div>
 
 <div class="callout warn">
-<p><strong>⚠️ Предупреждение:</strong> CoT Overload (AP-10) — больше 3 CoT якорей. Модель начинает генерировать внутренние монологи вместо действий. Подробности: <a href="#p8_ap10_cot_overload">AP-10 в Part 8 <span class="remark-icon" aria-hidden="true">→</span> Layer 3</a>.</p>
+<p><strong>⚠️ Предупреждение:</strong> CoT Overload (AP-10) — больше 3 CoT якорей. Модель начинает генерировать внутренние монологи вместо действий. Подробности: <a href="#p8_ap10_cot_overload">AP-10 в Part 8</a>.</p>
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Сенсорные якоря (основа для CoT): <a href="#p2_sensory_anchors">Part 2: Сенсорные якоря</a></p>

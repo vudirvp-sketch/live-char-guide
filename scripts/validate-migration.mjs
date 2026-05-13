@@ -38,7 +38,7 @@ const MIGRATION_MAP_PATH = join(ROOT, 'docs', 'migration_map.md');
 const MASTER_DIR = join(ROOT, 'src', 'master');
 const BUILD_DIR = join(ROOT, 'build');
 const SECTION_REGISTRY_PATH = join(BUILD_DIR, 'section-registry.json');
-const GLOSSARY_PATH = join(ROOT, 'data', 'glossary-unified.json');
+const GLOSSARY_PATH = join(ROOT, 'data', 'glossary.json');
 
 const VERBOSE = process.argv.includes('--verbose');
 

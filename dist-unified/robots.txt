@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://vudirvp-sketch.github.io/live-char-guide/sitemap.xml

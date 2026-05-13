@@ -9,7 +9,7 @@
     "build:shell": "node src/scripts/build-shell-unified.mjs",
     "build": "node scripts/build-unified.mjs && node src/scripts/build-shell-unified.mjs",
     "build:check": "pnpm run build && pnpm run validate",
-    "build:watch": "chokidar 'src/unified/**/*' -c 'pnpm run build'",
+    "build:watch": "chokidar 'src/master/**/*' -c 'pnpm run build'",
     "validate": "node scripts/validate-artifact.mjs",
     "validate:master": "node scripts/validate-master.mjs",
     "version:check": "node scripts/version-sync.mjs",

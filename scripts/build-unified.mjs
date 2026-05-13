@@ -5,11 +5,11 @@
  * @version 7.0.0
  *
  * @description
- * Replaces build-layers.mjs. Reads src/unified/part_*.html and produces
+ * Replaces build-layers.mjs. Reads src/master/part_*.html and produces
  * a single set of output files in build/parts/.
  *
- * Input:  src/unified/part_01.html ... part_10.html
- *         data/glossary-unified.json
+ * Input:  src/master/part_01.html ... part_10.html
+ *         data/glossary.json
  * Output: build/parts/part_01.html ... part_10.html
  *         build/parts/manifest.json
  *         build/parts/glossary.html
@@ -26,10 +26,10 @@ import { createHash } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const UNIFIED_DIR = join(ROOT, 'src', 'unified');
+const UNIFIED_DIR = join(ROOT, 'src', 'master');
 const DATA_DIR = join(ROOT, 'data');
 const BUILD_DIR = join(ROOT, 'build');
-const GLOSSARY_PATH = join(DATA_DIR, 'glossary-unified.json');
+const GLOSSARY_PATH = join(DATA_DIR, 'glossary.json');
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -158,7 +158,7 @@ function parseUnifiedHTML(content, filename) {
 
 async function generateGlossaryHTML() {
   if (!existsSync(GLOSSARY_PATH)) {
-    log('WARN', 'glossary-unified.json not found, skipping glossary');
+    log('WARN', 'glossary.json not found, skipping glossary');
     return '';
   }
 

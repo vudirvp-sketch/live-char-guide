@@ -194,11 +194,10 @@ describe('Manifest Structure', () => {
 // ============================================================================
 
 describe('Output File Validation', () => {
-  it('should have dist-unified/index.html or dist/index.html after build', () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
+  it('should have dist/index.html after build', () => {
     const distPath = join(ROOT, 'dist', 'index.html');
-    const exists = existsSync(distUnifiedPath) || existsSync(distPath);
-    assert.strictEqual(exists, true, 'dist-unified/index.html or dist/index.html should exist');
+    const exists = existsSync(distPath);
+    assert.strictEqual(exists, true, 'dist/index.html should exist');
   });
 
   it('should have root index.html fallback', () => {
@@ -207,9 +206,8 @@ describe('Output File Validation', () => {
   });
 
   it('dist index.html should have DOCTYPE', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -218,9 +216,8 @@ describe('Output File Validation', () => {
   });
 
   it('dist index.html should have version meta tag', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -229,9 +226,8 @@ describe('Output File Validation', () => {
   });
 
   it('dist index.html should have build hash in comment', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -240,9 +236,8 @@ describe('Output File Validation', () => {
   });
 
   it('dist index.html should have data-layer="3" on body', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');

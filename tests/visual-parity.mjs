@@ -49,7 +49,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // ============================================================================
 
 const ROOT_DIR = join(__dirname, '..');
-const DIST_DIR = join(ROOT_DIR, 'dist-unified');
+const DIST_DIR = join(ROOT_DIR, 'dist');
 const DIST_FALLBACK = join(ROOT_DIR, 'dist');
 const SCREENSHOT_DIR = join(__dirname, 'screenshots');
 const THRESHOLD = 0.95;      // 95% structural match
@@ -769,9 +769,8 @@ async function runFallbackTests(baseUrl) {
   });
 
   await test('Antipattern card styles are defined', async () => {
-    const shellCSS = join(ROOT_DIR, 'src', 'shell-unified', 'styles.css');
-    const fallbackCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
-    const cssPath = existsSync(shellCSS) ? shellCSS : fallbackCSS;
+    const shellCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
+    const cssPath = shellCSS;
 
     if (!existsSync(cssPath)) {
       throw new Error('styles.css not found');
@@ -786,9 +785,8 @@ async function runFallbackTests(baseUrl) {
   });
 
   await test('Theme variants defined (light, oled)', async () => {
-    const shellCSS = join(ROOT_DIR, 'src', 'shell-unified', 'styles.css');
-    const fallbackCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
-    const cssPath = existsSync(shellCSS) ? shellCSS : fallbackCSS;
+    const shellCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
+    const cssPath = shellCSS;
 
     const css = await readFile(cssPath, 'utf-8');
     if (!css.includes('theme-light')) {

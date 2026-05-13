@@ -31,9 +31,8 @@ describe('Size Validation', () => {
   };
 
   it('dist index.html should be within size limits', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const stats = await stat(indexPath);
@@ -66,9 +65,8 @@ describe('Size Validation', () => {
 
 describe('Version Presence Check', () => {
   it('dist index.html should contain version metadata', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -83,9 +81,8 @@ describe('Version Presence Check', () => {
   it('version should match VERSION file', async () => {
     const versionPath = join(ROOT, 'src', 'VERSION');
 
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(versionPath) && existsSync(indexPath)) {
       const expectedVersion = (await readFile(versionPath, 'utf-8')).trim();
@@ -111,9 +108,8 @@ describe('Required Sections Check', () => {
   ];
 
   it('dist index.html should have all required shell elements', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -126,9 +122,8 @@ describe('Required Sections Check', () => {
   });
 
   it('dist index.html should NOT have layer modal or switcher', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -149,9 +144,8 @@ describe('Required Sections Check', () => {
 
 describe('HTML Validity Check', () => {
   it('dist index.html should have valid DOCTYPE', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -161,9 +155,8 @@ describe('HTML Validity Check', () => {
   });
 
   it('dist index.html should have required HTML structure', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -176,9 +169,8 @@ describe('HTML Validity Check', () => {
   });
 
   it('dist index.html should not have replacement characters', async () => {
-    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
     const distPath = join(ROOT, 'dist', 'index.html');
-    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+    const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
@@ -194,30 +186,26 @@ describe('HTML Validity Check', () => {
 
 describe('Shell Architecture (Unified)', () => {
   it('should have lazy-loader.js', () => {
-    const distUnifiedLazy = join(ROOT, 'dist-unified', 'assets', 'lazy-loader.js');
     const distLazy = join(ROOT, 'dist', 'assets', 'lazy-loader.js');
-    const lazyPath = existsSync(distUnifiedLazy) ? distUnifiedLazy : distLazy;
+    const lazyPath = distLazy;
     assert.strictEqual(existsSync(lazyPath), true, 'lazy-loader.js should exist in dist assets');
   });
 
   it('should have shell-styles.css', () => {
-    const distUnifiedStyles = join(ROOT, 'dist-unified', 'assets', 'shell-styles.css');
     const distStyles = join(ROOT, 'dist', 'assets', 'shell-styles.css');
-    const stylesPath = existsSync(distUnifiedStyles) ? distUnifiedStyles : distStyles;
+    const stylesPath = distStyles;
     assert.strictEqual(existsSync(stylesPath), true, 'shell-styles.css should exist in dist assets');
   });
 
   it('should have unified parts directory', () => {
-    const distUnifiedParts = join(ROOT, 'dist-unified', 'parts');
     const distParts = join(ROOT, 'dist', 'parts');
-    const partsDir = existsSync(distUnifiedParts) ? distUnifiedParts : distParts;
+    const partsDir = distParts;
     assert.strictEqual(existsSync(partsDir), true, 'unified parts/ directory should exist in dist');
   });
 
   it('should have manifest.json in parts', () => {
-    const distUnifiedManifest = join(ROOT, 'dist-unified', 'parts', 'manifest.json');
     const distManifest = join(ROOT, 'dist', 'parts', 'manifest.json');
-    const manifestPath = existsSync(distUnifiedManifest) ? distUnifiedManifest : distManifest;
+    const manifestPath = distManifest;
     assert.strictEqual(existsSync(manifestPath), true, 'parts/manifest.json should exist in dist');
   });
 });

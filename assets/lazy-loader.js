@@ -1142,7 +1142,7 @@
 
     // 2. Fallback: fetch external glossary.json
     if (!glossaryData) {
-      const urls = ['data/glossary.json', './data/glossary.json', 'data/glossary-unified.json', './data/glossary-unified.json'];
+      const urls = ['data/glossary.json', './data/glossary.json'];
       for (const url of urls) {
         try {
           const response = await fetch(url);

@@ -34,7 +34,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const UNIFIED_DIR = join(ROOT, 'src', 'unified');
+const UNIFIED_DIR = join(ROOT, 'src', 'master');
 const BUILD_DIR = join(ROOT, 'build');
 
 const errors = [];
@@ -324,10 +324,10 @@ async function checkGlossaryTermsUsed(allContent) {
   console.log('\n📋 Check 5: Glossary terms used in at least one Part...');
 
   let errorCount = 0;
-  const glossaryPath = join(ROOT, 'data', 'glossary-unified.json');
+  const glossaryPath = join(ROOT, 'data', 'glossary.json');
 
   if (!existsSync(glossaryPath)) {
-    warnings.push('glossary-unified.json not found — skipping glossary term check');
+    warnings.push('glossary.json not found — skipping glossary term check');
     return 0;
   }
 

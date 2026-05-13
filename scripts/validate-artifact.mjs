@@ -23,7 +23,7 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
-const DIST_DIR = join(ROOT, 'dist-unified');
+const DIST_DIR = join(ROOT, 'dist');
 const INDEX_PATH = join(DIST_DIR, 'index.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
@@ -220,7 +220,7 @@ async function checkShellArchitecture() {
     results.push({
       gate: 'SHELL-PARTS',
       pass: false,
-      error: 'dist-unified/parts/ not found'
+      error: 'dist/parts/ not found'
     });
   } else {
     const manifestPath = join(partsDir, 'manifest.json');
@@ -229,7 +229,7 @@ async function checkShellArchitecture() {
       results.push({
         gate: 'SHELL-PARTS',
         pass: false,
-        error: 'dist-unified/parts/manifest.json not found'
+        error: 'dist/parts/manifest.json not found'
       });
     } else {
       // Count HTML files in parts directory
@@ -244,13 +244,13 @@ async function checkShellArchitecture() {
         results.push({
           gate: 'SHELL-PARTS',
           pass: false,
-          error: `dist-unified/parts/ has only ${htmlFiles.length} HTML files (minimum 10 required)`
+          error: `dist/parts/ has only ${htmlFiles.length} HTML files (minimum 10 required)`
         });
       } else if (missingSpecial.length > 0) {
         results.push({
           gate: 'SHELL-PARTS',
           pass: false,
-          error: `dist-unified/parts/ missing required files: ${missingSpecial.join(', ')}`
+          error: `dist/parts/ missing required files: ${missingSpecial.join(', ')}`
         });
       } else {
         results.push({ gate: 'SHELL-PARTS', pass: true });
@@ -269,7 +269,7 @@ async function checkShellArchitecture() {
     results.push({
       gate: 'SHELL-LOADER',
       pass: false,
-      error: 'dist-unified/assets/lazy-loader.js not found'
+      error: 'dist/assets/lazy-loader.js not found'
     });
   } else {
     const loaderContent = await readFile(lazyLoader, 'utf-8');
@@ -281,7 +281,7 @@ async function checkShellArchitecture() {
       results.push({
         gate: 'SHELL-LOADER',
         pass: false,
-        error: `dist-unified/assets/lazy-loader.js contains layer artifacts: ${layerArtifacts.join(', ')}`
+        error: `dist/assets/lazy-loader.js contains layer artifacts: ${layerArtifacts.join(', ')}`
       });
     } else {
       results.push({ gate: 'SHELL-LOADER', pass: true });
@@ -294,7 +294,7 @@ async function checkShellArchitecture() {
     results.push({
       gate: 'SHELL-STYLES',
       pass: false,
-      error: 'dist-unified/assets/shell-styles.css not found'
+      error: 'dist/assets/shell-styles.css not found'
     });
   } else {
     const stylesContent = await readFile(shellStyles, 'utf-8');
@@ -305,7 +305,7 @@ async function checkShellArchitecture() {
       results.push({
         gate: 'SHELL-STYLES',
         pass: false,
-        error: `dist-unified/assets/shell-styles.css contains layer artifacts: ${styleArtifacts.join(', ')}`
+        error: `dist/assets/shell-styles.css contains layer artifacts: ${styleArtifacts.join(', ')}`
       });
     } else {
       results.push({ gate: 'SHELL-STYLES', pass: true });
@@ -334,10 +334,10 @@ async function validate() {
     log('WARN', 'VERSION file not found');
   }
 
-  // 2. Validate dist-unified/index.html (shell architecture)
-  log('INFO', 'Validating dist-unified/index.html (shell architecture)...');
+  // 2. Validate dist/index.html (shell architecture)
+  log('INFO', 'Validating dist/index.html (shell architecture)...');
 
-  let indexResult = await checkFileExists(INDEX_PATH, 'dist-unified/index.html');
+  let indexResult = await checkFileExists(INDEX_PATH, 'dist/index.html');
   if (!indexResult.pass) {
     results.push({ gate: 'GATE-1', ...indexResult });
     allPassed = false;
@@ -345,27 +345,27 @@ async function validate() {
     const indexContent = await readFile(INDEX_PATH, 'utf-8');
 
     // Shell is lightweight - only needs 2KB minimum
-    const indexSize = await checkFileSize(INDEX_PATH, 'dist-unified/index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
+    const indexSize = await checkFileSize(INDEX_PATH, 'dist/index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
 
     results.push({ gate: 'GATE-1', ...indexSize });
     if (!indexSize.pass) allPassed = false;
 
     if (version !== 'unknown') {
-      const versionCheck = await checkVersion(indexContent, 'dist-unified/index.html', version);
+      const versionCheck = await checkVersion(indexContent, 'dist/index.html', version);
       results.push({ gate: 'GATE-2', ...versionCheck });
       if (!versionCheck.pass) allPassed = false;
     }
 
-    const sectionsCheck = checkRequiredSections(indexContent, 'dist-unified/index.html');
+    const sectionsCheck = checkRequiredSections(indexContent, 'dist/index.html');
     results.push({ gate: 'GATE-3', ...sectionsCheck });
     if (!sectionsCheck.pass) allPassed = false;
 
-    const htmlCheck = checkHtmlValidity(indexContent, 'dist-unified/index.html');
+    const htmlCheck = checkHtmlValidity(indexContent, 'dist/index.html');
     results.push({ gate: 'GATE-4', ...htmlCheck });
     if (!htmlCheck.pass) allPassed = false;
 
     // WCAG 1.4.10 Reflow check
-    const wcagCheck = checkWCAG1410Reflow(indexContent, 'dist-unified/index.html');
+    const wcagCheck = checkWCAG1410Reflow(indexContent, 'dist/index.html');
     results.push({ gate: 'GATE-5', ...wcagCheck });
     if (!wcagCheck.pass) allPassed = false;
     if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
