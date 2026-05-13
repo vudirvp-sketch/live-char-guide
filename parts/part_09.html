@@ -2,7 +2,7 @@
   Part 9: Diagnostics and Debugging (Диагностика и отладка)
   Live Character Guide v6 Master HTML
 
-  Layer inclusion: l1 (basic checklist, troubleshooting, One Change Rule), l2 (symptom table, test scenarios, decision tree, element→scenario map, test requirements), l3 (12B specifics, pre-deploy)
+  Unified content: all layers merged
 -->
 <section  data-section="p9_quality_scale" data-toc-nav>
 <h2>Диагностика и тестирование</h2>
@@ -90,7 +90,7 @@
 <section  data-section="p9_symptom_table">
 <h3>Таблица симптомов</h3>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Обзор L2→L3 → <a href="#p4_l3_learning_path">Путь изучения L3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Расширенные секции → <a href="#p4_l3_learning_path">Расширенный SPINE</a></p>
 
 <div class="table-wrap">
 <table>
@@ -185,15 +185,14 @@
 </section>
 
 <section  data-section="p9_test_requirements">
-<h3>Требования к тестированию по слоям</h3>
-
+<h4>Рекомендуемое количество тестовых сценариев</h4>
 <div class="table-wrap">
 <table>
-<thead><tr><th>Слой</th><th>Минимум сценариев</th><th>Обязательные сценарии</th></tr></thead>
+<thead><tr><th>Количество</th><th>Обязательные сценарии</th></tr></thead>
 <tbody>
-<tr><td>L1</td><td>2</td><td>Нейтральная сцена + Конфликт</td></tr>
-<tr><td>L2</td><td>4</td><td>Нейтральная + Конфликт + Забота + Прошлый опыт</td></tr>
-<tr><td>L3</td><td>6</td><td>Все L2 + Длинный диалог + Мульти-персонаж</td></tr>
+<tr><td>2</td><td>Нейтральная сцена + Конфликт</td></tr>
+<tr><td>4</td><td>Нейтральная + Конфликт + Забота + Прошлый опыт</td></tr>
+<tr><td>6</td><td>Все выше + Длинный диалог + Мульти-персонаж</td></tr>
 </tbody>
 </table>
 </div>
@@ -215,14 +214,14 @@
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Карточка протестирована. Сравните с полными примерами → <a href="#p10_elena_full">Примеры карточек (Part 10)</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — Part 6: 12B-специфичные проблемы, критерии перехода L2→L3, Pre-Deploy валидация.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — 12B-специфичные проблемы, критерии перехода к расширенным элементам, Pre-Deploy валидация.</p>
 
 </section>
 
 <section  data-section="p9_12b_issues">
 <h3>12B-специфичные проблемы</h3>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Обзор L2→L3 → <a href="#p4_l3_learning_path">Путь изучения L3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Расширенные секции → <a href="#p4_l3_learning_path">Расширенный SPINE</a></p>
 
 <p>12B модели имеют ограничения, требующие особого подхода.</p>
 
@@ -301,7 +300,7 @@
 </div>
 </details>
 
-<h4>Пример: Pre-Deploy для Выщебленного L3</h4>
+<h4>Пример: Pre-Deploy для Выщебленного (полная карточка)</h4>
 
 <h5>Quick Check (5 items)</h5>
 <table>
@@ -326,12 +325,12 @@
 <tr><td>☐ Lorebook: консистентен</td><td>✓ 5 записей без конфликтов с Description</td></tr>
 <tr><td>☐ XML: валиден</td><td>✓ Все теги закрыты, структура корректна</td></tr>
 <tr><td>☐ Tone Frame: присутствует</td><td>✓ "archival, detached. Memory is currency."</td></tr>
-<tr><td>☐ Author's Note: L3 format</td><td>✓ State + WANT→NEED + GHOST-activation + Blind Spot + Scene</td></tr>
+<tr><td>☐ Author's Note: расширенный формат</td><td>✓ State + WANT→NEED + GHOST-activation + Blind Spot + Scene</td></tr>
 <tr><td>☐ OCEAN: 1-2 экстремума</td><td>✓ Высокая O, Низкая E</td></tr>
 <tr><td>☐ Immersion Boundary</td><td>✓ Присутствует (для 32B+ и API)</td></tr>
 </tbody>
 </table>
 
-<p><strong>Итог:</strong> Выщербленный L3 проходит Pre-Deploy полностью.</p>
+<p><strong>Итог:</strong> Выщербленный проходит Pre-Deploy полностью.</p>
 
 </section>

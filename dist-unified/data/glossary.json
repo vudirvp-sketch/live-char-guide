@@ -631,7 +631,7 @@
       "cross_refs": [
         "#p6_cot_basics"
       ],
-      "unified_definition": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Доступен на Экспертном слое (L3). Настройте CoT tier 3 для сложных сценариев"
+      "unified_definition": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Настройте CoT tier 3 для сложных сценариев"
     },
     {
       "term": "processus_analysium",

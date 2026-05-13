@@ -181,17 +181,26 @@ async function buildShell() {
   const DATA_DIST = join(DIST_DIR, 'data');
   await ensureDir(DATA_DIST);
 
-  // Copy all data files (glossary-unified.json is the canonical source, glossary-old.json and glossary.json are skipped)
+  // Copy all data files
+  // Per SB-8: glossary-unified.json is renamed to glossary.json in dist output
+  // Skip glossary-old.json and the original glossary.json (if any) from data/
   if (existsSync(DATA_DIR)) {
     const dataFiles = await readdir(DATA_DIR);
     for (const file of dataFiles) {
-      const srcPath = join(DATA_DIR, file);
-      const destPath = join(DATA_DIST, file);
-
-      if (file === 'glossary-old.json' || file === 'glossary.json') {
-        // Skip old/pre-unified glossary (replaced by glossary-unified.json per SB-8)
+      if (file === 'glossary-old.json') {
+        // Skip old glossary
+        continue;
+      } else if (file === 'glossary-unified.json') {
+        // Rename glossary-unified.json → glossary.json in dist per SB-8
+        const srcPath = join(DATA_DIR, file);
+        const destPath = join(DATA_DIST, 'glossary.json');
+        await copyFile(srcPath, destPath);
+      } else if (file === 'glossary.json') {
+        // Skip original glossary.json — replaced by glossary-unified.json per SB-8
         continue;
       } else {
+        const srcPath = join(DATA_DIR, file);
+        const destPath = join(DATA_DIST, file);
         await copyFile(srcPath, destPath);
       }
     }
@@ -258,8 +267,13 @@ async function buildShell() {
     log('INFO', `Copied dist-unified/widgets/ → widgets/ (root fallback, ${widgetRootFiles.length} files)`);
   }
 
-  // 14. Copy data/ to root
+  // 14. Copy data/ to root (preserve glossary-unified.json source file for future builds)
+  // Save the source glossary-unified.json before overwriting root data/
   const rootData = join(ROOT, 'data');
+  const glossaryUnifiedSrc = join(DATA_DIR, 'glossary-unified.json');
+  const glossaryUnifiedSaved = existsSync(glossaryUnifiedSrc)
+    ? await readFile(glossaryUnifiedSrc, 'utf-8')
+    : null;
   if (existsSync(rootData)) {
     await rm(rootData, { recursive: true });
   }
@@ -267,6 +281,11 @@ async function buildShell() {
     await copyDir(DATA_DIST, rootData);
     const dataRootFiles = await readdir(rootData);
     log('INFO', `Copied dist-unified/data/ → data/ (root fallback, ${dataRootFiles.length} files)`);
+  }
+  // Preserve glossary-unified.json in root data/ so subsequent builds can find it
+  if (glossaryUnifiedSaved) {
+    await writeFile(join(rootData, 'glossary-unified.json'), glossaryUnifiedSaved);
+    log('INFO', 'Preserved glossary-unified.json in root data/ for future builds');
   }
 
   // 15. Copy parts/ to root (SB-6: single parts/ instead of parts-l{N}/)
