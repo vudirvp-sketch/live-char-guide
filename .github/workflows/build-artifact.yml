@@ -15,7 +15,6 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'index.html'
-      - 'layer-config.json'
       - 'eslint.config.js'
   pull_request:
     branches: [main]
@@ -31,7 +30,6 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'index.html'
-      - 'layer-config.json'
       - 'eslint.config.js'
   workflow_dispatch:
 
@@ -60,8 +58,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build all artifacts (shell architecture)
-        run: pnpm run build:all
+      - name: Build unified artifacts (shell architecture)
+        run: pnpm run build
 
       - name: Validate artifacts
         run: pnpm run validate
@@ -138,7 +136,7 @@ jobs:
 
             Build and validation completed successfully.
 
-            > Shell architecture with lazy-loading parts-l{1,2,3}.`;
+            > Unified shell architecture with lazy-loading parts.`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,

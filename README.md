@@ -79,17 +79,17 @@ src/master/part_*.html (авторский контент)
         │
         ▼
 ┌─────────────────────────────────────┐
-│  Stage 1: build-layers.mjs          │
-│  Парсит HTML, извлекает по data-layer│
-│  Генерирует parts-l1/l2/l3          │
+│  Stage 1: build-unified.mjs         │
+│  Парсит HTML, извлекает секции      │
+│  Генерирует parts/ (unified)        │
 └─────────────────────────────────────┘
         │
         ▼
-build/parts-l{1,2,3}/*.html + manifest.json
+build/parts/*.html + manifest.json
         │
         ▼
 ┌─────────────────────────────────────┐
-│  Stage 2: build-shell.mjs           │
+│  Stage 2: build-shell-unified.mjs   │
 │  Копирует shell + parts + data      │
 │  → dist/ для GitHub Pages           │
 └─────────────────────────────────────┘
@@ -101,11 +101,11 @@ build/parts-l{1,2,3}/*.html + manifest.json
 live-char-guide/
 ├── src/
 │   ├── master/              # ← АВТОРЫ: редактируют тут
-│   │   └── part_*.html      # Master-файлы с data-layer разметкой
+│   │   └── part_*.html      # Unified HTML-файлы (без data-layer)
 │   ├── shell/               # ← ИНФРАСТРУКТУРА: не трогать
-│   │   ├── index.html       # Shell с layer selector
+│   │   ├── index.html       # Shell (auto-load, без layer selector)
 │   │   ├── styles.css       # Стили
-│   │   └── lazy-loader.js   # Динамическая загрузка слоёв
+│   │   └── lazy-loader.js   # Динамическая загрузка контента
 │   ├── scripts/             # Build-скрипты
 │   └── VERSION              # Источник версии
 │
@@ -115,10 +115,8 @@ live-char-guide/
 │   ├── enneagram.json       # Эннеаграмма
 │   └── mbti.json            # MBTI типы
 │
-├── build/                   # Сгенерированные слои (gitignored)
-│   ├── parts-l1/
-│   ├── parts-l2/
-│   ├── parts-l3/
+├── build/                   # Сгенерированные части (gitignored)
+│   ├── parts/               # Unified parts
 │   ├── build-manifest.json
 │   └── section-registry.json
 │
@@ -135,7 +133,7 @@ live-char-guide/
 │   ├── components.md
 │   └── ...
 │
-└── layer-config.json        # Конфигурация слоёв
+└── (unified config)        # Конфигурация встроена в build-unified.mjs
 ```
 
 ### Владение директориями

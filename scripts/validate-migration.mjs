@@ -835,7 +835,7 @@ async function main() {
   if (existsSync(srcDir)) {
     const srcEntries = await readdir(srcDir);
     const legacyDirs = srcEntries.filter(e =>
-      e === 'parts-l1' || e === 'parts-l2' || e === 'parts-l3'
+      e === 'parts-l1' || e === 'parts-l2' || e === 'parts-l3' || e === 'unified'
     );
     if (legacyDirs.length > 0) {
       warnings.push(`Legacy v5.12 directories still exist in src/: ${legacyDirs.join(', ')} — should be removed after migration`);

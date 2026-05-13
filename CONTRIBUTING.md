@@ -38,7 +38,7 @@ git remote add upstream https://github.com/vudirvp-sketch/live-char-guide.git
 pnpm install
 
 # Run initial build
-pnpm run build:all
+pnpm run build
 
 # Verify setup
 pnpm run validate
@@ -68,7 +68,7 @@ git checkout -b docs/my-documentation
 
 ```bash
 # Build artifacts
-pnpm run build:all
+pnpm run build
 
 # Validate artifacts
 pnpm run validate
@@ -236,7 +236,7 @@ import { execSync } from 'child_process';
 
 describe('Integration Test', () => {
   it('should run full pipeline', () => {
-    execSync('pnpm run build:all', { stdio: 'inherit' });
+    execSync('pnpm run build', { stdio: 'inherit' });
     assert.ok(true);
   });
 });

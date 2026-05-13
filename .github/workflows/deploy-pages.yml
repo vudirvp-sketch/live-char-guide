@@ -15,7 +15,6 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'index.html'
-      - 'layer-config.json'
       - 'eslint.config.js'
   workflow_dispatch:
 
@@ -51,8 +50,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build all artifacts (shell architecture)
-        run: pnpm run build:all
+      - name: Build unified artifacts (shell architecture)
+        run: pnpm run build
 
       - name: Validate artifacts
         run: pnpm run validate
@@ -138,7 +137,7 @@ jobs:
           PAGE_URL="${{ steps.deployment.outputs.page_url }}"
           curl -s "$PAGE_URL" | grep -q "shell-styles.css" || echo "WARN: shell not found"
           curl -s "$PAGE_URL/assets/lazy-loader.js" | head -1 | grep -q "LAZY LOADER" || echo "WARN: lazy-loader not found"
-          curl -s "$PAGE_URL/parts-l2/part_01.html" | grep -q "p1" || echo "WARN: parts-l2 not found"
+          curl -s "$PAGE_URL/parts/part_01.html" | grep -q "p1" || echo "WARN: parts not found"
 
       - name: Create Deploy Tag
         if: success()
