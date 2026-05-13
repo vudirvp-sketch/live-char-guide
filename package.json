@@ -28,7 +28,7 @@
     "reinstall": "pnpm run clean && pnpm install"
   },
   "devDependencies": {
-    "@axe-core/cli": "^4.8.0",
+    "@axe-core/cli": "^4.11.3",
     "@eslint/js": "^10.0.1",
     "chokidar-cli": "^3.0.0",
     "eslint": "^10.2.0",
