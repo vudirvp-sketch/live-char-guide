@@ -573,7 +573,13 @@ tbody tr:hover { background: var(--accent-soft); }
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  right: max(1rem, calc((100vw - 900px) / 2 - 3rem));
+  /* Position FABs in the right margin, outside the content area (~1000px wide) */
+  right: max(1rem, calc((100vw - 1000px) / 2 - 3.5rem));
+}
+
+/* In wide mode, content is ~1100px — recalculate to keep FABs outside */
+body.content-wide .fab-group {
+  right: max(1rem, calc((100vw - 1100px) / 2 - 3.5rem));
 }
 
 .fab-btn {

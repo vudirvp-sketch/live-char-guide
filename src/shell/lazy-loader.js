@@ -176,8 +176,6 @@
    * @returns {number} Widget level (1, 2, or 3)
    */
   function getWidgetLevel() {
-    // M3 — expert mode (can be toggled by user preference)
-    if (window.userExpertMode) return 3;
     // M2 — default for L2+
     if (getGuideLayer() >= 2) return 2;
     // M1 — fallback (shouldn't happen at L2+)
@@ -944,7 +942,6 @@
     if (window.PersonaCross && typeof window.PersonaCross.init === 'function') {
       window.PersonaCross.init();
     }
-    initExpertModeToggle();
     initTokenCalc();
     initProgressBar();
 
@@ -954,42 +951,7 @@
     }
   }
 
-  // ============================================================================
-  // EXPERT MODE TOGGLE (M3 widget level)
-  // ============================================================================
 
-  function initExpertModeToggle() {
-    const btn = document.getElementById('fab-expert');
-    if (!btn) return;
-
-    // Load saved preference
-    const saved = storage.get('guide-expert-mode');
-    if (saved) {
-      window.userExpertMode = true;
-      btn.setAttribute('aria-pressed', 'true');
-      btn.classList.add('fab-active');
-    }
-
-    btn.addEventListener('click', () => {
-      window.userExpertMode = !window.userExpertMode;
-      storage.set('guide-expert-mode', window.userExpertMode);
-      btn.setAttribute('aria-pressed', String(window.userExpertMode));
-      btn.classList.toggle('fab-active', window.userExpertMode);
-
-      // Re-initialize widgets at new level
-      const containers = ['#ocean-embed', '#enneagram-embed', '#mbti-embed', '#persona-cross', '#persona-synthesis'];
-      containers.forEach(sel => {
-        const el = document.querySelector(sel);
-        if (el) el.innerHTML = '';
-      });
-
-      if (window.OceanInsight) window.OceanInsight.init();
-      if (window.EnneagramBuilder) window.EnneagramBuilder.init();
-      if (window.MbtiComposer) window.MbtiComposer.init();
-      if (window.PersonaCross) window.PersonaCross.init();
-      if (window.PersonaSynthesis) window.PersonaSynthesis.init();
-    });
-  }
 
   // ============================================================================
   // THEME TOGGLE
@@ -1084,7 +1046,10 @@
     // Initialize glossary panel
     if (glossaryPanel && !panelInstances['glossary-panel']) {
       panelInstances['glossary-panel'] = new Panel(glossaryPanel, {
-        storageKey: 'glossary_panel_state'
+        storageKey: 'glossary_panel_state',
+        onToggle: (isOpen) => {
+          fabGlossary?.classList.toggle('active', isOpen);
+        }
       });
     }
 
@@ -1373,7 +1338,10 @@
     
     if (tocPanel && !panelInstances['toc-panel']) {
       panelInstances['toc-panel'] = new Panel(tocPanel, {
-        storageKey: 'toc_panel_state'
+        storageKey: 'toc_panel_state',
+        onToggle: (isOpen) => {
+          fabToc?.classList.toggle('active', isOpen);
+        }
       });
     }
 
@@ -1394,6 +1362,9 @@
         storageKey: 'notepad_panel_state',
         // IMP-52: Notepad content is global — uses lcg-notepad-v1 internally,
         // position/size still uses per-panel storageKey
+        onToggle: (isOpen) => {
+          fabNotepad?.classList.toggle('active', isOpen);
+        }
       });
     }
 
