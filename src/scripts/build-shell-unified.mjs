@@ -177,19 +177,19 @@ async function buildShell() {
     log('INFO', `Copied ${assetFiles.length} assets → dist-unified/assets/`);
   }
 
-  // 5b. Copy data files (glossary.json is already the unified version)
+  // 5b. Copy data files (glossary-unified.json is the canonical glossary source per SB-8)
   const DATA_DIST = join(DIST_DIR, 'data');
   await ensureDir(DATA_DIST);
 
-  // Copy all data files (glossary.json is the unified version, glossary-old.json is skipped)
+  // Copy all data files (glossary-unified.json is the canonical source, glossary-old.json and glossary.json are skipped)
   if (existsSync(DATA_DIR)) {
     const dataFiles = await readdir(DATA_DIR);
     for (const file of dataFiles) {
       const srcPath = join(DATA_DIR, file);
       const destPath = join(DATA_DIST, file);
 
-      if (file === 'glossary-old.json') {
-        // Skip old glossary (replaced by unified version)
+      if (file === 'glossary-old.json' || file === 'glossary.json') {
+        // Skip old/pre-unified glossary (replaced by glossary-unified.json per SB-8)
         continue;
       } else {
         await copyFile(srcPath, destPath);

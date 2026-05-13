@@ -29,7 +29,7 @@ const ROOT = join(__dirname, '..');
 const UNIFIED_DIR = join(ROOT, 'src', 'unified');
 const DATA_DIR = join(ROOT, 'data');
 const BUILD_DIR = join(ROOT, 'build');
-const GLOSSARY_PATH = join(DATA_DIR, 'glossary.json');
+const GLOSSARY_PATH = join(DATA_DIR, 'glossary-unified.json');
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -158,7 +158,7 @@ function parseUnifiedHTML(content, filename) {
 
 async function generateGlossaryHTML() {
   if (!existsSync(GLOSSARY_PATH)) {
-    log('WARN', 'glossary.json not found, skipping glossary');
+    log('WARN', 'glossary-unified.json not found, skipping glossary');
     return '';
   }
 

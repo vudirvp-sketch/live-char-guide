@@ -2,7 +2,7 @@
   Part 3: Voice and Isolation (Голос и изоляция)
   Live Character Guide v6 Master HTML
 
-  Layer inclusion: l1 (Voice Isolation rule), l2 (Examples, Greeting, Tier quality)
+  Unified content: all layers merged
 -->
 <section  data-section="p3_voice_isolation" data-toc-nav>
 <h2>Голос и изоляция</h2>
@@ -57,10 +57,10 @@ Example:
 
 <a href="#p3_voice_leak">утечка голоса</a>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Голос — только первый шаг. На Глубоком слое вы научитесь писать Examples, Greeting и избегать Voice Leak: <a href="#p3_examples_rules">Examples и Greeting</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Голос — только первый шаг. Далее — правила написания Examples, Greeting и Voice Leak: <a href="#p3_examples_rules">Examples и Greeting</a></p>
 
 <div class="callout tip">
-<p><strong>💡 Куда дальше?</strong> Parts 4–8 раскрывают инструменты для углубления персонажа (SPINE, OCEAN, техническая реализация, анти-паттерны) и доступны на <a href="#p4_spine_overview">Глубоком слое</a>. На Минимальном слое вы переходите к диагностике — чтобы проверить, что ваша L1-карточка работает корректно: <a href="#p9_basic_checklist">Диагностика → Part 9</a></p>
+<p><strong>💡 Куда дальше?</strong> Parts 4–8 раскрывают инструменты для углубления персонажа (SPINE, OCEAN, техническая реализация, анти-паттерны): <a href="#p4_spine_overview">SPINE</a>. Для проверки карточки перейдите к диагностике: <a href="#p9_basic_checklist">Диагностика → Part 9</a></p>
 </div>
 
 </section>
@@ -70,7 +70,7 @@ Example:
 
 <div class="table-wrap">
 <table>
-<thead><tr><th>Вы уже знаете</th><th>L2 добавляет</th></tr></thead>
+<thead><tr><th>Основы</th><th>Дополнительно</th></tr></thead>
 <tbody>
 <tr><td>Voice Isolation: голос только через Examples</td><td>Voice Leak: утекание авторского стиля в речь персонажа</td></tr>
 <tr><td>Иерархия влияния на голос</td><td>Voice Contamination: заражение чужими Examples</td></tr>
@@ -83,16 +83,16 @@ Example:
 <p><strong>⚠️ Заражение голоса (Voice Contamination):</strong> Никогда не копируйте Examples из чужих карточек. Чужой ритм и разметка ломают голос на 12B. Каждый <code>&lt;START&gt;</code>-блок пишите с нуля под вашего персонажа.</p>
 </div>
 
-<h4>Минимум примеров по слою</h4>
+<h4>Рекомендуемое количество примеров</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Слой</th><th>Количество</th><th>Типы</th></tr>
+<tr><th>Количество</th><th>Типы</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>L1</strong></td><td>2</td><td>Нейтральный, Стресс</td></tr>
-<tr><td><strong>L2</strong></td><td>3</td><td>+ Доверие/рост</td></tr>
-<tr><td><strong>L3</strong></td><td>3-5</td><td>+ Мульти-персонаж</td></tr>
+<tr><td>2</td><td>Нейтральный, Стресс</td></tr>
+<tr><td>3</td><td>+ Доверие/рост</td></tr>
+<tr><td>3-5</td><td>+ Мульти-персонаж</td></tr>
 </tbody>
 </table>
 </div>
@@ -266,7 +266,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 <li>Модель слишком "умная" для персонажа (32B для простого характера)</li>
 </ul>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> При мульти-персонажном взаимодействии возникает Voice Bleed — анти-паттерн AP-11, при котором голоса персонажей смешиваются. Решение в Part 6 → <a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed → L3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> При мульти-персонажном взаимодействии возникает Voice Bleed — анти-паттерн AP-11, при котором голоса персонажей смешиваются. Решение в Part 6 → <a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed → Part 8</a></p>
 
 </section>
 

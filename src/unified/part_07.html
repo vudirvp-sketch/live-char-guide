@@ -2,14 +2,14 @@
   Part 7: Technical Implementation (Техническая реализация)
   Live Character Guide v6 Master HTML
 
-  Layer inclusion: l2 (SP, AN, Lorebook basics, Format Lock, CORE DIRECTIVES, Tone Frame), l3 (API blocks, XML, 4K-Fallback, OOC Protection, Immersion Boundary, L3 directives)
+  Unified content: all layers merged
 -->
 <section  data-section="p7_system_prompt" data-toc-nav>
 <h2>Техническая реализация</h2>
 
 <div class="table-wrap">
 <table>
-<thead><tr><th>Вы уже знаете</th><th>L2 добавляет</th></tr></thead>
+<thead><tr><th>Основы</th><th>Дополнительно</th></tr></thead>
 <tbody>
 <tr><td>Базовый SP: Identity + Rules</td><td>CORE DIRECTIVES: 5 директив поведения в SP</td></tr>
 <tr><td>Anti-godmoding (1 строка)</td><td>Format Lock: фиксация разметки, Tone Frame</td></tr>
@@ -20,7 +20,7 @@
 
 <p><span class="remark-icon" aria-hidden="true">→</span> <strong>Part 06 (Chain of Thought)</strong> добавляет внутренний процесс рассуждения персонажа. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
 
-<p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI.</small> На Глубоком слое SP включает CORE DIRECTIVES — единую систему из 5 директив, связывающую все поведенческие правила в одну логику.</p>
+<p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI.</small> SP включает CORE DIRECTIVES — единую систему из 5 директив, связывающую все поведенческие правила в одну логику.</p>
 
 <h3>Обязательные элементы SP</h3>
 <ul>
@@ -64,24 +64,24 @@ Format Lock:
 <p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Директивы пишутся на английском — <a href="#p7_core_directives">почему → CORE DIRECTIVES</a></small></p>
 
 <div class="callout important">
-<p><strong>📌 Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES → Tone Frame → Format Lock. L3 добавляет OOC Protection.</p>
+<p><strong>📌 Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES → Tone Frame → Format Lock. Расширенный шаблон добавляет OOC Protection.</p>
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Каждая директива подробно разобрана ниже: <a href="#p7_core_directives">CORE DIRECTIVES — объяснения и примеры</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> L3 SP-шаблон с 7 директивами + Tone Frame + OOC Protection: <a href="#p7_sp_template_l3">Шаблон SP Экспертного слоя</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Расширенный SP-шаблон с 7 директивами + Tone Frame + OOC Protection: <a href="#p7_sp_template_l3">Полный шаблон SP</a></p>
 
 </section>
 <section  data-section="p7_core_directives" data-toc-nav>
 <h3>CORE DIRECTIVES — единая система директив</h3>
 
-<p>CORE DIRECTIVES — единая система директив на английском языке, размещаемая в System Prompt. Для L2 (Part 4) — директивы 1–5. Для L3 (Part 6) — все 7. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
+<p>CORE DIRECTIVES — единая система директив на английском языке, размещаемая в System Prompt. Базовый набор — директивы 1–5. Полный набор — все 7. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
 
 <div class="callout important">
 <p><strong>📌 Правило языка директив:</strong> Директивы SP и CORE DIRECTIVES — на английском. RP-контент (Description, Examples, Greeting) — на языке карточки. На 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам), потому что обучающая выборка содержит больше английских паттернов инструкций.</p>
 </div>
 
-<p>Для L2 (Part 4) — директивы 1–5:</p>
+<p>Базовый набор — директивы 1–5:</p>
 <pre><code>&lt;CORE_DIRECTIVES&gt;
 1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
 2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
@@ -200,12 +200,12 @@ Format Lock:
 </table>
 </div>
 
-<h4>Шаблон Author's Note (3 секции — L2)</h4>
+<h4>Шаблон Author's Note (3 секции)</h4>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> L3: добавляется секция GHOST-activation → <a href="#p7_authors_note_l3">AN для Экспертного слоя</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Расширенный шаблон добавляет секцию GHOST-activation → <a href="#p7_authors_note_l3">AN с GHOST-activation</a></p>
 
 <h4>Пример AN</h4>
 <pre><code>[Author's Note:
@@ -246,7 +246,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Параметр</th><th>L1 (12B)</th><th>L2 (12B-32B)</th><th>L3 (32B+ / API)</th><th>Примечание</th></tr>
+<tr><th>Параметр</th><th>12B</th><th>12B-32B</th><th>32B+ / API</th><th>Примечание</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>Temperature</strong></td><td>0.6-0.8</td><td>0.7-0.9</td><td>0.7-1.0</td><td>Ниже = предсказуемее, выше = разнообразнее</td></tr>
@@ -268,7 +268,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 </div>
 
 <details class="interactive">
-<summary>📋 Модель-специфичные рекомендации (L3 → Part 6)</summary>
+<summary>📋 Модель-специфичные рекомендации</summary>
 <div class="table-wrap">
 <table>
 <thead>
@@ -318,7 +318,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 </div>
 
 <div class="callout tip">
-<p><strong>💡 На L2:</strong> Lorebook используется для сенсорных активаций и контекстных фактов. Активация через GHOST-события доступна в Part 6. <a href="#p7_lorebook_advanced">Lorebook L3 → Part 6</a></p>
+<p><strong>💡 Совет:</strong> Lorebook используется для сенсорных активаций и контекстных фактов. Активация через GHOST-события описана в <a href="#p7_lorebook_advanced">продвинутых механиках Lorebook</a>.</p>
 </div>
 
 <h4>Правила Lorebook</h4>
@@ -444,7 +444,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <p><span class="remark-icon" aria-hidden="true">→</span> Продвинутые механики (эмуляция усталости, мета-лор, ложная память) — в Part 6 → <a href="#p7_lorebook_advanced">Продвинутые механики → Part 6</a></p>
 
 <div class="callout tip">
-<p><strong>💡 Механики Lorebook особенно полезны для GHOST-связанных триггеров в Part 6.</strong> GHOST-факты (события прошлого) могут активироваться через комбинированный триггер и каскад по диапазону, создавая динамическое поведение. Подробности → <a href="#p7_lorebook_advanced">Продвинутые механики Lorebook → L3</a></p>
+<p><strong>💡 Механики Lorebook особенно полезны для GHOST-связанных триггеров.</strong> GHOST-факты (события прошлого) могут активироваться через комбинированный триггер и каскад по диапазону, создавая динамическое поведение. Подробности → <a href="#p7_lorebook_advanced">Продвинутые механики Lorebook</a></p>
 </div>
 
 </section>
@@ -479,12 +479,12 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <section  data-section="p7_core_directives_l3">
 <h3>CORE DIRECTIVES — директивы Экспертного слоя (6–7)</h3>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Обзор L2→L3 → <a href="#p4_l3_learning_path">Путь изучения L3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Расширенные директивы → <a href="#p4_l3_learning_path">Расширенный SPINE</a></p>
 
-<p>На Экспертном слое к 5 базовым директивам добавляются ещё 2. Базовые директивы 1–5 описаны в <a href="#p7_core_directives">CORE DIRECTIVES</a>.</p>
+<p>К 5 базовым директивам добавляются ещё 2. Базовые директивы 1–5 описаны в <a href="#p7_core_directives">CORE DIRECTIVES</a>.</p>
 
 <h4>6. CONSEQUENCE DRIVEN (Динамика следствий)</h4>
-<p>L3-enhanced директива. WANT сдвигается к NEED по мере накопления Price в сессии. На L2 — базовое понимание. На L3 — отслеживание через SPINE-чеклист. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a></p>
+<p>Расширенная директива. WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a></p>
 <pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
 <h4>7. PRE-GENERATION FILTER (Фильтр предгенерации)</h4>
@@ -497,8 +497,8 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 </ol>
 <p><strong>Почему для 32B+ и API:</strong> На 12B моделях этот фильтр соблюдается ~40–60%. На 32B+ и API — ~85–95%. Только в Part 6-уровне имеет смысл требовать строгого соблюдения.</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Полный L3 SP-шаблон с 7 директивами в каноническом формате: <a href="#p7_sp_template_l3">Шаблон SP Экспертного слоя</a></p>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример использования в карточке: <a href="#p10_vysherblenny_l3">Выщербленный L3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Полный SP-шаблон с 7 директивами в каноническом формате: <a href="#p7_sp_template_l3">Полный шаблон SP</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример использования в карточке: <a href="#p10_vysherblenny_l3">Выщербленный</a></p>
 
 </section>
 <section  data-section="p7_ooc_protection" data-toc-nav>
@@ -506,7 +506,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 
 <p>Протокол реакции на OOC-провокации в характере персонажа. Добавляет ~15 токенов в SP, но критически важен для иммерсии.</p>
 <pre><code>OOC PROTECTION (OOC-защита): If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI. Если {{user}} говорит OOC или об AI — реагируй в характере как на непонимание или игнорируй. Никогда не признавай, что ты AI.</code></pre>
-<p><strong>Когда использовать:</strong> Всегда для L2+. На L1 — опционально (модель может не следовать).</p>
+<p><strong>Когда использовать:</strong> Всегда, если карточка содержит SPINE и Examples. Для простых карточек — опционально (модель может не следовать).</p>
 
 <h4>Продвинутый вариант: Immersion Boundary</h4>
 <p>Полное отрицание мета-реальности. Упоминание ИИ воспринимается персонажем как симптом безумия — это создаёт нарративный ход из технической проблемы.</p>
@@ -526,7 +526,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <section  data-section="p7_authors_note_l3">
 <h3>Author's Note — Part 6 (4 секции с GHOST)</h3>
 
-<p>На Экспертном слое AN-шаблон расширяется 4-й секцией — GHOST-activation:</p>
+<p>Расширенный AN-шаблон включает 4-ю секцию — GHOST-activation:</p>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [GHOST-activation: {is GHOST triggered? by what?}]
@@ -555,8 +555,8 @@ GHOST-activation: Активен, если в сцене был триггер (
 <section  data-section="p7_sp_template_l3">
 <h3>Шаблон System Prompt — Part 6 (полный)</h3>
 
-<p>Полный L3 SP-шаблон с 7 директивами, Tone Frame и OOC Protection:</p>
-<pre><code>[System Prompt — L3 Extended]
+<p>Полный SP-шаблон с 7 директивами, Tone Frame и OOC Protection:</p>
+<pre><code>[System Prompt — Extended]
 You are {{char}}. {{brief_identity}}
 
 Never speak, act, or decide for {{user}}.
@@ -574,12 +574,12 @@ Never speak, act, or decide for {{user}}.
 
 {{TONE_FRAME}}
 {{OOC_PROTECTION}}</code></pre>
-<p>Подробности каждой директивы — в <a href="#p7_core_directives">CORE DIRECTIVES</a> (1–5) и <a href="#p7_core_directives_l3">CORE DIRECTIVES L3</a> (6–7).</p>
+<p>Подробности каждой директивы — в <a href="#p7_core_directives">CORE DIRECTIVES</a> (1–5) и <a href="#p7_core_directives_l3">Расширенных директивах</a> (6–7).</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример L3 карточки с этим шаблоном: <a href="#p10_vysherblenny_l3">Выщербленный L3</a>. Сравните структуру SP в шаблоне с фактической карточкой — все 7 директив, Tone Frame, OOC Protection, Format Lock на своих местах.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример карточки с этим шаблоном: <a href="#p10_vysherblenny_l3">Выщербленный</a>. Сравните структуру SP в шаблоне с фактической карточкой — все 7 директив, Tone Frame, OOC Protection, Format Lock на своих местах.</p>
 
 <div class="callout tip">
-<p><strong>💡 Пример использования:</strong> Карточка <a href="#p10_vysherblenny_l3">Выщербленный L3</a> использует этот шаблон.</p>
+<p><strong>💡 Пример использования:</strong> Карточка <a href="#p10_vysherblenny_l3">Выщербленный</a> использует этот шаблон.</p>
 <p><strong>Сравните:</strong></p>
 <ul>
 <li>SP начинается с идентификации персонажа + анти-годмодинг</li>
@@ -588,7 +588,7 @@ Never speak, act, or decide for {{user}}.
 <li>OOC Protection: ~15 токенов, критично для иммерсии</li>
 <li>Format Lock: фиксирует формат диалога</li>
 </ul>
-<p>Откройте <a href="#p10_vysherblenny_l3">Выщербленный L3</a> и найдите каждый элемент шаблона в фактической карточке.</p>
+<p>Откройте <a href="#p10_vysherblenny_l3">Выщебленный</a> и найдите каждый элемент шаблона в фактической карточке.</p>
 </div>
 
 </section>
@@ -699,7 +699,7 @@ GHOST: {{ghost}}
 ...
 &lt;/anchors&gt;</code></pre>
 
-<h4>Полный пример XML Description (Выщербленный L3)</h4>
+<h4>Полный пример XML Description (Выщербленный)</h4>
 <pre><code>&lt;identity&gt;
 Имя: Выщербленный
 Роль: Паразит памяти, живущий в ошметке Веля
@@ -789,7 +789,7 @@ CoT (для 32B+ и API, 2 якоря максимум):
 <section  data-section="p7_4k_fallback">
 <h3>4K-Fallback (Протокол адаптации для 4K контекста)</h3>
 
-<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с ограниченным контекстом (4K токенов). Используется когда полная L3-карточка не помещается в контекстное окно.</p>
+<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с ограниченным контекстом (4K токенов). Используется когда расширенная карточка не помещается в контекстное окно.</p>
 
 <h4>Токен-лимиты 4K</h4>
 <div class="table-wrap">
@@ -822,7 +822,7 @@ Anchors:
 - {{trigger}} → {{action}} → {{price}}</code></pre>
 
 <div class="callout tip">
-<p><strong>💡 Совет:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте L2 профиль.</p>
+<p><strong>💡 Совет:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
 </div>
 
 </section>

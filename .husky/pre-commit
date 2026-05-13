@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 pnpm run lint
 if [ -z "$SKIP_ARTIFACT_BUILD" ]; then
-  pnpm run build:all
+  pnpm run build
   pnpm run validate
 fi

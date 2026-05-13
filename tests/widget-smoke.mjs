@@ -1,21 +1,27 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Widget Smoke Test for Live Character Guide v6
+ * @fileoverview Widget Smoke Test for Live Character Guide v7 (unified)
  * @module tests/widget-smoke
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @description
  * IMP-36: Widget smoke test using Puppeteer.
  * Tests runtime behavior that static validation cannot detect.
+ *
+ * Migrated from L1/L2/L3 layer system to unified linear guide per Phase 6.7
+ * of UNIFIED-GUIDE-MIGRATION-PLAN-v2.md. Removed:
+ * - L2 selection via modal (page loads directly, no modal)
+ * - Layer switch button tests
+ * - data-layer-switch tests
  *
  * Test cases:
  * 1. Click OCEAN node → verify panel displays
  * 2. Move OCEAN slider → verify result display updates
  * 3. Click Enneagram node → verify panel displays
  * 4. Move MBTI slider/radio → verify result display updates
- * 5. Click data-layer-switch → verify layer switches + scroll to anchor
- * 6. TOC generation works after layer load
- * 7. Glossary panel opens and displays terms
+ * 5. TOC generation works after page load
+ * 6. Glossary panel opens and displays terms
+ * 7. Theme toggle works
  *
  * Usage:
  *   node tests/widget-smoke.mjs
@@ -66,7 +72,7 @@ async function waitForVisible(page, selector, timeout = TIMEOUT) {
  * Main test suite
  */
 async function runTests() {
-  console.log('=== IMP-36: Widget Smoke Test ===\n');
+  console.log('=== IMP-36: Widget Smoke Test (Unified Guide) ===\n');
   console.log(`Base URL: ${BASE_URL}\n`);
 
   const browser = await puppeteer.launch({
@@ -82,17 +88,9 @@ async function runTests() {
     console.log('Loading page...');
     await page.goto(BASE_URL, { waitUntil: 'networkidle0', timeout: 30000 });
 
-    // Select L2 layer if modal appears
-    try {
-      const modal = await page.$('.layer-modal, #layer-modal');
-      if (modal) {
-        console.log('Layer selector modal found, selecting L2...');
-        await page.click('[data-layer="2"]');
-        await page.waitForTimeout(1000);
-      }
-    } catch (e) {
-      // Modal might not exist if localStorage is set
-    }
+    // No modal to dismiss — unified guide auto-loads content directly
+    // Wait for content to render
+    await page.waitForTimeout(2000);
 
     console.log('\nRunning tests...\n');
 
@@ -176,38 +174,7 @@ async function runTests() {
       }
     });
 
-    // Test 5: Layer Switch
-    await test('Layer switch: Button triggers layer change', async () => {
-      // Find layer switcher
-      const switchBtn = await page.$('.layer-switch-btn[data-layer="3"], [data-layer-switch="3"]');
-      if (!switchBtn) {
-        // Try L1 button
-        const l1Btn = await page.$('.layer-switch-btn[data-layer="1"]');
-        if (l1Btn) {
-          await l1Btn.click();
-          await page.waitForTimeout(1000);
-
-          // Verify layer changed
-          const layerIndicator = await page.$eval('#current-layer-number, .layer-indicator span', el => el.textContent).catch(() => null);
-          if (layerIndicator !== '1') {
-            throw new Error('Layer did not switch to L1');
-          }
-          return;
-        }
-        throw new Error('No layer switch button found');
-      }
-
-      await switchBtn.click();
-      await page.waitForTimeout(1000);
-
-      // Verify layer changed
-      const currentLayer = await page.$eval('#current-layer-number', el => el.textContent).catch(() => null);
-      if (currentLayer !== '3') {
-        throw new Error('Layer did not switch to L3');
-      }
-    });
-
-    // Test 6: TOC Panel
+    // Test 5: TOC Panel
     await test('TOC: Panel opens and displays items', async () => {
       // Open TOC panel
       const tocBtn = await page.$('#fab-toc, .toc-toggle, [data-panel="toc"]');
@@ -227,7 +194,7 @@ async function runTests() {
       }
     });
 
-    // Test 7: Glossary Panel
+    // Test 6: Glossary Panel
     await test('Glossary: Panel opens and displays terms', async () => {
       // Open glossary panel
       const glossaryBtn = await page.$('#fab-glossary, .glossary-tab, [data-panel="glossary"]');
@@ -248,7 +215,7 @@ async function runTests() {
       }
     });
 
-    // Test 8: Theme Toggle
+    // Test 7: Theme Toggle
     await test('Theme: Toggle switches between light/dark', async () => {
       const themeBtn = await page.$('#fab-theme, .theme-toggle, [data-action="theme"]');
       if (!themeBtn) {
@@ -267,6 +234,31 @@ async function runTests() {
 
       if (initialTheme === newTheme) {
         throw new Error('Theme did not change after toggle');
+      }
+    });
+
+    // Test 8: No layer modal or switcher present
+    await test('No layer modal or switcher present in DOM', async () => {
+      const layerModal = await page.$('#layer-modal, .layer-modal');
+      const layerSwitcher = await page.$('#layer-switcher, .layer-switcher');
+      const layerSwitchBtn = await page.$('.layer-switch-btn');
+
+      if (layerModal) {
+        throw new Error('Layer modal (#layer-modal/.layer-modal) found — should not exist in unified mode');
+      }
+      if (layerSwitcher) {
+        throw new Error('Layer switcher (#layer-switcher/.layer-switcher) found — should not exist in unified mode');
+      }
+      if (layerSwitchBtn) {
+        throw new Error('Layer switch button (.layer-switch-btn) found — should not exist in unified mode');
+      }
+    });
+
+    // Test 9: Body has data-layer="3" for unified mode
+    await test('Body has data-layer="3" (unified mode)', async () => {
+      const dataLayer = await page.$eval('body', el => el.getAttribute('data-layer'));
+      if (dataLayer !== '3') {
+        throw new Error(`Body data-layer is "${dataLayer}" — expected "3" for unified mode`);
       }
     });
 

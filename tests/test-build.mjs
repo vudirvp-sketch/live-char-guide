@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Unit tests for build.mjs
+ * @fileoverview Unit tests for build.mjs (unified)
  * @module tests/test-build
- * @version 2.0.0
+ * @version 3.0.0
  * 
  * @description
- * Tests for shell architecture build system
+ * Tests for unified guide build system.
+ * Migrated from layer-based build to unified build per Phase 6.7
+ * of UNIFIED-GUIDE-MIGRATION-PLAN-v2.md.
  */
 
 import { describe, it, before, after, beforeEach } from 'node:test';
@@ -148,23 +150,24 @@ describe('Anchor Validation', () => {
 });
 
 // ============================================================================
-// MANIFEST STRUCTURE TESTS
+// MANIFEST STRUCTURE TESTS (UNIFIED)
 // ============================================================================
 
 describe('Manifest Structure', () => {
-  it('should have valid manifest.json in parts-l2', async () => {
-    const manifestPath = join(ROOT, 'src', 'parts-l2', 'manifest.json');
+  it('should have valid manifest.json in build/parts', async () => {
+    const manifestPath = join(ROOT, 'build', 'parts', 'manifest.json');
     if (existsSync(manifestPath)) {
       const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
 
-      assert.ok(manifest.layer, 'Manifest should have layer');
+      assert.ok(manifest.format, 'Manifest should have format field');
+      assert.strictEqual(manifest.format, 'unified', 'Manifest format should be "unified"');
       assert.ok(Array.isArray(manifest.parts), 'Manifest should have parts array');
       assert.ok(manifest.parts.length > 0, 'Parts array should not be empty');
     }
   });
 
   it('should have required part properties', async () => {
-    const manifestPath = join(ROOT, 'src', 'parts-l2', 'manifest.json');
+    const manifestPath = join(ROOT, 'build', 'parts', 'manifest.json');
     if (existsSync(manifestPath)) {
       const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
 
@@ -174,16 +177,28 @@ describe('Manifest Structure', () => {
       }
     }
   });
+
+  it('manifest should NOT have layer field (unified)', async () => {
+    const manifestPath = join(ROOT, 'build', 'parts', 'manifest.json');
+    if (existsSync(manifestPath)) {
+      const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
+
+      assert.strictEqual(manifest.layer, undefined,
+        'Unified manifest should NOT have "layer" field');
+    }
+  });
 });
 
 // ============================================================================
-// OUTPUT FILE TESTS (SHELL ARCHITECTURE)
+// OUTPUT FILE TESTS (UNIFIED ARCHITECTURE)
 // ============================================================================
 
 describe('Output File Validation', () => {
-  it('should have dist/index.html after build', () => {
-    const indexPath = join(ROOT, 'dist', 'index.html');
-    assert.strictEqual(existsSync(indexPath), true, 'dist/index.html should exist');
+  it('should have dist-unified/index.html or dist/index.html after build', () => {
+    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
+    const distPath = join(ROOT, 'dist', 'index.html');
+    const exists = existsSync(distUnifiedPath) || existsSync(distPath);
+    assert.strictEqual(exists, true, 'dist-unified/index.html or dist/index.html should exist');
   });
 
   it('should have root index.html fallback', () => {
@@ -191,27 +206,47 @@ describe('Output File Validation', () => {
     assert.strictEqual(existsSync(indexPath), true, 'index.html should exist in root');
   });
 
-  it('dist/index.html should have DOCTYPE', async () => {
-    const indexPath = join(ROOT, 'dist', 'index.html');
+  it('dist index.html should have DOCTYPE', async () => {
+    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
+    const distPath = join(ROOT, 'dist', 'index.html');
+    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       assert.ok(content.startsWith('<!DOCTYPE html>'), 'Should start with DOCTYPE');
     }
   });
 
-  it('dist/index.html should have version meta tag', async () => {
-    const indexPath = join(ROOT, 'dist', 'index.html');
+  it('dist index.html should have version meta tag', async () => {
+    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
+    const distPath = join(ROOT, 'dist', 'index.html');
+    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       assert.match(content, /<meta name="livechar-version"/, 'Should have version meta');
     }
   });
 
-  it('dist/index.html should have build hash in comment', async () => {
-    const indexPath = join(ROOT, 'dist', 'index.html');
+  it('dist index.html should have build hash in comment', async () => {
+    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
+    const distPath = join(ROOT, 'dist', 'index.html');
+    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
       assert.match(content, /<!-- Build: [a-f0-9]+ -->/, 'Should have build hash comment');
+    }
+  });
+
+  it('dist index.html should have data-layer="3" on body', async () => {
+    const distUnifiedPath = join(ROOT, 'dist-unified', 'index.html');
+    const distPath = join(ROOT, 'dist', 'index.html');
+    const indexPath = existsSync(distUnifiedPath) ? distUnifiedPath : distPath;
+
+    if (existsSync(indexPath)) {
+      const content = await readFile(indexPath, 'utf-8');
+      assert.match(content, /data-layer="3"/, 'Body should have data-layer="3" for unified mode');
     }
   });
 });
@@ -220,4 +255,4 @@ describe('Output File Validation', () => {
 // RUN TESTS
 // ============================================================================
 
-console.log('🧪 Running build.mjs unit tests (shell architecture)...\n');
+console.log('🧪 Running build.mjs unit tests (unified guide architecture)...\n');

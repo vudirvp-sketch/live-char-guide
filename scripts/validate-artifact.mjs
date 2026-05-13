@@ -95,6 +95,11 @@ function checkRequiredSections(content, name) {
     { pattern: /lazy-loader\.js/i, name: 'Lazy loader script' }
   ];
 
+  const prohibitedLayerElements = [
+    { pattern: /layer-modal/i, name: 'layer-modal (prohibited in unified)' },
+    { pattern: /layer-switcher/i, name: 'layer-switcher (prohibited in unified)' }
+  ];
+
   const missing = [];
   for (const element of requiredShellElements) {
     if (!element.pattern.test(content)) {
@@ -102,8 +107,19 @@ function checkRequiredSections(content, name) {
     }
   }
 
+  // Check for prohibited layer selector elements
+  const prohibitedFound = [];
+  for (const element of prohibitedLayerElements) {
+    if (element.pattern.test(content)) {
+      prohibitedFound.push(element.name);
+    }
+  }
+
   if (missing.length > 0) {
     return { pass: false, error: `${name} missing shell elements: ${missing.join(', ')}` };
+  }
+  if (prohibitedFound.length > 0) {
+    return { pass: false, error: `${name} contains prohibited layer elements: ${prohibitedFound.join(', ')}` };
   }
   return { pass: true };
 }
@@ -220,11 +236,21 @@ async function checkShellArchitecture() {
       const { readdir: readdirSync } = await import('fs/promises');
       const partFiles = await readdirSync(partsDir);
       const htmlFiles = partFiles.filter(f => f.endsWith('.html'));
+      // Verify required special files: glossary.html and footer.html
+      const requiredSpecialFiles = ['glossary.html', 'footer.html'];
+      const missingSpecial = requiredSpecialFiles.filter(f => !htmlFiles.includes(f));
+
       if (htmlFiles.length < 10) {
         results.push({
           gate: 'SHELL-PARTS',
           pass: false,
           error: `dist-unified/parts/ has only ${htmlFiles.length} HTML files (minimum 10 required)`
+        });
+      } else if (missingSpecial.length > 0) {
+        results.push({
+          gate: 'SHELL-PARTS',
+          pass: false,
+          error: `dist-unified/parts/ missing required files: ${missingSpecial.join(', ')}`
         });
       } else {
         results.push({ gate: 'SHELL-PARTS', pass: true });

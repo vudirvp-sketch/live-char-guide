@@ -324,10 +324,10 @@ async function checkGlossaryTermsUsed(allContent) {
   console.log('\n📋 Check 5: Glossary terms used in at least one Part...');
 
   let errorCount = 0;
-  const glossaryPath = join(ROOT, 'data', 'glossary.json');
+  const glossaryPath = join(ROOT, 'data', 'glossary-unified.json');
 
   if (!existsSync(glossaryPath)) {
-    warnings.push('glossary.json not found — skipping glossary term check');
+    warnings.push('glossary-unified.json not found — skipping glossary term check');
     return 0;
   }
 

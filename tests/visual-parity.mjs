@@ -1,26 +1,32 @@
 #!/usr/bin/env node
 /**
- * @fileoverview IMP-37 Visual Parity Check for Live Character Guide v6
+ * @fileoverview IMP-37 Visual Parity Check for Live Character Guide v7 (unified)
  * @module tests/visual-parity
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @description
  * IMP-37: Structural visual parity check using Playwright.
- * Verifies that the built site renders correctly across layers and themes
+ * Verifies that the unified guide renders correctly across themes
  * by checking computed styles, structural elements, and taking reference
  * screenshots for comparison.
+ *
+ * Migrated from L1/L2/L3 layer system to unified linear guide per Phase 6.7
+ * of UNIFIED-GUIDE-MIGRATION-PLAN-v2.md. Removed:
+ * - Per-layer screenshot tests (L1, L2, L3)
+ * - Layer-switching Playwright tests
+ * - .audience-card[data-layer] click tests
+ * - .layer-switch-btn tests
+ * - .layer-indicator checks
+ * - Per-layer color variable checks
  *
  * Test cases:
  * 1. Callouts have colored borders (not gray fallback)
  * 2. Tables have alternating row colors
  * 3. Widgets are interactive (not static gray)
  * 4. No unstyled .antipattern-card divs
- * 5. Layer colors are correct (L1=green, L2=blue, L3=purple)
- * 6. Theme toggle works (dark/light switch)
- * 7. No broken images or missing SVGs
- *
- * Per-layer screenshots are taken for L1, L2, L3 and compared against
- * previous reference screenshots when available (threshold: 95%).
+ * 5. Theme toggle works (dark/light switch)
+ * 6. No broken images or missing SVGs
+ * 7. Single-page scroll works (all content visible)
  *
  * Usage:
  *   node tests/visual-parity.mjs
@@ -43,19 +49,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // ============================================================================
 
 const ROOT_DIR = join(__dirname, '..');
-const DIST_DIR = join(ROOT_DIR, 'dist');
+const DIST_DIR = join(ROOT_DIR, 'dist-unified');
+const DIST_FALLBACK = join(ROOT_DIR, 'dist');
 const SCREENSHOT_DIR = join(__dirname, 'screenshots');
 const THRESHOLD = 0.95;      // 95% structural match
 const TIMEOUT = 30000;       // 30s per operation
 const VIEWPORT = { width: 1280, height: 800 };
 
-const LAYER_COLORS = {
-  1: '#22c55e',  // L1 = green
-  2: '#38bdf8',  // L2 = blue
-  3: '#8b5cf6',  // L3 = purple
-};
-
-const LAYERS = [1, 2, 3];
 const THEMES = ['dark', 'light', 'oled'];
 
 // Test results — same tracking pattern as widget-smoke.mjs
@@ -217,48 +217,6 @@ function normalizeColor(color) {
   return color.toLowerCase();
 }
 
-/**
- * Check if a computed color roughly matches an expected hex color.
- * Accounts for browser RGB rounding.
- */
-function colorMatches(computed, expectedHex, tolerance = 5) {
-  const normalized = normalizeColor(computed);
-  if (normalized === expectedHex) return true;
-
-  const rgbMatch = computed.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-  if (!rgbMatch) return false;
-
-  const hexMatch = expectedHex.match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
-  if (!hexMatch) return false;
-
-  const r = parseInt(rgbMatch[1], 10);
-  const g = parseInt(rgbMatch[2], 10);
-  const b = parseInt(rgbMatch[3], 10);
-  const er = parseInt(hexMatch[1], 16);
-  const eg = parseInt(hexMatch[2], 16);
-  const eb = parseInt(hexMatch[3], 16);
-
-  return (
-    Math.abs(r - er) <= tolerance &&
-    Math.abs(g - eg) <= tolerance &&
-    Math.abs(b - eb) <= tolerance
-  );
-}
-
-/**
- * Check if a color is "gray" (R ≈ G ≈ B), indicating a fallback.
- */
-function isGrayColor(computed) {
-  const rgbMatch = computed.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-  if (!rgbMatch) return true; // Can't parse = suspect
-
-  const r = parseInt(rgbMatch[1], 10);
-  const g = parseInt(rgbMatch[2], 10);
-  const b = parseInt(rgbMatch[3], 10);
-  const maxDiff = Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b));
-  return maxDiff < 15; // Nearly monochrome
-}
-
 // ============================================================================
 // PLAYWRIGHT AVAILABILITY CHECK
 // ============================================================================
@@ -301,15 +259,6 @@ async function loadPreviousScreenshot(name) {
 }
 
 // ============================================================================
-// DOM-BASED STRUCTURAL CHECKS (work with or without Playwright)
-// ============================================================================
-
-/**
- * All structural checks are implemented as page.evaluate() calls.
- * These work with Playwright; the fallback path uses a simpler approach.
- */
-
-// ============================================================================
 // MAIN TEST SUITE — PLAYWRIGHT PATH
 // ============================================================================
 
@@ -329,389 +278,347 @@ async function runPlaywrightTests(baseUrl) {
 
   try {
     // ---------------------------------------------------------------
-    // PHASE 1: Per-layer screenshot + structural checks
+    // PHASE 1: Single-page structural checks (unified guide — no layers)
     // ---------------------------------------------------------------
-    for (const layerId of LAYERS) {
-      const layerColor = LAYER_COLORS[layerId];
-      const layerLabel = `L${layerId}`;
+    console.log(`\n--- Unified Guide (single page) ---\n`);
 
-      console.log(`\n--- ${layerLabel} (color: ${layerColor}) ---\n`);
+    const page = await context.newPage();
+    await page.goto(baseUrl, { waitUntil: 'networkidle', timeout: TIMEOUT });
 
-      const page = await context.newPage();
-      await page.goto(baseUrl, { waitUntil: 'networkidle', timeout: TIMEOUT });
+    // Wait for content to render (no modal to dismiss — auto-loads)
+    await page.waitForTimeout(1500);
 
-      // Dismiss layer modal by selecting the desired layer
-      try {
-        const modalVisible = await page.locator('.layer-modal:not(.hidden)').isVisible().catch(() => false);
-        if (modalVisible) {
-          await page.click(`.audience-card[data-layer="${layerId}"]`);
-          await page.waitForTimeout(1000);
-        } else {
-          // Modal may already be dismissed — try the layer switcher
-          const switchBtn = page.locator(`.layer-switch-btn[data-layer="${layerId}"]`);
-          if (await switchBtn.isVisible().catch(() => false)) {
-            await switchBtn.click();
-            await page.waitForTimeout(500);
-          }
-        }
-      } catch (_e) {
-        // May already be on a layer via localStorage
+    // Take reference screenshot for unified page
+    await test('Screenshot captured (unified-dark)', async () => {
+      await ensureScreenshotDir();
+      const path = await takeScreenshot(page, 'unified-dark');
+      if (!path) throw new Error('Screenshot not saved');
+      const exists = existsSync(path);
+      if (!exists) throw new Error(`Screenshot file not found at ${path}`);
+    });
+
+    // Compare with previous screenshot if exists
+    await test('Screenshot structural parity (≥95%)', async () => {
+      if (!screenshotMode) {
+        throw new Error('Screenshot mode not available — Playwright not fully loaded');
       }
+      const path = join(SCREENSHOT_DIR, 'unified-dark.png');
+      if (!existsSync(path)) throw new Error('No screenshot to compare');
+      const stat = await import('fs/promises').then(m => m.stat(path));
+      if (stat.size === 0) throw new Error('Screenshot file is empty');
+    });
 
-      // Wait for content to render
-      await page.waitForTimeout(500);
+    // --- CHECK 1: Callouts have colored borders ---
+    await test('Callouts have colored borders (not gray fallback)', async () => {
+      const calloutInfo = await page.evaluate(() => {
+        const callouts = document.querySelectorAll('.callout');
+        if (callouts.length === 0) return { count: 0, message: 'No callouts found' };
 
-      // Take reference screenshot for this layer
-      await test(`${layerLabel}: Screenshot captured`, async () => {
-        await ensureScreenshotDir();
-        const path = await takeScreenshot(page, `layer-${layerLabel}-dark`);
-        if (!path) throw new Error('Screenshot not saved');
-        const exists = existsSync(path);
-        if (!exists) throw new Error(`Screenshot file not found at ${path}`);
-      });
+        let coloredCount = 0;
+        let grayCount = 0;
+        const details = [];
 
-      // Compare with previous screenshot if exists
-      await test(`${layerLabel}: Screenshot structural parity (≥95%)`, async () => {
-        if (!screenshotMode) {
-          throw new Error('Screenshot mode not available — Playwright not fully loaded');
-        }
-        // We take a fresh screenshot and compare if an old one existed
-        // On first run there is no previous screenshot — skip comparison
-        // For now we just verify the file exists and is non-zero
-        const path = join(SCREENSHOT_DIR, `layer-${layerLabel}-dark.png`);
-        if (!existsSync(path)) throw new Error('No screenshot to compare');
-        const stat = await import('fs/promises').then(m => m.stat(path));
-        if (stat.size === 0) throw new Error('Screenshot file is empty');
-        // Full pixel comparison would require PNG decoding (pixelmatch etc.)
-        // Structural parity is verified through the DOM checks below instead
-      });
+        for (const c of callouts) {
+          const style = getComputedStyle(c);
+          const borderLeft = style.borderLeftColor;
+          const isVisible = c.offsetParent !== null;
+          if (!isVisible) continue;
 
-      // --- CHECK 1: Callouts have colored borders ---
-      await test(`${layerLabel}: Callouts have colored borders (not gray fallback)`, async () => {
-        const calloutInfo = await page.evaluate(() => {
-          const callouts = document.querySelectorAll('.callout');
-          if (callouts.length === 0) return { count: 0, message: 'No callouts found (may not exist in this layer)' };
-
-          let coloredCount = 0;
-          let grayCount = 0;
-          const details = [];
-
-          for (const c of callouts) {
-            const style = getComputedStyle(c);
-            const borderLeft = style.borderLeftColor;
-            const isVisible = c.offsetParent !== null;
-            if (!isVisible) continue;
-
-            // Check if border is gray (R≈G≈B)
-            const rgbMatch = borderLeft.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-            if (rgbMatch) {
-              const r = parseInt(rgbMatch[1], 10);
-              const g = parseInt(rgbMatch[2], 10);
-              const b = parseInt(rgbMatch[3], 10);
-              const maxDiff = Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b));
-              if (maxDiff < 15) {
-                grayCount++;
-                details.push(`gray(${r},${g},${b})`);
-              } else {
-                coloredCount++;
-              }
-            }
-          }
-
-          return {
-            count: callouts.length,
-            colored: coloredCount,
-            gray: grayCount,
-            details,
-          };
-        });
-
-        if (calloutInfo.count === 0) {
-          // No callouts visible in this layer — acceptable
-          return;
-        }
-        if (calloutInfo.gray > 0 && calloutInfo.colored === 0) {
-          throw new Error(
-            `All ${calloutInfo.gray} visible callouts have gray borders: ${calloutInfo.details.join(', ')}`
-          );
-        }
-      });
-
-      // --- CHECK 2: Tables have alternating row colors ---
-      await test(`${layerLabel}: Tables have alternating row colors`, async () => {
-        const tableInfo = await page.evaluate(() => {
-          const tables = document.querySelectorAll('.table-wrap table, .table-zebra');
-          if (tables.length === 0) return { count: 0, message: 'No tables found' };
-
-          let alternatingCount = 0;
-          let flatCount = 0;
-
-          for (const table of tables) {
-            const rows = table.querySelectorAll('tbody tr');
-            if (rows.length < 2) continue;
-
-            const bgColors = new Set();
-            for (const row of rows) {
-              const bg = getComputedStyle(row).backgroundColor;
-              bgColors.add(bg);
-            }
-
-            if (bgColors.size >= 2) {
-              alternatingCount++;
-            } else {
-              flatCount++;
-            }
-          }
-
-          return { count: tables.length, alternating: alternatingCount, flat: flatCount };
-        });
-
-        if (tableInfo.count === 0) return; // No tables in this layer — OK
-        if (tableInfo.flat > 0 && tableInfo.alternating === 0) {
-          throw new Error(`${tableInfo.flat} tables found but none have alternating row colors`);
-        }
-      });
-
-      // --- CHECK 3: Widgets are interactive (not static gray) ---
-      await test(`${layerLabel}: Widgets are interactive (not static gray blocks)`, async () => {
-        const widgetInfo = await page.evaluate(() => {
-          const widgets = document.querySelectorAll(
-            '.ocean-embed, .ennea-embed, .mbti-grid, .ocean-validator-panel, .steps-grid'
-          );
-          if (widgets.length === 0) return { count: 0, interactive: 0, gray: 0 };
-
-          let interactiveCount = 0;
-          let grayCount = 0;
-
-          for (const w of widgets) {
-            // Check if widget has interactive elements
-            const hasButtons = w.querySelectorAll('button, [role="button"]').length > 0;
-            const hasInputs = w.querySelectorAll('input, select, textarea').length > 0;
-            const hasSVG = w.querySelectorAll('svg').length > 0;
-            const hasLinks = w.querySelectorAll('a[href]').length > 0;
-
-            const style = getComputedStyle(w);
-            const bg = style.backgroundColor;
-            const isGray = (() => {
-              const m = bg.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-              if (!m) return false;
-              const r = parseInt(m[1], 10);
-              const g = parseInt(m[2], 10);
-              const b = parseInt(m[3], 10);
-              return Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b)) < 15;
-            })();
-
-            if (isGray && !hasButtons && !hasInputs && !hasSVG && !hasLinks) {
+          const rgbMatch = borderLeft.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+          if (rgbMatch) {
+            const r = parseInt(rgbMatch[1], 10);
+            const g = parseInt(rgbMatch[2], 10);
+            const b = parseInt(rgbMatch[3], 10);
+            const maxDiff = Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b));
+            if (maxDiff < 15) {
               grayCount++;
+              details.push(`gray(${r},${g},${b})`);
             } else {
-              interactiveCount++;
+              coloredCount++;
             }
           }
-
-          return { count: widgets.length, interactive: interactiveCount, gray: grayCount };
-        });
-
-        if (widgetInfo.count === 0) return; // No widgets — OK for this layer
-        if (widgetInfo.gray > 0 && widgetInfo.interactive === 0) {
-          throw new Error(`${widgetInfo.gray} widgets found but all appear as static gray blocks`);
         }
+
+        return {
+          count: callouts.length,
+          colored: coloredCount,
+          gray: grayCount,
+          details,
+        };
       });
 
-      // --- CHECK 4: No unstyled .antipattern-card divs ---
-      await test(`${layerLabel}: No unstyled .antipattern-card divs`, async () => {
-        const antipatternInfo = await page.evaluate(() => {
-          const cards = document.querySelectorAll('.antipattern-card');
-          if (cards.length === 0) return { count: 0, unstyled: 0 };
+      if (calloutInfo.count === 0) {
+        return;
+      }
+      if (calloutInfo.gray > 0 && calloutInfo.colored === 0) {
+        throw new Error(
+          `All ${calloutInfo.gray} visible callouts have gray borders: ${calloutInfo.details.join(', ')}`
+        );
+      }
+    });
 
-          let unstyledCount = 0;
-          const details = [];
+    // --- CHECK 2: Tables have alternating row colors ---
+    await test('Tables have alternating row colors', async () => {
+      const tableInfo = await page.evaluate(() => {
+        const tables = document.querySelectorAll('.table-wrap table, .table-zebra');
+        if (tables.length === 0) return { count: 0, message: 'No tables found' };
 
-          for (const card of cards) {
-            const style = getComputedStyle(card);
-            const hasBorder = style.borderStyle !== 'none' && style.borderWidth !== '0px';
-            const hasBackground = style.backgroundColor !== 'rgba(0, 0, 0, 0)';
-            const hasBorderRadius = style.borderRadius !== '0px';
-            const hasPadding = style.padding !== '0px';
+        let alternatingCount = 0;
+        let flatCount = 0;
 
-            // An unstyled card would have no border, no background, no border-radius, no padding
-            if (!hasBorder && !hasBackground && !hasBorderRadius && !hasPadding) {
-              unstyledCount++;
-              details.push('no-border/bg/radius/padding');
-            }
+        for (const table of tables) {
+          const rows = table.querySelectorAll('tbody tr');
+          if (rows.length < 2) continue;
 
-            // Also check that .problem-block and .solution-block have colored borders
-            const problemBlock = card.querySelector('.problem-block');
-            const solutionBlock = card.querySelector('.solution-block');
-            if (problemBlock) {
-              const pStyle = getComputedStyle(problemBlock);
-              const pBorder = pStyle.borderLeftColor;
-              if (isGrayColor(pBorder)) {
-                details.push('problem-block-gray-border');
-              }
-            }
-            if (solutionBlock) {
-              const sStyle = getComputedStyle(solutionBlock);
-              const sBorder = sStyle.borderLeftColor;
-              if (isGrayColor(sBorder)) {
-                details.push('solution-block-gray-border');
-              }
-            }
+          const bgColors = new Set();
+          for (const row of rows) {
+            const bg = getComputedStyle(row).backgroundColor;
+            bgColors.add(bg);
           }
 
-          // Helper
-          function isGrayColor(color) {
-            const m = color.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-            if (!m) return true;
+          if (bgColors.size >= 2) {
+            alternatingCount++;
+          } else {
+            flatCount++;
+          }
+        }
+
+        return { count: tables.length, alternating: alternatingCount, flat: flatCount };
+      });
+
+      if (tableInfo.count === 0) return;
+      if (tableInfo.flat > 0 && tableInfo.alternating === 0) {
+        throw new Error(`${tableInfo.flat} tables found but none have alternating row colors`);
+      }
+    });
+
+    // --- CHECK 3: Widgets are interactive (not static gray) ---
+    await test('Widgets are interactive (not static gray blocks)', async () => {
+      const widgetInfo = await page.evaluate(() => {
+        const widgets = document.querySelectorAll(
+          '.ocean-embed, .ennea-embed, .mbti-grid, .ocean-validator-panel, .steps-grid'
+        );
+        if (widgets.length === 0) return { count: 0, interactive: 0, gray: 0 };
+
+        let interactiveCount = 0;
+        let grayCount = 0;
+
+        for (const w of widgets) {
+          const hasButtons = w.querySelectorAll('button, [role="button"]').length > 0;
+          const hasInputs = w.querySelectorAll('input, select, textarea').length > 0;
+          const hasSVG = w.querySelectorAll('svg').length > 0;
+          const hasLinks = w.querySelectorAll('a[href]').length > 0;
+
+          const style = getComputedStyle(w);
+          const bg = style.backgroundColor;
+          const isGray = (() => {
+            const m = bg.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+            if (!m) return false;
             const r = parseInt(m[1], 10);
             const g = parseInt(m[2], 10);
             const b = parseInt(m[3], 10);
             return Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b)) < 15;
+          })();
+
+          if (isGray && !hasButtons && !hasInputs && !hasSVG && !hasLinks) {
+            grayCount++;
+          } else {
+            interactiveCount++;
           }
-
-          return { count: cards.length, unstyled: unstyledCount, details };
-        });
-
-        if (antipatternInfo.count === 0) return; // No antipattern cards — OK
-        if (antipatternInfo.unstyled > 0) {
-          throw new Error(
-            `${antipatternInfo.unstyled}/${antipatternInfo.count} antipattern-cards are unstyled: ${antipatternInfo.details.join(', ')}`
-          );
         }
+
+        return { count: widgets.length, interactive: interactiveCount, gray: grayCount };
       });
 
-      // --- CHECK 5: Layer colors are correct ---
-      await test(`${layerLabel}: Layer badge/indicator color matches ${layerColor}`, async () => {
-        const colorInfo = await page.evaluate((expectedColor) => {
-          // Check layer-indicator border color
-          const indicator = document.querySelector('.layer-indicator');
-          if (!indicator) return { found: false, reason: 'no .layer-indicator element' };
+      if (widgetInfo.count === 0) return;
+      if (widgetInfo.gray > 0 && widgetInfo.interactive === 0) {
+        throw new Error(`${widgetInfo.gray} widgets found but all appear as static gray blocks`);
+      }
+    });
 
-          const indicatorStyle = getComputedStyle(indicator);
-          const borderColor = indicatorStyle.borderColor;
+    // --- CHECK 4: No unstyled .antipattern-card divs ---
+    await test('No unstyled .antipattern-card divs', async () => {
+      const antipatternInfo = await page.evaluate(() => {
+        const cards = document.querySelectorAll('.antipattern-card');
+        if (cards.length === 0) return { count: 0, unstyled: 0 };
 
-          // Check layer-badge colors
-          const badges = document.querySelectorAll(`.layer-badge.layer-${1}, .layer-badge.layer-${2}, .layer-badge.layer-${3}`);
-          const badgeColors = [];
-          for (const badge of badges) {
-            const bStyle = getComputedStyle(badge);
-            badgeColors.push({
-              classes: badge.className,
-              color: bStyle.color,
-              borderColor: bStyle.borderColor,
-            });
+        let unstyledCount = 0;
+        const details = [];
+
+        for (const card of cards) {
+          const style = getComputedStyle(card);
+          const hasBorder = style.borderStyle !== 'none' && style.borderWidth !== '0px';
+          const hasBackground = style.backgroundColor !== 'rgba(0, 0, 0, 0)';
+          const hasBorderRadius = style.borderRadius !== '0px';
+          const hasPadding = style.padding !== '0px';
+
+          if (!hasBorder && !hasBackground && !hasBorderRadius && !hasPadding) {
+            unstyledCount++;
+            details.push('no-border/bg/radius/padding');
           }
 
-          // Check layer switcher active button
-          const activeBtn = document.querySelector('.layer-switch-btn.active');
-          let activeBtnBorderColor = null;
-          if (activeBtn) {
-            activeBtnBorderColor = getComputedStyle(activeBtn).borderColor;
-          }
-
-          return {
-            found: true,
-            indicatorBorder: borderColor,
-            badgeColors,
-            activeBtnBorderColor,
-            expectedColor,
-          };
-        }, layerColor);
-
-        // Verify indicator border color
-        if (colorInfo.found && colorInfo.indicatorBorder) {
-          const match = colorMatches(colorInfo.indicatorBorder, layerColor, 10);
-          if (!match) {
-            // Border may be a compound — check individual sides
-            // This is a soft check; the border shorthand can differ
-          }
-        }
-
-        // Verify active switch button border
-        if (colorInfo.activeBtnBorderColor) {
-          const match = colorMatches(colorInfo.activeBtnBorderColor, layerColor, 10);
-          if (!match) {
-            // The button might not be set to active for this layer yet
-            // This is informational
-          }
-        }
-      });
-
-      // --- CHECK 6: Theme toggle works ---
-      await test(`${layerLabel}: Theme toggle switches dark → light`, async () => {
-        const themeBtn = page.locator('#fab-theme, .theme-toggle, [data-action="theme"]');
-        if (!(await themeBtn.isVisible().catch(() => false))) {
-          throw new Error('Theme toggle button not found or not visible');
-        }
-
-        // Get initial theme
-        const initialTheme = await page.evaluate(() => {
-          return document.body.className.match(/theme-\w+/)?.[0] || 'theme-dark';
-        });
-
-        // Click theme toggle
-        await themeBtn.click();
-        await page.waitForTimeout(500);
-
-        // Verify theme changed
-        const newTheme = await page.evaluate(() => {
-          return document.body.className.match(/theme-\w+/)?.[0] || 'theme-dark';
-        });
-
-        if (initialTheme === newTheme) {
-          throw new Error(`Theme did not change after toggle (${initialTheme} → ${newTheme})`);
-        }
-
-        // Take light theme screenshot
-        if (screenshotMode) {
-          await ensureScreenshotDir();
-          await takeScreenshot(page, `layer-L${layerId}-${newTheme.replace('theme-', '')}`);
-        }
-
-        // Toggle back to dark for subsequent tests
-        await themeBtn.click();
-        await page.waitForTimeout(300);
-      });
-
-      // --- CHECK 7: No broken images or missing SVGs ---
-      await test(`${layerLabel}: No broken images or missing SVGs`, async () => {
-        const imgInfo = await page.evaluate(async () => {
-          const results = { images: 0, broken: 0, svgOk: 0, svgBroken: 0, details: [] };
-
-          // Check <img> elements
-          const imgs = document.querySelectorAll('img[src]');
-          results.images = imgs.length;
-          for (const img of imgs) {
-            if (!img.complete || img.naturalWidth === 0) {
-              results.broken++;
-              results.details.push(`img: ${img.src}`);
+          const problemBlock = card.querySelector('.problem-block');
+          const solutionBlock = card.querySelector('.solution-block');
+          if (problemBlock) {
+            const pStyle = getComputedStyle(problemBlock);
+            const pBorder = pStyle.borderLeftColor;
+            if (isGrayColor(pBorder)) {
+              details.push('problem-block-gray-border');
             }
           }
-
-          // Check inline SVGs
-          const svgs = document.querySelectorAll('svg');
-          for (const svg of svgs) {
-            const hasChildren = svg.innerHTML.trim().length > 0;
-            if (!hasChildren) {
-              results.svgBroken++;
-              results.details.push('empty-svg');
-            } else {
-              results.svgOk++;
+          if (solutionBlock) {
+            const sStyle = getComputedStyle(solutionBlock);
+            const sBorder = sStyle.borderLeftColor;
+            if (isGrayColor(sBorder)) {
+              details.push('solution-block-gray-border');
             }
           }
-
-          return results;
-        });
-
-        if (imgInfo.broken > 0) {
-          throw new Error(`${imgInfo.broken} broken images: ${imgInfo.details.join(', ')}`);
         }
-        if (imgInfo.svgBroken > 0) {
-          throw new Error(`${imgInfo.svgBroken} empty SVGs found`);
+
+        function isGrayColor(color) {
+          const m = color.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+          if (!m) return true;
+          const r = parseInt(m[1], 10);
+          const g = parseInt(m[2], 10);
+          const b = parseInt(m[3], 10);
+          return Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b)) < 15;
         }
+
+        return { count: cards.length, unstyled: unstyledCount, details };
       });
 
-      await page.close();
-    }
+      if (antipatternInfo.count === 0) return;
+      if (antipatternInfo.unstyled > 0) {
+        throw new Error(
+          `${antipatternInfo.unstyled}/${antipatternInfo.count} antipattern-cards are unstyled: ${antipatternInfo.details.join(', ')}`
+        );
+      }
+    });
+
+    // --- CHECK 5: Theme toggle works ---
+    await test('Theme toggle switches dark → light', async () => {
+      const themeBtn = page.locator('#fab-theme, .theme-toggle, [data-action="theme"]');
+      if (!(await themeBtn.isVisible().catch(() => false))) {
+        throw new Error('Theme toggle button not found or not visible');
+      }
+
+      // Get initial theme
+      const initialTheme = await page.evaluate(() => {
+        return document.body.className.match(/theme-\w+/)?.[0] || 'theme-dark';
+      });
+
+      // Click theme toggle
+      await themeBtn.click();
+      await page.waitForTimeout(500);
+
+      // Verify theme changed
+      const newTheme = await page.evaluate(() => {
+        return document.body.className.match(/theme-\w+/)?.[0] || 'theme-dark';
+      });
+
+      if (initialTheme === newTheme) {
+        throw new Error(`Theme did not change after toggle (${initialTheme} → ${newTheme})`);
+      }
+
+      // Take light theme screenshot
+      if (screenshotMode) {
+        await ensureScreenshotDir();
+        await takeScreenshot(page, `unified-${newTheme.replace('theme-', '')}`);
+      }
+
+      // Toggle back to dark for subsequent tests
+      await themeBtn.click();
+      await page.waitForTimeout(300);
+    });
+
+    // --- CHECK 6: No broken images or missing SVGs ---
+    await test('No broken images or missing SVGs', async () => {
+      const imgInfo = await page.evaluate(async () => {
+        const results = { images: 0, broken: 0, svgOk: 0, svgBroken: 0, details: [] };
+
+        // Check <img> elements
+        const imgs = document.querySelectorAll('img[src]');
+        results.images = imgs.length;
+        for (const img of imgs) {
+          if (!img.complete || img.naturalWidth === 0) {
+            results.broken++;
+            results.details.push(`img: ${img.src}`);
+          }
+        }
+
+        // Check inline SVGs
+        const svgs = document.querySelectorAll('svg');
+        for (const svg of svgs) {
+          const hasChildren = svg.innerHTML.trim().length > 0;
+          if (!hasChildren) {
+            results.svgBroken++;
+            results.details.push('empty-svg');
+          } else {
+            results.svgOk++;
+          }
+        }
+
+        return results;
+      });
+
+      if (imgInfo.broken > 0) {
+        throw new Error(`${imgInfo.broken} broken images: ${imgInfo.details.join(', ')}`);
+      }
+      if (imgInfo.svgBroken > 0) {
+        throw new Error(`${imgInfo.svgBroken} empty SVGs found`);
+      }
+    });
+
+    // --- CHECK 7: Single-page scroll — all content visible ---
+    await test('Single-page scroll: all sections are visible (no hidden layers)', async () => {
+      const scrollInfo = await page.evaluate(() => {
+        const sections = document.querySelectorAll('section[data-section]');
+        const totalSections = sections.length;
+        let visibleSections = 0;
+        const hiddenSections = [];
+
+        for (const section of sections) {
+          const style = getComputedStyle(section);
+          const isHidden = style.display === 'none' || style.visibility === 'hidden';
+          if (isHidden) {
+            hiddenSections.push(section.getAttribute('data-section'));
+          } else {
+            visibleSections++;
+          }
+        }
+
+        return { total: totalSections, visible: visibleSections, hidden: hiddenSections };
+      });
+
+      if (scrollInfo.total === 0) {
+        throw new Error('No sections found — content may not have loaded');
+      }
+      if (scrollInfo.hidden.length > 0) {
+        throw new Error(
+          `${scrollInfo.hidden.length} sections are hidden: ${scrollInfo.hidden.slice(0, 5).join(', ')}`
+        );
+      }
+    });
+
+    // --- CHECK 8: No layer-specific elements remain ---
+    await test('No layer-specific UI elements remain (modal, switcher, indicator)', async () => {
+      const layerElements = await page.evaluate(() => {
+        const found = [];
+        if (document.querySelector('#layer-modal')) found.push('#layer-modal');
+        if (document.querySelector('.layer-modal')) found.push('.layer-modal');
+        if (document.querySelector('#layer-switcher')) found.push('#layer-switcher');
+        if (document.querySelector('.layer-switcher')) found.push('.layer-switcher');
+        if (document.querySelector('.layer-switch-btn')) found.push('.layer-switch-btn');
+        if (document.querySelector('.layer-indicator')) found.push('.layer-indicator');
+        return found;
+      });
+
+      if (layerElements.length > 0) {
+        throw new Error(`Layer-specific elements found: ${layerElements.join(', ')}`);
+      }
+    });
+
+    await page.close();
 
     // ---------------------------------------------------------------
     // PHASE 2: OLED theme check
@@ -720,15 +627,7 @@ async function runPlaywrightTests(baseUrl) {
 
     const oledPage = await context.newPage();
     await oledPage.goto(baseUrl, { waitUntil: 'networkidle', timeout: TIMEOUT });
-
-    // Dismiss modal / select L2
-    try {
-      const modalVisible = await oledPage.locator('.layer-modal:not(.hidden)').isVisible().catch(() => false);
-      if (modalVisible) {
-        await oledPage.click('.audience-card[data-layer="2"]');
-        await oledPage.waitForTimeout(1000);
-      }
-    } catch (_e) { /* ignore */ }
+    await oledPage.waitForTimeout(1500);
 
     await test('OLED: Theme cycle dark → light → OLED works', async () => {
       const themeBtn = oledPage.locator('#fab-theme');
@@ -746,19 +645,17 @@ async function runPlaywrightTests(baseUrl) {
         await oledPage.waitForTimeout(400);
       }
 
-      // We should have cycled through dark → light → oled (or similar)
       const uniqueThemes = new Set(themes);
       if (uniqueThemes.size < 2) {
         throw new Error(`Theme toggle did not cycle: ${themes.join(' → ')}`);
       }
 
-      // Take OLED screenshot
       if (screenshotMode) {
         await ensureScreenshotDir();
         const oledTheme = await oledPage.evaluate(() => {
           return (document.body.className.match(/theme-\w+/)?.[0] || 'dark').replace('theme-', '');
         });
-        await takeScreenshot(oledPage, `layer-L2-${oledTheme}`);
+        await takeScreenshot(oledPage, `unified-${oledTheme}`);
       }
     });
 
@@ -774,9 +671,7 @@ async function runPlaywrightTests(baseUrl) {
       const g = parseInt(rgbMatch[2], 10);
       const b = parseInt(rgbMatch[3], 10);
 
-      // OLED theme should have very dark background (r, g, b all ≤ 17)
       if (r > 17 || g > 17 || b > 17) {
-        // Maybe not on OLED theme currently — check
         const currentTheme = await oledPage.evaluate(() => {
           return document.body.className;
         });
@@ -803,98 +698,85 @@ async function runFallbackTests(baseUrl) {
   console.log('    npx playwright install chromium\n');
 
   // We can still do basic HTML structure checks via fetch + string matching
-  for (const layerId of LAYERS) {
-    const layerLabel = `L${layerId}`;
-    console.log(`\n--- ${layerLabel} (fallback) ---\n`);
+  console.log(`\n--- Unified Guide (fallback) ---\n`);
 
-    await test(`${layerLabel}: index.html is fetchable`, async () => {
-      const resp = await fetch(baseUrl);
-      if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${baseUrl}`);
-      const html = await resp.text();
-      if (!html.includes('<!DOCTYPE')) throw new Error('Response is not HTML');
-    });
+  await test('index.html is fetchable', async () => {
+    const resp = await fetch(baseUrl);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status} for ${baseUrl}`);
+    const html = await resp.text();
+    if (!html.includes('<!DOCTYPE')) throw new Error('Response is not HTML');
+  });
 
-    await test(`${layerLabel}: CSS references are present`, async () => {
-      const resp = await fetch(baseUrl);
-      const html = await resp.text();
-      const hasCSS = html.includes('.css') || html.includes('stylesheet');
-      if (!hasCSS) throw new Error('No CSS stylesheet references found in HTML');
-    });
+  await test('CSS references are present', async () => {
+    const resp = await fetch(baseUrl);
+    const html = await resp.text();
+    const hasCSS = html.includes('.css') || html.includes('stylesheet');
+    if (!hasCSS) throw new Error('No CSS stylesheet references found in HTML');
+  });
 
-    await test(`${layerLabel}: Layer ${layerId} data attribute is present`, async () => {
-      const resp = await fetch(baseUrl);
-      const html = await resp.text();
-      const hasLayerAttr = html.includes(`data-layer="${layerId}"`);
-      if (!hasLayerAttr) throw new Error(`No data-layer="${layerId}" found in HTML`);
-    });
+  await test('data-layer="3" is present on body', async () => {
+    const resp = await fetch(baseUrl);
+    const html = await resp.text();
+    const hasLayerAttr = html.includes('data-layer="3"');
+    if (!hasLayerAttr) throw new Error('No data-layer="3" found in HTML (unified mode requires this)');
+  });
 
-    await test(`${layerLabel}: Theme toggle element exists in HTML`, async () => {
-      const resp = await fetch(baseUrl);
-      const html = await resp.text();
-      const hasThemeBtn = html.includes('fab-theme') || html.includes('theme-toggle');
-      if (!hasThemeBtn) throw new Error('No theme toggle element found in HTML');
-    });
+  await test('No layer modal in HTML', async () => {
+    const resp = await fetch(baseUrl);
+    const html = await resp.text();
+    if (html.includes('id="layer-modal"') || html.includes('class="layer-modal"')) {
+      throw new Error('Layer modal found in HTML — should be removed in unified mode');
+    }
+  });
 
-    await test(`${layerLabel}: SVG icons present`, async () => {
-      const resp = await fetch(baseUrl);
-      const html = await resp.text();
-      const hasSVG = html.includes('<svg');
-      if (!hasSVG) throw new Error('No inline SVG elements found in HTML');
-    });
+  await test('No layer switcher in HTML', async () => {
+    const resp = await fetch(baseUrl);
+    const html = await resp.text();
+    if (html.includes('id="layer-switcher"') || html.includes('class="layer-switcher"')) {
+      throw new Error('Layer switcher found in HTML — should be removed in unified mode');
+    }
+  });
 
-    await test(`${layerLabel}: Layer color variables defined in CSS`, async () => {
-      // Try to fetch the CSS file
-      const resp = await fetch(baseUrl);
-      const html = await resp.text();
+  await test('Theme toggle element exists in HTML', async () => {
+    const resp = await fetch(baseUrl);
+    const html = await resp.text();
+    const hasThemeBtn = html.includes('fab-theme') || html.includes('theme-toggle');
+    if (!hasThemeBtn) throw new Error('No theme toggle element found in HTML');
+  });
 
-      // Extract CSS href
-      const cssMatch = html.match(/href="([^"]*\.css)"/);
-      if (!cssMatch) throw new Error('No CSS file linked in HTML');
-
-      const cssUrl = new URL(cssMatch[1], baseUrl).href;
-      const cssResp = await fetch(cssUrl);
-      if (!cssResp.ok) throw new Error(`Cannot fetch CSS: ${cssUrl}`);
-
-      const css = await cssResp.text();
-      const layerColor = LAYER_COLORS[layerId];
-      if (!css.includes(layerColor)) {
-        throw new Error(`Layer color ${layerColor} not found in CSS`);
-      }
-    });
-  }
+  await test('SVG icons present', async () => {
+    const resp = await fetch(baseUrl);
+    const html = await resp.text();
+    const hasSVG = html.includes('<svg');
+    if (!hasSVG) throw new Error('No inline SVG elements found in HTML');
+  });
 
   // Check dist/ static files
   console.log(`\n--- Static File Checks ---\n`);
 
-  await test('dist/ directory exists', async () => {
-    if (!existsSync(DIST_DIR)) {
+  const activeDistDir = existsSync(DIST_DIR) ? DIST_DIR : DIST_FALLBACK;
+
+  await test('dist directory exists', async () => {
+    if (!existsSync(activeDistDir)) {
       throw new Error('dist/ directory not found — run build first');
     }
   });
 
-  await test('dist/index.html exists', async () => {
-    if (!existsSync(join(DIST_DIR, 'index.html'))) {
+  await test('dist index.html exists', async () => {
+    if (!existsSync(join(activeDistDir, 'index.html'))) {
       throw new Error('dist/index.html not found');
     }
   });
 
-  await test('CSS file references layer colors correctly', async () => {
-    // Read CSS from shell styles
-    const shellCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
-    if (!existsSync(shellCSS)) {
-      throw new Error('src/shell/styles.css not found');
-    }
-    const css = await readFile(shellCSS, 'utf-8');
-    for (const [id, color] of Object.entries(LAYER_COLORS)) {
-      if (!css.includes(color)) {
-        throw new Error(`Layer ${id} color ${color} not found in styles.css`);
-      }
-    }
-  });
-
   await test('Antipattern card styles are defined', async () => {
-    const shellCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
-    const css = await readFile(shellCSS, 'utf-8');
+    const shellCSS = join(ROOT_DIR, 'src', 'shell-unified', 'styles.css');
+    const fallbackCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
+    const cssPath = existsSync(shellCSS) ? shellCSS : fallbackCSS;
+
+    if (!existsSync(cssPath)) {
+      throw new Error('styles.css not found');
+    }
+    const css = await readFile(cssPath, 'utf-8');
     if (!css.includes('.antipattern-card')) {
       throw new Error('.antipattern-card styles not found in CSS');
     }
@@ -904,8 +786,11 @@ async function runFallbackTests(baseUrl) {
   });
 
   await test('Theme variants defined (light, oled)', async () => {
-    const shellCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
-    const css = await readFile(shellCSS, 'utf-8');
+    const shellCSS = join(ROOT_DIR, 'src', 'shell-unified', 'styles.css');
+    const fallbackCSS = join(ROOT_DIR, 'src', 'shell', 'styles.css');
+    const cssPath = existsSync(shellCSS) ? shellCSS : fallbackCSS;
+
+    const css = await readFile(cssPath, 'utf-8');
     if (!css.includes('theme-light')) {
       throw new Error('body.theme-light styles not found in CSS');
     }
@@ -920,7 +805,7 @@ async function runFallbackTests(baseUrl) {
 // ============================================================================
 
 async function main() {
-  console.log('=== IMP-37: Visual Parity Check ===\n');
+  console.log('=== IMP-37: Visual Parity Check (Unified Guide) ===\n');
 
   // Check Playwright availability
   const hasPlaywright = await checkPlaywright();
@@ -937,9 +822,11 @@ async function main() {
   let baseUrl = process.env.TEST_URL || process.argv.find(a => a.startsWith('--url='))?.split('=')[1];
   let ownServer = null;
 
+  const activeDistDir = existsSync(DIST_DIR) ? DIST_DIR : DIST_FALLBACK;
+
   if (!baseUrl) {
     // Check dist/ exists
-    if (!existsSync(DIST_DIR)) {
+    if (!existsSync(activeDistDir)) {
       console.error('ERROR: dist/ directory not found. Run "pnpm run build" first.');
       process.exit(1);
     }
@@ -947,7 +834,7 @@ async function main() {
     // Start local server
     console.log('Starting local server...');
     try {
-      ownServer = await startServer(DIST_DIR);
+      ownServer = await startServer(activeDistDir);
       baseUrl = ownServer.url;
       console.log(`Server: ${baseUrl}\n`);
     } catch (err) {
