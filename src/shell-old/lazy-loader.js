@@ -1,10 +1,10 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - LAZY LOADER v7.0.0 (UNIFIED)
+ * LIVE CHARACTER GUIDE - LAZY LOADER v6.2.3
  * ============================================================================
  * 
- * Unified content loading system:
- * 1. On page load → fetch HTML parts from parts/
+ * Dynamic layer loading system:
+ * 1. User selects layer → fetch HTML parts from parts-l{N}/
  * 2. Insert content into #content container
  * 3. Handle anchor navigation and browser history
  * 
@@ -14,12 +14,11 @@
  * - Glossary panel
  * - Theme toggle (dark/light/oled)
  * - Content width toggle
- * - Expert mode toggle (M3 widget level)
  * - Scroll to top
  * 
  * Architecture:
  * - Shell (this file) loads once
- * - Content fetched from single unified parts/ directory
+ * - Layer content fetched on demand
  * - localStorage remembers preferences
  */
 
@@ -31,17 +30,30 @@
   // ============================================================================
   
   const CONFIG = {
-    STORAGE_KEY: 'guide-unified',
-    VERSION: '7.0.0',
-    PARTS_DIR: 'parts'
+    STORAGE_KEY: 'guide-layer-selection',
+    VERSION: '6.2.3',
+    LAYERS: ['1', '2', '3'],
+    LAYER_LABELS: {
+      '1': '\u041c\u0438\u043d\u0438\u043c\u0430\u043b\u044c\u043d\u044b\u0439',
+      '2': '\u0413\u043b\u0443\u0431\u043e\u043a\u0438\u0439',
+      '3': '\u042d\u043a\u0441\u043f\u0435\u0440\u0442\u043d\u044b\u0439'
+    },
+    DEFAULT_LAYER: '2',
+    PARTS_DIR: {
+      '1': 'parts-l1',
+      '2': 'parts-l2',
+      '3': 'parts-l3'
+    }
   };
 
   // ============================================================================
   // STATE
   // ============================================================================
   
+  let currentLayer = null;
   let isLoading = false;
   let loadedParts = new Set();
+  let lastVisibleSection = null; // IMP-46: scroll preservation
 
   // ============================================================================
   // ANCHOR REDIRECT MAP (§0.18: v5.12 → v6 backward compatibility)
@@ -631,6 +643,34 @@
   const panelInstances = {};
 
   // ============================================================================
+  // LAYER SELECTION
+  // ============================================================================
+
+  function getSavedLayer() {
+    try {
+      const saved = localStorage.getItem(CONFIG.STORAGE_KEY);
+      if (saved && CONFIG.LAYERS.includes(saved)) return saved;
+    } catch (e) {
+      console.warn('[LazyLoader] localStorage unavailable:', e.message);
+    }
+    return null;
+  }
+
+  function saveLayer(layer) {
+    try {
+      localStorage.setItem(CONFIG.STORAGE_KEY, layer);
+    } catch (e) {
+      console.warn('[LazyLoader] Failed to save layer:', e.message);
+    }
+  }
+
+  function getLayerFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const layer = params.get('layer');
+    return layer && CONFIG.LAYERS.includes(layer) ? layer : null;
+  }
+
+  // ============================================================================
   // CONTENT LOADING
   // ============================================================================
 
@@ -642,49 +682,249 @@
     $('#loading-overlay')?.classList.add('hidden');
   }
 
-  async function loadContent() {
-    if (isLoading) return;
+  async function fetchPart(layer, filename) {
+    const dir = CONFIG.PARTS_DIR[layer];
+    const url = `${dir}/${filename}`;
+    
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.text();
+    } catch (e) {
+      console.error(`[LazyLoader] Failed to fetch ${url}:`, e.message);
+      return `<!-- Failed to load: ${filename} -->`;
+    }
+  }
+
+  async function loadLayerContent(layer) {
+    if (isLoading) {
+      console.warn('[LazyLoader] Already loading');
+      return;
+    }
+
     isLoading = true;
     showLoading();
 
     const content = $('#content');
-    if (!content) { isLoading = false; hideLoading(); return; }
+    if (!content) {
+      console.error('[LazyLoader] #content element not found');
+      isLoading = false;
+      hideLoading();
+      return;
+    }
+
+    // IMP-46: Record nearest visible data-section before clearing content
+    lastVisibleSection = null;
+    const allSections = $$('section[data-section]');
+    const viewportMiddle = window.scrollY + window.innerHeight / 2;
+    let minDistance = Infinity;
+    allSections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      const secMiddle = rect.top + window.scrollY + rect.height / 2;
+      const dist = Math.abs(secMiddle - viewportMiddle);
+      if (dist < minDistance) {
+        minDistance = dist;
+        lastVisibleSection = sec.getAttribute('data-section') || sec.id;
+      }
+    });
 
     content.innerHTML = '';
     loadedParts.clear();
 
     try {
-      const manifestResponse = await fetch(`${CONFIG.PARTS_DIR}/manifest.json`);
-      if (!manifestResponse.ok) throw new Error(`Failed to load manifest: HTTP ${manifestResponse.status}`);
-
+      const dir = CONFIG.PARTS_DIR[layer];
+      const manifestResponse = await fetch(`${dir}/manifest.json`);
+      
+      if (!manifestResponse.ok) {
+        throw new Error(`Failed to load manifest: HTTP ${manifestResponse.status}`);
+      }
+      
       const manifest = await manifestResponse.json();
       const parts = manifest.parts || [];
-
-      const fetchPromises = parts.map(part => {
-        const url = `${CONFIG.PARTS_DIR}/${part.file}`;
-        return fetch(url).then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}`);
-          return r.text();
-        }).catch(e => `<!-- Failed to load: ${part.file} -->`);
-      });
-
+      
+      console.log(`[LazyLoader] Loading layer ${layer}: ${parts.length} parts`);
+      
+      const fetchPromises = parts.map(part => fetchPart(layer, part.file));
       const results = await Promise.all(fetchPromises);
+      
       content.innerHTML = results.join('\n');
+      document.body.setAttribute('data-layer', layer);
       content.classList.remove('content-hidden');
-
+      
+      updateSwitcherButtons(layer);
       initInteractiveElements();
       generateTOC();
       initActivePartHighlighting();
       handleAnchor();
       loadGlossaryContent();
+      updateGlossaryForLayer(layer);
       handleLegacyAnchor();
-
+      
+      // IMP-46: Scroll to previously visible section after layer switch
+      if (lastVisibleSection) {
+        const targetEl = document.getElementById(lastVisibleSection);
+        if (targetEl) {
+          setTimeout(() => targetEl.scrollIntoView({ behavior: 'smooth' }), 100);
+        }
+      }
+      
+      console.log(`[LazyLoader] Layer ${layer} loaded successfully`);
+      
     } catch (e) {
-      content.innerHTML = `<div class="callout warn"><strong>Error</strong><p>Failed to load content: ${e.message}</p></div>`;
+      console.error('[LazyLoader] Failed to load layer:', e);
+      content.innerHTML = `<div class="callout warn"><strong>Ошибка загрузки</strong><p>Не удалось загрузить контент: ${e.message}</p><p>Попробуйте обновить страницу.</p></div>`;
     }
 
     isLoading = false;
     hideLoading();
+  }
+
+  // ============================================================================
+  // IMP-47: WIDGET DISAPPEARANCE TOAST
+  // ============================================================================
+
+  // Widget containers that only exist on L2+ or L3
+  const WIDGET_SELECTORS = {
+    '#ocean-embed': { minLayer: 2, name: 'OCEAN' },
+    '#enneagram-embed': { minLayer: 2, name: 'Эннеаграмма' },
+    '#mbti-embed': { minLayer: 2, name: 'MBTI' },
+    '#persona-cross': { minLayer: 3, name: 'OCEAN×Эннеаграмма' }
+  };
+
+  function checkWidgetDisappearance(oldLayer, newLayer) {
+    if (!oldLayer || parseInt(newLayer, 10) >= parseInt(oldLayer, 10)) return;
+
+    const oldLayerNum = parseInt(oldLayer, 10);
+    const newLayerNum = parseInt(newLayer, 10);
+
+    // Find which widgets existed in the old layer but don't exist in the new layer
+    const disappearedWidgets = [];
+    Object.entries(WIDGET_SELECTORS).forEach(([_selector, info]) => {
+      if (oldLayerNum >= info.minLayer && newLayerNum < info.minLayer) {
+        // Only show toast if the widget actually existed in the old content
+        // (some parts don't have widgets at all)
+        disappearedWidgets.push(info);
+      }
+    });
+
+    if (disappearedWidgets.length === 0) return;
+
+    // Show toast
+    const toast = document.createElement('div');
+    toast.className = 'widget-toast';
+
+    const targetLayer = disappearedWidgets[0].minLayer;
+    const targetLabel = CONFIG.LAYER_LABELS[String(targetLayer)];
+
+    const message = document.createElement('span');
+    message.textContent = `Интерактивный инструмент доступен на ${targetLabel} слое`;
+
+    const switchBtn = document.createElement('button');
+    switchBtn.textContent = `Перейти → ${targetLabel}`;
+    switchBtn.className = 'widget-toast-btn';
+    switchBtn.addEventListener('click', () => {
+      toast.remove();
+      switchLayer(String(targetLayer));
+    });
+
+    toast.appendChild(message);
+    toast.appendChild(switchBtn);
+    document.body.appendChild(toast);
+
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.classList.add('widget-toast-fadeout');
+        setTimeout(() => toast.remove(), 300);
+      }
+    }, 3000);
+  }
+
+  // ============================================================================
+  // UI UPDATES
+  // ============================================================================
+
+  function hideModal() { $('#layer-modal')?.classList.add('hidden'); }
+  // Reserved for future use
+  function _showModal() { $('#layer-modal')?.classList.remove('hidden'); }
+  function showSwitcher() { $('#layer-switcher')?.classList.remove('hidden'); }
+
+  function updateSwitcherButtons(activeLayer) {
+    $$('.layer-switch-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.layer === activeLayer);
+    });
+  }
+
+  function showFABs() {
+    const fabs = $('#fab-group');
+    if (fabs) fabs.classList.remove('hidden');
+  }
+
+  function showLayerIndicator(layer) {
+    const numEl = $('#current-layer-number');
+    const labelEl = $('#current-layer-label');
+    if (numEl) numEl.textContent = layer;
+    if (labelEl) labelEl.textContent = CONFIG.LAYER_LABELS[layer] || '';
+  }
+
+  // ============================================================================
+  // LAYER SWITCHING
+  // ============================================================================
+
+  async function switchLayer(layer, anchor = null) {
+    if (!CONFIG.LAYERS.includes(layer)) {
+      console.error('[LazyLoader] Invalid layer:', layer);
+      return;
+    }
+
+    // If same layer, just scroll to anchor if provided
+    if (layer === currentLayer) {
+      if (anchor) {
+        scrollToAnchor(anchor);
+      }
+      return;
+    }
+
+    const previousLayer = currentLayer; // IMP-47: track previous layer
+    currentLayer = layer;
+    saveLayer(layer);
+    
+    const url = new URL(window.location);
+    url.searchParams.set('layer', layer);
+    url.hash = anchor || '';
+    history.pushState({ layer, anchor }, '', url);
+    
+    await loadLayerContent(layer);
+    
+    // Update layer indicator with new layer
+    showLayerIndicator(layer);
+    
+    // IMP-47: Show toast if widgets disappeared on layer downgrade
+    checkWidgetDisappearance(previousLayer, layer);
+    
+    // Scroll to anchor or top
+    if (anchor) {
+      scrollToAnchor(anchor);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function scrollToAnchor(anchor) {
+    const element = document.getElementById(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.warn('[LazyLoader] Anchor not found:', anchor);
+    }
+  }
+
+  async function selectLayer(layer) {
+    hideModal();
+    showSwitcher();
+    showFABs();
+    showLayerIndicator(layer);
+    await switchLayer(layer);
   }
 
   // ============================================================================
@@ -838,7 +1078,7 @@
   let tocActiveObserver = null;
 
   function initActivePartHighlighting() {
-    // Disconnect previous observer if it exists
+    // Disconnect previous observer if it exists (layer switch re-init)
     if (tocActiveObserver) {
       tocActiveObserver.disconnect();
       tocActiveObserver = null;
@@ -895,6 +1135,80 @@
   }
 
   // ============================================================================
+  // GLOSSARY LAYER FILTERING (IMP-51)
+  // ============================================================================
+
+  /**
+   * FIX-04/§3.4: Hide glossary terms not applicable to current layer.
+   * Uses CSS class toggle (.glossary-item-hidden) instead of inline styles.
+   */
+  function updateGlossaryForLayer(layer) {
+    const layerNum = parseInt(layer, 10);
+    const glossaryItems = $$('.glossary-item');
+    
+    glossaryItems.forEach(item => {
+      const layers = (item.dataset.layers || '').split(' ').map(Number);
+      const isAvailable = layers.some(l => l === 0 || l === layerNum);
+      
+      if (!isAvailable && layers.length > 0) {
+        item.classList.add('glossary-item-hidden');
+      } else {
+        item.classList.remove('glossary-item-hidden');
+      }
+    });
+  }
+
+  // ============================================================================
+  // LAYER SWITCH LINKS (data-layer-switch in-content navigation)
+  // ============================================================================
+
+  /**
+   * Initialize the layer switch UI state (sync switcher buttons with current layer).
+   * This is called after each layer content load to ensure the layer-switcher
+   * reflects the current layer and that its buttons are properly highlighted.
+   */
+  function initLayerSwitch() {
+    const switcher = $('#layer-switcher');
+    if (!switcher) return;
+    // Ensure switcher is visible after content replacement
+    if (currentLayer) {
+      switcher.classList.remove('hidden');
+      updateSwitcherButtons(currentLayer);
+      showLayerIndicator(currentLayer);
+    }
+  }
+
+  /**
+   * Bind click handlers to [data-layer-switch] links inside loaded content.
+   * Format: data-layer-switch="3#p8_ap15_extended" → switch to layer 3, scroll to #p8_ap15_extended
+   * Format: data-layer-switch="2#p5_ocean_validator" → switch to layer 2, scroll to #p5_ocean_validator
+   */
+  function bindDataLayerSwitchLinks() {
+    $$('[data-layer-switch]').forEach(link => {
+      // Remove previous handler to avoid duplicates on re-init
+      link.removeEventListener('click', handleLayerSwitchClick);
+      link.addEventListener('click', handleLayerSwitchClick);
+    });
+  }
+
+  function handleLayerSwitchClick(e) {
+    e.preventDefault();
+    const attr = e.currentTarget.getAttribute('data-layer-switch');
+    if (!attr) return;
+
+    // Parse format: "{layer}#{anchor}" or just "{layer}"
+    const [layerPart, anchorPart] = attr.split('#');
+    const targetLayer = layerPart;
+    const anchor = anchorPart || null;
+
+    if (CONFIG.LAYERS.includes(targetLayer)) {
+      switchLayer(targetLayer, anchor);
+    } else {
+      console.warn('[LazyLoader] Invalid layer in data-layer-switch:', targetLayer);
+    }
+  }
+
+  // ============================================================================
   // INTERACTIVE ELEMENTS
   // ============================================================================
 
@@ -927,8 +1241,10 @@
       wrapper.appendChild(btn);
     });
 
-    // Re-initialize interactive tools after content load
+    // Re-initialize interactive tools after layer switch
+    // (content is replaced, so event listeners are lost)
     // Widget JS files auto-init via DOMContentLoaded + container detection
+    // Re-trigger widget initialization after layer content replacement
     if (window.OceanInsight && typeof window.OceanInsight.init === 'function') {
       window.OceanInsight.init();
     }
@@ -944,52 +1260,18 @@
     if (window.PersonaCross && typeof window.PersonaCross.init === 'function') {
       window.PersonaCross.init();
     }
-    initExpertModeToggle();
+    initLayerSwitch();
+    initLayerToggle();
     initTooltips();
     initTokenCalc();
     initProgressBar();
+    bindDataLayerSwitchLinks();
 
-    // EventBus integration (§0.3): ensure EventBus is available after content load
+    // EventBus integration (§0.3): ensure EventBus is available after layer switch
+    // event-bus.js is loaded before lazy-loader.js, so window.EventBus should exist
     if (typeof window.EventBus === 'undefined') {
       console.warn('[LazyLoader] EventBus not found — widgets will work standalone');
     }
-  }
-
-  // ============================================================================
-  // EXPERT MODE TOGGLE (M3 widget level)
-  // ============================================================================
-
-  function initExpertModeToggle() {
-    const btn = document.getElementById('fab-expert');
-    if (!btn) return;
-
-    // Load saved preference
-    const saved = storage.get('guide-expert-mode');
-    if (saved) {
-      window.userExpertMode = true;
-      btn.setAttribute('aria-pressed', 'true');
-      btn.classList.add('fab-active');
-    }
-
-    btn.addEventListener('click', () => {
-      window.userExpertMode = !window.userExpertMode;
-      storage.set('guide-expert-mode', window.userExpertMode);
-      btn.setAttribute('aria-pressed', String(window.userExpertMode));
-      btn.classList.toggle('fab-active', window.userExpertMode);
-
-      // Re-initialize widgets at new level
-      const containers = ['#ocean-embed', '#enneagram-embed', '#mbti-embed', '#persona-cross', '#persona-synthesis'];
-      containers.forEach(sel => {
-        const el = document.querySelector(sel);
-        if (el) el.innerHTML = '';
-      });
-
-      if (window.OceanInsight) window.OceanInsight.init();
-      if (window.EnneagramBuilder) window.EnneagramBuilder.init();
-      if (window.MbtiComposer) window.MbtiComposer.init();
-      if (window.PersonaCross) window.PersonaCross.init();
-      if (window.PersonaSynthesis) window.PersonaSynthesis.init();
-    });
   }
 
   // ============================================================================
@@ -1088,10 +1370,12 @@
         }
       } else {
         // Section not in current layer — build generic tooltip
+        // Determine target layer from tooltip-ref data attribute or from section registry
         const targetLayerAttr = marker.getAttribute('data-target-layer');
         if (targetLayerAttr) {
           targetLayer = parseInt(targetLayerAttr, 10);
         } else {
+          // Default: if not found in current layer, it's likely L2 or L3
           targetLayer = 2;
         }
 
@@ -1280,7 +1564,7 @@
     loadGlossaryContent();
   }
 
-  // Cache glossary data so we don't re-fetch on every content load
+  // Cache glossary data so we don't re-fetch on every layer switch
   let glossaryDataCache = null;
 
   async function loadGlossaryContent() {
@@ -1328,9 +1612,16 @@
       return;
     }
 
-    const terms = glossaryData.canonical_terms;
+    // 4. Get current layer for context-aware definitions
+    const currentLayerNum = parseInt(document.body.getAttribute('data-layer') || '2', 10);
 
-    // 4. Build HTML: search + grouped terms
+    const terms = glossaryData.canonical_terms;
+    // TODO: Use layer markers in glossary term rendering
+    const _layerMarkers = glossaryData.layer_markers || {
+      '0': '📘', '1': '🔁', '2': '⚙️', '3': '🔍'
+    };
+
+    // 5. Build HTML: search + grouped terms
     let html = '<div class="glossary-search"><input type="text" id="glossary-search-input" placeholder="Поиск терминов..." aria-label="Поиск в глоссарии"></div>';
 
     // Group terms by first letter
@@ -1347,15 +1638,30 @@
       html += '<div class="glossary-section"><h4>' + letter + '</h4><ul>';
 
       groupedTerms[letter].forEach(term => {
-        // Use unified definition if available, fallback to regular definition
-        let definition = term.unified_definition || term.definition || '';
+        const layers = term.applicable_layers || [0, 1, 2, 3];
+        const layerStr = layers.join(' ');
 
-        html += '<li class="glossary-item" data-term="' + term.term.toLowerCase() + '">';
+        // Use layer-specific definition if available
+        let definition = term.definition;
+        if (term.layer_context && term.layer_context[String(currentLayerNum)]) {
+          definition = term.layer_context[String(currentLayerNum)];
+        }
+
+        // Build layer markers
+        const markers = layers.map(l => {
+          const markerMap = { 0: '📘', 1: '🔁', 2: '⚙️', 3: '🔍' };
+          return markerMap[l] || '';
+        }).filter(m => m).join(' ');
+
+        html += '<li class="glossary-item" data-layers="' + layerStr + '" data-term="' + term.term.toLowerCase() + '">';
         html += '<strong>' + term.term + '</strong>';
         if (term.abbreviation) {
           html += ' <small style="color:var(--accent);">(' + term.abbreviation + ')</small>';
         }
         html += '<br><span class="glossary-def">' + definition + '</span>';
+        if (markers) {
+          html += '<br><small style="color:var(--text-muted);">' + markers + '</small>';
+        }
         if (term.anchor_id) {
           html += ' <a href="#' + term.anchor_id + '" class="glossary-link" title="Перейти к разделу">\u2192</a>';
         }
@@ -1366,9 +1672,9 @@
     });
 
     glossaryContent.innerHTML = html;
-    console.log('[Glossary] Rendered ' + terms.length + ' terms');
+    console.log('[Glossary] Rendered ' + terms.length + ' terms (layer ' + currentLayerNum + ')');
 
-    // 5. Initialize search functionality
+    // 6. Initialize search functionality
     const searchInput = document.getElementById('glossary-search-input');
     if (searchInput) {
       searchInput.addEventListener('input', () => {
@@ -1379,14 +1685,21 @@
           const termText = item.dataset.term || '';
           const content = item.textContent.toLowerCase();
           const matches = termText.includes(query) || content.includes(query);
-          item.style.display = matches ? '' : 'none';
+          if (matches) {
+            item.classList.remove('glossary-item-hidden');
+          } else {
+            item.classList.add('glossary-item-hidden');
+          }
         });
 
         // Show/hide section headers
         glossaryContent.querySelectorAll('.glossary-section').forEach(section => {
-          const items = section.querySelectorAll('.glossary-item');
-          const hasVisible = Array.from(items).some(item => item.style.display !== 'none');
-          section.style.display = hasVisible ? '' : 'none';
+          const visibleItems = section.querySelectorAll('.glossary-item:not(.glossary-item-hidden)');
+          if (visibleItems.length) {
+            section.classList.remove('glossary-section-hidden');
+          } else {
+            section.classList.add('glossary-section-hidden');
+          }
         });
       });
     }
@@ -1579,38 +1892,165 @@
   }
 
   // ============================================================================
-  // UI HELPERS
+  // EVENT BINDING
   // ============================================================================
 
-  function showFABs() {
-    const fabs = $('#fab-group');
-    if (fabs) fabs.classList.remove('hidden');
+  function bindEvents() {
+    // Layer modal buttons
+    $$('.audience-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const layer = btn.dataset.layer;
+        if (layer) selectLayer(layer);
+      });
+    });
+
+    // Uncertain path button
+    $$('.uncertain-path').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectLayer(btn.dataset.defaultLayer || CONFIG.DEFAULT_LAYER);
+      });
+    });
+
+    // Layer switcher buttons
+    $$('.layer-switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const layer = btn.dataset.layer;
+        if (layer) switchLayer(layer);
+      });
+    });
+
+    // Browser history
+    window.addEventListener('popstate', (e) => {
+      if (e.state?.layer) {
+        loadLayerContent(e.state.layer);
+        currentLayer = e.state.layer;
+        updateSwitcherButtons(e.state.layer);
+      }
+      // §0.18: Handle legacy anchor redirects on popstate too
+      handleLegacyAnchor();
+    });
+
+    // Keyboard: close panels on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        Object.values(panelInstances).forEach(panel => {
+          if (panel.isOpen()) panel.close();
+        });
+      }
+    });
   }
 
   // ============================================================================
-  // BACKWARD COMPATIBILITY
+  // LAYER TOGGLE (V-14: Quick Reference toggle)
   // ============================================================================
 
-  // Backward compatibility: strip ?layer=N from old URLs
-  function cleanupLayerURL() {
-    const url = new URL(window.location);
-    if (url.searchParams.has('layer')) {
-      const hash = url.hash;
-      url.searchParams.delete('layer');
-      history.replaceState(null, '', url.pathname + url.search + hash);
+  const LAYER_TOGGLE_KEY = 'guide-layer-toggle-state';
+
+  function initLayerToggle() {
+    // Create toggle UI
+    const switcher = $('#layer-switcher');
+    if (!switcher) return;
+
+    // Check if already exists
+    if ($('#layer-toggle-wrap')) return;
+
+    // Create toggle container
+    const toggleWrap = document.createElement('span');
+    toggleWrap.className = 'layer-toggle-wrap';
+    toggleWrap.id = 'layer-toggle-wrap';
+    toggleWrap.setAttribute('aria-label', 'Переключение видимости слоёв');
+
+    // Create toggle buttons for each layer
+    ['1', '2', '3'].forEach(layer => {
+      const btn = document.createElement('button');
+      btn.className = 'layer-toggle-btn active';
+      btn.dataset.toggleLayer = layer;
+      btn.textContent = `L${layer}`;
+      btn.title = `Переключить видимость L${layer}`;
+      btn.setAttribute('aria-pressed', 'true');
+      btn.type = 'button';
+      toggleWrap.appendChild(btn);
+    });
+
+    // Insert after layer indicator
+    const indicator = switcher.querySelector('.layer-indicator');
+    if (indicator) {
+      indicator.after(toggleWrap);
+    } else {
+      switcher.appendChild(toggleWrap);
+    }
+
+    // Load saved state
+    const savedState = storage.get(LAYER_TOGGLE_KEY);
+    if (savedState) {
+      applyToggleState(savedState);
+    }
+
+    // Bind events
+    toggleWrap.querySelectorAll('.layer-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => toggleLayerVisibility(btn.dataset.toggleLayer));
+    });
+
+    console.log('[LayerToggle] Initialized');
+  }
+
+  function toggleLayerVisibility(layer) {
+    const btn = $(`.layer-toggle-btn[data-toggle-layer="${layer}"]`);
+    if (!btn) return;
+
+    const isActive = btn.classList.toggle('active');
+    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+
+    // Get current state
+    const state = getToggleState();
+    state[layer] = isActive;
+
+    // Apply and save
+    applyToggleState(state);
+    storage.set(LAYER_TOGGLE_KEY, state);
+
+    console.log(`[LayerToggle] Layer ${layer} visibility: ${isActive ? 'visible' : 'dimmed'}`);
+  }
+
+  function getToggleState() {
+    const state = { '1': true, '2': true, '3': true };
+    $$('.layer-toggle-btn').forEach(btn => {
+      const layer = btn.dataset.toggleLayer;
+      state[layer] = btn.classList.contains('active');
+    });
+    return state;
+  }
+
+  function applyToggleState(state) {
+    const body = document.body;
+
+    // Update button states
+    Object.entries(state).forEach(([layer, active]) => {
+      const btn = $(`.layer-toggle-btn[data-toggle-layer="${layer}"]`);
+      if (btn) {
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+    });
+
+    // Check if we're in toggle mode (not all visible)
+    const allVisible = state['1'] && state['2'] && state['3'];
+
+    if (allVisible) {
+      // Normal cumulative layer mode
+      body.classList.remove('layer-toggle-mode', 'layer-hide-1', 'layer-hide-2', 'layer-hide-3');
+    } else {
+      // Toggle mode - show all layers but dim hidden ones
+      body.classList.add('layer-toggle-mode');
+      body.classList.toggle('layer-hide-1', !state['1']);
+      body.classList.toggle('layer-hide-2', !state['2']);
+      body.classList.toggle('layer-hide-3', !state['3']);
     }
   }
 
   // ============================================================================
   // INITIALIZATION
   // ============================================================================
-
-  // Auto-load content on page load (no modal)
-  function initApp() {
-    cleanupLayerURL();
-    showFABs();
-    loadContent();
-  }
 
   async function init() {
     console.log('[LazyLoader] Initializing v' + CONFIG.VERSION + '...');
@@ -1621,29 +2061,36 @@
     // Handle v5.12 legacy anchor redirects (§0.18)
     handleLegacyAnchor();
 
+    let layer = getLayerFromURL() || getSavedLayer();
+
+    if (layer) {
+      hideModal();
+      showSwitcher();
+      showFABs();
+      showLayerIndicator(layer);
+      currentLayer = layer;
+      await loadLayerContent(layer);
+      updateSwitcherButtons(layer);
+    } else {
+      hideLoading();
+    }
+
     initTheme();
     initWidthToggle();
     initScrollTop();
     initPanels();
     initGlossary();
-
-    // Keyboard: close panels on Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        Object.values(panelInstances).forEach(panel => {
-          if (panel.isOpen()) panel.close();
-        });
-      }
-    });
-
-    initApp();
-
+    bindEvents();
+    initLayerToggle();
+    
     console.log('[LazyLoader] Ready (v' + CONFIG.VERSION + ')');
   }
 
   // Expose API
   window.LazyLoader = {
-    loadContent,
+    switchLayer,
+    scrollToAnchor,
+    get currentLayer() { return currentLayer; },
     panels: panelInstances,
     version: CONFIG.VERSION
   };

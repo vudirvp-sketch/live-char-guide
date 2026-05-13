@@ -1,29 +1,27 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Master HTML Validation Script for Live Character Guide v6
+ * @fileoverview Unified HTML Validation Script for Live Character Guide v7
  * @module scripts/validate-master
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @description
- * Stage 2 validation: checks master HTML files for structural and content
- * integrity BEFORE layer assembly. This script is part of the Master
- * Validation phase described in §5 Stage 2 of the plan.
+ * Stage 2 validation: checks unified HTML files for structural and content
+ * integrity. This script validates the unified architecture described
+ * in the v7 migration plan.
  *
- * Checks implemented (full Stage 2):
- *   1. All sections have correct data-layer and data-section attributes
- *   2. All data-layer-switch references are valid (target section exists in target layer)
- *   3. All cross-references (href="#id") resolve within the same or referenced layer
- *   4. No prohibited elements in master HTML (<style>, <script>, <link>, <meta>)
- *   5. No content outside <section data-layer> blocks
- *   6. Glossary terms are used in at least one Part
- *   7. Heading hierarchy is correct (no h4 without h3 parent)
- *   8. No prohibited translations
- *   9. Visual components are from registry (CSS class check)
- *  10. Character examples match Character Bible
- *  11. IMP-27: every L2 section has an L1 mention; every L3 section has an L2 mention
- *      (recognises both data-layer-switch and term-marker with data-target-layer)
- *  12. IMP-28: no orphan sections (every section is reachable)
- *  13. Callout emoji markers are correct (IMP-56)
+ * Checks implemented (12 checks):
+ *   1. No layer artifacts in unified HTML (data-layer, data-layer-switch, etc.)
+ *   2. All cross-references (href="#id") resolve within the unified file set
+ *   3. No prohibited elements in unified HTML (<style>, <script>, <link>, <meta>)
+ *   4. No content outside <section data-section> blocks
+ *   5. Glossary terms are used in at least one Part
+ *   6. Heading hierarchy is correct (no h4 without h3 parent)
+ *   7. No prohibited translations
+ *   8. Visual components are from registry (CSS class check)
+ *   9. Character examples match Character Bible
+ *  10. IMP-28: no orphan sections (every section is reachable)
+ *  11. Callout emoji markers are correct (IMP-56)
+ *  12. Widget containers present (ocean-embed, enneagram-embed, etc.)
  *
  * Usage:
  *   node scripts/validate-master.mjs
@@ -36,7 +34,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const MASTER_DIR = join(ROOT, 'src', 'master');
+const UNIFIED_DIR = join(ROOT, 'src', 'unified');
 const BUILD_DIR = join(ROOT, 'build');
 
 const errors = [];
@@ -52,20 +50,20 @@ function log(level, message) {
 }
 
 // ============================================================================
-// PARSE ALL MASTER FILES
+// PARSE ALL UNIFIED FILES
 // ============================================================================
 
-async function parseAllMasterFiles() {
-  if (!existsSync(MASTER_DIR)) {
-    log('ERROR', `Master directory not found: ${MASTER_DIR}`);
+async function parseAllUnifiedFiles() {
+  if (!existsSync(UNIFIED_DIR)) {
+    log('ERROR', `Unified directory not found: ${UNIFIED_DIR}`);
     process.exit(1);
   }
 
-  const masterFiles = await readdir(MASTER_DIR);
-  const partFiles = masterFiles.filter(f => f.startsWith('part_') && f.endsWith('.html')).sort();
+  const unifiedFiles = await readdir(UNIFIED_DIR);
+  const partFiles = unifiedFiles.filter(f => f.startsWith('part_') && f.endsWith('.html')).sort();
 
   if (partFiles.length === 0) {
-    log('ERROR', 'No part files found in master directory');
+    log('ERROR', 'No part files found in unified directory');
     process.exit(1);
   }
 
@@ -73,23 +71,21 @@ async function parseAllMasterFiles() {
   const allContent = [];
 
   for (const file of partFiles) {
-    const filepath = join(MASTER_DIR, file);
+    const filepath = join(UNIFIED_DIR, file);
     const content = await readFile(filepath, 'utf-8');
     const partMatch = file.match(/part_(\d+)/);
     const partNum = partMatch ? partMatch[1] : '00';
 
-    // Parse sections with data-layer
+    // Parse sections — no data-layer required, only data-section
     const sectionRegex = /<section\s+([^>]*)>/gi;
     let match;
 
     while ((match = sectionRegex.exec(content)) !== null) {
       const attrs = match[1];
-      const layerMatch = attrs.match(/data-layer=["']([^"']+)["']/i);
       const sectionMatch = attrs.match(/data-section=["']([^"']+)["']/i);
 
-      if (layerMatch) {
-        const layer = layerMatch[1];
-        const sectionId = sectionMatch ? sectionMatch[1] : null;
+      if (sectionMatch) {
+        const sectionId = sectionMatch[1];
 
         // Find closing tag and extract content
         const startIndex = match.index + match[0].length;
@@ -118,7 +114,6 @@ async function parseAllMasterFiles() {
         allSections.push({
           file,
           partNum,
-          layer,
           sectionId,
           content: sectionContent,
           startIndex: match.index,
@@ -134,141 +129,53 @@ async function parseAllMasterFiles() {
 }
 
 // ============================================================================
-// CHECK 1: All sections have correct data-layer and data-section attributes
+// CHECK 1: No layer artifacts in unified HTML
 // ============================================================================
 
-async function checkSectionAttributes(allSections) {
-  console.log('\n📋 Check 1: Section attributes (data-layer, data-section)...');
-
-  let sectionCount = 0;
-  let errorCount = 0;
-  const sectionIds = new Set();
-  const validLayers = new Set(['l1', 'l2', 'l3']);
-
-  for (const section of allSections) {
-    sectionCount++;
-
-    // Check data-section exists
-    if (!section.sectionId) {
-      errors.push(`${section.file}: Section with data-layer="${section.layer}" is missing data-section attribute`);
-      errorCount++;
-      continue;
-    }
-
-    // Check data-section format (should be snake_case, prefixed with part number)
-    if (!/^[a-z][a-z0-9_]*$/.test(section.sectionId)) {
-      warnings.push(`${section.file}: data-section="${section.sectionId}" — not in snake_case format`);
-    }
-
-    // Check layer value
-    if (!validLayers.has(section.layer)) {
-      errors.push(`${section.file}: data-layer="${section.layer}" — invalid layer value (expected l1, l2, or l3)`);
-      errorCount++;
-    }
-
-    // Check uniqueness
-    if (sectionIds.has(section.sectionId)) {
-      errors.push(`${section.file}: data-section="${section.sectionId}" — DUPLICATE (already used in another section)`);
-      errorCount++;
-    }
-    sectionIds.add(section.sectionId);
-  }
-
-  if (errorCount === 0) {
-    log('INFO', `All ${sectionCount} sections have valid data-layer and data-section attributes`);
-    log('INFO', `All data-section IDs are unique (${sectionIds.size} unique IDs)`);
-  }
-
-  return { sectionIds, errorCount };
-}
-
-// ============================================================================
-// CHECK 2: All data-layer-switch references are valid
-// ============================================================================
-
-async function checkLayerSwitchRefs(allSections, sectionIds) {
-  console.log('\n📋 Check 2: data-layer-switch references...');
+async function checkNoLayerArtifacts(allContent) {
+  console.log('\n📋 Check 1: No layer artifacts in unified HTML...');
 
   let errorCount = 0;
-  let refCount = 0;
+  const layerPatterns = [
+    { pattern: /data-layer=/i, name: 'data-layer=' },
+    { pattern: /data-layer-switch=/i, name: 'data-layer-switch=' },
+    { pattern: /data-target-layer=/i, name: 'data-target-layer=' },
+    { pattern: /class="layer-remark"/i, name: 'class="layer-remark"' },
+  ];
 
-  // Build a map of sectionId → layer for validation
-  const sectionLayerMap = new Map();
-  for (const section of allSections) {
-    if (section.sectionId) {
-      sectionLayerMap.set(section.sectionId, section.layer);
-    }
-  }
-
-  for (const section of allSections) {
-    // Find all data-layer-switch attributes
-    const layerSwitchRegex = /data-layer-switch=["'](\d+)#([^"']+)["']/gi;
-    let match;
-
-    while ((match = layerSwitchRegex.exec(section.content)) !== null) {
-      refCount++;
-      const targetLayer = match[1];
-      const targetSection = match[2];
-
-      // Check target section exists
-      if (!sectionLayerMap.has(targetSection)) {
-        errors.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section "${targetSection}" does not exist`);
-        errorCount++;
-        continue;
-      }
-
-      // Check target section is in the target layer or a deeper layer
-      const targetActualLayer = sectionLayerMap.get(targetSection);
-      const layerNums = { l1: 1, l2: 2, l3: 3 };
-      const targetLayerNum = parseInt(targetLayer);
-      const actualLayerNum = layerNums[targetActualLayer] || 0;
-
-      if (actualLayerNum > targetLayerNum) {
-        errors.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section is in layer ${targetActualLayer}, deeper than referenced layer ${targetLayer}. Link targets a section invisible at the switch layer.`);
-        errorCount++;
-      }
-
-      // NEW: Check that data-layer-switch target layer matches section's actual layer
-      // If a link targets data-layer-switch="2#section" but the section has data-layer="l1",
-      // that is an error — the section is already available at L1, no need to switch layers
-      if (actualLayerNum < targetLayerNum) {
-        errors.push(`${section.file} (${section.sectionId}): data-layer-switch="${targetLayer}#${targetSection}" — target section is in layer ${targetActualLayer} (L${actualLayerNum}), but link implies layer ${targetLayer}. Section is already available at a lower layer; no layer switch needed.`);
+  for (const { file, content } of allContent) {
+    for (const { pattern, name } of layerPatterns) {
+      if (pattern.test(content)) {
+        errors.push(`${file}: Layer artifact found: ${name}`);
         errorCount++;
       }
     }
   }
 
   if (errorCount === 0) {
-    log('INFO', `All ${refCount} data-layer-switch references are valid`);
+    log('INFO', 'No layer artifacts found in unified HTML files');
   }
 
   return errorCount;
 }
 
 // ============================================================================
-// CHECK 3: All cross-references (href="#id") resolve
+// CHECK 2: All cross-references (href="#id") resolve
 // ============================================================================
 
 async function checkCrossReferences(allSections, sectionIds) {
-  console.log('\n📋 Check 3: Cross-references (href="#id")...');
+  console.log('\n📋 Check 2: Cross-references (href="#id")...');
 
   let errorCount = 0;
   let refCount = 0;
 
   for (const section of allSections) {
-    // Find all href="#id" links (excluding data-layer-switch)
+    // Find all href="#id" links
     const hrefRegex = /href=["']#([^"']+)["']/gi;
     let match;
 
     while ((match = hrefRegex.exec(section.content)) !== null) {
       const targetId = match[1];
-
-      // Skip if this href is part of a data-layer-switch
-      const contextBefore = section.content.substring(Math.max(0, match.index - 40), match.index);
-      if (contextBefore.includes('data-layer-switch')) {
-        continue;
-      }
-
       refCount++;
 
       if (!sectionIds.has(targetId)) {
@@ -286,11 +193,11 @@ async function checkCrossReferences(allSections, sectionIds) {
 }
 
 // ============================================================================
-// CHECK 4: No prohibited elements in master HTML
+// CHECK 3: No prohibited elements in unified HTML
 // ============================================================================
 
 async function checkProhibitedElements(allContent) {
-  console.log('\n📋 Check 4: Prohibited elements (<style>, <script>, <link>, <meta>)...');
+  console.log('\n📋 Check 3: Prohibited elements (<style>, <script>, <link>, <meta>)...');
 
   let errorCount = 0;
   const prohibitedPatterns = [
@@ -310,18 +217,18 @@ async function checkProhibitedElements(allContent) {
   }
 
   if (errorCount === 0) {
-    log('INFO', 'No prohibited elements found in any master HTML file');
+    log('INFO', 'No prohibited elements found in any unified HTML file');
   }
 
   return errorCount;
 }
 
 // ============================================================================
-// CHECK 5: No content outside <section data-layer> blocks
+// CHECK 4: No content outside <section data-section> blocks
 // ============================================================================
 
 async function checkContentOutsideSections(allContent) {
-  console.log('\n📋 Check 5: Content outside <section data-layer> blocks...');
+  console.log('\n📋 Check 4: Content outside <section data-section> blocks...');
 
   let errorCount = 0;
 
@@ -336,7 +243,7 @@ async function checkContentOutsideSections(allContent) {
     // Find all section boundaries
     const sectionStarts = [];
     const sectionEnds = [];
-    const sectionRegex = /<section\s+[^>]*data-layer[^>]*>/gi;
+    const sectionRegex = /<section\s+[^>]*data-section[^>]*>/gi;
     let match;
 
     while ((match = sectionRegex.exec(contentNoComments)) !== null) {
@@ -397,24 +304,24 @@ async function checkContentOutsideSections(allContent) {
         .trim();
 
       if (cleaned.length > 0 && !/^[\s\n\r]*$/.test(cleaned)) {
-        warnings.push(`${file}: Content found outside <section data-layer> blocks: "${cleaned.substring(0, 80)}..."`);
+        warnings.push(`${file}: Content found outside <section data-section> blocks: "${cleaned.substring(0, 80)}..."`);
       }
     }
   }
 
   if (errorCount === 0) {
-    log('INFO', 'No significant content found outside <section data-layer> blocks');
+    log('INFO', 'No significant content found outside <section data-section> blocks');
   }
 
   return errorCount;
 }
 
 // ============================================================================
-// CHECK 6: Glossary terms used in at least one Part
+// CHECK 5: Glossary terms used in at least one Part
 // ============================================================================
 
 async function checkGlossaryTermsUsed(allContent) {
-  console.log('\n📋 Check 6: Glossary terms used in at least one Part...');
+  console.log('\n📋 Check 5: Glossary terms used in at least one Part...');
 
   let errorCount = 0;
   const glossaryPath = join(ROOT, 'data', 'glossary.json');
@@ -445,7 +352,7 @@ async function checkGlossaryTermsUsed(allContent) {
 
   if (unusedTerms.length > 0) {
     for (const term of unusedTerms) {
-      warnings.push(`Glossary term "${term}" not found in any master HTML file`);
+      warnings.push(`Glossary term "${term}" not found in any unified HTML file`);
     }
     log('WARN', `${unusedTerms.length} glossary terms not used in any Part (see warnings)`);
   } else {
@@ -456,11 +363,11 @@ async function checkGlossaryTermsUsed(allContent) {
 }
 
 // ============================================================================
-// CHECK 7: Heading hierarchy (no h4 without h3 parent)
+// CHECK 6: Heading hierarchy (no h4 without h3 parent)
 // ============================================================================
 
 async function checkHeadingHierarchy(allContent) {
-  console.log('\n📋 Check 7: Heading hierarchy (no h4 without h3 parent)...');
+  console.log('\n📋 Check 6: Heading hierarchy (no h4 without h3 parent)...');
 
   let errorCount = 0;
 
@@ -496,11 +403,11 @@ async function checkHeadingHierarchy(allContent) {
 }
 
 // ============================================================================
-// CHECK 8: No prohibited translations
+// CHECK 7: No prohibited translations
 // ============================================================================
 
 async function checkProhibitedTranslations(allContent) {
-  console.log('\n📋 Check 8: Prohibited translations...');
+  console.log('\n📋 Check 7: Prohibited translations...');
 
   let errorCount = 0;
   const prohibited = [
@@ -533,11 +440,11 @@ async function checkProhibitedTranslations(allContent) {
 }
 
 // ============================================================================
-// CHECK 9: Visual components from registry (CSS class check)
+// CHECK 8: Visual components from registry (CSS class check)
 // ============================================================================
 
 async function checkVisualComponents(allContent) {
-  console.log('\n📋 Check 9: Visual components from registry...');
+  console.log('\n📋 Check 8: Visual components from registry...');
 
   let errorCount = 0;
   const allowedCallouts = ['callout warn', 'callout tip', 'callout important', 'callout'];
@@ -587,11 +494,11 @@ async function checkVisualComponents(allContent) {
 }
 
 // ============================================================================
-// CHECK 10: Character examples match Character Bible
+// CHECK 9: Character examples match Character Bible
 // ============================================================================
 
 async function checkCharacterBible(allContent) {
-  console.log('\n📋 Check 10: Character examples match Character Bible...');
+  console.log('\n📋 Check 9: Character examples match Character Bible...');
 
   let errorCount = 0;
   const bibleCharacters = [
@@ -636,181 +543,17 @@ async function checkCharacterBible(allContent) {
 }
 
 // ============================================================================
-// CHECK 11: IMP-27 — L2 sections have L1 mention, L3 sections have L2 mention
-// ============================================================================
-
-async function checkIMP27(allSections) {
-  console.log('\n📋 Check 11: IMP-27 — Layer visibility bridges...');
-
-  let errorCount = 0;
-
-  // Group sections by part
-  const partSections = new Map();
-  for (const section of allSections) {
-    const key = section.partNum;
-    if (!partSections.has(key)) partSections.set(key, []);
-    partSections.get(key).push(section);
-  }
-
-  for (const [partNum, sections] of partSections) {
-    const l1Sections = sections.filter(s => s.layer === 'l1');
-    const l2Sections = sections.filter(s => s.layer === 'l2');
-    const l3Sections = sections.filter(s => s.layer === 'l3');
-
-    // Check: L2 sections should have some mention in L1 (via layer-remark or brief reference)
-    // This is a soft check — we look for data-layer-switch or text references
-    const l1Content = l1Sections.map(s => s.content).join('\n');
-
-    for (const l2Section of l2Sections) {
-      // Check if there's a layer-remark pointing to this L2 section from L1
-      const hasLayerRemark = l1Content.includes(`data-layer-switch="2#${l2Section.sectionId}"`) ||
-                             l1Content.includes(l2Section.sectionId);
-
-      // Soft check: at least one L2 concept should be visible from L1
-      // We don't error on every L2 section without L1 mention — only flag if NO L2 sections are mentioned
-    }
-
-    // Check: at least one L2/L3 reference from L1 content
-    // Supports both data-layer-switch and term-marker with data-target-layer
-    if (l2Sections.length > 0 && l1Sections.length > 0) {
-      const hasLayerSwitch = l1Content.includes('data-layer-switch="2#') ||
-                             l1Content.includes('data-layer-switch="3#');
-      const hasTermMarker = /data-target-layer=["']2["']/i.test(l1Content) ||
-                           /data-target-layer=["']3["']/i.test(l1Content);
-      if (!hasLayerSwitch && !hasTermMarker && l1Content.length > 0) {
-        warnings.push(`Part ${partNum}: L1 content has no data-layer-switch or term-marker references to L2/L3 — IMP-27 bridge missing`);
-      }
-    }
-
-    // Check: at least one L3 reference from L2 content
-    const l2Content = l2Sections.map(s => s.content).join('\n');
-    if (l3Sections.length > 0 && l2Sections.length > 0) {
-      const hasLayerSwitch = l2Content.includes('data-layer-switch="3#');
-      const hasTermMarker = /data-target-layer=["']3["']/i.test(l2Content);
-      if (!hasLayerSwitch && !hasTermMarker && l2Content.length > 0) {
-        errors.push(`Part ${partNum}: L2 content has no data-layer-switch or term-marker references to L3 — IMP-27 bridge missing`);
-      }
-    }
-  }
-
-  // ── Cross-Part IMP-27 bridge check ──────────────────────────────────
-  // Parts 4/5/7/8 have no L1 sections — their L2 sections rely on
-  // cross-Part data-layer-switch bridges from Part 1 (p1_next_layers).
-  // Part 6 has no L2 sections — its L3 sections rely on cross-Part bridges.
-  // The within-Part loop above skips these, so we check cross-Part here.
-
-  // Collect L2 sections whose Part has no L1 sections (need cross-Part L1 bridge)
-  const l2WithoutL1Bridge = new Map(); // sectionId → { file, partNum }
-  for (const [partNum, sections] of partSections) {
-    const l1Sections = sections.filter(s => s.layer === 'l1');
-    const l2Sections = sections.filter(s => s.layer === 'l2');
-    if (l1Sections.length === 0 && l2Sections.length > 0) {
-      for (const l2 of l2Sections) {
-        l2WithoutL1Bridge.set(l2.sectionId, { file: l2.file, partNum });
-      }
-    }
-  }
-
-  // Check cross-Part L1→L2 bridges
-  for (const [sectionId, info] of l2WithoutL1Bridge) {
-    let found = false;
-
-    // Scan all sections in OTHER Parts for data-layer-switch pointing to this L2 section
-    for (const section of allSections) {
-      if (section.partNum === info.partNum) continue; // Skip same Part (already checked)
-
-      // Check data-layer-switch="2#<sectionId>"
-      const layerSwitchRegex = /data-layer-switch=["']2#([^"']+)["']/gi;
-      let match;
-      while ((match = layerSwitchRegex.exec(section.content)) !== null) {
-        if (match[1] === sectionId) {
-          found = true;
-          break;
-        }
-      }
-      if (found) break;
-
-      // Check term-marker with data-target-layer="2" (soft bridge)
-      const termMarkerRegex = /data-target-layer=["']2["'][^>]*data-tooltip-ref=["']#[^"']*["']/gi;
-      while ((match = termMarkerRegex.exec(section.content)) !== null) {
-        found = true;
-        break;
-      }
-      if (found) break;
-    }
-
-    if (!found) {
-      warnings.push(`Part ${info.partNum} (${sectionId}): L2 section has no within-Part or cross-Part L1 bridge — IMP-27 bridge may be missing`);
-    }
-  }
-
-  // Collect L3 sections whose Part has no L2 sections (need cross-Part L2 bridge)
-  const l3WithoutL2Bridge = new Map(); // sectionId → { file, partNum }
-  for (const [partNum, sections] of partSections) {
-    const l2Sections = sections.filter(s => s.layer === 'l2');
-    const l3Sections = sections.filter(s => s.layer === 'l3');
-    if (l2Sections.length === 0 && l3Sections.length > 0) {
-      for (const l3 of l3Sections) {
-        l3WithoutL2Bridge.set(l3.sectionId, { file: l3.file, partNum });
-      }
-    }
-  }
-
-  // Check cross-Part L2→L3 bridges
-  for (const [sectionId, info] of l3WithoutL2Bridge) {
-    let found = false;
-
-    for (const section of allSections) {
-      if (section.partNum === info.partNum) continue;
-
-      // Check data-layer-switch="3#<sectionId>"
-      const layerSwitchRegex = /data-layer-switch=["']3#([^"']+)["']/gi;
-      let match;
-      while ((match = layerSwitchRegex.exec(section.content)) !== null) {
-        if (match[1] === sectionId) {
-          found = true;
-          break;
-        }
-      }
-      if (found) break;
-
-      // Check term-marker with data-target-layer="3" (soft bridge)
-      const termMarkerRegex = /data-target-layer=["']3["'][^>]*data-tooltip-ref=["']#[^"']*["']/gi;
-      while ((match = termMarkerRegex.exec(section.content)) !== null) {
-        found = true;
-        break;
-      }
-      if (found) break;
-    }
-
-    if (!found) {
-      warnings.push(`Part ${info.partNum} (${sectionId}): L3 section has no within-Part or cross-Part L2 bridge — IMP-27 bridge may be missing`);
-    }
-  }
-
-  if (l2WithoutL1Bridge.size > 0 || l3WithoutL2Bridge.size > 0) {
-    log('INFO', `Cross-Part IMP-27 check: ${l2WithoutL1Bridge.size} L2 sections without within-Part L1, ${l3WithoutL2Bridge.size} L3 sections without within-Part L2`);
-  }
-
-  if (errorCount === 0) {
-    log('INFO', 'IMP-27 layer visibility bridges checked');
-  }
-
-  return errorCount;
-}
-
-// ============================================================================
-// CHECK 12: IMP-28 — No orphan sections
+// CHECK 10: IMP-28 — No orphan sections
 // ============================================================================
 
 async function checkIMP28(allSections, sectionIds) {
-  console.log('\n📋 Check 12: IMP-28 — No orphan sections...');
+  console.log('\n📋 Check 10: IMP-28 — No orphan sections...');
 
   let errorCount = 0;
 
   // A section is reachable if:
   // 1. It has an h2 or h3 heading (appears in TOC)
-  // 2. It is referenced by another section (data-layer-switch or href)
+  // 2. It is referenced by another section via href
   // 3. It has a data-section ID (can be linked to)
 
   const referencedSections = new Set();
@@ -822,16 +565,10 @@ async function checkIMP28(allSections, sectionIds) {
     }
   }
 
-  // Sections referenced by data-layer-switch
+  // Sections referenced by href
   for (const section of allSections) {
-    const layerSwitchRegex = /data-layer-switch=["']\d+#([^"']+)["']/gi;
-    let match;
-    while ((match = layerSwitchRegex.exec(section.content)) !== null) {
-      referencedSections.add(match[1]);
-    }
-
-    // Sections referenced by href
     const hrefRegex = /href=["']#([^"']+)["']/gi;
+    let match;
     while ((match = hrefRegex.exec(section.content)) !== null) {
       referencedSections.add(match[1]);
     }
@@ -852,11 +589,11 @@ async function checkIMP28(allSections, sectionIds) {
 }
 
 // ============================================================================
-// CHECK 13: Callout emoji markers (IMP-56)
+// CHECK 11: Callout emoji markers (IMP-56)
 // ============================================================================
 
 async function checkCalloutEmoji(allContent) {
-  console.log('\n📋 Check 13: Callout emoji markers (IMP-56)...');
+  console.log('\n📋 Check 11: Callout emoji markers (IMP-56)...');
 
   let errorCount = 0;
   const expectedEmojis = {
@@ -889,23 +626,77 @@ async function checkCalloutEmoji(allContent) {
 }
 
 // ============================================================================
+// CHECK 12: Widget containers present
+// ============================================================================
+
+async function checkWidgetContainers(allSections) {
+  console.log('\n📋 Check 12: Widget containers present...');
+
+  let errorCount = 0;
+
+  const requiredWidgets = [
+    { id: 'ocean-embed', sectionContains: 'ocean' },
+    { id: 'enneagram-embed', sectionContains: 'enneagram' },
+    { id: 'mbti-embed', sectionContains: 'mbti' },
+    { id: 'persona-cross', sectionContains: 'cross' },
+    { id: 'persona-synthesis', sectionContains: 'cross' },
+    { id: 'ocean-static', sectionContains: 'ocean' },
+    { id: 'token-calc', sectionContains: ['token_budget', 'p1_token'] },
+  ];
+
+  for (const widget of requiredWidgets) {
+    // Normalize sectionContains to an array for uniform handling
+    const keywords = Array.isArray(widget.sectionContains) ? widget.sectionContains : [widget.sectionContains];
+
+    // Find a section whose data-section contains any of the required keywords
+    const matchingSection = allSections.find(s =>
+      s.sectionId && keywords.some(kw => s.sectionId.includes(kw))
+    );
+
+    if (!matchingSection) {
+      warnings.push(`Widget "${widget.id}": No section with data-section containing "${keywords.join("' or '")}" found`);
+      continue;
+    }
+
+    // Check if the widget ID exists in that section's content
+    const idPattern = new RegExp(`id=["']${widget.id}["']`, 'i');
+    if (!idPattern.test(matchingSection.content)) {
+      // Also check across all sections containing any of the keywords
+      const allMatching = allSections.filter(s =>
+        s.sectionId && keywords.some(kw => s.sectionId.includes(kw))
+      );
+      const foundAnywhere = allMatching.some(s => idPattern.test(s.content));
+      if (!foundAnywhere) {
+        errors.push(`Widget "${widget.id}" not found in any section with data-section containing "${keywords.join("' or '")}"`);
+        errorCount++;
+      }
+    }
+  }
+
+  if (errorCount === 0) {
+    log('INFO', 'All required widget containers are present');
+  }
+
+  return errorCount;
+}
+
+// ============================================================================
 // MAIN
 // ============================================================================
 
 async function main() {
-  console.log('🔍 Live Character Guide v6 — Master HTML Validation\n');
+  console.log('🔍 Live Character Guide v7 — Unified HTML Validation\n');
   console.log('=' .repeat(60));
 
-  const { allSections, allContent, partFiles } = await parseAllMasterFiles();
+  const { allSections, allContent, partFiles } = await parseAllUnifiedFiles();
 
-  log('INFO', `Found ${partFiles.length} master HTML files with ${allSections.length} sections\n`);
+  log('INFO', `Found ${partFiles.length} unified HTML files with ${allSections.length} sections\n`);
 
-  // Run all checks
-  const sectionCheckResult = await checkSectionAttributes(allSections);
-  const { sectionIds } = sectionCheckResult;
+  // Build sectionIds set from parsed sections
+  const sectionIds = new Set(allSections.map(s => s.sectionId).filter(Boolean));
 
   let totalErrors = 0;
-  totalErrors += await checkLayerSwitchRefs(allSections, sectionIds);
+  totalErrors += await checkNoLayerArtifacts(allContent);
   totalErrors += await checkCrossReferences(allSections, sectionIds);
   totalErrors += await checkProhibitedElements(allContent);
   totalErrors += await checkContentOutsideSections(allContent);
@@ -914,12 +705,9 @@ async function main() {
   totalErrors += await checkProhibitedTranslations(allContent);
   totalErrors += await checkVisualComponents(allContent);
   totalErrors += await checkCharacterBible(allContent);
-  totalErrors += await checkIMP27(allSections);
   totalErrors += await checkIMP28(allSections, sectionIds);
   totalErrors += await checkCalloutEmoji(allContent);
-
-  // Add errors from check 1
-  totalErrors += sectionCheckResult.errorCount;
+  totalErrors += await checkWidgetContainers(allSections);
 
   // Summary
   console.log('\n' + '='.repeat(60));
@@ -940,9 +728,9 @@ async function main() {
   }
 
   if (errors.length === 0) {
-    console.log('\n✅ Master validation PASSED (all 13 checks)');
+    console.log('\n✅ Unified validation PASSED (all 12 checks)');
   } else {
-    console.log(`\n❌ Master validation FAILED with ${errors.length} error(s)`);
+    console.log(`\n❌ Unified validation FAILED with ${errors.length} error(s)`);
     process.exit(1);
   }
 }

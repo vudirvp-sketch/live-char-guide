@@ -1,17 +1,18 @@
 {
   "name": "live-char-guide",
-  "version": "6.2.3",
+  "version": "7.0.0",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "description": "Live Character Guide for LLM \u2014 Engineering pipeline for RP character cards",
   "scripts": {
-    "build:layers": "node scripts/build-layers.mjs",
-    "build": "node scripts/build-layers.mjs && node src/scripts/build-shell.mjs",
-    "build:shell": "node src/scripts/build-shell.mjs",
-    "build:all": "pnpm run build:layers && pnpm run build:shell",
-    "build:check": "pnpm run build:all && pnpm run validate",
-    "build:watch": "chokidar 'src/master/**/*' -c 'pnpm run build'",
+    "build:unified": "node scripts/build-unified.mjs",
+    "build:shell": "node src/scripts/build-shell-unified.mjs",
+    "build": "node scripts/build-unified.mjs && node src/scripts/build-shell-unified.mjs",
+    "build:all": "pnpm run build",
+    "build:check": "pnpm run build && pnpm run validate",
+    "build:watch": "chokidar 'src/unified/**/*' -c 'pnpm run build'",
     "validate": "node scripts/validate-artifact.mjs",
+    "validate:master": "node scripts/validate-master.mjs",
     "version:check": "node scripts/version-sync.mjs",
     "test": "node --test tests/test-*.mjs tests/integration/*.mjs",
     "test:unit": "node --test tests/test-*.mjs",
@@ -24,10 +25,7 @@
     "lint": "eslint src/",
     "lint:fix": "prettier --write .",
     "clean": "rm -rf node_modules package-lock.json pnpm-lock.yaml",
-    "reinstall": "pnpm run clean && pnpm install",
-    "validate:master": "node scripts/validate-master.mjs",
-    "validate:layers": "node scripts/validate-layers.mjs",
-    "validate:all": "node scripts/validate-master.mjs && node scripts/validate-layers.mjs && node scripts/validate-artifact.mjs"
+    "reinstall": "pnpm run clean && pnpm install"
   },
   "devDependencies": {
     "@axe-core/cli": "^4.8.0",

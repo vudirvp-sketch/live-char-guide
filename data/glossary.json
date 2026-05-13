@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "7.0.0",
   "canonical_terms": [
     {
       "term": "System Prompt (Системный промпт)",
@@ -17,23 +17,12 @@
         "Системник"
       ],
       "note": "В тексте гайда используется SP как общепринятая аббревиатура. Русский термин 'системный промпт' допустим в пояснениях.",
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение, расположение в интерфейсе",
-        "1": "Блок с инструкциями, запретами и форматом. Задаёт рамки поведения модели. Подробнее → p1_card_overview",
-        "2": "Настройте FORMAT LOCK для консистентного вывода",
-        "3": "Отладка: проверьте конфликты с карточкой персонажа"
-      },
-      "anchor_id": "layer-0-term-system-prompt",
+      "anchor_id": "p7_system_prompt",
       "cross_refs": [
         "#p7_system_prompt",
         "#p7_format_lock"
-      ]
+      ],
+      "unified_definition": "Определение, назначение, расположение в интерфейсе Отладка: проверьте конфликты с карточкой персонажа"
     },
     {
       "term": "Description (Описание персонажа)",
@@ -47,23 +36,12 @@
       "prohibited": [
         "Описание персонажа"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение, расположение в карточке",
-        "1": "Блок карточки с фактами и якорями. Голос здесь запрещён (правило #3). Подробнее → p1_card_overview",
-        "2": "Добавьте телесность и расширенные якоря",
-        "3": "Оптимизация: проверьте баланс фактологии vs поведенческих инструкций"
-      },
-      "anchor_id": "layer-0-term-description",
+      "anchor_id": "p1_card_overview",
       "cross_refs": [
         "#p1_card_overview",
         "#p4_spine_overview"
-      ]
+      ],
+      "unified_definition": "Определение, назначение, расположение в карточке Оптимизация: проверьте баланс фактологии vs поведенческих инструкций"
     },
     {
       "term": "Examples (Примеры диалогов)",
@@ -78,23 +56,12 @@
       "prohibited": [
         "Примерные сообщения"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, правило Voice Isolation",
-        "1": "Напишите 2 примера: нейтральный + стресс",
-        "2": "Добавьте 3-й пример: сцена доверия/роста; включите телесность",
-        "3": "Отладка: проверьте contamination от внешних <START> блоков"
-      },
-      "anchor_id": "layer-0-term-examples",
+      "anchor_id": "p3_examples_rules",
       "cross_refs": [
         "#p3_examples_rules",
         "#p3_voice_isolation"
-      ]
+      ],
+      "unified_definition": "Определение, правило Voice Isolation Отладка: проверьте contamination от внешних <START> блоков"
     },
     {
       "term": "Greeting (Первое сообщение)",
@@ -109,22 +76,11 @@
       "prohibited": [
         "Первое сообщение"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение, влияние на голос",
-        "1": "Напишите приветствие, демонстрирующее голос",
-        "2": "Интегрируйте SPINE (WANT/NEED/FLAW) и начальное состояние персонажа",
-        "3": "Диагностика: проверьте соответствие Examples vs Greeting"
-      },
-      "anchor_id": "layer-0-term-greeting",
+      "anchor_id": "p3_greeting",
       "cross_refs": [
         "#p3_greeting"
-      ]
+      ],
+      "unified_definition": "Определение, назначение, влияние на голос Диагностика: проверьте соответствие Examples vs Greeting"
     },
     {
       "term": "Author's Notes (Динамический контекст)",
@@ -142,23 +98,12 @@
         "Авторка",
         "Авторка Заметки"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение, частота обновления",
-        "1": "Используйте для отслеживания состояния в длинных сессиях",
-        "2": "Настройте Structured Inject с базовыми XML-тегами (`<motivation>`, `<state>`) для динамической мотивации. Расширенные XML → Экспертный слой",
-        "3": "Отладка: проверьте приоритет инъекции и конфликт с LB"
-      },
-      "anchor_id": "layer-0-term-authors-notes",
+      "anchor_id": "p7_authors_note",
       "cross_refs": [
         "#p7_authors_note",
         "#p7_structured_inject"
-      ]
+      ],
+      "unified_definition": "Определение, назначение, частота обновления Отладка: проверьте приоритет инъекции и конфликт с LB"
     },
     {
       "term": "Character Card (Карточка персонажа)",
@@ -173,22 +118,11 @@
       "prohibited": [
         "Персонаж"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, составные части",
-        "1": "Минимальная конфигурация для 12B",
-        "2": "Оптимальная конфигурация с WANT/NEED/FLAW",
-        "3": "Продвинутая конфигурация с CoT и AN"
-      },
-      "anchor_id": "layer-0-term-character-card",
+      "anchor_id": "p1_card_overview",
       "cross_refs": [
         "#p1_card_overview"
-      ]
+      ],
+      "unified_definition": "Определение, составные части Продвинутая конфигурация с CoT и AN"
     },
     {
       "term": "Voice Isolation (Изоляция голоса)",
@@ -199,22 +133,11 @@
       ],
       "definition": "Принцип разделения: голос персонажа определяется через Examples, а Description содержит только фактологию и поведенческие инструкции.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, правило для 12B",
-        "1": "Демонстрируйте голос через Examples, не описывайте",
-        "2": "Проверьте отсутствие голосовых директив в Description",
-        "3": "Диагностика: отладка voice contamination"
-      },
-      "anchor_id": "layer-0-term-voice-isolation",
+      "anchor_id": "p3_voice_isolation",
       "cross_refs": [
         "#p3_voice_isolation"
-      ]
+      ],
+      "unified_definition": "Определение, правило для 12B Диагностика: отладка voice contamination"
     },
     {
       "term": "SPINE (Мотивационное ядро)",
@@ -227,23 +150,12 @@
       ],
       "definition": "Мотивационное ядро персонажа. На L2: 3 элемента (WANT, NEED, FLAW). На L3: 5 элементов (+ LIE, GHOST).",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, 5 элементов, формула GHOST → LIE → FLAW",
-        "1": "SPINE доступен на Глубоком слое (L2). Фреймворк WANT/NEED/FLAW для внутренней логики. Подробнее → p4_spine_overview",
-        "2": "Добавьте WANT, NEED, FLAW для глубины персонажа. LIE/GHOST → Экспертный слой",
-        "3": "Диагностика: проверьте внутреннюю консистентность SPINE"
-      },
-      "anchor_id": "layer-0-term-spine",
+      "anchor_id": "p4_spine_overview",
       "cross_refs": [
         "#p4_spine_overview",
         "#p4_spine_mapping"
-      ]
+      ],
+      "unified_definition": "Определение, 5 элементов, формула GHOST → LIE → FLAW Диагностика: проверьте внутреннюю консистентность SPINE"
     },
     {
       "term": "WANT (Желание)",
@@ -259,22 +171,11 @@
         "ХОЧУ",
         "Хочет"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, отличие от NEED",
-        "1": "Определите внешнюю, поверхностную цель",
-        "2": "Проверьте конфликт WANT vs NEED",
-        "3": "Диагностика: WANT должен вести к FLAW"
-      },
-      "anchor_id": "layer-0-term-want",
+      "anchor_id": "p4_want",
       "cross_refs": [
         "#p4_want"
-      ]
+      ],
+      "unified_definition": "Определение, отличие от NEED Диагностика: WANT должен вести к FLAW"
     },
     {
       "term": "NEED (Потребность)",
@@ -290,22 +191,11 @@
         "НУЖДА",
         "Нуждается"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, отличие от WANT",
-        "1": "Определите глубинную, часто неосознаваемую потребность",
-        "2": "Проверьте: NEED — это то, что разрешит внутренний конфликт",
-        "3": "Диагностика: NEED должен требовать преодоления FLAW"
-      },
-      "anchor_id": "layer-0-term-need",
+      "anchor_id": "p4_need",
       "cross_refs": [
         "#p4_need"
-      ]
+      ],
+      "unified_definition": "Определение, отличие от WANT Диагностика: NEED должен требовать преодоления FLAW"
     },
     {
       "term": "FLAW (Дефект)",
@@ -321,22 +211,11 @@
         "ДЕФЕКТ",
         "Изъян"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, связь с GHOST и LIE",
-        "1": "Изъян персонажа — конкретное поведение, мешающее получить NEED. Упоминается в правиле #2. Полный разбор → Глубокий слой (L2). Подробнее → p1_core_rules",
-        "2": "Сформулируйте FLAW как конкретное поведение",
-        "3": "Проверьте: FLAW должен быть поведением, не чертой характера"
-      },
-      "anchor_id": "layer-0-term-flaw",
+      "anchor_id": "p4_flaw",
       "cross_refs": [
         "#p4_flaw"
-      ]
+      ],
+      "unified_definition": "Определение, связь с GHOST и LIE Проверьте: FLAW должен быть поведением, не чертой характера"
     },
     {
       "term": "LIE (Ложная установка)",
@@ -349,22 +228,11 @@
       ],
       "definition": "Ложная установка — во что персонаж верит, часто мешая себе получить NEED.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, связь с GHOST и FLAW",
-        "1": "Ложная установка — во что персонаж верит. Упоминается в правиле #4. Полный разбор → Экспертный слой (L3). Подробнее → p1_core_rules",
-        "2": "Доступно на Экспертном слое (L3). Перейдите на L3 для доступа.",
-        "3": "Проверьте: LIE должен объяснять, почему FLAW существует"
-      },
-      "anchor_id": "layer-0-term-lie",
+      "anchor_id": "p4_spine_overview",
       "cross_refs": [
         "#p4_spine_overview"
-      ]
+      ],
+      "unified_definition": "Определение, связь с GHOST и FLAW Проверьте: LIE должен объяснять, почему FLAW существует"
     },
     {
       "term": "GHOST (Призрак)",
@@ -379,23 +247,12 @@
       "prohibited": [
         "GHOST-Слой"
       ],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW).",
-        "1": "Упоминается в правиле #4. Полный разбор → Глубокий слой (L2). Подробнее → p1_core_rules",
-        "2": "Доступно на Экспертном слое (L3). Перейдите на L3 для доступа.",
-        "3": "L3-only: 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры"
-      },
-      "anchor_id": "layer-0-term-ghost",
+      "anchor_id": "p4_spine_overview",
       "cross_refs": [
         "#p4_spine_overview",
         "#p2_anchor_rules"
-      ]
+      ],
+      "unified_definition": "Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). L3-only: 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры"
     },
     {
       "term": "Anchors (Поведенческие якоря)",
@@ -408,22 +265,11 @@
       ],
       "definition": "Поведенческие якоря — правила поведения в формате «Триггер → Действие → Цена».",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, формат, назначение",
-        "1": "Правила поведения в формате Триггер → Действие → Цена. Цена обязательна. Подробнее → p2_basic_anchors",
-        "2": "Добавьте Price: [Trigger → Action → Price]",
-        "3": "Диагностика: отладка false positives и nested anchors"
-      },
-      "anchor_id": "layer-0-term-anchors",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules"
-      ]
+      ],
+      "unified_definition": "Определение, формат, назначение Диагностика: отладка false positives и nested anchors"
     },
     {
       "term": "Триггер (Trigger)",
@@ -435,22 +281,11 @@
       ],
       "definition": "Ситуация или стимул, активирующий поведенческий якорь.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, место в формате якоря",
-        "1": "Определите простой триггер",
-        "2": "Уточните триггер для специфичности",
-        "3": "Диагностика: проверьте, не слишком ли широкий триггер"
-      },
-      "anchor_id": "layer-0-term-trigger",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules"
-      ]
+      ],
+      "unified_definition": "Определение, место в формате якоря Диагностика: проверьте, не слишком ли широкий триггер"
     },
     {
       "term": "Действие (Action)",
@@ -462,22 +297,11 @@
       ],
       "definition": "Наблюдаемое поведение персонажа в ответ на триггер.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, место в формате якоря",
-        "1": "Определите наблюдаемое действие",
-        "2": "Уточните действие с телесностью",
-        "3": "Диагностика: проверьте, не является ли действие слишком общим"
-      },
-      "anchor_id": "layer-0-term-action",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules"
-      ]
+      ],
+      "unified_definition": "Определение, место в формате якоря Диагностика: проверьте, не является ли действие слишком общим"
     },
     {
       "term": "Price (Цена)",
@@ -488,22 +312,11 @@
       ],
       "definition": "Немедленная физическая или вербальная манифестация последствия.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, правило обязательности для FLAW/GHOST якорей",
-        "1": "Обязательный элемент якоря: физическая реакция на триггер. Без цены якорь = инструкция без паттерна. Подробнее → p2_anchor_rules",
-        "2": "Добавьте Price к каждому FLAW/GHOST якорю",
-        "3": "Диагностика: проверьте специфичность Price"
-      },
-      "anchor_id": "layer-0-term-price",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules"
-      ]
+      ],
+      "unified_definition": "Определение, правило обязательности для FLAW/GHOST якорей Диагностика: проверьте специфичность Price"
     },
     {
       "term": "Nested Anchors (Вложенные якоря)",
@@ -515,18 +328,11 @@
       ],
       "definition": "Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "⚠️ Вложенные якоря часто становятся анти-паттерном (AP-16). Рассмотрите атомарные якоря. Если используете — один триггер, разные действия в зависимости от контекста",
-        "3": "Диагностика: проверьте, что вложенные якоря не создают противоречий"
-      },
-      "anchor_id": "layer-2-term-nested-anchors",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules"
-      ]
+      ],
+      "unified_definition": "Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Диагностика: проверьте, что вложенные якоря не создают противоречий"
     },
     {
       "term": "OCEAN (Большая пятёрка)",
@@ -539,23 +345,12 @@
       ],
       "definition": "Модель личности из 5 измерений: Открытость (O), Добросовестность (C), Экстраверсия (E), Доброжелательность (A), Нейротизм (N).",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, 5 измерений",
-        "1": "Психологическая модель пяти факторов. 1-2 экстремальных полюса для поведенческой последовательности. Доступна на Глубоком слое (L2). Подробнее → p5_ocean_basics",
-        "2": "Полная конфигурация с валидатором",
-        "3": "Диагностика: проверьте соответствие OCEAN поведению"
-      },
-      "anchor_id": "layer-0-term-ocean",
+      "anchor_id": "p5_ocean_basics",
       "cross_refs": [
         "#p5_ocean_basics",
         "#p5_ocean_validator"
-      ]
+      ],
+      "unified_definition": "Определение, 5 измерений Диагностика: проверьте соответствие OCEAN поведению"
     },
     {
       "term": "Enneagram (Эннеаграмма)",
@@ -567,20 +362,11 @@
       ],
       "definition": "Система типов личности из 9 типов со стрессом, ростом и крыльями.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, 9 типов, базовая структура",
-        "2": "Идентифицируйте доминантный тип, крыло, базовую мотивацию",
-        "3": "Добавьте пути интеграции/дезинтеграции, инстинктивные варианты"
-      },
-      "anchor_id": "layer-0-term-enneagram",
+      "anchor_id": "p5_enneagram_basics",
       "cross_refs": [
         "#p5_enneagram_basics"
-      ]
+      ],
+      "unified_definition": "Определение, 9 типов, базовая структура Добавьте пути интеграции/дезинтеграции, инстинктивные варианты"
     },
     {
       "term": "MBTI (Типология Майерс-Бриггс)",
@@ -593,20 +379,11 @@
       ],
       "definition": "Типология личности Майерс-Бриггс из 16 типов на основе 4 осей.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, 4 оси, 16 типов",
-        "2": "Определите тип для базового понимания",
-        "3": "Добавьте когнитивные функции для глубины"
-      },
-      "anchor_id": "layer-0-term-mbti",
+      "anchor_id": "p5_mbti_basics",
       "cross_refs": [
         "#p5_mbti_basics"
-      ]
+      ],
+      "unified_definition": "Определение, 4 оси, 16 типов Добавьте когнитивные функции для глубины"
     },
     {
       "term": "CORE DIRECTIVES (Основные директивы)",
@@ -618,21 +395,12 @@
       ],
       "definition": "Единая система директив на английском языке, размещаемая в System Prompt. L2 = директивы 1–5, L3 = все 7.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, единая система директив для System Prompt. L2 = 1-5, L3 = все 7.",
-        "2": "Добавьте директивы 1–5: SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, INFLUENCE BOUNDARY, ENVIRONMENTAL REACTIVITY",
-        "3": "Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER"
-      },
-      "anchor_id": "layer-2-term-core-directives",
+      "anchor_id": "p7_core_directives",
       "cross_refs": [
         "#p7_core_directives",
         "#p7_system_prompt"
-      ]
+      ],
+      "unified_definition": "Определение, единая система директив для System Prompt. L2 = 1-5, L3 = все 7. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER"
     },
     {
       "term": "Tone Frame (Тональный фрейм)",
@@ -644,19 +412,12 @@
       ],
       "definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Добавьте Tone Frame в SP для фиксации тона персонажа",
-        "3": "Отладка: проверьте конфликт Tone Frame с AN"
-      },
-      "anchor_id": "layer-2-term-tone-frame",
+      "anchor_id": "p7_tone_frame",
       "cross_refs": [
         "#p7_tone_frame",
         "#p7_system_prompt"
-      ]
+      ],
+      "unified_definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP. Отладка: проверьте конфликт Tone Frame с AN"
     },
     {
       "term": "SHOW NEVER TELL (Показывай, не рассказывай)",
@@ -668,18 +429,11 @@
       ],
       "definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "SHOW NEVER TELL — директива #1 в CORE DIRECTIVES",
-        "3": "Диагностика: проверьте, не рассказывает ли модель вместо демонстрации"
-      },
-      "anchor_id": "layer-2-term-show-never-tell",
+      "anchor_id": "p7_core_directives",
       "cross_refs": [
         "#p7_core_directives"
-      ]
+      ],
+      "unified_definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском. Диагностика: проверьте, не рассказывает ли модель вместо демонстрации"
     },
     {
       "term": "EMBODIMENT FIRST (Телесность прежде всего)",
@@ -691,19 +445,12 @@
       ],
       "definition": "Директива SP: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "EMBODIMENT FIRST — директива #2 в CORE DIRECTIVES, связана с протоколом телесности",
-        "3": "Диагностика: проверьте, не пропускает ли модель телесный шаг"
-      },
-      "anchor_id": "layer-2-term-embodiment-first",
+      "anchor_id": "p2_embodiment",
       "cross_refs": [
         "#p2_embodiment",
         "#p7_core_directives"
-      ]
+      ],
+      "unified_definition": "Директива SP: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском. Диагностика: проверьте, не пропускает ли модель телесный шаг"
     },
     {
       "term": "SPATIAL LOCK (Пространственная блокировка)",
@@ -715,18 +462,11 @@
       ],
       "definition": "Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Добавьте SPATIAL LOCK в SP для фиксации положения персонажа в пространстве",
-        "3": "Отладка: проверьте активацию при сложных сценах"
-      },
-      "anchor_id": "layer-2-term-spatial-lock",
+      "anchor_id": "p7_core_directives",
       "cross_refs": [
         "#p7_core_directives"
-      ]
+      ],
+      "unified_definition": "Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском. Отладка: проверьте активацию при сложных сценах"
     },
     {
       "term": "ENVIRONMENTAL REACTIVITY (Реактивность среды)",
@@ -738,19 +478,12 @@
       ],
       "definition": "Директива SP: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Добавьте ENVIRONMENTAL REACTIVITY для органичного описания среды",
-        "3": "Диагностика: проверьте, не генерирует ли модель декоративные описания"
-      },
-      "anchor_id": "layer-2-term-environmental-reactivity",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules",
         "#p7_core_directives"
-      ]
+      ],
+      "unified_definition": "Директива SP: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском. Диагностика: проверьте, не генерирует ли модель декоративные описания"
     },
     {
       "term": "INFLUENCE BOUNDARY (Граница влияния)",
@@ -762,19 +495,12 @@
       ],
       "definition": "Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Добавьте INFLUENCE BOUNDARY для предотвращения годмодинга",
-        "3": "Диагностика: проверьте, не декларирует ли модель эмоции {{user}}"
-      },
-      "anchor_id": "layer-2-term-influence-boundary",
+      "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules",
         "#p7_core_directives"
-      ]
+      ],
+      "unified_definition": "Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}"
     },
     {
       "term": "CONSEQUENCE DRIVEN (Последовательность следствий)",
@@ -786,19 +512,12 @@
       ],
       "definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only CORE DIRECTIVE. Пишется на английском.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Базовая динамика SPINE: WANT конфликтует с NEED. Отслеживание не формализовано.",
-        "3": "L3-enhanced: полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY."
-      },
-      "anchor_id": "layer-3-term-consequence-driven",
+      "anchor_id": "p7_core_directives_l3",
       "cross_refs": [
         "#p7_core_directives_l3",
         "#p4_spine_mapping"
-      ]
+      ],
+      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only CORE DIRECTIVE. Пишется на английском. L3-enhanced: полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY."
     },
     {
       "term": "PRE-GENERATION FILTER (Фильтр предгенерации)",
@@ -810,19 +529,12 @@
       ],
       "definition": "L3-only CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
       "prohibited": [],
-      "applicable_layers": [
-        3
-      ],
-      "layer_context": {
-        "1": "Недоступно.",
-        "2": "Недоступно. Директивы 1-5 для L2.",
-        "3": "L3-only: директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN."
-      },
-      "anchor_id": "layer-3-term-pre-generation-filter",
+      "anchor_id": "p7_core_directives_l3",
       "cross_refs": [
         "#p7_core_directives_l3",
         "#p7_sp_template_l3"
-      ]
+      ],
+      "unified_definition": "L3-only CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. L3-only: директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN."
     },
     {
       "term": "SP (MBTI temperament)",
@@ -835,19 +547,12 @@
       ],
       "definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "В таблице темпераментов SP = Sensing-Perceiving, не System Prompt",
-        "3": "При анализе кросс-типов уточняйте, какой SP имеется в виду"
-      },
-      "anchor_id": "layer-2-term-sp-mbti",
+      "anchor_id": "p5_mbti_basics",
       "cross_refs": [
         "#p5_mbti_basics",
         "#p1_core_rules"
-      ]
+      ],
+      "unified_definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения. При анализе кросс-типов уточняйте, какой SP имеется в виду"
     },
     {
       "term": "Immersion Boundary (Иммерсионная граница)",
@@ -858,18 +563,11 @@
       ],
       "definition": "Продвинутая OOC-защита: отрицание мета-реальности. L3-only. Персонаж не признаёт существование «игры» или «роли».",
       "prohibited": [],
-      "applicable_layers": [
-        3
-      ],
-      "layer_context": {
-        "1": "Недоступно. Используйте базовый OOC Protection.",
-        "2": "Недоступно. Используйте базовый OOC Protection.",
-        "3": "L3-only: добавьте Immersion Boundary для максимальной иммерсии. На L2 используйте базовый OOC Protection."
-      },
-      "anchor_id": "layer-3-term-immersion-boundary",
+      "anchor_id": "p7_ooc_protection",
       "cross_refs": [
         "#p7_ooc_protection"
-      ]
+      ],
+      "unified_definition": "Продвинутая OOC-защита: отрицание мета-реальности. L3-only. Персонаж не признаёт существование «игры» или «роли». L3-only: добавьте Immersion Boundary для максимальной иммерсии. На L2 используйте базовый OOC Protection."
     },
     {
       "term": "Format Lock (Фиксация формата)",
@@ -880,19 +578,12 @@
       ],
       "definition": "Фиксация формата диалога в конце SP. Предотвращает дрейф разметки.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Добавьте Format Lock в SP: выберите одну систему разметки и используйте её во всех Examples и Greeting",
-        "3": "Диагностика: проверьте, что все Examples и Greeting используют одну систему разметки"
-      },
-      "anchor_id": "layer-2-term-format-lock",
+      "anchor_id": "p7_format_lock",
       "cross_refs": [
         "#p7_format_lock",
         "#p7_system_prompt"
-      ]
+      ],
+      "unified_definition": "Фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Диагностика: проверьте, что все Examples и Greeting используют одну систему разметки"
     },
     {
       "term": "RepPen (Штраф за повторы)",
@@ -904,20 +595,11 @@
       ],
       "definition": "Repetition Penalty — параметр сэмплинга, штрафующий повторение токенов. Рекомендуемый диапазон: 1.00–1.10.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, рекомендуемые значения",
-        "2": "Настройте RepPen 1.05 для баланса",
-        "3": "Диагностика: >1.10 убивает signature phrases"
-      },
-      "anchor_id": "layer-0-term-reppen",
+      "anchor_id": "p7_sampling_params",
       "cross_refs": [
         "#p7_sampling_params"
-      ]
+      ],
+      "unified_definition": "Определение, рекомендуемые значения Диагностика: >1.10 убивает signature phrases"
     },
     {
       "term": "Presence Penalty (Штраф за присутствие)",
@@ -929,18 +611,11 @@
       ],
       "definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Установите Presence Penalty = 0.0. Любое значение > 0 ломает голос персонажа (AP-7)",
-        "3": "Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7"
-      },
-      "anchor_id": "layer-2-term-presence-penalty",
+      "anchor_id": "p7_sampling_params",
       "cross_refs": [
         "#p7_sampling_params"
-      ]
+      ],
+      "unified_definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует. Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7"
     },
     {
       "term": "CoT (Цепочка рассуждений)",
@@ -952,20 +627,11 @@
       ],
       "definition": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Доступен на Экспертном слое (L3).",
-        "2": "CoT доступен на Экспертном слое (L3). Перейдите на L3 для доступа.",
-        "3": "Настройте CoT tier 3 для сложных сценариев"
-      },
-      "anchor_id": "layer-0-term-cot",
+      "anchor_id": "p6_cot_basics",
       "cross_refs": [
         "#p6_cot_basics"
-      ]
+      ],
+      "unified_definition": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Доступен на Экспертном слое (L3). Настройте CoT tier 3 для сложных сценариев"
     },
     {
       "term": "processus_analysium",
@@ -975,18 +641,11 @@
       ],
       "category": "technique",
       "definition": "L3-only. Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4).",
-      "layer_context": {
-        "1": "Недоступно.",
-        "2": "Недоступно.",
-        "3": "L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL]...[/INTERNAL]."
-      },
-      "applicable_layers": [
-        3
-      ],
-      "anchor_id": "layer-3-term-processus-analysium",
+      "anchor_id": "p6_cot_tier3",
       "cross_refs": [
         "#p6_cot_tier3"
-      ]
+      ],
+      "unified_definition": "L3-only. Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL]."
     },
     {
       "term": "Lorebook (База знаний)",
@@ -1003,20 +662,11 @@
       "prohibited": [
         "Лорбук"
       ],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение, структура записи",
-        "2": "Настройте триггеры для сенсорных активаций и контекстных фактов. Активация через GHOST-события доступна на Экспертном слое (L3)",
-        "3": "Диагностика: проверьте приоритет и конфликт записей"
-      },
-      "anchor_id": "layer-0-term-lorebook",
+      "anchor_id": "p7_lorebook",
       "cross_refs": [
         "#p7_lorebook"
-      ]
+      ],
+      "unified_definition": "Определение, назначение, структура записи Диагностика: проверьте приоритет и конфликт записей"
     },
     {
       "term": "Structured Inject (Структурированная инъекция)",
@@ -1027,20 +677,11 @@
       ],
       "definition": "Механизм динамического обновления мотивации через AN или LB с XML-тегами.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение",
-        "2": "Настройте Structured Inject для динамической мотивации. GHOST-активация доступна на Экспертном слое (L3)",
-        "3": "Диагностика: проверьте приоритет и конфликт инъекций"
-      },
-      "anchor_id": "layer-0-term-structured-inject",
+      "anchor_id": "p7_structured_inject",
       "cross_refs": [
         "#p7_structured_inject"
-      ]
+      ],
+      "unified_definition": "Определение, назначение Диагностика: проверьте приоритет и конфликт инъекций"
     },
     {
       "term": "4K-Fallback (Протокол адаптации)",
@@ -1053,18 +694,11 @@
       ],
       "definition": "Протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, назначение",
-        "3": "Примените fallback для старых моделей"
-      },
-      "anchor_id": "layer-0-term-4k-fallback",
+      "anchor_id": "p7_4k_fallback",
       "cross_refs": [
         "#p7_4k_fallback"
-      ]
+      ],
+      "unified_definition": "Определение, назначение Примените fallback для старых моделей"
     },
     {
       "term": "годмодинг (Godmoding)",
@@ -1076,22 +710,11 @@
       ],
       "definition": "Модель пишет за пользователя (действия, мысли, чувства {{user}}).",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, проявления",
-        "1": "Добавьте запрет в SP",
-        "2": "Настройте анти-годмодинг паттерны",
-        "3": "Диагностика: отладка persistent годмодинг"
-      },
-      "anchor_id": "layer-0-term-godmoding",
+      "anchor_id": "p1_core_rules",
       "cross_refs": [
         "#p1_core_rules"
-      ]
+      ],
+      "unified_definition": "Определение, проявления Диагностика: отладка persistent годмодинг"
     },
     {
       "term": "OOC (Вне образа)",
@@ -1103,22 +726,11 @@
       ],
       "definition": "Out of Character — выход из образа.",
       "prohibited": [],
-      "applicable_layers": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "0": "Определение, проявления",
-        "1": "Добавьте запрет OOC в SP",
-        "2": "Добавьте запрет в SP и примеры",
-        "3": "Диагностика: определение и исправление OOC"
-      },
-      "anchor_id": "layer-0-term-ooc",
+      "anchor_id": "p9_basic_checklist",
       "cross_refs": [
         "#p9_basic_checklist"
-      ]
+      ],
+      "unified_definition": "Определение, проявления Диагностика: определение и исправление OOC"
     },
     {
       "term": "Voice Contamination (Заражение голоса)",
@@ -1129,18 +741,11 @@
       ],
       "definition": "Нарушение голоса персонажа на 12B, вызванное копированием чужих <START> примеров.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Предупреждение: никогда не копируйте Examples из чужих карточек",
-        "3": "Диагностика: если голос «плывёт», проверьте источник Examples"
-      },
-      "anchor_id": "layer-2-term-voice-contamination",
+      "anchor_id": "p3_examples_rules",
       "cross_refs": [
         "#p3_examples_rules"
-      ]
+      ],
+      "unified_definition": "Нарушение голоса персонажа на 12B, вызванное копированием чужих <START> примеров. Диагностика: если голос «плывёт», проверьте источник Examples"
     },
     {
       "term": "Narrator Bleed (Утечка рассказчика)",
@@ -1152,20 +757,13 @@
       ],
       "definition": "Смешивание голоса рассказчика с голосом персонажа в Examples. Диагностический термин.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Диагностика: проверьте, не описывает ли модель от третьего лица вместо демонстрации через персонажа",
-        "3": "Отладка: сравните Examples с Greeting — голос должен быть единым"
-      },
-      "anchor_id": "layer-2-term-narrator-bleed",
+      "anchor_id": "p3_voice_leak",
       "cross_refs": [
         "#p3_voice_leak",
         "#p3_voice_isolation",
         "#p8_ap11_voice_bleed"
-      ]
+      ],
+      "unified_definition": "Смешивание голоса рассказчика с голосом персонажа в Examples. Диагностический термин. Отладка: сравните Examples с Greeting — голос должен быть единым"
     },
     {
       "term": "Voice Bleed (Утечка голоса между персонажами)",
@@ -1176,16 +774,11 @@
       ],
       "definition": "В мульти-персонажных карточках голос одного персонажа «перетекает» в реплики другого. Диагностический термин.",
       "prohibited": [],
-      "applicable_layers": [
-        3
-      ],
-      "layer_context": {
-        "3": "Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples"
-      },
-      "anchor_id": "layer-3-term-voice-bleed",
+      "anchor_id": "p3_voice_isolation",
       "cross_refs": [
         "#p3_voice_isolation"
-      ]
+      ],
+      "unified_definition": "В мульти-персонажных карточках голос одного персонажа «перетекает» в реплики другого. Диагностический термин. Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples"
     },
     {
       "term": "One Change Rule (Правило одного изменения)",
@@ -1196,20 +789,11 @@
       ],
       "definition": "Принцип диагностики: изменение только одного параметра за итерацию для достоверной оценки результата.",
       "prohibited": [],
-      "applicable_layers": [
-        1,
-        2,
-        3
-      ],
-      "layer_context": {
-        "1": "Базовое правило диагностики: один параметр за раз",
-        "2": "Применяйте при систематической отладке",
-        "3": "Формализуйте: логируйте каждое изменение и результат"
-      },
-      "anchor_id": "layer-1-term-one-change-rule",
+      "anchor_id": "p9_one_change_rule",
       "cross_refs": [
         "#p9_one_change_rule"
-      ]
+      ],
+      "unified_definition": "Принцип диагностики: изменение только одного параметра за итерацию для достоверной оценки результата. Формализуйте: логируйте каждое изменение и результат"
     },
     {
       "term": "Lorebook Entry (Запись Lorebook)",
@@ -1221,26 +805,13 @@
       ],
       "definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown.",
       "prohibited": [],
-      "applicable_layers": [
-        2,
-        3
-      ],
-      "layer_context": {
-        "2": "Настройте записи для GHOST-фактов с триггерами",
-        "3": "Добавьте мировые записи для углубления сеттинга"
-      },
-      "anchor_id": "layer-2-term-lorebook-entry",
+      "anchor_id": "p7_lorebook",
       "cross_refs": [
         "#p7_lorebook"
-      ]
+      ],
+      "unified_definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown. Добавьте мировые записи для углубления сеттинга"
     }
   ],
-  "layer_markers": {
-    "📘": "Определение из Layer 0 (Reference)",
-    "🔁": "Базовый рецепт из Layer 1 (Minimum)",
-    "⚙️": "Реализация в Layer 2 (Optimal)",
-    "🔍": "Паттерн отладки в Layer 3 (Pro)"
-  },
   "core_rules": [
     {
       "id": "ocean-poles",

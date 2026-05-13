@@ -2,7 +2,7 @@
 /**
  * @fileoverview Artifact Validation Script for Live Char Guide
  * @module scripts/validate-artifact
- * @version 2.0.0
+ * @version 3.0.0
  * @author TITAN FUSE Team
  * @license MIT
  * 
@@ -23,7 +23,8 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
-const INDEX_PATH = join(ROOT, 'dist', 'index.html');
+const DIST_DIR = join(ROOT, 'dist-unified');
+const INDEX_PATH = join(DIST_DIR, 'index.html');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 
 // Validation limits for shell architecture
@@ -90,7 +91,7 @@ function checkRequiredSections(content, name) {
   // Shell architecture: check shell-specific elements
   const requiredShellElements = [
     { pattern: /id="content"/i, name: 'Content container' },
-    { pattern: /id="layer-modal"|class="layer-modal"/i, name: 'Layer selector' },
+    { pattern: /data-layer="3"/i, name: 'Body data-layer=3' },
     { pattern: /lazy-loader\.js/i, name: 'Lazy loader script' }
   ];
 
@@ -193,37 +194,98 @@ function checkWCAG1410Reflow(content, name) {
 // SHELL ARCHITECTURE CHECKS
 // ============================================================================
 
-function checkShellArchitecture() {
+async function checkShellArchitecture() {
   const results = [];
-  const layers = ['1', '2', '3'];
-  
-  for (const layer of layers) {
-    const partsDir = join(ROOT, 'dist', `parts-l${layer}`);
-    const exists = existsSync(partsDir);
+
+  // SHELL-PARTS: unified parts directory with manifest
+  const partsDir = join(DIST_DIR, 'parts');
+  const partsExist = existsSync(partsDir);
+  if (!partsExist) {
     results.push({
-      gate: `SHELL-L${layer}`,
-      pass: exists,
-      error: exists ? undefined : `dist/parts-l${layer}/ not found`
+      gate: 'SHELL-PARTS',
+      pass: false,
+      error: 'dist-unified/parts/ not found'
     });
+  } else {
+    const manifestPath = join(partsDir, 'manifest.json');
+    const manifestExists = existsSync(manifestPath);
+    if (!manifestExists) {
+      results.push({
+        gate: 'SHELL-PARTS',
+        pass: false,
+        error: 'dist-unified/parts/manifest.json not found'
+      });
+    } else {
+      // Count HTML files in parts directory
+      const { readdir: readdirSync } = await import('fs/promises');
+      const partFiles = await readdirSync(partsDir);
+      const htmlFiles = partFiles.filter(f => f.endsWith('.html'));
+      if (htmlFiles.length < 10) {
+        results.push({
+          gate: 'SHELL-PARTS',
+          pass: false,
+          error: `dist-unified/parts/ has only ${htmlFiles.length} HTML files (minimum 10 required)`
+        });
+      } else {
+        results.push({ gate: 'SHELL-PARTS', pass: true });
+      }
+    }
   }
-  
+
   // Check assets
-  const assetsDir = join(ROOT, 'dist', 'assets');
+  const assetsDir = join(DIST_DIR, 'assets');
   const lazyLoader = join(assetsDir, 'lazy-loader.js');
   const shellStyles = join(assetsDir, 'shell-styles.css');
-  
-  results.push({
-    gate: 'SHELL-LOADER',
-    pass: existsSync(lazyLoader),
-    error: existsSync(lazyLoader) ? undefined : 'dist/assets/lazy-loader.js not found'
-  });
-  
-  results.push({
-    gate: 'SHELL-STYLES',
-    pass: existsSync(shellStyles),
-    error: existsSync(shellStyles) ? undefined : 'dist/assets/shell-styles.css not found'
-  });
-  
+
+  // SHELL-LOADER: lazy-loader.js must exist and must NOT contain layer artifacts
+  const loaderExists = existsSync(lazyLoader);
+  if (!loaderExists) {
+    results.push({
+      gate: 'SHELL-LOADER',
+      pass: false,
+      error: 'dist-unified/assets/lazy-loader.js not found'
+    });
+  } else {
+    const loaderContent = await readFile(lazyLoader, 'utf-8');
+    const layerArtifacts = [];
+    if (loaderContent.includes('switchLayer')) layerArtifacts.push('switchLayer');
+    if (loaderContent.includes('loadLayerContent')) layerArtifacts.push('loadLayerContent');
+    if (loaderContent.includes('CONFIG.LAYERS')) layerArtifacts.push('CONFIG.LAYERS');
+    if (layerArtifacts.length > 0) {
+      results.push({
+        gate: 'SHELL-LOADER',
+        pass: false,
+        error: `dist-unified/assets/lazy-loader.js contains layer artifacts: ${layerArtifacts.join(', ')}`
+      });
+    } else {
+      results.push({ gate: 'SHELL-LOADER', pass: true });
+    }
+  }
+
+  // SHELL-STYLES: shell-styles.css must exist and must NOT contain layer modal/switcher styles
+  const stylesExist = existsSync(shellStyles);
+  if (!stylesExist) {
+    results.push({
+      gate: 'SHELL-STYLES',
+      pass: false,
+      error: 'dist-unified/assets/shell-styles.css not found'
+    });
+  } else {
+    const stylesContent = await readFile(shellStyles, 'utf-8');
+    const styleArtifacts = [];
+    if (stylesContent.includes('.layer-modal')) styleArtifacts.push('.layer-modal');
+    if (stylesContent.includes('.layer-switcher')) styleArtifacts.push('.layer-switcher');
+    if (styleArtifacts.length > 0) {
+      results.push({
+        gate: 'SHELL-STYLES',
+        pass: false,
+        error: `dist-unified/assets/shell-styles.css contains layer artifacts: ${styleArtifacts.join(', ')}`
+      });
+    } else {
+      results.push({ gate: 'SHELL-STYLES', pass: true });
+    }
+  }
+
   return results;
 }
 
@@ -246,10 +308,10 @@ async function validate() {
     log('WARN', 'VERSION file not found');
   }
 
-  // 2. Validate dist/index.html (shell architecture)
-  log('INFO', 'Validating dist/index.html (shell architecture)...');
+  // 2. Validate dist-unified/index.html (shell architecture)
+  log('INFO', 'Validating dist-unified/index.html (shell architecture)...');
 
-  let indexResult = await checkFileExists(INDEX_PATH, 'dist/index.html');
+  let indexResult = await checkFileExists(INDEX_PATH, 'dist-unified/index.html');
   if (!indexResult.pass) {
     results.push({ gate: 'GATE-1', ...indexResult });
     allPassed = false;
@@ -257,27 +319,27 @@ async function validate() {
     const indexContent = await readFile(INDEX_PATH, 'utf-8');
 
     // Shell is lightweight - only needs 2KB minimum
-    const indexSize = await checkFileSize(INDEX_PATH, 'dist/index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
+    const indexSize = await checkFileSize(INDEX_PATH, 'dist-unified/index.html', LIMITS.shellMinKB, LIMITS.indexMaxKB);
 
     results.push({ gate: 'GATE-1', ...indexSize });
     if (!indexSize.pass) allPassed = false;
 
     if (version !== 'unknown') {
-      const versionCheck = await checkVersion(indexContent, 'dist/index.html', version);
+      const versionCheck = await checkVersion(indexContent, 'dist-unified/index.html', version);
       results.push({ gate: 'GATE-2', ...versionCheck });
       if (!versionCheck.pass) allPassed = false;
     }
 
-    const sectionsCheck = checkRequiredSections(indexContent, 'dist/index.html');
+    const sectionsCheck = checkRequiredSections(indexContent, 'dist-unified/index.html');
     results.push({ gate: 'GATE-3', ...sectionsCheck });
     if (!sectionsCheck.pass) allPassed = false;
 
-    const htmlCheck = checkHtmlValidity(indexContent, 'dist/index.html');
+    const htmlCheck = checkHtmlValidity(indexContent, 'dist-unified/index.html');
     results.push({ gate: 'GATE-4', ...htmlCheck });
     if (!htmlCheck.pass) allPassed = false;
 
     // WCAG 1.4.10 Reflow check
-    const wcagCheck = checkWCAG1410Reflow(indexContent, 'dist/index.html');
+    const wcagCheck = checkWCAG1410Reflow(indexContent, 'dist-unified/index.html');
     results.push({ gate: 'GATE-5', ...wcagCheck });
     if (!wcagCheck.pass) allPassed = false;
     if (wcagCheck.warnings && wcagCheck.warnings.length > 0) {
@@ -286,7 +348,7 @@ async function validate() {
   }
 
   // 3. Shell architecture checks
-  const shellResults = checkShellArchitecture();
+  const shellResults = await checkShellArchitecture();
   for (const result of shellResults) {
     results.push(result);
     if (!result.pass) allPassed = false;
@@ -294,7 +356,7 @@ async function validate() {
 
   // 4. Report results
   console.log('\n============================================');
-  console.log('VALIDATION RESULTS (SHELL ARCHITECTURE)');
+  console.log('VALIDATION RESULTS (SHELL ARCHITECTURE (UNIFIED))');
   console.log('============================================');
 
   for (const result of results) {
