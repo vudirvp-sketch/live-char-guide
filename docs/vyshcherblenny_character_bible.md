@@ -92,7 +92,7 @@ resolution: withdraw
 - Low A → FLAW: Поглощение чужого без эмпатии, чужое = ресурс
 - High N → GHOST-реактивность: Каждая пустота триггерит тревогу → цикл поглощения
 
-**Note:** OCEAN values here differ from the TEMPLATE example in Part 7A (`p7a_xml_tags`) which used O:60 C:55 E:25 A:30 N:70. The values here reflect a more extreme, fragmented psychology appropriate for Выщербленный's unstable nature. The Part 7A example should be updated to match in a future phase.
+**Note:** OCEAN values here differ from the TEMPLATE example in Part 7A (`p7a_xml_tags`) which used O:60 C:55 E:25 A:30 N:70. The Part 7A XML example intentionally uses moderate values as a generic template / 4K-fallback demonstration, while the values here reflect Выщербленный's extreme, fragmented psychology.
 
 ## Enneagram
 - **Type:** 5w4 (Исследователь/Бунтарь)
@@ -152,4 +152,4 @@ All other triggers use standard T→A→P anchors without CoT, keeping the balan
 - [x] CoT structure (processus_analysium) consistent across Parts 6, 7, 10
 - [x] Lorebook entries match across Parts 7, 10
 - [x] Voice markers (formal/archival) consistent across all appearances
-- [ ] No contradictions between any two Parts — ⚠️ OCEAN values in Part 7A XML example (O:60 C:55 E:25 A:30 N:70) differ from canonical values here (O:85 C:25 E:60 A:15 N:92); update pending in future phase
+- [ ] No contradictions between any two Parts — ⚠️ OCEAN values in Part 7A XML example (O:60 C:55 E:25 A:30 N:70) differ from canonical values here (O:85 C:25 E:60 A:15 N:92); this is intentional — the Part 7A XML example uses moderate values as a generic template / 4K-fallback demonstration, while the canonical bible values reflect Выщербленный's extreme, fragmented psychology

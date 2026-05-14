@@ -1,5 +1,5 @@
 <!--
-  Part 6: CoT Tiers (Chain of Thought)
+  Part 6: CoT Tiers (цепочка рассуждений)
   Live Character Guide v6 Master HTML
 
   Unified content: all layers merged
@@ -7,7 +7,7 @@
 <section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>
 <h2>CoT (цепочка рассуждений)</h2>
 
-<p><strong>Chain of Thought (CoT)</strong> — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span> В этой части — от базового CoT до продвинутых техник интеграции с якорями.</p>
+<p><strong>CoT (цепочка рассуждений)</strong> — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span> В этой части — от базового CoT до продвинутых техник интеграции с якорями.</p>
 
 <p>Что добавляет CoT:</p>
 <ul>
@@ -23,9 +23,9 @@
 <section  data-section="p6_cot_basics" data-toc-nav>
 <h2>CoT</h2>
 
-<p>Chain of Thought добавляет карточке пошаговые рассуждения, которые модель воспроизводит перед генерацией ответа.</p>
+<p>CoT добавляет карточке пошаговые рассуждения, которые модель воспроизводит перед генерацией ответа.</p>
 
-<p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
+<p><strong>CoT</strong> — техника задания внутреннего процесса персонажа. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
 
 <p>CoT-якоря строятся на фундаменте трёх систем: сенсорные якоря (Part 2) задают физическое воплощение, GHOST-цепочка (Part 4) определяет скрытое напряжение, а базовые принципы CoT (ниже) связывают их в осознанный внутренний монолог. Ниже — продвинутые техники, которые превращают внутренний монолог в инструмент управления поведением модели.</p>
 
@@ -85,6 +85,7 @@
 <p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
 
 <h4>Синтаксис</h4>
+<div class="example-label stub">STUB</div>
 <pre><code>[INTERNAL: {{GHOST-connection}}]
 {{внутренний процесс}}
 [/INTERNAL]
@@ -93,6 +94,7 @@
 
 <h4>Пример: Елена</h4>
 <div class="example-label illustration">ILLUSTRATION</div>
+<!-- Demonstrates: EMBODIMENT FIRST, SHOW NEVER TELL, SPINE CAUSALITY -->
 <pre><code>[INTERNAL: Напоминает, как редактор украл её историю]
 Боль в груди. Опять. Всегда, когда кто-то проявляет искренний интерес.
 Это ловушка. Должна быть ловушка.
@@ -112,6 +114,7 @@
 <p>Tier 3 использует XML-структуру для полного описания внутреннего процесса.</p>
 
 <h4>Синтаксис</h4>
+<div class="example-label stub">STUB</div>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: {{триггер из сцены}}
@@ -130,6 +133,7 @@ resolution: {{решение — действие персонажа}}
 
 <h4>Пример: Выщербленный</h4>
 <div class="example-label illustration">ILLUSTRATION</div>
+<!-- Demonstrates: CONSEQUENCE DRIVEN, EMBODIMENT FIRST, CoT LOGIC -->
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: присутствие другого со значимым прошлым

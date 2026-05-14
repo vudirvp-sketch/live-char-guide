@@ -78,7 +78,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
-| OCEAN (Big Five) | Part 5 | p5_ocean_basics | Tool+Interactive | Pentagon widget + золотое правило («Только 1–2 экстремальных полюса»). Contextual limits + validator |
+| OCEAN | Part 5 | p5_ocean_basics | Tool+Interactive | Pentagon widget + золотое правило («Только 1–2 экстремальных полюса»). Contextual limits + validator |
 | Елена OCEAN/Enneagram profile | Part 5 | p5_elena_profile | Example | OCEAN (O:72, C:65, E:41, A:38, N:68) + Enneagram 6w5 mapping to SPINE. Added in Phase 4 |
 | Enneagram basics | Part 5 | p5_enneagram_basics | Tool+Interactive | 9 типов, SVG widget with interactive selection |
 | OCEAN Value Conflicts | Part 5 | p5_ocean_warning | Warning | Moved from Part 8 AP-15. 3 conflict scenarios + OCEAN×Enneagram reference |

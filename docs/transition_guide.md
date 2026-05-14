@@ -120,7 +120,7 @@ v8 eliminates ALL of these remnants. The result is a guide where every reader se
 
 ### Part 8: Anti-patterns
 - **AP-15 merged**: `p8_ap15_basic` + `p8_ap15_extended` → `p8_ap15_ocean_overload`.
-- **Sequential ordering**: APs are now numbered AP-1 through AP-16 in order.
+- **Sequential ordering**: APs are now numbered AP-1 through AP-15 in order.
 
 ### Part 9: Diagnostics
 - **12B parameter table**: Removed from Part 9; links back to Part 7.

@@ -363,7 +363,7 @@ The following changes were made during the content restoration (`content-restora
 | p7_authors_note_l3 | l3 | Part 7 | 4-section AN template with GHOST-activation | Phase 6 | ← p7_authors_note |
 | p7_sp_template_l3 | l3 | Part 7 | Full L3 System Prompt template with all 7 directives | Phase 6 | ← p7_system_prompt |
 | p7_model_checklist | l2 | Part 7 | Summary table by model type (12B/32B+/API) | Phase 6 | ← p7_sampling_params |
-| p8_ap16_nested_anchors | l2 | Part 8 | AP-16: Nested Anchors — anchor chains → unpredictability | Phase 8 | ← p8_l1_bridge |
+| p8_ap15_nested_anchors | l2 | Part 8 | AP-15: Nested Anchors (renumbered from AP-16) — anchor chains → unpredictability | Phase 8 | ← p8_l1_bridge |
 | p9_one_change_rule | l1 | Part 9 | Rule: never change >1 parameter at a time | Phase 9 | → p9_decision_tree, ← p1_conclusion |
 | p9_decision_tree | l2 | Part 9 | Branching symptom→check→fix table (7 paths) | Phase 9 | ← p9_symptom_table |
 | p9_element_scenario_map | l2 | Part 9 | Dynamic element → test scenario + verification mapping | Phase 9 | ← p9_test_scenarios |

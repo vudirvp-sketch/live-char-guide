@@ -88,7 +88,7 @@
       "properties": {
         "ocean": {
           "type": "object",
-          "description": "OCEAN (Big Five) personality - use only 1-2 extreme poles",
+          "description": "OCEAN personality - use only 1-2 extreme poles",
           "properties": {
             "O": {
               "type": "integer",

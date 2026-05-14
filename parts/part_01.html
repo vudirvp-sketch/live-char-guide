@@ -48,7 +48,7 @@ graph TD
 
 <h4>Содержание</h4>
 
-<div class="toc-block">
+<div class="guide-toc">
 <ol class="toc-parts">
 <li><strong>Part 1:</strong> Базовые блоки карточки
   <ul>
@@ -98,7 +98,7 @@ graph TD
 </li>
 <li><strong>Part 5:</strong> Psychology Toolkit
   <ul>
-  <li><a href="#p5_ocean_basics">OCEAN (Big Five)</a></li>
+  <li><a href="#p5_ocean_basics">OCEAN</a></li>
   <li><a href="#p5_elena_profile">Елена OCEAN/Enneagram profile</a></li>
   <li><a href="#p5_enneagram_basics">Enneagram basics</a></li>
   <li><a href="#p5_ocean_warning">OCEAN Value Conflicts</a></li>
@@ -108,7 +108,7 @@ graph TD
   <li><a href="#p5_cross_matrix">OCEAN×Enneagram matrix</a></li>
   </ul>
 </li>
-<li><strong>Part 6:</strong> CoT — Chain of Thought
+<li><strong>Part 6:</strong> CoT (цепочка рассуждений)
   <ul>
   <li><a href="#p6_cot_bridge">CoT bridge (обзор)</a></li>
   <li><a href="#p6_cot_basics">CoT basics</a></li>
@@ -245,7 +245,7 @@ graph TD
 <section  data-section="p1_token_budget">
 <h3>Token Budget</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook.</p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_table">Appendix B: Model Capability Table</a>.</p>
 
 <h4>Лимиты по блокам</h4>
 
@@ -363,7 +363,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
-<p><strong>Причина:</strong> В System Prompt нет анти-годмодинга.</p>
+<p><strong>Причина:</strong> В System Prompt нет Anti-godmoding (анти-годмодинга).</p>
 <p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Part 7A: System Prompt</a> | <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a>)</p>
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>

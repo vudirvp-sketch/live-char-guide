@@ -1,5 +1,5 @@
 /* ============================================
-   LIVE CHARACTER GUIDE - SHELL STYLES v7.0.0
+   LIVE CHARACTER GUIDE - SHELL STYLES v9.0.0
    ============================================ */
 
 /* === FONT FACES === */
@@ -236,7 +236,7 @@ th { background: var(--table-header); font-weight: 600; color: var(--text); posi
 .table-zebra tbody tr:nth-child(even) { background: var(--table-row-alt); }
 tbody tr:hover { background: var(--accent-soft); }
 
-/* Callouts */
+/* Callouts — v9 unified taxonomy (RULE / RECOMMENDATION / EXAMPLE) */
 .callout {
   padding: 1em 1.2em;
   margin: 1.2em 0;
@@ -244,17 +244,42 @@ tbody tr:hover { background: var(--accent-soft); }
   border-radius: 0 6px 6px 0;
   background: var(--bg-surface);
 }
-.callout.tip { border-color: var(--tip-border); background: var(--tip-bg); }
-.callout.warn { border-color: var(--warning-border); background: var(--warning-bg); }
-.callout.important { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
 .callout strong { display: block; margin-bottom: 0.4em; }
 
-/* Tags */
+/* RULE — mandatory principle; solid red left border */
+.callout.rule {
+  border-color: var(--color-error, #ef4444);
+  background: rgba(239, 68, 68, 0.06);
+}
+.callout.rule strong { color: #fca5a5; }
+
+/* RECOMMENDATION — best practice; dashed amber left border */
+.callout.rec {
+  border-color: var(--color-warning, #f59e0b);
+  border-left-style: dashed;
+  background: rgba(245, 158, 11, 0.06);
+}
+.callout.rec strong { color: #fde047; }
+
+/* EXAMPLE — illustration; dotted blue left border */
+.callout.ex {
+  border-color: var(--color-info, #06b6d4);
+  border-left-style: dotted;
+  background: rgba(6, 182, 212, 0.06);
+}
+.callout.ex strong { color: #67e8f9; }
+
+/* Light theme overrides for callouts */
+body.theme-light .callout.rule { background: rgba(239, 68, 68, 0.05); }
+body.theme-light .callout.rule strong { color: #dc2626; }
+body.theme-light .callout.rec { background: rgba(245, 158, 11, 0.05); }
+body.theme-light .callout.rec strong { color: #d97706; }
+body.theme-light .callout.ex { background: rgba(6, 182, 212, 0.05); }
+body.theme-light .callout.ex strong { color: #0891b2; }
+
+/* Tags — v9: only .tag.core remains; .opt, .risk, .advanced removed (Phase 2.4) */
 .tag { display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.75em; font-weight: 600; margin-right: 0.4em; }
 .tag.core { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
-.tag.opt { background: rgba(234, 179, 8, 0.12); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.25); }
-.tag.risk { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
-.tag.advanced { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); }
 
 /* Infographic */
 .infographic, .dependency-map {
@@ -769,6 +794,136 @@ body.content-wide pre {
 
 .panel-resize-handle:hover {
   background: linear-gradient(135deg, transparent 50%, var(--accent) 50%);
+}
+
+/* === EXAMPLE LABELS (v9 Phase 4.4) === */
+.example-label {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 3px;
+  font-size: 0.7em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+  font-family: var(--font-mono);
+}
+
+.example-label.illustration {
+  background: rgba(6, 182, 212, 0.15);
+  color: #67e8f9;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.example-label.template {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.example-label.stub {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fde047;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+body.theme-light .example-label.illustration { color: #0891b2; background: rgba(6, 182, 212, 0.1); }
+body.theme-light .example-label.template { color: #16a34a; background: rgba(34, 197, 94, 0.1); }
+body.theme-light .example-label.stub { color: #ca8a04; background: rgba(234, 179, 8, 0.1); }
+
+/* === TRANSITIONAL BRIDGE PARAGRAPHS (v9 Phase 6.1) === */
+.bridge-paragraph {
+  margin: 1.5em 0;
+  padding: 0.8em 1em;
+  border-left: 2px solid var(--accent);
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.bridge-paragraph a {
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* === INLINE TABLE OF CONTENTS (v9 Phase 9.5) === */
+.guide-toc {
+  margin: 1.5em 0;
+  padding: 1.2em 1.5em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+}
+
+.guide-toc h3 {
+  margin: 0 0 0.8em;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.guide-toc ol {
+  padding-left: 1.4em;
+  margin: 0;
+}
+
+.guide-toc ol ol {
+  padding-left: 1.2em;
+  margin-top: 0.3em;
+}
+
+.guide-toc li {
+  margin: 0.3em 0;
+  font-size: 0.92em;
+}
+
+.guide-toc li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.guide-toc li a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.guide-toc .toc-appendices {
+  margin-top: 1em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--border);
+}
+
+.guide-toc .toc-appendices h4 {
+  margin: 0 0 0.5em;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* === MERMAID / CONCEPT DIAGRAM (v9 Phase 9.4) === */
+.concept-diagram {
+  margin: 1.5em 0;
+  padding: 1em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  overflow-x: auto;
+}
+
+.concept-diagram pre {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.concept-diagram svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* === ANTIPATTERN CARD === */

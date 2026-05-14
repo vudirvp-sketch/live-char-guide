@@ -143,7 +143,7 @@
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
 <div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>Never speak or act for {{user}}.</code></pre>
-<p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
+<p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <!-- Demonstrates: INFLUENCE BOUNDARY --><code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
 <p>Fix → <a href="#p1_top3_problems">Part 1: Топ-3 ошибки</a></p>
 <p>Fix → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
@@ -301,8 +301,6 @@ WANT: {{want}}
            + "Когда обнаруживает ложь повторно → хлопает дверью → уходит в другую комнату"</code></pre>
 </div>
 </div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Анти-паттерны проверены. Протестируйте карточку → <a href="#p9_symptom_table">Диагностика (Part 9)</a></p>
 
 <p>Анти-паттерны указывают, чего избегать. Диагностика показывает, работает ли ваша карточка на самом деле. Этот раздел предоставляет структурированный протокол тестирования: от быстрых проверок до полноценной сценарной валидации. → <a href="#p9_quality_scale">Part 9</a></p>
 

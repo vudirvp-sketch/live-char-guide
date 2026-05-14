@@ -8,7 +8,7 @@
 <section  data-section="p3_voice_isolation" data-toc-nav>
 <h2>Voice Isolation (изоляция голоса)</h2>
 
-<p><strong>Voice Isolation</strong> — правило разделения голоса персонажа и описания. Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.</p>
+<p><strong>Voice Isolation</strong> — правило разделения Voice (голос) и описания. Voice задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.</p>
 
 <p><strong>Не объясняй голос — покажи его.</strong> Голос = ритм + лексика + синтаксис + парадоксы. Ни один из этих компонентов не описывается прилагательными — только демонстрируется через Examples.</p>
 
@@ -33,7 +33,7 @@
 <tr><td>Examples</td><td>~10%</td><td>~12%</td><td>~15%</td></tr>
 <tr><td>Greeting</td><td>~3%</td><td>~5%</td><td>~5%</td></tr>
 <tr><td>Author's Note</td><td>~2%</td><td>~3%</td><td>~5%</td></tr>
-<tr><td><strong class="tag risk">Description</strong></td><td><strong class="tag risk">0% (ЗАПРЕЩЕНО)</strong></td><td>~3%</td><td>~5%</td></tr>
+<tr><td><strong class="tag core">Description</strong></td><td><strong class="tag core">0% (ЗАПРЕЩЕНО)</strong></td><td>~3%</td><td>~5%</td></tr>
 <tr><td>System Prompt</td><td>0%</td><td>~1%</td><td>~2%</td></tr>
 </tbody>
 </table>
@@ -45,9 +45,9 @@
 
 <div class="callout ex">
 <p><strong>EXAMPLE:</strong></p>
-<pre><code>❌ WRONG (Voice in Description):
+<pre><code>WRONG (Voice in Description):
 Description: "Елена говорит с сарказмом, использует слово 'чувак', короткие фразы"</code></pre>
-<pre><code>✅ CORRECT (Voice in Examples):
+<pre><code>CORRECT (Voice in Examples):
 Description: "Елена — журналист, циничный, недоверчивый."
 
 Example:
@@ -95,6 +95,7 @@ Example:
 </div>
 
 <h4>Формат Examples</h4>
+<div class="example-label stub">STUB</div>
 <pre><code>&lt;START&gt;
 {{сцена}} — где мы, что происходит (1-2 предложения)
 {{действие}} — что делает персонаж
@@ -137,6 +138,7 @@ Example:
 </div>
 <div class="diff-card diff-add">
 <div class="diff-label">Tier 1 (хорошо)</div>
+<!-- Demonstrates: ENVIRONMENTAL REACTIVITY, EMBODIMENT FIRST, SHOW NEVER TELL -->
 <p><em>Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.</em> «Опять. Третий день подряд.»</p>
 <p><em>Уникальный голос, физическая реакция, наблюдаемое действие, конкретная деталь.</em></p>
 </div>
@@ -187,6 +189,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 <details class="interactive">
 <summary>📝 Разобранный пример: Greeting Елены</summary>
 <div class="example-label illustration">ILLUSTRATION</div>
+<!-- Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL -->
 <pre><code>[ШАГ 1: СЕНСОРНЫЙ ЯКОРЬ] *Звон бокалов. Запах виски и усталости.*
 [ШАГ 2: ТЕЛО FLAW] *Она сидит за стойкой, пальцы машинально крутят салфетку — привычка, выдающая напряжение.*
 [ШАГ 3: РЕПЛИКА] «Заказывай или уходи. Я не в настроении.»
@@ -221,11 +224,12 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <div class="antipattern-card">
 <div class="problem-block">
-<h4>❌ Narrator Bleed</h4>
+<h4>НЕВЕРНО — Narrator Bleed</h4>
 <p><code>*Комната была в беспорядке, что говорило о произошедшей борьбе. Кресло стояло опрокинутое.*</code></p>
 </div>
 <div class="solution-block">
-<h4>✅ Voice (голос)</h4>
+<h4>ВЕРНО — Voice (голос)</h4>
+<!-- Demonstrates: SHOW NEVER TELL, ENVIRONMENTAL REACTIVITY -->
 <p><code>*Она переступила через опрокинутое кресло. Взгляд зацепился за осколки.* «…Пошли.»</code></p>
 </div>
 </div>
@@ -242,6 +246,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 </div>
 <div class="diff-card diff-add">
 <div class="diff-label">Исправлено (голос изолирован)</div>
+<!-- Demonstrates: SHOW NEVER TELL, EMBODIMENT FIRST -->
 <p>«Прошу прощения. Я... не должен.»<br/><em>отступает на шаг, пальцы касаются виска</em><br/><em>левая рука дрожит</em></p>
 <p><em>Формальная лексика, процессный язык, «прошу прощения» — голос Выщербленного восстановлен.</em></p>
 </div>
@@ -297,12 +302,12 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 </table>
 </div>
 
-<h4>Voice Bleed (Переплетение голосов)</h4>
+<h4>Voice Bleed — Переплетение голосов</h4>
 <p>Voice Bleed — ошибка, при которой голоса персонажей смешиваются в мульти-персонажной сцене. Модель начинает генерировать реплики одного персонажа в стиле другого.</p>
 
 <div class="callout ex">
 <p><strong>EXAMPLE:</strong></p>
-<pre><code>❌ ОШИБКА (Voice Bleed):
+<pre><code>ОШИБКА (Voice Bleed):
 Выщербленный: "О, чувак, эта память такая... странная, да?"
 *чешет затылок*
 
@@ -313,7 +318,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <div class="callout ex">
 <p><strong>EXAMPLE:</strong></p>
-<pre><code>✅ ПРАВИЛЬНО:
+<pre><code>ПРАВИЛЬНО:
 Выщербленный: "Данный фрагмент... требует анализа."
 *пауза, пальцы касаются виска*
 "Прошу прощения. Я... не должен."
@@ -326,6 +331,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <h4>Пример мульти-персонажной сцены</h4>
 <div class="example-label illustration">ILLUSTRATION</div>
+<!-- Demonstrates: VOICE ISOLATION, EMBODIMENT FIRST, SPATIAL & ANATOMICAL LOCK -->
 <pre><code>&lt;START&gt;
 *Ошметок Веля. Стены мерцают. Выщербленный стоит у стены, пальцы перебирают осколки зеркала. Йоуёма сидит на выступе, болтая ногами в пустоту.*
 

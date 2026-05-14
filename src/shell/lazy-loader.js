@@ -53,7 +53,7 @@
     '04_spine': 'p4_spine_overview',
     '05_ocean': 'p5_ocean_basics',
     '06_cot': 'p6_cot_basics',
-    '07_tech': 'p7_system_prompt',
+    '07_tech': 'p7a_system_prompt',
     '08_anti': 'p8_antipatterns_overview',
     '09_diag': 'p9_troubleshooting',
     '01_intro': 'p1_card_overview',

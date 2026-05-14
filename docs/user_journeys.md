@@ -184,7 +184,7 @@ The guide follows a single, continuous reading path. There are no branches, no l
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  [1] Reader uses OCEAN (Big Five)                                │
+│  [1] Reader uses OCEAN                                            │
 │      • Validate 1–2 extreme poles for the character              │
 │      • See how OCEAN poles reinforce SPINE elements              │
 │      • Add OCEAN notation to the card                            │
@@ -278,11 +278,11 @@ The guide follows a single, continuous reading path. There are no branches, no l
 
 ### Part 8: Anti-patterns
 
-**Reader goal:** Learn to identify and fix the 16 most common errors in character cards.
+**Reader goal:** Learn to identify and fix the 15 most common errors in character cards.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  [1] Reader studies the anti-pattern catalog (AP-1 through AP-16)│
+│  [1] Reader studies the anti-pattern catalog (AP-1 through AP-15)│
 │      • Each anti-pattern has: name, symptom, cause, fix         │
 │      • Anti-patterns grouped by category:                        │
 │        - Voice anti-patterns (bleed, contamination, flattening)  │
@@ -291,12 +291,12 @@ The guide follows a single, continuous reading path. There are no branches, no l
 │        - Technical anti-patterns (token bloat, missing directive) │
 │                                                                  │
 │  [2] Reader applies fixes to their own card                      │
-│      • Self-check: scan card against all 16 anti-patterns        │
+│      • Self-check: scan card against all 15 anti-patterns        │
 │      • Fix each identified issue using the prescribed remedy     │
 │      • Re-check after fixes                                      │
 │                                                                  │
 │  [3] Part Resume — reader can now:                               │
-│      • Identify all 16 anti-patterns by symptom                  │
+│      • Identify all 15 anti-patterns by symptom                  │
 │      • Apply the correct fix for each anti-pattern               │
 │      • Perform a systematic self-check of their card             │
 └─────────────────────────────────────────────────────────────────┘
@@ -424,7 +424,7 @@ Each Part Resume follows this template:
 | 5 | OCEAN validation, Enneagram validation, MBTI cross-check |
 | 6 | CoT anchors, CoT tied to SPINE, CoT integration |
 | 7 | System Prompt (7 directives), AN + Tone Frame, Lorebook, Assembly Pipeline |
-| 8 | Identify 16 anti-patterns, apply fixes, self-check |
+| 8 | Identify 15 anti-patterns, apply fixes, self-check |
 | 9 | One Change Rule, 6 test scenarios, Decision Tree, Pre-Deploy Validation |
 | 10 | Read annotated cards, compare to own, identify improvement areas |
 
