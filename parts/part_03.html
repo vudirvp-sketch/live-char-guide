@@ -1,8 +1,9 @@
 <!--
   Part 3: Voice and Isolation (Голос и изоляция)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v8.0.0 Master HTML
 
-  Unified content: all layers merged
+  v8: p3_tier_quality renamed to p3_examples_quality,
+      explicit <START> tag requirement added
 -->
 <section  data-section="p3_voice_isolation" data-toc-nav>
 <h2>Голос и изоляция</h2>
@@ -96,6 +97,10 @@ Example:
 <li><strong>Телесность:</strong> Минимум одна физическая реакция на блок</li>
 </ul>
 
+<div class="callout important">
+<p><strong>📌 Тег &lt;START&gt; обязателен</strong> для каждого Example. Это маркер начала нового диалогового блока. Без него модель не распознаёт границы паттернов и может смешивать разные Examples — голос персонажа дрейфует, а паттерны из одного Example «утекают» в другой.</p>
+</div>
+
 <h4>Формат Examples</h4>
 <pre><code>&lt;START&gt;
 {{сцена}} — где мы, что происходит (1-2 предложения)
@@ -104,7 +109,7 @@ Example:
 
 </section>
 
-<section  data-section="p3_tier_quality">
+<section  data-section="p3_examples_quality">
 <h3>Система уровней качества Examples</h3>
 
 <p>Система оценки качества Examples по 6 критериям. Три критерия оценивают сами Examples, три — карточку в целом, но проявляются они через Examples.</p>
@@ -257,7 +262,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 <li>Модель слишком "умная" для персонажа (32B для простого характера)</li>
 </ul>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> При мульти-персонажном взаимодействии возникает Voice Bleed — анти-паттерн AP-11, при котором голоса персонажей смешиваются. Решение в Part 6 → <a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed → Part 8</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> При мульти-персонажном взаимодействии возникает Voice Bleed — анти-паттерн AP-11, при котором голоса персонажей смешиваются. <a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed → Part 8</a></p>
 
 </section>
 
@@ -290,7 +295,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <p>Паузы, действия, срывы голоса — всё это часть голоса, не описание.</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Мульти-персонажное взаимодействие и продвинутые техники голоса → <a href="#p3_multi_char">Part 6</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Мульти-персонажное взаимодействие и продвинутые техники голоса → <a href="#p3_multi_char">Мульти-персонажные примеры</a></p>
 
 </section>
 
@@ -356,7 +361,16 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <p>
 <span class="remark-icon" aria-hidden="true">→</span>
-Подробнее об анти-паттерне Voice Bleed: <a href="#p8_ap11_voice_bleed">AP-11 в Part 8 → Part 6</a>
+Подробнее об анти-паттерне Voice Bleed: <a href="#p8_ap11_voice_bleed">AP-11 → Part 8</a>
 </p>
 
 </section>
+
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Применять Voice Isolation — голос персонажа только в Examples и Greeting</li>
+    <li>Строить Examples по правилам: &lt;START&gt;, нейтральный + стресс + доверие</li>
+    <li>Изолировать голос мульти-персонажей через уникальные маркеры</li>
+  </ul>
+</div>

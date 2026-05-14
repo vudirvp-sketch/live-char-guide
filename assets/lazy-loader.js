@@ -1210,9 +1210,9 @@
     const exSlider = $('#calc-ex');
     const ancSlider = $('#calc-anc');
     const totalEl = $('#calc-total');
-    const layerTagEl = $('#calc-layer-tag');
+    const budgetRangeEl = $('#calc-budget-range');
 
-    if (!spSlider || !descSlider || !exSlider || !ancSlider || !totalEl || !layerTagEl) return;
+    if (!spSlider || !descSlider || !exSlider || !ancSlider || !totalEl || !budgetRangeEl) return;
 
     const spValEl = $('#calc-sp-val');
     const descValEl = $('#calc-desc-val');
@@ -1235,23 +1235,23 @@
       // Update total
       totalEl.textContent = total;
 
-      // Update layer tag
-      layerTagEl.className = 'tag';
+      // Update budget range indicator
+      budgetRangeEl.className = 'tag';
       if (total < 400) {
-        layerTagEl.textContent = 'Минимум (<400)';
-        layerTagEl.classList.add('over');
+        budgetRangeEl.textContent = 'Минимум (<400)';
+        budgetRangeEl.classList.add('over');
       } else if (total <= 800) {
-        layerTagEl.textContent = 'Базовый (400–800)';
-        layerTagEl.classList.add('budget-basic');
+        budgetRangeEl.textContent = 'Базовый (400–800)';
+        budgetRangeEl.classList.add('budget-basic');
       } else if (total <= 1500) {
-        layerTagEl.textContent = 'Стандартный (800–1500)';
-        layerTagEl.classList.add('budget-standard');
+        budgetRangeEl.textContent = 'Стандартный (800–1500)';
+        budgetRangeEl.classList.add('budget-standard');
       } else if (total <= 2500) {
-        layerTagEl.textContent = 'Расширенный (1500–2500)';
-        layerTagEl.classList.add('budget-extended');
+        budgetRangeEl.textContent = 'Расширенный (1500–2500)';
+        budgetRangeEl.classList.add('budget-extended');
       } else {
-        layerTagEl.textContent = 'Перегруз (>2500)';
-        layerTagEl.classList.add('over');
+        budgetRangeEl.textContent = 'Перегруз (>2500)';
+        budgetRangeEl.classList.add('over');
       }
     }
 

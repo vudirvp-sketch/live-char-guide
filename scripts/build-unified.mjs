@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Build Unified Script for Live Character Guide v7
+ * @fileoverview Build Unified Script for Live Character Guide v8
  * @module scripts/build-unified
- * @version 7.0.0
+ * @version 8.0.0
  *
  * @description
- * Replaces build-layers.mjs. Reads src/master/part_*.html and produces
+ * Reads src/master/part_*.html and produces
  * a single set of output files in build/parts/.
+ * All sections are processed equally — no layer-based filtering.
  *
  * Input:  src/master/part_01.html ... part_10.html
  *         data/glossary.json
@@ -302,7 +303,7 @@ async function buildUnified() {
 
   // Generate manifest.json (FIX-14: only version, format, parts)
   const manifest = {
-    version: '7.0.0',
+    version: '8.0.0',
     format: 'unified',
     parts: assembledParts
   };
@@ -316,14 +317,14 @@ async function buildUnified() {
     log('INFO', 'Generated: build/parts/glossary.html');
   }
 
-  // Generate footer.html (without layer navigation)
-  const footerHtml = `<footer class="layer-footer">
-<div class="layer-meta">Live Character Guide v7.0.0 &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
+  // Generate footer.html
+  const footerHtml = `<footer class="guide-footer">
+<div class="guide-meta">Live Character Guide v8.0.0 &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
 </footer>`;
   await writeFile(join(outputDir, 'footer.html'), footerHtml);
   log('INFO', 'Generated: build/parts/footer.html');
 
-  // Generate section-registry.json (without layer field)
+  // Generate section-registry.json
   const registry = {};
   for (const section of allSections) {
     registry[section.sectionId] = {
@@ -337,7 +338,7 @@ async function buildUnified() {
   // Generate build-manifest.json
   const contentHash = createHash('sha256').update(combinedHTMLContent).digest('hex');
   const buildManifest = {
-    version: '7.0.0',
+    version: '8.0.0',
     format: 'unified',
     builtAt: new Date().toISOString(),
     sectionCount: allSections.length,

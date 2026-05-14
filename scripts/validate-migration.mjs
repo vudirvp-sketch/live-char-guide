@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Migration Validation Script for Live Character Guide v6
+ * @fileoverview Migration Validation Script for Live Character Guide v8
  * @module scripts/validate-migration
- * @version 1.0.0
+ * @version 2.0.0
  *
  * @description
- * Stage 4 validation (IMP-30): verifies the v5.12 → v6 migration is complete
- * and correct. This script cross-references migration_map.md anchor mappings
- * against master HTML, section-registry, and build output to enforce the
- * Zero Degradation Principle (§0.4).
+ * Validates the v7 → v8 migration is complete and correct.
+ * This script cross-references migration_map.md anchor mappings
+ * against master HTML, section-registry, and build output.
  *
  * Checks implemented:
  *   1. Parse migration_map.md and extract all v5.12 → v6 mappings
@@ -16,7 +15,7 @@
  *   3. All v5.12 concepts have corresponding v6 sections
  *   4. All mapped sections exist in section-registry.json
  *   5. CSS class migrations applied (.callout.info→.callout.important, .tag.warn→.tag.risk)
- *   6. No old data-layer-switch format ("2" → must be "2#section-id")
+ *   6. No old data-layer-switch format or data-layer on <body> (v8 — layer system removed)
  *   7. No deprecated characters ("Макс", "Paul Atreides", "Shinji Ikari")
  *   8. No English text leaks ("Deception/Concealment" in anchor tables)
  *   9. Bug fix status from migration_map Bug Fix Tracking table
@@ -282,7 +281,7 @@ async function loadMasterFiles() {
 
   const allContent = [];
   const sectionIds = new Set();
-  const sectionData = new Map(); // data-section → { file, layer, id }
+  const sectionData = new Map(); // data-section → { file, id }
 
   for (const file of partFiles) {
     const filepath = join(MASTER_DIR, file);
@@ -296,7 +295,6 @@ async function loadMasterFiles() {
     while ((match = sectionRegex.exec(content)) !== null) {
       const attrs = match[1];
       const idMatch = attrs.match(/id=["']([^"']+)["']/i);
-      const layerMatch = attrs.match(/data-layer=["']([^"']+)["']/i);
       const sectionMatch = attrs.match(/data-section=["']([^"']+)["']/i);
 
       if (idMatch) sectionIds.add(idMatch[1]);
@@ -304,7 +302,6 @@ async function loadMasterFiles() {
         sectionIds.add(sectionMatch[1]);
         sectionData.set(sectionMatch[1], {
           file,
-          layer: layerMatch ? layerMatch[1] : null,
           id: idMatch ? idMatch[1] : null
         });
       }
@@ -437,15 +434,8 @@ async function checkSectionRegistry(mappings) {
   for (const target of uniqueTargets) {
     if (registryKeys.has(target)) {
       foundCount++;
-      // Verify layer consistency
       const regEntry = registry[target];
-      const mappedMappings = mappings.filter(m => m.v6Section === target);
-      for (const m of mappedMappings) {
-        if (m.layer && regEntry.layer && m.layer !== regEntry.layer) {
-          warnings.push(`Layer mismatch for "${target}": migration_map says "${m.layer}", registry says "${regEntry.layer}"`);
-        }
-      }
-      verbose(`Registry: "${target}" → layer=${regEntry.layer}, part=${regEntry.part}`);
+      verbose(`Registry: "${target}" → part=${regEntry.part}`);
     } else {
       errors.push(`Mapped v6 section "${target}" NOT FOUND in section-registry.json`);
       errorCount++;
@@ -776,7 +766,7 @@ function generateReport(checkResults) {
 // ============================================================================
 
 async function main() {
-  console.log('🔍 Live Character Guide v6 — Migration Validation (Stage 4, IMP-30)\n');
+  console.log('🔍 Live Character Guide v8 — Migration Validation\n');
   console.log('='.repeat(60));
 
   // Load migration_map.md

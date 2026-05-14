@@ -9,28 +9,19 @@
 
 <p>System Prompt — единственная техническая часть карточки, которую модель видит всегда. Здесь размещаются CORE DIRECTIVES и Tone Frame.</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> <strong>Part 06 (Chain of Thought)</strong> добавляет внутренний процесс рассуждения персонажа. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> <strong>Chain of Thought (CoT)</strong> добавляет внутренний процесс рассуждения персонажа. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
 
-<p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI.</small> SP включает CORE DIRECTIVES — единую систему из 5 директив, связывающую все поведенческие правила в одну логику.</p>
+<p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI.</small> SP включает CORE DIRECTIVES — единую систему из 7 директив, связывающую все поведенческие правила в одну логику.</p>
 
 <h3>Обязательные элементы SP</h3>
 <ul>
 <li><strong>Identity:</strong> "You are {{char}}" — кто персонаж</li>
 <li><strong>Anti-godmoding:</strong> две строки — запрет + позитивная формулировка</li>
-<li><strong>CORE DIRECTIVES:</strong> 5 директив или 7 директив — <a href="#p7_core_directives">подробно ниже</a></li>
+<li><strong>CORE DIRECTIVES:</strong> все 7 директив — <a href="#p7_core_directives">подробно ниже</a></li>
 <li><strong>Tone Frame:</strong> тональность + ограничение сеттинга — <a href="#p7_tone_frame">Tone Frame</a></li>
 </ul>
 
-<h3>Шаблон SP</h3>
-<pre><code>You are {{char}}. Never speak or act for {{user}}.
-
-Rules:
-- Stay in character at all times
-- Use the dialogue format from examples
-- Never break the fourth wall</code></pre>
-
-<h3>Шаблон SP</h3>
-<!-- NOTE: CORE DIRECTIVES duplicated intentionally — copy-paste template -->
+<h3>Канонический шаблон SP</h3>
 <pre><code>[System Prompt]
 You are {{char}}. {{brief_identity}}
 
@@ -43,42 +34,47 @@ Never speak, act, or decide for {{user}}.
 3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
 4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
 5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
+6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
+7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.
 &lt;/CORE_DIRECTIVES&gt;
 
 {{TONE_FRAME}}
+{{OOC_PROTECTION}}
 
 Format Lock:
 - Dialogue: *action* "speech"
 - Narrative tense: [past/present]
 - Never change this format</code></pre>
 
-<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Директивы пишутся на английском — <a href="#p7_core_directives">почему → CORE DIRECTIVES</a></small></p>
+<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Директивы пишутся на английском — <a href="#p7_core_directives">почему → CORE DIRECTIVES</a></small> Директивы 6 и 7 ссылаются на свои подробные описания по номеру — полный текст каждой директивы не дублируется в шаблоне.</p>
 
 <div class="callout important">
-<p><strong>📌 Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES → Tone Frame → Format Lock. Расширенный шаблон добавляет OOC Protection.</p>
+<p><strong>📌 Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Каждая директива подробно разобрана ниже: <a href="#p7_core_directives">CORE DIRECTIVES — объяснения и примеры</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Расширенный SP-шаблон с 7 директивами + Tone Frame + OOC Protection: <a href="#p7_sp_template_l3">Полный шаблон SP</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример карточки с этим шаблоном: <a href="#p10_vysherblenny">Выщербленный</a>. Сравните структуру SP в шаблоне с фактической карточкой — все 7 директив, Tone Frame, OOC Protection, Format Lock на своих местах.</p>
 
 </section>
 <section  data-section="p7_core_directives" data-toc-nav>
 <h3>CORE DIRECTIVES — единая система директив</h3>
 
-<p>CORE DIRECTIVES — единая система директив на английском языке, размещаемая в System Prompt. Базовый набор — директивы 1–5. Полный набор — все 7. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
+<p>CORE DIRECTIVES — единая система из 7 директив на английском языке, размещаемая в System Prompt. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции.</p>
 
 <div class="callout important">
 <p><strong>📌 Правило языка директив:</strong> Директивы SP и CORE DIRECTIVES — на английском. RP-контент (Description, Examples, Greeting) — на языке карточки. На 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам), потому что обучающая выборка содержит больше английских паттернов инструкций.</p>
 </div>
 
-<p>Базовый набор — директивы 1–5:</p>
+<p>Полный набор — все 7 директив:</p>
 <pre><code>&lt;CORE_DIRECTIVES&gt;
 1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
 2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
 3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
 4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
 5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
+6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
+7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.
 &lt;/CORE_DIRECTIVES&gt;</code></pre>
 
 <p>Каждая директива подробно:</p>
@@ -87,7 +83,7 @@ Format Lock:
 <p>Мета-принцип: демонстрируйте всё через наблюдаемое поведение. Запрет на мета-комментарии, эмоциональные декларации, информационные свалки. Из него вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
 
 <h4>2. EMBODIMENT FIRST</h4>
-<p>State → Body → Sensor → Speech. Always. → Полный протокол → Part 2: <a href="#p2_embodiment">Телесность</a></p>
+<p>State → Body → Sensor → Speech. Always. Полный протокол телесности описан в Part 2: <a href="#p2_embodiment">Телесность</a></p>
 
 <h4>3. SPATIAL & ANATOMICAL LOCK</h4>
 <p>Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации. Никаких анатомических противоречий. Если {{user}} через комнату — вы не можете коснуться его без пересечения пространства.</p>
@@ -106,15 +102,27 @@ Format Lock:
 <p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → Part 2: <a href="#p2_env_reactivity">Реактивность среды</a></p>
 
 <h4>5. INFLUENCE BOUNDARY</h4>
-<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напяган. Подробно — в Part 2: <a href="#p2_anchor_rules">p2_anchor_rules</a></p>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён. <a href="#p2_anchor_rules">Подробно — в Part 2: Правила якорей</a></p>
+
+<h4>6. CONSEQUENCE DRIVEN (Динамика следствий)</h4>
+<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a> <span class="model-note">[MODEL_NOTE: Наибольший эффект на моделях ≥32B и API; на 12B эффект ограничён из-за недостаточной способности к рассуждению]</span></p>
+<pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
+
+<h4>7. PRE-GENERATION FILTER (Фильтр предгенерации)</h4>
+<p>Чеклист перед каждым ответом:</p>
+<ol>
+<li>Новый сенсорный элемент введён? (Embodiment)</li>
+<li>Реакция привязана к телу? (Physical lock)</li>
+<li>Влияние на {{user}} основано на наблюдаемых симптомах? (Observability)</li>
+<li>Ноль мета-комментариев? (Zero-meta)</li>
+</ol>
+<p><span class="model-note">[MODEL_NOTE: Требует моделей ≥32B или API; 12B модели часто игнорируют эту директиву (~40–60% соблюдение)]</span></p>
 
 <div class="callout tip">
 <p><strong>💡 Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Pre-Deploy Validation включает проверку CORE DIRECTIVES → <a href="#p9_pre_deploy">Пред-деплой валидация → Part 6</a></p>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — Part 6: CoT, OOC Protection, Immersion Boundary, XML, API-блоки.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Pre-Deploy Validation включает проверку CORE DIRECTIVES → <a href="#p9_pre_deploy">Пред-деплой валидация (Part 9)</a></p>
 </section>
 <section  data-section="p7_tone_frame" data-toc-nav>
 <h3>Tone Frame (Тональный фрейм)</h3>
@@ -191,19 +199,43 @@ Format Lock:
 </table>
 </div>
 
-<h4>Шаблон Author's Note (3 секции)</h4>
+<h4>Template A: Шаблон Author's Note (3 секции — без GHOST)</h4>
+<p>Используется для персонажей без явного GHOST-элемента.</p>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Расширенный шаблон добавляет секцию GHOST-activation → <a href="#p7_authors_note_l3">AN с GHOST-activation</a></p>
-
-<h4>Пример AN</h4>
+<h4>Пример AN (Template A)</h4>
 <pre><code>[Author's Note:
 State: Усталость + осторожное любопытство
 WANT→NEED: WANT доминирует, NEED подавлен
 Blind Spot: Не видит, что её сарказм отталкивает тех, кто искренен
 Сцена — ночь, дождь. Елена уставшая после долгого дня.]</code></pre>
+
+<h4>Template B: Шаблон Author's Note (4 секции — с GHOST-activation)</h4>
+<p>Используется, когда персонаж имеет явный GHOST-элемент (см. Part 4). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
+<pre><code>[State: {current emotional/physical state}]
+[WANT→NEED: {current position on axis}]
+[GHOST-activation: {is GHOST triggered? by what?}]
+[Blind Spot: {what character cannot see about themselves}]</code></pre>
+
+<h4>Пример AN (Template B) — Выщербленный</h4>
+<pre><code>[Author's Note:
+Фокус: Страх растворения активен. Каждая реакция несёт физический цензор — тремор, потеря слова, сбой руки.
+WANT→NEED: WANT доминирует — стремится к полноценности через поглощение; NEED подавлен.
+GHOST-activation: Активен, если в сцене был триггер (распад, пустота, имя, Йоуёма, Вентора).
+Слепая зона: Не видит, что его вырезания отталкивают тех, кто мог бы остаться.
+Счётчик вырезаний: [обновляется в сессии] — после третьего не помнит имя, после пятого — зачем помогает.
+Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.]</code></pre>
+
+<p><strong>Пояснение секций:</strong></p>
+<ul>
+<li><strong>State:</strong> Текущее эмоциональное состояние — влияет на реакции</li>
+<li><strong>WANT→NEED:</strong> Баланс мотивации — какой полюс доминирует в данный момент</li>
+<li><strong>GHOST-activation:</strong> (Template B) Отслеживает активацию GHOST — какой триггер сработал</li>
+<li><strong>Blind Spot:</strong> Слепое пятно персонажа — модель может использовать для иронии</li>
+<li><strong>Сцена:</strong> Контекст — локация, атмосфера, присутствие других</li>
+</ul>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Комбинирование AN с Lorebook-механиками (каскад по диапазону, sticky-состояния) → <a href="#p7_lorebook_mechanics">Механики Lorebook</a></p>
 
@@ -355,7 +387,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Поведенческие механики Lorebook (каскад по диапазону, комбинированный триггер, контекстный фильтр) → <a href="#p7_lorebook_mechanics">Механики Lorebook</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> XML-теги для Description: <a href="#p7_xml_tags">Расширенный XML → Part 6</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> XML-теги для Description: <a href="#p7_xml_tags">XML-теги</a></p>
 
 </section>
 <section  data-section="p7_lorebook_mechanics">
@@ -432,7 +464,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 &lt;/instruction&gt;</code></pre>
 </details>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Продвинутые механики (эмуляция усталости, мета-лор, ложная память) — в Part 6 → <a href="#p7_lorebook_advanced">Продвинутые механики → Part 6</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Продвинутые механики (эмуляция усталости, мета-лор, ложная память) → <a href="#p7_lorebook_advanced">Продвинутые механики Lorebook</a></p>
 
 <div class="callout tip">
 <p><strong>💡 Механики Lorebook особенно полезны для GHOST-связанных триггеров.</strong> GHOST-факты (события прошлого) могут активироваться через комбинированный триггер и каскад по диапазону, создавая динамическое поведение. Подробности → <a href="#p7_lorebook_advanced">Продвинутые механики Lorebook</a></p>
@@ -449,7 +481,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <tr><td>Temperature</td><td>0.6–0.8</td><td>0.85–1.1</td><td>0.9–1.0</td></tr>
 <tr><td>Presence Penalty</td><td><span class="tag risk">0.0 (обязательно)</span></td><td>0.0</td><td>0.0</td></tr>
 <tr><td>RepPen</td><td>1.05</td><td>1.0–1.05</td><td>N/A</td></tr>
-<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong></td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
+<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong> (<a href="#p3_voice_isolation">→ Part 3</a>)</td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
 <tr><td>XML Tags</td><td><span class="tag risk">⚠️ нестабильны</span></td><td><span class="tag tip">✓ стабильны</span></td><td><span class="tag tip">✓ стабильны</span></td></tr>
 <tr><td>CoT Tier</td><td><span class="tag risk">✗</span></td><td>Tier 1</td><td>Tier 2–3</td></tr>
 <tr><td>SP Language</td><td>English (критично)<sup>1</sup></td><td>English</td><td>English</td></tr>
@@ -461,35 +493,10 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <p><sup>1</sup> SP на английском: подробнее → <a href="#p7_core_directives">CORE DIRECTIVES</a></p>
 
 <div class="callout tip">
-<p><strong>💡 AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос.</p>
+<p><strong>💡 AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос. Подробнее о правиле голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 <p><span class="remark-icon" aria-hidden="true">→</span> Технические блоки настроены. Проверьте, нет ли анти-паттернов → <a href="#p8_antipatterns_overview">Анти-паттерны (Part 8)</a></p>
 
 </div>
-
-</section>
-<section  data-section="p7_core_directives_l3">
-<h3>CORE DIRECTIVES — директивы Экспертного слоя (6–7)</h3>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Навигация по SPINE → <a href="#p4_l3_learning_path">SPINE: дальнейшие шаги</a></p>
-
-<p>К 5 базовым директивам добавляются ещё 2. Базовые директивы 1–5 описаны в <a href="#p7_core_directives">CORE DIRECTIVES</a>.</p>
-
-<h4>6. CONSEQUENCE DRIVEN (Динамика следствий)</h4>
-<p>Расширенная директива. WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a></p>
-<pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
-
-<h4>7. PRE-GENERATION FILTER (Фильтр предгенерации)</h4>
-<p>для 32B+ и API директива. Чеклист перед каждым ответом:</p>
-<ol>
-<li>Новый сенсорный элемент введён? (Embodiment)</li>
-<li>Реакция привязана к телу? (Physical lock)</li>
-<li>Влияние на {{user}} основано на наблюдаемых симптомах? (Observability)</li>
-<li>Ноль мета-комментариев? (Zero-meta)</li>
-</ol>
-<p><strong>Почему для 32B+ и API:</strong> На 12B моделях этот фильтр соблюдается ~40–60%. На 32B+ и API — ~85–95%. Только в Part 6-уровне имеет смысл требовать строгого соблюдения.</p>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Полный SP-шаблон с 7 директивами в каноническом формате: <a href="#p7_sp_template_l3">Полный шаблон SP</a></p>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример использования в карточке: <a href="#p10_vysherblenny_l3">Выщербленный</a></p>
 
 </section>
 <section  data-section="p7_ooc_protection" data-toc-nav>
@@ -511,75 +518,6 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <h4>✅ С Immersion Boundary</h4>
 <p><code>{{user}}: «Ты же ИИ» → *Нахмурился.* «Что? Ты бредишь. Ложись, я позову врача.»</code></p>
 </div>
-</div>
-
-</section>
-<section  data-section="p7_authors_note_l3">
-<h3>Author's Note — Part 6 (4 секции с GHOST)</h3>
-
-<p>Расширенный AN-шаблон включает 4-ю секцию — GHOST-activation:</p>
-<pre><code>[State: {current emotional/physical state}]
-[WANT→NEED: {current position on axis}]
-[GHOST-activation: {is GHOST triggered? by what?}]
-[Blind Spot: {what character cannot see about themselves}]</code></pre>
-<p>Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
-
-<h4>Пример: Author's Note для Выщербленного</h4>
-<pre><code>[Author's Note:
-Фокус: Страх растворения активен. Каждая реакция несёт физический цензор — тремор, потеря слова, сбой руки.
-WANT→NEED: WANT доминирует — стремится к полноценности через поглощение; NEED подавлен.
-GHOST-activation: Активен, если в сцене был триггер (распад, пустота, имя, Йоуёма, Вентора).
-Слепая зона: Не видит, что его вырезания отталкивают тех, кто мог бы остаться.
-Счётчик вырезаний: [обновляется в сессии] — после третьего не помнит имя, после пятого — зачем помогает.
-Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.]</code></pre>
-
-<p><strong>Пояснение секций:</strong></p>
-<ul>
-<li><strong>State:</strong> Текущее эмоциональное состояние — влияет на реакции</li>
-<li><strong>WANT→NEED:</strong> Баланс мотивации — какой полюс доминирует в данный момент</li>
-<li><strong>GHOST-activation:</strong> Отслеживает активацию GHOST — какой триггер сработал</li>
-<li><strong>Blind Spot:</strong> Слепое пятно персонажа — модель может использовать для иронии</li>
-<li><strong>Сцена:</strong> Контекст — локация, атмосфера, присутствие других</li>
-</ul>
-
-</section>
-<section  data-section="p7_sp_template_l3">
-<h3>Шаблон System Prompt — Part 6 (полный)</h3>
-
-<p>Полный SP-шаблон с 7 директивами, Tone Frame и OOC Protection:</p>
-<pre><code>[System Prompt — Extended]
-You are {{char}}. {{brief_identity}}
-
-Never speak, act, or decide for {{user}}.
-{{user}}'s inner state is inaccessible; respond only to observable actions and words.
-
-&lt;CORE_DIRECTIVES&gt;
-1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
-2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
-3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
-4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
-5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
-6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
-7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.
-&lt;/CORE_DIRECTIVES&gt;
-
-{{TONE_FRAME}}
-{{OOC_PROTECTION}}</code></pre>
-<p>Подробности каждой директивы — в <a href="#p7_core_directives">CORE DIRECTIVES</a> (1–5) и <a href="#p7_core_directives_l3">Расширенных директивах</a> (6–7).</p>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример карточки с этим шаблоном: <a href="#p10_vysherblenny_l3">Выщербленный</a>. Сравните структуру SP в шаблоне с фактической карточкой — все 7 директив, Tone Frame, OOC Protection, Format Lock на своих местах.</p>
-
-<div class="callout tip">
-<p><strong>💡 Пример использования:</strong> Карточка <a href="#p10_vysherblenny_l3">Выщербленный</a> использует этот шаблон.</p>
-<p><strong>Сравните:</strong></p>
-<ul>
-<li>SP начинается с идентификации персонажа + анти-годмодинг</li>
-<li>CORE_DIRECTIVES: все 7 директив в формате &lt;CORE_DIRECTIVES&gt;...&lt;/CORE_DIRECTIVES&gt;</li>
-<li>Tone Frame: задаёт атмосферу одной строкой</li>
-<li>OOC Protection: ~15 токенов, критично для иммерсии</li>
-<li>Format Lock: фиксирует формат диалога</li>
-</ul>
-<p>Откройте <a href="#p10_vysherblenny_l3">Выщебленный</a> и найдите каждый элемент шаблона в фактической карточке.</p>
 </div>
 
 </section>
@@ -817,3 +755,73 @@ Anchors:
 </div>
 
 </section>
+<section  data-section="p7_assembly_pipeline" data-toc-nav>
+<h3>Полный конвейер сборки карточки</h3>
+
+<p>Это единственный полный конвейер сборки в гайде. Каждый шаг указывает: что вы делаете, в какой Part заглянуть за подробностями, и как выглядит результат. Токен-бюджет по блокам — в <a href="#p1_token_budget">Part 1: Токен-бюджет</a>.</p>
+
+<h4>Шаг 1: System Prompt (SP)</h4>
+<p><strong>Что делаете:</strong> Записываете базовую роль, анти-годмодинг и CORE DIRECTIVES (1-7). → <a href="#p7_system_prompt">Подробно — SP</a></p>
+<p><strong>Результат:</strong> ~70-150 токенов. Identity + Anti-godmoding + CORE_DIRECTIVES + Tone Frame + Format Lock.</p>
+
+<h4>Шаг 2: Description</h4>
+<p><strong>Что делаете:</strong> Описываете внешность, контекст и мотивацию без голоса персонажа. → <a href="#p1_card_overview">Обзор блоков — Part 1</a></p>
+<p><strong>Результат:</strong> ~150-300 токенов. Факты, якоря, SPINE, OCEAN — всё здесь.</p>
+
+<h4>Шаг 3: Якоря (3-5 базовых)</h4>
+<p><strong>Что делаете:</strong> Создаёте якоря в формате T→A→P. Каждый якорь обязан иметь Цену. → <a href="#p2_anchor_rules">Правила якорей — Part 2</a></p>
+<p><strong>Результат:</strong> ~40-80 токенов. 3-5 якорей «Когда {{триггер}} → {{действие}} → {{цена}}».</p>
+
+<h4>Шаг 4: Examples (2 примера)</h4>
+<p><strong>Что делаете:</strong> Пишете нейтральный + стрессовый пример диалога ГОЛОСОМ персонажа. Каждый пример начинается с &lt;START&gt;. → <a href="#p3_examples_rules">Правила Examples — Part 3</a></p>
+<p><strong>Результат:</strong> ~80-140 токенов. 2 примера, голос только здесь.</p>
+
+<h4>Шаг 5: Greeting</h4>
+<p><strong>Что делаете:</strong> Создаёте первое сообщение персонажа — сцена → действие → реплика. → <a href="#p3_greeting">Greeting — Part 3</a></p>
+<p><strong>Результат:</strong> ~40-80 токенов. Задаёт тон и демонстрирует голос.</p>
+
+<p><strong>Контрольная точка:</strong> Базовая карточка (~430-580 токенов). Проверьте: голос только в Examples/Greeting, все якоря имеют Цену, бюджет в пределах лимита.</p>
+
+<h4>Шаг 6: SPINE-профиль</h4>
+<p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. → <a href="#p4_spine_overview">SPINE — Part 4</a></p>
+<p><strong>Результат:</strong> Полный психологический каркас персонажа, встроенный в Description.</p>
+
+<h4>Шаг 7: FLAW-linked якоря + Embodiment (5-7 якорей)</h4>
+<p><strong>Что делаете:</strong> Добавляете якоря, выведенные из SPINE-элементов, и сенсорные якоря телесности. → <a href="#p4_spine_mapping">SPINE→Якоря — Part 4</a>, <a href="#p2_embodiment">Телесность — Part 2</a></p>
+<p><strong>Результат:</strong> 5-7 якорей, включая FLAW-linked и Embodiment.</p>
+
+<h4>Шаг 8: Examples (3 примера)</h4>
+<p><strong>Что делаете:</strong> Добавляете пример доверия/роста, демонстрирующий уязвимость персонажа. → <a href="#p3_examples_rules">Правила Examples — Part 3</a></p>
+<p><strong>Результат:</strong> 3 примера с &lt;START&gt;, покрывающие нейтральный / стресс / уязвимость.</p>
+
+<h4>Шаг 9: OCEAN + Enneagram</h4>
+<p><strong>Что делаете:</strong> Заполняете OCEAN-профиль (не более 1-2 экстремальных полюсов) и определяете Enneagram-тип. → <a href="#p5_ocean_basics">OCEAN — Part 5</a></p>
+<p><strong>Результат:</strong> OCEAN + Enneagram в Description, валидация SPINE через кросс-инструментальную карту.</p>
+
+<h4>Шаг 10: Дополнительные инструменты</h4>
+<p><strong>Что делаете:</strong> Добавляете CoT-якоря (при наличии моделей ≥32B/API), настраиваете Lorebook для GHOST-фактов, настраиваете Author's Note. → <a href="#p6_cot_basics">CoT — Part 6</a>, <a href="#p7_lorebook">Lorebook</a>, <a href="#p7_authors_note">Author's Note</a></p>
+<p><strong>Результат:</strong> Полная карточка (~800-1800 токенов) со всеми инструментами.</p>
+
+<h4>Чек-лист перед тестированием</h4>
+<ul>
+<li>☐ Все якоря содержат Цену (→ <a href="#p2_anchor_rules">Part 2</a>)</li>
+<li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3</a>)</li>
+<li>☐ SPINE-цепочка консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_check">Part 4</a>)</li>
+<li>☐ OCEAN: не более 1-2 экстремальных полюсов (→ <a href="#p5_ocean_basics">Part 5</a>)</li>
+<li>☐ Токен-бюджет в пределах диапазона (→ <a href="#p1_token_budget">Part 1</a>)</li>
+</ul>
+
+<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (~440–900 токенов)</a> | <a href="#p10_omnis">Омнис-Зета (~450–1800 токенов)</a></p>
+
+</section>
+
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Писать System Prompt с 7 CORE DIRECTIVES</li>
+    <li>Настраивать Tone Frame и Format Lock для стабилизации генерации</li>
+    <li>Использовать Author's Note (Template A и B) для динамического контекста</li>
+    <li>Настраивать Lorebook с поведенческими механиками (каскад, комбинированный триггер, контекстный фильтр)</li>
+    <li>Собирать карточку по полному конвейеру от SP до дополнительных инструментов</li>
+  </ul>
+</div>

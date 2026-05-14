@@ -57,42 +57,11 @@
 <section  data-section="p1_token_budget">
 <h3>Токен-бюджет</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает бюджет базовой карточки (SP + Description + Examples + Greeting). Дополнительные блоки (Tone Frame, Format Lock, AN, Lorebook) описаны в Part 7.</p>
-
-<h4>Конвейер сборки</h4>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">1</div>
-<div class="inf-step-label">SP + Rules</div>
-<div class="inf-step-desc">70-150 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">2</div>
-<div class="inf-step-label">Description</div>
-<div class="inf-step-desc">150-300 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">3</div>
-<div class="inf-step-label">Anchors</div>
-<div class="inf-step-desc">40-80 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">4</div>
-<div class="inf-step-label">Examples</div>
-<div class="inf-step-desc">80-140 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">5</div>
-<div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">40-80 токенов</div>
-</div>
-</div>
-<p><strong>Итого: ~430-580 (4K) / ~580-830 (8K+)</strong></p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки (Tone Frame, Format Lock, AN, Lorebook) описаны в Part 7.</p>
 
 <h4>Лимиты по блокам</h4>
 
-<p>Каждый блок имеет три уровня бюджета: минимальный (4K), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста.</p>
+<p>Каждый блок имеет три уровня бюджета: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста. Зелёный = компактно и эффективно, жёлтый = стандартный баланс, красный = риск раздувания — эти обозначения отражают влияние на общее качество, а не уровень сложности.</p>
 
 <div class="table-wrap">
 <table>
@@ -140,7 +109,7 @@
 </div>
 <div class="token-calc-result">
 <span>Итого: <strong id="calc-total">420</strong> токенов</span>
-<span class="tag" id="calc-layer-tag">(400–800)</span>
+<span class="tag" id="calc-budget-range">(400–800)</span>
 </div>
 <noscript>
 <p class="callout tip">Для интерактивного калькулятора включите JavaScript.</p>

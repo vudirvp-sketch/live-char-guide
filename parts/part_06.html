@@ -7,21 +7,17 @@
 <section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>
 <h2>Цепочка рассуждений (CoT)</h2>
 
-<p><strong>Chain of Thought (CoT)</strong> — техника, при которой модель «думает вслух» перед тем как ответить. Это позволяет моделям 32B+ и API лучше следовать якорям и SPINE-логике персонажа.</p>
+<p><strong>Chain of Thought (CoT)</strong> — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа. <span class="model-note">[MODEL_NOTE: CoT наиболее эффективен на моделях ≥32B и API; на 12B моделях его влияние ограничено]</span> В этой части — от базового CoT до продвинутых техник интеграции с якорями.</p>
 
-<div class="callout tip">
-<p><strong>CoT доступен в Part 6.</strong> Этот инструмент предназначен для моделей 32B+ и API, где контекстное окно позволяет добавить внутренние рассуждения персонажа. SPINE, OCEAN и CORE DIRECTIVES — этого достаточно для стабильной карточки и без CoT.</p>
-</div>
-
-<p>Что добавляет CoT в Part 6:</p>
+<p>Что добавляет CoT:</p>
 <ul>
-<li><strong>Tier 0–3</strong> — четыре уровня сложности внутренних рассуждений</li>
+<li><strong>4 уровня сложности</strong> — от простых внутренних рассуждений до структурированного анализа</li>
 <li><strong>CoT-якоря</strong> — триггер → [внутренний процесс] → реакция → цена</li>
 <li><strong>XML-синтаксис</strong> — <code>&lt;processus_analysium&gt;</code> для структурированных размышлений</li>
 <li><strong>Quickstart (CoT)</strong> — 60-минутный конвейер сборки экспертной карточки</li>
 </ul>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Полный разбор CoT: <a href="#p6_cot_basics">Chain of Thought → Part 6</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Полный разбор CoT: <a href="#p6_cot_basics">Chain of Thought → текущая часть</a></p>
 </section>
 
 <section  data-section="p6_cot_basics" data-toc-nav>
@@ -29,7 +25,7 @@
 
 <p>Chain of Thought добавляет карточке пошаговые рассуждения, которые модель воспроизводит перед генерацией ответа.</p>
 
-<p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. Используется для моделей 32B+ и API.</p>
+<p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. <span class="model-note">[MODEL_NOTE: Базовый CoT (Tier 0-1) работает на всех моделях; продвинутые Tier 2-3 рекомендованы для моделей ≥32B и API]</span></p>
 
 <p>CoT-якоря строятся на фундаменте трёх ранее изученных систем: сенсорные якоря (Part 2) задают физическое воплощение, GHOST-цепочка (Part 4) определяет скрытое напряжение, а базовые принципы CoT (ниже) связывают их в осознанный внутренний монолог. Ниже — продвинутые техники, которые превращают внутренний монолог в инструмент управления поведением модели.</p>
 
@@ -56,7 +52,7 @@
 <ul>
 <li><strong>Глубина реакции:</strong> Модель понимает, ПОЧЕМУ персонаж реагирует так</li>
 <li><strong>GHOST связь:</strong> Внутренний процесс связывает триггеры с травмой</li>
-<li><strong>12B vs 32B+:</strong> 12B — только Tier 0-1, 32B+ — Tier 2-3</li>
+<li><strong>Уровни сложности CoT:</strong> Tier 0-1 (базовый, все модели) → Tier 2-3 (продвинутый, ≥32B и API) — выбор уровня зависит от возможностей модели</li>
 </ul>
 
 </section>
@@ -146,7 +142,7 @@ resolution: отступить
 *отступает на шаг, пальцы касаются виска*
 "Прошу прощения. Я... не должен."</code></pre>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Этот пример повторяет CoT из полной карточки: <a href="#p10_vysherblenny_l3">Выщербленный</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Этот пример повторяет CoT из полной карточки: <a href="#p10_vysherblenny">Выщербленный</a></p>
 
 </section>
 
@@ -178,5 +174,14 @@ resolution: отступить
 <p><span class="remark-icon" aria-hidden="true">→</span> Сенсорные якоря (основа для CoT): <a href="#p2_sensory_anchors">Part 2: Сенсорные якоря</a></p>
 
 </section>
+
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Настраивать Chain of Thought для персонажа</li>
+    <li>Интегрировать CoT-якоря с SPINE и Lorebook</li>
+    <li>Выбирать уровень сложности CoT в зависимости от модели</li>
+  </ul>
+</div>
 
 
