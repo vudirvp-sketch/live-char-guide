@@ -110,7 +110,7 @@
 </div>
 
 <div class="callout important">
-<p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) описаны в Part 7 — см. <a href="#p1_quickstart">Быстрый старт</a>.</p>
+<p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) описаны в Part 7. Полный конвейер сборки с пошаговыми инструкциями — в конце Part 7.</p>
 </div>
 
 <h4>Калькулятор токен-бюджета</h4>
@@ -156,47 +156,38 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <section  data-section="p1_assembly_pipeline" data-toc-nav>
 <h3>Конвейер сборки карточки</h3>
 
-<details class="interactive">
-<summary>📋 Конвейер сборки (справочно)</summary>
-
-<p>Ниже — пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены. Конвейер иллюстрируется на персонаже Омнис-Зета 7-Квин — тех-жреце Адептус Механикус.</p>
+<p>Пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены.</p>
 
 <div class="infographic inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
 <div class="inf-step-label">SP</div>
 <div class="inf-step-desc">Запишите базовую роль и 3–5 ключевых правил поведения</div>
-<div class="inf-step-code">Омнис-Зета: «Тех-Жрец Кузницы Меадия-Прайм. Не выражает эмоции в тексте повествования.»</div>
+<div class="inf-step-code">70-150 токенов</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">02</div>
 <div class="inf-step-label">Description</div>
 <div class="inf-step-desc">Опишите внешность, контекст и мотивацию без голоса персонажа</div>
-<div class="inf-step-code">Омнис-Зета: «Тех-жрец третьего уровня с множественными аугментациями. Левый глаз заменён линзой...»</div>
+<div class="inf-step-code">150-300 токенов</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">03</div>
 <div class="inf-step-label">Examples</div>
 <div class="inf-step-desc">Напишите 2 примера диалога ГОЛОСОМ персонажа</div>
-<div class="inf-step-code">Омнис-Зета: «01010100 — Механикум свидетельствует. Назовите цель визита.»</div>
+<div class="inf-step-code">80-140 токенов</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">04</div>
 <div class="inf-step-label">Greeting</div>
 <div class="inf-step-desc">Создайте Greeting, которое задаёт тон</div>
-<div class="inf-step-code">Омнис-Зета: ритуальное благословение + Бинарный кант</div>
+<div class="inf-step-code">40-80 токенов</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">05</div>
 <div class="inf-step-label">Проверка</div>
 <div class="inf-step-desc">Убедитесь, что токен-бюджет в пределах 400–800 и голос не протёк в SP/Description</div>
-<div class="inf-step-code">~450–580 токенов, голос только в Examples/Greeting</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">06</div>
-<div class="inf-step-label">Результат</div>
-<div class="inf-step-desc">Итоговая карточка — ~450-580 токенов, голос только в Examples/Greeting</div>
-<div class="inf-step-code">Полный код → <a href="#p10_omnis">Омнис-Зета (Part 10)</a></div>
+<div class="inf-step-code">~430-580 токенов</div>
 </div>
 </div>
 
@@ -204,124 +195,11 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <p>📌 Если голос в SP/Description — карточка не работает на 12B. <a href="#p3_voice_isolation">Голос — только в Examples/Greeting (Part 3)</a></p>
 </div>
 
-<p>
-<span class="remark-icon" aria-hidden="true">→</span>
-Полный фреймворк SPINE для более глубоких персонажей: <a href="#p4_spine_overview">SPINE → Part 4</a>
-</p>
-
-</details>
+<p>Полный конвейер сборки с пошаговыми инструкциями, шаблонами и чек-листами — в конце <a href="#p7_assembly_pipeline">Part 7</a>.</p>
 
 </section>
 
-<section  data-section="p1_quickstart" data-toc-nav>
-<h3>Quickstart: Полный конвейер сборки</h3>
 
-<p>Полный конвейер от нулевой карточки до готового персонажа. Каждый этап добавляет новый инструмент — можно остановиться на любом шаге и получить рабочую карточку. Подробности токен-бюджета — в <a href="#p1_token_budget">Токен-бюджет</a>.</p>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">SP</div>
-<div class="inf-step-desc">Запишите базовую роль и 3–5 ключевых правил поведения</div>
-<div class="inf-step-code">~5 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">Description</div>
-<div class="inf-step-desc">Опишите внешность, контекст и мотивацию без голоса персонажа</div>
-<div class="inf-step-code">~5 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">Якоря 3-5</div>
-<div class="inf-step-desc">Базовые якоря T→A→P с ценой</div>
-<div class="inf-step-code">~5 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">Examples 2</div>
-<div class="inf-step-desc">Нейтральный + Стресс — голос персонажа</div>
-<div class="inf-step-code">~5 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">05</div>
-<div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">Сцена → Действие → Реплика</div>
-<div class="inf-step-code">~3 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">06</div>
-<div class="inf-step-label">SPINE</div>
-<div class="inf-step-desc">Определите WANT/NEED/FLAW → <a href="#p4_spine_overview">Part 4</a></div>
-<div class="inf-step-code">~10 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">07</div>
-<div class="inf-step-label">Якоря 5-7</div>
-<div class="inf-step-desc">Добавьте FLAW-linked якоря + Embodiment → <a href="#p2_flaw_anchors">Part 2</a></div>
-<div class="inf-step-code">~7 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">08</div>
-<div class="inf-step-label">Examples 3</div>
-<div class="inf-step-desc">Добавьте пример доверия/роста → <a href="#p3_examples_rules">Part 3</a></div>
-<div class="inf-step-code">~5 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">09</div>
-<div class="inf-step-label">OCEAN + Enneagram</div>
-<div class="inf-step-desc">1-2 экстремальных полюса + тип → SPINE → <a href="#p5_ocean_basics">Part 5</a></div>
-<div class="inf-step-code">~8 мин</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">10</div>
-<div class="inf-step-label">Доп. инструменты</div>
-<div class="inf-step-desc">CoT, GHOST, Lorebook — при необходимости → <a href="#p6_cot_basics">Part 6</a></div>
-<div class="inf-step-code">~15 мин</div>
-</div>
-</div>
-
-<h4>Шаблон System Prompt</h4>
-<p>→ Полный шаблон SP: <a href="#p7_system_prompt">Техническая реализация</a></p>
-
-<h4>Шаблон Description</h4>
-<pre><code>Имя: {{имя}}
-Роль: {{профессия/статус}}
-
-Якоря:
-- Когда {{триггер}} → {{действие}} → {{цена}}
-- Когда {{триггер}} → {{действие}} → {{цена}}
-- Когда {{триггер}} → {{действие}} → {{цена}}
-
-{{Шаг 6+: &lt;spine&gt;WANT: ... NEED: ... FLAW: ...&lt;/spine&gt;}}
-{{Шаг 9+: &lt;ocean&gt;O: __ | C: __ | E: __ | A: __ | N: __&lt;/ocean&gt;}}</code></pre>
-
-<h4>Шаблон Examples</h4>
-<pre><code>&lt;START&gt;
-{{сцена_нейтральная}}
-{{реплика_нейтральная}}
-
-&lt;START&gt;
-{{сцена_стресс}}
-{{реплика_стресс}}
-
-{{Шаг 8+: &lt;START&gt;}}
-{{сцена_доверие/рост}}
-{{реплика_уязвимость}}</code></pre>
-
-<h4>Чек-лист</h4>
-<ul>
-<li>☐ 3-5 якорей с ценой (шаг 3), + FLAW-linked (шаг 7)</li>
-<li>☐ 2 примера с &lt;START&gt; (шаг 4), + третий доверие/рост (шаг 8)</li>
-<li>☐ Голос только в Examples/Greeting (<a href="#p1_core_rules">правило #3</a>)</li>
-<li>☐ SPINE: WANT/NEED/FLAW связаны логически (шаг 6)</li>
-<li>☐ OCEAN: 1-2 экстремальных полюса (шаг 9)</li>
-<li>☐ Токен-бюджет: 400-800 (шаги 1-5) / 800-1500 (шаги 6-9) / 1500+ (шаг 10)</li>
-</ul>
-
-<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (~440–900 токенов)</a> | <a href="#p10_omnis">Омнис-Зета (~450–1800 токенов)</a></p>
-
-</section>
 
 <section  data-section="p1_top3_problems">
 <h3>Топ-3 критичные ошибки</h3>
@@ -347,20 +225,11 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 </section>
 
-<section  data-section="p1_conclusion">
-<h3>Готовы к практике?</h3>
-<p>Перед переходом к Part 2 убедитесь, что можете ответить на эти вопросы:</p>
-
-<h4>Вопросы для самопроверки</h4>
-<ul>
-<li>Какие блоки обязательны в карточке и зачем каждый?</li>
-<li>Где задаётся голос персонажа, а где — факты? (<a href="#p3_influence_hierarchy">Part 3</a>)</li>
-<li>Какой формат якоря и почему цена обязательна? (<a href="#p2_basic_anchors">Part 2</a>)</li>
-<li>Какой блок имеет 0% влияния на голос для 12B? (<a href="#p3_influence_hierarchy">Part 3</a>)</li>
-<li>Что такое FLAW-linked якорь и чем он отличается от базового? (<a href="#p2_flaw_anchors">Part 2</a>)</li>
-<li>Как SPINE связывает якоря с мотивацией? (<a href="#p4_spine_overview">Part 4</a>)</li>
-<li>Что делать, если персонаж «не работает»? (<a href="#p9_basic_checklist">Part 9</a>)</li>
-</ul>
-
-<p>Если все ответы ясны — переходите к <a href="#p2_basic_anchors">Поведенческим якорям (Part 2)</a>. Если сомневаетесь — перечитайте <a href="#p1_core_rules">3 ключевых принципа</a>.</p>
-</section>
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Определять блоки карточки (SP, Description, Examples, Greeting, AN) и их функции</li>
+    <li>Оценивать токен-бюджет для каждого блока и не превышать лимиты</li>
+    <li>Следовать трём ключевым принципам: якорь с Ценой, голос только в Examples, психология только в Description</li>
+  </ul>
+</div>

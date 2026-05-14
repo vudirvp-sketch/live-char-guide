@@ -755,3 +755,73 @@ Anchors:
 </div>
 
 </section>
+<section  data-section="p7_assembly_pipeline" data-toc-nav>
+<h3>Полный конвейер сборки карточки</h3>
+
+<p>Это единственный полный конвейер сборки в гайде. Каждый шаг указывает: что вы делаете, в какой Part заглянуть за подробностями, и как выглядит результат. Токен-бюджет по блокам — в <a href="#p1_token_budget">Part 1: Токен-бюджет</a>.</p>
+
+<h4>Шаг 1: System Prompt (SP)</h4>
+<p><strong>Что делаете:</strong> Записываете базовую роль, анти-годмодинг и CORE DIRECTIVES (1-7). → <a href="#p7_system_prompt">Подробно — SP</a></p>
+<p><strong>Результат:</strong> ~70-150 токенов. Identity + Anti-godmoding + CORE_DIRECTIVES + Tone Frame + Format Lock.</p>
+
+<h4>Шаг 2: Description</h4>
+<p><strong>Что делаете:</strong> Описываете внешность, контекст и мотивацию без голоса персонажа. → <a href="#p1_card_overview">Обзор блоков — Part 1</a></p>
+<p><strong>Результат:</strong> ~150-300 токенов. Факты, якоря, SPINE, OCEAN — всё здесь.</p>
+
+<h4>Шаг 3: Якоря (3-5 базовых)</h4>
+<p><strong>Что делаете:</strong> Создаёте якоря в формате T→A→P. Каждый якорь обязан иметь Цену. → <a href="#p2_anchor_rules">Правила якорей — Part 2</a></p>
+<p><strong>Результат:</strong> ~40-80 токенов. 3-5 якорей «Когда {{триггер}} → {{действие}} → {{цена}}».</p>
+
+<h4>Шаг 4: Examples (2 примера)</h4>
+<p><strong>Что делаете:</strong> Пишете нейтральный + стрессовый пример диалога ГОЛОСОМ персонажа. Каждый пример начинается с &lt;START&gt;. → <a href="#p3_examples_rules">Правила Examples — Part 3</a></p>
+<p><strong>Результат:</strong> ~80-140 токенов. 2 примера, голос только здесь.</p>
+
+<h4>Шаг 5: Greeting</h4>
+<p><strong>Что делаете:</strong> Создаёте первое сообщение персонажа — сцена → действие → реплика. → <a href="#p3_greeting">Greeting — Part 3</a></p>
+<p><strong>Результат:</strong> ~40-80 токенов. Задаёт тон и демонстрирует голос.</p>
+
+<p><strong>Контрольная точка:</strong> Базовая карточка (~430-580 токенов). Проверьте: голос только в Examples/Greeting, все якоря имеют Цену, бюджет в пределах лимита.</p>
+
+<h4>Шаг 6: SPINE-профиль</h4>
+<p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. → <a href="#p4_spine_overview">SPINE — Part 4</a></p>
+<p><strong>Результат:</strong> Полный психологический каркас персонажа, встроенный в Description.</p>
+
+<h4>Шаг 7: FLAW-linked якоря + Embodiment (5-7 якорей)</h4>
+<p><strong>Что делаете:</strong> Добавляете якоря, выведенные из SPINE-элементов, и сенсорные якоря телесности. → <a href="#p4_spine_mapping">SPINE→Якоря — Part 4</a>, <a href="#p2_embodiment">Телесность — Part 2</a></p>
+<p><strong>Результат:</strong> 5-7 якорей, включая FLAW-linked и Embodiment.</p>
+
+<h4>Шаг 8: Examples (3 примера)</h4>
+<p><strong>Что делаете:</strong> Добавляете пример доверия/роста, демонстрирующий уязвимость персонажа. → <a href="#p3_examples_rules">Правила Examples — Part 3</a></p>
+<p><strong>Результат:</strong> 3 примера с &lt;START&gt;, покрывающие нейтральный / стресс / уязвимость.</p>
+
+<h4>Шаг 9: OCEAN + Enneagram</h4>
+<p><strong>Что делаете:</strong> Заполняете OCEAN-профиль (не более 1-2 экстремальных полюсов) и определяете Enneagram-тип. → <a href="#p5_ocean_basics">OCEAN — Part 5</a></p>
+<p><strong>Результат:</strong> OCEAN + Enneagram в Description, валидация SPINE через кросс-инструментальную карту.</p>
+
+<h4>Шаг 10: Дополнительные инструменты</h4>
+<p><strong>Что делаете:</strong> Добавляете CoT-якоря (при наличии моделей ≥32B/API), настраиваете Lorebook для GHOST-фактов, настраиваете Author's Note. → <a href="#p6_cot_basics">CoT — Part 6</a>, <a href="#p7_lorebook">Lorebook</a>, <a href="#p7_authors_note">Author's Note</a></p>
+<p><strong>Результат:</strong> Полная карточка (~800-1800 токенов) со всеми инструментами.</p>
+
+<h4>Чек-лист перед тестированием</h4>
+<ul>
+<li>☐ Все якоря содержат Цену (→ <a href="#p2_anchor_rules">Part 2</a>)</li>
+<li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3</a>)</li>
+<li>☐ SPINE-цепочка консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_check">Part 4</a>)</li>
+<li>☐ OCEAN: не более 1-2 экстремальных полюсов (→ <a href="#p5_ocean_basics">Part 5</a>)</li>
+<li>☐ Токен-бюджет в пределах диапазона (→ <a href="#p1_token_budget">Part 1</a>)</li>
+</ul>
+
+<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (~440–900 токенов)</a> | <a href="#p10_omnis">Омнис-Зета (~450–1800 токенов)</a></p>
+
+</section>
+
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Писать System Prompt с 7 CORE DIRECTIVES</li>
+    <li>Настраивать Tone Frame и Format Lock для стабилизации генерации</li>
+    <li>Использовать Author's Note (Template A и B) для динамического контекста</li>
+    <li>Настраивать Lorebook с поведенческими механиками (каскад, комбинированный триггер, контекстный фильтр)</li>
+    <li>Собирать карточку по полному конвейеру от SP до дополнительных инструментов</li>
+  </ul>
+</div>

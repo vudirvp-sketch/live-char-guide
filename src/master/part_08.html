@@ -1,8 +1,8 @@
 <!--
   Part 8: Anti-patterns (Анти-паттерны)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v8 Master HTML
 
-  Unified content: all layers merged
+  v8: AP-15 merged, sequential AP ordering, reduced duplication
 -->
 <section  data-section="p8_antipatterns_overview" data-toc-nav>
 <h2>Анти-паттерны</h2>
@@ -30,8 +30,6 @@
 <tr><td><a href="#p8_ap5_reppen_high">AP-5</a></td><td>RepPen > 1.10</td><td><span class="tag tip">Средняя</span></td><td>Установить RepPen ≤ 1.10</td></tr>
 <tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-Godmoding</td><td><span class="tag risk">Высокая</span></td><td>Добавить "Never speak for {{user}}"</td></tr>
 <tr><td><a href="#p8_ap7_presence_penalty">AP-7</a></td><td>Presence Penalty > 0</td><td><span class="tag tip">Средняя</span></td><td>Установить Presence Penalty = 0</td></tr>
-<tr><td><a href="#p8_ap15_basic">AP-15</a></td><td>OCEAN Overload</td><td><span class="tag tip">Средняя</span></td><td>Оставить 1–2 экстремальных полюса</td></tr>
-<tr><td><a href="#p8_ap16_nested_anchors">AP-16</a></td><td>Nested Anchors</td><td><span class="tag tip">Средняя</span></td><td>Разбить на атомарные якоря</td></tr>
 <tr><td><a href="#p8_ap8_ghost_no_anchors">AP-8</a></td><td>GHOST без якорей</td><td><span class="tag tip">Средняя</span></td><td>Добавить минимум 1 GHOST-якорь</td></tr>
 <tr><td><a href="#p8_ap9_spine_broken">AP-9</a></td><td>Broken SPINE</td><td><span class="tag risk">Высокая</span></td><td>Проверить цепочку G→L→F→N→W</td></tr>
 <tr><td><a href="#p8_ap10_cot_overload">AP-10</a></td><td>CoT Overload</td><td><span class="tag tip">Средняя</span></td><td>Оставить 2–3 CoT-якоря</td></tr>
@@ -39,6 +37,8 @@
 <tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td><span class="tag tip">Средняя</span></td><td>Валидировать XML-теги</td></tr>
 <tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td><span class="tag tip">Средняя</span></td><td>Проверить консистентность записей</td></tr>
 <tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td><span class="tag risk">Высокая</span></td><td>Использовать 4K-Fallback Protocol</td></tr>
+<tr><td><a href="#p8_ap15_ocean_overload">AP-15</a></td><td>OCEAN Overload</td><td><span class="tag tip">Средняя</span></td><td>Оставить 1–2 экстремальных полюса</td></tr>
+<tr><td><a href="#p8_ap16_nested_anchors">AP-16</a></td><td>Nested Anchors</td><td><span class="tag tip">Средняя</span></td><td>Разбить на атомарные якоря</td></tr>
 </tbody>
 </table>
 </div>
@@ -64,14 +64,14 @@
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Якорь без физической цены</p>
-<p><strong>Решение:</strong> <a href="#p2_anchor_rules">Формат якоря: Триггер → Действие → Цена</a></p>
+<p><strong>Решение:</strong> <a href="#p2_anchor_rules">Формат якоря: Триггер → Действие → Цена (Part 2)</a></p>
 </div>
 </section>
 <section  data-section="p8_ap3_voice_in_description">
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
-<p><strong>Решение:</strong> <a href="#p3_voice_isolation">Правило голоса</a>: Description = только факты. Голос → Examples/Greeting.</p>
+<p><strong>Решение:</strong> <a href="#p3_voice_isolation">Правило голоса (Part 3)</a>: Description = только факты. Голос → Examples/Greeting.</p>
 </div>
 </section>
 <section  data-section="p8_ap4_ghost_in_sp">
@@ -89,7 +89,7 @@
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
-<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Рекомендуемые значения → <a href="#p7_sampling_params">параметры сэмплинга</a>.</p>
+<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Рекомендуемые значения → <a href="#p7_sampling_params">параметры сэмплинга (Part 7)</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding">
@@ -99,7 +99,7 @@
 <p><strong>Причина:</strong> Нет инструкции "Never speak or act for {{user}}" в SP</p>
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
 <pre><code>Never speak or act for {{user}}.</code></pre>
-<p>Подробный разбор → <a href="#p1_top3_problems">p1_top3_problems</a></p>
+<p>Подробный разбор → <a href="#p1_top3_problems">Топ-3 ошибки (Part 1)</a></p>
 <div class="problem-block">
 <h4>❌ Без анти-годмодинга</h4>
 <p><code>{{user}} подошёл ближе. *Она почувствовала, как сердце user забилось чаще от волнения.*</code></p>
@@ -114,44 +114,8 @@
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
-<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Обоснование → <a href="#p7_sampling_params">параметры сэмплинга</a>.</p>
+<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Обоснование → <a href="#p7_sampling_params">параметры сэмплинга (Part 7)</a>.</p>
 </div>
-</section>
-<section  data-section="p8_ap15_basic">
-<div class="antipattern-card">
-<h3>AP-15: Перегрузка OCEAN (OCEAN Overload)</h3>
-<p><strong>Симптом:</strong> > 2 экстремальных OCEAN полюсов</p>
-<p><strong>Причина:</strong> Попытка сделать персонажа "интересным" через противоречия</p>
-<p><strong>Решение:</strong> 1-2 экстремальных полюса. Больше — внутренняя противоречивость.</p>
-<div class="callout important">
-<p><strong>📌 Важно:</strong> 0 экстремумов = забываемый персонаж. 1-2 = запоминающийся. 3+ = inconsistent.</p>
-</div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Золотое правило профиля OCEAN → <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
-</div>
-
-</section>
-<section  data-section="p8_ap16_nested_anchors">
-<h3>AP-16: Вложенные якоря (Nested Anchors)</h3>
-
-<div class="antipattern-card">
-<div class="problem-block">
-<h4>❌ Проблема</h4>
-<p>Якорь содержит вложенные условия: «Если X, а потом Y → делает Z». Модель не может надёжно исполнить цепочку из 3+ вложенных условий на ≤14B.</p>
-</div>
-<div class="solution-block">
-<h4>✅ Решение</h4>
-<p>Разбить на атомарные <a href="#p2_anchor_rules">якоря</a>: один якорь = одна связь T→A→P. Принцип атомарности.</p>
-</div>
-<div class="example-block">
-<h4>📝 Пример</h4>
-<pre><code>❌ Вложенный: "Когда лгут → если уже лгали раньше → хлопает дверью → замолкает на час"
-✅ Атомарные: "Когда лгут → сжимает челюсти → голос становится тише"
-           + "Когда обнаруживает ложь повторно → хлопает дверью → уходит в другую комнату"</code></pre>
-</div>
-</div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Анти-паттерны проверены. Протестируйте карточку → <a href="#p9_symptom_table">Диагностика (Part 9)</a></p>
-
 </section>
 <section  data-section="p8_ap8_ghost_no_anchors">
 
@@ -171,7 +135,7 @@
 <h3>AP-9: Сломанный SPINE (Broken SPINE)</h3>
 <p><strong>Симптом:</strong> SPINE элементы не связаны логически</p>
 <p><strong>Причина:</strong> WANT, NEED, FLAW, LIE, GHOST написаны независимо</p>
-<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT</p>
+<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT (<a href="#p4_spine_check">SPINE Check — Part 4</a>)</p>
 <div class="callout tip">
 <p><strong>💡 Совет:</strong> Каждый элемент должен объясняться предыдущим. Если связь разорвана — пересмотрите SPINE.</p>
 </div>
@@ -217,7 +181,7 @@ WANT: Быть любимым
 <li><strong>Итог:</strong> Цепь замкнута — каждый элемент объясняется предыдущим</li>
 </ul>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — GHOST→LIE→FLAW→NEED→WANT цепочка логически связана. См. также <a href="#p4_spine_full_chain">пример полной цепочки</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — GHOST→LIE→FLAW→NEED→WANT цепочка логически связана. См. также <a href="#p4_spine_full_chain">пример полной цепочки (Part 4)</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap10_cot_overload">
@@ -237,7 +201,7 @@ WANT: Быть любимым
 <h4>✅ Максимум 2–3 CoT-якоря</h4>
 <p>Оставьте только ключевые триггеры (GHOST-связь, критический конфликт). Остальные якоря — обычные T→A→P без CoT.</p>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — только 2 CoT-якоря по правилу (см. <a href="#p6_cot_basics">правило CoT</a>).</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — только 2 CoT-якоря по правилу (см. <a href="#p6_cot_basics">правило CoT — Part 6</a>).</p>
 </div>
 </section>
 <section  data-section="p8_ap11_voice_bleed">
@@ -267,7 +231,7 @@ WANT: {{want}}
 WANT: {{want}}
 &lt;/spine&gt;</code></pre>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны, закрыты правильно. См. также <a href="#p7_xml_tags">полный XML-пример</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны, закрыты правильно. См. также <a href="#p7_xml_tags">полный XML-пример (Part 7)</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap13_lorebook_conflict">
@@ -275,7 +239,7 @@ WANT: {{want}}
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
 <p><strong>Симптом:</strong> Lorebook записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
-<p><strong>Решение:</strong> Проверяйте консистентность всех <a href="#p7_lorebook">Lorebook</a> записей с Description</p>
+<p><strong>Решение:</strong> Проверяйте консистентность всех <a href="#p7_lorebook">Lorebook (Part 7)</a> записей с Description</p>
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>
 </div>
 </section>
@@ -284,14 +248,23 @@ WANT: {{want}}
 <h3>AP-14: Нарушение контекстного окна</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
-<p><strong>Решение:</strong> Используйте <a href="#p7_4k_fallback">4K-Fallback Protocol</a> или выберите модель с большим контекстом</p>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p7_4k_fallback">4K Fallback Protocol</a> — стратегии сжатия при ограниченном контекстном окне.</p>
+<p><strong>Решение:</strong> Используйте <a href="#p7_4k_fallback">4K-Fallback Protocol (Part 7)</a> или выберите модель с большим контекстом</p>
 </div>
 </section>
-<section  data-section="p8_ap15_extended">
-<h3>AP-15 (расширенно): Конфликт полюсов OCEAN</h3>
+<section  data-section="p8_ap15_ocean_overload">
+<div class="antipattern-card">
+<h3>AP-15: Перегрузка OCEAN (OCEAN Overload)</h3>
+<p><strong>Симптом:</strong> > 2 экстремальных OCEAN полюсов</p>
+<p><strong>Причина:</strong> Попытка сделать персонажа "интересным" через противоречия</p>
+<p><strong>Решение:</strong> 1-2 экстремальных полюса. Больше — внутренняя противоречивость. Золотое правило OCEAN-профиля → <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
 
-<p>Правило «не больше 1–2 экстремальных полюсов» получает глубинное обоснование. Три и более экстремальных полюса создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
+<div class="callout important">
+<p><strong>📌 Важно:</strong> 0 экстремумов = забываемый персонаж. 1-2 = запоминающийся. 3+ = inconsistent.</p>
+</div>
+
+<h4>Конфликт-сценарии при 3+ экстремальных полюсах</h4>
+
+<p>Три и более экстремальных полюса создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
 
 <h4>Сценарий 1: Низкая A + Высокая E + Высокий N</h4>
 <p><strong>Расшифровка:</strong> Низкая Доброжелательность (агрессивный) + Высокая Экстраверсия (доминирующий) + Высокий Нейротизм (тревожный).</p>
@@ -306,10 +279,39 @@ WANT: {{want}}
 <p>«Харизматичный социопат» — работает для Tyler Durden, но при добавлении четвёртого экстремального полюса (например, Высокая O) модель начинает добавлять черты, противоречащие ключевой концепции. Решение: максимум 3 экстремума для 8K+, 2 для 4K.</p>
 
 <h4>OCEAN×Enneagram: проверка через тип</h4>
-<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен. Используйте <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix в Part 5</a> для валидации.</p>
+<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен. Используйте <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix (Part 5)</a> для валидации.</p>
 
-<div class="callout important">
-<p><strong>📌 Правило:</strong> Базовое правило (не больше 1–2 экстремальных полюсов) описано в <a href="#p8_ap15_basic">AP-15</a>. Здесь — расширенное обоснование с конфликт-сценариями. Если карточка «не работает» при внешне корректных данных — проверьте количество экстремальных полюсов.</p>
+</div>
+</section>
+<section  data-section="p8_ap16_nested_anchors">
+<h3>AP-16: Вложенные якоря (Nested Anchors)</h3>
+
+<div class="antipattern-card">
+<div class="problem-block">
+<h4>❌ Проблема</h4>
+<p>Якорь содержит вложенные условия: «Если X, а потом Y → делает Z». Модель не может надёжно исполнить цепочку из 3+ вложенных условий на ≤14B.</p>
+</div>
+<div class="solution-block">
+<h4>✅ Решение</h4>
+<p>Разбить на атомарные <a href="#p2_anchor_rules">якоря (Part 2)</a>: один якорь = одна связь T→A→P. Принцип атомарности.</p>
+</div>
+<div class="example-block">
+<h4>📝 Пример</h4>
+<pre><code>❌ Вложенный: "Когда лгут → если уже лгали раньше → хлопает дверью → замолкает на час"
+✅ Атомарные: "Когда лгут → сжимает челюсти → голос становится тише"
+           + "Когда обнаруживает ложь повторно → хлопает дверью → уходит в другую комнату"</code></pre>
+</div>
 </div>
 
+<p><span class="remark-icon" aria-hidden="true">→</span> Анти-паттерны проверены. Протестируйте карточку → <a href="#p9_symptom_table">Диагностика (Part 9)</a></p>
+
 </section>
+
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Распознавать 16 анти-паттернов в карточках персонажей</li>
+    <li>Применять Symptom→Cause→Solution для диагностики каждого AP</li>
+    <li>Связывать анти-паттерны с правилами из Parts 1-7 через обратные ссылки</li>
+  </ul>
+</div>
