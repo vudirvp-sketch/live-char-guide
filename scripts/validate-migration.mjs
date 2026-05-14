@@ -540,59 +540,34 @@ async function checkCssClassMigrations(allContent, cssMigrations) {
 }
 
 // ============================================================================
-// CHECK 6: No old data-layer-switch format
+// CHECK 6: No data-layer-switch attributes (v8 — layer system removed)
 // ============================================================================
 
-async function checkDataLayerSwitchFormat(allContent) {
-  console.log('\n📋 Check 6: data-layer-switch format (must be "N#section-id")...');
+async function checkNoDataLayerSwitch(allContent) {
+  console.log('\n📋 Check 6: No data-layer-switch attributes (v8 — layer system removed)...');
 
   let errorCount = 0;
-  let validCount = 0;
 
   for (const { file, content } of allContent) {
-    // Find ALL data-layer-switch attributes
-    const allLayerSwitchRegex = /data-layer-switch=["']([^"']+)["']/gi;
+    // Find ANY data-layer-switch attributes — these should NOT exist in v8
+    const layerSwitchRegex = /data-layer-switch=["'][^"']*["']/gi;
     let match;
 
-    while ((match = allLayerSwitchRegex.exec(content)) !== null) {
-      const value = match[1];
+    while ((match = layerSwitchRegex.exec(content)) !== null) {
+      errors.push(`${file}: Found data-layer-switch attribute "${match[0]}" — layer system removed in v8`);
+      errorCount++;
+    }
 
-      // Old format: just a number like "2" or "3"
-      if (/^\d+$/.test(value)) {
-        errors.push(`${file}: Old data-layer-switch format "${value}" — v6 requires "N#section-id" format (e.g., "${value}#target-section")`);
-        errorCount++;
-        continue;
-      }
-
-      // New format: "N#section-id"
-      const newFormatMatch = value.match(/^(\d+)#(.+)$/);
-      if (newFormatMatch) {
-        const layerNum = parseInt(newFormatMatch[1]);
-        const sectionId = newFormatMatch[2];
-
-        if (layerNum < 1 || layerNum > 3) {
-          errors.push(`${file}: data-layer-switch="${value}" — invalid layer number ${layerNum} (must be 1-3)`);
-          errorCount++;
-          continue;
-        }
-
-        if (!sectionId || sectionId.trim() === '') {
-          errors.push(`${file}: data-layer-switch="${value}" — empty section ID after #`);
-          errorCount++;
-          continue;
-        }
-
-        validCount++;
-        verbose(`${file}: data-layer-switch="${value}" — valid ✓`);
-      } else {
-        errors.push(`${file}: data-layer-switch="${value}" — unrecognized format (expected "N#section-id")`);
-        errorCount++;
-      }
+    // Also check for data-layer on body
+    const bodyLayerRegex = /<body[^>]*data-layer=["'][^"']*["']/gi;
+    while ((match = bodyLayerRegex.exec(content)) !== null) {
+      errors.push(`${file}: Found data-layer on <body> "${match[0]}" — layer system removed in v8`);
+      errorCount++;
     }
   }
 
   if (errorCount === 0) {
-    log('INFO', `All data-layer-switch attributes use v6 format (${validCount} valid references)`);
+    log('INFO', 'No data-layer-switch or body data-layer attributes found ✓');
   }
 
   return errorCount;
@@ -868,9 +843,9 @@ async function main() {
   const check5Errors = await checkCssClassMigrations(allContent, cssMigrations);
   checkResults.push({ checkNum: 5, name: 'CSS class migrations', errorCount: check5Errors });
 
-  // Check 6: data-layer-switch format
-  const check6Errors = await checkDataLayerSwitchFormat(allContent);
-  checkResults.push({ checkNum: 6, name: 'data-layer-switch format', errorCount: check6Errors });
+  // Check 6: v8 — verify data-layer-switch does NOT exist (was removed in v8)
+  const check6Errors = await checkNoDataLayerSwitch(allContent);
+  checkResults.push({ checkNum: 6, name: 'No data-layer-switch (v8)', errorCount: check6Errors });
 
   // Check 7: Character replacements
   const check7Errors = await checkCharacterReplacements(allContent, charMigrations);

@@ -235,13 +235,13 @@ describe('Output File Validation', () => {
     }
   });
 
-  it('dist index.html should have data-layer="3" on body', async () => {
+  it('dist index.html should NOT have data-layer on body (v8)', async () => {
     const distPath = join(ROOT, 'dist', 'index.html');
     const indexPath = distPath;
 
     if (existsSync(indexPath)) {
       const content = await readFile(indexPath, 'utf-8');
-      assert.match(content, /data-layer="3"/, 'Body should have data-layer="3" for unified mode');
+      assert.doesNotMatch(content, /data-layer="3"/, 'Body should NOT have data-layer="3" — layer system removed in v8');
     }
   });
 });

@@ -714,11 +714,11 @@ async function runFallbackTests(baseUrl) {
     if (!hasCSS) throw new Error('No CSS stylesheet references found in HTML');
   });
 
-  await test('data-layer="3" is present on body', async () => {
+  await test('data-layer is NOT present on body (v8)', async () => {
     const resp = await fetch(baseUrl);
     const html = await resp.text();
     const hasLayerAttr = html.includes('data-layer="3"');
-    if (!hasLayerAttr) throw new Error('No data-layer="3" found in HTML (unified mode requires this)');
+    if (hasLayerAttr) throw new Error('data-layer="3" found in HTML — layer system removed in v8');
   });
 
   await test('No layer modal in HTML', async () => {

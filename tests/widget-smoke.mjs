@@ -254,11 +254,11 @@ async function runTests() {
       }
     });
 
-    // Test 9: Body has data-layer="3" for unified mode
-    await test('Body has data-layer="3" (unified mode)', async () => {
+    // Test 9: Body does NOT have data-layer attribute (v8 — layer system removed)
+    await test('Body has no data-layer attribute (v8)', async () => {
       const dataLayer = await page.$eval('body', el => el.getAttribute('data-layer'));
-      if (dataLayer !== '3') {
-        throw new Error(`Body data-layer is "${dataLayer}" — expected "3" for unified mode`);
+      if (dataLayer !== null) {
+        throw new Error(`Body data-layer is "${dataLayer}" — expected null (layer system removed in v8)`);
       }
     });
 

@@ -56,13 +56,10 @@
   // Local caches are still populated for direct access
 
   // ─── Layer Check ─────────────────────────────────────────────────────
-
-  function getGuideLayer() {
-    return parseInt(document.body.getAttribute('data-layer') || '2', 10);
-  }
+  // v8: No layer system — widgets are always active
 
   function isActive() {
-    return getGuideLayer() >= 3;
+    return true;
   }
 
   // ─── Conflict Detection (§5.1) ──────────────────────────────────────
@@ -645,15 +642,7 @@
     handleLayerChange();
   });
 
-  // Also observe data-layer attribute changes on body
-  var layerObserver = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.attributeName === 'data-layer') {
-        handleLayerChange();
-      }
-    });
-  });
-  layerObserver.observe(document.body, { attributes: true });
+  // v8: MutationObserver for data-layer removed — no layer switching in v8
 
   // ─── Auto-init ───────────────────────────────────────────────────────
 

@@ -3302,7 +3302,7 @@ td.temperament-sp {
   box-shadow: 0 4px 24px rgba(139, 92, 246, 0.1);
 }
 
-body[data-layer="3"] .persona-synthesis-widget { display: block; }
+.persona-synthesis-widget { display: block; }
 
 /* --- Persona Synthesis: Header --- */
 .synthesis-header {

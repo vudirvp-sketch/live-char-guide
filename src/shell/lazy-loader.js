@@ -149,37 +149,35 @@
 
   // ============================================================================
   // GUIDE LAYER VISIBILITY HELPERS (§0.6)
+  // v8: No layer system — all widgets always active
   // ============================================================================
 
   /**
-   * Get current guide layer from data-layer attribute or URL param.
-   * Widgets use this to determine visibility and functionality level.
-   * @returns {number} Layer number (1, 2, or 3)
+   * Get current guide layer.
+   * v8: Always returns 3 — all widgets are always visible.
+   * @returns {number} Layer number (always 3)
    */
   function getGuideLayer() {
-    return parseInt(document.body.getAttribute('data-layer') || '2', 10);
+    return 3;
   }
 
   /**
    * Check if psychological tools (OCEAN, Enneagram, MBTI) are allowed.
-   * These tools are only available at L2+ guide layer.
+   * v8: Always true — no layer gating.
    * @returns {boolean}
    */
   function isWidgetAllowed() {
-    return getGuideLayer() >= 2;
+    return true;
   }
 
   /**
    * Get widget functionality level (M1/M2/M3).
    * M1 = quick preset, M2 = full config, M3 = expert validation.
-   * Only meaningful at L2+ guide layer.
-   * @returns {number} Widget level (1, 2, or 3)
+   * v8: Always M2 (full config) — widgets always fully functional.
+   * @returns {number} Widget level (always 2)
    */
   function getWidgetLevel() {
-    // M2 — default for L2+
-    if (getGuideLayer() >= 2) return 2;
-    // M1 — fallback (shouldn't happen at L2+)
-    return 1;
+    return 2;
   }
 
   // Expose on window for widgets (loaded outside this IIFE)
@@ -663,7 +661,7 @@
         return fetch(url).then(r => {
           if (!r.ok) throw new Error(`HTTP ${r.status}`);
           return r.text();
-        }).catch(e => `<!-- Failed to load: ${part.file} -->`);
+        }).catch(() => `<!-- Failed to load: ${part.file} -->`);
       });
 
       const results = await Promise.all(fetchPromises);

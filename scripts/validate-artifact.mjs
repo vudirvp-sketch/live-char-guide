@@ -91,13 +91,13 @@ function checkRequiredSections(content, name) {
   // Shell architecture: check shell-specific elements
   const requiredShellElements = [
     { pattern: /id="content"/i, name: 'Content container' },
-    { pattern: /data-layer="3"/i, name: 'Body data-layer=3' },
     { pattern: /lazy-loader\.js/i, name: 'Lazy loader script' }
   ];
 
   const prohibitedLayerElements = [
     { pattern: /layer-modal/i, name: 'layer-modal (prohibited in unified)' },
-    { pattern: /layer-switcher/i, name: 'layer-switcher (prohibited in unified)' }
+    { pattern: /layer-switcher/i, name: 'layer-switcher (prohibited in unified)' },
+    { pattern: /data-layer="3"/i, name: 'data-layer="3" on body (prohibited in v8 — layer system removed)' }
   ];
 
   const missing = [];

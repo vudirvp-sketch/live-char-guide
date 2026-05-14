@@ -1,5 +1,5 @@
 {
-  "version": "7.0.0",
+  "version": "8.0.0",
   "canonical_terms": [
     {
       "term": "System Prompt (Системный промпт)",
@@ -148,7 +148,7 @@
         "Спин",
         "Мотивационное ядро"
       ],
-      "definition": "Мотивационное ядро персонажа. На L2: 3 элемента (WANT, NEED, FLAW). На L3: 5 элементов (+ LIE, GHOST).",
+      "definition": "Мотивационное ядро персонажа: 5 элементов (GHOST, LIE, FLAW, NEED, WANT) в причинно-следственной цепочке. Для простых персонажей GHOST и LIE могут быть неявными.",
       "prohibited": [],
       "anchor_id": "p4_spine_overview",
       "cross_refs": [
@@ -245,14 +245,15 @@
       ],
       "definition": "Событие из прошлого, сформировавшее FLAW и LIE.",
       "prohibited": [
-        "GHOST-Слой"
+        "GHOST-Слой",
+        "Слой призрака"
       ],
       "anchor_id": "p4_spine_overview",
       "cross_refs": [
         "#p4_spine_overview",
         "#p2_anchor_rules"
       ],
-      "unified_definition": "Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). L3-only: 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры"
+      "unified_definition": "Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры"
     },
     {
       "term": "Anchors (Поведенческие якоря)",
@@ -393,14 +394,14 @@
         "Core Directives",
         "Основные директивы"
       ],
-      "definition": "Единая система директив на английском языке, размещаемая в System Prompt. L2 = директивы 1–5, L3 = все 7.",
+      "definition": "Единая система из 7 директив на английском языке, размещаемая в System Prompt.",
       "prohibited": [],
       "anchor_id": "p7_core_directives",
       "cross_refs": [
         "#p7_core_directives",
         "#p7_system_prompt"
       ],
-      "unified_definition": "Определение, единая система директив для System Prompt. L2 = 1-5, L3 = все 7. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER"
+      "unified_definition": "Определение, единая система из 7 директив для System Prompt. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER"
     },
     {
       "term": "Tone Frame (Тональный фрейм)",
@@ -510,14 +511,14 @@
         "Последовательность следствий",
         "Consequence Driven"
       ],
-      "definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only CORE DIRECTIVE. Пишется на английском.",
+      "definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском.",
       "prohibited": [],
       "anchor_id": "p7_core_directives_l3",
       "cross_refs": [
         "#p7_core_directives_l3",
         "#p4_spine_mapping"
       ],
-      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only CORE DIRECTIVE. Пишется на английском. L3-enhanced: полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY."
+      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. Полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY."
     },
     {
       "term": "PRE-GENERATION FILTER (Фильтр предгенерации)",
@@ -527,14 +528,14 @@
         "Фильтр предгенерации",
         "Pre-Generation Filter"
       ],
-      "definition": "L3-only CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
+      "definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
       "prohibited": [],
       "anchor_id": "p7_core_directives_l3",
       "cross_refs": [
         "#p7_core_directives_l3",
         "#p7_sp_template_l3"
       ],
-      "unified_definition": "L3-only CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. L3-only: директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN."
+      "unified_definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. Директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN."
     },
     {
       "term": "SP (MBTI temperament)",
@@ -561,13 +562,13 @@
         "Immersion Boundary",
         "Иммерсионная граница"
       ],
-      "definition": "Продвинутая OOC-защита: отрицание мета-реальности. L3-only. Персонаж не признаёт существование «игры» или «роли».",
+      "definition": "Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли».",
       "prohibited": [],
       "anchor_id": "p7_ooc_protection",
       "cross_refs": [
         "#p7_ooc_protection"
       ],
-      "unified_definition": "Продвинутая OOC-защита: отрицание мета-реальности. L3-only. Персонаж не признаёт существование «игры» или «роли». L3-only: добавьте Immersion Boundary для максимальной иммерсии. На L2 используйте базовый OOC Protection."
+      "unified_definition": "Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли». Добавьте Immersion Boundary для максимальной иммерсии. Для базовой защиты используйте OOC Protection."
     },
     {
       "term": "Format Lock (Фиксация формата)",
@@ -640,12 +641,12 @@
         "внутренний процесс XML"
       ],
       "category": "technique",
-      "definition": "L3-only. Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4).",
+      "definition": "Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4).",
       "anchor_id": "p6_cot_tier3",
       "cross_refs": [
         "#p6_cot_tier3"
       ],
-      "unified_definition": "L3-only. Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL]."
+      "unified_definition": "Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL]."
     },
     {
       "term": "Lorebook (База знаний)",
@@ -816,32 +817,27 @@
     {
       "id": "ocean-poles",
       "rule": "OCEAN: Только 1–2 экстремальных полюса",
-      "location": "01_core_principles.html#core-principles",
-      "layer": 1
+      "location": "01_core_principles.html#core-principles"
     },
     {
       "id": "price-mandatory",
       "rule": "Price обязателен для FLAW/GHOST якорей",
-      "location": "01_core_principles.html#core-principles",
-      "layer": 2
+      "location": "01_core_principles.html#core-principles"
     },
     {
       "id": "voice-isolation",
       "rule": "Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.",
-      "location": "01_core_principles.html#core-principles",
-      "layer": 0
+      "location": "01_core_principles.html#core-principles"
     },
     {
       "id": "ghost-placement",
       "rule": "GHOST только в Description, никогда в SP",
-      "location": "01_core_principles.html#core-principles",
-      "layer": 0
+      "location": "01_core_principles.html#core-principles"
     },
     {
       "id": "anchor-format",
       "rule": "trigger → action → price: Каноническая схема поведения",
-      "location": "01_core_principles.html#core-principles",
-      "layer": 0
+      "location": "01_core_principles.html#core-principles"
     }
   ]
 }

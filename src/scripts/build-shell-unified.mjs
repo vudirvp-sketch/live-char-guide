@@ -66,7 +66,13 @@ function log(level, message) {
 async function buildShell() {
   log('INFO', 'Starting unified shell build...');
 
-  const version = '7.0.0';
+  const VERSION_FILE = join(ROOT, 'src', 'VERSION');
+  let version = '0.0.0';
+  if (existsSync(VERSION_FILE)) {
+    version = (await readFile(VERSION_FILE, 'utf-8')).trim();
+  } else {
+    log('WARN', 'src/VERSION not found, using fallback version');
+  }
 
   // Verify build-unified.mjs has been run
   if (!existsSync(join(BUILD_DIR, 'parts', 'manifest.json'))) {
@@ -93,6 +99,12 @@ async function buildShell() {
       .update(indexContent)
       .digest('hex')
       .slice(0, 8);
+
+    // Update version in meta tag
+    indexContent = indexContent.replace(
+      /<meta name="livechar-version" content="[\d.]+"/,
+      `<meta name="livechar-version" content="${version}"`
+    );
 
     // Add build metadata
     indexContent = indexContent.replace(

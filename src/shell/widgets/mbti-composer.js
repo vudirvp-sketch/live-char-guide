@@ -861,14 +861,7 @@
     handleLayerChange();
   });
 
-  var mbtiLayerObserver = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.attributeName === 'data-layer') {
-        handleLayerChange();
-      }
-    });
-  });
-  mbtiLayerObserver.observe(document.body, { attributes: true });
+  // v8: MutationObserver for data-layer removed — no layer switching in v8
 
   // ============================================================================
   // PUBLIC API
