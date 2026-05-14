@@ -1,5 +1,5 @@
 {
-  "version": "8.0.0",
+  "version": "9.0.0",
   "canonical_terms": [
     {
       "term": "System Prompt (Системный промпт)",
@@ -17,10 +17,10 @@
         "Системник"
       ],
       "note": "В тексте гайда используется SP как общепринятая аббревиатура. Русский термин 'системный промпт' допустим в пояснениях.",
-      "anchor_id": "p7_system_prompt",
+      "anchor_id": "p7a_system_prompt",
       "cross_refs": [
-        "#p7_system_prompt",
-        "#p7_format_lock"
+        "#p7a_system_prompt",
+        "#p7a_format_lock"
       ],
       "unified_definition": "Определение, назначение, расположение в интерфейсе Отладка: проверьте конфликты с карточкой персонажа"
     },
@@ -98,10 +98,10 @@
         "Авторка",
         "Авторка Заметки"
       ],
-      "anchor_id": "p7_authors_note",
+      "anchor_id": "p7a_authors_note",
       "cross_refs": [
-        "#p7_authors_note",
-        "#p7_structured_inject"
+        "#p7a_authors_note",
+        "#p7b_structured_inject"
       ],
       "unified_definition": "Определение, назначение, частота обновления Отладка: проверьте приоритет инъекции и конфликт с LB"
     },
@@ -380,9 +380,9 @@
       ],
       "definition": "Типология личности Майерс-Бриггс из 16 типов на основе 4 осей.",
       "prohibited": [],
-      "anchor_id": "p5_mbti_basics",
+      "anchor_id": "appendix_mbti",
       "cross_refs": [
-        "#p5_mbti_basics"
+        "#appendix_mbti"
       ],
       "unified_definition": "Определение, 4 оси, 16 типов Добавьте когнитивные функции для глубины"
     },
@@ -396,10 +396,10 @@
       ],
       "definition": "Единая система из 7 директив на английском языке, размещаемая в System Prompt.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives",
+      "anchor_id": "p7a_core_directives",
       "cross_refs": [
-        "#p7_core_directives",
-        "#p7_system_prompt"
+        "#p7a_core_directives",
+        "#p7a_system_prompt"
       ],
       "unified_definition": "Определение, единая система из 7 директив для System Prompt. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER"
     },
@@ -413,10 +413,10 @@
       ],
       "definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP.",
       "prohibited": [],
-      "anchor_id": "p7_tone_frame",
+      "anchor_id": "p7a_tone_frame",
       "cross_refs": [
-        "#p7_tone_frame",
-        "#p7_system_prompt"
+        "#p7a_tone_frame",
+        "#p7a_system_prompt"
       ],
       "unified_definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP. Отладка: проверьте конфликт Tone Frame с AN"
     },
@@ -430,9 +430,9 @@
       ],
       "definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives",
+      "anchor_id": "p7a_core_directives",
       "cross_refs": [
-        "#p7_core_directives"
+        "#p7a_core_directives"
       ],
       "unified_definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском. Диагностика: проверьте, не рассказывает ли модель вместо демонстрации"
     },
@@ -449,7 +449,7 @@
       "anchor_id": "p2_embodiment",
       "cross_refs": [
         "#p2_embodiment",
-        "#p7_core_directives"
+        "#p7a_core_directives"
       ],
       "unified_definition": "Директива SP: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском. Диагностика: проверьте, не пропускает ли модель телесный шаг"
     },
@@ -463,9 +463,9 @@
       ],
       "definition": "Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives",
+      "anchor_id": "p7a_core_directives",
       "cross_refs": [
-        "#p7_core_directives"
+        "#p7a_core_directives"
       ],
       "unified_definition": "Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском. Отладка: проверьте активацию при сложных сценах"
     },
@@ -482,7 +482,7 @@
       "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules",
-        "#p7_core_directives"
+        "#p7a_core_directives"
       ],
       "unified_definition": "Директива SP: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском. Диагностика: проверьте, не генерирует ли модель декоративные описания"
     },
@@ -499,7 +499,7 @@
       "anchor_id": "p2_anchor_rules",
       "cross_refs": [
         "#p2_anchor_rules",
-        "#p7_core_directives"
+        "#p7a_core_directives"
       ],
       "unified_definition": "Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}"
     },
@@ -513,9 +513,9 @@
       ],
       "definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives",
+      "anchor_id": "p7a_core_directives",
       "cross_refs": [
-        "#p7_core_directives",
+        "#p7a_core_directives",
         "#p4_spine_mapping"
       ],
       "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [MODEL_NOTE: Наибольший эффект на моделях ≥32B и API; на 12B эффект ограничен]"
@@ -530,10 +530,10 @@
       ],
       "definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives",
+      "anchor_id": "p7a_core_directives",
       "cross_refs": [
-        "#p7_core_directives",
-        "#p7_system_prompt"
+        "#p7a_core_directives",
+        "#p7a_system_prompt"
       ],
       "unified_definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [MODEL_NOTE: Требует моделей ≥32B или API; 12B модели часто игнорируют эту директиву]"
     },
@@ -548,9 +548,9 @@
       ],
       "definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения.",
       "prohibited": [],
-      "anchor_id": "p5_mbti_basics",
+      "anchor_id": "appendix_mbti",
       "cross_refs": [
-        "#p5_mbti_basics",
+        "#appendix_mbti",
         "#p1_core_rules"
       ],
       "unified_definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения. При анализе кросс-типов уточняйте, какой SP имеется в виду"
@@ -564,9 +564,9 @@
       ],
       "definition": "Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли».",
       "prohibited": [],
-      "anchor_id": "p7_ooc_protection",
+      "anchor_id": "p7a_ooc_protection",
       "cross_refs": [
-        "#p7_ooc_protection"
+        "#p7a_ooc_protection"
       ],
       "unified_definition": "Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли». Добавьте Immersion Boundary для максимальной иммерсии. Для базовой защиты используйте OOC Protection."
     },
@@ -579,10 +579,10 @@
       ],
       "definition": "Фиксация формата диалога в конце SP. Предотвращает дрейф разметки.",
       "prohibited": [],
-      "anchor_id": "p7_format_lock",
+      "anchor_id": "p7a_format_lock",
       "cross_refs": [
-        "#p7_format_lock",
-        "#p7_system_prompt"
+        "#p7a_format_lock",
+        "#p7a_system_prompt"
       ],
       "unified_definition": "Фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Диагностика: проверьте, что все Examples и Greeting используют одну систему разметки"
     },
@@ -663,9 +663,9 @@
       "prohibited": [
         "Лорбук"
       ],
-      "anchor_id": "p7_lorebook",
+      "anchor_id": "p7b_lorebook_basics",
       "cross_refs": [
-        "#p7_lorebook"
+        "#p7b_lorebook_basics"
       ],
       "unified_definition": "Определение, назначение, структура записи Диагностика: проверьте приоритет и конфликт записей"
     },
@@ -678,9 +678,9 @@
       ],
       "definition": "Механизм динамического обновления мотивации через AN или LB с XML-тегами.",
       "prohibited": [],
-      "anchor_id": "p7_structured_inject",
+      "anchor_id": "p7b_structured_inject",
       "cross_refs": [
-        "#p7_structured_inject"
+        "#p7b_structured_inject"
       ],
       "unified_definition": "Определение, назначение Диагностика: проверьте приоритет и конфликт инъекций"
     },
@@ -695,9 +695,9 @@
       ],
       "definition": "Протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов.",
       "prohibited": [],
-      "anchor_id": "p7_4k_fallback",
+      "anchor_id": "p7a_4k_fallback",
       "cross_refs": [
-        "#p7_4k_fallback"
+        "#p7a_4k_fallback"
       ],
       "unified_definition": "Определение, назначение Примените fallback для старых моделей"
     },
@@ -806,9 +806,9 @@
       ],
       "definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown.",
       "prohibited": [],
-      "anchor_id": "p7_lorebook",
+      "anchor_id": "p7b_lorebook_basics",
       "cross_refs": [
-        "#p7_lorebook"
+        "#p7b_lorebook_basics"
       ],
       "unified_definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown. Добавьте мировые записи для углубления сеттинга"
     }

@@ -1,8 +1,8 @@
-# Content Ownership Map — Live Character Guide v8
+# Content Ownership Map — Live Character Guide v9
 
-> **Version:** 8.0.0
-> **Last Updated:** 2026-05-14
-> **Status:** Canonical Reference (post-flat-restructure)
+> **Version:** 9.0.0
+> **Last Updated:** 2026-05-15
+> **Status:** Canonical Reference (v9 restructure — Phases 2–3)
 
 ---
 
@@ -17,7 +17,7 @@ This document is the **single source of truth** for "where does concept X live."
 - Read this BEFORE writing any Part
 - Updated after each phase by appending new rows
 
-**v8 restructure note:** The layer system (L1/L2/L3) has been removed. All content is now organized by topic and progression without artificial layer boundaries. Section IDs have been updated to reflect the flat structure. Previous layer-qualified IDs (e.g. `p10_elena_l1`, `p10_omnis_l2_card`) have been consolidated into single entries per character. Cumulative statistics and layer transition criteria have been eliminated.
+**v9 restructure note:** Phase 2 split Part 7 into 7A (System Prompt & Assembly) and 7B (Lorebook, Greeting & Compatibility). MBTI moved from Part 5 to Appendix A. AP-15 (OCEAN Overload) moved from Part 8 to Part 5 as a Warning section; AP-16 renumbered to AP-15. Appendix B (Model Capability Table) created from consolidated MODEL_NOTE tags in Phase 3.3.
 
 ---
 
@@ -79,7 +79,9 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|---------------|-----------------|--------------|-------|
 | OCEAN (Big Five) | Part 5 | p5_ocean_basics | Tool+Interactive | Pentagon widget + золотое правило («Только 1–2 экстремальных полюса»). Contextual limits + validator |
 | Enneagram basics | Part 5 | p5_enneagram_basics | Tool+Interactive | 9 типов, SVG widget with interactive selection |
-| MBTI | Part 5 | p5_mbti_basics | Tool+Interactive | 16 типов, filter grid with composer. Type selection and SP alignment |
+| OCEAN Value Conflicts | Part 5 | p5_ocean_warning | Warning | Moved from Part 8 AP-15. 3 conflict scenarios + OCEAN×Enneagram reference |
+| MBTI | Appendix A | appendix_mbti | Tool+Interactive | Moved from Part 5 in Phase 2.3. 16 типов, filter grid with composer |
+| MBTI Reference | Part 5 | p5_mbti_ref | Reference | Brief note linking to Appendix A |
 | Enneagram → SPINE | Part 5 | p5_cross_instrument_map | Protocol | Страх→LIE, Желание→WANT, Стресс→FLAW, Рост→NEED. Cross-instrument mapping protocol |
 | Enneagram wings | Part 5 | p5_enneagram_wings | Full treatment | Выбор крыла. Wing selection and its effect on SPINE derivation |
 | OCEAN×Enneagram matrix | Part 5 | p5_cross_matrix | Interactive | Корреляция 5×9. Cross-validation between OCEAN and Enneagram profiles |
@@ -95,32 +97,37 @@ This document is the **single source of truth** for "where does concept X live."
 | CoT Tier 3 | Part 6 | p6_cot_tier3 | Template | Full XML blocks. Пример: Эллиот Алдерсон. Advanced CoT with full reasoning |
 | CoT anchors | Part 6 | p6_cot_anchors | Rules | Внутренний процесс как якорь. How CoT serves as behavioral anchor |
 
-### Part 7: Technical Implementation (Техническая реализация)
+### Part 7A: System Prompt & Assembly (System Prompt и сборка)
 
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
-| System Prompt (SP) | Part 7 | p7_system_prompt | Template+Rules | Базовые запреты. Foundation of the System Prompt with core restrictions |
-| CORE DIRECTIVES | Part 7 | p7_core_directives | System | Unified 7-directive system in English. Directives 1–7 (full set) |
-| Tone Frame | Part 7 | p7_tone_frame | Technique | Dual-function SP element (~25-30 tokens). Setting tonal boundaries in SP |
-| Format Lock | Part 7 | p7_format_lock | Rule | Фиксация формата диалога + системы A/B/C. Output format enforcement |
-| Author's Note (AN) | Part 7 | p7_authors_note | Template+Rules | Динамический контекст. 4-section AN with GHOST-activation |
-| Structured Inject | Part 7 | p7_structured_inject | Technique | XML-теги для мотивации в AN. Injecting structured context into AN |
-| Sampling parameters | Part 7 | p7_sampling_params | Reference | Temperature, RepPen, Top P, etc. Recommended values by model type |
-| Lorebook (LB) | Part 7 | p7_lorebook | Template+Rules | Триггеры для GHOST + таблица совместимости фронтендов |
-| Lorebook Mechanics | Part 7 | p7_lorebook_mechanics | Full treatment | Каскад по диапазону, комбинированный триггер, контекстный фильтр |
-| Model Type Checklist | Part 7 | p7_model_checklist | Reference | Summary table by model type (12B/32B+/API). Quick reference for model-specific settings |
-| OOC Protection | Part 7 | p7_ooc_protection | Technique | SP block for OOC reaction (~15 tokens). Includes Immersion Boundary as subsection |
-| Lorebook Advanced | Part 7 | p7_lorebook_advanced | Full treatment | Эмуляция усталости, мета-лор, ложная память. Advanced lorebook techniques |
-| XML tags | Part 7 | p7_xml_tags | Full treatment | Синтаксис и применение XML для Description and structured content |
-| API blocks | Part 7 | p7_api_blocks | Template | Claude/GPT specifics. Platform-specific adaptation notes |
-| 4K-Fallback | Part 7 | p7_4k_fallback | Protocol | Адаптация для ≤4K контекста. Fallback strategies for constrained context windows |
-| Assembly Pipeline | Part 7 | p7_assembly_pipeline | Pipeline | Full card assembly pipeline. End-to-end construction from blocks to deployed card |
+| System Prompt (SP) | Part 7A | p7a_system_prompt | Template+Rules | Split from Part 7 in Phase 2.1 |
+| CORE DIRECTIVES | Part 7A | p7a_core_directives | System | Split from Part 7 in Phase 2.1 |
+| Tone Frame | Part 7A | p7a_tone_frame | Technique | Split from Part 7 in Phase 2.1 |
+| Format Lock | Part 7A | p7a_format_lock | Rule | Split from Part 7 in Phase 2.1 |
+| Author's Note (AN) | Part 7A | p7a_authors_note | Template+Rules | Split from Part 7 in Phase 2.1 |
+| Sampling parameters | Part 7A | p7a_sampling_params | Reference | Split from Part 7 in Phase 2.1 |
+| Model Type Checklist | Part 7A | p7a_model_checklist | Reference | Split from Part 7 in Phase 2.1 |
+| OOC Protection | Part 7A | p7a_ooc_protection | Technique | Split from Part 7 in Phase 2.1 |
+| XML tags | Part 7A | p7a_xml_tags | Full treatment | Split from Part 7 in Phase 2.1 |
+| API blocks | Part 7A | p7a_api_blocks | Template | Split from Part 7 in Phase 2.1 |
+| 4K-Fallback | Part 7A | p7a_4k_fallback | Protocol | Split from Part 7 in Phase 2.1 |
+| Assembly Pipeline | Part 7A | p7a_assembly_pipeline | Pipeline | Split from Part 7 in Phase 2.1 |
+
+### Part 7B: Lorebook, Greeting & Compatibility (Lorebook, приветствие и совместимость)
+
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Lorebook (LB) basics | Part 7B | p7b_lorebook_basics | Template+Rules | Split from Part 7 in Phase 2.1 |
+| Lorebook Mechanics | Part 7B | p7b_lorebook_mechanics | Full treatment | Split from Part 7 in Phase 2.1 |
+| Lorebook Advanced | Part 7B | p7b_lorebook_advanced | Full treatment | Split from Part 7 in Phase 2.1 |
+| Structured Inject | Part 7B | p7b_structured_inject | Technique | Split from Part 7 in Phase 2.1 |
 
 ### Part 8: Anti-patterns (Анти-паттерны)
 
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
-| Anti-pattern overview | Part 8 | p8_antipatterns_overview | Catalog | Классификация анти-паттернов. Index of all 16 anti-patterns with severity ratings |
+| Anti-pattern overview | Part 8 | p8_antipatterns_overview | Catalog | Классификация анти-паттернов. Index of all 15 anti-patterns with severity ratings |
 | AP-1: Token bloat | Part 8 | p8_ap1_token_bloat | Anti-pattern | Раздувание токенов. Overloading card with unnecessary content |
 | AP-2: Missing price | Part 8 | p8_ap2_missing_price | Anti-pattern | Отсутствие цены у якоря. Anchors without behavioral cost |
 | AP-3: Voice in Description | Part 8 | p8_ap3_voice_in_description | Anti-pattern | Голос в Description вместо Examples. Voice belongs in Examples, not Description |
@@ -135,8 +142,7 @@ This document is the **single source of truth** for "where does concept X live."
 | AP-12: XML malformed | Part 8 | p8_ap12_xml_malformed | Anti-pattern | Некорректные XML-теги. Broken XML syntax breaks parsing |
 | AP-13: Lorebook conflict | Part 8 | p8_ap13_lorebook_conflict | Anti-pattern | Конфликт Lorebook-записей. Contradictory entries in lorebook |
 | AP-14: Context violation | Part 8 | p8_ap14_context_violation | Anti-pattern | Нарушение контекстного окна. Content exceeds available context |
-| AP-15: OCEAN overload | Part 8 | p8_ap15_ocean_overload | Anti-pattern | Слишком много экстремальных полюсов. Max 1–2 extreme OCEAN poles. Includes conflict scenarios and OCEAN×Enneagram reference |
-| AP-16: Nested Anchors | Part 8 | p8_ap16_nested_anchors | Anti-pattern | Anchor chains → unpredictability. Nested anchor structures cause erratic behavior |
+| AP-15: Nested Anchors | Part 8 | p8_ap15_nested_anchors | Anti-pattern | Anchor chains → unpredictability. Nested anchor structures cause erratic behavior |
 
 ### Part 9: Diagnostics and Debugging (Диагностика)
 
@@ -167,21 +173,38 @@ This document is the **single source of truth** for "where does concept X live."
 
 ---
 
+### Appendix A: MBTI Reference (Справочник MBTI)
+
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| MBTI | Appendix A | appendix_mbti | Tool+Interactive | Moved from Part 5 in Phase 2.3 |
+
+### Appendix B: Model Capability Table (Таблица возможностей моделей)
+
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Model Capability Table | Appendix B | appendix_model_table | Reference | Created in Phase 3.3 from consolidated MODEL_NOTE tags |
+
+---
+
 ## Summary Table
 
 | Part | Title | Sections |
 |------|-------|----------|
-| Part 1 | Basic Blocks (Базовые блоки) | 5 |
-| Part 2 | Behavioral Anchors (Якоря) | 6 |
-| Part 3 | Voice and Isolation (Голос) | 8 |
-| Part 4 | SPINE Framework (СПИН) | 11 |
-| Part 5 | Psychology Toolkit (Психологический инструментарий) | 6 |
-| Part 6 | CoT — Chain of Thought (Цепочка рассуждений) | 6 |
-| Part 7 | Technical Implementation (Техническая реализация) | 16 |
-| Part 8 | Anti-patterns (Анти-паттерны) | 17 |
-| Part 9 | Diagnostics and Debugging (Диагностика) | 11 |
-| Part 10 | Full Card Examples (Примеры карточек) | 6 |
-| **Total** | | **92** |
+| Part 1 | Basic Blocks | 5 |
+| Part 2 | Behavioral Anchors | 6 |
+| Part 3 | Voice and Isolation | 8 |
+| Part 4 | SPINE Framework | 11 |
+| Part 5 | Psychology Toolkit | 7 (added p5_ocean_warning, p5_mbti_ref; removed p5_mbti_basics) |
+| Part 6 | CoT | 6 |
+| Part 7A | System Prompt & Assembly | 12 |
+| Part 7B | Lorebook, Greeting & Compatibility | 4 |
+| Part 8 | Anti-patterns | 15 (removed AP-15, renumbered AP-16→AP-15) |
+| Part 9 | Diagnostics | 11 |
+| Part 10 | Full Card Examples | 6 |
+| Appendix A | MBTI Reference | 1 |
+| Appendix B | Model Capability Table | 1 |
+| **Total** | | **93** |
 
 ---
 
@@ -195,9 +218,10 @@ Links flow **unidirectionally from complex to simple**:
 Part 4 (SPINE) ──can reference──▶ Part 2 (Anchors)
 Part 5 (OCEAN) ──can reference──▶ Part 4 (SPINE)
 Part 6 (CoT) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
-Part 7 (Technical) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
+Part 7A (System Prompt & Assembly) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
+Part 7B (Lorebook & Greeting) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
 Part 8 (Anti-patterns) ──can reference──▶ Parts 2, 3, 4, 5
-Part 9 (Diagnostics) ──can reference──▶ Parts 7, 8
+Part 9 (Diagnostics) ──can reference──▶ Parts 7A, 7B, 8
 Part 10 (Examples) ──can reference──▶ All Parts
 
 Part 2 (Anchors) ──CANNOT reference──▶ Part 4 (SPINE)
@@ -237,5 +261,5 @@ Before finalizing any Part, verify:
 
 ---
 
-*Document prepared for Live Character Guide v8 rebuild project*
-*Updated 2026-05-14: v8.0.0 — complete rewrite removing layer system, cumulative statistics, and L1/L2/L3 references. Section IDs updated to match current HTML build output (92 sections across 10 parts).*
+*Document prepared for Live Character Guide v9 rebuild project*
+*Updated 2026-05-15: v9.0.0 — Phases 2–3 restructure. Part 7 split into 7A/7B, MBTI moved to Appendix A, AP-15 OCEAN Overload moved to Part 5, AP-16 renumbered to AP-15, Appendix B added for Model Capability Table. 93 sections across 10 parts + 2 appendices.*

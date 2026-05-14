@@ -4,6 +4,11 @@
 
   v8: AP-15 merged, sequential AP ordering, reduced duplication
   Phase 6: Reduced content duplication — APs reference canonical Parts instead of re-explaining
+
+  Changelog (v9 restructure):
+  - Phase 2.2: Removed AP-15 section (OCEAN Overload) — content moved to Part 5 p5_ocean_warning
+  - Phase 2.2: Renumbered AP-16 (Nested Anchors) to AP-15
+  - Removed part-resume div
 -->
 <section  data-section="p8_antipatterns_overview" data-toc-nav>
 <h2>Анти-паттерны</h2>
@@ -38,8 +43,8 @@
 <tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td><span class="tag tip">Средняя</span></td><td>Валидировать XML-теги</td></tr>
 <tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td><span class="tag tip">Средняя</span></td><td>Проверить консистентность записей</td></tr>
 <tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td><span class="tag risk">Высокая</span></td><td>Использовать 4K-Fallback Protocol</td></tr>
-<tr><td><a href="#p8_ap15_ocean_overload">AP-15</a></td><td>OCEAN Overload</td><td><span class="tag tip">Средняя</span></td><td>Оставить 1–2 экстремальных полюса</td></tr>
-<tr><td><a href="#p8_ap16_nested_anchors">AP-16</a></td><td>Nested Anchors</td><td><span class="tag tip">Средняя</span></td><td>Разбить на атомарные якоря</td></tr>
+<tr><td>—</td><td>OCEAN Overload</td><td><span class="tag tip">Средняя</span></td><td>OCEAN value conflicts → Part 5: OCEAN Warning</td></tr>
+<tr><td><a href="#p8_ap15_nested_anchors">AP-15</a></td><td>Nested Anchors</td><td><span class="tag tip">Средняя</span></td><td>Разбить на атомарные якоря</td></tr>
 </tbody>
 </table>
 </div>
@@ -90,7 +95,7 @@
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
-<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Рекомендуемые значения → <a href="#p7_sampling_params">параметры сэмплинга (Part 7)</a>.</p>
+<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Рекомендуемые значения → <a href="#p7a_sampling_params">параметры сэмплинга (Part 7A)</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding">
@@ -108,7 +113,7 @@
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
-<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Обоснование → <a href="#p7_sampling_params">параметры сэмплинга (Part 7)</a>.</p>
+<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Обоснование → <a href="#p7a_sampling_params">параметры сэмплинга (Part 7A)</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap8_ghost_no_anchors">
@@ -199,7 +204,7 @@ WANT: {{want}}
 WANT: {{want}}
 &lt;/spine&gt;</code></pre>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны, закрыты правильно. См. также <a href="#p7_xml_tags">полный XML-пример (Part 7)</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны, закрыты правильно. См. также <a href="#p7a_xml_tags">полный XML-пример (Part 7A)</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap13_lorebook_conflict">
@@ -207,7 +212,7 @@ WANT: {{want}}
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
 <p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
-<p><strong>Решение:</strong> Проверяйте консистентность всех <a href="#p7_lorebook">Lorebook (Part 7)</a> записей с Description</p>
+<p><strong>Решение:</strong> Проверяйте консистентность всех <a href="#p7b_lorebook_basics">Lorebook (Part 7B)</a> записей с Description</p>
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>
 </div>
 </section>
@@ -216,43 +221,11 @@ WANT: {{want}}
 <h3>AP-14: Нарушение контекстного окна</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
-<p><strong>Решение:</strong> Используйте <a href="#p7_4k_fallback">4K-Fallback Protocol (Part 7)</a> или выберите модель с большим контекстом</p>
+<p><strong>Решение:</strong> Используйте <a href="#p7a_4k_fallback">4K-Fallback Protocol (Part 7A)</a> или выберите модель с большим контекстом</p>
 </div>
 </section>
-<section  data-section="p8_ap15_ocean_overload">
-<div class="antipattern-card">
-<h3>AP-15: Перегрузка OCEAN (OCEAN Overload)</h3>
-<p><strong>Симптом:</strong> > 2 экстремальных OCEAN полюсов</p>
-<p><strong>Причина:</strong> Попытка сделать персонажа "интересным" через противоречия</p>
-<p><strong>Решение:</strong> 1-2 экстремальных полюса. Больше — внутренняя противоречивость. Золотое правило OCEAN-профиля → <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
-
-<div class="callout important">
-<p><strong>📌 Важно:</strong> 0 экстремумов = забываемый персонаж. 1-2 = запоминающийся. 3+ = inconsistent.</p>
-</div>
-
-<h4>Конфликт-сценарии при 3+ экстремальных полюсах</h4>
-
-<p>Три и более экстремальных полюса создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
-
-<h4>Сценарий 1: Низкая A + Высокая E + Высокий N</h4>
-<p><strong>Расшифровка:</strong> Низкая Доброжелательность (агрессивный) + Высокая Экстраверсия (доминирующий) + Высокий Нейротизм (тревожный).</p>
-<p>Модель мечется между агрессией, доминированием и тревогой — персонаж получается непредсказуемым не в смысле «сложный», а в смысле «неконсистентный». Решение: уберите один экстремум или добавьте связующий контекст в SPINE.</p>
-
-<h4>Сценарий 2: Высокая O + Низкая C + Высокий N</h4>
-<p><strong>Расшифровка:</strong> Высокая Открытость (творческий) + Низкая Добросовестность (импульсивный) + Высокий Нейротизм (тревожный).</p>
-<p>Персонаж генерирует идеи, но не доводит до конца, и при этом тревожится о результатах. Модель производит хаотичный, невротичный текст вместо целенаправленного творчества. Решение: добавьте FLAW, который объясняет импульсивность.</p>
-
-<h4>Сценарий 3: Высокая E + Низкая A + Низкий N</h4>
-<p><strong>Расшифровка:</strong> Высокая Экстраверсия (харизматичный) + Низкая Доброжелательность (манипулятивный) + Низкий Нейротизм (бесстрашный).</p>
-<p>«Харизматичный социопат» — работает для Tyler Durden, но при добавлении четвёртого экстремального полюса (например, Высокая O) модель начинает добавлять черты, противоречащие ключевой концепции. Решение: максимум 3 экстремума для 8K+, 2 для 4K.</p>
-
-<h4>OCEAN×Enneagram: проверка через тип</h4>
-<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен. Используйте <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix (Part 5)</a> для валидации.</p>
-
-</div>
-</section>
-<section  data-section="p8_ap16_nested_anchors">
-<h3>AP-16: Вложенные якоря (Nested Anchors)</h3>
+<section  data-section="p8_ap15_nested_anchors">
+<h3>AP-15: Вложенные якоря (Nested Anchors)</h3>
 
 <div class="antipattern-card">
 <div class="problem-block">
@@ -274,12 +247,3 @@ WANT: {{want}}
 <p><span class="remark-icon" aria-hidden="true">→</span> Анти-паттерны проверены. Протестируйте карточку → <a href="#p9_symptom_table">Диагностика (Part 9)</a></p>
 
 </section>
-
-<div class="part-resume">
-  <h3>Что вы теперь умеете</h3>
-  <ul>
-    <li>Распознавать 16 анти-паттернов в карточках персонажей</li>
-    <li>Применять Symptom→Cause→Solution для диагностики каждого AP</li>
-    <li>Связывать анти-паттерны с правилами из Parts 1-7 через обратные ссылки</li>
-  </ul>
-</div>

@@ -18,6 +18,11 @@
 
   - Added data-toc-nav to p5_cross_instrument_map (fix 1.5)
   - Added aria-hidden="true" to all remark-icon spans (fix 8.13/10.5)
+
+  Changelog (v9 restructure):
+  - Phase 2.2: Moved AP-15 OCEAN Overload content from Part 8 to Part 5 as p5_ocean_warning
+  - Phase 2.3: Moved MBTI section to appendix_mbti.html, replaced with brief reference
+  - Removed part-resume div
 -->
 <section  data-section="p5_ocean_basics" data-toc-nav>
 <h2>Психологический инструментарий</h2>
@@ -27,12 +32,12 @@
 <p><strong>OCEAN</strong> — модель из 5 личностных измерений. Используется для проверки внутренней консистентности персонажа и дополнения фреймворка SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)).</p>
 
 <div class="callout important">
-<p><strong>📌 Золотое правило профиля:</strong> Только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70). Каждый дополнительный экстремальный полюс снижает стабильность поведения. Нарушение = AP-15 (OCEAN Overload).</p>
+<p><strong>📌 Золотое правило профиля:</strong> Только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70). Каждый дополнительный экстремальный полюс снижает стабильность поведения. Нарушение = OCEAN Value Conflicts (см. ниже).</p>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Подробный разбор сценариев конфликта полюсов → <a href="#p8_ap15_ocean_overload">AP-15: OCEAN Overload (Part 8)</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Подробный разбор сценариев конфликта полюсов → <a href="#p5_ocean_warning">OCEAN Value Conflicts</a></p>
 
 <div class="callout tip">
-<p><strong>💡 Нарушение этого правила — анти-паттерн AP-15.</strong> Примеры «до/после» и формулировка правила → <a href="#p8_ap15_ocean_overload">AP-15: OCEAN Overload → Part 8</a></p>
+<p><strong>💡 Нарушение этого правила — анти-паттерн.</strong> Примеры «до/после» и формулировка правила → <a href="#p5_ocean_warning">OCEAN Value Conflicts</a></p>
 </div>
 
 <h3>5 измерений OCEAN</h3>
@@ -131,8 +136,36 @@
 </details>
 
 <p><span class="remark-icon" aria-hidden="true">→</span>
-Как применить OCEAN при сборке карточки → <a href="#p7_assembly_pipeline">Конвейер сборки (Part 7)</a>
+Как применить OCEAN при сборке карточки → <a href="#p7a_assembly_pipeline">Конвейер сборки (Part 7A)</a>
 </p>
+
+</section>
+
+<section  data-section="p5_ocean_warning" data-toc-nav>
+<h3>Warning: OCEAN Value Conflicts</h3>
+
+<div class="callout warn">
+<p><strong>⚠️ OCEAN Overload:</strong> Более 2 экстремальных полюсов OCEAN создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
+</div>
+
+<h4>Конфликт-сценарии при 3+ экстремальных полюсах</h4>
+
+<p>Три и более экстремальных полюса создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
+
+<h4>Сценарий 1: Низкая A + Высокая E + Высокий N</h4>
+<p><strong>Расшифровка:</strong> Низкая Доброжелательность (агрессивный) + Высокая Экстраверсия (доминирующий) + Высокий Нейротизм (тревожный).</p>
+<p>Модель мечется между агрессией, доминированием и тревогой — персонаж получается непредсказуемым не в смысле «сложный», а в смысле «неконсистентный». Решение: уберите один экстремум или добавьте связующий контекст в SPINE.</p>
+
+<h4>Сценарий 2: Высокая O + Низкая C + Высокий N</h4>
+<p><strong>Расшифровка:</strong> Высокая Открытость (творческий) + Низкая Добросовестность (импульсивный) + Высокий Нейротизм (тревожный).</p>
+<p>Персонаж генерирует идеи, но не доводит до конца, и при этом тревожится о результатах. Модель производит хаотичный, невротичный текст вместо целенаправленного творчества. Решение: добавьте FLAW, который объясняет импульсивность.</p>
+
+<h4>Сценарий 3: Высокая E + Низкая A + Низкий N</h4>
+<p><strong>Расшифровка:</strong> Высокая Экстраверсия (харизматичный) + Низкая Доброжелательность (манипулятивный) + Низкий Нейротизм (бесстрашный).</p>
+<p>«Харизматичный социопат» — работает для Tyler Durden, но при добавлении четвёртого экстремального полюса (например, Высокая O) модель начинает добавлять черты, противоречащие ключевой концепции. Решение: максимум 3 экстремума для 8K+, 2 для 4K.</p>
+
+<h4>OCEAN×Enneagram: проверка через тип</h4>
+<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен. Используйте <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix</a> для валидации.</p>
 
 </section>
 
@@ -179,51 +212,9 @@
 
 </section>
 
-<section  data-section="p5_mbti_basics" data-toc-nav>
+<section  data-section="p5_mbti_ref" data-toc-nav>
 <h3>MBTI</h3>
-
-<p><strong>MBTI</strong> — модель из 16 типов на 4 осях. Менее научная чем OCEAN, но популярная.</p>
-
-<h4>4 оси MBTI</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Ось</th><th>Полюс A</th><th>Полюс B</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>E/I</strong></td><td>Extraversion</td><td>Introversion</td></tr>
-<tr><td><strong>S/N</strong></td><td>Sensing</td><td>Intuition</td></tr>
-<tr><td><strong>T/F</strong></td><td>Thinking</td><td>Feeling</td></tr>
-<tr><td><strong>J/P</strong></td><td>Judging</td><td>Perceiving</td></tr>
-</tbody>
-</table>
-</div>
-
-<h4>Темпераменты</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Группа</th><th>Типы</th><th>Цвет</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>NT</strong> (Аналитики)</td><td>INTJ, INTP, ENTJ, ENTP</td><td class="temperament-nt">Фиолетовый</td></tr>
-<tr><td><strong>NF</strong> (Дипломаты)</td><td>INFJ, INFP, ENFJ, ENFP</td><td class="temperament-nf">Розовый</td></tr>
-<tr><td><strong>SJ</strong> (Стражи)</td><td>ISTJ, ISFJ, ESTJ, ESFJ</td><td class="temperament-sj">Голубой</td></tr>
-<tr><td><strong>S·P</strong> (Исследователи)</td><td>ISTP, ISFP, ESTP, ESFP</td><td class="temperament-sp">Оранжевый</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><em>(S·P = темперамент Keirsey <strong>S</strong>ensing-<strong>P</strong>erceiving, не <abbr title="System Prompt">SP</abbr>)</em></p>
-
-<div id="mbti-embed" class="mbti-embed"></div>
-
-<div class="callout tip">
-<p><strong>💡 MBTI — справочный инструмент.</strong> Для создания карточки используйте OCEAN (полюса → якоря) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.</p>
-</div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Следующие секции: <a href="#p5_enneagram_wings">Enneagram Wings</a>, <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix</a>.</p>
-
+<p>MBTI доступен как справочный инструмент в <a href="#appendix_mbti">Appendix A</a>. Для создания карточки используйте OCEAN (полюса → якоря) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.</p>
 </section>
 
 <section  data-section="p5_cross_instrument_map" data-toc-nav>
@@ -329,13 +320,3 @@
 <div id="persona-synthesis" class="persona-synthesis-embed"></div>
 
 </section>
-
-<div class="part-resume">
-  <h3>Что вы теперь умеете</h3>
-  <ul>
-    <li>Заполнять OCEAN-профиль с не более чем 1-2 экстремальными полюсами</li>
-    <li>Валидировать SPINE через Enneagram→SPINE справочную карту и OCEAN→SPINE Validation Reference</li>
-    <li>Использовать Wings и OCEAN×Enneagram для углубления персонажа</li>
-    <li>Диагностировать противоречия между OCEAN/Enneagram-профилем и SPINE-элементами</li>
-  </ul>
-</div>

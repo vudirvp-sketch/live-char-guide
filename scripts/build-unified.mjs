@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Build Unified Script for Live Character Guide v8
+ * @fileoverview Build Unified Script for Live Character Guide v9
  * @module scripts/build-unified
- * @version 8.0.0
+ * @version 9.0.0
  *
  * @description
- * Reads src/master/part_*.html and produces
+ * Reads src/master/part_*.html and appendix_*.html and produces
  * a single set of output files in build/parts/.
  * All sections are processed equally — no layer-based filtering.
  *
- * Input:  src/master/part_01.html ... part_10.html
+ * Input:  src/master/part_01.html ... part_10.html (including part_07a, part_07b)
+ *         src/master/appendix_mbti.html, appendix_model_table.html
  *         data/glossary.json
  * Output: build/parts/part_01.html ... part_10.html
+ *         build/parts/appendix_mbti.html, appendix_model_table.html
  *         build/parts/manifest.json
  *         build/parts/glossary.html
  *         build/parts/footer.html
@@ -233,14 +235,15 @@ async function buildUnified() {
   const allSections = [];
   const buildErrors = [];
   const assembledParts = [];
+  const assembledAppendices = [];
   let combinedHTMLContent = '';
 
   for (const file of partFiles) {
     const filepath = join(UNIFIED_DIR, file);
     const content = await readFile(filepath, 'utf-8');
 
-    // Extract part number
-    const partMatch = file.match(/part_(\d+)/);
+    // Extract part number (with optional letter suffix for part_07a, part_07b)
+    const partMatch = file.match(/part_(\d+[a-z]?)/);
     const partNum = partMatch ? partMatch[1] : '00';
 
     const { sections, errors } = parseUnifiedHTML(content, file);
@@ -281,6 +284,43 @@ async function buildUnified() {
     log('INFO', `Generated: build/parts/part_${partNum}.html (${sections.length} sections)`);
   }
 
+  // Process appendix files
+  const appendixFiles = unifiedFiles.filter(f => f.startsWith('appendix_') && f.endsWith('.html')).sort();
+
+  for (const file of appendixFiles) {
+    const filepath = join(UNIFIED_DIR, file);
+    const content = await readFile(filepath, 'utf-8');
+    const { sections, errors } = parseUnifiedHTML(content, file);
+
+    if (errors.length > 0) {
+      buildErrors.push(...errors);
+      for (const err of errors) {
+        log('ERROR', `${err.file}: ${err.message}`);
+      }
+    }
+
+    for (const section of sections) {
+      section.part = 'appendix';
+      allSections.push(section);
+    }
+
+    const outputPath = join(outputDir, file);
+    await writeFile(outputPath, content);
+    combinedHTMLContent += content;
+
+    const appendixAnchors = sections.map(s => s.sectionId);
+    const appendixTitle = sections[0]?.title || file.replace('.html', '');
+
+    // Append to manifest appendices (will be added to manifest)
+    assembledAppendices.push({
+      file: file,
+      title: appendixTitle,
+      anchors: appendixAnchors
+    });
+
+    log('INFO', `Generated: build/parts/${file} (${sections.length} sections)`);
+  }
+
   // Check for duplicate data-section IDs
   const seenIds = new Set();
   const duplicateIds = [];
@@ -301,14 +341,15 @@ async function buildUnified() {
     process.exit(1);
   }
 
-  // Generate manifest.json (FIX-14: only version, format, parts)
+  // Generate manifest.json (v9: version, format, parts, appendices)
   const manifest = {
-    version: '8.0.0',
+    version: '9.0.0',
     format: 'unified',
-    parts: assembledParts
+    parts: assembledParts,
+    appendices: assembledAppendices
   };
   await writeFile(join(outputDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
-  log('INFO', `Generated: build/parts/manifest.json (${assembledParts.length} parts)`);
+  log('INFO', `Generated: build/parts/manifest.json (${assembledParts.length} parts, ${assembledAppendices.length} appendices)`);
 
   // Generate glossary.html
   const glossaryHtml = await generateGlossaryHTML();
@@ -319,7 +360,7 @@ async function buildUnified() {
 
   // Generate footer.html
   const footerHtml = `<footer class="guide-footer">
-<div class="guide-meta">Live Character Guide v8.0.0 &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
+<div class="guide-meta">Live Character Guide v9.0.0 &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
 </footer>`;
   await writeFile(join(outputDir, 'footer.html'), footerHtml);
   log('INFO', 'Generated: build/parts/footer.html');
@@ -328,7 +369,7 @@ async function buildUnified() {
   const registry = {};
   for (const section of allSections) {
     registry[section.sectionId] = {
-      part: parseInt(section.part),
+      part: section.part,
       topic: section.title || ''
     };
   }
@@ -338,11 +379,12 @@ async function buildUnified() {
   // Generate build-manifest.json
   const contentHash = createHash('sha256').update(combinedHTMLContent).digest('hex');
   const buildManifest = {
-    version: '8.0.0',
+    version: '9.0.0',
     format: 'unified',
     builtAt: new Date().toISOString(),
     sectionCount: allSections.length,
     partCount: partFiles.length,
+    appendixCount: appendixFiles.length,
     contentHash: `sha256:${contentHash.slice(0, 16)}`
   };
   await writeFile(join(BUILD_DIR, 'build-manifest.json'), JSON.stringify(buildManifest, null, 2));
@@ -353,6 +395,7 @@ async function buildUnified() {
   return {
     sectionCount: allSections.length,
     partCount: partFiles.length,
+    appendixCount: appendixFiles.length,
     errors: buildErrors.length
   };
 }
@@ -367,6 +410,7 @@ buildUnified()
     console.log('UNIFIED BUILD SUCCESSFUL');
     console.log('============================================');
     console.log(`Parts: ${result.partCount}`);
+    console.log(`Appendices: ${result.appendixCount}`);
     console.log(`Sections: ${result.sectionCount}`);
     console.log(`Errors: ${result.errors}`);
     process.exit(result.errors > 0 ? 1 : 0);
