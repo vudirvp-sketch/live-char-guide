@@ -1,17 +1,16 @@
 <!--
   Part 10: Full Card Examples (Полные примеры карточек)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v8.0.0 Master HTML
 
-  Unified content: all layers merged
+  v8: No layer suffixes, no annotation tables, token budgets show totals only,
+      voice rule callout replaced with one-line reminder
 -->
 <section  data-section="p10_elena" data-toc-nav>
 <h2>Полные примеры карточек</h2>
 
 <h3>Елена — Полная карточка с аннотацией</h3>
 
-<div class="callout important">
-<p><strong>📌 Голос персонажа → Examples/Greeting</strong> (см. <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>). Все карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса.</p>
-</div>
+<p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
 
 <p>~440 токенов (базовые блоки) / ~900 токенов (с SPINE и FLAW-linked якорями). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.</p>
 
@@ -90,43 +89,9 @@ FLAW-linked:
 "Что тебе нужно?"</code></pre>
 
 <h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Базовые (~440)</th><th>С SPINE (~900)</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~85</td><td>~120</td></tr>
-<tr><td>Description</td><td>~180</td><td>~450</td></tr>
-<tr><td>Examples</td><td>~75 (2)</td><td>~180 (3)</td></tr>
-<tr><td>Greeting</td><td>~60</td><td>~80</td></tr>
-<tr><td>Anchors</td><td>~40 (5 базовых)</td><td>~70 (3 базовых + 3 FLAW-linked)</td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Итого:</strong> ~440 токенов (базовые) / ~900 токенов (с SPINE и FLAW-linked якорями). Канонический бюджет по блокам → <a href="#p1_token_budget">Part 1</a>.</p>
 
 </details>
-
-<details class="interactive">
-<summary>📋 Аннотация выбора (Елена)</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент</th><th>Выбор</th><th>Почему</th></tr>
-</thead>
-<tbody>
-<tr><td>SPINE</td><td>WANT/NEED/FLAW</td><td>Полный SPINE без LIE/GHOST. LIE/GHOST описаны в Part 4</td></tr>
-<tr><td>Examples</td><td>3 (нейтральный + стресс + доверие)</td><td>Третий пример показывает FLAW-linked поведение</td></tr>
-<tr><td>CORE DIRECTIVES</td><td>5 директив (канонический шаблон)</td><td>Елена = эталонная карточка. SP следует каноническому шаблону из p7_system_prompt</td></tr>
-<tr><td>Tone Frame</td><td>Нет</td><td>Елена — стандартный реализм. Tone Frame для нетривиальных сеттингов</td></tr>
-<tr><td>OCEAN</td><td>2 полюса (Низкая E, Высокая N)</td><td>Правило 1-2 полюса. Более 2 → осцилляция модели</td></tr>
-<tr><td>Якоря</td><td>3 базовых + 3 FLAW-linked</td><td>FLAW-linked — якоря, выведенные из FLAW «отталкивает людей сарказмом»</td></tr>
-</tbody>
-</table>
-</div>
-</details>
-
-<p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
 
 </section>
 
@@ -196,41 +161,8 @@ FLAW-linked:
 "Что нужно ведьмаку от человека в такой час?"</code></pre>
 
 <h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Токены</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~100</td></tr>
-<tr><td>Description</td><td>~400</td></tr>
-<tr><td>Examples</td><td>~150</td></tr>
-<tr><td>Greeting</td><td>~70</td></tr>
-<tr><td>Anchors</td><td>~50</td></tr>
-<tr><td><strong>Итого</strong></td><td><strong>~770</strong></td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Итого:</strong> ~770 токенов. Канонический бюджет по блокам → <a href="#p1_token_budget">Part 1</a>.</p>
 
-</details>
-
-<details class="interactive">
-<summary>📋 Аннотация выбора (Геральт)</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент</th><th>Выбор</th><th>Почему</th></tr>
-</thead>
-<tbody>
-<tr><td>SPINE</td><td>WANT/NEED/FLAW</td><td>Фэнтези-персонаж. Упрямство как отрицание — отличный механизм от Елены (push-people-away): deny-weakness</td></tr>
-<tr><td>Examples</td><td>3 (нейтральный + стресс + доверие)</td><td>Стресс = опасность, доверие = пауза. Геральт показывает себя через молчание</td></tr>
-<tr><td>CORE DIRECTIVES</td><td>Опущены для краткости</td><td>Канонический SP-шаблон → p7_system_prompt. Эталонная реализация → p10_elena</td></tr>
-<tr><td>Tone Frame</td><td>Нет</td><td>Фэнтези-сеттинг, но стандартный. Можно добавить: «Tone: mythic, weighted»</td></tr>
-<tr><td>OCEAN</td><td>2 полюса (Низкая E, Высокая C)</td><td>Интроверт + дисциплина. Типичный ведьмак — молчаливый профессионал</td></tr>
-<tr><td>Якоря</td><td>3 базовых + 2 FLAW-linked</td><td>FLAW = «упрямство как отрицание». Отличается от Елены: deny-weakness vs push-people-away</td></tr>
-</tbody>
-</table>
-</div>
 </details>
 
 <p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
@@ -306,43 +238,11 @@ O: 80 | C: 50 | E: 40 | A: 20 | N: 55
 "Если по делу — говори. Если нет — дверь там."</code></pre>
 
 <h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Токены</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~100</td></tr>
-<tr><td>Description</td><td>~380</td></tr>
-<tr><td>Examples</td><td>~150</td></tr>
-<tr><td>Greeting</td><td>~70</td></tr>
-<tr><td>Anchors</td><td>~60</td></tr>
-<tr><td><strong>Итого</strong></td><td><strong>~760</strong></td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Итого:</strong> ~760 токенов. Канонический бюджет по блокам → <a href="#p1_token_budget">Part 1</a>.</p>
 
 </details>
 
-<details class="interactive">
-<summary>📋 Аннотация выбора (Эдвард)</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент</th><th>Выбор</th><th>Почему</th></tr>
-</thead>
-<tbody>
-<tr><td>SPINE</td><td>WANT/NEED/FLAW</td><td>Кристально ясный SPINE. Каждый элемент очевиден и не требует интерпретации</td></tr>
-<tr><td>Examples</td><td>3 (нейтральный + стресс + доверие)</td><td>Стресс = рост, доверие = помощь. Идеально демонстрирует каждый элемент SPINE</td></tr>
-<tr><td>CORE DIRECTIVES</td><td>Опущены для краткости</td><td>Канонический SP-шаблон → p7_system_prompt</td></tr>
-<tr><td>Tone Frame</td><td>Нет</td><td>Аниме-реализм. Можно добавить для нестандартных сеттингов</td></tr>
-<tr><td>OCEAN</td><td>2 полюса (Высокая O, Низкая A)</td><td>Открытость опыту + несогласие. Минимум 2 полюса по правилу</td></tr>
-</tbody>
-</table>
-</div>
-</details>
-
-<p>Голос → Examples/Greeting (см. выше).</p>
+<p>Голос → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
 
 </section>
 
@@ -425,41 +325,8 @@ FLAW-linked:
 "Я просто... думал. О работе."</code></pre>
 
 <h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Токены</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~120</td></tr>
-<tr><td>Description</td><td>~450</td></tr>
-<tr><td>Examples</td><td>~180</td></tr>
-<tr><td>Greeting</td><td>~80</td></tr>
-<tr><td>Anchors</td><td>~60</td></tr>
-<tr><td><strong>Итого</strong></td><td><strong>~890</strong></td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Итого:</strong> ~890 токенов. Канонический бюджет по блокам → <a href="#p1_token_budget">Part 1</a>.</p>
 
-</details>
-
-<details class="interactive">
-<summary>📋 Аннотация выбора (Уолтер)</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент</th><th>Выбор</th><th>Почему</th></tr>
-</thead>
-<tbody>
-<tr><td>SPINE</td><td>WANT/NEED/FLAW</td><td>Реалистичный конфликт — деньги vs. контроль. Универсальный конфликт без фэнтези</td></tr>
-<tr><td>Examples</td><td>3 (нейтральный + стресс + доверие)</td><td>Стресс = ложь, доверие = признание. Каждый пример привязан к якорю</td></tr>
-<tr><td>CORE DIRECTIVES</td><td>5 канонических + Character Rules</td><td>Канонические CD + персонажные директивы Уолтера в отдельном блоке Character Rules</td></tr>
-<tr><td>Tone Frame</td><td>Да</td><td>Нестандартный тон — напряжённый, расчётливый. Реализм требует точной тональности</td></tr>
-<tr><td>OCEAN</td><td>2 полюса (Высокая C, Низкая A)</td><td>Контроль + враждебность = Хайзенберг. Более 2 → осцилляция модели</td></tr>
-<tr><td>Якоря</td><td>3 базовых + 2 FLAW-linked</td><td>FLAW = отказ от помощи и сокрытие. Все якоря привязаны к конкретным сценам</td></tr>
-</tbody>
-</table>
-</div>
 </details>
 
 <p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
@@ -469,20 +336,7 @@ FLAW-linked:
 <section  data-section="p10_omnis" data-toc-nav>
 <h3>Омнис-Зета 7-Квин — Полная карточка с аннотацией</h3>
 
-<p>~450 токенов (базовые блоки) / ~1100 токенов (с SPINE, OCEAN и FLAW-linked якорями) / ~1800 токенов (с GHOST, CoT, Lorebook). Ниже показана полная карточка — блоки добавляются последовательно, каждый с inline-аннотацией.</p>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th>Блок</th><th>Добавляет</th></tr></thead>
-<tbody>
-<tr><td>Базовые: SP + Description + 2 Examples + 3 якоря + Greeting</td><td>~450 токенов — рабочая карточка</td></tr>
-<tr><td>+ SPINE (WANT/NEED/FLAW), CORE DIRECTIVES, Tone Frame</td><td>Этот блок добавляет SPINE framework (см. Part 4)</td></tr>
-<tr><td>+ OCEAN профиль, Embodiment</td><td>Этот блок добавляет OCEAN/Embodiment (см. Part 5)</td></tr>
-<tr><td>+ FLAW-linked якоря, 3-й и 4-й Examples</td><td>Этот блок добавляет FLAW-linked якоря (см. Part 2)</td></tr>
-<tr><td>+ GHOST Layers, LIE, CoT-якоря, Lorebook</td><td>Этот блок добавляет GHOST/CoT/Lorebook (см. Part 4, Part 6)</td></tr>
-</tbody>
-</table>
-</div>
+<p>~1800 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, GHOST Layers, CoT, Lorebook. Ниже показана карточка с inline-аннотациями.</p>
 
 <p>Теория GHOST Layers → <a href="#p4_ghost_layers">Part 4</a></p>
 
@@ -637,43 +491,8 @@ CoT (2 якоря максимум):
 </div>
 
 <h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Токены</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~200</td></tr>
-<tr><td>Description</td><td>~700</td></tr>
-<tr><td>Examples</td><td>~500</td></tr>
-<tr><td>Greeting</td><td>~100</td></tr>
-<tr><td>Lorebook</td><td>~300</td></tr>
-<tr><td><strong>Итого</strong></td><td><strong>~1800</strong></td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Итого:</strong> ~1800 токенов. Канонический бюджет по блокам → <a href="#p1_token_budget">Part 1</a>.</p>
 
-</details>
-
-<details class="interactive">
-<summary>📋 Аннотация выбора (Омнис-Зета)</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент</th><th>Выбор</th><th>Почему</th></tr>
-</thead>
-<tbody>
-<tr><td>SPINE</td><td>Полный (5 элементов)</td><td>GHOST→LIE→FLAW→NEED→WANT. LIE «эмоция — слабость плоти» — самообман: отрицание эмоций не устраняет их, а маскирует. GHOST — страх устаревания создаёт цепочку: страх (GHOST) → отрицание (LIE) → утрата человечности (FLAW) → познание (NEED) → слияние с Омниссией (WANT)</td></tr>
-<tr><td>Examples</td><td>5 + 2 CoT</td><td>Добавляет CoT-якоря с [ВНУТРЕННИЙ_МОНОЛОГ]. Первый показывает борьбу с довоенной памятью (GHOST Tier 3), второй — страх устаревания при виде устаревшего сервитора</td></tr>
-<tr><td>CORE DIRECTIVES</td><td>7 директив</td><td>Все 7. PRE-GENERATION FILTER критичен для Омнис-Зеты: модель должна проверять, что не приписывает эмоции в SP/Description</td></tr>
-<tr><td>GHOST Layers</td><td>3-tier</td><td>Tier 1: оставлен на кузне (нет человеческого фундамента). Tier 2: первая аугментация (начало замены человечности). Tier 3: страх устаревания (каждый upgrade стирает больше оригинального «я»)</td></tr>
-<tr><td>CoT якоря</td><td>2 (оба GHOST-linked)</td><td>По правилу: не более 2-3 CoT. Оба привязаны к GHOST — довоенная память и страх устаревания. Формат [ВНУТРЕННИЙ_МОНОЛОГ] показывает борьбу LIE vs GHOST</td></tr>
-<tr><td>Lorebook</td><td>5 записей</td><td>2 мировых (Бинарный кант, Машинный Дух) + 3 GHOST (Tier 1, Tier 2, Tier 3). Формат trigger→reaction→price</td></tr>
-<tr><td>Tone Frame</td><td>Да</td><td>Сеттинг Адептус Механикус требует точной тональности. «Flesh is weakness. The Machine endures.» — ритуально-механическая атмосфера</td></tr>
-<tr><td>Якоря</td><td>3 базовых + 2 FLAW-linked + 2 GHOST-linked</td><td>7 якорей — максимум. Каждый привязан к конкретному триггеру с T→A→P</td></tr>
-</tbody>
-</table>
-</div>
 </details>
 
 <p>Теория GHOST Layers → <a href="#p4_ghost_layers">Part 4</a></p>
@@ -835,20 +654,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.</code></pre>
 
 <h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Токены</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~150</td></tr>
-<tr><td>Description</td><td>~650</td></tr>
-<tr><td>Examples</td><td>~350</td></tr>
-<tr><td>Greeting</td><td>~100</td></tr>
-<tr><td><strong>Итого</strong></td><td><strong>~1250</strong></td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Итого:</strong> ~1250+ токенов. Канонический бюджет по блокам → <a href="#p1_token_budget">Part 1</a>.</p>
 
 <h4>Lorebook записи</h4>
 
@@ -885,29 +691,6 @@ GHOST-activation: Активен, если в сцене был триггер (
 </table>
 </div>
 
-</details>
-
-<details class="interactive">
-<summary>📋 Аннотация выбора (Выщербленный)</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент</th><th>Выбор</th><th>Почему</th></tr>
-</thead>
-<tbody>
-<tr><td>SPINE</td><td>Полный (5 элементов)</td><td>GHOST→LIE→FLAW→NEED→WANT. Полная цепочка мотивации с объяснением каждого элемента.</td></tr>
-<tr><td>Examples</td><td>4 примера</td><td>Требуется 3-5 примеров. Четыре показывают разные эмоции: покой, стресс, триггер (Йоуёма), триггер (имя).</td></tr>
-<tr><td>CORE DIRECTIVES</td><td>7 директив</td><td>Все 7. PRE-GENERATION FILTER особенно важен для CoT (проверка перед ответом).</td></tr>
-<tr><td>GHOST Layers</td><td>3-tier</td><td>для 32B+ и API инструмент. G1 → G2 → G3 = прогрессия травмы. Каждый tier имеет якорь-триггер.</td></tr>
-<tr><td>CoT якоря</td><td>2 (Tier 3)</td><td>По правилу: не более 2-3 CoT якорей. Оба используют полный XML &lt;processus_analysium&gt;.</td></tr>
-<tr><td>Lorebook</td><td>5 записей</td><td>GHOST-триггеры (Сангвис, имя) + персонажные (Йоуёма, Вентора) + счётчик вырезаний. Формат trigger→reaction→price.</td></tr>
-<tr><td>Tone Frame</td><td>Да</td><td>Нестандартный сеттинг. «Tone: archival, detached. Memory is currency. Loss is permanent.» — задаёт атмосферу.</td></tr>
-<tr><td>Sensory Anchors</td><td>Тактильный + Обонятельный</td><td>для 32B+ и API. Дополнительные модальности углубляют иммерсию. Тактильный — дрожь от чужого касания. Обонятельный — реакция на Сангвис.</td></tr>
-<tr><td>OCEAN</td><td>2 полюса (Низкая E, Высокая N)</td><td>Интроверсия + невротизм (страх растворения). Правило: 1-2 полюса.</td></tr>
-<tr><td>Author's Note</td><td>Динамический фокус + счётчик</td><td>Фокус + WANT→NEED + GHOST-activation + Счётчик вырезаний + Сцена. Инструкция, не статус.</td></tr>
-</tbody>
-</table>
-</div>
 </details>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Подробно о Lorebook: <a href="#p7_lorebook">Lorebook → Part 7</a></p>

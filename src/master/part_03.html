@@ -1,8 +1,9 @@
 <!--
   Part 3: Voice and Isolation (Голос и изоляция)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v8.0.0 Master HTML
 
-  Unified content: all layers merged
+  v8: p3_tier_quality renamed to p3_examples_quality,
+      explicit <START> tag requirement added
 -->
 <section  data-section="p3_voice_isolation" data-toc-nav>
 <h2>Голос и изоляция</h2>
@@ -95,6 +96,10 @@ Example:
 <li><strong>Стиль:</strong> Должен совпадать с Greeting</li>
 <li><strong>Телесность:</strong> Минимум одна физическая реакция на блок</li>
 </ul>
+
+<div class="callout important">
+<p><strong>📌 Тег &lt;START&gt; обязателен</strong> для каждого Example. Это маркер начала нового диалогового блока. Без него модель не распознаёт границы паттернов и может смешивать разные Examples — голос персонажа дрейфует, а паттерны из одного Example «утекают» в другой.</p>
+</div>
 
 <h4>Формат Examples</h4>
 <pre><code>&lt;START&gt;

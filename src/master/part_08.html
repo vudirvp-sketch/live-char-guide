@@ -1,8 +1,9 @@
 <!--
   Part 8: Anti-patterns (Анти-паттерны)
-  Live Character Guide v8 Master HTML
+  Live Character Guide v8.0.0 Master HTML
 
   v8: AP-15 merged, sequential AP ordering, reduced duplication
+  Phase 6: Reduced content duplication — APs reference canonical Parts instead of re-explaining
 -->
 <section  data-section="p8_antipatterns_overview" data-toc-nav>
 <h2>Анти-паттерны</h2>
@@ -99,15 +100,8 @@
 <p><strong>Причина:</strong> Нет инструкции "Never speak or act for {{user}}" в SP</p>
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
 <pre><code>Never speak or act for {{user}}.</code></pre>
+<p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
 <p>Подробный разбор → <a href="#p1_top3_problems">Топ-3 ошибки (Part 1)</a></p>
-<div class="problem-block">
-<h4>❌ Без анти-годмодинга</h4>
-<p><code>{{user}} подошёл ближе. *Она почувствовала, как сердце user забилось чаще от волнения.*</code></p>
-</div>
-<div class="solution-block">
-<h4>✅ С анти-годмодингом</h4>
-<p><code>{{user}} подошёл ближе. *Она отступила на шаг, не отводя взгляда.* «Так... и что теперь?»</code></p>
-</div>
 </div>
 </section>
 <section  data-section="p8_ap7_presence_penalty">
@@ -133,55 +127,29 @@
 <section  data-section="p8_ap9_spine_broken">
 <div class="antipattern-card">
 <h3>AP-9: Сломанный SPINE (Broken SPINE)</h3>
-<p><strong>Симптом:</strong> SPINE элементы не связаны логически</p>
-<p><strong>Причина:</strong> WANT, NEED, FLAW, LIE, GHOST написаны независимо</p>
-<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT (<a href="#p4_spine_check">SPINE Check — Part 4</a>)</p>
-<div class="callout tip">
-<p><strong>💡 Совет:</strong> Каждый элемент должен объясняться предыдущим. Если связь разорвана — пересмотрите SPINE.</p>
-</div>
+<p><strong>Симптом:</strong> SPINE-элементы не связаны логически — WANT совместим с NEED (нет конфликта), FLAW существует без объяснения</p>
+<p><strong>Причина:</strong> WANT, NEED, FLAW, LIE, GHOST написаны независимо, без причинно-следственной связи</p>
+<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT (<a href="#p4_spine_check">SPINE Check — Part 4</a>). Каждый элемент должен объясняться предыдущим.</p>
 <div class="problem-block">
 <h4>❌ Сломанный SPINE</h4>
-<p><strong>Пример:</strong></p>
-<pre><code>GHOST: (отсутствует)
-LIE: (отсутствует)
-FLAW: Избегает близости
-NEED: Нуждается в доверии
-WANT: Хочет быть любимым</code></pre>
-
-<p><strong>Почему сломано:</strong></p>
-<ul>
-<li>WANT (быть любимым) совместим с NEED (доверие) — нет конфликта</li>
-<li>FLAW (избегает близости) блокирует BOTH — но откуда FLAW?</li>
-<li>Нет LIE → непонятно, почему FLAW существует</li>
-<li>Нет GHOST → непонятно, откуда LIE</li>
-<li><strong>Итог:</strong> Цепь не замкнута — элементы не объясняют друг друга</li>
-</ul>
+<pre><code>GHOST: (отсутствует)  →  LIE: (отсутствует)  →  FLAW: Избегает близости
+NEED: Нуждается в доверии  ←  WANT: Хочет быть любимым</code></pre>
+<p>WANT совместим с NEED — нет конфликта. FLAW блокирует BOTH — но откуда FLAW? Нет LIE/GHOST → цепь разорвана.</p>
 </div>
-
 <div class="solution-block">
 <h4>✅ Цельный SPINE</h4>
-<p><strong>Пример:</strong></p>
 <pre><code>GHOST: Предательство близкого человека
-  ↓ объясняет
+  ↓
 LIE: "Любовь = уязвимость = боль"
-  ↓ защищает от боли
+  ↓
 FLAW: Отталкивает людей, когда сближается
-  ↓ поведение из LIE (близость = боль)
-NEED: Доверие без стен
-  ↑ FLAW мешает (стены мешают доверию)
-WANT: Быть любимым
-  ↑ совместимо с LIE ("я хочу любви, но не подпущу близко")</code></pre>
-
-<p><strong>Почему работает:</strong></p>
-<ul>
-<li>GHOST объясняет LIE — предательство → страх уязвимости</li>
-<li>LIE объясняет FLAW — "любовь = боль" → отталкивание</li>
-<li>FLAW блокирует NEED — стены мешают доверию</li>
-<li>WANT совместим с LIE — "Желаю любви, но боюсь близости"</li>
-<li><strong>Итог:</strong> Цепь замкнута — каждый элемент объясняется предыдущим</li>
-</ul>
+  ↓
+NEED: Доверие без стен (FLAW мешает)
+  ↓
+WANT: Быть любимым (совместимо с LIE — "хочу любви, но боюсь близости")</code></pre>
+<p>Цепь замкнута — каждый элемент объясняется предыдущим.</p>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — GHOST→LIE→FLAW→NEED→WANT цепочка логически связана. См. также <a href="#p4_spine_full_chain">пример полной цепочки (Part 4)</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Полный разбор SPINE Check → <a href="#p4_spine_check">Part 4</a>. Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap10_cot_overload">
