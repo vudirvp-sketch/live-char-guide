@@ -53,9 +53,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Правила Examples | Part 3 | p3_examples_rules | Rules | Как писать Examples. Structural rules and formatting |
 | Качество Examples | Part 3 | p3_examples_quality | Classification | Quality tiers for Examples. What separates good examples from bad |
 | Greeting | Part 3 | p3_greeting | Structure | Сцена→Действие→Реплика. Greeting as voice anchor |
-| Voice Leak (утечка голоса) | Part 3 | p3_voice_leak | Anti-pattern | «Красноречивый Джесси» — пример ошибки. Detecting and fixing voice bleed |
-| Крайний случай: Джокер | Part 3 | p3_joker_case | Extreme example | Голос невозможно описать — только воспроизвести. When voice defies description |
-| Мульти-персонажные примеры | Part 3 | p3_multi_char | Rules+Examples | Уолтер Уайт + Джесси Пинкман. Voice Bleed, Character Markers in multi-character contexts |
+| Voice Leak (утечка голоса) | Part 3 | p3_voice_leak | Anti-pattern | Выщербленный — пример ошибки. Detecting and fixing voice bleed. Updated in Phase 4 |
+| Крайний случай: голос без описания | Part 3 | p3_joker_case | Extreme example | Голос невозможно описать — только воспроизвести. General principle (rewritten from Джокер in Phase 4) |
+| Мульти-персонажные примеры | Part 3 | p3_multi_char | Rules+Examples | Выщербленный + Йоуёма. Voice Bleed, Character Markers in multi-character contexts. Updated in Phase 4 |
 
 ### Part 4: SPINE Framework (СПИН)
 
@@ -78,6 +78,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
 | OCEAN (Big Five) | Part 5 | p5_ocean_basics | Tool+Interactive | Pentagon widget + золотое правило («Только 1–2 экстремальных полюса»). Contextual limits + validator |
+| Елена OCEAN/Enneagram profile | Part 5 | p5_elena_profile | Example | OCEAN (O:72, C:65, E:41, A:38, N:68) + Enneagram 6w5 mapping to SPINE. Added in Phase 4 |
 | Enneagram basics | Part 5 | p5_enneagram_basics | Tool+Interactive | 9 типов, SVG widget with interactive selection |
 | OCEAN Value Conflicts | Part 5 | p5_ocean_warning | Warning | Moved from Part 8 AP-15. 3 conflict scenarios + OCEAN×Enneagram reference |
 | MBTI | Appendix A | appendix_mbti | Tool+Interactive | Moved from Part 5 in Phase 2.3. 16 типов, filter grid with composer |
@@ -195,7 +196,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 2 | Behavioral Anchors | 6 |
 | Part 3 | Voice and Isolation | 8 |
 | Part 4 | SPINE Framework | 11 |
-| Part 5 | Psychology Toolkit | 7 (added p5_ocean_warning, p5_mbti_ref; removed p5_mbti_basics) |
+| Part 5 | Psychology Toolkit | 8 (added p5_elena_profile in Phase 4) |
 | Part 6 | CoT | 6 |
 | Part 7A | System Prompt & Assembly | 12 |
 | Part 7B | Lorebook, Greeting & Compatibility | 4 |
@@ -204,7 +205,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 10 | Full Card Examples | 6 |
 | Appendix A | MBTI Reference | 1 |
 | Appendix B | Model Capability Table | 1 |
-| **Total** | | **93** |
+| **Total** | | **94** |
 
 ---
 

@@ -3,7 +3,7 @@
 > Any agent modifying Елена's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.0.0 (Phase 0 creation)
+**Version:** 9.1.0 (Phase 4 update — OCEAN, Enneagram, CoT added)
 **Last Updated:** 2026-05-15
 
 ---
@@ -71,30 +71,56 @@
 "Но ты... остаёшься. Почему?"
 ```
 
-## OCEAN (to be filled in Phase 4)
-- O: C: E: A: N:
+## OCEAN
+- O: 72 (High Openness — curious, creative, follows leads others ignore)
+- C: 65 (Moderate-High Conscientiousness — methodical in research, less so in personal life)
+- E: 41 (Low-Moderate Extraversion — works alone, prefers bars to parties)
+- A: 38 (Low-Moderate Agreeableness — confrontational, challenges sources) ⚠️ EXTREME
+- N: 68 (High Neuroticism — cynical, anxious, reacts strongly to betrayal) ⚠️ EXTREME
+- Extreme poles: 3 (O=72, A=38, N=68). For 4K context, keep only 2: N=68 and A=38.
 
-## Enneagram (to be filled in Phase 4)
-- Type:
+## Enneagram
+- Type: 6w5 (Лоялист/Скептик с крылом Исследователя)
+- Key fear: Being without support, abandoned
+- Key desire: Security, being supported
+- Stress: 6→3 (competitive, workaholic)
+- Growth: 6→9 (trusting, relaxed, open)
+- Wing 5: Intellectualizes fear (analysis, preparation) → reinforces LIE
 
-## CoT Block (to be filled in Phase 4)
+## CoT Block
+- Tier 2 CoT (already in Part 6, section p6_cot_tier2)
+- Trigger: GHOST-connection (напоминает предательство редактора)
+- Process: Pain in chest → "Это ловушка" → deflection through sarcasm
+- External reaction: отводит взгляд, уголок рта дёргается → «О, чувак, какие чувства?» → сарказм как стена
 
-## Lorebook Entries (to be filled in Phase 4)
+## Lorebook Entries
+- Key: пожар, огонь, горел, сгорел → Content: Елена помнит запах горящего дерева. В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу.
+- Key: предательство, редактор, украдена → Content: История о коррупции была украдена редактором и опубликована под чужим именем.
+- (Full Lorebook example in Part 7B, section p7b_lorebook_basics)
 
-## Anti-Pattern Demonstrations (to be filled in Phase 4)
+## Anti-Pattern Demonstrations
+- AP-1 (Token Bloat): Before/after showing bloated vs compact Description
+- AP-3 (Voice in Description): Before/after showing voice directives vs voice demonstrated
+- AP-9 (Broken SPINE): Full SPINE chain verification with checkmarks
+- (All in Part 8)
 
 ## Parts Where Елена Appears
-- Part 1: Basic card blocks overview
-- Part 2: Behavioral Anchors examples (Ложь→Прищуривается→Напряжение в челюсти; Стресс→Трёт шею→Головная боль; Радость→Редкая улыбка→Краснеет)
+- Part 1: Basic card blocks overview, stylistic neutrality disclaimer
+- Part 2: Behavioral Anchors examples + Embodiment table + Environmental Reactivity example
 - Part 3: Voice Isolation, Greeting walkthrough, FLAW-linked behavior
-- Part 4: Full SPINE chain
+- Part 4: Full SPINE chain + GHOST/LIE/NEED/WANT examples
+- Part 5: OCEAN profile (p5_elena_profile), Enneagram 6w5 mapping to SPINE
+- Part 6: CoT Tier 2 example (p6_cot_tier2)
+- Part 7A: Referenced in assembly pipeline
+- Part 7B: Lorebook GHOST-fact example
+- Part 8: AP-1, AP-3, AP-9 before/after examples
+- Part 9: Quick Check example (p9_pre_deploy)
 - Part 10: Complete card (`p10_elena`)
-- Parts 5–9: TO BE EXTENDED in Phase 4
 
 ## Consistency Checklist
-- [ ] OCEAN values in Part 5 match values referenced in Parts 8, 9
-- [ ] SPINE elements in Part 4 match references in Parts 6, 7A, 8, 9
-- [ ] Voice attributes in Part 3 match references in Parts 8, 9
+- [x] OCEAN values in Part 5 match values referenced in Parts 8, 9 (O:72, C:65, E:41, A:38, N:68)
+- [x] SPINE elements in Part 4 match references in Parts 6, 7A, 8, 9
+- [x] Voice attributes in Part 3 match references in Parts 8, 9
 - [ ] No contradictions between any two Parts
-- [ ] Anchors remain consistent across all Part references
-- [ ] GHOST story never changes between mentions
+- [x] Anchors remain consistent across all Part references
+- [x] GHOST story never changes between mentions

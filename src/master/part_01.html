@@ -11,6 +11,11 @@
 
 <p><strong>Сквозной пример:</strong> На протяжении всего гайда мы будем строить карточку Елены — от базовых блоков до полной карточки со всеми инструментами. Это позволит увидеть, как каждый инструмент добавляет глубину персонажу.</p>
 
+<div class="callout important">
+<p><strong>О примерах и стиле</strong></p>
+<p>Этот гайд учит механике, не эстетике. Все примеры намеренно сухие — они иллюстрируют структурные принципы (причинность SPINE, триггеры якорей, маркеры Voice, логику CoT), а не качество письма. Когда пример содержит нарративный язык («Дождь барабанил по стеклу»), он существует для демонстрации конкретной директивы (в данном случае Environmental Reactivity) и помечен соответствующим образом. Стиль вашего персонажа — качество прозы, глубина лора, сенсорная насыщенность — ваша_domain. Этот гайд гарантирует, что модель его уважает.</p>
+</div>
+
 <p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые якоря (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_assembly_pipeline">Конвейер сборки</a></p>
 
 <div class="table-wrap">
@@ -27,7 +32,7 @@
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам: <a href="#p1_token_budget">Token Budget (бюджет токенов) →</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам → <a href="#p1_token_budget">Part 1: Token Budget</a></p>
 
 <div class="callout important">
 <p>📌 Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
@@ -45,9 +50,9 @@
 </div>
 
 <ol>
-<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна (→ <a href="#p2_anchor_rules">Part 2</a>)</li>
-<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса (→ <a href="#p3_voice_isolation">Part 3</a>)</li>
-<li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt (→ <a href="#p4_spine_overview">Part 4</a>, <a href="#p5_ocean_basics">Part 5</a>)</li>
+<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></li>
+<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
+<li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
 </ol>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Правило OCEAN: не более 1-2 экстремальных полюсов — описано в <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
@@ -161,10 +166,10 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 </div>
 
 <div class="callout important">
-<p>📌 Если голос в SP/Description — карточка не работает на 12B. <a href="#p3_voice_isolation">Голос — только в Examples/Greeting (Part 3)</a></p>
+<p>📌 Если голос в SP/Description — карточка не работает на 12B. → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 </div>
 
-<p>Полный конвейер сборки с пошаговыми инструкциями, шаблонами и чек-листами — в конце <a href="#p7a_assembly_pipeline">Part 7A</a>.</p>
+<p>Полный конвейер сборки с пошаговыми инструкциями, шаблонами и чек-листами → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>.</p>
 
 </section>
 
@@ -176,17 +181,17 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
 <p><strong>Причина:</strong> В System Prompt нет анти-годмодинга.</p>
-<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Шаблон SP → Part 7A</a> | <a href="#p8_ap6_no_anti_godmoding">AP-6 → Part 8</a>)</p>
+<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Part 7A: System Prompt</a> | <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a>)</p>
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
 <p><strong>Причина:</strong> Голос помещён в Description вместо Examples — <a href="#p1_core_rules">правило #3</a>. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
-<p><strong>Исправление:</strong> <a href="#p3_voice_isolation">Полный разбор Voice Isolation → Part 3</a></p>
+<p><strong>Исправление:</strong> Полный разбор Voice Isolation → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
 <h4>Ошибка 3: Персонаж «слишком идеальный»</h4>
 <p><strong>Симптом:</strong> Персонаж не проявляет уязвимость, не ошибается, реагирует «правильно» на все стимулы.</p>
 <p><strong>Причина:</strong> Якоря не имеют цены (Price). Без физической реакции якорь = инструкция без паттерна.</p>
-<p><strong>Исправление:</strong> <a href="#p2_anchor_rules">Критерии качества якоря → Part 2</a></p>
+<p><strong>Исправление:</strong> Критерии качества якоря → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
 <p>Проблемы #4 и #5 → <a href="#p9_additional_problems">Диагностика: Дополнительные проблемы (Part 9)</a></p>
 

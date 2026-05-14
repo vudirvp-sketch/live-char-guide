@@ -77,7 +77,7 @@ Format Lock:
 <p>Мета-принцип: демонстрируйте всё через наблюдаемое поведение. Запрет на мета-комментарии, эмоциональные декларации, информационные свалки. Из него вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
 
 <h4>2. Embodiment First</h4>
-<p>State → Body → Sensor → Speech. Always. <strong>Embodiment First</strong> — это CORE DIRECTIVE #2, которая <em>предписывает</em> использовать Embodiment Protocol. <strong>Embodiment Protocol</strong> — это сама последовательность (State → Body → Sensor → Speech), описанная в Part 2. Директива = МАНДАТ (всегда используй протокол); Протокол = КАК (последовательность шагов). Полный Embodiment Protocol описан в Part 2: <a href="#p2_embodiment">Телесность</a></p>
+<p>State → Body → Sensor → Speech. Always. <strong>Embodiment First</strong> — это CORE DIRECTIVE #2, которая <em>предписывает</em> использовать Embodiment Protocol. <strong>Embodiment Protocol</strong> — это сама последовательность (State → Body → Sensor → Speech), описанная в Part 2. Директива = МАНДАТ (всегда используй протокол); Протокол = КАК (последовательность шагов). Полный Embodiment Protocol → <a href="#p2_embodiment">Part 2: Embodiment Protocol</a></p>
 
 <h4>3. Spatial & Anatomical Lock</h4>
 <p>Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации. Никаких анатомических противоречий. Если {{user}} через комнату — вы не можете коснуться его без пересечения пространства.</p>
@@ -93,13 +93,13 @@ Format Lock:
 </div>
 
 <h4>4. Environmental Reactivity</h4>
-<p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → Part 2: <a href="#p2_env_reactivity">Реактивность среды</a></p>
+<p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → <a href="#p2_env_reactivity">Part 2: Environmental Reactivity</a></p>
 
 <h4>5. Influence Boundary</h4>
-<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён. <a href="#p2_anchor_rules">Подробно — в Part 2: Правила якорей</a></p>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
 <h4>6. Consequence Driven (Динамика следствий)</h4>
-<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → Part 4: <a href="#p4_spine_mapping">SPINE → Якоря</a> <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
+<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a> <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
 <pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
 <h4>7. Pre-Generation Filter (Фильтр предгенерации)</h4>
@@ -292,7 +292,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <tr><td>Temperature</td><td>0.6–0.8</td><td>0.85–1.1</td><td>0.9–1.0</td></tr>
 <tr><td>Presence Penalty</td><td>0.0 (обязательно)</td><td>0.0</td><td>0.0</td></tr>
 <tr><td>RepPen</td><td>1.05</td><td>1.0–1.05</td><td>N/A</td></tr>
-<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong> (<a href="#p3_voice_isolation">→ Part 3</a>)</td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
+<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong> (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
 <tr><td>XML Tags</td><td>⚠️ нестабильны</td><td>✓ стабильны</td><td>✓ стабильны</td></tr>
 <tr><td>CoT Tier</td><td>✗</td><td>Tier 1</td><td>Tier 2–3</td></tr>
 <tr><td>SP Language</td><td>English (критично)<sup>1</sup></td><td>English</td><td>English</td></tr>
@@ -305,7 +305,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <div class="callout tip">
 <p><strong>💡 AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос. Подробнее о правиле голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
-<p><span class="remark-icon" aria-hidden="true">→</span> Технические блоки настроены. Проверьте, нет ли анти-паттернов → <a href="#p8_antipatterns_overview">Анти-паттерны (Part 8)</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Технические блоки настроены. Проверьте, нет ли анти-паттернов → <a href="#p8_antipatterns_overview">Part 8: Анти-паттерны</a></p>
 
 </div>
 
@@ -500,50 +500,50 @@ Anchors:
 <p><strong>Результат:</strong> ~70-150 токенов. Identity + Anti-godmoding + CORE_DIRECTIVES + Tone Frame + Format Lock.</p>
 
 <h4>Шаг 2: Description</h4>
-<p><strong>Что делаете:</strong> Описываете внешность, контекст и мотивацию без голоса персонажа. → <a href="#p1_card_overview">Обзор блоков — Part 1</a></p>
+<p><strong>Что делаете:</strong> Описываете внешность, контекст и мотивацию без голоса персонажа. → <a href="#p1_card_overview">Part 1: Card Overview</a></p>
 <p><strong>Результат:</strong> ~150-300 токенов. Факты, якоря, SPINE, OCEAN — всё здесь.</p>
 
 <h4>Шаг 3: Якоря (3-5 базовых)</h4>
-<p><strong>Что делаете:</strong> Создаёте якоря в формате T→A→P. Каждый якорь обязан иметь Цену. → <a href="#p2_anchor_rules">Правила якорей — Part 2</a></p>
+<p><strong>Что делаете:</strong> Создаёте якоря в формате T→A→P. Каждый якорь обязан иметь Цену. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 <p><strong>Результат:</strong> ~40-80 токенов. 3-5 якорей «Когда {{триггер}} → {{действие}} → {{цена}}».</p>
 
 <h4>Шаг 4: Examples (2 примера)</h4>
-<p><strong>Что делаете:</strong> Пишете нейтральный + стрессовый пример диалога ГОЛОСОМ персонажа. Каждый пример начинается с &lt;START&gt;. → <a href="#p3_examples_rules">Правила Examples — Part 3</a></p>
+<p><strong>Что делаете:</strong> Пишете нейтральный + стрессовый пример диалога ГОЛОСОМ персонажа. Каждый пример начинается с &lt;START&gt;. → <a href="#p3_examples_rules">Part 3: Examples</a></p>
 <p><strong>Результат:</strong> ~80-140 токенов. 2 примера, голос только здесь.</p>
 
 <h4>Шаг 5: Greeting</h4>
-<p><strong>Что делаете:</strong> Создаёте первое сообщение персонажа — сцена → действие → реплика. → <a href="#p3_greeting">Greeting — Part 3</a></p>
+<p><strong>Что делаете:</strong> Создаёте первое сообщение персонажа — сцена → действие → реплика. → <a href="#p3_greeting">Part 3: Greeting</a></p>
 <p><strong>Результат:</strong> ~40-80 токенов. Задаёт тон и демонстрирует голос.</p>
 
 <p><strong>Контрольная точка:</strong> Базовая карточка (~430-580 токенов). Проверьте: голос только в Examples/Greeting, все якоря имеют Цену, бюджет в пределах лимита.</p>
 
 <h4>Шаг 6: SPINE-профиль</h4>
-<p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. → <a href="#p4_spine_overview">SPINE — Part 4</a></p>
+<p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. → <a href="#p4_spine_overview">Part 4: SPINE</a></p>
 <p><strong>Результат:</strong> Полный психологический каркас персонажа, встроенный в Description.</p>
 
 <h4>Шаг 7: FLAW-linked якоря + Embodiment (5-7 якорей)</h4>
-<p><strong>Что делаете:</strong> Добавляете якоря, выведенные из SPINE-элементов, и сенсорные якоря телесности. → <a href="#p4_spine_mapping">SPINE→Якоря — Part 4</a>, <a href="#p2_embodiment">Телесность — Part 2</a></p>
+<p><strong>Что делаете:</strong> Добавляете якоря, выведенные из SPINE-элементов, и сенсорные якоря телесности. → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a>, <a href="#p2_embodiment">Part 2: Embodiment Protocol</a></p>
 <p><strong>Результат:</strong> 5-7 якорей, включая FLAW-linked и Embodiment.</p>
 
 <h4>Шаг 8: Examples (3 примера)</h4>
-<p><strong>Что делаете:</strong> Добавляете пример доверия/роста, демонстрирующий уязвимость персонажа. → <a href="#p3_examples_rules">Правила Examples — Part 3</a></p>
+<p><strong>Что делаете:</strong> Добавляете пример доверия/роста, демонстрирующий уязвимость персонажа. → <a href="#p3_examples_rules">Part 3: Examples</a></p>
 <p><strong>Результат:</strong> 3 примера с &lt;START&gt;, покрывающие нейтральный / стресс / уязвимость.</p>
 
 <h4>Шаг 9: OCEAN + Enneagram</h4>
-<p><strong>Что делаете:</strong> Заполняете OCEAN-профиль (не более 1-2 экстремальных полюсов) и определяете Enneagram-тип. → <a href="#p5_ocean_basics">OCEAN — Part 5</a></p>
+<p><strong>Что делаете:</strong> Заполняете OCEAN-профиль (не более 1-2 экстремальных полюсов) и определяете Enneagram-тип. → <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
 <p><strong>Результат:</strong> OCEAN + Enneagram в Description, валидация SPINE через кросс-инструментальную карту.</p>
 
 <h4>Шаг 10: Дополнительные инструменты</h4>
-<p><strong>Что делаете:</strong> Добавляете CoT-якоря (при наличии моделей ≥32B/API), настраиваете Lorebook для GHOST-фактов, настраиваете Author's Note. → <a href="#p6_cot_basics">CoT — Part 6</a>, <a href="#p7b_lorebook_basics">Lorebook</a>, <a href="#p7a_authors_note">Author's Note</a></p>
+<p><strong>Что делаете:</strong> Добавляете CoT-якоря (при наличии моделей ≥32B/API), настраиваете Lorebook для GHOST-фактов, настраиваете Author's Note. → <a href="#p6_cot_basics">Part 6: CoT</a>, <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>, <a href="#p7a_authors_note">Part 7A: Author's Note</a></p>
 <p><strong>Результат:</strong> Полная карточка (~800-1800 токенов) со всеми инструментами.</p>
 
 <h4>Чек-лист перед тестированием</h4>
 <ul>
-<li>☐ Все якоря содержат Цену (→ <a href="#p2_anchor_rules">Part 2</a>)</li>
-<li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3</a>)</li>
-<li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_check">Part 4</a>)</li>
-<li>☐ OCEAN: не более 1-2 экстремальных полюсов (→ <a href="#p5_ocean_basics">Part 5</a>)</li>
-<li>☐ Token Budget в пределах диапазона (→ <a href="#p1_token_budget">Part 1</a>)</li>
+<li>☐ Все якоря содержат Цену (→ <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>)</li>
+<li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</li>
+<li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_full_chain">Part 4: SPINE</a>)</li>
+<li>☐ OCEAN: не более 1-2 экстремальных полюсов (→ <a href="#p5_ocean_basics">Part 5: OCEAN</a>)</li>
+<li>☐ Token Budget в пределах диапазона (→ <a href="#p1_token_budget">Part 1: Token Budget</a>)</li>
 </ul>
 
 <p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (~440–900 токенов)</a> | <a href="#p10_omnis">Омнис-Зета (~450–1800 токенов)</a></p>
