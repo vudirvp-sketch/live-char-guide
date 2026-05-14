@@ -1,6 +1,6 @@
 {
-  "generated": "2026-04-19T22:25:55.299Z",
-  "description": "Anchor redirects for v5.12 → v6 migration. Used by lazy-loader.js handleLegacyAnchor(). Cleaned: removed backtick keys, em-dash key, and other garbage entries (fix 7.2).",
+  "generated": "2026-05-14T00:00:00.000Z",
+  "description": "Anchor redirects for v7 → v8 migration. Used by lazy-loader.js handleLegacyAnchor(). Updated: added v8 redirects for merged/deleted sections.",
   "redirects": {
     "01_intro": "p1_card_overview",
     "intro": "p1_card_overview",
@@ -13,7 +13,8 @@
     "action": "p2_action",
     "price": "p2_price",
     "embodiment": "p2_embodiment",
-    "flaw-anchors": "p2_flaw_anchors",
+    "flaw-anchors": "p4_spine_mapping",
+    "p2_flaw_anchors": "p4_spine_mapping",
     "voice-isolation": "p3_voice_isolation",
     "examples": "p3_examples",
     "greeting": "p3_greeting",
@@ -76,7 +77,7 @@
     "p5_mbti_composer": "p5_mbti_basics",
     "p7_immersion_boundary": "p7_ooc_protection",
     "p10_l2_voice_warning": "p10_elena",
-    "p1_next_layers": "p1_next_steps",
+    "p1_next_layers": "p1_card_overview",
     "05_glossary": "glossary",
     "glossary": "glossary",
     "p4_l3_learning_path": "p4_spine_navigation",
@@ -87,6 +88,10 @@
     "p10_geralt_l2": "p10_geralt",
     "p10_edward_l2": "p10_edward",
     "p10_walter_l2": "p10_walter",
-    "p3_tier_quality": "p3_examples_quality"
+    "p3_tier_quality": "p3_examples_quality",
+    "p7_core_directives_l3": "p7_core_directives",
+    "p7_authors_note_l3": "p7_authors_note",
+    "p7_sp_template_l3": "p7_system_prompt",
+    "p7_sp_template_full": "p7_system_prompt"
   }
 }

@@ -1,35 +1,50 @@
 <!--
   Part 4: SPINE Framework (Фреймворк SPINE)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v8.0.0 Master HTML
 
-  Unified content: all layers merged
+  Phase 2.2.3: Restructured to causal order (GHOST→LIE→FLAW→NEED→WANT)
+  Phase 2.2.2: FLAW-linked anchors moved from Part 2 to p4_spine_mapping
 -->
 <section  data-section="p4_spine_overview" data-toc-nav>
 <h2>SPINE Framework</h2>
 
 <p>В Part 2 мы изучили якоря, а в Part 3 — голос. Теперь собираем психологический каркас: SPINE — фреймворк из 5 элементов, связывающих прошлое персонажа с его поведением.</p>
 
-<p><strong>SPINE</strong> — фреймворк из 3 базовых элементов (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)), который связывает мотивацию персонажа с его поведением. SPINE даёт якорям причину существовать, а не быть набором случайных правил.</p>
+<p><strong>SPINE</strong> — фреймворк из 5 элементов, которые образуют причинную цепочку от прошлого к настоящему: <strong>GHOST → LIE → FLAW → NEED → WANT</strong>. SPINE даёт якорям причину существовать, а не быть набором случайных правил.</p>
 
 <p>Без SPINE ваши якоря — набор реакций без причины. SPINE даёт каждому якорю обоснование: ПОЧЕМУ персонаж реагирует именно так.</p>
+
+<p><strong>WANT</strong> — это то, что персонаж осознанно желает. Но за WANT стоит <strong>NEED</strong> — истинная потребность, которую персонаж не может признать из-за <strong>FLAW</strong>. FLAW возникает из <strong>LIE</strong> — ложной установки о мире. А LIE — из <strong>GHOST</strong> — события прошлого, которое травмировало персонажа.</p>
 
 <p><strong>Правило SPINE: наблюдаемые единицы.</strong> Каждый элемент SPINE = наблюдаемая единица, не абстрактный ярлык.</p>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Элемент</th><th>❌ Абстракция</th><th>✅ Наблюдаемая единица</th></tr></thead>
 <tbody>
-<tr><td>WANT</td><td>«Желание: быть счастливым»</td><td>«Желание: получить повышение до конца года»</td></tr>
-<tr><td>NEED</td><td>«Потребность: в любви»</td><td>«Потребность: чтобы кто-то остался, когда он уязвим»</td></tr>
+<tr><td>GHOST</td><td>«Травма в детстве»</td><td>«В 7 лет видел, как дом сгорел, а пожарные не приехали вовремя»</td></tr>
+<tr><td>LIE</td><td>«Недоверчивый»</td><td>«Если я никого не впущу — никто не сможет меня ранить»</td></tr>
 <tr><td>FLAW</td><td>«нерешительный»</td><td>«откладывает решения до последнего момента»</td></tr>
+<tr><td>NEED</td><td>«Потребность: в любви»</td><td>«Потребность: чтобы кто-то остался, когда он уязвим»</td></tr>
+<tr><td>WANT</td><td>«Желание: быть счастливым»</td><td>«Желание: получить повышение до конца года»</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="infographic inf-pipeline">
 <div class="inf-pipeline-step">
-<div class="inf-step-id">W</div>
-<div class="inf-step-label">WANT</div>
-<div class="inf-step-desc">Осознанное желание</div>
+<div class="inf-step-id">G</div>
+<div class="inf-step-label">GHOST</div>
+<div class="inf-step-desc">Событие прошлого</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">L</div>
+<div class="inf-step-label">LIE</div>
+<div class="inf-step-desc">Ложная установка</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">F</div>
+<div class="inf-step-label">FLAW</div>
+<div class="inf-step-desc">Поведенческий недостаток</div>
 </div>
 <div class="inf-pipeline-step">
 <div class="inf-step-id">N</div>
@@ -37,256 +52,14 @@
 <div class="inf-step-desc">Истинная потребность</div>
 </div>
 <div class="inf-pipeline-step">
-<div class="inf-step-id">F</div>
-<div class="inf-step-label">FLAW</div>
-<div class="inf-step-desc">Поведенческий недостаток</div>
+<div class="inf-step-id">W</div>
+<div class="inf-step-label">WANT</div>
+<div class="inf-step-desc">Осознанное желание</div>
 </div>
 </div>
 
 <div class="callout tip">
-<p><strong>💡 GHOST и LIE → Part 6:</strong> К цепочке добавляются GHOST (событие прошлого) и LIE (ложная установка), расширяя стек до 5 элементов: GHOST → LIE → FLAW → NEED → WANT.</p>
-</div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> <a href="#p4_spine_full_chain">Полный SPINE из 5 элементов</a></p>
-
-</section>
-
-<section  data-section="p4_want" data-toc-nav>
-<h3>WANT (Желание)</h3>
-
-<p><strong>WANT</strong> — осознанное Желание персонажа. Внешняя цель, которую он может сформулировать.</p>
-
-<h4>Правила WANT</h4>
-<ul>
-<li>Конкретный, измеримый результат</li>
-<li>Персонаж может сформулировать его словами</li>
-<li>Движет видимыми действиями</li>
-</ul>
-
-<h4>Примеры</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Персонаж</th><th>WANT</th></tr>
-</thead>
-<tbody>
-<tr><td>Елена</td><td>Доказать, что она права — историю, которую никто не желает публиковать</td></tr>
-<tr><td>Геральт</td><td>Сохранить нейтралитет, избегать привязанностей</td></tr>
-<tr><td>Эдвард Элрик</td><td>Вернуть тело Алу — исправить свою ошибку</td></tr>
-<tr><td>Уолтер Уайт</td><td>Обеспечить семью, оставить наследство</td></tr>
-</tbody>
-</table>
-</div>
-
-</section>
-
-<section  data-section="p4_need" data-toc-nav>
-<h3>NEED (Потребность)</h3>
-
-<p><strong>NEED</strong> — истинная потребность, которую персонаж может не осознавать. Часто противоречит WANT.</p>
-
-<h4>Правила NEED</h4>
-<ul>
-<li>То, что персонаж действительно должен получить для роста</li>
-<li>Может противоречить WANT (напряжение, не прямой конфликт)</li>
-<li>Обычно связано с людьми/связями</li>
-</ul>
-
-<h4>Примеры</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Персонаж</th><th>WANT</th><th>NEED</th><th>Напряжение</th></tr>
-</thead>
-<tbody>
-<tr><td>Елена</td><td>Доказать правоту</td><td>Принятие — связь без стены цинизма</td><td>Правота vs близость</td></tr>
-<tr><td>Геральт</td><td>Избегать привязанностей</td><td>Принять роль отца для Цири</td><td>Одиночество vs семья</td></tr>
-<tr><td>Эдвард</td><td>Сделать всё сам</td><td>Принять помощь других</td><td>Самостоятельность vs связь</td></tr>
-<tr><td>Уолтер</td><td>Обеспечить семью</td><td>Принять свою истинную природу (Хайзенберг)</td><td>Семья vs власть</td></tr>
-</tbody>
-</table>
-</div>
-
-</section>
-
-<section  data-section="p4_flaw" data-toc-nav>
-<h3>FLAW (Дефект)</h3>
-
-<p>FLAW = конкретное поведение, блокирующее NEED. НЕ прилагательное.</p>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th>❌ Прилагательное</th><th>✅ Поведение</th></tr></thead>
-<tbody>
-<tr><td>«замкнутый»</td><td>«отвечает односложно, не задаёт встречных вопросов»</td></tr>
-<tr><td>«агрессивный»</td><td>«повышает голос при малейшем сопротивлении»</td></tr>
-<tr><td>«недоверчивый»</td><td>«проверяет информацию из трёх источников прежде чем решить»</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="callout important">
-<p>📌 Правило FLAW-linked якорей → Part 2: <a href="#p2_flaw_anchors">p2_flaw_anchors</a></p>
-</div>
-
-<h4>Правила FLAW</h4>
-<ul>
-<li>Конкретное поведение, не прилагательное</li>
-<li>Проявляется в действиях</li>
-<li>Мешает получить NEED</li>
-<li>Каждый FLAW = минимум 1 якорь</li>
-</ul>
-
-<h4>Примеры FLAW</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>❌ Плохой FLAW</th><th>✅ Хороший FLAW</th></tr>
-</thead>
-<tbody>
-<tr><td>"Он неуверенный"</td><td>"Отшучивается и отстраняется, когда кто-то проявляет искреннюю заботу"</td></tr>
-<tr><td>"Она циничная"</td><td>"Отталкивает людей сарказмом, когда сближается"</td></tr>
-<tr><td>"Он гордый"</td><td>"Не может принять помощь или признать поражение"</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Следующие секции — Part 6: LIE, GHOST, GHOST Layers, проверка SPINE.</p>
-
-</section>
-
-<section  data-section="p4_spine_mapping">
-<h3>SPINE → Карта якорей</h3>
-
-<p>Как выводить якоря из SPINE элементов.</p>
-
-<div class="infographic">
-<div class="infographic-title">SPINE → Якоря: мнемоническая связь</div>
-<div class="inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">FLAW</div>
-<div class="inf-step-label">→ ЦЕНА</div>
-<div class="inf-step-desc">FLAW определяет физическую цену</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">WANT</div>
-<div class="inf-step-label">→ ДЕЙСТВИЕ В ПОКОЕ</div>
-<div class="inf-step-desc">WANT проявляется в поведении «в покое»</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">NEED</div>
-<div class="inf-step-label">→ НАПРАВЛЕНИЕ РОСТА</div>
-<div class="inf-step-desc">NEED указывает, куда тянется персонаж</div>
-</div>
-</div>
-</div>
-<p><span class="remark-icon" aria-hidden="true">→</span> +2 связи (GHOST→триггер, LIE→психологический якорь) → <a href="#p4_spine_full_chain">Полный SPINE</a></p>
-
-<h4>Детальная карта: SPINE → Якоря</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Элемент SPINE</th><th>Какой якорь создать</th><th>Логика вывода</th><th>Пример (Елена)</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>WANT</strong></td><td>At-rest якорь</td><td>WANT — внешняя цель. Создайте якорь, который показывает персонажа в «покое», когда он преследует свою цель.</td><td>WANT: Доказать правоту → Якорь: «Когда есть зацепка» → Оживляется, глаза загораются</td></tr>
-<tr><td><strong>NEED</strong></td><td>Рост-якорь</td><td>NEED — истинная потребность. Создайте якорь для момента близости/уязвимости, когда NEED проявляется.</td><td>NEED: Принятие → Якорь: «Когда доверие» → Пауза, голос тише, смотрит в глаза</td></tr>
-<tr><td><strong>FLAW</strong></td><td>FLAW-linked якорь (обязательно)</td><td>FLAW блокирует NEED. Создайте якорь, где FLAW срабатывает как защитный механизм.</td><td>FLAW: Отталкивает сарказмом → Якорь: «Искренняя забота» → Отшучивается, отстраняется, руки дрожат</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="callout important">
-<p><strong>📌 Правило:</strong> Каждый FLAW требует минимум 1 FLAW-linked якорь. WANT и NEED якоря — опциональны, но рекомендуются для глубины персонажа.</p>
-</div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Полный разбор FLAW-linked якорей: <a href="#p2_flaw_anchors">Part 2: p2_flaw_anchors</a></p>
-
-<details class="interactive">
-<summary>Дополнительные связи</summary>
-<p>→ <a href="#p4_spine_full_chain">Дополнительные связи</a></p>
-</details>
-
-<div class="callout important">
-<p><strong>📌 LIE и GHOST.</strong> В карте якорей выше показаны только WANT/NEED/FLAW. LIE (ложная установка) и GHOST (событие прошлого) описаны ниже и добавляют 2 связи: GHOST→триггер, LIE→психологический якорь. Полный SPINE → <a href="#p4_spine_full_chain">Полный SPINE из 5 элементов</a></p>
-</div>
-
-<div class="callout tip">
-<p><strong>💡 Динамика SPINE:</strong> WANT сдвигается к NEED по мере накопления Price в сессии — директива <strong>CONSEQUENCE DRIVEN</strong>. Подробности и реализация в SP → <a href="#p7_core_directives_l3">CORE DIRECTIVES #6 → Part 6</a></p>
-</div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Шаблон AN с секцией WANT→NEED → <a href="#p7_authors_note">Part 7: Author's Note</a></p>
-
-<a href="#p4_ghost_layers">Расширенный GHOST Layers → Part 6<span class="remark-icon" aria-hidden="true">→</span></a>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Quickstart перенесён после Part 5 — теперь он следует за OCEAN/Enneagram, чтобы все знания были доступны перед сборкой → <a href="#p1_quickstart">Перейти к Quickstart</a></p>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Инструментальная карта Enneagram→SPINE → <a href="#p5_cross_instrument_map">Part 5: Связь инструментов</a></p>
-
-</section>
-
-<section  data-section="p4_spine_navigation" data-toc-nav>
-<h3>Расширенный SPINE: от GHOST до полной карточки</h3>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Ниже — расширенные элементы SPINE: LIE, GHOST и полная цепочка.</p>
-
-<p>Когда все 5 элементов SPINE определены, следующий шаг — валидация через психологические инструменты (Part 5) и интеграция с CoT (Part 6).</p>
-
-<p>Новые инструменты расширяют, а не заменяют базу WANT/NEED/FLAW. Ниже — навигационная карта, которая показывает структурированный путь от GHOST до полной карточки.</p>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">GHOST Layers</div>
-<div class="inf-step-desc">Part 4 (ниже) — скрытый страх и цепочка LIE → FLAW → NEED → WANT</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">CoT-якоря</div>
-<div class="inf-step-desc">Part 6 — цепочка рассуждений персонажа в реальном времени</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">API/XML</div>
-<div class="inf-step-desc">Part 7 — XML-теги, Lorebook, CORE DIRECTIVES 6-7</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">Полная карточка</div>
-<div class="inf-step-desc">Part 10 — пример собранной карточки со всеми элементами</div>
-</div>
-</div>
-
-<div class="callout tip">
-<p><strong>💡 Совет:</strong> Новые инструменты расширяют, а не заменяют базу WANT/NEED/FLAW.</p>
-</div>
-
-</section>
-
-<section  data-section="p4_lie" data-toc-nav>
-<h3>LIE (Ложная установка)</h3>
-
-<p><strong>LIE</strong> — ложное убеждение, которое персонаж носит в себе. Обычно связано с GHOST.</p>
-
-<h4>Правила LIE</h4>
-<ul>
-<li>Фраза в кавычках — то, что персонаж сказал бы о себе</li>
-<li>Ложное убеждение о мире/себе</li>
-<li>Защищает от боли GHOST</li>
-</ul>
-
-<h4>Примеры LIE</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Персонаж</th><th>LIE</th><th>Связь с GHOST</th></tr>
-</thead>
-<tbody>
-<tr><td>Елена</td><td>"Мне не нужно ничьё одобрение. Я работаю одна."</td><td>Предательство редактора</td></tr>
-<tr><td>Геральт</td><td>"Если я никого не впущу — никто не сможет меня ранить"</td><td>Изгнание из Каэр Морхена</td></tr>
-<tr><td>Эдвард</td><td>"Я могу исправить всё через силу воли"</td><td>Human transmutation</td></tr>
-<tr><td>Уолтер</td><td>"Я делаю это для семьи"</td><td>Gray Matter</td></tr>
-</tbody>
-</table>
+<p><strong>💡 Для простых персонажей</strong> GHOST и LIE могут быть неявными — цепочка всё равно работает, просто без явной привязки к травме прошлого. Но если вы используете полную цепочку — она должна быть логически связана.</p>
 </div>
 
 </section>
@@ -294,7 +67,7 @@
 <section  data-section="p4_ghost" data-toc-nav>
 <h3>GHOST (Призрак)</h3>
 
-<p><strong>GHOST</strong> — конкретное событие из прошлого, сформировавшее LIE. НЕ психологический вывод.</p>
+<p><strong>GHOST</strong> — конкретное событие из прошлого, сформировавшее LIE. НЕ психологический вывод. Это корень причинной цепочки SPINE: всё начинается с GHOST.</p>
 
 <div class="callout warn">
 <p><strong>⚠️ Запрещённые слова:</strong> «травма», «пережил», «СТОЛКНУЛСЯ С». GHOST = ЧТО произошло, не вывод. Показывайте через конкретное событие.</p>
@@ -329,6 +102,137 @@
 <tr><td>Геральт</td><td>Бледная Кобыла. Потеря Йеннифэр, ложные обвинения, изгнание</td><td>"Если никого не впущу — не ранят"</td></tr>
 <tr><td>Эдвард</td><td>Human transmutation — потерял руку и ногу, Ал потерял тело</td><td>"Я могу исправить всё"</td></tr>
 <tr><td>Уолтер</td><td>Gray Matter: продал долю за $5000, компания стала миллиардной</td><td>"Я делаю это для семьи"</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section  data-section="p4_lie" data-toc-nav>
+<h3>LIE (Ложная установка)</h3>
+
+<p><strong>LIE</strong> — ложное убеждение, которое персонаж носит в себе. Вытекает из GHOST: GHOST порождает LIE как защитный механизм от боли. LIE объясняет, <strong>почему</strong> существует FLAW.</p>
+
+<h4>Правила LIE</h4>
+<ul>
+<li>Фраза в кавычках — то, что персонаж сказал бы о себе</li>
+<li>Ложное убеждение о мире/себе</li>
+<li>Защищает от боли GHOST</li>
+</ul>
+
+<h4>Примеры LIE</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>LIE</th><th>Связь с GHOST</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>"Мне не нужно ничьё одобрение. Я работаю одна."</td><td>Предательство редактора</td></tr>
+<tr><td>Геральт</td><td>"Если я никого не впущу — никто не сможет меня ранить"</td><td>Изгнание из Каэр Морхена</td></tr>
+<tr><td>Эдвард</td><td>"Я могу исправить всё через силу воли"</td><td>Human transmutation</td></tr>
+<tr><td>Уолтер</td><td>"Я делаю это для семьи"</td><td>Gray Matter</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section  data-section="p4_flaw" data-toc-nav>
+<h3>FLAW (Дефект)</h3>
+
+<p>FLAW = конкретное поведение, блокирующее NEED. НЕ прилагательное. FLAW — прямое поведение из LIE: ложная установка заставляет персонажа действовать саморазрушительно.</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>❌ Прилагательное</th><th>✅ Поведение</th></tr></thead>
+<tbody>
+<tr><td>«замкнутый»</td><td>«отвечает односложно, не задаёт встречных вопросов»</td></tr>
+<tr><td>«агрессивный»</td><td>«повышает голос при малейшем сопротивлении»</td></tr>
+<tr><td>«недоверчивый»</td><td>«проверяет информацию из трёх источников прежде чем решить»</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p>📌 Правило FLAW-linked якорей → <a href="#p4_spine_mapping">SPINE → Карта якорей: FLAW-якоря</a></p>
+</div>
+
+<h4>Правила FLAW</h4>
+<ul>
+<li>Конкретное поведение, не прилагательное</li>
+<li>Проявляется в действиях</li>
+<li>Мешает получить NEED</li>
+<li>Каждый FLAW = минимум 1 якорь</li>
+</ul>
+
+<h4>Примеры FLAW</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>❌ Плохой FLAW</th><th>✅ Хороший FLAW</th></tr>
+</thead>
+<tbody>
+<tr><td>"Он неуверенный"</td><td>"Отшучивается и отстраняется, когда кто-то проявляет искреннюю заботу"</td></tr>
+<tr><td>"Она циничная"</td><td>"Отталкивает людей сарказмом, когда сближается"</td></tr>
+<tr><td>"Он гордый"</td><td>"Не может принять помощь или признать поражение"</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section  data-section="p4_need" data-toc-nav>
+<h3>NEED (Потребность)</h3>
+
+<p><strong>NEED</strong> — истинная потребность, которую персонаж может не осознавать. Часто противоречит WANT. FLAW блокирует NEED — именно поэтому персонаж не может получить то, в чём действительно нуждается.</p>
+
+<h4>Правила NEED</h4>
+<ul>
+<li>То, что персонаж действительно должен получить для роста</li>
+<li>Может противоречить WANT (напряжение, не прямой конфликт)</li>
+<li>Обычно связано с людьми/связями</li>
+</ul>
+
+<h4>Примеры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>WANT</th><th>NEED</th><th>Напряжение</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>Доказать правоту</td><td>Принятие — связь без стены цинизма</td><td>Правота vs близость</td></tr>
+<tr><td>Геральт</td><td>Избегать привязанностей</td><td>Принять роль отца для Цири</td><td>Одиночество vs семья</td></tr>
+<tr><td>Эдвард</td><td>Сделать всё сам</td><td>Принять помощь других</td><td>Самостоятельность vs связь</td></tr>
+<tr><td>Уолтер</td><td>Обеспечить семью</td><td>Принять свою истинную природу (Хайзенберг)</td><td>Семья vs власть</td></tr>
+</tbody>
+</table>
+</div>
+
+</section>
+
+<section  data-section="p4_want" data-toc-nav>
+<h3>WANT (Желание)</h3>
+
+<p><strong>WANT</strong> — осознанное Желание персонажа. Внешняя цель, которую он может сформулировать. WANT совместим с LIE — персонаж не видит противоречия между своим желанием и своей ложной установкой.</p>
+
+<h4>Правила WANT</h4>
+<ul>
+<li>Конкретный, измеримый результат</li>
+<li>Персонаж может сформулировать его словами</li>
+<li>Движет видимыми действиями</li>
+</ul>
+
+<h4>Примеры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Персонаж</th><th>WANT</th></tr>
+</thead>
+<tbody>
+<tr><td>Елена</td><td>Доказать, что она права — историю, которую никто не желает публиковать</td></tr>
+<tr><td>Геральт</td><td>Сохранить нейтралитет, избегать привязанностей</td></tr>
+<tr><td>Эдвард Элрик</td><td>Вернуть тело Алу — исправить свою ошибку</td></tr>
+<tr><td>Уолтер Уайт</td><td>Обеспечить семью, оставить наследство</td></tr>
 </tbody>
 </table>
 </div>
@@ -376,7 +280,7 @@
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Полная карточка: <a href="#p10_vysherblenny">Выщербленный</a> | Практика на Омнис-Зета: <a href="#p10_omnis">Омнис-Зета</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Полная карточка: <a href="#p10_vysherblenny">Выщербленный</a> | Практика на Омнис-Зета: <a href="#p10_omnis">Омнис-Зета 7-Квин</a></p>
 
 <div class="callout tip">
 <p><strong>💡 Совет:</strong> Не всем персонажам нужны 3 GHOST Layers. Если backstory простая — достаточно одного GHOST.</p>
@@ -397,6 +301,162 @@
 <li><strong>Простая карточка:</strong> Не планируется расширенный уровень детализации</li>
 </ul>
 </div>
+
+</section>
+
+<section  data-section="p4_spine_full_chain">
+<h3>Полный SPINE: цепочка из 5 элементов</h3>
+
+<p>Все 5 элементов SPINE образуют единую причинную цепочку. <a href="#p4_ghost">GHOST</a> (событие прошлого) порождает <a href="#p4_lie">LIE</a> (ложную установку), LIE защищает от боли и вызывает <a href="#p4_flaw">FLAW</a> (поведенческий недостаток), FLAW блокирует <a href="#p4_need">NEED</a> (истинную потребность), <a href="#p4_want">WANT</a> (осознанное желание) совместимо с LIE.</p>
+
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G</div>
+<div class="inf-step-label">GHOST</div>
+<div class="inf-step-desc">Событие прошлого</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">L</div>
+<div class="inf-step-label">LIE</div>
+<div class="inf-step-desc">Ложная установка</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">F</div>
+<div class="inf-step-label">FLAW</div>
+<div class="inf-step-desc">Поведенческий недостаток</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">N</div>
+<div class="inf-step-label">NEED</div>
+<div class="inf-step-desc">Истинная потребность</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">W</div>
+<div class="inf-step-label">WANT</div>
+<div class="inf-step-desc">Осознанное желание</div>
+</div>
+</div>
+
+<h4>Цепочка: GHOST → LIE → FLAW → NEED → WANT</h4>
+<p>Каждый элемент объясняется предыдущим. GHOST порождает LIE, LIE защищает от боли, FLAW — поведение из LIE, FLAW мешает NEED, WANT совместимо с LIE.</p>
+
+<h4>Пример полной цепочки: Выщербленный</h4>
+<pre><code>GHOST: Брошен в архиве, воспитан документами. Инъекция живого документа начала распад.
+  ↓ объясняет
+LIE: "Если я поглощу достаточно — стану цельным"
+  ↓ защищает от боли пустоты
+FLAW: Поглощает чужое прошлое, после каждого теряет часть себя
+  ↓ поведение из LIE (заполнение = решение)
+NEED: Принять утраты как часть себя, не заменять чужой памятью
+  ↑ FLAW мешает (поглощение вместо принятия)
+WANT: Стать цельным — заполнить пустоты внутри
+  ↑ совместимо с LIE ("я пуст, поэтому должен заполниться")</code></pre>
+
+<p><span class="remark-icon" aria-hidden="true">→</span> Полная карточка Выщебленного с GHOST Layers, CoT и XML: <a href="#p10_vysherblenny">Part 10: Выщербленный</a></p>
+
+<p><span class="remark-icon" aria-hidden="true">→</span> Практическое применение GHOST на примере персонажа → <a href="#p10_omnis">Part 10: Омнис-Зета 7-Квин</a></p>
+
+<div class="callout important">
+<p><strong>📌 Правило:</strong> Для простых персонажей GHOST и LIE могут быть неявными. Но если вы используете полную цепочку — она должна быть логически связана. Проверьте: GHOST объясняет LIE? LIE защищает от боли GHOST? FLAW — прямое поведение из LIE?</p>
+</div>
+
+</section>
+
+<section  data-section="p4_spine_mapping">
+<h3>SPINE → Карта якорей</h3>
+
+<p>Как выводить якоря из SPINE элементов.</p>
+
+<div class="infographic">
+<div class="infographic-title">SPINE → Якоря: мнемоническая связь</div>
+<div class="inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">GHOST</div>
+<div class="inf-step-label">→ ТРИГГЕР</div>
+<div class="inf-step-desc">GHOST определяет триггеры через сенсорные ассоциации</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">LIE</div>
+<div class="inf-step-label">→ ПСИХОЛОГИЧЕСКИЙ ЯКОРЬ</div>
+<div class="inf-step-desc">LIE создаёт психологическую слепую зону</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">FLAW</div>
+<div class="inf-step-label">→ ЦЕНА</div>
+<div class="inf-step-desc">FLAW определяет физическую цену</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">WANT</div>
+<div class="inf-step-label">→ ДЕЙСТВИЕ В ПОКОЕ</div>
+<div class="inf-step-desc">WANT проявляется в поведении «в покое»</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">NEED</div>
+<div class="inf-step-label">→ НАПРАВЛЕНИЕ РОСТА</div>
+<div class="inf-step-desc">NEED указывает, куда тянется персонаж</div>
+</div>
+</div>
+</div>
+
+<h4>Детальная карта: SPINE → Якоря</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Элемент SPINE</th><th>Какой якорь создать</th><th>Логика вывода</th><th>Пример (Елена)</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>GHOST</strong></td><td>Сенсорный якорь</td><td>GHOST формирует триггеры через сенсорные ассоциации. Создайте якорь, где сенсорный стимул активирует GHOST-реакцию.</td><td>GHOST: Предательство редактора → Якорь: «Когда кто-то хвалит её работу» → Вздрагивает, сжимает ручку</td></tr>
+<tr><td><strong>LIE</strong></td><td>Психологический якорь</td><td>LIE создаёт слепую зону. Создайте якорь, где персонаж действует из ложной установки.</td><td>LIE: "Мне не нужно одобрение" → Якорь: «Когда предлагают помощь» → Отказывается, затем жалеет</td></tr>
+<tr><td><strong>FLAW</strong></td><td>FLAW-linked якорь (обязательно)</td><td>FLAW блокирует NEED. Создайте якорь, где FLAW срабатывает как защитный механизм.</td><td>FLAW: Отталкивает сарказмом → Якорь: «Искренняя забота» → Отшучивается, отстраняется, руки дрожат</td></tr>
+<tr><td><strong>WANT</strong></td><td>At-rest якорь</td><td>WANT — внешняя цель. Создайте якорь, который показывает персонажа в «покое», когда он преследует свою цель.</td><td>WANT: Доказать правоту → Якорь: «Когда есть зацепка» → Оживляется, глаза загораются</td></tr>
+<tr><td><strong>NEED</strong></td><td>Рост-якорь</td><td>NEED — истинная потребность. Создайте якорь для момента близости/уязвимости, когда NEED проявляется.</td><td>NEED: Принятие → Якорь: «Когда доверие» → Пауза, голос тише, смотрит в глаза</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout important">
+<p><strong>📌 Правило:</strong> Каждый FLAW требует минимум 1 FLAW-linked якорь. Остальные якоря (GHOST, LIE, WANT, NEED) — рекомендуются для глубины персонажа.</p>
+</div>
+
+<h4>FLAW-якоря: от SPINE к поведению</h4>
+
+<p><strong>FLAW-linked якорь</strong> — якорь, выведенный из FLAW (поведенческого недостатка персонажа). FLAW — конкретное саморазрушительное поведение, блокирующее истинную потребность (NEED). Пример: «Отталкивает людей сарказмом, когда сближается» — это FLAW; якорь «Когда искренняя забота → отшучивается → руки дрожат» — выведен из этого FLAW.</p>
+
+<p><span class="remark-icon" aria-hidden="true">→</span> Правило FLAW: каждый FLAW должен иметь минимум один FLAW-linked якорь.</p>
+
+<h5>Алгоритм создания FLAW-linked якоря</h5>
+<ol>
+<li>Запишите FLAW как конкретное поведение (не прилагательное)</li>
+<li>Найдите момент, когда это поведение срабатывает</li>
+<li>Опишите наблюдаемое действие</li>
+<li>Добавьте физическую цену</li>
+</ol>
+
+<h5>Пример: Елена</h5>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>FLAW</th><th>FLAW-linked триггер</th><th>Действие</th><th>Цена</th></tr>
+</thead>
+<tbody>
+<tr><td>Отталкивает людей сарказмом, когда сближается</td><td>Искренняя забота о ней</td><td>Отшучивается, отстраняется</td><td>Вздрагивает, голос становится тише, сжимает кулаки</td></tr>
+<tr><td>(тот же)</td><td>Момент близости</td><td>Становится резкой, уходит</td><td>Руки дрожат</td></tr>
+<tr><td>(тот же)</td><td>Вопрос о чувствах</td><td>Переводит тему, шутит</td><td>Голос тише</td></tr>
+</tbody>
+</table>
+</div>
+
+<details class="interactive">
+<summary>Дополнительные связи</summary>
+<p>→ <a href="#p4_spine_full_chain">Дополнительные связи</a></p>
+</details>
+
+<div class="callout tip">
+<p><strong>💡 Динамика SPINE:</strong> WANT сдвигается к NEED по мере накопления Price в сессии — директива <strong>CONSEQUENCE DRIVEN</strong>. <span class="model-note">[MODEL_NOTE: Наибольший эффект на моделях ≥32B и API; на 12B эффект ограничён из-за недостаточной способности к рассуждению]</span> Подробности и реализация в SP → <a href="#p7_core_directives">CORE DIRECTIVES #6 → Part 7</a></p>
+</div>
+<p><span class="remark-icon" aria-hidden="true">→</span> Шаблон AN с секцией WANT→NEED → <a href="#p7_authors_note">Part 7: Author's Note</a></p>
+
+<p><span class="remark-icon" aria-hidden="true">→</span> Инструментальная карта Enneagram→SPINE → <a href="#p5_cross_instrument_map">Part 5: Связь инструментов</a></p>
 
 </section>
 
@@ -471,60 +531,32 @@ WANT: Доказать правоту самостоятельно
 
 </section>
 
-<section  data-section="p4_spine_full_chain">
-<h3>Полный SPINE: цепочка из 5 элементов</h3>
+<section  data-section="p4_spine_navigation" data-toc-nav>
+<h3>SPINE: следующие шаги</h3>
 
-<p>SPINE расширяется с 3 до 5 элементов. <a href="#p4_lie">LIE</a> (ложная установка) и <a href="#p4_ghost">GHOST</a> (событие прошлого) добавляют глубину: они объясняют, <strong>почему</strong> FLAW существует и <strong>откуда</strong> он взялся.</p>
+<p>Когда все 5 элементов SPINE определены, следующий шаг — валидация через психологические инструменты (Part 5) и интеграция с CoT (Part 6).</p>
 
 <div class="infographic inf-pipeline">
 <div class="inf-pipeline-step">
-<div class="inf-step-id">G</div>
-<div class="inf-step-label">GHOST</div>
-<div class="inf-step-desc">Событие прошлого</div>
+<div class="inf-step-id">01</div>
+<div class="inf-step-label">Валидация</div>
+<div class="inf-step-desc">Part 5 — OCEAN, Enneagram, MBTI: проверка SPINE через психологические инструменты</div>
 </div>
 <div class="inf-pipeline-step">
-<div class="inf-step-id">L</div>
-<div class="inf-step-label">LIE</div>
-<div class="inf-step-desc">Ложная установка</div>
+<div class="inf-step-id">02</div>
+<div class="inf-step-label">CoT-якоря</div>
+<div class="inf-step-desc">Part 6 — цепочка рассуждений персонажа в реальном времени</div>
 </div>
 <div class="inf-pipeline-step">
-<div class="inf-step-id">F</div>
-<div class="inf-step-label">FLAW</div>
-<div class="inf-step-desc">Поведенческий недостаток</div>
+<div class="inf-step-id">03</div>
+<div class="inf-step-label">Техническая реализация</div>
+<div class="inf-step-desc">Part 7 — System Prompt, CORE DIRECTIVES, Lorebook, XML-теги</div>
 </div>
 <div class="inf-pipeline-step">
-<div class="inf-step-id">N</div>
-<div class="inf-step-label">NEED</div>
-<div class="inf-step-desc">Истинная потребность</div>
+<div class="inf-step-id">04</div>
+<div class="inf-step-label">Полная карточка</div>
+<div class="inf-step-desc">Part 10 — пример собранной карточки со всеми элементами</div>
 </div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">W</div>
-<div class="inf-step-label">WANT</div>
-<div class="inf-step-desc">Осознанное желание</div>
-</div>
-</div>
-
-<h4>Цепочка: GHOST → LIE → FLAW → NEED → WANT</h4>
-<p>Каждый элемент объясняется предыдущим. GHOST порождает LIE (определение и примеры — в <a href="#p4_ghost">секции GHOST</a>), LIE защищает от боли, FLAW — поведение из LIE (определение и примеры — в <a href="#p4_lie">секции LIE</a>), FLAW мешает NEED, WANT совместимо с LIE.</p>
-
-<h4>Пример полной цепочки: Выщербленный</h4>
-<pre><code>GHOST: Брошен в архиве, воспитан документами. Инъекция живого документа начала распад.
-  ↓ объясняет
-LIE: "Если я поглощу достаточно — стану цельным"
-  ↓ защищает от боли пустоты
-FLAW: Поглощает чужое прошлое, после каждого теряет часть себя
-  ↓ поведение из LIE (заполнение = решение)
-NEED: Принять утраты как часть себя, не заменять чужой памятью
-  ↑ FLAW мешает (поглощение вместо принятия)
-WANT: Стать цельным — заполнить пустоты внутри
-  ↑ совместимо с LIE ("я пуст, поэтому должен заполниться")</code></pre>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Полная карточка Выщебленного с GHOST Layers, CoT и XML: <a href="#p10_vysherblenny">Part 10: Выщербленный</a></p>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Практическое применение GHOST на примере персонажа → <a href="#p10_omnis">Part 10: Омнис-Зета 7-Квин</a></p>
-
-<div class="callout important">
-<p><strong>📌 Правило:</strong> LIE и GHOST — не обязательны для базовой карточки. Но если вы используете полную цепочку — она должна быть логически связана. Проверьте: GHOST объясняет LIE? LIE защищает от боли GHOST? FLAW — прямое поведение из LIE?</p>
 </div>
 
 </section>
