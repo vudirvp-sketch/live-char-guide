@@ -28,6 +28,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
 | Карточка персонажа | Part 1 | p1_card_overview | Definition | 4 блока карточки: SP, Description, Examples, Greeting. Overview of card structure and block purposes |
+| Структура гайда (диаграмма + TOC) | Part 1 | p1_structure_overview | Navigation | Mermaid concept relationship diagram + Table of Contents. Added in Phase 9 |
 | Core Rules (4 базовых правила) | Part 1 | p1_core_rules | Rules | 4 foundational rules of character creation. GHOST inline definition. Перенесено из glossary.json → Part 1 |
 | Токен-бюджет | Part 1 | p1_token_budget | Reference | Token pipeline and per-block limits. 2 subsections: конвейер сборки + лимиты по блокам |
 | Конвейер сборки карточки | Part 1 | p1_assembly_pipeline | Pipeline | Step-by-step card assembly pipeline with mini-example embedded at step 06 |
@@ -68,7 +69,7 @@ This document is the **single source of truth** for "where does concept X live."
 | NEED | Part 4 | p4_need | Definition+Examples | Истинная потребность. What the character actually needs (vs wants) |
 | WANT | Part 4 | p4_want | Definition+Examples | Осознанное желание. What the character thinks they want |
 | GHOST Layers | Part 4 | p4_ghost_layers | Full treatment | 3-tier структура GHOST. Deep structure of traumatic events |
-| Полный СПИН (5 элементов) | Part 4 | p4_spine_full_chain | Chain-connection | GHOST→LIE→FLAW→NEED→WANT full chain. Эллиот Алдерсон example |
+| Полный СПИН (5 элементов) | Part 4 | p4_spine_full_chain | Chain-connection | GHOST→LIE→FLAW→NEED→WANT full chain. Елена example |
 | SPINE → Anchors mapping | Part 4 | p4_spine_mapping | Protocol | WANT/NEED/FLAW → якоря derivation protocol |
 | SPINE consistency check | Part 4 | p4_spine_check | Diagnostic | Внутренняя консистентность. Verifying SPINE elements align logically |
 | SPINE Navigation | Part 4 | p4_spine_navigation | Navigation | Navigational map from GHOST to full card. Learning path through SPINE elements |
@@ -95,7 +96,7 @@ This document is the **single source of truth** for "where does concept X live."
 | CoT basics | Part 6 | p6_cot_basics | Definition | Основы CoT для 12B vs 32B+ моделей. Core concepts and terminology |
 | CoT Tier definitions | Part 6 | p6_cot_tiers | Reference | Tier 0/1/2/3 определения. What each tier provides and when to use it |
 | CoT Tier 2 | Part 6 | p6_cot_tier2 | Template | Structured internal process. Template for mid-level CoT implementation |
-| CoT Tier 3 | Part 6 | p6_cot_tier3 | Template | Full XML blocks. Пример: Эллиот Алдерсон. Advanced CoT with full reasoning |
+| CoT Tier 3 | Part 6 | p6_cot_tier3 | Template | Full XML blocks. Пример: Выщербленный. Advanced CoT with full reasoning |
 | CoT anchors | Part 6 | p6_cot_anchors | Rules | Внутренний процесс как якорь. How CoT serves as behavioral anchor |
 
 ### Part 7A: System Prompt & Assembly (System Prompt и сборка)
@@ -139,7 +140,7 @@ This document is the **single source of truth** for "where does concept X live."
 | AP-8: GHOST no anchors | Part 8 | p8_ap8_ghost_no_anchors | Anti-pattern | GHOST без якорей. GHOST must be expressed through anchors |
 | AP-9: Broken SPINE | Part 8 | p8_ap9_spine_broken | Diagnostic | Конфликтующие элементы СПИН. SPINE elements contradict each other |
 | AP-10: CoT overload | Part 8 | p8_ap10_cot_overload | Anti-pattern | Перегрузка CoT-якорями. Too much CoT structure overwhelms model |
-| AP-11: Voice Bleed | Part 8 | p8_ap11_voice_bleed | Anti-pattern | Переплетение голосов. Уолтер Уайт + Джесси Пинкман |
+| AP-11: Voice Bleed | Part 8 | p8_ap11_voice_bleed | Anti-pattern | Переплетение голосов. Выщербленный + Йоуёма. Updated in Phase 4 |
 | AP-12: XML malformed | Part 8 | p8_ap12_xml_malformed | Anti-pattern | Некорректные XML-теги. Broken XML syntax breaks parsing |
 | AP-13: Lorebook conflict | Part 8 | p8_ap13_lorebook_conflict | Anti-pattern | Конфликт Lorebook-записей. Contradictory entries in lorebook |
 | AP-14: Context violation | Part 8 | p8_ap14_context_violation | Anti-pattern | Нарушение контекстного окна. Content exceeds available context |
@@ -186,13 +187,19 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|---------------|-----------------|--------------|-------|
 | Model Capability Table | Appendix B | appendix_model_table | Reference | Created in Phase 3.3 from consolidated MODEL_NOTE tags |
 
+### Appendix C: Glossary (Глоссарий)
+
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Глоссарий | Appendix C | appendix_glossary | Reference | Alphabetical glossary of all 30 technical terms. Created in Phase 9 |
+
 ---
 
 ## Summary Table
 
 | Part | Title | Sections |
 |------|-------|----------|
-| Part 1 | Basic Blocks | 5 |
+| Part 1 | Basic Blocks | 6 (added p1_structure_overview in Phase 9) |
 | Part 2 | Behavioral Anchors | 6 |
 | Part 3 | Voice and Isolation | 8 |
 | Part 4 | SPINE Framework | 11 |
@@ -205,7 +212,8 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 10 | Full Card Examples | 6 |
 | Appendix A | MBTI Reference | 1 |
 | Appendix B | Model Capability Table | 1 |
-| **Total** | | **94** |
+| Appendix C | Glossary | 1 |
+| **Total** | | **96** |
 
 ---
 
@@ -263,4 +271,4 @@ Before finalizing any Part, verify:
 ---
 
 *Document prepared for Live Character Guide v9 rebuild project*
-*Updated 2026-05-15: v9.0.0 — Phases 2–3 restructure. Part 7 split into 7A/7B, MBTI moved to Appendix A, AP-15 OCEAN Overload moved to Part 5, AP-16 renumbered to AP-15, Appendix B added for Model Capability Table. 93 sections across 10 parts + 2 appendices.*
+*Updated 2026-05-15: v9.0.0 — Phases 2–9 restructure complete. Part 7 split into 7A/7B, MBTI moved to Appendix A, AP-15 OCEAN Overload moved to Part 5, AP-16 renumbered to AP-15, Appendix B (Model Capability Table) and Appendix C (Glossary) added, concept diagram and TOC added to Part 1, cross-reference cleanup and callout unification done. 96 sections across 10 parts + 3 appendices.*

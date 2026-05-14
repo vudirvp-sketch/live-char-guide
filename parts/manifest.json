@@ -7,6 +7,7 @@
       "title": "Базовые блоки карточки",
       "anchors": [
         "p1_card_overview",
+        "p1_structure_overview",
         "p1_core_rules",
         "p1_token_budget",
         "p1_assembly_pipeline",
@@ -15,7 +16,7 @@
     },
     {
       "file": "part_02.html",
-      "title": "Поведенческие якоря",
+      "title": "Behavioral Anchors (поведенческие якоря)",
       "anchors": [
         "p2_basic_anchors",
         "p2_anchor_rules",
@@ -27,7 +28,7 @@
     },
     {
       "file": "part_03.html",
-      "title": "Голос и изоляция",
+      "title": "Voice Isolation (изоляция голоса)",
       "anchors": [
         "p3_voice_isolation",
         "p3_influence_hierarchy",
@@ -61,8 +62,9 @@
       "title": "Психологический инструментарий",
       "anchors": [
         "p5_ocean_basics",
-        "p5_enneagram_basics",
+        "p5_elena_profile",
         "p5_ocean_warning",
+        "p5_enneagram_basics",
         "p5_mbti_ref",
         "p5_cross_instrument_map",
         "p5_enneagram_wings",
@@ -71,7 +73,7 @@
     },
     {
       "file": "part_06.html",
-      "title": "Цепочка рассуждений (CoT)",
+      "title": "CoT (цепочка рассуждений)",
       "anchors": [
         "p6_cot_bridge",
         "p6_cot_basics",
@@ -83,7 +85,7 @@
     },
     {
       "file": "part_07a.html",
-      "title": "System Prompt и сборка",
+      "title": "System Prompt: Structure and Assembly",
       "anchors": [
         "p7a_system_prompt",
         "p7a_core_directives",
@@ -101,12 +103,12 @@
     },
     {
       "file": "part_07b.html",
-      "title": "Lorebook, приветствие и совместимость",
+      "title": "Part 07b",
       "anchors": [
+        "p7b_structured_inject",
         "p7b_lorebook_basics",
         "p7b_lorebook_mechanics",
-        "p7b_lorebook_advanced",
-        "p7b_structured_inject"
+        "p7b_lorebook_advanced"
       ]
     },
     {
@@ -163,14 +165,25 @@
   ],
   "appendices": [
     {
+      "file": "appendix_glossary.html",
+      "title": "Глоссарий",
+      "anchors": [
+        "appendix_glossary"
+      ]
+    },
+    {
       "file": "appendix_mbti.html",
-      "title": "Справочник MBTI",
-      "anchors": ["appendix_mbti"]
+      "title": "appendix_mbti",
+      "anchors": [
+        "appendix_mbti"
+      ]
     },
     {
       "file": "appendix_model_table.html",
-      "title": "Таблица возможностей моделей",
-      "anchors": ["appendix_model_table"]
+      "title": "Model Capability Table",
+      "anchors": [
+        "appendix_model_table"
+      ]
     }
   ]
 }

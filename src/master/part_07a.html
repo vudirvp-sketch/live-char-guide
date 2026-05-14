@@ -43,8 +43,8 @@ Format Lock:
 
 <p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Директивы пишутся на английском — <a href="#p7a_core_directives">почему → CORE DIRECTIVES</a></small> Директивы 6 и 7 ссылаются на свои подробные описания по номеру — полный текст каждой директивы не дублируется в шаблоне.</p>
 
-<div class="callout important">
-<p><strong>📌 Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
+<div class="callout rule">
+<p><strong>RULE: Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Каждая директива подробно разобрана ниже: <a href="#p7a_core_directives">CORE DIRECTIVES — объяснения и примеры</a></p>
@@ -57,8 +57,8 @@ Format Lock:
 
 <p>CORE DIRECTIVES — единая система из 7 директив на английском языке, размещаемая <strong>внутри System Prompt</strong>. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. CORE DIRECTIVES — это содержимое System Prompt; сам System Prompt также включает Identity Block, Anti-godmoding, Tone Frame и другие элементы.</p>
 
-<div class="callout important">
-<p><strong>📌 Правило языка директив:</strong> Директивы SP и CORE DIRECTIVES — на английском. RP-контент (Description, Examples, Greeting) — на языке карточки. На 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам), потому что обучающая выборка содержит больше английских паттернов инструкций.</p>
+<div class="callout rule">
+<p><strong>RULE: Правило языка директив:</strong> Директивы SP и CORE DIRECTIVES — на английском. RP-контент (Description, Examples, Greeting) — на языке карточки. На 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам), потому что обучающая выборка содержит больше английских паттернов инструкций.</p>
 </div>
 
 <p>Полный набор — все 7 директив:</p>
@@ -114,8 +114,8 @@ Format Lock:
 </ol>
 <p><span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
 
-<div class="callout tip">
-<p><strong>💡 Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
+<div class="callout rec">
+<p><strong>RECOMMENDATION: Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Pre-Deploy Validation включает проверку CORE DIRECTIVES → <a href="#p9_pre_deploy">Пред-деплой валидация (Part 9)</a></p>
@@ -139,8 +139,8 @@ Format Lock:
 </table>
 </div>
 
-<div class="callout tip">
-<p><strong>💡 Двойная функция:</strong> (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
+<div class="callout rec">
+<p><strong>RECOMMENDATION: Двойная функция:</strong> (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
 </div>
 
 </section>
@@ -161,12 +161,12 @@ Format Lock:
 </table>
 </div>
 
-<div class="callout important">
-<p><strong>📌 Почему нельзя смешивать:</strong> <a href="#p1_core_rules">Pattern Matcher</a>: два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
+<div class="callout rule">
+<p><strong>RULE: Почему нельзя смешивать:</strong> Pattern Matcher: два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
 </div>
 
-<div class="callout important">
-<p><strong>📌 Правило разрешения конфликта:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
+<div class="callout rule">
+<p><strong>RULE: Правило разрешения конфликта:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
 </div>
 
 <h4>Format Lock инструкция</h4>
@@ -211,7 +211,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 Сцена — ночь, дождь. Елена уставшая после долгого дня.]</code></pre>
 
 <h4>Template B: Шаблон Author's Note (4 секции — с GHOST-activation)</h4>
-<p>Используется, когда персонаж имеет явный GHOST-элемент (см. Part 4). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
+<p>Используется, когда персонаж имеет явный GHOST-элемент (see → Part 4: GHOST). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
 <div class="example-label template">TEMPLATE</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
@@ -262,12 +262,12 @@ GHOST-activation: Активен, если в сцене был триггер (
 </table>
 </div>
 
-<div class="callout important">
-<p><strong>📌 Важно:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
 </div>
 
-<div class="callout warn">
-<p>⚠️ <strong>Ollama и LM Studio:</strong> Эти интерфейсы имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
+<div class="callout rule">
+<p><strong>RULE: Ollama и LM Studio:</strong> Эти интерфейсы имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
 </div>
 
 <details class="interactive">
@@ -309,8 +309,8 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <p><sup>1</sup> SP на английском: подробнее → <a href="#p7a_core_directives">CORE DIRECTIVES</a></p>
 
-<div class="callout tip">
-<p><strong>💡 AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос. Подробнее о правиле голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
+<div class="callout rec">
+<p><strong>RECOMMENDATION: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос. Подробнее о правиле голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 <p><span class="remark-icon" aria-hidden="true">→</span> Технические блоки настроены. Проверьте, нет ли анти-паттернов → <a href="#p8_antipatterns_overview">Part 8: Анти-паттерны</a></p>
 
 </div>
@@ -497,8 +497,8 @@ Anchors:
 - {{trigger}} → {{action}} → {{price}}
 - {{trigger}} → {{action}} → {{price}}</code></pre>
 
-<div class="callout tip">
-<p><strong>💡 Совет:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
+<div class="callout rec">
+<p><strong>RECOMMENDATION:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
 </div>
 
 </section>
@@ -571,7 +571,7 @@ GHOST: Предательство редактора — история, кот�
 <p>~60 токенов. Один CoT-якорь — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, GHOST один. Для персонажей с GHOST Layers (Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
 
 <h4>Шаг 6: Token Budget Check</h4>
-<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. → <a href="#p1_token_budget">Part 1: Token Budget</a></p>
+<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (see → Part 1: Token Budget)</p>
 <p><strong>Бюджет Елены:</strong></p>
 <div class="table-wrap">
 <table>

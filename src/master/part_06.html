@@ -7,7 +7,7 @@
 <section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>
 <h2>CoT (цепочка рассуждений)</h2>
 
-<p><strong>Chain of Thought (CoT)</strong> — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа. [Model: see Appendix B — Model Capability Table] В этой части — от базового CoT до продвинутых техник интеграции с якорями.</p>
+<p><strong>Chain of Thought (CoT)</strong> — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span> В этой части — от базового CoT до продвинутых техник интеграции с якорями.</p>
 
 <p>Что добавляет CoT:</p>
 <ul>
@@ -25,12 +25,12 @@
 
 <p>Chain of Thought добавляет карточке пошаговые рассуждения, которые модель воспроизводит перед генерацией ответа.</p>
 
-<p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. [Model: see Appendix B — Model Capability Table]</p>
+<p><strong>Chain of Thought (CoT)</strong> — техника задания внутреннего процесса персонажа. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
 
-<p>CoT-якоря строятся на фундаменте трёх ранее изученных систем: сенсорные якоря (Part 2) задают физическое воплощение, GHOST-цепочка (Part 4) определяет скрытое напряжение, а базовые принципы CoT (ниже) связывают их в осознанный внутренний монолог. Ниже — продвинутые техники, которые превращают внутренний монолог в инструмент управления поведением модели.</p>
+<p>CoT-якоря строятся на фундаменте трёх систем: сенсорные якоря (Part 2) задают физическое воплощение, GHOST-цепочка (Part 4) определяет скрытое напряжение, а базовые принципы CoT (ниже) связывают их в осознанный внутренний монолог. Ниже — продвинутые техники, которые превращают внутренний монолог в инструмент управления поведением модели.</p>
 
-<div class="callout important">
-<p><strong>📌 Правило CoT:</strong> Не более 2-3 CoT якорей на карточку. Перегрузка = анти-паттерн AP-10 (CoT Overload).</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Правило CoT: Не более 2-3 CoT якорей на карточку. Перегрузка = анти-паттерн AP-10 (CoT Overload).</p>
 
 <p><strong>Почему ограничение:</strong></p>
 <ul>
@@ -76,7 +76,6 @@
 </table>
 </div>
 
-<p>Подробнее о Tier 2 и Tier 3 — в следующих секциях.</p>
 
 </section>
 
@@ -144,7 +143,7 @@ resolution: отступить
 *отступает на шаг, пальцы касаются виска*
 "Прошу прощения. Я... не должен."</code></pre>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Этот пример повторяет CoT из полной карточки: <a href="#p10_vysherblenny">Выщербленный</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Этот пример повторяет CoT из полной карточки: <a href="#p10_vysherblenny">Part 10: Выщербленный</a></p>
 
 </section>
 
@@ -170,13 +169,13 @@ resolution: отступить
 </table>
 </div>
 
-<div class="callout warn">
-<p><strong>⚠️ Предупреждение:</strong> CoT Overload (AP-10) — больше 3 CoT якорей. Модель начинает генерировать внутренние монологи вместо действий. Подробности: <a href="#p8_ap10_cot_overload">Part 8: AP-10</a>.</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> CoT Overload (AP-10) — больше 3 CoT якорей. Модель начинает генерировать внутренние монологи вместо действий. → <a href="#p8_ap10_cot_overload">Part 8: AP-10 CoT Overload</a>.</p>
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Сенсорные якоря (основа для CoT): <a href="#p2_sensory_anchors">Part 2: Сенсорные якоря</a></p>
 
-<p>Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A</a></p>
+<p>Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 
 </section>
 

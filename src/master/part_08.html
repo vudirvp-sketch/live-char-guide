@@ -17,8 +17,8 @@
 
 <p><strong>Анти-паттерн</strong> — распространённая ошибка в создании карточек. Каждый анти-паттерн имеет симптом, причину и решение.</p>
 
-<div class="callout important">
-<p><strong>📌 Важно:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
 </div>
 
 <h3>Сводная таблица анти-паттернов</h3>
@@ -29,22 +29,22 @@
 <tr><th>AP</th><th>Название</th><th>Критичность</th><th>Быстрый фикс</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="#p8_ap1_token_bloat">AP-1</a></td><td>Token Bloat</td><td><span class="tag risk">Высокая</span></td><td>Удалить повторы из Description</td></tr>
-<tr><td><a href="#p8_ap2_missing_price">AP-2</a></td><td>Missing Price</td><td><span class="tag risk">Высокая</span></td><td>Добавить физическую цену к якорю</td></tr>
-<tr><td><a href="#p8_ap3_voice_in_description">AP-3</a></td><td>Voice in Description</td><td><span class="tag risk">Высокая</span></td><td>Перенести голос в Examples</td></tr>
-<tr><td><a href="#p8_ap4_ghost_in_sp">AP-4</a></td><td>GHOST в SP</td><td><span class="tag risk">Высокая</span></td><td>Перенести SPINE в Description</td></tr>
-<tr><td><a href="#p8_ap5_reppen_high">AP-5</a></td><td>RepPen > 1.10</td><td><span class="tag tip">Средняя</span></td><td>Установить RepPen ≤ 1.10</td></tr>
-<tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-godmoding</td><td><span class="tag risk">Высокая</span></td><td>Добавить "Never speak for {{user}}"</td></tr>
-<tr><td><a href="#p8_ap7_presence_penalty">AP-7</a></td><td>Presence Penalty > 0</td><td><span class="tag tip">Средняя</span></td><td>Установить Presence Penalty = 0</td></tr>
-<tr><td><a href="#p8_ap8_ghost_no_anchors">AP-8</a></td><td>GHOST без якорей</td><td><span class="tag tip">Средняя</span></td><td>Добавить минимум 1 GHOST-якорь</td></tr>
-<tr><td><a href="#p8_ap9_spine_broken">AP-9</a></td><td>Broken SPINE</td><td><span class="tag risk">Высокая</span></td><td>Проверить цепочку G→L→F→N→W</td></tr>
-<tr><td><a href="#p8_ap10_cot_overload">AP-10</a></td><td>CoT Overload</td><td><span class="tag tip">Средняя</span></td><td>Оставить 2–3 CoT-якоря</td></tr>
-<tr><td><a href="#p8_ap11_voice_bleed">AP-11</a></td><td>Voice Bleed</td><td><span class="tag risk">Высокая</span></td><td>Добавить Character Markers</td></tr>
-<tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td><span class="tag tip">Средняя</span></td><td>Валидировать XML-теги</td></tr>
-<tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td><span class="tag tip">Средняя</span></td><td>Проверить консистентность записей</td></tr>
-<tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td><span class="tag risk">Высокая</span></td><td>Использовать 4K-Fallback Protocol</td></tr>
-<tr><td>—</td><td>OCEAN Overload</td><td><span class="tag tip">Средняя</span></td><td>OCEAN value conflicts → <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a></td></tr>
-<tr><td><a href="#p8_ap15_nested_anchors">AP-15</a></td><td>Nested Anchors</td><td><span class="tag tip">Средняя</span></td><td>Разбить на атомарные якоря</td></tr>
+<tr><td><a href="#p8_ap1_token_bloat">AP-1</a></td><td>Token Bloat</td><td>Высокая</td><td>Удалить повторы из Description</td></tr>
+<tr><td><a href="#p8_ap2_missing_price">AP-2</a></td><td>Missing Price</td><td>Высокая</td><td>Добавить физическую цену к якорю</td></tr>
+<tr><td><a href="#p8_ap3_voice_in_description">AP-3</a></td><td>Voice in Description</td><td>Высокая</td><td>Перенести голос в Examples</td></tr>
+<tr><td><a href="#p8_ap4_ghost_in_sp">AP-4</a></td><td>GHOST в SP</td><td>Высокая</td><td>Перенести SPINE в Description</td></tr>
+<tr><td><a href="#p8_ap5_reppen_high">AP-5</a></td><td>RepPen > 1.10</td><td>Средняя</td><td>Установить RepPen ≤ 1.10</td></tr>
+<tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-godmoding</td><td>Высокая</td><td>Добавить "Never speak for {{user}}"</td></tr>
+<tr><td><a href="#p8_ap7_presence_penalty">AP-7</a></td><td>Presence Penalty > 0</td><td>Средняя</td><td>Установить Presence Penalty = 0</td></tr>
+<tr><td><a href="#p8_ap8_ghost_no_anchors">AP-8</a></td><td>GHOST без якорей</td><td>Средняя</td><td>Добавить минимум 1 GHOST-якорь</td></tr>
+<tr><td><a href="#p8_ap9_spine_broken">AP-9</a></td><td>Broken SPINE</td><td>Высокая</td><td>Проверить цепочку G→L→F→N→W</td></tr>
+<tr><td><a href="#p8_ap10_cot_overload">AP-10</a></td><td>CoT Overload</td><td>Средняя</td><td>Оставить 2–3 CoT-якоря</td></tr>
+<tr><td><a href="#p8_ap11_voice_bleed">AP-11</a></td><td>Voice Bleed</td><td>Высокая</td><td>Добавить Character Markers</td></tr>
+<tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td>Средняя</td><td>Валидировать XML-теги</td></tr>
+<tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td>Средняя</td><td>Проверить консистентность записей</td></tr>
+<tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td>Высокая</td><td>Использовать 4K-Fallback Protocol</td></tr>
+<tr><td>—</td><td>OCEAN Overload</td><td>Средняя</td><td>OCEAN value conflicts → <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a></td></tr>
+<tr><td><a href="#p8_ap15_nested_anchors">AP-15</a></td><td>Nested Anchors</td><td>Средняя</td><td>Разбить на атомарные якоря</td></tr>
 </tbody>
 </table>
 </div>
@@ -57,7 +57,7 @@
 <p><strong>Причина:</strong> Избыточное описание, дублирование, голос в Description</p>
 <p><strong>Решение:</strong></p>
 <ul>
-<li><a href="#p3_voice_isolation">Вынесите голос в Examples</a></li>
+<li>Fix → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
 <li>Удалите дубликаты</li>
 <li>Оставьте только факты и якоря</li>
 </ul>
@@ -87,14 +87,14 @@
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Якорь без физической цены</p>
-<p><strong>Решение:</strong> Формат якоря: Триггер → Действие → Цена → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
+<p><strong>Решение:</strong> Формат якоря: Триггер → Действие → Цена. Fix → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 </div>
 </section>
 <section  data-section="p8_ap3_voice_in_description">
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
-<p><strong>Решение:</strong> Правило голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>: Description = только факты. Голос → Examples/Greeting.</p>
+<p><strong>Решение:</strong> Description = только факты. Голос → Examples/Greeting. Fix → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
 <div class="example-label illustration">ILLUSTRATION</div>
 <h4>До/После: Voice in Description — Елена</h4>
@@ -123,8 +123,8 @@
 <p><strong>Симптом:</strong> Психологический анализ (SPINE, GHOST) помещён в System Prompt</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
 <p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты.</p>
-<div class="callout warn">
-<p><strong>⚠️ Предупреждение:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
 </div>
 </div>
 </section>
@@ -132,7 +132,7 @@
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
-<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Рекомендуемые значения → <a href="#p7a_sampling_params">Part 7A: Sampling</a>.</p>
+<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
 </div>
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding">
@@ -144,15 +144,15 @@
 <div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>Never speak or act for {{user}}.</code></pre>
 <p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
-<p>Подробный разбор → <a href="#p1_top3_problems">Part 1: Топ-3 ошибки</a></p>
-<p>Full template → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
+<p>Fix → <a href="#p1_top3_problems">Part 1: Топ-3 ошибки</a></p>
+<p>Fix → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
 </section>
 <section  data-section="p8_ap7_presence_penalty">
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
-<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Обоснование → <a href="#p7a_sampling_params">Part 7A: Sampling</a>.</p>
+<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
 </div>
 </section>
 <section  data-section="p8_ap8_ghost_no_anchors">
@@ -174,7 +174,7 @@
 <h3>AP-9: Сломанный SPINE (Broken SPINE)</h3>
 <p><strong>Симптом:</strong> SPINE-элементы не связаны логически — WANT совместим с NEED (нет конфликта), FLAW существует без объяснения</p>
 <p><strong>Причина:</strong> WANT, NEED, FLAW, LIE, GHOST написаны независимо, без причинно-следственной связи</p>
-<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT → <a href="#p4_spine_full_chain">Part 4: SPINE</a>. Каждый элемент должен объясняться предыдущим.</p>
+<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT. Fix → <a href="#p4_spine_full_chain">Part 4: SPINE</a>. Каждый элемент должен объясняться предыдущим.</p>
 <div class="problem-block">
 <h4>❌ Сломанный SPINE</h4>
 <pre><code>GHOST: (отсутствует)  →  LIE: (отсутствует)  →  FLAW: Избегает близости
@@ -209,7 +209,7 @@ WANT: Доказать правоту самостоятельно
   ↑ совместимо с LIE ("работаю одна = доказываю одна")</code></pre>
 <p>Цепь замкнута: каждый элемент объясняется предыдущим. Проверка: GHOST→LIE (предательство → недоверие ✓), LIE→FLAW (недоверие → сарказм при близости ✓), FLAW→NEED (сарказм блокирует принятие ✓), WANT↔LIE (доказывает одна ↔ не нужно одобрение ✓).</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Полный разбор SPINE → <a href="#p4_spine_full_chain">Part 4: SPINE</a>. Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap10_cot_overload">
@@ -218,8 +218,8 @@ WANT: Доказать правоту самостоятельно
 <p><strong>Симптом:</strong> > 3 CoT якорей в карточке</p>
 <p><strong>Причина:</strong> Попытка задать весь внутренний процесс</p>
 <p><strong>Решение:</strong> 2-3 CoT якоря максимум. Остальное — обычные якоря.</p>
-<div class="callout warn">
-<p><strong>⚠️ Предупреждение:</strong> Модель генерирует внутренние монологи вместо действий, персонаж "думает" больше чем "делает".</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Модель генерирует внутренние монологи вместо действий, персонаж "думает" больше чем "делает".</p>
 </div>
 <div class="example-label illustration">ILLUSTRATION</div>
 <div class="problem-block">
@@ -230,7 +230,7 @@ WANT: Доказать правоту самостоятельно
 <h4>✅ Максимум 2–3 CoT-якоря</h4>
 <p>Оставьте только ключевые триггеры (GHOST-связь, критический конфликт). Остальные якоря — обычные T→A→P без CoT.</p>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — только 2 CoT-якоря по правилу (см. <a href="#p6_cot_basics">Part 6: CoT</a>).</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — только 2 CoT-якоря по правилу. Fix → <a href="#p6_cot_basics">Part 6: CoT</a></p>
 </div>
 </section>
 <section  data-section="p8_ap11_voice_bleed">
@@ -239,7 +239,7 @@ WANT: Доказать правоту самостоятельно
 <p><strong>Симптом:</strong> В мульти-персонажных сценах голоса смешиваются</p>
 <p><strong>Причина:</strong> Недостаточное различение голосов персонажей</p>
 <p><strong>Решение:</strong> Character Markers (Маркеры персонажа) — явные маркеры уникальности голоса. Примеры: специфичная лексика, синтаксические паттерны, телесные реакции, catchphrases.</p>
-<p><span class="remark-icon" aria-hidden="true">→</span> Примеры маркеров персонажей с Voice Bleed и Character Markers: <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
+<p>Fix → <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
 </div>
 </section>
 <section  data-section="p8_ap12_xml_malformed">
@@ -261,7 +261,7 @@ WANT: {{want}}
 WANT: {{want}}
 &lt;/spine&gt;</code></pre>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны, закрыты правильно. См. также <a href="#p7a_xml_tags">полный XML-пример (Part 7A)</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны. Fix → <a href="#p7a_xml_tags">Part 7A: XML Tags</a></p>
 </div>
 </section>
 <section  data-section="p8_ap13_lorebook_conflict">
@@ -269,7 +269,7 @@ WANT: {{want}}
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
 <p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
-<p><strong>Решение:</strong> Проверяйте консистентность всех <a href="#p7b_lorebook_basics">Lorebook (Part 7B)</a> записей с Description</p>
+<p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description. Fix → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a></p>
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>
 </div>
 </section>
@@ -278,7 +278,7 @@ WANT: {{want}}
 <h3>AP-14: Нарушение контекстного окна</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
-<p><strong>Решение:</strong> Используйте <a href="#p7a_4k_fallback">4K-Fallback Protocol (Part 7A)</a> или выберите модель с большим контекстом</p>
+<p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Fix → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a></p>
 </div>
 </section>
 <section  data-section="p8_ap15_nested_anchors">
@@ -291,7 +291,7 @@ WANT: {{want}}
 </div>
 <div class="solution-block">
 <h4>✅ Решение</h4>
-<p>Разбить на атомарные <a href="#p2_anchor_rules">якоря (Part 2)</a>: один якорь = одна связь T→A→P. Принцип атомарности.</p>
+<p>Разбить на атомарные якоря: один якорь = одна связь T→A→P. Fix → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a> Принцип атомарности.</p>
 </div>
 <div class="example-block">
 <h4>📝 Пример</h4>
