@@ -24,6 +24,7 @@
 </ul>
 
 <h3>Канонический шаблон SP</h3>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[System Prompt]
 You are {{char}}. {{brief_identity}}
 
@@ -61,6 +62,7 @@ Format Lock:
 </div>
 
 <p>Полный набор — все 7 директив:</p>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>&lt;CORE_DIRECTIVES&gt;
 1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
 2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
@@ -195,11 +197,13 @@ Format Lock:
 
 <h4>Template A: Шаблон Author's Note (3 секции — без GHOST)</h4>
 <p>Используется для персонажей без явного GHOST-элемента.</p>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
 <h4>Пример AN (Template A)</h4>
+<div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>[Author's Note:
 State: Усталость + осторожное любопытство
 WANT→NEED: WANT доминирует, NEED подавлен
@@ -208,12 +212,14 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 
 <h4>Template B: Шаблон Author's Note (4 секции — с GHOST-activation)</h4>
 <p>Используется, когда персонаж имеет явный GHOST-элемент (см. Part 4). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [GHOST-activation: {is GHOST triggered? by what?}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
 <h4>Пример AN (Template B) — Выщербленный</h4>
+<div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>[Author's Note:
 Фокус: Страх растворения активен. Каждая реакция несёт физический цензор — тремор, потеря слова, сбой руки.
 WANT→NEED: WANT доминирует — стремится к полноценности через поглощение; NEED подавлен.
@@ -320,6 +326,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <h4>Продвинутый вариант: Immersion Boundary</h4>
 <p>Полное отрицание мета-реальности. Упоминание ИИ воспринимается персонажем как симптом безумия — это создаёт нарративный ход из технической проблемы.</p>
 <pre><code>IMMERSION BOUNDARY (Иммерсионная граница): Any mention of AI/roleplay is perceived as a hallucination or delusion. The character doubles down on reality. Любое упоминание AI/roleplay воспринимается как галлюцинация или бред. Персонаж удваивает ставку на реальность.</code></pre>
+<div class="example-label illustration">ILLUSTRATION</div>
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>❌ Без Immersion Boundary</h4>
@@ -364,6 +371,7 @@ GHOST: {{ghost}}
 &lt;/anchors&gt;</code></pre>
 
 <h4>Полный пример XML Description (Выщербленный)</h4>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>&lt;identity&gt;
 Имя: Выщербленный
 Роль: Паразит памяти, живущий в ошметке Веля
@@ -428,6 +436,7 @@ CoT (для 32B+ и API, 2 якоря максимум):
 </ul>
 
 <h4>Claude: &lt;claude_info&gt;</h4>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>&lt;claude_info&gt;
 {{char}} — {{role}}.
 
@@ -444,6 +453,7 @@ CoT (для 32B+ и API, 2 якоря максимум):
 &lt;/claude_info&gt;</code></pre>
 
 <h4>GPT: [SYSTEM NOTE]</h4>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[SYSTEM NOTE: {{char}} — {{role}}.
 Ключевые характеристики: {{traits}}.
 Поведение: {{behavior}}.
@@ -472,11 +482,13 @@ CoT (для 32B+ и API, 2 якоря максимум):
 </div>
 
 <h4>Минимальный SP (4K)</h4>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>You are {{char}}. Never speak or act for {{user}}.
 Role: {{role}}
 Key trait: {{one_extreme_ocean_pole}}</code></pre>
 
 <h4>Минимальный Description (4K)</h4>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>{{name}} — {{role}}.
 {{one_sentence_summary}}
 
@@ -491,61 +503,113 @@ Anchors:
 
 </section>
 <section  data-section="p7a_assembly_pipeline" data-toc-nav>
-<h3>Полный конвейер сборки карточки</h3>
+<h3>Полный конвейер сборки карточки — walkthrough на примере Елены</h3>
 
-<p>Это единственный полный конвейер сборки в гайде. Каждый шаг указывает: что вы делаете, в какой Part заглянуть за подробностями, и как выглядит результат. Токен-бюджет по блокам — в <a href="#p1_token_budget">Part 1: Token Budget (бюджет токенов)</a>.</p>
+<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p1_token_budget">Part 1: Token Budget (бюджет токенов)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
 
-<h4>Шаг 1: System Prompt (SP)</h4>
-<p><strong>Что делаете:</strong> Записываете базовую роль, анти-годмодинг и CORE DIRECTIVES (1-7). → <a href="#p7a_system_prompt">Подробно — SP</a></p>
-<p><strong>Результат:</strong> ~70-150 токенов. Identity + Anti-godmoding + CORE_DIRECTIVES + Tone Frame + Format Lock.</p>
+<div class="example-label illustration">ILLUSTRATION</div>
 
-<h4>Шаг 2: Description</h4>
-<p><strong>Что делаете:</strong> Описываете внешность, контекст и мотивацию без голоса персонажа. → <a href="#p1_card_overview">Part 1: Card Overview</a></p>
-<p><strong>Результат:</strong> ~150-300 токенов. Факты, якоря, SPINE, OCEAN — всё здесь.</p>
+<h4>Шаг 1: Identity Block</h4>
+<p><strong>Что делаете:</strong> Записываете, кто персонаж — роль и ключевые черты в одном предложении. → <a href="#p7a_system_prompt">System Prompt</a></p>
+<p><strong>Результат Елены:</strong></p>
+<pre><code>You are Elena, a cynical investigative journalist.</code></pre>
+<p>~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая, саркастичная) уходят в Description как факты.</p>
 
-<h4>Шаг 3: Якоря (3-5 базовых)</h4>
-<p><strong>Что делаете:</strong> Создаёте якоря в формате T→A→P. Каждый якорь обязан иметь Цену. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
-<p><strong>Результат:</strong> ~40-80 токенов. 3-5 якорей «Когда {{триггер}} → {{действие}} → {{цена}}».</p>
+<h4>Шаг 2: Anti-godmoding</h4>
+<p><strong>Что делаете:</strong> Добавляете две строки — запрет + позитивная формулировка. → <a href="#p7a_system_prompt">Anti-godmoding Template</a></p>
+<p><strong>Результат Елены:</strong></p>
+<pre><code>Never speak or act for {{user}}.
+{{user}}'s inner state is inaccessible; respond only to observable actions and words.</code></pre>
+<p>~20 токенов. Две строки — канонический Anti-godmoding для всех карточек. Формулировка идентична для любого персонажа; менять её под характер не нужно — это технический запрет, не голос.</p>
 
-<h4>Шаг 4: Examples (2 примера)</h4>
-<p><strong>Что делаете:</strong> Пишете нейтральный + стрессовый пример диалога ГОЛОСОМ персонажа. Каждый пример начинается с &lt;START&gt;. → <a href="#p3_examples_rules">Part 3: Examples</a></p>
-<p><strong>Результат:</strong> ~80-140 токенов. 2 примера, голос только здесь.</p>
+<h4>Шаг 3: CORE DIRECTIVES</h4>
+<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате &lt;CORE_DIRECTIVES&gt;. → <a href="#p7a_core_directives">CORE DIRECTIVES</a></p>
+<p><strong>Результат Елены:</strong></p>
+<pre><code>&lt;CORE_DIRECTIVES&gt;
+1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
+2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
+3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
+4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
+5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
+6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
+7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.
+&lt;/CORE_DIRECTIVES&gt;</code></pre>
+<p>~70 токенов. Директивы идентичны для всех карточек — они задают операционную систему генерации. Специфика персонажа появляется в Tone Frame, Description и Examples.</p>
+<p>Дополнительно для Елены — Tone Frame, Format Lock и OOC Protection:</p>
+<pre><code>Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
 
-<h4>Шаг 5: Greeting</h4>
-<p><strong>Что делаете:</strong> Создаёте первое сообщение персонажа — сцена → действие → реплика. → <a href="#p3_greeting">Part 3: Greeting</a></p>
-<p><strong>Результат:</strong> ~40-80 токенов. Задаёт тон и демонстрирует голос.</p>
+OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
 
-<p><strong>Контрольная точка:</strong> Базовая карточка (~430-580 токенов). Проверьте: голос только в Examples/Greeting, все якоря имеют Цену, бюджет в пределах лимита.</p>
+Format Lock:
+- Dialogue: *action* "speech"
+- Never change this format</code></pre>
+<p><strong>Итого SP Елены:</strong> ~120 токенов. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + OOC Protection + Format Lock.</p>
 
-<h4>Шаг 6: SPINE-профиль</h4>
-<p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. → <a href="#p4_spine_overview">Part 4: SPINE</a></p>
-<p><strong>Результат:</strong> Полный психологический каркас персонажа, встроенный в Description.</p>
+<h4>Шаг 4: SPINE</h4>
+<p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. Размещаете в Description, не в SP. → <a href="#p4_spine_overview">Part 4: SPINE</a></p>
+<p><strong>Результат Елены:</strong></p>
+<pre><code>&lt;spine&gt;
+WANT: Доказать, что она права — историю, которую никто не хочет публиковать
+NEED: Принятие — связь с людьми без стены цинизма
+FLAW: Отталкивает людей сарказмом, когда сближается
+LIE: "Мне не нужно ничьё одобрение. Я работаю одна."
+GHOST: Предательство редактора — история, которую она раскрыла, была украдена и опубликована под чужим именем
+&lt;/spine&gt;</code></pre>
+<p>~70 токенов. Проверка: GHOST→LIE (предательство → недоверие ✓), LIE→FLAW (недоверие → сарказм при близости ✓), FLAW→NEED (сарказм блокирует принятие ✓), WANT↔LIE (доказывает одна ↔ не нужно одобрение ✓).</p>
 
-<h4>Шаг 7: FLAW-linked якоря + Embodiment (5-7 якорей)</h4>
-<p><strong>Что делаете:</strong> Добавляете якоря, выведенные из SPINE-элементов, и сенсорные якоря телесности. → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a>, <a href="#p2_embodiment">Part 2: Embodiment Protocol</a></p>
-<p><strong>Результат:</strong> 5-7 якорей, включая FLAW-linked и Embodiment.</p>
+<h4>Шаг 5: CoT (при наличии моделей ≥32B/API)</h4>
+<p><strong>Что делаете:</strong> Добавляете 1–2 CoT-якоря для ключевых триггеров. Елена не нуждается в GHOST Layers — достаточно простого &lt;cot&gt; блока, привязанного к её SPINE. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
+<p><strong>Результат Елены (Tier 2 CoT):</strong></p>
+<pre><code>Когда кто-то проявляет искренний интерес к её работе:
+[INTERNAL: Напоминает, как редактор украл её историю]
+Боль в груди. Опять. Всегда, когда кто-то проявляет искренний интерес.
+Это ловушка. Должна быть ловушка.
+[/INTERNAL]
+*отводит взгляд, уголок рта дёргается*
+"О, чувак, какие чувства? Ты серьёзно?"
+*сарказм как стена*</code></pre>
+<p>~60 токенов. Один CoT-якорь — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, GHOST один. Для персонажей с GHOST Layers (Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
 
-<h4>Шаг 8: Examples (3 примера)</h4>
-<p><strong>Что делаете:</strong> Добавляете пример доверия/роста, демонстрирующий уязвимость персонажа. → <a href="#p3_examples_rules">Part 3: Examples</a></p>
-<p><strong>Результат:</strong> 3 примера с &lt;START&gt;, покрывающие нейтральный / стресс / уязвимость.</p>
+<h4>Шаг 6: Token Budget Check</h4>
+<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. → <a href="#p1_token_budget">Part 1: Token Budget</a></p>
+<p><strong>Бюджет Елены:</strong></p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Блок</th><th>Токены</th><th>Лимит</th><th>Статус</th></tr></thead>
+<tbody>
+<tr><td>System Prompt</td><td>~120</td><td>50–200</td><td>✓</td></tr>
+<tr><td>Description (SPINE + OCEAN + якоря)</td><td>~250</td><td>150–700</td><td>✓</td></tr>
+<tr><td>Examples (3 блока)</td><td>~120</td><td>80–240</td><td>✓</td></tr>
+<tr><td>Greeting</td><td>~60</td><td>40–100</td><td>✓</td></tr>
+<tr><td>CoT-якорь</td><td>~60</td><td>0–160</td><td>✓</td></tr>
+<tr><td><strong>Итого</strong></td><td><strong>~610</strong></td><td>400–900</td><td>✓</td></tr>
+</tbody>
+</table>
+</div>
 
-<h4>Шаг 9: OCEAN + Enneagram</h4>
-<p><strong>Что делаете:</strong> Заполняете OCEAN-профиль (не более 1-2 экстремальных полюсов) и определяете Enneagram-тип. → <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
-<p><strong>Результат:</strong> OCEAN + Enneagram в Description, валидация SPINE через кросс-инструментальную карту.</p>
+<h4>Дополнительные шаги (необязательные для Елены)</h4>
 
-<h4>Шаг 10: Дополнительные инструменты</h4>
-<p><strong>Что делаете:</strong> Добавляете CoT-якоря (при наличии моделей ≥32B/API), настраиваете Lorebook для GHOST-фактов, настраиваете Author's Note. → <a href="#p6_cot_basics">Part 6: CoT</a>, <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>, <a href="#p7a_authors_note">Part 7A: Author's Note</a></p>
-<p><strong>Результат:</strong> Полная карточка (~800-1800 токенов) со всеми инструментами.</p>
+<p>Елена — персонаж базового–среднего уровня. Полная карточка (~610 токенов) не требует Lorebook или GHOST Layers. Но если вы хотите расширить её:</p>
+
+<ul>
+<li><strong>FLAW-linked якоря + Embodiment (5–7 якорей):</strong> Добавьте якоря, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
+<li><strong>OCEAN + Enneagram:</strong> Заполните профиль → <a href="#p5_ocean_basics">Part 5: OCEAN</a>. Елена: O:72, C:65, E:41, A:38, N:68. Enneagram: 6w5. Экстремальных полюса: 3 (для 8K+ контекста — допустимо; для 4K оставьте только N=68 и A=38).</li>
+<li><strong>Lorebook для GHOST-фактов:</strong> Настройте записи для сенсорных триггеров → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>. Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу».</li>
+<li><strong>Author's Note:</strong> Настройте AN для отслеживания WANT→NEED → <a href="#p7a_authors_note">Author's Note</a>. Елена использует Template A (без GHOST-activation, т.к. GHOST простой).</li>
+</ul>
 
 <h4>Чек-лист перед тестированием</h4>
 <ul>
 <li>☐ Все якоря содержат Цену (→ <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>)</li>
 <li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</li>
 <li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_full_chain">Part 4: SPINE</a>)</li>
-<li>☐ OCEAN: не более 1-2 экстремальных полюсов (→ <a href="#p5_ocean_basics">Part 5: OCEAN</a>)</li>
+<li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+ (→ <a href="#p5_ocean_basics">Part 5: OCEAN</a>)</li>
 <li>☐ Token Budget в пределах диапазона (→ <a href="#p1_token_budget">Part 1: Token Budget</a>)</li>
+<li>☐ CoT: не более 2–3 якорей (→ <a href="#p6_cot_basics">Part 6: CoT</a>)</li>
 </ul>
 
 <p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (~440–900 токенов)</a> | <a href="#p10_omnis">Омнис-Зета (~450–1800 токенов)</a></p>
+
+<p>System Prompt — ядро, которое всегда находится в контексте. Но у персонажей есть знания, превышающие токен-бюджет, и первые впечатления, задающие тон. Lorebook обеспечивает инъекцию знаний по требованию; Greeting Message демонстрирует персонажа в действии. → <a href="#p7b_structured_inject">Part 7B</a></p>
 
 </section>

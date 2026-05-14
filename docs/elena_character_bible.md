@@ -3,7 +3,7 @@
 > Any agent modifying Елена's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.1.0 (Phase 4 update — OCEAN, Enneagram, CoT added)
+**Version:** 9.2.0 (Phase 4.3–6 update — Assembly walkthrough, status labels, transitions)
 **Last Updated:** 2026-05-15
 
 ---
@@ -111,7 +111,7 @@
 - Part 4: Full SPINE chain + GHOST/LIE/NEED/WANT examples
 - Part 5: OCEAN profile (p5_elena_profile), Enneagram 6w5 mapping to SPINE
 - Part 6: CoT Tier 2 example (p6_cot_tier2)
-- Part 7A: Referenced in assembly pipeline
+- Part 7A: Assembly walkthrough with Елена's card (p7a_assembly_pipeline) — Identity, Anti-godmoding, CORE DIRECTIVES, SPINE, CoT, Token Budget check
 - Part 7B: Lorebook GHOST-fact example
 - Part 8: AP-1, AP-3, AP-9 before/after examples
 - Part 9: Quick Check example (p9_pre_deploy)
@@ -121,6 +121,6 @@
 - [x] OCEAN values in Part 5 match values referenced in Parts 8, 9 (O:72, C:65, E:41, A:38, N:68)
 - [x] SPINE elements in Part 4 match references in Parts 6, 7A, 8, 9
 - [x] Voice attributes in Part 3 match references in Parts 8, 9
-- [ ] No contradictions between any two Parts
+- [x] No contradictions between any two Parts (verified Phase 5 dedup re-check)
 - [x] Anchors remain consistent across all Part references
 - [x] GHOST story never changes between mentions

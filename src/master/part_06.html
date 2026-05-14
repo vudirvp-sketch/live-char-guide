@@ -93,6 +93,7 @@
 {{внешняя реакция}}</code></pre>
 
 <h4>Пример: Елена</h4>
+<div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>[INTERNAL: Напоминает, как редактор украл её историю]
 Боль в груди. Опять. Всегда, когда кто-то проявляет искренний интерес.
 Это ловушка. Должна быть ловушка.
@@ -129,6 +130,7 @@ resolution: {{решение — действие персонажа}}
 <p><em>processus_analysium — каноническое имя XML-тега для внутреннего процесса. "Processus" = процесс, "analysium" = анализ. Возможно использование других имён (inner_thought, mental_process), но этот формат протестирован на API моделях (Claude, GPT-4) и показывает стабильные результаты.</em></p>
 
 <h4>Пример: Выщербленный</h4>
+<div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: присутствие другого со значимым прошлым
@@ -155,6 +157,7 @@ resolution: отступить
 <pre><code>Триггер → [Внутренний процесс] → Внешняя реакция → Цена</code></pre>
 
 <h4>Примеры</h4>
+<div class="example-label illustration">ILLUSTRATION</div>
 <div class="table-wrap">
 <table>
 <thead>
@@ -172,6 +175,8 @@ resolution: отступить
 </div>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Сенсорные якоря (основа для CoT): <a href="#p2_sensory_anchors">Part 2: Сенсорные якоря</a></p>
+
+<p>Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A</a></p>
 
 </section>
 
