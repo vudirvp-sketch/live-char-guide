@@ -513,12 +513,12 @@
       ],
       "definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives_l3",
+      "anchor_id": "p7_core_directives",
       "cross_refs": [
-        "#p7_core_directives_l3",
+        "#p7_core_directives",
         "#p4_spine_mapping"
       ],
-      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. Полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY."
+      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [MODEL_NOTE: Наибольший эффект на моделях ≥32B и API; на 12B эффект ограничен]"
     },
     {
       "term": "PRE-GENERATION FILTER (Фильтр предгенерации)",
@@ -530,12 +530,12 @@
       ],
       "definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
       "prohibited": [],
-      "anchor_id": "p7_core_directives_l3",
+      "anchor_id": "p7_core_directives",
       "cross_refs": [
-        "#p7_core_directives_l3",
-        "#p7_sp_template_l3"
+        "#p7_core_directives",
+        "#p7_system_prompt"
       ],
-      "unified_definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. Директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN."
+      "unified_definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [MODEL_NOTE: Требует моделей ≥32B или API; 12B модели часто игнорируют эту директиву]"
     },
     {
       "term": "SP (MBTI temperament)",

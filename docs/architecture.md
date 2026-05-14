@@ -1,19 +1,19 @@
 # Live Character Guide Architecture
 
-> **Version:** 6.2.3
-> **Last Updated:** 2026-04-27
-> **Status:** Draft for Stage 0a (synced with Content Restoration Phases 0–13)
+> **Version:** 8.0.0
+> **Last Updated:** 2026-05-14
+> **Status:** v8.0.0 — Unified single-pass guide (no layer system)
 
 ---
 
 ## How the Repository Works
 
-Live Character Guide v6 follows a **two-stage build pipeline** that transforms master HTML files into a layered reading experience.
+Live Character Guide v8 follows a **single-stage build pipeline** that transforms master HTML files into a unified reading experience. All content is presented in a single linear pass from Part 1 to Part 10 — there are no layers, tiers, or depth levels.
 
 ### High-Level Flow
 
 ```
-Author edits → Build Stage 1 → Build Stage 2 → GitHub Pages
+Author edits → Build → GitHub Pages
 ```
 
 Detailed flow:
@@ -23,23 +23,25 @@ src/master/part_*.html (author content)
         │
         ▼
 ┌─────────────────────────────────────┐
-│  STAGE 1: build-layers.mjs          │
-│  Parse HTML → Extract by data-layer │
-│  → Generate per-layer HTML files    │
+│  build-unified.mjs                   │
+│  Parse HTML → Extract sections       │
+│  → Generate unified HTML files       │
+│  → Generate manifest + registry      │
 └─────────────────────────────────────┘
         │
         ▼
-build/parts-l1/*.html
-build/parts-l2/*.html
-build/parts-l3/*.html
-build/build-manifest.json
+build/parts/*.html (all sections equally)
+build/parts/manifest.json
+build/parts/glossary.html
+build/parts/footer.html
 build/section-registry.json
+build/build-manifest.json
         │
         ▼
 ┌─────────────────────────────────────┐
-│  STAGE 2: build-shell.mjs           │
-│  Copy shell + generated parts +     │
-│  data → dist/                       │
+│  build-shell-unified.mjs             │
+│  Copy shell + generated parts +      │
+│  data → dist/                        │
 └─────────────────────────────────────┘
         │
         ▼
@@ -54,7 +56,7 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files with `data-layer` markup (109 sections post-content-restoration) | Authors writing Parts |
+| `src/master/` | Author | Master guide HTML files (92 sections in v8) | Authors writing Parts |
 | `src/shell/` | Infrastructure | HTML/CSS/JS shell (loader, styles, panels) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
 | `docs/` | Author | Documentation (not included in build) | Authors |
@@ -71,94 +73,76 @@ dist/ (deployed to GitHub Pages)
 
 3. **Authors DO NOT hardcode widget data in JS** — All widget data lives in `data/*.json` files.
 
-4. **Authors DO NOT write content outside `<section data-layer>`** — All content in master HTML must be inside a section with `data-layer` and `data-section` attributes.
+4. **Authors DO NOT write content outside `<section data-section>`** — All content in master HTML must be inside a section with `data-section` attribute.
 
 ---
 
 ## What Happens During Build
 
-### Stage 1: build-layers.mjs
+### Build Stage: build-unified.mjs
 
 **Input:** All `src/master/part_*.html` files
 
 **Process:**
 1. Parse each master Part HTML file
-2. Find all `<section>` elements with `data-layer` attribute
-3. For nested sections: child inherits `data-layer` from nearest ancestor
-4. Validate: no content outside `<section data-layer>` blocks
-5. Validate: every `<section data-layer>` has `data-section` attribute
-
-**Assembly per layer:**
-- **L1:** Extract `data-layer="l1"` sections only
-- **L2:** Extract `data-layer="l1"` + `data-layer="l2"` sections
-- **L3:** Extract all sections
+2. Find all `<section>` elements with `data-section` attribute
+3. Validate: every `<section>` has `data-section` attribute
+4. All sections are processed equally — no filtering by layer, tier, or depth
+5. Check for duplicate `data-section` IDs across all Parts
 
 **Output:**
-- `build/parts-l1/*.html` — Layer 1 HTML files
-- `build/parts-l2/*.html` — Layer 2 HTML files
-- `build/parts-l3/*.html` — Layer 3 HTML files
-- `build/build-manifest.json` — Top-level build manifest (version, section count, layer hashes)
-- `build/parts-l{N}/manifest.json` — Per-layer manifest for lazy-loader
-- `build/section-registry.json` — All `data-section` IDs for cross-phase validation
-- `build/glossary.html` — Per-layer no-JS glossary
+- `build/parts/part_01.html` through `part_10.html` — Unified HTML files (all sections included)
+- `build/parts/manifest.json` — Build manifest (version, format, parts with anchors)
+- `build/parts/glossary.html` — No-JS glossary
+- `build/parts/footer.html` — Footer with version and link
+- `build/section-registry.json` — All `data-section` IDs mapped to parts
+- `build/build-manifest.json` — Top-level build manifest (version, section count, content hash)
 
-### Stage 2: build-shell.mjs
+### Shell Stage: build-shell-unified.mjs
 
-**Input:** `src/shell/` + `build/parts-l*/` + `data/`
+**Input:** `src/shell/` + `build/parts/` + `data/`
 
 **Process:**
 1. Copy shell HTML/CSS/JS
-2. Copy generated layer parts (path: `build/parts-l{N}/` → `dist/parts-l{N}/`)
-3. Copy data JSON files
-4. Generate footer for each layer
-5. Validate layer names match `build/layer-config.json`
+2. Copy generated parts and data files
+3. Generate deployment-ready output
 
 **Output:** `dist/` directory ready for GitHub Pages deployment
 
 ---
 
-## Layer Model
+## Section Model
 
-### Cumulative Layer Architecture
+### Unified Single-Pass Architecture
+
+v8 presents ALL content in a single linear pass. There are no layers, tiers, or depth levels. Every section is visible to every reader. The guide follows a natural learning gradient:
 
 ```
-L1 ⊂ L2 ⊂ L3
+Part 1 (Foundations) → Part 2 (Anchors) → Part 3 (Voice) → Part 4 (SPINE) → Part 5 (Psychology) → Part 6 (CoT) → Part 7 (Technical) → Part 8 (Anti-patterns) → Part 9 (Diagnostics) → Part 10 (Examples)
 ```
 
-- **L1 (Минимальный/Basic):** ~15 min read, 400-800 tokens/card — basic blocks, anchors, Voice Isolation, Quickstart + bridges to ALL other topics
-- **L2 (Глубокий/Deep):** ~30 min read, 800-1500 tokens/card (includes all L1 content) — SPINE (WANT/NEED/FLAW), FLAW-linked anchors, OCEAN/Enneagram/MBTI, CORE DIRECTIVES (5 directives), Tone Frame, AP-1–AP-7 + AP-15 basic + AP-16
-- **L3 (Экспертный/Expert):** ~60 min read, 1500+ tokens/card (includes all L1 + L2 content) — +LIE/GHOST/GHOST Layers, CoT all Tiers, CORE DIRECTIVES 6–7, OOC Protection, Immersion Boundary, XML/API/4K-Fallback, AP-8–AP-14, AP-15 extended, multi-character, Pre-Deploy Validation
-
-### Layer Markup in Master HTML
+### Section Markup in Master HTML
 
 ```html
-<section data-layer="l1" data-section="p2_basic_anchors">
-  <!-- Content visible in ALL layers -->
-</section>
-
-<section data-layer="l2" data-section="p2_embodiment">
-  <!-- Content added starting from L2 -->
-</section>
-
-<section data-layer="l3" data-section="p4_lie">
-  <!-- LIE (ложная установка) — L3-only after restructure -->
+<section data-section="p2_basic_anchors" data-toc-nav>
+  <!-- Content visible to ALL readers -->
 </section>
 ```
 
 **Key attributes:**
-- `data-layer`: Which layer(s) this section belongs to (`l1`, `l2`, or `l3`)
 - `data-section`: Unique identifier across entire guide (convention: `p{N}_{topic}`)
+- `data-toc-nav`: Optional — marks section for inclusion in Table of Navigation
 
 ### Section ID Naming Convention
 
 Pattern: `p{part_number}_{topic}`
 
 Examples:
-- `p1_basic_blocks` — Part 1, basic blocks overview
+- `p1_card_overview` — Part 1, card anatomy overview
 - `p2_basic_anchors` — Part 2, anchor basics
-- `p2_embodiment` — Part 2, embodiment protocol
 - `p4_spine_overview` — Part 4, SPINE framework
-- `p5_ocean_basics` — Part 5, OCEAN tool
+- `p7_core_directives` — Part 7, CORE DIRECTIVES
+- `p8_ap15_ocean_overload` — Part 8, anti-pattern 15
 
 **Rule:** Each `data-section` ID must be unique across the ENTIRE master guide, not just within a Part.
 
@@ -168,70 +152,23 @@ Examples:
 
 CORE DIRECTIVES is a unified directive system for the System Prompt, consisting of 7 items:
 
-| # | Directive | Layer | Function |
-|---|-----------|-------|----------|
-| 1 | SHOW NEVER TELL | L2 | Demonstrate through behavior, don't describe |
-| 2 | EMBODIMENT FIRST | L2 | State → Body → Sensor → Speech |
-| 3 | SPATIAL & ANATOMICAL LOCK | L2 | Prevent teleportation/anatomical errors |
-| 4 | ENVIRONMENTAL REACTIVITY | L2 | Sensory details only through character action |
-| 5 | INFLUENCE BOUNDARY | L2 | React to observable symptoms only |
-| 6 | CONSEQUENCE DRIVEN | L3 | WANT→NEED shift as Price accumulates |
-| 7 | PRE-GENERATION FILTER | L3 | 4-item self-check before response |
+| # | Directive | Function | Model Note |
+|---|-----------|----------|------------|
+| 1 | SHOW NEVER TELL | Demonstrate through behavior, don't describe | All models |
+| 2 | EMBODIMENT FIRST | State → Body → Sensor → Speech | All models |
+| 3 | SPATIAL & ANATOMICAL LOCK | Prevent teleportation/anatomical errors | All models |
+| 4 | ENVIRONMENTAL REACTIVITY | Sensory details only through character action | All models |
+| 5 | INFLUENCE BOUNDARY | React to observable symptoms only | All models |
+| 6 | CONSEQUENCE DRIVEN | WANT→NEED shift as Price accumulates | ≥32B and API; 12B limited effect |
+| 7 | PRE-GENERATION FILTER | 4-item self-check before response | ≥32B or API; 12B often ignores |
 
 **Directive Language Rule:** All directives in the CORE_DIRECTIVES block of the System Prompt are written in **English**, per terminology_dictionary.md convention. Guide prose explaining these directives is in **Russian**.
 
-**Bracket Format (IMP-46):** All character card examples across ALL layers use bracket format `[SYSTEM]/[DESCRIPTION]/[EXAMPLES]/[ANCHORS]`. XML tags (`<spine>`, `<ghost_layers>`, etc.) are used INSIDE Description for structural markup at L2+, but the outer block delimiters are always brackets.
+**Bracket Format:** All character card examples use bracket format `[SYSTEM]/[DESCRIPTION]/[EXAMPLES]/[ANCHORS]`. XML tags (`<spine>`, `<ghost_layers>`, etc.) are used INSIDE Description for structural markup, but the outer block delimiters are always brackets.
 
-**Layer-Flexibility Principle (IMP-47):** Content layer assignments follow `layer-restructure-plan-v3.md`, not the original v6-plan. Content is never rejected based on prior layer assignments. If layer-restructure moved a concept to L3, the content is restored AT L3.
+**Model Capability Notes:** Where a directive or technique has different effectiveness on different model sizes, this is noted inline using `[MODEL_NOTE: text]` format. These are technical constraints, not difficulty ratings — all content is mandatory reading.
 
-**Bidirectional Cross-Reference (IMP-48):** When section A references section B, section B MUST reference back to A. Unidirectional references create orphan knowledge. Verified in Phase 11 sync-audit and maintained in `docs/cross_reference_sync.md`.
-
----
-
-## Link Direction (DAG Model)
-
-Links flow **unidirectionally from complex to simple** (with IMP-48 bidirectional cross-references for navigation):
-
-```
-Part 4 (SPINE) ──can reference──▶ Part 2 (Anchors)
-Part 2 (Anchors) ──cannot reference──▶ Part 4 (SPINE)
-```
-
-This is a **Directed Acyclic Graph (DAG)**, not a web of cross-references.
-
-**Why:** Prevents duplication. Each concept is written once. Other Parts reference it; they do not re-explain it.
-
----
-
-## Cross-Layer Navigation
-
-### data-layer-switch Attribute
-
-Used for explicit invitations to go deeper:
-
-```html
-<a data-layer-switch="2#p4_spine_overview" class="layer-remark">
-  Подробнее о SPINE → Слой 2
-</a>
-```
-
-**Format:** `data-layer-switch="{layer}#{section-id}"`
-
-**Runtime behavior:**
-- Clicking switches to the specified layer
-- Scrolls to the specified section
-
-**Build-time processing:**
-- If target layer > current → render as layer-switch button
-- If target layer ≤ current → convert to regular anchor link
-- If target section doesn't exist → build error
-
-### Regular Anchor Links
-
-Regular `<a href="#section-id">` links:
-
-- If target exists in current layer → anchor link
-- If target doesn't exist → greyed-out text with tooltip "Available on Layer N"
+**Cross-Reference Rule:** When section A references section B, the reference is a 1-sentence mention with link. Concepts are explained in full only in their canonical location. Backward references (to earlier Parts) are 1 sentence + link. Forward references are replaced with inline 1-sentence definitions.
 
 ---
 
@@ -239,7 +176,7 @@ Regular `<a href="#section-id">` links:
 
 ### Markup in HTML, Data in JSON
 
-Widgets use the existing v5.12 model:
+Widgets use the existing model:
 
 1. **SVG/HTML markup** stays in master HTML
 2. **Text data** lives in `data/*.json` files
@@ -252,17 +189,16 @@ Widgets use the existing v5.12 model:
 | `data/ocean.json` | OCEAN pentagon: 5 trait descriptions, pole guidelines, anchor examples |
 | `data/enneagram.json` | Enneagram: 9 types with core fear, desire, lie, flaw, wings, OCEAN correlation |
 | `data/mbti.json` | MBTI: 16 types with temperament, hint, cognitive functions |
-| `data/glossary.json` | Term definitions with layer-specific context |
+| `data/glossary.json` | Term definitions with cross-references |
+| `data/character_schema.json` | JSON Schema for character cards |
+| `data/anchor-redirects.json` | Redirects for renamed/deleted section IDs |
+| `data/test_scenarios.json` | Test scenario definitions |
 
 ### Widget Lifecycle
 
-On layer switch, `lazy-loader.js`:
-1. Clears `#content.innerHTML`
-2. Fetches new parts
-3. Inserts into DOM
-4. Calls `initInteractiveElements()` (full reinitialization)
+Widgets activate when the user scrolls to the relevant Part. All widgets are always visible — no layer gating or conditional activation. The `lazy-loader.js` initializes interactive elements on page load.
 
-Panels (TOC, Glossary, Notepad) survive — they are outside `#content`.
+Panels (TOC, Glossary, Notepad) survive navigation — they are outside `#content`.
 
 ---
 
@@ -274,16 +210,19 @@ Panels (TOC, Glossary, Notepad) survive — they are outside `#content`.
 - `<script>` blocks → all scripts in `src/shell/lazy-loader.js`
 - `<link>` elements
 - `<meta>` elements
-- Any content outside a `<section data-layer>`
+- Any content outside a `<section data-section>`
+- `data-layer` attributes (removed in v8)
+- `data-layer-switch` attributes (removed in v8)
+- `class="layer-remark"` (removed in v8)
 
 ### Prohibited Actions
 
 - Do not edit `src/shell/` when writing Parts
 - Do not create new CSS classes (use component registry only)
 - Do not hardcode widget data in JS (use `data/*.json`)
-- Do not write content outside `<section data-layer>` in master HTML
-- Do not make backward links (from simple to complex Parts)
-- Do not duplicate concepts across Parts
+- Do not write content outside `<section data-section>` in master HTML
+- Do not duplicate concepts across Parts (one canonical location per concept)
+- Do not add layer/tier/depth markers or "basic/advanced" divisions
 
 ---
 
@@ -296,25 +235,23 @@ Version must be synchronized across ALL 4 locations:
 1. `package.json` — `version` field
 2. `src/VERSION` — plain text file
 3. `data/character_schema.json` — `version` field
-4. `src/shell/lazy-loader.js` — header comment
+4. Build output (`build/build-manifest.json`, `build/parts/manifest.json`)
 
 ### Version Format
 
 Semantic versioning: `MAJOR.MINOR.PATCH`
 
-- **MAJOR:** Architecture changes (v5 → v6)
-- **MINOR:** New features, new Parts
+- **MAJOR:** Architecture changes (v7 → v8 — unified restructuring)
+- **MINOR:** New features, new sections
 - **PATCH:** Bug fixes, content corrections
 
 ### Documentation Version Sync Rule
 
-When content changes are made (content restoration phase, new TP, layer restructure), the following MUST be updated:
+When content changes are made, the following MUST be updated:
 
-1. **Version bump:** Each affected `docs/*.md` file must have its version incremented by +0.1 in the header
+1. **Version bump:** Each affected `docs/*.md` file must have its version incremented
 2. **Date update:** The `Last Updated` field in the header must reflect the date of the change
 3. **Scope:** This applies to all files listed in `docs/` that have version headers
-
-**Rationale:** Documentation drift is the primary source of section count mismatches, stale migration records, and broken cross-references. Enforcing version bumps on docs makes it auditable which documents were reviewed after each change.
 
 ---
 
@@ -328,10 +265,11 @@ The following checks run before each commit:
 2. `check_english.py` — No English leaks (3+ words outside allowed contexts)
 3. `check_duplicates.py` — No duplicate concepts across Parts
 4. `validate-master.mjs` Check 3 — All anchor links resolve
-5. `data-layer`/`data-section` validation — All sections have required attributes
+5. `data-section` validation — All sections have required attributes
 6. Master HTML content restriction check — No prohibited elements
 7. CSS class check — All classes are from registry
 8. Syntax mix check — No Markdown patterns in HTML
+9. `validate-migration.mjs` — No `data-layer-switch` or `data-layer` on body (v8 requirement)
 
 ### CI/CD Pipeline
 
@@ -342,43 +280,41 @@ GitHub Actions workflow:
 
 ---
 
-## Directory Structure (v6)
+## Directory Structure (v8)
 
 ```
 live-char-guide/
 ├── .github/
 │   └── workflows/        # GitHub Actions
 ├── build/                # Generated artifacts (gitignored)
-│   ├── parts-l1/
-│   ├── parts-l2/
-│   ├── parts-l3/
+│   ├── parts/            # Unified HTML output
 │   ├── build-manifest.json
-│   ├── section-registry.json
-│   └── layer-config.json
+│   └── section-registry.json
 ├── data/                 # Widget data + glossary
 │   ├── glossary.json
 │   ├── ocean.json
 │   ├── enneagram.json
 │   ├── mbti.json
 │   ├── test_scenarios.json
-│   └── character_schema.json
+│   ├── character_schema.json
+│   └── anchor-redirects.json
 ├── docs/                 # Author documentation
 │   ├── architecture.md
 │   ├── character_bible.md
 │   ├── content_map.md
-│   ├── content_restoration_changelog.md
 │   ├── cross_reference_sync.md
 │   ├── user_journeys.md
 │   ├── components.md
 │   ├── migration_map.md
-│   ├── shell-components.md
+│   ├── transition_guide.md
 │   └── terminology_dictionary.md
 ├── scripts/              # Build and validation scripts
-│   ├── build-layers.mjs
-│   ├── build-shell.mjs
+│   ├── build-unified.mjs
+│   ├── validate-artifact.mjs
+│   ├── validate-migration.mjs
 │   └── ...
 ├── src/
-│   ├── master/           # Author content (NEW in v6)
+│   ├── master/           # Author content
 │   │   └── part_*.html
 │   ├── shell/            # Infrastructure
 │   │   ├── index.html
@@ -392,41 +328,28 @@ live-char-guide/
 
 ---
 
-## Layer Restructure (v6 → v6.1)
+## v7 → v8 Migration
 
-A layer restructure was performed to create qualitative differences between layers:
+v8 is a **unified restructuring** of v7, which mechanically merged L1/L2/L3 layers without eliminating their structural remnants.
 
-| Aspect | Before Restructure | After Restructure |
-|--------|--------------------|-------------------|
-| SPINE on L2 | 5 elements (WANT/NEED/FLAW/LIE/GHOST) | 3 elements (WANT/NEED/FLAW) |
-| LIE, GHOST | `data-layer="l2"` | `data-layer="l3"` |
-| CoT basics, CoT tiers | `data-layer="l2"` | `data-layer="l3"` |
-| Part 6 (CoT) | Mixed L2+L3 | L3-only content (+ L1 bridge) |
-| L1 sections | ~6 (5 Parts had zero L1) | 27 (all 10 Parts have L1 via bridges + new content) |
-| Total sections | 81 | 109 (91 after restructure + 18 after content restoration) |
+Key changes:
 
-**SPINE split rule:** On L2, SPINE = WANT/NEED/FLAW only. LIE and GHOST are L3-only. L1 bridge sections exist in all 10 Parts so readers know these topics exist.
+| Aspect | v7 | v8 |
+|--------|----|----|
+| Content model | L1/L2/L3 layers with `data-layer` attributes | Unified single-pass, no layers |
+| Build system | Layer extraction (`build-layers.mjs`) | Unified processing (`build-unified.mjs`) |
+| Section IDs | Layer suffixes (`_l2`, `_l3`) | No layer suffixes |
+| Widget activation | Gated by `data-layer` on `<body>` | Always visible |
+| SPINE | Split: WANT/NEED/FLAW (base) + LIE/GHOST (L3) | Unified: all 5 elements in causal order (GHOST→LIE→FLAW→NEED→WANT) |
+| CORE DIRECTIVES | Split: 1-5 (base) + 6-7 (L3) | Unified: all 7 directives, model notes inline |
+| AP-15 | Split into basic + extended | Merged into single `p8_ap15_ocean_overload` |
+| Quickstart | Part 1 (quickstart section) | Deleted; full Assembly Pipeline at end of Part 7 |
+| Cross-references | Forward refs with links, "What's next?" bridges | Backward refs only (1 sentence + link), Part Resumes |
+| "Основы/Дополнительно" tables | 10 tables across Parts 2-8 | Deleted, replaced with intro paragraphs |
+| Model capability | Mixed with layer concepts | Inline `[MODEL_NOTE: text]` format |
 
-## Migration from v5.12
-
-v6 is a **rebuild with reference to v5.12**, not an in-place evolution.
-
-Key differences:
-
-| Aspect | v5.12 | v6 |
-|--------|-------|-----|
-| Content source | `src/parts-l{N}/` | `src/master/part_*.html` |
-| Layer assembly | Manual | Automated (`build-layers.mjs`) |
-| Widget data | Hardcoded in JS | `data/*.json` files |
-| Cross-layer links | Layer only (`data-layer-switch="2"`) | Layer + section (`data-layer-switch="2#id"`) |
-| Layer names | Inconsistent | Canonical from `layer-config.json` |
-| SPINE model | All 5 elements on L2 | WANT/NEED/FLAW (L2) + LIE/GHOST (L3) |
-| Part 6 (CoT) | Mixed L2+L3 | L3-only + L1 bridge |
-
-### Zero Degradation Principle
-
-v6 must cover 100% of v5.12 semantic and functional content. The migration map (`docs/migration_map.md`) tracks where each v5.12 section migrated.
+See `docs/transition_guide.md` for a detailed migration guide for v7 users.
 
 ---
 
-*Document prepared for Live Character Guide v6 rebuild project*
+*Document prepared for Live Character Guide v8.0.0*

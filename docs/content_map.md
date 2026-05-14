@@ -1,8 +1,8 @@
-# Content Ownership Map — Live Character Guide v6
+# Content Ownership Map — Live Character Guide v8
 
-> **Version:** 2.4
-> **Last Updated:** 2026-04-27
-> **Status:** Canonical Reference (post-layer-restructure, post-remediation, post-lorebook-enhancement, post-TP-11-20)
+> **Version:** 8.0.0
+> **Last Updated:** 2026-05-14
+> **Status:** Canonical Reference (post-flat-restructure)
 
 ---
 
@@ -12,14 +12,12 @@ This document is the **single source of truth** for "where does concept X live."
 
 **Rules:**
 - Every concept mentioned in any Part MUST have exactly one row in this table
-- If a concept has no row → it's an orphan → IMP-28 violation
-- If a concept has two rows → it's duplicated → IMP-5 violation
+- If a concept has no row → it's an orphan → documentation violation
+- If a concept has two rows → it's duplicated → documentation violation
 - Read this BEFORE writing any Part
 - Updated after each phase by appending new rows
 
-**Post-restructure note (Phase 5):** This version was completely rewritten after the layer restructure (Phases 1–4 of `layer-restructure-plan-v3.md`). All phantom IDs removed, all missing IDs added, all layer values updated to match post-restructure state.
-
-**Post-remediation note (Phase 6):** Statistics corrected after L1 Remediation Plan v3 execution and Content Restoration phases. L1 section count updated from 17 → 18 (Part 1 has 8 L1 sections, not 7). Total section count aligned with build output (102 sections from build-layers.mjs, including p10_walter_l2).
+**v8 restructure note:** The layer system (L1/L2/L3) has been removed. All content is now organized by topic and progression without artificial layer boundaries. Section IDs have been updated to reflect the flat structure. Previous layer-qualified IDs (e.g. `p10_elena_l1`, `p10_omnis_l2_card`) have been consolidated into single entries per character. Cumulative statistics and layer transition criteria have been eliminated.
 
 ---
 
@@ -27,193 +25,163 @@ This document is the **single source of truth** for "where does concept X live."
 
 ### Part 1: Basic Blocks (Базовые блоки)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| Карточка персонажа | Part 1 | p1_card_overview | l1 | Definition | 4 блока карточки: SP, Description, Examples, Greeting |
-| Core Rules (4 базовых правила) | Part 1 | p1_core_rules | l1 | Rules | GHOST inline definition + layer-remark bridge. Перенесено из glossary.json → Part 1 |
-| Сравнение слоёв | Part 1 | p1_layer_comparison | l1 | Reference | L1 vs L2 vs L3 comparison table. SPINE row: L2 = WANT/NEED/FLAW, L3 = +LIE/GHOST |
-| L1 Quickstart | Part 1 | p1_l1_quickstart | l1 | Template | 5-minute template → minimal card. Ссылка на p10_elena_l1 вместо отдельной секции p1_elena_minimal. Чек-лист минимальный (3 пункта) |
-| Топ-3 критичные ошибки | Part 1 | p1_top3_problems | l1 | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_top5_problems |
-| Что дальше? / Следующие шаги | Part 1 | p1_next_steps | l1 | Navigation | ← MERGED p1_next_layers into p1_next_steps. L2/L3 критерии как подсекции. Навигационный мостик к Part 2+ |
-| Токен-бюджет | Part 1 | p1_token_budget | l1 | Reference | Мерж p1_token_pipeline + p1_block_budget. 2 subsections: конвейер сборки + лимиты по блокам. Только L1 блоки. Без подтаблицы AN/Lorebook/CoT |
-| Конвейер сборки L1-карточки | Part 1 | p1_assembly_pipeline | l1 | Pipeline | Конвейер сборки L1-карточки |
-| ~~Мини-пример L1-карточки~~ | Part 1 | ~~p1_mini_example~~ | ~~l1~~ | REMOVED | Удалён — дублировал p10_omnis_l1_card. Результат встроен в p1_assembly_pipeline (шаг 06) |
-
-| Заключение | Part 1 | p1_conclusion | l1 | Readiness checklist | Готовы к практике? Вопросы для самопроверки + ссылки |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Карточка персонажа | Part 1 | p1_card_overview | Definition | 4 блока карточки: SP, Description, Examples, Greeting. Overview of card structure and block purposes |
+| Core Rules (4 базовых правила) | Part 1 | p1_core_rules | Rules | 4 foundational rules of character creation. GHOST inline definition. Перенесено из glossary.json → Part 1 |
+| Токен-бюджет | Part 1 | p1_token_budget | Reference | Token pipeline and per-block limits. 2 subsections: конвейер сборки + лимиты по блокам |
+| Конвейер сборки карточки | Part 1 | p1_assembly_pipeline | Pipeline | Step-by-step card assembly pipeline with mini-example embedded at step 06 |
+| Топ-3 критичные ошибки | Part 1 | p1_top3_problems | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_additional_problems |
 
 ### Part 2: Behavioral Anchors (Якоря)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| Якорь (Anchor) | Part 2 | p2_basic_anchors | l1 | Definition+Rules | Формат: T→A→P |
-| Правила якорей | Part 2 | p2_anchor_rules | l1 | Rules | Цена обязательна, формат T→A→P |
-| Примеры якорей | Part 2 | p2_anchor_examples | l1 | Examples | Таблица примеров + wrong/correct пример перед таблицей |
-| FLAW-linked якоря | Part 2 | p2_flaw_anchors | l2 | Rules+Examples | Как выводить якоря из FLAW |
-| Embodiment (Телесность) | Part 2 | p2_embodiment | l2 | Full treatment | Протокол: Состояние→Тело→Сенсор→Речь |
-| Сенсорные якоря | Part 2 | p2_sensory_anchors | l3 | Full treatment | Сенсорные якоря для GHOST. Ссылка на CoT-якоря → Part 6 |
-| ENVIRONMENTAL REACTIVITY | Part 2 | p2_env_reactivity | l2 | Directive | Sensory details only through character action. NEW |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Якорь (Anchor) | Part 2 | p2_basic_anchors | Definition+Rules | Формат: T→A→P. Foundational anchor concept and notation |
+| Правила якорей | Part 2 | p2_anchor_rules | Rules | Цена обязательна, формат T→A→P. Expanded anchor creation rules |
+| Примеры якорей | Part 2 | p2_anchor_examples | Examples | Таблица примеров + wrong/correct пример перед таблицей |
+| Embodiment (Телесность) | Part 2 | p2_embodiment | Full treatment | Протокол: Состояние→Тело→Сенсор→Речь. Physical grounding of character behavior. Includes FLAW-linked anchor derivation |
+| ENVIRONMENTAL REACTIVITY | Part 2 | p2_env_reactivity | Directive | Sensory details only through character action. Environment responds through character perception |
+| Сенсорные якоря | Part 2 | p2_sensory_anchors | Full treatment | Сенсорные якоря для GHOST. Ссылка на CoT-якоря → Part 6 |
 
 ### Part 3: Voice and Isolation (Голос)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| Voice Isolation | Part 3 | p3_voice_isolation | l1 | Rule+Hierarchy | Иерархия влияния на голос |
-| Иерархия влияния | Part 3 | p3_influence_hierarchy | l1 | Reference | Порядок: SP > Description > Examples > Greeting |
-| Правила Examples | Part 3 | p3_examples_rules | l2 | Rules | Как писать Examples |
-| Качество Tier | Part 3 | p3_tier_quality | l2 | Classification | Tier 1/2/3 для Examples |
-| Greeting | Part 3 | p3_greeting | l2 | Structure | Сцена→Действие→Реплика |
-| Voice Leak (утечка голоса) | Part 3 | p3_voice_leak | l2 | Anti-pattern | «Красноречивый Джесси» — пример ошибки |
-| Крайний случай: Джокер | Part 3 | p3_joker_case | l2 | Extreme example | Голос невозможно описать — только воспроизвести |
-| Мульти-персонажные примеры | Part 3 | p3_multi_char | l3 | Rules+Examples | Уолтер Уайт + Джесси Пинкман. Voice Bleed, Character Markers |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Voice Isolation | Part 3 | p3_voice_isolation | Rule+Hierarchy | Core principle of voice isolation and why it matters |
+| Иерархия влияния | Part 3 | p3_influence_hierarchy | Reference | Порядок: SP > Description > Examples > Greeting. How different blocks affect voice |
+| Правила Examples | Part 3 | p3_examples_rules | Rules | Как писать Examples. Structural rules and formatting |
+| Качество Examples | Part 3 | p3_examples_quality | Classification | Quality tiers for Examples. What separates good examples from bad |
+| Greeting | Part 3 | p3_greeting | Structure | Сцена→Действие→Реплика. Greeting as voice anchor |
+| Voice Leak (утечка голоса) | Part 3 | p3_voice_leak | Anti-pattern | «Красноречивый Джесси» — пример ошибки. Detecting and fixing voice bleed |
+| Крайний случай: Джокер | Part 3 | p3_joker_case | Extreme example | Голос невозможно описать — только воспроизвести. When voice defies description |
+| Мульти-персонажные примеры | Part 3 | p3_multi_char | Rules+Examples | Уолтер Уайт + Джесси Пинкман. Voice Bleed, Character Markers in multi-character contexts |
 
 ### Part 4: SPINE Framework (СПИН)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| SPINE (обзор) | Part 4 | p4_spine_overview | l2 | Framework | WANT/NEED/FLAW (L2). LIE/GHOST — bridge → L3 |
-| WANT | Part 4 | p4_want | l2 | Definition+Examples | Осознанное желание |
-| NEED | Part 4 | p4_need | l2 | Definition+Examples | Истинная потребность |
-| FLAW | Part 4 | p4_flaw | l2 | Definition+Examples | Конкретное поведение |
-| SPINE → Anchors mapping | Part 4 | p4_spine_mapping | l2 | Protocol | WANT/NEED/FLAW → якоря. GHOST/LIE отмечены как L3-only |
-| *(moved to Part 5 as p5_l2_quickstart)* | Part 4 | p4_l2_quickstart | l2 | Note | ⚠ Moved to Part 5 as p5_l2_quickstart. See navigational link below |
-| LIE (Ложная установка) | Part 4 | p4_lie | l3 | Definition+Examples | Перемещено из L2 → L3 при реструктуризации |
-| GHOST (Событие прошлого) | Part 4 | p4_ghost | l3 | Definition+Examples | Перемещено из L2 → L3 при реструктуризации |
-| GHOST Layers | Part 4 | p4_ghost_layers | l3 | Full treatment | 3-tier структура GHOST |
-| L3 Learning Path | Part 4 | p4_l3_learning_path | l3 | Navigation | Навигационная карта L3 (from GHOST to full card) |
-| SPINE consistency check | Part 4 | p4_spine_check | l3 | Diagnostic | Внутренняя консистентность |
-| Полный СПИН (5 элементов) | Part 4 | p4_l3_spine_full | l3 | Chain-connection | GHOST→LIE→FLAW→NEED→WANT + Эллиот Алдерсон. НЕ переопределяет LIE/GHOST |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| SPINE (обзор) | Part 4 | p4_spine_overview | Framework | Overview of all 5 SPINE elements: GHOST→LIE→FLAW→NEED→WANT |
+| GHOST (Событие прошлого) | Part 4 | p4_ghost | Definition+Examples | Defining traumatic past event that drives the character |
+| LIE (Ложная установка) | Part 4 | p4_lie | Definition+Examples | False belief derived from GHOST. How LIE distorts character perception |
+| FLAW | Part 4 | p4_flaw | Definition+Examples | Конкретное поведение. Observable flaw born from LIE |
+| NEED | Part 4 | p4_need | Definition+Examples | Истинная потребность. What the character actually needs (vs wants) |
+| WANT | Part 4 | p4_want | Definition+Examples | Осознанное желание. What the character thinks they want |
+| GHOST Layers | Part 4 | p4_ghost_layers | Full treatment | 3-tier структура GHOST. Deep structure of traumatic events |
+| Полный СПИН (5 элементов) | Part 4 | p4_spine_full_chain | Chain-connection | GHOST→LIE→FLAW→NEED→WANT full chain. Эллиот Алдерсон example |
+| SPINE → Anchors mapping | Part 4 | p4_spine_mapping | Protocol | WANT/NEED/FLAW → якоря derivation protocol |
+| SPINE consistency check | Part 4 | p4_spine_check | Diagnostic | Внутренняя консистентность. Verifying SPINE elements align logically |
+| SPINE Navigation | Part 4 | p4_spine_navigation | Navigation | Navigational map from GHOST to full card. Learning path through SPINE elements |
 
 ### Part 5: Psychology Toolkit (Психологический инструментарий)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| OCEAN (Big Five) | Part 5 | p5_ocean_basics | l2 | Tool+Interactive | Pentagon widget + золотое правило `.callout.important` («Только 1–2 экстремальных полюса»). План указывал p5_ocean_poles, но реализация помещает правило в p5_ocean_basics для лучшего педагогического потока |
-| OCEAN poles + validator | Part 5 | p5_ocean_basics | l2 | Merged | ← MERGED into p5_ocean_basics. Контекстные лимиты + пентагон виджет |
-| Enneagram basics | Part 5 | p5_enneagram_basics | l2 | Tool+Interactive | 9 типов, SVG widget |
-| Enneagram interactive | Part 5 | p5_enneagram_basics | l2 | Merged | ← MERGED into p5_enneagram_basics (enneagram-embed) |
-| Enneagram → SPINE | Part 5 | p5_cross_instrument_map | l2 | Protocol | Страх→LIE (L3 ref), Желание→WANT, Стресс→FLAW, Рост→NEED. Renamed from p5_enneagram_to_spine |
-| MBTI | Part 5 | p5_mbti_basics | l2 | Tool+Interactive | 16 типов, filter grid. ← MERGED p5_mbti_composer (mbti-embed) |
-| L2 Quickstart | Part 5 | p5_l2_quickstart | l2 | Checklist | L2 Quickstart (moved from Part 4, now after OCEAN/Enneagram) |
-| Enneagram wings | Part 5 | p5_enneagram_wings | l3 | Full treatment | Выбор крыла |
-| OCEAN×Enneagram matrix | Part 5 | p5_cross_matrix | l3 | Interactive | Корреляция 5×9 |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| OCEAN (Big Five) | Part 5 | p5_ocean_basics | Tool+Interactive | Pentagon widget + золотое правило («Только 1–2 экстремальных полюса»). Contextual limits + validator |
+| Enneagram basics | Part 5 | p5_enneagram_basics | Tool+Interactive | 9 типов, SVG widget with interactive selection |
+| MBTI | Part 5 | p5_mbti_basics | Tool+Interactive | 16 типов, filter grid with composer. Type selection and SP alignment |
+| Enneagram → SPINE | Part 5 | p5_cross_instrument_map | Protocol | Страх→LIE, Желание→WANT, Стресс→FLAW, Рост→NEED. Cross-instrument mapping protocol |
+| Enneagram wings | Part 5 | p5_enneagram_wings | Full treatment | Выбор крыла. Wing selection and its effect on SPINE derivation |
+| OCEAN×Enneagram matrix | Part 5 | p5_cross_matrix | Interactive | Корреляция 5×9. Cross-validation between OCEAN and Enneagram profiles |
 
 ### Part 6: CoT — Chain of Thought (Цепочка рассуждений)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| CoT bridge (обзор) | Part 6 | p6_cot_bridge | l2 | Bridge | Навигационный мостик к L3-контенту CoT. NEW |
-| CoT basics | Part 6 | p6_cot_basics | l3 | Definition | Перемещено из L2 → L3. Для 12B vs 32B+ |
-| CoT Tier definitions | Part 6 | p6_cot_tiers | l3 | Reference | Tier 0/1/2/3 определения. Перемещено из L2 → L3 |
-| CoT Tier 2 | Part 6 | p6_cot_tier2 | l3 | Template | Structured internal process |
-| CoT Tier 3 | Part 6 | p6_cot_tier3 | l3 | Template | Full XML blocks. Пример: Эллиот Алдерсон |
-| CoT anchors | Part 6 | p6_cot_anchors | l3 | Rules | Внутренний процесс как якорь |
-| L3 Quickstart (CoT) | Part 6 | p6_l3_quickstart | l3 | Checklist | 60-минутный pipeline |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| CoT bridge (обзор) | Part 6 | p6_cot_bridge | Bridge | Навигационный мостик к CoT контенту. When and why to use Chain of Thought |
+| CoT basics | Part 6 | p6_cot_basics | Definition | Основы CoT для 12B vs 32B+ моделей. Core concepts and terminology |
+| CoT Tier definitions | Part 6 | p6_cot_tiers | Reference | Tier 0/1/2/3 определения. What each tier provides and when to use it |
+| CoT Tier 2 | Part 6 | p6_cot_tier2 | Template | Structured internal process. Template for mid-level CoT implementation |
+| CoT Tier 3 | Part 6 | p6_cot_tier3 | Template | Full XML blocks. Пример: Эллиот Алдерсон. Advanced CoT with full reasoning |
+| CoT anchors | Part 6 | p6_cot_anchors | Rules | Внутренний процесс как якорь. How CoT serves as behavioral anchor |
 
 ### Part 7: Technical Implementation (Техническая реализация)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| System Prompt (SP) | Part 7 | p7_system_prompt | l2 | Template+Rules | Базовые запреты |
-| Sampling parameters | Part 7 | p7_sampling_params | l2 | Reference | Temperature, RepPen, Top P, etc. |
-| Format Lock | Part 7 | p7_format_lock | l2 | Rule | Фиксация формата диалога + системы A/B/C |
-| Author's Note (AN) | Part 7 | p7_authors_note | l2 | Template+Rules | Динамический контекст |
-| Structured Inject | Part 7 | p7_structured_inject | l2 | Technique | XML-теги для мотивации в AN |
-| Lorebook (LB) | Part 7 | p7_lorebook | l2 | Template+Rules | Триггеры для GHOST + таблица совместимости фронтендов |
-| Lorebook Mechanics | Part 7 | p7_lorebook_mechanics | l2 | Full treatment | Каскад по диапазону, комбинированный триггер, контекстный фильтр. NEW |
-| Lorebook Advanced | Part 7 | p7_lorebook_advanced | l3 | Full treatment | Эмуляция усталости, мета-лор, ложная память. NEW |
-| XML tags | Part 7 | p7_xml_tags | l3 | Full treatment | Синтаксис и применение XML для Description |
-| API blocks | Part 7 | p7_api_blocks | l3 | Template | Claude/GPT specifics |
-| 4K-Fallback | Part 7 | p7_4k_fallback | l3 | Protocol | Адаптация для ≤4K контекста |
-| CORE DIRECTIVES | Part 7 | p7_core_directives | l2 | System | Unified 7-directive system in English. L2 = directives 1–5, L3 = all 7. NEW |
-| Tone Frame | Part 7 | p7_tone_frame | l2 | Technique | Dual-function SP element (~25-30 tokens). NEW |
-| OOC Protection | Part 7 | p7_ooc_protection | l3 | Technique | SP block for OOC reaction (~15 tokens). NEW |
-| Immersion Boundary | Part 7 | p7_ooc_protection | l3 | Merged | ← MERGED into p7_ooc_protection as subsection. NEW |
-| L3 CORE DIRECTIVES Extension | Part 7 | p7_core_directives_l3 | l3 | System | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER). Cross-ref to p7_core_directives for 1–5. NEW |
-| Model Type Checklist | Part 7 | p7_model_checklist | l2 | Reference | Summary table by model type (12B/32B+/API). NEW |
-| L3 SP Template | Part 7 | p7_sp_template_l3 | l3 | Template | Full L3 System Prompt template with all 7 directives. NEW |
-| L3 AN Template | Part 7 | p7_authors_note_l3 | l3 | Template | 4-section AN with GHOST-activation. NEW |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| System Prompt (SP) | Part 7 | p7_system_prompt | Template+Rules | Базовые запреты. Foundation of the System Prompt with core restrictions |
+| CORE DIRECTIVES | Part 7 | p7_core_directives | System | Unified 7-directive system in English. Directives 1–7 (full set) |
+| Tone Frame | Part 7 | p7_tone_frame | Technique | Dual-function SP element (~25-30 tokens). Setting tonal boundaries in SP |
+| Format Lock | Part 7 | p7_format_lock | Rule | Фиксация формата диалога + системы A/B/C. Output format enforcement |
+| Author's Note (AN) | Part 7 | p7_authors_note | Template+Rules | Динамический контекст. 4-section AN with GHOST-activation |
+| Structured Inject | Part 7 | p7_structured_inject | Technique | XML-теги для мотивации в AN. Injecting structured context into AN |
+| Sampling parameters | Part 7 | p7_sampling_params | Reference | Temperature, RepPen, Top P, etc. Recommended values by model type |
+| Lorebook (LB) | Part 7 | p7_lorebook | Template+Rules | Триггеры для GHOST + таблица совместимости фронтендов |
+| Lorebook Mechanics | Part 7 | p7_lorebook_mechanics | Full treatment | Каскад по диапазону, комбинированный триггер, контекстный фильтр |
+| Model Type Checklist | Part 7 | p7_model_checklist | Reference | Summary table by model type (12B/32B+/API). Quick reference for model-specific settings |
+| OOC Protection | Part 7 | p7_ooc_protection | Technique | SP block for OOC reaction (~15 tokens). Includes Immersion Boundary as subsection |
+| Lorebook Advanced | Part 7 | p7_lorebook_advanced | Full treatment | Эмуляция усталости, мета-лор, ложная память. Advanced lorebook techniques |
+| XML tags | Part 7 | p7_xml_tags | Full treatment | Синтаксис и применение XML для Description and structured content |
+| API blocks | Part 7 | p7_api_blocks | Template | Claude/GPT specifics. Platform-specific adaptation notes |
+| 4K-Fallback | Part 7 | p7_4k_fallback | Protocol | Адаптация для ≤4K контекста. Fallback strategies for constrained context windows |
+| Assembly Pipeline | Part 7 | p7_assembly_pipeline | Pipeline | Full card assembly pipeline. End-to-end construction from blocks to deployed card |
 
 ### Part 8: Anti-patterns (Анти-паттерны)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| Anti-pattern overview | Part 8 | p8_antipatterns_overview | l2 | Catalog | Классификация анти-паттернов |
-| AP-1: Token bloat | Part 8 | p8_ap1_token_bloat | l2 | Anti-pattern | Раздувание токенов |
-| AP-2: Missing price | Part 8 | p8_ap2_missing_price | l2 | Anti-pattern | Отсутствие цены у якоря |
-| AP-3: Voice in Description | Part 8 | p8_ap3_voice_in_description | l2 | Anti-pattern | Голос в Description вместо Examples |
-| AP-4: GHOST in SP | Part 8 | p8_ap4_ghost_in_sp | l2 | Anti-pattern | Психология в System Prompt |
-| AP-5: RepPen high | Part 8 | p8_ap5_reppen_high | l2 | Anti-pattern | RepPen > 1.10 |
-| AP-6: No anti-godmoding | Part 8 | p8_ap6_no_anti_godmoding | l2 | Anti-pattern | Отсутствие анти-годмодинга |
-| AP-7: Presence Penalty | Part 8 | p8_ap7_presence_penalty | l2 | Anti-pattern | Presence Penalty > 0 |
-| AP-8: GHOST no anchors | Part 8 | p8_ap8_ghost_no_anchors | l3 | Anti-pattern | GHOST без якорей |
-| AP-9: Broken SPINE | Part 8 | p8_ap9_spine_broken | l3 | Diagnostic | Конфликтующие элементы СПИН |
-| AP-10: CoT overload | Part 8 | p8_ap10_cot_overload | l3 | Anti-pattern | Перегрузка CoT-якорями |
-| AP-11: Voice Bleed | Part 8 | p8_ap11_voice_bleed | l3 | Anti-pattern | Переплетение голосов. Уолтер Уайт + Джесси Пинкман |
-| AP-12: XML malformed | Part 8 | p8_ap12_xml_malformed | l3 | Anti-pattern | Некорректные XML-теги |
-| AP-13: Lorebook conflict | Part 8 | p8_ap13_lorebook_conflict | l3 | Anti-pattern | Конфликт Lorebook-записей |
-| AP-14: Context violation | Part 8 | p8_ap14_context_violation | l3 | Anti-pattern | Нарушение контекстного окна |
-| AP-15: OCEAN overload (basic) | Part 8 | p8_ap15_basic | l2 | Anti-pattern | Базовое правило: не больше 1–2 экстремальных полюсов |
-| AP-15: OCEAN overload (extended) | Part 8 | p8_ap15_extended | l3 | Extended treatment | 3 сценария конфликта полюсов + OCEAN×Enneagram ссылка |
-| AP-16: Nested Anchors | Part 8 | p8_ap16_nested_anchors | l2 | Anti-pattern | Anchor chains → unpredictability. NEW |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Anti-pattern overview | Part 8 | p8_antipatterns_overview | Catalog | Классификация анти-паттернов. Index of all 16 anti-patterns with severity ratings |
+| AP-1: Token bloat | Part 8 | p8_ap1_token_bloat | Anti-pattern | Раздувание токенов. Overloading card with unnecessary content |
+| AP-2: Missing price | Part 8 | p8_ap2_missing_price | Anti-pattern | Отсутствие цены у якоря. Anchors without behavioral cost |
+| AP-3: Voice in Description | Part 8 | p8_ap3_voice_in_description | Anti-pattern | Голос в Description вместо Examples. Voice belongs in Examples, not Description |
+| AP-4: GHOST in SP | Part 8 | p8_ap4_ghost_in_sp | Anti-pattern | Психология в System Prompt. GHOST/LIE should not pollute SP |
+| AP-5: RepPen high | Part 8 | p8_ap5_reppen_high | Anti-pattern | RepPen > 1.10. Over-penalizing repetition harms natural speech |
+| AP-6: No anti-godmoding | Part 8 | p8_ap6_no_anti_godmoding | Anti-pattern | Отсутствие анти-годмодинга. Missing godmoding prevention |
+| AP-7: Presence Penalty | Part 8 | p8_ap7_presence_penalty | Anti-pattern | Presence Penalty > 0. Should be zero for character cards |
+| AP-8: GHOST no anchors | Part 8 | p8_ap8_ghost_no_anchors | Anti-pattern | GHOST без якорей. GHOST must be expressed through anchors |
+| AP-9: Broken SPINE | Part 8 | p8_ap9_spine_broken | Diagnostic | Конфликтующие элементы СПИН. SPINE elements contradict each other |
+| AP-10: CoT overload | Part 8 | p8_ap10_cot_overload | Anti-pattern | Перегрузка CoT-якорями. Too much CoT structure overwhelms model |
+| AP-11: Voice Bleed | Part 8 | p8_ap11_voice_bleed | Anti-pattern | Переплетение голосов. Уолтер Уайт + Джесси Пинкман |
+| AP-12: XML malformed | Part 8 | p8_ap12_xml_malformed | Anti-pattern | Некорректные XML-теги. Broken XML syntax breaks parsing |
+| AP-13: Lorebook conflict | Part 8 | p8_ap13_lorebook_conflict | Anti-pattern | Конфликт Lorebook-записей. Contradictory entries in lorebook |
+| AP-14: Context violation | Part 8 | p8_ap14_context_violation | Anti-pattern | Нарушение контекстного окна. Content exceeds available context |
+| AP-15: OCEAN overload | Part 8 | p8_ap15_ocean_overload | Anti-pattern | Слишком много экстремальных полюсов. Max 1–2 extreme OCEAN poles. Includes conflict scenarios and OCEAN×Enneagram reference |
+| AP-16: Nested Anchors | Part 8 | p8_ap16_nested_anchors | Anti-pattern | Anchor chains → unpredictability. Nested anchor structures cause erratic behavior |
 
 ### Part 9: Diagnostics and Debugging (Диагностика)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| Диагностика и чек-лист | Part 9 | p9_basic_checklist | l1 | Checklist | Мерж p9_troubleshooting + p9_basic_checklist. Чек-лист с cross-references на p1_core_rules |
-| Топ-5 проблем | Part 9 | p9_top5_problems | l1 | Quick reference | Краткий справочник: 5 строк, 1 колонка решения. Ссылки на p1_top3_problems для первых 3 |
-| Symptom table | Part 9 | p9_symptom_table | l2 | Diagnostic | 10 строк симптом→диагноз→решение |
-| Test scenarios | Part 9 | p9_test_scenarios | l2 | Protocol | 6 тестовых сценариев |
-| 12B-specific issues | Part 9 | p9_12b_issues | l3 | Special | Диагностика для 12B моделей |
-| Layer transition | Part 9 | p9_layer_transition | l3 | Criteria | Критерии перехода L1→L2, L2→L3. Добавлены LIE/GHOST и CoT |
-| One Change Rule | Part 9 | p9_one_change_rule | l1 | Rule | Never change >1 parameter at a time. NEW |
-| Decision Tree | Part 9 | p9_decision_tree | l2 | Diagnostic | Branching symptom→check→fix logic. NEW |
-| Element→Scenario Mapping | Part 9 | p9_element_scenario_map | l2 | Reference | Dynamic element → test scenario + verification. NEW |
-| Test Requirements by Layer | Part 9 | p9_test_requirements | l2 | Reference | Min scenarios per layer + 6 success metrics. NEW |
-| Pre-Deploy Validation | Part 9 | p9_pre_deploy | l3 | Checklist | Quick Check (5 items) + Full Check (14 items). NEW |
-| Шкала качества карточки | Part 9 | p9_quality_scale | l1 | Reference | 3-level quality table (Critical / Bad / Good). NEW |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Шкала качества карточки | Part 9 | p9_quality_scale | Reference | 3-level quality table (Critical / Bad / Good). Overall card quality assessment |
+| One Change Rule | Part 9 | p9_one_change_rule | Rule | Never change >1 parameter at a time. Isolating variables during debugging |
+| Диагностика и чек-лист | Part 9 | p9_basic_checklist | Checklist | Чек-лист с cross-references на p1_core_rules. Basic diagnostic checklist |
+| Дополнительные проблемы | Part 9 | p9_additional_problems | Quick reference | Additional common problems beyond the top-3. Quick reference with solutions |
+| Symptom table | Part 9 | p9_symptom_table | Diagnostic | 10 строк симптом→диагноз→решение. Comprehensive symptom-to-fix mapping |
+| Decision Tree | Part 9 | p9_decision_tree | Diagnostic | Branching symptom→check→fix logic. Decision flow for debugging |
+| Test scenarios | Part 9 | p9_test_scenarios | Protocol | 6 тестовых сценариев. Standardized testing procedures |
+| Element→Scenario Mapping | Part 9 | p9_element_scenario_map | Reference | Dynamic element → test scenario + verification. Mapping card elements to appropriate tests |
+| Test Requirements | Part 9 | p9_test_requirements | Reference | Min scenarios per card complexity + 6 success metrics |
+| 12B-specific issues | Part 9 | p9_12b_issues | Special | Диагностика для 12B моделей. Model-specific limitations and workarounds |
+| Pre-Deploy Validation | Part 9 | p9_pre_deploy | Checklist | Quick Check (5 items) + Full Check (14 items). Final validation before deployment |
 
 ### Part 10: Full Card Examples (Примеры карточек)
 
-| Concept | Canonical Part | data-section ID | Layer | Content Type | Notes |
-|---------|---------------|-----------------|-------|--------------|-------|
-| Елена (L1) | Part 10 | p10_elena_l1 | l1 | Complete card | Минимальная карточка (~580 токенов). Каноническое расположение |
-| Елена (L2) | Part 10 | p10_elena_l2 | l2 | Complete card | WANT/NEED/FLAW только (LIE/GHOST удалены при реструктуризации) |
-| Геральт (L2) | Part 10 | p10_geralt_l2 | l2 | Complete card | WANT/NEED/FLAW только (LIE/GHOST удалены при реструктуризации) |
-| Эдвард Элрик (L2) | Part 10 | p10_edward_l2 | l2 | Complete card | Кристально ясный СПИН. WANT/NEED/FLAW только. Новый раздел |
-| Выщербленный (L3) | Part 10 | p10_vysherblenny_l3 | l3 | Complete card | GHOST Layers + CoT + XML (~1500+ токенов) |
-| Уолтер Уайт (L2) | Part 10 | p10_walter_l2 | l2 | Complete card | Realistic modern character, WANT/NEED/FLAW. NEW |
-| Voice Warning (L2) | Part 10 | p10_elena_l2 | l2 | Merged | ← MERGED into p10_elena_l2 as callout. Was p10_l2_voice_warning |
-| Омнис-Зета 7-Квин (L1) | Part 10 | p10_omnis_l1_card | l1 | Complete card | L1 карточка Омнис-Зета 7-Квин (Тех-Жрец, Адептус Механикус) |
-| Омнис-Зета 7-Квин (L2) | Part 10 | p10_omnis_l2_card | l2 | Complete card | L2 карточка Омнис-Зета 7-Квин (SPINE + OCEAN + FLAW-linked anchors) |
-| Омнис-Зета 7-Квин (L3) | Part 10 | p10_omnis_l3_card | l3 | Complete card | L3 карточка Омнис-Зета 7-Квин (GHOST Layers + CoT + XML) |
+| Concept | Canonical Part | data-section ID | Content Type | Notes |
+|---------|---------------|-----------------|--------------|-------|
+| Елена | Part 10 | p10_elena | Complete card | Минимальная карточка → full card progression. От базовой карточки до SPINE. Includes Voice Warning callout |
+| Геральт | Part 10 | p10_geralt | Complete card | WANT/NEED/FLAW. Witcher character with clear SPINE structure |
+| Эдвард Элрик | Part 10 | p10_edward | Complete card | Кристально ясный СПИН. WANT/NEED/FLAW. Classic shonen protagonist |
+| Уолтер Уайт | Part 10 | p10_walter | Complete card | Realistic modern character, WANT/NEED/FLAW. Multi-character voice isolation example |
+| Омнис-Зета 7-Квин | Part 10 | p10_omnis | Complete card | Тех-Жрец, Адептус Механикус. Full progression: basic → SPINE + OCEAN + FLAW-linked anchors → GHOST Layers + CoT + XML |
+| Выщербленный | Part 10 | p10_vysherblenny | Complete card | GHOST Layers + CoT + XML (~1500+ токенов). Most advanced example card |
 
 ---
 
-## Statistics
+## Summary Table
 
-| Part | L1 | L2 | L3 | Total |
-|------|----|----|-----|-------|
-| Part 1 (Basic Blocks) | 9 | 0 | 0 | 9 |
-| Part 2 (Anchors) | 3 | 3 | 1 | 7 |
-| Part 3 (Voice) | 2 | 5 | 1 | 8 |
-| Part 4 (SPINE) | 0 | 5 | 6 | 11 |
-| Part 5 (Psych Toolkit) | 0 | 5 | 2 | 7 |
-| Part 6 (CoT) | 0 | 1 | 6 | 7 |
-| Part 7 (Technical) | 0 | 10 | 8 | 18 |
-| Part 8 (Anti-patterns) | 0 | 10 | 8 | 18 |
-| Part 9 (Diagnostics) | 4 | 5 | 3 | 12 |
-| Part 10 (Examples) | 2 | 5 | 2 | 9 |
-| **Total** | **20** | **49** | **37** | **106** |
-
-**Cumulative (as reader sees it):**
-- **L1 sees: 20 sections** (Part 1 has 9 L1 sections after p1_next_layers merged into p1_next_steps)
-- **L2 sees: 69 sections** (+49 to L1)
-- **L3 sees: 106 sections** (+37 to L2)
-
-**Note:** Statistics updated post Phase 3+1+2+6+5+7 consolidation. Key changes: Part 5 reduced from 10→7 (merged widget containers), Part 6 has 1 L2 bridge section (p6_cot_bridge) + 6 L3 sections (p6_l3_quickstart added during content restoration), Part 7 reduced from 19→18 (immersion boundary merged into ooc_protection), Part 8 has 18 sections (AP-15 basic+extended split), Part 10 reduced from 10→9 (voice warning merged into elena_l2), Part 1 reduced from 11→9 (next_layers merged, conclusion rewritten). Total = 106 matching section-registry.json (updated after p6_cot_bridge addition: L2 48→49, Total 105→106).
-
-**L1 Bridge Note:** L1 bridge sections for Parts 4–8 are implemented as navigational links within `p1_next_steps` (Part 1), not as separate `data-section` elements. Readers on L1 see bridge mentions pointing to L2/L3 content via `data-layer-switch` or `term-marker` elements inside `p1_next_steps`.
+| Part | Title | Sections |
+|------|-------|----------|
+| Part 1 | Basic Blocks (Базовые блоки) | 5 |
+| Part 2 | Behavioral Anchors (Якоря) | 6 |
+| Part 3 | Voice and Isolation (Голос) | 8 |
+| Part 4 | SPINE Framework (СПИН) | 11 |
+| Part 5 | Psychology Toolkit (Психологический инструментарий) | 6 |
+| Part 6 | CoT — Chain of Thought (Цепочка рассуждений) | 6 |
+| Part 7 | Technical Implementation (Техническая реализация) | 16 |
+| Part 8 | Anti-patterns (Анти-паттерны) | 17 |
+| Part 9 | Diagnostics and Debugging (Диагностика) | 11 |
+| Part 10 | Full Card Examples (Примеры карточек) | 6 |
+| **Total** | | **92** |
 
 ---
 
@@ -246,7 +214,7 @@ When referencing another concept:
 **Example (correct):**
 ```
 FLAW-linked anchors (как выводить якоря из FLAW) описаны в Part 2,
-section p2_flaw_anchors. Здесь мы рассматриваем их связь с SPINE.
+section p2_embodiment. Здесь мы рассматриваем их связь с SPINE.
 ```
 
 **Example (wrong — duplication):**
@@ -269,8 +237,5 @@ Before finalizing any Part, verify:
 
 ---
 
-*Document prepared for Live Character Guide v6 rebuild project*
-*Updated 2026-04-23: TP-11–20 changes — added p4_l3_learning_path, p5_l2_quickstart, p10_l2_voice_warning, p10_omnis_l1/l2/l3_card; moved p4_l2_quickstart to Part 5 (v2.3)*
-*Updated 2026-04-23: added p7_lorebook_mechanics and p7_lorebook_advanced (v2.2)*
-*Updated 2026-04-22: statistics corrected to match build output (v2.1)*
-*Updated 2026-04-20: complete rewrite post-layer-restructure (Phases 1–4)*
+*Document prepared for Live Character Guide v8 rebuild project*
+*Updated 2026-05-14: v8.0.0 — complete rewrite removing layer system, cumulative statistics, and L1/L2/L3 references. Section IDs updated to match current HTML build output (92 sections across 10 parts).*

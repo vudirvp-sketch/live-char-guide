@@ -1,7 +1,7 @@
-# Visual Component Registry — Live Character Guide v6
+# Visual Component Registry — Live Character Guide v8
 
-> **Version:** 1.0
-> **Last Updated:** 2026-04-19
+> **Version:** 8.0.0
+> **Last Updated:** 2026-05-14
 > **Status:** Canonical Reference
 
 ---
@@ -21,6 +21,7 @@ This document defines the **complete set of CSS classes and HTML structures** av
 5. **Collapsible** — Interactive details blocks
 6. **Cards** — Specialized card components
 7. **Code** — Code blocks with copy button
+8. **Part Resume** — Part completion skill summary
 
 ---
 
@@ -376,37 +377,7 @@ Copy buttons are **automatically added** by `lazy-loader.js` to all `<pre>` bloc
 
 ---
 
-## 8. CROSS-LAYER LINKS
-
-### Layer Remark (data-layer-switch)
-
-```html
-<p class="layer-remark">
-  <span class="remark-icon">→</span>
-  Подробнее о SPINE → <a href="javascript:void(0)" data-layer-switch="2#p4_spine_overview">Слой 2</a>
-</p>
-```
-
-### CSS Specification
-
-```css
-.layer-remark {
-  margin: 1rem 0;
-  padding: 0.75rem;
-  background: var(--bg-secondary);
-  border-radius: 4px;
-  font-size: 0.95em;
-}
-
-.remark-icon {
-  color: var(--accent);
-  margin-right: 0.5rem;
-}
-```
-
----
-
-## 9. DIFF VIEW — Before→After Comparison
+## 8. DIFF VIEW — Before→After Comparison
 
 ### Available Variants
 
@@ -444,7 +415,7 @@ Copy buttons are **automatically added** by `lazy-loader.js` to all `<pre>` bloc
 
 ---
 
-## 10. SPINE STACK — Layered SPINE Diagram
+## 9. SPINE STACK — Layered SPINE Diagram
 
 ### Available Variants
 
@@ -466,6 +437,34 @@ Copy buttons are **automatically added** by `lazy-loader.js` to all `<pre>` bloc
   <div class="spine-stack-item"><span class="spine-stack-label">WANT</span><span class="spine-stack-desc">Осознанное желание → поверхность</span></div>
 </div>
 ```
+
+---
+
+## 10. PART RESUME — Part Completion Skill Summary
+
+### `.part-resume`
+
+**Purpose:** Part Resume block — replaces "What's next?" bridges. Shows 3-5 bullet points listing skills the reader now possesses after completing a Part.
+
+**Usage:**
+```html
+<div class="part-resume">
+  <h3>Что вы теперь умеете</h3>
+  <ul>
+    <li>Skill 1</li>
+    <li>Skill 2</li>
+    <li>Skill 3</li>
+  </ul>
+</div>
+```
+
+**Location:** End of each Part (Part 1 through Part 10), before the closing `</section>`.
+
+**Notes:**
+- Replaces the old "Что дальше?" / "What's next?" bridge sections
+- Uses past tense ("что вы теперь умеете" = "what you can now do")
+- Maximum 5 bullet points
+- No forward references — only summarizes what was learned
 
 ---
 
@@ -496,4 +495,4 @@ If you need a new CSS class:
 
 ---
 
-*Document prepared for Live Character Guide v6 rebuild project*
+*Document prepared for Live Character Guide v8 rebuild project*

@@ -10,9 +10,7 @@
         "p1_core_rules",
         "p1_token_budget",
         "p1_assembly_pipeline",
-        "p1_quickstart",
-        "p1_top3_problems",
-        "p1_conclusion"
+        "p1_top3_problems"
       ]
     },
     {
@@ -22,7 +20,6 @@
         "p2_basic_anchors",
         "p2_anchor_rules",
         "p2_anchor_examples",
-        "p2_flaw_anchors",
         "p2_embodiment",
         "p2_env_reactivity",
         "p2_sensory_anchors"
@@ -35,7 +32,7 @@
         "p3_voice_isolation",
         "p3_influence_hierarchy",
         "p3_examples_rules",
-        "p3_tier_quality",
+        "p3_examples_quality",
         "p3_greeting",
         "p3_voice_leak",
         "p3_joker_case",
@@ -47,16 +44,16 @@
       "title": "SPINE Framework",
       "anchors": [
         "p4_spine_overview",
-        "p4_want",
-        "p4_need",
-        "p4_flaw",
-        "p4_spine_mapping",
-        "p4_l3_learning_path",
-        "p4_lie",
         "p4_ghost",
+        "p4_lie",
+        "p4_flaw",
+        "p4_need",
+        "p4_want",
         "p4_ghost_layers",
+        "p4_spine_full_chain",
+        "p4_spine_mapping",
         "p4_spine_check",
-        "p4_l3_spine_full"
+        "p4_spine_navigation"
       ]
     },
     {
@@ -97,14 +94,12 @@
         "p7_lorebook",
         "p7_lorebook_mechanics",
         "p7_model_checklist",
-        "p7_core_directives_l3",
         "p7_ooc_protection",
-        "p7_authors_note_l3",
-        "p7_sp_template_l3",
         "p7_lorebook_advanced",
         "p7_xml_tags",
         "p7_api_blocks",
-        "p7_4k_fallback"
+        "p7_4k_fallback",
+        "p7_assembly_pipeline"
       ]
     },
     {
@@ -119,8 +114,6 @@
         "p8_ap5_reppen_high",
         "p8_ap6_no_anti_godmoding",
         "p8_ap7_presence_penalty",
-        "p8_ap15_basic",
-        "p8_ap16_nested_anchors",
         "p8_ap8_ghost_no_anchors",
         "p8_ap9_spine_broken",
         "p8_ap10_cot_overload",
@@ -128,7 +121,8 @@
         "p8_ap12_xml_malformed",
         "p8_ap13_lorebook_conflict",
         "p8_ap14_context_violation",
-        "p8_ap15_extended"
+        "p8_ap15_ocean_overload",
+        "p8_ap16_nested_anchors"
       ]
     },
     {
@@ -138,7 +132,7 @@
         "p9_quality_scale",
         "p9_one_change_rule",
         "p9_basic_checklist",
-        "p9_top5_problems",
+        "p9_additional_problems",
         "p9_symptom_table",
         "p9_decision_tree",
         "p9_test_scenarios",
@@ -152,12 +146,12 @@
       "file": "part_10.html",
       "title": "Полные примеры карточек",
       "anchors": [
-        "p10_elena_full",
-        "p10_geralt_l2",
-        "p10_edward_l2",
-        "p10_walter_l2",
-        "p10_omnis_full",
-        "p10_vysherblenny_l3"
+        "p10_elena",
+        "p10_geralt",
+        "p10_edward",
+        "p10_walter",
+        "p10_omnis",
+        "p10_vysherblenny"
       ]
     }
   ]

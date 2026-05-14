@@ -581,28 +581,28 @@
       "an": false,
       "lorebook": false,
       "cot": false,
-      "notes": "L1 only, minimal SP"
+      "notes": "Minimal card, core elements only"
     },
     "8K": {
       "card_budget": "580-830",
       "an": true,
       "lorebook": false,
       "cot": false,
-      "notes": "L1+L2 basics"
+      "notes": "Standard card with AN and SPINE"
     },
     "16K": {
       "card_budget": "800-1500",
       "an": true,
       "lorebook": true,
       "cot": false,
-      "notes": "Full L2"
+      "notes": "Full card with Lorebook"
     },
     "32K": {
       "card_budget": "1500+",
       "an": true,
       "lorebook": true,
       "cot": "limited",
-      "notes": "Full L3"
+      "notes": "Full card with CoT"
     }
   },
   "test_scenarios": {

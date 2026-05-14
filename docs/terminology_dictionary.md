@@ -1,7 +1,7 @@
 # Терминологический словарь Live Character Guide
 
-**Версия:** 2.1  
-**Дата:** 2026-04-24  
+**Версия:** 8.0.0  
+**Дата:** 2026-05-14  
 
 ---
 
@@ -22,8 +22,8 @@
 | **WANT** | Желание | — | framework | Элемент SPINE |
 | **NEED** | Потребность | — | framework | Элемент SPINE |
 | **FLAW** | Дефект | — | framework | Элемент SPINE |
-| **LIE** | Ложная установка | — | framework | Элемент SPINE (L3-only после реструктуризации) |
-| **GHOST** | Призрак | — | framework | Элемент SPINE (L3-only после реструктуризации), можно оставить GHOST |
+| **LIE** | Ложная установка | — | framework | Элемент SPINE |
+| **GHOST** | Призрак | — | framework | Элемент SPINE, можно оставить GHOST |
 | **OCEAN** | OCEAN | — | framework | Большая пятёрка, без перевода. Измерения: O/C/E/A/N |
 | **O — Openness** | Открытость | O | trait | OCEAN-измерение: креативность, любопытство |
 | **C — Conscientiousness** | Добросовестность | C | trait | OCEAN-измерение: организованность, дисциплина |
@@ -57,7 +57,7 @@
 | **ocean_defaults** | Профиль OCEAN по умолчанию | — | data-field | Значения OCEAN-профиля (0–100) для предзаполнения виджета. ≈ ocean_correlation × 100 |
 | **Author's Note** | Author's Note | AN | parameter | НЕ "Авторские заметки" |
 | **Lorebook** | Lorebook | LB | parameter | НЕ "Лорбук" |
-| **Chain of Thought** | Цепочка рассуждений | CoT | technique | CoT — аббревиатура (L3-only после реструктуризации) |
+| **Chain of Thought** | Цепочка рассуждений | CoT | technique | CoT — аббревиатура |
 | **Voice Isolation** | Изоляция голоса | — | technique | — |
 | **Embodiment** | Телесность | — | technique | — |
 | **Format Lock** | Format Lock | — | technique | Без перевода |
@@ -76,7 +76,7 @@
 | **Context** | Контекст | — | technical | Контекстное окно |
 | **Poles** | Полюса | — | technical | Полюса OCEAN |
 | **Rationale** | Обоснование | — | technical | — |
-| **CORE DIRECTIVES** | Основные директивы | CD | technique | Unified directive system in SP. 7 items. English in SP |
+| **CORE DIRECTIVES** | Основные директивы | CD | technique | Unified directive system in SP. 7 items. English in SP. See `p7_core_directives` |
 | **Tone Frame** | Тональный фрейм | TF | technique | Dual-function SP element (~25-30 tokens). English in SP |
 | **SPATIAL LOCK** | Пространственная блокировка | — | directive | Prevent teleportation/anatomical errors. English in SP |
 | **PRE-GENERATION FILTER** | Фильтр предгенерации | — | directive | 4-item self-check before response. English in SP |
@@ -85,7 +85,7 @@
 | **CONSEQUENCE DRIVEN** | Последовательность следствий | — | directive | WANT→NEED shift as Price accumulates. English in SP |
 | **SHOW NEVER TELL** | Показывай, не рассказывай | — | directive | Meta-principle: demonstrate through behavior. English in SP |
 | **EMBODIMENT FIRST** | Телесность прежде всего | — | directive | State→Body→Sensor→Speech. English in SP |
-| **Immersion Boundary** | Иммерсионная граница | — | technique | Advanced OOC: deny meta-reality. L3-only |
+| **Immersion Boundary** | Иммерсионная граница | — | technique | Advanced OOC: deny meta-reality |
 | **Voice Contamination** | Заражение голоса | — | diagnostic | Copying foreign `<START>` examples breaks voice on 12B |
 | **Narrator Bleed** | Утечка рассказчика | — | diagnostic | Mixing narrator voice with character voice in Examples |
 | **One Change Rule** | Правило одного изменения | — | diagnostic | Never change >1 parameter at a time when debugging |

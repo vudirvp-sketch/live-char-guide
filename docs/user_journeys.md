@@ -1,316 +1,462 @@
-# User Journeys — Live Character Guide v6
+# User Journeys — Live Character Guide v8
 
-> **Version:** 2.2
-> **Last Updated:** 2026-04-27
-> **Status:** Draft (synced with Content Restoration Phases 0–13)
+> **Version:** 8.0.0
+> **Last Updated:** 2026-05-14
+> **Status:** Draft
 
 ---
 
 ## Purpose
 
-This document describes what a reader **DOES** at each layer — not what content exists, but the reader's PATH through that content. It validates:
+This document describes the reader's **PATH** through the guide — not what content exists, but what the reader **DOES** at each step. It validates:
 
-1. Quickstart is a real entry point
-2. Cross-layer bridges (IMP-27) actually lead somewhere useful
-3. No "dead ends" exist where a reader finishes a section and doesn't know where to go next
+1. Every Part has a clear entry and exit
+2. No dead ends exist where a reader finishes a section and doesn't know where to go next
+3. The journey is strictly linear: Part 1 → Part 10
 
 ---
 
-## L1 Journey (15 minutes)
+## The Linear Journey
 
-### Profile
-- **Target reader**: New to character cards, needs quick result
-- **Time budget**: ~15 minutes
-- **Token target**: 400-800 tokens/card
-
-### Journey Map
+The guide follows a single, continuous reading path. There are no branches, no layer selections, no skill-level gates. Every reader starts at Part 1 and moves forward through Part 10. Each Part builds directly on the one before it.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ENTRY POINT                                                     │
-│  ↓                                                               │
-│  [1] Landing → Layer selector modal                             │
-│      • Picks L1 (Минимальный)                                   │
-│      • Or clicks "Не уверены?" → redirected to L2               │
-│                                                                  │
-│  [2] Part 1 intro → Understand what a card is                   │
-│      • See 4 blocks table                                        │
-│      • Read Core Rules (5 rules)                                │
-│                                                                  │
-│  [3] Part 2 L1 sections → Understand anchors                    │
-│      • Format: Trigger → Action → Price                         │
-│      • 3-5 anchors minimum                                       │
-│                                                                  │
-│  [4] Part 3 L1 sections → Voice Isolation                       │
-│      • Voice ONLY in Examples                                    │
-│      • Write 2 examples: neutral + stress                       │
-│                                                                  │
-│  [5] L1 Quickstart → Fill 5-minute template                     │
-│      • Minimal Elena card                                        │
-│      • Test with one scenario                                   │
-│                                                                  │
-│  [6] Problem? → Part 9 Top-3 troubleshooting                    │
-│      • One Change Rule: change only 1 parameter at a time        │
-│      • If fixed → done                                          │
-│      • If deeper issue → data-layer-switch → L2                 │
-│                                                                  │
-│  [7] Bridge sections in Parts 4–8 → Know SPINE/OCEAN/CoT/      │
-│      Technical/Anti-patterns exist → Can switch to L2/L3        │
-│                                                                  │
-│  EXIT: Working minimal card (~500 tokens)                       │
-│  NEXT: See OCEAN/SPINE mentions → know they exist in L2         │
+│  Part 1: Foundations                                            │
+│  ↓                                                              │
+│  Part 2: Behavioral Anchors                                     │
+│  ↓                                                              │
+│  Part 3: Voice and Isolation                                    │
+│  ↓                                                              │
+│  Part 4: SPINE Framework                                        │
+│  ↓                                                              │
+│  Part 5: Psychology Toolkit                                     │
+│  ↓                                                              │
+│  Part 6: Chain of Thought                                       │
+│  ↓                                                              │
+│  Part 7: Technical Implementation                               │
+│  ↓                                                              │
+│  Part 8: Anti-patterns                                          │
+│  ↓                                                              │
+│  Part 9: Diagnostics                                            │
+│  ↓                                                              │
+│  Part 10: Card Examples                                         │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Validation Points
-
-| Step | Check | Pass Criteria |
-|------|-------|---------------|
-| 1 | Modal shows L1 option | ✅ L1 visible with description |
-| 2 | Core Rules accessible | ✅ 5 rules visible in Part 1 |
-| 3 | Anchor format clear | ✅ T→A→P format explained |
-| 4 | Voice Isolation rule | ✅ Rule stated clearly |
-| 5 | Quickstart exists | ✅ Template available |
-| 6 | Troubleshooting accessible | ✅ Part 9 link works |
-| 7 | Bridge sections visible | ✅ All 10 Parts have L1 content, bridges to L2/L3 |
-
-### Expected Outcome
-- Reader produces a **minimal working card** (~500 tokens)
-- Understands the 4 blocks structure
-- Knows core rules (OCEAN poles, Voice Isolation, etc.)
-- Knows L2 exists for deeper content (SPINE, OCEAN, FLAW-linked anchors)
-- Knows L3 exists for advanced content (LIE, GHOST, CoT, XML, API) via bridge sections
-
 ---
 
-## L2 Journey (30 minutes)
+## Part-by-Part Journey
 
-### Profile
-- **Target reader**: Has basic card, wants depth
-- **Time budget**: ~30 minutes
-- **Token target**: 800-1500 tokens/card
+### Part 1: Foundations
 
-### Journey Map
+**Reader goal:** Understand what a character card is, how it's structured, and what principles guide its creation.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ENTRY POINT                                                     │
-│  ↓                                                               │
-│  [1] Switch to L2 → See "What's New" table                      │
-│      • Knows what was added vs L1                               │
+│  [1] Reader opens the guide                                      │
+│      • Sees the assembly overview — what a card looks like       │
+│      • Learns card anatomy: the 4 blocks and their roles        │
 │                                                                  │
-│  [2] Part 4 (SPINE) → Fill SPINE for character                  │
-│      • WANT/NEED/FLAW (3 elements on L2)                         │
-│      • Derive anchors from psychology                           │
-│      • If you want LIE/GHOST → bridge to L3                    │
+│  [2] Reader learns the 3 key principles                          │
+│      • Principle 1: Show, don't tell                             │
+│      • Principle 2: Voice lives only in Examples                 │
+│      • Principle 3: Every element earns its tokens               │
 │                                                                  │
-│  [3] Part 2 L2 sections → Expand anchors                        │
-│      • FLAW-linked anchors                                      │
-│      • Embodiment protocol                                      │
-│      • 5-7 anchors with Price                                   │
-│      • ENVIRONMENTAL REACTIVITY directive                       │
-│      • INFLUENCE BOUNDARY: react only to observable symptoms    │
+│  [3] Reader learns the token budget                              │
+│      • How to estimate token count                               │
+│      • Why budget discipline matters                             │
+│      • How each block consumes tokens                            │
 │                                                                  │
-│  [4] Part 3 L2 sections → Write 3 Examples                      │
-│      • Neutral + Stress + Trust                                 │
-│      • Apply Tier quality criteria                              │
-│      • Voice Contamination check: never copy foreign <START>    │
-│                                                                  │
-│  [5] Part 5 (Psych Toolkit) → OCEAN Interactive Tool            │
-│      • Validate 1-2 extreme poles                               │
-│      • See Enneagram suggestion                                 │
-│      • Add notation to card                                     │
-│                                                                  │
-│  [6] L2 Quickstart → 30-minute pipeline                         │
-│      • Card ~950 tokens                                         │
-│                                                                  │
-│  [7] Part 7 L2 → CORE DIRECTIVES in System Prompt               │
-│      • Add CORE_DIRECTIVES block to SP (5 directives)            │
-│      • Add Tone Frame for atmosphere (~25-30 tokens)             │
-│      • Verify Model Type Checklist for your model size           │
-│                                                                  │
-│  [8] Test with 6 scenarios → Part 9 diagnostics                 │
-│      • Decision Tree for structured debugging                    │
-│      • If model-specific issue → data-layer-switch → L3         │
-│                                                                  │
-│  EXIT: Working deep card (~950 tokens)                          │
-│  NEXT: Knows L3 exists for CoT, GHOST Layers, API blocks        │
+│  [4] Part Resume — reader can now:                               │
+│      • Explain what a character card is and what it contains     │
+│      • Name the 3 key principles                                 │
+│      • Estimate token budget for a card                          │
+│      • Navigate the assembly overview                            │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Validation Points
-
-| Step | Check | Pass Criteria |
-|------|-------|---------------|
-| 1 | "What's New" visible | ✅ Table shows L2 additions |
-| 2 | SPINE sections exist | ✅ WANT/NEED/FLAW explained (LIE/GHOST on L3) |
-| 3 | FLAW-linked anchors | ✅ Protocol documented |
-| 4 | Tier quality criteria | ✅ Tier 1/2/3 defined |
-| 5 | OCEAN tool works | ✅ Pentagon + sliders functional |
-| 6 | L2 Quickstart exists | ✅ 30-min template available |
-| 7 | Cross-layer bridges | ✅ Links to L3 work |
-
-### Expected Outcome
-- Reader produces a **deep card** (~950 tokens)
-- Has complete SPINE (WANT/NEED/FLAW). LIE/GHOST available on L3 via bridge
-- Has 5-7 anchors with Price
-- Has OCEAN + Enneagram notation
-- Understands FLAW-linked anchors
-
 ---
 
-## L3 Journey (60 minutes)
+### Part 2: Behavioral Anchors
 
-### Profile
-- **Target reader**: Power user, complex scenarios
-- **Time budget**: ~60 minutes
-- **Token target**: 1500+ tokens/card
-
-### Journey Map
+**Reader goal:** Learn how to write anchors that make a character behave consistently.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  ENTRY POINT                                                     │
-│  ↓                                                               │
-│  [1] Switch to L3 → See "What's New" table                      │
-│      • Knows what was added vs L2                               │
+│  [1] Reader learns the T→A→P format                              │
+│      • Trigger: what situation activates the anchor              │
+│      • Action: what the character does                           │
+│      • Price: what it costs the character                        │
 │                                                                  │
-│  [2] Part 4 L3 sections → Add LIE and GHOST to SPINE           │
-│      • LIE (ложная установка) → see p4_lie                      │
-│      • GHOST (событие прошлого) → see p4_ghost                  │
-│      • 3-tier GHOST Layers → link each to anchors               │
-│      • Validate full SPINE chain via p4_l3_spine_full           │
+│  [2] Reader learns anchor rules                                  │
+│      • Minimum 3–5 anchors per card                              │
+│      • Every anchor must have a Price                            │
+│      • Anchors must be observable in roleplay                    │
 │                                                                  │
-│  [3] Part 6 (CoT Tiers) → Add 2-3 CoT anchors                   │
-│      • CoT basics + Tier definitions now on L3                  │
-│      • Tier 2 recommended for most                              │
-│      • Internal process anchors                                 │
+│  [3] Reader learns embodiment                                    │
+│      • Body-first writing: gesture, posture, micro-movement      │
+│      • Sensory anchors: how the character perceives the world    │
+│      • Embodiment ≠ description — it drives behavior             │
 │                                                                  │
-│  [4] Part 7 L3 sections → Configure advanced blocks             │
-│      • API blocks (Claude/GPT)                                  │
-│      • XML tags for structured Description                      │
-│      • Advanced Lorebook triggers                               │
-│      • CORE DIRECTIVES 6–7 (CONSEQUENCE DRIVEN, PRE-GEN FILTER) │
-│      • OOC Protection + Immersion Boundary                      │
-│      • L3 SP Template + L3 AN Template with GHOST-activation    │
+│  [4] Part Resume — reader can now:                               │
+│      • Write anchors in T→A→P format                             │
+│      • Apply anchor rules (Price, observability)                 │
+│      • Write embodiment and sensory anchors                      │
+│      • Distinguish embodiment from static description            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 3: Voice and Isolation
+
+**Reader goal:** Ensure the character's voice is unique, consistent, and never leaks.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader learns the Voice Isolation rule                      │
+│      • Character voice lives ONLY in Examples                    │
+│      • Description = behavior, not speech patterns               │
+│      • Why mixing voice into Description breaks cards            │
 │                                                                  │
-│  [5] Part 5 L3 sections → OCEAN×Enneagram Matrix                │
-│      • Validate cross-correlations                              │
-│      • Fine-tune personality profile                            │
+│  [2] Reader learns Examples rules                                │
+│      • Write at least 2 examples: neutral + stress               │
+│      • Examples must demonstrate T→A→P anchors in action         │
+│      • Examples must show voice, not just describe it            │
 │                                                                  │
-│  [6] L3 Quickstart → 60-minute pipeline                         │
-│      • Card ~1500+ tokens                                       │
+│  [3] Reader learns greeting construction                         │
+│      • Greeting as the first voice demonstration                 │
+│      • Greeting must establish tone, manner, and anchoring       │
 │                                                                  │
-│  [7] If 12B model → Part 9 diagnostics                          │
-│      • 4K-Fallback protocol if needed                           │
+│  [4] Reader learns voice leak detection                          │
+│      • How to spot voice bleeding into Description               │
+│      • How to fix voice leaks by moving text to Examples         │
+│      • Voice Contamination check: never copy another character's  │
+│        speech patterns                                           │
 │                                                                  │
-│  [8] Pre-Deploy Validation → Part 9 L3                          │
-│      • Quick Check (5 items: PP=0.0, voice only in Examples,    │
-│        Price in every anchor, Format Lock, anti-godmoding)       │
+│  [5] Part Resume — reader can now:                               │
+│      • Apply the Voice Isolation rule                            │
+│      • Write Examples that demonstrate character voice            │
+│      • Construct a greeting that establishes character identity   │
+│      • Detect and fix voice leaks                                │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 4: SPINE Framework
+
+**Reader goal:** Build a complete psychological profile that drives every element of the card.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader learns the SPINE structure                           │
+│      • GHOST — событие прошлого (the formative event)            │
+│      • LIE — ложная установка (the false belief)                 │
+│      • FLAW — the behavioral flaw                                │
+│      • NEED — what the character truly needs                     │
+│      • WANT — what the character pursues instead                 │
+│                                                                  │
+│  [2] Reader fills out the full SPINE for their character         │
+│      • GHOST → LIE → FLAW → NEED → WANT chain                   │
+│      • Each element must connect to the next                     │
+│      • Full 5-element SPINE is the standard                      │
+│                                                                  │
+│  [3] Reader learns SPINE→Anchor mapping                          │
+│      • How each SPINE element generates anchors                  │
+│      • FLAW-linked anchors: the most important mapping           │
+│      • WANT→NEED tension drives behavior in roleplay             │
+│                                                                  │
+│  [4] Part Resume — reader can now:                               │
+│      • Build a complete 5-element SPINE profile                  │
+│      • Trace the GHOST→LIE→FLAW→NEED→WANT chain                 │
+│      • Map SPINE elements to behavioral anchors                  │
+│      • Explain why WANT≠NEED creates compelling characters       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 5: Psychology Toolkit
+
+**Reader goal:** Validate and refine the SPINE profile with established personality models.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader uses OCEAN (Big Five)                                │
+│      • Validate 1–2 extreme poles for the character              │
+│      • See how OCEAN poles reinforce SPINE elements              │
+│      • Add OCEAN notation to the card                            │
+│                                                                  │
+│  [2] Reader uses the Enneagram                                   │
+│      • Find the character's core type                            │
+│      • Use the type to validate FLAW and LIE                     │
+│      • See Enneagram suggestions based on SPINE                  │
+│                                                                  │
+│  [3] Reader uses MBTI                                            │
+│      • Cross-check cognitive functions with SPINE                │
+│      • Use MBTI as a secondary validation tool                   │
+│      • Understand MBTI's limitations for character cards         │
+│                                                                  │
+│  [4] Part Resume — reader can now:                               │
+│      • Validate SPINE with OCEAN extreme poles                   │
+│      • Use Enneagram to strengthen FLAW and LIE                  │
+│      • Cross-check personality with MBTI                         │
+│      • Add psychology notation to the card                       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 6: Chain of Thought
+
+**Reader goal:** Add reasoning anchors that make the character's internal process visible and consistent.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader learns what CoT anchors are                          │
+│      • CoT = internal reasoning the model performs before reply  │
+│      • CoT anchors guide how the character thinks, not just acts │
+│      • Why CoT improves consistency and depth                    │
+│                                                                  │
+│  [2] Reader adds CoT anchors to their card                       │
+│      • Write 2–3 CoT anchors tied to SPINE elements              │
+│      • CoT must reflect WANT→NEED tension                       │
+│      • CoT format: situation → internal reasoning → decision     │
+│                                                                  │
+│  [3] Part Resume — reader can now:                               │
+│      • Explain what CoT anchors are and why they matter          │
+│      • Write CoT anchors tied to SPINE                           │
+│      • Integrate CoT into the card's anchor structure             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 7: Technical Implementation
+
+**Reader goal:** Assemble the full System Prompt with all directives, Author's Note, and Lorebook.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader assembles the System Prompt                          │
+│      • All 7 CORE DIRECTIVES:                                    │
+│        1. BEHAVIORAL ANCHORING                                   │
+│        2. VOICE ISOLATION                                        │
+│        3. ENVIRONMENTAL REACTIVITY                               │
+│        4. INFLUENCE BOUNDARY                                     │
+│        5. FORMAT LOCK                                            │
+│        6. CONSEQUENCE DRIVEN                                     │
+│        7. PRE-GEN FILTER                                         │
+│      • Each directive in its own block with clear instructions   │
+│                                                                  │
+│  [2] Reader configures Author's Note (AN)                        │
+│      • AN template with WANT→NEED injection                      │
+│      • Tone Frame for atmosphere (~25–30 tokens)                 │
+│      • AN placement and depth settings                           │
+│                                                                  │
+│  [3] Reader sets up the Lorebook                                 │
+│      • Lorebook entries for key concepts and relationships       │
+│      • Trigger conditions and insertion order                    │
+│      • How Lorebook extends the card without bloating tokens     │
+│                                                                  │
+│  [4] Reader follows the complete Assembly Pipeline               │
+│      • Step-by-step: Description → Anchors → Examples → SP → AN │
+│      • Final token count check                                   │
+│      • Model type checklist for target model size                │
+│                                                                  │
+│  [5] Part Resume — reader can now:                               │
+│      • Write a complete System Prompt with all 7 directives      │
+│      • Configure Author's Note with Tone Frame                   │
+│      • Set up Lorebook entries with proper triggers              │
+│      • Follow the Assembly Pipeline from start to finish         │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 8: Anti-patterns
+
+**Reader goal:** Learn to identify and fix the 16 most common errors in character cards.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader studies the anti-pattern catalog (AP-1 through AP-16)│
+│      • Each anti-pattern has: name, symptom, cause, fix         │
+│      • Anti-patterns grouped by category:                        │
+│        - Voice anti-patterns (bleed, contamination, flattening)  │
+│        - Anchor anti-patterns (no Price, vague trigger, etc.)    │
+│        - SPINE anti-patterns (broken chain, missing elements)    │
+│        - Technical anti-patterns (token bloat, missing directive) │
+│                                                                  │
+│  [2] Reader applies fixes to their own card                      │
+│      • Self-check: scan card against all 16 anti-patterns        │
+│      • Fix each identified issue using the prescribed remedy     │
+│      • Re-check after fixes                                      │
+│                                                                  │
+│  [3] Part Resume — reader can now:                               │
+│      • Identify all 16 anti-patterns by symptom                  │
+│      • Apply the correct fix for each anti-pattern               │
+│      • Perform a systematic self-check of their card             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Part 9: Diagnostics
+
+**Reader goal:** Learn to test and validate a character card before deployment.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader learns the One Change Rule                           │
+│      • Change only 1 parameter at a time when debugging          │
+│      • Why multiple simultaneous changes obscure causes          │
+│                                                                  │
+│  [2] Reader runs test scenarios                                  │
+│      • 6 standard scenarios to probe anchor activation           │
+│      • Neutral, stress, trust, conflict, intimacy, boundary      │
+│      • Each scenario tests specific anchor groups                │
+│                                                                  │
+│  [3] Reader uses the Decision Tree for debugging                 │
+│      • Structured diagnostic flow: symptom → cause → fix        │
+│      • Decision points for voice issues, behavior drift, etc.   │
+│                                                                  │
+│  [4] Reader runs the Pre-Deploy Validation checklist             │
+│      • Quick Check (5 items): PP=0.0, voice only in Examples,   │
+│        Price in every anchor, Format Lock, anti-godmoding        │
 │      • Full Check (14 items) if Quick Check passes              │
 │                                                                  │
-│  EXIT: Working expert card (~1500+ tokens)                      │
-│  NEXT: Can return to L1/L2 for simpler cards                    │
+│  [5] Part Resume — reader can now:                               │
+│      • Apply the One Change Rule when debugging                  │
+│      • Run 6 test scenarios and interpret results                │
+│      • Use the Decision Tree to diagnose issues                  │
+│      • Complete Pre-Deploy Validation (Quick + Full Check)       │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Validation Points
-
-| Step | Check | Pass Criteria |
-|------|-------|---------------|
-| 1 | "What's New" visible | ✅ Table shows L3 additions |
-| 2 | LIE + GHOST + GHOST Layers | ✅ LIE/GHOST sections on L3, full chain in p4_l3_spine_full |
-| 3 | CoT tiers documented | ✅ CoT basics + tiers now on L3, Tier 1/2/3 templates available |
-| 4 | API blocks documented | ✅ Claude/GPT specifics |
-| 5 | Cross-matrix works | ✅ 5×9 interactive table |
-| 6 | L3 Quickstart exists | ✅ 60-min template available |
-| 7 | 4K-Fallback accessible | ✅ Protocol in Part 7/9 |
-
-### Expected Outcome
-- Reader produces an **expert card** (~1500+ tokens)
-- Has GHOST Layers
-- Has CoT anchors
-- Has API blocks / XML tags
-- Has all 7 CORE DIRECTIVES in SP
-- Has OOC Protection and/or Immersion Boundary
-- Has passed Pre-Deploy Validation checklist
-- Can diagnose 12B-specific issues
-
-### IMP-47 Note: Repositioned Content
-
-Если вы читали гайд до реструктуризации: GHOST и LIE теперь на Экспертном слое (L3). CoT basics и tiers также перемещены на L3. Это не новое содержание — оно перемещено для создания качественного различия между слоями. L2 SPINE теперь содержит только WANT/NEED/FLAW.
-
 ---
 
-## Cross-Layer Bridge Validation
+### Part 10: Card Examples
 
-### IMP-27 Requirement
-Every L2 section must have an L1 mention or `data-layer-switch`. Every L3 section must have an L2 mention.
+**Reader goal:** See complete, annotated character cards that demonstrate all principles in practice.
 
-### Bridge Inventory
-
-| From | To | Type | Purpose |
-|------|-----|------|---------|
-| L1 Part 1 (p1_next_steps) | L2 Part 4 (SPINE) | data-layer-switch | "Want anchors from psychology? → L2" |
-| L1 Part 1 (p1_next_steps) | L2 Part 5 (OCEAN) | data-layer-switch | "OCEAN/Enneagram tools → L2" |
-| L1 Part 1 (p1_next_steps) | L3 Part 6 (CoT) | data-layer-switch | "CoT internal process → L3" |
-| L1 Part 1 (p1_next_steps) | L2 Part 7 (Technical) | data-layer-switch | "SP/Format Lock/AN/Lorebook → L2" |
-| L1 Part 1 (p1_next_steps) | L2 Part 8 (Anti-patterns) | data-layer-switch | "AP-1–AP-15 catalog → L2" |
-| L1 Part 3 (voice) | L2 Part 3 (embodiment) | data-layer-switch | "Want body-first protocol? → L2" |
-| L1 Part 9 | L2 Part 4 | data-layer-switch | "Deeper diagnostics → L2" |
-| L2 Part 2 (anchors) | L3 Part 6 (CoT) | data-layer-switch | "Internal process anchors → L3" |
-| L2 Part 4 (SPINE) | L3 Part 4 (LIE+GHOST) | data-layer-switch | "LIE/GHOST/GHOST Layers → L3" |
-| L2 Part 4 (SPINE) | L3 Part 4 (full chain) | data-layer-switch | "Полный СПИН из 5 элементов → L3" |
-| L2 Part 5 (OCEAN) | L3 Part 5 (cross-matrix) | data-layer-switch | "OCEAN×Enneagram correlation → L3" |
-| L2 Part 7 (technical) | L3 Part 7 (4K-Fallback) | data-layer-switch | "Low-context adaptation → L3" |
-| L2 Part 2 (anchors) | L2 Part 7 (CORE DIRECTIVES) | data-layer-switch | "INFLUENCE BOUNDARY directive → Part 7" |
-| L2 Part 2 (env reactivity) | L2 Part 7 (CORE DIRECTIVES) | data-layer-switch | "ENVIRONMENTAL REACTIVITY directive → Part 7" |
-| L2 Part 4 (SPINE mapping) | L2 Part 7 (CORE DIRECTIVES) | data-layer-switch | "CONSEQUENCE DRIVEN → Part 7" |
-| L2 Part 4 (SPINE mapping) | L2 Part 7 (AN) | data-layer-switch | "WANT→NEED in AN → Part 7" |
-| L2 Part 7 (CORE DIRECTIVES) | L3 Part 7 (CD L3) | data-layer-switch | "Directives 6–7 (L3 extension) → L3" |
-| L1 Part 9 (troubleshooting) | L1 Part 9 (One Change Rule) | href | "Debugging principle → p9_one_change_rule" |
-| L3 Part 7 (OOC Protection) | L3 Part 7 (Immersion Boundary) | data-layer-switch | "Advanced OOC → L3" |
-| L2 Part 8 (AP-11 voice bleed) | L3 Part 3 (multi-char) | data-layer-switch | "Multi-char examples → L3" |
-| L2 Part 8 (AP-15 basic) | L2 Part 5 (OCEAN poles) | data-layer-switch | "Golden rule OCEAN → Part 5" |
-
-### Dead End Check
-
-After Stage 1, walk each journey on the assembled site:
-
-- [ ] L1 journey: no dead ends
-- [ ] L2 journey: no dead ends
-- [ ] L3 journey: no dead ends
-- [ ] All cross-layer bridges work
-- [ ] Reader always knows where to go next
-
----
-
-## User Journey Test Protocol
-
-### Manual Testing Steps
-
-1. **Fresh browser session** (no localStorage)
-2. **Select L1** from modal
-3. **Follow L1 journey** step by step
-4. **Verify each checkpoint**
-5. **Repeat for L2**
-6. **Repeat for L3**
-7. **Test all cross-layer switches**
-
-### Automated Testing (Puppeteer)
-
-```javascript
-// Test: L1 journey completes without dead ends
-describe('L1 Journey', () => {
-  it('should guide user from landing to working card', async () => {
-    await page.goto(BASE_URL);
-    await page.click('[data-layer="1"]');
-    await page.waitForSelector('#part-01');
-    // ... continue through journey
-  });
-});
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  [1] Reader studies complete annotated cards                      │
+│      • Each card shows the full assembly: Description, Anchors,  │
+│        Examples, SP, AN, Lorebook                                │
+│      • Annotations explain WHY each element is written as-is     │
+│      • Cards vary in complexity and style                        │
+│                                                                  │
+│  [2] Reader compares their card to the examples                  │
+│      • Self-assessment against reference quality                 │
+│      • Identify gaps and areas for improvement                   │
+│      • Return to earlier Parts to refine specific elements       │
+│                                                                  │
+│  [3] Part Resume — reader can now:                               │
+│      • Read an annotated card and understand every design choice  │
+│      • Compare their own card to reference examples              │
+│      • Identify which Parts to revisit for improvement           │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-*Document prepared for Live Character Guide v6 rebuild project*
+## Model Capability Notes
+
+Throughout the guide, you will encounter annotations in this format:
+
+```
+[MODEL_NOTE: text]
+```
+
+### What they are
+
+Model Capability Notes are **technical constraints** — factual statements about what a specific model architecture can or cannot do well. They describe hardware, context window, or architectural limitations.
+
+### What they are NOT
+
+Model Capability Notes are **not difficulty levels**. They do not mean "this is too hard for you" or "skip this section." A `[MODEL_NOTE]` about 12B models having limited context is a technical fact, not a gate.
+
+### How to use them
+
+- Read them as advisory constraints for your specific deployment target
+- If your model matches the note, apply the recommended adaptation
+- If your model does not match, you can safely ignore the note
+- Never skip a section because of a Model Capability Note — the section still teaches principles that apply universally
+
+---
+
+## Part Resumes
+
+At the end of every Part, the reader finds a **Part Resume** — a short summary of 3–5 bullet points answering the question: **"Что вы теперь умеете?"** (What can you now do?).
+
+### Purpose
+
+- Consolidates learning before moving to the next Part
+- Gives the reader a clear sense of progress
+- Serves as a quick reference when revisiting a Part later
+- Validates that the reader has acquired the skills needed for the next Part
+
+### Format
+
+Each Part Resume follows this template:
+
+```
+**Что вы теперь умеете:**
+- [Skill or capability 1]
+- [Skill or capability 2]
+- [Skill or capability 3]
+- (optional) [Skill or capability 4]
+- (optional) [Skill or capability 5]
+```
+
+### Resume inventory
+
+| Part | Resume highlights |
+|------|-------------------|
+| 1 | Card anatomy, 3 key principles, token budget, assembly overview |
+| 2 | T→A→P format, anchor rules, embodiment, sensory anchors |
+| 3 | Voice Isolation, Examples rules, greeting, voice leak detection |
+| 4 | Full SPINE profile (GHOST→LIE→FLAW→NEED→WANT), SPINE→Anchor mapping |
+| 5 | OCEAN validation, Enneagram validation, MBTI cross-check |
+| 6 | CoT anchors, CoT tied to SPINE, CoT integration |
+| 7 | System Prompt (7 directives), AN + Tone Frame, Lorebook, Assembly Pipeline |
+| 8 | Identify 16 anti-patterns, apply fixes, self-check |
+| 9 | One Change Rule, 6 test scenarios, Decision Tree, Pre-Deploy Validation |
+| 10 | Read annotated cards, compare to own, identify improvement areas |
+
+---
+
+## Validation Points
+
+### No Dead Ends
+
+After assembly, walk the complete linear journey:
+
+- [ ] Part 1 → Part 2 transition is clear
+- [ ] Part 2 → Part 3 transition is clear
+- [ ] Part 3 → Part 4 transition is clear
+- [ ] Part 4 → Part 5 transition is clear
+- [ ] Part 5 → Part 6 transition is clear
+- [ ] Part 6 → Part 7 transition is clear
+- [ ] Part 7 → Part 8 transition is clear
+- [ ] Part 8 → Part 9 transition is clear
+- [ ] Part 9 → Part 10 transition is clear
+- [ ] Reader always knows where to go next
+- [ ] Every Part Resume accurately reflects skills acquired
+
+### Journey Test Protocol
+
+1. **Fresh browser session** (no localStorage)
+2. **Open the guide** at Part 1
+3. **Read through Parts 1–10** in order
+4. **Verify each Part Resume** matches the content
+5. **Verify no dead ends** — at every Part boundary, the next step is obvious
+6. **Verify back-references** — from Part 10, reader can navigate to any earlier Part for refinement
+
+---
+
+*Document prepared for Live Character Guide v8*

@@ -92,6 +92,11 @@
     "p7_core_directives_l3": "p7_core_directives",
     "p7_authors_note_l3": "p7_authors_note",
     "p7_sp_template_l3": "p7_system_prompt",
-    "p7_sp_template_full": "p7_system_prompt"
+    "p7_sp_template_full": "p7_system_prompt",
+    "p8_ap15_basic": "p8_ap15_ocean_overload",
+    "p8_ap15_extended": "p8_ap15_ocean_overload",
+    "p1_quickstart": "p7_assembly_pipeline",
+    "p2_flaw_anchors": "p4_spine_mapping",
+    "p9_top5_problems": "p9_additional_problems"
   }
 }

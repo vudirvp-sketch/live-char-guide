@@ -491,3 +491,53 @@ The following changes implement the tooltip system per L1-REMEDIATION-PLAN-V3.md
 | check_duplicates.py | ✅ No duplicates found |
 | check_english.py | 61 hits — all in `<pre><code>` blocks or allowed technical terms (expected per plan) |
 | validate-build.mjs | ✅ PASSED |
+
+---
+
+## v7 → v8 Migration
+
+> **Version:** 8.0
+> **Last Updated:** 2026-03-05
+> **Status:** Tracking Document
+
+v8 is a **unified restructuring** of the Live Character Guide. The primary change is the **removal of the layer system** (L1/L2/L3 with data-layer switching). Instead, v8 presents all content in a single unified pass — no layer toggles, no split sections, no separate L3-only content. Sections that were previously duplicated across layers are merged; sections that existed only for layer navigation are deleted. The SPINE framework is now presented in full causal order (GHOST→LIE→FLAW→NEED→WANT) for all readers, rather than splitting WANT/NEED/FLAW (base) from LIE/GHOST (L3).
+
+### Section ID Changes
+
+| Old ID (v7) | New ID (v8) | Status |
+|-------------|-------------|--------|
+| p3_tier_quality | p3_examples_quality | RENAMED |
+| p4_l3_learning_path | p4_spine_navigation | RENAMED |
+| p4_l3_spine_full | p4_spine_full_chain | RENAMED |
+| p10_elena_full | p10_elena | RENAMED |
+| p10_omnis_full | p10_omnis | RENAMED |
+| p10_geralt_l2 | p10_geralt | RENAMED |
+| p10_edward_l2 | p10_edward | RENAMED |
+| p10_walter_l2 | p10_walter | RENAMED |
+| p10_vysherblenny_l3 | p10_vysherblenny | RENAMED |
+| p9_top5_problems | p9_additional_problems | RENAMED |
+| p1_quickstart | — | DELETED (moved to p7_assembly_pipeline) |
+| p2_flaw_anchors | — | DELETED (moved to p4_spine_mapping) |
+| p7_core_directives_l3 | — | MERGED into p7_core_directives |
+| p7_authors_note_l3 | — | MERGED into p7_authors_note |
+| p7_sp_template_l3 | — | MERGED into p7_system_prompt |
+| p8_ap15_basic | — | MERGED into p8_ap15_ocean_overload |
+| p8_ap15_extended | — | MERGED into p8_ap15_ocean_overload |
+| — | p7_assembly_pipeline | NEW |
+
+### Key Structural Changes
+
+| Aspect | v7 | v8 |
+|--------|----|----|
+| Layer system | L1/L2/L3 with data-layer toggles and per-layer builds | No layers, unified single-pass reading experience |
+| SPINE | Split: WANT/NEED/FLAW (base) + LIE/GHOST (L3) | Unified: all 5 in causal order GHOST→LIE→FLAW→NEED→WANT |
+| CORE DIRECTIVES | 1–5 (base) + 6–7 (L3-only) | All 7 unified, `[MODEL_NOTE]` annotation for directives 6–7 |
+| Quickstart | Part 1 section | Deleted; Assembly Pipeline (`p7_assembly_pipeline`) at end of Part 7 |
+| FLAW-linked anchors | Part 2 (`p2_flaw_anchors`) | Moved to Part 4 under `p4_spine_mapping` |
+| AP-15 | Split: `p8_ap15_basic` (L2) + `p8_ap15_extended` (L3) | Merged into `p8_ap15_ocean_overload` |
+| "Основы/Дополнительно" tables | 10 tables across Parts | Deleted, replaced with concise intro paragraphs per section |
+| Voice rule callout | Part 10 full callout block | Replaced with 1-line reminder |
+
+### Anchor Redirects
+
+The file `anchor-redirects.json` handles automatic URL redirection for all old section IDs. Any external link or bookmark referencing a v7 ID (e.g., `#p10_geralt_l2`, `#p4_l3_spine_full`) will resolve to the corresponding v8 section via this redirect map. No manual URL updates are required for existing links.

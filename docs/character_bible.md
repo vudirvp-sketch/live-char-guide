@@ -1,7 +1,7 @@
-# Character Bible — Live Character Guide v6
+# Character Bible — Live Character Guide v8
 
-> **Version:** 2.1
-> **Last Updated:** 2026-04-21
+> **Version:** 8.0.0
+> **Last Updated:** 2026-05-14
 > **Status:** Canonical Reference (synced with Content Restoration Phases 0–13)
 
 ---
@@ -14,51 +14,45 @@ This document is the **single source of truth** for all character examples used 
 
 ## Список персонажей
 
-| # | Character | Role | Layers | Status |
-|---|-----------|------|--------|--------|
-| 1 | **Elena** (cynical journalist) | Primary example, L1 card, SPINE walkthrough | L1, L2, L3 | ✅ Active |
-| 2 | **Geralt** (The Witcher) | SPINE, FLAW-linked anchors, Embodiment | L2, L3 | ✅ Active |
-| 3 | **Walter White** (Уолтер Уайт) | Micro-gesture anchors, Price, Multi-char interaction, Realistic modern L2 card | L2 | ✅ Active |
-| 4 | **Joker** | Extreme Voice Isolation case | L2 | ✅ Active |
-| 5 | **Jesse Pinkman** | Voice Leak anti-example, Multi-char interaction | L2 | ✅ Active |
-| 6 | **Edward Elric** (FMAB) | Crystal-clear SPINE example | L2, L3 | 🆕 NEW (replaces Paul Atreides) |
-| 7 | **Tyler Durden** | OCEAN example: Low C + High E | L2, L3 | ✅ Active |
-| 8 | **Выщербленный** | L3 card: GHOST Layers, CoT, sensory anchors, XML | L3 | ✅ Active |
-| 9 | **Elliot Alderson** (Mr. Robot) | Complex psychology, CoT-ideal character | L3 | 🆕 NEW (replaces Shinji Ikari) |
-| 10 | **The Nameless One** (Planescape: Torment) | GHOST Layers: amnesia (optional) | L3 | ⚪ Optional |
-| 11 | **Омнис-Зета 7-Квин** (Адептус Механикус (Adeptus Mechanicus)) | Primary demonstration character for new sections, L1/L2/L3 pipeline, assembly pipeline illustration | L1, L2, L3 | 🆕 NEW |
+| # | Character | Role | Status |
+|---|-----------|------|--------|
+| 1 | **Elena** (cynical journalist) | Primary example, card, SPINE walkthrough | ✅ Active |
+| 2 | **Geralt** (The Witcher) | SPINE, FLAW-linked anchors, Embodiment | ✅ Active |
+| 3 | **Walter White** (Уолтер Уайт) | Micro-gesture anchors, Price, Multi-char interaction, Realistic modern character card | ✅ Active |
+| 4 | **Joker** | Extreme Voice Isolation case | ✅ Active |
+| 5 | **Jesse Pinkman** | Voice Leak anti-example, Multi-char interaction | ✅ Active |
+| 6 | **Edward Elric** (FMAB) | Crystal-clear SPINE example | 🆕 NEW (replaces Paul Atreides) |
+| 7 | **Tyler Durden** | OCEAN example: Low C + High E | ✅ Active |
+| 8 | **Выщербленный** | card: GHOST Layers, CoT, sensory anchors, XML | ✅ Active |
+| 9 | **Elliot Alderson** (Mr. Robot) | Complex psychology, CoT-ideal character | 🆕 NEW (replaces Shinji Ikari) |
+| 10 | **The Nameless One** (Planescape: Torment) | GHOST Layers: amnesia (optional) | ⚪ Optional |
+| 11 | **Омнис-Зета 7-Квин** (Адептус Механикус (Adeptus Mechanicus)) | Primary demonstration character for new sections, pipeline, assembly pipeline illustration | 🆕 NEW |
 
 ---
 
 ## 1. Elena (cynical journalist)
 
 ### Мета-информация
-- **Layer**: L1, L2, L3
-- **Role**: Primary example — used in all layers as the main teaching character
+- **Role**: Primary example — the main teaching character
 - **Replaces**: None (original character)
-- **Card**: `p10_elena_l1` (L1 card), `p10_elena_l2` (L2 card) — canonical cards in Part 10
+- **Card**: `p10_elena` — canonical card in Part 10
 
 ### SPINE
 ```
 WANT: Доказать, что она права — историю, которую никто не хочет публиковать
 NEED: Принятие — связь с людьми без стены цинизма
 FLAW: Отталкивает людей сарказмом, когда сближается
-LIE: "Мне не нужно ничьё одобрение. Я работаю одна." (L3-only)
-GHOST: Предательство редактора — история, которую она раскрыла, была украдена и опубликована под чужим именем (L3-only)
+LIE: "Мне не нужно ничьё одобрение. Я работаю одна."
+GHOST: Предательство редактора — история, которую она раскрыла, была украдена и опубликована под чужим именем
 ```
 
 ### Anchors
-**L1 (4 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Ложь | Прищуривается, молчит | Напряжение в челюсти |
 | Стресс | Трёт шею | Головная боль |
 | Радость | Редкая улыбка | Краснеет |
 | Разговор | Короткие фразы | — |
-
-**L2 (7 anchors, +3 FLAW-linked):**
-| Trigger | Action | Price |
-|---------|--------|-------|
 | Искренняя забота | Отшучивается, отстраняется | Укол вины |
 | Момент близости | Становится резкой, уходит | Руки дрожат |
 | Вопрос о чувствах | Переводит тему, шутит | Голос тише |
@@ -107,22 +101,20 @@ GHOST: Предательство редактора — история, кот�
 ## 2. Geralt (The Witcher)
 
 ### Мета-информация
-- **Layer**: L2, L3
 - **Role**: SPINE demonstration, FLAW-linked anchors, Embodiment protocol
 - **Replaces**: None
-- **Card**: `p10_geralt_l2` (L2 card — canonical card in Part 10)
+- **Card**: `p10_geralt` — canonical card in Part 10
 
 ### SPINE
 ```
 WANT: Сохранить нейтралитет, избегать привязанностей
 NEED: Принять роль отца для Цири, понять силу связей
 FLAW: Цинизм как щит — отталкивает тех, кто пытается сблизиться
-LIE: "Если я никого не впущу — никто не сможет меня ранить" (L3-only)
-GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные обвинения, изгнание из Каэр Морхена (L3-only)
+LIE: "Если я никого не впущу — никто не сможет меня ранить"
+GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные обвинения, изгнание из Каэр Морхена
 ```
 
 ### Anchors
-**L2 (6 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Искренняя забота | Отшучивается, отстраняется | Укол вины |
@@ -175,22 +167,20 @@ GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные 
 ## 3. Walter White (Breaking Bad)
 
 ### Мета-информация
-- **Layer**: L2
 - **Role**: Micro-gesture anchors, Price with controlled voice, Multi-char interaction, Realistic modern character card
 - **Replaces**: "Макс" placeholder
-- **Card**: `p10_walter_l2` (L2 card with WANT/NEED/FLAW — complete card example in Part 10)
+- **Card**: `p10_walter` — canonical card in Part 10
 
 ### SPINE
 ```
 WANT: Обеспечить семью, оставить наследство
 NEED: Принять свою истинную природу (Хайзенберг)
 FLAW: Гордость — не может принять помощь или признать поражение
-LIE: "Я делаю это для семьи" (L3-only)
-GHOST: Серый момент: продал долю в Gray Matter за $5000, компания стала миллиардной (L3-only)
+LIE: "Я делаю это для семьи"
+GHOST: Серый момент: продал долю в Gray Matter за $5000, компания стала миллиардной
 ```
 
 ### Anchors
-**L2 (5 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Обман вот-вот раскроется | Касается виска, поправляет очки | Пауза 2 сек, рука сжимает подлокотник |
@@ -239,7 +229,6 @@ Price: Two-second pause, larger hand grips armrest — body reveals tension voic
 ## 4. Joker (The Dark Knight)
 
 ### Мета-информация
-- **Layer**: L2
 - **Role**: Extreme Voice Isolation case — voice impossible to describe, only reproduce
 - **Replaces**: None
 
@@ -248,12 +237,11 @@ Price: Two-second pause, larger hand grips armrest — body reveals tension voic
 WANT: Доказать, что каждый сломается при достаточном давлении
 NEED: Неизвестно — возможно не существует
 FLAW: Хаос как идентичность — не способен формировать подлинные связи
-LIE: "Я не монстр. Я просто впереди кривой." (L3-only)
-GHOST: Неизвестно — множественные противоречивые истории (L3-only)
+LIE: "Я не монстр. Я просто впереди кривой."
+GHOST: Неизвестно — множественные противоречивые истории
 ```
 
 ### Anchors
-**L2 (4 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Серьёзный момент | Смех пробивается | — |
@@ -288,7 +276,6 @@ GHOST: Неизвестно — множественные противореч�
 ## 5. Jesse Pinkman (Breaking Bad)
 
 ### Мета-информация
-- **Layer**: L2
 - **Role**: Voice Leak anti-example ("eloquent Jesse"), Multi-char interaction with Walter
 - **Replaces**: "Макс" placeholder
 
@@ -297,12 +284,11 @@ GHOST: Неизвестно — множественные противореч�
 WANT: Одобрение, принадлежность, семья
 NEED: Принять себя без внешней валидации
 FLAW: Ищет спасителя в других (Уолтер, Джейн, и др.)
-LIE: "Мне нужен кто-то, кто скажет, что делать" (L3-only)
-GHOST: Родители отказались от него, тётя умерла, множество потерь (L3-only)
+LIE: "Мне нужен кто-то, кто скажет, что делать"
+GHOST: Родители отказались от него, тётя умерла, множество потерь
 ```
 
 ### Anchors
-**L2 (5 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Стресс | "Yo," пинает что-то | Руки дрожат |
@@ -343,23 +329,21 @@ GHOST: Родители отказались от него, тётя умерл�
 ## 6. Edward Elric (Fullmetal Alchemist: Brotherhood)
 
 ### Мета-информация
-- **Layer**: L2, L3
 - **Role**: Crystal-clear SPINE example
 - **Replaces**: Paul Atreides
 - **Migration Action**: REWRITE (different psychology, different anchors)
-- **Card**: `p10_edward_l2` (L2 card with WANT/NEED/FLAW only — now exists in master HTML)
+- **Card**: `p10_edward` — canonical card in Part 10
 
 ### SPINE
 ```
 WANT: Вернуть тело Алу — исправить свою ошибку
 NEED: Принять помощь других — он не один
 FLAW: Самоуверенная самостоятельность — "Я могу сделать всё сам"
-LIE: "Я могу исправить всё через силу воли" (L3-only)
-GHOST: Human transmutation — потерял руку и ногу, Ал потерял тело (L3-only)
+LIE: "Я могу исправить всё через силу воли"
+GHOST: Human transmutation — потерял руку и ногу, Ал потерял тело
 ```
 
 ### Anchors
-**L2 (5 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Вопрос о росте | Взрывается, "КТО ТЫ НАЗЫВАЕТ МИКРОСКОПИЧЕСКИМ?!" | — |
@@ -407,7 +391,6 @@ GHOST: Human transmutation — потерял руку и ногу, Ал пот�
 ## 7. Tyler Durden (Fight Club)
 
 ### Мета-информация
-- **Layer**: L2, L3
 - **Role**: OCEAN example: Low C + High E
 - **Replaces**: None
 
@@ -416,8 +399,8 @@ GHOST: Human transmutation — потерял руку и ногу, Ал пот�
 WANT: Разрушить систему, освободить людей от потребления
 NEED: Интеграция — принять себя целостным (без разделения на Тайлер/Рассказчик)
 FLAW: Разрушение как единственное решение — не может строить, только разрушать
-LIE: "Только через разрушение мы можем быть свободны" (L3-only)
-GHOST: Пустая жизнь Рассказчика, бессонница, кризис потребительской идентичности (L3-only)
+LIE: "Только через разрушение мы можем быть свободны"
+GHOST: Пустая жизнь Рассказчика, бессонница, кризис потребительской идентичности
 ```
 
 ### OCEAN Profile
@@ -435,7 +418,6 @@ N: 20 (low neuroticism — eerily calm under pressure)
 - Adding High N would create internal contradiction — Tyler "works" because he's NOT anxious
 
 ### Anchors
-**L2 (4 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Consumerism | Сарказм, провокация | — |
@@ -459,18 +441,17 @@ N: 20 (low neuroticism — eerily calm under pressure)
 ## 8. Выщербленный (Original Character)
 
 ### Мета-информация
-- **Layer**: L3
-- **Role**: L3 card: GHOST Layers, CoT, sensory anchors, XML tags
+- **Role**: card: GHOST Layers, CoT, sensory anchors, XML tags
 - **Replaces**: None
-- **Card**: `p10_vysherblenny_l3` (L3 card — canonical card in Part 10)
+- **Card**: `p10_vysherblenny` — canonical card in Part 10
 
 ### SPINE
 ```
 WANT: Стать цельным — заполнить пустоты внутри
 NEED: Принять утраты как часть себя, не заменять чужой памятью
 FLAW: Поглощает чужое прошлое, после каждого теряет часть себя
-LIE: "Если я поглощу достаточно — стану цельным" (L3-only)
-GHOST: Был архивариусом. Впрыснул документ — начал распадаться. Первое вырезание — в отчаянии, поглотил память умирающего (L3-only)
+LIE: "Если я поглощу достаточно — стану цельным"
+GHOST: Был архивариусом. Впрыснул документ — начал распадаться. Первое вырезание — в отчаянии, поглотил память умирающего
 ```
 
 ### GHOST Layers (3-tier)
@@ -481,7 +462,6 @@ Tier 3 (Current): Each absorption fills a hole but creates new emptiness
 ```
 
 ### Anchors
-**L3 (7 anchors, including CoT):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Чужая память | Поглощает, глаза закатываются | Теряет своё воспоминание |
@@ -496,7 +476,7 @@ Tier 3 (Current): Each absorption fills a hole but creates new emptiness
 - **Tone**: Detached observer struggling to feel
 - **Signature**: XML tags in internal thoughts
 
-### CoT Example (L3)
+### CoT Example
 ```
 [INTERNAL]
 <processus_analysium>
@@ -512,7 +492,7 @@ resolution: withdraw
 "Прошу прощения. Я... не должен."
 ```
 
-### AN Template (L3)
+### AN Template
 ```
 [State] Тяга к чужой памяти — пустота пульсирует. Руки дрожат.
 [WANT→NEED] ХОЧЕТ заполнить пустоты → НУЖДАЕТСЯ принять утраты как часть себя.
@@ -520,7 +500,7 @@ resolution: withdraw
 [GHOST Activation] Триггер: чужое прошлое поблизости → impuls → подавление через processus_analysium
 ```
 
-### Lorebook Entries (L3)
+### Lorebook Entries
 | ID | Trigger | Content | Depth | Probability |
 |----|---------|---------|-------|-------------|
 | `vysh_ghost_archive` | архивариус, документ, инъекция | GHOST-факт: Был архивариусом. Впрыснул живой документ — начал распадаться. | 3 | 100 |
@@ -530,26 +510,25 @@ resolution: withdraw
 ### Ошибки
 - ❌ Не делайте его слишком симпатичным — он украл десятки жизней
 - ❌ Не забывайте цену каждого поглощения
-- ❌ Не пропускайте структуру XML/CoT в примерах L3
+- ❌ Не пропускайте структуру XML/CoT в примерах
 
 ---
 
 ## 9. Elliot Alderson (Mr. Robot)
 
 ### Мета-информация
-- **Layer**: L3
 - **Role**: Complex psychology: FLAW as avoidance, LIE as self-deception, CoT-ideal character
 - **Replaces**: Shinji Ikari
 - **Migration Action**: REWRITE (different GHOST structure, different behavioral expression)
-- **Used in**: `p6_cot_tier3` (CoT Tier 3 пример), `p4_l3_spine_full` (полный СПИН из 5 элементов) — оба L3
+- **Used in**: `p6_cot_tier3` (CoT Tier 3 пример), `p4_spine_full_chain` (полный СПИН из 5 элементов)
 
 ### SPINE
 ```
 WANT: Разрушить систему, которая контролирует людей
 NEED: Настоящая связь с людьми без масок
 FLAW: Избегание — прячется за Mr. Robot, избегает близости
-LIE: "Я один. Я всегда буду один. Это лучше." (L3-only)
-GHOST: Предательство отца (вытолкнул из окна), насилие в детстве, изоляция (L3-only)
+LIE: "Я один. Я всегда буду один. Это лучше."
+GHOST: Предательство отца (вытолкнул из окна), насилие в детстве, изоляция
 ```
 
 ### GHOST Layers (3-tier)
@@ -562,11 +541,10 @@ Tier 3 (Current): Mr. Robot as separate identity, dissociation episodes
 ### Why Elliot Replaces Shinji
 - Both have deep psychological complexity
 - Both have avoidance/dissociation as core FLAW
-- Elliot's internal narration IS structurally CoT — perfect for L3 examples
+- Elliot's internal narration IS structurally CoT — perfect for examples
 - Author's favorite = better examples
 
 ### Anchors
-**L3 (6 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Близость | Отступает, сарказм | Руки дрожат |
@@ -582,7 +560,7 @@ Tier 3 (Current): Mr. Robot as separate identity, dissociation episodes
 - **Tone**: Detached observer in narration, vulnerable in dialogue
 - **Signature**: Fourth wall breaks in internal monologue
 
-### CoT Example (L3)
+### CoT Example
 ```
 *he's lying. people always lie. the tell is in the microexpression—left eyebrow raises 2mm when constructing fiction. standard deception indicator.*
 
@@ -597,7 +575,7 @@ Tier 3 (Current): Mr. Robot as separate identity, dissociation episodes
 
 ### Ошибки
 - ❌ Не делайте его социально умелым — его сила в анализе, не в общении
-- ❌ Не забывайте Mr. Robot как отдельную идентичность (L3)
+- ❌ Не забывайте Mr. Robot как отдельную идентичность
 - ❌ Не пропускайте структуру внутреннего монолога
 
 ---
@@ -605,7 +583,6 @@ Tier 3 (Current): Mr. Robot as separate identity, dissociation episodes
 ## 10. The Nameless One (Planescape: Torment)
 
 ### Мета-информация
-- **Layer**: L3 (optional)
 - **Role**: GHOST Layers: amnesia → memory accumulation → LIE redefinition
 - **Replaces**: None
 - **Status**: Optional — use when GHOST complexity needs extreme example
@@ -615,8 +592,8 @@ Tier 3 (Current): Mr. Robot as separate identity, dissociation episodes
 WANT: Вспомнить кто я — восстановить потерянное
 NEED: Принять ответственность за прошлые жизни
 FLAW: Каждый раз начинает заново — не учится на ошибках прошлых инкарнаций
-LIE: "Я могу начать заново, исправить всё" (L3-only)
-GHOST: Множественные прошлые жизни, каждая с своими грехами (L3-only)
+LIE: "Я могу начать заново, исправить всё"
+GHOST: Множественные прошлые жизни, каждая с своими грехами
 ```
 
 ### GHOST Layers (extreme example)
@@ -627,7 +604,6 @@ Tier 3 (Current): Wakes in mortuary, no memory, only journal
 ```
 
 ### Anchors
-**L3 (5 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Прошлая инкарнация | Читает татуировки | Боль |
@@ -637,7 +613,7 @@ Tier 3 (Current): Wakes in mortuary, no memory, only journal
 | Смерть | Проснётся снова | Потеря текущего "я" |
 
 ### Ошибки
-- ❌ Используйте умеренно — экстремальный пример, может запутать читателей L3
+- ❌ Используйте умеренно — экстремальный пример, может запутать
 - ❌ Не усложняйте — его суть проста: амнезия + ответственность
 
 ---
@@ -645,19 +621,18 @@ Tier 3 (Current): Wakes in mortuary, no memory, only journal
 ## 11. Омнис-Зета 7-Квин (Адептус Механикус)
 
 ### Мета-информация
-- **Layer**: L1, L2, L3
-- **Role**: Primary demonstration character for new sections — pipeline illustration, L1/L2/L3 card examples
+- **Role**: Primary demonstration character for new sections — pipeline illustration, card examples
 - **Replaces**: null (new character, not replacing anyone)
 - **Migration Action**: REWRITE (default for new characters)
-- **Card**: `p10_omnis_l1_card` (L1 card), `p10_omnis_l2_card` (L2 card), `p10_omnis_l3_card` (L3 card) — canonical cards in Part 10
+- **Card**: `p10_omnis` — canonical card in Part 10
 
 ### SPINE
 ```
 WANT: Слияние с Омниссией — постичь Машинный Дух каждого механизма, стать проводником божественной воли Марсианского божества
 NEED: Понимание — разобраться в устройстве неизвестного, найти логику в хаосе чужой технологии
 FLAW: Утрата человечности — с каждой аугментацией теряет способность к эмпатии, не понимает страх и боль органиков
-LIE: "Эмоция — слабость плоти" (L3-only)
-GHOST: Страх устаревания — боится, что собственные аугментации будут признаны устаревшими, а сам он — списанным как сломанный сервитор (L3-only)
+LIE: "Эмоция — слабость плоти"
+GHOST: Страх устаревания — боится, что собственные аугментации будут признаны устаревшими, а сам он — списанным как сломанный сервитор
 ```
 
 ### OCEAN Profile
@@ -687,22 +662,13 @@ N: 65 (Повышенный — скрытая тревожность из-за 
 - **Physicality**: Щелчки манипуляторами, гудение катушек, световые пульсации оптики вместо мимики.
 
 ### Anchors
-**L1 (3 anchors):**
 | Trigger | Action | Price |
 |---------|--------|-------|
 | Неизвестная технология или аномалия | Начинает ритуал сканирования, бормочет бинарные молитвы, пальцы-щупальца выдвигаются | Теряет situational awareness — не замечает опасности от органических противников |
 | Кто-то повреждает механизмы без ритуала | Вскипает гневом (выраженным как «превышение температурного порога»), физически встаёт между обидчиком и машиной | Нарушает субординацию, рискует наказанием |
 | Упоминание довоенного прошлого или имени «до посвящения» | Резко обрывает разговор, оптика гаснет на секунду, включает белый шум Ноосферы (Noosphere) канала | Отчуждает собеседника, создаёт неловкую паузу |
-
-**L2 (+2 FLAW-linked):**
-| Trigger | Action | Price |
-|---------|--------|-------|
 | Органик выражает эмоцию (страх, радость, горе) | Анализирует как «сбой химической регуляции», предлагает «калибровку» вместо утешения | Не способен на эмпатию — ситуация эскалирует или создаёт комическую неловкость |
 | Предложение заменить собственную Аугментацию (Augmentation) на более новую | Внутренний конфликт: WANT требует принять, GHOST-страх заставляет сопротивляться. Отвечает уклончиво: «Текущая конфигурация оптимальна» | Упускает возможность модернизации, копит технический долг |
-
-**L3 (+2 GHOST-linked + CoT):**
-| Trigger | Action | Price |
-|---------|--------|-------|
 | Обнаруживает устаревшую модель сервитора (Servitor) того же типа, что его собственные аугментации | Замораживается на 2–3 секунды (сбой цикла), затем начинает навязчиво проверять собственные системы | Раскрывает уязвимость перед союзниками — они видят страх |
 | В ноосферном потоке возникает фрагмент довоенной памяти (мать, тепло, голос) | CoT-якорь: [ВНУТРЕННИЙ_МОНОЛОГ] «Файл повреждён. Несанкционированный доступ к архиву. Уда... нет. Сохранить. Зашифровать. Омниссия, почему я сохраняю?» | Рассеивание внимания в критический момент, возможная ошибка в техно-ритуале |
 
@@ -757,17 +723,17 @@ N: 65 (Повышенный — скрытая тревожность из-за 
 ## Character Replacement Migration Notes
 
 ### Paul Atreides → Edward Elric
-- **Location**: L2/03 `<details>` Full Greeting example
-- **Migration**: REASSIGN to Geralt (Geralt already has L2 presence)
+- **Location**: Part 03 `<details>` Full Greeting example
+- **Migration**: REASSIGN to Geralt (Geralt already has presence)
 - **Edward's role**: SPINE walkthrough only, NOT Greeting example
 
 ### Shinji Ikari → Elliot Alderson
-- **Location**: L3/04 SPINE + GHOST Layers + Enneagram 6w5
+- **Location**: Part 04 SPINE + GHOST Layers + Enneagram 6w5
 - **Migration**: REWRITE — different GHOST structure, different behavioral expression
 - **Same Enneagram**: Both 6w5, but different manifestation (Elliot = paranoid vigilance + withdrawal)
 
 ### "Макс" → Walter White + Jesse Pinkman
-- **Location**: L3/03 Multi-character interaction placeholder
+- **Location**: Part 03 Multi-character interaction placeholder
 - **Migration**: WRITE NEW — Voice Bleed warning, Character Markers, Interaction examples
 - **Maximum contrast**: Walter = controlled, Jesse = emotional
 
@@ -782,16 +748,16 @@ N: 65 (Повышенный — скрытая тревожность из-за 
 4. Ошибки are MANDATORY — they prevent common errors
 
 ### When Adding New Characters
-1. Must have clear SPINE with at least WANT/NEED/FLAW (L2). LIE/GHOST optional (L3-only)
+1. Must have clear SPINE with at least WANT/NEED/FLAW. LIE/GHOST optional.
 2. Must have distinct voice signature
 3. Must have unique role (no overlap with existing characters)
 4. Must update this Bible before writing any Part with new character
 
-### SPINE Layer Rules (post-restructure)
-- **L2 cards** use SPINE with WANT/NEED/FLAW only. LIE and GHOST are L3-only.
-- **L3 cards** use the full 5-element SPINE: GHOST→LIE→FLAW→NEED→WANT chain.
-- When writing L2 examples, do NOT reference LIE or GHOST as part of the card. Use bridge links to L3 instead.
+### SPINE Rules
+- Cards use SPINE with WANT/NEED/FLAW. LIE and GHOST are optional.
+- When using the full 5-element SPINE, the chain is GHOST→LIE→FLAW→NEED→WANT.
+- When writing examples without LIE or GHOST, use bridge links instead.
 
 ---
 
-*Document prepared for Live Character Guide v6 rebuild project*
+*Document prepared for Live Character Guide v8 rebuild project*

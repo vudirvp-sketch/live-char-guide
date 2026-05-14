@@ -2,7 +2,7 @@
 
 > **Инженерный пайплайн для RP-карточек персонажей. От SPINE до деплоя. Для моделей 12B–32B+.**
 
-![Version](https://img.shields.io/badge/version-6.2.3-green)
+![Version](https://img.shields.io/badge/version-8.0.0-green)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 
@@ -13,34 +13,30 @@
 | **Онлайн-гайд** | [vudirvp-sketch.github.io/live-char-guide](https://vudirvp-sketch.github.io/live-char-guide/) |
 | **Changelog** | [CHANGELOG.md](./CHANGELOG.md) |
 | **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+| **Transition Guide (v7→v8)** | [docs/transition_guide.md](./docs/transition_guide.md) |
 
 ---
 
-## Система слоёв
+## Единый линейный гайд
 
-Гайд поддерживает три уровня глубины с **кумулятивной видимостью**:
+v8 — единый гайд без слоёв. Весь контент читается последовательно от Part 1 до Part 10. Нет деления на «базовый»/«продвинутый» — все инструменты обязательны к изучению. Различия в возможностях моделей отмечены inline через `[MODEL_NOTE: text]`.
 
-```
-L1 ⊂ L2 ⊂ L3
-```
+### Структура гайда
 
-| Слой | Название | Токены | Время | Для кого | Что добавляет |
-|------|----------|--------|-------|----------|---------------|
-| **L1** | Минимальный | 400-800 | ~15 мин | Новички, 4K контекст, 12B модели | Базовые блоки, 3-5 якорей, 2 примера |
-| **L2** | Глубокий | 800-1500 | ~30 мин | Опытные, 8K+ контекст, 12B-32B | +SPINE (WANT/NEED/FLAW), OCEAN/Enneagram, FLAW-якоря, 5-7 якорей |
-| **L3** | Экспертный | 1500+ | ~60 мин | Эксперты, 32K+ контекст, API | +LIE/GHOST/GHOST Layers, CoT, XML/API, 7-12 якорей |
+| Part | Название | Секций | Содержание |
+|------|----------|--------|------------|
+| 1 | Базовые блоки карточки | 5 | Card Anatomy, 3 Key Principles, Token Budget, Assembly Overview, Top-3 Errors |
+| 2 | Поведенческие якоря | 6 | T→A→P, Anchor Rules, Anchor Examples, Embodiment, Env. Reactivity, Sensory Anchors |
+| 3 | Голос и изоляция | 8 | Voice Isolation, Influence Hierarchy, Examples Rules, Examples Quality, Greeting, Voice Leak, Joker Case, Multi-char |
+| 4 | SPINE Framework | 11 | 5 элементов (GHOST→LIE→FLAW→NEED→WANT), Ghost Layers, Full Chain, SPINE→Anchor Mapping, SPINE Check, Navigation |
+| 5 | Психологический инструментарий | 6 | OCEAN, Enneagram, MBTI, Cross-instrument Map, Wings, OCEAN×Enneagram |
+| 6 | Цепочка рассуждений (CoT) | 6 | Bridge (reframed), Basics, Tiers, Tier 2, Tier 3, CoT-anchors |
+| 7 | Техническая реализация | 16 | SP, CORE DIRECTIVES (все 7), Tone Frame, Format Lock, AN, Structured Inject, Lorebook, Params, XML/API/4K, Assembly Pipeline |
+| 8 | Анти-паттерны | 17 | 16 анти-паттернов (AP-1–AP-16), последовательная нумерация |
+| 9 | Диагностика и тестирование | 11 | Quality Scale, One Change Rule, Checklist, Problems, Symptom Table, Decision Tree, Test Scenarios, Pre-Deploy |
+| 10 | Полные примеры карточек | 6 | Elena, Geralt, Edward, Walter, Omnis-Zeta, Vysherblenny |
 
-### Принцип кумулятивности
-
-- **L3** показывает контент L1 + L2 + L3
-- **L2** показывает контент L1 + L2
-- **L1** показывает только контент L1
-
-### Прямые ссылки на слои
-
-```
-https://vudirvp-sketch.github.io/live-char-guide/?layer=2
-```
+**Итого: 92 секций, 10 Parts.**
 
 ---
 
@@ -48,25 +44,25 @@ https://vudirvp-sketch.github.io/live-char-guide/?layer=2
 
 ### SPINE Framework
 
-Фреймворк глубинной мотивации персонажа:
+Фреймворк глубинной мотивации персонажа — 5 элементов в причинно-следственной цепочке:
 
-| Элемент | Описание | Слой |
-|---------|----------|------|
-| **WANT** | Осознанное желание персонажа | L2+ |
-| **NEED** | Истинная потребность (часто противоречит WANT) | L2+ |
-| **FLAW** | Поведенческий дефект, блокирующий NEED | L2+ |
-| **LIE** | Ложная установка о себе/мире | L3 |
-| **GHOST** | Событие прошлого, сформировавшее LIE | L3 |
+| Элемент | Описание |
+|---------|----------|
+| **GHOST** | Событие прошлого, сформировавшее LIE и FLAW |
+| **LIE** | Ложная установка о себе/мире, возникшая из GHOST |
+| **FLAW** | Поведенческий дефект, блокирующий NEED (возникает из LIE) |
+| **NEED** | Истинная потребность (часто противоречит WANT) |
+| **WANT** | Осознанное желание персонажа (маскирует NEED) |
 
-### 5 базовых правил
+Для простых персонажей GHOST и LIE могут быть неявными — цепочка работает и без них.
 
-| # | Правило | Почему важно |
+### 3 ключевых принципа
+
+| # | Принцип | Почему важно |
 |---|---------|--------------|
-| 1 | **OCEAN: 1-2 экстремальных полюса** — значения <30 или >70 | 3+ полюса = внутренняя противоречивость |
-| 2 | **Цена обязательна** — каждый якорь имеет физическую реакцию | Без цены модель не показывает уязвимость |
-| 3 | **Голос только в Examples** — никогда в Description | Модель копирует паттерны, не следует инструкциям |
-| 4 | **GHOST только в Description** — никогда в System Prompt | Психология в SP ломает поведение |
-| 5 | **Формат якоря: Триггер → Действие → Цена** | Каждый элемент обязателен |
+| 1 | **Якорь = Trigger → Action → Price** — поведение задаётся якорями | Каждый якорь обязан иметь Цена — без неё модель не показывает уязвимость |
+| 2 | **Голос — только в Examples и Greeting** | Модель считывает характер из примеров диалога, а не из описания |
+| 3 | **Психология — только в Description** | SPINE, OCEAN и другие элементы размещаются исключительно в блоке Description |
 
 ---
 
@@ -79,9 +75,9 @@ src/master/part_*.html (авторский контент)
         │
         ▼
 ┌─────────────────────────────────────┐
-│  Stage 1: build-unified.mjs         │
-│  Парсит HTML, извлекает секции      │
-│  Генерирует parts/ (unified)        │
+│  build-unified.mjs                   │
+│  Парсит HTML, извлекает все секции   │
+│  Генерирует parts/ (unified)         │
 └─────────────────────────────────────┘
         │
         ▼
@@ -89,9 +85,9 @@ build/parts/*.html + manifest.json
         │
         ▼
 ┌─────────────────────────────────────┐
-│  Stage 2: build-shell-unified.mjs   │
-│  Копирует shell + parts + data      │
-│  → dist/ для GitHub Pages           │
+│  build-shell-unified.mjs             │
+│  Копирует shell + parts + data       │
+│  → dist/ для GitHub Pages            │
 └─────────────────────────────────────┘
 ```
 
@@ -101,9 +97,9 @@ build/parts/*.html + manifest.json
 live-char-guide/
 ├── src/
 │   ├── master/              # ← АВТОРЫ: редактируют тут
-│   │   └── part_*.html      # Unified HTML-файлы (без data-layer)
+│   │   └── part_*.html      # Unified HTML-файлы
 │   ├── shell/               # ← ИНФРАСТРУКТУРА: не трогать
-│   │   ├── index.html       # Shell (auto-load, без layer selector)
+│   │   ├── index.html       # Shell (auto-load)
 │   │   ├── styles.css       # Стили
 │   │   └── lazy-loader.js   # Динамическая загрузка контента
 │   ├── scripts/             # Build-скрипты
@@ -113,7 +109,10 @@ live-char-guide/
 │   ├── glossary.json        # Глоссарий
 │   ├── ocean.json           # OCEAN пентагон
 │   ├── enneagram.json       # Эннеаграмма
-│   └── mbti.json            # MBTI типы
+│   ├── mbti.json            # MBTI типы
+│   ├── character_schema.json # JSON-схема карточки
+│   ├── anchor-redirects.json # Редиректы для старых ID
+│   └── test_scenarios.json  # Сценарии тестирования
 │
 ├── build/                   # Сгенерированные части (gitignored)
 │   ├── parts/               # Unified parts
@@ -123,17 +122,19 @@ live-char-guide/
 ├── dist/                    # Деплой на GitHub Pages (gitignored)
 │
 ├── scripts/                 # Скрипты валидации
+│   ├── build-unified.mjs
 │   ├── validate-artifact.mjs
-│   ├── version-sync.mjs
+│   ├── validate-migration.mjs
 │   └── *.py                 # Python-валидаторы
 │
 ├── tests/                   # Тесты
 ├── docs/                    # Документация (не входит в билд)
 │   ├── architecture.md
-│   ├── components.md
+│   ├── content_map.md
+│   ├── transition_guide.md  # v7 → v8 миграция
 │   └── ...
 │
-└── (unified config)        # Конфигурация встроена в build-unified.mjs
+└── package.json
 ```
 
 ### Владение директориями
@@ -157,17 +158,9 @@ live-char-guide/
 Каждый `src/master/part_*.html` содержит секции с атрибутами:
 
 ```html
-<section data-layer="l1" data-section="p1_card_overview">
+<section data-section="p2_basic_anchors" data-toc-nav>
   <h2>Заголовок секции</h2>
-  <!-- Контент виден на L1, L2, L3 -->
-</section>
-
-<section data-layer="l2" data-section="p4_spine_overview">
-  <!-- Контент виден только на L2 и L3 -->
-</section>
-
-<section data-layer="l3" data-section="p4_lie">
-  <!-- Контент виден только на L3 -->
+  <!-- Контент виден всем читателям -->
 </section>
 ```
 
@@ -175,8 +168,8 @@ live-char-guide/
 
 | Атрибут | Обязателен | Формат | Пример |
 |---------|------------|--------|--------|
-| `data-layer` | Да | `l1` \| `l2` \| `l3` | `data-layer="l2"` |
 | `data-section` | Да | `p{N}_{topic}` | `data-section="p4_spine_overview"` |
+| `data-toc-nav` | Нет | boolean | `data-toc-nav` |
 
 ### Запрещено в мастер-файлах
 
@@ -184,13 +177,15 @@ live-char-guide/
 - `<script>` блоки → все скрипты в `src/shell/lazy-loader.js`
 - `<link>` элементы
 - `<meta>` элементы
-- Контент вне `<section data-layer>`
+- Контент вне `<section data-section>`
+- `data-layer` атрибуты (удалены в v8)
+- `data-layer-switch` атрибуты (удалены в v8)
 
 ### Пошаговый workflow
 
 ```bash
 # 1. Редактируете мастер-файл
-vim src/master/part_01_basic_blocks.html
+vim src/master/part_01.html
 
 # 2. Запускаете билд
 pnpm run build
@@ -203,7 +198,7 @@ pnpm run dev
 # Откроется http://localhost:3000
 
 # 5. Коммитите изменения
-git add src/master/part_01_basic_blocks.html
+git add src/master/part_01.html
 git commit -m "feat: update Part 1 content"
 git push
 ```
@@ -214,7 +209,7 @@ git push
 
 ### Требования
 
-- Node.js >= 20 (см. `.nvmrc`)
+- Node.js >= 20
 - pnpm 10.x
 - Python 3.10+ (для скриптов валидации)
 
@@ -230,14 +225,14 @@ pnpm install
 
 ```bash
 # Билд
-pnpm run build          # Полный билд (layers + shell)
-pnpm run build:layers   # Только Stage 1
-pnpm run build:shell    # Только Stage 2
+pnpm run build          # Полный билд (unified + shell)
+pnpm run build:unified  # Только unified билд
+pnpm run build:shell    # Только shell билд
 pnpm run build:watch    # Watch-режим
 
 # Валидация
 pnpm run validate       # Валидация билда
-pnpm run validate:all   # Все проверки
+pnpm run validate:master # Валидация мастер-файлов
 pnpm run version:check  # Проверка синхронизации версий
 
 # Тесты
@@ -256,7 +251,7 @@ pnpm run lint           # ESLint
 - [ ] `pnpm run build` завершается без ошибок
 - [ ] `pnpm run validate` проходит
 - [ ] `pnpm test` проходит
-- [ ] Все секции имеют `data-layer` и `data-section`
+- [ ] Все секции имеют `data-section` (без `data-layer`)
 - [ ] Нет запрещённых элементов в мастер-файлах
 - [ ] Версии синхронизированы (`src/VERSION` = `package.json`)
 
@@ -270,19 +265,11 @@ pnpm run lint           # ESLint
 2. GitHub Actions собирает и деплоит автоматически
 3. Доступно на: https://vudirvp-sketch.github.io/live-char-guide/
 
-### CI/CD Pipeline
-
-| Workflow | Триггер | Назначение |
-|----------|---------|------------|
-| `build-artifact.yml` | Push to main, PR | Билд, валидация, тесты |
-| `deploy-pages.yml` | Push to main | Деплой на GitHub Pages |
-| `validate.yml` | Push/PR | Скрипты валидации |
-
 ---
 
 ## Версия
 
-**Текущая версия:** 6.2.3
+**Текущая версия:** 8.0.0
 
 См. [CHANGELOG.md](./CHANGELOG.md) для истории изменений.
 
@@ -290,7 +277,7 @@ pnpm run lint           # ESLint
 1. `package.json` — поле `version`
 2. `src/VERSION` — plain text файл
 3. `data/character_schema.json` — поле `version`
-4. `src/shell/lazy-loader.js` — комментарий в шапке
+4. Build output (`build-manifest.json`, `manifest.json`)
 
 ---
 
