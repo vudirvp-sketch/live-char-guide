@@ -1,5 +1,12 @@
 # Character Bible — Live Character Guide v8
 
+> ⚠️ **DEPRECATED** — This multi-character bible is superseded by per-character bibles:
+> - `docs/elena_character_bible.md` (Елена — Source of Truth)
+> - `docs/vyshcherblenny_character_bible.md` (Выщербленный — Source of Truth)
+> 
+> This file is retained for historical reference only. Do not update it.
+> If content here contradicts the per-character bibles, the per-character bibles take precedence.
+
 > **Version:** 8.0.0
 > **Last Updated:** 2026-05-14
 > **Status:** Canonical Reference (synced with Content Restoration Phases 0–13)
