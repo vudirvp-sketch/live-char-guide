@@ -26,7 +26,7 @@
 | AP-12 | XML Malformed | p8_ap12_xml_malformed | Средняя |
 | AP-13 | Lorebook Conflict | p8_ap13_lorebook_conflict | Средняя |
 | AP-14 | Context Violation | p8_ap14_context_violation | Высокая |
-| AP-15 | OCEAN Overload | p8_ap15_ocean_overload | Средняя |
+| AP-15 | OCEAN Overload [MOVED to Part 5: p5_ocean_warning] | p8_ap15_ocean_overload | Средняя |
 | AP-15 | Nested Anchors | p8_ap15_nested_anchors | Средняя |
 
 ---

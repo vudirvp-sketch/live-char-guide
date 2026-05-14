@@ -3,7 +3,7 @@
 > Any agent modifying Выщербленный's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.0.0 (Phase 0 creation)
+**Version:** 9.2.0 (Phase 0 creation)
 **Last Updated:** 2026-05-15
 
 ---
@@ -144,7 +144,27 @@ All other triggers use standard T→A→P anchors without CoT, keeping the balan
 - Part 8: Referenced as correct implementation for AP-8, AP-9, AP-10, AP-12, AP-13
 - Part 9: Pre-Deploy example (Quick Check + Full Check)
 - Part 10: Complete expert card (`p10_vysherblenny`)
-- Part 3: TO BE EXTENDED in Phase 4 (Voice Bleed demonstration with Йоуёма)
+- Part 3: Voice Bleed demonstration with Йоуёма (see profile below)
+
+## Йоуёма — Tertiary Character Profile
+
+> Appears only in Part 3 (Voice Bleed demonstration) as Выщербленный's interlocutor.
+
+### Basic Identity
+- Name: Йоуёма
+- Role: Eccentric wanderer / mirror to Выщербленный's rigidity
+- Design purpose: Maximize Voice Bleed risk through maximal contrast with Выщербленный
+
+### Voice Profile
+- Register: Unstable — oscillates between formal and familiar without pattern
+- Syntax: Associative chains, parenthetical digressions, sentence fragments
+- Vocabulary markers: Archaic interpolations ("ведь"), excessive diminutives, sudden switches to English mid-sentence
+- Signature: Self-interruption, topic drift, rhetorical questions left unanswered
+
+### Voice Bleed Mechanics
+- Йоуёма's speech is designed to be "contagious" — her associative rhythm pulls interlocutors into her register
+- When Выщербленный speaks like Йоуёма: clipped hierarchy → rambling parentheticals (Voice Bleed detected)
+- Correct: Выщербленный maintains clipped diction even in Йоуёма's presence (Voice Isolation active)
 
 ## Consistency Checklist
 - [x] GHOST Layers (3-tier) match across Parts 4, 6, 7, 10

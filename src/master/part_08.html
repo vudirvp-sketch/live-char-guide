@@ -83,6 +83,7 @@
 
 </div>
 </section>
+<p class="ap-transition">Раздувание токенов — проблема размера; следующий анти-паттерн указывает на иной тип отсутствия: у персонажа нет цены за свои действия.</p>
 <section  data-section="p8_ap2_missing_price">
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
@@ -90,6 +91,7 @@
 <p><strong>Решение:</strong> Формат якоря: Триггер → Действие → Цена. Fix → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 </div>
 </section>
+<p class="ap-transition">Когда у действия нет цены, голос персонажа нередко теряет опору — и утекает в Description.</p>
 <section  data-section="p8_ap3_voice_in_description">
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
@@ -117,6 +119,7 @@
 
 </div>
 </section>
+<p class="ap-transition">Голос не единственное, что оказывается не на своём месте: психологическая структура тоже часто попадает в System Prompt вместо Description.</p>
 <section  data-section="p8_ap4_ghost_in_sp">
 <div class="antipattern-card">
 <h3>AP-4: Психология в SP</h3>
@@ -128,6 +131,7 @@
 </div>
 </div>
 </section>
+<p class="ap-transition">Ошибки структуры — полдела; параметры сэмплинга могут разрушить карточку не меньше.</p>
 <section  data-section="p8_ap5_reppen_high">
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
@@ -135,6 +139,7 @@
 <p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
 </div>
 </section>
+<p class="ap-transition">Неправильные параметры сэмплинга вредят генерации, но ещё опаснее — отсутствие ключевой инструкции, запрещающей модели говорить за пользователя.</p>
 <section  data-section="p8_ap6_no_anti_godmoding">
 <div class="antipattern-card">
 <h3>AP-6: No Anti-godmoding (анти-годмодинг)</h3>
@@ -144,10 +149,10 @@
 <div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>Never speak or act for {{user}}.</code></pre>
 <p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <!-- Demonstrates: INFLUENCE BOUNDARY --><code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
-<p>Fix → <a href="#p1_top3_problems">Part 1: Топ-3 ошибки</a></p>
 <p>Fix → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
 </section>
+<p class="ap-transition">Годмодинг — следствие отсутствия инструкции; следующий параметр, если его не обнулить, создаёт другую проблему — хаотичную генерацию.</p>
 <section  data-section="p8_ap7_presence_penalty">
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
@@ -155,6 +160,7 @@
 <p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
 </div>
 </section>
+<p class="ap-transition">Параметры исправлены — вернёмся к структуре: GHOST без якорей так же бесполезен, как SPINE без GHOST.</p>
 <section  data-section="p8_ap8_ghost_no_anchors">
 
 <div class="antipattern-card">
@@ -169,6 +175,7 @@
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — каждый GHOST tier имеет минимум один якорь-триггер в Lorebook и Examples.</p>
 </div>
 </section>
+<p class="ap-transition">Якорь без GHOST-связи — это форма без содержания; но и SPINE без причинно-следственной связи — то же самое.</p>
 <section  data-section="p8_ap9_spine_broken">
 <div class="antipattern-card">
 <h3>AP-9: Сломанный SPINE (Broken SPINE)</h3>
@@ -212,6 +219,7 @@ WANT: Доказать правоту самостоятельно
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a>.</p>
 </div>
 </section>
+<p class="ap-transition">Сломанный SPINE толкает создателей перекомпенсировать — и часто это приводит к избыточному CoT.</p>
 <section  data-section="p8_ap10_cot_overload">
 <div class="antipattern-card">
 <h3>AP-10: Перегрузка CoT (CoT Overload)</h3>
@@ -233,6 +241,7 @@ WANT: Доказать правоту самостоятельно
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — только 2 CoT-якоря по правилу. Fix → <a href="#p6_cot_basics">Part 6: CoT</a></p>
 </div>
 </section>
+<p class="ap-transition">Перегрузка CoT — проблема одного персонажа; в мульти-персонажных сценах возникает другая угроза — голоса сливаются.</p>
 <section  data-section="p8_ap11_voice_bleed">
 <div class="antipattern-card">
 <h3>AP-11: Voice Bleed (переплетение голосов)</h3>
@@ -242,6 +251,7 @@ WANT: Доказать правоту самостоятельно
 <p>Fix → <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
 </div>
 </section>
+<p class="ap-transition">Голоса смешиваются — но даже разделённые, они не помогут, если XML-разметка невалидна.</p>
 <section  data-section="p8_ap12_xml_malformed">
 <div class="antipattern-card">
 <h3>AP-12: Невалидный XML (XML Malformed)</h3>
@@ -264,6 +274,7 @@ WANT: {{want}}
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — все XML-теги валидны. Fix → <a href="#p7a_xml_tags">Part 7A: XML Tags</a></p>
 </div>
 </section>
+<p class="ap-transition">Невалидный XML ломает структуру карточки; конфликтующие записи в Lorebook ломают содержание.</p>
 <section  data-section="p8_ap13_lorebook_conflict">
 <div class="antipattern-card">
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
@@ -273,6 +284,7 @@ WANT: {{want}}
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>
 </div>
 </section>
+<p class="ap-transition">Конфликт Lorebook — внутренняя противоречивость; но даже консистентная карточка бесполезна, если не помещается в контекстное окно модели.</p>
 <section  data-section="p8_ap14_context_violation">
 <div class="antipattern-card">
 <h3>AP-14: Нарушение контекстного окна</h3>
@@ -281,6 +293,7 @@ WANT: {{want}}
 <p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Fix → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a></p>
 </div>
 </section>
+<p class="ap-transition">Контекстное окно спасено — остаётся последний структурный соблазн: вложить в один якорь целую цепочку условий.</p>
 <section  data-section="p8_ap15_nested_anchors">
 <h3>AP-15: Вложенные якоря (Nested Anchors)</h3>
 

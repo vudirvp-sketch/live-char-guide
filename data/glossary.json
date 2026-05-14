@@ -898,9 +898,9 @@
       "definition": "Repetition Penalty — параметр сэмплинга, штрафующий повторение токенов. Рекомендуемый диапазон: 1.00–1.10.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p7_sampling_params",
+      "anchor_id": "p7a_sampling_params",
       "cross_refs": [
-        "#p7_sampling_params"
+        "#p7a_sampling_params"
       ],
       "unified_definition": "Определение, рекомендуемые значения Диагностика: >1.10 убивает signature phrases"
     },
@@ -915,9 +915,9 @@
       "definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p7_sampling_params",
+      "anchor_id": "p7a_sampling_params",
       "cross_refs": [
-        "#p7_sampling_params"
+        "#p7a_sampling_params"
       ],
       "unified_definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует. Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7"
     },

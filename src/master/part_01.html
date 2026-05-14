@@ -1,6 +1,6 @@
 <!--
   Part 1: Basic Card Blocks (Базовые блоки карточки)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v9 Master HTML
 
   Unified: All content at maximum depth
 -->
@@ -304,6 +304,7 @@ graph TD
 </noscript>
 </div>
 
+<div class="example-label stub">STUB</div>
 <pre class="plain-copy">Калькулятор токенов (пример):
 SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
@@ -315,6 +316,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 <p>Пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены.</p>
 
+<div class="example-label illustration">ILLUSTRATION</div>
 <div class="infographic inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
@@ -361,16 +363,19 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 <p>Три самые частые ошибки начинающих, которые сильнее всего ломают качество карточки. Каждая разбирается подробно: симптом → причина → пошаговое исправление → пример до/после. Дополнительные проблемы → <a href="#p9_additional_problems">Диагностика: Дополнительные проблемы (Part 9)</a>.</p>
 
+<div class="example-label illustration">ILLUSTRATION</div>
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
 <p><strong>Причина:</strong> В System Prompt нет Anti-godmoding (анти-годмодинга).</p>
 <p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Part 7A: System Prompt</a> | <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a>)</p>
 
+<div class="example-label illustration">ILLUSTRATION</div>
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
 <p><strong>Причина:</strong> Голос помещён в Description вместо Examples — <a href="#p1_core_rules">правило #3</a>. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
 <p><strong>Исправление:</strong> Полный разбор Voice Isolation → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
+<div class="example-label illustration">ILLUSTRATION</div>
 <h4>Ошибка 3: Персонаж «слишком идеальный»</h4>
 <p><strong>Симптом:</strong> Персонаж не проявляет уязвимость, не ошибается, реагирует «правильно» на все стимулы.</p>
 <p><strong>Причина:</strong> Якоря не имеют цены (Price). Без физической реакции якорь = инструкция без паттерна.</p>
