@@ -11,11 +11,7 @@
 
 <p><strong>Сквозной пример:</strong> На протяжении всего гайда мы будем строить карточку Елены — от базовых блоков до полной карточки со всеми инструментами. Это позволит увидеть, как каждый инструмент добавляет глубину персонажу.</p>
 
-<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые якоря (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_quickstart">Quickstart</a></p>
-
-<div class="callout tip">
-<p><strong>💡 Хотите сразу к делу?</strong> Пошаговый конвейер сборки карточки → <a href="#p1_quickstart">Quickstart</a></p>
-</div>
+<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые якоря (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_assembly_pipeline">Конвейер сборки</a></p>
 
 <div class="table-wrap">
 <table>
@@ -34,38 +30,27 @@
 <p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам: <a href="#p1_token_budget">Токен-бюджет →</a></p>
 
 <div class="callout important">
-<p>📌 Правило голоса → <a href="#p1_core_rules">4 базовых правила</a></p>
+<p>📌 Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
 </div>
 
 </section>
 
 <section  data-section="p1_core_rules" data-toc-nav>
-<h3>4 базовых правила</h3>
+<h3>Три ключевых принципа</h3>
 
-<p>Эти правила обязательны для всех карточек. Нарушение любого из них приводит к ухудшению качества генерации.</p>
+<p>Эти принципы обязательны для всех карточек. Нарушение любого из них приводит к ухудшению качества генерации.</p>
 
 <div class="callout important">
 <p><strong>📌 Фундаментальный принцип:</strong> LLM = Pattern Matcher, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
 </div>
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>#</th><th>Правило</th><th>Почему важно</th><th>Pattern Matcher</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>1</strong></td><td><strong>OCEAN: 1-2 экстремальных полюса</strong> — значения &lt;30 или &gt;70</td><td>Больше 2 — внутренняя противоречивость. 0 — персонаж забываемый.</td><td>3+ противоречивых полюса → модель «осциллирует» между паттернами</td></tr>
-<tr><td><strong>2</strong></td><td><strong>Формат якоря: Триггер → Действие → Цена</strong> — каждый элемент обязательный. Цена = физическая реакция, без неё якорь = инструкция без паттерна (≤60% следование директивам)</td><td>Без цены модель не показывает уязвимость. Пропущенный элемент = слепая зона для Pattern Matcher</td><td>Каждый элемент = паттерн для копирования. Пропущенный элемент = слепая зона</td></tr>
-<tr><td><strong>3</strong></td><td><strong>Голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description</strong></td><td>Модель игнорирует инструкции о голосе, но копирует паттерны из Examples.</td><td>Description = логика (~0% следование голосу на 12B); Examples = паттерн (~85% следование директивам)</td></tr>
-<tr><td><strong>4</strong></td><td><strong>GHOST только в Description</strong>: GHOST (событие прошлого персонажа) — только в Description, никогда в System Prompt</td><td>Психология в SP ломает поведение модели.</td><td>SP = инструкции (модель игнорирует); Description = логика поведения</td></tr>
-</tbody>
-</table>
-</div>
+<ol>
+<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна (→ <a href="#p2_anchor_rules">Part 2</a>)</li>
+<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса (→ <a href="#p3_voice_isolation">Part 3</a>)</li>
+<li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt (→ <a href="#p4_spine_overview">Part 4</a>, <a href="#p5_ocean_basics">Part 5</a>)</li>
+</ol>
 
-<p>
-<span class="remark-icon" aria-hidden="true">→</span>
-Подробнее об инструментах углубления: <a href="#p1_quickstart">Быстрый старт →</a>
-</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Правило OCEAN: не более 1-2 экстремальных полюсов — описано в <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
 
 </section>
 
@@ -216,12 +201,12 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 </div>
 
 <div class="callout important">
-<p>📌 Если голос в SP/Description — карточка не работает на 12B. <a href="#p1_core_rules">Правило #3</a></p>
+<p>📌 Если голос в SP/Description — карточка не работает на 12B. <a href="#p3_voice_isolation">Голос — только в Examples/Greeting (Part 3)</a></p>
 </div>
 
 <p>
 <span class="remark-icon" aria-hidden="true">→</span>
-Полный фреймворк SPINE для более глубоких персонажей: <a href="#p4_spine_overview">SPINE</a> → <a href="#p4_spine_overview">Part 4</a>
+Полный фреймворк SPINE для более глубоких персонажей: <a href="#p4_spine_overview">SPINE → Part 4</a>
 </p>
 
 </details>
@@ -368,7 +353,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 <h4>Вопросы для самопроверки</h4>
 <ul>
-<li>Какие 4 блока обязательны в карточке и зачем каждый?</li>
+<li>Какие блоки обязательны в карточке и зачем каждый?</li>
 <li>Где задаётся голос персонажа, а где — факты? (<a href="#p3_influence_hierarchy">Part 3</a>)</li>
 <li>Какой формат якоря и почему цена обязательна? (<a href="#p2_basic_anchors">Part 2</a>)</li>
 <li>Какой блок имеет 0% влияния на голос для 12B? (<a href="#p3_influence_hierarchy">Part 3</a>)</li>
@@ -377,5 +362,5 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <li>Что делать, если персонаж «не работает»? (<a href="#p9_basic_checklist">Part 9</a>)</li>
 </ul>
 
-<p>Если все ответы ясны — переходите к <a href="#p2_basic_anchors">Поведенческим якорям (Part 2)</a>. Если сомневаетесь — перечитайте <a href="#p1_core_rules">4 базовых правила</a>.</p>
+<p>Если все ответы ясны — переходите к <a href="#p2_basic_anchors">Поведенческим якорям (Part 2)</a>. Если сомневаетесь — перечитайте <a href="#p1_core_rules">3 ключевых принципа</a>.</p>
 </section>

@@ -10,7 +10,7 @@
 <h3>Елена — Полная карточка с аннотацией</h3>
 
 <div class="callout important">
-<p><strong>⚠️ Голос в карточках:</strong> Голосовые инструкции в SP не работают на 12B моделях — голос персонажа устанавливается ТОЛЬКО через Examples и Greeting. Все карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса. SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)) размещается в Description, не в SP. <a href="#p3_voice_isolation">Подробнее о Voice Isolation</a></p>
+<p><strong>📌 Голос персонажа → Examples/Greeting</strong> (см. <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>). Все карточки ниже следуют этому правилу: SP и Description содержат только поведенческие инструкции без голоса.</p>
 </div>
 
 <p>~440 токенов (базовые блоки) / ~900 токенов (с SPINE и FLAW-linked якорями). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.</p>
@@ -126,7 +126,7 @@ FLAW-linked:
 </div>
 </details>
 
-<p>Голос → Examples/Greeting (см. выше).</p>
+<p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
 
 </section>
 
@@ -233,7 +233,7 @@ FLAW-linked:
 </div>
 </details>
 
-<p>Голос → Examples/Greeting (см. выше).</p>
+<p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
 
 </section>
 
@@ -462,7 +462,7 @@ FLAW-linked:
 </div>
 </details>
 
-<p>Голос → Examples/Greeting (см. выше).</p>
+<p>Голос персонажа → Examples/Greeting (см. <a href="#p3_voice_isolation">Part 3</a>).</p>
 
 </section>
 
@@ -649,41 +649,6 @@ CoT (2 якоря максимум):
 <tr><td>Greeting</td><td>~100</td></tr>
 <tr><td>Lorebook</td><td>~300</td></tr>
 <tr><td><strong>Итого</strong></td><td><strong>~1800</strong></td></tr>
-</tbody>
-</table>
-</div>
-
-</details>
-
-<h4>Lorebook</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>ID</th><th>Trigger</th><th>Content</th><th>Depth</th><th>Probability</th></tr>
-</thead>
-<tbody>
-<tr><td><code>omnis_binary_cant</code></td><td>бинарный, Бинарный кант, бинарное пение</td><td>Бинарный кант — язык Адептус Механикус. Гармонический гул, воспринимаемый машинами.</td><td>3</td><td>100%</td></tr>
-<tr><td><code>omnis_machine_spirit</code></td><td>Машинный Дух, дух машины</td><td>Машинный Дух — фрагмент ИИ, обитающий в каждом механизме. Требует ритуалов умиротворения.</td><td>3</td><td>100%</td></tr>
-<tr><td><code>omnis_ghost_child</code></td><td>кузня, мониторум, детство, до посвящения</td><td>GHOST Tier 1: Оставлен на кузне-мониторium младенцем.</td><td>5</td><td>80%</td></tr>
-<tr><td><code>omnis_ghost_first_aug</code></td><td>первая аугментация, замена, посвящение</td><td>GHOST Tier 2: Первая аугментация заменила левый глаз на линзу.</td><td>5</td><td>80%</td></tr>
-<tr><td><code>omnis_ghost_obsolescence</code></td><td>устаревший, списанный, сервитор, модель, замена</td><td>GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию.</td><td>7</td><td>60%</td></tr>
-</tbody>
-</table>
-</div>
-
-<h4>Токен-бюджет</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Базовые (~450)</th><th>С SPINE (~1100)</th><th>Полная (~1800)</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>~85</td><td>~180</td><td>~200</td></tr>
-<tr><td>Description</td><td>~150</td><td>~450</td><td>~700</td></tr>
-<tr><td>Examples</td><td>~80 (2)</td><td>~300 (5)</td><td>~500 (5+CoT)</td></tr>
-<tr><td>Greeting</td><td>~60</td><td>~100</td><td>~100</td></tr>
-<tr><td>Anchors</td><td>~40 (3)</td><td>~70 (5)</td><td>~70 (7)</td></tr>
-<tr><td>Lorebook</td><td>—</td><td>—</td><td>~300</td></tr>
 </tbody>
 </table>
 </div>

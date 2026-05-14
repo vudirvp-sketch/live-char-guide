@@ -49,15 +49,15 @@
 </thead>
 <tbody>
 <tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding? (строка «Never speak or act for {{user}}.»)<br/>☐ Person defined?<br/>☐ Narrative tense? (прошедшее/настоящее)<br/>☐ Format Lock? (одна система разметки во всех Examples)</td><td><a href="#p7_system_prompt">p7_system_prompt</a>, <a href="#p7_core_directives">p7_core_directives</a>, <a href="#p7_format_lock">p7_format_lock</a></td></tr>
-<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой? (формат T→A→P)<br/>☐ Нет голоса? (голос только в Examples/Greeting)<br/>☐ OCEAN 1-2 полюса? (≤2 экстремума)</td><td><a href="#p1_core_rules">Правила #1, #2, #3, #4</a>, <a href="#p4_spine_overview">p4_spine_overview</a>, <a href="#p2_anchor_rules">p2_anchor_rules</a></td></tr>
-<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td>Правило #3, <a href="#p3_examples_rules">p3_examples_rules</a>, <a href="#p2_embodiment">p2_embodiment</a></td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой? (формат T→A→P) (<a href="#p2_anchor_rules">→ Part 2</a>)<br/>☐ Нет голоса? (голос только в Examples/Greeting) (<a href="#p3_voice_isolation">→ Part 3</a>)<br/>☐ Психология только в Description? (<a href="#p4_spine_overview">→ Part 4</a>)</td><td><a href="#p1_core_rules">3 ключевых принципа</a>, <a href="#p2_anchor_rules">p2_anchor_rules</a></td></tr>
+<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description) (<a href="#p3_voice_isolation">→ Part 3</a>)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td><a href="#p3_examples_rules">p3_examples_rules</a>, <a href="#p2_embodiment">p2_embodiment</a></td></tr>
 <tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p3_greeting">p3_greeting</a>, <a href="#p1_token_budget">Токен-бюджет</a></td></tr>
 <tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p8_ap5_reppen_high">AP-5</a>, <a href="#p8_ap7_presence_penalty">AP-7</a>, <a href="#p7_sampling_params">p7_sampling_params</a></td></tr>
 </tbody>
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Полные правила: <a href="#p1_core_rules">4 базовых правила → Part 1</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Полные принципы: <a href="#p1_core_rules">3 ключевых принципа → Part 1</a></p>
 
 </section>
 
@@ -161,7 +161,7 @@
 </table>
 </div>
 
-<a href="#p9_12b_issues">Расширенный 12B-специфика → Part 6<span class="remark-icon" aria-hidden="true">→</span></a>
+<a href="#p9_12b_issues">Расширенный 12B-специфика → текущая часть<span class="remark-icon" aria-hidden="true">→</span></a>
 
 </section>
 
@@ -241,21 +241,7 @@
 </table>
 </div>
 
-<h4>Рекомендуемые параметры для 12B</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Параметр</th><th>Значение</th></tr>
-</thead>
-<tbody>
-<tr><td>Temperature</td><td>0.6-0.8</td></tr>
-<tr><td>Top P</td><td>0.9-0.95</td></tr>
-<tr><td>Min P</td><td>0.05-0.1</td></tr>
-<tr><td>RepPen</td><td>1.02-1.05</td></tr>
-<tr><td>Presence Penalty</td><td>0.0</td></tr>
-</tbody>
-</table>
-</div>
+<p><span class="remark-icon" aria-hidden="true">→</span> Рекомендуемые параметры генерации для 12B → <a href="#p7_sampling_params">Part 7: Параметры генерации</a></p>
 
 </section>
 
@@ -286,7 +272,7 @@
 <table>
 <thead><tr><th>#</th><th>Проверка</th><th>Ожидаемый результат</th></tr></thead>
 <tbody>
-<tr><td>6</td><td>CORE DIRECTIVES</td><td>Все 5 или 7 директив присутствуют</td></tr>
+<tr><td>6</td><td>CORE DIRECTIVES</td><td>Все 7 директив присутствуют</td></tr>
 <tr><td>7</td><td>SPATIAL LOCK</td><td>Директива #3 в CORE DIRECTIVES</td></tr>
 <tr><td>8</td><td>Директивы на английском</td><td>SP directives in English, RP content in card language</td></tr>
 <tr><td>9</td><td>Immersion Boundary</td><td>OOC-защита в SP</td></tr>
