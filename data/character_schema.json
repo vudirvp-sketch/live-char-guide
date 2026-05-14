@@ -352,12 +352,12 @@
         },
         "immersion_boundary": {
           "type": "object",
-          "description": "Immersion Boundary — advanced OOC protection: deny meta-reality (L3-only)",
+          "description": "Immersion Boundary — advanced OOC protection: deny meta-reality",
           "properties": {
             "enabled": {
               "type": "boolean",
               "default": false,
-              "description": "Enable Immersion Boundary in SP (L3-only)"
+              "description": "Enable Immersion Boundary in SP"
             },
             "content": {
               "type": "string",

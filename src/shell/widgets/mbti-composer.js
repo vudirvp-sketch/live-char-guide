@@ -11,7 +11,7 @@
  *   M2 — Extended configuration, OCEAN cross-ref, SPINE patterns, Enneagram hints
  *   M3 — Deep linking with Enneagram, ocean:updated subscription, full export (current)
  *
- * Activation: Only at L2+ guide layer (isWidgetAllowed())
+ * Activation: Always active in v8 unified guide (no layer gating)
  * Event Emission:
  *   mbti:selected     via EventBus (on type selection)
  *   mbti:ocean-apply  via EventBus (on "Apply to OCEAN" button click)
@@ -809,16 +809,15 @@
       return;
     }
 
-    // Check guide layer — widgets only at L2+
+    // v8: No layer gating — all widgets always active
     if (typeof window.isWidgetAllowed === 'function' && !window.isWidgetAllowed()) {
-      container.innerHTML = '';
-      container.style.display = 'none';
-      console.log('[MBTI] Widget hidden — L1 guide layer');
-      return;
+      // v8: isWidgetAllowed() always returns true — this branch is unreachable
     }
 
-    // Determine widget level
-    currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
+    // v8: Always full widget level (M3)
+    currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 3;
+    // Fallback: ensure at least M2 for full configuration
+    if (currentWidgetLevel < 2) currentWidgetLevel = 3;
 
     // Fetch data
     mbtiDataCache = await window.WidgetUtils.fetchJson('data/mbti.json');
@@ -841,27 +840,8 @@
     console.log('[MBTI] Widget initialized at M' + currentWidgetLevel + ' level');
   }
 
-  // ─── Layer Change Handler ────────────────────────────────────────────
-
-  function handleLayerChange() {
-    // Re-evaluate widget level on layer change
-    var newLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 1;
-    if (newLevel !== currentWidgetLevel) {
-      currentWidgetLevel = newLevel;
-      // If upgraded to M3, subscribe to events that weren't available at M2
-      if (currentWidgetLevel >= 3) {
-        subscribeOceanUpdates();
-        subscribeEnneagramSelected();
-      }
-    }
-  }
-
-  // Listen for layer changes
-  document.addEventListener('layer-changed', function() {
-    handleLayerChange();
-  });
-
-  // v8: MutationObserver for data-layer removed — no layer switching in v8
+  // v8: Layer change handler and layer-changed event listener removed —
+  // no layer switching in unified guide. currentWidgetLevel is always 3.
 
   // ============================================================================
   // PUBLIC API
@@ -874,7 +854,7 @@
     getVersion: function() { return '3.0.0'; }
   };
 
-  // Auto-init after layer content is loaded
+  // Auto-init on page load
   function autoInit() {
     var container = document.getElementById('mbti-embed');
     if (container) {

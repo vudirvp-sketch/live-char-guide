@@ -1,15 +1,14 @@
 /**
  * ============================================================================
- * PERSONA SYNTHESIS DASHBOARD — L3 Aggregator v1.0.0
+ * PERSONA SYNTHESIS DASHBOARD — Aggregator v1.0.0
  * ============================================================================
  *
  * Unified aggregation dashboard for all three psychological tools.
- * Only rendered at L3 guide layer. Subscribes to all events on the bus,
+ * Always active in v8 (unified guide). Subscribes to all events on the bus,
  * builds a conflict map, generates unified narrative, exports Character Card.
  *
  * Architecture (§4.4):
- * - L1/L2 guide: Absent (not rendered)
- * - L3 guide: Active, subscribed to all events
+ * - v8 unified guide: Always active, subscribed to all events
  *
  * Event Subscriptions (§2.2):
  *   ocean:updated       — { O, C, E, A, N } from OCEAN Insight
@@ -55,7 +54,7 @@
   // Data fetching delegated to WidgetUtils.fetchJson
   // Local caches are still populated for direct access
 
-  // ─── Layer Check ─────────────────────────────────────────────────────
+  // ─── Active Check ──────────────────────────────────────────────────
   // v8: No layer system — widgets are always active
 
   function isActive() {
@@ -579,7 +578,7 @@
 
   async function init() {
     if (!isActive()) {
-      console.log('[PersonaSynthesis] Skipped: layer < 3');
+      // v8: isActive() always returns true — this branch is unreachable
       return;
     }
 
@@ -615,34 +614,11 @@
     // Initial render
     updateDashboard();
 
-    console.log('[PersonaSynthesis] Initialized (L3)');
+    console.log('[PersonaSynthesis] Initialized');
   }
 
-  // ─── Layer Change Handler ────────────────────────────────────────────
-
-  function handleLayerChange() {
-    if (isActive()) {
-      if (!dashboardEl) {
-        init();
-      } else {
-        dashboardEl.style.display = '';
-        // Re-reconcile state when becoming visible (widgets may have been updated)
-        reconcileState();
-        updateDashboard();
-      }
-    } else {
-      if (dashboardEl) {
-        dashboardEl.style.display = 'none';
-      }
-    }
-  }
-
-  // Listen for layer changes
-  document.addEventListener('layer-changed', function() {
-    handleLayerChange();
-  });
-
-  // v8: MutationObserver for data-layer removed — no layer switching in v8
+  // v8: Layer change handler and layer-changed event listener removed —
+  // no layer switching in unified guide. Widgets are always active.
 
   // ─── Auto-init ───────────────────────────────────────────────────────
 
