@@ -29,7 +29,7 @@
 <tr><td><a href="#p8_ap3_voice_in_description">AP-3</a></td><td>Voice in Description</td><td><span class="tag risk">Высокая</span></td><td>Перенести голос в Examples</td></tr>
 <tr><td><a href="#p8_ap4_ghost_in_sp">AP-4</a></td><td>GHOST в SP</td><td><span class="tag risk">Высокая</span></td><td>Перенести SPINE в Description</td></tr>
 <tr><td><a href="#p8_ap5_reppen_high">AP-5</a></td><td>RepPen > 1.10</td><td><span class="tag tip">Средняя</span></td><td>Установить RepPen ≤ 1.10</td></tr>
-<tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-Godmoding</td><td><span class="tag risk">Высокая</span></td><td>Добавить "Never speak for {{user}}"</td></tr>
+<tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-godmoding</td><td><span class="tag risk">Высокая</span></td><td>Добавить "Never speak for {{user}}"</td></tr>
 <tr><td><a href="#p8_ap7_presence_penalty">AP-7</a></td><td>Presence Penalty > 0</td><td><span class="tag tip">Средняя</span></td><td>Установить Presence Penalty = 0</td></tr>
 <tr><td><a href="#p8_ap8_ghost_no_anchors">AP-8</a></td><td>GHOST без якорей</td><td><span class="tag tip">Средняя</span></td><td>Добавить минимум 1 GHOST-якорь</td></tr>
 <tr><td><a href="#p8_ap9_spine_broken">AP-9</a></td><td>Broken SPINE</td><td><span class="tag risk">Высокая</span></td><td>Проверить цепочку G→L→F→N→W</td></tr>
@@ -95,7 +95,7 @@
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding">
 <div class="antipattern-card">
-<h3>AP-6: Нет анти-годмодинга (No Anti-Godmoding)</h3>
+<h3>AP-6: No Anti-godmoding (анти-годмодинг)</h3>
 <p><strong>Симптом:</strong> Модель пишет за {{user}}</p>
 <p><strong>Причина:</strong> Нет инструкции "Never speak or act for {{user}}" в SP</p>
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
@@ -174,7 +174,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 </section>
 <section  data-section="p8_ap11_voice_bleed">
 <div class="antipattern-card">
-<h3>AP-11: Переплетение голосов (Voice Bleed)</h3>
+<h3>AP-11: Voice Bleed (переплетение голосов)</h3>
 <p><strong>Симптом:</strong> В мульти-персонажных сценах голоса смешиваются</p>
 <p><strong>Причина:</strong> Недостаточное различение голосов персонажей</p>
 <p><strong>Решение:</strong> Character Markers (Маркеры персонажа) — явные маркеры уникальности голоса. Примеры: специфичная лексика, синтаксические паттерны, телесные реакции, catchphrases.</p>
@@ -205,7 +205,7 @@ WANT: {{want}}
 <section  data-section="p8_ap13_lorebook_conflict">
 <div class="antipattern-card">
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
-<p><strong>Симптом:</strong> Lorebook записи противоречат друг другу или Description</p>
+<p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
 <p><strong>Решение:</strong> Проверяйте консистентность всех <a href="#p7_lorebook">Lorebook (Part 7)</a> записей с Description</p>
 <p><span class="remark-icon" aria-hidden="true">→</span> Пример правильной реализации: <a href="#p10_vysherblenny">Выщербленный</a> — 5 Lorebook записей консистентны с Description и SPINE.</p>

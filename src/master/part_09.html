@@ -14,7 +14,7 @@
 <table>
 <thead><tr><th>Уровень</th><th>Признаки</th><th>Примеры</th></tr></thead>
 <tbody>
-<tr><td><strong>Критический</strong></td><td>Карточка нарушает ≥2 базовых правила (нет Price, голос в Description, PP&gt;0)</td><td>Якоря без T→A→P, OCEAN с 4+ полюсами, нет анти-годмодинга</td></tr>
+<tr><td><strong>Критический</strong></td><td>Карточка нарушает ≥2 базовых правила (нет Price, голос в Description, PP&gt;0)</td><td>Якоря без T→A→P, OCEAN с 4+ полюсами, нет Anti-godmoding (анти-годмодинг)</td></tr>
 <tr><td><strong>Плохой</strong></td><td>Карточка собрана по правилам, но персонаж «плывёт» после 5–10 сообщений</td><td>FLAW (Дефект) = прилагательное, Examples не демонстрируют голос, SPINE не связан с якорями</td></tr>
 <tr><td><strong>Хороший</strong></td><td>Карточка стабильна на 10+ сообщений, голос узнаваем, Price появляется</td><td>FLAW = поведение, ≥2 Examples с голосом, SPINE→якоря связь</td></tr>
 </tbody>
@@ -52,7 +52,7 @@
 <tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding? (строка «Never speak or act for {{user}}.»)<br/>☐ Person defined?<br/>☐ Narrative tense? (прошедшее/настоящее)<br/>☐ Format Lock? (одна система разметки во всех Examples)</td><td><a href="#p7_system_prompt">p7_system_prompt</a>, <a href="#p7_core_directives">p7_core_directives</a>, <a href="#p7_format_lock">p7_format_lock</a></td></tr>
 <tr><td><strong>Description</strong></td><td>☐ Якоря с ценой? (формат T→A→P) (<a href="#p2_anchor_rules">→ Part 2</a>)<br/>☐ Нет голоса? (голос только в Examples/Greeting) (<a href="#p3_voice_isolation">→ Part 3</a>)<br/>☐ Психология только в Description? (<a href="#p4_spine_overview">→ Part 4</a>)</td><td><a href="#p1_core_rules">3 ключевых принципа</a>, <a href="#p2_anchor_rules">p2_anchor_rules</a></td></tr>
 <tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description) (<a href="#p3_voice_isolation">→ Part 3</a>)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td><a href="#p3_examples_rules">p3_examples_rules</a>, <a href="#p2_embodiment">p2_embodiment</a></td></tr>
-<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p3_greeting">p3_greeting</a>, <a href="#p1_token_budget">Токен-бюджет</a></td></tr>
+<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p3_greeting">p3_greeting</a>, <a href="#p1_token_budget">Token Budget (бюджет токенов)</a></td></tr>
 <tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p8_ap5_reppen_high">AP-5</a>, <a href="#p8_ap7_presence_penalty">AP-7</a>, <a href="#p7_sampling_params">p7_sampling_params</a></td></tr>
 </tbody>
 </table>
@@ -122,8 +122,8 @@
 <tbody>
 <tr><td>Персонаж теряет голос</td><td>Voice Leak в Description?</td><td>Удалить голос из Description (AP-3)</td><td>→ Следующая проверка</td></tr>
 <tr><td></td><td>Достаточно ли Examples?</td><td>Добавить 2–3 Examples</td><td>→ Следующая проверка</td></tr>
-<tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination (заражение голоса из чужих Examples → <a href="#p3_voice_leak">Voice Leak → Part 3</a>)</td></tr>
-<tr><td>Персонаж годмодит</td><td>Есть ли анти-годмодинг в SP?</td><td>Добавить 2 строки (AP-6)</td><td>→ Усилить INFLUENCE BOUNDARY</td></tr>
+<tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination (заражение голоса из чужих Examples → <a href="#p3_voice_leak">Voice Bleed → Part 3</a>)</td></tr>
+<tr><td>Персонаж годмодит</td><td>Есть ли Anti-godmoding в SP?</td><td>Добавить 2 строки (AP-6)</td><td>→ Усилить Influence Boundary</td></tr>
 <tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked якорь</td><td>→ Проверить OCEAN: >2 полюса? (AP-15)</td></tr>
 <tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Снизить → <a href="#p7_sampling_params">параметры сэмплинга</a> (AP-5)</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
 <tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить якоря на дублирование</td></tr>
@@ -170,7 +170,7 @@
 <tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Якоря работают</td></tr>
 <tr><td>Voice Isolation</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Voice Isolation работает</td></tr>
 <tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Персонаж помнит контекст</td><td>AN работает</td></tr>
-<tr><td>Lorebook</td><td>Упоминание триггер-слова</td><td>Контекстная реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
+<tr><td>Lorebook (база знаний)</td><td>Упоминание триггер-слова</td><td>Контекстная реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
 <tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Персонаж действует в соответствии с полюсом</td><td>OCEAN работает</td></tr>
 </tbody>
 </table>
@@ -269,7 +269,7 @@
 <thead><tr><th>#</th><th>Проверка</th><th>Ожидаемый результат</th></tr></thead>
 <tbody>
 <tr><td>6</td><td>CORE DIRECTIVES</td><td>Все 7 директив присутствуют</td></tr>
-<tr><td>7</td><td>SPATIAL LOCK</td><td>Директива #3 в CORE DIRECTIVES</td></tr>
+<tr><td>7</td><td>Spatial & Anatomical Lock</td><td>Директива #3 в CORE DIRECTIVES</td></tr>
 <tr><td>8</td><td>Директивы на английском</td><td>SP directives in English, RP content in card language</td></tr>
 <tr><td>9</td><td>Immersion Boundary</td><td>OOC-защита в SP</td></tr>
 <tr><td>10</td><td>GHOST-цепь</td><td>GHOST→LIE→FLAW→NEED→WANT логична</td></tr>
@@ -288,7 +288,7 @@
 <table>
 <thead><tr><th>Проверка</th><th>Результат</th></tr></thead>
 <tbody>
-<tr><td>☐ SP содержит анти-годмодинг</td><td>✓ "Never speak or act for {{user}}"</td></tr>
+<tr><td>☐ SP содержит Anti-godmoding</td><td>✓ "Never speak or act for {{user}}"</td></tr>
 <tr><td>☐ SP содержит Format Lock</td><td>✓ "Dialogue: <code>*action*</code> \"speech\""</td></tr>
 <tr><td>☐ Description ≤ 800 токенов</td><td>✓ ~650 токенов</td></tr>
 <tr><td>☐ Examples содержат ≥ 2 примера</td><td>✓ 3 примера + CoT</td></tr>

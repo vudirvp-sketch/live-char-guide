@@ -22,12 +22,12 @@
 <tr><td><strong>System Prompt</strong></td><td>Инструкции, запреты, формат</td><td>Высокое — задаёт рамки</td><td>Компактный</td></tr>
 <tr><td><strong>Description</strong></td><td>Факты, якоря, психология</td><td>Среднее — контекст</td><td>Основной объём</td></tr>
 <tr><td><strong>Examples</strong></td><td>Демонстрация голоса</td><td>Ключевое — паттерны речи</td><td>Средний</td></tr>
-<tr><td><strong>Greeting</strong></td><td>Greeting (Первое сообщение)</td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
+<tr><td><strong>Greeting</strong></td><td>Greeting Message (первое сообщение)</td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам: <a href="#p1_token_budget">Токен-бюджет →</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам: <a href="#p1_token_budget">Token Budget (бюджет токенов) →</a></p>
 
 <div class="callout important">
 <p>📌 Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
@@ -55,7 +55,7 @@
 </section>
 
 <section  data-section="p1_token_budget">
-<h3>Токен-бюджет</h3>
+<h3>Token Budget</h3>
 
 <p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки (Tone Frame, Format Lock, AN, Lorebook) описаны в Part 7.</p>
 
@@ -82,7 +82,7 @@
 <p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) описаны в Part 7. Полный конвейер сборки с пошаговыми инструкциями — в конце Part 7.</p>
 </div>
 
-<h4>Калькулятор токен-бюджета</h4>
+<h4>Калькулятор Token Budget</h4>
 
 <div class="token-calc" id="token-calc" data-toc-exclude>
 <div class="token-calc-inputs">
@@ -155,7 +155,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <div class="inf-pipeline-step">
 <div class="inf-step-id">05</div>
 <div class="inf-step-label">Проверка</div>
-<div class="inf-step-desc">Убедитесь, что токен-бюджет в пределах 400–800 и голос не протёк в SP/Description</div>
+<div class="inf-step-desc">Убедитесь, что Token Budget в пределах 400–800 и голос не протёк в SP/Description</div>
 <div class="inf-step-code">~430-580 токенов</div>
 </div>
 </div>
