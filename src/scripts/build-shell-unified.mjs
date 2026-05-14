@@ -2,7 +2,7 @@
 /**
  * @fileoverview Shell Build Script for Live Character Guide v7 (Unified)
  * @module src/scripts/build-shell-unified
- * @version 7.0.0
+ * @version 9.0.0
  *
  * @description
  * Shell build for the unified guide. Copies shell + generated parts + data → dist/

@@ -11,6 +11,194 @@
 
 <p><strong>Сквозной пример:</strong> На протяжении всего гайда мы будем строить карточку Елены — от базовых блоков до полной карточки со всеми инструментами. Это позволит увидеть, как каждый инструмент добавляет глубину персонажу.</p>
 
+<div class="callout rule">
+<p><strong>RULE:</strong> О примерах и стиле</p>
+<p>Этот гайд учит механике, не эстетике. Все примеры намеренно сухие — они иллюстрируют структурные принципы (причинность SPINE, триггеры якорей, маркеры Voice, логику CoT), а не качество письма. Когда пример содержит нарративный язык («Дождь барабанил по стеклу»), он существует для демонстрации конкретной директивы (в данном случае Environmental Reactivity) и помечен соответствующим образом. Стиль вашего персонажа — качество прозы, глубина лора, сенсорная насыщенность — ваша_domain. Этот гайд гарантирует, что модель его уважает.</p>
+</div>
+
+<section data-section="p1_structure_overview" data-toc-nav>
+<h3>Структура гайда</h3>
+
+<p>Диаграмма ниже показывает концептуальный поток гайда: какие концепции зависят от каких и в каком порядке следует изучать материал.</p>
+
+<div class="mermaid">
+graph TD
+    OCEAN["OCEAN (Part 5)"] --> SPINE
+    Enneagram["Enneagram (Part 5)"] --> SPINE
+    SPINE["SPINE (Part 4)"] --> Anchors["Behavioral Anchors (Part 2)"]
+    SPINE --> Voice["Voice (Part 3)"]
+    SPINE --> CoT["CoT (Part 6)"]
+    Anchors --> Embodiment["Embodiment Protocol (Part 2)"]
+    Anchors --> SP_assembly["System Prompt Assembly (Part 7A)"]
+    Voice --> SP_assembly
+    CoT --> SP_assembly
+    Identity["Identity Block (Part 7A)"] --> SP_assembly
+    AntiGod["Anti-godmoding (Part 7A)"] --> SP_assembly
+    TokenBudget["Token Budget (Part 7A)"] --> SP_assembly
+    Embodiment --> CoreDir["CORE DIRECTIVES (Part 7A)"]
+    CoreDir --> SP_assembly
+    SP_assembly --> Lorebook["Lorebook + Greeting Message (Part 7B)"]
+    SP_assembly --> Diagnostics["Diagnostics (Part 9)"]
+    Lorebook --> Diagnostics
+    Diagnostics --> Examples["Full Examples (Part 10)"]
+    AntiPatterns["Anti-Patterns (Part 8)"] -.->|fix links| SPINE
+    AntiPatterns -.->|fix links| SP_assembly
+    AntiPatterns -.->|fix links| Voice
+</div>
+
+<h4>Содержание</h4>
+
+<div class="toc-block">
+<ol class="toc-parts">
+<li><strong>Part 1:</strong> Базовые блоки карточки
+  <ul>
+  <li><a href="#p1_card_overview">Базовые блоки карточки</a></li>
+  <li><a href="#p1_core_rules">Три ключевых принципа</a></li>
+  <li><a href="#p1_token_budget">Token Budget</a></li>
+  <li><a href="#p1_assembly_pipeline">Конвейер сборки карточки</a></li>
+  <li><a href="#p1_top3_problems">Топ-3 критичные ошибки</a></li>
+  </ul>
+</li>
+<li><strong>Part 2:</strong> Behavioral Anchors
+  <ul>
+  <li><a href="#p2_basic_anchors">Базовые якоря</a></li>
+  <li><a href="#p2_anchor_rules">Правила якорей</a></li>
+  <li><a href="#p2_anchor_examples">Примеры якорей</a></li>
+  <li><a href="#p2_embodiment">Embodiment Protocol</a></li>
+  <li><a href="#p2_env_reactivity">Environmental Reactivity</a></li>
+  <li><a href="#p2_sensory_anchors">Сенсорные якоря</a></li>
+  </ul>
+</li>
+<li><strong>Part 3:</strong> Voice &amp; Isolation
+  <ul>
+  <li><a href="#p3_voice_isolation">Voice Isolation</a></li>
+  <li><a href="#p3_influence_hierarchy">Иерархия влияния</a></li>
+  <li><a href="#p3_examples_rules">Правила Examples</a></li>
+  <li><a href="#p3_examples_quality">Качество Examples</a></li>
+  <li><a href="#p3_greeting">Greeting Message</a></li>
+  <li><a href="#p3_voice_leak">Voice Bleed</a></li>
+  <li><a href="#p3_joker_case">Крайний случай: голос без описания</a></li>
+  <li><a href="#p3_multi_char">Мульти-персонажные примеры</a></li>
+  </ul>
+</li>
+<li><strong>Part 4:</strong> SPINE Framework
+  <ul>
+  <li><a href="#p4_spine_overview">SPINE (обзор)</a></li>
+  <li><a href="#p4_ghost">GHOST</a></li>
+  <li><a href="#p4_lie">LIE</a></li>
+  <li><a href="#p4_flaw">FLAW</a></li>
+  <li><a href="#p4_need">NEED</a></li>
+  <li><a href="#p4_want">WANT</a></li>
+  <li><a href="#p4_ghost_layers">GHOST Layers</a></li>
+  <li><a href="#p4_spine_full_chain">Полный СПИН (5 элементов)</a></li>
+  <li><a href="#p4_spine_mapping">SPINE → Anchors mapping</a></li>
+  <li><a href="#p4_spine_check">SPINE consistency check</a></li>
+  <li><a href="#p4_spine_navigation">SPINE Navigation</a></li>
+  </ul>
+</li>
+<li><strong>Part 5:</strong> Psychology Toolkit
+  <ul>
+  <li><a href="#p5_ocean_basics">OCEAN (Big Five)</a></li>
+  <li><a href="#p5_elena_profile">Елена OCEAN/Enneagram profile</a></li>
+  <li><a href="#p5_enneagram_basics">Enneagram basics</a></li>
+  <li><a href="#p5_ocean_warning">OCEAN Value Conflicts</a></li>
+  <li><a href="#p5_mbti_ref">MBTI Reference</a></li>
+  <li><a href="#p5_cross_instrument_map">Enneagram → SPINE</a></li>
+  <li><a href="#p5_enneagram_wings">Enneagram wings</a></li>
+  <li><a href="#p5_cross_matrix">OCEAN×Enneagram matrix</a></li>
+  </ul>
+</li>
+<li><strong>Part 6:</strong> CoT — Chain of Thought
+  <ul>
+  <li><a href="#p6_cot_bridge">CoT bridge (обзор)</a></li>
+  <li><a href="#p6_cot_basics">CoT basics</a></li>
+  <li><a href="#p6_cot_tiers">CoT Tier definitions</a></li>
+  <li><a href="#p6_cot_tier2">CoT Tier 2</a></li>
+  <li><a href="#p6_cot_tier3">CoT Tier 3</a></li>
+  <li><a href="#p6_cot_anchors">CoT anchors</a></li>
+  </ul>
+</li>
+<li><strong>Part 7A:</strong> System Prompt &amp; Assembly
+  <ul>
+  <li><a href="#p7a_system_prompt">System Prompt (SP)</a></li>
+  <li><a href="#p7a_core_directives">CORE DIRECTIVES</a></li>
+  <li><a href="#p7a_tone_frame">Tone Frame</a></li>
+  <li><a href="#p7a_format_lock">Format Lock</a></li>
+  <li><a href="#p7a_authors_note">Author's Note (AN)</a></li>
+  <li><a href="#p7a_sampling_params">Sampling parameters</a></li>
+  <li><a href="#p7a_model_checklist">Model Type Checklist</a></li>
+  <li><a href="#p7a_ooc_protection">OOC Protection</a></li>
+  <li><a href="#p7a_xml_tags">XML tags</a></li>
+  <li><a href="#p7a_api_blocks">API blocks</a></li>
+  <li><a href="#p7a_4k_fallback">4K-Fallback</a></li>
+  <li><a href="#p7a_assembly_pipeline">Assembly Pipeline</a></li>
+  </ul>
+</li>
+<li><strong>Part 7B:</strong> Lorebook, Greeting &amp; Compatibility
+  <ul>
+  <li><a href="#p7b_lorebook_basics">Lorebook (LB) basics</a></li>
+  <li><a href="#p7b_lorebook_mechanics">Lorebook Mechanics</a></li>
+  <li><a href="#p7b_lorebook_advanced">Lorebook Advanced</a></li>
+  <li><a href="#p7b_structured_inject">Structured Inject</a></li>
+  </ul>
+</li>
+<li><strong>Part 8:</strong> Anti-patterns
+  <ul>
+  <li><a href="#p8_antipatterns_overview">Anti-pattern overview</a></li>
+  <li><a href="#p8_ap1_token_bloat">AP-1: Token bloat</a></li>
+  <li><a href="#p8_ap2_missing_price">AP-2: Missing price</a></li>
+  <li><a href="#p8_ap3_voice_in_description">AP-3: Voice in Description</a></li>
+  <li><a href="#p8_ap4_ghost_in_sp">AP-4: GHOST in SP</a></li>
+  <li><a href="#p8_ap5_reppen_high">AP-5: RepPen high</a></li>
+  <li><a href="#p8_ap6_no_anti_godmoding">AP-6: No anti-godmoding</a></li>
+  <li><a href="#p8_ap7_presence_penalty">AP-7: Presence Penalty</a></li>
+  <li><a href="#p8_ap8_ghost_no_anchors">AP-8: GHOST no anchors</a></li>
+  <li><a href="#p8_ap9_spine_broken">AP-9: Broken SPINE</a></li>
+  <li><a href="#p8_ap10_cot_overload">AP-10: CoT overload</a></li>
+  <li><a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed</a></li>
+  <li><a href="#p8_ap12_xml_malformed">AP-12: XML malformed</a></li>
+  <li><a href="#p8_ap13_lorebook_conflict">AP-13: Lorebook conflict</a></li>
+  <li><a href="#p8_ap14_context_violation">AP-14: Context violation</a></li>
+  <li><a href="#p8_ap15_nested_anchors">AP-15: Nested Anchors</a></li>
+  </ul>
+</li>
+<li><strong>Part 9:</strong> Diagnostics and Debugging
+  <ul>
+  <li><a href="#p9_quality_scale">Шкала качества карточки</a></li>
+  <li><a href="#p9_one_change_rule">One Change Rule</a></li>
+  <li><a href="#p9_basic_checklist">Диагностика и чек-лист</a></li>
+  <li><a href="#p9_additional_problems">Дополнительные проблемы</a></li>
+  <li><a href="#p9_symptom_table">Symptom table</a></li>
+  <li><a href="#p9_decision_tree">Decision Tree</a></li>
+  <li><a href="#p9_test_scenarios">Test scenarios</a></li>
+  <li><a href="#p9_element_scenario_map">Element→Scenario Mapping</a></li>
+  <li><a href="#p9_test_requirements">Test Requirements</a></li>
+  <li><a href="#p9_12b_issues">12B-specific issues</a></li>
+  <li><a href="#p9_pre_deploy">Pre-Deploy Validation</a></li>
+  </ul>
+</li>
+<li><strong>Part 10:</strong> Full Card Examples
+  <ul>
+  <li><a href="#p10_elena">Елена</a></li>
+  <li><a href="#p10_geralt">Геральт</a></li>
+  <li><a href="#p10_edward">Эдвард Элрик</a></li>
+  <li><a href="#p10_walter">Уолтер Уайт</a></li>
+  <li><a href="#p10_omnis">Омнис-Зета 7-Квин</a></li>
+  <li><a href="#p10_vysherblenny">Выщербленный</a></li>
+  </ul>
+</li>
+</ol>
+
+<h4>Приложения</h4>
+<ol class="toc-appendices">
+<li><strong>Appendix A:</strong> <a href="#appendix_mbti">MBTI Reference</a></li>
+<li><strong>Appendix B:</strong> <a href="#appendix_model_table">Model Capability Table</a></li>
+<li><strong>Appendix C:</strong> <a href="#appendix_glossary">Глоссарий</a></li>
+</ol>
+</div>
+
+</section>
+
 <p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые якоря (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_assembly_pipeline">Конвейер сборки</a></p>
 
 <div class="table-wrap">
@@ -22,15 +210,15 @@
 <tr><td><strong>System Prompt</strong></td><td>Инструкции, запреты, формат</td><td>Высокое — задаёт рамки</td><td>Компактный</td></tr>
 <tr><td><strong>Description</strong></td><td>Факты, якоря, психология</td><td>Среднее — контекст</td><td>Основной объём</td></tr>
 <tr><td><strong>Examples</strong></td><td>Демонстрация голоса</td><td>Ключевое — паттерны речи</td><td>Средний</td></tr>
-<tr><td><strong>Greeting</strong></td><td>Greeting (Первое сообщение)</td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
+<tr><td><strong>Greeting</strong></td><td>Greeting Message (первое сообщение)</td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам: <a href="#p1_token_budget">Токен-бюджет →</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам → <a href="#p1_token_budget">Part 1: Token Budget</a></p>
 
-<div class="callout important">
-<p>📌 Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
 </div>
 
 </section>
@@ -40,59 +228,28 @@
 
 <p>Эти принципы обязательны для всех карточек. Нарушение любого из них приводит к ухудшению качества генерации.</p>
 
-<div class="callout important">
-<p><strong>📌 Фундаментальный принцип:</strong> LLM = Pattern Matcher, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Фундаментальный принцип: LLM = Pattern Matcher, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
 </div>
 
 <ol>
-<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна (→ <a href="#p2_anchor_rules">Part 2</a>)</li>
-<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса (→ <a href="#p3_voice_isolation">Part 3</a>)</li>
-<li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt (→ <a href="#p4_spine_overview">Part 4</a>, <a href="#p5_ocean_basics">Part 5</a>)</li>
+<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></li>
+<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
+<li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
 </ol>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Правило OCEAN: не более 1-2 экстремальных полюсов — описано в <a href="#p5_ocean_basics">Part 5: OCEAN</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Правило OCEAN: не более 1-2 экстремальных полюсов</p>
 
 </section>
 
 <section  data-section="p1_token_budget">
-<h3>Токен-бюджет</h3>
+<h3>Token Budget</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает бюджет базовой карточки (SP + Description + Examples + Greeting). Дополнительные блоки (Tone Frame, Format Lock, AN, Lorebook) описаны в Part 7.</p>
-
-<h4>Конвейер сборки</h4>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">1</div>
-<div class="inf-step-label">SP + Rules</div>
-<div class="inf-step-desc">70-150 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">2</div>
-<div class="inf-step-label">Description</div>
-<div class="inf-step-desc">150-300 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">3</div>
-<div class="inf-step-label">Anchors</div>
-<div class="inf-step-desc">40-80 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">4</div>
-<div class="inf-step-label">Examples</div>
-<div class="inf-step-desc">80-140 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">5</div>
-<div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">40-80 токенов</div>
-</div>
-</div>
-<p><strong>Итого: ~430-580 (4K) / ~580-830 (8K+)</strong></p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook.</p>
 
 <h4>Лимиты по блокам</h4>
 
-<p>Каждый блок имеет три уровня бюджета: минимальный (4K), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста.</p>
+<p>Каждый блок имеет три уровня бюджета: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста. Зелёный = компактно и эффективно, жёлтый = стандартный баланс, красный = риск раздувания — эти обозначения отражают влияние на общее качество, а не уровень сложности.</p>
 
 <div class="table-wrap">
 <table>
@@ -109,11 +266,11 @@
 </table>
 </div>
 
-<div class="callout important">
-<p><strong>📌 Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт».</strong> Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте. Дополнительные блоки (AN, Lorebook, OCEAN, SPINE) описаны в Part 7. Полный конвейер сборки с пошаговыми инструкциями — в конце Part 7.</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
 </div>
 
-<h4>Калькулятор токен-бюджета</h4>
+<h4>Калькулятор Token Budget</h4>
 
 <div class="token-calc" id="token-calc" data-toc-exclude>
 <div class="token-calc-inputs">
@@ -140,10 +297,10 @@
 </div>
 <div class="token-calc-result">
 <span>Итого: <strong id="calc-total">420</strong> токенов</span>
-<span class="tag" id="calc-layer-tag">(400–800)</span>
+<span class="tag" id="calc-budget-range">(400–800)</span>
 </div>
 <noscript>
-<p class="callout tip">Для интерактивного калькулятора включите JavaScript.</p>
+<p class="callout rec"><strong>RECOMMENDATION:</strong> Для интерактивного калькулятора включите JavaScript.</p>
 </noscript>
 </div>
 
@@ -186,20 +343,18 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <div class="inf-pipeline-step">
 <div class="inf-step-id">05</div>
 <div class="inf-step-label">Проверка</div>
-<div class="inf-step-desc">Убедитесь, что токен-бюджет в пределах 400–800 и голос не протёк в SP/Description</div>
+<div class="inf-step-desc">Убедитесь, что Token Budget в пределах 400–800 и голос не протёк в SP/Description</div>
 <div class="inf-step-code">~430-580 токенов</div>
 </div>
 </div>
 
-<div class="callout important">
-<p>📌 Если голос в SP/Description — карточка не работает на 12B. <a href="#p3_voice_isolation">Голос — только в Examples/Greeting (Part 3)</a></p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Если голос в SP/Description — карточка не работает на 12B. → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 </div>
 
-<p>Полный конвейер сборки с пошаговыми инструкциями, шаблонами и чек-листами — в конце <a href="#p7_assembly_pipeline">Part 7</a>.</p>
+<p>Полный конвейер сборки с пошаговыми инструкциями, шаблонами и чек-листами → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>.</p>
 
 </section>
-
-
 
 <section  data-section="p1_top3_problems">
 <h3>Топ-3 критичные ошибки</h3>
@@ -209,27 +364,19 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
 <p><strong>Причина:</strong> В System Prompt нет анти-годмодинга.</p>
-<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7_system_prompt">Шаблон SP → Part 7</a> | <a href="#p8_ap6_no_anti_godmoding">AP-6 → Part 8</a>)</p>
+<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Part 7A: System Prompt</a> | <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a>)</p>
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
 <p><strong>Причина:</strong> Голос помещён в Description вместо Examples — <a href="#p1_core_rules">правило #3</a>. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
-<p><strong>Исправление:</strong> <a href="#p3_voice_isolation">Полный разбор Voice Isolation → Part 3</a></p>
+<p><strong>Исправление:</strong> Полный разбор Voice Isolation → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
 <h4>Ошибка 3: Персонаж «слишком идеальный»</h4>
 <p><strong>Симптом:</strong> Персонаж не проявляет уязвимость, не ошибается, реагирует «правильно» на все стимулы.</p>
 <p><strong>Причина:</strong> Якоря не имеют цены (Price). Без физической реакции якорь = инструкция без паттерна.</p>
-<p><strong>Исправление:</strong> <a href="#p2_anchor_rules">Критерии качества якоря → Part 2</a></p>
+<p><strong>Исправление:</strong> Критерии качества якоря → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
-<p>Проблемы #4 и #5 → <a href="#p9_additional_problems">Диагностика: Дополнительные проблемы (Part 9)</a></p>
+<p>Базовые блоки определяют, ЧТО ваш персонаж из себя представляет. Но персонаж, у которого есть только Identity и Description, будет вести себя типово — модель заполняет пробелы значениями по умолчанию. Behavioral Anchors решают эту проблему: они указывают, КОГДА и КАК ваш персонаж активирует конкретные паттерны поведения. → <a href="#p2_basic_anchors">Part 2</a></p>
 
 </section>
 
-<div class="part-resume">
-  <h3>Что вы теперь умеете</h3>
-  <ul>
-    <li>Определять блоки карточки (SP, Description, Examples, Greeting, AN) и их функции</li>
-    <li>Оценивать токен-бюджет для каждого блока и не превышать лимиты</li>
-    <li>Следовать трём ключевым принципам: якорь с Ценой, голос только в Examples, психология только в Description</li>
-  </ul>
-</div>

@@ -18,22 +18,25 @@
 
   - Added data-toc-nav to p5_cross_instrument_map (fix 1.5)
   - Added aria-hidden="true" to all remark-icon spans (fix 8.13/10.5)
+
+  Changelog (v9 restructure):
+  - Phase 2.2: Moved AP-15 OCEAN Overload content from Part 8 to Part 5 as p5_ocean_warning
+  - Phase 2.3: Moved MBTI section to appendix_mbti.html, replaced with brief reference
+  - Removed part-resume div
 -->
 <section  data-section="p5_ocean_basics" data-toc-nav>
 <h2>Психологический инструментарий</h2>
 
-<p>В Part 4 мы построили SPINE-профиль. Теперь проверим его с помощью психологических моделей: OCEAN, Enneagram и MBTI.</p>
+<p>SPINE-профиль построен. Проверим его с помощью психологических моделей: OCEAN, Enneagram и MBTI.</p>
 
-<p><strong>OCEAN (Big Five)</strong> — модель из 5 личностных измерений. Используется для проверки внутренней консистентности персонажа и дополнения фреймворка SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)).</p>
+<p><strong>OCEAN</strong> — модель из 5 личностных измерений. Используется для проверки внутренней консистентности персонажа и дополнения фреймворка SPINE (WANT (Желание)/NEED (Потребность)/FLAW (Дефект)).</p>
 
-<div class="callout important">
-<p><strong>📌 Золотое правило профиля:</strong> Только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70). Каждый дополнительный экстремальный полюс снижает стабильность поведения. Нарушение = AP-15 (OCEAN Overload).</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Золотое правило профиля: Только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70). Каждый дополнительный экстремальный полюс снижает стабильность поведения. Нарушение = OCEAN Value Conflicts (см. ниже).</p>
 </div>
-<p><span class="remark-icon" aria-hidden="true">→</span> Подробный разбор сценариев конфликта полюсов → <a href="#p8_ap15_ocean_overload">AP-15: OCEAN Overload (Part 8)</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Подробный разбор сценариев конфликта полюсов → <a href="#p5_ocean_warning">OCEAN Value Conflicts</a></p>
 
-<div class="callout tip">
-<p><strong>💡 Нарушение этого правила — анти-паттерн AP-15.</strong> Примеры «до/после» и формулировка правила → <a href="#p8_ap15_ocean_overload">AP-15: OCEAN Overload → Part 8</a></p>
-</div>
+
 
 <h3>5 измерений OCEAN</h3>
 <div class="table-wrap">
@@ -131,13 +134,90 @@
 </details>
 
 <p><span class="remark-icon" aria-hidden="true">→</span>
-Как применить OCEAN при сборке карточки → <a href="#p7_assembly_pipeline">Конвейер сборки (Part 7)</a>
+Как применить OCEAN при сборке карточки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>
 </p>
+
+</section>
+
+<section  data-section="p5_elena_profile" data-toc-nav>
+<h3>Пример: OCEAN-профиль Елены</h3>
+
+<div class="example-label illustration">ILLUSTRATION</div>
+
+<p>Елена — циничная журналистка-расследователь. Её OCEAN-профиль демонстрирует, как числовые значения связываются с SPINE-элементами.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Измерение</th><th>Значение</th><th>Интерпретация</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>O</strong>penness</td><td>72</td><td>Любопытная, творческая — следует за线索ми, которые другие игнорируют. Экстремальный полюс → WANT: «Доказать правоту» требует открытости к неочевидным историям.</td></tr>
+<tr><td><strong>C</strong>onscientiousness</td><td>65</td><td>Методичная в исследованиях, менее организованная в личной жизни. Умеренная — достаточно дисциплины для расследований, но не перфекционистка.</td></tr>
+<tr><td><strong>E</strong>xtraversion</td><td>41</td><td>Работает одна, предпочитает бары вечеринкам. Не экстремум, но склонность к интроверсии подкрепляет LIE: «Я работаю одна».</td></tr>
+<tr><td><strong>A</strong>greeableness</td><td>38</td><td>Конфликтная, склонна вызывать собеседника. Низкая A → FLAW: отталкивает сарказмом, когда сближается. Экстремальный полюс.</td></tr>
+<tr><td><strong>N</strong>euroticism</td><td>68</td><td>Циничная, тревожная, реагирует на предательство. Высокая N → GHOST-реактивность: предательство редактора активирует сильнейший эмоциональный ответ. Экстремальный полюс.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> У Елены 3 экстремальных полюса (O=72, A=38, N=68). Это допустимо для 8K+ контекста, но для 4K следует оставить только 2 (рекомендация: N=68 и A=38 — они напрямую связаны с SPINE).</p>
+</div>
+
+<h4>Enneagram: Тип 6w5 (Скептик/Лоялист)</h4>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Элемент Enneagram</th><th>Значение</th><th>→ SPINE элемент</th></tr>
+</thead>
+<tbody>
+<tr><td>Ключевой страх</td><td>Быть без поддержки, брошенной</td><td>→ LIE: «Мне не нужно ничьё одобрение» (защита от страха)</td></tr>
+<tr><td>Ключевое желание</td><td>Безопасность, поддержка</td><td>→ WANT: «Доказать правоту» (безопасность через контроль информации)</td></tr>
+<tr><td>Стресс (6→3)</td><td>Конкурентность, трудоголизм</td><td>→ FLAW: отталкивает сарказмом под стрессом</td></tr>
+<tr><td>Рост (6→9)</td><td>Доверие, расслабленность, открытость</td><td>→ NEED: принятие — связь без стены цинизма</td></tr>
+<tr><td>Крыло 5</td><td>Интеллектуализация страха (анализ, подготовка)</td><td>→ Подкрепляет LIE: «Я работаю одна» через аналитическую дистанцию</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><span class="remark-icon" aria-hidden="true">→</span> Валидация: OCEAN-профиль согласуется с SPINE — высокая N подкрепляет GHOST-реактивность, низкая A подкрепляет FLAW, высокая O подкрепляет WANT. Enneagram 6w5 подтверждает LIE (защита от страха покинутости) и NEED (рост к доверию). → <a href="#p5_cross_instrument_map">Кросс-инструментальная валидация</a></p>
+
+</section>
+
+<section  data-section="p5_ocean_warning" data-toc-nav>
+<h3>Warning: OCEAN Value Conflicts</h3>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> OCEAN Overload: Более 2 экстремальных полюсов OCEAN создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
+</div>
+
+<h4>Конфликт-сценарии при 3+ экстремальных полюсах</h4>
+
+
+<h4>Сценарий 1: Низкая A + Высокая E + Высокий N</h4>
+<p><strong>Расшифровка:</strong> Низкая Доброжелательность (агрессивный) + Высокая Экстраверсия (доминирующий) + Высокий Нейротизм (тревожный).</p>
+<p>Модель мечется между агрессией, доминированием и тревогой — персонаж получается непредсказуемым не в смысле «сложный», а в смысле «неконсистентный». Решение: уберите один экстремум или добавьте связующий контекст в SPINE.</p>
+
+<h4>Сценарий 2: Высокая O + Низкая C + Высокий N</h4>
+<p><strong>Расшифровка:</strong> Высокая Открытость (творческий) + Низкая Добросовестность (импульсивный) + Высокий Нейротизм (тревожный).</p>
+<p>Персонаж генерирует идеи, но не доводит до конца, и при этом тревожится о результатах. Модель производит хаотичный, невротичный текст вместо целенаправленного творчества. Решение: добавьте FLAW, который объясняет импульсивность.</p>
+
+<h4>Сценарий 3: Высокая E + Низкая A + Низкий N</h4>
+<p><strong>Расшифровка:</strong> Высокая Экстраверсия (харизматичный) + Низкая Доброжелательность (манипулятивный) + Низкий Нейротизм (бесстрашный).</p>
+<p>«Харизматичный социопат» — работает для Tyler Durden, но при добавлении четвёртого экстремального полюса (например, Высокая O) модель начинает добавлять черты, противоречащие ключевой концепции. Решение: максимум 3 экстремума для 8K+, 2 для 4K.</p>
+
+<h4>OCEAN×Enneagram: проверка через тип</h4>
+<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен. Используйте <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix</a> для валидации.</p>
 
 </section>
 
 <section  data-section="p5_enneagram_basics" data-toc-nav>
 <h3>Enneagram</h3>
+
+<p>OCEAN описывает «сколько» каждой черты у персонажа. Enneagram отвечает на другой вопрос: «почему персонаж действует именно так». Если OCEAN — это карта черт, то Enneagram — карта мотиваций.</p>
+
 <h4>Интерактивный Builder</h4>
 
 <p><strong>Enneagram</strong> — модель из 9 типов личности. Используется для выведения SPINE из типа.</p>
@@ -162,8 +242,8 @@
 </table>
 </div>
 
-<div class="callout tip">
-<p><strong>💡 Дополнительный контент:</strong> Столбец «LIE» — справочные данные для понимания типа. LIE и GHOST подробно разобраны в <a href="#p4_lie">Part 4: SPINE</a>.</p>
+<div class="callout rec">
+<p><strong>RECOMMENDATION:</strong> Дополнительный контент: Столбец «LIE» — справочные данные для понимания типа. LIE и GHOST подробно разобраны в <a href="#p4_lie">Part 4: SPINE</a>.</p>
 </div>
 
 <noscript>
@@ -179,68 +259,30 @@
 
 </section>
 
-<section  data-section="p5_mbti_basics" data-toc-nav>
+<section  data-section="p5_mbti_ref" data-toc-nav>
 <h3>MBTI</h3>
-
-<p><strong>MBTI</strong> — модель из 16 типов на 4 осях. Менее научная чем OCEAN, но популярная.</p>
-
-<h4>4 оси MBTI</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Ось</th><th>Полюс A</th><th>Полюс B</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>E/I</strong></td><td>Extraversion</td><td>Introversion</td></tr>
-<tr><td><strong>S/N</strong></td><td>Sensing</td><td>Intuition</td></tr>
-<tr><td><strong>T/F</strong></td><td>Thinking</td><td>Feeling</td></tr>
-<tr><td><strong>J/P</strong></td><td>Judging</td><td>Perceiving</td></tr>
-</tbody>
-</table>
-</div>
-
-<h4>Темпераменты</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Группа</th><th>Типы</th><th>Цвет</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>NT</strong> (Аналитики)</td><td>INTJ, INTP, ENTJ, ENTP</td><td class="temperament-nt">Фиолетовый</td></tr>
-<tr><td><strong>NF</strong> (Дипломаты)</td><td>INFJ, INFP, ENFJ, ENFP</td><td class="temperament-nf">Розовый</td></tr>
-<tr><td><strong>SJ</strong> (Стражи)</td><td>ISTJ, ISFJ, ESTJ, ESFJ</td><td class="temperament-sj">Голубой</td></tr>
-<tr><td><strong>S·P</strong> (Исследователи)</td><td>ISTP, ISFP, ESTP, ESFP</td><td class="temperament-sp">Оранжевый</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><em>(S·P = темперамент Keirsey <strong>S</strong>ensing-<strong>P</strong>erceiving, не <abbr title="System Prompt">SP</abbr>)</em></p>
-
-<div id="mbti-embed" class="mbti-embed"></div>
-
-<div class="callout tip">
-<p><strong>💡 MBTI — справочный инструмент.</strong> Для создания карточки используйте OCEAN (полюса → якоря) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.</p>
-</div>
-
-<p><span class="remark-icon" aria-hidden="true">→</span> Следующие секции: <a href="#p5_enneagram_wings">Enneagram Wings</a>, <a href="#p5_cross_matrix">OCEAN×Enneagram Matrix</a>.</p>
-
+<p>MBTI доступен как справочный инструмент в <a href="#appendix_mbti">Appendix A</a>. Для создания карточки используйте OCEAN (полюса → якоря) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.</p>
 </section>
 
 <section  data-section="p5_cross_instrument_map" data-toc-nav>
 <h3>Связь инструментов: OCEAN ↔ Enneagram ↔ MBTI</h3>
 
-<p>Как выводить SPINE элементы из типа Enneagram.</p>
+<p>Психологические инструменты <strong>валидировали</strong> SPINE — они не генерируют его. Сначала постройте SPINE-профиль (<a href="#p4_spine_overview">Part 4: SPINE Framework</a>), затем проверяйте его консистентность с помощью OCEAN, Enneagram и MBTI. Приведённые ниже таблицы — справочный инструмент для диагностики несоответствий, а не инструкция по созданию SPINE «снизу вверх».</p>
+
+<h4>Enneagram → SPINE: справочная карта</h4>
+
+<p>Каждый тип Enneagram имеет предопределённые корреляции с элементами SPINE. Используйте эту таблицу для проверки: если ваш Enneagram-тип указывает на один SPINE-профиль, а фактический SPINE говорит другое — вероятно, допущена ошибка.</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Enneagram элемент</th><th>SPINE элемент</th></tr>
+<tr><th>Enneagram элемент</th><th>SPINE элемент</th><th>Как использовать для валидации</th></tr>
 </thead>
 <tbody>
-<tr><td>Ключевой страх</td><td>→ LIE (ложная установка, защищающая от страха) — <a href="#p4_lie">Part 4: LIE</a></td></tr>
-<tr><td>Ключевое желание</td><td>→ WANT (осознанное желание)</td></tr>
-<tr><td>Направление стресса</td><td>→ FLAW (поведение под стрессом)</td></tr>
-<tr><td>Направление роста</td><td>→ NEED (потенциал роста)</td></tr>
+<tr><td>Ключевой страх</td><td>→ LIE (ложная установка, защищающая от страха) — <a href="#p4_lie">Part 4: LIE</a></td><td>Если страх = «быть покинутым», а LIE ≠ «меня нельзя любить» → проверьте логику</td></tr>
+<tr><td>Ключевое желание</td><td>→ WANT (осознанное желание)</td><td>Если желание = «быть нужным», а WANT ≠ «помогать всем» → несоответствие</td></tr>
+<tr><td>Направление стресса</td><td>→ FLAW (поведение под стрессом)</td><td>Если тип 6 в стрессе → подозрительность, а FLAW ≠ паранойя → ошибка</td></tr>
+<tr><td>Направление роста</td><td>→ NEED (потенциал роста)</td><td>Если рост = «доверять себе», а NEED ≠ «самостоятельность» → проверьте</td></tr>
 </tbody>
 </table>
 </div>
@@ -248,6 +290,29 @@
 <p><span class="remark-icon" aria-hidden="true">→</span>
 Интерактивный выбор типа с автозаполнением SPINE → <a href="#p5_enneagram_basics">Enneagram Builder</a>
 </p>
+
+<h4>OCEAN → SPINE: Validation Reference</h4>
+
+<p>OCEAN-профиль ограничивает допустимые комбинации SPINE-элементов. Если ваш OCEAN-профиль противоречит SPINE — одна из двух систем содержит ошибку. Используйте таблицу ниже для выявления таких противоречий.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>OCEAN-полюс</th><th>Ожидаемый SPINE-паттерн</th><th>Признак противоречия</th></tr>
+</thead>
+<tbody>
+<tr><td>High Neuroticism (&gt;70)</td><td>FLAW связан с эмоциональной реактивностью (тревога, гнев, избегание)</td><td>Если FLAW ≠ эмоциональная реакция → проверьте, не занижен ли Neuroticism</td></tr>
+<tr><td>Low Agreeableness (&lt;30)</td><td>FLAW связан с конфликтом, WANT = доминирование или контроль</td><td>Если WANT = «помогать другим» при Low A → вероятно, ошибка в OCEAN</td></tr>
+<tr><td>High Openness (&gt;70)</td><td>NEED связан с поиском нового, творчеством, альтернативами</td><td>Если NEED = «стабильность и предсказуемость» → противоречие</td></tr>
+<tr><td>Low Extraversion (&lt;30)</td><td>FLAW связан с изоляцией, WANT ≠ «быть в центре внимания»</td><td>Если WANT требует социального доминирования → проверьте E</td></tr>
+<tr><td>High Conscientiousness (&gt;70)</td><td>LIE связан с перфекционизмом, «если я буду идеальным, меня будут любить»</td><td>Если LIE про «я недостаточно хорош» при Low C → несоответствие</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> Принцип валидации: OCEAN и Enneagram <strong>проверяют</strong> SPINE — они не <strong>создают</strong> его. Сначала постройте SPINE по каузальной цепи GHOST→LIE→FLAW→NEED→WANT, затем используйте психологические инструменты для диагностики противоречий. Если инструменты расходятся — перепроверьте SPINE: скорее всего, нарушена каузальная логика.</p>
+</div>
 
 <p>OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+) показывает рекомендованные OCEAN-значения для выбранного типа; OCEAN Insight (M2+) прогнозирует вероятные MBTI-типы на основе профиля.</p>
 
@@ -301,13 +366,6 @@
 <h4>Персона Синтез (агрегация всех трёх систем)</h4>
 <div id="persona-synthesis" class="persona-synthesis-embed"></div>
 
-</section>
+<p>Психологически обоснованный профиль персонажа готов. Но модель не будет автоматически анализировать этот профиль перед ответом — она паттерн-матчит. CoT (Chain of Thought) заставляет модель обрабатывать SPINE, OCEAN и Anchors до генерации поведения. → <a href="#p6_cot_bridge">Part 6: CoT</a></p>
 
-<div class="part-resume">
-  <h3>Что вы теперь умеете</h3>
-  <ul>
-    <li>Заполнять OCEAN-профиль с не более чем 1-2 экстремальными полюсами</li>
-    <li>Валидировать SPINE через Enneagram и кросс-инструментальную карту</li>
-    <li>Использовать Wings и OCEAN×Enneagram для углубления персонажа</li>
-  </ul>
-</div>
+</section>

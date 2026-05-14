@@ -6,7 +6,7 @@ ID: F1
 Purpose: Detect text blocks >100 chars appearing in multiple files.
 Exit: 0 if no duplicates, 1 if duplicates found.
 
-Updated for v6: works with src/master/ and src/parts-l{1,2,3}/
+Updated for v9: works with src/master/ (including part_07a, part_07b, appendixes)
 """
 
 import os
@@ -17,7 +17,8 @@ from difflib import SequenceMatcher
 
 # Pairs of files where duplication is intentional (template → implementation)
 ALLOWED_DUPLICATE_PAIRS = [
-    ("part_07_technical.html", "part_10_examples.html"),
+    ("part_07a.html", "part_10_examples.html"),
+    ("part_07b.html", "part_10_examples.html"),
 ]
 
 def is_allowed_pair(file1, file2):
@@ -119,9 +120,6 @@ def main():
     # Default: check all layer directories
     default_parts_dirs = [
         repo_root / 'src' / 'master',
-        repo_root / 'src' / 'parts-l1',
-        repo_root / 'src' / 'parts-l2',
-        repo_root / 'src' / 'parts-l3',
     ]
     
     parser = argparse.ArgumentParser(description='Check for duplicate content in HTML parts')

@@ -5,7 +5,7 @@
   Unified content: all layers merged
 -->
 <section  data-section="p2_basic_anchors" data-toc-nav>
-<h2>Поведенческие якоря</h2>
+<h2>Behavioral Anchors (поведенческие якоря)</h2>
 
 <p><strong>Якорь (Anchor)</strong> — это правило поведения персонажа в формате <strong>Триггер → Действие → Цена</strong>. Это основной механизм задания характера без бесконечного описания.</p>
 
@@ -65,14 +65,15 @@
 <li><strong>Триггер конкретный</strong> — не "когда ему грустно", а "когда ему задают вопрос о прошлом"</li>
 </ul>
 
-<div class="callout warn">
-<p><strong>⚠️ Якоря и FLAW — конкретные действия, не прилагательные.</strong> «Он неуверенный» ≠ якорь. «Грызёт ногти и перечитывает сообщение трижды» = якорь. Подробнее → <a href="#p4_flaw">FLAW: поведение vs прилагательное (Part 4)</a></p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Якоря и FLAW — конкретные действия, не прилагательные. «Он неуверенный» ≠ якорь. «Грызёт ногти и перечитывает сообщение трижды» = якорь. → <a href="#p4_flaw">Part 4: FLAW</a></p>
 </div>
 
-<div class="callout warn">
-<p><strong>⚠️ «Потом будет жалеть» — НЕ валидный Price.</strong> Price = наблюдаемый физический или вербально-поведенческий маркер в той же сцене. Если Price не появляется в ответе модели — якорь не работает.</p>
+<div class="callout rule">
+<p><strong>RULE:</strong> «Потом будет жалеть» — НЕ валидный Price. Price = наблюдаемый физический или вербально-поведенческий маркер в той же сцене. Если Price не появляется в ответе модели — якорь не работает.</p>
 </div>
 
+<div class="example-label illustration">ILLUSTRATION</div>
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>❌ Отложенная цена</h4>
@@ -95,8 +96,8 @@
 </table>
 </div>
 
-<div class="callout important">
-<p><strong>📌 Граница влияния:</strong> Персонаж реагирует только на наблюдаемые действия {{user}}. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напуган. Описывайте реакцию персонажя на то, что он видит и слышит, а не на внутренние состояния собеседника. Правило INFLUENCE BOUNDARY как SP-директива → <a href="#p7_core_directives">Part 7: CORE DIRECTIVES #5</a></p>
+<div class="callout rule">
+<p><strong>RULE:</strong> Граница влияния: Персонаж реагирует только на наблюдаемые действия {{user}} (может заметить, что {{user}} вздрогнул — не может заявить, что {{user}} напуган). → <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #5</a></p>
 </div>
 
 </section>
@@ -104,7 +105,7 @@
 <section  data-section="p2_anchor_examples">
 <h3>Примеры якорей по триггерам</h3>
 
-<p>Ниже — таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Обратите внимание: цена — всегда физическая реакция, наблюдаемая в той же сцене.</p>
+<p>Ниже — таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Цена — всегда физическая реакция, наблюдаемая в той же сцене.</p>
 
 <div class="table-wrap">
 <table>
@@ -115,16 +116,16 @@
 <tr><td>Ложь</td><td>Прищуривается, молчит</td><td>Напряжение в челюсти</td><td>Елена</td></tr>
 <tr><td>Стресс</td><td>Трёт шею</td><td>Головная боль</td><td>Елена</td></tr>
 <tr><td>Радость</td><td>Редкая улыбка</td><td>Краснеет</td><td>Елена</td></tr>
-<tr><td>Опасность</td><td>Рука к мечу</td><td>Пульс в ушах</td><td>Геральт</td></tr>
-<tr><td>Доверие</td><td>Пауза перед ответом</td><td>Напряжение в груди уходит</td><td>Геральт</td></tr>
-<tr><td>Вопрос о росте</td><td>Взрывается</td><td>Дрожат кулаки</td><td>Эдвард Элрик</td></tr>
+<tr><td>Чужая память</td><td>Поглощает, глаза закатываются</td><td>Теряет своё воспоминание</td><td>Выщербленный</td></tr>
+<tr><td>Вопрос о прошлом</td><td>Пауза, взгляд внутрь</td><td>Какая из историй?</td><td>Выщербленный</td></tr>
+<tr><td>Разговор</td><td>Короткие фразы</td><td>—</td><td>Елена</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> О том, как выводить якоря из SPINE-элементов (FLAW-linked якоря) — см. Part 4, раздел <a href="#p4_spine_mapping">SPINE → Якоря</a>.</p>
+<p><span class="remark-icon" aria-hidden="true">→</span> FLAW-linked якоря: → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Якоря определяют, <strong>что</strong> делает персонаж. Но поведение — это не только действие, но и <strong>голос</strong>. Следующая часть — о том, где голос живёт в карточке и как его изолировать от описания: <a href="#p3_voice_isolation">Голос и изоляция → Part 3</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Якоря определяют, <strong>что</strong> делает персонаж. Но поведение — это не только действие, но и <strong>голос</strong>. Следующая часть — о том, где голос живёт в карточке и как его изолировать от описания: <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
 </section>
 
@@ -133,9 +134,9 @@
 
 <p><strong>Embodiment</strong> — протокол связи эмоционального состояния с телесной реакцией. Каждая эмоция должна проявляться физически.</p>
 
-<p>Протокол телесности (EMBODIMENT FIRST):</p>
+<p>Протокол телесности (Embodiment First):</p>
 <div class="infographic">
-<div class="infographic-title">EMBODIMENT FIRST: Протокол телесности</div>
+<div class="infographic-title">Embodiment First: Протокол телесности</div>
 <div class="inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
@@ -172,40 +173,40 @@
 <tr><th>Персонаж</th><th>Состояние</th><th>Тело</th><th>Сенсор</th><th>Речь</th></tr>
 </thead>
 <tbody>
-<tr><td>Геральт</td><td>Напряжение</td><td>Сжимает кулаки</td><td>Жар в груди</td><td>Лаконичные фразы</td></tr>
+<tr><td>Выщербленный</td><td>Тяга к чужой памяти</td><td>Руки дрожат</td><td>Запах старой бумаги</td><td>Формальные фразы с сбоями</td></tr>
 <tr><td>Елена</td><td>Сарказм → одиночество</td><td>Трёт шею</td><td>Холод в животе</td><td>Колкие шутки</td></tr>
-<tr><td>Уолтер</td><td>Обман</td><td>Касается виска</td><td>Пот на ладонях</td><td>Контролируемый голос</td></tr>
+<tr><td>Выщербленный</td><td>Пустота внутри</td><td>Тянется к чужой памяти</td><td>Запах сырого Сангвиса</td><td>XML-теги в речи</td></tr>
 </tbody>
 </table>
 </div>
 
-<div class="callout tip">
-<p><strong>💡 Совет:</strong> Каждый Example должен содержать минимум одну физическую реакцию (embodiment). Если персонаж только говорит — модель не научится телесности.</p>
+<div class="callout rec">
+<p><strong>RECOMMENDATION:</strong> Каждый Example должен содержать минимум одну физическую реакцию (embodiment). Если персонаж только говорит — модель не научится телесности.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>EMBODIMENT FIRST</strong> в System Prompt: <a href="#p7_core_directives">CORE DIRECTIVES #2 → Part 7</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>Embodiment First</strong> в System Prompt: <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #2</a></p>
 
 <p><span class="remark-icon" aria-hidden="true">→</span> Для GHOST-персонажей протокол Embodiment усиливается сенсорными якорями — якорями, привязанными к 5 каналам восприятия через GHOST-события → <a href="#p2_sensory_anchors">Сенсорные якоря</a></p>
 
 <p>
 <span class="remark-icon" aria-hidden="true">→</span>
-CoT-якоря (якоря с внутренним процессом) описаны в <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>.
+CoT-якоря (якоря с внутренним процессом) → <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>
 </p>
 
 </section>
 
 <section  data-section="p2_env_reactivity">
-<h3>Реактивность среды (ENVIRONMENTAL REACTIVITY)</h3>
+<h3>Реактивность среды (Environmental Reactivity)</h3>
 
 <p>Сенсорные и пространственные детали должны вводиться органично, через действие персонажа или присутствие {{user}}, никогда — декоративно. Среда раскрывается через действие, а не описывается отдельно от персонажа.</p>
 
-<div class="callout warn">
-<p><strong>⚠️ Декоративное описание vs действие:</strong></p>
+<div class="callout ex">
+<p><strong>EXAMPLE:</strong> Декоративное описание vs действие:</p>
 <p><strong>❌ Декорация без персонажа:</strong> «Комната была украшена гобеленами с изображениями охотничьих сцен. Камин потрескивал.» — чистая декорация, персонаж не присутствует.</p>
-<p><strong>✅ Среда через действие:</strong> «Геральт провёл пальцами по шершавой ткани гобелена — пыль. Давно никто не заходил.» — среда раскрывается через действие персонажа.</p>
+<p><strong>✅ Среда через действие:</strong> «Елена провела пальцами по краю бара — липко. Давно не убирали.» — среда раскрывается через действие персонажа.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>ENVIRONMENTAL REACTIVITY</strong> в System Prompt: <a href="#p7_core_directives">CORE DIRECTIVES #4 → Part 7</a></p>
+<p><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>Environmental Reactivity</strong> в System Prompt: <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #4</a></p>
 
 </section>
 
@@ -233,6 +234,7 @@ CoT-якоря (якоря с внутренним процессом) опис�
 </div>
 
 <h4>Пример: Выщербленный</h4>
+<div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>Сенсорные якоря:
 - Тактильный: Когда чужое касание → тело реагирует раньше ума → дрожь
 - Обонятельный: Когда запах сырого Сангвиса → левая рука движется сама, тянется к источнику → рука ноет остаток дня
@@ -240,16 +242,10 @@ CoT-якоря (якоря с внутренним процессом) опис�
 
 <p>
 <span class="remark-icon" aria-hidden="true">→</span>
-CoT-якоря (якоря с внутренним процессом) описаны в <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>.
+CoT-якоря (якоря с внутренним процессом) → <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>
 </p>
+
+<p>Якоря управляют тем, КОГДА персонаж действует. Voice (голос) управляет тем, КАК он звучит. Без Voice Isolation даже хорошо анкорированные персонажи сливаются с регистром рассказчика или перенимают голоса других персонажей в мульти-персонажных сценах. → <a href="#p3_voice_isolation">Part 3</a></p>
 
 </section>
 
-<div class="part-resume">
-  <h3>Что вы теперь умеете</h3>
-  <ul>
-    <li>Создавать якоря в формате T→A→P с обязательной Ценой</li>
-    <li>Использовать Embodiment (State→Body→Sensor→Speech) для телесности персонажа</li>
-    <li>Добавлять сенсорные якоря, привязанные к каналам восприятия через GHOST-события</li>
-  </ul>
-</div>

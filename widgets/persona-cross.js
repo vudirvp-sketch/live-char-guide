@@ -4,7 +4,7 @@
  * ============================================================================
  * 
  * Interactive 5×9 cross-table showing correlations between OCEAN dimensions
- * and Enneagram types. Part of the Live Character Guide v6.
+ * and Enneagram types. Part of the Live Character Guide v9.
  * 
  * Contract (§0.8):
  * - Input: fetches data/ocean.json and data/enneagram.json (cached)

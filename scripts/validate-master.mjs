@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /**
- * @fileoverview Unified HTML Validation Script for Live Character Guide v7
+ * @fileoverview Unified HTML Validation Script for Live Character Guide v9
  * @module scripts/validate-master
- * @version 2.0.0
+ * @version 3.0.0
  *
  * @description
  * Stage 2 validation: checks unified HTML files for structural and content
  * integrity. This script validates the unified architecture described
- * in the v7 migration plan.
+ * in the v9 restructure plan.
  *
- * Checks implemented (12 checks):
+ * Checks implemented (12 checks — v9 restructure):
  *   1. No layer artifacts in unified HTML (data-layer, data-layer-switch, etc.)
  *   2. All cross-references (href="#id") resolve within the unified file set
  *   3. No prohibited elements in unified HTML (<style>, <script>, <link>, <meta>)
@@ -20,7 +20,7 @@
  *   8. Visual components are from registry (CSS class check)
  *   9. Character examples match Character Bible
  *  10. IMP-28: no orphan sections (every section is reachable)
- *  11. Callout emoji markers are correct (IMP-56)
+ *  11. Callout blocks must NOT contain emoji markers (v9)
  *  12. Widget containers present (ocean-embed, enneagram-embed, etc.)
  *
  * Usage:
@@ -61,6 +61,8 @@ async function parseAllUnifiedFiles() {
 
   const unifiedFiles = await readdir(UNIFIED_DIR);
   const partFiles = unifiedFiles.filter(f => f.startsWith('part_') && f.endsWith('.html')).sort();
+  const appendixFiles = unifiedFiles.filter(f => f.startsWith('appendix_') && f.endsWith('.html')).sort();
+  const allFiles = [...partFiles, ...appendixFiles];
 
   if (partFiles.length === 0) {
     log('ERROR', 'No part files found in unified directory');
@@ -70,11 +72,11 @@ async function parseAllUnifiedFiles() {
   const allSections = [];
   const allContent = [];
 
-  for (const file of partFiles) {
+  for (const file of allFiles) {
     const filepath = join(UNIFIED_DIR, file);
     const content = await readFile(filepath, 'utf-8');
-    const partMatch = file.match(/part_(\d+)/);
-    const partNum = partMatch ? partMatch[1] : '00';
+    const partMatch = file.match(/part_(\d+[a-z]?)/);
+    const partNum = partMatch ? partMatch[1] : (file.startsWith('appendix_') ? 'appendix' : '00');
 
     // Parse sections — no data-layer required, only data-section
     const sectionRegex = /<section\s+([^>]*)>/gi;
@@ -447,18 +449,18 @@ async function checkVisualComponents(allContent) {
   console.log('\n📋 Check 8: Visual components from registry...');
 
   let errorCount = 0;
-  const allowedCallouts = ['callout warn', 'callout tip', 'callout important', 'callout'];
-  const prohibitedCallouts = ['callout info', 'callout note', 'callout sidebar', 'callout box', 'callout custom'];
+  const allowedCallouts = ['callout rule', 'callout rec', 'callout ex', 'callout'];
+  const prohibitedCallouts = ['callout info', 'callout note', 'callout sidebar', 'callout box', 'callout custom', 'callout warn', 'callout tip', 'callout important'];
 
-  const allowedTags = ['tag tip', 'tag opt', 'tag risk', 'tag advanced', 'tag core', 'tag'];
-  const prohibitedTags = ['tag warn'];
+  const allowedTags = ['tag core', 'tag'];
+  const prohibitedTags = ['tag warn', 'tag opt', 'tag risk', 'tag advanced', 'tag tip'];
 
   for (const { file, content } of allContent) {
     // Check prohibited callout types
     for (const prohibited of prohibitedCallouts) {
       const regex = new RegExp(`class=["'][^"']*${prohibited.replace(' ', '\\s+')}[^"']*["']`, 'gi');
       if (regex.test(content)) {
-        errors.push(`${file}: Prohibited callout class "${prohibited}" found — use .callout.warn/.tip/.important only`);
+        errors.push(`${file}: Prohibited callout class "${prohibited}" found — use .callout.rule/.rec/.ex only`);
         errorCount++;
       }
     }
@@ -467,7 +469,7 @@ async function checkVisualComponents(allContent) {
     for (const prohibited of prohibitedTags) {
       const regex = new RegExp(`class=["'][^"']*${prohibited.replace(' ', '\\s+')}[^"']*["']`, 'gi');
       if (regex.test(content)) {
-        errors.push(`${file}: Prohibited tag class "${prohibited}" found — use .tag.risk instead`);
+        errors.push(`${file}: Prohibited tag class "${prohibited}" found — use .tag.core instead`);
         errorCount++;
       }
     }
@@ -589,37 +591,42 @@ async function checkIMP28(allSections, sectionIds) {
 }
 
 // ============================================================================
-// CHECK 11: Callout emoji markers (IMP-56)
+// CHECK 11: Callout blocks must NOT contain emoji markers (v9)
 // ============================================================================
 
 async function checkCalloutEmoji(allContent) {
-  console.log('\n📋 Check 11: Callout emoji markers (IMP-56)...');
+  console.log('\n📋 Check 11: Callout blocks must NOT contain emoji markers (v9)...');
 
   let errorCount = 0;
-  const expectedEmojis = {
-    'callout warn': '⚠️',
-    'callout tip': '💡',
-    'callout important': '📌',
-  };
+  const v9CalloutTypes = ['callout rule', 'callout rec', 'callout ex'];
+  const emojiSet = /[�⚠️💡🎯📝📋✅❌]/u;
 
   for (const { file, content } of allContent) {
-    // Find all callout blocks
-    const calloutRegex = /<div\s+class=["']callout\s+(warn|tip|important)["'][^>]*>([\s\S]*?)<\/div>/gi;
-    let match;
+    // Find all v9 callout blocks
+    for (const calloutType of v9CalloutTypes) {
+      const classPattern = calloutType.replace(' ', '\\s+');
+      const calloutRegex = new RegExp(
+        `<div\\s+class=["']${classPattern}["'][^>]*>([\\s\\S]*?)<\/div>`, 'gi'
+      );
+      let match;
 
-    while ((match = calloutRegex.exec(content)) !== null) {
-      const calloutType = match[1];
-      const calloutContent = match[2];
-      const expectedEmoji = expectedEmojis[`callout ${calloutType}`];
+      while ((match = calloutRegex.exec(content)) !== null) {
+        const calloutContent = match[1];
 
-      if (expectedEmoji && !calloutContent.includes(expectedEmoji)) {
-        warnings.push(`${file}: .callout.${calloutType} missing expected emoji "${expectedEmoji}" (IMP-56)`);
+        if (emojiSet.test(calloutContent)) {
+          // Find which emoji was matched for a helpful message
+          const foundEmoji = calloutContent.match(emojiSet);
+          const emojiChar = foundEmoji ? foundEmoji[0] : 'emoji';
+          warnings.push(
+            `${file}: .${calloutType.replace(' ', '.')} block contains emoji "${emojiChar}" — v9 callouts must not include emoji markers`
+          );
+        }
       }
     }
   }
 
   if (errorCount === 0) {
-    log('INFO', 'Callout emoji markers check completed');
+    log('INFO', 'No emoji markers found in v9 callout blocks');
   }
 
   return errorCount;
@@ -637,7 +644,7 @@ async function checkWidgetContainers(allSections) {
   const requiredWidgets = [
     { id: 'ocean-embed', sectionContains: 'ocean' },
     { id: 'enneagram-embed', sectionContains: 'enneagram' },
-    { id: 'mbti-embed', sectionContains: 'mbti' },
+    { id: 'mbti-embed', sectionContains: 'mbti', optional: true },
     { id: 'persona-cross', sectionContains: 'cross' },
     { id: 'persona-synthesis', sectionContains: 'cross' },
     { id: 'ocean-static', sectionContains: 'ocean' },
@@ -667,8 +674,12 @@ async function checkWidgetContainers(allSections) {
       );
       const foundAnywhere = allMatching.some(s => idPattern.test(s.content));
       if (!foundAnywhere) {
-        errors.push(`Widget "${widget.id}" not found in any section with data-section containing "${keywords.join("' or '")}"`);
-        errorCount++;
+        if (widget.optional) {
+          warnings.push(`Widget "${widget.id}" not found — optional (MBTI moved to Appendix A in v9)`);
+        } else {
+          errors.push(`Widget "${widget.id}" not found in any section with data-section containing "${keywords.join("' or '")}"`);
+          errorCount++;
+        }
       }
     }
   }
@@ -685,7 +696,7 @@ async function checkWidgetContainers(allSections) {
 // ============================================================================
 
 async function main() {
-  console.log('🔍 Live Character Guide v7 — Unified HTML Validation\n');
+  console.log('🔍 Live Character Guide v9 — Unified HTML Validation\n');
   console.log('=' .repeat(60));
 
   const { allSections, allContent, partFiles } = await parseAllUnifiedFiles();

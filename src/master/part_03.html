@@ -33,7 +33,7 @@
 <tr><td>Examples</td><td>~10%</td><td>~12%</td><td>~15%</td></tr>
 <tr><td>Greeting</td><td>~3%</td><td>~5%</td><td>~5%</td></tr>
 <tr><td>Author's Note</td><td>~2%</td><td>~3%</td><td>~5%</td></tr>
-<tr><td><strong class="tag risk">Description</strong></td><td><strong class="tag risk">0% (ЗАПРЕЩЕНО)</strong></td><td>~3%</td><td>~5%</td></tr>
+<tr><td><strong class="tag core">Description</strong></td><td><strong class="tag core">0% (ЗАПРЕЩЕНО)</strong></td><td>~3%</td><td>~5%</td></tr>
 <tr><td>System Prompt</td><td>0%</td><td>~1%</td><td>~2%</td></tr>
 </tbody>
 </table>
@@ -45,9 +45,9 @@
 
 <div class="callout ex">
 <p><strong>EXAMPLE:</strong></p>
-<pre><code>❌ WRONG (Voice in Description):
+<pre><code>WRONG (Voice in Description):
 Description: "Елена говорит с сарказмом, использует слово 'чувак', короткие фразы"</code></pre>
-<pre><code>✅ CORRECT (Voice in Examples):
+<pre><code>CORRECT (Voice in Examples):
 Description: "Елена — журналист, циничный, недоверчивый."
 
 Example:
@@ -221,11 +221,11 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <div class="antipattern-card">
 <div class="problem-block">
-<h4>❌ Narrator Bleed</h4>
+<h4>НЕВЕРНО — Narrator Bleed</h4>
 <p><code>*Комната была в беспорядке, что говорило о произошедшей борьбе. Кресло стояло опрокинутое.*</code></p>
 </div>
 <div class="solution-block">
-<h4>✅ Voice (голос)</h4>
+<h4>ВЕРНО — Voice (голос)</h4>
 <p><code>*Она переступила через опрокинутое кресло. Взгляд зацепился за осколки.* «…Пошли.»</code></p>
 </div>
 </div>
@@ -297,12 +297,12 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 </table>
 </div>
 
-<h4>Voice Bleed (Переплетение голосов)</h4>
+<h4>Voice Bleed — Переплетение голосов</h4>
 <p>Voice Bleed — ошибка, при которой голоса персонажей смешиваются в мульти-персонажной сцене. Модель начинает генерировать реплики одного персонажа в стиле другого.</p>
 
 <div class="callout ex">
 <p><strong>EXAMPLE:</strong></p>
-<pre><code>❌ ОШИБКА (Voice Bleed):
+<pre><code>ОШИБКА (Voice Bleed):
 Выщербленный: "О, чувак, эта память такая... странная, да?"
 *чешет затылок*
 
@@ -313,7 +313,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <div class="callout ex">
 <p><strong>EXAMPLE:</strong></p>
-<pre><code>✅ ПРАВИЛЬНО:
+<pre><code>ПРАВИЛЬНО:
 Выщербленный: "Данный фрагмент... требует анализа."
 *пауза, пальцы касаются виска*
 "Прошу прощения. Я... не должен."

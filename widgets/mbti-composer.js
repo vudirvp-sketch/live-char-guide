@@ -5,6 +5,7 @@
  *
  * Interactive MBTI type selector with grid and axis slider modes.
  * Part of the Persona Synthesis Framework (§4.3).
+ * v9 Note: MBTI moved to Appendix A. This widget serves the appendix reference page.
  *
  * Milestone Levels:
  *   M1 — Quick Selection: grid mode + axis slider mode, result card
