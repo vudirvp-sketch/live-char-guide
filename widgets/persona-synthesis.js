@@ -58,10 +58,6 @@
   // ─── Layer Check ─────────────────────────────────────────────────────
   // v8: No layer system — widgets are always active
 
-  function getGuideLayer() {
-    return 3;
-  }
-
   function isActive() {
     return true;
   }

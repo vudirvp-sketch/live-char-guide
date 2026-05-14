@@ -26,7 +26,7 @@
 <dt>LIE (Ложная установка) <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
 <dd>Определение, связь с GHOST и FLAW Проверьте: LIE должен объяснять, почему FLAW существует</dd>
 <dt>GHOST (Призрак) <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
-<dd>Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). L3-only: 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры</dd>
+<dd>Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры</dd>
 <dt>Anchors (Поведенческие якоря) <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
 <dd>Определение, формат, назначение Диагностика: отладка false positives и nested anchors</dd>
 <dt>Триггер (Trigger) <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
@@ -44,7 +44,7 @@
 <dt>MBTI (Типология Майерс-Бриггс) <a href="#p5_mbti_basics" class="glossary-ref">→</a></dt>
 <dd>Определение, 4 оси, 16 типов Добавьте когнитивные функции для глубины</dd>
 <dt>CORE DIRECTIVES (Основные директивы) <small class="glossary-abbr">(CD)</small> <a href="#p7_core_directives" class="glossary-ref">→</a></dt>
-<dd>Определение, единая система директив для System Prompt. L2 = 1-5, L3 = все 7. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER</dd>
+<dd>Определение, единая система из 7 директив для System Prompt. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER</dd>
 <dt>Tone Frame (Тональный фрейм) <small class="glossary-abbr">(TF)</small> <a href="#p7_tone_frame" class="glossary-ref">→</a></dt>
 <dd>Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP. Отладка: проверьте конфликт Tone Frame с AN</dd>
 <dt>SHOW NEVER TELL (Показывай, не рассказывай) <a href="#p7_core_directives" class="glossary-ref">→</a></dt>
@@ -58,13 +58,13 @@
 <dt>INFLUENCE BOUNDARY (Граница влияния) <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
 <dd>Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}</dd>
 <dt>CONSEQUENCE DRIVEN (Последовательность следствий) <a href="#p7_core_directives_l3" class="glossary-ref">→</a></dt>
-<dd>Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. L3-only CORE DIRECTIVE. Пишется на английском. L3-enhanced: полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY.</dd>
+<dd>Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. Полный CONSEQUENCE DRIVEN с SPINE-checklist. WANT→NEED сдвиг через накопление Price. Добавьте директиву #6 в CORE_DIRECTIVES после INFLUENCE BOUNDARY.</dd>
 <dt>PRE-GENERATION FILTER (Фильтр предгенерации) <a href="#p7_core_directives_l3" class="glossary-ref">→</a></dt>
-<dd>L3-only CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. L3-only: директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN.</dd>
+<dd>CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. Директива 7 из 7. Добавьте в CORE_DIRECTIVES после CONSEQUENCE DRIVEN.</dd>
 <dt>SP (MBTI temperament) <small class="glossary-abbr">(SP)</small> <a href="#p5_mbti_basics" class="glossary-ref">→</a></dt>
 <dd>Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения. При анализе кросс-типов уточняйте, какой SP имеется в виду</dd>
 <dt>Immersion Boundary (Иммерсионная граница) <a href="#p7_ooc_protection" class="glossary-ref">→</a></dt>
-<dd>Продвинутая OOC-защита: отрицание мета-реальности. L3-only. Персонаж не признаёт существование «игры» или «роли». L3-only: добавьте Immersion Boundary для максимальной иммерсии. На L2 используйте базовый OOC Protection.</dd>
+<dd>Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли». Добавьте Immersion Boundary для максимальной иммерсии. Для базовой защиты используйте OOC Protection.</dd>
 <dt>Format Lock (Фиксация формата) <a href="#p7_format_lock" class="glossary-ref">→</a></dt>
 <dd>Фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Диагностика: проверьте, что все Examples и Greeting используют одну систему разметки</dd>
 <dt>RepPen (Штраф за повторы) <a href="#p7_sampling_params" class="glossary-ref">→</a></dt>
@@ -74,7 +74,7 @@
 <dt>CoT (Цепочка рассуждений) <a href="#p6_cot_basics" class="glossary-ref">→</a></dt>
 <dd>Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Настройте CoT tier 3 для сложных сценариев</dd>
 <dt>processus_analysium <a href="#p6_cot_tier3" class="glossary-ref">→</a></dt>
-<dd>L3-only. Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). L3-only: XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL].</dd>
+<dd>Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL].</dd>
 <dt>Lorebook (База знаний) <small class="glossary-abbr">(LB)</small> <a href="#p7_lorebook" class="glossary-ref">→</a></dt>
 <dd>Определение, назначение, структура записи Диагностика: проверьте приоритет и конфликт записей</dd>
 <dt>Structured Inject (Структурированная инъекция) <a href="#p7_structured_inject" class="glossary-ref">→</a></dt>

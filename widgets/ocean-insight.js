@@ -68,7 +68,7 @@
   // Data cache
   let oceanDataCache = null;
   let mbtiDataCache = null;
-  let enneagramDataCache = null;
+  let _enneagramDataCache = null;
 
   // Current profile state
   const oceanProfile = {
@@ -849,7 +849,7 @@
         if (!detail) return;
         var typeId = detail.typeId;
         window.WidgetUtils.fetchJson('data/enneagram.json').then(function(enneagramData) {
-          enneagramDataCache = enneagramData;
+          _enneagramDataCache = enneagramData;
           if (!enneagramData || !enneagramData.ocean_defaults) return;
           var defaults = enneagramData.ocean_defaults[String(typeId)];
           if (!defaults) return;

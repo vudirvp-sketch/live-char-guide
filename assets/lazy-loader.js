@@ -661,7 +661,7 @@
         return fetch(url).then(r => {
           if (!r.ok) throw new Error(`HTTP ${r.status}`);
           return r.text();
-        }).catch(e => `<!-- Failed to load: ${part.file} -->`);
+        }).catch(() => `<!-- Failed to load: ${part.file} -->`);
       });
 
       const results = await Promise.all(fetchPromises);

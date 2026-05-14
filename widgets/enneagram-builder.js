@@ -540,7 +540,6 @@
       return '<p class="enneagram-hint">Сначала выберите тип на вкладке «Эннеатип»</p>';
     }
 
-    var typeInfo = getTypeInfo(selectedTypeId);
     var anchors = getFlawAnchors(selectedTypeId);
     if (!anchors || anchors.length === 0) {
       return '<p class="enneagram-hint">Примеры не найдены для типа ' + selectedTypeId + '</p>';
@@ -746,7 +745,7 @@
     // Arrow key navigation for tabs
     var tabs = container.querySelectorAll('.enneagram-tab');
     if (tabs.length > 0) {
-      tabs.forEach(function(tab, index) {
+      tabs.forEach(function(tab) {
         tab.addEventListener('keydown', function(e) {
           var tabList = Array.from(tabs);
           var currentIdx = tabList.indexOf(e.target);
