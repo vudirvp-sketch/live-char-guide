@@ -8,11 +8,9 @@
  * IMP-36: Widget smoke test using Puppeteer.
  * Tests runtime behavior that static validation cannot detect.
  *
- * Migrated from L1/L2/L3 layer system to unified linear guide per Phase 6.7
- * of UNIFIED-GUIDE-MIGRATION-PLAN-v2.md. Removed:
- * - L2 selection via modal (page loads directly, no modal)
- * - Layer switch button tests
- * - data-layer-switch tests
+ * Migrated from L1/L2/L3 layer system to unified linear guide (v8).
+ * Layer modal/switcher/data-layer attributes removed.
+ * Tests verify that no layer UI elements remain in the DOM.
  *
  * Test cases:
  * 1. Click OCEAN node → verify panel displays
