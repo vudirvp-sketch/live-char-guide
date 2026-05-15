@@ -38,7 +38,7 @@
     }
 
     .param-column--api {
-      border-color: rgba(139,92,246,0.2);
+      border-color: var(--violet-20);
     }
 
     .param-column__tier {
@@ -65,7 +65,7 @@
       justify-content: space-between;
       align-items: center;
       padding: var(--gap-sm) 0;
-      border-bottom: var(--line-width) solid rgba(30,36,48,0.5);
+      border-bottom: var(--line-width) solid var(--border-50);
     }
 
     .param-row:last-child {
@@ -87,7 +87,7 @@
 
     /* Danger row — PP and RepPen threshold */
     .param-row--danger {
-      background: rgba(217,69,90,0.04);
+      background: var(--danger-4);
       margin: 0 calc(-1 * var(--gap-md));
       padding-left: var(--gap-md);
       padding-right: var(--gap-md);
@@ -106,7 +106,7 @@
 
     /* Amber warning row — RepPen > 1.10 */
     .param-row--warning {
-      background: rgba(240,160,64,0.04);
+      background: var(--amber-4);
       margin: 0 calc(-1 * var(--gap-md));
       padding-left: var(--gap-md);
       padding-right: var(--gap-md);
@@ -154,7 +154,7 @@
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: var(--gap-sm);
       padding: var(--gap-xs) 0;
-      border-bottom: var(--line-width) solid rgba(30,36,48,0.4);
+      border-bottom: var(--line-width) solid var(--border-40);
       font-family: var(--font-mono);
       font-size: 11px;
       color: var(--text-secondary);

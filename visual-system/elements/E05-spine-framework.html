@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E05 — SPINE Framework | Live Character Guide Visual System</title>
+  <title>E05 — Фреймворк SPINE | Визуальная система «Живой справочник персонажа»</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -53,9 +53,9 @@
     /* Внешний слой — бордер */
     .spine-node__hex-border {
       clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
-      background: rgba(139,92,246,0.3);
+      background: var(--violet-30);
       padding: 2px; /* толщина бордера */
-      transition: background 0.2s;
+      transition: background var(--duration-fast);
     }
 
     /* Внутренний слой — заливка */
@@ -63,11 +63,11 @@
       clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
       background: var(--bg-panel);
       padding: 14px 24px;
-      transition: background 0.2s;
+      transition: background var(--duration-fast);
     }
 
     .spine-node__hex:hover .spine-node__hex-border {
-      background: rgba(139,92,246,0.5);
+      background: var(--violet-50);
     }
 
     .spine-node__hex:hover .spine-node__hex-fill {
@@ -101,18 +101,18 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: rgba(139,92,246,0.15);
-      border: 1px solid rgba(139,92,246,0.3);
+      background: var(--violet-15);
+      border: 1px solid var(--violet-30);
       font-size: 12px;
       color: var(--accent-violet);
       cursor: pointer;
       margin-top: 4px;
-      transition: background 0.2s;
+      transition: background var(--duration-fast);
       position: relative;
     }
 
     .spine-node__expand:hover {
-      background: rgba(139,92,246,0.25);
+      background: var(--violet-25);
     }
 
     /* Tooltip for GHOST expand */
@@ -132,10 +132,11 @@
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s;
+      transition: opacity var(--duration-fast);
     }
 
-    .spine-node__expand:hover::after {
+    .spine-node__expand:hover::after,
+    .spine-node__expand:focus::after {
       opacity: 1;
     }
 
@@ -203,7 +204,7 @@
         border-radius: var(--radius-sm);
       }
       .spine-node__hex-border {
-        background: rgba(139,92,246,0.3);
+        background: var(--violet-30);
         padding: 1px;
       }
       .spine-node__hex-fill {
@@ -272,7 +273,8 @@
         </div>
 
         <div class="spine-arrow scroll-enter">
-          <svg viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
             <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
             <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
           </svg>
@@ -292,7 +294,8 @@
         </div>
 
         <div class="spine-arrow scroll-enter">
-          <svg viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
             <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
             <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
           </svg>
@@ -312,7 +315,8 @@
         </div>
 
         <div class="spine-arrow scroll-enter">
-          <svg viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
             <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
             <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
           </svg>
@@ -332,7 +336,8 @@
         </div>
 
         <div class="spine-arrow scroll-enter">
-          <svg viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
             <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
             <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
           </svg>

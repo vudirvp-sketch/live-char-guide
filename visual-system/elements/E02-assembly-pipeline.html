@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E02 — Assembly Pipeline | Live Character Guide Visual System</title>
+  <title>E02 — Пайплайн сборки | Визуальная система «Живой справочник персонажа»</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -41,13 +41,13 @@
       padding: 10px 16px;
       min-width: 120px;
       text-align: center;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
       cursor: default;
     }
 
     .pipeline-node__box:hover {
       border-color: var(--border-active);
-      box-shadow: -2px 0 8px rgba(60,200,255,0.15);
+      box-shadow: -2px 0 8px var(--cyan-15);
     }
 
     .pipeline-node__label {
@@ -81,10 +81,10 @@
 
     /* SPINE sub-label violet */
     .pipeline-node__box--spine {
-      border-color: rgba(139,92,246,0.3);
+      border-color: var(--violet-30);
     }
     .pipeline-node__box--spine:hover {
-      box-shadow: -2px 0 8px rgba(139,92,246,0.15);
+      box-shadow: -2px 0 8px var(--violet-15);
     }
 
     /* Forward arrows between nodes */
@@ -114,7 +114,7 @@
       padding: var(--gap-md);
       border: 1px dashed var(--accent-amber);
       border-radius: var(--radius-md);
-      background: rgba(240,160,64,0.04);
+      background: var(--amber-4);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -171,7 +171,7 @@
       font-weight: 500;
       font-size: 12px;
       color: var(--text-secondary);
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color var(--duration-fast), color var(--duration-fast);
     }
 
     .optional-branch__item:hover {

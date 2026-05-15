@@ -62,7 +62,13 @@
 
     /* Bar chart animations */
     .bar-rect {
-      transition: width 600ms var(--ease-out-expo);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 600ms var(--ease-out-expo);
+    }
+
+    .bar-rect.is-visible {
+      transform: scaleX(1);
     }
 
     /* Red × marker */
@@ -121,7 +127,7 @@
           <defs>
             <!-- Grid line pattern -->
             <pattern id="grid5" width="78" height="420" patternUnits="userSpaceOnUse">
-              <line x1="0" y1="0" x2="0" y2="420" stroke="rgba(30,36,48,0.4)" stroke-width="0.5"/>
+              <line x1="0" y1="0" x2="0" y2="420" stroke="var(--border-40)" stroke-width="0.5"/>
             </pattern>
           </defs>
 
@@ -142,9 +148,9 @@
           <!-- ===== ROW 1: Recent Chat (dominant — split axis) ===== -->
           <text x="175" y="70" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Недавний чат</text>
           <!-- 12B: ~85% = 830px equivalent, but compressed for split axis -->
-          <rect class="bar-rect" x="180" y="52" width="468" height="12" fill="rgba(60,200,255,0.2)" rx="2"/>
-          <rect class="bar-rect" x="180" y="66" width="440" height="12" fill="rgba(60,200,255,0.2)" rx="2"/>
-          <rect class="bar-rect" x="180" y="80" width="413" height="12" fill="rgba(60,200,255,0.2)" rx="2"/>
+          <rect class="bar-rect" x="180" y="52" width="468" height="12" fill="var(--cyan-20)" rx="2"/>
+          <rect class="bar-rect" x="180" y="66" width="440" height="12" fill="var(--cyan-20)" rx="2"/>
+          <rect class="bar-rect" x="180" y="80" width="413" height="12" fill="var(--cyan-20)" rx="2"/>
           <text x="655" y="68" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="9" opacity="0.7">~75-85% (сжатая шкала)</text>
 
           <!-- ===== ROW 2: Examples (highest card-level) ===== -->

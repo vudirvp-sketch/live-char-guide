@@ -118,13 +118,8 @@
       <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Пентагон OCEAN — радарная диаграмма профиля персонажа Елена, показывающая 5 черт личности">
         <title>Пентагон OCEAN — профиль персонажа Елена</title>
 
-        <defs>
-          <!-- Threshold zone colors -->
-          <linearGradient id="danger-zone" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(217,69,90,0)"/>
-            <stop offset="100%" stop-color="rgba(217,69,90,0.05)"/>
-          </linearGradient>
-        </defs>
+        <!-- No <defs> needed: removed unused danger-zone gradient. -->
+        <!-- Note: SVG gradient stop-color cannot use CSS custom properties reliably across browsers, so hardcoded rgba values are kept wherever gradient stops are used. -->
 
         <!-- Pentagon gridlines (5 levels: 0, 25, 50, 75, 100) -->
         <!-- Center at 250, 210. Radius max = 170 -->
@@ -171,7 +166,7 @@
 
         <polygon class="profile-anim"
                  points="250,87.6 355.2,175.9 290.9,268.4 212.1,264.2 140,174.3"
-                 fill="rgba(60,200,255,0.12)"
+                 fill="var(--cyan-12)"
                  stroke="var(--accent-cyan)" stroke-width="1.5"/>
 
         <!-- Data points -->

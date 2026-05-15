@@ -59,10 +59,10 @@
     }
 
     /* Zone boundaries: 0-25%, 25-50%, 50-85%, 85-100% */
-    .zone-critical { bottom: 0; height: 25%; background: rgba(217,69,90,0.15); }
-    .zone-poor     { bottom: 25%; height: 25%; background: rgba(240,160,64,0.1); }
-    .zone-good     { bottom: 50%; height: 35%; background: rgba(60,200,255,0.08); }
-    .zone-excellent { bottom: 85%; height: 15%; background: rgba(139,92,246,0.12); }
+    .zone-critical { bottom: 0; height: 25%; background: var(--danger-15); }
+    .zone-poor     { bottom: 25%; height: 25%; background: var(--amber-10); }
+    .zone-good     { bottom: 50%; height: 35%; background: var(--cyan-8); }
+    .zone-excellent { bottom: 85%; height: 15%; background: var(--violet-12); }
 
     /* Indicator line */
     .indicator {
@@ -100,22 +100,22 @@
     }
 
     .zone-detail--critical {
-      background: rgba(217,69,90,0.06);
+      background: var(--danger-6);
       border-left-color: var(--danger);
     }
 
     .zone-detail--poor {
-      background: rgba(240,160,64,0.06);
+      background: var(--amber-6);
       border-left-color: var(--accent-amber);
     }
 
     .zone-detail--good {
-      background: rgba(60,200,255,0.06);
+      background: var(--cyan-6);
       border-left-color: var(--accent-cyan);
     }
 
     .zone-detail--excellent {
-      background: rgba(139,92,246,0.06);
+      background: var(--violet-6);
       border-left-color: var(--accent-violet);
     }
 

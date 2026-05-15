@@ -327,11 +327,17 @@
           mcLie.textContent = data.lie;
           mcFlaw.textContent = data.flaw;
 
-          // Position near the node
-          const rect = node.getBoundingClientRect();
+          // Position near the node using SVG→screen coordinate conversion
+          const svgEl = document.querySelector('.enneagram-container svg');
+          const circle = node.querySelector('circle');
+          const point = svgEl.createSVGPoint();
+          point.x = parseFloat(circle.getAttribute('cx'));
+          point.y = parseFloat(circle.getAttribute('cy'));
+          const ctm = svgEl.getScreenCTM();
+          const screenPoint = point.matrixTransform(ctm);
           const wrapRect = document.getElementById('enneagram-wrap').getBoundingClientRect();
-          miniCard.style.left = (rect.left - wrapRect.left + 30) + 'px';
-          miniCard.style.top = (rect.top - wrapRect.top - 10) + 'px';
+          miniCard.style.left = (screenPoint.x - wrapRect.left + 30) + 'px';
+          miniCard.style.top = (screenPoint.y - wrapRect.top - 10) + 'px';
           miniCard.classList.add('is-visible');
         });
 

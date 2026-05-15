@@ -42,26 +42,26 @@
     }
 
     .layer-toggle--active.layer-toggle--structure {
-      background: rgba(60,200,255,0.12);
-      border-color: rgba(60,200,255,0.3);
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
       color: var(--accent-cyan);
     }
 
     .layer-toggle--active.layer-toggle--anchors {
-      background: rgba(139,92,246,0.12);
-      border-color: rgba(139,92,246,0.3);
+      background: var(--violet-12);
+      border-color: var(--violet-30);
       color: var(--accent-violet);
     }
 
     .layer-toggle--active.layer-toggle--spine {
-      background: rgba(139,92,246,0.12);
-      border-color: rgba(139,92,246,0.3);
+      background: var(--violet-12);
+      border-color: var(--violet-30);
       color: var(--accent-violet);
     }
 
     .layer-toggle--active.layer-toggle--directives {
-      background: rgba(60,200,255,0.12);
-      border-color: rgba(60,200,255,0.3);
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
       color: var(--accent-cyan);
     }
 
@@ -69,8 +69,8 @@
     .blueprint-area {
       position: relative;
       background:
-        linear-gradient(rgba(60,200,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(60,200,255,0.03) 1px, transparent 1px);
+        linear-gradient(var(--cyan-3) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cyan-3) 1px, transparent 1px);
       background-size: 20px 20px;
       border: var(--line-width) solid var(--border);
       border-radius: var(--radius-lg);
@@ -135,22 +135,22 @@
     }
 
     .callout--structure {
-      background: rgba(60,200,255,0.08);
+      background: var(--cyan-8);
       border-left: 2px solid var(--accent-cyan);
     }
 
     .callout--anchors {
-      background: rgba(139,92,246,0.08);
+      background: var(--violet-8);
       border-left: 2px solid var(--accent-violet);
     }
 
     .callout--spine {
-      background: rgba(139,92,246,0.08);
+      background: var(--violet-8);
       border-left: 2px solid var(--accent-violet);
     }
 
     .callout--directives {
-      background: rgba(60,200,255,0.08);
+      background: var(--cyan-8);
       border-left: 2px solid var(--accent-cyan);
     }
 
@@ -235,49 +235,49 @@
 
         <!-- Structure layer (default active) -->
         <div class="annotation-layer annotation-layer--active" data-layer="structure">
-          <div class="callout callout--structure is-visible" style="top:10px; right:20px;">
+          <div class="callout callout--structure" style="top:10px; right:20px;">
             SP: ~50-200 токенов<br>Контейнер — содержит директивы, идентичность, anti-godmoding
           </div>
-          <div class="callout callout--structure is-visible" style="top:100px; right:20px;">
+          <div class="callout callout--structure" style="top:100px; right:20px;">
             Description: ~150-700 токенов<br>Крупнейший блок — факты, SPINE, OCEAN, физичность
           </div>
-          <div class="callout callout--structure is-visible" style="top:250px; right:20px;">
+          <div class="callout callout--structure" style="top:250px; right:20px;">
             Examples: ~80-400 токенов<br>Голос живёт здесь + Anchors вложены внутри
           </div>
-          <div class="callout callout--structure is-visible" style="top:380px; right:20px;">
+          <div class="callout callout--structure" style="top:380px; right:20px;">
             Greeting: ~40-100 токенов<br>Первое впечатление, задаёт тон
           </div>
         </div>
 
         <!-- Anchors layer -->
         <div class="annotation-layer" data-layer="anchors">
-          <div class="callout callout--anchors is-visible" style="top:260px; right:20px;">
+          <div class="callout callout--anchors" style="top:260px; right:20px;">
             Подпанель Anchors<br>Формат T→A→P с Embodiment<br>Только FLAW-связанные (→ E03, E04)
           </div>
-          <div class="callout callout--anchors is-visible" style="top:120px; right:20px;">
+          <div class="callout callout--anchors" style="top:120px; right:20px;">
             Anchors НЕ вложены в Description<br>Только упоминаются — структурный дом — Examples
           </div>
         </div>
 
         <!-- SPINE layer -->
         <div class="annotation-layer" data-layer="spine">
-          <div class="callout callout--spine is-visible" style="top:130px; right:20px;">
+          <div class="callout callout--spine" style="top:130px; right:20px;">
             GHOST→LIE→FLAW→NEED→WANT<br>Записано внутри блока Description<br>Елена: предательство→недоверие→изоляция→связь→контроль
           </div>
-          <div class="callout callout--spine is-visible" style="top:290px; right:20px;">
+          <div class="callout callout--spine" style="top:290px; right:20px;">
             FLAW-связанные Anchors<br>Каждый Anchor восходит к элементу SPINE
           </div>
         </div>
 
         <!-- Directives layer -->
         <div class="annotation-layer" data-layer="directives">
-          <div class="callout callout--directives is-visible" style="top:20px; right:20px;">
+          <div class="callout callout--directives" style="top:20px; right:20px;">
             SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
           </div>
-          <div class="callout callout--directives is-visible" style="top:280px; right:20px;">
+          <div class="callout callout--directives" style="top:280px; right:20px;">
             Директива 2 (Embodiment)<br>Выражается через слой Action в Anchors
           </div>
-          <div class="callout callout--directives is-visible" style="top:390px; right:20px;">
+          <div class="callout callout--directives" style="top:390px; right:20px;">
             Директива 6 (Последствие)<br>WANT→NEED по мере накопления Price
           </div>
         </div>

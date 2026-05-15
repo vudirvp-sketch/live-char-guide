@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E03 — Behavioral Anchor: T→A→P | Live Character Guide Visual System</title>
+  <title>E03 — Поведенческий Anchor: T→A→P | Визуальная система «Живой справочник персонажа»</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -28,14 +28,14 @@
       background: var(--bg-panel);
       border: var(--line-width) solid var(--border);
       border-left: var(--line-bold) solid var(--accent-cyan);
-      box-shadow: inset 2px 0 8px rgba(60,200,255,0.06);
+      box-shadow: inset 2px 0 8px var(--cyan-6);
     }
 
     .compare-column--incorrect {
       background: var(--bg-panel);
       border: var(--line-width) solid var(--border);
       border-left: var(--line-bold) solid var(--accent-amber);
-      box-shadow: inset 2px 0 8px rgba(240,160,64,0.06);
+      box-shadow: inset 2px 0 8px var(--amber-6);
     }
 
     .compare-column__title {
@@ -96,6 +96,7 @@
       bottom: 60px;
       width: 40px;
       pointer-events: none;
+      transform: none;
     }
 
     .bypass-arrow svg {
@@ -148,8 +149,8 @@
       align-items: center;
       gap: 4px;
       padding: 2px 8px;
-      background: rgba(139,92,246,0.1);
-      border: 1px solid rgba(139,92,246,0.25);
+      background: var(--violet-10);
+      border: 1px solid var(--violet-25);
       border-radius: 999px;
       font-family: var(--font-mono);
       font-size: 10px;
@@ -202,6 +203,7 @@
 
     .bypass-arrow.is-visible {
       opacity: 1;
+      transform: none;
     }
 
     @media (max-width: 768px) {
@@ -268,7 +270,7 @@
         <div class="flow-arrow-down">&#8595;</div>
 
         <!-- Action + Embodiment badge -->
-        <div class="flow-node" style="border-left: 2px solid var(--accent-violet);">
+        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-violet);">
           <div class="flow-node__name">
             Action
             <span class="embodiment-badge">↳ E04 Embodiment</span>
@@ -279,7 +281,7 @@
         <div class="flow-arrow-down">&#8595;</div>
 
         <!-- Price (physical, immediate) -->
-        <div class="flow-node" style="border-left: 2px solid var(--accent-cyan);">
+        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-cyan);">
           <div class="flow-node__name">Price</div>
           <div class="flow-node__desc">Физическое, немедленное, внутри сцены последствие</div>
         </div>
@@ -302,7 +304,8 @@
 
         <!-- Bypass arrow (drawn via SVG) -->
         <div class="bypass-arrow scroll-enter" aria-label="Bypass arrow from Trigger to Price">
-          <svg viewBox="0 0 40 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg role="img" viewBox="0 0 40 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Bypass arrow</title>
             <path d="M8 15 C28 15, 32 60, 32 80 C32 95, 28 105, 8 105"
                   stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
             <path d="M8 100 L8 108 L14 104 Z" fill="var(--danger)"/>
@@ -329,7 +332,7 @@
         <div class="flow-arrow-down" style="opacity:0.3;">&#8595;</div>
 
         <!-- Price (deferred/abstract) -->
-        <div class="flow-node" style="border-left: 2px solid var(--accent-amber);">
+        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-amber);">
           <div class="flow-node__name">Price</div>
           <div class="flow-node__desc price-deferred">Абстрактный, отложенный — «пожалеет позже», нефизический</div>
         </div>
