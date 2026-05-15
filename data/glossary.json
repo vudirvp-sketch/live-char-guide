@@ -722,7 +722,7 @@
         "#p7a_core_directives",
         "#p4_spine_mapping"
       ],
-      "unified_definition": "Директива SP #4: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [MODEL_NOTE: Наибольший эффект на моделях ≥32B и API; на 12B эффект ограничен]"
+      "unified_definition": "Директива SP #4: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]"
     },
     {
       "term": "Pre-Generation Filter",
@@ -747,7 +747,7 @@
         "#p7a_core_directives",
         "#p7a_system_prompt"
       ],
-      "unified_definition": "CORE DIRECTIVE #5. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [MODEL_NOTE: Требует моделей ≥32B или API; 12B модели часто игнорируют эту директиву]"
+      "unified_definition": "CORE DIRECTIVE #5. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]"
     },
     {
       "term": "Identity Block",
