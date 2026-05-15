@@ -1,7 +1,7 @@
-# Visual Component Registry — Live Character Guide v8
+# Visual Component Registry — Live Character Guide v9.1
 
-> **Version:** 8.0.0
-> **Last Updated:** 2026-05-14
+> **Version:** 9.1.0
+> **Last Updated:** 2026-05-16
 > **Status:** Canonical Reference
 
 ---
@@ -35,6 +35,9 @@ This document defines the **complete set of CSS classes and HTML structures** av
 | `.callout.warn` | Warning/anti-pattern | Red/orange accent |
 | `.callout.tip` | Recommendation | Green accent |
 | `.callout.important` | Important note | Blue/cyan accent |
+| `.callout.rule` | Mandatory principle / rule | Solid red left border |
+| `.callout.rec` | Best practice / recommendation | Dashed amber left border |
+| `.callout.ex` | Illustrative example | Dotted blue left border |
 
 ### HTML Structure
 
@@ -79,6 +82,77 @@ This document defines the **complete set of CSS classes and HTML structures** av
 }
 ```
 
+### `.callout.rule` — Mandatory Principle
+
+Used for foundational rules that must be followed. Solid red left border signals importance.
+
+```html
+<div class="callout rule">
+  <p><strong>RULE:</strong> Every anchor must have a Price.</p>
+</div>
+```
+
+```css
+.callout.rule {
+  border-color: var(--color-error, #ef4444);
+  background: rgba(239, 68, 68, 0.06);
+}
+.callout.rule strong { color: #fca5a5; }
+```
+
+### `.callout.rec` — Best Practice / Recommendation
+
+Used for recommended practices. Dashed amber left border distinguishes from mandatory rules.
+
+```html
+<div class="callout rec">
+  <p><strong>RECOMMENDATION:</strong> Each Example should contain at least one physical reaction.</p>
+</div>
+```
+
+```css
+.callout.rec {
+  border-color: var(--color-warning, #f59e0b);
+  border-left-style: dashed;
+  background: rgba(245, 158, 11, 0.06);
+}
+.callout.rec strong { color: #fde047; }
+```
+
+### `.callout.ex` — Illustrative Example
+
+Used for inline examples that demonstrate a concept. Dotted blue left border.
+
+```html
+<div class="callout ex">
+  <p><strong>EXAMPLE:</strong> Decorative description vs action:</p>
+  <p><strong>WRONG:</strong> "The room was decorated with tapestries."</p>
+  <p><strong>CORRECT:</strong> "Elena ran her fingers along the bar — sticky."</p>
+</div>
+```
+
+```css
+.callout.ex {
+  border-color: var(--color-info, #06b6d4);
+  border-left-style: dotted;
+  background: rgba(6, 182, 212, 0.06);
+}
+.callout.ex strong { color: #67e8f9; }
+```
+
+### Light Theme Overrides
+
+All three new callout variants have light theme overrides:
+
+```css
+body.theme-light .callout.rule { background: rgba(239, 68, 68, 0.05); }
+body.theme-light .callout.rule strong { color: #dc2626; }
+body.theme-light .callout.rec { background: rgba(245, 158, 11, 0.05); }
+body.theme-light .callout.rec strong { color: #d97706; }
+body.theme-light .callout.ex { background: rgba(6, 182, 212, 0.05); }
+body.theme-light .callout.ex strong { color: #0891b2; }
+```
+
 ### BUG-3 Fix Note
 `.callout.important` was used in v5.12 HTML but not defined in CSS. v6 adds this definition.
 
@@ -95,7 +169,7 @@ This document defines the **complete set of CSS classes and HTML structures** av
 | `.tag.opt` | Optional | Blue background |
 | `.tag.risk` | Risky/Warning | Orange background |
 | `.tag.advanced` | Advanced | Purple background |
-| `.tag.core` | Core/Required | Dark background |
+| `.tag.core` | Core/Required | Red background with border |
 
 ### HTML Structure
 
@@ -122,7 +196,7 @@ This document defines the **complete set of CSS classes and HTML structures** av
 .tag.opt { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
 .tag.risk { background: rgba(249, 115, 22, 0.2); color: #f97316; }
 .tag.advanced { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
-.tag.core { background: rgba(100, 100, 100, 0.2); color: #888; }
+.tag.core { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
 ```
 
 ### BUG-6 Fix Note
@@ -495,4 +569,5 @@ If you need a new CSS class:
 
 ---
 
-*Document prepared for Live Character Guide v8 rebuild project*
+*Document prepared for Live Character Guide v9.1.0*
+*Updated 2026-05-16: Added .callout.rule, .callout.rec, .callout.ex; updated .tag.core styling; version bump to v9.1.0.*

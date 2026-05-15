@@ -1,6 +1,6 @@
 <!--
   Part 6: CoT Tiers (цепочка рассуждений)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v9.1 Master HTML
 
   Unified content: all layers merged
 -->
@@ -85,7 +85,7 @@
 <p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
 
 <h4>Синтаксис</h4>
-<div class="example-label stub">STUB</div>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[INTERNAL: {{GHOST-connection}}]
 {{внутренний процесс}}
 [/INTERNAL]
@@ -114,7 +114,7 @@
 <p>Tier 3 использует XML-структуру для полного описания внутреннего процесса.</p>
 
 <h4>Синтаксис</h4>
-<div class="example-label stub">STUB</div>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: {{триггер из сцены}}
@@ -180,6 +180,17 @@ resolution: отступить
 
 
 <p>Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
+
+<div class="part-resume">
+<h3>Что вы теперь умеете</h3>
+<ul>
+<li>Понимать 4 уровня CoT (Tier 0–3) и выбирать подходящий для модели</li>
+<li>Писать CoT Anchors: Триггер → [Внутренний процесс] → Реакция → Цена</li>
+<li>Ограничивать CoT до 2-3 Anchors на карточку (AP-10)</li>
+<li>Использовать XML-синтаксис processus_analysium для Tier 3</li>
+<li>Связывать CoT с GHOST-цепочкой персонажа</li>
+</ul>
+</div>
 
 </section>
 

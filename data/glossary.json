@@ -1,5 +1,5 @@
 {
-  "version": "9.0.0",
+  "version": "9.1.0",
   "canonical_terms": [
     {
       "term": "System Prompt",
@@ -92,9 +92,9 @@
         "первое сообщение"
       ],
       "note": "В заголовках и метках — всегда Greeting Message. В беглом тексте допустима краткая форма Greeting.",
-      "anchor_id": "p3_greeting",
+      "anchor_id": "p7b_greeting",
       "cross_refs": [
-        "#p3_greeting"
+        "#p7b_greeting"
       ],
       "unified_definition": "Определение, назначение, влияние на голос Диагностика: проверьте соответствие Examples vs Greeting Message"
     },
@@ -166,7 +166,7 @@
       "cross_refs": [
         "#p3_voice_isolation",
         "#p3_examples_rules",
-        "#p3_greeting"
+        "#p7b_greeting"
       ],
       "unified_definition": "Канонический термин для голоса персонажа. Определяется исключительно через Examples и Greeting Message, никогда через Description. Диагностика: если голос «плывёт», проверьте Voice Isolation и Voice Contamination"
     },
@@ -469,8 +469,7 @@
       ],
       "anchor_id": "p5_ocean_basics",
       "cross_refs": [
-        "#p5_ocean_basics",
-        "#p5_ocean_validator"
+        "#p5_ocean_basics"
       ],
       "unified_definition": "Определение, 5 измерений Диагностика: проверьте соответствие OCEAN поведению"
     },
@@ -710,7 +709,7 @@
         "управляемый последствиями",
         "consequences matter"
       ],
-      "definition": "Директива CORE DIRECTIVES #4: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском.",
+      "definition": "Директива CORE DIRECTIVES #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском.",
       "prohibited": [],
       "deprecated": [
         "Consequence driven",
@@ -722,7 +721,7 @@
         "#p7a_core_directives",
         "#p4_spine_mapping"
       ],
-      "unified_definition": "Директива SP #4: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]"
+      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]"
     },
     {
       "term": "Pre-Generation Filter",
@@ -735,7 +734,7 @@
         "предгенерационный фильтр",
         "pregen filter"
       ],
-      "definition": "CORE DIRECTIVE #5. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
+      "definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
       "prohibited": [],
       "deprecated": [
         "Pre-generation filter",
@@ -747,7 +746,7 @@
         "#p7a_core_directives",
         "#p7a_system_prompt"
       ],
-      "unified_definition": "CORE DIRECTIVE #5. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]"
+      "unified_definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]"
     },
     {
       "term": "Identity Block",
@@ -786,9 +785,9 @@
         "бюджет токенов",
         "token budget allocation"
       ],
-      "anchor_id": "p1_token_budget",
+      "anchor_id": "p7a_token_budget",
       "cross_refs": [
-        "#p1_token_budget",
+        "#p7a_token_budget",
         "#p7a_system_prompt"
       ],
       "unified_definition": "Распределение токенов контекстного окна по компонентам System Prompt. Контролирует, какая часть контекста выделена на каждый блок карточки. Диагностика: проверьте, что Identity Block + CORE DIRECTIVES не превышают 40% бюджета"
