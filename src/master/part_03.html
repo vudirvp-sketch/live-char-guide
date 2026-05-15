@@ -1,6 +1,6 @@
 <!--
   Part 3: Voice and Isolation (Голос и изоляция)
-  Live Character Guide v8.0.0 Master HTML
+  Live Character Guide v9 Master HTML
 
   v8: p3_tier_quality renamed to p3_examples_quality,
       explicit <START> tag requirement added
@@ -40,7 +40,7 @@
 </div>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Для 12B: Description = 0% влияния на голос. <a href="#p3_voice_isolation">Правило голоса</a>: стилистические директивы в Description — ошибка сборки. Токены, потраченные на голос в Description — потеряны или вредят.</p>
+<p><strong>RULE:</strong> Для 12B: Description = 0% влияния на голос. Правило голоса: стилистические директивы в Description — ошибка сборки. Токены, потраченные на голос в Description — потеряны или вредят.</p>
 </div>
 
 <div class="callout ex">
@@ -55,14 +55,14 @@ Example:
 Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
 </div>
 
-<p>Голос — только первый шаг. Далее — правила написания Examples и Greeting: <a href="#p3_examples_rules">Examples и Greeting</a></p>
+<p>Голос — только первый шаг. Далее — правила написания Examples и Greeting.</p>
 
 </section>
 
 <section  data-section="p3_examples_rules" data-toc-nav>
 <h3>Правила написания Examples</h3>
 
-<p>Правила Examples определяют, как модель считывает голос персонажа из диалоговых примеров.</p>
+<p>Правила Examples определяют, как модель считывает Voice из диалоговых примеров.</p>
 
 <div class="callout rule">
 <p><strong>RULE:</strong> Заражение голоса (Voice Contamination): Никогда не копируйте Examples из чужих карточек. Чужой ритм и разметка ломают голос на 12B. Каждый <code>&lt;START&gt;</code>-блок пишите с нуля под вашего персонажа.</p>
@@ -91,7 +91,7 @@ Example:
 </ul>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Тег &lt;START&gt; обязателен для каждого Example. Это маркер начала нового диалогового блока. Без него модель не распознаёт границы паттернов и может смешивать разные Examples — голос персонажа дрейфует, а паттерны из одного Example «утекают» в другой.</p>
+<p><strong>RULE:</strong> Тег &lt;START&gt; обязателен для каждого Example. Это маркер начала нового диалогового блока. Без него модель не распознаёт границы паттернов и может смешивать разные Examples — Voice дрейфует, а паттерны из одного Example «утекают» в другой.</p>
 </div>
 
 <h4>Формат Examples</h4>
@@ -150,59 +150,9 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 </section>
 
 <section  data-section="p3_greeting" data-toc-nav>
-<h3>Greeting Message (первое сообщение)</h3>
+<h3>Greeting Message</h3>
 
-<p><strong>Greeting</strong> — начальное сообщение персонажа. Задаёт место, время и тон.</p>
-
-<div class="infographic">
-<div class="infographic-title">Алгоритм Greeting</div>
-<div class="inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">SENSORY ANCHOR</div>
-<div class="inf-step-desc">Пред-настройка восприятия персонажа</div>
-<div class="inf-step-code">Запах → Звук → Ощущение</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">ТЕЛО FLAW</div>
-<div class="inf-step-desc">Физическое проявление через FLAW</div>
-<div class="inf-step-code">Поза → Напряжение → Привычка</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">РЕПЛИКА</div>
-<div class="inf-step-desc">Первая фраза персонажа</div>
-<div class="inf-step-code">Голос → Тон → Лексика</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">КРЮЧОК</div>
-<div class="inf-step-desc">Вовлечение {{user}} в сцену</div>
-<div class="inf-step-code">Открытый вопрос → Действие → Провокация</div>
-</div>
-</div>
-</div>
-
-<p><strong>Sensory Anchor</strong> (Sensory Anchor) — приём пред-настройки восприятия: персонаж уже в состоянии до первого слова. Пример: Елена за барной стойкой слышит звон бокалов и чувствует запах виски — прежде чем произнести реплику.</p>
-
-<details class="interactive">
-<summary>📝 Разобранный пример: Greeting Елены</summary>
-<div class="example-label illustration">ILLUSTRATION</div>
-<!-- Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL -->
-<pre><code>[ШАГ 1: SENSORY ANCHOR] *Звон бокалов. Запах виски и усталости.*
-[ШАГ 2: ТЕЛО FLAW] *Она сидит за стойкой, пальцы машинально крутят салфетку — привычка, выдающая напряжение.*
-[ШАГ 3: РЕПЛИКА] «Заказывай или уходи. Я не в настроении.»
-[ШАГ 4: КРЮЧОК] *Пауза. Взгляд скользит по твоему лицу.* «Хотя... ты не похож на остальных.»</code></pre>
-</details>
-
-<h4>Правила Greeting</h4>
-<ul>
-<li>Длина: <strong>50-100 токенов</strong></li>
-<li>Тот же стиль разметки, что в Examples</li>
-<li>Не начинайте с вопроса о том, что хочет пользователь</li>
-<li>Задайте место, но не сюжет</li>
-</ul>
+<p><strong>Greeting Message</strong> — начальное сообщение персонажа. Задаёт место, время и тон. Полный алгоритм написания Greeting (Sensory Anchor → тело FLAW → реплика → крючок), пример Елены и правила длины → <a href="#p7b_greeting">Part 7B: Greeting Message</a></p>
 
 </section>
 
@@ -273,12 +223,12 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 <p>Некоторые персонажи сопротивляются описанию голоса. Это не слабость карточки — это свойство архетипа. Хаотичные, непредсказуемые персонажи, чей голос = ритм + парадокс + непредсказуемость, не описываются прилагательными — «нестабильный» описывает тысячу персонажей.</p>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Если вы не можете описать голос персонажа в 3-4 Voice-маркерах — не описывайте его. Демонстрируйте исключительно через Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности — но только из примеров.</p>
+<p><strong>RULE:</strong> Если вы не можете описать Voice в 3-4 Voice-маркерах — не описывайте его. Демонстрируйте исключительно через Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности — но только из примеров.</p>
 </div>
 
 <p>Практический тест: если после трёх попыток описать голос маркерами каждый маркер описывает ещё хотя бы 100 других персонажей — переходите к чистой демонстрации. Examples становятся единственным носителем голоса, а Description содержит только факты.</p>
 
-<p>Мульти-персонажное взаимодействие и продвинутые техники голоса → <a href="#p3_multi_char">Мульти-персонажные примеры</a></p>
+<p>Мульти-персонажное взаимодействие и продвинутые техники голоса → Мульти-персонажные примеры (ниже).</p>
 
 </section>
 
@@ -345,8 +295,6 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 Выщербленный: *резко оборачивается, голос падает до формального шёпота* "Йоуёма."
 *пауза, в которой он забывает, что хотел сказать*
 "Не приближайся. Это... не рекомендуется."</code></pre>
-
-<p>Подробнее об анти-паттерне Voice Bleed: <a href="#p8_ap11_voice_bleed">Part 8: AP-11</a></p>
 
 <p class="bridge-paragraph">Якоря и Voice (голос) управляют поверхностным поведением. Но поверхностное поведение без психологической глубины создаёт неконсистентных персонажей — добрых в одной сцене, жестоких в следующей, без внутренней логики. SPINE предоставляет эту логику: причинную цепочку от формирующей травмы к текущему желанию. → <a href="#p4_spine_overview">Part 4</a></p>
 

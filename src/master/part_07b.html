@@ -25,6 +25,62 @@
 ]</code></pre>
 
 </section>
+<section  data-section="p7b_greeting" data-toc-nav>
+<h3>Greeting Message (первое сообщение)</h3>
+
+<p><strong>Greeting Message</strong> — начальное сообщение персонажа. Задаёт место, время и тон.</p>
+
+<div class="infographic">
+<div class="infographic-title">Алгоритм Greeting</div>
+<div class="inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">01</div>
+<div class="inf-step-label">SENSORY ANCHOR</div>
+<div class="inf-step-desc">Пред-настройка восприятия персонажа</div>
+<div class="inf-step-code">Запах → Звук → Ощущение</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">02</div>
+<div class="inf-step-label">ТЕЛО FLAW</div>
+<div class="inf-step-desc">Физическое проявление через FLAW</div>
+<div class="inf-step-code">Поза → Напряжение → Привычка</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">03</div>
+<div class="inf-step-label">РЕПЛИКА</div>
+<div class="inf-step-desc">Первая фраза персонажа</div>
+<div class="inf-step-code">Голос → Тон → Лексика</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">04</div>
+<div class="inf-step-label">КРЮЧОК</div>
+<div class="inf-step-desc">Вовлечение {{user}} в сцену</div>
+<div class="inf-step-code">Открытый вопрос → Действие → Провокация</div>
+</div>
+</div>
+</div>
+
+<p><strong>Sensory Anchor</strong> (Sensory Anchor) — приём пред-настройки восприятия: персонаж уже в состоянии до первого слова. Пример: Елена за барной стойкой слышит звон бокалов и чувствует запах виски — прежде чем произнести реплику.</p>
+
+<details class="interactive">
+<summary>📝 Разобранный пример: Greeting Елены</summary>
+<div class="example-label illustration">ILLUSTRATION</div>
+<!-- Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL -->
+<pre><code>[ШАГ 1: SENSORY ANCHOR] *Звон бокалов. Запах виски и усталости.*
+[ШАГ 2: ТЕЛО FLAW] *Она сидит за стойкой, пальцы машинально крутят салфетку — привычка, выдающая напряжение.*
+[ШАГ 3: РЕПЛИКА] «Заказывай или уходи. Я не в настроении.»
+[ШАГ 4: КРЮЧОК] *Пауза. Взгляд скользит по твоему лицу.* «Хотя... ты не похож на остальных.»</code></pre>
+</details>
+
+<h4>Правила Greeting</h4>
+<ul>
+<li>Длина: <strong>50-100 токенов</strong></li>
+<li>Тот же стиль разметки, что в Examples</li>
+<li>Не начинайте с вопроса о том, что хочет пользователь</li>
+<li>Задайте место, но не сюжет</li>
+</ul>
+
+</section>
 <section  data-section="p7b_lorebook_basics" data-toc-nav>
 <h3>Lorebook (база знаний)</h3>
 
@@ -157,7 +213,7 @@
 </div>
 
 <div class="callout rule">
-<p><strong>RULE: Ограничение:</strong> Никогда не вставляйте действия или мысли <code>{{user}}</code> в поле <code>content</code>. Это не техническое ограничение, а принцип Anti-godmoding (анти-годмодинга). Подробнее → <a href="#p1_core_rules">Правила</a>.</p>
+<p><strong>RULE: Ограничение:</strong> Никогда не вставляйте действия или мысли <code>{{user}}</code> в поле <code>content</code>. Это не техническое ограничение, а принцип Anti-godmoding (анти-годмодинга).</p>
 </div>
 
 <h4>Таблица механик</h4>
@@ -222,7 +278,7 @@
 &lt;/instruction&gt;</code></pre>
 </details>
 
-<p>Продвинутые механики (эмуляция усталости, мета-лор, ложная память) → <a href="#p7b_lorebook_advanced">Продвинутые механики Lorebook</a></p>
+<p>Продвинутые механики (эмуляция усталости, мета-лор, ложная память) → Продвинутые механики Lorebook (ниже)</p>
 
 <div class="callout rec">
 <p><strong>RECOMMENDATION: Механики Lorebook особенно полезны для GHOST-связанных триггеров.</strong> GHOST-факты (события прошлого) могут активироваться через комбинированный триггер и каскад по диапазону, создавая динамическое поведение.</p>
@@ -297,12 +353,7 @@
 </ul>
 </details>
 
-<h4>Кросс-ссылки</h4>
-<ul>
-<li><strong>Author's Note (AN):</strong> Для длинных сессий комбинируйте AN с каскадом по диапазону + sticky-состояниями → <a href="#p7a_authors_note">Author's Note</a>.</li>
-<li><strong>Структурированная инъекция (Structured Inject):</strong> Использует ту же логику тегов внутри content-полей Lorebook → <a href="#p7b_structured_inject">Structured Inject</a>.</li>
-<li><strong>GHOST Anchors:</strong> Эмуляция усталости <strong>не сохраняет</strong> Anchors автоматически — пересказывайте явно (see → Part 4: GHOST).</li>
-</ul>
+
 
 <p>Карточка собрана. Перед тестированием научитесь распознавать наиболее частые ошибки — паттерны, которые выглядят корректно, но незаметно ломают консистентность персонажа. Каждый анти-паттерн содержит диагностику и ссылку на каноническое исправление. → <a href="#p8_antipatterns_overview">Part 8</a></p>
 

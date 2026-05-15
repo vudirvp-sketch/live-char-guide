@@ -53,7 +53,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Иерархия влияния | Part 3 | p3_influence_hierarchy | Reference | Порядок: SP > Description > Examples > Greeting. How different blocks affect voice |
 | Правила Examples | Part 3 | p3_examples_rules | Rules | Как писать Examples. Structural rules and formatting |
 | Качество Examples | Part 3 | p3_examples_quality | Classification | Quality tiers for Examples. What separates good examples from bad |
-| Greeting | Part 3 | p3_greeting | Structure | Сцена→Действие→Реплика. Greeting as voice anchor |
+| Greeting | Part 7B | p7b_greeting | Structure | Moved to Part 7B in v9. Сцена→Действие→Реплика. Greeting as voice anchor |
 | Voice Leak (утечка голоса) | Part 3 | p3_voice_leak | Anti-pattern | Выщербленный — пример ошибки. Detecting and fixing voice bleed. Updated in Phase 4 |
 | Крайний случай: голос без описания | Part 3 | p3_joker_case | Extreme example | Голос невозможно описать — только воспроизвести. General principle (rewritten from Джокер in Phase 4) |
 | Мульти-персонажные примеры | Part 3 | p3_multi_char | Rules+Examples | Выщербленный + Йоуёма. Voice Bleed, Character Markers in multi-character contexts. Updated in Phase 4 |
@@ -124,6 +124,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Lorebook Mechanics | Part 7B | p7b_lorebook_mechanics | Full treatment | Split from Part 7 in Phase 2.1 |
 | Lorebook Advanced | Part 7B | p7b_lorebook_advanced | Full treatment | Split from Part 7 in Phase 2.1 |
 | Structured Inject | Part 7B | p7b_structured_inject | Technique | Split from Part 7 in Phase 2.1 |
+| Greeting Message | Part 7B | p7b_greeting | Structure+Rules | Moved from Part 3 in v9. Сцена→Действие→Реплика. Greeting algorithm: Sensory Anchor → тело FLAW → реплика → крючок. Elena example + length rules |
 
 ### Part 8: Anti-patterns (Анти-паттерны)
 
@@ -206,7 +207,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 5 | Psychology Toolkit | 8 (added p5_elena_profile in Phase 4) |
 | Part 6 | CoT | 6 |
 | Part 7A | System Prompt & Assembly | 12 |
-| Part 7B | Lorebook, Greeting & Compatibility | 4 |
+| Part 7B | Lorebook, Greeting & Compatibility | 5 |
 | Part 8 | Anti-patterns | 15 (removed AP-15, renumbered AP-16→AP-15) |
 | Part 9 | Diagnostics | 11 |
 | Part 10 | Full Card Examples | 6 |

@@ -34,7 +34,6 @@
         "p3_influence_hierarchy",
         "p3_examples_rules",
         "p3_examples_quality",
-        "p3_greeting",
         "p3_voice_leak",
         "p3_joker_case",
         "p3_multi_char"
@@ -106,6 +105,7 @@
       "title": "Part 07b",
       "anchors": [
         "p7b_structured_inject",
+        "p7b_greeting",
         "p7b_lorebook_basics",
         "p7b_lorebook_mechanics",
         "p7b_lorebook_advanced"
