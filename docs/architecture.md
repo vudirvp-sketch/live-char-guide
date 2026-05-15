@@ -1,14 +1,14 @@
 # Live Character Guide Architecture
 
-> **Version:** 8.0.0
-> **Last Updated:** 2026-05-14
-> **Status:** v8.0.0 — Unified single-pass guide (no layer system)
+> **Version:** 9.1.0
+> **Last Updated:** 2026-05-15
+> **Status:** v9.1.0 — Unified single-pass guide (no layer system)
 
 ---
 
 ## How the Repository Works
 
-Live Character Guide v8 follows a **single-stage build pipeline** that transforms master HTML files into a unified reading experience. All content is presented in a single linear pass from Part 1 to Part 10 — there are no layers, tiers, or depth levels.
+Live Character Guide v9 follows a **single-stage build pipeline** that transforms master HTML files into a unified reading experience. All content is presented in a single linear pass from Part 1 to Part 10 — there are no layers, tiers, or depth levels.
 
 ### High-Level Flow
 
@@ -56,7 +56,7 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files (92 sections in v8) | Authors writing Parts |
+| `src/master/` | Author | Master guide HTML files (95 sections in v9.1) | Authors writing Parts |
 | `src/shell/` | Infrastructure | HTML/CSS/JS shell (loader, styles, panels) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
 | `docs/` | Author | Documentation (not included in build) | Authors |
@@ -330,7 +330,7 @@ live-char-guide/
 
 ## v7 → v8 Migration
 
-v8 is a **unified restructuring** of v7, which mechanically merged L1/L2/L3 layers without eliminating their structural remnants.
+v9 continues the **unified restructuring** of v8, eliminating remaining structural remnants from the old layer system. v9.1 specifically addresses: dual assembly pipeline (FIX-01), token budget misplacement (FIX-02), CORE DIRECTIVES numbering conflict (FIX-03), content duplication ~25-30% (FIX-04), and other issues detailed in the restructure plan.
 
 Key changes:
 
@@ -352,4 +352,4 @@ See `docs/transition_guide.md` for a detailed migration guide for v7 users.
 
 ---
 
-*Document prepared for Live Character Guide v8.0.0*
+*Document prepared for Live Character Guide v9.1.0*

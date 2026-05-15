@@ -1,19 +1,21 @@
-# Cross-Reference Synchronization — Live Character Guide v8
+# Cross-Reference Synchronization — Live Character Guide v9.1
 
-> **Version:** 8.0.0
-> **Date:** 2026-05-14
-> **Status:** v8 Anchor-Only Cross-Reference Registry
-> **Source:** content-restoration-implementation-plan-v2.1.md §13.0, §13.2, §14
+> **Version:** 9.1.0
+> **Date:** 2026-05-15
+> **Status:** v9.1 Restructure Cross-Reference Registry
 
 ---
 
-> **⚠️ v8 Breaking Change — `data-layer-switch` Pairs Removed**
+> **⚠️ v9.1 Restructure Changes**
 >
-> In v8, the multi-layer system (`data-layer-switch` / `data-layer` attributes) has been
-> removed entirely. All cross-reference pairs that relied on `data-layer-switch` for
-> navigation have been deleted from this registry. Only anchor-based cross-references
-> (`href="#..."`) are tracked going forward. Approximately 40 `data-layer-switch` pairs
-> were removed; see git history for the v6/v7 version of this document if needed.
+> In v9.1, the following structural changes affect cross-references:
+> - `p1_assembly_pipeline` DELETED → replaced by `p1_pipeline_ref` (forward ref to Part 7A)
+> - `p1_token_budget` MOVED → now `p7a_token_budget` in Part 7A, replaced by `p1_token_budget_ref` in Part 1
+> - `p10_geralt` DELETED
+> - `p10_edward` DELETED
+> - New sections: `p1_value_proposition`, `p7a_token_budget`
+> - All cross-references to `#p1_token_budget` updated to `#p7a_token_budget`
+> - All cross-references to `#p1_assembly_pipeline` removed
 
 ---
 
@@ -41,6 +43,10 @@ section B MUST reference back to A. Unidirectional references create orphan know
 | 10 | p9_additional_problems | p1_top3_problems | `href="#p1_top3_problems"` | ✅ p9_additional_problems references p1_top3_problems via back-link |
 | 11 | p10_elena_l1 | p2_anchor_examples | `href="#p2_anchor_examples"` | ✅ p10_elena_l1 references p2_anchor_examples via back-link |
 
+| 12 | p1_token_budget_ref | p7a_token_budget | `href="#p7a_token_budget"` | ✅ Forward reference only — canonical content now in Part 7A |
+| 13 | p1_pipeline_ref | p7a_assembly_pipeline | `href="#p7a_assembly_pipeline"` | ✅ Forward reference only — pipeline is in Part 7A |
+| 14 | p1_value_proposition | p1_card_overview | Internal sub-section | ✅ Value prop is sub-section of card overview |
+
 ---
 
 ## Validation
@@ -49,12 +55,8 @@ section B MUST reference back to A. Unidirectional references create orphan know
 - [x] No ❌ items remain
 - [x] All `href` targets resolve to existing sections
 - [x] No `data-layer-switch` references remain (removed in v8)
+- [x] No references to deleted sections (p1_assembly_pipeline, p10_geralt, p10_edward)
 
 ---
 
-*Document prepared for Live Character Guide v8*
-*Created: 2026-04-21 (Remediation R-05)*
-*Updated: 2026-04-23 (Lorebook Enhancement — added pairs 16-21, fixed checklist and cross-refs)*
-*Updated: 2026-04-24 (Terminology dedup: verified p5↔p8 cross-refs, added pairs 25-26)*
-*Updated: 2026-04-27 (v6.2.3: actually implemented pairs #33-35 in master HTML, fixed validation errors)*
-*Updated: 2026-05-14 (v8.0.0: removed all data-layer-switch pairs, applied section ID renames, anchor-only registry)*
+*Updated 2026-05-15: v9.1.0 — Restructure cross-references updated. Deleted p1_assembly_pipeline, moved p1_token_budget to p7a_token_budget, deleted p10_geralt and p10_edward, added p1_value_proposition and p1_pipeline_ref.*

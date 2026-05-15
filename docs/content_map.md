@@ -1,8 +1,8 @@
-# Content Ownership Map — Live Character Guide v9
+# Content Ownership Map — Live Character Guide v9.1
 
-> **Version:** 9.0.0
+> **Version:** 9.1.0
 > **Last Updated:** 2026-05-15
-> **Status:** Canonical Reference (v9 restructure — Phases 2–3)
+> **Status:** Canonical Reference (v9.1 restructure)
 
 ---
 
@@ -27,12 +27,13 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
-| Карточка персонажа | Part 1 | p1_card_overview | Definition | 4 блока карточки: SP, Description, Examples, Greeting. Overview of card structure and block purposes |
-| Структура гайда (диаграмма + TOC) | Part 1 | p1_structure_overview | Navigation | Mermaid concept relationship diagram + Table of Contents. Added in Phase 9 |
-| Core Rules (4 базовых правила) | Part 1 | p1_core_rules | Rules | 4 foundational rules of character creation. GHOST inline definition. Перенесено из glossary.json → Part 1 |
-| Токен-бюджет | Part 1 | p1_token_budget | Reference | Token pipeline and per-block limits. 2 subsections: конвейер сборки + лимиты по блокам |
-| Конвейер сборки карточки | Part 1 | p1_assembly_pipeline | Pipeline | Step-by-step card assembly pipeline with mini-example embedded at step 06 |
-| Топ-3 критичные ошибки | Part 1 | p1_top3_problems | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после. Не дублирует p9_additional_problems |
+| Зачем системный подход? | Part 1 | p1_value_proposition | Value Prop | Added in v9.1. Comparison table: Classic vs Systematic approach |
+| Карточка персонажа | Part 1 | p1_card_overview | Definition | 4 блока карточки: SP, Description, Examples, Greeting |
+| Структура гайда (диаграмма + TOC) | Part 1 | p1_structure_overview | Navigation | Mermaid concept relationship diagram + Table of Contents |
+| Core Rules (3 ключевых принципа) | Part 1 | p1_core_rules | Rules | 3 foundational rules of character creation |
+| Token Budget (ссылка) | Part 1 | p1_token_budget_ref | Reference | 2-sentence reference with link to Part 7A. Moved from p1_token_budget in v9.1 |
+| Конвейер сборки (ссылка) | Part 1 | p1_pipeline_ref | Reference | 1-sentence forward reference to Part 7A. Replaced p1_assembly_pipeline in v9.1 |
+| Топ-3 критичные ошибки | Part 1 | p1_top3_problems | Detailed problems | Подробный разбор 3 ошибок: симптом→причина→исправление→до/после |
 
 ### Part 2: Behavioral Anchors (Якоря)
 
@@ -105,6 +106,7 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|---------------|-----------------|--------------|-------|
 | System Prompt (SP) | Part 7A | p7a_system_prompt | Template+Rules | Split from Part 7 in Phase 2.1 |
 | CORE DIRECTIVES | Part 7A | p7a_core_directives | System | Split from Part 7 in Phase 2.1 |
+| Token Budget | Part 7A | p7a_token_budget | Reference | Moved from Part 1 (p1_token_budget) in v9.1. Per-block limits + calculator |
 | Tone Frame | Part 7A | p7a_tone_frame | Technique | Split from Part 7 in Phase 2.1 |
 | Format Lock | Part 7A | p7a_format_lock | Rule | Split from Part 7 in Phase 2.1 |
 | Author's Note (AN) | Part 7A | p7a_authors_note | Template+Rules | Split from Part 7 in Phase 2.1 |
@@ -167,12 +169,10 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
-| Елена | Part 10 | p10_elena | Complete card | Минимальная карточка → full card progression. От базовой карточки до SPINE. Includes Voice Warning callout |
-| Геральт | Part 10 | p10_geralt | Complete card | WANT/NEED/FLAW. Witcher character with clear SPINE structure |
-| Эдвард Элрик | Part 10 | p10_edward | Complete card | Кристально ясный СПИН. WANT/NEED/FLAW. Classic shonen protagonist |
-| Уолтер Уайт | Part 10 | p10_walter | Complete card | Realistic modern character, WANT/NEED/FLAW. Multi-character voice isolation example |
-| Омнис-Зета 7-Квин | Part 10 | p10_omnis | Complete card | Тех-Жрец, Адептус Механикус. Full progression: basic → SPINE + OCEAN + FLAW-linked anchors → GHOST Layers + CoT + XML |
-| Выщербленный | Part 10 | p10_vysherblenny | Complete card | GHOST Layers + CoT + XML (~1500+ токенов). Most advanced example card |
+| Елена | Part 10 | p10_elena | Complete card | Минимальная карточка → full card progression. WANT at rest in Greeting |
+| Уолтер Уайт | Part 10 | p10_walter | Complete card | Realistic modern character, full SPINE (5 elements incl. LIE+GHOST added in v9.1). WANT at rest in Greeting |
+| Омнис-Зета 7-Квин | Part 10 | p10_omnis | Complete card | Тех-Жрец, Адептус Механикус. Full progression. CORE_DIRECTIVES replaced with link to Part 7A in v9.1 |
+| Выщербленный | Part 10 | p10_vysherblenny | Complete card | GHOST Layers + CoT + XML. CORE_DIRECTIVES replaced with link to Part 7A in v9.1. WANT at rest in Greeting |
 
 ---
 
@@ -200,21 +200,21 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | Title | Sections |
 |------|-------|----------|
-| Part 1 | Basic Blocks | 6 (added p1_structure_overview in Phase 9) |
+| Part 1 | Basic Blocks | 7 (added p1_value_proposition, replaced p1_token_budget→p1_token_budget_ref, replaced p1_assembly_pipeline→p1_pipeline_ref) |
 | Part 2 | Behavioral Anchors | 6 |
 | Part 3 | Voice and Isolation | 8 |
-| Part 4 | SPINE Framework | 11 |
-| Part 5 | Psychology Toolkit | 8 (added p5_elena_profile in Phase 4) |
+| Part 4 | SPINE Framework | 11 (GHOST Layers moved to end after p4_spine_navigation) |
+| Part 5 | Psychology Toolkit | 8 |
 | Part 6 | CoT | 6 |
-| Part 7A | System Prompt & Assembly | 12 |
+| Part 7A | System Prompt & Assembly | 13 (added p7a_token_budget) |
 | Part 7B | Lorebook, Greeting & Compatibility | 5 |
-| Part 8 | Anti-patterns | 15 (removed AP-15, renumbered AP-16→AP-15) |
+| Part 8 | Anti-patterns | 15 |
 | Part 9 | Diagnostics | 11 |
-| Part 10 | Full Card Examples | 6 |
+| Part 10 | Full Card Examples | 4 (deleted p10_geralt, p10_edward) |
 | Appendix A | MBTI Reference | 1 |
 | Appendix B | Model Capability Table | 1 |
 | Appendix C | Glossary | 1 |
-| **Total** | | **96** |
+| **Total** | | **95** |
 
 ---
 
@@ -272,4 +272,4 @@ Before finalizing any Part, verify:
 ---
 
 *Document prepared for Live Character Guide v9 rebuild project*
-*Updated 2026-05-15: v9.0.0 — Phases 2–9 restructure complete. Part 7 split into 7A/7B, MBTI moved to Appendix A, AP-15 OCEAN Overload moved to Part 5, AP-16 renumbered to AP-15, Appendix B (Model Capability Table) and Appendix C (Glossary) added, concept diagram and TOC added to Part 1, cross-reference cleanup and callout unification done. 96 sections across 10 parts + 3 appendices.*
+*Updated 2026-05-15: v9.1.0 — Restructure per FIX-01 through FIX-16. Deleted p1_assembly_pipeline (dual pipeline eliminated), moved Token Budget to Part 7A (p7a_token_budget), fixed CORE DIRECTIVES numbering in glossary, deleted p10_geralt and p10_edward, added LIE+GHOST to Walter White, rewrote Greetings to show WANT at rest, moved GHOST Layers to end of Part 4, fixed Part 4→5 bridge paragraph, added p1_value_proposition, added SPINE Mermaid diagram and Voice degradation table, deduplicated content across Parts. 95 sections across 10 parts + 3 appendices.*

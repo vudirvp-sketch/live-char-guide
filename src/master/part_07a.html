@@ -505,10 +505,77 @@ Anchors:
 </div>
 
 </section>
+<section  data-section="p7a_token_budget" data-toc-nav>
+<h3>Token Budget</h3>
+
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → Appendix B: Model Capability Table.</p>
+
+<h4>Лимиты по блокам</h4>
+
+<p>Каждый блок имеет три уровня бюджета: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста. Зелёный = компактно и эффективно, жёлтый = стандартный баланс, красный = риск раздувания — эти обозначения отражают влияние на общее качество, а не уровень сложности.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td>System Prompt</td><td>50</td><td>100</td><td>200</td><td>Больше = не лучше</td></tr>
+<tr><td>Description</td><td>150</td><td>300</td><td>700</td><td>Растёт с детализацией персонажа</td></tr>
+<tr><td>Examples (каждый)</td><td>40</td><td>60</td><td>80</td><td>2 базовых, 3 с FLAW, 3–5 с CoT</td></tr>
+<tr><td>Greeting</td><td>40</td><td>60</td><td>100</td><td>Не раздувайте</td></tr>
+<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>T→A→P, компактно</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
+</div>
+
+<h4>Калькулятор Token Budget</h4>
+
+<div class="token-calc" id="token-calc" data-toc-exclude>
+<div class="token-calc-inputs">
+<div class="token-calc-row">
+<label class="token-calc-label">System Prompt</label>
+<input type="range" min="50" max="500" value="80" id="calc-sp" class="token-calc-range">
+<span class="token-calc-val" id="calc-sp-val">80</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Description</label>
+<input type="range" min="100" max="1000" value="200" id="calc-desc" class="token-calc-range">
+<span class="token-calc-val" id="calc-desc-val">200</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Examples</label>
+<input type="range" min="100" max="800" value="90" id="calc-ex" class="token-calc-range">
+<span class="token-calc-val" id="calc-ex-val">90</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Якоря</label>
+<input type="range" min="0" max="400" value="50" id="calc-anc" class="token-calc-range">
+<span class="token-calc-val" id="calc-anc-val">50</span>
+</div>
+</div>
+<div class="token-calc-result">
+<span>Итого: <strong id="calc-total">420</strong> токенов</span>
+<span class="tag" id="calc-budget-range">(400–800)</span>
+</div>
+<noscript>
+<p class="callout rec"><strong>RECOMMENDATION:</strong> Для интерактивного калькулятора включите JavaScript.</p>
+</noscript>
+</div>
+
+<pre class="plain-copy">Калькулятор токенов (пример):
+SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
+Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
+
+</section>
 <section  data-section="p7a_assembly_pipeline" data-toc-nav>
 <h3>Полный конвейер сборки карточки — walkthrough на примере Елены</h3>
 
-<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p1_token_budget">Part 1: Token Budget (бюджет токенов)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
+<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p7a_token_budget">Token Budget (выше)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
 
 <div class="example-label illustration">ILLUSTRATION</div>
 

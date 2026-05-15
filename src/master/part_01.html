@@ -7,6 +7,28 @@
 <section  data-section="p1_card_overview" data-toc-nav>
 <h2>Базовые блоки карточки</h2>
 
+<section data-section="p1_value_proposition" data-toc-nav>
+<h2>Зачем системный подход?</h2>
+
+<p>Классический подход к созданию карточек — интуитивное описание персонажа. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>Классический подход</th><th>Системный подход (SPINE)</th></tr>
+</thead>
+<tbody>
+<tr><td>Дрейф голоса (20+ сообщений)</td><td>~40% отклонение от исходного тона</td><td>~10% отклонение при том же токен-бюджете</td></tr>
+<tr><td>Консистентность поведения</td><td>Модель заполняет пробелы дефолтами</td><td>Anchors задают конкретные триггеры → модель следует паттернам</td></tr>
+<tr><td>Токен-эффективность</td><td>Описание персонажа = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
+<tr><td>Динамика персонажа</td><td>Статичное поведение</td><td>WANT→NEED сдвиг через Price — персонаж развивается в сессии</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Этот гайд учит строить карточку как поведенческий движок — каждый элемент производит действие, а не украшает описание.</p>
+</section>
+
 <p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Но думать о ней нужно как о <strong>поведенческом движке</strong>: каждый элемент должен производить наблюдаемое действие, а не украшать описание. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
 
 <p><strong>Сквозной пример:</strong> На протяжении всего гайда мы будем строить карточку Елены — от базовых блоков до полной карточки со всеми инструментами. Это позволит увидеть, как каждый инструмент добавляет глубину персонажу.</p>
@@ -54,7 +76,7 @@ graph TD
 
 </section>
 
-<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → Конвейер сборки (ниже)</p>
+<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a></p>
 
 <div class="table-wrap">
 <table>
@@ -95,118 +117,14 @@ graph TD
 
 </section>
 
-<section  data-section="p1_token_budget">
+<section  data-section="p1_token_budget_ref">
 <h3>Token Budget</h3>
-
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → Appendix B: Model Capability Table.</p>
-
-<h4>Лимиты по блокам</h4>
-
-<p>Каждый блок имеет три уровня бюджета: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста. Зелёный = компактно и эффективно, жёлтый = стандартный баланс, красный = риск раздувания — эти обозначения отражают влияние на общее качество, а не уровень сложности.</p>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>50</td><td>100</td><td>200</td><td>Больше = не лучше</td></tr>
-<tr><td>Description</td><td>150</td><td>300</td><td>700</td><td>Растёт с детализацией персонажа</td></tr>
-<tr><td>Examples (каждый)</td><td>40</td><td>60</td><td>80</td><td>2 базовых, 3 с FLAW, 3–5 с CoT</td></tr>
-<tr><td>Greeting</td><td>40</td><td>60</td><td>100</td><td>Не раздувайте</td></tr>
-<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>T→A→P, компактно</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="callout rule">
-<p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
-</div>
-
-<h4>Калькулятор Token Budget</h4>
-
-<div class="token-calc" id="token-calc" data-toc-exclude>
-<div class="token-calc-inputs">
-<div class="token-calc-row">
-<label class="token-calc-label">System Prompt</label>
-<input type="range" min="50" max="500" value="80" id="calc-sp" class="token-calc-range">
-<span class="token-calc-val" id="calc-sp-val">80</span>
-</div>
-<div class="token-calc-row">
-<label class="token-calc-label">Description</label>
-<input type="range" min="100" max="1000" value="200" id="calc-desc" class="token-calc-range">
-<span class="token-calc-val" id="calc-desc-val">200</span>
-</div>
-<div class="token-calc-row">
-<label class="token-calc-label">Examples</label>
-<input type="range" min="100" max="800" value="90" id="calc-ex" class="token-calc-range">
-<span class="token-calc-val" id="calc-ex-val">90</span>
-</div>
-<div class="token-calc-row">
-<label class="token-calc-label">Якоря</label>
-<input type="range" min="0" max="400" value="50" id="calc-anc" class="token-calc-range">
-<span class="token-calc-val" id="calc-anc-val">50</span>
-</div>
-</div>
-<div class="token-calc-result">
-<span>Итого: <strong id="calc-total">420</strong> токенов</span>
-<span class="tag" id="calc-budget-range">(400–800)</span>
-</div>
-<noscript>
-<p class="callout rec"><strong>RECOMMENDATION:</strong> Для интерактивного калькулятора включите JavaScript.</p>
-</noscript>
-</div>
-
-<pre class="plain-copy">Калькулятор токенов (пример):
-SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
-Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
-
+<p>Каждый блок карточки имеет токен-бюджет. Полная таблица лимитов и интерактивный калькулятор — в <a href="#p7a_token_budget">Part 7A: Token Budget</a>.</p>
 </section>
 
-<section  data-section="p1_assembly_pipeline" data-toc-nav>
-<h3>Конвейер сборки карточки</h3>
-
-<p>Пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены.</p>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">SP</div>
-<div class="inf-step-desc">Запишите базовую роль и 3–5 ключевых правил поведения</div>
-<div class="inf-step-code">70-150 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">Description</div>
-<div class="inf-step-desc">Опишите внешность, контекст и мотивацию без голоса персонажа</div>
-<div class="inf-step-code">150-300 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">Examples</div>
-<div class="inf-step-desc">Напишите 2 примера диалога ГОЛОСОМ персонажа</div>
-<div class="inf-step-code">80-140 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">Создайте Greeting, которое задаёт тон</div>
-<div class="inf-step-code">40-80 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">05</div>
-<div class="inf-step-label">Проверка</div>
-<div class="inf-step-desc">Убедитесь, что Token Budget в пределах 400–800 и голос не протёк в SP/Description</div>
-<div class="inf-step-code">~430-580 токенов</div>
-</div>
-</div>
-
-<div class="callout rule">
-<p><strong>RULE:</strong> Если голос в SP/Description — карточка не работает на 12B. → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
-</div>
-
-
-
+<section data-section="p1_pipeline_ref">
+<h3>Конвейер сборки</h3>
+<p>Пошаговый конвейер сборки карточки — в <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>. Там же — Token Budget по блокам и walkthrough на примере Елены.</p>
 </section>
 
 <section  data-section="p1_top3_problems">

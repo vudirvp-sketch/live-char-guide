@@ -12,6 +12,21 @@
 
 <p><strong>SPINE</strong> — фреймворк из 5 элементов, которые образуют причинную цепочку от прошлого к настоящему: <strong>GHOST → LIE → FLAW → NEED → WANT</strong>. SPINE даёт Anchors причину существовать, а не быть набором случайных правил.</p>
 
+<div class="mermaid">
+graph LR
+    GHOST["GHOST<br/>Формирующее событие"] -->|"защита от боли"| LIE["LIE<br/>Ложная установка"]
+    LIE -->|"искажает восприятие"| FLAW["FLAW<br/>Деструктивное поведение"]
+    FLAW -->|"блокирует"| NEED["NEED<br/>Истинная потребность"]
+    NEED -.-|"противоречит"| WANT["WANT<br/>Осознанное желание"]
+    WANT -->|"совместимо с"| LIE
+
+    style GHOST fill:#4a1a1a,stroke:#ff6b6b,color:#fff
+    style LIE fill:#4a3a1a,stroke:#ffa94d,color:#fff
+    style FLAW fill:#4a1a4a,stroke:#da77f2,color:#fff
+    style NEED fill:#1a3a4a,stroke:#74c0fc,color:#fff
+    style WANT fill:#1a4a1a,stroke:#69db7c,color:#fff
+</div>
+
 
 <p><strong>WANT</strong> — это то, что персонаж осознанно желает. Но за WANT стоит <strong>NEED</strong> — истинная потребность, которую персонаж не может признать из-за <strong>FLAW</strong>. FLAW возникает из <strong>LIE</strong> — ложной установки о мире. А LIE — из <strong>GHOST</strong> — события прошлого, которое травмировало персонажа.</p>
 
@@ -235,75 +250,6 @@
 <tr><td>Выщербленный</td><td>Найти способ заполнить выщерблины в себе</td></tr>
 </tbody>
 </table>
-</div>
-
-</section>
-
-<p>Для большинства персонажей достаточно одного GHOST — единичного травматического опыта. Но некоторые backstory требуют нескольких травматических слоёв, каждый из которых формирует отдельный аспект личности. → GHOST Layers (ниже)</p>
-
-<section  data-section="p4_ghost_layers">
-<h3>GHOST Layers</h3>
-
-<p><strong>GHOST Layers</strong> — трёхуровневая структура GHOST для сложных персонажей.</p>
-
-<p>У Елены один GHOST — предательство редактора. Этого достаточно для большинства персонажей. Для персонажей со сложной многослойной травмой Выщербленный демонстрирует GHOST Layers — трёхуровневую архитектуру. Те же принципы SPINE применяются и здесь; разница — в структурной глубине.</p>
-
-<h4>Архитектура</h4>
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G1</div>
-<div class="inf-step-label">ДЕТСТВО</div>
-<div class="inf-step-desc">Формирует LIE</div>
-<div class="inf-step-code">0-12 лет</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G2</div>
-<div class="inf-step-label">ЮНОСТЬ</div>
-<div class="inf-step-desc">Укрепляет FLAW</div>
-<div class="inf-step-code">13-25 лет</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G3</div>
-<div class="inf-step-label">НАСТОЯЩЕЕ</div>
-<div class="inf-step-desc">Триггеры сейчас</div>
-<div class="inf-step-code">Недавнее</div>
-</div>
-</div>
-
-<h4>Пример: Выщербленный</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Уровень</th><th>Событие</th><th>Влияние</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>G1</strong></td><td>Был архивариусом — впрыснул себе документ, начал распадаться</td><td>Формирует LIE: «Если я поглощу достаточно чужого сопротивления — стану цельным»</td></tr>
-<tr><td><strong>G2</strong></td><td>Первое вырезание — в отчаянии поглотил память умирающего коллеги → цикл начался</td><td>Укрепляет FLAW: Поглощает чужое прошлое, после каждого теряет часть себя</td></tr>
-<tr><td><strong>G3</strong></td><td>Каждое вырезание заполняет дыру, создаёт новую → после 3-го не помнит имя, после 5-го — зачем помогает</td><td>Триггеры: Вентора (изоляция), зеркало (бывшая коллега), Сангвис (голод)</td></tr>
-</tbody>
-</table>
-</div>
-
-
-
-<div class="callout rec">
-<p><strong>RECOMMENDATION:</strong> Не всем персонажам нужны 3 GHOST Layers. Если backstory простая — достаточно одного GHOST.</p>
-
-<p><strong>Когда использовать GHOST Layers (3-tier):</strong></p>
-<ul>
-<li><strong>Множественные травмы:</strong> Персонаж имеет несколько травматических событий в разные периоды жизни</li>
-<li><strong>Кумулятивность:</strong> Травмы усиливают друг друга: G1 → G2 → G3</li>
-<li><strong>Разные триггеры:</strong> Персонаж демонстрирует разные FLAW-поведения в зависимости от типа триггера</li>
-<li><strong>Сложная психология:</strong> Персонаж имеет несколько LIE или противоречивые мотивации</li>
-</ul>
-
-<p><strong>Когда достаточно 1 GHOST:</strong></p>
-<ul>
-<li><strong>Единичная травма:</strong> Одно травматическое событие в прошлом</li>
-<li><strong>Прямая связь:</strong> FLAW напрямую выводится из одного GHOST</li>
-<li><strong>Простая психология:</strong> Персонаж относительно прост психологически</li>
-<li><strong>Простая карточка:</strong> Не планируется расширенный уровень детализации</li>
-</ul>
 </div>
 
 </section>
@@ -564,7 +510,74 @@ WANT: Доказать правоту самостоятельно
 </div>
 </div>
 
-<p class="bridge-paragraph">SPINE даёт каузальный каркас. Но заполнение GHOST, LIE, FLAW, NEED, WANT психологически достоверным содержанием требует диагностических инструментов. OCEAN и Enneagram — эти инструменты: они позволяют вывести элементы SPINE из устоявшихся личностных моделей, а не изобретать их с нуля. → <a href="#p5_ocean_basics">Part 5: Психологический инструментарий</a></p>
+<p class="bridge-paragraph">SPINE-профиль построен и проверен на консистентность. Психологические модели — OCEAN и Enneagram — НЕ генерируют SPINE, а ВАЛИДИРУЮТ его. Если ваш SPINE согласуется с OCEAN и Enneagram — он надёжен. Если противоречит — перепроверьте каузальную цепь. → <a href="#p5_ocean_basics">Part 5: Психологический инструментарий</a></p>
+
+</section>
+
+<p>Для большинства персонажей достаточно одного GHOST — единичного травматического опыта. Но некоторые backstory требуют нескольких травматических слоёв, каждый из которых формирует отдельный аспект личности. → GHOST Layers (ниже)</p>
+
+<section  data-section="p4_ghost_layers">
+<h3>GHOST Layers</h3>
+
+<p><strong>GHOST Layers</strong> — трёхуровневая структура GHOST для сложных персонажей.</p>
+
+<p>У Елены один GHOST — предательство редактора. Этого достаточно для большинства персонажей. Для персонажей со сложной многослойной травмой Выщербленный демонстрирует GHOST Layers — трёхуровневую архитектуру. Те же принципы SPINE применяются и здесь; разница — в структурной глубине.</p>
+
+<h4>Архитектура</h4>
+<div class="infographic inf-pipeline">
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G1</div>
+<div class="inf-step-label">ДЕТСТВО</div>
+<div class="inf-step-desc">Формирует LIE</div>
+<div class="inf-step-code">0-12 лет</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G2</div>
+<div class="inf-step-label">ЮНОСТЬ</div>
+<div class="inf-step-desc">Укрепляет FLAW</div>
+<div class="inf-step-code">13-25 лет</div>
+</div>
+<div class="inf-pipeline-step">
+<div class="inf-step-id">G3</div>
+<div class="inf-step-label">НАСТОЯЩЕЕ</div>
+<div class="inf-step-desc">Триггеры сейчас</div>
+<div class="inf-step-code">Недавнее</div>
+</div>
+</div>
+
+<h4>Пример: Выщербленный</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Уровень</th><th>Событие</th><th>Влияние</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>G1</strong></td><td>Был архивариусом — впрыснул себе документ, начал распадаться</td><td>Формирует LIE: «Если я поглощу достаточно чужого сопротивления — стану цельным»</td></tr>
+<tr><td><strong>G2</strong></td><td>Первое вырезание — в отчаянии поглотил память умирающего коллеги → цикл начался</td><td>Укрепляет FLAW: Поглощает чужое прошлое, после каждого теряет часть себя</td></tr>
+<tr><td><strong>G3</strong></td><td>Каждое вырезание заполняет дыру, создаёт новую → после 3-го не помнит имя, после 5-го — зачем помогает</td><td>Триггеры: Вентора (изоляция), зеркало (бывшая коллега), Сангвис (голод)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rec">
+<p><strong>RECOMMENDATION:</strong> Не всем персонажам нужны 3 GHOST Layers. Если backstory простая — достаточно одного GHOST.</p>
+
+<p><strong>Когда использовать GHOST Layers (3-tier):</strong></p>
+<ul>
+<li><strong>Множественные травмы:</strong> Персонаж имеет несколько травматических событий в разные периоды жизни</li>
+<li><strong>Кумулятивность:</strong> Травмы усиливают друг друга: G1 → G2 → G3</li>
+<li><strong>Разные триггеры:</strong> Персонаж демонстрирует разные FLAW-поведения в зависимости от типа триггера</li>
+<li><strong>Сложная психология:</strong> Персонаж имеет несколько LIE или противоречивые мотивации</li>
+</ul>
+
+<p><strong>Когда достаточно 1 GHOST:</strong></p>
+<ul>
+<li><strong>Единичная травма:</strong> Одно травматическое событие в прошлом</li>
+<li><strong>Прямая связь:</strong> FLAW напрямую выводится из одного GHOST</li>
+<li><strong>Простая психология:</strong> Персонаж относительно прост психологически</li>
+<li><strong>Простая карточка:</strong> Не планируется расширенный уровень детализации</li>
+</ul>
+</div>
 
 </section>
 
