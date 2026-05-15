@@ -1,7 +1,7 @@
 # Content Ownership Map — Live Character Guide v9.1
 
 > **Version:** 9.1.0
-> **Last Updated:** 2026-05-15
+> **Last Updated:** 2026-05-16
 > **Status:** Canonical Reference (v9.1 restructure)
 
 ---
@@ -54,7 +54,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Иерархия влияния | Part 3 | p3_influence_hierarchy | Reference | Порядок: SP > Description > Examples > Greeting. How different blocks affect voice |
 | Правила Examples | Part 3 | p3_examples_rules | Rules | Как писать Examples. Structural rules and formatting |
 | Качество Examples | Part 3 | p3_examples_quality | Classification | Quality tiers for Examples. What separates good examples from bad |
-| Greeting | Part 7B | p7b_greeting | Structure | Moved to Part 7B in v9. Сцена→Действие→Реплика. Greeting as voice anchor |
+| Greeting (ссылка) | Part 3 | p3_greeting_ref | Reference | Forward reference → Part 7B (p7b_greeting). Полный алгоритм: Sensory Anchor → тело FLAW → реплика → крючок |
 | Voice Leak (утечка голоса) | Part 3 | p3_voice_leak | Anti-pattern | Выщербленный — пример ошибки. Detecting and fixing voice bleed. Updated in Phase 4 |
 | Крайний случай: голос без описания | Part 3 | p3_joker_case | Extreme example | Голос невозможно описать — только воспроизвести. General principle (rewritten from Джокер in Phase 4) |
 | Мульти-персонажные примеры | Part 3 | p3_multi_char | Rules+Examples | Выщербленный + Йоуёма. Voice Bleed, Character Markers in multi-character contexts. Updated in Phase 4 |
@@ -208,13 +208,13 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 6 | CoT | 6 |
 | Part 7A | System Prompt & Assembly | 13 (added p7a_token_budget) |
 | Part 7B | Lorebook, Greeting & Compatibility | 5 |
-| Part 8 | Anti-patterns | 15 |
+| Part 8 | Anti-patterns | 16 (1 overview + 15 APs, AP-15 renumbered from AP-16 after OCEAN Overload moved to Part 5) |
 | Part 9 | Diagnostics | 11 |
 | Part 10 | Full Card Examples | 4 (deleted p10_geralt, p10_edward) |
 | Appendix A | MBTI Reference | 1 |
 | Appendix B | Model Capability Table | 1 |
 | Appendix C | Glossary | 1 |
-| **Total** | | **95** |
+| **Total** | | **98** |
 
 ---
 
@@ -272,4 +272,5 @@ Before finalizing any Part, verify:
 ---
 
 *Document prepared for Live Character Guide v9 rebuild project*
-*Updated 2026-05-15: v9.1.0 — Restructure per FIX-01 through FIX-16. Deleted p1_assembly_pipeline (dual pipeline eliminated), moved Token Budget to Part 7A (p7a_token_budget), fixed CORE DIRECTIVES numbering in glossary, deleted p10_geralt and p10_edward, added LIE+GHOST to Walter White, rewrote Greetings to show WANT at rest, moved GHOST Layers to end of Part 4, fixed Part 4→5 bridge paragraph, added p1_value_proposition, added SPINE Mermaid diagram and Voice degradation table, deduplicated content across Parts. 95 sections across 10 parts + 3 appendices.*
+*Updated 2026-05-15: v9.1.0 — Restructure per FIX-01 through FIX-16. Deleted p1_assembly_pipeline (dual pipeline eliminated), moved Token Budget to Part 7A (p7a_token_budget), fixed CORE DIRECTIVES numbering in glossary, deleted p10_geralt and p10_edward, added LIE+GHOST to Walter White, rewrote Greetings to show WANT at rest, moved GHOST Layers to end of Part 4, fixed Part 4→5 bridge paragraph, added p1_value_proposition, added SPINE Mermaid diagram and Voice degradation table, deduplicated content across Parts.*
+*Updated 2026-05-16: v9.1.0 — Updated Part 3 Greeting entry from p7b_greeting to p3_greeting_ref (reference, actual content in Part 7B). Fixed Part 8 section count: 16 (was 15, added overview row). Fixed total: 98 (was 95). OCEAN Overload (old AP-15) moved to Part 5 as p5_ocean_warning; old AP-16 renumbered to AP-15 (Nested Anchors).*

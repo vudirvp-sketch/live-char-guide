@@ -1,6 +1,6 @@
 {
-  "generated": "2026-05-14T00:00:00.000Z",
-  "description": "Anchor redirects for v8 → v9 migration. Used by lazy-loader.js handleLegacyAnchor(). Updated: added v8 redirects for merged/deleted sections.",
+  "generated": "2026-05-16T00:00:00.000Z",
+  "description": "Anchor redirects for v8 → v9.1 migration. Used by lazy-loader.js handleLegacyAnchor(). Updated: added v9.1 redirects for renamed/moved sections (p3_greeting, p1_token_budget, p1_assembly_pipeline).",
   "redirects": {
     "01_intro": "p1_card_overview",
     "intro": "p1_card_overview",
@@ -100,6 +100,9 @@
     "p8_ap15_ocean_overload": "p5_ocean_warning",
     "p1_quickstart": "p7a_assembly_pipeline",
     "p2_flaw_anchors": "p4_spine_mapping",
-    "p9_top5_problems": "p9_additional_problems"
+    "p9_top5_problems": "p9_additional_problems",
+    "p3_greeting": "p7b_greeting",
+    "p1_token_budget": "p7a_token_budget",
+    "p1_assembly_pipeline": "p7a_assembly_pipeline"
   }
 }

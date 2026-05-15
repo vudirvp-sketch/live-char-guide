@@ -7,8 +7,8 @@
 > This file is retained for historical reference only. Do not update it.
 > If content here contradicts the per-character bibles, the per-character bibles take precedence.
 
-> **Version:** 8.0.0
-> **Last Updated:** 2026-05-14
+> **Version:** 9.1.0
+> **Last Updated:** 2026-05-16
 > **Status:** Canonical Reference (synced with Content Restoration Phases 0–13)
 
 ---

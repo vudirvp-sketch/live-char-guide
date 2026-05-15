@@ -82,7 +82,7 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `voice-isolation` | `p3_voice_isolation` | l1 | Voice rule |
 | — | `p3_influence_hierarchy` | l1 | Voice influence hierarchy (split from voice isolation) |
 | `examples` | `p3_examples_rules` | l2 | Examples rules + writing rules |
-| `greeting` | `p3_greeting` | l2 | Greeting structure (Scene→Action→Line) |
+| `greeting` | `p3_greeting_ref` | l2 | Greeting reference — now just a forward link to Part 7B (p7b_greeting). Renamed in v9.1 |
 | `voice-leak` | `p3_voice_leak` | l2 | Voice Leak antipattern |
 | `tier-quality` | `p3_tier_quality` | l2 | Tier 1/2/3 criteria |
 | `joker-case` | `p3_joker_case` | l2 | Extreme voice isolation |
@@ -161,8 +161,8 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | — | `p8_ap12_xml_malformed` | l3 | XML malformed (AP-12) |
 | — | `p8_ap13_lorebook_conflict` | l3 | Lorebook conflict (AP-13) |
 | — | `p8_ap14_context_violation` | l3 | Context window violation (AP-14) |
-| `ap-ocean-overload` | `p8_ap15_basic` | l2 | OCEAN overload basic (AP-15, L2 section) |
-| — | p8_ap15_extended | l3 | AP-15 extended: 3 OCEAN conflict scenarios. **Now exists as p8_ap15_extended** |
+| `ap-ocean-overload` | `p5_ocean_warning` | l2 | **MOVED to Part 5** in v9.1 as `p5_ocean_warning`. Was `p8_ap15_basic` in v8, now relocated to Psychology Toolkit |
+| — | `p5_ocean_warning` | l3 | AP-15 extended scenarios merged into `p5_ocean_warning` in Part 5. Was `p8_ap15_extended` in v8 |
 
 ### Part 9: Diagnostics and Debugging
 
@@ -491,6 +491,49 @@ The following changes implement the tooltip system per L1-REMEDIATION-PLAN-V3.md
 | check_duplicates.py | ✅ No duplicates found |
 | check_english.py | 61 hits — all in `<pre><code>` blocks or allowed technical terms (expected per plan) |
 | validate-build.mjs | ✅ PASSED |
+
+---
+
+## v8 → v9.1 Migration
+
+> **Version:** 9.1
+> **Last Updated:** 2026-05-16
+> **Status:** Tracking Document
+
+v9.1 is a **content restructure** of the Live Character Guide. The primary changes are:
+1. **Part 7 split** into 7A (System Prompt & Assembly) and 7B (Lorebook, Greeting & Compatibility)
+2. **Token Budget** moved from Part 1 to Part 7A
+3. **MBTI** moved from Part 5 to Appendix A
+4. **OCEAN Overload** (old AP-15) moved from Part 8 to Part 5 as a Warning section (`p5_ocean_warning`)
+5. **AP-16 renumbered to AP-15** (Nested Anchors) after OCEAN Overload vacated the slot
+6. **Greeting** in Part 3 changed from full section (`p3_greeting`) to reference (`p3_greeting_ref`) pointing to Part 7B
+7. Deleted `p10_geralt` and `p10_edward` card examples
+8. Added LIE+GHOST to Walter White SPINE
+9. Added `p1_value_proposition`, `p7a_token_budget`, `p7a_assembly_pipeline`
+
+### Section ID Changes (v8 → v9.1)
+
+| Old ID (v8) | New ID (v9.1) | Status |
+|-------------|---------------|--------|
+| p1_token_budget | p1_token_budget_ref | RENAMED — now a 2-sentence reference with link to Part 7A |
+| p1_assembly_pipeline | p1_pipeline_ref | RENAMED — now a 1-sentence forward reference to Part 7A |
+| p3_greeting | p3_greeting_ref | RENAMED — now just a forward reference to Part 7B (p7b_greeting) |
+| p8_ap15_ocean_overload | p5_ocean_warning | MOVED to Part 5 (OCEAN Overload becomes a Warning section in Psychology Toolkit) |
+| (new) | p8_ap15_nested_anchors | RENAMED from AP-16 — renumbered to AP-15 after OCEAN Overload vacated the slot |
+| p10_geralt | — | DELETED — see p10_elena (basic-intermediate) or p10_walter (realistic modern) |
+| p10_edward | — | DELETED — see p10_elena (basic-intermediate) or p10_walter (realistic modern) |
+
+### Anchor Redirects (v8 → v9.1)
+
+The following redirects are already in `data/anchor-redirects.json`:
+
+- `p8_ap15_basic` → `p5_ocean_warning`
+- `p8_ap15_extended` → `p5_ocean_warning`
+- `p8_ap15_ocean_overload` → `p5_ocean_warning`
+- `p10_geralt_l2` → `p10_elena`
+- `p10_edward_l2` → `p10_elena`
+- `p10_geralt` → `p10_elena`
+- `p10_edward` → `p10_elena`
 
 ---
 
