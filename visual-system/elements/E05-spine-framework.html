@@ -40,22 +40,38 @@
     .spine-node:nth-of-type(7) { margin-top: 60px; }
     .spine-node:nth-of-type(9) { margin-top: 80px; }
 
+    /* Гексагональный узел: двухэлементная техника для видимого бордера
+       Внешний div = бордер (clip-path hex), внутренний = заливка (clip-path hex) */
     .spine-node__hex {
-      background: var(--bg-panel);
-      border: var(--line-width) solid rgba(139,92,246,0.3);
-      /* Chamfered corners — clip-path hex shape */
-      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
-      padding: 14px 24px;
+      position: relative;
       min-width: 120px;
       text-align: center;
       cursor: default;
-      transition: border-color 0.2s, background 0.2s;
-      position: relative;
+      padding: 0;
     }
 
-    .spine-node__hex:hover {
+    /* Внешний слой — бордер */
+    .spine-node__hex-border {
+      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+      background: rgba(139,92,246,0.3);
+      padding: 2px; /* толщина бордера */
+      transition: background 0.2s;
+    }
+
+    /* Внутренний слой — заливка */
+    .spine-node__hex-fill {
+      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+      background: var(--bg-panel);
+      padding: 14px 24px;
+      transition: background 0.2s;
+    }
+
+    .spine-node__hex:hover .spine-node__hex-border {
+      background: rgba(139,92,246,0.5);
+    }
+
+    .spine-node__hex:hover .spine-node__hex-fill {
       background: var(--bg-raised);
-      border-color: rgba(139,92,246,0.5);
     }
 
     .spine-node__icon {
@@ -181,10 +197,17 @@
         margin-left: auto;
         margin-right: auto;
       }
-      .spine-node__hex {
+      .spine-node__hex-border,
+      .spine-node__hex-fill {
         clip-path: none;
         border-radius: var(--radius-sm);
-        border: var(--line-width) solid rgba(139,92,246,0.3);
+      }
+      .spine-node__hex-border {
+        background: rgba(139,92,246,0.3);
+        padding: 1px;
+      }
+      .spine-node__hex-fill {
+        background: var(--bg-panel);
       }
     }
   </style>
@@ -237,9 +260,13 @@
         <!-- GHOST -->
         <div class="spine-node scroll-enter">
           <div class="spine-node__hex">
-            <div class="spine-node__icon" aria-hidden="true">&#128123;</div>
-            <div class="spine-node__name">GHOST</div>
-            <div class="spine-node__example">"Предательство редактора"</div>
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#128123;</div>
+                <div class="spine-node__name">GHOST</div>
+                <div class="spine-node__example">"Предательство редактора"</div>
+              </div>
+            </div>
           </div>
           <div class="spine-node__expand" role="button" aria-label="Expand GHOST layers" tabindex="0">+</div>
         </div>
@@ -254,9 +281,13 @@
         <!-- LIE -->
         <div class="spine-node scroll-enter">
           <div class="spine-node__hex">
-            <div class="spine-node__icon" aria-hidden="true">&#127910;</div>
-            <div class="spine-node__name">LIE</div>
-            <div class="spine-node__example">"Я не могу никому доверять"</div>
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#127910;</div>
+                <div class="spine-node__name">LIE</div>
+                <div class="spine-node__example">"Я не могу никому доверять"</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -270,9 +301,13 @@
         <!-- FLAW -->
         <div class="spine-node scroll-enter">
           <div class="spine-node__hex">
-            <div class="spine-node__icon" aria-hidden="true">&#128165;</div>
-            <div class="spine-node__name">FLAW</div>
-            <div class="spine-node__example">"Отталкивает людей"</div>
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#128165;</div>
+                <div class="spine-node__name">FLAW</div>
+                <div class="spine-node__example">"Отталкивает людей"</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -286,9 +321,13 @@
         <!-- NEED -->
         <div class="spine-node scroll-enter">
           <div class="spine-node__hex">
-            <div class="spine-node__icon" aria-hidden="true">&#10084;</div>
-            <div class="spine-node__name">NEED</div>
-            <div class="spine-node__example">"Подлинная связь"</div>
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#10084;</div>
+                <div class="spine-node__name">NEED</div>
+                <div class="spine-node__example">"Подлинная связь"</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -302,9 +341,13 @@
         <!-- WANT -->
         <div class="spine-node scroll-enter">
           <div class="spine-node__hex">
-            <div class="spine-node__icon" aria-hidden="true">&#11088;</div>
-            <div class="spine-node__name">WANT</div>
-            <div class="spine-node__example">"Контроль над отношениями"</div>
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#11088;</div>
+                <div class="spine-node__name">WANT</div>
+                <div class="spine-node__example">"Контроль над отношениями"</div>
+              </div>
+            </div>
           </div>
         </div>
 
