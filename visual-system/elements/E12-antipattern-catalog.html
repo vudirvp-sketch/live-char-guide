@@ -32,7 +32,7 @@
 
     .ap-card:hover {
       transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: var(--glow-cyan);
     }
 
     .ap-card__header {
@@ -92,11 +92,13 @@
       transition: opacity 0.2s var(--ease-out-expo);
     }
 
-    .ap-card:hover .ap-card__fix {
+    .ap-card:hover .ap-card__fix,
+    .ap-card:focus-within .ap-card__fix {
       opacity: 1;
     }
 
-    .ap-card:hover .ap-card__cause {
+    .ap-card:hover .ap-card__cause,
+    .ap-card:focus-within .ap-card__cause {
       -webkit-line-clamp: unset;
     }
 
@@ -107,6 +109,7 @@
       height: 8px;
       border-radius: 50%;
       flex-shrink: 0;
+      position: relative;
     }
 
     .severity-dot--high {
@@ -117,6 +120,19 @@
     .severity-dot--medium {
       background: var(--accent-amber);
       box-shadow: 0 0 6px var(--amber-30);
+    }
+
+    /* Текст для скринридеров — визуально скрыт */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
 
     /* Scroll animation */
@@ -163,32 +179,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E01">E01</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E06">E06</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
-      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E12 (текущий)">E12</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E14">E14</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E15">E15</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E16">E16</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E11">E11</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E12 (текущий)">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E14">E14</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E15">E15</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E17">E17</span>
     </div>
   </nav>
 
@@ -203,10 +219,10 @@
     <div class="ap-grid">
 
       <!-- AP-1 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article" aria-label="AP-1: Раздувание токенов — высокая серьёзность">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-1</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Раздувание токенов</div>
         <div class="ap-card__cause">Description превышает бюджет</div>
@@ -215,10 +231,10 @@
       </div>
 
       <!-- AP-2 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-2</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Отсутствует Price</div>
         <div class="ap-card__cause">У Anchor нет последствия</div>
@@ -227,10 +243,10 @@
       </div>
 
       <!-- AP-3 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-3</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Голос в Description</div>
         <div class="ap-card__cause">Голосовые паттерны записаны в блоке Description</div>
@@ -239,10 +255,10 @@
       </div>
 
       <!-- AP-4 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-4</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">GHOST в SP</div>
         <div class="ap-card__cause">Элементы SPINE помещены в System Prompt</div>
@@ -251,10 +267,10 @@
       </div>
 
       <!-- AP-5 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-5</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">RepPen &gt; 1.10</div>
         <div class="ap-card__cause">Repetition Penalty установлен слишком высоким</div>
@@ -263,10 +279,10 @@
       </div>
 
       <!-- AP-6 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-6</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Нет Anti-godmoding</div>
         <div class="ap-card__cause">Отсутствует 2-строчный anti-godmoding в SP</div>
@@ -275,10 +291,10 @@
       </div>
 
       <!-- AP-7 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-7</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Presence Penalty &gt; 0</div>
         <div class="ap-card__cause">PP > 0 нарушает согласованность персонажа</div>
@@ -287,10 +303,10 @@
       </div>
 
       <!-- AP-8 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-8</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">GHOST без Anchors</div>
         <div class="ap-card__cause">SPINE определён, но нет Anchors для его выражения</div>
@@ -299,10 +315,10 @@
       </div>
 
       <!-- AP-9 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-9</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Нарушенный SPINE</div>
         <div class="ap-card__cause">Элементы SPINE не образуют причинную цепь</div>
@@ -311,10 +327,10 @@
       </div>
 
       <!-- AP-10 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-10</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Перегрузка CoT</div>
         <div class="ap-card__cause">Избыточный CoT на малых моделях</div>
@@ -323,10 +339,10 @@
       </div>
 
       <!-- AP-11 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-11</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Утечка голоса</div>
         <div class="ap-card__cause">Голос персонажа дрейфует к стилю нарратора</div>
@@ -335,10 +351,10 @@
       </div>
 
       <!-- AP-12 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-12</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Некорректный XML</div>
         <div class="ap-card__cause">Теги неправильно закрыты или вложены</div>
@@ -347,10 +363,10 @@
       </div>
 
       <!-- AP-13 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-13</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Конфликт Lorebook</div>
         <div class="ap-card__cause">Запись Lorebook противоречит Description</div>
@@ -359,10 +375,10 @@
       </div>
 
       <!-- AP-14 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-14</span>
-          <span class="severity-dot severity-dot--high"></span>
+          <span class="severity-dot severity-dot--high"><span class="sr-only">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Нарушение контекста</div>
         <div class="ap-card__cause">Общий размер карточки превышает контекстное окно модели</div>
@@ -371,10 +387,10 @@
       </div>
 
       <!-- AP-15 -->
-      <div class="ap-card scroll-enter">
+      <div class="ap-card scroll-enter" tabindex="0" role="article">
         <div class="ap-card__header">
           <span class="ap-card__id">AP-15</span>
-          <span class="severity-dot severity-dot--medium"></span>
+          <span class="severity-dot severity-dot--medium"><span class="sr-only">средняя серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Вложенные Anchors</div>
         <div class="ap-card__cause">Anchors рекурсивно ссылаются друг на друга</div>

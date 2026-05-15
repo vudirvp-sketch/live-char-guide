@@ -134,8 +134,8 @@
   position: relative;
   background:
     /* Сетка чертежа с непрозрачностью 3% */
-    linear-gradient(rgba(60,200,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(60,200,255,0.03) 1px, transparent 1px);
+    linear-gradient(var(--cyan-3) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cyan-3) 1px, transparent 1px);
   background-size: 20px 20px;
   border: var(--line-width) solid var(--border);
   border-radius: var(--radius-lg);

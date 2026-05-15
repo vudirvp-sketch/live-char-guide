@@ -52,11 +52,11 @@ body {
 
 /* --- Цвет выделения (циановый оттенок) --- */
 ::selection {
-  background: rgba(60, 200, 255, 0.25);
+  background: var(--cyan-25);
   color: var(--text-primary);
 }
 ::-moz-selection {
-  background: rgba(60, 200, 255, 0.25);
+  background: var(--cyan-25);
   color: var(--text-primary);
 }
 

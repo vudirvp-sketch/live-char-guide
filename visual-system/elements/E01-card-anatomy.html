@@ -14,6 +14,21 @@
       max-width: 720px;
       margin: 0 auto;
       position: relative;
+      padding: 0 var(--gap-sm);
+    }
+
+    @media (max-width: 768px) {
+      .block-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--gap-xs);
+      }
+      .token-anno {
+        text-align: left;
+      }
+      .token-anno__row {
+        justify-content: flex-start;
+      }
     }
 
     .card-block {
@@ -177,32 +192,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E01 (текущий)">E01</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E01 (текущий)">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E06">E06</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E12">E12</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E14">E14</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E15">E15</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E16">E16</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E14">E14</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E15">E15</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E17">E17</span>
     </div>
   </nav>
 
@@ -373,7 +388,8 @@
       <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--text-primary);">
         Сводка токенного бюджета
       </div>
-      <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px;">
+      <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+      <table style="width:100%; min-width:420px; border-collapse:collapse; font-family:var(--font-mono); font-size:12px;" role="table" aria-label="Сводка токенного бюджета по блокам карточки">
         <thead>
           <tr style="border-bottom:1px solid var(--border); color:var(--text-muted);">
             <th style="text-align:left; padding:6px 8px;">Блок</th>
@@ -428,6 +444,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
   </main>

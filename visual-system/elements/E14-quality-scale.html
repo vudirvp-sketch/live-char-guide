@@ -188,6 +188,23 @@
       border: var(--line-width) solid var(--border-active);
       border-radius: 2px;
       flex-shrink: 0;
+      cursor: pointer;
+      transition: background var(--duration-fast), border-color var(--duration-fast);
+    }
+
+    .quick-check-item__checkbox.is-checked {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    .quick-check-item__checkbox.is-checked::after {
+      content: '✓';
+      display: block;
+      text-align: center;
+      line-height: 14px;
+      font-size: 10px;
+      color: var(--bg-deep);
+      font-weight: 700;
     }
 
     /* Scroll animation for thermometer */
@@ -217,32 +234,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E01">E01</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E06">E06</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E12">E12</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
-      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E14 (текущий)">E14</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E15">E15</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E16">E16</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E13">E13</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E14 (текущий)">E14</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E15">E15</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E17">E17</span>
     </div>
   </nav>
 
@@ -301,27 +318,27 @@
       <div class="quick-checks__title">5 быстрых проверок перед развёртыванием</div>
 
       <div class="quick-check-item scroll-enter">
-        <div class="quick-check-item__checkbox"></div>
+        <div class="quick-check-item__checkbox" role="checkbox" aria-checked="false" aria-label="PP = 0.0" tabindex="0"></div>
         PP = 0.0 (Presence Penalty равен нулю)
       </div>
 
       <div class="quick-check-item scroll-enter">
-        <div class="quick-check-item__checkbox"></div>
+        <div class="quick-check-item__checkbox" role="checkbox" aria-checked="false" aria-label="Голос только в Examples" tabindex="0"></div>
         Голос только в Examples (не в Description или SP)
       </div>
 
       <div class="quick-check-item scroll-enter">
-        <div class="quick-check-item__checkbox"></div>
+        <div class="quick-check-item__checkbox" role="checkbox" aria-checked="false" aria-label="Price в каждом Anchor" tabindex="0"></div>
         Price в каждом Anchor (физический, внутри сцены)
       </div>
 
       <div class="quick-check-item scroll-enter">
-        <div class="quick-check-item__checkbox"></div>
+        <div class="quick-check-item__checkbox" role="checkbox" aria-checked="false" aria-label="Format Lock" tabindex="0"></div>
         Format Lock (1 согласованная система XML)
       </div>
 
       <div class="quick-check-item scroll-enter">
-        <div class="quick-check-item__checkbox"></div>
+        <div class="quick-check-item__checkbox" role="checkbox" aria-checked="false" aria-label="Anti-godmoding" tabindex="0"></div>
         Anti-godmoding (2 строки в SP)
       </div>
     </div>
@@ -350,6 +367,22 @@
         });
       }, { threshold: 0.1 });
       document.querySelectorAll('.scroll-enter, .quick-check-item').forEach(el => observer.observe(el));
+
+      // Интерактивные чекбоксы
+      document.querySelectorAll('.quick-check-item__checkbox').forEach(cb => {
+        function toggle() {
+          const checked = cb.getAttribute('aria-checked') === 'true';
+          cb.setAttribute('aria-checked', String(!checked));
+          cb.classList.toggle('is-checked', !checked);
+        }
+        cb.addEventListener('click', toggle);
+        cb.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      });
 
       // Клавиатурная навигация мини-карты
       document.querySelectorAll('.mini-map__el').forEach(el => {

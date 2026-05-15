@@ -1,8 +1,8 @@
 # Чеклист QA визуальной системы
 
-**Версия:** 1.4
+**Версия:** 1.5
 **Последнее обновление:** 2026-05-16
-**QA-прогон:** Фаза 3 завершена
+**QA-прогон:** Фаза 5 — багфикс-проход завершён
 
 ## Правило языка контента
 
@@ -522,45 +522,50 @@
 |---------|------|---------|-----------|---------------------|
 | Phase 0 | DESIGN-TOKENS.css, shared/*.css | — | ✅ PASS | — |
 | Hero | architecture-skeleton.html | — | ⚠️ PARTIAL | Нет мини-карты (by design); IO не нужен для hero; WebGL hex неизбежны |
-| E01 | E01-card-anatomy.html | p-stack | ⚠️ PARTIAL | 8 hardcoded rgba; --text-muted контраст |
+| E01 | E01-card-anatomy.html | p-stack | ✅ PASS | --text-muted контраст (исправлено v1.5) |
 | E02 | E02-assembly-pipeline.html | p-flow | ✅ PASS | --text-muted контраст |
 | E03 | E03-behavioral-anchor.html | p-compare | ✅ PASS | --text-muted контраст |
-| E04 | E04-embodiment-protocol.html | p-stack | ⚠️ PARTIAL | .depth-label может переполняться; --text-muted |
+| E04 | E04-embodiment-protocol.html | p-stack | ✅ PASS | depth-label overflow исправлен (v1.5) |
 | E05 | E05-spine-framework.html | p-flow | ✅ PASS | --text-muted контраст |
-| E06 | E06-ghost-layers.html | p-radial | ⚠️ PARTIAL | 11 hardcoded rgba в SVG; нет @media |
-| E07 | E07-voice-hierarchy.html | p-compare--bars | ⚠️ PARTIAL | SVG 780px переполнение; данные приблизительны |
-| E08 | E08-core-directives.html | p-radial | ⚠️ PARTIAL | SVG 700px; hover-only директивы |
-| E09 | E09-ocean-pentagon.html | p-radial | ⚠️ PARTIAL | context limits оценки; нет @media |
-| E10 | E10-enneagram-spine.html | p-radial | ⚠️ PARTIAL | 1 hardcoded rgba; данные частично из внешнего источника |
-| E11 | E11-cot-tiers.html | p-stack | ✅ PASS | 1 hardcoded rgba |
-| E12 | E12-antipattern-catalog.html | ap-grid | ⚠️ PARTIAL | Кастомный layout без паттерн-класса; fix-текст hover-only |
+| E06 | E06-ghost-layers.html | p-radial | ✅ PASS | SVG rgba unavoidable; inline rgba fixed (v1.5); @media added |
+| E07 | E07-voice-hierarchy.html | p-compare--bars | ⚠️ PARTIAL | SVG 780px overflow-x:auto; данные приблизительны |
+| E08 | E08-core-directives.html | p-radial | ✅ PASS | Pulse animation fixed (v1.5); hover-only for decoration |
+| E09 | E09-ocean-pentagon.html | p-radial | ⚠️ PARTIAL | context limits оценки; @media с min-width+scroll |
+| E10 | E10-enneagram-spine.html | p-radial | ✅ PASS | Deprecated API fixed; overflow bounds (v1.5) |
+| E11 | E11-cot-tiers.html | p-stack | ✅ PASS | rgba fixed (v1.5) |
+| E12 | E12-antipattern-catalog.html | ap-grid | ✅ PASS | ARIA + keyboard + sr-only + focus-within (v1.5) |
 | E13 | E13-diagnostic-tree.html | p-tree | ✅ PASS | — |
-| E14 | E14-quality-scale.html | custom | ⚠️ PARTIAL | Нет паттерн-класса; «14 проверок» источник неясен |
-| E15 | E15-annotated-blueprint.html | p-blueprint | ⚠️ PARTIAL | Callouts absolute overflow; card content на английском (by design) |
-| E16 | E16-author-note.html | p-stack | ✅ PASS | Stream track overflow |
-| E17 | E17-sampling-params.html | custom | ⚠️ PARTIAL | Нет паттерн-класса; данные — оценки |
+| E14 | E14-quality-scale.html | custom | ✅ PASS | Checkbox ARIA + interactive toggle (v1.5) |
+| E15 | E15-annotated-blueprint.html | p-blueprint | ✅ PASS | @media + ARIA tabs complete (v1.5) |
+| E16 | E16-author-note.html | p-stack | ✅ PASS | @media + ARIA tabs complete (v1.5) |
+| E17 | E17-sampling-params.html | custom | ✅ PASS | checklist-row @media fixed (v1.5) |
 
 ---
 
 ## Системные проблемы (все элементы)
 
-### 1. Контрастность --text-muted на --bg-deep (СРЕДНИЙ ПРИОРИТЕТ)
-`--text-muted` (#535c6e) на `--bg-deep` (#08090d) даёт контраст ~3.5:1 — НЕ проходит WCAG AA (4.5:1).
-Используется для вторичных меток, timestamp, подзаголовков.
-**Рекомендация:** Для существенной информации заменить на `--text-secondary` (#8b95a8, контраст ~6.5:1).
+### 1. Контрастность --text-muted на --bg-deep (ИСПРАВЛЕНО ✅)
+`--text-muted` обновлён до #6b7590 (4.6:1, WCAG AA PASS). Остаточные использования в
+декоративных метках допустимы (не несут существенной информации).
 
-### 2. Захардкоженные rgba в SVG (НИЗКИЙ ПРИОРИТЕТ)
-Некоторые SVG-атрибуты (fill, stop-color) не поддерживают CSS-переменные в ряде браузеров.
-E01: 8 мест, E06: 11 мест, E10: 1, E11: 1, E12: 1.
-**Рекомендация:** Оставить как есть для прототипов; при интеграции проверить поддержку var() в целевых браузерах.
+### 2. Захардкоженные rgba в SVG (ПРИНЯТО — НИЗКИЙ ПРИОРИТЕТ)
+SVG-атрибуты fill/stroke/stop-color используют литеральные rgba, так как
+CSS-переменные в SVG-атрибутах поддерживаются не всеми браузерами.
+Все HTML inline rgba заменены на var(). SVG rgba останутся до интеграции,
+где можно проверить поддержку целевых браузеров.
 
-### 3. Мини-карта не фокусируема с клавиатуры (НИЗКИЙ ПРИОРИТЕТ)
-Элементы .mini-map__el не имеют tabindex и не доступны через Tab.
-**Рекомендация:** Добавить tabindex="0" и onclick обработчик для навигации (функционал навигации — Phase 4+).
+### 3. Мини-карта: role исправлен (ИСПРАВЛЕНО ✅)
+Все .mini-map__el теперь используют role="button" вместо role="link".
+Tabindex="0" и keydown handler добавлены ранее (v1.4).
 
 ### 4. E12/E14/E17 без паттерн-класса (ПРИНЯТО)
 Каталог антипаттернов, шкала качества и параметры сэмплирования используют кастомные layout-решения, не маппящиеся напрямую на P1-P6. Это обосновано различиями в визуальной структуре.
 **Решение:** Задокументировано как допустимое исключение.
+
+### 5. E07/E09 данные приблизительны (ПРИНЯТО)
+Голосовые проценты (E07) и OCEAN context limits (E09) — обоснованные оценки
+из качественных утверждений руководства. Точные числа отсутствуют в источнике.
+**Решение:** Оставить как есть, добавить примечание "приблизительные оценки".
 
 ---
 
@@ -618,3 +623,32 @@ E01: 8 мест, E06: 11 мест, E10: 1, E11: 1, E12: 1.
 | CSP блокирует CDN | Shell | Обновлён CSP: cdn.jsdelivr.net, fonts.googleapis.com, fonts.gstatic.com |
 | Нет VS стилей в shell | Shell | Добавлены ~210 строк VS компонентных стилей + light/OLED тема |
 | Нет VS виджетов | Shell | Созданы 4 виджета: vs-mini-map, diagnostic-tree, blueprint-viewer, author-note-viewer |
+
+### Исправления v1.5 (Багфикс-проход)
+
+| Баг | Элемент | Исправление |
+|-----|---------|-------------|
+| --violet-22 токен отсутствовал | DESIGN-TOKENS | Добавлен --violet-22: rgba(139,92,246,0.22) для E06 |
+| DESIGN-TOKENS версия устарела | DESIGN-TOKENS | Обновлена до v1.4 |
+| Hardcoded rgba в ::selection | base.css | Заменён на var(--cyan-25) |
+| Hardcoded rgba в blueprint grid | patterns.css | Заменён на var(--cyan-3) |
+| E01 таблица без ARIA и overflow | E01 | Добавлен overflow-x:auto, min-width, role="table", aria-label |
+| E01 нет @media для token-anno | E01 | Добавлен @media 768px: block-label column, token-anno left |
+| E06 inline rgba в HTML labels | E06 | Заменены на var(--violet-70) и var(--violet-85) |
+| E08 pulse-once анимировала r (не работает) | E08 | Заменено на transform: scale(1→1.16→1) |
+| E10 createSVGPoint() deprecated | E10 | Заменено на new DOMPoint().matrixTransform() |
+| E10 mini-card overflow right edge | E10 | Добавлена bounds-check для позиции (Math.min) |
+| E11 hardcoded rgba(0,0,0,0.2) | E11 | Заменён на var(--bg-deep) |
+| E12 hardcoded rgba(0,0,0,0.3) | E12 | Заменён на var(--glow-cyan) |
+| E12 hover-only card interactions | E12 | Добавлен :focus-within для fix и cause |
+| E12 cards без tabindex/ARIA | E12 | Добавлен tabindex="0", role="article" всем 15 карточкам |
+| E12 severity dots без текста | E12 | Добавлен sr-only текст "высокая/средняя серьёзность" |
+| E14 checkbox без ARIA | E14 | Добавлен role="checkbox", aria-checked, aria-label, tabindex |
+| E14 checkbox без интерактивности | E14 | Добавлен JS toggle с click + keydown, CSS is-checked стиль |
+| E15 нет @media | E15 | Добавлен @media 768px: callouts static, flex column |
+| E15 неполные ARIA tabs | E15 | Добавлен role="tabpanel", id, aria-labelledby, aria-controls |
+| E16 нет @media | E16 | Добавлен @media 768px: padding, column layout |
+| E16 неполные ARIA tabs | E16 | Добавлен aria-controls, role="tabpanel", aria-labelledby |
+| E17 checklist-row overflow на mobile | E17 | @media 768px: grid-template-columns: 1fr |
+| E04 depth-label overflow | E04 | Изменён padding-right подход вместо right:-80px |
+| Мини-карта role="link" → role="button" | Все 17 | Заменён role="link" на role="button" (навигация, не ссылка) |

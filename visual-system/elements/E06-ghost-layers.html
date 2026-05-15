@@ -128,32 +128,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E01">E01</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
-      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E06 (текущий)">E06</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E05">E05</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E06 (текущий)">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E12">E12</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E14">E14</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E15">E15</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E16">E16</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E14">E14</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E15">E15</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E17">E17</span>
     </div>
   </nav>
 
@@ -169,9 +169,9 @@
       <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Слои GHOST: три концентрических кольца, показывающих глубину травмы от G1 (источник/ядро) до G3 (поверхностный/настоящее)">
         <title>Слои GHOST — визуализация 3-уровневой глубины травмы</title>
 
-        <!-- ПРИМЕЧАНИЕ: SVG-атрибуты fill/stroke/stop-color не могут надёжно
-             использовать CSS-переменные во всех браузерах, поэтому здесь
-             используются литеральные rgba-значения, соответствующие --accent-violet (#8b5cf6). -->
+        <!-- ПРИМЕЧАНИЕ: SVG-атрибуты fill/stroke/stop-color используют литеральные rgba-значения,
+             поскольку CSS-переменные в SVG-атрибутах поддерживаются не всеми браузерами.
+             Значения маппятся на токены: --violet-6, --violet-12, --violet-22, --violet-25, --violet-35, --violet-55. -->
         <defs>
           <radialGradient id="ghost-grad" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="rgba(139,92,246,0.15)"/>
@@ -228,14 +228,14 @@
 
       <!-- HTML labels on the right -->
       <div class="ring-label ring-label--g3 scroll-enter">
-        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Поверхностный</div>
+        <div class="ring-label__title" style="color:var(--violet-70);">G3 — Поверхностный</div>
         <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
         <div class="ring-label__event">"Избегает обязательств"</div>
         <div class="ring-label__causal">G3 → текущий триггер</div>
       </div>
 
       <div class="ring-label ring-label--g2 scroll-enter">
-        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Промежуточный</div>
+        <div class="ring-label__title" style="color:var(--violet-85);">G2 — Промежуточный</div>
         <div class="ring-label__timeline">Юность (13–25): подкрепляется → усиливает FLAW</div>
         <div class="ring-label__event">"Брошен в 16 лет"</div>
         <div class="ring-label__causal">G2 → усиливает FLAW</div>

@@ -188,6 +188,18 @@
       opacity: 1;
       transform: translateY(0);
     }
+    @media (max-width: 768px) {
+      .an-container {
+        padding: 0 var(--gap-sm);
+      }
+      .position-indicator {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .template-card {
+        padding: var(--gap-sm);
+      }
+    }
   </style>
 </head>
 <body>
@@ -195,32 +207,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E01">E01</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E06">E06</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E12">E12</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E14">E14</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E15">E15</span>
-      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E16 (текущий)">E16</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E14">E14</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E15">E15</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E16 (текущий)">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E17">E17</span>
     </div>
   </nav>
 
@@ -270,13 +282,13 @@
       </div>
 
       <!-- Template A/B toggle -->
-      <div class="template-toggle" role="tablist">
-        <button class="template-btn template-btn--active" role="tab" aria-selected="true" data-template="a">Шаблон A (3 секции)</button>
-        <button class="template-btn" role="tab" aria-selected="false" data-template="b">Шаблон B (4 секции)</button>
+      <div class="template-toggle" role="tablist" aria-label="Выбор шаблона Author's Note">
+        <button class="template-btn template-btn--active" role="tab" id="tab-template-a" aria-selected="true" aria-controls="template-a" data-template="a">Шаблон A (3 секции)</button>
+        <button class="template-btn" role="tab" id="tab-template-b" aria-selected="false" aria-controls="template-b" data-template="b">Шаблон B (4 секции)</button>
       </div>
 
       <!-- Template A -->
-      <div class="template-card scroll-enter" id="template-a">
+      <div class="template-card scroll-enter" id="template-a" role="tabpanel" aria-labelledby="tab-template-a">
         <div class="template-section">
           <div class="template-section__label">State</div>
           <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
@@ -292,7 +304,7 @@
       </div>
 
       <!-- Template B (includes GHOST-activation) -->
-      <div class="template-card scroll-enter" id="template-b" style="display:none;">
+      <div class="template-card scroll-enter" id="template-b" style="display:none;" role="tabpanel" aria-labelledby="tab-template-b">
         <div class="template-section">
           <div class="template-section__label">State</div>
           <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>

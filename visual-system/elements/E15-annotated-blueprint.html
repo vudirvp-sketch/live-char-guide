@@ -78,6 +78,27 @@
       min-height: 500px;
     }
 
+    @media (max-width: 768px) {
+      .blueprint-area {
+        min-height: auto;
+        padding: var(--gap-md);
+      }
+      .callout {
+        position: static !important;
+        max-width: 100%;
+        margin-bottom: var(--gap-sm);
+      }
+      .card-template {
+        max-width: 100%;
+      }
+      .annotation-layer--active {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-sm);
+        margin-bottom: var(--gap-md);
+      }
+    }
+
     /* Card template (central) */
     .card-template {
       background: var(--bg-raised);
@@ -183,32 +204,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E01">E01</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E06">E06</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E12">E12</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E14">E14</span>
-      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E15 (текущий)">E15</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E16">E16</span>
-      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E14">E14</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E15 (текущий)">E15</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label=E17">E17</span>
     </div>
   </nav>
 
@@ -224,17 +245,17 @@
 
       <!-- Layer toggle buttons -->
       <div class="layer-toggles" role="tablist" aria-label="Annotation layer selection">
-        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" data-layer="structure">Структура</button>
-        <button class="layer-toggle layer-toggle--anchors" role="tab" aria-selected="false" data-layer="anchors">Anchors</button>
-        <button class="layer-toggle layer-toggle--spine" role="tab" aria-selected="false" data-layer="spine">SPINE</button>
-        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" data-layer="directives">Директивы</button>
+        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" id="tab-structure" aria-selected="true" aria-controls="panel-structure" data-layer="structure">Структура</button>
+        <button class="layer-toggle layer-toggle--anchors" role="tab" id="tab-anchors" aria-selected="false" aria-controls="panel-anchors" data-layer="anchors">Anchors</button>
+        <button class="layer-toggle layer-toggle--spine" role="tab" id="tab-spine" aria-selected="false" aria-controls="panel-spine" data-layer="spine">SPINE</button>
+        <button class="layer-toggle layer-toggle--directives" role="tab" id="tab-directives" aria-selected="false" aria-controls="panel-directives" data-layer="directives">Директивы</button>
       </div>
 
       <!-- Blueprint area with card template -->
       <div class="blueprint-area scroll-enter">
 
         <!-- Structure layer (default active) -->
-        <div class="annotation-layer annotation-layer--active" data-layer="structure">
+        <div class="annotation-layer annotation-layer--active" data-layer="structure" role="tabpanel" id="panel-structure" aria-labelledby="tab-structure">
           <div class="callout callout--structure" style="top:10px; right:20px;">
             SP: ~50-200 токенов<br>Контейнер — содержит директивы, идентичность, anti-godmoding
           </div>
@@ -250,7 +271,7 @@
         </div>
 
         <!-- Anchors layer -->
-        <div class="annotation-layer" data-layer="anchors">
+        <div class="annotation-layer" data-layer="anchors" role="tabpanel" id="panel-anchors" aria-labelledby="tab-anchors">
           <div class="callout callout--anchors" style="top:260px; right:20px;">
             Подпанель Anchors<br>Формат T→A→P с Embodiment<br>Только FLAW-связанные (→ E03, E04)
           </div>
@@ -260,7 +281,7 @@
         </div>
 
         <!-- SPINE layer -->
-        <div class="annotation-layer" data-layer="spine">
+        <div class="annotation-layer" data-layer="spine" role="tabpanel" id="panel-spine" aria-labelledby="tab-spine">
           <div class="callout callout--spine" style="top:130px; right:20px;">
             GHOST→LIE→FLAW→NEED→WANT<br>Записано внутри блока Description<br>Елена: предательство→недоверие→изоляция→связь→контроль
           </div>
@@ -270,7 +291,7 @@
         </div>
 
         <!-- Directives layer -->
-        <div class="annotation-layer" data-layer="directives">
+        <div class="annotation-layer" data-layer="directives" role="tabpanel" id="panel-directives" aria-labelledby="tab-directives">
           <div class="callout callout--directives" style="top:20px; right:20px;">
             SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
           </div>
