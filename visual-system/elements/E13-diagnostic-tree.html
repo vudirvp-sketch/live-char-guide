@@ -186,14 +186,14 @@
     <p class="element-subtitle">Паттерн: P3 — Tree / Branching &middot; Источник: Part 9 (Диагностика и тестирование)</p>
   </header>
 
-  <main class="element-content" style="margin-top: var(--gap-xl);">
+  <main class="element-content p-tree" style="margin-top: var(--gap-xl);">
 
     <div class="tree-container">
 
       <!-- Root 1: Character drifts -->
       <div class="tree-root scroll-enter">
         <div class="tree-root__title">Симптом 1</div>
-        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
           «Персонаж дрейфует после 5–10 сообщений»
         </div>
         <div class="sub-tree">
@@ -244,7 +244,7 @@
       <!-- Root 2: Voice sounds generic -->
       <div class="tree-root scroll-enter">
         <div class="tree-root__title">Симптом 2</div>
-        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
           «Голос звучит типично / неразличимо»
         </div>
         <div class="sub-tree">
@@ -295,7 +295,7 @@
       <!-- Root 3: Character ignores actions -->
       <div class="tree-root scroll-enter">
         <div class="tree-root__title">Симптом 3</div>
-        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
           «Персонаж игнорирует действия пользователя»
         </div>
         <div class="sub-tree">
@@ -355,14 +355,25 @@
   </footer>
 
   <script>
-    function toggleTree(el) {
-      const subTree = el.nextElementSibling;
-      const isOpen = subTree.classList.contains('is-open');
-      subTree.classList.toggle('is-open');
-      el.setAttribute('aria-expanded', !isOpen);
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
+      // Привязка обработчиков через addEventListener (CSP-совместимо, без inline onclick)
+      function toggleTree(el) {
+        const subTree = el.nextElementSibling;
+        const isOpen = subTree.classList.contains('is-open');
+        subTree.classList.toggle('is-open');
+        el.setAttribute('aria-expanded', String(!isOpen));
+      }
+
+      document.querySelectorAll('[data-toggle="tree"]').forEach(btn => {
+        btn.addEventListener('click', () => toggleTree(btn));
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTree(btn);
+          }
+        });
+      });
+
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));

@@ -218,16 +218,16 @@
     <p class="element-subtitle">Паттерн: P6 — Blueprint / Аннотированная карточка &middot; Источник: Part 10 (полная карточка Елены)</p>
   </header>
 
-  <main class="element-content" style="margin-top: var(--gap-xl);">
+  <main class="element-content p-blueprint" style="margin-top: var(--gap-xl);">
 
     <div class="blueprint-container scroll-enter">
 
       <!-- Layer toggle buttons -->
       <div class="layer-toggles" role="tablist" aria-label="Annotation layer selection">
-        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" onclick="setLayer('structure')">Структура</button>
-        <button class="layer-toggle layer-toggle--anchors" role="tab" aria-selected="false" onclick="setLayer('anchors')">Anchors</button>
-        <button class="layer-toggle layer-toggle--spine" role="tab" aria-selected="false" onclick="setLayer('spine')">SPINE</button>
-        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" onclick="setLayer('directives')">Директивы</button>
+        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" data-layer="structure">Структура</button>
+        <button class="layer-toggle layer-toggle--anchors" role="tab" aria-selected="false" data-layer="anchors">Anchors</button>
+        <button class="layer-toggle layer-toggle--spine" role="tab" aria-selected="false" data-layer="spine">SPINE</button>
+        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" data-layer="directives">Директивы</button>
       </div>
 
       <!-- Blueprint area with card template -->
@@ -329,29 +329,32 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
   </footer>
 
   <script>
-    function setLayer(layerName) {
-      // Update toggle buttons
-      document.querySelectorAll('.layer-toggle').forEach(btn => {
-        btn.classList.remove('layer-toggle--active');
-        btn.setAttribute('aria-selected', 'false');
-      });
-      const activeBtn = document.querySelector(`.layer-toggle--${layerName}`);
-      if (activeBtn) {
-        activeBtn.classList.add('layer-toggle--active');
-        activeBtn.setAttribute('aria-selected', 'true');
-      }
-
-      // Update annotation layers
-      document.querySelectorAll('.annotation-layer').forEach(layer => {
-        layer.classList.remove('annotation-layer--active');
-      });
-      const activeLayer = document.querySelector(`[data-layer="${layerName}"]`);
-      if (activeLayer) {
-        activeLayer.classList.add('annotation-layer--active');
-      }
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
+      // Переключение слоёв через addEventListener (CSP-совместимо, без inline onclick)
+      function setLayer(layerName) {
+        document.querySelectorAll('.layer-toggle').forEach(btn => {
+          btn.classList.remove('layer-toggle--active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        const activeBtn = document.querySelector(`.layer-toggle--${layerName}`);
+        if (activeBtn) {
+          activeBtn.classList.add('layer-toggle--active');
+          activeBtn.setAttribute('aria-selected', 'true');
+        }
+
+        document.querySelectorAll('.annotation-layer').forEach(layer => {
+          layer.classList.remove('annotation-layer--active');
+        });
+        const activeLayer = document.querySelector(`[data-layer="${layerName}"]`);
+        if (activeLayer) {
+          activeLayer.classList.add('annotation-layer--active');
+        }
+      }
+
+      document.querySelectorAll('.layer-toggle[data-layer]').forEach(btn => {
+        btn.addEventListener('click', () => setLayer(btn.dataset.layer));
+      });
+
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));

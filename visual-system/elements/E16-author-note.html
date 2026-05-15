@@ -230,7 +230,7 @@
     <p class="element-subtitle">Паттерн: P2 — Flow (вертикальная временная шкала) &middot; Источник: Part 7A, Part 3 (Влияние на голос)</p>
   </header>
 
-  <main class="element-content" style="margin-top: var(--gap-xl);">
+  <main class="element-content p-stack" style="margin-top: var(--gap-xl);">
 
     <div class="an-container scroll-enter">
 
@@ -271,8 +271,8 @@
 
       <!-- Template A/B toggle -->
       <div class="template-toggle" role="tablist">
-        <button class="template-btn template-btn--active" role="tab" aria-selected="true" onclick="setTemplate(this, 'a')">Шаблон A (3 секции)</button>
-        <button class="template-btn" role="tab" aria-selected="false" onclick="setTemplate(this, 'b')">Шаблон B (4 секции)</button>
+        <button class="template-btn template-btn--active" role="tab" aria-selected="true" data-template="a">Шаблон A (3 секции)</button>
+        <button class="template-btn" role="tab" aria-selected="false" data-template="b">Шаблон B (4 секции)</button>
       </div>
 
       <!-- Template A -->
@@ -331,19 +331,24 @@
   </footer>
 
   <script>
-    function setTemplate(btn, type) {
-      document.querySelectorAll('.template-btn').forEach(b => {
-        b.classList.remove('template-btn--active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('template-btn--active');
-      btn.setAttribute('aria-selected', 'true');
-
-      document.getElementById('template-a').style.display = type === 'a' ? 'block' : 'none';
-      document.getElementById('template-b').style.display = type === 'b' ? 'block' : 'none';
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
+      // Переключение шаблонов через addEventListener (CSP-совместимо, без inline onclick)
+      function setTemplate(btn, type) {
+        document.querySelectorAll('.template-btn').forEach(b => {
+          b.classList.remove('template-btn--active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('template-btn--active');
+        btn.setAttribute('aria-selected', 'true');
+
+        document.getElementById('template-a').style.display = type === 'a' ? 'block' : 'none';
+        document.getElementById('template-b').style.display = type === 'b' ? 'block' : 'none';
+      }
+
+      document.querySelectorAll('.template-btn[data-template]').forEach(btn => {
+        btn.addEventListener('click', () => setTemplate(btn, btn.dataset.template));
+      });
+
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));

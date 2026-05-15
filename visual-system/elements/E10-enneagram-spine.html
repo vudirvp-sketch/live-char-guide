@@ -169,7 +169,7 @@
     <p class="element-subtitle">Паттерн: P4 — Радиальный (круг + связи) &middot; Источник: Часть 5, data/enneagram.json</p>
   </header>
 
-  <main class="element-content" style="margin-top: var(--gap-xl);">
+  <main class="element-content p-radial" style="margin-top: var(--gap-xl);">
 
     <div class="enneagram-container scroll-enter" id="enneagram-wrap">
       <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Круг Enneagram с 9 типами личности, привязанными к элементам фреймворка SPINE">
@@ -180,21 +180,21 @@
 
         <!-- Internal triangle (3-6-9) — violet dashed -->
         <polygon class="enneagram-anim"
-                 points="300,60 473,370 127,370"
+                 points="300,60 473,360 127,360"
                  fill="none" stroke="var(--accent-violet)" stroke-width="1" stroke-dasharray="6 4" opacity="0.4"/>
 
         <!-- Connection lines (1-4-2-8-5-7-1 pattern) — simplified -->
-        <line x1="300" y1="60" x2="127" y2="130" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
-        <line x1="127" y1="130" x2="127" y2="370" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
-        <line x1="127" y1="370" x2="300" y2="60" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="171" y1="107" x2="232" y2="448" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="232" y1="448" x2="103" y2="225" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="103" y1="225" x2="429" y2="107" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
 
         <!-- Stress arrows (danger/red) — simplified directional hints -->
-        <line x1="300" y1="60" x2="473" y2="370" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
-        <line x1="473" y1="370" x2="127" y2="130" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <line x1="300" y1="60" x2="473" y2="360" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <line x1="473" y1="360" x2="171" y2="107" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
 
         <!-- Growth arrows (success/green) — simplified -->
-        <line x1="300" y1="60" x2="127" y2="130" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
-        <line x1="473" y1="370" x2="300" y2="60" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <line x1="300" y1="60" x2="171" y2="107" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <line x1="473" y1="360" x2="300" y2="60" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
 
         <!-- Type nodes — positioned on circle -->
         <!-- Type 9 — top center -->
@@ -205,50 +205,50 @@
 
         <!-- Type 1 — top-left -->
         <g class="type-node" data-type="1">
-          <circle cx="127" cy="130" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="127" y="134" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">1</text>
+          <circle cx="171" cy="107" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="171" y="111" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">1</text>
         </g>
 
         <!-- Type 2 — left -->
         <g class="type-node" data-type="2">
-          <circle cx="60" cy="280" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="60" y="284" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">2</text>
+          <circle cx="103" cy="225" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="103" y="229" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">2</text>
         </g>
 
         <!-- Type 3 — bottom-left -->
         <g class="type-node" data-type="3">
-          <circle cx="127" cy="410" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="127" y="414" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">3</text>
+          <circle cx="127" cy="360" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="127" y="364" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">3</text>
         </g>
 
         <!-- Type 4 — bottom-center-left -->
         <g class="type-node" data-type="4">
-          <circle cx="230" cy="440" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="230" y="444" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">4</text>
+          <circle cx="232" cy="448" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="232" y="452" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">4</text>
         </g>
 
         <!-- Type 5 — bottom-center-right -->
         <g class="type-node" data-type="5">
-          <circle cx="370" cy="440" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="370" y="444" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">5</text>
+          <circle cx="368" cy="448" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="368" y="452" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">5</text>
         </g>
 
         <!-- Type 6 — bottom-right -->
         <g class="type-node" data-type="6">
-          <circle cx="473" cy="410" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="473" y="414" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">6</text>
+          <circle cx="473" cy="360" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="473" y="364" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">6</text>
         </g>
 
         <!-- Type 7 — right -->
         <g class="type-node" data-type="7">
-          <circle cx="540" cy="280" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="540" y="284" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">7</text>
+          <circle cx="497" cy="225" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="497" y="229" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">7</text>
         </g>
 
         <!-- Type 8 — top-right -->
         <g class="type-node" data-type="8">
-          <circle cx="473" cy="130" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
-          <text x="473" y="134" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">8</text>
+          <circle cx="429" cy="107" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="429" y="111" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">8</text>
         </g>
 
       </svg>

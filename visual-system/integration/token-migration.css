@@ -1,0 +1,126 @@
+/* ============================================================
+   Token Migration — Визуальная система → Сборка руководства
+   
+   Этот файл содержит финальные слитые CSS-переменные, 
+   которые нужно добавить в существующую таблицу стилей руководства.
+   
+   Принцип: VS-токены добавляются БЕЗ удаления существующих токенов.
+   Дубликаты маппятся через алиасы.
+   ============================================================ */
+
+:root {
+  /* === ЦВЕТА — Основная палитра (из DESIGN-TOKENS.css) === */
+  /* Если существующий проект уже имеет --color-bg-primary и т.д.,
+     добавьте алиасы: --color-bg-primary: var(--bg-deep); */
+  
+  --bg-deep:       #08090d;   /* Основной фоновый */
+  --bg-panel:      #0e1117;   /* Фон панели */
+  --bg-raised:     #161a22;   /* Приподнятый элемент */
+  --border:        #1e2430;   /* Граница по умолчанию */
+  --border-active: #2a3344;   /* Активная граница */
+  --text-primary:  #e2e6ed;   /* Основной текст */
+  --text-secondary:#8b95a8;   /* Вторичный текст (WCAG AA ~6.5:1 на --bg-deep) */
+  --text-muted:    #535c6e;   /* Приглушённый текст (WCAG FAIL на --bg-deep, ~3.5:1. НЕ для существенной инфо) */
+  --accent-cyan:   #3cc8ff;   /* Основной акцент */
+  --accent-violet: #8b5cf6;   /* Вторичный акцент (личность/психология) */
+  --accent-amber:  #f0a040;   /* Третичный акцент (предупреждение) */
+  --danger:        #d9455a;   /* Опасность/ошибка */
+  --success:       #3fb68b;   /* Успех/рост */
+
+  /* === ОТТЕНКИ (tints) — полупрозрачные === */
+  --cyan-3:   rgba(60,200,255,0.03);
+  --cyan-5:   rgba(60,200,255,0.05);
+  --cyan-6:   rgba(60,200,255,0.06);
+  --cyan-8:   rgba(60,200,255,0.08);
+  --cyan-10:  rgba(60,200,255,0.10);
+  --cyan-12:  rgba(60,200,255,0.12);
+  --cyan-15:  rgba(60,200,255,0.15);
+  --cyan-20:  rgba(60,200,255,0.20);
+  --cyan-25:  rgba(60,200,255,0.25);
+  --cyan-30:  rgba(60,200,255,0.30);
+  --cyan-40:  rgba(60,200,255,0.40);
+  --cyan-50:  rgba(60,200,255,0.50);
+  --cyan-60:  rgba(60,200,255,0.60);
+  --cyan-70:  rgba(60,200,255,0.70);
+  --violet-4:  rgba(139,92,246,0.04);
+  --violet-6:  rgba(139,92,246,0.06);
+  --violet-8:  rgba(139,92,246,0.08);
+  --violet-10: rgba(139,92,246,0.10);
+  --violet-12: rgba(139,92,246,0.12);
+  --violet-15: rgba(139,92,246,0.15);
+  --violet-20: rgba(139,92,246,0.20);
+  --violet-25: rgba(139,92,246,0.25);
+  --violet-30: rgba(139,92,246,0.30);
+  --violet-35: rgba(139,92,246,0.35);
+  --violet-50: rgba(139,92,246,0.50);
+  --violet-55: rgba(139,92,246,0.55);
+  --violet-65: rgba(139,92,246,0.65);
+  --violet-70: rgba(139,92,246,0.70);
+  --violet-85: rgba(139,92,246,0.85);
+  --amber-4:   rgba(240,160,64,0.04);
+  --amber-6:   rgba(240,160,64,0.06);
+  --amber-10:  rgba(240,160,64,0.10);
+  --amber-25:  rgba(240,160,64,0.25);
+  --amber-30:  rgba(240,160,64,0.30);
+  --amber-50:  rgba(240,160,64,0.50);
+  --danger-4:  rgba(217,69,90,0.04);
+  --danger-6:  rgba(217,69,90,0.06);
+  --danger-15: rgba(217,69,90,0.15);
+  --danger-25: rgba(217,69,90,0.25);
+  --danger-30: rgba(217,69,90,0.30);
+  --danger-40: rgba(217,69,90,0.40);
+  --danger-50: rgba(217,69,90,0.50);
+  --success-15: rgba(63,182,139,0.15);
+  --border-20: rgba(30,36,48,0.20);
+  --border-40: rgba(30,36,48,0.40);
+  --border-50: rgba(30,36,48,0.50);
+  --muted-15:  rgba(83,92,110,0.15);
+  --muted-20:  rgba(83,92,110,0.20);
+  --muted-25:  rgba(83,92,110,0.25);
+  --muted-30:  rgba(83,92,110,0.30);
+
+  /* === СВЕЧЕНИЕ === */
+  --glow-cyan:   0 0 12px rgba(60,200,255,0.25);
+  --glow-violet: 0 0 12px rgba(139,92,246,0.25);
+  --glow-danger: 0 0 10px rgba(217,69,90,0.30);
+  --glow-amber:  0 0 10px rgba(240,160,64,0.25);
+
+  /* === ТИПОГРАФИКА === */
+  --font-display: 'Bricolage Grotesque', sans-serif;  /* Заголовки элементов */
+  --font-heading: 'DM Sans', sans-serif;               /* Метки, подзаголовки */
+  --font-body:    'Geist', sans-serif;                  /* Основной текст */
+  --font-mono:    'JetBrains Mono', monospace;          /* Данные, токены */
+  --font-micro:   'Inter', sans-serif;                  /* Сноски */
+
+  /* === ОТОБРАЖЕНИЕ === */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --line-width: 1px;
+  --line-bold:  2px;
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 28px;
+  --gap-xl: 48px;
+
+  /* === АНИМАЦИЯ === */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 600ms;
+}
+
+/* === АЛИАСЫ ДЛЯ СОВМЕСТИМОСТИ === */
+/* Если существующий проект использует другие имена токенов,
+   раскомментируйте нужные алиасы: */
+
+/*
+--color-bg-primary:    var(--bg-deep);
+--color-bg-secondary:  var(--bg-panel);
+--color-bg-tertiary:   var(--bg-raised);
+--color-text-primary:  var(--text-primary);
+--color-text-secondary: var(--text-secondary);
+--color-border:        var(--border);
+*/

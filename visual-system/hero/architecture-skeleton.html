@@ -70,7 +70,7 @@
 
   <div id="hero-container">
     <div class="loading-fallback" id="loading">Загрузка 3D-сцены...</div>
-    <canvas id="hero-canvas" style="display:none;"></canvas>
+    <canvas id="hero-canvas" style="display:none;" role="img" aria-label="3D-анимация сборки анатомии карточки персонажа"></canvas>
     <!-- Метки позиционируются через JS -->
     <div class="label-overlay label-overlay--sp" id="label-sp">SP</div>
     <div class="label-overlay label-overlay--desc" id="label-desc">Description</div>
@@ -291,6 +291,9 @@
       label.style.top = y + 'px';
     }
 
+    // --- Поддержка prefers-reduced-motion ---
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // --- Основной цикл анимации ---
     function animate() {
       requestAnimationFrame(animate);
@@ -298,6 +301,21 @@
       const elapsed = clock.getElapsedTime();
       if (startTime === null) startTime = elapsed;
       const t = elapsed - startTime;
+
+      if (prefersReducedMotion) {
+        // Статичное финальное состояние без анимации
+        spineMesh.material.opacity = 0.8;
+        spFrame.position.x = 0;
+        descPlane.position.y = 0;
+        exPlane.position.x = 0;
+        anchorPlane.scale.set(1, 1, 1);
+        greetPlane.position.y = -1.2;
+        connLines.forEach(l => l.material.opacity = 0.25);
+        nodes.forEach(n => n.material.opacity = 0.9);
+        Object.values(labels).forEach(l => l.classList.add('is-visible'));
+        composer.render();
+        return; // Без цикла анимации
+      }
 
       // Анимации таймлайна
       // 0.0–0.5: SPINE появляется
