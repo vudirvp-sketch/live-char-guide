@@ -31,7 +31,7 @@ section B MUST reference back to A. Unidirectional references create orphan know
 
 | # | Source Section | Target Section | Forward Link | Back Link Status |
 |---|---------------|----------------|-------------|-----------------|
-| 1 | p1_conclusion | p9_basic_checklist | `href="#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_core_rules via back-link |
+| 1 | p1_top3_problems | p9_basic_checklist | `href="#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_core_rules via back-link |
 | 2 | p7a_system_prompt | p7a_core_directives | Internal href `#p7a_core_directives` | ✅ p7a_core_directives referenced as sub-section |
 | 3 | p7a_system_prompt | p7a_tone_frame | Internal href `#p7a_tone_frame` | ✅ p7a_tone_frame is sub-section of p7a |
 | 4 | p7b_lorebook_basics | p7b_lorebook_mechanics | `href="#p7b_lorebook_mechanics"` | ✅ p7b_lorebook_mechanics references p7b_lorebook_basics via callout link |

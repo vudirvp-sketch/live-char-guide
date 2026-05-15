@@ -1,6 +1,6 @@
 <!--
   Part 9: Diagnostics and Debugging (Диагностика и отладка)
-  Live Character Guide v8.0.0 Master HTML
+  Live Character Guide v9 Master HTML
 
   v8: Restructured diagnostics — symptom→AP mapping, no parameter duplication with Part 7,
       p9_top5_problems renamed to p9_additional_problems
@@ -49,11 +49,11 @@
 <tr><th>Блок</th><th>Проверка</th><th>Ссылка</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding? (строка «Never speak or act for {{user}}.»)<br/>☐ Person defined?<br/>☐ Narrative tense? (прошедшее/настоящее)<br/>☐ Format Lock? (одна система разметки во всех Examples)</td><td><a href="#p7a_system_prompt">p7a_system_prompt</a>, <a href="#p7a_core_directives">p7a_core_directives</a>, <a href="#p7a_format_lock">p7a_format_lock</a></td></tr>
-<tr><td><strong>Description</strong></td><td>☐ Anchors с ценой? (формат T→A→P) (→ <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>)<br/>☐ Нет голоса? (голос только в Examples/Greeting) (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)<br/>☐ Психология только в Description? (→ <a href="#p4_spine_overview">Part 4: SPINE</a>)</td><td><a href="#p1_core_rules">3 ключевых принципа</a></td></tr>
-<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description) (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td><a href="#p3_examples_rules">p3_examples_rules</a>, <a href="#p2_embodiment">p2_embodiment</a></td></tr>
-<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p3_greeting">p3_greeting</a>, <a href="#p1_token_budget">Token Budget (бюджет токенов)</a></td></tr>
-<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p8_ap5_reppen_high">AP-5</a>, <a href="#p8_ap7_presence_penalty">AP-7</a>, <a href="#p7a_sampling_params">p7a_sampling_params</a></td></tr>
+<tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding? (строка «Never speak or act for {{user}}.»)<br/>☐ Person defined?<br/>☐ Narrative tense? (прошедшее/настоящее)<br/>☐ Format Lock? (одна система разметки во всех Examples)</td><td><a href="#p7a_system_prompt">Part 7A</a></td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Anchors с ценой? (формат T→A→P)<br/>☐ Нет голоса? (голос только в Examples/Greeting)<br/>☐ Психология только в Description?</td><td><a href="#p4_spine_overview">Part 4: SPINE</a></td></tr>
+<tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td><a href="#p3_examples_rules">Part 3</a></td></tr>
+<tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p7b_greeting">Part 7B</a></td></tr>
+<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p7a_sampling_params">Part 7A</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -73,8 +73,8 @@
 <tr><th>#</th><th>Проблема</th><th>Решение</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>Установите RepPen 1.0–1.05; проверьте PP = 0.0 (<a href="#p8_ap5_reppen_high">AP-5</a>, <a href="#p8_ap7_presence_penalty">AP-7</a>)</td></tr>
-<tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Добавьте 2–3 Examples с уникальным голосом (<a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</td></tr>
+<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>Установите RepPen 1.0–1.05; проверьте PP = 0.0</td></tr>
+<tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Добавьте 2–3 Examples с уникальным голосом</td></tr>
 </tbody>
 </table>
 </div>
@@ -97,13 +97,13 @@
 <tr><td>Модель игнорирует характер</td><td>Examples не показывают голос?</td><td>Fix → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></td></tr>
 <tr><td>Персонаж слишком мягкий</td><td>Нет FLAW-linked Anchors?</td><td>Fix → <a href="#p4_spine_mapping">Part 4: SPINE→Anchors</a></td></tr>
 <tr><td>Голос «утекает» в длинных репликах</td><td>Менее 3 Examples?</td><td>Fix → <a href="#p3_examples_rules">Part 3: Правила Examples</a></td></tr>
-<tr><td>Персонаж не показывает уязвимость</td><td>Нет Цены у Anchors?</td><td>Fix → <a href="#p2_anchor_rules">Part 2: Anchor Format</a>, <a href="#p8_ap2_missing_price">AP-2</a></td></tr>
-<tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен?</td><td>Fix → <a href="#p4_spine_check">Part 4: SPINE Check</a>, <a href="#p8_ap9_spine_broken">AP-9</a></td></tr>
-<tr><td>Повторяющиеся фразы</td><td>RepPen > 1.10?</td><td>Fix → <a href="#p7a_sampling_params">Part 7A: Параметры сэмплинга</a>, <a href="#p8_ap5_reppen_high">AP-5</a></td></tr>
-<tr><td>Персонаж слишком много говорит</td><td>Examples длиннее 120 токенов?</td><td>Fix → <a href="#p3_examples_rules">Part 3: Правила Examples</a></td></tr>
-<tr><td>Модель ломает формат</td><td>Нет Format Lock?</td><td>Fix → <a href="#p7a_format_lock">Part 7A: Format Lock</a></td></tr>
-<tr><td>Персонаж забывает контекст</td><td>Карточка + контекст > контекстное окно?</td><td>Fix → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a>, <a href="#p8_ap14_context_violation">AP-14</a></td></tr>
-<tr><td>Неестественные переходы</td><td>Нет transition sentences?</td><td>Fix → <a href="#p2_embodiment">Part 2: Embodiment</a></td></tr>
+<tr><td>Персонаж не показывает уязвимость</td><td>Нет Цены у Anchors?</td><td>Fix → <a href="#p2_anchor_rules">Part 2: Anchor Format</a></td></tr>
+<tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен?</td><td>Fix → <a href="#p4_spine_check">Part 4: SPINE Check</a></td></tr>
+<tr><td>Повторяющиеся фразы</td><td>RepPen > 1.10?</td><td>Fix → <a href="#p8_ap5_reppen_high">Part 8: AP-5</a></td></tr>
+<tr><td>Персонаж слишком много говорит</td><td>Examples длиннее 120 токенов?</td><td>Укоротите Examples (≤120 токенов)</td></tr>
+<tr><td>Модель ломает формат</td><td>Нет Format Lock?</td><td>Добавить Format Lock в SP</td></tr>
+<tr><td>Персонаж забывает контекст</td><td>Карточка + контекст > контекстное окно?</td><td>Fix → <a href="#p8_ap14_context_violation">Part 8: AP-14</a></td></tr>
+<tr><td>Неестественные переходы</td><td>Нет transition sentences?</td><td>Добавить Embodiment-переходы</td></tr>
 <tr><td>Потеря внутренней логики персонажа</td><td>Нет CoT Anchor?</td><td>Fix → <a href="#p6_cot_basics">Part 6: CoT</a></td></tr>
 </tbody>
 </table>
@@ -122,10 +122,10 @@
 <tbody>
 <tr><td>Персонаж теряет голос</td><td>Voice Leak в Description?</td><td>Удалить голос из Description (AP-3)</td><td>→ Следующая проверка</td></tr>
 <tr><td></td><td>Достаточно ли Examples?</td><td>Добавить 2–3 Examples</td><td>→ Следующая проверка</td></tr>
-<tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination (Fix → <a href="#p3_multi_char">Part 3: Voice Bleed</a>)</td></tr>
+<tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination</td></tr>
 <tr><td>Персонаж годмодит</td><td>Есть ли Anti-godmoding в SP?</td><td>Добавить 2 строки (AP-6)</td><td>→ Усилить Influence Boundary</td></tr>
-<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked Anchor</td><td>→ Проверить OCEAN: >2 полюса? (AP-15)</td></tr>
-<tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a> (AP-5)</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
+<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked Anchor</td><td>→ Проверить OCEAN: >2 полюса? → <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a></td></tr>
+<tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Fix → AP-5</td><td>→ Проверить PP: >0? (AP-7)</td></tr>
 <tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить Anchors на дублирование</td></tr>
 <tr><td>Модель теряет внутреннюю логику персонажа</td><td>Есть ли у персонажа внутренний процесс?</td><td>Fix → <a href="#p6_cot_basics">Part 6: CoT</a></td><td>→ Проверить SPINE на консистентность</td></tr>
 </tbody>
@@ -261,6 +261,7 @@
 </table>
 </div>
 
+<!-- Demonstrates: DIAGNOSTICS, SPINE -->
 <h4>Пример: Quick Check для Елены</h4>
 
 <div class="example-label illustration">ILLUSTRATION</div>
@@ -299,6 +300,7 @@
 </div>
 </details>
 
+<!-- Demonstrates: DIAGNOSTICS, SPINE, GHOST LAYERS -->
 <h4>Пример: Pre-Deploy для Выщебленного (полная карточка)</h4>
 
 <div class="example-label illustration">ILLUSTRATION</div>
@@ -334,7 +336,7 @@
 
 <p><strong>Итог:</strong> Выщербленный проходит Pre-Deploy полностью.</p>
 
-<p>Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки с GHOST Layers, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля. → <a href="#p10_elena">Part 10</a></p>
+<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки с GHOST Layers, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля. → <a href="#p10_elena">Part 10</a></p>
 
 </section>
 

@@ -1,6 +1,6 @@
 <!--
   Part 8: Anti-patterns (Анти-паттерны)
-  Live Character Guide v8.0.0 Master HTML
+  Live Character Guide v9 Master HTML
 
   v8: AP-15 merged, sequential AP ordering, reduced duplication
   Phase 6: Reduced content duplication — APs reference canonical Parts instead of re-explaining
@@ -123,6 +123,7 @@
 <p><strong>Симптом:</strong> Психологический анализ (SPINE, GHOST) помещён в System Prompt</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
 <p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты.</p>
+<div class="example-label illustration">ILLUSTRATION</div>
 <div class="callout rule">
 <p><strong>RULE:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).</p>
 </div>
@@ -133,6 +134,7 @@
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
 <p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
+<div class="example-label illustration">ILLUSTRATION</div>
 </div>
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding">
@@ -144,15 +146,16 @@
 <div class="example-label illustration">ILLUSTRATION</div>
 <pre><code>Never speak or act for {{user}}.</code></pre>
 <p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <!-- Demonstrates: INFLUENCE BOUNDARY --><code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
-<p>Fix → <a href="#p1_top3_problems">Part 1: Топ-3 ошибки</a></p>
 <p>Fix → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
 </section>
+<p>Следующий анти-паттерн связан с параметрами генерации — даже правильная карточка может «сломаться» при неверных настройках сэмплинга.</p>
 <section  data-section="p8_ap7_presence_penalty">
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
 <p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
+<div class="example-label illustration">ILLUSTRATION</div>
 </div>
 </section>
 <section  data-section="p8_ap8_ghost_no_anchors">
@@ -212,6 +215,7 @@ WANT: Доказать правоту самостоятельно
 
 </div>
 </section>
+<p>Структура SPINE правильна — но избыточность тоже вредит. Перегрузка CoT — анти-паттерн, при котором персонаж «думает» больше, чем «действует».</p>
 <section  data-section="p8_ap10_cot_overload">
 <div class="antipattern-card">
 <h3>AP-10: Перегрузка CoT (CoT Overload)</h3>
@@ -242,6 +246,7 @@ WANT: Доказать правоту самостоятельно
 <p>Fix → <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
 </div>
 </section>
+<p>Voice Bleed — поведенческая проблема. Следующие два анти-паттерна — технические: невалидный XML и конфликт записей Lorebook.</p>
 <section  data-section="p8_ap12_xml_malformed">
 <div class="antipattern-card">
 <h3>AP-12: Невалидный XML (XML Malformed)</h3>
@@ -264,12 +269,14 @@ WANT: {{want}}
 
 </div>
 </section>
+<p>XML валиден — но записи внутри него могут противоречить друг другу. Lorebook Conflict — анти-паттерн, при котором записи базы знаний конфликтуют с Description.</p>
 <section  data-section="p8_ap13_lorebook_conflict">
 <div class="antipattern-card">
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
 <p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
 <p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description. Fix → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a></p>
+<div class="example-label illustration">ILLUSTRATION</div>
 
 </div>
 </section>
@@ -279,6 +286,7 @@ WANT: {{want}}
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
 <p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Fix → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a></p>
+<div class="example-label illustration">ILLUSTRATION</div>
 </div>
 </section>
 <section  data-section="p8_ap15_nested_anchors">
@@ -302,6 +310,6 @@ WANT: {{want}}
 </div>
 </div>
 
-<p>Анти-паттерны указывают, чего избегать. Диагностика показывает, работает ли ваша карточка на самом деле. Этот раздел предоставляет структурированный протокол тестирования: от быстрых проверок до полноценной сценарной валидации. → <a href="#p9_quality_scale">Part 9</a></p>
+<p class="bridge-paragraph">Анти-паттерны указывают, чего избегать. Диагностика показывает, работает ли ваша карточка на самом деле. Этот раздел предоставляет структурированный протокол тестирования: от быстрых проверок до полноценной сценарной валидации. → <a href="#p9_quality_scale">Part 9</a></p>
 
 </section>

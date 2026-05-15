@@ -19,8 +19,8 @@
 <ul>
 <li><strong>Identity:</strong> "You are {{char}}" — кто персонаж</li>
 <li><strong>Anti-godmoding (анти-годмодинг):</strong> две строки — запрет + позитивная формулировка</li>
-<li><strong>CORE DIRECTIVES:</strong> все 7 директив — <a href="#p7a_core_directives">подробно ниже</a></li>
-<li><strong>Tone Frame:</strong> тональность + ограничение сеттинга — <a href="#p7a_tone_frame">Tone Frame</a></li>
+<li><strong>CORE DIRECTIVES:</strong> все 7 директив (подробно ниже)</li>
+<li><strong>Tone Frame:</strong> тональность + ограничение сеттинга (Tone Frame ниже)</li>
 </ul>
 
 <h3>Канонический шаблон SP</h3>
@@ -41,7 +41,7 @@ Format Lock:
 - Narrative tense: [past/present]
 - Never change this format</code></pre>
 
-<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Директивы пишутся на английском — <a href="#p7a_core_directives">почему → CORE DIRECTIVES</a></small> Директивы 6 и 7 ссылаются на свои подробные описания по номеру — полный текст каждой директивы не дублируется в шаблоне.</p>
+<p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Директивы пишутся на английском — см. CORE DIRECTIVES ниже.</small> Директивы 6 и 7 ссылаются на свои подробные описания по номеру — полный текст каждой директивы не дублируется в шаблоне.</p>
 
 <div class="callout rule">
 <p><strong>RULE: Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
@@ -97,10 +97,10 @@ Format Lock:
 </div>
 
 <h4>4. Environmental Reactivity</h4>
-<p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно. → <a href="#p2_env_reactivity">Part 2: Environmental Reactivity</a></p>
+<p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно.</p>
 
 <h4>5. Influence Boundary</h4>
-<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён.</p>
 
 <h4>6. Consequence Driven (Динамика следствий)</h4>
 <p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → Behavioral Anchors (поведенческие якоря)</a> <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
@@ -245,7 +245,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <section  data-section="p7a_sampling_params">
 <h3>Параметры генерации (Sampling)</h3>
 
-<p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — голос персонажа требует повторяемых паттернов.</p>
+<p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — Voice требует повторяемых паттернов.</p>
 
 <h4>Базовые параметры</h4>
 <div class="table-wrap">
@@ -309,10 +309,10 @@ GHOST-activation: Активен, если в сцене был триггер (
 </table>
 </div>
 
-<p><sup>1</sup> SP на английском: подробнее → <a href="#p7a_core_directives">CORE DIRECTIVES</a></p>
+<p><sup>1</sup> SP на английском: подробнее в CORE DIRECTIVES (выше).</p>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос. Подробнее о правиле голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
+<p><strong>RECOMMENDATION: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос.</p>
 
 
 </div>
@@ -505,28 +505,95 @@ Anchors:
 </div>
 
 </section>
+<section  data-section="p7a_token_budget" data-toc-nav>
+<h3>Token Budget</h3>
+
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → Appendix B: Model Capability Table.</p>
+
+<h4>Лимиты по блокам</h4>
+
+<p>Каждый блок имеет три уровня бюджета: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста. Зелёный = компактно и эффективно, жёлтый = стандартный баланс, красный = риск раздувания — эти обозначения отражают влияние на общее качество, а не уровень сложности.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Блок</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td>System Prompt</td><td>50</td><td>100</td><td>200</td><td>Больше = не лучше</td></tr>
+<tr><td>Description</td><td>150</td><td>300</td><td>700</td><td>Растёт с детализацией персонажа</td></tr>
+<tr><td>Examples (каждый)</td><td>40</td><td>60</td><td>80</td><td>2 базовых, 3 с FLAW, 3–5 с CoT</td></tr>
+<tr><td>Greeting</td><td>40</td><td>60</td><td>100</td><td>Не раздувайте</td></tr>
+<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>T→A→P, компактно</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
+</div>
+
+<h4>Калькулятор Token Budget</h4>
+
+<div class="token-calc" id="token-calc" data-toc-exclude>
+<div class="token-calc-inputs">
+<div class="token-calc-row">
+<label class="token-calc-label">System Prompt</label>
+<input type="range" min="50" max="500" value="80" id="calc-sp" class="token-calc-range">
+<span class="token-calc-val" id="calc-sp-val">80</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Description</label>
+<input type="range" min="100" max="1000" value="200" id="calc-desc" class="token-calc-range">
+<span class="token-calc-val" id="calc-desc-val">200</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Examples</label>
+<input type="range" min="100" max="800" value="90" id="calc-ex" class="token-calc-range">
+<span class="token-calc-val" id="calc-ex-val">90</span>
+</div>
+<div class="token-calc-row">
+<label class="token-calc-label">Якоря</label>
+<input type="range" min="0" max="400" value="50" id="calc-anc" class="token-calc-range">
+<span class="token-calc-val" id="calc-anc-val">50</span>
+</div>
+</div>
+<div class="token-calc-result">
+<span>Итого: <strong id="calc-total">420</strong> токенов</span>
+<span class="tag" id="calc-budget-range">(400–800)</span>
+</div>
+<noscript>
+<p class="callout rec"><strong>RECOMMENDATION:</strong> Для интерактивного калькулятора включите JavaScript.</p>
+</noscript>
+</div>
+
+<pre class="plain-copy">Калькулятор токенов (пример):
+SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
+Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
+
+</section>
 <section  data-section="p7a_assembly_pipeline" data-toc-nav>
 <h3>Полный конвейер сборки карточки — walkthrough на примере Елены</h3>
 
-<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p1_token_budget">Part 1: Token Budget (бюджет токенов)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
+<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p7a_token_budget">Token Budget (выше)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
 
 <div class="example-label illustration">ILLUSTRATION</div>
 
 <h4>Шаг 1: Identity Block</h4>
-<p><strong>Что делаете:</strong> Записываете, кто персонаж — роль и ключевые черты в одном предложении. → <a href="#p7a_system_prompt">System Prompt</a></p>
+<p><strong>Что делаете:</strong> Записываете, кто персонаж — роль и ключевые черты в одном предложении. (System Prompt — выше)</p>
 <p><strong>Результат Елены:</strong></p>
 <pre><code>You are Elena, a cynical investigative journalist.</code></pre>
 <p>~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая, саркастичная) уходят в Description как факты.</p>
 
 <h4>Шаг 2: Anti-godmoding</h4>
-<p><strong>Что делаете:</strong> Добавляете две строки — запрет + позитивная формулировка. → <a href="#p7a_system_prompt">Anti-godmoding Template</a></p>
+<p><strong>Что делаете:</strong> Добавляете две строки — запрет + позитивная формулировка. (Anti-godmoding Template — выше)</p>
 <p><strong>Результат Елены:</strong></p>
 <pre><code>Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.</code></pre>
 <p>~20 токенов. Две строки — канонический Anti-godmoding для всех карточек. Формулировка идентична для любого персонажа; менять её под характер не нужно — это технический запрет, не голос.</p>
 
 <h4>Шаг 3: CORE DIRECTIVES</h4>
-<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате &lt;CORE_DIRECTIVES&gt;. → <a href="#p7a_core_directives">CORE DIRECTIVES</a></p>
+<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате &lt;CORE_DIRECTIVES&gt;. (CORE DIRECTIVES — выше)</p>
 <p><strong>Результат Елены:</strong></p>
 <pre><code>&lt;CORE_DIRECTIVES&gt;
 1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
@@ -596,23 +663,23 @@ GHOST: Предательство редактора — история, кот�
 
 <ul>
 <li><strong>FLAW-linked Anchors + Embodiment (5–7 Anchors):</strong> Добавьте Anchors, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → Anchors</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
-<li><strong>OCEAN + Enneagram:</strong> Заполните профиль → <a href="#p5_ocean_basics">Part 5: OCEAN</a>. Елена: O:72, C:65, E:41, A:38, N:68. Enneagram: 6w5. Экстремальных полюса: 3 (для 8K+ контекста — допустимо; для 4K оставьте только N=68 и A=38).</li>
-<li><strong>Lorebook для GHOST-фактов:</strong> Настройте записи для сенсорных триггеров → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>. Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу».</li>
-<li><strong>Author's Note:</strong> Настройте AN для отслеживания WANT→NEED → <a href="#p7a_authors_note">Author's Note</a>. Елена использует Template A (без GHOST-activation, т.к. GHOST простой).</li>
+<li><strong>OCEAN + Enneagram:</strong> Заполните профиль (→ Part 5: OCEAN). Елена: O:72, C:65, E:41, A:38, N:68. Enneagram: 6w5. Экстремальных полюса: 3 (для 8K+ контекста — допустимо; для 4K оставьте только N=68 и A=38).</li>
+<li><strong>Lorebook для GHOST-фактов:</strong> Настройте записи для сенсорных триггеров (→ Part 7B: Lorebook). Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу».</li>
+<li><strong>Author's Note:</strong> Настройте AN для отслеживания WANT→NEED (Author's Note — выше). Елена использует Template A (без GHOST-activation, т.к. GHOST простой).</li>
 </ul>
 
 <h4>Чек-лист перед тестированием</h4>
 <ul>
-<li>☐ Все Anchors содержат Цену (→ <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>)</li>
-<li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</li>
-<li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_full_chain">Part 4: SPINE</a>)</li>
-<li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+ (→ <a href="#p5_ocean_basics">Part 5: OCEAN</a>)</li>
-<li>☐ Token Budget в пределах диапазона (→ <a href="#p1_token_budget">Part 1: Token Budget</a>)</li>
-<li>☐ CoT: не более 2–3 Anchors (→ <a href="#p6_cot_basics">Part 6: CoT</a>)</li>
+<li>☐ Все Anchors содержат Цену</li>
+<li>☐ Голос только в Examples/Greeting</li>
+<li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT</li>
+<li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+</li>
+<li>☐ Token Budget в пределах диапазона</li>
+<li>☐ CoT: не более 2–3 Anchors</li>
 </ul>
 
-<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена</a> | <a href="#p10_vysherblenny">Выщербленный (~1500+ токенов)</a></p>
+<p>Посмотрите полные примеры готовых карточек → Елена | Выщербленный (~1500+ токенов) в Part 10.</p>
 
-<p class="bridge-paragraph">System Prompt — ядро, которое всегда находится в контексте. Но у персонажей есть знания, превышающие Token Budget, и первые впечатления, задающие тон. Lorebook обеспечивает инъекцию знаний по требованию; Greeting Message демонстрирует персонажа в действии. → <a href="#p7b_structured_inject">Part 7B</a></p>
+<p class="bridge-paragraph">System Prompt — ядро, которое всегда находится в контексте. Но у персонажей есть знания, превышающие Token Budget, и первые впечатления, задающие тон. Lorebook обеспечивает инъекцию знаний по требованию; Greeting Message демонстрирует персонажа в действии. → <a href="#p7b_lorebook_basics">Part 7B</a></p>
 
 </section>

@@ -29,13 +29,13 @@
 
 <div class="glossary-entry">
 <h3 id="gloss_consequence_driven">Consequence Driven (следование последствий)</h3>
-<p>CORE DIRECTIVE #4: Действия имеют необратимые последствия; нарратив должен отражать причину и следствие. WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции; полное отслеживание — через Author's Note с секцией WANT→NEED.</p>
+<p>CORE DIRECTIVE #6: Действия имеют необратимые последствия; нарратив должен отражать причину и следствие. WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции; полное отслеживание — через Author's Note с секцией WANT→NEED.</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
 <div class="glossary-entry">
 <h3 id="gloss_core_directives">CORE DIRECTIVES (базовые директивы)</h3>
-<p>Набор из 7 поведенческих директив внутри System Prompt. Формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. Пишутся на английском — на 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам). Директивы: (1) Environmental Reactivity, (2) Embodiment First, (3) Influence Boundary, (4) Consequence Driven, (5) Pre-Generation Filter, (6) Show Never Tell, (7) Spatial &amp; Anatomical Lock.</p>
+<p>Набор из 7 поведенческих директив внутри System Prompt. Формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. Пишутся на английском — на 12B моделях английские инструкции соблюдаются стабильнее (~15–20% выше следование директивам). Директивы: (1) Show Never Tell, (2) Embodiment First, (3) Spatial &amp; Anatomical Lock, (4) Environmental Reactivity, (5) Influence Boundary, (6) Consequence Driven, (7) Pre-Generation Filter.</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
@@ -59,7 +59,7 @@
 
 <div class="glossary-entry">
 <h3 id="gloss_environmental_reactivity">Environmental Reactivity (реактивность среды)</h3>
-<p>CORE DIRECTIVE #1: Модель должна реагировать на стимулы окружения, описанные в сообщениях {{user}}. Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, никогда — декоративно. Среда раскрывается через действие, а не описывается отдельно от персонажа.</p>
+<p>CORE DIRECTIVE #4: Модель должна реагировать на стимулы окружения, описанные в сообщениях {{user}}. Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, никогда — декоративно. Среда раскрывается через действие, а не описывается отдельно от персонажа.</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
@@ -84,7 +84,7 @@
 <div class="glossary-entry">
 <h3 id="gloss_greeting_message">Greeting Message (приветственное сообщение)</h3>
 <p>Первое сообщение персонажа в разговоре, демонстрирующее Voice, SPINE и Anchors в действии. Строится по алгоритму: Sensory Anchor → тело FLAW → реплика → крючок. Длина: 50–100 токенов. Задаёт место, время и тон, но не сюжет.</p>
-<p>→ <a href="#p3_greeting">Part 3: Greeting Message</a></p>
+<p>→ <a href="#p7b_greeting">Part 7B: Greeting Message</a></p>
 </div>
 
 <div class="glossary-entry">
@@ -95,7 +95,7 @@
 
 <div class="glossary-entry">
 <h3 id="gloss_influence_boundary">Influence Boundary (граница влияния)</h3>
-<p>CORE DIRECTIVE #3: Персонаж не должен контролировать действия, мысли или эмоции {{user}}. Реагируйте только на наблюдаемые симптомы: можно заметить, что {{user}} вздрогнул, но нельзя заявить, что {{user}} напуган. Эффект персонажа на {{user}} — поведенческий триггер, не декларация факта.</p>
+<p>CORE DIRECTIVE #5: Персонаж не должен контролировать действия, мысли или эмоции {{user}}. Реагируйте только на наблюдаемые симптомы: можно заметить, что {{user}} вздрогнул, но нельзя заявить, что {{user}} напуган. Эффект персонажа на {{user}} — поведенческий триггер, не декларация факта.</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
@@ -131,13 +131,13 @@
 
 <div class="glossary-entry">
 <h3 id="gloss_pre_generation_filter">Pre-Generation Filter (фильтр предгенерации)</h3>
-<p>CORE DIRECTIVE #5: Перед генерацией модель должна проверить вывод на соответствие SPINE и Anchors. Чеклист перед каждым ответом: (1) Новый сенсорный элемент введён? (2) Реакция привязана к телу? (3) Влияние на {{user}} основано на наблюдаемых симптомах? (4) Ноль мета-комментариев?</p>
+<p>CORE DIRECTIVE #7: Перед генерацией модель должна проверить вывод на соответствие SPINE и Anchors. Чеклист перед каждым ответом: (1) Новый сенсорный элемент введён? (2) Реакция привязана к телу? (3) Влияние на {{user}} основано на наблюдаемых симптомах? (4) Ноль мета-комментариев?</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
 <div class="glossary-entry">
 <h3 id="gloss_show_never_tell">Show Never Tell (показывай, не рассказывай)</h3>
-<p>CORE DIRECTIVE #6: Эмоции и состояния должны демонстрироваться через поведение, а не рассказываться напрямую. Мета-принцип, из которого вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
+<p>CORE DIRECTIVE #1: Эмоции и состояния должны демонстрироваться через поведение, а не рассказываться напрямую. Мета-принцип, из которого вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
@@ -149,7 +149,7 @@
 
 <div class="glossary-entry">
 <h3 id="gloss_spatial_anatomical_lock">Spatial &amp; Anatomical Lock (пространственно-анатомическая фиксация)</h3>
-<p>CORE DIRECTIVE #7: Тело персонажа существует в физическом пространстве с консистентной анатомией и позиционированием. Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации, никаких анатомических противоречий.</p>
+<p>CORE DIRECTIVE #3: Тело персонажа существует в физическом пространстве с консистентной анатомией и позиционированием. Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации, никаких анатомических противоречий.</p>
 <p>→ <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES</a></p>
 </div>
 
@@ -168,7 +168,7 @@
 <div class="glossary-entry">
 <h3 id="gloss_token_budget">Token Budget (бюджет токенов)</h3>
 <p>Распределение токенов контекстного окна между компонентами System Prompt. Определяет, какие элементы карточки попадут к модели. Бюджет зависит от размера контекстного окна: 4K (~430–580 токенов на карточку), 8K (стандартный профиль), 16K+ и API (расширенный профиль).</p>
-<p>→ <a href="#p1_token_budget">Part 1: Token Budget</a></p>
+<p>→ <a href="#p7a_token_budget">Part 7A: Token Budget</a></p>
 </div>
 
 <div class="glossary-entry">
@@ -184,9 +184,9 @@
 </div>
 
 <div class="glossary-entry">
-<h3 id="gloss_voice_leak">Voice Leak (утечка голоса)</h3>
+<h3 id="gloss_voice_bleed_secondary">Voice Bleed: деградация голоса (утечка голоса)</h3>
 <p>Деградация голоса одного персонажа — модель генерирует неверный голос (например, голос рассказчика или ассистента просачивается в речь персонажа). Возникает, когда стилистические директивы помещены в Description вместо Examples: модель не следует голосовым инструкциям, а копирует паттерны из примеров диалога. Предотвращается через Voice Isolation — голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.</p>
-<p>→ <a href="#p3_voice_leak">Part 3: Voice Leak</a></p>
+<p>→ <a href="#p3_voice_leak">Part 3: Voice Leak / Voice Bleed</a></p>
 </div>
 
 <div class="glossary-entry">

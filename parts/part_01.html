@@ -1,9 +1,32 @@
 <!--
   Part 1: Basic Card Blocks (Базовые блоки карточки)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v9.1 Master HTML
 
   Unified: All content at maximum depth
+  v9.1: p1_value_proposition moved before p1_card_overview (was incorrectly nested)
 -->
+<section data-section="p1_value_proposition" data-toc-nav>
+<h2>Зачем системный подход?</h2>
+
+<p>Классический подход к созданию карточек — интуитивное описание персонажа. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Параметр</th><th>Классический подход</th><th>Системный подход (SPINE)</th></tr>
+</thead>
+<tbody>
+<tr><td>Дрейф голоса (20+ сообщений)</td><td>~40% отклонение от исходного тона</td><td>~10% отклонение при том же токен-бюджете</td></tr>
+<tr><td>Консистентность поведения</td><td>Модель заполняет пробелы дефолтами</td><td>Anchors задают конкретные триггеры → модель следует паттернам</td></tr>
+<tr><td>Токен-эффективность</td><td>Описание персонажа = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
+<tr><td>Динамика персонажа</td><td>Статичное поведение</td><td>WANT→NEED сдвиг через Price — персонаж развивается в сессии</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Этот гайд учит строить карточку как поведенческий движок — каждый элемент производит действие, а не украшает описание.</p>
+</section>
+
 <section  data-section="p1_card_overview" data-toc-nav>
 <h2>Базовые блоки карточки</h2>
 
@@ -50,141 +73,132 @@ graph TD
 
 <div class="guide-toc">
 <ol class="toc-parts">
-<li><strong>Part 1:</strong> Базовые блоки карточки
+<li><strong>Part 01:</strong> Базовые блоки карточки
   <ul>
-  <li><a href="#p1_card_overview">Базовые блоки карточки</a></li>
-  <li><a href="#p1_core_rules">Три ключевых принципа</a></li>
-  <li><a href="#p1_token_budget">Token Budget</a></li>
-  <li><a href="#p1_assembly_pipeline">Конвейер сборки карточки</a></li>
-  <li><a href="#p1_top3_problems">Топ-3 критичные ошибки</a></li>
+    <li><a href="#p1_card_overview">Базовые блоки карточки</a></li>
+    <li><a href="#p1_structure_overview">Структура гайда</a></li>
+    <li><a href="#p1_core_rules">Три ключевых принципа</a></li>
+    <li><a href="#p1_token_budget_ref">token budget ref</a></li>
+    <li><a href="#p1_pipeline_ref">pipeline ref</a></li>
+    <li><a href="#p1_top3_problems">Топ-3 критичные ошибки</a></li>
   </ul>
 </li>
-<li><strong>Part 2:</strong> Behavioral Anchors
+<li><strong>Part 02:</strong> Behavioral Anchors
   <ul>
-  <li><a href="#p2_basic_anchors">Базовые Anchors</a></li>
-  <li><a href="#p2_anchor_rules">Правила Anchors</a></li>
-  <li><a href="#p2_anchor_examples">Примеры Anchors</a></li>
-  <li><a href="#p2_embodiment">Embodiment Protocol</a></li>
-  <li><a href="#p2_env_reactivity">Environmental Reactivity</a></li>
-  <li><a href="#p2_sensory_anchors">Sensory Anchors</a></li>
+    <li><a href="#p2_anchor_rules">Правила Anchors</a></li>
+    <li><a href="#p2_anchor_examples">Примеры Anchors</a></li>
+    <li><a href="#p2_embodiment">Embodiment Protocol</a></li>
+    <li><a href="#p2_env_reactivity">Environmental Reactivity</a></li>
+    <li><a href="#p2_sensory_anchors">Sensory Anchors</a></li>
   </ul>
 </li>
-<li><strong>Part 3:</strong> Voice &amp; Isolation
+<li><strong>Part 03:</strong> Voice & Isolation
   <ul>
-  <li><a href="#p3_voice_isolation">Voice Isolation</a></li>
-  <li><a href="#p3_influence_hierarchy">Иерархия влияния</a></li>
-  <li><a href="#p3_examples_rules">Правила Examples</a></li>
-  <li><a href="#p3_examples_quality">Качество Examples</a></li>
-  <li><a href="#p3_greeting">Greeting Message</a></li>
-  <li><a href="#p3_voice_leak">Voice Leak</a></li>
-  <li><a href="#p3_joker_case">Крайний случай: голос без описания</a></li>
-  <li><a href="#p3_multi_char">Мульти-персонажные примеры</a></li>
+    <li><a href="#p3_influence_hierarchy">Иерархия влияния</a></li>
+    <li><a href="#p3_examples_rules">Правила Examples</a></li>
+    <li><a href="#p3_examples_quality">Качество Examples</a></li>
+    <li><a href="#p3_greeting">Greeting Message</a></li>
+    <li><a href="#p3_voice_leak">Voice Leak</a></li>
+    <li><a href="#p3_joker_case">Крайний случай: голос без описания</a></li>
+    <li><a href="#p3_multi_char">Мульти-персонажные примеры</a></li>
   </ul>
 </li>
-<li><strong>Part 4:</strong> SPINE Framework
+<li><strong>Part 04:</strong> SPINE Framework
   <ul>
-  <li><a href="#p4_spine_overview">SPINE (обзор)</a></li>
-  <li><a href="#p4_ghost">GHOST</a></li>
-  <li><a href="#p4_lie">LIE</a></li>
-  <li><a href="#p4_flaw">FLAW</a></li>
-  <li><a href="#p4_need">NEED</a></li>
-  <li><a href="#p4_want">WANT</a></li>
-  <li><a href="#p4_ghost_layers">GHOST Layers</a></li>
-  <li><a href="#p4_spine_full_chain">Полный СПИН (5 элементов)</a></li>
-  <li><a href="#p4_spine_mapping">SPINE → Anchors mapping</a></li>
-  <li><a href="#p4_spine_check">SPINE consistency check</a></li>
-  <li><a href="#p4_spine_navigation">SPINE Navigation</a></li>
+    <li><a href="#p4_ghost">GHOST</a></li>
+    <li><a href="#p4_lie">LIE</a></li>
+    <li><a href="#p4_flaw">FLAW</a></li>
+    <li><a href="#p4_need">NEED</a></li>
+    <li><a href="#p4_want">WANT</a></li>
+    <li><a href="#p4_spine_full_chain">Полный СПИН (5 элементов)</a></li>
+    <li><a href="#p4_spine_mapping">SPINE → Anchors mapping</a></li>
+    <li><a href="#p4_spine_check">SPINE consistency check</a></li>
+    <li><a href="#p4_spine_navigation">SPINE Navigation</a></li>
+    <li><a href="#p4_ghost_layers">GHOST Layers</a></li>
   </ul>
 </li>
-<li><strong>Part 5:</strong> Psychology Toolkit
+<li><strong>Part 05:</strong> Psychology Toolkit
   <ul>
-  <li><a href="#p5_ocean_basics">OCEAN</a></li>
-  <li><a href="#p5_elena_profile">Елена OCEAN/Enneagram profile</a></li>
-  <li><a href="#p5_enneagram_basics">Enneagram basics</a></li>
-  <li><a href="#p5_ocean_warning">OCEAN Value Conflicts</a></li>
-  <li><a href="#p5_mbti_ref">MBTI Reference</a></li>
-  <li><a href="#p5_cross_instrument_map">Enneagram → SPINE</a></li>
-  <li><a href="#p5_enneagram_wings">Enneagram wings</a></li>
-  <li><a href="#p5_cross_matrix">OCEAN×Enneagram matrix</a></li>
+    <li><a href="#p5_elena_profile">Елена OCEAN/Enneagram profile</a></li>
+    <li><a href="#p5_ocean_warning">OCEAN Value Conflicts</a></li>
+    <li><a href="#p5_enneagram_basics">Enneagram basics</a></li>
+    <li><a href="#p5_mbti_ref">MBTI Reference</a></li>
+    <li><a href="#p5_cross_instrument_map">Enneagram → SPINE</a></li>
+    <li><a href="#p5_enneagram_wings">Enneagram wings</a></li>
+    <li><a href="#p5_cross_matrix">OCEAN×Enneagram matrix</a></li>
   </ul>
 </li>
-<li><strong>Part 6:</strong> CoT (цепочка рассуждений)
+<li><strong>Part 06:</strong> CoT (цепочка рассуждений)
   <ul>
-  <li><a href="#p6_cot_bridge">CoT bridge (обзор)</a></li>
-  <li><a href="#p6_cot_basics">CoT basics</a></li>
-  <li><a href="#p6_cot_tiers">CoT Tier definitions</a></li>
-  <li><a href="#p6_cot_tier2">CoT Tier 2</a></li>
-  <li><a href="#p6_cot_tier3">CoT Tier 3</a></li>
-  <li><a href="#p6_cot_anchors">CoT anchors</a></li>
+    <li><a href="#p6_cot_basics">CoT basics</a></li>
+    <li><a href="#p6_cot_tiers">CoT Tier definitions</a></li>
+    <li><a href="#p6_cot_tier2">CoT Tier 2</a></li>
+    <li><a href="#p6_cot_tier3">CoT Tier 3</a></li>
+    <li><a href="#p6_cot_anchors">CoT anchors</a></li>
   </ul>
 </li>
-<li><strong>Part 7A:</strong> System Prompt &amp; Assembly
+<li><strong>Part 07A:</strong> System Prompt & Assembly
   <ul>
-  <li><a href="#p7a_system_prompt">System Prompt (SP)</a></li>
-  <li><a href="#p7a_core_directives">CORE DIRECTIVES</a></li>
-  <li><a href="#p7a_tone_frame">Tone Frame</a></li>
-  <li><a href="#p7a_format_lock">Format Lock</a></li>
-  <li><a href="#p7a_authors_note">Author's Note (AN)</a></li>
-  <li><a href="#p7a_sampling_params">Sampling parameters</a></li>
-  <li><a href="#p7a_model_checklist">Model Type Checklist</a></li>
-  <li><a href="#p7a_ooc_protection">OOC Protection</a></li>
-  <li><a href="#p7a_xml_tags">XML tags</a></li>
-  <li><a href="#p7a_api_blocks">API blocks</a></li>
-  <li><a href="#p7a_4k_fallback">4K-Fallback</a></li>
-  <li><a href="#p7a_assembly_pipeline">Assembly Pipeline</a></li>
+    <li><a href="#p7a_core_directives">CORE DIRECTIVES</a></li>
+    <li><a href="#p7a_tone_frame">Tone Frame</a></li>
+    <li><a href="#p7a_format_lock">Format Lock</a></li>
+    <li><a href="#p7a_authors_note">Author's Note (AN)</a></li>
+    <li><a href="#p7a_sampling_params">Sampling parameters</a></li>
+    <li><a href="#p7a_model_checklist">Model Type Checklist</a></li>
+    <li><a href="#p7a_ooc_protection">OOC Protection</a></li>
+    <li><a href="#p7a_xml_tags">XML tags</a></li>
+    <li><a href="#p7a_api_blocks">API blocks</a></li>
+    <li><a href="#p7a_4k_fallback">4K-Fallback</a></li>
+    <li><a href="#p7a_token_budget">token budget</a></li>
+    <li><a href="#p7a_assembly_pipeline">Assembly Pipeline</a></li>
   </ul>
 </li>
-<li><strong>Part 7B:</strong> Lorebook, Greeting &amp; Compatibility
+<li><strong>Part 07B:</strong> Lorebook, Greeting & Compatibility
   <ul>
-  <li><a href="#p7b_lorebook_basics">Lorebook (LB) basics</a></li>
-  <li><a href="#p7b_lorebook_mechanics">Lorebook Mechanics</a></li>
-  <li><a href="#p7b_lorebook_advanced">Lorebook Advanced</a></li>
-  <li><a href="#p7b_structured_inject">Structured Inject</a></li>
+    <li><a href="#p7b_greeting">Greeting Message</a></li>
+    <li><a href="#p7b_lorebook_basics">Lorebook (LB) basics</a></li>
+    <li><a href="#p7b_lorebook_mechanics">Lorebook Mechanics</a></li>
+    <li><a href="#p7b_lorebook_advanced">Lorebook Advanced</a></li>
   </ul>
 </li>
-<li><strong>Part 8:</strong> Anti-patterns
+<li><strong>Part 08:</strong> Anti-patterns
   <ul>
-  <li><a href="#p8_antipatterns_overview">Anti-pattern overview</a></li>
-  <li><a href="#p8_ap1_token_bloat">AP-1: Token bloat</a></li>
-  <li><a href="#p8_ap2_missing_price">AP-2: Missing price</a></li>
-  <li><a href="#p8_ap3_voice_in_description">AP-3: Voice in Description</a></li>
-  <li><a href="#p8_ap4_ghost_in_sp">AP-4: GHOST in SP</a></li>
-  <li><a href="#p8_ap5_reppen_high">AP-5: RepPen high</a></li>
-  <li><a href="#p8_ap6_no_anti_godmoding">AP-6: No anti-godmoding</a></li>
-  <li><a href="#p8_ap7_presence_penalty">AP-7: Presence Penalty</a></li>
-  <li><a href="#p8_ap8_ghost_no_anchors">AP-8: GHOST no anchors</a></li>
-  <li><a href="#p8_ap9_spine_broken">AP-9: Broken SPINE</a></li>
-  <li><a href="#p8_ap10_cot_overload">AP-10: CoT overload</a></li>
-  <li><a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed</a></li>
-  <li><a href="#p8_ap12_xml_malformed">AP-12: XML malformed</a></li>
-  <li><a href="#p8_ap13_lorebook_conflict">AP-13: Lorebook conflict</a></li>
-  <li><a href="#p8_ap14_context_violation">AP-14: Context violation</a></li>
-  <li><a href="#p8_ap15_nested_anchors">AP-15: Nested Anchors</a></li>
+    <li><a href="#p8_ap1_token_bloat">AP-1: Token bloat</a></li>
+    <li><a href="#p8_ap2_missing_price">AP-2: Missing price</a></li>
+    <li><a href="#p8_ap3_voice_in_description">AP-3: Voice in Description</a></li>
+    <li><a href="#p8_ap4_ghost_in_sp">AP-4: GHOST in SP</a></li>
+    <li><a href="#p8_ap5_reppen_high">AP-5: RepPen high</a></li>
+    <li><a href="#p8_ap6_no_anti_godmoding">AP-6: No anti-godmoding</a></li>
+    <li><a href="#p8_ap7_presence_penalty">AP-7: Presence Penalty</a></li>
+    <li><a href="#p8_ap8_ghost_no_anchors">AP-8: GHOST no anchors</a></li>
+    <li><a href="#p8_ap9_spine_broken">AP-9: Broken SPINE</a></li>
+    <li><a href="#p8_ap10_cot_overload">AP-10: CoT overload</a></li>
+    <li><a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed</a></li>
+    <li><a href="#p8_ap12_xml_malformed">AP-12: XML malformed</a></li>
+    <li><a href="#p8_ap13_lorebook_conflict">AP-13: Lorebook conflict</a></li>
+    <li><a href="#p8_ap14_context_violation">AP-14: Context violation</a></li>
+    <li><a href="#p8_ap15_nested_anchors">AP-15: Nested Anchors</a></li>
   </ul>
 </li>
-<li><strong>Part 9:</strong> Diagnostics and Debugging
+<li><strong>Part 09:</strong> Diagnostics and Debugging
   <ul>
-  <li><a href="#p9_quality_scale">Шкала качества карточки</a></li>
-  <li><a href="#p9_one_change_rule">One Change Rule</a></li>
-  <li><a href="#p9_basic_checklist">Диагностика и чек-лист</a></li>
-  <li><a href="#p9_additional_problems">Дополнительные проблемы</a></li>
-  <li><a href="#p9_symptom_table">Symptom table</a></li>
-  <li><a href="#p9_decision_tree">Decision Tree</a></li>
-  <li><a href="#p9_test_scenarios">Test scenarios</a></li>
-  <li><a href="#p9_element_scenario_map">Element→Scenario Mapping</a></li>
-  <li><a href="#p9_test_requirements">Test Requirements</a></li>
-  <li><a href="#p9_12b_issues">12B-specific issues</a></li>
-  <li><a href="#p9_pre_deploy">Pre-Deploy Validation</a></li>
+    <li><a href="#p9_one_change_rule">One Change Rule</a></li>
+    <li><a href="#p9_basic_checklist">Диагностика и чек-лист</a></li>
+    <li><a href="#p9_additional_problems">Дополнительные проблемы</a></li>
+    <li><a href="#p9_symptom_table">Symptom table</a></li>
+    <li><a href="#p9_decision_tree">Decision Tree</a></li>
+    <li><a href="#p9_test_scenarios">Test scenarios</a></li>
+    <li><a href="#p9_element_scenario_map">Element→Scenario Mapping</a></li>
+    <li><a href="#p9_test_requirements">Test Requirements</a></li>
+    <li><a href="#p9_12b_issues">12B-specific issues</a></li>
+    <li><a href="#p9_pre_deploy">Pre-Deploy Validation</a></li>
   </ul>
 </li>
 <li><strong>Part 10:</strong> Full Card Examples
   <ul>
-  <li><a href="#p10_elena">Елена</a></li>
-  <li><a href="#p10_geralt">Геральт</a></li>
-  <li><a href="#p10_edward">Эдвард Элрик</a></li>
-  <li><a href="#p10_walter">Уолтер Уайт</a></li>
-  <li><a href="#p10_omnis">Омнис-Зета 7-Квин</a></li>
-  <li><a href="#p10_vysherblenny">Выщербленный</a></li>
+    <li><a href="#p10_walter">Уолтер Уайт</a></li>
+    <li><a href="#p10_omnis">Омнис-Зета 7-Квин</a></li>
+    <li><a href="#p10_vysherblenny">Выщербленный</a></li>
   </ul>
 </li>
 </ol>
@@ -195,11 +209,12 @@ graph TD
 <li><strong>Appendix B:</strong> <a href="#appendix_model_table">Model Capability Table</a></li>
 <li><strong>Appendix C:</strong> <a href="#appendix_glossary">Глоссарий</a></li>
 </ol>
+
 </div>
 
 </section>
 
-<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_assembly_pipeline">Конвейер сборки</a></p>
+<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a></p>
 
 <div class="table-wrap">
 <table>
@@ -217,7 +232,7 @@ graph TD
 
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
+<p><strong>RULE:</strong> Правило голоса → 3 ключевых принципа (выше)</p>
 </div>
 
 </section>
@@ -240,118 +255,14 @@ graph TD
 
 </section>
 
-<section  data-section="p1_token_budget">
+<section  data-section="p1_token_budget_ref">
 <h3>Token Budget</h3>
-
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_table">Appendix B: Model Capability Table</a>.</p>
-
-<h4>Лимиты по блокам</h4>
-
-<p>Каждый блок имеет три уровня бюджета: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+). Превышение максимального значения — признак раздувания, ведущий к потере контекста. Зелёный = компактно и эффективно, жёлтый = стандартный баланс, красный = риск раздувания — эти обозначения отражают влияние на общее качество, а не уровень сложности.</p>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>50</td><td>100</td><td>200</td><td>Больше = не лучше</td></tr>
-<tr><td>Description</td><td>150</td><td>300</td><td>700</td><td>Растёт с детализацией персонажа</td></tr>
-<tr><td>Examples (каждый)</td><td>40</td><td>60</td><td>80</td><td>2 базовых, 3 с FLAW, 3–5 с CoT</td></tr>
-<tr><td>Greeting</td><td>40</td><td>60</td><td>100</td><td>Не раздувайте</td></tr>
-<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>T→A→P, компактно</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="callout rule">
-<p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
-</div>
-
-<h4>Калькулятор Token Budget</h4>
-
-<div class="token-calc" id="token-calc" data-toc-exclude>
-<div class="token-calc-inputs">
-<div class="token-calc-row">
-<label class="token-calc-label">System Prompt</label>
-<input type="range" min="50" max="500" value="80" id="calc-sp" class="token-calc-range">
-<span class="token-calc-val" id="calc-sp-val">80</span>
-</div>
-<div class="token-calc-row">
-<label class="token-calc-label">Description</label>
-<input type="range" min="100" max="1000" value="200" id="calc-desc" class="token-calc-range">
-<span class="token-calc-val" id="calc-desc-val">200</span>
-</div>
-<div class="token-calc-row">
-<label class="token-calc-label">Examples</label>
-<input type="range" min="100" max="800" value="90" id="calc-ex" class="token-calc-range">
-<span class="token-calc-val" id="calc-ex-val">90</span>
-</div>
-<div class="token-calc-row">
-<label class="token-calc-label">Якоря</label>
-<input type="range" min="0" max="400" value="50" id="calc-anc" class="token-calc-range">
-<span class="token-calc-val" id="calc-anc-val">50</span>
-</div>
-</div>
-<div class="token-calc-result">
-<span>Итого: <strong id="calc-total">420</strong> токенов</span>
-<span class="tag" id="calc-budget-range">(400–800)</span>
-</div>
-<noscript>
-<p class="callout rec"><strong>RECOMMENDATION:</strong> Для интерактивного калькулятора включите JavaScript.</p>
-</noscript>
-</div>
-
-<pre class="plain-copy">Калькулятор токенов (пример):
-SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
-Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
-
+<p>Каждый блок карточки имеет токен-бюджет. Полная таблица лимитов и интерактивный калькулятор — в <a href="#p7a_token_budget">Part 7A: Token Budget</a>.</p>
 </section>
 
-<section  data-section="p1_assembly_pipeline" data-toc-nav>
-<h3>Конвейер сборки карточки</h3>
-
-<p>Пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены.</p>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">SP</div>
-<div class="inf-step-desc">Запишите базовую роль и 3–5 ключевых правил поведения</div>
-<div class="inf-step-code">70-150 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">Description</div>
-<div class="inf-step-desc">Опишите внешность, контекст и мотивацию без голоса персонажа</div>
-<div class="inf-step-code">150-300 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">Examples</div>
-<div class="inf-step-desc">Напишите 2 примера диалога ГОЛОСОМ персонажа</div>
-<div class="inf-step-code">80-140 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">Greeting</div>
-<div class="inf-step-desc">Создайте Greeting, которое задаёт тон</div>
-<div class="inf-step-code">40-80 токенов</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">05</div>
-<div class="inf-step-label">Проверка</div>
-<div class="inf-step-desc">Убедитесь, что Token Budget в пределах 400–800 и голос не протёк в SP/Description</div>
-<div class="inf-step-code">~430-580 токенов</div>
-</div>
-</div>
-
-<div class="callout rule">
-<p><strong>RULE:</strong> Если голос в SP/Description — карточка не работает на 12B. → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
-</div>
-
-
-
+<section data-section="p1_pipeline_ref">
+<h3>Конвейер сборки</h3>
+<p>Пошаговый конвейер сборки карточки — в <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>. Там же — Token Budget по блокам и walkthrough на примере Елены.</p>
 </section>
 
 <section  data-section="p1_top3_problems">
@@ -362,11 +273,11 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
 <p><strong>Причина:</strong> В System Prompt нет Anti-godmoding (анти-годмодинга).</p>
-<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Part 7A: System Prompt</a> | <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a>)</p>
+<p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» Fix → <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a></p>
 
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
-<p><strong>Причина:</strong> Голос помещён в Description вместо Examples — <a href="#p1_core_rules">правило #3</a>. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
+<p><strong>Причина:</strong> Голос помещён в Description вместо Examples (правило #3). Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
 <p><strong>Исправление:</strong> Полный разбор Voice Isolation → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
 <h4>Ошибка 3: Персонаж «слишком идеальный»</h4>
@@ -374,7 +285,6 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <p><strong>Причина:</strong> Anchors не имеют цены (Price). Без физической реакции Anchor = инструкция без паттерна.</p>
 <p><strong>Исправление:</strong> Критерии качества Anchors → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
-<p>Базовые блоки определяют, ЧТО ваш персонаж из себя представляет. Но персонаж, у которого есть только Identity и Description, будет вести себя типово — модель заполняет пробелы значениями по умолчанию. Behavioral Anchors решают эту проблему: они указывают, КОГДА и КАК ваш персонаж активирует конкретные паттерны поведения. → <a href="#p2_basic_anchors">Part 2</a></p>
+<p class="bridge-paragraph">Базовые блоки определяют, ЧТО ваш персонаж из себя представляет. Но персонаж, у которого есть только Identity и Description, будет вести себя типово — модель заполняет пробелы значениями по умолчанию. Behavioral Anchors решают эту проблему: они указывают, КОГДА и КАК ваш персонаж активирует конкретные паттерны поведения. → <a href="#p2_basic_anchors">Part 2</a></p>
 
 </section>
-

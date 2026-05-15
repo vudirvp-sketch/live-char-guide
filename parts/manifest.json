@@ -4,13 +4,14 @@
   "parts": [
     {
       "file": "part_01.html",
-      "title": "Базовые блоки карточки",
+      "title": "Зачем системный подход?",
       "anchors": [
+        "p1_value_proposition",
         "p1_card_overview",
         "p1_structure_overview",
         "p1_core_rules",
-        "p1_token_budget",
-        "p1_assembly_pipeline",
+        "p1_token_budget_ref",
+        "p1_pipeline_ref",
         "p1_top3_problems"
       ]
     },
@@ -34,6 +35,7 @@
         "p3_influence_hierarchy",
         "p3_examples_rules",
         "p3_examples_quality",
+        "p3_greeting",
         "p3_voice_leak",
         "p3_joker_case",
         "p3_multi_char"
@@ -49,11 +51,11 @@
         "p4_flaw",
         "p4_need",
         "p4_want",
-        "p4_ghost_layers",
         "p4_spine_full_chain",
         "p4_spine_mapping",
         "p4_spine_check",
-        "p4_spine_navigation"
+        "p4_spine_navigation",
+        "p4_ghost_layers"
       ]
     },
     {
@@ -97,6 +99,7 @@
         "p7a_xml_tags",
         "p7a_api_blocks",
         "p7a_4k_fallback",
+        "p7a_token_budget",
         "p7a_assembly_pipeline"
       ]
     },
@@ -155,8 +158,6 @@
       "title": "Полные примеры карточек",
       "anchors": [
         "p10_elena",
-        "p10_geralt",
-        "p10_edward",
         "p10_walter",
         "p10_omnis",
         "p10_vysherblenny"
@@ -173,7 +174,7 @@
     },
     {
       "file": "appendix_mbti.html",
-      "title": "appendix_mbti",
+      "title": "MBTI (Appendix A)",
       "anchors": [
         "appendix_mbti"
       ]

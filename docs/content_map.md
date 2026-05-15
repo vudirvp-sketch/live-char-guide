@@ -169,7 +169,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | Canonical Part | data-section ID | Content Type | Notes |
 |---------|---------------|-----------------|--------------|-------|
-| Елена | Part 10 | p10_elena | Complete card | Минимальная карточка → full card progression. WANT at rest in Greeting |
+| Елена | Part 10 | p10_elena | Complete card | Full card with all 5 SPINE elements (incl. LIE+GHOST, added in v9.1). WANT at rest in Greeting |
 | Уолтер Уайт | Part 10 | p10_walter | Complete card | Realistic modern character, full SPINE (5 elements incl. LIE+GHOST added in v9.1). WANT at rest in Greeting |
 | Омнис-Зета 7-Квин | Part 10 | p10_omnis | Complete card | Тех-Жрец, Адептус Механикус. Full progression. CORE_DIRECTIVES replaced with link to Part 7A in v9.1 |
 | Выщербленный | Part 10 | p10_vysherblenny | Complete card | GHOST Layers + CoT + XML. CORE_DIRECTIVES replaced with link to Part 7A in v9.1. WANT at rest in Greeting |

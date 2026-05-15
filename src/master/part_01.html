@@ -3,12 +3,14 @@
   Live Character Guide v9.1 Master HTML
 
   Unified: All content at maximum depth
-  v9.1: p1_value_proposition moved before p1_card_overview (was incorrectly nested)
+  v9.1: p1_value_proposition added before p1_card_overview
+        p1_token_budget replaced with p1_token_budget_ref (link to Part 7A)
+        p1_assembly_pipeline replaced with p1_pipeline_ref (link to Part 7A)
 -->
 <section data-section="p1_value_proposition" data-toc-nav>
 <h2>Зачем системный подход?</h2>
 
-<p>Классический подход к созданию карточек — интуитивное описание персонажа. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
+<p>Классический подход к созданию карточек — интуитивное заполнение Description. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
 
 <div class="table-wrap">
 <table>
@@ -18,7 +20,7 @@
 <tbody>
 <tr><td>Дрейф голоса (20+ сообщений)</td><td>~40% отклонение от исходного тона</td><td>~10% отклонение при том же токен-бюджете</td></tr>
 <tr><td>Консистентность поведения</td><td>Модель заполняет пробелы дефолтами</td><td>Anchors задают конкретные триггеры → модель следует паттернам</td></tr>
-<tr><td>Токен-эффективность</td><td>Описание персонажа = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
+<tr><td>Токен-эффективность</td><td>Description (Описание) = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
 <tr><td>Динамика персонажа</td><td>Статичное поведение</td><td>WANT→NEED сдвиг через Price — персонаж развивается в сессии</td></tr>
 </tbody>
 </table>
