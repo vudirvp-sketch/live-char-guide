@@ -6,22 +6,334 @@
       p9_top5_problems renamed to p9_additional_problems
 -->
 <!-- VS-EMBED: E13 — Diagnostics -->
-<div class="vs-embed" data-vs-element="E13" role="img" aria-label="Визуализация: Diagnostics">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E13-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E13…
-  </p>
+<div class="vs-embed" data-vs-element="E13">
+<!-- 
+  Element: E13 — Diagnostic Decision Tree
+  Source: elements/E13-diagnostic-tree.html
+  Pattern: P3 — Tree/Branching
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E13-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E13-script.js
+-->
+<div class="tree-container">
+
+      <!-- Root 1: Character drifts -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Симптом 1</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
+          «Персонаж дрейфует после 5–10 сообщений»
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">У персонажа есть рабочие Anchors?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">Нет →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Отсутствует структура Anchors</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-2</span>
+                <span class="badge badge--cyan">→ AP-8</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Да →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">SPINE причинно согласован?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">Нет →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Нарушенная цепь SPINE</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-9</span>
+                  <span class="badge badge--violet">→ E05</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Да →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Дрейф голоса (доминирование недавнего чата)</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-11</span>
+                  <span class="badge badge--cyan">→ E16 (AN)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root 2: Voice sounds generic -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Симптом 2</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
+          «Голос звучит типично / неразличимо»
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Голос записан только в Examples?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">Нет →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Утечка голоса в Description/SP</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-3</span>
+                <span class="badge badge--cyan">→ AP-11</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Да →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Достаточно ли диалоговых примеров (3+)?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">Нет →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Недостаточно образцов голоса</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E01</span>
+                  <span class="badge badge--cyan">→ E07</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Да →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Проблема параметров сэмплирования</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-5</span>
+                  <span class="badge badge--cyan">→ E17</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root 3: Character ignores actions -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Симптом 3</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
+          «Персонаж игнорирует действия пользователя»
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Anti-godmoding присутствует в SP?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">Нет →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Отсутствует Anti-godmoding</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-6</span>
+                <span class="badge badge--cyan">→ E02</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Да →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Персонаж использует протокол Embodiment?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">Нет →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Embodiment отсутствует</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E04</span>
+                  <span class="badge badge--cyan">→ E08 (Директива 2)</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Да →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Нарушение границы влияния</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E08 (Директива 5)</span>
+                  <span class="badge badge--cyan">→ E03</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+<script type="module">
+// VS Element E13 - inline script (from component-extracts)
+/**
+ * Element: E13 — Diagnostic Decision Tree
+ * Source: elements/E13-diagnostic-tree.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      // Привязка обработчиков через addEventListener (CSP-совместимо, без inline onclick)
+      function toggleTree(el) {
+        const subTree = el.nextElementSibling;
+        const isOpen = subTree.classList.contains('is-open');
+        subTree.classList.toggle('is-open');
+        el.setAttribute('aria-expanded', String(!isOpen));
+      }
+
+      document.querySelectorAll('[data-toggle="tree"]').forEach(btn => {
+        btn.addEventListener('click', () => toggleTree(btn));
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleTree(btn);
+          }
+        });
+      });
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        document.querySelectorAll('.sub-tree').forEach(el => el.classList.add('is-open'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E13 -->
 <section  data-section="p9_quality_scale" data-toc-nav>
 <h2>Диагностика и тестирование</h2>
 
 <!-- VS-EMBED: E14 — Quality Scale -->
-<div class="vs-embed" data-vs-element="E14" role="img" aria-label="Визуализация: Quality Scale">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E14-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E14…
-  </p>
+<div class="vs-embed" data-vs-element="E14">
+<!-- 
+  Element: E14 — Quality Scale
+  Source: elements/E14-quality-scale.html
+  Pattern: P1 — Stack (thermometer)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E14-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E14-script.js
+-->
+<div class="quality-container scroll-enter">
+
+      <!-- Thermometer -->
+      <div class="thermometer scroll-enter">
+        <div class="thermometer__zone zone-critical"><span class="thermometer__zone-label">Критический</span></div>
+        <div class="thermometer__zone zone-poor"><span class="thermometer__zone-label">Слабый</span></div>
+        <div class="thermometer__zone zone-good"><span class="thermometer__zone-label">Хороший</span></div>
+        <div class="thermometer__zone zone-excellent"><span class="thermometer__zone-label">Отличный</span></div>
+        <div class="indicator" style="bottom:50%;">
+          <div class="indicator__marker"></div>
+        </div>
+      </div>
+
+      <!-- Zone descriptions -->
+      <div class="zone-details">
+        <div class="zone-detail zone-detail--excellent">
+          <div class="zone-detail__title" style="color:var(--accent-violet);">Отличный</div>
+          <div class="zone-detail__range">85–100%</div>
+          <div class="zone-detail__criteria">Проходит все 14 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие Token Budget, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--good">
+          <div class="zone-detail__title" style="color:var(--accent-cyan);">Хороший</div>
+          <div class="zone-detail__range">50–85%</div>
+          <div class="zone-detail__criteria">Стабильные 10+ сообщений, узнаваемый голос, Price последовательно появляется в Anchors. Основная структура здорова, но возможны незначительные проблемы сэмплирования или бюджета.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--poor">
+          <div class="zone-detail__title" style="color:var(--accent-amber);">Слабый</div>
+          <div class="zone-detail__range">25–50%</div>
+          <div class="zone-detail__criteria">Следует базовым правилам, но персонаж дрейфует после 5–10 сообщений. Anchors присутствуют, но неэффективны. SPINE определён, но не выражен через Anchors.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--critical">
+          <div class="zone-detail__title" style="color:var(--danger);">Критический</div>
+          <div class="zone-detail__range">0–25%</div>
+          <div class="zone-detail__criteria">Нарушает 2+ базовых правила: нет Price, голос в Description, PP > 0. Персонаж фундаментально сломан. Требуется полная переработка.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Pre-Deploy Checks -->
+    <div class="quick-checks" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div class="quick-checks__title">5 быстрых проверок перед развёртыванием</div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        PP = 0.0 (Presence Penalty равен нулю)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Голос только в Examples (не в Description или SP)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Price в каждом Anchor (физический, внутри сцены)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Format Lock (1 согласованная система XML)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Anti-godmoding (2 строки в SP)
+      </div>
+    </div>
+
+<script type="module">
+// VS Element E14 - inline script (from component-extracts)
+/**
+ * Element: E14 — Quality Scale
+ * Source: elements/E14-quality-scale.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter, .quick-check-item').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter, .quick-check-item').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E14 -->
 <h3>Шкала качества карточки</h3>

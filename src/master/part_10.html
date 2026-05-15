@@ -12,11 +12,166 @@
         Added voice rule callout at top (Task 2.2)
 -->
 <!-- VS-EMBED: E15 — Elena Card Walkthrough -->
-<div class="vs-embed" data-vs-element="E15" role="img" aria-label="Визуализация: Elena Card Walkthrough">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E15-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E15…
-  </p>
+<div class="vs-embed" data-vs-element="E15">
+<!-- 
+  Element: E15 — Annotated Blueprint
+  Source: elements/E15-annotated-blueprint.html
+  Pattern: P6 — Blueprint/Annotated Card
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E15-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E15-script.js
+-->
+<div class="blueprint-container scroll-enter">
+
+      <!-- Layer toggle buttons -->
+      <div class="layer-toggles" role="tablist" aria-label="Annotation layer selection">
+        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" data-layer="structure">Структура</button>
+        <button class="layer-toggle layer-toggle--anchors" role="tab" aria-selected="false" data-layer="anchors">Anchors</button>
+        <button class="layer-toggle layer-toggle--spine" role="tab" aria-selected="false" data-layer="spine">SPINE</button>
+        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" data-layer="directives">Директивы</button>
+      </div>
+
+      <!-- Blueprint area with card template -->
+      <div class="blueprint-area scroll-enter">
+
+        <!-- Structure layer (default active) -->
+        <div class="annotation-layer annotation-layer--active" data-layer="structure">
+          <div class="callout callout--structure" style="top:10px; right:20px;">
+            SP: ~50-200 токенов<br>Контейнер — содержит директивы, идентичность, anti-godmoding
+          </div>
+          <div class="callout callout--structure" style="top:100px; right:20px;">
+            Description: ~150-700 токенов<br>Крупнейший блок — факты, SPINE, OCEAN, физичность
+          </div>
+          <div class="callout callout--structure" style="top:250px; right:20px;">
+            Examples: ~80-400 токенов<br>Голос живёт здесь + Anchors вложены внутри
+          </div>
+          <div class="callout callout--structure" style="top:380px; right:20px;">
+            Greeting: ~40-100 токенов<br>Первое впечатление, задаёт тон
+          </div>
+        </div>
+
+        <!-- Anchors layer -->
+        <div class="annotation-layer" data-layer="anchors">
+          <div class="callout callout--anchors" style="top:260px; right:20px;">
+            Подпанель Anchors<br>Формат T→A→P с Embodiment<br>Только FLAW-связанные (→ E03, E04)
+          </div>
+          <div class="callout callout--anchors" style="top:120px; right:20px;">
+            Anchors НЕ вложены в Description<br>Только упоминаются — структурный дом — Examples
+          </div>
+        </div>
+
+        <!-- SPINE layer -->
+        <div class="annotation-layer" data-layer="spine">
+          <div class="callout callout--spine" style="top:130px; right:20px;">
+            GHOST→LIE→FLAW→NEED→WANT<br>Записано внутри блока Description<br>Елена: предательство→недоверие→изоляция→связь→контроль
+          </div>
+          <div class="callout callout--spine" style="top:290px; right:20px;">
+            FLAW-связанные Anchors<br>Каждый Anchor восходит к элементу SPINE
+          </div>
+        </div>
+
+        <!-- Directives layer -->
+        <div class="annotation-layer" data-layer="directives">
+          <div class="callout callout--directives" style="top:20px; right:20px;">
+            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
+          </div>
+          <div class="callout callout--directives" style="top:280px; right:20px;">
+            Директива 2 (Embodiment)<br>Выражается через слой Action в Anchors
+          </div>
+          <div class="callout callout--directives" style="top:390px; right:20px;">
+            Директива 6 (Последствие)<br>WANT→NEED по мере накопления Price
+          </div>
+        </div>
+
+        <!-- Central card template (Елена) -->
+        <div class="card-template">
+          <div class="card-block">
+            <div class="card-block__label">[SP]</div>
+            <div class="card-block__content">You are Елена, a 28-year-old investigative journalist...
+Do not speak or act for the user.
+You react only to observable actions and stated words.</div>
+          </div>
+          <div class="card-block">
+            <div class="card-block__label">[Description]</div>
+            <div class="card-block__content">Elena is sharp-witted and guarded. Betrayal by her editor left her distrustful.
+GHOST: Father left when she was 5 → LIE: "I can't trust anyone"
+FLAW: Pushes people away → NEED: Genuine connection → WANT: Control
+O:72 C:65 E:41 A:38 N:68</div>
+          </div>
+          <div class="card-block" style="border-left:2px solid var(--accent-violet); padding-left:var(--gap-md);">
+            <div class="card-block__label">[Examples + Anchors]</div>
+            <div class="card-block__content"><START>
+User: "You don't have to do this alone."
+Елена: *Fingers tighten around the pen.* "I've been alone before. I manage." *She doesn't look up.* [Anxiety: trust threatened → deflects]
+→ Trigger: Offer of help → Action: Deflect + physical tension → Price: Missed connection
+<END>
+
+*Anchors (T→A→P):*
+Confrontation → Grip tightens, jaw sets → Vulnerability exposed
+Trust test → Changes subject abruptly → Emotional distance grows</div>
+          </div>
+          <div class="card-block">
+            <div class="card-block__label">[Greeting]</div>
+            <div class="card-block__content">*The office is dimly lit, the only sound the scratching of a pen.* "What do you want? I'm on deadline."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<script type="module">
+// VS Element E15 - inline script (from component-extracts)
+/**
+ * Element: E15 — Annotated Blueprint
+ * Source: elements/E15-annotated-blueprint.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      // Переключение слоёв через addEventListener (CSP-совместимо, без inline onclick)
+      function setLayer(layerName) {
+        document.querySelectorAll('.layer-toggle').forEach(btn => {
+          btn.classList.remove('layer-toggle--active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        const activeBtn = document.querySelector(`.layer-toggle--${layerName}`);
+        if (activeBtn) {
+          activeBtn.classList.add('layer-toggle--active');
+          activeBtn.setAttribute('aria-selected', 'true');
+        }
+
+        document.querySelectorAll('.annotation-layer').forEach(layer => {
+          layer.classList.remove('annotation-layer--active');
+        });
+        const activeLayer = document.querySelector(`[data-layer="${layerName}"]`);
+        if (activeLayer) {
+          activeLayer.classList.add('annotation-layer--active');
+        }
+      }
+
+      document.querySelectorAll('.layer-toggle[data-layer]').forEach(btn => {
+        btn.addEventListener('click', () => setLayer(btn.dataset.layer));
+      });
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E15 -->
 <section  data-section="p10_elena" data-toc-nav>

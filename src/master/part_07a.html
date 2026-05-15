@@ -49,11 +49,126 @@ Format Lock:
 
 </section>
 <!-- VS-EMBED: E08 — CORE DIRECTIVES -->
-<div class="vs-embed" data-vs-element="E08" role="img" aria-label="Визуализация: CORE DIRECTIVES">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E08-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E08…
-  </p>
+<div class="vs-embed" data-vs-element="E08">
+<!-- 
+  Element: E08 — CORE DIRECTIVES
+  Source: elements/E08-core-directives.html
+  Pattern: P4 — Hub-Spoke
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E08-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E08-script.js
+-->
+<div class="hub-spoke-container scroll-enter">
+
+<svg viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CORE DIRECTIVES — диаграмма «узел-лучи» с 7 директивами, исходящими из центрального узла CORE">
+        <title>CORE DIRECTIVES — 7 обязательных директив в раскладке «узел-лучи»</title>
+
+        <!-- Center node: CORE -->
+        <g class="anim-group">
+          <circle class="center-pulse" cx="350" cy="280" r="38" fill="var(--accent-cyan)" opacity="0.15"/>
+          <circle cx="350" cy="280" r="30" fill="var(--bg-panel)" stroke="var(--accent-cyan)" stroke-width="1.5"/>
+          <text x="350" y="284" text-anchor="middle" fill="var(--accent-cyan)"
+                font-family="var(--font-display)" font-size="14" font-weight="700">CORE</text>
+        </g>
+
+        <!-- Directive 1: Show Never Tell — top-left -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="150" y2="120" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="60" y="85" width="180" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="150" y="107" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">1</text>
+          <text x="150" y="123" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Показывай, не говори</text>
+          <text x="150" y="140" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Демонстрируй через поведение</text>
+        </g>
+
+        <!-- Directive 2: Embodiment First — left -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="80" y2="300" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="0" y="268" width="175" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="88" y="290" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">2</text>
+          <text x="88" y="306" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Воплощение прежде всего</text>
+          <text x="88" y="323" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">State → Body → Sensor → Speech</text>
+        </g>
+
+        <!-- Directive 3: Spatial Lock — bottom-left -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="160" y2="460" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="40" y="420" width="240" height="75" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="160" y="442" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">3</text>
+          <text x="160" y="458" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="11" font-weight="600">Пространственная и</text>
+          <text x="160" y="473" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="11" font-weight="600">анатомическая фиксация</text>
+          <text x="160" y="489" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Отслеживай расстояние, позу, вес</text>
+        </g>
+
+        <!-- Directive 4: Env Reactivity — top -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="350" y2="60" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="250" y="25" width="200" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="350" y="47" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">4</text>
+          <text x="350" y="63" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Реактивность окружения</text>
+          <text x="350" y="80" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Сенсорика через действия персонажа</text>
+        </g>
+
+        <!-- Directive 5: Influence Boundary — top-right -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="540" y2="120" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="450" y="85" width="185" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="543" y="107" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">5</text>
+          <text x="543" y="123" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Граница влияния</text>
+          <text x="543" y="140" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Реагируй только на наблюдаемое</text>
+        </g>
+
+        <!-- Directive 6: Consequence Driven — right (with [Model ↗] badge) -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="620" y2="300" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="525" y="268" width="175" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="613" y="290" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">6</text>
+          <text x="613" y="306" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Управление последствиями</text>
+          <text x="613" y="323" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">WANT → NEED по мере накопления Price</text>
+          <text x="695" y="276" class="model-badge">[Model ↗]</text>
+        </g>
+
+        <!-- Directive 7: Pre-Gen Filter — bottom-right (with [Model ↗] badge) -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="530" y2="460" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="430" y="425" width="200" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="530" y="447" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">7</text>
+          <text x="530" y="463" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Пре-генерационный фильтр</text>
+          <text x="530" y="480" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">4-пунктовая самопроверка перед ответом</text>
+          <text x="625" y="433" class="model-badge">[Model ↗]</text>
+        </g>
+
+      </svg>
+
+</div>
+
+<script type="module">
+// VS Element E08 - inline script (from component-extracts)
+/**
+ * Element: E08 — CORE DIRECTIVES
+ * Source: elements/E08-core-directives.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.anim-group, .center-pulse, .scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.anim-group, .center-pulse, .scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E08 -->
 <section  data-section="p7a_core_directives" data-toc-nav>
@@ -183,11 +298,149 @@ Format Lock:
 
 </section>
 <!-- VS-EMBED: E16 — Author's Note -->
-<div class="vs-embed" data-vs-element="E16" role="img" aria-label="Визуализация: Author's Note">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E16-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E16…
-  </p>
+<div class="vs-embed" data-vs-element="E16">
+<!-- 
+  Element: E16 — Author's Note Mechanics
+  Source: elements/E16-author-note.html
+  Pattern: P2 — Flow (vertical timeline)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E16-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E16-script.js
+-->
+<div class="an-container scroll-enter">
+
+      <!-- Message stream with AN injection -->
+      <div class="message-stream">
+        <div class="stream-track">
+          <div class="stream-msg">msg6</div>
+          <div class="stream-msg">msg7</div>
+          <div class="stream-msg">msg8</div>
+          <div class="stream-msg">msg9</div>
+          <div class="stream-msg stream-msg--an">[AN]</div>
+          <div class="stream-msg">msg10</div>
+          <div class="stream-msg">msg11</div>
+          <div class="stream-msg">msg12</div>
+          <div class="stream-msg">...</div>
+        </div>
+      </div>
+
+      <!-- Position indicator -->
+      <div class="position-indicator scroll-enter">
+        <div>
+          <span class="position-indicator__label">Позиция</span>
+          <span class="position-indicator__value">3–5 сообщений от конца</span>
+        </div>
+        <div>
+          <span class="position-indicator__label">Длина</span>
+          <span class="position-indicator__value">100–200 токенов</span>
+        </div>
+        <div>
+          <span class="position-indicator__label">Частота</span>
+          <span class="position-indicator__value">Каждые 5–10 сообщений</span>
+        </div>
+        <div>
+          <span class="position-indicator__label">Влияние на голос</span>
+          <span class="position-indicator__value">~2–5% → <span class="badge badge--cyan" style="font-size:10px;">E07</span></span>
+        </div>
+      </div>
+
+      <!-- Template A/B toggle -->
+      <div class="template-toggle" role="tablist">
+        <button class="template-btn template-btn--active" role="tab" aria-selected="true" data-template="a">Шаблон A (3 секции)</button>
+        <button class="template-btn" role="tab" aria-selected="false" data-template="b">Шаблон B (4 секции)</button>
+      </div>
+
+      <!-- Template A -->
+      <div class="template-card scroll-enter" id="template-a">
+        <div class="template-section">
+          <div class="template-section__label">State</div>
+          <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">WANT → NEED</div>
+          <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">Blind Spot</div>
+          <div class="template-section__content">[Что персонаж не может сейчас увидеть в себе]</div>
+        </div>
+      </div>
+
+      <!-- Template B (includes GHOST-activation) -->
+      <div class="template-card scroll-enter" id="template-b" style="display:none;">
+        <div class="template-section">
+          <div class="template-section__label">State</div>
+          <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">WANT → NEED</div>
+          <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
+        </div>
+        <div class="template-section template-section--ghost">
+          <div class="template-section__label" style="color:var(--accent-violet);">GHOST-activation</div>
+          <div class="template-section__content">[Какой слой GHOST активирован и как он проявляется → <span class="badge badge--violet" style="font-size:10px;">E06</span>]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">Blind Spot</div>
+          <div class="template-section__content">[Что персонаж не может сейчас увидеть в себе]</div>
+        </div>
+      </div>
+
+      <!-- Cross-references -->
+      <div class="an-crossref scroll-enter">
+        <span class="badge badge--cyan">Влияние на голос: E07 (~2–5%)</span>
+        <span class="badge badge--violet">SPINE: E05 (Шаблон B: GHOST-activation)</span>
+        <span class="badge badge--violet">Слои GHOST: E06</span>
+        <span class="badge badge--cyan">Конвейер сборки: E02 (Шаг: инъекция AN)</span>
+      </div>
+
+    </div>
+
+<script type="module">
+// VS Element E16 - inline script (from component-extracts)
+/**
+ * Element: E16 — Author's Note Mechanics
+ * Source: elements/E16-author-note.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      // Переключение шаблонов через addEventListener (CSP-совместимо, без inline onclick)
+      function setTemplate(btn, type) {
+        document.querySelectorAll('.template-btn').forEach(b => {
+          b.classList.remove('template-btn--active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('template-btn--active');
+        btn.setAttribute('aria-selected', 'true');
+
+        document.getElementById('template-a').style.display = type === 'a' ? 'block' : 'none';
+        document.getElementById('template-b').style.display = type === 'b' ? 'block' : 'none';
+      }
+
+      document.querySelectorAll('.template-btn[data-template]').forEach(btn => {
+        btn.addEventListener('click', () => setTemplate(btn, btn.dataset.template));
+      });
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E16 -->
 <section  data-section="p7a_authors_note" data-toc-nav>
@@ -255,11 +508,188 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 </section>
 <!-- VS-EMBED: E17 — Sampling Parameters -->
-<div class="vs-embed" data-vs-element="E17" role="img" aria-label="Визуализация: Sampling Parameters">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E17-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E17…
-  </p>
+<div class="vs-embed" data-vs-element="E17">
+<!-- 
+  Element: E17 — Sampling Parameters
+  Source: elements/E17-sampling-params.html
+  Pattern: P5 — Comparison (grouped columns)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E17-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E17-script.js
+-->
+<div class="params-container scroll-enter">
+
+      <div class="params-grid">
+
+        <!-- 12B-14B column -->
+        <div class="param-column param-column--12b scroll-enter">
+          <div class="param-column__tier">12B-14B</div>
+          <div class="param-column__sub">Наиболее ограниченный</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.6–0.8</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.05</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- 32B+ column -->
+        <div class="param-column param-column--32b scroll-enter">
+          <div class="param-column__tier">32B+</div>
+          <div class="param-column__sub">Рекомендуемый уровень</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.7–1.1*</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">0.7–0.9 базовая</span> | <span class="sub-range__amber">0.85–1.1 чеклист</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.10</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span> | <span class="sub-range__amber">1.05–1.10 с осторожностью</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–80</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- API column -->
+        <div class="param-column param-column--api scroll-enter">
+          <div class="param-column__tier">API</div>
+          <div class="param-column__sub">Максимальная гибкость</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.8–1.0</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value" style="color:var(--text-muted);">N/A</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–100</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Model Type Checklist -->
+      <div class="checklist-section scroll-enter">
+        <div class="checklist-section__title">Чеклист по типу модели (Part 7A)</div>
+        <div class="checklist-row checklist-row__header">
+          <span>Проверка</span>
+          <span>12B-14B</span>
+          <span>32B+</span>
+          <span>API</span>
+        </div>
+        <div class="checklist-row">
+          <span>Размещение голоса</span>
+          <span style="color:var(--danger);">Только Examples</span>
+          <span>Examples основной</span>
+          <span>Examples + AN</span>
+        </div>
+        <div class="checklist-row">
+          <span>Стабильность XML</span>
+          <span style="color:var(--text-muted);">Минимальная</span>
+          <span>Стабильная</span>
+          <span>Полная</span>
+        </div>
+        <div class="checklist-row">
+          <span>Уровень CoT</span>
+          <span style="color:var(--text-muted);">0–1</span>
+          <span>1–2</span>
+          <span style="color:var(--accent-violet);">3</span>
+        </div>
+        <div class="checklist-row">
+          <span>Anti-godmoding</span>
+          <span style="color:var(--success);">2 строки</span>
+          <span style="color:var(--success);">2 строки</span>
+          <span style="color:var(--success);">2 строки</span>
+        </div>
+      </div>
+
+    </div>
+
+<script type="module">
+// VS Element E17 - inline script (from component-extracts)
+/**
+ * Element: E17 — Sampling Parameters
+ * Source: elements/E17-sampling-params.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E17 -->
 <section  data-section="p7a_sampling_params">
@@ -593,11 +1023,165 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 </section>
 <!-- VS-EMBED: E02 — Assembly Pipeline -->
-<div class="vs-embed" data-vs-element="E02" role="img" aria-label="Визуализация: Assembly Pipeline">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E02-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E02…
-  </p>
+<div class="vs-embed" data-vs-element="E02">
+<!-- 
+  Element: E02 — Assembly Pipeline
+  Source: elements/E02-assembly-pipeline.html
+  Pattern: P2 — Flow/Pipeline
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E02-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E02-script.js
+-->
+<div class="pipeline-container">
+
+      <!-- Main flow: 6 steps -->
+      <div class="pipeline-main">
+
+        <!-- Step 1: Identity -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 1</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">Блок идентичности</div>
+            <div class="pipeline-node__sublabel">"You are {{char}}"</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 2: Anti-godmoding -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 2</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">Анти-годмодинг</div>
+            <div class="pipeline-node__sublabel">2 строки (негатив + позитив)</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 3: CORE DIRECTIVES -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 3</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">CORE DIRECTIVES</div>
+            <div class="pipeline-node__sublabel">Все 7 директив → SP</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 4: SPINE (in Description) -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 4</div>
+          <div class="pipeline-node__box pipeline-node__box--spine">
+            <div class="pipeline-node__label" style="color:var(--accent-violet);">SPINE</div>
+            <div class="pipeline-node__sublabel">GHOST→LIE→FLAW→NEED→WANT в Description</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 5: CoT (optional) -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 5</div>
+          <div class="pipeline-node__box pipeline-node__box--optional">
+            <div class="pipeline-node__label">CoT</div>
+            <div class="pipeline-node__sublabel">32B+/API only</div>
+            <span class="badge badge--amber" style="margin-top:4px;">Опционально</span>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 6: Budget Check -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 6</div>
+          <div class="pipeline-node__box" style="border-color:var(--accent-cyan);">
+            <div class="pipeline-node__label">Проверка бюджета</div>
+            <div class="pipeline-node__sublabel">Проверить соответствие токенов</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Feedback loop -->
+      <div class="feedback-loop scroll-enter">
+        <span class="feedback-loop__arrows">↺</span>
+        <div>
+          <div class="feedback-loop__label">Диагностический цикл</div>
+          <div class="feedback-loop__desc">Если бюджет переполнен или качество не проходит → вернуться к SPINE или Directives для доработки</div>
+        </div>
+      </div>
+
+      <!-- Optional steps -->
+      <div class="optional-branch scroll-enter">
+        <div class="optional-branch__title">Опциональные шаги (после проверки бюджета)</div>
+        <div class="optional-branch__items">
+          <div class="optional-branch__item">Anchors привязанные к FLAW <span class="badge badge--violet" style="margin-left:4px;">→ E03</span></div>
+          <div class="optional-branch__item">OCEAN + Enneagram <span class="badge badge--cyan" style="margin-left:4px;">→ E09, E10</span></div>
+          <div class="optional-branch__item">Lorebook <span class="badge badge--muted" style="margin-left:4px;">Part 7B</span></div>
+          <div class="optional-branch__item">Author's Note (Заметка автора) <span class="badge badge--cyan" style="margin-left:4px;">→ E16</span></div>
+        </div>
+      </div>
+
+    </div>
+
+<script type="module">
+// VS Element E02 - inline script (from component-extracts)
+/**
+ * Element: E02 — Assembly Pipeline
+ * Source: elements/E02-assembly-pipeline.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E02 -->
 <section  data-section="p7a_assembly_pipeline" data-toc-nav>

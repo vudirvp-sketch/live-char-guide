@@ -30,11 +30,265 @@
 </section>
 
 <!-- VS-EMBED: E01 — Card Anatomy -->
-<div class="vs-embed" data-vs-element="E01" role="img" aria-label="Визуализация: Card Anatomy">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E01-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E01…
-  </p>
+<div class="vs-embed" data-vs-element="E01">
+<!-- 
+  Element: E01 — Card Anatomy
+  Source: elements/E01-card-anatomy.html
+  Pattern: P1 — Stack/Layers
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E01-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E01-script.js
+-->
+<div class="card-stack">
+
+      <!-- SP Block — border-only frame -->
+      <div class="card-block card-block--sp scroll-enter scroll-enter--left">
+        <div class="inner-dashed"></div>
+        <div class="block-label">
+          <span class="block-label__name">
+            SP (System Prompt)
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~50</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~100</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~200</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">Контейнер — содержит директивы, идентичность, правила. Никакого нарративного контента.</div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Description Block — widest -->
+      <div class="card-block card-block--desc scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Description
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~150</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~300</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~700</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">
+          Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
+          <div class="desc-callout">
+            ↳ Anchors упомянуты здесь как ссылка — структурно вложены в Examples
+          </div>
+        </div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Examples + Anchors Block — medium -->
+      <div class="card-block card-block--examples scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Examples + Anchors
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~80</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~180</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~400</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">
+          Примеры диалогов, демонстрирующие голос персонажа. 2–5 примеров, каждый ~40–80 токенов.
+          <!-- Anchors sub-panel — nested, violet accent -->
+          <div class="anchors-subpanel">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <span style="font-family:var(--font-heading); font-weight:600; font-size:13px; color:var(--accent-violet);">Anchors</span>
+              <span class="badge badge--violet">T→A→P</span>
+            </div>
+            <div style="font-size:12px; color:var(--text-secondary);">
+              Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
+              Единственное место, где Anchors живут структурно.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Greeting Block — narrow -->
+      <div class="card-block card-block--greeting scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Greeting
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~40</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~60</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~100</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">Первое сообщение персонажа. Задаёт тон и базовую голосовую линию.</div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Lorebook Block — optional, dashed -->
+      <div class="card-block card-block--lorebook scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Lorebook
+            <span class="optional-badge">опционально</span>
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~0</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~100</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~300</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">Контекстно-зависимые записи лора. Описано в Part 7B.</div>
+      </div>
+
+    </div>
+
+    <!-- Token budget summary -->
+    <div class="panel" style="max-width:720px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--text-primary);">
+        Сводка токенного бюджета
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border); color:var(--text-muted);">
+            <th style="text-align:left; padding:6px 8px;">Блок</th>
+            <th style="text-align:right; padding:6px 8px;">Мин</th>
+            <th style="text-align:right; padding:6px 8px;">Стандарт</th>
+            <th style="text-align:right; padding:6px 8px;">Макс</th>
+            <th style="text-align:left; padding:6px 8px; color:var(--text-muted);">Источник</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--text-secondary);">
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">SP</td>
+            <td style="text-align:right; padding:6px 8px;">~50</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="text-align:right; padding:6px 8px;">~200</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Description</td>
+            <td style="text-align:right; padding:6px 8px;">~150</td>
+            <td style="text-align:right; padding:6px 8px;">~300</td>
+            <td style="text-align:right; padding:6px 8px;">~700</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Examples (2–5)</td>
+            <td style="text-align:right; padding:6px 8px;">~80</td>
+            <td style="text-align:right; padding:6px 8px;">~180</td>
+            <td style="text-align:right; padding:6px 8px;">~400</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A (40/60/80 per)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Greeting</td>
+            <td style="text-align:right; padding:6px 8px;">~40</td>
+            <td style="text-align:right; padding:6px 8px;">~60</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Anchors (each)</td>
+            <td style="text-align:right; padding:6px 8px;">~15</td>
+            <td style="text-align:right; padding:6px 8px;">~25</td>
+            <td style="text-align:right; padding:6px 8px;">~40</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;">Lorebook</td>
+            <td style="text-align:right; padding:6px 8px;">~0</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="text-align:right; padding:6px 8px;">~300</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Est. Part 7B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+<script type="module">
+// VS Element E01 - inline script (from component-extracts)
+/**
+ * Element: E01 — Card Anatomy
+ * Source: elements/E01-card-anatomy.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+// Scroll-triggered animations via IntersectionObserver
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => {
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.scroll-enter').forEach(el => {
+        observer.observe(el);
+      });
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E01 -->
 <section  data-section="p1_card_overview" data-toc-nav>

@@ -6,11 +6,163 @@
   Phase 2.2.2: FLAW-linked anchors moved from Part 2 to p4_spine_mapping
 -->
 <!-- VS-EMBED: E05 — SPINE Framework -->
-<div class="vs-embed" data-vs-element="E05" role="img" aria-label="Визуализация: SPINE Framework">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E05-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E05…
-  </p>
+<div class="vs-embed" data-vs-element="E05">
+<!-- 
+  Element: E05 — SPINE Framework
+  Source: elements/E05-spine-framework.html
+  Pattern: P2 — Flow (horizontal chain)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E05-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E05-script.js
+-->
+<div class="spine-cascade">
+      <div class="spine-flow">
+
+        <!-- GHOST -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#128123;</div>
+                <div class="spine-node__name">GHOST</div>
+                <div class="spine-node__example">"Предательство редактора"</div>
+              </div>
+            </div>
+          </div>
+          <div class="spine-node__expand" role="button" aria-label="Expand GHOST layers" tabindex="0">+</div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- LIE -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#127910;</div>
+                <div class="spine-node__name">LIE</div>
+                <div class="spine-node__example">"Я не могу никому доверять"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- FLAW -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#128165;</div>
+                <div class="spine-node__name">FLAW</div>
+                <div class="spine-node__example">"Отталкивает людей"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- NEED -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#10084;</div>
+                <div class="spine-node__name">NEED</div>
+                <div class="spine-node__example">"Подлинная связь"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- WANT -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#11088;</div>
+                <div class="spine-node__name">WANT</div>
+                <div class="spine-node__example">"Контроль над отношениями"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
+        Причинно-следственная цепь
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+        SPINE — психологический стержень персонажа. Каждый элемент причинно-следственно вытекает из предыдущего:
+        <strong style="color:var(--text-primary);">GHOST</strong> (глубокая травма) порождает
+        <strong style="color:var(--text-primary);">LIE</strong> (ложное убеждение), которое создаёт
+        <strong style="color:var(--text-primary);">FLAW</strong> (дезадаптивный паттерн), который двигает
+        <strong style="color:var(--text-primary);">NEED</strong> (подлинное желание), маскируемое
+        <strong style="color:var(--text-primary);">WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
+        WANT сходится к NEED по мере того, как персонаж платит Prices через Anchors.
+      </p>
+    </div>
+
+<script type="module">
+// VS Element E05 - inline script (from component-extracts)
+/**
+ * Element: E05 — SPINE Framework
+ * Source: elements/E05-spine-framework.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E05 -->
 <section  data-section="p4_spine_overview" data-toc-nav>
@@ -525,11 +677,132 @@ WANT: Доказать правоту самостоятельно
 <p>Для большинства персонажей достаточно одного GHOST — единичного травматического опыта. Но некоторые backstory требуют нескольких травматических слоёв, каждый из которых формирует отдельный аспект личности. → GHOST Layers (ниже)</p>
 
 <!-- VS-EMBED: E06 — GHOST Layers -->
-<div class="vs-embed" data-vs-element="E06" role="img" aria-label="Визуализация: GHOST Layers">
-  <!-- Содержимое будет загружено из visual-system/integration/component-extracts/E06-visual.html -->
-  <p class="vs-loading" style="text-align:center; color:var(--text-muted); padding:2em;">
-    Загрузка визуализации E06…
-  </p>
+<div class="vs-embed" data-vs-element="E06">
+<!-- 
+  Element: E06 — GHOST Layers
+  Source: elements/E06-ghost-layers.html
+  Pattern: P4 — Concentric Rings
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E06-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E06-script.js
+-->
+<div class="ghost-rings scroll-enter">
+
+<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Слои GHOST: три концентрических кольца, показывающих глубину травмы от G1 (источник/ядро) до G3 (поверхностный/настоящее)">
+        <title>Слои GHOST — визуализация 3-уровневой глубины травмы</title>
+
+        <!-- ПРИМЕЧАНИЕ: SVG-атрибуты fill/stroke/stop-color не могут надёжно
+             использовать CSS-переменные во всех браузерах, поэтому здесь
+             используются литеральные rgba-значения, соответствующие --accent-violet (#8b5cf6). -->
+        <defs>
+          <radialGradient id="ghost-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(139,92,246,0.15)"/>
+            <stop offset="100%" stop-color="var(--bg-deep)"/>
+          </radialGradient>
+          <!-- Core glow -->
+          <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(139,92,246,0.35)"/>
+            <stop offset="100%" stop-color="rgba(139,92,246,0)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Background -->
+        <rect width="600" height="480" fill="url(#ghost-grad)"/>
+
+        <!-- G3 — Surface (outer ring) — lightest violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
+                stroke="rgba(139,92,246,0.25)" stroke-width="1.5" style="transition-delay:0ms;"/>
+
+        <!-- G2 — Secondary (middle ring) — medium violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
+                stroke="rgba(139,92,246,0.35)" stroke-width="1.5" style="transition-delay:200ms;"/>
+
+        <!-- G1 — Core (inner ring) — deep violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
+                stroke="rgba(139,92,246,0.55)" stroke-width="1.5" style="transition-delay:400ms;"/>
+
+        <!-- Core glow -->
+        <circle class="ring-anim" cx="260" cy="240" r="30" fill="url(#core-glow)" style="transition-delay:500ms;"/>
+
+        <!-- Ring text labels inside SVG -->
+        <text class="ring-text-anim" x="260" y="100" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-heading)" font-size="12" font-weight="600"
+              style="transition-delay:600ms;">G3 — Поверхностный</text>
+        <text class="ring-text-anim" x="260" y="115" text-anchor="middle" fill="var(--text-muted)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:650ms;">"Избегает обязательств"</text>
+
+        <text class="ring-text-anim" x="260" y="155" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-heading)" font-size="12" font-weight="600"
+              style="transition-delay:700ms;">G2 — Промежуточный</text>
+        <text class="ring-text-anim" x="260" y="170" text-anchor="middle" fill="var(--text-muted)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:750ms;">"Брошен в 16 лет"</text>
+
+        <text class="ring-text-anim" x="260" y="230" text-anchor="middle" fill="var(--text-primary)"
+              font-family="var(--font-heading)" font-size="13" font-weight="600"
+              style="transition-delay:800ms;">G1 — Ядро</text>
+        <text class="ring-text-anim" x="260" y="248" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:850ms;">"Отец ушёл, когда мне было 5"</text>
+
+      </svg>
+
+<!-- HTML labels on the right -->
+      <div class="ring-label ring-label--g3 scroll-enter">
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Поверхностный</div>
+        <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
+        <div class="ring-label__event">"Избегает обязательств"</div>
+        <div class="ring-label__causal">G3 → текущий триггер</div>
+      </div>
+
+      <div class="ring-label ring-label--g2 scroll-enter">
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Промежуточный</div>
+        <div class="ring-label__timeline">Юность (13–25): подкрепляется → усиливает FLAW</div>
+        <div class="ring-label__event">"Брошен в 16 лет"</div>
+        <div class="ring-label__causal">G2 → усиливает FLAW</div>
+      </div>
+
+      <div class="ring-label ring-label--g1 scroll-enter">
+        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Ядро</div>
+        <div class="ring-label__timeline">Детство (0–12): исток → формирует LIE</div>
+        <div class="ring-label__event">"Отец ушёл, когда мне было 5"</div>
+        <div class="ring-label__causal">G1 → формирует LIE</div>
+      </div>
+    </div>
+
+    <div class="ghost-link-back scroll-enter">
+      <span class="badge badge--violet">GHOST = Слой 1 фреймворка SPINE → E05</span>
+    </div>
+
+<script type="module">
+// VS Element E06 - inline script (from component-extracts)
+/**
+ * Element: E06 — GHOST Layers
+ * Source: elements/E06-ghost-layers.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.ring-anim, .ring-text-anim, .ring-label, .scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.ring-anim, .ring-text-anim, .ring-label, .scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E06 -->
 <section  data-section="p4_ghost_layers">

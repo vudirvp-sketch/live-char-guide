@@ -119,11 +119,12 @@ async function buildShell() {
     process.exit(1);
   }
 
-  // 2. Copy shell styles.css
+  // 2. Copy shell styles.css (includes VS tokens + element CSS since Phase 4)
   const shellStyles = join(SHELL_DIR, 'styles.css');
   if (existsSync(shellStyles)) {
     await copyFile(shellStyles, join(ASSETS_DIST, 'shell-styles.css'));
-    log('INFO', 'Copied shell/styles.css → dist/assets/shell-styles.css');
+    const stylesSize = (await stat(shellStyles)).size;
+    log('INFO', `Copied shell/styles.css → dist/assets/shell-styles.css (${(stylesSize/1024).toFixed(1)} KB, includes VS tokens + element styles)`);
   } else {
     log('ERROR', 'shell/styles.css not found');
     process.exit(1);
