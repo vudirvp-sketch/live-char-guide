@@ -110,7 +110,7 @@ GHOST: Предательство редактора — история, кот�
 ### Мета-информация
 - **Role**: SPINE demonstration, FLAW-linked anchors, Embodiment protocol
 - **Replaces**: None
-- **Card**: `p10_geralt` — canonical card in Part 10
+- **Card**: DELETED in v9.1 — section `p10_geralt` removed. See `p10_elena` (basic-intermediate) or `p10_walter` (realistic modern) instead.
 
 ### SPINE
 ```
@@ -339,7 +339,7 @@ GHOST: Родители отказались от него, тётя умерл�
 - **Role**: Crystal-clear SPINE example
 - **Replaces**: Paul Atreides
 - **Migration Action**: REWRITE (different psychology, different anchors)
-- **Card**: `p10_edward` — canonical card in Part 10
+- **Card**: DELETED in v9.1 — section `p10_edward` removed. See `p10_elena` (basic-intermediate) or `p10_walter` (realistic modern) instead.
 
 ### SPINE
 ```

@@ -39,13 +39,13 @@ section B MUST reference back to A. Unidirectional references create orphan know
 | 6 | p7b_lorebook_advanced | p7a_authors_note | `href="#p7a_authors_note"` in Кросс-ссылки section | ✅ p7a_authors_note references p7b_lorebook_mechanics via upstream link |
 | 7 | p7b_lorebook_advanced | p7b_structured_inject | `href="#p7b_structured_inject"` in Кросс-ссылки section | ✅ Forward link only — p7b_structured_inject is technique reference (acceptable) |
 | 8 | p4_spine_navigation | p7a_xml_tags | Pipeline step 3 via href | ✅ p7a_xml_tags is downstream |
-| 9 | p10_omnis_l3_card | p4_ghost_layers | `href="#p4_ghost_layers"` | ✅ p4_ghost_layers references via back-link added in TP-15 |
+| 9 | p10_omnis | p4_ghost_layers | `href="#p4_ghost_layers"` | ✅ p4_ghost_layers references via back-link added in TP-15 |
 | 10 | p9_additional_problems | p1_top3_problems | `href="#p1_top3_problems"` | ✅ p9_additional_problems references p1_top3_problems via back-link |
-| 11 | p10_elena_l1 | p2_anchor_examples | `href="#p2_anchor_examples"` | ✅ p10_elena_l1 references p2_anchor_examples via back-link |
+| 11 | p10_elena | p2_anchor_examples | `href="#p2_anchor_examples"` | ✅ p10_elena references p2_anchor_examples via back-link |
 
 | 12 | p1_token_budget_ref | p7a_token_budget | `href="#p7a_token_budget"` | ✅ Forward reference only — canonical content now in Part 7A |
 | 13 | p1_pipeline_ref | p7a_assembly_pipeline | `href="#p7a_assembly_pipeline"` | ✅ Forward reference only — pipeline is in Part 7A |
-| 14 | p1_value_proposition | p1_card_overview | Internal sub-section | ✅ Value prop is sub-section of card overview |
+| 14 | p1_value_proposition | — | Standalone section | ✅ Top-level sibling before p1_card_overview (moved in v9.1 fix) |
 
 ---
 

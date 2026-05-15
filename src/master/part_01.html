@@ -1,12 +1,10 @@
 <!--
   Part 1: Basic Card Blocks (Базовые блоки карточки)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v9.1 Master HTML
 
   Unified: All content at maximum depth
+  v9.1: p1_value_proposition moved before p1_card_overview (was incorrectly nested)
 -->
-<section  data-section="p1_card_overview" data-toc-nav>
-<h2>Базовые блоки карточки</h2>
-
 <section data-section="p1_value_proposition" data-toc-nav>
 <h2>Зачем системный подход?</h2>
 
@@ -28,6 +26,9 @@
 
 <p>Этот гайд учит строить карточку как поведенческий движок — каждый элемент производит действие, а не украшает описание.</p>
 </section>
+
+<section  data-section="p1_card_overview" data-toc-nav>
+<h2>Базовые блоки карточки</h2>
 
 <p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Но думать о ней нужно как о <strong>поведенческом движке</strong>: каждый элемент должен производить наблюдаемое действие, а не украшать описание. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
 
@@ -150,4 +151,3 @@ graph TD
 <p class="bridge-paragraph">Базовые блоки определяют, ЧТО ваш персонаж из себя представляет. Но персонаж, у которого есть только Identity и Description, будет вести себя типово — модель заполняет пробелы значениями по умолчанию. Behavioral Anchors решают эту проблему: они указывают, КОГДА и КАК ваш персонаж активирует конкретные паттерны поведения. → <a href="#p2_basic_anchors">Part 2</a></p>
 
 </section>
-

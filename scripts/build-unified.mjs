@@ -255,8 +255,6 @@ function anchorToTitle(anchor) {
     'p9_12b_issues': '12B-specific issues',
     'p9_pre_deploy': 'Pre-Deploy Validation',
     'p10_elena': 'Елена',
-    'p10_geralt': 'Геральт',
-    'p10_edward': 'Эдвард Элрик',
     'p10_walter': 'Уолтер Уайт',
     'p10_omnis': 'Омнис-Зета 7-Квин',
     'p10_vysherblenny': 'Выщербленный',
