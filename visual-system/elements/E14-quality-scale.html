@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E14 — Quality Scale | Live Character Guide Visual System</title>
+  <title>E14 — Шкала качества | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -216,30 +216,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el mini-map__el--active">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -247,8 +248,8 @@
 
   <header>
     <span class="element-number">E14</span>
-    <h1 class="element-title">Quality Scale</h1>
-    <p class="element-subtitle">Pattern: P1 — Stack (thermometer variant) &middot; Source: Part 9 (Quality Scale, Pre-Deploy)</p>
+    <h1 class="element-title">Шкала качества</h1>
+    <p class="element-subtitle">Паттерн: P1 — Stack (вариант термометра) &middot; Источник: Part 9 (Шкала качества, предразвёртывание)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -257,10 +258,10 @@
 
       <!-- Thermometer -->
       <div class="thermometer scroll-enter">
-        <div class="thermometer__zone zone-critical"><span class="thermometer__zone-label">Critical</span></div>
-        <div class="thermometer__zone zone-poor"><span class="thermometer__zone-label">Poor</span></div>
-        <div class="thermometer__zone zone-good"><span class="thermometer__zone-label">Good</span></div>
-        <div class="thermometer__zone zone-excellent"><span class="thermometer__zone-label">Excellent</span></div>
+        <div class="thermometer__zone zone-critical"><span class="thermometer__zone-label">Критический</span></div>
+        <div class="thermometer__zone zone-poor"><span class="thermometer__zone-label">Слабый</span></div>
+        <div class="thermometer__zone zone-good"><span class="thermometer__zone-label">Хороший</span></div>
+        <div class="thermometer__zone zone-excellent"><span class="thermometer__zone-label">Отличный</span></div>
         <div class="indicator" style="bottom:50%;">
           <div class="indicator__marker"></div>
         </div>
@@ -269,27 +270,27 @@
       <!-- Zone descriptions -->
       <div class="zone-details">
         <div class="zone-detail zone-detail--excellent">
-          <div class="zone-detail__title" style="color:var(--accent-violet);">Excellent</div>
+          <div class="zone-detail__title" style="color:var(--accent-violet);">Отличный</div>
           <div class="zone-detail__range">85–100%</div>
-          <div class="zone-detail__criteria">Passes all 14 Pre-Deploy checks: Voice isolation, Anchor quality, Token budget compliance, SPINE consistency, Embodiment completeness, No antipatterns, Format Lock valid, Sampling correct, Anti-godmoding present, Context limits respected.</div>
+          <div class="zone-detail__criteria">Проходит все 14 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие Token Budget, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
         </div>
 
         <div class="zone-detail zone-detail--good">
-          <div class="zone-detail__title" style="color:var(--accent-cyan);">Good</div>
+          <div class="zone-detail__title" style="color:var(--accent-cyan);">Хороший</div>
           <div class="zone-detail__range">50–85%</div>
-          <div class="zone-detail__criteria">Stable 10+ messages, recognizable voice, Price appears consistently in Anchors. Core structure is sound but may have minor sampling or budget issues.</div>
+          <div class="zone-detail__criteria">Стабильные 10+ сообщений, узнаваемый голос, Price последовательно появляется в Anchors. Основная структура здорова, но возможны незначительные проблемы сэмплирования или бюджета.</div>
         </div>
 
         <div class="zone-detail zone-detail--poor">
-          <div class="zone-detail__title" style="color:var(--accent-amber);">Poor</div>
+          <div class="zone-detail__title" style="color:var(--accent-amber);">Слабый</div>
           <div class="zone-detail__range">25–50%</div>
-          <div class="zone-detail__criteria">Follows basic rules but character drifts after 5–10 messages. Anchors present but ineffective. SPINE defined but not expressed through Anchors.</div>
+          <div class="zone-detail__criteria">Следует базовым правилам, но персонаж дрейфует после 5–10 сообщений. Anchors присутствуют, но неэффективны. SPINE определён, но не выражен через Anchors.</div>
         </div>
 
         <div class="zone-detail zone-detail--critical">
-          <div class="zone-detail__title" style="color:var(--danger);">Critical</div>
+          <div class="zone-detail__title" style="color:var(--danger);">Критический</div>
           <div class="zone-detail__range">0–25%</div>
-          <div class="zone-detail__criteria">Violates 2+ basic rules: no Price, voice in Description, PP > 0. Character is fundamentally broken. Requires full rework.</div>
+          <div class="zone-detail__criteria">Нарушает 2+ базовых правила: нет Price, голос в Description, PP > 0. Персонаж фундаментально сломан. Требуется полная переработка.</div>
         </div>
       </div>
 
@@ -297,40 +298,40 @@
 
     <!-- Quick Pre-Deploy Checks -->
     <div class="quick-checks" style="max-width:700px; margin: var(--gap-xl) auto 0;">
-      <div class="quick-checks__title">5 Quick Pre-Deploy Checks</div>
+      <div class="quick-checks__title">5 быстрых проверок перед развёртыванием</div>
 
       <div class="quick-check-item scroll-enter">
         <div class="quick-check-item__checkbox"></div>
-        PP = 0.0 (Presence Penalty is zero)
+        PP = 0.0 (Presence Penalty равен нулю)
       </div>
 
       <div class="quick-check-item scroll-enter">
         <div class="quick-check-item__checkbox"></div>
-        Voice only in Examples (not in Description or SP)
+        Голос только в Examples (не в Description или SP)
       </div>
 
       <div class="quick-check-item scroll-enter">
         <div class="quick-check-item__checkbox"></div>
-        Price in every Anchor (physical, in-scene)
+        Price в каждом Anchor (физический, внутри сцены)
       </div>
 
       <div class="quick-check-item scroll-enter">
         <div class="quick-check-item__checkbox"></div>
-        Format Lock (1 consistent XML system)
+        Format Lock (1 согласованная система XML)
       </div>
 
       <div class="quick-check-item scroll-enter">
         <div class="quick-check-item__checkbox"></div>
-        Anti-godmoding (2 lines in SP)
+        Anti-godmoding (2 строки в SP)
       </div>
     </div>
 
   </main>
 
   <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--cyan">Diagnostics: E13</span>
-    <span class="badge badge--cyan">Antipatterns: E12</span>
-    <span class="badge badge--cyan">Sampling: E17</span>
+    <span class="badge badge--cyan">Диагностика: E13</span>
+    <span class="badge badge--cyan">Антипаттерны: E12</span>
+    <span class="badge badge--cyan">Сэмплирование: E17</span>
   </footer>
 
   <script>

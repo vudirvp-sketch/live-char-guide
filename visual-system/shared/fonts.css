@@ -1,20 +1,20 @@
 /* ============================================================
-   Live Character Guide — Font Declarations
-   Prototype phase: CDN-loaded fonts.
-   Production: self-host .woff2 alongside existing NotoSans.
+   Живой справочник персонажа — Объявления шрифтов
+   Фаза прототипа: шрифты загружаются через CDN.
+   Продакшен: самообзор .woff2 совместно с существующим NotoSans.
    ============================================================ */
 
-/* Bricolage Grotesque 700 — Display titles */
+/* Bricolage Grotesque 700 — Заголовки экранного уровня */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&display=swap');
 
-/* DM Sans 500, 600 — Headings, labels */
+/* DM Sans 500, 600 — Заголовки, метки */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600&display=swap');
 
-/* Geist 400, 500 — Body text (NOT on Google Fonts — use Vercel CDN) */
+/* Geist 400, 500 — Основной текст (НЕТ на Google Fonts — используется Vercel CDN) */
 @import url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css');
 
-/* JetBrains Mono 400, 450 — Monospace data */
+/* JetBrains Mono 400, 450 — Моноширинный для данных */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;450&display=swap');
 
-/* Inter 400 — Micro/footnotes only */
+/* Inter 400 — Только микро/сноски */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');

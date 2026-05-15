@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E06 — GHOST Layers | Live Character Guide Visual System</title>
+  <title>E06 — Слои GHOST | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -105,30 +105,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el mini-map__el--active">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -136,15 +137,15 @@
 
   <header>
     <span class="element-number">E06</span>
-    <h1 class="element-title">GHOST Layers</h1>
-    <p class="element-subtitle">Pattern: P4 — Concentric rings &middot; Source: Part 4 (GHOST Layers: 3-tier trauma depth)</p>
+    <h1 class="element-title">Слои GHOST</h1>
+    <p class="element-subtitle">Паттерн: P4 — Концентрические кольца &middot; Источник: Часть 4 (Слои GHOST: 3-уровневая глубина травмы)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
 
     <div class="ghost-rings scroll-enter">
-      <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GHOST Layers: three concentric rings showing trauma depth from G1 (origin/core) to G3 (surface/present)">
-        <title>GHOST Layers — 3-tier trauma depth visualization</title>
+      <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Слои GHOST: три концентрических кольца, показывающих глубину травмы от G1 (источник/ядро) до G3 (поверхностный/настоящее)">
+        <title>Слои GHOST — визуализация 3-уровневой глубины травмы</title>
 
         <!-- Background radial gradient -->
         <defs>
@@ -180,60 +181,60 @@
         <!-- Ring text labels inside SVG -->
         <text class="ring-text-anim" x="260" y="100" text-anchor="middle" fill="var(--text-secondary)"
               font-family="var(--font-heading)" font-size="12" font-weight="600"
-              style="transition-delay:600ms;">G3 — Surface</text>
+              style="transition-delay:600ms;">G3 — Поверхностный</text>
         <text class="ring-text-anim" x="260" y="115" text-anchor="middle" fill="var(--text-muted)"
               font-family="var(--font-micro)" font-size="9"
-              style="transition-delay:650ms;">"Avoids commitment"</text>
+              style="transition-delay:650ms;">"Избегает обязательств"</text>
 
         <text class="ring-text-anim" x="260" y="155" text-anchor="middle" fill="var(--text-secondary)"
               font-family="var(--font-heading)" font-size="12" font-weight="600"
-              style="transition-delay:700ms;">G2 — Secondary</text>
+              style="transition-delay:700ms;">G2 — Промежуточный</text>
         <text class="ring-text-anim" x="260" y="170" text-anchor="middle" fill="var(--text-muted)"
               font-family="var(--font-micro)" font-size="9"
-              style="transition-delay:750ms;">"Abandoned at 16"</text>
+              style="transition-delay:750ms;">"Брошен в 16 лет"</text>
 
         <text class="ring-text-anim" x="260" y="230" text-anchor="middle" fill="var(--text-primary)"
               font-family="var(--font-heading)" font-size="13" font-weight="600"
-              style="transition-delay:800ms;">G1 — Core</text>
+              style="transition-delay:800ms;">G1 — Ядро</text>
         <text class="ring-text-anim" x="260" y="248" text-anchor="middle" fill="var(--text-secondary)"
               font-family="var(--font-micro)" font-size="9"
-              style="transition-delay:850ms;">"Father left when I was 5"</text>
+              style="transition-delay:850ms;">"Отец ушёл, когда мне было 5"</text>
 
       </svg>
 
       <!-- HTML labels on the right -->
       <div class="ring-label ring-label--g3 scroll-enter">
-        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Surface</div>
-        <div class="ring-label__timeline">Present: triggers now</div>
-        <div class="ring-label__event">"Avoids commitment"</div>
-        <div class="ring-label__causal">G3 → current trigger</div>
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Поверхностный</div>
+        <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
+        <div class="ring-label__event">"Избегает обязательств"</div>
+        <div class="ring-label__causal">G3 → текущий триггер</div>
       </div>
 
       <div class="ring-label ring-label--g2 scroll-enter">
-        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Secondary</div>
-        <div class="ring-label__timeline">Youth (13–25): reinforced → strengthens FLAW</div>
-        <div class="ring-label__event">"Abandoned at 16"</div>
-        <div class="ring-label__causal">G2 → reinforced FLAW</div>
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Промежуточный</div>
+        <div class="ring-label__timeline">Юность (13–25): подкрепляется → усиливает FLAW</div>
+        <div class="ring-label__event">"Брошен в 16 лет"</div>
+        <div class="ring-label__causal">G2 → усиливает FLAW</div>
       </div>
 
       <div class="ring-label ring-label--g1 scroll-enter">
-        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Core</div>
-        <div class="ring-label__timeline">Childhood (0–12): origin → forms LIE</div>
-        <div class="ring-label__event">"Father left when I was 5"</div>
-        <div class="ring-label__causal">G1 → formed LIE</div>
+        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Ядро</div>
+        <div class="ring-label__timeline">Детство (0–12): исток → формирует LIE</div>
+        <div class="ring-label__event">"Отец ушёл, когда мне было 5"</div>
+        <div class="ring-label__causal">G1 → формирует LIE</div>
       </div>
     </div>
 
     <div class="ghost-link-back scroll-enter">
-      <span class="badge badge--violet">GHOST = Layer 1 of SPINE → E05</span>
+      <span class="badge badge--violet">GHOST = Слой 1 фреймворка SPINE → E05</span>
     </div>
 
   </main>
 
   <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--violet">SPINE Framework: E05</span>
-    <span class="badge badge--cyan">OCEAN validation: E09</span>
-    <span class="badge badge--cyan">Enneagram mapping: E10</span>
+    <span class="badge badge--violet">Фреймворк SPINE: E05</span>
+    <span class="badge badge--cyan">Валидация OCEAN: E09</span>
+    <span class="badge badge--cyan">Маппинг Enneagram: E10</span>
   </footer>
 
   <script>

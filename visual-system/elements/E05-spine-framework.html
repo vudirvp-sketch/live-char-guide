@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,7 +101,7 @@
 
     /* Tooltip for GHOST expand */
     .spine-node__expand::after {
-      content: '3 internal layers → See E06';
+      content: '3 внутренних слоя → См. E06';
       position: absolute;
       bottom: calc(100% + 6px);
       left: 50%;
@@ -193,30 +193,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el mini-map__el--active">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -224,8 +225,8 @@
 
   <header>
     <span class="element-number">E05</span>
-    <h1 class="element-title">SPINE Framework</h1>
-    <p class="element-subtitle">Pattern: P2 — Flow (horizontal cascade with vertical offset) &middot; Source: Part 4</p>
+    <h1 class="element-title">Фреймворк SPINE</h1>
+    <p class="element-subtitle">Паттерн: P2 — Поток (горизонтальная цепь с вертикальным смещением) &middot; Источник: Part 4</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -238,7 +239,7 @@
           <div class="spine-node__hex">
             <div class="spine-node__icon" aria-hidden="true">&#128123;</div>
             <div class="spine-node__name">GHOST</div>
-            <div class="spine-node__example">"Betrayal by editor"</div>
+            <div class="spine-node__example">"Предательство редактора"</div>
           </div>
           <div class="spine-node__expand" role="button" aria-label="Expand GHOST layers" tabindex="0">+</div>
         </div>
@@ -255,7 +256,7 @@
           <div class="spine-node__hex">
             <div class="spine-node__icon" aria-hidden="true">&#127910;</div>
             <div class="spine-node__name">LIE</div>
-            <div class="spine-node__example">"I can't trust anyone"</div>
+            <div class="spine-node__example">"Я не могу никому доверять"</div>
           </div>
         </div>
 
@@ -271,7 +272,7 @@
           <div class="spine-node__hex">
             <div class="spine-node__icon" aria-hidden="true">&#128165;</div>
             <div class="spine-node__name">FLAW</div>
-            <div class="spine-node__example">"Pushes people away"</div>
+            <div class="spine-node__example">"Отталкивает людей"</div>
           </div>
         </div>
 
@@ -287,7 +288,7 @@
           <div class="spine-node__hex">
             <div class="spine-node__icon" aria-hidden="true">&#10084;</div>
             <div class="spine-node__name">NEED</div>
-            <div class="spine-node__example">"Genuine connection"</div>
+            <div class="spine-node__example">"Подлинная связь"</div>
           </div>
         </div>
 
@@ -303,7 +304,7 @@
           <div class="spine-node__hex">
             <div class="spine-node__icon" aria-hidden="true">&#11088;</div>
             <div class="spine-node__name">WANT</div>
-            <div class="spine-node__example">"Control over relationships"</div>
+            <div class="spine-node__example">"Контроль над отношениями"</div>
           </div>
         </div>
 
@@ -313,26 +314,26 @@
     <!-- Explanation -->
     <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
       <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
-        Causal Cascade
+        Причинно-следственная цепь
       </div>
       <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
-        SPINE is the psychological backbone of the character. Each element flows causally into the next:
-        the <strong style="color:var(--text-primary);">GHOST</strong> (deep trauma) produces a
-        <strong style="color:var(--text-primary);">LIE</strong> (false belief), which creates a
-        <strong style="color:var(--text-primary);">FLAW</strong> (maladaptive pattern), which drives a
-        <strong style="color:var(--text-primary);">NEED</strong> (authentic desire) masked by a
-        <strong style="color:var(--text-primary);">WANT</strong> (surface goal). The cascade always flows left to right.
-        WANT converges toward NEED as the character pays Prices through Anchors.
+        SPINE — психологический стержень персонажа. Каждый элемент причинно-следственно вытекает из предыдущего:
+        <strong style="color:var(--text-primary);">GHOST</strong> (глубокая травма) порождает
+        <strong style="color:var(--text-primary);">LIE</strong> (ложное убеждение), которое создаёт
+        <strong style="color:var(--text-primary);">FLAW</strong> (дезадаптивный паттерн), который двигает
+        <strong style="color:var(--text-primary);">NEED</strong> (подлинное желание), маскируемое
+        <strong style="color:var(--text-primary);">WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
+        WANT сходится к NEED по мере того, как персонаж платит Prices через Anchors.
       </p>
     </div>
 
   </main>
 
   <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--violet">GHOST Layers: E06</span>
+    <span class="badge badge--violet">Слои GHOST: E06</span>
     <span class="badge badge--violet">Anchors (T→A→P): E03</span>
-    <span class="badge badge--cyan">Assembly Pipeline: E02</span>
-    <span class="badge badge--cyan">OCEAN validation: E09</span>
+    <span class="badge badge--cyan">Пайплайн сборки: E02</span>
+    <span class="badge badge--cyan">Валидация OCEAN: E09</span>
   </footer>
 
   <script>

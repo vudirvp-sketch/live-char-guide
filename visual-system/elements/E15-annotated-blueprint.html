@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E15 — Annotated Blueprint | Live Character Guide Visual System</title>
+  <title>E15 — Аннотированный чертёж | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -182,26 +182,26 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
@@ -214,8 +214,8 @@
 
   <header>
     <span class="element-number">E15</span>
-    <h1 class="element-title">Annotated Blueprint</h1>
-    <p class="element-subtitle">Pattern: P6 — Blueprint / Annotated Card &middot; Source: Part 10 (Елена full card)</p>
+    <h1 class="element-title">Аннотированный чертёж</h1>
+    <p class="element-subtitle">Паттерн: P6 — Blueprint / Аннотированная карточка &middot; Источник: Part 10 (полная карточка Елены)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -224,10 +224,10 @@
 
       <!-- Layer toggle buttons -->
       <div class="layer-toggles" role="tablist" aria-label="Annotation layer selection">
-        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" onclick="setLayer('structure')">Structure</button>
+        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" onclick="setLayer('structure')">Структура</button>
         <button class="layer-toggle layer-toggle--anchors" role="tab" aria-selected="false" onclick="setLayer('anchors')">Anchors</button>
         <button class="layer-toggle layer-toggle--spine" role="tab" aria-selected="false" onclick="setLayer('spine')">SPINE</button>
-        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" onclick="setLayer('directives')">Directives</button>
+        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" onclick="setLayer('directives')">Директивы</button>
       </div>
 
       <!-- Blueprint area with card template -->
@@ -236,49 +236,49 @@
         <!-- Structure layer (default active) -->
         <div class="annotation-layer annotation-layer--active" data-layer="structure">
           <div class="callout callout--structure is-visible" style="top:10px; right:20px;">
-            SP: ~50-200 tokens<br>Container — holds directives, identity, anti-godmoding
+            SP: ~50-200 токенов<br>Контейнер — содержит директивы, идентичность, anti-godmoding
           </div>
           <div class="callout callout--structure is-visible" style="top:100px; right:20px;">
-            Description: ~150-700 tokens<br>Largest block — facts, SPINE, OCEAN, physicality
+            Description: ~150-700 токенов<br>Крупнейший блок — факты, SPINE, OCEAN, физичность
           </div>
           <div class="callout callout--structure is-visible" style="top:250px; right:20px;">
-            Examples: ~80-400 tokens<br>Voice lives here + Anchors nested inside
+            Examples: ~80-400 токенов<br>Голос живёт здесь + Anchors вложены внутри
           </div>
           <div class="callout callout--structure is-visible" style="top:380px; right:20px;">
-            Greeting: ~40-100 tokens<br>First impression, tone setter
+            Greeting: ~40-100 токенов<br>Первое впечатление, задаёт тон
           </div>
         </div>
 
         <!-- Anchors layer -->
         <div class="annotation-layer" data-layer="anchors">
           <div class="callout callout--anchors is-visible" style="top:260px; right:20px;">
-            Anchors sub-panel<br>T→A→P format with Embodiment<br>FLAW-linked only (→ E03, E04)
+            Подпанель Anchors<br>Формат T→A→P с Embodiment<br>Только FLAW-связанные (→ E03, E04)
           </div>
           <div class="callout callout--anchors is-visible" style="top:120px; right:20px;">
-            Anchors are NOT nested in Description<br>Only referenced — structural home is Examples
+            Anchors НЕ вложены в Description<br>Только упоминаются — структурный дом — Examples
           </div>
         </div>
 
         <!-- SPINE layer -->
         <div class="annotation-layer" data-layer="spine">
           <div class="callout callout--spine is-visible" style="top:130px; right:20px;">
-            GHOST→LIE→FLAW→NEED→WANT<br>Written inside Description block<br>Елена: betrayal→distrust→isolation→connection→control
+            GHOST→LIE→FLAW→NEED→WANT<br>Записано внутри блока Description<br>Елена: предательство→недоверие→изоляция→связь→контроль
           </div>
           <div class="callout callout--spine is-visible" style="top:290px; right:20px;">
-            FLAW-linked Anchors<br>Each Anchor traces back to a SPINE element
+            FLAW-связанные Anchors<br>Каждый Anchor восходит к элементу SPINE
           </div>
         </div>
 
         <!-- Directives layer -->
         <div class="annotation-layer" data-layer="directives">
           <div class="callout callout--directives is-visible" style="top:20px; right:20px;">
-            SP contains: Directives 1-7<br>Anti-godmoding (2 lines)<br>Identity block
+            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
           </div>
           <div class="callout callout--directives is-visible" style="top:280px; right:20px;">
-            Directive 2 (Embodiment)<br>Expressed through Anchors' Action layer
+            Директива 2 (Embodiment)<br>Выражается через слой Action в Anchors
           </div>
           <div class="callout callout--directives is-visible" style="top:390px; right:20px;">
-            Directive 6 (Consequence)<br>WANT→NEED as Price accumulates
+            Директива 6 (Последствие)<br>WANT→NEED по мере накопления Price
           </div>
         </div>
 
@@ -321,10 +321,10 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
   </main>
 
   <footer class="element-links" style="max-width:900px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--cyan">Card anatomy: E01</span>
+    <span class="badge badge--cyan">Анатомия карточки: E01</span>
     <span class="badge badge--violet">Anchors: E03</span>
     <span class="badge badge--violet">SPINE: E05</span>
-    <span class="badge badge--cyan">Directives: E08</span>
+    <span class="badge badge--cyan">Директивы: E08</span>
     <span class="badge badge--violet">GHOST: E06</span>
   </footer>
 

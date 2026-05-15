@@ -1,11 +1,11 @@
 /* ============================================================
-   Live Character Guide — Visual System Design Tokens
-   Version: 1.2
-   All custom properties for the visual system prototypes.
+   Живой справочник персонажа — Дизайн-токены визуальной системы
+   Версия: 1.2
+   Все кастомные свойства для прототипов визуальной системы.
    ============================================================ */
 
 :root {
-  /* === COLORS === */
+  /* === ЦВЕТА === */
   --bg-deep:       #08090d;
   --bg-panel:      #0e1117;
   --bg-raised:     #161a22;
@@ -20,20 +20,20 @@
   --danger:        #d9455a;
   --success:       #3fb68b;
 
-  /* === GLOWS === */
+  /* === СВЕЧЕНИЕ === */
   --glow-cyan:   0 0 12px rgba(60,200,255,0.25);
   --glow-violet: 0 0 12px rgba(139,92,246,0.25);
   --glow-danger: 0 0 10px rgba(217,69,90,0.30);
   --glow-amber:  0 0 10px rgba(240,160,64,0.25);
 
-  /* === TYPOGRAPHY === */
+  /* === ТИПОГРАФИКА === */
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-heading: 'DM Sans', sans-serif;
   --font-body:    'Geist', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
   --font-micro:   'Inter', sans-serif;
 
-  /* === SPACING === */
+  /* === ОТОБРАЖЕНИЕ === */
   --radius-sm:  4px;
   --radius-md:  8px;
   --radius-lg:  14px;
@@ -46,7 +46,7 @@
   --gap-lg: 28px;
   --gap-xl: 48px;
 
-  /* === ANIMATION === */
+  /* === АНИМАЦИЯ === */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 200ms;
   --duration-base: 400ms;

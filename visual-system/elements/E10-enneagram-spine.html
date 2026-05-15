@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E10 — Enneagram × SPINE Mapping | Live Character Guide Visual System</title>
+  <title>E10 — Маппинг Enneagram × SPINE | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -133,30 +133,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el mini-map__el--active">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -164,15 +165,15 @@
 
   <header>
     <span class="element-number">E10</span>
-    <h1 class="element-title">Enneagram × SPINE Mapping</h1>
-    <p class="element-subtitle">Pattern: P4 — Radial (circle + connections) &middot; Source: Part 5, data/enneagram.json</p>
+    <h1 class="element-title">Маппинг Enneagram × SPINE</h1>
+    <p class="element-subtitle">Паттерн: P4 — Радиальный (круг + связи) &middot; Источник: Часть 5, data/enneagram.json</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
 
     <div class="enneagram-container scroll-enter" id="enneagram-wrap">
-      <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Enneagram circle with 9 personality types mapped to SPINE framework elements">
-        <title>Enneagram × SPINE Mapping</title>
+      <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Круг Enneagram с 9 типами личности, привязанными к элементам фреймворка SPINE">
+        <title>Маппинг Enneagram × SPINE</title>
 
         <!-- Main circle -->
         <circle class="enneagram-anim" cx="300" cy="260" r="200" fill="none" stroke="var(--border)" stroke-width="1" opacity="0.5"/>
@@ -254,40 +255,40 @@
 
       <!-- Mini-card (hidden by default, shown on hover) -->
       <div class="mini-card" id="mini-card">
-        <div class="mini-card__type" id="mc-type">Type 4 — The Individualist</div>
-        <div class="mini-card__row"><span class="mini-card__label">Core Fear:</span> <span id="mc-fear">Being insignificant</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">Core Desire:</span> <span id="mc-desire">To be unique</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">LIE template:</span> <span id="mc-lie">"I am fundamentally flawed"</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">FLAW pattern:</span> <span id="mc-flaw">Withdraws when hurt</span></div>
+        <div class="mini-card__type" id="mc-type">Тип 4 — Индивидуалист</div>
+        <div class="mini-card__row"><span class="mini-card__label">Основной страх:</span> <span id="mc-fear">Быть незначительным</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Основное желание:</span> <span id="mc-desire">Быть уникальным</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Шаблон LIE:</span> <span id="mc-lie">"Я фундаментально ущербен"</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Паттерн FLAW:</span> <span id="mc-flaw">Уходит в себя когда ранен</span></div>
       </div>
     </div>
 
     <!-- SPINE callout boxes -->
     <div class="spine-callouts scroll-enter">
       <div class="spine-callout spine-callout--tl">
-        <div class="spine-callout__title">Stress → FLAW</div>
-        <div class="spine-callout__desc">Stress direction reveals the FLAW pattern — how the character breaks under pressure</div>
+        <div class="spine-callout__title">Стресс → FLAW</div>
+        <div class="spine-callout__desc">Направление стресса раскрывает паттерн FLAW — как персонаж ломается под давлением</div>
       </div>
       <div class="spine-callout spine-callout--tr">
-        <div class="spine-callout__title">Fear → LIE</div>
-        <div class="spine-callout__desc">Core fear generates the LIE belief — the false conclusion drawn from trauma</div>
+        <div class="spine-callout__title">Страх → LIE</div>
+        <div class="spine-callout__desc">Основной страх порождает убеждение LIE — ложный вывод, сделанный из травмы</div>
       </div>
       <div class="spine-callout spine-callout--bl">
-        <div class="spine-callout__title">Growth → NEED</div>
-        <div class="spine-callout__desc">Growth direction points toward NEED — the authentic desire hidden beneath the WANT</div>
+        <div class="spine-callout__title">Рост → NEED</div>
+        <div class="spine-callout__desc">Направление роста указывает на NEED — подлинное желание, скрытое под WANT</div>
       </div>
       <div class="spine-callout spine-callout--br">
-        <div class="spine-callout__title">Desire → WANT</div>
-        <div class="spine-callout__desc">Conscious desire maps to WANT — the surface-level goal that masks the deeper NEED</div>
+        <div class="spine-callout__title">Желание → WANT</div>
+        <div class="spine-callout__desc">Осознанное желание соотносится с WANT — поверхностная цель, маскирующая более глубокий NEED</div>
       </div>
     </div>
 
   </main>
 
   <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--cyan">Cross-validate with OCEAN: E09</span>
-    <span class="badge badge--violet">SPINE Framework: E05</span>
-    <span class="badge badge--violet">GHOST Layers: E06</span>
+    <span class="badge badge--cyan">Перекрёстная валидация с OCEAN: E09</span>
+    <span class="badge badge--violet">Фреймворк SPINE: E05</span>
+    <span class="badge badge--violet">Слои GHOST: E06</span>
   </footer>
 
   <script>
@@ -296,15 +297,15 @@
 
       // Enneagram data for mini-cards
       const enneagramData = {
-        1: { name: 'The Reformer', fear: 'Being corrupt/evil', desire: 'To be good/integrity', lie: '"I must be perfect"', flaw: 'Critical of self and others' },
-        2: { name: 'The Helper', fear: 'Being unloved', desire: 'To feel loved', lie: '"I must earn love"', flaw: 'Manipulates through giving' },
-        3: { name: 'The Achiever', fear: 'Being worthless', desire: 'To feel valuable', lie: '"I am what I accomplish"', flaw: 'Chases image over substance' },
-        4: { name: 'The Individualist', fear: 'Being insignificant', desire: 'To be unique', lie: '"I am fundamentally flawed"', flaw: 'Withdraws when hurt' },
-        5: { name: 'The Investigator', fear: 'Being incapable', desire: 'To be competent', lie: '"I must conserve my energy"', flaw: 'Detaches from emotions' },
-        6: { name: 'The Loyalist', fear: 'Being without support', desire: 'To have security', lie: '"The world is dangerous"', flaw: 'Doubts self, seeks certainty' },
-        7: { name: 'The Enthusiast', fear: 'Being deprived', desire: 'To be satisfied', lie: '"I must avoid pain"', flaw: 'Escapes into novelty' },
-        8: { name: 'The Challenger', fear: 'Being controlled', desire: 'To protect self', lie: '"Vulnerability is weakness"', flaw: 'Dominates to feel safe' },
-        9: { name: 'The Peacemaker', fear: 'Being in conflict', desire: 'To have inner stability', lie: '"My needs don\'t matter"', flaw: 'Numb out to avoid tension' },
+        1: { name: 'Реформатор', fear: 'Быть коррумпированным/злым', desire: 'Быть добрым/целостным', lie: '"Я должен быть идеальным"', flaw: 'Критикует себя и других' },
+        2: { name: 'Помощник', fear: 'Быть нелюбимым', desire: 'Чувствовать любовь', lie: '"Я должен заслужить любовь"', flaw: 'Манипулирует через отдачу' },
+        3: { name: 'Достигатор', fear: 'Быть ничтожным', desire: 'Чувствовать ценность', lie: '"Я — то, чего я достиг"', flaw: 'Гонится за имиджем, а не за сутью' },
+        4: { name: 'Индивидуалист', fear: 'Быть незначительным', desire: 'Быть уникальным', lie: '"Я фундаментально ущербен"', flaw: 'Уходит в себя когда ранен' },
+        5: { name: 'Исследователь', fear: 'Быть неспособным', desire: 'Быть компетентным', lie: '"Я должен беречь энергию"', flaw: 'Отстраняется от эмоций' },
+        6: { name: 'Лоялист', fear: 'Быть без поддержки', desire: 'Иметь безопасность', lie: '"Мир опасен"', flaw: 'Сомневается в себе, ищет определённость' },
+        7: { name: 'Энтузиаст', fear: 'Быть лишённым', desire: 'Быть удовлетворённым', lie: '"Я должен избегать боли"', flaw: 'Убегает в новизну' },
+        8: { name: 'Вызывающий', fear: 'Быть подконтрольным', desire: 'Защищать себя', lie: '"Уязвимость — слабость"', flaw: 'Доминирует чтобы чувствовать себя в безопасности' },
+        9: { name: 'Миротворец', fear: 'Быть в конфликте', desire: 'Иметь внутреннюю стабильность', lie: '"Мои потребности не важны"', flaw: 'Отключается чтобы избежать напряжения' },
       };
 
       const miniCard = document.getElementById('mini-card');
@@ -320,7 +321,7 @@
         const data = enneagramData[typeNum];
 
         node.addEventListener('mouseenter', (e) => {
-          mcType.textContent = `Type ${typeNum} — ${data.name}`;
+          mcType.textContent = `Тип ${typeNum} — ${data.name}`;
           mcFear.textContent = data.fear;
           mcDesire.textContent = data.desire;
           mcLie.textContent = data.lie;
@@ -341,9 +342,9 @@
         // Keyboard accessibility
         node.setAttribute('tabindex', '0');
         node.setAttribute('role', 'button');
-        node.setAttribute('aria-label', `Type ${typeNum} — ${data.name}`);
+        node.setAttribute('aria-label', `Тип ${typeNum} — ${data.name}`);
         node.addEventListener('focus', (e) => {
-          mcType.textContent = `Type ${typeNum} — ${data.name}`;
+          mcType.textContent = `Тип ${typeNum} — ${data.name}`;
           mcFear.textContent = data.fear;
           mcDesire.textContent = data.desire;
           mcLie.textContent = data.lie;

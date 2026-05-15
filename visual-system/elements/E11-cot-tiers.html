@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E11 — CoT Tiers | Live Character Guide Visual System</title>
+  <title>E11 — Уровни CoT | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -157,30 +157,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el mini-map__el--active">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -188,8 +189,8 @@
 
   <header>
     <span class="element-number">E11</span>
-    <h1 class="element-title">CoT Tiers</h1>
-    <p class="element-subtitle">Pattern: P1 — Stack (staircase variant) &middot; Source: Part 6 (Chain of Thought)</p>
+    <h1 class="element-title">Уровни CoT</h1>
+    <p class="element-subtitle">Паттерн: P1 — Stack (вариант лестницы) &middot; Источник: Part 6 (Chain of Thought)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -200,9 +201,9 @@
       <div class="stair-step stair-step--tier0 scroll-enter">
         <div class="stair-step__header">
           <span class="stair-step__tier">Tier 0</span>
-          <span class="stair-step__name">No CoT</span>
-          <span class="model-pill model-pill--12b">12B+ (all)</span>
-          <span class="optional-label">Optional: start here</span>
+          <span class="stair-step__name">Без CoT</span>
+          <span class="model-pill model-pill--12b">12B+ (все)</span>
+          <span class="optional-label">Опционально: начните здесь</span>
         </div>
         <div class="stair-step__format">Stress → Rubs neck</div>
       </div>
@@ -211,8 +212,8 @@
       <div class="stair-step stair-step--tier1 scroll-enter">
         <div class="stair-step__header">
           <span class="stair-step__tier">Tier 1</span>
-          <span class="stair-step__name">Emotion tag</span>
-          <span class="model-pill model-pill--32b">32B basic</span>
+          <span class="stair-step__name">Эмоциональная метка</span>
+          <span class="model-pill model-pill--32b">32B базовый</span>
         </div>
         <div class="stair-step__format">[Anxiety] → Re-reads message 3x</div>
       </div>
@@ -222,7 +223,7 @@
         <div class="stair-step__header">
           <span class="stair-step__tier">Tier 2</span>
           <span class="stair-step__name">GHOST-link</span>
-          <span class="model-pill model-pill--32b">32B+ recommended</span>
+          <span class="model-pill model-pill--32b">32B+ рекомендуется</span>
         </div>
         <div class="stair-step__format">[Reminds of betrayal] → Closes off<br>[INTERNAL: GHOST]...[/INTERNAL]</div>
       </div>
@@ -231,8 +232,8 @@
       <div class="stair-step stair-step--tier3 scroll-enter">
         <div class="stair-step__header">
           <span class="stair-step__tier">Tier 3</span>
-          <span class="stair-step__name">Full XML</span>
-          <span class="model-pill model-pill--api">API only</span>
+          <span class="stair-step__name">Полный XML</span>
+          <span class="model-pill model-pill--api">API только</span>
         </div>
         <div class="stair-step__format">&lt;processus_analysium&gt;stimulus→analysis→synthesis→resolution&lt;/processus_analysium&gt;</div>
       </div>
@@ -242,23 +243,23 @@
     <!-- Explanation -->
     <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
       <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-cyan);">
-        Chain of Thought Progression
+        Прогрессия Chain of Thought
       </div>
       <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
-        CoT is <strong style="color:var(--text-primary);">not mandatory</strong> — Tier 0 works for all models.
-        Higher tiers add progressively more structured internal reasoning, enabling the model to
-        "think before speaking." Each format is shown above in its actual notation so this element
-        serves as a <strong style="color:var(--text-primary);">quick-reference tool</strong>, not just a diagram.
-        Use the minimum tier your model supports — over-engineering CoT on small models wastes tokens.
+        CoT <strong style="color:var(--text-primary);">не обязателен</strong> — Tier 0 работает для всех моделей.
+        Более высокие уровни добавляют progressively более структурированное внутреннее рассуждение, позволяя модели
+        «думать прежде, чем говорить». Каждый формат показан выше в своей фактической нотации, поэтому этот элемент
+        служит <strong style="color:var(--text-primary);">инструментом быстрого справочника</strong>, а не просто диаграммой.
+        Используйте минимальный уровень, который поддерживает ваша модель — избыточное усложнение CoT на малых моделях расходует токены.
       </p>
     </div>
 
   </main>
 
   <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--violet">GHOST Layers: E06</span>
-    <span class="badge badge--cyan">Sampling params: E17</span>
-    <span class="badge badge--cyan">Assembly Pipeline: E02</span>
+    <span class="badge badge--violet">Слои GHOST: E06</span>
+    <span class="badge badge--cyan">Параметры сэмплирования: E17</span>
+    <span class="badge badge--cyan">Конвейер сборки: E02</span>
   </footer>
 
   <script>

@@ -1,6 +1,6 @@
 /* ============================================================
-   Live Character Guide — Layout Patterns (P1–P6)
-   Reusable layout primitives. Colors/content set per-element.
+   Живой справочник персонажа — Паттерны компоновки (P1–P6)
+   Многократно используемые примитивы компоновки. Цвета/содержимое задаются для каждого элемента.
    ============================================================ */
 
 /* --- P1 — Stack / Layers --- */
@@ -14,7 +14,7 @@
   position: relative;
 }
 
-/* Dividers between stacked children */
+/* Разделители между дочерними элементами стека */
 .p-stack--divided > * + * {
   border-top: var(--line-width) solid var(--border);
   padding-top: var(--gap-md);
@@ -29,7 +29,7 @@
   flex-wrap: wrap;
 }
 
-/* Arrow connectors between flow children */
+/* Стрелки-соединители между дочерними элементами потока */
 .p-flow--arrows > * + *::before {
   content: '→';
   font-family: var(--font-body);
@@ -38,7 +38,7 @@
   margin-right: var(--gap-sm);
 }
 
-/* Vertical flow variant */
+/* Вертикальный вариант потока */
 .p-flow--vertical {
   flex-direction: column;
   align-items: stretch;
@@ -64,7 +64,7 @@
   position: relative;
 }
 
-/* Connector lines for tree branches */
+/* Соединительные линии для ветвей дерева */
 .p-tree ul::before {
   content: '';
   position: absolute;
@@ -118,12 +118,12 @@
   align-items: start;
 }
 
-/* Multi-column variant for 3+ columns */
+/* Многоколоночный вариант для 3+ колонок */
 .p-compare--3col {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* Grouped bars layout */
+/* Компоновка сгруппированных полос */
 .p-compare--bars {
   grid-template-columns: 1fr;
   gap: var(--gap-sm);
@@ -133,7 +133,7 @@
 .p-blueprint {
   position: relative;
   background:
-    /* Blueprint grid at 3% opacity */
+    /* Сетка чертежа с непрозрачностью 3% */
     linear-gradient(rgba(60,200,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(60,200,255,0.03) 1px, transparent 1px);
   background-size: 20px 20px;
@@ -143,7 +143,7 @@
   overflow: hidden;
 }
 
-/* Callout line positioning system */
+/* Система позиционирования линий выносок */
 .p-blueprint__callout {
   position: absolute;
   display: flex;
@@ -171,7 +171,7 @@
   background: var(--accent-cyan);
 }
 
-/* --- Responsive adjustments --- */
+/* --- Адаптивные корректировки --- */
 @media (max-width: 768px) {
   .p-flow {
     flex-direction: column;

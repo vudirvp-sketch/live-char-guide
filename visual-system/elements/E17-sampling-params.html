@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E17 — Sampling Parameters by Model Tier | Live Character Guide Visual System</title>
+  <title>E17 — Параметры сэмплирования по уровню модели | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -200,30 +200,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el mini-map__el--active">E17</span>
     </div>
@@ -231,8 +232,8 @@
 
   <header>
     <span class="element-number">E17</span>
-    <h1 class="element-title">Sampling Parameters by Model Tier</h1>
-    <p class="element-subtitle">Pattern: P5 — Comparison (grouped columns) &middot; Source: Part 7A (Sampling, Model Checklist)</p>
+    <h1 class="element-title">Параметры сэмплирования по уровню модели</h1>
+    <p class="element-subtitle">Паттерн: P5 — Comparison (сгруппированные столбцы) &middot; Источник: Part 7A (Сэмплирование, чеклист моделей)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -244,7 +245,7 @@
         <!-- 12B-14B column -->
         <div class="param-column param-column--12b scroll-enter">
           <div class="param-column__tier">12B-14B</div>
-          <div class="param-column__sub">Most constrained</div>
+          <div class="param-column__sub">Наиболее ограниченный</div>
 
           <div class="param-row">
             <span class="param-row__name">Temperature</span>
@@ -263,7 +264,7 @@
             <span class="param-row__value">1.0–1.05</span>
           </div>
           <div class="sub-range">
-            <span class="sub-range__green">1.0–1.05 recommended</span>
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top K</span>
@@ -278,14 +279,14 @@
         <!-- 32B+ column -->
         <div class="param-column param-column--32b scroll-enter">
           <div class="param-column__tier">32B+</div>
-          <div class="param-column__sub">Recommended tier</div>
+          <div class="param-column__sub">Рекомендуемый уровень</div>
 
           <div class="param-row">
             <span class="param-row__name">Temperature</span>
             <span class="param-row__value">0.7–1.1*</span>
           </div>
           <div class="sub-range">
-            <span class="sub-range__green">0.7–0.9 base</span> | <span class="sub-range__amber">0.85–1.1 checklist</span>
+            <span class="sub-range__green">0.7–0.9 базовая</span> | <span class="sub-range__amber">0.85–1.1 чеклист</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top P</span>
@@ -300,7 +301,7 @@
             <span class="param-row__value">1.0–1.10</span>
           </div>
           <div class="sub-range">
-            <span class="sub-range__green">1.0–1.05 recommended</span> | <span class="sub-range__amber">1.05–1.10 caution</span>
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span> | <span class="sub-range__amber">1.05–1.10 с осторожностью</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top K</span>
@@ -315,7 +316,7 @@
         <!-- API column -->
         <div class="param-column param-column--api scroll-enter">
           <div class="param-column__tier">API</div>
-          <div class="param-column__sub">Maximum flexibility</div>
+          <div class="param-column__sub">Максимальная гибкость</div>
 
           <div class="param-row">
             <span class="param-row__name">Temperature</span>
@@ -347,36 +348,36 @@
 
       <!-- Model Type Checklist -->
       <div class="checklist-section scroll-enter">
-        <div class="checklist-section__title">Model Type Checklist (Part 7A)</div>
+        <div class="checklist-section__title">Чеклист по типу модели (Part 7A)</div>
         <div class="checklist-row checklist-row__header">
-          <span>Check</span>
+          <span>Проверка</span>
           <span>12B-14B</span>
           <span>32B+</span>
           <span>API</span>
         </div>
         <div class="checklist-row">
-          <span>Voice placement</span>
-          <span style="color:var(--danger);">Examples ONLY</span>
-          <span>Examples primary</span>
+          <span>Размещение голоса</span>
+          <span style="color:var(--danger);">Только Examples</span>
+          <span>Examples основной</span>
           <span>Examples + AN</span>
         </div>
         <div class="checklist-row">
-          <span>XML stability</span>
-          <span style="color:var(--text-muted);">Minimal</span>
-          <span>Stable</span>
-          <span>Full</span>
+          <span>Стабильность XML</span>
+          <span style="color:var(--text-muted);">Минимальная</span>
+          <span>Стабильная</span>
+          <span>Полная</span>
         </div>
         <div class="checklist-row">
-          <span>CoT tier</span>
+          <span>Уровень CoT</span>
           <span style="color:var(--text-muted);">0–1</span>
           <span>1–2</span>
           <span style="color:var(--accent-violet);">3</span>
         </div>
         <div class="checklist-row">
           <span>Anti-godmoding</span>
-          <span style="color:var(--success);">2 lines</span>
-          <span style="color:var(--success);">2 lines</span>
-          <span style="color:var(--success);">2 lines</span>
+          <span style="color:var(--success);">2 строки</span>
+          <span style="color:var(--success);">2 строки</span>
+          <span style="color:var(--success);">2 строки</span>
         </div>
       </div>
 
@@ -385,10 +386,10 @@
   </main>
 
   <footer class="element-links" style="max-width:900px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--danger">Related antipatterns: AP-5, AP-7 → E12</span>
-    <span class="badge badge--cyan">CoT Tiers: E11</span>
-    <span class="badge badge--cyan">Directives: E08</span>
-    <span class="badge badge--cyan">Quality Scale: E14</span>
+    <span class="badge badge--danger">Связанные антипаттерны: AP-5, AP-7 → E12</span>
+    <span class="badge badge--cyan">Уровни CoT: E11</span>
+    <span class="badge badge--cyan">Директивы: E08</span>
+    <span class="badge badge--cyan">Шкала качества: E14</span>
   </footer>
 
   <script>

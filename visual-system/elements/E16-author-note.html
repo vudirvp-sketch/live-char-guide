@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E16 — Author's Note Mechanics | Live Character Guide Visual System</title>
+  <title>E16 — Механика Author's Note | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -194,30 +194,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el mini-map__el--active">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -225,8 +226,8 @@
 
   <header>
     <span class="element-number">E16</span>
-    <h1 class="element-title">Author's Note Mechanics</h1>
-    <p class="element-subtitle">Pattern: P2 — Flow (vertical timeline) &middot; Source: Part 7A, Part 3 (Voice Influence)</p>
+    <h1 class="element-title">Механика Author's Note</h1>
+    <p class="element-subtitle">Паттерн: P2 — Flow (вертикальная временная шкала) &middot; Источник: Part 7A, Part 3 (Влияние на голос)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -251,42 +252,42 @@
       <!-- Position indicator -->
       <div class="position-indicator scroll-enter">
         <div>
-          <span class="position-indicator__label">Position</span>
-          <span class="position-indicator__value">3–5 messages from end</span>
+          <span class="position-indicator__label">Позиция</span>
+          <span class="position-indicator__value">3–5 сообщений от конца</span>
         </div>
         <div>
-          <span class="position-indicator__label">Length</span>
-          <span class="position-indicator__value">100–200 tokens</span>
+          <span class="position-indicator__label">Длина</span>
+          <span class="position-indicator__value">100–200 токенов</span>
         </div>
         <div>
-          <span class="position-indicator__label">Frequency</span>
-          <span class="position-indicator__value">Every 5–10 messages</span>
+          <span class="position-indicator__label">Частота</span>
+          <span class="position-indicator__value">Каждые 5–10 сообщений</span>
         </div>
         <div>
-          <span class="position-indicator__label">Voice Influence</span>
+          <span class="position-indicator__label">Влияние на голос</span>
           <span class="position-indicator__value">~2–5% → <span class="badge badge--cyan" style="font-size:10px;">E07</span></span>
         </div>
       </div>
 
       <!-- Template A/B toggle -->
       <div class="template-toggle" role="tablist">
-        <button class="template-btn template-btn--active" role="tab" aria-selected="true" onclick="setTemplate('a')">Template A (3-section)</button>
-        <button class="template-btn" role="tab" aria-selected="false" onclick="setTemplate('b')">Template B (4-section)</button>
+        <button class="template-btn template-btn--active" role="tab" aria-selected="true" onclick="setTemplate(this, 'a')">Шаблон A (3 секции)</button>
+        <button class="template-btn" role="tab" aria-selected="false" onclick="setTemplate(this, 'b')">Шаблон B (4 секции)</button>
       </div>
 
       <!-- Template A -->
       <div class="template-card scroll-enter" id="template-a">
         <div class="template-section">
           <div class="template-section__label">State</div>
-          <div class="template-section__content">[Current emotional/physical state of {{char}}]</div>
+          <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
         </div>
         <div class="template-section">
           <div class="template-section__label">WANT → NEED</div>
-          <div class="template-section__content">[WANT is pursuing X; NEED is actually Y. Price pushes WANT toward NEED]</div>
+          <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
         </div>
         <div class="template-section">
           <div class="template-section__label">Blind Spot</div>
-          <div class="template-section__content">[What the character cannot see about themselves right now]</div>
+          <div class="template-section__content">[Что персонаж не может сейчас увидеть в себе]</div>
         </div>
       </div>
 
@@ -294,28 +295,28 @@
       <div class="template-card scroll-enter" id="template-b" style="display:none;">
         <div class="template-section">
           <div class="template-section__label">State</div>
-          <div class="template-section__content">[Current emotional/physical state of {{char}}]</div>
+          <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
         </div>
         <div class="template-section">
           <div class="template-section__label">WANT → NEED</div>
-          <div class="template-section__content">[WANT is pursuing X; NEED is actually Y. Price pushes WANT toward NEED]</div>
+          <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
         </div>
         <div class="template-section template-section--ghost">
           <div class="template-section__label" style="color:var(--accent-violet);">GHOST-activation</div>
-          <div class="template-section__content">[Which GHOST layer is triggered and how it manifests → <span class="badge badge--violet" style="font-size:10px;">E06</span>]</div>
+          <div class="template-section__content">[Какой слой GHOST активирован и как он проявляется → <span class="badge badge--violet" style="font-size:10px;">E06</span>]</div>
         </div>
         <div class="template-section">
           <div class="template-section__label">Blind Spot</div>
-          <div class="template-section__content">[What the character cannot see about themselves right now]</div>
+          <div class="template-section__content">[Что персонаж не может сейчас увидеть в себе]</div>
         </div>
       </div>
 
       <!-- Cross-references -->
       <div class="an-crossref scroll-enter">
-        <span class="badge badge--cyan">Voice Influence: E07 (~2–5%)</span>
-        <span class="badge badge--violet">SPINE: E05 (Template B: GHOST-activation)</span>
-        <span class="badge badge--violet">GHOST Layers: E06</span>
-        <span class="badge badge--cyan">Assembly Pipeline: E02 (Step: AN injection)</span>
+        <span class="badge badge--cyan">Влияние на голос: E07 (~2–5%)</span>
+        <span class="badge badge--violet">SPINE: E05 (Шаблон B: GHOST-activation)</span>
+        <span class="badge badge--violet">Слои GHOST: E06</span>
+        <span class="badge badge--cyan">Конвейер сборки: E02 (Шаг: инъекция AN)</span>
       </div>
 
     </div>
@@ -323,21 +324,20 @@
   </main>
 
   <footer class="element-links" style="max-width:800px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--cyan">Voice Influence: E07</span>
+    <span class="badge badge--cyan">Влияние на голос: E07</span>
     <span class="badge badge--violet">SPINE: E05</span>
     <span class="badge badge--violet">GHOST: E06</span>
-    <span class="badge badge--cyan">Antipatterns: E12 (AP-11)</span>
+    <span class="badge badge--cyan">Антипаттерны: E12 (AP-11)</span>
   </footer>
 
   <script>
-    function setTemplate(type) {
-      document.querySelectorAll('.template-btn').forEach(btn => {
-        btn.classList.remove('template-btn--active');
-        btn.setAttribute('aria-selected', 'false');
+    function setTemplate(btn, type) {
+      document.querySelectorAll('.template-btn').forEach(b => {
+        b.classList.remove('template-btn--active');
+        b.setAttribute('aria-selected', 'false');
       });
-      const activeBtn = event.target;
-      activeBtn.classList.add('template-btn--active');
-      activeBtn.setAttribute('aria-selected', 'true');
+      btn.classList.add('template-btn--active');
+      btn.setAttribute('aria-selected', 'true');
 
       document.getElementById('template-a').style.display = type === 'a' ? 'block' : 'none';
       document.getElementById('template-b').style.display = type === 'b' ? 'block' : 'none';

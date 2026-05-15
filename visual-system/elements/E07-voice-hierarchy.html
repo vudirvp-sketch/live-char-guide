@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E07 — Voice Influence Hierarchy | Live Character Guide Visual System</title>
+  <title>E07 — Иерархия влияния на голос | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -75,30 +75,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el mini-map__el--active">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -106,16 +107,16 @@
 
   <header>
     <span class="element-number">E07</span>
-    <h1 class="element-title">Voice Influence Hierarchy</h1>
-    <p class="element-subtitle">Pattern: P5 — Grouped bar chart &middot; Source: Part 3 (Voice &amp; Isolation)</p>
+    <h1 class="element-title">Иерархия влияния на голос</h1>
+    <p class="element-subtitle">Паттерн: P5 — Сгруппированная столбчатая диаграмма &middot; Источник: Часть 3 (Голос и изоляция)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
 
     <div class="chart-container">
       <div class="chart-svg-wrap">
-        <svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Voice Influence Hierarchy grouped bar chart showing influence of different card blocks on character voice across model tiers">
-          <title>Voice Influence Hierarchy — grouped bar chart</title>
+        <svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Иерархия влияния на голос — сгруппированная столбчатая диаграмма, показывающая влияние различных блоков карточки на голос персонажа для разных моделей">
+          <title>Иерархия влияния на голос — сгруппированная столбчатая диаграмма</title>
 
           <defs>
             <!-- Grid line pattern -->
@@ -139,12 +140,12 @@
           <text x="720" y="22" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" text-anchor="end">85%</text>
 
           <!-- ===== ROW 1: Recent Chat (dominant — split axis) ===== -->
-          <text x="175" y="70" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Recent Chat</text>
+          <text x="175" y="70" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Недавний чат</text>
           <!-- 12B: ~85% = 830px equivalent, but compressed for split axis -->
-          <rect class="bar-rect" x="180" y="55" width="468" height="18" fill="rgba(60,200,255,0.2)" rx="2"/>
-          <rect class="bar-rect" x="180" y="55" width="440" height="18" fill="rgba(60,200,255,0.2)" rx="2"/>
-          <rect class="bar-rect" x="180" y="55" width="413" height="18" fill="rgba(60,200,255,0.2)" rx="2"/>
-          <text x="655" y="68" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="9" opacity="0.7">~75-85% (compressed scale)</text>
+          <rect class="bar-rect" x="180" y="52" width="468" height="12" fill="rgba(60,200,255,0.2)" rx="2"/>
+          <rect class="bar-rect" x="180" y="66" width="440" height="12" fill="rgba(60,200,255,0.2)" rx="2"/>
+          <rect class="bar-rect" x="180" y="80" width="413" height="12" fill="rgba(60,200,255,0.2)" rx="2"/>
+          <text x="655" y="68" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="9" opacity="0.7">~75-85% (сжатая шкала)</text>
 
           <!-- ===== ROW 2: Examples (highest card-level) ===== -->
           <text x="175" y="125" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Examples</text>
@@ -179,7 +180,7 @@
           <!-- 12B: 0% — RED ✕ MARKER -->
           <line x1="180" y1="322" x2="180" y2="336" stroke="var(--danger)" stroke-width="2"/>
           <text x="188" y="333" fill="var(--danger)" font-family="var(--font-mono)" font-size="14" font-weight="700">✕</text>
-          <text x="200" y="333" fill="var(--danger)" font-family="var(--font-mono)" font-size="9">0% FORBIDDEN</text>
+          <text x="200" y="333" fill="var(--danger)" font-family="var(--font-mono)" font-size="9">0% ЗАПРЕЩЕНО</text>
           <!-- 32B+: 3% -->
           <rect class="bar-rect scroll-enter" x="180" y="336" width="23" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.7"/>
           <!-- API: 5% -->
@@ -197,27 +198,27 @@
 
           <!-- Split axis separator line -->
           <line x1="180" y1="95" x2="720" y2="95" stroke="var(--border-active)" stroke-width="1" stroke-dasharray="4 4"/>
-          <text x="720" y="108" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9" text-anchor="end">↑ Compressed scale (Recent Chat dominates)</text>
-          <text x="720" y="400" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9" text-anchor="end">↑ Zoomed scale (card-level sources)</text>
+          <text x="720" y="108" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9" text-anchor="end">↑ Сжатая шкала (Недавний чат доминирует)</text>
+          <text x="720" y="400" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9" text-anchor="end">↑ Увеличенная шкала (источники на уровне карточки)</text>
 
         </svg>
       </div>
 
       <!-- Storage vs Influence inset -->
       <div class="inset-box scroll-enter">
-        <div class="inset-box__title">Storage vs Influence</div>
+        <div class="inset-box__title">Хранилище vs Влияние</div>
         <div class="inset-box__text">
-          <strong style="color:var(--text-primary);">Storage</strong> (where voice patterns are <em>written</em>) is NOT the same as
-          <strong style="color:var(--text-primary);">Influence</strong> (what <em>shapes</em> model behavior).
-          Users often assume SP = highest influence because it's the "first" block, but
-          <span class="inset-box__highlight">Recent Chat dominates voice at ~75-85%</span>,
-          making it the primary driver of voice drift over time.
-          Voice patterns themselves live in Examples only — Description is
-          <span class="inset-box__highlight">FORBIDDEN for voice on 12B models</span>.
+          <strong style="color:var(--text-primary);">Хранилище</strong> (где голосовые паттерны <em>записаны</em>) — это НЕ то же самое, что
+          <strong style="color:var(--text-primary);">Влияние</strong> (что <em>формирует</em> поведение модели).
+          Пользователи часто предполагают, что SP = наибольшее влияние, потому что это «первый» блок, но
+          <span class="inset-box__highlight">Недавний чат доминирует в голосе на ~75-85%</span>,
+          что делает его основным источником дрейфа голоса с течением времени.
+          Сами голосовые паттерны живут только в Examples — Description
+          <span class="inset-box__highlight">ЗАПРЕЩЁН для голоса на 12B моделях</span>.
         </div>
         <div class="split-axis-note">
-          Chart uses a split axis: top section shows Recent Chat on a compressed scale,
-          bottom section shows card-level sources on a zoomed scale for visibility.
+          Диаграмма использует разделённую ось: верхняя секция показывает Недавний чат на сжатой шкале,
+          нижняя секция показывает источники на уровне карточки на увеличенной шкале для видимости.
         </div>
       </div>
 
@@ -227,8 +228,8 @@
 
   <footer class="element-links" style="max-width:800px; margin: var(--gap-xl) auto;">
     <span class="badge badge--cyan">Author's Note: E16</span>
-    <span class="badge badge--violet">Card anatomy: E01</span>
-    <span class="badge badge--cyan">Antipatterns: E12</span>
+    <span class="badge badge--violet">Анатомия карточки: E01</span>
+    <span class="badge badge--cyan">Антипаттерны: E12</span>
   </footer>
 
   <script>

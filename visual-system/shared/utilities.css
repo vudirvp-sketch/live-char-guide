@@ -1,15 +1,15 @@
 /* ============================================================
-   Live Character Guide — Utility Classes
-   Glow, panel, accent-strips, labels, scroll animations
+   Живой справочник персонажа — Служебные классы
+   Свечение, панели, акцентные полосы, метки, анимации при прокрутке
    ============================================================ */
 
-/* --- Glow effects --- */
+/* --- Эффекты свечения --- */
 .glow-cyan   { box-shadow: var(--glow-cyan); }
 .glow-violet { box-shadow: var(--glow-violet); }
 .glow-danger { box-shadow: var(--glow-danger); }
 .glow-amber  { box-shadow: var(--glow-amber); }
 
-/* --- Panel (standard card/panel) --- */
+/* --- Панель (стандартная карточка/панель) --- */
 .panel {
   background: var(--bg-panel);
   border: var(--line-width) solid var(--border);
@@ -23,7 +23,7 @@
   border-color: var(--border-active);
 }
 
-/* --- Accent strips (left-border accent) --- */
+/* --- Акцентные полосы (левая граница-акцент) --- */
 .accent-strip--cyan {
   border-left: var(--line-bold) solid var(--accent-cyan);
   padding-left: var(--gap-md);
@@ -44,7 +44,7 @@
   padding-left: var(--gap-md);
 }
 
-/* --- Labels --- */
+/* --- Метки --- */
 .label {
   font-family: var(--font-heading);
   font-weight: 600;
@@ -68,7 +68,7 @@
   letter-spacing: 0.04em;
 }
 
-/* --- Badge / Pill --- */
+/* --- Значок / Пилл --- */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -118,7 +118,7 @@
   border: 1px solid rgba(83,92,110,0.25);
 }
 
-/* --- Severity dots --- */
+/* --- Точки серьёзности --- */
 .severity-dot {
   display: inline-block;
   width: 8px;
@@ -137,7 +137,7 @@
   box-shadow: 0 0 6px rgba(240,160,64,0.3);
 }
 
-/* --- Scroll animation trigger --- */
+/* --- Триггер анимации при прокрутке --- */
 .scroll-enter {
   opacity: 0;
   transform: translateY(20px);
@@ -163,7 +163,7 @@
   transform: translateY(0) translateX(0) scale(1);
 }
 
-/* --- Element header --- */
+/* --- Заголовок элемента --- */
 .element-number {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -189,7 +189,7 @@
   margin-top: var(--gap-xs);
 }
 
-/* --- Cross-reference footer --- */
+/* --- Подвал перекрёстных ссылок --- */
 .element-links {
   display: flex;
   flex-wrap: wrap;
@@ -208,7 +208,7 @@
   filter: brightness(1.2);
 }
 
-/* --- Mini-map navigation --- */
+/* --- Навигация мини-карты --- */
 .mini-map {
   display: flex;
   flex-wrap: wrap;
@@ -268,7 +268,7 @@
   background: var(--accent-cyan);
 }
 
-/* --- Helper: mono text block --- */
+/* --- Помощник: блок моноширинного текста --- */
 .mono-block {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -278,12 +278,12 @@
   word-break: break-word;
 }
 
-/* --- Helper: dashed border (optional element) --- */
+/* --- Помощник: пунктирная граница (необязательный элемент) --- */
 .border-dashed {
   border-style: dashed;
 }
 
-/* --- Helper: token budget annotation --- */
+/* --- Помощник: аннотация Token Budget --- */
 .token-annotation {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -291,7 +291,7 @@
   text-align: right;
 }
 
-/* --- Interactive hover state --- */
+/* --- Интерактивное состояние при наведении --- */
 .hover-lift {
   transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
 }

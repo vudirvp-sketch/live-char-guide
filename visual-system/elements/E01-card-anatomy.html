@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -176,30 +176,31 @@
   <!-- Mini-map navigation -->
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el mini-map__el--active">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -208,8 +209,8 @@
   <!-- Element title -->
   <header>
     <span class="element-number">E01</span>
-    <h1 class="element-title">Card Anatomy</h1>
-    <p class="element-subtitle">Pattern: P1 — Stack / Layers &middot; Source: Part 1, Part 7A</p>
+    <h1 class="element-title">Анатомия карточки</h1>
+    <p class="element-subtitle">Паттерн: P1 — Стек / Слои &middot; Источник: Part 1, Part 7A</p>
   </header>
 
   <!-- Main visualization -->
@@ -226,20 +227,20 @@
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
-              <span class="token-anno__label">min</span>
+              <span class="token-anno__label">мин</span>
               <span class="token-anno__val">~50</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">std</span>
+              <span class="token-anno__label">стд</span>
               <span class="token-anno__val">~100</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">max</span>
+              <span class="token-anno__label">макс</span>
               <span class="token-anno__val">~200</span>
             </div>
           </div>
         </div>
-        <div class="block-content">Container — holds directives, identity, rules. No narrative content here.</div>
+        <div class="block-content">Контейнер — содержит директивы, идентичность, правила. Никакого нарративного контента.</div>
       </div>
 
       <div class="block-divider"></div>
@@ -252,23 +253,23 @@
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
-              <span class="token-anno__label">min</span>
+              <span class="token-anno__label">мин</span>
               <span class="token-anno__val">~150</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">std</span>
+              <span class="token-anno__label">стд</span>
               <span class="token-anno__val">~300</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">max</span>
+              <span class="token-anno__label">макс</span>
               <span class="token-anno__val">~700</span>
             </div>
           </div>
         </div>
         <div class="block-content">
-          Facts, SPINE, OCEAN scores, physical description, personality traits.
+          Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
           <div class="desc-callout">
-            ↳ Anchors mentioned here as reference — structurally nested in Examples
+            ↳ Anchors упомянуты здесь как ссылка — структурно вложены в Examples
           </div>
         </div>
       </div>
@@ -283,21 +284,21 @@
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
-              <span class="token-anno__label">min</span>
+              <span class="token-anno__label">мин</span>
               <span class="token-anno__val">~80</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">std</span>
+              <span class="token-anno__label">стд</span>
               <span class="token-anno__val">~180</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">max</span>
+              <span class="token-anno__label">макс</span>
               <span class="token-anno__val">~400</span>
             </div>
           </div>
         </div>
         <div class="block-content">
-          Dialogue examples showing character voice. 2–5 examples, each ~40–80 tokens.
+          Примеры диалогов, демонстрирующие голос персонажа. 2–5 примеров, каждый ~40–80 токенов.
           <!-- Anchors sub-panel — nested, violet accent -->
           <div class="anchors-subpanel">
             <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
@@ -305,8 +306,8 @@
               <span class="badge badge--violet">T→A→P</span>
             </div>
             <div style="font-size:12px; color:var(--text-secondary);">
-              Trigger → Action → Price format. Each anchor: ~15–40 tokens.<br>
-              The only place where Anchors live structurally.
+              Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
+              Единственное место, где Anchors живут структурно.
             </div>
           </div>
         </div>
@@ -322,20 +323,20 @@
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
-              <span class="token-anno__label">min</span>
+              <span class="token-anno__label">мин</span>
               <span class="token-anno__val">~40</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">std</span>
+              <span class="token-anno__label">стд</span>
               <span class="token-anno__val">~60</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">max</span>
+              <span class="token-anno__label">макс</span>
               <span class="token-anno__val">~100</span>
             </div>
           </div>
         </div>
-        <div class="block-content">First message the character sends. Sets tone and voice baseline.</div>
+        <div class="block-content">Первое сообщение персонажа. Задаёт тон и базовую голосовую линию.</div>
       </div>
 
       <div class="block-divider"></div>
@@ -345,24 +346,24 @@
         <div class="block-label">
           <span class="block-label__name">
             Lorebook
-            <span class="optional-badge">optional</span>
+            <span class="optional-badge">опционально</span>
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
-              <span class="token-anno__label">min</span>
+              <span class="token-anno__label">мин</span>
               <span class="token-anno__val">~0</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">std</span>
+              <span class="token-anno__label">стд</span>
               <span class="token-anno__val">~100</span>
             </div>
             <div class="token-anno__row">
-              <span class="token-anno__label">max</span>
+              <span class="token-anno__label">макс</span>
               <span class="token-anno__val">~300</span>
             </div>
           </div>
         </div>
-        <div class="block-content">Context-triggered lore entries. Covered in Part 7B.</div>
+        <div class="block-content">Контекстно-зависимые записи лора. Описано в Part 7B.</div>
       </div>
 
     </div>
@@ -370,16 +371,16 @@
     <!-- Token budget summary -->
     <div class="panel" style="max-width:720px; margin: var(--gap-xl) auto 0;">
       <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--text-primary);">
-        Token Budget Summary
+        Сводка токенного бюджета
       </div>
       <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px;">
         <thead>
           <tr style="border-bottom:1px solid var(--border); color:var(--text-muted);">
-            <th style="text-align:left; padding:6px 8px;">Block</th>
-            <th style="text-align:right; padding:6px 8px;">Min</th>
-            <th style="text-align:right; padding:6px 8px;">Standard</th>
-            <th style="text-align:right; padding:6px 8px;">Max</th>
-            <th style="text-align:left; padding:6px 8px; color:var(--text-muted);">Source</th>
+            <th style="text-align:left; padding:6px 8px;">Блок</th>
+            <th style="text-align:right; padding:6px 8px;">Мин</th>
+            <th style="text-align:right; padding:6px 8px;">Стандарт</th>
+            <th style="text-align:right; padding:6px 8px;">Макс</th>
+            <th style="text-align:left; padding:6px 8px; color:var(--text-muted);">Источник</th>
           </tr>
         </thead>
         <tbody style="color:var(--text-secondary);">
@@ -433,9 +434,9 @@
 
   <!-- Cross-references -->
   <footer class="element-links" style="max-width:720px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--cyan">→ Full blueprint: E15</span>
-    <span class="badge badge--violet">Anchors detail: E03</span>
-    <span class="badge badge--cyan">Assembly pipeline: E02</span>
+    <span class="badge badge--cyan">→ Полный чертёж: E15</span>
+    <span class="badge badge--violet">Детали Anchors: E03</span>
+    <span class="badge badge--cyan">Пайплайн сборки: E02</span>
   </footer>
 
   <script>

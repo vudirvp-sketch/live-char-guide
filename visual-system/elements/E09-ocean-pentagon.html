@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E09 — OCEAN Pentagon | Live Character Guide Visual System</title>
+  <title>E09 — Пентагон OCEAN | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -76,30 +76,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el mini-map__el--active">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -107,15 +108,15 @@
 
   <header>
     <span class="element-number">E09</span>
-    <h1 class="element-title">OCEAN Pentagon</h1>
-    <p class="element-subtitle">Pattern: P4 — Radar / Spider chart &middot; Source: Part 5, data/ocean.json</p>
+    <h1 class="element-title">Пентагон OCEAN</h1>
+    <p class="element-subtitle">Паттерн: P4 — Радарная / Паутинная диаграмма &middot; Источник: Часть 5, data/ocean.json</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
 
     <div class="pentagon-container scroll-enter">
-      <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OCEAN pentagon radar chart for Elena character profile showing 5 personality traits">
-        <title>OCEAN Pentagon — Elena character profile</title>
+      <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Пентагон OCEAN — радарная диаграмма профиля персонажа Елена, показывающая 5 черт личности">
+        <title>Пентагон OCEAN — профиль персонажа Елена</title>
 
         <defs>
           <!-- Threshold zone colors -->
@@ -194,14 +195,14 @@
           A <tspan fill="var(--danger)" font-size="10">38</tspan>
         </text>
         <text x="60" y="155" text-anchor="end" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
-          N <tspan fill="var(--accent-amber)" font-size="10">68</tspan>
+          N <tspan fill="var(--accent-cyan)" font-size="10">68</tspan>
         </text>
 
         <!-- Threshold zone indicators -->
         <text x="250" y="415" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9">
-          <tspan fill="var(--danger)">&lt;30</tspan> danger &middot;
-          <tspan fill="var(--success)">40-60</tspan> safe &middot;
-          <tspan fill="var(--accent-amber)">&gt;70</tspan> extreme
+          <tspan fill="var(--danger)">&lt;30</tspan> опасно &middot;
+          <tspan fill="var(--success)">40-60</tspan> безопасно &middot;
+          <tspan fill="var(--accent-amber)">&gt;70</tspan> экстремально
         </text>
 
       </svg>
@@ -209,14 +210,14 @@
 
     <!-- Context Limits inset -->
     <div class="context-limits-box scroll-enter">
-      <div class="context-limits-box__title">Context Limits for Personality Extremes</div>
+      <div class="context-limits-box__title">Контекстные ограничения для экстремумов личности</div>
       <div class="context-limits-box__data">
-        <span class="context-limits-box__highlight">4K context</span> → 1–2 extremes max<br>
-        <span class="context-limits-box__highlight">8K context</span> → 2–3 extremes<br>
-        <span class="context-limits-box__highlight">16K+</span> → 3–4 extremes<br>
-        <span class="context-limits-box__highlight">32K+</span> → up to 5 extremes<br>
+        <span class="context-limits-box__highlight">4K контекст</span> → максимум 1–2 экстремума<br>
+        <span class="context-limits-box__highlight">8K контекст</span> → 2–3 экстремума<br>
+        <span class="context-limits-box__highlight">16K+</span> → 3–4 экстремума<br>
+        <span class="context-limits-box__highlight">32K+</span> → до 5 экстремумов<br>
         <span style="color:var(--text-muted); font-size:10px; margin-top:4px; display:block;">
-          Elena (O=72, N=68) has 2 extremes → works at 8K+ context
+          Елена (O=72, N=68) имеет 1 экстремум → работает при контексте 4K+
         </span>
       </div>
     </div>
@@ -224,9 +225,9 @@
   </main>
 
   <footer class="element-links" style="max-width:600px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--violet">SPINE validation: E05</span>
-    <span class="badge badge--cyan">Cross-validate: E10 (Enneagram)</span>
-    <span class="badge badge--cyan">Antipatterns: E12</span>
+    <span class="badge badge--violet">Валидация SPINE: E05</span>
+    <span class="badge badge--cyan">Перекрёстная валидация: E10 (Enneagram)</span>
+    <span class="badge badge--cyan">Антипаттерны: E12</span>
   </footer>
 
   <script>

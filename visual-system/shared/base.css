@@ -1,9 +1,9 @@
 /* ============================================================
-   Live Character Guide — Base Styles
-   CSS reset, body defaults, scrollbar, selection, reduced-motion
+   Живой справочник персонажа — Базовые стили
+   CSS-сброс, умолчания body, скроллбар, выделение, уменьшенное движение
    ============================================================ */
 
-/* --- Modern minimal reset --- */
+/* --- Современный минимальный сброс --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +16,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* --- Body defaults --- */
+/* --- Умолчания body --- */
 body {
   background: var(--bg-deep);
   color: var(--text-primary);
@@ -28,7 +28,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Scrollbar styling (thin, dark) --- */
+/* --- Стилизация скроллбара (тонкий, тёмный) --- */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -44,13 +44,13 @@ body {
   background: var(--text-muted);
 }
 
-/* Firefox scrollbar */
+/* Скроллбар Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--border-active) var(--bg-deep);
 }
 
-/* --- Selection color (cyan tint) --- */
+/* --- Цвет выделения (циановый оттенок) --- */
 ::selection {
   background: rgba(60, 200, 255, 0.25);
   color: var(--text-primary);
@@ -60,19 +60,19 @@ body {
   color: var(--text-primary);
 }
 
-/* --- Focus indicator --- */
+/* --- Индикатор фокуса --- */
 :focus-visible {
   outline: 2px solid var(--accent-cyan);
   outline-offset: 2px;
 }
 
-/* --- Images --- */
+/* --- Изображения --- */
 img, svg {
   display: block;
   max-width: 100%;
 }
 
-/* --- Links --- */
+/* --- Ссылки --- */
 a {
   color: var(--accent-cyan);
   text-decoration: none;
@@ -81,7 +81,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* --- Reduced motion: disable ALL animations --- */
+/* --- Уменьшенное движение: отключить ВСЕ анимации --- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

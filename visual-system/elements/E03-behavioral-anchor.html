@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -215,30 +215,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el mini-map__el--active">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -246,8 +247,8 @@
 
   <header>
     <span class="element-number">E03</span>
-    <h1 class="element-title">Behavioral Anchor: T→A→P</h1>
-    <p class="element-subtitle">Pattern: P5 — Comparison (split-view) &middot; Source: Part 2 (Behavioral Anchors)</p>
+    <h1 class="element-title">Поведенческий Anchor: T→A→P</h1>
+    <p class="element-subtitle">Паттерн: P5 — Сравнение (разделённый вид) &middot; Источник: Part 2 (Behavioral Anchors)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -256,12 +257,12 @@
 
       <!-- CORRECT column -->
       <div class="compare-column compare-column--correct scroll-enter">
-        <div class="compare-column__title">&#10003; Correct</div>
+        <div class="compare-column__title">&#10003; Верно</div>
 
         <!-- Trigger -->
         <div class="flow-node">
           <div class="flow-node__name">Trigger</div>
-          <div class="flow-node__desc">Event happens → character reacts</div>
+          <div class="flow-node__desc">Событие происходит → персонаж реагирует</div>
         </div>
 
         <div class="flow-arrow-down">&#8595;</div>
@@ -272,7 +273,7 @@
             Action
             <span class="embodiment-badge">↳ E04 Embodiment</span>
           </div>
-          <div class="flow-node__desc">Character responds with embodied behavior (State → Body → Sensor → Speech)</div>
+          <div class="flow-node__desc">Персонаж отвечает воплощённым поведением (State → Body → Sensor → Speech)</div>
         </div>
 
         <div class="flow-arrow-down">&#8595;</div>
@@ -280,18 +281,18 @@
         <!-- Price (physical, immediate) -->
         <div class="flow-node" style="border-left: 2px solid var(--accent-cyan);">
           <div class="flow-node__name">Price</div>
-          <div class="flow-node__desc">Physical, immediate, in-scene consequence</div>
+          <div class="flow-node__desc">Физическое, немедленное, внутри сцены последствие</div>
         </div>
 
         <div class="check-list">
           <div class="check-item">
-            <span class="check-item__icon--pass">&#10003;</span> Smooth T→A→P flow
+            <span class="check-item__icon--pass">&#10003;</span> Плавный поток T→A→P
           </div>
           <div class="check-item">
-            <span class="check-item__icon--pass">&#10003;</span> Physical, immediate Price
+            <span class="check-item__icon--pass">&#10003;</span> Физический, немедленный Price
           </div>
           <div class="check-item">
-            <span class="check-item__icon--pass">&#10003;</span> Embodiment inside Action
+            <span class="check-item__icon--pass">&#10003;</span> Embodiment внутри Action
           </div>
         </div>
       </div>
@@ -309,12 +310,12 @@
           <div class="bypass-arrow__label">bypass</div>
         </div>
 
-        <div class="compare-column__title">&#10007; Incorrect</div>
+        <div class="compare-column__title">&#10007; Неверно</div>
 
         <!-- Trigger -->
         <div class="flow-node">
           <div class="flow-node__name">Trigger</div>
-          <div class="flow-node__desc">Event happens → shortcut begins</div>
+          <div class="flow-node__desc">Событие происходит → начинается сокращение</div>
         </div>
 
         <div class="flow-arrow-down">&#8595;</div>
@@ -322,7 +323,7 @@
         <!-- Action (empty — no embodiment) -->
         <div class="flow-node flow-node--empty">
           <div class="flow-node__name">Action</div>
-          <div class="flow-node__desc">No embodiment — hollow response</div>
+          <div class="flow-node__desc">Без embodiment — пустой ответ</div>
         </div>
 
         <div class="flow-arrow-down" style="opacity:0.3;">&#8595;</div>
@@ -330,18 +331,18 @@
         <!-- Price (deferred/abstract) -->
         <div class="flow-node" style="border-left: 2px solid var(--accent-amber);">
           <div class="flow-node__name">Price</div>
-          <div class="flow-node__desc price-deferred">Abstract, deferred — "will regret later", non-physical</div>
+          <div class="flow-node__desc price-deferred">Абстрактный, отложенный — «пожалеет позже», нефизический</div>
         </div>
 
         <div class="check-list">
           <div class="check-item">
-            <span class="check-item__icon--fail">&#10007;</span> Bypass arrow (Trigger → Price)
+            <span class="check-item__icon--fail">&#10007;</span> Стрелка обхода (Trigger → Price)
           </div>
           <div class="check-item">
-            <span class="check-item__icon--fail">&#10007;</span> No embodiment in Action
+            <span class="check-item__icon--fail">&#10007;</span> Нет embodiment в Action
           </div>
           <div class="check-item">
-            <span class="check-item__icon--fail">&#10007;</span> Deferred, abstract Price
+            <span class="check-item__icon--fail">&#10007;</span> Отложенный, абстрактный Price
           </div>
         </div>
       </div>
@@ -351,9 +352,9 @@
   </main>
 
   <footer class="element-links" style="max-width:800px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--violet">Embodiment Protocol: E04</span>
-    <span class="badge badge--cyan">Card anatomy: E01</span>
-    <span class="badge badge--cyan">Antipatterns: E12</span>
+    <span class="badge badge--violet">Протокол Embodiment: E04</span>
+    <span class="badge badge--cyan">Анатомия карточки: E01</span>
+    <span class="badge badge--cyan">Антипаттерны: E12</span>
   </footer>
 
   <script>

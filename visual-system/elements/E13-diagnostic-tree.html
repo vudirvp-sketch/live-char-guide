@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E13 — Diagnostic Decision Tree | Live Character Guide Visual System</title>
+  <title>E13 — Диагностическое дерево решений | Live Character Guide Visual System</title>
   <link rel="stylesheet" href="../DESIGN-TOKENS.css">
   <link rel="stylesheet" href="../shared/fonts.css">
   <link rel="stylesheet" href="../shared/base.css">
@@ -150,30 +150,31 @@
 
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__section-label">Основа</span>
       <span class="mini-map__el">E01</span>
       <span class="mini-map__el">E02</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__section-label">Механики ядра</span>
       <span class="mini-map__el">E03</span>
       <span class="mini-map__el">E04</span>
       <span class="mini-map__el">E07</span>
       <span class="mini-map__el">E08</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__section-label">Личность</span>
       <span class="mini-map__el">E05</span>
       <span class="mini-map__el">E06</span>
       <span class="mini-map__el">E09</span>
       <span class="mini-map__el">E10</span>
     </div>
     <div class="mini-map__section">
-      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__section-label">Продвинутые</span>
       <span class="mini-map__el">E11</span>
       <span class="mini-map__el">E12</span>
       <span class="mini-map__el mini-map__el--active">E13</span>
       <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E15</span>
       <span class="mini-map__el">E16</span>
       <span class="mini-map__el">E17</span>
     </div>
@@ -181,8 +182,8 @@
 
   <header>
     <span class="element-number">E13</span>
-    <h1 class="element-title">Diagnostic Decision Tree</h1>
-    <p class="element-subtitle">Pattern: P3 — Tree / Branching &middot; Source: Part 9 (Diagnostics &amp; Testing)</p>
+    <h1 class="element-title">Диагностическое дерево решений</h1>
+    <p class="element-subtitle">Паттерн: P3 — Tree / Branching &middot; Источник: Part 9 (Диагностика и тестирование)</p>
   </header>
 
   <main class="element-content" style="margin-top: var(--gap-xl);">
@@ -191,19 +192,19 @@
 
       <!-- Root 1: Character drifts -->
       <div class="tree-root scroll-enter">
-        <div class="tree-root__title">Symptom 1</div>
+        <div class="tree-root__title">Симптом 1</div>
         <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
-          "Character drifts after 5–10 messages"
+          «Персонаж дрейфует после 5–10 сообщений»
         </div>
         <div class="sub-tree">
           <div class="decision-node">
             <div class="decision-node__diamond"></div>
-            <div class="decision-node__question">Does the character have working Anchors?</div>
+            <div class="decision-node__question">У персонажа есть рабочие Anchors?</div>
           </div>
           <div class="branch">
-            <div class="branch__label branch__label--no">No →</div>
+            <div class="branch__label branch__label--no">Нет →</div>
             <div class="diagnosis-node">
-              <div class="diagnosis-node__name">Missing Anchor Structure</div>
+              <div class="diagnosis-node__name">Отсутствует структура Anchors</div>
               <div class="diagnosis-node__chips">
                 <span class="badge badge--cyan">→ AP-2</span>
                 <span class="badge badge--cyan">→ AP-8</span>
@@ -211,15 +212,15 @@
             </div>
           </div>
           <div class="branch">
-            <div class="branch__label branch__label--yes">Yes →</div>
+            <div class="branch__label branch__label--yes">Да →</div>
             <div class="decision-node">
               <div class="decision-node__diamond"></div>
-              <div class="decision-node__question">Is the SPINE causally consistent?</div>
+              <div class="decision-node__question">SPINE причинно согласован?</div>
             </div>
             <div class="branch">
-              <div class="branch__label branch__label--no">No →</div>
+              <div class="branch__label branch__label--no">Нет →</div>
               <div class="diagnosis-node">
-                <div class="diagnosis-node__name">Broken SPINE Chain</div>
+                <div class="diagnosis-node__name">Нарушенная цепь SPINE</div>
                 <div class="diagnosis-node__chips">
                   <span class="badge badge--cyan">→ AP-9</span>
                   <span class="badge badge--violet">→ E05</span>
@@ -227,9 +228,9 @@
               </div>
             </div>
             <div class="branch">
-              <div class="branch__label branch__label--yes">Yes →</div>
+              <div class="branch__label branch__label--yes">Да →</div>
               <div class="diagnosis-node">
-                <div class="diagnosis-node__name">Voice Drift (Recent Chat dominance)</div>
+                <div class="diagnosis-node__name">Дрейф голоса (доминирование недавнего чата)</div>
                 <div class="diagnosis-node__chips">
                   <span class="badge badge--cyan">→ AP-11</span>
                   <span class="badge badge--cyan">→ E16 (AN)</span>
@@ -242,19 +243,19 @@
 
       <!-- Root 2: Voice sounds generic -->
       <div class="tree-root scroll-enter">
-        <div class="tree-root__title">Symptom 2</div>
+        <div class="tree-root__title">Симптом 2</div>
         <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
-          "Voice sounds generic / not distinctive"
+          «Голос звучит типично / неразличимо»
         </div>
         <div class="sub-tree">
           <div class="decision-node">
             <div class="decision-node__diamond"></div>
-            <div class="decision-node__question">Is voice written in Examples only?</div>
+            <div class="decision-node__question">Голос записан только в Examples?</div>
           </div>
           <div class="branch">
-            <div class="branch__label branch__label--no">No →</div>
+            <div class="branch__label branch__label--no">Нет →</div>
             <div class="diagnosis-node">
-              <div class="diagnosis-node__name">Voice Leak to Description/SP</div>
+              <div class="diagnosis-node__name">Утечка голоса в Description/SP</div>
               <div class="diagnosis-node__chips">
                 <span class="badge badge--cyan">→ AP-3</span>
                 <span class="badge badge--cyan">→ AP-11</span>
@@ -262,15 +263,15 @@
             </div>
           </div>
           <div class="branch">
-            <div class="branch__label branch__label--yes">Yes →</div>
+            <div class="branch__label branch__label--yes">Да →</div>
             <div class="decision-node">
               <div class="decision-node__diamond"></div>
-              <div class="decision-node__question">Are there enough dialogue examples (3+)?</div>
+              <div class="decision-node__question">Достаточно ли диалоговых примеров (3+)?</div>
             </div>
             <div class="branch">
-              <div class="branch__label branch__label--no">No →</div>
+              <div class="branch__label branch__label--no">Нет →</div>
               <div class="diagnosis-node">
-                <div class="diagnosis-node__name">Insufficient Voice Samples</div>
+                <div class="diagnosis-node__name">Недостаточно образцов голоса</div>
                 <div class="diagnosis-node__chips">
                   <span class="badge badge--cyan">→ E01</span>
                   <span class="badge badge--cyan">→ E07</span>
@@ -278,9 +279,9 @@
               </div>
             </div>
             <div class="branch">
-              <div class="branch__label branch__label--yes">Yes →</div>
+              <div class="branch__label branch__label--yes">Да →</div>
               <div class="diagnosis-node">
-                <div class="diagnosis-node__name">Sampling Parameter Issue</div>
+                <div class="diagnosis-node__name">Проблема параметров сэмплирования</div>
                 <div class="diagnosis-node__chips">
                   <span class="badge badge--cyan">→ AP-5</span>
                   <span class="badge badge--cyan">→ E17</span>
@@ -293,19 +294,19 @@
 
       <!-- Root 3: Character ignores actions -->
       <div class="tree-root scroll-enter">
-        <div class="tree-root__title">Symptom 3</div>
+        <div class="tree-root__title">Симптом 3</div>
         <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
-          "Character ignores user actions"
+          «Персонаж игнорирует действия пользователя»
         </div>
         <div class="sub-tree">
           <div class="decision-node">
             <div class="decision-node__diamond"></div>
-            <div class="decision-node__question">Is Anti-godmoding present in SP?</div>
+            <div class="decision-node__question">Anti-godmoding присутствует в SP?</div>
           </div>
           <div class="branch">
-            <div class="branch__label branch__label--no">No →</div>
+            <div class="branch__label branch__label--no">Нет →</div>
             <div class="diagnosis-node">
-              <div class="diagnosis-node__name">Missing Anti-godmoding</div>
+              <div class="diagnosis-node__name">Отсутствует Anti-godmoding</div>
               <div class="diagnosis-node__chips">
                 <span class="badge badge--cyan">→ AP-6</span>
                 <span class="badge badge--cyan">→ E02</span>
@@ -313,27 +314,27 @@
             </div>
           </div>
           <div class="branch">
-            <div class="branch__label branch__label--yes">Yes →</div>
+            <div class="branch__label branch__label--yes">Да →</div>
             <div class="decision-node">
               <div class="decision-node__diamond"></div>
-              <div class="decision-node__question">Does the character use Embodiment Protocol?</div>
+              <div class="decision-node__question">Персонаж использует протокол Embodiment?</div>
             </div>
             <div class="branch">
-              <div class="branch__label branch__label--no">No →</div>
+              <div class="branch__label branch__label--no">Нет →</div>
               <div class="diagnosis-node">
-                <div class="diagnosis-node__name">Embodiment Missing</div>
+                <div class="diagnosis-node__name">Embodiment отсутствует</div>
                 <div class="diagnosis-node__chips">
                   <span class="badge badge--cyan">→ E04</span>
-                  <span class="badge badge--cyan">→ E08 (Dir 2)</span>
+                  <span class="badge badge--cyan">→ E08 (Директива 2)</span>
                 </div>
               </div>
             </div>
             <div class="branch">
-              <div class="branch__label branch__label--yes">Yes →</div>
+              <div class="branch__label branch__label--yes">Да →</div>
               <div class="diagnosis-node">
-                <div class="diagnosis-node__name">Influence Boundary Violation</div>
+                <div class="diagnosis-node__name">Нарушение границы влияния</div>
                 <div class="diagnosis-node__chips">
-                  <span class="badge badge--cyan">→ E08 (Dir 5)</span>
+                  <span class="badge badge--cyan">→ E08 (Директива 5)</span>
                   <span class="badge badge--cyan">→ E03</span>
                 </div>
               </div>
@@ -347,10 +348,10 @@
   </main>
 
   <footer class="element-links" style="max-width:800px; margin: var(--gap-xl) auto;">
-    <span class="badge badge--cyan">Antipatterns: E12</span>
+    <span class="badge badge--cyan">Антипаттерны: E12</span>
     <span class="badge badge--violet">SPINE: E05</span>
     <span class="badge badge--violet">Embodiment: E04</span>
-    <span class="badge badge--cyan">Quality Scale: E14</span>
+    <span class="badge badge--cyan">Шкала качества: E14</span>
   </footer>
 
   <script>
