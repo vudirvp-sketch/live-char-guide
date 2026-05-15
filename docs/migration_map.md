@@ -86,7 +86,7 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 | `voice-leak` | `p3_voice_leak` | l2 | Voice Leak antipattern |
 | `tier-quality` | `p3_tier_quality` | l2 | Tier 1/2/3 criteria |
 | `joker-case` | `p3_joker_case` | l2 | Extreme voice isolation |
-| `dialogue-markup` | `p7_format_lock` | l2 | Dialogue markup systems A/B/C moved to Part 7 Format Lock section |
+| `dialogue-markup` | `p7a_format_lock` | l2 | Dialogue markup systems A/B/C moved to Part 7A Format Lock section |
 | `multi-char` | `p8_ap11_voice_bleed` | l3 | Multi-char voice bleed handled as AP-11 in Part 8 (L3, not L2) |
 
 ### Part 4: SPINE Framework
@@ -132,15 +132,15 @@ This document tracks where each v5.12 section migrates to v6. The **Zero Degrada
 
 | v5.12 Anchor | v6 data-section | Layer | Migration Notes |
 |--------------|-----------------|-------|-----------------|
-| `technical` | `p7_system_prompt` | l2 | Technical overview + SP template |
-| `system-prompt` | `p7_system_prompt` | l2 | SP template (merged into overview) |
-| `authors-note` | `p7_authors_note` | l2 | AN template |
-| `lorebook` | `p7_lorebook` | l2 | Lorebook rules |
-| `format-lock` | `p7_format_lock` | l2 | Format Lock rule + dialogue markup systems A/B/C |
-| `structured-inject` | `p7_structured_inject` | l2 | [NEW] XML-tag technique in AN |
-| `xml-tags` | `p7_xml_tags` | l3 | XML syntax for Description |
-| `api-blocks` | `p7_api_blocks` | l3 | Claude/GPT specifics |
-| `4k-fallback` | `p7_4k_fallback` | l3 | [NEW] 4K context protocol (expanded from 4-line stub) |
+| `technical` | `p7a_system_prompt` | l2 | Technical overview + SP template |
+| `system-prompt` | `p7a_system_prompt` | l2 | SP template (merged into overview) |
+| `authors-note` | `p7a_authors_note` | l2 | AN template |
+| `lorebook` | `p7b_lorebook_basics` | l2 | Lorebook rules |
+| `format-lock` | `p7a_format_lock` | l2 | Format Lock rule + dialogue markup systems A/B/C |
+| `structured-inject` | `p7b_structured_inject` | l2 | [NEW] XML-tag technique in AN |
+| `xml-tags` | `p7a_xml_tags` | l3 | XML syntax for Description |
+| `api-blocks` | `p7a_api_blocks` | l3 | Claude/GPT specifics |
+| `4k-fallback` | `p7a_4k_fallback` | l3 | [NEW] 4K context protocol (expanded from 4-line stub) |
 
 ### Part 8: Anti-patterns
 
@@ -336,7 +336,7 @@ The following sections were merged or removed during the layer restructure and c
 | p5_ocean_validator | p5_ocean_basics | l2 | Merged: validator widget integrated into ocean basics |
 | p5_enneagram_widget | p5_enneagram_basics | l2 | Merged: interactive SVG merged into enneagram basics (enneagram-embed) |
 | p5_enneagram_to_spine | p5_cross_instrument_map | l2 | RENAMED: broader cross-instrument mapping (not just Enneagram→SPINE) |
-| p7_immersion_boundary | p7_ooc_protection | l3 | Merged: Immersion Boundary is now a subsection of OOC Protection |
+| p7_immersion_boundary | p7a_ooc_protection | l3 | Merged: Immersion Boundary is now a subsection of OOC Protection |
 | p10_l2_voice_warning | p10_elena_l2 | l2 | Merged: Voice Warning is now a callout inside Elena L2 card section |
 | p1_l2_bridge | p1_next_steps | l1 | Merged: L2 bridge content integrated into p1_next_steps as navigation hub (СПИН, OCEAN, FLAW-linked anchors) |
 | p1_l3_bridge | p1_next_steps | l1 | Merged: L3 bridge content integrated into p1_next_steps as navigation hub (LIE, GHOST, CoT, XML, API) |
@@ -354,15 +354,15 @@ The following changes were made during the content restoration (`content-restora
 | p1_token_pipeline | l1 | Part 1 | **[MERGED → p1_token_budget]** 10-step token budget pipeline table + context size budget table | Phase 1 | → p1_block_budget, ← p1_layer_comparison |
 | p1_block_budget | l1 | Part 1 | **[MERGED → p1_token_budget]** Min/Standard/Max budget table per block + per layer | Phase 1 | → p1_token_pipeline, ← p1_layer_comparison |
 | p1_conclusion | l1 | Part 1 | Key rules reminder table + "what you now know" list by layer | Phase 1 | ← p1_l3_bridge, → p9_basic_checklist |
-| p2_env_reactivity | l2 | Part 2 | ENVIRONMENTAL REACTIVITY directive: sensory details only through action | Phase 2 | → p7_core_directives, ← p7_core_directives |
-| p7_core_directives | l2 | Part 7 | Unified 5-directive system (SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, ENVIRONMENTAL REACTIVITY, INFLUENCE BOUNDARY) | Phase 6 | → p2_embodiment, p2_anchor_rules, p4_spine_mapping; ← p2_env_reactivity, p2_anchor_rules, p4_spine_mapping |
-| p7_core_directives_l3 | l3 | Part 7 | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER) | Phase 6 | → p4_spine_mapping, p7_core_directives; ← p4_spine_mapping |
-| p7_tone_frame | l2 | Part 7 | Tone Frame definition with 4 setting examples | Phase 6 | ← p7_system_prompt |
-| p7_ooc_protection | l3 | Part 7 | OOC Protection SP block (~15 tokens) + Immersion Boundary as subsection | Phase 6 | ← p7_system_prompt |
-| p7_immersion_boundary | l3 | Part 7 | **[MERGED → p7_ooc_protection]** Advanced OOC protection now a subsection of OOC Protection | Phase 6 | ← p7_system_prompt |
-| p7_authors_note_l3 | l3 | Part 7 | 4-section AN template with GHOST-activation | Phase 6 | ← p7_authors_note |
-| p7_sp_template_l3 | l3 | Part 7 | Full L3 System Prompt template with all 7 directives | Phase 6 | ← p7_system_prompt |
-| p7_model_checklist | l2 | Part 7 | Summary table by model type (12B/32B+/API) | Phase 6 | ← p7_sampling_params |
+| p2_env_reactivity | l2 | Part 2 | ENVIRONMENTAL REACTIVITY directive: sensory details only through action | Phase 2 | → p7a_core_directives, ← p7a_core_directives |
+| p7a_core_directives | l2 | Part 7A | Unified 5-directive system (SHOW NEVER TELL, EMBODIMENT FIRST, SPATIAL LOCK, ENVIRONMENTAL REACTIVITY, INFLUENCE BOUNDARY) | Phase 6 | → p2_embodiment, p2_anchor_rules, p4_spine_mapping; ← p2_env_reactivity, p2_anchor_rules, p4_spine_mapping |
+| p7a_core_directives_l3 | l3 | Part 7A | Directives 6–7 (CONSEQUENCE DRIVEN, PRE-GENERATION FILTER) | Phase 6 | → p4_spine_mapping, p7a_core_directives; ← p4_spine_mapping |
+| p7a_tone_frame | l2 | Part 7A | Tone Frame definition with 4 setting examples | Phase 6 | ← p7a_system_prompt |
+| p7a_ooc_protection | l3 | Part 7A | OOC Protection SP block (~15 tokens) + Immersion Boundary as subsection | Phase 6 | ← p7a_system_prompt |
+| p7a_immersion_boundary | l3 | Part 7A | **[MERGED → p7a_ooc_protection]** Advanced OOC protection now a subsection of OOC Protection | Phase 6 | ← p7a_system_prompt |
+| p7a_authors_note_l3 | l3 | Part 7A | 4-section AN template with GHOST-activation | Phase 6 | ← p7a_authors_note |
+| p7a_sp_template_l3 | l3 | Part 7A | Full L3 System Prompt template with all 7 directives | Phase 6 | ← p7a_system_prompt |
+| p7a_model_checklist | l2 | Part 7A | Summary table by model type (12B/32B+/API) | Phase 6 | ← p7a_sampling_params |
 | p8_ap15_nested_anchors | l2 | Part 8 | AP-15: Nested Anchors (renumbered from AP-16) — anchor chains → unpredictability | Phase 8 | ← p8_l1_bridge |
 | p9_one_change_rule | l1 | Part 9 | Rule: never change >1 parameter at a time | Phase 9 | → p9_decision_tree, ← p1_conclusion |
 | p9_decision_tree | l2 | Part 9 | Branching symptom→check→fix table (7 paths) | Phase 9 | ← p9_symptom_table |
@@ -393,11 +393,11 @@ The following changes were made during the content restoration (`content-restora
 | p3_greeting | l2 | Part 3 | Expanded from 3-step to 4-step pipeline, added sensory anchor concept | Phase 4 |
 | p5_ocean_basics | l2 | Part 5 | Strengthened golden rule, renamed to "Золотое правило профиля", added AP-15 cross-ref | Phase 5 |
 | p5_enneagram_wings | l3 | Part 5 | Added wing selection algorithm table with decision rule | Phase 5 |
-| p7_system_prompt | l2 | Part 7 | Replaced SP template with unified version (CORE_DIRECTIVES + positive anti-godmoding) | Phase 6 |
-| p7_sampling_params | l2 | Part 7 | Added Ollama/LM Studio PP=0.7 warning | Phase 6 |
-| p7_format_lock | l2 | Part 7 | Replaced with 4-column table, added Pattern Matcher explanation, conflict resolution | Phase 6 |
-| p7_authors_note | l2 | Part 7 | Added 3-section AN template, updated example | Phase 6 |
-| p7_lorebook | l2 | Part 7 | Added recommended parameter table + Elena GHOST-fact example | Phase 6 |
+| p7a_system_prompt | l2 | Part 7A | Replaced SP template with unified version (CORE_DIRECTIVES + positive anti-godmoding) | Phase 6 |
+| p7a_sampling_params | l2 | Part 7A | Added Ollama/LM Studio PP=0.7 warning | Phase 6 |
+| p7a_format_lock | l2 | Part 7A | Replaced with 4-column table, added Pattern Matcher explanation, conflict resolution | Phase 6 |
+| p7a_authors_note | l2 | Part 7A | Added 3-section AN template, updated example | Phase 6 |
+| p7b_lorebook_basics | l2 | Part 7B | Added recommended parameter table + Elena GHOST-fact example | Phase 6 |
 | p6_cot_tier3 | l3 | Part 6 | Added dissociation variant for Эллиот Алдерсон | Phase 7 |
 | p8_ap6_no_anti_godmoding | l2 | Part 8 | Added visual example pair (antipattern-card) | Phase 8 |
 | p8_ap9_spine_broken | l3 | Part 8 | Added visual example pair | Phase 8 |
@@ -462,7 +462,7 @@ The following changes implement the tooltip system per L1-REMEDIATION-PLAN-V3.md
 |------|---------|-------------|----------|--------------|
 | part_01_basic_blocks.html | p1_core_rules | `data-layer-switch="2#p4_spine_overview"` | СПИН | L2 |
 | part_01_basic_blocks.html | p1_layer_comparison | `data-layer-switch="2#p4_spine_overview"` | SPINE Framework | L2 |
-| part_01_basic_blocks.html | p1_l1_quickstart | `data-layer-switch="2#p7_system_prompt"` | Техническая реализация | L2 |
+| part_01_basic_blocks.html | p1_l1_quickstart | `data-layer-switch="2#p7a_system_prompt"` | Техническая реализация | L2 |
 | part_01_basic_blocks.html | p1_next_layers | `data-layer-switch="2#p4_spine_overview"` | SPINE Framework | L2 |
 | part_01_basic_blocks.html | p1_next_layers | `data-layer-switch="3#p4_l3_spine_full"` | Полный СПИН из 5 элементов | L3 |
 | part_02_anchors.html | p2_anchor_examples | `data-layer-switch="2#p2_flaw_anchors"` | FLAW-linked якоря | L2 |
@@ -516,14 +516,14 @@ v8 is a **unified restructuring** of the Live Character Guide. The primary chang
 | p10_walter_l2 | p10_walter | RENAMED |
 | p10_vysherblenny_l3 | p10_vysherblenny | RENAMED |
 | p9_top5_problems | p9_additional_problems | RENAMED |
-| p1_quickstart | — | DELETED (moved to p7_assembly_pipeline) |
+| p1_quickstart | — | DELETED (moved to p7a_assembly_pipeline) |
 | p2_flaw_anchors | — | DELETED (moved to p4_spine_mapping) |
-| p7_core_directives_l3 | — | MERGED into p7_core_directives |
-| p7_authors_note_l3 | — | MERGED into p7_authors_note |
-| p7_sp_template_l3 | — | MERGED into p7_system_prompt |
+| p7a_core_directives_l3 | — | MERGED into p7a_core_directives |
+| p7a_authors_note_l3 | — | MERGED into p7a_authors_note |
+| p7a_sp_template_l3 | — | MERGED into p7a_system_prompt |
 | p8_ap15_basic | — | MERGED into p8_ap15_ocean_overload |
 | p8_ap15_extended | — | MERGED into p8_ap15_ocean_overload |
-| — | p7_assembly_pipeline | NEW |
+| — | p7a_assembly_pipeline | NEW |
 
 ### Key Structural Changes
 
@@ -532,7 +532,7 @@ v8 is a **unified restructuring** of the Live Character Guide. The primary chang
 | Layer system | L1/L2/L3 with data-layer toggles and per-layer builds | No layers, unified single-pass reading experience |
 | SPINE | Split: WANT/NEED/FLAW (base) + LIE/GHOST (L3) | Unified: all 5 in causal order GHOST→LIE→FLAW→NEED→WANT |
 | CORE DIRECTIVES | 1–5 (base) + 6–7 (L3-only) | All 7 unified, `[MODEL_NOTE]` annotation for directives 6–7 |
-| Quickstart | Part 1 section | Deleted; Assembly Pipeline (`p7_assembly_pipeline`) at end of Part 7 |
+| Quickstart | Part 1 section | Deleted; Assembly Pipeline (`p7a_assembly_pipeline`) at end of Part 7A |
 | FLAW-linked anchors | Part 2 (`p2_flaw_anchors`) | Moved to Part 4 under `p4_spine_mapping` |
 | AP-15 | Split: `p8_ap15_basic` (L2) + `p8_ap15_extended` (L3) | Merged into `p8_ap15_ocean_overload` |
 | "Основы/Дополнительно" tables | 10 tables across Parts | Deleted, replaced with concise intro paragraphs per section |

@@ -93,16 +93,16 @@ const DEFAULT_REDIRECTS = {
   'cot-tier3': 'p6_cot_tier3',
   'cot-anchors': 'p6_cot_anchors',
 
-  // Part 7 (Technical) → Part 7
-  'technical': 'p7_system_prompt',
-  'system-prompt': 'p7_system_prompt',
-  'authors-note': 'p7_authors_note',
-  'lorebook': 'p7_lorebook',
-  'format-lock': 'p7_format_lock',
-  'structured-inject': 'p7_structured_inject',
-  'xml-tags': 'p7_xml_tags',
-  'api-blocks': 'p7_api_blocks',
-  '4k-fallback': 'p7_4k_fallback',
+  // Part 7A/7B (Technical) → Part 7A/7B
+  'technical': 'p7a_system_prompt',
+  'system-prompt': 'p7a_system_prompt',
+  'authors-note': 'p7a_authors_note',
+  'lorebook': 'p7b_lorebook_basics',
+  'format-lock': 'p7a_format_lock',
+  'structured-inject': 'p7b_structured_inject',
+  'xml-tags': 'p7a_xml_tags',
+  'api-blocks': 'p7a_api_blocks',
+  '4k-fallback': 'p7a_4k_fallback',
 
   // Part 8 (Antipatterns) → Part 8
   'antipatterns': 'p8_antipatterns_overview',

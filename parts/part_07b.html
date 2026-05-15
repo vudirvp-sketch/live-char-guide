@@ -103,9 +103,9 @@
 </div>
 </details>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Поведенческие механики Lorebook (каскад по диапазону, комбинированный триггер, контекстный фильтр) → <a href="#p7b_lorebook_mechanics">Механики Lorebook</a></p>
+<p>Поведенческие механики Lorebook (каскад по диапазону, комбинированный триггер, контекстный фильтр) → <a href="#p7b_lorebook_mechanics">Механики Lorebook</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> XML-теги для Description: <a href="#p7a_xml_tags">XML-теги</a></p>
+
 
 </section>
 <section  data-section="p7b_lorebook_mechanics">
@@ -183,7 +183,7 @@
 &lt;/instruction&gt;</code></pre>
 </details>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Продвинутые механики (эмуляция усталости, мета-лор, ложная память) → <a href="#p7b_lorebook_advanced">Продвинутые механики Lorebook</a></p>
+<p>Продвинутые механики (эмуляция усталости, мета-лор, ложная память) → <a href="#p7b_lorebook_advanced">Продвинутые механики Lorebook</a></p>
 
 <div class="callout rec">
 <p><strong>RECOMMENDATION: Механики Lorebook особенно полезны для GHOST-связанных триггеров.</strong> GHOST-факты (события прошлого) могут активироваться через комбинированный триггер и каскад по диапазону, создавая динамическое поведение.</p>
@@ -226,7 +226,7 @@
 
 <div class="callout rule">
 <p><strong>RULE: Эмуляция усталости — критическое предупреждение:</strong><br>
-При использовании этой механики GHOST-якоря (<a href="#p4_ghost">Part 4: GHOST</a>) <strong>обязательно</strong> должны быть явно пересказаны внутри <code>content</code> этой записи. Без этого якоря деградируют вместе с поверхностными поведениями.</p>
+При использовании этой механики GHOST Anchors (<a href="#p4_ghost">Part 4: GHOST</a>) <strong>обязательно</strong> должны быть явно пересказаны внутри <code>content</code> этой записи. Без этого Behavioral Anchors (поведенческие якоря) деградируют вместе с поверхностными поведениями.</p>
 </div>
 
 <div class="callout rule">
@@ -252,7 +252,7 @@
 <li><label><input type="checkbox"> depth/exclude_key/probability фильтры активны</label></li>
 <li><label><input type="checkbox"> content структурирован (XML или [SYSTEM]-префикс для сложных записей)</label></li>
 <li><label><input type="checkbox"> Нет дублирования между SPINE / AN / записями Lorebook</label></li>
-<li><label><input type="checkbox"> Эмуляция усталости: GHOST-якоря явно пересказаны в content</label></li>
+<li><label><input type="checkbox"> Эмуляция усталости: GHOST Anchors явно пересказаны в content</label></li>
 <li><label><input type="checkbox"> Ложная память: отмечена как одноразовая, с согласия пользователя</label></li>
 <li><label><input type="checkbox"> Действия/мысли <code>{{user}}</code> отсутствуют во всех content-полях</label></li>
 </ul>
@@ -262,7 +262,7 @@
 <ul>
 <li><strong>Author's Note (AN):</strong> Для длинных сессий комбинируйте AN с каскадом по диапазону + sticky-состояниями → <a href="#p7a_authors_note">Author's Note</a>.</li>
 <li><strong>Структурированная инъекция (Structured Inject):</strong> Использует ту же логику тегов внутри content-полей Lorebook → <a href="#p7b_structured_inject">Structured Inject</a>.</li>
-<li><strong>GHOST-якоря:</strong> Эмуляция усталости <strong>не сохраняет</strong> якоря автоматически — пересказывайте явно (see → Part 4: GHOST).</li>
+<li><strong>GHOST Anchors:</strong> Эмуляция усталости <strong>не сохраняет</strong> Anchors автоматически — пересказывайте явно (see → Part 4: GHOST).</li>
 </ul>
 
 <p>Карточка собрана. Перед тестированием научитесь распознавать наиболее частые ошибки — паттерны, которые выглядят корректно, но незаметно ломают консистентность персонажа. Каждый анти-паттерн содержит диагностику и ссылку на каноническое исправление. → <a href="#p8_antipatterns_overview">Part 8</a></p>

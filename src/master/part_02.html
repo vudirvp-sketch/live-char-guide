@@ -1,5 +1,5 @@
 <!--
-  Part 2: Behavioral Anchors (Поведенческие якоря)
+  Part 2: Behavioral Anchors (поведенческие якоря)
   Live Character Guide v6 Master HTML
 
   Unified content: all layers merged
@@ -7,15 +7,15 @@
 <section  data-section="p2_basic_anchors" data-toc-nav>
 <h2>Behavioral Anchors (поведенческие якоря)</h2>
 
-<p><strong>Якорь (Anchor)</strong> — это правило поведения персонажа в формате <strong>Триггер → Действие → Цена</strong>. Это основной механизм задания характера без бесконечного описания.</p>
+<p><strong>Anchor (Anchor)</strong> — это правило поведения персонажа в формате <strong>Триггер → Действие → Цена</strong>. Это основной механизм задания характера без бесконечного описания.</p>
 
 <div class="infographic">
-<div class="infographic-title">Формат якоря: Trigger → Action → Price</div>
+<div class="infographic-title">Формат Anchors: Trigger → Action → Price</div>
 <div class="inf-pipeline-vertical">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
 <div class="inf-step-label">TRIGGER (Триггер)</div>
-<div class="inf-step-desc">Внешний стимул, запускающий якорь</div>
+<div class="inf-step-desc">Внешний стимул, запускающий Anchor</div>
 <div class="inf-step-code">Кто-то лжёт</div>
 </div>
 <div class="inf-pipeline-step">
@@ -33,7 +33,7 @@
 </div>
 </div>
 
-<pre class="plain-copy">Формат якоря: Trigger → Action → Price
+<pre class="plain-copy">Формат Anchors: Trigger → Action → Price
 01 TRIGGER — Внешний стимул (Кто-то лжёт)
 02 ACTION — Наблюдаемая реакция (Прищуривается, молчит)
 03 PRICE — Физическая реакция (Напряжение в челюсти)</pre>
@@ -41,9 +41,9 @@
 </section>
 
 <section  data-section="p2_anchor_rules" data-toc-nav>
-<h3>Правила якорей</h3>
+<h3>Правила Anchors</h3>
 
-<h4>Рекомендуемое количество якорей</h4>
+<h4>Рекомендуемое количество Anchors</h4>
 <div class="table-wrap">
 <table>
 <thead>
@@ -57,7 +57,7 @@
 </table>
 </div>
 
-<h4>Критерии качества якоря</h4>
+<h4>Критерии качества Anchors</h4>
 <ul>
 <li><strong>Действие наблюдаемое</strong> — можно увидеть/услышать, не внутреннее состояние</li>
 <li><strong>Цена физическая</strong> — телесная реакция, не эмоция</li>
@@ -66,11 +66,11 @@
 </ul>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Якоря и FLAW — конкретные действия, не прилагательные. «Он неуверенный» ≠ якорь. «Грызёт ногти и перечитывает сообщение трижды» = якорь. → <a href="#p4_flaw">Part 4: FLAW</a></p>
+<p><strong>RULE:</strong> Anchors и FLAW — конкретные действия, не прилагательные. «Он неуверенный» ≠ Anchor. «Грызёт ногти и перечитывает сообщение трижды» = Anchor. → <a href="#p4_flaw">Part 4: FLAW</a></p>
 </div>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> «Потом будет жалеть» — НЕ валидный Price. Price = наблюдаемый физический или вербально-поведенческий маркер в той же сцене. Если Price не появляется в ответе модели — якорь не работает.</p>
+<p><strong>RULE:</strong> «Потом будет жалеть» — НЕ валидный Price. Price = наблюдаемый физический или вербально-поведенческий маркер в той же сцене. Если Price не появляется в ответе модели — Anchor не работает.</p>
 </div>
 
 <div class="example-label illustration">ILLUSTRATION</div>
@@ -103,7 +103,7 @@
 </section>
 
 <section  data-section="p2_anchor_examples">
-<h3>Примеры якорей по триггерам</h3>
+<h3>Примеры Anchors по триггерам</h3>
 
 <p>Ниже — таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Цена — всегда физическая реакция, наблюдаемая в той же сцене.</p>
 
@@ -123,9 +123,8 @@
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> FLAW-linked якоря: → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Якоря определяют, <strong>что</strong> делает персонаж. Но поведение — это не только действие, но и <strong>голос</strong>. Следующая часть — о том, где голос живёт в карточке и как его изолировать от описания: <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
+<p>Якоря определяют, <strong>что</strong> делает персонаж. Но поведение — это не только действие, но и <strong>голос</strong>. Следующая часть — о том, где голос живёт в карточке и как его изолировать от описания: <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
 </section>
 
@@ -184,14 +183,8 @@
 <p><strong>RECOMMENDATION:</strong> Каждый Example должен содержать минимум одну физическую реакцию (embodiment). Если персонаж только говорит — модель не научится телесности.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>Embodiment First</strong> в System Prompt: <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #2</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Для GHOST-персонажей протокол Embodiment усиливается сенсорными якорями — якорями, привязанными к 5 каналам восприятия через GHOST-события → <a href="#p2_sensory_anchors">Сенсорные якоря</a></p>
 
-<p>
-<span class="remark-icon" aria-hidden="true">→</span>
-CoT-якоря (якоря с внутренним процессом) → <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>
-</p>
 
 </section>
 
@@ -206,16 +199,16 @@ CoT-якоря (якоря с внутренним процессом) → <a hr
 <p><strong>ВЕРНО — Среда через действие:</strong> <!-- Demonstrates: ENVIRONMENTAL REACTIVITY -->«Елена провела пальцами по краю бара — липко. Давно не убирали.» — среда раскрывается через действие персонажа.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Директива <strong>Environmental Reactivity</strong> в System Prompt: <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #4</a></p>
+
 
 </section>
 
 <section  data-section="p2_sensory_anchors">
-<h3>Сенсорные якоря</h3>
+<h3>Sensory Anchors</h3>
 
 <p>Сенсорные якоря добавляют персонажу телесность — запахи, текстуры, звуки, которые модель использует для генерации реакций.</p>
 
-<p><strong>Сенсорный якорь</strong> — якорь, привязанный к одному из 5 каналов восприятия. Используется для персонажей с GHOST Layers или травмой.</p>
+<p><strong>Sensory Anchor</strong> — Anchor, привязанный к одному из 5 каналов восприятия. Используется для персонажей с GHOST Layers или травмой.</p>
 
 <h4>5 сенсорных каналов</h4>
 <div class="table-wrap">
@@ -236,17 +229,12 @@ CoT-якоря (якоря с внутренним процессом) → <a hr
 <h4>Пример: Выщербленный</h4>
 <div class="example-label illustration">ILLUSTRATION</div>
 <!-- Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY -->
-<pre><code>Сенсорные якоря:
+<pre><code>Sensory Anchors:
 - Тактильный: Когда чужое касание → тело реагирует раньше ума → дрожь
 - Обонятельный: Когда запах сырого Сангвиса → левая рука движется сама, тянется к источнику → рука ноет остаток дня
 - Проприоцептивный: Когда стены ошметка сжимаются (Вентора) → "вырезает" пространство → теряет фрагмент себя</code></pre>
 
-<p>
-<span class="remark-icon" aria-hidden="true">→</span>
-CoT-якоря (якоря с внутренним процессом) → <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>
-</p>
-
-<p>Якоря управляют тем, КОГДА персонаж действует. Voice (голос) управляет тем, КАК он звучит. Без Voice Isolation даже хорошо анкорированные персонажи сливаются с регистром рассказчика или перенимают голоса других персонажей в мульти-персонажных сценах. → <a href="#p3_voice_isolation">Part 3</a></p>
+<p>Anchors управляют тем, КОГДА персонаж действует. Voice (голос) управляет тем, КАК он звучит. Без Voice Isolation даже хорошо анкорированные персонажи сливаются с регистром рассказчика или перенимают голоса других персонажей в мульти-персонажных сценах. → <a href="#p3_voice_isolation">Part 3</a></p>
 
 </section>
 

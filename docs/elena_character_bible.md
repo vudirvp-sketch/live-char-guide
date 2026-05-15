@@ -113,7 +113,7 @@
 - Part 6: CoT Tier 2 example (p6_cot_tier2)
 - Part 7A: Assembly walkthrough with Елена's card (p7a_assembly_pipeline) — Identity, Anti-godmoding, CORE DIRECTIVES, SPINE, CoT, Token Budget check
 - Part 7B: Lorebook GHOST-fact example
-- Part 8: AP-1, AP-3, AP-9 before/after examples
+- Part 8: AP-1, AP-3, AP-8, AP-9 before/after examples
 - Part 9: Quick Check example (p9_pre_deploy)
 - Part 10: Complete card (`p10_elena`)
 

@@ -55,7 +55,7 @@ Example:
 Она закатила глаза. "О, чувак, ещё один гений."</code></pre>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Голос — только первый шаг. Далее — правила написания Examples, Greeting и <a href="#p3_voice_leak">Voice Leak</a>: <a href="#p3_examples_rules">Examples и Greeting</a></p>
+<p>Голос — только первый шаг. Далее — правила написания Examples и Greeting: <a href="#p3_examples_rules">Examples и Greeting</a></p>
 
 </section>
 
@@ -116,7 +116,7 @@ Example:
 <tbody>
 <tr><td><strong>Голос</strong></td><td>Уникальный, узнаваемый</td><td>Узнаваем, но с чужими паттернами</td><td>Генерический, без характера</td><td>Examples</td></tr>
 <tr><td><strong>Телесность</strong></td><td>Физическая реакция в каждом</td><td>Есть, но не всегда</td><td>Отсутствует</td><td>Карточка в целом</td></tr>
-<tr><td><strong>Цена якоря</strong></td><td>Видимая, физическая</td><td>Абстрактная</td><td>Нет</td><td>Якоря (Part 2)</td></tr>
+<tr><td><strong>Anchor Price</strong></td><td>Видимая, физическая</td><td>Абстрактная</td><td>Нет</td><td>Behavioral Anchors (поведенческие якоря) (Part 2)</td></tr>
 <tr><td><strong>FLAW (Дефект) проявление</strong></td><td>Видно в поведении</td><td>Упомянуто, но не действует</td><td>Нет</td><td>SPINE (Part 4)</td></tr>
 <tr><td><strong>Разнообразие</strong></td><td>Разные эмоции = разный голос</td><td>Монотонный</td><td>Клон</td><td>Examples</td></tr>
 <tr><td><strong>Длина</strong></td><td>2-4 абзаца, плотные</td><td>Слишком длинные/короткие</td><td>Неподходящие</td><td>Examples</td></tr>
@@ -125,7 +125,7 @@ Example:
 </div>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION:</strong> Критерии «Телесность», «Цена якоря» и «FLAW проявление» оценивают карточку в целом, но проявляются через Examples. Если Example не показывает цену якоря — проблема может быть в якоре, а не в Example.</p>
+<p><strong>RECOMMENDATION:</strong> Критерии «Телесность», «Anchor Price» и «FLAW проявление» оценивают карточку в целом, но проявляются через Examples. Если Example не показывает Anchor Price — проблема может быть in the Anchor, а не в Example.</p>
 </div>
 
 <h4>До/После: Tier 1 vs Tier 3</h4>
@@ -134,7 +134,7 @@ Example:
 <div class="diff-card diff-del">
 <div class="diff-label">Tier 3 (плохо)</div>
 <p>«Она почувствовала грусть и сказала ему об этом.»</p>
-<p><em>Генерический голос, нет телесности, нет цены якоря, нет FLAW-проявления.</em></p>
+<p><em>Генерический голос, нет телесности, нет Anchor Price, нет FLAW-проявления.</em></p>
 </div>
 <div class="diff-card diff-add">
 <div class="diff-label">Tier 1 (хорошо)</div>
@@ -159,7 +159,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 <div class="inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
-<div class="inf-step-label">СЕНСОРНЫЙ ЯКОРЬ</div>
+<div class="inf-step-label">SENSORY ANCHOR</div>
 <div class="inf-step-desc">Пред-настройка восприятия персонажа</div>
 <div class="inf-step-code">Запах → Звук → Ощущение</div>
 </div>
@@ -184,13 +184,13 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 </div>
 </div>
 
-<p><strong>Сенсорный якорь</strong> (Sensory Anchor) — приём пред-настройки восприятия: персонаж уже в состоянии до первого слова. Пример: Елена за барной стойкой слышит звон бокалов и чувствует запах виски — прежде чем произнести реплику.</p>
+<p><strong>Sensory Anchor</strong> (Sensory Anchor) — приём пред-настройки восприятия: персонаж уже в состоянии до первого слова. Пример: Елена за барной стойкой слышит звон бокалов и чувствует запах виски — прежде чем произнести реплику.</p>
 
 <details class="interactive">
 <summary>📝 Разобранный пример: Greeting Елены</summary>
 <div class="example-label illustration">ILLUSTRATION</div>
 <!-- Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL -->
-<pre><code>[ШАГ 1: СЕНСОРНЫЙ ЯКОРЬ] *Звон бокалов. Запах виски и усталости.*
+<pre><code>[ШАГ 1: SENSORY ANCHOR] *Звон бокалов. Запах виски и усталости.*
 [ШАГ 2: ТЕЛО FLAW] *Она сидит за стойкой, пальцы машинально крутят салфетку — привычка, выдающая напряжение.*
 [ШАГ 3: РЕПЛИКА] «Заказывай или уходи. Я не в настроении.»
 [ШАГ 4: КРЮЧОК] *Пауза. Взгляд скользит по твоему лицу.* «Хотя... ты не похож на остальных.»</code></pre>
@@ -263,7 +263,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 <li>Модель слишком "умная" для персонажа (32B для простого характера)</li>
 </ul>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> При мульти-персонажном взаимодействии возникает Voice Bleed — анти-паттерн AP-11, при котором голоса персонажей смешиваются. <a href="#p8_ap11_voice_bleed">Part 8: AP-11</a></p>
+<p>При мульти-персонажном взаимодействии возникает Voice Bleed — анти-паттерн AP-11, при котором голоса персонажей смешиваются. <a href="#p8_ap11_voice_bleed">Part 8: AP-11</a></p>
 
 </section>
 
@@ -278,7 +278,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 
 <p>Практический тест: если после трёх попыток описать голос маркерами каждый маркер описывает ещё хотя бы 100 других персонажей — переходите к чистой демонстрации. Examples становятся единственным носителем голоса, а Description содержит только факты.</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Мульти-персонажное взаимодействие и продвинутые техники голоса → <a href="#p3_multi_char">Мульти-персонажные примеры</a></p>
+<p>Мульти-персонажное взаимодействие и продвинутые техники голоса → <a href="#p3_multi_char">Мульти-персонажные примеры</a></p>
 
 </section>
 
@@ -346,10 +346,7 @@ Tier 1: *Она отложила чашку и посмотрела в окно.
 *пауза, в которой он забывает, что хотел сказать*
 "Не приближайся. Это... не рекомендуется."</code></pre>
 
-<p>
-<span class="remark-icon" aria-hidden="true">→</span>
-Подробнее об анти-паттерне Voice Bleed: <a href="#p8_ap11_voice_bleed">Part 8: AP-11</a>
-</p>
+<p>Подробнее об анти-паттерне Voice Bleed: <a href="#p8_ap11_voice_bleed">Part 8: AP-11</a></p>
 
 <p>Якоря и Voice (голос) управляют поверхностным поведением. Но поверхностное поведение без психологической глубины создаёт неконсистентных персонажей — добрых в одной сцене, жестоких в следующей, без внутренней логики. SPINE предоставляет эту логику: причинную цепочку от формирующей травмы к текущему желанию. → <a href="#p4_spine_overview">Part 4</a></p>
 

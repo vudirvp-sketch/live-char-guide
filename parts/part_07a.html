@@ -11,7 +11,7 @@
 
 <p>System Prompt — единственная техническая часть карточки, которую модель видит всегда. Здесь размещаются CORE DIRECTIVES и Tone Frame.</p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> <strong>CoT (цепочка рассуждений)</strong> добавляет внутренний процесс рассуждения персонажа. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
+
 
 <p><strong>System Prompt (SP)</strong> — блок инструкций, задающий рамки поведения модели. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI.</small> SP включает CORE DIRECTIVES — единую систему из 7 директив, связывающую все поведенческие правила в одну логику.</p>
 
@@ -47,9 +47,9 @@ Format Lock:
 <p><strong>RULE: Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Каждая директива подробно разобрана ниже: <a href="#p7a_core_directives">CORE DIRECTIVES — объяснения и примеры</a></p>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Пример карточки с этим шаблоном: <a href="#p10_vysherblenny">Выщербленный</a>. Сравните структуру SP в шаблоне с фактической карточкой — все 7 директив, Tone Frame, OOC Protection, Format Lock на своих местах.</p>
+
+
 
 </section>
 <section  data-section="p7a_core_directives" data-toc-nav>
@@ -103,7 +103,7 @@ Format Lock:
 <p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
 <h4>6. Consequence Driven (Динамика следствий)</h4>
-<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a> <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
+<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → Behavioral Anchors (поведенческие якоря)</a> <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
 <pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
 <h4>7. Pre-Generation Filter (Фильтр предгенерации)</h4>
@@ -120,7 +120,7 @@ Format Lock:
 <p><strong>RECOMMENDATION: Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Pre-Deploy Validation включает проверку CORE DIRECTIVES → <a href="#p9_pre_deploy">Пред-деплой валидация (Part 9)</a></p>
+
 </section>
 <section  data-section="p7a_tone_frame" data-toc-nav>
 <h3>Tone Frame (Тональный фрейм)</h3>
@@ -225,7 +225,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 <pre><code>[Author's Note:
 Фокус: Страх растворения активен. Каждая реакция несёт физический цензор — тремор, потеря слова, сбой руки.
 WANT→NEED: WANT доминирует — стремится к полноценности через поглощение; NEED подавлен.
-GHOST-activation: Активен, если в сцене был триггер (распад, пустота, имя, Йоуёма, Вентора).
+GHOST-activation: Активен, если в сцене был триггер (распад, пустота, имя, зеркало, Вентора).
 Слепая зона: Не видит, что его вырезания отталкивают тех, кто мог бы остаться.
 Счётчик вырезаний: [обновляется в сессии] — после третьего не помнит имя, после пятого — зачем помогает.
 Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.]</code></pre>
@@ -239,7 +239,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <li><strong>Сцена:</strong> Контекст — локация, атмосфера, присутствие других</li>
 </ul>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Комбинирование AN с Lorebook-механиками (каскад по диапазону, sticky-состояния) → <a href="#p7b_lorebook_mechanics">Механики Lorebook</a></p>
+
 
 </section>
 <section  data-section="p7a_sampling_params">
@@ -313,7 +313,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <div class="callout rec">
 <p><strong>RECOMMENDATION: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос. Подробнее о правиле голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
-<p><span class="remark-icon" aria-hidden="true">→</span> Технические блоки настроены. Проверьте, нет ли анти-паттернов → <a href="#p8_antipatterns_overview">Part 8: Анти-паттерны</a></p>
+
 
 </div>
 
@@ -413,14 +413,14 @@ FLAW-linked:
 - Когда ошметок сжимается / Вентора пытается изолировать → вырезает пространство → теряет фрагмент себя
 - Когда возможность поглощения → левая рука тянется сама → рука ноет остаток дня
 
-Йоуёма-linked:
-- Когда Йоуёма рядом → отшатывается, голос резче → тошнота от собственной реакции
+Зеркало-linked:
+- Когда зеркало (бывшая коллега) рядом → отшатывается, голос резче → тошнота от собственной реакции
 
 Сенсорные (для 32B+ и API):
 - Обонятельный: Когда запах сырого Сангвиса → левая рука движется сама → рука ноет
 - Тактильный: Когда чужое касание → тело реагирует раньше ума → дрожь
 
-CoT (для 32B+ и API, 2 якоря максимум):
+CoT (для 32B+ и API, 2 Anchors максимум):
 - Когда присутствие со значимым прошлым → [processus_analysium]...[/INTERNAL] → отступает → "Прошу прощения"
 - Когда Вентора пытается изолировать → [INTERNAL]...[/INTERNAL] → вырезает → пустота
 &lt;/anchors&gt;</code></pre>
@@ -561,7 +561,7 @@ GHOST: Предательство редактора — история, кот�
 <p>~70 токенов. Проверка: GHOST→LIE (предательство → недоверие ✓), LIE→FLAW (недоверие → сарказм при близости ✓), FLAW→NEED (сарказм блокирует принятие ✓), WANT↔LIE (доказывает одна ↔ не нужно одобрение ✓).</p>
 
 <h4>Шаг 5: CoT (при наличии моделей ≥32B/API)</h4>
-<p><strong>Что делаете:</strong> Добавляете 1–2 CoT-якоря для ключевых триггеров. Елена не нуждается в GHOST Layers — достаточно простого &lt;cot&gt; блока, привязанного к её SPINE. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
+<p><strong>Что делаете:</strong> Добавляете 1–2 CoT Anchors для ключевых триггеров. Елена не нуждается в GHOST Layers — достаточно простого &lt;cot&gt; блока, привязанного к её SPINE. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
 <p><strong>Результат Елены (Tier 2 CoT):</strong></p>
 <pre><code>Когда кто-то проявляет искренний интерес к её работе:
 [INTERNAL: Напоминает, как редактор украл её историю]
@@ -571,7 +571,7 @@ GHOST: Предательство редактора — история, кот�
 *отводит взгляд, уголок рта дёргается*
 "О, чувак, какие чувства? Ты серьёзно?"
 *сарказм как стена*</code></pre>
-<p>~60 токенов. Один CoT-якорь — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, GHOST один. Для персонажей с GHOST Layers (Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
+<p>~60 токенов. Один CoT Anchor — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, GHOST один. Для персонажей с GHOST Layers (Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
 
 <h4>Шаг 6: Token Budget Check</h4>
 <p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (see → Part 1: Token Budget)</p>
@@ -581,10 +581,10 @@ GHOST: Предательство редактора — история, кот�
 <thead><tr><th>Блок</th><th>Токены</th><th>Лимит</th><th>Статус</th></tr></thead>
 <tbody>
 <tr><td>System Prompt</td><td>~120</td><td>50–200</td><td>✓</td></tr>
-<tr><td>Description (SPINE + OCEAN + якоря)</td><td>~250</td><td>150–700</td><td>✓</td></tr>
+<tr><td>Description (SPINE + OCEAN + Anchors)</td><td>~250</td><td>150–700</td><td>✓</td></tr>
 <tr><td>Examples (3 блока)</td><td>~120</td><td>80–240</td><td>✓</td></tr>
 <tr><td>Greeting</td><td>~60</td><td>40–100</td><td>✓</td></tr>
-<tr><td>CoT-якорь</td><td>~60</td><td>0–160</td><td>✓</td></tr>
+<tr><td>CoT Anchor</td><td>~60</td><td>0–160</td><td>✓</td></tr>
 <tr><td><strong>Итого</strong></td><td><strong>~610</strong></td><td>400–900</td><td>✓</td></tr>
 </tbody>
 </table>
@@ -595,7 +595,7 @@ GHOST: Предательство редактора — история, кот�
 <p>Елена — персонаж базового–среднего уровня. Полная карточка (~610 токенов) не требует Lorebook или GHOST Layers. Но если вы хотите расширить её:</p>
 
 <ul>
-<li><strong>FLAW-linked якоря + Embodiment (5–7 якорей):</strong> Добавьте якоря, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → Якоря</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
+<li><strong>FLAW-linked Anchors + Embodiment (5–7 Anchors):</strong> Добавьте Anchors, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → Anchors</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
 <li><strong>OCEAN + Enneagram:</strong> Заполните профиль → <a href="#p5_ocean_basics">Part 5: OCEAN</a>. Елена: O:72, C:65, E:41, A:38, N:68. Enneagram: 6w5. Экстремальных полюса: 3 (для 8K+ контекста — допустимо; для 4K оставьте только N=68 и A=38).</li>
 <li><strong>Lorebook для GHOST-фактов:</strong> Настройте записи для сенсорных триггеров → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>. Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу».</li>
 <li><strong>Author's Note:</strong> Настройте AN для отслеживания WANT→NEED → <a href="#p7a_authors_note">Author's Note</a>. Елена использует Template A (без GHOST-activation, т.к. GHOST простой).</li>
@@ -603,15 +603,15 @@ GHOST: Предательство редактора — история, кот�
 
 <h4>Чек-лист перед тестированием</h4>
 <ul>
-<li>☐ Все якоря содержат Цену (→ <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>)</li>
+<li>☐ Все Anchors содержат Цену (→ <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>)</li>
 <li>☐ Голос только в Examples/Greeting (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</li>
 <li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (→ <a href="#p4_spine_full_chain">Part 4: SPINE</a>)</li>
 <li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+ (→ <a href="#p5_ocean_basics">Part 5: OCEAN</a>)</li>
 <li>☐ Token Budget в пределах диапазона (→ <a href="#p1_token_budget">Part 1: Token Budget</a>)</li>
-<li>☐ CoT: не более 2–3 якорей (→ <a href="#p6_cot_basics">Part 6: CoT</a>)</li>
+<li>☐ CoT: не более 2–3 Anchors (→ <a href="#p6_cot_basics">Part 6: CoT</a>)</li>
 </ul>
 
-<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (~440–900 токенов)</a> | <a href="#p10_omnis">Омнис-Зета (~450–1800 токенов)</a></p>
+<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена</a> | <a href="#p10_vysherblenny">Выщербленный (~1500+ токенов)</a></p>
 
 <p class="bridge-paragraph">System Prompt — ядро, которое всегда находится в контексте. Но у персонажей есть знания, превышающие Token Budget, и первые впечатления, задающие тон. Lorebook обеспечивает инъекцию знаний по требованию; Greeting Message демонстрирует персонажа в действии. → <a href="#p7b_structured_inject">Part 7B</a></p>
 

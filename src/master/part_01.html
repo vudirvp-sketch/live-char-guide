@@ -1,6 +1,6 @@
 <!--
   Part 1: Basic Card Blocks (Базовые блоки карточки)
-  Live Character Guide v9 Master HTML
+  Live Character Guide v6 Master HTML
 
   Unified: All content at maximum depth
 -->
@@ -13,7 +13,7 @@
 
 <div class="callout rule">
 <p><strong>RULE:</strong> О примерах и стиле</p>
-<p>Этот гайд учит механике, не эстетике. Все примеры намеренно сухие — они иллюстрируют структурные принципы (причинность SPINE, триггеры якорей, маркеры Voice, логику CoT), а не качество письма. Когда пример содержит нарративный язык («Дождь барабанил по стеклу»), он существует для демонстрации конкретной директивы (в данном случае Environmental Reactivity) и помечен соответствующим образом. Стиль вашего персонажа — качество прозы, глубина лора, сенсорная насыщенность — ваша_domain. Этот гайд гарантирует, что модель его уважает.</p>
+<p>Этот гайд учит механике, не эстетике. Все примеры намеренно сухие — они иллюстрируют структурные принципы (причинность SPINE, триггеры Behavioral Anchors (поведенческие якоря), маркеры Voice, логику CoT), а не качество письма. Когда пример содержит нарративный язык («Дождь барабанил по стеклу»), он существует для демонстрации конкретной директивы (в данном случае Environmental Reactivity) и помечен соответствующим образом. Стиль вашего персонажа — качество прозы, глубина лора, сенсорная насыщенность — ваша_domain. Этот гайд гарантирует, что модель его уважает.</p>
 </div>
 
 <section data-section="p1_structure_overview" data-toc-nav>
@@ -61,12 +61,12 @@ graph TD
 </li>
 <li><strong>Part 2:</strong> Behavioral Anchors
   <ul>
-  <li><a href="#p2_basic_anchors">Базовые якоря</a></li>
-  <li><a href="#p2_anchor_rules">Правила якорей</a></li>
-  <li><a href="#p2_anchor_examples">Примеры якорей</a></li>
+  <li><a href="#p2_basic_anchors">Базовые Anchors</a></li>
+  <li><a href="#p2_anchor_rules">Правила Anchors</a></li>
+  <li><a href="#p2_anchor_examples">Примеры Anchors</a></li>
   <li><a href="#p2_embodiment">Embodiment Protocol</a></li>
   <li><a href="#p2_env_reactivity">Environmental Reactivity</a></li>
-  <li><a href="#p2_sensory_anchors">Сенсорные якоря</a></li>
+  <li><a href="#p2_sensory_anchors">Sensory Anchors</a></li>
   </ul>
 </li>
 <li><strong>Part 3:</strong> Voice &amp; Isolation
@@ -76,7 +76,7 @@ graph TD
   <li><a href="#p3_examples_rules">Правила Examples</a></li>
   <li><a href="#p3_examples_quality">Качество Examples</a></li>
   <li><a href="#p3_greeting">Greeting Message</a></li>
-  <li><a href="#p3_voice_leak">Voice Bleed</a></li>
+  <li><a href="#p3_voice_leak">Voice Leak</a></li>
   <li><a href="#p3_joker_case">Крайний случай: голос без описания</a></li>
   <li><a href="#p3_multi_char">Мульти-персонажные примеры</a></li>
   </ul>
@@ -199,7 +199,7 @@ graph TD
 
 </section>
 
-<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые якоря (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_assembly_pipeline">Конвейер сборки</a></p>
+<p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p1_assembly_pipeline">Конвейер сборки</a></p>
 
 <div class="table-wrap">
 <table>
@@ -208,14 +208,13 @@ graph TD
 </thead>
 <tbody>
 <tr><td><strong>System Prompt</strong></td><td>Инструкции, запреты, формат</td><td>Высокое — задаёт рамки</td><td>Компактный</td></tr>
-<tr><td><strong>Description</strong></td><td>Факты, якоря, психология</td><td>Среднее — контекст</td><td>Основной объём</td></tr>
+<tr><td><strong>Description</strong></td><td>Факты, Anchors, психология</td><td>Среднее — контекст</td><td>Основной объём</td></tr>
 <tr><td><strong>Examples</strong></td><td>Демонстрация голоса</td><td>Ключевое — паттерны речи</td><td>Средний</td></tr>
 <tr><td><strong>Greeting</strong></td><td>Greeting Message (первое сообщение)</td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Точные токен-лимиты по блокам → <a href="#p1_token_budget">Part 1: Token Budget</a></p>
 
 <div class="callout rule">
 <p><strong>RULE:</strong> Правило голоса → <a href="#p1_core_rules">3 ключевых принципа</a></p>
@@ -233,12 +232,11 @@ graph TD
 </div>
 
 <ol>
-<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></li>
+<li><strong>Anchor = Trigger → Action → Price</strong> — поведение задаётся Anchors, и у каждого Anchors обязательна Цена — физическая реакция в той же сцене. Без Цены Anchor = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></li>
 <li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
 <li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
 </ol>
 
-<p><span class="remark-icon" aria-hidden="true">→</span> Правило OCEAN: не более 1-2 экстремальных полюсов</p>
 
 </section>
 
@@ -304,7 +302,6 @@ graph TD
 </noscript>
 </div>
 
-<div class="example-label stub">STUB</div>
 <pre class="plain-copy">Калькулятор токенов (пример):
 SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
@@ -316,7 +313,6 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 <p>Пошаговый порядок сборки минимальной рабочей карточки. Каждый шаг добавляет один блок, а на финальном этапе вы проверяете, что все правила соблюдены.</p>
 
-<div class="example-label illustration">ILLUSTRATION</div>
 <div class="infographic inf-pipeline">
 <div class="inf-pipeline-step">
 <div class="inf-step-id">01</div>
@@ -354,7 +350,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <p><strong>RULE:</strong> Если голос в SP/Description — карточка не работает на 12B. → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 </div>
 
-<p>Полный конвейер сборки с пошаговыми инструкциями, шаблонами и чек-листами → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>.</p>
+
 
 </section>
 
@@ -363,23 +359,20 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 
 <p>Три самые частые ошибки начинающих, которые сильнее всего ломают качество карточки. Каждая разбирается подробно: симптом → причина → пошаговое исправление → пример до/после. Дополнительные проблемы → <a href="#p9_additional_problems">Диагностика: Дополнительные проблемы (Part 9)</a>.</p>
 
-<div class="example-label illustration">ILLUSTRATION</div>
 <h4>Ошибка 1: Персонаж пишет за {{user}}</h4>
 <p><strong>Симптом:</strong> Модель описывает действия, мысли и реплики {{user}}. Диалог превращается в монолог от двух лиц.</p>
 <p><strong>Причина:</strong> В System Prompt нет Anti-godmoding (анти-годмодинга).</p>
 <p><strong>Исправление:</strong> Добавьте в SP строку «Never speak or act for {{user}}.» (Подробный разбор → <a href="#p7a_system_prompt">Part 7A: System Prompt</a> | <a href="#p8_ap6_no_anti_godmoding">Part 8: AP-6</a>)</p>
 
-<div class="example-label illustration">ILLUSTRATION</div>
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
 <p><strong>Причина:</strong> Голос помещён в Description вместо Examples — <a href="#p1_core_rules">правило #3</a>. Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
 <p><strong>Исправление:</strong> Полный разбор Voice Isolation → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
 
-<div class="example-label illustration">ILLUSTRATION</div>
 <h4>Ошибка 3: Персонаж «слишком идеальный»</h4>
 <p><strong>Симптом:</strong> Персонаж не проявляет уязвимость, не ошибается, реагирует «правильно» на все стимулы.</p>
-<p><strong>Причина:</strong> Якоря не имеют цены (Price). Без физической реакции якорь = инструкция без паттерна.</p>
-<p><strong>Исправление:</strong> Критерии качества якоря → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
+<p><strong>Причина:</strong> Anchors не имеют цены (Price). Без физической реакции Anchor = инструкция без паттерна.</p>
+<p><strong>Исправление:</strong> Критерии качества Anchors → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
 <p>Базовые блоки определяют, ЧТО ваш персонаж из себя представляет. Но персонаж, у которого есть только Identity и Description, будет вести себя типово — модель заполняет пробелы значениями по умолчанию. Behavioral Anchors решают эту проблему: они указывают, КОГДА и КАК ваш персонаж активирует конкретные паттерны поведения. → <a href="#p2_basic_anchors">Part 2</a></p>
 
