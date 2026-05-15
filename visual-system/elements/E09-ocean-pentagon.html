@@ -70,6 +70,16 @@
     .profile-anim.is-visible {
       opacity: 1;
     }
+
+    @media (max-width: 768px) {
+      .pentagon-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .pentagon-container svg {
+        min-width: 440px;
+      }
+    }
   </style>
 </head>
 <body>

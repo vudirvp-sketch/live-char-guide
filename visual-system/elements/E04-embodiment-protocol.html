@@ -81,18 +81,26 @@
       height: 16px;
     }
 
-    /* Depth indicator */
+    /* Depth indicator — статичный по умолчанию, абсолютный на широких экранах */
     .depth-label {
       font-family: var(--font-micro);
       font-size: 10px;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      position: absolute;
-      right: -80px;
-      top: 50%;
-      transform: translateY(-50%);
-      white-space: nowrap;
+      margin-top: 2px;
+      display: block;
+    }
+
+    @media (min-width: 769px) {
+      .depth-label {
+        position: absolute;
+        right: -80px;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        margin-top: 0;
+      }
     }
 
     /* Scroll animations */
@@ -120,11 +128,6 @@
       }
       .funnel-bar__example {
         text-align: left;
-      }
-      .depth-label {
-        position: static;
-        transform: none;
-        margin-top: 2px;
       }
     }
   </style>

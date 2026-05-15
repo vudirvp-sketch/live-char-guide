@@ -99,6 +99,28 @@
       text-align: center;
       margin-top: var(--gap-lg);
     }
+
+    @media (max-width: 768px) {
+      .ghost-rings {
+        aspect-ratio: auto;
+      }
+      .ghost-rings svg {
+        max-height: 400px;
+      }
+      .ring-label {
+        position: static;
+        margin-bottom: var(--gap-sm);
+        padding: var(--gap-xs) var(--gap-sm);
+        background: var(--bg-panel);
+        border-radius: var(--radius-sm);
+      }
+      .ring-label--g3,
+      .ring-label--g2,
+      .ring-label--g1 {
+        top: auto;
+        transition-delay: 0ms;
+      }
+    }
   </style>
 </head>
 <body>

@@ -75,6 +75,18 @@
     .red-marker {
       fill: var(--danger);
     }
+
+    @media (max-width: 768px) {
+      .chart-container {
+        max-width: 100%;
+      }
+      .chart-svg-wrap {
+        -webkit-overflow-scrolling: touch;
+      }
+      .inset-box {
+        font-size: 11px;
+      }
+    }
   </style>
 </head>
 <body>

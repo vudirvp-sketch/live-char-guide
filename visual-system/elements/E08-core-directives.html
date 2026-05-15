@@ -82,6 +82,17 @@
       font-family: var(--font-mono);
       font-size: 9px;
     }
+
+    @media (max-width: 768px) {
+      .hub-spoke-container {
+        aspect-ratio: auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .hub-spoke-container svg {
+        min-width: 600px;
+      }
+    }
   </style>
 </head>
 <body>

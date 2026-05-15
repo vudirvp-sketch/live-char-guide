@@ -72,19 +72,28 @@
       overflow: hidden;
     }
 
+    .ap-card__fix-label {
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
     .ap-card__fix {
       font-family: var(--font-body);
       font-size: 11px;
       color: var(--success);
       line-height: 1.4;
-      /* Hidden until hover */
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s var(--ease-out-expo);
+      /* Всегда видно для доступности; при hover — усиление */
+      opacity: 0.65;
+      transition: opacity 0.2s var(--ease-out-expo);
     }
 
     .ap-card:hover .ap-card__fix {
-      max-height: 60px;
+      opacity: 1;
     }
 
     .ap-card:hover .ap-card__cause {
@@ -201,6 +210,7 @@
         </div>
         <div class="ap-card__symptom">Раздувание токенов</div>
         <div class="ap-card__cause">Description превышает бюджет</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Сократите до стандартного бюджета. Перенесите детали в Lorebook.</div>
       </div>
 
@@ -212,6 +222,7 @@
         </div>
         <div class="ap-card__symptom">Отсутствует Price</div>
         <div class="ap-card__cause">У Anchor нет последствия</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Добавьте физический, внутри-сценовый Price каждому Anchor.</div>
       </div>
 
@@ -223,6 +234,7 @@
         </div>
         <div class="ap-card__symptom">Голос в Description</div>
         <div class="ap-card__cause">Голосовые паттерны записаны в блоке Description</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Перенесите весь голос в Examples. Description = только факты.</div>
       </div>
 
@@ -234,6 +246,7 @@
         </div>
         <div class="ap-card__symptom">GHOST в SP</div>
         <div class="ap-card__cause">Элементы SPINE помещены в System Prompt</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Перенесите SPINE в Description. SP = только контейнер.</div>
       </div>
 
@@ -245,6 +258,7 @@
         </div>
         <div class="ap-card__symptom">RepPen &gt; 1.10</div>
         <div class="ap-card__cause">Repetition Penalty установлен слишком высоким</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Держите RepPen 1.0–1.05. Используйте MinP вместо этого.</div>
       </div>
 
@@ -256,6 +270,7 @@
         </div>
         <div class="ap-card__symptom">Нет Anti-godmoding</div>
         <div class="ap-card__cause">Отсутствует 2-строчный anti-godmoding в SP</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Добавьте негативную + позитивную строки ограничений в SP.</div>
       </div>
 
@@ -267,6 +282,7 @@
         </div>
         <div class="ap-card__symptom">Presence Penalty &gt; 0</div>
         <div class="ap-card__cause">PP > 0 нарушает согласованность персонажа</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Установите PP = 0.0 всегда. Без исключений.</div>
       </div>
 
@@ -278,6 +294,7 @@
         </div>
         <div class="ap-card__symptom">GHOST без Anchors</div>
         <div class="ap-card__cause">SPINE определён, но нет Anchors для его выражения</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Добавьте FLAW-связанные Anchors в блок Examples.</div>
       </div>
 
@@ -289,6 +306,7 @@
         </div>
         <div class="ap-card__symptom">Нарушенный SPINE</div>
         <div class="ap-card__cause">Элементы SPINE не образуют причинную цепь</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Проверьте причинный поток GHOST→LIE→FLAW→NEED→WANT.</div>
       </div>
 
@@ -300,6 +318,7 @@
         </div>
         <div class="ap-card__symptom">Перегрузка CoT</div>
         <div class="ap-card__cause">Избыточный CoT на малых моделях</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Используйте Tier 0–1 для 12B, Tier 1–2 для 32B.</div>
       </div>
 
@@ -311,6 +330,7 @@
         </div>
         <div class="ap-card__symptom">Утечка голоса</div>
         <div class="ap-card__cause">Голос персонажа дрейфует к стилю нарратора</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Изолируйте голос в Examples. Добавьте усиление в Author's Note.</div>
       </div>
 
@@ -322,6 +342,7 @@
         </div>
         <div class="ap-card__symptom">Некорректный XML</div>
         <div class="ap-card__cause">Теги неправильно закрыты или вложены</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Проверьте все XML-теги. Используйте Format Lock (1 система).</div>
       </div>
 
@@ -333,6 +354,7 @@
         </div>
         <div class="ap-card__symptom">Конфликт Lorebook</div>
         <div class="ap-card__cause">Запись Lorebook противоречит Description</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Аудит Lorebook на согласованность с Description.</div>
       </div>
 
@@ -344,6 +366,7 @@
         </div>
         <div class="ap-card__symptom">Нарушение контекста</div>
         <div class="ap-card__cause">Общий размер карточки превышает контекстное окно модели</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Запустите Budget Check. Сократите или используйте Lorebook для избытка.</div>
       </div>
 
@@ -355,6 +378,7 @@
         </div>
         <div class="ap-card__symptom">Вложенные Anchors</div>
         <div class="ap-card__cause">Anchors рекурсивно ссылаются друг на друга</div>
+        <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Выровняйте структуру Anchors. Только один уровень ссылок.</div>
       </div>
 

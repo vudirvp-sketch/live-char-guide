@@ -13,7 +13,7 @@
   --border-active: #2a3344;
   --text-primary:  #e2e6ed;
   --text-secondary:#8b95a8;
-  --text-muted:    #535c6e;
+  --text-muted:    #6b7590;        /* было #535c6e — не проходило WCAG AA (3.5:1). #6b7590 даёт 4.6:1 на --bg-deep */
   --accent-cyan:   #3cc8ff;
   --accent-violet: #8b5cf6;
   --accent-amber:  #f0a040;
@@ -67,10 +67,10 @@
   --border-20: rgba(30,36,48,0.20);
   --border-40: rgba(30,36,48,0.40);
   --border-50: rgba(30,36,48,0.50);
-  --muted-15:  rgba(83,92,110,0.15);
-  --muted-20:  rgba(83,92,110,0.20);
-  --muted-25:  rgba(83,92,110,0.25);
-  --muted-30:  rgba(83,92,110,0.30);
+  --muted-15:  rgba(107,117,144,0.15);
+  --muted-20:  rgba(107,117,144,0.20);
+  --muted-25:  rgba(107,117,144,0.25);
+  --muted-30:  rgba(107,117,144,0.30);
 
   /* === СВЕЧЕНИЕ === */
   --glow-cyan:   0 0 12px rgba(60,200,255,0.25);

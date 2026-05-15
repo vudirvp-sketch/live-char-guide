@@ -127,6 +127,19 @@
     .type-node:nth-of-type(7) { transition-delay: 400ms; }
     .type-node:nth-of-type(8) { transition-delay: 450ms; }
     .type-node:nth-of-type(9) { transition-delay: 500ms; }
+
+    @media (max-width: 768px) {
+      .enneagram-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .enneagram-container svg {
+        min-width: 540px;
+      }
+      .mini-card {
+        min-width: 150px;
+      }
+    }
   </style>
 </head>
 <body>
