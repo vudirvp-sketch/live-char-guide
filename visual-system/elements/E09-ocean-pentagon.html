@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E09 — OCEAN Pentagon | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .pentagon-container {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .pentagon-container svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Context Limits inset */
+    .context-limits-box {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-left: var(--line-bold) solid var(--accent-amber);
+      border-radius: var(--radius-md);
+      padding: var(--gap-md);
+      margin-top: var(--gap-lg);
+    }
+
+    .context-limits-box__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-amber);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .context-limits-box__data {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .context-limits-box__highlight {
+      color: var(--accent-amber);
+      font-weight: 450;
+    }
+
+    /* Scroll animations */
+    .pentagon-anim {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      transition: stroke-dashoffset 800ms var(--ease-out-expo);
+    }
+
+    .pentagon-anim.is-visible {
+      stroke-dashoffset: 0;
+    }
+
+    .profile-anim {
+      opacity: 0;
+      transition: opacity 500ms var(--ease-out-expo) 600ms;
+    }
+
+    .profile-anim.is-visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el mini-map__el--active">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E09</span>
+    <h1 class="element-title">OCEAN Pentagon</h1>
+    <p class="element-subtitle">Pattern: P4 — Radar / Spider chart &middot; Source: Part 5, data/ocean.json</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="pentagon-container scroll-enter">
+      <svg viewBox="0 0 500 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OCEAN pentagon radar chart for Elena character profile showing 5 personality traits">
+        <title>OCEAN Pentagon — Elena character profile</title>
+
+        <defs>
+          <!-- Threshold zone colors -->
+          <linearGradient id="danger-zone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(217,69,90,0)"/>
+            <stop offset="100%" stop-color="rgba(217,69,90,0.05)"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Pentagon gridlines (5 levels: 0, 25, 50, 75, 100) -->
+        <!-- Center at 250, 210. Radius max = 170 -->
+
+        <!-- 25% ring -->
+        <polygon class="pentagon-anim" points="250,167.5 290.4,196.9 275,245.6 225,245.6 209.6,196.9"
+                 fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <!-- 50% ring -->
+        <polygon class="pentagon-anim" points="250,125 330.9,183.8 299.9,281.2 200.1,281.2 169.1,183.8"
+                 fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <!-- 75% ring -->
+        <polygon class="pentagon-anim" points="250,82.5 371.3,170.6 324.9,316.8 175.1,316.8 128.7,170.6"
+                 fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.5"/>
+        <!-- 100% ring (outer) -->
+        <polygon class="pentagon-anim" points="250,40 411.8,157.5 349.8,352.5 150.2,352.5 88.2,157.5"
+                 fill="none" stroke="var(--border)" stroke-width="0.7" opacity="0.6"/>
+
+        <!-- Axis lines -->
+        <line x1="250" y1="210" x2="250" y2="40" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="411.8" y2="157.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="349.8" y2="352.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="150.2" y2="352.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="88.2" y2="157.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+
+        <!-- Scale labels along top axis -->
+        <text x="256" y="172" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">25</text>
+        <text x="256" y="130" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">50</text>
+        <text x="256" y="87" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">75</text>
+        <text x="256" y="45" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">100</text>
+
+        <!-- Character profile: Elena — Openness=72, Conscientiousness=65, Extraversion=41, Agreeableness=38, Neuroticism=68 -->
+        <!-- O=72: 72% of radius 170 = 122.4 from center → y = 210 - 122.4 = 87.6 -->
+        <!-- C=65: 65% along E axis -->
+        <!-- E=41: 41% along SE axis -->
+        <!-- A=38: 38% along SW axis -->
+        <!-- N=68: 68% along W axis -->
+
+        <!-- Calculated profile points (approximate pentagon positions) -->
+        <!-- O(72%): 250, 87.6 -->
+        <!-- C(65%): 250 + 65%*161.8=105.2, 210 - 65%*52.5=175.9 → 355.2, 175.9 -->
+        <!-- E(41%): 250 + 41%*99.8=40.9, 210 + 41%*142.5=58.4 → 290.9, 268.4 -->
+        <!-- A(38%): 250 - 38%*99.8=37.9, 210 + 38%*142.5=54.2 → 212.1, 264.2 -->
+        <!-- N(68%): 250 - 68%*161.8=110, 210 - 68%*52.5=35.7 → 140, 174.3 -->
+
+        <polygon class="profile-anim"
+                 points="250,87.6 355.2,175.9 290.9,268.4 212.1,264.2 140,174.3"
+                 fill="rgba(60,200,255,0.12)"
+                 stroke="var(--accent-cyan)" stroke-width="1.5"/>
+
+        <!-- Data points -->
+        <circle class="profile-anim" cx="250" cy="87.6" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="355.2" cy="175.9" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="290.9" cy="268.4" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="212.1" cy="264.2" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="140" cy="174.3" r="4" fill="var(--accent-cyan)"/>
+
+        <!-- Axis labels -->
+        <text x="250" y="28" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          O <tspan fill="var(--accent-amber)" font-size="10">72</tspan>
+        </text>
+        <text x="425" y="155" text-anchor="start" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          C <tspan fill="var(--text-secondary)" font-size="10">65</tspan>
+        </text>
+        <text x="365" y="375" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          E <tspan fill="var(--text-secondary)" font-size="10">41</tspan>
+        </text>
+        <text x="135" y="375" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          A <tspan fill="var(--danger)" font-size="10">38</tspan>
+        </text>
+        <text x="60" y="155" text-anchor="end" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          N <tspan fill="var(--accent-amber)" font-size="10">68</tspan>
+        </text>
+
+        <!-- Threshold zone indicators -->
+        <text x="250" y="415" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9">
+          <tspan fill="var(--danger)">&lt;30</tspan> danger &middot;
+          <tspan fill="var(--success)">40-60</tspan> safe &middot;
+          <tspan fill="var(--accent-amber)">&gt;70</tspan> extreme
+        </text>
+
+      </svg>
+    </div>
+
+    <!-- Context Limits inset -->
+    <div class="context-limits-box scroll-enter">
+      <div class="context-limits-box__title">Context Limits for Personality Extremes</div>
+      <div class="context-limits-box__data">
+        <span class="context-limits-box__highlight">4K context</span> → 1–2 extremes max<br>
+        <span class="context-limits-box__highlight">8K context</span> → 2–3 extremes<br>
+        <span class="context-limits-box__highlight">16K+</span> → 3–4 extremes<br>
+        <span class="context-limits-box__highlight">32K+</span> → up to 5 extremes<br>
+        <span style="color:var(--text-muted); font-size:10px; margin-top:4px; display:block;">
+          Elena (O=72, N=68) has 2 extremes → works at 8K+ context
+        </span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:600px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--violet">SPINE validation: E05</span>
+    <span class="badge badge--cyan">Cross-validate: E10 (Enneagram)</span>
+    <span class="badge badge--cyan">Antipatterns: E12</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.pentagon-anim, .profile-anim, .scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.pentagon-anim, .profile-anim, .scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

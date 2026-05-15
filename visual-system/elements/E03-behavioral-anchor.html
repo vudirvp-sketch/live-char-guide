@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E03 — Behavioral Anchor: T→A→P | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-lg);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .compare-column {
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+      position: relative;
+    }
+
+    .compare-column--correct {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      box-shadow: inset 2px 0 8px rgba(60,200,255,0.06);
+    }
+
+    .compare-column--incorrect {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-amber);
+      box-shadow: inset 2px 0 8px rgba(240,160,64,0.06);
+    }
+
+    .compare-column__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: var(--gap-md);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .compare-column--correct .compare-column__title {
+      color: var(--accent-cyan);
+    }
+
+    .compare-column--incorrect .compare-column__title {
+      color: var(--accent-amber);
+    }
+
+    /* Flow nodes inside comparison */
+    .flow-node {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-bottom: var(--gap-sm);
+      position: relative;
+    }
+
+    .flow-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .flow-node__desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Downward arrow between nodes */
+    .flow-arrow-down {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin: var(--gap-xs) 0;
+    }
+
+    /* Bypass arrow (incorrect side) */
+    .bypass-arrow {
+      position: absolute;
+      right: -8px;
+      top: 20px;
+      bottom: 60px;
+      width: 40px;
+      pointer-events: none;
+    }
+
+    .bypass-arrow svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bypass-arrow__label {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--danger);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    /* Check / X marks */
+    .check-list {
+      margin-top: var(--gap-md);
+      padding-top: var(--gap-sm);
+      border-top: var(--line-width) solid var(--border);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .check-item__icon--pass {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .check-item__icon--fail {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    /* Embodiment badge */
+    .embodiment-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: rgba(139,92,246,0.1);
+      border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-violet);
+      margin-left: 6px;
+    }
+
+    /* Empty node (incorrect) */
+    .flow-node--empty {
+      border-style: dashed;
+      border-color: var(--border-active);
+      opacity: 0.5;
+    }
+
+    .flow-node--empty .flow-node__desc {
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Price deferred */
+    .price-deferred {
+      color: var(--accent-amber);
+      font-style: italic;
+    }
+
+    /* Scroll animations */
+    .compare-column {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .compare-column--correct {
+      transform: translateX(-20px);
+    }
+
+    .compare-column--incorrect {
+      transform: translateX(20px);
+    }
+
+    .compare-column.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .bypass-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-slow) var(--ease-out-expo) 0.4s;
+    }
+
+    .bypass-arrow.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el mini-map__el--active">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E03</span>
+    <h1 class="element-title">Behavioral Anchor: T→A→P</h1>
+    <p class="element-subtitle">Pattern: P5 — Comparison (split-view) &middot; Source: Part 2 (Behavioral Anchors)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="compare-grid">
+
+      <!-- CORRECT column -->
+      <div class="compare-column compare-column--correct scroll-enter">
+        <div class="compare-column__title">&#10003; Correct</div>
+
+        <!-- Trigger -->
+        <div class="flow-node">
+          <div class="flow-node__name">Trigger</div>
+          <div class="flow-node__desc">Event happens → character reacts</div>
+        </div>
+
+        <div class="flow-arrow-down">&#8595;</div>
+
+        <!-- Action + Embodiment badge -->
+        <div class="flow-node" style="border-left: 2px solid var(--accent-violet);">
+          <div class="flow-node__name">
+            Action
+            <span class="embodiment-badge">↳ E04 Embodiment</span>
+          </div>
+          <div class="flow-node__desc">Character responds with embodied behavior (State → Body → Sensor → Speech)</div>
+        </div>
+
+        <div class="flow-arrow-down">&#8595;</div>
+
+        <!-- Price (physical, immediate) -->
+        <div class="flow-node" style="border-left: 2px solid var(--accent-cyan);">
+          <div class="flow-node__name">Price</div>
+          <div class="flow-node__desc">Physical, immediate, in-scene consequence</div>
+        </div>
+
+        <div class="check-list">
+          <div class="check-item">
+            <span class="check-item__icon--pass">&#10003;</span> Smooth T→A→P flow
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--pass">&#10003;</span> Physical, immediate Price
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--pass">&#10003;</span> Embodiment inside Action
+          </div>
+        </div>
+      </div>
+
+      <!-- INCORRECT column -->
+      <div class="compare-column compare-column--incorrect scroll-enter" style="position:relative;">
+
+        <!-- Bypass arrow (drawn via SVG) -->
+        <div class="bypass-arrow scroll-enter" aria-label="Bypass arrow from Trigger to Price">
+          <svg viewBox="0 0 40 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 15 C28 15, 32 60, 32 80 C32 95, 28 105, 8 105"
+                  stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+            <path d="M8 100 L8 108 L14 104 Z" fill="var(--danger)"/>
+          </svg>
+          <div class="bypass-arrow__label">bypass</div>
+        </div>
+
+        <div class="compare-column__title">&#10007; Incorrect</div>
+
+        <!-- Trigger -->
+        <div class="flow-node">
+          <div class="flow-node__name">Trigger</div>
+          <div class="flow-node__desc">Event happens → shortcut begins</div>
+        </div>
+
+        <div class="flow-arrow-down">&#8595;</div>
+
+        <!-- Action (empty — no embodiment) -->
+        <div class="flow-node flow-node--empty">
+          <div class="flow-node__name">Action</div>
+          <div class="flow-node__desc">No embodiment — hollow response</div>
+        </div>
+
+        <div class="flow-arrow-down" style="opacity:0.3;">&#8595;</div>
+
+        <!-- Price (deferred/abstract) -->
+        <div class="flow-node" style="border-left: 2px solid var(--accent-amber);">
+          <div class="flow-node__name">Price</div>
+          <div class="flow-node__desc price-deferred">Abstract, deferred — "will regret later", non-physical</div>
+        </div>
+
+        <div class="check-list">
+          <div class="check-item">
+            <span class="check-item__icon--fail">&#10007;</span> Bypass arrow (Trigger → Price)
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--fail">&#10007;</span> No embodiment in Action
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--fail">&#10007;</span> Deferred, abstract Price
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:800px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--violet">Embodiment Protocol: E04</span>
+    <span class="badge badge--cyan">Card anatomy: E01</span>
+    <span class="badge badge--cyan">Antipatterns: E12</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

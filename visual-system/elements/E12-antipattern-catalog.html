@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E12 — Antipattern Catalog | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .ap-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--gap-sm);
+    }
+
+    .ap-card {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-sm) var(--gap-md);
+      position: relative;
+      cursor: default;
+      transition: transform 0.2s var(--ease-out-expo),
+                  box-shadow 0.2s var(--ease-out-expo),
+                  opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .ap-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .ap-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .ap-card__id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 450;
+      color: var(--accent-cyan);
+      opacity: 0.7;
+    }
+
+    .ap-card__symptom {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .ap-card__cause {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 4px;
+      /* Truncate by default */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ap-card__fix {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--success);
+      line-height: 1.4;
+      /* Hidden until hover */
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s var(--ease-out-expo);
+    }
+
+    .ap-card:hover .ap-card__fix {
+      max-height: 60px;
+    }
+
+    .ap-card:hover .ap-card__cause {
+      -webkit-line-clamp: unset;
+    }
+
+    /* Scroll animation */
+    .ap-card {
+      opacity: 0;
+    }
+
+    .ap-card.is-visible {
+      opacity: 1;
+    }
+
+    /* Stagger per row */
+    .ap-card:nth-child(1)  { transition-delay: 0ms; }
+    .ap-card:nth-child(2)  { transition-delay: 40ms; }
+    .ap-card:nth-child(3)  { transition-delay: 80ms; }
+    .ap-card:nth-child(4)  { transition-delay: 120ms; }
+    .ap-card:nth-child(5)  { transition-delay: 160ms; }
+    .ap-card:nth-child(6)  { transition-delay: 200ms; }
+    .ap-card:nth-child(7)  { transition-delay: 240ms; }
+    .ap-card:nth-child(8)  { transition-delay: 280ms; }
+    .ap-card:nth-child(9)  { transition-delay: 320ms; }
+    .ap-card:nth-child(10) { transition-delay: 360ms; }
+    .ap-card:nth-child(11) { transition-delay: 400ms; }
+    .ap-card:nth-child(12) { transition-delay: 440ms; }
+    .ap-card:nth-child(13) { transition-delay: 480ms; }
+    .ap-card:nth-child(14) { transition-delay: 520ms; }
+    .ap-card:nth-child(15) { transition-delay: 560ms; }
+
+    @media (max-width: 900px) {
+      .ap-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ap-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el mini-map__el--active">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E12</span>
+    <h1 class="element-title">Antipattern Catalog</h1>
+    <p class="element-subtitle">Pattern: P5 — Grid / Matrix &middot; Source: Part 8 (AP-1 through AP-15)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="ap-grid">
+
+      <!-- AP-1 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-1</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Token Bloat</div>
+        <div class="ap-card__cause">Description exceeds budget</div>
+        <div class="ap-card__fix">Trim to standard budget. Move detail to Lorebook.</div>
+      </div>
+
+      <!-- AP-2 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-2</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Missing Price</div>
+        <div class="ap-card__cause">Anchor has no consequence</div>
+        <div class="ap-card__fix">Add physical, in-scene Price to every Anchor.</div>
+      </div>
+
+      <!-- AP-3 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-3</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Voice in Description</div>
+        <div class="ap-card__cause">Voice patterns written in Description block</div>
+        <div class="ap-card__fix">Move all voice to Examples. Description = facts only.</div>
+      </div>
+
+      <!-- AP-4 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-4</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">GHOST in SP</div>
+        <div class="ap-card__cause">SPINE elements placed in System Prompt</div>
+        <div class="ap-card__fix">Move SPINE to Description. SP = container only.</div>
+      </div>
+
+      <!-- AP-5 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-5</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">RepPen &gt; 1.10</div>
+        <div class="ap-card__cause">Repetition Penalty set too high</div>
+        <div class="ap-card__fix">Keep RepPen 1.0–1.05. Use MinP instead.</div>
+      </div>
+
+      <!-- AP-6 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-6</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">No Anti-godmoding</div>
+        <div class="ap-card__cause">Missing 2-line anti-godmoding in SP</div>
+        <div class="ap-card__fix">Add negative + positive constraint lines to SP.</div>
+      </div>
+
+      <!-- AP-7 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-7</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Presence Penalty &gt; 0</div>
+        <div class="ap-card__cause">PP > 0 breaks character consistency</div>
+        <div class="ap-card__fix">Set PP = 0.0 always. No exceptions.</div>
+      </div>
+
+      <!-- AP-8 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-8</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">GHOST Without Anchors</div>
+        <div class="ap-card__cause">SPINE defined but no Anchors to express it</div>
+        <div class="ap-card__fix">Add FLAW-linked Anchors to Examples block.</div>
+      </div>
+
+      <!-- AP-9 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-9</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Broken SPINE</div>
+        <div class="ap-card__cause">SPINE elements don't form causal chain</div>
+        <div class="ap-card__fix">Verify GHOST→LIE→FLAW→NEED→WANT causal flow.</div>
+      </div>
+
+      <!-- AP-10 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-10</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">CoT Overload</div>
+        <div class="ap-card__cause">Excessive CoT on small models</div>
+        <div class="ap-card__fix">Use Tier 0–1 for 12B, Tier 1–2 for 32B.</div>
+      </div>
+
+      <!-- AP-11 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-11</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Voice Bleed</div>
+        <div class="ap-card__cause">Character voice drifts toward narrator style</div>
+        <div class="ap-card__fix">Isolate voice in Examples. Add Author's Note reinforcement.</div>
+      </div>
+
+      <!-- AP-12 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-12</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">XML Malformed</div>
+        <div class="ap-card__cause">Tags not properly closed or nested</div>
+        <div class="ap-card__fix">Validate all XML tags. Use Format Lock (1 system).</div>
+      </div>
+
+      <!-- AP-13 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-13</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Lorebook Conflict</div>
+        <div class="ap-card__cause">Lorebook entry contradicts Description</div>
+        <div class="ap-card__fix">Audit Lorebook for consistency with Description.</div>
+      </div>
+
+      <!-- AP-14 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-14</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Context Violation</div>
+        <div class="ap-card__cause">Total card exceeds model context window</div>
+        <div class="ap-card__fix">Run Budget Check. Trim or use Lorebook for overflow.</div>
+      </div>
+
+      <!-- AP-15 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-15</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Nested Anchors</div>
+        <div class="ap-card__cause">Anchors referencing other Anchors recursively</div>
+        <div class="ap-card__fix">Flatten Anchor structure. One level of reference only.</div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:900px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--cyan">Diagnostics: E13</span>
+    <span class="badge badge--violet">Anchors: E03</span>
+    <span class="badge badge--cyan">Sampling: E17</span>
+    <span class="badge badge--cyan">Assembly: E02</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

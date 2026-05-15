@@ -1,0 +1,196 @@
+/* ============================================================
+   Live Character Guide — Layout Patterns (P1–P6)
+   Reusable layout primitives. Colors/content set per-element.
+   ============================================================ */
+
+/* --- P1 — Stack / Layers --- */
+.p-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.p-stack > * {
+  position: relative;
+}
+
+/* Dividers between stacked children */
+.p-stack--divided > * + * {
+  border-top: var(--line-width) solid var(--border);
+  padding-top: var(--gap-md);
+}
+
+/* --- P2 — Flow / Pipeline --- */
+.p-flow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-lg);
+  flex-wrap: wrap;
+}
+
+/* Arrow connectors between flow children */
+.p-flow--arrows > * + *::before {
+  content: '→';
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--accent-cyan);
+  margin-right: var(--gap-sm);
+}
+
+/* Vertical flow variant */
+.p-flow--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.p-flow--vertical.p-flow--arrows > * + *::before {
+  content: '↓';
+  margin-right: 0;
+  text-align: center;
+  margin-bottom: var(--gap-xs);
+}
+
+/* --- P3 — Tree / Branching --- */
+.p-tree {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-sm);
+}
+
+.p-tree ul {
+  list-style: none;
+  padding-left: var(--gap-lg);
+  position: relative;
+}
+
+/* Connector lines for tree branches */
+.p-tree ul::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: var(--gap-sm);
+  width: var(--line-width);
+  background: var(--border);
+}
+
+.p-tree li {
+  position: relative;
+  padding-left: var(--gap-md);
+}
+
+.p-tree li::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: var(--gap-md);
+  height: var(--line-width);
+  background: var(--border);
+}
+
+/* --- P4 — Radial / Hub --- */
+.p-radial {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.p-radial__hub {
+  position: relative;
+  z-index: 2;
+}
+
+.p-radial__spoke {
+  position: absolute;
+  z-index: 1;
+  transform-origin: center center;
+}
+
+/* --- P5 — Comparison / Bars --- */
+.p-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+  align-items: start;
+}
+
+/* Multi-column variant for 3+ columns */
+.p-compare--3col {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Grouped bars layout */
+.p-compare--bars {
+  grid-template-columns: 1fr;
+  gap: var(--gap-sm);
+}
+
+/* --- P6 — Blueprint --- */
+.p-blueprint {
+  position: relative;
+  background:
+    /* Blueprint grid at 3% opacity */
+    linear-gradient(rgba(60,200,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(60,200,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: var(--line-width) solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-xl);
+  overflow: hidden;
+}
+
+/* Callout line positioning system */
+.p-blueprint__callout {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+}
+
+.p-blueprint__callout-line {
+  width: 40px;
+  height: var(--line-width);
+  background: var(--accent-cyan);
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.p-blueprint__callout-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+  .p-flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .p-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .p-compare--3col {
+    grid-template-columns: 1fr;
+  }
+
+  .p-radial {
+    min-height: 300px;
+  }
+
+  .p-blueprint {
+    padding: var(--gap-lg);
+  }
+}

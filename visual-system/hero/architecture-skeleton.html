@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Skeleton — Hero 3D Scene | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    #hero-canvas {
+      width: 100%;
+      height: 80vh;
+      min-height: 500px;
+      display: block;
+      position: relative;
+    }
+
+    /* HTML overlay labels */
+    .label-overlay {
+      position: absolute;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-secondary);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-slow) var(--ease-out-expo);
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+
+    .label-overlay.is-visible {
+      opacity: 1;
+    }
+
+    .label-overlay--sp { color: var(--accent-cyan); }
+    .label-overlay--desc { color: var(--accent-cyan); }
+    .label-overlay--examples { color: var(--accent-cyan); }
+    .label-overlay--anchors { color: var(--accent-violet); }
+    .label-overlay--greeting { color: var(--accent-amber); }
+
+    #hero-container {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Loading fallback */
+    .loading-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 80vh;
+      min-height: 500px;
+      background: var(--bg-deep);
+      color: var(--text-muted);
+      font-family: var(--font-heading);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header style="text-align:center; padding: var(--gap-xl) var(--gap-md);">
+    <span class="element-number">HERO</span>
+    <h1 class="element-title">Architecture Skeleton</h1>
+    <p class="element-subtitle">Three.js intro scene — card anatomy assembly animation</p>
+  </header>
+
+  <div id="hero-container">
+    <div class="loading-fallback" id="loading">Loading 3D scene...</div>
+    <canvas id="hero-canvas" style="display:none;"></canvas>
+    <!-- Labels positioned via JS -->
+    <div class="label-overlay label-overlay--sp" id="label-sp">SP</div>
+    <div class="label-overlay label-overlay--desc" id="label-desc">Description</div>
+    <div class="label-overlay label-overlay--examples" id="label-examples">Examples</div>
+    <div class="label-overlay label-overlay--anchors" id="label-anchors">Anchors</div>
+    <div class="label-overlay label-overlay--greeting" id="label-greeting">Greeting</div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+    // --- Geometry constants (easy tuning) ---
+    const SP_WIDTH = 3.0, SP_HEIGHT = 3.5, SP_DEPTH = 0.3;
+    const DESC_WIDTH = 2.6, DESC_HEIGHT = 2.8, DESC_DEPTH = 0.15;
+    const EX_WIDTH = 2.2, EX_HEIGHT = 2.0, EX_DEPTH = 0.15;
+    const ANCHOR_WIDTH = 1.2, ANCHOR_HEIGHT = 1.0, ANCHOR_DEPTH = 0.1;
+    const GREET_WIDTH = 1.8, GREET_HEIGHT = 0.8, GREET_DEPTH = 0.15;
+    const SPINE_RADIUS = 0.03, SPINE_HEIGHT = 4.0;
+    const NODE_RADIUS = 0.06;
+    const ROTATION_SPEED = 0.08; // rad/s
+    const SPINE_PULSE_MIN = 0.3, SPINE_PULSE_MAX = 0.8, SPINE_PULSE_PERIOD = 3.0;
+
+    // Colors
+    const COL_CYAN = new THREE.Color(0x3cc8ff);
+    const COL_VIOLET = new THREE.Color(0x8b5cf6);
+    const COL_AMBER = new THREE.Color(0xf0a040);
+    const COL_WHITE = new THREE.Color(0xffffff);
+    const COL_GRID = 0x111122;
+
+    // --- Scene setup ---
+    const canvas = document.getElementById('hero-canvas');
+    const container = document.getElementById('hero-container');
+    const loading = document.getElementById('loading');
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x08090d);
+
+    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / (container.clientHeight * 0.8), 0.1, 100);
+    camera.position.set(0, 2, 8);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight * 0.8);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Show canvas, hide loading
+    loading.style.display = 'none';
+    canvas.style.display = 'block';
+
+    // --- Post-processing (bloom) ---
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(container.clientWidth, container.clientHeight * 0.8),
+      0.5, 0.4, 0.85
+    );
+    composer.addPass(bloomPass);
+
+    // --- Grid floor ---
+    const grid = new THREE.GridHelper(20, 40, COL_GRID, COL_GRID);
+    grid.material.opacity = 0.15;
+    grid.material.transparent = true;
+    scene.add(grid);
+
+    // --- Assembly group (for rotation) ---
+    const assembly = new THREE.Group();
+    scene.add(assembly);
+
+    // --- SPINE axis ---
+    const spineMat = new THREE.MeshBasicMaterial({ color: COL_WHITE, transparent: true, opacity: 0.8 });
+    const spineGeo = new THREE.CylinderGeometry(SPINE_RADIUS, SPINE_RADIUS, SPINE_HEIGHT, 8);
+    const spineMesh = new THREE.Mesh(spineGeo, spineMat);
+    spineMesh.position.y = 0;
+    assembly.add(spineMesh);
+
+    // --- Helper: create plane with edges ---
+    function createPlane(w, h, d, fillColor, edgeColor, fillOpacity, edgeOpacity) {
+      const group = new THREE.Group();
+      // Fill
+      const fillGeo = new THREE.BoxGeometry(w, h, d);
+      const fillMat = new THREE.MeshBasicMaterial({
+        color: fillColor, transparent: true, opacity: fillOpacity, side: THREE.DoubleSide
+      });
+      group.add(new THREE.Mesh(fillGeo, fillMat));
+      // Edges
+      const edgeGeo = new THREE.EdgesGeometry(fillGeo);
+      const edgeMat = new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: edgeOpacity });
+      group.add(new THREE.LineSegments(edgeGeo, edgeMat));
+      return group;
+    }
+
+    // --- SP frame (wireframe only) ---
+    const spFrame = createPlane(SP_WIDTH, SP_HEIGHT, SP_DEPTH, COL_CYAN, COL_CYAN, 0, 0.6);
+    spFrame.position.set(0, 0, 0);
+    assembly.add(spFrame);
+
+    // --- Description plane ---
+    const descPlane = createPlane(DESC_WIDTH, DESC_HEIGHT, DESC_DEPTH, COL_CYAN, COL_CYAN, 0.12, 0.5);
+    descPlane.position.set(0, 0, 0.3);
+    assembly.add(descPlane);
+
+    // --- Examples plane ---
+    const exPlane = createPlane(EX_WIDTH, EX_HEIGHT, EX_DEPTH, COL_CYAN, COL_CYAN, 0.12, 0.5);
+    exPlane.position.set(0, 0, 0.5);
+    assembly.add(exPlane);
+
+    // --- Anchors inset ---
+    const anchorPlane = createPlane(ANCHOR_WIDTH, ANCHOR_HEIGHT, ANCHOR_DEPTH, COL_VIOLET, COL_VIOLET, 0.15, 0.5);
+    anchorPlane.position.set(0.3, -0.2, 0.6);
+    assembly.add(anchorPlane);
+
+    // --- Greeting plane ---
+    const greetPlane = createPlane(GREET_WIDTH, GREET_HEIGHT, GREET_DEPTH, COL_AMBER, COL_AMBER, 0.12, 0.5);
+    greetPlane.position.set(0, -1.2, 0.3);
+    assembly.add(greetPlane);
+
+    // --- Connection lines from SPINE to planes ---
+    function createConnectionLine(targetPos) {
+      const points = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z)];
+      const geo = new THREE.BufferGeometry().setFromPoints(points);
+      const mat = new THREE.LineBasicMaterial({ color: COL_CYAN, transparent: true, opacity: 0.25 });
+      return new THREE.Line(geo, mat);
+    }
+
+    const connLines = [
+      createConnectionLine(descPlane.position),
+      createConnectionLine(exPlane.position),
+      createConnectionLine(anchorPlane.position),
+      createConnectionLine(greetPlane.position),
+    ];
+    connLines.forEach(l => assembly.add(l));
+
+    // --- Node spheres ---
+    const nodeGeo = new THREE.SphereGeometry(NODE_RADIUS, 12, 12);
+    const nodePositions = [
+      descPlane.position, exPlane.position, anchorPlane.position, greetPlane.position
+    ];
+    const nodes = nodePositions.map(pos => {
+      const mat = new THREE.MeshBasicMaterial({ color: COL_CYAN, transparent: true, opacity: 0.9 });
+      const mesh = new THREE.Mesh(nodeGeo, mat);
+      mesh.position.copy(pos);
+      assembly.add(mesh);
+      return mesh;
+    });
+
+    // --- Animation state ---
+    const clock = new THREE.Clock();
+    let startTime = null;
+    let assemblyStarted = false;
+
+    // Initial positions (hidden or off-screen)
+    const initialPositions = {
+      spine: { y: 0, opacity: 0 },
+      sp: { x: -8 },
+      desc: { y: -4 },
+      ex: { x: 6 },
+      anchor: { scale: 0 },
+      greet: { y: 3 },
+    };
+
+    // Target positions
+    const targetPositions = {
+      spine: { y: 0, opacity: 0.8 },
+      sp: { x: 0 },
+      desc: { y: 0 },
+      ex: { x: 0 },
+      anchor: { scale: 1 },
+      greet: { y: -1.2 },
+    };
+
+    // Hide everything initially
+    spineMesh.material.opacity = 0;
+    spFrame.position.x = -8;
+    descPlane.position.y = -4;
+    exPlane.position.x = 6;
+    anchorPlane.scale.set(0, 0, 0);
+    greetPlane.position.y = 3;
+    connLines.forEach(l => l.material.opacity = 0);
+    nodes.forEach(n => n.material.opacity = 0);
+
+    // --- Animation timeline ---
+    function easeOutExpo(t) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function animateValue(current, target, progress) {
+      return current + (target - current) * easeOutExpo(progress);
+    }
+
+    // Labels
+    const labels = {
+      sp: document.getElementById('label-sp'),
+      desc: document.getElementById('label-desc'),
+      examples: document.getElementById('label-examples'),
+      anchors: document.getElementById('label-anchors'),
+      greeting: document.getElementById('label-greeting'),
+    };
+
+    function updateLabelPosition(label, position3D) {
+      const vector = position3D.clone();
+      vector.applyMatrix4(assembly.matrixWorld);
+      vector.project(camera);
+      const x = (vector.x * 0.5 + 0.5) * container.clientWidth;
+      const y = (-vector.y * 0.5 + 0.5) * container.clientHeight * 0.8;
+      label.style.left = x + 'px';
+      label.style.top = y + 'px';
+    }
+
+    // --- Main animation loop ---
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsed = clock.getElapsedTime();
+      if (startTime === null) startTime = elapsed;
+      const t = elapsed - startTime;
+
+      // Timeline animations
+      // 0.0–0.5: SPINE fades in
+      if (t >= 0.0 && t < 0.5) {
+        const p = (t - 0.0) / 0.6;
+        spineMesh.material.opacity = Math.min(0.8, easeOutExpo(Math.max(0, p)));
+      } else if (t >= 0.5) {
+        spineMesh.material.opacity = 0.8;
+      }
+
+      // 1.2–2.0: SP flies in
+      if (t >= 1.2 && t < 2.0) {
+        const p = (t - 1.2) / 0.8;
+        spFrame.position.x = animateValue(-8, 0, Math.min(1, p));
+      } else if (t >= 2.0) {
+        spFrame.position.x = 0;
+      }
+
+      // 2.0–2.7: Description rises
+      if (t >= 2.0 && t < 2.7) {
+        const p = (t - 2.0) / 0.7;
+        descPlane.position.y = animateValue(-4, 0, Math.min(1, p));
+      } else if (t >= 2.7) {
+        descPlane.position.y = 0;
+      }
+
+      // 2.8–3.5: Examples slides
+      if (t >= 2.8 && t < 3.5) {
+        const p = (t - 2.8) / 0.7;
+        exPlane.position.x = animateValue(6, 0, Math.min(1, p));
+      } else if (t >= 3.5) {
+        exPlane.position.x = 0;
+      }
+
+      // 3.4–3.8: Anchors pops
+      if (t >= 3.4 && t < 3.8) {
+        const p = (t - 3.4) / 0.4;
+        const s = easeOutExpo(Math.min(1, p)) * 1.1; // overshoot
+        anchorPlane.scale.set(s, s, s);
+      } else if (t >= 3.8) {
+        anchorPlane.scale.set(1, 1, 1);
+      }
+
+      // 3.9–4.5: Greeting drops
+      if (t >= 3.9 && t < 4.5) {
+        const p = (t - 3.9) / 0.6;
+        greetPlane.position.y = animateValue(3, -1.2, Math.min(1, p));
+      } else if (t >= 4.5) {
+        greetPlane.position.y = -1.2;
+      }
+
+      // 4.5–6.5: Connection lines draw + nodes appear
+      if (t >= 4.5) {
+        const p = Math.min(1, (t - 4.5) / 2.0);
+        connLines.forEach(l => l.material.opacity = 0.25 * easeOutExpo(p));
+        nodes.forEach(n => n.material.opacity = 0.9 * easeOutExpo(Math.max(0, (p - 0.3) / 0.7)));
+      }
+
+      // 6.5+: Slow rotation + SPINE pulse
+      if (t >= 6.5 && !assemblyStarted) {
+        assemblyStarted = true;
+      }
+
+      if (assemblyStarted) {
+        assembly.rotation.y += ROTATION_SPEED * clock.getDelta() || 0.001;
+
+        // SPINE pulse
+        const pulseT = (t % SPINE_PULSE_PERIOD) / SPINE_PULSE_PERIOD;
+        const pulseVal = SPINE_PULSE_MIN + (SPINE_PULSE_MAX - SPINE_PULSE_MIN) * (0.5 + 0.5 * Math.sin(pulseT * Math.PI * 2));
+        spineMesh.material.opacity = pulseVal;
+
+        // Node pulse (in sync)
+        nodes.forEach(n => n.material.opacity = 0.5 + 0.4 * Math.sin(pulseT * Math.PI * 2));
+
+        // Camera sway
+        camera.position.x = Math.sin(t * 0.785) * 0.3; // 8s period
+        camera.lookAt(0, 0, 0);
+      }
+
+      // Labels (fade in after their plane lands)
+      if (t >= 2.0) labels.sp.classList.add('is-visible');
+      if (t >= 2.7) labels.desc.classList.add('is-visible');
+      if (t >= 3.5) labels.examples.classList.add('is-visible');
+      if (t >= 3.8) labels.anchors.classList.add('is-visible');
+      if (t >= 4.5) labels.greeting.classList.add('is-visible');
+
+      // Update label positions
+      if (assemblyStarted) {
+        updateLabelPosition(labels.sp, spFrame.position);
+        updateLabelPosition(labels.desc, descPlane.position);
+        updateLabelPosition(labels.examples, exPlane.position);
+        updateLabelPosition(labels.anchors, anchorPlane.position);
+        updateLabelPosition(labels.greeting, greetPlane.position);
+      }
+
+      composer.render();
+    }
+
+    animate();
+
+    // --- Resize handler ---
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / (container.clientHeight * 0.8);
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight * 0.8);
+      composer.setSize(container.clientWidth, container.clientHeight * 0.8);
+    });
+  </script>
+</body>
+</html>

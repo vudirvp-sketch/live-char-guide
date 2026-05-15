@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E04 — Embodiment Protocol | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .funnel-stack {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Link-back annotation */
+    .link-back {
+      font-family: var(--font-micro);
+      font-size: 11px;
+      color: var(--accent-violet);
+      margin-bottom: var(--gap-lg);
+      padding: 4px 12px;
+      background: rgba(139,92,246,0.08);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Funnel bar — decreasing width */
+    .funnel-bar {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-violet);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-md) var(--gap-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* Decreasing widths: 100%, 85%, 70%, 55% */
+    .funnel-bar:nth-of-type(1) { width: 100%; }
+    .funnel-bar:nth-of-type(3) { width: 85%; }
+    .funnel-bar:nth-of-type(5) { width: 70%; }
+    .funnel-bar:nth-of-type(7) { width: 55%; }
+
+    .funnel-bar__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .funnel-bar__example {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 450;
+      text-align: right;
+    }
+
+    /* Arrow between bars */
+    .funnel-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--gap-xs) 0;
+      color: var(--accent-violet);
+    }
+
+    .funnel-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Depth indicator */
+    .depth-label {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+    }
+
+    /* Scroll animations */
+    .funnel-bar {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+
+    .funnel-bar.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .funnel-bar:nth-of-type(1) { transition-delay: 0ms; }
+    .funnel-bar:nth-of-type(3) { transition-delay: 100ms; }
+    .funnel-bar:nth-of-type(5) { transition-delay: 200ms; }
+    .funnel-bar:nth-of-type(7) { transition-delay: 300ms; }
+
+    @media (max-width: 768px) {
+      .funnel-bar {
+        width: 100% !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--gap-xs);
+      }
+      .funnel-bar__example {
+        text-align: left;
+      }
+      .depth-label {
+        position: static;
+        transform: none;
+        margin-top: 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el mini-map__el--active">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E04</span>
+    <h1 class="element-title">Embodiment Protocol</h1>
+    <p class="element-subtitle">Pattern: P1 — Stack / Layers (compact) &middot; Source: Part 2 (State → Body → Sensor → Speech)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="funnel-stack">
+      <div class="link-back">
+        Embodiment = mechanism inside Anchor Action → See E03
+      </div>
+
+      <!-- State — widest -->
+      <div class="funnel-bar scroll-enter">
+        <div>
+          <div class="funnel-bar__name">State</div>
+        </div>
+        <div class="funnel-bar__example">"Heart pounding, palms damp"</div>
+        <div class="depth-label">Internal</div>
+      </div>
+
+      <div class="funnel-arrow">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L8 12 M4 8 L8 12 L12 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Body — slightly narrower -->
+      <div class="funnel-bar scroll-enter">
+        <div>
+          <div class="funnel-bar__name">Body</div>
+        </div>
+        <div class="funnel-bar__example">"Shoulders tense, jaw tight"</div>
+        <div class="depth-label">Physical</div>
+      </div>
+
+      <div class="funnel-arrow">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L8 12 M4 8 L8 12 L12 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Sensor — narrower still -->
+      <div class="funnel-bar scroll-enter">
+        <div>
+          <div class="funnel-bar__name">Sensor</div>
+        </div>
+        <div class="funnel-bar__example">"Smell of antiseptic, cold metal"</div>
+        <div class="depth-label">Perceptual</div>
+      </div>
+
+      <div class="funnel-arrow">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2 L8 12 M4 8 L8 12 L12 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Speech — narrowest -->
+      <div class="funnel-bar scroll-enter">
+        <div>
+          <div class="funnel-bar__name">Speech</div>
+        </div>
+        <div class="funnel-bar__example">"I... I can't do this."</div>
+        <div class="depth-label">Output</div>
+      </div>
+
+    </div>
+
+    <!-- Explanation -->
+    <div class="panel" style="max-width:600px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
+        Filtration Metaphor
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+        Each layer narrows: internal state is broad and raw, speech is refined and filtered output.
+        The decreasing width physically represents how a character's complex inner world
+        compresses into a single spoken line. Embodiment is <strong style="color:var(--text-primary);">always</strong>
+        applied — every response must pass through all four layers.
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:600px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--violet">Behavioral Anchors: E03</span>
+    <span class="badge badge--cyan">CORE DIRECTIVES: E08</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

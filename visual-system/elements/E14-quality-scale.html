@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E14 — Quality Scale | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .quality-container {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      gap: var(--gap-xl);
+      align-items: flex-start;
+    }
+
+    /* Thermometer bar */
+    .thermometer {
+      width: 60px;
+      flex-shrink: 0;
+      position: relative;
+      height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-deep);
+    }
+
+    .thermometer__fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      transition: height 800ms var(--ease-out-expo);
+    }
+
+    .thermometer__zone {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thermometer__zone-label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+
+    /* Zone boundaries: 0-25%, 25-50%, 50-85%, 85-100% */
+    .zone-critical { bottom: 0; height: 25%; background: rgba(217,69,90,0.15); }
+    .zone-poor     { bottom: 25%; height: 25%; background: rgba(240,160,64,0.1); }
+    .zone-good     { bottom: 50%; height: 35%; background: rgba(60,200,255,0.08); }
+    .zone-excellent { bottom: 85%; height: 15%; background: rgba(139,92,246,0.12); }
+
+    /* Indicator line */
+    .indicator {
+      position: absolute;
+      left: -8px;
+      right: -8px;
+      height: 2px;
+      background: var(--accent-cyan);
+      z-index: 2;
+      box-shadow: var(--glow-cyan);
+      transition: bottom 400ms var(--ease-out-expo);
+    }
+
+    .indicator__marker {
+      position: absolute;
+      left: -6px;
+      top: -5px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid var(--accent-cyan);
+    }
+
+    /* Zone descriptions */
+    .zone-details {
+      flex: 1;
+    }
+
+    .zone-detail {
+      padding: var(--gap-sm) var(--gap-md);
+      margin-bottom: var(--gap-sm);
+      border-radius: var(--radius-sm);
+      border-left: var(--line-bold) solid;
+    }
+
+    .zone-detail--critical {
+      background: rgba(217,69,90,0.06);
+      border-left-color: var(--danger);
+    }
+
+    .zone-detail--poor {
+      background: rgba(240,160,64,0.06);
+      border-left-color: var(--accent-amber);
+    }
+
+    .zone-detail--good {
+      background: rgba(60,200,255,0.06);
+      border-left-color: var(--accent-cyan);
+    }
+
+    .zone-detail--excellent {
+      background: rgba(139,92,246,0.06);
+      border-left-color: var(--accent-violet);
+    }
+
+    .zone-detail__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .zone-detail__range {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .zone-detail__criteria {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* Quick Checks */
+    .quick-checks {
+      margin-top: var(--gap-lg);
+      padding: var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .quick-checks__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .quick-check-item {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      padding: var(--gap-xs) 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .quick-check-item.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .quick-check-item:nth-child(2) { transition-delay: 60ms; }
+    .quick-check-item:nth-child(3) { transition-delay: 120ms; }
+    .quick-check-item:nth-child(4) { transition-delay: 180ms; }
+    .quick-check-item:nth-child(5) { transition-delay: 240ms; }
+    .quick-check-item:nth-child(6) { transition-delay: 300ms; }
+
+    .quick-check-item__checkbox {
+      width: 14px;
+      height: 14px;
+      border: var(--line-width) solid var(--border-active);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Scroll animation for thermometer */
+    .thermometer {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .thermometer.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .quality-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .thermometer {
+        width: 100%;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el mini-map__el--active">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E14</span>
+    <h1 class="element-title">Quality Scale</h1>
+    <p class="element-subtitle">Pattern: P1 — Stack (thermometer variant) &middot; Source: Part 9 (Quality Scale, Pre-Deploy)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="quality-container scroll-enter">
+
+      <!-- Thermometer -->
+      <div class="thermometer scroll-enter">
+        <div class="thermometer__zone zone-critical"><span class="thermometer__zone-label">Critical</span></div>
+        <div class="thermometer__zone zone-poor"><span class="thermometer__zone-label">Poor</span></div>
+        <div class="thermometer__zone zone-good"><span class="thermometer__zone-label">Good</span></div>
+        <div class="thermometer__zone zone-excellent"><span class="thermometer__zone-label">Excellent</span></div>
+        <div class="indicator" style="bottom:50%;">
+          <div class="indicator__marker"></div>
+        </div>
+      </div>
+
+      <!-- Zone descriptions -->
+      <div class="zone-details">
+        <div class="zone-detail zone-detail--excellent">
+          <div class="zone-detail__title" style="color:var(--accent-violet);">Excellent</div>
+          <div class="zone-detail__range">85–100%</div>
+          <div class="zone-detail__criteria">Passes all 14 Pre-Deploy checks: Voice isolation, Anchor quality, Token budget compliance, SPINE consistency, Embodiment completeness, No antipatterns, Format Lock valid, Sampling correct, Anti-godmoding present, Context limits respected.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--good">
+          <div class="zone-detail__title" style="color:var(--accent-cyan);">Good</div>
+          <div class="zone-detail__range">50–85%</div>
+          <div class="zone-detail__criteria">Stable 10+ messages, recognizable voice, Price appears consistently in Anchors. Core structure is sound but may have minor sampling or budget issues.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--poor">
+          <div class="zone-detail__title" style="color:var(--accent-amber);">Poor</div>
+          <div class="zone-detail__range">25–50%</div>
+          <div class="zone-detail__criteria">Follows basic rules but character drifts after 5–10 messages. Anchors present but ineffective. SPINE defined but not expressed through Anchors.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--critical">
+          <div class="zone-detail__title" style="color:var(--danger);">Critical</div>
+          <div class="zone-detail__range">0–25%</div>
+          <div class="zone-detail__criteria">Violates 2+ basic rules: no Price, voice in Description, PP > 0. Character is fundamentally broken. Requires full rework.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Pre-Deploy Checks -->
+    <div class="quick-checks" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div class="quick-checks__title">5 Quick Pre-Deploy Checks</div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        PP = 0.0 (Presence Penalty is zero)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Voice only in Examples (not in Description or SP)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Price in every Anchor (physical, in-scene)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Format Lock (1 consistent XML system)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Anti-godmoding (2 lines in SP)
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--cyan">Diagnostics: E13</span>
+    <span class="badge badge--cyan">Antipatterns: E12</span>
+    <span class="badge badge--cyan">Sampling: E17</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter, .quick-check-item').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter, .quick-check-item').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E06 — GHOST Layers | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .ghost-rings {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      aspect-ratio: 1 / 0.8;
+    }
+
+    .ghost-rings svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ring labels — positioned on the right side */
+    .ring-label {
+      position: absolute;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ring-label__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .ring-label__timeline {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .ring-label__event {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .ring-label__causal {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--accent-violet);
+      opacity: 0.7;
+    }
+
+    /* Position labels at different heights */
+    .ring-label--g3 { top: 8%; }
+    .ring-label--g2 { top: 38%; }
+    .ring-label--g1 { top: 65%; }
+
+    /* Scroll animations */
+    .ghost-rings svg circle.ring-anim {
+      transform-origin: center;
+      transform: scale(0);
+      transition: transform 600ms var(--ease-out-expo);
+    }
+
+    .ghost-rings svg circle.ring-anim.is-visible {
+      transform: scale(1);
+    }
+
+    .ghost-rings svg text.ring-text-anim {
+      opacity: 0;
+      transition: opacity 400ms var(--ease-out-expo);
+    }
+
+    .ghost-rings svg text.ring-text-anim.is-visible {
+      opacity: 1;
+    }
+
+    .ring-label {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .ring-label.is-visible {
+      opacity: 1;
+    }
+
+    .ring-label--g3 { transition-delay: 200ms; }
+    .ring-label--g2 { transition-delay: 400ms; }
+    .ring-label--g1 { transition-delay: 600ms; }
+
+    /* Link back */
+    .ghost-link-back {
+      text-align: center;
+      margin-top: var(--gap-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el mini-map__el--active">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E06</span>
+    <h1 class="element-title">GHOST Layers</h1>
+    <p class="element-subtitle">Pattern: P4 — Concentric rings &middot; Source: Part 4 (GHOST Layers: 3-tier trauma depth)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="ghost-rings scroll-enter">
+      <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GHOST Layers: three concentric rings showing trauma depth from G1 (origin/core) to G3 (surface/present)">
+        <title>GHOST Layers — 3-tier trauma depth visualization</title>
+
+        <!-- Background radial gradient -->
+        <defs>
+          <radialGradient id="ghost-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(139,92,246,0.15)"/>
+            <stop offset="100%" stop-color="var(--bg-deep)"/>
+          </radialGradient>
+          <!-- Core glow -->
+          <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(139,92,246,0.35)"/>
+            <stop offset="100%" stop-color="rgba(139,92,246,0)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Background -->
+        <rect width="600" height="480" fill="url(#ghost-grad)"/>
+
+        <!-- G3 — Surface (outer ring) — lightest violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
+                stroke="rgba(139,92,246,0.25)" stroke-width="1.5" style="transition-delay:0ms;"/>
+
+        <!-- G2 — Secondary (middle ring) — medium violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
+                stroke="rgba(139,92,246,0.35)" stroke-width="1.5" style="transition-delay:200ms;"/>
+
+        <!-- G1 — Core (inner ring) — deep violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
+                stroke="rgba(139,92,246,0.55)" stroke-width="1.5" style="transition-delay:400ms;"/>
+
+        <!-- Core glow -->
+        <circle class="ring-anim" cx="260" cy="240" r="30" fill="url(#core-glow)" style="transition-delay:500ms;"/>
+
+        <!-- Ring text labels inside SVG -->
+        <text class="ring-text-anim" x="260" y="100" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-heading)" font-size="12" font-weight="600"
+              style="transition-delay:600ms;">G3 — Surface</text>
+        <text class="ring-text-anim" x="260" y="115" text-anchor="middle" fill="var(--text-muted)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:650ms;">"Avoids commitment"</text>
+
+        <text class="ring-text-anim" x="260" y="155" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-heading)" font-size="12" font-weight="600"
+              style="transition-delay:700ms;">G2 — Secondary</text>
+        <text class="ring-text-anim" x="260" y="170" text-anchor="middle" fill="var(--text-muted)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:750ms;">"Abandoned at 16"</text>
+
+        <text class="ring-text-anim" x="260" y="230" text-anchor="middle" fill="var(--text-primary)"
+              font-family="var(--font-heading)" font-size="13" font-weight="600"
+              style="transition-delay:800ms;">G1 — Core</text>
+        <text class="ring-text-anim" x="260" y="248" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:850ms;">"Father left when I was 5"</text>
+
+      </svg>
+
+      <!-- HTML labels on the right -->
+      <div class="ring-label ring-label--g3 scroll-enter">
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Surface</div>
+        <div class="ring-label__timeline">Present: triggers now</div>
+        <div class="ring-label__event">"Avoids commitment"</div>
+        <div class="ring-label__causal">G3 → current trigger</div>
+      </div>
+
+      <div class="ring-label ring-label--g2 scroll-enter">
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Secondary</div>
+        <div class="ring-label__timeline">Youth (13–25): reinforced → strengthens FLAW</div>
+        <div class="ring-label__event">"Abandoned at 16"</div>
+        <div class="ring-label__causal">G2 → reinforced FLAW</div>
+      </div>
+
+      <div class="ring-label ring-label--g1 scroll-enter">
+        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Core</div>
+        <div class="ring-label__timeline">Childhood (0–12): origin → forms LIE</div>
+        <div class="ring-label__event">"Father left when I was 5"</div>
+        <div class="ring-label__causal">G1 → formed LIE</div>
+      </div>
+    </div>
+
+    <div class="ghost-link-back scroll-enter">
+      <span class="badge badge--violet">GHOST = Layer 1 of SPINE → E05</span>
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:700px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--violet">SPINE Framework: E05</span>
+    <span class="badge badge--cyan">OCEAN validation: E09</span>
+    <span class="badge badge--cyan">Enneagram mapping: E10</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.ring-anim, .ring-text-anim, .ring-label, .scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.ring-anim, .ring-text-anim, .ring-label, .scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

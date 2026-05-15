@@ -1,0 +1,302 @@
+/* ============================================================
+   Live Character Guide — Utility Classes
+   Glow, panel, accent-strips, labels, scroll animations
+   ============================================================ */
+
+/* --- Glow effects --- */
+.glow-cyan   { box-shadow: var(--glow-cyan); }
+.glow-violet { box-shadow: var(--glow-violet); }
+.glow-danger { box-shadow: var(--glow-danger); }
+.glow-amber  { box-shadow: var(--glow-amber); }
+
+/* --- Panel (standard card/panel) --- */
+.panel {
+  background: var(--bg-panel);
+  border: var(--line-width) solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--gap-md);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.panel--raised {
+  background: var(--bg-raised);
+  border-color: var(--border-active);
+}
+
+/* --- Accent strips (left-border accent) --- */
+.accent-strip--cyan {
+  border-left: var(--line-bold) solid var(--accent-cyan);
+  padding-left: var(--gap-md);
+}
+
+.accent-strip--violet {
+  border-left: var(--line-bold) solid var(--accent-violet);
+  padding-left: var(--gap-md);
+}
+
+.accent-strip--amber {
+  border-left: var(--line-bold) solid var(--accent-amber);
+  padding-left: var(--gap-md);
+}
+
+.accent-strip--danger {
+  border-left: var(--line-bold) solid var(--danger);
+  padding-left: var(--gap-md);
+}
+
+/* --- Labels --- */
+.label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.label-micro {
+  font-family: var(--font-micro);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* --- Badge / Pill --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 450;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.badge--cyan {
+  background: rgba(60,200,255,0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(60,200,255,0.25);
+}
+
+.badge--violet {
+  background: rgba(139,92,246,0.12);
+  color: var(--accent-violet);
+  border: 1px solid rgba(139,92,246,0.25);
+}
+
+.badge--amber {
+  background: rgba(240,160,64,0.12);
+  color: var(--accent-amber);
+  border: 1px solid rgba(240,160,64,0.25);
+}
+
+.badge--danger {
+  background: rgba(217,69,90,0.12);
+  color: var(--danger);
+  border: 1px solid rgba(217,69,90,0.25);
+}
+
+.badge--success {
+  background: rgba(63,182,139,0.12);
+  color: var(--success);
+  border: 1px solid rgba(63,182,139,0.25);
+}
+
+.badge--muted {
+  background: rgba(83,92,110,0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(83,92,110,0.25);
+}
+
+/* --- Severity dots --- */
+.severity-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.severity-dot--high {
+  background: var(--danger);
+  box-shadow: 0 0 6px rgba(217,69,90,0.4);
+}
+
+.severity-dot--medium {
+  background: var(--accent-amber);
+  box-shadow: 0 0 6px rgba(240,160,64,0.3);
+}
+
+/* --- Scroll animation trigger --- */
+.scroll-enter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+.scroll-enter--left {
+  transform: translateX(-30px);
+}
+
+.scroll-enter--right {
+  transform: translateX(30px);
+}
+
+.scroll-enter--scale {
+  transform: scale(0.9);
+}
+
+.scroll-enter.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* --- Element header --- */
+.element-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 450;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.element-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-top: var(--gap-xs);
+}
+
+.element-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: var(--gap-xs);
+}
+
+/* --- Cross-reference footer --- */
+.element-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-xl);
+  padding-top: var(--gap-md);
+  border-top: var(--line-width) solid var(--border);
+}
+
+.element-links .badge {
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.element-links .badge:hover {
+  filter: brightness(1.2);
+}
+
+/* --- Mini-map navigation --- */
+.mini-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm) var(--gap-md);
+  padding: var(--gap-sm) var(--gap-md);
+  background: var(--bg-panel);
+  border: var(--line-width) solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-micro);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: var(--gap-xl);
+  align-items: center;
+}
+
+.mini-map__section {
+  display: flex;
+  gap: var(--gap-xs);
+  align-items: center;
+}
+
+.mini-map__section-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: var(--gap-xs);
+}
+
+.mini-map__el {
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: color 0.15s, background 0.15s;
+}
+
+.mini-map__el:hover {
+  color: var(--text-secondary);
+  background: var(--bg-raised);
+}
+
+.mini-map__el--active {
+  color: var(--accent-cyan);
+  background: rgba(60,200,255,0.1);
+  position: relative;
+}
+
+.mini-map__el--active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
+/* --- Helper: mono text block --- */
+.mono-block {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* --- Helper: dashed border (optional element) --- */
+.border-dashed {
+  border-style: dashed;
+}
+
+/* --- Helper: token budget annotation --- */
+.token-annotation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* --- Interactive hover state --- */
+.hover-lift {
+  transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}

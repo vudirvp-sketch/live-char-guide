@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E17 — Sampling Parameters by Model Tier | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .params-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .params-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--gap-lg);
+    }
+
+    .param-column {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+      position: relative;
+    }
+
+    .param-column--12b {
+      opacity: 0.75;
+    }
+
+    .param-column--32b {
+      /* Normal brightness */
+    }
+
+    .param-column--api {
+      border-color: rgba(139,92,246,0.2);
+    }
+
+    .param-column__tier {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .param-column--12b .param-column__tier { color: var(--text-muted); }
+    .param-column--32b .param-column__tier { color: var(--accent-cyan); }
+    .param-column--api .param-column__tier { color: var(--accent-violet); }
+
+    .param-column__sub {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: var(--gap-md);
+    }
+
+    .param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--gap-sm) 0;
+      border-bottom: var(--line-width) solid rgba(30,36,48,0.5);
+    }
+
+    .param-row:last-child {
+      border-bottom: none;
+    }
+
+    .param-row__name {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .param-row__value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-primary);
+      font-weight: 450;
+    }
+
+    /* Danger row — PP and RepPen threshold */
+    .param-row--danger {
+      background: rgba(217,69,90,0.04);
+      margin: 0 calc(-1 * var(--gap-md));
+      padding-left: var(--gap-md);
+      padding-right: var(--gap-md);
+    }
+
+    .param-row--danger .param-row__value {
+      color: var(--danger);
+    }
+
+    /* Warning marker */
+    .danger-marker {
+      color: var(--danger);
+      font-weight: 700;
+      margin-left: 4px;
+    }
+
+    /* Amber warning row — RepPen > 1.10 */
+    .param-row--warning {
+      background: rgba(240,160,64,0.04);
+      margin: 0 calc(-1 * var(--gap-md));
+      padding-left: var(--gap-md);
+      padding-right: var(--gap-md);
+    }
+
+    .param-row--warning .param-row__value {
+      color: var(--accent-amber);
+    }
+
+    /* Sub-range annotation */
+    .sub-range {
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .sub-range__green {
+      color: var(--success);
+    }
+
+    .sub-range__amber {
+      color: var(--accent-amber);
+    }
+
+    /* Checklist section */
+    .checklist-section {
+      margin-top: var(--gap-xl);
+      padding: var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .checklist-section__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .checklist-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: var(--gap-sm);
+      padding: var(--gap-xs) 0;
+      border-bottom: var(--line-width) solid rgba(30,36,48,0.4);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .checklist-row:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-row__header {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    /* Scroll animations */
+    .param-column {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .param-column.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .param-column:nth-child(1) { transition-delay: 0ms; }
+    .param-column:nth-child(2) { transition-delay: 150ms; }
+    .param-column:nth-child(3) { transition-delay: 300ms; }
+
+    @media (max-width: 768px) {
+      .params-grid {
+        grid-template-columns: 1fr;
+      }
+      .checklist-row {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el mini-map__el--active">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E17</span>
+    <h1 class="element-title">Sampling Parameters by Model Tier</h1>
+    <p class="element-subtitle">Pattern: P5 — Comparison (grouped columns) &middot; Source: Part 7A (Sampling, Model Checklist)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="params-container scroll-enter">
+
+      <div class="params-grid">
+
+        <!-- 12B-14B column -->
+        <div class="param-column param-column--12b scroll-enter">
+          <div class="param-column__tier">12B-14B</div>
+          <div class="param-column__sub">Most constrained</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.6–0.8</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.05</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 recommended</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- 32B+ column -->
+        <div class="param-column param-column--32b scroll-enter">
+          <div class="param-column__tier">32B+</div>
+          <div class="param-column__sub">Recommended tier</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.7–1.1*</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">0.7–0.9 base</span> | <span class="sub-range__amber">0.85–1.1 checklist</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.10</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 recommended</span> | <span class="sub-range__amber">1.05–1.10 caution</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–80</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- API column -->
+        <div class="param-column param-column--api scroll-enter">
+          <div class="param-column__tier">API</div>
+          <div class="param-column__sub">Maximum flexibility</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.8–1.0</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value" style="color:var(--text-muted);">N/A</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–100</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Model Type Checklist -->
+      <div class="checklist-section scroll-enter">
+        <div class="checklist-section__title">Model Type Checklist (Part 7A)</div>
+        <div class="checklist-row checklist-row__header">
+          <span>Check</span>
+          <span>12B-14B</span>
+          <span>32B+</span>
+          <span>API</span>
+        </div>
+        <div class="checklist-row">
+          <span>Voice placement</span>
+          <span style="color:var(--danger);">Examples ONLY</span>
+          <span>Examples primary</span>
+          <span>Examples + AN</span>
+        </div>
+        <div class="checklist-row">
+          <span>XML stability</span>
+          <span style="color:var(--text-muted);">Minimal</span>
+          <span>Stable</span>
+          <span>Full</span>
+        </div>
+        <div class="checklist-row">
+          <span>CoT tier</span>
+          <span style="color:var(--text-muted);">0–1</span>
+          <span>1–2</span>
+          <span style="color:var(--accent-violet);">3</span>
+        </div>
+        <div class="checklist-row">
+          <span>Anti-godmoding</span>
+          <span style="color:var(--success);">2 lines</span>
+          <span style="color:var(--success);">2 lines</span>
+          <span style="color:var(--success);">2 lines</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:900px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--danger">Related antipatterns: AP-5, AP-7 → E12</span>
+    <span class="badge badge--cyan">CoT Tiers: E11</span>
+    <span class="badge badge--cyan">Directives: E08</span>
+    <span class="badge badge--cyan">Quality Scale: E14</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

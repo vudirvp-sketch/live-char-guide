@@ -1,0 +1,54 @@
+/* ============================================================
+   Live Character Guide — Visual System Design Tokens
+   Version: 1.2
+   All custom properties for the visual system prototypes.
+   ============================================================ */
+
+:root {
+  /* === COLORS === */
+  --bg-deep:       #08090d;
+  --bg-panel:      #0e1117;
+  --bg-raised:     #161a22;
+  --border:        #1e2430;
+  --border-active: #2a3344;
+  --text-primary:  #e2e6ed;
+  --text-secondary:#8b95a8;
+  --text-muted:    #535c6e;
+  --accent-cyan:   #3cc8ff;
+  --accent-violet: #8b5cf6;
+  --accent-amber:  #f0a040;
+  --danger:        #d9455a;
+  --success:       #3fb68b;
+
+  /* === GLOWS === */
+  --glow-cyan:   0 0 12px rgba(60,200,255,0.25);
+  --glow-violet: 0 0 12px rgba(139,92,246,0.25);
+  --glow-danger: 0 0 10px rgba(217,69,90,0.30);
+  --glow-amber:  0 0 10px rgba(240,160,64,0.25);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-heading: 'DM Sans', sans-serif;
+  --font-body:    'Geist', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-micro:   'Inter', sans-serif;
+
+  /* === SPACING === */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --line-width: 1px;
+  --line-bold:  2px;
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 16px;
+  --gap-lg: 28px;
+  --gap-xl: 48px;
+
+  /* === ANIMATION === */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 600ms;
+}

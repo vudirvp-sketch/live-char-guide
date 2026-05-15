@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E13 — Diagnostic Decision Tree | Live Character Guide Visual System</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .tree-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tree-root {
+      margin-bottom: var(--gap-lg);
+    }
+
+    .tree-root__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .tree-root__symptom {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: var(--gap-sm) var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tree-root__symptom:hover {
+      background: var(--bg-raised);
+    }
+
+    /* Collapsible sub-tree */
+    .sub-tree {
+      padding-left: var(--gap-xl);
+      border-left: var(--line-width) solid var(--border);
+      margin-left: var(--gap-md);
+      margin-top: var(--gap-sm);
+      display: none;
+    }
+
+    .sub-tree.is-open {
+      display: block;
+    }
+
+    /* Decision diamond */
+    .decision-node {
+      position: relative;
+      padding: var(--gap-sm) var(--gap-md);
+      margin: var(--gap-sm) 0;
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .decision-node__diamond {
+      width: 16px;
+      height: 16px;
+      background: transparent;
+      border: var(--line-width) solid var(--accent-cyan);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .decision-node__question {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    /* Yes/No paths */
+    .branch {
+      padding-left: var(--gap-lg);
+      margin-top: var(--gap-xs);
+    }
+
+    .branch__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .branch__label--yes {
+      color: var(--success);
+    }
+
+    .branch__label--no {
+      color: var(--text-muted);
+    }
+
+    /* Terminal diagnosis */
+    .diagnosis-node {
+      padding: var(--gap-sm) var(--gap-md);
+      margin: var(--gap-xs) 0;
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-sm);
+    }
+
+    .diagnosis-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .diagnosis-node__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    /* Scroll animation */
+    .tree-root {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .tree-root.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tree-root:nth-child(1) { transition-delay: 0ms; }
+    .tree-root:nth-child(2) { transition-delay: 100ms; }
+    .tree-root:nth-child(3) { transition-delay: 200ms; }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Foundation</span>
+      <span class="mini-map__el">E01</span>
+      <span class="mini-map__el">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Core Mechanics</span>
+      <span class="mini-map__el">E03</span>
+      <span class="mini-map__el">E04</span>
+      <span class="mini-map__el">E07</span>
+      <span class="mini-map__el">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Personality</span>
+      <span class="mini-map__el">E05</span>
+      <span class="mini-map__el">E06</span>
+      <span class="mini-map__el">E09</span>
+      <span class="mini-map__el">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Advanced</span>
+      <span class="mini-map__el">E11</span>
+      <span class="mini-map__el">E12</span>
+      <span class="mini-map__el mini-map__el--active">E13</span>
+      <span class="mini-map__el">E14</span>
+      <span class="mini-map__el">E16</span>
+      <span class="mini-map__el">E17</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E13</span>
+    <h1 class="element-title">Diagnostic Decision Tree</h1>
+    <p class="element-subtitle">Pattern: P3 — Tree / Branching &middot; Source: Part 9 (Diagnostics &amp; Testing)</p>
+  </header>
+
+  <main class="element-content" style="margin-top: var(--gap-xl);">
+
+    <div class="tree-container">
+
+      <!-- Root 1: Character drifts -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Symptom 1</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
+          "Character drifts after 5–10 messages"
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Does the character have working Anchors?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">No →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Missing Anchor Structure</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-2</span>
+                <span class="badge badge--cyan">→ AP-8</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Yes →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Is the SPINE causally consistent?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">No →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Broken SPINE Chain</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-9</span>
+                  <span class="badge badge--violet">→ E05</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Yes →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Voice Drift (Recent Chat dominance)</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-11</span>
+                  <span class="badge badge--cyan">→ E16 (AN)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root 2: Voice sounds generic -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Symptom 2</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
+          "Voice sounds generic / not distinctive"
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Is voice written in Examples only?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">No →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Voice Leak to Description/SP</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-3</span>
+                <span class="badge badge--cyan">→ AP-11</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Yes →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Are there enough dialogue examples (3+)?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">No →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Insufficient Voice Samples</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E01</span>
+                  <span class="badge badge--cyan">→ E07</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Yes →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Sampling Parameter Issue</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-5</span>
+                  <span class="badge badge--cyan">→ E17</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root 3: Character ignores actions -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Symptom 3</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" onclick="toggleTree(this)" onkeydown="if(event.key==='Enter')toggleTree(this)">
+          "Character ignores user actions"
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Is Anti-godmoding present in SP?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">No →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Missing Anti-godmoding</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-6</span>
+                <span class="badge badge--cyan">→ E02</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Yes →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Does the character use Embodiment Protocol?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">No →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Embodiment Missing</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E04</span>
+                  <span class="badge badge--cyan">→ E08 (Dir 2)</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Yes →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Influence Boundary Violation</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E08 (Dir 5)</span>
+                  <span class="badge badge--cyan">→ E03</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:800px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--cyan">Antipatterns: E12</span>
+    <span class="badge badge--violet">SPINE: E05</span>
+    <span class="badge badge--violet">Embodiment: E04</span>
+    <span class="badge badge--cyan">Quality Scale: E14</span>
+  </footer>
+
+  <script>
+    function toggleTree(el) {
+      const subTree = el.nextElementSibling;
+      const isOpen = subTree.classList.contains('is-open');
+      subTree.classList.toggle('is-open');
+      el.setAttribute('aria-expanded', !isOpen);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        document.querySelectorAll('.sub-tree').forEach(el => el.classList.add('is-open'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

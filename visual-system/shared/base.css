@@ -1,0 +1,97 @@
+/* ============================================================
+   Live Character Guide — Base Styles
+   CSS reset, body defaults, scrollbar, selection, reduced-motion
+   ============================================================ */
+
+/* --- Modern minimal reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* --- Body defaults --- */
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Scrollbar styling (thin, dark) --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-active) var(--bg-deep);
+}
+
+/* --- Selection color (cyan tint) --- */
+::selection {
+  background: rgba(60, 200, 255, 0.25);
+  color: var(--text-primary);
+}
+::-moz-selection {
+  background: rgba(60, 200, 255, 0.25);
+  color: var(--text-primary);
+}
+
+/* --- Focus indicator --- */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* --- Images --- */
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Links --- */
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Reduced motion: disable ALL animations --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
