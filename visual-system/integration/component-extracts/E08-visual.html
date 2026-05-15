@@ -1,0 +1,90 @@
+<!-- 
+  Element: E08 — CORE DIRECTIVES
+  Source: elements/E08-core-directives.html
+  Pattern: P4 — Hub-Spoke
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E08-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E08-script.js
+-->
+<div class="hub-spoke-container scroll-enter">
+
+<svg viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CORE DIRECTIVES — диаграмма «узел-лучи» с 7 директивами, исходящими из центрального узла CORE">
+        <title>CORE DIRECTIVES — 7 обязательных директив в раскладке «узел-лучи»</title>
+
+        <!-- Center node: CORE -->
+        <g class="anim-group">
+          <circle class="center-pulse" cx="350" cy="280" r="38" fill="var(--accent-cyan)" opacity="0.15"/>
+          <circle cx="350" cy="280" r="30" fill="var(--bg-panel)" stroke="var(--accent-cyan)" stroke-width="1.5"/>
+          <text x="350" y="284" text-anchor="middle" fill="var(--accent-cyan)"
+                font-family="var(--font-display)" font-size="14" font-weight="700">CORE</text>
+        </g>
+
+        <!-- Directive 1: Show Never Tell — top-left -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="150" y2="120" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="60" y="85" width="180" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="150" y="107" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">1</text>
+          <text x="150" y="123" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Показывай, не говори</text>
+          <text x="150" y="140" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Демонстрируй через поведение</text>
+        </g>
+
+        <!-- Directive 2: Embodiment First — left -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="80" y2="300" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="0" y="268" width="175" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="88" y="290" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">2</text>
+          <text x="88" y="306" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Воплощение прежде всего</text>
+          <text x="88" y="323" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">State → Body → Sensor → Speech</text>
+        </g>
+
+        <!-- Directive 3: Spatial Lock — bottom-left -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="160" y2="460" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="40" y="420" width="240" height="75" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="160" y="442" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">3</text>
+          <text x="160" y="458" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="11" font-weight="600">Пространственная и</text>
+          <text x="160" y="473" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="11" font-weight="600">анатомическая фиксация</text>
+          <text x="160" y="489" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Отслеживай расстояние, позу, вес</text>
+        </g>
+
+        <!-- Directive 4: Env Reactivity — top -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="350" y2="60" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="250" y="25" width="200" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="350" y="47" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">4</text>
+          <text x="350" y="63" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Реактивность окружения</text>
+          <text x="350" y="80" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Сенсорика через действия персонажа</text>
+        </g>
+
+        <!-- Directive 5: Influence Boundary — top-right -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="540" y2="120" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="450" y="85" width="185" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="543" y="107" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">5</text>
+          <text x="543" y="123" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Граница влияния</text>
+          <text x="543" y="140" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">Реагируй только на наблюдаемое</text>
+        </g>
+
+        <!-- Directive 6: Consequence Driven — right (with [Model ↗] badge) -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="620" y2="300" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="525" y="268" width="175" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="613" y="290" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">6</text>
+          <text x="613" y="306" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Управление последствиями</text>
+          <text x="613" y="323" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">WANT → NEED по мере накопления Price</text>
+          <text x="695" y="276" class="model-badge">[Model ↗]</text>
+        </g>
+
+        <!-- Directive 7: Pre-Gen Filter — bottom-right (with [Model ↗] badge) -->
+        <g class="anim-group directive-node">
+          <line class="spoke-line" x1="350" y1="280" x2="530" y2="460" stroke="var(--accent-cyan)" stroke-width="1" opacity="0.4"/>
+          <rect x="430" y="425" width="200" height="65" rx="8" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="530" y="447" text-anchor="middle" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10" opacity="0.7">7</text>
+          <text x="530" y="463" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">Пре-генерационный фильтр</text>
+          <text x="530" y="480" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-body)" font-size="10">4-пунктовая самопроверка перед ответом</text>
+          <text x="625" y="433" class="model-badge">[Model ↗]</text>
+        </g>
+
+      </svg>
+
+</div>

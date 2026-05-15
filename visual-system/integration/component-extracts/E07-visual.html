@@ -1,0 +1,120 @@
+<!-- 
+  Element: E07 — Voice Influence Hierarchy
+  Source: elements/E07-voice-hierarchy.html
+  Pattern: P5 — Grouped Bar Chart
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E07-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E07-script.js
+-->
+<div class="chart-container">
+      <div class="chart-svg-wrap">
+
+<svg viewBox="0 0 780 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Иерархия влияния на голос — сгруппированная столбчатая диаграмма, показывающая влияние различных блоков карточки на голос персонажа для разных моделей">
+          <title>Иерархия влияния на голос — сгруппированная столбчатая диаграмма</title>
+
+          <defs>
+            <!-- Grid line pattern -->
+            <pattern id="grid5" width="78" height="420" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="420" stroke="var(--border-40)" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+
+          <!-- Grid lines at 5% intervals (scaled: 78px = 5%) -->
+          <rect x="180" y="30" width="546" height="350" fill="url(#grid5)"/>
+
+          <!-- Axis labels (top) -->
+          <text x="230" y="22" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="10" text-anchor="middle">12B</text>
+          <text x="280" y="22" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="10" text-anchor="middle">32B+</text>
+          <text x="330" y="22" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="10" text-anchor="middle">API</text>
+
+          <!-- Percentage axis labels -->
+          <text x="180" y="22" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" text-anchor="end">0%</text>
+          <text x="336" y="22" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" text-anchor="end">10%</text>
+          <text x="492" y="22" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" text-anchor="end">50%</text>
+          <text x="720" y="22" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" text-anchor="end">85%</text>
+
+          <!-- ===== ROW 1: Recent Chat (dominant — split axis) ===== -->
+          <text x="175" y="70" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Недавний чат</text>
+          <!-- 12B: ~85% = 830px equivalent, but compressed for split axis -->
+          <rect class="bar-rect" x="180" y="52" width="468" height="12" fill="var(--cyan-20)" rx="2"/>
+          <rect class="bar-rect" x="180" y="66" width="440" height="12" fill="var(--cyan-20)" rx="2"/>
+          <rect class="bar-rect" x="180" y="80" width="413" height="12" fill="var(--cyan-20)" rx="2"/>
+          <text x="655" y="68" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="9" opacity="0.7">~75-85% (сжатая шкала)</text>
+
+          <!-- ===== ROW 2: Examples (highest card-level) ===== -->
+          <text x="175" y="125" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Examples</text>
+          <!-- 12B: 10% -->
+          <rect class="bar-rect scroll-enter" x="180" y="110" width="78" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.5"/>
+          <!-- 32B+: 12% -->
+          <rect class="bar-rect scroll-enter" x="180" y="124" width="94" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.7"/>
+          <!-- API: 15% -->
+          <rect class="bar-rect scroll-enter" x="180" y="138" width="117" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.9"/>
+
+          <!-- ===== ROW 3: Greeting ===== -->
+          <text x="175" y="195" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Greeting</text>
+          <!-- 12B: 3% -->
+          <rect class="bar-rect scroll-enter" x="180" y="182" width="23" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.5"/>
+          <!-- 32B+: 5% -->
+          <rect class="bar-rect scroll-enter" x="180" y="196" width="39" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.7"/>
+          <!-- API: 5% -->
+          <rect class="bar-rect scroll-enter" x="180" y="210" width="39" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.9"/>
+
+          <!-- ===== ROW 4: Author's Note ===== -->
+          <text x="175" y="265" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Author's Note</text>
+          <!-- 12B: 2% -->
+          <rect class="bar-rect scroll-enter" x="180" y="252" width="16" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.5"/>
+          <!-- 32B+: 3% -->
+          <rect class="bar-rect scroll-enter" x="180" y="266" width="23" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.7"/>
+          <!-- API: 5% -->
+          <rect class="bar-rect scroll-enter" x="180" y="280" width="39" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.9"/>
+          <text x="225" y="275" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="8" opacity="0.6">→ E16</text>
+
+          <!-- ===== ROW 5: Description — 12B = 0% RED MARKER ===== -->
+          <text x="175" y="335" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">Description</text>
+          <!-- 12B: 0% — RED ✕ MARKER -->
+          <line x1="180" y1="322" x2="180" y2="336" stroke="var(--danger)" stroke-width="2"/>
+          <text x="188" y="333" fill="var(--danger)" font-family="var(--font-mono)" font-size="14" font-weight="700">✕</text>
+          <text x="200" y="333" fill="var(--danger)" font-family="var(--font-mono)" font-size="9">0% ЗАПРЕЩЕНО</text>
+          <!-- 32B+: 3% -->
+          <rect class="bar-rect scroll-enter" x="180" y="336" width="23" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.7"/>
+          <!-- API: 5% -->
+          <rect class="bar-rect scroll-enter" x="180" y="350" width="39" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.9"/>
+
+          <!-- ===== ROW 6: System Prompt ===== -->
+          <text x="175" y="395" fill="var(--text-secondary)" font-family="var(--font-heading)" font-size="12" font-weight="600" text-anchor="end">SP</text>
+          <!-- 12B: 0% — thin line -->
+          <line x1="180" y1="382" x2="180" y2="396" stroke="var(--text-muted)" stroke-width="1" opacity="0.4"/>
+          <text x="188" y="393" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9">~0%</text>
+          <!-- 32B+: 1% -->
+          <rect class="bar-rect scroll-enter" x="180" y="396" width="8" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.5"/>
+          <!-- API: 2% -->
+          <rect class="bar-rect scroll-enter" x="180" y="410" width="16" height="12" fill="var(--accent-cyan)" rx="2" opacity="0.7"/>
+
+          <!-- Split axis separator line -->
+          <line x1="180" y1="95" x2="720" y2="95" stroke="var(--border-active)" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="720" y="108" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9" text-anchor="end">↑ Сжатая шкала (Недавний чат доминирует)</text>
+          <text x="720" y="400" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9" text-anchor="end">↑ Увеличенная шкала (источники на уровне карточки)</text>
+
+        </svg>
+
+</div>
+
+      <!-- Storage vs Influence inset -->
+      <div class="inset-box scroll-enter">
+        <div class="inset-box__title">Хранилище vs Влияние</div>
+        <div class="inset-box__text">
+          <strong style="color:var(--text-primary);">Хранилище</strong> (где голосовые паттерны <em>записаны</em>) — это НЕ то же самое, что
+          <strong style="color:var(--text-primary);">Влияние</strong> (что <em>формирует</em> поведение модели).
+          Пользователи часто предполагают, что SP = наибольшее влияние, потому что это «первый» блок, но
+          <span class="inset-box__highlight">Недавний чат доминирует в голосе на ~75-85%</span>,
+          что делает его основным источником дрейфа голоса с течением времени.
+          Сами голосовые паттерны живут только в Examples — Description
+          <span class="inset-box__highlight">ЗАПРЕЩЁН для голоса на 12B моделях</span>.
+        </div>
+        <div class="split-axis-note">
+          Диаграмма использует разделённую ось: верхняя секция показывает Недавний чат на сжатой шкале,
+          нижняя секция показывает источники на уровне карточки на увеличенной шкале для видимости.
+        </div>
+      </div>
+
+    </div>

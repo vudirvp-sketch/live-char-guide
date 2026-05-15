@@ -1,0 +1,149 @@
+/*
+  Element: E11 — CoT Tiers
+  Source: elements/E11-cot-tiers.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.staircase {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 0;
+      padding-left: var(--gap-xl);
+    }
+
+    .stair-step {
+      position: relative;
+      border-radius: var(--radius-md);
+      padding: var(--gap-md) var(--gap-lg);
+      margin-left: 0;
+      border: var(--line-width) solid var(--border);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* Increasing left margin = staircase effect */
+    .stair-step:nth-child(1) { margin-left: 0; }
+    .stair-step:nth-child(2) { margin-left: 60px; }
+    .stair-step:nth-child(3) { margin-left: 120px; }
+    .stair-step:nth-child(4) { margin-left: 180px; }
+
+    /* Tier colors */
+    .stair-step--tier0 {
+      background: var(--bg-panel);
+      border-color: var(--border);
+    }
+
+    .stair-step--tier1 {
+      background: var(--bg-panel);
+      border-left: var(--line-bold) solid var(--cyan-40);
+    }
+
+    .stair-step--tier2 {
+      background: var(--bg-panel);
+      border-left: var(--line-bold) solid var(--cyan-70);
+    }
+
+    .stair-step--tier3 {
+      background: var(--bg-panel);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .stair-step__header {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .stair-step__tier {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .stair-step__name {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .stair-step__format {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      background: rgba(0,0,0,0.2);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-top: var(--gap-xs);
+      word-break: break-word;
+    }
+
+    /* Model badges */
+    .model-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 450;
+    }
+
+    .model-pill--12b {
+      background: var(--muted-20);
+      color: var(--text-muted);
+      border: 1px solid var(--muted-30);
+    }
+
+    .model-pill--32b {
+      background: var(--cyan-10);
+      color: var(--accent-cyan);
+      border: 1px solid var(--cyan-25);
+    }
+
+    .model-pill--api {
+      background: var(--violet-10);
+      color: var(--accent-violet);
+      border: 1px solid var(--violet-25);
+    }
+
+    /* Optional label */
+    .optional-label {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Scroll animation */
+    .stair-step {
+      opacity: 0;
+      transform: translateY(15px) translateX(-10px);
+    }
+
+    .stair-step.is-visible {
+      opacity: 1;
+      transform: translateY(0) translateX(0);
+    }
+
+    .stair-step:nth-child(1) { transition-delay: 0ms; }
+    .stair-step:nth-child(2) { transition-delay: 150ms; }
+    .stair-step:nth-child(3) { transition-delay: 300ms; }
+    .stair-step:nth-child(4) { transition-delay: 450ms; }
+
+    @media (max-width: 768px) {
+      .stair-step:nth-child(2) { margin-left: 30px; }
+      .stair-step:nth-child(3) { margin-left: 60px; }
+      .stair-step:nth-child(4) { margin-left: 90px; }
+      .staircase {
+        padding-left: var(--gap-md);
+      }
+    }

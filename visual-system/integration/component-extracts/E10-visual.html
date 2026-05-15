@@ -1,0 +1,120 @@
+<!-- 
+  Element: E10 — Enneagram × SPINE Mapping
+  Source: elements/E10-enneagram-spine.html
+  Pattern: P4 — Radial (circle + links)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E10-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E10-script.js
+-->
+<div class="enneagram-container scroll-enter" id="enneagram-wrap">
+
+<svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Круг Enneagram с 9 типами личности, привязанными к элементам фреймворка SPINE">
+        <title>Маппинг Enneagram × SPINE</title>
+
+        <!-- Main circle -->
+        <circle class="enneagram-anim" cx="300" cy="260" r="200" fill="none" stroke="var(--border)" stroke-width="1" opacity="0.5"/>
+
+        <!-- Internal triangle (3-6-9) — violet dashed -->
+        <polygon class="enneagram-anim"
+                 points="300,60 473,360 127,360"
+                 fill="none" stroke="var(--accent-violet)" stroke-width="1" stroke-dasharray="6 4" opacity="0.4"/>
+
+        <!-- Connection lines (1-4-2-8-5-7-1 pattern) — simplified -->
+        <line x1="171" y1="107" x2="232" y2="448" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="232" y1="448" x2="103" y2="225" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="103" y1="225" x2="429" y2="107" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+
+        <!-- Stress arrows (danger/red) — simplified directional hints -->
+        <line x1="300" y1="60" x2="473" y2="360" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <line x1="473" y1="360" x2="171" y2="107" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+
+        <!-- Growth arrows (success/green) — simplified -->
+        <line x1="300" y1="60" x2="171" y2="107" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <line x1="473" y1="360" x2="300" y2="60" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+
+        <!-- Type nodes — positioned on circle -->
+        <!-- Type 9 — top center -->
+        <g class="type-node" data-type="9">
+          <circle cx="300" cy="60" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="300" y="64" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">9</text>
+        </g>
+
+        <!-- Type 1 — top-left -->
+        <g class="type-node" data-type="1">
+          <circle cx="171" cy="107" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="171" y="111" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">1</text>
+        </g>
+
+        <!-- Type 2 — left -->
+        <g class="type-node" data-type="2">
+          <circle cx="103" cy="225" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="103" y="229" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">2</text>
+        </g>
+
+        <!-- Type 3 — bottom-left -->
+        <g class="type-node" data-type="3">
+          <circle cx="127" cy="360" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="127" y="364" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">3</text>
+        </g>
+
+        <!-- Type 4 — bottom-center-left -->
+        <g class="type-node" data-type="4">
+          <circle cx="232" cy="448" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="232" y="452" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">4</text>
+        </g>
+
+        <!-- Type 5 — bottom-center-right -->
+        <g class="type-node" data-type="5">
+          <circle cx="368" cy="448" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="368" y="452" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">5</text>
+        </g>
+
+        <!-- Type 6 — bottom-right -->
+        <g class="type-node" data-type="6">
+          <circle cx="473" cy="360" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="473" y="364" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">6</text>
+        </g>
+
+        <!-- Type 7 — right -->
+        <g class="type-node" data-type="7">
+          <circle cx="497" cy="225" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="497" y="229" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">7</text>
+        </g>
+
+        <!-- Type 8 — top-right -->
+        <g class="type-node" data-type="8">
+          <circle cx="429" cy="107" r="22" fill="var(--bg-panel)" stroke="var(--border)" stroke-width="1"/>
+          <text x="429" y="111" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="14" font-weight="600">8</text>
+        </g>
+
+      </svg>
+
+<!-- Mini-card (hidden by default, shown on hover) -->
+      <div class="mini-card" id="mini-card">
+        <div class="mini-card__type" id="mc-type">Тип 4 — Индивидуалист</div>
+        <div class="mini-card__row"><span class="mini-card__label">Основной страх:</span> <span id="mc-fear">Быть незначительным</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Основное желание:</span> <span id="mc-desire">Быть уникальным</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Шаблон LIE:</span> <span id="mc-lie">"Я фундаментально ущербен"</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Паттерн FLAW:</span> <span id="mc-flaw">Уходит в себя когда ранен</span></div>
+      </div>
+    </div>
+
+    <!-- SPINE callout boxes -->
+    <div class="spine-callouts scroll-enter">
+      <div class="spine-callout spine-callout--tl">
+        <div class="spine-callout__title">Стресс → FLAW</div>
+        <div class="spine-callout__desc">Направление стресса раскрывает паттерн FLAW — как персонаж ломается под давлением</div>
+      </div>
+      <div class="spine-callout spine-callout--tr">
+        <div class="spine-callout__title">Страх → LIE</div>
+        <div class="spine-callout__desc">Основной страх порождает убеждение LIE — ложный вывод, сделанный из травмы</div>
+      </div>
+      <div class="spine-callout spine-callout--bl">
+        <div class="spine-callout__title">Рост → NEED</div>
+        <div class="spine-callout__desc">Направление роста указывает на NEED — подлинное желание, скрытое под WANT</div>
+      </div>
+      <div class="spine-callout spine-callout--br">
+        <div class="spine-callout__title">Желание → WANT</div>
+        <div class="spine-callout__desc">Осознанное желание соотносится с WANT — поверхностная цель, маскирующая более глубокий NEED</div>
+      </div>
+    </div>

@@ -1,0 +1,142 @@
+/*
+  Element: E13 — Diagnostic Decision Tree
+  Source: elements/E13-diagnostic-tree.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.tree-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tree-root {
+      margin-bottom: var(--gap-lg);
+    }
+
+    .tree-root__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .tree-root__symptom {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: var(--gap-sm) var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tree-root__symptom:hover {
+      background: var(--bg-raised);
+    }
+
+    /* Collapsible sub-tree */
+    .sub-tree {
+      padding-left: var(--gap-xl);
+      border-left: var(--line-width) solid var(--border);
+      margin-left: var(--gap-md);
+      margin-top: var(--gap-sm);
+      display: none;
+    }
+
+    .sub-tree.is-open {
+      display: block;
+    }
+
+    /* Decision diamond */
+    .decision-node {
+      position: relative;
+      padding: var(--gap-sm) var(--gap-md);
+      margin: var(--gap-sm) 0;
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .decision-node__diamond {
+      width: 16px;
+      height: 16px;
+      background: transparent;
+      border: var(--line-width) solid var(--accent-cyan);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .decision-node__question {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    /* Yes/No paths */
+    .branch {
+      padding-left: var(--gap-lg);
+      margin-top: var(--gap-xs);
+    }
+
+    .branch__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .branch__label--yes {
+      color: var(--success);
+    }
+
+    .branch__label--no {
+      color: var(--text-muted);
+    }
+
+    /* Terminal diagnosis */
+    .diagnosis-node {
+      padding: var(--gap-sm) var(--gap-md);
+      margin: var(--gap-xs) 0;
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-sm);
+    }
+
+    .diagnosis-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .diagnosis-node__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    /* Scroll animation */
+    .tree-root {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .tree-root.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tree-root:nth-child(1) { transition-delay: 0ms; }
+    .tree-root:nth-child(2) { transition-delay: 100ms; }
+    .tree-root:nth-child(3) { transition-delay: 200ms; }

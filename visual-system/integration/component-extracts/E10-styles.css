@@ -1,0 +1,138 @@
+/*
+  Element: E10 — Enneagram × SPINE Mapping
+  Source: elements/E10-enneagram-spine.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.enneagram-container {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .enneagram-container svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Mini-card tooltip on hover */
+    .type-node {
+      cursor: pointer;
+    }
+
+    .mini-card {
+      position: absolute;
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-md);
+      padding: var(--gap-sm) var(--gap-md);
+      min-width: 180px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-fast) var(--ease-out-expo);
+      z-index: 10;
+    }
+
+    .mini-card.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mini-card__type {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+    }
+
+    .mini-card__row {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .mini-card__label {
+      color: var(--text-muted);
+    }
+
+    /* SPINE callout boxes */
+    .spine-callouts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-sm);
+      margin-top: var(--gap-lg);
+    }
+
+    .spine-callout {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-sm) var(--gap-md);
+    }
+
+    .spine-callout__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-violet);
+      margin-bottom: 2px;
+    }
+
+    .spine-callout__desc {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .spine-callout--tl { border-left: 2px solid var(--danger); }
+    .spine-callout--tr { border-left: 2px solid var(--accent-violet); }
+    .spine-callout--bl { border-left: 2px solid var(--success); }
+    .spine-callout--br { border-left: 2px solid var(--accent-amber); }
+
+    /* Scroll animations */
+    .enneagram-anim {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      transition: stroke-dashoffset 800ms var(--ease-out-expo);
+    }
+
+    .enneagram-anim.is-visible {
+      stroke-dashoffset: 0;
+    }
+
+    .type-node {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .type-node.is-visible {
+      opacity: 1;
+    }
+
+    .type-node:nth-of-type(1) { transition-delay: 100ms; }
+    .type-node:nth-of-type(2) { transition-delay: 150ms; }
+    .type-node:nth-of-type(3) { transition-delay: 200ms; }
+    .type-node:nth-of-type(4) { transition-delay: 250ms; }
+    .type-node:nth-of-type(5) { transition-delay: 300ms; }
+    .type-node:nth-of-type(6) { transition-delay: 350ms; }
+    .type-node:nth-of-type(7) { transition-delay: 400ms; }
+    .type-node:nth-of-type(8) { transition-delay: 450ms; }
+    .type-node:nth-of-type(9) { transition-delay: 500ms; }
+
+    @media (max-width: 768px) {
+      .enneagram-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .enneagram-container svg {
+        min-width: 540px;
+      }
+      .mini-card {
+        min-width: 150px;
+      }
+    }

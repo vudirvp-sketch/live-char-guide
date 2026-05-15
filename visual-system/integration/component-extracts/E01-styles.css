@@ -1,0 +1,167 @@
+/*
+  Element: E01 — Card Anatomy
+  Source: elements/E01-card-anatomy.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.card-stack {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .card-block {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* SP block — border-only frame, no fill */
+    .card-block--sp {
+      border: var(--line-bold) solid var(--accent-cyan);
+      background: transparent;
+      min-height: 40px;
+      position: relative;
+    }
+
+    .card-block--sp .inner-dashed {
+      position: absolute;
+      inset: 4px;
+      border: 1px dashed var(--cyan-30);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Description block — widest */
+    .card-block--desc {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      min-height: 120px;
+      border-left: var(--line-bold) solid var(--accent-cyan);
+    }
+
+    /* Examples block — medium */
+    .card-block--examples {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      min-height: 90px;
+      border-left: var(--line-bold) solid var(--accent-cyan);
+    }
+
+    /* Anchors sub-panel inside Examples */
+    .anchors-subpanel {
+      background: var(--violet-8);
+      border: var(--line-width) solid var(--violet-25);
+      border-left: var(--line-bold) solid var(--accent-violet);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-top: var(--gap-sm);
+    }
+
+    /* Greeting block — narrow */
+    .card-block--greeting {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      min-height: 50px;
+      border-left: var(--line-bold) solid var(--accent-amber);
+    }
+
+    /* Lorebook — optional, dashed */
+    .card-block--lorebook {
+      background: var(--bg-panel);
+      border: 1px dashed var(--border-active);
+      min-height: 40px;
+      opacity: 0.7;
+    }
+
+    /* Block labels */
+    .block-label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+      padding: var(--gap-sm) var(--gap-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .block-label__name {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .block-content {
+      padding: 0 var(--gap-md) var(--gap-sm);
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Token annotations on the right */
+    .token-anno {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .token-anno__row {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--gap-xs);
+    }
+
+    .token-anno__val {
+      min-width: 36px;
+      text-align: right;
+    }
+
+    .token-anno__label {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    /* Divider between blocks */
+    .block-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* Description callout for Anchors */
+    .desc-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: var(--violet-8);
+      border: 1px solid var(--violet-20);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      color: var(--accent-violet);
+      margin-top: var(--gap-xs);
+    }
+
+    /* Optional badge */
+    .optional-badge {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 1px 6px;
+      border: 1px dashed var(--border-active);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Scroll animation delays */
+    .card-block:nth-child(1) { transition-delay: 0ms; }
+    .card-block:nth-child(3) { transition-delay: 80ms; }
+    .card-block:nth-child(5) { transition-delay: 160ms; }
+    .card-block:nth-child(7) { transition-delay: 240ms; }
+    .card-block:nth-child(9) { transition-delay: 320ms; }

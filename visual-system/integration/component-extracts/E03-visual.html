@@ -1,0 +1,104 @@
+<!-- 
+  Element: E03 — Behavioral Anchor T→A→P
+  Source: elements/E03-behavioral-anchor.html
+  Pattern: P5 — Comparison (split view)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E03-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E03-script.js
+-->
+<div class="compare-grid">
+
+      <!-- CORRECT column -->
+      <div class="compare-column compare-column--correct scroll-enter">
+        <div class="compare-column__title">&#10003; Верно</div>
+
+        <!-- Trigger -->
+        <div class="flow-node">
+          <div class="flow-node__name">Trigger</div>
+          <div class="flow-node__desc">Событие происходит → персонаж реагирует</div>
+        </div>
+
+        <div class="flow-arrow-down">&#8595;</div>
+
+        <!-- Action + Embodiment badge -->
+        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-violet);">
+          <div class="flow-node__name">
+            Action
+            <span class="embodiment-badge">↳ E04 Embodiment</span>
+          </div>
+          <div class="flow-node__desc">Персонаж отвечает воплощённым поведением (State → Body → Sensor → Speech)</div>
+        </div>
+
+        <div class="flow-arrow-down">&#8595;</div>
+
+        <!-- Price (physical, immediate) -->
+        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-cyan);">
+          <div class="flow-node__name">Price</div>
+          <div class="flow-node__desc">Физическое, немедленное, внутри сцены последствие</div>
+        </div>
+
+        <div class="check-list">
+          <div class="check-item">
+            <span class="check-item__icon--pass">&#10003;</span> Плавный поток T→A→P
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--pass">&#10003;</span> Физический, немедленный Price
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--pass">&#10003;</span> Embodiment внутри Action
+          </div>
+        </div>
+      </div>
+
+      <!-- INCORRECT column -->
+      <div class="compare-column compare-column--incorrect scroll-enter" style="position:relative;">
+
+        <!-- Bypass arrow (drawn via SVG) -->
+        <div class="bypass-arrow scroll-enter" aria-label="Bypass arrow from Trigger to Price">
+          <svg role="img" viewBox="0 0 40 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Bypass arrow</title>
+            <path d="M8 15 C28 15, 32 60, 32 80 C32 95, 28 105, 8 105"
+                  stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+            <path d="M8 100 L8 108 L14 104 Z" fill="var(--danger)"/>
+          </svg>
+          <div class="bypass-arrow__label">bypass</div>
+        </div>
+
+        <div class="compare-column__title">&#10007; Неверно</div>
+
+        <!-- Trigger -->
+        <div class="flow-node">
+          <div class="flow-node__name">Trigger</div>
+          <div class="flow-node__desc">Событие происходит → начинается сокращение</div>
+        </div>
+
+        <div class="flow-arrow-down">&#8595;</div>
+
+        <!-- Action (empty — no embodiment) -->
+        <div class="flow-node flow-node--empty">
+          <div class="flow-node__name">Action</div>
+          <div class="flow-node__desc">Без embodiment — пустой ответ</div>
+        </div>
+
+        <div class="flow-arrow-down" style="opacity:0.3;">&#8595;</div>
+
+        <!-- Price (deferred/abstract) -->
+        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-amber);">
+          <div class="flow-node__name">Price</div>
+          <div class="flow-node__desc price-deferred">Абстрактный, отложенный — «пожалеет позже», нефизический</div>
+        </div>
+
+        <div class="check-list">
+          <div class="check-item">
+            <span class="check-item__icon--fail">&#10007;</span> Стрелка обхода (Trigger → Price)
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--fail">&#10007;</span> Нет embodiment в Action
+          </div>
+          <div class="check-item">
+            <span class="check-item__icon--fail">&#10007;</span> Отложенный, абстрактный Price
+          </div>
+        </div>
+      </div>
+
+    </div>

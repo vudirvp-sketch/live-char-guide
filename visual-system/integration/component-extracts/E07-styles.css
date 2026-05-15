@@ -1,0 +1,85 @@
+/*
+  Element: E07 — Voice Influence Hierarchy
+  Source: elements/E07-voice-hierarchy.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.chart-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .chart-svg-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    /* Inset box: Storage vs Influence */
+    .inset-box {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-md);
+      padding: var(--gap-md);
+      margin-top: var(--gap-lg);
+      max-width: 800px;
+    }
+
+    .inset-box__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .inset-box__text {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .inset-box__highlight {
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    /* Split axis note */
+    .split-axis-note {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: var(--gap-sm);
+      padding-top: var(--gap-sm);
+      border-top: var(--line-width) solid var(--border);
+    }
+
+    /* Bar chart animations */
+    .bar-rect {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 600ms var(--ease-out-expo);
+    }
+
+    .bar-rect.is-visible {
+      transform: scaleX(1);
+    }
+
+    /* Red × marker */
+    .red-marker {
+      fill: var(--danger);
+    }
+
+    @media (max-width: 768px) {
+      .chart-container {
+        max-width: 100%;
+      }
+      .chart-svg-wrap {
+        -webkit-overflow-scrolling: touch;
+      }
+      .inset-box {
+        font-size: 11px;
+      }
+    }

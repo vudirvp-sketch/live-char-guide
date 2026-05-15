@@ -1,0 +1,96 @@
+<!-- 
+  Element: E16 — Author's Note Mechanics
+  Source: elements/E16-author-note.html
+  Pattern: P2 — Flow (vertical timeline)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E16-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E16-script.js
+-->
+<div class="an-container scroll-enter">
+
+      <!-- Message stream with AN injection -->
+      <div class="message-stream">
+        <div class="stream-track">
+          <div class="stream-msg">msg6</div>
+          <div class="stream-msg">msg7</div>
+          <div class="stream-msg">msg8</div>
+          <div class="stream-msg">msg9</div>
+          <div class="stream-msg stream-msg--an">[AN]</div>
+          <div class="stream-msg">msg10</div>
+          <div class="stream-msg">msg11</div>
+          <div class="stream-msg">msg12</div>
+          <div class="stream-msg">...</div>
+        </div>
+      </div>
+
+      <!-- Position indicator -->
+      <div class="position-indicator scroll-enter">
+        <div>
+          <span class="position-indicator__label">Позиция</span>
+          <span class="position-indicator__value">3–5 сообщений от конца</span>
+        </div>
+        <div>
+          <span class="position-indicator__label">Длина</span>
+          <span class="position-indicator__value">100–200 токенов</span>
+        </div>
+        <div>
+          <span class="position-indicator__label">Частота</span>
+          <span class="position-indicator__value">Каждые 5–10 сообщений</span>
+        </div>
+        <div>
+          <span class="position-indicator__label">Влияние на голос</span>
+          <span class="position-indicator__value">~2–5% → <span class="badge badge--cyan" style="font-size:10px;">E07</span></span>
+        </div>
+      </div>
+
+      <!-- Template A/B toggle -->
+      <div class="template-toggle" role="tablist">
+        <button class="template-btn template-btn--active" role="tab" aria-selected="true" data-template="a">Шаблон A (3 секции)</button>
+        <button class="template-btn" role="tab" aria-selected="false" data-template="b">Шаблон B (4 секции)</button>
+      </div>
+
+      <!-- Template A -->
+      <div class="template-card scroll-enter" id="template-a">
+        <div class="template-section">
+          <div class="template-section__label">State</div>
+          <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">WANT → NEED</div>
+          <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">Blind Spot</div>
+          <div class="template-section__content">[Что персонаж не может сейчас увидеть в себе]</div>
+        </div>
+      </div>
+
+      <!-- Template B (includes GHOST-activation) -->
+      <div class="template-card scroll-enter" id="template-b" style="display:none;">
+        <div class="template-section">
+          <div class="template-section__label">State</div>
+          <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">WANT → NEED</div>
+          <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
+        </div>
+        <div class="template-section template-section--ghost">
+          <div class="template-section__label" style="color:var(--accent-violet);">GHOST-activation</div>
+          <div class="template-section__content">[Какой слой GHOST активирован и как он проявляется → <span class="badge badge--violet" style="font-size:10px;">E06</span>]</div>
+        </div>
+        <div class="template-section">
+          <div class="template-section__label">Blind Spot</div>
+          <div class="template-section__content">[Что персонаж не может сейчас увидеть в себе]</div>
+        </div>
+      </div>
+
+      <!-- Cross-references -->
+      <div class="an-crossref scroll-enter">
+        <span class="badge badge--cyan">Влияние на голос: E07 (~2–5%)</span>
+        <span class="badge badge--violet">SPINE: E05 (Шаблон B: GHOST-activation)</span>
+        <span class="badge badge--violet">Слои GHOST: E06</span>
+        <span class="badge badge--cyan">Конвейер сборки: E02 (Шаг: инъекция AN)</span>
+      </div>
+
+    </div>

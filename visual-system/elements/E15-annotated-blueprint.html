@@ -183,32 +183,32 @@
   <nav class="mini-map" role="navigation" aria-label="Element navigation">
     <div class="mini-map__section">
       <span class="mini-map__section-label">Основа</span>
-      <span class="mini-map__el">E01</span>
-      <span class="mini-map__el">E02</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E02">E02</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Механики ядра</span>
-      <span class="mini-map__el">E03</span>
-      <span class="mini-map__el">E04</span>
-      <span class="mini-map__el">E07</span>
-      <span class="mini-map__el">E08</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E08">E08</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Личность</span>
-      <span class="mini-map__el">E05</span>
-      <span class="mini-map__el">E06</span>
-      <span class="mini-map__el">E09</span>
-      <span class="mini-map__el">E10</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E10">E10</span>
     </div>
     <div class="mini-map__section">
       <span class="mini-map__section-label">Продвинутые</span>
-      <span class="mini-map__el">E11</span>
-      <span class="mini-map__el">E12</span>
-      <span class="mini-map__el">E13</span>
-      <span class="mini-map__el">E14</span>
-      <span class="mini-map__el mini-map__el--active">E15</span>
-      <span class="mini-map__el">E16</span>
-      <span class="mini-map__el">E17</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E14">E14</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="link" aria-current="true" aria-label="E15 (текущий)">E15</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="link" aria-label="E17">E17</span>
     </div>
   </nav>
 
@@ -369,6 +369,18 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
         });
       }, { threshold: 0.1 });
       document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+
+      // Клавиатурная навигация мини-карты
+      document.querySelectorAll('.mini-map__el').forEach(el => {
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const target = el.textContent.trim();
+            // В интегрированной версии будет навигация к элементу
+            console.log('Navigate to:', target);
+          }
+        });
+      });
     });
   </script>
 </body>

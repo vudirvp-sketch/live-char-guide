@@ -1,0 +1,209 @@
+/*
+  Element: E05 — SPINE Framework
+  Source: elements/E05-spine-framework.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.spine-cascade {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: var(--gap-lg);
+    }
+
+    .spine-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      min-width: max-content;
+    }
+
+    /* Hexagonal/chamfered node */
+    .spine-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      position: relative;
+      /* Vertical offset — each node slightly lower */
+    }
+
+    .spine-node:nth-of-type(1) { margin-top: 0; }
+    .spine-node:nth-of-type(3) { margin-top: 20px; }
+    .spine-node:nth-of-type(5) { margin-top: 40px; }
+    .spine-node:nth-of-type(7) { margin-top: 60px; }
+    .spine-node:nth-of-type(9) { margin-top: 80px; }
+
+    /* Гексагональный узел: двухэлементная техника для видимого бордера
+       Внешний div = бордер (clip-path hex), внутренний = заливка (clip-path hex) */
+    .spine-node__hex {
+      position: relative;
+      min-width: 120px;
+      text-align: center;
+      cursor: default;
+      padding: 0;
+    }
+
+    /* Внешний слой — бордер */
+    .spine-node__hex-border {
+      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+      background: var(--violet-30);
+      padding: 2px; /* толщина бордера */
+      transition: background var(--duration-fast);
+    }
+
+    /* Внутренний слой — заливка */
+    .spine-node__hex-fill {
+      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+      background: var(--bg-panel);
+      padding: 14px 24px;
+      transition: background var(--duration-fast);
+    }
+
+    .spine-node__hex:hover .spine-node__hex-border {
+      background: var(--violet-50);
+    }
+
+    .spine-node__hex:hover .spine-node__hex-fill {
+      background: var(--bg-raised);
+    }
+
+    .spine-node__icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+
+    .spine-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-violet);
+    }
+
+    .spine-node__example {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Expand icon on GHOST node */
+    .spine-node__expand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--violet-15);
+      border: 1px solid var(--violet-30);
+      font-size: 12px;
+      color: var(--accent-violet);
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background var(--duration-fast);
+      position: relative;
+    }
+
+    .spine-node__expand:hover {
+      background: var(--violet-25);
+    }
+
+    /* Tooltip for GHOST expand */
+    .spine-node__expand::after {
+      content: '3 внутренних слоя → См. E06';
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-raised);
+      border: 1px solid var(--border-active);
+      border-radius: var(--radius-sm);
+      padding: 4px 8px;
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-fast);
+    }
+
+    .spine-node__expand:hover::after,
+    .spine-node__expand:focus::after {
+      opacity: 1;
+    }
+
+    /* Violet arrow between nodes */
+    .spine-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      color: var(--accent-violet);
+      flex-shrink: 0;
+      margin-top: 40px;
+      /* Match average offset */
+    }
+
+    .spine-arrow svg {
+      width: 36px;
+      height: 12px;
+    }
+
+    /* Scroll animations */
+    .spine-node {
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .spine-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-out-expo);
+    }
+
+    .spine-node.is-visible,
+    .spine-arrow.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .spine-node:nth-of-type(1) { transition-delay: 0ms; }
+    .spine-node:nth-of-type(3) { transition-delay: 120ms; }
+    .spine-node:nth-of-type(5) { transition-delay: 240ms; }
+    .spine-node:nth-of-type(7) { transition-delay: 360ms; }
+    .spine-node:nth-of-type(9) { transition-delay: 480ms; }
+
+    @media (max-width: 768px) {
+      .spine-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .spine-node {
+        margin-top: 0 !important;
+      }
+      .spine-arrow {
+        margin-top: 0;
+        transform: rotate(90deg);
+        width: auto;
+        height: 24px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .spine-node__hex-border,
+      .spine-node__hex-fill {
+        clip-path: none;
+        border-radius: var(--radius-sm);
+      }
+      .spine-node__hex-border {
+        background: var(--violet-30);
+        padding: 1px;
+      }
+      .spine-node__hex-fill {
+        background: var(--bg-panel);
+      }
+    }

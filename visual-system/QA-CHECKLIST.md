@@ -595,8 +595,26 @@ E01: 8 мест, E06: 11 мест, E10: 1, E11: 1, E12: 1.
 - [x] Hero prefers-reduced-motion + ARIA добавлены
 - [x] Паттерн-классы добавлены ко всем элементам
 
-## Фаза 4: СЛЕДУЮЩАЯ
+## Фаза 4: ЗАВЕРШЕНА ✅
 
-- [ ] Создать integration/INTEGRATION-MAP.md
-- [ ] Создать integration/token-migration.css
-- [ ] Создать integration/component-extracts/
+- [x] Создать integration/INTEGRATION-MAP.md
+- [x] Создать integration/token-migration.css (обновлён с --text-muted fix + --success-25 + алиасы)
+- [x] Создать integration/component-extracts/ (51 файл: 17 visual + 17 styles + 17 script)
+- [x] Widget JS: vs-mini-map.js, diagnostic-tree.js, blueprint-viewer.js, author-note-viewer.js
+- [x] Shell styles.css: добавлены VS-токены, шрифты, VS-компонент стили, light/OLED тема
+- [x] Shell index.html: обновлён CSP для CDN, добавлены VS-виджеты
+- [x] Master pages: добавлены VS-embed плейсхолдеры в 10 страниц (17 элементов)
+- [x] Мини-карта: клавиатурная доступность (tabindex, role, keydown) для всех 17 элементов
+- [x] utilities.css: rgba → CSS-переменные миграция (badges, severity-dots, panel, hover-lift)
+
+### Исправления v1.4 → v1.5 (Фаза 4)
+
+| Баг | Элемент | Исправление |
+|-----|---------|-------------|
+| --text-muted контраст FAIL | Все | DESIGN-TOKENS.css: #535c6e → #6b7590 (4.6:1, WCAG AA PASS) |
+| Мини-карта не фокусируема | Все 17 | Добавлен tabindex="0", role="link", aria-label, keydown handler |
+| Hardcoded rgba в utilities | Shared | Заменены на CSS-переменные (badges, severity-dots, panel, mini-map) |
+| --success-25 отсутствовал | DESIGN-TOKENS | Добавлен --success-25: rgba(63,182,139,0.25) |
+| CSP блокирует CDN | Shell | Обновлён CSP: cdn.jsdelivr.net, fonts.googleapis.com, fonts.gstatic.com |
+| Нет VS стилей в shell | Shell | Добавлены ~210 строк VS компонентных стилей + light/OLED тема |
+| Нет VS виджетов | Shell | Созданы 4 виджета: vs-mini-map, diagnostic-tree, blueprint-viewer, author-note-viewer |

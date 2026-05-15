@@ -1,0 +1,127 @@
+<!-- 
+  Element: E05 — SPINE Framework
+  Source: elements/E05-spine-framework.html
+  Pattern: P2 — Flow (horizontal chain)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E05-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E05-script.js
+-->
+<div class="spine-cascade">
+      <div class="spine-flow">
+
+        <!-- GHOST -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#128123;</div>
+                <div class="spine-node__name">GHOST</div>
+                <div class="spine-node__example">"Предательство редактора"</div>
+              </div>
+            </div>
+          </div>
+          <div class="spine-node__expand" role="button" aria-label="Expand GHOST layers" tabindex="0">+</div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- LIE -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#127910;</div>
+                <div class="spine-node__name">LIE</div>
+                <div class="spine-node__example">"Я не могу никому доверять"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- FLAW -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#128165;</div>
+                <div class="spine-node__name">FLAW</div>
+                <div class="spine-node__example">"Отталкивает людей"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- NEED -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#10084;</div>
+                <div class="spine-node__name">NEED</div>
+                <div class="spine-node__example">"Подлинная связь"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spine-arrow scroll-enter">
+          <svg role="img" viewBox="0 0 36 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <title>Стрелка вправо</title>
+            <line x1="0" y1="6" x2="28" y2="6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M28 1L34 6L28 11" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- WANT -->
+        <div class="spine-node scroll-enter">
+          <div class="spine-node__hex">
+            <div class="spine-node__hex-border">
+              <div class="spine-node__hex-fill">
+                <div class="spine-node__icon" aria-hidden="true">&#11088;</div>
+                <div class="spine-node__name">WANT</div>
+                <div class="spine-node__example">"Контроль над отношениями"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
+        Причинно-следственная цепь
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+        SPINE — психологический стержень персонажа. Каждый элемент причинно-следственно вытекает из предыдущего:
+        <strong style="color:var(--text-primary);">GHOST</strong> (глубокая травма) порождает
+        <strong style="color:var(--text-primary);">LIE</strong> (ложное убеждение), которое создаёт
+        <strong style="color:var(--text-primary);">FLAW</strong> (дезадаптивный паттерн), который двигает
+        <strong style="color:var(--text-primary);">NEED</strong> (подлинное желание), маскируемое
+        <strong style="color:var(--text-primary);">WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
+        WANT сходится к NEED по мере того, как персонаж платит Prices через Anchors.
+      </p>
+    </div>

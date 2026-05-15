@@ -15,7 +15,7 @@
   border: var(--line-width) solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--gap-md);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 var(--border-20);
 }
 
 .panel--raised {
@@ -83,39 +83,39 @@
 }
 
 .badge--cyan {
-  background: rgba(60,200,255,0.12);
+  background: var(--cyan-12);
   color: var(--accent-cyan);
-  border: 1px solid rgba(60,200,255,0.25);
+  border: 1px solid var(--cyan-25);
 }
 
 .badge--violet {
-  background: rgba(139,92,246,0.12);
+  background: var(--violet-12);
   color: var(--accent-violet);
-  border: 1px solid rgba(139,92,246,0.25);
+  border: 1px solid var(--violet-25);
 }
 
 .badge--amber {
-  background: rgba(240,160,64,0.12);
+  background: var(--amber-10);
   color: var(--accent-amber);
-  border: 1px solid rgba(240,160,64,0.25);
+  border: 1px solid var(--amber-25);
 }
 
 .badge--danger {
-  background: rgba(217,69,90,0.12);
+  background: var(--danger-15);
   color: var(--danger);
-  border: 1px solid rgba(217,69,90,0.25);
+  border: 1px solid var(--danger-25);
 }
 
 .badge--success {
-  background: rgba(63,182,139,0.12);
+  background: var(--success-15);
   color: var(--success);
-  border: 1px solid rgba(63,182,139,0.25);
+  border: 1px solid var(--success-25);
 }
 
 .badge--muted {
-  background: rgba(83,92,110,0.15);
+  background: var(--muted-15);
   color: var(--text-muted);
-  border: 1px solid rgba(83,92,110,0.25);
+  border: 1px solid var(--muted-25);
 }
 
 /* --- Точки серьёзности --- */
@@ -129,12 +129,12 @@
 
 .severity-dot--high {
   background: var(--danger);
-  box-shadow: 0 0 6px rgba(217,69,90,0.4);
+  box-shadow: 0 0 6px var(--danger-40);
 }
 
 .severity-dot--medium {
   background: var(--accent-amber);
-  box-shadow: 0 0 6px rgba(240,160,64,0.3);
+  box-shadow: 0 0 6px var(--amber-30);
 }
 
 /* --- Триггер анимации при прокрутке --- */
@@ -242,17 +242,21 @@
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   color: var(--text-muted);
+  cursor: pointer;
   transition: color 0.15s, background 0.15s;
 }
 
-.mini-map__el:hover {
+.mini-map__el:hover,
+.mini-map__el:focus-visible {
   color: var(--text-secondary);
   background: var(--bg-raised);
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 1px;
 }
 
 .mini-map__el--active {
   color: var(--accent-cyan);
-  background: rgba(60,200,255,0.1);
+  background: var(--cyan-10);
   position: relative;
 }
 
@@ -298,5 +302,5 @@
 
 .hover-lift:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px var(--border-40);
 }

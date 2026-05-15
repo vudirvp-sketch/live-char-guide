@@ -1,0 +1,79 @@
+<!-- 
+  Element: E14 — Quality Scale
+  Source: elements/E14-quality-scale.html
+  Pattern: P1 — Stack (thermometer)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E14-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E14-script.js
+-->
+<div class="quality-container scroll-enter">
+
+      <!-- Thermometer -->
+      <div class="thermometer scroll-enter">
+        <div class="thermometer__zone zone-critical"><span class="thermometer__zone-label">Критический</span></div>
+        <div class="thermometer__zone zone-poor"><span class="thermometer__zone-label">Слабый</span></div>
+        <div class="thermometer__zone zone-good"><span class="thermometer__zone-label">Хороший</span></div>
+        <div class="thermometer__zone zone-excellent"><span class="thermometer__zone-label">Отличный</span></div>
+        <div class="indicator" style="bottom:50%;">
+          <div class="indicator__marker"></div>
+        </div>
+      </div>
+
+      <!-- Zone descriptions -->
+      <div class="zone-details">
+        <div class="zone-detail zone-detail--excellent">
+          <div class="zone-detail__title" style="color:var(--accent-violet);">Отличный</div>
+          <div class="zone-detail__range">85–100%</div>
+          <div class="zone-detail__criteria">Проходит все 14 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие Token Budget, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--good">
+          <div class="zone-detail__title" style="color:var(--accent-cyan);">Хороший</div>
+          <div class="zone-detail__range">50–85%</div>
+          <div class="zone-detail__criteria">Стабильные 10+ сообщений, узнаваемый голос, Price последовательно появляется в Anchors. Основная структура здорова, но возможны незначительные проблемы сэмплирования или бюджета.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--poor">
+          <div class="zone-detail__title" style="color:var(--accent-amber);">Слабый</div>
+          <div class="zone-detail__range">25–50%</div>
+          <div class="zone-detail__criteria">Следует базовым правилам, но персонаж дрейфует после 5–10 сообщений. Anchors присутствуют, но неэффективны. SPINE определён, но не выражен через Anchors.</div>
+        </div>
+
+        <div class="zone-detail zone-detail--critical">
+          <div class="zone-detail__title" style="color:var(--danger);">Критический</div>
+          <div class="zone-detail__range">0–25%</div>
+          <div class="zone-detail__criteria">Нарушает 2+ базовых правила: нет Price, голос в Description, PP > 0. Персонаж фундаментально сломан. Требуется полная переработка.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Pre-Deploy Checks -->
+    <div class="quick-checks" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div class="quick-checks__title">5 быстрых проверок перед развёртыванием</div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        PP = 0.0 (Presence Penalty равен нулю)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Голос только в Examples (не в Description или SP)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Price в каждом Anchor (физический, внутри сцены)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Format Lock (1 согласованная система XML)
+      </div>
+
+      <div class="quick-check-item scroll-enter">
+        <div class="quick-check-item__checkbox"></div>
+        Anti-godmoding (2 строки в SP)
+      </div>
+    </div>

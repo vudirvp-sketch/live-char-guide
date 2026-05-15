@@ -1,0 +1,128 @@
+/*
+  Element: E04 — Embodiment Protocol
+  Source: elements/E04-embodiment-protocol.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.funnel-stack {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Link-back annotation */
+    .link-back {
+      font-family: var(--font-micro);
+      font-size: 11px;
+      color: var(--accent-violet);
+      margin-bottom: var(--gap-lg);
+      padding: 4px 12px;
+      background: var(--violet-8);
+      border: 1px solid var(--violet-20);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Funnel bar — decreasing width */
+    .funnel-bar {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-violet);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-md) var(--gap-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* Decreasing widths: 100%, 85%, 70%, 55% */
+    .funnel-bar:nth-of-type(1) { width: 100%; }
+    .funnel-bar:nth-of-type(3) { width: 85%; }
+    .funnel-bar:nth-of-type(5) { width: 70%; }
+    .funnel-bar:nth-of-type(7) { width: 55%; }
+
+    .funnel-bar__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .funnel-bar__example {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 450;
+      text-align: right;
+    }
+
+    /* Arrow between bars */
+    .funnel-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--gap-xs) 0;
+      color: var(--accent-violet);
+    }
+
+    .funnel-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Depth indicator — статичный по умолчанию, абсолютный на широких экранах */
+    .depth-label {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+      display: block;
+    }
+
+    @media (min-width: 769px) {
+      .depth-label {
+        position: absolute;
+        right: -80px;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        margin-top: 0;
+      }
+    }
+
+    /* Scroll animations */
+    .funnel-bar {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+
+    .funnel-bar.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .funnel-bar:nth-of-type(1) { transition-delay: 0ms; }
+    .funnel-bar:nth-of-type(3) { transition-delay: 100ms; }
+    .funnel-bar:nth-of-type(5) { transition-delay: 200ms; }
+    .funnel-bar:nth-of-type(7) { transition-delay: 300ms; }
+
+    @media (max-width: 768px) {
+      .funnel-bar {
+        width: 100% !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--gap-xs);
+      }
+      .funnel-bar__example {
+        text-align: left;
+      }
+    }

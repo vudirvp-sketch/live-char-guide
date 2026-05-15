@@ -1,0 +1,209 @@
+/*
+  Element: E03 — Behavioral Anchor T→A→P
+  Source: elements/E03-behavioral-anchor.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-lg);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .compare-column {
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+      position: relative;
+    }
+
+    .compare-column--correct {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      box-shadow: inset 2px 0 8px var(--cyan-6);
+    }
+
+    .compare-column--incorrect {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-amber);
+      box-shadow: inset 2px 0 8px var(--amber-6);
+    }
+
+    .compare-column__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: var(--gap-md);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .compare-column--correct .compare-column__title {
+      color: var(--accent-cyan);
+    }
+
+    .compare-column--incorrect .compare-column__title {
+      color: var(--accent-amber);
+    }
+
+    /* Flow nodes inside comparison */
+    .flow-node {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-bottom: var(--gap-sm);
+      position: relative;
+    }
+
+    .flow-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .flow-node__desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Downward arrow between nodes */
+    .flow-arrow-down {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin: var(--gap-xs) 0;
+    }
+
+    /* Bypass arrow (incorrect side) */
+    .bypass-arrow {
+      position: absolute;
+      right: -8px;
+      top: 20px;
+      bottom: 60px;
+      width: 40px;
+      pointer-events: none;
+      transform: none;
+    }
+
+    .bypass-arrow svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bypass-arrow__label {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--danger);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    /* Check / X marks */
+    .check-list {
+      margin-top: var(--gap-md);
+      padding-top: var(--gap-sm);
+      border-top: var(--line-width) solid var(--border);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .check-item__icon--pass {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .check-item__icon--fail {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    /* Embodiment badge */
+    .embodiment-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: var(--violet-10);
+      border: 1px solid var(--violet-25);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-violet);
+      margin-left: 6px;
+    }
+
+    /* Empty node (incorrect) */
+    .flow-node--empty {
+      border-style: dashed;
+      border-color: var(--border-active);
+      opacity: 0.5;
+    }
+
+    .flow-node--empty .flow-node__desc {
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Price deferred */
+    .price-deferred {
+      color: var(--accent-amber);
+      font-style: italic;
+    }
+
+    /* Scroll animations */
+    .compare-column {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .compare-column--correct {
+      transform: translateX(-20px);
+    }
+
+    .compare-column--incorrect {
+      transform: translateX(20px);
+    }
+
+    .compare-column.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .bypass-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-slow) var(--ease-out-expo) 0.4s;
+    }
+
+    .bypass-arrow.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }

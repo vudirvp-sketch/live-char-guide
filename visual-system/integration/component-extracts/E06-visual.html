@@ -1,0 +1,96 @@
+<!-- 
+  Element: E06 — GHOST Layers
+  Source: elements/E06-ghost-layers.html
+  Pattern: P4 — Concentric Rings
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E06-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E06-script.js
+-->
+<div class="ghost-rings scroll-enter">
+
+<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Слои GHOST: три концентрических кольца, показывающих глубину травмы от G1 (источник/ядро) до G3 (поверхностный/настоящее)">
+        <title>Слои GHOST — визуализация 3-уровневой глубины травмы</title>
+
+        <!-- ПРИМЕЧАНИЕ: SVG-атрибуты fill/stroke/stop-color не могут надёжно
+             использовать CSS-переменные во всех браузерах, поэтому здесь
+             используются литеральные rgba-значения, соответствующие --accent-violet (#8b5cf6). -->
+        <defs>
+          <radialGradient id="ghost-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(139,92,246,0.15)"/>
+            <stop offset="100%" stop-color="var(--bg-deep)"/>
+          </radialGradient>
+          <!-- Core glow -->
+          <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(139,92,246,0.35)"/>
+            <stop offset="100%" stop-color="rgba(139,92,246,0)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Background -->
+        <rect width="600" height="480" fill="url(#ghost-grad)"/>
+
+        <!-- G3 — Surface (outer ring) — lightest violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
+                stroke="rgba(139,92,246,0.25)" stroke-width="1.5" style="transition-delay:0ms;"/>
+
+        <!-- G2 — Secondary (middle ring) — medium violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
+                stroke="rgba(139,92,246,0.35)" stroke-width="1.5" style="transition-delay:200ms;"/>
+
+        <!-- G1 — Core (inner ring) — deep violet -->
+        <circle class="ring-anim" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
+                stroke="rgba(139,92,246,0.55)" stroke-width="1.5" style="transition-delay:400ms;"/>
+
+        <!-- Core glow -->
+        <circle class="ring-anim" cx="260" cy="240" r="30" fill="url(#core-glow)" style="transition-delay:500ms;"/>
+
+        <!-- Ring text labels inside SVG -->
+        <text class="ring-text-anim" x="260" y="100" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-heading)" font-size="12" font-weight="600"
+              style="transition-delay:600ms;">G3 — Поверхностный</text>
+        <text class="ring-text-anim" x="260" y="115" text-anchor="middle" fill="var(--text-muted)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:650ms;">"Избегает обязательств"</text>
+
+        <text class="ring-text-anim" x="260" y="155" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-heading)" font-size="12" font-weight="600"
+              style="transition-delay:700ms;">G2 — Промежуточный</text>
+        <text class="ring-text-anim" x="260" y="170" text-anchor="middle" fill="var(--text-muted)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:750ms;">"Брошен в 16 лет"</text>
+
+        <text class="ring-text-anim" x="260" y="230" text-anchor="middle" fill="var(--text-primary)"
+              font-family="var(--font-heading)" font-size="13" font-weight="600"
+              style="transition-delay:800ms;">G1 — Ядро</text>
+        <text class="ring-text-anim" x="260" y="248" text-anchor="middle" fill="var(--text-secondary)"
+              font-family="var(--font-micro)" font-size="9"
+              style="transition-delay:850ms;">"Отец ушёл, когда мне было 5"</text>
+
+      </svg>
+
+<!-- HTML labels on the right -->
+      <div class="ring-label ring-label--g3 scroll-enter">
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Поверхностный</div>
+        <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
+        <div class="ring-label__event">"Избегает обязательств"</div>
+        <div class="ring-label__causal">G3 → текущий триггер</div>
+      </div>
+
+      <div class="ring-label ring-label--g2 scroll-enter">
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Промежуточный</div>
+        <div class="ring-label__timeline">Юность (13–25): подкрепляется → усиливает FLAW</div>
+        <div class="ring-label__event">"Брошен в 16 лет"</div>
+        <div class="ring-label__causal">G2 → усиливает FLAW</div>
+      </div>
+
+      <div class="ring-label ring-label--g1 scroll-enter">
+        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Ядро</div>
+        <div class="ring-label__timeline">Детство (0–12): исток → формирует LIE</div>
+        <div class="ring-label__event">"Отец ушёл, когда мне было 5"</div>
+        <div class="ring-label__causal">G1 → формирует LIE</div>
+      </div>
+    </div>
+
+    <div class="ghost-link-back scroll-enter">
+      <span class="badge badge--violet">GHOST = Слой 1 фреймворка SPINE → E05</span>
+    </div>

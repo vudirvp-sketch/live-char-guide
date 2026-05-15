@@ -1,0 +1,186 @@
+/*
+  Element: E16 — Author's Note Mechanics
+  Source: elements/E16-author-note.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.an-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Message stream visualization */
+    .message-stream {
+      position: relative;
+      padding: var(--gap-lg) 0;
+      overflow-x: auto;
+    }
+
+    .stream-track {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      min-width: max-content;
+    }
+
+    .stream-msg {
+      width: 48px;
+      height: 32px;
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .stream-msg--an {
+      background: var(--cyan-10);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-weight: 600;
+      width: 56px;
+      box-shadow: var(--glow-cyan);
+      position: relative;
+    }
+
+    .stream-msg--an::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--accent-cyan);
+    }
+
+    /* Position indicator */
+    .position-indicator {
+      margin-top: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-md);
+      align-items: center;
+    }
+
+    .position-indicator__label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+
+    .position-indicator__value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Template A/B toggle */
+    .template-toggle {
+      display: flex;
+      gap: var(--gap-sm);
+      margin: var(--gap-lg) 0 var(--gap-md);
+    }
+
+    .template-btn {
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-panel);
+      color: var(--text-muted);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .template-btn--active {
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
+      color: var(--accent-cyan);
+    }
+
+    /* Template card */
+    .template-card {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+    }
+
+    .template-section {
+      padding: var(--gap-sm) 0;
+      border-bottom: var(--line-width) solid var(--border);
+    }
+
+    .template-section:last-child {
+      border-bottom: none;
+    }
+
+    .template-section__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+
+    .template-section__content {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .template-section--ghost {
+      border-left: 2px solid var(--accent-violet);
+      padding-left: var(--gap-sm);
+      background: var(--violet-4);
+    }
+
+    /* Template B only section */
+    .template-b-only {
+      display: none;
+    }
+
+    .template-b-only.is-visible {
+      display: block;
+    }
+
+    /* Cross-reference badge */
+    .an-crossref {
+      margin-top: var(--gap-lg);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-sm);
+    }
+
+    /* Scroll animations */
+    .scroll-enter {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .scroll-enter.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }

@@ -1,0 +1,164 @@
+<!-- 
+  Element: E13 — Diagnostic Decision Tree
+  Source: elements/E13-diagnostic-tree.html
+  Pattern: P3 — Tree/Branching
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E13-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E13-script.js
+-->
+<div class="tree-container">
+
+      <!-- Root 1: Character drifts -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Симптом 1</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
+          «Персонаж дрейфует после 5–10 сообщений»
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">У персонажа есть рабочие Anchors?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">Нет →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Отсутствует структура Anchors</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-2</span>
+                <span class="badge badge--cyan">→ AP-8</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Да →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">SPINE причинно согласован?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">Нет →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Нарушенная цепь SPINE</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-9</span>
+                  <span class="badge badge--violet">→ E05</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Да →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Дрейф голоса (доминирование недавнего чата)</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-11</span>
+                  <span class="badge badge--cyan">→ E16 (AN)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root 2: Voice sounds generic -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Симптом 2</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
+          «Голос звучит типично / неразличимо»
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Голос записан только в Examples?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">Нет →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Утечка голоса в Description/SP</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-3</span>
+                <span class="badge badge--cyan">→ AP-11</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Да →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Достаточно ли диалоговых примеров (3+)?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">Нет →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Недостаточно образцов голоса</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E01</span>
+                  <span class="badge badge--cyan">→ E07</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Да →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Проблема параметров сэмплирования</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ AP-5</span>
+                  <span class="badge badge--cyan">→ E17</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Root 3: Character ignores actions -->
+      <div class="tree-root scroll-enter">
+        <div class="tree-root__title">Симптом 3</div>
+        <div class="tree-root__symptom" role="button" tabindex="0" aria-expanded="false" data-toggle="tree">
+          «Персонаж игнорирует действия пользователя»
+        </div>
+        <div class="sub-tree">
+          <div class="decision-node">
+            <div class="decision-node__diamond"></div>
+            <div class="decision-node__question">Anti-godmoding присутствует в SP?</div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--no">Нет →</div>
+            <div class="diagnosis-node">
+              <div class="diagnosis-node__name">Отсутствует Anti-godmoding</div>
+              <div class="diagnosis-node__chips">
+                <span class="badge badge--cyan">→ AP-6</span>
+                <span class="badge badge--cyan">→ E02</span>
+              </div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="branch__label branch__label--yes">Да →</div>
+            <div class="decision-node">
+              <div class="decision-node__diamond"></div>
+              <div class="decision-node__question">Персонаж использует протокол Embodiment?</div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--no">Нет →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Embodiment отсутствует</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E04</span>
+                  <span class="badge badge--cyan">→ E08 (Директива 2)</span>
+                </div>
+              </div>
+            </div>
+            <div class="branch">
+              <div class="branch__label branch__label--yes">Да →</div>
+              <div class="diagnosis-node">
+                <div class="diagnosis-node__name">Нарушение границы влияния</div>
+                <div class="diagnosis-node__chips">
+                  <span class="badge badge--cyan">→ E08 (Директива 5)</span>
+                  <span class="badge badge--cyan">→ E03</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>

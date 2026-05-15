@@ -1,0 +1,208 @@
+/*
+  Element: E14 — Quality Scale
+  Source: elements/E14-quality-scale.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.quality-container {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      gap: var(--gap-xl);
+      align-items: flex-start;
+    }
+
+    /* Thermometer bar */
+    .thermometer {
+      width: 60px;
+      flex-shrink: 0;
+      position: relative;
+      height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-deep);
+    }
+
+    .thermometer__fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      transition: height 800ms var(--ease-out-expo);
+    }
+
+    .thermometer__zone {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thermometer__zone-label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    /* Zone boundaries: 0-25%, 25-50%, 50-85%, 85-100% */
+    .zone-critical { bottom: 0; height: 25%; background: var(--danger-15); }
+    .zone-poor     { bottom: 25%; height: 25%; background: var(--amber-10); }
+    .zone-good     { bottom: 50%; height: 35%; background: var(--cyan-8); }
+    .zone-excellent { bottom: 85%; height: 15%; background: var(--violet-12); }
+
+    /* Indicator line */
+    .indicator {
+      position: absolute;
+      left: -8px;
+      right: -8px;
+      height: 2px;
+      background: var(--accent-cyan);
+      z-index: 2;
+      box-shadow: var(--glow-cyan);
+      transition: bottom 400ms var(--ease-out-expo);
+    }
+
+    .indicator__marker {
+      position: absolute;
+      left: -6px;
+      top: -5px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid var(--accent-cyan);
+    }
+
+    /* Zone descriptions */
+    .zone-details {
+      flex: 1;
+    }
+
+    .zone-detail {
+      padding: var(--gap-sm) var(--gap-md);
+      margin-bottom: var(--gap-sm);
+      border-radius: var(--radius-sm);
+      border-left: var(--line-bold) solid;
+    }
+
+    .zone-detail--critical {
+      background: var(--danger-6);
+      border-left-color: var(--danger);
+    }
+
+    .zone-detail--poor {
+      background: var(--amber-6);
+      border-left-color: var(--accent-amber);
+    }
+
+    .zone-detail--good {
+      background: var(--cyan-6);
+      border-left-color: var(--accent-cyan);
+    }
+
+    .zone-detail--excellent {
+      background: var(--violet-6);
+      border-left-color: var(--accent-violet);
+    }
+
+    .zone-detail__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .zone-detail__range {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .zone-detail__criteria {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* Quick Checks */
+    .quick-checks {
+      margin-top: var(--gap-lg);
+      padding: var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .quick-checks__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .quick-check-item {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      padding: var(--gap-xs) 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .quick-check-item.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .quick-check-item:nth-child(2) { transition-delay: 60ms; }
+    .quick-check-item:nth-child(3) { transition-delay: 120ms; }
+    .quick-check-item:nth-child(4) { transition-delay: 180ms; }
+    .quick-check-item:nth-child(5) { transition-delay: 240ms; }
+    .quick-check-item:nth-child(6) { transition-delay: 300ms; }
+
+    .quick-check-item__checkbox {
+      width: 14px;
+      height: 14px;
+      border: var(--line-width) solid var(--border-active);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Scroll animation for thermometer */
+    .thermometer {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .thermometer.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .quality-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .thermometer {
+        width: 100%;
+        height: 40px;
+      }
+    }

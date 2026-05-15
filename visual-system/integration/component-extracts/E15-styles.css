@@ -1,0 +1,174 @@
+/*
+  Element: E15 — Annotated Blueprint
+  Source: elements/E15-annotated-blueprint.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.blueprint-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Toggle buttons for layers */
+    .layer-toggles {
+      display: flex;
+      gap: var(--gap-sm);
+      margin-bottom: var(--gap-lg);
+      flex-wrap: wrap;
+    }
+
+    .layer-toggle {
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-panel);
+      color: var(--text-muted);
+    }
+
+    .layer-toggle:hover {
+      border-color: var(--border-active);
+      color: var(--text-secondary);
+    }
+
+    .layer-toggle--active.layer-toggle--structure {
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
+      color: var(--accent-cyan);
+    }
+
+    .layer-toggle--active.layer-toggle--anchors {
+      background: var(--violet-12);
+      border-color: var(--violet-30);
+      color: var(--accent-violet);
+    }
+
+    .layer-toggle--active.layer-toggle--spine {
+      background: var(--violet-12);
+      border-color: var(--violet-30);
+      color: var(--accent-violet);
+    }
+
+    .layer-toggle--active.layer-toggle--directives {
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
+      color: var(--accent-cyan);
+    }
+
+    /* Blueprint area */
+    .blueprint-area {
+      position: relative;
+      background:
+        linear-gradient(var(--cyan-3) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cyan-3) 1px, transparent 1px);
+      background-size: 20px 20px;
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--gap-xl);
+      min-height: 500px;
+    }
+
+    /* Card template (central) */
+    .card-template {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-md);
+      max-width: 480px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .card-block {
+      padding: var(--gap-sm) var(--gap-md);
+      border-bottom: var(--line-width) solid var(--border);
+      position: relative;
+    }
+
+    .card-block:last-child {
+      border-bottom: none;
+    }
+
+    .card-block__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+
+    .card-block__content {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    /* Annotation callouts — positioned around the card */
+    .callout {
+      position: absolute;
+      max-width: 200px;
+      padding: var(--gap-xs) var(--gap-sm);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+      pointer-events: none;
+    }
+
+    .callout.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .callout--structure {
+      background: var(--cyan-8);
+      border-left: 2px solid var(--accent-cyan);
+    }
+
+    .callout--anchors {
+      background: var(--violet-8);
+      border-left: 2px solid var(--accent-violet);
+    }
+
+    .callout--spine {
+      background: var(--violet-8);
+      border-left: 2px solid var(--accent-violet);
+    }
+
+    .callout--directives {
+      background: var(--cyan-8);
+      border-left: 2px solid var(--accent-cyan);
+    }
+
+    /* Callout connector lines */
+    .callout-line {
+      position: absolute;
+      height: 1px;
+      background: var(--accent-cyan);
+      opacity: 0.4;
+      transition: opacity var(--duration-base);
+    }
+
+    /* Layer visibility */
+    .annotation-layer { display: none; }
+    .annotation-layer--active { display: block; }
+
+    /* Scroll animation */
+    .blueprint-area {
+      opacity: 0;
+      transition: opacity var(--duration-slow) var(--ease-out-expo);
+    }
+
+    .blueprint-area.is-visible {
+      opacity: 1;
+    }

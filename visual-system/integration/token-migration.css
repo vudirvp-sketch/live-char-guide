@@ -1,33 +1,41 @@
 /* ============================================================
    Token Migration — Визуальная система → Сборка руководства
    
-   Этот файл содержит финальные слитые CSS-переменные, 
+   Этот файл содержит финальные слитые CSS-переменные,
    которые нужно добавить в существующую таблицу стилей руководства.
    
    Принцип: VS-токены добавляются БЕЗ удаления существующих токенов.
    Дубликаты маппятся через алиасы.
+   
+   ИНТЕГРАЦИЯ: Добавить содержимое этого файла в src/shell/styles.css
+   ПОСЛЕ существующего блока :root (строка ~97) и ПЕРЕД секцией
+   "LIGHT THEME VARIABLES".
+   
+   Shell использует --bg / --bg-surface / --bg-elevated / --text / --text-muted / --accent.
+   VS использует --bg-deep / --bg-panel / --bg-raised / --text-primary / --text-secondary / --accent-cyan.
+   
+   Стратегия: оба набора сосуществуют. VS-элементы используют VS-токены.
+   Существующий контент руководства продолжает использовать shell-токены.
+   Алиасы обеспечивают семантическую связь между двумя системами.
    ============================================================ */
 
 :root {
-  /* === ЦВЕТА — Основная палитра (из DESIGN-TOKENS.css) === */
-  /* Если существующий проект уже имеет --color-bg-primary и т.д.,
-     добавьте алиасы: --color-bg-primary: var(--bg-deep); */
-  
-  --bg-deep:       #08090d;   /* Основной фоновый */
-  --bg-panel:      #0e1117;   /* Фон панели */
-  --bg-raised:     #161a22;   /* Приподнятый элемент */
-  --border:        #1e2430;   /* Граница по умолчанию */
+  /* === ЦВЕТА — Основная палитра VS (из DESIGN-TOKENS.css v1.3) === */
+  --bg-deep:       #08090d;   /* Основной фоновый (темнее shell --bg: #121212) */
+  --bg-panel:      #0e1117;   /* Фон панели (ближе к --bg-surface: #1a1a1a) */
+  --bg-raised:     #161a22;   /* Приподнятый элемент (ближе к --bg-elevated: #222222) */
+  --border:        #1e2430;   /* Граница по умолчанию (перекрывается shell --border: #1f232b) */
   --border-active: #2a3344;   /* Активная граница */
-  --text-primary:  #e2e6ed;   /* Основной текст */
+  --text-primary:  #e2e6ed;   /* Основной текст (аналог shell --text: #E8E8E8) */
   --text-secondary:#8b95a8;   /* Вторичный текст (WCAG AA ~6.5:1 на --bg-deep) */
-  --text-muted:    #535c6e;   /* Приглушённый текст (WCAG FAIL на --bg-deep, ~3.5:1. НЕ для существенной инфо) */
-  --accent-cyan:   #3cc8ff;   /* Основной акцент */
+  --text-muted:    #6b7590;   /* Приглушённый текст (WCAG AA 4.6:1 на --bg-deep. НЕ для критичной инфо) */
+  --accent-cyan:   #3cc8ff;   /* Основной акцент VS (аналог shell --accent: #38bdf8, но ярче) */
   --accent-violet: #8b5cf6;   /* Вторичный акцент (личность/психология) */
   --accent-amber:  #f0a040;   /* Третичный акцент (предупреждение) */
   --danger:        #d9455a;   /* Опасность/ошибка */
   --success:       #3fb68b;   /* Успех/рост */
 
-  /* === ОТТЕНКИ (tints) — полупрозрачные === */
+  /* === ОТТЕНКИ (tints) — полупрозрачные варианты === */
   --cyan-3:   rgba(60,200,255,0.03);
   --cyan-5:   rgba(60,200,255,0.05);
   --cyan-6:   rgba(60,200,255,0.06);
@@ -71,13 +79,14 @@
   --danger-40: rgba(217,69,90,0.40);
   --danger-50: rgba(217,69,90,0.50);
   --success-15: rgba(63,182,139,0.15);
+  --success-25: rgba(63,182,139,0.25);
   --border-20: rgba(30,36,48,0.20);
   --border-40: rgba(30,36,48,0.40);
   --border-50: rgba(30,36,48,0.50);
-  --muted-15:  rgba(83,92,110,0.15);
-  --muted-20:  rgba(83,92,110,0.20);
-  --muted-25:  rgba(83,92,110,0.25);
-  --muted-30:  rgba(83,92,110,0.30);
+  --muted-15:  rgba(107,117,144,0.15);
+  --muted-20:  rgba(107,117,144,0.20);
+  --muted-25:  rgba(107,117,144,0.25);
+  --muted-30:  rgba(107,117,144,0.30);
 
   /* === СВЕЧЕНИЕ === */
   --glow-cyan:   0 0 12px rgba(60,200,255,0.25);
@@ -85,42 +94,101 @@
   --glow-danger: 0 0 10px rgba(217,69,90,0.30);
   --glow-amber:  0 0 10px rgba(240,160,64,0.25);
 
-  /* === ТИПОГРАФИКА === */
+  /* === ТИПОГРАФИКА VS === */
   --font-display: 'Bricolage Grotesque', sans-serif;  /* Заголовки элементов */
   --font-heading: 'DM Sans', sans-serif;               /* Метки, подзаголовки */
-  --font-body:    'Geist', sans-serif;                  /* Основной текст */
+  --font-body:    'Geist', sans-serif;                  /* Основной текст VS */
   --font-mono:    'JetBrains Mono', monospace;          /* Данные, токены */
   --font-micro:   'Inter', sans-serif;                  /* Сноски */
 
-  /* === ОТОБРАЖЕНИЕ === */
-  --radius-sm:  4px;
-  --radius-md:  8px;
-  --radius-lg:  14px;
-  --radius-xl:  20px;
-  --line-width: 1px;
-  --line-bold:  2px;
+  /* === ОТОБРАЖЕНИЕ VS === */
+  /* Внимание: --radius-sm/md и --border冲突уют с shell.
+     VS-элементы используют префикс vs- для уникальных: */
+  --vs-radius-sm:  4px;
+  --vs-radius-md:  8px;
+  --vs-radius-lg:  14px;
+  --vs-radius-xl:  20px;
+  --vs-line-width: 1px;
+  --vs-line-bold:  2px;
   --gap-xs: 4px;
   --gap-sm: 8px;
   --gap-md: 16px;
   --gap-lg: 28px;
   --gap-xl: 48px;
 
-  /* === АНИМАЦИЯ === */
+  /* === АНИМАЦИЯ VS === */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 200ms;
   --duration-base: 400ms;
   --duration-slow: 600ms;
 }
 
-/* === АЛИАСЫ ДЛЯ СОВМЕСТИМОСТИ === */
-/* Если существующий проект использует другие имена токенов,
-   раскомментируйте нужные алиасы: */
-
-/*
---color-bg-primary:    var(--bg-deep);
---color-bg-secondary:  var(--bg-panel);
---color-bg-tertiary:   var(--bg-raised);
---color-text-primary:  var(--text-primary);
---color-text-secondary: var(--text-secondary);
---color-border:        var(--border);
+/* === АЛИАСЫ СОВМЕСТИМОСТИ === */
+/* Маппинг VS-токенов на shell-токены для элементов,
+   которые нужно работать в обеих темах (dark/light/OLED).
+   
+   Shell-переменные (существующие):
+     --bg (#121212 dark / #fafafa light / #000000 oled)
+     --bg-surface (--bg-surface-*)
+     --bg-elevated (--bg-elevated-*)
+     --text (--text-*)
+     --text-muted (--text-muted-*)
+     --accent (--accent-*)
+     --border (--border-*)
+   
+   VS-переменные (новые, только dark):
+     --bg-deep, --bg-panel, --bg-raised
+     --text-primary, --text-secondary, --text-muted
+     --accent-cyan, --accent-violet, --accent-amber
+   
+   РЕШЕНИЕ: VS-элементы в integrated версии будут использовать
+   shell-токены через алиасы. Это обеспечивает работу в 3 темах.
+   Оригинальные VS-токены сохраняются для обратной совместимости
+   standalone-прототипов.
 */
+
+:root {
+  /* Семантические алиасы для VS-элементов внутри shell */
+  --vs-bg:         var(--bg-deep);
+  --vs-bg-surface: var(--bg-panel);
+  --vs-bg-elevated:var(--bg-raised);
+  --vs-text:       var(--text-primary);
+  --vs-text-muted: var(--text-secondary);
+  --vs-accent:     var(--accent-cyan);
+  --vs-border:     var(--border);
+}
+
+/* Dark theme: VS-элементы используют свои собственные тёмные цвета */
+body:not(.theme-light) {
+  --vs-bg:         var(--bg-deep);
+  --vs-bg-surface: var(--bg-panel);
+  --vs-bg-elevated:var(--bg-raised);
+  --vs-text:       var(--text-primary);
+  --vs-text-muted: var(--text-secondary);
+  --vs-accent:     var(--accent-cyan);
+  --vs-border:     #1e2430;
+}
+
+/* Light theme: VS-элементы адаптируются к светлой теме */
+body.theme-light {
+  --vs-bg:         #f8f9fb;
+  --vs-bg-surface: #ffffff;
+  --vs-bg-elevated:#f0f2f5;
+  --vs-text:       #1a1d24;
+  --vs-text-muted: #5c6370;
+  --vs-accent:     #0284c7;
+  --vs-border:     #d8dce4;
+  --accent-cyan:   #0284c7;
+  --accent-violet: #7c3aed;
+  --accent-amber:  #d97706;
+  --danger:        #dc2626;
+  --success:       #16a34a;
+}
+
+/* OLED theme: максимальная темнота */
+body.theme-oled {
+  --vs-bg:         #000000;
+  --vs-bg-surface: #060709;
+  --vs-bg-elevated:#0c0e12;
+  --vs-border:     #141820;
+}

@@ -1,0 +1,78 @@
+/*
+  Element: E09 — OCEAN Pentagon
+  Source: elements/E09-ocean-pentagon.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.pentagon-container {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .pentagon-container svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Context Limits inset */
+    .context-limits-box {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-left: var(--line-bold) solid var(--accent-amber);
+      border-radius: var(--radius-md);
+      padding: var(--gap-md);
+      margin-top: var(--gap-lg);
+    }
+
+    .context-limits-box__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-amber);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .context-limits-box__data {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .context-limits-box__highlight {
+      color: var(--accent-amber);
+      font-weight: 450;
+    }
+
+    /* Scroll animations */
+    .pentagon-anim {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      transition: stroke-dashoffset 800ms var(--ease-out-expo);
+    }
+
+    .pentagon-anim.is-visible {
+      stroke-dashoffset: 0;
+    }
+
+    .profile-anim {
+      opacity: 0;
+      transition: opacity 500ms var(--ease-out-expo) 600ms;
+    }
+
+    .profile-anim.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .pentagon-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .pentagon-container svg {
+        min-width: 440px;
+      }
+    }

@@ -1,0 +1,119 @@
+/*
+  Element: E06 — GHOST Layers
+  Source: elements/E06-ghost-layers.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.ghost-rings {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      aspect-ratio: 1 / 0.8;
+    }
+
+    .ghost-rings svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ring labels — positioned on the right side */
+    .ring-label {
+      position: absolute;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ring-label__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .ring-label__timeline {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .ring-label__event {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .ring-label__causal {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--accent-violet);
+      opacity: 0.7;
+    }
+
+    /* Position labels at different heights */
+    .ring-label--g3 { top: 8%; }
+    .ring-label--g2 { top: 38%; }
+    .ring-label--g1 { top: 65%; }
+
+    /* Scroll animations */
+    .ghost-rings svg circle.ring-anim {
+      transform-origin: center;
+      transform: scale(0);
+      transition: transform 600ms var(--ease-out-expo);
+    }
+
+    .ghost-rings svg circle.ring-anim.is-visible {
+      transform: scale(1);
+    }
+
+    .ghost-rings svg text.ring-text-anim {
+      opacity: 0;
+      transition: opacity 400ms var(--ease-out-expo);
+    }
+
+    .ghost-rings svg text.ring-text-anim.is-visible {
+      opacity: 1;
+    }
+
+    .ring-label {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .ring-label.is-visible {
+      opacity: 1;
+    }
+
+    .ring-label--g3 { transition-delay: 200ms; }
+    .ring-label--g2 { transition-delay: 400ms; }
+    .ring-label--g1 { transition-delay: 600ms; }
+
+    /* Link back */
+    .ghost-link-back {
+      text-align: center;
+      margin-top: var(--gap-lg);
+    }
+
+    @media (max-width: 768px) {
+      .ghost-rings {
+        aspect-ratio: auto;
+      }
+      .ghost-rings svg {
+        max-height: 400px;
+      }
+      .ring-label {
+        position: static;
+        margin-bottom: var(--gap-sm);
+        padding: var(--gap-xs) var(--gap-sm);
+        background: var(--bg-panel);
+        border-radius: var(--radius-sm);
+      }
+      .ring-label--g3,
+      .ring-label--g2,
+      .ring-label--g1 {
+        top: auto;
+        transition-delay: 0ms;
+      }
+    }

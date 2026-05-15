@@ -1,0 +1,152 @@
+<!-- 
+  Element: E17 — Sampling Parameters
+  Source: elements/E17-sampling-params.html
+  Pattern: P5 — Comparison (grouped columns)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E17-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E17-script.js
+-->
+<div class="params-container scroll-enter">
+
+      <div class="params-grid">
+
+        <!-- 12B-14B column -->
+        <div class="param-column param-column--12b scroll-enter">
+          <div class="param-column__tier">12B-14B</div>
+          <div class="param-column__sub">Наиболее ограниченный</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.6–0.8</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.05</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- 32B+ column -->
+        <div class="param-column param-column--32b scroll-enter">
+          <div class="param-column__tier">32B+</div>
+          <div class="param-column__sub">Рекомендуемый уровень</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.7–1.1*</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">0.7–0.9 базовая</span> | <span class="sub-range__amber">0.85–1.1 чеклист</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.10</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span> | <span class="sub-range__amber">1.05–1.10 с осторожностью</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–80</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- API column -->
+        <div class="param-column param-column--api scroll-enter">
+          <div class="param-column__tier">API</div>
+          <div class="param-column__sub">Максимальная гибкость</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.8–1.0</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value" style="color:var(--text-muted);">N/A</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–100</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Model Type Checklist -->
+      <div class="checklist-section scroll-enter">
+        <div class="checklist-section__title">Чеклист по типу модели (Part 7A)</div>
+        <div class="checklist-row checklist-row__header">
+          <span>Проверка</span>
+          <span>12B-14B</span>
+          <span>32B+</span>
+          <span>API</span>
+        </div>
+        <div class="checklist-row">
+          <span>Размещение голоса</span>
+          <span style="color:var(--danger);">Только Examples</span>
+          <span>Examples основной</span>
+          <span>Examples + AN</span>
+        </div>
+        <div class="checklist-row">
+          <span>Стабильность XML</span>
+          <span style="color:var(--text-muted);">Минимальная</span>
+          <span>Стабильная</span>
+          <span>Полная</span>
+        </div>
+        <div class="checklist-row">
+          <span>Уровень CoT</span>
+          <span style="color:var(--text-muted);">0–1</span>
+          <span>1–2</span>
+          <span style="color:var(--accent-violet);">3</span>
+        </div>
+        <div class="checklist-row">
+          <span>Anti-godmoding</span>
+          <span style="color:var(--success);">2 строки</span>
+          <span style="color:var(--success);">2 строки</span>
+          <span style="color:var(--success);">2 строки</span>
+        </div>
+      </div>
+
+    </div>
