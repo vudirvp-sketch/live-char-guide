@@ -243,7 +243,7 @@
 
     tabs.forEach(function(tab) {
       var isActive = currentTab === tab.id;
-      tabButtons += '<button class="enneagram-tab' + (isActive ? ' active' : '') + '" data-tab="' + tab.id + '" type="button" role="tab" aria-selected="' + (isActive ? 'true' : 'false') + '" aria-controls="enneagram-tabpanel-' + tab.id + '">' + tab.label + '</button>';
+      tabButtons += '<button id="enneagram-tab-' + tab.id + '" class="enneagram-tab' + (isActive ? ' active' : '') + '" data-tab="' + tab.id + '" type="button" role="tab" aria-selected="' + (isActive ? 'true' : 'false') + '" aria-controls="enneagram-tabpanel-' + tab.id + '">' + tab.label + '</button>';
       tabContents += '<div class="enneagram-tab-content' + (isActive ? ' active' : '') + '" id="enneagram-tabpanel-' + tab.id + '" role="tabpanel" aria-labelledby="enneagram-tab-' + tab.id + '">';
       tabContents += buildTabContent(tab.id);
       tabContents += '</div>';
@@ -296,7 +296,7 @@
         // Wings
         var wings = getWings(selectedTypeId);
         if (wings.length > 0) {
-          html += '<div class="enneagram-type-wings">Крылья: ' + typeInfo.wings.join(', ') + '</div>';
+          html += '<div class="enneagram-type-wings">Крылья: ' + wings.join(', ') + '</div>';
         }
 
         // M2+ MBTI hints (passive connection)
@@ -951,7 +951,11 @@
     if (!enneagramDataCache || !enneagramDataCache.types) return [];
     var typeInfo = getTypeInfo(typeId);
     if (!typeInfo || !typeInfo.ocean_correlation) return [];
-    return window.WidgetUtils.checkOceanEnneagramConflicts(profile, typeInfo.ocean_correlation);
+    // FIX-08: Pass data-driven thresholds instead of hardcoded 30/70 defaults
+    var thresholds = (oceanDataCache && oceanDataCache.extremum_thresholds)
+      ? oceanDataCache.extremum_thresholds
+      : undefined;
+    return window.WidgetUtils.checkOceanEnneagramConflicts(profile, typeInfo.ocean_correlation, thresholds);
   }
 
   // ============================================================================
