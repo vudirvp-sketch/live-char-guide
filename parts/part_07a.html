@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div>
           <span class="position-indicator__label">Влияние на голос</span>
-          <span class="position-indicator__value">~2–5% → <span class="badge badge--cyan" style="font-size:10px;">E07</span></span>
+          <span class="position-indicator__value">~2–5% → <span class="badge badge--cyan fi26-text-2xs">E07</span></span>
         </div>
       </div>
 
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <!-- Template B (includes GHOST-activation) -->
-      <div class="template-card scroll-enter" id="template-b" style="display:none;">
+      <div class="template-card scroll-enter" id="template-b" class="fi26-hidden">
         <div class="template-section">
           <div class="template-section__label">State</div>
           <div class="template-section__content">[Текущее эмоциональное/физическое состояние {{char}}]</div>
@@ -377,8 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="template-section__content">[WANT преследует X; NEED на самом деле Y. Price толкает WANT к NEED]</div>
         </div>
         <div class="template-section template-section--ghost">
-          <div class="template-section__label" style="color:var(--accent-violet);">GHOST-activation</div>
-          <div class="template-section__content">[Какой слой GHOST активирован и как он проявляется → <span class="badge badge--violet" style="font-size:10px;">E06</span>]</div>
+          <div class="template-section__label fi26-c-violet">GHOST-activation</div>
+          <div class="template-section__content">[Какой слой GHOST активирован и как он проявляется → <span class="badge badge--violet fi26-text-2xs">E06</span>]</div>
         </div>
         <div class="template-section">
           <div class="template-section__label">Blind Spot</div>
@@ -611,7 +611,7 @@ GHOST-activation: Активен, если в сцене был триггер (
           </div>
           <div class="param-row">
             <span class="param-row__name">RepPen</span>
-            <span class="param-row__value" style="color:var(--text-muted);">N/A</span>
+            <span class="param-row__value fi26-c-muted">N/A</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top K</span>
@@ -636,27 +636,27 @@ GHOST-activation: Активен, если в сцене был триггер (
         </div>
         <div class="checklist-row">
           <span>Размещение голоса</span>
-          <span style="color:var(--danger);">Только Examples</span>
+          <span class="fi26-c-danger">Только Examples</span>
           <span>Examples основной</span>
           <span>Examples + AN</span>
         </div>
         <div class="checklist-row">
           <span>Стабильность XML</span>
-          <span style="color:var(--text-muted);">Минимальная</span>
+          <span class="fi26-c-muted">Минимальная</span>
           <span>Стабильная</span>
           <span>Полная</span>
         </div>
         <div class="checklist-row">
           <span>Уровень CoT</span>
-          <span style="color:var(--text-muted);">0–1</span>
+          <span class="fi26-c-muted">0–1</span>
           <span>1–2</span>
-          <span style="color:var(--accent-violet);">3</span>
+          <span class="fi26-c-violet">3</span>
         </div>
         <div class="checklist-row">
           <span>Anti-godmoding</span>
-          <span style="color:var(--success);">2 строки</span>
-          <span style="color:var(--success);">2 строки</span>
-          <span style="color:var(--success);">2 строки</span>
+          <span class="fi26-c-success">2 строки</span>
+          <span class="fi26-c-success">2 строки</span>
+          <span class="fi26-c-success">2 строки</span>
         </div>
       </div>
 
@@ -1089,7 +1089,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
         <div class="pipeline-node scroll-enter">
           <div class="pipeline-node__step">Step 4</div>
           <div class="pipeline-node__box pipeline-node__box--spine">
-            <div class="pipeline-node__label" style="color:var(--accent-violet);">SPINE</div>
+            <div class="pipeline-node__label fi26-c-violet">SPINE</div>
             <div class="pipeline-node__sublabel">GHOST→LIE→FLAW→NEED→WANT в Description</div>
           </div>
         </div>
@@ -1107,7 +1107,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
           <div class="pipeline-node__box pipeline-node__box--optional">
             <div class="pipeline-node__label">CoT</div>
             <div class="pipeline-node__sublabel">32B+/API only</div>
-            <span class="badge badge--amber" style="margin-top:4px;">Опционально</span>
+            <span class="badge badge--amber fi26-mt-xs">Опционально</span>
           </div>
         </div>
 
@@ -1121,7 +1121,7 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
         <!-- Step 6: Budget Check -->
         <div class="pipeline-node scroll-enter">
           <div class="pipeline-node__step">Step 6</div>
-          <div class="pipeline-node__box" style="border-color:var(--accent-cyan);">
+          <div class="pipeline-node__box fi26-border-cyan">
             <div class="pipeline-node__label">Проверка бюджета</div>
             <div class="pipeline-node__sublabel">Проверить соответствие токенов</div>
           </div>
@@ -1142,10 +1142,10 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
       <div class="optional-branch scroll-enter">
         <div class="optional-branch__title">Опциональные шаги (после проверки бюджета)</div>
         <div class="optional-branch__items">
-          <div class="optional-branch__item">Anchors привязанные к FLAW <span class="badge badge--violet" style="margin-left:4px;">→ E03</span></div>
-          <div class="optional-branch__item">OCEAN + Enneagram <span class="badge badge--cyan" style="margin-left:4px;">→ E09, E10</span></div>
-          <div class="optional-branch__item">Lorebook <span class="badge badge--muted" style="margin-left:4px;">Part 7B</span></div>
-          <div class="optional-branch__item">Author's Note (Заметка автора) <span class="badge badge--cyan" style="margin-left:4px;">→ E16</span></div>
+          <div class="optional-branch__item">Anchors привязанные к FLAW <span class="badge badge--violet fi26-ml-xs">→ E03</span></div>
+          <div class="optional-branch__item">OCEAN + Enneagram <span class="badge badge--cyan fi26-ml-xs">→ E09, E10</span></div>
+          <div class="optional-branch__item">Lorebook <span class="badge badge--muted fi26-ml-xs">Part 7B</span></div>
+          <div class="optional-branch__item">Author's Note (Заметка автора) <span class="badge badge--cyan fi26-ml-xs">→ E16</span></div>
         </div>
       </div>
 

@@ -630,15 +630,19 @@
   // no layer switching in unified guide. Widgets are always active.
 
   // ─── Auto-init ───────────────────────────────────────────────────────
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
+  // Restructured: readyState check is now outside autoInit (consistent with other widgets)
 
   function autoInit() {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() {
-        (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(init) : setTimeout(init, 800));
-      });
-    } else {
-      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(init) : setTimeout(init, 800));
-    }
+    init();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
+    });
+  } else {
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
   }
 
   // Expose public API

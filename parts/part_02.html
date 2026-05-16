@@ -29,7 +29,7 @@
         <div class="flow-arrow-down">&#8595;</div>
 
         <!-- Action + Embodiment badge -->
-        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-violet);">
+        <div class="flow-node fi26-border-l-violet">
           <div class="flow-node__name">
             Action
             <span class="embodiment-badge">↳ E04 Embodiment</span>
@@ -40,7 +40,7 @@
         <div class="flow-arrow-down">&#8595;</div>
 
         <!-- Price (physical, immediate) -->
-        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-cyan);">
+        <div class="flow-node fi26-border-l-cyan">
           <div class="flow-node__name">Price</div>
           <div class="flow-node__desc">Физическое, немедленное, внутри сцены последствие</div>
         </div>
@@ -59,7 +59,7 @@
       </div>
 
       <!-- INCORRECT column -->
-      <div class="compare-column compare-column--incorrect scroll-enter" style="position:relative;">
+      <div class="compare-column compare-column--incorrect scroll-enter fi26-pos-relative">
 
         <!-- Bypass arrow (drawn via SVG) -->
         <div class="bypass-arrow scroll-enter" aria-label="Bypass arrow from Trigger to Price">
@@ -88,10 +88,10 @@
           <div class="flow-node__desc">Без embodiment — пустой ответ</div>
         </div>
 
-        <div class="flow-arrow-down" style="opacity:0.3;">&#8595;</div>
+        <div class="flow-arrow-down fi26-opacity30">&#8595;</div>
 
         <!-- Price (deferred/abstract) -->
-        <div class="flow-node" style="border-left: var(--line-bold) solid var(--accent-amber);">
+        <div class="flow-node fi26-border-l-amber">
           <div class="flow-node__name">Price</div>
           <div class="flow-node__desc price-deferred">Абстрактный, отложенный — «пожалеет позже», нефизический</div>
         </div>
@@ -343,14 +343,14 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <!-- Explanation -->
-    <div class="panel" style="max-width:600px; margin: var(--gap-xl) auto 0;">
-      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
+    <div class="panel fi26-container-sm">
+      <div class="fi26-label-violet">
         Метафора фильтрации
       </div>
-      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+      <p class="fi26-text-sm-secondary">
         Каждый слой сужается: внутреннее состояние широкое и сырое, речь — очищенный и отфильтрованный вывод.
         Уменьшающаяся ширина наглядно показывает, как сложный внутренний мир персонажа
-        сжимается в одну произнесённую фразу. Embodiment применяется <strong style="color:var(--text-primary);">всегда</strong>
+        сжимается в одну произнесённую фразу. Embodiment применяется <strong class="fi26-c-primary">всегда</strong>
         — каждый ответ должен пройти через все четыре слоя.
       </p>
     </div>

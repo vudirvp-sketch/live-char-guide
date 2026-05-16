@@ -6960,3 +6960,265 @@ body.theme-light .vs-mini-map {
   background: #ffffff;
   border-color: #e5e7eb;
 }
+
+/* ==========================================================================
+   FIX-26: Extracted inline styles → utility classes
+   Auto-generated. Do not edit manually without updating HTML references.
+   ========================================================================== */
+
+
+/* --- Table cells --- */
+.fi26-cell-right {
+  text-align:right;
+  padding:6px 8px;
+}
+.fi26-cell-pad {
+  padding:6px 8px;
+}
+.fi26-cell-pad-muted {
+  padding:6px 8px;
+  color:var(--text-muted);
+}
+.fi26-row-border {
+  border-bottom:1px solid var(--border-50);
+}
+.fi26-cell-left {
+  text-align:left;
+  padding:6px 8px;
+}
+.fi26-cell-left-muted {
+  text-align:left;
+  padding:6px 8px;
+  color:var(--text-muted);
+}
+.fi26-table-mono {
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--font-mono);
+  font-size:12px;
+}
+.fi26-thead-muted {
+  border-bottom:1px solid var(--border);
+  color:var(--text-muted);
+}
+.fi26-tbody-secondary {
+  color:var(--text-secondary);
+}
+
+/* --- Colors --- */
+.fi26-c-primary {
+  color:var(--text-primary);
+}
+.fi26-c-violet {
+  color:var(--accent-violet);
+}
+.fi26-c-muted {
+  color:var(--text-muted);
+}
+.fi26-c-success {
+  color:var(--success);
+}
+.fi26-c-danger {
+  color:var(--danger);
+}
+.fi26-c-cyan {
+  color:var(--accent-cyan);
+}
+.fi26-c-amber {
+  color:var(--accent-amber);
+}
+.fi26-c-violet70 {
+  color:rgba(139,92,246,0.7);
+}
+.fi26-c-violet85 {
+  color:rgba(139,92,246,0.85);
+}
+
+/* --- Text --- */
+.fi26-text-xs-secondary {
+  font-size:12px;
+  color:var(--text-secondary);
+}
+.fi26-text-sm-secondary {
+  font-size:13px;
+  color:var(--text-secondary);
+  line-height:1.6;
+}
+.fi26-text-2xs {
+  font-size:10px;
+}
+.fi26-ml-xs {
+  margin-left:4px;
+}
+.fi26-mt-xs {
+  margin-top:4px;
+}
+.fi26-label-sm-violet {
+  font-family:var(--font-heading);
+  font-weight:600;
+  font-size:13px;
+  color:var(--accent-violet);
+}
+.fi26-label-primary {
+  font-family:var(--font-heading);
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:var(--gap-sm);
+  color:var(--text-primary);
+}
+.fi26-label-violet {
+  font-family:var(--font-heading);
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:var(--gap-sm);
+  color:var(--accent-violet);
+}
+.fi26-label-cyan {
+  font-family:var(--font-heading);
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:var(--gap-sm);
+  color:var(--accent-cyan);
+}
+.fi26-muted-block-xs {
+  color:var(--text-muted);
+  font-size:10px;
+  margin-top:4px;
+  display:block;
+}
+
+/* --- Containers --- */
+.fi26-container-lg {
+  max-width:720px;
+  margin: var(--gap-xl) auto 0;
+}
+.fi26-container-md {
+  max-width:700px;
+  margin: var(--gap-xl) auto 0;
+}
+.fi26-container-sm {
+  max-width:600px;
+  margin: var(--gap-xl) auto 0;
+}
+.fi26-flex-center-gap {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:4px;
+}
+
+/* --- Borders --- */
+.fi26-border-l-violet {
+  border-left: var(--line-bold) solid var(--accent-violet);
+}
+.fi26-border-l-cyan {
+  border-left: var(--line-bold) solid var(--accent-cyan);
+}
+.fi26-border-l-amber {
+  border-left: var(--line-bold) solid var(--accent-amber);
+}
+.fi26-border-cyan {
+  border-color:var(--accent-cyan);
+}
+.fi26-quote-violet {
+  border-left:2px solid var(--accent-violet);
+  padding-left:var(--gap-md);
+}
+
+/* --- Positioning --- */
+.fi26-pos-relative {
+  position:relative;
+}
+.fi26-pos-tr-10 {
+  top:10px;
+  right:20px;
+}
+.fi26-pos-tr-20 {
+  top:20px;
+  right:20px;
+}
+.fi26-pos-tr-100 {
+  top:100px;
+  right:20px;
+}
+.fi26-pos-tr-120 {
+  top:120px;
+  right:20px;
+}
+.fi26-pos-tr-130 {
+  top:130px;
+  right:20px;
+}
+.fi26-pos-tr-250 {
+  top:250px;
+  right:20px;
+}
+.fi26-pos-tr-260 {
+  top:260px;
+  right:20px;
+}
+.fi26-pos-tr-280 {
+  top:280px;
+  right:20px;
+}
+.fi26-pos-tr-290 {
+  top:290px;
+  right:20px;
+}
+.fi26-pos-tr-380 {
+  top:380px;
+  right:20px;
+}
+.fi26-pos-tr-390 {
+  top:390px;
+  right:20px;
+}
+.fi26-bottom-half {
+  bottom:50%;
+}
+
+/* --- Visibility & Misc --- */
+.fi26-opacity30 {
+  opacity:0.3;
+}
+.fi26-hidden {
+  display:none;
+}
+.fi26-noscript-fallback {
+  padding:2em;
+  text-align:center;
+  color:#e2e8f0;
+  font-family:sans-serif;
+}
+
+/* --- Transition delays --- */
+.fi26-delay-0 {
+  transition-delay:0ms;
+}
+.fi26-delay-200 {
+  transition-delay:200ms;
+}
+.fi26-delay-400 {
+  transition-delay:400ms;
+}
+.fi26-delay-500 {
+  transition-delay:500ms;
+}
+.fi26-delay-600 {
+  transition-delay:600ms;
+}
+.fi26-delay-650 {
+  transition-delay:650ms;
+}
+.fi26-delay-700 {
+  transition-delay:700ms;
+}
+.fi26-delay-750 {
+  transition-delay:750ms;
+}
+.fi26-delay-800 {
+  transition-delay:800ms;
+}
+.fi26-delay-850 {
+  transition-delay:850ms;
+}

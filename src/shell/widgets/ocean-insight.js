@@ -962,7 +962,7 @@
     getVersion: () => '3.0.0'
   };
 
-  // Auto-init after layer content is loaded
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
   function autoInit() {
     const container = document.getElementById('ocean-embed');
     if (container) {
@@ -971,11 +971,11 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 600));
+    document.addEventListener('DOMContentLoaded', function() {
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
     });
   } else {
-    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 600));
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
   }
 
 })();

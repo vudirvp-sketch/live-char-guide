@@ -77,5 +77,17 @@
   }
   
   window.VsAuthorNoteViewer = { init: initAuthorNoteViewer, initAll, destroy };
-  document.addEventListener('DOMContentLoaded', initAll);
+
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
+  function autoInit() {
+    initAll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
+    });
+  } else {
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
+  }
 })();

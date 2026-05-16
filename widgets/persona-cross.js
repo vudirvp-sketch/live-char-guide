@@ -216,10 +216,9 @@
     get enneagramData() { return enneagramDataCache; }
   };
 
-  // Auto-init after layer content is loaded
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      // Wait a tick for lazy-loader to finish
+    document.addEventListener('DOMContentLoaded', function() {
       (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
     });
   } else {

@@ -855,7 +855,7 @@
     getVersion: function() { return '3.0.0'; }
   };
 
-  // Auto-init on page load
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
   function autoInit() {
     var container = document.getElementById('mbti-embed');
     if (container) {
@@ -865,10 +865,10 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 800));
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
     });
   } else {
-    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 800));
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
   }
 
 })();

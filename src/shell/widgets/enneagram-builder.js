@@ -1045,6 +1045,7 @@
   };
 
   // Auto-init after layer content is loaded
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
   function autoInit() {
     var container = document.getElementById('enneagram-embed');
     if (container) {
@@ -1055,10 +1056,10 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 700));
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
     });
   } else {
-    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 700));
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
   }
 
 })();

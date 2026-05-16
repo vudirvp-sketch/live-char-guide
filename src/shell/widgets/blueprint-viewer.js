@@ -47,5 +47,17 @@
   window.VsBlueprintViewer = { init: initBlueprintViewer, initAll, destroy };
   // Note: setLayer was a planned feature never implemented. Removed to prevent TypeError.
   // Layer toggling removed in v8 — all annotation layers are visible simultaneously.
-  document.addEventListener('DOMContentLoaded', _domContentLoadedHandler);
+
+  // FIX-23: Standardized widget initialization — EventBus.whenReady() with 500ms fallback
+  function autoInit() {
+    initAll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
+    });
+  } else {
+    (window.EventBus && window.EventBus.whenReady ? window.EventBus.whenReady(autoInit) : setTimeout(autoInit, 500));
+  }
 })();
