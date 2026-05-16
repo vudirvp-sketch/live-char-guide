@@ -675,6 +675,11 @@
       loadGlossaryContent();
       handleLegacyAnchor();
 
+      // Render Mermaid diagrams after content is loaded
+      if (typeof mermaid !== 'undefined' && typeof mermaid.run === 'function') {
+        try { mermaid.run(); } catch (e) { console.warn('[Mermaid] Render error:', e.message); }
+      }
+
     } catch (e) {
       content.innerHTML = `<div class="callout warn"><strong>Error</strong><p>Failed to load content: ${e.message}</p></div>`;
     }

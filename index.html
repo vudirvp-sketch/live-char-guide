@@ -15,7 +15,7 @@
   <meta property="og:image" content="assets/preview-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <!-- CSP updated for VS: added cdn.jsdelivr.net for Three.js/Geist fonts, fonts.googleapis.com -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -23,6 +23,28 @@
   <link rel="stylesheet" href="assets/shell-styles.css">
   <link rel="stylesheet" href="assets/vs-styles.css">
   <script>document.documentElement.classList.add('js')</script>
+  <!-- Mermaid.js for flowchart/diagram rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#4a1a4a',
+        primaryTextColor: '#e2e8f0',
+        primaryBorderColor: '#da77f2',
+        lineColor: '#8b95a8',
+        secondaryColor: '#1a3a4a',
+        tertiaryColor: '#1a2a3a',
+        background: '#0c0d12',
+        mainBkg: '#1a1a2e',
+        nodeBorder: '#da77f2',
+        clusterBkg: '#151620',
+        titleColor: '#e2e8f0',
+        edgeLabelBackground: '#0c0d12'
+      }
+    });
+  </script>
 </head>
 <body>
   <!-- Loading overlay -->
