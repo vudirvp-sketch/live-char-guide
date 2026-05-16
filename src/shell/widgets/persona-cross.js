@@ -29,6 +29,9 @@
   let oceanDataCache = null;
   let enneagramDataCache = null;
 
+  // FIX-02: Origin guard flag to prevent infinite event loop
+  let _isExternalTrigger = false;
+
   // Data fetching delegated to WidgetUtils.fetchJson
 
   /**
@@ -88,8 +91,10 @@
 
   /**
    * Dispatch custom event when a cell is clicked
+   * FIX-02: Skip emission when triggered externally to prevent infinite loop
    */
   function dispatchSelectEvent(trait, typeNum, value) {
+    if (_isExternalTrigger) return; // Don't re-emit events from external triggers
     const event = new CustomEvent('persona-cross://select', {
       detail: { trait, type: typeNum, value },
       bubbles: true
@@ -179,12 +184,17 @@
     });
 
     // Listen for external events (OCEAN pentagon click → highlight column)
+    // FIX-02: Set origin guard before programmatically clicking to prevent infinite loop
     document.addEventListener('persona-cross://select', (e) => {
       // External widget triggered selection
       const { trait, type: typeNum } = e.detail;
       if (trait && typeNum) {
         const cell = container.querySelector(`.cross-cell[data-trait="${trait}"][data-type="${typeNum}"]`);
-        if (cell) cell.click();
+        if (cell) {
+          _isExternalTrigger = true;
+          cell.click();
+          _isExternalTrigger = false;
+        }
       }
     });
 

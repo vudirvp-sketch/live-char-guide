@@ -32,7 +32,7 @@
   
   const CONFIG = {
     STORAGE_KEY: 'guide-unified',
-    VERSION: '7.0.0',
+    VERSION: '9.1.0',
     PARTS_DIR: 'parts'
   };
 
@@ -704,9 +704,12 @@
    * FIX: Execute inline <script> tags that were injected via innerHTML.
    * Browsers do not execute <script> tags inserted via innerHTML (HTML spec).
    * This function extracts each script, strips the DOMContentLoaded wrapper
-   * (since DOM is already loaded at this point), removes type="module"
-   * (for CSP 'unsafe-inline' compatibility), and re-inserts the script
-   * so the browser executes it.
+   * (since DOM is already loaded at this point), and executes it safely.
+   *
+   * FIX-01: Non-module scripts are executed via new Function() to handle
+   * bare `return` statements (legal inside DOMContentLoaded callback but
+   * illegal at top level). Module scripts preserve type="module" so that
+   * `import` statements work correctly.
    */
   function executeInlineScripts(container) {
     const scripts = container.querySelectorAll('script');
@@ -714,23 +717,46 @@
       let code = oldScript.textContent.trim();
       if (!code) return;
 
+      const isModule = oldScript.type === 'module';
+
       // Remove DOMContentLoaded wrapper since DOM is already loaded
       code = code.replace(
         /document\.addEventListener\(\s*['"]DOMContentLoaded['"]\s*,\s*\(\)\s*=>\s*\{([\s\S]*)\}\s*\)\s*;?\s*$/,
         '$1'
       );
 
-      // Create new script element (without type="module" for CSP compatibility)
-      const newScript = document.createElement('script');
-      for (const attr of oldScript.attributes) {
-        if (attr.name !== 'type') {
-          newScript.setAttribute(attr.name, attr.value);
+      if (isModule) {
+        // Module scripts: preserve type="module" and wrap in IIFE for return statements
+        // Module scripts can't use new Function() — they need the module scope
+        // Wrap in block scope to handle bare returns
+        if (/^\s*return\s/m.test(code)) {
+          code = '(function() { ' + code + ' })();';
+        }
+        const newScript = document.createElement('script');
+        newScript.type = 'module';
+        // Copy other attributes (except type which we already set)
+        for (const attr of oldScript.attributes) {
+          if (attr.name !== 'type') {
+            newScript.setAttribute(attr.name, attr.value);
+          }
+        }
+        newScript.textContent = code;
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+      } else {
+        // Non-module scripts: use new Function() for safe execution
+        // This handles bare `return` statements that would cause
+        // SyntaxError: Illegal return statement at top level
+        try {
+          const fn = new Function(code);
+          fn.call(window);
+        } catch (e) {
+          console.warn('[LazyLoader] Inline script error:', e.message);
+        }
+        // Remove the original script tag (already executed via new Function)
+        if (oldScript.parentNode) {
+          oldScript.parentNode.removeChild(oldScript);
         }
       }
-      newScript.textContent = code;
-
-      // Replace old with new — this triggers script execution
-      oldScript.parentNode.replaceChild(newScript, oldScript);
     });
   }
 
