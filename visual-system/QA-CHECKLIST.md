@@ -1,8 +1,8 @@
 # Чеклист QA визуальной системы
 
-**Версия:** 1.5
+**Версия:** 1.6
 **Последнее обновление:** 2026-05-16
-**QA-прогон:** Фаза 5 — багфикс-проход завершён
+**QA-прогон:** Фаза 6 — багфикс-проход v1.6 завершён
 
 ## Правило языка контента
 
@@ -652,3 +652,13 @@ Tabindex="0" и keydown handler добавлены ранее (v1.4).
 | E17 checklist-row overflow на mobile | E17 | @media 768px: grid-template-columns: 1fr |
 | E04 depth-label overflow | E04 | Изменён padding-right подход вместо right:-80px |
 | Мини-карта role="link" → role="button" | Все 17 | Заменён role="link" на role="button" (навигация, не ссылка) |
+
+### Исправления v1.6 (Багфикс-проход)
+
+| Баг | Элемент | Исправление |
+|-----|---------|-------------|
+| aria-label без открывающей кавычки | Все 17 | `aria-label=E01"` → `aria-label="E01"` (~272 атрибута) |
+| Recent Chat bars невидимые | E07 | Добавлен `scroll-enter` класс к 3 rect элементам Недавнего чата |
+| Callouts никогда не видны | E15 | Добавлено `.annotation-layer--active .callout { opacity: 1 }` правило |
+| 12B column opacity сбрасывается | E17 | Разделено: `.param-column.is-visible:not(.param-column--12b) { opacity: 1 }` + `.param-column--12b.is-visible { opacity: 0.75 }` |
+| Шаблон IMPLEMENTATION_PLAN lang="en" | План | Заменён `lang="en"` → `lang="ru"` в файловом шаблоне |
