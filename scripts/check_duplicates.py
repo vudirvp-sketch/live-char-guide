@@ -7,6 +7,8 @@ Purpose: Detect text blocks >100 chars appearing in multiple files.
 Exit: 0 if no duplicates, 1 if duplicates found.
 
 Updated for v9: works with src/master/ (including part_07a, part_07b, appendixes)
+Updated for v9.1: strip <script>, comments, and structural divs before comparison
+                   to eliminate false positives from boilerplate HTML.
 """
 
 import os
@@ -17,8 +19,21 @@ from difflib import SequenceMatcher
 
 # Pairs of files where duplication is intentional (template → implementation)
 ALLOWED_DUPLICATE_PAIRS = [
-    ("part_07a.html", "part_10_examples.html"),
-    ("part_07b.html", "part_10_examples.html"),
+    ("part_07a.html", "part_10.html"),
+    ("part_07b.html", "part_10.html"),
+]
+
+# Structural HTML patterns that produce false-positive duplicates.
+# These are stripped from content BEFORE block extraction.
+STRUCTURAL_STRIP_PATTERNS = [
+    # Inline <script> blocks (IntersectionObserver boilerplate, etc.)
+    (r'<script[^>]*>.*?</script>', re.DOTALL),
+    # HTML comments (VS-EMBED headers, etc.)
+    (r'<!--.*?-->', re.DOTALL),
+    # part-resume summary footers ("Что вы теперь умеете")
+    (r'<div[^>]*class="[^"]*part-resume[^"]*"[^>]*>.*?</div>\s*</div>', re.DOTALL),
+    # bridge-paragraph navigation blocks
+    (r'<div[^>]*class="[^"]*bridge-paragraph[^"]*"[^>]*>.*?</div>', re.DOTALL),
 ]
 
 def is_allowed_pair(file1, file2):
@@ -27,6 +42,12 @@ def is_allowed_pair(file1, file2):
         if (a in file1 and b in file2) or (b in file1 and a in file2):
             return True
     return False
+
+def strip_structural_boilerplate(content: str) -> str:
+    """Remove structural boilerplate patterns that cause false positives."""
+    for pattern, flags in STRUCTURAL_STRIP_PATTERNS:
+        content = re.sub(pattern, '', content, flags=flags)
+    return content
 
 def normalize_text(text: str) -> str:
     """Normalize text for comparison."""
@@ -72,6 +93,8 @@ def find_duplicates(parts_dirs: list, min_length: int = 100, threshold: float = 
         
         for file_path in files:
             content = file_path.read_text(encoding='utf-8')
+            # Strip structural boilerplate before block extraction
+            content = strip_structural_boilerplate(content)
             blocks = extract_text_blocks(content, min_length)
             
             for block in blocks:

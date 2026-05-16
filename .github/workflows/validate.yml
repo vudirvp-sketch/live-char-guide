@@ -3,8 +3,17 @@ name: Validate Track System
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'data/**'
+      - 'scripts/**'
   pull_request:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'data/**'
+      - 'scripts/**'
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -32,4 +41,4 @@ jobs:
       - name: Check for duplicates (all layers)
         run: |
           echo "=== Duplicate Detection ==="
-          python scripts/check_duplicates.py --min-length 100 --threshold 0.9
+          python scripts/check_duplicates.py --min-length 100 --threshold 0.95

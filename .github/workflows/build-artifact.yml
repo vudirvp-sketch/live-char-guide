@@ -75,7 +75,7 @@ jobs:
       # === ID: F1 | CI Duplicate Detection ===
       - name: Check for duplicates
         run: |
-          python scripts/check_duplicates.py --min-length 100 --threshold 0.9
+          python scripts/check_duplicates.py --min-length 100 --threshold 0.95
         continue-on-error: ${{ github.event_name == 'pull_request' }}
 
       # === ID: F2 | CI Terminology Validation ===

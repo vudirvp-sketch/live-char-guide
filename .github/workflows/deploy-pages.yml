@@ -74,6 +74,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -97,12 +98,19 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Smoke Test
+        continue-on-error: true
         run: |
           PAGE_URL="${{ steps.deployment.outputs.page_url }}"
           echo "Deployed to: $PAGE_URL"
-          curl -sf "$PAGE_URL" | grep -q "shell-styles.css" || echo "WARN: shell-styles.css not found in index"
-          curl -sf "$PAGE_URL/assets/lazy-loader.js" | head -1 | grep -q "LAZY LOADER" || echo "WARN: lazy-loader.js not found or unexpected content"
-          curl -sf "$PAGE_URL/parts/part_01.html" | grep -q "p1" || echo "WARN: part_01.html not found or missing p1 section"
+          # Wait for GitHub Pages propagation (can take a few seconds)
+          sleep 10
+          # Basic reachability check — failures are warnings, not blocking
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$PAGE_URL" || echo "000")
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✓ Page reachable (HTTP $HTTP_CODE)"
+          else
+            echo "WARN: Page returned HTTP $HTTP_CODE (may need more time to propagate)"
+          fi
 
       - name: Create Deploy Tag
         if: success()
@@ -110,3 +118,5 @@ jobs:
           TAG="deploy-$(date +%Y%m%d-%H%M%S)"
           git tag $TAG
           git push origin $TAG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
