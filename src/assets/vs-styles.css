@@ -1,0 +1,3317 @@
+/* ============================================================
+   vs-styles.css — Consolidated Visual System Styles
+   ============================================================
+   This file aggregates ALL Visual System styles needed by
+   index.html alongside shell-styles.css. It contains:
+
+   1. CSS Custom Property Aliases (unprefixed → --vs-* vars)
+   2. VS Shared Base (scrollbar, selection, focus, links,
+      prefers-reduced-motion — reset/html/body excluded)
+   3. VS Shared Patterns (P1–P6 layout primitives)
+   4. VS Shared Utilities (glow, panels, badges, scroll-enter, etc.)
+   5. Component Extracts E01–E17
+
+   DO NOT edit individual sections in isolation — regenerate
+   from source files if a re-consolidation is needed.
+   ============================================================ */
+
+
+/* ============================================================
+   SECTION 1 — CSS Custom Property Aliases
+   ============================================================
+   The E*-styles.css files reference unprefixed variable names
+   (--line-width, --radius-sm, etc.) that are defined in
+   shell-styles.css with the --vs- prefix. These aliases bridge
+   the gap.
+   ============================================================ */
+
+:root {
+  /* Aliases for VS component styles that reference unprefixed names */
+  --line-width: var(--vs-line-width);
+  --line-bold: var(--vs-line-bold);
+  --radius-sm: var(--vs-radius-sm);
+  --radius-md: var(--vs-radius-md);
+  --radius-lg: var(--vs-radius-lg);
+}
+
+
+/* ============================================================
+   SECTION 2 — VS Shared Base
+   Source: visual-system/shared/base.css
+   (Reset, html, body rules SKIPPED — shell-styles.css has those)
+   ============================================================ */
+
+/* --- Стилизация скроллбара (тонкий, тёмный) --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Скроллбар Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-active) var(--bg-deep);
+}
+
+/* --- Цвет выделения (циановый оттенок) --- */
+::selection {
+  background: var(--cyan-25);
+  color: var(--text-primary);
+}
+::-moz-selection {
+  background: var(--cyan-25);
+  color: var(--text-primary);
+}
+
+/* --- Индикатор фокуса --- */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* --- Изображения --- */
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Ссылки --- */
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Уменьшенное движение: отключить ВСЕ анимации --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* ============================================================
+   SECTION 3 — VS Shared Patterns (P1–P6)
+   Source: visual-system/shared/patterns.css
+   ============================================================ */
+
+/* --- P1 — Stack / Layers --- */
+.p-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.p-stack > * {
+  position: relative;
+}
+
+/* Разделители между дочерними элементами стека */
+.p-stack--divided > * + * {
+  border-top: var(--line-width) solid var(--border);
+  padding-top: var(--gap-md);
+}
+
+/* --- P2 — Flow / Pipeline --- */
+.p-flow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-lg);
+  flex-wrap: wrap;
+}
+
+/* Стрелки-соединители между дочерними элементами потока */
+.p-flow--arrows > * + *::before {
+  content: '→';
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--accent-cyan);
+  margin-right: var(--gap-sm);
+}
+
+/* Вертикальный вариант потока */
+.p-flow--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.p-flow--vertical.p-flow--arrows > * + *::before {
+  content: '↓';
+  margin-right: 0;
+  text-align: center;
+  margin-bottom: var(--gap-xs);
+}
+
+/* --- P3 — Tree / Branching --- */
+.p-tree {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-sm);
+}
+
+.p-tree ul {
+  list-style: none;
+  padding-left: var(--gap-lg);
+  position: relative;
+}
+
+/* Соединительные линии для ветвей дерева */
+.p-tree ul::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: var(--gap-sm);
+  width: var(--line-width);
+  background: var(--border);
+}
+
+.p-tree li {
+  position: relative;
+  padding-left: var(--gap-md);
+}
+
+.p-tree li::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: var(--gap-md);
+  height: var(--line-width);
+  background: var(--border);
+}
+
+/* --- P4 — Radial / Hub --- */
+.p-radial {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.p-radial__hub {
+  position: relative;
+  z-index: 2;
+}
+
+.p-radial__spoke {
+  position: absolute;
+  z-index: 1;
+  transform-origin: center center;
+}
+
+/* --- P5 — Comparison / Bars --- */
+.p-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+  align-items: start;
+}
+
+/* Многоколоночный вариант для 3+ колонок */
+.p-compare--3col {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Компоновка сгруппированных полос */
+.p-compare--bars {
+  grid-template-columns: 1fr;
+  gap: var(--gap-sm);
+}
+
+/* --- P6 — Blueprint --- */
+.p-blueprint {
+  position: relative;
+  background:
+    /* Сетка чертежа с непрозрачностью 3% */
+    linear-gradient(var(--cyan-3) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cyan-3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: var(--line-width) solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-xl);
+  overflow: hidden;
+}
+
+/* Система позиционирования линий выносок */
+.p-blueprint__callout {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+}
+
+.p-blueprint__callout-line {
+  width: 40px;
+  height: var(--line-width);
+  background: var(--accent-cyan);
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.p-blueprint__callout-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
+/* --- Адаптивные корректировки --- */
+@media (max-width: 768px) {
+  .p-flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .p-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .p-compare--3col {
+    grid-template-columns: 1fr;
+  }
+
+  .p-radial {
+    min-height: 300px;
+  }
+
+  .p-blueprint {
+    padding: var(--gap-lg);
+  }
+}
+
+
+/* ============================================================
+   SECTION 4 — VS Shared Utilities
+   Source: visual-system/shared/utilities.css
+   ============================================================ */
+
+/* --- Эффекты свечения --- */
+.glow-cyan   { box-shadow: var(--glow-cyan); }
+.glow-violet { box-shadow: var(--glow-violet); }
+.glow-danger { box-shadow: var(--glow-danger); }
+.glow-amber  { box-shadow: var(--glow-amber); }
+
+/* --- Панель (стандартная карточка/панель) --- */
+.panel {
+  background: var(--bg-panel);
+  border: var(--line-width) solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--gap-md);
+  box-shadow: inset 0 1px 0 var(--border-20);
+}
+
+.panel--raised {
+  background: var(--bg-raised);
+  border-color: var(--border-active);
+}
+
+/* --- Акцентные полосы (левая граница-акцент) --- */
+.accent-strip--cyan {
+  border-left: var(--line-bold) solid var(--accent-cyan);
+  padding-left: var(--gap-md);
+}
+
+.accent-strip--violet {
+  border-left: var(--line-bold) solid var(--accent-violet);
+  padding-left: var(--gap-md);
+}
+
+.accent-strip--amber {
+  border-left: var(--line-bold) solid var(--accent-amber);
+  padding-left: var(--gap-md);
+}
+
+.accent-strip--danger {
+  border-left: var(--line-bold) solid var(--danger);
+  padding-left: var(--gap-md);
+}
+
+/* --- Метки --- */
+.label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.label-micro {
+  font-family: var(--font-micro);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* --- Значок / Пилл --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 450;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.badge--cyan {
+  background: var(--cyan-12);
+  color: var(--accent-cyan);
+  border: 1px solid var(--cyan-25);
+}
+
+.badge--violet {
+  background: var(--violet-12);
+  color: var(--accent-violet);
+  border: 1px solid var(--violet-25);
+}
+
+.badge--amber {
+  background: var(--amber-10);
+  color: var(--accent-amber);
+  border: 1px solid var(--amber-25);
+}
+
+.badge--danger {
+  background: var(--danger-15);
+  color: var(--danger);
+  border: 1px solid var(--danger-25);
+}
+
+.badge--success {
+  background: var(--success-15);
+  color: var(--success);
+  border: 1px solid var(--success-25);
+}
+
+.badge--muted {
+  background: var(--muted-15);
+  color: var(--text-muted);
+  border: 1px solid var(--muted-25);
+}
+
+/* --- Точки серьёзности --- */
+.severity-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.severity-dot--high {
+  background: var(--danger);
+  box-shadow: 0 0 6px var(--danger-40);
+}
+
+.severity-dot--medium {
+  background: var(--accent-amber);
+  box-shadow: 0 0 6px var(--amber-30);
+}
+
+/* --- Триггер анимации при прокрутке --- */
+.scroll-enter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+.scroll-enter--left {
+  transform: translateX(-30px);
+}
+
+.scroll-enter--right {
+  transform: translateX(30px);
+}
+
+.scroll-enter--scale {
+  transform: scale(0.9);
+}
+
+.scroll-enter.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* --- Заголовок элемента --- */
+.element-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 450;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.element-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-top: var(--gap-xs);
+}
+
+.element-subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: var(--gap-xs);
+}
+
+/* --- Подвал перекрёстных ссылок --- */
+.element-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-xl);
+  padding-top: var(--gap-md);
+  border-top: var(--line-width) solid var(--border);
+}
+
+.element-links .badge {
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.element-links .badge:hover {
+  filter: brightness(1.2);
+}
+
+/* --- Навигация мини-карты --- */
+.mini-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm) var(--gap-md);
+  padding: var(--gap-sm) var(--gap-md);
+  background: var(--bg-panel);
+  border: var(--line-width) solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-micro);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: var(--gap-xl);
+  align-items: center;
+}
+
+.mini-map__section {
+  display: flex;
+  gap: var(--gap-xs);
+  align-items: center;
+}
+
+.mini-map__section-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: var(--gap-xs);
+}
+
+.mini-map__el {
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.mini-map__el:hover,
+.mini-map__el:focus-visible {
+  color: var(--text-secondary);
+  background: var(--bg-raised);
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 1px;
+}
+
+.mini-map__el--active {
+  color: var(--accent-cyan);
+  background: var(--cyan-10);
+  position: relative;
+}
+
+.mini-map__el--active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
+/* --- Помощник: блок моноширинного текста --- */
+.mono-block {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* --- Помощник: пунктирная граница (необязательный элемент) --- */
+.border-dashed {
+  border-style: dashed;
+}
+
+/* --- Помощник: аннотация Token Budget --- */
+.token-annotation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* --- Интерактивное состояние при наведении --- */
+.hover-lift {
+  transition: transform 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--border-40);
+}
+
+
+/* ============================================================
+   SECTION 5 — Component Extracts E01–E17
+   Source: visual-system/integration/component-extracts/
+   ============================================================ */
+
+
+/* --- E01 — Card Anatomy --- */
+/*
+  Element: E01 — Card Anatomy
+  Source: elements/E01-card-anatomy.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.card-stack {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .card-block {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* SP block — border-only frame, no fill */
+    .card-block--sp {
+      border: var(--line-bold) solid var(--accent-cyan);
+      background: transparent;
+      min-height: 40px;
+      position: relative;
+    }
+
+    .card-block--sp .inner-dashed {
+      position: absolute;
+      inset: 4px;
+      border: 1px dashed var(--cyan-30);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Description block — widest */
+    .card-block--desc {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      min-height: 120px;
+      border-left: var(--line-bold) solid var(--accent-cyan);
+    }
+
+    /* Examples block — medium */
+    .card-block--examples {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      min-height: 90px;
+      border-left: var(--line-bold) solid var(--accent-cyan);
+    }
+
+    /* Anchors sub-panel inside Examples */
+    .anchors-subpanel {
+      background: var(--violet-8);
+      border: var(--line-width) solid var(--violet-25);
+      border-left: var(--line-bold) solid var(--accent-violet);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-top: var(--gap-sm);
+    }
+
+    /* Greeting block — narrow */
+    .card-block--greeting {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      min-height: 50px;
+      border-left: var(--line-bold) solid var(--accent-amber);
+    }
+
+    /* Lorebook — optional, dashed */
+    .card-block--lorebook {
+      background: var(--bg-panel);
+      border: 1px dashed var(--border-active);
+      min-height: 40px;
+      opacity: 0.7;
+    }
+
+    /* Block labels */
+    .block-label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+      padding: var(--gap-sm) var(--gap-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .block-label__name {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .block-content {
+      padding: 0 var(--gap-md) var(--gap-sm);
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Token annotations on the right */
+    .token-anno {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .token-anno__row {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--gap-xs);
+    }
+
+    .token-anno__val {
+      min-width: 36px;
+      text-align: right;
+    }
+
+    .token-anno__label {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    /* Divider between blocks */
+    .block-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* Description callout for Anchors */
+    .desc-callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: var(--violet-8);
+      border: 1px solid var(--violet-20);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      color: var(--accent-violet);
+      margin-top: var(--gap-xs);
+    }
+
+    /* Optional badge */
+    .optional-badge {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 1px 6px;
+      border: 1px dashed var(--border-active);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Scroll animation delays */
+    .card-block:nth-child(1) { transition-delay: 0ms; }
+    .card-block:nth-child(3) { transition-delay: 80ms; }
+    .card-block:nth-child(5) { transition-delay: 160ms; }
+    .card-block:nth-child(7) { transition-delay: 240ms; }
+    .card-block:nth-child(9) { transition-delay: 320ms; }
+
+
+/* --- E02 — Assembly Pipeline --- */
+/*
+  Element: E02 — Assembly Pipeline
+  Source: elements/E02-assembly-pipeline.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.pipeline-container {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: var(--gap-lg);
+    }
+
+    /* Main flow row */
+    .pipeline-main {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: nowrap;
+      min-width: max-content;
+    }
+
+    .pipeline-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pipeline-node__box {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      min-width: 120px;
+      text-align: center;
+      transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+      cursor: default;
+    }
+
+    .pipeline-node__box:hover {
+      border-color: var(--border-active);
+      box-shadow: -2px 0 8px var(--cyan-15);
+    }
+
+    .pipeline-node__label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .pipeline-node__sublabel {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .pipeline-node__step {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+
+    /* Optional node — dashed border */
+    .pipeline-node__box--optional {
+      border-style: dashed;
+      border-color: var(--border-active);
+    }
+
+    /* SPINE sub-label violet */
+    .pipeline-node__box--spine {
+      border-color: var(--violet-30);
+    }
+    .pipeline-node__box--spine:hover {
+      box-shadow: -2px 0 8px var(--violet-15);
+    }
+
+    /* Forward arrows between nodes */
+    .pipeline-arrow {
+      width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-cyan);
+      font-size: 16px;
+    }
+
+    .pipeline-arrow svg {
+      width: 28px;
+      height: 12px;
+    }
+
+    /* Feedback loop — below main flow */
+    .feedback-loop {
+      margin-top: var(--gap-lg);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--gap-md);
+      padding: var(--gap-md);
+      border: 1px dashed var(--accent-amber);
+      border-radius: var(--radius-md);
+      background: var(--amber-4);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feedback-loop__label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-amber);
+    }
+
+    .feedback-loop__desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .feedback-loop__arrows {
+      color: var(--accent-amber);
+      font-size: 14px;
+    }
+
+    /* Optional steps branching below */
+    .optional-branch {
+      margin-top: var(--gap-lg);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .optional-branch__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: var(--gap-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .optional-branch__items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-sm);
+    }
+
+    .optional-branch__item {
+      background: var(--bg-panel);
+      border: 1px dashed var(--border-active);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-family: var(--font-heading);
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: border-color var(--duration-fast), color var(--duration-fast);
+    }
+
+    .optional-branch__item:hover {
+      border-color: var(--accent-cyan);
+      color: var(--text-primary);
+    }
+
+    /* Scroll animations */
+    .pipeline-node {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .pipeline-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-out-expo);
+    }
+
+    .pipeline-node.is-visible,
+    .pipeline-arrow.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Stagger delays */
+    .pipeline-node:nth-child(1) { transition-delay: 0ms; }
+    .pipeline-node:nth-child(3) { transition-delay: 80ms; }
+    .pipeline-node:nth-child(5) { transition-delay: 160ms; }
+    .pipeline-node:nth-child(7) { transition-delay: 240ms; }
+    .pipeline-node:nth-child(9) { transition-delay: 320ms; }
+    .pipeline-node:nth-child(11) { transition-delay: 400ms; }
+
+    @media (max-width: 768px) {
+      .pipeline-main {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .pipeline-arrow {
+        transform: rotate(90deg);
+        width: auto;
+        height: 24px;
+      }
+    }
+
+
+/* --- E03 — Behavioral Anchor T→A→P --- */
+/*
+  Element: E03 — Behavioral Anchor T→A→P
+  Source: elements/E03-behavioral-anchor.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-lg);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .compare-column {
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+      position: relative;
+    }
+
+    .compare-column--correct {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      box-shadow: inset 2px 0 8px var(--cyan-6);
+    }
+
+    .compare-column--incorrect {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-amber);
+      box-shadow: inset 2px 0 8px var(--amber-6);
+    }
+
+    .compare-column__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: var(--gap-md);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .compare-column--correct .compare-column__title {
+      color: var(--accent-cyan);
+    }
+
+    .compare-column--incorrect .compare-column__title {
+      color: var(--accent-amber);
+    }
+
+    /* Flow nodes inside comparison */
+    .flow-node {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-bottom: var(--gap-sm);
+      position: relative;
+    }
+
+    .flow-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .flow-node__desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Downward arrow between nodes */
+    .flow-arrow-down {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin: var(--gap-xs) 0;
+    }
+
+    /* Bypass arrow (incorrect side) */
+    .bypass-arrow {
+      position: absolute;
+      right: -8px;
+      top: 20px;
+      bottom: 60px;
+      width: 40px;
+      pointer-events: none;
+      transform: none;
+    }
+
+    .bypass-arrow svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bypass-arrow__label {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--danger);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    /* Check / X marks */
+    .check-list {
+      margin-top: var(--gap-md);
+      padding-top: var(--gap-sm);
+      border-top: var(--line-width) solid var(--border);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .check-item__icon--pass {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .check-item__icon--fail {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    /* Embodiment badge */
+    .embodiment-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: var(--violet-10);
+      border: 1px solid var(--violet-25);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-violet);
+      margin-left: 6px;
+    }
+
+    /* Empty node (incorrect) */
+    .flow-node--empty {
+      border-style: dashed;
+      border-color: var(--border-active);
+      opacity: 0.5;
+    }
+
+    .flow-node--empty .flow-node__desc {
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Price deferred */
+    .price-deferred {
+      color: var(--accent-amber);
+      font-style: italic;
+    }
+
+    /* Scroll animations */
+    .compare-column {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .compare-column--correct {
+      transform: translateX(-20px);
+    }
+
+    .compare-column--incorrect {
+      transform: translateX(20px);
+    }
+
+    .compare-column.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .bypass-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-slow) var(--ease-out-expo) 0.4s;
+    }
+
+    .bypass-arrow.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+/* --- E04 — Embodiment Protocol --- */
+/*
+  Element: E04 — Embodiment Protocol
+  Source: elements/E04-embodiment-protocol.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.funnel-stack {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* Link-back annotation */
+    .link-back {
+      font-family: var(--font-micro);
+      font-size: 11px;
+      color: var(--accent-violet);
+      margin-bottom: var(--gap-lg);
+      padding: 4px 12px;
+      background: var(--violet-8);
+      border: 1px solid var(--violet-20);
+      border-radius: var(--radius-sm);
+    }
+
+    /* Funnel bar — decreasing width */
+    .funnel-bar {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-violet);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-md) var(--gap-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* Decreasing widths: 100%, 85%, 70%, 55% */
+    .funnel-bar:nth-of-type(1) { width: 100%; }
+    .funnel-bar:nth-of-type(3) { width: 85%; }
+    .funnel-bar:nth-of-type(5) { width: 70%; }
+    .funnel-bar:nth-of-type(7) { width: 55%; }
+
+    .funnel-bar__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .funnel-bar__example {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 450;
+      text-align: right;
+    }
+
+    /* Arrow between bars */
+    .funnel-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--gap-xs) 0;
+      color: var(--accent-violet);
+    }
+
+    .funnel-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Depth indicator — статичный по умолчанию, абсолютный на широких экранах */
+    .depth-label {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+      display: block;
+    }
+
+    @media (min-width: 769px) {
+      .depth-label {
+        position: absolute;
+        right: -80px;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        margin-top: 0;
+      }
+    }
+
+    /* Scroll animations */
+    .funnel-bar {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+
+    .funnel-bar.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .funnel-bar:nth-of-type(1) { transition-delay: 0ms; }
+    .funnel-bar:nth-of-type(3) { transition-delay: 100ms; }
+    .funnel-bar:nth-of-type(5) { transition-delay: 200ms; }
+    .funnel-bar:nth-of-type(7) { transition-delay: 300ms; }
+
+    @media (max-width: 768px) {
+      .funnel-bar {
+        width: 100% !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--gap-xs);
+      }
+      .funnel-bar__example {
+        text-align: left;
+      }
+    }
+
+
+/* --- E05 — SPINE Framework --- */
+/*
+  Element: E05 — SPINE Framework
+  Source: elements/E05-spine-framework.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.spine-cascade {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: var(--gap-lg);
+    }
+
+    .spine-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      min-width: max-content;
+    }
+
+    /* Hexagonal/chamfered node */
+    .spine-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      position: relative;
+      /* Vertical offset — each node slightly lower */
+    }
+
+    .spine-node:nth-of-type(1) { margin-top: 0; }
+    .spine-node:nth-of-type(3) { margin-top: 20px; }
+    .spine-node:nth-of-type(5) { margin-top: 40px; }
+    .spine-node:nth-of-type(7) { margin-top: 60px; }
+    .spine-node:nth-of-type(9) { margin-top: 80px; }
+
+    /* Гексагональный узел: двухэлементная техника для видимого бордера
+       Внешний div = бордер (clip-path hex), внутренний = заливка (clip-path hex) */
+    .spine-node__hex {
+      position: relative;
+      min-width: 120px;
+      text-align: center;
+      cursor: default;
+      padding: 0;
+    }
+
+    /* Внешний слой — бордер */
+    .spine-node__hex-border {
+      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+      background: var(--violet-30);
+      padding: 2px; /* толщина бордера */
+      transition: background var(--duration-fast);
+    }
+
+    /* Внутренний слой — заливка */
+    .spine-node__hex-fill {
+      clip-path: polygon(8% 0%, 92% 0%, 100% 50%, 92% 100%, 8% 100%, 0% 50%);
+      background: var(--bg-panel);
+      padding: 14px 24px;
+      transition: background var(--duration-fast);
+    }
+
+    .spine-node__hex:hover .spine-node__hex-border {
+      background: var(--violet-50);
+    }
+
+    .spine-node__hex:hover .spine-node__hex-fill {
+      background: var(--bg-raised);
+    }
+
+    .spine-node__icon {
+      font-size: 18px;
+      margin-bottom: 2px;
+    }
+
+    .spine-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-violet);
+    }
+
+    .spine-node__example {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Expand icon on GHOST node */
+    .spine-node__expand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--violet-15);
+      border: 1px solid var(--violet-30);
+      font-size: 12px;
+      color: var(--accent-violet);
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background var(--duration-fast);
+      position: relative;
+    }
+
+    .spine-node__expand:hover {
+      background: var(--violet-25);
+    }
+
+    /* Tooltip for GHOST expand */
+    .spine-node__expand::after {
+      content: '3 внутренних слоя → См. E06';
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-raised);
+      border: 1px solid var(--border-active);
+      border-radius: var(--radius-sm);
+      padding: 4px 8px;
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-fast);
+    }
+
+    .spine-node__expand:hover::after,
+    .spine-node__expand:focus::after {
+      opacity: 1;
+    }
+
+    /* Violet arrow between nodes */
+    .spine-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      color: var(--accent-violet);
+      flex-shrink: 0;
+      margin-top: 40px;
+      /* Match average offset */
+    }
+
+    .spine-arrow svg {
+      width: 36px;
+      height: 12px;
+    }
+
+    /* Scroll animations */
+    .spine-node {
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .spine-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-out-expo);
+    }
+
+    .spine-node.is-visible,
+    .spine-arrow.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .spine-node:nth-of-type(1) { transition-delay: 0ms; }
+    .spine-node:nth-of-type(3) { transition-delay: 120ms; }
+    .spine-node:nth-of-type(5) { transition-delay: 240ms; }
+    .spine-node:nth-of-type(7) { transition-delay: 360ms; }
+    .spine-node:nth-of-type(9) { transition-delay: 480ms; }
+
+    @media (max-width: 768px) {
+      .spine-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .spine-node {
+        margin-top: 0 !important;
+      }
+      .spine-arrow {
+        margin-top: 0;
+        transform: rotate(90deg);
+        width: auto;
+        height: 24px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .spine-node__hex-border,
+      .spine-node__hex-fill {
+        clip-path: none;
+        border-radius: var(--radius-sm);
+      }
+      .spine-node__hex-border {
+        background: var(--violet-30);
+        padding: 1px;
+      }
+      .spine-node__hex-fill {
+        background: var(--bg-panel);
+      }
+    }
+
+
+/* --- E06 — GHOST Layers --- */
+/*
+  Element: E06 — GHOST Layers
+  Source: elements/E06-ghost-layers.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.ghost-rings {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      aspect-ratio: 1 / 0.8;
+    }
+
+    .ghost-rings svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ring labels — positioned on the right side */
+    .ring-label {
+      position: absolute;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ring-label__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .ring-label__timeline {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .ring-label__event {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .ring-label__causal {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--accent-violet);
+      opacity: 0.7;
+    }
+
+    /* Position labels at different heights */
+    .ring-label--g3 { top: 8%; }
+    .ring-label--g2 { top: 38%; }
+    .ring-label--g1 { top: 65%; }
+
+    /* Scroll animations */
+    .ghost-rings svg circle.ring-anim {
+      transform-origin: center;
+      transform: scale(0);
+      transition: transform 600ms var(--ease-out-expo);
+    }
+
+    .ghost-rings svg circle.ring-anim.is-visible {
+      transform: scale(1);
+    }
+
+    .ghost-rings svg text.ring-text-anim {
+      opacity: 0;
+      transition: opacity 400ms var(--ease-out-expo);
+    }
+
+    .ghost-rings svg text.ring-text-anim.is-visible {
+      opacity: 1;
+    }
+
+    .ring-label {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .ring-label.is-visible {
+      opacity: 1;
+    }
+
+    .ring-label--g3 { transition-delay: 200ms; }
+    .ring-label--g2 { transition-delay: 400ms; }
+    .ring-label--g1 { transition-delay: 600ms; }
+
+    /* Link back */
+    .ghost-link-back {
+      text-align: center;
+      margin-top: var(--gap-lg);
+    }
+
+    @media (max-width: 768px) {
+      .ghost-rings {
+        aspect-ratio: auto;
+      }
+      .ghost-rings svg {
+        max-height: 400px;
+      }
+      .ring-label {
+        position: static;
+        margin-bottom: var(--gap-sm);
+        padding: var(--gap-xs) var(--gap-sm);
+        background: var(--bg-panel);
+        border-radius: var(--radius-sm);
+      }
+      .ring-label--g3,
+      .ring-label--g2,
+      .ring-label--g1 {
+        top: auto;
+        transition-delay: 0ms;
+      }
+    }
+
+
+/* --- E07 — Voice Influence Hierarchy --- */
+/*
+  Element: E07 — Voice Influence Hierarchy
+  Source: elements/E07-voice-hierarchy.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.chart-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .chart-svg-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    /* Inset box: Storage vs Influence */
+    .inset-box {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-md);
+      padding: var(--gap-md);
+      margin-top: var(--gap-lg);
+      max-width: 800px;
+    }
+
+    .inset-box__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .inset-box__text {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .inset-box__highlight {
+      color: var(--danger);
+      font-weight: 500;
+    }
+
+    /* Split axis note */
+    .split-axis-note {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: var(--gap-sm);
+      padding-top: var(--gap-sm);
+      border-top: var(--line-width) solid var(--border);
+    }
+
+    /* Bar chart animations */
+    .bar-rect {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 600ms var(--ease-out-expo);
+    }
+
+    .bar-rect.is-visible {
+      transform: scaleX(1);
+    }
+
+    /* Red × marker */
+    .red-marker {
+      fill: var(--danger);
+    }
+
+    @media (max-width: 768px) {
+      .chart-container {
+        max-width: 100%;
+      }
+      .chart-svg-wrap {
+        -webkit-overflow-scrolling: touch;
+      }
+      .inset-box {
+        font-size: 11px;
+      }
+    }
+
+
+/* --- E08 — CORE DIRECTIVES --- */
+/*
+  Element: E08 — CORE DIRECTIVES
+  Source: elements/E08-core-directives.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.hub-spoke-container {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      aspect-ratio: 1 / 0.85;
+    }
+
+    .hub-spoke-container svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Spoke hover effect */
+    .spoke-line {
+      transition: stroke-width 0.2s;
+    }
+
+    .spoke-line:hover {
+      stroke-width: 2px;
+    }
+
+    /* Node hover effect */
+    .directive-node {
+      cursor: default;
+      transition: filter 0.2s;
+    }
+
+    .directive-node:hover {
+      filter: brightness(1.2);
+    }
+
+    /* Scroll animations */
+    .hub-spoke-container svg .anim-group {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .hub-spoke-container svg .anim-group.is-visible {
+      opacity: 1;
+    }
+
+    .hub-spoke-container svg .center-pulse {
+      transform-origin: 350px 280px;
+      animation: none;
+    }
+
+    .hub-spoke-container svg .center-pulse.is-visible {
+      animation: pulse-once 600ms var(--ease-out-expo);
+    }
+
+    @keyframes pulse-once {
+      0% { r: 38; }
+      50% { r: 44; }
+      100% { r: 38; }
+    }
+
+    /* Stagger */
+    .hub-spoke-container svg .anim-group:nth-of-type(1) { transition-delay: 0ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(2) { transition-delay: 100ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(3) { transition-delay: 200ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(4) { transition-delay: 300ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(5) { transition-delay: 400ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(6) { transition-delay: 500ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(7) { transition-delay: 600ms; }
+    .hub-spoke-container svg .anim-group:nth-of-type(8) { transition-delay: 700ms; }
+
+    /* Model badge */
+    .model-badge {
+      fill: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 9px;
+    }
+
+    @media (max-width: 768px) {
+      .hub-spoke-container {
+        aspect-ratio: auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .hub-spoke-container svg {
+        min-width: 600px;
+      }
+    }
+
+
+/* --- E09 — OCEAN Pentagon --- */
+/*
+  Element: E09 — OCEAN Pentagon
+  Source: elements/E09-ocean-pentagon.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.pentagon-container {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .pentagon-container svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Context Limits inset */
+    .context-limits-box {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-left: var(--line-bold) solid var(--accent-amber);
+      border-radius: var(--radius-md);
+      padding: var(--gap-md);
+      margin-top: var(--gap-lg);
+    }
+
+    .context-limits-box__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-amber);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .context-limits-box__data {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .context-limits-box__highlight {
+      color: var(--accent-amber);
+      font-weight: 450;
+    }
+
+    /* Scroll animations */
+    .pentagon-anim {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      transition: stroke-dashoffset 800ms var(--ease-out-expo);
+    }
+
+    .pentagon-anim.is-visible {
+      stroke-dashoffset: 0;
+    }
+
+    .profile-anim {
+      opacity: 0;
+      transition: opacity 500ms var(--ease-out-expo) 600ms;
+    }
+
+    .profile-anim.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .pentagon-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .pentagon-container svg {
+        min-width: 440px;
+      }
+    }
+
+
+/* --- E10 — Enneagram × SPINE Mapping --- */
+/*
+  Element: E10 — Enneagram × SPINE Mapping
+  Source: elements/E10-enneagram-spine.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.enneagram-container {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .enneagram-container svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Mini-card tooltip on hover */
+    .type-node {
+      cursor: pointer;
+    }
+
+    .mini-card {
+      position: absolute;
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-md);
+      padding: var(--gap-sm) var(--gap-md);
+      min-width: 180px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-fast) var(--ease-out-expo);
+      z-index: 10;
+    }
+
+    .mini-card.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mini-card__type {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+    }
+
+    .mini-card__row {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .mini-card__label {
+      color: var(--text-muted);
+    }
+
+    /* SPINE callout boxes */
+    .spine-callouts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-sm);
+      margin-top: var(--gap-lg);
+    }
+
+    .spine-callout {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-sm) var(--gap-md);
+    }
+
+    .spine-callout__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-violet);
+      margin-bottom: 2px;
+    }
+
+    .spine-callout__desc {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .spine-callout--tl { border-left: 2px solid var(--danger); }
+    .spine-callout--tr { border-left: 2px solid var(--accent-violet); }
+    .spine-callout--bl { border-left: 2px solid var(--success); }
+    .spine-callout--br { border-left: 2px solid var(--accent-amber); }
+
+    /* Scroll animations */
+    .enneagram-anim {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      transition: stroke-dashoffset 800ms var(--ease-out-expo);
+    }
+
+    .enneagram-anim.is-visible {
+      stroke-dashoffset: 0;
+    }
+
+    .type-node {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .type-node.is-visible {
+      opacity: 1;
+    }
+
+    .type-node:nth-of-type(1) { transition-delay: 100ms; }
+    .type-node:nth-of-type(2) { transition-delay: 150ms; }
+    .type-node:nth-of-type(3) { transition-delay: 200ms; }
+    .type-node:nth-of-type(4) { transition-delay: 250ms; }
+    .type-node:nth-of-type(5) { transition-delay: 300ms; }
+    .type-node:nth-of-type(6) { transition-delay: 350ms; }
+    .type-node:nth-of-type(7) { transition-delay: 400ms; }
+    .type-node:nth-of-type(8) { transition-delay: 450ms; }
+    .type-node:nth-of-type(9) { transition-delay: 500ms; }
+
+    @media (max-width: 768px) {
+      .enneagram-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .enneagram-container svg {
+        min-width: 540px;
+      }
+      .mini-card {
+        min-width: 150px;
+      }
+    }
+
+
+/* --- E11 — CoT Tiers --- */
+/*
+  Element: E11 — CoT Tiers
+  Source: elements/E11-cot-tiers.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.staircase {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 0;
+      padding-left: var(--gap-xl);
+    }
+
+    .stair-step {
+      position: relative;
+      border-radius: var(--radius-md);
+      padding: var(--gap-md) var(--gap-lg);
+      margin-left: 0;
+      border: var(--line-width) solid var(--border);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    /* Increasing left margin = staircase effect */
+    .stair-step:nth-child(1) { margin-left: 0; }
+    .stair-step:nth-child(2) { margin-left: 60px; }
+    .stair-step:nth-child(3) { margin-left: 120px; }
+    .stair-step:nth-child(4) { margin-left: 180px; }
+
+    /* Tier colors */
+    .stair-step--tier0 {
+      background: var(--bg-panel);
+      border-color: var(--border);
+    }
+
+    .stair-step--tier1 {
+      background: var(--bg-panel);
+      border-left: var(--line-bold) solid var(--cyan-40);
+    }
+
+    .stair-step--tier2 {
+      background: var(--bg-panel);
+      border-left: var(--line-bold) solid var(--cyan-70);
+    }
+
+    .stair-step--tier3 {
+      background: var(--bg-panel);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .stair-step__header {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .stair-step__tier {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .stair-step__name {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .stair-step__format {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      background: rgba(0,0,0,0.2);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-top: var(--gap-xs);
+      word-break: break-word;
+    }
+
+    /* Model badges */
+    .model-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 450;
+    }
+
+    .model-pill--12b {
+      background: var(--muted-20);
+      color: var(--text-muted);
+      border: 1px solid var(--muted-30);
+    }
+
+    .model-pill--32b {
+      background: var(--cyan-10);
+      color: var(--accent-cyan);
+      border: 1px solid var(--cyan-25);
+    }
+
+    .model-pill--api {
+      background: var(--violet-10);
+      color: var(--accent-violet);
+      border: 1px solid var(--violet-25);
+    }
+
+    /* Optional label */
+    .optional-label {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Scroll animation */
+    .stair-step {
+      opacity: 0;
+      transform: translateY(15px) translateX(-10px);
+    }
+
+    .stair-step.is-visible {
+      opacity: 1;
+      transform: translateY(0) translateX(0);
+    }
+
+    .stair-step:nth-child(1) { transition-delay: 0ms; }
+    .stair-step:nth-child(2) { transition-delay: 150ms; }
+    .stair-step:nth-child(3) { transition-delay: 300ms; }
+    .stair-step:nth-child(4) { transition-delay: 450ms; }
+
+    @media (max-width: 768px) {
+      .stair-step:nth-child(2) { margin-left: 30px; }
+      .stair-step:nth-child(3) { margin-left: 60px; }
+      .stair-step:nth-child(4) { margin-left: 90px; }
+      .staircase {
+        padding-left: var(--gap-md);
+      }
+    }
+
+
+/* --- E12 — Antipattern Catalog --- */
+/*
+  Element: E12 — Antipattern Catalog
+  Source: elements/E12-antipattern-catalog.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.ap-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--gap-sm);
+    }
+
+    .ap-card {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-sm) var(--gap-md);
+      position: relative;
+      cursor: default;
+      transition: transform 0.2s var(--ease-out-expo),
+                  box-shadow 0.2s var(--ease-out-expo),
+                  opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .ap-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .ap-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .ap-card__id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 450;
+      color: var(--accent-cyan);
+      opacity: 0.7;
+    }
+
+    .ap-card__symptom {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .ap-card__cause {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 4px;
+      /* Truncate by default */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ap-card__fix-label {
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .ap-card__fix {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--success);
+      line-height: 1.4;
+      /* Всегда видно для доступности; при hover — усиление */
+      opacity: 0.65;
+      transition: opacity 0.2s var(--ease-out-expo);
+    }
+
+    .ap-card:hover .ap-card__fix {
+      opacity: 1;
+    }
+
+    .ap-card:hover .ap-card__cause {
+      -webkit-line-clamp: unset;
+    }
+
+    /* Severity dots */
+    .severity-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .severity-dot--high {
+      background: var(--danger);
+      box-shadow: 0 0 6px var(--danger-40);
+    }
+
+    .severity-dot--medium {
+      background: var(--accent-amber);
+      box-shadow: 0 0 6px var(--amber-30);
+    }
+
+    /* Scroll animation */
+    .ap-card {
+      opacity: 0;
+    }
+
+    .ap-card.is-visible {
+      opacity: 1;
+    }
+
+    /* Stagger per row */
+    .ap-card:nth-child(1)  { transition-delay: 0ms; }
+    .ap-card:nth-child(2)  { transition-delay: 40ms; }
+    .ap-card:nth-child(3)  { transition-delay: 80ms; }
+    .ap-card:nth-child(4)  { transition-delay: 120ms; }
+    .ap-card:nth-child(5)  { transition-delay: 160ms; }
+    .ap-card:nth-child(6)  { transition-delay: 200ms; }
+    .ap-card:nth-child(7)  { transition-delay: 240ms; }
+    .ap-card:nth-child(8)  { transition-delay: 280ms; }
+    .ap-card:nth-child(9)  { transition-delay: 320ms; }
+    .ap-card:nth-child(10) { transition-delay: 360ms; }
+    .ap-card:nth-child(11) { transition-delay: 400ms; }
+    .ap-card:nth-child(12) { transition-delay: 440ms; }
+    .ap-card:nth-child(13) { transition-delay: 480ms; }
+    .ap-card:nth-child(14) { transition-delay: 520ms; }
+    .ap-card:nth-child(15) { transition-delay: 560ms; }
+
+    @media (max-width: 900px) {
+      .ap-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ap-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
+/* --- E13 — Diagnostic Decision Tree --- */
+/*
+  Element: E13 — Diagnostic Decision Tree
+  Source: elements/E13-diagnostic-tree.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.tree-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .tree-root {
+      margin-bottom: var(--gap-lg);
+    }
+
+    .tree-root__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .tree-root__symptom {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: var(--gap-sm) var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-left: var(--line-bold) solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tree-root__symptom:hover {
+      background: var(--bg-raised);
+    }
+
+    /* Collapsible sub-tree */
+    .sub-tree {
+      padding-left: var(--gap-xl);
+      border-left: var(--line-width) solid var(--border);
+      margin-left: var(--gap-md);
+      margin-top: var(--gap-sm);
+      display: none;
+    }
+
+    .sub-tree.is-open {
+      display: block;
+    }
+
+    /* Decision diamond */
+    .decision-node {
+      position: relative;
+      padding: var(--gap-sm) var(--gap-md);
+      margin: var(--gap-sm) 0;
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .decision-node__diamond {
+      width: 16px;
+      height: 16px;
+      background: transparent;
+      border: var(--line-width) solid var(--accent-cyan);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .decision-node__question {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    /* Yes/No paths */
+    .branch {
+      padding-left: var(--gap-lg);
+      margin-top: var(--gap-xs);
+    }
+
+    .branch__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .branch__label--yes {
+      color: var(--success);
+    }
+
+    .branch__label--no {
+      color: var(--text-muted);
+    }
+
+    /* Terminal diagnosis */
+    .diagnosis-node {
+      padding: var(--gap-sm) var(--gap-md);
+      margin: var(--gap-xs) 0;
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-sm);
+    }
+
+    .diagnosis-node__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .diagnosis-node__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    /* Scroll animation */
+    .tree-root {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .tree-root.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tree-root:nth-child(1) { transition-delay: 0ms; }
+    .tree-root:nth-child(2) { transition-delay: 100ms; }
+    .tree-root:nth-child(3) { transition-delay: 200ms; }
+
+
+/* --- E14 — Quality Scale --- */
+/*
+  Element: E14 — Quality Scale
+  Source: elements/E14-quality-scale.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.quality-container {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      gap: var(--gap-xl);
+      align-items: flex-start;
+    }
+
+    /* Thermometer bar */
+    .thermometer {
+      width: 60px;
+      flex-shrink: 0;
+      position: relative;
+      height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-deep);
+    }
+
+    .thermometer__fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      transition: height 800ms var(--ease-out-expo);
+    }
+
+    .thermometer__zone {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thermometer__zone-label {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    /* Zone boundaries: 0-25%, 25-50%, 50-85%, 85-100% */
+    .zone-critical { bottom: 0; height: 25%; background: var(--danger-15); }
+    .zone-poor     { bottom: 25%; height: 25%; background: var(--amber-10); }
+    .zone-good     { bottom: 50%; height: 35%; background: var(--cyan-8); }
+    .zone-excellent { bottom: 85%; height: 15%; background: var(--violet-12); }
+
+    /* Indicator line */
+    .indicator {
+      position: absolute;
+      left: -8px;
+      right: -8px;
+      height: 2px;
+      background: var(--accent-cyan);
+      z-index: 2;
+      box-shadow: var(--glow-cyan);
+      transition: bottom 400ms var(--ease-out-expo);
+    }
+
+    .indicator__marker {
+      position: absolute;
+      left: -6px;
+      top: -5px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid var(--accent-cyan);
+    }
+
+    /* Zone descriptions */
+    .zone-details {
+      flex: 1;
+    }
+
+    .zone-detail {
+      padding: var(--gap-sm) var(--gap-md);
+      margin-bottom: var(--gap-sm);
+      border-radius: var(--radius-sm);
+      border-left: var(--line-bold) solid;
+    }
+
+    .zone-detail--critical {
+      background: var(--danger-6);
+      border-left-color: var(--danger);
+    }
+
+    .zone-detail--poor {
+      background: var(--amber-6);
+      border-left-color: var(--accent-amber);
+    }
+
+    .zone-detail--good {
+      background: var(--cyan-6);
+      border-left-color: var(--accent-cyan);
+    }
+
+    .zone-detail--excellent {
+      background: var(--violet-6);
+      border-left-color: var(--accent-violet);
+    }
+
+    .zone-detail__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .zone-detail__range {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .zone-detail__criteria {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* Quick Checks */
+    .quick-checks {
+      margin-top: var(--gap-lg);
+      padding: var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .quick-checks__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .quick-check-item {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      padding: var(--gap-xs) 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .quick-check-item.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .quick-check-item:nth-child(2) { transition-delay: 60ms; }
+    .quick-check-item:nth-child(3) { transition-delay: 120ms; }
+    .quick-check-item:nth-child(4) { transition-delay: 180ms; }
+    .quick-check-item:nth-child(5) { transition-delay: 240ms; }
+    .quick-check-item:nth-child(6) { transition-delay: 300ms; }
+
+    .quick-check-item__checkbox {
+      width: 14px;
+      height: 14px;
+      border: var(--line-width) solid var(--border-active);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Scroll animation for thermometer */
+    .thermometer {
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+    }
+
+    .thermometer.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .quality-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .thermometer {
+        width: 100%;
+        height: 40px;
+      }
+    }
+
+
+/* --- E15 — Annotated Blueprint --- */
+/*
+  Element: E15 — Annotated Blueprint
+  Source: elements/E15-annotated-blueprint.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.blueprint-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Toggle buttons for layers */
+    .layer-toggles {
+      display: flex;
+      gap: var(--gap-sm);
+      margin-bottom: var(--gap-lg);
+      flex-wrap: wrap;
+    }
+
+    .layer-toggle {
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-panel);
+      color: var(--text-muted);
+    }
+
+    .layer-toggle:hover {
+      border-color: var(--border-active);
+      color: var(--text-secondary);
+    }
+
+    .layer-toggle--active.layer-toggle--structure {
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
+      color: var(--accent-cyan);
+    }
+
+    .layer-toggle--active.layer-toggle--anchors {
+      background: var(--violet-12);
+      border-color: var(--violet-30);
+      color: var(--accent-violet);
+    }
+
+    .layer-toggle--active.layer-toggle--spine {
+      background: var(--violet-12);
+      border-color: var(--violet-30);
+      color: var(--accent-violet);
+    }
+
+    .layer-toggle--active.layer-toggle--directives {
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
+      color: var(--accent-cyan);
+    }
+
+    /* Blueprint area */
+    .blueprint-area {
+      position: relative;
+      background:
+        linear-gradient(var(--cyan-3) 1px, transparent 1px),
+        linear-gradient(90deg, var(--cyan-3) 1px, transparent 1px);
+      background-size: 20px 20px;
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--gap-xl);
+      min-height: 500px;
+    }
+
+    /* Card template (central) */
+    .card-template {
+      background: var(--bg-raised);
+      border: var(--line-width) solid var(--border-active);
+      border-radius: var(--radius-md);
+      max-width: 480px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .card-block {
+      padding: var(--gap-sm) var(--gap-md);
+      border-bottom: var(--line-width) solid var(--border);
+      position: relative;
+    }
+
+    .card-block:last-child {
+      border-bottom: none;
+    }
+
+    .card-block__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+
+    .card-block__content {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    /* Annotation callouts — positioned around the card */
+    .callout {
+      position: absolute;
+      max-width: 200px;
+      padding: var(--gap-xs) var(--gap-sm);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      opacity: 0;
+      transition: opacity var(--duration-base) var(--ease-out-expo);
+      pointer-events: none;
+    }
+
+    .callout.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .callout--structure {
+      background: var(--cyan-8);
+      border-left: 2px solid var(--accent-cyan);
+    }
+
+    .callout--anchors {
+      background: var(--violet-8);
+      border-left: 2px solid var(--accent-violet);
+    }
+
+    .callout--spine {
+      background: var(--violet-8);
+      border-left: 2px solid var(--accent-violet);
+    }
+
+    .callout--directives {
+      background: var(--cyan-8);
+      border-left: 2px solid var(--accent-cyan);
+    }
+
+    /* Callout connector lines */
+    .callout-line {
+      position: absolute;
+      height: 1px;
+      background: var(--accent-cyan);
+      opacity: 0.4;
+      transition: opacity var(--duration-base);
+    }
+
+    /* Layer visibility */
+    .annotation-layer { display: none; }
+    .annotation-layer--active { display: block; }
+
+    /* Scroll animation */
+    .blueprint-area {
+      opacity: 0;
+      transition: opacity var(--duration-slow) var(--ease-out-expo);
+    }
+
+    .blueprint-area.is-visible {
+      opacity: 1;
+    }
+
+
+/* --- E16 — Author's Note Mechanics --- */
+/*
+  Element: E16 — Author's Note Mechanics
+  Source: elements/E16-author-note.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.an-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Message stream visualization */
+    .message-stream {
+      position: relative;
+      padding: var(--gap-lg) 0;
+      overflow-x: auto;
+    }
+
+    .stream-track {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      min-width: max-content;
+    }
+
+    .stream-msg {
+      width: 48px;
+      height: 32px;
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .stream-msg--an {
+      background: var(--cyan-10);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-weight: 600;
+      width: 56px;
+      box-shadow: var(--glow-cyan);
+      position: relative;
+    }
+
+    .stream-msg--an::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--accent-cyan);
+    }
+
+    /* Position indicator */
+    .position-indicator {
+      margin-top: var(--gap-md);
+      padding: var(--gap-sm) var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-md);
+      align-items: center;
+    }
+
+    .position-indicator__label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+
+    .position-indicator__value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Template A/B toggle */
+    .template-toggle {
+      display: flex;
+      gap: var(--gap-sm);
+      margin: var(--gap-lg) 0 var(--gap-md);
+    }
+
+    .template-btn {
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      border: var(--line-width) solid var(--border);
+      background: var(--bg-panel);
+      color: var(--text-muted);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .template-btn--active {
+      background: var(--cyan-12);
+      border-color: var(--cyan-30);
+      color: var(--accent-cyan);
+    }
+
+    /* Template card */
+    .template-card {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+    }
+
+    .template-section {
+      padding: var(--gap-sm) 0;
+      border-bottom: var(--line-width) solid var(--border);
+    }
+
+    .template-section:last-child {
+      border-bottom: none;
+    }
+
+    .template-section__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+
+    .template-section__content {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .template-section--ghost {
+      border-left: 2px solid var(--accent-violet);
+      padding-left: var(--gap-sm);
+      background: var(--violet-4);
+    }
+
+    /* Template B only section */
+    .template-b-only {
+      display: none;
+    }
+
+    .template-b-only.is-visible {
+      display: block;
+    }
+
+    /* Cross-reference badge */
+    .an-crossref {
+      margin-top: var(--gap-lg);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap-sm);
+    }
+
+    /* Scroll animations */
+    .scroll-enter {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .scroll-enter.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+/* --- E17 — Sampling Parameters --- */
+/*
+  Element: E17 — Sampling Parameters
+  Source: elements/E17-sampling-params.html
+  Dependencies: DESIGN-TOKENS.css (custom properties), shared/base.css, shared/patterns.css
+  Notes: Element-specific styles extracted from inline <style>.
+         Uses CSS custom properties from DESIGN-TOKENS.css.
+*/
+
+.params-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .params-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--gap-lg);
+    }
+
+    .param-column {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--gap-lg);
+      position: relative;
+    }
+
+    .param-column--12b {
+      opacity: 0.75;
+    }
+
+    .param-column--32b {
+      /* Normal brightness */
+    }
+
+    .param-column--api {
+      border-color: var(--violet-20);
+    }
+
+    .param-column__tier {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+      margin-bottom: var(--gap-xs);
+    }
+
+    .param-column--12b .param-column__tier { color: var(--text-muted); }
+    .param-column--32b .param-column__tier { color: var(--accent-cyan); }
+    .param-column--api .param-column__tier { color: var(--accent-violet); }
+
+    .param-column__sub {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: var(--gap-md);
+    }
+
+    .param-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--gap-sm) 0;
+      border-bottom: var(--line-width) solid var(--border-50);
+    }
+
+    .param-row:last-child {
+      border-bottom: none;
+    }
+
+    .param-row__name {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .param-row__value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-primary);
+      font-weight: 450;
+    }
+
+    /* Danger row — PP and RepPen threshold */
+    .param-row--danger {
+      background: var(--danger-4);
+      margin: 0 calc(-1 * var(--gap-md));
+      padding-left: var(--gap-md);
+      padding-right: var(--gap-md);
+    }
+
+    .param-row--danger .param-row__value {
+      color: var(--danger);
+    }
+
+    /* Warning marker */
+    .danger-marker {
+      color: var(--danger);
+      font-weight: 700;
+      margin-left: 4px;
+    }
+
+    /* Amber warning row — RepPen > 1.10 */
+    .param-row--warning {
+      background: var(--amber-4);
+      margin: 0 calc(-1 * var(--gap-md));
+      padding-left: var(--gap-md);
+      padding-right: var(--gap-md);
+    }
+
+    .param-row--warning .param-row__value {
+      color: var(--accent-amber);
+    }
+
+    /* Sub-range annotation */
+    .sub-range {
+      font-family: var(--font-micro);
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .sub-range__green {
+      color: var(--success);
+    }
+
+    .sub-range__amber {
+      color: var(--accent-amber);
+    }
+
+    /* Checklist section */
+    .checklist-section {
+      margin-top: var(--gap-xl);
+      padding: var(--gap-md);
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .checklist-section__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      margin-bottom: var(--gap-sm);
+    }
+
+    .checklist-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: var(--gap-sm);
+      padding: var(--gap-xs) 0;
+      border-bottom: var(--line-width) solid var(--border-40);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .checklist-row:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-row__header {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    /* Scroll animations */
+    .param-column {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .param-column.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .param-column:nth-child(1) { transition-delay: 0ms; }
+    .param-column:nth-child(2) { transition-delay: 150ms; }
+    .param-column:nth-child(3) { transition-delay: 300ms; }
+
+    @media (max-width: 768px) {
+      .params-grid {
+        grid-template-columns: 1fr;
+      }
+      .checklist-row {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      }
+    }
