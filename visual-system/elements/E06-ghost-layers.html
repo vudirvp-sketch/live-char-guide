@@ -175,7 +175,9 @@
         <defs>
           <radialGradient id="ghost-grad" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="rgba(139,92,246,0.15)"/>
-            <stop offset="100%" stop-color="var(--bg-deep)"/>
+            <!-- Note: SVG stop-color attribute does not support CSS custom properties in all browsers.
+                 Use hardcoded value matching --bg-deep (#08090d). Update manually if token changes. -->
+            <stop offset="100%" stop-color="#08090d"/>
           </radialGradient>
           <!-- Core glow -->
           <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">

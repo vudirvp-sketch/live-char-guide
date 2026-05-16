@@ -346,8 +346,12 @@
           const cx = parseFloat(circle.getAttribute('cx'));
           const cy = parseFloat(circle.getAttribute('cy'));
           const ctm = svgEl.getScreenCTM();
+          if (!ctm) return; // SVG not visible or not in DOM
           const screenPoint = new DOMPoint(cx, cy).matrixTransform(ctm);
-          const wrapRect = document.getElementById('enneagram-wrap').getBoundingClientRect();
+          const wrapEl = document.getElementById('enneagram-wrap');
+          if (!wrapEl) return;
+          const wrapRect = wrapEl.getBoundingClientRect();
+          if (wrapRect.width === 0 || wrapRect.height === 0) return; // Element hidden
           // Ограничиваем позицию, чтобы мини-карта не выходила за правый край
           const cardWidth = 220;
           const maxLeft = wrapRect.width - cardWidth - 10;

@@ -361,36 +361,42 @@
       <!-- Model Type Checklist -->
       <div class="checklist-section scroll-enter">
         <div class="checklist-section__title">Чеклист по типу модели (Part 7A)</div>
-        <div class="checklist-row checklist-row__header">
-          <span>Проверка</span>
-          <span>12B-14B</span>
-          <span>32B+</span>
-          <span>API</span>
-        </div>
-        <div class="checklist-row">
-          <span>Размещение голоса</span>
-          <span style="color:var(--danger);">Только Examples</span>
-          <span>Examples основной</span>
-          <span>Examples + AN</span>
-        </div>
-        <div class="checklist-row">
-          <span>Стабильность XML</span>
-          <span style="color:var(--text-muted);">Минимальная</span>
-          <span>Стабильная</span>
-          <span>Полная</span>
-        </div>
-        <div class="checklist-row">
-          <span>Уровень CoT</span>
-          <span style="color:var(--text-muted);">0–1</span>
-          <span>1–2</span>
-          <span style="color:var(--accent-violet);">3</span>
-        </div>
-        <div class="checklist-row">
-          <span>Anti-godmoding</span>
-          <span style="color:var(--success);">2 строки</span>
-          <span style="color:var(--success);">2 строки</span>
-          <span style="color:var(--success);">2 строки</span>
-        </div>
+        <table class="model-checklist" aria-label="Чеклист по типу модели">
+          <thead>
+            <tr>
+              <th scope="col">Параметр</th>
+              <th scope="col">12B</th>
+              <th scope="col">32B+</th>
+              <th scope="col">API</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Размещение голоса</td>
+              <td style="color:var(--danger);">Только Examples</td>
+              <td>Examples основной</td>
+              <td>Examples + AN</td>
+            </tr>
+            <tr>
+              <td>Стабильность XML</td>
+              <td style="color:var(--text-muted);">Минимальная</td>
+              <td>Стабильная</td>
+              <td>Полная</td>
+            </tr>
+            <tr>
+              <td>Уровень CoT</td>
+              <td style="color:var(--text-muted);">0–1</td>
+              <td>1–2</td>
+              <td style="color:var(--accent-violet);">3</td>
+            </tr>
+            <tr>
+              <td>Anti-godmoding</td>
+              <td style="color:var(--success);">2 строки</td>
+              <td style="color:var(--success);">2 строки</td>
+              <td style="color:var(--success);">2 строки</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
     </div>

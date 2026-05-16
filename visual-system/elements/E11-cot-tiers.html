@@ -14,7 +14,7 @@
       max-width: 800px;
       margin: 0 auto;
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
       gap: 0;
       padding-left: var(--gap-xl);
     }
@@ -197,25 +197,14 @@
 
     <div class="staircase">
 
-      <!-- Tier 0: No CoT — baseline -->
-      <div class="stair-step stair-step--tier0 scroll-enter">
+      <!-- Tier 3: Full XML -->
+      <div class="stair-step stair-step--tier3 scroll-enter">
         <div class="stair-step__header">
-          <span class="stair-step__tier">Tier 0</span>
-          <span class="stair-step__name">Без CoT</span>
-          <span class="model-pill model-pill--12b">12B+ (все)</span>
-          <span class="optional-label">Опционально: начните здесь</span>
+          <span class="stair-step__tier">Tier 3</span>
+          <span class="stair-step__name">Полный XML</span>
+          <span class="model-pill model-pill--api">API только</span>
         </div>
-        <div class="stair-step__format">Stress → Rubs neck</div>
-      </div>
-
-      <!-- Tier 1: Emotion tag -->
-      <div class="stair-step stair-step--tier1 scroll-enter">
-        <div class="stair-step__header">
-          <span class="stair-step__tier">Tier 1</span>
-          <span class="stair-step__name">Эмоциональная метка</span>
-          <span class="model-pill model-pill--32b">32B базовый</span>
-        </div>
-        <div class="stair-step__format">[Anxiety] → Re-reads message 3x</div>
+        <div class="stair-step__format">&lt;processus_analysium&gt;stimulus→analysis→synthesis→resolution&lt;/processus_analysium&gt;</div>
       </div>
 
       <!-- Tier 2: GHOST-link -->
@@ -228,14 +217,25 @@
         <div class="stair-step__format">[Reminds of betrayal] → Closes off<br>[INTERNAL: GHOST]...[/INTERNAL]</div>
       </div>
 
-      <!-- Tier 3: Full XML -->
-      <div class="stair-step stair-step--tier3 scroll-enter">
+      <!-- Tier 1: Emotion tag -->
+      <div class="stair-step stair-step--tier1 scroll-enter">
         <div class="stair-step__header">
-          <span class="stair-step__tier">Tier 3</span>
-          <span class="stair-step__name">Полный XML</span>
-          <span class="model-pill model-pill--api">API только</span>
+          <span class="stair-step__tier">Tier 1</span>
+          <span class="stair-step__name">Эмоциональная метка</span>
+          <span class="model-pill model-pill--32b">32B базовый</span>
         </div>
-        <div class="stair-step__format">&lt;processus_analysium&gt;stimulus→analysis→synthesis→resolution&lt;/processus_analysium&gt;</div>
+        <div class="stair-step__format">[Anxiety] → Re-reads message 3x</div>
+      </div>
+
+      <!-- Tier 0: No CoT — baseline -->
+      <div class="stair-step stair-step--tier0 scroll-enter">
+        <div class="stair-step__header">
+          <span class="stair-step__tier">Tier 0</span>
+          <span class="stair-step__name">Без CoT</span>
+          <span class="model-pill model-pill--12b">12B+ (все)</span>
+          <span class="optional-label">Опционально: начните здесь</span>
+        </div>
+        <div class="stair-step__format">Stress → Rubs neck</div>
       </div>
 
     </div>
