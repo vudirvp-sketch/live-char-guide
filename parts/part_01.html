@@ -3,12 +3,14 @@
   Live Character Guide v9.1 Master HTML
 
   Unified: All content at maximum depth
-  v9.1: p1_value_proposition moved before p1_card_overview (was incorrectly nested)
+  v9.1: p1_value_proposition added before p1_card_overview
+        p1_token_budget replaced with p1_token_budget_ref (link to Part 7A)
+        p1_assembly_pipeline replaced with p1_pipeline_ref (link to Part 7A)
 -->
 <section data-section="p1_value_proposition" data-toc-nav>
 <h2>Зачем системный подход?</h2>
 
-<p>Классический подход к созданию карточек — интуитивное описание персонажа. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
+<p>Классический подход к созданию карточек — интуитивное заполнение Description. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
 
 <div class="table-wrap">
 <table>
@@ -18,7 +20,7 @@
 <tbody>
 <tr><td>Дрейф голоса (20+ сообщений)</td><td>~40% отклонение от исходного тона</td><td>~10% отклонение при том же токен-бюджете</td></tr>
 <tr><td>Консистентность поведения</td><td>Модель заполняет пробелы дефолтами</td><td>Anchors задают конкретные триггеры → модель следует паттернам</td></tr>
-<tr><td>Токен-эффективность</td><td>Описание персонажа = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
+<tr><td>Токен-эффективность</td><td>Description (Описание) = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
 <tr><td>Динамика персонажа</td><td>Статичное поведение</td><td>WANT→NEED сдвиг через Price — персонаж развивается в сессии</td></tr>
 </tbody>
 </table>
@@ -27,6 +29,268 @@
 <p>Этот гайд учит строить карточку как поведенческий движок — каждый элемент производит действие, а не украшает описание.</p>
 </section>
 
+<!-- VS-EMBED: E01 — Card Anatomy -->
+<div class="vs-embed" data-vs-element="E01">
+<!-- 
+  Element: E01 — Card Anatomy
+  Source: elements/E01-card-anatomy.html
+  Pattern: P1 — Stack/Layers
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E01-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E01-script.js
+-->
+<div class="card-stack">
+
+      <!-- SP Block — border-only frame -->
+      <div class="card-block card-block--sp scroll-enter scroll-enter--left">
+        <div class="inner-dashed"></div>
+        <div class="block-label">
+          <span class="block-label__name">
+            SP (System Prompt)
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~50</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~100</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~200</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">Контейнер — содержит директивы, идентичность, правила. Никакого нарративного контента.</div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Description Block — widest -->
+      <div class="card-block card-block--desc scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Description
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~150</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~300</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~700</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">
+          Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
+          <div class="desc-callout">
+            ↳ Anchors упомянуты здесь как ссылка — структурно вложены в Examples
+          </div>
+        </div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Examples + Anchors Block — medium -->
+      <div class="card-block card-block--examples scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Examples + Anchors
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~80</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~180</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~400</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">
+          Примеры диалогов, демонстрирующие голос персонажа. 2–5 примеров, каждый ~40–80 токенов.
+          <!-- Anchors sub-panel — nested, violet accent -->
+          <div class="anchors-subpanel">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <span style="font-family:var(--font-heading); font-weight:600; font-size:13px; color:var(--accent-violet);">Anchors</span>
+              <span class="badge badge--violet">T→A→P</span>
+            </div>
+            <div style="font-size:12px; color:var(--text-secondary);">
+              Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
+              Единственное место, где Anchors живут структурно.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Greeting Block — narrow -->
+      <div class="card-block card-block--greeting scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Greeting
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~40</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~60</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~100</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">Первое сообщение персонажа. Задаёт тон и базовую голосовую линию.</div>
+      </div>
+
+      <div class="block-divider"></div>
+
+      <!-- Lorebook Block — optional, dashed -->
+      <div class="card-block card-block--lorebook scroll-enter scroll-enter--left">
+        <div class="block-label">
+          <span class="block-label__name">
+            Lorebook
+            <span class="optional-badge">опционально</span>
+          </span>
+          <div class="token-anno">
+            <div class="token-anno__row">
+              <span class="token-anno__label">мин</span>
+              <span class="token-anno__val">~0</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">стд</span>
+              <span class="token-anno__val">~100</span>
+            </div>
+            <div class="token-anno__row">
+              <span class="token-anno__label">макс</span>
+              <span class="token-anno__val">~300</span>
+            </div>
+          </div>
+        </div>
+        <div class="block-content">Контекстно-зависимые записи лора. Описано в Part 7B.</div>
+      </div>
+
+    </div>
+
+    <!-- Token budget summary -->
+    <div class="panel" style="max-width:720px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--text-primary);">
+        Сводка токенного бюджета
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border); color:var(--text-muted);">
+            <th style="text-align:left; padding:6px 8px;">Блок</th>
+            <th style="text-align:right; padding:6px 8px;">Мин</th>
+            <th style="text-align:right; padding:6px 8px;">Стандарт</th>
+            <th style="text-align:right; padding:6px 8px;">Макс</th>
+            <th style="text-align:left; padding:6px 8px; color:var(--text-muted);">Источник</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--text-secondary);">
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">SP</td>
+            <td style="text-align:right; padding:6px 8px;">~50</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="text-align:right; padding:6px 8px;">~200</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Description</td>
+            <td style="text-align:right; padding:6px 8px;">~150</td>
+            <td style="text-align:right; padding:6px 8px;">~300</td>
+            <td style="text-align:right; padding:6px 8px;">~700</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Examples (2–5)</td>
+            <td style="text-align:right; padding:6px 8px;">~80</td>
+            <td style="text-align:right; padding:6px 8px;">~180</td>
+            <td style="text-align:right; padding:6px 8px;">~400</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A (40/60/80 per)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Greeting</td>
+            <td style="text-align:right; padding:6px 8px;">~40</td>
+            <td style="text-align:right; padding:6px 8px;">~60</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Anchors (each)</td>
+            <td style="text-align:right; padding:6px 8px;">~15</td>
+            <td style="text-align:right; padding:6px 8px;">~25</td>
+            <td style="text-align:right; padding:6px 8px;">~40</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;">Lorebook</td>
+            <td style="text-align:right; padding:6px 8px;">~0</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="text-align:right; padding:6px 8px;">~300</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Est. Part 7B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+<script type="module">
+// VS Element E01 - inline script (from component-extracts)
+/**
+ * Element: E01 — Card Anatomy
+ * Source: elements/E01-card-anatomy.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+// Scroll-triggered animations via IntersectionObserver
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => {
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.scroll-enter').forEach(el => {
+        observer.observe(el);
+      });
+    });
+</script>
+</div>
+<!-- REPLACED BY VISUAL SYSTEM: E01 -->
 <section  data-section="p1_card_overview" data-toc-nav>
 <h2>Базовые блоки карточки</h2>
 
@@ -97,7 +361,7 @@ graph TD
     <li><a href="#p3_influence_hierarchy">Иерархия влияния</a></li>
     <li><a href="#p3_examples_rules">Правила Examples</a></li>
     <li><a href="#p3_examples_quality">Качество Examples</a></li>
-    <li><a href="#p3_greeting">Greeting Message</a></li>
+    <li><a href="#p3_greeting_ref">greeting ref</a></li>
     <li><a href="#p3_voice_leak">Voice Leak</a></li>
     <li><a href="#p3_joker_case">Крайний случай: голос без описания</a></li>
     <li><a href="#p3_multi_char">Мульти-персонажные примеры</a></li>
@@ -286,5 +550,16 @@ graph TD
 <p><strong>Исправление:</strong> Критерии качества Anchors → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
 <p class="bridge-paragraph">Базовые блоки определяют, ЧТО ваш персонаж из себя представляет. Но персонаж, у которого есть только Identity и Description, будет вести себя типово — модель заполняет пробелы значениями по умолчанию. Behavioral Anchors решают эту проблему: они указывают, КОГДА и КАК ваш персонаж активирует конкретные паттерны поведения. → <a href="#p2_basic_anchors">Part 2</a></p>
+
+<div class="part-resume">
+<h3>Что вы теперь умеете</h3>
+<ul>
+<li>Понимать структуру карточки (System Prompt, Description, Examples, Greeting Message)</li>
+<li>Знать 3 ключевых принципа: Anchor = T→A→P, Голос только в Examples, Психология только в Description</li>
+<li>Различать классический и системный подход к созданию карточек</li>
+<li>Распознавать 3 критичные ошибки и знать, как их исправить</li>
+<li>Знать, где найти Token Budget и Конвейер сборки</li>
+</ul>
+</div>
 
 </section>

@@ -2,7 +2,7 @@
 
 > **Инженерный пайплайн для RP-карточек персонажей. От SPINE до деплоя. Для моделей 12B–32B+.**
 
-![Version](https://img.shields.io/badge/version-8.0.0-green)
+![Version](https://img.shields.io/badge/version-9.1.0-green)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 
@@ -269,7 +269,7 @@ pnpm run lint           # ESLint
 
 ## Версия
 
-**Текущая версия:** 8.0.0
+**Текущая версия:** 9.1.0
 
 См. [CHANGELOG.md](./CHANGELOG.md) для истории изменений.
 

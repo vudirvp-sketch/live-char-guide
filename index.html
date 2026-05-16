@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.1.0 -->
-<!-- Build: 7b993c28 -->
-<!-- Generated: 2026-05-15T18:28:00.263Z -->
+<!-- Build: 1f210aca -->
+<!-- Generated: 2026-05-16T07:28:23.589Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -14,7 +14,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/preview-card.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <!-- CSP updated for VS: added cdn.jsdelivr.net for Three.js/Geist fonts, fonts.googleapis.com -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -104,5 +105,10 @@
   <script src="widgets/enneagram-builder.js"></script>
   <script src="widgets/mbti-composer.js"></script>
   <script src="widgets/persona-synthesis.js"></script>
+  <!-- VS Widget Scripts -->
+  <script src="widgets/vs-mini-map.js"></script>
+  <script src="widgets/diagnostic-tree.js"></script>
+  <script src="widgets/blueprint-viewer.js"></script>
+  <script src="widgets/author-note-viewer.js"></script>
 </body>
 </html>

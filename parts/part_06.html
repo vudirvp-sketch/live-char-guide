@@ -1,9 +1,108 @@
 <!--
   Part 6: CoT Tiers (цепочка рассуждений)
-  Live Character Guide v6 Master HTML
+  Live Character Guide v9.1 Master HTML
 
   Unified content: all layers merged
 -->
+<!-- VS-EMBED: E11 — CoT -->
+<div class="vs-embed" data-vs-element="E11">
+<!-- 
+  Element: E11 — CoT Tiers
+  Source: elements/E11-cot-tiers.html
+  Pattern: P1 — Stack (staircase variant)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E11-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E11-script.js
+-->
+<div class="staircase">
+
+      <!-- Tier 0: No CoT — baseline -->
+      <div class="stair-step stair-step--tier0 scroll-enter">
+        <div class="stair-step__header">
+          <span class="stair-step__tier">Tier 0</span>
+          <span class="stair-step__name">Без CoT</span>
+          <span class="model-pill model-pill--12b">12B+ (все)</span>
+          <span class="optional-label">Опционально: начните здесь</span>
+        </div>
+        <div class="stair-step__format">Stress → Rubs neck</div>
+      </div>
+
+      <!-- Tier 1: Emotion tag -->
+      <div class="stair-step stair-step--tier1 scroll-enter">
+        <div class="stair-step__header">
+          <span class="stair-step__tier">Tier 1</span>
+          <span class="stair-step__name">Эмоциональная метка</span>
+          <span class="model-pill model-pill--32b">32B базовый</span>
+        </div>
+        <div class="stair-step__format">[Anxiety] → Re-reads message 3x</div>
+      </div>
+
+      <!-- Tier 2: GHOST-link -->
+      <div class="stair-step stair-step--tier2 scroll-enter">
+        <div class="stair-step__header">
+          <span class="stair-step__tier">Tier 2</span>
+          <span class="stair-step__name">GHOST-link</span>
+          <span class="model-pill model-pill--32b">32B+ рекомендуется</span>
+        </div>
+        <div class="stair-step__format">[Reminds of betrayal] → Closes off<br>[INTERNAL: GHOST]...[/INTERNAL]</div>
+      </div>
+
+      <!-- Tier 3: Full XML -->
+      <div class="stair-step stair-step--tier3 scroll-enter">
+        <div class="stair-step__header">
+          <span class="stair-step__tier">Tier 3</span>
+          <span class="stair-step__name">Полный XML</span>
+          <span class="model-pill model-pill--api">API только</span>
+        </div>
+        <div class="stair-step__format">&lt;processus_analysium&gt;stimulus→analysis→synthesis→resolution&lt;/processus_analysium&gt;</div>
+      </div>
+
+    </div>
+
+    <!-- Explanation -->
+    <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-cyan);">
+        Прогрессия Chain of Thought
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+        CoT <strong style="color:var(--text-primary);">не обязателен</strong> — Tier 0 работает для всех моделей.
+        Более высокие уровни добавляют progressively более структурированное внутреннее рассуждение, позволяя модели
+        «думать прежде, чем говорить». Каждый формат показан выше в своей фактической нотации, поэтому этот элемент
+        служит <strong style="color:var(--text-primary);">инструментом быстрого справочника</strong>, а не просто диаграммой.
+        Используйте минимальный уровень, который поддерживает ваша модель — избыточное усложнение CoT на малых моделях расходует токены.
+      </p>
+    </div>
+
+<script type="module">
+// VS Element E11 - inline script (from component-extracts)
+/**
+ * Element: E11 — CoT Tiers
+ * Source: elements/E11-cot-tiers.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
+</div>
+<!-- REPLACED BY VISUAL SYSTEM: E11 -->
 <section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>
 <h2>CoT (цепочка рассуждений)</h2>
 
@@ -85,7 +184,7 @@
 <p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
 
 <h4>Синтаксис</h4>
-<div class="example-label stub">STUB</div>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[INTERNAL: {{GHOST-connection}}]
 {{внутренний процесс}}
 [/INTERNAL]
@@ -114,7 +213,7 @@
 <p>Tier 3 использует XML-структуру для полного описания внутреннего процесса.</p>
 
 <h4>Синтаксис</h4>
-<div class="example-label stub">STUB</div>
+<div class="example-label template">TEMPLATE</div>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: {{триггер из сцены}}
@@ -180,6 +279,17 @@ resolution: отступить
 
 
 <p>Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
+
+<div class="part-resume">
+<h3>Что вы теперь умеете</h3>
+<ul>
+<li>Понимать 4 уровня CoT (Tier 0–3) и выбирать подходящий для модели</li>
+<li>Писать CoT Anchors: Триггер → [Внутренний процесс] → Реакция → Цена</li>
+<li>Ограничивать CoT до 2-3 Anchors на карточку (AP-10)</li>
+<li>Использовать XML-синтаксис processus_analysium для Tier 3</li>
+<li>Связывать CoT с GHOST-цепочкой персонажа</li>
+</ul>
+</div>
 
 </section>
 

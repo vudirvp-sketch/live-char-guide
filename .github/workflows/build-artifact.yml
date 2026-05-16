@@ -6,11 +6,11 @@ on:
     paths:
       - 'src/**'
       - 'assets/**'
-      - 'build/**'
       - 'data/**'
       - 'docs/**'
       - 'scripts/**'
       - 'tests/**'
+      - 'visual-system/**'
       - '.github/workflows/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -21,11 +21,11 @@ on:
     paths:
       - 'src/**'
       - 'assets/**'
-      - 'build/**'
       - 'data/**'
       - 'docs/**'
       - 'scripts/**'
       - 'tests/**'
+      - 'visual-system/**'
       - '.github/workflows/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -50,7 +50,7 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
@@ -105,7 +105,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Get artifact sizes
         id: sizes
@@ -120,7 +120,7 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
-        uses: actions/github-script@v8
+        uses: actions/github-script@v7
         with:
           script: |
             const indexSize = '${{ steps.sizes.outputs.index_size }}';

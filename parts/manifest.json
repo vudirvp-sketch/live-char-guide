@@ -35,7 +35,7 @@
         "p3_influence_hierarchy",
         "p3_examples_rules",
         "p3_examples_quality",
-        "p3_greeting",
+        "p3_greeting_ref",
         "p3_voice_leak",
         "p3_joker_case",
         "p3_multi_char"

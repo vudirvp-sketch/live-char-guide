@@ -7,7 +7,7 @@
 <dd>Определение, назначение, расположение в карточке Оптимизация: проверьте баланс фактологии vs поведенческих инструкций</dd>
 <dt>Examples <a href="#p3_examples_rules" class="glossary-ref">→</a></dt>
 <dd>Определение, правило Voice Isolation Отладка: проверьте contamination от внешних <START> блоков</dd>
-<dt>Greeting Message <a href="#p3_greeting" class="glossary-ref">→</a></dt>
+<dt>Greeting Message <a href="#p7b_greeting" class="glossary-ref">→</a></dt>
 <dd>Определение, назначение, влияние на голос Диагностика: проверьте соответствие Examples vs Greeting Message</dd>
 <dt>Author's Note <small class="glossary-abbr">(AN)</small> <a href="#p7a_authors_note" class="glossary-ref">→</a></dt>
 <dd>Определение, назначение, частота обновления Отладка: проверьте приоритет инъекции и конфликт с LB</dd>
@@ -64,12 +64,12 @@
 <dt>Influence Boundary <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
 <dd>Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}</dd>
 <dt>Consequence Driven <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
-<dd>Директива SP #4: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]</dd>
+<dd>Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]</dd>
 <dt>Pre-Generation Filter <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
-<dd>CORE DIRECTIVE #5. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]</dd>
+<dd>CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]</dd>
 <dt>Identity Block <a href="#p7a_system_prompt" class="glossary-ref">→</a></dt>
 <dd>Секция System Prompt, определяющая идентичность персонажа. Включает имя, внешность, предысторию, тип личности. НЕ «блок идентичности» / «identity section». Диагностика: проверьте, что Identity Block не дублирует Description</dd>
-<dt>Token Budget <a href="#p1_token_budget" class="glossary-ref">→</a></dt>
+<dt>Token Budget <a href="#p7a_token_budget" class="glossary-ref">→</a></dt>
 <dd>Распределение токенов контекстного окна по компонентам System Prompt. Контролирует, какая часть контекста выделена на каждый блок карточки. Диагностика: проверьте, что Identity Block + CORE DIRECTIVES не превышают 40% бюджета</dd>
 <dt>Anti-godmoding <a href="#p1_core_rules" class="glossary-ref">→</a></dt>
 <dd>Директива SP, запрещающая модель писать за {{user}}. Позитивная формулировка в SP. Отличать от «годмодинг» (диагностический термин — сам факт нарушения). Диагностика: проверьте наличие Anti-godmoding в SP</dd>

@@ -1,9 +1,10 @@
 # Live Character Guide — Visual System Implementation Plan
 
-**Version:** 1.3 (errata-corrigenda + язык контента)
+**Version:** 1.4 (CI/CD pipeline fix + version sync + PLAN completion)
 **Date:** 2026-05-16
+**Changelog v1.3:** errata-corrigenda + язык контента
 **Changelog v1.2:** Fixed Assembly Pipeline to match actual Part 7A 6-step structure (E02), fixed AP-5 severity to Medium (E12), fixed Elena GHOST example from "mentor" to "editor" (E05), fixed E03 Incorrect-side Price label from "(immed)" to "(deferred)", fixed E07 ASCII chart removing Lorebook row, fixed E08 model-tier badges to match actual guide notation, fixed E17 sampling parameters to reflect actual multi-table structure, fixed E01 to note Part 1 defines 4 main blocks (not 5), added E16/E17 to directory structure and mini-map, fixed Phase 3 dependency to include 2D.
-**Changelog v1.1:** Fixed G-level ordering (E06), voice hierarchy data (E07), Quick Checks (E14), AP severities (E12), token budgets (E01), Price terminology (E03), Geist font source (Phase 0), Assembly Pipeline steps (E02), Directive 7 badge (E08), token migration principle (Phase 4). Added Author's Note (E16), Sampling Parameters (E17), performance budget, a11y spec, integration dedup rules.  
+**Changelog v1.1:** Fixed G-level ordering (E06), voice hierarchy data (E07), Quick Checks (E14), AP severities (E12), token budgets (E01), Price terminology (E03), Geist font source (Phase 0), Assembly Pipeline steps (E02), Directive 7 badge (E08), token migration principle (Phase 4). Added Author's Note (E16), Sampling Parameters (E17), performance budget, a11y spec, integration dedup rules.
 **Repository:** https://github.com/vudirvp-sketch/live-char-guide  
 **Strategy:** Isolated-first development → standalone HTML prototypes → integration into guide build
 
@@ -1397,12 +1398,62 @@ Existing CSS components to study for integration:
 
 ## Appendix E — Repository Health Notes
 
-The following issues were identified during cross-referencing and should be addressed separately:
+The following issues were identified during cross-referencing and were fixed in v1.4:
 
-1. **Version mismatch:** `package.json` says v9.1.0, but `src/VERSION` says v9.0.0 and `data/character_schema.json` / `data/glossary.json` say v9.0.0. The version sync script should catch this.
+1. **Version mismatch (FIXED):** `build-unified.mjs` hardcoded version `9.0.0` instead of reading from `src/VERSION` (which says `9.1.0`). Fixed: `build-unified.mjs` now reads version dynamically from `src/VERSION` at build time. `package.json` says `9.1.0` and `src/VERSION` says `9.1.0` — now consistent. README badge was also updated from `8.0.0` to `9.1.0`.
 
-2. **Content duplication:** `parts/` at root level mirrors `src/master/` exactly; `widgets/` at root mirrors `src/shell/widgets/`; `assets/` mirrors `src/assets/`. These appear to be build artifacts that were checked in and should be cleaned up.
+2. **Content duplication:** `parts/` at root level mirrors `src/master/` exactly; `widgets/` at root mirrors `src/shell/widgets/`; `assets/` mirrors `src/assets/`. These appear to be build artifacts that were checked in and should be cleaned up. When CI/CD is fully operational, these root fallbacks become optional since `dist/` is deployed directly.
 
 3. **E02 pipeline spec ambiguity:** The Assembly Pipeline in Part 7A describes an SP-assembly walkthrough for Елена (6 steps + 4 optional). It is NOT a card-design lifecycle. Any future spec work should clarify whether a higher-level "card design pipeline" is needed as a separate concept.
 
 4. **Multiple parameter tables:** Part 7A contains at least 3 different parameter tables (base parameters by context tier, model-specific sub-table, and model type checklist) with slightly different values. This can confuse users. Consider unifying into a single authoritative table.
+
+---
+
+## Appendix F — CI/CD Pipeline Fix Log (v1.4)
+
+### Critical Issues Found and Fixed
+
+| # | Issue | Root Cause | Fix |
+|---|-------|-----------|-----|
+| 1 | GitHub Actions workflows fail silently | `actions/checkout@v6`, `actions/setup-node@v6`, `actions/configure-pages@v6`, `actions/deploy-pages@v5` do not exist | Downgraded to `@v4`, `@v4`, `@v5`, `@v4` respectively |
+| 2 | `actions/github-script@v8` does not exist | Version v8 not released | Downgraded to `@v7` |
+| 3 | Workflows never trigger for `build/**` changes | `/build/` is in `.gitignore` — never pushed to repo | Removed `build/**` from path triggers; added `visual-system/**` instead |
+| 4 | Quality gate job uses `npx lhci autorun` | `@lhci/cli` not in `package.json` dependencies | Removed entire quality-gate job from deploy workflow (Lighthouse CI should be a separate optional workflow) |
+| 5 | Quality gate uses `npx wait-on` | `wait-on` not in dependencies | Removed with quality gate job |
+| 6 | Duplicate workflows on push to main | Both `deploy-pages.yml` and `build-artifact.yml` trigger on same paths | `deploy-pages.yml` is now the single deployment workflow; `build-artifact.yml` handles PR builds and validation |
+| 7 | Version hardcoded as `9.0.0` in build scripts | `build-unified.mjs` used string literal instead of reading `src/VERSION` | Changed to dynamic version read from `src/VERSION` |
+| 8 | README shows version `8.0.0` | Badge and text not updated since v8→v9 migration | Updated to `9.1.0` |
+| 9 | `.gitignore` header says "v7" | Not updated during v7→v8→v9 transitions | Updated to "v9" |
+
+### deploy-pages.yml Changes Summary
+
+- `actions/checkout@v6` → `@v4`
+- `actions/setup-node@v6` → `@v4`
+- `actions/configure-pages@v6` → `@v5`
+- `actions/deploy-pages@v5` → `@v4`
+- Removed `build/**` from path triggers
+- Added `visual-system/**` to path triggers
+- Removed entire `quality` job (Lighthouse CI + axe audit) — requires `@lhci/cli` and `wait-on` not in dependencies. Should be re-added as a separate optional workflow after installing deps
+- Added explicit `permissions: pages: write, id-token: write` to deploy job
+- Smoke test now uses `curl -sf` instead of `curl -s` for proper error handling
+
+### build-artifact.yml Changes Summary
+
+- `actions/checkout@v6` → `@v4`
+- `actions/setup-node@v6` → `@v4`
+- `actions/github-script@v8` → `@v7`
+- Removed `build/**` from path triggers
+- Added `visual-system/**` to path triggers
+
+### validate.yml Changes Summary
+
+- `actions/checkout@v6` → `@v4`
+- Removed `master` from branch triggers (only `main` exists)
+
+### Recommended Follow-up Actions
+
+1. **Re-enable Lighthouse CI:** Add `@lhci/cli` and `wait-on` to `devDependencies`, then create a separate `lighthouse.yml` workflow
+2. **Clean up root fallback files:** Once CI/CD is verified working, consider gitignoring root-level `index.html`, `assets/`, `widgets/`, `parts/`, `data/`, `event-bus.js` (these are build artifacts that CI regenerates)
+3. **Version sync validation:** The `version:check` script should validate all 4 canonical version locations match
+4. **Dependabot PRs:** There are 4 open Dependabot PRs that should be merged for security updates

@@ -943,10 +943,59 @@
     initTokenCalc();
     initProgressBar();
 
+    // === VISUAL SYSTEM WIDGETS ===
+    // Инициализация VS-виджетов после загрузки контента
+    if (window.VsMiniMap && typeof window.VsMiniMap.init === 'function') {
+      window.VsMiniMap.init();
+    }
+    if (window.VsDiagnosticTree && typeof window.VsDiagnosticTree.initAll === 'function') {
+      window.VsDiagnosticTree.initAll();
+    }
+    if (window.VsBlueprintViewer && typeof window.VsBlueprintViewer.initAll === 'function') {
+      window.VsBlueprintViewer.initAll();
+    }
+    if (window.VsAuthorNoteViewer && typeof window.VsAuthorNoteViewer.initAll === 'function') {
+      window.VsAuthorNoteViewer.initAll();
+    }
+
+    // VS Scroll-анимации через IntersectionObserver
+    initVsScrollAnimations();
+
     // EventBus integration (§0.3): ensure EventBus is available after content load
     if (typeof window.EventBus === 'undefined') {
       console.warn('[LazyLoader] EventBus not found — widgets will work standalone');
     }
+  }
+
+  // ============================================================================
+  // VISUAL SYSTEM SCROLL ANIMATIONS
+  // ============================================================================
+
+  function initVsScrollAnimations() {
+    const scrollElements = $$('.vs-scroll-enter');
+    if (!scrollElements.length) return;
+
+    // Проверяем prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      // Показываем все элементы сразу без анимации
+      scrollElements.forEach(el => el.classList.add('vs-is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vs-is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    scrollElements.forEach(el => observer.observe(el));
   }
 
 

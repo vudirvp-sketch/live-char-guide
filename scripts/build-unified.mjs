@@ -2,7 +2,7 @@
 /**
  * @fileoverview Build Unified Script for Live Character Guide v9
  * @module scripts/build-unified
- * @version 9.0.0
+ * @version 9.1.0
  *
  * @description
  * Reads src/master/part_*.html and appendix_*.html and produces
@@ -33,6 +33,7 @@ const UNIFIED_DIR = join(ROOT, 'src', 'master');
 const DATA_DIR = join(ROOT, 'data');
 const BUILD_DIR = join(ROOT, 'build');
 const GLOSSARY_PATH = join(DATA_DIR, 'glossary.json');
+const VERSION_FILE = join(ROOT, 'src', 'VERSION');
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -375,6 +376,15 @@ async function generateGlossaryHTML() {
 async function buildUnified() {
   log('INFO', 'Starting unified build...');
 
+  // Read version from src/VERSION
+  let version = '0.0.0';
+  if (existsSync(VERSION_FILE)) {
+    version = (await readFile(VERSION_FILE, 'utf-8')).trim();
+  } else {
+    log('WARN', 'src/VERSION not found, using fallback version');
+  }
+  log('INFO', `Building version: ${version}`);
+
   // Clean build directory
   if (existsSync(BUILD_DIR)) {
     const entries = await readdir(BUILD_DIR);
@@ -527,9 +537,9 @@ async function buildUnified() {
     process.exit(1);
   }
 
-  // Generate manifest.json (v9: version, format, parts, appendices)
+  // Generate manifest.json (version from src/VERSION)
   const manifest = {
-    version: '9.0.0',
+    version: version,
     format: 'unified',
     parts: assembledParts,
     appendices: assembledAppendices
@@ -546,7 +556,7 @@ async function buildUnified() {
 
   // Generate footer.html
   const footerHtml = `<footer class="guide-footer">
-<div class="guide-meta">Live Character Guide v9.0.0 &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
+<div class="guide-meta">Live Character Guide v${version} &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
 </footer>`;
   await writeFile(join(outputDir, 'footer.html'), footerHtml);
   log('INFO', 'Generated: build/parts/footer.html');
@@ -565,7 +575,7 @@ async function buildUnified() {
   // Generate build-manifest.json
   const contentHash = createHash('sha256').update(combinedHTMLContent).digest('hex');
   const buildManifest = {
-    version: '9.0.0',
+    version: version,
     format: 'unified',
     builtAt: new Date().toISOString(),
     sectionCount: allSections.length,

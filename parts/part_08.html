@@ -10,6 +10,230 @@
   - Phase 2.2: Renumbered AP-16 (Nested Anchors) to AP-15
   - Removed part-resume div
 -->
+<!-- VS-EMBED: E12 — Antipatterns -->
+<div class="vs-embed" data-vs-element="E12">
+<!-- 
+  Element: E12 — Antipattern Catalog
+  Source: elements/E12-antipattern-catalog.html
+  Pattern: P5 — Grid/Matrix
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E12-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E12-script.js
+-->
+<div class="ap-grid">
+
+      <!-- AP-1 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-1</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Раздувание токенов</div>
+        <div class="ap-card__cause">Description превышает бюджет</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Сократите до стандартного бюджета. Перенесите детали в Lorebook.</div>
+      </div>
+
+      <!-- AP-2 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-2</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Отсутствует Price</div>
+        <div class="ap-card__cause">У Anchor нет последствия</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Добавьте физический, внутри-сценовый Price каждому Anchor.</div>
+      </div>
+
+      <!-- AP-3 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-3</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Голос в Description</div>
+        <div class="ap-card__cause">Голосовые паттерны записаны в блоке Description</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Перенесите весь голос в Examples. Description = только факты.</div>
+      </div>
+
+      <!-- AP-4 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-4</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">GHOST в SP</div>
+        <div class="ap-card__cause">Элементы SPINE помещены в System Prompt</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Перенесите SPINE в Description. SP = только контейнер.</div>
+      </div>
+
+      <!-- AP-5 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-5</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">RepPen &gt; 1.10</div>
+        <div class="ap-card__cause">Repetition Penalty установлен слишком высоким</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Держите RepPen 1.0–1.05. Используйте MinP вместо этого.</div>
+      </div>
+
+      <!-- AP-6 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-6</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Нет Anti-godmoding</div>
+        <div class="ap-card__cause">Отсутствует 2-строчный anti-godmoding в SP</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Добавьте негативную + позитивную строки ограничений в SP.</div>
+      </div>
+
+      <!-- AP-7 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-7</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Presence Penalty &gt; 0</div>
+        <div class="ap-card__cause">PP > 0 нарушает согласованность персонажа</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Установите PP = 0.0 всегда. Без исключений.</div>
+      </div>
+
+      <!-- AP-8 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-8</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">GHOST без Anchors</div>
+        <div class="ap-card__cause">SPINE определён, но нет Anchors для его выражения</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Добавьте FLAW-связанные Anchors в блок Examples.</div>
+      </div>
+
+      <!-- AP-9 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-9</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Нарушенный SPINE</div>
+        <div class="ap-card__cause">Элементы SPINE не образуют причинную цепь</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Проверьте причинный поток GHOST→LIE→FLAW→NEED→WANT.</div>
+      </div>
+
+      <!-- AP-10 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-10</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Перегрузка CoT</div>
+        <div class="ap-card__cause">Избыточный CoT на малых моделях</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Используйте Tier 0–1 для 12B, Tier 1–2 для 32B.</div>
+      </div>
+
+      <!-- AP-11 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-11</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Утечка голоса</div>
+        <div class="ap-card__cause">Голос персонажа дрейфует к стилю нарратора</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Изолируйте голос в Examples. Добавьте усиление в Author's Note.</div>
+      </div>
+
+      <!-- AP-12 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-12</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Некорректный XML</div>
+        <div class="ap-card__cause">Теги неправильно закрыты или вложены</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Проверьте все XML-теги. Используйте Format Lock (1 система).</div>
+      </div>
+
+      <!-- AP-13 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-13</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Конфликт Lorebook</div>
+        <div class="ap-card__cause">Запись Lorebook противоречит Description</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Аудит Lorebook на согласованность с Description.</div>
+      </div>
+
+      <!-- AP-14 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-14</span>
+          <span class="severity-dot severity-dot--high"></span>
+        </div>
+        <div class="ap-card__symptom">Нарушение контекста</div>
+        <div class="ap-card__cause">Общий размер карточки превышает контекстное окно модели</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Запустите Budget Check. Сократите или используйте Lorebook для избытка.</div>
+      </div>
+
+      <!-- AP-15 -->
+      <div class="ap-card scroll-enter">
+        <div class="ap-card__header">
+          <span class="ap-card__id">AP-15</span>
+          <span class="severity-dot severity-dot--medium"></span>
+        </div>
+        <div class="ap-card__symptom">Вложенные Anchors</div>
+        <div class="ap-card__cause">Anchors рекурсивно ссылаются друг на друга</div>
+        <div class="ap-card__fix-label">Исправление:</div>
+        <div class="ap-card__fix">Выровняйте структуру Anchors. Только один уровень ссылок.</div>
+      </div>
+
+    </div>
+
+<script type="module">
+// VS Element E12 - inline script (from component-extracts)
+/**
+ * Element: E12 — Antipattern Catalog
+ * Source: elements/E12-antipattern-catalog.html
+ * Dependencies: None (vanilla JS)
+ * Notes: Element-specific interaction logic. IntersectionObserver handles
+ *        scroll-enter animations. Shared mini-map keyboard navigation removed
+ *        (will be handled by global shell component).
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+    });
+</script>
+</div>
+<!-- REPLACED BY VISUAL SYSTEM: E12 -->
 <section  data-section="p8_antipatterns_overview" data-toc-nav>
 <h2>Анти-паттерны</h2>
 
@@ -311,5 +535,16 @@ WANT: {{want}}
 </div>
 
 <p class="bridge-paragraph">Анти-паттерны указывают, чего избегать. Диагностика показывает, работает ли ваша карточка на самом деле. Этот раздел предоставляет структурированный протокол тестирования: от быстрых проверок до полноценной сценарной валидации. → <a href="#p9_quality_scale">Part 9</a></p>
+
+<div class="part-resume">
+<h3>Что вы теперь умеете</h3>
+<ul>
+<li>Распознавать все 15 анти-паттернов по симптомам</li>
+<li>Применять исправления для каждого анти-паттерна</li>
+<li>Проверять карточку на Token Bloat (AP-1) и Missing Price (AP-2)</li>
+<li>Обнаруживать Voice Bleed (AP-11) и XML Malformed (AP-12)</li>
+<li>Понимать, почему Nested Anchors (AP-15) создают непредсказуемость</li>
+</ul>
+</div>
 
 </section>

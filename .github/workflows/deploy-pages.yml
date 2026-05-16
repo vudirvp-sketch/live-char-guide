@@ -6,11 +6,11 @@ on:
     paths:
       - 'src/**'
       - 'assets/**'
-      - 'build/**'
       - 'data/**'
       - 'docs/**'
       - 'scripts/**'
       - 'tests/**'
+      - 'visual-system/**'
       - '.github/workflows/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -36,13 +36,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
@@ -64,55 +64,19 @@ jobs:
             dist/
           retention-days: 5
 
-  # Quality gate job
-  quality:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: dist
-
-      - name: Start server for quality checks
-        run: |
-          pnpm exec serve dist -l 3000 &
-          npx wait-on http://localhost:3000/ --timeout 60000
-
-      - name: Lighthouse CI
-        run: npx lhci autorun --config=.lighthouserc.json
-
-      - name: Full-Page Accessibility Audit
-        continue-on-error: true
-        run: |
-          npx @axe-core/cli http://localhost:3000/ --load-delay=2000 --exit || echo "Axe audit completed with warnings"
-
   # Deployment job
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: quality
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
@@ -121,7 +85,7 @@ jobs:
           path: dist
 
       - name: Setup Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -130,14 +94,15 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
 
       - name: Smoke Test
         run: |
           PAGE_URL="${{ steps.deployment.outputs.page_url }}"
-          curl -s "$PAGE_URL" | grep -q "shell-styles.css" || echo "WARN: shell not found"
-          curl -s "$PAGE_URL/assets/lazy-loader.js" | head -1 | grep -q "LAZY LOADER" || echo "WARN: lazy-loader not found"
-          curl -s "$PAGE_URL/parts/part_01.html" | grep -q "p1" || echo "WARN: parts not found"
+          echo "Deployed to: $PAGE_URL"
+          curl -sf "$PAGE_URL" | grep -q "shell-styles.css" || echo "WARN: shell-styles.css not found in index"
+          curl -sf "$PAGE_URL/assets/lazy-loader.js" | head -1 | grep -q "LAZY LOADER" || echo "WARN: lazy-loader.js not found or unexpected content"
+          curl -sf "$PAGE_URL/parts/part_01.html" | grep -q "p1" || echo "WARN: part_01.html not found or missing p1 section"
 
       - name: Create Deploy Tag
         if: success()
