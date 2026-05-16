@@ -668,6 +668,10 @@
       content.innerHTML = results.join('\n');
       content.classList.remove('content-hidden');
 
+      // FIX: Execute inline scripts that were injected via innerHTML
+      // (browsers don't execute <script> tags inserted via innerHTML)
+      executeInlineScripts(content);
+
       initInteractiveElements();
       generateTOC();
       initActivePartHighlighting();
@@ -676,8 +680,12 @@
       handleLegacyAnchor();
 
       // Render Mermaid diagrams after content is loaded
+      // Use requestAnimationFrame for reliable DOM timing
       if (typeof mermaid !== 'undefined' && typeof mermaid.run === 'function') {
-        try { mermaid.run(); } catch (e) { console.warn('[Mermaid] Render error:', e.message); }
+        requestAnimationFrame(() => {
+          try { mermaid.run({ querySelector: '.mermaid' }); }
+          catch (e) { console.warn('[Mermaid] Render error:', e.message); }
+        });
       }
 
     } catch (e) {
@@ -686,6 +694,44 @@
 
     isLoading = false;
     hideLoading();
+  }
+
+  // ============================================================================
+  // INLINE SCRIPT EXECUTION (FIX: innerHTML scripts don't execute)
+  // ============================================================================
+
+  /**
+   * FIX: Execute inline <script> tags that were injected via innerHTML.
+   * Browsers do not execute <script> tags inserted via innerHTML (HTML spec).
+   * This function extracts each script, strips the DOMContentLoaded wrapper
+   * (since DOM is already loaded at this point), removes type="module"
+   * (for CSP 'unsafe-inline' compatibility), and re-inserts the script
+   * so the browser executes it.
+   */
+  function executeInlineScripts(container) {
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      let code = oldScript.textContent.trim();
+      if (!code) return;
+
+      // Remove DOMContentLoaded wrapper since DOM is already loaded
+      code = code.replace(
+        /document\.addEventListener\(\s*['"]DOMContentLoaded['"]\s*,\s*\(\)\s*=>\s*\{([\s\S]*)\}\s*\)\s*;?\s*$/,
+        '$1'
+      );
+
+      // Create new script element (without type="module" for CSP compatibility)
+      const newScript = document.createElement('script');
+      for (const attr of oldScript.attributes) {
+        if (attr.name !== 'type') {
+          newScript.setAttribute(attr.name, attr.value);
+        }
+      }
+      newScript.textContent = code;
+
+      // Replace old with new — this triggers script execution
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
   }
 
   // ============================================================================
@@ -977,21 +1023,29 @@
   // ============================================================================
 
   function initVsScrollAnimations() {
-    const scrollElements = $$('.vs-scroll-enter');
+    // FIX: Handle BOTH animation class systems:
+    //   .vs-scroll-enter → .vs-is-visible  (used by lazy-loader)
+    //   .scroll-enter    → .is-visible     (used by vs-embed elements in parts HTML)
+    const scrollElements = $$('.vs-scroll-enter, .scroll-enter');
     if (!scrollElements.length) return;
 
     // Проверяем prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       // Показываем все элементы сразу без анимации
-      scrollElements.forEach(el => el.classList.add('vs-is-visible'));
+      scrollElements.forEach(el => {
+        el.classList.add('vs-is-visible');
+        el.classList.add('is-visible');
+      });
       return;
     }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // Add both classes for maximum compatibility
           entry.target.classList.add('vs-is-visible');
+          entry.target.classList.add('is-visible');
           observer.unobserve(entry.target);
         }
       });
