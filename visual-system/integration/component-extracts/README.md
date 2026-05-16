@@ -7,9 +7,9 @@
 
 Для каждого элемента (E01-E17, Hero):
 
-- `E##-name.svg` — извлечённый SVG (если есть)
-- `E##-name.css` — элементо-специфичные стили (без DESIGN-TOKENS, patterns, utilities)
-- `E##-name.js` — извлечённый JS (если есть), как ES-модуль
+- `E##-visual.html` — Self-contained HTML with inline CSS/JS
+- `E##-styles.css`  — Extracted CSS
+- `E##-script.js`   — Extracted JS
 
 ## Статус создания
 

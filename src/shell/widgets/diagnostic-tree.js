@@ -1,10 +1,14 @@
 /**
  * VS Diagnostic Tree — интерактивное дерево диагностики (E13)
- * v1.0.0
+ * v1.1.0
  * Поддерживает сворачивание/разворачивание веток, навигацию с клавиатуры.
+ * FIX-22: Added destroy() method.
  */
 (function() {
   'use strict';
+  
+  // Track bound handlers for cleanup
+  const _boundHandlers = [];
   
   function initDiagnosticTree(container) {
     if (!container) return;
@@ -32,12 +36,16 @@
       }
       
       toggle.addEventListener('click', expandCollapse);
-      toggle.addEventListener('keydown', (e) => {
+      const keydownHandler = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           expandCollapse();
         }
-      });
+      };
+      toggle.addEventListener('keydown', keydownHandler);
+      
+      _boundHandlers.push({ element: toggle, type: 'click', handler: expandCollapse });
+      _boundHandlers.push({ element: toggle, type: 'keydown', handler: keydownHandler });
     });
   }
   
@@ -46,6 +54,14 @@
     document.querySelectorAll('.vs-diagnostic-tree').forEach(initDiagnosticTree);
   }
   
-  window.VsDiagnosticTree = { init: initDiagnosticTree, initAll };
+  // FIX-22: destroy() method — remove all event listeners
+  function destroy() {
+    _boundHandlers.forEach(({ element, type, handler }) => {
+      if (element) element.removeEventListener(type, handler);
+    });
+    _boundHandlers.length = 0;
+  }
+  
+  window.VsDiagnosticTree = { init: initDiagnosticTree, initAll, destroy };
   document.addEventListener('DOMContentLoaded', initAll);
 })();

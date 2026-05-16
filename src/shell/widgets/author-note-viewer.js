@@ -1,10 +1,14 @@
 /**
  * VS Author's Note Viewer — переключатель шаблонов A/B (E16)
- * v1.0.0
+ * v1.1.0
  * Поддерживает переключение между Template A (3-section) и Template B (4-section).
+ * FIX-22: Added destroy() method.
  */
 (function() {
   'use strict';
+  
+  // Track bound handlers for cleanup
+  const _boundHandlers = [];
   
   function initAuthorNoteViewer(container) {
     if (!container) return;
@@ -20,13 +24,19 @@
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', btn.dataset.template === 'a' ? 'true' : 'false');
       
-      btn.addEventListener('click', () => setTemplate(btn.dataset.template));
-      btn.addEventListener('keydown', (e) => {
+      function clickHandler() { setTemplate(btn.dataset.template); }
+      function keydownHandler(e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           setTemplate(btn.dataset.template);
         }
-      });
+      }
+      
+      btn.addEventListener('click', clickHandler);
+      btn.addEventListener('keydown', keydownHandler);
+      
+      _boundHandlers.push({ element: btn, type: 'click', handler: clickHandler });
+      _boundHandlers.push({ element: btn, type: 'keydown', handler: keydownHandler });
     });
     
     function setTemplate(templateId) {
@@ -58,6 +68,14 @@
     document.querySelectorAll('.vs-author-note-viewer').forEach(initAuthorNoteViewer);
   }
   
-  window.VsAuthorNoteViewer = { init: initAuthorNoteViewer, initAll };
+  // FIX-22: destroy() method — remove all event listeners
+  function destroy() {
+    _boundHandlers.forEach(({ element, type, handler }) => {
+      if (element) element.removeEventListener(type, handler);
+    });
+    _boundHandlers.length = 0;
+  }
+  
+  window.VsAuthorNoteViewer = { init: initAuthorNoteViewer, initAll, destroy };
   document.addEventListener('DOMContentLoaded', initAll);
 })();
