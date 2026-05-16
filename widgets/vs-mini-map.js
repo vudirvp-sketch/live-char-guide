@@ -1,8 +1,9 @@
 /**
  * VS Mini-Map — глобальная навигация по элементам визуальной системы
- * v1.0.0
+ * v1.1.0
  * Заменяет 17 встроенных мини-карт из прототипов.
  * Вставляется один раз в shell и обновляется при навигации.
+ * FIX-22: Added destroy() method. FIX-31: Remove tabindex after blur.
  */
 (function() {
   'use strict';
@@ -13,6 +14,9 @@
     { label: 'Личность', elements: ['E05', 'E06', 'E09', 'E10'] },
     { label: 'Продвинутые', elements: ['E11', 'E12', 'E13', 'E14', 'E15', 'E16', 'E17'] }
   ];
+
+  // Stored click handlers for cleanup
+  let _navElement = null;
   
   function createMiniMap() {
     const nav = document.createElement('nav');
@@ -55,13 +59,18 @@
     return nav;
   }
   
+  // FIX-31: Remove tabindex="-1" after blur to avoid polluting DOM
   function navigateToElement(elId) {
-    // Find the target element section in the current page
     const target = document.querySelector(`[data-vs-element="${elId}"]`);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       target.setAttribute('tabindex', '-1');
       target.focus();
+      // Remove tabindex after blur to avoid polluting DOM
+      target.addEventListener('blur', function handler() {
+        target.removeAttribute('tabindex');
+        target.removeEventListener('blur', handler);
+      });
     }
   }
   
@@ -85,12 +94,21 @@
     const content = document.getElementById('content');
     if (content) {
       const map = createMiniMap();
+      _navElement = map;
       content.insertBefore(map, content.firstChild);
     }
   }
   
+  // FIX-22: destroy() method for cleanup
+  function destroy() {
+    if (_navElement && _navElement.parentNode) {
+      _navElement.parentNode.removeChild(_navElement);
+    }
+    _navElement = null;
+  }
+  
   // Public API
-  window.VsMiniMap = { init, setActive, navigateToElement };
+  window.VsMiniMap = { init, setActive, navigateToElement, destroy };
   
   // Auto-init when content loads
   document.addEventListener('DOMContentLoaded', init);

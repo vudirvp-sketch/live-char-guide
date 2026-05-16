@@ -70,7 +70,11 @@
     if (!enneagramDataCache || !oceanProfile || !enneagramTypeId) return [];
     const type = enneagramDataCache.types.find(function(t) { return t.id === enneagramTypeId; });
     if (!type || !type.ocean_correlation) return [];
-    return window.WidgetUtils.checkOceanEnneagramConflicts(oceanProfile, type.ocean_correlation);
+    // FIX-29: Pass data-driven thresholds instead of hardcoded 30/70 defaults
+    const thresholds = (oceanDataCache && oceanDataCache.extremum_thresholds)
+      ? oceanDataCache.extremum_thresholds
+      : undefined;
+    return window.WidgetUtils.checkOceanEnneagramConflicts(oceanProfile, type.ocean_correlation, thresholds);
   }
 
   /**
@@ -468,13 +472,18 @@
         }
 
         if (format === 'clipboard') {
-          navigator.clipboard.writeText(content).then(function() {
-            btn.textContent = '\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e!';
-            setTimeout(function() { btn.textContent = '\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c'; }, 1500);
-          }).catch(function() {
-            // Fallback for older browsers
+          // FIX-03: Guard Clipboard API for insecure contexts (HTTP, file://)
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(content).then(function() {
+              btn.textContent = '\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e!';
+              setTimeout(function() { btn.textContent = '\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c'; }, 1500);
+            }).catch(function() {
+              // Fallback for older browsers
+              window.WidgetUtils.fallbackCopy(content);
+            });
+          } else {
             window.WidgetUtils.fallbackCopy(content);
-          });
+          }
         } else {
           // Download file
           var blob = new Blob([content], { type: format === 'json' ? 'application/json' : 'text/markdown' });
@@ -535,7 +544,7 @@
       }
       if (!synthesisState.ocean && window.OceanInsight && typeof window.OceanInsight.getProfile === 'function') {
         var profile = window.OceanInsight.getProfile();
-        if (profile && (profile.O + profile.C + profile.E + profile.A + profile.N) > 0) {
+        if (profile && typeof profile.O === 'number') {
           synthesisState.ocean = profile;
         }
       }

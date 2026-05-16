@@ -558,18 +558,19 @@
       });
     }
 
-    // M3: Enneagram link buttons (emit enneagram suggestion event)
+    // M3: Enneagram link buttons (emit mbti:enneagram-suggest instead of ENNEAGRAM_SELECTED)
     resultEl.querySelectorAll('.mbti-enneagram-link-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var typeId = parseInt(btn.dataset.enneagramEmit, 10);
         if (isNaN(typeId)) return;
-        // Optional: emit event that Enneagram Builder can react to
-        if (window.EventBus && window.GuideEvents) {
-          window.EventBus.emit(window.GuideEvents.ENNEAGRAM_SELECTED, {
+        // FIX-06: Emit suggestion event instead of directly selecting Enneagram type
+        // Per §0.3 (no direct API calls between components) and §0.5 (Single Data Owner)
+        if (window.EventBus) {
+          window.EventBus.emit('mbti:enneagram-suggest', {
             typeId: typeId,
-            wings: []
+            reason: 'mbti-compatibility'
           });
-          console.log('[MBTI] Emitted enneagram:selected suggestion for type ' + typeId);
+          console.log('[MBTI] Emitted mbti:enneagram-suggest for type ' + typeId);
         }
       });
     });
@@ -811,14 +812,12 @@
     }
 
     // v8: No layer gating — all widgets always active
-    if (typeof window.isWidgetAllowed === 'function' && !window.isWidgetAllowed()) {
-      // v8: isWidgetAllowed() always returns true — this branch is unreachable
-    }
+    // FIX-10: Removed dead isWidgetAllowed check (unreachable in v8)
 
-    // v8: Always full widget level (M3)
-    currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 3;
-    // Fallback: ensure at least M2 for full configuration
-    if (currentWidgetLevel < 2) currentWidgetLevel = 3;
+    // v8: Always M2 level — full configuration, all features active
+    currentWidgetLevel = (typeof window.getWidgetLevel === 'function') ? window.getWidgetLevel() : 2;
+    // M2 is the standard level in unified v8 — all features are active
+    // Removed: if (currentWidgetLevel < 2) currentWidgetLevel = 3;
 
     // Fetch data
     mbtiDataCache = await window.WidgetUtils.fetchJson('data/mbti.json');
@@ -832,7 +831,8 @@
     // Build widget
     buildWidget(container);
 
-    // M3: subscribe to events from other widgets
+    // Note: M3 features are not gated in unified v8 (getWidgetLevel always returns 2)
+    // These subscriptions are kept for forward compatibility if M3 is reintroduced
     if (currentWidgetLevel >= 3) {
       subscribeOceanUpdates();
       subscribeEnneagramSelected();

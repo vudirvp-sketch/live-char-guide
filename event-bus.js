@@ -161,6 +161,7 @@
     ENNEAGRAM_OCEAN_SUGGEST: 'enneagram:ocean-suggest', // Emitted by Enneagram Builder (suggestion, not command)
     MBTI_SELECTED: 'mbti:selected',            // Emitted by MBTI Composer
     MBTI_OCEAN_APPLY: 'mbti:ocean-apply',      // Emitted by MBTI Composer
+    MBTI_ENNEAGRAM_SUGGEST: 'mbti:enneagram-suggest', // FIX-06: MBTI suggests Enneagram type (not commands)
     SYNTHESIS_EXPORTED: 'synthesis:exported'    // Emitted by Persona Synthesis
   };
 

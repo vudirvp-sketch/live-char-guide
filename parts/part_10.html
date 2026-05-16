@@ -10,6 +10,8 @@
         Rewrote all Greetings to show WANT at rest (FIX-09)
         Replaced full CORE_DIRECTIVES with Part 7A link (FIX-04)
         Added voice rule callout at top (Task 2.2)
+  FIX-04: Removed layer toggle buttons and data-layer attributes.
+          All annotation layers are visible simultaneously (v8 unified approach).
 -->
 <!-- VS-EMBED: E15 — Elena Card Walkthrough -->
 <div class="vs-embed" data-vs-element="E15">
@@ -23,19 +25,12 @@
 -->
 <div class="blueprint-container scroll-enter">
 
-      <!-- Layer toggle buttons -->
-      <div class="layer-toggles" role="tablist" aria-label="Annotation layer selection">
-        <button class="layer-toggle layer-toggle--structure layer-toggle--active" role="tab" aria-selected="true" data-layer="structure">Структура</button>
-        <button class="layer-toggle layer-toggle--anchors" role="tab" aria-selected="false" data-layer="anchors">Anchors</button>
-        <button class="layer-toggle layer-toggle--spine" role="tab" aria-selected="false" data-layer="spine">SPINE</button>
-        <button class="layer-toggle layer-toggle--directives" role="tab" aria-selected="false" data-layer="directives">Директивы</button>
-      </div>
-
       <!-- Blueprint area with card template -->
       <div class="blueprint-area scroll-enter">
 
-        <!-- Structure layer (default active) -->
-        <div class="annotation-layer annotation-layer--active" data-layer="structure">
+        <!-- FIX-04: All annotation layers visible simultaneously (v8 unified approach) -->
+        <!-- Structure layer -->
+        <div class="annotation-layer">
           <div class="callout callout--structure" style="top:10px; right:20px;">
             SP: ~50-200 токенов<br>Контейнер — содержит директивы, идентичность, anti-godmoding
           </div>
@@ -51,7 +46,7 @@
         </div>
 
         <!-- Anchors layer -->
-        <div class="annotation-layer" data-layer="anchors">
+        <div class="annotation-layer">
           <div class="callout callout--anchors" style="top:260px; right:20px;">
             Подпанель Anchors<br>Формат T→A→P с Embodiment<br>Только FLAW-связанные (→ E03, E04)
           </div>
@@ -61,7 +56,7 @@
         </div>
 
         <!-- SPINE layer -->
-        <div class="annotation-layer" data-layer="spine">
+        <div class="annotation-layer">
           <div class="callout callout--spine" style="top:130px; right:20px;">
             GHOST→LIE→FLAW→NEED→WANT<br>Записано внутри блока Description<br>Елена: предательство→недоверие→изоляция→связь→контроль
           </div>
@@ -71,7 +66,7 @@
         </div>
 
         <!-- Directives layer -->
-        <div class="annotation-layer" data-layer="directives">
+        <div class="annotation-layer">
           <div class="callout callout--directives" style="top:20px; right:20px;">
             SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
           </div>
@@ -125,35 +120,16 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
  * Element: E15 — Annotated Blueprint
  * Source: elements/E15-annotated-blueprint.html
  * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
+ * Notes: FIX-04 — layer toggling removed in v8. All annotation layers
+ *        are visible simultaneously (unified approach). Only scroll-enter
+ *        animations remain.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-      // Переключение слоёв через addEventListener (CSP-совместимо, без inline onclick)
-      function setLayer(layerName) {
-        document.querySelectorAll('.layer-toggle').forEach(btn => {
-          btn.classList.remove('layer-toggle--active');
-          btn.setAttribute('aria-selected', 'false');
-        });
-        const activeBtn = document.querySelector(`.layer-toggle--${layerName}`);
-        if (activeBtn) {
-          activeBtn.classList.add('layer-toggle--active');
-          activeBtn.setAttribute('aria-selected', 'true');
-        }
-
-        document.querySelectorAll('.annotation-layer').forEach(layer => {
-          layer.classList.remove('annotation-layer--active');
-        });
-        const activeLayer = document.querySelector(`[data-layer="${layerName}"]`);
-        if (activeLayer) {
-          activeLayer.classList.add('annotation-layer--active');
-        }
-      }
-
-      document.querySelectorAll('.layer-toggle[data-layer]').forEach(btn => {
-        btn.addEventListener('click', () => setLayer(btn.dataset.layer));
+      // v8: All annotation layers are visible simultaneously — no toggling needed
+      // Show all annotations
+      document.querySelectorAll('.annotation-layer').forEach(layer => {
+        layer.classList.add('annotation-layer--active');
       });
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
