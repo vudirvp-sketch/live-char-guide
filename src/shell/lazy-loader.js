@@ -680,11 +680,39 @@
       handleLegacyAnchor();
 
       // Render Mermaid diagrams after content is loaded
+      // FIX-26: Robust Mermaid rendering with re-initialization fallback
       // Use requestAnimationFrame for reliable DOM timing
-      if (typeof mermaid !== 'undefined' && typeof mermaid.run === 'function') {
-        requestAnimationFrame(() => {
-          try { mermaid.run({ querySelector: '.mermaid' }); }
-          catch (e) { console.warn('[Mermaid] Render error:', e.message); }
+      if (typeof mermaid !== 'undefined') {
+        requestAnimationFrame(async () => {
+          try {
+            // Ensure mermaid is initialized (may not be if script loaded after DOM)
+            if (typeof mermaid.initialize === 'function' && !mermaid._initialized) {
+              mermaid.initialize({
+                startOnLoad: false,
+                theme: 'dark',
+                themeVariables: {
+                  primaryColor: '#4a1a4a',
+                  primaryTextColor: '#e2e8f0',
+                  primaryBorderColor: '#8b5cf6',
+                  lineColor: '#6b7590',
+                  secondaryColor: '#1a1a2e',
+                  tertiaryColor: '#16162a',
+                  fontFamily: 'var(--font-body, sans-serif)',
+                  fontSize: '13px'
+                },
+                flowchart: { htmlLabels: true, curve: 'basis', padding: 12 }
+              });
+              mermaid._initialized = true;
+            }
+            // mermaid.run() is the v10+ API; fallback to mermaid.init() for older versions
+            if (typeof mermaid.run === 'function') {
+              await mermaid.run({ querySelector: '.mermaid' });
+            } else if (typeof mermaid.init === 'function') {
+              mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+          } catch (e) {
+            console.warn('[Mermaid] Render error:', e.message);
+          }
         });
       }
 

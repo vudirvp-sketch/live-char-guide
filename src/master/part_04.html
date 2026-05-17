@@ -173,11 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
 <p><strong>SPINE</strong> — фреймворк из 5 элементов, которые образуют причинную цепочку от прошлого к настоящему: <strong>GHOST → LIE → FLAW → NEED → WANT</strong>. SPINE даёт Anchors причину существовать, а не быть набором случайных правил.</p>
 
 <div class="mermaid">
-graph LR
+graph TD
     GHOST["GHOST<br/>Формирующее событие"] -->|"защита от боли"| LIE["LIE<br/>Ложная установка"]
     LIE -->|"искажает восприятие"| FLAW["FLAW<br/>Деструктивное поведение"]
     FLAW -->|"блокирует"| NEED["NEED<br/>Истинная потребность"]
-    NEED -.-|"противоречит"| WANT["WANT<br/>Осознанное желание"]
+    NEED -.->|"противоречит"| WANT["WANT<br/>Осознанное желание"]
     WANT -->|"совместимо с"| LIE
 
     style GHOST fill:#4a1a1a,stroke:#ff6b6b,color:#fff

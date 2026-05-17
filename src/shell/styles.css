@@ -1080,6 +1080,24 @@ body.theme-light .example-label.stub { color: #ca8a04; background: rgba(234, 179
 }
 
 /* === MERMAID / CONCEPT DIAGRAM (v9 Phase 9.4) === */
+/* FIX-26: Added .mermaid container styles for proper diagram rendering */
+.mermaid {
+  margin: 1.5em 0;
+  padding: 1em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .concept-diagram {
   margin: 1.5em 0;
   padding: 1em;

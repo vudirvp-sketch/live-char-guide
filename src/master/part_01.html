@@ -310,9 +310,9 @@
 
 <div class="mermaid">
 graph TD
-    OCEAN["OCEAN (Part 5)"] --> SPINE
+    OCEAN["OCEAN (Part 5)"] --> SPINE["SPINE (Part 4)"]
     Enneagram["Enneagram (Part 5)"] --> SPINE
-    SPINE["SPINE (Part 4)"] --> Anchors["Behavioral Anchors (Part 2)"]
+    SPINE --> Anchors["Behavioral Anchors (Part 2)"]
     SPINE --> Voice["Voice (Part 3)"]
     SPINE --> CoT["CoT (Part 6)"]
     Anchors --> Embodiment["Embodiment Protocol (Part 2)"]
@@ -328,9 +328,9 @@ graph TD
     SP_assembly --> Diagnostics["Diagnostics (Part 9)"]
     Lorebook --> Diagnostics
     Diagnostics --> Examples["Full Examples (Part 10)"]
-    AntiPatterns["Anti-Patterns (Part 8)"] -.->|fix links| SPINE
-    AntiPatterns -.->|fix links| SP_assembly
-    AntiPatterns -.->|fix links| Voice
+    AntiPatterns["Anti-Patterns (Part 8)"] -.->|"fix links"| SPINE
+    AntiPatterns -.->|"fix links"| SP_assembly
+    AntiPatterns -.->|"fix links"| Voice
 </div>
 
 <h4>Содержание</h4>
