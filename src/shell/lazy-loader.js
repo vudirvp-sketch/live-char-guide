@@ -725,11 +725,18 @@
         '$1'
       );
 
+      // FIX-26: After stripping DOMContentLoaded wrapper, any `return` statement
+      // (even inside an `if` block) becomes illegal at the module top level.
+      // The previous regex /^\s*return\s/m only matched `return` at the start
+      // of a line, missing indented returns like `        return;` inside `if`.
+      // Use \breturn\b to catch return at ANY indentation level.
+      const hasReturnStatement = /\breturn\b/.test(code);
+
       if (isModule) {
         // Module scripts: preserve type="module" and wrap in IIFE for return statements
         // Module scripts can't use new Function() — they need the module scope
-        // Wrap in block scope to handle bare returns
-        if (/^\s*return\s/m.test(code)) {
+        // Wrap in IIFE to handle bare returns (FIX-26: broader detection)
+        if (hasReturnStatement) {
           code = '(function() { ' + code + ' })();';
         }
         const newScript = document.createElement('script');
