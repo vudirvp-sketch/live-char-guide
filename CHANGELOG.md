@@ -1,5 +1,36 @@
 # Changelog
 
+## [9.1.12] - 2026-06-24
+
+### Added (iter 12 — Canon Part 8 creation)
+- **Canon Part 8 created** — `docs/canon/part_08.md` (411 строк). 16 H2 секций (по одной на каждый `data-section` из `src/master/part_08.html`): p8_antipatterns_overview, p8_ap1_token_bloat..p8_ap15_nested_anchors.
+- **1 VS-маркер:** E12 (Antipattern Catalog, §8.1) — сетка 5×3 с 15 AP-картами.
+- **Front-matter:** `Migration status: ✅ MIGRATED (iter 12)` (Canon created + master HTML migrated end-to-end за один iter).
+- **Migration Notes таблица:** 31 элемент (29 «Оставить» + 2 «Сжать» кандидата #3, #21). Все → DONE.
+
+### Changed (iter 12 — Part 8 master HTML migration)
+- **Part 8 master HTML migrated** против Canon §8 (`src/master/part_08.html`, 521 → 507 строк, -2.7%).
+- **2 compression candidates applied:**
+  - #3: Overview intro paragraph #2 («**Анти-паттерн** — распространённая ошибка...») — объединён с intro #1 в один параграф. Дублировал определение «анти-паттерн».
+  - #21: AP-9 «Пример: Елена — проверка SPINE» `<pre><code>` блок (13 строк) → удалён, заменён на 1-строчный cross-ref на Part 4 §4.9 (canonical location Elena SPINE check).
+- **29 "Оставить" элементов** — без изменений. VS-EMBED E12, summary table (16 rows incl. OCEAN Overload redirect), все diff examples (AP-1/AP-3/AP-12/AP-15), все RULE callouts, все anti-pattern pairs, все cross-refs сохранены.
+- **Canon front-matter updated:** `Migration status: ✅ MIGRATED (iter 12)`, `Last synced: 2026-06-24 (iter 12)`.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 123 warnings = KI#13 baseline).
+- `pnpm run build` ✅ SUCCESS (hash df283246).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (10 pre-existing warnings).
+- `pnpm run qa:bundle` ✅ PASS. `pnpm run qa:doc-versions` ✅ PASS.
+
+### Notes
+- iter 12 = Canon Part 8 creation + master HTML migration (end-to-end за один iter). 9 files updated.
+- KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+- iter 13+ priorities: Canon creation + migrate для Part 9 (diagnostics).
+
+---
+
 ## [9.1.11] - 2026-06-24
 
 ### Changed (iter 11 — Part 7A master HTML migration)

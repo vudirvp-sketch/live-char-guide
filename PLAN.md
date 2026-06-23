@@ -204,8 +204,10 @@ Stage Summary:
 
 **Iter 11 (Part 7A migration, DONE 2026-06-24):** Мигрирован `src/master/part_07a.html` против Canon §7A. 1168 → 1137 строк (-2.7%). 4 compression candidates applied (#22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES walkthrough). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
 
-**Iter 12+ (пересмотрено в iter 11):**
-1. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
+**Iter 12 (Canon Part 8 + migrate, DONE 2026-06-24):** Canon `docs/canon/part_08.md` создан (411 строк, 16 H2 секций, 1 VS-маркер для E12) + `src/master/part_08.html` мигрирован (521 → 507 строк, -2.7%). 2 compression candidates applied: #3 overview intro paragraphs merge, #21 AP-9 «Пример: Елена — проверка SPINE» → 1-строчный cross-ref на Part 4 §4.9. 29 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated. End-to-end за один iter (Canon creation + migrate).
+
+**Iter 13+ (пересмотрено в iter 12):**
+1. **iter 13** — Canon Part 9 + migrate (diagnostics).
 2. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
 3. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
 4. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
@@ -213,4 +215,4 @@ Stage Summary:
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
 
-**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 22 outside) + KI#14 (content duplication) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 12+.**
+**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 1 outside) + KI#14 (content duplication) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 13+.**

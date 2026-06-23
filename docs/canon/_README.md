@@ -179,8 +179,8 @@ docs/canon/
 | Part 6 | `part_06.md` | ❌ | ❌ | iter 16 (planned) |
 | Part 7A | `part_07a.md` | ✅ iter 10 | ✅ iter 11 | iter 10–11 (DONE) |
 | Part 7B | `part_07b.md` | ❌ | ❌ | iter 16 (planned) |
-| Part 8 | `part_08.md` | ❌ | ❌ | iter 12 (planned) |
-| Part 9 | `part_09.md` | ❌ | ❌ | iter 12 (planned) |
+| Part 8 | `part_08.md` | ✅ iter 12 | ✅ iter 12 | iter 12 (DONE) |
+| Part 9 | `part_09.md` | ❌ | ❌ | iter 13 (planned) |
 | Part 10 | `part_10.md` | ❌ | ❌ | iter 16 (planned) |
 | Appendix MBTI | `appendix_mbti.md` | ❌ | ❌ | iter 18 (planned) |
 | Appendix Model Table | `appendix_model_table.md` | ❌ | ❌ | iter 18 (planned) |
@@ -242,6 +242,7 @@ docs/canon/
 - **iter 9 (2026-06-24):** Validation pass Part 4 migration (iter 8). Static HTML sanity check (11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs) + served `parts/part_04.html` через локальный сервер (40 825 bytes, all expected content present, all removed content absent) + `pnpm run validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:contrast`/`qa:doc-versions` PASS. `qa:english`/`qa:syntax` — same false positives as iter 7 (no regression). `qa:csp` FAIL → KI#16 NEW (pre-existing с iter 5, не задокументирован ранее). 6 docs updated. Никаких правок master HTML / visual-system / widget JS.
 - **iter 10 (2026-06-24):** Canon Part 7A created (`docs/canon/part_07a.md`, 802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Master HTML не тронут (iter 11 задача). KI#17 NEW (documentation drift — fixed). 8 docs updated.
 - **iter 11 (2026-06-24):** Part 7A master HTML migrated (`src/master/part_07a.html`, 1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
+- **iter 12 (2026-06-24):** Canon Part 8 created (`docs/canon/part_08.md`, 411 строки, 16 H2 секций, 1 VS-маркер для E12) + master HTML мигрирован (`src/master/part_08.html`, 521 → 507 строк, -2.7%). 2 compression candidates applied: #3 intro paragraph merge, #21 AP-9 Elena SPINE check example → cross-ref Part 4. 29 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
 
 ---
 
