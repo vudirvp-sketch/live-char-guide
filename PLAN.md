@@ -68,7 +68,7 @@
 | `docs/character_bible.md` | — | Общий bible | Актуален |
 | `docs/elena_character_bible.md` | — | Elena bible | Актуален, но дублирует часть character_bible.md |
 | `docs/vyshcherblenny_character_bible.md` | — | Vysherblenny bible | Актуален, но дублирует часть character_bible.md |
-| `docs/anchor-redirects.json` | — | Redirects для старых section IDs | Актуален |
+| `docs/anchor-redirects.json` | — | Redirects для старых section IDs | **REMOVED iter 7 (KI#15):** stale duplicate of `data/anchor-redirects.json`. Runtime использует `data/` версию. |
 | `visual-system/PLAN.md` | 1.4 | Visual system implementation plan | Актуален, ongoing |
 
 ### 2.2 Чего нет
@@ -235,18 +235,23 @@ Stage Summary:
 - **Validation pass (iter 6b):** все 18 ключевых метрик verified ✅. 3 арифметические погрешности исправлены (section count 124→98, AGENT_NAV §1 92→98). 5 новых находок: Pattern H (`docs/anchor-redirects.json` stale duplicate → KI#15), Pattern E scope (3→12+ мест), CHANGELOG iter 6 gap, component-extracts/ unaudited (iter 19+), tables 62+→76. CHANGELOG.md [9.1.6] добавлен.
 - Никаких правок master HTML / visual-system — только docs.
 
-**Iter 7+ (пересмотрено в iter 6):**
-1. **iter 7** — Canon scaffold `docs/canon/` + `_README.md` + Canon Part 4 pilot (Markdown, без HTML правок).
-2. **iter 8** — Migrate `part_04.html` против Canon §4. Удалить дубликаты + 6 устаревших infographic.
-3. **iter 9** — Validate pilot Part 4 (visual diff в браузере).
-4. **iter 10–11** — Canon Part 7A + migrate (1168 строк, разбить на 2 итерации).
-5. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
-6. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
-7. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
-8. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
-9. **iter 19+** — KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
-10. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
+**Iter 7 завершена (Canon scaffold + Part 4 pilot + KI#15 fix):**
+- Создан `docs/canon/` scaffold: `_README.md` (244 строки, 9 секций — правила Canon) + `part_04.md` (394 строки, 11 секций — пилот SPINE, все `data-section` покрыты, Migration Notes таблица для iter 8).
+- KI#15 CLOSED — удалён `docs/anchor-redirects.json` (stale duplicate of `data/anchor-redirects.json`). Single source of truth = `data/anchor-redirects.json`.
+- 6 docs updated: STATUS, AGENT_NAVIGATION, worklog, PLAN, CHANGELOG, CONTENT_RESTRUCTURE_PLAN §9.3.1.
+- Никаких правок master HTML / visual-system / widget JS.
 
-**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2.
+**Iter 8+ (пересмотрено в iter 7):**
+1. **iter 8** — Migrate `src/master/part_04.html` против Canon §4. TODO list — в `docs/canon/part_04.md` Migration Notes таблица. Удалить 6 устаревших `infographic inf-pipeline` + 1 `mermaid`.
+2. **iter 9** — Validate pilot Part 4 (visual diff в браузере, `pnpm run qa`, `pnpm run validate:master`).
+3. **iter 10–11** — Canon Part 7A + migrate (1168 строк, разбить на 2 итерации).
+4. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
+5. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
+6. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
+7. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
+8. **iter 19+** — KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
+9. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
 
-**KI#1..KI#12 закрыты. KI#13 + KI#14 + KI#15 — ACTIVE, defer iter 7+.**
+**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
+
+**KI#1..KI#12 + KI#15 закрыты. KI#13 + KI#14 — ACTIVE, defer iter 8+.**

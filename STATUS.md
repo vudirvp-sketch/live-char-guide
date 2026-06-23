@@ -2,36 +2,38 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.6 + docs restructure iter 6 (analytical + validation pass)
+> **Текущая версия:** 9.1.7 + docs restructure iter 7 (Canon scaffold + Part 4 pilot + KI#15 fix)
 > **Дата:** 2026-06-23
 
 ---
 
 ## Текущее состояние
 
-**iter 6 COMPLETE (analytical + validation pass).** Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — полный анализ дублирования (7 паттернов A..G + Pattern H найден в validation) + стратегия Canonical Guide Spec + дорожная карта iter 7..19. Validation pass подтвердил все 18 ключевых метрик, исправил 3 арифметические погрешности (section count 124 → 98), обнаружил 5 новых находок (Pattern H, Pattern E scope, CHANGELOG gap, component-extracts/ unaudited, tables count). KI#15 NEW (anchor-redirects.json stale duplicate). Никаких правок master HTML / visual-system.
+**iter 7 COMPLETE.** Создан Canon scaffold: `docs/canon/_README.md` (правила Canon: что это, как писать, как мигрировать) + `docs/canon/part_04.md` (пилот, SPINE Framework, 11 секций, ~390 строк Markdown). KI#15 CLOSED — удалён `docs/anchor-redirects.json` (stale duplicate), остался только `data/anchor-redirects.json` (runtime). Никаких правок master HTML / visual-system — только docs (Canon creation + KI#15 cleanup).
 
-### Что сделано в iter 6
+### Что сделано в iter 7
 
-**Аналитическая итерация + validation pass.** Без правок кода/контента. Только docs.
+**Canon scaffold + пилотный Canon + KI#15 fix.** Без правок кода/контента master HTML.
 
-- Изучены master HTML (10 Parts + 3 Appendix, 98 секций, 6 576 строк), visual-system/elements (17 файлов, 6 369 строк), docs/ (8 файлов, 2 909 строк).
-- Идентифицированы 7 паттернов дублирования (Pattern A..G): VS-EMBED + textual section, cascade duplicates, per-element re-explanation, anti-patterns triple duplication, cross-section concept repetition, stale infographic + VS-EMBED coexistence, docs ↔ master HTML drift.
-- **Validation pass** добавил Pattern H: `docs/anchor-redirects.json` — stale duplicate of `data/anchor-redirects.json` (битые редиректы v8→v9 вместо актуальных v8→v9.1).
-- Подсчитаны и **verified** метрики: GHOST 165 ✅, SPINE 160 ✅, FLAW 142 ✅, LIE 104 ✅, NEED 105 ✅, WANT 108 ✅, OCEAN 72 ✅, CoT 92 ✅, Enneagram 48 ✅, MBTI 25 ✅, CORE DIRECTIVES 36 ✅. VS-EMBED 17 ✅, infographic 12 ✅, mermaid 2 ✅, inline `style=` 123 ✅.
-- Сформулирована стратегия: **Canonical Guide Spec** — единый Markdown-документ-источник (`docs/canon/part_NN.md`), из которого master HTML выводится. Визуализация = замещение, не дополнение.
-- Дорожная карта: iter 7 (Canon scaffold + Part 4 pilot) → iter 8 (migrate part_04.html) → iter 9 (validate) → iter 10–17 (остальные Parts) → iter 18 (final cleanup) → iter 19+ (KI#13 + KI#15 + Phase 4).
+- Создан `docs/canon/` с двумя файлами: `_README.md` (244 строки, 9 секций: зачем Canon, структура, Markdown conventions, workflow, migration status, anti-patterns, validation checklist) и `part_04.md` (394 строки, 11 секций, покрывает все `data-section` из `src/master/part_04.html`).
+- Canon Part 4 покрывает: SPINE Overview, GHOST, LIE, FLAW, NEED, WANT, полная цепочка (Выщербленный canonical), SPINE → Anchors mapping (Елена FLAW-linked canonical), consistency check (Елена canonical), navigation, GHOST Layers (Выщербленный canonical).
+- Дедупликация: VS-маркеры `[VS: E05 — ...]` / `[VS: E06 — ...]` вместо 6 устаревших `infographic inf-pipeline` + 1 `mermaid`. Примеры персонажей — каждый в одном canonical location (Елена в §4.2–§4.6, Выщербленный в §4.7 / §4.11), в остальных местах cross-ref.
+- Migration Notes секция в `part_04.md` — таблица из 10 строк: какие HTML-элементы удалить/заменить/оставить при миграции `part_04.html` в iter 8.
+- **KI#15 fix:** удалён `docs/anchor-redirects.json` (108 строк, stale v8→v9 redirects). Остался только `data/anchor-redirects.json` (runtime, v8→v9.1, загружается `lazy-loader.js`). AGENT_NAVIGATION §7 — строка про docs/anchor-redirects.json удалена.
 
-### Изменённые файлы в iter 6
+### Изменённые файлы в iter 7
 
 | File | Action | Reason |
 |------|--------|--------|
-| `docs/CONTENT_RESTRUCTURE_PLAN.md` | **Created + §9 added** | Канонический план переработки + validation pass (§9: 18 verified, 3 corrected, 5 new findings) |
-| `STATUS.md` | Rewritten | iter 6 status + KI#14 + KI#15 |
-| `worklog.md` | Updated | Appended iter 6 record (analytical + validation pass) |
-| `AGENT_NAVIGATION.md` | Updated | Header iter 6, §1 section count fix (92 → 98), §6 pitfall #32 (KI#14) + #33 (KI#15), §7 CONTENT_RESTRUCTURE_PLAN + docs/canon/ в Documentation Map, §8 iter 6 record + iter 7+ roadmap, §10 hint для iter 7 |
-| `PLAN.md` | Updated | §5 iter 6 status (analytical + validation) + iter 7+ roadmap |
-| `CHANGELOG.md` | Updated | Добавлена запись `[9.1.6]` — iter 6 (KI#14 + CONTENT_RESTRUCTURE_PLAN + validation pass) |
+| `docs/canon/_README.md` | **Created** | Правила Canon: что это, структура, Markdown conventions, workflow, migration status, anti-patterns, validation checklist |
+| `docs/canon/part_04.md` | **Created** | Пилотный Canon для Part 4 (SPINE). 11 секций, 394 строки, все `data-section` покрыты. Migration Notes для iter 8. |
+| `docs/anchor-redirects.json` | **Deleted** | KI#15 fix — stale duplicate of `data/anchor-redirects.json`. Runtime использует только `data/` версию. |
+| `STATUS.md` | Rewritten | iter 7 status + KI#15 CLOSED |
+| `worklog.md` | Updated | iter 6b → one-liner, iter 7 record (Canon scaffold + Part 4 + KI#15) |
+| `AGENT_NAVIGATION.md` | Updated | Header iter 7, §6 pitfall #33 → CLOSED, §7 убрана строка про `docs/anchor-redirects.json`, §8 iter 7 record + iter 8+ roadmap, §10 hint для iter 8 |
+| `PLAN.md` | Updated | §2.1 docs/anchor-redirects.json → REMOVED iter 7. §5 iter 7 status + iter 8+ roadmap |
+| `CHANGELOG.md` | Updated | Добавлена запись `[9.1.7]` — iter 7 (Canon scaffold + Part 4 pilot + KI#15 fix) |
+| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | §9.3.1 — добавлена пометка "FIXED iter 7 — файл удалён, KI#15 CLOSED" |
 
 ---
 
@@ -41,13 +43,7 @@
 
 **KI#14 (ACTIVE, MEDIUM-HIGH, found iter 6) — Content duplication VS-EMBED ↔ текст.** 17 VS-EMBED'ов сосуществуют с 12 устаревшими infographic + 2 mermaid = 31 визуализация параллельно с текстом. Концепции (GHOST, SPINE, FLAW и т.д.) пере-объясняются в каждой секции. Визуализации **дублируют** текст вместо **замещения**. Все 11 term counts + 4 visual counts verified в iter 6 validation pass.
 
-**Fix plan (iter 7..18):** См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2.
-
-**KI#15 (ACTIVE, LOW-MEDIUM, found iter 6 validation) — `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json`.** В репозитории 2 файла с одинаковым именем: `data/anchor-redirects.json` (runtime, загружается lazy-loader.js, v8→v9.1 redirects, актуальный) и `docs/anchor-redirects.json` (документация, v8→v9 redirects, **stale** — `greeting` → `p3_greeting` вместо `p7b_greeting`, `p8_ap15_*` → `p8_ap15_ocean_overload` вместо `p5_ocean_warning`). MD5 различаются. AGENT_NAVIGATION §7 ссылается на docs/ версию как "обновлять при rename/delete section IDs", но фактически она не обновлялась с v9.1 restructure.
-
-**Fix plan (iter 7+, low priority):** Удалить `docs/anchor-redirects.json`, оставить только `data/anchor-redirects.json` как single source of truth. AGENT_NAVIGATION §7 обновить — убрать строку про `docs/anchor-redirects.json`. См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §9.3.1.
-
-**Impact:** LOW для runtime (lazy-loader использует `data/`), MEDIUM для documentation integrity — агент, читающий docs/ версию как референс, получит устаревшие редиректы.
+**Fix plan (iter 8..18):** Canon creation iter 7 ✅ (Part 4). Migragion iter 8 (Part 4) → iter 10–17 (остальные Parts) → iter 18 (final cleanup). См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5 Migration Status.
 
 ---
 
@@ -60,6 +56,7 @@
 - KI#10 (iter 4) — закрыт в iter 4.
 - KI#11 (iter 4) — закрыт в iter 5: `tokens.json` создан, `qa:contrast` работает.
 - KI#12 (iter 4) — частично пофикшен в iter 5: 10 `<script>` errors → 0 (widget migration). Остаток → KI#13.
+- KI#15 (iter 6) — закрыт в iter 7: `docs/anchor-redirects.json` удалён, остался только `data/` (single source of truth).
 
 ---
 
@@ -75,8 +72,8 @@
 | **Python 3.10+** | Для CI-wired скриптов и QA tools. |
 | **GitHub Pages deploy** | Через GitHub Actions на push в main. |
 | **QA scripts wired as `qa:*` (iter 4)** | `qa:csp`, `qa:bundle`, `qa:contrast`, `qa:english`, `qa:syntax`, `qa:doc-versions`, `qa:interactive`. Aggregate: `pnpm run qa`. `validate:master` wired в `precommit` (iter 5). |
-| **Canonical Guide Spec (planned iter 7)** | `docs/canon/part_NN.md` — Markdown-источник правды для контента. Master HTML = генерируемый артефакт. Визуализации = замещение, не дополнение. См. `docs/CONTENT_RESTRUCTURE_PLAN.md`. |
-| **Runtime data: `data/anchor-redirects.json` (iter 6 validation)** | Только `data/anchor-redirects.json` загружается lazy-loader.js. `docs/anchor-redirects.json` — stale duplicate (KI#15), подлежит удалению. |
+| **Canonical Guide Spec (iter 7 scaffold)** | `docs/canon/part_NN.md` — Markdown-источник правды для контента. Master HTML = генерируемый артефакт. Визуализации = замещение, не дополнение. Part 4 Canon создан (iter 7), master HTML миграция — iter 8. См. `docs/canon/_README.md` и `docs/CONTENT_RESTRUCTURE_PLAN.md`. |
+| **Runtime data: `data/anchor-redirects.json` only** | Только `data/anchor-redirects.json` загружается lazy-loader.js. `docs/anchor-redirects.json` удалён в iter 7 (KI#15 fix). Single source of truth. |
 
 ---
 

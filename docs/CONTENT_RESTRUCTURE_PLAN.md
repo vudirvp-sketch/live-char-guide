@@ -474,9 +474,11 @@ SPINE — психологический каркас из 5 элементов,
 
 ### 9.3 Дополнения, найденные при validation (NEW)
 
-#### 9.3.1 Pattern H — `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json`
+#### 9.3.1 Pattern H — `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json` — **FIXED iter 7 (KI#15 CLOSED)**
 
-**Симптом:** В репозитории существуют ДВА файла `anchor-redirects.json`:
+> **Status update (iter 7):** Файл `docs/anchor-redirects.json` удалён. Single source of truth = `data/anchor-redirects.json`. AGENT_NAVIGATION §7 строка убрана. Ниже — историческое описание проблемы (оставлено как record).
+
+**Симптом (iter 6 finding):** В репозитории существовали ДВА файла `anchor-redirects.json`:
 
 - `data/anchor-redirects.json` (108 строк, MD5 `f35bee35…`) — **runtime data**, загружается `src/shell/lazy-loader.js` (см. AGENT_NAVIGATION §1, §7 KEEP list). Содержит v8 → v9.1 redirects (`greeting` → `p7b_greeting`, `p8_ap15_*` → `p5_ocean_warning`).
 - `docs/anchor-redirects.json` (108 строк, MD5 `aa4f8d8c…`) — **stale duplicate**, содержит v8 → v9 redirects старого формата (`greeting` → `p3_greeting`, `p8_ap15_*` → `p8_ap15_ocean_overload`). Заявлен в AGENT_NAVIGATION §7 "при rename/delete section IDs", но фактически никто не обновлял после v9.1 restructure.
@@ -490,7 +492,7 @@ SPINE — психологический каркас из 5 элементов,
 - (b) Сделать `docs/` symlink на `data/` (нерекомендуется — git on Windows ломается).
 - (c) Синхронизировать при каждом change section ID (хрупко — забудут).
 
-**Рекомендация:** (a). Зарегистрировано как **KI#15** в STATUS.md.
+**Рекомендация:** (a). Зарегистрировано как **KI#15** в STATUS.md. **FIXED iter 7** — файл `docs/anchor-redirects.json` удалён.
 
 #### 9.3.2 Pattern E (Consequence Driven) более распространён, чем зафиксировано в §2.5
 

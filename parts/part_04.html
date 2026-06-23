@@ -135,34 +135,6 @@
       </p>
     </div>
 
-<script type="module">
-// VS Element E05 - inline script (from component-extracts)
-/**
- * Element: E05 — SPINE Framework
- * Source: elements/E05-spine-framework.html
- * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
-    });
-</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E05 -->
 <section  data-section="p4_spine_overview" data-toc-nav>
@@ -186,7 +158,6 @@ graph TD
     style NEED fill:#1a3a4a,stroke:#74c0fc,color:#fff
     style WANT fill:#1a4a1a,stroke:#69db7c,color:#fff
 </div>
-
 
 <p><strong>WANT</strong> — это то, что персонаж осознанно желает. Но за WANT стоит <strong>NEED</strong> — истинная потребность, которую персонаж не может признать из-за <strong>FLAW</strong>. FLAW возникает из <strong>LIE</strong> — ложной установки о мире. А LIE — из <strong>GHOST</strong> — события прошлого, которое травмировало персонажа.</p>
 
@@ -466,8 +437,6 @@ WANT: Стать цельным — заполнить пустоты внутр
 
 <p>Полная карточка Выщебленного с GHOST Layers, CoT и XML: <a href="#p10_vysherblenny">Part 10: Выщербленный</a></p>
 
-
-
 <div class="callout rule">
 <p><strong>RULE:</strong> Для простых персонажей GHOST и LIE могут быть неявными. Но если вы используете полную цепочку — она должна быть логически связана. Проверьте: GHOST объясняет LIE? LIE защищает от боли GHOST? FLAW — прямое поведение из LIE?</p>
 </div>
@@ -534,7 +503,6 @@ WANT: Стать цельным — заполнить пустоты внутр
 
 <p><strong>FLAW-linked Anchor</strong> — Anchor, выведенный из FLAW (поведенческого недостатка персонажа). FLAW — конкретное саморазрушительное поведение, блокирующее истинную потребность (NEED). Пример: «Отталкивает людей сарказмом, когда сближается» — это FLAW; Anchor «Когда искренняя забота → отшучивается → руки дрожат» — выведен из этого FLAW.</p>
 
-
 <h5>Алгоритм создания FLAW-linked Anchors</h5>
 <ol>
 <li>Запишите FLAW как конкретное поведение (не прилагательное)</li>
@@ -559,14 +527,9 @@ WANT: Стать цельным — заполнить пустоты внутр
 </table>
 </div>
 
-
-
 <div class="callout rec">
 <p><strong>RECOMMENDATION:</strong> Динамика SPINE: WANT сдвигается к NEED по мере накопления Price в сессии — директива <strong>Consequence Driven</strong>. <span class="model-note">[Model: see Appendix B — Model Capability Table]</span> Подробности и реализация в SP → <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #6</a></p>
 </div>
-
-
-
 
 </section>
 
@@ -598,8 +561,6 @@ WANT: Доказать правоту самостоятельно
 <li>☐ <strong>GHOST Layers:</strong> Каждый tier имеет минимум один Anchor-trigger</li>
 <li>☐ <strong>Lorebook:</strong> GHOST-факты консистентны с Description</li>
 </ul>
-
-
 
 </section>
 
@@ -736,34 +697,6 @@ WANT: Доказать правоту самостоятельно
       <span class="badge badge--violet">GHOST = Слой 1 фреймворка SPINE → E05</span>
     </div>
 
-<script type="module">
-// VS Element E06 - inline script (from component-extracts)
-/**
- * Element: E06 — GHOST Layers
- * Source: elements/E06-ghost-layers.html
- * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelectorAll('.ring-anim, .ring-text-anim, .ring-label, .scroll-enter').forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      document.querySelectorAll('.ring-anim, .ring-text-anim, .ring-label, .scroll-enter').forEach(el => observer.observe(el));
-    });
-</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E06 -->
 <section  data-section="p4_ghost_layers">

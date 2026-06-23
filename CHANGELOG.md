@@ -1,5 +1,31 @@
 # Changelog
 
+## [9.1.7] - 2026-06-23
+
+### Added (iter 7 — Canon scaffold + Part 4 pilot)
+- **`docs/canon/_README.md`** (244 строки, 9 секций) — правила Canonical Guide Spec: зачем Canon, структура (`part_NN.md` + `appendix_*.md`), Markdown conventions (H1–H4 mapping, front-matter, VS-маркеры `[VS: E0X — ...]`, таблицы только с уникальными данными, примеры в одном canonical location, cross-refs `[ref: §X.Y]`), что запрещено (HTML/SVG/CSS/JS/inline styles), workflow Canon-first миграции (iter N = Canon, iter N+1 = HTML), Migration Status таблица (14 файлов: Part 4 created iter 7, остальные planned iter 8..18), anti-patterns (7 пунктов), validation checklist (12 пунктов).
+- **`docs/canon/part_04.md`** (394 строки, 11 H2 секций) — пилотный Canon для Part 4 (SPINE Framework). Покрывает все `data-section` из `src/master/part_04.html` (p4_spine_overview, p4_ghost, p4_lie, p4_flaw, p4_need, p4_want, p4_spine_full_chain, p4_spine_mapping, p4_spine_check, p4_spine_navigation, p4_ghost_layers). VS-маркеры для E05 (SPINE chain) и E06 (GHOST Layers). Дедупликация: 6 устаревших `infographic inf-pipeline` + 1 `mermaid` заменены на VS-маркеры. Канонические примеры: Елена (§4.2–§4.6 + §4.9 consistency check), Выщербленный (§4.7 полная цепочка + §4.11 GHOST Layers). Migration Notes таблица внизу — TODO list для iter 8 (что удалить/заменить/оставить в master HTML).
+
+### Fixed
+- **KI#15** (CLOSED) `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json`. Удалён `docs/anchor-redirects.json` (108 строк, v8→v9 stale redirects). Single source of truth = `data/anchor-redirects.json` (runtime, v8→v9.1, загружается `lazy-loader.js`).
+
+### Changed
+- **`STATUS.md`** — iter 7 status + KI#15 CLOSED + Canon Guide Spec restriction added.
+- **`AGENT_NAVIGATION.md`** — header iter 7. §6 pitfall #33 → CLOSED (iter 7 fix summary). §7 Documentation Map убрана строка про `docs/anchor-redirects.json`, добавлены строки для `docs/canon/_README.md` + `docs/canon/part_NN.md`. §8 iter 7 record + iter 8+ roadmap. §10 hint для iter 8 (migrate `part_04.html` против Canon §4).
+- **`worklog.md`** — iter 6/6b → one-liners, iter 7 record (этот pass).
+- **`PLAN.md`** — §2.1 `docs/anchor-redirects.json` → REMOVED iter 7 (KI#15). §5 iter 7 entry + iter 8+ roadmap.
+- **`docs/CONTENT_RESTRUCTURE_PLAN.md`** — §9.3.1 added "FIXED iter 7" note (файл удалён, KI#15 CLOSED).
+
+### Removed
+- **`docs/anchor-redirects.json`** (108 строк) — KI#15 fix. Stale duplicate of `data/anchor-redirects.json` (v8→v9 redirects вместо актуальных v8→v9.1). Не загружался runtime, был только documentation reference, но не обновлялся с v9.1 restructure.
+
+### Notes
+- iter 7 = Canon scaffold + Part 4 pilot + KI#15 fix. Никаких правок master HTML / visual-system / widget JS — только docs (Canon creation + KI#15 cleanup).
+- **KI#1..KI#12 + KI#15 закрыты.** KI#13 (123 inline styles + 23 outside section) + KI#14 (content duplication VS-EMBED ↔ текст) — ACTIVE, defer iter 8+.
+- iter 8 priorities: migrate `src/master/part_04.html` против Canon §4 (TODO list — в `docs/canon/part_04.md` Migration Notes таблица).
+
+---
+
 ## [9.1.6] - 2026-06-23
 
 ### Added (iter 6 — analytical + validation pass)
