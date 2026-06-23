@@ -1,5 +1,32 @@
 # Changelog
 
+## [9.1.11] - 2026-06-24
+
+### Changed (iter 11 — Part 7A master HTML migration)
+- **Part 7A master HTML migrated** против Canon §7A (`src/master/part_07a.html`, 1168 → 1137 строк, -2.7%).
+- **4 compression candidates applied:**
+  - #22: Базовые параметры sampling table → заменён на notes-only `<ul>` список + cross-ref на E17.
+  - #26: Чеклист по типу модели table → заменён на bullet-list ключевых distinctions + cross-ref на E17.
+  - #42: Plain-copy `<pre class="plain-copy">` пример расчёта Token Budget → удалён (дублировал `<noscript>` fallback).
+  - #46: CORE DIRECTIVES пример в walkthrough Елены → заменён на 1-строчный cross-ref `→ CORE DIRECTIVES (выше)`.
+- **50 "Оставить" элементов** — без изменений. Все RULE/RECOMMENDATION callouts, templates, уникальные таблицы, anti-pattern pairs, примеры Елены/Выщербленного сохранены.
+- **Canon front-matter updated:** `Migration status: ✅ MIGRATED (iter 11)`, `Last synced: 2026-06-24 (iter 11)`.
+- **Migration Notes таблица:** все 54 элемента → DONE.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 146 warnings = KI#13 baseline).
+- `pnpm run build` ✅ SUCCESS (hash df283246).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (10 pre-existing warnings).
+
+### Notes
+- iter 11 = Part 7A master HTML migration. 9 files updated.
+- KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+- iter 12+ priorities: Canon creation + migrate для остальных Parts (Part 8, 9, etc.).
+
+---
+
 ## [9.1.10] - 2026-06-24
 
 ### Added (iter 10 — Canon Part 7A creation)

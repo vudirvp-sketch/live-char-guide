@@ -331,7 +331,7 @@ SPINE — психологический каркас из 5 элементов,
 | **8** | Pilot migration | ✅ DONE — Мигрировать `part_04.html` против Canon §4. Удалить 4 дубликата (mermaid + 3 inf-pipeline) + 1 orphan paragraph + сжать re-explanation. 2 unique infographic сохранены (deviation). LIE таблица сохранена полностью (deviation). 777 → 676 строк (-13%). Build PASS, validate:master PASS, qa без новых critical. | `src/master/part_04.html` | MEDIUM (visual diff pending iter 9) |
 | **9** | Validate pilot | ✅ DONE — Validation pass Part 4. Static HTML sanity + served `parts/part_04.html` checks PASS (11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:contrast`/`qa:doc-versions` PASS. `qa:english`/`qa:syntax` — same false positives as iter 7 (no regression). `qa:csp` FAIL → KI#16 NEW (pre-existing с iter 5). 6 docs updated. Никаких правок master HTML. | — | LOW |
 | **10** | Canon Part 7A | ✅ DONE — Создан `docs/canon/part_07a.md` (802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Front-matter `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица: 54 TODO + 4 "Сжать" кандидата + validation gates. Master HTML не тронут. `validate:master` PASS (0 errors, KI#13 baseline). KI#17 NEW (documentation drift: AGENT_NAVIGATION §10 hint указывал E07 вместо E02 как 4-й VS-EMBED — fixed). 8 docs updated. | `docs/canon/part_07a.md` | LOW |
-| **11** | Migrate Part 7A | Мигрировать `part_07a.html` (1168 строк — самый большой файл) | `src/master/part_07a.html` | HIGH (размер) |
+| **11** | Migrate Part 7A | ✅ DONE — Мигрирован `src/master/part_07a.html` против Canon §7A (1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated. | `src/master/part_07a.html`, `docs/canon/part_07a.md` | LOW |
 | **12** | Canon Part 8 + 9 | Anti-patterns + Diagnostics (связанные — AP-1..15 упоминаются в обоих) | `docs/canon/part_08.md`, `docs/canon/part_09.md` | LOW |
 | **13** | Migrate Part 8 + 9 | Мигрировать оба Part'а вместе (нужно сохранить cross-refs) | `src/master/part_08.html`, `part_09.html` | MEDIUM |
 | **14** | Canon Part 1, 2, 3 | Базовые блоки, Anchors, Voice | `docs/canon/part_01..03.md` | LOW |
@@ -412,28 +412,21 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 10 COMPLETE (Canon Part 7A creation).** Canon `docs/canon/part_07a.md` создан (802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Master HTML не тронут (iter 11 задача). `validate:master` PASS (0 errors, KI#13 baseline). KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+**Iter 11 COMPLETE (Part 7A migration).** Мигрирован `src/master/part_07a.html` против Canon §7A (1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
 
-**Iter 11 priorities (Migrate Part 7A master HTML):**
+**Iter 12 priorities (Canon Part 8 or Part 9):**
 
-1. **Migrate `src/master/part_07a.html` против Canon §7A** — 1168 строк, 13 секций, 4 VS-EMBED (E08 line 47, E16 line 267, E17 line 430, E02 line 916). Canon `part_07a.md` Migration Notes таблица = TODO list с 54 элементами.
-2. **Рекомендуется разбить на 2 под-итерации:**
-   - **iter 11a** — §7A.1–§7A.7 (p7a_system_prompt, p7a_core_directives, p7a_tone_frame, p7a_format_lock, p7a_authors_note, p7a_sampling_params, p7a_model_checklist). ~660 строк master HTML, 3 VS-EMBED: E08+E16+E17.
-   - **iter 11b** — §7A.8–§7A.13 (p7a_ooc_protection, p7a_xml_tags, p7a_api_blocks, p7a_4k_fallback, p7a_token_budget, p7a_assembly_pipeline). ~510 строк, 1 VS-EMBED: E02.
-3. **Применить 4 "Сжать" кандидата** из Canon Migration Notes (#22 sampling table дублирует E17, #26 model checklist дублирует E17 checklist-section, #42 plain-copy дублирует noscript, #46 CORE DIRECTIVES пример в walkthrough Елены дублирует §7A.2).
-4. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + visual diff в браузере.
-5. **После миграции** — обновить Canon front-matter `Migration status: ✅ MIGRATED (iter 11)` + Migration Notes таблица (TODO → DONE/DEVIATED).
+1. **Canon creation + migrate** для Part 8 (anti-patterns) или Part 9 (diagnostics) — см. `docs/canon/_README.md` §5 planned iters.
+2. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint`.
+3. **После миграции** — обновить Canon front-matter `Migration status: ✅ MIGRATED` + Migration Notes таблица.
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 11 прочитай:
-> 1. `STATUS.md` (iter 10 COMPLETE, Part 4 ✅ MIGRATED+VALIDATED, Part 7A Canon ✅ CREATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
-> 2. `worklog.md` (iter 10 record — Canon Part 7A creation)
-> 3. `AGENT_NAVIGATION.md` (§8 iter 11+ roadmap, §10 hint для iter 11, §6 pitfall #35 KI#17)
-> 4. `docs/canon/_README.md` (§4 workflow migration, §5 Part 7A ❌ NOT MIGRATED — iter 11 задача)
-> 5. `docs/canon/part_07a.md` (Canon §7A — источник правды для миграции, 802 строки, 13 H2 секций, 4 VS-маркера, Migration Notes таблица с 54 TODO + 4 "Сжать" кандидатами)
-> 6. `docs/canon/part_04.md` (reference pilot — структура отмигрированного Canon-файла, Migration Notes с DONE/DEVIATED статусами)
-> 7. `src/master/part_07a.html` (1168 строк, 13 секций, **4 VS-EMBED: E08 line 47, E16 line 267, E17 line 430, E02 line 916** — не E07; KI#17 fix applied)
+> Перед стартом iter 12 прочитай:
+> 1. `STATUS.md` (iter 11 COMPLETE, Part 4+7A ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
+> 2. `worklog.md` (iter 11 record)
+> 3. `AGENT_NAVIGATION.md` (§8 iter 12+ roadmap)
+> 4. `docs/canon/_README.md` (§5 migration status — Part 4+7A ✅, остальные ❌)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 

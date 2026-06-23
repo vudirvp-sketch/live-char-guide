@@ -590,21 +590,15 @@ GHOST-activation: Активен, если в сцене был триггер (
 <p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — Voice требует повторяемых паттернов.</p>
 
 <h4>Базовые параметры</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Параметр</th><th>12B</th><th>12B-32B</th><th>32B+ / API</th><th>Примечание</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>Temperature</strong></td><td>0.6-0.8</td><td>0.7-0.9</td><td>0.7-1.0</td><td>Ниже = предсказуемее, выше = разнообразнее</td></tr>
-<tr><td><strong>Top P</strong></td><td>0.9</td><td>0.9-0.95</td><td>0.9-0.95</td><td>Nucleus sampling, обычно не трогать</td></tr>
-<tr><td><strong>Min P</strong></td><td>0.05</td><td>0.05-0.1</td><td>0.05-0.1</td><td>Отсечение маловероятных токенов</td></tr>
-<tr><td><strong>RepPen</strong></td><td>1.0-1.05</td><td>1.05-1.10</td><td>1.05-1.10</td><td>Никогда &gt; 1.10 — убьёт голос (AP-5)</td></tr>
-<tr><td><strong>Top K</strong></td><td>40</td><td>40-80</td><td>40-100</td><td>Ограничение выбора токенов</td></tr>
-<tr><td><strong>Presence Penalty</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td>Обязательно 0 — иначе голос дрейфует (AP-7)</td></tr>
-</tbody>
-</table>
-</div>
+<p>Конкретные значения по типам моделей — в визуализации выше (E17). Ключевые примечания:</p>
+<ul>
+<li><strong>Temperature:</strong> Ниже = предсказуемее, выше = разнообразнее</li>
+<li><strong>Top P:</strong> Nucleus sampling, обычно не трогать</li>
+<li><strong>Min P:</strong> Отсечение маловероятных токенов</li>
+<li><strong>RepPen:</strong> Никогда &gt; 1.10 — убьёт голос (AP-5)</li>
+<li><strong>Top K:</strong> Ограничение выбора токенов</li>
+<li><strong>Presence Penalty:</strong> <strong>Обязательно 0.0</strong> — иначе голос дрейфует (AP-7)</li>
+</ul>
 
 <div class="callout rule">
 <p><strong>RULE:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
@@ -635,23 +629,12 @@ GHOST-activation: Активен, если в сцене был триггер (
 <section  data-section="p7a_model_checklist">
 <h3>Чеклист по типу модели</h3>
 
-<div class="table-wrap">
-<table>
-<thead><tr><th>Параметр</th><th>12B–14B</th><th>32B+</th><th>API (Claude/GPT)</th></tr></thead>
-<tbody>
-<tr><td>Temperature</td><td>0.6–0.8</td><td>0.85–1.1</td><td>0.9–1.0</td></tr>
-<tr><td>Presence Penalty</td><td>0.0 (обязательно)</td><td>0.0</td><td>0.0</td></tr>
-<tr><td>RepPen</td><td>1.05</td><td>1.0–1.05</td><td>N/A</td></tr>
-<tr><td>Voice Placement</td><td>Examples + Greeting<br/><strong>Никогда в Description</strong> (→ <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>)</td><td>Examples + Greeting<br/>Никогда в Description</td><td>Examples + Greeting + AN<br/>Никогда в Description</td></tr>
-<tr><td>XML Tags</td><td>⚠️ нестабильны</td><td>✓ стабильны</td><td>✓ стабильны</td></tr>
-<tr><td>CoT Tier</td><td>✗</td><td>Tier 1</td><td>Tier 2–3</td></tr>
-<tr><td>SP Language</td><td>English (критично)<sup>1</sup></td><td>English</td><td>English</td></tr>
-<tr><td>Anti-godmoding</td><td>2 lines (neg+pos)</td><td>2 lines</td><td>1 line</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><sup>1</sup> SP на английском: подробнее в CORE DIRECTIVES (выше).</p>
+<p>Полная таблица параметров — в визуализации E17 (выше). Ключевые отличия по типам моделей:</p>
+<ul>
+<li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>); XML нестабилен; CoT Tier 0–1; SP на английском критично; Anti-godmoding 2 строки (негатив + позитив).</li>
+<li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; SP на английском.</li>
+<li><strong>API (Claude/GPT):</strong> Voice через Examples + Greeting + AN (никогда в Description); XML стабилен; CoT Tier 2–3; Anti-godmoding 1 строка.</li>
+</ul>
 
 <div class="callout rec">
 <p><strong>RECOMMENDATION: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос.</p>
@@ -908,10 +891,6 @@ Anchors:
 </noscript>
 </div>
 
-<pre class="plain-copy">Калькулятор токенов (пример):
-SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
-Итого: 420 токенов → Диапазон: 400–800 токенов</pre>
-
 </section>
 <!-- VS-EMBED: E02 — Assembly Pipeline -->
 <div class="vs-embed" data-vs-element="E02">
@@ -1065,18 +1044,8 @@ SP: 80 | Description: 200 | Examples: 90 | Anchors: 50
 <p>~20 токенов. Две строки — канонический Anti-godmoding для всех карточек. Формулировка идентична для любого персонажа; менять её под характер не нужно — это технический запрет, не голос.</p>
 
 <h4>Шаг 3: CORE DIRECTIVES</h4>
-<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате &lt;CORE_DIRECTIVES&gt;. (CORE DIRECTIVES — выше)</p>
-<p><strong>Результат Елены:</strong></p>
-<pre><code>&lt;CORE_DIRECTIVES&gt;
-1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
-2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
-3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
-4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
-5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
-6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
-7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.
-&lt;/CORE_DIRECTIVES&gt;</code></pre>
-<p>~70 токенов. Директивы идентичны для всех карточек — они задают операционную систему генерации. Специфика персонажа появляется в Tone Frame, Description и Examples.</p>
+<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>. Директивы идентичны для всех карточек — полный текст → <a href="#p7a_core_directives">CORE DIRECTIVES (выше)</a>.</p>
+<p>~70 токенов. Директивы задают операционную систему генерации. Специфика персонажа появляется в Tone Frame, Description и Examples.</p>
 <p>Дополнительно для Елены — Tone Frame, Format Lock и OOC Protection:</p>
 <pre><code>Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
 

@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + Part 4 ✅ migrated+validated + Part 7A Canon ✅ created (iter 10). Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md`**, **Canon (источник правды для контента, iter 7+) — в `docs/canon/` (см. `_README.md`)**, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + Part 4 ✅ migrated+validated + Part 7A ✅ migrated (iter 11). Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md`**, **Canon (источник правды для контента, iter 7+) — в `docs/canon/` (см. `_README.md`)**, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -322,14 +322,14 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 **iter 10 (Canon Part 7A creation):** Создан `docs/canon/part_07a.md` (802 строки, 13 H2 секций — по одной на каждый `data-section` из `src/master/part_07a.html`, 4 VS-маркера для E08/E16/E17/E02). Front-matter `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица: 54 TODO строки + validation gates. Master HTML не тронут (iter 11 задача). `pnpm run validate:master` PASS (0 errors, KI#13 baseline). **KI#17 NEW** (documentation drift: AGENT_NAVIGATION §10 hint + worklog iter 9 record указывали 4 VS-EMBED как «E07, E08, E16, E17», но фактически в файле — E08, E16, E17, E02; E07 — Voice Hierarchy, cross-referenced внутри E16, embedded в Part 3). Fix applied in iter 10. **Decision:** iter 11 (migration, 1168 строк master HTML) — рекомендуется разбить на 2 под-итерации (iter 11a: §7A.1–§7A.7, ~660 строк, 3 VS-EMBED; iter 11b: §7A.8–§7A.13, ~510 строк, 1 VS-EMBED). 8 docs updated.
 
-**iter 11+ — что осталось:**
-- **iter 11:** Migrate Part 7A — `src/master/part_07a.html` (1168 строк — самый большой файл). Рекомендуется разбить на 2 под-итерации (iter 11a: §7A.1–§7A.7 + iter 11b: §7A.8–§7A.13). Применить 4 "Сжать" кандидата из Canon Migration Notes (#22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES пример в walkthrough Елены).
+**iter 11 (Part 7A migration):** Мигрирован `src/master/part_07a.html` против Canon §7A. 1168 → 1137 строк (-2.7%). 4 compression candidates applied: #22 sampling table → notes-only list + cross-ref E17, #26 model checklist → bullet-list + cross-ref E17, #42 plain-copy pre-block → удалён, #46 CORE DIRECTIVES walkthrough → 1-line cross-ref. 50 "Оставить" элементов без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
+
+**iter 12+ — что осталось:**
 - **iter 12–13:** Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
 - **iter 14–15:** Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
 - **iter 16–17:** Canon Part 5+6+7B+10 + migrate.
 - **iter 18:** Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
 - **iter 19+:** KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
-- **qi:syntax + qa:english false positives** — low priority, не блокирует Canon.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
 
@@ -397,4 +397,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 11 прочитай `STATUS.md` (iter 10 COMPLETE, Part 4 ✅ MIGRATED+VALIDATED, Part 7A Canon ✅ CREATED, KI#13+KI#14+KI#16+KI#17 ACTIVE), `worklog.md` (iter 10 record — этот), этот файл (AGENT_NAVIGATION §6 pitfall #35 KI#17 added, §8 iter 11+ roadmap), `docs/canon/_README.md` (§5 Part 7A ❌ NOT MIGRATED — iter 11 задача, §4 workflow migration), `docs/canon/part_07a.md` (Canon §7A — источник правды для миграции, 802 строки, 13 H2 секций, 4 VS-маркера, Migration Notes таблица = TODO list с 54 элементами, 4 "Сжать" кандидата: #22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES пример в walkthrough Елены), `docs/canon/part_04.md` (reference pilot — структура отмигрированного Canon-файла, Migration Notes с DONE/DEVIATED статусусами), `src/master/part_07a.html` (1168 строк, 13 секций, **4 VS-EMBED: E08 line 47, E16 line 267, E17 line 430, E02 line 916** — не E07; KI#17 fix applied). iter 11 priorities: (1) Migrate `src/master/part_07a.html` против Canon §7A — **рекомендуется разбить на 2 под-итерации**: iter 11a (§7A.1–§7A.7, ~660 строк, 3 VS-EMBED: E08+E16+E17) + iter 11b (§7A.8–§7A.13, ~510 строк, 1 VS-EMBED: E02); (2) Применить 4 "Сжать" кандидата из Canon Migration Notes таблицы (#22, #26, #42, #46); (3) `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + visual diff PASS; (4) Обновить Canon front-matter `Migration status: ✅ MIGRATED (iter 11)` + Migration Notes таблица (TODO → DONE/DEVIATED). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий. Принцип «viz > dry text» (iter 8) — сохраняется.
+**Подсказка следующему агенту:** Перед стартом iter 12 прочитай `STATUS.md` (iter 11 COMPLETE, Part 4 ✅ MIGRATED+VALIDATED, Part 7A ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE), `worklog.md` (iter 11 record), этот файл (AGENT_NAVIGATION §8 iter 12+ roadmap), `docs/canon/_README.md` (§5 migration status — Part 4+7A ✅, остальные ❌), `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 12 priorities). iter 12 priorities: Canon creation + migrate для Part 8 (anti-patterns) или Part 9 (diagnostics) — см. `_README.md` §5 planned iters. Принцип «viz > dry text» (iter 8) — сохраняется. Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.

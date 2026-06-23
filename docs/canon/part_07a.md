@@ -1,11 +1,11 @@
 # Part 7A: System Prompt & Assembly
 
-> **Canonical source for:** `src/master/part_07a.html` (1168 строк, 13 секций)
+> **Canonical source for:** `src/master/part_07a.html` (1137 строк, 13 секций)
 > **VS elements (embedded):** E08 (CORE DIRECTIVES), E16 (Author's Note Mechanics), E17 (Sampling Parameters), E02 (Assembly Pipeline)
 > **VS elements (cross-ref only):** E07 (Voice Hierarchy) — referenced inside E16; embedded in Part 3 (`p3_voice_hierarchy`)
 > **Sections (13):** `p7a_system_prompt`, `p7a_core_directives`, `p7a_tone_frame`, `p7a_format_lock`, `p7a_authors_note`, `p7a_sampling_params`, `p7a_model_checklist`, `p7a_ooc_protection`, `p7a_xml_tags`, `p7a_api_blocks`, `p7a_4k_fallback`, `p7a_token_budget`, `p7a_assembly_pipeline`
-> **Last synced:** 2026-06-24 (iter 10 — Canon created, master HTML NOT yet migrated)
-> **Migration status:** ❌ NOT MIGRATED (iter 11 task — see Migration Notes below)
+> **Last synced:** 2026-06-24 (iter 11 — master HTML migrated)
+> **Migration status:** ✅ MIGRATED (iter 11)
 
 ---
 
@@ -719,84 +719,81 @@ GHOST: Предательство редактора — история, кот�
 - **iter 11a — §7A.1–§7A.7** (p7a_system_prompt, p7a_core_directives, p7a_tone_frame, p7a_format_lock, p7a_authors_note, p7a_sampling_params, p7a_model_checklist) — SP core + sampling + model checklist. 7 секций, ~660 строк master HTML, 3 VS-EMBED (E08, E16, E17).
 - **iter 11b — §7A.8–§7A.13** (p7a_ooc_protection, p7a_xml_tags, p7a_api_blocks, p7a_4k_fallback, p7a_token_budget, p7a_assembly_pipeline) — technical implementation + assembly walkthrough. 6 секций, ~510 строк master HTML, 1 VS-EMBED (E02).
 
-### TODO list для iter 11
+### Migration Notes (iter 11 — DONE)
 
 | # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
 |---|-------------------|----------|--------|--------------------------|
-| 1 | `<div class="callout rule">` RULE: Структура SP-шаблона (p7a_system_prompt, ~line 42) | Оставить | TODO | Canonical RULE — §7A.1 |
-| 2 | `<pre><code>` SP template (p7a_system_prompt, ~line 24) | Оставить | TODO | Canonical template — §7A.1 |
-| 3 | VS-EMBED E08 (p7a_system_prompt → p7a_core_directives, lines 47–141) | Оставить | TODO | Canonical VS-marker — §7A.2 |
-| 4 | `<div class="callout rule">` RULE: Правило языка директив (p7a_core_directives, ~line 147) | Оставить | TODO | Canonical RULE — §7A.2 |
-| 5 | `<pre><code>` `<CORE_DIRECTIVES>` template (p7a_core_directives, ~line 153) | Оставить | TODO | Canonical template — §7A.2 |
-| 6 | `<div class="antipattern-card">` Spatial & Anatomical Lock ❌/✅ (p7a_core_directives, ~line 173) | Оставить | TODO | Unique anti-pattern pair — §7A.2 (Directive #3) |
-| 7 | `<pre><code>` CONSEQUENCE DRIVEN expansion (p7a_core_directives, ~line 194) | Оставить | TODO | Canonical — §7A.2 (Directive #6) |
-| 8 | `<ol>` Pre-Generation Filter checklist (p7a_core_directives, ~line 198) | Оставить | TODO | Canonical — §7A.2 (Directive #7) |
-| 9 | `<div class="callout rec">` Двусторонняя синхронизация (p7a_core_directives, ~line 206) | Оставить | TODO | Canonical RECOMMENDATION — §7A.2 |
-| 10 | `<div class="table-wrap"><table>` Tone Frame examples (p7a_tone_frame, ~line 218) | Оставить | TODO | Unique examples table — §7A.3 |
-| 11 | `<div class="callout rec">` Двойная функция Tone Frame (p7a_tone_frame, ~line 230) | Оставить | TODO | Canonical RECOMMENDATION — §7A.3 |
-| 12 | `<div class="table-wrap"><table>` Три системы разметки (p7a_format_lock, ~line 241) | Оставить | TODO | Unique comparison table — §7A.4 |
-| 13 | `<div class="callout rule">` RULE: Почему нельзя смешивать (p7a_format_lock, ~line 252) | Оставить | TODO | Canonical RULE — §7A.4 |
-| 14 | `<div class="callout rule">` RULE: Правило разрешения конфликта (p7a_format_lock, ~line 256) | Оставить | TODO | Canonical RULE — §7A.4 |
-| 15 | `<pre><code>` Format Lock инструкция (p7a_format_lock, ~line 261) | Оставить | TODO | Canonical template — §7A.4 |
-| 16 | VS-EMBED E16 (p7a_format_lock → p7a_authors_note, lines 267–367) | Оставить | TODO | Canonical VS-marker — §7A.5 |
-| 17 | `<div class="table-wrap"><table>` Параметры AN (p7a_authors_note, ~line 374) | Оставить | TODO | Unique parameters table — §7A.5 |
-| 18 | `<pre><code>` Template A + пример Елены (p7a_authors_note, ~line 389–400) | Оставить | TODO | Canonical — §7A.5 |
-| 19 | `<pre><code>` Template B + пример Выщербленного (p7a_authors_note, ~line 404–418) | Оставить | TODO | Canonical — §7A.5 |
-| 20 | `<ul>` Пояснение секций AN (p7a_authors_note, ~line 421) | Оставить | TODO | Canonical — §7A.5 |
-| 21 | VS-EMBED E17 (p7a_authors_note → p7a_sampling_params, lines 430–586) | Оставить | TODO | Canonical VS-marker — §7A.6 |
-| 22 | `<div class="table-wrap"><table>` Базовые параметры sampling (p7a_sampling_params, ~line 593) | ~~Оставить~~ Сжать | TODO | Дублирует VS-EMBED E17 (3-column comparison) — оставить только "Примечание" колонку + cross-ref на E17. См. KI#14 principle. |
-| 23 | `<div class="callout rule">` RULE: PP = 0.0 (p7a_sampling_params, ~line 609) | Оставить | TODO | Canonical RULE — §7A.6 |
-| 24 | `<div class="callout rule">` RULE: Ollama и LM Studio hardcoded PP=0.7 (p7a_sampling_params, ~line 613) | Оставить | TODO | Canonical RULE — §7A.6 |
-| 25 | `<details class="interactive">` Модель-специфичные рекомендации (p7a_sampling_params, ~line 617) | Оставить | TODO | Unique collapsible table — §7A.6 |
-| 26 | `<div class="table-wrap"><table>` Чеклист по типу модели (p7a_model_checklist, ~line 638) | ~~Оставить~~ Сжать | TODO | Дублирует VS-EMBED E17 checklist-section (нижняя секция E17). Оставить только колонки "Параметр + 12B–14B" (key distinctions); full table → cross-ref на E17. |
-| 27 | `<div class="callout rec">` AN и голос (p7a_model_checklist, ~line 656) | Оставить | TODO | Canonical RECOMMENDATION — §7A.7 |
-| 28 | `<pre><code>` OOC PROTECTION template (p7a_ooc_protection, ~line 666) | Оставить | TODO | Canonical template — §7A.8 |
-| 29 | `<pre><code>` IMMERSION BOUNDARY template (p7a_ooc_protection, ~line 671) | Оставить | TODO | Canonical template — §7A.8 |
-| 30 | `<div class="antipattern-card">` Без/С Immersion Boundary ❌/✅ (p7a_ooc_protection, ~line 673) | Оставить | TODO | Unique anti-pattern pair — §7A.8 |
-| 31 | `<pre><code>` XML structure template (p7a_xml_tags, ~line 692) | Оставить | TODO | Canonical template — §7A.9 |
-| 32 | `<pre><code>` Полный пример XML Description Выщербленного (p7a_xml_tags, ~line 719) | Оставить | TODO | Canonical example — §7A.9 |
-| 33 | `<pre><code>` Claude `<claude_info>` template (p7a_api_blocks, ~line 784) | Оставить | TODO | Canonical template — §7A.10 |
-| 34 | `<pre><code>` GPT `[SYSTEM NOTE]` template (p7a_api_blocks, ~line 801) | Оставить | TODO | Canonical template — §7A.10 |
-| 35 | `<div class="table-wrap"><table>` Токен-лимиты 4K (p7a_4k_fallback, ~line 813) | Оставить | TODO | Unique comparison table — §7A.11 |
-| 36 | `<pre><code>` Минимальный SP (4K) (p7a_4k_fallback, ~line 830) | Оставить | TODO | Canonical template — §7A.11 |
-| 37 | `<pre><code>` Минимальный Description (4K) (p7a_4k_fallback, ~line 836) | Оставить | TODO | Canonical template — §7A.11 |
-| 38 | `<div class="callout rec">` 4K-Fallback recommendation (p7a_4k_fallback, ~line 844) | Оставить | TODO | Canonical RECOMMENDATION — §7A.11 |
-| 39 | `<div class="table-wrap"><table>` Лимиты по блокам Token Budget (p7a_token_budget, ~line 858) | Оставить | TODO | Canonical table — §7A.12 |
-| 40 | `<div class="callout rule">` RULE: Превышение бюджета (p7a_token_budget, ~line 873) | Оставить | TODO | Canonical RULE — §7A.12 |
-| 41 | `<div class="token-calc">` интерактивный калькулятор (p7a_token_budget, ~line 879) | Оставить | TODO | Unique interactive widget — §7A.12 |
-| 42 | `<pre class="plain-copy">` Plain-copy пример расчёта (p7a_token_budget, ~line 911) | ~~Оставить~~ Сжать | TODO | Дублирует `<noscript>` fallback внутри калькулятора. Кандидат на удаление или сжатие до 1 строки. |
-| 43 | VS-EMBED E02 (p7a_token_budget → p7a_assembly_pipeline, lines 916–1046) | Оставить | TODO | Canonical VS-marker — §7A.13 |
-| 44 | `<pre><code>` Identity Block Елены (p7a_assembly_pipeline, ~line 1057) | Оставить | TODO | Canonical example — §7A.13 (Шаг 1) |
-| 45 | `<pre><code>` Anti-godmoding Елены (p7a_assembly_pipeline, ~line 1063) | Оставить | TODO | Canonical example — §7A.13 (Шаг 2) |
-| 46 | `<pre><code>` CORE DIRECTIVES Елены (p7a_assembly_pipeline, ~line 1070) | ~~Оставить~~ Сжать | TODO | Дублирует `<pre><code>` в p7a_core_directives (~line 153). Заменить на 1-строчный cross-ref: «Директивы идентичны для всех карточек → §7A.2». См. KI#14 principle. |
-| 47 | `<pre><code>` Tone Frame + OOC + Format Lock Елены (p7a_assembly_pipeline, ~line 1081) | Оставить | TODO | Unique пример — §7A.13 (Шаг 3, дополнения) |
-| 48 | `<pre><code>` SPINE Елены (p7a_assembly_pipeline, ~line 1093) | Оставить | TODO | Canonical example — §7A.13 (Шаг 4) |
-| 49 | `<pre><code>` CoT Anchor Елены (p7a_assembly_pipeline, ~line 1105) | Оставить | TODO | Canonical example — §7A.13 (Шаг 5) |
-| 50 | `<div class="table-wrap"><table>` Бюджет Елены (p7a_assembly_pipeline, ~line 1118) | Оставить | TODO | Canonical example — §7A.13 (Шаг 6) |
-| 51 | `<ul>` Дополнительные шаги (p7a_assembly_pipeline, ~line 1136) | Оставить | TODO | Canonical — §7A.13 |
-| 52 | `<ul>` Чек-лист перед тестированием (p7a_assembly_pipeline, ~line 1144) | Оставить | TODO | Canonical checklist — §7A.13 |
-| 53 | `<p class="bridge-paragraph">` Bridge to Part 7B (p7a_assembly_pipeline, ~line 1155) | Оставить | TODO | Canonical bridge — §7A.13 |
-| 54 | `<div class="part-resume">` resume list (p7a_assembly_pipeline, ~line 1157) | Оставить | TODO | Canonical resume — §"Что вы теперь умеете" |
+| 1 | `<div class="callout rule">` RULE: Структура SP-шаблона | Оставить | DONE | Canonical RULE — §7A.1 |
+| 2 | `<pre><code>` SP template | Оставить | DONE | Canonical template — §7A.1 |
+| 3 | VS-EMBED E08 | Оставить | DONE | Canonical VS-marker — §7A.2 |
+| 4 | `<div class="callout rule">` RULE: Правило языка директив | Оставить | DONE | Canonical RULE — §7A.2 |
+| 5 | `<pre><code>` `<CORE_DIRECTIVES>` template | Оставить | DONE | Canonical template — §7A.2 |
+| 6 | `<div class="antipattern-card">` Spatial & Anatomical Lock ❌/✅ | Оставить | DONE | Unique anti-pattern pair — §7A.2 (Directive #3) |
+| 7 | `<pre><code>` CONSEQUENCE DRIVEN expansion | Оставить | DONE | Canonical — §7A.2 (Directive #6) |
+| 8 | `<ol>` Pre-Generation Filter checklist | Оставить | DONE | Canonical — §7A.2 (Directive #7) |
+| 9 | `<div class="callout rec">` Двусторонняя синхронизация | Оставить | DONE | Canonical RECOMMENDATION — §7A.2 |
+| 10 | `<table>` Tone Frame examples | Оставить | DONE | Unique examples table — §7A.3 |
+| 11 | `<div class="callout rec">` Двойная функция Tone Frame | Оставить | DONE | Canonical RECOMMENDATION — §7A.3 |
+| 12 | `<table>` Три системы разметки | Оставить | DONE | Unique comparison table — §7A.4 |
+| 13 | `<div class="callout rule">` RULE: Почему нельзя смешивать | Оставить | DONE | Canonical RULE — §7A.4 |
+| 14 | `<div class="callout rule">` RULE: Правило разрешения конфликта | Оставить | DONE | Canonical RULE — §7A.4 |
+| 15 | `<pre><code>` Format Lock инструкция | Оставить | DONE | Canonical template — §7A.4 |
+| 16 | VS-EMBED E16 | Оставить | DONE | Canonical VS-marker — §7A.5 |
+| 17 | `<table>` Параметры AN | Оставить | DONE | Unique parameters table — §7A.5 |
+| 18 | `<pre><code>` Template A + пример Елены | Оставить | DONE | Canonical — §7A.5 |
+| 19 | `<pre><code>` Template B + пример Выщербленного | Оставить | DONE | Canonical — §7A.5 |
+| 20 | `<ul>` Пояснение секций AN | Оставить | DONE | Canonical — §7A.5 |
+| 21 | VS-EMBED E17 | Оставить | DONE | Canonical VS-marker — §7A.6 |
+| 22 | `<table>` Базовые параметры sampling | Сжать | DONE | Заменён на notes-only список + cross-ref на E17. Дублировал VS-EMBED E17. |
+| 23 | `<div class="callout rule">` RULE: PP = 0.0 | Оставить | DONE | Canonical RULE — §7A.6 |
+| 24 | `<div class="callout rule">` RULE: Ollama и LM Studio hardcoded PP=0.7 | Оставить | DONE | Canonical RULE — §7A.6 |
+| 25 | `<details class="interactive">` Модель-специфичные рекомендации | Оставить | DONE | Unique collapsible table — §7A.6 |
+| 26 | `<table>` Чеклист по типу модели | Сжать | DONE | Заменён на bullet-list ключевых distinctions + cross-ref на E17. Дублировал VS-EMBED E17 checklist-section. |
+| 27 | `<div class="callout rec">` AN и голос | Оставить | DONE | Canonical RECOMMENDATION — §7A.7 |
+| 28 | `<pre><code>` OOC PROTECTION template | Оставить | DONE | Canonical template — §7A.8 |
+| 29 | `<pre><code>` IMMERSION BOUNDARY template | Оставить | DONE | Canonical template — §7A.8 |
+| 30 | `<div class="antipattern-card">` Без/С Immersion Boundary ❌/✅ | Оставить | DONE | Unique anti-pattern pair — §7A.8 |
+| 31 | `<pre><code>` XML structure template | Оставить | DONE | Canonical template — §7A.9 |
+| 32 | `<pre><code>` Полный пример XML Description Выщербленного | Оставить | DONE | Canonical example — §7A.9 |
+| 33 | `<pre><code>` Claude `<claude_info>` template | Оставить | DONE | Canonical template — §7A.10 |
+| 34 | `<pre><code>` GPT `[SYSTEM NOTE]` template | Оставить | DONE | Canonical template — §7A.10 |
+| 35 | `<table>` Токен-лимиты 4K | Оставить | DONE | Unique comparison table — §7A.11 |
+| 36 | `<pre><code>` Минимальный SP (4K) | Оставить | DONE | Canonical template — §7A.11 |
+| 37 | `<pre><code>` Минимальный Description (4K) | Оставить | DONE | Canonical template — §7A.11 |
+| 38 | `<div class="callout rec">` 4K-Fallback recommendation | Оставить | DONE | Canonical RECOMMENDATION — §7A.11 |
+| 39 | `<table>` Лимиты по блокам Token Budget | Оставить | DONE | Canonical table — §7A.12 |
+| 40 | `<div class="callout rule">` RULE: Превышение бюджета | Оставить | DONE | Canonical RULE — §7A.12 |
+| 41 | `<div class="token-calc">` интерактивный калькулятор | Оставить | DONE | Unique interactive widget — §7A.12 |
+| 42 | `<pre class="plain-copy">` Plain-copy пример расчёта | Сжать | DONE | Удалён. Дублировал `<noscript>` fallback. |
+| 43 | VS-EMBED E02 | Оставить | DONE | Canonical VS-marker — §7A.13 |
+| 44 | `<pre><code>` Identity Block Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 1) |
+| 45 | `<pre><code>` Anti-godmoding Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 2) |
+| 46 | `<pre><code>` CORE DIRECTIVES Елены | Сжать | DONE | Заменён на 1-строчный cross-ref → p7a_core_directives. Дублировал template в §7A.2. |
+| 47 | `<pre><code>` Tone Frame + OOC + Format Lock Елены | Оставить | DONE | Unique пример — §7A.13 (Шаг 3, дополнения) |
+| 48 | `<pre><code>` SPINE Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 4) |
+| 49 | `<pre><code>` CoT Anchor Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 5) |
+| 50 | `<table>` Бюджет Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 6) |
+| 51 | `<ul>` Дополнительные шаги | Оставить | DONE | Canonical — §7A.13 |
+| 52 | `<ul>` Чек-лист перед тестированием | Оставить | DONE | Canonical checklist — §7A.13 |
+| 53 | `<p class="bridge-paragraph">` Bridge to Part 7B | Оставить | DONE | Canonical bridge — §7A.13 |
+| 54 | `<div class="part-resume">` resume list | Оставить | DONE | Canonical resume — §"Что вы теперь умеете" |
 
-### Known duplication candidates (iter 11 priority)
+### Compression results (iter 11)
 
-На основе анализа master HTML против Canon, выявлены 4 явных кандидата на сжатие (дублирование VS-EMBED или других секций):
+4 кандидата на сжатие обработаны:
 
-1. **#22** — Базовые параметры sampling table (p7a_sampling_params) дублирует VS-EMBED E17. Оставить только колонку "Примечание" + cross-ref на E17.
-2. **#26** — Чеклист по типу модели (p7a_model_checklist) дублирует VS-EMBED E17 (checklist-section, нижняя часть). Сжать до ключевых distinctions + cross-ref.
-3. **#42** — Plain-copy пример расчёта Token Budget дублирует `<noscript>` fallback. Кандидат на удаление.
-4. **#46** — CORE DIRECTIVES пример в walkthrough Елены дублирует `<pre><code>` в p7a_core_directives. Сжать до 1-строчного cross-ref.
+1. **#22 DONE** — Базовые параметры sampling table → заменён на notes-only `<ul>` список + cross-ref на E17.
+2. **#26 DONE** — Чеклист по типу модели table → заменён на bullet-list ключевых distinctions + cross-ref на E17.
+3. **#42 DONE** — Plain-copy `<pre class="plain-copy">` пример расчёта → удалён (дублировал `<noscript>` fallback).
+4. **#46 DONE** — CORE DIRECTIVES пример в walkthrough Елены → заменён на 1-строчный cross-ref `→ CORE DIRECTIVES (выше)`.
 
-Все остальные элементы (~50 элементов) — unique content, оставляются как есть. **Принцип `viz > dry text`** — уникальные таблицы (Tone Frame examples, Три системы разметки, Токен-лимиты 4K, Лимиты по блокам, Бюджет Елены), все `<pre><code>` templates и примеры Елены/Выщербленного, все anti-pattern pairs, все RULE/RECOMMENDATION callouts — сохраняются.
+Итого: 1168 → 1137 строк (-31, ~2.7%). Принцип `viz > dry text` — все уникальные таблицы, templates, anti-pattern pairs, RULE/RECOMMENDATION callouts сохранены.
 
-### Validation gates для iter 11
+### Validation gates (iter 11 — PASSED)
 
-- [ ] `pnpm run validate:master` — 0 errors (KI#13 warnings могут измениться: если #22/#26/#42/#46 сжаты, "content outside section" warnings могут уменьшиться).
-- [ ] `pnpm run build` — SUCCESS (hash updated).
-- [ ] `pnpm run validate` — все 8 gates passed.
-- [ ] `pnpm run test:unit` — 43/43 pass.
-- [ ] `pnpm run lint` — 0 errors.
-- [ ] Visual diff в браузере: served `parts/part_07a.html` — все 13 секций на месте, все 4 VS-EMBED рендерятся, E07 cross-ref badge внутри E16 visible.
-- [ ] `qa:english` / `qa:syntax` — no regression vs iter 9 baseline (29 / 236 false positives).
-- [ ] `qa:csp` — pre-existing KI#16 (no regression).
-- [ ] Front-matter updated: `Migration status: ✅ MIGRATED (iter 11)`.
+- [x] `pnpm run validate:master` — 0 errors, 146 warnings (= KI#13 baseline, no change).
+- [x] `pnpm run build` — SUCCESS (hash df283246).
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors (10 pre-existing warnings).
+- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 11)`.

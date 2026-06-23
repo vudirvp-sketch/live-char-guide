@@ -202,15 +202,15 @@ Stage Summary:
 
 **Iter 10 (Canon Part 7A creation, DONE 2026-06-24):** Создан `docs/canon/part_07a.md` (802 строки, 13 H2 секций — по одной на каждый `data-section` из `src/master/part_07a.html`, 4 VS-маркера для E08/E16/E17/E02). Front-matter `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица: 54 TODO строки + validation gates. Master HTML не тронут (iter 11 задача). `pnpm run validate:master` PASS (0 errors, KI#13 baseline). **KI#17 NEW** (documentation drift: AGENT_NAVIGATION §10 hint + worklog iter 9 record указывали 4 VS-EMBED как «E07, E08, E16, E17», но фактически в файле — E08, E16, E17, E02; fix applied). **Decision для iter 11:** рекомендуется разбить на 2 под-итерации (iter 11a: §7A.1–§7A.7 + iter 11b: §7A.8–§7A.13). 8 docs updated.
 
-**Iter 11+ (пересмотрено в iter 10):**
-1. **iter 11** — Migrate Part 7A: `src/master/part_07a.html` (1168 строк — самый большой файл). Рекомендуется разбить на 2 под-итерации (iter 11a: §7A.1–§7A.7, ~660 строк, 3 VS-EMBED: E08+E16+E17; iter 11b: §7A.8–§7A.13, ~510 строк, 1 VS-EMBED: E02). Применить 4 "Сжать" кандидата из Canon Migration Notes (#22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES пример в walkthrough Елены).
-2. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
-3. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
-4. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
-5. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
-6. **iter 19+** — KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
-7. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
+**Iter 11 (Part 7A migration, DONE 2026-06-24):** Мигрирован `src/master/part_07a.html` против Canon §7A. 1168 → 1137 строк (-2.7%). 4 compression candidates applied (#22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES walkthrough). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
+
+**Iter 12+ (пересмотрено в iter 11):**
+1. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
+2. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
+3. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
+4. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
+5. **iter 19+** — KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
 
-**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 22 outside) + KI#14 (content duplication, 26 viz параллельно) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 11+.**
+**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 22 outside) + KI#14 (content duplication) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 12+.**
