@@ -1,5 +1,46 @@
 # Changelog
 
+## [9.1.8] - 2026-06-23
+
+### Changed (iter 8 — Part 4 pilot migration)
+- **`src/master/part_04.html`** — мигрирован против Canon §4 (`docs/canon/part_04.md`). 777 → 676 строк (-13%). Применён Canon-first workflow iter 7 → iter 8.
+  - **Удалены 4 дублирующих визуализации:**
+    - `<div class="mermaid">` в p4_spine_overview — дублировал VS-EMBED E05 (chain GHOST→LIE→FLAW→NEED→WANT)
+    - `<div class="infographic inf-pipeline">` в p4_spine_overview (5 steps G/L/F/N/W) — дублировал VS-EMBED E05
+    - `<div class="infographic inf-pipeline">` в p4_spine_full_chain — дублировал VS-EMBED E05
+    - `<div class="infographic inf-pipeline">` в p4_ghost_layers (G1/G2/G3 + periods) — дублировал VS-EMBED E06
+  - **Сжаты re-explanation абзацы** в p4_spine_overview (строки 145, 162 оригинала) до 1 предложения + cross-ref на §4.2–§4.6. Цепочка GHOST→LIE→FLAW→NEED→WANT теперь показана только в VS-EMBED E05.
+  - **Удалён orphan `<p>`** между `</section>` p4_spine_navigation и VS-EMBED E06 (строка 599 оригинала) — content outside `<section>` (1 из 23 KI#13 warnings), дублировала intro p4_ghost_layers.
+  - **Удалена 4-я строка** (forward-ref "GHOST Layers: 3 уровня") из таблицы "Примеры GHOST" — структурно несогласована с таблицей примеров.
+- **`docs/canon/part_04.md`** — front-matter обновлён → `Migration status: ✅ MIGRATED (iter 8 — see Migration Notes below for deviations)`. Migration Notes таблица переписана: каждая строка с пометкой DONE/DEVIATED/PARTIAL/BONUS. Принцип «viz > dry text» зафиксирован в intro.
+- **`docs/canon/_README.md`** — §5 Migration Status: Part 4 → `✅ iter 7 | ✅ iter 8 | iter 7–8 (DONE)`. §9 история: iter 8 record.
+- **`STATUS.md`** — rewritten iter 8 status. KI#13 → 122 inline + 22 outside (1 orphan удалён, было 123+23). KI#14 → 26 визуализаций параллельно (было 31, -4 dup + 1 orphan). Добавлено новое ограничение «Migration principle: viz > dry text (iter 8)».
+- **`AGENT_NAVIGATION.md`** — header iter 7 → iter 8. §6 pitfall #32 KI#14 updated (counts + iter 8 principle). §8 iter 8 record + iter 9+ roadmap. §10 hint для iter 9.
+- **`worklog.md`** — iter 7 → one-liner, iter 8 = новый record.
+- **`PLAN.md`** — §5 iter 8 → ✅ DONE.
+- **`docs/CONTENT_RESTRUCTURE_PLAN.md`** — §5.2 iter 8 row → ✅ DONE.
+
+### Deviations от Canon Migration Notes (по предпочтению пользователя «viz > dry text»)
+- **p4_spine_mapping infographic** (mnemonic GHOST→ТРИГГЕР, LIE→PSYCHOLOGICAL ANCHOR и т.д.) — KEPT (Canon said remove). Причина: мнемоническая визуализация комплементарна детальной таблице ниже, не дубликат.
+- **p4_spine_navigation infographic** (4-step pipeline 1→5→6→7A/B→10) — KEPT (Canon said convert to `<ol>`). Причина: unique визуализация следующих Parts, не дубликат VS-EMBED.
+- **LIE таблица** (4 строки) — KEPT 4 rows (Canon said reduce to 2). Причина: все 4 строки уникальны.
+- **GHOST таблица** (4 строки) — KEPT 3 rows (Canon said 2; removed only structural forward-ref row).
+
+### Validation
+- `pnpm run validate:master` — ✅ PASSED (warnings = KI#13 inline styles + 2 content-outside-section для VS-EMBED markup — pre-existing pattern).
+- `pnpm run build` — ✅ SUCCESSFUL, hash df283246.
+- `pnpm run validate` — ✅ All validation gates passed.
+- `qa:english` — 1 pre-existing false positive (line 441, `[Model: see Appendix B]` model-note span).
+- `qa:syntax` — 22 false positives (BEM class names с `__`) — same count as baseline, different line numbers due to removed content.
+- `qa:contrast` / `qa:bundle` / `qa:doc-versions` — ✅ PASS.
+
+### Notes
+- iter 8 = Part 4 pilot migration против Canon §4. **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique визуализации не удаляются даже если Canon рекомендует. Unique text в таблицах не удаляется (даже если Canon рекомендует сократить). Применяется «очень деликатно».
+- **KI#1..KI#12 + KI#15 закрыты.** KI#13 (122 inline styles + 22 outside section — было 123+23) + KI#14 (content duplication, 26 viz параллельно — было 31) — ACTIVE, continue iter 10+.
+- iter 9 priorities: visual diff Part 4 в браузере (`pnpm run dev` → localhost:3000) + sanity-check что VS-EMBED E05+E06 рендерятся. iter 10 = Canon Part 7A.
+
+---
+
 ## [9.1.7] - 2026-06-23
 
 ### Added (iter 7 — Canon scaffold + Part 4 pilot)

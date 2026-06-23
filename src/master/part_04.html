@@ -142,24 +142,7 @@
 
 <p>Behavioral Anchors (поведенческие якоря) задают поведение, голос задаёт речь. Психологический каркас — следующий уровень: SPINE — фреймворк из 5 элементов, связывающих прошлое персонажа с его поведением.</p>
 
-<p><strong>SPINE</strong> — фреймворк из 5 элементов, которые образуют причинную цепочку от прошлого к настоящему: <strong>GHOST → LIE → FLAW → NEED → WANT</strong>. SPINE даёт Anchors причину существовать, а не быть набором случайных правил.</p>
-
-<div class="mermaid">
-graph TD
-    GHOST["GHOST<br/>Формирующее событие"] -->|"защита от боли"| LIE["LIE<br/>Ложная установка"]
-    LIE -->|"искажает восприятие"| FLAW["FLAW<br/>Деструктивное поведение"]
-    FLAW -->|"блокирует"| NEED["NEED<br/>Истинная потребность"]
-    NEED -.->|"противоречит"| WANT["WANT<br/>Осознанное желание"]
-    WANT -->|"совместимо с"| LIE
-
-    style GHOST fill:#4a1a1a,stroke:#ff6b6b,color:#fff
-    style LIE fill:#4a3a1a,stroke:#ffa94d,color:#fff
-    style FLAW fill:#4a1a4a,stroke:#da77f2,color:#fff
-    style NEED fill:#1a3a4a,stroke:#74c0fc,color:#fff
-    style WANT fill:#1a4a1a,stroke:#69db7c,color:#fff
-</div>
-
-<p><strong>WANT</strong> — это то, что персонаж осознанно желает. Но за WANT стоит <strong>NEED</strong> — истинная потребность, которую персонаж не может признать из-за <strong>FLAW</strong>. FLAW возникает из <strong>LIE</strong> — ложной установки о мире. А LIE — из <strong>GHOST</strong> — события прошлого, которое травмировало персонажа.</p>
+<p><strong>SPINE даёт Anchors причину существовать, а не быть набором случайных правил.</strong> Причинная цепочка GHOST → LIE → FLAW → NEED → WANT показана выше (VS-EMBED E05); поэлементное описание — в §4.2–§4.6.</p>
 
 <p><strong>Правило SPINE: наблюдаемые единицы.</strong> Каждый элемент SPINE = наблюдаемая единица, не абстрактный ярлык.</p>
 <div class="table-wrap">
@@ -173,34 +156,6 @@ graph TD
 <tr><td>WANT</td><td>«Желание: быть счастливым»</td><td>«Желание: получить повышение до конца года»</td></tr>
 </tbody>
 </table>
-</div>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G</div>
-<div class="inf-step-label">GHOST</div>
-<div class="inf-step-desc">Событие прошлого</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">L</div>
-<div class="inf-step-label">LIE</div>
-<div class="inf-step-desc">Ложная установка</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">F</div>
-<div class="inf-step-label">FLAW</div>
-<div class="inf-step-desc">Поведенческий недостаток</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">N</div>
-<div class="inf-step-label">NEED</div>
-<div class="inf-step-desc">Истинная потребность</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">W</div>
-<div class="inf-step-label">WANT</div>
-<div class="inf-step-desc">Осознанное желание</div>
-</div>
 </div>
 
 <div class="callout rec">
@@ -247,7 +202,6 @@ graph TD
 <tr><td>Елена</td><td>Предательство редактора — история, которую она раскрыла, была украдена и опубликована под чужим именем</td><td>"Мне не нужно ничьё одобрение"</td></tr>
 <tr><td>Выщербленный</td><td>Был архивариусом. Впрыснул живой документ — начал распадаться.</td><td>"Если я поглощу достаточно — стану цельным"</td></tr>
 <tr><td>Елена</td><td>В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу. Пожарные приехали слишком поздно.</td><td>"Если я никого не впущу — никто не сможет меня ранить"</td></tr>
-<tr><td>Выщербленный</td><td>GHOST Layers: 3 уровня — детство, юность, настоящее</td><td>→ GHOST Layers (ниже)</td></tr>
 </tbody>
 </table>
 </div>
@@ -388,38 +342,7 @@ graph TD
 <section  data-section="p4_spine_full_chain">
 <h3>Полный SPINE: цепочка из 5 элементов</h3>
 
-<p>Все 5 элементов SPINE образуют единую причинную цепочку. GHOST (событие прошлого) порождает LIE (ложную установку), LIE защищает от боли и вызывает FLAW (поведенческий недостаток), FLAW блокирует NEED (истинную потребность), WANT (осознанное желание) совместимо с LIE.</p>
-
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G</div>
-<div class="inf-step-label">GHOST</div>
-<div class="inf-step-desc">Событие прошлого</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">L</div>
-<div class="inf-step-label">LIE</div>
-<div class="inf-step-desc">Ложная установка</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">F</div>
-<div class="inf-step-label">FLAW</div>
-<div class="inf-step-desc">Поведенческий недостаток</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">N</div>
-<div class="inf-step-label">NEED</div>
-<div class="inf-step-desc">Истинная потребность</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">W</div>
-<div class="inf-step-label">WANT</div>
-<div class="inf-step-desc">Осознанное желание</div>
-</div>
-</div>
-
-<h4>Цепочка: GHOST → LIE → FLAW → NEED → WANT</h4>
-<p>Каждый элемент объясняется предыдущим. GHOST порождает LIE, LIE защищает от боли, FLAW — поведение из LIE, FLAW мешает NEED, WANT совместимо с LIE.</p>
+<p>Все 5 элементов SPINE образуют единую причинную цепочку — см. VS-EMBED E05 в §4.1. Ниже — канонический пример полной цепочки на Выщербленном.</p>
 
 <!-- Demonstrates: SPINE, CONSEQUENCE DRIVEN -->
 <h4>Пример полной цепочки: Выщербленный</h4>
@@ -596,8 +519,6 @@ WANT: Доказать правоту самостоятельно
 
 </section>
 
-<p>Для большинства персонажей достаточно одного GHOST — единичного травматического опыта. Но некоторые backstory требуют нескольких травматических слоёв, каждый из которых формирует отдельный аспект личности. → GHOST Layers (ниже)</p>
-
 <!-- VS-EMBED: E06 — GHOST Layers -->
 <div class="vs-embed" data-vs-element="E06">
 <!-- 
@@ -705,28 +626,6 @@ WANT: Доказать правоту самостоятельно
 <p><strong>GHOST Layers</strong> — трёхуровневая структура GHOST для сложных персонажей.</p>
 
 <p>У Елены один GHOST — предательство редактора. Этого достаточно для большинства персонажей. Для персонажей со сложной многослойной травмой Выщербленный демонстрирует GHOST Layers — трёхуровневую архитектуру. Те же принципы SPINE применяются и здесь; разница — в структурной глубине.</p>
-
-<h4>Архитектура</h4>
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G1</div>
-<div class="inf-step-label">ДЕТСТВО</div>
-<div class="inf-step-desc">Формирует LIE</div>
-<div class="inf-step-code">0-12 лет</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G2</div>
-<div class="inf-step-label">ЮНОСТЬ</div>
-<div class="inf-step-desc">Укрепляет FLAW</div>
-<div class="inf-step-code">13-25 лет</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">G3</div>
-<div class="inf-step-label">НАСТОЯЩЕЕ</div>
-<div class="inf-step-desc">Триггеры сейчас</div>
-<div class="inf-step-code">Недавнее</div>
-</div>
-</div>
 
 <h4>Пример: Выщербленный</h4>
 <div class="table-wrap">

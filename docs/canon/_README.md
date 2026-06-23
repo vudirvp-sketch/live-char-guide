@@ -174,7 +174,7 @@ docs/canon/
 | Part 1 | `part_01.md` | ❌ | ❌ | iter 14 (planned) |
 | Part 2 | `part_02.md` | ❌ | ❌ | iter 14 (planned) |
 | Part 3 | `part_03.md` | ❌ | ❌ | iter 14 (planned) |
-| Part 4 | `part_04.md` | ✅ iter 7 | ❌ | iter 8 (planned) |
+| Part 4 | `part_04.md` | ✅ iter 7 | ✅ iter 8 | iter 7–8 (DONE) |
 | Part 5 | `part_05.md` | ❌ | ❌ | iter 16 (planned) |
 | Part 6 | `part_06.md` | ❌ | ❌ | iter 16 (planned) |
 | Part 7A | `part_07a.md` | ❌ | ❌ | iter 10 (planned) |
@@ -238,6 +238,7 @@ docs/canon/
 ## 9. История изменений
 
 - **iter 7 (2026-06-23):** Создан `docs/canon/` scaffold + этот `_README.md` + `part_04.md` (пилот). Migration status = NOT MIGRATED. iter 8 = migrate `part_04.html`.
+- **iter 8 (2026-06-23):** Миграция `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%). 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён (fixes 1 из 23 KI#13 warnings), 2 re-explanation абзаца сжаты до 1 предложения. 2 unique infographic сохранены (deviation от Canon Migration Notes — по предпочтению пользователя «viz > dry text»). LIE таблица сохранена полностью (4 строки, все уникальны). Build PASS, validate:master PASS, qa без новых critical findings. Canon `part_04.md` Migration Notes таблица обновлена с пометками DONE/DEVIATED/PARTIAL/BONUS.
 
 ---
 

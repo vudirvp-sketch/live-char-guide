@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_04.html`
 > **VS elements:** E05 (SPINE chain), E06 (GHOST Layers)
 > **Sections (11):** `p4_spine_overview`, `p4_ghost`, `p4_lie`, `p4_flaw`, `p4_need`, `p4_want`, `p4_spine_full_chain`, `p4_spine_mapping`, `p4_spine_check`, `p4_spine_navigation`, `p4_ghost_layers`
-> **Last synced:** 2026-06-23 (iter 7 — Canon created, master HTML NOT yet migrated)
-> **Migration status:** ❌ NOT MIGRATED (iter 8 task — migrate `src/master/part_04.html` against this Canon)
+> **Last synced:** 2026-06-23 (iter 8 — master HTML migrated against this Canon)
+> **Migration status:** ✅ MIGRATED (iter 8 — see Migration Notes below for deviations)
 
 ---
 
@@ -372,23 +372,26 @@ SPINE-профиль построен и проверен на консисте�
 
 ---
 
-## Migration Notes (для iter 8 — migrate `part_04.html`)
+## Migration Notes (iter 8 — applied 2026-06-23)
 
-Когда `src/master/part_04.html` будет мигрироваться против этого Canon, удалить/заменить:
+Миграция `src/master/part_04.html` против этого Canon выполнена в iter 8. Результат: 777 → 676 строк (-13%). Build PASS, validate:master PASS, qa без регрессий.
 
-| Что в master HTML | Действие | Причина |
-|-------------------|----------|---------|
-| `<div class="mermaid">` в p4_spine_overview (строки 147–160) | Удалить | Дублирует VS-EMBED E05 (chain показан визуально) |
-| `<div class="infographic inf-pipeline">` в p4_spine_overview (строки 178–204) | Удалить | Дублирует VS-EMBED E05 |
-| `<div class="infographic inf-pipeline">` в p4_spine_full_chain (строки 393–419) | Удалить | Дублирует VS-EMBED E05 |
-| `<div class="infographic inf-pipeline">` в p4_spine_mapping (строки 451–480) | Удалить | Дублирует mapping таблицу ниже |
-| `<div class="infographic inf-pipeline">` в p4_spine_navigation (строки 572–593) | Заменить на compact `<ol>` список | Pipeline 4 шагов — уникальный контент, но не требует визуализации |
-| `<div class="infographic inf-pipeline">` в p4_ghost_layers (строки 710–729) | Удалить | Дублирует VS-EMBED E06 |
-| Пере-объяснение цепочки GHOST → LIE → FLAW → NEED → WANT в p4_spine_overview (строки 145, 162) | Сжать до 1 предложения + cross-ref на §4.1 Canon | Концепция определена в §4.1, повтор не нужен |
-| Таблица "Примеры GHOST" в p4_ghost (строки 241–253) — 4 строки | Сократить до 2 (Елена primary + Выщербленный), secondary Elena → cross-ref | Канонические примеры в §4.2 Canon |
-| Таблица "Примеры LIE" в p4_lie (строки 269–282) — 4 строки | Сократить до 2, variants → cross-ref | Канонические примеры в §4.3 Canon |
-| Таблица FLAW "❌ Плохой FLAW / ✅ Хороший FLAW" (строки 314–326) | Оставить — unique comparison data | Канон в §4.4 Canon |
-| Pre/code пример Выщербленного в p4_spine_full_chain (строки 427–436) | Оставить — canonical | Канон в §4.7 Canon |
-| Pre/code пример Елены в p4_spine_check (строки 543–552) | Оставить — canonical consistency check demo | Канон в §4.9 Canon |
+**Принцип применённый:** при выборе «удалить текст или визуализацию» — визуализация сохранялась, удалялся dry-дублирующий текст (по явному предпочтению пользователя).
 
-**После миграции:** обновить front-matter этого файла → `Migration status: ✅ MIGRATED (iter 8)`. Обновить `_README.md` §5 Migration Status.
+| Что в master HTML | Действие | Статус | Причина |
+|-------------------|----------|--------|---------|
+| `<div class="mermaid">` в p4_spine_overview | Удалить | ✅ DONE | Дублирует VS-EMBED E05 (chain показан визуально) |
+| `<div class="infographic inf-pipeline">` в p4_spine_overview | Удалить | ✅ DONE | Дублирует VS-EMBED E05 |
+| `<div class="infographic inf-pipeline">` в p4_spine_full_chain | Удалить | ✅ DONE | Дублирует VS-EMBED E05 |
+| `<div class="infographic">` (mnemonic pipeline) в p4_spine_mapping | ~~Удалить~~ Оставить | ⚠️ DEVIATED | Mнемоническая визуализация (GHOST→ТРИГГЕР, LIE→PSYCHOLOGICAL ANCHOR и т.д.) — комплементарна детальной таблице ниже, не дублирует. Метки отличаются от формальных Anchor type names в таблице. По предпочтению пользователя «viz > dry text» — сохранена. |
+| `<div class="infographic inf-pipeline">` в p4_spine_navigation | ~~Заменить на `<ol>`~~ Оставить | ⚠️ DEVIATED | Unique pipeline визуализация следующих Parts (1→5→6→7A/B→10). Не дублирует VS-EMBED. По предпочтению пользователя — сохранена как визуализация, а не compact список. |
+| `<div class="infographic inf-pipeline">` в p4_ghost_layers (G1/G2/G3 + periods) | Удалить | ✅ DONE | Дублирует VS-EMBED E06 (периоды G1/G2/G3 + роли есть в HTML labels E06) |
+| Пере-объяснение цепочки GHOST → LIE → FLAW → NEED → WANT в p4_spine_overview | Сжать | ✅ DONE | 2 абзаца (строки 145, 162 оригинала) сжаты до 1 предложения + cross-ref на §4.2–§4.6. Цепочка показана в VS-EMBED E05 выше. |
+| Таблица "Примеры GHOST" в p4_ghost (4 строки) | Сократить до 3 | ⚠️ PARTIAL | Удалена 4-я строка (forward-ref "GHOST Layers: 3 уровня" — структурно несогласована с таблицей примеров, дублирует §4.11). 3 строки (Елена primary, Выщербленный, Елена secondary) сохранены — все уникальные примеры. Canon рекомендовал 2, но secondary Elena содержит уникальный сценарий (пожар в детстве) — оставлен. |
+| Таблица "Примеры LIE" в p4_lie (4 строки) | ~~Сократить до 2~~ Оставить 4 | ⚠️ DEVIATED | Все 4 строки уникальны (variant Выщербленного "Пустота заполняема" не повторяется elsewhere). По предпочтению «очень деликатно» — не удалены. |
+| Таблица FLAW "❌ Плохой FLAW / ✅ Хороший FLAW" | Оставить | ✅ DONE | Unique comparison data, оставлена как в Canon |
+| Pre/code пример Выщербленного в p4_spine_full_chain | Оставить | ✅ DONE | Canonical, оставлен как в Canon |
+| Pre/code пример Елены в p4_spine_check | Оставить | ✅ DONE | Canonical consistency check demo, оставлен как в Canon |
+| Orphan `<p>` между p4_spine_navigation `</section>` и VS-EMBED E06 (строка 599 оригинала) | Удалить | ✅ BONUS | Content outside `<section>` (KI#13 warning). Дублировала intro p4_ghost_layers (строка 630 оригинала). Удалена — fixes 1 из 23 "content outside section" warnings. |
+
+**Итог миграции:** 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удален, 1 forward-ref строка таблицы удалена, 2 абзаца re-explanation сжаты до 1 предложения. 2 unique infographic сохранены (deviation от Canon, по предпочтению пользователя viz > text). LIE таблица сохранена полностью (deviation, все 4 строки уникальны). Build PASS, validate:master PASS, qa без новых critical findings.

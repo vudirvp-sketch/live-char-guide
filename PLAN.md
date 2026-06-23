@@ -241,17 +241,25 @@ Stage Summary:
 - 6 docs updated: STATUS, AGENT_NAVIGATION, worklog, PLAN, CHANGELOG, CONTENT_RESTRUCTURE_PLAN §9.3.1.
 - Никаких правок master HTML / visual-system / widget JS.
 
-**Iter 8+ (пересмотрено в iter 7):**
-1. **iter 8** — Migrate `src/master/part_04.html` против Canon §4. TODO list — в `docs/canon/part_04.md` Migration Notes таблица. Удалить 6 устаревших `infographic inf-pipeline` + 1 `mermaid`.
-2. **iter 9** — Validate pilot Part 4 (visual diff в браузере, `pnpm run qa`, `pnpm run validate:master`).
-3. **iter 10–11** — Canon Part 7A + migrate (1168 строк, разбить на 2 итерации).
-4. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
-5. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
-6. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
-7. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
-8. **iter 19+** — KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
-9. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
+**Iter 8 (Part 4 pilot migration, DONE 2026-06-23):**
+- Мигрирован `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%).
+- 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён (1 из 23 KI#13 warnings), 2 re-explanation абзаца сжаты.
+- **2 unique infographic сохранены** (deviation от Canon): p4_spine_mapping mnemonic + p4_spine_navigation pipeline — по предпочтению пользователя «viz > dry text».
+- **LIE таблица сохранена полностью** (4 строки, deviation от Canon «сократить до 2») — все строки уникальны.
+- Canon `part_04.md` Migration Notes переписана с пометками DONE/DEVIATED/PARTIAL/BONUS.
+- Build PASS, validate:master PASS, qa без новых critical. 9 docs updated.
+- **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
+
+**Iter 9+ (пересмотрено в iter 8):**
+1. **iter 9** — Validate pilot Part 4 (visual diff в браузере `pnpm run dev` → localhost:3000, sanity-check VS-EMBED E05+E06, 2 сохранённые infographic).
+2. **iter 10–11** — Canon Part 7A + migrate (1168 строк, разбить на 2 итерации).
+3. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
+4. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
+5. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
+6. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
+7. **iter 19+** — KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
+8. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
 
-**KI#1..KI#12 + KI#15 закрыты. KI#13 + KI#14 — ACTIVE, defer iter 8+.**
+**KI#1..KI#12 + KI#15 закрыты. KI#13 (122 inline + 22 outside — было 123+23) + KI#14 (26 viz параллельно — было 31) — ACTIVE, continue iter 10+.**

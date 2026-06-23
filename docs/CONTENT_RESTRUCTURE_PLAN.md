@@ -328,7 +328,7 @@ SPINE — психологический каркас из 5 элементов,
 |------|------|--------|-------|------|
 | **6** (current) | Анализ | Создать этот план, KI#14 | `docs/CONTENT_RESTRUCTURE_PLAN.md`, STATUS, worklog, AGENT_NAVIGATION | LOW (только docs) |
 | **7** | Canon scaffold | Создать `docs/canon/` структуру + Canon Part 4 (самый дубль-тяжёлый) как пилот | `docs/canon/_README.md`, `docs/canon/part_04.md` | LOW (только docs) |
-| **8** | Pilot migration | Мигрировать `part_04.html` против Canon §4. Удалить дубликаты, вычистить 6 устаревших infographic. | `src/master/part_04.html` | MEDIUM (visual diff) |
+| **8** | Pilot migration | ✅ DONE — Мигрировать `part_04.html` против Canon §4. Удалить 4 дубликата (mermaid + 3 inf-pipeline) + 1 orphan paragraph + сжать re-explanation. 2 unique infographic сохранены (deviation). LIE таблица сохранена полностью (deviation). 777 → 676 строк (-13%). Build PASS, validate:master PASS, qa без новых critical. | `src/master/part_04.html` | MEDIUM (visual diff pending iter 9) |
 | **9** | Validate pilot | Visual diff Part 4 в браузере. Sanity-check что ничего не сломалось. Adjust Canon process. | — | LOW |
 | **10** | Canon Part 7A | Написать Canon §7A (SP, Assembly, CORE DIRECTIVES — 13 секций, 4 VS-EMBED) | `docs/canon/part_07a.md` | LOW |
 | **11** | Migrate Part 7A | Мигрировать `part_07a.html` (1168 строк — самый большой файл) | `src/master/part_07a.html` | HIGH (размер) |
@@ -412,26 +412,26 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 6 COMPLETE (analytical pass).** KI#14 NEW (content duplication, ACTIVE). План переработки создан.
+**Iter 8 COMPLETE (Part 4 pilot migration).** `src/master/part_04.html` мигрирован против Canon §4. 777 → 676 строк (-13%). KI#13 + KI#14 ACTIVE.
 
-**Iter 7 priorities:**
+**Iter 9 priorities:**
 
-1. **Создать `docs/canon/` scaffold** — структура папки + `_README.md` с правилами Canon (что это, как писать, как мигрировать).
-2. **Написать `docs/canon/part_04.md`** — пилотный Canon для Part 4 (SPINE Framework). Самый дубль-тяжёлый файл (6 infographic, 11 секций, 2 VS-EMBED). Использовать структуру из §4.3 этого документа как template.
-3. **НЕ мигрировать `part_04.html` в iter 7.** Сначала Canon, потом миграция в iter 8. Это разделение важно: Canon = чистая семантика, миграция = HTML-механика. Не смешивать.
-4. **Обновить STATUS.md / worklog.md / AGENT_NAVIGATION.md** — отметить iter 7 done, iter 8 = migrate part_04.html.
+1. **Visual diff Part 4 в браузере** — `pnpm run dev` → localhost:3000 → открыть секции p4_spine_overview, p4_ghost, p4_lie, p4_flaw, p4_need, p4_want, p4_spine_full_chain, p4_spine_mapping, p4_spine_check, p4_spine_navigation, p4_ghost_layers. Сравнить с https://vudirvp-sketch.github.io/live-char-guide/.
+2. **Sanity-check что VS-EMBED E05+E06 рендерятся** — hex-chain GHOST→LIE→FLAW→NEED→WANT + concentric rings G1/G2/G3.
+3. **Sanity-check 2 сохранённые infographic** — p4_spine_mapping mnemonic + p4_spine_navigation pipeline. Они должны рендериться (не удалены, deviation от Canon).
+4. **Если visual regression** — откатить через `git checkout src/master/part_04.html` или точечно поправить.
+5. **Если всё OK** — начать Canon Part 7A в iter 10 (1168 строк, 13 секций, 4 VS-EMBED).
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 7 прочитай:
-> 1. `STATUS.md` (KI#13 + KI#14 ACTIVE, iter 6 done)
-> 2. `worklog.md` (iter 6 record — analytical pass)
-> 3. `docs/CONTENT_RESTRUCTURE_PLAN.md` (этот файл — §4.3 Canon template, §5.2 iter 7 задача)
-> 4. `AGENT_NAVIGATION.md` (§8 iter 7+ roadmap)
-> 5. `src/master/part_04.html` (целевой файл для Canon §4)
-> 6. `visual-system/elements/E05-spine-framework.html` + `E06-ghost-layers.html` (VS-элементы Part 4)
+> Перед стартом iter 9 прочитай:
+> 1. `STATUS.md` (iter 8 COMPLETE, KI#13+KI#14 ACTIVE, Part 4 ✅ MIGRATED)
+> 2. `worklog.md` (iter 8 record — Part 4 migration, deviations зафиксированы)
+> 3. `docs/canon/part_04.md` (Migration Notes — DONE/DEVIATED статусы каждой строки)
+> 4. `AGENT_NAVIGATION.md` (§8 iter 9+ roadmap, §10 hint)
+> 5. `src/master/part_04.html` (676 строк, мигрированный)
 >
-> Canon = Markdown, не HTML. Один концепт = одно место. VS-маркеры `[VS: E0X — ...]` вместо встроенной разметки. Примеры — единственный источник (не дублировать).
+> **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 
 ---
 
