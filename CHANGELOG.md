@@ -1,5 +1,31 @@
 # Changelog
 
+## [9.1.9] - 2026-06-24
+
+### Changed (iter 9 — Part 4 validation pass)
+- **Validation pass Part 4 master HTML** (мигрирован в iter 8 против Canon §4). Никаких правок кода — только проверки. Регрессий не найдено.
+  - **Static HTML sanity check:** 11 секций (open/close balanced), 2 VS-EMBED divs (E05 + E06 well-formed), 3 infographic opens (2 retained + 1 inner), все 11 expected `data-section` IDs присутствуют. No orphan `<p>` между `</section>` и VS-EMBED E06 (iter 8 fix confirmed). No mermaid в part_04 (iter 8 removal confirmed). No broken internal hrefs.
+  - **Served `parts/part_04.html` через локальный сервер** (Python http.server :3001): 40 825 байт / 676 строк. VS-EMBED E05 (line 8-9) + E06 (line 522-523) — present. Retained infographic p4_spine_mapping mnemonic (line 374) + p4_spine_navigation pipeline (line 495) — present. All 11 `data-section` IDs — present. Orphan `<p>` (iter7 line 599), orphan `<h4>Архитектура` (iter7 line 711), mermaid (iter7 line 147) — все 0 matches (iter 8 removals confirmed).
+  - **`pnpm run validate:master`** ✅ PASSED (all 12 checks). Warnings = 123 inline `style=` + 22 "content outside section" (pre-existing KI#13, baseline iter 8).
+  - **`pnpm run build`** ✅ SUCCESSFUL, hash `df283246` (same as iter 8, no drift).
+  - **`pnpm run validate`** ✅ All 8 validation gates passed.
+  - **`pnpm run test:unit`** ✅ 43/43 pass.
+  - **`pnpm run lint`** ✅ 0 errors, 10 warnings (pre-existing).
+  - **`pnpm run qa:bundle` / `qa:contrast` / `qa:doc-versions`** ✅ PASS.
+  - **`pnpm run qa:english`** ❌ 29 issues (vs 29 в iter 7 — **no regression**). Все pre-existing false positives: `[Model: see Appendix B]` в `<span class="model-note">` (1 в part_04, 5 в part_07a) + BEM class names с `__` в part_07a.
+  - **`pnpm run qa:syntax`** ❌ 236 markdown false positives (BEM class names с `__` — `ring-label--g3` и т.д.). Same count as iter 7 baseline. part_04 — 22 false positives (same as iter 8).
+  - **`pnpm run qa:csp`** ❌ FAIL — `index.html has 2 inline script(s)`. **Pre-existing с iter 5** (`src/shell/index.html` имел 2 inline scripts с commit 60d7abd). **Зарегистрирован как KI#16** (NEW, ACTIVE).
+
+### Known Issues (NEW, ACTIVE)
+- **KI#16** `pnpm run qa:csp` FAIL: `index.html has 2 inline script(s)`. Pre-existing с iter 5: `src/shell/index.html` строки 24 (`document.documentElement.classList.add('js')`) + 108-126 (`mermaid.initialize({...})`). Build регенерирует `index.html` (root fallback) из `src/shell/index.html`. Не блокирует Canon миграцию (CSP не enforced на GitHub Pages), но нарушает §6 pitfall #1. Fix plan (iter 19+): вынести mermaid.initialize в `src/shell/widgets/mermaid-init.js` + CSP `unsafe-inline` exception для tiny js flag.
+
+### Notes
+- iter 9 = validation pass Part 4. Никаких правок master HTML / visual-system / widget JS — только docs (6 files updated).
+- **KI#1..KI#12 + KI#15 закрыты.** KI#13 (123 inline + 22 outside) + KI#14 (content duplication, 26 viz параллельно) + KI#16 (qa:csp FAIL) — ACTIVE, continue iter 10+.
+- iter 10 priorities: Canon Part 7A (`docs/canon/part_07a.md`) — 13 секций, 4 VS-EMBED (E07/E08/E16/E17), 1168 строк master HTML.
+
+---
+
 ## [9.1.8] - 2026-06-23
 
 ### Changed (iter 8 — Part 4 pilot migration)

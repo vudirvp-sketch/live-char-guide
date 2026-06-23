@@ -194,72 +194,22 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**Iter 1 завершена:** созданы AGENT_NAVIGATION.md / STATUS.md / worklog.md, удалены 3 устаревших docs, обновлены README.md / CHANGELOG.md / docs/architecture.md. Идентифицированы 6 Known Issues (KI#1..KI#6).
+**Iter 1–7 (compressed — см. CHANGELOG [9.1.1]..[9.1.7], worklog.md one-liners, git history):** iter 1 — AGENT_NAVIGATION/STATUS/worklog/PLAN created, 6 KI identified. iter 2 — KI#1..#6 closed, stale docs removed. iter 3 — KI#8+#9 closed (orphan scripts), pitfalls 18→30. iter 4 — KI#10 closed, KI#11+#12 found (qa:* scripts wired). iter 5 — KI#11 closed (tokens.json), KI#12 partial (17 inline scripts → 5 widget JS modules), KI#13 NEW (123 inline styles + 23 outside). iter 6 — `docs/CONTENT_RESTRUCTURE_PLAN.md` created (7 dup patterns + Canon strategy + iter 7..19 roadmap), KI#14 NEW (content duplication), KI#15 NEW (anchor-redirects stale dup). iter 7 — `docs/canon/` scaffold created (`_README.md` + `part_04.md` pilot), KI#15 CLOSED.
 
-**Iter 2 завершена:** закрыты все 6 Known Issues из iter 1. Обнаружены 2 новых KI (KI#7, KI#8) — KI#7 закрыт в iter 2, KI#8 отложен в iter 3.
-- KI#1 (parts/ в repo) — CLOSED "won't fix — by design": root fallbacks intentional per `.gitignore` + `build-shell-unified.mjs`.
-- KI#2 (дубли widgets/assets) — CLOSED: удалили только `src/shell/assets/` (stale duplicate), top-level widgets/assets/event-bus.js — root fallbacks.
-- KI#3 (CHANGELOG не отражал FIX-N) — CLOSED: добавлены [9.1.0] (FIX-01..31) + [9.1.2] (iter 2) секции.
-- KI#4 (user_journeys.md Draft) — CLOSED (deleted): устаревший v8 контент (CORE DIRECTIVES pre-v8 naming, Part 7 не split).
-- KI#5 (CONTRIBUTING.md src/parts/) — CLOSED: заменён на src/master/ + добавлены src/shell/, src/assets/, data/, root fallbacks note.
-- KI#6 (architecture.md v7→v8 archived) — CLOSED: секция удалена, заменена compact Version History таблицей.
-- KI#7 (NEW, найден в iter 2) — CLOSED: iter 1 commit `c6a58c8` в message заявлял удаление migration_map.md/transition_guide.md/ap_reference_inventory.md, но фактически не удалил. В iter 2 удалены transition_guide.md + ap_reference_inventory.md (нет кодовых зависимостей). migration_map.md оставлен (см. KI#8). Также удалён DELETIONS-iter1.txt (stale cleanup file).
-- KI#8 (NEW, найден в iter 2) — DEFERRED to iter 3: `scripts/validate-migration.mjs` + `gen-redirect-map.mjs` (orphan, не в package.json) зависят от `docs/migration_map.md`. Решение iter 3: удалить оба orphan-скрипта + migration_map.md, либо wire в package.json.
+**Iter 8 (Part 4 pilot migration, DONE 2026-06-23):** Мигрирован `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%). 4 dup viz удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён, 2 re-explanation абзаца сжаты. 2 unique infographic сохранены (deviation от Canon — по предпочтению «viz > dry text»). LIE таблица сохранена полностью (deviation, все 4 строки уникальны). Build PASS, validate:master PASS.
 
-**Iter 3 завершена:** закрыты KI#8 (orphan trio удалён) + KI#9 (stale `DELETIONS-iter2.txt` удалён). §6 pitfalls расширены с 18 до 30. §1 scripts/ list классифицирован. `terminology_dictionary.md` пофикшен (stale `p7_core_directives` → `p7a_core_directives`). `visual-system/PLAN.md` устаревшие рекомендации в Appendix E/F помечены [OBSOLETE per iter 2 KI#1/KI#2].
-- KI#8 — CLOSED (option a — delete): удалены `scripts/validate-migration.mjs` (888 строк) + `scripts/gen-redirect-map.mjs` (257 строк) + `docs/migration_map.md` (586 строк). Все про v5.12→v6 migration (4 major версии назад). Orphan (не в package.json, не в CI). `data/anchor-redirects.json` — KEEP (runtime data, загружается `lazy-loader.js`).
-- KI#9 (NEW, найден в iter 3) — CLOSED: `DELETIONS-iter2.txt` создан в iter 2, но не удалён — stale cleanup-instruction file (poe2-regex-ru конвенция). Iter 2 удалил `DELETIONS-iter1.txt` с пометкой "больше не нужен", но при этом создал `DELETIONS-iter2.txt` — противоречие. Удалён в iter 3.
-- AGENT_NAVIGATION §6 pitfalls: 18 → 30. Пункты 19-30 добавлены из FIX-04..31 commit messages.
-- AGENT_NAVIGATION §1 scripts/ list: классификация (package.json-wired 5 / CI-wired 2 Python / orphan QA tools 5+ KEEP / removed in iter 3 2).
-- terminology_dictionary.md: stale ref `p7_core_directives` → `p7a_core_directives`; version 9.0.0 → 9.1.0.
-- visual-system/PLAN.md: Appendix E §2 + F §2 помечены [OBSOLETE per iter 2 KI#1/KI#2].
+**Iter 9 (Part 4 validation pass, DONE 2026-06-24):** Validation pilot Part 4 migration (iter 8). Static HTML sanity check (11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs) + served `parts/part_04.html` через локальный сервер (40 825 bytes, all expected content present, all removed content absent) + `pnpm run validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:contrast`/`qa:doc-versions` PASS. `qa:english`/`qa:syntax` — same false positives as iter 7 (no regression). `qa:csp` FAIL → **KI#16 NEW** (pre-existing с iter 5, не задокументирован ранее). 6 docs updated. Никаких правок master HTML / visual-system / widget JS.
 
-**Iter 4 завершена:** закрыты все 4 LOW-priority задач из iter 3 roadmap + закрыт KI#10. Обнаружены 2 новых ACTIVE KI (KI#11, KI#12) — defer в iter 5+.
-- **Task A (DONE):** `docs/character_bible.md` trimmed (770 → 645 строк, -125). Removed Elena (section 1) + Выщербленный (section 8) duplicates — canonical в per-character bibles. Header: deprecated notice → "Supporting Characters Registry" clarification.
-- **Task B (DONE):** `docs/cross_reference_sync.md` (62 строки) merged в `AGENT_NAVIGATION.md` новый §9 "Cross-Reference Pairs". Source file удалён.
-- **Task C (DONE):** Orphan QA scripts wired в `package.json` как `qa:*` (9 scripts: csp/bundle/contrast/english/english:docs/syntax/doc-versions/interactive + aggregate `qa`). НЕ в precommit/CI.
-- **Task D (DONE):** `visual-system/PLAN.md` Phase 4 audited — добавлен §4.0 "Integration Status": markers ✅ 17/17, component-extracts ✅ 17/17, INTEGRATION-MAP ✅, actual content replacement ❌ not started, widget JS porting ⚠️ partial, build pipeline updates ❌ not verified.
-- KI#10 (NEW, найден в iter 4) — CLOSED: `check_english.py` lines 325-334 + `check_syntax_mix.py` line 169 содержали stale v7 paths (`src/parts-l1/l2/l3/`, removed в v8) + stale "v6" comment. Пофикшено: оба скрипта теперь сканируют только `src/master/`.
-- KI#11 (NEW, найден в iter 4) — ACTIVE, defer iter 5+: `contrast_checker.mjs` ожидает `tokens.json`, которого нет в repo. `qa:contrast` gracefully SKIPs. Fix options (a/b/c).
-- KI#12 (NEW, найден в iter 4) — ACTIVE, defer iter 5+: Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit` — silent ship. Fix plan (4 steps), требует architecture decision (a vs b).
-
-**Iter 5 завершена:** закрыты KI#11 + KI#12 (scripts). KI#13 NEW (inline styles + content-outside-section).
-- **KI#11 (CLOSED):** Создан `visual-system/tokens.json` — JSON-экстракт из `DESIGN-TOKENS.css`. `qa:contrast` работает.
-- **KI#12 (PARTIAL, scripts → 0 errors):** Architecture decision (b) — migrate 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. Удалены 17 inline scripts из 10 master HTML файлов. `validate:master` wired в `precommit`.
-- **KI#13 (NEW, ACTIVE):** 123 inline `style=` attributes + 23 "content outside section" warnings. Defer iter 6+.
-
-**Iter 6 завершена (analytical + validation pass):** KI#14 + KI#15 NEW (ACTIVE).
-- Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — анализ 7 паттернов дублирования (Pattern A..G) + стратегия Canonical Guide Spec + дорожная карта iter 7..19.
-- Идентифицировано: 17 VS-EMBED + 12 устаревших infographic + 2 mermaid = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз (~каждые 40 строк), SPINE — 160.
-- Стратегия: Canonical Guide Spec (`docs/canon/part_NN.md`) — Markdown-источник правды. Визуализация = замещение, не дополнение.
-- **Validation pass (iter 6b):** все 18 ключевых метрик verified ✅. 3 арифметические погрешности исправлены (section count 124→98, AGENT_NAV §1 92→98). 5 новых находок: Pattern H (`docs/anchor-redirects.json` stale duplicate → KI#15), Pattern E scope (3→12+ мест), CHANGELOG iter 6 gap, component-extracts/ unaudited (iter 19+), tables 62+→76. CHANGELOG.md [9.1.6] добавлен.
-- Никаких правок master HTML / visual-system — только docs.
-
-**Iter 7 завершена (Canon scaffold + Part 4 pilot + KI#15 fix):**
-- Создан `docs/canon/` scaffold: `_README.md` (244 строки, 9 секций — правила Canon) + `part_04.md` (394 строки, 11 секций — пилот SPINE, все `data-section` покрыты, Migration Notes таблица для iter 8).
-- KI#15 CLOSED — удалён `docs/anchor-redirects.json` (stale duplicate of `data/anchor-redirects.json`). Single source of truth = `data/anchor-redirects.json`.
-- 6 docs updated: STATUS, AGENT_NAVIGATION, worklog, PLAN, CHANGELOG, CONTENT_RESTRUCTURE_PLAN §9.3.1.
-- Никаких правок master HTML / visual-system / widget JS.
-
-**Iter 8 (Part 4 pilot migration, DONE 2026-06-23):**
-- Мигрирован `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%).
-- 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён (1 из 23 KI#13 warnings), 2 re-explanation абзаца сжаты.
-- **2 unique infographic сохранены** (deviation от Canon): p4_spine_mapping mnemonic + p4_spine_navigation pipeline — по предпочтению пользователя «viz > dry text».
-- **LIE таблица сохранена полностью** (4 строки, deviation от Canon «сократить до 2») — все строки уникальны.
-- Canon `part_04.md` Migration Notes переписана с пометками DONE/DEVIATED/PARTIAL/BONUS.
-- Build PASS, validate:master PASS, qa без новых critical. 9 docs updated.
-- **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
-
-**Iter 9+ (пересмотрено в iter 8):**
-1. **iter 9** — Validate pilot Part 4 (visual diff в браузере `pnpm run dev` → localhost:3000, sanity-check VS-EMBED E05+E06, 2 сохранённые infographic).
-2. **iter 10–11** — Canon Part 7A + migrate (1168 строк, разбить на 2 итерации).
+**Iter 10+ (пересмотрено в iter 9):**
+1. **iter 10** — Canon Part 7A: создать `docs/canon/part_07a.md` (13 H2 секций, 4 VS-маркера для E07/E08/E16/E17, Migration Notes таблица для iter 11). **НЕ править master HTML.**
+2. **iter 11** — Migrate Part 7A: `src/master/part_07a.html` (1168 строк — самый большой файл). При риске — разбить на 2 под-итерации (§7A.1-7 + §7A.8-13).
 3. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
 4. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
 5. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
 6. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
-7. **iter 19+** — KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
+7. **iter 19+** — KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
 8. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
 
-**KI#1..KI#12 + KI#15 закрыты. KI#13 (122 inline + 22 outside — было 123+23) + KI#14 (26 viz параллельно — было 31) — ACTIVE, continue iter 10+.**
+**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 22 outside) + KI#14 (content duplication, 26 viz параллельно) + KI#16 (qa:csp FAIL) — ACTIVE, continue iter 10+.**

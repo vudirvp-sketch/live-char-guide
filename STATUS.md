@@ -2,51 +2,53 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.8 + Part 4 master HTML migrated против Canon (iter 8)
-> **Дата:** 2026-06-23
+> **Текущая версия:** 9.1.0 + Part 4 master HTML migrated + validated (iter 9)
+> **Дата:** 2026-06-24
 
 ---
 
 ## Текущее состояние
 
-**iter 8 COMPLETE.** Мигрирован `src/master/part_04.html` против Canon §4 (пилот). 777 → 676 строк (-13%). Build PASS, validate:master PASS, qa без новых critical. KI#13 + KI#14 — ACTIVE.
+**iter 9 COMPLETE.** Pilot Part 4 migration (iter 8) — визуально и статически валидирована. Регрессий не найдено. Build PASS, validate:master PASS, 43/43 unit tests PASS. KI#13 + KI#14 + KI#16 — ACTIVE.
 
-### Что сделано в iter 8
+### Что сделано в iter 9
 
-**Pilot migration: Part 4 master HTML → Canon §4.** Применён Canon-first workflow iter 7 → iter 8.
+**Validation pass Part 4 master HTML против Canon §4.** Никаких правок кода — только проверки.
 
-- Удалены 4 дублирующих визуализации: 1 mermaid (p4_spine_overview, дубликат E05) + 3 `infographic inf-pipeline` (p4_spine_overview, p4_spine_full_chain, p4_ghost_layers — все дубликаты VS-EMBED E05/E06).
-- Сжаты 2 re-explanation абзаца в p4_spine_overview (строки 145, 162 оригинала) до 1 предложения + cross-ref на §4.2–§4.6. Цепочка GHOST→LIE→FLAW→NEED→WANT теперь показана только в VS-EMBED E05, текст не пере-объясняет.
-- Удалён orphan `<p>` между `</section>` p4_spine_navigation и VS-EMBED E06 — content outside `<section>` (1 из 23 KI#13 warnings), дублировала intro p4_ghost_layers.
-- Удалена 4-я строка (forward-ref "GHOST Layers: 3 уровня") из таблицы "Примеры GHOST" — структурно несогласована с таблицей примеров, дублирует §4.11.
-- **Сохранены 2 unique infographic** (deviation от Canon Migration Notes, по предпочтению пользователя «viz > dry text»): p4_spine_mapping mnemonic (GHOST→ТРИГГЕР, LIE→PSYCHOLOGICAL ANCHOR и т.д. — комплементарна детальной таблице, не дубликат) + p4_spine_navigation pipeline (1→5→6→7A/B→10 — unique визуализация следующих Parts, не дубликат VS-EMBED).
-- **LIE таблица сохранена полностью** (4 строки, deviation от Canon "сократить до 2") — все 4 строки уникальны (variant Выщербленного "Пустота заполняема" не повторяется elsewhere).
-- Сохранены как canonical: pre/code пример Выщербленного (p4_spine_full_chain), pre/code пример Елены (p4_spine_check), таблица FLAW ❌/✅ comparison, VS-EMBED E05 + E06 как primary визуализации.
-- Canon `docs/canon/part_04.md` front-matter обновлён → `Migration status: ✅ MIGRATED (iter 8)`. Migration Notes таблица переписана с пометками DONE/DEVIATED/PARTIAL/BONUS для каждой строки.
+- **Static HTML sanity check:** 11 секций (open/close balanced), 2 VS-EMBED divs (E05 + E06 well-formed), 3 infographic opens (2 retained + 1 inner), все 11 expected `data-section` IDs присутствуют. No orphan `<p>` между `</section>` и VS-EMBED E06 (iter 8 fix confirmed). No mermaid в part_04 (iter 8 removal confirmed). No broken internal hrefs.
+- **Served `parts/part_04.html` через локальный сервер** (Python http.server :3001, build artifacts): 40 825 байт / 676 строк. VS-EMBED E05 (line 8-9) + E06 (line 522-523) присутствуют. Retained infographic p4_spine_mapping mnemonic (line 374) + p4_spine_navigation pipeline (line 495) — рендерятся. All 11 `data-section` IDs присутствуют. Orphan `<p>` (был line 599 iter 7) — 0 matches. Orphan `<h4>Архитектура` (был line 711 iter 7) — 0 matches. Mermaid (был line 147 iter 7) — 0 matches.
+- **`pnpm run validate:master`** ✅ PASSED (all 12 checks). Warnings = 123 inline `style=` + 22 "content outside section" (pre-existing KI#13, baseline iter 8).
+- **`pnpm run build`** ✅ SUCCESSFUL, hash `df283246` (same as iter 8, no drift).
+- **`pnpm run validate`** ✅ All 8 validation gates passed.
+- **`pnpm run test:unit`** ✅ 43/43 pass.
+- **`pnpm run lint`** ✅ 0 errors, 10 warnings (pre-existing).
+- **`pnpm run qa:bundle` / `qa:contrast` / `qa:doc-versions`** ✅ PASS.
+- **`pnpm run qa:english`** ❌ 29 issues (vs 29 в iter 7 — no regression). Все pre-existing false positives: `[Model: see Appendix B]` в `<span class="model-note">` (1 в part_04, 5 в part_07a) + BEM class names с `__` в part_07a. qa:english script не распознаёт model-note span pattern.
+- **`pnpm run qa:syntax`** ❌ 236 markdown false positives (BEM class names с `__` — `ring-label--g3` и т.д.). Same count as iter 7 baseline. part_04 — 22 false positives (same as iter 8).
+- **`pnpm run qa:csp`** ❌ FAIL — `index.html has 2 inline script(s)`. **Pre-existing с iter 5** (`src/shell/index.html` имел 2 inline scripts с commit 60d7abd: `document.documentElement.classList.add('js')` + `mermaid.initialize({...})`). iter 8 worklog заявлял "qa без новых critical" но не упоминал qa:csp — был silent failing. **Зарегистрирован как KI#16** (NEW, ACTIVE).
 
-### Изменённые файлы в iter 8
+### Изменённые файлы в iter 9
 
 | File | Action | Reason |
 |------|--------|--------|
-| `src/master/part_04.html` | **Migrated** | Pilot migration против Canon §4. 777 → 676 строк (-13%). 4 dup визуализации удалены, 1 orphan удалён, re-explanation сжато, 2 unique infographic сохранены. |
-| `docs/canon/part_04.md` | Updated | Front-matter → ✅ MIGRATED (iter 8). Migration Notes переписана: каждая строка с пометкой DONE/DEVIATED/PARTIAL/BONUS. Принцип «viz > dry text» зафиксирован. |
-| `docs/canon/_README.md` | Updated | §5 Migration Status: Part 4 → ✅ iter 8 (DONE). §9 история: iter 8 record. |
-| `STATUS.md` | Rewritten | iter 8 status, KI#13/KI#14 ACTIVE. |
-| `worklog.md` | Updated | iter 7 → one-liner, iter 8 = этот record. |
-| `AGENT_NAVIGATION.md` | Updated | Header iter 8. §8 iter 8 record + iter 9+ roadmap. §10 hint для iter 9. |
-| `CHANGELOG.md` | Updated | Добавлена запись `[9.1.8]` — iter 8 (Part 4 migration). |
-| `PLAN.md` | Updated | §5 iter 8 status (DONE) + iter 9+ roadmap. |
-| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | §5.2 iter 8 row → ✅ DONE. |
+| `STATUS.md` | Rewritten | iter 9 status, KI#16 NEW ACTIVE. iter 8 details → опущены (см. CHANGELOG [9.1.8]). |
+| `worklog.md` | Updated | iter 8 → one-liner, iter 9 = этот record. |
+| `AGENT_NAVIGATION.md` | Updated | Header iter 8 → iter 9. §8 iter 8 compressed, iter 9 record + iter 10+ roadmap. §6 pitfall #34 (KI#16). §10 hint для iter 10 (Canon Part 7A). |
+| `CHANGELOG.md` | Updated | [9.1.9] entry — iter 9 validation pass. |
+| `PLAN.md` | Updated | §5 iter 9 → ✅ DONE, iter 10+ roadmap. |
+| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | §5.2 iter 9 row → ✅ DONE. §8 iter 9 stop point + iter 10 priorities. |
 
 ---
 
 ## Known Issues
 
-**KI#13 (ACTIVE, MEDIUM, found iter 5) — 122 inline `style=` + 22 "content outside section" warnings в master HTML (1 orphan удалён в iter 8, было 123 + 23).** Defer до post-Canon миграции (см. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.3 — KI#13 делается после миграции каждого Part'а, в той же итерации; в iter 8 удалён 1 orphan как побочный эффект миграции Part 4).
+**KI#13 (ACTIVE, MEDIUM, found iter 5)** — 123 inline `style=` + 22 "content outside section" warnings в master HTML (iter 8 удалил 1 orphan, было 123 + 23; iter 9 verify — то же 123 + 22). Defer до post-Canon миграции (см. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.3).
 
-**KI#14 (ACTIVE, MEDIUM-HIGH, found iter 6) — Content duplication VS-EMBED ↔ текст.** 17 VS-EMBED'ов сосуществуют с 8 устаревшими infographic + 1 mermaid = 26 визуализаций параллельно с текстом (было 31 — Part 4 миграция iter 8 убрала 4 дубликата + 1 orphan). Концепции (GHOST, SPINE, FLAW и т.д.) пере-объясняются в каждой секции. Визуализации **дублируют** текст вместо **замещения**. Part 4 мигрирован (iter 8) — остальные Parts в очереди.
+**KI#14 (ACTIVE, MEDIUM-HIGH, found iter 6)** — Content duplication VS-EMBED ↔ текст. 17 VS-EMBED'ов сосуществуют с 8 устаревшими infographic + 1 mermaid = 26 визуализаций параллельно с текстом (iter 8 убрал 4 дубликата + 1 orphan из 31). Part 4 мигрирован (iter 8) + валидирован (iter 9). Остальные Parts в очереди (iter 10..17).
 
-**Fix plan (iter 9..18):** Canon creation iter 7 ✅ (Part 4) + migration iter 8 ✅ (Part 4). Дальше: iter 10–17 (остальные Parts) → iter 18 (final cleanup). См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5 Migration Status.
+**KI#16 (NEW, ACTIVE, MEDIUM, found iter 9)** — `pnpm run qa:csp` FAIL: `index.html has 2 inline script(s)`. Pre-existing с iter 5 (`src/shell/index.html` строки 24 + 108: `document.documentElement.classList.add('js')` + `mermaid.initialize({...})`). Build pipeline регенерирует `index.html` (root fallback) из `src/shell/index.html` на каждом `pnpm run build`. Не блокирует Canon миграцию (CSP policy не enforced на GitHub Pages), но нарушает §6 pitfall #1 (no inline scripts). **Fix plan (iter 10+):** (a) вынести mermaid.initialize в `src/shell/widgets/mermaid-init.js` + загружать через `<script src="...">`; (b) оставить `document.documentElement.classList.add('js')` как essential inline (add CSP `unsafe-inline` exception) или вынести в external tiny script. Рекомендуется (a) + tiny inline exception.
+
+**Fix plan (iter 10..18):** Canon creation iter 7 ✅ (Part 4) + migration iter 8 ✅ (Part 4) + validation iter 9 ✅ (Part 4). Дальше: iter 10–11 (Canon Part 7A + migrate) → iter 12–17 (остальные Parts) → iter 18 (final cleanup) → iter 19+ (KI#13 + KI#16 + Phase 4 SVG integration). См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5 Migration Status.
 
 ---
 
@@ -75,7 +77,7 @@
 | **Python 3.10+** | Для CI-wired скриптов и QA tools. |
 | **GitHub Pages deploy** | Через GitHub Actions на push в main. |
 | **QA scripts wired as `qa:*` (iter 4)** | `qa:csp`, `qa:bundle`, `qa:contrast`, `qa:english`, `qa:syntax`, `qa:doc-versions`, `qa:interactive`. Aggregate: `pnpm run qa`. `validate:master` wired в `precommit` (iter 5). |
-| **Canonical Guide Spec (iter 7+8)** | `docs/canon/part_NN.md` — Markdown-источник правды для контента. Master HTML = генерируемый артефакт. Визуализации = замещение, не дополнение. Part 4 Canon создан (iter 7) + master HTML мигрирован (iter 8). См. `docs/canon/_README.md` и `docs/CONTENT_RESTRUCTURE_PLAN.md`. |
+| **Canonical Guide Spec (iter 7+8)** | `docs/canon/part_NN.md` — Markdown-источник правды для контента. Master HTML = генерируемый артефакт. Визуализации = замещение, не дополнение. Part 4 Canon создан (iter 7) + master HTML мигрирован (iter 8) + валидирован (iter 9). См. `docs/canon/_README.md` и `docs/CONTENT_RESTRUCTURE_PLAN.md`. |
 | **Migration principle: viz > dry text (iter 8)** | При выборе «удалить текст или визуализацию» — визуализация сохраняется, dry-дублирующий текст удаляется. Unique визуализации не удаляются (даже если Canon рекомендует). Unique text в таблицах не удаляется (даже если Canon рекомендует сократить). Применяется «очень деликатно». |
 | **Runtime data: `data/anchor-redirects.json` only** | Только `data/anchor-redirects.json` загружается lazy-loader.js. `docs/anchor-redirects.json` удалён в iter 7 (KI#15 fix). Single source of truth. |
 

@@ -239,6 +239,7 @@ docs/canon/
 
 - **iter 7 (2026-06-23):** Создан `docs/canon/` scaffold + этот `_README.md` + `part_04.md` (пилот). Migration status = NOT MIGRATED. iter 8 = migrate `part_04.html`.
 - **iter 8 (2026-06-23):** Миграция `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%). 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён (fixes 1 из 23 KI#13 warnings), 2 re-explanation абзаца сжаты до 1 предложения. 2 unique infographic сохранены (deviation от Canon Migration Notes — по предпочтению пользователя «viz > dry text»). LIE таблица сохранена полностью (4 строки, все уникальны). Build PASS, validate:master PASS, qa без новых critical findings. Canon `part_04.md` Migration Notes таблица обновлена с пометками DONE/DEVIATED/PARTIAL/BONUS.
+- **iter 9 (2026-06-24):** Validation pass Part 4 migration (iter 8). Static HTML sanity check (11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs) + served `parts/part_04.html` через локальный сервер (40 825 bytes, all expected content present, all removed content absent) + `pnpm run validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:contrast`/`qa:doc-versions` PASS. `qa:english`/`qa:syntax` — same false positives as iter 7 (no regression). `qa:csp` FAIL → KI#16 NEW (pre-existing с iter 5, не задокументирован ранее). 6 docs updated. Никаких правок master HTML / visual-system / widget JS.
 
 ---
 
