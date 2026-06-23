@@ -1,5 +1,41 @@
 # Changelog
 
+## [9.1.14] - 2026-06-24
+
+### Added (iter 14 — Canon Part 1+2+3 creation)
+- **Canon Part 1 created** — `docs/canon/part_01.md` (186 строк). 7 H2 секций (по одной на каждый `data-section` из `src/master/part_01.html`): p1_value_proposition, p1_card_overview, p1_structure_overview, p1_core_rules, p1_token_budget_ref, p1_pipeline_ref, p1_top3_problems.
+- **Canon Part 2 created** — `docs/canon/part_02.md` (238 строк). 6 H2 секций: p2_basic_anchors, p2_anchor_rules, p2_anchor_examples, p2_embodiment, p2_env_reactivity, p2_sensory_anchors.
+- **Canon Part 3 created** — `docs/canon/part_03.md` (315 строк). 8 H2 секций: p3_voice_isolation, p3_influence_hierarchy, p3_examples_rules, p3_examples_quality, p3_greeting_ref, p3_voice_leak, p3_joker_case, p3_multi_char.
+- **4 VS-маркера total:** E01 (Card Anatomy, Part 1 preamble), E03 (Behavioral Anchors T→A→P, Part 2 preamble), E04 (Embodiment Protocol, Part 2 preamble), E07 (Voice Influence Hierarchy, Part 3 preamble).
+- **Front-matter** для всех 3 Canon files: `Migration status: ✅ MIGRATED (iter 14)` (Canon created + master HTML migrated end-to-end за один iter, по образцу iter 12/13).
+- **Migration Notes таблицы:** Part 1 (10 элементов: 9 «Оставить» + 1 «Сжать»), Part 2 (20 элементов: 17 «Оставить» + 3 «Сжать»), Part 3 (9 элементов: все «Оставить», 0 «Сжать»).
+
+### Changed (iter 14 — Part 1+2+3 master HTML migration)
+- **Part 1 master HTML migrated** против Canon §1 (`src/master/part_01.html`, 390 → 365 строк, -6.4%).
+  - #14: `p1_structure_overview` `<div class="mermaid">` dependency graph (25 строк + intro paragraph «Диаграмма ниже показывает…») → удалён. Дублировал auto-TOC (placeholder `AUTO_TOC_PLACEHOLDER` ниже по файлу). Заменён на 1-строчный intro paragraph + auto-TOC как единственный навигационный артефакт. Снижает «2 mermaid blocks» из плана iter 6 до «1 mermaid block» (оставшийся в part_04).
+- **Part 2 master HTML migrated** против Canon §2 (`src/master/part_02.html`, 443 → 415 строк, -6.3%).
+  - #15: `p2_basic_anchors` `<div class="infographic">` «Формат Anchors: Trigger → Action → Price» (3-step `inf-pipeline-vertical`, 23 строки) → удалён. Дублировал VS-EMBED E03 (T→A→P split-view) выше. Заменён на компактную 3-row table.
+  - #16: `p2_basic_anchors` `<pre class="plain-copy">` «Формат Anchors: Trigger → Action → Price» (text duplicate, 4 строки) → удалён. Был текстовым fallback для infographic #15; после удаления infographic — fallback тоже не нужен.
+  - #17: `p2_embodiment` `<div class="infographic">` «Embodiment Protocol (протокол телесности)» (4-step `inf-pipeline`, 29 строк) → удалён. Дублировал VS-EMBED E04 (funnel-stack 4 layers State→Body→Sensor→Speech) выше. Заменён на компактную 4-row table.
+- **Part 3 master HTML migrated** против Canon §3 (`src/master/part_03.html`, 452 → 452 строк, 0%). Контент плотный, дубликатов не найдено. 0 compression candidates applied. Все секции содержат уникальный контент: 5 таблиц, 4 RULE callouts, 2 RECOMMENDATION/EXAMPLE callouts, 2 diff-view, 2 ILLUSTRATION `<pre><code>` blocks, 1 TEMPLATE pre. `<pre class="plain-copy">` блоки (2 шт.) — accessibility-fallback для diff-view визуализаций (не для VS-EMBED), сохранены.
+- **Canon front-matter updated:** `Migration status: ✅ MIGRATED (iter 14)`, `Last synced: 2026-06-24 (iter 14)` для всех 3 Canon files.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, baseline warnings = KI#13 baseline, no regression).
+- `pnpm run build` ✅ SUCCESS (hash df283246, same as iter 8–13).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (10 pre-existing warnings).
+- `pnpm run qa:bundle` ✅ PASS. `pnpm run qa:doc-versions` ✅ PASS.
+
+### Notes
+- iter 14 = Canon Part 1+2+3 creation + 3 master HTML migrations (end-to-end за один iter, по образцу iter 12/13). 13 files updated.
+- Plan iter 6 заявлял «4 infographic в part_02» — фактически 2 infographic + 1 plain-copy = 3 stale duplicate viz-блока (plan over-counted). Все 3 удалены в iter 14.
+- KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+- iter 15+ priorities: iter 15 reserved (не нужен), iter 16 = Canon creation + migrate для Part 5+6+7B+10 (Psychology, CoT, Lorebook, Examples).
+
+---
+
 ## [9.1.13] - 2026-06-24
 
 ### Added (iter 13 — Canon Part 9 creation)

@@ -171,9 +171,9 @@ docs/canon/
 
 | Part | Canon file | Created | Migrated | Iter |
 |------|-----------|---------|----------|------|
-| Part 1 | `part_01.md` | ❌ | ❌ | iter 14 (planned) |
-| Part 2 | `part_02.md` | ❌ | ❌ | iter 14 (planned) |
-| Part 3 | `part_03.md` | ❌ | ❌ | iter 14 (planned) |
+| Part 1 | `part_01.md` | ✅ iter 14 | ✅ iter 14 | iter 14 (DONE) |
+| Part 2 | `part_02.md` | ✅ iter 14 | ✅ iter 14 | iter 14 (DONE) |
+| Part 3 | `part_03.md` | ✅ iter 14 | ✅ iter 14 | iter 14 (DONE) |
 | Part 4 | `part_04.md` | ✅ iter 7 | ✅ iter 8 | iter 7–8 (DONE) |
 | Part 5 | `part_05.md` | ❌ | ❌ | iter 16 (planned) |
 | Part 6 | `part_06.md` | ❌ | ❌ | iter 16 (planned) |
@@ -243,7 +243,8 @@ docs/canon/
 - **iter 10 (2026-06-24):** Canon Part 7A created (`docs/canon/part_07a.md`, 802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Master HTML не тронут (iter 11 задача). KI#17 NEW (documentation drift — fixed). 8 docs updated.
 - **iter 11 (2026-06-24):** Part 7A master HTML migrated (`src/master/part_07a.html`, 1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
 - **iter 12 (2026-06-24):** Canon Part 8 created (`docs/canon/part_08.md`, 411 строки, 16 H2 секций, 1 VS-маркер для E12) + master HTML мигрирован (`src/master/part_08.html`, 521 → 507 строк, -2.7%). 2 compression candidates applied: #3 intro paragraph merge, #21 AP-9 Elena SPINE check example → cross-ref Part 4. 29 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
-- **iter 13 (2026-06-24):** Canon Part 9 created (`docs/canon/part_09.md`, 351 строка, 11 H2 секций, 2 VS-маркера для E13 в preamble + E14 в §9.1) + master HTML мигрирован (`src/master/part_09.html`, 596 → 582 строк, -2.3%). 1 compression candidate applied: #13 `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, дублировал §9.7 `p9_test_scenarios` таблицу) → 1-строчный cross-ref. 20 "Оставить" без изменений (quality scale table с Examples column, One Change Rule, basic_checklist per-block, symptom_table 11 симптомов, decision_tree 5 групп, test_scenarios 4-col, element_scenario_map, success metrics, 12B symptoms, Quick Check, Full Check, Elena/Vyshcherblenny examples). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED. 10 docs updated.
+- **iter 13 (2026-06-24):** Canon Part 9 created (`docs/canon/part_09.md`, 351 строка, 11 H2 секций, 2 VS-маркера для E13 в preamble + E14 в §9.1) + master HTML мигрирован (`src/master/part_09.html`, 596 → 582 строк, -2.3%). 1 compression candidate applied: #13 `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, дублировал §9.7 `p9_test_scenarios` таблицу) → 1-строчный cross-ref. 20 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED. 10 docs updated.
+- **iter 14 (2026-06-24):** Canon Part 1+2+3 created (`docs/canon/part_01.md` 186 строк + `part_02.md` 238 строк + `part_03.md` 315 строк, всего 739 строк, 21 H2 секций, 4 VS-маркера E01+E03+E04+E07) + 3 master HTML мигрированы end-to-end за один iter. Part 1: 390 → 365 строк (-6.4%, #14 mermaid → auto-TOC duplicate removed). Part 2: 443 → 415 строк (-6.3%, #15+#16+#17 — 2 infographic + 1 plain-copy removed как дубликаты VS-EMBED E03/E04). Part 3: 452 → 452 строк (0%, контент плотный, дубликатов не найдено). 4 compression candidates applied total. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED для всех 3 files. 10 docs updated.
 
 ---
 

@@ -270,32 +270,7 @@
 <section data-section="p1_structure_overview" data-toc-nav>
 <h3>Структура гайда</h3>
 
-<p>Диаграмма ниже показывает концептуальный поток гайда: какие концепции зависят от каких и в каком порядке следует изучать материал.</p>
-
-<div class="mermaid">
-graph TD
-    OCEAN["OCEAN (Part 5)"] --> SPINE["SPINE (Part 4)"]
-    Enneagram["Enneagram (Part 5)"] --> SPINE
-    SPINE --> Anchors["Behavioral Anchors (Part 2)"]
-    SPINE --> Voice["Voice (Part 3)"]
-    SPINE --> CoT["CoT (Part 6)"]
-    Anchors --> Embodiment["Embodiment Protocol (Part 2)"]
-    Anchors --> SP_assembly["System Prompt Assembly (Part 7A)"]
-    Voice --> SP_assembly
-    CoT --> SP_assembly
-    Identity["Identity Block (Part 7A)"] --> SP_assembly
-    AntiGod["Anti-godmoding (Part 7A)"] --> SP_assembly
-    TokenBudget["Token Budget (Part 7A)"] --> SP_assembly
-    Embodiment --> CoreDir["CORE DIRECTIVES (Part 7A)"]
-    CoreDir --> SP_assembly
-    SP_assembly --> Lorebook["Lorebook + Greeting Message (Part 7B)"]
-    SP_assembly --> Diagnostics["Diagnostics (Part 9)"]
-    Lorebook --> Diagnostics
-    Diagnostics --> Examples["Full Examples (Part 10)"]
-    AntiPatterns["Anti-Patterns (Part 8)"] -.->|"fix links"| SPINE
-    AntiPatterns -.->|"fix links"| SP_assembly
-    AntiPatterns -.->|"fix links"| Voice
-</div>
+<p>Оглавление ниже показывает концептуальный поток гайда: какие Parts зависят от каких и в каком порядке следует изучать материал.</p>
 
 <h4>Содержание</h4>
 

@@ -334,10 +334,10 @@ SPINE — психологический каркас из 5 элементов,
 | **11** | Migrate Part 7A | ✅ DONE — Мигрирован `src/master/part_07a.html` против Canon §7A (1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated. | `src/master/part_07a.html`, `docs/canon/part_07a.md` | LOW |
 | **12** | Canon Part 8 + migrate | ✅ DONE — Canon `docs/canon/part_08.md` создан (411 строк, 16 H2 секций, 1 VS-маркер E12) + `src/master/part_08.html` мигрирован (521 → 507 строк, -2.7%). 2 compression candidates applied (#3 intro paragraphs merge, #21 AP-9 Elena SPINE check → cross-ref Part 4). 29 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. End-to-end за один iter (Canon + migrate). 9 docs updated. | `docs/canon/part_08.md`, `src/master/part_08.html` | LOW |
 | **13** | Canon Part 9 + migrate | ✅ DONE — Diagnostics (596 строк master HTML, 11 секций, 2 VS-EMBED E13+E14). Canon creation + migrate end-to-end (по образцу iter 12). Canon `docs/canon/part_09.md` (351 строка) + `src/master/part_09.html` мигрирован (596 → 582 строк, -2.3%). 1 compression candidate applied (#13 p9_test_requirements Table 1 → cross-ref на §9.7 p9_test_scenarios). 20 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED. 10 docs updated. | `docs/canon/part_09.md`, `src/master/part_09.html` | LOW |
-| **14** | Canon Part 1, 2, 3 | Базовые блоки, Anchors, Voice | `docs/canon/part_01..03.md` | LOW |
-| **15** | Migrate Part 1, 2, 3 | Миграция + cleanup 4 устаревших infographic в Part 2 | `src/master/part_01..03.html` | MEDIUM |
-| **16** | Canon Part 5, 6, 7B, 10 | Psych toolkit, CoT, Lorebook, Examples | `docs/canon/part_05.md`, `06.md`, `07b.md`, `10.md` | LOW |
-| **17** | Migrate Part 5, 6, 7B, 10 | Миграция 4 файлов | `src/master/part_05..07b,10.html` | MEDIUM |
+| **14** | Canon Part 1, 2, 3 + migrate | ✅ DONE — Базовые блоки, Anchors, Voice. End-to-end за один iter (по образцу iter 12/13). Canon `docs/canon/part_01.md` (186 строк, 7 секций, 1 VS-маркер E01) + `docs/canon/part_02.md` (238 строк, 6 секций, 2 VS-маркера E03+E04) + `docs/canon/part_03.md` (315 строк, 8 секций, 1 VS-маркер E07) созданы. 3 master HTML мигрированы: `part_01.html` 390 → 365 строк (-6.4%, #14 mermaid → auto-TOC duplicate), `part_02.html` 443 → 415 строк (-6.3%, #15+#16+#17 — 2 infographic + 1 plain-copy removed как дубликаты VS-EMBED E03/E04), `part_03.html` 452 → 452 строк (0%, контент плотный). 4 compression candidates applied. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Plan заявлял «4 infographic в part_02» — фактически 2 infographic + 1 plain-copy = 3 stale duplicate viz-блока (plan over-counted), все 3 удалены. 10 docs updated. | `docs/canon/part_01..03.md`, `src/master/part_01..03.html` | LOW |
+| **15** | (reserved) | Не нужен — iter 14 покрыл Part 1+2+3 end-to-end. | — | — |
+| **16** | Canon Part 5, 6, 7B, 10 + migrate | Psych toolkit, CoT, Lorebook, Examples | `docs/canon/part_05.md`, `06.md`, `07b.md`, `10.md` | LOW |
+| **17** | (reserved) | Продолжение iter 16 если 4 Parts не помещаются в один iter. | `src/master/part_05..07b,10.html` | MEDIUM |
 | **18** | Final cleanup | Удалить устаревшие `infographic` + `mermaid` (12+2). Cleanup `docs/content_map.md` (сделать mirror канона). Cleanup `terminology_dictionary.md`. | varies | MEDIUM |
 | **19+** | KI#13 + Phase 4 | После content cleanup: KI#13 inline styles + Phase 4 actual SVG integration | varies | HIGH |
 
@@ -412,23 +412,23 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 13 COMPLETE (Canon Part 9 + migrate).** Canon `docs/canon/part_09.md` создан (351 строка, 11 H2 секций, 2 VS-маркера E13 в preamble + E14 в §9.1) + `src/master/part_09.html` мигрирован (596 → 582 строк, -2.3%). 1 compression candidate applied (#13 p9_test_requirements Table 1 → 1-строчный cross-ref на §9.7 p9_test_scenarios). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+**Iter 14 COMPLETE (Canon Part 1+2+3 + migrate).** Canon `docs/canon/part_01.md` (186 строк, 7 H2 секций, 1 VS-маркер E01) + `docs/canon/part_02.md` (238 строк, 6 H2 секций, 2 VS-маркера E03+E04) + `docs/canon/part_03.md` (315 строк, 8 H2 секций, 1 VS-маркер E07) созданы. 3 master HTML мигрированы end-to-end за один iter: `part_01.html` 390 → 365 строк (-6.4%, #14 mermaid → auto-TOC duplicate), `part_02.html` 443 → 415 строк (-6.3%, #15+#16+#17 — 2 infographic + 1 plain-copy removed как дубликаты VS-EMBED E03/E04), `part_03.html` 452 → 452 строк (0%, контент плотный). 4 compression candidates applied. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
 
-**Iter 14 priorities (Canon Part 1+2+3 + migrate):**
+**Iter 15 (reserved — не нужен) → Iter 16 priorities (Canon Part 5+6+7B+10 + migrate):**
 
-1. **Canon creation + migrate** для Part 1, 2, 3 (Foundations, Anchors, Voice) — по образцу iter 12/13 (end-to-end за один iter на Part, либо все 3 за один iter если помещаются). Перед стартом: `rg "VS-EMBED:" src/master/part_01.html src/master/part_02.html src/master/part_03.html` для inventory.
-2. **Особое внимание Part 2:** cleanup 4 устаревших `infographic inf-pipeline` блоков (см. §2.6 Pattern F, §9.1 confirmed 4 в part_02). Заменить на VS-маркеры в Canon + удалить из master HTML при миграции.
+1. **Canon creation + migrate** для Part 5 (Psychology: OCEAN, Enneagram, MBTI), Part 6 (CoT), Part 7B (Lorebook + Greeting), Part 10 (Examples) — по образцу iter 12/13/14 (end-to-end за один iter на Part, либо все 4 за один iter если помещаются). Перед стартом: `rg "VS-EMBED:" src/master/part_05.html src/master/part_06.html src/master/part_07b.html src/master/part_10.html` для inventory.
+2. **Особое внимание Part 5:** OCEAN Overload warning (referenced в Part 9 §9.6 decision tree как `[ref: part_05.md §5.X — OCEAN Warning]`). Part 6: CoT referenced в Part 9 §9.5 + §9.10. Part 7B: Greeting referenced в Part 3 §3.5 + Part 9 §9.3. Part 10: full cards Elena + Vyshcherblenny referenced в Part 9 §9.11 (Pre-Deploy examples).
 3. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint`.
 4. **После миграции** — обновить Canon front-matter `Migration status: ✅ MIGRATED` + Migration Notes таблица.
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 14 прочитай:
-> 1. `STATUS.md` (iter 13 COMPLETE, Part 4+7A+8+9 ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
-> 2. `worklog.md` (iter 13 record)
-> 3. `AGENT_NAVIGATION.md` (§8 iter 14+ roadmap)
-> 4. `docs/canon/_README.md` (§5 migration status — Part 4+7A+8+9 ✅, остальные ❌)
-> 5. `docs/canon/part_09.md` (reference pattern для Canon+migrate end-to-end за один iter)
+> Перед стартом iter 16 прочитай:
+> 1. `STATUS.md` (iter 14 COMPLETE, Part 1+2+3+4+7A+8+9 ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
+> 2. `worklog.md` (iter 14 record)
+> 3. `AGENT_NAVIGATION.md` (§8 iter 15+ roadmap)
+> 4. `docs/canon/_README.md` (§5 migration status — Part 1+2+3+4+7A+8+9 ✅, остальные ❌)
+> 5. `docs/canon/part_01.md`, `docs/canon/part_02.md`, `docs/canon/part_03.md` (reference pattern для Canon+migrate end-to-end за один iter — iter 14 fresh references)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 
@@ -457,8 +457,8 @@ SPINE — психологический каркас из 5 элементов,
 | CORE DIRECTIVES mentions | 36 | 36 | ✅ |
 | AP-1..AP-15 per pattern | 4–9 | 4–9 | ✅ |
 | VS-EMBED markers | 17 | 17 | ✅ |
-| Stale `infographic` blocks | 12 | 12 (4 part_02 + 6 part_04 + 2 part_07b) | ✅ |
-| `mermaid` blocks | 2 | 2 (part_01 + part_04) | ✅ |
+| Stale `infographic` blocks | 12 | 8 (iter 14 update: 2 removed from part_02 + 1 plain-copy removed; original «4 в part_02» — over-count, actually 2; current state = 6 part_04 + 2 part_07b) | ✅ (iter 14 update) |
+| `mermaid` blocks | 2 | 1 (iter 14 update: part_01 mermaid removed как auto-TOC duplicate; remaining 1 in part_04, planned for iter 16+ cleanup) | ✅ (iter 14 update) |
 | Inline `style=` attributes | 123 | 123 | ✅ |
 | Master HTML total lines | ~6 600 | 6 576 | ✅ |
 | visual-system/elements/ files | 17 (E01..E17) | 17 / 6 369 строк | ✅ |
