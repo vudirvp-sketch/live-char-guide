@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 5. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 6. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md`**, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -253,6 +253,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 29. **Final a11y pass (FIX-31)** — `pnpm run test:a11y` (axe, WCAG 2a/2aa). Не коммитить с a11y violations.
 30. **Orphan scripts audit (meta-pitfall, iter 3 finding)** — перед добавлением нового скрипта в `scripts/`: (a) определить, wired он в `package.json` или CI workflows; (b) если orphan — задокументировать в `AGENT_NAVIGATION.md` §1 как `[orphan QA tool]`; (c) если зависит от другого файла (как `validate-migration.mjs` от `migration_map.md`) — обеспечить fallback или удалить связку. В iter 3 удалены: `validate-migration.mjs` + `gen-redirect-map.mjs` + `migration_map.md` (KI#8).
 31. **Inline scripts в master HTML (KI#12, fixed iter 5)** — visual-system integration добавила 17 inline `<script type="module">` блоков в master HTML, нарушая §3 rule. Fix: migrate в `src/shell/widgets/vs-*.js` (5 файлов: scroll-observer + 4 element-specific). `vs-scroll-observer.js` использует MutationObserver для lazy-loaded content. **Правило:** все JS для visual-system elements → `src/shell/widgets/vs-eXX-*.js`, НЕ inline в master HTML.
+32. **Content duplication VS-EMBED ↔ текст (KI#14, found iter 6, ACTIVE)** — 17 VS-EMBED'ов сосуществуют с 12 устаревшими `infographic` + 2 `mermaid` = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз в master HTML (~каждые 40 строк), SPINE — 160. Каждая секция самодостаточна и пере-объясняет концепции. **Fix:** Canonical Guide Spec (`docs/canon/`) — текстовый источник правды + part-by-part миграция (iter 7..18). См. `docs/CONTENT_RESTRUCTURE_PLAN.md`. **Правило:** визуализация = **замещение**, не **дополнение**. Если VS-EMBED показывает концепцию — текст не должен её пере-объяснять.
 
 ---
 
@@ -275,6 +276,8 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/elena_character_bible.md` | При изменении Elena |
 | `docs/vyshcherblenny_character_bible.md` | При изменении Vysherblenny |
 | `docs/anchor-redirects.json` | При rename/delete section IDs |
+| `docs/CONTENT_RESTRUCTURE_PLAN.md` | При пересмотре стратегии переработки контента (iter 6+) |
+| `docs/canon/` (planned iter 7) | При создании/обновлении Canonical Guide Spec — один файл на Part |
 | `visual-system/PLAN.md` | При изменении visual system roadmap |
 
 ### Удалено в iter 1+2+3+4 (docs restructure)
@@ -316,10 +319,18 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 **iter 5:** Закрыты KI#11 + KI#12 (scripts). Создан `visual-system/tokens.json` (8 semantic colors + 5 gray scale) — `qa:contrast` работает. 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. `validate:master` wired в precommit. Результат: 0 errors (было 10). KI#13 NEW: 123 inline `style=` + 23 "content outside section" warnings → defer iter 6+.
 
-**iter 6+ — что осталось:**
-- **KI#13 fix:** 123 inline `style=` → CSS classes + 23 "content outside section" → wrap in sections.
-- **Phase 4 actual integration:** Заменить textual content в master HTML на SVG (17 elements per `visual-system/PLAN.md` §4.0).
-- **qa:syntax + qa:english false positives** — context-aware parsing.
+**iter 6 (аналитическая):** Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — анализ дублирования (7 паттернов A..G) + стратегия Canonical Guide Spec + дорожная карта iter 7..19. KI#14 NEW (content duplication, ACTIVE, MEDIUM-HIGH). Никаких правок master HTML / visual-system — только docs. Подробности: `docs/CONTENT_RESTRUCTURE_PLAN.md`.
+
+**iter 7+ — что осталось (пересмотрено в iter 6):**
+- **iter 7:** Canon scaffold `docs/canon/` + Canon Part 4 (пилот, самый дубль-тяжёлый). Только Markdown, без правок HTML.
+- **iter 8:** Migrate `part_04.html` против Canon §4. Удалить дубликаты + 6 устаревших infographic.
+- **iter 9:** Validate pilot Part 4 (visual diff).
+- **iter 10–17:** Canon + migrate оставшихся Parts (7A, 8+9, 1+2+3, 5+6+7B+10).
+- **iter 18:** Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
+- **iter 19+:** KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
+- **qi:syntax + qa:english false positives** — low priority, не блокирует Canon.
+
+**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2.
 
 ### OP-2 — Дублирующие папки widgets/ и assets/ [CLOSED iter 2]
 
@@ -385,4 +396,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 6 прочитай `STATUS.md` (KI#13 ACTIVE — 123 inline styles + 23 content-outside-section), `worklog.md` (iter 5 record), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 6+ пунктами). iter 6 priorities: (1) KI#13 fix — migrate 123 inline `style=` → CSS classes + wrap 23 content-outside-section elements, (2) Phase 4 actual integration start (replace textual content with SVG in master HTML). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом iter 7 прочитай `STATUS.md` (KI#13 + KI#14 ACTIVE), `worklog.md` (iter 6 record — analytical pass), этот файл (AGENT_NAVIGATION §6 pitfall #32, §8 iter 7+ roadmap), `docs/CONTENT_RESTRUCTURE_PLAN.md` (полный план — §4.3 Canon template, §5.2 iter 7 задача), `src/master/part_04.html` (целевой файл для Canon §4). iter 7 priorities: (1) Создать `docs/canon/` scaffold + `_README.md`, (2) Написать `docs/canon/part_04.md` (Markdown, без HTML правок). НЕ мигрировать `part_04.html` в iter 7 — это iter 8 задача. Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.

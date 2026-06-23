@@ -228,9 +228,24 @@ Stage Summary:
 - **KI#12 (PARTIAL, scripts → 0 errors):** Architecture decision (b) — migrate 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. Удалены 17 inline scripts из 10 master HTML файлов. `validate:master` wired в `precommit`.
 - **KI#13 (NEW, ACTIVE):** 123 inline `style=` attributes + 23 "content outside section" warnings. Defer iter 6+.
 
-**Iter 6+ (следующий запуск):**
-1. **KI#13 fix** — 123 inline `style=` → CSS classes + 23 "content outside section" → wrap in sections.
-2. **Phase 4 actual integration** — Заменить textual content в master HTML на SVG (17 elements per `visual-system/PLAN.md` §4.0).
-3. **qa:syntax + qa:english false positives** — context-aware parsing.
+**Iter 6 завершена (analytical pass):** KI#14 NEW (content duplication, ACTIVE, MEDIUM-HIGH).
+- Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — анализ 7 паттернов дублирования (Pattern A..G) + стратегия Canonical Guide Spec + дорожная карта iter 7..19.
+- Идентифицировано: 17 VS-EMBED + 12 устаревших infographic + 2 mermaid = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз (~каждые 40 строк), SPINE — 160.
+- Стратегия: Canonical Guide Spec (`docs/canon/part_NN.md`) — Markdown-источник правды. Визуализация = замещение, не дополнение.
+- Никаких правок master HTML / visual-system — только docs.
 
-**KI#1..KI#12 закрыты. KI#13 — ACTIVE, defer iter 6+.**
+**Iter 7+ (пересмотрено в iter 6):**
+1. **iter 7** — Canon scaffold `docs/canon/` + `_README.md` + Canon Part 4 pilot (Markdown, без HTML правок).
+2. **iter 8** — Migrate `part_04.html` против Canon §4. Удалить дубликаты + 6 устаревших infographic.
+3. **iter 9** — Validate pilot Part 4 (visual diff в браузере).
+4. **iter 10–11** — Canon Part 7A + migrate (1168 строк, разбить на 2 итерации).
+5. **iter 12–13** — Canon Part 8+9 + migrate (anti-patterns + diagnostics, cross-refs).
+6. **iter 14–15** — Canon Part 1+2+3 + migrate (cleanup 4 устаревших infographic в Part 2).
+7. **iter 16–17** — Canon Part 5+6+7B+10 + migrate.
+8. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
+9. **iter 19+** — KI#13 (inline styles) + Phase 4 actual SVG integration — после content cleanup.
+10. **qa:syntax + qa:english false positives** — low priority, не блокирует Canon.
+
+**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2.
+
+**KI#1..KI#12 закрыты. KI#13 + KI#14 — ACTIVE, defer iter 7+.**
