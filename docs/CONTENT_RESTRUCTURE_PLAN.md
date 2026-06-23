@@ -26,7 +26,7 @@
 
 | Артефакт | Объём | Замечание |
 |----------|-------|-----------|
-| `src/master/*.html` (10 Parts + 3 Appendix) | ~6 600 строк / ~430 KB | Авторский контент, 124 секции |
+| `src/master/*.html` (10 Parts + 3 Appendix) | 6 576 строк / ~430 KB | Авторский контент, 98 секций (verified iter 6 review) |
 | `visual-system/elements/*.html` (E01..E17) | ~6 000 строк / ~250 KB | Standalone прототипы визуализаций |
 | `docs/*.md` (8 файлов) | ~2 500 строк / ~140 KB | Architecture, Bibles, Content Map, Terminology |
 | `src/shell/widgets/*.js` (15 виджетов) | ~3 000 строк / ~110 KB | Behavior-скрипты (не трогаем в миграции) |
@@ -34,7 +34,7 @@
 
 **Итого гайд-контента (без инфраструктуры):** ~15 000 строк / ~820 KB.
 
-### 1.2 Структура секций (124 секции в 14 файлах)
+### 1.2 Структура секций (98 секций в 14 файлах, verified iter 6 review)
 
 | Файл | Секций | VS-EMBED | Infographic | Mermaid | Таблиц |
 |------|--------|----------|-------------|---------|--------|
@@ -432,3 +432,107 @@ SPINE — психологический каркас из 5 элементов,
 > 6. `visual-system/elements/E05-spine-framework.html` + `E06-ghost-layers.html` (VS-элементы Part 4)
 >
 > Canon = Markdown, не HTML. Один концепт = одно место. VS-маркеры `[VS: E0X — ...]` вместо встроенной разметки. Примеры — единственный источник (не дублировать).
+
+---
+
+## 9. Validation Pass (iter 6 review)
+
+> Цель: проверить, что все цифры и утверждения в этом плане соответствуют фактическому состоянию репозитория. Найденные расхождения и упущения зафиксированы ниже.
+
+### 9.1 Подтверждено (без правок)
+
+Все ключевые метрики дублирования проверены case-sensitive word-boundary поиском `rg`:
+
+| Метрика | Заявлено | Фактически | Статус |
+|---------|----------|------------|--------|
+| GHOST mentions | 165 | 165 | ✅ |
+| SPINE mentions | 160 | 160 | ✅ |
+| FLAW mentions | 142 | 142 | ✅ |
+| LIE mentions | 104 | 104 | ✅ |
+| NEED mentions | 105 | 105 | ✅ |
+| WANT mentions | 108 | 108 | ✅ |
+| CoT mentions | 92 | 92 | ✅ |
+| OCEAN mentions | 72 | 72 | ✅ |
+| Enneagram mentions | 48 | 48 | ✅ |
+| MBTI mentions | 25 | 25 | ✅ |
+| CORE DIRECTIVES mentions | 36 | 36 | ✅ |
+| AP-1..AP-15 per pattern | 4–9 | 4–9 | ✅ |
+| VS-EMBED markers | 17 | 17 | ✅ |
+| Stale `infographic` blocks | 12 | 12 (4 part_02 + 6 part_04 + 2 part_07b) | ✅ |
+| `mermaid` blocks | 2 | 2 (part_01 + part_04) | ✅ |
+| Inline `style=` attributes | 123 | 123 | ✅ |
+| Master HTML total lines | ~6 600 | 6 576 | ✅ |
+| visual-system/elements/ files | 17 (E01..E17) | 17 / 6 369 строк | ✅ |
+
+### 9.2 Исправлено в этом pass
+
+| Где | Было | Стало | Причина |
+|-----|------|-------|---------|
+| §1.1 сводная таблица | "124 секции" | "98 секций" | Сумма по §1.2 таблице = 98, фактический `rg "data-section="` = 98. 124 — арифметическая ошибка. |
+| §1.2 заголовок | "124 секции в 14 файлах" | "98 секций в 14 файлах" | То же. |
+| `AGENT_NAVIGATION.md` §1 | "92 секции, ~6000 строк HTML" | "98 секций, ~6 600 строк HTML" | Устаревшая цифра из iter 1. Фактически 98 / 6 576. |
+
+### 9.3 Дополнения, найденные при validation (NEW)
+
+#### 9.3.1 Pattern H — `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json`
+
+**Симптом:** В репозитории существуют ДВА файла `anchor-redirects.json`:
+
+- `data/anchor-redirects.json` (108 строк, MD5 `f35bee35…`) — **runtime data**, загружается `src/shell/lazy-loader.js` (см. AGENT_NAVIGATION §1, §7 KEEP list). Содержит v8 → v9.1 redirects (`greeting` → `p7b_greeting`, `p8_ap15_*` → `p5_ocean_warning`).
+- `docs/anchor-redirects.json` (108 строк, MD5 `aa4f8d8c…`) — **stale duplicate**, содержит v8 → v9 redirects старого формата (`greeting` → `p3_greeting`, `p8_ap15_*` → `p8_ap15_ocean_overload`). Заявлен в AGENT_NAVIGATION §7 "при rename/delete section IDs", но фактически никто не обновлял после v9.1 restructure.
+
+**Класс дублирования:** Pattern G (docs ↔ master drift), но распространяется на **runtime data**, а не на prose. Это более серьёзно, чем prose drift, потому что `data/anchor-redirects.json` — working runtime, а `docs/anchor-redirects.json` — bit-rotten mirror.
+
+**Impact:** LOW для runtime (lazy-loader использует `data/`), но MEDIUM для documentation integrity: агент, читающий `docs/anchor-redirects.json` как референс, получит устаревшие редиректы.
+
+**Fix (iter 7+ cleanup):** Варианты:
+- (a) Удалить `docs/anchor-redirects.json`, оставить только `data/` (рекомендуется — single source of truth).
+- (b) Сделать `docs/` symlink на `data/` (нерекомендуется — git on Windows ломается).
+- (c) Синхронизировать при каждом change section ID (хрупко — забудут).
+
+**Рекомендация:** (a). Зарегистрировано как **KI#15** в STATUS.md.
+
+#### 9.3.2 Pattern E (Consequence Driven) более распространён, чем зафиксировано в §2.5
+
+§2.5 заявляет 3 места: `p7a_core_directives` (defined) + `p4_spine_mapping` (callout) + `part_09 symptom table`. Фактически `rg "Consequence Driven"` находит:
+
+- `part_07a.html` — **4 места** (lines 116, 159, 192, 1076) — определено в SVG, в тексте директивы, в `<pre><code>` примере, в System Prompt template. Это **каскад внутри одного Part'а**, не только cross-section.
+- `appendix_glossary.html` line 31-32 — **отдельное определение** в глоссарии (formal duplicate).
+- `part_04.html` line 531 — callout (как и заявлено).
+- `part_06.html` line 205 — `<!-- Demonstrates: ... -->` comment.
+- `part_10.html` — **5 мест** (lines 269, 395, 417, 424, 525, 572, 586) — во всех example-блоках.
+- `appendix_model_table.html` line 22 — таблица model capability.
+
+**Итого:** 12+ мест вместо 3 заявленных. Pattern E серьёзнее, чем описано. Это усилвает аргумент для Canon: "Consequence Driven" должен определяться **один раз** (Canon §7A), всё остальное — `[ref: §7A.6]`.
+
+#### 9.3.3 `CHANGELOG.md` отсутствует запись iter 6
+
+Последняя запись — `[9.1.5]` (iter 5, KI#11 + KI#12). iter 6 (KI#14 + CONTENT_RESTRUCTURE_PLAN.md) **не зафиксирован** в CHANGELOG. Добавлено в этом validation pass — см. `CHANGELOG.md` секцию `[9.1.6]`.
+
+#### 9.3.4 visual-system/integration/component-extracts/ (51 файл) не в scope
+
+`visual-system/integration/component-extracts/` содержит 51 файл (17 elements × 3: `E0X-script.js` + `E0X-styles.css` + `E0X-visual.html`) + `README.md`. Эти файлы — **извлечённые компоненты** из standalone prototypes для интеграции в master HTML.
+
+**Не проанализированы в iter 6:** не проверено, синхронизированы ли они с актуальными `visual-system/elements/E0X.html` (source) и `src/master/part_N.html` (target). Возможный drift: если standalone prototype обновлён, но extract не синхронизирован — integration возьмёт устаревший код.
+
+**Задача iter 7+ (PHASE 4 SVG integration):** Аудит `component-extracts/` — для каждого E0X проверить:
+1. Совпадает ли `E0X-visual.html` с соответствующим фрагментом `visual-system/elements/E0X.html`
+2. Используется ли `E0X-script.js` в `src/shell/widgets/vs-eXX-*.js` или orphan
+3. Используются ли `E0X-styles.css` в `src/assets/vs-styles.css` или orphan
+
+Если extracts orphan — удалить. Если используются — синхронизировать с sources. Это часть Phase 4 actual integration (iter 19+).
+
+#### 9.3.5 Tables count: "62+" → 76 (минорная правка)
+
+§1.2 строка "Итого 62+ таблиц" — фактически 76 `<table>` тегов. Расхождение минорное, но стоит уточнить для целей метрики. **Не критично для плана** — направление дублирования сохраняется.
+
+### 9.4 Итог validation pass
+
+| Тип | Количество | Действие |
+|-----|------------|----------|
+| ✅ Verified accurate | 18 метрик | ничего не делаем |
+| 🔧 Corrected | 3 (section count ×2 + AGENT_NAV line) | исправлено в этом pass |
+| ➕ New findings | 5 (Pattern H, Pattern E scope, CHANGELOG, component-extracts, tables count) | задокументировано, задачи iter 7+ |
+| 🆕 New KI | KI#15 (anchor-redirects duplicate) | добавлен в STATUS.md |
+
+**Вывод:** План итерации 6 аналитически корректен. Цифры точные. Найденные расхождения — мелкие (арифметика) + 1 новый паттерн + 1 новый KI. Стратегия Canonical Guide Spec валидна и не требует пересмотра.

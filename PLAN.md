@@ -228,10 +228,11 @@ Stage Summary:
 - **KI#12 (PARTIAL, scripts → 0 errors):** Architecture decision (b) — migrate 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. Удалены 17 inline scripts из 10 master HTML файлов. `validate:master` wired в `precommit`.
 - **KI#13 (NEW, ACTIVE):** 123 inline `style=` attributes + 23 "content outside section" warnings. Defer iter 6+.
 
-**Iter 6 завершена (analytical pass):** KI#14 NEW (content duplication, ACTIVE, MEDIUM-HIGH).
+**Iter 6 завершена (analytical + validation pass):** KI#14 + KI#15 NEW (ACTIVE).
 - Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — анализ 7 паттернов дублирования (Pattern A..G) + стратегия Canonical Guide Spec + дорожная карта iter 7..19.
 - Идентифицировано: 17 VS-EMBED + 12 устаревших infographic + 2 mermaid = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз (~каждые 40 строк), SPINE — 160.
 - Стратегия: Canonical Guide Spec (`docs/canon/part_NN.md`) — Markdown-источник правды. Визуализация = замещение, не дополнение.
+- **Validation pass (iter 6b):** все 18 ключевых метрик verified ✅. 3 арифметические погрешности исправлены (section count 124→98, AGENT_NAV §1 92→98). 5 новых находок: Pattern H (`docs/anchor-redirects.json` stale duplicate → KI#15), Pattern E scope (3→12+ мест), CHANGELOG iter 6 gap, component-extracts/ unaudited (iter 19+), tables 62+→76. CHANGELOG.md [9.1.6] добавлен.
 - Никаких правок master HTML / visual-system — только docs.
 
 **Iter 7+ (пересмотрено в iter 6):**
@@ -248,4 +249,4 @@ Stage Summary:
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2.
 
-**KI#1..KI#12 закрыты. KI#13 + KI#14 — ACTIVE, defer iter 7+.**
+**KI#1..KI#12 закрыты. KI#13 + KI#14 + KI#15 — ACTIVE, defer iter 7+.**

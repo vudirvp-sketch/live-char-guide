@@ -1,5 +1,30 @@
 # Changelog
 
+## [9.1.6] - 2026-06-23
+
+### Added (iter 6 — analytical + validation pass)
+- **`docs/CONTENT_RESTRUCTURE_PLAN.md`** — канонический план переработки контента: анализ 7 паттернов дублирования (Pattern A..G) + стратегия Canonical Guide Spec (`docs/canon/part_NN.md`) + дорожная карта iter 7..19 + success metrics. §9 "Validation Pass" — verified 18 метрик, 3 исправлено, 5 новых находок.
+- **Pattern H (NEW, found iter 6 validation)** — `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json`. v8→v9 redirects вместо актуальных v8→v9.1. Зарегистрирован как KI#15.
+
+### Known Issues (NEW, ACTIVE)
+- **KI#14** Content duplication VS-EMBED ↔ текст — 17 VS-EMBED'ов сосуществуют с 12 устаревшими infographic + 2 mermaid = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз (~каждые 40 строк), SPINE — 160. Стратегия: Canonical Guide Spec + part-by-part миграция (iter 7..18). Все 11 term counts + 4 visual counts verified в validation pass.
+- **KI#15** `docs/anchor-redirects.json` stale duplicate of `data/anchor-redirects.json`. Runtime использует `data/` версию. `docs/` версия не обновлялась с v9.1 restructure. Fix: удалить `docs/anchor-redirects.json` (iter 7+, 5 минут).
+
+### Changed
+- **`STATUS.md`** — iter 6 status + KI#14 + KI#15 + validation pass summary.
+- **`AGENT_NAVIGATION.md`** — §1 section count 92→98 (verified), ~6000→~6 600 строк HTML. §6 pitfall #32 (KI#14 verified counts) + pitfall #33 (KI#15). §7 docs/anchor-redirects.json помечен STALE (KI#15). §8 iter 6 entry (analytical + validation). §10 hint для iter 7 (KI#15 + §9 ref).
+- **`worklog.md`** — iter 6 → one-liner, iter 6b validation pass record (этот pass).
+- **`PLAN.md`** — §5 iter 6 status updated (analytical + validation).
+
+### Notes
+- iter 6 = analytical + validation pass. Никаких правок master HTML / visual-system / widget JS — только docs.
+- Все 18 ключевых метрик дублирования verified ✅ (GHOST 165, SPINE 160, FLAW 142, LIE 104, NEED 105, WANT 108, OCEAN 72, CoT 92, Enneagram 48, MBTI 25, CORE DIRECTIVES 36, AP-1..15 4-9, VS-EMBED 17, infographic 12, mermaid 2, inline style= 123, master HTML 6 576 строк, visual-system 17/6 369).
+- 3 арифметические погрешности исправлены: section count 124→98 (CONTENT_RESTRUCTURE_PLAN §1.1, §1.2), AGENT_NAVIGATION §1 "92 секции, ~6000 строк" → "98 секций, ~6 600 строк".
+- 5 новых находок: Pattern H (KI#15), Pattern E scope (3→12+ мест), CHANGELOG iter 6 gap (fixed), component-extracts/ unaudited (iter 19+), tables count 62+→76.
+- KI#1..KI#12 закрыты. KI#13 + KI#14 + KI#15 — ACTIVE, defer iter 7+.
+
+---
+
 ## [9.1.5] - 2026-06-23
 
 ### Fixed (iter 5 — KI#11 + KI#12 CRITICAL fixes)

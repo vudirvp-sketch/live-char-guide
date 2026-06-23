@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 6. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md`**, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.6** + docs restructure iter 6 (analytical + validation pass). Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md` (включая §9 validation pass)**, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Directory | Purpose | Rules |
 |-----------|---------|-------|
-| `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendix (`mbti/model_table/glossary`). 92 секции, ~6000 строк HTML. | **АВТОРЫ редактируют тут.** Все секции в `<section data-section>`. Запрещены `<style>` / `<script>` / `<link>` / `<meta>`. |
+| `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendix (`mbti/model_table/glossary`). 98 секций, ~6 600 строк HTML. | **АВТОРЫ редактируют тут.** Все секции в `<section data-section>`. Запрещены `<style>` / `<script>` / `<link>` / `<meta>`. |
 | `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (15 виджетов). | **НЕ ТРОГАТЬ при написании Parts.** Изменения — через request к infrastructure. |
 | `src/shell/widgets/` | 15 виджетов: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e15-blueprint`, `vs-e16-author-note`. | Markup в HTML, data в `data/*.json`, behavior в `lazy-loader.js`. |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Читается `build-shell-unified.mjs` (ASSETS_SRC = `src/assets/`). |
@@ -253,7 +253,8 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 29. **Final a11y pass (FIX-31)** — `pnpm run test:a11y` (axe, WCAG 2a/2aa). Не коммитить с a11y violations.
 30. **Orphan scripts audit (meta-pitfall, iter 3 finding)** — перед добавлением нового скрипта в `scripts/`: (a) определить, wired он в `package.json` или CI workflows; (b) если orphan — задокументировать в `AGENT_NAVIGATION.md` §1 как `[orphan QA tool]`; (c) если зависит от другого файла (как `validate-migration.mjs` от `migration_map.md`) — обеспечить fallback или удалить связку. В iter 3 удалены: `validate-migration.mjs` + `gen-redirect-map.mjs` + `migration_map.md` (KI#8).
 31. **Inline scripts в master HTML (KI#12, fixed iter 5)** — visual-system integration добавила 17 inline `<script type="module">` блоков в master HTML, нарушая §3 rule. Fix: migrate в `src/shell/widgets/vs-*.js` (5 файлов: scroll-observer + 4 element-specific). `vs-scroll-observer.js` использует MutationObserver для lazy-loaded content. **Правило:** все JS для visual-system elements → `src/shell/widgets/vs-eXX-*.js`, НЕ inline в master HTML.
-32. **Content duplication VS-EMBED ↔ текст (KI#14, found iter 6, ACTIVE)** — 17 VS-EMBED'ов сосуществуют с 12 устаревшими `infographic` + 2 `mermaid` = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз в master HTML (~каждые 40 строк), SPINE — 160. Каждая секция самодостаточна и пере-объясняет концепции. **Fix:** Canonical Guide Spec (`docs/canon/`) — текстовый источник правды + part-by-part миграция (iter 7..18). См. `docs/CONTENT_RESTRUCTURE_PLAN.md`. **Правило:** визуализация = **замещение**, не **дополнение**. Если VS-EMBED показывает концепцию — текст не должен её пере-объяснять.
+32. **Content duplication VS-EMBED ↔ текст (KI#14, found iter 6, ACTIVE)** — 17 VS-EMBED'ов сосуществуют с 12 устаревшими `infographic` + 2 `mermaid` = 31 визуализация параллельно с текстом. GHOST упоминается 165 раз в master HTML (~каждые 40 строк), SPINE — 160. Каждая секция самодостаточна и пере-объясняет концепции. **Fix:** Canonical Guide Spec (`docs/canon/`) — текстовый источник правды + part-by-part миграция (iter 7..18). См. `docs/CONTENT_RESTRUCTURE_PLAN.md`. **Правило:** визуализация = **замещение**, не **дополнение**. Если VS-EMBED показывает концепцию — текст не должен её пере-объяснять. Все 11 term counts + 4 visual counts verified в iter 6 validation pass (см. CONTENT_RESTRUCTURE_PLAN §9).
+33. **`docs/anchor-redirects.json` stale duplicate (KI#15, found iter 6 validation, ACTIVE)** — два файла `anchor-redirects.json` в репозитории: `data/` (runtime, актуальный v8→v9.1) и `docs/` (документация, stale v8→v9). MD5 различаются. `data/` загружается `lazy-loader.js` (runtime), `docs/` — только референс для авторов, но не обновлялся с v9.1 restructure. **Fix (iter 7+):** удалить `docs/anchor-redirects.json`, оставить только `data/` как single source of truth. AGENT_NAVIGATION §7 убрать строку про docs/anchor-redirects.json. См. CONTENT_RESTRUCTURE_PLAN §9.3.1.
 
 ---
 
@@ -275,7 +276,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/character_bible.md` | При изменении canonical персонажей |
 | `docs/elena_character_bible.md` | При изменении Elena |
 | `docs/vyshcherblenny_character_bible.md` | При изменении Vysherblenny |
-| `docs/anchor-redirects.json` | При rename/delete section IDs |
+| `docs/anchor-redirects.json` | **STALE (KI#15)** — duplicate of `data/anchor-redirects.json`, не обновлялся с v9.1. Подлежит удалению в iter 7+. |
 | `docs/CONTENT_RESTRUCTURE_PLAN.md` | При пересмотре стратегии переработки контента (iter 6+) |
 | `docs/canon/` (planned iter 7) | При создании/обновлении Canonical Guide Spec — один файл на Part |
 | `visual-system/PLAN.md` | При изменении visual system roadmap |
@@ -319,7 +320,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 **iter 5:** Закрыты KI#11 + KI#12 (scripts). Создан `visual-system/tokens.json` (8 semantic colors + 5 gray scale) — `qa:contrast` работает. 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. `validate:master` wired в precommit. Результат: 0 errors (было 10). KI#13 NEW: 123 inline `style=` + 23 "content outside section" warnings → defer iter 6+.
 
-**iter 6 (аналитическая):** Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — анализ дублирования (7 паттернов A..G) + стратегия Canonical Guide Spec + дорожная карта iter 7..19. KI#14 NEW (content duplication, ACTIVE, MEDIUM-HIGH). Никаких правок master HTML / visual-system — только docs. Подробности: `docs/CONTENT_RESTRUCTURE_PLAN.md`.
+**iter 6 (аналитическая + validation pass):** Создан `docs/CONTENT_RESTRUCTURE_PLAN.md` — анализ дублирования (7 паттернов A..G + Pattern H найден в validation) + стратегия Canonical Guide Spec + дорожная карта iter 7..19 + §9 validation pass (18 метрик verified, 3 исправлено, 5 новых находок). KI#14 NEW (content duplication, ACTIVE, MEDIUM-HIGH). KI#15 NEW (`docs/anchor-redirects.json` stale duplicate, ACTIVE, LOW-MEDIUM). Никаких правок master HTML / visual-system — только docs. Подробности: `docs/CONTENT_RESTRUCTURE_PLAN.md`.
 
 **iter 7+ — что осталось (пересмотрено в iter 6):**
 - **iter 7:** Canon scaffold `docs/canon/` + Canon Part 4 (пилот, самый дубль-тяжёлый). Только Markdown, без правок HTML.
@@ -396,4 +397,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 7 прочитай `STATUS.md` (KI#13 + KI#14 ACTIVE), `worklog.md` (iter 6 record — analytical pass), этот файл (AGENT_NAVIGATION §6 pitfall #32, §8 iter 7+ roadmap), `docs/CONTENT_RESTRUCTURE_PLAN.md` (полный план — §4.3 Canon template, §5.2 iter 7 задача), `src/master/part_04.html` (целевой файл для Canon §4). iter 7 priorities: (1) Создать `docs/canon/` scaffold + `_README.md`, (2) Написать `docs/canon/part_04.md` (Markdown, без HTML правок). НЕ мигрировать `part_04.html` в iter 7 — это iter 8 задача. Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом iter 7 прочитай `STATUS.md` (KI#13 + KI#14 + KI#15 ACTIVE), `worklog.md` (iter 6 record — analytical + validation pass), этот файл (AGENT_NAVIGATION §6 pitfalls #32 + #33, §8 iter 7+ roadmap), `docs/CONTENT_RESTRUCTURE_PLAN.md` (полный план — §4.3 Canon template, §5.2 iter 7 задача, §9 validation pass), `src/master/part_04.html` (целевой файл для Canon §4). iter 7 priorities: (1) Создать `docs/canon/` scaffold + `_README.md`, (2) Написать `docs/canon/part_04.md` (Markdown, без HTML правок), (3) [опционально] удалить `docs/anchor-redirects.json` (KI#15 fix — 5 минут работы). НЕ мигрировать `part_04.html` в iter 7 — это iter 8 задача. Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
