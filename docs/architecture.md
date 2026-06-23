@@ -305,8 +305,6 @@ live-char-guide/
 │   ├── cross_reference_sync.md
 │   ├── user_journeys.md
 │   ├── components.md
-│   ├── migration_map.md
-│   ├── transition_guide.md
 │   └── terminology_dictionary.md
 ├── scripts/              # Build and validation scripts
 │   ├── build-unified.mjs
@@ -328,28 +326,18 @@ live-char-guide/
 
 ---
 
-## v7 → v8 Migration (Archived)
+## Version History (Compact)
 
-> **Archived (iter 1, v9.1.1):** `docs/transition_guide.md` удалён в iter 1 docs restructure — устарел (v7→v8 при текущей v9.1.0). v7 users — see git history (`docs/transition_guide.md` в коммитах до iter 1). Эта секция оставлена как historical reference; полное удаление — iter 2+ (после подтверждения, что v7→v8 миграция больше не актуальна).
+| Version | Date | Summary |
+|---------|------|---------|
+| v9.1.x | 2026-05-16 | FIX-01..FIX-31: bug fixes (executeInlineScripts, persona-cross loop, Clipboard API, dual assembly, CSP, blueprint-viewer destroy, heading hierarchy, noscript, accessibility). |
+| v9.0.0 | 2026-05-15 | Restructure (split Part 7 → 7A/7B, MBTI → Appendix A, AP-15 → Part 5, renumber AP-16 → AP-15). Deduplication, terminology standardization, 3 callout types, character bibles. |
+| v8.0.0 | 2026-05-14 | Unified single-pass architecture (eliminated L1/L2/L3 layer system). Section IDs without `_l2`/`_l3` suffixes. SPINE unified. CORE DIRECTIVES unified. |
+| v7 | pre-2026-05-14 | Layered system (L1/L2/L3) with `data-layer` attributes. See git history. |
+| v6 / v5.12 | pre-2026-04-27 | Earlier versions. See git history. |
 
-v9 continues the **unified restructuring** of v8, eliminating remaining structural remnants from the old layer system. v9.1 specifically addresses: dual assembly pipeline (FIX-01), token budget misplacement (FIX-02), CORE DIRECTIVES numbering conflict (FIX-03), content duplication ~25-30% (FIX-04), and other issues detailed in the restructure plan.
-
-Key changes:
-
-| Aspect | v7 | v8 |
-|--------|----|----|
-| Content model | L1/L2/L3 layers with `data-layer` attributes | Unified single-pass, no layers |
-| Build system | Layer extraction (`build-layers.mjs`) | Unified processing (`build-unified.mjs`) |
-| Section IDs | Layer suffixes (`_l2`, `_l3`) | No layer suffixes |
-| Widget activation | Gated by `data-layer` on `<body>` | Always visible |
-| SPINE | Split: WANT/NEED/FLAW (base) + LIE/GHOST (L3) | Unified: all 5 elements in causal order (GHOST→LIE→FLAW→NEED→WANT) |
-| CORE DIRECTIVES | Split: 1-5 (base) + 6-7 (L3) | Unified: all 7 directives, model notes inline |
-| AP-15 | Split into basic + extended | Merged into single `p8_ap15_ocean_overload` |
-| Quickstart | Part 1 (quickstart section) | Deleted; full Assembly Pipeline at end of Part 7 |
-| Cross-references | Forward refs with links, "What's next?" bridges | Backward refs only (1 sentence + link), Part Resumes |
-| "Основы/Дополнительно" tables | 10 tables across Parts 2-8 | Deleted, replaced with intro paragraphs |
-| Model capability | Mixed with layer concepts | Inline `[MODEL_NOTE: text]` format |
+> Для детальной migration info по старым версиям — см. git history (`git log -- docs/`).
 
 ---
 
-*Document prepared for Live Character Guide v9.1.0 + docs restructure iter 1*
+*Document prepared for Live Character Guide v9.1.0 + docs restructure iter 2*

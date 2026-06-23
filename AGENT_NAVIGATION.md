@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 1. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 2. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -11,6 +11,7 @@
 | `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendix (`mbti/model_table/glossary`). 92 секции, ~6000 строк HTML. | **АВТОРЫ редактируют тут.** Все секции в `<section data-section>`. Запрещены `<style>` / `<script>` / `<link>` / `<meta>`. |
 | `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (10 виджетов). | **НЕ ТРОГАТЬ при написании Parts.** Изменения — через request к infrastructure. |
 | `src/shell/widgets/` | 10 виджетов: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`. | Markup в HTML, data в `data/*.json`, behavior в `lazy-loader.js`. |
+| `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Читается `build-shell-unified.mjs` (ASSETS_SRC = `src/assets/`). |
 | `src/scripts/` | Build-скрипт `build-shell-unified.mjs` (копирует shell + parts + data → `dist/`). | Запускается через `pnpm run build:shell`. |
 | `src/VERSION` | Plain text файл с версией (9.1.0). | Синхронизирован с `package.json` + `data/character_schema.json` + build manifest. |
 | `data/` | JSON-данные виджетов: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Авторы — данные. Инфраструктура — схемы. **Не хардкодить widget data в JS.** |
@@ -18,13 +19,9 @@
 | `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` запускает все. |
 | `docs/` | Техническая документация (не входит в билд). | Update при структурных изменениях. См. §7. |
 | `visual-system/` | Visual system prototype work: `PLAN.md` (v1.4), `DESIGN-TOKENS.css`, `shared/` (fonts/base/patterns/utilities), `elements/` (E01-E17 prototypes), `integration/` (component-extracts + INTEGRATION-MAP). | Isolated-first development strategy. Integration phase — ongoing. |
-| `parts/` | Generated unified HTML (10 part_*.html + manifest.json + glossary/footer). | **Gitignored в норме, но в repo сейчас лежит.** См. KI#1 в STATUS.md. |
-| `widgets/` | Дублирующая папка виджетов на верхнем уровне (10 файлов .js). | **Дубль `src/shell/widgets/`** — см. KI#2 в STATUS.md. |
-| `assets/` | Дублирующая папка assets на верхнем уровне (vs-styles.css, lazy-loader.js, preview-card.png, favicon.svg, fonts/). | **Дубль `src/shell/assets/`** — см. KI#2 в STATUS.md. |
+| `parts/`, `widgets/`, `assets/`, `event-bus.js`, `data/`, `index.html`, `build.hash` | **Root fallbacks** — regenerated на каждом `pnpm run build` из `dist/` (см. `build-shell-unified.mjs` строки 237-293). Committed to git для GitHub Pages backward compat (`.gitignore` строки 22-30: "DO NOT gitignore"). CI/CD деплоит из `dist/`, fallbacks обеспечивают работу без CI/CD. | **НЕ РЕДАКТИРОВАТЬ напрямую.** Все правки — в `src/master/`, `src/shell/`, `src/assets/`, `data/`. После правок — `pnpm run build` регенерирует fallbacks. |
 | `build/` | Generated artifacts (gitignored). | Авто-генерация. |
 | `dist/` | Deployment output (gitignored). | Авто-генерация → GitHub Pages. |
-| `index.html` | Top-level HTML (redirect or root). | Проверить при deploy-issues. |
-| `event-bus.js` | Top-level event bus (дубль `src/shell/event-bus.js`). | См. KI#2. |
 
 ---
 
@@ -228,7 +225,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 15. **`noscript` в build artifact** — должен присутствовать (FIX-30). Не удалять.
 16. **Inline styles → CSS migration** — при добавлении нового визуального элемента сначала вынести стили в `src/shell/styles.css` или `assets/vs-styles.css`, потом уже в HTML.
 17. **Версии в 4 местах** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` проверяет sync.
-18. **Дублирующие папки виджетов/assets** — в repo есть `widgets/` (top-level) и `src/shell/widgets/`, а также `assets/` (top-level) и `src/shell/assets/`. См. KI#2 в STATUS.md. При правках — уточнять, какая папка реально используется в билде.
+18. **Root fallbacks vs canonical sources** — top-level `widgets/`, `assets/`, `parts/`, `event-bus.js`, `data/`, `index.html`, `build.hash` это **regenerated root fallbacks** (см. `build-shell-unified.mjs` строки 237-293), НЕ дубликаты. Canonical sources: `src/shell/widgets/`, `src/assets/`, `src/master/` → `build/parts/`, `src/shell/event-bus.js`, `data/`, `src/shell/index.html`. **Все правки — в canonical sources.** После `pnpm run build` fallbacks регенерируются. В iter 2 закрыт `src/shell/assets/` (был stale duplicate, не читался build script).
 
 ---
 
@@ -254,53 +251,48 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/anchor-redirects.json` | При rename/delete section IDs |
 | `visual-system/PLAN.md` | При изменении visual system roadmap |
 
-### Удалено в iter 1 (docs restructure)
+### Удалено в iter 1+2 (docs restructure)
+
+| File | Iter | Reason |
+|------|------|--------|
+| `docs/transition_guide.md` | iter 2 (KI#7) | Iter 1 commit `c6a58c8` в message заявлял удаление, но фактически не удалил. В iter 2 проверено — нет кодовых зависимостей, удалён. 179 строк. |
+| `docs/ap_reference_inventory.md` | iter 2 (KI#7) | То же — iter 1 не удалил фактически. Одноразовый Phase 0 документ. 179 строк. |
+| `docs/user_journeys.md` | iter 2 (KI#4) | Draft с 2026-05-14 (v8.0.0), содержал устаревшие CORE DIRECTIVES (pre-v8 naming) и Part 7 не разделённый на 7A/7B. 462 строки. Core linear-journey concept уже в §3 этого файла + `docs/architecture.md` Section Model. |
+| `DELETIONS-iter1.txt` | iter 2 | Stale iter 1 cleanup instruction file (poe2-regex-ru convention), больше не нужен после iter 2. |
+| `src/shell/assets/` | iter 2 (KI#2) | Stale duplicate of `src/assets/`. Не читался `build-shell-unified.mjs` (ASSETS_SRC = `src/assets/`, не `src/shell/assets/`). |
+
+### NOT удалено (Ki#8, deferred to iter 3)
 
 | File | Reason |
 |------|--------|
-| `docs/migration_map.md` | Устарел: v5.12→v6 при текущей v9.1.0 (4 major версии назад). 586 строк. Git history сохранит. |
-| `docs/transition_guide.md` | Устарел: v7→v8 при текущей v9.1.0. 179 строк. |
-| `docs/ap_reference_inventory.md` | Одноразовый: Phase 0 для renumbering Phase 2.3. Задача выполнена. 179 строк. |
+| `docs/migration_map.md` (586 строк, v5.12→v6 migration guide) | `scripts/validate-migration.mjs` парсит этот файл (строка 36). Скрипт orphan (не в package.json), но удаление файла сломает ручной запуск. Решение iter 3: удалить оба orphan-скрипта (`validate-migration.mjs`, `gen-redirect-map.mjs`) + migration_map.md, либо wire в package.json. См. KI#8 в `STATUS.md`. |
 
 ---
 
 ## 8. Open Proposals
 
-### OP-1 (iter 1) — Docs restructure по образцу poe2-regex-ru
+### OP-1 — Docs restructure по образцу poe2-regex-ru
 
-Полный анализ и обоснование: `PLAN.md`.
+**Статус:** iter 1+2 завершены. Полный анализ в `PLAN.md`.
 
-**Суть:** Перенять структуру навигации и документации из `poe2-regex-ru` (entry doc + STATUS + worklog + cleanup устаревших docs).
+**iter 1:** Созданы AGENT_NAVIGATION / STATUS / worklog / PLAN. Удалены 3 устаревших docs (migration_map, transition_guide, ap_reference_inventory). Обновлены README / CHANGELOG / architecture.
 
-**iter 1 — что сделано:**
-- Создан `AGENT_NAVIGATION.md` (этот файл) — entry document для AI-агентов.
-- Создан `STATUS.md` — current state + Known Issues + Open Proposals.
-- Создан `worklog.md` — iter log (последняя итерация подробно, остальные одной строкой).
-- Создан `PLAN.md` — полный анализ + roadmap.
-- Удалены 3 устаревших docs (migration_map, transition_guide, ap_reference_inventory).
-- Обновлены `README.md`, `CHANGELOG.md`, `docs/architecture.md`.
+**iter 2:** Закрыты все 6 Known Issues из iter 1. Удалён `docs/user_journeys.md` (Draft с устаревшим v8 контентом). Удалён `src/shell/assets/` (stale duplicate). Обновлены CONTRIBUTING / CHANGELOG / architecture / STATUS / AGENT_NAVIGATION.
 
-**iter 2+ — что осталось (см. PLAN.md §3.2):**
-- Финализировать или удалить `docs/user_journeys.md` (Draft с 2026-05-14).
-- Audit `CONTRIBUTING.md` (ссылка на устаревший `src/parts/`).
-- Перенести pitfalls из FIX-N коммитов в §6 этого файла.
-- Review `docs/content_map.md` / `docs/terminology_dictionary.md`.
-- Объединить `docs/character_bible.md` + персональные bible'ы.
-- Слить `docs/cross_reference_sync.md` в эту файл (compact).
+**iter 3+ — что осталось (см. PLAN.md §3.2):**
+- Перенести pitfalls из FIX-N коммитов в §6 этого файла (расширить с 18 до ~30 пунктов).
+- Review `docs/content_map.md` / `docs/terminology_dictionary.md` на устаревшие строки после v9.1.
+- Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк.
+- Слить `docs/cross_reference_sync.md` в этот файл (compact).
 - Audit `visual-system/PLAN.md` (integration phase status).
 
-### OP-2 — Дублирующие папки widgets/ и assets/
+### OP-2 — Дублирующие папки widgets/ и assets/ [CLOSED iter 2]
 
-В repo есть дубликаты:
-- `widgets/` (top-level) и `src/shell/widgets/` — 10 файлов .js.
-- `assets/` (top-level) и `src/shell/assets/` — vs-styles.css, lazy-loader.js, preview-card.png, favicon.svg, fonts/.
-- `event-bus.js` (top-level) и `src/shell/event-bus.js`.
+**Решение (iter 2):** После анализа `build-shell-unified.mjs` оказалось, что top-level `widgets/`, `assets/`, `event-bus.js` — это **intentional root fallbacks** (regenerated на каждом билде для GitHub Pages backward compat), а не дубликаты. Реальный stale duplicate был только `src/shell/assets/` (не читался build script) — удалён. См. KI#2 / KI#1 в `STATUS.md` iter 1 record (в git history) и pitfall #18.
 
-Нужно определить, какая папка реально используется в билде (`build-shell-unified.mjs`), и удалить дубликаты. См. KI#2 в STATUS.md.
+### OP-3 — `parts/` папка в repo [CLOSED iter 2]
 
-### OP-3 — `parts/` папка в repo
-
-`parts/` — это generated artifacts (должны быть gitignored). В текущем repo лежит в корне с 15 файлами. Нужно проверить `.gitignore` и убрать из git tracking, если это артефакты билда. См. KI#1 в STATUS.md.
+**Решение (iter 2):** `parts/` — intentional root fallback, НЕ gitignored by design (см. `.gitignore` строки 22-30). CI/CD деплоит из `dist/`, но fallbacks обеспечивают работу без CI/CD. См. KI#1 в `STATUS.md` iter 1 record (в git history) и pitfall #18.
 
 ---
 
@@ -315,4 +307,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 2 прочитай `STATUS.md` (актуальный статус + Known Issues), `worklog.md` (iter 1 record), эту файлу (AGENT_NAVIGATION) и `PLAN.md` (roadmap). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом iter 3 прочитай `STATUS.md` (актуальный статус — все 6 KI закрыты), `worklog.md` (iter 2 record — этот раздел), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 3+ пунктами). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.

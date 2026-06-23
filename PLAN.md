@@ -194,15 +194,23 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**Iter 1 завершена:** созданы AGENT_NAVIGATION.md / STATUS.md / worklog.md, удалены 3 устаревших docs, обновлены README.md / CHANGELOG.md / docs/architecture.md.
+**Iter 1 завершена:** созданы AGENT_NAVIGATION.md / STATUS.md / worklog.md, удалены 3 устаревших docs, обновлены README.md / CHANGELOG.md / docs/architecture.md. Идентифицированы 6 Known Issues (KI#1..KI#6).
 
-**Iter 2 (следующий запуск):**
-1. Финализировать или удалить `docs/user_journeys.md` (Draft с 2026-05-14).
-2. Audit `CONTRIBUTING.md` — ссылка на устаревший `src/parts/`.
-3. Перенести pitfalls из FIX-N коммитов в `AGENT_NAVIGATION.md` (Pitfalls секция).
-4. Review `docs/content_map.md` / `docs/terminology_dictionary.md` на устаревшие строки после v9.1.
+**Iter 2 завершена:** закрыты все 6 Known Issues из iter 1. Обнаружены 2 новых KI (KI#7, KI#8) — KI#7 закрыт в iter 2, KI#8 отложен в iter 3.
+- KI#1 (parts/ в repo) — CLOSED "won't fix — by design": root fallbacks intentional per `.gitignore` + `build-shell-unified.mjs`.
+- KI#2 (дубли widgets/assets) — CLOSED: удалили только `src/shell/assets/` (stale duplicate), top-level widgets/assets/event-bus.js — root fallbacks.
+- KI#3 (CHANGELOG не отражал FIX-N) — CLOSED: добавлены [9.1.0] (FIX-01..31) + [9.1.2] (iter 2) секции.
+- KI#4 (user_journeys.md Draft) — CLOSED (deleted): устаревший v8 контент (CORE DIRECTIVES pre-v8 naming, Part 7 не split).
+- KI#5 (CONTRIBUTING.md src/parts/) — CLOSED: заменён на src/master/ + добавлены src/shell/, src/assets/, data/, root fallbacks note.
+- KI#6 (architecture.md v7→v8 archived) — CLOSED: секция удалена, заменена compact Version History таблицей.
+- KI#7 (NEW, найден в iter 2) — CLOSED: iter 1 commit `c6a58c8` в message заявлял удаление migration_map.md/transition_guide.md/ap_reference_inventory.md, но фактически не удалил. В iter 2 удалены transition_guide.md + ap_reference_inventory.md (нет кодовых зависимостей). migration_map.md оставлен (см. KI#8). Также удалён DELETIONS-iter1.txt (stale cleanup file).
+- KI#8 (NEW, найден в iter 2) — DEFERRED to iter 3: `scripts/validate-migration.mjs` + `gen-redirect-map.mjs` (orphan, не в package.json) зависят от `docs/migration_map.md`. Решение iter 3: удалить оба orphan-скрипта + migration_map.md, либо wire в package.json.
 
-**Iter 3+:**
-1. Объединить character_bible'ы.
-2. Слить cross_reference_sync.md в AGENT_NAVIGATION.
-3. Полный audit `visual-system/PLAN.md` — integration phase status.
+**Iter 3+ (следующий запуск):**
+1. **KI#8** — решить судьбу `scripts/validate-migration.mjs` + `gen-redirect-map.mjs` + `docs/migration_map.md` (orphan scripts). Варианты: удалить оба + migration_map.md, либо wire в package.json.
+2. Перенести pitfalls из FIX-N коммитов в `AGENT_NAVIGATION.md` §6 (расширить с 18 до ~30 пунктов) — собрать из git log FIX-01..31 commit messages.
+3. Review `docs/content_map.md` / `docs/terminology_dictionary.md` на устаревшие строки после v9.1.
+4. Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк.
+5. Слить `docs/cross_reference_sync.md` в `AGENT_NAVIGATION.md` (compact).
+6. Полный audit `visual-system/PLAN.md` — integration phase status (v1.4 от 2026-05-16).
+7. Audit AGENT_NAVIGATION §1 scripts/ list — несколько orphan скриптов (csp_check.mjs, bundle_check.mjs, contrast_checker.mjs, check_*.py) не wired в package.json. Уточнить, какие реально запускаются.
