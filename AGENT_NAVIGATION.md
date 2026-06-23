@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 2. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 3. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -15,7 +15,7 @@
 | `src/scripts/` | Build-скрипт `build-shell-unified.mjs` (копирует shell + parts + data → `dist/`). | Запускается через `pnpm run build:shell`. |
 | `src/VERSION` | Plain text файл с версией (9.1.0). | Синхронизирован с `package.json` + `data/character_schema.json` + build manifest. |
 | `data/` | JSON-данные виджетов: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Авторы — данные. Инфраструктура — схемы. **Не хардкодить widget data в JS.** |
-| `scripts/` | Build + validation скрипты: `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `validate-migration.mjs`, `version-sync.mjs`, `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_duplicates.py`, `validate_terms.py`, `check_english.py`, `check_syntax_mix.py`, `gen-redirect-map.mjs`. | Запускаются через `pnpm run <script>`. Python 3.10+ требуется для `*.py`. |
+| `scripts/` | Build + validation скрипты. **package.json-wired (5):** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs` (+ `src/scripts/build-shell-unified.mjs`). **CI-wired (2 Python, не в package.json):** `check_duplicates.py`, `validate_terms.py` — в `.github/workflows/{validate,build-artifact}.yml`. **Orphan QA tools (5+, не wired, ручной запуск):** `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs`. **Removed in iter 3:** `validate-migration.mjs`, `gen-redirect-map.mjs` (orphan + depended on deleted `docs/migration_map.md`). | `pnpm run <script>` только для wired. Python 3.10+ для `*.py`. Wire orphan QA tools в package.json — iter 4+ decision. |
 | `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` запускает все. |
 | `docs/` | Техническая документация (не входит в билд). | Update при структурных изменениях. См. §7. |
 | `visual-system/` | Visual system prototype work: `PLAN.md` (v1.4), `DESIGN-TOKENS.css`, `shared/` (fonts/base/patterns/utilities), `elements/` (E01-E17 prototypes), `integration/` (component-extracts + INTEGRATION-MAP). | Isolated-first development strategy. Integration phase — ongoing. |
@@ -206,10 +206,12 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ## 6. Frequent Pitfalls
 
-> Read before touching master HTML / shell / build scripts.
+> Read before touching master HTML / shell / build scripts. Пункты 1-18 — из iter 1-2. Пункты 19-30 — добавлены в iter 3 из FIX-04..31 commit messages.
+
+### Базовые (iter 1-2)
 
 1. **`<style>` / `<script>` в мастер-файлах** — все стили в `src/shell/styles.css`, скрипты в `src/shell/lazy-loader.js`. Inline styles удалялись в FIX-23 + FIX-26 (см. git log `47b6f16`, `3058f02`).
-2. **`data-layer` / `data-layer-switch` атрибуты** — удалены в v8. `validate-migration.mjs` проверяет их отсутствие на `<body>`.
+2. **`data-layer` / `data-layer-switch` атрибуты** — удалены в v8. Проверяй их отсутствие на `<body>` вручную (`validate-migration.mjs` удалён в iter 3 — KI#8).
 3. **Дублирование концепций между Parts** — каждый концепт имеет ОДНО canonical location. Cross-refs — 1 предложение + link. См. `docs/content_map.md` для canonical mapping.
 4. **Forward references** — заменены на inline 1-sentence определения. Backward refs — 1 предложение + link.
 5. **Английские термины в Russian prose** — 3+ слова English вне allowed contexts триггерят `check_english.py`. Allowed: SP, Description, Examples, Greeting, Lorebook, SPINE, GHOST, OCEAN, Enneagram, LIE, FLAW, NEED, WANT, T→A→P, CoT, Embodiment, CORE DIRECTIVES, Temperature, Top P, Min P, RepPen, Top K, PP, 12B, 32B, API, Part N, AP-N.
@@ -221,11 +223,26 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 11. **`blueprint-viewer` destroy()** — виджет должен корректно уничтожаться при unmount (FIX-22). Не удалять `destroy()` метод.
 12. **`persona-cross` infinite loop** — guard на рекурсивные вызовы (FIX-02, см. git log `0816ff1`). Не убирать guard.
 13. **Clipboard API guard** — `navigator.clipboard` может быть undefined в insecure context (FIX-03). Всегда проверять `if (navigator.clipboard)`.
-14. **Heading hierarchy** —`<h1>` один на страницу, `<h2>` для секций, `<h3>` для подсекций. Не прыгать через уровни (FIX-20..31, см. git log `17413f2`).
+14. **Heading hierarchy** — `<h1>` один на страницу, `<h2>` для секций, `<h3>` для подсекций. Не прыгать через уровни (FIX-20..31, см. git log `17413f2`).
 15. **`noscript` в build artifact** — должен присутствовать (FIX-30). Не удалять.
 16. **Inline styles → CSS migration** — при добавлении нового визуального элемента сначала вынести стили в `src/shell/styles.css` или `assets/vs-styles.css`, потом уже в HTML.
 17. **Версии в 4 местах** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` проверяет sync.
 18. **Root fallbacks vs canonical sources** — top-level `widgets/`, `assets/`, `parts/`, `event-bus.js`, `data/`, `index.html`, `build.hash` это **regenerated root fallbacks** (см. `build-shell-unified.mjs` строки 237-293), НЕ дубликаты. Canonical sources: `src/shell/widgets/`, `src/assets/`, `src/master/` → `build/parts/`, `src/shell/event-bus.js`, `data/`, `src/shell/index.html`. **Все правки — в canonical sources.** После `pnpm run build` fallbacks регенерируются. В iter 2 закрыт `src/shell/assets/` (был stale duplicate, не читался build script).
+
+### Расширение из FIX-N коммитов (iter 3)
+
+19. **Dual assembly pipeline consolidation (FIX-04)** — ранее было 2 параллельных pipeline (build-unified.mjs + альтернативный). Консолидировано в один `build-unified.mjs`. Не реанимировать второй pipeline.
+20. **Token budget misplacement (FIX-05)** — Token Budget должен быть в Part 7A (`p7a_token_budget`), НЕ в Part 1. В Part 1 — только `p1_token_budget_ref` (forward reference, 2 предложения).
+21. **CORE DIRECTIVES numbering conflict (FIX-06)** — 7 directives, нумерация 1-7. Не дублировать нумерацию в glossary. См. §5 этого файла для canonical numbering.
+22. **Content duplication 25-30% (FIX-07)** — между Parts было 25-30% дублированного контента. Канонические локации зафиксированы в `docs/content_map.md`. Перед добавлением нового контента — проверить content_map.
+23. **Dead SPINE-validator removal (FIX-09)** — standalone SPINE-validator скрипт удалён. Валидация SPINE — только через `validate-artifact.mjs` + `validate-master.mjs`.
+24. **SVG CSS variables fix (FIX-10)** — SVG-элементы должны использовать CSS variables (`var(--accent-cyan)` и т.д.), НЕ hardcoded `rgba(...)`. Hardcoded colors ломают theme switch.
+25. **WCAG contrast / hardcoded rgba → CSS variables (FIX-11..19)** — `--text-muted: #535c6e` на `--bg-deep: #08090d` = 3.1:1 (fails WCAG AA для normal text). Использовать только для decorative/non-essential labels. Все цвета — через CSS variables.
+26. **Responsive breakpoints / aria-label quotes / E07 invisible bars (FIX-11..19)** — `aria-label` значения требуют двойных кавычек (single quotes ломают HTML parsing). E07 voice hierarchy bars — проверять `min-height` (иначе invisible на 0 value). Responsive — 768px и 1200px+ breakpoints.
+27. **Mermaid CDN dependency (дополнение к #9, FIX-25 + FIX-26)** — Mermaid.js грузится с `cdn.jsdelivr.net`. Если CDN недоступен — diagram не рендерится, но остальной контент работает. Не заменять CDN на локальный bundle без одобрения (CSP implications).
+28. **Code quality pass (FIX-27)** — ESLint проходит без errors. `pnpm run lint` проверяет `src/`. Не коммитить с lint errors.
+29. **Final a11y pass (FIX-31)** — `pnpm run test:a11y` (axe, WCAG 2a/2aa). Не коммитить с a11y violations.
+30. **Orphan scripts audit (meta-pitfall, iter 3 finding)** — перед добавлением нового скрипта в `scripts/`: (a) определить, wired он в `package.json` или CI workflows; (b) если orphan — задокументировать в `AGENT_NAVIGATION.md` §1 как `[orphan QA tool]`; (c) если зависит от другого файла (как `validate-migration.mjs` от `migration_map.md`) — обеспечить fallback или удалить связку. В iter 3 удалены: `validate-migration.mjs` + `gen-redirect-map.mjs` + `migration_map.md` (KI#8).
 
 ---
 
@@ -251,7 +268,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/anchor-redirects.json` | При rename/delete section IDs |
 | `visual-system/PLAN.md` | При изменении visual system roadmap |
 
-### Удалено в iter 1+2 (docs restructure)
+### Удалено в iter 1+2+3 (docs restructure)
 
 | File | Iter | Reason |
 |------|------|--------|
@@ -260,12 +277,16 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/user_journeys.md` | iter 2 (KI#4) | Draft с 2026-05-14 (v8.0.0), содержал устаревшие CORE DIRECTIVES (pre-v8 naming) и Part 7 не разделённый на 7A/7B. 462 строки. Core linear-journey concept уже в §3 этого файла + `docs/architecture.md` Section Model. |
 | `DELETIONS-iter1.txt` | iter 2 | Stale iter 1 cleanup instruction file (poe2-regex-ru convention), больше не нужен после iter 2. |
 | `src/shell/assets/` | iter 2 (KI#2) | Stale duplicate of `src/assets/`. Не читался `build-shell-unified.mjs` (ASSETS_SRC = `src/assets/`, не `src/shell/assets/`). |
+| `DELETIONS-iter2.txt` | iter 3 (KI#9) | Stale iter 2 cleanup instruction file. Iter 2 удалил `DELETIONS-iter1.txt` с пометкой "больше не нужен", но при этом создал `DELETIONS-iter2.txt` — противоречие. Удалён в iter 3. |
+| `scripts/validate-migration.mjs` | iter 3 (KI#8) | Orphan (не в package.json, не в CI). Валидировал v5.12→v6 / v7→v8 migration — 4 major версии назад при v9.1.0. Зависел от `docs/migration_map.md`. 888 строк. |
+| `scripts/gen-redirect-map.mjs` | iter 3 (KI#8) | Orphan. Генерировал `data/anchor-redirects.json` из `migration_map.md`. Output файл уже committed и стабилен. `lazy-loader.js` имеет hardcoded fallback. 257 строк. |
+| `docs/migration_map.md` | iter 3 (KI#8) | Зависел только от 2 orphan-скриптов выше. v5.12→v6 migration guide. 586 строк. |
 
-### NOT удалено (Ki#8, deferred to iter 3)
+### KEEP (runtime data, не удалять)
 
 | File | Reason |
 |------|--------|
-| `docs/migration_map.md` (586 строк, v5.12→v6 migration guide) | `scripts/validate-migration.mjs` парсит этот файл (строка 36). Скрипт orphan (не в package.json), но удаление файла сломает ручной запуск. Решение iter 3: удалить оба orphan-скрипта (`validate-migration.mjs`, `gen-redirect-map.mjs`) + migration_map.md, либо wire в package.json. См. KI#8 в `STATUS.md`. |
+| `data/anchor-redirects.json` | Runtime data. Загружается `src/shell/lazy-loader.js` строки 67-81 для backward compat со старыми v5.12/v6 section IDs. Hardcoded fallback в lazy-loader.js (строки 51-62) обеспечивает работу без JSON. После удаления `gen-redirect-map.mjs` в iter 3 — становится статическим maintained артефактом. |
 
 ---
 
@@ -273,18 +294,19 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ### OP-1 — Docs restructure по образцу poe2-regex-ru
 
-**Статус:** iter 1+2 завершены. Полный анализ в `PLAN.md`.
+**Статус:** iter 1+2+3 завершены. Полный анализ в `PLAN.md`.
 
-**iter 1:** Созданы AGENT_NAVIGATION / STATUS / worklog / PLAN. Удалены 3 устаревших docs (migration_map, transition_guide, ap_reference_inventory). Обновлены README / CHANGELOG / architecture.
+**iter 1:** Созданы AGENT_NAVIGATION / STATUS / worklog / PLAN. Удалены 3 устаревших docs (migration_map, transition_guide, ap_reference_inventory — фактически только заявлено, см. KI#7). Обновлены README / CHANGELOG / architecture.
 
-**iter 2:** Закрыты все 6 Known Issues из iter 1. Удалён `docs/user_journeys.md` (Draft с устаревшим v8 контентом). Удалён `src/shell/assets/` (stale duplicate). Обновлены CONTRIBUTING / CHANGELOG / architecture / STATUS / AGENT_NAVIGATION.
+**iter 2:** Закрыты все 6 Known Issues из iter 1. Удалён `docs/user_journeys.md` (Draft с устаревшим v8 контентом). Удалён `src/shell/assets/` (stale duplicate). Удалены `docs/transition_guide.md` + `docs/ap_reference_inventory.md` (iter 1 заявлял, но не удалил). Удалён `DELETIONS-iter1.txt`. Обновлены CONTRIBUTING / CHANGELOG / architecture / STATUS / AGENT_NAVIGATION.
 
-**iter 3+ — что осталось (см. PLAN.md §3.2):**
-- Перенести pitfalls из FIX-N коммитов в §6 этого файла (расширить с 18 до ~30 пунктов).
-- Review `docs/content_map.md` / `docs/terminology_dictionary.md` на устаревшие строки после v9.1.
-- Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк.
-- Слить `docs/cross_reference_sync.md` в этот файл (compact).
-- Audit `visual-system/PLAN.md` (integration phase status).
+**iter 3:** Закрыты KI#8 (orphan migration-validation trio удалён) + KI#9 (stale `DELETIONS-iter2.txt` удалён). §6 pitfalls расширены с 18 до 30. §1 scripts/ list классифицирован (package.json-wired / CI-wired / orphan QA tools / removed). `terminology_dictionary.md` пофикшен (stale `p7_core_directives` → `p7a_core_directives`). `visual-system/PLAN.md` — устаревшие рекомендации в Appendix E/F помечены [OBSOLETE per iter 2 KI#1/KI#2].
+
+**iter 4+ — что осталось (см. PLAN.md §3.2):**
+- Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк. LOW priority, требует тщательного чтения 3 больших файлов.
+- Слить `docs/cross_reference_sync.md` в этот файл (compact). LOW priority, текущее состояние OK.
+- Wire orphan QA scripts в `package.json` (csp_check, bundle_check, contrast_checker, check_english, check_syntax_mix, check-doc-versions, test-interactive). Infrastructure decision — нужно решить, какие реально нужны в CI/pre-commit.
+- Audit `visual-system/PLAN.md` Phase 4 (integration) — фактически ли E01-E17 уже интегрированы в `src/master/part_*.html`? Интеграция может быть уже завершена (см. `visual-system/integration/component-extracts/`).
 
 ### OP-2 — Дублирующие папки widgets/ и assets/ [CLOSED iter 2]
 
@@ -307,4 +329,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 3 прочитай `STATUS.md` (актуальный статус — все 6 KI закрыты), `worklog.md` (iter 2 record — этот раздел), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 3+ пунктами). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом iter 4 прочитай `STATUS.md` (актуальный статус — все 9 KI закрыты, активных KI нет), `worklog.md` (iter 3 record — этот раздел), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 4+ пунктами). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.

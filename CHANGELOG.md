@@ -1,5 +1,30 @@
 # Changelog
 
+## [9.1.3] - 2026-06-23
+
+### Fixed (iter 3 — orphan scripts cleanup + pitfalls expansion)
+- **KI#8** `scripts/validate-migration.mjs` (888 строк) + `scripts/gen-redirect-map.mjs` (257 строк) + `docs/migration_map.md` (586 строк) — orphan trio удалён. All про v5.12→v6 migration (4 major версии назад при v9.1.0). Neither в `package.json`, ни в CI workflows, ни в pre-commit hook. `data/anchor-redirects.json` (output `gen-redirect-map.mjs`) — KEEP: runtime data, загружается `src/shell/lazy-loader.js` строки 67-81. Hardcoded fallback в lazy-loader.js (строки 51-62) обеспечивает работу без JSON.
+- **KI#9** (NEW) `DELETIONS-iter2.txt` — stale cleanup-instruction file. Iter 2 удалил `DELETIONS-iter1.txt` с пометкой "больше не нужен после iter 2", но при этом создал `DELETIONS-iter2.txt` — противоречие. Удалён в iter 3.
+- `docs/terminology_dictionary.md` — stale reference `p7_core_directives` → `p7a_core_directives` (v9.0 Part 7 split). Header version 9.0.0 → 9.1.0.
+- `visual-system/PLAN.md` Appendix E §2 + F §2 "Recommended Follow-up Actions" §2 — устаревшие рекомендации про "clean up root fallback files" помечены `[OBSOLETE per iter 2 KI#1/KI#2]` (root fallbacks — by design per `.gitignore` строки 22-30 + `build-shell-unified.mjs` строки 237-293).
+
+### Added
+- **AGENT_NAVIGATION.md §6 pitfalls** расширены с 18 до 30 пунктов. Пункты 19-30 добавлены из FIX-04..31 commit messages: dual assembly pipeline consolidation, token budget misplacement, CORE DIRECTIVES numbering conflict, content duplication 25-30%, dead SPINE-validator removal, SVG CSS variables, WCAG contrast, responsive/aria/E07 bars, Mermaid CDN dependency, code quality pass, final a11y pass, orphan scripts audit (meta-pitfall).
+- **AGENT_NAVIGATION.md §1 scripts/ list** классифицирован: package.json-wired (5), CI-wired (2 Python), orphan QA tools (5+, KEEP), removed in iter 3 (2).
+
+### Removed
+- **scripts/validate-migration.mjs** (888 строк) — KI#8: orphan, validates v5.12→v6 migration (4 major версии назад).
+- **scripts/gen-redirect-map.mjs** (257 строк) — KI#8: orphan, generator for already-committed `data/anchor-redirects.json`.
+- **docs/migration_map.md** (586 строк) — KI#8: only depended on by 2 orphan scripts above.
+- **DELETIONS-iter2.txt** (13 строк) — KI#9: stale cleanup-instruction file (poe2-regex-ru convention).
+
+### Notes
+- iter 3 = orphan scripts cleanup + pitfalls expansion. Без правок кода/UI/тестов/shell — только docs + удаление orphan-троицы.
+- Подробности — в `worklog.md` (iter 3 record) и `STATUS.md` (KI#8/KI#9 resolution).
+- Все 9 KI (KI#1..KI#9) закрыты. Активных Known Issues нет.
+
+---
+
 ## [9.1.2] - 2026-06-23
 
 ### Fixed (iter 2 — Known Issues cleanup)

@@ -1,8 +1,8 @@
 # Терминологический словарь Live Character Guide
 
-**Версия:** 9.0.0  
-**Дата:** 2026-03-04  
-**Фаза:** Phase 1.1 — Canonical Terminology Mapping
+**Версия:** 9.1.0  
+**Дата:** 2026-06-23 (обновлено в iter 3 docs restructure)  
+**Фаза:** Phase 1.1 — Canonical Terminology Mapping (актуализировано под v9.1)
 
 ---
 
@@ -119,7 +119,7 @@
 | **Context** | Контекст | — | technical | Контекстное окно |
 | **Poles** | Полюса | — | technical | Полюса OCEAN |
 | **Rationale** | Обоснование | — | technical | — |
-| **CORE DIRECTIVES** | Основные директивы | CD | directive | Всегда UPPERCASE. Unified directive system in SP. 7 items. English in SP. НЕ «Core Directives» / «core directives» / «ядерные директивы». See `p7_core_directives` |
+| **CORE DIRECTIVES** | Основные директивы | CD | directive | Всегда UPPERCASE. Unified directive system in SP. 7 items. English in SP. НЕ «Core Directives» / «core directives» / «ядерные директивы». See `p7a_core_directives` (Part 7A, split в v9.0) |
 | **Tone Frame** | Тональный фрейм | TF | technique | Dual-function SP element (~25-30 tokens). English in SP |
 | **Spatial & Anatomical Lock** | Пространственная блокировка | — | directive | Prevent teleportation/anatomical errors. English in SP. НЕ «spatial lock» / «анатомический лок» / «spatial and anatomical lock» |
 | **Pre-Generation Filter** | Фильтр предгенерации | — | directive | 4-item self-check before response. English in SP. НЕ «Pre-generation filter» / «предгенерационный фильтр» / «pregen filter» |
@@ -334,4 +334,4 @@
 
 ---
 
-*Документ подготовлен для проекта Live Character Guide. Версия 9.0.0 — Phase 1.1: Canonical Terminology Mapping.*
+*Документ подготовлен для проекта Live Character Guide. Версия 9.0.0 — Phase 1.1: Canonical Terminology Mapping. Обновлено 2026-06-23 в iter 3 docs restructure: stale reference `p7_core_directives` → `p7a_core_directives` (v9.0 Part 7 split).*

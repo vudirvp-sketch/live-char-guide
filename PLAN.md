@@ -206,11 +206,19 @@ Stage Summary:
 - KI#7 (NEW, найден в iter 2) — CLOSED: iter 1 commit `c6a58c8` в message заявлял удаление migration_map.md/transition_guide.md/ap_reference_inventory.md, но фактически не удалил. В iter 2 удалены transition_guide.md + ap_reference_inventory.md (нет кодовых зависимостей). migration_map.md оставлен (см. KI#8). Также удалён DELETIONS-iter1.txt (stale cleanup file).
 - KI#8 (NEW, найден в iter 2) — DEFERRED to iter 3: `scripts/validate-migration.mjs` + `gen-redirect-map.mjs` (orphan, не в package.json) зависят от `docs/migration_map.md`. Решение iter 3: удалить оба orphan-скрипта + migration_map.md, либо wire в package.json.
 
-**Iter 3+ (следующий запуск):**
-1. **KI#8** — решить судьбу `scripts/validate-migration.mjs` + `gen-redirect-map.mjs` + `docs/migration_map.md` (orphan scripts). Варианты: удалить оба + migration_map.md, либо wire в package.json.
-2. Перенести pitfalls из FIX-N коммитов в `AGENT_NAVIGATION.md` §6 (расширить с 18 до ~30 пунктов) — собрать из git log FIX-01..31 commit messages.
-3. Review `docs/content_map.md` / `docs/terminology_dictionary.md` на устаревшие строки после v9.1.
-4. Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк.
-5. Слить `docs/cross_reference_sync.md` в `AGENT_NAVIGATION.md` (compact).
-6. Полный audit `visual-system/PLAN.md` — integration phase status (v1.4 от 2026-05-16).
-7. Audit AGENT_NAVIGATION §1 scripts/ list — несколько orphan скриптов (csp_check.mjs, bundle_check.mjs, contrast_checker.mjs, check_*.py) не wired в package.json. Уточнить, какие реально запускаются.
+**Iter 3 завершена:** закрыты KI#8 (orphan trio удалён) + KI#9 (stale `DELETIONS-iter2.txt` удалён). §6 pitfalls расширены с 18 до 30. §1 scripts/ list классифицирован. `terminology_dictionary.md` пофикшен (stale `p7_core_directives` → `p7a_core_directives`). `visual-system/PLAN.md` устаревшие рекомендации в Appendix E/F помечены [OBSOLETE per iter 2 KI#1/KI#2].
+- KI#8 — CLOSED (option a — delete): удалены `scripts/validate-migration.mjs` (888 строк) + `scripts/gen-redirect-map.mjs` (257 строк) + `docs/migration_map.md` (586 строк). Все про v5.12→v6 migration (4 major версии назад). Orphan (не в package.json, не в CI). `data/anchor-redirects.json` — KEEP (runtime data, загружается `lazy-loader.js`).
+- KI#9 (NEW, найден в iter 3) — CLOSED: `DELETIONS-iter2.txt` создан в iter 2, но не удалён — stale cleanup-instruction file (poe2-regex-ru конвенция). Iter 2 удалил `DELETIONS-iter1.txt` с пометкой "больше не нужен", но при этом создал `DELETIONS-iter2.txt` — противоречие. Удалён в iter 3.
+- AGENT_NAVIGATION §6 pitfalls: 18 → 30. Пункты 19-30 добавлены из FIX-04..31 commit messages.
+- AGENT_NAVIGATION §1 scripts/ list: классификация (package.json-wired 5 / CI-wired 2 Python / orphan QA tools 5+ KEEP / removed in iter 3 2).
+- terminology_dictionary.md: stale ref `p7_core_directives` → `p7a_core_directives`; version 9.0.0 → 9.1.0.
+- visual-system/PLAN.md: Appendix E §2 + F §2 помечены [OBSOLETE per iter 2 KI#1/KI#2].
+
+**Iter 4+ (следующий запуск):**
+1. Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк. LOW priority, требует тщательного чтения 3 больших файлов.
+2. Слить `docs/cross_reference_sync.md` в `AGENT_NAVIGATION.md` (compact). LOW priority, текущее состояние OK.
+3. Wire orphan QA scripts в `package.json` (csp_check, bundle_check, contrast_checker, check_english, check_syntax_mix, check-doc-versions, test-interactive). Infrastructure decision — нужно решить, какие реально нужны в CI/pre-commit.
+4. Audit `visual-system/PLAN.md` Phase 4 (integration) — фактически ли E01-E17 уже интегрированы в `src/master/part_*.html`? Интеграция может быть уже завершена (см. `visual-system/integration/component-extracts/`).
+5. CHANGELOG.md [9.1.1] всё ещё содержит "Removed: docs/migration_map.md" — историческая неточность (iter 1 заявлял, но не удалил, см. KI#7). Можно добавить inline note или оставить как есть (история).
+
+**Все 9 Known Issues (KI#1..KI#9) закрыты.** Активных Known Issues нет.

@@ -1402,7 +1402,7 @@ The following issues were identified during cross-referencing and were fixed in 
 
 1. **Version mismatch (FIXED):** `build-unified.mjs` hardcoded version `9.0.0` instead of reading from `src/VERSION` (which says `9.1.0`). Fixed: `build-unified.mjs` now reads version dynamically from `src/VERSION` at build time. `package.json` says `9.1.0` and `src/VERSION` says `9.1.0` — now consistent. README badge was also updated from `8.0.0` to `9.1.0`.
 
-2. **Content duplication:** `parts/` at root level mirrors `src/master/` exactly; `widgets/` at root mirrors `src/shell/widgets/`; `assets/` mirrors `src/assets/`. These appear to be build artifacts that were checked in and should be cleaned up. When CI/CD is fully operational, these root fallbacks become optional since `dist/` is deployed directly.
+2. **Content duplication:** `parts/` at root level mirrors `src/master/` exactly; `widgets/` at root mirrors `src/shell/widgets/`; `assets/` mirrors `src/assets/`. **[OBSOLETE per iter 2 KI#1/KI#2]** — эти root-level файлы это **intentional root fallbacks** для GitHub Pages backward compat (regenerated на каждом `pnpm run build`, см. `build-shell-unified.mjs` строки 237-293, `.gitignore` строки 22-30 "DO NOT gitignore"). НЕ gitignore. Реальный stale duplicate был только `src/shell/assets/` — удалён в iter 2.
 
 3. **E02 pipeline spec ambiguity:** The Assembly Pipeline in Part 7A describes an SP-assembly walkthrough for Елена (6 steps + 4 optional). It is NOT a card-design lifecycle. Any future spec work should clarify whether a higher-level "card design pipeline" is needed as a separate concept.
 
@@ -1454,6 +1454,6 @@ The following issues were identified during cross-referencing and were fixed in 
 ### Recommended Follow-up Actions
 
 1. **Re-enable Lighthouse CI:** Add `@lhci/cli` and `wait-on` to `devDependencies`, then create a separate `lighthouse.yml` workflow
-2. **Clean up root fallback files:** Once CI/CD is verified working, consider gitignoring root-level `index.html`, `assets/`, `widgets/`, `parts/`, `data/`, `event-bus.js` (these are build artifacts that CI regenerates)
+2. **Clean up root fallback files:** **[OBSOLETE per iter 2 KI#1/KI#2]** — НЕ ВЫПОЛНЯТЬ. Root-level `index.html`, `assets/`, `widgets/`, `parts/`, `data/`, `event-bus.js`, `build.hash` — это **intentional root fallbacks** для GitHub Pages backward compat (regenerated на каждом `pnpm run build`). `.gitignore` строки 22-30 EXPLICITLY говорит "DO NOT gitignore". CI/CD деплоит из `dist/`, fallbacks обеспечивают работу без CI/CD. См. `STATUS.md` "Подтверждённые ограничения" + `AGENT_NAVIGATION.md` §6 pitfall #18.
 3. **Version sync validation:** The `version:check` script should validate all 4 canonical version locations match
 4. **Dependabot PRs:** There are 4 open Dependabot PRs that should be merged for security updates
