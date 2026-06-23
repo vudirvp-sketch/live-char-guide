@@ -1,5 +1,35 @@
 # Changelog
 
+## [9.1.13] - 2026-06-24
+
+### Added (iter 13 — Canon Part 9 creation)
+- **Canon Part 9 created** — `docs/canon/part_09.md` (351 строка). 11 H2 секций (по одной на каждый `data-section` из `src/master/part_09.html`): p9_quality_scale, p9_one_change_rule, p9_basic_checklist, p9_additional_problems, p9_symptom_table, p9_decision_tree, p9_test_scenarios, p9_element_scenario_map, p9_test_requirements, p9_12b_issues, p9_pre_deploy.
+- **2 VS-маркера:** E13 (Diagnostic Decision Tree, в preamble перед §9.1) — 3 symptoms с binary branching → AP/E references; E14 (Quality Scale, §9.1) — thermometer с 4 зонами + Quick Check list.
+- **Front-matter:** `Migration status: ✅ MIGRATED (iter 13)` (Canon created + master HTML migrated end-to-end за один iter).
+- **Migration Notes таблица:** 21 элемент (20 «Оставить» + 1 «Сжать» кандидат #13). Все → DONE.
+
+### Changed (iter 13 — Part 9 master HTML migration)
+- **Part 9 master HTML migrated** против Canon §9 (`src/master/part_09.html`, 596 → 582 строк, -2.3%).
+- **1 compression candidate applied:**
+  - #13: `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, 2-колонный формат: Сценарий / Что проверяет) → удалён. Дублировал §9.7 `p9_test_scenarios` таблицу (те же 6 сценариев в полной 4-колонной версии). Заменён на 1-строчный cross-ref в intro параграфе: «Полный список сценариев — см. Тестовые сценарии выше».
+- **20 "Оставить" элементов** — без изменений. VS-EMBED E13 + E14, quality scale table (с уникальной Examples column), One Change Rule callout, basic_checklist (per-block, 15 checks), additional_problems (#4, #5), symptom_table (11 симптомов), decision_tree (5 групп с branching), test_scenarios (6 сценариев 4-col), element_scenario_map, success metrics (6 критериев), 12B symptoms table, Quick Check table (5 пунктов), Full Check table (14 пунктов), Elena Quick Check example, Vyshcherblenny Quick+Full Check example, bridge, part-resume.
+- **Canon front-matter updated:** `Migration status: ✅ MIGRATED (iter 13)`, `Last synced: 2026-06-24 (iter 13)`.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 123 warnings = KI#13 baseline, no regression).
+- `pnpm run build` ✅ SUCCESS (hash df283246).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (10 pre-existing warnings).
+- `pnpm run qa:bundle` ✅ PASS. `pnpm run qa:doc-versions` ✅ PASS.
+
+### Notes
+- iter 13 = Canon Part 9 creation + master HTML migration (end-to-end за один iter). 10 files updated.
+- KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+- iter 14+ priorities: Canon creation + migrate для Part 1+2+3 (Foundations, Anchors, Voice; cleanup 4 устаревших infographic в Part 2).
+
+---
+
 ## [9.1.12] - 2026-06-24
 
 ### Added (iter 12 — Canon Part 8 creation)

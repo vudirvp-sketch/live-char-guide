@@ -4,51 +4,52 @@
 
 ---
 
-Task ID: 12
+Task ID: 13
 Agent: main
-Task: iter 12 — Canon creation + migrate Part 8 (anti-patterns). Создать `docs/canon/part_08.md` (16 H2 секций, 1 VS-маркер E12) и мигрировать `src/master/part_08.html` против Canon §8 (521 строка, 16 секций). Применить 2 «Сжать» кандидата (#3 intro paragraph merge, #21 AP-9 Elena SPINE check → cross-ref Part 4). Validation gates: validate:master + build + validate + test:unit + lint. Обновить Canon front-matter + 8 docs.
+Task: iter 13 — Canon creation + migrate Part 9 (diagnostics). Создать `docs/canon/part_09.md` (11 H2 секций, 2 VS-маркера E13 + E14) и мигрировать `src/master/part_09.html` против Canon §9 (596 строк, 11 секций). Применить 1 «Сжать» кандидата (#13 p9_test_requirements Table 1 → cross-ref на §9.7 p9_test_scenarios). Validation gates: validate:master + build + validate + test:unit + lint. Обновить Canon front-matter + 8 docs.
 
 Work Log:
-- 1: Контекст загружен из STATUS.md (iter 11 COMPLETE, Part 7A ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE), worklog.md (iter 11 record), AGENT_NAVIGATION.md (§8 iter 12+ roadmap, §10 hint, §6 pitfalls 32–35), docs/canon/_README.md (§5 Part 8 ❌ NOT MIGRATED — iter 12 задача, §3 Markdown conventions, §4 workflow), docs/canon/part_04.md (reference Canon pilot, 11 секций, Migration Notes таблица), docs/canon/part_07a.md (reference Canon Part 7A, 13 секций, 4 VS-маркера, Migration Notes 54 строки DONE), docs/CONTENT_RESTRUCTURE_PLAN.md (§5.2 iter 12 = Canon Part 8+9 planned, §5.1 principles), src/master/part_08.html (521 строка, 16 секций p8_antipatterns_overview + p8_ap1..p8_ap15, 1 VS-EMBED E12 lines 14-208).
-- 2: **Decision:** iter 12 = Canon creation + migrate для ОДНОГО Part (Part 8 anti-patterns). Не Part 8+9 одновременно — принцип «Лучше недоделать, чем сломать». Part 9 (diagnostics) → iter 13.
-- 3: **Setup environment:** pnpm 11.9.0 installed globally, `pnpm install --frozen-lockfile` OK (husky warning only).
-- 4: **Baseline `pnpm run validate:master`** ✅ PASSED (all 12 checks). 0 errors. 123 warnings = KI#13 baseline (123 inline style + 1 orphan section).
-- 5: **Canon `docs/canon/part_08.md` created** (411 строк, 16 H2 секций — по одной на каждый `data-section`, 1 VS-маркер для E12 в §8.1). Front-matter: `Migration status: ✅ MIGRATED (iter 12)`, `Last synced: 2026-06-24 (iter 12)`. Migration Notes таблица: 31 элемент (29 «Оставить» + 2 «Сжать» кандидата #3, #21). Cross-refs на part_02, part_03, part_04, part_05, part_06, part_07a, part_07b, part_10 (Canon files planned iter 13+).
-- 6: **Compression #3 applied:** Overview intro paragraphs (p8_antipatterns_overview, lines 212-214) — два параграфа определяли одно и то же понятие «анти-паттерн». Объединены в один: «**Анти-паттерн** — распространённая ошибка в создании карточек, приводящая к нестабильному поведению модели. Каждый анти-паттерн имеет симптом, причину и решение.» Сохраняет оба ключевых тезиса ( frequenity + symptom/cause/solution structure).
-- 7: **Compression #21 applied:** AP-9 «Пример: Елена — проверка SPINE» (p8_ap9_spine_broken, lines 397-409) — `<div class="example-label">` + `<p>` + `<pre><code>` Elena full SPINE chain + `<p>` check explanation (13 строк). Удалён, заменён на 1-строчный cross-ref: `<p><strong>Пример: Елена — проверка SPINE</strong> → см. <a href="#p4_spine_check">Part 4: Проверка консистентности SPINE</a> (canonical location Elena SPINE check).</p>`. Дублировал canonical Elena SPINE check в Part 4 §4.9 (p4_spine_check).
-- 8: **`pnpm run validate:master`** ✅ PASSED (0 errors, 123 warnings = KI#13 baseline, no regression). Cross-references preserved.
-- 9: **`pnpm run build`** ✅ SUCCESS (hash df283246, same as iter 8/9/10/11). 16 sections in part_08.html.
+- 1: Контекст загружен из STATUS.md (iter 12 COMPLETE, Part 8 ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE), worklog.md (iter 12 record), AGENT_NAVIGATION.md (§8 iter 13+ roadmap, §10 hint iter 12), docs/canon/_README.md (§5 Part 9 ❌ NOT MIGRATED — iter 13 задача, §3 Markdown conventions, §4 workflow), docs/canon/part_08.md (reference Canon Part 8, 412 строк, 16 секций, 1 VS-маркер E12, Migration Notes 31 элемент DONE), docs/CONTENT_RESTRUCTURE_PLAN.md (§5.2 iter 13 = Canon Part 9 + migrate end-to-end planned, §5.1 principles, §8 iter 13 priorities), src/master/part_09.html (596 строк, 11 секций p9_quality_scale + p9_one_change_rule + p9_basic_checklist + p9_additional_problems + p9_symptom_table + p9_decision_tree + p9_test_scenarios + p9_element_scenario_map + p9_test_requirements + p9_12b_issues + p9_pre_deploy, VS-EMBED E13 в preamble lines 8-175 + E14 в §9.1 lines 181-263).
+- 2: **Inventory:** `rg "VS-EMBED:" src/master/part_09.html` → 2 маркера: line 8 (E13 Diagnostics, в preamble вне секций) + line 180 (E14 Quality Scale, внутри p9_quality_scale). 11 `data-section` блоков.
+- 3: **Setup environment:** pnpm 10.9.0 installed via `npm install -g pnpm@10.9.0`, `pnpm install --frozen-lockfile` OK (husky warning only).
+- 4: **Baseline `pnpm run validate:master`** ✅ PASSED (all 12 checks). 0 errors. 123 inline style warnings = KI#13 baseline. 1 orphan section warning (p9_test_requirements pre-existing — heading h4 вместо h3).
+- 5: **Compression candidate identification:** Анализ 11 секций + 2 VS-EMBED на дублирование. Найден 1 чистый дубликат: `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, 2-колонный формат: Сценарий / Что проверяет) — дублировал `p9_test_scenarios` таблицу (6 строк, 4-колонный формат: # / Сценарий / Что проверяем / Ожидаемый результат). Те же 6 сценариев в кратком формате. Candidate #13 зарегистрирован.
+- 6: **Canon `docs/canon/part_09.md` created** (351 строка, 11 H2 секций — по одной на каждый `data-section`, 2 VS-маркера: E13 в preamble перед §9.1 + E14 в §9.1). Front-matter: `Migration status: ✅ MIGRATED (iter 13)`, `Last synced: 2026-06-24 (iter 13 — Canon created + master HTML migrated)`. Migration Notes таблица: 21 элемент (20 «Оставить» + 1 «Сжать» кандидат #13). Cross-refs на part_01, part_02, part_03, part_04, part_05, part_06, part_07a, part_07b, part_08, part_10 (Canon files planned iter 14+).
+- 7: **Compression #13 applied:** `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, 13 lines) — удалён. Дублировал §9.7 `p9_test_scenarios` таблицу. Заменён на 1-строчный cross-ref в intro параграфе: «Минимум 6 тестовых сценариев для любой карточки... Полный список сценариев — см. <a href="#p9_test_scenarios">Тестовые сценарии</a> выше.»
+- 8: **`pnpm run validate:master`** ✅ PASSED (0 errors, 123 inline style warnings = KI#13 baseline, 1 orphan section warning pre-existing, no regression). Cross-references preserved.
+- 9: **`pnpm run build`** ✅ SUCCESS (hash df283246, same as iter 8/9/10/11/12). 11 sections in part_09.html.
 - 10: **`pnpm run validate`** ✅ All 8 gates passed.
 - 11: **`pnpm run test:unit`** ✅ 43/43 pass.
 - 12: **`pnpm run lint`** ✅ 0 errors (10 pre-existing warnings — mermaid + unused vars).
 - 13: **`pnpm run qa:bundle`** ✅ PASS (index.html 7.5KB, max 500KB). **`pnpm run qa:doc-versions`** ✅ PASS (all doc dates current).
-- 14: **Sanity check built `parts/part_08.html`:** 507 строк, 31 670 байт. Compression verified: «Пример: Елена — проверка SPINE» → 1 cross-ref, «p4_spine_check» link present, merged intro paragraph present.
-- 15: **Canon front-matter finalized:** `Migration status: ✅ MIGRATED (iter 12)`, `Last synced: 2026-06-24 (iter 12 — Canon created + master HTML migrated)`, line count 521 → 507.
-- 16: **Migration Notes таблица finalized:** все 31 элемента → DONE (29 «Оставить» DONE + 2 «Сжать» DONE). Added "Compression results" + "Validation gates" sections.
+- 14: **Sanity check built `parts/part_09.html`:** 582 строк (matches src/master after compression). Compression verified: cross-ref «Полный список сценариев — см. Тестовые сценарии выше» present, duplicate table absent.
+- 15: **Canon front-matter finalized:** `Migration status: ✅ MIGRATED (iter 13)`, `Last synced: 2026-06-24 (iter 13 — Canon created + master HTML migrated)`, line count 596 → 582.
+- 16: **Migration Notes таблица finalized:** все 21 элемента → DONE (20 «Оставить» DONE + 1 «Сжать» DONE). Added "Compression results" + "Validation gates" sections.
 - 17: **Documentation updates** (clean, no garbage):
-  - docs/canon/_README.md — §5 Part 8 row → ✅ iter 12, §9 iter 12 entry added.
-  - STATUS.md — rewritten: iter 12 status, KI#13+KI#14+KI#16+KI#17 ACTIVE.
-  - worklog.md — iter 11 → one-liner, iter 12 = этот record.
-  - AGENT_NAVIGATION.md — will update next.
-  - CHANGELOG.md — [9.1.12] entry.
-  - PLAN.md — §5 iter 12 → ✅ DONE, iter 13+ roadmap.
-  - docs/CONTENT_RESTRUCTURE_PLAN.md — §5.2 iter 12 row → ✅ DONE, §8 stop point + iter 13 priorities.
+  - docs/canon/_README.md — §5 Part 9 row → ✅ iter 13, §9 iter 13 entry added.
+  - STATUS.md — rewritten: iter 13 status, KI#13+KI#14+KI#16+KI#17 ACTIVE.
+  - worklog.md — iter 12 → one-liner, iter 13 = этот record.
+  - AGENT_NAVIGATION.md — header iter 12 → iter 13, §8 iter 13 record, §10 hint updated.
+  - CHANGELOG.md — [9.1.13] entry.
+  - PLAN.md — §5 iter 13 → ✅ DONE, iter 14+ roadmap.
+  - docs/CONTENT_RESTRUCTURE_PLAN.md — §5.2 iter 13 row → ✅ DONE, §8 stop point + iter 14 priorities.
 
 Stage Summary:
-- **iter 12 COMPLETE.** Canon Part 8 created + master HTML мигрирован end-to-end за один iter. 521 → 507 строк (-14, ~2.7%). 2 compression candidates applied. All validation gates PASSED.
-- **Modified files (9):** docs/canon/part_08.md (created), src/master/part_08.html (edited), docs/canon/_README.md (updated), STATUS.md (rewritten), worklog.md (updated), AGENT_NAVIGATION.md (updated), CHANGELOG.md (updated), PLAN.md (updated), docs/CONTENT_RESTRUCTURE_PLAN.md (updated).
-- **НЕ сделано (намеренно, iter 13+ задача):**
-  1. Остальные Parts (Canon + migrate) — iter 13–17
+- **iter 13 COMPLETE.** Canon Part 9 created + master HTML мигрирован end-to-end за один iter. 596 → 582 строк (-14, ~2.3%). 1 compression candidate applied. All validation gates PASSED.
+- **Modified files (10):** docs/canon/part_09.md (created), src/master/part_09.html (edited), parts/part_09.html (regenerated root fallback), docs/canon/_README.md (updated), STATUS.md (rewritten), worklog.md (updated), AGENT_NAVIGATION.md (updated), CHANGELOG.md (updated), PLAN.md (updated), docs/CONTENT_RESTRUCTURE_PLAN.md (updated).
+- **НЕ сделано (намеренно, iter 14+ задача):**
+  1. Остальные Parts (Canon + migrate) — iter 14–17
   2. Final cleanup (устаревшие infographic + mermaid → 0) — iter 18
   3. KI#13 (inline styles) — iter 19+
   4. KI#16 (qa:csp inline scripts) — iter 19+
   5. Phase 4 SVG integration — iter 19+
-- **Точка остановки:** iter 12 done (Part 8 ✅ MIGRATED). KI#13 + KI#14 + KI#16 + KI#17 ACTIVE. В iter 13: Canon creation + migrate для Part 9 (diagnostics) — см. `docs/canon/_README.md` §5.
+- **Точка остановки:** iter 13 done (Part 9 ✅ MIGRATED). KI#13 + KI#14 + KI#16 + KI#17 ACTIVE. В iter 14: Canon creation + migrate для Part 1, 2, 3 (Foundations, Anchors, Voice) — см. `docs/canon/_README.md` §5.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 13 (2026-06-24)**: Canon Part 9 created (351 строка, 11 секций, 2 VS-маркера E13+E14) + master HTML мигрирован (596 → 582 строк, -2.3%). 1 compression candidate (#13 p9_test_requirements Table 1 → cross-ref на §9.7 p9_test_scenarios). validate:master/build/validate/test:unit/lint PASS. 10 docs updated.
 - **iter 12 (2026-06-24)**: Canon Part 8 created (411 строк, 16 секций, 1 VS-маркер E12) + master HTML мигрирован (521 → 507 строк, -2.7%). 2 compression candidates (#3 intro merge, #21 AP-9 Elena SPINE check → cross-ref Part 4). validate:master/build/validate/test:unit/lint PASS. 9 docs updated.
 - **iter 11 (2026-06-24)**: Migrate Part 7A master HTML против Canon §7A. 1168 → 1137 строк (-2.7%). 4 compression candidates applied (#22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES walkthrough). validate:master/build/validate/test:unit/lint PASS. Canon front-matter MIGRATED. 9 docs updated.
 - **iter 10 (2026-06-24)**: Canon Part 7A created (`docs/canon/part_07a.md`, 802 строки, 13 H2 секций, 4 VS-маркера E08/E16/E17/E02). KI#17 NEW (documentation drift — fixed). validate:master PASS. 8 docs updated.

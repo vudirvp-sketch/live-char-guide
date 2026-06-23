@@ -1,0 +1,351 @@
+# Part 9: Diagnostics and Debugging (Диагностика и отладка)
+
+> **Canonical source for:** `src/master/part_09.html` (596 → 582 строк, 11 секций)
+> **VS elements (embedded):** E13 (Diagnostic Decision Tree), E14 (Quality Scale)
+> **Sections (11):** `p9_quality_scale`, `p9_one_change_rule`, `p9_basic_checklist`, `p9_additional_problems`, `p9_symptom_table`, `p9_decision_tree`, `p9_test_scenarios`, `p9_element_scenario_map`, `p9_test_requirements`, `p9_12b_issues`, `p9_pre_deploy`
+> **Last synced:** 2026-06-24 (iter 13 — Canon created + master HTML migrated)
+> **Migration status:** ✅ MIGRATED (iter 13)
+
+---
+
+[VS: E13 — Diagnostic Decision Tree. 3 symptoms (character drifts after 5–10 messages / voice sounds generic / character ignores user actions) с binary branching → diagnosis node → AP/E references. Замещает текстовое объяснение диагностического дерева в preamble Part 9. Sits at file preamble before §9.1, визуальный каталог для быстрой навигации от симптома к анти-паттерну.]
+
+**Назначение Part 9:** проверка готовой карточки персонажа. После сборки (Part 1–7) и проверки на анти-паттерны (Part 8) — диагностика определяет, **работает ли карточка на самом деле**. Симптом → проверка → исправление.
+
+---
+
+## 9.1 Шкала качества и 5 быстрых проверок
+
+`data-section: p9_quality_scale`
+
+[VS: E14 — Quality Scale. Thermometer с 4 зонами (Critical 0–25% / Poor 25–50% / Good 50–85% / Excellent 85–100%) + критерии каждой зоны + блок «5 быстрых проверок перед развёртыванием» (PP=0, Voice в Examples, Price в Anchors, Format Lock, Anti-godmoding). Замещает текстовое описание уровней качества и список пред-деплой проверок.]
+
+### Шкала качества карточки (3 уровня с примерами)
+
+| Уровень | Признаки | Примеры |
+|---------|----------|---------|
+| **Критический** | Карточка нарушает ≥2 базовых правила (нет Price, голос в Description, PP > 0) | Behavioral Anchors без T→A→P, OCEAN с 4+ полюсами, нет Anti-godmoding |
+| **Плохой** | Карточка собрана по правилам, но персонаж «плывёт» после 5–10 сообщений | FLAW = прилагательное, Examples не демонстрируют голос, SPINE не связан с Anchors |
+| **Хороший** | Карточка стабильна на 10+ сообщений, голос узнаваем, Price появляется | FLAW = поведение, ≥2 Examples с голосом, SPINE→Anchors связь |
+
+**RECOMMENDATION:** Цель — «Хороший» уровень. «Критический» = переписать. «Плохой» = точечные доработки по Decision Tree.
+
+**Cross-ref:** Полный Pre-Deploy Validation (Quick Check 5 пунктов + Full Check 14 пунктов) — см. `[ref: §9.11]`.
+
+---
+
+## 9.2 Правило одного изменения
+
+`data-section: p9_one_change_rule`
+
+**RULE:** Никогда не меняйте более одного параметра за раз. Иначе вы не узнаете, что именно помогло. Изменили → протестировали 5–10 сообщений → оценили → только потом следующее изменение.
+
+**Применение:** относится ко всем правкам карточки — параметры сэмплирования (RepPen, PP, Temperature), структура Anchors, Examples, SPINE-цепь. Не объединяйте правки в одном тест-цикле.
+
+---
+
+## 9.3 Чек-лист диагностики (по блокам карточки)
+
+`data-section: p9_basic_checklist`
+
+Если персонаж «не работает» — начните с этого чек-листа. Проверьте каждый блок карточки и сравните с типичными ошибками.
+
+| Блок | Проверка | Ссылка |
+|------|----------|--------|
+| **System Prompt** | ☐ Anti-godmoding? (строка «Never speak or act for {{user}}.») ☐ Person defined? ☐ Narrative tense? (прошедшее/настоящее) ☐ Format Lock? (одна система разметки во всех Examples) | `[ref: part_07a.md §7A.1 — System Prompt]` |
+| **Description** | ☐ Anchors с ценой? (формат T→A→P) ☐ Нет голоса? (голос только в Examples/Greeting) ☐ Психология только в Description? | `[ref: part_04.md §4.X — SPINE]` |
+| **Examples** | ☐ Уникальный голос? (только через Examples, не Description) ☐ Embodiment? (минимум одна физическая реакция) ☐ `<START>`? (в начале каждого блока) | `[ref: part_03.md §3.X — Voice Isolation]` (Canon planned iter 14) |
+| **Greeting** | ☐ Сцена→Действие→Реплика? ☐ 50–100 токенов? | `[ref: part_07b.md §7B.X — Lorebook/Greeting]` (Canon planned iter 16) |
+| **Parameters** | ☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05) ☐ PP = 0? (Presence Penalty = 0.0) ☐ Temperature в диапазоне? (0.6–0.8 для 12B) | `[ref: part_07a.md §7A.6 — Sampling Parameters]` |
+
+**Cross-ref:** Расширенная версия — Pre-Deploy Validation (Quick Check 5 пунктов + Full Check 14 пунктов) — см. `[ref: §9.11]`.
+
+---
+
+## 9.4 Дополнительные проблемы (#4, #5)
+
+`data-section: p9_additional_problems`
+
+Три главные ошибки (годмодинг, голос в Description, отсутствующая цена) разобраны в Part 1: Top-3 Errors. Ниже — проблемы #4 и #5.
+
+| # | Проблема | Решение |
+|---|----------|---------|
+| **4** | Повторы фраз | Установите RepPen 1.0–1.05; проверьте PP = 0.0 |
+| **5** | Персонаж теряет характер | Добавьте 2–3 Examples с уникальным голосом |
+
+**Cross-ref:** Top-3 Errors — `[ref: part_01.md §1.X — Top-3 Problems]` (Canon planned iter 14). Симптомы #4 и #5 также в `[ref: §9.5 — Таблица симптомов]`.
+
+---
+
+## 9.5 Таблица симптомов
+
+`data-section: p9_symptom_table`
+
+Каждый симптом связан с анти-паттерном или разделом гайда, где описано решение.
+
+| Симптом | Проверка | Ссылка |
+|---------|----------|--------|
+| Модель игнорирует характер | Examples не показывают голос? | `[ref: part_03.md §3.X — Voice Isolation]` |
+| Персонаж слишком мягкий | Нет FLAW-linked Anchors? | `[ref: part_04.md §4.X — SPINE→Anchors]` |
+| Голос «утекает» в длинных репликах | Менее 3 Examples? | `[ref: part_03.md §3.X — Examples Rules]` |
+| Персонаж не показывает уязвимость | Нет Цены у Anchors? | `[ref: part_02.md §2.X — Anchor Format]` (Canon planned iter 14) |
+| Внезапные OOC моменты | SPINE не консистентен? | `[ref: part_04.md §4.9 — SPINE Check]` |
+| Повторяющиеся фразы | RepPen > 1.10? | `[ref: part_08.md §8.6 — AP-5]` |
+| Персонаж слишком много говорит | Examples длиннее 120 токенов? | Укоротите Examples (≤120 токенов) |
+| Модель ломает формат | Нет Format Lock? | Добавить Format Lock в SP |
+| Персонаж забывает контекст | Карточка + контекст > контекстное окно? | `[ref: part_08.md §8.15 — AP-14]` |
+| Неестественные переходы | Нет transition sentences? | Добавить Embodiment-переходы |
+| Потеря внутренней логики персонажа | Нет CoT Anchor? | `[ref: part_06.md §6.X — CoT]` (Canon planned iter 16) |
+
+---
+
+## 9.6 Дерево решений
+
+`data-section: p9_decision_tree`
+
+Если симптом-таблица не помогла локализовать проблему, используйте пошаговое дерево. Формат: Симптом → Проверка → Если да → / Если нет → следующая проверка.
+
+| Симптом | Проверка | Если да → | Если нет → |
+|---------|----------|-----------|------------|
+| Персонаж теряет голос | Voice Leak в Description? | Удалить голос из Description (AP-3) | → Следующая проверка |
+| | Достаточно ли Examples? | Добавить 2–3 Examples | → Следующая проверка |
+| | Совпадает ли формат Examples и Greeting? | Унифицировать формат (Format Lock) | → Проверить Voice Contamination |
+| Персонаж годмодит | Есть ли Anti-godmoding в SP? | Добавить 2 строки (AP-6) | → Усилить Influence Boundary |
+| Персонаж «слишком идеальный» | Есть ли FLAW в SPINE? | Добавить FLAW + FLAW-linked Anchor | → Проверить OCEAN: >2 полюса? → `[ref: part_05.md §5.X — OCEAN Warning]` (Canon planned iter 16) |
+| Повторы в ответах | RepPen > 1.10? | Fix → AP-5 | → Проверить PP: >0? (AP-7) |
+| | Используете Ollama/LM Studio? | Сменить интерфейс (PP=0.7 hardcode) | → Проверить Anchors на дублирование |
+| Модель теряет внутреннюю логику персонажа | Есть ли у персонажа внутренний процесс? | Fix → `[ref: part_06.md §6.X — CoT]` | → Проверить SPINE на консистентность |
+
+**Cross-ref:** Визуальная версия дерева для 3 базовых симптомов — `[VS: E13]` в preamble Part 9.
+
+---
+
+## 9.7 Тестовые сценарии
+
+`data-section: p9_test_scenarios`
+
+Протестируйте карточку на этих 6 сценариях:
+
+| # | Сценарий | Что проверяем | Ожидаемый результат |
+|---|----------|---------------|---------------------|
+| **1** | Нейтральное приветствие | Базовый голос | Узнаваемый голос, характерный синтаксис |
+| **2** | Конфликт/стресс | FLAW проявление | FLAW-linked поведение + цена |
+| **3** | Искренняя забота | Стена/защита | Отстранение или сарказм (для Елена) |
+| **4** | Вопрос о личном | FLAW-триггер | FLAW-linked поведение + цена |
+| **5** | Долгий диалог (10+ ходов) | Стабильность голоса | Голос не деградирует |
+| **6** | Сцена с другим персонажем | Voice Bleed (если мульти) | Голоса различимы |
+
+**Cross-ref:** Расширенный набор для 12B-моделей — см. `[ref: §9.10]`. Метрики успеха — см. `[ref: §9.9]`.
+
+---
+
+## 9.8 Карта: элемент → тестовый сценарий
+
+`data-section: p9_element_scenario_map`
+
+| Элемент | Тестовый сценарий | Что ожидаем | Что наблюдаем | Диагноз |
+|---------|-------------------|-------------|---------------|---------|
+| SPINE (WANT/NEED/FLAW) | Провокация страха | FLAW проявляется | Персонаж реагирует «правильно» | SPINE работает |
+| Якоря | Нейтральная сцена | At-rest поведение (WANT) | Персонаж «в покое» действует в направлении WANT | Anchors работают |
+| Voice Isolation | Длинный диалог (10+ сообщений) | Голос стабилен | Голос не дрейфует к дефолтному | Voice Isolation работает |
+| Author's Note | 10+ сообщений | Состояние отслеживается | Персонаж помнит контекст | AN работает |
+| Lorebook (база знаний) | Упоминание триггер-слова | Контекстная реакция | Персонаж реагирует на триггер | Lorebook работает |
+| OCEAN | Конфликт ценностей | Экстремальный полюс доминирует | Персонаж действует в соответствии с полюсом | OCEAN работает |
+
+---
+
+## 9.9 Минимум сценариев + Метрики успеха
+
+`data-section: p9_test_requirements`
+
+**Минимум 6 тестовых сценариев** для любой карточки. Для карточек с GHOST Layers или мульти-персонажностью — добавьте соответствующие сценарии. Полный список сценариев — см. `[ref: §9.7 — Тестовые сценарии]`.
+
+### Метрики успеха (6 критериев)
+
+| # | Метрика | Критерий |
+|---|---------|----------|
+| 1 | Голос стабилен | На 10+ сообщений без дрейфа |
+| 2 | Price появляется | В каждом 2–3 ответе при триггере |
+| 3 | FLAW проявляется | В сценарии конфликта |
+| 4 | Нет godmoding | 0 случаев за 10 сообщений |
+| 5 | Нет Voice Bleed | 0 стилистических директив в Description |
+| 6 | AN влияет | Поведение меняется после 10 сообщений с AN |
+
+---
+
+## 9.10 12B-специфичные проблемы
+
+`data-section: p9_12b_issues`
+
+12B модели имеют ограничения, требующие особого подхода. Рекомендуемые параметры генерации для 12B → `[ref: part_07a.md §7A.6 — Sampling Parameters]`.
+
+### Симптомы 12B
+
+| Симптом | Причина | Решение |
+|---------|---------|---------|
+| Голос деградирует быстро | Ограниченная память | Более явные Anchors, короче Examples |
+| Модель игнорирует SPINE | Недостаточная ёмкость | Упростите SPINE до FLAW + LIE |
+| OOC моменты | Контекст overflow | 4K-Fallback Protocol |
+| Повторы фраз | Паттерн-зависимость | RepPen 1.02-1.05, разнообразьте Examples |
+| Неспособность к CoT | Архитектура модели | Tier 0-1 CoT только, без XML |
+
+**Cross-ref:** 4K-Fallback — `[ref: part_07a.md §7A.11]`. CoT Tiers — `[ref: part_06.md §6.X]` (Canon planned iter 16).
+
+---
+
+## 9.11 Пред-деплой валидация
+
+`data-section: p9_pre_deploy`
+
+### Quick Check (5 пунктов — обязательно)
+
+Базовая версия → см. `[ref: §9.3 — Чек-лист диагностики]`.
+
+| # | Проверка | Ожидаемый результат |
+|---|----------|---------------------|
+| 1 | PP = 0.0 | Presence Penalty = 0.0 в интерфейсе |
+| 2 | Voice только в Examples | 0 стилистических директив в Description |
+| 3 | Price в каждом Anchor | Все Anchors имеют T→A→P |
+| 4 | Format Lock | Одна система разметки во всех Examples + Greeting |
+| 5 | Anti-godmoding | 2 строки в SP (neg + pos) |
+
+### Пример: Quick Check для Елены
+
+| Проверка | Результат |
+|----------|-----------|
+| ☐ PP = 0.0 | ✓ Presence Penalty = 0.0 |
+| ☐ Voice только в Examples | ✓ Description = факты + SPINE, 0 стилистических директив |
+| ☐ Price в каждом Anchor | ✓ Все 6 Anchors имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат) |
+| ☐ Format Lock | ✓ Система A: `*action*` «speech» во всех Examples + Greeting |
+| ☐ Anti-godmoding | ✓ "Never speak or act for `{{user}}`" + позитивная формулировка |
+
+**Итог:** Елена проходит Quick Check. Далее → Full Check (14 пунктов) для карточек с SPINE и OCEAN.
+
+### Full Check (14 пунктов — рекомендуется)
+
+Пункты 1–5: см. Quick Check выше.
+
+| # | Проверка | Ожидаемый результат |
+|---|----------|---------------------|
+| 6 | CORE DIRECTIVES | Все 7 директив присутствуют |
+| 7 | Spatial & Anatomical Lock | Директива #3 в CORE DIRECTIVES |
+| 8 | Директивы на английском | SP directives in English, RP content in card language |
+| 9 | Immersion Boundary | OOC-защита в SP |
+| 10 | GHOST-цепь | GHOST→LIE→FLAW→NEED→WANT логична |
+| 11 | Tone Frame | Присутствует для нетривиальных сеттингов |
+| 12 | OCEAN ≤ 2 полюса | Не более 2 экстремальных значений |
+| 13 | Lorebook параметры | Depth/Probability/Cooldown в рекомендованных диапазонах |
+| 14 | CoT ≤ 3 Anchors | Не более 2–3 CoT Anchors |
+
+### Пример: Pre-Deploy для Выщербленного (полная карточка)
+
+**Quick Check (5 items):**
+
+| Проверка | Результат |
+|----------|-----------|
+| ☐ SP содержит Anti-godmoding | ✓ "Never speak or act for `{{user}}`" |
+| ☐ SP содержит Format Lock | ✓ "Dialogue: `*action*` «speech»" |
+| ☐ Description ≤ 800 токенов | ✓ ~650 токенов |
+| ☐ Examples содержат ≥ 2 примера | ✓ 3 примера + CoT |
+| ☐ Greeting демонстрирует голос | ✓ "Добро пожаловать в Архив. Чего ищете... в других?" |
+
+**Full Check:**
+
+| Проверка | Результат |
+|----------|-----------|
+| ☐ CORE DIRECTIVES: 7 директив | ✓ Все 7 в формате `<CORE_DIRECTIVES>` |
+| ☐ SPINE: 5 элементов связаны | ✓ GHOST→LIE→FLAW→NEED→WANT цепь логична |
+| ☐ GHOST Layers: 3 tier | ✓ G1/G2/G3 определены с Anchors |
+| ☐ CoT Anchors: ≤ 3 | ✓ 2 CoT Anchors (Tier 2 + Tier 3) |
+| ☐ Lorebook: консистентен | ✓ 5 записей без конфликтов с Description |
+| ☐ XML: валиден | ✓ Все теги закрыты, структура корректна |
+| ☐ Tone Frame: присутствует | ✓ "archival, detached. Memory is currency." |
+| ☐ Author's Note: расширенный формат | ✓ State + WANT→NEED + GHOST-activation + Blind Spot + Scene |
+| ☐ OCEAN: 1-2 экстремума | ✓ Высокая O, Низкая E |
+| ☐ Immersion Boundary | ✓ Присутствует (для 32B+ и API) |
+
+**Итог:** Выщербленный проходит Pre-Deploy полностью.
+
+### Bridge
+
+Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки с GHOST Layers, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля. → `[ref: part_10.md]` (Canon planned iter 16).
+
+### Что вы теперь умеете
+
+- Применять правило One Change Rule при отладке.
+- Проводить 6 тестовых сценариев и интерпретировать результаты.
+- Использовать Decision Tree для диагностики: симптом → причина → исправление.
+- Выполнять Pre-Deploy Validation (Quick Check 5 пунктов + Full Check 14 пунктов).
+- Оценивать качество карточки по 3-уровневой шкале (Critical / Bad / Good).
+
+---
+
+## Cross-references из других Parts
+
+- `p1_top3_problems` — Top-3 Errors, referenced в §9.4 (дополнительные проблемы #4, #5).
+- `p2_anchor_rules` — Anchor Format, referenced в §9.5 (симптом "нет Цены у Anchors").
+- `p3_voice_isolation` — Voice Isolation, referenced в §9.3 (Examples checks), §9.5 (симптом "модель игнорирует характер").
+- `p3_examples_rules` — Examples Rules, referenced в §9.5 (симптом "голос утекает").
+- `p4_spine_overview` — SPINE, referenced в §9.3 (Description checks).
+- `p4_spine_mapping` — SPINE → Anchors, referenced в §9.5 (симптом "слишком мягкий").
+- `p4_spine_check` — SPINE consistency check, referenced в §9.5 (симптом "OOC моменты").
+- `p5_ocean_warning` — OCEAN Overload, referenced в §9.6 (симптом "слишком идеальный").
+- `p6_cot_basics` — CoT, referenced в §9.5 (симптом "потеря логики"), §9.10 (12B CoT).
+- `p7a_system_prompt` — System Prompt, referenced в §9.3 (SP checks).
+- `p7a_sampling_params` — Sampling Parameters, referenced в §9.3 (Parameters checks), §9.10 (12B params).
+- `p7a_4k_fallback` — 4K-Fallback, referenced в §9.10 (12B context overflow).
+- `p7b_greeting` — Greeting, referenced в §9.3 (Greeting checks).
+- `p7b_lorebook_basics` — Lorebook, referenced в §9.3 (Greeting cross-ref).
+- `p8_ap5_reppen_high` — AP-5 RepPen, referenced в §9.5 (симптом "повторы"), §9.6 (decision tree).
+- `p8_ap14_context_violation` — AP-14 Context Violation, referenced в §9.5 (симптом "забывает контекст").
+- `p10_elena` — Полная карточка Елены, referenced в §9.11 (Pre-Deploy example).
+- `p10_vyshcherblenny` — Полная карточка Выщербленного, referenced в §9.11 (Pre-Deploy example).
+
+---
+
+## Migration Notes (iter 13 — applied 2026-06-24)
+
+Миграция `src/master/part_09.html` против этого Canon выполнена в iter 13. Результат: 596 → 582 строк (-14, ~2.3%). Build PASS, validate:master PASS, qa без регрессий.
+
+**Принцип применённый:** `viz > dry text` (iter 8) — визуализация = замещение, не дополнение; уникальные визуализации не удаляются. Применяется «очень деликатно».
+
+| # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
+|---|-------------------|----------|--------|--------------------------|
+| 1 | VS-EMBED E13 (Diagnostic Decision Tree, 3 symptoms + binary branching) | Оставить | DONE | Canonical VS-marker — preamble Part 9 |
+| 2 | `<section data-section="p9_quality_scale">` h2 "Диагностика и тестирование" | Оставить | DONE | Canonical section title — §9.1 |
+| 3 | VS-EMBED E14 (Quality Scale thermometer + 4 zones + Quick Check list) | Оставить | DONE | Canonical VS-marker — §9.1 |
+| 4 | h3 "Шкала качества карточки" + 3-row table (Critical/Плохой/Хороший + Признаки + Примеры) | Оставить | DONE | Unique Examples column (Behavioral Anchors без T→A→P, FLAW = прилагательное, и т.д.) — §9.1. Признаки column частично дублирует E14 zones, но Examples column уникален. |
+| 5 | `<div class="callout rec">` RECOMMENDATION: Цель — «Хороший» уровень | Оставить | DONE | Canonical RECOMMENDATION — §9.1 |
+| 6 | `<section data-section="p9_one_change_rule">` RULE callout | Оставить | DONE | Canonical RULE — §9.2 |
+| 7 | `<section data-section="p9_basic_checklist">` h3 + intro + per-block table (SP/Description/Examples/Greeting/Parameters) | Оставить | DONE | Unique per-block checklist — §9.3 |
+| 8 | `<section data-section="p9_additional_problems">` intro + 2-row table (#4, #5) | Оставить | DONE | Unique #4/#5 problems — §9.4 |
+| 9 | `<section data-section="p9_symptom_table">` 11-row symptom table | Оставить | DONE | Unique symptom → check → fix mapping — §9.5 |
+| 10 | `<section data-section="p9_decision_tree">` 5-group decision tree table | Оставить | DONE | Unique "if yes →, if no →" branching format — §9.6 (complements E13 visual, не дублирует) |
+| 11 | `<section data-section="p9_test_scenarios">` 6-row test scenarios table (4 cols: # / Scenario / What / Expected) | Оставить | DONE | Canonical test scenarios — §9.7 |
+| 12 | `<section data-section="p9_element_scenario_map">` 6-row element → scenario table | Оставить | DONE | Unique element-to-scenario mapping — §9.8 |
+| 13 | `<section data-section="p9_test_requirements">` h4 "Количество тестовых сценариев" + intro + **6-row scenarios table** | Сжать | DONE | Дубликат §9.7 таблицы (те же 6 сценариев в кратком формате). Table удалён, заменён на 1-строчный cross-ref в intro параграфе: «Полный список сценариев — см. Тестовые сценарии выше». |
+| 14 | `<section data-section="p9_test_requirements">` h4 "Метрики успеха (6 критериев)" + 6-row metrics table | Оставить | DONE | Unique success metrics — §9.9 |
+| 15 | `<section data-section="p9_12b_issues">` h3 + intro + 5-row 12B symptoms table | Оставить | DONE | Unique 12B-specific symptoms — §9.10 |
+| 16 | `<section data-section="p9_pre_deploy">` h3 + Quick Check h4 + 5-row Quick Check table | Оставить | DONE | Canonical Quick Check — §9.11 |
+| 17 | `<section data-section="p9_pre_deploy">` "Пример: Quick Check для Елены" + ILLUSTRATION label + 5-row Elena table | Оставить | DONE | Unique Elena example — §9.11 |
+| 18 | `<section data-section="p9_pre_deploy">` `<details>` Full Check (14 пунктов) + 9-row table | Оставить | DONE | Canonical Full Check — §9.11 |
+| 19 | `<section data-section="p9_pre_deploy">` "Пример: Pre-Deploy для Выщербленного" + Quick Check (5 items) + Full Check (10 items) | Оставить | DONE | Unique Vyshcherblenny example — §9.11 |
+| 20 | `<p class="bridge-paragraph">` bridge to Part 10 | Оставить | DONE | Canonical bridge — §9.11 |
+| 21 | `<div class="part-resume">` "Что вы теперь умеете" list | Оставить | DONE | Canonical resume — §9.11 |
+
+### Compression results (iter 13)
+
+1 кандидат на сжатие обработан:
+
+1. **#13 DONE** — `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, 13 lines) — удалён. Дублировал §9.7 `p9_test_scenarios` таблицу (те же 6 сценариев в кратком 2-колонном формате, когда §9.7 даёт полную 4-колонную версию). Заменён на 1-строчный cross-ref в intro параграфе: «Полный список сценариев — см. Тестовые сценарии выше».
+
+Итого: 596 → 582 строк (-14, ~2.3%). Принцип `viz > dry text` — все уникальные таблицы (basic_checklist, symptom_table, decision_tree, element_scenario_map, 12B symptoms, Quick Check, Full Check, Elena/Vyshcherblenny examples) сохранены.
+
+### Validation gates (iter 13 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, 123 warnings (= KI#13 baseline, no change).
+- [x] `pnpm run build` — SUCCESS.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors.
+- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 13)`.

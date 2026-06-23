@@ -333,7 +333,7 @@ SPINE — психологический каркас из 5 элементов,
 | **10** | Canon Part 7A | ✅ DONE — Создан `docs/canon/part_07a.md` (802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Front-matter `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица: 54 TODO + 4 "Сжать" кандидата + validation gates. Master HTML не тронут. `validate:master` PASS (0 errors, KI#13 baseline). KI#17 NEW (documentation drift: AGENT_NAVIGATION §10 hint указывал E07 вместо E02 как 4-й VS-EMBED — fixed). 8 docs updated. | `docs/canon/part_07a.md` | LOW |
 | **11** | Migrate Part 7A | ✅ DONE — Мигрирован `src/master/part_07a.html` против Canon §7A (1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated. | `src/master/part_07a.html`, `docs/canon/part_07a.md` | LOW |
 | **12** | Canon Part 8 + migrate | ✅ DONE — Canon `docs/canon/part_08.md` создан (411 строк, 16 H2 секций, 1 VS-маркер E12) + `src/master/part_08.html` мигрирован (521 → 507 строк, -2.7%). 2 compression candidates applied (#3 intro paragraphs merge, #21 AP-9 Elena SPINE check → cross-ref Part 4). 29 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. End-to-end за один iter (Canon + migrate). 9 docs updated. | `docs/canon/part_08.md`, `src/master/part_08.html` | LOW |
-| **13** | Canon Part 9 + migrate | Diagnostics (596 строк master HTML, ~14 секций, VS-EMBED TBD). Canon creation + migrate end-to-end (по образцу iter 12). | `docs/canon/part_09.md`, `src/master/part_09.html` | LOW |
+| **13** | Canon Part 9 + migrate | ✅ DONE — Diagnostics (596 строк master HTML, 11 секций, 2 VS-EMBED E13+E14). Canon creation + migrate end-to-end (по образцу iter 12). Canon `docs/canon/part_09.md` (351 строка) + `src/master/part_09.html` мигрирован (596 → 582 строк, -2.3%). 1 compression candidate applied (#13 p9_test_requirements Table 1 → cross-ref на §9.7 p9_test_scenarios). 20 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED. 10 docs updated. | `docs/canon/part_09.md`, `src/master/part_09.html` | LOW |
 | **14** | Canon Part 1, 2, 3 | Базовые блоки, Anchors, Voice | `docs/canon/part_01..03.md` | LOW |
 | **15** | Migrate Part 1, 2, 3 | Миграция + cleanup 4 устаревших infographic в Part 2 | `src/master/part_01..03.html` | MEDIUM |
 | **16** | Canon Part 5, 6, 7B, 10 | Psych toolkit, CoT, Lorebook, Examples | `docs/canon/part_05.md`, `06.md`, `07b.md`, `10.md` | LOW |
@@ -412,22 +412,23 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 12 COMPLETE (Canon Part 8 + migrate).** Canon `docs/canon/part_08.md` создан (411 строк, 16 H2 секций, 1 VS-маркер E12) + `src/master/part_08.html` мигрирован (521 → 507 строк, -2.7%). 2 compression candidates applied (#3 intro paragraphs merge, #21 AP-9 Elena SPINE check → cross-ref Part 4). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+**Iter 13 COMPLETE (Canon Part 9 + migrate).** Canon `docs/canon/part_09.md` создан (351 строка, 11 H2 секций, 2 VS-маркера E13 в preamble + E14 в §9.1) + `src/master/part_09.html` мигрирован (596 → 582 строк, -2.3%). 1 compression candidate applied (#13 p9_test_requirements Table 1 → 1-строчный cross-ref на §9.7 p9_test_scenarios). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
 
-**Iter 13 priorities (Canon Part 9 + migrate):**
+**Iter 14 priorities (Canon Part 1+2+3 + migrate):**
 
-1. **Canon creation + migrate** для Part 9 (diagnostics) — по образцу iter 12 (end-to-end за один iter). Part 9 master HTML = 596 строк, ~14 секций. Проверить VS-EMBED перед стартом (`rg "VS-EMBED:" src/master/part_09.html`).
-2. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint`.
-3. **После миграции** — обновить Canon front-matter `Migration status: ✅ MIGRATED` + Migration Notes таблица.
+1. **Canon creation + migrate** для Part 1, 2, 3 (Foundations, Anchors, Voice) — по образцу iter 12/13 (end-to-end за один iter на Part, либо все 3 за один iter если помещаются). Перед стартом: `rg "VS-EMBED:" src/master/part_01.html src/master/part_02.html src/master/part_03.html` для inventory.
+2. **Особое внимание Part 2:** cleanup 4 устаревших `infographic inf-pipeline` блоков (см. §2.6 Pattern F, §9.1 confirmed 4 в part_02). Заменить на VS-маркеры в Canon + удалить из master HTML при миграции.
+3. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint`.
+4. **После миграции** — обновить Canon front-matter `Migration status: ✅ MIGRATED` + Migration Notes таблица.
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 13 прочитай:
-> 1. `STATUS.md` (iter 12 COMPLETE, Part 4+7A+8 ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
-> 2. `worklog.md` (iter 12 record)
-> 3. `AGENT_NAVIGATION.md` (§8 iter 13+ roadmap)
-> 4. `docs/canon/_README.md` (§5 migration status — Part 4+7A+8 ✅, остальные ❌)
-> 5. `docs/canon/part_08.md` (reference pattern для Canon+migrate end-to-end за один iter)
+> Перед стартом iter 14 прочитай:
+> 1. `STATUS.md` (iter 13 COMPLETE, Part 4+7A+8+9 ✅ MIGRATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
+> 2. `worklog.md` (iter 13 record)
+> 3. `AGENT_NAVIGATION.md` (§8 iter 14+ roadmap)
+> 4. `docs/canon/_README.md` (§5 migration status — Part 4+7A+8+9 ✅, остальные ❌)
+> 5. `docs/canon/part_09.md` (reference pattern для Canon+migrate end-to-end за один iter)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 
