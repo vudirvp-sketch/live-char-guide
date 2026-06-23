@@ -111,37 +111,6 @@
 
     </div>
 
-<script type="module">
-// VS Element E03 - inline script (from component-extracts)
-/**
- * Element: E03 — Behavioral Anchor T→A→P
- * Source: elements/E03-behavioral-anchor.html
- * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (prefersReducedMotion) {
-        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
-    });
-</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E03 -->
 <section  data-section="p2_basic_anchors" data-toc-nav>
@@ -263,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </table>
 </div>
 
-
 <p>Якоря определяют, <strong>что</strong> делает персонаж. Но поведение — это не только действие, но и <strong>голос</strong>. Следующая часть — о том, где голос живёт в карточке и как его изолировать от описания.</p>
 
 </section>
@@ -355,34 +323,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </p>
     </div>
 
-<script type="module">
-// VS Element E04 - inline script (from component-extracts)
-/**
- * Element: E04 — Embodiment Protocol
- * Source: elements/E04-embodiment-protocol.html
- * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
-    });
-</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E04 -->
 <section  data-section="p2_embodiment" data-toc-nav>
@@ -440,9 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <p><strong>RECOMMENDATION:</strong> Каждый Example должен содержать минимум одну физическую реакцию (embodiment). Если персонаж только говорит — модель не научится телесности.</p>
 </div>
 
-
-
-
 </section>
 
 <section  data-section="p2_env_reactivity">
@@ -455,8 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <p><strong>НЕВЕРНО — Декорация без персонажа:</strong> «Комната была украшена гобеленами с изображениями охотничьих сцен. Камин потрескивал.» — чистая декорация, персонаж не присутствует.</p>
 <p><strong>ВЕРНО — Среда через действие:</strong> <!-- Demonstrates: ENVIRONMENTAL REACTIVITY -->«Елена провела пальцами по краю бара — липко. Давно не убирали.» — среда раскрывается через действие персонажа.</p>
 </div>
-
-
 
 </section>
 

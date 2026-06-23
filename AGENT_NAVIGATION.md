@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 4. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 5. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -9,13 +9,13 @@
 | Directory | Purpose | Rules |
 |-----------|---------|-------|
 | `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendix (`mbti/model_table/glossary`). 92 секции, ~6000 строк HTML. | **АВТОРЫ редактируют тут.** Все секции в `<section data-section>`. Запрещены `<style>` / `<script>` / `<link>` / `<meta>`. |
-| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (10 виджетов). | **НЕ ТРОГАТЬ при написании Parts.** Изменения — через request к infrastructure. |
-| `src/shell/widgets/` | 10 виджетов: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`. | Markup в HTML, data в `data/*.json`, behavior в `lazy-loader.js`. |
+| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (15 виджетов). | **НЕ ТРОГАТЬ при написании Parts.** Изменения — через request к infrastructure. |
+| `src/shell/widgets/` | 15 виджетов: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e15-blueprint`, `vs-e16-author-note`. | Markup в HTML, data в `data/*.json`, behavior в `lazy-loader.js`. |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Читается `build-shell-unified.mjs` (ASSETS_SRC = `src/assets/`). |
 | `src/scripts/` | Build-скрипт `build-shell-unified.mjs` (копирует shell + parts + data → `dist/`). | Запускается через `pnpm run build:shell`. |
 | `src/VERSION` | Plain text файл с версией (9.1.0). | Синхронизирован с `package.json` + `data/character_schema.json` + build manifest. |
 | `data/` | JSON-данные виджетов: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Авторы — данные. Инфраструктура — схемы. **Не хардкодить widget data в JS.** |
-| `scripts/` | Build + validation скрипты. **package.json-wired (5):** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs` (+ `src/scripts/build-shell-unified.mjs`). **CI-wired (2 Python, не в package.json):** `check_duplicates.py`, `validate_terms.py` — в `.github/workflows/{validate,build-artifact}.yml`. **QA scripts wired в iter 4 (7, ручной запуск через `pnpm run qa:*`):** `csp_check.mjs` (`qa:csp`), `bundle_check.mjs` (`qa:bundle`), `contrast_checker.mjs` (`qa:contrast`, gracefully SKIPs — KI#11), `check_english.py` (`qa:english` + `qa:english:docs`), `check_syntax_mix.py` (`qa:syntax`), `check-doc-versions.mjs` (`qa:doc-versions`), `test-interactive.mjs` (`qa:interactive`). Aggregate: `pnpm run qa`. НЕ в `precommit`/CI. **Removed in iter 3:** `validate-migration.mjs`, `gen-redirect-map.mjs` (orphan + depended on deleted `docs/migration_map.md`). | `pnpm run <script>` для wired. `pnpm run qa:*` для ad-hoc QA. Python 3.10+ для `*.py`. |
+| `scripts/` | Build + validation скрипты. **package.json-wired (5):** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs` (+ `src/scripts/build-shell-unified.mjs`). **CI-wired (2 Python, не в package.json):** `check_duplicates.py`, `validate_terms.py` — в `.github/workflows/{validate,build-artifact}.yml`. **QA scripts wired в iter 4 (7, ручной запуск через `pnpm run qa:*`):** `csp_check.mjs` (`qa:csp`), `bundle_check.mjs` (`qa:bundle`), `contrast_checker.mjs` (`qa:contrast`, FIXED iter 5 — requires `visual-system/tokens.json`), `check_english.py` (`qa:english` + `qa:english:docs`), `check_syntax_mix.py` (`qa:syntax`), `check-doc-versions.mjs` (`qa:doc-versions`), `test-interactive.mjs` (`qa:interactive`). Aggregate: `pnpm run qa`. `validate:master` wired в `precommit` (iter 5). **Removed in iter 3:** `validate-migration.mjs`, `gen-redirect-map.mjs` (orphan + depended on deleted `docs/migration_map.md`). | `pnpm run <script>` для wired. `pnpm run qa:*` для ad-hoc QA. Python 3.10+ для `*.py`. |
 | `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` запускает все. |
 | `docs/` | Техническая документация (не входит в билд). | Update при структурных изменениях. См. §7. |
 | `visual-system/` | Visual system prototype work: `PLAN.md` (v1.4), `DESIGN-TOKENS.css`, `shared/` (fonts/base/patterns/utilities), `elements/` (E01-E17 prototypes), `integration/` (component-extracts + INTEGRATION-MAP). | Isolated-first development strategy. Integration phase — ongoing. |
@@ -252,6 +252,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 28. **Code quality pass (FIX-27)** — ESLint проходит без errors. `pnpm run lint` проверяет `src/`. Не коммитить с lint errors.
 29. **Final a11y pass (FIX-31)** — `pnpm run test:a11y` (axe, WCAG 2a/2aa). Не коммитить с a11y violations.
 30. **Orphan scripts audit (meta-pitfall, iter 3 finding)** — перед добавлением нового скрипта в `scripts/`: (a) определить, wired он в `package.json` или CI workflows; (b) если orphan — задокументировать в `AGENT_NAVIGATION.md` §1 как `[orphan QA tool]`; (c) если зависит от другого файла (как `validate-migration.mjs` от `migration_map.md`) — обеспечить fallback или удалить связку. В iter 3 удалены: `validate-migration.mjs` + `gen-redirect-map.mjs` + `migration_map.md` (KI#8).
+31. **Inline scripts в master HTML (KI#12, fixed iter 5)** — visual-system integration добавила 17 inline `<script type="module">` блоков в master HTML, нарушая §3 rule. Fix: migrate в `src/shell/widgets/vs-*.js` (5 файлов: scroll-observer + 4 element-specific). `vs-scroll-observer.js` использует MutationObserver для lazy-loaded content. **Правило:** все JS для visual-system elements → `src/shell/widgets/vs-eXX-*.js`, НЕ inline в master HTML.
 
 ---
 
@@ -311,20 +312,14 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 **iter 3:** Закрыты KI#8 (orphan migration-validation trio удалён) + KI#9 (stale `DELETIONS-iter2.txt` удалён). §6 pitfalls расширены с 18 до 30. §1 scripts/ list классифицирован (package.json-wired / CI-wired / orphan QA tools / removed). `terminology_dictionary.md` пофикшен (stale `p7_core_directives` → `p7a_core_directives`). `visual-system/PLAN.md` — устаревшие рекомендации в Appendix E/F помечены [OBSOLETE per iter 2 KI#1/KI#2].
 
-**iter 4:** Закрыты все 4 LOW-priority задач из iter 3 roadmap + закрыт KI#10 (stale v7 paths в `check_english.py` + `check_syntax_mix.py`). Обнаружены 2 новых ACTIVE KI:
-- **Task A (DONE):** `docs/character_bible.md` trimmed (770 → 645 строк) — removed Elena + Выщербленный duplicates (canonical в per-character bibles). Header: deprecated notice → "Supporting Characters Registry" clarification.
-- **Task B (DONE):** `docs/cross_reference_sync.md` (62 строки) merged в `AGENT_NAVIGATION.md` новый §9 "Cross-Reference Pairs". Source file удалён.
-- **Task C (DONE):** Orphan QA scripts wired в `package.json` как `qa:*` (9 scripts). НЕ в precommit/CI — ручной запуск.
-- **Task D (DONE):** `visual-system/PLAN.md` Phase 4 audited — добавлен §4.0 "Integration Status": markers ✅ 17/17, component-extracts ✅ 17/17, actual content replacement ❌ not started.
-- **KI#10 (CLOSED):** stale v7 paths в `check_english.py` + `check_syntax_mix.py` пофикшены.
-- **KI#11 (ACTIVE, defer iter 5+):** `contrast_checker.mjs` требует несуществующий `tokens.json`. `qa:contrast` gracefully SKIPs.
-- **KI#12 (ACTIVE, defer iter 5+):** Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit` — silent ship.
+**iter 4:** Закрыты все 4 LOW-priority задач из iter 3 roadmap + закрыт KI#10. Обнаружены KI#11 + KI#12 (ACTIVE).
 
-**iter 5+ — что осталось:**
-- **KI#11 fix:** `contrast_checker.mjs` — создать `tokens.json` (a) / переписать под CSS parser (b) / удалить (c). Infrastructure decision.
-- **KI#12 fix:** Architecture decision — (a) обновить §3 rule чтобы разрешить visual-system inline scripts (with explicit `// VS Element EXX` marker) OR (b) migrate 10 inline scripts в `src/shell/widgets/*.js` per Phase 4 §4.4 plan. Затем: migrate 123 inline `style=` → CSS classes, wire `validate:master` в `precommit`, fix 23 "content outside section" warnings.
-- **Phase 4 actual integration:** Заменить textual content в master HTML на SVG (per `visual-system/PLAN.md` §4.0 Integration Status — actual content replacement ❌ not started). 17 elements, каждый требует dedup audit + text removal + SVG insertion.
-- **CHANGELOG.md [9.1.1]** всё ещё содержит "Removed: docs/migration_map.md" — историческая неточность (iter 1 заявлял, но не удалил, см. KI#7). Можно добавить inline note или оставить как есть (история).
+**iter 5:** Закрыты KI#11 + KI#12 (scripts). Создан `visual-system/tokens.json` (8 semantic colors + 5 gray scale) — `qa:contrast` работает. 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. `validate:master` wired в precommit. Результат: 0 errors (было 10). KI#13 NEW: 123 inline `style=` + 23 "content outside section" warnings → defer iter 6+.
+
+**iter 6+ — что осталось:**
+- **KI#13 fix:** 123 inline `style=` → CSS classes + 23 "content outside section" → wrap in sections.
+- **Phase 4 actual integration:** Заменить textual content в master HTML на SVG (17 elements per `visual-system/PLAN.md` §4.0).
+- **qa:syntax + qa:english false positives** — context-aware parsing.
 
 ### OP-2 — Дублирующие папки widgets/ и assets/ [CLOSED iter 2]
 
@@ -390,4 +385,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 5 прочитай `STATUS.md` (KI#1..KI#10 закрыты, KI#11/KI#12 ACTIVE — defer iter 5+), `worklog.md` (iter 4 record — этот раздел), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 5+ пунктами). iter 5 priorities: (1) KI#11 fix (contrast_checker.mjs + tokens.json decision), (2) KI#12 architecture decision (update §3 rule OR migrate inline scripts to widgets), (3) Phase 4 actual integration (replace textual content with SVG in master HTML). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом iter 6 прочитай `STATUS.md` (KI#13 ACTIVE — 123 inline styles + 23 content-outside-section), `worklog.md` (iter 5 record), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 6+ пунктами). iter 6 priorities: (1) KI#13 fix — migrate 123 inline `style=` → CSS classes + wrap 23 content-outside-section elements, (2) Phase 4 actual integration start (replace textual content with SVG in master HTML). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.

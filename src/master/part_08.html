@@ -204,34 +204,6 @@
 
     </div>
 
-<script type="module">
-// VS Element E12 - inline script (from component-extracts)
-/**
- * Element: E12 — Antipattern Catalog
- * Source: elements/E12-antipattern-catalog.html
- * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05 });
-      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
-    });
-</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E12 -->
 <section  data-section="p8_antipatterns_overview" data-toc-nav>
@@ -435,7 +407,6 @@ NEED: Принятие — связь без стены цинизма
 WANT: Доказать правоту самостоятельно
   ↑ совместимо с LIE ("работаю одна = доказываю одна")</code></pre>
 <p>Цепь замкнута: каждый элемент объясняется предыдущим. Проверка: GHOST→LIE (предательство → недоверие ✓), LIE→FLAW (недоверие → сарказм при близости ✓), FLAW→NEED (сарказм блокирует принятие ✓), WANT↔LIE (доказывает одна ↔ не нужно одобрение ✓).</p>
-
 
 </div>
 </section>

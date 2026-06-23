@@ -73,34 +73,6 @@
       </p>
     </div>
 
-<script type="module">
-// VS Element E11 - inline script (from component-extracts)
-/**
- * Element: E11 — CoT Tiers
- * Source: elements/E11-cot-tiers.html
- * Dependencies: None (vanilla JS)
- * Notes: Element-specific interaction logic. IntersectionObserver handles
- *        scroll-enter animations. Shared mini-map keyboard navigation removed
- *        (will be handled by global shell component).
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
-    });
-</script>
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E11 -->
 <section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>
@@ -115,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
 <li><strong>XML-синтаксис</strong> — <code>&lt;processus_analysium&gt;</code> для структурированных размышлений</li>
 <li><strong>Quickstart (CoT)</strong> — 60-минутный конвейер сборки экспертной карточки</li>
 </ul>
-
 
 </section>
 
@@ -174,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </tbody>
 </table>
 </div>
-
 
 </section>
 
@@ -246,8 +216,6 @@ resolution: отступить
 *отступает на шаг, пальцы касаются виска*
 "Прошу прощения. Я... не должен."</code></pre>
 
-
-
 </section>
 
 <section  data-section="p6_cot_anchors">
@@ -275,8 +243,6 @@ resolution: отступить
 <div class="callout rule">
 <p><strong>RULE:</strong> CoT Overload (AP-10) — больше 3 CoT Anchors. Модель начинает генерировать внутренние монологи вместо действий. → <a href="#p8_ap10_cot_overload">Part 8: AP-10 CoT Overload</a>.</p>
 </div>
-
-
 
 <p>Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 

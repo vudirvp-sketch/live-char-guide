@@ -1,5 +1,33 @@
 # Changelog
 
+## [9.1.5] - 2026-06-23
+
+### Fixed (iter 5 — KI#11 + KI#12 CRITICAL fixes)
+- **KI#11** (CLOSED) `scripts/contrast_checker.mjs` ожидал `tokens.json`, которого не было в repo. Создан `visual-system/tokens.json` — JSON-экстракт из `DESIGN-TOKENS.css` с `primitives.color.semantic` (8 цветов) + `primitives.color.gray` (5 уровней). `qa:contrast` теперь работает: "All contrast ratios pass". Добавлен в aggregate `qa` script.
+- **KI#12** (PARTIAL) 10 prohibited `<script>` blocks → 0 errors. Architecture decision (b): migrate inline scripts → widget JS modules. Созданы 5 widget scripts. Удалены 17 inline `<script type="module">` блоков из 10 master HTML файлов. `validate:master` wired в `precommit`. Остаток → KI#13 (123 inline styles + 23 content-outside-section warnings).
+
+### Added
+- **`visual-system/tokens.json`** — JSON design token extract for contrast_checker.mjs (8 semantic colors + 5 gray scale).
+- **`src/shell/widgets/vs-scroll-observer.js`** — Global IntersectionObserver + MutationObserver for all `.scroll-enter`, `.enneagram-anim`, `.type-node` elements. Replaces duplicated pattern from 17 inline scripts.
+- **`src/shell/widgets/vs-e10-enneagram.js`** — E10 enneagram hover/keyboard mini-card interaction with SVG→screen coordinate conversion.
+- **`src/shell/widgets/vs-e13-diagnostic.js`** — E13 diagnostic tree expand/collapse with keyboard support.
+- **`src/shell/widgets/vs-e15-blueprint.js`** — E15 annotated blueprint layer toggle with ARIA support.
+- **`src/shell/widgets/vs-e16-author-note.js`** — E16 author's note template toggle with ARIA support.
+
+### Changed
+- **`src/master/part_01..10.html`** — removed 17 inline `<script type="module">` blocks (total -25,494 chars). All VS element JS logic now in `src/shell/widgets/vs-*.js`.
+- **`src/shell/index.html`** — added 5 new widget script tags (vs-scroll-observer, vs-e10-enneagram, vs-e13-diagnostic, vs-e15-blueprint, vs-e16-author-note).
+- **`package.json`** — `qa:contrast` now passes `visual-system/tokens.json` as argument. `qa:contrast` added to aggregate `qa`. `precommit` now includes `validate:master`.
+
+### Known Issues (NEW, ACTIVE)
+- **KI#13** 123 inline `style=` attributes + 23 "content outside section" warnings в master HTML. MEDIUM impact — not prohibited by §3 but pitfall #16 recommends CSS classes. Defer iter 6+.
+
+### Notes
+- iter 5 = KI#11/KI#12 CRITICAL fixes. validate:master: 0 errors (was 10), 146 warnings remain (KI#13).
+- KI#1..KI#12 all closed or partially fixed. KI#13 — ACTIVE, defer iter 6+.
+
+---
+
 ## [9.1.4] - 2026-06-23
 
 ### Fixed (iter 4 — LOW-priority cleanup + QA wiring)

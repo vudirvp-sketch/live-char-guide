@@ -223,10 +223,14 @@ Stage Summary:
 - KI#11 (NEW, найден в iter 4) — ACTIVE, defer iter 5+: `contrast_checker.mjs` ожидает `tokens.json`, которого нет в repo. `qa:contrast` gracefully SKIPs. Fix options (a/b/c).
 - KI#12 (NEW, найден в iter 4) — ACTIVE, defer iter 5+: Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit` — silent ship. Fix plan (4 steps), требует architecture decision (a vs b).
 
-**Iter 5+ (следующий запуск):**
-1. **KI#11 fix** — `contrast_checker.mjs` + `tokens.json`: (a) создать `visual-system/tokens.json` (JSON-экстракт из DESIGN-TOKENS.css), (b) переписать скрипт под CSS parser, (c) удалить скрипт. Infrastructure decision.
-2. **KI#12 fix** — Architecture decision: (a) обновить §3 rule чтобы разрешить visual-system inline scripts (with `// VS Element EXX` marker) OR (b) migrate 10 inline scripts в `src/shell/widgets/*.js`. Затем: migrate 123 inline `style=` → CSS classes, wire `validate:master` в `precommit`, fix 23 "content outside section" warnings.
-3. **Phase 4 actual integration** — Заменить textual content в master HTML на SVG (per `visual-system/PLAN.md` §4.0). 17 elements, каждый требует dedup audit + text removal + SVG insertion.
-4. **CHANGELOG.md [9.1.1]** всё ещё содержит "Removed: docs/migration_map.md" — историческая неточность (iter 1 заявлял, но не удалил, см. KI#7). Можно добавить inline note или оставить как есть (история).
+**Iter 5 завершена:** закрыты KI#11 + KI#12 (scripts). KI#13 NEW (inline styles + content-outside-section).
+- **KI#11 (CLOSED):** Создан `visual-system/tokens.json` — JSON-экстракт из `DESIGN-TOKENS.css`. `qa:contrast` работает.
+- **KI#12 (PARTIAL, scripts → 0 errors):** Architecture decision (b) — migrate 17 inline `<script>` blocks → 5 widget JS modules: `vs-scroll-observer.js` (global IntersectionObserver + MutationObserver), `vs-e10-enneagram.js`, `vs-e13-diagnostic.js`, `vs-e15-blueprint.js`, `vs-e16-author-note.js`. Удалены 17 inline scripts из 10 master HTML файлов. `validate:master` wired в `precommit`.
+- **KI#13 (NEW, ACTIVE):** 123 inline `style=` attributes + 23 "content outside section" warnings. Defer iter 6+.
 
-**Все 10 Known Issues (KI#1..KI#10) закрыты. KI#11/KI#12 — ACTIVE, defer iter 5+.**
+**Iter 6+ (следующий запуск):**
+1. **KI#13 fix** — 123 inline `style=` → CSS classes + 23 "content outside section" → wrap in sections.
+2. **Phase 4 actual integration** — Заменить textual content в master HTML на SVG (17 elements per `visual-system/PLAN.md` §4.0).
+3. **qa:syntax + qa:english false positives** — context-aware parsing.
+
+**KI#1..KI#12 закрыты. KI#13 — ACTIVE, defer iter 6+.**
