@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.1.0 -->
-<!-- Build: ae2995f6 -->
-<!-- Generated: 2026-05-16T17:31:32.308Z -->
+<!-- Build: 99ad248a -->
+<!-- Generated: 2026-05-17T09:00:25.427Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -15,7 +15,8 @@
   <meta property="og:image" content="assets/preview-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <!-- FIX-25: Removed cdn.jsdelivr.net from script-src (no scripts loaded from CDN). Kept in style-src/font-src for Geist font CSS. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
+  <!-- FIX-26: Added cdn.jsdelivr.net to script-src for Mermaid diagram rendering. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -34,7 +35,7 @@
   <!-- Main content area (auto-loaded, no modal) -->
   <main id="content" class="content-hidden"></main>
   <noscript>
-    <div class="fi26-noscript-fallback">
+    <div style="padding:2em;text-align:center;color:#e2e8f0;font-family:sans-serif;">
       <h1>Live Character Guide</h1>
       <p>Для работы этого руководства требуется JavaScript. Пожалуйста, включите JavaScript в настройках браузера.</p>
     </div>
@@ -104,6 +105,25 @@
     <div class="panel-resize-handle" data-resize-handle></div>
   </div>
 
+  <!-- Mermaid: diagram rendering library (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#4a1a4a',
+        primaryTextColor: '#e2e8f0',
+        primaryBorderColor: '#8b5cf6',
+        lineColor: '#6b7590',
+        secondaryColor: '#1a1a2e',
+        tertiaryColor: '#16162a',
+        fontFamily: 'var(--font-body, sans-serif)',
+        fontSize: '13px'
+      },
+      flowchart: { htmlLabels: true, curve: 'basis', padding: 12 }
+    });
+  </script>
   <script src="event-bus.js"></script>
   <script src="widgets/widget-utils.js"></script>
   <script src="assets/lazy-loader.js"></script>

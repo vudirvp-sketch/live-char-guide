@@ -328,7 +328,9 @@ live-char-guide/
 
 ---
 
-## v7 → v8 Migration
+## v7 → v8 Migration (Archived)
+
+> **Archived (iter 1, v9.1.1):** `docs/transition_guide.md` удалён в iter 1 docs restructure — устарел (v7→v8 при текущей v9.1.0). v7 users — see git history (`docs/transition_guide.md` в коммитах до iter 1). Эта секция оставлена как historical reference; полное удаление — iter 2+ (после подтверждения, что v7→v8 миграция больше не актуальна).
 
 v9 continues the **unified restructuring** of v8, eliminating remaining structural remnants from the old layer system. v9.1 specifically addresses: dual assembly pipeline (FIX-01), token budget misplacement (FIX-02), CORE DIRECTIVES numbering conflict (FIX-03), content duplication ~25-30% (FIX-04), and other issues detailed in the restructure plan.
 
@@ -348,8 +350,6 @@ Key changes:
 | "Основы/Дополнительно" tables | 10 tables across Parts 2-8 | Deleted, replaced with intro paragraphs |
 | Model capability | Mixed with layer concepts | Inline `[MODEL_NOTE: text]` format |
 
-See `docs/transition_guide.md` for a detailed migration guide for v7 users.
-
 ---
 
-*Document prepared for Live Character Guide v9.1.0*
+*Document prepared for Live Character Guide v9.1.0 + docs restructure iter 1*

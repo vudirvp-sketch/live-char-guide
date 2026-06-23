@@ -1,5 +1,29 @@
 # Changelog
 
+## [9.1.1] - 2026-06-23
+
+### Added
+- **AGENT_NAVIGATION.md** — entry document для AI-агентов (structure map, build pipeline, section model, widget arch, 18 pitfalls, doc map, open proposals). Перенят паттерн из `poe2-regex-ru`.
+- **STATUS.md** — текущий статус проекта + 6 Known Issues + подтверждённые ограничения.
+- **worklog.md** — iter log (последняя итерация подробно, предыдущие одной строкой).
+- **PLAN.md** — полный анализ `poe2-regex-ru` навигации/документации + roadmap перенять в `live-char-guide` с обоснованием ЗАЧЕМ.
+
+### Removed
+- **docs/migration_map.md** (586 строк) — устарел: v5.12→v6 при текущей v9.1.0 (4 major версии назад). Git history сохранит при необходимости.
+- **docs/transition_guide.md** (179 строк) — устарел: v7→v8 при текущей v9.1.0.
+- **docs/ap_reference_inventory.md** (179 строк) — одноразовый документ Phase 0 для renumbering Phase 2.3, задача выполнена.
+
+### Updated
+- **README.md** — добавлены ссылки на новые AGENT_NAVIGATION/STATUS/worklog/PLAN. Убраны ссылки на удалённый transition_guide. Структура репозитория обновлена с 4 новыми файлами верхнего уровня.
+- **docs/architecture.md** — секция "v7 → v8 Migration" помечена как **Archived** (transition_guide.md удалён в этой итерации).
+
+### Notes
+- iter 1 = docs restructure. Без правок кода, тестов, UI или shell.
+- Полный анализ и обоснование — в `PLAN.md`.
+- Known Issues после iter 1: 6 шт (KI#1 parts/ в repo, KI#2 дубли widgets/assets, KI#3 CHANGELOG не отражает FIX-N, KI#4 user_journeys.md Draft, KI#5 CONTRIBUTING.md устаревший src/parts/, KI#6 architecture.md archived секция). См. `STATUS.md`.
+
+---
+
 ## [9.0.0] - 2026-05-15
 
 ### Restructured

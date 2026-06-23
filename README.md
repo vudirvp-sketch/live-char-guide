@@ -11,9 +11,12 @@
 | Ресурс | Ссылка |
 |--------|--------|
 | **Онлайн-гайд** | [vudirvp-sketch.github.io/live-char-guide](https://vudirvp-sketch.github.io/live-char-guide/) |
+| **Entry document (для AI-агентов)** | [AGENT_NAVIGATION.md](./AGENT_NAVIGATION.md) |
+| **Текущий статус + Known Issues** | [STATUS.md](./STATUS.md) |
+| **Worklog (итерации)** | [worklog.md](./worklog.md) |
+| **План docs-restructure** | [PLAN.md](./PLAN.md) |
 | **Changelog** | [CHANGELOG.md](./CHANGELOG.md) |
 | **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| **Transition Guide (v7→v8)** | [docs/transition_guide.md](./docs/transition_guide.md) |
 
 ---
 
@@ -131,8 +134,14 @@ live-char-guide/
 ├── docs/                    # Документация (не входит в билд)
 │   ├── architecture.md
 │   ├── content_map.md
-│   ├── transition_guide.md  # v7 → v8 миграция
+│   ├── components.md
+│   ├── terminology_dictionary.md
 │   └── ...
+│
+├── AGENT_NAVIGATION.md      # Entry document для AI-агентов
+├── STATUS.md                # Текущий статус + Known Issues
+├── worklog.md               # История итераций
+├── PLAN.md                  # План docs-restructure
 │
 └── package.json
 ```

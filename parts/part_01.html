@@ -124,11 +124,11 @@
           Примеры диалогов, демонстрирующие голос персонажа. 2–5 примеров, каждый ~40–80 токенов.
           <!-- Anchors sub-panel — nested, violet accent -->
           <div class="anchors-subpanel">
-            <div class="fi26-flex-center-gap">
-              <span class="fi26-label-sm-violet">Anchors</span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <span style="font-family:var(--font-heading); font-weight:600; font-size:13px; color:var(--accent-violet);">Anchors</span>
               <span class="badge badge--violet">T→A→P</span>
             </div>
-            <div class="fi26-text-xs-secondary">
+            <div style="font-size:12px; color:var(--text-secondary);">
               Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
               Единственное место, где Anchors живут структурно.
             </div>
@@ -192,62 +192,62 @@
     </div>
 
     <!-- Token budget summary -->
-    <div class="panel fi26-container-lg">
-      <div class="fi26-label-primary">
+    <div class="panel" style="max-width:720px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--text-primary);">
         Сводка токенного бюджета
       </div>
-      <table class="fi26-table-mono">
+      <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px;">
         <thead>
-          <tr class="fi26-thead-muted">
-            <th class="fi26-cell-left">Блок</th>
-            <th class="fi26-cell-right">Мин</th>
-            <th class="fi26-cell-right">Стандарт</th>
-            <th class="fi26-cell-right">Макс</th>
-            <th class="fi26-cell-left-muted">Источник</th>
+          <tr style="border-bottom:1px solid var(--border); color:var(--text-muted);">
+            <th style="text-align:left; padding:6px 8px;">Блок</th>
+            <th style="text-align:right; padding:6px 8px;">Мин</th>
+            <th style="text-align:right; padding:6px 8px;">Стандарт</th>
+            <th style="text-align:right; padding:6px 8px;">Макс</th>
+            <th style="text-align:left; padding:6px 8px; color:var(--text-muted);">Источник</th>
           </tr>
         </thead>
-        <tbody class="fi26-tbody-secondary">
-          <tr class="fi26-row-border">
-            <td class="fi26-cell-pad">SP</td>
-            <td class="fi26-cell-right">~50</td>
-            <td class="fi26-cell-right">~100</td>
-            <td class="fi26-cell-right">~200</td>
-            <td class="fi26-cell-pad-muted">Part 7A</td>
+        <tbody style="color:var(--text-secondary);">
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">SP</td>
+            <td style="text-align:right; padding:6px 8px;">~50</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="text-align:right; padding:6px 8px;">~200</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
           </tr>
-          <tr class="fi26-row-border">
-            <td class="fi26-cell-pad">Description</td>
-            <td class="fi26-cell-right">~150</td>
-            <td class="fi26-cell-right">~300</td>
-            <td class="fi26-cell-right">~700</td>
-            <td class="fi26-cell-pad-muted">Part 7A</td>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Description</td>
+            <td style="text-align:right; padding:6px 8px;">~150</td>
+            <td style="text-align:right; padding:6px 8px;">~300</td>
+            <td style="text-align:right; padding:6px 8px;">~700</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
           </tr>
-          <tr class="fi26-row-border">
-            <td class="fi26-cell-pad">Examples (2–5)</td>
-            <td class="fi26-cell-right">~80</td>
-            <td class="fi26-cell-right">~180</td>
-            <td class="fi26-cell-right">~400</td>
-            <td class="fi26-cell-pad-muted">Part 7A (40/60/80 per)</td>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Examples (2–5)</td>
+            <td style="text-align:right; padding:6px 8px;">~80</td>
+            <td style="text-align:right; padding:6px 8px;">~180</td>
+            <td style="text-align:right; padding:6px 8px;">~400</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A (40/60/80 per)</td>
           </tr>
-          <tr class="fi26-row-border">
-            <td class="fi26-cell-pad">Greeting</td>
-            <td class="fi26-cell-right">~40</td>
-            <td class="fi26-cell-right">~60</td>
-            <td class="fi26-cell-right">~100</td>
-            <td class="fi26-cell-pad-muted">Part 7A</td>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Greeting</td>
+            <td style="text-align:right; padding:6px 8px;">~40</td>
+            <td style="text-align:right; padding:6px 8px;">~60</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
           </tr>
-          <tr class="fi26-row-border">
-            <td class="fi26-cell-pad">Anchors (each)</td>
-            <td class="fi26-cell-right">~15</td>
-            <td class="fi26-cell-right">~25</td>
-            <td class="fi26-cell-right">~40</td>
-            <td class="fi26-cell-pad-muted">Part 7A</td>
+          <tr style="border-bottom:1px solid var(--border-50);">
+            <td style="padding:6px 8px;">Anchors (each)</td>
+            <td style="text-align:right; padding:6px 8px;">~15</td>
+            <td style="text-align:right; padding:6px 8px;">~25</td>
+            <td style="text-align:right; padding:6px 8px;">~40</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Part 7A</td>
           </tr>
           <tr>
-            <td class="fi26-cell-pad">Lorebook</td>
-            <td class="fi26-cell-right">~0</td>
-            <td class="fi26-cell-right">~100</td>
-            <td class="fi26-cell-right">~300</td>
-            <td class="fi26-cell-pad-muted">Est. Part 7B</td>
+            <td style="padding:6px 8px;">Lorebook</td>
+            <td style="text-align:right; padding:6px 8px;">~0</td>
+            <td style="text-align:right; padding:6px 8px;">~100</td>
+            <td style="text-align:right; padding:6px 8px;">~300</td>
+            <td style="padding:6px 8px; color:var(--text-muted);">Est. Part 7B</td>
           </tr>
         </tbody>
       </table>
@@ -310,9 +310,9 @@
 
 <div class="mermaid">
 graph TD
-    OCEAN["OCEAN (Part 5)"] --> SPINE
+    OCEAN["OCEAN (Part 5)"] --> SPINE["SPINE (Part 4)"]
     Enneagram["Enneagram (Part 5)"] --> SPINE
-    SPINE["SPINE (Part 4)"] --> Anchors["Behavioral Anchors (Part 2)"]
+    SPINE --> Anchors["Behavioral Anchors (Part 2)"]
     SPINE --> Voice["Voice (Part 3)"]
     SPINE --> CoT["CoT (Part 6)"]
     Anchors --> Embodiment["Embodiment Protocol (Part 2)"]
@@ -328,9 +328,9 @@ graph TD
     SP_assembly --> Diagnostics["Diagnostics (Part 9)"]
     Lorebook --> Diagnostics
     Diagnostics --> Examples["Full Examples (Part 10)"]
-    AntiPatterns["Anti-Patterns (Part 8)"] -.->|fix links| SPINE
-    AntiPatterns -.->|fix links| SP_assembly
-    AntiPatterns -.->|fix links| Voice
+    AntiPatterns["Anti-Patterns (Part 8)"] -.->|"fix links"| SPINE
+    AntiPatterns -.->|"fix links"| SP_assembly
+    AntiPatterns -.->|"fix links"| Voice
 </div>
 
 <h4>Содержание</h4>

@@ -120,17 +120,17 @@
     </div>
 
     <!-- Explanation -->
-    <div class="panel fi26-container-md">
-      <div class="fi26-label-violet">
+    <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
         Причинно-следственная цепь
       </div>
-      <p class="fi26-text-sm-secondary">
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
         SPINE — психологический стержень персонажа. Каждый элемент причинно-следственно вытекает из предыдущего:
-        <strong class="fi26-c-primary">GHOST</strong> (глубокая травма) порождает
-        <strong class="fi26-c-primary">LIE</strong> (ложное убеждение), которое создаёт
-        <strong class="fi26-c-primary">FLAW</strong> (дезадаптивный паттерн), который двигает
-        <strong class="fi26-c-primary">NEED</strong> (подлинное желание), маскируемое
-        <strong class="fi26-c-primary">WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
+        <strong style="color:var(--text-primary);">GHOST</strong> (глубокая травма) порождает
+        <strong style="color:var(--text-primary);">LIE</strong> (ложное убеждение), которое создаёт
+        <strong style="color:var(--text-primary);">FLAW</strong> (дезадаптивный паттерн), который двигает
+        <strong style="color:var(--text-primary);">NEED</strong> (подлинное желание), маскируемое
+        <strong style="color:var(--text-primary);">WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
         WANT сходится к NEED по мере того, как персонаж платит Prices через Anchors.
       </p>
     </div>
@@ -173,11 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
 <p><strong>SPINE</strong> — фреймворк из 5 элементов, которые образуют причинную цепочку от прошлого к настоящему: <strong>GHOST → LIE → FLAW → NEED → WANT</strong>. SPINE даёт Anchors причину существовать, а не быть набором случайных правил.</p>
 
 <div class="mermaid">
-graph LR
+graph TD
     GHOST["GHOST<br/>Формирующее событие"] -->|"защита от боли"| LIE["LIE<br/>Ложная установка"]
     LIE -->|"искажает восприятие"| FLAW["FLAW<br/>Деструктивное поведение"]
     FLAW -->|"блокирует"| NEED["NEED<br/>Истинная потребность"]
-    NEED -.-|"противоречит"| WANT["WANT<br/>Осознанное желание"]
+    NEED -.->|"противоречит"| WANT["WANT<br/>Осознанное желание"]
     WANT -->|"совместимо с"| LIE
 
     style GHOST fill:#4a1a1a,stroke:#ff6b6b,color:#fff
@@ -672,60 +672,60 @@ WANT: Доказать правоту самостоятельно
 
         <!-- G3 — Surface (outer ring) — lightest violet -->
         <circle class="ring-anim" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
-                stroke="rgba(139,92,246,0.25)" stroke-width="1.5" class="fi26-delay-0"/>
+                stroke="rgba(139,92,246,0.25)" stroke-width="1.5" style="transition-delay:0ms;"/>
 
         <!-- G2 — Secondary (middle ring) — medium violet -->
         <circle class="ring-anim" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
-                stroke="rgba(139,92,246,0.35)" stroke-width="1.5" class="fi26-delay-200"/>
+                stroke="rgba(139,92,246,0.35)" stroke-width="1.5" style="transition-delay:200ms;"/>
 
         <!-- G1 — Core (inner ring) — deep violet -->
         <circle class="ring-anim" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
-                stroke="rgba(139,92,246,0.55)" stroke-width="1.5" class="fi26-delay-400"/>
+                stroke="rgba(139,92,246,0.55)" stroke-width="1.5" style="transition-delay:400ms;"/>
 
         <!-- Core glow -->
-        <circle class="ring-anim" cx="260" cy="240" r="30" fill="url(#core-glow)" class="fi26-delay-500"/>
+        <circle class="ring-anim" cx="260" cy="240" r="30" fill="url(#core-glow)" style="transition-delay:500ms;"/>
 
         <!-- Ring text labels inside SVG -->
         <text class="ring-text-anim" x="260" y="100" text-anchor="middle" fill="#8b95a8"
               font-family="'DM Sans', sans-serif" font-size="12" font-weight="600"
-              class="fi26-delay-600">G3 — Поверхностный</text>
+              style="transition-delay:600ms;">G3 — Поверхностный</text>
         <text class="ring-text-anim" x="260" y="115" text-anchor="middle" fill="#6b7590"
               font-family="'Inter', sans-serif" font-size="9"
-              class="fi26-delay-650">"Избегает обязательств"</text>
+              style="transition-delay:650ms;">"Избегает обязательств"</text>
 
         <text class="ring-text-anim" x="260" y="155" text-anchor="middle" fill="#8b95a8"
               font-family="'DM Sans', sans-serif" font-size="12" font-weight="600"
-              class="fi26-delay-700">G2 — Промежуточный</text>
+              style="transition-delay:700ms;">G2 — Промежуточный</text>
         <text class="ring-text-anim" x="260" y="170" text-anchor="middle" fill="#6b7590"
               font-family="'Inter', sans-serif" font-size="9"
-              class="fi26-delay-750">"Брошен в 16 лет"</text>
+              style="transition-delay:750ms;">"Брошен в 16 лет"</text>
 
         <text class="ring-text-anim" x="260" y="230" text-anchor="middle" fill="#e2e6ed"
               font-family="'DM Sans', sans-serif" font-size="13" font-weight="600"
-              class="fi26-delay-800">G1 — Ядро</text>
+              style="transition-delay:800ms;">G1 — Ядро</text>
         <text class="ring-text-anim" x="260" y="248" text-anchor="middle" fill="#8b95a8"
               font-family="'Inter', sans-serif" font-size="9"
-              class="fi26-delay-850">"Отец ушёл, когда мне было 5"</text>
+              style="transition-delay:850ms;">"Отец ушёл, когда мне было 5"</text>
 
       </svg>
 
 <!-- HTML labels on the right -->
       <div class="ring-label ring-label--g3 scroll-enter">
-        <div class="ring-label__title fi26-c-violet70">G3 — Поверхностный</div>
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Поверхностный</div>
         <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
         <div class="ring-label__event">"Избегает обязательств"</div>
         <div class="ring-label__causal">G3 → текущий триггер</div>
       </div>
 
       <div class="ring-label ring-label--g2 scroll-enter">
-        <div class="ring-label__title fi26-c-violet85">G2 — Промежуточный</div>
+        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Промежуточный</div>
         <div class="ring-label__timeline">Юность (13–25): подкрепляется → усиливает FLAW</div>
         <div class="ring-label__event">"Брошен в 16 лет"</div>
         <div class="ring-label__causal">G2 → усиливает FLAW</div>
       </div>
 
       <div class="ring-label ring-label--g1 scroll-enter">
-        <div class="ring-label__title fi26-c-violet">G1 — Ядро</div>
+        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Ядро</div>
         <div class="ring-label__timeline">Детство (0–12): исток → формирует LIE</div>
         <div class="ring-label__event">"Отец ушёл, когда мне было 5"</div>
         <div class="ring-label__causal">G1 → формирует LIE</div>
