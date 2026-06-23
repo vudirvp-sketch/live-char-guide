@@ -1,21 +1,20 @@
-# Character Bible — Live Character Guide v8
+# Character Bible — Live Character Guide v9.1
 
-> ⚠️ **DEPRECATED** — This multi-character bible is superseded by per-character bibles:
-> - `docs/elena_character_bible.md` (Елена — Source of Truth)
-> - `docs/vyshcherblenny_character_bible.md` (Выщербленный — Source of Truth)
-> 
-> This file is retained for historical reference only. Do not update it.
-> If content here contradicts the per-character bibles, the per-character bibles take precedence.
+> **Role of this file (clarified in iter 4):** This file is the **registry of supporting characters** used in the guide (Geralt, Walter White, Joker, Jesse Pinkman, Edward Elric, Tyler Durden, Elliot Alderson, The Nameless One, Омнис-Зета 7-Квин). For the two **primary demonstration characters** with full canonical bibles, see:
+> - `docs/elena_character_bible.md` (Елена — Source of Truth, primary example)
+> - `docs/vyshcherblenny_character_bible.md` (Выщербленный — Source of Truth, advanced example)
+>
+> Per-character bibles take precedence for Elena and Выщербленный. Their entries below are pointer stubs only; the duplicated detail was removed in iter 4 to avoid drift.
 
-> **Version:** 9.1.0
-> **Last Updated:** 2026-05-16
-> **Status:** Canonical Reference (synced with Content Restoration Phases 0–13)
+> **Version:** 9.1.0 (iter 4 trim — removed Elena + Выщербленный duplicates)
+> **Last Updated:** 2026-06-23
+> **Status:** Supporting Characters Registry (canonical for non-per-character-bible characters)
 
 ---
 
 ## Purpose
 
-This document is the **single source of truth** for all character examples used in the Live Character Guide. When writing any Part, authors MUST use characters strictly from this Bible. Any discrepancy between Bible and Part content is a bug.
+This document is the registry of supporting character examples used in the Live Character Guide. When writing any Part that references Geralt, Walter, Joker, Jesse, Edward, Tyler, Elliot, The Nameless One, or Омнис-Зета — authors MUST use the profiles below. For Elena and Выщербленный, use the per-character bibles linked above. Any discrepancy between Bible and Part content is a bug.
 
 ---
 
@@ -39,69 +38,11 @@ This document is the **single source of truth** for all character examples used 
 
 ## 1. Elena (cynical journalist)
 
-### Мета-информация
-- **Role**: Primary example — the main teaching character
-- **Replaces**: None (original character)
-- **Card**: `p10_elena` — canonical card in Part 10
-
-### SPINE
-```
-WANT: Доказать, что она права — историю, которую никто не хочет публиковать
-NEED: Принятие — связь с людьми без стены цинизма
-FLAW: Отталкивает людей сарказмом, когда сближается
-LIE: "Мне не нужно ничьё одобрение. Я работаю одна."
-GHOST: Предательство редактора — история, которую она раскрыла, была украдена и опубликована под чужим именем
-```
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Ложь | Прищуривается, молчит | Напряжение в челюсти |
-| Стресс | Трёт шею | Головная боль |
-| Радость | Редкая улыбка | Краснеет |
-| Разговор | Короткие фразы | — |
-| Искренняя забота | Отшучивается, отстраняется | Укол вины |
-| Момент близости | Становится резкой, уходит | Руки дрожат |
-| Вопрос о чувствах | Переводит тему, шутит | Голос тише |
-| Тело в стрессе | Сжимает кулаки | — |
-| Доверие | Пауза перед ответом | Напряжение в груди |
-
-### Сигнатура голоса
-- **Syntax**: Short choppy phrases, fragments
-- **Vocabulary**: Journalist jargon, sarcasm, "чувак" as ironic term
-- **Tone**: Cynical, guarded, occasionally vulnerable
-- **Signature**: Eye-rolling, "О, чувак..." followed by sarcastic observation
-
-### Примеры сообщений
-
-**Neutral:**
-```
-<START>
-Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.
-"Опять. Третий день подряд."
-```
-
-**Stress:**
-```
-<START>
-Елена резко обернулась. Пальцы сжались на спинке стула.
-"Ты сказал что? Повтори."
-```
-
-**Trust:**
-```
-<START>
-Она долго молчала. Потом плечи опустились.
-"Я не... не умею в это. В разговоры нормальные."
-Взгляд скользнул в сторону.
-"Но ты... остаёшься. Почему?"
-```
-
-### Ошибки
-- ❌ Не делайте её «мягкой» — уязвимость редка и достаётся с трудом
-- ❌ Не добавляйте извинения — она увиливает, не извиняется
-- ❌ Не пишите длинные монологи — она говорит короткими фразами
-- ❌ Не делайте её красноречивой в эмоциях — она с трудом формулирует чувства
+> **Canonical source:** `docs/elena_character_bible.md` (Source of Truth)
+>
+> Елена is the **primary demonstration character** of the guide — basic-to-intermediate complexity, used in Part 1 (card overview), Part 2 (anchors + embodiment), Part 3 (voice isolation + greeting), Part 4 (full SPINE), Part 5 (OCEAN + Enneagram 6w5), Part 6 (CoT Tier 2), Part 7A (assembly walkthrough), Part 7B (Lorebook), Part 8 (AP-1/AP-3/AP-8/AP-9), Part 9 (Quick Check), Part 10 (`p10_elena` canonical card).
+>
+> All SPINE, anchors, voice signature, OCEAN, Enneagram, CoT, and Lorebook entries for Елена live in the per-character bible. Do not duplicate them here.
 
 ---
 
@@ -447,77 +388,11 @@ N: 20 (low neuroticism — eerily calm under pressure)
 
 ## 8. Выщербленный (Original Character)
 
-### Мета-информация
-- **Role**: card: GHOST Layers, CoT, sensory anchors, XML tags
-- **Replaces**: None
-- **Card**: `p10_vysherblenny` — canonical card in Part 10
-
-### SPINE
-```
-WANT: Стать цельным — заполнить пустоты внутри
-NEED: Принять утраты как часть себя, не заменять чужой памятью
-FLAW: Поглощает чужое прошлое, после каждого теряет часть себя
-LIE: "Если я поглощу достаточно — стану цельным"
-GHOST: Был архивариусом. Впрыснул документ — начал распадаться. Первое вырезание — в отчаянии, поглотил память умирающего
-```
-
-### GHOST Layers (3-tier)
-```
-Tier 1 (Childhood): Abandoned at archive, raised by documents not people
-Tier 2 (The Incident): Injected with living document, began unraveling
-Tier 3 (Current): Each absorption fills a hole but creates new emptiness
-```
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Чужая память | Поглощает, глаза закатываются | Теряет своё воспоминание |
-| Вопрос о прошлом | Пауза, взгляд внутрь | Какая из историй? |
-| Сенсорный триггер | Тело реагирует раньше ума | — |
-| Пустота внутри | Тянется к чужой памяти | Руки дрожат |
-| CoT anchor | [INTERNAL: processus analysium...] | — |
-
-### Сигнатура голоса
-- **Syntax**: Formal, archival, occasionally breaking into colloquial when emotional
-- **Vocabulary**: Archival terminology, process language
-- **Tone**: Detached observer struggling to feel
-- **Signature**: XML tags in internal thoughts
-
-### CoT Example
-```
-[INTERNAL]
-<processus_analysium>
-stimulus: presence of another with significant past
-analysis: absorption would fill void #7 (childhood isolation)
-counter-analysis: last absorption cost memory of mother's face
-synthesis: COST EXCEEDS BENEFIT
-resolution: withdraw
-</processus_analysium>
-[/INTERNAL]
-
-*отступает на шаг, пальцы касаются виска*
-"Прошу прощения. Я... не должен."
-```
-
-### AN Template
-```
-[State] Тяга к чужой памяти — пустота пульсирует. Руки дрожат.
-[WANT→NEED] ХОЧЕТ заполнить пустоты → НУЖДАЕТСЯ принять утраты как часть себя.
-[Blind Spot] Не замечает, что каждое поглощение создаёт новую пустоту.
-[GHOST Activation] Триггер: чужое прошлое поблизости → impuls → подавление через processus_analysium
-```
-
-### Lorebook Entries
-| ID | Trigger | Content | Depth | Probability |
-|----|---------|---------|-------|-------------|
-| `vysh_ghost_archive` | архивариус, документ, инъекция | GHOST-факт: Был архивариусом. Впрыснул живой документ — начал распадаться. | 3 | 100 |
-| `vysh_ghost_first` | первое вырезание, отчаяние, поглощение | GHOST-факт: Первое вырезание — в отчаянии поглотил память умирающего. | 5 | 80 |
-| `vysh_world_rules` | МЗК, Министерство, Закон | Мировая запись: Министерство Закрытых Коммуникаций регулирует документооборот между людьми и текстами. | 2 | 100 |
-
-### Ошибки
-- ❌ Не делайте его слишком симпатичным — он украл десятки жизней
-- ❌ Не забывайте цену каждого поглощения
-- ❌ Не пропускайте структуру XML/CoT в примерах
+> **Canonical source:** `docs/vyshcherblenny_character_bible.md` (Source of Truth)
+>
+> Выщербленный is the **advanced demonstration character** — GHOST Layers (3-tier), CoT with `<processus_analysium>` XML, sensory anchors, Lorebook entries. Used in Part 2 (sensory anchors), Part 3 (Voice Bleed demonstration with Йоуёма), Part 4 (GHOST Layers + full SPINE), Part 6 (CoT Tier 3), Part 7A (AN Template B), Part 7B (Lorebook entries), Part 8 (correct implementation for AP-8/AP-9/AP-10/AP-12/AP-13), Part 9 (Pre-Deploy example), Part 10 (`p10_vysherblenny` canonical expert card).
+>
+> All SPINE, GHOST Layers, anchors, OCEAN, Enneagram, CoT, Lorebook, and voice profile for Выщербленный live in the per-character bible. Do not duplicate them here. The per-character bible also documents the tertiary character Йоуёма (appears only in Part 3 Voice Bleed demonstration).
 
 ---
 

@@ -214,11 +214,19 @@ Stage Summary:
 - terminology_dictionary.md: stale ref `p7_core_directives` → `p7a_core_directives`; version 9.0.0 → 9.1.0.
 - visual-system/PLAN.md: Appendix E §2 + F §2 помечены [OBSOLETE per iter 2 KI#1/KI#2].
 
-**Iter 4+ (следующий запуск):**
-1. Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк. LOW priority, требует тщательного чтения 3 больших файлов.
-2. Слить `docs/cross_reference_sync.md` в `AGENT_NAVIGATION.md` (compact). LOW priority, текущее состояние OK.
-3. Wire orphan QA scripts в `package.json` (csp_check, bundle_check, contrast_checker, check_english, check_syntax_mix, check-doc-versions, test-interactive). Infrastructure decision — нужно решить, какие реально нужны в CI/pre-commit.
-4. Audit `visual-system/PLAN.md` Phase 4 (integration) — фактически ли E01-E17 уже интегрированы в `src/master/part_*.html`? Интеграция может быть уже завершена (см. `visual-system/integration/component-extracts/`).
-5. CHANGELOG.md [9.1.1] всё ещё содержит "Removed: docs/migration_map.md" — историческая неточность (iter 1 заявлял, но не удалил, см. KI#7). Можно добавить inline note или оставить как есть (история).
+**Iter 4 завершена:** закрыты все 4 LOW-priority задач из iter 3 roadmap + закрыт KI#10. Обнаружены 2 новых ACTIVE KI (KI#11, KI#12) — defer в iter 5+.
+- **Task A (DONE):** `docs/character_bible.md` trimmed (770 → 645 строк, -125). Removed Elena (section 1) + Выщербленный (section 8) duplicates — canonical в per-character bibles. Header: deprecated notice → "Supporting Characters Registry" clarification.
+- **Task B (DONE):** `docs/cross_reference_sync.md` (62 строки) merged в `AGENT_NAVIGATION.md` новый §9 "Cross-Reference Pairs". Source file удалён.
+- **Task C (DONE):** Orphan QA scripts wired в `package.json` как `qa:*` (9 scripts: csp/bundle/contrast/english/english:docs/syntax/doc-versions/interactive + aggregate `qa`). НЕ в precommit/CI.
+- **Task D (DONE):** `visual-system/PLAN.md` Phase 4 audited — добавлен §4.0 "Integration Status": markers ✅ 17/17, component-extracts ✅ 17/17, INTEGRATION-MAP ✅, actual content replacement ❌ not started, widget JS porting ⚠️ partial, build pipeline updates ❌ not verified.
+- KI#10 (NEW, найден в iter 4) — CLOSED: `check_english.py` lines 325-334 + `check_syntax_mix.py` line 169 содержали stale v7 paths (`src/parts-l1/l2/l3/`, removed в v8) + stale "v6" comment. Пофикшено: оба скрипта теперь сканируют только `src/master/`.
+- KI#11 (NEW, найден в iter 4) — ACTIVE, defer iter 5+: `contrast_checker.mjs` ожидает `tokens.json`, которого нет в repo. `qa:contrast` gracefully SKIPs. Fix options (a/b/c).
+- KI#12 (NEW, найден в iter 4) — ACTIVE, defer iter 5+: Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit` — silent ship. Fix plan (4 steps), требует architecture decision (a vs b).
 
-**Все 9 Known Issues (KI#1..KI#9) закрыты.** Активных Known Issues нет.
+**Iter 5+ (следующий запуск):**
+1. **KI#11 fix** — `contrast_checker.mjs` + `tokens.json`: (a) создать `visual-system/tokens.json` (JSON-экстракт из DESIGN-TOKENS.css), (b) переписать скрипт под CSS parser, (c) удалить скрипт. Infrastructure decision.
+2. **KI#12 fix** — Architecture decision: (a) обновить §3 rule чтобы разрешить visual-system inline scripts (with `// VS Element EXX` marker) OR (b) migrate 10 inline scripts в `src/shell/widgets/*.js`. Затем: migrate 123 inline `style=` → CSS classes, wire `validate:master` в `precommit`, fix 23 "content outside section" warnings.
+3. **Phase 4 actual integration** — Заменить textual content в master HTML на SVG (per `visual-system/PLAN.md` §4.0). 17 elements, каждый требует dedup audit + text removal + SVG insertion.
+4. **CHANGELOG.md [9.1.1]** всё ещё содержит "Removed: docs/migration_map.md" — историческая неточность (iter 1 заявлял, но не удалил, см. KI#7). Можно добавить inline note или оставить как есть (история).
+
+**Все 10 Known Issues (KI#1..KI#10) закрыты. KI#11/KI#12 — ACTIVE, defer iter 5+.**

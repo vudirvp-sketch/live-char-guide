@@ -166,8 +166,8 @@ def main():
     parser.add_argument(
         'paths',
         nargs='*',
-        default=['src/master/', 'src/parts-l1/', 'src/parts-l2/', 'src/parts-l3/'],
-        help='Paths to check (default: src/master/ and src/parts-l{1,2,3}/)'
+        default=['src/master/'],
+        help='Paths to check (default: src/master/ — v8+ canonical author content)'
     )
     parser.add_argument(
         '-v', '--verbose',

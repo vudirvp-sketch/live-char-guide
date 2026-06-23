@@ -1122,6 +1122,20 @@ For each element, verify:
 
 ## Phase 4 — Integration into Guide Build
 
+### 4.0 — Integration Status (audited 2026-06-23, iter 4)
+
+| Step | State | Evidence |
+|------|-------|----------|
+| Marker comments placed in master HTML | ✅ 17/17 | `<!-- REPLACED BY VISUAL SYSTEM: EXX -->` found in `src/master/part_*.html` for all E01–E17 (see `INTEGRATION-MAP.md` for mapping) |
+| Component extracts ready | ✅ 17/17 | `visual-system/integration/component-extracts/E{01..17}-{visual.html,styles.css,script.js}` exist (52 files total incl. README) |
+| `INTEGRATION-MAP.md` mapping | ✅ Done | 17 element → target-section rows, token migration plan, integration order |
+| Token migration (`token-migration.css`) | ✅ Drafted | File exists, contains merged token map |
+| Actual content replacement in `src/master/part_*.html` | ❌ Not started | Master sections still contain original textual content after each marker. Markers indicate WHERE visual should be inserted, not that replacement happened. |
+| Widget JS porting (E09/E10/E13/E15/E16) | ⚠️ Partial | Widgets exist in `src/shell/widgets/` (`ocean-insight.js`, `enneagram-builder.js`, `diagnostic-tree.js`, `blueprint-viewer.js`, `author-note-viewer.js`) — wired to `lazy-loader.js`. Whether they are visual-system ports or pre-existing widgets is unclear without per-widget audit. |
+| Build pipeline updates | ❌ Not verified | `build-unified.mjs` not audited for SVG-asset bundling changes |
+
+**Conclusion:** Phase 4 is **partially complete** — marker scaffolding + component-extract artifacts are in place, but the actual text→SVG replacement described in §4.1 Integration Dedup Rules has not been executed. Remaining work for a future iter: per-element audit (does the post-marker section still contain duplicate textual content that the rule says to remove?), then execute replacement and verify build.
+
 ### 4.1 — Integration Map
 
 File: `visual-system/integration/INTEGRATION-MAP.md`

@@ -322,16 +322,10 @@ def main():
     # Default mode: check HTML files
     html_files = []
     
-    # Check src/master/ (v6)
+    # Check src/master/ (v8+ canonical author content)
     master_dir = repo_root / 'src' / 'master'
     if master_dir.exists():
         html_files.extend(master_dir.glob('**/*.html'))
-    
-    # Check parts directories (v5.12, for migration)
-    for parts_dir in ['src/parts-l1', 'src/parts-l2', 'src/parts-l3']:
-        parts_path = repo_root / parts_dir
-        if parts_path.exists():
-            html_files.extend(parts_path.glob('**/*.html'))
     
     if not html_files:
         print('No HTML files found to check')

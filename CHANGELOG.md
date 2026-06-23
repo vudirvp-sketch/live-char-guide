@@ -1,5 +1,32 @@
 # Changelog
 
+## [9.1.4] - 2026-06-23
+
+### Fixed (iter 4 — LOW-priority cleanup + QA wiring)
+- **KI#10** (NEW) `scripts/check_english.py` lines 325-334 + `scripts/check_syntax_mix.py` line 169 содержали stale v7 paths (`src/parts-l1/l2/l3/`, removed в v8) + stale "v6" comment. Пофикшено: оба скрипта теперь сканируют только `src/master/` (v8+ canonical).
+
+### Added
+- **`package.json` `qa:*` scripts** — 9 новых scripts для ad-hoc QA (manual run, НЕ в precommit/CI): `qa:csp`, `qa:bundle`, `qa:contrast`, `qa:english`, `qa:english:docs`, `qa:syntax`, `qa:doc-versions`, `qa:interactive`, aggregate `qa`. Orphan QA scripts (`csp_check.mjs`, `bundle_check.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs`, `contrast_checker.mjs`) теперь wired и discoverable через `pnpm run qa:*`.
+- **`AGENT_NAVIGATION.md` §9 "Cross-Reference Pairs"** — новый раздел, merged из удалённого `docs/cross_reference_sync.md` (14 bidirectional cross-ref pairs + v9.1 restructure changes + validation checklist).
+- **`visual-system/PLAN.md` §4.0 "Integration Status"** — новый подраздел в Phase 4 с actual state audit: markers ✅ 17/17, component-extracts ✅ 17/17, INTEGRATION-MAP ✅, actual content replacement ❌ (master sections still contain original textual content after each marker), widget JS porting ⚠️ partial, build pipeline updates ❌ not verified.
+
+### Changed
+- **`docs/character_bible.md`** trimmed (770 → 645 строк, -125). Removed duplicated Elena (section 1) и Выщербленный (section 8) — они каноничны в per-character bibles. Секции заменены на pointer stubs. Header обновлён: deprecated notice → "Supporting Characters Registry" clarification. Per-character bibles (`elena_character_bible.md`, `vyshcherblenny_character_bible.md`) — без изменений (canonical Source of Truth).
+
+### Removed
+- **`docs/cross_reference_sync.md`** (62 строки) — merged в `AGENT_NAVIGATION.md` §9. Compact файл с 14 cross-ref pairs + overhead на шапку/версию.
+
+### Known Issues (NEW, ACTIVE)
+- **KI#11** `scripts/contrast_checker.mjs` ожидает `tokens.json`, которого нет в repo. `qa:contrast` gracefully SKIPs. Fix options (a/b/c) — defer to iter 5+.
+- **KI#12** Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit`, поэтому 10 errors ship silently. Fix plan (4 steps) — defer to iter 5+ (нужен architecture decision: update §3 rule OR migrate to widget JS).
+
+### Notes
+- iter 4 = LOW-priority cleanup (4 planned tasks) + QA wiring revealed 2 new KI. Без правок master HTML / shell / widget JS — только docs + package.json + 2 Python script fixes (KI#10).
+- Подробности — в `worklog.md` (iter 4 record) и `STATUS.md` (KI#10 closed, KI#11/KI#12 active).
+- Все 4 planned iter 4 tasks done. KI#1..KI#10 закрыты. KI#11/KI#12 — ACTIVE, defer to iter 5+.
+
+---
+
 ## [9.1.3] - 2026-06-23
 
 ### Fixed (iter 3 — orphan scripts cleanup + pitfalls expansion)

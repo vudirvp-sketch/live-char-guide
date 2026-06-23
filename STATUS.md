@@ -2,82 +2,93 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + docs restructure iter 3
+> **Текущая версия:** 9.1.0 + docs restructure iter 4
 > **Дата:** 2026-06-23
 
 ---
 
 ## Текущее состояние
 
-**iter 3 (orphan scripts cleanup + pitfalls expansion): KI#8 и KI#9 закрыты.**
+**iter 4 (LOW-priority cleanup + QA wiring): 4 planned tasks done, 1 closed KI#10, 2 new active KI#11/KI#12.**
 
-iter 1 создал docs-инфраструктуру. iter 2 закрыл 6 KI из iter 1 и обнаружил 2 новых (KI#7 закрыт, KI#8 отложен в iter 3). iter 3 разобрал KI#8 (orphan migration-validation trio), обнаружил и закрыл KI#9 (stale `DELETIONS-iter2.txt`), расширил §6 pitfalls с 18 до ~30, уточнил §1 scripts/ list с orphan-маркировкой.
+iter 4 закрыл все 4 LOW-priority задач из iter 3 roadmap: (A) trim character_bible.md, (B) merge cross_reference_sync.md в AGENT_NAVIGATION §9, (C) wire orphan QA scripts в package.json, (D) audit visual-system/PLAN.md Phase 4. При выполнении task C обнаружены 2 новых KI: KI#11 (`contrast_checker.mjs` требует несуществующий `tokens.json`) и KI#12 (visual-system integration introduce 10 `<script>` + 123 inline `style=` violations, `validate:master` не в precommit — silent ship). Оба KI задокументированы и deferred в iter 5+ (нужен architecture decision).
 
-### Что сделано в iter 3
+### Что сделано в iter 4
 
-**KI#8 — `scripts/validate-migration.mjs` + `gen-redirect-map.mjs` + `docs/migration_map.md` (orphan)** → CLOSED (option a — delete).
-Анализ:
-- `validate-migration.mjs` (888 строк, v2.0.0) — валидирует v7→v8 / v5.12→v6 migration. При текущей v9.1.0 — миграция 4 major версий назад. Не в `package.json`, не в CI workflows, не в pre-commit hook.
-- `gen-redirect-map.mjs` (257 строк, v1.0.0) — генерирует `data/anchor-redirects.json` из `docs/migration_map.md`. Orphan аналогично.
-- `docs/migration_map.md` (586 строк) — depended on только двумя orphan-скриптами выше.
-- `data/anchor-redirects.json` — KEEP. Runtime data, загружается `src/shell/lazy-loader.js` строки 67-81. Hardcoded fallback в lazy-loader.js (строки 51-62) обеспечивает работу без JSON.
+**Task A — `docs/character_bible.md` trim** → DONE. Удалены дублирующие секции Elena (1) и Выщербленный (8) — они каноничны в per-character bibles. Секции заменены на pointer stubs с описанием где в guide используется персонаж. Header обновлён: deprecated notice → "Supporting Characters Registry" clarification. Экономия: 125 строк (770 → 645). Per-character bibles (`elena_character_bible.md`, `vyshcherblenny_character_bible.md`) — без изменений (canonical Source of Truth).
 
-Решение: удалить все 3 orphan-файла. `data/anchor-redirects.json` остаётся committed статическим артефактом. Все 3 файла сохранятся в git history (commit `f97057d` и ранее).
+**Task B — `docs/cross_reference_sync.md` merge** → DONE. Compact файл (62 строки, 14 bidirectional cross-ref pairs) слит в `AGENT_NAVIGATION.md` новый §9 "Cross-Reference Pairs". Source file удалён. §7 Documentation Map обновлён (удалена строка `cross_reference_sync.md`). §7 "Удалено в iter 1+2+3" → "Удалено в iter 1+2+3+4" с новой строкой.
 
-**KI#9 (NEW, найден в iter 3) — `DELETIONS-iter2.txt` создан в iter 2, но не удалён** → CLOSED.
-Iter 2 commit `f97057d` добавил `DELETIONS-iter2.txt` (13 строк) — cleanup-instruction file из poe2-regex-ru конвенции. Это stale-конвенция: iter 2 уже удалил `DELETIONS-iter1.txt` (KI#7) с пометкой "больше не нужен после iter 2", но при этом создал `DELETIONS-iter2.txt` для собственных удалений. Противоречие. В iter 3 удалён.
+**Task C — Wire orphan QA scripts в `package.json`** → DONE. Добавлены 9 новых scripts: `qa:csp`, `qa:bundle`, `qa:contrast`, `qa:english`, `qa:english:docs`, `qa:syntax`, `qa:doc-versions`, `qa:interactive`, aggregate `qa`. НЕ в `precommit` / CI — ручной запуск. `qa:contrast` gracefully SKIPs (KI#11).
 
-**AGENT_NAVIGATION §6 pitfalls расширены с 18 до 30 пунктов.** Добавлены pitfalls из FIX-04..31 commit messages:
-- #19 dual assembly pipeline consolidation (FIX-04)
-- #20 token budget misplacement (FIX-05)
-- #21 CORE DIRECTIVES numbering conflict (FIX-06)
-- #22 content duplication 25-30% (FIX-07)
-- #23 dead SPINE-validator removal (FIX-09)
-- #24 SVG CSS variables fix (FIX-10)
-- #25 WCAG contrast / hardcoded rgba → CSS variables (FIX-11..19)
-- #26 responsive breakpoints / aria-label quotes / E07 invisible bars (FIX-11..19)
-- #27 Mermaid CDN dependency (дополнение к #9, FIX-25 + FIX-26)
-- #28 code quality pass (FIX-27)
-- #29 final a11y pass (FIX-31)
-- #30 orphan scripts audit (new meta-pitfall из iter 3 findings)
+**Task D — Audit `visual-system/PLAN.md` Phase 4** → DONE. Добавлен новый §4.0 "Integration Status" с таблицей состояния: markers ✅ 17/17, component-extracts ✅ 17/17, INTEGRATION-MAP ✅, actual content replacement ❌ (master sections still contain original textual content after each marker). Conclusion: Phase 4 partially complete — marker scaffolding + artifacts in place, actual text→SVG replacement not executed.
 
-**AGENT_NAVIGATION §1 scripts/ list уточнён.** Скрипты классифицированы:
-- **package.json-wired (5):** `build-unified.mjs`, `src/scripts/build-shell-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs`.
-- **CI-wired (2 Python):** `check_duplicates.py`, `validate_terms.py` — в `.github/workflows/validate.yml` + `build-artifact.yml`, но НЕ в `package.json`.
-- **Orphan QA tools (5, KEEP):** `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs` — не wired, но могут запускаться вручную для ad-hoc QA.
-- **Removed in iter 3 (2):** `validate-migration.mjs`, `gen-redirect-map.mjs` — orphan + depended on deleted `migration_map.md`.
+**KI#10 (NEW, найден в iter 4) — closed в iter 4.** `check_english.py` lines 325-334 + `check_syntax_mix.py` line 169 содержали stale v7 paths (`src/parts-l1/l2/l3/`, removed в v8) + stale "v6" comment. Пофикшено: оба скрипта теперь сканируют только `src/master/` (v8+ canonical).
 
-**terminology_dictionary.md:** Stale ref `p7_core_directives` → `p7a_core_directives` (v9.1 Part 7 split). Header version 9.0.0 → 9.1.0.
+**KI#11 (NEW, найден в iter 4) — ACTIVE, defer to iter 5+.** `contrast_checker.mjs` ожидает `tokens.json`, которого нет в repo. Script gracefully SKIPs при запуске `qa:contrast`. Fix options (a/b/c) описаны в STATUS.md.
 
-**visual-system/PLAN.md:** Appendix E §2 + Appendix F §2 "Recommended Follow-up Actions" §2 содержали рекомендацию "Clean up root fallback files: gitignore root-level index.html, assets/, widgets/, parts/, data/, event-bus.js". Это противоречит iter 2 KI#1/KI#2 resolution (root fallbacks — by design per `.gitignore` строки 22-30). Добавлены пометки [OBSOLETE per iter 2 KI#1/KI#2] без переписывания файла.
+**KI#12 (NEW, найден в iter 4) — ACTIVE, defer to iter 5+.** Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit`, поэтому 10 errors ship silently. Fix plan (4 steps) описан в STATUS.md. iter 5+ должен решить architecture question (update §3 rule OR migrate to widget JS).
 
-### Изменённые файлы в iter 3
+### Изменённые файлы в iter 4
 
 | File | Action | Reason |
 |------|--------|--------|
-| `STATUS.md` | Updated | This file — iter 3 status + KI#8/KI#9 resolution |
-| `worklog.md` | Updated | Appended iter 3 Task ID section, iter 2 → one-liner |
-| `AGENT_NAVIGATION.md` | Updated | Header iter 3, §1 scripts classification, §6 pitfalls 18→30, §7 deletions iter 3, §8 OP-1 progress, hint iter 4 |
-| `CHANGELOG.md` | Updated | Added [9.1.3] (iter 3) section |
-| `PLAN.md` | Updated | §5 iter 3 status + iter 4+ remaining |
-| `docs/terminology_dictionary.md` | Updated | Stale `p7_core_directives` → `p7a_core_directives`; version 9.0.0 → 9.1.0 |
-| `visual-system/PLAN.md` | Updated | Appendix E §2 + F §2 marked [OBSOLETE per iter 2 KI#1/KI#2] |
-| `DELETIONS-iter2.txt` | **Deleted** | KI#9: stale cleanup-instruction file, iter 2 противоречие |
-| `scripts/validate-migration.mjs` | **Deleted** | KI#8: orphan, validates 4-major-versions-old migration |
-| `scripts/gen-redirect-map.mjs` | **Deleted** | KI#8: orphan, generator for already-committed `data/anchor-redirects.json` |
-| `docs/migration_map.md` | **Deleted** | KI#8: only depended on by 2 orphan scripts above |
+| `STATUS.md` | Updated | This file — iter 4 status + KI#10 (closed) + KI#11/KI#12 (active) |
+| `worklog.md` | Updated | Appended iter 4 Task ID section, iter 3 → one-liner |
+| `AGENT_NAVIGATION.md` | Updated | Header iter 4, §1 scripts classification (orphan → wired), §7 deletion list iter 4, §8 OP-1 progress, §9 NEW Cross-Reference Pairs (merged from cross_reference_sync.md), §10 hint iter 5 |
+| `CHANGELOG.md` | Updated | Added [9.1.4] (iter 4) section |
+| `PLAN.md` | Updated | §5 iter 4 status + iter 5+ remaining |
+| `docs/character_bible.md` | Trimmed | Removed Elena + Выщербленный duplicates (125 строк), updated header to "Supporting Characters Registry" |
+| `docs/cross_reference_sync.md` | **Deleted** | Merged into AGENT_NAVIGATION.md §9 |
+| `visual-system/PLAN.md` | Updated | Added §4.0 "Integration Status" с actual state audit |
+| `package.json` | Updated | Added 9 `qa:*` scripts (csp/bundle/contrast/english/english:docs/syntax/doc-versions/interactive/aggregate) |
+| `scripts/check_english.py` | Fixed (KI#10) | Removed stale v7 paths `src/parts-l1/l2/l3/`, updated "v6" → "v8+" comment |
+| `scripts/check_syntax_mix.py` | Fixed (KI#10) | Updated argparse default to `['src/master/']`, removed v7 paths |
 
 ---
 
 ## Known Issues
 
-KI#1..KI#9 — все закрыты. Активных Known Issues нет.
+**KI#11 (NEW, найден в iter 4) — `scripts/contrast_checker.mjs` ожидает `tokens.json`, которого нет в repo** → ACTIVE (defer to iter 5+).
+
+`contrast_checker.mjs` строка 3 + 38-48: открывает JSON-файл по пути из `process.argv[2]`, парсит как `tokens.primitives.color.semantic` + `tokens.primitives.color.gray['900']`, считает WCAG contrast ratio. **Проблема:** файла `tokens.json` нет нигде в repo (grep по всем `*.mjs/js/md/py/json` — единственные упоминания внутри самого `contrast_checker.mjs`). В repo есть только `visual-system/DESIGN-TOKENS.css` — CSS custom properties (`:root { --bg-deep: #08090d; ... }`), не JSON.
+
+**Impact:** `qa:contrast` (wired в iter 4) печатает "SKIP: No tokens.json path provided" и завершается без ошибок, но фактически не валидирует контраст. Pitfall #25 (WCAG contrast) остаётся непокрытым автоматической проверкой.
+
+**Fix options (iter 5+):**
+- (a) Создать `visual-system/tokens.json` (JSON-экстракт из `DESIGN-TOKENS.css` с `primitives.color` структурой) — minimal change, скрипт работает как есть.
+- (b) Переписать `contrast_checker.mjs` для парсинга CSS custom properties напрямую из `DESIGN-TOKENS.css` — better long-term (single source of truth), но требует CSS-парсер (`node-html-parser` уже в devDependencies).
+- (c) Удалить `contrast_checker.mjs` как orphan с broken contract — aggressive, теряем WCAG-чекер.
+
+**Решение defer в iter 5+:** нужен infrastructure decision (a/b/c). На iter 4 script оставлен в repo, `qa:contrast` НЕ wired в `qa` aggregate (только как standalone `pnpm run qa:contrast`, который gracefully SKIPs).
+
+---
+
+**KI#12 (NEW, найден в iter 4 через `qa:syntax` + `qa:csp` + `pnpm run validate:master`) — visual-system integration introduced 10 `<script>` blocks + 123 inline `style=` attributes в master HTML, нарушает §3 rule** → ACTIVE (defer to iter 5+).
+
+`pnpm run validate:master` (впервые запущен в iter 4 после wiring `qa:*` scripts) сообщает:
+- **10 ERRORS** — "Prohibited element found: `<script>`" в каждом из 10 `src/master/part_*.html` файлов. Все inline `<script type="module">` блоки пришли из visual-system integration (см. `visual-system/integration/component-extracts/E##-script.js`). Например `src/master/part_10.html` строки 117-150 — inline E15 Annotated Blueprint script с комментарием `// VS Element E15 - inline script (from component-extracts)`.
+- **123 WARNINGS** — `style="..."` inline attributes (не `<style>` блоки), преимущественно visual-system elements (`top:10px; right:20px;` для callout positioning, `color:var(--accent-violet);` для accent colors).
+- **23 WARNINGS** — "Content found outside `<section data-section>` blocks" — visual-system SVG/HTML elements расположены между `</section>` и следующим `<section>`, нарушает §3 "Контент вне `<section data-section>`" rule.
+
+**Impact:** CRITICAL. AGENT_NAVIGATION §3 явно запрещает `<script>` блоки в master файлах. pitfall #1 говорит "inline styles удалялись в FIX-23 + FIX-26" — но visual-system integration вернула их. **`pnpm run validate:master` НЕ в `precommit` hook** (только `pnpm run validate` = `validate-artifact.mjs`), поэтому 10 errors ship silently в каждый commit.
+
+**Root cause:** Visual-system Phase 4 integration (см. `visual-system/PLAN.md` §4.4 Widget Integration) планировала port JS logic to shell widget modules (`ocean-insight.js`, `enneagram-builder.js`, `diagnostic-tree.js`, `blueprint-viewer.js`, `author-note-viewer.js`). Вместо этого inline scripts были скопированы напрямую из `component-extracts/E##-script.js` в master HTML. Phase 4 §4.0 Integration Status (added iter 4) отмечает "Actual content replacement ❌ Not started" — но markers были добавлены, и inline scripts тоже.
+
+**Fix plan (iter 5+):**
+1. Architecture decision: либо (a) обновить §3 rule чтобы разрешить visual-system inline scripts (with explicit comment marker `// VS Element EXX - inline script`), либо (b) migrate все 10 inline scripts в `src/shell/widgets/*.js` per Phase 4 §4.4 plan.
+2. Для inline `style=` attributes: migrate в `src/shell/styles.css` или `src/assets/vs-styles.css` per pitfall #16.
+3. Wire `pnpm run validate:master` в `precommit` hook (сейчас только `pnpm run build && pnpm run validate`).
+4. Для 23 "content outside section" warnings: wrap visual-system SVG/HTML в `<section data-section="...">` или переместить внутрь существующих секций.
+
+**Решение defer в iter 5+:** iter 4 не делает правок master HTML / shell / widget JS (per task scope: "docs + wiring only"). iter 5+ должен решить architecture question (a vs b) и выполнить миграцию.
 
 **История KI (все CLOSED):**
 - KI#1..KI#6 (iter 1) — закрыты в iter 2.
 - KI#7 (iter 2) — закрыт в iter 2.
 - KI#8 (iter 2, deferred to iter 3) — закрыт в iter 3 (option a: delete orphan trio).
 - KI#9 (iter 3) — закрыт в iter 3.
+- KI#10 (iter 4) — закрыт в iter 4: orphan QA scripts `check_english.py` + `check_syntax_mix.py` содержали stale v7 paths (`src/parts-l1/l2/l3/`, removed в v8) + stale "v6" comment. Пофикшено: оба скрипта теперь сканируют только `src/master/` (v8+ canonical).
 
 ---
 
@@ -94,7 +105,7 @@ KI#1..KI#9 — все закрыты. Активных Known Issues нет.
 | **Node >= 20, pnpm 10.x** | JavaScript runtime + package manager. |
 | **Python 3.10+** | Для CI-wired скриптов (`check_duplicates.py`, `validate_terms.py`) и orphan QA tools (`check_english.py`, `check_syntax_mix.py`). |
 | **GitHub Pages deploy** | Через GitHub Actions на push в main. Деплой из `dist/`. |
-| **Orphan QA scripts not wired** | `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs` — не в `package.json`, не в CI. Запускаются вручную. Wire в package.json — iter 4+ decision. |
+| **Orphan QA scripts wired as `qa:*` (iter 4)** | `csp_check.mjs`, `bundle_check.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs` — wired в `package.json` как `pnpm run qa:csp`, `qa:bundle`, `qa:english`, `qa:english:docs`, `qa:syntax`, `qa:doc-versions`, `qa:interactive`. Aggregate: `pnpm run qa`. НЕ в `precommit` / CI — ручной запуск. `contrast_checker.mjs` wired как `qa:contrast`, но gracefully SKIPs (KI#11 — нет `tokens.json`). |
 
 ---
 

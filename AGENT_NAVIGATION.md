@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 3. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + docs restructure iter 4. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -15,7 +15,7 @@
 | `src/scripts/` | Build-скрипт `build-shell-unified.mjs` (копирует shell + parts + data → `dist/`). | Запускается через `pnpm run build:shell`. |
 | `src/VERSION` | Plain text файл с версией (9.1.0). | Синхронизирован с `package.json` + `data/character_schema.json` + build manifest. |
 | `data/` | JSON-данные виджетов: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Авторы — данные. Инфраструктура — схемы. **Не хардкодить widget data в JS.** |
-| `scripts/` | Build + validation скрипты. **package.json-wired (5):** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs` (+ `src/scripts/build-shell-unified.mjs`). **CI-wired (2 Python, не в package.json):** `check_duplicates.py`, `validate_terms.py` — в `.github/workflows/{validate,build-artifact}.yml`. **Orphan QA tools (5+, не wired, ручной запуск):** `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs`. **Removed in iter 3:** `validate-migration.mjs`, `gen-redirect-map.mjs` (orphan + depended on deleted `docs/migration_map.md`). | `pnpm run <script>` только для wired. Python 3.10+ для `*.py`. Wire orphan QA tools в package.json — iter 4+ decision. |
+| `scripts/` | Build + validation скрипты. **package.json-wired (5):** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs` (+ `src/scripts/build-shell-unified.mjs`). **CI-wired (2 Python, не в package.json):** `check_duplicates.py`, `validate_terms.py` — в `.github/workflows/{validate,build-artifact}.yml`. **QA scripts wired в iter 4 (7, ручной запуск через `pnpm run qa:*`):** `csp_check.mjs` (`qa:csp`), `bundle_check.mjs` (`qa:bundle`), `contrast_checker.mjs` (`qa:contrast`, gracefully SKIPs — KI#11), `check_english.py` (`qa:english` + `qa:english:docs`), `check_syntax_mix.py` (`qa:syntax`), `check-doc-versions.mjs` (`qa:doc-versions`), `test-interactive.mjs` (`qa:interactive`). Aggregate: `pnpm run qa`. НЕ в `precommit`/CI. **Removed in iter 3:** `validate-migration.mjs`, `gen-redirect-map.mjs` (orphan + depended on deleted `docs/migration_map.md`). | `pnpm run <script>` для wired. `pnpm run qa:*` для ad-hoc QA. Python 3.10+ для `*.py`. |
 | `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` запускает все. |
 | `docs/` | Техническая документация (не входит в билд). | Update при структурных изменениях. См. §7. |
 | `visual-system/` | Visual system prototype work: `PLAN.md` (v1.4), `DESIGN-TOKENS.css`, `shared/` (fonts/base/patterns/utilities), `elements/` (E01-E17 prototypes), `integration/` (component-extracts + INTEGRATION-MAP). | Isolated-first development strategy. Integration phase — ongoing. |
@@ -69,6 +69,15 @@ pnpm run test:integration # Интеграционные тесты
 pnpm run dev              # Билд + локальный сервер (port 3000)
 pnpm run serve            # Только сервер
 pnpm run lint             # ESLint
+pnpm run qa               # Aggregate QA (csp + bundle + english + syntax + doc-versions)
+pnpm run qa:csp           # CSP compliance check (index.html inline scripts)
+pnpm run qa:bundle        # Bundle size budget check
+pnpm run qa:contrast      # WCAG contrast check (SKIPs — KI#11, нет tokens.json)
+pnpm run qa:english       # English leaks check in src/master/
+pnpm run qa:english:docs  # English leaks check in docs/ (WH40k terms)
+pnpm run qa:syntax        # Markdown patterns in HTML check
+pnpm run qa:doc-versions  # Doc "Last Updated" vs git commit date drift
+pnpm run qa:interactive   # Puppeteer smoke tests (requires running server)
 ```
 
 ### Деплой
@@ -261,14 +270,13 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/content_map.md` | При добавлении/удалении секций (canonical mapping) |
 | `docs/components.md` | При добавлении новых CSS-компонентов |
 | `docs/terminology_dictionary.md` | При добавлении новых терминов |
-| `docs/cross_reference_sync.md` | При добавлении/удалении cross-references |
 | `docs/character_bible.md` | При изменении canonical персонажей |
 | `docs/elena_character_bible.md` | При изменении Elena |
 | `docs/vyshcherblenny_character_bible.md` | При изменении Vysherblenny |
 | `docs/anchor-redirects.json` | При rename/delete section IDs |
 | `visual-system/PLAN.md` | При изменении visual system roadmap |
 
-### Удалено в iter 1+2+3 (docs restructure)
+### Удалено в iter 1+2+3+4 (docs restructure)
 
 | File | Iter | Reason |
 |------|------|--------|
@@ -281,6 +289,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `scripts/validate-migration.mjs` | iter 3 (KI#8) | Orphan (не в package.json, не в CI). Валидировал v5.12→v6 / v7→v8 migration — 4 major версии назад при v9.1.0. Зависел от `docs/migration_map.md`. 888 строк. |
 | `scripts/gen-redirect-map.mjs` | iter 3 (KI#8) | Orphan. Генерировал `data/anchor-redirects.json` из `migration_map.md`. Output файл уже committed и стабилен. `lazy-loader.js` имеет hardcoded fallback. 257 строк. |
 | `docs/migration_map.md` | iter 3 (KI#8) | Зависел только от 2 orphan-скриптов выше. v5.12→v6 migration guide. 586 строк. |
+| `docs/cross_reference_sync.md` | iter 4 | Compact file (62 строки), 14 bidirectional cross-ref pairs. Слит в `AGENT_NAVIGATION.md` §9 "Cross-Reference Pairs". Экономия ~20 строк overhead на шапку/версию. |
 
 ### KEEP (runtime data, не удалять)
 
@@ -302,11 +311,20 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 **iter 3:** Закрыты KI#8 (orphan migration-validation trio удалён) + KI#9 (stale `DELETIONS-iter2.txt` удалён). §6 pitfalls расширены с 18 до 30. §1 scripts/ list классифицирован (package.json-wired / CI-wired / orphan QA tools / removed). `terminology_dictionary.md` пофикшен (stale `p7_core_directives` → `p7a_core_directives`). `visual-system/PLAN.md` — устаревшие рекомендации в Appendix E/F помечены [OBSOLETE per iter 2 KI#1/KI#2].
 
-**iter 4+ — что осталось (см. PLAN.md §3.2):**
-- Объединить `docs/character_bible.md` + персональные bible'ы (Elena + Vysherblenny) — экономия ~300 строк. LOW priority, требует тщательного чтения 3 больших файлов.
-- Слить `docs/cross_reference_sync.md` в этот файл (compact). LOW priority, текущее состояние OK.
-- Wire orphan QA scripts в `package.json` (csp_check, bundle_check, contrast_checker, check_english, check_syntax_mix, check-doc-versions, test-interactive). Infrastructure decision — нужно решить, какие реально нужны в CI/pre-commit.
-- Audit `visual-system/PLAN.md` Phase 4 (integration) — фактически ли E01-E17 уже интегрированы в `src/master/part_*.html`? Интеграция может быть уже завершена (см. `visual-system/integration/component-extracts/`).
+**iter 4:** Закрыты все 4 LOW-priority задач из iter 3 roadmap + закрыт KI#10 (stale v7 paths в `check_english.py` + `check_syntax_mix.py`). Обнаружены 2 новых ACTIVE KI:
+- **Task A (DONE):** `docs/character_bible.md` trimmed (770 → 645 строк) — removed Elena + Выщербленный duplicates (canonical в per-character bibles). Header: deprecated notice → "Supporting Characters Registry" clarification.
+- **Task B (DONE):** `docs/cross_reference_sync.md` (62 строки) merged в `AGENT_NAVIGATION.md` новый §9 "Cross-Reference Pairs". Source file удалён.
+- **Task C (DONE):** Orphan QA scripts wired в `package.json` как `qa:*` (9 scripts). НЕ в precommit/CI — ручной запуск.
+- **Task D (DONE):** `visual-system/PLAN.md` Phase 4 audited — добавлен §4.0 "Integration Status": markers ✅ 17/17, component-extracts ✅ 17/17, actual content replacement ❌ not started.
+- **KI#10 (CLOSED):** stale v7 paths в `check_english.py` + `check_syntax_mix.py` пофикшены.
+- **KI#11 (ACTIVE, defer iter 5+):** `contrast_checker.mjs` требует несуществующий `tokens.json`. `qa:contrast` gracefully SKIPs.
+- **KI#12 (ACTIVE, defer iter 5+):** Visual-system integration introduced 10 prohibited `<script>` blocks + 123 inline `style=` attributes + 23 "content outside section" violations в master HTML. `pnpm run validate:master` не в `precommit` — silent ship.
+
+**iter 5+ — что осталось:**
+- **KI#11 fix:** `contrast_checker.mjs` — создать `tokens.json` (a) / переписать под CSS parser (b) / удалить (c). Infrastructure decision.
+- **KI#12 fix:** Architecture decision — (a) обновить §3 rule чтобы разрешить visual-system inline scripts (with explicit `// VS Element EXX` marker) OR (b) migrate 10 inline scripts в `src/shell/widgets/*.js` per Phase 4 §4.4 plan. Затем: migrate 123 inline `style=` → CSS classes, wire `validate:master` в `precommit`, fix 23 "content outside section" warnings.
+- **Phase 4 actual integration:** Заменить textual content в master HTML на SVG (per `visual-system/PLAN.md` §4.0 Integration Status — actual content replacement ❌ not started). 17 elements, каждый требует dedup audit + text removal + SVG insertion.
+- **CHANGELOG.md [9.1.1]** всё ещё содержит "Removed: docs/migration_map.md" — историческая неточность (iter 1 заявлял, но не удалил, см. KI#7). Можно добавить inline note или оставить как есть (история).
 
 ### OP-2 — Дублирующие папки widgets/ и assets/ [CLOSED iter 2]
 
@@ -318,7 +336,50 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-## 9. Полезные ссылки
+## 9. Cross-Reference Pairs (synced from docs/cross_reference_sync.md, iter 4)
+
+> Per IMP-48: when section A references section B, B MUST reference back to A. Unidirectional refs create orphan knowledge. Migrated from `docs/cross_reference_sync.md` (deleted in iter 4) — kept here as the canonical registry.
+
+### v9.1 Restructure Changes
+
+- `p1_assembly_pipeline` DELETED → replaced by `p1_pipeline_ref` (forward ref to Part 7A)
+- `p1_token_budget` MOVED → now `p7a_token_budget` in Part 7A, replaced by `p1_token_budget_ref` in Part 1
+- `p10_geralt` DELETED
+- `p10_edward` DELETED
+- New sections: `p1_value_proposition`, `p7a_token_budget`
+- All cross-references to `#p1_token_budget` updated to `#p7a_token_budget`
+- All cross-references to `#p1_assembly_pipeline` removed
+
+### Known Cross-Reference Pairs
+
+| # | Source | Target | Forward Link | Back Link Status |
+|---|--------|--------|--------------|------------------|
+| 1 | `p1_top3_problems` | `p9_basic_checklist` | `href="#p9_basic_checklist"` | ✅ p9_basic_checklist references p1_core_rules via back-link |
+| 2 | `p7a_system_prompt` | `p7a_core_directives` | Internal `#p7a_core_directives` | ✅ sub-section |
+| 3 | `p7a_system_prompt` | `p7a_tone_frame` | Internal `#p7a_tone_frame` | ✅ sub-section |
+| 4 | `p7b_lorebook_basics` | `p7b_lorebook_mechanics` | `href="#p7b_lorebook_mechanics"` | ✅ callout link |
+| 5 | `p7a_authors_note` | `p7b_lorebook_mechanics` | `href="#p7b_lorebook_mechanics"` | ✅ acceptable (AN is upstream) |
+| 6 | `p7b_lorebook_advanced` | `p7a_authors_note` | `href="#p7a_authors_note"` in Кросс-ссылки | ✅ upstream link |
+| 7 | `p7b_lorebook_advanced` | `p7b_structured_inject` | `href="#p7b_structured_inject"` | ✅ forward only — technique ref (acceptable) |
+| 8 | `p4_spine_navigation` | `p7a_xml_tags` | Pipeline step 3 via href | ✅ downstream |
+| 9 | `p10_omnis` | `p4_ghost_layers` | `href="#p4_ghost_layers"` | ✅ back-link added in TP-15 |
+| 10 | `p9_additional_problems` | `p1_top3_problems` | `href="#p1_top3_problems"` | ✅ back-link |
+| 11 | `p10_elena` | `p2_anchor_examples` | `href="#p2_anchor_examples"` | ✅ back-link |
+| 12 | `p1_token_budget_ref` | `p7a_token_budget` | `href="#p7a_token_budget"` | ✅ forward ref — canonical content in Part 7A |
+| 13 | `p1_pipeline_ref` | `p7a_assembly_pipeline` | `href="#p7a_assembly_pipeline"` | ✅ forward ref — pipeline in Part 7A |
+| 14 | `p1_value_proposition` | — | Standalone section | ✅ top-level sibling before p1_card_overview |
+
+### Validation Checklist
+
+- [x] Every forward link has a corresponding back link (✅ or acceptable)
+- [x] No ❌ items remain
+- [x] All `href` targets resolve to existing sections
+- [x] No `data-layer-switch` references remain (removed in v8)
+- [x] No references to deleted sections (`p1_assembly_pipeline`, `p10_geralt`, `p10_edward`)
+
+---
+
+## 10. Полезные ссылки
 
 | Ресурс | URL |
 |--------|-----|
@@ -329,4 +390,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 4 прочитай `STATUS.md` (актуальный статус — все 9 KI закрыты, активных KI нет), `worklog.md` (iter 3 record — этот раздел), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 4+ пунктами). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом iter 5 прочитай `STATUS.md` (KI#1..KI#10 закрыты, KI#11/KI#12 ACTIVE — defer iter 5+), `worklog.md` (iter 4 record — этот раздел), этот файл (AGENT_NAVIGATION) и `PLAN.md` (roadmap с iter 5+ пунктами). iter 5 priorities: (1) KI#11 fix (contrast_checker.mjs + tokens.json decision), (2) KI#12 architecture decision (update §3 rule OR migrate inline scripts to widgets), (3) Phase 4 actual integration (replace textual content with SVG in master HTML). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue, потом фиксий.
