@@ -1,5 +1,28 @@
 # Changelog
 
+## [9.1.10] - 2026-06-24
+
+### Added (iter 10 — Canon Part 7A creation)
+- **Canon Part 7A created** — `docs/canon/part_07a.md` (802 строки). 13 H2 секций (по одной на каждый `data-section` из `src/master/part_07a.html`): p7a_system_prompt, p7a_core_directives, p7a_tone_frame, p7a_format_lock, p7a_authors_note, p7a_sampling_params, p7a_model_checklist, p7a_ooc_protection, p7a_xml_tags, p7a_api_blocks, p7a_4k_fallback, p7a_token_budget, p7a_assembly_pipeline.
+- **4 VS-маркера:** E08 (CORE DIRECTIVES, §7A.2), E16 (Author's Note Mechanics, §7A.5), E17 (Sampling Parameters, §7A.6), E02 (Assembly Pipeline, §7A.13). E07 (Voice Hierarchy) — cross-ref only внутри E16 (embedded в Part 3).
+- **Front-matter:** `Migration status: ❌ NOT MIGRATED (iter 11 task)`.
+- **Migration Notes таблица:** 54 TODO строки для iter 11 (50 "Оставить" + 4 "Сжать" кандидата: #22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES пример в walkthrough Елены) + validation gates (8 чек-пунктов).
+- **Decision для iter 11:** рекомендуется разбить на 2 под-итерации — iter 11a (§7A.1–§7A.7, ~660 строк master HTML, 3 VS-EMBED: E08+E16+E17) + iter 11b (§7A.8–§7A.13, ~510 строк, 1 VS-EMBED: E02).
+
+### Fixed
+- **KI#17 documentation drift:** AGENT_NAVIGATION.md §10 hint + worklog.md iter 9 record указывали 4 VS-EMBED в `src/master/part_07a.html` как «E07, E08, E16, E17». Фактически в файле — **E08, E16, E17, E02** (E02 = Assembly Pipeline, line 916; E07 = Voice Hierarchy — cross-ref внутри E16, embedded в Part 3). Fix applied: AGENT_NAVIGATION.md §10 hint + worklog.md iter 9 one-liner обновлены; Canon `part_07a.md` front-matter явно перечисляет embedded (E08/E16/E17/E02) vs cross-ref-only (E07).
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (all 12 checks). 0 errors. Warnings = pre-existing KI#13 baseline (123 inline `style=` + 22 "content outside section"). Canon-файлы не входят в build pipeline — валидация идентична iter 9.
+
+### Notes
+- iter 10 = Canon Part 7A creation. Никаких правок master HTML / visual-system / widget JS — только Canon + docs (8 files updated: 1 new + 7 modified).
+- Master HTML `src/master/part_07a.html` не тронут — iter 11 задача.
+- **KI#1..KI#12 + KI#15 закрыты.** KI#13 (123 inline + 22 outside) + KI#14 (content duplication, 26 viz параллельно) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE.
+- iter 11 priorities: Migrate `src/master/part_07a.html` против Canon §7A (рекомендуется 11a + 11b).
+
+---
+
 ## [9.1.9] - 2026-06-24
 
 ### Changed (iter 9 — Part 4 validation pass)

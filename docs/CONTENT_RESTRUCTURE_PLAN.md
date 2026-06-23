@@ -330,7 +330,7 @@ SPINE — психологический каркас из 5 элементов,
 | **7** | Canon scaffold | Создать `docs/canon/` структуру + Canon Part 4 (самый дубль-тяжёлый) как пилот | `docs/canon/_README.md`, `docs/canon/part_04.md` | LOW (только docs) |
 | **8** | Pilot migration | ✅ DONE — Мигрировать `part_04.html` против Canon §4. Удалить 4 дубликата (mermaid + 3 inf-pipeline) + 1 orphan paragraph + сжать re-explanation. 2 unique infographic сохранены (deviation). LIE таблица сохранена полностью (deviation). 777 → 676 строк (-13%). Build PASS, validate:master PASS, qa без новых critical. | `src/master/part_04.html` | MEDIUM (visual diff pending iter 9) |
 | **9** | Validate pilot | ✅ DONE — Validation pass Part 4. Static HTML sanity + served `parts/part_04.html` checks PASS (11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:contrast`/`qa:doc-versions` PASS. `qa:english`/`qa:syntax` — same false positives as iter 7 (no regression). `qa:csp` FAIL → KI#16 NEW (pre-existing с iter 5). 6 docs updated. Никаких правок master HTML. | — | LOW |
-| **10** | Canon Part 7A | Написать Canon §7A (SP, Assembly, CORE DIRECTIVES — 13 секций, 4 VS-EMBED) | `docs/canon/part_07a.md` | LOW |
+| **10** | Canon Part 7A | ✅ DONE — Создан `docs/canon/part_07a.md` (802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Front-matter `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица: 54 TODO + 4 "Сжать" кандидата + validation gates. Master HTML не тронут. `validate:master` PASS (0 errors, KI#13 baseline). KI#17 NEW (documentation drift: AGENT_NAVIGATION §10 hint указывал E07 вместо E02 как 4-й VS-EMBED — fixed). 8 docs updated. | `docs/canon/part_07a.md` | LOW |
 | **11** | Migrate Part 7A | Мигрировать `part_07a.html` (1168 строк — самый большой файл) | `src/master/part_07a.html` | HIGH (размер) |
 | **12** | Canon Part 8 + 9 | Anti-patterns + Diagnostics (связанные — AP-1..15 упоминаются в обоих) | `docs/canon/part_08.md`, `docs/canon/part_09.md` | LOW |
 | **13** | Migrate Part 8 + 9 | Мигрировать оба Part'а вместе (нужно сохранить cross-refs) | `src/master/part_08.html`, `part_09.html` | MEDIUM |
@@ -412,24 +412,28 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 9 COMPLETE (Part 4 validation pass).** Pilot Part 4 migration (iter 8) — визуально и статически валидирована. Регрессий не найдено. Build PASS, validate:master PASS, 43/43 unit tests PASS. KI#13 + KI#14 + KI#16 — ACTIVE.
+**Iter 10 COMPLETE (Canon Part 7A creation).** Canon `docs/canon/part_07a.md` создан (802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Master HTML не тронут (iter 11 задача). `validate:master` PASS (0 errors, KI#13 baseline). KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
 
-**Iter 10 priorities (Canon Part 7A creation):**
+**Iter 11 priorities (Migrate Part 7A master HTML):**
 
-1. **Создать `docs/canon/part_07a.md`** — Canon §7A (System Prompt & Assembly). 13 H2 секций (по одной на каждый `data-section` из `src/master/part_07a.html`). 4 VS-маркера для E07 (voice hierarchy), E08 (core directives), E16 (author note), E17 (sampling params). Front-matter: `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица внизу — TODO list для iter 11.
-2. **НЕ править master HTML.** Это iter 11 задача.
-3. **После Canon creation** — `pnpm run validate:master` (should be 0 errors, no change in master HTML) + git commit.
-4. **Решить — разбивать Part 7A на 2 под-итерации** (Canon §7A.1-7 = SP, CORE DIRECTIVES; Canon §7A.8-13 = XML tags, tone frame, assembly, token budget, author's note) или делать одним проходом. Учитывая 1168 строк master HTML — рекомендуется разбить.
+1. **Migrate `src/master/part_07a.html` против Canon §7A** — 1168 строк, 13 секций, 4 VS-EMBED (E08 line 47, E16 line 267, E17 line 430, E02 line 916). Canon `part_07a.md` Migration Notes таблица = TODO list с 54 элементами.
+2. **Рекомендуется разбить на 2 под-итерации:**
+   - **iter 11a** — §7A.1–§7A.7 (p7a_system_prompt, p7a_core_directives, p7a_tone_frame, p7a_format_lock, p7a_authors_note, p7a_sampling_params, p7a_model_checklist). ~660 строк master HTML, 3 VS-EMBED: E08+E16+E17.
+   - **iter 11b** — §7A.8–§7A.13 (p7a_ooc_protection, p7a_xml_tags, p7a_api_blocks, p7a_4k_fallback, p7a_token_budget, p7a_assembly_pipeline). ~510 строк, 1 VS-EMBED: E02.
+3. **Применить 4 "Сжать" кандидата** из Canon Migration Notes (#22 sampling table дублирует E17, #26 model checklist дублирует E17 checklist-section, #42 plain-copy дублирует noscript, #46 CORE DIRECTIVES пример в walkthrough Елены дублирует §7A.2).
+4. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + visual diff в браузере.
+5. **После миграции** — обновить Canon front-matter `Migration status: ✅ MIGRATED (iter 11)` + Migration Notes таблица (TODO → DONE/DEVIATED).
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 10 прочитай:
-> 1. `STATUS.md` (iter 9 COMPLETE, Part 4 ✅ MIGRATED+VALIDATED, KI#13+KI#14+KI#16 ACTIVE)
-> 2. `worklog.md` (iter 9 record — validation pass)
-> 3. `AGENT_NAVIGATION.md` (§8 iter 10+ roadmap, §10 hint, §6 pitfall #34 KI#16)
-> 4. `docs/canon/_README.md` (§4 workflow Canon creation, §5 Part 7A ❌ NOT MIGRATED)
-> 5. `docs/canon/part_04.md` (reference pilot — структура Canon-файла, front-matter, VS-маркеры, Migration Notes таблица)
-> 6. `src/master/part_07a.html` (1168 строк, 13 секций, 4 VS-EMBED)
+> Перед стартом iter 11 прочитай:
+> 1. `STATUS.md` (iter 10 COMPLETE, Part 4 ✅ MIGRATED+VALIDATED, Part 7A Canon ✅ CREATED, KI#13+KI#14+KI#16+KI#17 ACTIVE)
+> 2. `worklog.md` (iter 10 record — Canon Part 7A creation)
+> 3. `AGENT_NAVIGATION.md` (§8 iter 11+ roadmap, §10 hint для iter 11, §6 pitfall #35 KI#17)
+> 4. `docs/canon/_README.md` (§4 workflow migration, §5 Part 7A ❌ NOT MIGRATED — iter 11 задача)
+> 5. `docs/canon/part_07a.md` (Canon §7A — источник правды для миграции, 802 строки, 13 H2 секций, 4 VS-маркера, Migration Notes таблица с 54 TODO + 4 "Сжать" кандидатами)
+> 6. `docs/canon/part_04.md` (reference pilot — структура отмигрированного Canon-файла, Migration Notes с DONE/DEVIATED статусами)
+> 7. `src/master/part_07a.html` (1168 строк, 13 секций, **4 VS-EMBED: E08 line 47, E16 line 267, E17 line 430, E02 line 916** — не E07; KI#17 fix applied)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 

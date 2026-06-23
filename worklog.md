@@ -4,73 +4,61 @@
 
 ---
 
-Task ID: 9
+Task ID: 10
 Agent: main
-Task: iter 9 — Validation pass Part 4 master HTML (мигрирован в iter 8 против Canon §4). Visual diff в локальном сервере, sanity-check VS-EMBED E05+E06 и 2 сохранённых infographic, verify no regression. Если найден новый баг — сначала документировать в STATUS.md как Known Issue, потом фиксить.
+Task: iter 10 — Canon Part 7A creation. Создать `docs/canon/part_07a.md` (13 H2 секций, 4 VS-маркера для E08/E16/E17/E02, Migration Notes таблица для iter 11). НЕ править master HTML. После Canon creation — `pnpm run validate:master` (0 errors) + git commit. Если найден новый баг — сначала документировать в STATUS.md как Known Issue, потом фиксить.
 
 Work Log:
-- 1: Контекст загружен из STATUS.md (iter 8 COMPLETE, Part 4 ✅ MIGRATED, KI#13+KI#14 ACTIVE), worklog.md (iter 8 record), AGENT_NAVIGATION.md (§8 iter 9+ roadmap, §10 hint), docs/canon/part_04.md (Migration Notes DONE/DEVIATED статусы), docs/canon/_README.md (§5 Part 4 ✅ iter 7+8), src/master/part_04.html (676 строк, мигрированный). Базовая структура понятна: 11 секций, 2 VS-EMBED (E05+E06), 2 retained infographic (p4_spine_mapping mnemonic + p4_spine_navigation pipeline), 1 orphan paragraph + 1 orphan h4 + 1 mermaid + 3 inf-pipeline удалены в iter 8.
-- 2: **Setup environment:** pnpm недоступен в системе → установлен через `npm install pnpm@10.33.0 --prefix /home/z/my-project` (local prefix). PATH=/home/z/my-project/node_modules/.bin. `pnpm install --frozen-lockfile` OK (1.6s). Husky hook срабатывает.
-- 3: **`pnpm run validate:master`** ✅ PASSED (all 12 checks). Warnings: 123 inline `style=` + 22 "content outside section" (pre-existing KI#13). part_04: 21 inline + 2 outside (VS-EMBED markup, expected pattern).
-- 4: **`pnpm run build`** ✅ SUCCESSFUL, hash `df283246` (same as iter 8 — no drift). Build output: `dist/` + root fallbacks (`index.html`, `assets/`, `widgets/`, `parts/`, `event-bus.js`, `data/`, `build.hash`).
-- 5: **`pnpm run validate`** ✅ All 8 validation gates passed (GATE-1..5, SHELL-PARTS, SHELL-LOADER, SHELL-STYLES).
-- 6: **`pnpm run test:unit`** ✅ 43/43 pass (12.7ms Version Extraction, 3.6ms Sync State, 1.5ms Semantic Version, 1.7ms Outdated).
-- 7: **`pnpm run lint`** ✅ 0 errors, 10 warnings (pre-existing: mermaid no-undef, unused vars in widget JS).
-- 8: **`pnpm run qa:bundle`** ✅ PASS (index.html 7.5KB, max 500KB).
-- 9: **`pnpm run qa:contrast`** ✅ PASS ("All contrast ratios pass" — tokens.json OK).
-- 10: **`pnpm run qa:doc-versions`** ✅ PASS ("All doc dates are current").
-- 11: **`pnpm run qa:english`** ❌ 29 issues (vs 29 в iter 7 — **no regression**). Все false positives: part_04.html:441 (1 — `[Model: see Appendix B — Model Capability Table]` в `<span class="model-note">`) + part_07a.html (5 — то же pattern + "Token Budget Check" в code block). qa:english script не распознаёт model-note span pattern как allowed context.
-- 12: **`pnpm run qa:syntax`** ❌ 236 markdown false positives (vs 236 в iter 8 — **no regression**). part_04: 22 false positives (BEM class names с `__` типа `ring-label--g3`). Same count as iter 7 baseline, different line numbers due to removed content.
-- 13: **`pnpm run qa:csp`** ❌ FAIL — `index.html has 2 inline script(s)`. **NEW FINDING** (ранее не задокументирован). Inline scripts в `src/shell/index.html`: line 24 (`document.documentElement.classList.add('js')`) + lines 108-126 (`mermaid.initialize({...})`). Pre-existing с iter 5 (commit 60d7abd — `git log -- src/shell/index.html` подтверждает). iter 8 worklog заявлял "qa без новых critical" но не упоминал qa:csp — был silent failing. **Зарегистрирован как KI#16** в STATUS.md. Не фиксился в iter 9 (per user instruction "Лучше недоделать, чем сломать — остальное в следующей итерации").
-- 14: **Static HTML sanity check** (Python regex): 11 section opens / 11 section closes (balanced). 2 VS-EMBED divs (E05 line 9, E06 line 523) — well-formed. 2 REPLACED BY VISUAL SYSTEM markers (line 139, 622). 3 infographic opens (line 374 outer + 375 inner for spine_mapping mnemonic, line 495 for spine_navigation pipeline). 11 `data-section` IDs — все expected, no missing, no extra. VS-EMBED E06 preceded only by whitespace/comments (orphan paragraph iter 8 removal confirmed). No internal p4_ hrefs (no broken self-refs). External hrefs (p10_vysherblenny, p7a_core_directives, p5_ocean_basics) — valid cross-refs.
-- 15: **Diff iter 7 vs iter 8 `src/master/part_04.html`** (git show): 777 → 676 строк (-101, -13%). Confirmed 6 edits: (1) mermaid removed (iter7 lines 147-160), (2) inf-pipeline в spine_overview removed (iter7 178-205), (3) GHOST table 4th row removed (iter7 250), (4) inf-pipeline в spine_full_chain removed (iter7 393-419) + re-explanation сжат, (5) orphan `<p>` между </section> и VS-EMBED E06 removed (iter7 599-600), (6) h4 "Архитектура" + inf-pipeline в ghost_layers removed (iter7 709-729). Все 6 edits совпадают с iter 8 worklog. No unexpected changes.
-- 16: **Local server visual diff:** `pnpm run serve` (serve CLI) умирал после 1 connection — переключился на `python3 -m http.server 3001 --bind 127.0.0.1`. Curl `http://127.0.0.1:3001/parts/part_04.html` → 200, 40 825 bytes, 676 lines. Verifications:
-    - VS-EMBED E05 (line 8-9) + E06 (line 522-523) — present ✅
-    - p4_spine_mapping mnemonic infographic (line 374-375) — present ✅
-    - p4_spine_navigation pipeline infographic (line 495) — present ✅
-    - 11 `<section>` tags — present ✅
-    - All 11 expected `data-section` IDs (p4_flaw, p4_ghost, p4_ghost_layers, p4_lie, p4_need, p4_spine_check, p4_spine_full_chain, p4_spine_mapping, p4_spine_navigation, p4_spine_overview, p4_want) — present ✅
-    - Orphan `<p>` "Для большинства персонажей достаточно одного GHOST — единичного травматического опыта" (iter7 line 599) — 0 matches ✅ (removed in iter 8)
-    - Orphan `<h4>Архитектура` (iter7 line 711) — 0 matches ✅ (removed in iter 8)
-    - Mermaid `class="mermaid"` — 0 matches ✅ (removed in iter 8)
-- 17: **Documentation updates** (clean, no garbage — per user instruction "Убирай длинную историю изменений, мусор, устаревшие секции"):
-    - STATUS.md — rewritten: iter 9 status, KI#16 NEW ACTIVE, iter 8 details → опущены (см. CHANGELOG [9.1.8]).
-    - worklog.md — iter 8 → one-liner, iter 9 = этот record.
-    - AGENT_NAVIGATION.md — header iter 8 → iter 9. §6 pitfall #34 (KI#16). §8 iter 8 compressed to one-liner, iter 9 record + iter 10+ roadmap. §10 hint для iter 10 (Canon Part 7A).
-    - CHANGELOG.md — [9.1.9] entry added (iter 9 validation pass).
-    - PLAN.md — §5 iter 9 → ✅ DONE, iter 10+ roadmap.
-    - docs/CONTENT_RESTRUCTURE_PLAN.md — §5.2 iter 9 row → ✅ DONE. §8 iter 9 stop point + iter 10 priorities.
+- 1: Контекст загружен из STATUS.md (iter 9 COMPLETE, Part 4 ✅ MIGRATED+VALIDATED, KI#13+KI#14+KI#16 ACTIVE), worklog.md (iter 9 record), AGENT_NAVIGATION.md (§8 iter 10+ roadmap, §10 hint, §6 pitfall #34 KI#16), docs/canon/_README.md (§4 workflow Canon creation, §5 Part 7A ❌ NOT MIGRATED — iter 10 задача), docs/canon/part_04.md (reference pilot — front-matter, VS-маркеры, Migration Notes таблица), src/master/part_07a.html (1168 строк, 13 секций).
+- 2: **Setup environment:** pnpm недоступен в системе → установлен через `npm install pnpm@10.33.0 --prefix /home/z/my-project`. `pnpm install --frozen-lockfile` OK (2.1s).
+- 3: **Baseline `pnpm run validate:master`** ✅ PASSED (all 12 checks). 0 errors. Warnings = pre-existing KI#13 baseline (123 inline `style=` + 22 "content outside section").
+- 4: **KI#17 NEW (documentation drift) identified:** При анализе `src/master/part_07a.html` обнаружено — фактические 4 VS-EMBED в файле: E08 (line 47), E16 (line 267), E17 (line 430), E02 (line 916). Но AGENT_NAVIGATION.md §10 hint и worklog.md iter 9 record указывали «E07, E08, E16, E17» — некорректно. E07 (Voice Hierarchy) существует как visual-system element, но в Part 7A только cross-referenced внутри E16 (lines 310, 358 — badge «Влияние на голос: E07 (~2–5%)»), не embedded. Per user instruction "Если найден новый баг — сначала документируй в STATUS.md как Known Issue, потом фиксий" — зарегистрирован как KI#17 в STATUS.md.
+- 5: **Decision — single-pass Canon creation (iter 10), split migration (iter 11):** Canon file = Markdown (~700-800 строк), не входит в build pipeline, риск отсутствует → один проход. iter 11 (master HTML migration, 1168 строк) — рекомендуется разбить на 2 под-итерации: 11a (§7A.1–§7A.7, ~660 строк, 3 VS-EMBED: E08+E16+E17) + 11b (§7A.8–§7A.13, ~510 строк, 1 VS-EMBED: E02). Соответствует подсказке AGENT_NAVIGATION §10.
+- 6: **Canon `docs/canon/part_07a.md` created** — 802 строки. Структура:
+  - Front-matter: Canonical source for / VS elements (embedded: E08+E16+E17+E02; cross-ref only: E07) / Sections (13) / Last synced 2026-06-24 (iter 10) / Migration status: ❌ NOT MIGRATED (iter 11 task).
+  - 13 H2 секций: §7A.1 SP Structure+Assembly, §7A.2 CORE DIRECTIVES [VS: E08], §7A.3 Tone Frame, §7A.4 Format Lock, §7A.5 Author's Note [VS: E16] + E07 cross-ref note, §7A.6 Sampling Params [VS: E17], §7A.7 Model Checklist, §7A.8 OOC Protection, §7A.9 XML Tags, §7A.10 API Blocks, §7A.11 4K-Fallback, §7A.12 Token Budget, §7A.13 Assembly Pipeline walkthrough Елены [VS: E02].
+  - Resume секция + Cross-references секция + Migration Notes таблица (54 строк TODO list для iter 11).
+  - Migration Notes: 50 "Оставить" + 4 "Сжать" кандидата (#22 sampling table дублирует E17, #26 model checklist дублирует E17 checklist-section, #42 plain-copy дублирует noscript, #46 CORE DIRECTIVES пример в walkthrough Елены дублирует §7A.2). Validation gates прописаны (8 чек-пунктов).
+- 7: **Canon validation** — Validation Checklist из `_README.md` §8:
+  - [x] Front-matter заполнен
+  - [x] Каждый `data-section` ID из master HTML имеет соответствующую H2 секцию (13/13)
+  - [x] Каждый VS-EMBED отмечен `[VS: E0X — ...]` маркером (4/4: E08, E16, E17, E02)
+  - [x] Ни одного raw HTML markup (52 backtick-quoted references в Migration Notes — same pattern as part_04.md pilot, describes master HTML content)
+  - [x] Ни одного устаревшего `infographic`/`mermaid`
+  - [x] Cross-refs в формате `[ref: part_XX.md §X.Y]`
+  - [x] Таблицы — только с уникальными данными
+  - [x] `_README.md` §5 Migration Status будет обновлён (step 9)
+- 8: **`pnpm run validate:master`** ✅ PASSED (all 12 checks). 0 errors. Identical to iter 9 baseline — Canon-файлы не входят в build pipeline.
+- 9: **Documentation updates** (clean, no garbage — per user instruction "Убирай длинную историю изменений, мусор, устаревшие секции"):
+  - STATUS.md — rewritten: iter 10 status, KI#17 NEW ACTIVE (documentation drift, LOW). iter 9 details → опущены (см. CHANGELOG [9.1.9]).
+  - worklog.md — iter 9 → one-liner, iter 10 = этот record.
+  - AGENT_NAVIGATION.md — header iter 9 → iter 10. §8 iter 9 compressed, iter 10 record + iter 11+ roadmap. §6 pitfall #35 (KI#17 — documentation drift). §10 hint для iter 11 (fix E07→E02 drift applied + 2-sub-iter recommendation).
+  - CHANGELOG.md — [9.1.10] entry added (iter 10 Canon Part 7A created).
+  - PLAN.md — §5 iter 10 → ✅ DONE, iter 11+ roadmap.
+  - docs/CONTENT_RESTRUCTURE_PLAN.md — §5.2 iter 10 row → ✅ DONE. §8 iter 10 stop point + iter 11 priorities.
+  - docs/canon/_README.md — §5 Part 7A row → ✅ iter 10 (Canon created). §9 iter 10 entry.
+- 10: **Git commit** — `git add -A && git commit -m "iter 10: Canon Part 7A created (13 sections, 4 VS-markers E08/E16/E17/E02). KI#17 NEW (documentation drift, fixed). validate:master PASS. Master HTML untouched (iter 11 task)."`
 
 Stage Summary:
-- **iter 9 COMPLETE.** Pilot Part 4 migration (iter 8) — визуально и статически валидирована. Регрессий не найдено. Build PASS, validate:master PASS, 43/43 unit tests PASS. KI#13 + KI#14 + KI#16 — ACTIVE.
-- **Validation results:**
-  - Static HTML: 11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs ✅
-  - Served `parts/part_04.html`: all expected content present, all removed content absent ✅
-  - `validate:master` ✅ PASS (123 inline + 22 outside — KI#13 baseline)
-  - `build` ✅ SUCCESS (hash df283246 — same as iter 8)
-  - `validate` ✅ All 8 gates passed
-  - `test:unit` ✅ 43/43 pass
-  - `lint` ✅ 0 errors, 10 warnings (pre-existing)
-  - `qa:bundle` / `qa:contrast` / `qa:doc-versions` ✅ PASS
-  - `qa:english` ❌ 29 issues (no regression vs iter 7)
-  - `qa:syntax` ❌ 236 issues (no regression vs iter 7)
-  - `qa:csp` ❌ FAIL — **KI#16 NEW** (pre-existing с iter 5, не задокументирован ранее)
-- **Modified files (6):** STATUS.md, worklog.md, AGENT_NAVIGATION.md, CHANGELOG.md, PLAN.md, docs/CONTENT_RESTRUCTURE_PLAN.md. Никаких правок кода / master HTML / visual-system.
-- **НЕ сделано (намеренно, iter 10+ задача):**
-  1. Canon Part 7A (1168 строк, 13 секций, 4 VS-EMBED) — iter 10
-  2. Migrate Part 7A — iter 11
-  3. Остальные Parts (Canon + migrate) — iter 12–17
-  4. Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon) — iter 18
-  5. KI#13 (inline styles) — iter 19+ (после content cleanup)
-  6. KI#16 (qa:csp inline scripts в src/shell/index.html) — iter 19+ (после content cleanup)
-  7. Phase 4 actual SVG integration — iter 19+
-- **Точка остановки:** iter 9 done (Part 4 validation). KI#13 + KI#14 + KI#16 ACTIVE. В iter 10: (1) Canon Part 7A (`docs/canon/part_07a.md`) — 13 секций, 4 VS-EMBED (E07 voice hierarchy, E08 core directives, E16 author note, E17 sampling params), 1168 строк master HTML; (2) Принять решение — разбивать Part 7A на 2 под-итерации (Canon §7A.1-7 + Canon §7A.8-13) или делать одним проходом. Подсказка: AGENT_NAVIGATION §6 pitfall #34 (risk mitigation для Part 7A — разбить на 2 под-итерации).
-- **Подсказка следующему агенту:** iter 9 = Part 4 master HTML валидирован против Canon §4 (regressions не найдено, KI#16 NEW для qa:csp). Перед стартом iter 10 прочитай STATUS.md (KI#13+KI#14+KI#16 ACTIVE, Part 4 ✅ MIGRATED+VALIDATED), worklog.md (iter 9 record — этот), AGENT_NAVIGATION.md (§8 iter 10+ roadmap, §10 hint), docs/canon/_README.md (§5 Part 7A ❌ NOT MIGRATED — iter 10 задача), src/master/part_07a.html (1168 строк, 13 секций, 4 VS-EMBED). iter 10 priorities: (1) Создать `docs/canon/part_07a.md` (Canon §7A — 13 H2 секций, все `data-section` покрыть, 4 VS-маркера для E07/E08/E16/E17, Migration Notes таблица для iter 11); (2) НЕ править master HTML — это iter 11 задача; (3) После Canon creation — `pnpm run validate:master` (should be 0 errors) + git commit. Если найден новый баг — сначала документируй в STATUS.md как Known Issue, потом фиксий.
+- **iter 10 COMPLETE.** Canon Part 7A создан (`docs/canon/part_07a.md`, 802 строки). Master HTML не тронут. `validate:master` ✅ PASS (0 errors, KI#13 baseline). KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+- **Canon Part 7A structure:** 13 H2 секций (по одной на каждый `data-section`), 4 VS-маркера (E08 CORE DIRECTIVES, E16 Author's Note Mechanics, E17 Sampling Parameters, E02 Assembly Pipeline), 1 cross-ref VS (E07 Voice Hierarchy — embedded в Part 3, referenced из E16). Front-matter `Migration status: ❌ NOT MIGRATED (iter 11 task)`. Migration Notes таблица: 54 TODO строк + validation gates.
+- **Decision for iter 11:** split into 2 sub-iterations — iter 11a (§7A.1–§7A.7, ~660 строк, 3 VS-EMBED) + iter 11b (§7A.8–§7A.13, ~510 строк, 1 VS-EMBED). Per AGENT_NAVIGATION §10 hint recommendation.
+- **Modified files (8):** docs/canon/part_07a.md (NEW), STATUS.md, worklog.md, AGENT_NAVIGATION.md, CHANGELOG.md, PLAN.md, docs/CONTENT_RESTRUCTURE_PLAN.md, docs/canon/_README.md. Никаких правок master HTML / visual-system / widget JS.
+- **НЕ сделано (намеренно, iter 11+ задача):**
+  1. Migrate Part 7A master HTML (`src/master/part_07a.html`, 1168 строк) — iter 11 (рекомендуется 11a + 11b)
+  2. Остальные Parts (Canon + migrate) — iter 12–17
+  3. Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon) — iter 18
+  4. KI#13 (inline styles) — iter 19+ (после content cleanup)
+  5. KI#16 (qa:csp inline scripts в src/shell/index.html) — iter 19+ (после content cleanup)
+  6. Phase 4 actual SVG integration — iter 19+
+- **Точка остановки:** iter 10 done (Canon Part 7A created). KI#13 + KI#14 + KI#16 + KI#17 ACTIVE. В iter 11: (1) Migrate `src/master/part_07a.html` против Canon §7A — рекомендуется разбить на 11a (§7A.1–§7A.7) + 11b (§7A.8–§7A.13); (2) Применить 4 "Сжать" кандидата из Migration Notes таблицы (#22, #26, #42, #46); (3) `pnpm run validate:master` + `build` + `validate` + `test:unit` + `lint` + visual diff PASS; (4) Обновить Canon front-matter `Migration status: ✅ MIGRATED (iter 11)`.
+- **Подсказка следующему агенту:** iter 10 = Canon Part 7A создан (802 строки, 13 секций, 4 VS-маркера). Перед стартом iter 11 прочитай STATUS.md (KI#13+KI#14+KI#16+KI#17 ACTIVE, Part 4 ✅ MIGRATED, Part 7A Canon ✅ CREATED), worklog.md (iter 10 record — этот), AGENT_NAVIGATION.md (§8 iter 11+ roadmap, §10 hint для iter 11, §6 pitfall #35 KI#17), docs/canon/_README.md (§5 Part 7A ❌ NOT MIGRATED — iter 11 задача), docs/canon/part_07a.md (Canon §7A — источник правды для миграции, Migration Notes таблица = TODO list для iter 11 с 54 элементами), src/master/part_07a.html (1168 строк, 13 секций, 4 VS-EMBED: E08 line 47, E16 line 267, E17 line 430, E02 line 916). iter 11 priorities: (1) Migrate master HTML против Canon §7A — рекомендуемое разбиение 11a + 11b; (2) Применить 4 "Сжать" кандидата (#22 sampling table, #26 model checklist, #42 plain-copy, #46 CORE DIRECTIVES пример); (3) `pnpm run validate:master` + `build` + `validate` + `test:unit` + `lint` + visual diff PASS; (4) Принцип `viz > dry text` (iter 8) — сохраняется. Если найден новый баг — сначала документируй в STATUS.md как Known Issue, потом фиксий.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 10 (2026-06-24)**: Canon Part 7A created (`docs/canon/part_07a.md`, 802 строки, 13 H2 секций, 4 VS-маркера E08/E16/E17/E02). Master HTML не тронут (iter 11 задача). KI#17 NEW (documentation drift: AGENT_NAVIGATION §10 hint указывал E07 вместо E02 как 4-й VS-EMBED — fixed). `validate:master` PASS. 8 docs updated.
 - **iter 9 (2026-06-24)**: Validation pass Part 4 master HTML. Static HTML + served output checks PASS. validate:master PASS, build PASS (hash df283246 same as iter 8), 43/43 unit tests PASS. qa:english/qa:syntax — same false positives as iter 7 (no regression). qa:csp FAIL → KI#16 NEW (pre-existing с iter 5, не задокументирован). 6 docs updated.
 - **iter 8 (2026-06-23)**: Pilot migration Part 4 master HTML против Canon §4. 777 → 676 строк (-13%). 4 dup viz удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён, 2 re-explanation абзаца сжаты. 2 unique infographic сохранены (deviation). LIE таблица сохранена полностью (deviation). Build PASS, validate:master PASS.
 - **iter 7 (2026-06-23)**: Canon scaffold `docs/canon/` + `_README.md` (правила) + `part_04.md` (пилот SPINE, 11 секций, 394 строки). KI#15 CLOSED — удалён `docs/anchor-redirects.json` (stale duplicate). 6 docs updated. Никаких правок master HTML.
