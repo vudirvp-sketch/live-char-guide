@@ -1,5 +1,42 @@
 # Changelog
 
+## [9.1.16] - 2026-06-24
+
+### Added (iter 16 — Canon Part 5+6+7B+10 creation)
+- **Canon Part 5 created** — `docs/canon/part_05.md` (285 строк). 8 H2 секций: p5_ocean_basics, p5_elena_profile, p5_ocean_warning, p5_enneagram_basics, p5_mbti_ref, p5_cross_instrument_map, p5_enneagram_wings, p5_cross_matrix.
+- **Canon Part 6 created** — `docs/canon/part_06.md` (247 строк). 6 H2 секций: p6_cot_bridge, p6_cot_basics, p6_cot_tiers, p6_cot_tier2, p6_cot_tier3, p6_cot_anchors.
+- **Canon Part 7B created** — `docs/canon/part_07b.md` (309 строк). 5 H2 секций: p7b_structured_inject, p7b_greeting, p7b_lorebook_basics, p7b_lorebook_mechanics, p7b_lorebook_advanced.
+- **Canon Part 10 created** — `docs/canon/part_10.md` (593 строки). 4 H2 секции: p10_elena, p10_walter, p10_omnis, p10_vysherblenny.
+- **4 VS-маркера total:** E09 (OCEAN Pentagon, Part 5 preamble), E10 (Enneagram × SPINE Mapping, Part 5 между §5.3 и §5.4), E11 (CoT Tiers Staircase, Part 6 preamble), E15 (Annotated Blueprint, Part 10 preamble).
+- **Front-matter** для всех 4 Canon files: `Migration status: ✅ MIGRATED (iter 16)` (Canon created + master HTML migrated end-to-end за один iter, по образцу iter 12/13/14).
+- **Migration Notes таблицы:** Part 5 (13 элементов: 11 «Оставить» + 2 «Сжать»), Part 6 (7 элементов: 6 «Оставить» + 1 «Сжать»), Part 7B (5 элементов: все «Оставить», 0 «Сжать»), Part 10 (5 элементов: все «Оставить», 0 «Сжать»).
+
+### Changed (iter 16 — Part 5+6+7B+10 master HTML migration)
+- **Part 5 master HTML migrated** против Canon §5 (`src/master/part_05.html`, 619 → 615 строк, -0.6%).
+  - #18: Orphan paragraph «У Елены три экстремальных полюса...» (lines 303, между `</section>` и `<section>`, вне любого `<section data-section>`) → удалён. Дублировал RULE callout внутри p5_elena_profile. Также нарушал §3 pitfall #8 (контент вне section).
+  - #19: Orphan paragraph «OCEAN показывает «сколько»...» (lines 331, между `</section>` и `<!-- VS-EMBED: E10 -->`, вне любого `<section data-section>`) → удалён. Дублировал p5_enneagram_basics intro (тот же тезис «OCEAN = сколько, Enneagram = почему»). Также нарушал §3 pitfall #8.
+- **Part 6 master HTML migrated** против Canon §6 (`src/master/part_06.html`, 261 → 259 строк, -0.8%).
+  - #20: `p6_cot_basics` L96 `<p>CoT добавляет карточке пошаговые рассуждения...</p>` → удалён. Дублировал `p6_cot_bridge` L81 definition. KI#14 principle — одно canonical location для определения концепта. L98 сохранён (уникальный Model Note).
+- **Part 7B master HTML migrated** против Canon §7B (`src/master/part_07b.html`, 371 → 371 строк, 0%). Контент плотный, дубликатов не найдено. 0 compression candidates applied. Infographic «Алгоритм Greeting» = visualization of 4-step algorithm, example ниже = concrete application (complement, не duplicate).
+- **Part 10 master HTML migrated** против Canon §10 (`src/master/part_10.html`, 666 → 666 строк, 0%). Контент плотный, все 4 карточки — уникальные TEMPLATEs. 0 compression candidates applied. RULE callout «Правило голоса» в §10.1 = brief 1-sentence reminder with cross-ref to Part 3, не paragraph-length re-explanation.
+- **Canon front-matter updated:** `Migration status: ✅ MIGRATED (iter 16)`, `Last synced: 2026-06-24 (iter 16)` для всех 4 Canon files.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, baseline warnings = KI#13 baseline, no regression).
+- `pnpm run build` ✅ SUCCESS (hash df283246, same as iter 8–14).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (10 pre-existing warnings).
+- `pnpm run qa:bundle` ✅ PASS. `pnpm run qa:doc-versions` ✅ PASS.
+
+### Notes
+- iter 16 = Canon Part 5+6+7B+10 creation + 4 master HTML migrations (end-to-end за один iter, по образцу iter 12/13/14). 16 files updated.
+- **Canon migration COMPLETE:** все 10 Parts ✅ MIGRATED (iter 7–16). Part 1+2+3 ✅ iter 14. Part 4 ✅ iter 8–9. Part 5+6+7B+10 ✅ iter 16. Part 7A ✅ iter 11. Part 8 ✅ iter 12. Part 9 ✅ iter 13.
+- KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+- iter 17+ priorities: iter 17 reserved (не нужен), iter 18 = Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon, Appendix Canon creation), iter 19+ = KI#13 + KI#16 + Phase 4 SVG integration.
+
+---
+
 ## [9.1.14] - 2026-06-24
 
 ### Added (iter 14 — Canon Part 1+2+3 creation)

@@ -210,12 +210,13 @@ Stage Summary:
 
 **Iter 14 (Canon Part 1+2+3 + migrate, DONE 2026-06-24):** Canon `docs/canon/part_01.md` (186 строк, 7 H2 секций, 1 VS-маркер E01) + `docs/canon/part_02.md` (238 строк, 6 H2 секций, 2 VS-маркера E03+E04) + `docs/canon/part_03.md` (315 строк, 8 H2 секций, 1 VS-маркер E07) созданы. 3 master HTML мигрированы end-to-end за один iter: `part_01.html` 390 → 365 строк (-6.4%, #14 mermaid → auto-TOC duplicate removed), `part_02.html` 443 → 415 строк (-6.3%, #15+#16+#17 — 2 infographic + 1 plain-copy removed как дубликаты VS-EMBED E03/E04), `part_03.html` 452 → 452 строк (0%, контент плотный, дубликатов не найдено). 4 compression candidates applied total. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED для всех 3 files. 10 docs updated. End-to-end за один iter (Canon creation + migrate, по образцу iter 12/13).
 
-**Iter 15+ (пересмотрено в iter 14):**
-1. **iter 15** — (reserved — не нужен, iter 14 покрыл Part 1+2+3).
-2. **iter 16–17** — Canon Part 5+6+7B+10 + migrate (Psychology, CoT, Lorebook, Examples).
-3. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon).
-4. **iter 19+** — KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
+**Iter 16 (Canon Part 5+6+7B+10 + migrate, DONE 2026-06-24):** Canon `docs/canon/part_05.md` (285 строк, 8 H2 секций, 2 VS-маркера E09+E10) + `docs/canon/part_06.md` (247 строк, 6 H2 секций, 1 VS-маркер E11) + `docs/canon/part_07b.md` (309 строк, 5 H2 секций, 0 VS-маркеров) + `docs/canon/part_10.md` (593 строки, 4 H2 секции, 1 VS-маркер E15) созданы. 4 master HTML мигрированы end-to-end за один iter: `part_05.html` 619 → 615 строк (-0.6%, #18+#19 — 2 orphan paragraphs removed), `part_06.html` 261 → 259 строк (-0.8%, #20 — duplicate CoT definition removed), `part_07b.html` 371 → 371 строк (0%, контент плотный), `part_10.html` 666 → 666 строк (0%, все 4 карточки уникальные TEMPLATEs). 3 compression candidates applied total. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED для всех 4 files. **Все 10 Parts мигрированы — Canon migration complete.** 10 docs updated. End-to-end за один iter (Canon creation + migrate, по образцу iter 12/13/14).
 
-**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
+**Iter 17+ (пересмотрено в iter 16):**
+1. **iter 17** — (reserved — не нужен, iter 16 покрыл все 10 Parts).
+2. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon, Appendix Canon creation для MBTI/Model Table/Glossary).
+3. **iter 19+** — KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
 
-**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 1 outside) + KI#14 (content duplication) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 16+.**
+**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts ✅ MIGRATED, Appendix ❌).
+
+**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 1 outside) + KI#14 (content duplication, migration COMPLETE iter 16) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 18+.**
