@@ -218,10 +218,12 @@ Stage Summary:
 
 **Iter 20 ✅ DONE:** KI#13 Part 1+2 (57/123 inline styles → 28 CSS classes, `vs-ki13-*` prefix). KI#17 CLOSED. SVG extracts audit (0 orphans).
 
-**Iter 21+ (пересмотрено в iter 20):**
-1. **iter 21** — KI#13 Part 3+4 (23 inline styles → CSS classes) + Phase 4 SVG integration start.
-2. **iter 22+** — KI#13 Part 5-10 (43 inline styles) + Phase 4 SVG integration.
+**Iter 21 ✅ DONE:** KI#13 Part 3+4 (23/123 inline styles → 18 новых CSS селекторов с `vs-ki13-*` prefix). Phase 4 SVG integration analysis complete (Canon migration уже удалил major duplicates; 3 retained infographics intentional; Part 7B candidate для iter 22+). Build hash fd3d96d3 unchanged.
+
+**Iter 22+ (пересмотрено в iter 21):**
+1. **iter 22** — KI#13 Part 5+6 (6 inline styles → CSS classes) + Phase 4 SVG integration (Part 7B new VS element, optional, low priority).
+2. **iter 23+** — KI#13 Part 7A (19) + Part 9 (6) + Part 10 (12) = 37 remaining inline styles.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE).
 
-**KI#1..KI#12 + KI#15 + KI#16 + KI#17 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (66 inline styles remaining в Part 3-10) — ACTIVE, continue iter 21+.**
+**KI#1..KI#12 + KI#15 + KI#16 + KI#17 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (43 inline styles remaining в Part 5-10) — ACTIVE, continue iter 22+.**

@@ -3453,3 +3453,52 @@ a:hover {
 .vs-ki13-funnel-panel-text strong {
   color: var(--text-primary);
 }
+
+/* --- E07 Voice Hierarchy — Storage vs Influence inset (iter 21) --- */
+.vs-ki13-inset-text strong {
+  color: var(--text-primary);
+}
+
+/* --- E05 SPINE Framework — Causal chain explanation panel (iter 21) --- */
+.vs-ki13-spine-chain-panel {
+  max-width: 700px;
+  margin: var(--gap-xl) auto 0;
+}
+
+.vs-ki13-spine-chain-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: var(--gap-sm);
+  color: var(--accent-violet);
+}
+
+.vs-ki13-spine-chain-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.vs-ki13-spine-chain-text strong {
+  color: var(--text-primary);
+}
+
+/* --- E05 SPINE Framework — GHOST Layers ring animation delays (iter 21) --- */
+/* Staggered transition-delay values for ring-anim circles + ring-text-anim texts.
+   Applied to SVG elements inside .ghost-rings (see SECTION 2 for base transitions). */
+.vs-ki13-ring-delay-0   { transition-delay: 0ms; }
+.vs-ki13-ring-delay-200 { transition-delay: 200ms; }
+.vs-ki13-ring-delay-400 { transition-delay: 400ms; }
+.vs-ki13-ring-delay-500 { transition-delay: 500ms; }
+.vs-ki13-ring-delay-600 { transition-delay: 600ms; }
+.vs-ki13-ring-delay-650 { transition-delay: 650ms; }
+.vs-ki13-ring-delay-700 { transition-delay: 700ms; }
+.vs-ki13-ring-delay-750 { transition-delay: 750ms; }
+.vs-ki13-ring-delay-800 { transition-delay: 800ms; }
+.vs-ki13-ring-delay-850 { transition-delay: 850ms; }
+
+/* --- E05 SPINE Framework — GHOST Layers ring label titles (iter 21) --- */
+/* Per-tier color overrides for .ring-label__title (base styles in SECTION 2). */
+.vs-ki13-ring-title--g3 { color: rgba(139, 92, 246, 0.7); }
+.vs-ki13-ring-title--g2 { color: rgba(139, 92, 246, 0.85); }
+.vs-ki13-ring-title--g1 { color: var(--accent-violet); }

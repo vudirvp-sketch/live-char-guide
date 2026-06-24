@@ -1,5 +1,30 @@
 # Changelog
 
+## [9.1.21] - 2026-06-24
+
+### Added (iter 21 — KI#13 Part 3+4: inline styles → CSS classes)
+- **`src/assets/vs-styles.css` SECTION 6 extended** — +49 строк (18 новых селекторов с `vs-ki13-*` prefix). Groups: (a) E07 Voice Hierarchy inset (1 селектор: `.vs-ki13-inset-text strong` — descendant selector для 2 `<strong>` elements), (b) E05 SPINE causal chain panel (4 селектора: spine-chain-panel, spine-chain-heading, spine-chain-text, spine-chain-text strong), (c) E06 GHOST Layers ring animation delays (10 селекторов: ring-delay-{0,200,400,500,600,650,700,750,800,850}), (d) E06 GHOST Layers ring label titles (3 селектора: ring-title--g3/g2/g1).
+- **Phase 4 SVG integration analysis completed** — Canon migration (iter 7–18) already removed all major textual duplicates of VS-EMBEDs. 3 retained infographics (2 part_04 + 1 part_07b) — unique, intentional retention (iter 8 principle «viz > dry text»). Part 7B (0 VS-EMBED) identified as candidate for new VS element (E18+) in iter 22+, low priority, requires visual-system/elements/ prototyping first.
+
+### Changed (iter 21 — KI#13 inline style migration)
+- **`src/master/part_03.html` edited** — 2 inline `style=` attributes → CSS classes (0 remaining). E07 VS-EMBED Storage vs Influence inset: `<div class="inset-box__text">` → `<div class="inset-box__text vs-ki13-inset-text">`. 2 `<strong style="color:var(--text-primary);">` → `<strong>` (covered by descendant selector `.vs-ki13-inset-text strong`).
+- **`src/master/part_04.html` edited** — 21 inline `style=` attributes → CSS classes (0 remaining). (i) E05 SPINE causal chain panel: 8 inline styles → 4 selectors (panel + heading + text + 5 strongs covered by descendant selector). (ii) E06 GHOST Layers SVG: 10 `transition-delay` inline styles → 10 `vs-ki13-ring-delay-*` classes (4 circles + 6 text elements, staggered animation choreography preserved). (iii) E06 GHOST Layers HTML ring labels: 3 color inline styles → 3 `vs-ki13-ring-title--g3/g2/g1` classes.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 43 inline styles remaining в Part 5-10).
+- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified, vs-styles.css propagated to dist/assets/ + root assets/).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
+- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone
+**KI#13 progress:** 80/123 inline styles fixed (65%). Part 1+2+3+4 ✅ DONE. 43 remaining в Part 5-10 (Part 5: 1, Part 6: 5, Part 7A: 19, Part 9: 6, Part 10: 12). Active KI: KI#13 (MEDIUM). iter 22+: KI#13 Part 5+6 (6 inline styles) + Phase 4 SVG integration (Part 7B new VS element, optional, low priority).
+
+---
+
 ## [9.1.20] - 2026-06-24
 
 ### Added (iter 20 — KI#13 Part 1+2: inline styles → CSS classes)

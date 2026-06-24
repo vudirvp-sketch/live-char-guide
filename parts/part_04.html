@@ -120,17 +120,17 @@
     </div>
 
     <!-- Explanation -->
-    <div class="panel" style="max-width:700px; margin: var(--gap-xl) auto 0;">
-      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; margin-bottom:var(--gap-sm); color:var(--accent-violet);">
+    <div class="panel vs-ki13-spine-chain-panel">
+      <div class="vs-ki13-spine-chain-heading">
         Причинно-следственная цепь
       </div>
-      <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+      <p class="vs-ki13-spine-chain-text">
         SPINE — психологический стержень персонажа. Каждый элемент причинно-следственно вытекает из предыдущего:
-        <strong style="color:var(--text-primary);">GHOST</strong> (глубокая травма) порождает
-        <strong style="color:var(--text-primary);">LIE</strong> (ложное убеждение), которое создаёт
-        <strong style="color:var(--text-primary);">FLAW</strong> (дезадаптивный паттерн), который двигает
-        <strong style="color:var(--text-primary);">NEED</strong> (подлинное желание), маскируемое
-        <strong style="color:var(--text-primary);">WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
+        <strong>GHOST</strong> (глубокая травма) порождает
+        <strong>LIE</strong> (ложное убеждение), которое создаёт
+        <strong>FLAW</strong> (дезадаптивный паттерн), который двигает
+        <strong>NEED</strong> (подлинное желание), маскируемое
+        <strong>WANT</strong> (поверхностная цель). Цепь всегда течёт слева направо.
         WANT сходится к NEED по мере того, как персонаж платит Prices через Anchors.
       </p>
     </div>
@@ -553,61 +553,55 @@ WANT: Доказать правоту самостоятельно
         <rect width="600" height="480" fill="url(#ghost-grad)"/>
 
         <!-- G3 — Surface (outer ring) — lightest violet -->
-        <circle class="ring-anim" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
-                stroke="rgba(139,92,246,0.25)" stroke-width="1.5" style="transition-delay:0ms;"/>
+        <circle class="ring-anim vs-ki13-ring-delay-0" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
+                stroke="rgba(139,92,246,0.25)" stroke-width="1.5"/>
 
         <!-- G2 — Secondary (middle ring) — medium violet -->
-        <circle class="ring-anim" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
-                stroke="rgba(139,92,246,0.35)" stroke-width="1.5" style="transition-delay:200ms;"/>
+        <circle class="ring-anim vs-ki13-ring-delay-200" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
+                stroke="rgba(139,92,246,0.35)" stroke-width="1.5"/>
 
         <!-- G1 — Core (inner ring) — deep violet -->
-        <circle class="ring-anim" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
-                stroke="rgba(139,92,246,0.55)" stroke-width="1.5" style="transition-delay:400ms;"/>
+        <circle class="ring-anim vs-ki13-ring-delay-400" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
+                stroke="rgba(139,92,246,0.55)" stroke-width="1.5"/>
 
         <!-- Core glow -->
-        <circle class="ring-anim" cx="260" cy="240" r="30" fill="url(#core-glow)" style="transition-delay:500ms;"/>
+        <circle class="ring-anim vs-ki13-ring-delay-500" cx="260" cy="240" r="30" fill="url(#core-glow)"/>
 
         <!-- Ring text labels inside SVG -->
-        <text class="ring-text-anim" x="260" y="100" text-anchor="middle" fill="#8b95a8"
-              font-family="'DM Sans', sans-serif" font-size="12" font-weight="600"
-              style="transition-delay:600ms;">G3 — Поверхностный</text>
-        <text class="ring-text-anim" x="260" y="115" text-anchor="middle" fill="#6b7590"
-              font-family="'Inter', sans-serif" font-size="9"
-              style="transition-delay:650ms;">"Избегает обязательств"</text>
+        <text class="ring-text-anim vs-ki13-ring-delay-600" x="260" y="100" text-anchor="middle" fill="#8b95a8"
+              font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">G3 — Поверхностный</text>
+        <text class="ring-text-anim vs-ki13-ring-delay-650" x="260" y="115" text-anchor="middle" fill="#6b7590"
+              font-family="'Inter', sans-serif" font-size="9">"Избегает обязательств"</text>
 
-        <text class="ring-text-anim" x="260" y="155" text-anchor="middle" fill="#8b95a8"
-              font-family="'DM Sans', sans-serif" font-size="12" font-weight="600"
-              style="transition-delay:700ms;">G2 — Промежуточный</text>
-        <text class="ring-text-anim" x="260" y="170" text-anchor="middle" fill="#6b7590"
-              font-family="'Inter', sans-serif" font-size="9"
-              style="transition-delay:750ms;">"Брошен в 16 лет"</text>
+        <text class="ring-text-anim vs-ki13-ring-delay-700" x="260" y="155" text-anchor="middle" fill="#8b95a8"
+              font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">G2 — Промежуточный</text>
+        <text class="ring-text-anim vs-ki13-ring-delay-750" x="260" y="170" text-anchor="middle" fill="#6b7590"
+              font-family="'Inter', sans-serif" font-size="9">"Брошен в 16 лет"</text>
 
-        <text class="ring-text-anim" x="260" y="230" text-anchor="middle" fill="#e2e6ed"
-              font-family="'DM Sans', sans-serif" font-size="13" font-weight="600"
-              style="transition-delay:800ms;">G1 — Ядро</text>
-        <text class="ring-text-anim" x="260" y="248" text-anchor="middle" fill="#8b95a8"
-              font-family="'Inter', sans-serif" font-size="9"
-              style="transition-delay:850ms;">"Отец ушёл, когда мне было 5"</text>
+        <text class="ring-text-anim vs-ki13-ring-delay-800" x="260" y="230" text-anchor="middle" fill="#e2e6ed"
+              font-family="'DM Sans', sans-serif" font-size="13" font-weight="600">G1 — Ядро</text>
+        <text class="ring-text-anim vs-ki13-ring-delay-850" x="260" y="248" text-anchor="middle" fill="#8b95a8"
+              font-family="'Inter', sans-serif" font-size="9">"Отец ушёл, когда мне было 5"</text>
 
       </svg>
 
 <!-- HTML labels on the right -->
       <div class="ring-label ring-label--g3 scroll-enter">
-        <div class="ring-label__title" style="color:rgba(139,92,246,0.7);">G3 — Поверхностный</div>
+        <div class="ring-label__title vs-ki13-ring-title--g3">G3 — Поверхностный</div>
         <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
         <div class="ring-label__event">"Избегает обязательств"</div>
         <div class="ring-label__causal">G3 → текущий триггер</div>
       </div>
 
       <div class="ring-label ring-label--g2 scroll-enter">
-        <div class="ring-label__title" style="color:rgba(139,92,246,0.85);">G2 — Промежуточный</div>
+        <div class="ring-label__title vs-ki13-ring-title--g2">G2 — Промежуточный</div>
         <div class="ring-label__timeline">Юность (13–25): подкрепляется → усиливает FLAW</div>
         <div class="ring-label__event">"Брошен в 16 лет"</div>
         <div class="ring-label__causal">G2 → усиливает FLAW</div>
       </div>
 
       <div class="ring-label ring-label--g1 scroll-enter">
-        <div class="ring-label__title" style="color:var(--accent-violet);">G1 — Ядро</div>
+        <div class="ring-label__title vs-ki13-ring-title--g1">G1 — Ядро</div>
         <div class="ring-label__timeline">Детство (0–12): исток → формирует LIE</div>
         <div class="ring-label__event">"Отец ушёл, когда мне было 5"</div>
         <div class="ring-label__causal">G1 → формирует LIE</div>
