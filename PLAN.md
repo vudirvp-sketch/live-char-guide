@@ -216,9 +216,12 @@ Stage Summary:
 
 **Iter 19 (KI#16 fix — qa:csp PASS, DONE 2026-06-24):** 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">` с KI#16 fix comments. (d) Build regenerated root `index.html` + `widgets/` (15→17 files) + `build.hash` (`df283246` → `fd3d96d3`). (e) `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** 14 docs/files updated.
 
-**Iter 20+ (пересмотрено в iter 19):**
-1. **iter 20+** — KI#13 (123 inline styles → external CSS classes) + Phase 4 actual SVG integration (заменить textual content на VS-EMBED где возможно) — после KI#16 closed (iter 19 done).
+**Iter 20 ✅ DONE:** KI#13 Part 1+2 (57/123 inline styles → 28 CSS classes, `vs-ki13-*` prefix). KI#17 CLOSED. SVG extracts audit (0 orphans).
+
+**Iter 21+ (пересмотрено в iter 20):**
+1. **iter 21** — KI#13 Part 3+4 (23 inline styles → CSS classes) + Phase 4 SVG integration start.
+2. **iter 22+** — KI#13 Part 5-10 (43 inline styles) + Phase 4 SVG integration.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE).
 
-**KI#1..KI#12 + KI#15 + KI#16 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (123 inline + 1 outside) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 20+.**
+**KI#1..KI#12 + KI#15 + KI#16 + KI#17 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (66 inline styles remaining в Part 3-10) — ACTIVE, continue iter 21+.**

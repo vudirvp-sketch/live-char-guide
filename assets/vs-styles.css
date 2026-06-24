@@ -3315,3 +3315,141 @@ a:hover {
         grid-template-columns: 1.5fr 1fr 1fr 1fr;
       }
     }
+
+
+/* ============================================================
+   SECTION 6 — KI#13 Inline Style → CSS Class Migration
+   ============================================================
+   Inline style= attributes extracted from master HTML VS-EMBEDs.
+   Added in iter 20 (KI#13 fix, Part 1+2 baseline).
+   Naming convention: vs-ki13-{element}-{property}
+   ============================================================ */
+
+/* --- E01 Card Anatomy — Anchors subpanel --- */
+.vs-ki13-anchor-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.vs-ki13-anchor-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--accent-violet);
+}
+
+.vs-ki13-anchor-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* --- E01 Card Anatomy — Token Budget Summary --- */
+.vs-ki13-token-panel {
+  max-width: 720px;
+  margin: var(--gap-xl) auto 0;
+}
+
+.vs-ki13-token-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: var(--gap-sm);
+  color: var(--text-primary);
+}
+
+.vs-ki13-token-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.vs-ki13-token-thead tr {
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.vs-ki13-token-th-left {
+  text-align: left;
+  padding: 6px 8px;
+}
+
+.vs-ki13-token-th-right {
+  text-align: right;
+  padding: 6px 8px;
+}
+
+.vs-ki13-token-th-source {
+  text-align: left;
+  padding: 6px 8px;
+  color: var(--text-muted);
+}
+
+.vs-ki13-token-tbody {
+  color: var(--text-secondary);
+}
+
+.vs-ki13-token-row {
+  border-bottom: 1px solid var(--border-50);
+}
+
+.vs-ki13-token-td {
+  padding: 6px 8px;
+}
+
+.vs-ki13-token-td-right {
+  text-align: right;
+  padding: 6px 8px;
+}
+
+.vs-ki13-token-td-source {
+  padding: 6px 8px;
+  color: var(--text-muted);
+}
+
+/* --- E03 Behavioral Anchor — Flow node accent borders --- */
+.vs-ki13-flow-node--violet {
+  border-left: var(--line-bold) solid var(--accent-violet);
+}
+
+.vs-ki13-flow-node--cyan {
+  border-left: var(--line-bold) solid var(--accent-cyan);
+}
+
+.vs-ki13-flow-node--amber {
+  border-left: var(--line-bold) solid var(--accent-amber);
+}
+
+.vs-ki13-compare-column--relative {
+  position: relative;
+}
+
+.vs-ki13-arrow-dim {
+  opacity: 0.3;
+}
+
+/* --- E04 Embodiment Protocol — Explanation panel --- */
+.vs-ki13-funnel-panel {
+  max-width: 600px;
+  margin: var(--gap-xl) auto 0;
+}
+
+.vs-ki13-funnel-panel-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: var(--gap-sm);
+  color: var(--accent-violet);
+}
+
+.vs-ki13-funnel-panel-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.vs-ki13-funnel-panel-text strong {
+  color: var(--text-primary);
+}

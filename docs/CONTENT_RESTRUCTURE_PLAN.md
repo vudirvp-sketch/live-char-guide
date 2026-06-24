@@ -340,7 +340,8 @@ SPINE — психологический каркас из 5 элементов,
 | **17** | (reserved) | Не нужен — iter 16 покрыл Part 5+6+7B+10 end-to-end. | — | — |
 | **18** | Final cleanup | ✅ DONE — (a) Visual check Part 5+6 via static validation — no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML; 3 infographic retained (2 part_04 + 1 part_07b) + 1 part_05 static SVG fallback — все unique visualizations, deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** 12 docs updated. | `docs/canon/appendix_*.md`, `docs/content_map.md`, `docs/terminology_dictionary.md` | LOW |
 | **19** | KI#16 fix | ✅ DONE — 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">`. (d) Build regenerated root `index.html` + `widgets/` (15→17 files) + `build.hash` (`df283246` → `fd3d96d3`). `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** 14 docs/files updated. | `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `src/shell/index.html` | LOW |
-| **20+** | KI#13 + Phase 4 | После KI#16 closed (iter 19 done): KI#13 (123 inline styles → external CSS classes) + Phase 4 actual SVG integration (заменить textual content на VS-EMBED где возможно) | varies | HIGH |
+| **20** | KI#13 Part 1+2 + KI#17 + SVG audit | ✅ DONE — KI#13 Part 1: 48 inline styles → 15 CSS classes. Part 2: 9 inline styles → 9 CSS classes. Total: 57/123 (46%). `vs-styles.css` +137 строк (SECTION 6, 28 классов `vs-ki13-*`). KI#17 CLOSED (doc drift fixed iter 10, LOW). SVG extracts audit: 0 orphans, все 17 elements embedded, все styles в vs-styles.css. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. 10 docs/files updated. | `src/assets/vs-styles.css`, `src/master/part_01.html`, `src/master/part_02.html` | MEDIUM |
+| **21+** | KI#13 Part 3-10 + Phase 4 SVG | KI#13 remaining: Part 3 (2) + Part 4 (21) + Part 5 (1) + Part 6 (5) + Part 7A (19) + Part 9 (6) + Part 10 (12) = 66 inline styles. Phase 4 SVG integration start. | varies | HIGH |
 
 **Оценка:** ~13 итераций (iter 7..19) на полный content restructure. Каждая итерация — 1–3 часа работы агента.
 
@@ -413,26 +414,26 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 19 COMPLETE (KI#16 fix — qa:csp PASS).** 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">` с KI#16 fix comments. (d) Build regenerated root `index.html` (7.2 KB, 0 inline scripts) + `widgets/` (15→17 files, +2 для js-flag.js + mermaid-init.js) + `build.hash` (`df283246` → `fd3d96d3`). (e) `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** Canon migration (iter 7–18) unaffected. KI#13 + KI#17 — ACTIVE (KI#14 closed iter 16).
+**Iter 20 COMPLETE (KI#13 Part 1+2 + KI#17 closure + SVG audit).** 57/123 inline `style=` → 28 CSS classes (Part 1: 48→0, Part 2: 9→0). `src/assets/vs-styles.css` +137 строк (SECTION 6). KI#17 CLOSED. SVG extracts audit: 0 orphans, все 17 elements embedded, все styles в vs-styles.css. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Canon migration (iter 7–18) unaffected. Build hash fd3d96d3 unchanged. **KI#13 ACTIVE (66 remaining в Part 3-10).** KI#17 CLOSED.
 
-**Iter 20+ priorities (KI#13 + Phase 4 SVG integration):**
+**Iter 21+ priorities (KI#13 Part 3+4 + Phase 4 SVG integration):**
 
-1. **KI#13 (123 inline `style=` + 1 outside section warning):** вынести inline styles в CSS classes (`src/assets/vs-styles.css` + `src/shell/styles.css`). Делать part-by-part (не все 10 Parts за один iter) — иначе visual regression risk. Рекомендация: 1-2 Parts per iter.
-2. **Phase 4 actual SVG integration:** заменить textual content на VS-EMBED где возможно. См. `visual-system/integration/component-extracts/` (51 файл) — актуализировать extracts относительно `visual-system/elements/E0X.html` sources + `src/master/part_N.html` targets. Удалить orphan extracts.
-3. **Validation gates:** `pnpm run validate:master` (0 errors, KI#13 baseline до fix) + `build` + `validate` + `test:unit` + `lint` + `qa:csp` (0 inline scripts, после iter 19 fix) + `qa:bundle` + `qa:doc-versions`.
+1. **KI#13 (66 remaining inline `style=`):** Part 3 (2) + Part 4 (21) + Part 5 (1) + Part 6 (5) + Part 7A (19) + Part 9 (6) + Part 10 (12). Следующий шаг: Part 3+4 (23 inline styles). Классы продолжают добавляться в `vs-styles.css` SECTION 6 с `vs-ki13-*` prefix.
+2. **Phase 4 actual SVG integration:** заменить textual content на VS-EMBED где возможно. SVG extracts audit (iter 20) подтвердил: 0 orphans, все extracts актуальны. Следующий шаг: определить, где textual content в master HTML может быть заменён на VS-EMBED (дополняющие визуализации, не дублирующие).
+3. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + `qa:csp` + `qa:bundle` + `qa:doc-versions`.
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 20+ прочитай:
-> 1. `STATUS.md` (iter 19 COMPLETE, KI#16 ✅ CLOSED, Canon COMPLETE iter 18, KI#13+KI#17 ACTIVE)
-> 2. `worklog.md` (iter 19 record)
-> 3. `AGENT_NAVIGATION.md` (§6 pitfall #34 KI#16 CLOSED, §8 iter 20+ roadmap)
+> Перед стартом iter 21+ прочитай:
+> 1. `STATUS.md` (iter 20 COMPLETE, KI#17 ✅ CLOSED, KI#13 57/123 fixed)
+> 2. `worklog.md` (iter 20 record)
+> 3. `AGENT_NAVIGATION.md` (§6 pitfall #36 KI#13 ACTIVE, §8 iter 21+ roadmap)
 > 4. `docs/canon/_README.md` (§5 migration status — все 10 Parts + 3 Appendix ✅, Canon COMPLETE)
-> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 20 priorities)
+> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 21 priorities)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 >
-> **KI#13 strategy:** 123 inline styles распределены по 10 Parts. Не делать все за один iter — visual regression risk. Рекомендация: iter 20 = Part 1+2 (baseline pattern), iter 21 = Part 3+4, и т.д. Каждый iter: validate:master + visual diff в браузере.
+> **KI#13 strategy (updated iter 20):** 123→66 remaining. Pattern established: `vs-ki13-*` CSS classes в vs-styles.css SECTION 6. Part 3+4 в iter 21, Part 5-7A в iter 22, Part 8-10 в iter 23. Каждый iter: validate:master + visual diff.
 
 ---
 

@@ -1,5 +1,33 @@
 # Changelog
 
+## [9.1.20] - 2026-06-24
+
+### Added (iter 20 — KI#13 Part 1+2: inline styles → CSS classes)
+- **`src/assets/vs-styles.css` SECTION 6 added** — +137 строк «KI#13 Inline Style → CSS Class Migration». 28 новых CSS классов с `vs-ki13-*` prefix. Groups: (a) E01 Anchors subpanel (3 класса: anchor-header, anchor-title, anchor-desc), (b) E01 Token Budget Summary (12 классов: token-panel, token-heading, token-table, token-thead, token-th-left/right/source, token-tbody, token-row, token-td, token-td-right, token-td-source), (c) E03 flow-node accent borders (3 класса: flow-node--violet/cyan/amber), (d) E03 comparison (2 класса: compare-column--relative, arrow-dim), (e) E04 explanation panel (4 класса: funnel-panel, funnel-panel-heading, funnel-panel-text, funnel-panel-text strong).
+- **SVG extracts audit completed** — All 17 elements (E01-E17) embedded in master HTML. All 17 extract styles consolidated in vs-styles.css. Scripts consolidated: vs-scroll-observer.js + 4 widget JS (vs-e10/e13/e15/e16). 0 orphans found.
+
+### Changed (iter 20 — KI#13 inline style migration)
+- **`src/master/part_01.html` edited** — 48 inline `style=` attributes → CSS classes (0 remaining). E01 VS-EMBED Anchors subpanel (3) + Token Budget Summary table (45 inline styles converted to 12 CSS classes with semantic markup).
+- **`src/master/part_02.html` edited** — 9 inline `style=` attributes → CSS classes (0 remaining). E03 VS-EMBED flow-node accent borders (5) + E04 VS-EMBED explanation panel (4).
+
+### Closed
+- **KI#17 CLOSED** — Documentation drift (E07 vs E02 in Part 7A VS-EMBED list). Fixed in iter 10. LOW severity. Closed iter 20.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 66 inline styles remaining в Part 3-10).
+- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
+- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone
+**KI#13 progress:** 57/123 inline styles fixed (46%). Part 1+2 ✅ DONE. 66 remaining в Part 3-10. **KI#17 CLOSED.** Active KI: KI#13 (MEDIUM). iter 21+: KI#13 Part 3+4 + Phase 4 SVG integration.
+
+---
+
 ## [9.1.19] - 2026-06-24
 
 ### Added (iter 19 — KI#16 fix: external inline scripts)
