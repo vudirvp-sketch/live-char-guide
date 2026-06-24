@@ -182,11 +182,13 @@ docs/canon/
 | Part 8 | `part_08.md` | ✅ iter 12 | ✅ iter 12 | iter 12 (DONE) |
 | Part 9 | `part_09.md` | ✅ iter 13 | ✅ iter 13 | iter 13 (DONE) |
 | Part 10 | `part_10.md` | ✅ iter 16 | ✅ iter 16 | iter 16 (DONE) |
-| Appendix MBTI | `appendix_mbti.md` | ❌ | ❌ | iter 18 (planned) |
-| Appendix Model Table | `appendix_model_table.md` | ❌ | ❌ | iter 18 (planned) |
-| Appendix Glossary | `appendix_glossary.md` | ❌ | ❌ | iter 18 (planned) |
+| Appendix MBTI | `appendix_mbti.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix Model Table | `appendix_model_table.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix Glossary | `appendix_glossary.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
 
 **Обновлять эту таблицу при каждом изменении статуса Canon-файла.**
+
+**Все 10 Parts + 3 Appendix — Canon COMPLETE (iter 18).**
 
 ---
 
@@ -237,15 +239,16 @@ docs/canon/
 
 ## 9. История изменений
 
-- **iter 7 (2026-06-23):** Создан `docs/canon/` scaffold + этот `_README.md` + `part_04.md` (пилот). Migration status = NOT MIGRATED. iter 8 = migrate `part_04.html`.
-- **iter 8 (2026-06-23):** Миграция `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%). 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удалён (fixes 1 из 23 KI#13 warnings), 2 re-explanation абзаца сжаты до 1 предложения. 2 unique infographic сохранены (deviation от Canon Migration Notes — по предпочтению пользователя «viz > dry text»). LIE таблица сохранена полностью (4 строки, все уникальны). Build PASS, validate:master PASS, qa без новых critical findings. Canon `part_04.md` Migration Notes таблица обновлена с пометками DONE/DEVIATED/PARTIAL/BONUS.
-- **iter 9 (2026-06-24):** Validation pass Part 4 migration (iter 8). Static HTML sanity check (11 sections balanced, 2 VS-EMBED well-formed, 2 retained infographic present, no orphans, no mermaid, no broken refs) + served `parts/part_04.html` через локальный сервер (40 825 bytes, all expected content present, all removed content absent) + `pnpm run validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:contrast`/`qa:doc-versions` PASS. `qa:english`/`qa:syntax` — same false positives as iter 7 (no regression). `qa:csp` FAIL → KI#16 NEW (pre-existing с iter 5, не задокументирован ранее). 6 docs updated. Никаких правок master HTML / visual-system / widget JS.
-- **iter 10 (2026-06-24):** Canon Part 7A created (`docs/canon/part_07a.md`, 802 строки, 13 H2 секций, 4 VS-маркера для E08/E16/E17/E02). Master HTML не тронут (iter 11 задача). KI#17 NEW (documentation drift — fixed). 8 docs updated.
-- **iter 11 (2026-06-24):** Part 7A master HTML migrated (`src/master/part_07a.html`, 1168 → 1137 строк, -2.7%). 4 compression candidates applied (#22, #26, #42, #46). 50 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
-- **iter 12 (2026-06-24):** Canon Part 8 created (`docs/canon/part_08.md`, 411 строки, 16 H2 секций, 1 VS-маркер для E12) + master HTML мигрирован (`src/master/part_08.html`, 521 → 507 строк, -2.7%). 2 compression candidates applied: #3 intro paragraph merge, #21 AP-9 Elena SPINE check example → cross-ref Part 4. 29 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. Canon front-matter MIGRATED. 9 docs updated.
-- **iter 13 (2026-06-24):** Canon Part 9 created (`docs/canon/part_09.md`, 351 строка, 11 H2 секций, 2 VS-маркера для E13 в preamble + E14 в §9.1) + master HTML мигрирован (`src/master/part_09.html`, 596 → 582 строк, -2.3%). 1 compression candidate applied: #13 `p9_test_requirements` Table 1 «Количество тестовых сценариев» (6 строк, дублировал §9.7 `p9_test_scenarios` таблицу) → 1-строчный cross-ref. 20 "Оставить" без изменений. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED. 10 docs updated.
-- **iter 14 (2026-06-24):** Canon Part 1+2+3 created (`docs/canon/part_01.md` 186 строк + `part_02.md` 238 строк + `part_03.md` 315 строк, всего 739 строк, 21 H2 секций, 4 VS-маркера E01+E03+E04+E07) + 3 master HTML мигрированы end-to-end за один iter. Part 1: 390 → 365 строк (-6.4%, #14 mermaid → auto-TOC duplicate removed). Part 2: 443 → 415 строк (-6.3%, #15+#16+#17 — 2 infographic + 1 plain-copy removed как дубликаты VS-EMBED E03/E04). Part 3: 452 → 452 строк (0%, контент плотный, дубликатов не найдено). 4 compression candidates applied total. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED для всех 3 files. 10 docs updated.
-- **iter 16 (2026-06-24):** Canon Part 5+6+7B+10 created (`docs/canon/part_05.md` 285 строк + `part_06.md` 247 строк + `part_07b.md` 309 строк + `part_10.md` 593 строки, всего 1434 строки, 23 H2 секций, 4 VS-маркера E09+E10+E11+E15) + 4 master HTML мигрированы end-to-end за один iter. Part 5: 619 → 615 строк (-0.6%, #18+#19 — 2 orphan paragraphs removed как duplicates + orphans). Part 6: 261 → 259 строк (-0.8%, #20 — duplicate CoT definition removed). Part 7B: 371 → 371 строк (0%, контент плотный). Part 10: 666 → 666 строк (0%, все 4 карточки уникальные TEMPLATEs). 3 compression candidates applied total. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED для всех 4 files. **Все 10 Parts мигрированы — Canon migration complete.** 10 docs updated.
+- **iter 7 (2026-06-23):** Создан `docs/canon/` scaffold + этот `_README.md` + `part_04.md` (пилот). Migration status = NOT MIGRATED.
+- **iter 8 (2026-06-23):** Миграция `src/master/part_04.html` против Canon §4. 777 → 676 строк (-13%). 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 2 unique infographic сохранены (deviation — viz > dry text).
+- **iter 9 (2026-06-24):** Validation pass Part 4. Все validation gates PASS. KI#16 NEW (qa:csp FAIL pre-existing с iter 5).
+- **iter 10 (2026-06-24):** Canon Part 7A created (802 строки, 13 H2 секций, 4 VS-маркера E08/E16/E17/E02). KI#17 NEW (documentation drift — fixed).
+- **iter 11 (2026-06-24):** Part 7A master HTML migrated (1168 → 1137, -2.7%, 4 compression candidates).
+- **iter 12 (2026-06-24):** Canon Part 8 created (411 строк, 16 H2 секций, E12) + master HTML мигрирован (521 → 507, -2.7%, 2 compression candidates).
+- **iter 13 (2026-06-24):** Canon Part 9 created (351 строка, 11 H2 секций, E13+E14) + master HTML мигрирован (596 → 582, -2.3%, 1 compression candidate).
+- **iter 14 (2026-06-24):** Canon Part 1+2+3 created (739 строк, 21 H2 секций, E01+E03+E04+E07) + 3 master HTML мигрированы (Part 1: -6.4%, Part 2: -6.3%, Part 3: 0%).
+- **iter 16 (2026-06-24):** Canon Part 5+6+7B+10 created (1434 строки, 23 H2 секций, E09+E10+E11+E15) + 4 master HTML мигрированы (Part 5: -0.6%, Part 6: -0.8%, Part 7B: 0%, Part 10: 0%). **Все 10 Parts мигрированы — Canon migration complete.**
+- **iter 18 (2026-06-24):** Final cleanup. (a) Visual check Part 5+6 via static validation — no regression. (b) Infographic + mermaid audit: 0 mermaid, 3 infographic retained (2 part_04 + 1 part_07b) + 1 part_05 static SVG fallback — все unique, deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, deduplicated, merged «Запрещённые переводы» into §1). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.**
 
 ---
 

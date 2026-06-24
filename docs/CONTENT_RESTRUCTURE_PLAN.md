@@ -338,8 +338,8 @@ SPINE — психологический каркас из 5 элементов,
 | **15** | (reserved) | Не нужен — iter 14 покрыл Part 1+2+3 end-to-end. | — | — |
 | **16** | Canon Part 5, 6, 7B, 10 + migrate | ✅ DONE — Psych toolkit, CoT, Lorebook, Examples. End-to-end за один iter (по образцу iter 12/13/14). Canon `docs/canon/part_05.md` (285 строк, 8 секций, 2 VS-маркера E09+E10) + `docs/canon/part_06.md` (247 строк, 6 секций, 1 VS-маркер E11) + `docs/canon/part_07b.md` (309 строк, 5 секций, 0 VS-маркеров) + `docs/canon/part_10.md` (593 строки, 4 секции, 1 VS-маркер E15) созданы. 4 master HTML мигрированы: `part_05.html` 619 → 615 строк (-0.6%, #18+#19 — 2 orphan paragraphs removed), `part_06.html` 261 → 259 строк (-0.8%, #20 — duplicate CoT definition removed), `part_07b.html` 371 → 371 строк (0%, контент плотный), `part_10.html` 666 → 666 строк (0%, 4 unique TEMPLATEs). 3 compression candidates applied. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **Все 10 Parts мигрированы — Canon migration complete.** 10 docs updated. | `docs/canon/part_05.md`, `06.md`, `07b.md`, `10.md`, `src/master/part_05..07b,10.html` | LOW |
 | **17** | (reserved) | Не нужен — iter 16 покрыл Part 5+6+7B+10 end-to-end. | — | — |
-| **18** | Final cleanup | Удалить устаревшие `infographic` + `mermaid` (12+2). Cleanup `docs/content_map.md` (сделать mirror канона). Cleanup `terminology_dictionary.md`. Appendix Canon creation для MBTI/Model Table/Glossary. | varies | MEDIUM |
-| **19+** | KI#13 + Phase 4 | После content cleanup: KI#13 inline styles + Phase 4 actual SVG integration | varies | HIGH |
+| **18** | Final cleanup | ✅ DONE — (a) Visual check Part 5+6 via static validation — no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML; 3 infographic retained (2 part_04 + 1 part_07b) + 1 part_05 static SVG fallback — все unique visualizations, deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** 12 docs updated. | `docs/canon/appendix_*.md`, `docs/content_map.md`, `docs/terminology_dictionary.md` | LOW |
+| **19+** | KI#13 + KI#16 + Phase 4 | После Canon complete (iter 18 done): KI#13 (123 inline styles → external CSS classes) + KI#16 (qa:csp FAIL: 2 inline scripts в `src/shell/index.html` → external widget) + Phase 4 actual SVG integration | varies | HIGH |
 
 **Оценка:** ~13 итераций (iter 7..19) на полный content restructure. Каждая итерация — 1–3 часа работы агента.
 
@@ -412,24 +412,23 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 16 COMPLETE (Canon Part 5+6+7B+10 + migrate).** Canon `docs/canon/part_05.md` (285 строк, 8 H2 секций, 2 VS-маркера E09+E10) + `docs/canon/part_06.md` (247 строк, 6 H2 секций, 1 VS-маркер E11) + `docs/canon/part_07b.md` (309 строк, 5 H2 секций, 0 VS-маркеров) + `docs/canon/part_10.md` (593 строки, 4 H2 секции, 1 VS-маркер E15) созданы. 4 master HTML мигрированы end-to-end за один iter: `part_05.html` 619 → 615 строк (-0.6%, #18+#19 — 2 orphan paragraphs removed), `part_06.html` 261 → 259 строк (-0.8%, #20 — duplicate CoT definition removed), `part_07b.html` 371 → 371 строк (0%, контент плотный), `part_10.html` 666 → 666 строк (0%, 4 unique TEMPLATEs). 3 compression candidates applied. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **Все 10 Parts мигрированы — Canon migration complete.** KI#13 + KI#14 + KI#16 + KI#17 — ACTIVE.
+**Iter 18 COMPLETE (Final cleanup — Canon migration COMPLETE).** (a) Visual check Part 5+6 via static validation — 8/6 sections balanced, 2/1 VS-EMBEDs well-formed, no orphan infographics/mermaid — only callout rule/rec, no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML (все удалены в iter 8/14); 3 infographic retained (2 part_04: SPINE→Anchors mnemonic + Assembly pipeline; 1 part_07b: Greeting algorithm) — все unique visualizations, iter 8/16 retention confirmed. 1 part_05 static SVG fallback (ocean-static, accessibility fallback для E09 widget) retained. Deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column для каждого concept). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** KI#13 + KI#16 + KI#17 — ACTIVE (KI#14 closed iter 16).
 
-**Iter 17 (reserved — не нужен) → Iter 18 priorities (Final cleanup + Appendix Canon):**
+**Iter 19+ priorities (KI#13 + KI#16 + Phase 4 SVG integration):**
 
-1. **Final cleanup:** удалить устаревшие `infographic` + `mermaid` (после iter 14 + iter 16 остаток: 6 part_04 retained infographic + 2 part_07b retained infographic + 1 part_04 mermaid + 1 part_05 static SVG fallback — все они unique visualization, не дубликаты; решение об удалении — на усмотрение агента iter 18 с визуальной проверкой).
-2. **Cleanup `docs/content_map.md`** — сделать mirror Canon (concept → Canon §X.Y, не section ID).
-3. **Cleanup `terminology_dictionary.md`** — убрать дублирование с Canon.
-4. **Appendix Canon creation** — `docs/canon/appendix_mbti.md`, `appendix_model_table.md`, `appendix_glossary.md` по образцу part_NN.md.
-5. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint`.
+1. **KI#13 (123 inline `style=` + 1 outside section warning):** вынести inline styles в CSS classes (`src/assets/vs-styles.css` + `src/shell/styles.css`).
+2. **KI#16 (qa:csp FAIL: 2 inline scripts в `src/shell/index.html`):** (a) вынести `mermaid.initialize({...})` в `src/shell/widgets/mermaid-init.js`; (b) оставить `document.documentElement.classList.add('js')` как essential inline (CSP `unsafe-inline` exception) или вынести в external tiny script.
+3. **Phase 4 actual SVG integration:** заменить textual content на VS-EMBED где возможно.
+4. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + `qa:csp` (0 inline scripts после KI#16 fix).
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 18 прочитай:
-> 1. `STATUS.md` (iter 16 COMPLETE, все 10 Parts ✅ MIGRATED, Canon migration complete, KI#13+KI#14+KI#16+KI#17 ACTIVE)
-> 2. `worklog.md` (iter 16 record)
-> 3. `AGENT_NAVIGATION.md` (§8 iter 17+ roadmap)
-> 4. `docs/canon/_README.md` (§5 migration status — все 10 Parts ✅, Appendix ❌)
-> 5. `docs/canon/part_05.md`, `part_06.md`, `part_07b.md`, `part_10.md` (reference pattern для Canon+migrate end-to-end за один iter — iter 16 fresh references)
+> Перед стартом iter 19+ прочитай:
+> 1. `STATUS.md` (iter 18 COMPLETE, все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE, KI#13+KI#16+KI#17 ACTIVE — KI#14 closed iter 16)
+> 2. `worklog.md` (iter 18 record)
+> 3. `AGENT_NAVIGATION.md` (§8 iter 19+ roadmap)
+> 4. `docs/canon/_README.md` (§5 migration status — все 10 Parts + 3 Appendix ✅, Canon COMPLETE)
+> 5. `docs/canon/appendix_mbti.md`, `appendix_model_table.md`, `appendix_glossary.md` (reference pattern для Appendix Canon — iter 18 fresh references)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 
@@ -458,8 +457,8 @@ SPINE — психологический каркас из 5 элементов,
 | CORE DIRECTIVES mentions | 36 | 36 | ✅ |
 | AP-1..AP-15 per pattern | 4–9 | 4–9 | ✅ |
 | VS-EMBED markers | 17 | 17 | ✅ |
-| Stale `infographic` blocks | 12 | 8 (iter 16 update: 2 removed from part_02 in iter 14 + 1 plain-copy removed; current state = 6 part_04 retained + 2 part_07b retained = 8 retained unique visualizations; final cleanup decision — iter 18) | ✅ (iter 16 update) |
-| `mermaid` blocks | 2 | 1 (iter 16 update: part_01 mermaid removed в iter 14 как auto-TOC duplicate; remaining 1 in part_04, planned for iter 18 cleanup) | ✅ (iter 16 update) |
+| Stale `infographic` blocks | 12 | 3 (iter 18 final audit: 2 part_04 retained + 1 part_07b retained = 3 unique visualizations; 12 устаревших удалены в iter 8/14. Final cleanup done iter 18 — deletions не требуются, all retained unique) | ✅ (iter 18 update) |
+| `mermaid` blocks | 2 | 0 (iter 18 final audit: part_01 mermaid removed в iter 14, part_04 mermaid removed в iter 8 — все mermaid удалены из master HTML) | ✅ (iter 18 update) |
 | Inline `style=` attributes | 123 | 123 | ✅ |
 | Master HTML total lines | ~6 600 | 6 576 | ✅ |
 | visual-system/elements/ files | 17 (E01..E17) | 17 / 6 369 строк | ✅ |

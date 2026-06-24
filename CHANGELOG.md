@@ -1,5 +1,32 @@
 # Changelog
 
+## [9.1.18] - 2026-06-24
+
+### Added (iter 18 — Appendix Canon creation)
+- **Canon Appendix A (MBTI) created** — `docs/canon/appendix_mbti.md` (74 строки). 1 H2 секция: appendix_mbti. 4 оси MBTI + 4 Keirsey темперамента + S·P disambiguation + RECOMMENDATION callout. Master HTML уже минимален — Canon = mirror.
+- **Canon Appendix B (Model Table) created** — `docs/canon/appendix_model_table.md` (63 строки). 1 H2 секция: appendix_model_table. 7-row capability table (12B / 32B+ / API) + «Ключевые следствия для сборки карточки» summary. Master HTML уже минимален — Canon = mirror.
+- **Canon Appendix C (Glossary) created** — `docs/canon/appendix_glossary.md` (230 строк). 1 H2 секция: appendix_glossary. 27 alphabetical entries A-W. Cross-refs переформатированы из `<a href="#...">` в `[ref: part_XX.md §X.Y — Title]` (Canon convention). Master HTML уже минимален — Canon = mirror.
+
+### Changed (iter 18 — Final cleanup)
+- **Visual check Part 5+6** (pre-iter 18 regression) — static validation: 8/6 sections balanced, 2/1 VS-EMBEDs well-formed (E09+E10 / E11), no orphan infographics/mermaid (only callout rule/rec), HTTP 200 OK на `parts/part_05` + `parts/part_06`. No regression.
+- **Infographic + mermaid audit** — 0 mermaid в master HTML (все удалены в iter 8/14). 3 infographic retained как unique visualizations (iter 8/16 retention confirmed): (a) `src/master/part_04.html` line 374 — SPINE→Anchors mnemonic (5-step); (b) `src/master/part_04.html` line 495 — Assembly pipeline (4-step); (c) `src/master/part_07b.html` line 33 — Greeting algorithm (4-step). 1 static SVG fallback retained: `src/master/part_05.html` lines 191-240 — `ocean-static` accessibility fallback для E09 widget. Deletions не требуются.
+- **`docs/content_map.md` cleanup → mirror Canon** — 277 → 256 строк (-8%). Добавлен Canon § column для каждого concept (39 entries). Summary table расширена с Canon file + Iter + Status columns (14 rows). Removed stale v9.1 restructure note. Appendix rows обновлены (3 новых для iter 18).
+- **`docs/terminology_dictionary.md` cleanup** — 338 → 206 строк (-39%). §1 «Канонические формы терминов» — consolidated table (39 rows, merged «Запрещённые переводы» into ❌ column). §2 T→A→P structure. §3 OCEAN 5 измерений (с запрещёнными переводами). §4 MBTI 4 оси + 4 Keirsey темперамента (с S·P disambiguation). §5 Enneagram 9 типов (с Wing + Stress/Growth). §6 Языковая политика (rules + examples + abbreviations). §7 Заголовки таблиц (RU). §8 Глоссарий (ref → `docs/canon/appendix_glossary.md`).
+- **`docs/canon/_README.md` updated** — §5 Appendix rows → ✅ iter 18 (3 новых). §9 iter 18 entry added + iter 7-14 history compressed to one-liners per user request «Убирай длинную историю изменений».
+- **STATUS.md, worklog.md, AGENT_NAVIGATION.md, PLAN.md, docs/CONTENT_RESTRUCTURE_PLAN.md** — updated для iter 18 status + iter 19+ roadmap.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, baseline warnings = KI#13 baseline, no regression).
+- `pnpm run build` ✅ SUCCESS (hash df283246, same as iter 8–16).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (10 pre-existing warnings — mermaid + unused vars).
+
+### Milestone
+**Все 10 Parts + 3 Appendix — Canon COMPLETE (iter 18).** Canon migration project (iter 7–18) finished. Остаются: KI#13 (123 inline styles), KI#16 (qa:csp FAIL), Phase 4 SVG integration — iter 19+.
+
+---
+
 ## [9.1.16] - 2026-06-24
 
 ### Added (iter 16 — Canon Part 5+6+7B+10 creation)

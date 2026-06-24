@@ -212,11 +212,11 @@ Stage Summary:
 
 **Iter 16 (Canon Part 5+6+7B+10 + migrate, DONE 2026-06-24):** Canon `docs/canon/part_05.md` (285 строк, 8 H2 секций, 2 VS-маркера E09+E10) + `docs/canon/part_06.md` (247 строк, 6 H2 секций, 1 VS-маркер E11) + `docs/canon/part_07b.md` (309 строк, 5 H2 секций, 0 VS-маркеров) + `docs/canon/part_10.md` (593 строки, 4 H2 секции, 1 VS-маркер E15) созданы. 4 master HTML мигрированы end-to-end за один iter: `part_05.html` 619 → 615 строк (-0.6%, #18+#19 — 2 orphan paragraphs removed), `part_06.html` 261 → 259 строк (-0.8%, #20 — duplicate CoT definition removed), `part_07b.html` 371 → 371 строк (0%, контент плотный), `part_10.html` 666 → 666 строк (0%, все 4 карточки уникальные TEMPLATEs). 3 compression candidates applied total. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon front-matter MIGRATED для всех 4 files. **Все 10 Parts мигрированы — Canon migration complete.** 10 docs updated. End-to-end за один iter (Canon creation + migrate, по образцу iter 12/13/14).
 
-**Iter 17+ (пересмотрено в iter 16):**
-1. **iter 17** — (reserved — не нужен, iter 16 покрыл все 10 Parts).
-2. **iter 18** — Final cleanup (устаревшие infographic + mermaid → 0, content_map sync с Canon, Appendix Canon creation для MBTI/Model Table/Glossary).
-3. **iter 19+** — KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration — после content cleanup.
+**Iter 18 (Final cleanup, DONE 2026-06-24):** (a) Visual check Part 5+6 via static validation — no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML; 3 infographic retained (2 part_04 + 1 part_07b) + 1 part_05 static SVG fallback — все unique visualizations, deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** 12 docs updated.
 
-**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts ✅ MIGRATED, Appendix ❌).
+**Iter 19+ (пересмотрено в iter 18):**
+1. **iter 19+** — KI#13 (123 inline styles → external CSS classes) + KI#16 (qa:csp FAIL: 2 inline scripts в `src/shell/index.html` → external widget) + Phase 4 actual SVG integration — после Canon complete (iter 18 done).
 
-**KI#1..KI#12 + KI#15 закрыты. KI#13 (123 inline + 1 outside) + KI#14 (content duplication, migration COMPLETE iter 16) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 18+.**
+**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE).
+
+**KI#1..KI#12 + KI#15 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (123 inline + 1 outside) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 19+.**
