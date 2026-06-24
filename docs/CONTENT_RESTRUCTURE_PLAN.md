@@ -339,7 +339,8 @@ SPINE — психологический каркас из 5 элементов,
 | **16** | Canon Part 5, 6, 7B, 10 + migrate | ✅ DONE — Psych toolkit, CoT, Lorebook, Examples. End-to-end за один iter (по образцу iter 12/13/14). Canon `docs/canon/part_05.md` (285 строк, 8 секций, 2 VS-маркера E09+E10) + `docs/canon/part_06.md` (247 строк, 6 секций, 1 VS-маркер E11) + `docs/canon/part_07b.md` (309 строк, 5 секций, 0 VS-маркеров) + `docs/canon/part_10.md` (593 строки, 4 секции, 1 VS-маркер E15) созданы. 4 master HTML мигрированы: `part_05.html` 619 → 615 строк (-0.6%, #18+#19 — 2 orphan paragraphs removed), `part_06.html` 261 → 259 строк (-0.8%, #20 — duplicate CoT definition removed), `part_07b.html` 371 → 371 строк (0%, контент плотный), `part_10.html` 666 → 666 строк (0%, 4 unique TEMPLATEs). 3 compression candidates applied. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **Все 10 Parts мигрированы — Canon migration complete.** 10 docs updated. | `docs/canon/part_05.md`, `06.md`, `07b.md`, `10.md`, `src/master/part_05..07b,10.html` | LOW |
 | **17** | (reserved) | Не нужен — iter 16 покрыл Part 5+6+7B+10 end-to-end. | — | — |
 | **18** | Final cleanup | ✅ DONE — (a) Visual check Part 5+6 via static validation — no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML; 3 infographic retained (2 part_04 + 1 part_07b) + 1 part_05 static SVG fallback — все unique visualizations, deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** 12 docs updated. | `docs/canon/appendix_*.md`, `docs/content_map.md`, `docs/terminology_dictionary.md` | LOW |
-| **19+** | KI#13 + KI#16 + Phase 4 | После Canon complete (iter 18 done): KI#13 (123 inline styles → external CSS classes) + KI#16 (qa:csp FAIL: 2 inline scripts в `src/shell/index.html` → external widget) + Phase 4 actual SVG integration | varies | HIGH |
+| **19** | KI#16 fix | ✅ DONE — 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">`. (d) Build regenerated root `index.html` + `widgets/` (15→17 files) + `build.hash` (`df283246` → `fd3d96d3`). `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** 14 docs/files updated. | `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `src/shell/index.html` | LOW |
+| **20+** | KI#13 + Phase 4 | После KI#16 closed (iter 19 done): KI#13 (123 inline styles → external CSS classes) + Phase 4 actual SVG integration (заменить textual content на VS-EMBED где возможно) | varies | HIGH |
 
 **Оценка:** ~13 итераций (iter 7..19) на полный content restructure. Каждая итерация — 1–3 часа работы агента.
 
@@ -412,25 +413,26 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 18 COMPLETE (Final cleanup — Canon migration COMPLETE).** (a) Visual check Part 5+6 via static validation — 8/6 sections balanced, 2/1 VS-EMBEDs well-formed, no orphan infographics/mermaid — only callout rule/rec, no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML (все удалены в iter 8/14); 3 infographic retained (2 part_04: SPINE→Anchors mnemonic + Assembly pipeline; 1 part_07b: Greeting algorithm) — все unique visualizations, iter 8/16 retention confirmed. 1 part_05 static SVG fallback (ocean-static, accessibility fallback для E09 widget) retained. Deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column для каждого concept). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** KI#13 + KI#16 + KI#17 — ACTIVE (KI#14 closed iter 16).
+**Iter 19 COMPLETE (KI#16 fix — qa:csp PASS).** 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">` с KI#16 fix comments. (d) Build regenerated root `index.html` (7.2 KB, 0 inline scripts) + `widgets/` (15→17 files, +2 для js-flag.js + mermaid-init.js) + `build.hash` (`df283246` → `fd3d96d3`). (e) `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** Canon migration (iter 7–18) unaffected. KI#13 + KI#17 — ACTIVE (KI#14 closed iter 16).
 
-**Iter 19+ priorities (KI#13 + KI#16 + Phase 4 SVG integration):**
+**Iter 20+ priorities (KI#13 + Phase 4 SVG integration):**
 
-1. **KI#13 (123 inline `style=` + 1 outside section warning):** вынести inline styles в CSS classes (`src/assets/vs-styles.css` + `src/shell/styles.css`).
-2. **KI#16 (qa:csp FAIL: 2 inline scripts в `src/shell/index.html`):** (a) вынести `mermaid.initialize({...})` в `src/shell/widgets/mermaid-init.js`; (b) оставить `document.documentElement.classList.add('js')` как essential inline (CSP `unsafe-inline` exception) или вынести в external tiny script.
-3. **Phase 4 actual SVG integration:** заменить textual content на VS-EMBED где возможно.
-4. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + `qa:csp` (0 inline scripts после KI#16 fix).
+1. **KI#13 (123 inline `style=` + 1 outside section warning):** вынести inline styles в CSS classes (`src/assets/vs-styles.css` + `src/shell/styles.css`). Делать part-by-part (не все 10 Parts за один iter) — иначе visual regression risk. Рекомендация: 1-2 Parts per iter.
+2. **Phase 4 actual SVG integration:** заменить textual content на VS-EMBED где возможно. См. `visual-system/integration/component-extracts/` (51 файл) — актуализировать extracts относительно `visual-system/elements/E0X.html` sources + `src/master/part_N.html` targets. Удалить orphan extracts.
+3. **Validation gates:** `pnpm run validate:master` (0 errors, KI#13 baseline до fix) + `build` + `validate` + `test:unit` + `lint` + `qa:csp` (0 inline scripts, после iter 19 fix) + `qa:bundle` + `qa:doc-versions`.
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 19+ прочитай:
-> 1. `STATUS.md` (iter 18 COMPLETE, все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE, KI#13+KI#16+KI#17 ACTIVE — KI#14 closed iter 16)
-> 2. `worklog.md` (iter 18 record)
-> 3. `AGENT_NAVIGATION.md` (§8 iter 19+ roadmap)
+> Перед стартом iter 20+ прочитай:
+> 1. `STATUS.md` (iter 19 COMPLETE, KI#16 ✅ CLOSED, Canon COMPLETE iter 18, KI#13+KI#17 ACTIVE)
+> 2. `worklog.md` (iter 19 record)
+> 3. `AGENT_NAVIGATION.md` (§6 pitfall #34 KI#16 CLOSED, §8 iter 20+ roadmap)
 > 4. `docs/canon/_README.md` (§5 migration status — все 10 Parts + 3 Appendix ✅, Canon COMPLETE)
-> 5. `docs/canon/appendix_mbti.md`, `appendix_model_table.md`, `appendix_glossary.md` (reference pattern для Appendix Canon — iter 18 fresh references)
+> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 20 priorities)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
+>
+> **KI#13 strategy:** 123 inline styles распределены по 10 Parts. Не делать все за один iter — visual regression risk. Рекомендация: iter 20 = Part 1+2 (baseline pattern), iter 21 = Part 3+4, и т.д. Каждый iter: validate:master + visual diff в браузере.
 
 ---
 

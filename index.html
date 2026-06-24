@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.1.0 -->
-<!-- Build: df283246 -->
-<!-- Generated: 2026-06-23T22:35:44.486Z -->
+<!-- Build: fd3d96d3 -->
+<!-- Generated: 2026-06-24T10:42:54.326Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -23,7 +23,8 @@
   <title>Live Character for LLM — Guide</title>
   <link rel="stylesheet" href="assets/shell-styles.css">
   <link rel="stylesheet" href="assets/vs-styles.css">
-  <script>document.documentElement.classList.add('js')</script>
+  <!-- KI#16 fix (iter 19): externalized inline script → widgets/js-flag.js for CSP compliance -->
+  <script src="widgets/js-flag.js"></script>
 </head>
 <body>
   <!-- Loading overlay -->
@@ -107,23 +108,8 @@
 
   <!-- Mermaid: diagram rendering library (CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      themeVariables: {
-        primaryColor: '#4a1a4a',
-        primaryTextColor: '#e2e8f0',
-        primaryBorderColor: '#8b5cf6',
-        lineColor: '#6b7590',
-        secondaryColor: '#1a1a2e',
-        tertiaryColor: '#16162a',
-        fontFamily: 'var(--font-body, sans-serif)',
-        fontSize: '13px'
-      },
-      flowchart: { htmlLabels: true, curve: 'basis', padding: 12 }
-    });
-  </script>
+  <!-- KI#16 fix (iter 19): externalized inline mermaid.initialize() → widgets/mermaid-init.js for CSP compliance -->
+  <script src="widgets/mermaid-init.js"></script>
   <script src="event-bus.js"></script>
   <script src="widgets/widget-utils.js"></script>
   <script src="assets/lazy-loader.js"></script>

@@ -214,9 +214,11 @@ Stage Summary:
 
 **Iter 18 (Final cleanup, DONE 2026-06-24):** (a) Visual check Part 5+6 via static validation — no regression. (b) Infographic + mermaid audit: 0 mermaid в master HTML; 3 infographic retained (2 part_04 + 1 part_07b) + 1 part_05 static SVG fallback — все unique visualizations, deletions не требуются. (c) `docs/canon/appendix_mbti.md` (74 строки) + `appendix_model_table.md` (63 строки) + `appendix_glossary.md` (230 строк, 27 entries) созданы — master HTML уже минимален, Canon = mirror. (d) `docs/content_map.md` cleanup → mirror Canon (277 → 256, -8%, добавлен Canon § column). (e) `docs/terminology_dictionary.md` cleanup (338 → 206, -39%, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.** 12 docs updated.
 
-**Iter 19+ (пересмотрено в iter 18):**
-1. **iter 19+** — KI#13 (123 inline styles → external CSS classes) + KI#16 (qa:csp FAIL: 2 inline scripts в `src/shell/index.html` → external widget) + Phase 4 actual SVG integration — после Canon complete (iter 18 done).
+**Iter 19 (KI#16 fix — qa:csp PASS, DONE 2026-06-24):** 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">` с KI#16 fix comments. (d) Build regenerated root `index.html` + `widgets/` (15→17 files) + `build.hash` (`df283246` → `fd3d96d3`). (e) `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** 14 docs/files updated.
+
+**Iter 20+ (пересмотрено в iter 19):**
+1. **iter 20+** — KI#13 (123 inline styles → external CSS classes) + Phase 4 actual SVG integration (заменить textual content на VS-EMBED где возможно) — после KI#16 closed (iter 19 done).
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE).
 
-**KI#1..KI#12 + KI#15 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (123 inline + 1 outside) + KI#16 (qa:csp FAIL) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 19+.**
+**KI#1..KI#12 + KI#15 + KI#16 закрыты. KI#14 закрыт iter 16 (Canon migration complete). KI#13 (123 inline + 1 outside) + KI#17 (documentation drift, LOW, fixed) — ACTIVE, continue iter 20+.**

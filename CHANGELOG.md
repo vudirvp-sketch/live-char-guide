@@ -1,5 +1,29 @@
 # Changelog
 
+## [9.1.19] - 2026-06-24
+
+### Added (iter 19 — KI#16 fix: external inline scripts)
+- **`src/shell/widgets/js-flag.js` created** — External early `js` class flag for `<html>` element. Tiny script (~50 bytes body): `document.documentElement.classList.add('js')`. Loaded synchronously in `<head>` before body paint — FOUC prevention preserved. Extracted from inline `<script>` block in `src/shell/index.html` line 24 per KI#16 fix.
+- **`src/shell/widgets/mermaid-init.js` created** — External Mermaid.js initialization with dark theme + brand colors (primaryColor `#4a1a4a`, primaryTextColor `#e2e8f0`, primaryBorderColor `#8b5cf6`, etc.). Loaded synchronously after `mermaid.min.js` (CDN, line 108). Safety guard: `if (typeof mermaid !== 'undefined' && typeof mermaid.initialize === 'function')` — no-op if CDN blocked. Sets `mermaid._initialized = true` flag — `lazy-loader.js` line 689 skips redundant init on dynamic content load. Extracted from inline `<script>` block in `src/shell/index.html` lines 108-124 per KI#16 fix.
+
+### Changed (iter 19 — qa:csp compliance)
+- **`src/shell/index.html` edited** — 2 inline `<script>` → 2 `<script src="widgets/...">` с KI#16 fix comments. (a) Line 24: `<script>document.documentElement.classList.add('js')</script>` → `<script src="widgets/js-flag.js"></script>`. (b) Lines 108-124: inline `mermaid.initialize({...})` block → `<script src="widgets/mermaid-init.js"></script>`. Loading order preserved: mermaid CDN → mermaid-init.js → event-bus.js → widgets → lazy-loader.js.
+- **Build regenerated** — `pnpm run build` SUCCESS. Build hash `df283246` → `fd3d96d3`. Root `index.html` (7.2 KB, 0 inline scripts), root `widgets/` (15→17 files, +2 для js-flag.js + mermaid-init.js), root `build.hash` regenerated. `dist/` artifact обновлён.
+
+### Validation
+- `pnpm run qa:csp` ✅ PASS — "index.html has no inline scripts" + "No eval() usage" (was FAIL: 2 inline scripts).
+- `pnpm run validate:master` ✅ PASSED (0 errors, KI#13 baseline = 123 inline styles + 1 orphan section, no regression).
+- `pnpm run validate` ✅ All 8 gates passed (GATE-1..5 + SHELL-PARTS + SHELL-LOADER + SHELL-STYLES).
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings — 10 pre-existing + 3 new из `mermaid-init.js` `no-undef` для `mermaid` global, matches existing `lazy-loader.js` pattern).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone
+**KI#16 CLOSED.** `qa:csp` PASS — все scripts в `index.html` теперь `<script src="...">` (external). Inline scripts forbidden, даже если CSP `script-src 'unsafe-inline'` allows them — `qa:csp` stricter than actual CSP. Active KIs: KI#13 (MEDIUM, 123 inline styles) + KI#17 (LOW, fixed iter 10). iter 20+: KI#13 + Phase 4 actual SVG integration.
+
+---
+
 ## [9.1.18] - 2026-06-24
 
 ### Added (iter 18 — Appendix Canon creation)

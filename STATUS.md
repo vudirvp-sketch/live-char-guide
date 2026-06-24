@@ -2,55 +2,57 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18)
+> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#16 ✅ CLOSED (iter 19)
 > **Дата:** 2026-06-24
 
 ---
 
 ## Текущее состояние
 
-**iter 18 COMPLETE.** Final cleanup: визуальная проверка Part 5+6 (no regression), infographic+mermaid audit (0 mermaid, 3 infographic retained как unique), созданы 3 Appendix Canon (`appendix_mbti.md` 74 + `appendix_model_table.md` 63 + `appendix_glossary.md` 230 строк = 367 строк, 3 секции), cleanup `content_map.md` (277 → 256, mirror Canon) + `terminology_dictionary.md` (338 → 206, dedup). `validate:master`/`build`/`validate`/`test:unit`/`lint` PASS. **Все 10 Parts + 3 Appendix — Canon COMPLETE.**
+**iter 19 COMPLETE.** KI#16 fix: 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. Созданы `src/shell/widgets/js-flag.js` (early `js` class flag, sync в `<head>` для FOUC prevention) + `src/shell/widgets/mermaid-init.js` (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, устанавливает `mermaid._initialized = true` для skip redundant init в lazy-loader.js). `src/shell/index.html` updated: 2 inline `<script>` → 2 `<script src="widgets/...">`. Build regenerated root `index.html` + `widgets/` (17 files, +2). Build hash: `df283246` → `fd3d96d3`. `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. Canon migration (iter 7–18) unaffected.
 
-### Что сделано в iter 18
+### Что сделано в iter 19
 
 | # | Задача | Результат |
 |---|--------|-----------|
-| a | Visual check Part 5+6 (pre-iter 18 regression) | Static validation: 8/6 sections balanced, 2/1 VS-EMBEDs well-formed, no orphan infographics/mermaid, HTTP 200 OK. No regression. |
-| b | Infographic + mermaid audit | 0 mermaid в master HTML. 3 infographic retained (2 part_04: SPINE→Anchors mnemonic + Assembly pipeline; 1 part_07b: Greeting algorithm) + 1 part_05 static SVG fallback (ocean-static, accessibility fallback для E09). Все unique visualizations, iter 8/16 retention confirmed. Deletions не требуются. |
-| c | Appendix Canon creation | `docs/canon/appendix_mbti.md` (74 строки, 1 секция) + `appendix_model_table.md` (63 строки, 1 секция) + `appendix_glossary.md` (230 строк, 27 entries) созданы. Master HTML уже минимален, Canon = mirror. |
-| d | `docs/content_map.md` cleanup | 277 → 256 строк (-8%). Добавлен Canon § column для каждого concept. Обновлены Appendix rows (3 новых). Summary table расширена с iter + status columns. |
-| e | `docs/terminology_dictionary.md` cleanup | 338 → 206 строк (-39%). Deduplicated tables, merged «Запрещённые переводы» into §1, removed stale v9.0 history, consolidated MBTI/Enneagram/OCEAN references. |
+| a | `src/shell/widgets/js-flag.js` created | Tiny external script (~50 bytes body): `document.documentElement.classList.add('js')`. Загружается sync в `<head>` — FOUC prevention сохранён. |
+| b | `src/shell/widgets/mermaid-init.js` created | External mermaid.initialize (dark theme + themeVariables + flowchart config). Safety guard: `if (typeof mermaid !== 'undefined' && typeof mermaid.initialize === 'function')`. Sets `mermaid._initialized = true` — lazy-loader.js пропускает redundant init. |
+| c | `src/shell/index.html` edited | 2 inline `<script>` → 2 `<script src="widgets/...">` с KI#16 fix comment. Build comments + KI#16 fix markers. |
+| d | Build regenerated | `pnpm run build` SUCCESS. Root `index.html`, `widgets/` (15→17 files), `build.hash` (df283246→fd3d96d3) перегенерированы. `dist/` артефакт обновлён. |
+| e | Validation gates PASS | `qa:csp` ✅ (0 inline scripts), `validate:master` ✅ (KI#13 baseline, no regression), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings — 10 pre-existing + 3 new из mermaid-init.js, expected `no-undef` для mermaid global, matches lazy-loader.js pattern), `qa:bundle` ✅, `qa:doc-versions` ✅. |
 
-### Изменённые файлы в iter 18
+### Изменённые файлы в iter 19
 
 | File | Action | Reason |
 |------|--------|--------|
-| `docs/canon/appendix_mbti.md` | Created | Canon Appendix A (74 строки, 1 секция). |
-| `docs/canon/appendix_model_table.md` | Created | Canon Appendix B (63 строки, 1 секция). |
-| `docs/canon/appendix_glossary.md` | Created | Canon Appendix C (230 строк, 27 entries). |
-| `docs/content_map.md` | Rewritten | Mirror Canon (277 → 256 строк). |
-| `docs/terminology_dictionary.md` | Rewritten | Cleanup + dedup (338 → 206 строк). |
-| `docs/canon/_README.md` | Updated | §5 Appendix rows → ✅ iter 18. §9 iter 18 entry + history compressed. |
-| `STATUS.md` | Rewritten | iter 18 status. |
-| `worklog.md` | Updated | iter 18 record. |
-| `AGENT_NAVIGATION.md` | Updated | Header iter 16 → iter 18. §8 iter 18 record + iter 19+ roadmap. |
-| `CHANGELOG.md` | Updated | [9.1.18] entry. |
-| `PLAN.md` | Updated | §5 iter 18 → ✅ DONE, iter 19+ roadmap. |
-| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | §5.2 iter 18 row → ✅ DONE. §8 iter 18 stop point + iter 19 priorities. |
+| `src/shell/widgets/js-flag.js` | Created | External early `js` class flag (KI#16 fix). |
+| `src/shell/widgets/mermaid-init.js` | Created | External mermaid.initialize (KI#16 fix). |
+| `src/shell/index.html` | Edited | 2 inline `<script>` → 2 `<script src="widgets/...">`. |
+| `index.html` | Regenerated | Root fallback (build artifact). |
+| `widgets/js-flag.js` | Regenerated | Root fallback (build artifact). |
+| `widgets/mermaid-init.js` | Regenerated | Root fallback (build artifact). |
+| `build.hash` | Regenerated | `df283246` → `fd3d96d3`. |
+| `STATUS.md` | Rewritten | iter 19 status, KI#16 CLOSED. |
+| `worklog.md` | Updated | iter 19 record (iter 18 → one-liner). |
+| `AGENT_NAVIGATION.md` | Updated | §6 pitfall #34 → CLOSED, §8 iter 19 record, header iter 18 → iter 19. |
+| `CHANGELOG.md` | Updated | [9.1.19] entry. |
+| `PLAN.md` | Updated | §5 iter 19 → ✅ DONE, iter 20+ roadmap. |
+| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | §5.2 iter 19 row → ✅ DONE. §8 iter 19 stop point + iter 20 priorities. |
+| `docs/canon/_README.md` | Updated | §9 iter 19 entry (KI#16 fix, no Canon changes). |
 
 ---
 
 ## Known Issues
 
-**KI#13 (ACTIVE, MEDIUM, found iter 5)** — 123 inline `style=` + 1 "content outside section" warning в master HTML. Defer до iter 19+.
+**KI#13 (ACTIVE, MEDIUM, found iter 5)** — 123 inline `style=` + 1 "content outside section" warning в master HTML. Defer до iter 20+.
 
-**KI#14 (CLOSED, iter 16)** — Content duplication VS-EMBED ↔ текст. **ВСЕ 10 PARTS ✅ MIGRATED** (iter 7–16). Canon migration complete.
+**KI#14 (CLOSED, iter 16)** — Content duplication VS-EMBED ↔ текст. Все 10 Parts ✅ MIGRATED.
 
-**KI#16 (ACTIVE, MEDIUM, found iter 9)** — `pnpm run qa:csp` FAIL: 2 inline scripts в `src/shell/index.html`. Fix plan (iter 19+).
+**KI#16 (CLOSED, iter 19)** — `pnpm run qa:csp` FAIL: 2 inline scripts в `src/shell/index.html`. Fixed: external widgets `js-flag.js` + `mermaid-init.js`. `qa:csp` PASS.
 
 **KI#17 (ACTIVE, LOW, found iter 10)** — Documentation drift (E07 vs E02). Fixed in iter 10. LOW severity.
 
-**Fix plan (iter 19+):** KI#13 (inline styles) + KI#16 (qa:csp inline scripts) + Phase 4 actual SVG integration. См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5.
+**Fix plan (iter 20+):** KI#13 (inline styles → external CSS classes) + Phase 4 actual SVG integration (заменить textual content на VS-EMBED где возможно). См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5.
 
 ---
 
@@ -63,6 +65,7 @@
 | **CORE DIRECTIVES на English** | Directives в System Prompt — English. Guide prose — Russian. |
 | **Node >= 20, pnpm 10.x** | JavaScript runtime + package manager. |
 | **Canonical Guide Spec (iter 7–18) — COMPLETE** | Part 1 ✅ iter 14. Part 2 ✅ iter 14. Part 3 ✅ iter 14. Part 4 ✅ iter 7–9. Part 5 ✅ iter 16. Part 6 ✅ iter 16. Part 7A ✅ iter 10–11. Part 7B ✅ iter 16. Part 8 ✅ iter 12. Part 9 ✅ iter 13. Part 10 ✅ iter 16. Appendix A/B/C ✅ iter 18. |
+| **CSP compliance (iter 19)** | `qa:csp` PASS. Все scripts в `index.html` — `<script src="...">` (external). Inline scripts forbidden. |
 | **Migration principle: viz > dry text (iter 8)** | Визуализация = замещение, dry-дублирующий текст удаляется. Применяется «очень деликатно». |
 
 ---
