@@ -1,125 +1,187 @@
-# iter 14 — Merge Instructions
+# iter 22 — Merge Instructions
 
-> **Archive:** live-char-guide-iter14.zip
-> **Date:** 2026-06-24
-> **Author:** main agent (iter 14)
-> **Status:** iter 14 COMPLETE — Canon Part 1+2+3 ✅ MIGRATED
-> **Base commit:** last commit on `main` branch of https://github.com/vudirvp-sketch/live-char-guide
-
----
-
-## Что в архиве
-
-15 файлов (12 modified + 3 new), сохранена структура папок репозитория:
-
-### New files (3)
-- `docs/canon/part_01.md` — Canon Part 1 (186 строк, 7 секций, 1 VS-маркер E01)
-- `docs/canon/part_02.md` — Canon Part 2 (238 строк, 6 секций, 2 VS-маркера E03+E04)
-- `docs/canon/part_03.md` — Canon Part 3 (315 строк, 8 секций, 1 VS-маркер E07)
-
-### Modified files (12)
-- `src/master/part_01.html` — 390 → 365 строк (-6.4%, mermaid удалён как auto-TOC duplicate)
-- `src/master/part_02.html` — 443 → 415 строк (-6.3%, 2 infographic + 1 plain-copy удалены как дубликаты VS-EMBED E03/E04)
-- `parts/part_01.html` — regenerated root fallback
-- `parts/part_02.html` — regenerated root fallback
-- `index.html` — regenerated root fallback (build hash updated)
-- `docs/canon/_README.md` — §5 migration status (Part 1+2+3 → ✅), §9 iter 14 history entry
-- `docs/CONTENT_RESTRUCTURE_PLAN.md` — §5.2 iter 14 row → ✅ DONE, §8 stop point iter 16, §9.1 metric updates
-- `STATUS.md` — rewritten: iter 14 status
-- `worklog.md` — iter 13 → one-liner, iter 14 = full record
-- `AGENT_NAVIGATION.md` — header iter 13 → iter 14, §8 iter 14 record + iter 15+ roadmap
-- `CHANGELOG.md` — [9.1.14] entry
-- `PLAN.md` — §5 iter 14 → ✅ DONE, iter 15+ roadmap
-
-### NOT modified (но упоминается в логах)
-- `src/master/part_03.html` — 452 → 452 строк (0%, контент плотный, дубликатов не найдено, 0 compression candidates applied)
-- `parts/part_03.html` — root fallback (не менялся, т.к. src/master не менялся)
+> **Архив:** `iter22-live-char-guide.tar.gz` (или `.zip`)
+> **Дата:** 2026-06-30
+> **Версия проекта:** 9.1.0 → 9.1.22 (iter 22 changelog entry)
+> **Build hash:** `fd3d96d3` (unchanged — shell not modified, only CSS + HTML content)
 
 ---
 
-## Как смержить с локальной директорией
+## Содержание архива
 
-### Вариант 1: Распаковать поверх (простой)
+14 файлов, сохранена полная структура папок для слияния с локальной директорией:
 
-```bash
-# Из корня локального клона репозитория
-cd /path/to/live-char-guide
-unzip -o live-char-guide-iter14.zip
+```
+.
+├── AGENT_NAVIGATION.md                (updated — header iter 22, §6 pitfall #36, §8 iter 22 record + iter 23+ roadmap, iter 1-19 history compressed)
+├── CHANGELOG.md                       (updated — [9.1.22] entry, iter 1-19 compressed to brief summary section)
+├── PLAN.md                            (updated — §5 iter 22 → ✅ DONE, iter 23+ roadmap)
+├── STATUS.md                          (rewritten — iter 22 status, KI#13 86/123 fixed = 70%)
+├── worklog.md                         (updated — iter 21 → one-liner, iter 22 = detailed record)
+├── assets/
+│   └── vs-styles.css                  (regenerated root fallback — build artifact, hash unchanged)
+├── docs/
+│   ├── CONTENT_RESTRUCTURE_PLAN.md    (updated — §5.2 iter 22 row → ✅ DONE, §8 iter 22 stop point + iter 23 priorities)
+│   └── canon/
+│       └── _README.md                 (updated — §9 iter 22 entry)
+├── index.html                         (regenerated root fallback — only timestamp updated, hash unchanged)
+├── parts/
+│   ├── part_05.html                   (regenerated root fallback — build artifact)
+│   └── part_06.html                   (regenerated root fallback — build artifact)
+└── src/
+    ├── assets/
+    │   └── vs-styles.css              (edited — +30 строк SECTION 6, 5 новых селекторов vs-ki13-*)
+    └── master/
+        ├── part_05.html               (edited — 1 inline style → CSS class, 0 remaining)
+        └── part_06.html               (edited — 5 inline styles → CSS classes, 0 remaining)
 ```
 
-Файлы в архиве имеют правильную относительную структуру — распакуется поверх существующих файлов с заменой.
+---
 
-### Вариант 2: Git-комманды (рекомендуется)
+## Что было сделано в iter 22
+
+**KI#13 Part 5+6: 6 inline `style=` → 5 CSS селекторов с `vs-ki13-*` prefix.**
+
+### Part 5 (`src/master/part_05.html`) — 1→0 inline styles
+- E09 OCEAN Pentagon context-limits footnote: `<span style="color:var(--text-muted); font-size:10px; margin-top:4px; display:block;">` → `<span class="vs-ki13-context-limits-note">` (Elena extreme example note inside `.context-limits-box__data`).
+
+### Part 6 (`src/master/part_06.html`) — 5→0 inline styles
+- E11 CoT Tiers progression explanation panel:
+  - `<div class="panel" style="max-width:700px;...">` → `<div class="panel vs-ki13-cot-panel">`
+  - heading div (cyan accent — distinct от funnel-panel violet) → `<div class="vs-ki13-cot-heading">`
+  - `<p style="font-size:13px;...">` → `<p class="vs-ki13-cot-text">`
+  - 2 `<strong style="color:var(--text-primary);">` → `<strong>` (covered by descendant selector `.vs-ki13-cot-text strong`)
+
+### Новые CSS селекторы в `src/assets/vs-styles.css` SECTION 6 (+30 строк)
+
+```css
+/* --- E09 OCEAN Pentagon — Context limits footnote (iter 22) --- */
+.vs-ki13-context-limits-note {
+  color: var(--text-muted);
+  font-size: 10px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* --- E11 CoT Tiers — Progression explanation panel (iter 22) --- */
+.vs-ki13-cot-panel {
+  max-width: 700px;
+  margin: var(--gap-xl) auto 0;
+}
+
+.vs-ki13-cot-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: var(--gap-sm);
+  color: var(--accent-cyan);
+}
+
+.vs-ki13-cot-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.vs-ki13-cot-text strong {
+  color: var(--text-primary);
+}
+```
+
+### Validation gates — ALL PASS
+
+- `pnpm run validate:master` ✅ (0 errors, 37 inline styles remaining Part 7A+9+10)
+- `pnpm run build` ✅ (hash `fd3d96d3` unchanged — shell not modified)
+- `pnpm run validate` ✅ (8 gates)
+- `pnpm run test:unit` ✅ (43/43)
+- `pnpm run lint` ✅ (0 errors, 13 warnings pre-existing)
+- `pnpm run qa:csp` ✅ (0 inline scripts)
+- `pnpm run qa:bundle` ✅ (7.2KB, max 500KB)
+- `pnpm run qa:doc-versions` ✅
+
+### KI#13 progress
+
+| | До iter 22 | После iter 22 |
+|---|------------|---------------|
+| Fixed | 80/123 (65%) | 86/123 (70%) |
+| Remaining | 43 (Part 5+6+7A+9+10) | 37 (Part 7A+9+10) |
+| Part 1-6 status | Part 1-4 ✅ DONE | Part 1-6 ✅ DONE |
+
+---
+
+## Как применить архив (merge instructions)
+
+### Вариант A — Слияние через tar (Linux/macOS/Git Bash)
 
 ```bash
-cd /path/to/live-char-guide
+# Извлечь архив поверх локального репозитория (preserve folder structure)
+cd /path/to/local/live-char-guide
+tar -xzf /path/to/iter22-live-char-guide.tar.gz
+```
 
-# 1. Распаковать архив во временную директорию
-mkdir -p /tmp/iter14
-unzip live-char-guide-iter14.zip -d /tmp/iter14
+### Вариант B — Слияние через unzip
 
-# 2. Скопировать файлы поверх локальной директории
-cp -r /tmp/iter14/* .
+```bash
+cd /path/to/local/live-char-guide
+unzip -o /path/to/iter22-live-char-guide.zip
+```
 
-# 3. Проверить статус
+### После слияния — проверить и закоммитить
+
+```bash
+cd /path/to/local/live-char-guide
+
+# 1. Установить зависимости (если ещё не установлены)
+pnpm install
+
+# 2. Прогнать validation gates (опционально, для подтверждения)
+pnpm run validate:master
+pnpm run build
+pnpm run validate
+pnpm run test:unit
+pnpm run lint
+pnpm run qa:csp
+pnpm run qa:bundle
+pnpm run qa:doc-versions
+
+# 3. Проверить diff
 git status
+git diff --stat
 
-# 4. Запустить валидаторы для подтверждения целостности
-pnpm install --frozen-lockfile
-pnpm run validate:master   # должно PASSED (0 errors)
-pnpm run build              # должно SUCCESS (hash df283246)
-pnpm run validate           # все 8 gates passed
-pnpm run test:unit          # 43/43 pass
-pnpm run lint               # 0 errors
-
-# 5. Commit и push
+# 4. Закоммитить и запушить
 git add -A
-git commit -m "iter 14: Canon Part 1+2+3 creation + migrate (end-to-end)
-
-- Canon docs/canon/part_01.md created (186 строк, 7 секций, 1 VS-маркер E01)
-- Canon docs/canon/part_02.md created (238 строк, 6 секций, 2 VS-маркера E03+E04)
-- Canon docs/canon/part_03.md created (315 строк, 8 секций, 1 VS-маркер E07)
-- src/master/part_01.html мигрирован: 390 → 365 строк (-6.4%)
-  - #14 mermaid dependency graph удалён (дубликат auto-TOC)
-- src/master/part_02.html мигрирован: 443 → 415 строк (-6.3%)
-  - #15 infographic T→A→P удалён (дубликат VS-EMBED E03)
-  - #16 plain-copy T→A→P удалён (text-дубликат #15)
-  - #17 infographic Embodiment удалён (дубликат VS-EMBED E04)
-- src/master/part_03.html не менялся: 452 → 452 строк (0%, контент плотный)
-- 4 compression candidates applied total
-- validate:master/build/validate/test:unit/lint/qa:bundle/qa:doc-versions PASS
-- Canon front-matter MIGRATED для всех 3 files
-- 10 docs updated
-
-KI#13+KI#14+KI#16+KI#17 ACTIVE. iter 15 reserved (не нужен). iter 16 = Canon Part 5+6+7B+10."
-
+git commit -m "[9.1.22] KI#13 Part 5+6: 6 inline styles -> 5 CSS selectors (vs-ki13-*)"
 git push origin main
 ```
 
 ---
 
-## Validation gates (iter 14 — PASSED)
+## Точка остановки для следующего чата
 
-- [x] `pnpm run validate:master` — ✅ PASSED (0 errors, baseline warnings = KI#13 baseline, no regression)
-- [x] `pnpm run build` — ✅ SUCCESS (hash df283246, same as iter 8–13)
-- [x] `pnpm run validate` — ✅ All 8 gates passed
-- [x] `pnpm run test:unit` — ✅ 43/43 pass
-- [x] `pnpm run lint` — ✅ 0 errors (10 pre-existing warnings)
-- [x] `pnpm run qa:bundle` — ✅ PASS (index.html 7.5KB, max 500KB)
-- [x] `pnpm run qa:doc-versions` — ✅ PASS (all doc dates current)
+**Iter 22 COMPLETE.** KI#13 Part 5+6 fixed (6 inline styles → 5 CSS селекторов). Part 1-6 ✅ DONE. KI#13 ACTIVE: 86/123 fixed (70%), 37 remaining.
 
----
+**Iter 23+ priorities:**
 
-## Точка остановки для следующего агента
+1. **iter 23** — KI#13 Part 7A (19 inline styles → CSS classes). Largest remaining batch — Part 7A имеет 13 секций + 4 VS-EMBED (E08/E16/E17/E02). Inline styles в Part 7A:
+   - `font-size:10px` ×2 (badge/meta text)
+   - `display:none` ×1 (hidden state)
+   - `color:var(--accent-violet)` ×3, `color:var(--text-muted)` ×3, `color:var(--danger)` ×1, `color:var(--success)` ×3 (color overrides)
+   - `margin-top:4px` ×1, `margin-left:4px` ×4 (spacing)
+   - `border-color:var(--accent-cyan)` ×1 (border override)
+   - Рекомендация: группировать по semantic intent (см. `docs/CONTENT_RESTRUCTURE_PLAN.md` §8).
+2. **iter 24** — KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles. Part 10 имеет 11 positional `top:Npx; right:20px;` styles — кандидат на generic class + per-instance modifier или single selector per position.
+3. **iter 25 (optional, low priority)** — Phase 4 SVG integration: Part 7B Greeting algorithm infographic → new VS element E18 (requires `visual-system/elements/` prototyping first).
 
-**iter 14 done.** Part 1+2+3 ✅ MIGRATED. KI#13 + KI#14 + KI#16 + KI#17 ACTIVE.
+**Контекст для следующего агента:**
 
-**Следующий шаг — iter 15 (reserved, не нужен) или iter 16:** Canon creation + migrate для Part 5+6+7B+10 (Psychology, CoT, Lorebook, Examples). По образцу iter 12/13/14 (end-to-end за один iter на Part, либо все 4 за один iter если помещаются). Перед стартом: `rg "VS-EMBED:" src/master/part_05.html src/master/part_06.html src/master/part_07b.html src/master/part_10.html` для inventory.
+- `STATUS.md` — iter 22 COMPLETE, KI#13 86/123 fixed = 70%, 37 remaining
+- `worklog.md` — iter 22 record (detailed), iter 1-21 — one-liners
+- `AGENT_NAVIGATION.md` — §6 pitfall #36 KI#13 ACTIVE, §8 iter 23+ roadmap
+- `docs/canon/_README.md` — §5 migration status (Canon COMPLETE), §9 iter 22 entry
+- `docs/CONTENT_RESTRUCTURE_PLAN.md` — §5.2 iter 23 priorities, §8 stop point + Phase 4 analysis
 
-**Что НЕ сделано (намеренно):**
-- Part 5/6/7B/10 (iter 16–17)
-- Final cleanup (устаревшие infographic + mermaid → 0, iter 18)
-- KI#13/KI#16 fix (iter 19+)
-- Phase 4 SVG integration (iter 19+)
+**Migration principle (iter 8+):** «viz > dry text» — при выборе «удалить текст или визуализацию» viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется.
 
-**Рекомендация перед iter 16:** визуальная проверка `parts/part_01.html`, `parts/part_02.html` в браузере (на случай regression, не пойманных валидаторами) — `pnpm run dev` → http://localhost:3000 → Part 1 и Part 2.
+**KI#13 strategy:** 123→37 remaining (70% fixed). Pattern established: `vs-ki13-*` CSS classes в `vs-styles.css` SECTION 6.
+
+**Если найден новый баг:** сначала документируй в `STATUS.md` как Known Issue (KI#N), потом фиксий.

@@ -2,44 +2,38 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#16 ✅ CLOSED (iter 19) + KI#17 ✅ CLOSED (iter 20)
-> **Дата:** 2026-06-24
+> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#16 ✅ CLOSED (iter 19) + KI#17 ✅ CLOSED (iter 20) + KI#13 Part 1-6 ✅ DONE (iter 20-22)
+> **Дата:** 2026-06-30
 
 ---
 
 ## Текущее состояние
 
-**iter 21 COMPLETE.** KI#13 Part 3+4: 23 inline `style=` → external CSS classes. `src/assets/vs-styles.css` +49 строк (SECTION 6 — 18 новых селекторов с `vs-ki13-*` prefix). `src/master/part_03.html` 2→0 inline styles. `src/master/part_04.html` 21→0 inline styles. Phase 4 SVG integration analysis: Canon migration (iter 7–18) уже удалил все major textual duplicates VS-EMBEDs; 3 retained infographics (2 part_04 + 1 part_07b) — unique, intentional retention (iter 8 principle «viz > dry text»); Phase 4 actual replacement work — low priority, deferred to iter 22+ как optional. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 (unchanged). Canon migration (iter 7–18) unaffected.
+**iter 22 COMPLETE.** KI#13 Part 5+6: 6 inline `style=` → external CSS classes. `src/assets/vs-styles.css` +30 строк (SECTION 6 — 5 новых селекторов `vs-ki13-*`). `src/master/part_05.html` 1→0 inline styles. `src/master/part_06.html` 5→0 inline styles. Build hash `fd3d96d3` unchanged. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Canon migration (iter 7–18) unaffected.
 
-### Что сделано в iter 21
+### Что сделано в iter 22
 
 | # | Задача | Результат |
 |---|--------|-----------|
-| a | KI#13 Part 3: 2 inline styles → CSS classes | `.vs-ki13-inset-text strong` (1 селектор, E07 Storage vs Influence inset, descendant selector для 2 `<strong>` элементов). part_03.html: 2→0 inline styles. |
-| b | KI#13 Part 4: 21 inline styles → CSS classes | (i) E05 SPINE causal chain panel: 4 селектора (`vs-ki13-spine-chain-panel/heading/text/text strong`) для 8 inline styles (panel + heading + text + 5 strongs). (ii) E06 GHOST Layers ring animation delays: 10 селекторов (`vs-ki13-ring-delay-{0,200,400,500,600,650,700,750,800,850}`) для 10 SVG `transition-delay` inline styles (4 circles + 6 texts). (iii) E06 GHOST Layers ring label titles: 3 селектора (`vs-ki13-ring-title--g3/g2/g1`) для 3 HTML `<div>` color inline styles. part_04.html: 21→0 inline styles. |
-| c | Phase 4 SVG integration analysis | Canon migration (iter 7–18) уже удалил все major textual duplicates VS-EMBEDs. 3 retained infographics (2 part_04 + 1 part_07b) — unique, intentional retention (iter 8 principle «viz > dry text»). Candidates для iter 22+ evaluation: Part 7B (0 VS-EMBED) — Greeting algorithm infographic (line 33) потенциальный кандидат на новый VS element (E18+, requires visual-system prototyping). Phase 4 actual replacement — low priority, deferred. |
-| d | Validation gates PASS | `validate:master` ✅ (0 errors, 43 inline styles remaining в Part 5-10), `build` ✅ (hash fd3d96d3 unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings pre-existing), `qa:csp` ✅, `qa:bundle` ✅, `qa:doc-versions` ✅. |
+| a | KI#13 Part 5: 1 inline style → CSS class | `.vs-ki13-context-limits-note` (1 селектор, E09 OCEAN Pentagon — Elena extreme example footnote inside `.context-limits-box__data`). part_05.html: 1→0. |
+| b | KI#13 Part 6: 5 inline styles → 4 CSS selectors | E11 CoT Tiers — Progression explanation panel: `.vs-ki13-cot-panel` (max-width 700px), `.vs-ki13-cot-heading` (cyan accent — distinct от funnel-panel violet), `.vs-ki13-cot-text`, `.vs-ki13-cot-text strong` (descendant selector для 2 `<strong>`). part_06.html: 5→0. |
+| c | Validation gates PASS | `validate:master` ✅ (0 errors, 37 inline styles remaining в Part 7A+9+10), `build` ✅ (hash fd3d96d3 unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings pre-existing), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
 
-### Изменённые файлы в iter 21
+### Изменённые файлы в iter 22
 
 | File | Action | Reason |
 |------|--------|--------|
-| `src/assets/vs-styles.css` | Edited | +49 строк SECTION 6 (18 новых селекторов `vs-ki13-*`: 1 inset-text + 4 spine-chain + 10 ring-delay + 3 ring-title). |
-| `src/master/part_03.html` | Edited | 2 inline styles → CSS classes (0 remaining). |
-| `src/master/part_04.html` | Edited | 21 inline styles → CSS classes (0 remaining). |
-| `STATUS.md` | Rewritten | iter 21 status. |
-| `worklog.md` | Updated | iter 21 record (iter 20 → one-liner). |
-| `AGENT_NAVIGATION.md` | Updated | §6 pitfall #36 KI#13 progress, §8 iter 21 record, header iter 20 → iter 21. |
-| `CHANGELOG.md` | Updated | [9.1.21] entry. |
-| `PLAN.md` | Updated | §5 iter 21 → ✅ DONE, iter 22+ roadmap. |
-| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | §5.2 iter 21 row → ✅ DONE. §8 iter 21 stop point + iter 22 priorities + Phase 4 analysis. |
-| `docs/canon/_README.md` | Updated | §9 iter 21 entry (KI#13 Part 3+4, Phase 4 analysis). |
+| `src/assets/vs-styles.css` | Edited | +30 строк SECTION 6 (5 новых селекторов `vs-ki13-*`: 1 context-limits-note + 4 cot-* panel/heading/text/strong). |
+| `src/master/part_05.html` | Edited | 1 inline style → CSS class (0 remaining). |
+| `src/master/part_06.html` | Edited | 5 inline styles → CSS classes (0 remaining). |
+| `assets/vs-styles.css`, `parts/part_05.html`, `parts/part_06.html`, `index.html` | Regenerated | Root fallbacks (build artifact — timestamp updated, hash unchanged). |
+| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/canon/_README.md` | Updated | iter 22 record. CHANGELOG compressed (iter 1-19 → brief summary). |
 
 ---
 
 ## Known Issues
 
-**KI#13 (ACTIVE, MEDIUM, found iter 5)** — 43 inline `style=` remaining (123 - 80 fixed: 57 в iter 20 + 23 в iter 21) в Part 5-10 master HTML. Part 1+2+3+4 ✅ DONE (iter 20+21). Продолжение: Part 5+6 в iter 22, Part 7A в iter 23, Part 8-10 в iter 24.
+**KI#13 (ACTIVE, MEDIUM, found iter 5)** — 37 inline `style=` remaining (123 - 86 fixed: 57 в iter 20 + 23 в iter 21 + 6 в iter 22) в Part 7A+9+10 master HTML. Part 1-6 ✅ DONE (iter 20-22). Продолжение: Part 7A в iter 23, Part 9+10 в iter 24.
 
 **KI#14 (CLOSED, iter 16)** — Content duplication VS-EMBED ↔ текст. Все 10 Parts ✅ MIGRATED.
 
@@ -47,7 +41,7 @@
 
 **KI#17 (CLOSED, iter 20)** — Documentation drift (E07 vs E02). Fixed in iter 10. LOW severity. Closed iter 20.
 
-**Fix plan (iter 22+):** KI#13 (inline styles → external CSS classes, Part 5+6) — next 6 inline styles (Part 5: 1, Part 6: 5). См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5.
+**Fix plan (iter 23+):** KI#13 (inline styles → external CSS classes, Part 7A) — next 19 inline styles. См. `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2 и `docs/canon/_README.md` §5.
 
 ---
 
@@ -61,7 +55,7 @@
 | **Node >= 20, pnpm 10.x** | JavaScript runtime + package manager. |
 | **Canonical Guide Spec (iter 7–18) — COMPLETE** | Все 10 Parts + 3 Appendix ✅ MIGRATED. См. `docs/canon/_README.md` §5. |
 | **CSP compliance (iter 19)** | `qa:csp` PASS. Все scripts в `index.html` — `<script src="...">` (external). Inline scripts forbidden. |
-| **KI#13 inline styles → CSS (iter 20+21)** | 123 inline styles → 80 fixed (Part 1+2+3+4). 43 remaining (Part 5-10). Naming: `vs-ki13-*` prefix. |
+| **KI#13 inline styles → CSS (iter 20-22)** | 123 inline styles → 86 fixed (Part 1-6). 37 remaining (Part 7A: 19, Part 9: 6, Part 10: 12). Naming: `vs-ki13-*` prefix. |
 
 ---
 

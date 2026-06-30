@@ -3502,3 +3502,37 @@ a:hover {
 .vs-ki13-ring-title--g3 { color: rgba(139, 92, 246, 0.7); }
 .vs-ki13-ring-title--g2 { color: rgba(139, 92, 246, 0.85); }
 .vs-ki13-ring-title--g1 { color: var(--accent-violet); }
+
+/* --- E09 OCEAN Pentagon — Context limits footnote (iter 22) --- */
+/* Small muted caption inside .context-limits-box__data — Elena extreme example note. */
+.vs-ki13-context-limits-note {
+  color: var(--text-muted);
+  font-size: 10px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* --- E11 CoT Tiers — Progression explanation panel (iter 22) --- */
+/* CoT progression panel: 700px max-width + heading (cyan accent) + body text + strong emphasis. */
+.vs-ki13-cot-panel {
+  max-width: 700px;
+  margin: var(--gap-xl) auto 0;
+}
+
+.vs-ki13-cot-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: var(--gap-sm);
+  color: var(--accent-cyan);
+}
+
+.vs-ki13-cot-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.vs-ki13-cot-text strong {
+  color: var(--text-primary);
+}

@@ -342,7 +342,8 @@ SPINE — психологический каркас из 5 элементов,
 | **19** | KI#16 fix | ✅ DONE — 2 inline `<script>` блока в `src/shell/index.html` вынесены в external widget JS. (a) `src/shell/widgets/js-flag.js` created (early `js` class flag, sync в `<head>` для FOUC prevention). (b) `src/shell/widgets/mermaid-init.js` created (mermaid.initialize с dark theme + brand colors, sync после mermaid CDN, sets `mermaid._initialized = true` для skip redundant init в lazy-loader.js line 689). (c) `src/shell/index.html` edited: 2 inline `<script>` → 2 `<script src="widgets/...">`. (d) Build regenerated root `index.html` + `widgets/` (15→17 files) + `build.hash` (`df283246` → `fd3d96d3`). `qa:csp` PASS (0 inline scripts). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:bundle`/`qa:doc-versions` PASS. **KI#16 CLOSED.** 14 docs/files updated. | `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `src/shell/index.html` | LOW |
 | **20** | KI#13 Part 1+2 + KI#17 + SVG audit | ✅ DONE — KI#13 Part 1: 48 inline styles → 15 CSS classes. Part 2: 9 inline styles → 9 CSS classes. Total: 57/123 (46%). `vs-styles.css` +137 строк (SECTION 6, 28 классов `vs-ki13-*`). KI#17 CLOSED (doc drift fixed iter 10, LOW). SVG extracts audit: 0 orphans, все 17 elements embedded, все styles в vs-styles.css. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. 10 docs/files updated. | `src/assets/vs-styles.css`, `src/master/part_01.html`, `src/master/part_02.html` | MEDIUM |
 | **21** | KI#13 Part 3+4 + Phase 4 SVG analysis | ✅ DONE — KI#13 Part 3: 2 inline styles → 1 CSS selector (`.vs-ki13-inset-text strong`, descendant selector). Part 4: 21 inline styles → 17 CSS selectors (spine-chain-panel/heading/text + descendant strong = 4; ring-delay-{0..850} = 10; ring-title--g3/g2/g1 = 3). Total: 80/123 (65%). `vs-styles.css` +49 строк (SECTION 6, 18 новых селекторов). Phase 4 SVG integration analysis: Canon migration (iter 7–18) уже удалил major textual duplicates; 3 retained infographics intentional; Part 7B (0 VS-EMBED) — candidate для нового VS element (E18+) в iter 22+, low priority. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged. 10 docs/files updated. | `src/assets/vs-styles.css`, `src/master/part_03.html`, `src/master/part_04.html` | MEDIUM |
-| **22+** | KI#13 Part 5-10 + Phase 4 SVG | KI#13 remaining: Part 5 (1) + Part 6 (5) + Part 7A (19) + Part 9 (6) + Part 10 (12) = 43 inline styles. Phase 4 SVG integration: Part 7B new VS element (optional, low priority, requires visual-system/elements/ prototyping first). | varies | HIGH |
+| **22** | KI#13 Part 5+6 | ✅ DONE — KI#13 Part 5: 1 inline style → 1 CSS selector (`.vs-ki13-context-limits-note`, E09 OCEAN Pentagon — Elena extreme example footnote inside `.context-limits-box__data`). Part 6: 5 inline styles → 4 CSS selectors (E11 CoT Tiers progression panel: `vs-ki13-cot-panel` (max-width 700px) + `vs-ki13-cot-heading` (cyan accent — distinct от funnel-panel violet) + `vs-ki13-cot-text` + descendant `vs-ki13-cot-text strong` для 2 strongs). Total: 86/123 (70%). `vs-styles.css` +30 строк (SECTION 6, 5 новых селекторов). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged. 7 docs + 4 regenerated fallbacks updated. | `src/assets/vs-styles.css`, `src/master/part_05.html`, `src/master/part_06.html` | MEDIUM |
+| **23+** | KI#13 Part 7A+9+10 + Phase 4 SVG | KI#13 remaining: Part 7A (19) + Part 9 (6) + Part 10 (12) = 37 inline styles. iter 23: Part 7A (largest batch — 13 секций + 4 VS-EMBED E08/E16/E17/E02). iter 24: Part 9 + Part 10 (Part 10 имеет 11 positional `top:Npx; right:20px;` styles — кандидат на generic class + per-instance modifier или single selector per position). Phase 4 SVG integration: Part 7B new VS element (optional, low priority, requires visual-system/elements/ prototyping first). | varies | HIGH |
 
 **Оценка:** ~13 итераций (iter 7..19) на полный content restructure. Каждая итерация — 1–3 часа работы агента.
 
@@ -415,37 +416,37 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 21 COMPLETE (KI#13 Part 3+4 + Phase 4 SVG integration analysis).** 80/123 inline `style=` → 46 CSS selectors (iter 20: 28 + iter 21: 18) в `src/assets/vs-styles.css` SECTION 6. Part 3: 2→0, Part 4: 21→0. Phase 4 SVG integration analysis complete. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Canon migration (iter 7–18) unaffected. Build hash fd3d96d3 unchanged. **KI#13 ACTIVE (43 remaining в Part 5-10).**
+**Iter 22 COMPLETE (KI#13 Part 5+6).** 86/123 inline `style=` → 51 CSS selectors (iter 20: 28 + iter 21: 18 + iter 22: 5) в `src/assets/vs-styles.css` SECTION 6. Part 5: 1→0, Part 6: 5→0. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Canon migration (iter 7–18) unaffected. Build hash fd3d96d3 unchanged. **KI#13 ACTIVE (37 remaining в Part 7A+9+10).**
 
-**Iter 22+ priorities (KI#13 Part 5+6 + Phase 4 SVG integration):**
+**Iter 23+ priorities (KI#13 Part 7A + Phase 4 SVG integration):**
 
-1. **KI#13 (43 remaining inline `style=`):** Part 5 (1) + Part 6 (5) + Part 7A (19) + Part 9 (6) + Part 10 (12). Следующий шаг: Part 5+6 (6 inline styles). Классы продолжают добавляться в `vs-styles.css` SECTION 6 с `vs-ki13-*` prefix.
-2. **Phase 4 SVG integration (Part 7B candidate, optional, low priority):** Canon migration (iter 7–18) уже удалил все major textual duplicates VS-EMBEDs (Pattern A из §2.1). 3 retained infographics (2 part_04 + 1 part_07b) — unique, intentional retention (iter 8 principle «viz > dry text»). Phase 4 candidate для iter 22+ evaluation: **Part 7B** (0 VS-EMBED) — Greeting algorithm infographic (line 33, textual `infographic inf-pipeline` block, 4 steps: Sensory Anchor → Тело FLAW → Реплика → Крючок) потенциальный кандидат на новый VS element (E18+, requires `visual-system/elements/` prototyping first). Создание нового VS element — отдельная задача, не блокирует KI#13.
+1. **KI#13 (37 remaining inline `style=`):** Part 7A (19) + Part 9 (6) + Part 10 (12). Следующий шаг (iter 23): Part 7A (largest batch — 13 секций + 4 VS-EMBED E08/E16/E17/E02). Классы продолжают добавляться в `vs-styles.css` SECTION 6 с `vs-ki13-*` prefix. Part 7A содержит разнообразные inline styles (font-size:10px, display:none, color:var(--accent-violet/danger/success), margin-left:4px ×4, border-color:var(--accent-cyan)) — рекомендуется группировать по semantic intent (`.vs-ki13-p7a-badge-meta` для font-size:10px; `.vs-ki13-p7a-hidden` для display:none; `.vs-ki13-p7a-text-{violet/danger/success/muted}` для color overrides; `.vs-ki13-p7a-indent-sm` для margin-left:4px; `.vs-ki13-p7a-border-cyan` для border-color).
+2. **Phase 4 SVG integration (Part 7B candidate, optional, low priority):** Canon migration (iter 7–18) уже удалил все major textual duplicates VS-EMBEDs (Pattern A из §2.1). 3 retained infographics (2 part_04 + 1 part_07b) — unique, intentional retention (iter 8 principle «viz > dry text»). Phase 4 candidate для iter 23+ evaluation: **Part 7B** (0 VS-EMBED) — Greeting algorithm infographic (line 33, textual `infographic inf-pipeline` block, 4 steps: Sensory Anchor → Тело FLAW → Реплика → Крючок) потенциальный кандидат на новый VS element (E18+, requires `visual-system/elements/` prototyping first). Создание нового VS element — отдельная задача, не блокирует KI#13.
 3. **Validation gates:** `pnpm run validate:master` (0 errors) + `build` + `validate` + `test:unit` + `lint` + `qa:csp` + `qa:bundle` + `qa:doc-versions`.
 
-**Phase 4 SVG integration — анализ (iter 21):**
+**Phase 4 SVG integration — анализ (iter 21, unchanged в iter 22):**
 
 | # | Кандидат | Локация | Тип | Решение |
 |---|----------|---------|-----|---------|
 | 1 | Part 4 SPINE → Anchors mnemonic | `src/master/part_04.html:374` | Textual `infographic` block (5-row table SPINE→Anchors mapping) | **Retain** — unique visualization, iter 8/18 retention confirmed. Not a duplicate of any VS-EMBED. |
 | 2 | Part 4 Navigation pipeline | `src/master/part_04.html:495` | Textual `infographic inf-pipeline` (4 steps: Part 5→6→7A→10) | **Retain** — unique navigation viz, different concept from Part 7A E02 Assembly Pipeline. |
-| 3 | Part 7B Greeting algorithm | `src/master/part_07b.html:33` | Textual `infographic inf-pipeline` (4 steps: Sensory Anchor → Тело FLAW → Реплика → Крючок) | **Phase 4 candidate** — Part 7B has 0 VS-EMBED. Could become new VS element E18 (Greeting Algorithm). Requires `visual-system/elements/` prototyping first. iter 22+ optional, low priority. |
+| 3 | Part 7B Greeting algorithm | `src/master/part_07b.html:33` | Textual `infographic inf-pipeline` (4 steps: Sensory Anchor → Тело FLAW → Реплика → Крючок) | **Phase 4 candidate** — Part 7B has 0 VS-EMBED. Could become new VS element E18 (Greeting Algorithm). Requires `visual-system/elements/` prototyping first. iter 23+ optional, low priority. |
 | 4 | Part 8 AP-1..AP-15 subsections | `src/master/part_08.html:247+` | 15 antipattern subsections (textual: signs + fixes + examples) | **Verified clean** — E12 VS-EMBED at line 13 is catalog overview; subsections are unique per-AP entries, not duplicates. Canon migration (iter 12) confirmed. |
 
-**Conclusion:** Phase 4 actual SVG integration is largely COMPLETE. Canon migration (iter 7–18) handled the bulk of textual→VS-EMBED replacement. Remaining work: KI#13 (Part 5-10 CSS class migration) + optional new VS element for Part 7B Greeting algorithm (iter 22+, separate effort, low priority).
+**Conclusion:** Phase 4 actual SVG integration is largely COMPLETE. Canon migration (iter 7–18) handled the bulk of textual→VS-EMBED replacement. Remaining work: KI#13 (Part 7A+9+10 CSS class migration) + optional new VS element for Part 7B Greeting algorithm (iter 23+, separate effort, low priority).
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 22+ прочитай:
-> 1. `STATUS.md` (iter 21 COMPLETE, KI#13 80/123 fixed, 43 remaining)
-> 2. `worklog.md` (iter 21 record)
-> 3. `AGENT_NAVIGATION.md` (§6 pitfall #36 KI#13 ACTIVE, §8 iter 22+ roadmap)
+> Перед стартом iter 23+ прочитай:
+> 1. `STATUS.md` (iter 22 COMPLETE, KI#13 86/123 fixed = 70%, 37 remaining)
+> 2. `worklog.md` (iter 22 record)
+> 3. `AGENT_NAVIGATION.md` (§6 pitfall #36 KI#13 ACTIVE, §8 iter 23+ roadmap)
 > 4. `docs/canon/_README.md` (§5 migration status — все 10 Parts + 3 Appendix ✅, Canon COMPLETE)
-> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 22 priorities + §8 Phase 4 analysis)
+> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 23 priorities + §8 Phase 4 analysis)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 >
-> **KI#13 strategy (updated iter 21):** 123→43 remaining (65% fixed). Pattern established: `vs-ki13-*` CSS classes в vs-styles.css SECTION 6. Part 5+6 в iter 22, Part 7A в iter 23, Part 8-10 в iter 24. Каждый iter: validate:master + visual diff.
+> **KI#13 strategy (updated iter 22):** 123→37 remaining (70% fixed). Pattern established: `vs-ki13-*` CSS classes в vs-styles.css SECTION 6. Part 7A в iter 23, Part 9+10 в iter 24. Каждый iter: validate:master + visual diff.
 
 ---
 
