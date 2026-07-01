@@ -4,27 +4,28 @@
 
 ---
 
-Task ID: 22
+Task ID: 23
 Agent: main
-Task: iter 22 — KI#13 Part 5+6 (6 inline styles → external CSS classes). Validation gates: validate:master + build + validate + test:unit + lint + qa:csp + qa:bundle + qa:doc-versions. Обновить документацию (cleanup + compress).
+Task: iter 23 — KI#13 Part 7A (19 inline styles → external CSS classes, semantic grouping). JS toggle compatibility check (vs-e16-author-note.js). Validation gates: validate:master + build + validate + test:unit + lint + qa:csp + qa:bundle + qa:doc-versions. Обновить документацию (cleanup + compress).
 
 Work Log:
-- 1: Контекст загружен из STATUS.md (iter 21 COMPLETE, KI#13 80/123 fixed, 43 remaining), worklog.md (iter 21 record), AGENT_NAVIGATION.md (§6 pitfall #36 KI#13 ACTIVE, §8 iter 22+ roadmap), docs/canon/_README.md (§5 Canon COMPLETE), docs/CONTENT_RESTRUCTURE_PLAN.md (§5.2 iter 22 priorities).
-- 2: **Baseline `pnpm run validate:master`** ✅ PASSED (0 errors, 43 inline styles remaining: Part 5=1, Part 6=5, Part 7A=19, Part 9=6, Part 10=12).
-- 3: **Analyzed inline styles context (Part 5+6 = 6 inline styles):**
-  - Part 5 line 137: `<span style="color:var(--text-muted); font-size:10px; margin-top:4px; display:block;">` — Elena extreme example footnote inside `.context-limits-box__data` (E09 OCEAN Pentagon).
-  - Part 6 lines 63-71: 5 inline styles in E11 CoT Tiers progression explanation panel — `<div class="panel" style="max-width:700px;...">`, heading div (cyan accent — distinct от E04 funnel-panel violet), `<p>` body, 2 `<strong>` emphasis spans.
-- 4: **Designed 5 new CSS selectors in `src/assets/vs-styles.css` SECTION 6** (appended, +30 строк):
-  - `.vs-ki13-context-limits-note` — for Part 5 Elena footnote (color muted, font-size 10px, margin-top 4px, display block).
-  - `.vs-ki13-cot-panel` (max-width 700px), `.vs-ki13-cot-heading` (cyan accent — distinct от spine-chain-panel violet + funnel-panel violet), `.vs-ki13-cot-text`, `.vs-ki13-cot-text strong` (descendant selector для 2 strongs) — 4 селектора для 5 inline styles (1 panel + 1 heading + 1 text + 2 strongs).
-- 5: **Edited `src/master/part_05.html`:** 1 inline `style=` → 1 CSS class. `<span style="...">` → `<span class="vs-ki13-context-limits-note">`. 0 remaining.
-- 6: **Edited `src/master/part_06.html`:** 5 inline `style=` → 4 CSS classes (1 descendant selector covers 2 strongs):
-  - Line 63: `<div class="panel" style="max-width:700px;...">` → `<div class="panel vs-ki13-cot-panel">`.
-  - Line 64: heading `<div style="font-family:...; color:var(--accent-cyan);">` → `<div class="vs-ki13-cot-heading">`.
-  - Line 67: `<p style="font-size:13px;...">` → `<p class="vs-ki13-cot-text">`.
-  - Lines 68 + 71: 2 `<strong style="color:var(--text-primary);">` → `<strong>` (covered by descendant selector `.vs-ki13-cot-text strong`).
-  - 0 remaining.
-- 7: **`pnpm run validate:master`** ✅ PASSED (0 errors, 37 inline styles remaining Part 7A+9+10, KI#13 progress 86/123 = 70%).
+- 1: Контекст загружен из STATUS.md (iter 22 COMPLETE, KI#13 86/123 fixed, 37 remaining), worklog.md (iter 22 record), AGENT_NAVIGATION.md (§6 pitfall #36 KI#13 ACTIVE, §8 iter 23+ roadmap), docs/canon/_README.md (§5 Canon COMPLETE), docs/CONTENT_RESTRUCTURE_PLAN.md (§5.2 iter 23 priorities + §8 Phase 4 analysis).
+- 2: **Baseline `pnpm run validate:master`** ✅ PASSED (0 errors, 37 inline styles remaining: Part 7A=19, Part 9=6, Part 10=12).
+- 3: **Analyzed inline styles context (Part 7A = 19 inline styles), grouped by VS-EMBED:**
+  - E16 Author's Note (4): line 310 badge font-size:10px (E07 cross-ref), line 337 template-card display:none (initial hidden state for template-b), line 347 template-section__label color:violet (GHOST-activation label), line 348 badge font-size:10px (E06 cross-ref).
+  - E17 Sampling Parameters (8): line 534 param-row__value color:muted (N/A), line 559 span color:danger (Только Examples), line 565 span color:muted (Минимальная), line 571 span color:muted (0–1), line 573 span color:violet (3), lines 577-579 3× span color:success (2 строки).
+  - E02 Assembly Pipeline (7): line 962 pipeline-node__label color:violet (SPINE), line 980 badge margin-top:4px (Опционально), line 994 pipeline-node__box border-color:cyan, lines 1015-1018 4× badge margin-left:4px (cross-ref badges → E03/E09,E10/Part 7B/E16).
+- 4: **JS toggle compatibility verified** — `src/shell/widgets/vs-e16-author-note.js` line 37-38: `templateB.style.display = type === 'b' ? 'block' : 'none'` (inline assignment). Inline style overrides class, so `.vs-ki13-p7a-template-hidden { display: none; }` only sets initial state. After first user click, JS controls visibility via inline style. No breakage.
+- 5: **Designed 9 new CSS selectors in `src/assets/vs-styles.css` SECTION 6** (appended, +33 строки), grouped by semantic intent (per CONTENT_RESTRUCTURE_PLAN.md §8 recommendation):
+  - 4 color overrides: `.vs-ki13-p7a-text-{violet/muted/danger/success}` — 10 применений (3+3+1+3).
+  - 3 badge sizing/spacing: `.vs-ki13-p7a-badge-meta` (font-size:10px, 2×), `.vs-ki13-p7a-badge-indent` (margin-left:4px, 4×), `.vs-ki13-p7a-badge-indent-top` (margin-top:4px, 1×).
+  - 1 state: `.vs-ki13-p7a-template-hidden` (display:none, 1× — template-b initial state, JS toggle compatible).
+  - 1 border: `.vs-ki13-p7a-border-cyan` (border-color:var(--accent-cyan), 1× — pipeline-node__box accent).
+- 6: **Edited `src/master/part_07a.html`:** 19 inline `style=` → 9 CSS classes (semantic grouping, 0 remaining):
+  - E16 (4→0): lines 310, 337, 347, 348.
+  - E17 (8→0): lines 534, 559, 565, 571, 573, 577, 578, 579.
+  - E02 (7→0): lines 962, 980, 994, 1015, 1016, 1017, 1018.
+- 7: **`pnpm run validate:master`** ✅ PASSED (0 errors, 18 inline styles remaining Part 9+10, KI#13 progress 105/123 = 85%).
 - 8: **`pnpm run build`** ✅ SUCCESS. Hash `fd3d96d3` unchanged (shell index.html not modified, vs-styles.css changes propagated to dist/assets/ + root assets/).
 - 9: **`pnpm run validate`** ✅ All 8 gates passed.
 - 10: **`pnpm run test:unit`** ✅ 43/43 pass.
@@ -32,28 +33,30 @@ Work Log:
 - 12: **`pnpm run qa:csp`** ✅ PASS (0 inline scripts).
 - 13: **`pnpm run qa:bundle`** ✅ PASS (7.2KB, max 500KB).
 - 14: **`pnpm run qa:doc-versions`** ✅ PASS.
-- 15: **Documentation updates** (clean, no garbage — per user request "лёгкие для модели/агента"):
-  - STATUS.md — rewritten: iter 22 status, KI#13 progress (86/123 fixed = 70%).
-  - worklog.md — iter 21 → one-liner, iter 22 = этот record.
-  - AGENT_NAVIGATION.md — header iter 21 → iter 22, §6 pitfall #36 KI#13 progress (Part 1-6 ✅ DONE), §8 iter 22 record + iter 23+ roadmap, §8 iter 1-19 history compressed to brief one-liners (cleanup).
-  - CHANGELOG.md — [9.1.22] entry. iter 1-19 compressed to brief summary section (KEEP last 3 iters detailed: 20, 21, 22).
-  - PLAN.md — §5 iter 22 → ✅ DONE, iter 23+ roadmap.
-  - docs/CONTENT_RESTRUCTURE_PLAN.md — §5.2 iter 22 row → ✅ DONE, §8 iter 22 stop point + iter 23 priorities.
-  - docs/canon/_README.md — §9 iter 22 entry.
+- 15: **Root fallbacks verified** — `parts/part_07a.html` 0 inline styles, `assets/vs-styles.css` identical to `src/assets/vs-styles.css` (9 vs-ki13-p7a occurrences), `index.html` only timestamp changed (hash unchanged).
+- 16: **Documentation updates** (clean, no garbage — per user request "лёгкие для модели/агента"):
+  - STATUS.md — rewritten: iter 23 status, KI#13 progress (105/123 fixed = 85%).
+  - worklog.md — iter 22 → one-liner, iter 23 = этот record.
+  - AGENT_NAVIGATION.md — header iter 22 → iter 23, §6 pitfall #36 KI#13 progress (Part 1-7A ✅ DONE), §8 iter 23 record + iter 24+ roadmap.
+  - CHANGELOG.md — [9.1.23] entry. iter 20 compressed to one-liner (KEEP last 3 detailed: 21, 22, 23).
+  - PLAN.md — §5 iter 23 → ✅ DONE, iter 24+ roadmap.
+  - docs/CONTENT_RESTRUCTURE_PLAN.md — §5.2 iter 23 row → ✅ DONE, §8 iter 23 stop point + iter 24 priorities.
+  - docs/canon/_README.md — §9 iter 23 entry.
 
 Stage Summary:
-- **iter 22 COMPLETE.** KI#13 Part 5+6: 6 inline styles → external CSS classes (5 новых селекторов в vs-styles.css SECTION 6, +30 строк). part_05.html: 1→0. part_06.html: 5→0. Все validation gates PASS. Build hash fd3d96d3 unchanged.
-- **Modified files (7 source + 4 regenerated fallbacks):** src/assets/vs-styles.css (edited, +30 строк), src/master/part_05.html (edited, 1→0), src/master/part_06.html (edited, 5→0), assets/vs-styles.css + parts/part_05.html + parts/part_06.html + index.html (regenerated root fallbacks), STATUS.md + worklog.md + AGENT_NAVIGATION.md + CHANGELOG.md + PLAN.md + docs/CONTENT_RESTRUCTURE_PLAN.md + docs/canon/_README.md (docs updated).
-- **KI#13 progress:** 86/123 fixed (70%). 37 remaining в Part 7A+9+10 (Part 7A: 19, Part 9: 6, Part 10: 12). Next: Part 7A в iter 23.
-- **НЕ сделано (намеренно, iter 23+ задача):**
-  1. KI#13 Part 7A+9+10 (37 inline styles) — iter 23+
-  2. Phase 4 actual SVG integration (Part 7B new VS element) — iter 23+ (low priority, exploratory, optional)
-- **Точка остановки:** iter 22 done (KI#13 Part 5+6 fixed). KI#13 ACTIVE (37 remaining). В iter 23+: KI#13 Part 7A (19 inline styles → external CSS classes) — см. `docs/canon/_README.md` §5, `docs/CONTENT_RESTRUCTURE_PLAN.md` §8.
+- **iter 23 COMPLETE.** KI#13 Part 7A: 19 inline styles → 9 external CSS classes (semantic grouping: 4 color + 3 badge sizing/spacing + 1 state + 1 border). `src/assets/vs-styles.css` +33 строки (SECTION 6, 9 новых селекторов `vs-ki13-p7a-*`). part_07a.html: 19→0 (E16: 4→0, E17: 8→0, E02: 7→0). JS toggle compatibility verified (vs-e16-author-note.js). Все validation gates PASS. Build hash fd3d96d3 unchanged.
+- **Modified files (2 source + 3 regenerated fallbacks + 7 docs):** src/assets/vs-styles.css (edited, +33 строки), src/master/part_07a.html (edited, 19→0), assets/vs-styles.css + parts/part_07a.html + index.html (regenerated root fallbacks), STATUS.md + worklog.md + AGENT_NAVIGATION.md + CHANGELOG.md + PLAN.md + docs/CONTENT_RESTRUCTURE_PLAN.md + docs/canon/_README.md (docs updated).
+- **KI#13 progress:** 105/123 fixed (85%). 18 remaining в Part 9+10 (Part 9: 6, Part 10: 12). Next: Part 9+10 в iter 24.
+- **НЕ сделано (намеренно, iter 24+ задача):**
+  1. KI#13 Part 9+10 (18 inline styles) — iter 24
+  2. Phase 4 actual SVG integration (Part 7B new VS element E18) — iter 25+ (low priority, exploratory, optional)
+- **Точка остановки:** iter 23 done (KI#13 Part 7A fixed). KI#13 ACTIVE (18 remaining). В iter 24: KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles — см. `docs/canon/_README.md` §5, `docs/CONTENT_RESTRUCTURE_PLAN.md` §8.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 22 (2026-06-30)**: KI#13 Part 5+6 (6 inline styles → 5 CSS селекторов `vs-ki13-*`). Build hash fd3d96d3.
 - **iter 21 (2026-06-24)**: KI#13 Part 3+4 (23 inline styles → 18 CSS селекторов `vs-ki13-*`). Phase 4 SVG integration analysis complete. Build hash fd3d96d3.
 - **iter 20 (2026-06-24)**: KI#13 Part 1+2 baseline (57 inline styles → 28 CSS classes). KI#17 CLOSED. SVG extracts audit (0 orphans).
 - **iter 19 (2026-06-24)**: KI#16 fix — 2 inline `<script>` в src/shell/index.html → external widget JS (js-flag.js + mermaid-init.js). qa:csp PASS. Build hash df283246→fd3d96d3.

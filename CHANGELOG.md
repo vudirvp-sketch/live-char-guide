@@ -1,5 +1,28 @@
 # Changelog
 
+## [9.1.23] - 2026-06-30
+
+### Added (iter 23 — KI#13 Part 7A: inline styles → CSS classes, semantic grouping)
+- **`src/assets/vs-styles.css` SECTION 6 extended** — +33 строки (9 новых селекторов с `vs-ki13-p7a-*` sub-namespace). Groups: (a) 4 semantic color overrides `.vs-ki13-p7a-text-{violet/muted/danger/success}` — 10 применений across E16/E17/E02 (cells, labels, values), (b) 3 badge sizing/spacing `.vs-ki13-p7a-badge-meta` (font-size:10px) + `.vs-ki13-p7a-badge-indent` (margin-left:4px) + `.vs-ki13-p7a-badge-indent-top` (margin-top:4px) — 7 применений, (c) 1 state `.vs-ki13-p7a-template-hidden` (display:none — template-b initial state, JS toggle compatible via inline style assignment override), (d) 1 border `.vs-ki13-p7a-border-cyan` (pipeline-node__box accent).
+
+### Changed (iter 23 — KI#13 inline style migration)
+- **`src/master/part_07a.html` edited** — 19 inline `style=` attributes → 9 CSS classes (0 remaining). E16 Author's Note: 4→0 (badge font-size, template-b display:none, GHOST-activation label color, E06 badge font-size). E17 Sampling Parameters: 8→0 (param-row N/A muted, 4 checklist cell colors: danger/muted×2/violet/success×3). E02 Assembly Pipeline: 7→0 (SPINE label violet, badge margin-top, pipeline-node__box border-cyan, 4 cross-ref badges margin-left).
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 18 inline styles remaining в Part 9+10).
+- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified, vs-styles.css propagated to dist/assets/ + root assets/).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
+- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone
+**KI#13 progress:** 105/123 inline styles fixed (85%). Part 1-7A ✅ DONE. 18 remaining в Part 9+10 (Part 9: 6, Part 10: 12). Active KI: KI#13 (MEDIUM). iter 24: KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles. Part 10 имеет 11 positional `top:Npx; right:20px;` styles — кандидат на generic class + per-instance modifier.
+
+---
+
 ## [9.1.22] - 2026-06-30
 
 ### Added (iter 22 — KI#13 Part 5+6: inline styles → CSS classes)
@@ -49,38 +72,11 @@
 
 ---
 
-## [9.1.20] - 2026-06-24
-
-### Added (iter 20 — KI#13 Part 1+2: inline styles → CSS classes)
-- **`src/assets/vs-styles.css` SECTION 6 added** — +137 строк «KI#13 Inline Style → CSS Class Migration». 28 новых CSS классов с `vs-ki13-*` prefix. Groups: (a) E01 Anchors subpanel (3 класса: anchor-header, anchor-title, anchor-desc), (b) E01 Token Budget Summary (12 классов: token-panel, token-heading, token-table, token-thead, token-th-left/right/source, token-tbody, token-row, token-td, token-td-right, token-td-source), (c) E03 flow-node accent borders (3 класса: flow-node--violet/cyan/amber), (d) E03 comparison (2 класса: compare-column--relative, arrow-dim), (e) E04 explanation panel (4 класса: funnel-panel, funnel-panel-heading, funnel-panel-text, funnel-panel-text strong).
-- **SVG extracts audit completed** — All 17 elements (E01-E17) embedded in master HTML. All 17 extract styles consolidated in vs-styles.css. Scripts consolidated: vs-scroll-observer.js + 4 widget JS (vs-e10/e13/e15/e16). 0 orphans found.
-
-### Changed (iter 20 — KI#13 inline style migration)
-- **`src/master/part_01.html` edited** — 48 inline `style=` attributes → CSS classes (0 remaining). E01 VS-EMBED Anchors subpanel (3) + Token Budget Summary table (45 inline styles converted to 12 CSS classes with semantic markup).
-- **`src/master/part_02.html` edited** — 9 inline `style=` attributes → CSS classes (0 remaining). E03 VS-EMBED flow-node accent borders (5) + E04 VS-EMBED explanation panel (4).
-
-### Closed
-- **KI#17 CLOSED** — Documentation drift (E07 vs E02 in Part 7A VS-EMBED list). Fixed in iter 10. LOW severity. Closed iter 20.
-
-### Validation
-- `pnpm run validate:master` ✅ PASSED (0 errors, 66 inline styles remaining в Part 3-10).
-- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified).
-- `pnpm run validate` ✅ All 8 gates passed.
-- `pnpm run test:unit` ✅ 43/43 pass.
-- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
-- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
-- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
-- `pnpm run qa:doc-versions` ✅ PASS.
-
-### Milestone
-**KI#13 progress:** 57/123 inline styles fixed (46%). Part 1+2 ✅ DONE. 66 remaining в Part 3-10. **KI#17 CLOSED.** Active KI: KI#13 (MEDIUM). iter 21+: KI#13 Part 3+4 + Phase 4 SVG integration.
-
----
-
 ## Previous iterations (compressed)
 
 > Полная история — в `worklog.md` one-liners и git log. Ниже — краткая сводка для контекста.
 
+- **[9.1.20] (iter 20, 2026-06-24):** KI#13 Part 1+2 baseline (57/123 inline styles → 28 CSS classes `vs-ki13-*` в vs-styles.css SECTION 6). part_01: 48→0, part_02: 9→0. **KI#17 CLOSED.** SVG extracts audit (0 orphans, все 17 elements embedded). Build hash fd3d96d3.
 - **[9.1.19] (iter 19, 2026-06-24):** KI#16 fix — `qa:csp` PASS. 2 inline `<script>` в `src/shell/index.html` → external widget JS (`js-flag.js` + `mermaid-init.js`). Build hash `df283246` → `fd3d96d3`. **KI#16 CLOSED.**
 - **[9.1.18] (iter 18, 2026-06-24):** Final cleanup — Canon migration COMPLETE. 3 Appendix Canon files (`appendix_mbti.md` + `appendix_model_table.md` + `appendix_glossary.md`) created. `content_map.md` cleanup (277→256, -8%). `terminology_dictionary.md` cleanup (338→206, -39%). Все 10 Parts + 3 Appendix ✅ MIGRATED.
 - **[9.1.16] (iter 16, 2026-06-24):** Canon Part 5+6+7B+10 created + 4 master HTML мигрированы. **Все 10 Parts мигрированы — Canon migration complete.**

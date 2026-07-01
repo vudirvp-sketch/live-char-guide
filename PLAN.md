@@ -200,13 +200,14 @@ Stage Summary:
 
 **Iter 21 ✅ DONE:** KI#13 Part 3+4 (23/123 inline styles → 18 новых CSS селекторов с `vs-ki13-*` prefix). Phase 4 SVG integration analysis complete (Canon migration уже удалил major duplicates; 3 retained infographics intentional; Part 7B candidate для iter 23+). Build hash fd3d96d3 unchanged.
 
-**Iter 22 ✅ DONE:** KI#13 Part 5+6 (6/123 inline styles → 5 новых CSS селекторов с `vs-ki13-*` prefix: `vs-ki13-context-limits-note` + `vs-ki13-cot-panel/heading/text/strong`). part_05: 1→0. part_06: 5→0. Total KI#13: 86/123 fixed (70%). `src/assets/vs-styles.css` +30 строк (SECTION 6). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged.
+**Iter 22 ✅ DONE:** KI#13 Part 5+6 (6/123 inline styles → 5 новых CSS селекторов `vs-ki13-context-limits-note` + `vs-ki13-cot-panel/heading/text/strong`). part_05: 1→0, part_06: 5→0. Build hash fd3d96d3 unchanged.
 
-**Iter 23+ — что осталось:**
-1. **iter 23** — KI#13 Part 7A (19 inline styles → CSS classes). Largest remaining batch — Part 7A имеет 13 секций + 4 VS-EMBED (E08/E16/E17/E02).
-2. **iter 24** — KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles. Part 10 имеет 11 positional `top:Npx; right:20px;` styles — кандидат на 1 generic class + per-instance modifier или single selector per position.
-3. **iter 25 (optional, low priority)** — Phase 4 SVG integration: Part 7B Greeting algorithm infographic → new VS element E18 (requires `visual-system/elements/` prototyping first).
+**Iter 23 ✅ DONE:** KI#13 Part 7A (19/123 inline styles → 9 новых CSS селекторов с `vs-ki13-p7a-*` sub-namespace, semantic grouping: 4 color overrides + 3 badge sizing/spacing + 1 template-hidden state + 1 border-cyan). part_07a: 19→0 (E16: 4→0, E17: 8→0, E02: 7→0). JS toggle compatibility verified (vs-e16-author-note.js). Total KI#13: 105/123 fixed (85%). `src/assets/vs-styles.css` +33 строки (SECTION 6). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged.
+
+**Iter 24+ — что осталось:**
+1. **iter 24** — KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles. Part 9: 1 positional `bottom:50%`, 4 color overrides, 1 panel max-width. Part 10: 11 positional `top:Npx; right:20px;` styles — кандидат на generic class + per-instance modifier или single selector per position, 1 border-left+violet.
+2. **iter 25 (optional, low priority)** — Phase 4 SVG integration: Part 7B Greeting algorithm infographic → new VS element E18 (requires `visual-system/elements/` prototyping first).
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE).
 
-**KI#1..KI#12 + KI#14 + KI#15 + KI#16 + KI#17 закрыты. KI#13 (37 inline styles remaining в Part 7A+9+10) — ACTIVE, continue iter 23+.**
+**KI#1..KI#12 + KI#14 + KI#15 + KI#16 + KI#17 закрыты. KI#13 (18 inline styles remaining в Part 9+10) — ACTIVE, continue iter 24+.**

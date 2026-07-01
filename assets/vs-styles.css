@@ -3536,3 +3536,35 @@ a:hover {
 .vs-ki13-cot-text strong {
   color: var(--text-primary);
 }
+
+/* --- Part 7A — Semantic color overrides for E16/E17/E02 cells (iter 23) --- */
+/* Single-source color hint classes. Applied to <span>/<div> inside VS-EMBED
+   tables and labels to override the base class color without !important.
+   Source-order override: SECTION 6 is appended after SECTION 1-5 + shell-styles.css,
+   so single-class specificity (0,1,0) wins over base .param-row__value / .template-section__label / .pipeline-node__label. */
+.vs-ki13-p7a-text-violet { color: var(--accent-violet); }
+.vs-ki13-p7a-text-muted  { color: var(--text-muted); }
+.vs-ki13-p7a-text-danger { color: var(--danger); }
+.vs-ki13-p7a-text-success { color: var(--success); }
+
+/* --- Part 7A — Badge sizing + spacing (iter 23) --- */
+/* Meta-badges: small E0X cross-reference tags inside position indicators and
+   template sections. Base .badge font-size is 11px; meta variant is 10px. */
+.vs-ki13-p7a-badge-meta { font-size: 10px; }
+
+/* Small left/top indent for badges inside .optional-branch__item lists and
+   pipeline nodes. Used to separate the badge from preceding text without
+   adding a full --gap-sm. */
+.vs-ki13-p7a-badge-indent     { margin-left: 4px; }
+.vs-ki13-p7a-badge-indent-top { margin-top: 4px; }
+
+/* --- Part 7A — Template B initial hidden state (iter 23) --- */
+/* Template-b card is hidden by default; vs-e16-author-note.js toggles it via
+   element.style.display = 'block'/'none' (inline assignment overrides class).
+   This class only sets the initial state before JS runs. */
+.vs-ki13-p7a-template-hidden { display: none; }
+
+/* --- Part 7A — Pipeline node cyan border accent (iter 23) --- */
+/* Overrides .pipeline-node__box border-color (base: var(--border)) for the
+   assembly-pipeline terminal node. */
+.vs-ki13-p7a-border-cyan { border-color: var(--accent-cyan); }
