@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_09.html` (596 → 582 строк, 11 секций)
 > **VS elements (embedded):** E13 (Diagnostic Decision Tree), E14 (Quality Scale)
 > **Sections (11):** `p9_quality_scale`, `p9_one_change_rule`, `p9_basic_checklist`, `p9_additional_problems`, `p9_symptom_table`, `p9_decision_tree`, `p9_test_scenarios`, `p9_element_scenario_map`, `p9_test_requirements`, `p9_12b_issues`, `p9_pre_deploy`
-> **Last synced:** 2026-06-24 (iter 13 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 13)
+> **Last synced:** 2026-07-01 (iter 26 — Quality Scale table deduplicated: dropped "Признаки" column duplicate of E14, renamed "Плохой" → "Слабый" to match E14 tier naming, added missing "Отличный" row)
+> **Migration status:** ✅ MIGRATED (iter 13) + ✅ iter 26 DGA fix
 
 ---
 
@@ -20,15 +20,18 @@
 
 [VS: E14 — Quality Scale. Thermometer с 4 зонами (Critical 0–25% / Poor 25–50% / Good 50–85% / Excellent 85–100%) + критерии каждой зоны + блок «5 быстрых проверок перед развёртыванием» (PP=0, Voice в Examples, Price в Anchors, Format Lock, Anti-godmoding). Замещает текстовое описание уровней качества и список пред-деплой проверок.]
 
-### Шкала качества карточки (3 уровня с примерами)
+### Шкала качества карточки (4 уровня — паттерны ошибок)
 
-| Уровень | Признаки | Примеры |
-|---------|----------|---------|
-| **Критический** | Карточка нарушает ≥2 базовых правила (нет Price, голос в Description, PP > 0) | Behavioral Anchors без T→A→P, OCEAN с 4+ полюсами, нет Anti-godmoding |
-| **Плохой** | Карточка собрана по правилам, но персонаж «плывёт» после 5–10 сообщений | FLAW = прилагательное, Examples не демонстрируют голос, SPINE не связан с Anchors |
-| **Хороший** | Карточка стабильна на 10+ сообщений, голос узнаваем, Price появляется | FLAW = поведение, ≥2 Examples с голосом, SPINE→Anchors связь |
+4 зоны качества показаны в VS-EMBED E14 выше (Критический 0–25% / Слабый 25–50% / Хороший 50–85% / Отличный 85–100%) с подробными критериями. Таблица ниже — типичные паттерны ошибок для каждой зоны (дополняет E14, не дублирует критерии).
 
-**RECOMMENDATION:** Цель — «Хороший» уровень. «Критический» = переписать. «Плохой» = точечные доработки по Decision Tree.
+| Уровень | Типичные паттерны ошибок |
+|---------|--------------------------|
+| **Критический** (0–25%) | Behavioral Anchors без T→A→P, OCEAN с 4+ полюсами, нет Anti-godmoding |
+| **Слабый** (25–50%) | FLAW = прилагательное, Examples не демонстрируют голос, SPINE не связан с Anchors |
+| **Хороший** (50–85%) | FLAW = поведение, ≥2 Examples с голосом, SPINE→Anchors связь |
+| **Отличный** (85–100%) | 14/14 предразвёрточных проверок пройдены, Embodiment во всех Anchors, Format Lock консистентен во всех Examples |
+
+**RECOMMENDATION:** Цель — «Хороший» уровень. «Критический» = переписать. «Слабый» = точечные доработки по Decision Tree. «Отличный» = полировка для продакшна.
 
 **Cross-ref:** Полный Pre-Deploy Validation (Quick Check 5 пунктов + Full Check 14 пунктов) — см. `[ref: §9.11]`.
 
@@ -314,7 +317,7 @@
 | 1 | VS-EMBED E13 (Diagnostic Decision Tree, 3 symptoms + binary branching) | Оставить | DONE | Canonical VS-marker — preamble Part 9 |
 | 2 | `<section data-section="p9_quality_scale">` h2 "Диагностика и тестирование" | Оставить | DONE | Canonical section title — §9.1 |
 | 3 | VS-EMBED E14 (Quality Scale thermometer + 4 zones + Quick Check list) | Оставить | DONE | Canonical VS-marker — §9.1 |
-| 4 | h3 "Шкала качества карточки" + 3-row table (Critical/Плохой/Хороший + Признаки + Примеры) | Оставить | DONE | Unique Examples column (Behavioral Anchors без T→A→P, FLAW = прилагательное, и т.д.) — §9.1. Признаки column частично дублирует E14 zones, но Examples column уникален. |
+| 4 | h3 "Шкала качества карточки" + intro p + 4-row table (Critical/Слабый/Хороший/Отличный + Типичные паттерны ошибок) | Оставить | DONE (iter 26) | iter 26: drop duplicate "Признаки" column (E14 viz already shows criteria), rename "Плохой" → "Слабый" to align with E14 viz tier naming, add missing "Отличный" row, add intro paragraph linking to E14. Unique "Типичные паттерны ошибок" column preserved — §9.1. |
 | 5 | `<div class="callout rec">` RECOMMENDATION: Цель — «Хороший» уровень | Оставить | DONE | Canonical RECOMMENDATION — §9.1 |
 | 6 | `<section data-section="p9_one_change_rule">` RULE callout | Оставить | DONE | Canonical RULE — §9.2 |
 | 7 | `<section data-section="p9_basic_checklist">` h3 + intro + per-block table (SP/Description/Examples/Greeting/Parameters) | Оставить | DONE | Unique per-block checklist — §9.3 |

@@ -2,57 +2,69 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ CLOSED (iter 24, 123/123 = 100%) + Phase 4 SVG integration: E18 Greeting Algorithm ✅ INTEGRATED (iter 25)
+> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ CLOSED (iter 24) + Phase 4 SVG: E18 ✅ INTEGRATED (iter 25) + **Deployed Guide Audit (DGA) Phase 1 — STARTED (iter 26, KI#18 NEW)**
 > **Дата:** 2026-07-01
 
 ---
 
 ## Текущее состояние
 
-**iter 25 COMPLETE. Phase 4 SVG integration — E18 Greeting Algorithm.** Создан новый VS element E18 (4-step pipeline: Sensory Anchor → Тело FLAW → Реплика → Крючок). Тextual `infographic inf-pipeline` блок в `src/master/part_07b.html` (lines 33–61 pre-iter-25) заменён на VS-EMBED E18 (migration principle «viz > dry text»). Step 2 (Тело FLAW) использует `.pipeline-node__box--spine` (violet — SPINE connection). E18 reuses E02 `.pipeline-*` classes + new `.pipeline-node__code` for technique sequence. Standalone prototype: `visual-system/elements/E18-greeting-algorithm.html`. Component extracts: 3 новых файла в `visual-system/integration/component-extracts/`. E18 styles (+12 строк) appended to `src/assets/vs-styles.css` SECTION 5 (header E01–E17 → E01–E18). part_07b: 371 → 424 строк (+53, E18 markup). Build hash `fd3d96d3` unchanged. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS.
+**iter 26 COMPLETE. Deployed Guide Audit (DGA) Phase 1 — STARTED.** Новый цикл работы: пошаговая проверка собранного при деплое гайда на дублирование смысловой и функциональной нагрузки между текстом и визуализациями (VS-EMBED E01–E18). Цель — сделать гайд читаемым, ясным и понятным, шаг за шагом.
 
-### Что сделано в iter 25
+**iter 26 result:** Полный аудит 14 master HTML файлов (Part 1–10 + 3 Appendix) выполнен — выявлено 8 duplication/inconsistency кейсов (KI#18 sub-items A–H). Применён **1 safe fix**: Part 9 Quality Scale table — убран дублирующий столбец «Признаки» (повторял E14 zone criteria), добавлен недостающий tier «Отличный», исправлена naming inconsistency «Плохой» → «Слабый» (в соответствии с E14 viz). Остальные 7 кейсов (KI#18 B–H) задокументированы для iter 27+ — применяются по принципу «лучше недоделать, чем сломать».
+
+### Что сделано в iter 26
 
 | # | Задача | Результат |
 |---|--------|-----------|
-| a | E18 standalone prototype | `visual-system/elements/E18-greeting-algorithm.html` (новый). E02-pattern pipeline: 4 nodes (Sensory Anchor → Тело FLAW → Реплика → Крючок) + 3 SVG arrows + scroll animations. Mini-map nav с E18 active в «Продвинутые» group. Footer badges: E05 (SPINE), E04 (Embodiment), E03 (Behavioral Anchor). |
-| b | E18 component extracts | 3 новых файла в `visual-system/integration/component-extracts/`: `E18-visual.html` (main markup), `E18-styles.css` (`.pipeline-node__code` only — rest reused from E02), `E18-script.js` (IntersectionObserver, same as E02). |
-| c | vs-styles.css SECTION 5 update | `src/assets/vs-styles.css`: header E01–E17 → E01–E18, +12 строк (`.pipeline-node__code` style, E18 comment block). E18 reuses E02 `.pipeline-container/main/node/box/label/sublabel/step/arrow` classes (already in SECTION 5). |
-| d | Master HTML Part 7B integration | `src/master/part_07b.html`: textual `infographic inf-pipeline` (lines 33–61 pre-iter-25) → VS-EMBED E18 (lines 28–110 iter 25). Intro `<p>` обновлён: added reference to VS-EMBED E18. Sensory Anchor paragraph + Elena example `<details>` + rules h4+ul — retained (unique content). |
-| e | INTEGRATION-MAP.md update | `visual-system/integration/INTEGRATION-MAP.md`: E18 row added в mapping table + E18 extracts listed в structure tree. |
-| f | Canon part_07b.md update | `docs/canon/part_07b.md`: front-matter (VS elements embedded: E18, Last synced: 2026-07-01 iter 25, Migration status: ✅ MIGRATED iter 16 + ✅ E18 iter 25). §7B.2 row 2 retention note updated. +iter 25 update section + validation gates. Line count 371 → 424. |
-| g | Validation gates PASS | `validate:master` ✅ (0 errors, 0 inline styles, expected content-outside-section warnings — same as E02 in part_07a), `build` ✅ (hash `fd3d96d3` unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings pre-existing), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
+| a | Audit 14 master HTML файлов | Полный инвентарь дублирований: VS-EMBED ↔ adjacent text, cross-Part duplication, naming inconsistencies. 8 кейсов KI#18 sub-items A–H. См. §«Known Issues» ниже. |
+| b | Fix KI#18-A (Part 9 Quality Scale) | `src/master/part_09.html` (lines 263–282): 3-row table (Critical/Плохой/Хороший + Признаки + Примеры) → 4-row table (Critical/Слабый/Хороший/Отличный + Типичные паттерны ошибок) + intro paragraph linking to E14 viz. Дублирующий столбец «Признаки» удалён (E14 zone criteria уже показывает те же данные). Naming «Плохой» → «Слабый» (соответствие E14 tier label). Добавлен недостающий tier «Отличный» (85–100%). Recommendation callout обновлён. |
+| c | Canon part_09.md update | `docs/canon/part_09.md`: §9.1 таблица переписана (4 уровня + Типичные паттерны ошибок). Front-matter Last synced → iter 26, Migration status + iter 26 DGA fix. Migration history row 4 обновлена. |
+| d | Validation gates PASS | `validate:master` ✅ (0 errors, 0 inline styles, expected content-outside-section warnings), `build` ✅ (hash `fd3d96d3` unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings pre-existing), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
+| e | Root fallbacks verified | `parts/part_09.html` identical to `src/master/part_09.html` (fix propagated). `index.html` unchanged (hash unchanged). |
 
-### Изменённые файлы в iter 25
+### Изменённые файлы в iter 26
 
 | File | Action | Reason |
 |------|--------|--------|
-| `visual-system/elements/E18-greeting-algorithm.html` | Created | New VS element E18 standalone prototype (E02-pattern, 4-step pipeline). |
-| `visual-system/integration/component-extracts/E18-visual.html` | Created | E18 visual markup extract (pipeline-container + 4 nodes + 3 arrows). |
-| `visual-system/integration/component-extracts/E18-styles.css` | Created | E18 styles extract (`.pipeline-node__code` + 4-node stagger delays). |
-| `visual-system/integration/component-extracts/E18-script.js` | Created | E18 script extract (IntersectionObserver, same as E02). |
-| `visual-system/integration/INTEGRATION-MAP.md` | Edited | +E18 row в mapping table + E18 extracts listed в structure tree. |
-| `src/assets/vs-styles.css` | Edited | SECTION 5 header E01–E17 → E01–E18, +12 строк (`.pipeline-node__code` + E18 comment block). |
-| `src/master/part_07b.html` | Edited | Textual `infographic inf-pipeline` (lines 33–61) → VS-EMBED E18 (lines 28–110). Intro `<p>` updated. part_07b: 371 → 424 строк (+53). |
-| `docs/canon/part_07b.md` | Edited | Front-matter (VS elements: E18, Last synced iter 25, Migration status +E18). §7B.2 row 2 retention note. +iter 25 update section + validation gates. |
-| `assets/vs-styles.css`, `parts/part_07b.html`, `index.html` | Regenerated | Root fallbacks (build artifact — timestamp updated, hash unchanged). |
-| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/canon/_README.md` | Updated | iter 25 record. Cleanup: CHANGELOG compressed (iter 22 → one-liner), canon _README §9 compressed (iter 7–22 → one-liner). |
+| `src/master/part_09.html` | Edited | Quality Scale table deduplicated: drop «Признаки» column, rename «Плохой» → «Слабый», add «Отличный» row, add intro paragraph linking to E14. part_09: 582 → 583 строк (+1). |
+| `docs/canon/part_09.md` | Edited | §9.1 таблица + front-matter (Last synced, Migration status) + migration history row 4 updated. |
+| `parts/part_09.html` | Regenerated | Root fallback (build artifact, timestamp updated, hash unchanged). |
+| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/canon/_README.md` | Updated | iter 26 record + KI#18 documented. Cleanup: iter 23 → one-liner (KEEP last 3 detailed: 24, 25, 26). |
 
 ---
 
 ## Known Issues
 
-**Все Known Issues (KI#1..KI#17) ✅ CLOSED.** Активных KI нет.
+**KI#18 NEW (iter 26).** Активный. Deployed Guide Duplication Audit (DGA) — Phase 1 audit complete, 8 sub-items identified, 1 fixed (A), 7 pending (B–H).
 
 | KI | Severity | Status | Iter |
 |----|----------|--------|------|
-| KI#13 (inline styles → CSS) | MEDIUM | ✅ CLOSED | found iter 5, fixed iter 20-24 (123/123 = 100%) |
+| **KI#18 (Deployed Guide Duplication Audit)** | MEDIUM | **🟡 ACTIVE — Phase 1 audit done, 1/8 fixed** | found iter 26, A fixed iter 26, B–H pending iter 27+ |
+| KI#13 (inline styles → CSS) | MEDIUM | ✅ CLOSED | iter 20–24 (123/123 = 100%) |
 | KI#14 (content duplication VS-EMBED ↔ текст) | MEDIUM-HIGH | ✅ CLOSED | iter 16 (Canon migration complete) |
 | KI#16 (qa:csp FAIL — inline scripts) | MEDIUM | ✅ CLOSED | iter 19 |
 | KI#17 (documentation drift E07 vs E02) | LOW | ✅ CLOSED | iter 20 |
-| KI#1..KI#12, KI#15 | various | ✅ CLOSED | iter 1-7 |
+| KI#1..KI#12, KI#15 | various | ✅ CLOSED | iter 1–7 |
 
-**Текущих активных багов нет.** Новые баги — сначала документировать в `STATUS.md` как Known Issue (KI#N), потом фиксить.
+### KI#18 — Deployed Guide Duplication Audit (DGA) — Detailed
+
+**Принцип (iter 8+):** `viz > dry text` — визуализация = замещение, не дополнение. Если VS-EMBED показывает концепцию — текст не должен её пере-объяснять. Unique контент не удаляется.
+
+**Audit scope:** 14 master HTML файлов (Part 1–10 + 3 Appendix). Inventory: 16 VS-EMBED elements embedded across 11 Parts.
+
+| Sub | Part | Описание дублирования / inconsistency | Severity | Status |
+|-----|------|---------------------------------------|----------|--------|
+| **A** | Part 9 | E14 Quality Scale viz (4 zones: Критический/Слабый/Хороший/Отличный) ↔ p9_quality_scale table (3 rows: Критический/«Плохой»/Хороший + «Признаки» column duplicating E14 criteria). Naming inconsistency «Плохой» vs viz «Слабый». Missing tier «Отличный». | MEDIUM | ✅ FIXED iter 26 |
+| **B** | Part 1 | E01 Card Anatomy viz (5 blocks with descriptions + token budgets + summary table) ↔ p1_card_overview table (4 rows: Блок/Функция/Влияние/Доля). «Функция» column duplicates E01 block-content text. | LOW-MEDIUM | ⏳ pending iter 27+ |
+| **C** | Part 2 | E03 Behavioral Anchors viz (T→A→P with descriptions + correct/incorrect comparison) ↔ p2_basic_anchors table (3 rows: #/Этап/Описание/Пример). «Описание» column duplicates E03 flow-node__desc text. | LOW-MEDIUM | ⏳ pending iter 27+ |
+| **D** | Part 4 | E05 SPINE Framework viz (5 nodes with example text) + panel «Причинно-следственная цепь» (lines 122–136) ↔ p4_spine_overview h2 + intro paragraphs partially re-explain SPINE chain shown in viz. | LOW | ⏳ pending iter 27+ |
+| **E** | Part 5 | E09 OCEAN viz inset «Context Limits» (4K/8K/16K/32K → max extrema) ↔ p5_ocean_basics «Контекстные лимиты полюсов» table (4 rows with same data). Cross-viz/text semantic inconsistency: viz says «Елена имеет 1 экстремум» (per rule <30 or >70: only O=72), text says «3 экстремальных полюса (O=72, A=38, N=68)». Rule definition unclear — strict vs broad interpretation. | MEDIUM (semantic bug) | ⏳ pending iter 27+ (needs careful rule alignment, NOT trivial fix) |
+| **F** | Part 6 | E11 CoT viz (4 tiers with format + model pill) ↔ p6_cot_tiers table (4 rows: Tier/Формат/Для моделей/Пример). «Формат» + «Пример» columns largely duplicate E11 stair-step__format content. | LOW-MEDIUM | ⏳ pending iter 27+ |
+| **G** | Part 8 | E12 Antipatterns viz (15 AP cards with Симптом/Причина/Исправление) ↔ per-AP sections repeat «Симптом/Причина/Решение» structure with same content. Design pattern (catalog vs detail) — partially intentional. | LOW (by design — catalog vs detail) | ⏳ pending iter 27+ (may keep by design, document rationale) |
+| **H** | Part 10 | E15 Annotated Blueprint callouts (SP/Description/Examples/Greeting token budgets) duplicate E01 token budgets in Part 1. Cross-Part duplication, but integrated into annotation layer (contextually relevant). | LOW (intentional annotation) | ⏳ pending iter 27+ (likely keep, document rationale) |
+
+**iter 27+ roadmap (DGA Phase 2):** Fix KI#18-B and KI#18-C first (clearest duplication patterns, lowest risk). KI#18-E needs careful rule alignment (strict vs broad extremum definition). KI#18-G and KI#18-H likely keep-by-design with documented rationale.
 
 ---
 
@@ -66,8 +78,9 @@
 | **Node >= 20, pnpm 10.x** | JavaScript runtime + package manager. |
 | **Canonical Guide Spec (iter 7–18) — COMPLETE** | Все 10 Parts + 3 Appendix ✅ MIGRATED. См. `docs/canon/_README.md` §5. |
 | **CSP compliance (iter 19)** | `qa:csp` PASS. Все scripts в `index.html` — `<script src="...">` (external). Inline scripts forbidden. |
-| **Inline styles forbidden (iter 24, KI#13 CLOSED)** | Все 123 inline `style=` → external CSS classes с `vs-ki13-*` prefix (60 селекторов: 28 Part 1+2 + 18 Part 3+4 + 5 Part 5+6 + 9 Part 7A + 6 Part 9 + 13 Part 10). Sub-namespaces `vs-ki13-p7a-*`, `vs-ki13-p9-*`, `vs-ki13-p10-*` для semantic grouping. |
+| **Inline styles forbidden (iter 24, KI#13 CLOSED)** | Все 123 inline `style=` → external CSS classes с `vs-ki13-*` prefix (60 селекторов). |
 | **VS elements registry (iter 25)** | 18 VS elements: E01–E18. E18 (Greeting Algorithm) — iter 25, Part 7B. Все 18 embeded в master HTML, styles в `src/assets/vs-styles.css` SECTION 5, extracts в `visual-system/integration/component-extracts/`. |
+| **Deployed Guide Audit (iter 26+) — ONGOING** | KI#18 NEW. Phase 1 audit done (8 sub-items A–H), 1 fixed (A), 7 pending (B–H). Принцип: `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED. См. §«Known Issues» KI#18 above. |
 
 ---
 

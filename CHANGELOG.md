@@ -1,5 +1,30 @@
 # Changelog
 
+## [9.1.26] - 2026-07-01
+
+### Added (iter 26 — Deployed Guide Audit Phase 1: KI#18 NEW)
+- **KI#18 — Deployed Guide Duplication Audit (DGA)** 🟡 ACTIVE. Полный аудит 14 master HTML файлов (Part 1–10 + 3 Appendix) выявил 8 duplication/inconsistency кейсов между VS-EMBED viz и adjacent text. Принцип: `viz > dry text` (iter 8+) — текст не должен пере-объяснять то, что уже показано в VS-EMBED. Sub-items: **A** (Part 9 Quality Scale) ✅ FIXED iter 26. **B** (Part 1 p1_card_overview table «Функция» col) ⏳ pending. **C** (Part 2 p2_basic_anchors table «Описание» col) ⏳ pending. **D** (Part 4 p4_spine_overview intro) ⏳ pending. **E** (Part 5 OCEAN Context Limits table + semantic inconsistency) ⏳ pending — needs rule alignment. **F** (Part 6 p6_cot_tiers table) ⏳ pending. **G** (Part 8 per-AP sections — by design) ⏳ pending. **H** (Part 10 E15 callouts — intentional annotation) ⏳ pending.
+
+### Changed (iter 26 — KI#18-A fix: Part 9 Quality Scale table deduplicated)
+- **`src/master/part_09.html` edited** (lines 263–282) — Quality Scale table deduplicated against E14 viz: (i) «Признаки» column REMOVED (was duplicating E14 zone-detail__criteria text); (ii) «Плохой» RENAMED → «Слабый» (align with E14 viz tier label, naming inconsistency fix); (iii) «Отличный» row ADDED (was missing — 4th tier in E14 viz, absent from old 3-row table); (iv) intro paragraph ADDED linking to E14 viz above; (v) Recommendation callout updated (mentions Слабый + Отличный). part_09: 582 → 583 строк (+1).
+- **`docs/canon/part_09.md` edited** — §9.1 table rewritten (4 rows + «Типичные паттерны ошибок» col). Front-matter Last synced → 2026-07-01 (iter 26), Migration status + ✅ iter 26 DGA fix. Migration history row 4 updated (3-row → 4-row, Плохой → Слабый, +Отличный, drop Признаки col).
+- **`parts/part_09.html` regenerated** — root fallback (build artifact, timestamp updated, hash unchanged).
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 0 inline styles, expected content-outside-section warnings).
+- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
+- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone — Deployed Guide Audit (DGA) Phase 1 STARTED
+**Новый цикл работы по запросу user:** пошаговая проверка собранного при деплое гайда на дублирование смысловой и функциональной нагрузки между текстом и визуализациями. Принцип `viz > dry text` (iter 8+) — сохраняется. **KI#18 🟡 ACTIVE — 1/8 fixed (A), 7 pending iter 27+ (B–H).** iter 27 priority: B (Part 1) + C (Part 2) — lowest risk. Then E (Part 5 — needs rule alignment) + F (Part 6). G + H likely keep-by-design.
+
+---
+
 ## [9.1.25] - 2026-07-01
 
 ### Added (iter 25 — Phase 4 SVG integration: E18 Greeting Algorithm)
@@ -54,24 +79,7 @@
 
 ## [9.1.23] - 2026-06-30
 
-### Added (iter 23 — KI#13 Part 7A: inline styles → CSS classes, semantic grouping)
-- **`src/assets/vs-styles.css` SECTION 6 extended** — +33 строки (9 новых селекторов с `vs-ki13-p7a-*` sub-namespace). Groups: (a) 4 semantic color overrides `.vs-ki13-p7a-text-{violet/muted/danger/success}` — 10 применений across E16/E17/E02 (cells, labels, values), (b) 3 badge sizing/spacing `.vs-ki13-p7a-badge-meta` (font-size:10px) + `.vs-ki13-p7a-badge-indent` (margin-left:4px) + `.vs-ki13-p7a-badge-indent-top` (margin-top:4px) — 7 применений, (c) 1 state `.vs-ki13-p7a-template-hidden` (display:none — template-b initial state, JS toggle compatible via inline style assignment override), (d) 1 border `.vs-ki13-p7a-border-cyan` (pipeline-node__box accent).
-
-### Changed (iter 23 — KI#13 inline style migration)
-- **`src/master/part_07a.html` edited** — 19 inline `style=` attributes → 9 CSS classes (0 remaining). E16 Author's Note: 4→0 (badge font-size, template-b display:none, GHOST-activation label color, E06 badge font-size). E17 Sampling Parameters: 8→0 (param-row N/A muted, 4 checklist cell colors: danger/muted×2/violet/success×3). E02 Assembly Pipeline: 7→0 (SPINE label violet, badge margin-top, pipeline-node__box border-cyan, 4 cross-ref badges margin-left).
-
-### Validation
-- `pnpm run validate:master` ✅ PASSED (0 errors, 18 inline styles remaining в Part 9+10).
-- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified, vs-styles.css propagated to dist/assets/ + root assets/).
-- `pnpm run validate` ✅ All 8 gates passed.
-- `pnpm run test:unit` ✅ 43/43 pass.
-- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
-- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
-- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
-- `pnpm run qa:doc-versions` ✅ PASS.
-
-### Milestone
-**KI#13 progress:** 105/123 inline styles fixed (85%). Part 1-7A ✅ DONE. 18 remaining в Part 9+10 (Part 9: 6, Part 10: 12). Active KI: KI#13 (MEDIUM). iter 24: KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles. Part 10 имеет 11 positional `top:Npx; right:20px;` styles — кандидат на generic class + per-instance modifier.
+> iter 23 compressed — KI#13 Part 7A: 19 inline styles → 9 CSS селекторов `vs-ki13-p7a-*` (semantic grouping: 4 color overrides + 3 badge sizing/spacing + 1 template-hidden state + 1 border-cyan). part_07a: 19→0 (E16: 4, E17: 8, E02: 7). Total KI#13: 105/123 (85%). Build hash fd3d96d3 unchanged.
 
 ---
 
