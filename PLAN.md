@@ -196,18 +196,12 @@ Stage Summary:
 
 **Iter 1–19 (compressed — см. CHANGELOG [9.1.1]..[9.1.19], worklog.md one-liners, git history):** iter 1 — AGENT_NAVIGATION/STATUS/worklog/PLAN created. iter 2-3 — KI#1..#9 closed, stale docs/orphan scripts removed. iter 4-5 — KI#10..#12 (qa:* wiring, tokens.json, inline scripts → widget JS), KI#13 NEW (123 inline styles). iter 6 — CONTENT_RESTRUCTURE_PLAN.md (Canon strategy), KI#14 NEW. iter 7 — Canon scaffold + Part 4 pilot, KI#15 CLOSED. iter 8 — Part 4 migration (-13%). iter 9 — Part 4 validation, KI#16 NEW. iter 10 — Canon Part 7A, KI#17 NEW. iter 11 — Part 7A migration (-2.7%). iter 12 — Canon Part 8 + migrate. iter 13 — Canon Part 9 + migrate. iter 14 — Canon Part 1+2+3 + migrate. iter 16 — Canon Part 5+6+7B+10 + migrate (**Canon migration COMPLETE**). iter 18 — final cleanup (3 Appendix Canon files + content_map/terminology cleanup). iter 19 — KI#16 fix (qa:csp PASS).
 
-**Iter 20 ✅ DONE:** KI#13 Part 1+2 (57/123 inline styles → 28 CSS classes, `vs-ki13-*` prefix). KI#17 CLOSED. SVG extracts audit (0 orphans). Build hash fd3d96d3.
+**Iter 24 ✅ DONE (KI#13 CLOSED):** KI#13 Part 9+10 (18/123 inline styles → 19 новых CSS селекторов с `vs-ki13-p9-*` и `vs-ki13-p10-*` sub-namespaces, semantic grouping). part_09: 6→0 (E14 Quality Scale — thermometer indicator + 4 zone-title color modifiers + quick-checks panel). part_10: 12→0 (E15 Annotated Blueprint — 11 callouts positional via shared base `.vs-ki13-p10-callout-pos` + 11 per-instance top modifiers, DRY pattern eliminating `right:20px` duplication, + 1 card-block-accent). Total KI#13: **123/123 fixed (100%) — CLOSED.** `src/assets/vs-styles.css` +52 строки (SECTION 6, total 60 селекторов). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged.
 
-**Iter 21 ✅ DONE:** KI#13 Part 3+4 (23/123 inline styles → 18 новых CSS селекторов с `vs-ki13-*` prefix). Phase 4 SVG integration analysis complete (Canon migration уже удалил major duplicates; 3 retained infographics intentional; Part 7B candidate для iter 23+). Build hash fd3d96d3 unchanged.
-
-**Iter 22 ✅ DONE:** KI#13 Part 5+6 (6/123 inline styles → 5 новых CSS селекторов `vs-ki13-context-limits-note` + `vs-ki13-cot-panel/heading/text/strong`). part_05: 1→0, part_06: 5→0. Build hash fd3d96d3 unchanged.
-
-**Iter 23 ✅ DONE:** KI#13 Part 7A (19/123 inline styles → 9 новых CSS селекторов с `vs-ki13-p7a-*` sub-namespace, semantic grouping: 4 color overrides + 3 badge sizing/spacing + 1 template-hidden state + 1 border-cyan). part_07a: 19→0 (E16: 4→0, E17: 8→0, E02: 7→0). JS toggle compatibility verified (vs-e16-author-note.js). Total KI#13: 105/123 fixed (85%). `src/assets/vs-styles.css` +33 строки (SECTION 6). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged.
-
-**Iter 24+ — что осталось:**
-1. **iter 24** — KI#13 Part 9 (6) + Part 10 (12) = 18 inline styles. Part 9: 1 positional `bottom:50%`, 4 color overrides, 1 panel max-width. Part 10: 11 positional `top:Npx; right:20px;` styles — кандидат на generic class + per-instance modifier или single selector per position, 1 border-left+violet.
-2. **iter 25 (optional, low priority)** — Phase 4 SVG integration: Part 7B Greeting algorithm infographic → new VS element E18 (requires `visual-system/elements/` prototyping first).
+**Iter 25+ — что осталось:**
+1. **iter 25 (optional, low priority)** — Phase 4 SVG integration: Part 7B Greeting algorithm infographic → new VS element E18 (requires `visual-system/elements/` prototyping first).
+2. **Все Known Issues (KI#1..KI#17) ✅ CLOSED.** Активных KI нет.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 3 Appendix ✅ MIGRATED, Canon COMPLETE).
 
-**KI#1..KI#12 + KI#14 + KI#15 + KI#16 + KI#17 закрыты. KI#13 (18 inline styles remaining в Part 9+10) — ACTIVE, continue iter 24+.**
+**Все Known Issues закрыты.** KI#1..KI#17 ✅ CLOSED. KI#13 ✅ CLOSED iter 24 (123/123 inline styles → CSS classes). Активных KI нет.

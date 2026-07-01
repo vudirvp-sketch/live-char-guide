@@ -3568,3 +3568,54 @@ a:hover {
 /* Overrides .pipeline-node__box border-color (base: var(--border)) for the
    assembly-pipeline terminal node. */
 .vs-ki13-p7a-border-cyan { border-color: var(--accent-cyan); }
+
+/* --- Part 9 — E14 Quality Scale zone colors + indicator + quick-checks panel (iter 24) --- */
+/* E14 thermometer indicator default position: mid-thermometer (50% — boundary
+   between "good" (50–85%) and "excellent" (85–100%) zones). Base .indicator
+   has no `bottom` value set in SECTION 4 (line ~2612), so this is the default
+   visual state before any JS scroll-driven update. */
+.vs-ki13-p9-indicator-mid { bottom: 50%; }
+
+/* Per-zone title color overrides for .zone-detail__title (base in SECTION 4
+   line ~2666 has no color set). Mirrors the parent .zone-detail--{tier}
+   border-left-color so the title text matches its zone accent. */
+.vs-ki13-p9-zone-title--excellent { color: var(--accent-violet); }
+.vs-ki13-p9-zone-title--good      { color: var(--accent-cyan); }
+.vs-ki13-p9-zone-title--poor      { color: var(--accent-amber); }
+.vs-ki13-p9-zone-title--critical  { color: var(--danger); }
+
+/* Quick-checks panel sizing: max-width + centered horizontal margin. Overrides
+   base .quick-checks (SECTION 4 line ~2688) which has only margin-top:lg,
+   no max-width — without this, panel stretches edge-to-edge on wide screens. */
+.vs-ki13-p9-quick-checks {
+  max-width: 700px;
+  margin: var(--gap-xl) auto 0;
+}
+
+/* --- Part 10 — E15 Annotated Blueprint callout positions + card-block accent (iter 24) --- */
+/* All annotation callouts around the Elena card share right:20px (offset from
+   the right edge of .blueprint-area). position:absolute comes from base
+   .callout (SECTION 4 line ~2873). Per-instance top:Npx modifiers below pin
+   each callout to a specific y-coordinate matching the corresponding card block. */
+.vs-ki13-p10-callout-pos { right: 20px; }
+
+.vs-ki13-p10-callout-pos--top-10  { top: 10px; }
+.vs-ki13-p10-callout-pos--top-20  { top: 20px; }
+.vs-ki13-p10-callout-pos--top-100 { top: 100px; }
+.vs-ki13-p10-callout-pos--top-120 { top: 120px; }
+.vs-ki13-p10-callout-pos--top-130 { top: 130px; }
+.vs-ki13-p10-callout-pos--top-250 { top: 250px; }
+.vs-ki13-p10-callout-pos--top-260 { top: 260px; }
+.vs-ki13-p10-callout-pos--top-280 { top: 280px; }
+.vs-ki13-p10-callout-pos--top-290 { top: 290px; }
+.vs-ki13-p10-callout-pos--top-380 { top: 380px; }
+.vs-ki13-p10-callout-pos--top-390 { top: 390px; }
+
+/* Examples+Anchors card-block accent: violet left border + extra left padding
+   to visually separate the combined block from regular card-blocks (which
+   only have border-bottom). Base .card-block in SECTION 4 line ~2846 has no
+   border-left, so this is an additive accent, not an override. */
+.vs-ki13-p10-card-block-accent {
+  border-left: 2px solid var(--accent-violet);
+  padding-left: var(--gap-md);
+}

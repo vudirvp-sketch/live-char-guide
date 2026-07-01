@@ -1,5 +1,29 @@
 # Changelog
 
+## [9.1.24] - 2026-07-01
+
+### Added (iter 24 — KI#13 Part 9+10: inline styles → CSS classes, semantic grouping)
+- **`src/assets/vs-styles.css` SECTION 6 extended** — +52 строки (19 новых селекторов с `vs-ki13-p9-*` и `vs-ki13-p10-*` sub-namespaces, consistent with iter 23 `vs-ki13-p7a-*`). Groups: (a) Part 9 E14 Quality Scale (6 селекторов): 1 indicator position `.vs-ki13-p9-indicator-mid` (bottom:50%, default mid-thermometer between "good" 50–85% and "excellent" 85–100% zones) + 4 zone-title color modifiers `.vs-ki13-p9-zone-title--{excellent/good/poor/critical}` (mirror parent `.zone-detail--{tier}` border-left-color: violet/cyan/amber/danger) + 1 quick-checks panel `.vs-ki13-p9-quick-checks` (max-width:700px + centered margin — overrides base which only has margin-top:lg); (b) Part 10 E15 Annotated Blueprint (13 селекторов): 1 shared base `.vs-ki13-p10-callout-pos` (right:20px, DRY pattern eliminating `right:20px` duplication across 11 callouts) + 11 per-instance top modifiers `.vs-ki13-p10-callout-pos--top-{10/20/100/120/130/250/260/280/290/380/390}` (position:absolute comes from base `.callout`, each modifier pins callout to y-coordinate matching its card block) + 1 card-block-accent `.vs-ki13-p10-card-block-accent` (border-left:2px solid violet + padding-left:gap-md — additive accent for Examples+Anchors combined block).
+
+### Changed (iter 24 — KI#13 inline style migration)
+- **`src/master/part_09.html` edited** — 6 inline `style=` attributes → 6 CSS classes (0 remaining). E14 Quality Scale: (i) thermometer indicator default `bottom:50%` → `.vs-ki13-p9-indicator-mid`, (ii) 4 zone-detail__title color overrides (violet/cyan/amber/danger for Отличный/Хороший/Слабый/Критический) → 4 zone-title color modifier classes, (iii) quick-checks panel `max-width:700px; margin:auto+xl` → `.vs-ki13-p9-quick-checks`.
+- **`src/master/part_10.html` edited** — 12 inline `style=` attributes → 13 CSS classes (0 remaining). E15 Annotated Blueprint: (i) 11 callouts (4 structure + 2 anchors + 2 spine + 3 directives) `top:Npx; right:20px;` → shared `.vs-ki13-p10-callout-pos` base + per-instance `.vs-ki13-p10-callout-pos--top-N` modifier (DRY pattern), (ii) Examples+Anchors card-block `border-left:2px solid violet; padding-left:gap-md` → `.vs-ki13-p10-card-block-accent`.
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, **0 inline styles** — was 18).
+- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified, vs-styles.css propagated to dist/assets/ + root assets/).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
+- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone — KI#13 CLOSED
+**KI#13 progress:** 123/123 inline styles fixed (**100%**). Все 10 Parts ✅ DONE (Part 1-2 iter 20, Part 3-4 iter 21, Part 5-6 iter 22, Part 7A iter 23, Part 9-10 iter 24). **Все master HTML — 0 inline styles.** SECTION 6 vs-styles.css total: 60 селекторов (28+18+5+9+19). **KI#13 ✅ CLOSED.** Все Known Issues (KI#1..KI#17) ✅ CLOSED. Active KI нет. iter 25 (optional, low priority): Phase 4 SVG integration — Part 7B Greeting algorithm → new VS element E18 (requires `visual-system/elements/` prototyping first).
+
+---
+
 ## [9.1.23] - 2026-06-30
 
 ### Added (iter 23 — KI#13 Part 7A: inline styles → CSS classes, semantic grouping)
@@ -47,34 +71,11 @@
 
 ---
 
-## [9.1.21] - 2026-06-24
-
-### Added (iter 21 — KI#13 Part 3+4: inline styles → CSS classes)
-- **`src/assets/vs-styles.css` SECTION 6 extended** — +49 строк (18 новых селекторов с `vs-ki13-*` prefix). Groups: (a) E07 Voice Hierarchy inset (1 селектор: `.vs-ki13-inset-text strong` — descendant selector для 2 `<strong>` elements), (b) E05 SPINE causal chain panel (4 селектора: spine-chain-panel, spine-chain-heading, spine-chain-text, spine-chain-text strong), (c) E06 GHOST Layers ring animation delays (10 селекторов: ring-delay-{0,200,400,500,600,650,700,750,800,850}), (d) E06 GHOST Layers ring label titles (3 селектора: ring-title--g3/g2/g1).
-- **Phase 4 SVG integration analysis completed** — Canon migration (iter 7–18) already removed all major textual duplicates of VS-EMBEDs. 3 retained infographics (2 part_04 + 1 part_07b) — unique, intentional retention (iter 8 principle «viz > dry text»). Part 7B (0 VS-EMBED) identified as candidate for new VS element (E18+) in iter 23+, low priority, requires visual-system/elements/ prototyping first.
-
-### Changed (iter 21 — KI#13 inline style migration)
-- **`src/master/part_03.html` edited** — 2 inline `style=` attributes → CSS classes (0 remaining). E07 VS-EMBED Storage vs Influence inset: `<div class="inset-box__text">` → `<div class="inset-box__text vs-ki13-inset-text">`. 2 `<strong style="color:var(--text-primary);">` → `<strong>` (covered by descendant selector `.vs-ki13-inset-text strong`).
-- **`src/master/part_04.html` edited** — 21 inline `style=` attributes → CSS classes (0 remaining). (i) E05 SPINE causal chain panel: 8 inline styles → 4 selectors (panel + heading + text + 5 strongs covered by descendant selector). (ii) E06 GHOST Layers SVG: 10 `transition-delay` inline styles → 10 `vs-ki13-ring-delay-*` classes (4 circles + 6 text elements, staggered animation choreography preserved). (iii) E06 GHOST Layers HTML ring labels: 3 color inline styles → 3 `vs-ki13-ring-title--g3/g2/g1` classes.
-
-### Validation
-- `pnpm run validate:master` ✅ PASSED (0 errors, 43 inline styles remaining в Part 5-10).
-- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified, vs-styles.css propagated to dist/assets/ + root assets/).
-- `pnpm run validate` ✅ All 8 gates passed.
-- `pnpm run test:unit` ✅ 43/43 pass.
-- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
-- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
-- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
-- `pnpm run qa:doc-versions` ✅ PASS.
-
-### Milestone
-**KI#13 progress:** 80/123 inline styles fixed (65%). Part 1+2+3+4 ✅ DONE. 43 remaining в Part 5-10. iter 22+: KI#13 Part 5+6 (6 inline styles).
-
----
-
 ## Previous iterations (compressed)
 
 > Полная история — в `worklog.md` one-liners и git log. Ниже — краткая сводка для контекста.
+
+- **[9.1.21] (iter 21, 2026-06-24):** KI#13 Part 3+4 (23/123 inline styles → 18 CSS селекторов `vs-ki13-*` в vs-styles.css SECTION 6, +49 строк). part_03: 2→0, part_04: 21→0. Phase 4 SVG integration analysis complete (Canon migration уже удалил major duplicates; 3 retained infographics intentional; Part 7B candidate для iter 23+ optional). Build hash fd3d96d3 unchanged.
 
 - **[9.1.20] (iter 20, 2026-06-24):** KI#13 Part 1+2 baseline (57/123 inline styles → 28 CSS classes `vs-ki13-*` в vs-styles.css SECTION 6). part_01: 48→0, part_02: 9→0. **KI#17 CLOSED.** SVG extracts audit (0 orphans, все 17 elements embedded). Build hash fd3d96d3.
 - **[9.1.19] (iter 19, 2026-06-24):** KI#16 fix — `qa:csp` PASS. 2 inline `<script>` в `src/shell/index.html` → external widget JS (`js-flag.js` + `mermaid-init.js`). Build hash `df283246` → `fd3d96d3`. **KI#16 CLOSED.**
