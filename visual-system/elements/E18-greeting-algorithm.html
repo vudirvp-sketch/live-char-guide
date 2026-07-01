@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E18 — Алгоритм Greeting | Визуальная система «Живой справочник персонажа»</title>
+  <link rel="stylesheet" href="../DESIGN-TOKENS.css">
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/patterns.css">
+  <link rel="stylesheet" href="../shared/utilities.css">
+  <style>
+    .pipeline-container {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: var(--gap-lg);
+    }
+
+    /* Main flow row */
+    .pipeline-main {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: nowrap;
+      min-width: max-content;
+    }
+
+    .pipeline-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pipeline-node__box {
+      background: var(--bg-panel);
+      border: var(--line-width) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      min-width: 140px;
+      text-align: center;
+      transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+      cursor: default;
+    }
+
+    .pipeline-node__box:hover {
+      border-color: var(--border-active);
+      box-shadow: -2px 0 8px var(--cyan-15);
+    }
+
+    .pipeline-node__label {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .pipeline-node__sublabel {
+      font-family: var(--font-micro);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .pipeline-node__step {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+
+    /* Code line — concrete technique sequence (Запах → Звук → Ощущение).
+       Visual hierarchy: label (bold) > sublabel (muted caption) > code (mono on dark bg). */
+    .pipeline-node__code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      background: var(--bg-deep);
+      border-radius: var(--radius-sm);
+      padding: var(--gap-sm) var(--gap-md);
+      margin-top: var(--gap-xs);
+      word-break: break-word;
+    }
+
+    /* SPINE FLAW step — violet border (Тело FLAW ссылается на SPINE) */
+    .pipeline-node__box--spine {
+      border-color: var(--violet-30);
+    }
+    .pipeline-node__box--spine:hover {
+      box-shadow: -2px 0 8px var(--violet-15);
+    }
+
+    /* Forward arrows between nodes */
+    .pipeline-arrow {
+      width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-cyan);
+      font-size: 16px;
+    }
+
+    .pipeline-arrow svg {
+      width: 28px;
+      height: 12px;
+    }
+
+    /* Scroll animations */
+    .pipeline-node {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity var(--duration-base) var(--ease-out-expo),
+                  transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    .pipeline-arrow {
+      opacity: 0;
+      transition: opacity var(--duration-fast) var(--ease-out-expo);
+    }
+
+    .pipeline-node.is-visible,
+    .pipeline-arrow.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Stagger delays */
+    .pipeline-node:nth-child(1) { transition-delay: 0ms; }
+    .pipeline-node:nth-child(3) { transition-delay: 100ms; }
+    .pipeline-node:nth-child(5) { transition-delay: 200ms; }
+    .pipeline-node:nth-child(7) { transition-delay: 300ms; }
+
+    @media (max-width: 768px) {
+      .pipeline-main {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .pipeline-arrow {
+        transform: rotate(90deg);
+        width: auto;
+        height: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .pipeline-arrow.is-visible {
+        transform: rotate(90deg) translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="mini-map" role="navigation" aria-label="Element navigation">
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Основа</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E01">E01</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E02">E02</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Механики ядра</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E03">E03</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E04">E04</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E07">E07</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E08">E08</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Личность</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E05">E05</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E06">E06</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E09">E09</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E10">E10</span>
+    </div>
+    <div class="mini-map__section">
+      <span class="mini-map__section-label">Продвинутые</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E11">E11</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E12">E12</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E13">E13</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E14">E14</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E15">E15</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E16">E16</span>
+      <span class="mini-map__el" tabindex="0" role="button" aria-label="E17">E17</span>
+      <span class="mini-map__el mini-map__el--active" tabindex="0" role="button" aria-current="true" aria-label="E18 (текущий)">E18</span>
+    </div>
+  </nav>
+
+  <header>
+    <span class="element-number">E18</span>
+    <h1 class="element-title">Алгоритм Greeting</h1>
+    <p class="element-subtitle">Паттерн: P2 — Поток / Пайплайн &middot; Источник: Part 7B (Greeting Message)</p>
+  </header>
+
+  <main class="element-content p-flow" style="margin-top: var(--gap-xl);">
+
+    <div class="pipeline-container">
+
+      <!-- Main flow: 4 steps -->
+      <div class="pipeline-main">
+
+        <!-- Step 1: Sensory Anchor -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 1</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">SENSORY ANCHOR</div>
+            <div class="pipeline-node__sublabel">Пред-настройка восприятия</div>
+            <div class="pipeline-node__code">Запах → Звук → Ощущение</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 2: Тело FLAW (SPINE connection — violet) -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 2</div>
+          <div class="pipeline-node__box pipeline-node__box--spine">
+            <div class="pipeline-node__label">ТЕЛО FLAW</div>
+            <div class="pipeline-node__sublabel">Физическое проявление через FLAW</div>
+            <div class="pipeline-node__code">Поза → Напряжение → Привычка</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 3: Реплика -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 3</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">РЕПЛИКА</div>
+            <div class="pipeline-node__sublabel">Первая фраза персонажа</div>
+            <div class="pipeline-node__code">Голос → Тон → Лексика</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 4: Крючок -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 4</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">КРЮЧОК</div>
+            <div class="pipeline-node__sublabel">Вовлечение {{user}} в сцену</div>
+            <div class="pipeline-node__code">Вопрос → Действие → Провокация</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="element-links" style="max-width:900px; margin: var(--gap-xl) auto;">
+    <span class="badge badge--violet">SPINE Framework: E05</span>
+    <span class="badge badge--cyan">Embodiment Protocol: E04</span>
+    <span class="badge badge--cyan">Behavioral Anchor: E03</span>
+    <span class="badge badge--muted">Источник: Part 7B</span>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll('.scroll-enter').forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.scroll-enter').forEach(el => observer.observe(el));
+
+      // Клавиатурная навигация мини-карты
+      document.querySelectorAll('.mini-map__el').forEach(el => {
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const target = el.textContent.trim();
+            // В интегрированной версии будет навигация к элементу
+            console.log('Navigate to:', target);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

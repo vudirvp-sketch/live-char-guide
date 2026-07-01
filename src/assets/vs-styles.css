@@ -617,7 +617,7 @@ a:hover {
 
 
 /* ============================================================
-   SECTION 5 — Component Extracts E01–E17
+   SECTION 5 — Component Extracts E01–E18
    Source: visual-system/integration/component-extracts/
    ============================================================ */
 
@@ -3315,6 +3315,29 @@ a:hover {
         grid-template-columns: 1.5fr 1fr 1fr 1fr;
       }
     }
+
+
+/* --- E18 — Greeting Algorithm (iter 25, Phase 4 SVG integration) ---
+   Source: elements/E18-greeting-algorithm.html
+   Pattern: P2 — Flow/Pipeline (same as E02).
+   Reuses .pipeline-container, .pipeline-main, .pipeline-node, .pipeline-node__box,
+   .pipeline-node__label, .pipeline-node__sublabel, .pipeline-node__step,
+   .pipeline-node__box--spine, .pipeline-arrow from E02 extract above.
+   Only .pipeline-node__code is E18-specific — adds a third content line
+   (concrete technique sequence like "Запах → Звук → Ощущение") with mono font
+   on dark background, visually distinct from .pipeline-node__sublabel.
+   Same pattern as .stair-step__format from E11. */
+.pipeline-node__code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  background: var(--bg-deep);
+  border-radius: var(--radius-sm);
+  padding: var(--gap-sm) var(--gap-md);
+  margin-top: var(--gap-xs);
+  word-break: break-word;
+}
 
 
 /* ============================================================

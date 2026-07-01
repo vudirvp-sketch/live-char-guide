@@ -1,10 +1,10 @@
 # Part 7B: Lorebook, Greeting & Compatibility
 
-> **Canonical source for:** `src/master/part_07b.html` (371 строка, 5 секций)
-> **VS elements (embedded):** None (Part 7B использует inline infographic "Алгоритм Greeting" + widgets вместо VS-EMBED).
+> **Canonical source for:** `src/master/part_07b.html` (424 строки, 5 секций; iter 25: 371 → 424, +53 — E18 VS-EMBED markup)
+> **VS elements (embedded):** E18 — Greeting Algorithm (iter 25, replaced textual `infographic inf-pipeline` block in `p7b_greeting`). Source: `visual-system/elements/E18-greeting-algorithm.html`.
 > **Sections (5):** `p7b_structured_inject`, `p7b_greeting`, `p7b_lorebook_basics`, `p7b_lorebook_mechanics`, `p7b_lorebook_advanced`
-> **Last synced:** 2026-06-24 (iter 16 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 16)
+> **Last synced:** 2026-07-01 (iter 25 — E18 VS-EMBED integrated, textual infographic replaced)
+> **Migration status:** ✅ MIGRATED (iter 16) + ✅ E18 integrated (iter 25)
 
 ---
 
@@ -282,7 +282,7 @@
 | # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
 |---|-------------------|----------|--------|--------------------------|
 | 1 | `<section data-section="p7b_structured_inject">` h3 + intro + h4 Правила + 3-bullet list + h4 Пример + ILLUSTRATION label + pre code | Оставить | DONE | Canonical §7B.1 — unique Structured Inject technique |
-| 2 | `<section data-section="p7b_greeting" data-toc-nav>` h3 + intro + `<div class="infographic">` Алгоритм Greeting (4-step inf-pipeline) + Sensory Anchor paragraph + `<details>` "Разобранный пример: Greeting Елены" + h4 Правила Greeting + 4-bullet list | Оставить | DONE | Canonical §7B.2 — infographic = visualization of algorithm, example = concrete application (complement, не duplicate). Sensory Anchor paragraph + rules list — unique content. |
+| 2 | `<section data-section="p7b_greeting" data-toc-nav>` h3 + intro + VS-EMBED E18 (4-step pipeline: Sensory Anchor → Тело FLAW → Реплика → Крючок) + Sensory Anchor paragraph + `<details>` "Разобранный пример: Greeting Елены" + h4 Правила Greeting + 4-bullet list | Оставить + E18 (iter 25) | DONE | Canonical §7B.2 — VS-EMBED E18 replaced textual `infographic inf-pipeline` (iter 25, migration principle "viz > dry text" — VS-EMBED canonical visualization). Sensory Anchor paragraph + Elena example + rules list — unique content, retained. |
 | 3 | `<section data-section="p7b_lorebook_basics" data-toc-nav>` h3 + intro + h4 Структура записи + 4-row table + h4 Рекомендованные параметры + 3-row params table + RECOMMENDATION callout + h4 Правила Lorebook + 3-bullet list + 3 `<details>` examples (пожар, Марина, город) + `<details>` EVENT compatibility 5-row table + bridge paragraph | Оставить | DONE | Canonical §7B.3 — unique Lorebook basics + 3 Elena examples + EVENT compatibility table |
 | 4 | `<section data-section="p7b_lorebook_mechanics">` h3 + intro + RECOMMENDATION callout + RULE callout + h4 Таблица механик + 3-row mechanics table + h4 Практика + 6-row practice table + `<details>` Structured Inject в content + 2 pre code blocks + bridge paragraph + RECOMMENDATION callout | Оставить | DONE | Canonical §7B.4 — unique mechanics tables + Structured Inject in content example |
 | 5 | `<section data-section="p7b_lorebook_advanced">` h3 + intro + h4 Таблица продвинутых механик + 3-row advanced mechanics table + RULE callout (Fatigue) + RULE callout (False Memory) + h4 Контекстные бюджеты + 3-row context budget table + `<details>` Чеклист интеграции + bridge paragraph + part-resume | Оставить | DONE | Canonical §7B.5 — unique advanced mechanics + 2 critical RULE callouts + integration checklist |
@@ -297,13 +297,20 @@
 - §7B.4 — 3 mechanics (Range-Cascade / Combo-Trigger / Context Filter) + 6-row practice table + Structured Inject in content example.
 - §7B.5 — 3 advanced mechanics (Fatigue / Meta-Lore / False Memory) + 2 critical RULE callouts + 3-row context budget + integration checklist.
 
-Итого: 371 → 371 строк (0%, ~0%). Принцип `viz > dry text` — infographic "Алгоритм Greeting" сохранена (unique visualization of 4-step algorithm, не дублирует example ниже — abstract vs concrete).
+Итого: 371 → 424 строк (+53, E18 VS-EMBED markup). Принцип `viz > dry text` — textual infographic заменена на VS-EMBED E18 (iter 25, canonical visualization). Sensory Anchor paragraph + Elena example + rules list — retained (unique content).
 
-### Validation gates (iter 16 — PASSED)
+### iter 25 update — E18 VS-EMBED integration
 
-- [x] `pnpm run validate:master` — 0 errors, KI#13 baseline warnings, no regression.
-- [x] `pnpm run build` — SUCCESS.
+В iter 25 textual `infographic inf-pipeline` block (lines 33–61 в pre-iter-25 `src/master/part_07b.html`) заменён на VS-EMBED E18 (Greeting Algorithm). E18 — new VS element: 4-step pipeline (Sensory Anchor → Тело FLAW → Реплика → Крючок) с SVG arrows, reuse E02 `.pipeline-*` classes + new `.pipeline-node__code` for technique sequence line. Step 2 (Тело FLAW) uses `.pipeline-node__box--spine` (violet — SPINE connection). Standalone prototype: `visual-system/elements/E18-greeting-algorithm.html`. Component extracts: `visual-system/integration/component-extracts/E18-{visual.html,styles.css,script.js}`. E18 styles appended to `src/assets/vs-styles.css` SECTION 5 (header updated E01–E17 → E01–E18).
+
+### Validation gates (iter 25 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, 0 inline styles, expected content-outside-section warnings (same as E02 in part_07a).
+- [x] `pnpm run build` — SUCCESS. Hash `fd3d96d3` unchanged (shell index.html not modified).
 - [x] `pnpm run validate` — все 8 gates passed.
 - [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors.
-- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 16)`.
+- [x] `pnpm run lint` — 0 errors (13 warnings pre-existing).
+- [x] `pnpm run qa:csp` — PASS (0 inline scripts).
+- [x] `pnpm run qa:bundle` — PASS (7.2KB).
+- [x] `pnpm run qa:doc-versions` — PASS.
+- [x] Front-matter updated: `Last synced: 2026-07-01 (iter 25)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ E18 integrated (iter 25)`.

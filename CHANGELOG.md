@@ -1,5 +1,33 @@
 # Changelog
 
+## [9.1.25] - 2026-07-01
+
+### Added (iter 25 — Phase 4 SVG integration: E18 Greeting Algorithm)
+- **`visual-system/elements/E18-greeting-algorithm.html` created** (new VS element, ~280 строк) — E02-pattern 4-step pipeline (Sensory Anchor → Тело FLAW → Реплика → Крючок) with SVG arrows, scroll animations, mini-map nav with E18 active in «Продвинутые» group. Step 2 (Тело FLAW) uses `.pipeline-node__box--spine` (violet — SPINE connection). Each node has 3 content lines: `pipeline-node__label` (bold) + `pipeline-node__sublabel` (muted caption) + `pipeline-node__code` (NEW — concrete technique sequence in mono font on dark bg, same pattern as E11 `.stair-step__format`). Footer badges: E05 (SPINE), E04 (Embodiment), E03 (Behavioral Anchor).
+- **`visual-system/integration/component-extracts/E18-{visual.html,styles.css,script.js}` created** (3 new files) — visual.html (pipeline-container + 4 nodes + 3 arrows), styles.css (only `.pipeline-node__code` + 4-node stagger delays — rest reuses E02 classes), script.js (IntersectionObserver, same as E02-script.js, mini-map keyboard nav removed per extract convention).
+- **`src/assets/vs-styles.css` SECTION 5 extended** — header "Component Extracts E01–E17" → "E01–E18", +12 строк (E18 comment block + `.pipeline-node__code` style: font-family mono, font-size 11px, color text-secondary, line-height 1.5, background bg-deep, border-radius radius-sm, padding gap-sm gap-md, margin-top gap-xs, word-break break-word).
+- **`visual-system/integration/INTEGRATION-MAP.md` updated** — +E18 row в mapping table (`E18 | E18-greeting-algorithm.html | part_07b.html | before <section id="p7b_greeting"> | CSS pipeline + SVG arrows (iter 25)`) + E18 extracts listed в structure tree.
+
+### Changed (iter 25 — Master HTML Part 7B integration + Canon update)
+- **`src/master/part_07b.html` edited** — textual `infographic inf-pipeline` block (lines 33–61 pre-iter-25) → VS-EMBED E18 (lines 28–110 iter 25). Migration principle «viz > dry text» applied — VS-EMBED = canonical visualization, textual infographic = simpler predecessor. Intro `<p>` updated: added reference to VS-EMBED E18. Sensory Anchor paragraph + Elena example `<details>` + rules h4+ul — retained (unique content). part_07b: 371 → 424 строк (+53).
+- **`docs/canon/part_07b.md` edited** — front-matter (VS elements embedded: E18, Last synced: 2026-07-01 iter 25, Migration status + ✅ E18 integrated iter 25, line count 371 → 424). §7B.2 row 2 retention note updated (VS-EMBED E18 replaced textual infographic, iter 25). +iter 25 update section (E18 description) + validation gates (iter 25 — PASSED).
+- **`assets/vs-styles.css`, `parts/part_07b.html`, `index.html` regenerated** — root fallbacks (build artifact — timestamp updated, hash unchanged).
+
+### Validation
+- `pnpm run validate:master` ✅ PASSED (0 errors, 0 inline styles, expected content-outside-section warnings — same as E02 in part_07a).
+- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell index.html not modified, part_07b changes propagated to dist/parts/ + root parts/).
+- `pnpm run validate` ✅ All 8 gates passed.
+- `pnpm run test:unit` ✅ 43/43 pass.
+- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
+- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
+- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
+- `pnpm run qa:doc-versions` ✅ PASS.
+
+### Milestone — Phase 4 SVG integration COMPLETE
+**Phase 4 SVG integration — DONE.** Все 3 Phase 4 candidates analyzed (iter 21): Part 4 SPINE→Anchors + Part 4 Navigation pipeline — retained (unique, iter 8/18 retention confirmed). Part 7B Greeting algorithm — ✅ replaced с E18 (iter 25). Canon migration (iter 7–18) handled bulk of textual→VS-EMBED replacement. **VS elements registry: 18 (E01–E18).** Все planned work (Canon migration iter 7–18, KI#13 fix iter 20–24, Phase 4 SVG iter 25) — DONE. iter 26+ roadmap — empty. Все Known Issues (KI#1..KI#17) ✅ CLOSED. Active KI нет.
+
+---
+
 ## [9.1.24] - 2026-07-01
 
 ### Added (iter 24 — KI#13 Part 9+10: inline styles → CSS classes, semantic grouping)
@@ -47,34 +75,11 @@
 
 ---
 
-## [9.1.22] - 2026-06-30
-
-### Added (iter 22 — KI#13 Part 5+6: inline styles → CSS classes)
-- **`src/assets/vs-styles.css` SECTION 6 extended** — +30 строк (5 новых селекторов с `vs-ki13-*` prefix). Groups: (a) E09 OCEAN Pentagon context-limits footnote (1 селектор: `.vs-ki13-context-limits-note` — Elena extreme example note inside `.context-limits-box__data`), (b) E11 CoT Tiers progression explanation panel (4 селектора: `vs-ki13-cot-panel` + `vs-ki13-cot-heading` (cyan accent — distinct от funnel-panel violet) + `vs-ki13-cot-text` + descendant `vs-ki13-cot-text strong`).
-
-### Changed (iter 22 — KI#13 inline style migration)
-- **`src/master/part_05.html` edited** — 1 inline `style=` attribute → CSS class (0 remaining). E09 OCEAN Pentagon context-limits box: `<span style="color:var(--text-muted); font-size:10px; margin-top:4px; display:block;">` → `<span class="vs-ki13-context-limits-note">`.
-- **`src/master/part_06.html` edited** — 5 inline `style=` attributes → CSS classes (0 remaining). E11 CoT Tiers progression panel: (i) `<div class="panel" style="max-width:700px;...">` → `<div class="panel vs-ki13-cot-panel">`; (ii) heading div (cyan accent) → `.vs-ki13-cot-heading`; (iii) `<p style="font-size:13px;...">` → `<p class="vs-ki13-cot-text">`; (iv) 2 `<strong style="color:var(--text-primary);">` → `<strong>` (covered by descendant selector `.vs-ki13-cot-text strong`).
-
-### Validation
-- `pnpm run validate:master` ✅ PASSED (0 errors, 37 inline styles remaining в Part 7A+9+10).
-- `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — shell not modified, vs-styles.css propagated to dist/assets/ + root assets/).
-- `pnpm run validate` ✅ All 8 gates passed.
-- `pnpm run test:unit` ✅ 43/43 pass.
-- `pnpm run lint` ✅ 0 errors (13 warnings pre-existing).
-- `pnpm run qa:csp` ✅ PASS (0 inline scripts).
-- `pnpm run qa:bundle` ✅ PASS (7.2KB, max 500KB).
-- `pnpm run qa:doc-versions` ✅ PASS.
-
-### Milestone
-**KI#13 progress:** 86/123 inline styles fixed (70%). Part 1-6 ✅ DONE. 37 remaining в Part 7A+9+10 (Part 7A: 19, Part 9: 6, Part 10: 12). Active KI: KI#13 (MEDIUM). iter 23+: KI#13 Part 7A (19 inline styles → external CSS classes) — largest remaining batch.
-
----
-
 ## Previous iterations (compressed)
 
 > Полная история — в `worklog.md` one-liners и git log. Ниже — краткая сводка для контекста.
 
+- **[9.1.22] (iter 22, 2026-06-30):** KI#13 Part 5+6 (6/123 inline styles → 5 CSS селекторов `vs-ki13-*` в vs-styles.css SECTION 6, +30 строк). part_05: 1→0 (`.vs-ki13-context-limits-note`), part_06: 5→0 (4 селектора для E11 CoT progression panel: `vs-ki13-cot-panel/heading/text/strong`). Total KI#13: 86/123 (70%). Build hash fd3d96d3 unchanged.
 - **[9.1.21] (iter 21, 2026-06-24):** KI#13 Part 3+4 (23/123 inline styles → 18 CSS селекторов `vs-ki13-*` в vs-styles.css SECTION 6, +49 строк). part_03: 2→0, part_04: 21→0. Phase 4 SVG integration analysis complete (Canon migration уже удалил major duplicates; 3 retained infographics intentional; Part 7B candidate для iter 23+ optional). Build hash fd3d96d3 unchanged.
 
 - **[9.1.20] (iter 20, 2026-06-24):** KI#13 Part 1+2 baseline (57/123 inline styles → 28 CSS classes `vs-ki13-*` в vs-styles.css SECTION 6). part_01: 48→0, part_02: 9→0. **KI#17 CLOSED.** SVG extracts audit (0 orphans, все 17 elements embedded). Build hash fd3d96d3.

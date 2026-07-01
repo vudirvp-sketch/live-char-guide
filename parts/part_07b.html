@@ -25,40 +25,93 @@
 ]</code></pre>
 
 </section>
+<!-- VS-EMBED: E18 — Greeting Algorithm -->
+<div class="vs-embed" data-vs-element="E18">
+<!-- 
+  Element: E18 — Greeting Algorithm
+  Source: elements/E18-greeting-algorithm.html
+  Pattern: P2 — Flow/Pipeline
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E18-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E18-script.js
+         Replaces textual infographic inf-pipeline (iter 25, Phase 4 SVG integration).
+         Migration principle "viz > dry text" — VS-EMBED canonical visualization.
+-->
+<div class="pipeline-container">
+
+      <!-- Main flow: 4 steps -->
+      <div class="pipeline-main">
+
+        <!-- Step 1: Sensory Anchor -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 1</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">SENSORY ANCHOR</div>
+            <div class="pipeline-node__sublabel">Пред-настройка восприятия</div>
+            <div class="pipeline-node__code">Запах → Звук → Ощущение</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 2: Тело FLAW (SPINE connection — violet) -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 2</div>
+          <div class="pipeline-node__box pipeline-node__box--spine">
+            <div class="pipeline-node__label">ТЕЛО FLAW</div>
+            <div class="pipeline-node__sublabel">Физическое проявление через FLAW</div>
+            <div class="pipeline-node__code">Поза → Напряжение → Привычка</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 3: Реплика -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 3</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">РЕПЛИКА</div>
+            <div class="pipeline-node__sublabel">Первая фраза персонажа</div>
+            <div class="pipeline-node__code">Голос → Тон → Лексика</div>
+          </div>
+        </div>
+
+        <div class="pipeline-arrow scroll-enter">
+          <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стрелка соединитель"><title>Стрелка</title>
+            <line x1="0" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M22 1L27 6L22 11" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Step 4: Крючок -->
+        <div class="pipeline-node scroll-enter">
+          <div class="pipeline-node__step">Step 4</div>
+          <div class="pipeline-node__box">
+            <div class="pipeline-node__label">КРЮЧОК</div>
+            <div class="pipeline-node__sublabel">Вовлечение {{user}} в сцену</div>
+            <div class="pipeline-node__code">Вопрос → Действие → Провокация</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+</div>
+<!-- REPLACED BY VISUAL SYSTEM: E18 -->
 <section  data-section="p7b_greeting" data-toc-nav>
 <h3>Greeting Message (первое сообщение)</h3>
 
-<p><strong>Greeting Message</strong> — начальное сообщение персонажа. Задаёт место, время и тон.</p>
-
-<div class="infographic">
-<div class="infographic-title">Алгоритм Greeting</div>
-<div class="inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">SENSORY ANCHOR</div>
-<div class="inf-step-desc">Пред-настройка восприятия персонажа</div>
-<div class="inf-step-code">Запах → Звук → Ощущение</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">ТЕЛО FLAW</div>
-<div class="inf-step-desc">Физическое проявление через FLAW</div>
-<div class="inf-step-code">Поза → Напряжение → Привычка</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">РЕПЛИКА</div>
-<div class="inf-step-desc">Первая фраза персонажа</div>
-<div class="inf-step-code">Голос → Тон → Лексика</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">КРЮЧОК</div>
-<div class="inf-step-desc">Вовлечение {{user}} в сцену</div>
-<div class="inf-step-code">Открытый вопрос → Действие → Провокация</div>
-</div>
-</div>
-</div>
+<p><strong>Greeting Message</strong> — начальное сообщение персонажа. Задаёт место, время и тон. Алгоритм из 4 шагов (Sensory Anchor → Тело FLAW → Реплика → Крючок) показан выше (VS-EMBED E18); разобранный пример на Елене — ниже.</p>
 
 <p><strong>Sensory Anchor</strong> (Sensory Anchor) — приём пред-настройки восприятия: персонаж уже в состоянии до первого слова. Пример: Елена за барной стойкой слышит звон бокалов и чувствует запах виски — прежде чем произнести реплику.</p>
 

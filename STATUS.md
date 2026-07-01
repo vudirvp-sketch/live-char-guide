@@ -2,32 +2,41 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ **CLOSED** (iter 24, 123/123 = 100%) + KI#14/#16/#17 ✅ CLOSED
+> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ CLOSED (iter 24, 123/123 = 100%) + Phase 4 SVG integration: E18 Greeting Algorithm ✅ INTEGRATED (iter 25)
 > **Дата:** 2026-07-01
 
 ---
 
 ## Текущее состояние
 
-**iter 24 COMPLETE. KI#13 CLOSED — все 123 inline `style=` → external CSS classes (100%).** Part 9 (6) + Part 10 (12) = 18 inline styles → 19 новых селекторов с `vs-ki13-p9-*` и `vs-ki13-p10-*` sub-namespaces (semantic grouping: 1 indicator position + 4 zone-title color modifiers + 1 quick-checks panel + 1 shared callout-pos base + 11 per-instance top modifiers + 1 card-block-accent). `src/assets/vs-styles.css` +52 строки (SECTION 6). `src/master/part_09.html` 6→0 inline styles. `src/master/part_10.html` 12→0 inline styles. Build hash `fd3d96d3` unchanged. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. **Все master HTML — 0 inline styles.**
+**iter 25 COMPLETE. Phase 4 SVG integration — E18 Greeting Algorithm.** Создан новый VS element E18 (4-step pipeline: Sensory Anchor → Тело FLAW → Реплика → Крючок). Тextual `infographic inf-pipeline` блок в `src/master/part_07b.html` (lines 33–61 pre-iter-25) заменён на VS-EMBED E18 (migration principle «viz > dry text»). Step 2 (Тело FLAW) использует `.pipeline-node__box--spine` (violet — SPINE connection). E18 reuses E02 `.pipeline-*` classes + new `.pipeline-node__code` for technique sequence. Standalone prototype: `visual-system/elements/E18-greeting-algorithm.html`. Component extracts: 3 новых файла в `visual-system/integration/component-extracts/`. E18 styles (+12 строк) appended to `src/assets/vs-styles.css` SECTION 5 (header E01–E17 → E01–E18). part_07b: 371 → 424 строк (+53, E18 markup). Build hash `fd3d96d3` unchanged. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS.
 
-### Что сделано в iter 24
+### Что сделано в iter 25
 
 | # | Задача | Результат |
 |---|--------|-----------|
-| a | KI#13 Part 9: 6 inline styles → 6 CSS classes | E14 Quality Scale. 1 positional `bottom:50%` → `.vs-ki13-p9-indicator-mid` (default mid-thermometer). 4 zone-title color overrides → `.vs-ki13-p9-zone-title--{excellent/good/poor/critical}` (mirror parent `.zone-detail--{tier}` border-left-color: violet/cyan/amber/danger). 1 panel max-width → `.vs-ki13-p9-quick-checks` (700px centered). |
-| b | KI#13 Part 10: 12 inline styles → 13 CSS classes | E15 Annotated Blueprint. 11 positional `top:Npx; right:20px;` callouts → 1 shared base `.vs-ki13-p10-callout-pos { right: 20px; }` + 11 per-instance top modifiers `.vs-ki13-p10-callout-pos--top-{10/20/100/120/130/250/260/280/290/380/390}` (DRY pattern, position:absolute comes from base `.callout`). 1 border-left+violet on Examples+Anchors card-block → `.vs-ki13-p10-card-block-accent`. |
-| c | Validation gates PASS | `validate:master` ✅ (0 errors, **0 inline styles** — was 18), `build` ✅ (hash `fd3d96d3` unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings pre-existing), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
+| a | E18 standalone prototype | `visual-system/elements/E18-greeting-algorithm.html` (новый). E02-pattern pipeline: 4 nodes (Sensory Anchor → Тело FLAW → Реплика → Крючок) + 3 SVG arrows + scroll animations. Mini-map nav с E18 active в «Продвинутые» group. Footer badges: E05 (SPINE), E04 (Embodiment), E03 (Behavioral Anchor). |
+| b | E18 component extracts | 3 новых файла в `visual-system/integration/component-extracts/`: `E18-visual.html` (main markup), `E18-styles.css` (`.pipeline-node__code` only — rest reused from E02), `E18-script.js` (IntersectionObserver, same as E02). |
+| c | vs-styles.css SECTION 5 update | `src/assets/vs-styles.css`: header E01–E17 → E01–E18, +12 строк (`.pipeline-node__code` style, E18 comment block). E18 reuses E02 `.pipeline-container/main/node/box/label/sublabel/step/arrow` classes (already in SECTION 5). |
+| d | Master HTML Part 7B integration | `src/master/part_07b.html`: textual `infographic inf-pipeline` (lines 33–61 pre-iter-25) → VS-EMBED E18 (lines 28–110 iter 25). Intro `<p>` обновлён: added reference to VS-EMBED E18. Sensory Anchor paragraph + Elena example `<details>` + rules h4+ul — retained (unique content). |
+| e | INTEGRATION-MAP.md update | `visual-system/integration/INTEGRATION-MAP.md`: E18 row added в mapping table + E18 extracts listed в structure tree. |
+| f | Canon part_07b.md update | `docs/canon/part_07b.md`: front-matter (VS elements embedded: E18, Last synced: 2026-07-01 iter 25, Migration status: ✅ MIGRATED iter 16 + ✅ E18 iter 25). §7B.2 row 2 retention note updated. +iter 25 update section + validation gates. Line count 371 → 424. |
+| g | Validation gates PASS | `validate:master` ✅ (0 errors, 0 inline styles, expected content-outside-section warnings — same as E02 in part_07a), `build` ✅ (hash `fd3d96d3` unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings pre-existing), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
 
-### Изменённые файлы в iter 24
+### Изменённые файлы в iter 25
 
 | File | Action | Reason |
 |------|--------|--------|
-| `src/assets/vs-styles.css` | Edited | +52 строки SECTION 6 (19 новых селекторов: 6 `vs-ki13-p9-*` + 13 `vs-ki13-p10-*`). |
-| `src/master/part_09.html` | Edited | 6 inline styles → CSS classes (0 remaining). E14 Quality Scale: thermometer indicator + 4 zone titles + quick-checks panel. |
-| `src/master/part_10.html` | Edited | 12 inline styles → CSS classes (0 remaining). E15 Annotated Blueprint: 11 callouts positional + 1 card-block accent. |
-| `assets/vs-styles.css`, `parts/part_09.html`, `parts/part_10.html`, `index.html` | Regenerated | Root fallbacks (build artifact — timestamp updated, hash unchanged). |
-| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/canon/_README.md` | Updated | iter 24 record. CHANGELOG compressed (iter 21 → one-liner, keep last 3 detailed: 22, 23, 24). |
+| `visual-system/elements/E18-greeting-algorithm.html` | Created | New VS element E18 standalone prototype (E02-pattern, 4-step pipeline). |
+| `visual-system/integration/component-extracts/E18-visual.html` | Created | E18 visual markup extract (pipeline-container + 4 nodes + 3 arrows). |
+| `visual-system/integration/component-extracts/E18-styles.css` | Created | E18 styles extract (`.pipeline-node__code` + 4-node stagger delays). |
+| `visual-system/integration/component-extracts/E18-script.js` | Created | E18 script extract (IntersectionObserver, same as E02). |
+| `visual-system/integration/INTEGRATION-MAP.md` | Edited | +E18 row в mapping table + E18 extracts listed в structure tree. |
+| `src/assets/vs-styles.css` | Edited | SECTION 5 header E01–E17 → E01–E18, +12 строк (`.pipeline-node__code` + E18 comment block). |
+| `src/master/part_07b.html` | Edited | Textual `infographic inf-pipeline` (lines 33–61) → VS-EMBED E18 (lines 28–110). Intro `<p>` updated. part_07b: 371 → 424 строк (+53). |
+| `docs/canon/part_07b.md` | Edited | Front-matter (VS elements: E18, Last synced iter 25, Migration status +E18). §7B.2 row 2 retention note. +iter 25 update section + validation gates. |
+| `assets/vs-styles.css`, `parts/part_07b.html`, `index.html` | Regenerated | Root fallbacks (build artifact — timestamp updated, hash unchanged). |
+| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/canon/_README.md` | Updated | iter 25 record. Cleanup: CHANGELOG compressed (iter 22 → one-liner), canon _README §9 compressed (iter 7–22 → one-liner). |
 
 ---
 
@@ -58,6 +67,7 @@
 | **Canonical Guide Spec (iter 7–18) — COMPLETE** | Все 10 Parts + 3 Appendix ✅ MIGRATED. См. `docs/canon/_README.md` §5. |
 | **CSP compliance (iter 19)** | `qa:csp` PASS. Все scripts в `index.html` — `<script src="...">` (external). Inline scripts forbidden. |
 | **Inline styles forbidden (iter 24, KI#13 CLOSED)** | Все 123 inline `style=` → external CSS classes с `vs-ki13-*` prefix (60 селекторов: 28 Part 1+2 + 18 Part 3+4 + 5 Part 5+6 + 9 Part 7A + 6 Part 9 + 13 Part 10). Sub-namespaces `vs-ki13-p7a-*`, `vs-ki13-p9-*`, `vs-ki13-p10-*` для semantic grouping. |
+| **VS elements registry (iter 25)** | 18 VS elements: E01–E18. E18 (Greeting Algorithm) — iter 25, Part 7B. Все 18 embeded в master HTML, styles в `src/assets/vs-styles.css` SECTION 5, extracts в `visual-system/integration/component-extracts/`. |
 
 ---
 

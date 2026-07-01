@@ -35,6 +35,7 @@
 | E15 | E15-annotated-blueprint.html | part_10.html | `<section id="annotated-blueprint">` | CSS blueprint + JS layer toggle |
 | E16 | E16-author-note.html | part_07a.html | `<section id="author-note">` | CSS template cards + JS toggle |
 | E17 | E17-sampling-params.html | part_07a.html | `<section id="sampling-params">` | CSS params grid |
+| E18 | E18-greeting-algorithm.html | part_07b.html | before `<section id="p7b_greeting">` | CSS pipeline + SVG arrows (iter 25) |
 
 ---
 
@@ -126,6 +127,8 @@ component-extracts/
 ├── E16-author-note.css           # CSS template cards
 ├── E16-author-note.js            # Template A/B toggle
 ├── E17-sampling-params.css       # CSS params grid
+├── E18-greeting-algorithm.css    # CSS pipeline (reuses E02 .pipeline-* + .pipeline-node__code)
+├── E18-greeting-algorithm.js     # IntersectionObserver (same as E02)
 └── README.md                     # Описание структуры
 ```
 
