@@ -2869,8 +2869,13 @@ a:hover {
       white-space: pre-wrap;
     }
 
-    /* Annotation callouts — positioned around the card */
-    .callout {
+    /* Annotation callouts — positioned around the card.
+       Scoped to .blueprint-area (KI#22 fix, iter 34): without scope, this
+       .callout selector overrides the documentation callout taxonomy
+       (.callout.rule/.rec/.ex defined in shell/styles.css ~line 419),
+       making all 56 documentation callouts in 12 master HTML files
+       absolutely positioned with font-size:11px and opacity:0. */
+    .blueprint-area .callout {
       position: absolute;
       max-width: 200px;
       padding: var(--gap-xs) var(--gap-sm);
@@ -2884,33 +2889,33 @@ a:hover {
       pointer-events: none;
     }
 
-    .callout.is-visible {
+    .blueprint-area .callout.is-visible {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .callout--structure {
+    .blueprint-area .callout--structure {
       background: var(--cyan-8);
       border-left: 2px solid var(--accent-cyan);
     }
 
-    .callout--anchors {
+    .blueprint-area .callout--anchors {
       background: var(--violet-8);
       border-left: 2px solid var(--accent-violet);
     }
 
-    .callout--spine {
+    .blueprint-area .callout--spine {
       background: var(--violet-8);
       border-left: 2px solid var(--accent-violet);
     }
 
-    .callout--directives {
+    .blueprint-area .callout--directives {
       background: var(--cyan-8);
       border-left: 2px solid var(--accent-cyan);
     }
 
     /* Callout connector lines */
-    .callout-line {
+    .blueprint-area .callout-line {
       position: absolute;
       height: 1px;
       background: var(--accent-cyan);

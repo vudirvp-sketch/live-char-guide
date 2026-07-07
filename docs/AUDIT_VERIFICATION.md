@@ -2,7 +2,7 @@
 
 > **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками.
 > **Дата:** 2026-07-08
-> **Build hash baseline:** `fd3d96d3`
+> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix добавил `worker-src 'self' blob:;` в CSP meta в `src/shell/index.html`; до iter 34 был `fd3d96d3`)
 > **Источник аудита:** прошлый чат iter 33 (525-строчный paste от пользователя)
 
 ---
@@ -178,7 +178,7 @@
 **Validation gates P0:**
 ```bash
 pnpm run validate:master    # 0 errors, baseline warnings
-pnpm run build              # SUCCESS, hash fd3d96d3 (если только контент-правки)
+pnpm run build              # SUCCESS, hash 69d9b813 (если только canon-контент правки)
 pnpm run validate           # 8 gates PASS
 pnpm run test:unit          # 43/43
 pnpm run lint               # 0 errors
@@ -188,11 +188,11 @@ pnpm run qa:doc-versions    # PASS
 python3 scripts/audit_vs_embeds.py  # 0 regressions
 ```
 
-**Ожидаемый результат:** build hash остаётся `fd3d96d3` (только canon-контент правки, master HTML не трогается). Если хеш изменится — диагностировать, что задето в master HTML.
+**Ожидаемый результат:** build hash остаётся `69d9b813` (только canon-контент правки, master HTML не трогается). Если хеш изменится — диагностировать, что задето в master HTML.
 
 ---
 
-### 4.2. P1 — Противоречия «пример vs правило» + дубли/мёртвый код (iter 35)
+### 4.2. P1 — Противоречия «пример vs правило» + дубли/мёртвый код (iter 36)
 
 **Цель:** Устранить противоречия между каноническими примерами и каноническими правилами. Удалить мёртвый код (variant'ы, dual-Elena secondary).
 
@@ -216,7 +216,7 @@ python3 scripts/audit_vs_embeds.py  # 0 regressions
 
 ---
 
-### 4.3. P2 — Терминология + структурный cleanup (iter 36)
+### 4.3. P2 — Терминология + структурный cleanup (iter 37)
 
 **Цель:** Унифицировать терминологию, удалить устаревшие заглушки, сжать meta-секции (front-matter, Migration Notes, Validation gates, resume, Cross-refs ending). Самая большая итерация по объёму (~1500 строк удалений + ~80 новых).
 
@@ -274,59 +274,59 @@ python3 scripts/audit_vs_embeds.py  # 0 regressions
 
 ## 5. Поэтапный план исполнения
 
-### iter 34 — P0 (Critical contradictions)
+### iter 35 — P0 (Critical contradictions)
 
 **Шаги:**
-1. Прочитать STATUS.md, worklog.md iter 32, AGENT_NAVIGATION.md §6 #39, этот AUDIT_VERIFICATION.md §4.1.
+1. Прочитать STATUS.md (iter 34 — KI#22/#23 ✅ CLOSED, build hash `69d9b813`), worklog.md iter 34, AGENT_NAVIGATION.md §6 pitfalls #41-#42, этот AUDIT_VERIFICATION.md §4.1.
 2. Документировать KI#21 «Content Audit contradictions» в STATUS.md (sub-items A1-A10, NEW-1, NEW-3).
 3. Внести 16 правок P0-1..P0-16 (таблица выше).
 4. Запустить validation gates.
-5. Если build hash изменился — диагностировать (должен остаться `fd3d96d3`).
+5. Если build hash изменился — диагностировать (должен остаться `69d9b813`).
 6. Запустить `python3 scripts/audit_vs_embeds.py` — 0 regressions.
-7. Обновить STATUS.md (KI#21 P0 sub-items ✅ FIXED), worklog.md (iter 34 record), AGENT_NAVIGATION.md (§6 pitfall #40 KI#21 P0).
-8. Создать архив `iter_34_p0_fixes.zip` с изменёнными canon-файлами.
+7. Обновить STATUS.md (KI#21 P0 sub-items ✅ FIXED), worklog.md (iter 35 record), AGENT_NAVIGATION.md (§6 pitfall #40 KI#21 P0).
+8. Создать архив `iter_35_p0_fixes.zip` с изменёнными canon-файлами.
 9. Git commit + push.
 
-**Точка остановки iter 34:** P0 complete. KI#21-A1..A10, KI#21-NEW-1, KI#21-NEW-3 ✅ CLOSED. Build hash `fd3d96d3` unchanged. P1 ready to start.
+**Точка остановки iter 35:** P0 complete. KI#21-A1..A10, KI#21-NEW-1, KI#21-NEW-3 ✅ CLOSED. Build hash `69d9b813` unchanged. P1 ready to start.
 
-### iter 35 — P1 (Example vs rule + dead code)
+### iter 36 — P1 (Example vs rule + dead code)
 
 **Шаги:**
-1. Прочитать STATUS.md (iter 34 record), worklog.md iter 34, этот AUDIT_VERIFICATION.md §4.2.
+1. Прочитать STATUS.md (iter 35 record), worklog.md iter 35, этот AUDIT_VERIFICATION.md §4.2.
 2. Внести 11 правок P1-1..P1-11.
 3. Validation gates.
 4. Обновить docs.
-5. Архив `iter_35_p1_fixes.zip`.
+5. Архив `iter_36_p1_fixes.zip`.
 6. Git commit + push.
 
-**Точка остановки iter 35:** P1 complete. KI#21-B1,B2,B5,B6,D1,D2,D4,A5,A7,A8 ✅ CLOSED. Build hash `fd3d96d3` unchanged. P2 ready.
+**Точка остановки iter 36:** P1 complete. KI#21-B1,B2,B5,B6,D1,D2,D4,A5,A7,A8 ✅ CLOSED. Build hash `69d9b813` unchanged. P2 ready.
 
-### iter 36 — P2 (Terminology + structural cleanup)
+### iter 37 — P2 (Terminology + structural cleanup)
 
 **Шаги:**
-1. Прочитать STATUS.md (iter 35 record), worklog.md iter 35, этот AUDIT_VERIFICATION.md §4.3.
+1. Прочитать STATUS.md (iter 36 record), worklog.md iter 36, этот AUDIT_VERIFICATION.md §4.3.
 2. **Сначала** выполнить P2-4 (YAML front-matter) и P2-5/P2-6/P2-7 (delete Migration Notes/Cross-refs ending/resume) — это даст ~1500 строк чистого удаления, упростит дальнейшие правки.
 3. Выполнить P2-11 (заменить 30+ «Canon planned iter X» заглушек).
 4. Выполнить P2-1..P2-3, P2-8..P2-10, P2-12..P2-18.
 5. Validation gates + `qa:english:docs`.
 6. Обновить docs.
-7. Архив `iter_36_p2_cleanup.zip`.
+7. Архив `iter_37_p2_cleanup.zip`.
 8. Git commit + push.
 
-**Точка остановки iter 36:** P2 complete. KI#21-C1,C2,C5,E1-E7,F1,F4,F5,F6,F7,F9,F10,B4 ✅ CLOSED. Build hash `fd3d96d3` unchanged. P3 ready.
+**Точка остановки iter 37:** P2 complete. KI#21-C1,C2,C5,E1-E7,F1,F4,F5,F6,F7,F9,F10,B4 ✅ CLOSED. Build hash `69d9b813` unchanged. P3 ready.
 
-### iter 37 — P3 (Local fixes + new sections)
+### iter 38 — P3 (Local fixes + new sections)
 
 **Шаги:**
-1. Прочитать STATUS.md (iter 36 record), worklog.md iter 36, этот AUDIT_VERIFICATION.md §4.4.
+1. Прочитать STATUS.md (iter 37 record), worklog.md iter 37, этот AUDIT_VERIFICATION.md §4.4.
 2. Внести 7 правок P3-1..P3-7 (локальные).
 3. Создать 3 новых файла/секции P3-8..P3-12 (How to read, TL;DR, Character map, Pre-build checklist).
 4. Validation gates + manual review новых секций.
 5. Обновить docs (KI#21 ✅ CLOSED полностью).
-6. Архив `iter_37_p3_complete.zip`.
+6. Архив `iter_38_p3_complete.zip`.
 7. Git commit + push.
 
-**Точка остановки iter 37:** P3 complete. KI#21 ✅ CLOSED полностью (все sub-items A1-A10, B1-B6, C1-C8, D1-D7, E1-E7, F1-F10, G1-G5). iter 38+ roadmap: none planned. Build hash `fd3d96d3` unchanged (только canon-контент правки + новые файлы).
+**Точка остановки iter 38:** P3 complete. KI#21 ✅ CLOSED полностью (все sub-items A1-A10, B1-B6, C1-C8, D1-D7, E1-E7, F1-F10, G1-G5). iter 39+ roadmap: none planned. Build hash `69d9b813` unchanged (только canon-контент правки + новые файлы).
 
 ---
 
@@ -334,15 +334,15 @@ python3 scripts/audit_vs_embeds.py  # 0 regressions
 
 ### 6.1. Build hash stability
 
-Все правки P0/P1/P2/P3 — в `docs/canon/` (markdown-источник). Master HTML не трогается. Build hash `fd3d96d3` computed из `index.html` (shell), не из canon. **Ожидается, что hash останется неизменным** во всех 4 итерациях.
+Все правки P0/P1/P2/P3 — в `docs/canon/` (markdown-источник). Master HTML не трогается. Build hash `69d9b813` (после iter 34 — KI#23 fix) computed из `index.html` (shell), не из canon. **Ожидается, что hash останется неизменным** во всех 4 итерациях (iter 35-38).
 
 Если hash изменится — значит:
 - (a) случайно задет `src/master/` — откатить.
-- (b) `pnpm run build` перегенерирует root fallbacks — проверить `widgets/`, `parts/`, `assets/`, `index.html`, `build.hash` (root). Если только они — это нормальная регенерация, hash `build.hash` file должен остаться `fd3d96d3`.
+- (b) `pnpm run build` перегенерирует root fallbacks — проверить `widgets/`, `parts/`, `assets/`, `index.html`, `build.hash` (root). Если только они — это нормальная регенерация, hash `build.hash` file должен остаться `69d9b813`.
 
 ### 6.2. Canon migration history loss (P2-5)
 
-Удаление Migration Notes / Compression results / Validation gates секций из canon — потеря исторического контекста. **Митигация:** перед удалением в iter 36, вынести в `docs/migration_history/part_NN.md` (14 новых файлов). Если миграционная история не нужна — удалить полностью (canon = источник правды для контента, не для migration audit).
+Удаление Migration Notes / Compression results / Validation gates секций из canon — потеря исторического контекста. **Митигация:** перед удалением в iter 37, вынести в `docs/migration_history/part_NN.md` (14 новых файлов). Если миграционная история не нужна — удалить полностью (canon = источник правды для контента, не для migration audit).
 
 ### 6.3. Dual-Elena secondary GHOST removal (P1-7)
 
@@ -370,22 +370,22 @@ B3 был признан невалидным. **Не пытаться «уко�
 - Верифицирован каждый пункт аудита iter 33 (A1-G5, ~50 пунктов).
 - Найдено: 1 INVALID (B3), 2 REFINED (B2, B5), 2 STRENGTHENED (B4, F1), 3 NEW (NEW-1/2/3).
 - Зафиксирован финальный фронт работ: 16 P0 + 11 P1 + 18 P2 + 12 P3 = **57 правок** в 14 canon-файлах + 3 новых файла/секции.
-- План исполнения: iter 34 (P0) → iter 35 (P1) → iter 36 (P2) → iter 37 (P3). После каждой итерации — validation gates + архив + git.
+- План исполнения: iter 35 (P0) → iter 36 (P1) → iter 37 (P2) → iter 38 (P3) — сдвинут с iter 34-37 из-за iter 34 = CSS/CSP fix (KI#22/#23). После каждой итерации — validation gates + архив + git.
 - **Правок не внесено** — пользователь просил сначала перепроверить, потом решить.
 - **Документация:** создан `docs/AUDIT_VERIFICATION.md` (этот файл). STATUS.md / worklog.md / AGENT_NAVIGATION.md обновлены iter 33 record (без новых KI — это аудит, не баги).
 - **Архив `iter_33_audit_verification.zip`:** содержит только `docs/AUDIT_VERIFICATION.md` + обновлённые STATUS.md / worklog.md / AGENT_NAVIGATION.md (docs-only, без canon-правок).
-- **Build hash `fd3d96d3` unchanged** (canon-файлы не тронуты, только docs).
+- **Build hash `fd3d96d3` unchanged** (canon-файлы не тронуты, только docs). После iter 34 (KI#23 fix) baseline стал `69d9b813`.
 
-**Что в следующем чате (iter 34):**
+**Что в следующем чате (iter 35 — canon P0):**
 
-1. Прочитать STATUS.md (iter 33 record), worklog.md iter 33, AGENT_NAVIGATION.md §6 (existing pitfalls), этот `docs/AUDIT_VERIFICATION.md` §4.1.
+1. Прочитать STATUS.md (iter 34 record — KI#22/#23 ✅ CLOSED, build hash `69d9b813`), worklog.md iter 34, AGENT_NAVIGATION.md §6 pitfalls #41-#42, этот `docs/AUDIT_VERIFICATION.md` §4.1.
 2. Документировать KI#21 «Content Audit contradictions» в STATUS.md со всеми sub-items (A1-A10, B1-B6, C1-C8, D1-D7, E1-E7, F1-F10, G1-G5, NEW-1, NEW-2, NEW-3).
 3. Внести 16 правок P0 (таблица §4.1).
 4. Validation gates + audit script.
 5. Обновить docs.
-6. Архив `iter_34_p0_fixes.zip`.
+6. Архив `iter_35_p0_fixes.zip`.
 7. Git commit + push.
-8. Точка остановки iter 34 → передать в iter 35 (P1).
+8. Точка остановки iter 35 → передать в iter 36 (P1).
 
 ---
 
@@ -411,4 +411,4 @@ B3 был признан невалидным. **Не пытаться «уко�
 
 ---
 
-*Конец документа. Все правки — следующая итерация (iter 34+). Этот файл =Canonical source для KI#21 work plan.*
+*Конец документа. Все правки — следующая итерация (iter 35+). Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*

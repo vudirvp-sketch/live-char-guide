@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.1.0 -->
-<!-- Build: fd3d96d3 -->
-<!-- Generated: 2026-07-07T22:25:51.419Z -->
+<!-- Build: 69d9b813 -->
+<!-- Generated: 2026-07-07T23:22:09.431Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -16,7 +16,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- FIX-25: Removed cdn.jsdelivr.net from script-src (no scripts loaded from CDN). Kept in style-src/font-src for Geist font CSS. -->
   <!-- FIX-26: Added cdn.jsdelivr.net to script-src for Mermaid diagram rendering. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
+  <!-- KI#23 fix (iter 34): Added worker-src 'self' blob: — Mermaid v11 creates Web Worker
+       from blob URL for parsing. Without worker-src, CSP falls back to script-src which
+       doesn't allow blob:, blocking worker creation (Mermaid degrades to single-threaded). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
