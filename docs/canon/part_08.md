@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_08.html` (521 → 507 строк, 16 секций)
 > **VS elements (embedded):** E12 (Antipattern Catalog)
 > **Sections (16):** `p8_antipatterns_overview`, `p8_ap1_token_bloat`, `p8_ap2_missing_price`, `p8_ap3_voice_in_description`, `p8_ap4_ghost_in_sp`, `p8_ap5_reppen_high`, `p8_ap6_no_anti_godmoding`, `p8_ap7_presence_penalty`, `p8_ap8_ghost_no_anchors`, `p8_ap9_spine_broken`, `p8_ap10_cot_overload`, `p8_ap11_voice_bleed`, `p8_ap12_xml_malformed`, `p8_ap13_lorebook_conflict`, `p8_ap14_context_violation`, `p8_ap15_nested_anchors`
-> **Last synced:** 2026-06-24 (iter 12 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 12)
+> **Last synced:** 2026-07-08 (iter 31 — DGA Phase 2 final KI#18-G: documented keep-by-design rationale for per-AP sections vs E12 catalog viz; no master HTML edit needed)
+> **Migration status:** ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design rationale (KI#18-G)
 
 ---
 
@@ -410,3 +410,41 @@ WANT: {{want}}
 - [x] `pnpm run test:unit` — 43/43 pass.
 - [x] `pnpm run lint` — 0 errors (10 pre-existing warnings).
 - [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 12)`.
+
+---
+
+## DGA Phase 2 final (iter 31 — applied 2026-07-08)
+
+**KI#18-G — KEEP-BY-DESIGN (no master HTML edit).** Deployed Guide Audit Phase 2 final — анализ дублирования между VS-EMBED E12 (Antipattern Catalog) и per-AP секциями (AP-1..AP-15). Принцип `viz > dry text` (iter 8+) — viz = замещение, не дополнение; но **catalog vs detail pattern** — intentional design, not duplication.
+
+### Catalog vs Detail rationale
+
+| Aspect | E12 viz (catalog) | Per-AP sections (detail) |
+|--------|-------------------|--------------------------|
+| **Purpose** | Visual checklist — quick scan all 15 APs on one screen | Deep-dive reference — learn each AP with examples |
+| **Symptom** | 1-line generic phrase (e.g., «Раздувание токенов») | Concrete threshold (e.g., «Description > 800 токенов») |
+| **Cause** | 1-line generic phrase | Expanded multi-factor explanation |
+| **Fix** | 1-line action (e.g., «Сократите до стандартного бюджета. Перенесите детали в Lorebook.») | Multi-step list with cross-ref links to canonical Parts (Part 2, 3, 4, 5, 6, 7A, 7B) |
+| **Examples** | None | Concrete diff-views (AP-1 Elena before/after, AP-3 Elena before/after, AP-12 XML malformed code blocks, AP-15 nested anchors code, AP-9 broken/full SPINE) |
+| **Callouts** | None | RULE callouts (AP-4, AP-10), ILLUSTRATION labels |
+| **Reader intent** | «Какие APs существуют?» (scan/lookup) | «Как применить fix к этому AP?» (deep-dive) |
+
+### Decision
+
+Per-AP секции добавляют **substantial unique content** beyond viz: concrete thresholds, multi-step solutions, cross-ref links, diff examples, RULE callouts. **Catalog (viz) vs Detail (per-AP sections)** — это intentional design pattern, не дублирование. Viz = scan/lookup tool (15 APs on one screen, visual severity dots, quick recognition). Per-AP sections = deep-dive reference with examples and cross-refs.
+
+**Принцип `viz > dry text` применяется к pure re-explanation** (когда текст пере-объясняет концепцию, уже показанную в viz). Catalog vs Detail — это **different reader intents**, не pure re-explanation. Per iter 12 Migration Notes (item #5), сводная таблица `p8_antipatterns_overview` также оставлена как unique navigation table — «Быстрый фикс» column ≠ E12 card fix (более краткая форма). Это тот же catalog-vs-detail pattern на уровне table.
+
+**Action:** No master HTML edit. Rationale documented here. KI#18-G ✅ CLOSED as keep-by-design.
+
+### Validation gates (iter 31 — PASSED, no master HTML change)
+
+- [x] `pnpm run validate:master` — 0 errors, 23 baseline warnings (no regression, no part_08 new warnings).
+- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged (no source code change).
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors, baseline warnings.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass.
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 31 — DGA Phase 2 final KI#18-G)`, `Migration status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design rationale (KI#18-G)`.

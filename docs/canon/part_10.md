@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_10.html` (666 строк, 4 секции)
 > **VS elements (embedded):** E15 (Elena Card Walkthrough / Annotated Blueprint)
 > **Sections (4):** `p10_elena`, `p10_walter`, `p10_omnis`, `p10_vysherblenny`
-> **Last synced:** 2026-06-24 (iter 16 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 16)
+> **Last synced:** 2026-07-08 (iter 31 — DGA Phase 2 final KI#18-H: documented keep-by-design rationale for E15 Annotated Blueprint callouts vs E01 Card Anatomy in Part 1; no master HTML edit needed)
+> **Migration status:** ✅ MIGRATED (iter 16) + ✅ iter 31 DGA keep-by-design rationale (KI#18-H)
 
 ---
 
@@ -591,3 +591,44 @@ RULE callout в §10.1 ("Правило голоса: голос персона�
 - [x] `pnpm run test:unit` — 43/43 pass.
 - [x] `pnpm run lint` — 0 errors.
 - [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 16)`.
+
+---
+
+## DGA Phase 2 final (iter 31 — applied 2026-07-08)
+
+**KI#18-H — KEEP-BY-DESIGN (no master HTML edit).** Deployed Guide Audit Phase 2 final — анализ cross-Part дублирования между VS-EMBED E15 (Annotated Blueprint, Part 10 preamble) и VS-EMBED E01 (Card Anatomy, Part 1). Принцип `viz > dry text` (iter 8+) — viz = замещение, не дополнение; но **annotation layer pattern** — intentional design, not duplication.
+
+### Annotation layer rationale
+
+| Aspect | E01 viz (Part 1, Card Anatomy) | E15 viz (Part 10, Annotated Blueprint) |
+|--------|--------------------------------|----------------------------------------|
+| **Purpose** | Intro — teach reader the 4-block card structure (SP, Description, Examples+Anchors, Greeting) | Annotation tool — show 4 different analysis aspects layered on the same Elena card |
+| **Visualization** | Vertical card-stack (4 blocks, pure anatomy) | Central card template (Elena) with 4 ANNOTATION LAYERS positioned on top |
+| **Annotation layers** | None — pure block anatomy | 4 layers: structure / anchors / spine / directives — each callout combines budget range with annotation context |
+| **Token budget display** | `token-anno` widget per block (3 rows: мин/стд/макс) | Inline in callouts (e.g., «SP: ~50-200 токенов») — combined with annotation text |
+| **Reader intent** | «Как устроена карточка?» (anatomy intro at Part 1 start) | «Как читать конкретную карточку через 4 different lenses?» (annotation tool at Part 10 start, prepares for 4 detailed cards below) |
+| **Position in flow** | Part 1 — first VS-EMBED, teaches foundational concept | Part 10 — first VS-EMBED, prepares reader for 4 detailed full card TEMPLATEs (Elena, Walter, Omnis, Vyshcherblenny) |
+
+### Decision
+
+E15 callouts содержат token budget ranges (e.g., «SP: ~50-200 токенов», «Description: ~150-700 токенов») — те же ranges отображены в E01 `token-anno` widget. Однако E15 callouts **не pure budget tables** — каждый callout = annotation label, комбинирующий budget range с annotation context (e.g., «SP: ~50-200 токенов / Контейнер — содержит директивы, идентичность, anti-godmoding» для structure layer; «Директива 2 (Embodiment) / Выражается через слой Action в Anchors» для directives layer).
+
+Removing callouts = strips E15 element of its core function (4-layer annotation approach). E15 ≠ E01: E01 = pure block anatomy (vertical stack), E15 = central card template with 4 ANNOTATION LAYERS (structure/anchors/spine/directives) — это different visualization patterns, не duplication. Cross-Part reference intentional — Part 10 открывается annotated blueprint как learning tool для чтения 4 detailed cards ниже.
+
+Token Budget subsections ниже в Part 10 (per character card, e.g., «Token Budget: ~440 токенов (базовые) / ~900 токенов (с SPINE...)») — **не дублируют E15 callouts**. E15 callouts показывают **generic per-block ranges** (annotation context). Token Budget subsections показывают **concrete total for specific card** (e.g., Elena ~440/900, Walter ~890, Omnis ~1800, Vyshcherblenny ~1250+) с cross-ref на canonical Part 7A token budget. Это different information layers — generic range (E15) vs concrete total (Token Budget subsection).
+
+**Принцип `viz > dry text` применяется к pure re-explanation** (когда текст пере-объясняет концепцию, уже показанную в viz). Annotation layer pattern — это **different visualization aspect**, не pure re-explanation. E15 = annotation tool (4 layers on same card), E01 = anatomy intro (vertical stack) — different visual patterns serving different reader intents.
+
+**Action:** No master HTML edit. Rationale documented here. KI#18-H ✅ CLOSED as keep-by-design.
+
+### Validation gates (iter 31 — PASSED, no master HTML change)
+
+- [x] `pnpm run validate:master` — 0 errors, 23 baseline warnings (no regression, no part_10 new warnings).
+- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged (no source code change).
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors, baseline warnings.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass.
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 31 — DGA Phase 2 final KI#18-H)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ iter 31 DGA keep-by-design rationale (KI#18-H)`.

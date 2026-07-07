@@ -1,5 +1,42 @@
 # Changelog
 
+## [9.1.31] - 2026-07-08
+
+### iter 31 — DGA Phase 2 final (KI#18-G + KI#18-H ✅ keep-by-design → KI#18 ✅ CLOSED)
+
+Документированы rationale для последних 2 pending sub-items KI#18 (G + H). Оба sub-item'а — keep-by-design с documented rationale, без master HTML edit. Принцип `viz > dry text` (iter 8+) — применяется к pure re-explanation, не к different reader intents / different visualization patterns.
+
+### Changed (iter 31 — KI#18-G rationale documented: Part 8 per-AP sections vs E12 Antipattern Catalog viz)
+- **`docs/canon/part_08.md` edited** — front-matter Last synced → 2026-07-08 (iter 31 — DGA Phase 2 final KI#18-G), Migration status + ✅ iter 31 DGA keep-by-design rationale (KI#18-G). Added «DGA Phase 2 final (iter 31 — applied 2026-07-08)» section: KI#18-G KEEP-BY-DESIGN intro (no master HTML edit) + Catalog vs Detail rationale table (7 dimensions: Purpose / Symptom / Cause / Fix / Examples / Callouts / Reader intent) comparing E12 viz (catalog/quick-scan) vs per-AP sections (detailed reference) + Decision paragraph (substantial unique content beyond viz, different reader intents — scan/lookup vs deep-dive, same pattern as iter 12 item #5 navigation table) + Action (No master HTML edit, KI#18-G ✅ CLOSED as keep-by-design) + Validation gates iter 31 PASSED (8 gates, no source code change, hash `fd3d96d3` unchanged). No master HTML edit — only rationale documentation.
+- **`src/master/part_08.html` NOT edited** — keep-by-design: per-AP sections add concrete thresholds (e.g., «Description > 800 токенов»), multi-step solutions with cross-ref links to canonical Parts, diff examples (AP-1/AP-3 Elena before/after, AP-9 broken/full SPINE, AP-12 XML malformed code, AP-15 nested anchors code), RULE callouts (AP-4, AP-10) — substantial unique content beyond viz.
+
+### Changed (iter 31 — KI#18-H rationale documented: Part 10 E15 Annotated Blueprint callouts vs E01 Card Anatomy)
+- **`docs/canon/part_10.md` edited** — front-matter Last synced → 2026-07-08 (iter 31 — DGA Phase 2 final KI#18-H), Migration status + ✅ iter 31 DGA keep-by-design rationale (KI#18-H). Added «DGA Phase 2 final (iter 31 — applied 2026-07-08)» section: KI#18-H KEEP-BY-DESIGN intro (no master HTML edit) + Annotation layer rationale table (6 dimensions: Purpose / Visualization / Annotation layers / Token budget display / Reader intent / Position in flow) comparing E01 viz (Part 1, pure block anatomy vertical card-stack) vs E15 viz (Part 10, central card template Elena с 4 ANNOTATION LAYERS structure/anchors/spine/directives) + Decision paragraph (E15 callouts ≠ pure budget tables — annotation labels combining budget range с annotation context; removing callouts = strips E15 of core function 4-layer annotation approach; E15 ≠ E01 different visualization patterns; cross-Part reference intentional — Part 10 открывается annotated blueprint как learning tool; Token Budget subsections ≠ E15 callouts — concrete total per card vs generic per-block ranges) + Action (No master HTML edit, KI#18-H ✅ CLOSED as keep-by-design) + Validation gates iter 31 PASSED. No master HTML edit — only rationale documentation.
+- **`src/master/part_10.html` NOT edited** — keep-by-design: E15 Annotated Blueprint ≠ E01 Card Anatomy. E01 = pure block anatomy (vertical card-stack 4 blocks, token-anno widget мин/стд/макс, no annotation layers). E15 = central card template (Elena) с 4 ANNOTATION LAYERS positioned on top (structure/anchors/spine/directives) — different visualization pattern.
+
+### Validation gates (iter 31 — ALL PASSED, no source code change)
+- `validate:master` ✅ (0 errors, 23 baseline warnings — no regression, no part_08/part_10 new warnings).
+- `build` ✅ (hash `fd3d96d3` unchanged — no source code change).
+- `validate` ✅ (8 gates: GATE-1..5 + SHELL-PARTS + SHELL-LOADER + SHELL-STYLES).
+- `test:unit` ✅ (43/43 pass).
+- `lint` ✅ (0 errors, 13 warnings baseline).
+- `qa:csp` ✅.
+- `qa:bundle` ✅ (index.html 7.2KB).
+- `qa:doc-versions` ✅.
+
+### KI#18 ✅ CLOSED (iter 31)
+- **KI#18 ✅ CLOSED — 9/9 resolved** (7 fixed: A iter 26, B+C iter 28, I+F iter 29, D+E iter 30; 2 keep-by-design: G+H iter 31). DGA Phase 1 (audit) COMPLETE iter 26. Phase 2 COMPLETE iter 28-31. Все previous KI (KI#1..KI#17 + KI#19) ✅ CLOSED.
+
+### Changed (iter 31 — docs)
+- **`STATUS.md`** — header iter line updated (DGA Phase 2 iter 28-31, KI#18 ✅ CLOSED), iter 31 section (2 keep-by-design rationale documented), KI#18 sub-items table (9/9 resolved), iter 32+ roadmap — none, DGA COMPLETE.
+- **`worklog.md`** — iter 31 record (KI#18-G + KI#18-H rationale documented), iter 30 → one-liner.
+- **`AGENT_NAVIGATION.md`** — header iter line updated (DGA COMPLETE KI#18 ✅ CLOSED), §6 pitfall #37 KI#18 status updated to ✅ CLOSED 9/9, §8 iter 31 record + iter 32+ roadmap — none.
+- **`PLAN.md`** — §5 iter 31 line, DGA COMPLETE.
+- **`docs/CONTENT_RESTRUCTURE_PLAN.md`** — §5.2 iter 31 row, §8 iter 31 stop point (DGA COMPLETE), KI#18 sub-items table updated with G+H ✅ CLOSED keep-by-design.
+- **`index.html`** — regenerated (timestamp only, hash `fd3d96d3` unchanged).
+
+---
+
 ## [9.1.30] - 2026-07-08
 
 ### iter 30 — DGA Phase 2 continued (KI#18-D + KI#18-E FIXED, KI#19 incidental FIXED)
