@@ -2,71 +2,85 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ CLOSED (iter 24) + Phase 4 SVG: E18 ✅ INTEGRATED (iter 25) + DGA Phase 1 (iter 26, KI#18-A ✅) + DGA Phase 2 (iter 28, KI#18-B ✅ + KI#18-C ✅; iter 29, KI#18-I ✅ + KI#18-F ✅ partial; iter 30, KI#18-D ✅ + KI#18-E ✅ + KI#19 ✅ incidental; iter 31, KI#18-G ✅ + KI#18-H ✅ keep-by-design → **KI#18 ✅ CLOSED**)
+> **Версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED + KI#13 ✅ CLOSED (iter 24) + E18 ✅ INTEGRATED (iter 25) + DGA ✅ COMPLETE (iter 26-31, KI#18 ✅ CLOSED 9/9) + **KI#20 ✅ CLOSED (iter 32 — Visual System Scroll-Animation Bug)**
 > **Дата:** 2026-07-08
 
 ---
 
 ## Текущее состояние
 
-**iter 31 — DGA Phase 2 final (KI#18 ✅ CLOSED).** Документированы rationale для последних 2 pending sub-items KI#18 (G + H). Оба sub-item'а — keep-by-design с documented rationale, без master HTML edit:
+**iter 32 — Visual System Scroll-Animation Bug (KI#20) ✅ CLOSED.** Найден и исправлен системный визуальный баг: 5 из 18 VS-EMBED элементов (E06, E07, E08, E09, E15) отображались частично/поломанно на собранном сайте из-за того, что их SVG/HTML animation-class элементы не имели `scroll-enter` класса и не наблюдались `IntersectionObserver`. Фикс — расширение селектора в `vs-scroll-observer.js`.
 
-- **KI#18-G ✅ CLOSED (keep-by-design)** — `docs/canon/part_08.md`: documented catalog-vs-detail rationale для per-AP sections (AP-1..AP-15) vs E12 Antipattern Catalog viz. Viz = quick scan (15 APs на one screen, severity dots, 1-line Симптом/Причина/Исправление). Per-AP sections = deep-dive reference (concrete thresholds, multi-step solutions, cross-ref links, diff examples, RULE callouts). Different reader intents — не pure re-explanation. No master HTML edit.
-- **KI#18-H ✅ CLOSED (keep-by-design)** — `docs/canon/part_10.md`: documented annotation-layer rationale для E15 Annotated Blueprint callouts (Part 10) vs E01 Card Anatomy viz (Part 1). E01 = pure block anatomy (vertical stack). E15 = central card template (Elena) с 4 ANNOTATION LAYERS (structure/anchors/spine/directives) — different visualization pattern. Token budget ranges в E15 callouts ≠ pure budget tables — каждый callout = annotation label, комбинирующий budget range с annotation context. No master HTML edit.
+- **KI#20-A ✅ FIXED** — E06 (Part 4): 4 `.ring-anim` + 6 `.ring-text-anim` SVG circles/texts — кольца GHOST и текстовые метки невидимы.
+- **KI#20-B ✅ FIXED** — E07 (Part 3): 3 `.bar-rect` SVG rects — столбцы Voice Hierarchy невидимы.
+- **KI#20-C ✅ FIXED** — E08 (Part 7A): 8 `.anim-group` + 1 `.center-pulse` SVG groups/circles — ноды Core Directives невидимы.
+- **KI#20-D ✅ FIXED** — E09 (Part 5): 4 `.pentagon-anim` + 6 `.profile-anim` SVG polygons/circles — OCEAN pentagon + профиль невидимы.
+- **KI#20-E ✅ FIXED** — E15 (Part 10): 11 `.callout` divs — annotation callouts Annotated Blueprint невидимы.
 
-### Что сделано в iter 31 (DGA Phase 2 final)
+**Root cause:** KI#16 (iter 19, CSP compliance) вырезал inline `<script>` из VS-EMBED элементов, в которых local `IntersectionObserver` наблюдал animation classes (`.ring-anim`, `.bar-rect` и т.д.). Замена `vs-scroll-observer.js` наблюдала только `.scroll-enter, .enneagram-anim, .type-node` — не покрывала остальные animation classes.
 
-| # | Задача | Результат |
-|---|--------|-----------|
-| a | KI#18-G rationale documented | `docs/canon/part_08.md`: front-matter (Last synced → iter 31, Migration status + iter 31 DGA keep-by-design rationale KI#18-G). Added «DGA Phase 2 final (iter 31)» section: catalog-vs-detail rationale table (7 dimensions: Purpose/Symptom/Cause/Fix/Examples/Callouts/Reader intent) + Decision + Validation gates iter 31 PASSED. No master HTML edit. |
-| b | KI#18-H rationale documented | `docs/canon/part_10.md`: front-matter (Last synced → iter 31, Migration status + iter 31 DGA keep-by-design rationale KI#18-H). Added «DGA Phase 2 final (iter 31)» section: annotation-layer rationale table (6 dimensions: Purpose/Visualization/Annotation layers/Token budget display/Reader intent/Position in flow) + Decision + Validation gates iter 31 PASSED. No master HTML edit. |
-| c | Validation gates PASS | `validate:master` ✅ (0 errors, 23 baseline warnings, no new warnings), `build` ✅ (hash `fd3d96d3` unchanged — no source code change), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings baseline), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
-| d | Root fallbacks | `index.html` timestamp-only change (hash unchanged, no content change). No parts/ files changed (no source code edit). |
+**Fix:** расширение `SCROLL_ENTER_SELECTOR` в `src/shell/widgets/vs-scroll-observer.js` (+ root fallback `widgets/vs-scroll-observer.js`) для наблюдения всех animation classes: `.ring-anim, .ring-text-anim, .bar-rect, .anim-group, .center-pulse, .pentagon-anim, .profile-anim, .callout`. Single-file edit, без master HTML изменений.
 
-### Изменённые файлы в iter 31
+### Изменённые файлы в iter 32
 
 | File | Action | Reason |
 |------|--------|--------|
-| `docs/canon/part_08.md` | Edited | KI#18-G: front-matter + DGA Phase 2 final section (catalog-vs-detail rationale + Decision + Validation gates). No master HTML edit. |
-| `docs/canon/part_10.md` | Edited | KI#18-H: front-matter + DGA Phase 2 final section (annotation-layer rationale + Decision + Validation gates). No master HTML edit. |
-| `index.html` | Regenerated | Build artifact (timestamp only, hash unchanged). |
-| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | iter 31 record + KI#18 ✅ CLOSED (G + H keep-by-design). |
+| `src/shell/widgets/vs-scroll-observer.js` | Edited | KI#20: extended `SCROLL_ENTER_SELECTOR` to include `.ring-anim, .ring-text-anim, .bar-rect, .anim-group, .center-pulse, .pentagon-anim, .profile-anim, .callout`. |
+| `widgets/vs-scroll-observer.js` | Regenerated | Root fallback (копия `src/shell/widgets/`). |
+| `README_iter18.md`, `README_ITER8_MERGE.md`, `ITER9_PATCH_README.md` | Deleted | Stale iter-specific READMEs, superseded by current STATUS/worklog/CHANGELOG. |
+| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | iter 32 record + KI#20 ✅ CLOSED + cleanup. |
 
 ---
 
 ## Known Issues
 
-**KI#18 ✅ CLOSED.** Deployed Guide Duplication Audit (DGA) — Phase 1 audit complete (iter 26), Phase 2 complete (iter 28-31). All 9 sub-items (A–I) resolved: 7 fixed (A iter 26, B + C iter 28, I + F iter 29, D + E iter 30), 2 keep-by-design (G + H iter 31).
+Все Known Issues ✅ CLOSED. Новые баги — сначала документировать в `STATUS.md` как KI#N, потом фиксить.
 
 | KI | Severity | Status | Iter |
 |----|----------|--------|------|
-| **KI#18 (Deployed Guide Duplication Audit)** | MEDIUM | ✅ **CLOSED** — 9/9 resolved (7 fixed A+B+C+D+E+I+F, 2 keep-by-design G+H) | found iter 26, A iter 26, B+C iter 28, I+F iter 29, D+E iter 30, G+H iter 31 |
-| KI#13 (inline styles → CSS) | MEDIUM | ✅ CLOSED | iter 20–24 (123/123 = 100%) |
-| KI#14 (content duplication VS-EMBED ↔ текст) | MEDIUM-HIGH | ✅ CLOSED | iter 16 (Canon migration complete) |
-| KI#16 (qa:csp FAIL — inline scripts) | MEDIUM | ✅ CLOSED | iter 19 |
+| **KI#20 (Visual System Scroll-Animation Bug)** | HIGH | ✅ **CLOSED** — 5/5 sub-items fixed (A-E) | found + fixed iter 32 |
+| KI#18 (Deployed Guide Duplication Audit) | MEDIUM | ✅ CLOSED — 9/9 (7 fixed + 2 keep-by-design) | iter 26-31 |
+| KI#19 (Chinese chars in part_05 L269) | LOW | ✅ CLOSED | iter 30 |
+| KI#13 (inline styles → CSS) | MEDIUM | ✅ CLOSED (123/123) | iter 20-24 |
+| KI#14 (content duplication VS-EMBED ↔ текст) | MEDIUM-HIGH | ✅ CLOSED | iter 16 |
+| KI#16 (qa:csp — inline scripts) | MEDIUM | ✅ CLOSED | iter 19 |
 | KI#17 (documentation drift E07 vs E02) | LOW | ✅ CLOSED | iter 20 |
-| KI#19 (Chinese chars in master HTML part_05 L269) | LOW | ✅ CLOSED | found + fixed iter 30 (incidental during KI#18-E) |
-| KI#1..KI#12, KI#15 | various | ✅ CLOSED | iter 1–7 |
+| KI#1..KI#12, KI#15 | various | ✅ CLOSED | iter 1-7 |
 
-### KI#18 — Deployed Guide Duplication Audit (DGA) — ✅ CLOSED (iter 31)
+### KI#20 — Visual System Scroll-Animation Bug ✅ CLOSED (iter 32)
 
-**Принцип (iter 8+):** `viz > dry text` — визуализация = замещение, не дополнение. Если VS-EMBED показывает концепцию — текст не должен её пере-объяснять. Unique контент не удаляется.
+**Symptom:** На собранном сайте 5 из 18 VS-EMBED элементов отображались поломанно — SVG-кольца GHOST (E06), столбцы Voice Hierarchy (E07), ноды Core Directives (E08), OCEAN pentagon + профиль (E09), annotation callouts Annotated Blueprint (E15) были невидимы или отображались частично, создавая эффект "наезжающих друг на друга" и "хаотичного неполного отображения".
 
-**Audit scope:** 14 master HTML файлов (Part 1–10 + 3 Appendix). Inventory: 16 VS-EMBED elements embedded across 11 Parts.
+**Root cause:** CSS правила для animation classes (`.ring-anim`, `.bar-rect`, `.anim-group`, `.pentagon-anim`, `.callout` и др.) задают initial state `opacity: 0` / `transform: scale(0)`, переход к visible state требует `.is-visible` class на том же элементе. Local `IntersectionObserver` в standalone element HTML файлах (`visual-system/elements/E0X-*.html`) наблюдал эти классы напрямую. Но при embedding в master HTML inline scripts вырезались (KI#16, CSP compliance, iter 19) — замена `vs-scroll-observer.js` наблюдала только `.scroll-enter, .enneagram-anim, .type-node`, не покрывая остальные animation classes. Элементы оставались в initial state навсегда.
 
-| Sub | Part | Описание дублирования / inconsistency | Severity | Status |
-|-----|------|---------------------------------------|----------|--------|
-| **A** | Part 9 | E14 Quality Scale viz (4 zones: Критический/Слабый/Хороший/Отличный) ↔ p9_quality_scale table. «Признаки» col duplicating E14 criteria. Naming «Плохой» vs viz «Слабый». Missing tier «Отличный». | MEDIUM | ✅ FIXED iter 26 |
-| **B** | Part 1 | E01 Card Anatomy viz (5 blocks with descriptions) ↔ p1_card_overview table. «Функция» col duplicates E01 `.block-content`. | LOW-MEDIUM | ✅ FIXED iter 28 |
-| **C** | Part 2 | E03 Behavioral Anchors viz (T→A→P with descriptions) ↔ p2_basic_anchors table. «Описание» col duplicates E03 `flow-node__desc`. | LOW-MEDIUM | ✅ FIXED iter 28 |
-| **D** | Part 4 | E05 SPINE Framework viz (5 nodes with example text) + panel «Причинно-следственная цепь» ↔ p4_spine_overview intro paragraphs partially re-explain SPINE chain shown in viz. | LOW | ✅ FIXED iter 30 (intro trimmed — «фреймворк из 5 элементов» removed; panel inside VS-EMBED kept as canonical E05 source) |
-| **E** | Part 5 | E09 OCEAN viz inset «Context Limits» ↔ p5_ocean_basics table (same data). Cross-viz/text semantic inconsistency: viz «1 экстремум» (O=72) vs text «3 экстремальных полюса (O=72, A=38, N=68)». Rule definition unclear — strict <30/>70 vs broad <40/>60. | MEDIUM (semantic bug) | ✅ FIXED iter 30 (aligned к strict rule <30 или >70 — most prevalent; L272+L273+L279 rewritten; «3 экстремальных полюса» → «1 экстремальный + 2 cautious zone») |
-| **F** | Part 6 | E11 CoT viz (4 tiers with name + model-pill + format) ↔ p6_cot_tiers table. «Формат» col duplicating E11 `stair-step__name`. «Для моделей» + «Пример» cols partial duplication (model-pill + stair-step__format Russian versions). | LOW-MEDIUM | ✅ FIXED iter 29 (partial — «Формат» dropped; «Для моделей» + «Пример» DEFERRED) |
-| **G** | Part 8 | E12 Antipatterns viz (15 AP cards with Симптом/Причина/Исправление) ↔ per-AP sections repeat same structure. Design pattern (catalog vs detail) — partially intentional. | LOW (by design) | ✅ CLOSED iter 31 (keep-by-design — catalog vs detail rationale documented in `docs/canon/part_08.md`) |
-| **H** | Part 10 | E15 Annotated Blueprint callouts (token budgets) duplicate E01 in Part 1. Cross-Part duplication, but integrated into annotation layer (contextually relevant). | LOW (intentional annotation) | ✅ CLOSED iter 31 (keep-by-design — annotation layer rationale documented in `docs/canon/part_10.md`) |
-| **I** | Part 2 | E04 Embodiment Protocol viz (funnel-stack 4 layers: State→Body→Sensor→Speech with depth-labels + examples) ↔ p2_embodiment table. «Описание» col duplicates E04 `depth-label`. Same pattern as KI#18-C. | LOW-MEDIUM | ✅ FIXED iter 29 |
+**Fix:** Single-file edit — расширение `SCROLL_ENTER_SELECTOR` в `src/shell/widgets/vs-scroll-observer.js`:
 
-**Conclusion:** DGA Phase 1 (audit) COMPLETE iter 26. Phase 2 COMPLETE iter 28-31. All 9 sub-items resolved: 7 fixed (A+B+C+D+E+I+F), 2 keep-by-design (G+H with documented rationale). KI#18 ✅ CLOSED iter 31. Принцип `viz > dry text` сохраняется. Unique контент не удаляется даже при дублировании. Новые баги — сначала документировать в `STATUS.md` как KI#N, потом фиксить.
+```js
+// BEFORE (iter 5/19):
+var SCROLL_ENTER_SELECTOR = '.scroll-enter, .enneagram-anim, .type-node';
+
+// AFTER (iter 32):
+var SCROLL_ENTER_SELECTOR = '.scroll-enter, .enneagram-anim, .type-node, ' +
+  '.ring-anim, .ring-text-anim, ' +     // E06
+  '.bar-rect, ' +                       // E07
+  '.anim-group, .center-pulse, ' +      // E08
+  '.pentagon-anim, .profile-anim, ' +   // E09
+  '.callout';                           // E15
+```
+
+После `pnpm run build` root fallback `widgets/vs-scroll-observer.js` регенерируется из `src/shell/widgets/`.
+
+| Sub | Part | Element | Animation classes | Элементов | Status |
+|-----|------|---------|-------------------|-----------|--------|
+| A | Part 4 | E06 GHOST Layers | `.ring-anim`, `.ring-text-anim` | 10 | ✅ FIXED iter 32 |
+| B | Part 3 | E07 Voice Hierarchy | `.bar-rect` | 3 | ✅ FIXED iter 32 |
+| C | Part 7A | E08 Core Directives | `.anim-group`, `.center-pulse` | 9 | ✅ FIXED iter 32 |
+| D | Part 5 | E09 OCEAN Pentagon | `.pentagon-anim`, `.profile-anim` | 10 | ✅ FIXED iter 32 |
+| E | Part 10 | E15 Annotated Blueprint | `.callout` | 11 | ✅ FIXED iter 32 |
+
+**Affected total:** 43 animation elements across 5 VS-EMBEDs (E01-E05, E10-E14, E16-E18 — не затронуты, их animation classes уже имели `scroll-enter` или наблюдались `vs-scroll-observer.js`).
+
+**Правило (iter 32+):** при добавлении нового VS-EMBED с animation classes — проверить, что `vs-scroll-observer.js` `SCROLL_ENTER_SELECTOR` включает эти классы, ИЛИ что элементы имеют `scroll-enter` class. Иначе элементы останутся невидимыми на собранном сайте. Audit script: `scripts/audit_vs_embeds.py`.
 
 ---
 
@@ -74,15 +88,16 @@
 
 | Ограничение | Описание |
 |-------------|----------|
-| **Root fallbacks committed to git** | `index.html`, `assets/`, `widgets/`, `parts/`, `event-bus.js`, `data/`, `build.hash` — regenerated root fallbacks. Не редактировать напрямую. Все правки — в `src/`. После `pnpm run build` fallbacks регенерируются. |
+| **Root fallbacks committed to git** | `index.html`, `assets/`, `widgets/`, `parts/`, `event-bus.js`, `data/`, `build.hash` — regenerated. Не редактировать напрямую. Все правки — в `src/`. После `pnpm run build` fallbacks регенерируются. |
 | **Только linear single-pass** | Нет слоёв, тиров, уровней глубины. Весь контент — Part 1 → Part 10. |
 | **CORE DIRECTIVES на English** | Directives в System Prompt — English. Guide prose — Russian. |
 | **Node >= 20, pnpm 10.x** | JavaScript runtime + package manager. |
-| **Canonical Guide Spec (iter 7–18) — COMPLETE** | Все 10 Parts + 3 Appendix ✅ MIGRATED. См. `docs/canon/_README.md` §5. |
+| **Canonical Guide Spec (iter 7-18) — COMPLETE** | Все 10 Parts + 3 Appendix ✅ MIGRATED. См. `docs/canon/_README.md` §5. |
 | **CSP compliance (iter 19)** | `qa:csp` PASS. Все scripts в `index.html` — `<script src="...">` (external). Inline scripts forbidden. |
 | **Inline styles forbidden (iter 24, KI#13 CLOSED)** | Все 123 inline `style=` → external CSS classes с `vs-ki13-*` prefix (60 селекторов). |
-| **VS elements registry (iter 25)** | 18 VS elements: E01–E18. E18 (Greeting Algorithm) — iter 25, Part 7B. Все 18 embeded в master HTML, styles в `src/assets/vs-styles.css` SECTION 5, extracts в `visual-system/integration/component-extracts/`. |
-| **Deployed Guide Audit (iter 26-31) — COMPLETE** | KI#18 ✅ CLOSED iter 31. Phase 1 audit done iter 26 (8 sub-items A–H + I). Phase 2 complete iter 28-31: 7 fixed (A+B+C+D+E+I+F), 2 keep-by-design (G+H with documented rationale). KI#19 (Chinese chars) CLOSED iter 30. Принцип: `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED. См. §«Known Issues» KI#18 above. |
+| **VS elements registry (iter 25)** | 18 VS elements: E01–E18. Все 18 embeded в master HTML, styles в `src/assets/vs-styles.css` SECTION 5, extracts в `visual-system/integration/component-extracts/`. |
+| **VS scroll-animation observer (iter 32, KI#20 CLOSED)** | `vs-scroll-observer.js` наблюдает `.scroll-enter, .enneagram-anim, .type-node, .ring-anim, .ring-text-anim, .bar-rect, .anim-group, .center-pulse, .pentagon-anim, .profile-anim, .callout`. При добавлении нового animation class — добавить в selector. |
+| **DGA COMPLETE (iter 26-31, KI#18 CLOSED)** | 9/9 sub-items resolved (7 fixed + 2 keep-by-design). Принцип `viz > dry text` — текст не должен пере-объяснять VS-EMBED. Catalog vs Detail / Annotation Layer patterns — keep-by-design с documented rationale. |
 
 ---
 

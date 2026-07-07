@@ -1,37 +1,51 @@
 /**
  * ============================================================================
- * LIVE CHARACTER GUIDE - VS Scroll Observer v1.0.0
+ * LIVE CHARACTER GUIDE - VS Scroll Observer v1.1.0
  * ============================================================================
  *
- * Global IntersectionObserver for all .scroll-enter elements.
+ * Global IntersectionObserver for all VS-EMBED animation elements.
  * Replaces 17 inline <script> blocks from visual-system integration
  * (E01–E17) that each duplicated the same IntersectionObserver pattern.
  *
  * Architecture:
- * - MutationObserver watches for new .scroll-enter elements added to DOM
+ * - MutationObserver watches for new animation elements added to DOM
  *   (handles lazy-loaded content from lazy-loader.js)
  * - IntersectionObserver triggers .is-visible class when element enters viewport
  * - Respects prefers-reduced-motion: all elements immediately visible
- * - Also handles .enneagram-anim and .type-node classes (E10-specific)
+ *
+ * Selector coverage (KI#20 fix, iter 32):
+ * - .scroll-enter              — generic scroll-trigger (most VS-EMBED elements)
+ * - .enneagram-anim, .type-node — E10 Enneagram (was in v1.0.0)
+ * - .ring-anim, .ring-text-anim — E06 GHOST Layers (KI#20-A)
+ * - .bar-rect                  — E07 Voice Hierarchy (KI#20-B)
+ * - .anim-group, .center-pulse — E08 Core Directives (KI#20-C)
+ * - .pentagon-anim, .profile-anim — E09 OCEAN Pentagon (KI#20-D)
+ * - .callout                   — E15 Annotated Blueprint (KI#20-E)
  *
  * Load order: must be loaded AFTER widget-utils.js in shell/index.html
  *
  * KI#12 fix (iter 5): migrated inline scripts → shell widget module.
+ * KI#20 fix (iter 32): extended selector to cover all animation classes
+ *   previously observed by local element scripts (stripped during KI#16 CSP
+ *   compliance migration, iter 19).
  */
 
 (function() {
   'use strict';
 
-  var SCROLL_ENTER_SELECTOR = '.scroll-enter, .enneagram-anim, .type-node';
+  // KI#20 (iter 32): extended selector covers all animation classes that have
+  // CSS rules depending on .is-visible (initial state opacity:0 / transform:scale(0)).
+  // When adding a new VS-EMBED with a new animation class — add it here AND
+  // check scripts/audit_vs_embeds.py to verify no regression.
+  var SCROLL_ENTER_SELECTOR = '.scroll-enter, .enneagram-anim, .type-node, ' +
+    '.ring-anim, .ring-text-anim, ' +     // E06 GHOST Layers
+    '.bar-rect, ' +                       // E07 Voice Hierarchy
+    '.anim-group, .center-pulse, ' +      // E08 Core Directives
+    '.pentagon-anim, .profile-anim, ' +   // E09 OCEAN Pentagon
+    '.callout';                           // E15 Annotated Blueprint
   var VISIBLE_CLASS = 'is-visible';
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function observeElement(el, observer) {
-    if (observer) {
-      observer.observe(el);
-    }
-  }
 
   function makeElementsVisible(el) {
     if (el.classList) {
