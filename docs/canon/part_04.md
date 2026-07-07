@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_04.html`
 > **VS elements:** E05 (SPINE chain), E06 (GHOST Layers)
 > **Sections (11):** `p4_spine_overview`, `p4_ghost`, `p4_lie`, `p4_flaw`, `p4_need`, `p4_want`, `p4_spine_full_chain`, `p4_spine_mapping`, `p4_spine_check`, `p4_spine_navigation`, `p4_ghost_layers`
-> **Last synced:** 2026-06-23 (iter 8 — master HTML migrated against this Canon)
-> **Migration status:** ✅ MIGRATED (iter 8 — see Migration Notes below for deviations)
+> **Last synced:** 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-D: trimmed p4_spine_overview intro paragraph to remove partial re-explanation of E05 viz SPINE chain)
+> **Migration status:** ✅ MIGRATED (iter 8 — see Migration Notes below for deviations) + ✅ iter 30 DGA fix (KI#18-D)
 
 ---
 
@@ -395,3 +395,29 @@ SPINE-профиль построен и проверен на консисте�
 | Orphan `<p>` между p4_spine_navigation `</section>` и VS-EMBED E06 (строка 599 оригинала) | Удалить | ✅ BONUS | Content outside `<section>` (KI#13 warning). Дублировала intro p4_ghost_layers (строка 630 оригинала). Удалена — fixes 1 из 23 "content outside section" warnings. |
 
 **Итог миграции:** 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удален, 1 forward-ref строка таблицы удалена, 2 абзаца re-explanation сжаты до 1 предложения. 2 unique infographic сохранены (deviation от Canon, по предпочтению пользователя viz > text). LIE таблица сохранена полностью (deviation, все 4 строки уникальны). Build PASS, validate:master PASS, qa без новых critical findings.
+
+---
+
+## DGA Phase 2 fix (iter 30 — applied 2026-07-08)
+
+**KI#18-D FIXED.** Deployed Guide Audit Phase 2 — дедупликация intro параграфа `p4_spine_overview` против VS-EMBED E05 (SPINE Framework hex-chain) выше. Iter 8 уже сжал 2 абзаца re-explanation до 1 предложения, но в intro оставалось упоминание «фреймворк из 5 элементов» (показано в viz hexagons).
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|--------|
+| 1 | `<p>` intro «...SPINE — фреймворк из 5 элементов, связывающих прошлое персонажа с его поведением.» → trimmed до «...SPINE связывает прошлое персонажа с его поведением (структура показана в VS-EMBED E05 выше).» | Сжать | DONE (iter 30) | Pattern KI#18-A/B/C/I/F: viz > dry text. Убрано «фреймворк из 5 элементов» (5 hexagons уже показаны в viz E05). Сохранён unique angle «связывающих прошлое с поведением» (не в viz). Добавлен explicit cross-ref к E05. |
+
+**Result:** `src/master/part_04.html`: 670 → 670 строк (0 net — single-line edit, no row count change). Принцип `viz > dry text` — упоминание «5 элементов» убрано (видно в viz hexagons), сохранён unique angle «связывает прошлое с поведением» + cross-ref к E05.
+
+### Validation gates (iter 30 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, baseline warnings (23 — KI#13/VS-EMBED baseline, no regression, no part_04 new warnings).
+- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass (7.2KB).
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-D)`, `Migration status: ✅ MIGRATED (iter 8) + ✅ iter 30 DGA fix (KI#18-D)`.
+
+**Note:** Панель «Причинно-следственная цепь» внутри VS-EMBED E05 (master HTML lines 122-136) НЕ редактировалась — она часть стандартизованного визуального элемента E05. Panel добавляет UNIQUE контент: русские переводы терминов (глубокая травма, ложное убеждение etc.) + causality verbs (порождает/создаёт/двигает/маскируемое) + dynamics insight «WANT сходится к NEED». Trimming panel deviated бы от canonical E05 source (`visual-system/elements/E05-spine-framework.html` + `visual-system/integration/component-extracts/E05-visual.html`). По принципу «better to underdo than to break» — panel оставлена как есть.

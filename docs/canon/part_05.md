@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_05.html` (619 → 615 строк, 8 секций)
 > **VS elements (embedded):** E09 (OCEAN Pentagon), E10 (Enneagram × SPINE Mapping)
 > **Sections (8):** `p5_ocean_basics`, `p5_elena_profile`, `p5_ocean_warning`, `p5_enneagram_basics`, `p5_mbti_ref`, `p5_cross_instrument_map`, `p5_enneagram_wings`, `p5_cross_matrix`
-> **Last synced:** 2026-06-24 (iter 16 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 16)
+> **Last synced:** 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-E: aligned OCEAN extreme-pole rule to strict definition <30 or >70; fixed Elena profile semantic bug «3 экстремальных полюса» → «1 экстремальный полюс + 2 cautious zone values»; KI#19: Chinese chars «线索» in master HTML L269 replaced with Russian «зацепками» per canon)
+> **Migration status:** ✅ MIGRATED (iter 16) + ✅ iter 30 DGA fix (KI#18-E) + master HTML encoding fix (KI#19)
 
 ---
 
@@ -56,10 +56,10 @@
 | **O**penness | 72 | Любопытная, творческая — следует за зацепками, которые другие игнорируют. Экстремальный полюс → WANT: «Доказать правоту» требует открытости к неочевидным историям. |
 | **C**onscientiousness | 65 | Методичная в исследованиях, менее организованная в личной жизни. Умеренная — достаточно дисциплины для расследований, но не перфекционистка. |
 | **E**xtraversion | 41 | Работает одна, предпочитает бары вечеринкам. Не экстремум, но склонность к интроверсии подкрепляет LIE: «Я работаю одна». |
-| **A**greeableness | 38 | Конфликтная, склонна вызывать собеседника. Низкая A → FLAW: отталкивает сарказмом, когда сближается. Экстремальный полюс. |
-| **N**euroticism | 68 | Циничная, тревожная, реагирует на предательство. Высокая N → GHOST-реактивность: предательство редактора активирует сильнейший эмоциональный ответ. Экстремальный полюс. |
+| **A**greeableness | 38 | Конфликтная, склонна вызывать собеседника. Низкая A → FLAW: отталкивает сарказмом, когда сближается. Cautious zone (30–40) — на границе с экстремальной зоной (<30), напрямую связана с FLAW. |
+| **N**euroticism | 68 | Циничная, тревожная, реагирует на предательство. Высокая N → GHOST-реактивность: предательство редактора активирует сильнейший эмоциональный ответ. Cautious zone (60–70) — на границе с экстремальной зоной (>70), напрямую связана с GHOST. |
 
-**RULE:** У Елены 3 экстремальных полюса (O=72, A=38, N=68). Это допустимо для 8K+ контекста, но для 4K следует оставить только 2 (рекомендация: N=68 и A=38 — они напрямую связаны с SPINE).
+**RULE:** У Елены 1 экстремальный полюс (O=72 > 70) + 2 значения в cautious zone (A=38, N=68 — на границе 30–40 / 60–70). Соответствует строгому правилу (значения <30 или >70 = экстремальные). Профиль допустим для 4K+ контекста (1 экстремум). A=38 и N=68 напрямую связаны с SPINE (FLAW и GHOST-реактивность) — при 8K+ можно усилить их до экстремальной зоны (A<30 или N>70) для более выраженного конфликта.
 
 ### Enneagram: Тип 6w5 (Скептик/Лоялист)
 
@@ -283,3 +283,47 @@ OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+
 - [x] `pnpm run test:unit` — 43/43 pass.
 - [x] `pnpm run lint` — 0 errors.
 - [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 16)`.
+
+---
+
+## DGA Phase 2 fix (iter 30 — applied 2026-07-08)
+
+**KI#18-E FIXED** + **KI#19 FIXED** (incidental finding during KI#18-E analysis).
+
+### KI#18-E — OCEAN extreme-pole rule alignment (semantic bug)
+
+**Проблема:** Cross-viz/text semantic inconsistency. E09 viz (lines 122, 138) uses strict rule (<30 or >70 = extreme) and says Elena has **1 экстремум** (only O=72). But text `p5_elena_profile` (lines 272, 273, 279) used broad interpretation (<40 or >60 = extreme) and claimed Elena has **3 экстремальных полюса** (O=72, A=38, N=68). Internal contradiction: `p5_ocean_basics` L153 + table L160 already state strict rule (<30 or >70), but Elena profile section contradicted it.
+
+**Fix (aligned to strict rule <30 or >70 — most prevalent across codebase):**
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|---------|
+| 1 | L272: `<td>...Agreeableness 38... Экстремальный полюс.</td>` | Заменить | DONE (iter 30) | A=38 в cautious zone (30–40), НЕ экстремальный полюс per strict rule (<30). Заменено на «Cautious zone (30–40) — на границе с экстремальной зоной (<30), напрямую связана с FLAW.» |
+| 2 | L273: `<td>...Neuroticism 68... Экстремальный полюс.</td>` | Заменить | DONE (iter 30) | N=68 в cautious zone (60–70), НЕ экстремальный полюс per strict rule (>70). Заменено на «Cautious zone (60–70) — на границе с экстремальной зоной (>70), напрямую связана с GHOST.» |
+| 3 | L279: `<p>RULE: У Елены 3 экстремальных полюса (O=72, A=38, N=68). Это допустимо для 8K+ контекста, но для 4K следует оставить только 2 (рекомендация: N=68 и A=38 — они напрямую связаны с SPINE).</p>` | Переписать | DONE (iter 30) | Semantic bug: 3 → 1 экстремальный полюс. Заменено на: «У Елены 1 экстремальный полюс (O=72 > 70) + 2 значения в cautious zone (A=38, N=68 — на границе 30–40 / 60–70). Соответствует строгому правилу (значения <30 или >70 = экстремальные). Профиль допустим для 4K+ контекста (1 экстремум). A=38 и N=68 напрямую связаны с SPINE (FLAW и GHOST-реактивность) — при 8K+ можно усилить их до экстремальной зоны (A<30 или N>70) для более выраженного конфликта.» |
+
+**Rule alignment decision:** Strict rule (<30 or >70) выбрана как canonical, потому что: (a) E09 viz threshold indicator L122 использует <30 и >70; (b) E09 viz note L138 говорит «1 экстремум»; (c) `p5_ocean_basics` L153 RULE callout уже формулирует strict rule; (d) `p5_ocean_basics` L160 table header использует (<30) и (>70); (e) canon L23 + L27 — strict. Broad rule (<40 or >60) была только implicit в Elena profile section.
+
+**Canon sync:** L59, L60, L62 canon part_05.md — те же правки применены.
+
+### KI#19 — Chinese chars in master HTML (encoding bug, found incidentally)
+
+**Проблема:** `src/master/part_05.html` L269 содержал смешение русского с китайскими иероглифами: «следует за**线索**ми, которые другие игнорируют» (вместо «следует за **зацепками**»). Canon part_05.md L56 имеет правильное русское «за зацепками» — master HTML был corrupted при какой-то past edit.
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|---------|
+| 1 | L269: `<td>...Openness 72... следует за线索ми, которые другие игнорируют...</td>` | Заменить | DONE (iter 30) | Chinese chars «线索» (xiànsuǒ = clue) заменены на русское «зацепками» per canon L56. |
+
+**Canon:** не требовалось — canon L56 уже корректен.
+
+### Validation gates (iter 30 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, baseline warnings (23 — KI#13/VS-EMBED baseline, no regression).
+- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass (7.2KB).
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-E + KI#19)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ iter 30 DGA fix (KI#18-E) + master HTML encoding fix (KI#19)`.

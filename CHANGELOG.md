@@ -1,5 +1,42 @@
 # Changelog
 
+## [9.1.30] - 2026-07-08
+
+### iter 30 — DGA Phase 2 continued (KI#18-D + KI#18-E FIXED, KI#19 incidental FIXED)
+
+Применены 3 fix: 2 из 4 pending sub-items KI#18 (D + E) + 1 incidental KI#19 (encoding bug, найден при анализе KI#18-E). Принцип `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED.
+
+### Changed (iter 30 — KI#18-D fix: Part 4 p4_spine_overview intro trimmed)
+- **`src/master/part_04.html` edited** (L143) — p4_spine_overview intro paragraph trimmed: removed partial re-explanation «фреймворк из 5 элементов, связывающих прошлое персонажа с его поведением» (5 hexagons уже показаны в E05 viz L18-119) → «SPINE связывает прошлое персонажа с его поведением (структура показана в VS-EMBED E05 выше).» Single-line edit. part_04: 670 → 670 (0 net). Панель «Причинно-следственная цепь» внутри VS-EMBED L122-136 НЕ редактировалась — часть canonical E05 viz source (visual-system/elements/E05-spine-framework.html L364-377 + component-extracts/E05-visual.html L113-127). Panel добавляет UNIQUE контент: русские переводы (глубокая травма, ложное убеждение etc.) + causality verbs (порождает/создаёт/двигает/маскируемое) + dynamics insight «WANT сходится к NEED». По принципу «better to underdo than to break» — panel оставлена.
+- **`docs/canon/part_04.md` edited** — front-matter Last synced → 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-D), Migration status + ✅ iter 30 DGA fix (KI#18-D). DGA Phase 2 fix section (iter 30) + validation gates iter 30 PASSED + Note про panel inside VS-EMBED оставлена.
+- **`parts/part_04.html` regenerated** — root fallback (build artifact, fix propagated, hash unchanged).
+
+### Changed (iter 30 — KI#18-E fix: Part 5 p5_elena_profile semantic bug fixed)
+- **`src/master/part_05.html` edited** (L272, L273, L279) — p5_elena_profile semantic bug fixed: aligned OCEAN extreme-pole rule к strict (<30 или >70 — most prevalent across codebase). Cross-viz/text inconsistency resolved: E09 viz L122+L138 says «1 экстремум» (only O=72, strict rule), но text L272-273, L279 говорил «3 экстремальных полюса» (broad rule <40 или >60). L272: «Экстремальный полюс.» → «Cautious zone (30–40) — на границе с экстремальной зоной (<30), напрямую связана с FLAW.» L273: аналогично для N=68 (cautious 60–70). L279: «3 экстремальных полюса» → «1 экстремальный полюс (O=72 > 70) + 2 значения в cautious zone (A=38, N=68)». part_05: 615 → 615 (0 net — single-token + paragraph rewrite).
+- **`docs/canon/part_05.md` edited** — front-matter Last synced → 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-E + KI#19), Migration status + ✅ iter 30 DGA fix (KI#18-E) + master HTML encoding fix (KI#19). L59 (A=38 row) + L60 (N=68 row) + L62 (RULE callout) синхронизированы. DGA Phase 2 fix section (iter 30) with 2 subsections (KI#18-E + KI#19) + validation gates iter 30 PASSED.
+- **`parts/part_05.html` regenerated** — root fallback (build artifact, fix propagated, hash unchanged).
+
+### Changed (iter 30 — KI#19 incidental fix: Chinese chars in master HTML)
+- **`src/master/part_05.html` edited** (L269) — encoding bug fixed: Chinese chars «线索» (xiànsuǒ = clue) заменены на русское «зацепками» per canon part_05.md L56. Master HTML был corrupted при past edit: «следует за**线索**ми, которые другие игнорируют» → «следует за **зацепками**, которые другие игнорируют». Canon уже имел корректный текст. Single-token replacement.
+
+### Rule alignment decision (iter 30 — KI#18-E)
+- **Strict rule (<30 или >70)** выбрана как canonical для OCEAN extreme-pole definition, потому что: (a) E09 viz L122 threshold indicator использует <30 и >70; (b) E09 viz L138 note говорит «1 экстремум»; (c) p5_ocean_basics L153 RULE callout уже формулирует strict rule; (d) p5_ocean_basics L160 table header использует (<30) и (>70); (e) canon part_05.md L23 + L27 — strict. Broad rule (<40 или >60) была только implicit в Elena profile section L272-273, L279. Aligning к strict = минимальные изменения, maximum consistency.
+
+### Validation gates (iter 30 — ALL PASSED)
+- `validate:master` ✅ (0 errors, 23 baseline warnings — KI#13/VS-EMBED baseline, no regression, no part_04/part_05 new warnings).
+- `build` ✅ (hash `fd3d96d3` unchanged).
+- `validate` ✅ (8 gates).
+- `test:unit` ✅ (43/43 pass).
+- `lint` ✅ (0 errors, 13 warnings baseline).
+- `qa:csp` ✅.
+- `qa:bundle` ✅ (7.2KB).
+- `qa:doc-versions` ✅.
+
+### KI#18 status update (iter 30)
+- **KI#18 🟡 ACTIVE — 7/9 fixed (A iter 26, B+C iter 28, I+F iter 29, D+E iter 30), 2 pending (G, H — likely keep-by-design с documented rationale).** После G + H — KI#18 ✅ CLOSED.
+
+---
+
 ## [9.1.29] - 2026-07-08
 
 ### iter 29 — DGA Phase 2 continued (KI#18-I + KI#18-F FIXED)
