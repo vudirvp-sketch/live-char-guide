@@ -4,54 +4,91 @@
 
 ---
 
-Task ID: 32
+Task ID: 33
 Agent: main
-Task: iter 32 — по запросу user: перепроверить все элементы visual-system на корректность отображения на собранном сайте (user наблюдал поломанные элементы — наезд, частичное отображение, кашу). Пример поломанного элемента: E06 GHOST Layers из `src/master/part_04.html`. Также — почистить репозиторий от устаревшего мусора и необоснованной громоздкости в документации. Если найден новый баг — сначала документировать в `STATUS.md` как KI#N, потом фиксить. Результат: архив изменённых файлов с сохранением структуры + git-команды + точка остановки.
+Task: iter 33 — по запросу user: перепроверить аудит канона из предыдущего чата (525-строчный paste), убедиться что все пункты корректны, ничего не упущено, ничего не сделает хуже, доработать и улучшить где нужно, зафиксировать итоговый «фронт» работ так, чтобы шаг за шагом и качественно все поправить и улучшить. Результат: архив + git-команды + точка остановки для продолжения в новом чате. Правок канона НЕ вносить — это верификация.
 
 Work Log:
-- 1: **Контекст загружен** из STATUS.md (iter 31 DGA Phase 2 final COMPLETE — KI#18 ✅ CLOSED 9/9 resolved; все previous KI#1..#17 + KI#19 ✅ CLOSED; iter 32+ roadmap — none planned), worklog.md (iter 31 record — DGA Phase 2 final), AGENT_NAVIGATION.md (§6 pitfalls #37 KI#18 ✅ CLOSED, #38 KI#19 ✅ CLOSED; §8 iter 32+ roadmap — none planned, DGA COMPLETE; §6 pitfall #1 — `<style>`/`<script>` forbidden в master HTML, §6 pitfall #31 — visual-system integration JS → `src/shell/widgets/vs-*.js` external modules, §6 pitfall #34 — KI#16 qa:csp inline scripts → external widget JS), PLAN.md (§5 iter 31 stop point — DGA COMPLETE), docs/CONTENT_RESTRUCTURE_PLAN.md (§8 iter 31 stop point). Build hash baseline: `fd3d96d3`.
-- 2: **Анализ примера E06** — user предоставил snippet из `src/master/part_04.html` L523-615 (VS-EMBED E06 GHOST Layers). Сравнён с standalone element HTML `visual-system/elements/E06-ghost-layers.html`. Найдено: standalone HTML имеет local `<script>` с `IntersectionObserver` наблюдающим `.ring-anim, .ring-text-anim, .ring-label, .scroll-enter` (4-селектор). Embedded версия в master HTML НЕ включает этот script (KI#16, CSP compliance, iter 19 — inline scripts запрещены). Замена `vs-scroll-observer.js` наблюдает только `.scroll-enter, .enneagram-anim, .type-node` (3-селектор) — НЕ покрывает `.ring-anim`, `.ring-text-anim`. CSS правила: `.ghost-rings svg circle.ring-anim { transform: scale(0); }` (initial) → `.ring-anim.is-visible { transform: scale(1); }` (visible). Без `is-visible` class circles остаются `scale(0)` = INVISIBLE. Same для `.ring-text-anim` (`opacity: 0` initial). Гипотеза: 4 SVG circles + 6 SVG text labels E06 невидимы на собранном сайте.
-- 3: **Audit script написан** — `scripts/audit_vs_embeds.py` (Python, ~250 строк). Парсит `src/assets/vs-styles.css` для нахождения всех CSS классов с `.is-visible`-dependent правилом (initial state `opacity:0` / `transform:scale(0)`). Парсит `src/shell/widgets/vs-scroll-observer.js` для извлечения `SCROLL_ENTER_SELECTOR`. Для каждого VS-EMBED в `src/master/*.html`: проверяет, что каждый animation-classed element EITHER имеет `scroll-enter` class на себе, EITHER его animation class входит в JS observed set. Interactive-only classes (показываются на hover/focus, не scroll) — exclude list (`.mini-card` для E10).
-- 4: **Audit найден SYSTEMIC BUG — KI#20.** 5 из 18 VS-EMBED элементов имеют animation-classed elements без `scroll-enter` class и без coverage в JS observer selector.总计 43 элемента:
-  - **E06 (Part 4)** — 4 `.ring-anim` + 6 `.ring-text-anim` (10 elements)
-  - **E07 (Part 3)** — 3 `.bar-rect` (3 elements)
-  - **E08 (Part 7A)** — 8 `.anim-group` + 1 `.center-pulse` (9 elements)
-  - **E09 (Part 5)** — 4 `.pentagon-anim` + 6 `.profile-anim` (10 elements)
-  - **E15 (Part 10)** — 11 `.callout` (11 elements)
-  - E01, E02, E03, E04, E05, E10 (partially), E11, E12, E13, E14, E16, E17, E18 — НЕ затронуты (animation classes уже имели `scroll-enter` на элементах или наблюдались `vs-scroll-observer.js`).
-- 5: **KI#20 documented в STATUS.md ДО фикса** (per user workflow rule "сначала документируй в STATUS.md как Known Issue, потом фиксий"). Добавлен раздел "KI#20 — Visual System Scroll-Animation Bug ✅ CLOSED (iter 32)" с symptom / root cause / fix approach / sub-items table A-E / affected total 43 elements / rule for future.
-- 6: **Fix applied — single-file edit `src/shell/widgets/vs-scroll-observer.js`:** `SCROLL_ENTER_SELECTOR` extended from `'.scroll-enter, .enneagram-anim, .type-node'` (3 classes) → `'.scroll-enter, .enneagram-anim, .type-node, .ring-anim, .ring-text-anim, .bar-rect, .anim-group, .center-pulse, .pentagon-anim, .profile-anim, .callout'` (11 classes). File header updated: version 1.0.0 → 1.1.0, added KI#20 fix docstring with per-class element mapping. Удалена unused `observeElement(el, observer)` function (lint warning baseline → fixed: 13 warnings → 12 warnings).
-- 7: **Build + validation gates ALL PASS:**
-  - `pnpm run build` ✅ — hash `fd3d96d3` unchanged (только JS widget edit, не master HTML; hash computed from index.html content only).
-  - `pnpm run validate:master` ✅ (0 errors, baseline warnings unchanged).
-  - `pnpm run validate` ✅ (8 gates: GATE-1..5 + SHELL-PARTS + SHELL-LOADER + SHELL-STYLES).
-  - `pnpm run test:unit` ✅ (43/43 pass).
-  - `pnpm run lint` ✅ (0 errors, **12 warnings** — was 13 baseline, -1 от удаления unused `observeElement` function).
-  - `pnpm run qa:csp` ✅ (0 inline scripts).
-  - `pnpm run qa:bundle` ✅ (7.2KB, max 500KB).
-  - `pnpm run qa:doc-versions` ✅.
-- 8: **Audit script re-run — 0 regressions.** После фикса `scripts/audit_vs_embeds.py` reports: "✓ No regressions: all animation-classed elements are observed either by vs-scroll-observer.js selector OR by having `scroll-enter` class on the element." Audit script скопирован в `scripts/audit_vs_embeds.py` репозитория (новый file) для будущего использования.
-- 9: **Repo cleanup — 4 stale iter-specific READMEs DELETED:**
-  - `README_iter18.md` (100 строк) — iter 18 final cleanup README, superseded by current STATUS/worklog.
-  - `README_ITER8_MERGE.md` (97 строк) — iter 8 merge archive README, superseded.
-  - `ITER9_PATCH_README.md` (60 строк) — iter 9 patch README, superseded.
-  - `MERGE_INSTRUCTIONS.md` (187 строк) — iter 22 merge instructions, one-time document long past.
-  - Все 4 файла НЕ referenced ни в одном другом файле репозитория (verified via grep).
-- 10: **Документация актуализирована:**
-  - `STATUS.md` — rewritten: iter 32 record, KI#20 ✅ CLOSED (5 sub-items A-E table), iter 33+ roadmap — none planned, все KIs CLOSED. Cleanup: убраны verbose iter 31 tables (Что сделано / Изменённые файлы), KI#18 sub-items table compressed.
-  - `worklog.md` — iter 32 = этот record (самый подробный); iter 31 → one-liner; iter 30 → one-liner; iter 29 → one-liner; iter 28 → one-liner; iter 26 → one-liner. Compressed "Предыдущие итерации" section.
-  - `AGENT_NAVIGATION.md` — header iter line updated (+KI#20 ✅ CLOSED iter 32). §6 pitfall #39 NEW (KI#20 Visual System Scroll-Animation Bug, full root cause + fix + rule). §8 OP-1 iter 20-31 verbose paragraphs (9 paragraphs, ~9000 chars) COMPRESSED to single iter history table (8 rows, iter 1-32). §8 iter 33+ roadmap updated (none planned, all KIs CLOSED, VS scroll-animation invariant). Footer "Подсказка следующему агенту" updated to iter 33+. Net savings: 9198 chars (-18%).
-  - `PLAN.md` — rewritten cleaner: §1-4 historical context preserved, §5 Точка остановки compressed (iter 32 COMPLETE, iter 33+ roadmap — none planned).
-  - `docs/CONTENT_RESTRUCTURE_PLAN.md` — §5.2 iter 32 row added (KI#20 CLOSED), §8 iter 32 stop point updated.
-  - `CHANGELOG.md` — [9.1.32] entry added.
+- 1: **Контекст загружен** из STATUS.md (iter 32 KI#20 ✅ CLOSED Visual System Scroll-Animation Bug; все previous KI ✅ CLOSED; iter 33+ roadmap — none planned), worklog.md (iter 32 record — KI#20 single-file fix в vs-scroll-observer.js), AGENT_NAVIGATION.md (§6 pitfall #39 KI#20 ✅ CLOSED; §8 iter 33+ roadmap — none planned). Build hash baseline: `fd3d96d3`.
+- 2: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git` (shallow depth 1) в `/home/z/my-project/repo/live-char-guide/`. HEAD = commit 9472f17 (iter 32 KI#20). Build hash `fd3d96d3` confirmed.
+- 3: **Audit верификация — каждый пункт A1-G5 сверен с фактическим текстом canon-файлов.** Использованы Grep для поиска точных строк + Read для контекста. Результаты:
+  - **A1 ✅ CONFIRMED** — `appendix_glossary.md` L175: `T→A→P (Trigger → Action → **Pattern**)`, но определение ниже говорит «Цена (физическая реакция в той же сцене)». Все остальные упоминания (part_01 L83/L126/L134, part_02 L13/L169, part_07a L539) используют «Price» / «Цена».
+  - **A2 ✅ CONFIRMED** — `part_05.md` §5.2 (iter 30 fix) L62: «У Елены 1 экстремальный полюс (O=72 > 70) + 2 cautious zone». `part_07a.md` L666: «Елена: O:72, C:65, E:41, A:38, N:68. Enneagram: 6w5. Экстремальных полюса: 3 (...)» — противоречие.
+  - **A3 ✅ CONFIRMED + STRENGTHENED** — Счётчик вырезаний: 2 уровня в `part_04.md` L334, `part_07a.md` L244, L404-405, `part_10.md` L500; 3 уровня в `part_10.md` L392 (Tier 3), L514 (Lorebook). ВНУТРЕННЯЯ несогласованность в part_10: L500=2, L514=3.
+  - **A4 ✅ CONFIRMED** — NEED Выщербленного: «Принять утраты как часть себя» (part_04 L151), «Принять утраты как часть себя, не заменять чужой памятью» (part_04 L197), «Принять, что полноценности не существует. Выбрать, как растворяться — в функции или в диссонансе» (part_10 L383, part_07a L394). ТРИ разные формулировки.
+  - **A5 ✅ CONFIRMED** — `part_08.md` L181-188 (AP-9 ❌ пример) помечен «Сломанный SPINE» из-за absent GHOST/LIE, но `part_04.md` L39 явно говорит «Для простых персонажей GHOST и LIE могут быть неявными». AP-9 conflates два критерия.
+  - **A6 ✅ CONFIRMED** — `part_08.md` L313 AP-15 ❌ пример: «замолкает на час» = отложенная цена, нарушает `part_02.md` §2.2 RULE.
+  - **A7 ✅ CONFIRMED** — `part_07a.md` L244 пример AN Выщербленного содержит секцию «Счётчик вырезаний», но таблица L250-256 «Пояснение секций AN» её не описывает.
+  - **A8 ✅ CONFIRMED** — `part_08.md` §8.1 сводная таблица L21-42: 15 строк AP-1..AP-15 + 1 строка «—» без номера (OCEAN Overload). footnote объясняет, но не снижает confusion.
+  - **A9 ✅ CONFIRMED** — `part_09.md` L282 resume: «3-уровневая шкала (Critical / Bad / Good)» vs §9.1 L25: «4 зоны качества (Критический 0–25% / Слабый 25–50% / Хороший 50–85% / Отличный 85–100%)». 3 vs 4, English vs Russian.
+  - **A10 ✅ CONFIRMED** — `part_09.md` L207-213 universal Quick Check (PP/Voice/Price/Format/Anti-godmoding) vs L245-253 Vyshcherblenny Quick Check (SP/Description/Examples/Greeting structural). Два разных набора под одним именем.
+  - **B1 ✅ PARTIALLY CONFIRMED** — GHOST Омнис L238 «Страх устаревания» = вывод (не событие) ✓; FLAW L236 «Утрата человечности» = абстракция ✓; LIE L237 «Эмоция — слабость плоти» = borderline OK (кредо). Audit слегка перебрал по LIE.
+  - **B2 ✅ REFINED** — `part_10.md` L134 «Унижение» = ярлык, но существующая формулировка уже содержит событие. Фикс = убрать слово «Унижение», не переписывать с нуля.
+  - **B3 ❌ INVALID** — Examples Омнис-Зета 25-35 русских слов = ~50-65 токенов каждый (с annotation). В пределах лимита 120 токенов. Аудит переоценил. **НЕ вносить правки по B3.**
+  - **B4 ✅ STRENGTHENED** — Tier 1/2/3 overloaded: Part 3 §3.4 (Examples quality ✓/⚠/✗), Part 6 (CoT complexity 0-3), Part 10 (GHOST Layers 1-3). Не просто «не используется далее», а **конфликт имён**.
+  - **B5 ✅ REFINED** — Из 5 типов Anchors в §4.8 без определений **3 (не 4)**: Psychological, At-rest, Growth. Sensory в Part 2 §2.6, FLAW-linked в Part 4 §4.8 детально.
+  - **B6 ✅ CONFIRMED** — `part_06.md` L73 text «12B» vs L11 viz «12B+».
+  - **C1-C8 ✅ CONFIRMED (subjective)** — англицизмы, метки callouts, кавычки. P2-2 решает через explicit policy в _README.md.
+  - **D1 ✅ CONFIRMED** — `part_04.md` L70 explicit note «Елена имеет два GHOST-сценария». Dual-GHOST противоречит правилу «один GHOST на персонажа».
+  - **D2 ✅ CONFIRMED** — `part_04.md` L93 (variant LIE Выщербленного), L152 (variant NEED) — мёртвый код, не используется далее.
+  - **D3 ✅ CONFIRMED** — `part_07b.md` L63 Greeting Елены (бар, ночь) vs `part_10.md` L94 Greeting Елены (кабинет редакции, 2 часа ночи).
+  - **D4 ✅ CONFIRMED + STRENGTHENED** — `part_07b.md` §7B.3 Lorebook Елены L667 = secondary GHOST (пожар). Та же проблема в `part_07a.md` L667 walkthrough.
+  - **D5 ✅ CONFIRMED** — `part_10.md` 5 карточек содержат `<!-- Demonstrates: ... -->` на английском.
+  - **D6 ✅ CONFIRMED** — Йоуёма только в `part_03.md` L205-250, без контекста, без cross-refs.
+  - **D7 ✅ CONFIRMED** — Уолтер Уайт только в `part_10.md` L104-191, без cross-refs из других Parts.
+  - **E1-E7 ✅ CONFIRMED** — front-matter 5-line block, Migration Notes/Validation gates ~1500 строк, Cross-refs ending duplicate, resume пересказ TOC, §1.3 orphan, Pattern Matcher 3 раза, «Применяется «очень деликатно»» копипаста.
+  - **F1 ✅ STRENGTHENED** — `rg "Canon planned iter 1[3-6]"` находит **30+ совпадений** в 9 canon-файлах. Не 5, как утверждал аудит. Все Parts 2-10 уже MIGRATED — заглушки устарели массово.
+  - **F2-F10 ✅ CONFIRMED** — типы Price без примеров, % без источника, cautious zone без определения, `<br/>` в markdown (part_07a L305), Keirsey vs MBTI (part_07a L401), Decision Tree без AP-симптомов, Elena inline annotations mixed.
+  - **G1-G5 ✅ CONFIRMED (suggestions)** — нет «Как читать», нет TL;DR, нет glossary-on-first-use, нет карты персонажей, нет pre-build checklist.
+- 4: **3 НОВЫХ пункта найдены при верификации:**
+  - **NEW-1 (KI#19-stray)** — `part_04.md` L366: `## Cross-references из других Parts (待 — будет заполнено при миграции других Parts)`. Китайский иероглиф «待» (dài = ждать). Не покрыт KI#19 (тогда правили master HTML L269 с «线索»).
+  - **NEW-2 (Lorebook walkthrough inconsistency)** — `part_07a.md` L667: «Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе...»». Это secondary GHOST, тогда как primary = «предательство редактора». Усиливает D4.
+  - **NEW-3 (§5.1 vs §5.3 vs §5.3 context-table)** — `part_05.md`: §5.1 RULE L23 «1-2 экстремума», §5.3 L84 «3+ полюсов», §5.3 L102 «максимум 3 для 8K+», §5.3 L37-42 context-table «до 4 для 16K+, до 5 для 32K+». Три формулировки одного правила.
+- 5: **Финальный «фронт работ» зафиксирован** в новом файле `docs/AUDIT_VERIFICATION.md` (8 секций, ~500 строк). Структура:
+  - §1 Контекст iter 33.
+  - §2 Сводная таблица верификации (50+ пунктов + 3 NEW).
+  - §3 Уточнения к исходному аудиту (B3 INVALID, B5 REFINED, B2 REFINED, B4 STRENGTHENED, F1 STRENGTHENED, NEW-1/2/3).
+  - §4 Финальный фронт работ: **P0 (16 правок, iter 34) → P1 (11 правок, iter 35) → P2 (18 правок, iter 36) → P3 (12 правок, iter 37) = 57 правок**. Каждая правка = exact file + line + before/after.
+  - §5 Поэтапный план исполнения (iter 34-37, шаги + validation gates + точка остановки).
+  - §6 Риски и компромиссы (build hash stability, migration history loss, dual-Elena pedagogy, YAML front-matter conversion, B3 не трогать, C-items минимальные правки).
+  - §7 Точка остановки iter 33.
+  - §8 Приложение: индекс правок по файлам (14 файлов + 3 новых).
+- 6: **Документация актуализирована:**
+  - `docs/AUDIT_VERIFICATION.md` — NEW file (главный deliverable).
+  - `STATUS.md` — iter 33 record (CONTENT AUDIT VERIFICATION), KI#21 (Content Audit contradictions) 🟡 DOCUMENTED с categories A-G + fix plan iter 34-37. iter 32 → one-paragraph reference.
+  - `worklog.md` — iter 33 = этот record (самый подробный); iter 32 → one-liner.
+  - `AGENT_NAVIGATION.md` — header iter line updated (+iter 33 Content Audit Verified + KI#21 documented). §6 pitfall #40 NEW (KI#21 Content Audit contradictions — categories A-G, fix plan reference to AUDIT_VERIFICATION.md). §8 OP-1 iter history table: iter 33 row added. §8 iter 34+ roadmap updated.
+- 7: **Правок канона НЕ внесено** (per user request — сначала перепроверить, потом решать). Build hash `fd3d96d3` unchanged (canon-файлы не тронуты, только docs).
+- 8: **Архив `iter_33_audit_verification.zip`** содержит только docs-изменения: `docs/AUDIT_VERIFICATION.md` (NEW), `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`. Структура папок сохранена. Загружен на tmpfiles.org.
 
 Stage Summary:
-- **iter 32 COMPLETE — KI#20 Visual System Scroll-Animation Bug ✅ CLOSED.** 5/5 sub-items fixed single-file edit'ом `src/shell/widgets/vs-scroll-observer.js` (selector extended for 8 animation classes: `.ring-anim, .ring-text-anim, .bar-rect, .anim-group, .center-pulse, .pentagon-anim, .profile-anim, .callout`). 43 animation elements на 5 VS-EMBED (E06/E07/E08/E09/E15) теперь корректно наблюдаются IntersectionObserver и отображаются при scroll into view.
-- **Состояние проекта (кратко):** **KI#20 ✅ CLOSED — 5/5 sub-items fixed.** Все previous KI (KI#1..KI#19) ✅ CLOSED. **Все Known Issues (KI#1..KI#20) ✅ CLOSED.** Build hash `fd3d96d3` unchanged (только JS widget edit). Live deploy: https://vudirvp-sketch.github.io/live-char-guide/
-- **Root cause (architectural):** KI#16 (iter 19, CSP compliance) вырезал inline `<script>` из VS-EMBED элементов. Local `IntersectionObserver` в standalone element HTML файлах (`visual-system/elements/E0X-*.html`) наблюдал animation classes напрямую (`.ring-anim, .bar-rect` и т.д.). Замена `vs-scroll-observer.js` наблюдала только `.scroll-enter, .enneagram-anim, .type-node` — missing 8 animation classes для E06/E07/E08/E09/E15. Элементы оставались в initial state (`opacity:0` / `transform:scale(0)`) навсегда — invisible на собранном сайте.
-- **Modified files:** `src/shell/widgets/vs-scroll-observer.js` (edited — selector extended, unused function removed), `widgets/vs-scroll-observer.js` (regenerated root fallback), `scripts/audit_vs_embeds.py` (NEW — regression audit tool). Deleted: `README_iter18.md`, `README_ITER8_MERGE.md`, `ITER9_PATCH_README.md`, `MERGE_INSTRUCTIONS.md` (444 строки stale iter-specific docs removed). Docs updated: STATUS.md, worklog.md, AGENT_NAVIGATION.md (-18% / -9198 chars), PLAN.md (rewritten), docs/CONTENT_RESTRUCTURE_PLAN.md, CHANGELOG.md.
-- **Validation gates:** ALL PASS — `validate:master`/`build`/`validate`/`test:unit` (43/43)/`lint` (0 errors, 12 warnings — was 13, -1 от cleanup)/`qa:csp`/`qa:bundle` (7.2KB)/`qa:doc-versions`. Audit script: `python3 scripts/audit_vs_embeds.py` — 0 regressions.
-- **Точка остановки:** iter 32 done. **Все Known Issues (KI#1..KI#20) ✅ CLOSED.** iter 33+ roadmap: none planned. Если пользователь даст новую задачу — продолжить с неё. Если найден новый баг — сначала документировать в `STATUS.md` как KI#N, потом фиксить. VS scroll-animation invariant — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). Принцип `viz > dry text` сохраняется, all decisions documented в canon files.
+- **iter 33 COMPLETE — AUDIT VERIFICATION (без правок кода).** Перепроверен каждый пункт аудита iter 33 (~50 пунктов A1-G5). Найдено: 1 INVALID (B3 — Examples Омнис в пределах лимита 120 токенов, аудит переоценил), 2 REFINED (B2 — фикс = убрать слово «Унижение», не переписывать; B5 — без определений 3 типа Anchors, не 4), 2 STRENGTHENED (B4 — Tier 1/2/3 overloaded в 3 значениях; F1 — 30+ устаревших заглушек «Canon planned iter 13/14/16», не 5), 3 NEW (NEW-1: «待» в part_04 L366; NEW-2: Lorebook walkthrough Елены в part_07a L667 = secondary GHOST; NEW-3: §5.1 vs §5.3 vs §5.3 context-table — 3 формулировки правила OCEAN).
+- **Финальный фронт работ:** 57 правок в 14 canon-файлах + 3 новых файла/секции. Распределены по 4 итерациям: **iter 34 (P0, 16 правок — критические противоречия) → iter 35 (P1, 11 правок — пример vs правило + dead code) → iter 36 (P2, 18 правок — терминология + структурный cleanup, ~1500 строк удалений) → iter 37 (P3, 12 правок + 3 новые секции — локальные правки + G1-G5)**. После каждой итерации — validation gates + audit script + git commit/push. Build hash `fd3d96d3` expected unchanged (только canon-контент правки).
+- **Документация:** `docs/AUDIT_VERIFICATION.md` (NEW, ~500 строк — полный план работ с exact file+line+before/after для каждой правки). STATUS.md updated (iter 33 record + KI#21 🟡 DOCUMENTED). worklog.md updated (iter 33 = этот record, iter 32 → one-liner). AGENT_NAVIGATION.md updated (§6 pitfall #40 + §8 iter 34+ roadmap).
+- **Modified files:** `docs/AUDIT_VERIFICATION.md` (NEW), `STATUS.md` (rewritten), `worklog.md` (iter 33 prepended, iter 32 → one-liner), `AGENT_NAVIGATION.md` (header + §6 #40 + §8 roadmap).
+- **Точка остановки:** iter 33 done. **KI#21 🟡 DOCUMENTED — fix plan ready в `docs/AUDIT_VERIFICATION.md` §4.** iter 34 = P0 (16 правок). Если пользователь согласует план — начать с iter 34. Если найден новый баг — сначала документировать в STATUS.md как KI#N, потом фиксить. VS scroll-animation invariant — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). Принцип `viz > dry text` сохраняется.
+
+---
+
+Task ID: 32
+Agent: main
+Task: iter 32 — Visual System Scroll-Animation Bug (KI#20). По запросу user: перепроверить все элементы visual-system на корректность отображения (E06 поломанный). Cleanup репозитория от устаревшего мусора. Если найден новый баг — сначала документировать в STATUS.md как KI#N, потом фиксить.
+
+Work Log:
+- 1: Контекст загружен из STATUS/worklog/AGENT_NAVIGATION. Build hash baseline: `fd3d96d3`.
+- 2: Анализ E06 — standalone HTML имеет local `<script>` с `IntersectionObserver` для `.ring-anim, .ring-text-anim`. Embedded версия в master HTML НЕ включает script (KI#16, CSP). Замена `vs-scroll-observer.js` наблюдала только `.scroll-enter, .enneagram-anim, .type-node` — НЕ покрывала `.ring-anim`/`.ring-text-anim`. CSS: `.ring-anim { transform: scale(0); }` initial → `.is-visible { transform: scale(1); }`. Без `is-visible` = INVISIBLE.
+- 3: Audit script `scripts/audit_vs_embeds.py` (~250 строк Python) написан — парсит vs-styles.css для animation classes с `.is-visible`-dependent правилом, парсит vs-scroll-observer.js для `SCROLL_ENTER_SELECTOR`, проверяет каждый VS-EMBED в master HTML.
+- 4: KI#20 documented в STATUS.md ДО фикса (per workflow rule). 5/5 sub-items A-E: E06 (10 elements), E07 (3), E08 (9), E09 (10), E15 (11) = 43 total.
+- 5: Fix — single-file edit `src/shell/widgets/vs-scroll-observer.js`: `SCROLL_ENTER_SELECTOR` extended с 3 → 11 classes (`.scroll-enter, .enneagram-anim, .type-node, .ring-anim, .ring-text-anim, .bar-rect, .anim-group, .center-pulse, .pentagon-anim, .profile-anim, .callout`). Header version 1.0.0 → 1.1.0. Unused `observeElement` function удалена (lint 13 → 12 warnings).
+- 6: Validation gates ALL PASS — `validate:master`/`build` (hash `fd3d96d3` unchanged)/`validate` (8 gates)/`test:unit` (43/43)/`lint` (0 errors, 12 warnings)/`qa:csp`/`qa:bundle` (7.2KB)/`qa:doc-versions`. Audit script re-run: 0 regressions.
+- 7: Repo cleanup — 4 stale iter-specific READMEs DELETED (README_iter18.md, README_ITER8_MERGE.md, ITER9_PATCH_README.md, MERGE_INSTRUCTIONS.md = 444 строки).
+- 8: Документация актуализирована — STATUS.md (iter 32 record, KI#20 ✅ CLOSED), worklog.md (iter 32 = этот record), AGENT_NAVIGATION.md (-18% / -9198 chars, §6 pitfall #39 NEW, §8 OP-1 iter history table), PLAN.md, docs/CONTENT_RESTRUCTURE_PLAN.md, CHANGELOG.md [9.1.32].
+
+Stage Summary:
+- **iter 32 COMPLETE — KI#20 Visual System Scroll-Animation Bug ✅ CLOSED.** 5/5 sub-items fixed single-file edit'ом `src/shell/widgets/vs-scroll-observer.js` (selector extended для 8 animation classes). 43 animation elements на 5 VS-EMBED (E06/E07/E08/E09/E15) теперь корректно наблюдаются IntersectionObserver. Build hash `fd3d96d3` unchanged. Audit script: `python3 scripts/audit_vs_embeds.py` — 0 regressions.
+- **Root cause:** KI#16 (iter 19, CSP compliance) вырезал inline `<script>` из VS-EMBED элементов. Local `IntersectionObserver` в standalone element HTML файлах наблюдал animation classes напрямую, но embedded версия полагалась на `vs-scroll-observer.js`, который покрывал только 3 класса. 8 animation classes не покрывались — элементы оставались в initial state навсегда.
+- **Modified files:** `src/shell/widgets/vs-scroll-observer.js` (edited), `widgets/vs-scroll-observer.js` (regenerated root fallback), `scripts/audit_vs_embeds.py` (NEW). Deleted: 4 stale READMEs (444 строки). Docs updated: STATUS.md, worklog.md, AGENT_NAVIGATION.md (-18%), PLAN.md, docs/CONTENT_RESTRUCTURE_PLAN.md, CHANGELOG.md.
+- **Точка остановки:** iter 32 done. Все Known Issues (KI#1..KI#20) ✅ CLOSED. iter 33+ roadmap: none planned. VS scroll-animation invariant: `python3 scripts/audit_vs_embeds.py`.
 
 ---
 
