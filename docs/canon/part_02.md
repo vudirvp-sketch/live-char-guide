@@ -3,8 +3,8 @@
 > **Canonical source for:** `src/master/part_02.html` (443 → 415 → 415 строк, 6 секций)
 > **VS elements (embedded):** E03 (Behavioral Anchor T→A→P), E04 (Embodiment Protocol)
 > **Sections (6):** `p2_basic_anchors`, `p2_anchor_rules`, `p2_anchor_examples`, `p2_embodiment`, `p2_env_reactivity`, `p2_sensory_anchors`
-> **Last synced:** 2026-07-08 (iter 28 — DGA Phase 2 fix KI#18-C: dropped duplicate «Описание» column from p2_basic_anchors table; content already shown in E03 flow-node__desc; expanded intro paragraph linking to E03)
-> **Migration status:** ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-C)
+> **Last synced:** 2026-07-08 (iter 29 — DGA Phase 2 fix KI#18-I: dropped duplicate «Описание» column from p2_embodiment table; content already shown in E04 funnel-bar depth-labels; expanded intro paragraph linking to E04)
+> **Migration status:** ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-C) + ✅ iter 29 DGA fix (KI#18-I)
 
 ---
 
@@ -99,14 +99,14 @@
 
 [VS: E04 — Embodiment Protocol. Funnel-stack из 4 слоёв (State → Body → Sensor → Speech), каждый слой с примером. Замещает infographic `inf-pipeline` «Embodiment Protocol (протокол телесности)» (4-step pipeline). Embodiment = механизм внутри Anchor Action, см. E03.]
 
-Embodiment Protocol (4 слоя):
+Embodiment Protocol показан выше в VS-EMBED E04 (funnel-stack из 4 слоёв: State → Body → Sensor → Speech, каждый с depth-label «Внутренний / Физический / Перцептивный / Вывод» и in-character примером). Таблица ниже — типовые категории примеров для каждого слоя (дополняет E04, не дублирует описания).
 
-| # | Слой | Описание | Пример |
-|---|------|----------|--------|
-| 01 | **СОСТОЯНИЕ** | Внутренний сигнал | Вес / Баланс / Дыхание / Микро-движение |
-| 02 | **ТЕЛО** | Физическая реакция | Напряжение / Расслабление / Дрожь |
-| 03 | **СЕНСОР** | Контакт со средой | Текстура / Звук / Запах / Температура |
-| 04 | **РЕЧЬ** | Вербальная реакция | Тон / Темп / Объём / Лексика |
+| # | Слой | Пример |
+|---|------|--------|
+| 01 | **СОСТОЯНИЕ** | Вес / Баланс / Дыхание / Микро-движение |
+| 02 | **ТЕЛО** | Напряжение / Расслабление / Дрожь |
+| 03 | **СЕНСОР** | Текстура / Звук / Запах / Температура |
+| 04 | **РЕЧЬ** | Тон / Темп / Объём / Лексика |
 
 Сенсорный слой (шаг 3) — результат телесного контакта со средой, не отдельная цепь. Персонаж ощущает текстуру ЧЕРЕЗ действие тела, а не декоративно.
 
@@ -238,6 +238,29 @@ Sensory Anchors:
 | 2 | `<tr><th>#</th><th>Этап</th><th>Описание</th><th>Пример</th></tr>` + 3 rows × 4 cells | Сжать | DONE (iter 28) | «Описание» column duplicating E03 `flow-node__desc` (Внешний стимул/Наблюдаемая реакция/Физическая реакция — те же данные, что в viz). Drop «Описание» → 3 cols (# / Этап / Пример). Unique col «Пример» preserved (concrete examples not in viz). |
 
 **Result:** `src/master/part_02.html`: 415 → 415 строк (0 net — intro line replaced, 4 table rows shortened by 1 cell each). Принцип `viz > dry text` — описания этапов теперь только в viz, таблица показывает уникальные примеры.
+
+### DGA Phase 2 fix (iter 29 — applied 2026-07-08)
+
+**KI#18-I FIXED.** Deployed Guide Audit Phase 2 — дедупликация таблицы `p2_embodiment` против VS-EMBED E04 (Embodiment Protocol funnel-stack) выше.
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|---------|
+| 1 | `<p>` intro «Embodiment Protocol (протокол телесности, см. визуализацию E04 выше):» → расширен до explicit linking paragraph | Расширить | DONE (iter 29) | Pattern KI#18-A/B/C: intro paragraph links to viz + frames table as supplementing (not duplicating) |
+| 2 | `<tr><th>#</th><th>Слой</th><th>Описание</th><th>Пример</th></tr>` + 4 rows × 4 cells | Сжать | DONE (iter 29) | «Описание» column duplicating E04 `depth-label` (Внутренний/Физическая реакция/Контакт со средой/Вербальная реакция — те же данные, что в viz depth-labels «Внутренний/Физический/Перцептивный/Вывод»). Drop «Описание» → 3 cols (# / Слой / Пример). Unique col «Пример» preserved (типовые категории примеров — Вес/Баланс/Дыхание etc., not in viz which has in-character examples). |
+
+**Result:** `src/master/part_02.html`: 415 → 415 строк (0 net — intro line expanded, 4 table rows shortened by 1 cell each). Принцип `viz > dry text` — описания слоёв теперь только в viz depth-labels, таблица показывает уникальные типовые категории примеров.
+
+### Validation gates (iter 29 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, baseline warnings (KI#13 baseline, no regression, no part_02 warnings).
+- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass (7.2KB).
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 29 — DGA Phase 2 fix KI#18-I)`, `Migration status: ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-C) + ✅ iter 29 DGA fix (KI#18-I)`.
 
 ### Validation gates (iter 28 — PASSED)
 

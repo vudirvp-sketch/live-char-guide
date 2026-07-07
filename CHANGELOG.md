@@ -1,33 +1,34 @@
 # Changelog
 
-## [9.1.28] - 2026-07-08
+## [9.1.29] - 2026-07-08
 
-### iter 28 — DGA Phase 2 (KI#18-B + KI#18-C FIXED, KI#18-I NEW)
+### iter 29 — DGA Phase 2 continued (KI#18-I + KI#18-F FIXED)
 
-Применены 2 safe fix из 7 pending sub-items KI#18 (Deployed Guide Audit). Принцип `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED. Найден новый баг KI#18-I (Part 2 p2_embodiment) — задокументирован, не зафиксён.
+Применены 2 safe fix из 6 pending sub-items KI#18 (Deployed Guide Audit). Принцип `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED.
 
-### Changed (iter 28 — KI#18-B fix: Part 1 p1_card_overview table deduplicated)
-- **`src/master/part_01.html` edited** (lines 285-299) — p1_card_overview table deduplicated against E01 viz: (i) «Функция» column REMOVED (was duplicating E01 `.block-content` text — Инструкции/Факты/Демонстрация/Первое сообщение ↔ viz block descriptions); (ii) intro paragraph ADDED linking to E01 viz above (pattern KI#18-A from Part 9). Table: 4 cols → 3 cols (Блок / Влияние на модель / Доля бюджета — both unique). part_01: 365 → 367 строк (+1).
-- **`docs/canon/part_01.md` edited** — §1.2 table rewritten (3 cols, drop «Функция»). Front-matter Last synced → 2026-07-08 (iter 28), Migration status + ✅ iter 28 DGA fix (KI#18-B). Migration history row 6 updated. DGA Phase 2 fix section + validation gates iter 28 PASSED added.
-- **`parts/part_01.html` regenerated** — root fallback (build artifact, fix propagated, hash unchanged).
-
-### Changed (iter 28 — KI#18-C fix: Part 2 p2_basic_anchors table deduplicated)
-- **`src/master/part_02.html` edited** (lines 121-134) — p2_basic_anchors table deduplicated against E03 viz: (i) «Описание» column REMOVED (was duplicating E03 `flow-node__desc` text — Внешний стимул/Наблюдаемая реакция/Физическая реакция ↔ viz flow-node descriptions); (ii) intro paragraph EXPANDED linking to E03 viz above (was one-liner «Формат Anchors (см. визуализацию E03 выше):» → explicit framing: viz shows T→A→P with descriptions, table adds concrete examples). Table: 4 cols → 3 cols (# / Этап / Пример — examples unique). part_02: 415 → 415 строк (0 net — intro line replaced, 3 rows shortened by 1 cell each).
-- **`docs/canon/part_02.md` edited** — §2.1 table rewritten (3 cols, drop «Описание»). Front-matter Last synced → 2026-07-08 (iter 28), Migration status + ✅ iter 28 DGA fix (KI#18-C). Migration history row 3 updated. DGA Phase 2 fix section + validation gates iter 28 PASSED added.
+### Changed (iter 29 — KI#18-I fix: Part 2 p2_embodiment table deduplicated)
+- **`src/master/part_02.html` edited** (lines 319-333) — p2_embodiment table deduplicated against E04 viz: (i) «Описание» column REMOVED (was duplicating E04 `depth-label` content — Внутренний сигнал/Физическая реакция/Контакт со средой/Вербальная реакция ↔ viz depth-labels Внутренний/Физический/Перцептивный/Вывод); (ii) intro paragraph EXPANDED linking to E04 viz above (was one-liner «Embodiment Protocol (протокол телесности, см. визуализацию E04 выше):» → explicit framing: viz shows funnel-stack 4 layers with depth-labels + in-character examples, table adds typological category examples). Table: 4 cols → 3 cols (# / Слой / Пример — examples unique). part_02: 415 → 415 строк (0 net — intro line expanded, 4 rows shortened by 1 cell each). Same pattern as KI#18-C (applied iter 28).
+- **`docs/canon/part_02.md` edited** — §2.4 table rewritten (3 cols, drop «Описание»). Front-matter Last synced → 2026-07-08 (iter 29), Migration status + ✅ iter 29 DGA fix (KI#18-I). DGA Phase 2 fix section (iter 29) + validation gates iter 29 PASSED added.
 - **`parts/part_02.html` regenerated** — root fallback (build artifact, fix propagated, hash unchanged).
 
-### Added (iter 28 — KI#18-I NEW documented, NOT fixed)
-- **KI#18-I NEW** — Part 2 `p2_embodiment` table (line 324, 4 cols: # / Слой / Описание / Пример). «Описание» col («Внутренний сигнал» / «Физическая реакция» / «Контакт со средой» / «Вербальная реакция») duplicates E04 viz (Embodiment funnel-stack 4 layers State→Body→Sensor→Speech). Same pattern as KI#18-C. Found during KI#18-C analysis. Documented in STATUS.md §Known Issues as KI#18-I (LOW-MEDIUM, pending iter 29+). NOT fixed in iter 28 — per user instruction «Если найден новый баг — сначала документируй в STATUS.md как Known Issue, потом фиксий».
+### Changed (iter 29 — KI#18-F fix partial: Part 6 p6_cot_tiers table deduplicated)
+- **`src/master/part_06.html` edited** (lines 131-145) — p6_cot_tiers table deduplicated against E11 viz: (i) «Формат» column REMOVED (was duplicating E11 `stair-step__name` — Без CoT/Эмоциональная метка/GHOST-link/Полный XML ↔ table «Формат» col Без CoT/[Эмоция] → Реакция/[GHOST-связь] → Реакция/Полный XML-процесс); (ii) intro paragraph ADDED linking to E11 viz (was single intro `<p>` → added 2nd `<p>`: viz shows staircase 4 tiers with name+model-pill+format example, table adds model support + Russian examples). Table: 4 cols → 3 cols (Tier / Для моделей / Пример). part_06: 259 → 261 строк (+2 — intro paragraph added, 4 rows shortened by 1 cell each).
+- **`docs/canon/part_06.md` edited** — §6.3 table rewritten (3 cols, drop «Формат»). Front-matter Last synced → 2026-07-08 (iter 29), Migration status + ✅ iter 29 DGA fix (KI#18-F). DGA Phase 2 fix section (iter 29, partial — «Для моделей» + «Пример» cols DEFERRED for accessibility) + validation gates iter 29 PASSED added.
+- **`parts/part_06.html` regenerated** — root fallback (build artifact, fix propagated, hash unchanged).
 
-### Changed (iter 28 — docs)
-- **`STATUS.md`** — header iter line updated (DGA Phase 2 iter 28, KI#18-B/C ✅), +iter 28 section (2 fixes applied, 1 new bug documented), KI#18 sub-items table (3/9 fixed, +I NEW), iter 29+ roadmap.
-- **`worklog.md`** — iter 27 → one-liner (KEEP last 3 detailed: 26, 27, 28), iter 28 = новый record (DGA Phase 2).
-- **`CHANGELOG.md`** — [9.1.28] entry (этот).
-- **`PLAN.md`** — §5 +iter 28 line (DGA Phase 2 — 2 fixes), iter 29+ roadmap.
-- **`AGENT_NAVIGATION.md`** — header iter line updated (iter 28 DGA Phase 2), §6 pitfall #37 KI#18 status (3/9 fixed, +I NEW), §8 +iter 28 entry, §8 iter 29+ roadmap.
+### Deferred (iter 29 — KI#18-F partial)
+- **«Для моделей» + «Пример» cols partial duplication DEFERRED** — «Для моделей» ≈ viz `model-pill` (12B+/32B/API), «Пример» ≈ viz `stair-step__format` (Russian translations of English examples). Kept for accessibility (русские переводы не в viz). Полное устранение дублирования потребует решения по рус/англ перекрытию — отложено до future iter.
 
-### Validation (iter 28)
-- `pnpm run validate:master` ✅ PASSED (0 errors, baseline content-outside-section warnings, no part_01/part_02 warnings).
+### Changed (iter 29 — docs)
+- **`STATUS.md`** — header iter line updated (DGA Phase 2 iter 28-29, KI#18-B/C/I/F ✅), +iter 29 section (2 fixes applied), KI#18 sub-items table (5/9 fixed), iter 30+ roadmap.
+- **`worklog.md`** — iter 28 → one-liner (KEEP last 3 detailed: 27, 28, 29), iter 29 = новый record (DGA Phase 2 continued).
+- **`CHANGELOG.md`** — [9.1.29] entry (этот). iter 28 entry compressed to one-liner.
+- **`PLAN.md`** — §5 +iter 29 line (DGA Phase 2 — 2 fixes), iter 30+ roadmap.
+- **`AGENT_NAVIGATION.md`** — header iter line updated (iter 29 DGA Phase 2), §6 pitfall #37 KI#18 status (5/9 fixed), §8 +iter 29 entry, §8 iter 30+ roadmap.
+- **`docs/CONTENT_RESTRUCTURE_PLAN.md`** — §5.2 +iter 29 row, §8 iter 29 stop point, KI#18 sub-items table (I+F ✅).
+
+### Validation (iter 29)
+- `pnpm run validate:master` ✅ PASSED (0 errors, baseline content-outside-section warnings, no part_02/part_06 warnings).
 - `pnpm run build` ✅ SUCCESS (hash fd3d96d3, unchanged — pure content fix, no JS/CSS/structure changes).
 - `pnpm run validate` ✅ All 8 gates passed.
 - `pnpm run test:unit` ✅ 43/43 pass.
@@ -37,28 +38,19 @@
 - `pnpm run qa:doc-versions` ✅ PASS.
 
 ### Milestone — DGA Phase 2 in progress
-**KI#18 🟡 ACTIVE — 3/9 fixed (A iter 26, B+C iter 28), 6 pending (D, E, F, G, H, I).** Все previous KI (KI#1..KI#17) ✅ CLOSED. Build hash fd3d96d3 unchanged. **Точка остановки:** iter 29+ — priority **I** (Part 2 p2_embodiment, same pattern as C, lowest risk) + **F** (Part 6 p6_cot_tiers — drop «Формат» col). Then **D** (Part 4 SPINE intro — careful, partial re-explanation) + **E** (Part 5 OCEAN — needs careful rule alignment: strict <30/>70 vs broad <40/>60 definition; viz «1 экстремум» vs text «3 экстремальных полюса»). **G** (Part 8 per-AP sections — by design) + **H** (Part 10 E15 callouts — intentional annotation) likely keep-by-design with documented rationale.
+**KI#18 🟡 ACTIVE — 5/9 fixed (A iter 26, B+C iter 28, I+F iter 29), 4 pending (D, E, G, H).** Все previous KI (KI#1..KI#17) ✅ CLOSED. Build hash fd3d96d3 unchanged. **Точка остановки:** iter 30+ — priority **D** (Part 4 SPINE intro — careful, partial re-explanation). Then **E** (Part 5 OCEAN — needs careful rule alignment: strict <30/>70 vs broad <40/>60 definition; viz «1 экстремум» vs text «3 экстремальных полюса» — semantic bug). **G** (Part 8 per-AP sections — by design, document rationale) + **H** (Part 10 E15 callouts — intentional annotation, document rationale) likely keep-by-design.
+
+---
+
+## [9.1.28] - 2026-07-08
+
+> iter 28 — DGA Phase 2: KI#18-B (Part 1 p1_card_overview drop «Функция» col, duplicates E01) + KI#18-C (Part 2 p2_basic_anchors drop «Описание» col, duplicates E03) FIXED. KI#18-I NEW documented (Part 2 p2_embodiment — same pattern as C, E04 depth-label duplication). All validation gates PASS. Build hash fd3d96d3 unchanged.
 
 ---
 
 ## [9.1.27] - 2026-07-08
 
-### iter 27 — STATUS CHECK (без правок кода)
-
-User запросил краткий отчёт о стадии работ. Никаких изменений в master HTML / canon / build artifacts / widgets / data. Только актуализация документации.
-
-### Changed (iter 27 — docs only)
-- **`STATUS.md`** — header дата → 2026-07-08, +iter 27 status check секция, все «iter 27+» → «iter 28+» в KI#18 sub-items (7 pending B–H) и roadmap.
-- **`worklog.md`** — iter 26 → one-liner (KEEP last 3 detailed: 25, 26, 27), iter 27 = новый record (status check, no code changes).
-- **`CHANGELOG.md`** — [9.1.27] entry (этот).
-- **`PLAN.md`** — §5 +iter 27 line (status check), iter 27+ roadmap → iter 28+.
-- **`AGENT_NAVIGATION.md`** — header iter line updated (iter 27 status check), §8 +iter 27 entry, §8 iter 27+ roadmap → iter 28+.
-
-### Validation
-- No code changes — validation gates не запускались. Build hash fd3d96d3 (от iter 26) confirmed unchanged.
-
-### Milestone — iter 27 status check COMPLETE
-**Текущее состояние:** iter 26 complete (DGA Phase 1 started, KI#18-A fixed). KI#18 🟡 ACTIVE (1/8 fixed, 7 pending B–H). Все previous KI (KI#1..KI#17) ✅ CLOSED. **Точка остановки:** DGA Phase 2 (iter 28+) — priority KI#18-B (Part 1) + KI#18-C (Part 2), then E (Part 5 semantic) + F (Part 6), G+H likely keep-by-design.
+> iter 27 — STATUS CHECK (без правок кода). Документация актуализирована. Build hash fd3d96d3 unchanged.
 
 ---
 

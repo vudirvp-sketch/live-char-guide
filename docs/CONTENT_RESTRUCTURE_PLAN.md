@@ -349,6 +349,7 @@ SPINE — психологический каркас из 5 элементов,
 | **26** | Deployed Guide Audit (DGA) Phase 1 | ✅ DONE — Audit 14 master HTML, 8 duplication кейсов KI#18 A–H. KI#18-A FIXED (Part 9 Quality Scale). 7 pending B–H documented. Build hash fd3d96d3 unchanged. | `src/master/part_09.html`, `docs/canon/part_09.md` | MEDIUM |
 | **27** | STATUS CHECK (no code changes) | ✅ DONE — User запросил краткий отчёт. Документация актуализирована. Build hash fd3d96d3 unchanged. | (docs only) | LOW |
 | **28** | DGA Phase 2 (KI#18-B + KI#18-C FIXED, KI#18-I NEW) | ✅ DONE — KI#18-B (Part 1 p1_card_overview): drop «Функция» col duplicating E01, add intro p linking to E01. part_01: 365→367. KI#18-C (Part 2 p2_basic_anchors): drop «Описание» col duplicating E03, expand intro p linking to E03. part_02: 415→415 (0 net). Canon part_01.md + part_02.md updated. KI#18-I NEW (Part 2 p2_embodiment «Описание» col duplicates E04 — same pattern as C) — documented, NOT fixed (pending iter 29+). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged. **KI#18 🟡 ACTIVE — 3/9 fixed (A+B+C), 6 pending (D, E, F, G, H, I) iter 29+.** | `src/master/part_01.html`, `src/master/part_02.html`, `docs/canon/part_01.md`, `docs/canon/part_02.md` | MEDIUM |
+| **29** | DGA Phase 2 continued (KI#18-I + KI#18-F FIXED partial) | ✅ DONE — KI#18-I (Part 2 p2_embodiment): drop «Описание» col duplicating E04 depth-label, expand intro p linking to E04. part_02: 415→415 (0 net). Same pattern as KI#18-C. KI#18-F (Part 6 p6_cot_tiers): drop «Формат» col duplicating E11 stair-step__name, add intro p linking to E11. part_06: 259→261 (+2). **KI#18-F partial:** «Для моделей» + «Пример» cols partial duplication (≈ viz model-pill + stair-step__format Russian translations) DEFERRED for accessibility — kept for Russian readers. Canon part_02.md + part_06.md updated. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged. **KI#18 🟡 ACTIVE — 5/9 fixed (A+B+C+I+F), 4 pending (D, E, G, H) iter 30+.** | `src/master/part_02.html`, `src/master/part_06.html`, `docs/canon/part_02.md`, `docs/canon/part_06.md` | MEDIUM |
 
 **Оценка:** ~13 итераций (iter 7..19) на полный content restructure. Каждая итерация — 1–3 часа работы агента.
 
@@ -421,11 +422,11 @@ SPINE — психологический каркас из 5 элементов,
 
 ## 8. Точка остановки для следующего агента
 
-**Iter 28 COMPLETE (DGA Phase 2 — 2 fixes applied, 1 new bug documented, KI#18 🟡 ACTIVE 3/9 fixed).** KI#18-B (Part 1 p1_card_overview) + KI#18-C (Part 2 p2_basic_anchors) FIXED — drop duplicate columns, add/expand intro paragraphs linking to E01/E03 viz. KI#18-I NEW (Part 2 p2_embodiment — same pattern as C, duplicates E04) — documented, pending iter 29+. `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged.
+**Iter 29 COMPLETE (DGA Phase 2 continued — 2 fixes applied, KI#18 🟡 ACTIVE 5/9 fixed).** KI#18-I (Part 2 p2_embodiment) FIXED — drop duplicate «Описание» column (duplicating E04 depth-label), expand intro paragraph linking to E04 viz. Same pattern as KI#18-C (applied iter 28). KI#18-F (Part 6 p6_cot_tiers) FIXED partial — drop duplicate «Формат» column (duplicating E11 stair-step__name), add intro paragraph linking to E11 viz. «Для моделей» + «Пример» cols partial duplication DEFERRED for accessibility (Russian translations). `validate:master`/`build`/`validate`/`test:unit`/`lint`/`qa:csp`/`qa:bundle`/`qa:doc-versions` PASS. Build hash fd3d96d3 unchanged.
 
-**Iter 29+ — что осталось (DGA Phase 2 continued):**
+**Iter 30+ — что осталось (DGA Phase 2 continued):**
 
-1. **KI#18 🟡 ACTIVE — 6 pending sub-items.** iter 29 priority: **I** (Part 2 p2_embodiment — same fix pattern as KI#18-C, drop «Описание» col duplicating E04, lowest risk) + **F** (Part 6 p6_cot_tiers — drop «Формат» col duplicating E11). Then **D** (Part 4 SPINE intro — careful, partial re-explanation) + **E** (Part 5 OCEAN — needs careful rule alignment: strict <30/>70 vs broad <40/>60 definition; viz «1 экстремум» vs text «3 экстремальных полюса»). **G** (Part 8 per-AP sections — by design, document rationale) + **H** (Part 10 E15 callouts — intentional annotation, document rationale) likely keep-by-design.
+1. **KI#18 🟡 ACTIVE — 4 pending sub-items.** iter 30 priority: **D** (Part 4 p4_spine_overview intro — careful, partial re-explanation of E05 SPINE chain shown in viz; needs careful analysis to not break section flow). Then **E** (Part 5 OCEAN — needs careful rule alignment: strict <30/>70 vs broad <40/>60 definition; viz «1 экстремум» vs text «3 экстремальных полюса» — semantic bug, NOT trivial fix). **G** (Part 8 per-AP sections — by design catalog vs detail, document rationale) + **H** (Part 10 E15 callouts — intentional annotation, document rationale) likely keep-by-design.
 2. **Все previous KI (KI#1..KI#17) ✅ CLOSED.** Новые баги — сначала документировать в `STATUS.md` как Known Issue (KI#N), потом фиксить.
 3. **Принцип `viz > dry text` (iter 8+):** сохраняется. Unique контент не удаляется даже при дублировании.
 
@@ -436,23 +437,23 @@ SPINE — психологический каркас из 5 элементов,
 | **A** | Part 9 | E14 Quality Scale viz ↔ p9_quality_scale table (duplicate «Признаки» col + naming inconsistency «Плохой» vs viz «Слабый» + missing «Отличный» tier) | MEDIUM | ✅ FIXED iter 26 |
 | **B** | Part 1 | E01 Card Anatomy viz (5 blocks with descriptions + token budgets) ↔ p1_card_overview table «Функция» col duplicates E01 block-content | LOW-MEDIUM | ✅ FIXED iter 28 |
 | **C** | Part 2 | E03 Behavioral Anchors viz (T→A→P with descriptions) ↔ p2_basic_anchors table «Описание» col duplicates E03 flow-node__desc | LOW-MEDIUM | ✅ FIXED iter 28 |
-| **D** | Part 4 | E05 SPINE viz + panel «Причинно-следственная цепь» ↔ p4_spine_overview intro paragraphs partially re-explain chain | LOW | ⏳ pending iter 29+ |
-| **E** | Part 5 | E09 OCEAN Context Limits inset ↔ p5_ocean_basics «Контекстные лимиты полюсов» table (duplicate data) + cross-viz/text semantic inconsistency: viz «1 экстремум» vs text «3 экстремальных полюса» (rule <30 or >70: only O=72 qualifies) | MEDIUM (semantic bug) | ⏳ pending iter 29+ (needs rule alignment) |
-| **F** | Part 6 | E11 CoT viz (4 tiers with format) ↔ p6_cot_tiers table «Формат» + «Пример» cols largely duplicate E11 stair-step__format | LOW-MEDIUM | ⏳ pending iter 29+ |
-| **G** | Part 8 | E12 Antipatterns viz (15 AP cards Симптом/Причина/Исправление) ↔ per-AP sections repeat «Симптом/Причина/Решение» structure | LOW (by design — catalog vs detail) | ⏳ pending iter 29+ (likely keep with rationale) |
-| **H** | Part 10 | E15 Annotated Blueprint callouts (token budgets) duplicate E01 token budgets (Part 1) | LOW (intentional annotation) | ⏳ pending iter 29+ (likely keep with rationale) |
-| **I** | Part 2 | E04 Embodiment Protocol viz (funnel-stack 4 layers State→Body→Sensor→Speech) ↔ p2_embodiment table «Описание» col duplicates E04 layer desc | LOW-MEDIUM | ⏳ pending iter 29+ (NEW, found iter 28 during KI#18-C fix) |
+| **D** | Part 4 | E05 SPINE viz + panel «Причинно-следственная цепь» ↔ p4_spine_overview intro paragraphs partially re-explain chain | LOW | ⏳ pending iter 30+ |
+| **E** | Part 5 | E09 OCEAN Context Limits inset ↔ p5_ocean_basics «Контекстные лимиты полюсов» table (duplicate data) + cross-viz/text semantic inconsistency: viz «1 экстремум» vs text «3 экстремальных полюса» (rule <30 or >70: only O=72 qualifies) | MEDIUM (semantic bug) | ⏳ pending iter 30+ (needs rule alignment) |
+| **F** | Part 6 | E11 CoT viz (4 tiers with name + model-pill + format) ↔ p6_cot_tiers table «Формат» col duplicates E11 stair-step__name; «Для моделей» + «Пример» cols partial duplication (model-pill + stair-step__format Russian translations) | LOW-MEDIUM | ✅ FIXED iter 29 (partial — «Формат» dropped; «Для моделей» + «Пример» DEFERRED for accessibility) |
+| **G** | Part 8 | E12 Antipatterns viz (15 AP cards Симптом/Причина/Исправление) ↔ per-AP sections repeat «Симптом/Причина/Решение» structure | LOW (by design — catalog vs detail) | ⏳ pending iter 30+ (likely keep with rationale) |
+| **H** | Part 10 | E15 Annotated Blueprint callouts (token budgets) duplicate E01 token budgets (Part 1) | LOW (intentional annotation) | ⏳ pending iter 30+ (likely keep with rationale) |
+| **I** | Part 2 | E04 Embodiment Protocol viz (funnel-stack 4 layers State→Body→Sensor→Speech) ↔ p2_embodiment table «Описание» col duplicates E04 depth-label | LOW-MEDIUM | ✅ FIXED iter 29 |
 
-**Conclusion:** DGA Phase 1 (audit) COMPLETE iter 26. Phase 2 in progress: 3/9 fixed (A iter 26, B+C iter 28), 6 pending (D, E, F, G, H, I). iter 29 priority: I + F (lowest risk), then D + E (careful), G + H likely keep-by-design.
+**Conclusion:** DGA Phase 1 (audit) COMPLETE iter 26. Phase 2 in progress: 5/9 fixed (A iter 26, B+C iter 28, I+F iter 29), 4 pending (D, E, G, H). iter 30 priority: D (careful, partial re-explanation), then E (semantic bug, needs rule alignment), G + H likely keep-by-design.
 
 **Подсказка следующему агенту:**
 
-> Перед стартом iter 29+ прочитай:
-> 1. `STATUS.md` (iter 28 DGA Phase 2 COMPLETE — KI#18-B + KI#18-C ✅ FIXED, KI#18-I NEW documented; iter 26 DGA Phase 1 STARTED, KI#18 🟡 ACTIVE 3/9 fixed, 6 pending D+E+F+G+H+I, все previous KI#1..#17 ✅ CLOSED)
-> 2. `worklog.md` (iter 28 record — самый подробный)
-> 3. `AGENT_NAVIGATION.md` (§6 pitfall #37 KI#18 🟡 ACTIVE 3/9 fixed, §8 iter 29+ roadmap — DGA Phase 2 continued: priority I + F, then D + E, G+H likely keep-by-design)
+> Перед стартом iter 30+ прочитай:
+> 1. `STATUS.md` (iter 29 DGA Phase 2 continued COMPLETE — KI#18-I ✅ FIXED + KI#18-F ✅ FIXED partial; iter 26 DGA Phase 1 STARTED, KI#18 🟡 ACTIVE 5/9 fixed, 4 pending D+E+G+H, все previous KI#1..#17 ✅ CLOSED)
+> 2. `worklog.md` (iter 29 record — самый подробный)
+> 3. `AGENT_NAVIGATION.md` (§6 pitfall #37 KI#18 🟡 ACTIVE 5/9 fixed, §8 iter 30+ roadmap — DGA Phase 2 continued: priority D, then E, G+H likely keep-by-design)
 > 4. `docs/canon/_README.md` (§5 migration status — все 10 Parts + 3 Appendix ✅, Canon COMPLETE)
-> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 28 → DGA Phase 2 in progress, §8 iter 28 stop point + KI#18 sub-items table above)
+> 5. `docs/CONTENT_RESTRUCTURE_PLAN.md` (§5.2 iter 29 → DGA Phase 2 continued, §8 iter 29 stop point + KI#18 sub-items table above)
 >
 > **Migration principle (iter 8+):** при выборе «удалить текст или визуализацию» — viz сохраняется, dry-дублирующий текст удаляется. Unique контент не удаляется даже если Canon рекомендует. Применяется «очень деликатно».
 

@@ -130,16 +130,18 @@
 
 <p>CoT имеет 4 уровня сложности. Tier 0 — базовый якорь без внутреннего процесса. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.</p>
 
+<p>Формат каждого Tier показан выше в VS-EMBED E11 (staircase 4 ступени: Tier 0 → Tier 3, каждая со своим именем, model-pill и concrete-примером нотации). Таблица ниже — какие модели поддерживают каждый Tier и русскоязычный пример для справки (дополняет E11, не дублирует viz-нотацию).</p>
+
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Tier</th><th>Формат</th><th>Для моделей</th><th>Пример</th></tr>
+<tr><th>Tier</th><th>Для моделей</th><th>Пример</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Tier 0</strong></td><td>Без CoT — базовый Anchor</td><td>12B, базовый/стандартный</td><td>Стресс → Трёт шею</td></tr>
-<tr><td><strong>Tier 1</strong></td><td>[Эмоция] → Реакция</td><td>32B, базовый уровень</td><td>[Тревога] → Перечитывает сообщение трижды</td></tr>
-<tr><td><strong>Tier 2</strong></td><td>[GHOST-связь] → Реакция</td><td>32B+, рекомендован</td><td>[Напоминает предательство] → Закрывается</td></tr>
-<tr><td><strong>Tier 3</strong></td><td>Полный XML-процесс</td><td>Только API</td><td>&lt;processus_analysium&gt;...&lt;/processus_analysium&gt;</td></tr>
+<tr><td><strong>Tier 0</strong></td><td>12B, базовый/стандартный</td><td>Стресс → Трёт шею</td></tr>
+<tr><td><strong>Tier 1</strong></td><td>32B, базовый уровень</td><td>[Тревога] → Перечитывает сообщение трижды</td></tr>
+<tr><td><strong>Tier 2</strong></td><td>32B+, рекомендован</td><td>[Напоминает предательство] → Закрывается</td></tr>
+<tr><td><strong>Tier 3</strong></td><td>Только API</td><td>&lt;processus_analysium&gt;...&lt;/processus_analysium&gt;</td></tr>
 </tbody>
 </table>
 </div>

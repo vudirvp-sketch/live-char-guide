@@ -1,10 +1,10 @@
 # Part 6: CoT Tiers (цепочка рассуждений)
 
-> **Canonical source for:** `src/master/part_06.html` (261 → 259 строк, 6 секций)
+> **Canonical source for:** `src/master/part_06.html` (261 → 259 → 261 строк, 6 секций)
 > **VS elements (embedded):** E11 (CoT Tiers Staircase)
 > **Sections (6):** `p6_cot_bridge`, `p6_cot_basics`, `p6_cot_tiers`, `p6_cot_tier2`, `p6_cot_tier3`, `p6_cot_anchors`
-> **Last synced:** 2026-06-24 (iter 16 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 16)
+> **Last synced:** 2026-07-08 (iter 29 — DGA Phase 2 fix KI#18-F: dropped duplicate «Формат» column from p6_cot_tiers table; content partially shown in E11 stair-step__name; expanded intro paragraph linking to E11)
+> **Migration status:** ✅ MIGRATED (iter 16) + ✅ iter 29 DGA fix (KI#18-F)
 
 ---
 
@@ -66,14 +66,18 @@ CoT Anchors строятся на фундаменте трёх систем: Se
 
 CoT имеет 4 уровня сложности. Tier 0 — базовый якорь без внутреннего процесса. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.
 
-| Tier | Формат | Для моделей | Пример |
-|------|--------|-------------|--------|
-| **Tier 0** | Без CoT — базовый Anchor | 12B, базовый/стандартный | Стресс → Трёт шею |
-| **Tier 1** | [Эмоция] → Реакция | 32B, базовый уровень | [Тревога] → Перечитывает сообщение трижды |
-| **Tier 2** | [GHOST-связь] → Реакция | 32B+, рекомендован | [Напоминает предательство] → Закрывается |
-| **Tier 3** | Полный XML-процесс | Только API | `<processus_analysium>...</processus_analysium>` |
+Формат каждого Tier показан выше в VS-EMBED E11 (staircase 4 ступени: Tier 0 → Tier 3, каждая со своим именем, model-pill и concrete-примером нотации). Таблица ниже — какие модели поддерживают каждый Tier и русскоязычный пример для справки (дополняет E11, не дублирует viz-нотацию).
+
+| Tier | Для моделей | Пример |
+|------|-------------|--------|
+| **Tier 0** | 12B, базовый/стандартный | Стресс → Трёт шею |
+| **Tier 1** | 32B, базовый уровень | [Тревога] → Перечитывает сообщение трижды |
+| **Tier 2** | 32B+, рекомендован | [Напоминает предательство] → Закрывается |
+| **Tier 3** | Только API | `<processus_analysium>...</processus_analysium>` |
 
 **Cross-ref:** Визуальная версия staircase — `[VS: E11]` в preamble Part 6.
+
+**Примечание (iter 29, KI#18-F partial fix):** «Для моделей» и «Пример» cols частично дублируют E11 (`model-pill` + `stair-step__format` в русской версии). Сохранены для accessibility (русские переводы примеров). Полное устранение дублирования потребует решения по перекрытию рус/англ версий — отложено.
 
 ---
 
@@ -236,6 +240,30 @@ resolution: отступить
 1. **#20 DONE** — `p6_cot_basics` L96 `<p>CoT добавляет карточке пошаговые рассуждения, которые модель воспроизводит перед генерацией ответа.</p>` — удалён. Дублировал `p6_cot_bridge` L81 definition (`CoT (цепочка рассуждений) — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа.`). KI#14 principle — одно canonical location для определения концепта. L98 сохранён (уникальный Model Note + альтернативная формулировка).
 
 Итого: 261 → 259 строк (-2, ~0.8%). Принцип `viz > dry text` — VS-EMBED E11, 4-tier reference table, Tier 2 + Tier 3 syntax + examples, CoT Anchors examples table сохранены.
+
+### DGA Phase 2 fix (iter 29 — applied 2026-07-08)
+
+**KI#18-F FIXED (partial).** Deployed Guide Audit Phase 2 — дедупликация таблицы `p6_cot_tiers` против VS-EMBED E11 (CoT Tiers Staircase) выше.
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|---------|
+| 1 | `<p>` intro (single line) → расширен до explicit linking paragraph (add 2-й `<p>`) | Расширить | DONE (iter 29) | Pattern KI#18-A/B/C/I: intro paragraph links to viz + frames table as supplementing (not duplicating) |
+| 2 | `<tr><th>Tier</th><th>Формат</th><th>Для моделей</th><th>Пример</th></tr>` + 4 rows × 4 cells | Сжать | DONE (iter 29) | «Формат» col duplicating E11 `stair-step__name` (Без CoT/Эмоциональная метка/GHOST-link/Полный XML — те же данные, что в viz). Drop «Формат» → 3 cols (Tier / Для моделей / Пример). |
+| 3 | «Для моделей» + «Пример» cols partial duplication (model-pill + stair-step__format Russian versions) | Keep | DEFERRED | «Для моделей» ≈ viz `model-pill` (12B+/32B/API), «Пример» ≈ viz `stair-step__format` (Russian translations). Kept for accessibility (русские переводы не в viz). Полное устранение дублирования потребует решения по рус/англ перекрытию — отложено до future iter. |
+
+**Result:** `src/master/part_06.html`: 259 → 261 строк (+2 — intro paragraph added, 4 table rows shortened by 1 cell each). Принцип `viz > dry text` — формат-имена Tier теперь только в viz `stair-step__name`, таблица показывает модельную поддержку + русские примеры.
+
+### Validation gates (iter 29 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, baseline warnings (KI#13 baseline, no regression, no part_06 warnings).
+- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — 43/43 pass.
+- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass (7.2KB).
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 29 — DGA Phase 2 fix KI#18-F)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ iter 29 DGA fix (KI#18-F)`.
 
 ### Validation gates (iter 16 — PASSED)
 

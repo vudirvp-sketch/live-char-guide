@@ -2,55 +2,50 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ CLOSED (iter 24) + Phase 4 SVG: E18 ✅ INTEGRATED (iter 25) + DGA Phase 1 (iter 26, KI#18-A ✅) + DGA Phase 2 (iter 28, KI#18-B ✅ + KI#18-C ✅)
+> **Текущая версия:** 9.1.0 + все 10 Parts + 3 Appendix ✅ MIGRATED (iter 18) + KI#13 ✅ CLOSED (iter 24) + Phase 4 SVG: E18 ✅ INTEGRATED (iter 25) + DGA Phase 1 (iter 26, KI#18-A ✅) + DGA Phase 2 (iter 28, KI#18-B ✅ + KI#18-C ✅; iter 29, KI#18-I ✅ + KI#18-F ✅ partial)
 > **Дата:** 2026-07-08
 
 ---
 
 ## Текущее состояние
 
-**iter 28 — DGA Phase 2 (2 fixes applied).** Применены 2 safe fix из 7 pending sub-items KI#18:
+**iter 29 — DGA Phase 2 continued (2 fixes applied).** Применены 2 safe fix из 6 pending sub-items KI#18:
 
-- **KI#18-B FIXED** — `src/master/part_01.html` p1_card_overview table: drop duplicate «Функция» column (повторял E01 `.block-content`), add intro paragraph linking to E01 viz. part_01: 365 → 367 (+1).
-- **KI#18-C FIXED** — `src/master/part_02.html` p2_basic_anchors table: drop duplicate «Описание» column (повторял E03 `flow-node__desc`), expand intro paragraph linking to E03. part_02: 415 → 415 (0 net — intro replaced, table cells shortened).
+- **KI#18-I FIXED** — `src/master/part_02.html` p2_embodiment table: drop duplicate «Описание» column (повторял E04 `depth-label`), expand intro paragraph linking to E04 viz. 4 cols → 3 cols (# / Слой / Пример). part_02: 415 → 415 (0 net).
+- **KI#18-F FIXED (partial)** — `src/master/part_06.html` p6_cot_tiers table: drop duplicate «Формат» column (повторял E11 `stair-step__name`), add intro paragraph linking to E11 viz. 4 cols → 3 cols (Tier / Для моделей / Пример). part_06: 259 → 261 (+2). «Для моделей» + «Пример» cols partial duplication оставлено (accessibility — русские переводы) — DEFERRED.
 
-**Найден новый баг (KI#18-I, iter 28):** Part 2 `p2_embodiment` table (line 324) — тот же паттерн: «Описание» column дублирует E04 viz (Embodiment funnel-stack 4 layers). Не зафиксён — только задокументирован для iter 29+.
-
-**iter 26 COMPLETE (DGA Phase 1 — STARTED):** Полный аудит 14 master HTML файлов выявил 8 duplication/inconsistency кейсов (KI#18 A–H). 1 fix применён (KI#18-A: Part 9 Quality Scale — drop «Признаки» col, rename «Плохой» → «Слабый», add «Отличный» row).
-
-### Что сделано в iter 28 (DGA Phase 2)
+### Что сделано в iter 29 (DGA Phase 2 continued)
 
 | # | Задача | Результат |
 |---|--------|-----------|
-| a | KI#18-B fix (Part 1) | `src/master/part_01.html` p1_card_overview table: 4 cols (Блок/Функция/Влияние/Доля) → 3 cols (Блок/Влияние/Доля). Drop «Функция» (duplicate of E01 `.block-content`). Add intro paragraph linking to E01 viz (pattern KI#18-A). 365 → 367 (+1). |
-| b | KI#18-C fix (Part 2) | `src/master/part_02.html` p2_basic_anchors table: 4 cols (#/Этап/Описание/Пример) → 3 cols (#/Этап/Пример). Drop «Описание» (duplicate of E03 `flow-node__desc`). Expand intro paragraph linking to E03. 415 → 415 (0 net). |
-| c | Canon updates | `docs/canon/part_01.md` + `docs/canon/part_02.md`: front-matter (Last synced → iter 28, Migration status + iter 28 DGA fix), table rewritten, migration history row updated, DGA Phase 2 fix section + validation gates iter 28 added. |
-| d | Validation gates PASS | `validate:master` ✅ (0 errors, baseline warnings, no part_01/part_02 warnings), `build` ✅ (hash `fd3d96d3` unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings baseline), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
-| e | Root fallbacks verified | `parts/part_01.html` + `parts/part_02.html` regenerated with fixes. `index.html` timestamp-only change (hash unchanged). |
-| f | New bug documented | **KI#18-I NEW** — Part 2 `p2_embodiment` table (line 324): «Описание» column duplicates E04 viz (Embodiment funnel-stack). Documented for iter 29+. |
+| a | KI#18-I fix (Part 2) | `src/master/part_02.html` p2_embodiment table: 4 cols (#/Слой/Описание/Пример) → 3 cols (#/Слой/Пример). Drop «Описание» (duplicate of E04 `depth-label`). Expand intro paragraph linking to E04. 415 → 415 (0 net). |
+| b | KI#18-F fix (Part 6, partial) | `src/master/part_06.html` p6_cot_tiers table: 4 cols (Tier/Формат/Для моделей/Пример) → 3 cols (Tier/Для моделей/Пример). Drop «Формат» (duplicate of E11 `stair-step__name`). Add intro paragraph linking to E11. 259 → 261 (+2). «Для моделей» + «Пример» partial duplication DEFERRED. |
+| c | Canon updates | `docs/canon/part_02.md` + `docs/canon/part_06.md`: front-matter (Last synced → iter 29, Migration status + iter 29 DGA fix), tables rewritten, migration history rows updated, DGA Phase 2 fix sections + validation gates iter 29 added. |
+| d | Validation gates PASS | `validate:master` ✅ (0 errors, baseline warnings, no part_02/part_06 warnings), `build` ✅ (hash `fd3d96d3` unchanged), `validate` ✅ (8 gates), `test:unit` ✅ (43/43), `lint` ✅ (0 errors, 13 warnings baseline), `qa:csp` ✅, `qa:bundle` ✅ (7.2KB), `qa:doc-versions` ✅. |
+| e | Root fallbacks verified | `parts/part_02.html` + `parts/part_06.html` regenerated with fixes. `index.html` timestamp-only change (hash unchanged). |
 
-### Изменённые файлы в iter 28
+### Изменённые файлы в iter 29
 
 | File | Action | Reason |
 |------|--------|--------|
-| `src/master/part_01.html` | Edited | KI#18-B: drop «Функция» column, add intro paragraph linking to E01. 365 → 367 (+1). |
-| `src/master/part_02.html` | Edited | KI#18-C: drop «Описание» column, expand intro paragraph linking to E03. 415 → 415 (0 net). |
-| `docs/canon/part_01.md` | Edited | KI#18-B: front-matter, table rewritten, migration history row 6, DGA Phase 2 fix section + validation gates. |
-| `docs/canon/part_02.md` | Edited | KI#18-C: front-matter, table rewritten, migration history row 3, DGA Phase 2 fix section + validation gates. |
-| `parts/part_01.html` | Regenerated | Root fallback (build artifact, fix propagated). |
+| `src/master/part_02.html` | Edited | KI#18-I: drop «Описание» column, expand intro paragraph linking to E04. 415 → 415 (0 net). |
+| `src/master/part_06.html` | Edited | KI#18-F: drop «Формат» column, add intro paragraph linking to E11. 259 → 261 (+2). |
+| `docs/canon/part_02.md` | Edited | KI#18-I: front-matter, table rewritten, migration history, DGA Phase 2 fix section + validation gates. |
+| `docs/canon/part_06.md` | Edited | KI#18-F: front-matter, table rewritten, migration history, DGA Phase 2 fix section + validation gates. |
 | `parts/part_02.html` | Regenerated | Root fallback (build artifact, fix propagated). |
+| `parts/part_06.html` | Regenerated | Root fallback (build artifact, fix propagated). |
 | `index.html` | Regenerated | Root fallback (timestamp only, hash unchanged). |
-| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md` | Updated | iter 28 record + KI#18-B/C closed + KI#18-I documented. |
+| `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md` | Updated | iter 29 record + KI#18-I/F closed. |
 
 ---
 
 ## Known Issues
 
-**KI#18 ACTIVE.** Deployed Guide Duplication Audit (DGA) — Phase 1 audit complete (iter 26), Phase 2 in progress (iter 28). 8 sub-items identified (A–H), 3 fixed (A iter 26, B + C iter 28), 5 pending (D–H). 1 new sub-item found iter 28 (I).
+**KI#18 ACTIVE.** Deployed Guide Duplication Audit (DGA) — Phase 1 audit complete (iter 26), Phase 2 in progress (iter 28-29). 9 sub-items identified (A–I), 5 fixed (A iter 26, B + C iter 28, I + F iter 29), 4 pending (D, E, G, H).
 
 | KI | Severity | Status | Iter |
 |----|----------|--------|------|
-| **KI#18 (Deployed Guide Duplication Audit)** | MEDIUM | **🟡 ACTIVE — 3/9 fixed (A, B, C), 6 pending (D, E, F, G, H, I)** | found iter 26, A fixed iter 26, B+C fixed iter 28, I found iter 28 |
+| **KI#18 (Deployed Guide Duplication Audit)** | MEDIUM | **🟡 ACTIVE — 5/9 fixed (A, B, C, I, F), 4 pending (D, E, G, H)** | found iter 26, A fixed iter 26, B+C fixed iter 28, I+F fixed iter 29 |
 | KI#13 (inline styles → CSS) | MEDIUM | ✅ CLOSED | iter 20–24 (123/123 = 100%) |
 | KI#14 (content duplication VS-EMBED ↔ текст) | MEDIUM-HIGH | ✅ CLOSED | iter 16 (Canon migration complete) |
 | KI#16 (qa:csp FAIL — inline scripts) | MEDIUM | ✅ CLOSED | iter 19 |
@@ -68,14 +63,14 @@
 | **A** | Part 9 | E14 Quality Scale viz (4 zones: Критический/Слабый/Хороший/Отличный) ↔ p9_quality_scale table. «Признаки» col duplicating E14 criteria. Naming «Плохой» vs viz «Слабый». Missing tier «Отличный». | MEDIUM | ✅ FIXED iter 26 |
 | **B** | Part 1 | E01 Card Anatomy viz (5 blocks with descriptions) ↔ p1_card_overview table. «Функция» col duplicates E01 `.block-content`. | LOW-MEDIUM | ✅ FIXED iter 28 |
 | **C** | Part 2 | E03 Behavioral Anchors viz (T→A→P with descriptions) ↔ p2_basic_anchors table. «Описание» col duplicates E03 `flow-node__desc`. | LOW-MEDIUM | ✅ FIXED iter 28 |
-| **D** | Part 4 | E05 SPINE Framework viz (5 nodes with example text) + panel «Причинно-следственная цепь» ↔ p4_spine_overview intro paragraphs partially re-explain SPINE chain shown in viz. | LOW | ⏳ pending iter 29+ |
-| **E** | Part 5 | E09 OCEAN viz inset «Context Limits» ↔ p5_ocean_basics table (same data). Cross-viz/text semantic inconsistency: viz «1 экстремум» (O=72) vs text «3 экстремальных полюса (O=72, A=38, N=68)». Rule definition unclear — strict <30/>70 vs broad <40/>60. | MEDIUM (semantic bug) | ⏳ pending iter 29+ (needs careful rule alignment, NOT trivial fix) |
-| **F** | Part 6 | E11 CoT viz (4 tiers with format) ↔ p6_cot_tiers table. «Формат» + «Пример» cols largely duplicate E11 `stair-step__format`. | LOW-MEDIUM | ⏳ pending iter 29+ |
-| **G** | Part 8 | E12 Antipatterns viz (15 AP cards with Симптом/Причина/Исправление) ↔ per-AP sections repeat same structure. Design pattern (catalog vs detail) — partially intentional. | LOW (by design) | ⏳ pending iter 29+ (likely keep, document rationale) |
-| **H** | Part 10 | E15 Annotated Blueprint callouts (token budgets) duplicate E01 in Part 1. Cross-Part duplication, but integrated into annotation layer (contextually relevant). | LOW (intentional annotation) | ⏳ pending iter 29+ (likely keep, document rationale) |
-| **I** | Part 2 | E04 Embodiment Protocol viz (funnel-stack 4 layers: State→Body→Sensor→Speech with examples) ↔ p2_embodiment table (4 rows: #/Слой/Описание/Пример). «Описание» col duplicates E04 layer desc. Same pattern as KI#18-C. | LOW-MEDIUM | ⏳ pending iter 29+ (NEW, found iter 28 during KI#18-C fix) |
+| **D** | Part 4 | E05 SPINE Framework viz (5 nodes with example text) + panel «Причинно-следственная цепь» ↔ p4_spine_overview intro paragraphs partially re-explain SPINE chain shown in viz. | LOW | ⏳ pending iter 30+ |
+| **E** | Part 5 | E09 OCEAN viz inset «Context Limits» ↔ p5_ocean_basics table (same data). Cross-viz/text semantic inconsistency: viz «1 экстремум» (O=72) vs text «3 экстремальных полюса (O=72, A=38, N=68)». Rule definition unclear — strict <30/>70 vs broad <40/>60. | MEDIUM (semantic bug) | ⏳ pending iter 30+ (needs careful rule alignment, NOT trivial fix) |
+| **F** | Part 6 | E11 CoT viz (4 tiers with name + model-pill + format) ↔ p6_cot_tiers table. «Формат» col duplicating E11 `stair-step__name`. «Для моделей» + «Пример» cols partial duplication (model-pill + stair-step__format Russian versions). | LOW-MEDIUM | ✅ FIXED iter 29 (partial — «Формат» dropped; «Для моделей» + «Пример» DEFERRED) |
+| **G** | Part 8 | E12 Antipatterns viz (15 AP cards with Симптом/Причина/Исправление) ↔ per-AP sections repeat same structure. Design pattern (catalog vs detail) — partially intentional. | LOW (by design) | ⏳ pending iter 30+ (likely keep, document rationale) |
+| **H** | Part 10 | E15 Annotated Blueprint callouts (token budgets) duplicate E01 in Part 1. Cross-Part duplication, but integrated into annotation layer (contextually relevant). | LOW (intentional annotation) | ⏳ pending iter 30+ (likely keep, document rationale) |
+| **I** | Part 2 | E04 Embodiment Protocol viz (funnel-stack 4 layers: State→Body→Sensor→Speech with depth-labels + examples) ↔ p2_embodiment table. «Описание» col duplicates E04 `depth-label`. Same pattern as KI#18-C. | LOW-MEDIUM | ✅ FIXED iter 29 |
 
-**iter 29+ roadmap (DGA Phase 2 continued):** Next priority: **KI#18-I** (Part 2 p2_embodiment — same fix pattern as KI#18-C, low risk). Then **F** (Part 6 p6_cot_tiers — drop «Формат» col). **D** (Part 4 SPINE intro — careful, partial re-explanation). **E** (Part 5 OCEAN — needs careful rule alignment: strict <30/>70 vs broad <40/>60 definition). **G** + **H** likely keep-by-design with documented rationale.
+**iter 30+ roadmap (DGA Phase 2 continued):** Next priority: **KI#18-D** (Part 4 SPINE intro — careful, partial re-explanation; needs careful analysis to not break the section flow). Then **KI#18-E** (Part 5 OCEAN — needs careful rule alignment: strict <30/>70 vs broad <40/>60 definition; viz «1 экстремум» vs text «3 экстремальных полюса» — semantic bug). **KI#18-G** (Part 8 per-AP sections — by design, document rationale) + **KI#18-H** (Part 10 E15 callouts — intentional annotation, document rationale) likely keep-by-design with documented rationale.
 
 ---
 
@@ -91,7 +86,7 @@
 | **CSP compliance (iter 19)** | `qa:csp` PASS. Все scripts в `index.html` — `<script src="...">` (external). Inline scripts forbidden. |
 | **Inline styles forbidden (iter 24, KI#13 CLOSED)** | Все 123 inline `style=` → external CSS classes с `vs-ki13-*` prefix (60 селекторов). |
 | **VS elements registry (iter 25)** | 18 VS elements: E01–E18. E18 (Greeting Algorithm) — iter 25, Part 7B. Все 18 embeded в master HTML, styles в `src/assets/vs-styles.css` SECTION 5, extracts в `visual-system/integration/component-extracts/`. |
-| **Deployed Guide Audit (iter 26+) — ONGOING** | KI#18 ACTIVE. Phase 1 audit done (iter 26, 8 sub-items A–H). Phase 2 in progress (iter 28, 3/9 fixed: A+B+C, 6 pending: D+E+F+G+H+I). Принцип: `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED. См. §«Known Issues» KI#18 above. |
+| **Deployed Guide Audit (iter 26+) — ONGOING** | KI#18 ACTIVE. Phase 1 audit done (iter 26, 8 sub-items A–H). Phase 2 in progress (iter 28-29, 5/9 fixed: A+B+C+I+F, 4 pending: D+E+G+H). Принцип: `viz > dry text` — текст не должен пере-объяснять то, что уже показано в VS-EMBED. См. §«Known Issues» KI#18 above. |
 
 ---
 
