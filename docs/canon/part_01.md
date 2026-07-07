@@ -1,10 +1,10 @@
 # Part 1: Basic Card Blocks (Базовые блоки карточки)
 
-> **Canonical source for:** `src/master/part_01.html` (390 → 365 строк, 7 секций)
+> **Canonical source for:** `src/master/part_01.html` (390 → 365 → 367 строк, 7 секций)
 > **VS elements (embedded):** E01 (Card Anatomy)
 > **Sections (7):** `p1_value_proposition`, `p1_card_overview`, `p1_structure_overview`, `p1_core_rules`, `p1_token_budget_ref`, `p1_pipeline_ref`, `p1_top3_problems`
-> **Last synced:** 2026-06-24 (iter 14 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 14)
+> **Last synced:** 2026-07-08 (iter 28 — DGA Phase 2 fix KI#18-B: dropped duplicate «Функция» column from p1_card_overview table; content already shown in E01 viz; added intro paragraph linking to E01)
+> **Migration status:** ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-B)
 
 ---
 
@@ -51,12 +51,14 @@
 
 Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → `[ref: part_07a.md §7A.X — Assembly Pipeline]`.
 
-| Блок | Функция | Влияние на модель | Доля бюджета |
-|------|---------|-------------------|--------------|
-| **System Prompt** | Инструкции, запреты, формат | Высокое — задаёт рамки | Компактный |
-| **Description** | Факты, Anchors, психология | Среднее — контекст | Основной объём |
-| **Examples** | Демонстрация голоса | Ключевое — паттерны речи | Средний |
-| **Greeting** | Первое сообщение | Поддерживающее — тон | Минимальный |
+Структура и содержимое блоков показаны выше в VS-EMBED E01 (Card Anatomy) — стек из 5 блоков с token-аннотациями (мин/стд/макс) и описаниями. Таблица ниже — структурные свойства, не видные в viz: влияние на модель и качественная доля бюджета.
+
+| Блок | Влияние на модель | Доля бюджета |
+|------|-------------------|--------------|
+| **System Prompt** | Высокое — задаёт рамки | Компактный |
+| **Description** | Среднее — контекст | Основной объём |
+| **Examples** | Ключевое — паттерны речи | Средний |
+| **Greeting** | Поддерживающее — тон | Минимальный |
 
 **RULE:** Правило голоса → 3 ключевых принципа (см. §1.4 ниже).
 
@@ -162,7 +164,7 @@
 | 3 | VS-EMBED E01 (Card Anatomy stack + token-anno на каждом блоке + token budget summary table) | Оставить | DONE | Canonical VS-marker — preamble Part 1 |
 | 4 | `<section data-section="p1_card_overview">` h2 "Базовые блоки карточки" + intro paragraphs + RULE callout | Оставить | DONE | Canonical section — §1.2 |
 | 5 | `<section data-section="p1_structure_overview">` h3 "Структура гайда" + `<div class="mermaid">` graph TD dependency diagram + `<h4>Содержание</h4>` + AUTO_TOC_PLACEHOLDER | Сжать | DONE | Mermaid-диаграмма дублировала auto-TOC (оба показывали порядок Parts и их связи). Mermaid удалён (33 строки), оставлен только auto-TOC. Canonical §1.2 (Structure Overview). |
-| 6 | `<p>` "Этот раздел — краткий обзор базовых блоков. Порядок чтения..." + 4-row table (Блок / Функция / Влияние / Доля бюджета) + RULE callout | Оставить | DONE | Unique table — §1.2 |
+| 6 | `<p>` "Этот раздел — краткий обзор базовых блоков. Порядок чтения..." + `<p>` intro linking to E01 + 4-row table (Блок / Влияние / Доля бюджета) + RULE callout | Оставить | DONE (iter 28) | iter 28 (KI#18-B): drop duplicate «Функция» column (E01 viz already shows block-content/functions), add intro paragraph linking to E01. Unique «Влияние на модель» + «Доля бюджета» columns preserved — §1.2 |
 | 7 | `<section data-section="p1_core_rules">` h3 "Три ключевых принципа" + RULE callout (LLM = Pattern Matcher) + `<ol>` 3 principles | Оставить | DONE | Canonical 3 principles — §1.4 |
 | 8 | `<section data-section="p1_token_budget_ref">` h3 + cross-ref paragraph | Оставить | DONE | Canonical cross-ref — §1.5 |
 | 9 | `<section data-section="p1_pipeline_ref">` h3 + cross-ref paragraph | Оставить | DONE | Canonical cross-ref — §1.6 |
@@ -175,6 +177,29 @@
 1. **#14 DONE** — `p1_structure_overview` `<div class="mermaid">` dependency graph (25 строк + intro paragraph «Диаграмма ниже показывает…»). Дублировал auto-TOC (placeholder `AUTO_TOC_PLACEHOLDER` ниже по файлу): оба показывали Parts и их связи. Mermaid + intro paragraph удалены (-25 строк); auto-TOC остаётся единственным навигационным артефактом. Снижает «2 mermaid blocks» из плана iter 6 до «1 mermaid block» (оставшийся в part_04, запланирован к удалению в iter 16+).
 
 Итого: 390 → 365 строк (-25, ~6.4%). Принцип `viz > dry text` — все уникальные таблицы (comparison Classic vs SPINE, Блок/Функция/Влияние) и RULE callouts сохранены. Mermaid удалён как дубликат auto-TOC.
+
+### DGA Phase 2 fix (iter 28 — applied 2026-07-08)
+
+**KI#18-B FIXED.** Deployed Guide Audit Phase 2 — дедупликация таблицы `p1_card_overview` против VS-EMBED E01 (Card Anatomy) выше.
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|---------|
+| 1 | `<p>` intro (новый) — ссылка на E01 viz + framing таблицы как «structural properties, not in viz» | Добавить | DONE (iter 28) | Pattern KI#18-A (Part 9): intro paragraph linking to viz before table |
+| 2 | `<tr><th>Блок</th><th>Функция</th><th>Влияние на модель</th><th>Доля бюджета</th></tr>` + 4 rows × 4 cells | Сжать | DONE (iter 28) | «Функция» column duplicating E01 `.block-content` (Инструкции/Факты/Демонстрация/Первое сообщение — те же данные, что в viz). Drop «Функция» → 3 cols (Блок / Влияние на модель / Доля бюджета). Unique cols «Влияние на модель» + «Доля бюджета» preserved. |
+
+**Result:** `src/master/part_01.html`: 365 → 367 строк (+1 — добавлен intro paragraph, 4 строки стали короче на 1 ячейку каждая). Принцип `viz > dry text` — функция блоков теперь только в viz, таблица показывает уникальные свойства.
+
+### Validation gates (iter 28 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, baseline warnings (KI#13 baseline, no regression).
+- [x] `pnpm run build` — SUCCESS.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — pass.
+- [x] `pnpm run lint` — 0 errors.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass.
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 28 — DGA Phase 2 fix KI#18-B)`, `Migration status: ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-B)`.
 
 ### Validation gates (iter 14 — PASSED)
 

@@ -1,10 +1,10 @@
 # Part 2: Behavioral Anchors (поведенческие якоря)
 
-> **Canonical source for:** `src/master/part_02.html` (443 → 415 строк, 6 секций)
+> **Canonical source for:** `src/master/part_02.html` (443 → 415 → 415 строк, 6 секций)
 > **VS elements (embedded):** E03 (Behavioral Anchor T→A→P), E04 (Embodiment Protocol)
 > **Sections (6):** `p2_basic_anchors`, `p2_anchor_rules`, `p2_anchor_examples`, `p2_embodiment`, `p2_env_reactivity`, `p2_sensory_anchors`
-> **Last synced:** 2026-06-24 (iter 14 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 14)
+> **Last synced:** 2026-07-08 (iter 28 — DGA Phase 2 fix KI#18-C: dropped duplicate «Описание» column from p2_basic_anchors table; content already shown in E03 flow-node__desc; expanded intro paragraph linking to E03)
+> **Migration status:** ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-C)
 
 ---
 
@@ -22,13 +22,13 @@
 
 [VS: E03 — Behavioral Anchor T→A→P. См. маркер в preamble. Замещает infographic `inf-pipeline-vertical` «Формат Anchors: Trigger → Action → Price» (3-step pipeline) и сопутствующий `<pre class="plain-copy">` текстовый дубликат.]
 
-Формат Anchors:
+Формат Anchors показан выше в VS-EMBED E03 (сравнение верного и неверного T→A→P: Trigger → Action → Price с описанием каждого этапа). Таблица ниже — конкретные примеры для каждого этапа (дополняет E03, не дублирует описания).
 
-| # | Этап | Описание | Пример |
-|---|------|----------|--------|
-| 01 | **TRIGGER (Триггер)** | Внешний стимул, запускающий Anchor | Кто-то лжёт |
-| 02 | **ACTION (Действие)** | Наблюдаемая реакция персонажа | Прищуривается, молчит |
-| 03 | **PRICE (Цена)** | Физическая реакция в той же сцене | Напряжение в челюсти |
+| # | Этап | Пример |
+|---|------|--------|
+| 01 | **TRIGGER (Триггер)** | Кто-то лжёт |
+| 02 | **ACTION (Действие)** | Прищуривается, молчит |
+| 03 | **PRICE (Цена)** | Напряжение в челюсти |
 
 ---
 
@@ -199,7 +199,7 @@ Sensory Anchors:
 |---|-------------------|----------|--------|--------------------------|
 | 1 | VS-EMBED E03 (Behavioral Anchor T→A→P, split-view Верно/Неверно) | Оставить | DONE | Canonical VS-marker — preamble Part 2 |
 | 2 | `<section data-section="p2_basic_anchors">` h2 + intro paragraph | Оставить | DONE | Canonical intro — §2.1 |
-| 3 | `<div class="infographic">` «Формат Anchors: Trigger → Action → Price» (3-step `inf-pipeline-vertical`) | Удалить | DONE | Дублировал VS-EMBED E03 выше. Заменён на компактную 3-row table (TRIGGER/ACTION/PRICE + описание + пример) в Canon §2.1. |
+| 3 | `<div class="infographic">` «Формат Anchors: Trigger → Action → Price» (3-step `inf-pipeline-vertical`) | Удалить | DONE | Дублировал VS-EMBED E03 выше. Заменён на компактную 3-row table (TRIGGER/ACTION/PRICE + пример) в Canon §2.1. |
 | 4 | `<pre class="plain-copy">` «Формат Anchors: Trigger → Action → Price» (text duplicate) | Удалить | DONE | Text-дубликат infographic #3 и VS-EMBED E03. Удалён полностью. |
 | 5 | `<section data-section="p2_anchor_rules">` h3 + recommended count table + quality criteria list | Оставить | DONE | Canonical rules — §2.2 |
 | 6 | 2 RULE callouts (FLAW not adjective; deferred Price) | Оставить | DONE | Canonical RULEs — §2.2 |
@@ -227,6 +227,29 @@ Sensory Anchors:
 3. **#17 DONE** — `p2_embodiment` `<div class="infographic">` «Embodiment Protocol (протокол телесности)» (4-step `inf-pipeline`, 29 строк, lines 334-362). Дублировал VS-EMBED E04 (funnel-stack 4 layers State→Body→Sensor→Speech) выше по файлу. Удалён полностью. В Canon §2.4 Embodiment Protocol представлен компактной 4-row table.
 
 Итого: 443 → 415 строк (-28, ~6.3%). Принцип `viz > dry text` — все уникальные таблицы (recommended count, quality criteria, Типы Price, anchor examples, Embodiment examples, sensory channels) и RULE/RECOMMENDATION callouts сохранены. 2 устаревших infographic + 1 plain-copy fallback удалены как дубликаты VS-EMBED E03/E04. Plan iter 6 заявлял «4 infographic в part_02» — фактически 2 infographic + 1 plain-copy = 3 stale duplicate viz-блока (plan over-counted).
+
+### DGA Phase 2 fix (iter 28 — applied 2026-07-08)
+
+**KI#18-C FIXED.** Deployed Guide Audit Phase 2 — дедупликация таблицы `p2_basic_anchors` против VS-EMBED E03 (Behavioral Anchors T→A→P) выше.
+
+| # | Что в master HTML | Действие | Статус | Причина |
+|---|-------------------|----------|--------|---------|
+| 1 | `<p>` intro «Формат Anchors (см. визуализацию E03 выше):» → расширен до explicit linking paragraph | Расширить | DONE (iter 28) | Pattern KI#18-A/B: intro paragraph links to viz + frames table as supplementing (not duplicating) |
+| 2 | `<tr><th>#</th><th>Этап</th><th>Описание</th><th>Пример</th></tr>` + 3 rows × 4 cells | Сжать | DONE (iter 28) | «Описание» column duplicating E03 `flow-node__desc` (Внешний стимул/Наблюдаемая реакция/Физическая реакция — те же данные, что в viz). Drop «Описание» → 3 cols (# / Этап / Пример). Unique col «Пример» preserved (concrete examples not in viz). |
+
+**Result:** `src/master/part_02.html`: 415 → 415 строк (0 net — intro line replaced, 4 table rows shortened by 1 cell each). Принцип `viz > dry text` — описания этапов теперь только в viz, таблица показывает уникальные примеры.
+
+### Validation gates (iter 28 — PASSED)
+
+- [x] `pnpm run validate:master` — 0 errors, baseline warnings (KI#13 baseline, no regression).
+- [x] `pnpm run build` — SUCCESS, hash unchanged.
+- [x] `pnpm run validate` — все 8 gates passed.
+- [x] `pnpm run test:unit` — pass.
+- [x] `pnpm run lint` — 0 errors.
+- [x] `pnpm run qa:csp` — pass.
+- [x] `pnpm run qa:bundle` — pass.
+- [x] `pnpm run qa:doc-versions` — pass.
+- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 28 — DGA Phase 2 fix KI#18-C)`, `Migration status: ✅ MIGRATED (iter 14) + ✅ iter 28 DGA fix (KI#18-C)`.
 
 ### Validation gates (iter 14 — PASSED)
 
