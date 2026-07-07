@@ -1,5 +1,26 @@
 # Changelog
 
+## [9.1.27] - 2026-07-08
+
+### iter 27 — STATUS CHECK (без правок кода)
+
+User запросил краткий отчёт о стадии работ. Никаких изменений в master HTML / canon / build artifacts / widgets / data. Только актуализация документации.
+
+### Changed (iter 27 — docs only)
+- **`STATUS.md`** — header дата → 2026-07-08, +iter 27 status check секция, все «iter 27+» → «iter 28+» в KI#18 sub-items (7 pending B–H) и roadmap.
+- **`worklog.md`** — iter 26 → one-liner (KEEP last 3 detailed: 25, 26, 27), iter 27 = новый record (status check, no code changes).
+- **`CHANGELOG.md`** — [9.1.27] entry (этот).
+- **`PLAN.md`** — §5 +iter 27 line (status check), iter 27+ roadmap → iter 28+.
+- **`AGENT_NAVIGATION.md`** — header iter line updated (iter 27 status check), §8 +iter 27 entry, §8 iter 27+ roadmap → iter 28+.
+
+### Validation
+- No code changes — validation gates не запускались. Build hash fd3d96d3 (от iter 26) confirmed unchanged.
+
+### Milestone — iter 27 status check COMPLETE
+**Текущее состояние:** iter 26 complete (DGA Phase 1 started, KI#18-A fixed). KI#18 🟡 ACTIVE (1/8 fixed, 7 pending B–H). Все previous KI (KI#1..KI#17) ✅ CLOSED. **Точка остановки:** DGA Phase 2 (iter 28+) — priority KI#18-B (Part 1) + KI#18-C (Part 2), then E (Part 5 semantic) + F (Part 6), G+H likely keep-by-design.
+
+---
+
 ## [9.1.26] - 2026-07-01
 
 ### Added (iter 26 — Deployed Guide Audit Phase 1: KI#18 NEW)
