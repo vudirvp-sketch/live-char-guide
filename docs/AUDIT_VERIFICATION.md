@@ -1,9 +1,10 @@
-# AUDIT_VERIFICATION.md — iter 33
+# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35 (P0 ✅ applied)
 
 > **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками.
 > **Дата:** 2026-07-08
-> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix добавил `worker-src 'self' blob:;` в CSP meta в `src/shell/index.html`; до iter 34 был `fd3d96d3`)
+> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35 P0 ✅ CLOSED, hash unchanged — canon не в hash computation)
 > **Источник аудита:** прошлый чат iter 33 (525-строчный paste от пользователя)
+> **iter 35 (P0) ✅ CLOSED:** 16 правок применены (см. §4.1 — каждая правка помечена ✅ DONE iter 35). Build hash `69d9b813` unchanged.
 
 ---
 
@@ -148,11 +149,13 @@
 
 ## 4. Финальный фронт работ (P0 → P1 → P2 → P3)
 
-Каждый приоритет = одна итерация (iter 34 = P0, iter 35 = P1, iter 36 = P2, iter 37 = P3). После каждой — validation gates и архив.
+Каждый приоритет = одна итерация (iter 35 = P0 ✅, iter 36 = P1, iter 37 = P2, iter 38 = P3). После каждой — validation gates и архив.
 
-### 4.1. P0 — Критические противоречия (iter 34)
+### 4.1. P0 — Критические противоречия (iter 35) ✅ CLOSED
 
-**Цель:** Устранить 9 критических противоречий, где канон противоречит сам себе. Все правки — точечные (1-10 строк каждая).
+**Цель:** Устранить 16 критических противоречий, где канон противоречит сам себе. Все правки — точечные (1-15 строк каждая).
+
+**iter 35 ✅ CLOSED:** Все 16 правок применены в iter 35. Build hash `69d9b813` unchanged. Все validation gates PASS + `audit_vs_embeds.py` 0 regressions.
 
 | # | Item | Файл + строка | Правка (before → after) |
 |---|------|---------------|--------------------------|
@@ -274,20 +277,11 @@ python3 scripts/audit_vs_embeds.py  # 0 regressions
 
 ## 5. Поэтапный план исполнения
 
-### iter 35 — P0 (Critical contradictions)
+### iter 35 — P0 (Critical contradictions) ✅ COMPLETE
 
-**Шаги:**
-1. Прочитать STATUS.md (iter 34 — KI#22/#23 ✅ CLOSED, build hash `69d9b813`), worklog.md iter 34, AGENT_NAVIGATION.md §6 pitfalls #41-#42, этот AUDIT_VERIFICATION.md §4.1.
-2. Документировать KI#21 «Content Audit contradictions» в STATUS.md (sub-items A1-A10, NEW-1, NEW-3).
-3. Внести 16 правок P0-1..P0-16 (таблица выше).
-4. Запустить validation gates.
-5. Если build hash изменился — диагностировать (должен остаться `69d9b813`).
-6. Запустить `python3 scripts/audit_vs_embeds.py` — 0 regressions.
-7. Обновить STATUS.md (KI#21 P0 sub-items ✅ FIXED), worklog.md (iter 35 record), AGENT_NAVIGATION.md (§6 pitfall #40 KI#21 P0).
-8. Создать архив `iter_35_p0_fixes.zip` с изменёнными canon-файлами.
-9. Git commit + push.
+**Статус:** Все 16 правок P0-1..P0-16 применены в iter 35. Build hash `69d9b813` unchanged. Validation gates ALL PASS + `audit_vs_embeds.py` 0 regressions. Документация актуализирована (STATUS.md, worklog.md, AGENT_NAVIGATION.md, AUDIT_VERIFICATION.md). Архив `iter_35_p0_fixes.zip` создан. Git commit + push.
 
-**Точка остановки iter 35:** P0 complete. KI#21-A1..A10, KI#21-NEW-1, KI#21-NEW-3 ✅ CLOSED. Build hash `69d9b813` unchanged. P1 ready to start.
+**Точка остановки iter 35:** P0 ✅ CLOSED. KI#21-A1, A2, A3 (×4), A4 (×2), A6, A9, A10, B1 (GHOST+FLAW), NEW-1, NEW-3 ✅ CLOSED. Build hash `69d9b813` unchanged. P1 (iter 36) ready to start.
 
 ### iter 36 — P1 (Example vs rule + dead code)
 
@@ -362,7 +356,7 @@ B3 был признан невалидным. **Не пытаться «уко�
 
 ---
 
-## 7. Точка остановки iter 33 (этот чат)
+## 7. Точка остановки iter 33 (audit verification, без правок)
 
 **iter 33 — AUDIT VERIFICATION (без правок).**
 
@@ -370,22 +364,31 @@ B3 был признан невалидным. **Не пытаться «уко�
 - Верифицирован каждый пункт аудита iter 33 (A1-G5, ~50 пунктов).
 - Найдено: 1 INVALID (B3), 2 REFINED (B2, B5), 2 STRENGTHENED (B4, F1), 3 NEW (NEW-1/2/3).
 - Зафиксирован финальный фронт работ: 16 P0 + 11 P1 + 18 P2 + 12 P3 = **57 правок** в 14 canon-файлах + 3 новых файла/секции.
-- План исполнения: iter 35 (P0) → iter 36 (P1) → iter 37 (P2) → iter 38 (P3) — сдвинут с iter 34-37 из-за iter 34 = CSS/CSP fix (KI#22/#23). После каждой итерации — validation gates + архив + git.
+- План исполнения: iter 35 (P0 ✅) → iter 36 (P1) → iter 37 (P2) → iter 38 (P3) — сдвинут с iter 34-37 из-за iter 34 = CSS/CSP fix (KI#22/#23). После каждой итерации — validation gates + архив + git.
 - **Правок не внесено** — пользователь просил сначала перепроверить, потом решить.
 - **Документация:** создан `docs/AUDIT_VERIFICATION.md` (этот файл). STATUS.md / worklog.md / AGENT_NAVIGATION.md обновлены iter 33 record (без новых KI — это аудит, не баги).
 - **Архив `iter_33_audit_verification.zip`:** содержит только `docs/AUDIT_VERIFICATION.md` + обновлённые STATUS.md / worklog.md / AGENT_NAVIGATION.md (docs-only, без canon-правок).
 - **Build hash `fd3d96d3` unchanged** (canon-файлы не тронуты, только docs). После iter 34 (KI#23 fix) baseline стал `69d9b813`.
 
-**Что в следующем чате (iter 35 — canon P0):**
+## 7.1. Точка остановки iter 35 (этот чат — canon P0)
 
-1. Прочитать STATUS.md (iter 34 record — KI#22/#23 ✅ CLOSED, build hash `69d9b813`), worklog.md iter 34, AGENT_NAVIGATION.md §6 pitfalls #41-#42, этот `docs/AUDIT_VERIFICATION.md` §4.1.
-2. Документировать KI#21 «Content Audit contradictions» в STATUS.md со всеми sub-items (A1-A10, B1-B6, C1-C8, D1-D7, E1-E7, F1-F10, G1-G5, NEW-1, NEW-2, NEW-3).
-3. Внести 16 правок P0 (таблица §4.1).
-4. Validation gates + audit script.
-5. Обновить docs.
-6. Архив `iter_35_p0_fixes.zip`.
-7. Git commit + push.
-8. Точка остановки iter 35 → передать в iter 36 (P1).
+**iter 35 — CANON AUDIT P0 ✅ COMPLETE.**
+
+- Прочитан весь контекст iter 34 (STATUS.md / worklog.md / AGENT_NAVIGATION.md §6 #40-42 / `docs/AUDIT_VERIFICATION.md` §4.1).
+- Применены все 16 правок P0 (P0-1..P0-16) в 7 canon-файлах: `appendix_glossary.md`, `part_04.md`, `part_05.md`, `part_07a.md`, `part_08.md`, `part_09.md`, `part_10.md`.
+- Все validation gates PASS: `validate:master` (12 checks) / `build` (hash `69d9b813` unchanged) / `validate` (8 gates) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` (7.5KB) / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions).
+- **Документация актуализирована:** STATUS.md (iter 35 record — KI#21 P0 ✅ CLOSED), worklog.md (iter 35 = самый подробный), AGENT_NAVIGATION.md (§6 #40 KI#21 P0 ✅, §8 OP-1 iter 35 row + iter 36+ roadmap), AUDIT_VERIFICATION.md (§4.1 P0 ✅ CLOSED, §5 iter 35 ✅, §7.1 iter 35 stop point).
+- **Build hash `69d9b813` unchanged** (canon-файлы не входят в hash computation — только `src/shell/index.html`).
+
+**Что в следующем чате (iter 36 — canon P1):**
+
+1. Прочитать STATUS.md (iter 35 record — KI#21 P0 ✅ CLOSED, build hash `69d9b813`), worklog.md iter 35, AGENT_NAVIGATION.md §6 pitfall #40 KI#21 P0 ✅, этот `docs/AUDIT_VERIFICATION.md` §4.2.
+2. Внести 11 правок P1 (таблица §4.2): P1-1 (A5 AP-9 ❌ пример), P1-2 (A7 AN секция), P1-3 (A8 §8.1 orphan row), P1-4 (B2 Уолтер GHOST ярлык), P1-5 (B5 3 Anchor definitions), P1-6 (B6 Tier 0 «12B»→«12B+»), P1-7+P1-8 (D1 dual-Elena secondary GHOST L67+L91), P1-9 (D2 variant LIE L93), P1-10 (D4+NEW-2 Lorebook walkthrough L667), P1-11 (D4 part_07b §7B.3 пример пожар→предательство).
+3. Validation gates + audit script.
+4. Обновить docs.
+5. Архив `iter_36_p1_fixes.zip`.
+6. Git commit + push.
+7. Точка остановки iter 36 → передать в iter 37 (P2).
 
 ---
 
@@ -411,4 +414,4 @@ B3 был признан невалидным. **Не пытаться «уко�
 
 ---
 
-*Конец документа. Все правки — следующая итерация (iter 35+). Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*
+*Конец документа. iter 35 (P0) ✅ CLOSED — 16/57 правок применены, build hash `69d9b813` unchanged. iter 36 (P1) — 11 правок ready to start. Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*
