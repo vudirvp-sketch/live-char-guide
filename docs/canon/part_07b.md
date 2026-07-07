@@ -108,7 +108,20 @@
 
 ### Примеры записей Lorebook для Елены
 
-**Пример 1: GHOST-факт (пожар)** — ILLUSTRATION (LOREBOOK, GHOST):
+**Пример 1: GHOST-факт (предательство)** — ILLUSTRATION (LOREBOOK, GHOST):
+
+| Поле | Значение |
+|------|----------|
+| Key | предательство, редактор, Марина, украденная история |
+| Content | Марина — редактор Елены. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна. |
+| Position | Before char |
+| Depth | 3 |
+| Probability | 90% |
+| Cooldown | 7 |
+
+**Пример 2: secondary GHOST (пожар)** — ILLUSTRATION (LOREBOOK, SECONDARY GHOST):
+
+> **Примечание:** используется только если в карточке выбран secondary GHOST-сценарий (см. `part_04.md` §4.2). Canonical Elena имеет ОДИН GHOST — предательство редактора.
 
 | Поле | Значение |
 |------|----------|
@@ -119,7 +132,7 @@
 | Probability | 90% |
 | Cooldown | 7 |
 
-**Пример 2: Контакт Елены** — ILLUSTRATION (LOREBOOK):
+**Пример 3: Контакт Елены** — ILLUSTRATION (LOREBOOK):
 
 | Поле | Значение |
 |------|----------|
@@ -130,7 +143,7 @@
 | Probability | 85% |
 | Cooldown | 10 |
 
-**Пример 3: Город Елены** — ILLUSTRATION (LOREBOOK, ENVIRONMENTAL REACTIVITY):
+**Пример 4: Город Елены** — ILLUSTRATION (LOREBOOK, ENVIRONMENTAL REACTIVITY):
 
 | Поле | Значение |
 |------|----------|

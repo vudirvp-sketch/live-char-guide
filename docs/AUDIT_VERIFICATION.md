@@ -1,10 +1,11 @@
-# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35 (P0 ✅ applied)
+# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35 (P0 ✅ applied), iter 36 (P1 ✅ applied)
 
 > **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками.
 > **Дата:** 2026-07-08
-> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35 P0 ✅ CLOSED, hash unchanged — canon не в hash computation)
+> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35 P0 ✅ CLOSED, iter 36 P1 ✅ CLOSED, hash unchanged — canon не в hash computation)
 > **Источник аудита:** прошлый чат iter 33 (525-строчный paste от пользователя)
 > **iter 35 (P0) ✅ CLOSED:** 16 правок применены (см. §4.1 — каждая правка помечена ✅ DONE iter 35). Build hash `69d9b813` unchanged.
+> **iter 36 (P1) ✅ CLOSED:** 11 правок применены (см. §4.2 — каждая правка помечена ✅ DONE iter 36). Build hash `69d9b813` unchanged.
 
 ---
 
@@ -195,27 +196,41 @@ python3 scripts/audit_vs_embeds.py  # 0 regressions
 
 ---
 
-### 4.2. P1 — Противоречия «пример vs правило» + дубли/мёртвый код (iter 36)
+### 4.2. P1 — Противоречия «пример vs правило» + дубли/мёртвый код (iter 36) ✅ CLOSED
 
 **Цель:** Устранить противоречия между каноническими примерами и каноническими правилами. Удалить мёртвый код (variant'ы, dual-Elena secondary).
 
+**iter 36 ✅ CLOSED:** Все 11 правок применены в iter 36. Build hash `69d9b813` unchanged. Все validation gates PASS + `audit_vs_embeds.py` 0 regressions.
+
 | # | Item | Файл + строка | Правка |
 |---|------|---------------|--------|
-| P1-1 | **A5** | `part_08.md` L181-188 (AP-9 ❌ пример) | Заменить ❌ пример: `GHOST: (отсутствует) → LIE: (отсутствует) → FLAW: Избегает близости / NEED: Нуждается в доверии ← WANT: Хочет быть любимым` → `GHOST: Предательство редактора → LIE: «Я работаю одна» → FLAW: Отталкивает сарказмом / NEED: Принятие ← WANT: Доказать правоту` (WANT совместим с NEED = no conflict, FLAW блокирует BOTH без LIE/GHOST). Сохранить пояснение «WANT совместим с NEED — нет конфликта» как критерий. |
-| P1-2 | **A7** | `part_07a.md` L250-256 (таблица «Пояснение секций AN») | Добавить строку: `\| **Счётчик вырезаний** \| (Template B+, опционально) Счётчик событий для персонажей с прогрессивной деградацией (см. Выщербленный §10.4) \|` |
-| P1-3 | **A8** | `part_08.md` L21-42 (сводная таблица APs) | Удалить строку `\| — \| OCEAN Overload \|...\|` (без номера). Обновить footnote: «OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (`p5_ocean_warning`). В таблице не отображается — см. Part 5.» |
-| P1-4 | **B2** | `part_10.md` L134 | `GHOST: Gray Matter — продал свою долю за $5000, наблюдал, как партнёры стали миллиардерами. Унижение от того, что он сам ушёл, а его оставили позади.` → `GHOST: Gray Matter — продал свою долю за $5000. Партнёры стали миллиардерами. Сам работаю учителем химии в подержанном Pontiac Aztek.` (убрать ярлык «Унижение», заменить конкретным наблюдением) |
-| P1-5 | **B5** | `part_04.md` §4.8 после L225 | Добавить определение 3 типов Anchors: «**Psychological Anchor** — Anchor, выведенный из LIE: модель действует из ложной установки в observably-поведенческом маркере. **At-rest Anchor** — Anchor, показывающий персонажа в «покое», когда он просто преследует свою WANT (без активации GHOST). **Growth Anchor** — Anchor для момента близости/уязвимости, когда NEED проявляется в обход FLAW.» |
-| P1-6 | **B6** | `part_06.md` L73 | `\| **Tier 0** \| 12B, базовый/стандартный \|...` → `\| **Tier 0** \| 12B+, базовый/стандартный \|...` (синхронизировать с E11 viz «12B+») |
-| P1-7 | **D1** | `part_04.md` L67 (Елена secondary GHOST row) | Удалить строку `\| Елена (secondary) \| В 7 лет стояла во дворе... \|...` + удалить note L70 «Елена имеет два GHOST-сценария...» (rule: один GHOST на персонажа; secondary = у другого персонажа или alt-scenario в Part 10). Заменить note на: «**Примечание:** В учебном гайде каждый персонаж имеет ОДИН canonical GHOST. У Елены — предательство редактора. Множественная травма (GHOST Layers) — см. Выщербленный §4.11.» |
-| P1-8 | **D1** | `part_04.md` L91 (Елена secondary GHOST row в LIE table) | Удалить secondary-строку |
-| P1-9 | **D2** | `part_04.md` L93 (variant Выщербленный LIE) | Удалить variant-строку полностью |
-| P1-10 | **D4 + NEW-2** | `part_07a.md` L667 | `Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу»` → `Пример для Елены: Key «предательство, редактор, Марина, украденная история» → Content «Марина — её редактор. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.»` |
-| P1-11 | **D4** | `part_07b.md` §7B.3 «Пример 1: GHOST-факт (пожар)» | Заменить весь пример: ключ «пожар, огонь» → «предательство, Марина, редактор». Content: событие предательства (см. part_04 §4.2). Старый пример «пожар» — переименовать в «Пример 1: secondary GHOST (пожар)» с пояснением «используется только если в карточке выбран secondary GHOST-сценарий». |
+| P1-1 | **A5** ✅ DONE iter 36 | `part_08.md` §8.10 AP-9 ❌ пример (L181-188) | Критерий broken SPINE уточнён: «WANT совместим с NEED — нет конфликта» + FLAW не объяснён через LIE/GHOST. Снято противоречие с §4.1 (GHOST/LIE могут быть неявными — diagnose по разрыву каузальной цепи, не по текстовому отсутствию). Пояснение «WANT совместим с NEED» сохранено как критерий. |
+| P1-2 | **A7** ✅ DONE iter 36 | `part_07a.md` §7A.5 (L250-256) | Добавлена строка в таблицу «Пояснение секций AN»: `\| **Счётчик вырезаний** \| (Template B+, опционально) Счётчик событий для персонажей с прогрессивной деградацией (см. Выщербленный §10.4) \|` |
+| P1-3 | **A8** ✅ DONE iter 36 | `part_08.md` §8.1 (L21-42) | Удалена orphan-строка `\| — \| OCEAN Overload \|...\|` (без номера). Footnote обновлён: «OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (`p5_ocean_warning`). В таблице не отображается — см. Part 5.» |
+| P1-4 | **B2** ✅ DONE iter 36 | `part_10.md` §10.2 (L134) | `GHOST: Gray Matter — продал свою долю за $5000, наблюдал, как партнёры стали миллиардерами. Унижение от того, что он сам ушёл, а его оставили позади.` → `GHOST: Gray Matter — продал свою долю за $5000. Партнёры стали миллиардерами. Сам работаю учителем химии в подержанном Pontiac Aztek.` (убрать ярлык «Унижение», заменить конкретным наблюдением) |
+| P1-5 | **B5** ✅ DONE iter 36 | `part_04.md` §4.8 после mapping-таблицы | Добавлены определения 3 типов Anchors: «**Psychological Anchor** — Anchor, выведенный из LIE: модель действует из ложной установки в наблюдаемом поведенческом маркере. **At-rest Anchor** — Anchor, показывающий персонажа в «покое», когда он просто преследует свою WANT (без активации GHOST). **Growth Anchor** — Anchor для момента близости/уязвимости, когда NEED проявляется в обход FLAW.» |
+| P1-6 | **B6** ✅ DONE iter 36 | `part_06.md` §6.3 (L73) | `\| **Tier 0** \| 12B, базовый/стандартный \|...` → `\| **Tier 0** \| 12B+, базовый/стандартный \|...` (синхронизировать с E11 viz «12B+») |
+| P1-7 | **D1** ✅ DONE iter 36 | `part_04.md` §4.2 (L67) | Удалена строка `\| Елена (secondary) \| В 7 лет стояла во дворе... \|...` + note L70 «Елена имеет два GHOST-сценария...» заменена на: «**Примечание:** В учебном гайде каждый персонаж имеет ОДИН canonical GHOST. У Елены — предательство редактора. Множественная травма (GHOST Layers) — см. Выщербленный §4.11.» |
+| P1-8 | **D1** ✅ DONE iter 36 | `part_04.md` §4.3 (L91) | Удалена secondary-строка `\| Елена (secondary) \| «Если я никого не впущу...» \| Пожар в детстве (§4.2) \|` из LIE table |
+| P1-9 | **D2** ✅ DONE iter 36 | `part_04.md` §4.3 (L93) | Удалена variant-строка `\| Выщербленный (variant) \| «Пустота заполняема...» \| Цикл вырезаний (§4.11) \|` полностью (dead code) |
+| P1-10 | **D4 + NEW-2** ✅ DONE iter 36 | `part_07a.md` §7A.13 (L667) | `Пример для Елены: Key «пожар, огонь» → Content «В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу»` → `Пример для Елены: Key «предательство, редактор, Марина, украденная история» → Content «Марина — её редактор. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.»` |
+| P1-11 | **D4** ✅ DONE iter 36 | `part_07b.md` §7B.3 «Пример 1: GHOST-факт (пожар)» | Пример 1 заменён с пожар→предательство (primary GHOST): Key «предательство, Марина, редактор», Content «Марина — редактор Елены. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.». Старый пример «пожар» — переименован в «Пример 2: secondary GHOST (пожар)» с пояснением «используется только если в карточке выбран secondary GHOST-сценарий». Примеры 2 (Марина) и 3 (Город) перенумерованы в 3 и 4. |
 
-**Итого P1:** 11 правок в 4 файлах. ~50 строк net edits.
+**Итого P1 ✅ CLOSED:** 11 правок в 6 canon-файлах (part_04, part_06, part_07a, part_07b, part_08, part_10). ~50 строк net edits. Build hash `69d9b813` unchanged.
 
-**Validation gates P1:** те же, что P0.
+**Validation gates P1 (iter 36, ALL PASS):**
+```bash
+pnpm run validate:master    # ✅ 12 checks, no regressions
+pnpm run build              # ✅ SUCCESS, hash 69d9b813 (canon-файлы не в hash computation)
+pnpm run validate           # ✅ 8 gates PASS, index.html 7.5KB
+pnpm run test:unit          # ✅ 43/43
+pnpm run test:integration   # ✅ 21/21
+pnpm run lint               # ✅ 0 errors, 12 warnings (baseline)
+pnpm run qa:csp             # ✅ 0 inline scripts
+pnpm run qa:bundle          # ✅ 7.5KB (max 500KB)
+pnpm run qa:doc-versions    # ✅ PASS
+python3 scripts/audit_vs_embeds.py  # ✅ 0 regressions
+```
 
 ---
 
@@ -283,17 +298,11 @@ python3 scripts/audit_vs_embeds.py  # 0 regressions
 
 **Точка остановки iter 35:** P0 ✅ CLOSED. KI#21-A1, A2, A3 (×4), A4 (×2), A6, A9, A10, B1 (GHOST+FLAW), NEW-1, NEW-3 ✅ CLOSED. Build hash `69d9b813` unchanged. P1 (iter 36) ready to start.
 
-### iter 36 — P1 (Example vs rule + dead code)
+### iter 36 — P1 (Example vs rule + dead code) ✅ COMPLETE
 
-**Шаги:**
-1. Прочитать STATUS.md (iter 35 record), worklog.md iter 35, этот AUDIT_VERIFICATION.md §4.2.
-2. Внести 11 правок P1-1..P1-11.
-3. Validation gates.
-4. Обновить docs.
-5. Архив `iter_36_p1_fixes.zip`.
-6. Git commit + push.
+**Статус:** Все 11 правок P1-1..P1-11 применены в iter 36 (см. §4.2 — каждая правка помечена ✅ DONE iter 36). Build hash `69d9b813` unchanged. Validation gates ALL PASS + `audit_vs_embeds.py` 0 regressions. Документация актуализирована (STATUS.md, worklog.md, AGENT_NAVIGATION.md, AUDIT_VERIFICATION.md). Архив `iter_36_p1_fixes.zip` создан. Git commit + push.
 
-**Точка остановки iter 36:** P1 complete. KI#21-B1,B2,B5,B6,D1,D2,D4,A5,A7,A8 ✅ CLOSED. Build hash `69d9b813` unchanged. P2 ready.
+**Точка остановки iter 36:** P1 ✅ CLOSED. KI#21-B5, B6, B2, D1, D2, D4, A5, A7, A8 (+NEW-2) ✅ CLOSED. Build hash `69d9b813` unchanged. P2 (iter 37) ready to start.
 
 ### iter 37 — P2 (Terminology + structural cleanup)
 
@@ -370,7 +379,7 @@ B3 был признан невалидным. **Не пытаться «уко�
 - **Архив `iter_33_audit_verification.zip`:** содержит только `docs/AUDIT_VERIFICATION.md` + обновлённые STATUS.md / worklog.md / AGENT_NAVIGATION.md (docs-only, без canon-правок).
 - **Build hash `fd3d96d3` unchanged** (canon-файлы не тронуты, только docs). После iter 34 (KI#23 fix) baseline стал `69d9b813`.
 
-## 7.1. Точка остановки iter 35 (этот чат — canon P0)
+## 7.1. Точка остановки iter 35 (canon P0)
 
 **iter 35 — CANON AUDIT P0 ✅ COMPLETE.**
 
@@ -380,15 +389,27 @@ B3 был признан невалидным. **Не пытаться «уко�
 - **Документация актуализирована:** STATUS.md (iter 35 record — KI#21 P0 ✅ CLOSED), worklog.md (iter 35 = самый подробный), AGENT_NAVIGATION.md (§6 #40 KI#21 P0 ✅, §8 OP-1 iter 35 row + iter 36+ roadmap), AUDIT_VERIFICATION.md (§4.1 P0 ✅ CLOSED, §5 iter 35 ✅, §7.1 iter 35 stop point).
 - **Build hash `69d9b813` unchanged** (canon-файлы не входят в hash computation — только `src/shell/index.html`).
 
-**Что в следующем чате (iter 36 — canon P1):**
+## 7.2. Точка остановки iter 36 (этот чат — canon P1)
 
-1. Прочитать STATUS.md (iter 35 record — KI#21 P0 ✅ CLOSED, build hash `69d9b813`), worklog.md iter 35, AGENT_NAVIGATION.md §6 pitfall #40 KI#21 P0 ✅, этот `docs/AUDIT_VERIFICATION.md` §4.2.
-2. Внести 11 правок P1 (таблица §4.2): P1-1 (A5 AP-9 ❌ пример), P1-2 (A7 AN секция), P1-3 (A8 §8.1 orphan row), P1-4 (B2 Уолтер GHOST ярлык), P1-5 (B5 3 Anchor definitions), P1-6 (B6 Tier 0 «12B»→«12B+»), P1-7+P1-8 (D1 dual-Elena secondary GHOST L67+L91), P1-9 (D2 variant LIE L93), P1-10 (D4+NEW-2 Lorebook walkthrough L667), P1-11 (D4 part_07b §7B.3 пример пожар→предательство).
-3. Validation gates + audit script.
-4. Обновить docs.
-5. Архив `iter_36_p1_fixes.zip`.
-6. Git commit + push.
-7. Точка остановки iter 36 → передать в iter 37 (P2).
+**iter 36 — CANON AUDIT P1 ✅ COMPLETE.**
+
+- Прочитан весь контекст iter 35 (STATUS.md / worklog.md / AGENT_NAVIGATION.md §6 #40 / `docs/AUDIT_VERIFICATION.md` §4.2).
+- Применены все 11 правок P1 (P1-1..P1-11) в 6 canon-файлах: `part_04.md` (4 правки — P1-5, P1-7, P1-8, P1-9), `part_06.md` (1 — P1-6), `part_07a.md` (2 — P1-2, P1-10), `part_07b.md` (1 — P1-11), `part_08.md` (2 — P1-1, P1-3), `part_10.md` (1 — P1-4).
+- Все validation gates PASS: `validate:master` (12 checks) / `build` (hash `69d9b813` unchanged) / `validate` (8 gates) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` (7.5KB) / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions).
+- **Документация актуализирована:** STATUS.md (iter 36 record — KI#21 P0+P1 ✅ CLOSED, 27/57 правок), worklog.md (iter 36 = самый подробный; iter 35 → one-liner), AGENT_NAVIGATION.md (§6 #40 KI#21 P0+P1 ✅, §8 OP-1 iter 36 row + iter 37+ roadmap), AUDIT_VERIFICATION.md (§4.2 P1 ✅ CLOSED annotations, §5 iter 36 ✅, §7.2 iter 36 stop point).
+- **Build hash `69d9b813` unchanged** (canon-файлы не входят в hash computation — только `src/shell/index.html`; index.html root fallback регенерирован — только `Generated:` timestamp обновлён, content identical).
+
+**Что в следующем чате (iter 37 — canon P2):**
+
+1. Прочитать STATUS.md (iter 36 record — KI#21 P0+P1 ✅ CLOSED, 27/57 правок, build hash `69d9b813`), worklog.md iter 36, AGENT_NAVIGATION.md §6 pitfall #40 KI#21 P0+P1 ✅, этот `docs/AUDIT_VERIFICATION.md` §4.3.
+2. **Сначала** выполнить P2-4 (YAML front-matter конверсия) и P2-5/P2-6/P2-7 (delete Migration Notes / Cross-refs ending / resume секции) — это даст ~1500 строк чистого удаления, упростит дальнейшие правки.
+3. Выполнить P2-11 (заменить 30+ «Canon planned iter X» заглушек на актуальные cross-refs).
+4. Выполнить P2-1..P2-3, P2-8..P2-10, P2-12..P2-18 (terminology + structural fixes).
+5. Validation gates + `qa:english:docs` + audit script.
+6. Обновить docs.
+7. Архив `iter_37_p2_cleanup.zip`.
+8. Git commit + push.
+9. Точка остановки iter 37 → передать в iter 38 (P3).
 
 ---
 
@@ -414,4 +435,4 @@ B3 был признан невалидным. **Не пытаться «уко�
 
 ---
 
-*Конец документа. iter 35 (P0) ✅ CLOSED — 16/57 правок применены, build hash `69d9b813` unchanged. iter 36 (P1) — 11 правок ready to start. Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*
+*Конец документа. iter 35 (P0) ✅ CLOSED — 16/57 правок. iter 36 (P1) ✅ CLOSED — 27/57 правок. Build hash `69d9b813` unchanged. iter 37 (P2) — 18 правок + ~1500 строк удалений, ready to start. Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*

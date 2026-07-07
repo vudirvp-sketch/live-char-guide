@@ -36,10 +36,9 @@
 | AP-12 | XML Malformed | Средняя | Валидировать XML-теги |
 | AP-13 | Lorebook Conflict | Средняя | Проверить консистентность записей |
 | AP-14 | Context Violation | Высокая | Использовать 4K-Fallback Protocol |
-| — | OCEAN Overload | Средняя | OCEAN value conflicts → Part 5 (см. `p5_ocean_warning`) |
 | AP-15 | Nested Anchors | Средняя | Разбить на атомарные Anchors |
 
-**Примечание:** OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 (`p5_ocean_warning`). Текущий AP-15 = Nested Anchors (renumbered from AP-16).
+**Примечание:** OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (`p5_ocean_warning`). В таблице не отображается — см. Part 5.
 
 ---
 
@@ -185,7 +184,9 @@ GHOST: (отсутствует)  →  LIE: (отсутствует)  →  FLAW: 
 NEED: Нуждается в доверии  ←  WANT: Хочет быть любимым
 ```
 
-WANT совместим с NEED — нет конфликта. FLAW блокирует BOTH — но откуда FLAW? Нет LIE/GHOST → цепь разорвана.
+WANT совместим с NEED — нет конфликта. FLAW блокирует BOTH — но откуда FLAW? Без объяснения через LIE/GHOST цепь разорвана.
+
+**Критерий broken SPINE** (сохраняется как диагностика): «WANT совместим с NEED — нет конфликта» + FLAW не объяснён через LIE/GHOST. Это не то же самое, что «GHOST/LIE текстуально отсутствуют» — per Part 4 §4.1, GHOST/LIE могут быть **неявными** для простых персонажей. Diagnose broken SPINE по разрыву каузальной цепи (FLAW без корня в LIE/GHOST), а не по текстовому отсутствию элементов.
 
 ### ✅ Цельный SPINE
 
