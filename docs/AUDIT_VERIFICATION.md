@@ -1,15 +1,16 @@
-# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35-38 (P0-P3 ✅ applied canon), iter 39-41 (doc drift + OCEAN labeling ✅ applied canon), iter 44 (master HTML sync Phase 1 🔵 PARTIAL 9/57)
+# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35-38 (P0-P3 ✅ applied canon), iter 39-41 (doc drift + OCEAN labeling ✅ applied canon), iter 44 (master HTML sync Phase 1 🔵 PARTIAL 9/57), iter 45 (master HTML sync Phase 2 🔵 PARTIAL 33/57 cumulatively)
 
-> **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками. Plus iter 39-41 doc drift + OCEAN labeling follow-up + iter 44 canon→master HTML sync Phase 1.
+> **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками. Plus iter 39-41 doc drift + OCEAN labeling follow-up + iter 44-45 canon→master HTML sync Phases 1+2.
 > **Дата:** 2026-07-08
-> **Build hash baseline:** shell hash `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35-44 все ✅/🔵 CLOSED/PARTIAL, shell hash unchanged — вычисляется из `src/shell/index.html` ONLY). **contentHash** (в `build/build-manifest.json`): iter 34-43 `58f4daa85c05e070` → iter 44 `34c34a7d9839c11d` (first change since iter 34 — master HTML sync).
+> **Build hash baseline:** shell hash `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35-45 все ✅/🔵 CLOSED/PARTIAL, shell hash unchanged — вычисляется из `src/shell/index.html` ONLY). **contentHash** (в `build/build-manifest.json`): iter 34-43 `58f4daa85c05e070` → iter 44 `34c34a7d9839c11d` (1st change since iter 34) → iter 45 `665cede798c34fc0` (2nd change since iter 34 — master HTML sync Phase 2).
 > **Источник аудита:** прошлый чат iter 33 (525-строчный paste от пользователя)
-> **iter 35 (P0) ✅ CLOSED canon:** 16 правок применены (см. §4.1). Build hash `69d9b813` unchanged. **iter 44 master sync:** 4/16 fixes (P0-2, P0-3, P0-4, P0-5) — ✅ applied.
-> **iter 36 (P1) ✅ CLOSED canon:** 11 правок применены (см. §4.2). Build hash `69d9b813` unchanged. **iter 44 master sync:** 1/11 fixes (P1-2/A7) — ✅ applied.
-> **iter 37 (P2) ✅ CLOSED canon:** 18 правок применены (см. §4.3). Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged. **iter 44 master sync:** 0/18 (metadata fixes — skip; content fixes — iter 45+).
-> **iter 38 (P3) ✅ CLOSED canon:** 10 правок + 2 SKIP + 2 новых canon-файла (`part_00.md`, `appendix_character_map.md`). Canon total: 3 905 → 4 070 строк (+165 net). KI#21 ✅ CLOSED полностью (57/57 canon). Build hash `69d9b813` unchanged. **iter 44 master sync:** 0/12 (P3-8/11 — no master equivalent; P3-1..7 — iter 45+).
+> **iter 35 (P0) ✅ CLOSED canon:** 16 правок применены (см. §4.1). Build hash `69d9b813` unchanged. **iter 44+45 master sync:** 5/16 fixes (P0-2, P0-3, P0-4, P0-5 iter 44; P0-1, P0-7, P0-8, P0-9, P0-10, P0-11, P0-12, P0-13, P0-14, P0-16 iter 45; P0-15 SKIP — already fixed) — ✅ applied.
+> **iter 36 (P1) ✅ CLOSED canon:** 11 правок применены (см. §4.2). Build hash `69d9b813` unchanged. **iter 44+45 master sync:** 5/11 fixes (P1-2 iter 44; P1-1, P1-3, P1-4, P1-5, P1-6, P1-7, P1-10, P1-11 iter 45; P1-8, P1-9 pending iter 46+) — ✅ applied.
+> **iter 37 (P2) ✅ CLOSED canon:** 18 правок применены (см. §4.3). Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged. **iter 45 master sync:** 0/18 (metadata fixes — skip; content fixes — iter 46+).
+> **iter 38 (P3) ✅ CLOSED canon:** 10 правок + 2 SKIP + 2 новых canon-файла (`part_00.md`, `appendix_character_map.md`). Canon total: 3 905 → 4 070 строк (+165 net). KI#21 ✅ CLOSED полностью (57/57 canon). Build hash `69d9b813` unchanged. **iter 45 master sync:** 4/12 (P3-1 ×2, P3-3, P3-5, P3-6; P3-2, P3-4 pending iter 46+; P3-8/11 — no master equivalent; P3-7 — covered by P0-2).
 > **iter 39-41 (doc drift + OCEAN labeling follow-up) ✅ CLOSED canon:** KI#25/#26/#27 (iter 39, bible + README), KI#28/#29 (iter 40, README counts + OCEAN labeling), KI#30/#31 (iter 41, OCEAN labeling leftover + bible ↔ canon cross-ref). Build hash `69d9b813` unchanged. **iter 44 master sync:** KI#29 ✅, KI#30 ✅ (×2), KI#31 ✅ (×2). См. §5.5, §5.6, §5.7, §5.9.
-> **iter 44 (master HTML sync Phase 1) 🔵 PARTIAL:** 9/57 fixes applied to `src/master/*.html`. contentHash `58f4daa85c05e070` → `34c34a7d9839c11d` (first change since iter 34). Regression test `scripts/audit_canon_master_sync.py` (11/11 PASS). См. §5.9.
+> **iter 44 (master HTML sync Phase 1) 🔵 PARTIAL:** 9/57 fixes applied to `src/master/*.html`. contentHash `58f4daa85c05e070` → `34c34a7d9839c11d` (1st change since iter 34). Regression test `scripts/audit_canon_master_sync.py` (11/11 PASS). См. §5.9.
+> **iter 45 (master HTML sync Phase 2) 🔵 PARTIAL:** 24/57 fixes applied this iter (33/57 cumulatively). contentHash `34c34a7d9839c11d` → `665cede798c34fc0` (2nd change since iter 34). Regression test extended to 34 checks (34/34 PASS). NEW invariant: Callout class policy (iter 45+). См. §5.10.
 
 ---
 
@@ -458,26 +459,60 @@ iter 44 — первая фаза синхронизации canon audit фик�
 | 9 | KI#31 (iter 41 canon) | `src/master/part_07a.html` + `part_10.html` | L730 + L512 — Cross-ref Notes ×2 → bible | ✅ iter 44 |
 | — | A3 collateral | `src/master/part_10.html` | L611 — §10.4 AN «Счётчик вырезаний» «после седьмого» | ✅ iter 44 (bonus) |
 
-**HTML entity escaping handled:** `<` and `>` in OCEAN labels escaped as `&lt;` / `&gt;` (inside `<pre><code>` blocks, matching existing convention). `<code>` tag for file paths in Cross-ref Notes (matching canon's backticks). `**Cross-ref:**` markdown bold kept as plain text inside `<pre><code>` (matching canon source — markdown not rendered inside code blocks).
+**HTML entity escaping handled:** `<` and `>` in OCEAN labels escaped as `&lt;` / `&gt;` (inside `<pre><code>` blocks). `<code>` tag for file paths in Cross-ref Notes. `**Cross-ref:**` markdown bold kept as plain text inside `<pre><code>`.
 
-**Validation gates ALL PASS (iter 44):**
-- `pnpm run build` — ✅ SUCCESS, shell Hash `69d9b813` unchanged (вычисляется из `src/shell/index.html` ONLY). **contentHash в `build/build-manifest.json` ИЗМЕНИЛСЯ: `58f4daa85c05e070` → `34c34a7d9839c11d` (first change since iter 34).**
-- `pnpm run validate:master` — ✅ 12 checks PASS
-- `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB
-- `pnpm run test:unit` — ✅ 43/43
-- `pnpm run qa:csp` — ✅ 0 inline scripts
-- `pnpm run qa:bundle` — ✅ 7.5KB (max 500KB)
-- `pnpm run qa:doc-versions` — ✅ PASS
-- `python3 scripts/audit_vs_embeds.py` — ✅ 0 regressions
-- `python3 scripts/audit_canon_master_sync.py` — ✅ 11/11 PASS (NEW, focused guard для iter 44 fixes; negative test verified)
+**Validation gates ALL PASS (iter 44):** build (shell hash `69d9b813` unchanged, contentHash `58f4daa85c05e070` → `34c34a7d9839c11d` CHANGED 1st since iter 34), validate:master (12 checks), validate (8 gates, 7.5KB), test:unit (43/43), qa:csp, qa:bundle, qa:doc-versions, audit_vs_embeds.py (0 regressions), audit_canon_master_sync.py (11/11 PASS).
 
 **Новые invariants (iter 44+):**
-- **Canon → master HTML sync (iter 43+ invariant, iter 44 PARTIAL 9/57):** 9 fixes применены к `src/master/*.html`. Осталось 48 (iter 45+). Regression test: `python3 scripts/audit_canon_master_sync.py` (11 checks, focused guard). General-purpose drift detector — iter 45+.
-- **Build hash vs contentHash (iter 44+ clarification, НОВЫЙ):** Shell hash `69d9b813` (в `build.hash`) = SHA-256 of `src/shell/index.html` ONLY. contentHash (в `build/build-manifest.json`) = SHA-256 of combined `src/master/*.html`, CHANGED iter 44: `58f4daa85c05e070` → `34c34a7d9839c11d`. **Shell hash unchanged ≠ master HTML unchanged.**
+- **Canon → master HTML sync (iter 43+ invariant, iter 44 PARTIAL 9/57).**
+- **Build hash vs contentHash (iter 44+ clarification, НОВЫЙ).**
 
-**iter 45+ REMAINING (48 fixes):** P0-7..9 (A4 part_04 NEED + variant delete), P0-13..14 (B1 part_10 Vysh GHOST+FLAW), P0-15 (NEW-1 part_04 cross-refs), P0-16 (NEW-3 part_05 RULE), P0-1 (A1 appendix_glossary), P0-10..12 (A6/A9/A10 part_08/09), P1-1..11 (part_04/06/07a/07b/08/10), P2-* (terminology, skip P2-4/P2-15 metadata), P3-* (local + cross-refs, skip P3-8/11 — no master equivalent). После каждого Part: `pnpm run build` + `validate:master` + `audit_canon_master_sync.py` + visual diff.
+**Точка остановки iter 44:** KI#33 🔵 PARTIAL (9/57). contentHash `34c34a7d9839c11d` (1st change since iter 34). iter 45+ roadmap: KI#33 fix Phase 2 (48 fixes).
 
-**Точка остановки iter 44:** KI#33 🔵 PARTIAL (9/57). contentHash `34c34a7d9839c11d` (first change since iter 34). iter 45+ roadmap: KI#33 fix Phase 2 (48 fixes) + general-purpose drift detector + Glossary double-render (LOW) + Component extracts regeneration (LOW опциональный). Все validation gates PASS.
+---
+
+## 5.10. iter 45 — CANON→MASTER HTML SYNC PHASE 2 (KI#33 🔵 PARTIAL, 33/57 cumulatively)
+
+iter 45 — вторая фаза синхронизации canon audit фиксов iter 35-38 с `src/master/*.html`. Применены 24 content fixes в 10 файлах. metadata fixes (YAML front-matter, callout labels policy) — skip. Regression test `scripts/audit_canon_master_sync.py` расширен с 11 до 34 checks. **contentHash изменился 2nd time since iter 34.**
+
+| # | Fix ID | File | Description | Status |
+|---|--------|------|-------------|--------|
+| 1 | P0-1 (A1) | `src/master/appendix_glossary.html` | L163 — T→A→P heading: Pattern → Price | ✅ iter 45 |
+| 2 | P0-7 (A4) | `src/master/part_04.html` | NEED table — Выщербленный canonical NEED text update | ✅ iter 45 |
+| 3 | P0-8 (A4) | `src/master/part_04.html` | Full chain L356 — NEED text update | ✅ iter 45 |
+| 4 | P0-9 (A4) | `src/master/part_04.html` | NEED table — Выщербленный variant row delete + variant label | ✅ iter 45 |
+| 5 | P0-10 (A6) | `src/master/part_08.html` | L488 — AP-15 ❌ example: «замолкает на час» → «кричит: Вон!» (immediate Price) | ✅ iter 45 |
+| 6 | P0-11 (A9) | `src/master/part_09.html` | L580 — resume: 3-level scale → 4-zone scale | ✅ iter 45 |
+| 7 | P0-12 (A10) | `src/master/part_09.html` | L540 — Vysh Quick Check heading rename + clarifier paragraph | ✅ iter 45 |
+| 8 | P0-13 (B1 GHOST) | `src/master/part_10.html` | L342 — Omnis GHOST: abstract fear → concrete event (linza) | ✅ iter 45 |
+| 9 | P0-14 (B1 FLAW) | `src/master/part_10.html` | L340 — Omnis FLAW: abstract adjective → concrete behavior | ✅ iter 45 |
+| 10 | P0-15 (NEW-1) | — | SKIP — `待` char и Cross-references секция уже удалены (P2-6 canon) | ⏭️ SKIP |
+| 11 | P0-16 (NEW-3) | `src/master/part_05.html` | L153 — §5.1 RULE expansion (8K+/16K+ context limits) | ✅ iter 45 |
+| 12 | P1-1 (A5) | `src/master/part_08.html` | L379 — AP-9 «Критерий broken SPINE» clarification paragraph added | ✅ iter 45 |
+| 13 | P1-3 (A8) | `src/master/part_08.html` | L247 — OCEAN Overload orphan row delete + footnote | ✅ iter 45 |
+| 14 | P1-4 (B2) | `src/master/part_10.html` | L238 — Walter GHOST rewrite (concrete observation, no «Унижение» label) | ✅ iter 45 |
+| 15 | P1-5 (B5) | `src/master/part_04.html` | After RULE callout — 3 Anchor type definitions (Psychological/At-rest/Growth) | ✅ iter 45 |
+| 16 | P1-6 (B6) | `src/master/part_06.html` | L141 — Tier 0 «12B» → «12B+» (sync with E11 viz) | ✅ iter 45 |
+| 17 | P1-7 (D1) | `src/master/part_04.html` | L204 — secondary GHOST row delete + Примечание | ✅ iter 45 |
+| 18 | P1-10 (D4+NEW-2) | `src/master/part_07a.html` | L1110 — Lorebook example: «пожар» → «предательство» (primary GHOST) | ✅ iter 45 |
+| 19 | P1-11 (D4) | `src/master/part_07b.html` | §7B.3 — Пример 1 (предательство) added + Пример 2/3/4 renumbered | ✅ iter 45 |
+| 20 | P3-1 (D3) | `src/master/part_07b.html` | §7B.2 — Greeting scene clarification note (бар, ночь vs кабинет редакции) | ✅ iter 45 |
+| 21 | P3-1 (D3) | `src/master/part_10.html` | §10.1 — Greeting scene clarification note (reverse cross-ref) | ✅ iter 45 |
+| 22 | P3-3 (D6) | `src/master/part_03.html` | §3.8 — Йоуёма character context paragraph (Сквозные персонажи) | ✅ iter 45 |
+| 23 | P3-5 (F2) | `src/master/part_02.html` | §2.2 Price table — 4th column «Пример (конкретный)» added | ✅ iter 45 |
+| 24 | P3-6 (F3) | `src/master/part_03.html` | §3.1 after % table — Voice Isolation methodology note added | ✅ iter 45 |
+
+**NEW KI discovered (documented as iter 45+ invariant, not as KI#N):** `validate:master` FAILED after first batch because `<div class="callout note">` was used for Примечание/Методология/Критерий callouts. Validator only allows `.callout.rule/.rec/.ex` + plain `.callout`. **Fix:** converted all 5 `callout note` wrappers to plain `<p>` (matching precedent in `part_07a.html` L754). Added new invariant: «Callout class policy (iter 45+)».
+
+**Validation gates ALL PASS (iter 45):** build (shell hash `69d9b813` unchanged, contentHash `34c34a7d9839c11d` → `665cede798c34fc0` CHANGED 2nd since iter 34), validate:master (12 checks), validate (8 gates, 7.5KB), test:unit (43/43), qa:csp, qa:bundle, qa:doc-versions, audit_vs_embeds.py (0 regressions), audit_canon_master_sync.py (34/34 PASS).
+
+**Новые invariants (iter 45+):**
+- **Canon → master HTML sync (iter 43+ invariant, iter 45 PARTIAL 33/57).** Regression test extended с 11 до 34 checks.
+- **Callout class policy (iter 45+ NEW):** `.callout.rule/.rec/.ex` и plain `.callout` ONLY; `.callout.note/.info/.warn/.tip/.box/.sidebar/.custom/.important` ПРОИБИЩЕНы. См. `scripts/validate-master.mjs` L452-463. Для «Примечание»/«Методология»/etc — plain `<p><strong>Примечание:</strong>...</p>` без callout wrapper.
+
+**iter 46+ REMAINING (24 fixes):** P1-8/9 (part_04 secondary-LIE Елена + variant-LIE Выщербленный row delete, 2 fixes low risk), P2-* content fixes (terminology cleanup, skip P2-4 YAML/P2-15 `<br/>` metadata), P3-2 (D5 part_10 HTML comments → visible callouts, 5 cards, structural high risk), P3-4 (D7 part_01/04/09 Уолтер cross-refs).
+
+**Точка остановки iter 45:** KI#33 🔵 PARTIAL (33/57). contentHash `665cede798c34fc0` (2nd change since iter 34). iter 46+ roadmap: KI#33 fix Phase 3 (24 fixes) + general-purpose drift detector + Glossary double-render (LOW) + Component extracts regeneration (LOW опциональный). Все validation gates PASS.
 
 ---
 

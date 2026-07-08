@@ -237,11 +237,12 @@
 <tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td>Средняя</td><td>Валидировать XML-теги</td></tr>
 <tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td>Средняя</td><td>Проверить консистентность записей</td></tr>
 <tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td>Высокая</td><td>Использовать 4K-Fallback Protocol</td></tr>
-<tr><td>—</td><td>OCEAN Overload</td><td>Средняя</td><td>OCEAN value conflicts → <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a></td></tr>
 <tr><td><a href="#p8_ap15_nested_anchors">AP-15</a></td><td>Nested Anchors</td><td>Средняя</td><td>Разбить на атомарные Anchors</td></tr>
 </tbody>
 </table>
 </div>
+
+<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (<code>p5_ocean_warning</code>). В таблице не отображается — см. <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a>.</p>
 
 </section>
 <section  data-section="p8_ap1_token_bloat">
@@ -376,7 +377,9 @@
 <h4>❌ Сломанный SPINE</h4>
 <pre><code>GHOST: (отсутствует)  →  LIE: (отсутствует)  →  FLAW: Избегает близости
 NEED: Нуждается в доверии  ←  WANT: Хочет быть любимым</code></pre>
-<p>WANT совместим с NEED — нет конфликта. FLAW блокирует BOTH — но откуда FLAW? Нет LIE/GHOST → цепь разорвана.</p>
+<p>WANT совместим с NEED — нет конфликта. FLAW блокирует BOTH — но откуда FLAW? Без объяснения через LIE/GHOST цепь разорвана.</p>
+
+<p><strong>Критерий broken SPINE</strong> (сохраняется как диагностика): «WANT совместим с NEED — нет конфликта» + FLAW не объяснён через LIE/GHOST. Это не то же самое, что «GHOST/LIE текстуально отсутствуют» — per Part 4 §4.1, GHOST/LIE могут быть <strong>неявными</strong> для простых персонажей. Diagnose broken SPINE по разрыву каузальной цепи (FLAW без корня в LIE/GHOST), а не по текстовому отсутствию элементов.</p>
 </div>
 <div class="solution-block">
 <h4>✅ Цельный SPINE</h4>
@@ -485,7 +488,7 @@ WANT: {{want}}
 <div class="example-block">
 <h4>📝 Пример</h4>
 <div class="example-label illustration">ILLUSTRATION</div>
-<pre><code>❌ Вложенный: "Когда лгут → если уже лгали раньше → хлопает дверью → замолкает на час"
+<pre><code>❌ Вложенный: "Когда лгут → если уже лгали раньше → хлопает дверью → кричит: «Вон!»"
 ✅ Атомарные: "Когда лгут → сжимает челюсти → голос становится тише"
            + "Когда обнаруживает ложь повторно → хлопает дверью → уходит в другую комнату"</code></pre>
 </div>
