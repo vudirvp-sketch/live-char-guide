@@ -28,14 +28,14 @@ v8 — единый гайд без слоёв. Весь контент чита
 
 | Part | Название | Секций | Содержание |
 |------|----------|--------|------------|
-| 1 | Базовые блоки карточки | 5 | Card Anatomy, 3 Key Principles, Token Budget, Assembly Overview, Top-3 Errors |
+| 1 | Базовые блоки карточки | 7 | Value Proposition, Card Anatomy, Structure Overview, Core Rules, Token Budget, Pipeline, Top-3 Errors |
 | 2 | Поведенческие якоря | 6 | T→A→P, Anchor Rules, Anchor Examples, Embodiment, Env. Reactivity, Sensory Anchors |
 | 3 | Голос и изоляция | 8 | Voice Isolation, Influence Hierarchy, Examples Rules, Examples Quality, Greeting, Voice Leak, Joker Case, Multi-char |
 | 4 | SPINE Framework | 11 | 5 элементов (GHOST→LIE→FLAW→NEED→WANT), Ghost Layers, Full Chain, SPINE→Anchor Mapping, SPINE Check, Navigation |
-| 5 | Психологический инструментарий | 6 | OCEAN, Enneagram, MBTI, Cross-instrument Map, Wings, OCEAN×Enneagram |
+| 5 | Психологический инструментарий | 8 | OCEAN Basics, Elena Profile, OCEAN Warning, Enneagram, MBTI, Cross-instrument Map, Wings, OCEAN×Enneagram |
 | 6 | Цепочка рассуждений (CoT) | 6 | Bridge (reframed), Basics, Tiers, Tier 2, Tier 3, CoT-anchors |
-| 7 | Техническая реализация | 16 | SP, CORE DIRECTIVES (все 7), Tone Frame, Format Lock, AN, Structured Inject, Lorebook, Params, XML/API/4K, Assembly Pipeline |
-| 8 | Анти-паттерны | 17 | 16 анти-паттернов (AP-1–AP-16), последовательная нумерация |
+| 7 | Техническая реализация | 18 | SP, CORE DIRECTIVES, Tone Frame, Format Lock, AN, Sampling Params, Model Checklist, OOC Protection, XML Tags, API Blocks, 4K Fallback, Token Budget, Assembly Pipeline (7A) + Structured Inject, Greeting, Lorebook Basics/Mechanics/Advanced (7B) |
+| 8 | Анти-паттерны | 16 | 15 анти-паттернов (AP-1–AP-15) + overview. (AP-16 не существует — OCEAN Overload перенесён в Part 5 §5.3 в v9 restructure.) |
 | 9 | Диагностика и тестирование | 11 | Quality Scale, One Change Rule, Checklist, Problems, Symptom Table, Decision Tree, Test Scenarios, Pre-Deploy |
 | 10 | Полные примеры карточек | 4 | Elena, Walter, Omnis-Zeta, Vysherblenny (Geralt + Edward DELETED в v9.1 — FIX-07) |
 

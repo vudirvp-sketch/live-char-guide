@@ -2,14 +2,16 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Версия:** 9.1.0 + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED + KI#22/#23 ✅ CLOSED + iter 34 (CSS/CSP) + iter 35 (KI#21 P0) + iter 36 (KI#21 P1) + iter 37 (KI#21 P2) + iter 38 (KI#21 P3 ✅ CLOSED) + **iter 39 — KI#25/#26/#27 ✅ CLOSED (doc drift fix, build hash 69d9b813 unchanged)**
+> **Версия:** 9.1.0 + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED + KI#22/#23 ✅ CLOSED + iter 34 (CSS/CSP) + iter 35 (KI#21 P0) + iter 36 (KI#21 P1) + iter 37 (KI#21 P2) + iter 38 (KI#21 P3 ✅ CLOSED) + iter 39 (KI#25/#26/#27 ✅ CLOSED) + **iter 40 — KI#28/#29 ✅ CLOSED (README section counts + OCEAN labeling, build hash 69d9b813 unchanged)**
 > **Дата:** 2026-07-08
 
 ---
 
 ## Текущее состояние
 
-**iter 39 — DOC DRIFT FIX ✅ COMPLETE.** 3 новых KI обнаружены при анализе исходников Йоуёмы/Выщербленного и сверки с каноном `docs/canon/`. Все 3 KI — doc-only (canon не тронут, build hash unchanged): KI#25 (`elena_character_bible.md` OCEAN labels stale), KI#26 (`vyshcherblenny_character_bible.md` stale world setting + GHOST Layers drift + OCEAN count + Lorebook), KI#27 (`README.md` stale Part 10 structure entry). Принцип: guide's role as example takes priority — canon Part 10 §10.4 не правится, bible/README подтягиваются к канону. Validation gates ALL PASS.
+**iter 40 — README + OCEAN LABELING FIX ✅ COMPLETE.** 2 новых KI из iter 39 roadmap закрыты: KI#28 (README section counts устарели для Parts 1/5/7/8 — обновлены до фактических 7/8/18/16, описание Part 8 исправлено AP-1–AP-16 → AP-1–AP-15), KI#29 (OCEAN labeling — N=70 в part_10.md §10.4 + appendix_character_map.md помечен как «экстремум», но per Part 5 §5.1 RULE = cautious zone boundary; label-only fix, значения unchanged). Оба — doc/canon-only, build hash `69d9b813` unchanged. Validation gates ALL PASS.
+
+**iter 39 — DOC DRIFT FIX ✅ COMPLETE.** 3 KI (KI#25/#26/#27) — bible + README выровнены с canon Part 10 §10.4. Build hash unchanged.
 
 **iter 38 — CANON AUDIT P3 ✅ COMPLETE.** 10 правок P3 из `docs/AUDIT_VERIFICATION.md` §4.4. Создано 2 новых canon-файла: `part_00.md` (Как читать + TL;DR), `appendix_character_map.md` (карта 5 персонажей). Canon total: 3 905 → 4 070 строк (+165 net). **KI#21 ✅ CLOSED полностью (57/57 правок).**
 
@@ -21,6 +23,8 @@
 
 | KI | Severity | Status | Iter |
 |----|----------|--------|------|
+| KI#28 (README.md section counts stale — Parts 1/5/7/8) | LOW | ✅ CLOSED | iter 40 |
+| KI#29 (OCEAN labeling: N=70 marked as «extreme» vs Part 5 §5.1 RULE) | LOW-MEDIUM | ✅ CLOSED | iter 40 |
 | KI#25 (elena_character_bible.md OCEAN labels stale) | LOW | ✅ CLOSED | iter 39 |
 | KI#26 (vyshcherblenny_character_bible.md stale world setting + GHOST Layers drift) | MEDIUM | ✅ CLOSED | iter 39 |
 | KI#27 (README.md stale Part 10 structure entry) | LOW | ✅ CLOSED | iter 39 |
@@ -36,6 +40,22 @@
 | KI#16 (qa:csp — inline scripts) | MEDIUM | ✅ CLOSED | iter 19 |
 | KI#17 (documentation drift E07 vs E02) | LOW | ✅ CLOSED | iter 20 |
 | KI#1..KI#12, KI#15 | various | ✅ CLOSED | iter 1-7 |
+
+### KI#28 — README.md section counts stale (Parts 1/5/7/8) ✅ CLOSED (iter 40)
+
+**Симптом:** `README.md` L31-40 (таблица «Структура гайда») содержал устаревшие counts секций для 4 Parts (Part 1: 5 вместо 7, Part 5: 6 вместо 8, Part 7: 16 вместо 18, Part 8: 17 вместо 16). Part 8 описание «16 анти-паттернов (AP-1–AP-16)» также устарело — AP-16 не существует (OCEAN Overload перенесён в Part 5 §5.3 в v9 restructure).
+
+**Fix (iter 40):** README L31 (Part 1: 5 → 7, описание расширено), L35 (Part 5: 6 → 8, описание расширено), L37 (Part 7: 16 → 18, описание расширено с 7A/7B breakdown), L38 (Part 8: 17 → 16, описание «16 анти-паттернов (AP-1–AP-16)» → «15 анти-паттернов (AP-1–AP-15) + overview» с пояснением про AP-16). Сумма: 7+6+8+11+8+6+18+16+11+4 = 95 Part секций + 3 appendix = 98 ✓ (matches AGENT_NAVIGATION.md). Pure docs, build hash unaffected.
+
+### KI#29 — OCEAN labeling: N=70 marked as «extreme» vs Part 5 §5.1 RULE ✅ CLOSED (iter 40)
+
+**Симптом:** Внутренняя противоречивость канона — Part 10 §10.4 L408 и `appendix_character_map.md` L16 помечали N=70 как «экстремум»/«Высокая N», но Part 5 §5.1 RULE определяет экстремум как строго `<30` или `>70`. N=70 = upper boundary cautious zone (60–70), НЕ экстремум.
+
+**Fix (iter 40):** label-only fix, значения OCEAN НЕ менялись.
+- `docs/canon/part_10.md` L408: «Экстремумы: Низкая E (интроверт), Высокая N (невротизм)» → «Экстремумы: Низкая E (<30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной, см. Part 5 §5.1 RULE: extreme = строго <30 или >70).» Значения (O:60, C:55, E:25, A:30, N:70) unchanged — moderate 4K-fallback example.
+- `docs/canon/appendix_character_map.md`: колонка «OCEAN экстремумы» → «OCEAN (extreme + cautious)» + footnote с per-character breakdown (Елена: 1 extreme + 2 cautious; Уолтер: 2 extreme + 1 cautious boundary; Омнис: 3 extreme; Выщербленный: 1 extreme + 1 cautious boundary, bible = 16K+ extreme values). YAML `last_synced` updated to iter 40.
+
+**НЕ в scope (principle preserved):** values O:60/C:55/E:25/A:30/N:70 в Part 10 §10.4 — unchanged. Это internal canon consistency fix (Part 5 RULE vs Part 10/appendix label), НЕ bible-vs-canon sync — iter 39 invariant не применяется.
 
 ### KI#25 — elena_character_bible.md OCEAN labels stale ✅ CLOSED (iter 39)
 
@@ -82,26 +102,26 @@
 
 ---
 
-## Invariants (iter 39+)
+## Invariants (iter 40+)
 
 - VS scroll-animation: `python3 scripts/audit_vs_embeds.py` (0 regressions expected).
 - CSS scoping (iter 34+): VS-EMBED selectors scoped к element-specific parent.
 - Принцип `viz > dry text` сохраняется.
 - Build hash `69d9b813` — unchanged после iter 34 (KI#23 fix). Canon-файлы + doc-файлы (`docs/*.md`, `*.md` в root) НЕ входят в hash computation — только `src/master/`, `src/shell/`, `src/assets/`, `data/`, `parts/` root fallbacks.
 - Принцип «guide's role as example takes priority over character canon»: при рассинхроне bible vs canon Part 10 — правится bible, не Part 10.
+- **OCEAN labeling consistency (iter 40+):** extreme = строго `<30` или `>70` per Part 5 §5.1 RULE; cautious zone = `30–40` / `60–70`. Label-only fixes допустимы для internal canon consistency (Part 5 RULE vs Part 10/appendix label) — values примера не трогаются.
 - При обнаружении новых противоречий в каноне — добавлять в `docs/AUDIT_VERIFICATION.md` §2 таблицу + sub-ID (A11, B7, etc.).
 - При обнаружении новых багов — сначала документировать в `STATUS.md` §«Known Issues» как KI#N, потом фиксить.
 
 ---
 
-## iter 40+ Roadmap (deferred from iter 39)
+## iter 41+ Roadmap (deferred from iter 40)
 
 Не критично, не запланировано строго:
 
-- **README.md section counts** (KI#27 leftover) — Parts 1/5/7/8 также устарели (README говорит 92 секции, фактически 98). Cosmetic.
-- **OCEAN moderate values labeling** в `part_10.md` §10.4 + `appendix_character_map.md` — N=70 помечен как «экстремум», но N=70 = cautious zone boundary per Part 5 §5.1 RULE «<30 или >70». Требует аудита: либо изменить labels (но это трогает пример), либо уточнить RULE.
-- **Glossary double-render inefficiency** (glossary.json + appendix_glossary.md — лёгкое дублирование).
-- **Component extracts sync** (visual-system/integration/component-extracts/) — documentation drift.
+- **Glossary double-render inefficiency** (`data/glossary.json` + `docs/canon/appendix_glossary.md` — лёгкое дублирование). LOW.
+- **Component extracts sync** (`visual-system/integration/component-extracts/`) — documentation drift vs actual `src/shell/widgets/`. MEDIUM — много файлов.
+- **Part 10 §10.4 moderate vs bible extreme values** — в Part 10 §10.4 используются moderate 4K-fallback values (O:60/C:55/E:25/A:30/N:70), в bible — canonical 16K+ extreme values (O:85/C:25/A:15/N:92/E:60). Note в bible (iter 39 KI#26 fix) объясняет различие, но формальной cross-ref между Part 10 §10.4 и bible нет. LOW — cosmetic.
 
 ---
 
@@ -122,6 +142,7 @@
 | **DGA COMPLETE (KI#18 CLOSED)** | 9/9 sub-items resolved. Принцип `viz > dry text`. |
 | **Canon audit P0+P1+P2+P3 ✅ CLOSED (iter 35-38)** | 57/57 правок закрыты. KI#21 ✅ CLOSED полностью. |
 | **Doc drift fix ✅ CLOSED (iter 39)** | KI#25/#26/#27 ✅ CLOSED. Bible (`elena_character_bible.md`, `vyshcherblenny_character_bible.md`) + README.md выровнены с canon Part 10 §10.4 (мир ТЕНЕБРИС) и Part 5 §5.1 (OCEAN labeling). Принцип: при рассинхроне bible vs canon — правится bible, не canon. |
+| **README + OCEAN labeling fix ✅ CLOSED (iter 40)** | KI#28/#29 ✅ CLOSED. README section counts обновлены (Parts 1/5/7/8: 7/8/18/16, сумма 98 ✓). OCEAN labeling в part_10.md §10.4 + appendix_character_map.md — N=70 relabeled как cautious zone boundary (не extreme per Part 5 §5.1 RULE). Values unchanged. |
 | **YAML front-matter (iter 37)** | Все canon-файлы (кроме `_README.md`) используют YAML front-matter (`--- canonical_for / vs_embedded / vs_cross_ref / sections / last_synced / migration_status ---`). |
 | **Callout labels English (iter 37+)** | Метки `RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`, `Demonstrates`, `Annotation` — English semantic anchors. `Примечание` — Russian локальное уточнение. См. `docs/canon/_README.md` §3.9. |
 

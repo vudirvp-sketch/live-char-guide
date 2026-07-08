@@ -368,6 +368,25 @@ iter 39 вышел за scope KI#21 (контент канона) — обнар
 
 ---
 
+## 5.6. iter 40 — README + OCEAN LABELING FIX (KI#28/#29 ✅ CLOSED)
+
+iter 40 закрыл 2 roadmap-задачи из iter 39 stopping point. Оба KI — doc/canon-only, build hash `69d9b813` unchanged.
+
+| KI | Файл | Симптом | Fix | Status |
+|----|------|---------|-----|--------|
+| KI#28 | `README.md` L31-38 | Section counts устарели: Part 1 (5 вместо 7), Part 5 (6 вместо 8), Part 7 (16 вместо 18), Part 8 (17 вместо 16). Part 8 описание «16 анти-паттернов (AP-1–AP-16)» — AP-16 не существует (OCEAN Overload перенесён в Part 5 §5.3 в v9). | Part 1: 5→7 (описание расширено), Part 5: 6→8 (описание расширено), Part 7: 16→18 (описание с 7A/7B breakdown), Part 8: 17→16 + «16 анти-паттернов (AP-1–AP-16)» → «15 анти-паттернов (AP-1–AP-15) + overview». Сумма: 95 Part секций + 3 appendix = 98 ✓. | ✅ CLOSED |
+| KI#29 | `docs/canon/part_10.md` L408 + `docs/canon/appendix_character_map.md` L16 | N=70 помечен как «экстремум»/«Высокая N» — противоречит Part 5 §5.1 RULE (extreme = строго `<30` или `>70`; N=70 = cautious zone boundary 60–70). | **Label-only fix, values unchanged.** `part_10.md` L408: «Экстремумы: Низкая E, Высокая N» → «Экстремумы: Низкая E (<30). Cautious zone: N=70 (граница 60–70, см. Part 5 §5.1 RULE)». `appendix_character_map.md`: колонка «OCEAN экстремумы» → «OCEAN (extreme + cautious)» + footnote с per-character breakdown (Елена 1 ext + 2 cautious; Уолтер 2 ext + 1 cautious; Омнис 3 ext; Выщербленный 1 ext + 1 cautious). YAML `last_synced` → iter 40. | ✅ CLOSED |
+
+**Modified files (iter 40):** `README.md` (KI#28), `docs/canon/part_10.md` (KI#29), `docs/canon/appendix_character_map.md` (KI#29), `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `docs/AUDIT_VERIFICATION.md`.
+
+**Validation gates ALL PASS:** build (hash `69d9b813`) / validate:master (12 checks) / validate (8 gates, 7.5KB) / test:unit (43/43) / test:integration (21/21) / lint (0 errors, 12 warnings baseline) / qa:csp / qa:bundle / qa:doc-versions / audit_vs_embeds.py (0 regressions) / check_english.py --scan-docs (0 WH40k terms).
+
+**НЕ в scope (principle preserved):** OCEAN values O:60/C:55/E:25/A:30/N:70 в Part 10 §10.4 — unchanged (moderate 4K-fallback example). Это internal canon consistency fix (Part 5 RULE vs Part 10/appendix label), НЕ bible-vs-canon sync — iter 39 invariant («guide's role as example takes priority») не применяется. Новый invariant (iter 40+): OCEAN labeling consistency — label-only fixes допустимы для internal canon consistency, values примера не трогаются.
+
+**Точка остановки iter 40:** README + OCEAN labeling fix complete. KI#28/#29 ✅ CLOSED. iter 41+ roadmap: Glossary double-render (LOW), Component extracts sync (MEDIUM), Part 10 moderate vs bible extreme cross-ref (LOW — cosmetic). Build hash `69d9b813` unchanged. Invariants: guide's role as example takes priority (iter 39+), OCEAN labeling consistency (iter 40+).
+
+---
+
 ## 6. Риски и компромиссы
 
 ### 6.1. Build hash stability
