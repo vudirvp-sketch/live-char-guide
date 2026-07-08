@@ -15,6 +15,10 @@ migration_status: —
 
 ~440 токенов (базовые блоки) / ~900 токенов (с SPINE и FLAW-linked Anchors). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.
 
+**Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.
+
+**Примечание:** Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Учебный разбор Greeting по 4-шаговому алгоритму (бар, ночь) — `[ref: part_07b.md §7B.2 — Greeting алгоритм]`.
+
 **TEMPLATE:**
 
 ### Полная карточка Елены с аннотациями
@@ -103,6 +107,8 @@ FLAW-linked:
 `data-section: p10_walter`
 
 Уолтер Уайт — пример реалистичного современного персонажа. Никаких фэнтези-элементов: химия, деньги, семья. Конфликт WANT/NEED очевиден и психологически достоверен — обеспечение семьи vs. потребность в контроле и признании.
+
+**Demonstrates:** EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.
 
 **TEMPLATE:**
 
@@ -194,6 +200,8 @@ FLAW-linked:
 `data-section: p10_omnis`
 
 ~1800 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, GHOST Layers, CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотациями.
+
+**Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.
 
 **TEMPLATE:**
 
@@ -348,6 +356,8 @@ CoT (2 Anchors максимум):
 `data-section: p10_vysherblenny`
 
 ~1500+ токенов. GHOST Layers, CoT, Sensory Anchors, XML.
+
+**Demonstrates:** SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.
 
 **TEMPLATE:**
 

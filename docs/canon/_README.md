@@ -22,6 +22,7 @@
 ```
 docs/canon/
 ├── _README.md            ← этот файл (правила Canon)
+├── part_00.md            ← Part 0: Как читать + TL;DR (iter 38)
 ├── part_01.md            ← Canon для Part 1 (Foundations)
 ├── part_02.md            ← Part 2 (Anchors)
 ├── part_03.md            ← Part 3 (Voice)
@@ -33,9 +34,10 @@ docs/canon/
 ├── part_08.md            ← Part 8 (Anti-patterns)
 ├── part_09.md            ← Part 9 (Diagnostics)
 ├── part_10.md            ← Part 10 (Examples)
-├── appendix_mbti.md      ← Appendix: MBTI
-├── appendix_model_table.md ← Appendix: Model Capability Table
-└── appendix_glossary.md  ← Appendix: Glossary
+├── appendix_mbti.md      ← Appendix A: MBTI
+├── appendix_model_table.md ← Appendix B: Model Capability Table
+├── appendix_glossary.md  ← Appendix C: Glossary
+└── appendix_character_map.md ← Appendix D: Character map (iter 38)
 ```
 
 **Один файл = один Part master HTML.** Это позволяет агенту загружать в контекст только нужный Part, а не весь гайд.
@@ -138,8 +140,12 @@ docs/canon/
 - `**Bridge:**` — narративный переход между Parts (только 1-2 на гайд, не во всех Parts)
 - `**Synthesis:**` — 1-2 предложение summary в конце Part (только для Parts с major conceptual shift)
 - `**Cross-ref:**` — pointer на связанную секцию в другом Part
+- `**Demonstrates:**` — список принципов, которые карточка демонстрирует (iter 38+)
+- `**Annotation:**` — детальный разбор блока карточки (iter 37+)
 
 Тело callouts — на русском (это контент для читателя). Метки — на английском (это parsing anchors для модели).
+
+Уточняющие комментарии внутри секций — на русском с меткой `**Примечание:**` (не semantic anchor, локальное уточнение).
 
 ---
 
@@ -186,6 +192,7 @@ docs/canon/
 
 | Part | Canon file | Created | Migrated | Iter |
 |------|-----------|---------|----------|------|
+| Part 0 (concept) | `part_00.md` | ✅ iter 38 | n/a (no master HTML) | iter 38 (NEW) |
 | Part 1 | `part_01.md` | ✅ iter 14 | ✅ iter 14 | iter 14 (DONE) |
 | Part 2 | `part_02.md` | ✅ iter 14 | ✅ iter 14 | iter 14 (DONE) |
 | Part 3 | `part_03.md` | ✅ iter 14 | ✅ iter 14 | iter 14 (DONE) |
@@ -197,13 +204,14 @@ docs/canon/
 | Part 8 | `part_08.md` | ✅ iter 12 | ✅ iter 12 | iter 12 (DONE) |
 | Part 9 | `part_09.md` | ✅ iter 13 | ✅ iter 13 | iter 13 (DONE) |
 | Part 10 | `part_10.md` | ✅ iter 16 | ✅ iter 16 | iter 16 (DONE) |
-| Appendix MBTI | `appendix_mbti.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
-| Appendix Model Table | `appendix_model_table.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
-| Appendix Glossary | `appendix_glossary.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix A MBTI | `appendix_mbti.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix B Model Table | `appendix_model_table.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix C Glossary | `appendix_glossary.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix D Character Map | `appendix_character_map.md` | ✅ iter 38 | n/a (no master HTML) | iter 38 (NEW) |
 
 **Обновлять эту таблицу при каждом изменении статуса Canon-файла.**
 
-**Все 10 Parts + 3 Appendix — Canon COMPLETE (iter 18).**
+**Все 10 Parts + 4 Appendix + Part 0 (concept) — Canon COMPLETE (iter 18 + iter 38 concept additions).**
 
 ---
 

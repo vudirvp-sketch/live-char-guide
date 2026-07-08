@@ -54,6 +54,8 @@ migration_status: —
 
 ### Разобранный пример: Greeting Елены
 
+**Примечание:** Greeting Елены здесь — учебный пример для разбора 4-шагового алгоритма (бар, ночь). Canonical Greeting для production-карточки Елены (кабинет редакции, 2 часа ночи) — `[ref: part_10.md §10.1 — GREETING]`. Разные сцены = разные Sensory Anchors, тот же персонаж.
+
 **ILLUSTRATION** — Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL:
 
 ```
