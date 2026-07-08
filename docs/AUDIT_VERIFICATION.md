@@ -516,6 +516,39 @@ iter 45 — вторая фаза синхронизации canon audit фик�
 
 ---
 
+## 5.11. iter 46 — CANON→MASTER HTML SYNC PHASE 3 (KI#33 🔵 PARTIAL, 41/57 cumulatively)
+
+iter 46 — третья фаза синхронизации canon audit фиксов iter 35-38 с `src/master/*.html`. Применены 8 content fixes в 6 файлах (P2-1, P2-9 ×2, P2-12, P2-13, P2-14, P2-16, P2-17, P3-4 ×3). P1-8/9 SKIP — secondary/variant LIE rows уже отсутствуют в master HTML (canon-only fix). metadata fixes (YAML front-matter, callout labels policy, `[ref: ...]` notation, `<br/>` tags) — skip (canon-only). Regression test `scripts/audit_canon_master_sync.py` расширен с 34 до 57 checks. **contentHash изменился 3rd time since iter 34.**
+
+| # | Fix ID | File | Description | Status |
+|---|--------|------|-------------|--------|
+| 1 | P2-1 (C1) | `src/master/part_01.html` §1.4 | Ключевые термины block (Anchor/Voice/SPINE/OCEAN) + bold **Pattern Matcher** | ✅ iter 46 |
+| 2 | P2-9 (E6) | `src/master/part_07a.html` Format Lock | Pattern Matcher ref: «Модель — Pattern Matcher (см. Part 1 §1.4)» | ✅ iter 46 |
+| 3 | P2-9 (E6) | `src/master/part_07a.html` Format Lock RULE | Pattern Matcher ref: «модель выступает как Pattern Matcher (см. §1.4 Part 1)» | ✅ iter 46 |
+| 4 | P2-12 (B4) | `src/master/part_03.html` §3.4 | Tier 1/2/3 → Quality Grade A/B/C + disambiguation block (CoT Tier 0-3 / GHOST Layers Tier 1-3) | ✅ iter 46 |
+| 5 | P2-13 (F4) | `src/master/part_04.html` §4.2 | «Запрещённые слова» → «Запрещённые формулировки — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал»...» | ✅ iter 46 |
+| 6 | P2-14 (F5) | `src/master/part_05.html` §5.1 | Cautious zone (30–40 / 60–70) определение после RULE (FLAW/GHOST-реактивность) | ✅ iter 46 |
+| 7 | P2-16 (F7) | `src/master/part_07a.html` §7A.1 | Keirsey SP (Artisan/Ремесленник) → Sensing-Perceiving, см. Appendix A — MBTI | ✅ iter 46 |
+| 8 | P2-17 (F9) | `src/master/part_09.html` §9.6 | 1-словные симптомы для AP-refs ×7: AP-3 Voice-in-Desc, AP-5 RepPen-High, AP-6 No-Anti-Godmoding, AP-7 PP-Leak, AP-9 SPINE-Broken, AP-10 CoT-Overload, AP-15 OCEAN-Overload | ✅ iter 46 |
+| 9 | P3-4 (D7) | `src/master/part_01.html` §1.4 | Cross-ref на Уолтера §10.2 (реалистичный современный персонаж, простая SPINE) | ✅ iter 46 |
+| 10 | P3-4 (D7) | `src/master/part_04.html` §4.11 | Cross-ref на Уолтера §10.2 (SPINE без GHOST Layers) | ✅ iter 46 |
+| 11 | P3-4 (D7) | `src/master/part_09.html` §9.6 | Cross-ref на Уолтера §10.2 (тестирование карточки с OCEAN) | ✅ iter 46 |
+| — | P1-8 (D1) | — | SKIP — secondary-LIE Елена row отсутствует в master HTML (canon-only fix) | ⏭️ SKIP |
+| — | P1-9 (D2) | — | SKIP — variant-LIE Выщербленный row отсутствует в master HTML (canon-only fix) | ⏭️ SKIP |
+
+**No new KI discovered in iter 46.** Все fixes — content-only, validate:master PASS с первого применения (callout class policy iter 45+ соблюдена: используются plain `<p>` для Cross-ref и callout.rule/rec для RULE/RECOMMENDATION).
+
+**Validation gates ALL PASS (iter 46):** build (shell hash `69d9b813` unchanged, contentHash `665cede798c34fc0` → `d2fdafeaf093dd80` CHANGED 3rd since iter 34), validate:master (12 checks), validate (8 gates, 7.5KB), test:unit (43/43), qa:csp, qa:bundle, qa:doc-versions, audit_vs_embeds.py (0 regressions), audit_canon_master_sync.py (57/57 PASS).
+
+**iter 47+ REMAINING (16 fixes, MEDIUM/HIGH risk):**
+- **MEDIUM risk:** P2-3 (C5) Bridge paragraphs cleanup (~8 delete, 2 keep), P2-7 (E4) «Что вы теперь умеете» resume sections removal, P2-18 (F10) Elena inline annotations → Annotation callout.
+- **HIGH risk:** P3-2 (D5) part_10 HTML comments `<!-- Demonstrates: -->` → visible callouts (5 cards).
+- **SKIP (metadata, canon-only):** P2-2 (callout labels policy), P2-4 (YAML front-matter), P2-6 (`[ref: ...]` notation), P2-15 (`<br/>` → em-dash). P3-7 covered by P0-2. P3-8/11 — part_00/appendix_character_map (no master equivalent).
+
+**Точка остановки iter 46:** KI#33 🔵 PARTIAL (41/57). contentHash `d2fdafeaf093dd80` (3rd change since iter 34). iter 47+ roadmap: KI#33 fix Phase 4 (16 fixes, MEDIUM/HIGH risk) + general-purpose drift detector + Glossary double-render (LOW) + Component extracts regeneration (LOW опциональный). Все validation gates PASS.
+
+---
+
 ## 6. Риски и компромиссы
 
 ### 6.1. Build hash stability

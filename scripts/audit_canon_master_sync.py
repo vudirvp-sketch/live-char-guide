@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Audit canon → master HTML sync (iter 44+45 regression guard).
+Audit canon → master HTML sync (iter 44+45+46 regression guard).
 
 Purpose:
-    Verify that iter 44 + iter 45 canon→master HTML sync fixes are present
-    in `src/master/*.html`. This is a focused regression test — it does NOT
-    attempt a general-purpose semantic drift detector (planned for iter 46+).
+    Verify that iter 44 + iter 45 + iter 46 canon→master HTML sync fixes are
+    present in `src/master/*.html`. This is a focused regression test — it
+    does NOT attempt a general-purpose semantic drift detector (planned for
+    iter 47+).
 
     Each check compares a specific canon snippet (the source of truth in
     `docs/canon/*.md`) against the corresponding master HTML snippet,
@@ -36,6 +37,18 @@ Scope:
       - P3-3 (D6): part_03 — Йоуёма context paragraph
       - P3-5 (F2): part_02 — Price table 4th column «Пример (конкретный)»
       - P3-6 (F3): part_03 — Voice Isolation methodology note
+
+    iter 46 (8 fixes — Phase 3, KI#33 PARTIAL → closer to COMPLETE):
+      - P2-1 (C1): part_01 — Ключевые термины block + bold Pattern Matcher
+      - P2-9 (E6): part_07a — Pattern Matcher refs ×2 (Format Lock + RULE)
+      - P2-12 (B4): part_03 — Tier 1/2/3 → Quality Grade A/B/C + disambiguation
+      - P2-13 (F4): part_04 — «Запрещённые слова» → «Запрещённые формулировки»
+      - P2-14 (F5): part_05 — Cautious zone definition after RULE
+      - P2-16 (F7): part_07a — Keirsey SP Artisan → Sensing-Perceiving
+      - P2-17 (F9): part_09 — 1-word symptoms for AP-refs (×5 in Decision Tree)
+      - P3-4 (D7): part_01 + part_04 + part_09 — Уолтер cross-refs (×3)
+      - P1-8/P1-9 (D1/D2): SKIP — secondary/variant LIE rows already absent
+        in master HTML (never present; canon-only fix)
 
     Also detects A3 collateral drift:
       - src/master/part_10.html L611 — «Счётчик вырезаний» in §10.4 AN
@@ -299,13 +312,162 @@ CHECKS = [
         "<p><strong>Методология:</strong> проценты отклонения — эмпирические оценки авторов гайда на основе тестирования ~50 карточек",
         "part_03 §3.1: Voice Isolation % methodology note added (iter 38 P3-6 fix)",
     ),
+    # ================================================================
+    # iter 46 — Phase 3 canon→master HTML sync (8 fixes, P1-8/9 SKIP)
+    # ================================================================
+    # ----- P2-1 (C1): part_01 §1.4 Ключевые термины block -----
+    (
+        "P2-1a",
+        "part_01.html",
+        "<p><strong>Ключевые термины (используются далее без перевыполнения):</strong></p>",
+        "part_01 §1.4: Ключевые термины block added with Anchor/Voice/SPINE/OCEAN definitions (iter 37 P2-1 fix)",
+    ),
+    (
+        "P2-1b",
+        "part_01.html",
+        "<li><strong>SPINE</strong> — психологический каркас из 5 элементов (GHOST/LIE/FLAW/NEED/WANT), см. Part 4.</li>",
+        "part_01 §1.4: SPINE definition in Ключевые термины block (iter 37 P2-1 fix)",
+    ),
+    (
+        "P2-1c",
+        "part_01.html",
+        "LLM = <strong>Pattern Matcher</strong>, не Исполнитель правил",
+        "part_01 §1.4: bold **Pattern Matcher** in RULE (iter 37 P2-1 fix)",
+    ),
+    # ----- P2-9 (E6): part_07a Pattern Matcher refs ×2 -----
+    (
+        "P2-9a",
+        "part_07a.html",
+        "Модель — <a href=\"#p1_core_rules\">Pattern Matcher</a> (см. Part 1 §1.4): два паттерна разметки в одной карточке = произвольное переключение между ними.",
+        "part_07a Format Lock: Pattern Matcher ref updated with «Модель —» prefix + «(см. Part 1 §1.4)» suffix (iter 37 P2-9 fix)",
+    ),
+    (
+        "P2-9b",
+        "part_07a.html",
+        "модель выступает как <a href=\"#p1_core_rules\">Pattern Matcher</a> (см. §1.4 Part 1): два паттерна разметки = два источника",
+        "part_07a Format Lock RULE: Pattern Matcher ref updated with «модель выступает как» prefix + «(см. §1.4 Part 1)» suffix (iter 37 P2-9 fix)",
+    ),
+    # ----- P2-12 (B4): part_03 §3.4 Tier 1/2/3 → Quality Grade A/B/C -----
+    (
+        "P2-12a",
+        "part_03.html",
+        "<strong>Quality Grade A / B / C</strong> (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10)",
+        "part_03 §3.4: Quality Grade A/B/C disambiguation block added (iter 37 P2-12 fix)",
+    ),
+    (
+        "P2-12b",
+        "part_03.html",
+        "<tr><th>Критерий</th><th>Grade A (✓)</th><th>Grade B (⚠)</th><th>Grade C (✗)</th><th>Относится к</th></tr>",
+        "part_03 §3.4: quality table headers Tier 1/2/3 → Grade A/B/C (iter 37 P2-12 fix)",
+    ),
+    (
+        "P2-12c",
+        "part_03.html",
+        "<h4>До/После: Grade A vs Grade C</h4>",
+        "part_03 §3.4: «До/После» heading Tier 1 vs Tier 3 → Grade A vs Grade C (iter 37 P2-12 fix)",
+    ),
+    (
+        "P2-12d",
+        "part_03.html",
+        "<div class=\"diff-label\">Grade C (плохо)</div>",
+        "part_03 §3.4: diff-view label Tier 3 → Grade C (iter 37 P2-12 fix)",
+    ),
+    (
+        "P2-12e",
+        "part_03.html",
+        "<div class=\"diff-label\">Grade A (хорошо)</div>",
+        "part_03 §3.4: diff-view label Tier 1 → Grade A (iter 37 P2-12 fix)",
+    ),
+    # ----- P2-13 (F4): part_04 §4.2 «Запрещённые слова» → «Запрещённые формулировки» -----
+    (
+        "P2-13",
+        "part_04.html",
+        "<p><strong>RULE:</strong> Запрещённые формулировки — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». GHOST = ЧТО произошло, не вывод. Вместо них — конкретное событие: «в 7 лет видел, как дом сгорел, а пожарные не приехали вовремя».</p>",
+        "part_04 §4.2: «Запрещённые слова» → «Запрещённые формулировки» with examples (iter 37 P2-13 fix)",
+    ),
+    # ----- P2-14 (F5): part_05 §5.1 Cautious zone definition -----
+    (
+        "P2-14",
+        "part_05.html",
+        "<p><strong>Cautious zone (30–40 / 60–70)</strong> — пограничная зона, не экстремальная, но влияющая на SPINE-связи (FLAW, GHOST-реактивность). Значения в cautious zone не считаются «экстремальными полюсами», но активно формируют поведение — например, Елена <code>A=38</code> и <code>N=68</code> напрямую связаны с её FLAW (отталкивает людей сарказмом) и GHOST (предательство редактора → недоверие).</p>",
+        "part_05 §5.1: Cautious zone definition added after RULE (iter 37 P2-14 fix)",
+    ),
+    # ----- P2-16 (F7): part_07a §7A.1 Keirsey SP Artisan → Sensing-Perceiving -----
+    (
+        "P2-16",
+        "part_07a.html",
+        "Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI)",
+        "part_07a §7A.1: Keirsey SP Artisan/Ремесленник → Sensing-Perceiving (iter 37 P2-16 fix)",
+    ),
+    # ----- P2-17 (F9): part_09 §9.6 Decision Tree 1-word symptoms -----
+    (
+        "P2-17a",
+        "part_09.html",
+        "Удалить голос из Description (AP-3 Voice-in-Desc)",
+        "part_09 §9.6: AP-3 1-word symptom «Voice-in-Desc» added (iter 37 P2-17 fix)",
+    ),
+    (
+        "P2-17b",
+        "part_09.html",
+        "Добавить 2 строки (AP-6 No-Anti-Godmoding)",
+        "part_09 §9.6: AP-6 1-word symptom «No-Anti-Godmoding» added (iter 37 P2-17 fix)",
+    ),
+    (
+        "P2-17c",
+        "part_09.html",
+        "Part 5: OCEAN Warning</a> (AP-15 OCEAN-Overload)",
+        "part_09 §9.6: AP-15 1-word symptom «OCEAN-Overload» added (iter 37 P2-17 fix)",
+    ),
+    (
+        "P2-17d",
+        "part_09.html",
+        "Fix → AP-5 (RepPen-High)",
+        "part_09 §9.6: AP-5 1-word symptom «RepPen-High» added (iter 37 P2-17 fix)",
+    ),
+    (
+        "P2-17e",
+        "part_09.html",
+        "→ Проверить PP: >0? (AP-7 PP-Leak)",
+        "part_09 §9.6: AP-7 1-word symptom «PP-Leak» added (iter 37 P2-17 fix)",
+    ),
+    (
+        "P2-17f",
+        "part_09.html",
+        "Part 6: CoT</a> (AP-10 CoT-Overload)",
+        "part_09 §9.6: AP-10 1-word symptom «CoT-Overload» added (iter 37 P2-17 fix)",
+    ),
+    (
+        "P2-17g",
+        "part_09.html",
+        "→ Проверить SPINE на консистентность (AP-9 SPINE-Broken)",
+        "part_09 §9.6: AP-9 1-word symptom «SPINE-Broken» added (iter 37 P2-17 fix)",
+    ),
+    # ----- P3-4 (D7): Уолтер cross-refs (3 locations) -----
+    (
+        "P3-4a",
+        "part_01.html",
+        "<p><strong>Cross-ref:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "part_01 §1.4: Cross-ref to Walter §10.2 (realistic modern character) added (iter 38 P3-4 fix)",
+    ),
+    (
+        "P3-4b",
+        "part_04.html",
+        "<p><strong>Cross-ref:</strong> Пример простой карточки без GHOST Layers (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "part_04 §4.11: Cross-ref to Walter §10.2 (simple SPINE without GHOST Layers) added (iter 38 P3-4 fix)",
+    ),
+    (
+        "P3-4c",
+        "part_09.html",
+        "<p><strong>Cross-ref:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — cautious zone, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "part_09 §9.6: Cross-ref to Walter §10.2 (OCEAN testing example) added (iter 38 P3-4 fix)",
+    ),
 ]
 
 
 def main() -> int:
     print("=" * 70)
-    print("audit_canon_master_sync.py — iter 44+45 regression guard")
-    print("Verifies that iter 44 + iter 45 canon→master HTML sync fixes are in place.")
+    print("audit_canon_master_sync.py — iter 44+45+46 regression guard")
+    print("Verifies that iter 44 + iter 45 + iter 46 canon→master HTML sync fixes are in place.")
     print("=" * 70)
     print()
 
@@ -334,17 +496,17 @@ def main() -> int:
     if failures:
         print(f"FAILED: {len(failures)} check(s) failed, {pass_count} passed")
         print()
-        print("Regression detected — iter 44+45 fixes are NOT all in place.")
+        print("Regression detected — iter 44+45+46 fixes are NOT all in place.")
         print("Investigate src/master/*.html and re-apply missing fixes.")
         return 1
     else:
         print(f"PASS: all {pass_count} checks passed")
         print()
-        print("iter 44+45 canon→master HTML sync fixes are in place.")
+        print("iter 44+45+46 canon→master HTML sync fixes are in place.")
         print()
-        print("NOTE: This is a focused regression test for iter 44+45 fixes.")
+        print("NOTE: This is a focused regression test for iter 44+45+46 fixes.")
         print("      A general-purpose canon↔master drift detector is planned")
-        print("      for iter 46+ (see STATUS.md iter 46+ roadmap).")
+        print("      for iter 47+ (see STATUS.md iter 47+ roadmap).")
         return 0
 
 

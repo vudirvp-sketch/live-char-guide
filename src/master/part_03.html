@@ -247,12 +247,18 @@ Example:
 <section  data-section="p3_examples_quality">
 <h3>Система уровней качества Examples</h3>
 
-<p>Система оценки качества Examples по 6 критериям. Три критерия оценивают сами Examples, три — карточку в целом, но проявляются они через Examples.</p>
+<p>Система оценки качества Examples по 6 критериям. Три критерия оценивают сами Examples, три — карточку в целом, но проявляются они через Examples. Качество оценивается как <strong>Quality Grade A / B / C</strong> (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10):</p>
+
+<ul>
+<li><strong>Grade A (✓)</strong> — целевой уровень качества.</li>
+<li><strong>Grade B (⚠)</strong> — допустимо, но требует доработки.</li>
+<li><strong>Grade C (✗)</strong> — критическое отклонение, обязательно к исправлению.</li>
+</ul>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Критерий</th><th>Tier 1 (✓)</th><th>Tier 2 (⚠)</th><th>Tier 3 (✗)</th><th>Относится к</th></tr>
+<tr><th>Критерий</th><th>Grade A (✓)</th><th>Grade B (⚠)</th><th>Grade C (✗)</th><th>Относится к</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>Голос</strong></td><td>Уникальный, узнаваемый</td><td>Узнаваем, но с чужими паттернами</td><td>Генерический, без характера</td><td>Examples</td></tr>
@@ -269,24 +275,24 @@ Example:
 <p><strong>RECOMMENDATION:</strong> Критерии «Телесность», «Anchor Price» и «FLAW проявление» оценивают карточку в целом, но проявляются через Examples. Если Example не показывает Anchor Price — проблема может быть in the Anchor, а не в Example.</p>
 </div>
 
-<h4>До/После: Tier 1 vs Tier 3</h4>
+<h4>До/После: Grade A vs Grade C</h4>
 <div class="example-label illustration">ILLUSTRATION</div>
 <div class="diff-view">
 <div class="diff-card diff-del">
-<div class="diff-label">Tier 3 (плохо)</div>
+<div class="diff-label">Grade C (плохо)</div>
 <p>«Она почувствовала грусть и сказала ему об этом.»</p>
 <p><em>Генерический голос, нет телесности, нет Anchor Price, нет FLAW-проявления.</em></p>
 </div>
 <div class="diff-card diff-add">
-<div class="diff-label">Tier 1 (хорошо)</div>
+<div class="diff-label">Grade A (хорошо)</div>
 <!-- Demonstrates: ENVIRONMENTAL REACTIVITY, EMBODIMENT FIRST, SHOW NEVER TELL -->
 <p><em>Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.</em> «Опять. Третий день подряд.»</p>
 <p><em>Уникальный голос, физическая реакция, наблюдаемое действие, конкретная деталь.</em></p>
 </div>
 </div>
-<pre class="plain-copy">Tier Quality — До/После:
-Tier 3: «Она почувствовала грусть и сказала ему об этом.» (генерический, без характера)
-Tier 1: *Она отложила чашку и посмотрела в окно.* «Опять. Третий день подряд.» (уникальный голос + телесность + деталь)</pre>
+<pre class="plain-copy">Quality Grade — До/После:
+Grade C: «Она почувствовала грусть и сказала ему об этом.» (генерический, без характера)
+Grade A: *Она отложила чашку и посмотрела в окно.* «Опять. Третий день подряд.» (уникальный голос + телесность + деталь)</pre>
 
 </section>
 

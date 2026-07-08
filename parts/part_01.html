@@ -446,8 +446,16 @@
 
 <p>Эти принципы обязательны для всех карточек. Нарушение любого из них приводит к ухудшению качества генерации.</p>
 
+<p><strong>Ключевые термины (используются далее без перевыполнения):</strong></p>
+<ul>
+<li><strong>Anchor</strong> (поведенческий якорь) — конкретное правило поведения в формате Trigger → Action → Price (см. Part 2).</li>
+<li><strong>Voice</strong> (голос) — уникальный стиль речи персонажа; задаётся только в Examples и Greeting (см. Part 3).</li>
+<li><strong>SPINE</strong> — психологический каркас из 5 элементов (GHOST/LIE/FLAW/NEED/WANT), см. Part 4.</li>
+<li><strong>OCEAN</strong> — модель личности из 5 измерений (O/C/E/A/N), см. Part 5.</li>
+</ul>
+
 <div class="callout rule">
-<p><strong>RULE:</strong> Фундаментальный принцип: LLM = Pattern Matcher, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
+<p><strong>RULE:</strong> Фундаментальный принцип: LLM = <strong>Pattern Matcher</strong>, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
 </div>
 
 <ol>
@@ -455,6 +463,8 @@
 <li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
 <li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
 </ol>
+
+<p><strong>Cross-ref:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>
 
 </section>
 

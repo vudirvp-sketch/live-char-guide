@@ -1,0 +1,11 @@
+# iter 46 — Files to DELETE from local repo (stale cleanup)
+# Run: rm -f <path> for each line below
+
+DELETED_FILES.txt
+DELETIONS-iter32.txt
+ITER42_README.md
+ITER43_README.md
+ITER44_README.md
+ITER45_README.md
+README_ITER38.md
+README_iter37.md
