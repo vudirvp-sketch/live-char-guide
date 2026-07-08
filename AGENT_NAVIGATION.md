@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.1.0** + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED/ADDED (iter 18 + iter 38) + KI#13/#18/#20/#21/#22/#23 ✅ CLOSED + iter 34 (CSS/CSP) + iter 35-38 (KI#21 ✅ CLOSED) + iter 39 (KI#25/#26/#27 ✅ CLOSED) + iter 40 (KI#28/#29 ✅ CLOSED) + iter 41 (KI#30/#31 ✅ CLOSED) + **iter 42 — KI#32 ✅ CLOSED (component-extracts drift audit + README historical snapshot notice, build hash 69d9b813 unchanged)**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 0 (concept) → Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md`**, **Canon (источник правды для контента, iter 7+) — в `docs/canon/` (см. `_README.md`)**, **аудит канона + fix plan (iter 33+) — в `docs/AUDIT_VERIFICATION.md` (P0+P1+P2+P3 ✅ CLOSED iter 35-38, KI#21 ✅ CLOSED полностью)**, техническая архитектура — в `docs/architecture.md`.
+> **Entry document.** Read this first. Текущая версия: **9.1.0** + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED/ADDED (iter 18 + iter 38) + KI#13/#18/#20/#21/#22/#23/#32 ✅ CLOSED + iter 34-42 + **iter 43 — KI#33 🟡 NEW (canon→master HTML sync gap discovered, deploy pipeline documented in §2a, build hash `69d9b813` unchanged)**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд без слоёв: весь контент читается последовательно Part 0 (concept) → Part 1 → Part 10. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, полный план docs-restructure — в `PLAN.md`, **план переработки контента (iter 6+) — в `docs/CONTENT_RESTRUCTURE_PLAN.md`**, **Canon (источник правды для контента, iter 7+) — в `docs/canon/` (см. `_README.md`)**, **аудит канона + fix plan (iter 33+) — в `docs/AUDIT_VERIFICATION.md` (P0+P1+P2+P3 ✅ CLOSED iter 35-38, KI#21 ✅ CLOSED полностью)**, техническая архитектура — в `docs/architecture.md`.
 
 ---
 
@@ -80,12 +80,81 @@ pnpm run qa:doc-versions  # Doc "Last Updated" vs git commit date drift
 pnpm run qa:interactive   # Puppeteer smoke tests (requires running server)
 ```
 
-### Деплой
+### 2a. Deployment Pipeline (iter 43+)
 
-GitHub Pages с автоматическим деплоем через GitHub Actions:
-1. Push в `main` ветку.
-2. GitHub Actions собирает и деплоит автоматически.
-3. Доступно на: https://vudirvp-sketch.github.io/live-char-guide/
+> **Ответ на вопрос «Как изменения переходят в основной проект? На сайт?»**
+
+**Полный flow от canon fixes до живого сайта:**
+
+```
+[1] AUTHORS EDIT (source of truth)
+    ├─ docs/canon/*.md          ← Markdown, semantic content, NOT в build
+    └─ src/master/*.html        ← Production HTML, IS в build
+
+         ↓ manual sync (canon → master HTML)
+         ↓   workflow: docs/canon/_README.md §4.2
+         ↓   validate:master + visual diff per Part
+
+[2] BUILD (pnpm run build)
+    │
+    ├─ scripts/build-unified.mjs
+    │   Парсит src/master/*.html → извлекает <section data-section>
+    │   → генерирует parts/*.html (unified) + manifest.json
+    │
+    └─ src/scripts/build-shell-unified.mjs
+        Копирует shell + parts + data + assets → dist/
+        Копирует dist/ → root fallbacks (index.html, assets/, widgets/, parts/, data/, event-bus.js, build.hash)
+        Вычисляет build hash из: src/master/, src/shell/, src/assets/, data/, parts/ (root fallbacks)
+        НЕ включает: docs/canon/, docs/*.md, *.md в root, visual-system/, scripts/
+
+[3] COMMIT + PUSH to main
+    │
+    └─ Root fallbacks committed to git (NOT gitignored, см. .gitignore строки 22-30)
+       Обеспечивают работу сайта даже без CI/CD rebuild
+
+[4] GITHUB ACTIONS (auto-deploy)
+    │
+    └─ .github/workflows/{validate,build-artifact}.yml
+       Builds dist/ и деплоит на GitHub Pages
+
+[5] LIVE SITE
+    └─ https://vudirvp-sketch.github.io/live-char-guide/
+```
+
+**Что входит в build hash (функционально деплоится):**
+- `src/master/*.html` — author content (14 файлов, ~6 600 строк)
+- `src/shell/` — infrastructure (index.html, styles.css, lazy-loader.js, event-bus.js, widgets/)
+- `src/assets/` — static assets (vs-styles.css, fonts/, favicon.svg, preview-card.png)
+- `data/*.json` — widget data (7 файлов)
+- `parts/` (root fallbacks) — regenerated from dist/
+
+**Что НЕ входит в build hash (doc-only, НЕ деплоится):**
+- `docs/canon/*.md` — canon markdown (source of truth для контента, но в build не используется)
+- `docs/*.md` — technical documentation
+- `*.md` в root (README.md, STATUS.md, AGENT_NAVIGATION.md, worklog.md, PLAN.md, CHANGELOG.md, ITER*.md)
+- `visual-system/` — prototype work + component-extracts/ (historical snapshots, NOT used in build/runtime)
+- `scripts/` — build + validation + audit scripts
+- `tests/` — test runner
+
+**Критичный invariant (iter 43+):**
+- **Hash unchanged ≠ canon fixes deployed.** Build hash `69d9b813` unchanged с iter 34 = master HTML не менялся. Canon audit фиксы iter 35-41 (57 правок KI#21 + KI#25-31) находятся только в `docs/canon/*.md` и НЕ синхронизированы с `src/master/*.html`. **Сайт НЕ отражает canon audit фиксы iter 35-41.** См. KI#33 в `STATUS.md`.
+- При canon fixes, требующих sync в master HTML — применяется workflow `docs/canon/_README.md` §4.2 (manual sync per Part + `validate:master` + visual diff). Metadata fixes (YAML front-matter, callout labels) — skip, они canon-only.
+
+**Команды для деплоя:**
+
+```bash
+# Локально — полный цикл правки + деплой:
+pnpm run build              # Пересобрать dist/ + root fallbacks
+pnpm run validate           # Валидация билда
+pnpm run validate:master    # Валидация мастер-файлов
+pnpm test                   # Все тесты
+git add -A                  # Включая regenerated root fallbacks
+git commit -m "iter N: <description>"
+git push origin main        # Триггер GitHub Actions → GitHub Pages
+
+# Онлайн через ~30-60 сек:
+# https://vudirvp-sketch.github.io/live-char-guide/
+```
 
 ---
 
@@ -352,12 +421,14 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | 40 | **README + OCEAN LABELING FIX ✅ CLOSED — KI#28/#29 ✅ CLOSED.** 2 KI из iter 39 roadmap закрыты. Оба — doc/canon-only (build hash `69d9b813` unchanged). **KI#28** (`README.md` L31-38): section counts обновлены для Parts 1/5/7/8 (5→7, 6→8, 16→18, 17→16). Part 8 описание «16 анти-паттернов (AP-1–AP-16)» → «15 анти-паттернов (AP-1–AP-15) + overview» (AP-16 не существует — OCEAN Overload перенесён в Part 5 §5.3 в v9). Сумма: 95 Part секций + 3 appendix = 98 ✓ (matches AGENT_NAVIGATION.md). **KI#29** (OCEAN labeling): `docs/canon/part_10.md` L408 — «Экстремумы: Низкая E, Высокая N» → «Экстремумы: Низкая E (<30). Cautious zone: N=70 (граница 60–70, см. Part 5 §5.1 RULE)» — N=70 = cautious zone boundary, не extreme (extreme = строго >70). `docs/canon/appendix_character_map.md` — колонка «OCEAN экстремумы» → «OCEAN (extreme + cautious)» + footnote с per-character breakdown. **Values unchanged** (O:60/C:55/E:25/A:30/N:70 — moderate 4K-fallback example). Internal canon consistency fix (Part 5 RULE vs Part 10/appendix label), НЕ bible-vs-canon sync — iter 39 invariant не применяется. Все validation gates PASS + `audit_vs_embeds.py` 0 regressions + `check_english.py --scan-docs` 0 WH40k terms. Build hash `69d9b813` unchanged. | KI#28 ✅, KI#29 ✅ |
 | 41 | **OCEAN LABELING LEFTOVER + BIBLE CROSS-REF ✅ CLOSED — KI#30/#31 ✅ CLOSED.** 2 KI закрыты. Оба — doc/canon-only (build hash `69d9b813` unchanged). **KI#30** (NEW BUG found during investigation — iter 40 KI#29 fix был неполным, остались 2 locations с stale OCEAN labels): `docs/canon/part_07a.md` L415 (Выщербленный XML template §7A.9) — «Экстремумы: Низкая E, Высокая N» → «Низкая E (<30). Cautious zone: N=70 (граница 60–70)» (mirror iter 40 KI#29 fix). `docs/canon/part_10.md` L51 (Елена OCEAN §10.1) — «Экстремумы: Высокая O, Низкая A, Высокая N» → «Высокая O (>70). Cautious zone: A=38 (30–40), N=68 (60–70)» (Part 5 §5.1 L59 явно говорит: 1 extreme + 2 cautious). **Values unchanged** (O:60/C:55/E:25/A:30/N:70 Выщербленный; O:72/C:65/E:41/A:38/N:68 Елена). **KI#31** (roadmap item #3 — Part 10 §10.4 + Part 7A §7A.9 missing reverse cross-ref to bible): Cross-ref Note добавлена в OCEAN section обеих canon locations — «**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see `docs/vyshcherblenny_character_bible.md` §OCEAN.» Bible Note (iter 39 KI#26) уже указывала на canon, reverse отсутствовала. Все validation gates PASS + `audit_vs_embeds.py` 0 regressions + `check_english.py --scan-docs` 0 WH40k terms. Build hash `69d9b813` unchanged. | KI#30 ✅, KI#31 ✅ |
 | 42 | **COMPONENT-EXTRACTS DRIFT AUDIT ✅ CLOSED — KI#32 ✅ CLOSED (doc-only).** Roadmap item #2 закрыт. Pairwise diff audit выявил drift: 18/18 `E##-visual.html` (KI#13 + KI#22 + structural changes), 16/18 `E##-styles.css` MATCH vs `vs-styles.css` SECTION 5 (только E15 +13/-8 KI#22, E18 +16/-8 iter 25 с drift), 18/18 `E##-script.js` (KI#20 + KI#16). Файлы НЕ синхронизировались (54 файла, high risk, low value — `component-extracts/` не используются в build pipeline / runtime). Fix: `component-extracts/README.md` переписан с HISTORICAL SNAPSHOT notice + canonical source pointers + drift table + regeneration instructions. 2 новых audit scripts: `scripts/audit_component_extracts.py` (211 строк, visual.html vs VS-EMBED) + `scripts/audit_component_extracts_css.py` (135 строк, styles.css vs SECTION 5). Все validation gates PASS + `audit_vs_embeds.py` 0 regressions + `audit_component_extracts*.py` (expected drift confirmed) + `check_english.py --scan-docs` 0 WH40k terms. Build hash `69d9b813` unchanged (component-extracts/ и scripts/*.py не в hash computation). | KI#32 ✅ |
+| 43 | **DEPLOY PIPELINE DOC + KI#33 🟡 NEW (doc-only).** Ответ на вопрос пользователя «Все завершено? Канон готов? А каким образом эти изменения перейдут в основной проект? На сайт?» — добавлена §2a «Deployment Pipeline» в AGENT_NAVIGATION.md (полный flow canon → master HTML → build → root fallbacks → GitHub Actions → GitHub Pages + что входит/НЕ входит в build hash + команды для деплоя). **KI#33 DISCOVERED:** canon audit фиксы iter 35-41 (57 правок KI#21 + KI#25-31) находятся только в `docs/canon/*.md` и НЕ синхронизированы с `src/master/*.html`. 3 spot-checks подтвердили drift (KI#25 part_07a L668 vs master L1107, KI#29 part_10 L408 vs master L511, KI#30 part_10 L51 + part_07a L416 vs master L160 + L728). Build hash `69d9b813` unchanged с iter 34 = master HTML не менялся 9 итераций. **Сайт НЕ отражает canon audit фиксы iter 35-41.** Fix deferred to iter 44+ (large effort: 57 fixes × verification × master edit × build test × visual diff per Part). Регрессионный тест `scripts/audit_canon_master_sync.py` planned. Все validation gates PASS (build hash unchanged — iter 43 doc-only). | KI#33 🟡 |
 
-**iter 43+ — что осталось:**
+**iter 44+ — что осталось:**
+- **KI#33 🟡 NEW (iter 43) — canon→master HTML sync (iter 44+, MEDIUM).** Canon audit фиксы iter 35-41 (57 правок KI#21 + KI#25-31) НЕ синхронизированы с `src/master/*.html`. 3 spot-checks подтвердили drift. Сайт НЕ отражает canon audit фиксы. Fix plan: для каждого fix — проверить применимость к master HTML (content fixes → sync, metadata fixes → skip), применить sync per Part, `pnpm run build` + `validate:master` + visual diff. Regression test `scripts/audit_canon_master_sync.py` planned. Build hash изменится (впервые с iter 34).
 - **KI#32 ✅ CLOSED (iter 42).** Component-extracts drift audit + HISTORICAL SNAPSHOT notice + audit scripts.
 - **Принцип «guide's role as example takes priority over character canon» (iter 39+ invariant):** при рассинхроне bible vs canon Part 10 — правится bible, не Part 10. Canon = source of truth, examples в canon (Part 10 §10.1-§10.4) не трогаются без явного аудита.
-- **OCEAN labeling consistency (iter 40+, расширен iter 41 invariant):** extreme = строго `<30` или `>70` per Part 5 §5.1 RULE; cautious zone = `30–40` / `60–70`. Label-only fixes допустимы для internal canon consistency (Part 5 RULE vs Part 7A/Part 10/appendix labels) — values примера не трогаются. **Все canon locations с OCEAN labels проверены (iter 41):** `part_07a.md` L415, `part_10.md` L51/L148/L254/L408, `appendix_character_map.md` — все consistent с Part 5 §5.1 RULE.
-- **Bible ↔ canon cross-ref symmetry (iter 41+ invariant):** bible (`vyshcherblenny_character_bible.md`) имеет Note → Part 10 §10.4 + Part 7A §7A.9 (iter 39 KI#26). Reverse: Part 10 §10.4 + Part 7A §7A.9 имеют Cross-ref Note → bible (iter 41 KI#31). Навигационная полнота.
+- **OCEAN labeling consistency (iter 40+, расширен iter 41 invariant):** extreme = строго `<30` или `>70` per Part 5 §5.1 RULE; cautious zone = `30–40` / `60–70`. Label-only fixes допустимы для internal canon consistency (Part 5 RULE vs Part 7A/Part 10/appendix labels) — values примера не трогаются. **Все canon locations с OCEAN labels проверены (iter 41):** `part_07a.md` L415, `part_10.md` L51/L148/L254/L408, `appendix_character_map.md` — все consistent с Part 5 §5.1 RULE. **Master HTML sync pending — см. KI#33.**
+- **Bible ↔ canon cross-ref symmetry (iter 41+ invariant):** bible (`vyshcherblenny_character_bible.md`) имеет Note → Part 10 §10.4 + Part 7A §7A.9 (iter 39 KI#26). Reverse: Part 10 §10.4 + Part 7A §7A.9 имеют Cross-ref Note → bible (iter 41 KI#31). Навигационная полнота. **Master HTML sync pending — см. KI#33.**
 - **Component extracts drift (iter 42+ invariant):** `python3 scripts/audit_component_extracts.py` (18/18 visual.html — DRIFT expected, historical snapshots) + `python3 scripts/audit_component_extracts_css.py` (16/18 styles.css — MATCH expected, E15/E18 known drift). Если extracts нужны как актуальный reference — regenerate from master (см. KI#32 «НЕ в scope» и `component-extracts/README.md`).
 - **Потенциальные minor задачи (не критично, не запланировано):**
   - **Glossary double-render inefficiency** (`data/glossary.json` 53 terms + `docs/canon/appendix_glossary.md` 30 entries + `parts/appendix_glossary.html` 30 entries — лёгкое дублирование между markdown canon и HTML rendering). LOW — structural, by design (canon = source of truth, HTML = render).
@@ -435,4 +506,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 43+ прочитай `STATUS.md` (iter 42 — COMPONENT-EXTRACTS DRIFT AUDIT ✅ COMPLETE, KI#32 ✅ CLOSED doc-only, build hash `69d9b813`; iter 41 one-paragraph — KI#30/#31 ✅ CLOSED; iter 40 one-paragraph — KI#28/#29 ✅ CLOSED; iter 39 one-paragraph — KI#25/#26/#27 ✅ CLOSED; iter 38 one-paragraph — KI#21 P3 ✅ CLOSED полностью; iter 34-37 one-liners — CSS/CSP + KI#21 P0/P1/P2; все previous KI#1..#31 ✅ CLOSED/VERIFIED), `worklog.md` (iter 42 record — самый подробный; iter 41 one-liner), этот файл (AGENT_NAVIGATION §6 pitfall #40 KI#21 ✅ CLOSED полностью, §6 pitfall #41 doc drift invariant iter 39+, §8 OP-1 iter 42 row + iter 43+ roadmap — только minor задачи: Glossary double-render LOW, Component extracts regeneration LOW опциональный), `docs/canon/_README.md` (§5 migration status — все 10 Parts + 4 Appendix + Part 0 concept ✅, Canon COMPLETE; §3.9 callout labels policy — English by design + 2 метки Demonstrates/Annotation iter 38). **Invariants (iter 42+):** (1) `viz > dry text` (iter 8+) — сохраняется. (2) VS scroll-animation — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). (3) **Component extracts drift (iter 42+)** — `python3 scripts/audit_component_extracts.py` (18/18 visual.html — DRIFT expected, historical snapshots) + `python3 scripts/audit_component_extracts_css.py` (16/18 styles.css — MATCH expected, E15/E18 known drift). Если extracts нужны как актуальный reference — regenerate from master (см. KI#32 «НЕ в scope» и `component-extracts/README.md`). (4) CSS scoping (iter 34+) — VS-EMBED selectors scoped к element-specific parent. (5) YAML front-matter (iter 37+) — все canon-файлы используют YAML front-matter. (6) **Guide's role as example takes priority over character canon (iter 39+):** при рассинхроне bible vs canon Part 10 — правится bible, не Part 10. (7) **OCEAN labeling consistency (iter 40+, расширен iter 41):** extreme = строго `<30` или `>70` per Part 5 §5.1 RULE; cautious zone = `30–40` / `60–70`. Label-only fixes допустимы для internal canon consistency — values примера не трогаются. Все canon locations с OCEAN labels проверены iter 41 (part_07a L415, part_10 L51/L148/L254/L408, appendix_character_map). (8) **Bible ↔ canon cross-ref symmetry (iter 41+):** bible Note → Part 10 §10.4 + Part 7A §7A.9 (iter 39 KI#26); reverse Cross-ref Note → bible (iter 41 KI#31). (9) Build hash baseline `69d9b813` (unchanged после iter 34 — KI#23 fix; canon + doc файлы + `visual-system/integration/component-extracts/` НЕ входят в hash computation — только `src/master/`, `src/shell/`, `src/assets/`, `data/`, `parts/` root fallbacks). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue (KI#N), потом фиксий. Если найдено новое противоречие в каноне — добавляй в `docs/AUDIT_VERIFICATION.md` §2 таблицу с sub-ID (A11, B7, и т.д.) и пометкой P0-P3. **B3 — НЕ пытаться «укоротить Examples Омнис-Зета»** (KI#21-B3 INVALID, аудит переоценил, examples в пределах лимита 120 токенов).
+**Подсказка следующему агенту:** Перед стартом iter 44+ прочитай `STATUS.md` (iter 43 — DEPLOY PIPELINE DOC + KI#33 🟡 NEW, build hash `69d9b813` unchanged; iter 42 one-paragraph — KI#32 ✅ CLOSED doc-only; iter 41 one-paragraph — KI#30/#31 ✅ CLOSED canon-only; iter 40 one-paragraph — KI#28/#29 ✅ CLOSED canon-only; iter 39 one-paragraph — KI#25/#26/#27 ✅ CLOSED bible+README only; iter 38 one-paragraph — KI#21 P3 ✅ CLOSED полностью canon-only; iter 34-37 one-liners — CSS/CSP + KI#21 P0/P1/P2 canon-only; все previous KI#1..#32 ✅ CLOSED/VERIFIED), `worklog.md` (iter 43 record — самый подробный; iter 42 one-liner), этот файл (AGENT_NAVIGATION §2a Deployment Pipeline iter 43+, §6 pitfall #40 KI#21 ✅ CLOSED полностью, §6 pitfall #41 doc drift invariant iter 39+, §8 OP-1 iter 43 row + iter 44+ roadmap — KI#33 fix MEDIUM priority + minor задачи LOW), `docs/canon/_README.md` (§5 migration status — все 10 Parts + 4 Appendix + Part 0 concept ✅, Canon COMPLETE; §3.9 callout labels policy — English by design + 2 метки Demonstrates/Annotation iter 38). **Invariants (iter 43+):** (1) `viz > dry text` (iter 8+) — сохраняется. (2) VS scroll-animation — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). (3) Component extracts drift (iter 42+) — `python3 scripts/audit_component_extracts.py` (18/18 visual.html — DRIFT expected, historical snapshots) + `python3 scripts/audit_component_extracts_css.py` (16/18 styles.css — MATCH expected, E15/E18 known drift). Если extracts нужны как актуальный reference — regenerate from master (см. KI#32 «НЕ в scope» и `component-extracts/README.md`). (4) CSS scoping (iter 34+) — VS-EMBED selectors scoped к element-specific parent. (5) YAML front-matter (iter 37+) — все canon-файлы используют YAML front-matter. (6) **Guide's role as example takes priority over character canon (iter 39+):** при рассинхроне bible vs canon Part 10 — правится bible, не Part 10. (7) **OCEAN labeling consistency (iter 40+, расширен iter 41):** extreme = строго `<30` или `>70` per Part 5 §5.1 RULE; cautious zone = `30–40` / `60–70`. Label-only fixes допустимы для internal canon consistency — values примера не трогаются. Все canon locations с OCEAN labels проверены iter 41. **Master HTML sync pending — см. KI#33.** (8) **Bible ↔ canon cross-ref symmetry (iter 41+):** bible Note → Part 10 §10.4 + Part 7A §7A.9 (iter 39 KI#26); reverse Cross-ref Note → bible (iter 41 KI#31). **Master HTML sync pending — см. KI#33.** (9) **Canon → master HTML sync (iter 43+ invariant, НОВЫЙ):** `docs/canon/*.md` = source of truth для content. `src/master/*.html` = production HTML, деплоится на сайт. При canon fixes, требующих sync в master HTML — workflow `docs/canon/_README.md` §4.2 (manual sync per Part + `validate:master` + visual diff). **Hash unchanged ≠ canon fixes deployed.** Regression test `scripts/audit_canon_master_sync.py` planned (iter 44+). (10) Build hash baseline `69d9b813` (unchanged после iter 34 — KI#23 fix; canon + doc файлы + `visual-system/integration/component-extracts/` НЕ входят в hash computation — только `src/master/`, `src/shell/`, `src/assets/`, `data/`, `parts/` root fallbacks). Если найден новый баг — сначала документируй в `STATUS.md` как Known Issue (KI#N), потом фиксий. Если найдено новое противоречие в каноне — добавляй в `docs/AUDIT_VERIFICATION.md` §2 таблицу с sub-ID (A11, B7, и т.д.) и пометкой P0-P3. **B3 — НЕ пытаться «укоротить Examples Омнис-Зета»** (KI#21-B3 INVALID, аудит переоценил, examples в пределах лимита 120 токенов).
