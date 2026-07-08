@@ -549,6 +549,39 @@ iter 46 — третья фаза синхронизации canon audit фик�
 
 ---
 
+## 5.12. iter 47 — CANON→MASTER HTML SYNC PHASE 4 (KI#33 ✅ CLOSED, 57/57 cumulatively)
+
+iter 47 — финальная фаза синхронизации canon audit фиксов iter 35-38 с `src/master/*.html`. Применены 4 content fix IDs (covering 16 individual changes) в 10 файлах (part_01-10 + part_07b): P2-3 (Bridge paragraphs cleanup), P2-7 (resume sections removal + Synthesis add), P2-18 (Elena inline annotations → Annotation callout), P3-2 (HTML comments → visible Demonstrates callouts). Дополнительно: P0-11 sync completion («4 уровня» → «4 зоны» в part_09 §9.11 основном тексте — iter 44 применил fix только к resume, iter 47 sync completion). Regression test `scripts/audit_canon_master_sync.py` расширен с 57 до **89 checks** (71 positive + 18 negative, NEW `ABSENT_CHECKS` list для verifies deletes). **contentHash изменился 4th time since iter 34.** **KI#33 ✅ CLOSED.**
+
+| # | Fix ID | File(s) | Description | Status |
+|---|--------|---------|-------------|--------|
+| 1 | P2-3 (C5) | `part_01, 02, 03, 04, 05, 07a, 08.html` | 7 bridge-paragraphs удалены (Part 1→2, 2→3, 3→4, 4→5, 5→6, 7A→7B, 8→9) | ✅ iter 47 |
+| 1 | P2-3 (C5) | `part_06.html` L247 | Bridge to Part 7A KEPT + добавлен `bridge-paragraph` CSS class для consistency с part_09 | ✅ iter 47 |
+| 1 | P2-3 (C5) | `part_09.html` L574 | Bridge to Part 10 KEPT (уже имел CSS class) | ✅ iter 47 |
+| 2 | P2-7 (E4) | `part_01, 02, 03, 04, 05, 06, 07a, 07b, 08, 09, 10.html` | 11 part-resume секций удалены (11 deletes) | ✅ iter 47 |
+| 2 | P2-7 (E4) | `part_01.html` §1-end | Synthesis paragraph add: «Если в карточке есть SP, Description, Examples, Greeting — она уже работает...» (canon part_01.md L122) | ✅ iter 47 |
+| 2 | P2-7 (E4) | `part_04.html` §4-end | Synthesis paragraph add: «SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT...» (canon part_04.md L357) | ✅ iter 47 |
+| 2 | P2-7 (E4) | `part_07a.html` §7A-end | Synthesis paragraph add: «System Prompt — контейнер, который модель видит всегда...» (canon part_07a.md L683) | ✅ iter 47 |
+| 2 | P2-7 (E4) | `part_08.html` §8-end | Synthesis paragraph add: «15 анти-паттернов покрывают ~90% ошибок сборки...» (canon part_08.md L325) | ✅ iter 47 |
+| 3 | P2-18 (F10) | `part_10.html` §10.1 Elena card | 4 inline `<!-- ↑ ... -->` annotations удалены (SPINE, OCEAN, FLAW-linked Example, FLAW-linked Anchors) | ✅ iter 47 |
+| 3 | P2-18 (F10) | `part_10.html` §10.1 after card | Annotation callout add с 6 пунктами (DESCRIPTION→spine, DESCRIPTION→ocean, EXAMPLES, ANCHORS Базовые, ANCHORS FLAW-linked, GREETING) | ✅ iter 47 |
+| 4 | P3-2 (D5) | `part_10.html` §10.1 Elena | `Demonstrates:` callout add перед карточкой: «EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK» | ✅ iter 47 |
+| 4 | P3-2 (D5) | `part_10.html` §10.2 Walter | `Demonstrates:` callout add перед карточкой: «EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY» | ✅ iter 47 |
+| 4 | P3-2 (D5) | `part_10.html` §10.3 Omnis-Zeta | `Demonstrates:` callout add перед карточкой: 9 principles (EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC) | ✅ iter 47 |
+| 4 | P3-2 (D5) | `part_10.html` §10.4 Vyshcherblenny | `Demonstrates:` callout add перед карточкой: 8 principles (SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC) | ✅ iter 47 |
+| 5 | P0-11 (A9) sync completion | `part_09.html` §9.11 main text | «4 уровня качества» → «4 зоны качества» (iter 44 применил fix только к resume секции, iter 47 sync completion — к основному тексту) | ✅ iter 47 |
+| — | P2-2/4/5/6/8/10/11/15 | — | SKIP — canon-only metadata (callout labels policy, YAML front-matter, Migration Notes, `[ref: ...]` notation, orphan §1.3, клише «деликатно», 22 stubs, `<br/>` → em-dash) | ⏭️ SKIP |
+| — | P1-8/9 | — | SKIP — secondary/variant LIE rows уже отсутствуют в master HTML (canon-only fix) | ⏭️ SKIP |
+| — | P3-7/8/11 | — | SKIP — P3-7 covered by P0-2; P3-8/11 — part_00/appendix_character_map (no master equivalent) | ⏭️ SKIP |
+
+**No new KI discovered in iter 47.** Все fixes — content-only, validate:master PASS с первого применения (callout class policy iter 45+ соблюдена: используются plain `<p><strong>Label:</strong>...</p>` для Synthesis/Annotation/Demonstrates без callout wrapper, согласно precedent `part_07a.html` L754 для «Примечание»).
+
+**Validation gates ALL PASS (iter 47):** build (shell hash `69d9b813` unchanged, contentHash `d2fdafeaf093dd80` → `84d69ecffca28cbf` CHANGED 4th since iter 34), validate:master (12 checks), validate (8 gates, 7.5KB), test:unit (43/43), qa:csp, qa:bundle, qa:doc-versions, audit_vs_embeds.py (0 regressions), audit_canon_master_sync.py (**89/89 PASS** — 57 iter 44-46 + 14 positive iter 47 + 18 negative iter 47 NEW `ABSENT_CHECKS` list).
+
+**Точка остановки iter 47:** KI#33 ✅ CLOSED (57/57). contentHash `84d69ecffca28cbf` (4th change since iter 34). iter 48+ roadmap: minor задачи LOW priority — general-purpose drift detector (расширить `audit_canon_master_sync.py` до semantic parsing), Glossary double-render (LOW — structural, by design), Component extracts regeneration (LOW — опциональный). Если новых багов/противоречий нет — проект STABLE.
+
+---
+
 ## 6. Риски и компромиссы
 
 ### 6.1. Build hash stability

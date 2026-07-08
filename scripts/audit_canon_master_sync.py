@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Audit canon → master HTML sync (iter 44+45+46 regression guard).
+Audit canon → master HTML sync (iter 44+45+46+47 regression guard).
 
 Purpose:
-    Verify that iter 44 + iter 45 + iter 46 canon→master HTML sync fixes are
-    present in `src/master/*.html`. This is a focused regression test — it
-    does NOT attempt a general-purpose semantic drift detector (planned for
-    iter 47+).
+    Verify that iter 44 + iter 45 + iter 46 + iter 47 canon→master HTML sync
+    fixes are present in `src/master/*.html`. This is a focused regression
+    test — it does NOT attempt a general-purpose semantic drift detector
+    (still planned for iter 48+).
 
     Each check compares a specific canon snippet (the source of truth in
     `docs/canon/*.md`) against the corresponding master HTML snippet,
@@ -49,6 +49,16 @@ Scope:
       - P3-4 (D7): part_01 + part_04 + part_09 — Уолтер cross-refs (×3)
       - P1-8/P1-9 (D1/D2): SKIP — secondary/variant LIE rows already absent
         in master HTML (never present; canon-only fix)
+
+    iter 47 (16 fixes — Phase 4, KI#33 PARTIAL → COMPLETE):
+      - P2-3 (C5): bridge-paragraph cleanup — 7 deletes in part_01/02/03/04/05/07a/08
+        + 2 keeps in part_06 (CSS class added) + part_09
+      - P2-7 (E4): part-resume removal — 11 deletes in part_01-10 + part_07b
+        + 4 Synthesis paragraphs added in part_01/04/07a/08
+      - P2-18 (F10): part_10 §10.1 Elena — 4 inline ↑ annotations deleted
+        + Annotation callout with 6 items added after card
+      - P3-2 (D5): part_10 — 4 Demonstrates: callouts added before Elena/Walter/
+        Omnis-Zeta/Vyshcherblenny cards
 
     Also detects A3 collateral drift:
       - src/master/part_10.html L611 — «Счётчик вырезаний» in §10.4 AN
@@ -187,11 +197,16 @@ CHECKS = [
         "part_08 AP-15 ❌ example: immediate Price «кричит: Вон!» (iter 35 P0-10 fix)",
     ),
     # ----- P0-11 (A9): part_09 4-зонная шкала -----
+    # iter 47 update: original P0-11 fix was applied to resume section text
+    # in iter 44, but iter 47 P2-7 deleted the entire resume section.
+    # The fix's intent (4-zone, not 3-level) is now verified via the
+    # "4 зоны качества" phrasing in §9.11 main text (was "4 уровня" before
+    # iter 47 sync completion).
     (
         "P0-11",
         "part_09.html",
-        "Оценивать качество карточки по 4-зонной шкале (Критический / Слабый / Хороший / Отличный)",
-        "part_09 resume: 3-level scale → 4-zone scale (iter 35 P0-11 fix)",
+        "4 зоны качества показаны выше (VS-EMBED E14: Критический 0–25% / Слабый 25–50% / Хороший 50–85% / Отличный 85–100%)",
+        "part_09 §9.11: 3-level → 4-zone scale (iter 35 P0-11 fix, iter 47 sync completion — «4 уровня» → «4 зоны»)",
     ),
     # ----- P0-12 (A10): part_09 Vysh Quick Check rename -----
     (
@@ -461,19 +476,249 @@ CHECKS = [
         "<p><strong>Cross-ref:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — cautious zone, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_09 §9.6: Cross-ref to Walter §10.2 (OCEAN testing example) added (iter 38 P3-4 fix)",
     ),
+
+    # ============================================================
+    # iter 47 — Phase 4: P2-3 (C5) Bridge paragraphs cleanup
+    # 7 deletes in part_01/02/03/04/05/07a/08; 2 keeps in part_06/09
+    # ============================================================
+    # Negative checks: ensure deleted bridge text is ABSENT.
+    # Python helper below uses ABSENT_CHECKS list for these.
+    # Positive checks: confirm 2 kept bridges still present with proper CSS class.
+    (
+        "P2-3-keep-06",
+        "part_06.html",
+        '<p class="bridge-paragraph">Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt',
+        "part_06 §6-end: Bridge to Part 7A KEPT with bridge-paragraph CSS class (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-keep-09",
+        "part_09.html",
+        '<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки',
+        "part_09 §9-end: Bridge to Part 10 KEPT with bridge-paragraph CSS class (iter 47 P2-3 fix)",
+    ),
+
+    # ============================================================
+    # iter 47 — Phase 4: P2-7 (E4) Resume sections removal
+    # 11 deletes in part_01-10 + part_07b; 4 Synthesis added in part_01/04/07a/08
+    # ============================================================
+    (
+        "P2-7-syn-01",
+        "part_01.html",
+        "<p><strong>Synthesis:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (Anchor = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
+        "part_01 §1-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
+    ),
+    (
+        "P2-7-syn-04",
+        "part_04.html",
+        "<p><strong>Synthesis:</strong> SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без SPINE Anchors — набор случайных правил.</p>",
+        "part_04 §4-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
+    ),
+    (
+        "P2-7-syn-07a",
+        "part_07a.html",
+        "<p><strong>Synthesis:</strong> System Prompt — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
+        "part_07a §7A-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
+    ),
+    (
+        "P2-7-syn-08",
+        "part_08.html",
+        "<p><strong>Synthesis:</strong> 15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (broken SPINE), AP-15 (nested Anchors).</p>",
+        "part_08 §8-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
+    ),
+
+    # ============================================================
+    # iter 47 — Phase 4: P2-18 (F10) Elena inline annotations → Annotation callout
+    # 4 inline ↑ comments deleted; Annotation callout with 6 items added after card
+    # ============================================================
+    (
+        "P2-18-annotation",
+        "part_10.html",
+        "<p><strong>Annotation:</strong> Карточка Елены демонстрирует:</p>",
+        "part_10 §10.1 Elena: Annotation callout with 6 items added after card (iter 47 P2-18 fix)",
+    ),
+    (
+        "P2-18-item-spine",
+        "part_10.html",
+        "<strong>DESCRIPTION → <code>&lt;spine&gt;</code>:</strong> SPINE framework (WANT/NEED/FLAW/LIE/GHOST)",
+        "part_10 §10.1 Annotation: DESCRIPTION → spine item (iter 47 P2-18 fix)",
+    ),
+    (
+        "P2-18-item-ocean",
+        "part_10.html",
+        "<strong>DESCRIPTION → <code>&lt;ocean&gt;</code>:</strong> OCEAN profile",
+        "part_10 §10.1 Annotation: DESCRIPTION → ocean item (iter 47 P2-18 fix)",
+    ),
+    (
+        "P2-18-item-anchors-flaw",
+        "part_10.html",
+        "<strong>ANCHORS — FLAW-linked:</strong> SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price)",
+        "part_10 §10.1 Annotation: ANCHORS — FLAW-linked item (iter 47 P2-18 fix)",
+    ),
+
+    # ============================================================
+    # iter 47 — Phase 4: P3-2 (D5) HTML comments → visible Demonstrates callouts
+    # 4 Demonstrates: callouts added before Elena/Walter/Omnis-Zeta/Vyshcherblenny cards
+    # ============================================================
+    (
+        "P3-2-elena",
+        "part_10.html",
+        "<p><strong>Demonstrates:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>",
+        "part_10 §10.1 Elena: Demonstrates callout before card (iter 47 P3-2 fix)",
+    ),
+    (
+        "P3-2-walter",
+        "part_10.html",
+        "<p><strong>Demonstrates:</strong> EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>",
+        "part_10 §10.2 Walter: Demonstrates callout before card (iter 47 P3-2 fix)",
+    ),
+    (
+        "P3-2-omnis",
+        "part_10.html",
+        "<p><strong>Demonstrates:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
+        "part_10 §10.3 Omnis-Zeta: Demonstrates callout before card (iter 47 P3-2 fix)",
+    ),
+    (
+        "P3-2-vysh",
+        "part_10.html",
+        "<p><strong>Demonstrates:</strong> SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
+        "part_10 §10.4 Vyshcherblenny: Demonstrates callout before card (iter 47 P3-2 fix)",
+    ),
+]
+
+# Negative checks: substrings that MUST NOT appear in master HTML.
+# Used to verify that iter 47 deletes (bridge-paragraph cleanup, part-resume
+# removal, Elena inline ↑ annotations) actually took effect.
+ABSENT_CHECKS = [
+    # ----- P2-3 (C5): 7 deleted bridge-paragraphs -----
+    (
+        "P2-3-del-01",
+        "part_01.html",
+        "Базовые блоки определяют, ЧТО ваш персонаж из себя представляет",
+        "part_01: deleted bridge-paragraph to Part 2 (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-del-02",
+        "part_02.html",
+        "Anchors управляют тем, КОГДА персонаж действует. Voice (голос) управляет тем, КАК он звучит",
+        "part_02: deleted bridge-paragraph to Part 3 (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-del-03",
+        "part_03.html",
+        "Якоря и Voice (голос) управляют поверхностным поведением",
+        "part_03: deleted bridge-paragraph to Part 4 (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-del-04",
+        "part_04.html",
+        "SPINE-профиль построен и проверен на консистентность",
+        "part_04: deleted bridge-paragraph to Part 5 (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-del-05",
+        "part_05.html",
+        "Психологически обоснованный профиль персонажа готов",
+        "part_05: deleted bridge-paragraph to Part 6 (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-del-07a",
+        "part_07a.html",
+        "System Prompt — ядро, которое всегда находится в контексте. Но у персонажей есть знания",
+        "part_07a: deleted bridge-paragraph to Part 7B (iter 47 P2-3 fix)",
+    ),
+    (
+        "P2-3-del-08",
+        "part_08.html",
+        "Анти-паттерны указывают, чего избегать. Диагностика показывает",
+        "part_08: deleted bridge-paragraph to Part 9 (iter 47 P2-3 fix)",
+    ),
+
+    # ----- P2-7 (E4): 11 deleted part-resume sections -----
+    # We check for the «<h3>Что вы теперь умеете</h3>» heading appearing
+    # inside a <div class="part-resume"> wrapper — these must all be gone
+    # from Parts (appendices are out of scope for KI#21).
+    (
+        "P2-7-del-02",
+        "part_02.html",
+        '<div class="part-resume">',
+        "part_02: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+    (
+        "P2-7-del-03",
+        "part_03.html",
+        '<div class="part-resume">',
+        "part_03: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+    (
+        "P2-7-del-05",
+        "part_05.html",
+        '<div class="part-resume">',
+        "part_05: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+    (
+        "P2-7-del-06",
+        "part_06.html",
+        '<div class="part-resume">',
+        "part_06: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+    (
+        "P2-7-del-07b",
+        "part_07b.html",
+        '<div class="part-resume">',
+        "part_07b: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+    (
+        "P2-7-del-09",
+        "part_09.html",
+        '<div class="part-resume">',
+        "part_09: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+    (
+        "P2-7-del-10",
+        "part_10.html",
+        '<div class="part-resume">',
+        "part_10: deleted part-resume section (iter 47 P2-7 fix)",
+    ),
+
+    # ----- P2-18 (F10): 4 deleted inline ↑ annotations in Elena card -----
+    (
+        "P2-18-del-1",
+        "part_10.html",
+        "&lt;!-- ↑ Этот блок добавляет SPINE framework",
+        "part_10 §10.1: deleted inline ↑ annotation for SPINE (iter 47 P2-18 fix)",
+    ),
+    (
+        "P2-18-del-2",
+        "part_10.html",
+        "&lt;!-- ↑ Этот блок добавляет OCEAN профиль",
+        "part_10 §10.1: deleted inline ↑ annotation for OCEAN (iter 47 P2-18 fix)",
+    ),
+    (
+        "P2-18-del-3",
+        "part_10.html",
+        "&lt;!-- ↑ Этот пример добавляет FLAW-linked поведение",
+        "part_10 §10.1: deleted inline ↑ annotation for FLAW-linked Example (iter 47 P2-18 fix)",
+    ),
+    (
+        "P2-18-del-4",
+        "part_10.html",
+        "&lt;!-- ↑ Эти Anchors добавляет SPINE framework",
+        "part_10 §10.1: deleted inline ↑ annotation for FLAW-linked Anchors (iter 47 P2-18 fix)",
+    ),
 ]
 
 
 def main() -> int:
     print("=" * 70)
-    print("audit_canon_master_sync.py — iter 44+45+46 regression guard")
-    print("Verifies that iter 44 + iter 45 + iter 46 canon→master HTML sync fixes are in place.")
+    print("audit_canon_master_sync.py — iter 44+45+46+47 regression guard")
+    print("Verifies that iter 44 + iter 45 + iter 46 + iter 47 canon→master HTML sync fixes are in place.")
     print("=" * 70)
     print()
 
     failures = []
     pass_count = 0
 
+    # Positive checks: substrings that MUST be present.
     for check_id, filename, expected, description in CHECKS:
         filepath = MASTER_DIR / filename
         if not filepath.exists():
@@ -491,22 +736,44 @@ def main() -> int:
             print(f"         Expected: {expected[:80]}...")
             print(f"         Description: {description}")
 
+    # Negative checks: substrings that MUST NOT be present (verifies deletes).
+    print()
+    print("-" * 70)
+    print("Negative checks (verifies iter 47 deletes):")
+    print("-" * 70)
+    for check_id, filename, forbidden, description in ABSENT_CHECKS:
+        filepath = MASTER_DIR / filename
+        if not filepath.exists():
+            failures.append((check_id, filename, "FILE NOT FOUND", description))
+            print(f"  FAIL [{check_id}] {filename}: file not found")
+            continue
+
+        content = filepath.read_text(encoding="utf-8")
+        if forbidden not in content:
+            print(f"  PASS [{check_id}] {filename}: {description}")
+            pass_count += 1
+        else:
+            failures.append((check_id, filename, "forbidden substring still present", description))
+            print(f"  FAIL [{check_id}] {filename}: forbidden substring still present")
+            print(f"         Forbidden: {forbidden[:80]}...")
+            print(f"         Description: {description}")
+
     print()
     print("=" * 70)
     if failures:
         print(f"FAILED: {len(failures)} check(s) failed, {pass_count} passed")
         print()
-        print("Regression detected — iter 44+45+46 fixes are NOT all in place.")
+        print("Regression detected — iter 44+45+46+47 fixes are NOT all in place.")
         print("Investigate src/master/*.html and re-apply missing fixes.")
         return 1
     else:
         print(f"PASS: all {pass_count} checks passed")
         print()
-        print("iter 44+45+46 canon→master HTML sync fixes are in place.")
+        print("iter 44+45+46+47 canon→master HTML sync fixes are in place.")
         print()
-        print("NOTE: This is a focused regression test for iter 44+45+46 fixes.")
+        print("NOTE: This is a focused regression test for iter 44+45+46+47 fixes.")
         print("      A general-purpose canon↔master drift detector is planned")
-        print("      for iter 47+ (see STATUS.md iter 47+ roadmap).")
+        print("      for iter 48+ (see STATUS.md iter 48+ roadmap).")
         return 0
 
 
