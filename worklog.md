@@ -4,57 +4,75 @@
 
 ---
 
-Task ID: 36
+Task ID: 37
 Agent: main
-Task: iter 36 — выполнить P1 fixes из `docs/AUDIT_VERIFICATION.md` §4.2 (11 правок KI#21 Content Audit contradictions — Example vs rule + dead code). Точка остановки iter 35: KI#21 P0 ✅ CLOSED (16/57), build hash 69d9b813. Все правки — точечные текстовые замены/добавления/удаления в `docs/canon/*.md`, master HTML не трогается. После правок — validation gates + `audit_vs_embeds.py`. Результат: архив + git-команды + точка остановки.
+Task: iter 37 — выполнить P2 fixes из `docs/AUDIT_VERIFICATION.md` §4.3 (18 правок KI#21 Content Audit contradictions — Terminology + structural cleanup). Точка остановки iter 36: KI#21 P0+P1 ✅ CLOSED (27/57), build hash 69d9b813. Все правки — текстовые замены/добавления/удаления в `docs/canon/*.md`, master HTML не трогается. После правок — validation gates + `audit_vs_embeds.py`. Результат: архив + git-команды + точка остановки.
 
 Work Log:
-- 1: **Контекст загружен** из STATUS.md (iter 35 — CANON AUDIT P0 ✅ COMPLETE, 16/57 правок закрыты, KI#21 P0 ✅ CLOSED; build hash `69d9b813`), worklog.md (iter 35 record — самый подробный), AGENT_NAVIGATION.md (§6 pitfall #40 KI#21 P0 ✅ CLOSED, §8 OP-1 iter 35 row + iter 36+ roadmap), `docs/AUDIT_VERIFICATION.md` §4.2 (P1 fix plan — 11 правок, exact file+line+before/after).
-- 2: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. Build hash `69d9b813` confirmed. `pnpm install --frozen-lockfile` (Node 24 + pnpm 10.33.0). Symlink `/home/z/my-project/work/live-char-guide` → `/home/z/my-project/repo` создан для `scripts/audit_vs_embeds.py`.
+- 1: **Контекст загружен** из STATUS.md (iter 36 — CANON AUDIT P1 ✅ COMPLETE, 27/57 правок закрыты, KI#21 P0+P1 ✅ CLOSED; build hash `69d9b813`), worklog.md (iter 36 record — самый подробный), AGENT_NAVIGATION.md (§6 pitfall #40 KI#21 P0+P1 ✅ CLOSED, §8 OP-1 iter 36 row + iter 37+ roadmap), `docs/AUDIT_VERIFICATION.md` §4.3 (P2 fix plan — 18 правок, exact file+line+before/after).
+- 2: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. Build hash `69d9b813` confirmed. `pnpm install --frozen-lockfile` (Node 24 + pnpm 10.33.0).
 - 3: **Baseline validation gates ALL PASS** (до правок):
   - `audit_vs_embeds.py` — ✅ 0 regressions (28 animation classes, 11 observed, 16 covered by `scroll-enter`)
-- 4: **11 P1 правок спланированы и сверен фактический текст в каждой локации:**
-  - P1-1 (A5): `part_08.md` §8.10 AP-9 ❌ пример — критерий broken SPINE уточнён (не «absent GHOST/LIE», а «WANT совместим с NEED + FLAW без объяснения через LIE/GHOST»), снято противоречие с §4.1 (GHOST/LIE могут быть неявными). ✅ verified L181-188.
-  - P1-2 (A7): `part_07a.md` §7A.5 таблица «Пояснение секций AN» — добавлена строка «Счётчик вырезаний (Template B+, опционально)». ✅ verified L250-256.
-  - P1-3 (A8): `part_08.md` §8.1 сводная таблица APs — удалена orphan-строка «— OCEAN Overload». Footnote обновлён: «В таблице не отображается — см. Part 5 §5.3». ✅ verified L21-42.
-  - P1-4 (B2): `part_10.md` §10.2 Уолтер GHOST L134 — «Унижение от того, что он сам ушёл, а его оставили позади» → «Сам работаю учителем химии в подержанном Pontiac Aztek.» (конкретное наблюдение, не ярлык). ✅ verified L134.
-  - P1-5 (B5): `part_04.md` §4.8 — добавлены определения 3 типов Anchors (Psychological, At-rest, Growth) после mapping-таблицы. ✅ verified L223-227.
-  - P1-6 (B6): `part_06.md` §6.3 L73 — Tier 0 «12B» → «12B+» (синхронизация с E11 viz). ✅ verified L73.
-  - P1-7 (D1): `part_04.md` §4.2 — удалена Elena secondary GHOST row (пожар). Note L70 заменена: «В учебном гайде каждый персонаж имеет ОДИН canonical GHOST. У Елены — предательство редактора. Множественная травма (GHOST Layers) — см. Выщербленный §4.11.». ✅ verified L62-69.
-  - P1-8 (D1): `part_04.md` §4.3 — удалена Elena secondary LIE row. ✅ verified L85-90.
-  - P1-9 (D2): `part_04.md` §4.3 — удалена Выщербленный variant LIE row (dead code). ✅ verified L85-90.
-  - P1-10 (D4+NEW-2): `part_07a.md` §7A.13 L667 — Lorebook walkthrough Елены: Key «пожар, огонь» → «предательство, редактор, Марина, украденная история», Content «В 7 лет стояла во дворе...» → «Марина — её редактор. Опубликовала расследование Елены под своим именем...». ✅ verified L668.
-  - P1-11 (D4): `part_07b.md` §7B.3 — Пример 1 GHOST-факт: «пожар» → «предательство» (primary GHOST). Старый пожар-пример переименован в «Пример 2: secondary GHOST (пожар)» с пометкой про secondary scenario. Примеры 2 (Марина) и 3 (Город) перенумерованы в 3 и 4. ✅ verified L109-155.
-- 5: **11 правок внесены через Edit/MultiEdit tools** (по одной, с verification после каждой). Все 11 edits успешны.
-- 6: **Post-fix validation gates ALL PASS:**
+  - `check_english.py` — ✅ 0 leaks in `docs/canon/` (29 baseline leaks в `src/master/` HTML — unchanged)
+- 4: **Inventory выполнен** для всех 14 canon-файлов:
+  - Front-matter quote-block — 13 файлов (кроме `_README.md`).
+  - Trailing meta-sections (Migration Notes / Compression results / Validation gates / DGA Phase 2 / Cross-refs ending / resume): 14 файлов (все).
+  - Inline H3 «Что вы теперь умеете» resume: 8 файлов (parts 01, 02, 03, 05, 06, 07b, 09, 10).
+  - Bridge paragraphs: 9 (parts 01, 02×2, 03, 05, 06, 07a, 07b, 08, 09). Keep 2 (Part 6→7A, Part 9→10), delete 8.
+  - «Canon planned iter 13/14/16» stubs: 22 (parts 01, 03, 04, 07a, 08, 09). Plan оценивал 30+, фактически 22.
+  - «Применяется «очень деликатно»» clichés: 9 (parts 01-10), все в Migration Notes секциях.
+- 5: **Bulk transformation script written** (`/home/z/my-project/scripts/iter37_p2_bulk.py`) для P2-4 + P2-5 + P2-6 + P2-7: YAML front-matter конверсия + удаление trailing meta-sections + опциональная Synthesis (4 файла: parts 01, 04, 07A, 08). Bug fix: парсер front-matter использовал `==` вместо `startswith` для ключа «sections» (с номером в скобках) — fixed, re-run.
+- 6: **Inline cleanup script written** (`/home/z/my-project/scripts/iter37_p2_inline_cleanup.py`) для P2-3 + P2-7 inline: удаление inline H3 «Что вы теперь умеете» + удаление лишних Bridge paragraphs (оставлены только Part 6→7A, Part 9→10).
+- 7: **Stub removal script written** (`/home/z/my-project/scripts/iter37_p2_canon_planned_stubs.py`) для P2-11: regex-удаление 3 паттернов «Canon planned iter X» / «(Canon planned iter X)» / «(Canon, planned iter X)».
+- 8: **Stub cleanup script written** (`/home/z/my-project/scripts/iter37_p2_stub_cleanup.py`) для P2-11 punctuation fix: residual `] .` → `].`. Bug fix: первоначальная версия включала P4 (double space → single), что повредило code-block indentation в `part_07a.md` (5 строк) и `part_08.md` (6 строк) — P4 removed, affected files restored from backup and re-transformed.
+- 9: **P2-1 (C1):** `part_01.md` §1.4 — добавлен block «Ключевые термины» с 1-предложными определениями Anchor/Voice/SPINE/OCEAN + bold **Pattern Matcher** в RULE.
+- 10: **P2-2 (C2):** `docs/canon/_README.md` §3.9 — добавлена explicit policy: метки callouts (`RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`) остаются на английском как semantic anchors. Тело callouts — на русском.
+- 11: **P2-8 (E5):** `part_01.md` §1.3 orphan секция слита с §1.4 (заголовок и body удалены, данные уже в §1.2 + §1.4).
+- 12: **P2-9 (E6):** `part_07a.md` L162, L172 — Pattern Matcher ссылки обновлены: «Модель — Pattern Matcher (см. Part 1 §1.4)» и «модель выступает как Pattern Matcher (см. §1.4 Part 1)».
+- 13: **P2-10 (E7):** автоматически — клише «Применяется «очень деликатно»» удалено вместе с Migration Notes секциями (9 вхождений в 9 файлах).
+- 14: **P2-12 (B4):** `part_03.md` §3.4 — Tier 1/2/3 переименованы в Quality Grade A/B/C + добавлен disambiguation block (не путать с CoT Tier 0-3 из Part 6 и GHOST Layers Tier 1-3 из Part 10). Заголовок «До/После: Tier 1 vs Tier 3» → «Grade A vs Grade C». Bug fix: случайный китайский символ «分级ается» (typing artifact) → «оценивается».
+- 15: **P2-13 (F4):** `part_04.md` §4.2 L55 — «Запрещённые слова: «травма», «пережил», «столкнулся с»» → «Запрещённые формулировки — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». Вместо них — конкретное событие: ...».
+- 16: **P2-14 (F5):** `part_05.md` §5.1 (после RULE) — добавлено определение **Cautious zone (30–40 / 60–70)** с примером Елены (A=38, N=68 → FLAW, GHOST).
+- 17: **P2-15 (F6):** `part_07a.md` L305 (sampling params table) — 3 ячейки Voice Placement: `Examples + Greeting<br/>**Никогда в Description**` → `Examples + Greeting — **Никогда в Description**` (em-dash вместо `<br/>`, HTML-теги запрещены в Canon per `_README.md` §3.7).
+- 18: **P2-16 (F7):** `part_07a.md` §7A.1 — Keirsey SP уточнено: «Artisan/Ремесленник из MBTI» → «Sensing-Perceiving, см. Appendix A — MBTI» (Keirsey ≠ MBTI, корректная ссылка на Appendix A).
+- 19: **P2-17 (F9):** `part_09.md` §9.6 Decision Tree — добавлены 1-словные симптомы для каждой AP-ссылки: AP-3 Voice-in-Desc, AP-6 No-Anti-Godmoding, AP-15 OCEAN-Overload, AP-5 RepPen-High, AP-7 PP-Leak, AP-10 CoT-Overload, AP-9 SPINE-Broken.
+- 20: **P2-18 (F10):** `part_10.md` §10.1 — inline-комментарии `<!-- ↑ Этот блок добавляет SPINE framework (см. Part 4) -->`, `<!-- ↑ Этот блок добавляет OCEAN профиль -->`, `<!-- ↑ Этот пример добавляет FLAW-linked поведение -->`, `<!-- ↑ Эти Anchors добавляет SPINE framework -->` удалены. Вместо них — отдельный **Annotation:** callout после карточки с 6 пунктами (DESCRIPTION→spine, DESCRIPTION→ocean, EXAMPLES, ANCHORS Базовые, ANCHORS FLAW-linked, GREETING).
+- 21: **Post-fix validation gates ALL PASS:**
   - `validate:master` — ✅ Unified validation PASSED (12 checks, no regressions vs baseline)
-  - `build` — ✅ hash `69d9b813` unchanged (canon-файлы не входят в hash computation; index.html root fallback регенерирован — только `Generated:` timestamp обновлён, content identical)
-  - `validate` — ✅ 8 gates PASSED, index.html 7.5KB (same as iter 35)
+  - `build` — ✅ SUCCESS, hash `69d9b813` unchanged (canon-файлы не в hash computation)
+  - `validate` — ✅ 8 gates PASSED, index.html 7.5KB (same as iter 36)
   - `test:unit` — ✅ 43/43 (no regressions)
   - `test:integration` — ✅ 21/21 (no regressions)
-  - `lint` — ✅ 0 errors, 12 warnings (same as baseline)
-  - `qa:csp` — ✅ PASS (0 inline scripts, no eval)
+  - `lint` — ✅ 0 errors, 12 warnings (baseline)
+  - `qa:csp` — ✅ PASS (0 inline scripts)
   - `qa:bundle` — ✅ 7.5KB (max 500KB)
   - `qa:doc-versions` — ✅ all current
   - `audit_vs_embeds.py` — ✅ **0 regressions** (28 animation classes, 11 observed, 16 covered by `scroll-enter`)
-- 7: **Verification:** `git diff --stat` показывает 6 canon files modified + index.html (root fallback regenerated, only timestamp changed). `git diff --stat src/` — пусто (нет правок в src/master, src/shell, src/assets). `cat build.hash` — `69d9b813` (unchanged).
-- 8: **Документация актуализирована:**
-  - `STATUS.md` — iter 36 record (CANON AUDIT P1 ✅ COMPLETE, 27/57 правок закрыты, KI#21 P0+P1 ✅ CLOSED). iter 35 → one-paragraph reference. iter 34 → one-paragraph reference. iter 33 → one-liner. iter 32 → one-liner. KI#21 fix plan updated: P0+P1 ✅ CLOSED, P2/P3 pending iter 37-38. Подтверждённые ограничения — обновлена строка «Canon audit P0+P1 (iter 35-36): 27/57 правок закрыты».
-  - `worklog.md` — iter 36 = этот record (самый подробный); iter 35 → one-liner.
-  - `AGENT_NAVIGATION.md` — header iter line updated (+iter 36 canon P1). §6 pitfall #40 KI#21 P0+P1 ✅ CLOSED (обновлён). §8 OP-1 iter history table: iter 36 row added. §8 iter 37+ roadmap updated (P2 18 правок next).
-  - `docs/AUDIT_VERIFICATION.md` — §4.2 P1 table annotated «✅ DONE iter 36» для каждой правки. §7 stop point updated: iter 36 P1 ✅ CLOSED, iter 37 (P2) ready. Header baseline `69d9b813` unchanged.
+  - `check_english.py` — ✅ 0 leaks in `docs/canon/` (29 baseline leaks в `src/master/` HTML — unchanged)
+- 22: **Verification:** `git diff --stat docs/canon/` показывает все 14 canon-файлов modified. `git diff --stat src/` — пусто (нет правок в src/master, src/shell, src/assets). `cat build.hash` — `69d9b813` (unchanged). Canon total: 5 035 → 3 905 строк (−1 130).
+- 23: **Документация актуализирована:**
+  - `STATUS.md` — iter 37 record (CANON AUDIT P2 ✅ COMPLETE, 45/57 правок закрыты, KI#21 P0+P1+P2 ✅ CLOSED). iter 36 → one-paragraph reference. iter 35 → one-paragraph reference. iter 34 → one-paragraph reference. iter 33 → one-liner. iter 32 → one-liner. KI#21 fix plan updated: P0+P1+P2 ✅ CLOSED, P3 pending iter 38. Подтверждённые ограничения — добавлена строка «YAML front-matter (iter 37)».
+  - `worklog.md` — iter 37 = этот record (самый подробный); iter 36 → one-liner.
+  - `AGENT_NAVIGATION.md` — header iter line updated (+iter 37 canon P2). §6 pitfall #40 KI#21 P0+P1+P2 ✅ CLOSED (обновлён). §8 OP-1 iter history table: iter 37 row added. §8 iter 38+ roadmap updated (P3 12 правок next).
+  - `docs/AUDIT_VERIFICATION.md` — §4.3 P2 table annotated «✅ DONE iter 37» для каждой правки. §7 stop point updated: iter 37 P2 ✅ CLOSED, iter 38 (P3) ready. Header baseline `69d9b813` unchanged.
 
 Stage Summary:
-- **iter 36 COMPLETE — CANON AUDIT P1.** 27/57 правок KI#21 закрыты (16 P0 в iter 35 + 11 P1 в iter 36). P1-1..P1-11 applied across 6 canon files (part_04, part_06, part_07a, part_07b, part_08, part_10). Все правки — точечные текстовые замены/добавления/удаления (1-15 строк каждая). P1-7/P1-8/P1-9 (Elena secondary + Выщербленный variant deletions) — 3 удаления строк. P1-11 (Lorebook Пример 1 пожар→предательство) — самое объёмное (5 новых строк + rename 1 примера + renumber 2 примеров). Build hash `69d9b813` unchanged (canon-файлы не входят в hash computation; index.html root fallback регенерирован — только `Generated:` timestamp обновлён, content identical).
-- **Validation gates ALL PASS:** `validate:master` (12 checks) / `build` (hash `69d9b813`) / `validate` (8 gates, 7.5KB) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions).
-- **Документация:** STATUS.md updated (iter 36 record, KI#21 P0+P1 ✅ CLOSED). worklog.md updated (iter 36 = этот record, iter 35 → one-liner). AGENT_NAVIGATION.md updated (§6 #40 KI#21 P0+P1 ✅, §8 iter 36 row + iter 37+ roadmap). docs/AUDIT_VERIFICATION.md updated (§4.2 P1 ✅ DONE annotations, §7 iter 36 stop point).
-- **Modified files:** `docs/canon/part_04.md` (4 edits — P1-5, P1-7, P1-8, P1-9), `docs/canon/part_06.md` (1 — P1-6), `docs/canon/part_07a.md` (2 — P1-2, P1-10), `docs/canon/part_07b.md` (1 — P1-11), `docs/canon/part_08.md` (2 — P1-1, P1-3), `docs/canon/part_10.md` (1 — P1-4). Total: 6 canon files, 11 edits. + index.html (root fallback regenerated, только timestamp).
-- **Точка остановки:** iter 36 done. KI#21 P0+P1 ✅ CLOSED (27/57). iter 37+ roadmap: P2 (18 правок — терминология C1/C2/C5 + структурный cleanup E1-E7/F1/F4-F10/B4, ~1500 строк удалений — YAML front-matter конверсия, удаление Migration Notes/Validation gates/Cross-refs ending/resume, замена 30+ «Canon planned iter X» заглушек). Если найден новый баг — сначала документировать в STATUS.md как KI#N, потом фиксить. VS scroll-animation invariant — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). Принцип `viz > dry text` сохраняется. Build hash baseline: `69d9b813` (unchanged после iter 36, expected unchanged для iter 37-38).
+- **iter 37 COMPLETE — CANON AUDIT P2.** 45/57 правок KI#21 закрыты (16 P0 в iter 35 + 11 P1 в iter 36 + 18 P2 в iter 37). P2-1..P2-18 applied across all 14 canon files. Все правки — текстовые замены/добавления/удаления в `docs/canon/`. Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged (canon-файлы не входят в hash computation).
+- **Validation gates ALL PASS:** `validate:master` (12 checks) / `build` (hash `69d9b813`) / `validate` (8 gates, 7.5KB) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions) / `check_english.py` (0 leaks in `docs/canon/`).
+- **Документация:** STATUS.md updated (iter 37 record, KI#21 P0+P1+P2 ✅ CLOSED). worklog.md updated (iter 37 = этот record, iter 36 → one-liner). AGENT_NAVIGATION.md updated (§6 #40 KI#21 P0+P1+P2 ✅, §8 iter 37 row + iter 38+ roadmap). docs/AUDIT_VERIFICATION.md updated (§4.3 P2 ✅ DONE annotations, §7 iter 37 stop point).
+- **Modified files:** All 14 `docs/canon/*.md` files modified (10 parts + 3 appendices + `_README.md`). + `index.html` (root fallback regenerated, только timestamp). ~1130 строк удалено (Migration Notes / Validation gates / Cross-refs ending / resume / «Canon planned iter X» stubs / «деликатно» clichés / Bridge paragraphs except 2 kept). ~50 строк добавлено (YAML front-matter в 13 файлов, inline term definitions, Synthesis в 4 Parts, Cautious zone definition, Annotation callout, Quality Grade rename).
+- **Helper scripts persisted** (`/home/z/my-project/scripts/iter37_*.py` — 4 scripts):
+  - `iter37_p2_bulk.py` — YAML front-matter + delete trailing meta-sections + add Synthesis.
+  - `iter37_p2_inline_cleanup.py` — delete inline H3 resume + delete excess Bridge paragraphs.
+  - `iter37_p2_canon_planned_stubs.py` — regex-remove «Canon planned iter X» stubs.
+  - `iter37_p2_stub_cleanup.py` — fix residual `] .` punctuation after stub removal.
+- **Точка остановки:** iter 37 done. KI#21 P0+P1+P2 ✅ CLOSED (45/57). iter 38+ roadmap: P3 (12 правок + 3 новые секции G1-G5: «Как читать», TL;DR, Character map, Pre-build checklist — fix plan ready в `docs/AUDIT_VERIFICATION.md` §4.4). Если найден новый баг — сначала документировать в STATUS.md как KI#N, потом фиксить. VS scroll-animation invariant — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). Принцип `viz > dry text` сохраняется. Build hash baseline: `69d9b813` (unchanged после iter 37, expected unchanged для iter 38).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 36 (2026-07-08)**: CANON AUDIT P1 ✅ CLOSED — 27/57 правок KI#21 (P1 fixes: A5, A7, A8, B2, B5, B6, D1, D2, D4+NEW-2). Build hash `69d9b813` unchanged.
 - **iter 35 (2026-07-08)**: CANON AUDIT P0 ✅ CLOSED — 16/57 правок KI#21 (A1-A10, NEW-1, NEW-3) applied в 7 canon-файлах. Build hash `69d9b813` unchanged.
 - **iter 34 (2026-07-08)**: KI#22 Callout CSS Scoping Bug ✅ CLOSED (56 callouts fixed via scope), KI#23 CSP worker-src ✅ CLOSED, KI#24 FAB ✅ VERIFIED. Build hash fd3d96d3 → 69d9b813.
 - **iter 33 (2026-07-08)**: CONTENT AUDIT VERIFICATION ✅ COMPLETE (без правок кода) — fix plan 57 правок в `docs/AUDIT_VERIFICATION.md`.

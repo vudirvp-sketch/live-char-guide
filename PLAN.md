@@ -1,10 +1,10 @@
 # Live Character Guide — План docs-restructure (по образцу poe2-regex-ru)
 
-> **Версия плана:** 1.1 (актуализировано iter 32)
+> **Версия плана:** 1.1 (актуализировано iter 37)
 > **Дата:** 2026-07-08
 > **Автор:** main agent
 > **Источник паттерна:** https://github.com/vudirvp-sketch/poe2-regex-ru
-> **Статус:** iter 1-32 COMPLETE. Документ хранит исторический контекст docs-restructure плана (§1-4) и текущую точку остановки (§5). Подробная iter-by-iter история — в `worklog.md` + `CHANGELOG.md` + git log.
+> **Статус:** iter 1-37 COMPLETE. Документ хранит исторический контекст docs-restructure плана (§1-4) и текущую точку остановки (§5). Подробная iter-by-iter история — в `worklog.md` + `CHANGELOG.md` + git log.
 
 ---
 

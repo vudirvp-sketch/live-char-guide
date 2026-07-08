@@ -1,16 +1,11 @@
-# Appendix C: Glossary (Глоссарий)
-
-> **Canonical source for:** `src/master/appendix_glossary.html` (212 строк, 1 секция, 27 glossary entries)
-> **VS elements (embedded):** none
-> **Sections (1):** `appendix_glossary`
-> **Last synced:** 2026-06-24 (iter 18 — Canon created; master HTML уже минимален, миграция не требуется)
-> **Migration status:** ✅ MIGRATED (iter 18 — master HTML уже canonical, no compression needed)
-
 ---
-
-**Назначение Appendix C:** алфавитный справочник всех технических терминов гайда. Каждый термин содержит определение и ссылку на канонический раздел, где он описан подробно. Glossary — плоский индекс; глубокие определения живут в Canon Parts.
-
-**Cross-ref:** Полные канонические правила терминологии — `docs/terminology_dictionary.md` (canonical forms + language policy).
+canonical_for: —
+vs_embedded: none
+vs_cross_ref: none
+sections: —
+last_synced: —
+migration_status: —
+---
 
 ---
 
@@ -211,20 +206,3 @@
 **WANT (желание)** — осознанное желание персонажа — то, что он думает, что ему нужно. Внешняя цель, которую персонаж может сформулировать. WANT совместим с LIE: персонаж не видит противоречия между своим желанием и своей ложной установкой. Часто противоречит NEED, создавая нарративное напряжение.
 
 → `[ref: part_04.md §4.X — WANT]`
-
----
-
-## Migration Notes (iter 18 — applied 2026-06-24)
-
-Master HTML `src/master/appendix_glossary.html` уже минимален (212 строк, 1 секция, 27 glossary entries, 0 VS-EMBED, 0 infographic/mermaid). Контент плотный, все 27 entries уникальны — миграция не требовалась, Canon создан как mirror текущего master HTML. Все cross-refs переформатированы из `<a href="#...">` в `[ref: part_XX.md §X.Y — Title]` (Canon convention).
-
-| # | Что в master HTML | Действие | Статус | Причина |
-|---|-------------------|----------|--------|---------|
-| 1 | `<section data-section="appendix_glossary">` h2 + intro p + 27 glossary-entry blocks (каждый: h3 id="gloss_..." + def p + cross-ref link) + part-resume | Оставить | DONE | Все 27 entries уникальны, дубликатов нет |
-
-### Validation gates (iter 18 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, baseline warnings.
-- [x] `pnpm run build` — SUCCESS.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 18)`.

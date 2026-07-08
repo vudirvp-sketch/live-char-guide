@@ -1,5 +1,55 @@
 # Changelog
 
+## [9.1.37] - 2026-07-08
+
+### iter 37 — Canon Audit P2 (KI#21 P2) ✅ CLOSED
+
+18 правок P2 из `docs/AUDIT_VERIFICATION.md` §4.3 применены во всех 14 canon-файлах. Canon total: 5 035 → 3 905 строк (−1 130 net deletion). Build hash `69d9b813` unchanged (canon-файлы не входят в hash computation). 45/57 правок KI#21 закрыты (16 P0 + 11 P1 + 18 P2). Осталось 12 правок + 3 новые секции (P3) на iter 38.
+
+### Changed (iter 37 — KI#21 P2 fixes)
+- **P2-1 (C1):** `part_01.md` §1.4 — added «Ключевые термины» block with 1-sentence definitions of Anchor/Voice/SPINE/OCEAN inline + bold **Pattern Matcher** in RULE.
+- **P2-2 (C2):** `docs/canon/_README.md` §3.9 (new) — explicit policy: callout labels (`RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`) stay in English as semantic anchors; callout body in Russian.
+- **P2-3 (C5):** All canon files — kept 2 Bridge paragraphs (Part 6→7A, Part 9→10), deleted 8 others.
+- **P2-4 (E1):** All canon files (except `_README.md`) — front-matter converted from markdown quote-block to YAML (`--- canonical_for / vs_embedded / vs_cross_ref / sections / last_synced / migration_status ---`).
+- **P2-5 (E2):** All canon files — deleted trailing meta-sections: Migration Notes / Compression results / Validation gates / DGA Phase 2 fix.
+- **P2-6 (E3):** All canon files — deleted «Cross-references из других Parts» sections (reverse-index duplicates inline `[ref: ...]`).
+- **P2-7 (E4):** All canon files — deleted inline H3 «Что вы теперь умеете» resume sections. Added **Synthesis:** 1-2-sentence summary in 4 Parts (01, 04, 07A, 08) with major conceptual shift.
+- **P2-8 (E5):** `part_01.md` §1.3 — orphan section merged into §1.4 (content already in §1.2 + §1.4).
+- **P2-9 (E6):** `part_07a.md` L162, L172 — Pattern Matcher references updated to «Pattern Matcher (см. Part 1 §1.4)».
+- **P2-10 (E7):** All canon files — cliché «Применяется «очень деликатно»» removed together with Migration Notes sections (9 occurrences in 9 files).
+- **P2-11 (F1):** All canon files — 22 stub «Canon planned iter 13/14/16» removed (Parts 2-10 already MIGRATED).
+- **P2-12 (B4 partial):** `part_03.md` §3.4 — Tier 1/2/3 renamed to Quality Grade A/B/C + added disambiguation block (do not confuse with CoT Tier 0-3 from Part 6 or GHOST Layers Tier 1-3 from Part 10). Heading «Tier 1 vs Tier 3» → «Grade A vs Grade C».
+- **P2-13 (F4):** `part_04.md` §4.2 L55 — «Запрещённые слова» → «Запрещённые формулировки — это выводы-ярлыки, не события» + 2 new forbidden example words.
+- **P2-14 (F5):** `part_05.md` §5.1 (after RULE) — added **Cautious zone (30–40 / 60–70)** definition with Elena example.
+- **P2-15 (F6):** `part_07a.md` L305 (sampling params table) — 3 Voice Placement cells: `<br/>` replaced with em-dash (HTML tags forbidden in Canon per `_README.md` §3.7).
+- **P2-16 (F7):** `part_07a.md` §7A.1 — Keirsey SP clarified: «Artisan/Ремесленник из MBTI» → «Sensing-Perceiving, см. Appendix A — MBTI» (Keirsey ≠ MBTI).
+- **P2-17 (F9):** `part_09.md` §9.6 Decision Tree — added 1-word symptoms for each AP-reference: AP-3 Voice-in-Desc, AP-6 No-Anti-Godmoding, AP-15 OCEAN-Overload, AP-5 RepPen-High, AP-7 PP-Leak, AP-10 CoT-Overload, AP-9 SPINE-Broken.
+- **P2-18 (F10):** `part_10.md` §10.1 — 4 inline comments `<!-- ↑ ... -->` removed; replaced with separate **Annotation:** callout after Elena card with 6 items (DESCRIPTION→spine, DESCRIPTION→ocean, EXAMPLES, ANCHORS Базовые, ANCHORS FLAW-linked, GREETING).
+
+### Helper scripts (persisted in `/home/z/my-project/scripts/iter37_*.py`)
+- `iter37_p2_bulk.py` — YAML front-matter conversion + delete trailing meta-sections + add Synthesis.
+- `iter37_p2_inline_cleanup.py` — delete inline H3 resume + delete excess Bridge paragraphs.
+- `iter37_p2_canon_planned_stubs.py` — regex-remove «Canon planned iter X» stubs.
+- `iter37_p2_stub_cleanup.py` — fix residual `] .` punctuation after stub removal.
+
+### Validation (iter 37 — ALL PASS)
+- `validate:master` — ✅ 12 checks, no regressions
+- `build` — ✅ hash `69d9b813` unchanged (canon-файлы не в hash computation; index.html root fallback regenerated — only `Generated:` timestamp updated, content identical)
+- `validate` — ✅ 8 gates PASS, index.html 7.5KB
+- `test:unit` — ✅ 43/43
+- `test:integration` — ✅ 21/21
+- `lint` — ✅ 0 errors, 12 warnings (baseline)
+- `qa:csp` — ✅ PASS (0 inline scripts)
+- `qa:bundle` — ✅ 7.5KB (max 500KB)
+- `qa:doc-versions` — ✅ PASS
+- `audit_vs_embeds.py` — ✅ 0 regressions
+- `check_english.py` — ✅ 0 leaks in `docs/canon/` (29 baseline leaks in `src/master/` HTML — unchanged)
+
+### Modified files (iter 37)
+All 14 canon files modified: `docs/canon/_README.md`, `docs/canon/appendix_glossary.md`, `docs/canon/appendix_mbti.md`, `docs/canon/appendix_model_table.md`, `docs/canon/part_01.md`, `docs/canon/part_02.md`, `docs/canon/part_03.md`, `docs/canon/part_04.md`, `docs/canon/part_05.md`, `docs/canon/part_06.md`, `docs/canon/part_07a.md`, `docs/canon/part_07b.md`, `docs/canon/part_08.md`, `docs/canon/part_09.md`, `docs/canon/part_10.md`. Plus `index.html` (root fallback regenerated, only timestamp). Documentation: `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `docs/AUDIT_VERIFICATION.md`, `CHANGELOG.md`.
+
+---
+
 ## [9.1.32] - 2026-07-08
 
 ### iter 32 — Visual System Scroll-Animation Bug (KI#20) ✅ CLOSED

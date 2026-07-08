@@ -1,16 +1,11 @@
-# Part 6: CoT Tiers (цепочка рассуждений)
-
-> **Canonical source for:** `src/master/part_06.html` (261 → 259 → 261 строк, 6 секций)
-> **VS elements (embedded):** E11 (CoT Tiers Staircase)
-> **Sections (6):** `p6_cot_bridge`, `p6_cot_basics`, `p6_cot_tiers`, `p6_cot_tier2`, `p6_cot_tier3`, `p6_cot_anchors`
-> **Last synced:** 2026-07-08 (iter 29 — DGA Phase 2 fix KI#18-F: dropped duplicate «Формат» column from p6_cot_tiers table; content partially shown in E11 stair-step__name; expanded intro paragraph linking to E11)
-> **Migration status:** ✅ MIGRATED (iter 16) + ✅ iter 29 DGA fix (KI#18-F)
-
 ---
-
-[VS: E11 — CoT Tiers Staircase. 4-step «staircase» (Tier 0 / Tier 1 / Tier 2 / Tier 3) с model-pill badges (12B+ / 32B базовый / 32B+ рекомендуется / API только) и format example на каждой ступени. Замещает текстовое перечисление 4 уровней CoT и даёт визуальный инструмент быстрого справочника. Sits at file preamble before §6.1.]
-
-**Назначение Part 6:** добавление карточке пошаговых рассуждений (CoT), которые модель воспроизводит перед генерацией ответа. CoT **не обязателен** — Tier 0 работает для всех моделей. Более высокие уровни добавляют progressively более структурированное внутреннее рассуждение, позволяя модели «думать прежде, чем говорить».
+canonical_for: —
+vs_embedded: none
+vs_cross_ref: none
+sections: —
+last_synced: —
+migration_status: —
+---
 
 ---
 
@@ -191,85 +186,3 @@ resolution: отступить
 **RULE:** CoT Overload (AP-10) — больше 3 CoT Anchors. Модель начинает генерировать внутренние монологи вместо действий. → `[ref: part_08.md §8.11 — AP-10 CoT Overload]`.
 
 **Bridge:** Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → `[ref: part_07a.md §7A.1 — System Prompt]`.
-
-### Что вы теперь умеете
-
-- Понимать 4 уровня CoT (Tier 0–3) и выбирать подходящий для модели.
-- Писать CoT Anchors: Триггер → [Внутренний процесс] → Реакция → Цена.
-- Ограничивать CoT до 2–3 Anchors на карточку (AP-10).
-- Использовать XML-синтаксис processus_analysium для Tier 3.
-- Связывать CoT с GHOST-цепочкой персонажа.
-
----
-
-## Cross-references из других Parts
-
-- `p2_basic_anchors` — Behavioral Anchors, foundation for CoT Anchors.
-- `p4_ghost` — GHOST, referenced в §6.4 (Tier 2 GHOST-link), §6.5 (Tier 3 example Выщербленный).
-- `p4_spine_overview` — SPINE, referenced в §6.2 (intro, SPINE causal chain).
-- `p7a_system_prompt` — System Prompt, referenced в §6.6 (bridge).
-- `p8_ap10_cot_overload` — AP-10 CoT Overload, referenced в §6.2 (RULE), §6.6 (RULE).
-- `p9_test_scenarios` — Test scenarios, references CoT in test #6 (long dialogue stability).
-- `p9_12b_issues` — 12B-specific issues, references Tier 0–1 CoT only.
-- `p10_omnis` — Омнис-Зета card, includes 2 CoT Anchors (Tier 2 + Tier 3 XML).
-- `p10_vysherblenny` — Выщербленный card, includes 2 CoT Anchors with processus_analysium XML.
-- `appendix_model_table` — Model Capability Table, referenced in §6.1 + §6.2 Model Notes.
-
----
-
-## Migration Notes (iter 16 — applied 2026-06-24)
-
-Миграция `src/master/part_06.html` против этого Canon выполнена в iter 16. Результат: 261 → 259 строк (-2, ~0.8%). Build PASS, validate:master PASS, qa без регрессий.
-
-**Принцип применённый:** `viz > dry text` (iter 8) — визуализация = замещение, не дополнение; уникальные визуализации не удаляются. Применяется «очень деликатно».
-
-| # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
-|---|-------------------|----------|--------|--------------------------|
-| 1 | VS-EMBED E11 (CoT staircase, 4 tiers with model-pills + format examples) | Оставить | DONE | Canonical VS-marker — preamble Part 6 |
-| 2 | `<section id="p6_cot_bridge" data-section="p6_cot_bridge" data-toc-nav>` h2 + intro paragraph + "Что добавляет CoT" 4-bullet list | Оставить | DONE | Canonical §6.1 — intro + bridge content |
-| 3 | `<section data-section="p6_cot_basics" data-toc-nav>` h2 + duplicate CoT definition paragraph (L96) + alternative definition paragraph with Model Note (L98) + "CoT Anchors строятся..." paragraph + RULE callout + "Зачем нужен CoT" h3 + 3-bullet list | Оставить + сжать | DONE | Canonical §6.2. L96 ("CoT добавляет карточке пошаговые рассуждения...") удалён — дублировал bridge L81 definition. L98 сохранён (уникальный Model Note). |
-| 4 | `<section data-section="p6_cot_tiers" data-toc-nav>` h3 + intro + 4-row Tiers table | Оставить | DONE | Canonical §6.3 — unique 4-tier reference table (complements E11 visual) |
-| 5 | `<section data-section="p6_cot_tier2">` h3 + intro + h4 Синтаксис + TEMPLATE pre + h4 Пример: Елена + ILLUSTRATION label + pre code | Оставить | DONE | Canonical §6.4 — unique Tier 2 syntax + Elena example |
-| 6 | `<section data-section="p6_cot_tier3">` h3 + intro + h4 Синтаксис + TEMPLATE pre + processus_analysium note paragraph + h4 Пример: Выщербленный + ILLUSTRATION label + pre code | Оставить | DONE | Canonical §6.5 — unique Tier 3 XML syntax + Выщербленный example |
-| 7 | `<section data-section="p6_cot_anchors">` h3 + intro + h4 Структура + pre + h4 Примеры + ILLUSTRATION label + 2-row examples table + RULE callout (AP-10) + bridge paragraph + part-resume | Оставить | DONE | Canonical §6.6 — unique CoT Anchor structure + examples + bridge |
-
-### Compression results (iter 16)
-
-1 кандидат на сжатие обработан:
-
-1. **#20 DONE** — `p6_cot_basics` L96 `<p>CoT добавляет карточке пошаговые рассуждения, которые модель воспроизводит перед генерацией ответа.</p>` — удалён. Дублировал `p6_cot_bridge` L81 definition (`CoT (цепочка рассуждений) — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа.`). KI#14 principle — одно canonical location для определения концепта. L98 сохранён (уникальный Model Note + альтернативная формулировка).
-
-Итого: 261 → 259 строк (-2, ~0.8%). Принцип `viz > dry text` — VS-EMBED E11, 4-tier reference table, Tier 2 + Tier 3 syntax + examples, CoT Anchors examples table сохранены.
-
-### DGA Phase 2 fix (iter 29 — applied 2026-07-08)
-
-**KI#18-F FIXED (partial).** Deployed Guide Audit Phase 2 — дедупликация таблицы `p6_cot_tiers` против VS-EMBED E11 (CoT Tiers Staircase) выше.
-
-| # | Что в master HTML | Действие | Статус | Причина |
-|---|-------------------|----------|--------|---------|
-| 1 | `<p>` intro (single line) → расширен до explicit linking paragraph (add 2-й `<p>`) | Расширить | DONE (iter 29) | Pattern KI#18-A/B/C/I: intro paragraph links to viz + frames table as supplementing (not duplicating) |
-| 2 | `<tr><th>Tier</th><th>Формат</th><th>Для моделей</th><th>Пример</th></tr>` + 4 rows × 4 cells | Сжать | DONE (iter 29) | «Формат» col duplicating E11 `stair-step__name` (Без CoT/Эмоциональная метка/GHOST-link/Полный XML — те же данные, что в viz). Drop «Формат» → 3 cols (Tier / Для моделей / Пример). |
-| 3 | «Для моделей» + «Пример» cols partial duplication (model-pill + stair-step__format Russian versions) | Keep | DEFERRED | «Для моделей» ≈ viz `model-pill` (12B+/32B/API), «Пример» ≈ viz `stair-step__format` (Russian translations). Kept for accessibility (русские переводы не в viz). Полное устранение дублирования потребует решения по рус/англ перекрытию — отложено до future iter. |
-
-**Result:** `src/master/part_06.html`: 259 → 261 строк (+2 — intro paragraph added, 4 table rows shortened by 1 cell each). Принцип `viz > dry text` — формат-имена Tier теперь только в viz `stair-step__name`, таблица показывает модельную поддержку + русские примеры.
-
-### Validation gates (iter 29 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, baseline warnings (KI#13 baseline, no regression, no part_06 warnings).
-- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
-- [x] `pnpm run qa:csp` — pass.
-- [x] `pnpm run qa:bundle` — pass (7.2KB).
-- [x] `pnpm run qa:doc-versions` — pass.
-- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 29 — DGA Phase 2 fix KI#18-F)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ iter 29 DGA fix (KI#18-F)`.
-
-### Validation gates (iter 16 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, KI#13 baseline warnings, no regression.
-- [x] `pnpm run build` — SUCCESS.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors.
-- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 16)`.

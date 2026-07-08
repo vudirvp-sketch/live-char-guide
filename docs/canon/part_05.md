@@ -1,16 +1,11 @@
-# Part 5: Psychology Toolkit (Психологический инструментарий)
-
-> **Canonical source for:** `src/master/part_05.html` (619 → 615 строк, 8 секций)
-> **VS elements (embedded):** E09 (OCEAN Pentagon), E10 (Enneagram × SPINE Mapping)
-> **Sections (8):** `p5_ocean_basics`, `p5_elena_profile`, `p5_ocean_warning`, `p5_enneagram_basics`, `p5_mbti_ref`, `p5_cross_instrument_map`, `p5_enneagram_wings`, `p5_cross_matrix`
-> **Last synced:** 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-E: aligned OCEAN extreme-pole rule to strict definition <30 or >70; fixed Elena profile semantic bug «3 экстремальных полюса» → «1 экстремальный полюс + 2 cautious zone values»; KI#19: Chinese chars «线索» in master HTML L269 replaced with Russian «зацепками» per canon)
-> **Migration status:** ✅ MIGRATED (iter 16) + ✅ iter 30 DGA fix (KI#18-E) + master HTML encoding fix (KI#19)
-
 ---
-
-[VS: E09 — OCEAN Pentagon. Интерактивный радиальный пентагон с 5 узлами OCEAN (O/C/E/A/N), каждый узел кликабелен и показывает описание полюса + пример Anchor. Замещает текстовое описание «5 измерений OCEAN» и даёт визуальный способ проверки консистентности профиля. Sits at file preamble before §5.1.]
-
-**Назначение Part 5:** проверка SPINE-профиля (Part 4) с помощью психологических моделей. OCEAN показывает «сколько» каждой черты, Enneagram — «почему» персонаж действует. MBTI — справочный инструмент в Appendix A. Принцип: психологические инструменты **проверяют** SPINE, не **создают** его.
+canonical_for: —
+vs_embedded: none
+vs_cross_ref: none
+sections: —
+last_synced: —
+migration_status: —
+---
 
 ---
 
@@ -21,6 +16,8 @@
 **OCEAN** — модель из 5 личностных измерений. Используется для проверки внутренней консистентности персонажа и дополнения фреймворка SPINE (WANT/NEED/FLAW).
 
 **RULE:** Золотое правило профиля: Только 1–2 экстремальных полюса OCEAN (значения <30 или >70) — рекомендуемый максимум для всех контекстов. Для 8K+ допустимо до 3, для 16K+ — до 4 (см. §5.3 контекстные лимиты). Каждый дополнительный полюс сверх рекомендации снижает стабильность поведения. Нарушение = OCEAN Value Conflicts (см. §5.3).
+
+**Cautious zone (30–40 / 60–70)** — пограничная зона, не экстремальная, но влияющая на SPINE-связи (FLAW, GHOST-реактивность). Значения в cautious zone не считаются «экстремальными полюсами», но активно формируют поведение — например, Елена `A=38` и `N=68` напрямую связаны с её FLAW (отталкивает людей сарказмом) и GHOST (предательство редактора → недоверие).
 
 ### 5 измерений OCEAN
 
@@ -147,7 +144,7 @@ MBTI доступен как справочный инструмент в `[ref:
 
 `data-section: p5_cross_instrument_map`
 
-Психологические инструменты **валидировали** SPINE — они не генерируют его. Сначала постройте SPINE-профиль (`[ref: part_04.md §4.1 — SPINE Overview]`), затем проверяйте его консистентность с помощью OCEAN, Enneagram и MBTI. Приведённые ниже таблицы — справочный инструмент для диагностики несоответствий, а не инструкция по созданию SPINE «снизу вверх».
+Психологические инструменты **валидировали** SPINE — они не генерируют его. Сначала постройте SPINE-профиль (`[ref: part_04.md §4.1 — SPINE Overview]`, затем проверяйте его консистентность с помощью OCEAN, Enneagram и MBTI. Приведённые ниже таблицы — справочный инструмент для диагностики несоответствий, а не инструкция по созданию SPINE «снизу вверх».
 
 ### Enneagram → SPINE: справочная карта
 
@@ -215,115 +212,3 @@ OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+
 Матрица показывает корреляцию OCEAN×Enneagram: зелёные ячейки = высокая корреляция, красные = низкая. Нажмите на ячейку для деталей. Автоматическая валидация вашего профиля — **Персона Синтез** ниже.
 
 **Persona Synthesis** — агрегация всех трёх систем (OCEAN + Enneagram + MBTI) в единый профиль с диагностикой консистентности.
-
-**Bridge:** Психологически обоснованный профиль персонажа готов. Но модель не будет автоматически анализировать этот профиль перед ответом — она паттерн-матчит. CoT (цепочка рассуждений) заставляет модель обрабатывать SPINE, OCEAN и Anchors до генерации поведения. → `[ref: part_06.md]`.
-
-### Что вы теперь умеете
-
-- Валидировать SPINE с помощью OCEAN (1–2 экстремальных полюса)
-- Использовать Enneagram для проверки LIE, FLAW, WANT, NEED
-- Определять wing (крыло) Enneagram и его влияние на SPINE
-- Проверять OCEAN×Enneagram кросс-консистентность
-- Распознавать OCEAN Value Conflicts при 3+ экстремальных полюсах
-
----
-
-## Cross-references из других Parts
-
-- `p4_spine_overview` — SPINE Framework, referenced в §5.1 (intro cross-ref).
-- `p4_lie` — LIE, referenced в §5.4 (RECOMMENDATION callout), §5.6 (Enneagram→SPINE table).
-- `p4_ghost` — GHOST, referenced implicitly в §5.2 (Elena OCEAN/Enneagram profiles, GHOST-реактивность).
-- `p6_cot_basics` — CoT, referenced в §5.8 (bridge paragraph).
-- `p7a_assembly_pipeline` — Assembly Pipeline, referenced в §5.1 (cross-ref).
-- `p8_ap10_cot_overload` — AP-10 CoT Overload (no direct ref, but OCEAN overload §5.3 is similar pattern).
-- `p9_basic_checklist` — Diagnostic checklist, references Part 5 OCEAN checks.
-- `p10_elena` — Полная карточка Елены, references OCEAN/Enneagram profile from §5.2.
-- `p10_omnis` — Полная карточка Омнис-Зета, references OCEAN profile (O:92 E:12).
-- `p10_vysherblenny` — Полная карточка Выщербленного, references OCEAN + Enneagram 5w4.
-- `appendix_mbti` — MBTI, referenced в §5.5.
-
----
-
-## Migration Notes (iter 16 — applied 2026-06-24)
-
-Миграция `src/master/part_05.html` против этого Canon выполнена в iter 16. Результат: 619 → 615 строк (-4, ~0.6%). Build PASS, validate:master PASS, qa без регрессий.
-
-**Принцип применённый:** `viz > dry text` (iter 8) — визуализация = замещение, не дополнение; уникальные визуализации не удаляются. Применяется «очень деликатно».
-
-| # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
-|---|-------------------|----------|--------|--------------------------|
-| 1 | VS-EMBED E09 (OCEAN pentagon, interactive + static SVG fallback) | Оставить | DONE | Canonical VS-marker — preamble Part 5 |
-| 2 | `<section data-section="p5_ocean_basics">` h2 "Психологический инструментарий" + intro + RULE callout + 5-row OCEAN table + 4-row context limits table + `<details>` static SVG fallback + ocean-embed widget div | Оставить | DONE | Canonical §5.1 — intro + RULE + unique tables + interactive widget |
-| 3 | `<section data-section="p5_elena_profile">` h3 + ILLUSTRATION label + intro + 5-row Elena OCEAN table + RULE callout + h4 "Enneagram: Тип 6w5" + 5-row Enneagram→SPINE table + validation paragraph | Оставить | DONE | Canonical §5.2 — unique Elena example with OCEAN+Enneagram mapping |
-| 4 | `<p>` Orphan paragraph "У Елены три экстремальных полюса..." (lines 303, outside any section) | Сжать | DONE | Удалён. Дублировал RULE callout внутри p5_elena_profile (тот же вывод про 3 экстремума + рекомендация). Orphan — между `</section>` и `<section>`, нарушает §3 pitfall #8 (контент вне section). |
-| 5 | `<section data-section="p5_ocean_warning">` h3 + RULE callout + 4 h4 scenario blocks + h4 OCEAN×Enneagram cross-ref | Оставить | DONE | Canonical §5.3 — unique 3 conflict scenarios |
-| 6 | `<p>` Orphan paragraph "OCEAN показывает «сколько»..." (lines 331, outside any section) | Сжать | DONE | Удалён. Дублировал p5_enneagram_basics intro (lines 461, тот же тезис «OCEAN = сколько, Enneagram = почему»). Orphan — между `</section>` и `<!-- VS-EMBED: E10 -->`, нарушает §3 pitfall #8. |
-| 7 | VS-EMBED E10 (Enneagram circle, 9 type nodes + SPINE callouts) | Оставить | DONE | Canonical VS-marker — between §5.3 and §5.4 |
-| 8 | `<section data-section="p5_enneagram_basics">` h3 + intro + h4 + 9-row Enneagram types table + RECOMMENDATION callout + noscript + enneagram-embed widget + bridge paragraph | Оставить | DONE | Canonical §5.4 — intro + unique 9-types table + interactive widget |
-| 9 | `<section data-section="p5_mbti_ref">` h3 + 1-line reference paragraph | Оставить | DONE | Canonical §5.5 — minimal cross-ref section |
-| 10 | `<section data-section="p5_cross_instrument_map">` h3 + intro + h4 + Enneagram→SPINE 4-row table + h4 + OCEAN→SPINE 5-row table + RULE callout + Enneagram↔MBTI paragraph | Оставить | DONE | Canonical §5.6 — unique validation tables |
-| 11 | `<section data-section="p5_enneagram_wings">` h3 + intro + h4 + 2-row wing algorithm table + h4 + 4-row wing examples table | Оставить | DONE | Canonical §5.7 — unique wings content |
-| 12 | `<section data-section="p5_cross_matrix">` h3 + intro + persona-cross widget + h4 Persona Synthesis + persona-synthesis widget + bridge paragraph + part-resume | Оставить | DONE | Canonical §5.8 — unique widgets + bridge |
-| 13 | Static SVG fallback inside `<details class="interactive">` "OCEAN Interactive Pentagon" (lines 187-249, ~50 lines of SVG markup) | Оставить | DONE | Accessibility fallback для VS-EMBED E09. Виджет-контейнер заменяет при инициализации, но SVG остаётся visible-at-load + noscript fallback. Уникальная разметка, не дубликат E09 (это static fallback, не parallel description). |
-
-### Compression results (iter 16)
-
-2 кандидата на сжатие обработаны:
-
-1. **#18 DONE** — Orphan paragraph "У Елены три экстремальных полюса..." (lines 303) — удалён. Дублировал RULE callout внутри p5_elena_profile. Был orphan (контент вне `<section>`) — нарушает §3 pitfall #8.
-2. **#19 DONE** — Orphan paragraph "OCEAN показывает «сколько» каждой черты..." (lines 331) — удалён. Дублировал p5_enneagram_basics intro (тот же тезис «OCEAN = сколько, Enneagram = почему»). Был orphan — нарушает §3 pitfall #8.
-
-Итого: 619 → 615 строк (-4, ~0.6%). Принцип `viz > dry text` — VS-EMBED E09+E10, static SVG fallback, все таблицы (5-row OCEAN, 4-row context limits, 5-row Elena OCEAN, 5-row Enneagram→SPINE, 9-row Enneagram types, 4-row Enneagram→SPINE validation, 5-row OCEAN→SPINE validation, 2-row wing algorithm, 4-row wing examples) сохранены.
-
-### Validation gates (iter 16 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, KI#13 baseline warnings, no regression.
-- [x] `pnpm run build` — SUCCESS.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors.
-- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 16)`.
-
----
-
-## DGA Phase 2 fix (iter 30 — applied 2026-07-08)
-
-**KI#18-E FIXED** + **KI#19 FIXED** (incidental finding during KI#18-E analysis).
-
-### KI#18-E — OCEAN extreme-pole rule alignment (semantic bug)
-
-**Проблема:** Cross-viz/text semantic inconsistency. E09 viz (lines 122, 138) uses strict rule (<30 or >70 = extreme) and says Elena has **1 экстремум** (only O=72). But text `p5_elena_profile` (lines 272, 273, 279) used broad interpretation (<40 or >60 = extreme) and claimed Elena has **3 экстремальных полюса** (O=72, A=38, N=68). Internal contradiction: `p5_ocean_basics` L153 + table L160 already state strict rule (<30 or >70), but Elena profile section contradicted it.
-
-**Fix (aligned to strict rule <30 or >70 — most prevalent across codebase):**
-
-| # | Что в master HTML | Действие | Статус | Причина |
-|---|-------------------|----------|--------|---------|
-| 1 | L272: `<td>...Agreeableness 38... Экстремальный полюс.</td>` | Заменить | DONE (iter 30) | A=38 в cautious zone (30–40), НЕ экстремальный полюс per strict rule (<30). Заменено на «Cautious zone (30–40) — на границе с экстремальной зоной (<30), напрямую связана с FLAW.» |
-| 2 | L273: `<td>...Neuroticism 68... Экстремальный полюс.</td>` | Заменить | DONE (iter 30) | N=68 в cautious zone (60–70), НЕ экстремальный полюс per strict rule (>70). Заменено на «Cautious zone (60–70) — на границе с экстремальной зоной (>70), напрямую связана с GHOST.» |
-| 3 | L279: `<p>RULE: У Елены 3 экстремальных полюса (O=72, A=38, N=68). Это допустимо для 8K+ контекста, но для 4K следует оставить только 2 (рекомендация: N=68 и A=38 — они напрямую связаны с SPINE).</p>` | Переписать | DONE (iter 30) | Semantic bug: 3 → 1 экстремальный полюс. Заменено на: «У Елены 1 экстремальный полюс (O=72 > 70) + 2 значения в cautious zone (A=38, N=68 — на границе 30–40 / 60–70). Соответствует строгому правилу (значения <30 или >70 = экстремальные). Профиль допустим для 4K+ контекста (1 экстремум). A=38 и N=68 напрямую связаны с SPINE (FLAW и GHOST-реактивность) — при 8K+ можно усилить их до экстремальной зоны (A<30 или N>70) для более выраженного конфликта.» |
-
-**Rule alignment decision:** Strict rule (<30 or >70) выбрана как canonical, потому что: (a) E09 viz threshold indicator L122 использует <30 и >70; (b) E09 viz note L138 говорит «1 экстремум»; (c) `p5_ocean_basics` L153 RULE callout уже формулирует strict rule; (d) `p5_ocean_basics` L160 table header использует (<30) и (>70); (e) canon L23 + L27 — strict. Broad rule (<40 or >60) была только implicit в Elena profile section.
-
-**Canon sync:** L59, L60, L62 canon part_05.md — те же правки применены.
-
-### KI#19 — Chinese chars in master HTML (encoding bug, found incidentally)
-
-**Проблема:** `src/master/part_05.html` L269 содержал смешение русского с китайскими иероглифами: «следует за**线索**ми, которые другие игнорируют» (вместо «следует за **зацепками**»). Canon part_05.md L56 имеет правильное русское «за зацепками» — master HTML был corrupted при какой-то past edit.
-
-| # | Что в master HTML | Действие | Статус | Причина |
-|---|-------------------|----------|--------|---------|
-| 1 | L269: `<td>...Openness 72... следует за线索ми, которые другие игнорируют...</td>` | Заменить | DONE (iter 30) | Chinese chars «线索» (xiànsuǒ = clue) заменены на русское «зацепками» per canon L56. |
-
-**Canon:** не требовалось — canon L56 уже корректен.
-
-### Validation gates (iter 30 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, baseline warnings (23 — KI#13/VS-EMBED baseline, no regression).
-- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
-- [x] `pnpm run qa:csp` — pass.
-- [x] `pnpm run qa:bundle` — pass (7.2KB).
-- [x] `pnpm run qa:doc-versions` — pass.
-- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-E + KI#19)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ iter 30 DGA fix (KI#18-E) + master HTML encoding fix (KI#19)`.

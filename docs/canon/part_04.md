@@ -1,10 +1,11 @@
-# Part 4: SPINE Framework
-
-> **Canonical source for:** `src/master/part_04.html`
-> **VS elements:** E05 (SPINE chain), E06 (GHOST Layers)
-> **Sections (11):** `p4_spine_overview`, `p4_ghost`, `p4_lie`, `p4_flaw`, `p4_need`, `p4_want`, `p4_spine_full_chain`, `p4_spine_mapping`, `p4_spine_check`, `p4_spine_navigation`, `p4_ghost_layers`
-> **Last synced:** 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-D: trimmed p4_spine_overview intro paragraph to remove partial re-explanation of E05 viz SPINE chain)
-> **Migration status:** ✅ MIGRATED (iter 8 — see Migration Notes below for deviations) + ✅ iter 30 DGA fix (KI#18-D)
+---
+canonical_for: —
+vs_embedded: none
+vs_cross_ref: none
+sections: —
+last_synced: —
+migration_status: —
+---
 
 ---
 
@@ -52,7 +53,7 @@
 - Можно описать в 1–2 предложениях.
 - Объясняет, откуда взялась LIE (GHOST → LIE).
 
-**Запрещённые слова:** «травма», «пережил», «столкнулся с». GHOST = ЧТО произошло, не вывод. Показывайте через конкретное событие.
+**Запрещённые формулировки** — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». Вместо них — конкретное событие: «в 7 лет видел, как дом сгорел, а пожарные не приехали вовремя».
 
 ### Anti-pattern / Solution
 
@@ -185,15 +186,15 @@
 
 ```
 GHOST: Брошен в архиве, воспитан документами. Инъекция живого документа начала распад.
-  ↓ объясняет
+ ↓ объясняет
 LIE: «Если я поглощу достаточно — стану цельным»
-  ↓ защищает от боли пустоты
+ ↓ защищает от боли пустоты
 FLAW: Поглощает чужое прошлое, после каждого теряет часть себя
-  ↓ поведение из LIE (заполнение = решение)
+ ↓ поведение из LIE (заполнение = решение)
 NEED: Принять, что полноценности не существует. Выбрать, как растворяться — в функции или в диссонансе.
-  ↑ FLAW мешает (поглощение вместо принятия)
+ ↑ FLAW мешает (поглощение вместо принятия)
 WANT: Стать цельным — заполнить пустоты внутри
-  ↑ совместимо с LIE («я пуст, поэтому должен заполниться»)
+ ↑ совместимо с LIE («я пуст, поэтому должен заполниться»)
 ```
 
 **Правило:** для простых персонажей GHOST и LIE могут быть неявными. Но если используется полная цепочка — она должна быть логически связана. Проверьте: GHOST объясняет LIE? LIE защищает от боли GHOST? FLAW — прямое поведение из LIE?
@@ -275,15 +276,15 @@ FLAW (см. §4.4): «Отталкивает людей сарказмом, ко
 
 ```
 GHOST: Предательство редактора
-  ↓ объясняет
+ ↓ объясняет
 LIE: «Мне не нужно ничьё одобрение»
-  ↓ защищает от боли
+ ↓ защищает от боли
 FLAW: Отталкивает людей сарказмом когда сближается
-  ↓ поведение из LIE
+ ↓ поведение из LIE
 NEED: Принятие — связь без стены
-  ↑ FLAW мешает
+ ↑ FLAW мешает
 WANT: Доказать правоту самостоятельно
-  ↑ совместимо с LIE
+ ↑ совместимо с LIE
 ```
 
 **Cross-ref:** поэлементные значения Елены — §4.2 (GHOST), §4.3 (LIE), §4.4 (FLAW), §4.5 (NEED), §4.6 (WANT). Полная цепочка Выщербленного — §4.7. GHOST Layers Выщербленного — §4.11.
@@ -307,7 +308,7 @@ WANT: Доказать правоту самостоятельно
 
 SPINE-профиль построен и проверен на консистентность. Психологические модели — OCEAN и Enneagram — **НЕ генерируют SPINE**, а **ВАЛИДИРУЮТ** его. Если SPINE согласуется с OCEAN и Enneagram — он надёжен. Если противоречит — перепроверьте каузальную цепь.
 
-**Cross-ref:** Part 5 — `[ref: part_05.md]` (Canon, planned iter 16).
+**Cross-ref:** Part 5 — `[ref: part_05.md]`.
 
 ---
 
@@ -353,81 +354,5 @@ SPINE-профиль построен и проверен на консисте�
 
 **RECOMMENDATION:** Не всем персонажам нужны 3 GHOST Layers. Если backstory простая — достаточно одного GHOST. См. Елена (§4.2) как canonical пример одиночного GHOST.
 
----
+**Synthesis:** SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без SPINE Anchors — набор случайных правил.
 
-## Что вы теперь умеете (resume)
-
-- Строить полный SPINE-профиль: GHOST → LIE → FLAW → NEED → WANT (§4.1–§4.6).
-- Проверять внутреннюю консистентность SPINE-цепочки (§4.9).
-- Выводить Behavioral Anchors из SPINE-элементов (§4.8).
-- Понимать 3-tier структуру GHOST Layers (§4.11).
-- Навигировать от GHOST к полной карточке через SPINE Navigation (§4.10).
-
----
-
-## Cross-references из других Parts
-
-- `p1_structure_overview` — правило «Психология только в Description» (§1.4 #3) ссылается на §4.1 SPINE Overview.
-- `p2_behavioral_anchors` — §2.2 (Behavioral Anchors) ссылается на §4.4 FLAW (Anchors и FLAW — конкретные действия, не прилагательные).
-- `p3_voice_isolation` — §3.8 Bridge ссылается на §4.1 SPINE Overview; §3.4 (FLAW проявление критерий) ссылается на §4.4 FLAW.
-- `p5_ocean_basics` / `p5_enneagram_basics` — §5.X (LIE column) ссылается на §4.3 LIE; §5.1 валидация SPINE referenced в §4.10.
-- `p6_cot` — §6.2 intro (SPINE causal chain) и §6.4/§6.5 (Tier 2/3 GHOST-link, пример Выщербленного) ссылаются на §4.1 SPINE Overview, §4.2 GHOST, §4.3 FLAW.
-- `p7a_core_directives` — Consequence Driven (CORE DIRECTIVE #6) referenced в §4.8; §7A.13 (Шаг 4 — Заполнение Description) ссылается на §4.1 SPINE Overview.
-- `p7b_lorebook_an` — §7B.3 (GHOST-факты candidates), §7B.4 (GHOST-связанные триггеры), §7B.5 (Fatigue Emulation RULE) ссылаются на §4.2 GHOST.
-- `p8_antipatterns` — §8.9 AP-8 (FLAW-linked Anchors) ссылается на §4.8 SPINE→Anchors mapping; §8.10 AP-9 (broken SPINE) ссылается на §4.7 full chain + §4.9 SPINE Check (canonical Elena example).
-- `p9_test_requirements` — §9.3 (Description checks) ссылается на §4.X SPINE; §9.5 (symptom «слишком мягкий» → §4.X SPINE→Anchors; symptom «OOC моменты» → §4.9 SPINE Check).
-- `p10_vysherblenny` — полная карточка Выщербленного referenced в §4.7, §4.11.
-- `p10_elena` — полная карточка Елены (поэлементно в §4.2–§4.6).
-- `p10_omnis` — карточка Омнис-Зета (§10.3) ссылается на §4.11 GHOST Layers (Tier 1/2/3).
-
----
-
-## Migration Notes (iter 8 — applied 2026-06-23)
-
-Миграция `src/master/part_04.html` против этого Canon выполнена в iter 8. Результат: 777 → 676 строк (-13%). Build PASS, validate:master PASS, qa без регрессий.
-
-**Принцип применённый:** при выборе «удалить текст или визуализацию» — визуализация сохранялась, удалялся dry-дублирующий текст (по явному предпочтению пользователя).
-
-| Что в master HTML | Действие | Статус | Причина |
-|-------------------|----------|--------|---------|
-| `<div class="mermaid">` в p4_spine_overview | Удалить | ✅ DONE | Дублирует VS-EMBED E05 (chain показан визуально) |
-| `<div class="infographic inf-pipeline">` в p4_spine_overview | Удалить | ✅ DONE | Дублирует VS-EMBED E05 |
-| `<div class="infographic inf-pipeline">` в p4_spine_full_chain | Удалить | ✅ DONE | Дублирует VS-EMBED E05 |
-| `<div class="infographic">` (mnemonic pipeline) в p4_spine_mapping | ~~Удалить~~ Оставить | ⚠️ DEVIATED | Mнемоническая визуализация (GHOST→ТРИГГЕР, LIE→PSYCHOLOGICAL ANCHOR и т.д.) — комплементарна детальной таблице ниже, не дублирует. Метки отличаются от формальных Anchor type names в таблице. По предпочтению пользователя «viz > dry text» — сохранена. |
-| `<div class="infographic inf-pipeline">` в p4_spine_navigation | ~~Заменить на `<ol>`~~ Оставить | ⚠️ DEVIATED | Unique pipeline визуализация следующих Parts (1→5→6→7A/B→10). Не дублирует VS-EMBED. По предпочтению пользователя — сохранена как визуализация, а не compact список. |
-| `<div class="infographic inf-pipeline">` в p4_ghost_layers (G1/G2/G3 + periods) | Удалить | ✅ DONE | Дублирует VS-EMBED E06 (периоды G1/G2/G3 + роли есть в HTML labels E06) |
-| Пере-объяснение цепочки GHOST → LIE → FLAW → NEED → WANT в p4_spine_overview | Сжать | ✅ DONE | 2 абзаца (строки 145, 162 оригинала) сжаты до 1 предложения + cross-ref на §4.2–§4.6. Цепочка показана в VS-EMBED E05 выше. |
-| Таблица "Примеры GHOST" в p4_ghost (4 строки) | Сократить до 3 | ⚠️ PARTIAL | Удалена 4-я строка (forward-ref "GHOST Layers: 3 уровня" — структурно несогласована с таблицей примеров, дублирует §4.11). 3 строки (Елена primary, Выщербленный, Елена secondary) сохранены — все уникальные примеры. Canon рекомендовал 2, но secondary Elena содержит уникальный сценарий (пожар в детстве) — оставлен. |
-| Таблица "Примеры LIE" в p4_lie (4 строки) | ~~Сократить до 2~~ Оставить 4 | ⚠️ DEVIATED | Все 4 строки уникальны (variant Выщербленного "Пустота заполняема" не повторяется elsewhere). По предпочтению «очень деликатно» — не удалены. |
-| Таблица FLAW "❌ Плохой FLAW / ✅ Хороший FLAW" | Оставить | ✅ DONE | Unique comparison data, оставлена как в Canon |
-| Pre/code пример Выщербленного в p4_spine_full_chain | Оставить | ✅ DONE | Canonical, оставлен как в Canon |
-| Pre/code пример Елены в p4_spine_check | Оставить | ✅ DONE | Canonical consistency check demo, оставлен как в Canon |
-| Orphan `<p>` между p4_spine_navigation `</section>` и VS-EMBED E06 (строка 599 оригинала) | Удалить | ✅ BONUS | Content outside `<section>` (KI#13 warning). Дублировала intro p4_ghost_layers (строка 630 оригинала). Удалена — fixes 1 из 23 "content outside section" warnings. |
-
-**Итог миграции:** 4 дублирующих визуализации удалены (mermaid + 3 inf-pipeline), 1 orphan paragraph удален, 1 forward-ref строка таблицы удалена, 2 абзаца re-explanation сжаты до 1 предложения. 2 unique infographic сохранены (deviation от Canon, по предпочтению пользователя viz > text). LIE таблица сохранена полностью (deviation, все 4 строки уникальны). Build PASS, validate:master PASS, qa без новых critical findings.
-
----
-
-## DGA Phase 2 fix (iter 30 — applied 2026-07-08)
-
-**KI#18-D FIXED.** Deployed Guide Audit Phase 2 — дедупликация intro параграфа `p4_spine_overview` против VS-EMBED E05 (SPINE Framework hex-chain) выше. Iter 8 уже сжал 2 абзаца re-explanation до 1 предложения, но в intro оставалось упоминание «фреймворк из 5 элементов» (показано в viz hexagons).
-
-| # | Что в master HTML | Действие | Статус | Причина |
-|---|-------------------|----------|--------|--------|
-| 1 | `<p>` intro «...SPINE — фреймворк из 5 элементов, связывающих прошлое персонажа с его поведением.» → trimmed до «...SPINE связывает прошлое персонажа с его поведением (структура показана в VS-EMBED E05 выше).» | Сжать | DONE (iter 30) | Pattern KI#18-A/B/C/I/F: viz > dry text. Убрано «фреймворк из 5 элементов» (5 hexagons уже показаны в viz E05). Сохранён unique angle «связывающих прошлое с поведением» (не в viz). Добавлен explicit cross-ref к E05. |
-
-**Result:** `src/master/part_04.html`: 670 → 670 строк (0 net — single-line edit, no row count change). Принцип `viz > dry text` — упоминание «5 элементов» убрано (видно в viz hexagons), сохранён unique angle «связывает прошлое с поведением» + cross-ref к E05.
-
-### Validation gates (iter 30 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, baseline warnings (23 — KI#13/VS-EMBED baseline, no regression, no part_04 new warnings).
-- [x] `pnpm run build` — SUCCESS, hash `fd3d96d3` unchanged.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors, 13 warnings baseline.
-- [x] `pnpm run qa:csp` — pass.
-- [x] `pnpm run qa:bundle` — pass (7.2KB).
-- [x] `pnpm run qa:doc-versions` — pass.
-- [x] Front-matter updated: `Last synced: 2026-07-08 (iter 30 — DGA Phase 2 fix KI#18-D)`, `Migration status: ✅ MIGRATED (iter 8) + ✅ iter 30 DGA fix (KI#18-D)`.
-
-**Note:** Панель «Причинно-следственная цепь» внутри VS-EMBED E05 (master HTML lines 122-136) НЕ редактировалась — она часть стандартизованного визуального элемента E05. Panel добавляет UNIQUE контент: русские переводы терминов (глубокая травма, ложное убеждение etc.) + causality verbs (порождает/создаёт/двигает/маскируемое) + dynamics insight «WANT сходится к NEED». Trimming panel deviated бы от canonical E05 source (`visual-system/elements/E05-spine-framework.html` + `visual-system/integration/component-extracts/E05-visual.html`). По принципу «better to underdo than to break» — panel оставлена как есть.

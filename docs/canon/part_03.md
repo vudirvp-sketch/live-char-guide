@@ -1,16 +1,11 @@
-# Part 3: Voice and Isolation (Голос и изоляция)
-
-> **Canonical source for:** `src/master/part_03.html` (452 → 452 строк, 8 секций)
-> **VS elements (embedded):** E07 (Voice Influence Hierarchy)
-> **Sections (8):** `p3_voice_isolation`, `p3_influence_hierarchy`, `p3_examples_rules`, `p3_examples_quality`, `p3_greeting_ref`, `p3_voice_leak`, `p3_joker_case`, `p3_multi_char`
-> **Last synced:** 2026-06-24 (iter 14 — Canon created + master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 14)
-
 ---
-
-[VS: E07 — Voice Influence Hierarchy. Сгруппированная столбчатая диаграмма влияния различных блоков карточки на голос персонажа для 3 классов моделей (12B / 32B+ / API). 6 строк (Недавний чат / Examples / Greeting / Author's Note / Description / System Prompt) с разделённой осью: верхняя часть — Недавний чат на сжатой шкале (~75–85% доминация), нижняя часть — источники карточки на увеличенной шкале. Description на 12B помечен ✕ 0% ЗАПРЕЩЕНО. Замещает текстовое объяснение иерархии влияния. Inset-box «Хранилище vs Влияние» объясняет разницу между тем, где голос записан, и тем, что формирует поведение модели.]
-
-**Назначение Part 3:** ввести Voice Isolation — правило разделения Voice (голос) и описания. Voice задаётся ТОЛЬКО в Examples и Greeting, никогда в Description. Здесь же — иерархия влияния источников на голос, правила написания Examples, система уровней качества Examples, Voice Leak (утечка голоса), мульти-персонажные примеры.
+canonical_for: —
+vs_embedded: none
+vs_cross_ref: none
+sections: —
+last_synced: —
+migration_status: —
+---
 
 ---
 
@@ -110,9 +105,13 @@ Example:
 
 `data-section: p3_examples_quality`
 
-Система оценки качества Examples по 6 критериям. Три критерия оценивают сами Examples, три — карточку в целом, но проявляются они через Examples.
+Система оценки качества Examples по 6 критериям. Три критерия оценивают сами Examples, три — карточку в целом, но проявляются они через Examples. Качество оценивается как **Quality Grade A / B / C** (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10):
 
-| Критерий | Tier 1 (✓) | Tier 2 (⚠) | Tier 3 (✗) | Относится к |
+- **Grade A (✓)** — целевой уровень качества.
+- **Grade B (⚠)** — допустимо, но требует доработки.
+- **Grade C (✗)** — критическое отклонение, обязательно к исправлению.
+
+| Критерий | Grade A (✓) | Grade B (⚠) | Grade C (✗) | Относится к |
 |----------|-----------|-----------|-----------|-------------|
 | **Голос** | Уникальный, узнаваемый | Узнаваем, но с чужими паттернами | Генерический, без характера | Examples |
 | **Телесность** | Физическая реакция в каждом | Есть, но не всегда | Отсутствует | Карточка в целом |
@@ -123,9 +122,9 @@ Example:
 
 **RECOMMENDATION:** Критерии «Телесность», «Anchor Price» и «FLAW проявление» оценивают карточку в целом, но проявляются через Examples. Если Example не показывает Anchor Price — проблема может быть in the Anchor, а не в Example.
 
-### До/После: Tier 1 vs Tier 3
+### До/После: Grade A vs Grade C
 
-| Tier 3 (плохо) | Tier 1 (хорошо) |
+| Grade C (плохо) | Grade A (хорошо) |
 |----------------|------------------|
 | «Она почувствовала грусть и сказала ему об этом.» *(Генерический голос, нет телесности, нет Anchor Price, нет FLAW-проявления.)* | *Она отложила чашку и посмотрела в окно. Дождь барабанил по стеклу.* «Опять. Третий день подряд.» *(Уникальный голос, физическая реакция, наблюдаемое действие, конкретная деталь.)* |
 
@@ -135,7 +134,7 @@ Example:
 
 `data-section: p3_greeting_ref`
 
-**Greeting Message** — начальное сообщение персонажа. Задаёт место, время и тон. Полный алгоритм написания Greeting (Sensory Anchor → тело FLAW → реплика → крючок), пример Елены и правила длины → `[ref: part_07b.md §7B.X — Greeting Message]` (Canon planned iter 16).
+**Greeting Message** — начальное сообщение персонажа. Задаёт место, время и тон. Полный алгоритм написания Greeting (Sensory Anchor → тело FLAW → реплика → крючок), пример Елены и правила длины → `[ref: part_07b.md §7B.X — Greeting Message]`.
 
 ---
 
@@ -251,65 +250,3 @@ Voice Bleed — ошибка, при которой голоса персона�
 *пауза, в которой он забывает, что хотел сказать*
 "Не приближайся. Это... не рекомендуется."
 ```
-
-**Bridge:** Якоря и Voice (голос) управляют поверхностным поведением. Но поверхностное поведение без психологической глубины создаёт неконсистентных персонажей — добрых в одной сцене, жестоких в следующей, без внутренней логики. SPINE предоставляет эту логику: причинную цепочку от формирующей травмы к текущему желанию → `[ref: part_04.md §4.1 — SPINE Overview]`.
-
-### Что вы теперь умеете
-
-- Применять правило Voice Isolation: голос только в Examples и Greeting.
-- Понимать иерархию влияния: SP > Description > Examples > Greeting.
-- Писать Examples, демонстрирующие голос персонажа.
-- Обнаруживать и исправлять Voice Leak и Narrator Bleed.
-- Работать с мульти-персонажными Examples (Character Markers).
-
----
-
-## Cross-references из других Parts
-
-- `p2_basic_anchors` — Behavioral Anchors, referenced в §3.4 (Anchor Price критерий).
-- `p4_spine_overview` — SPINE, referenced в §3.8 bridge.
-- `p4_flaw` — FLAW, referenced в §3.4 (FLAW проявление критерий).
-- `p7b_greeting` — Greeting Message, referenced в §3.5 (Canon planned iter 16).
-- `p8_ap11_voice_bleed` — AP-11 Voice Bleed, referenced в §3.6 (Cross-ref).
-- `p9_basic_checklist` — Diagnostics checklist, references p3 (Examples checks).
-- `p9_symptom_table` — Symptom table, references p3 (Voice Isolation, Examples Rules).
-- `p9_decision_tree` — Decision tree, references p3 (Voice Leak, Examples count).
-- `p10_elena` — Elena full card (Canon planned iter 16).
-- `p10_vyshcherblenny` — Vyshcherblenny full card (Canon planned iter 16).
-
----
-
-## Migration Notes (iter 14 — applied 2026-06-24)
-
-Миграция `src/master/part_03.html` против этого Canon выполнена в iter 14. Результат: 452 → 452 строк (0, ~0%). Build PASS, validate:master PASS, qa без регрессий.
-
-**Принцип применённый:** `viz > dry text` (iter 8) — визуализация = замещение, не дополнение; уникальные визуализации не удаляются. Применяется «очень деликатно».
-
-**Результат миграции:** Part 3 не имеет кандидатов на сжатие. Все секции содержат уникальный контент: 5 таблиц с уникальными данными (Voice Isolation drift, Influence Hierarchy, Examples count, Tier Quality 6 критериев, Voice Leak variants, Character Markers), 4 RULE callouts, 2 RECOMMENDATION/EXAMPLE callouts, 2 diff-view (Tier 1 vs Tier 3, Voice Leak до/после), 2 ILLUSTRATION `<pre><code>` blocks (multi-char scene + Voice Bleed examples), 1 TEMPLATE pre (Examples format). Контент плотный, дубликатов не найдено — `<pre class="plain-copy">` блоки (Tier Quality + Voice Leak до/после) являются accessibility-fallback для diff-view визуализаций (не для VS-EMBED), сохранены как part of existing pattern.
-
-| # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
-|---|-------------------|----------|--------|--------------------------|
-| 1 | VS-EMBED E07 (Voice Influence Hierarchy grouped bar chart + Storage vs Influence inset) | Оставить | DONE | Canonical VS-marker — preamble Part 3 |
-| 2 | `<section data-section="p3_voice_isolation">` h2 + intro + 4-row drift table + RULE callout | Оставить | DONE | Canonical Voice Isolation — §3.1 |
-| 3 | `<section data-section="p3_influence_hierarchy">` h3 + intro + 6-row Influence Hierarchy table + RULE callout + EXAMPLE callout (WRONG vs CORRECT Description) | Оставить | DONE | Canonical Influence Hierarchy — §3.2 |
-| 4 | `<section data-section="p3_examples_rules">` h3 + intro + RULE callout (Voice Contamination) + 3-row count table + structure list + RULE callout (<START> requirement) + TEMPLATE pre | Оставить | DONE | Canonical Examples Rules — §3.3 |
-| 5 | `<section data-section="p3_examples_quality">` h3 + intro + 6-row Tier Quality table + RECOMMENDATION callout + ILLUSTRATION diff-view (Tier 1 vs Tier 3) + plain-copy fallback | Оставить | DONE | Unique Tier Quality system — §3.4 |
-| 6 | `<section data-section="p3_greeting_ref">` h3 + cross-ref paragraph | Оставить | DONE | Canonical cross-ref — §3.5 |
-| 7 | `<section data-section="p3_voice_leak">` h3 + intro + 2-row variants table + antipattern-card (Narrator Bleed vs Voice) + ILLUSTRATION diff-view (Voice Leak до/после Выщербленный) + plain-copy fallback + 4-item causes list + Cross-ref to AP-11 | Оставить | DONE | Unique Voice Leak variants + before/after — §3.6 |
-| 8 | `<section data-section="p3_joker_case">` h3 + 2 paragraphs + RULE callout + practical test paragraph + Cross-ref | Оставить | DONE | Unique Joker Case rule — §3.7 |
-| 9 | `<section data-section="p3_multi_char">` h3 + intro + Character Markers paragraph + 2-row markers table + Voice Bleed paragraph + 2 EXAMPLE callouts (ОШИБКА + ПРАВИЛЬНО) + ILLUSTRATION `<pre><code>` multi-char scene + bridge paragraph + part-resume list | Оставить | DONE | Unique multi-char examples + Character Markers — §3.8 |
-
-### Compression results (iter 14)
-
-0 кандидатов на сжатие. Part 3 — плотный контент без дубликатов. Все 9 секций сохранены без изменений.
-
-Итого: 452 → 452 строк (0, ~0%). Принцип `viz > dry text` — все уникальные таблицы, RULE/RECOMMENDATION/EXAMPLE callouts, diff-view blocks, multi-char examples сохранены. `<pre class="plain-copy">` блоки (2 шт.) — accessibility-fallback для diff-view визуализаций, не дубликаты VS-EMBED, сохранены как часть существующего паттерна.
-
-### Validation gates (iter 14 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, baseline warnings (= KI#13 baseline, no regression).
-- [x] `pnpm run build` — SUCCESS.
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — pass.
-- [x] `pnpm run lint` — 0 errors.
-- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 14)`.

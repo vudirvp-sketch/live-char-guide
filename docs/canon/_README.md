@@ -126,6 +126,21 @@ docs/canon/
 - ✅ VS-маркеры вместо визуализаций
 - ❌ Устаревшие `infographic`, `mermaid` — не переносим (они подлежат удалению в iter 8+)
 
+### 3.9 Callout labels — English by design
+
+Метки callouts остаются на английском намеренно — это semantic anchors для модели при генерации карточек. Они не русифицируются:
+
+- `**RULE:**` — каноническое правило (нарушение = регрессия качества)
+- `**RECOMMENDATION:**` — мягкая рекомендация
+- `**EXAMPLE:**` — пример выполнения
+- `**ILLUSTRATION:**` — визуальная демонстрация (diff-view, multi-char scene)
+- `**TEMPLATE:**` — шаблон для копирования
+- `**Bridge:**` — narративный переход между Parts (только 1-2 на гайд, не во всех Parts)
+- `**Synthesis:**` — 1-2 предложение summary в конце Part (только для Parts с major conceptual shift)
+- `**Cross-ref:**` — pointer на связанную секцию в другом Part
+
+Тело callouts — на русском (это контент для читателя). Метки — на английском (это parsing anchors для модели).
+
 ---
 
 ## 4. Workflow: Canon-first миграция

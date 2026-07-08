@@ -1,14 +1,11 @@
-# Part 7B: Lorebook, Greeting & Compatibility
-
-> **Canonical source for:** `src/master/part_07b.html` (424 строки, 5 секций; iter 25: 371 → 424, +53 — E18 VS-EMBED markup)
-> **VS elements (embedded):** E18 — Greeting Algorithm (iter 25, replaced textual `infographic inf-pipeline` block in `p7b_greeting`). Source: `visual-system/elements/E18-greeting-algorithm.html`.
-> **Sections (5):** `p7b_structured_inject`, `p7b_greeting`, `p7b_lorebook_basics`, `p7b_lorebook_mechanics`, `p7b_lorebook_advanced`
-> **Last synced:** 2026-07-01 (iter 25 — E18 VS-EMBED integrated, textual infographic replaced)
-> **Migration status:** ✅ MIGRATED (iter 16) + ✅ E18 integrated (iter 25)
-
 ---
-
-**Назначение Part 7B:** технические элементы карточки — Structured Inject (XML-теги в Author's Note), Greeting Message (первое сообщение), Lorebook (база знаний с триггерами). Part 7A покрывает System Prompt и сборку; Part 7B покрывает рантайм-инъекции контекста.
+canonical_for: —
+vs_embedded: none
+vs_cross_ref: none
+sections: —
+last_synced: —
+migration_status: —
+---
 
 ---
 
@@ -214,9 +211,9 @@
 
 ```
 <instruction>
-  <trigger>{{user}} задаёт личный вопрос</trigger>
-  <response>{{char}} уходит от ответа — меняет тему.</response>
-  <cost>Пауза, нервный тик — дёрнул плечом.</cost>
+ <trigger>{{user}} задаёт личный вопрос</trigger>
+ <response>{{char}} уходит от ответа — меняет тему.</response>
+ <cost>Пауза, нервный тик — дёрнул плечом.</cost>
 </instruction>
 ```
 
@@ -240,7 +237,7 @@
 | **Мета-лор** (Meta-Lore) | `keyword: ["config", "log", "bug", "prompt"]` `probability: 10–15%` `cooldown: 25+` | Персонаж интерпретирует технические термины как внутриигровые артефакты, магию или психические симптомы. | Низкая вероятность + высокий `cooldown` обеспечивают редкость события. Модель переосмысляет технический язык через призму сеттинга. |
 | **Ложная память** (False Memory) | `range: 42` или `keyword: "you remember"` `content`: псевдо-цитата из «прошлого» | Персонаж ссылается на событие, которого не было. Создаёт психологическое напряжение и элемент непредсказуемости. | Модель способна правдоподобно конфабулировать — механика применяется строго дозированно. |
 
-**RULE (Эмуляция усталости — критическое предупреждение):** При использовании этой механики GHOST Anchors (`[ref: part_04.md §4.2 — GHOST]`) **обязательно** должны быть явно пересказаны внутри `content` этой записи. Без этого Behavioral Anchors (поведенческие якоря) деградируют вместе с поверхностными поведениями.
+**RULE (Эмуляция усталости — критическое предупреждение):** При использовании этой механики GHOST Anchors (`[ref: part_04.md §4.2 — GHOST]` **обязательно** должны быть явно пересказаны внутри `content` этой записи. Без этого Behavioral Anchors (поведенческие якоря) деградируют вместе с поверхностными поведениями.
 
 **RULE (Ложная память — только для экспертов):** Риск Одиночное использование. Требует предварительного согласия пользователя. Злоупотребление разрушает достоверность лора. Конфликтует с принципом психологического ядра при повторном использовании.
 
@@ -260,70 +257,3 @@
 - [ ] Эмуляция усталости: GHOST Anchors явно пересказаны в content.
 - [ ] Ложная память: отмечена как одноразовая, с согласия пользователя.
 - [ ] Действия/мысли `{{user}}` отсутствуют во всех content-полях.
-
-**Bridge:** Карточка собрана. Перед тестированием научитесь распознавать наиболее частые ошибки — паттерны, которые выглядят корректно, но незаметно ломают консистентность персонажа. Каждый анти-паттерн содержит диагностику и ссылку на каноническое исправление. → `[ref: part_08.md]`.
-
-### Что вы теперь умеете
-
-- Настраивать Lorebook: триггеры, глубина, вероятность, позиция вставки.
-- Писать Greeting Message по алгоритму: Sensory Anchor → тело FLAW → реплика → крючок.
-- Использовать Structured Inject для XML-тегов в Author's Note.
-- Избегать конфликтов Lorebook-записей (AP-13).
-- Понимать механику Lorebook: постоянный контекст vs. триггерный.
-
----
-
-## Cross-references из других Parts
-
-- `p2_basic_anchors` — Behavioral Anchors, referenced в §7B.4 (Anti-godmoding rule for content).
-- `p4_ghost` — GHOST, referenced в §7B.3 (GHOST-факты candidates), §7B.4 (RECOMMENDATION GHOST-связанные триггеры), §7B.5 (Fatigue Emulation RULE).
-- `p7a_authors_note` — Author's Note, referenced в §7B.1 (Structured Inject technique).
-- `p7a_system_prompt` — System Prompt, referenced в §7B.1 (Structured Inject rules — не дублируйте SP).
-- `p8_ap13_lorebook_conflict` — AP-13 Lorebook Conflict, referenced в §"Что вы теперь умеете" (AP-13 avoid).
-- `p9_basic_checklist` — Diagnostic checklist, references Greeting checks (§7B.2 rules).
-- `p10_omnis` — Омнис-Зета card, includes 5 Lorebook records (binary_cant, machine_spirit, ghost_child, ghost_first_aug, ghost_obsolescence).
-- `p10_vysherblenny` — Выщербленный card, includes 5 Lorebook records (Сангвис, имя, Зеркало, Вентора, Счётчик вырезаний).
-
----
-
-## Migration Notes (iter 16 — applied 2026-06-24)
-
-Миграция `src/master/part_07b.html` против этого Canon выполнена в iter 16. Результат: 371 → 371 строк (0%, no compression needed). Build PASS, validate:master PASS, qa без регрессий.
-
-**Принцип применённый:** `viz > dry text` (iter 8) — визуализация = замещение, не дополнение; уникальные визуализации не удаляются. Применяется «очень деликатно».
-
-| # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
-|---|-------------------|----------|--------|--------------------------|
-| 1 | `<section data-section="p7b_structured_inject">` h3 + intro + h4 Правила + 3-bullet list + h4 Пример + ILLUSTRATION label + pre code | Оставить | DONE | Canonical §7B.1 — unique Structured Inject technique |
-| 2 | `<section data-section="p7b_greeting" data-toc-nav>` h3 + intro + VS-EMBED E18 (4-step pipeline: Sensory Anchor → Тело FLAW → Реплика → Крючок) + Sensory Anchor paragraph + `<details>` "Разобранный пример: Greeting Елены" + h4 Правила Greeting + 4-bullet list | Оставить + E18 (iter 25) | DONE | Canonical §7B.2 — VS-EMBED E18 replaced textual `infographic inf-pipeline` (iter 25, migration principle "viz > dry text" — VS-EMBED canonical visualization). Sensory Anchor paragraph + Elena example + rules list — unique content, retained. |
-| 3 | `<section data-section="p7b_lorebook_basics" data-toc-nav>` h3 + intro + h4 Структура записи + 4-row table + h4 Рекомендованные параметры + 3-row params table + RECOMMENDATION callout + h4 Правила Lorebook + 3-bullet list + 3 `<details>` examples (пожар, Марина, город) + `<details>` EVENT compatibility 5-row table + bridge paragraph | Оставить | DONE | Canonical §7B.3 — unique Lorebook basics + 3 Elena examples + EVENT compatibility table |
-| 4 | `<section data-section="p7b_lorebook_mechanics">` h3 + intro + RECOMMENDATION callout + RULE callout + h4 Таблица механик + 3-row mechanics table + h4 Практика + 6-row practice table + `<details>` Structured Inject в content + 2 pre code blocks + bridge paragraph + RECOMMENDATION callout | Оставить | DONE | Canonical §7B.4 — unique mechanics tables + Structured Inject in content example |
-| 5 | `<section data-section="p7b_lorebook_advanced">` h3 + intro + h4 Таблица продвинутых механик + 3-row advanced mechanics table + RULE callout (Fatigue) + RULE callout (False Memory) + h4 Контекстные бюджеты + 3-row context budget table + `<details>` Чеклист интеграции + bridge paragraph + part-resume | Оставить | DONE | Canonical §7B.5 — unique advanced mechanics + 2 critical RULE callouts + integration checklist |
-
-### Compression results (iter 16)
-
-0 кандидатов на сжатие обработано. Контент плотный, все секции содержат уникальный контент:
-
-- §7B.1 — Structured Inject technique (unique XML-in-AN pattern).
-- §7B.2 — Greeting algorithm + 4 rules + Elena example (infographic = abstract algorithm, example = concrete application — complement, не duplicate).
-- §7B.3 — Lorebook basics + 3 Elena examples (пожар/Марина/город — все уникальные данные) + EVENT compatibility (5-row table, unique cross-frontend reference).
-- §7B.4 — 3 mechanics (Range-Cascade / Combo-Trigger / Context Filter) + 6-row practice table + Structured Inject in content example.
-- §7B.5 — 3 advanced mechanics (Fatigue / Meta-Lore / False Memory) + 2 critical RULE callouts + 3-row context budget + integration checklist.
-
-Итого: 371 → 424 строк (+53, E18 VS-EMBED markup). Принцип `viz > dry text` — textual infographic заменена на VS-EMBED E18 (iter 25, canonical visualization). Sensory Anchor paragraph + Elena example + rules list — retained (unique content).
-
-### iter 25 update — E18 VS-EMBED integration
-
-В iter 25 textual `infographic inf-pipeline` block (lines 33–61 в pre-iter-25 `src/master/part_07b.html`) заменён на VS-EMBED E18 (Greeting Algorithm). E18 — new VS element: 4-step pipeline (Sensory Anchor → Тело FLAW → Реплика → Крючок) с SVG arrows, reuse E02 `.pipeline-*` classes + new `.pipeline-node__code` for technique sequence line. Step 2 (Тело FLAW) uses `.pipeline-node__box--spine` (violet — SPINE connection). Standalone prototype: `visual-system/elements/E18-greeting-algorithm.html`. Component extracts: `visual-system/integration/component-extracts/E18-{visual.html,styles.css,script.js}`. E18 styles appended to `src/assets/vs-styles.css` SECTION 5 (header updated E01–E17 → E01–E18).
-
-### Validation gates (iter 25 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, 0 inline styles, expected content-outside-section warnings (same as E02 in part_07a).
-- [x] `pnpm run build` — SUCCESS. Hash `fd3d96d3` unchanged (shell index.html not modified).
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors (13 warnings pre-existing).
-- [x] `pnpm run qa:csp` — PASS (0 inline scripts).
-- [x] `pnpm run qa:bundle` — PASS (7.2KB).
-- [x] `pnpm run qa:doc-versions` — PASS.
-- [x] Front-matter updated: `Last synced: 2026-07-01 (iter 25)`, `Migration status: ✅ MIGRATED (iter 16) + ✅ E18 integrated (iter 25)`.

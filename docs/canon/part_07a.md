@@ -1,13 +1,13 @@
-# Part 7A: System Prompt & Assembly
-
-> **Canonical source for:** `src/master/part_07a.html` (1137 строк, 13 секций)
-> **VS elements (embedded):** E08 (CORE DIRECTIVES), E16 (Author's Note Mechanics), E17 (Sampling Parameters), E02 (Assembly Pipeline)
-> **VS elements (cross-ref only):** E07 (Voice Hierarchy) — referenced inside E16; embedded in Part 3 (`p3_voice_hierarchy`)
-> **Sections (13):** `p7a_system_prompt`, `p7a_core_directives`, `p7a_tone_frame`, `p7a_format_lock`, `p7a_authors_note`, `p7a_sampling_params`, `p7a_model_checklist`, `p7a_ooc_protection`, `p7a_xml_tags`, `p7a_api_blocks`, `p7a_4k_fallback`, `p7a_token_budget`, `p7a_assembly_pipeline`
-> **Last synced:** 2026-06-24 (iter 11 — master HTML migrated)
-> **Migration status:** ✅ MIGRATED (iter 11)
-
 ---
+canonical_for: `src/master/part_07a.html` (1137 строк, 13 секций)
+vs_embedded: E08 (CORE DIRECTIVES), E16 (Author's Note Mechanics), E17 (Sampling Parameters), E02 (Assembly Pipeline)
+vs_cross_ref: E07 (Voice Hierarchy) — referenced inside E16; embedded in Part 3 (`p3_voice_hierarchy`)
+sections: `p7a_system_prompt`, `p7a_core_directives`, `p7a_tone_frame`, `p7a_format_lock`, `p7a_authors_note`, `p7a_sampling_params`, `p7a_model_checklist`, `p7a_ooc_protection`, `p7a_xml_tags`, `p7a_api_blocks`, `p7a_4k_fallback`, `p7a_token_budget`, `p7a_assembly_pipeline`
+last_synced: 2026-06-24 (iter 11 — master HTML migrated)
+migration_status: ✅ MIGRATED (iter 11)
+---
+
+# Part 7A: System Prompt & Assembly
 
 ## 7A.1 System Prompt: Structure and Assembly
 
@@ -15,7 +15,7 @@
 
 **System Prompt (SP)** — контейнер, вставляемый в начало контекста модели. Содержит: Identity Block, Anti-godmoding, CORE DIRECTIVES, SPINE block (в Description, не в SP), Tone Frame, Format Lock.
 
-> **Term disambiguation:** SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI. System Prompt — это КОНТЕЙНЕР; CORE DIRECTIVES — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда; здесь размещаются CORE DIRECTIVES и Tone Frame.
+> **Term disambiguation:** SP = System Prompt, не путать с темпераментом Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI). System Prompt — это КОНТЕЙНЕР; CORE DIRECTIVES — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда; здесь размещаются CORE DIRECTIVES и Tone Frame.
 
 ### Обязательные элементы SP
 
@@ -86,7 +86,7 @@ Format Lock:
 
 **Embodiment First** — это CORE DIRECTIVE #2, которая *предписывает* использовать Embodiment Protocol. **Embodiment Protocol** — это сама последовательность (`State → Body → Sensor → Speech`), описанная в Part 2. Директива = МАНДАТ (всегда используй протокол); Протокол = КАК (последовательность шагов).
 
-**Cross-ref:** `[ref: part_02.md §2.X — Embodiment Protocol]` (Canon, planned iter 14).
+**Cross-ref:** `[ref: part_02.md §2.X — Embodiment Protocol]`.
 
 #### 3. Spatial & Anatomical Lock
 
@@ -159,7 +159,7 @@ Tone: [тональность]. [ограничение].
 
 `data-section: p7a_format_lock`
 
-**Format Lock** — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. **Pattern Matcher** (см. Part 1): два паттерна разметки в одной карточке = произвольное переключение между ними.
+**Format Lock** — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Модель — Pattern Matcher (см. Part 1 §1.4): два паттерна разметки в одной карточке = произвольное переключение между ними.
 
 ### Три системы разметки
 
@@ -169,7 +169,7 @@ Tone: [тональность]. [ограничение].
 | B | — `*действие*` | — речь | — `*отводит взгляд*` — Не сейчас. |
 | C | [действие] | речь | [отводит взгляд] Не сейчас. |
 
-**RULE:** Почему нельзя смешивать — Pattern Matcher: два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.
+**RULE:** Почему нельзя смешивать — модель выступает как Pattern Matcher (см. §1.4 Part 1): два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.
 
 **RULE:** Правило разрешения конфликта — если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.
 
@@ -224,7 +224,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 
 ### Template B: Шаблон AN (4 секции — с GHOST-activation)
 
-Используется, когда персонаж имеет явный GHOST-элемент (см. `[ref: part_04.md §4.2 — GHOST]`). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.
+Используется, когда персонаж имеет явный GHOST-элемент (см. `[ref: part_04.md §4.2 — GHOST]`. Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.
 
 ```
 [State: {current emotional/physical state}]
@@ -303,7 +303,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 | Temperature | 0.6–0.8 | 0.85–1.1 | 0.9–1.0 |
 | Presence Penalty | 0.0 (обязательно) | 0.0 | 0.0 |
 | RepPen | 1.05 | 1.0–1.05 | N/A |
-| Voice Placement | Examples + Greeting<br/>**Никогда в Description** (`[ref: part_03.md §3.X — Voice Isolation]`) | Examples + Greeting<br/>Никогда в Description | Examples + Greeting + AN<br/>Никогда в Description |
+| Voice Placement | Examples + Greeting — **Никогда в Description** (`[ref: part_03.md §3.X — Voice Isolation]`) | Examples + Greeting — Никогда в Description | Examples + Greeting + AN — Никогда в Description |
 | XML Tags | ⚠️ нестабильны | ✓ стабильны | ✓ стабильны |
 | CoT Tier | ✗ | Tier 1 | Tier 2–3 |
 | SP Language | English (критично)¹ | English | English |
@@ -612,7 +612,7 @@ Format Lock:
 
 ### Шаг 4: SPINE
 
-**Что делаете:** Определяете все 5 элементов SPINE: `GHOST→LIE→FLAW→NEED→WANT`. Размещаете в Description, не в SP. (`[ref: part_04.md §4.1 — SPINE Overview]`)
+**Что делаете:** Определяете все 5 элементов SPINE: `GHOST→LIE→FLAW→NEED→WANT`. Размещаете в Description, не в SP. (`[ref: part_04.md §4.1 — SPINE Overview]`
 
 **Результат Елены:**
 ```
@@ -629,7 +629,7 @@ GHOST: Предательство редактора — история, кот�
 
 ### Шаг 5: CoT (при наличии моделей ≥32B/API)
 
-**Что делаете:** Добавляете 1–2 CoT Anchors для ключевых триггеров. Елена не нуждается в GHOST Layers — достаточно простого `<cot>` блока, привязанного к её SPINE. (`[ref: part_06.md §6.X — CoT]`, Canon planned iter 16)
+**Что делаете:** Добавляете 1–2 CoT Anchors для ключевых триггеров. Елена не нуждается в GHOST Layers — достаточно простого `<cot>` блока, привязанного к её SPINE. (`[ref: part_06.md §6.X — CoT]`
 
 **Результат Елены (Tier 2 CoT):**
 ```
@@ -664,8 +664,8 @@ GHOST: Предательство редактора — история, кот�
 Елена — персонаж базового–среднего уровня. Полная карточка (~610 токенов) не требует Lorebook или GHOST Layers. Но если вы хотите расширить её:
 
 - **FLAW-linked Anchors + Embodiment (5–7 Anchors):** Добавьте Anchors, выведенные из SPINE → `[ref: part_04.md §4.8 — SPINE → Anchors]`. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».
-- **OCEAN + Enneagram:** Заполните профиль (`[ref: part_05.md]`, Canon planned iter 16). Елена: `O:72, C:65, E:41, A:38, N:68`. Enneagram: 6w5. Экстремальных полюса: 1 (O=72 > 70). A=38 и N=68 — cautious zone (30-40 / 60-70), напрямую связаны с FLAW и GHOST. Соответствует строгому правилу §5.1.
-- **Lorebook для GHOST-фактов:** Настройте записи для сенсорных триггеров (`[ref: part_07b.md]`, Canon planned iter 16). Пример для Елены: Key «предательство, редактор, Марина, украденная история» → Content «Марина — её редактор. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.».
+- **OCEAN + Enneagram:** Заполните профиль (`[ref: part_05.md]`. Елена: `O:72, C:65, E:41, A:38, N:68`. Enneagram: 6w5. Экстремальных полюса: 1 (O=72 > 70). A=38 и N=68 — cautious zone (30-40 / 60-70), напрямую связаны с FLAW и GHOST. Соответствует строгому правилу §5.1.
+- **Lorebook для GHOST-фактов:** Настройте записи для сенсорных триггеров (`[ref: part_07b.md]`. Пример для Елены: Key «предательство, редактор, Марина, украденная история» → Content «Марина — её редактор. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.».
 - **Author's Note:** Настройте AN для отслеживания WANT→NEED (см. §7A.5). Елена использует Template A (без GHOST-activation, т.к. GHOST простой).
 
 ### Чек-лист перед тестированием
@@ -679,122 +679,5 @@ GHOST: Предательство редактора — история, кот�
 
 Посмотрите полные примеры готовых карточек → Елена | Выщербленный (~1500+ токенов) в Part 10.
 
----
+**Synthesis:** System Prompt — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.
 
-## Что вы теперь умеете (resume)
-
-- Собирать System Prompt с 7 CORE DIRECTIVES (§7A.1–§7A.2)
-- Настраивать Tone Frame и Format Lock (§7A.3–§7A.4)
-- Использовать Author's Note с WANT→NEED инъекцией (§7A.5)
-- Рассчитывать Token Budget по блокам карточки (§7A.12)
-- Выбирать параметры сэмплинга (RepPen ≤ 1.10, PP = 0.0) (§7A.6)
-- Применять OOC Protection и Immersion Boundary (§7A.8)
-- Структурировать Description через XML-теги (§7A.9)
-- Использовать API-специфичные блоки (`<claude_info>`, `[SYSTEM NOTE]`) (§7A.10)
-- Адаптировать карточку для 4K контекста (§7A.11)
-- Проходить полный Конвейер сборки от Description до SP (§7A.13)
-
-**Bridge:** System Prompt — ядро, которое всегда находится в контексте. Но у персонажей есть знания, превышающие Token Budget, и первые впечатления, задающие тон. Lorebook обеспечивает инъекцию знаний по требованию; Greeting Message демонстрирует персонажа в действии. → `[ref: part_07b.md]` (Canon, planned iter 16).
-
----
-
-## Cross-references из других Parts
-
-- `p2_embodiment` — Embodiment Protocol, referenced в §7A.2 (Directive #2).
-- `p3_voice_isolation` — Voice Isolation, referenced в §7A.7 (Voice Placement rule).
-- `p3_voice_hierarchy` — Voice Hierarchy (E07 visual element embedded here), cross-referenced из E16 в §7A.5.
-- `p4_spine_overview` / `p4_spine_mapping` / `p4_ghost` — SPINE framework, referenced в §7A.2 (Directive #6) и §7A.13 (Шаг 4).
-- `p5_ocean_basics` / `p5_enneagram_basics` — Psychology validation, referenced в §7A.13 (дополнительные шаги).
-- `p6_cot_basics` — CoT Anchors, referenced в §7A.13 (Шаг 5).
-- `p7b_lorebook_basics` — Lorebook, referenced в §7A.13 (дополнительные шаги + bridge).
-- `p10_elena` / `p10_vysherblenny` — Полные карточки, referenced в §7A.9 (XML пример Выщербленного) и §7A.13 (walkthrough Елены).
-
----
-
-## Migration Notes (iter 11 — TODO list)
-
-Миграция `src/master/part_07a.html` против этого Canon — задача iter 11. Master HTML = 1168 строк, 13 секций, 4 VS-EMBED (E08, E16, E17, E02). **Принцип `viz > dry text` (iter 8)** — сохраняется: визуализация = замещение, не дополнение; уникальные визуализации не удаляются.
-
-**Рекомендация по разбиению iter 11 на 2 под-итерации:**
-
-- **iter 11a — §7A.1–§7A.7** (p7a_system_prompt, p7a_core_directives, p7a_tone_frame, p7a_format_lock, p7a_authors_note, p7a_sampling_params, p7a_model_checklist) — SP core + sampling + model checklist. 7 секций, ~660 строк master HTML, 3 VS-EMBED (E08, E16, E17).
-- **iter 11b — §7A.8–§7A.13** (p7a_ooc_protection, p7a_xml_tags, p7a_api_blocks, p7a_4k_fallback, p7a_token_budget, p7a_assembly_pipeline) — technical implementation + assembly walkthrough. 6 секций, ~510 строк master HTML, 1 VS-EMBED (E02).
-
-### Migration Notes (iter 11 — DONE)
-
-| # | Что в master HTML | Действие | Статус | Причина / Canonical loc |
-|---|-------------------|----------|--------|--------------------------|
-| 1 | `<div class="callout rule">` RULE: Структура SP-шаблона | Оставить | DONE | Canonical RULE — §7A.1 |
-| 2 | `<pre><code>` SP template | Оставить | DONE | Canonical template — §7A.1 |
-| 3 | VS-EMBED E08 | Оставить | DONE | Canonical VS-marker — §7A.2 |
-| 4 | `<div class="callout rule">` RULE: Правило языка директив | Оставить | DONE | Canonical RULE — §7A.2 |
-| 5 | `<pre><code>` `<CORE_DIRECTIVES>` template | Оставить | DONE | Canonical template — §7A.2 |
-| 6 | `<div class="antipattern-card">` Spatial & Anatomical Lock ❌/✅ | Оставить | DONE | Unique anti-pattern pair — §7A.2 (Directive #3) |
-| 7 | `<pre><code>` CONSEQUENCE DRIVEN expansion | Оставить | DONE | Canonical — §7A.2 (Directive #6) |
-| 8 | `<ol>` Pre-Generation Filter checklist | Оставить | DONE | Canonical — §7A.2 (Directive #7) |
-| 9 | `<div class="callout rec">` Двусторонняя синхронизация | Оставить | DONE | Canonical RECOMMENDATION — §7A.2 |
-| 10 | `<table>` Tone Frame examples | Оставить | DONE | Unique examples table — §7A.3 |
-| 11 | `<div class="callout rec">` Двойная функция Tone Frame | Оставить | DONE | Canonical RECOMMENDATION — §7A.3 |
-| 12 | `<table>` Три системы разметки | Оставить | DONE | Unique comparison table — §7A.4 |
-| 13 | `<div class="callout rule">` RULE: Почему нельзя смешивать | Оставить | DONE | Canonical RULE — §7A.4 |
-| 14 | `<div class="callout rule">` RULE: Правило разрешения конфликта | Оставить | DONE | Canonical RULE — §7A.4 |
-| 15 | `<pre><code>` Format Lock инструкция | Оставить | DONE | Canonical template — §7A.4 |
-| 16 | VS-EMBED E16 | Оставить | DONE | Canonical VS-marker — §7A.5 |
-| 17 | `<table>` Параметры AN | Оставить | DONE | Unique parameters table — §7A.5 |
-| 18 | `<pre><code>` Template A + пример Елены | Оставить | DONE | Canonical — §7A.5 |
-| 19 | `<pre><code>` Template B + пример Выщербленного | Оставить | DONE | Canonical — §7A.5 |
-| 20 | `<ul>` Пояснение секций AN | Оставить | DONE | Canonical — §7A.5 |
-| 21 | VS-EMBED E17 | Оставить | DONE | Canonical VS-marker — §7A.6 |
-| 22 | `<table>` Базовые параметры sampling | Сжать | DONE | Заменён на notes-only список + cross-ref на E17. Дублировал VS-EMBED E17. |
-| 23 | `<div class="callout rule">` RULE: PP = 0.0 | Оставить | DONE | Canonical RULE — §7A.6 |
-| 24 | `<div class="callout rule">` RULE: Ollama и LM Studio hardcoded PP=0.7 | Оставить | DONE | Canonical RULE — §7A.6 |
-| 25 | `<details class="interactive">` Модель-специфичные рекомендации | Оставить | DONE | Unique collapsible table — §7A.6 |
-| 26 | `<table>` Чеклист по типу модели | Сжать | DONE | Заменён на bullet-list ключевых distinctions + cross-ref на E17. Дублировал VS-EMBED E17 checklist-section. |
-| 27 | `<div class="callout rec">` AN и голос | Оставить | DONE | Canonical RECOMMENDATION — §7A.7 |
-| 28 | `<pre><code>` OOC PROTECTION template | Оставить | DONE | Canonical template — §7A.8 |
-| 29 | `<pre><code>` IMMERSION BOUNDARY template | Оставить | DONE | Canonical template — §7A.8 |
-| 30 | `<div class="antipattern-card">` Без/С Immersion Boundary ❌/✅ | Оставить | DONE | Unique anti-pattern pair — §7A.8 |
-| 31 | `<pre><code>` XML structure template | Оставить | DONE | Canonical template — §7A.9 |
-| 32 | `<pre><code>` Полный пример XML Description Выщербленного | Оставить | DONE | Canonical example — §7A.9 |
-| 33 | `<pre><code>` Claude `<claude_info>` template | Оставить | DONE | Canonical template — §7A.10 |
-| 34 | `<pre><code>` GPT `[SYSTEM NOTE]` template | Оставить | DONE | Canonical template — §7A.10 |
-| 35 | `<table>` Токен-лимиты 4K | Оставить | DONE | Unique comparison table — §7A.11 |
-| 36 | `<pre><code>` Минимальный SP (4K) | Оставить | DONE | Canonical template — §7A.11 |
-| 37 | `<pre><code>` Минимальный Description (4K) | Оставить | DONE | Canonical template — §7A.11 |
-| 38 | `<div class="callout rec">` 4K-Fallback recommendation | Оставить | DONE | Canonical RECOMMENDATION — §7A.11 |
-| 39 | `<table>` Лимиты по блокам Token Budget | Оставить | DONE | Canonical table — §7A.12 |
-| 40 | `<div class="callout rule">` RULE: Превышение бюджета | Оставить | DONE | Canonical RULE — §7A.12 |
-| 41 | `<div class="token-calc">` интерактивный калькулятор | Оставить | DONE | Unique interactive widget — §7A.12 |
-| 42 | `<pre class="plain-copy">` Plain-copy пример расчёта | Сжать | DONE | Удалён. Дублировал `<noscript>` fallback. |
-| 43 | VS-EMBED E02 | Оставить | DONE | Canonical VS-marker — §7A.13 |
-| 44 | `<pre><code>` Identity Block Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 1) |
-| 45 | `<pre><code>` Anti-godmoding Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 2) |
-| 46 | `<pre><code>` CORE DIRECTIVES Елены | Сжать | DONE | Заменён на 1-строчный cross-ref → p7a_core_directives. Дублировал template в §7A.2. |
-| 47 | `<pre><code>` Tone Frame + OOC + Format Lock Елены | Оставить | DONE | Unique пример — §7A.13 (Шаг 3, дополнения) |
-| 48 | `<pre><code>` SPINE Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 4) |
-| 49 | `<pre><code>` CoT Anchor Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 5) |
-| 50 | `<table>` Бюджет Елены | Оставить | DONE | Canonical example — §7A.13 (Шаг 6) |
-| 51 | `<ul>` Дополнительные шаги | Оставить | DONE | Canonical — §7A.13 |
-| 52 | `<ul>` Чек-лист перед тестированием | Оставить | DONE | Canonical checklist — §7A.13 |
-| 53 | `<p class="bridge-paragraph">` Bridge to Part 7B | Оставить | DONE | Canonical bridge — §7A.13 |
-| 54 | `<div class="part-resume">` resume list | Оставить | DONE | Canonical resume — §"Что вы теперь умеете" |
-
-### Compression results (iter 11)
-
-4 кандидата на сжатие обработаны:
-
-1. **#22 DONE** — Базовые параметры sampling table → заменён на notes-only `<ul>` список + cross-ref на E17.
-2. **#26 DONE** — Чеклист по типу модели table → заменён на bullet-list ключевых distinctions + cross-ref на E17.
-3. **#42 DONE** — Plain-copy `<pre class="plain-copy">` пример расчёта → удалён (дублировал `<noscript>` fallback).
-4. **#46 DONE** — CORE DIRECTIVES пример в walkthrough Елены → заменён на 1-строчный cross-ref `→ CORE DIRECTIVES (выше)`.
-
-Итого: 1168 → 1137 строк (-31, ~2.7%). Принцип `viz > dry text` — все уникальные таблицы, templates, anti-pattern pairs, RULE/RECOMMENDATION callouts сохранены.
-
-### Validation gates (iter 11 — PASSED)
-
-- [x] `pnpm run validate:master` — 0 errors, 146 warnings (= KI#13 baseline, no change).
-- [x] `pnpm run build` — SUCCESS (hash df283246).
-- [x] `pnpm run validate` — все 8 gates passed.
-- [x] `pnpm run test:unit` — 43/43 pass.
-- [x] `pnpm run lint` — 0 errors (10 pre-existing warnings).
-- [x] Front-matter updated: `Migration status: ✅ MIGRATED (iter 11)`.

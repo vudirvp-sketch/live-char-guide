@@ -1,11 +1,12 @@
-# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35 (P0 ✅ applied), iter 36 (P1 ✅ applied)
+# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35 (P0 ✅ applied), iter 36 (P1 ✅ applied), iter 37 (P2 ✅ applied)
 
 > **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками.
 > **Дата:** 2026-07-08
-> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35 P0 ✅ CLOSED, iter 36 P1 ✅ CLOSED, hash unchanged — canon не в hash computation)
+> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35 P0 ✅ CLOSED, iter 36 P1 ✅ CLOSED, iter 37 P2 ✅ CLOSED, hash unchanged — canon не в hash computation)
 > **Источник аудита:** прошлый чат iter 33 (525-строчный paste от пользователя)
 > **iter 35 (P0) ✅ CLOSED:** 16 правок применены (см. §4.1 — каждая правка помечена ✅ DONE iter 35). Build hash `69d9b813` unchanged.
 > **iter 36 (P1) ✅ CLOSED:** 11 правок применены (см. §4.2 — каждая правка помечена ✅ DONE iter 36). Build hash `69d9b813` unchanged.
+> **iter 37 (P2) ✅ CLOSED:** 18 правок применены (см. §4.3 — каждая правка помечена ✅ DONE iter 37). Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged.
 
 ---
 
@@ -234,34 +235,49 @@ python3 scripts/audit_vs_embeds.py  # ✅ 0 regressions
 
 ---
 
-### 4.3. P2 — Терминология + структурный cleanup (iter 37)
+### 4.3. P2 — Терминология + структурный cleanup (iter 37) ✅ CLOSED
 
-**Цель:** Унифицировать терминологию, удалить устаревшие заглушки, сжать meta-секции (front-matter, Migration Notes, Validation gates, resume, Cross-refs ending). Самая большая итерация по объёму (~1500 строк удалений + ~80 новых).
+**Цель:** Унифицировать терминологию, удалить устаревшие заглушки, сжать meta-секции (front-matter, Migration Notes, Validation gates, resume, Cross-refs ending). Самая большая итерация по объёму (~1130 строк удалений + ~50 новых).
+
+**iter 37 ✅ CLOSED:** Все 18 правок P2-1..P2-18 применены в iter 37. Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged. Все validation gates PASS + `audit_vs_embeds.py` 0 regressions + `check_english.py` 0 leaks в `docs/canon/`.
 
 | # | Item | Файл + строка | Правка |
 |---|------|---------------|--------|
-| P2-1 | **C1** | `part_01.md` §1.4 (где впервые вводятся Anchors/Voice/SPINE/OCEAN) | Добавить 1-предложные определения каждого термина inline: «**Anchor** (поведенческий якорь) — конкретное правило поведения в формате T→A→P. **Voice** (голос) — уникальный стиль речи персонажа. **SPINE** — фреймворк из 5 элементов (GHOST/LIE/FLAW/NEED/WANT). **OCEAN** — модель личности из 5 измерений.» |
-| P2-2 | **C2** | `_README.md` §3.8 или новый §3.9 | Добавить explicit policy: «Метки callouts (`**RULE:**`, `**RECOMMENDATION:**`, `**EXAMPLE:**`, `**ILLUSTRATION:**`, `**TEMPLATE:**`, `**Bridge:**`) остаются на английском намеренно — это semantic anchors для модели при генерации карточек. Не русифицировать.» (это снимает необходимость править 100+ callouts) |
-| P2-3 | **C5** | все canon-файлы (11 Bridge-paragraphs) | Оставить 1-2 Bridge как narrative transitions (Part 6→7A, Part 9→10). Удалить остальные 9 — TOC уже показывает порядок. |
-| P2-4 | **E1** | все canon-файлы (front-matter 5-строчный блок) | Конвертировать в YAML front-matter в начале файла, оставить в markdown только H1 заголовок. Пример: `---\ncanonical_for: src/master/part_01.html\nvs_embedded: [E01, E05]\nlast_synced: 2026-07-08\nmigration_status: MIGRATED\n---\n# Part 1 — Foundations\n` |
-| P2-5 | **E2** | все canon-файлы (Migration Notes / Compression results / Validation gates секции в конце) | Удалить полностью. Если нужно сохранить migration history — вынести в `docs/migration_history/part_NN.md` (новые файлы). Для canon — оставить только `Migration status: ✅ MIGRATED (iter X)` в YAML front-matter. |
-| P2-6 | **E3** | все canon-файлы (Cross-references из других Parts секция в конце) | Удалить полностью. Inline `[ref: ...]` уже покрывает forward-refs. Reverse-index — не нужен, достаточен grep. |
-| P2-7 | **E4** | все canon-файлы («Что вы теперь умеете» resume) | Сократить до 1-2 предложений synthesis или удалить. Resume повторяет TOC. |
-| P2-8 | **E5** | `part_01.md` §1.3 | Удалить orphan секцию (1 абзац, не содержит принципов — они в §1.4) или слить с §1.2. |
-| P2-9 | **E6** | `part_01.md` §1.4 + `part_03.md` §3.1 + `part_07a.md` §7A.4 | «Pattern Matcher» определить 1 раз в Part 1 §1.4. В Part 3/7A — заменить на ссылку: «Модель — Pattern Matcher (см. §1.4)». |
-| P2-10 | **E7** | все canon-файлы (Migration Notes «Применяется «очень деликатно»» copy-paste) | Удалить клише. Если нужно сохранить принцип — 1 строка в `_README.md` §3.X. |
-| P2-11 | **F1** | все canon-файлы (30+ «Canon planned iter 13/14/16» заглушек) | Заменить все на актуальные cross-ref: `[ref: part_05.md §5.X — OCEAN]` (без «Canon planned iter 16»). Parts 2-10 уже MIGRATED — заглушки устарели. |
-| P2-12 | **B4 (partial)** | `part_03.md` §3.4 | Переименовать Tier 1/2/3 → «Quality Grade A/B/C» (или «Quality Tier ✓/⚠/✗»). Устранить коллизию с CoT Tiers (Part 6) и GHOST Layers (Part 10). |
-| P2-13 | **F4** | `part_04.md` §4.2 L55 | `**Запрещённые слова:** «травма», «пережил», «столкнулся с».` → `**Запрещённые формулировки** — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». Вместо них — конкретное событие: «в 7 лет видел, как дом сгорел, а пожарные не приехали вовремя».` |
-| P2-14 | **F5** | `part_05.md` §5.1 (после L33) | Добавить определение: «**Cautious zone (30–40 / 60–70)** — пограничная зона, не экстремальная, но влияющая на SPINE-связи (FLAW, GHOST-реактивность).» |
-| P2-15 | **F6** | `part_07a.md` L305 | Заменить `<br/>` на ` — ` (em-dash) или `\|` (разделитель ячеек в markdown table). HTML-теги запрещены в Canon per `_README.md` §3.7. |
-| P2-16 | **F7** | `part_07a.md` §7A.1 | `SP = System Prompt, не путать с темпераментом Keirsey SP (Artisan/Ремесленник) из MBTI.` → `SP = System Prompt, не путать с темпераментом Keirsey SP (Sensing-Perceiving, см. Appendix A).` (Keirsey ≠ MBTI, уточнить) |
-| P2-17 | **F9** | `part_09.md` §9.6 Decision Tree | Добавить 1-словный симптом для каждого AP-ссылки: «RepPen > 1.10? → Fix AP-5 (RepPen High)», «PP > 0? → Fix AP-7 (PP leak)» и т.д. |
-| P2-18 | **F10** | `part_10.md` §10.1 (Elena inline annotations) | Вынести inline-комментарии `<!-- ↑ Этот блок добавляет SPINE framework -->` в отдельный callout-блок после карточки: «**Annotation:** Строки 80-86 — SPINE framework (см. Part 4). Строки 88-95 — FLAW-linked Anchors. Строки 100-105 — OCEAN.» |
+| P2-1 | **C1** ✅ DONE iter 37 | `part_01.md` §1.4 | Добавлен block «Ключевые термины» с 1-предложными определениями Anchor/Voice/SPINE/OCEAN + bold **Pattern Matcher** в RULE. |
+| P2-2 | **C2** ✅ DONE iter 37 | `_README.md` §3.9 (новый) | Добавлена explicit policy: метки callouts (`RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`) остаются на английском как semantic anchors. Тело callouts — на русском. |
+| P2-3 | **C5** ✅ DONE iter 37 | все canon-файлы (9 Bridge-paragraphs) | Оставлены 2 Bridge (Part 6→7A, Part 9→10). Удалены 8 остальных. |
+| P2-4 | **E1** ✅ DONE iter 37 | все canon-файлы (front-matter 5-строчный quote-block) | Конвертирован в YAML front-matter (`--- canonical_for / vs_embedded / vs_cross_ref / sections / last_synced / migration_status ---`) во всех 13 canon-файлах (кроме `_README.md`). |
+| P2-5 | **E2** ✅ DONE iter 37 | все canon-файлы (Migration Notes / Compression results / Validation gates / DGA Phase 2) | Удалены полностью. Migration status сохранён в YAML front-matter `migration_status` field. |
+| P2-6 | **E3** ✅ DONE iter 37 | все canon-файлы (Cross-references из других Parts) | Удалены полностью. Inline `[ref: ...]` покрывает forward-refs. |
+| P2-7 | **E4** ✅ DONE iter 37 | все canon-файлы («Что вы теперь умеете» resume) | Inline H3 resume удалены. В 4 Parts (01, 04, 07A, 08) добавлены 1-2-предложные **Synthesis:** вместо них (только Parts с major conceptual shift). |
+| P2-8 | **E5** ✅ DONE iter 37 | `part_01.md` §1.3 | Orphan §1.3 удалён (контент уже в §1.2 + §1.4). |
+| P2-9 | **E6** ✅ DONE iter 37 | `part_07a.md` L162, L172 | Pattern Matcher ссылки обновлены: «Модель — Pattern Matcher (см. Part 1 §1.4)» и «модель выступает как Pattern Matcher (см. §1.4 Part 1)». |
+| P2-10 | **E7** ✅ DONE iter 37 | все canon-файлы | Клише «Применяется «очень деликатно»» удалено вместе с Migration Notes секциями (9 вхождений в 9 файлах). |
+| P2-11 | **F1** ✅ DONE iter 37 | все canon-файлы | 22 stub «Canon planned iter 13/14/16» удалено (фактически 22, не 30+). `[ref: ...]` ссылки сохранены. |
+| P2-12 | **B4 (partial)** ✅ DONE iter 37 | `part_03.md` §3.4 | Tier 1/2/3 → Quality Grade A/B/C. Добавлен disambiguation block (не путать с CoT Tier 0-3 из Part 6 и GHOST Layers Tier 1-3 из Part 10). Заголовок «Tier 1 vs Tier 3» → «Grade A vs Grade C». |
+| P2-13 | **F4** ✅ DONE iter 37 | `part_04.md` §4.2 L55 | «Запрещённые слова» → «Запрещённые формулировки — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». Вместо них — конкретное событие...». |
+| P2-14 | **F5** ✅ DONE iter 37 | `part_05.md` §5.1 (после RULE) | Добавлено определение **Cautious zone (30–40 / 60–70)** с примером Елены (A=38, N=68 → FLAW, GHOST). |
+| P2-15 | **F6** ✅ DONE iter 37 | `part_07a.md` L305 (sampling params table) | 3 ячейки Voice Placement: `<br/>` заменён на em-dash. HTML-теги запрещены в Canon per `_README.md` §3.7. |
+| P2-16 | **F7** ✅ DONE iter 37 | `part_07a.md` §7A.1 | Keirsey SP уточнено: «Artisan/Ремесленник из MBTI» → «Sensing-Perceiving, см. Appendix A — MBTI» (Keirsey ≠ MBTI). |
+| P2-17 | **F9** ✅ DONE iter 37 | `part_09.md` §9.6 Decision Tree | Добавлены 1-словные симптомы для каждой AP-ссылки: AP-3 Voice-in-Desc, AP-6 No-Anti-Godmoding, AP-15 OCEAN-Overload, AP-5 RepPen-High, AP-7 PP-Leak, AP-10 CoT-Overload, AP-9 SPINE-Broken. |
+| P2-18 | **F10** ✅ DONE iter 37 | `part_10.md` §10.1 (Elena inline annotations) | 4 inline-комментария `<!-- ↑ ... -->` удалены. Вместо них — отдельный **Annotation:** callout после карточки с 6 пунктами (DESCRIPTION→spine, DESCRIPTION→ocean, EXAMPLES, ANCHORS Базовые, ANCHORS FLAW-linked, GREETING). |
 
-**Итого P2:** 18 правок во всех canon-файлах. ~1500 строк удалений (Migration Notes/Validation gates/Cross-refs ending/resume) + ~80 строк новых (YAML front-matter, определения, fixes).
+**Итого P2 ✅ CLOSED:** 18 правок во всех 14 canon-файлах. Canon total: 5 035 → 3 905 строк (−1 130 net deletion). Build hash `69d9b813` unchanged.
 
-**Validation gates P2:** те же + дополнительно `pnpm run qa:english:docs` (проверить, что cleanup не добавил английских leaks).
+**Validation gates P2 (iter 37, ALL PASS):**
+```bash
+pnpm run validate:master    # ✅ 12 checks, no regressions
+pnpm run build              # ✅ SUCCESS, hash 69d9b813 (canon-файлы не в hash computation)
+pnpm run validate           # ✅ 8 gates PASS, index.html 7.5KB
+pnpm run test:unit          # ✅ 43/43
+pnpm run test:integration   # ✅ 21/21
+pnpm run lint               # ✅ 0 errors, 12 warnings (baseline)
+pnpm run qa:csp             # ✅ 0 inline scripts
+pnpm run qa:bundle          # ✅ 7.5KB (max 500KB)
+pnpm run qa:doc-versions    # ✅ PASS
+python3 scripts/audit_vs_embeds.py  # ✅ 0 regressions
+python3 scripts/check_english.py    # ✅ 0 leaks in docs/canon/ (29 baseline in src/master/)
+```
 
 ---
 
@@ -304,19 +320,11 @@ python3 scripts/audit_vs_embeds.py  # ✅ 0 regressions
 
 **Точка остановки iter 36:** P1 ✅ CLOSED. KI#21-B5, B6, B2, D1, D2, D4, A5, A7, A8 (+NEW-2) ✅ CLOSED. Build hash `69d9b813` unchanged. P2 (iter 37) ready to start.
 
-### iter 37 — P2 (Terminology + structural cleanup)
+### iter 37 — P2 (Terminology + structural cleanup) ✅ COMPLETE
 
-**Шаги:**
-1. Прочитать STATUS.md (iter 36 record), worklog.md iter 36, этот AUDIT_VERIFICATION.md §4.3.
-2. **Сначала** выполнить P2-4 (YAML front-matter) и P2-5/P2-6/P2-7 (delete Migration Notes/Cross-refs ending/resume) — это даст ~1500 строк чистого удаления, упростит дальнейшие правки.
-3. Выполнить P2-11 (заменить 30+ «Canon planned iter X» заглушек).
-4. Выполнить P2-1..P2-3, P2-8..P2-10, P2-12..P2-18.
-5. Validation gates + `qa:english:docs`.
-6. Обновить docs.
-7. Архив `iter_37_p2_cleanup.zip`.
-8. Git commit + push.
+**Статус:** Все 18 правок P2-1..P2-18 применены в iter 37 (см. §4.3 — каждая правка помечена ✅ DONE iter 37). Canon total: 5 035 → 3 905 строк (−1 130 net deletion). Build hash `69d9b813` unchanged. Validation gates ALL PASS + `audit_vs_embeds.py` 0 regressions + `check_english.py` 0 leaks в `docs/canon/`. Документация актуализирована (STATUS.md, worklog.md, AGENT_NAVIGATION.md, AUDIT_VERIFICATION.md). Архив `iter_37_p2_cleanup.zip` создан. Git commit + push.
 
-**Точка остановки iter 37:** P2 complete. KI#21-C1,C2,C5,E1-E7,F1,F4,F5,F6,F7,F9,F10,B4 ✅ CLOSED. Build hash `69d9b813` unchanged. P3 ready.
+**Точка остановки iter 37:** P2 ✅ CLOSED. KI#21-C1, C2, C5, E1-E7, F1, F4, F5, F6, F7, F9, F10, B4 ✅ CLOSED. 45/57 правок закрыты (16 P0 + 11 P1 + 18 P2). Build hash `69d9b813` unchanged. P3 (iter 38) ready to start.
 
 ### iter 38 — P3 (Local fixes + new sections)
 
@@ -389,27 +397,36 @@ B3 был признан невалидным. **Не пытаться «уко�
 - **Документация актуализирована:** STATUS.md (iter 35 record — KI#21 P0 ✅ CLOSED), worklog.md (iter 35 = самый подробный), AGENT_NAVIGATION.md (§6 #40 KI#21 P0 ✅, §8 OP-1 iter 35 row + iter 36+ roadmap), AUDIT_VERIFICATION.md (§4.1 P0 ✅ CLOSED, §5 iter 35 ✅, §7.1 iter 35 stop point).
 - **Build hash `69d9b813` unchanged** (canon-файлы не входят в hash computation — только `src/shell/index.html`).
 
-## 7.2. Точка остановки iter 36 (этот чат — canon P1)
+## 7.2. Точка остановки iter 36 (canon P1)
 
 **iter 36 — CANON AUDIT P1 ✅ COMPLETE.**
 
 - Прочитан весь контекст iter 35 (STATUS.md / worklog.md / AGENT_NAVIGATION.md §6 #40 / `docs/AUDIT_VERIFICATION.md` §4.2).
-- Применены все 11 правок P1 (P1-1..P1-11) в 6 canon-файлах: `part_04.md` (4 правки — P1-5, P1-7, P1-8, P1-9), `part_06.md` (1 — P1-6), `part_07a.md` (2 — P1-2, P1-10), `part_07b.md` (1 — P1-11), `part_08.md` (2 — P1-1, P1-3), `part_10.md` (1 — P1-4).
-- Все validation gates PASS: `validate:master` (12 checks) / `build` (hash `69d9b813` unchanged) / `validate` (8 gates) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` (7.5KB) / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions).
-- **Документация актуализирована:** STATUS.md (iter 36 record — KI#21 P0+P1 ✅ CLOSED, 27/57 правок), worklog.md (iter 36 = самый подробный; iter 35 → one-liner), AGENT_NAVIGATION.md (§6 #40 KI#21 P0+P1 ✅, §8 OP-1 iter 36 row + iter 37+ roadmap), AUDIT_VERIFICATION.md (§4.2 P1 ✅ CLOSED annotations, §5 iter 36 ✅, §7.2 iter 36 stop point).
+- Применены все 11 правок P1 (P1-1..P1-11) в 6 canon-файлах.
+- Все validation gates PASS + `audit_vs_embeds.py` 0 regressions.
+- Build hash `69d9b813` unchanged.
+
+## 7.3. Точка остановки iter 37 (этот чат — canon P2)
+
+**iter 37 — CANON AUDIT P2 ✅ COMPLETE.**
+
+- Прочитан весь контекст iter 36 (STATUS.md / worklog.md / AGENT_NAVIGATION.md §6 #40 / `docs/AUDIT_VERIFICATION.md` §4.3).
+- Применены все 18 правок P2 (P2-1..P2-18) во всех 14 canon-файлах: `part_01.md` (P2-1, P2-8), `part_03.md` (P2-12), `part_04.md` (P2-13), `part_05.md` (P2-14), `part_07a.md` (P2-9, P2-15, P2-16), `part_09.md` (P2-17), `part_10.md` (P2-18), `_README.md` (P2-2), все 14 файлов (P2-3, P2-4, P2-5, P2-6, P2-7, P2-10, P2-11).
+- Canon total: 5 035 → 3 905 строк (−1 130 net deletion).
+- Все validation gates PASS: `validate:master` (12 checks) / `build` (hash `69d9b813` unchanged) / `validate` (8 gates) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` (7.5KB) / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions) / `check_english.py` (0 leaks in `docs/canon/`).
+- **Документация актуализирована:** STATUS.md (iter 37 record — KI#21 P0+P1+P2 ✅ CLOSED, 45/57 правок), worklog.md (iter 37 = самый подробный; iter 36 → one-liner), AGENT_NAVIGATION.md (§6 #40 KI#21 P0+P1+P2 ✅, §8 OP-1 iter 37 row + iter 38+ roadmap), AUDIT_VERIFICATION.md (§4.3 P2 ✅ CLOSED annotations, §5 iter 37 ✅, §7.3 iter 37 stop point).
 - **Build hash `69d9b813` unchanged** (canon-файлы не входят в hash computation — только `src/shell/index.html`; index.html root fallback регенерирован — только `Generated:` timestamp обновлён, content identical).
 
-**Что в следующем чате (iter 37 — canon P2):**
+**Что в следующем чате (iter 38 — canon P3):**
 
-1. Прочитать STATUS.md (iter 36 record — KI#21 P0+P1 ✅ CLOSED, 27/57 правок, build hash `69d9b813`), worklog.md iter 36, AGENT_NAVIGATION.md §6 pitfall #40 KI#21 P0+P1 ✅, этот `docs/AUDIT_VERIFICATION.md` §4.3.
-2. **Сначала** выполнить P2-4 (YAML front-matter конверсия) и P2-5/P2-6/P2-7 (delete Migration Notes / Cross-refs ending / resume секции) — это даст ~1500 строк чистого удаления, упростит дальнейшие правки.
-3. Выполнить P2-11 (заменить 30+ «Canon planned iter X» заглушек на актуальные cross-refs).
-4. Выполнить P2-1..P2-3, P2-8..P2-10, P2-12..P2-18 (terminology + structural fixes).
-5. Validation gates + `qa:english:docs` + audit script.
-6. Обновить docs.
-7. Архив `iter_37_p2_cleanup.zip`.
-8. Git commit + push.
-9. Точка остановки iter 37 → передать в iter 38 (P3).
+1. Прочитать STATUS.md (iter 37 record — KI#21 P0+P1+P2 ✅ CLOSED, 45/57 правок, build hash `69d9b813`), worklog.md iter 37, AGENT_NAVIGATION.md §6 pitfall #40 KI#21 P0+P1+P2 ✅, этот `docs/AUDIT_VERIFICATION.md` §4.4.
+2. Внести 7 правок P3-1..P3-7 (локальные — D3 Greeting Елены 2 сцены, D5 HTML-комментарии в карточках Омнис, D6 Йоуёма контекст, D7 cross-refs на Уолтера, F2 Price table примеры, F3 Voice Isolation % methodology, F8 (covered by P0-2)).
+3. Создать 3 новых файла/секции P3-8..P3-12: G1 «Как читать» (part_00.md или секция в part_01), G2 TL;DR (part_00.md §0.2), G4 Character map (appendix_character_map.md), G5 Pre-build checklist (part_01 §1.X или part_07a §7A.X). P3-10 G3 (covered by P2-1).
+4. Validation gates + manual review новых секций + `check_english.py`.
+5. Обновить docs (KI#21 ✅ CLOSED полностью).
+6. Архив `iter_38_p3_complete.zip`.
+7. Git commit + push.
+8. Точка остановки iter 38 → KI#21 ✅ CLOSED полностью (57/57 правок).
 
 ---
 
@@ -435,4 +452,4 @@ B3 был признан невалидным. **Не пытаться «уко�
 
 ---
 
-*Конец документа. iter 35 (P0) ✅ CLOSED — 16/57 правок. iter 36 (P1) ✅ CLOSED — 27/57 правок. Build hash `69d9b813` unchanged. iter 37 (P2) — 18 правок + ~1500 строк удалений, ready to start. Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*
+*Конец документа. iter 35 (P0) ✅ CLOSED — 16/57 правок. iter 36 (P1) ✅ CLOSED — 27/57 правок. iter 37 (P2) ✅ CLOSED — 45/57 правок (−1 130 строк net). Build hash `69d9b813` unchanged. iter 38 (P3) — 12 правок + 3 новые секции (G1, G2, G4, G5), ready to start. Этот файл = Canonical source для KI#21 work plan. iter 34 = CSS/CSP fix (KI#22/#23), вне canon audit plan — сдвинул canon audit iter 34-37 → iter 35-38.*
