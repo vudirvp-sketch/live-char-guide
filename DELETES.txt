@@ -1,0 +1,9 @@
+# Files to DELETE (stale marker files from previous iterations)
+# These were one-time marker files that are no longer needed.
+# Run these commands in your local repo root before committing iter 48:
+#
+#   rm -f DELETED.txt
+#   rm -f DELETED_ITER46_README.txt
+#   rm -f ITER47_README.md
+#
+# After deletion, the only ITER*_README.md should be ITER48_README.md.

@@ -2,16 +2,16 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Версия:** 9.1.0 + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED + iter 34-46 + **iter 47 — KI#33 ✅ CLOSED (57/57 fixes applied cumulatively, contentHash `84d69ecf` 4th change since iter 34)**
+> **Версия:** 9.1.0 + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED + iter 34-47 + **iter 48 — general-purpose drift detector added (`scripts/audit_canon_master_drift.py`); KI#34/KI#35 NEW (found by drift detector, fix deferred)**
 > **Дата:** 2026-07-08
 
 ---
 
 ## Текущее состояние
 
-**iter 47 — CANON→MASTER HTML SYNC (PHASE 4) ✅ COMPLETE.** Применены 4 audit fix IDs к `src/master/*.html` (P2-3, P2-7, P2-18, P3-2) + P0-11 sync completion. Кумулятивно **57/57 fixes** (iter 44: 9 + iter 45: 24 + iter 46: 8 + iter 47: 16 individual changes across 4 fix IDs). Затронуты 10 файлов: `part_01-10` + `part_07b`. contentHash в `build/build-manifest.json`: `d2fdafeaf093dd80` → `84d69ecffca28cbf` (4th change since iter 34). Shell hash `69d9b813` unchanged. Regression test `scripts/audit_canon_master_sync.py` расширен с 57 до **89 checks** (71 positive + 18 negative). **KI#33 ✅ CLOSED** — все content fixes синхронизированы, оставшиеся SKIPs (P2-2/4/5/6/8/10/11/15, P3-7/8/11, P1-8/9) — canon-only metadata, не имеют master equivalent.
+**iter 48 — GENERAL-PURPOSE DRIFT DETECTOR ADDED ✅ COMPLETE.** Создан новый informational скрипт `scripts/audit_canon_master_drift.py` (~440 строк, stdlib only) для структурного сравнения canon ↔ master HTML. Скрипт **не** модифицирует рабочий `audit_canon_master_sync.py` (89/89 PASS) — это separate informational tool (exit 0 всегда). Drift detector нашёл 2 actionable KI: **KI#34** (MEDIUM — §1.8 Pre-build checklist missing from master HTML) + **KI#35** (LOW — `p4_spine_overview` canon metadata drift). JSON baseline `build/drift-report-iter48.json` сохранён. contentHash UNCHANGED `84d69ecffca28cbf` (скрипт не трогает master HTML). Shell hash `69d9b813` unchanged. Все validation gates PASS.
 
-**iter 34-46 — Phases 1-3 ✅ COMPLETE (41/57 fixes).** iter 44: 9 fixes (Phase 1) + iter 45: 24 fixes (Phase 2) + iter 46: 8 fixes (Phase 3). Canon audit ✅ CLOSED (iter 35-38).
+**iter 47 — CANON→MASTER HTML SYNC ✅ COMPLETE (57/57 fixes, KI#33 ✅ CLOSED).** Все content fixes из canon audit синхронизированы с `src/master/*.html`. Regression test `audit_canon_master_sync.py` — 89/89 PASS (71 positive + 18 negative). Остальные SKIPs (P2-2/4/5/6/8/10/11/15, P3-7/8/11, P1-8/9) — canon-only metadata, не имеют master equivalent.
 
 ---
 
@@ -19,51 +19,41 @@
 
 | KI | Severity | Status | Iter |
 |----|----------|--------|------|
-| **KI#33 (canon→master HTML sync gap)** | **MEDIUM** — сайт не отражал canon audit фиксы iter 35-41 | ✅ **CLOSED (iter 44+45+46+47: 57/57 fixes applied, 4 content fix IDs closed in iter 47)** | iter 43-47 |
-| KI#32 (component-extracts/ drift: 54 historical snapshot files) | LOW — historical reference files, NOT used in build/runtime | ✅ CLOSED (doc-only) | iter 42 |
-| KI#30 (OCEAN labeling leftover: part_07a L415 + part_10 L51) | LOW-MEDIUM | ✅ CLOSED (canon iter 41 + master iter 44) | iter 41+44 |
-| KI#31 (Part 10 §10.4 + Part 7A §7A.9 missing reverse cross-ref to bible) | LOW — cosmetic | ✅ CLOSED (canon iter 41 + master iter 44) | iter 41+44 |
-| KI#28 (README.md section counts stale) | LOW | ✅ CLOSED | iter 40 |
-| KI#29 (OCEAN labeling: N=70 marked as «extreme») | LOW-MEDIUM | ✅ CLOSED (canon iter 40 + master iter 44) | iter 40+44 |
-| KI#25 (elena_character_bible.md OCEAN labels stale) | LOW | ✅ CLOSED (canon iter 39 + master iter 44) | iter 39+44 |
-| KI#26 (vyshcherblenny_character_bible.md stale world setting + GHOST Layers drift) | MEDIUM | ✅ CLOSED (bible only — не входит в build) | iter 39 |
-| KI#27 (README.md stale Part 10 structure entry) | LOW | ✅ CLOSED | iter 39 |
-| KI#21 (Content Audit contradictions) | MEDIUM-HIGH | ✅ **CLOSED** canon (57/57 iter 35-38) + **57/57 master sync (iter 44+45+46+47)** | iter 33-38, 44-47 |
+| **KI#35 (p4_spine_overview canon metadata drift)** | **LOW** — cosmetic, canon missing `data-section:` declaration | 🟡 NEW (documented, fix optional) | iter 48 |
+| **KI#34 (§1.8 Pre-build checklist missing from master HTML)** | **MEDIUM** — canon section exists, master HTML doesn't | 🟡 NEW (found by drift detector, fix deferred to iter 49) | iter 48 |
+| KI#33 (canon→master HTML sync gap) | MEDIUM | ✅ CLOSED (iter 44-47: 57/57 fixes) | iter 43-47 |
+| KI#32 (component-extracts/ drift: 54 historical snapshots) | LOW — not used in build/runtime | ✅ CLOSED (doc-only) | iter 42 |
+| KI#21 (Content Audit contradictions) | MEDIUM-HIGH | ✅ CLOSED canon (57/57 iter 35-38) + master sync (57/57 iter 44-47) | iter 33-38, 44-47 |
 | KI#22 (Callout CSS Scoping Bug) | HIGH | ✅ CLOSED | iter 34 |
-| KI#23 (CSP worker-src missing) | MEDIUM | ✅ CLOSED | iter 34 |
-| KI#24 (FAB Glossary/TOC verification) | LOW | ✅ VERIFIED — no bug | iter 34 |
 | KI#20 (Visual System Scroll-Animation Bug) | HIGH | ✅ CLOSED — 5/5 sub-items fixed | iter 32 |
 | KI#18 (Deployed Guide Duplication Audit) | MEDIUM | ✅ CLOSED — 9/9 | iter 26-31 |
 | KI#13 (inline styles → CSS) | MEDIUM | ✅ CLOSED (123/123) | iter 20-24 |
-| KI#1..KI#12, KI#14..#19 | various | ✅ CLOSED | iter 1-7 |
+| KI#1..KI#12, KI#14..#19, KI#23..#31 | various | ✅ CLOSED | iter 1-7, 32-41 |
 
-### KI#33 — canon→master HTML sync gap ✅ CLOSED (iter 44+45+46+47: 57/57 fixes applied)
+### KI#34 — §1.8 Pre-build checklist missing from master HTML 🟡 NEW (iter 48, fix deferred)
 
-**Симптом:** canon audit фиксы iter 35-41 находятся в `docs/canon/*.md`, но НЕ синхронизированы с `src/master/*.html` (деплоится на сайт).
+**Симптом:** Canon `docs/canon/part_01.md` L128 содержит `## 1.8 Pre-build checklist` с `data-section: p1_prebuild_checklist` (added in iter 38 как P3-12/G5 fix). Однако в `src/master/part_01.html` соответствующий `<section data-section="p1_prebuild_checklist">` ОТСУТСТВУЕТ — 7 sections вместо 8.
 
-**iter 47 PROGRESS (4 content fix IDs closed + P0-11 sync completion):**
+**Found by:** `scripts/audit_canon_master_drift.py` (iter 48 — general-purpose drift detector).
 
-| # | Fix ID | File(s) | Description | Status |
-|---|--------|---------|-------------|--------|
-| 1 | P2-3 (C5) | `part_01, 02, 03, 04, 05, 07a, 08.html` | 7 bridge-paragraphs удалены; 2 keeps (`part_06` с добавлением `bridge-paragraph` CSS class, `part_09`) | ✅ iter 47 |
-| 2 | P2-7 (E4) | `part_01-10, part_07b.html` | 11 part-resume секций удалены; 4 Synthesis paragraphs добавлены в `part_01, 04, 07a, 08` | ✅ iter 47 |
-| 3 | P2-18 (F10) | `part_10.html` §10.1 | 4 inline `<!-- ↑ ... -->` annotations удалены; Annotation callout с 6 пунктами добавлен после карточки Елены | ✅ iter 47 |
-| 4 | P3-2 (D5) | `part_10.html` (4 cards) | 4 `Demonstrates:` callouts добавлены перед карточками (Елена, Уолтер, Омнис-Зета, Выщербленный) | ✅ iter 47 |
-| 5 | P0-11 (A9) sync completion | `part_09.html` §9.11 | «4 уровня качества» → «4 зоны качества» (iter 44 применил fix только к resume, iter 47 sync completion — к основному тексту) | ✅ iter 47 |
+**Fix (deferred to iter 49):** Add `<section data-section="p1_prebuild_checklist" data-toc-nav>` block в `src/master/part_01.html` после последней секции (p1_top3_problems). Content — перевод canon markdown в HTML (таблица 6 вопросов + RECOMMENDATION callout + Cross-ref). MEDIUM risk — требует visual verification.
 
-**iter 47 verification:** regression test `scripts/audit_canon_master_sync.py` — **89/89 checks PASS** (71 positive + 18 negative). contentHash `d2fdafea` → `84d69ecf` (4th change since iter 34). All validation gates PASS.
+### KI#35 — p4_spine_overview canon metadata drift 🟡 NEW (iter 48, fix optional)
 
-**iter 44-46 PROGRESS (41 fixes applied):** iter 44 (9 fixes) + iter 45 (24 fixes) + iter 46 (8 fixes). См. ниже «Предыдущие итерации (кратко)».
+**Симптом:** `src/master/part_04.html` L140 содержит `<section data-section="p4_spine_overview">` с `<h2>SPINE Framework</h2>`. Однако canon `docs/canon/part_04.md` L12 `## 4.1 SPINE Overview` не имеет `` `data-section: p4_spine_overview` `` декларации. Canon metadata drift — секция рендерится корректно, но в canon не зафиксирован canonical ID.
 
-**SKIP (canon-only, no master equivalent):** P2-2 (callout labels policy), P2-4 (YAML front-matter), P2-5 (Migration Notes), P2-6 (`[ref: ...]` notation), P2-8 (orphan §1.3 — already absent), P2-10 (клише «деликатно»), P2-11 (22 stubs «Canon planned»), P2-15 (`<br/>` → em-dash — canon-only), P1-8/9 (secondary/variant LIE rows — already absent), P3-7 (covered by P0-2), P3-8/11 (part_00/appendix_character_map — no master equivalent).
+**Found by:** `scripts/audit_canon_master_drift.py` (iter 48).
+
+**Fix (optional):** Add одну строку `` `data-section: p4_spine_overview` `` после `## 4.1 SPINE Overview` в `docs/canon/part_04.md`. Trivial fix, cosmetic only.
 
 ---
 
-## Invariants (iter 47+)
+## Invariants (iter 48+)
 
+- **Drift detector (iter 48+ invariant):** `python3 scripts/audit_canon_master_drift.py` — informational structural comparison canon ↔ master HTML. Exit 0 всегда. JSON baseline: `build/drift-report-iter48.json`. Actionable findings: canon-only sections + master-only sections. Heading mismatches (14, by design) + content hash diffs (96, informational) — expected.
 - **Canon → master HTML sync (iter 43+ invariant, iter 47 ✅ COMPLETE 57/57):** `docs/canon/*.md` = source of truth. `src/master/*.html` = production HTML. iter 44+45+46+47: 57/57 fixes применены. Regression test: `python3 scripts/audit_canon_master_sync.py` (89/89 PASS — 71 positive + 18 negative).
-- **Build hash vs contentHash (iter 44+):** Shell hash `69d9b813` (в `build.hash`) = SHA-256 of `src/shell/index.html` ONLY. contentHash (в `build/build-manifest.json`) = SHA-256 of combined `src/master/*.html`: `58f4daa85c05e070` (iter 34-43) → `34c34a7d9839c11d` (iter 44) → `665cede798c34fc0` (iter 45) → `d2fdafeaf093dd80` (iter 46) → `84d69ecffca28cbf` (iter 47). **Shell hash unchanged ≠ master HTML unchanged.**
-- VS scroll-animation: `python3 scripts/audit_vs_embeds.py` (0 regressions expected).
+- **Build hash vs contentHash (iter 44+):** Shell hash `69d9b813` = SHA-256 of `src/shell/index.html` ONLY. contentHash (в `build/build-manifest.json`) = SHA-256 of combined `src/master/*.html`: `58f4daa85c05e070` (iter 34-43) → `34c34a7d9839c11d` (iter 44) → `665cede798c34fc0` (iter 45) → `d2fdafeaf093dd80` (iter 46) → `84d69ecffca28cbf` (iter 47, iter 48 UNCHANGED). **Shell hash unchanged ≠ master HTML unchanged.**
+- VS scroll-animation: `python3 scripts/audit_vs_embeds.py` (0 regressions expected; pre-existing path issue: hardcoded `parents[2] / "work" / "live-char-guide"` — запустить через symlink `ln -sfn /path/to/repo /home/z/my-project/work/live-char-guide`).
 - Component extracts drift (iter 42+): `python3 scripts/audit_component_extracts.py` + `_css.py` (drift expected, historical snapshots).
 - CSS scoping (iter 34+): VS-EMBED selectors scoped к element-specific parent.
 - Принцип `viz > dry text` сохраняется.
@@ -76,11 +66,16 @@
 
 ---
 
-## iter 48+ Roadmap (KI#33 ✅ CLOSED — minor задачи remain)
+## iter 49+ Roadmap
+
+**MEDIUM priority (fix KI#34):**
+
+- **KI#34 fix — §1.8 Pre-build checklist sync to master HTML.** Add `<section data-section="p1_prebuild_checklist">` block в `src/master/part_01.html` с контентом из canon `docs/canon/part_01.md` L128-145. MEDIUM risk — careful HTML edit + visual verification. После fix: contentHash изменится (5th change since iter 34). Regression test `audit_canon_master_sync.py` расширить с positive check для p1_prebuild_checklist.
 
 **LOW priority (deferred):**
 
-- **General-purpose drift detector** — расширить `scripts/audit_canon_master_sync.py` до сравнения canon §X.Y vs master HTML `<section data-section>` semantic content. Текущий regression test — focused substring checks. General-purpose detector требует semantic parsing.
+- **KI#35 fix (optional, trivial)** — add `` `data-section: p4_spine_overview` `` line в `docs/canon/part_04.md` после `## 4.1 SPINE Overview`. Cosmetic canon metadata fix.
+- **Semantic paragraph-level drift detection** — расширить `scripts/audit_canon_master_drift.py` до paragraph-level Jaccard similarity для matching sections (сейчас только content hash diff). Позволит выявлять конкретные drifted paragraphs, не только section-level structural drift.
 - **Glossary double-render inefficiency** — structural, by design (canon = source of truth, HTML = render).
 - **Component extracts regeneration (опционально)** — regenerate 54 файла from master. Нет business value пока extracts не используются.
 
@@ -95,8 +90,9 @@
 | **CORE DIRECTIVES на English** | Directives в System Prompt — English. Guide prose — Russian. |
 | **Node >= 20, pnpm 10.x** | JavaScript runtime + package manager. |
 | **Canon migration COMPLETE (iter 7-18) + concept additions (iter 38)** | Все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED/ADDED. См. `docs/canon/_README.md` §5. |
-| **Canon → master HTML sync (iter 47 ✅ COMPLETE 57/57, KI#33 ✅ CLOSED)** | 57/57 fixes синхронизированы с `src/master/*.html`. contentHash `84d69ecffca28cbf` (4th change since iter 34). Regression test: `scripts/audit_canon_master_sync.py` (89/89 PASS). |
-| **Build hash vs contentHash (iter 44+)** | Shell hash `69d9b813` = SHA-256 of `src/shell/index.html` ONLY. contentHash = SHA-256 of combined `src/master/*.html`: `58f4daa85c05e070` → `34c34a7d9839c11d` (iter 44) → `665cede798c34fc0` (iter 45) → `d2fdafeaf093dd80` (iter 46) → `84d69ecffca28cbf` (iter 47). |
+| **Canon → master HTML sync (iter 47 ✅ COMPLETE 57/57, KI#33 ✅ CLOSED)** | 57/57 fixes синхронизированы с `src/master/*.html`. contentHash `84d69ecffca28cbf` (4th change since iter 34, iter 48 UNCHANGED). Regression test: `audit_canon_master_sync.py` (89/89 PASS). KI#34 (iter 48 NEW) — 1 section `p1_prebuild_checklist` всё ещё missing, fix deferred. |
+| **Drift detector (iter 48+ invariant)** | `python3 scripts/audit_canon_master_drift.py` — informational structural comparison canon ↔ master HTML. Exit 0 всегда. JSON baseline: `build/drift-report-iter48.json`. Actionable: KI#34 + KI#35. |
+| **Build hash vs contentHash (iter 44+)** | Shell hash `69d9b813` = SHA-256 of `src/shell/index.html` ONLY. contentHash = SHA-256 of combined `src/master/*.html`: `58f4daa85c05e070` → `34c34a7d9839c11d` (iter 44) → `665cede798c34fc0` (iter 45) → `d2fdafeaf093dd80` (iter 46) → `84d69ecffca28cbf` (iter 47, iter 48 UNCHANGED). |
 | **CSP compliance (KI#16/#23 CLOSED)** | `qa:csp` PASS. Все scripts в `index.html` — external. `worker-src 'self' blob:;` для Mermaid v11 worker. |
 | **Inline styles forbidden (KI#13 CLOSED)** | 123/123 inline `style=` → 60 external CSS classes (`vs-ki13-*`). |
 | **Callout class policy (iter 45+ invariant)** | Разрешены `.callout.rule/.rec/.ex` и plain `.callout`. Запрещены `.callout.note/.info/.warn/.tip/.box/.sidebar/.custom/.important` (см. `scripts/validate-master.mjs` L452-463). |
@@ -104,7 +100,7 @@
 | **VS scroll-animation observer (KI#20 CLOSED)** | `vs-scroll-observer.js` наблюдает 11 animation classes. Audit: `scripts/audit_vs_embeds.py`. |
 | **Callout taxonomy scope (KI#22 CLOSED)** | Документационные `.callout rule/rec/ex` (line 419) и E15 `.blueprint-area .callout*` (line 6278) — scoped, не конфликтуют. |
 | **DGA COMPLETE (KI#18 CLOSED)** | 9/9 sub-items resolved. Принцип `viz > dry text`. |
-| **Canon audit P0+P1+P2+P3 ✅ CLOSED canon (iter 35-38) + 57/57 master sync (iter 44+45+46+47)** | 57/57 в canon + 57/57 синхронизированы с master. KI#21 ✅ CLOSED, KI#33 ✅ CLOSED. |
+| **Canon audit P0+P1+P2+P3 ✅ CLOSED (iter 35-38 canon, iter 44-47 master sync)** | 57/57 в canon + 57/57 синхронизированы с master. KI#21 ✅ CLOSED, KI#33 ✅ CLOSED. |
 | **Component-extracts drift audit ✅ CLOSED (iter 42)** | KI#32 ✅ CLOSED (doc-only). `component-extracts/README.md` HISTORICAL SNAPSHOT notice. |
 | **YAML front-matter (iter 37)** | Все canon-файлы (кроме `_README.md`) используют YAML front-matter. |
 | **Callout labels English (iter 37+)** | Метки `RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`, `Demonstrates`, `Annotation` — English semantic anchors. `Примечание` — Russian локальное уточнение (как plain `<p>`, не callout). См. `docs/canon/_README.md` §3.9. |
