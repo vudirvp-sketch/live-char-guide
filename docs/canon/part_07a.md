@@ -412,7 +412,8 @@ G3: Каждое вырезание заполняет дыру, создаёт 
 
 <ocean>
 O: 60 | C: 55 | E: 25 | A: 30 | N: 70
-Экстремумы: Низкая E (интроверт), Высокая N (невротизм)
+Экстремумы: Низкая E (<30, интроверт). Cautious zone: N=70 (граница 60–70, см. Part 5 §5.1 RULE: extreme = строго <30 или >70).
+**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see `docs/vyshcherblenny_character_bible.md` §OCEAN.
 </ocean>
 
 <anchors>

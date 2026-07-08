@@ -48,7 +48,7 @@ GHOST: Предательство редактора — история, кот�
 
 <ocean>
 O: 72 | C: 65 | E: 41 | A: 38 | N: 68
-Экстремумы: Высокая O (любопытство), Низкая A (конфликтность), Высокая N (тревожность)
+Экстремумы: Высокая O (>70, любопытство). Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — см. Part 5 §5.1 RULE: extreme = строго <30 или >70.
 </ocean>
 
 [EXAMPLES]
@@ -406,6 +406,7 @@ Tier 3: Каждое вырезание заполняет дыру, созда�
 <ocean>
 O: 60 | C: 55 | E: 25 | A: 30 | N: 70
 Экстремумы: Низкая E (<30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной, см. Part 5 §5.1 RULE: extreme = строго <30 или >70).
+**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see `docs/vyshcherblenny_character_bible.md` §OCEAN.
 </ocean>
 
 [EXAMPLES]

@@ -1,12 +1,14 @@
-# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35 (P0 ✅ applied), iter 36 (P1 ✅ applied), iter 37 (P2 ✅ applied)
+# AUDIT_VERIFICATION.md — iter 33 (verified), iter 35-38 (P0-P3 ✅ applied), iter 39-41 (doc drift + OCEAN labeling ✅ applied)
 
-> **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками.
+> **Назначение:** Перепроверка аудита канона из iter 33. Подтверждение / опровержение / уточнение каждого пункта A1–G5. Финальный пошаговый план работ (P0→P1→P2→P3) с конкретными правками. Plus iter 39-41 doc drift + OCEAN labeling follow-up.
 > **Дата:** 2026-07-08
-> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35 P0 ✅ CLOSED, iter 36 P1 ✅ CLOSED, iter 37 P2 ✅ CLOSED, hash unchanged — canon не в hash computation)
+> **Build hash baseline:** `69d9b813` (изменён в iter 34 — KI#23 fix; iter 35-41 все ✅ CLOSED, hash unchanged — canon/docs не в hash computation)
 > **Источник аудита:** прошлый чат iter 33 (525-строчный paste от пользователя)
-> **iter 35 (P0) ✅ CLOSED:** 16 правок применены (см. §4.1 — каждая правка помечена ✅ DONE iter 35). Build hash `69d9b813` unchanged.
-> **iter 36 (P1) ✅ CLOSED:** 11 правок применены (см. §4.2 — каждая правка помечена ✅ DONE iter 36). Build hash `69d9b813` unchanged.
-> **iter 37 (P2) ✅ CLOSED:** 18 правок применены (см. §4.3 — каждая правка помечена ✅ DONE iter 37). Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged.
+> **iter 35 (P0) ✅ CLOSED:** 16 правок применены (см. §4.1). Build hash `69d9b813` unchanged.
+> **iter 36 (P1) ✅ CLOSED:** 11 правок применены (см. §4.2). Build hash `69d9b813` unchanged.
+> **iter 37 (P2) ✅ CLOSED:** 18 правок применены (см. §4.3). Canon total: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged.
+> **iter 38 (P3) ✅ CLOSED:** 10 правок + 2 SKIP + 2 новых canon-файла (`part_00.md`, `appendix_character_map.md`). Canon total: 3 905 → 4 070 строк (+165 net). KI#21 ✅ CLOSED полностью (57/57). Build hash `69d9b813` unchanged.
+> **iter 39-41 (doc drift + OCEAN labeling follow-up) ✅ CLOSED:** KI#25/#26/#27 (iter 39, bible + README), KI#28/#29 (iter 40, README counts + OCEAN labeling), KI#30/#31 (iter 41, OCEAN labeling leftover + bible ↔ canon cross-ref). Build hash `69d9b813` unchanged. См. §5.5, §5.6, §5.7.
 
 ---
 
@@ -384,6 +386,31 @@ iter 40 закрыл 2 roadmap-задачи из iter 39 stopping point. Оба 
 **НЕ в scope (principle preserved):** OCEAN values O:60/C:55/E:25/A:30/N:70 в Part 10 §10.4 — unchanged (moderate 4K-fallback example). Это internal canon consistency fix (Part 5 RULE vs Part 10/appendix label), НЕ bible-vs-canon sync — iter 39 invariant («guide's role as example takes priority») не применяется. Новый invariant (iter 40+): OCEAN labeling consistency — label-only fixes допустимы для internal canon consistency, values примера не трогаются.
 
 **Точка остановки iter 40:** README + OCEAN labeling fix complete. KI#28/#29 ✅ CLOSED. iter 41+ roadmap: Glossary double-render (LOW), Component extracts sync (MEDIUM), Part 10 moderate vs bible extreme cross-ref (LOW — cosmetic). Build hash `69d9b813` unchanged. Invariants: guide's role as example takes priority (iter 39+), OCEAN labeling consistency (iter 40+).
+
+---
+
+## 5.7. iter 41 — OCEAN LABELING LEFTOVER + BIBLE CROSS-REF (KI#30/#31 ✅ CLOSED)
+
+iter 41 закрыл 2 KI: KI#30 (NEW BUG found during investigation — iter 40 KI#29 fix был неполным) + KI#31 (roadmap item #3 — Part 10 §10.4 + Part 7A §7A.9 missing reverse cross-ref to bible). Оба — doc/canon-only, build hash `69d9b813` unchanged.
+
+| KI | Location | Симптом | Fix | Status |
+|----|----------|---------|-----|--------|
+| KI#30 | `docs/canon/part_07a.md` L415 (Выщербленный XML template §7A.9) + `docs/canon/part_10.md` L51 (Елена OCEAN §10.1) | iter 40 KI#29 fix был неполным — закрыты только `part_10.md` L408 + `appendix_character_map.md`, остались 2 locations с stale OCEAN labels (cautions zone values помечены как extreme): `part_07a.md` L415 N=70 labeled as «Высокая N (невротизм)» extreme; `part_10.md` L51 A=38/N=68 labeled as «Низкая A»/«Высокая N» extreme. Per Part 5 §5.1 RULE: extreme = строго `<30` или `>70`; cautious zone = `30–40` / `60–70`. Part 5 §5.1 L59 явно: «У Елены 1 экстремальный полюс (O=72) + 2 cautious zone (A=38, N=68)». | **Label-only fix, values unchanged.** `part_07a.md` L415: «Экстремумы: Низкая E, Высокая N» → «Низкая E (<30). Cautious zone: N=70 (граница 60–70, см. Part 5 §5.1 RULE)» (mirror iter 40 KI#29 fix). `part_10.md` L51: «Экстремумы: Высокая O, Низкая A, Высокая N» → «Высокая O (>70). Cautious zone: A=38 (30–40), N=68 (60–70) — см. Part 5 §5.1 RULE». | ✅ CLOSED |
+| KI#31 | `docs/canon/part_10.md` §10.4 OCEAN + `docs/canon/part_07a.md` §7A.9 OCEAN | Roadmap item #3 (iter 40 leftover). Bible (`docs/vyshcherblenny_character_bible.md` L95-99, iter 39 KI#26 fix) имеет Note → Part 10 §10.4 + Part 7A §7A.9 (moderate 4K-fallback values O:60/C:55/E:25/A:30/N:70). Reverse cross-ref отсутствует — ни Part 10 §10.4, ни Part 7A §7A.9 не ссылаются обратно на bible для extreme 16K+ values. Cosmetic. | Cross-ref Note добавлена в OCEAN section обеих canon locations: «**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see `docs/vyshcherblenny_character_bible.md` §OCEAN.» | ✅ CLOSED |
+
+**Modified files (iter 41):** `docs/canon/part_07a.md` (KI#30 L415 relabel + KI#31 Cross-ref Note), `docs/canon/part_10.md` (KI#30 L51 Елена relabel + KI#31 §10.4 Cross-ref Note), `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `docs/AUDIT_VERIFICATION.md`.
+
+**Все canon locations с OCEAN labels проверены (iter 41):** `part_07a.md` L415, `part_10.md` L51/L148/L254/L408, `appendix_character_map.md` — все consistent с Part 5 §5.1 RULE (extreme = строго `<30` или `>70`; cautious zone = `30–40` / `60–70`).
+
+**НЕ в scope (principles preserved):**
+- OCEAN values в обеих locations (Выщербленный O:60/C:55/E:25/A:30/N:70; Елена O:72/C:65/E:41/A:38/N:68) — unchanged. Это internal canon consistency fix (Part 5 RULE vs Part 7A/Part 10 labels), НЕ bible-vs-canon sync — iter 39 invariant не применяется.
+- Елена OCEAN (part_10.md L51) Cross-ref Note НЕ добавлена — у Елены нет moderate vs extreme split (bible `elena_character_bible.md` не дублирует OCEAN values в moderate/extreme вариантах, в отличие от Выщербленного).
+
+**Новые invariants (iter 41+):**
+- **OCEAN labeling consistency (iter 40+, расширен iter 41):** label-only fixes допустимы для internal canon consistency (Part 5 RULE vs Part 7A/Part 10/appendix labels) — values примера не трогаются. Все canon locations с OCEAN labels проверены.
+- **Bible ↔ canon cross-ref symmetry (iter 41+):** bible Note → canon (iter 39 KI#26) + reverse Cross-ref Note → bible (iter 41 KI#31). Навигационная полнота.
+
+**Точка остановки iter 41:** OCEAN labeling leftover + bible cross-ref complete. KI#30/#31 ✅ CLOSED. iter 42+ roadmap: Glossary double-render (LOW — structural, by design), Component extracts sync (MEDIUM — 54 файла, требует pairwise diff audit). Build hash `69d9b813` unchanged. Invariants: guide's role as example takes priority (iter 39+), OCEAN labeling consistency (iter 40+, расширен iter 41), Bible ↔ canon cross-ref symmetry (iter 41+).
 
 ---
 
