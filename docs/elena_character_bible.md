@@ -3,8 +3,8 @@
 > Any agent modifying Елена's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.2.0 (Phase 4.3–6 update — Assembly walkthrough, status labels, transitions)
-**Last Updated:** 2026-05-15
+**Version:** 9.2.1 (iter 39 — KI#25 fix: OCEAN labels aligned с canon Part 5 §5.1 + Part 7A §7A.13)
+**Last Updated:** 2026-07-08 (iter 39)
 
 ---
 
@@ -72,12 +72,12 @@
 ```
 
 ## OCEAN
-- O: 72 (High Openness — curious, creative, follows leads others ignore)
+- O: 72 (High Openness — curious, creative, follows leads others ignore) ⚠️ EXTREME (>70)
 - C: 65 (Moderate-High Conscientiousness — methodical in research, less so in personal life)
 - E: 41 (Low-Moderate Extraversion — works alone, prefers bars to parties)
-- A: 38 (Low-Moderate Agreeableness — confrontational, challenges sources) ⚠️ EXTREME
-- N: 68 (High Neuroticism — cynical, anxious, reacts strongly to betrayal) ⚠️ EXTREME
-- Extreme poles: 3 (O=72, A=38, N=68). For 4K context, keep only 2: N=68 and A=38.
+- A: 38 (Low-Moderate Agreeableness — confrontational, challenges sources) ⚠️ CAUTIOUS ZONE (30–40, напрямую связана с FLAW: отталкивает сарказмом)
+- N: 68 (High Neuroticism — cynical, anxious, reacts strongly to betrayal) ⚠️ CAUTIOUS ZONE (60–70, напрямую связана с GHOST-реактивностью: предательство редактора)
+- Extreme poles: 1 (O=72 > 70) + 2 cautious zone (A=38, N=68 — на границе с экстремальной зоной, напрямую связаны с FLAW и GHOST). Профиль допустим для 4K+ контекста целиком. См. `docs/canon/part_05.md` §5.1 RULE и `docs/canon/part_07a.md` §7A.13.
 
 ## Enneagram
 - Type: 6w5 (Лоялист/Скептик с крылом Исследователя)

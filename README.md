@@ -37,9 +37,9 @@ v8 — единый гайд без слоёв. Весь контент чита
 | 7 | Техническая реализация | 16 | SP, CORE DIRECTIVES (все 7), Tone Frame, Format Lock, AN, Structured Inject, Lorebook, Params, XML/API/4K, Assembly Pipeline |
 | 8 | Анти-паттерны | 17 | 16 анти-паттернов (AP-1–AP-16), последовательная нумерация |
 | 9 | Диагностика и тестирование | 11 | Quality Scale, One Change Rule, Checklist, Problems, Symptom Table, Decision Tree, Test Scenarios, Pre-Deploy |
-| 10 | Полные примеры карточек | 6 | Elena, Geralt, Edward, Walter, Omnis-Zeta, Vysherblenny |
+| 10 | Полные примеры карточек | 4 | Elena, Walter, Omnis-Zeta, Vysherblenny (Geralt + Edward DELETED в v9.1 — FIX-07) |
 
-**Итого: 92 секций, 10 Parts.**
+**Итого: 10 Parts.** Актуальный count секций — в `AGENT_NAVIGATION.md` (98 секций в master HTML, включая 3 appendix).
 
 ---
 

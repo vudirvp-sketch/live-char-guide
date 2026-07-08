@@ -341,6 +341,33 @@ python3 scripts/check_english.py    # ✅ 0 leaks in docs/canon/ (29 baseline in
 
 ---
 
+## 5.5. iter 39 — DOC DRIFT FIX (KI#25/#26/#27 ✅ CLOSED)
+
+iter 39 вышел за scope KI#21 (контент канона) — обнаружен doc drift в doc-файлах (bible + README), которые не покрывались аудитом KI#21. Все 3 новых KI — doc-only, canon Part 10 §10.4 не тронут. Build hash `69d9b813` unchanged.
+
+**Принцип iter 39+ invariant:** «guide's role as example takes priority over character canon» — при рассинхроне bible vs canon Part 10 правится bible, не Part 10.
+
+| KI | Файл | Симптом | Fix | Status |
+|----|------|---------|-----|--------|
+| KI#25 | `docs/elena_character_bible.md` L78-80 | OCEAN A=38/N=68 помечены `⚠️ EXTREME`; «Extreme poles: 3» — противоречит Part 5 §5.1 RULE и Part 7A §7A.13 (iter 35 fix) | `⚠️ CAUTIOUS ZONE` для A=38/N=68; «Extreme poles: 1 (O=72) + 2 cautious zone»; убрано «For 4K context, keep only 2» | ✅ CLOSED |
+| KI#26 | `docs/vyshcherblenny_character_bible.md` L14, L26-28, L86, L95, L115 | Setting «Ministry of Closed Communications» (старый сеттинг МЗК), GHOST Layers G1 «Abandoned at archive as child» vs Part 10 §10.4 Tier 1 «Был архивариусом — впрыснул себе документ», OCEAN «три экстремума» (фактически 4), Note covers only Part 7A (не Part 10), Lorebook `vysh_world_rules` keys «МЗК, Министерство, Закон» | L14 Setting (ТЕНЕБРИС), L26-28 GHOST Layers (Tier 1/2/3 matching Part 10 §10.4), L86 OCEAN (4 экстремума + per-value markers), L95 Note (расширена — covers Part 7A §7A.9 + Part 10 §10.4 moderate values), L115 Lorebook (`vysh_world_rules` → Вентора/Архив/Ошметок/Сангвис/Вель) | ✅ CLOSED |
+| KI#27 | `README.md` L40 | Part 10 указывает «6 cards: Elena, Geralt, Edward, Walter, Omnis-Zeta, Vysherblenny» — Geralt + Edward DELETED в v9.1 (FIX-07) | «4 cards: Elena, Walter, Omnis-Zeta, Vysherblenny (Geralt + Edward DELETED в v9.1 — FIX-07)»; L42 «92 секции» → «Итого: 10 Parts (см. AGENT_NAVIGATION.md для 98 секций)» | ✅ CLOSED |
+
+**Modified files (iter 39):** `docs/elena_character_bible.md`, `docs/vyshcherblenny_character_bible.md`, `README.md`, `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `docs/AUDIT_VERIFICATION.md`.
+
+**Validation gates ALL PASS:** build (hash `69d9b813`) / validate:master (12 checks) / validate (8 gates, 7.5KB) / test:unit (43/43) / test:integration (21/21) / lint (0 errors, 12 warnings baseline) / qa:csp / qa:bundle / qa:doc-versions / audit_vs_embeds.py (0 regressions) / check_english.py --scan-docs (0 WH40k terms).
+
+**НЕ в scope iter 39 (deferred to iter 40+):**
+
+| ID | Описание | Risk |
+|----|----------|------|
+| KI#27-leftover | README section counts (Parts 1/5/7/8 также устарели, 92 → 98 секций) | LOW — cosmetic |
+| KI#26-leftover | OCEAN moderate values labeling в `part_10.md` §10.4 + `appendix_character_map.md` — N=70 помечен как «экстремум», но N=70 = cautious zone boundary per Part 5 §5.1 RULE «<30 или >70» | MEDIUM — трогает example, требует аудита: либо labels (потенциальная регрессия примера), либо уточнить RULE |
+
+**Точка остановки iter 39:** Doc drift fix complete. KI#25/#26/#27 ✅ CLOSED. iter 40+ roadmap: README section counts (cosmetic), OCEAN moderate values labeling в Part 10 (potential example regression), Glossary double-render, Component extracts sync. Build hash `69d9b813` unchanged. Принцип «guide's role as example takes priority over character canon» — invariant с iter 39.
+
+---
+
 ## 6. Риски и компромиссы
 
 ### 6.1. Build hash stability

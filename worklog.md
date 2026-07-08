@@ -4,67 +4,42 @@
 
 ---
 
-Task ID: 38
+Task ID: 39
 Agent: main
-Task: iter 38 — выполнить P3 fixes из `docs/AUDIT_VERIFICATION.md` §4.4 (12 правок + 3 новые секции KI#21 Content Audit contradictions — Local fixes + new sections). Точка остановки iter 37: KI#21 P0+P1+P2 ✅ CLOSED (45/57), build hash 69d9b813. Все правки — текстовые замены/добавления в `docs/canon/*.md` + 2 новых файла, master HTML не трогается. После правок — validation gates + `audit_vs_embeds.py` + `check_english.py --scan-docs`. Результат: архив + git-команды + точка остановки.
+Task: iter 39 — анализ исходников Йоуёмы/Выщербленного (предоставлены пользователем), сверка с каноном `docs/canon/` и doc-файлами (`docs/character_bible.md`, `docs/elena_character_bible.md`, `docs/vyshcherblenny_character_bible.md`, `README.md`). Принцип: guide's role as example takes priority — canon Part 10 §10.4 НЕ правится; bible/README подтягиваются к канону. Найти doc drift, документировать как KI#N в STATUS.md, потом фиксить. Validation gates + audit_vs_embeds.py + check_english.py. Результат: архив + git-команды + точка остановки.
 
 Work Log:
-- 1: **Контекст загружен** из STATUS.md (iter 37 — CANON AUDIT P2 ✅ COMPLETE, 45/57 правок закрыты, KI#21 P0+P1+P2 ✅ CLOSED; build hash `69d9b813`), worklog.md (iter 37 record — самый подробный; iter 36 → one-liner), AGENT_NAVIGATION.md (header iter 37 line, §6 pitfall #40 KI#21 P0+P1+P2 ✅ CLOSED, §8 OP-1 iter 37 row + iter 38+ roadmap с P3 plan), `docs/AUDIT_VERIFICATION.md` §4.4 (P3 fix plan — 12 правок + 3 новые секции: P3-1 D3, P3-2 D5, P3-3 D6, P3-4 D7, P3-5 F2, P3-6 F3, P3-7 F8 skip, P3-8 G1, P3-9 G2, P3-10 G3 skip, P3-11 G4, P3-12 G5), `docs/canon/_README.md` (§3 markdown conventions, §3.9 callout policy, §5 migration status).
-- 2: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. Build hash `69d9b813` confirmed. `pnpm install --frozen-lockfile` (Node 24 + pnpm 10.33.0). `audit_vs_embeds.py` REPO path workaround — symlink `mkdir -p /home/z/my-project/work && ln -sfn /home/z/my-project/live-char-guide /home/z/my-project/work/live-char-guide` (script expects `work/live-char-guide` path).
-- 3: **Baseline validation gates ALL PASS** (до правок):
-  - `audit_vs_embeds.py` — ✅ 0 regressions (28 animation classes, 11 observed, 16 covered by `scroll-enter`)
-  - `check_english.py --scan-docs` — ✅ 0 WH40k English terms in docs/
-  - `check_english.py` (default) — 29 baseline leaks в `src/master/` HTML (unchanged, expected)
-- 4: **Canon file analysis выполнен** для всех targeted sections:
-  - `part_07b.md` §7B.2 (lines 38-72) — Greeting алгоритм + Разобранный пример Елены (бар, ночь).
-  - `part_10.md` (535 строк) — 4 карточки: §10.1 Елена (existing Annotation callout from P2-18), §10.2 Уолтер (no Annotation), §10.3 Омнис-Зета (no Annotation), §10.4 Выщербленный (no Annotation). Inline `<!-- Demonstrates: ... -->` comments — 23 occurrences across all 4 cards (inside code blocks).
-  - `part_03.md` §3.8 (lines 191-252) — Multi-char с Йоуёмой, без контекста кто это.
-  - `part_03.md` §3.1 (lines 12-29) — Voice Isolation % table с "~40% отклонение".
-  - `part_02.md` §2.2 (lines 30-67) — Типы Price table с 3 колонками (Тип/Механика/Пример), где «Пример» = абстрактные категории.
-  - `part_01.md` (123 → 146 строк) — §1.4 ends with Synthesis; нет §1.8 yet; cross-refs на Part 10 отсутствуют.
-  - `part_04.md` §4.11 (lines 315-358) — GHOST Layers section; RECOMMENDATION упоминает только Елену как single GHOST пример.
-  - `part_09.md` §9.7 (lines 121-137) — Test scenarios; нет примера карточки для OCEAN-теста.
-- 5: **P3-1 (D3) applied** — 1-строчное **Примечание:** перед обоими Greeting Елены:
-  - `part_07b.md` line 55 (before "### Разобранный пример: Greeting Елены"): «**Примечание:** Greeting Елены здесь — учебный пример для разбора 4-шагового алгоритма (бар, ночь). Canonical Greeting для production-карточки Елены (кабинет редакции, 2 часа ночи) — `[ref: part_10.md §10.1 — GREETING]`. Разные сцены = разные Sensory Anchors, тот же персонаж.»
-  - `part_10.md` §10.1 (after intro paragraph, before **TEMPLATE:**): «**Примечание:** Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Учебный разбор Greeting по 4-шаговому алгоритму (бар, ночь) — `[ref: part_07b.md §7B.2 — Greeting алгоритм]`.»
-- 6: **P3-2 (D5) applied** — **Demonstrates:** callout перед TEMPLATE каждой из 4 карточек в `part_10.md`:
-  - §10.1 Елена: «**Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.» (в дополнение к существующему Annotation callout снизу)
-  - §10.2 Уолтер: «**Demonstrates:** EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.»
-  - §10.3 Омнис-Зета: «**Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.»
-  - §10.4 Выщербленный: «**Demonstrates:** SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.»
-  - Inline `<!-- Demonstrates: ... -->` комментарии внутри code blocks сохранены (per-example аннотации, code block context allows English per check_english.py ALLOWED_CONTEXTS).
-- 7: **P3-3 (D6) applied** — `part_03.md` §3.8 (после intro paragraph, перед "### Маркеры персонажа"): «**Сквозные персонажи:** Выщербленный — паразит памяти из сеттинга «Ошметок Веля» (полная карточка — `[ref: part_10.md §10.4]`). **Йоуёма** — дополнительный персонаж того же сеттинга, вводится только в этом разделе для демонстрации Voice Bleed между двумя нестандартными голосами (поэтический поток сознания с неологизмами vs. архивная терминология с XML-тегами). В остальных Parts гайда Йоуёма не используется.»
-- 8: **P3-4 (D7) applied** — 3 cross-refs на Уолтера:
-  - `part_01.md` §1.4 (после Synthesis): «**Cross-ref:** Готовые карточки разной сложности — Елена (базовая, `[ref: part_10.md §10.1]`), Уолтер Уайт (базовая современная, без фэнтези, `[ref: part_10.md §10.2]`), Омнис-Зата (экспертная, GHOST Layers + CoT + Lorebook, `[ref: part_10.md §10.3]`), Выщербленный (экспертная, мульти-персонажность, `[ref: part_10.md §10.4]`). Карта всех персонажей — `[ref: appendix_character_map.md]`.»
-  - `part_04.md` §4.11 RECOMMENDATION (line 355): добавлен Уолтер Уайт как canonical пример одиночного GHOST без Layers (GHOST = Gray Matter). Для контраста — Омнис-Зата и Выщербленный с 3-tier GHOST Layers.
-  - `part_09.md` §9.7 (после Cross-ref): «Пример тестирования карточки с OCEAN-полюсами — Уолтер Уайт (C=85, A=25, E=30 — выраженные экстремумы), см. `[ref: part_10.md §10.2]`.»
-- 9: **P3-5 (F2) applied** — `part_02.md` §2.2 Типы Price table (line 60-64): 3-колоночная таблица → 4-колоночная. Существующая колонка «Пример» переименована в «Категории реакций», добавлена 4-я колонка «Пример (конкретный)» с конкретными Trigger → Action → Price:
-  - Физиологический: «Ложь собеседника → прищуривается, молчит → **напряжение в челюсти** (Елена, §2.3)»
-  - Вербально-поведенческий: «Сарказм собеседника → пауза 2 сек → **обрывание фразы, голос тише** (Уолтер, `[ref: part_10.md §10.2 — FLAW-linked Anchors]`)»
-- 10: **P3-6 (F3) applied** — `part_03.md` §3.1 (после таблицы % отклонений, перед **RULE:**): «**Методология:** проценты отклонения — эмпирические оценки авторов гайда на основе тестирования ~50 карточек на 12B–32B моделях. Не точные измерения; воспринимайте как качественные ориентиры (стабилен / дрейфует / сломан). Аналогичные проценты в §3.2 (Иерархия влияния на голос) — той же природы.»
-- 11: **P3-7 (F8) SKIP** — covered by P0-2 (A2 cautious zone добавлено в iter 35).
-- 12: **P3-8 (G1) + P3-9 (G2) applied** — новый файл `docs/canon/part_00.md` (86 строк):
-  - YAML front-matter: `canonical_for: —`, `vs_embedded: none`, `vs_cross_ref: part_01/07a/07b/09/10/appendix_character_map`, `sections: 2 (p0_how_to_read, p0_tldr_quick_start)`, `last_synced: 2026-07-08 (iter 38 — NEW)`, `migration_status: ✅ NEW (iter 38) — концептуальная секция, не имеет master HTML артефакта`.
-  - §0.1 «Как читать этот гайд»: что такое Part (карта 10 модулей в таблице), VS-EMBED, нотация `[ref: ...]`, метки callouts (английские semantic anchors) с описанием каждой. ~40 строк.
-  - §0.2 «TL;DR / Quick Start»: 6 шагов сборки (SP/Description/Examples/Greeting/Anchors/Pre-deploy check), 3 правила, готовый пример (Елена). ~30 строк.
-- 13: **P3-10 (G3) SKIP** — covered by P2-1 (inline defs Anchor/Voice/SPINE/OCEAN добавлены в part_01 §1.4 в iter 37).
-- 14: **P3-11 (G4) applied** — новый файл `docs/canon/appendix_character_map.md` (32 строки):
-  - YAML front-matter: `canonical_for: —`, `vs_embedded: none`, `vs_cross_ref: part_01/02/03/04/05/06/07a/07b/08/10`, `sections: 1 (appendix_character_map)`, `last_synced: 2026-07-08 (iter 38 — NEW)`, `migration_status: ✅ NEW (iter 38) — концептуальный reference, не имеет master HTML артефакта`.
-  - Appendix D: Карта персонажей. Таблица 5 персонажей: Елена, Уолтер Уайт, Омнис-Зата, Выщербленный, Йоуёма. Колонки: где используется / сложность / GHOST / SPINE / Enneagram / OCEAN экстремумы / CoT / Lorebook.
-  - RECOMMENDATION по выбору персонажа под задачу (базовая / экспертная / мульти-персонажная).
-- 15: **P3-12 (G5) applied** — `part_01.md` §1.8 «Pre-build checklist» (новая секция после §1.7):
-  - `data-section: p1_prebuild_checklist`
-  - Таблица 6 вопросов: размер модели (12B/32B+/API), контекстное окно (4K/8K/16K+), сложность (Простая/Средняя/Экспертная), GHOST один или Layers, CoT нужен, Lorebook нужен. Каждая строка с вариантами ответов и что определяет + cross-ref.
-  - RECOMMENDATION: для первой карточки — «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook» (конфигурация Елены).
-  - Cross-ref на part_00 §0.2 TL;DR и appendix_character_map.
-- 16: **`docs/canon/_README.md` updated**:
-  - §2 Структура Canon — добавлены 2 новых файла в дерево: `part_00.md` (Part 0: Как читать + TL;DR, iter 38), `appendix_character_map.md` (Appendix D: Character map, iter 38). Appendix renames: MBTI → Appendix A, Model Table → Appendix B, Glossary → Appendix C.
-  - §5 Migration Status — добавлены 2 новые строки: Part 0 (concept) и Appendix D Character Map. Финальная строка: «Все 10 Parts + 4 Appendix + Part 0 (concept) — Canon COMPLETE (iter 18 + iter 38 concept additions).»
-  - §3.9 Callout labels — добавлены 2 новые метки: `**Demonstrates:**` (iter 38+), `**Annotation:**` (iter 37+). Уточнение про `**Примечание:**` — Russian локальное уточнение, не semantic anchor.
-- 17: **Post-fix validation gates ALL PASS:**
-  - `validate:master` — ✅ Unified validation PASSED (12 checks, no regressions vs baseline)
-  - `build` — ✅ SUCCESS, hash `69d9b813` unchanged (canon-файлы не в hash computation)
-  - `validate` — ✅ 8 gates PASSED, index.html 7.5KB (same as iter 37)
+- 1: **Контекст загружен** из STATUS.md (iter 38 — CANON AUDIT P3 ✅ COMPLETE, KI#21 ✅ CLOSED полностью 57/57, build hash `69d9b813`), worklog.md (iter 38 record — самый подробный), AGENT_NAVIGATION.md (header iter 38 line, §6 pitfall #40 KI#21 ✅ CLOSED), `docs/canon/part_10.md` §10.4 (Выщербленный — полная карточка, мир ТЕНЕБРИС: Вель/Ошметок/Сангвис/Вентора/Архив), `docs/canon/part_03.md` §3.8 (Multi-char с Йоуёмой), `docs/canon/appendix_character_map.md` (карта 5 персонажей, iter 38 NEW), `docs/AUDIT_VERIFICATION.md` §2 (verification table). Исходники пользователя: `/home/z/my-project/upload/итерация 1.txt` (Йоуёма — ДЕФЕКТНЫЙ РЕЗОНАТОР, 4w5, GHOST из Архива), `/home/z/my-project/upload/концепт мира.txt` (ТЕНЕБРИС — Вель/Сангвис/Вентора/Архив/Ошметок/Церковь Анамнеза).
+- 2: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. Build hash `69d9b813` confirmed. `pnpm install --frozen-lockfile` (Node 24 + pnpm 10.33.0 via corepack wrapper `/home/z/my-project/scripts/pnpm.sh`). `audit_vs_embeds.py` REPO path workaround — symlink `mkdir -p /home/z/my-project/work && ln -sfn /home/z/my-project/repo /home/z/my-project/work/live-char-guide`.
+- 3: **Baseline validation gates ALL PASS** (до правок): build hash `69d9b813`, validate:master (12 checks), validate (8 gates, 7.5KB), test:unit (43/43), test:integration (21/21), lint (0 errors, 12 warnings baseline), qa:csp, qa:bundle (7.5KB), qa:doc-versions, audit_vs_embeds.py (0 regressions), check_english.py --scan-docs (0 WH40k English terms in docs/).
+- 4: **Анализ исходников vs canon выполнен:**
+  - `концепт мира.txt` описывает мир ТЕНЕБРИС: Вель = город-организм, Сангвис (3 формы: сырой/фильтрованный/чистый), Вентора = иммунитет, Архив = слепое пятно метаболизма, Ошметок = непереваренное пространство, Церковь Анамнеза (2 фракции), Чёрный рынок, Элита. Совпадает с canon Part 10 §10.4 (Выщербленный living in Oshmetok of Vel).
+  - `итерация 1.txt` описывает Йоуёму как ДЕФЕКТНЫЙ РЕЗОНАТОР (4w5 Enneagram), GHOST из Архива (выпила документ), микроасистолии как паузы, голос с металлическим резонансом, архаизмы при GHOST-активации, кровь из носа при возбуждении. НЕ совпадает с canon Part 3 §3.8 (где Йоуёма — eccentric wanderer с poetic/associative voice, без деталей GHOST). Но — guide's role as example takes priority: Part 3 §3.8 работает как пример Voice Bleed, не трогаем.
+  - `vyshcherblenny_character_bible.md` (v9.2.0, Phase 0) содержит stale references: L14 Setting (Ministry of Closed Communications — старый сеттинг), L26-28 GHOST Layers G1 (Abandoned at archive as child — не совпадает с Part 10 Tier 1), L86 OCEAN count (3 instead of 4), L95 Note (covers only Part 7A, not Part 10), L115 Lorebook (МЗК instead of Вентора/Архив).
+  - `elena_character_bible.md` (v9.2.0) L78-80: A=38 и N=68 помечены `⚠️ EXTREME` — противоречит canon Part 5 §5.1 RULE (extreme = `<30` или `>70`; cautious zone = `30–40` / `60–70`) и Part 7A §7A.13 (iter 35 fix: «1 экстремальный полюс (O=72). A=38 и N=68 — cautious zone»).
+  - `README.md` L40: Part 10 указывает «6 cards: Elena, Geralt, Edward, Walter, Omnis-Zeta, Vysherblenny» — фактически 4 (Geralt + Edward DELETED в v9.1, FIX-07).
+  - `appendix_character_map.md` (iter 38 NEW): «Выщербленный ... OCEAN экстремумы: N=70, E=25» — N=70 = cautious zone boundary, не extreme. Но это трогает пример → defer to iter 40+.
+- 5: **KI#25 documented** в STATUS.md (BEFORE fix) — `docs/elena_character_bible.md` L78-80 OCEAN labels stale. Severity: LOW. Fix plan: заменить `⚠️ EXTREME` → `⚠️ CAUTIOUS ZONE` для A=38 и N=68; «Extreme poles: 3» → «Extreme poles: 1 (O=72) + 2 cautious zone (A=38, N=68)»; убрать «For 4K context, keep only 2» (профиль допустим для 4K+ целиком per Part 5 §5.1 L59).
+- 6: **KI#26 documented** в STATUS.md (BEFORE fix) — `docs/vyshcherblenny_character_bible.md` multiple stale references. Severity: MEDIUM. Fix plan: L14 (Setting → ТЕНЕБРИС), L26-28 (GHOST Layers → Tier 1/2/3 matching Part 10 §10.4), L86 (4 экстремума, не 3), L95 (Note расширить — cover Part 10 §10.4 too), L115 (Lorebook → Вентора/Архив/Ошметок/Сангвис/Вель). НЕ в scope: OCEAN moderate values в Part 10 §10.4 + appendix_character_map.md (трогает пример, defer iter 40+).
+- 7: **KI#27 documented** в STATUS.md (BEFORE fix) — `README.md` L40 stale Part 10 entry. Severity: LOW. Fix plan: «6 | Elena, Geralt, Edward, Walter, Omnis-Zeta, Vysherblenny» → «4 | Elena, Walter, Omnis-Zeta, Vysherblenny (Geralt + Edward DELETED в v9.1 — FIX-07)». НЕ в scope: counts секций в README L31-40 (Parts 1/5/7/8 также устарели). Cosmetic, defer iter 40+.
+- 8: **KI#25 fix applied** — `docs/elena_character_bible.md`:
+  - L6: Version `9.2.0 (Phase 4.3–6 update ...)` → `9.2.1 (iter 39 — KI#25 fix: OCEAN labels aligned с canon Part 5 §5.1 + Part 7A §7A.13)`. Last Updated `2026-05-15` → `2026-07-08 (iter 39)`.
+  - L75-80: OCEAN секция переписана — добавлены `⚠️ EXTREME (>70)` для O=72; `⚠️ CAUTIOUS ZONE (30–40, ...)` для A=38; `⚠️ CAUTIOUS ZONE (60–70, ...)` для N=68. «Extreme poles: 3» → «Extreme poles: 1 (O=72 > 70) + 2 cautious zone (A=38, N=68 — на границе с экстремальной зоной, напрямую связаны с FLAW и GHOST). Профиль допустим для 4K+ контекста целиком. См. `docs/canon/part_05.md` §5.1 RULE и `docs/canon/part_07a.md` §7A.13.»
+- 9: **KI#26 fix applied** — `docs/vyshcherblenny_character_bible.md`:
+  - L6: Version `9.2.0 (Phase 0 creation)` → `9.2.1 (iter 39 — KI#26 fix: Setting + GHOST Layers + OCEAN count + Lorebook aligned с canon Part 10 §10.4)`. Last Updated `2026-05-15` → `2026-07-08 (iter 39)`.
+  - L14: Setting `Post-industrial fantastical — Ministry of Closed Communications, archives, urban decay` → `ТЕНЕБРИС — Вель (город-организм), Ошметок Веля (непереваренное пространство), Сангвис (сопротивление замене), Вентора (иммунитет Веля без сознания), Архив (слепое пятно метаболизма). См. docs/canon/part_10.md §10.4.`
+  - L26-28: GHOST Layers G1/G2/G3 (Abandoned at archive / Injected with living document / Each absorption...) → Tier 1/2/3 (Был архивариусом — впрыснул себе документ / Первое вырезание — поглотил память умирающего коллеги → цикл начался / Каждое вырезание заполняет дыру, создаёт новую → после 3-го не помнит имя...). Каждый tier с cross-ref на `part_10.md` §10.4.
+  - L80-86: OCEAN секция — добавлены `⚠️ EXTREME (>70)` для O=85, `⚠️ EXTREME (<30)` для C=25, `⚠️ CAUTIOUS ZONE (60–70)` для E=60, `⚠️ EXTREME (<30)` для A=15, `⚠️ EXTREME (>70)` для N=92. «Extreme poles: O=85 + A=15 + N=92 (три экстремума — допустимо для 16K+ карточки)» → «Extreme poles: 4 экстремума (O=85, C=25, A=15, N=92) — допустимо для 16K+ карточки (см. `part_05.md` §5.3: «16K+ — до 4 полюсов»). E=60 — cautious zone, напрямую связана с LIE (формальность как защита). Для 4K/8K: оставить N=92, A=15, C=25 (напрямую связаны с SPINE: FLAW, GHOST-реактивность, импульсивность).»
+  - L95: Note расширена — теперь явно покрывает и Part 7A §7A.9, и Part 10 §10.4 (both use moderate values O:60 C:55 E:25 A:30 N:70 for pedagogical simplification / 4K-fallback; bible's extreme values = canonical 16K+ psychology). Добавлена рекомендация: «При сборке production-карточки для 16K+ — extreme values. Для 4K/8K — moderate values из Part 10 §10.4 или Part 7A §7A.9.»
+  - L113-115: Lorebook entries — `vysh_ghost_first` content updated (добавлено «Цикл начался.» для соответствия Part 10 §10.4 Tier 2). `vysh_world_rules` полностью переписан: keys `МЗК, Министерство, Закон` → `Вентора, Архив, Ошметок, Сангвис, Вель`; content `Министерство Закрытых Коммуникаций регулирует документооборот между людьми и текстами` → `Вель — город-организм (метаболизм = замена). Вентора — иммунитет без сознания, пытается изолировать ошметки. Архив — слепое пятно метаболизма, источник «документов». Сангвис — сопротивление замене (сырой / фильтрованный / чистый). Ошметок — непереваренное пространство, где живёт Выщербленный. См. part_10.md §10.4 Lorebook entries.`
+  - L173-180: Consistency Checklist — все пункты `[x]`, добавлена строка «Setting aligned с `part_10.md` §10.4 (iter 39: ТЕНЕБРИС)». Последний пункт (OCEAN values differ) — переписан как `[x]` с пояснением: moderate в Part 7A/Part 10 = intentional 4K-fallback, extreme в bible = canonical 16K+ values.
+- 10: **KI#27 fix applied** — `README.md`:
+  - L40: `| 10 | Полные примеры карточек | 6 | Elena, Geralt, Edward, Walter, Omnis-Zeta, Vysherblenny |` → `| 10 | Полные примеры карточек | 4 | Elena, Walter, Omnis-Zeta, Vysherblenny (Geralt + Edward DELETED в v9.1 — FIX-07) |`.
+  - L42: `**Итого: 92 секций, 10 Parts.**` → `**Итого: 10 Parts.** Актуальный count секций — в AGENT_NAVIGATION.md (98 секций в master HTML, включая 3 appendix).`
+- 11: **Post-fix validation gates ALL PASS:**
+  - `build` — ✅ SUCCESS, hash `69d9b813` unchanged (docs не в hash computation)
+  - `validate:master` — ✅ Unified validation PASSED (12 checks, no regressions)
+  - `validate` — ✅ 8 gates PASSED, index.html 7.5KB
   - `test:unit` — ✅ 43/43 (no regressions)
   - `test:integration` — ✅ 21/21 (no regressions)
   - `lint` — ✅ 0 errors, 12 warnings (baseline)
@@ -72,49 +47,35 @@ Work Log:
   - `qa:bundle` — ✅ 7.5KB (max 500KB)
   - `qa:doc-versions` — ✅ all current
   - `audit_vs_embeds.py` — ✅ **0 regressions** (28 animation classes, 11 observed, 16 covered by `scroll-enter`)
-  - `check_english.py --scan-docs` — ✅ 0 WH40k English terms in docs/
-  - `check_english.py` (default) — 29 baseline leaks в `src/master/` HTML (unchanged — master HTML не тронут)
-  - Manual English-leak check новых canon-файлов (part_00.md, appendix_character_map.md) — 0 issues (English только в allowed contexts: code blocks, YAML front-matter, callout labels, semantic anchors)
-- 18: **Verification:** `git diff --stat docs/canon/` — 8 файлов modified (60 insertions, 13 deletions) + 2 новых файла (untracked). `git diff --stat src/` — пусто (нет правок в src/master, src/shell, src/assets). `cat build.hash` — `69d9b813` (unchanged). Canon total: 3 905 → 4 070 строк (+165 net).
-- 19: **Документация актуализирована:**
-  - `STATUS.md` — iter 38 record (CANON AUDIT P3 ✅ COMPLETE, 57/57 правок закрыты, KI#21 ✅ CLOSED полностью). iter 37 → one-paragraph reference. iter 36 → one-paragraph reference. iter 35 → one-paragraph reference. iter 34 → one-paragraph reference. iter 33 → one-liner. iter 32 → one-liner. KI#21 status updated: ✅ CLOSED (57/57). Подтверждённые ограничения — обновлены: «Canon migration COMPLETE (iter 7-18) + concept additions (iter 38)», «Canon audit P0+P1+P2+P3 ✅ CLOSED (iter 35-38)», добавлена строка «Callout labels English (iter 37+)» с `Demonstrates` и `Annotation`.
-  - `worklog.md` — iter 38 = этот record (самый подробный); iter 37 → one-liner.
-  - `AGENT_NAVIGATION.md` — header iter line updated (+iter 38 canon P3, KI#21 ✅ CLOSED). §6 pitfall #40 KI#21 ✅ CLOSED полностью (обновлён). §8 OP-1 iter history table: iter 38 row added. §8 iter 39+ roadmap updated (KI#21 ✅ CLOSED, no planned iter 39+).
-  - `docs/AUDIT_VERIFICATION.md` — §4.4 P3 table annotated «✅ DONE iter 38» для каждой правки. §5 iter 38 ✅ COMPLETE. §7.4 iter 38 stop point added. Header baseline `69d9b813` unchanged. Финальная строка: «iter 38 (P3) ✅ CLOSED — 57/57 правок. KI#21 ✅ CLOSED полностью.»
-  - `docs/canon/_README.md` — §2 дерево обновлено (+2 файла), §5 migration status (+2 строки), §3.9 callout labels (+2 метки).
+  - `check_english.py --scan-docs` — ✅ 0 WH40k English terms in docs/ (26 files scanned)
+- 12: **Документация актуализирована:**
+  - `STATUS.md` — iter 39 record (DOC DRIFT FIX ✅ COMPLETE, KI#25/#26/#27 ✅ CLOSED). iter 38 → trimmed (KI#21 reference only, no P3 fix details). Invariants section — добавлен принцип «guide's role as example takes priority» + строка про doc drift fix. iter 40+ Roadmap — README section counts (cosmetic), OCEAN moderate values labeling в Part 10 (potential example regression), Glossary double-render, Component extracts sync.
+  - `worklog.md` — iter 39 = этот record (самый подробный); iter 38 → one-liner.
+  - `AGENT_NAVIGATION.md` — header iter line updated (+iter 39 doc drift fix, KI#25/#26/#27 ✅ CLOSED). §6 pitfalls — добавлен #41 (doc drift invariant). §8 OP-1 iter history table: iter 39 row added. §8 iter 40+ roadmap updated.
+  - `docs/AUDIT_VERIFICATION.md` — §7.4 iter 39 stop point added. Header baseline `69d9b813` unchanged.
 
 Stage Summary:
-- **iter 38 COMPLETE — CANON AUDIT P3.** 57/57 правок KI#21 закрыты (16 P0 в iter 35 + 11 P1 в iter 36 + 18 P2 в iter 37 + 10 P3 + 2 SKIP в iter 38). P3-1..P3-6, P3-8, P3-11, P3-12 applied (10 правок). P3-7 SKIP (covered by P0-2), P3-10 SKIP (covered by P2-1). Все правки — текстовые замены/добавления в `docs/canon/` + 2 новых файла (`part_00.md`, `appendix_character_map.md`). Canon total: 3 905 → 4 070 строк (+165). Build hash `69d9b813` unchanged (canon-файлы не входят в hash computation).
-- **Validation gates ALL PASS:** `validate:master` (12 checks) / `build` (hash `69d9b813`) / `validate` (8 gates, 7.5KB) / `test:unit` (43/43) / `test:integration` (21/21) / `lint` (0 errors, 12 warnings) / `qa:csp` / `qa:bundle` / `qa:doc-versions` / `audit_vs_embeds.py` (0 regressions) / `check_english.py --scan-docs` (0 WH40k English terms in docs/).
-- **Документация:** STATUS.md updated (iter 38 record, KI#21 ✅ CLOSED полностью 57/57). worklog.md updated (iter 38 = этот record, iter 37 → one-liner). AGENT_NAVIGATION.md updated (§6 #40 KI#21 ✅ CLOSED, §8 iter 38 row + iter 39+ roadmap — none planned). docs/AUDIT_VERIFICATION.md updated (§4.4 P3 ✅ DONE annotations, §5 iter 38 ✅, §7.4 iter 38 stop point). docs/canon/_README.md updated (§2 +2 файла, §5 +2 строки, §3.9 +2 callout labels).
-- **Modified files:** 8 canon-файлов modified (`_README.md`, `part_01.md`, `part_02.md`, `part_03.md`, `part_04.md`, `part_07b.md`, `part_09.md`, `part_10.md`) + 2 новых canon-файла (`part_00.md`, `appendix_character_map.md`). + 4 doc-файла updated (`STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `docs/AUDIT_VERIFICATION.md`). ~165 строк net additions (2 новых файла ~118 строк + ~50 строк добавлено в существующие файлы).
-- **Helper scripts:** none needed (все правки — Edit/MultiEdit/Write tool calls, без скриптов; P3 = локальные правки, не bulk transformations).
-- **Точка остановки:** iter 38 done. KI#21 ✅ CLOSED полностью (57/57). iter 39+ roadmap: none planned (только потенциальные minor задачи: Glossary double-render inefficiency, Component extracts sync drift — не критично). Если найден новый баг — сначала документировать в STATUS.md как KI#N, потом фиксить. VS scroll-animation invariant — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). Принцип `viz > dry text` сохраняется. Build hash baseline: `69d9b813` (unchanged после iter 34 — KI#23 fix; canon-файлы не входят в hash computation).
+- **iter 39 COMPLETE — DOC DRIFT FIX.** 3 новых KI (KI#25, KI#26, KI#27) обнаружены при анализе исходников Йоуёмы/Выщербленного и сверки с каноном. Все 3 — doc-only (canon не тронут, build hash `69d9b813` unchanged). Принцип: guide's role as example takes priority — canon Part 10 §10.4 не правится, bible/README подтягиваются к канону.
+- **Modified files (4):** `docs/elena_character_bible.md` (KI#25 — OCEAN labels), `docs/vyshcherblenny_character_bible.md` (KI#26 — Setting + GHOST Layers + OCEAN count + Note + Lorebook + Consistency Checklist), `README.md` (KI#27 — Part 10 structure entry), `STATUS.md` (iter 39 record + KI#25/#26/#27 sections + Invariants + iter 40+ Roadmap).
+- **Validation gates ALL PASS:** build (hash `69d9b813`) / validate:master (12 checks) / validate (8 gates, 7.5KB) / test:unit (43/43) / test:integration (21/21) / lint (0 errors, 12 warnings baseline) / qa:csp / qa:bundle / qa:doc-versions / audit_vs_embeds.py (0 regressions) / check_english.py --scan-docs (0 WH40k terms).
+- **Точка остановки:** iter 39 done. KI#25/#26/#27 ✅ CLOSED. iter 40+ roadmap: README section counts (cosmetic), OCEAN moderate values labeling в Part 10 §10.4 + appendix_character_map.md (potential example regression — требует аудита), Glossary double-render, Component extracts sync. Если найден новый баг — сначала документировать в STATUS.md как KI#N, потом фиксить. Принцип «guide's role as example takes priority over character canon» — invariant с iter 39. VS scroll-animation invariant — `python3 scripts/audit_vs_embeds.py` (0 regressions expected). Build hash baseline: `69d9b813` (unchanged после iter 34 — KI#23 fix; canon + doc файлы не входят в hash computation).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
-- **iter 37 (2026-07-08)**: CANON AUDIT P2 ✅ CLOSED — 45/57 правок KI#21 (P2 fixes: 18 правок — C1/C2/C5, E1-E7, F1, F4-F10, B4). Canon: 5 035 → 3 905 строк (−1 130). Build hash `69d9b813` unchanged.
-- **iter 36 (2026-07-08)**: CANON AUDIT P1 ✅ CLOSED — 27/57 правок KI#21 (P1 fixes: A5, A7, A8, B2, B5, B6, D1, D2, D4+NEW-2). Build hash `69d9b813` unchanged.
-- **iter 35 (2026-07-08)**: CANON AUDIT P0 ✅ CLOSED — 16/57 правок KI#21 (A1-A10, NEW-1, NEW-3) applied в 7 canon-файлах. Build hash `69d9b813` unchanged.
-- **iter 34 (2026-07-08)**: KI#22 Callout CSS Scoping Bug ✅ CLOSED (56 callouts fixed via scope), KI#23 CSP worker-src ✅ CLOSED, KI#24 FAB ✅ VERIFIED. Build hash fd3d96d3 → 69d9b813.
-- **iter 33 (2026-07-08)**: CONTENT AUDIT VERIFICATION ✅ COMPLETE (без правок кода) — fix plan 57 правок в `docs/AUDIT_VERIFICATION.md`.
-- **iter 32 (2026-07-08)**: KI#20 Visual System Scroll-Animation Bug ✅ CLOSED — vs-scroll-observer.js selector extended. Audit script added. Build hash fd3d96d3.
-- **iter 31 (2026-07-08)**: DGA Phase 2 final — KI#18-G + KI#18-H ✅ CLOSED. KI#18 ✅ CLOSED 9/9.
-- **iter 30 (2026-07-08)**: DGA Phase 2 — KI#18-D + KI#18-E + KI#19 FIXED.
-- **iter 29 (2026-07-08)**: DGA Phase 2 — KI#18-I + KI#18-F FIXED.
-- **iter 28 (2026-07-08)**: DGA Phase 2 — KI#18-B + KI#18-C FIXED. KI#18-I NEW documented.
-- **iter 27 (2026-07-08)**: STATUS CHECK — без правок кода.
-- **iter 26 (2026-07-01)**: DGA Phase 1 STARTED. KI#18-A FIXED. 7 pending B-H.
-- **iter 25 (2026-07-01)**: Phase 4 SVG integration COMPLETE — E18. VS elements: 18.
-- **iter 24 (2026-07-01)**: KI#13 Part 9+10. KI#13 ✅ CLOSED (123/123).
-- **iter 23 (2026-06-30)**: KI#13 Part 7A.
-- **iter 22 (2026-06-30)**: KI#13 Part 5+6.
-- **iter 21 (2026-06-30)**: KI#13 Part 3+4.
-- **iter 20 (2026-06-30)**: KI#13 Part 1+2 baseline. KI#17 CLOSED.
+- **iter 38 (2026-07-08)**: CANON AUDIT P3 ✅ CLOSED — 57/57 правок KI#21. 10 P3 правок + 2 новых canon-файла (`part_00.md`, `appendix_character_map.md`). Canon: 3 905 → 4 070 строк. Build hash `69d9b813` unchanged.
+- **iter 37 (2026-07-08)**: CANON AUDIT P2 ✅ CLOSED — 45/57 правок KI#21 (18 P2 fixes). Canon: 5 035 → 3 905 строк. Build hash `69d9b813` unchanged.
+- **iter 36 (2026-07-08)**: CANON AUDIT P1 ✅ CLOSED — 27/57 правок KI#21 (11 P1 fixes).
+- **iter 35 (2026-07-08)**: CANON AUDIT P0 ✅ CLOSED — 16/57 правок KI#21 (A1-A10, NEW-1, NEW-3).
+- **iter 34 (2026-07-08)**: KI#22 Callout CSS Scoping ✅ CLOSED, KI#23 CSP worker-src ✅ CLOSED, KI#24 FAB ✅ VERIFIED. Build hash fd3d96d3 → 69d9b813.
+- **iter 33 (2026-07-08)**: CONTENT AUDIT VERIFICATION ✅ COMPLETE (без правок кода).
+- **iter 32 (2026-07-08)**: KI#20 VS Scroll-Animation ✅ CLOSED.
+- **iter 26-31 (2026-07-01..08)**: DGA Phase 1-2 — KI#18 ✅ CLOSED 9/9, KI#19 FIXED.
+- **iter 25 (2026-07-01)**: Phase 4 SVG integration — E18. VS elements: 18.
+- **iter 20-24 (2026-06-23..07-01)**: KI#13 ✅ CLOSED (123/123 inline styles → CSS).
 - **iter 19 (2026-06-24)**: KI#16 fix — 2 inline `<script>` → external widget JS.
 - **iter 18 (2026-06-24)**: Canon migration COMPLETE.
-- **iter 13-17 (2026-06-23..24)**: Canon scaffold + Part 4 pilot + all Parts migrated.
-- **iter 1-12 (2026-06-23)**: docs restructure + KI cleanup. См. CHANGELOG.md.
+- **iter 7-17 (2026-06-23..24)**: Canon scaffold + Part-by-Part migration.
+- **iter 1-6 (2026-06-23)**: docs restructure + KI cleanup.
 - **v9.1.0 (2026-05-16)**: FIX-01..FIX-31. См. CHANGELOG.md.
