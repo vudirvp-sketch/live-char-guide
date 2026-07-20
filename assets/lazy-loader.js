@@ -810,6 +810,21 @@
     }
   }
 
+  // KI#36 fix: listen for hashchange so anchor clicks (which update URL hash)
+  // reliably trigger smooth scroll, even when native browser behavior is
+  // interrupted by dynamic content / panel transitions.
+  function initHashChangeListener() {
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash;
+      if (!hash || hash.length <= 1) return;
+      const targetId = hash.substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
   // ============================================================================
   // TOC GENERATION
   // ============================================================================
@@ -831,7 +846,7 @@
     const tocContent = $('#toc-content');
     if (!tocContent) return;
 
-    const sections = $$('section[id]');
+    const sections = $$('section[data-section]');
 
     // Group sections by Part number
     const partGroups = {};
@@ -952,7 +967,7 @@
       tocActiveObserver = null;
     }
 
-    const sections = $$('section[id]');
+    const sections = $$('section[data-section]');
     const partSections = []; // first section of each Part (contains h2)
 
     sections.forEach(section => {
@@ -1337,6 +1352,17 @@
     glossaryContent.innerHTML = html;
     console.log('[Glossary] Rendered ' + terms.length + ' terms');
 
+    // KI#36 fix: close glossary panel on anchor link click so user sees the target section
+    glossaryContent.querySelectorAll('a.glossary-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const panel = panelInstances['glossary-panel'];
+        if (panel && panel.isOpen()) {
+          // Defer close to allow native hash navigation to fire first
+          setTimeout(() => panel.close(), 50);
+        }
+      });
+    });
+
     // 5. Initialize search functionality
     const searchInput = document.getElementById('glossary-search-input');
     if (searchInput) {
@@ -1601,6 +1627,7 @@
     initScrollTop();
     initPanels();
     initGlossary();
+    initHashChangeListener();
 
     // Keyboard: close panels on Escape
     document.addEventListener('keydown', (e) => {

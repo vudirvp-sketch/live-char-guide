@@ -6,7 +6,7 @@
   v9.1: Token Budget moved from Part 1 (p1_token_budget → p7a_token_budget)
         Duplicate SP definition merged into single paragraph
 -->
-<section  data-section="p7a_system_prompt" data-toc-nav>
+<section  data-section="p7a_system_prompt" id="p7a_system_prompt" data-toc-nav>
 <h2>System Prompt: Structure and Assembly</h2>
 
 <p><strong>System Prompt (SP)</strong> — контейнер, вставляемый в начало контекста. Содержит: Identity Block, Anti-godmoding, CORE DIRECTIVES, SPINE block, Tone Frame, Format Lock. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI).</small> System Prompt — это КОНТЕЙНЕР; CORE DIRECTIVES — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда; здесь размещаются CORE DIRECTIVES и Tone Frame.</p>
@@ -139,7 +139,7 @@ Format Lock:
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E08 -->
-<section  data-section="p7a_core_directives" data-toc-nav>
+<section  data-section="p7a_core_directives" id="p7a_core_directives" data-toc-nav>
 <h3>CORE DIRECTIVES: The 7 Behavioral Directives</h3>
 
 <p>CORE DIRECTIVES — единая система из 7 директив на английском языке, размещаемая <strong>внутри System Prompt</strong>. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. CORE DIRECTIVES — это содержимое System Prompt; сам System Prompt также включает Identity Block, Anti-godmoding, Tone Frame и другие элементы.</p>
@@ -190,7 +190,7 @@ Format Lock:
 <p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён.</p>
 
 <h4>6. Consequence Driven (Динамика следствий)</h4>
-<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → Behavioral Anchors (поведенческие якоря)</a> <span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
+<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → Behavioral Anchors (поведенческие якоря)</a> <span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
 <pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
 <h4>7. Pre-Generation Filter (Фильтр предгенерации)</h4>
@@ -201,14 +201,14 @@ Format Lock:
 <li>Влияние на {{user}} основано на наблюдаемых симптомах? (Observability)</li>
 <li>Ноль мета-комментариев? (Zero-meta)</li>
 </ol>
-<p><span class="model-note">[Model: see Appendix B — Model Capability Table]</span></p>
+<p><span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
 
 <div class="callout rec">
 <p><strong>RECOMMENDATION: Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
 </section>
-<section  data-section="p7a_tone_frame" data-toc-nav>
+<section  data-section="p7a_tone_frame" id="p7a_tone_frame" data-toc-nav>
 <h3>Tone Frame (Тональный фрейм)</h3>
 
 <p>Tone Frame — элемент SP (~25-30 токенов) с двойной функцией: задаёт тональность И защищает от контентного дрейфа. Обязателен для нетривиальных сеттингов.</p>
@@ -232,7 +232,7 @@ Format Lock:
 </div>
 
 </section>
-<section  data-section="p7a_format_lock" data-toc-nav>
+<section  data-section="p7a_format_lock" id="p7a_format_lock" data-toc-nav>
 <h3>Format Lock</h3>
 
 <p><strong>Format Lock</strong> — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Модель — <a href="#p1_core_rules">Pattern Matcher</a> (см. Part 1 §1.4): два паттерна разметки в одной карточке = произвольное переключение между ними.</p>
@@ -365,7 +365,7 @@ Format Lock:
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E16 -->
-<section  data-section="p7a_authors_note" data-toc-nav>
+<section  data-section="p7a_authors_note" id="p7a_authors_note" data-toc-nav>
 <h3>Author's Note (AN)</h3>
 
 <p><strong>Author's Note</strong> — динамический контекст, вставляемый перед последними сообщениями. Задаёт сцену, настроение, мотивацию.</p>
@@ -400,7 +400,7 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 Сцена — ночь, дождь. Елена уставшая после долгого дня.]</code></pre>
 
 <h4>Template B: Шаблон Author's Note (4 секции — с GHOST-activation)</h4>
-<p>Используется, когда персонаж имеет явный GHOST-элемент (see → Part 4: GHOST). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
+<p>Используется, когда персонаж имеет явный GHOST-элемент (см. → Part 4: GHOST). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
 <div class="example-label template">TEMPLATE</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
@@ -585,7 +585,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E17 -->
-<section  data-section="p7a_sampling_params">
+<section  data-section="p7a_sampling_params" id="p7a_sampling_params">
 <h3>Параметры генерации (Sampling)</h3>
 
 <p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — Voice требует повторяемых паттернов.</p>
@@ -627,7 +627,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 </details>
 
 </section>
-<section  data-section="p7a_model_checklist">
+<section  data-section="p7a_model_checklist" id="p7a_model_checklist">
 <h3>Чеклист по типу модели</h3>
 
 <p>Полная таблица параметров — в визуализации E17 (выше). Ключевые отличия по типам моделей:</p>
@@ -643,7 +643,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 </div>
 
 </section>
-<section  data-section="p7a_ooc_protection" data-toc-nav>
+<section  data-section="p7a_ooc_protection" id="p7a_ooc_protection" data-toc-nav>
 <h3>OOC Protection (OOC-защита)</h3>
 
 <p>Протокол реакции на OOC-провокации в характере персонажа. Добавляет ~15 токенов в SP, но критически важен для иммерсии.</p>
@@ -667,7 +667,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 </div>
 
 </section>
-<section  data-section="p7a_xml_tags">
+<section  data-section="p7a_xml_tags" id="p7a_xml_tags">
 <h3>XML Tags в Description</h3>
 
 <p>Структурирование Description через XML-теги для API моделей.</p>
@@ -754,7 +754,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <p><strong>Примечание:</strong> Это пример Description. System Prompt и Examples идут отдельно.</p>
 
 </section>
-<section  data-section="p7a_api_blocks">
+<section  data-section="p7a_api_blocks" id="p7a_api_blocks">
 <h3>API-специфичные блоки</h3>
 
 <p>API-модели (Claude, GPT-4) поддерживают специфичные форматы инструкций, которые недоступны или работают иначе на open-source моделях. Эти блоки размещаются:</p>
@@ -789,7 +789,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 Ограничения: не нарушай характер, не говори за {{user}}.]</code></pre>
 
 </section>
-<section  data-section="p7a_4k_fallback">
+<section  data-section="p7a_4k_fallback" id="p7a_4k_fallback">
 <h3>4K-Fallback (Протокол адаптации для 4K контекста)</h3>
 
 <p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с ограниченным контекстом (4K токенов). Используется когда расширенная карточка не помещается в контекстное окно.</p>
@@ -831,10 +831,10 @@ Anchors:
 </div>
 
 </section>
-<section  data-section="p7a_token_budget" data-toc-nav>
+<section  data-section="p7a_token_budget" id="p7a_token_budget" data-toc-nav>
 <h3>Token Budget</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → Appendix B: Model Capability Table.</p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_table">Приложение B: Таблица возможностей моделей</a>.</p>
 
 <h4>Лимиты по блокам</h4>
 
@@ -1025,7 +1025,7 @@ Anchors:
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E02 -->
-<section  data-section="p7a_assembly_pipeline" data-toc-nav>
+<section  data-section="p7a_assembly_pipeline" id="p7a_assembly_pipeline" data-toc-nav>
 <h3>Полный конвейер сборки карточки — walkthrough на примере Елены</h3>
 
 <p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p7a_token_budget">Token Budget (выше)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
@@ -1084,7 +1084,7 @@ GHOST: Предательство редактора — история, кот�
 <p>~60 токенов. Один CoT Anchor — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, GHOST один. Для персонажей с GHOST Layers (Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
 
 <h4>Шаг 6: Token Budget Check</h4>
-<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (see → Part 1: Token Budget)</p>
+<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (см. → Part 1: Token Budget)</p>
 <p><strong>Бюджет Елены:</strong></p>
 <div class="table-wrap">
 <table>

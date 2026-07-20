@@ -206,7 +206,7 @@
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E12 -->
-<section  data-section="p8_antipatterns_overview" data-toc-nav>
+<section  data-section="p8_antipatterns_overview" id="p8_antipatterns_overview" data-toc-nav>
 <h2>Анти-паттерны</h2>
 
 <p><strong>Анти-паттерн</strong> — распространённая ошибка в создании карточек, приводящая к нестабильному поведению модели. Каждый анти-паттерн имеет симптом, причину и решение.</p>
@@ -245,7 +245,7 @@
 <p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (<code>p5_ocean_warning</code>). В таблице не отображается — см. <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a>.</p>
 
 </section>
-<section  data-section="p8_ap1_token_bloat">
+<section  data-section="p8_ap1_token_bloat" id="p8_ap1_token_bloat">
 <div class="antipattern-card">
 <h3>AP-1: Раздувание токенов (Token Bloat)</h3>
 <p><strong>Симптом:</strong> Description > 800 токенов</p>
@@ -278,14 +278,14 @@
 
 </div>
 </section>
-<section  data-section="p8_ap2_missing_price">
+<section  data-section="p8_ap2_missing_price" id="p8_ap2_missing_price">
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> Anchor без физической цены</p>
 <p><strong>Решение:</strong> Anchor Format: Триггер → Действие → Цена. Fix → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 </div>
 </section>
-<section  data-section="p8_ap3_voice_in_description">
+<section  data-section="p8_ap3_voice_in_description" id="p8_ap3_voice_in_description">
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
@@ -312,7 +312,7 @@
 
 </div>
 </section>
-<section  data-section="p8_ap4_ghost_in_sp">
+<section  data-section="p8_ap4_ghost_in_sp" id="p8_ap4_ghost_in_sp">
 <div class="antipattern-card">
 <h3>AP-4: Психология в SP</h3>
 <p><strong>Симптом:</strong> Психологический анализ (SPINE, GHOST) помещён в System Prompt</p>
@@ -324,7 +324,7 @@
 </div>
 </div>
 </section>
-<section  data-section="p8_ap5_reppen_high">
+<section  data-section="p8_ap5_reppen_high" id="p8_ap5_reppen_high">
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
@@ -332,7 +332,7 @@
 <div class="example-label illustration">ILLUSTRATION</div>
 </div>
 </section>
-<section  data-section="p8_ap6_no_anti_godmoding">
+<section  data-section="p8_ap6_no_anti_godmoding" id="p8_ap6_no_anti_godmoding">
 <div class="antipattern-card">
 <h3>AP-6: No Anti-godmoding (анти-годмодинг)</h3>
 <p><strong>Симптом:</strong> Модель пишет за {{user}}</p>
@@ -345,7 +345,7 @@
 </div>
 </section>
 <p>Следующий анти-паттерн связан с параметрами генерации — даже правильная карточка может «сломаться» при неверных настройках сэмплинга.</p>
-<section  data-section="p8_ap7_presence_penalty">
+<section  data-section="p8_ap7_presence_penalty" id="p8_ap7_presence_penalty">
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
@@ -353,7 +353,7 @@
 <div class="example-label illustration">ILLUSTRATION</div>
 </div>
 </section>
-<section  data-section="p8_ap8_ghost_no_anchors">
+<section  data-section="p8_ap8_ghost_no_anchors" id="p8_ap8_ghost_no_anchors">
 
 <div class="antipattern-card">
 <h3>AP-8: GHOST без Anchors (GHOST without Anchors)</h3>
@@ -367,7 +367,7 @@
 
 </div>
 </section>
-<section  data-section="p8_ap9_spine_broken">
+<section  data-section="p8_ap9_spine_broken" id="p8_ap9_spine_broken">
 <div class="antipattern-card">
 <h3>AP-9: Сломанный SPINE (Broken SPINE)</h3>
 <p><strong>Симптом:</strong> SPINE-элементы не связаны логически — WANT совместим с NEED (нет конфликта), FLAW существует без объяснения</p>
@@ -400,7 +400,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 </div>
 </section>
 <p>Структура SPINE правильна — но избыточность тоже вредит. Перегрузка CoT — анти-паттерн, при котором персонаж «думает» больше, чем «действует».</p>
-<section  data-section="p8_ap10_cot_overload">
+<section  data-section="p8_ap10_cot_overload" id="p8_ap10_cot_overload">
 <div class="antipattern-card">
 <h3>AP-10: Перегрузка CoT (CoT Overload)</h3>
 <p><strong>Симптом:</strong> > 3 CoT Anchors в карточке</p>
@@ -421,7 +421,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 
 </div>
 </section>
-<section  data-section="p8_ap11_voice_bleed">
+<section  data-section="p8_ap11_voice_bleed" id="p8_ap11_voice_bleed">
 <div class="antipattern-card">
 <h3>AP-11: Voice Bleed (переплетение голосов)</h3>
 <p><strong>Симптом:</strong> В мульти-персонажных сценах голоса смешиваются</p>
@@ -431,7 +431,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 </div>
 </section>
 <p>Voice Bleed — поведенческая проблема. Следующие два анти-паттерна — технические: невалидный XML и конфликт записей Lorebook.</p>
-<section  data-section="p8_ap12_xml_malformed">
+<section  data-section="p8_ap12_xml_malformed" id="p8_ap12_xml_malformed">
 <div class="antipattern-card">
 <h3>AP-12: Невалидный XML (XML Malformed)</h3>
 <p><strong>Симптом:</strong> Невалидные XML теги в Description</p>
@@ -454,7 +454,7 @@ WANT: {{want}}
 </div>
 </section>
 <p>XML валиден — но записи внутри него могут противоречить друг другу. Lorebook Conflict — анти-паттерн, при котором записи базы знаний конфликтуют с Description.</p>
-<section  data-section="p8_ap13_lorebook_conflict">
+<section  data-section="p8_ap13_lorebook_conflict" id="p8_ap13_lorebook_conflict">
 <div class="antipattern-card">
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
 <p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
@@ -464,7 +464,7 @@ WANT: {{want}}
 
 </div>
 </section>
-<section  data-section="p8_ap14_context_violation">
+<section  data-section="p8_ap14_context_violation" id="p8_ap14_context_violation">
 <div class="antipattern-card">
 <h3>AP-14: Нарушение контекстного окна</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
@@ -473,7 +473,7 @@ WANT: {{want}}
 <div class="example-label illustration">ILLUSTRATION</div>
 </div>
 </section>
-<section  data-section="p8_ap15_nested_anchors">
+<section  data-section="p8_ap15_nested_anchors" id="p8_ap15_nested_anchors">
 <h3>AP-15: Nested Anchors</h3>
 
 <div class="antipattern-card">

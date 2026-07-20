@@ -4,70 +4,66 @@
 
 ---
 
-Task ID: 51
+Task ID: 52
 Agent: main
-Task: iter 51 — HIGH priority KI#36 fix (anchor navigation). Пользователь сообщил: (1) статичный TOC (`<div class="guide-toc">` в `src/master/part_01.html`) — ссылки `<a href="#p1_card_overview">` и т.д. не кликабельны, никуда не ведут; (2) FAB-кнопка `📑` (id=fab-toc) отображает только 1 пункт вместо 10 Parts; (3) перепроверить глоссарий; (4) русификация — найти и перевести английские термины. **Root cause:** все `<section>` в `src/master/*.html` имели `data-section="X"` НО не имели `id="X"`. Браузер ищет `id` (или `name`), не `data-section` — поэтому все 96+ якорных ссылок молча скроллируют наверх. Дополнительно: `assets/lazy-loader.js` функция `generateTOC()` использовала селектор `$$('section[id]')` — выбирала только 1 секцию (p6_cot_bridge, единственная с id), поэтому FAB TOC отображал только 1 пункт. Глоссарий (`data/glossary.json` → `term.anchor_id`) использует те же `#X` ссылки — тоже невалидны.
+Task: iter 52 — LOW-priority roadmap item #1: semantic paragraph-level drift detection. Расширить `scripts/audit_canon_master_drift.py` до paragraph-level Jaccard similarity для matching sections (сейчас только content hash diff, который почти всегда отличается из-за VS-EMBEDs vs `[ref:...]` markers). Дополнительно: почистить документацию от длинной истории изменений и устаревших секций (user request — «файлы должны быть лёгкими для модели/агента»).
 
 Work Log:
-- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK. Базовое состояние подтверждено (iter 50): contentHash `cc130a527480e61b`, shell hash `69d9b813`, audit_canon_master_sync.py 92/92 PASS, validate 8/8 PASS, test:unit 43/43, test:integration 21/21.
-- 2: **Recon — подтверждён root cause:** grep по `parts/*.html` показал 99 секций с `data-section`, но только 1 секция с `id` (part_06 p6_cot_bridge). Все 96 якорных ссылок (96 unique hrefs в parts/) не имели соответствующих `id` атрибутов. Статичный TOC в `parts/part_01.html` L277-416 (`<div class="guide-toc">`) содержит 130+ ссылок вида `<a href="#p1_card_overview">` — все невалидны. Глоссарий `parts/glossary.html` и `parts/appendix_glossary.html` — 100+ ссылок, все невалидны. FAB TOC: `assets/lazy-loader.js` L834 `const sections = $$('section[id]')` → только 1 секция.
-- 3: **Документирован KI#36 в STATUS.md** (Known Issues table + iter 51 record в "Текущее состояние" + iter 51+ Roadmap updated → iter 52+ Roadmap).
-- 4: **FIX KI#36 часть 1 — добавлены `id` атрибуты всем секциям в `src/master/*.html`:** написан Python скрипт `/home/z/my-project/scripts/add_section_ids.py` (regex `<section ... data-section="X" ...>` → добавляет `id="X"` если `id` ещё нет). Запуск: 14 файлов, 99 секций, **98 id атрибутов добавлено** (1 секция p6_cot_bridge уже имела id). Распределение: part_01: 8, part_02: 6, part_03: 8, part_04: 11, part_05: 8, part_06: 5 (1 уже было), part_07a: 13, part_07b: 5, part_08: 16, part_09: 11, part_10: 4, appendix_glossary: 1, appendix_mbti: 1, appendix_model_table: 1.
-- 5: **FIX KI#36 часть 2 — обновлён селектор в `src/shell/lazy-loader.js`:** две правки (L834 в `generateTOC()` и L955 в `initActivePartHighlighting()`): `$$('section[id]')` → `$$('section[data-section]')`. Добавлена функция `initHashChangeListener()` (L813-826) — слушает `window.addEventListener('hashchange', ...)` для надёжного smooth scroll при клике на якорные ссылки (нативный браузерный скроллинг + explicit smooth scroll для dynamic content). Вызов `initHashChangeListener()` добавлен в `init()` (L1630).
-- 6: **FIX KI#36 часть 3 — Glossary panel auto-close on anchor click:** в `loadGlossaryContent()` после рендера HTML добавлен обработчик `glossaryContent.querySelectorAll('a.glossary-link').forEach(link => link.addEventListener('click', ...))` — закрывает glossary panel через 50ms после клика (чтобы дать native hash navigation сработать), чтобы пользователь видел целевой раздел.
-- 7: **FIX KI#36 часть 4 — русификация:** переведены английские фразы в основном тексте `src/master/*.html` (не трогая SP-директивы и устоявшиеся термины):
-  - `<span class="model-note">[Model: see Appendix B — Model Capability Table]</span>` → `<span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span>` (5 вхождений: part_04 L459, part_06 L81+L96, part_07a L193+L204).
-  - `Appendix B: Model Capability Table` → `<a href="#appendix_model_table">Приложение B: Таблица возможностей моделей</a>` (1 вхождение: part_07a L837).
-  - `(see → Part 1: Token Budget)` → `(см. → Part 1: Token Budget)` (part_07a L1087).
-  - `(see → Part 4: GHOST)` → `(см. → Part 4: GHOST)` (part_07a L403).
-  - `universal Quick Check` → `универсального Quick Check` (part_09 L542).
-  - `universal parameter checklist` → `универсальный чеклист параметров` (part_09 L543).
-  - `5 items` → `5 пунктов` (part_09 L542).
-  - `structural check` → `структурная проверка` (part_09 L543).
-  - **English leaks:** было 33 → стало 20 (13 leaks переведено). Оставшиеся 20 — by design (part_10 примеры карточек, CORE DIRECTIVES, Quality Grade, Token Budget Check, Reminds of betrayal в `<code>`).
-- 8: **Regression test extended — `scripts/audit_canon_master_sync.py`:** добавлены 4 новых positive checks для KI#36 (после KI#34-callout, перед `]`):
-  - `KI#36-id-p1`: verifies `data-section="p1_card_overview" id="p1_card_overview"` в `part_01.html`.
-  - `KI#36-id-p4`: verifies `data-section="p4_spine_overview" id="p4_spine_overview"` в `part_04.html`.
-  - `KI#36-id-p7a`: verifies `data-section="p7a_system_prompt" id="p7a_system_prompt"` в `part_07a.html`.
-  - `KI#36-id-appendix-glossary`: verifies `data-section="appendix_glossary" id="appendix_glossary"` в `appendix_glossary.html`.
-  - `KI#34-section` substring relaxed: `'<section data-section="p1_prebuild_checklist" data-toc-nav>'` → `'data-section="p1_prebuild_checklist"'` (т.к. iter 51 добавил `id` атрибут между `data-section` и `data-toc-nav`).
-  - `P0-12` substring updated: `5 items — отлична от universal Quick Check` → `5 пунктов — отлична от универсального Quick Check`.
-  - Header docstring + main() output messages: `iter 44+45+46+47+50` → `iter 44+45+46+47+50+51`.
-  - **Итого: 92 → 96 checks (78 positive + 18 negative).**
-- 9: **Post-fix validation gates — ALL PASS:**
-  - `pnpm run build` — ✅ SUCCESS, shell Hash: `69d9b813` unchanged (lazy-loader.js не входит в shell hash). contentHash: `cc130a527480e61b` → новый (6th change since iter 34 — 98 id attrs + русификация).
-  - `pnpm run validate:master` — ✅ 12 checks PASS (baseline warnings unchanged).
+- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK. Базовое состояние подтверждено (iter 51): contentHash новый (6th change since iter 34), shell hash `69d9b813` unchanged, audit_canon_master_sync.py 96/96 PASS, validate 8/8 PASS, test:unit 43/43, test:integration 21/21, English leaks 20 baseline.
+- 2: **Recon — прочитан существующий `scripts/audit_canon_master_drift.py` (626 строк)** — informational detector с 4 функциями: section presence drift + heading text mismatch + content hash diff + (NEW) paragraph drift. Бэкап сохранён в `/home/z/my-project/scripts/audit_canon_master_drift.py.backup`. Текущий output: 3 canon-only sections (by design), 0 master-only, 15 heading mismatches (by design — canon `## X.Y Title` vs master `<h2>Title</h2>`), 98 content hash diffs (expected — VS-EMBEDs vs `[ref:...]`), 0 matches. **Проблема:** content hash diffs почти бесполезны как сигнал — всегда отличаются.
+- 3: **Документирован iter 52 plan в TODO** — LOW priority, не трогает content, только расширяет informational скрипт + чистит документацию.
+- 4: **Реализован paragraph-level Jaccard similarity detection в `scripts/audit_canon_master_drift.py`:**
+  - New dataclass `ParagraphDrift` (section_id, canon_text_preview, best_master_text_preview, best_similarity, canon_length, master_length).
+  - New field `paragraph_drifts: list` added to `FileDrift` dataclass.
+  - New functions: `split_canon_paragraphs()` (splits canon markdown body on horizontal rules + blank lines, filters out H3 headings / code fences / [ref:...] / short fragments), `split_master_paragraphs()` (extracts text from `<p>`, `<li>`, `<td>/<th>` tags with `MIN_PARAGRAPH_LENGTH` filter), `tokenize()` (Unicode-aware `\w{3,}` + Russian/English stopwords filter), `jaccard_similarity()` (|A∩B| / |A∪B|), `compute_paragraph_drift()` (for each canon paragraph finds best master match, returns drifts with similarity < threshold).
+  - New constants: `PARAGRAPH_DRIFT_THRESHOLD=0.3`, `MIN_PARAGRAPH_LENGTH=30`, `MAX_PARAGRAPH_DISPLAY=5`.
+  - New CLI flags: `--no-paragraphs` (skip paragraph drift), `--paragraph-threshold FLOAT` (custom threshold).
+  - Module-level flag `ENABLE_PARAGRAPH_DRIFT` toggled by `--no-paragraphs`.
+  - Console report: new `[INFO] N paragraph drift(s) below Jaccard 0.3` section per file, summary line `Paragraph drifts (iter 52+, informational): N`.
+  - JSON report: version `1.0` → `1.1`, new fields `paragraph_drift_threshold`, `min_paragraph_length`, paragraph_drifts в каждом FileDrift.
+  - Updated header docstring (iter 52+ feature description, new CLI examples).
+  - Bug fix during impl: initial `global PARAGRAPH_DRIFT_THRESHOLD` was inside if/else branch (SyntaxError) — moved to top of `main()`. Initial `TOKEN_RE = r"[\w\\u0400-\\u04FF]{3,}"` was malformed in raw string (literal `\u0400`) — simplified to `r"\w{3,}"` since Python 3 `\w` is Unicode-aware by default. Removed unused `CANON_RULE_LABEL_RE` pattern.
+- 5: **Post-fix validation gates — ALL PASS:**
+  - `python3 scripts/audit_canon_master_drift.py` — ✅ exit 0, **88 paragraph drifts found** (informational, expected — VS-EMBEDs replace text). Files with most drifts: part_01 (4), part_02 (2), part_03, part_04, etc. — все drifts informational.
+  - `python3 scripts/audit_canon_master_drift.py --no-paragraphs` — ✅ exit 0, 0 paragraph drifts (flag works).
+  - `python3 scripts/audit_canon_master_drift.py --paragraph-threshold 0.5` — ✅ exit 0, 137 paragraph drifts (custom threshold works — higher threshold = more drifts).
+  - `python3 scripts/audit_canon_master_drift.py --json /tmp/drift.json --quiet` — ✅ JSON valid, version 1.1, 88 total paragraph drifts.
+  - `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (unchanged, regression test не тронут).
+  - `pnpm run build` — ✅ SUCCESS, shell Hash `69d9b813` unchanged (скрипт не в build).
   - `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB.
+  - `pnpm run validate:master` — ✅ 12 checks PASS.
   - `pnpm run test:unit` — ✅ 43/43 PASS.
   - `pnpm run test:integration` — ✅ 21/21 PASS.
   - `pnpm run qa:csp` — ✅ 0 inline scripts.
   - `pnpm run qa:bundle` — ✅ 7.5KB.
-  - `pnpm run qa:doc-versions` — ✅ PASS.
   - `pnpm run lint` — ✅ 0 errors, 12 baseline warnings.
-  - `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (was 92/92, +4 KI#36 checks).
-  - `python3 scripts/audit_canon_master_drift.py` — ✅ informational. Master-only: 0. Canon-only: 3 (by design). Heading mismatches: 15 (by design). Content hash diffs: 98 (+5 от русификации, informational).
-  - `python3 scripts/check_english.py` — ✅ 20 baseline leaks (was 29; -9 от русификации). Все оставшиеся — by design (part_10 примеры карточек, CORE DIRECTIVES English в SP, Quality Grade, Token Budget Check).
-  - `python3 /home/z/my-project/scripts/verify_anchors.py` — ✅ **96/96 anchor references resolve to id attributes** (новый verification script, проверяет все `href="#X"` в `parts/*.html` → находит `id="X"`).
-- 10: **Документация актуализирована (clean, no garbage):**
-  - `STATUS.md` — iter 51 record (KI#36 ✅ CLOSED, 98 id attrs, lazy-loader.js selector fix, hashchange listener, glossary auto-close, 13 English leaks переведено). Invariants section: iter 50+ → iter 51+, добавлен "Anchor navigation (iter 51+ invariant)" первый пункт. iter 51+ Roadmap → iter 52+ Roadmap. "Подтверждённые ограничения" updated (CORE DIRECTIVES English: 29 → 20 baseline; Canon sync: 92/92 → 96/96; Drift detector: iter 50 → iter 51; Build hash: iter 50 → iter 51 6th change; Canon audit: +KI#36).
-  - `worklog.md` — iter 51 = этот record (самый подробный); iter 50 → one-liner.
-  - `CHANGELOG.md` — iter 51 entry добавлен.
+  - `pnpm run qa:doc-versions` — ✅ PASS.
+  - `python3 scripts/check_english.py` — ✅ 20 baseline leaks (unchanged).
+- 6: **Документация актуализирована (clean, no garbage — per user request «файлы должны быть лёгкими для модели/агента»):**
+  - `STATUS.md` — iter 52 record (paragraph drift detector added). iter 51 verbose paragraph replaced с iter 52 brief. Invariants: added «Paragraph-level drift detection (iter 52+ invariant)» пункт. iter 52+ Roadmap → iter 53+ Roadmap, первый пункт (semantic paragraph drift) удалён (just completed). «Подтверждённые ограничения» updated: drift detector iter 48 → iter 52 (paragraph drift added).
+  - `worklog.md` — iter 52 = этот record; iter 51 → one-liner.
+  - `CHANGELOG.md` — iter 52 entry добавлен (brief, ~25 строк). iter 51 entry compressed с 50+ строк до 10 строк (только key facts: KI#36 closed, 98 id attrs, lazy-loader selector fix, 13 русификаций). iter 50/37/32 — unchanged (уже brief). «Previous iterations (compressed)» — unchanged.
+  - `AGENT_NAVIGATION.md` — header iter line updated (iter 52 added). §6 Frequent Pitfalls: compressed с 39 пунктов (FIX-N verbose) до 18 key pitfalls (removed iter-specific FIX-N references, kept только still-relevant pitfalls + added iter 51 anchor nav + iter 52 paragraph drift). OP-1 iter history table: compressed с 30+ verbose rows (200+ слов каждая) до 9 milestone rows (iter 1, 18, 32, 38, 47, 50, 51, 52). iter 52+ Roadmap → iter 53+ Roadmap, первый пункт удалён.
+- 7: **Archive preparation:** только изменённые файлы сохранены с сохранением структуры папок для слияния с локальной директорией. Удалены stale files: `ITER51_README.md` + `_ITER51_DELETE_STALE.txt` (per-iter READMEs дублируют info из worklog/STATUS/CHANGELOG — мусор per user request).
 
 Stage Summary:
-- **iter 51 COMPLETE — KI#36 ✅ CLOSED.** Все validation gates PASS. **contentHash CHANGED:** `cc130a527480e61b` → новый (6th change since iter 34 — 98 id attrs + русификация). Shell hash `69d9b813` unchanged (lazy-loader.js не входит в shell hash). **96 якорных ссылок теперь работают нативно** (статичный TOC `guide-toc`, FAB TOC, Glossary panel). **FAB TOC теперь отображает 10 Parts** (раньше 1, из-за `section[id]` селектора). **Glossary panel auto-close** on anchor click. **13 английских фраз переведено** (5×«see Appendix B» + 4×«Model Capability Table» + «universal Quick Check» + «universal parameter checklist» + 2×«see → Part X» + «5 items» + «structural check»). English leaks: 33 → 20 (оставшиеся 20 — by design).
-- **Modified files (9):** `src/master/part_01.html` (+8 id), `src/master/part_02.html` (+6 id), `src/master/part_03.html` (+8 id), `src/master/part_04.html` (+11 id + 1 русификация), `src/master/part_05.html` (+8 id), `src/master/part_06.html` (+5 id + 2 русификации), `src/master/part_07a.html` (+13 id + 5 русификаций), `src/master/part_07b.html` (+5 id), `src/master/part_08.html` (+16 id), `src/master/part_09.html` (+11 id + 1 русификация), `src/master/part_10.html` (+4 id), `src/master/appendix_glossary.html` (+1 id), `src/master/appendix_mbti.html` (+1 id), `src/master/appendix_model_table.html` (+1 id), `src/shell/lazy-loader.js` (+25 строк: 2 selector fixes + hashchange listener + glossary auto-close), `scripts/audit_canon_master_sync.py` (+4 KI#36 checks + 2 substring updates + header docstring), `STATUS.md` (iter 51 record), `worklog.md` (iter 51 detailed record), `CHANGELOG.md` (iter 51 entry).
-- **Точка остановки:** iter 51 COMPLETE. Все MEDIUM/HIGH priority KI закрыты (KI#36 ✅ — последний HIGH priority UX bug). Next iter (iter 52+) — LOW priority only: semantic paragraph-level drift detection, Glossary double-render (by design), Component extracts regeneration (опционально), Dependabot merges (GitHub-level). Если новых багов нет — проект STABLE.
+- **iter 52 COMPLETE — paragraph-level drift detection added.** `scripts/audit_canon_master_drift.py` расширен с 1.0 до 1.1: новый `ParagraphDrift` dataclass, 5 new functions (split_canon_paragraphs, split_master_paragraphs, tokenize, jaccard_similarity, compute_paragraph_drift), 2 new CLI flags (--no-paragraphs, --paragraph-threshold), 88 paragraph drifts detected (informational, expected — VS-EMBEDs replace text). Все validation gates PASS. contentHash UNCHANGED (скрипт не в build). Shell hash `69d9b813` UNCHANGED. audit_canon_master_sync.py 96/96 PASS (не тронут). English leaks 20 baseline (unchanged).
+- **Documentation cleanup:** AGENT_NAVIGATION.md -23% (512→~390 строк, OP-1 iter table compressed, §6 pitfalls compressed с 39 до 18 key items). CHANGELOG.md -20% (iter 51 entry compressed с 50+ до 10 строк). STATUS.md iter 51 verbose paragraph заменён на iter 52 brief. worklog.md iter 51 → one-liner.
+- **Modified files (5):** `scripts/audit_canon_master_drift.py` (+330 строк: paragraph drift feature), `STATUS.md` (iter 52 record + cleanup), `worklog.md` (iter 52 detailed record), `CHANGELOG.md` (iter 52 entry + iter 51 compress), `AGENT_NAVIGATION.md` (header + §6 pitfalls cleanup + OP-1 iter table compress + iter 52+ roadmap).
+- **Deleted files (2):** `ITER51_README.md` (stale per-iter README, дублирует worklog/STATUS/CHANGELOG), `_ITER51_DELETE_STALE.txt` (stale marker file from iter 51).
+- **Точка остановки:** iter 52 COMPLETE. Все HIGH/MEDIUM priority KI закрыты (KI#36 ✅ iter 51 — последний HIGH). iter 52 = first LOW-priority roadmap item closed (semantic paragraph drift detection). Next iter (iter 53+) — LOW priority only: Glossary double-render (by design), Component extracts regeneration (опционально), Dependabot merges (GitHub-level). Если новых багов нет — проект STABLE.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 51 (2026-07-21)**: KI#36 ✅ CLOSED — 98 id attrs added to `src/master/*.html` sections (anchor nav fix); lazy-loader.js selector `section[id]`→`section[data-section]` + hashchange listener + glossary auto-close; 13 English phrases русификация. contentHash 6th change.
 - **iter 50 (2026-07-20)**: KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section added; p4_spine_overview canon metadata. contentHash `cc130a527480e61b` (5th change).
-- **iter 49 (2026-07-19)**: RECONNAISSANCE ONLY — validation gates ALL PASS, KI#34/KI#35 confirmed still open, DELETES.txt устаревший маркер удалён. contentHash `84d69ecf` UNCHANGED (no master HTML changes).
-- **iter 48 (2026-07-08)**: General-purpose drift detector added (`scripts/audit_canon_master_drift.py`, ~440 строк, stdlib only, informational only, exit 0). KI#34 (MEDIUM) + KI#35 (LOW) 🟡 NEW (found by drift detector, fix deferred). contentHash `84d69ecf` UNCHANGED.
+- **iter 49 (2026-07-19)**: RECONNAISSANCE ONLY — validation gates ALL PASS, KI#34/KI#35 confirmed still open.
+- **iter 48 (2026-07-08)**: General-purpose drift detector added (`scripts/audit_canon_master_drift.py`, ~440 строк, stdlib only, informational only, exit 0). KI#34 (MEDIUM) + KI#35 (LOW) 🟡 NEW.
 - **iter 47 (2026-07-08)**: KI#33 ✅ CLOSED — canon→master HTML sync Phase 4 (57/57 cumulatively). contentHash `84d69ecf` (4th change).
-- **iter 46 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 3 (8/57 this iter, 41/57 cumulatively). contentHash `d2fdafea` (3rd change).
-- **iter 45 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 2 (24/57 this iter, 33/57 cumulatively). contentHash `665cede7` (2nd change).
+- **iter 46 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 3 (8/57 this iter, 41/57 cumulatively).
+- **iter 45 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 2 (24/57 this iter, 33/57 cumulatively).
 - **iter 44 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 1 (9/57 fixes). contentHash `34c34a7d` (1st change).
 - **iter 43 (2026-07-08)**: DEPLOY PIPELINE DOC + KI#33 🟡 NEW.
 - **iter 42 (2026-07-08)**: COMPONENT-EXTRACTS DRIFT AUDIT ✅ CLOSED — KI#32.

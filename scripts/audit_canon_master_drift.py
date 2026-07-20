@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-General-purpose canon ↔ master HTML drift detector (iter 48+ tool).
+General-purpose canon ↔ master HTML drift detector (iter 48+ tool,
+paragraph-level Jaccard similarity added iter 52).
 
 Purpose:
     Informational detector that compares `docs/canon/*.md` (source of truth)
@@ -22,6 +23,15 @@ What it checks (per canon/master file pair):
        - Hash differences are EXPECTED (master has VS-EMBEDs, callouts,
          expanded tables; canon has `[ref: ...]` markers, markdown).
        - Reported as informational signal, not a failure.
+    4. Paragraph-level semantic drift (iter 52+):
+       - For each canon paragraph, find best matching master paragraph using
+         Jaccard similarity on word tokens.
+       - Paragraphs with similarity below PARAGRAPH_DRIFT_THRESHOLD are
+         reported as drift.
+       - Helps find paragraphs that were rewritten, deleted, or replaced
+         with VS-EMBEDs without leaving a textual trace.
+       - Informational only — many drifts are expected (canon has [ref: ...]
+         markers, master has VS-EMBEDs instead of text).
 
 Scope:
     Covers all 16 canon files: part_00, part_01..part_10, part_07a, part_07b,
@@ -35,6 +45,7 @@ Exit codes:
 Run:
     python3 scripts/audit_canon_master_drift.py
     python3 scripts/audit_canon_master_drift.py --json build/drift-report.json
+    python3 scripts/audit_canon_master_drift.py --no-paragraphs  # skip paragraph drift
 """
 import argparse
 import hashlib
@@ -46,9 +57,17 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Optional
 
+# Paragraph drift configuration (iter 52+)
+PARAGRAPH_DRIFT_THRESHOLD = 0.3  # Jaccard similarity below this = drift
+MIN_PARAGRAPH_LENGTH = 30  # chars (normalized); skip shorter paragraphs (labels, headings)
+MAX_PARAGRAPH_DISPLAY = 5  # max paragraph drifts to show per file in console output
+
 REPO = Path(__file__).resolve().parents[1]
 CANON_DIR = REPO / "docs" / "canon"
 MASTER_DIR = REPO / "src" / "master"
+
+# Module-level flag for paragraph drift (toggled by --no-paragraphs CLI flag).
+ENABLE_PARAGRAPH_DRIFT = True
 
 # Canon → master file mapping (most have 1:1 mapping; part_00 and
 # appendix_character_map are canon-only by design — no master HTML).
@@ -110,6 +129,17 @@ class MasterSection:
 
 
 @dataclass
+class ParagraphDrift:
+    """A canon paragraph with no good match in master HTML (iter 52+)."""
+    section_id: str
+    canon_text_preview: str  # first 80 chars of normalized canon paragraph
+    best_master_text_preview: str  # first 80 chars of best master paragraph match
+    best_similarity: float  # Jaccard similarity [0.0, 1.0]
+    canon_length: int
+    master_length: int
+
+
+@dataclass
 class FileDrift:
     """Drift report for a single canon/master file pair."""
     file: str
@@ -118,6 +148,7 @@ class FileDrift:
     heading_mismatches: list = field(default_factory=list)  # list of {id, canon_heading, master_heading}
     content_hash_diffs: list = field(default_factory=list)  # list of {id, canon_hash, master_hash}
     content_hash_matches: int = 0  # count of sections with matching content hash
+    paragraph_drifts: list = field(default_factory=list)  # list of ParagraphDrift (iter 52+)
     canon_sections_count: int = 0  # count of declared data-section IDs in canon
     master_sections_count: int = 0
     canon_file_exists: bool = True
@@ -382,6 +413,209 @@ def content_hash(text: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Paragraph-level drift detection (iter 52+)
+# ---------------------------------------------------------------------------
+
+# Patterns for splitting canon markdown body into paragraphs.
+CANON_H3_HEADING_RE = re.compile(r"^###\s+.+?$", re.MULTILINE)
+CANON_HORIZONTAL_RULE_RE = re.compile(r"^---+\s*$", re.MULTILINE)
+
+# Patterns for extracting paragraphs from master HTML.
+P_TAG_RE = re.compile(r"<p[^>]*>(.*?)</p>", re.IGNORECASE | re.DOTALL)
+LI_TAG_RE = re.compile(r"<li[^>]*>(.*?)</li>", re.IGNORECASE | re.DOTALL)
+TD_TAG_RE = re.compile(r"<t[dh][^>]*>(.*?)</t[dh]>", re.IGNORECASE | re.DOTALL)
+
+# Token pattern: words of 3+ word characters (Unicode-aware — includes Cyrillic).
+# In Python 3, \w matches Unicode word chars (letters, digits, underscore) by default.
+TOKEN_RE = re.compile(r"\w{3,}", re.UNICODE)
+
+# Russian stopwords (small set — only the most common filler words).
+# Keep the set small so we don't over-prune meaningful tokens.
+STOPWORDS_RU = frozenset({
+    "и", "в", "во", "не", "что", "он", "на", "я", "с", "со", "как",
+    "а", "то", "все", "она", "так", "его", "но", "да", "ты", "к",
+    "у", "же", "вы", "за", "бы", "по", "только", "ее", "мне", "было",
+    "вот", "от", "меня", "о", "из", "ему", "теперь", "когда", "даже",
+    "ну", "вдруг", "ли", "если", "уже", "или", "ни", "быть", "был",
+    "него", "до", "вас", "нибудь", "опять", "уж", "вам", "ведь", "там",
+    "потом", "себя", "ничего", "ей", "может", "они", "тут", "где", "есть",
+    "надо", "ней", "для", "мы", "тебя", "их", "чем", "была", "сам", "чтоб",
+    "без", "будто", "чего", "раз", "тоже", "себе", "под", "будет", "ж",
+    "тогда", "кто", "этот", "того", "потому", "этого", "какой", "совсем",
+    "ним", "здесь", "этом", "один", "почти", "мой", "тем", "чтобы", "нее",
+    "сейчас", "были", "куда", "зачем", "всех", "никогда", "можно", "при",
+    "наконец", "два", "об", "другой", "хоть", "после", "над", "больше",
+    "тот", "через", "эти", "нас", "про", "всего", "них", "какая", "много",
+    "разве", "три", "эту", "моя", "впрочем", "хорошо", "свою", "этой", "перед",
+    "иногда", "лучше", "чуть", "том", "нельзя", "такой", "им", "более",
+    "всегда", "конечно", "всю", "между",
+})
+STOPWORDS_EN = frozenset({
+    "the", "and", "for", "are", "but", "not", "you", "all", "any", "can",
+    "her", "was", "one", "our", "out", "has", "have", "had", "his", "him",
+    "she", "they", "them", "this", "that", "with", "from", "into", "over",
+    "than", "then", "when", "what", "which", "will", "your", "their", "there",
+})
+STOPWORDS = STOPWORDS_RU | STOPWORDS_EN
+
+
+def split_canon_paragraphs(body: str) -> list[str]:
+    """Split canon markdown body into paragraphs.
+
+    Splits on horizontal rules (---) and blank lines, then filters out
+    headings, code blocks, tables, [ref:...] markers, and short fragments.
+    Returns list of normalized paragraph strings.
+    """
+    text = body
+    # Remove horizontal rules first (they are paragraph separators).
+    text = CANON_HORIZONTAL_RULE_RE.sub("\n\n", text)
+    # Remove H3 headings (their text is a subheading, not a paragraph).
+    text = CANON_H3_HEADING_RE.sub("", text)
+    # Remove `data-section:` declaration lines.
+    text = MD_DATA_SECTION_DECL_LINE_RE.sub("", text)
+    # Remove code fences entirely.
+    text = MD_CODE_FENCE_RE.sub("", text)
+    # Remove [ref: ...] markers.
+    text = MD_REF_NOTATION_RE.sub("", text)
+
+    # Split on blank lines (2+ newlines).
+    raw_paragraphs = re.split(r"\n\s*\n", text)
+
+    paragraphs: list[str] = []
+    for raw in raw_paragraphs:
+        # Strip markdown formatting.
+        norm = normalize_canon_text(raw)
+        # Skip short fragments (likely labels, table rows, list items).
+        if len(norm) < MIN_PARAGRAPH_LENGTH:
+            continue
+        # Skip pure table rows (contain pipe | with cell separators).
+        if raw.strip().startswith("|") and "|" in raw.strip()[-3:]:
+            continue
+        # Skip list-only items (start with - or *).
+        stripped_raw = raw.strip()
+        if stripped_raw.startswith(("- ", "* ", "+ ")) and "\n" not in stripped_raw:
+            continue
+        paragraphs.append(norm)
+
+    return paragraphs
+
+
+def split_master_paragraphs(html_body: str) -> list[str]:
+    """Extract paragraphs from master HTML body.
+
+    Extracts text from <p>, <li>, and <td>/<th> elements, then normalizes.
+    Returns list of normalized paragraph strings.
+    """
+    paragraphs: list[str] = []
+
+    # Extract from <p> tags.
+    for m in P_TAG_RE.finditer(html_body):
+        text = strip_html(m.group(1))
+        norm = _final_normalize(text)
+        if len(norm) >= MIN_PARAGRAPH_LENGTH:
+            paragraphs.append(norm)
+
+    # Extract from <li> tags (list items often contain real content).
+    for m in LI_TAG_RE.finditer(html_body):
+        text = strip_html(m.group(1))
+        norm = _final_normalize(text)
+        if len(norm) >= MIN_PARAGRAPH_LENGTH:
+            paragraphs.append(norm)
+
+    # Extract from <td>/<th> tags (table cells).
+    for m in TD_TAG_RE.finditer(html_body):
+        text = strip_html(m.group(1))
+        norm = _final_normalize(text)
+        if len(norm) >= MIN_PARAGRAPH_LENGTH:
+            paragraphs.append(norm)
+
+    return paragraphs
+
+
+def tokenize(text: str) -> set[str]:
+    """Tokenize text into a set of meaningful word tokens (lowercase, 3+ chars).
+
+    Filters out stopwords and short tokens (numbers, abbreviations).
+    """
+    tokens = set()
+    for m in TOKEN_RE.finditer(text):
+        token = m.group(0).lower()
+        if token in STOPWORDS:
+            continue
+        tokens.add(token)
+    return tokens
+
+
+def jaccard_similarity(set_a: frozenset, set_b: frozenset) -> float:
+    """Compute Jaccard similarity between two token sets.
+
+    Jaccard = |A ∩ B| / |A ∪ B|
+    Returns 0.0 if both sets are empty (no meaningful content to compare).
+    """
+    if not set_a and not set_b:
+        return 0.0
+    union = set_a | set_b
+    if not union:
+        return 0.0
+    intersection = set_a & set_b
+    return len(intersection) / len(union)
+
+
+def compute_paragraph_drift(
+    section_id: str,
+    canon_paragraphs: list[str],
+    master_paragraphs: list[str],
+) -> list[ParagraphDrift]:
+    """For each canon paragraph, find best matching master paragraph.
+
+    Returns list of ParagraphDrift for canon paragraphs whose best match
+    has Jaccard similarity below PARAGRAPH_DRIFT_THRESHOLD.
+    """
+    if not canon_paragraphs or not master_paragraphs:
+        return []
+
+    # Pre-tokenize master paragraphs (frozen sets for fast intersection).
+    master_tokens: list[tuple[str, frozenset]] = []
+    for mp in master_paragraphs:
+        tokens = frozenset(tokenize(mp))
+        if tokens:  # skip empty token sets (e.g. pure numbers)
+            master_tokens.append((mp, tokens))
+
+    if not master_tokens:
+        return []
+
+    drifts: list[ParagraphDrift] = []
+    for cp in canon_paragraphs:
+        cp_tokens = frozenset(tokenize(cp))
+        if not cp_tokens:
+            continue
+
+        best_sim = 0.0
+        best_master_text = ""
+        best_master_len = 0
+        for mp_text, mp_tokens in master_tokens:
+            sim = jaccard_similarity(cp_tokens, mp_tokens)
+            if sim > best_sim:
+                best_sim = sim
+                best_master_text = mp_text
+                best_master_len = len(mp_text)
+                if sim >= 1.0:
+                    break  # perfect match, no need to search further
+
+        if best_sim < PARAGRAPH_DRIFT_THRESHOLD:
+            drifts.append(ParagraphDrift(
+                section_id=section_id,
+                canon_text_preview=cp[:80],
+                best_master_text_preview=best_master_text[:80],
+                best_similarity=round(best_sim, 3),
+                canon_length=len(cp),
+                master_length=best_master_len,
+            ))
+
+    return drifts
+
+
+# ---------------------------------------------------------------------------
 # Drift detection
 # ---------------------------------------------------------------------------
 
@@ -462,18 +696,28 @@ def compute_file_drift(canon_name: str) -> FileDrift:
 
         # Content hash comparison — only if we have an H2 canon section body.
         if c_section is not None:
-            c_hash = content_hash(normalize_canon_text(c_section.body))
-            m_hash = content_hash(normalize_master_text(m.body))
+            c_norm = normalize_canon_text(c_section.body)
+            m_norm = normalize_master_text(m.body)
+            c_hash = content_hash(c_norm)
+            m_hash = content_hash(m_norm)
             if c_hash != m_hash:
                 result.content_hash_diffs.append({
                     "id": section_id,
                     "canon_hash": c_hash,
                     "master_hash": m_hash,
-                    "canon_length": len(normalize_canon_text(c_section.body)),
-                    "master_length": len(normalize_master_text(m.body)),
+                    "canon_length": len(c_norm),
+                    "master_length": len(m_norm),
                 })
             else:
                 result.content_hash_matches += 1
+
+        # Paragraph-level drift detection (iter 52+) — only if canon H2 section body exists.
+        # Skip if user disabled via --no-paragraphs (handled in main, but guard anyway).
+        if c_section is not None and ENABLE_PARAGRAPH_DRIFT:
+            canon_paragraphs = split_canon_paragraphs(c_section.body)
+            master_paragraphs = split_master_paragraphs(m.body)
+            p_drifts = compute_paragraph_drift(section_id, canon_paragraphs, master_paragraphs)
+            result.paragraph_drifts.extend(p_drifts)
 
     return result
 
@@ -495,6 +739,7 @@ def print_console_report(drifts: list[FileDrift]) -> None:
     total_heading_mismatch = 0
     total_content_hash_diff = 0
     total_content_hash_match = 0
+    total_paragraph_drift = 0
 
     for d in drifts:
         # Skip silently if no drift at all and both files exist with sections.
@@ -503,6 +748,7 @@ def print_console_report(drifts: list[FileDrift]) -> None:
             or d.master_only_sections
             or d.heading_mismatches
             or (d.canon_file_exists and d.master_file_exists and d.content_hash_diffs)
+            or d.paragraph_drifts
         )
         if not has_any_drift and d.canon_file_exists and d.master_file_exists:
             # Quietly skip files with zero drift.
@@ -552,6 +798,19 @@ def print_console_report(drifts: list[FileDrift]) -> None:
         if d.content_hash_matches:
             print(f"  [OK] {d.content_hash_matches} section(s) with matching content hash")
 
+        if d.paragraph_drifts:
+            print(f"  [INFO] {len(d.paragraph_drifts)} paragraph drift(s) below Jaccard {PARAGRAPH_DRIFT_THRESHOLD} (iter 52+, informational):")
+            for pd in d.paragraph_drifts[:MAX_PARAGRAPH_DISPLAY]:
+                print(f"    - id={pd.section_id!r} sim={pd.best_similarity}")
+                print(f"        canon:   {pd.canon_text_preview!r} (len={pd.canon_length})")
+                if pd.best_master_text_preview:
+                    print(f"        master:  {pd.best_master_text_preview!r} (len={pd.master_length})")
+                else:
+                    print(f"        master:  <no candidate paragraph found>")
+            if len(d.paragraph_drifts) > MAX_PARAGRAPH_DISPLAY:
+                print(f"    ... and {len(d.paragraph_drifts) - MAX_PARAGRAPH_DISPLAY} more")
+            total_paragraph_drift += len(d.paragraph_drifts)
+
         total_content_hash_match += d.content_hash_matches
         print()
 
@@ -564,10 +823,12 @@ def print_console_report(drifts: list[FileDrift]) -> None:
     print(f"  Heading mismatches:               {total_heading_mismatch}")
     print(f"  Content hash diffs (informational): {total_content_hash_diff}")
     print(f"  Content hash matches (perfect sync): {total_content_hash_match}")
+    print(f"  Paragraph drifts (iter 52+, informational): {total_paragraph_drift}")
     print()
-    print("NOTE: This is an informational tool. Content hash diffs are EXPECTED")
-    print("      (master has VS-EMBEDs, expanded HTML; canon has [ref:...] markers).")
-    print("      Canon-only and master-only sections are the actionable signals.")
+    print("NOTE: This is an informational tool. Content hash diffs and paragraph")
+    print("      drifts are EXPECTED (master has VS-EMBEDs, expanded HTML; canon has")
+    print("      [ref:...] markers, markdown). Canon-only and master-only sections")
+    print("      are the actionable signals.")
     print("      See STATUS.md for documentation of known drift findings.")
 
 
@@ -575,8 +836,10 @@ def build_json_report(drifts: list[FileDrift]) -> dict:
     """Build a JSON-serializable report."""
     return {
         "tool": "audit_canon_master_drift.py",
-        "version": "1.0",
-        "iter": "48+",
+        "version": "1.1",  # iter 52: paragraph drift added
+        "iter": "48+ (paragraph drift: iter 52+)",
+        "paragraph_drift_threshold": PARAGRAPH_DRIFT_THRESHOLD,
+        "min_paragraph_length": MIN_PARAGRAPH_LENGTH,
         "files_scanned": len(drifts),
         "drifts": [asdict(d) for d in drifts],
     }
@@ -587,8 +850,9 @@ def build_json_report(drifts: list[FileDrift]) -> dict:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
+    global ENABLE_PARAGRAPH_DRIFT, PARAGRAPH_DRIFT_THRESHOLD
     parser = argparse.ArgumentParser(
-        description="General-purpose canon ↔ master HTML drift detector (iter 48+ tool)."
+        description="General-purpose canon ↔ master HTML drift detector (iter 48+ tool, paragraph drift iter 52+)."
     )
     parser.add_argument(
         "--json",
@@ -600,7 +864,24 @@ def main() -> int:
         action="store_true",
         help="Suppress console output (useful when only --json is wanted).",
     )
+    parser.add_argument(
+        "--no-paragraphs",
+        action="store_true",
+        help="Skip paragraph-level Jaccard drift detection (iter 52+ feature).",
+    )
+    parser.add_argument(
+        "--paragraph-threshold",
+        type=float,
+        default=PARAGRAPH_DRIFT_THRESHOLD,
+        help=f"Jaccard similarity threshold for paragraph drift (default: {PARAGRAPH_DRIFT_THRESHOLD}).",
+    )
     args = parser.parse_args()
+
+    if args.no_paragraphs:
+        ENABLE_PARAGRAPH_DRIFT = False
+    else:
+        # Allow CLI override of threshold.
+        PARAGRAPH_DRIFT_THRESHOLD = args.paragraph_threshold
 
     drifts = [compute_file_drift(name) for name in CANON_FILES]
 

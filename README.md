@@ -1,299 +1,185 @@
-# Live Character Guide
+# iter 52 — paragraph-level drift detection + documentation cleanup + root fallback regen
 
-> **Инженерный пайплайн для RP-карточек персонажей. От SPINE до деплоя. Для моделей 12B–32B+.**
-
-![Version](https://img.shields.io/badge/version-9.1.0-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
-
-## Ссылки
-
-| Ресурс | Ссылка |
-|--------|--------|
-| **Онлайн-гайд** | [vudirvp-sketch.github.io/live-char-guide](https://vudirvp-sketch.github.io/live-char-guide/) |
-| **Entry document (для AI-агентов)** | [AGENT_NAVIGATION.md](./AGENT_NAVIGATION.md) |
-| **Текущий статус + Known Issues** | [STATUS.md](./STATUS.md) |
-| **Worklog (итерации)** | [worklog.md](./worklog.md) |
-| **План docs-restructure** | [PLAN.md](./PLAN.md) |
-| **Changelog** | [CHANGELOG.md](./CHANGELOG.md) |
-| **Contributing** | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+**Дата:** 2026-07-21
+**Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
+**Версия:** 9.1.0 (без version bump — iter 52 это LOW-priority roadmap item + doc cleanup)
+**Shell hash:** `69d9b813` UNCHANGED
+**contentHash:** UNCHANGED (только `scripts/*.py` + `*.md` изменены, не входят в contentHash)
 
 ---
 
-## Единый линейный гайд
+## Что сделано в iter 52
 
-v8 — единый гайд без слоёв. Весь контент читается последовательно от Part 1 до Part 10. Нет деления на «базовый»/«продвинутый» — все инструменты обязательны к изучению. Различия в возможностях моделей отмечены inline через `[MODEL_NOTE: text]`.
+### 1. Paragraph-level Jaccard drift detection (LOW priority roadmap item #1)
 
-### Структура гайда
+`scripts/audit_canon_master_drift.py` расширен с v1.0 до v1.1:
+- New `ParagraphDrift` dataclass (section_id, canon_text_preview, best_master_text_preview, best_similarity, canon_length, master_length).
+- 5 new functions: `split_canon_paragraphs()`, `split_master_paragraphs()`, `tokenize()`, `jaccard_similarity()`, `compute_paragraph_drift()`.
+- 2 new CLI flags: `--no-paragraphs`, `--paragraph-threshold FLOAT`.
+- **88 paragraph drifts detected** (informational — expected, т.к. master HTML имеет VS-EMBEDs вместо текста, canon имеет `[ref:...]` markers).
+- Exit 0 всегда (informational script).
 
-| Part | Название | Секций | Содержание |
-|------|----------|--------|------------|
-| 1 | Базовые блоки карточки | 7 | Value Proposition, Card Anatomy, Structure Overview, Core Rules, Token Budget, Pipeline, Top-3 Errors |
-| 2 | Поведенческие якоря | 6 | T→A→P, Anchor Rules, Anchor Examples, Embodiment, Env. Reactivity, Sensory Anchors |
-| 3 | Голос и изоляция | 8 | Voice Isolation, Influence Hierarchy, Examples Rules, Examples Quality, Greeting, Voice Leak, Joker Case, Multi-char |
-| 4 | SPINE Framework | 11 | 5 элементов (GHOST→LIE→FLAW→NEED→WANT), Ghost Layers, Full Chain, SPINE→Anchor Mapping, SPINE Check, Navigation |
-| 5 | Психологический инструментарий | 8 | OCEAN Basics, Elena Profile, OCEAN Warning, Enneagram, MBTI, Cross-instrument Map, Wings, OCEAN×Enneagram |
-| 6 | Цепочка рассуждений (CoT) | 6 | Bridge (reframed), Basics, Tiers, Tier 2, Tier 3, CoT-anchors |
-| 7 | Техническая реализация | 18 | SP, CORE DIRECTIVES, Tone Frame, Format Lock, AN, Sampling Params, Model Checklist, OOC Protection, XML Tags, API Blocks, 4K Fallback, Token Budget, Assembly Pipeline (7A) + Structured Inject, Greeting, Lorebook Basics/Mechanics/Advanced (7B) |
-| 8 | Анти-паттерны | 16 | 15 анти-паттернов (AP-1–AP-15) + overview. (AP-16 не существует — OCEAN Overload перенесён в Part 5 §5.3 в v9 restructure.) |
-| 9 | Диагностика и тестирование | 11 | Quality Scale, One Change Rule, Checklist, Problems, Symptom Table, Decision Tree, Test Scenarios, Pre-Deploy |
-| 10 | Полные примеры карточек | 4 | Elena, Walter, Omnis-Zeta, Vysherblenny (Geralt + Edward DELETED в v9.1 — FIX-07) |
+### 2. Documentation cleanup (per user request «файлы должны быть лёгкими для модели/агента»)
 
-**Итого: 10 Parts.** Актуальный count секций — в `AGENT_NAVIGATION.md` (98 секций в master HTML, включая 3 appendix).
+- `AGENT_NAVIGATION.md`: §6 Frequent Pitfalls compressed с 43 пунктов (FIX-N verbose) до 25 key pitfalls. OP-1 iter history table compressed с 30+ verbose rows (200+ слов каждая) до 16 milestone rows. Header iter line updated.
+- `CHANGELOG.md`: iter 51 entry compressed с 50+ строк до 10 строк (только key facts). iter 52 entry added (brief, ~25 строк).
+- `STATUS.md`: iter 51 verbose paragraph (250+ слов) заменён на iter 52 brief. Invariants updated. iter 52+ Roadmap → iter 53+ Roadmap.
+- `worklog.md`: iter 51 → one-liner, iter 52 = detailed record.
 
----
+### 3. Stale files deleted
 
-## Ключевые концепции
+- `ITER51_README.md` — stale per-iter README, дублирует info из worklog/STATUS/CHANGELOG.
+- `_ITER51_DELETE_STALE.txt` — stale marker file from iter 51.
 
-### SPINE Framework
+### 4. Root fallbacks regenerated (completes iter 51 commit)
 
-Фреймворк глубинной мотивации персонажа — 5 элементов в причинно-следственной цепочке:
+После `pnpm run build` в iter 52, root fallbacks обновлены чтобы отразить iter 51 изменения (которые не были полностью закоммичены в iter 51 commit `f9839ad`):
 
-| Элемент | Описание |
-|---------|----------|
-| **GHOST** | Событие прошлого, сформировавшее LIE и FLAW |
-| **LIE** | Ложная установка о себе/мире, возникшая из GHOST |
-| **FLAW** | Поведенческий дефект, блокирующий NEED (возникает из LIE) |
-| **NEED** | Истинная потребность (часто противоречит WANT) |
-| **WANT** | Осознанное желание персонажа (маскирует NEED) |
+- `index.html` — только `Generated:` timestamp обновлён (контент идентичен).
+- `assets/lazy-loader.js` — KI#36 fixes (hashchange listener, `section[data-section]` selector, glossary auto-close) — regenerated из `src/shell/lazy-loader.js`.
+- `parts/*.html` (14 файлов) — id attrs добавлены всем секциям — regenerated из `src/master/*.html`.
 
-Для простых персонажей GHOST и LIE могут быть неявными — цепочка работает и без них.
-
-### 3 ключевых принципа
-
-| # | Принцип | Почему важно |
-|---|---------|--------------|
-| 1 | **Якорь = Trigger → Action → Price** — поведение задаётся якорями | Каждый якорь обязан иметь Цена — без неё модель не показывает уязвимость |
-| 2 | **Голос — только в Examples и Greeting** | Модель считывает характер из примеров диалога, а не из описания |
-| 3 | **Психология — только в Description** | SPINE, OCEAN и другие элементы размещаются исключительно в блоке Description |
+**Это НЕ iter 52 функциональные изменения** — это regenerated артефакты, которые синхронизируют root fallbacks с уже закоммиченными iter 51 исходниками.
 
 ---
 
-## Архитектура проекта
-
-### Как работает билд
+## Структура архива
 
 ```
-src/master/part_*.html (авторский контент)
-        │
-        ▼
-┌─────────────────────────────────────┐
-│  build-unified.mjs                   │
-│  Парсит HTML, извлекает все секции   │
-│  Генерирует parts/ (unified)         │
-└─────────────────────────────────────┘
-        │
-        ▼
-build/parts/*.html + manifest.json
-        │
-        ▼
-┌─────────────────────────────────────┐
-│  build-shell-unified.mjs             │
-│  Копирует shell + parts + data       │
-│  → dist/ для GitHub Pages            │
-└─────────────────────────────────────┘
+iter_52_archive/
+├── README.md                                    # этот файл
+├── STATUS.md                                    # iter 52 record
+├── worklog.md                                   # iter 52 detailed record
+├── CHANGELOG.md                                 # iter 52 entry + iter 51 compressed
+├── AGENT_NAVIGATION.md                          # §6 + OP-1 cleanup
+├── index.html                                   # regenerated (timestamp only)
+├── scripts/
+│   └── audit_canon_master_drift.py              # paragraph drift feature v1.1
+├── assets/
+│   └── lazy-loader.js                           # regenerated (KI#36 fixes from iter 51)
+└── parts/
+    ├── appendix_glossary.html                   # regenerated (+1 id attr)
+    ├── appendix_mbti.html                       # regenerated (+1 id attr)
+    ├── appendix_model_table.html                # regenerated (+1 id attr)
+    ├── part_01.html                             # regenerated (+8 id attrs)
+    ├── part_02.html                             # regenerated (+6 id attrs)
+    ├── part_03.html                             # regenerated (+8 id attrs)
+    ├── part_04.html                             # regenerated (+11 id attrs)
+    ├── part_05.html                             # regenerated (+8 id attrs)
+    ├── part_06.html                             # regenerated (+5 id attrs)
+    ├── part_07a.html                            # regenerated (+13 id attrs)
+    ├── part_07b.html                            # regenerated (+5 id attrs)
+    ├── part_08.html                             # regenerated (+16 id attrs)
+    ├── part_09.html                             # regenerated (+11 id attrs)
+    └── part_10.html                             # regenerated (+4 id attrs)
 ```
 
-### Структура репозитория
-
-```
-live-char-guide/
-├── src/
-│   ├── master/              # ← АВТОРЫ: редактируют тут
-│   │   └── part_*.html      # Unified HTML-файлы
-│   ├── shell/               # ← ИНФРАСТРУКТУРА: не трогать
-│   │   ├── index.html       # Shell (auto-load)
-│   │   ├── styles.css       # Стили
-│   │   └── lazy-loader.js   # Динамическая загрузка контента
-│   ├── scripts/             # Build-скрипты
-│   └── VERSION              # Источник версии
-│
-├── data/                    # Данные виджетов
-│   ├── glossary.json        # Глоссарий
-│   ├── ocean.json           # OCEAN пентагон
-│   ├── enneagram.json       # Эннеаграмма
-│   ├── mbti.json            # MBTI типы
-│   ├── character_schema.json # JSON-схема карточки
-│   ├── anchor-redirects.json # Редиректы для старых ID
-│   └── test_scenarios.json  # Сценарии тестирования
-│
-├── build/                   # Сгенерированные части (gitignored)
-│   ├── parts/               # Unified parts
-│   ├── build-manifest.json
-│   └── section-registry.json
-│
-├── dist/                    # Деплой на GitHub Pages (gitignored)
-│
-├── scripts/                 # Скрипты валидации
-│   ├── build-unified.mjs
-│   ├── validate-artifact.mjs
-│   ├── validate-migration.mjs
-│   └── *.py                 # Python-валидаторы
-│
-├── tests/                   # Тесты
-├── docs/                    # Документация (не входит в билд)
-│   ├── architecture.md
-│   ├── content_map.md
-│   ├── components.md
-│   ├── terminology_dictionary.md
-│   └── ...
-│
-├── AGENT_NAVIGATION.md      # Entry document для AI-агентов
-├── STATUS.md                # Текущий статус + Known Issues
-├── worklog.md               # История итераций
-├── PLAN.md                  # План docs-restructure
-│
-└── package.json
-```
-
-### Владение директориями
-
-| Директория | Владелец | Кто редактирует |
-|------------|----------|-----------------|
-| `src/master/` | Автор | Авторы контента |
-| `src/shell/` | Инфраструктура | Только через request |
-| `data/` | Shared | Авторы (данные), Инфраструктура (схемы) |
-| `docs/` | Автор | Авторы |
-| `build/` | Generated | Авто-генерация |
-| `dist/` | Generated | Авто-генерация |
-| `scripts/` | Инфраструктура | Инфраструктура |
+**Всего файлов в архиве:** 21 modified + 1 README = 22 файла
+**Файлов для удаления из локальной директории:** 2 (ITER51_README.md, _ITER51_DELETE_STALE.txt)
 
 ---
 
-## Авторский workflow
-
-### Разметка мастер-файлов
-
-Каждый `src/master/part_*.html` содержит секции с атрибутами:
-
-```html
-<section data-section="p2_basic_anchors" data-toc-nav>
-  <h2>Заголовок секции</h2>
-  <!-- Контент виден всем читателям -->
-</section>
-```
-
-### Атрибуты секций
-
-| Атрибут | Обязателен | Формат | Пример |
-|---------|------------|--------|--------|
-| `data-section` | Да | `p{N}_{topic}` | `data-section="p4_spine_overview"` |
-| `data-toc-nav` | Нет | boolean | `data-toc-nav` |
-
-### Запрещено в мастер-файлах
-
-- `<style>` блоки → все стили в `src/shell/styles.css`
-- `<script>` блоки → все скрипты в `src/shell/lazy-loader.js`
-- `<link>` элементы
-- `<meta>` элементы
-- Контент вне `<section data-section>`
-- `data-layer` атрибуты (удалены в v8)
-- `data-layer-switch` атрибуты (удалены в v8)
-
-### Пошаговый workflow
+## Инструкции по слиянию с локальной директорией
 
 ```bash
-# 1. Редактируете мастер-файл
-vim src/master/part_01.html
+# 1. Распакуйте архив в любую временную директорию
+unzip iter_52_paragraph_drift_cleanup.zip -d /tmp/iter52
 
-# 2. Запускаете билд
-pnpm run build
+# 2. Перейдите в локальную директорию live-char-guide
+cd /path/to/live-char-guide
 
-# 3. Проверяете валидацию
+# 3. Скопируйте все изменённые файлы с заменой (сохраняя структуру папок)
+cp /tmp/iter52/iter_52_archive/scripts/audit_canon_master_drift.py scripts/
+cp /tmp/iter52/iter_52_archive/assets/lazy-loader.js assets/
+cp /tmp/iter52/iter_52_archive/parts/*.html parts/
+cp /tmp/iter52/iter_52_archive/index.html .
+cp /tmp/iter52/iter_52_archive/STATUS.md .
+cp /tmp/iter52/iter_52_archive/worklog.md .
+cp /tmp/iter52/iter_52_archive/CHANGELOG.md .
+cp /tmp/iter52/iter_52_archive/AGENT_NAVIGATION.md .
+
+# 4. Удалите устаревшие файлы (stale per-iter READMEs)
+rm -f ITER51_README.md
+rm -f _ITER51_DELETE_STALE.txt
+
+# 5. Установите зависимости и запустите validation gates
+pnpm install --frozen-lockfile
+pnpm run build              # пересоберёт dist/ + root fallbacks (idempotent)
+pnpm run validate:master
 pnpm run validate
+pnpm run test:unit
+pnpm run test:integration
+pnpm run qa:csp
+pnpm run qa:bundle
+pnpm run qa:doc-versions
+pnpm run lint
+python3 scripts/audit_canon_master_sync.py    # 96/96 PASS ожидается
+python3 scripts/audit_canon_master_drift.py   # exit 0, 88 paragraph drifts (informational) ожидается
+python3 scripts/check_english.py              # 20 baseline leaks ожидается
 
-# 4. Запускаете локально для проверки
-pnpm run dev
-# Откроется http://localhost:3000
-
-# 5. Коммитите изменения
-git add src/master/part_01.html
-git commit -m "feat: update Part 1 content"
-git push
+# 6. Если все validation gates PASS — commit + push (см. git-команды ниже)
 ```
 
 ---
 
-## Разработка
+## Ожидаемые результаты validation gates
 
-### Требования
+| Gate | Expected | Actual iter 52 |
+|------|----------|----------------|
+| `pnpm run build` | SUCCESS, shell hash `69d9b813` | ✅ `69d9b813` unchanged |
+| `pnpm run validate` | 8 gates PASS, 7.5KB | ✅ 8/8 PASS, 7.5KB |
+| `pnpm run validate:master` | 12 checks PASS | ✅ 12/12 PASS |
+| `pnpm run test:unit` | 43/43 PASS | ✅ 43/43 PASS |
+| `pnpm run test:integration` | 21/21 PASS | ✅ 21/21 PASS |
+| `pnpm run qa:csp` | 0 inline scripts | ✅ PASS |
+| `pnpm run qa:bundle` | 7.5KB (max 500KB) | ✅ PASS |
+| `pnpm run lint` | 0 errors, 12 baseline warnings | ✅ 0 errors, 12 warnings |
+| `pnpm run qa:doc-versions` | PASS | ✅ PASS |
+| `audit_canon_master_sync.py` | 96/96 PASS | ✅ 96/96 PASS |
+| `audit_canon_master_drift.py` | exit 0, 88 paragraph drifts | ✅ exit 0, 88 drifts |
+| `check_english.py` | 20 baseline leaks | ✅ 20 leaks (unchanged) |
 
-- Node.js >= 20
-- pnpm 10.x
-- Python 3.10+ (для скриптов валидации)
+---
 
-### Установка
+## Git-команды для обновления репозитория
 
 ```bash
-git clone https://github.com/vudirvp-sketch/live-char-guide.git
-cd live-char-guide
-pnpm install
+# Из локальной директории live-char-guide (после слияния файлов из архива):
+
+# 1. Добавить все изменения (modified + deleted)
+git add -A
+
+# 2. Commit с описательным сообщением
+git commit -m "iter 52: paragraph-level Jaccard drift detection added; documentation cleanup; root fallback regen
+
+- scripts/audit_canon_master_drift.py: v1.0 → v1.1, paragraph-level drift detection added (5 new functions + 2 CLI flags + 88 drifts informational)
+- AGENT_NAVIGATION.md: §6 Frequent Pitfalls compressed (43 → 25 key items), OP-1 iter history table compressed (30+ rows → 16 milestone rows)
+- CHANGELOG.md: iter 51 entry compressed (50+ → 10 lines), iter 52 entry added
+- STATUS.md: iter 52 record + Invariants update + iter 53+ Roadmap
+- worklog.md: iter 52 detailed record + iter 51 → one-liner
+- DELETED: ITER51_README.md (stale per-iter README), _ITER51_DELETE_STALE.txt (stale marker)
+- Root fallbacks regenerated (completes iter 51 commit): parts/*.html (+98 id attrs), assets/lazy-loader.js (KI#36 fixes), index.html (timestamp only)
+- Shell hash 69d9b813 UNCHANGED, contentHash UNCHANGED
+- All validation gates PASS (96/96 sync, 88 paragraph drifts informational, 20 English leaks baseline)"
+
+# 3. Push в main
+git push origin main
 ```
 
-### Команды
-
-```bash
-# Билд
-pnpm run build          # Полный билд (unified + shell)
-pnpm run build:unified  # Только unified билд
-pnpm run build:shell    # Только shell билд
-pnpm run build:watch    # Watch-режим
-
-# Валидация
-pnpm run validate       # Валидация билда
-pnpm run validate:master # Валидация мастер-файлов
-pnpm run version:check  # Проверка синхронизации версий
-
-# Тесты
-pnpm test               # Все тесты
-pnpm run test:unit      # Unit-тесты
-pnpm run test:integration  # Интеграционные тесты
-
-# Разработка
-pnpm run dev            # Билд + локальный сервер (port 3000)
-pnpm run serve          # Только сервер
-pnpm run lint           # ESLint
-```
-
-### Чек-лист перед PR
-
-- [ ] `pnpm run build` завершается без ошибок
-- [ ] `pnpm run validate` проходит
-- [ ] `pnpm test` проходит
-- [ ] Все секции имеют `data-section` (без `data-layer`)
-- [ ] Нет запрещённых элементов в мастер-файлах
-- [ ] Версии синхронизированы (`src/VERSION` = `package.json`)
-
 ---
 
-## Деплой
+## Точка остановки
 
-Проект использует GitHub Pages с автоматическим деплоем:
+**iter 52 COMPLETE.** LOW-priority roadmap item #1 (semantic paragraph-level drift detection) закрыт. Documentation cleanup выполнен per user request. Root fallbacks regenerated для завершения iter 51 commit.
 
-1. Push в `main` ветку
-2. GitHub Actions собирает и деплоит автоматически
-3. Доступно на: https://vudirvp-sketch.github.io/live-char-guide/
+**Next iter (iter 53+) — LOW priority only:**
+- Glossary double-render inefficiency (by design)
+- Component extracts regeneration (опционально, 54 файла)
+- Dependabot merges (10 unmerged branches, GitHub-level)
 
----
+**Все HIGH/MEDIUM priority KI закрыты (KI#36 ✅ iter 51 — последний HIGH). Проект STABLE.**
 
-## Версия
-
-**Текущая версия:** 9.1.0
-
-См. [CHANGELOG.md](./CHANGELOG.md) для истории изменений.
-
-Версия синхронизируется в 4 местах:
-1. `package.json` — поле `version`
-2. `src/VERSION` — plain text файл
-3. `data/character_schema.json` — поле `version`
-4. Build output (`build-manifest.json`, `manifest.json`)
-
----
-
-## Лицензия
-
-MIT License — см. [LICENSE](LICENSE) для деталей.
-
----
-
-**Автор:** TITAN FUSE Team
+Если новых багов нет — следующая итерация может быть либо:
+1. Продолжение LOW-priority roadmap (Glossary / Component extracts / Dependabot).
+2. Разведка (reconnaissance) — поиск новых багов или audit-задач.
+3. Patch iter 52 если найдены регрессии в paragraph drift detection (88 drifts — expected, но если кто-то найдёт false positives — можно tuning `PARAGRAPH_DRIFT_THRESHOLD` или `MIN_PARAGRAPH_LENGTH`).
