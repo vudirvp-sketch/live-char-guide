@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Audit canon → master HTML sync (iter 44+45+46+47 regression guard).
+Audit canon → master HTML sync (iter 44+45+46+47+50 regression guard).
 
 Purpose:
-    Verify that iter 44 + iter 45 + iter 46 + iter 47 canon→master HTML sync
-    fixes are present in `src/master/*.html`. This is a focused regression
-    test — it does NOT attempt a general-purpose semantic drift detector
-    (still planned for iter 48+).
+    Verify that iter 44 + iter 45 + iter 46 + iter 47 + iter 50 canon→master
+    HTML sync fixes are present in `src/master/*.html`. This is a focused
+    regression test — it does NOT attempt a general-purpose semantic drift
+    detector (added in iter 48 as `audit_canon_master_drift.py`).
 
     Each check compares a specific canon snippet (the source of truth in
     `docs/canon/*.md`) against the corresponding master HTML snippet,
@@ -583,6 +583,33 @@ CHECKS = [
         "<p><strong>Demonstrates:</strong> SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
         "part_10 §10.4 Vyshcherblenny: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
+
+    # ================================================================
+    # iter 50 — KI#34 fix: §1.8 Pre-build checklist section added to master HTML
+    # ================================================================
+    # Canon `docs/canon/part_01.md` L128-145 declares `data-section: p1_prebuild_checklist`
+    # but master HTML was missing the section (7 sections vs canon 8).
+    # iter 50 fix: added `<section data-section="p1_prebuild_checklist" data-toc-nav>`
+    # block at end of `src/master/part_01.html` with 6-row table + RECOMMENDATION
+    # callout + Cross-ref. Drift detector confirms section now exists.
+    (
+        "KI#34-section",
+        "part_01.html",
+        '<section data-section="p1_prebuild_checklist" data-toc-nav>',
+        "part_01 §1.8 Pre-build checklist: section block added (iter 50 KI#34 fix)",
+    ),
+    (
+        "KI#34-table",
+        "part_01.html",
+        "<th>#</th><th>Вопрос</th><th>Варианты</th><th>Что это определяет</th>",
+        "part_01 §1.8 Pre-build checklist: 6-row table header (iter 50 KI#34 fix)",
+    ),
+    (
+        "KI#34-callout",
+        "part_01.html",
+        "<p><strong>RECOMMENDATION:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook».",
+        "part_01 §1.8 Pre-build checklist: RECOMMENDATION callout (iter 50 KI#34 fix)",
+    ),
 ]
 
 # Negative checks: substrings that MUST NOT appear in master HTML.
@@ -710,8 +737,8 @@ ABSENT_CHECKS = [
 
 def main() -> int:
     print("=" * 70)
-    print("audit_canon_master_sync.py — iter 44+45+46+47 regression guard")
-    print("Verifies that iter 44 + iter 45 + iter 46 + iter 47 canon→master HTML sync fixes are in place.")
+    print("audit_canon_master_sync.py — iter 44+45+46+47+50 regression guard")
+    print("Verifies that iter 44 + iter 45 + iter 46 + iter 47 + iter 50 canon→master HTML sync fixes are in place.")
     print("=" * 70)
     print()
 
@@ -763,17 +790,17 @@ def main() -> int:
     if failures:
         print(f"FAILED: {len(failures)} check(s) failed, {pass_count} passed")
         print()
-        print("Regression detected — iter 44+45+46+47 fixes are NOT all in place.")
+        print("Regression detected — iter 44+45+46+47+50 fixes are NOT all in place.")
         print("Investigate src/master/*.html and re-apply missing fixes.")
         return 1
     else:
         print(f"PASS: all {pass_count} checks passed")
         print()
-        print("iter 44+45+46+47 canon→master HTML sync fixes are in place.")
+        print("iter 44+45+46+47+50 canon→master HTML sync fixes are in place.")
         print()
-        print("NOTE: This is a focused regression test for iter 44+45+46+47 fixes.")
-        print("      A general-purpose canon↔master drift detector is planned")
-        print("      for iter 48+ (see STATUS.md iter 48+ roadmap).")
+        print("NOTE: This is a focused regression test for iter 44+45+46+47+50 fixes.")
+        print("      A general-purpose canon↔master drift detector is available")
+        print("      as `scripts/audit_canon_master_drift.py` (added iter 48).")
         return 0
 
 

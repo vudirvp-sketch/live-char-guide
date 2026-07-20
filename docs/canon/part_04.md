@@ -11,6 +11,8 @@ migration_status: —
 
 ## 4.1 SPINE Overview
 
+`data-section: p4_spine_overview`
+
 **SPINE** — психологический каркас из 5 элементов, связывающих прошлое персонажа с его поведением. SPINE даёт Behavioral Anchors причину существовать, а не быть набором случайных правил.
 
 **Causal chain:** `GHOST → LIE → FLAW → NEED → WANT`
