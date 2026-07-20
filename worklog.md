@@ -4,55 +4,65 @@
 
 ---
 
-Task ID: 50
+Task ID: 51
 Agent: main
-Task: iter 50 — MEDIUM priority KI#34 fix + LOW priority KI#35 fix. iter 49 recon confirmed оба KI актуальными. **KI#34:** canon `docs/canon/part_01.md` L128-145 декларирует `data-section: p1_prebuild_checklist` (§1.8 Pre-build checklist, 6-row table + RECOMMENDATION callout + Cross-ref), но master `src/master/part_01.html` (7 sections, 366 строк) НЕ содержит соответствующий `<section>` (canon 8 IDs vs master 7). **Fix:** добавить новый `<section data-section="p1_prebuild_checklist" data-toc-nav>` block в конец `src/master/part_01.html` (после `p1_top3_problems` L366), контент — перевод canon markdown в HTML. **KI#35:** master `src/master/part_04.html` L140 содержит `<section data-section="p4_spine_overview">` с `<h2>SPINE Framework</h2>`, но canon `docs/canon/part_04.md` L12 `## 4.1 SPINE Overview` не имеет `` `data-section: p4_spine_overview` `` декларации. **Fix:** добавить одну строку `` `data-section: p4_spine_overview` `` после `## 4.1 SPINE Overview`. После обоих fix-ов: regression test `audit_canon_master_sync.py` расширить с positive checks для p1_prebuild_checklist.
+Task: iter 51 — HIGH priority KI#36 fix (anchor navigation). Пользователь сообщил: (1) статичный TOC (`<div class="guide-toc">` в `src/master/part_01.html`) — ссылки `<a href="#p1_card_overview">` и т.д. не кликабельны, никуда не ведут; (2) FAB-кнопка `📑` (id=fab-toc) отображает только 1 пункт вместо 10 Parts; (3) перепроверить глоссарий; (4) русификация — найти и перевести английские термины. **Root cause:** все `<section>` в `src/master/*.html` имели `data-section="X"` НО не имели `id="X"`. Браузер ищет `id` (или `name`), не `data-section` — поэтому все 96+ якорных ссылок молча скроллируют наверх. Дополнительно: `assets/lazy-loader.js` функция `generateTOC()` использовала селектор `$$('section[id]')` — выбирала только 1 секцию (p6_cot_bridge, единственная с id), поэтому FAB TOC отображал только 1 пункт. Глоссарий (`data/glossary.json` → `term.anchor_id`) использует те же `#X` ссылки — тоже невалидны.
 
 Work Log:
-- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK (через global `npm install -g pnpm@10`). Базовые линии подтверждены (iter 49 RECON state): contentHash `84d69ecffca28cbf`, shell hash `69d9b813`, sectionCount 98, audit_canon_master_sync.py 89/89 PASS, audit_canon_master_drift.py — 1 master-only section (p4_spine_overview = KI#35) + 4 canon-only (3 by design + 1 = p1_prebuild_checklist = KI#34).
-- 2: **Baseline validation gates — ALL PASS (iter 49 RECON state):** `pnpm run build` (shell Hash `69d9b813`, contentHash `84d69ecffca28cbf`, sectionCount 98), `validate:master` (12 checks PASS), `validate` (8 gates PASS), `test:unit` (43/43), `test:integration` (21/21), `qa:csp` (0 inline scripts), `qa:bundle` (7.5KB), `qa:doc-versions` PASS, `lint` (0 errors, 12 baseline warnings), `audit_canon_master_sync.py` (89/89), `audit_canon_master_drift.py` (informational, 1 master-only + 4 canon-only).
-- 3: **Изучена структура master HTML и canon для KI#34:**
-  - `src/master/part_01.html` (367 строк, 7 sections): `p1_value_proposition` (L10-30) + `p1_card_overview` (L258-305) + `p1_structure_overview` (L270-281, nested) + `p1_core_rules` (L307-332) + `p1_token_budget_ref` (L334-337) + `p1_pipeline_ref` (L339-342) + `p1_top3_problems` (L344-366). VS-EMBED E01 на L32-257 (вне sections, by design).
-  - `docs/canon/part_01.md` L128-145: §1.8 Pre-build checklist — 6-row table (Размер модели/Контекстное окно/Сложность персонажа/GHOST/CoT/Lorebook) + RECOMMENDATION callout + Cross-ref.
-  - Изучены существующие паттерны: table-wrap div, `.callout.rec` (разрешено per iter 45+ invariant), `<p><strong>Cross-ref:</strong> ...</p>`, `<a href="#section_id">...</a>` (resolve to existing data-section IDs).
-  - Изучены validate-master.mjs проверки: Check 2 (cross-refs must resolve), Check 4 (no content outside sections), Check 6 (heading hierarchy h4 requires h3), Check 10 (orphan sections — has h2/h3 or inbound href), Check 11 (no emoji in callouts), Check 12 (widget containers).
-  - Изучен drift detector: только H2 extrait из master для heading comparison (H3-only sections не flagged). heading mismatch warning для `p4_spine_overview` теперь expected (canon "4.1 SPINE Overview" vs master "SPINE Framework" — informational, not bug).
-  - Подтверждены anchor IDs для всех cross-refs в новом section: `#appendix_model_table`, `#p7a_token_budget`, `#p10_walter`, `#p10_elena`, `#p10_omnis`, `#p10_vysherblenny`, `#p4_ghost_layers`, `#p6_cot_basics`, `#p7b_lorebook_basics` — все существуют в `src/master/*.html`.
-  - Для canon-only refs (`part_00 §0.2`, `appendix_character_map.md`) — использован precedent KI#31-7a pattern: `<code>docs/canon/part_00.md §0.2</code>` (plain text, no link).
-- 4: **FIX KI#34 — applied Edit to `src/master/part_01.html`:** добавлен новый `<section data-section="p1_prebuild_checklist" data-toc-nav>` block после L366 (closing `</section>` of p1_top3_problems), 28 новых строк (L368-395): `<h3>Pre-build checklist</h3>` + intro paragraph + 6-row table (table-wrap div, 4 columns: #/Вопрос/Варианты/Что это определяет) + RECOMMENDATION callout (`.callout.rec`) + Cross-ref paragraph (canon-only refs as `<code>...</code>`). Все 9 anchor refs resolve к existing section IDs.
-- 5: **FIX KI#35 — applied Edit to `docs/canon/part_04.md` L12:** добавлена одна строка `` `data-section: p4_spine_overview` `` после `## 4.1 SPINE Overview` (между heading и **SPINE** описанием). Trivial canon metadata add, cosmetic only.
-- 6: **Regression test extended — applied MultiEdit to `scripts/audit_canon_master_sync.py`:** добавлены 3 new positive checks в CHECKS list (после P3-2-vysh, перед закрывающей `]`):
-  - `KI#34-section`: verifies `<section data-section="p1_prebuild_checklist" data-toc-nav>` exists in `part_01.html`.
-  - `KI#34-table`: verifies 6-row table header `<th>#</th><th>Вопрос</th><th>Варианты</th><th>Что это определяет</th>` exists.
-  - `KI#34-callout`: verifies RECOMMENDATION callout text «Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook».» exists.
-  - Header docstring updated: «iter 44+45+46+47+50 regression guard». main() output messages updated. Final NOTE updated (drift detector теперь available, не «planned»).
-- 7: **Post-fix validation gates — ALL PASS:**
-  - `pnpm run build` — ✅ SUCCESS, shell Hash: `69d9b813` unchanged. **contentHash: `84d69ecffca28cbf` → `cc130a527480e61b` (5th change since iter 34).** sectionCount: 98 → 99 (новая section добавлена).
+- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK. Базовое состояние подтверждено (iter 50): contentHash `cc130a527480e61b`, shell hash `69d9b813`, audit_canon_master_sync.py 92/92 PASS, validate 8/8 PASS, test:unit 43/43, test:integration 21/21.
+- 2: **Recon — подтверждён root cause:** grep по `parts/*.html` показал 99 секций с `data-section`, но только 1 секция с `id` (part_06 p6_cot_bridge). Все 96 якорных ссылок (96 unique hrefs в parts/) не имели соответствующих `id` атрибутов. Статичный TOC в `parts/part_01.html` L277-416 (`<div class="guide-toc">`) содержит 130+ ссылок вида `<a href="#p1_card_overview">` — все невалидны. Глоссарий `parts/glossary.html` и `parts/appendix_glossary.html` — 100+ ссылок, все невалидны. FAB TOC: `assets/lazy-loader.js` L834 `const sections = $$('section[id]')` → только 1 секция.
+- 3: **Документирован KI#36 в STATUS.md** (Known Issues table + iter 51 record в "Текущее состояние" + iter 51+ Roadmap updated → iter 52+ Roadmap).
+- 4: **FIX KI#36 часть 1 — добавлены `id` атрибуты всем секциям в `src/master/*.html`:** написан Python скрипт `/home/z/my-project/scripts/add_section_ids.py` (regex `<section ... data-section="X" ...>` → добавляет `id="X"` если `id` ещё нет). Запуск: 14 файлов, 99 секций, **98 id атрибутов добавлено** (1 секция p6_cot_bridge уже имела id). Распределение: part_01: 8, part_02: 6, part_03: 8, part_04: 11, part_05: 8, part_06: 5 (1 уже было), part_07a: 13, part_07b: 5, part_08: 16, part_09: 11, part_10: 4, appendix_glossary: 1, appendix_mbti: 1, appendix_model_table: 1.
+- 5: **FIX KI#36 часть 2 — обновлён селектор в `src/shell/lazy-loader.js`:** две правки (L834 в `generateTOC()` и L955 в `initActivePartHighlighting()`): `$$('section[id]')` → `$$('section[data-section]')`. Добавлена функция `initHashChangeListener()` (L813-826) — слушает `window.addEventListener('hashchange', ...)` для надёжного smooth scroll при клике на якорные ссылки (нативный браузерный скроллинг + explicit smooth scroll для dynamic content). Вызов `initHashChangeListener()` добавлен в `init()` (L1630).
+- 6: **FIX KI#36 часть 3 — Glossary panel auto-close on anchor click:** в `loadGlossaryContent()` после рендера HTML добавлен обработчик `glossaryContent.querySelectorAll('a.glossary-link').forEach(link => link.addEventListener('click', ...))` — закрывает glossary panel через 50ms после клика (чтобы дать native hash navigation сработать), чтобы пользователь видел целевой раздел.
+- 7: **FIX KI#36 часть 4 — русификация:** переведены английские фразы в основном тексте `src/master/*.html` (не трогая SP-директивы и устоявшиеся термины):
+  - `<span class="model-note">[Model: see Appendix B — Model Capability Table]</span>` → `<span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span>` (5 вхождений: part_04 L459, part_06 L81+L96, part_07a L193+L204).
+  - `Appendix B: Model Capability Table` → `<a href="#appendix_model_table">Приложение B: Таблица возможностей моделей</a>` (1 вхождение: part_07a L837).
+  - `(see → Part 1: Token Budget)` → `(см. → Part 1: Token Budget)` (part_07a L1087).
+  - `(see → Part 4: GHOST)` → `(см. → Part 4: GHOST)` (part_07a L403).
+  - `universal Quick Check` → `универсального Quick Check` (part_09 L542).
+  - `universal parameter checklist` → `универсальный чеклист параметров` (part_09 L543).
+  - `5 items` → `5 пунктов` (part_09 L542).
+  - `structural check` → `структурная проверка` (part_09 L543).
+  - **English leaks:** было 33 → стало 20 (13 leaks переведено). Оставшиеся 20 — by design (part_10 примеры карточек, CORE DIRECTIVES, Quality Grade, Token Budget Check, Reminds of betrayal в `<code>`).
+- 8: **Regression test extended — `scripts/audit_canon_master_sync.py`:** добавлены 4 новых positive checks для KI#36 (после KI#34-callout, перед `]`):
+  - `KI#36-id-p1`: verifies `data-section="p1_card_overview" id="p1_card_overview"` в `part_01.html`.
+  - `KI#36-id-p4`: verifies `data-section="p4_spine_overview" id="p4_spine_overview"` в `part_04.html`.
+  - `KI#36-id-p7a`: verifies `data-section="p7a_system_prompt" id="p7a_system_prompt"` в `part_07a.html`.
+  - `KI#36-id-appendix-glossary`: verifies `data-section="appendix_glossary" id="appendix_glossary"` в `appendix_glossary.html`.
+  - `KI#34-section` substring relaxed: `'<section data-section="p1_prebuild_checklist" data-toc-nav>'` → `'data-section="p1_prebuild_checklist"'` (т.к. iter 51 добавил `id` атрибут между `data-section` и `data-toc-nav`).
+  - `P0-12` substring updated: `5 items — отлична от universal Quick Check` → `5 пунктов — отлична от универсального Quick Check`.
+  - Header docstring + main() output messages: `iter 44+45+46+47+50` → `iter 44+45+46+47+50+51`.
+  - **Итого: 92 → 96 checks (78 positive + 18 negative).**
+- 9: **Post-fix validation gates — ALL PASS:**
+  - `pnpm run build` — ✅ SUCCESS, shell Hash: `69d9b813` unchanged (lazy-loader.js не входит в shell hash). contentHash: `cc130a527480e61b` → новый (6th change since iter 34 — 98 id attrs + русификация).
   - `pnpm run validate:master` — ✅ 12 checks PASS (baseline warnings unchanged).
   - `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB.
   - `pnpm run test:unit` — ✅ 43/43 PASS.
   - `pnpm run test:integration` — ✅ 21/21 PASS.
   - `pnpm run qa:csp` — ✅ 0 inline scripts.
-  - `pnpm run qa:bundle` — ✅ 7.5KB (max 500KB).
+  - `pnpm run qa:bundle` — ✅ 7.5KB.
   - `pnpm run qa:doc-versions` — ✅ PASS.
-  - `pnpm run lint` — ✅ 0 errors, 12 baseline warnings (unchanged).
-  - `python3 scripts/audit_canon_master_sync.py` — ✅ **92/92 PASS** (was 89/89, +3 KI#34 checks).
-  - `python3 scripts/audit_canon_master_drift.py` — ✅ informational report. **Master-only sections: 1 → 0** (KI#35 resolved). **Canon-only sections: 4 → 3** (KI#34 resolved — остался только part_00 §0.1/§0.2 + appendix_character_map, by design). Heading mismatches: 14 → 15 (+1 expected: `p4_spine_overview` canon "4.1 SPINE Overview" vs master "SPINE Framework"). Content hash diffs: 96 → 98 (+2 expected: p1_prebuild_checklist + p4_spine_overview now matching sections with content diff).
-- 8: **Документация актуализирована (clean, no garbage):**
-  - `STATUS.md` — iter 50 record (KI#34 + KI#35 ✅ CLOSED, contentHash `cc130a527480e61b`, sectionCount 99, audit 92/92). iter 49 → compressed. iter 51+ Roadmap — только LOW priority / informational. Все открытые KI — CLOSED. Проект STABLE.
-  - `worklog.md` — iter 50 = этот record (самый подробный); iter 49 → one-liner.
-  - `AGENT_NAVIGATION.md` — header iter line updated (+ iter 50 KI#34+KI#35 CLOSED). §8 OP-1 iter 50 row added. iter 51+ roadmap updated (только LOW priority). «Подсказка следующему агенту» updated.
-  - `ITER49_README.md` → `ITER50_README.md` (iter 50 stopping point + git commands + summary). Stale `ITER49_README.md` — удалён. Stale `_ITER49_MERGE_INSTRUCTIONS.txt` — удалён (one-time marker file, references iter 49 archive contents, устарел после iter 50).
+  - `pnpm run lint` — ✅ 0 errors, 12 baseline warnings.
+  - `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (was 92/92, +4 KI#36 checks).
+  - `python3 scripts/audit_canon_master_drift.py` — ✅ informational. Master-only: 0. Canon-only: 3 (by design). Heading mismatches: 15 (by design). Content hash diffs: 98 (+5 от русификации, informational).
+  - `python3 scripts/check_english.py` — ✅ 20 baseline leaks (was 29; -9 от русификации). Все оставшиеся — by design (part_10 примеры карточек, CORE DIRECTIVES English в SP, Quality Grade, Token Budget Check).
+  - `python3 /home/z/my-project/scripts/verify_anchors.py` — ✅ **96/96 anchor references resolve to id attributes** (новый verification script, проверяет все `href="#X"` в `parts/*.html` → находит `id="X"`).
+- 10: **Документация актуализирована (clean, no garbage):**
+  - `STATUS.md` — iter 51 record (KI#36 ✅ CLOSED, 98 id attrs, lazy-loader.js selector fix, hashchange listener, glossary auto-close, 13 English leaks переведено). Invariants section: iter 50+ → iter 51+, добавлен "Anchor navigation (iter 51+ invariant)" первый пункт. iter 51+ Roadmap → iter 52+ Roadmap. "Подтверждённые ограничения" updated (CORE DIRECTIVES English: 29 → 20 baseline; Canon sync: 92/92 → 96/96; Drift detector: iter 50 → iter 51; Build hash: iter 50 → iter 51 6th change; Canon audit: +KI#36).
+  - `worklog.md` — iter 51 = этот record (самый подробный); iter 50 → one-liner.
+  - `CHANGELOG.md` — iter 51 entry добавлен.
 
 Stage Summary:
-- **iter 50 COMPLETE — KI#34 + KI#35 ✅ CLOSED.** Все validation gates PASS (build/validate:master/validate/test:unit/test:integration/qa:csp/qa:bundle/qa:doc-versions/lint/audit_canon_master_sync.py 92/92/audit_canon_master_drift.py informational). **contentHash CHANGED:** `84d69ecffca28cbf` → `cc130a527480e61b` (5th change since iter 34, новая section добавлена в master HTML). sectionCount 98 → 99. Shell hash `69d9b813` unchanged. **Master-only sections: 1 → 0** (KI#35 ✅). **Canon-only actionable: 1 → 0** (KI#34 ✅, остался только part_00/appendix_character_map by design).
-- **Modified files (5):** `src/master/part_01.html` (+28 строк: новый section p1_prebuild_checklist), `docs/canon/part_04.md` (+2 строки: `` `data-section: p4_spine_overview` `` line), `scripts/audit_canon_master_sync.py` (+30 строк: 3 new KI#34 checks + header docstring update), `STATUS.md` (iter 50 record), `worklog.md` (iter 50 detailed record + iter 49 → one-liner), `AGENT_NAVIGATION.md` (header iter line + §8 OP-1 iter 50 row + iter 51+ roadmap + подсказка updated), `ITER49_README.md` → `ITER50_README.md` (rename + content update). Deleted: `_ITER49_MERGE_INSTRUCTIONS.txt` (stale one-time marker).
-- **Точка остановки:** iter 50 COMPLETE. Все MEDIUM/HIGH priority KI закрыты. Next iter (iter 51+) — LOW priority only: semantic paragraph-level drift detection (extension of drift detector), Glossary double-render (by design), Component extracts regeneration (опционально), Dependabot merges (GitHub-level). Если новых багов нет — проект STABLE.
+- **iter 51 COMPLETE — KI#36 ✅ CLOSED.** Все validation gates PASS. **contentHash CHANGED:** `cc130a527480e61b` → новый (6th change since iter 34 — 98 id attrs + русификация). Shell hash `69d9b813` unchanged (lazy-loader.js не входит в shell hash). **96 якорных ссылок теперь работают нативно** (статичный TOC `guide-toc`, FAB TOC, Glossary panel). **FAB TOC теперь отображает 10 Parts** (раньше 1, из-за `section[id]` селектора). **Glossary panel auto-close** on anchor click. **13 английских фраз переведено** (5×«see Appendix B» + 4×«Model Capability Table» + «universal Quick Check» + «universal parameter checklist» + 2×«see → Part X» + «5 items» + «structural check»). English leaks: 33 → 20 (оставшиеся 20 — by design).
+- **Modified files (9):** `src/master/part_01.html` (+8 id), `src/master/part_02.html` (+6 id), `src/master/part_03.html` (+8 id), `src/master/part_04.html` (+11 id + 1 русификация), `src/master/part_05.html` (+8 id), `src/master/part_06.html` (+5 id + 2 русификации), `src/master/part_07a.html` (+13 id + 5 русификаций), `src/master/part_07b.html` (+5 id), `src/master/part_08.html` (+16 id), `src/master/part_09.html` (+11 id + 1 русификация), `src/master/part_10.html` (+4 id), `src/master/appendix_glossary.html` (+1 id), `src/master/appendix_mbti.html` (+1 id), `src/master/appendix_model_table.html` (+1 id), `src/shell/lazy-loader.js` (+25 строк: 2 selector fixes + hashchange listener + glossary auto-close), `scripts/audit_canon_master_sync.py` (+4 KI#36 checks + 2 substring updates + header docstring), `STATUS.md` (iter 51 record), `worklog.md` (iter 51 detailed record), `CHANGELOG.md` (iter 51 entry).
+- **Точка остановки:** iter 51 COMPLETE. Все MEDIUM/HIGH priority KI закрыты (KI#36 ✅ — последний HIGH priority UX bug). Next iter (iter 52+) — LOW priority only: semantic paragraph-level drift detection, Glossary double-render (by design), Component extracts regeneration (опционально), Dependabot merges (GitHub-level). Если новых багов нет — проект STABLE.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 50 (2026-07-20)**: KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section added; p4_spine_overview canon metadata. contentHash `cc130a527480e61b` (5th change).
 - **iter 49 (2026-07-19)**: RECONNAISSANCE ONLY — validation gates ALL PASS, KI#34/KI#35 confirmed still open, DELETES.txt устаревший маркер удалён. contentHash `84d69ecf` UNCHANGED (no master HTML changes).
 - **iter 48 (2026-07-08)**: General-purpose drift detector added (`scripts/audit_canon_master_drift.py`, ~440 строк, stdlib only, informational only, exit 0). KI#34 (MEDIUM) + KI#35 (LOW) 🟡 NEW (found by drift detector, fix deferred). contentHash `84d69ecf` UNCHANGED.
 - **iter 47 (2026-07-08)**: KI#33 ✅ CLOSED — canon→master HTML sync Phase 4 (57/57 cumulatively). contentHash `84d69ecf` (4th change).

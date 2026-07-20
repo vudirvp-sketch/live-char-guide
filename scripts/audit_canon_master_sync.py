@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Audit canon → master HTML sync (iter 44+45+46+47+50 regression guard).
+Audit canon → master HTML sync (iter 44+45+46+47+50+51 regression guard).
 
 Purpose:
     Verify that iter 44 + iter 45 + iter 46 + iter 47 + iter 50 canon→master
@@ -209,11 +209,12 @@ CHECKS = [
         "part_09 §9.11: 3-level → 4-zone scale (iter 35 P0-11 fix, iter 47 sync completion — «4 уровня» → «4 зоны»)",
     ),
     # ----- P0-12 (A10): part_09 Vysh Quick Check rename -----
+    # iter 51 KI#36: substring updated — "5 items" → "5 пунктов", "universal Quick Check" → "универсального Quick Check"
     (
         "P0-12",
         "part_09.html",
-        "<h5>Структурная проверка Выщербленного (5 items — отлична от universal Quick Check выше)</h5>",
-        "part_09 Vysh Quick Check heading renamed + clarifier paragraph (iter 35 P0-12 fix)",
+        "<h5>Структурная проверка Выщербленного (5 пунктов — отлична от универсального Quick Check выше)</h5>",
+        "part_09 Vysh Quick Check heading renamed + clarifier paragraph (iter 35 P0-12 fix; iter 51 русификация)",
     ),
     # ----- P0-13 (B1 GHOST): part_10 Omnis GHOST rewrite -----
     (
@@ -595,8 +596,8 @@ CHECKS = [
     (
         "KI#34-section",
         "part_01.html",
-        '<section data-section="p1_prebuild_checklist" data-toc-nav>',
-        "part_01 §1.8 Pre-build checklist: section block added (iter 50 KI#34 fix)",
+        'data-section="p1_prebuild_checklist"',
+        "part_01 §1.8 Pre-build checklist: section block added (iter 50 KI#34 fix; iter 51 KI#36: id attr added, substring relaxed)",
     ),
     (
         "KI#34-table",
@@ -609,6 +610,34 @@ CHECKS = [
         "part_01.html",
         "<p><strong>RECOMMENDATION:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook».",
         "part_01 §1.8 Pre-build checklist: RECOMMENDATION callout (iter 50 KI#34 fix)",
+    ),
+    # ----- KI#36 (iter 51): id attributes on <section> elements -----
+    # All <section data-section="X"> must now have id="X" too, so that
+    # anchor links like <a href="#X"> work natively in browsers.
+    # These 4 checks cover representative sections across parts/appendices.
+    (
+        "KI#36-id-p1",
+        "part_01.html",
+        'data-section="p1_card_overview" id="p1_card_overview"',
+        "part_01: id attribute on p1_card_overview section (iter 51 KI#36 fix — anchor nav)",
+    ),
+    (
+        "KI#36-id-p4",
+        "part_04.html",
+        'data-section="p4_spine_overview" id="p4_spine_overview"',
+        "part_04: id attribute on p4_spine_overview section (iter 51 KI#36 fix — anchor nav)",
+    ),
+    (
+        "KI#36-id-p7a",
+        "part_07a.html",
+        'data-section="p7a_system_prompt" id="p7a_system_prompt"',
+        "part_07a: id attribute on p7a_system_prompt section (iter 51 KI#36 fix — anchor nav)",
+    ),
+    (
+        "KI#36-id-appendix-glossary",
+        "appendix_glossary.html",
+        'data-section="appendix_glossary" id="appendix_glossary"',
+        "appendix_glossary: id attribute on appendix_glossary section (iter 51 KI#36 fix — anchor nav)",
     ),
 ]
 
@@ -737,7 +766,7 @@ ABSENT_CHECKS = [
 
 def main() -> int:
     print("=" * 70)
-    print("audit_canon_master_sync.py — iter 44+45+46+47+50 regression guard")
+    print("audit_canon_master_sync.py — iter 44+45+46+47+50+51 regression guard")
     print("Verifies that iter 44 + iter 45 + iter 46 + iter 47 + iter 50 canon→master HTML sync fixes are in place.")
     print("=" * 70)
     print()
@@ -790,15 +819,15 @@ def main() -> int:
     if failures:
         print(f"FAILED: {len(failures)} check(s) failed, {pass_count} passed")
         print()
-        print("Regression detected — iter 44+45+46+47+50 fixes are NOT all in place.")
+        print("Regression detected — iter 44+45+46+47+50+51 fixes are NOT all in place.")
         print("Investigate src/master/*.html and re-apply missing fixes.")
         return 1
     else:
         print(f"PASS: all {pass_count} checks passed")
         print()
-        print("iter 44+45+46+47+50 canon→master HTML sync fixes are in place.")
+        print("iter 44+45+46+47+50+51 canon→master HTML sync fixes are in place.")
         print()
-        print("NOTE: This is a focused regression test for iter 44+45+46+47+50 fixes.")
+        print("NOTE: This is a focused regression test for iter 44+45+46+47+50+51 fixes.")
         print("      A general-purpose canon↔master drift detector is available")
         print("      as `scripts/audit_canon_master_drift.py` (added iter 48).")
         return 0

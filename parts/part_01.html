@@ -284,6 +284,7 @@
     <li><a href="#p1_token_budget_ref">token budget ref</a></li>
     <li><a href="#p1_pipeline_ref">pipeline ref</a></li>
     <li><a href="#p1_top3_problems">Топ-3 критичные ошибки</a></li>
+    <li><a href="#p1_prebuild_checklist">prebuild checklist</a></li>
   </ul>
 </li>
 <li><strong>Part 02:</strong> Behavioral Anchors
@@ -499,5 +500,34 @@
 <p><strong>Исправление:</strong> Критерии качества Anchors → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
 
 <p><strong>Synthesis:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (Anchor = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>
+
+</section>
+
+<section data-section="p1_prebuild_checklist" data-toc-nav>
+<h3>Pre-build checklist</h3>
+
+<p>6 вопросов перед началом сборки карточки. Каждый ответ определяет, какие инструменты понадобятся и сколько токенов заложить.</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>#</th><th>Вопрос</th><th>Варианты</th><th>Что это определяет</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>Размер модели</strong></td><td>12B / 32B+ / API</td><td>12B — упор на Examples и Anchors, минимальный SP. 32B+ — можно CoT, Author's Note, Lorebook. API — максимум инструментов. → <a href="#appendix_model_table">Appendix: Model Table</a>.</td></tr>
+<tr><td>2</td><td><strong>Контекстное окно</strong></td><td>4K / 8K / 16K+</td><td>4K — Description ≤200 токенов, 2 Examples. 8K — Description ≤400, 3 Examples, базовый Lorebook. 16K+ — полная карточка, CoT, GHOST Layers. → <a href="#p7a_token_budget">Part 7A: Token Budget</a>.</td></tr>
+<tr><td>3</td><td><strong>Сложность персонажа</strong></td><td>Простая / Средняя / Экспертная</td><td>Простая — Уолтер Уайт (<a href="#p10_walter">§10.2</a>). Средняя — Елена (<a href="#p10_elena">§10.1</a>). Экспертная — Омнис-Зета (<a href="#p10_omnis">§10.3</a>), Выщербленный (<a href="#p10_vysherblenny">§10.4</a>).</td></tr>
+<tr><td>4</td><td><strong>GHOST один или Layers</strong></td><td>1 (single) / 3-tier (Layers)</td><td>1 — обычная карточка, GHOST = одно событие. 3-tier — временная хронология (детство → юность → настоящее), см. <a href="#p4_ghost_layers">Part 4: GHOST Layers</a>.</td></tr>
+<tr><td>5</td><td><strong>CoT нужен?</strong></td><td>Нет (Tier 0) / Да (Tier 1+)</td><td>Нет — персонаж без внутренних конфликтов в моменте. Да — нужен внутренний монолог для SPINE-триггеров. → <a href="#p6_cot_basics">Part 6: CoT</a>.</td></tr>
+<tr><td>6</td><td><strong>Lorebook нужен?</strong></td><td>Нет / 1–3 записи / 5+ записей</td><td>Нет — все факты помещаются в Description. 1–3 — контекстные триггеры. 5+ — мир + GHOST-факты. → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rec">
+<p><strong>RECOMMENDATION:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook». Это конфигурация Елены (~440 токенов). Не пытайтесь сразу строить экспертную карточку — это ведёт к перегрузке Description и Voice Leak.</p>
+</div>
+
+<p><strong>Cross-ref:</strong> TL;DR / Quick Start — в <code>docs/canon/part_00.md §0.2</code> (canon-only). Карта персонажей по сложности — в <code>docs/canon/appendix_character_map.md</code> (canon-only).</p>
 
 </section>

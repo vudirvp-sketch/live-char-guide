@@ -12,7 +12,8 @@
         "p1_core_rules",
         "p1_token_budget_ref",
         "p1_pipeline_ref",
-        "p1_top3_problems"
+        "p1_top3_problems",
+        "p1_prebuild_checklist"
       ]
     },
     {

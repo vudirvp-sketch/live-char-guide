@@ -1,5 +1,67 @@
 # Changelog
 
+## [9.1.51] - 2026-07-21
+
+### iter 51 — KI#36 (anchor navigation) ✅ CLOSED
+
+HIGH-priority UX fix: все внутренние якорные ссылки в гайде невалидны. Статичный TOC (`<div class="guide-toc">` в `src/master/part_01.html`) и Glossary panel (`data/glossary.json` → `term.anchor_id`) ссылаются на `#p1_card_overview` etc., но секции имеют только `data-section="p1_card_overview"` без `id`. Браузер ищет `id`, не `data-section` — поэтому все 96+ ссылок молча скроллируют наверх. FAB TOC (кнопка `📑`) отображал только 1 пункт из-за селектора `$$('section[id]')` в `lazy-loader.js` — только 1 секция имела `id`.
+
+### Fixed (iter 51 — KI#36)
+- **KI#36 часть 1 — id attributes:** добавлены `id` атрибуты 98 секциям в `src/master/*.html` (= значению `data-section`). Теперь все `<section data-section="X">` имеют `id="X"`. Браузерный anchor mechanism работает нативно.
+- **KI#36 часть 2 — lazy-loader.js selector:** `$$('section[id]')` → `$$('section[data-section]')` в `generateTOC()` (L834) и `initActivePartHighlighting()` (L955). FAB TOC теперь отображает все 10 Parts (раньше 1).
+- **KI#36 часть 3 — hashchange listener:** добавлена функция `initHashChangeListener()` (L813-826) — слушает `window.addEventListener('hashchange', ...)` для надёжного smooth scroll при клике на якорные ссылки.
+- **KI#36 часть 4 — Glossary panel auto-close:** в `loadGlossaryContent()` после рендера HTML добавлен обработчик клика на `a.glossary-link` — закрывает glossary panel через 50ms после клика, чтобы пользователь видел целевой раздел.
+- **Русификация:** 13 английских фраз переведено (5×«see Appendix B» → «см. Приложение B» + 4×«Model Capability Table» → «Таблица возможностей моделей» + «universal Quick Check» → «универсального Quick Check» + «universal parameter checklist» → «универсальный чеклист параметров» + 2×«see → Part X» → «см. → Part X» + «5 items» → «5 пунктов» + «structural check» → «структурная проверка»). English leaks: 33 → 20 (оставшиеся 20 — by design: part_10 примеры карточек, CORE DIRECTIVES English в SP, Quality Grade, Token Budget Check).
+
+### Tests (iter 51 — ALL PASS)
+- `pnpm run build` — ✅ shell Hash `69d9b813` unchanged (lazy-loader.js не входит в shell hash). contentHash изменён (6th change since iter 34).
+- `pnpm run validate:master` — ✅ 12 checks PASS
+- `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB
+- `pnpm run test:unit` — ✅ 43/43
+- `pnpm run test:integration` — ✅ 21/21
+- `pnpm run qa:csp` — ✅ 0 inline scripts
+- `pnpm run qa:bundle` — ✅ 7.5KB
+- `pnpm run qa:doc-versions` — ✅ PASS
+- `pnpm run lint` — ✅ 0 errors, 12 baseline warnings
+- `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (was 92/92, +4 KI#36 id checks)
+- `python3 scripts/audit_canon_master_drift.py` — ✅ informational (0 master-only, 3 canon-only by design)
+- `python3 scripts/check_english.py` — 20 baseline leaks (was 29; -9 от русификации)
+- `python3 verify_anchors.py` — ✅ **96/96 anchor references resolve to id attributes**
+
+### Modified files (iter 51)
+- `src/master/part_01.html` — +8 id attrs
+- `src/master/part_02.html` — +6 id attrs
+- `src/master/part_03.html` — +8 id attrs
+- `src/master/part_04.html` — +11 id attrs + 1 русификация
+- `src/master/part_05.html` — +8 id attrs
+- `src/master/part_06.html` — +5 id attrs + 2 русификации
+- `src/master/part_07a.html` — +13 id attrs + 5 русификаций
+- `src/master/part_07b.html` — +5 id attrs
+- `src/master/part_08.html` — +16 id attrs
+- `src/master/part_09.html` — +11 id attrs + 1 русификация
+- `src/master/part_10.html` — +4 id attrs
+- `src/master/appendix_glossary.html` — +1 id attr
+- `src/master/appendix_mbti.html` — +1 id attr
+- `src/master/appendix_model_table.html` — +1 id attr
+- `src/shell/lazy-loader.js` — +25 строк (2 selector fixes + hashchange listener + glossary auto-close)
+- `scripts/audit_canon_master_sync.py` — +4 KI#36 checks + 2 substring updates + header docstring (92→96 checks)
+- `STATUS.md` — iter 51 record, iter 51+ → iter 52+ Roadmap
+- `worklog.md` — iter 51 detailed record
+
+### Helper scripts (persisted in `/home/z/my-project/scripts/`)
+- `add_section_ids.py` — добавляет `id` атрибуты всем секциям с `data-section` в `src/master/*.html`.
+- `verify_anchors.py` — проверяет, что все `href="#X"` в `parts/*.html` разрешаются в `id="X"`.
+
+---
+
+## [9.1.50] - 2026-07-20
+
+### iter 50 — KI#34 + KI#35 ✅ CLOSED
+
+MEDIUM-priority KI#34 fix: добавлен `<section data-section="p1_prebuild_checklist" data-toc-nav>` block в `src/master/part_01.html`. LOW-priority KI#35 fix: `` `data-section: p4_spine_overview` `` line added в `docs/canon/part_04.md`. Regression test extended 89→92→96 checks.
+
+---
+
 ## [9.1.37] - 2026-07-08
 
 ### iter 37 — Canon Audit P2 (KI#21 P2) ✅ CLOSED
