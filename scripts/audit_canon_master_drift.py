@@ -32,6 +32,17 @@ What it checks (per canon/master file pair):
          with VS-EMBEDs without leaving a textual trace.
        - Informational only — many drifts are expected (canon has [ref: ...]
          markers, master has VS-EMBEDs instead of text).
+    5. Drift categorization (iter 53+):
+       - Each paragraph drift is classified into one of:
+         * `vs_embed_ref`     — canon text contains `[vs:` marker (expected).
+         * `cross_ref`         — canon text starts with `cross-ref:` (expected).
+         * `callout_label`     — canon text matches callout label pattern
+                                 (e.g., `illustration — demonstrates:`).
+         * `no_master_match`   — no candidate master paragraph found (master_len=0).
+         * `plain_text`        — regular text drift, may need investigation.
+       - Helps future iterations quickly see WHAT KIND of drifts exist
+         without manual inspection of every paragraph.
+       - Reported as a category summary in console output + JSON report.
 
 Scope:
     Covers all 16 canon files: part_00, part_01..part_10, part_07a, part_07b,
@@ -46,6 +57,15 @@ Run:
     python3 scripts/audit_canon_master_drift.py
     python3 scripts/audit_canon_master_drift.py --json build/drift-report.json
     python3 scripts/audit_canon_master_drift.py --no-paragraphs  # skip paragraph drift
+    python3 scripts/audit_canon_master_drift.py --paragraph-threshold 0.5  # custom threshold
+
+Categories (iter 53+):
+    vs_embed_ref     — canon paragraph mentions [vs: ...] (VS-EMBED replacement).
+    cross_ref        — canon paragraph is a `cross-ref:` structural pointer.
+    callout_label    — canon paragraph starts with a callout label
+                      (RULE / RECOMMENDATION / EXAMPLE / ILLUSTRATION / Bridge / Synthesis).
+    no_master_match  — no candidate master paragraph was found (master_len == 0).
+    plain_text       — regular text drift; the most actionable category.
 """
 import argparse
 import hashlib
@@ -137,6 +157,7 @@ class ParagraphDrift:
     best_similarity: float  # Jaccard similarity [0.0, 1.0]
     canon_length: int
     master_length: int
+    category: str = "plain_text"  # iter 53+: drift category (see CATEGORIES)
 
 
 @dataclass
@@ -561,6 +582,49 @@ def jaccard_similarity(set_a: frozenset, set_b: frozenset) -> float:
     return len(intersection) / len(union)
 
 
+# Patterns for paragraph drift categorization (iter 53+).
+# Order matters: vs_embed_ref is checked first (most specific), then cross_ref,
+# then callout_label. If none match and master_length == 0, it's no_master_match.
+# Otherwise it's plain_text.
+CANON_VS_MARKER_RE = re.compile(r"\[vs:", re.IGNORECASE)
+CANON_CROSS_REF_RE = re.compile(r"^cross-ref\s*[:—-]", re.IGNORECASE)
+CANON_CALLOUT_LABEL_RE = re.compile(
+    r"^(?:illustration|rule|recommendation|example|bridge|synthesis|cross-ref|demonstrates|annotation)\s*[—\-:]",
+    re.IGNORECASE,
+)
+
+# Valid category names (for documentation / validation).
+DRIFT_CATEGORIES = (
+    "vs_embed_ref",
+    "cross_ref",
+    "callout_label",
+    "no_master_match",
+    "plain_text",
+)
+
+
+def categorize_paragraph_drift(canon_text_preview: str, master_length: int) -> str:
+    """Classify a paragraph drift into a category (iter 53+).
+
+    Categories (checked in order, first match wins):
+        vs_embed_ref    — canon text contains `[vs:` marker (VS-EMBED replacement).
+        cross_ref       — canon text starts with `cross-ref:` (structural pointer).
+        callout_label   — canon text starts with a callout label
+                          (RULE / RECOMMENDATION / EXAMPLE / ILLUSTRATION / Bridge / Synthesis).
+        no_master_match — no candidate master paragraph found (master_length == 0).
+        plain_text      — regular text drift; the most actionable category.
+    """
+    if CANON_VS_MARKER_RE.search(canon_text_preview):
+        return "vs_embed_ref"
+    if CANON_CROSS_REF_RE.match(canon_text_preview):
+        return "cross_ref"
+    if CANON_CALLOUT_LABEL_RE.match(canon_text_preview):
+        return "callout_label"
+    if master_length == 0:
+        return "no_master_match"
+    return "plain_text"
+
+
 def compute_paragraph_drift(
     section_id: str,
     canon_paragraphs: list[str],
@@ -603,6 +667,7 @@ def compute_paragraph_drift(
                     break  # perfect match, no need to search further
 
         if best_sim < PARAGRAPH_DRIFT_THRESHOLD:
+            category = categorize_paragraph_drift(cp, best_master_len)
             drifts.append(ParagraphDrift(
                 section_id=section_id,
                 canon_text_preview=cp[:80],
@@ -610,6 +675,7 @@ def compute_paragraph_drift(
                 best_similarity=round(best_sim, 3),
                 canon_length=len(cp),
                 master_length=best_master_len,
+                category=category,
             ))
 
     return drifts
@@ -740,6 +806,7 @@ def print_console_report(drifts: list[FileDrift]) -> None:
     total_content_hash_diff = 0
     total_content_hash_match = 0
     total_paragraph_drift = 0
+    category_counts: dict[str, int] = {}  # iter 53+: drift category breakdown
 
     for d in drifts:
         # Skip silently if no drift at all and both files exist with sections.
@@ -801,7 +868,7 @@ def print_console_report(drifts: list[FileDrift]) -> None:
         if d.paragraph_drifts:
             print(f"  [INFO] {len(d.paragraph_drifts)} paragraph drift(s) below Jaccard {PARAGRAPH_DRIFT_THRESHOLD} (iter 52+, informational):")
             for pd in d.paragraph_drifts[:MAX_PARAGRAPH_DISPLAY]:
-                print(f"    - id={pd.section_id!r} sim={pd.best_similarity}")
+                print(f"    - id={pd.section_id!r} sim={pd.best_similarity} category={pd.category}")
                 print(f"        canon:   {pd.canon_text_preview!r} (len={pd.canon_length})")
                 if pd.best_master_text_preview:
                     print(f"        master:  {pd.best_master_text_preview!r} (len={pd.master_length})")
@@ -810,6 +877,9 @@ def print_console_report(drifts: list[FileDrift]) -> None:
             if len(d.paragraph_drifts) > MAX_PARAGRAPH_DISPLAY:
                 print(f"    ... and {len(d.paragraph_drifts) - MAX_PARAGRAPH_DISPLAY} more")
             total_paragraph_drift += len(d.paragraph_drifts)
+            # Accumulate category counts across all files.
+            for pd in d.paragraph_drifts:
+                category_counts[pd.category] = category_counts.get(pd.category, 0) + 1
 
         total_content_hash_match += d.content_hash_matches
         print()
@@ -824,6 +894,11 @@ def print_console_report(drifts: list[FileDrift]) -> None:
     print(f"  Content hash diffs (informational): {total_content_hash_diff}")
     print(f"  Content hash matches (perfect sync): {total_content_hash_match}")
     print(f"  Paragraph drifts (iter 52+, informational): {total_paragraph_drift}")
+    if category_counts:
+        # Show category breakdown ordered by DRIFT_CATEGORIES definition order.
+        for cat in DRIFT_CATEGORIES:
+            if cat in category_counts:
+                print(f"      - {cat:<18} {category_counts[cat]}")
     print()
     print("NOTE: This is an informational tool. Content hash diffs and paragraph")
     print("      drifts are EXPECTED (master has VS-EMBEDs, expanded HTML; canon has")
@@ -834,12 +909,21 @@ def print_console_report(drifts: list[FileDrift]) -> None:
 
 def build_json_report(drifts: list[FileDrift]) -> dict:
     """Build a JSON-serializable report."""
+    # Compute category breakdown across all files (iter 53+).
+    category_counts: dict[str, int] = {cat: 0 for cat in DRIFT_CATEGORIES}
+    for d in drifts:
+        for pd in d.paragraph_drifts:
+            # Defensive: unknown categories are counted under "plain_text".
+            cat = pd.category if pd.category in category_counts else "plain_text"
+            category_counts[cat] += 1
     return {
         "tool": "audit_canon_master_drift.py",
-        "version": "1.1",  # iter 52: paragraph drift added
-        "iter": "48+ (paragraph drift: iter 52+)",
+        "version": "1.2",  # iter 53: drift categorization added
+        "iter": "48+ (paragraph drift: iter 52+, categories: iter 53+)",
         "paragraph_drift_threshold": PARAGRAPH_DRIFT_THRESHOLD,
         "min_paragraph_length": MIN_PARAGRAPH_LENGTH,
+        "drift_categories": list(DRIFT_CATEGORIES),
+        "paragraph_drift_category_counts": category_counts,
         "files_scanned": len(drifts),
         "drifts": [asdict(d) for d in drifts],
     }

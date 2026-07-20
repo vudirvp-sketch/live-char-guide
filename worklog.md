@@ -4,30 +4,29 @@
 
 ---
 
-Task ID: 52
+Task ID: 53
 Agent: main
-Task: iter 52 — LOW-priority roadmap item #1: semantic paragraph-level drift detection. Расширить `scripts/audit_canon_master_drift.py` до paragraph-level Jaccard similarity для matching sections (сейчас только content hash diff, который почти всегда отличается из-за VS-EMBEDs vs `[ref:...]` markers). Дополнительно: почистить документацию от длинной истории изменений и устаревших секций (user request — «файлы должны быть лёгкими для модели/агента»).
+Task: iter 53 — LOW-priority roadmap continuation. Recon 88 paragraph drifts (iter 52) на false positives, и если false positives нет — добавить drift categorization в `scripts/audit_canon_master_drift.py` v1.1→v1.2 (5 категорий: vs_embed_ref / cross_ref / callout_label / no_master_match / plain_text) для future iterations visibility. Documentation cleanup.
 
 Work Log:
-- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK. Базовое состояние подтверждено (iter 51): contentHash новый (6th change since iter 34), shell hash `69d9b813` unchanged, audit_canon_master_sync.py 96/96 PASS, validate 8/8 PASS, test:unit 43/43, test:integration 21/21, English leaks 20 baseline.
-- 2: **Recon — прочитан существующий `scripts/audit_canon_master_drift.py` (626 строк)** — informational detector с 4 функциями: section presence drift + heading text mismatch + content hash diff + (NEW) paragraph drift. Бэкап сохранён в `/home/z/my-project/scripts/audit_canon_master_drift.py.backup`. Текущий output: 3 canon-only sections (by design), 0 master-only, 15 heading mismatches (by design — canon `## X.Y Title` vs master `<h2>Title</h2>`), 98 content hash diffs (expected — VS-EMBEDs vs `[ref:...]`), 0 matches. **Проблема:** content hash diffs почти бесполезны как сигнал — всегда отличаются.
-- 3: **Документирован iter 52 plan в TODO** — LOW priority, не трогает content, только расширяет informational скрипт + чистит документацию.
-- 4: **Реализован paragraph-level Jaccard similarity detection в `scripts/audit_canon_master_drift.py`:**
-  - New dataclass `ParagraphDrift` (section_id, canon_text_preview, best_master_text_preview, best_similarity, canon_length, master_length).
-  - New field `paragraph_drifts: list` added to `FileDrift` dataclass.
-  - New functions: `split_canon_paragraphs()` (splits canon markdown body on horizontal rules + blank lines, filters out H3 headings / code fences / [ref:...] / short fragments), `split_master_paragraphs()` (extracts text from `<p>`, `<li>`, `<td>/<th>` tags with `MIN_PARAGRAPH_LENGTH` filter), `tokenize()` (Unicode-aware `\w{3,}` + Russian/English stopwords filter), `jaccard_similarity()` (|A∩B| / |A∪B|), `compute_paragraph_drift()` (for each canon paragraph finds best master match, returns drifts with similarity < threshold).
-  - New constants: `PARAGRAPH_DRIFT_THRESHOLD=0.3`, `MIN_PARAGRAPH_LENGTH=30`, `MAX_PARAGRAPH_DISPLAY=5`.
-  - New CLI flags: `--no-paragraphs` (skip paragraph drift), `--paragraph-threshold FLOAT` (custom threshold).
-  - Module-level flag `ENABLE_PARAGRAPH_DRIFT` toggled by `--no-paragraphs`.
-  - Console report: new `[INFO] N paragraph drift(s) below Jaccard 0.3` section per file, summary line `Paragraph drifts (iter 52+, informational): N`.
-  - JSON report: version `1.0` → `1.1`, new fields `paragraph_drift_threshold`, `min_paragraph_length`, paragraph_drifts в каждом FileDrift.
-  - Updated header docstring (iter 52+ feature description, new CLI examples).
-  - Bug fix during impl: initial `global PARAGRAPH_DRIFT_THRESHOLD` was inside if/else branch (SyntaxError) — moved to top of `main()`. Initial `TOKEN_RE = r"[\w\\u0400-\\u04FF]{3,}"` was malformed in raw string (literal `\u0400`) — simplified to `r"\w{3,}"` since Python 3 `\w` is Unicode-aware by default. Removed unused `CANON_RULE_LABEL_RE` pattern.
+- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK. Базовое состояние подтверждено (iter 52): audit_canon_master_sync.py 96/96 PASS, drift detector v1.1 (88 paragraph drifts), shell hash `69d9b813` unchanged, validate 8/8 PASS, test:unit 43/43, test:integration 21/21, English leaks 20 baseline.
+- 2: **Recon — 88 paragraph drifts проанализированы через `--json` + ad-hoc Python categorization.** Drift distribution by similarity: 21 drifts sim<0.05, 17 sim 0.05-0.10, 12 sim 0.10-0.15, 7 sim 0.15-0.20, 13 sim 0.20-0.25, 18 sim 0.25-0.30. Длина canon: 14 drifts <50 chars, 22 drifts 50-100, 26 drifts 100-200, 24 drifts 200-500, 2 drifts >500. Files с most drifts: part_04 (19), part_07a (18), part_08 (9), part_07b (8), part_09 (8).
+- 3: **Recon conclusion — false positives нет.** Sample drifts with sim<0.05 — это либо VS-EMBED replacements (canon text: «[vs: e07 — voice influence hierarchy. см. маркер в preamble. замещает текстовое описание]»), либо callout labels без master counterpart (canon: «illustration — demonstrates: embodiment first, show never tell, spine causality», master_len=0). Sample drifts с sim 0.20-0.30 — это real partial matches (canon полный текст → master condensed/expanded версия). Все 88 drifts — real semantic differences между canon (verbose markdown) и master (production HTML). **Threshold 0.3 / MIN_PARAGRAPH_LENGTH 30 — остаются без изменений.**
+- 4: **Реализован drift categorization в `scripts/audit_canon_master_drift.py` (v1.1 → v1.2):**
+  - Backup сохранён в `/home/z/my-project/scripts/audit_canon_master_drift.py.backup_iter52`.
+  - New `category` field в `ParagraphDrift` dataclass (default `plain_text`).
+  - New constants: `DRIFT_CATEGORIES` tuple (5 categories).
+  - New compiled regex patterns: `CANON_VS_MARKER_RE` (`\[vs:`), `CANON_CROSS_REF_RE` (`^cross-ref\s*[:—-]`), `CANON_CALLOUT_LABEL_RE` (`^(illustration|rule|recommendation|example|bridge|synthesis|cross-ref|demonstrates|annotation)\s*[—\-:]`).
+  - New function `categorize_paragraph_drift(canon_text_preview, master_length) -> str` — checks patterns in order: vs_embed_ref → cross_ref → callout_label → no_master_match → plain_text.
+  - `compute_paragraph_drift()` updated: calls `categorize_paragraph_drift()` per drift, stores result in `category` field.
+  - Console report: each drift line now includes `category=<cat>`. Summary: new category breakdown section showing all 5 categories with counts.
+  - JSON report: version 1.1 → 1.2, new fields `drift_categories` (list), `paragraph_drift_category_counts` (dict). Each ParagraphDrift now includes `category` field.
+  - Header docstring: new §5 «Drift categorization (iter 53+)» + new «Categories» CLI examples section.
 - 5: **Post-fix validation gates — ALL PASS:**
-  - `python3 scripts/audit_canon_master_drift.py` — ✅ exit 0, **88 paragraph drifts found** (informational, expected — VS-EMBEDs replace text). Files with most drifts: part_01 (4), part_02 (2), part_03, part_04, etc. — все drifts informational.
+  - `python3 scripts/audit_canon_master_drift.py` — ✅ exit 0, 88 paragraph drifts, category breakdown: vs_embed_ref=15, cross_ref=14, callout_label=4, no_master_match=2, plain_text=53.
   - `python3 scripts/audit_canon_master_drift.py --no-paragraphs` — ✅ exit 0, 0 paragraph drifts (flag works).
-  - `python3 scripts/audit_canon_master_drift.py --paragraph-threshold 0.5` — ✅ exit 0, 137 paragraph drifts (custom threshold works — higher threshold = more drifts).
-  - `python3 scripts/audit_canon_master_drift.py --json /tmp/drift.json --quiet` — ✅ JSON valid, version 1.1, 88 total paragraph drifts.
+  - `python3 scripts/audit_canon_master_drift.py --paragraph-threshold 0.5` — ✅ exit 0, 122 paragraph drifts (custom threshold works).
+  - `python3 scripts/audit_canon_master_drift.py --json /tmp/drift_v1.2.json --quiet` — ✅ JSON valid, version 1.2, all drifts have `category` field.
   - `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (unchanged, regression test не тронут).
   - `pnpm run build` — ✅ SUCCESS, shell Hash `69d9b813` unchanged (скрипт не в build).
   - `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB.
@@ -39,24 +38,23 @@ Work Log:
   - `pnpm run lint` — ✅ 0 errors, 12 baseline warnings.
   - `pnpm run qa:doc-versions` — ✅ PASS.
   - `python3 scripts/check_english.py` — ✅ 20 baseline leaks (unchanged).
-- 6: **Документация актуализирована (clean, no garbage — per user request «файлы должны быть лёгкими для модели/агента»):**
-  - `STATUS.md` — iter 52 record (paragraph drift detector added). iter 51 verbose paragraph replaced с iter 52 brief. Invariants: added «Paragraph-level drift detection (iter 52+ invariant)» пункт. iter 52+ Roadmap → iter 53+ Roadmap, первый пункт (semantic paragraph drift) удалён (just completed). «Подтверждённые ограничения» updated: drift detector iter 48 → iter 52 (paragraph drift added).
-  - `worklog.md` — iter 52 = этот record; iter 51 → one-liner.
-  - `CHANGELOG.md` — iter 52 entry добавлен (brief, ~25 строк). iter 51 entry compressed с 50+ строк до 10 строк (только key facts: KI#36 closed, 98 id attrs, lazy-loader selector fix, 13 русификаций). iter 50/37/32 — unchanged (уже brief). «Previous iterations (compressed)» — unchanged.
-  - `AGENT_NAVIGATION.md` — header iter line updated (iter 52 added). §6 Frequent Pitfalls: compressed с 39 пунктов (FIX-N verbose) до 18 key pitfalls (removed iter-specific FIX-N references, kept только still-relevant pitfalls + added iter 51 anchor nav + iter 52 paragraph drift). OP-1 iter history table: compressed с 30+ verbose rows (200+ слов каждая) до 9 milestone rows (iter 1, 18, 32, 38, 47, 50, 51, 52). iter 52+ Roadmap → iter 53+ Roadmap, первый пункт удалён.
-- 7: **Archive preparation:** только изменённые файлы сохранены с сохранением структуры папок для слияния с локальной директорией. Удалены stale files: `ITER51_README.md` + `_ITER51_DELETE_STALE.txt` (per-iter READMEs дублируют info из worklog/STATUS/CHANGELOG — мусор per user request).
+- 6: **Документация актуализирована:**
+  - `STATUS.md` — iter 53 record. Invariants: added «Drift categorization (iter 53+ invariant)» пункт; «Paragraph-level drift detection (iter 52+)» updated to reference v1.2. Drift detector invariant updated (88 = 15+14+4+2+53 breakdown). iter 53+ Roadmap → iter 54+ Roadmap, paragraph drift tuning пункт updated (recon done, no tuning needed). «Подтверждённые ограничения» table updated similarly. Header version line: iter 34-52 → iter 34-53, iter 52 brief → iter 53 brief.
+  - `worklog.md` — iter 53 = этот record; iter 52 → one-liner.
+  - `CHANGELOG.md` — iter 53 entry добавлен (brief). iter 52 entry сохранён (compressed).
+  - `AGENT_NAVIGATION.md` — header iter line updated (iter 53 added). OP-1 iter table: iter 52 row → iter 52+53 combined row (drift detector evolution). iter 53+ Roadmap → iter 54+ Roadmap.
 
 Stage Summary:
-- **iter 52 COMPLETE — paragraph-level drift detection added.** `scripts/audit_canon_master_drift.py` расширен с 1.0 до 1.1: новый `ParagraphDrift` dataclass, 5 new functions (split_canon_paragraphs, split_master_paragraphs, tokenize, jaccard_similarity, compute_paragraph_drift), 2 new CLI flags (--no-paragraphs, --paragraph-threshold), 88 paragraph drifts detected (informational, expected — VS-EMBEDs replace text). Все validation gates PASS. contentHash UNCHANGED (скрипт не в build). Shell hash `69d9b813` UNCHANGED. audit_canon_master_sync.py 96/96 PASS (не тронут). English leaks 20 baseline (unchanged).
-- **Documentation cleanup:** AGENT_NAVIGATION.md -23% (512→~390 строк, OP-1 iter table compressed, §6 pitfalls compressed с 39 до 18 key items). CHANGELOG.md -20% (iter 51 entry compressed с 50+ до 10 строк). STATUS.md iter 51 verbose paragraph заменён на iter 52 brief. worklog.md iter 51 → one-liner.
-- **Modified files (5):** `scripts/audit_canon_master_drift.py` (+330 строк: paragraph drift feature), `STATUS.md` (iter 52 record + cleanup), `worklog.md` (iter 52 detailed record), `CHANGELOG.md` (iter 52 entry + iter 51 compress), `AGENT_NAVIGATION.md` (header + §6 pitfalls cleanup + OP-1 iter table compress + iter 52+ roadmap).
-- **Deleted files (2):** `ITER51_README.md` (stale per-iter README, дублирует worklog/STATUS/CHANGELOG), `_ITER51_DELETE_STALE.txt` (stale marker file from iter 51).
-- **Точка остановки:** iter 52 COMPLETE. Все HIGH/MEDIUM priority KI закрыты (KI#36 ✅ iter 51 — последний HIGH). iter 52 = first LOW-priority roadmap item closed (semantic paragraph drift detection). Next iter (iter 53+) — LOW priority only: Glossary double-render (by design), Component extracts regeneration (опционально), Dependabot merges (GitHub-level). Если новых багов нет — проект STABLE.
+- **iter 53 COMPLETE — drift categorization added.** `scripts/audit_canon_master_drift.py` расширен с 1.1 до 1.2: new `category` field в ParagraphDrift, new `categorize_paragraph_drift()` function (5 categories: vs_embed_ref, cross_ref, callout_label, no_master_match, plain_text), new patterns + constants, console + JSON report updated. iter 53 baseline: 15 vs_embed_ref + 14 cross_ref + 4 callout_label + 2 no_master_match + 53 plain_text = 88 total. Все validation gates PASS. contentHash UNCHANGED. Shell hash `69d9b813` UNCHANGED.
+- **Recon conclusion:** 88 paragraph drifts — real semantic differences (no false positives). Threshold tuning не нужен. 53 plain_text drifts — most actionable category for future investigation.
+- **Modified files (5):** `scripts/audit_canon_master_drift.py` (+90 строк: categorization feature, v1.1 → v1.2), `STATUS.md` (iter 53 record + Invariants + Roadmap), `worklog.md` (iter 53 detailed record), `CHANGELOG.md` (iter 53 entry), `AGENT_NAVIGATION.md` (header iter line + OP-1 + Roadmap). Plus `index.html` (only `Generated:` timestamp — automatic from `pnpm run build`).
+- **Точка остановки:** iter 53 COMPLETE. Все HIGH/MEDIUM priority KI закрыты. iter 52 closed paragraph drift detection. iter 53 closed drift categorization. Next iter (iter 54+) — LOW priority only: Glossary double-render (by design), Component extracts regeneration (опционально, no business value), Dependabot merges (GitHub-level), Paragraph drift tuning (опционально, recon done — no false positives). Проект STABLE.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 52 (2026-07-21)**: paragraph-level Jaccard drift detection added в `audit_canon_master_drift.py` v1.0→v1.1 (5 new functions + 2 CLI flags + 88 paragraph drifts informational). Documentation cleanup: AGENT_NAVIGATION -23%, CHANGELOG iter 51 entry compressed. contentHash UNCHANGED.
 - **iter 51 (2026-07-21)**: KI#36 ✅ CLOSED — 98 id attrs added to `src/master/*.html` sections (anchor nav fix); lazy-loader.js selector `section[id]`→`section[data-section]` + hashchange listener + glossary auto-close; 13 English phrases русификация. contentHash 6th change.
 - **iter 50 (2026-07-20)**: KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section added; p4_spine_overview canon metadata. contentHash `cc130a527480e61b` (5th change).
 - **iter 49 (2026-07-19)**: RECONNAISSANCE ONLY — validation gates ALL PASS, KI#34/KI#35 confirmed still open.

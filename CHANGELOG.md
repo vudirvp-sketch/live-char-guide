@@ -1,5 +1,61 @@
 # Changelog
 
+## [9.1.53] - 2026-07-21
+
+### iter 53 — drift categorization added (LOW priority)
+
+Расширение `scripts/audit_canon_master_drift.py` с 1.1 до 1.2: каждый paragraph drift классифицирован в одну из 5 категорий для future iterations visibility. Recon 88 paragraph drifts (iter 52) подтвердил: false positives нет — все drifts являются real semantic differences между canon (verbose markdown) и master (production HTML). Threshold tuning не нужен.
+
+### Added (iter 53)
+- **`scripts/audit_canon_master_drift.py` v1.2** — drift categorization:
+  - New `category` field в `ParagraphDrift` dataclass (default `plain_text`).
+  - New function `categorize_paragraph_drift(canon_text_preview, master_length) -> str`.
+  - 5 categories (checked in order, first match wins):
+    - `vs_embed_ref` — canon text содержит `[vs:` marker (expected — VS-EMBED replacement).
+    - `cross_ref` — canon text начинается с `cross-ref:` (expected — structural pointer).
+    - `callout_label` — canon text начинается с callout label (RULE/RECOMMENDATION/EXAMPLE/ILLUSTRATION/Bridge/Synthesis/Demonstrates/Annotation).
+    - `no_master_match` — нет candidate master paragraph (master_length == 0).
+    - `plain_text` — regular text drift; most actionable category.
+  - New constants: `DRIFT_CATEGORIES` tuple, `CANON_VS_MARKER_RE`, `CANON_CROSS_REF_RE`, `CANON_CALLOUT_LABEL_RE` compiled regex patterns.
+  - Console report: each drift line now includes `category=<cat>`. Summary: new category breakdown section showing all 5 categories with counts.
+  - JSON report: version 1.1 → 1.2, new fields `drift_categories` (list), `paragraph_drift_category_counts` (dict). Each ParagraphDrift now includes `category` field.
+- **Recon result (iter 53):** 88 paragraph drifts distribution:
+  - `vs_embed_ref`: 15 (expected — VS-EMBED replacements)
+  - `cross_ref`: 14 (expected — structural pointers)
+  - `callout_label`: 4 (expected — callout labels in canon)
+  - `no_master_match`: 2 (real — no candidate master paragraph)
+  - `plain_text`: 53 (most actionable — real text drift between canon and master)
+
+### Tests (iter 53 — ALL PASS)
+- `python3 scripts/audit_canon_master_drift.py` — ✅ exit 0, 88 paragraph drifts, category breakdown shown.
+- `python3 scripts/audit_canon_master_drift.py --no-paragraphs` — ✅ exit 0, 0 drifts (flag works).
+- `python3 scripts/audit_canon_master_drift.py --paragraph-threshold 0.5` — ✅ exit 0, 122 drifts (custom threshold works).
+- `python3 scripts/audit_canon_master_drift.py --json /tmp/drift_v1.2.json --quiet` — ✅ JSON valid, version 1.2.
+- `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (unchanged).
+- `pnpm run build` — ✅ SUCCESS, shell Hash `69d9b813` unchanged.
+- `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB.
+- `pnpm run validate:master` — ✅ 12 checks PASS.
+- `pnpm run test:unit` — ✅ 43/43 PASS.
+- `pnpm run test:integration` — ✅ 21/21 PASS.
+- `pnpm run qa:csp` — ✅ 0 inline scripts.
+- `pnpm run qa:bundle` — ✅ 7.5KB.
+- `pnpm run lint` — ✅ 0 errors, 12 baseline warnings.
+- `pnpm run qa:doc-versions` — ✅ PASS.
+- `python3 scripts/check_english.py` — ✅ 20 baseline leaks (unchanged).
+
+### Modified files (iter 53)
+- `scripts/audit_canon_master_drift.py` — +90 строк (categorization feature, v1.1 → v1.2).
+- `STATUS.md` — iter 53 record + Invariants update + iter 54+ Roadmap.
+- `worklog.md` — iter 53 detailed record + iter 52 → one-liner.
+- `CHANGELOG.md` — iter 53 entry (этот file).
+- `AGENT_NAVIGATION.md` — header iter line + OP-1 iter table update + iter 54+ Roadmap.
+
+### contentHash + shell hash (iter 53)
+- **contentHash UNCHANGED** (только `scripts/*.py` + `*.md` изменены, не входят в contentHash).
+- **Shell hash `69d9b813` UNCHANGED** (lazy-loader.js не редактировался).
+
+---
+
 ## [9.1.52] - 2026-07-21
 
 ### iter 52 — paragraph-level Jaccard drift detection added (LOW priority)
