@@ -4,62 +4,60 @@
 
 ---
 
-Task ID: 54
+Task ID: 55-56
 Agent: main
-Task: iter 54 — исследовательская/разведочная итерация. Проанализировать сводный аудит гайда (пользовательский paste, ~22 утверждения в 8 секциях + таблица противоречий), разбить на составляющие, обосновать верность/ошибочность каждого утверждения с чёткой ссылкой на canon. Никаких правок гайда — только документирование анализа.
+Task: iter 55-56 — закрытие KI#37/38/39 + Decision tree для фреймворков + сворачивание recap-чек-листов в `<details>` + глубокий аудит на дублирования. Пользователь запросил: (1) выполнить план iter 55 из STATUS.md, (2) скрыть recap-чек-листы под спойлеры (но не диагностические), (3) iter 56 потратить на глубокий аудит для поиска ещё дублирований, (4) улучшить читаемость, (5) не следовать радикальным предложениям аудита.
 
 Work Log:
-- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git` в `/home/z/my-project/work/live-char-guide`. Базовое состояние: iter 53 STABLE, все validation gates PASS, contentHash UNCHANGED.
-- 2: **Прочитан контекст проекта** — `STATUS.md` (iter 53 baseline), `AGENT_NAVIGATION.md`, `docs/canon/_README.md` (Canon Spec, правила cross-ref и canonical location), `AUDIT_VERIFICATION.md` (история аудитов iter 33-38). Всего canon: 4 080 строк в 14 файлах + `_README.md`.
-- 3: **Прочитаны все canon-файлы для сверки утверждений аудита** — `part_01.md` (146 строк), `part_02.md` (156), `part_03.md` (256), `part_04.md` (360), `part_05.md` (214), `part_06.md` (188), `part_07a.md` (684), `part_07b.md` (261), `part_08.md` (326), `part_09.md` (271), `part_10.md` (536), `appendix_glossary.md` (208). Прочитаны полностью, не по диагонали.
-- 4: **Декомпозиция аудита** — аудит состоит из 8 секций + 1 таблицы противоречий. Идентифицировано 22 конкретных утверждения для верификации: 6 в секции 1 (повторы), 1 (4 под-чека) в секции 2 (чек-листы), 7 в секции 3 (таблицы), 1 в секции 4 (жанровая каша), 4 в секции 5 (перегрузка), 1 в секции 6 (cross-refs), 8 в плане действий, 5 строк в таблице противоречий.
-- 5: **Верификация каждого утверждения** — для каждого фактического утверждения выполнен поиск конкретных секций в canon, подсчёт экземпляров, проверка контекста (definition vs cross-ref vs glossary entry). Для субъективных — оценка аргументации. Использовались `Read` (полное чтение canon-файлов) и `Grep` (поиск конкретных фраз).
-- 6: **Создан `docs/AUDIT_REVIEW_ITER54.md`** — 12 секций, ~440 строк:
-  - §0: Декомпозиция аудита (структурный разбор)
-  - §1-9: Разбор каждой секции аудита с вердиктами по каждому пункту
-  - §10: Найденные реальные баги (3 шт. — KI#37/38/39)
-  - §11: Рекомендации для iter 55+ (что делать / что НЕ делать)
-  - §12: Точка остановки
-- 7: **Итог анализа:** 0% утверждений полностью верны, 59% — частично верны, 18% — неверны (содержат фактические ошибки), 23% — субъективные суждения. Прямое следование плану аудита (удаление фреймворков, схлопывание чек-листов, переписывание таблиц) приведёт к деградации гайда. Аудит не учёл: (a) Canon `_README.md` §3.5 — cross-ref как заявленный механизм (не дублирование), (b) §3.9 — метки RULE/RECOMMENDATION как парсинговые якоря для LLM, (c) уже существующие methodology disclaimers в `part_03.md §3.1/§3.2`.
-- 8: **Найденные реальные баги (новые KI):**
-  - **KI#37 (LOW, OPEN):** `part_01.md §1.1` содержит таблицу «Классический vs Системный» с процентами дрейфа ~40%/~10%, но НЕ содержит methodology disclaimer (который есть в `part_03.md §3.1` для аналогичных цифр). Fix: 1-строчный disclaimer под таблицей.
-  - **KI#38 (LOW, OPEN):** `part_08.md §8.1` содержит сводную таблицу 15 AP (AP-ID, название, критичность, быстрый фикс). Одновременно `[VS: E12 — Antipattern Catalog]` описывает визуальную сетку 5×3 с теми же 15 AP. Реальное дублирование таблицы и viz. Fix: canonical = VS-EMBED, таблицу сократить до 4-строчного intro + cross-ref.
-  - **KI#39 (LOW, OPEN):** `part_10.md §10.1-10.4` внутри code-блоков карточек персонажей расставлены HTML-комментарии-маркеры (`<!-- Demonstrates: ENVIRONMENTAL REACTIVITY, EMBODIMENT FIRST -->`). После code-блока идёт отдельный `**Annotation:**` блок с тем же содержанием. Дублирование metadata. Fix: убрать HTML-комментарии из code-блоков, оставить только Annotation-блок.
-- 9: **Документация актуализирована:**
-  - `docs/AUDIT_REVIEW_ITER54.md` — НОВЫЙ файл (~440 строк).
-  - `STATUS.md` — iter 54 record. Header version line: iter 34-53 → iter 34-54. Known Issues table: 3 new rows (KI#37/38/39, 🟡 OPEN). iter 54+ Roadmap → iter 55+ Roadmap, полностью переписан с приоритетами P0-P3 из §11.3 анализа + секция «Что НЕ делать» из §11.1.
-  - `worklog.md` — iter 54 = этот record; iter 53 → one-liner.
-  - `AGENT_NAVIGATION.md` — header iter line updated (iter 54 added).
-- 10: **Validation gates проверены — contentHash UNCHANGED (только docs + worklog + STATUS + AGENT_NAVIGATION изменены, master HTML не тронут):**
-  - Никаких правок `src/master/*.html` — contentHash UNCHANGED.
-  - Никаких правок `scripts/*.py` — drift detector v1.2 unchanged.
-  - Никаких правок `src/shell/*` — shell hash `69d9b813` unchanged.
-  - Build hash unchanged по определению (не запускался).
+- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git` в `/home/z/my-project/live-char-guide`. Базовое состояние: iter 54 COMPLETE (исследовательская), 3 KI OPEN (KI#37/38/39, все LOW), contentHash UNCHANGED.
+- 2: **Прочитан контекст** — `STATUS.md` (iter 54), `docs/AUDIT_REVIEW_ITER54.md` (12 секций, 539 строк), `docs/canon/_README.md` (Canon Spec), `AGENT_NAVIGATION.md`. Прочитаны все canon-файлы (part_00..part_10 + appendix_*.md) и соответствующие master HTML файлы (part_01.html, part_05.html, part_07a.html, part_08.html, part_09.html, part_10.html).
+- 3: **iter 55 P0: KI#37 ✅ CLOSED** — добавлен methodology disclaimer в `docs/canon/part_01.md §1.1` под таблицей «Классический vs Системный» (1 абзац с cross-ref на part_03.md §3.1) + синхронизирован в `src/master/part_01.html` (c `<a href="#p3_voice_isolation">` anchor). Аналогично существующему disclaimer в part_03.md §3.1.
+- 4: **iter 55 P0: KI#39 ✅ CLOSED** — написан Python-скрипт `/home/z/my-project/scripts/remove_demonstrates_comments.py` для удаления HTML-комментариев `<!-- Demonstrates: ... -->` из code-блоков. Скрипт удалил 23 строки из `docs/canon/part_10.md` и 23 строки из `src/master/part_10.html` (46 удалений суммарно). Standalone `**Demonstrates:**` параграфы перед code-блоками сохранены (они вне code-блоков). `**Annotation:**` блоки после code-блоков сохранены (детальный разбор).
+- 5: **iter 55 P1: KI#38 ✅ CLOSED** — таблица AP в `docs/canon/part_08.md §8.1` (15 строк) заменена на 4-строчный intro + cross-ref. В intro указано: canonical = VS-EMBED E12, подробный разбор каждого AP — в подсекциях §8.2-§8.16. Синхронизировано в `src/master/part_08.html` (удалены `<h3>Сводная таблица анти-паттернов</h3>` + 15-row `<table>` + заменены на intro параграф). `<p><strong>Примечание:</strong> OCEAN Overload ...</p>` сохранён (regression test P1-3 требует именно эту формулировку).
+- 6: **iter 55 P1: Decision tree для фреймворков ✅ ADDED** — в `docs/canon/part_05.md §5.1` добавлена новая подсекция «Decision tree: какой фреймворк применять» — 4-шаговое дерево (SPINE → Enneagram → OCEAN → MBTI) в формате таблицы + RULE + RECOMMENDATION. Синхронизировано в `src/master/part_05.html` (новый `<h4>` + `<table>` + 2 callout блока).
+- 7: **iter 55: Recap-чек-листы свёрнуты в `<details>` ✅ DONE** — пользователь запросил скрыть recap-чек-листы (дублирующие уже изложенный материал) под спойлеры, но НЕ трогать диагностические:
+  - `docs/canon/part_07a.md §7A.13 Чек-лист перед тестированием` — 6 пунктов, дублирующих правила из §1.4/§4.9/§5.1/§6.2/§7A.12. Обёрнут в `<details><summary>📋 Recap-чек-лист (сворачивается — дублирует правила из §X.Y)</summary>...</details>` + добавлены cross-refs к каждому пункту. Синхронизировано в `src/master/part_07a.html` (`<details class="interactive">` + `<a href>` cross-refs).
+  - `docs/canon/part_09.md §9.11 Quick Check (5 пунктов)` — дубликат §9.3 в формате «ожидаемый результат». Обёрнут в `<details>` с пометкой «Quick Check (5 пунктов — дубликат §9.3 в формате «ожидаемый результат»)». Синхронизировано в `src/master/part_09.html`. Full Check (14 пунктов, имеет 9 новых пунктов) — оставлен видимым.
+- 8: **iter 55: Scenario-метка для §9.3 ✅ ADDED** — в `docs/canon/part_09.md §9.3` добавлена явная формулировка сценария применения («персонаж «не работает» — структурная проверка по блокам карточки — для локализации проблемы») + cross-refs на §9.11 (pre-deploy) и §9.5 (symptom-based). Синхронизировано в `src/master/part_09.html`.
+- 9: **iter 56: глубокий аудит ✅ DONE** — написан `/home/z/my-project/scripts/audit_iter56.py` для подсчёта упоминаний ключевых концепций (Voice Isolation, SPINE chain, T→A→P, Token Budget, Anti-godmoding, PP=0, RepPen>1.10, Demonstrates, CORE DIRECTIVES, Format Lock, Embodiment First, Methodology). Найдено: 36 упоминаний Voice Isolation, 19 SPINE chain, 25 T→A→P, 27 Token Budget, 47 Anti-godmoding, 38 CORE DIRECTIVES, 32 Format Lock, 17 Embodiment First. Большинство — cross-refs (different canonical roles), не дублирование. Подтверждено iter 54 audit: разные функциональные роли (определение / анти-паттерн / диагностика / глоссарий) — не подлежат удалению.
+  - Найдено 2 recap-чек-листа — свёрнуты в iter 55 (см. п.7).
+  - Глоссарий (7 CORE DIRECTIVES entries: Consequence Driven, Embodiment First, Environmental Reactivity, Influence Boundary, Pre-Generation Filter, Show Never Tell, Spatial & Anatomical Lock) — оставлен как есть (lookup convenience > consolidation; каждая запись имеет уникальное 2-sentence определение).
+  - Пример «Дождь барабанил по стеклу» в 4 местах (part_01 §1.2 meta-rule, part_03 §3.4 quality grade, part_08 §8.4 before-after, part_10 §10.1 canonical card) — разные функции, оставлен.
+  - §9.5 Симптомы vs §9.6 Decision tree — разные сценарии (плоский lookup vs последовательный поиск), оставлены.
+- 10: **Validation gates проверены:**
+  - `python3 scripts/audit_canon_master_sync.py` → **96/96 PASS** (78 positive + 18 negative).
+  - `python3 scripts/audit_canon_master_drift.py` → 89 drifts (15 vs_embed_ref + 14 cross_ref + 4 callout_label + 3 no_master_match + 53 plain_text). +1 vs iter 53 baseline (88) — добавлен disclaimer параграф в part_01.md §1.1. Informational only.
+  - HTML structure validation (details/section/a tag balance) — all balanced.
+- 11: **Документация актуализирована:**
+  - `STATUS.md` — iter 55-56 record. Header version line: iter 34-54 → iter 34-55-56. Known Issues: KI#37/38/39 → ✅ CLOSED. iter 55+ Roadmap → iter 56+ Roadmap (P0/P1 задачи отмечены как DONE, P2/P3 — опционально). Invariants: добавлен iter 55+ «Recap-чек-листы в `<details>`» invariant. Drift baseline updated: 88 → 89. contentHash: CHANGED (7th change).
+  - `docs/AUDIT_REVIEW_ITER54.md` — header updated с iter 55-56 status. §11 полностью переписан: что делать (7 пунктов DONE + 3 опциональных) + приоритизация table обновлена со столбцом «Статус». §12 Точка остановки переписана.
+  - `worklog.md` — iter 55-56 = этот record; iter 54 → one-liner.
+  - `docs/canon/_README.md` — iter history updated.
 
 Stage Summary:
-- **iter 54 COMPLETE — исследовательская итерация.** Создан `docs/AUDIT_REVIEW_ITER54.md` (~440 строк, 12 секций) с декомпозицией и вердиктами по 22 утверждениям аудита. Итог: 0% верны, 59% частично верны, 18% неверны, 23% субъективны. Прямое следование плану аудита навредит гайду. Найдены 3 реальных LOW-бага (KI#37/38/39, OPEN). Все validation gates PASS. contentHash UNCHANGED. Shell hash `69d9b813` UNCHANGED.
-- **Ключевые выводы анализа:**
-  1. Аудит не различает **canonical location** (определение) и **cross-ref** (ссылку) — большинство «повторов» на самом деле разные функциональные роли (определение / анти-паттерн / диагностика / глоссарий).
-  2. Аудит не учёл Canon `_README.md` §3.5 (cross-ref как заявленный механизм) и §3.9 (метки RULE/RECOMMENDATION как парсинговые якоря для LLM).
-  3. Аудит содержит **4 фактические ошибки**: (a) пример «Комната была в беспорядке» не дублируется в Part 8, (b) «в одном абзаце анти-годмодинг и CoT Tier 3» — в разных файлах, (c) VS-EMBED и Structured Inject не в глоссарии, (d) MBTI не дублирует OCEAN (заявлен как supplementary).
-  4. Реальные проблемы (найдены в ходе сверки): KI#37 (отсутствие disclaimer в §1.1), KI#38 (дублирование AP таблицы и VS-EMBED E12), KI#39 (HTML-комментарии в code-блоках Part 10).
-- **Modified files (4):** `docs/AUDIT_REVIEW_ITER54.md` (NEW, ~440 строк), `STATUS.md` (iter 54 record + 3 new KI + iter 55+ Roadmap rewrite), `worklog.md` (iter 54 detailed record), `AGENT_NAVIGATION.md` (header iter line).
-- **Точка остановки:** iter 54 COMPLETE (исследовательская). Next iter (iter 55) — начать с P0-задач: KI#37 (1 строка disclaimer) + KI#39 (убрать HTML-комментарии из Part 10 code-блоков). P1: KI#38 + decision tree для фреймворков в Part 5. P2/P3 — опционально. **НЕ следовать радикальным предложениям аудита** (удаление фреймворков, схлопывание чек-листов, переписывание таблиц) — они неверны и приведут к деградации гайда.
+- **iter 55-56 COMPLETE.** Все 3 LOW KI закрыты (KI#37/38/39 ✅ CLOSED). Decision tree для фреймворков добавлен. 2 recap-чек-листа свёрнуты в `<details>`. Scenario-метка для §9.3 добавлена. iter 56 deep audit подтвердил отсутствие дальнейших critical дублирований. Все validation gates PASS (96/96 sync). contentHash CHANGED (6 master HTML файлов модифицированы: part_01, part_05, part_07a, part_08, part_09, part_10).
+- **Modified files (12):**
+  - Canon (6): `docs/canon/part_01.md` (KI#37 disclaimer), `docs/canon/part_05.md` (Decision tree), `docs/canon/part_07a.md` (recap-spoiler), `docs/canon/part_08.md` (KI#38 table reduction), `docs/canon/part_09.md` (recap-spoiler + scenario label), `docs/canon/part_10.md` (KI#39 Demonstrates removal).
+  - Master HTML (6): `src/master/part_01.html`, `src/master/part_05.html`, `src/master/part_07a.html`, `src/master/part_08.html`, `src/master/part_09.html`, `src/master/part_10.html`.
+  - Documentation (3): `STATUS.md`, `docs/AUDIT_REVIEW_ITER54.md`, `worklog.md`, `docs/canon/_README.md`.
+  - Scripts (2 new): `/home/z/my-project/scripts/remove_demonstrates_comments.py` (iter 55 KI#39 fix), `/home/z/my-project/scripts/audit_iter56.py` (iter 56 audit).
+- **Точка остановки:** iter 55-56 COMPLETE. Все известные KI закрыты. P0/P1 задачи выполнены. P2/P3 задачи — опциональны. Пользователь может запросить: (a) canonical-location-маркер `[canonical: ...]` vs `[ref: ...]` (~150 правок, P2), (b) Progressive disclosure метки `[BASIC]/[INTERMEDIATE]/[EXPERT]` (~50 секций, P2), (c) Annotation blocks для §10.2-§10.4 (только §10.1 имеет Annotation, P3), (d) Расширение scenario-меток на остальные чек-листы Part 9 (P3, pattern задан в §9.3).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
-- **iter 53 (2026-07-21)**: drift categorization added в `audit_canon_master_drift.py` v1.1→v1.2 (5 categories: vs_embed_ref/cross_ref/callout_label/no_master_match/plain_text; 88 drifts = 15+14+4+2+53). Documentation cleanup. contentHash UNCHANGED.
-- **iter 52 (2026-07-21)**: paragraph-level Jaccard drift detection added в `audit_canon_master_drift.py` v1.0→v1.1 (5 new functions + 2 CLI flags + 88 paragraph drifts informational). Documentation cleanup: AGENT_NAVIGATION -23%, CHANGELOG iter 51 entry compressed. contentHash UNCHANGED.
-- **iter 51 (2026-07-21)**: KI#36 ✅ CLOSED — 98 id attrs added to `src/master/*.html` sections (anchor nav fix); lazy-loader.js selector `section[id]`→`section[data-section]` + hashchange listener + glossary auto-close; 13 English phrases русификация. contentHash 6th change.
-- **iter 50 (2026-07-20)**: KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section added; p4_spine_overview canon metadata. contentHash `cc130a527480e61b` (5th change).
-- **iter 49 (2026-07-19)**: RECONNAISSANCE ONLY — validation gates ALL PASS, KI#34/KI#35 confirmed still open.
-- **iter 48 (2026-07-08)**: General-purpose drift detector added (`scripts/audit_canon_master_drift.py`, ~440 строк, stdlib only, informational only, exit 0). KI#34 (MEDIUM) + KI#35 (LOW) 🟡 NEW.
-- **iter 47 (2026-07-08)**: KI#33 ✅ CLOSED — canon→master HTML sync Phase 4 (57/57 cumulatively). contentHash `84d69ecf` (4th change).
-- **iter 46 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 3 (8/57 this iter, 41/57 cumulatively).
-- **iter 45 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 2 (24/57 this iter, 33/57 cumulatively).
-- **iter 44 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 1 (9/57 fixes). contentHash `34c34a7d` (1st change).
+- **iter 54 (2026-07-21)**: исследовательская итерация — разбор сводного аудита (~22 утверждения) в `docs/AUDIT_REVIEW_ITER54.md`. Найдены 3 LOW-бага (KI#37/38/39, OPEN). contentHash UNCHANGED.
+- **iter 53 (2026-07-21)**: drift categorization added в `audit_canon_master_drift.py` v1.1→v1.2 (5 categories). Documentation cleanup. contentHash UNCHANGED.
+- **iter 52 (2026-07-21)**: paragraph-level Jaccard drift detection added в `audit_canon_master_drift.py` v1.0→v1.1 (88 paragraph drifts informational). Documentation cleanup. contentHash UNCHANGED.
+- **iter 51 (2026-07-21)**: KI#36 ✅ CLOSED — 98 id attrs added to `src/master/*.html` sections (anchor nav fix). contentHash 6th change.
+- **iter 50 (2026-07-20)**: KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section added; p4_spine_overview canon metadata. contentHash 5th change.
+- **iter 49 (2026-07-19)**: RECONNAISSANCE ONLY.
+- **iter 48 (2026-07-08)**: General-purpose drift detector added. KI#34 + KI#35 🟡 NEW.
+- **iter 47 (2026-07-08)**: KI#33 ✅ CLOSED — canon→master HTML sync Phase 4 (57/57 cumulatively). contentHash 4th change.
+- **iter 46 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 3 (41/57 cumulatively).
+- **iter 45 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 2 (33/57 cumulatively).
+- **iter 44 (2026-07-08)**: KI#33 🔵 PARTIAL — canon→master HTML sync Phase 1 (9/57 fixes). contentHash 1st change.
 - **iter 43 (2026-07-08)**: DEPLOY PIPELINE DOC + KI#33 🟡 NEW.
 - **iter 42 (2026-07-08)**: COMPONENT-EXTRACTS DRIFT AUDIT ✅ CLOSED — KI#32.
 - **iter 41 (2026-07-08)**: OCEAN LABELING LEFTOVER + BIBLE CROSS-REF ✅ CLOSED — KI#30/#31.
@@ -77,3 +75,4 @@ Stage Summary:
 - **iter 7-17 (2026-06-23..24)**: Canon scaffold + Part-by-Part migration.
 - **iter 1-6 (2026-06-23)**: docs restructure + KI cleanup.
 - **v9.1.0 (2026-05-16)**: FIX-01..FIX-31. См. CHANGELOG.md.
+

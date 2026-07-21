@@ -671,12 +671,17 @@ GHOST: Предательство редактора — история, кот�
 
 ### Чек-лист перед тестированием
 
-- ☐ Все Anchors содержат Цену
-- ☐ Голос только в Examples/Greeting
-- ☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT
-- ☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+
-- ☐ Token Budget в пределах диапазона
-- ☐ CoT: не более 2–3 Anchors
+<details>
+<summary>📋 Recap-чек-лист (сворачивается — дублирует правила из §1.4, §4.9, §5.1, §6.2, §7A.12)</summary>
+
+- ☐ Все Anchors содержат Цену (`[ref: part_02.md §2.2 — Anchor Rules]`)
+- ☐ Голос только в Examples/Greeting (`[ref: part_03.md §3.1 — Voice Isolation]`)
+- ☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (`[ref: part_04.md §4.9 — SPINE Check]`)
+- ☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+ (`[ref: part_05.md §5.1 — OCEAN RULE]`)
+- ☐ Token Budget в пределах диапазона (`[ref: §7A.12 — Token Budget]`)
+- ☐ CoT: не более 2–3 Anchors (`[ref: part_06.md §6.2 — CoT Basics]`)
+
+</details>
 
 Посмотрите полные примеры готовых карточек → Елена | Выщербленный (~1500+ токенов) в Part 10.
 
