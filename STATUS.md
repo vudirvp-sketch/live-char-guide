@@ -2,14 +2,14 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Версия:** 9.1.0 + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED + iter 34-52 + **iter 53 — drift categorization added в `scripts/audit_canon_master_drift.py` (1.1→1.2): каждый paragraph drift классифицирован в одну из 5 категорий (vs_embed_ref / cross_ref / callout_label / no_master_match / plain_text). Все validation gates PASS. contentHash UNCHANGED.**
+> **Версия:** 9.1.0 + все 10 Parts + 4 Appendix + Part 0 (concept) ✅ MIGRATED + iter 34-53 + **iter 54 — исследовательская итерация: разбор сводного аудита гайда (пользовательский paste). Создан `docs/AUDIT_REVIEW_ITER54.md` с декомпозицией аудита и вердиктами по 22 утверждениям. Найдены 3 реальных бага (KI#37/38/39 — LOW, OPEN). Никаких правок гайда не производилось. Все validation gates PASS. contentHash UNCHANGED.**
 > **Дата:** 2026-07-21
 
 ---
 
 ## Текущее состояние
 
-**iter 53 — drift categorization added.** LOW-priority roadmap item: paragraph drift detector расширен с 1.1 до 1.2. Каждый paragraph drift теперь классифицирован в одну из 5 категорий: `vs_embed_ref` (15) — canon содержит `[vs:` marker (expected), `cross_ref` (14) — canon начинается с `cross-ref:` (expected), `callout_label` (4) — canon начинается с callout label (illustration/rule/recommendation/example/bridge/synthesis/demonstrates/annotation), `no_master_match` (2) — нет candidate master paragraph, `plain_text` (53) — regular text drift, most actionable. Помогает будущим итерациям быстро видеть, какие drifts expected vs какие могут требовать investigation, без manual inspection каждого paragraph. Все validation gates PASS. contentHash UNCHANGED (скрипт не в build). Shell hash `69d9b813` UNCHANGED. Recon также подтвердил: 88 drifts — real semantic differences (не false positives), threshold tuning не нужен.
+**iter 54 — разбор сводного аудита (исследовательская).** Пользователь предоставил консолидированный аудит гайда (3 блока + таблица противоречий, ~22 утверждения). Анализ выполнен без правок гайда: каждое утверждение сверено с реальным содержимым `docs/canon/*.md`. Результат — `docs/AUDIT_REVIEW_ITER54.md` (12 секций, ~440 строк): декомпозиция аудита, вердикт по каждому пункту (ВЕРНО / ЧАСТИЧНО ВЕРНО / НЕВЕРНО / СУБЪЕКТИВНОЕ), сводная таблица, найденные реальные баги, рекомендации для iter 55+. **Итог анализа:** 0% утверждений полностью верны, 59% — частично верны, 18% — неверны, 23% — субъективные суждения. Прямое следование плану аудита (удаление фреймворков, схлопывание чек-листов, переписывание таблиц) приведёт к деградации гайда. В ходе сверки обнаружены 3 реальных LOW-бага (KI#37/38/39). contentHash UNCHANGED (только новый docs-файл + STATUS/worklog/AGENT_NAVIGATION обновлены).
 
 ---
 
@@ -17,6 +17,9 @@
 
 | KI | Severity | Status | Iter |
 |----|----------|--------|------|
+| **KI#37 (methodology disclaimer missing in `part_01.md §1.1`)** | LOW | 🟡 OPEN (iter 54 — found during audit verification) | iter 54 |
+| **KI#38 (AP table in `part_08.md §8.1` duplicates VS-EMBED E12)** | LOW | 🟡 OPEN (iter 54 — found during audit verification) | iter 54 |
+| **KI#39 (HTML comments `<!-- Demonstrates: ... -->` inside code blocks in `part_10.md §10.1-10.4`)** | LOW | 🟡 OPEN (iter 54 — found during audit verification) | iter 54 |
 | **KI#36 (anchor navigation: TOC/Glossary links broken — missing `id` on `<section>`)** | HIGH | ✅ CLOSED (iter 51: 95 `id` attributes added; lazy-loader.js selector fixed; 4 English leaks translated) | iter 51 |
 | **KI#34 (§1.8 Pre-build checklist missing from master HTML)** | MEDIUM | ✅ CLOSED (iter 50) | iter 48-50 |
 | **KI#35 (p4_spine_overview canon metadata drift)** | LOW | ✅ CLOSED (iter 50) | iter 48-50 |
@@ -27,7 +30,7 @@
 | KI#20 (Visual System Scroll-Animation Bug) | HIGH | ✅ CLOSED | iter 32 |
 | KI#1..KI#19, KI#23..#31 | various | ✅ CLOSED | iter 1-7, 20-50 |
 
-### Все открытые KI — CLOSED. Проект STABLE.
+### Открытые KI: KI#37, KI#38, KI#39 (все LOW, found iter 54). Все HIGH/MEDIUM — CLOSED.
 
 ---
 
@@ -52,9 +55,30 @@
 
 ---
 
-## iter 54+ Roadmap
+## iter 55+ Roadmap
 
-Все MEDIUM/HIGH priority KI закрыты (KI#36 iter 51 — последний HIGH). iter 52 закрыл paragraph drift detection. iter 53 закрыл drift categorization. Проект STABLE. Оставшиеся задачи — LOW priority / informational:
+iter 54 (research) — разбор аудита без правок, найдены 3 LOW-бага (KI#37/38/39, OPEN). iter 55+ — закрытие KI#37-39 + опциональные улучшения из `docs/AUDIT_REVIEW_ITER54.md` §11. Все HIGH/MEDIUM KI закрыты (KI#36 iter 51 — последний HIGH). iter 52-53 закрыли paragraph drift detection/categorization. Оставшиеся задачи — LOW priority / informational:
+
+**Приоритеты iter 55 (из AUDIT_REVIEW_ITER54.md §11.3):**
+
+- **P0: KI#37** — добавить methodology disclaimer в `part_01.md §1.1` (1 строка, аналогично `part_03.md §3.1`).
+- **P0: KI#39** — убрать HTML-комментарии `<!-- Demonstrates: ... -->` из code-блоков в `part_10.md §10.1-10.4` (оставить только Annotation-блоки после).
+- **P1: KI#38** — разрешить дублирование AP таблицы (`part_08.md §8.1`) vs VS-EMBED E12. Canonical = VS-EMBED, таблицу сократить до 4-строчного intro + cross-ref.
+- **P1: Decision tree для фреймворков** в `part_05.md` — новая подсекция «Начни с SPINE → если нужна мотивация → Enneagram → если нужны черты → OCEAN → MBTI только для справки».
+- **P2: canonical-location-маркер** — ввести `[canonical: ...]` vs `[ref: ...]` для различения определений и cross-refs (~150 правок).
+- **P2: Progressive disclosure метки** — `[BASIC]` / `[INTERMEDIATE]` / `[EXPERT]` к секциям.
+- **P3: Сокращение глоссария** — объединить 7 CORE DIRECTIVES-записей в одну сводную.
+- **P3: Разметка сценариев чек-листов** в Part 9 — явное указание «Pre-build = проектирование», «§9.3 = проверка по блокам» и т.д.
+
+**Что НЕ делать (предложения аудита, которые навредят — см. AUDIT_REVIEW_ITER54.md §11.1):**
+
+- ❌ Не удалять метки `RULE:`/`RECOMMENDATION:`/`EXAMPLE:` — парсинговые якоря для LLM (`docs/canon/_README.md` §3.9).
+- ❌ Не схлопывать все чек-листы в один — разные сценарии использования.
+- ❌ Не удалять Enneagram — отвечает на «почему», не дублирует OCEAN.
+- ❌ Не переносить Part 10 в «приложение» — это уже отдельный Part, rename ничего не даст.
+- ❌ Не переписывать таблицы нарративно как принцип — потеря сканируемости.
+
+**LOW-priority / informational (перенесено из iter 53):**
 
 - **Glossary double-render inefficiency** (LOW, structural) — by design (canon = source of truth, HTML = render).
 - **Component extracts regeneration** (LOW, опционально) — regenerate 54 файла from master. Нет business value пока extracts не используются в build/runtime.

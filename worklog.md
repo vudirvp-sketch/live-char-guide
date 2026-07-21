@@ -4,56 +4,53 @@
 
 ---
 
-Task ID: 53
+Task ID: 54
 Agent: main
-Task: iter 53 — LOW-priority roadmap continuation. Recon 88 paragraph drifts (iter 52) на false positives, и если false positives нет — добавить drift categorization в `scripts/audit_canon_master_drift.py` v1.1→v1.2 (5 категорий: vs_embed_ref / cross_ref / callout_label / no_master_match / plain_text) для future iterations visibility. Documentation cleanup.
+Task: iter 54 — исследовательская/разведочная итерация. Проанализировать сводный аудит гайда (пользовательский paste, ~22 утверждения в 8 секциях + таблица противоречий), разбить на составляющие, обосновать верность/ошибочность каждого утверждения с чёткой ссылкой на canon. Никаких правок гайда — только документирование анализа.
 
 Work Log:
-- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. `pnpm install --frozen-lockfile` OK. Базовое состояние подтверждено (iter 52): audit_canon_master_sync.py 96/96 PASS, drift detector v1.1 (88 paragraph drifts), shell hash `69d9b813` unchanged, validate 8/8 PASS, test:unit 43/43, test:integration 21/21, English leaks 20 baseline.
-- 2: **Recon — 88 paragraph drifts проанализированы через `--json` + ad-hoc Python categorization.** Drift distribution by similarity: 21 drifts sim<0.05, 17 sim 0.05-0.10, 12 sim 0.10-0.15, 7 sim 0.15-0.20, 13 sim 0.20-0.25, 18 sim 0.25-0.30. Длина canon: 14 drifts <50 chars, 22 drifts 50-100, 26 drifts 100-200, 24 drifts 200-500, 2 drifts >500. Files с most drifts: part_04 (19), part_07a (18), part_08 (9), part_07b (8), part_09 (8).
-- 3: **Recon conclusion — false positives нет.** Sample drifts with sim<0.05 — это либо VS-EMBED replacements (canon text: «[vs: e07 — voice influence hierarchy. см. маркер в preamble. замещает текстовое описание]»), либо callout labels без master counterpart (canon: «illustration — demonstrates: embodiment first, show never tell, spine causality», master_len=0). Sample drifts с sim 0.20-0.30 — это real partial matches (canon полный текст → master condensed/expanded версия). Все 88 drifts — real semantic differences между canon (verbose markdown) и master (production HTML). **Threshold 0.3 / MIN_PARAGRAPH_LENGTH 30 — остаются без изменений.**
-- 4: **Реализован drift categorization в `scripts/audit_canon_master_drift.py` (v1.1 → v1.2):**
-  - Backup сохранён в `/home/z/my-project/scripts/audit_canon_master_drift.py.backup_iter52`.
-  - New `category` field в `ParagraphDrift` dataclass (default `plain_text`).
-  - New constants: `DRIFT_CATEGORIES` tuple (5 categories).
-  - New compiled regex patterns: `CANON_VS_MARKER_RE` (`\[vs:`), `CANON_CROSS_REF_RE` (`^cross-ref\s*[:—-]`), `CANON_CALLOUT_LABEL_RE` (`^(illustration|rule|recommendation|example|bridge|synthesis|cross-ref|demonstrates|annotation)\s*[—\-:]`).
-  - New function `categorize_paragraph_drift(canon_text_preview, master_length) -> str` — checks patterns in order: vs_embed_ref → cross_ref → callout_label → no_master_match → plain_text.
-  - `compute_paragraph_drift()` updated: calls `categorize_paragraph_drift()` per drift, stores result in `category` field.
-  - Console report: each drift line now includes `category=<cat>`. Summary: new category breakdown section showing all 5 categories with counts.
-  - JSON report: version 1.1 → 1.2, new fields `drift_categories` (list), `paragraph_drift_category_counts` (dict). Each ParagraphDrift now includes `category` field.
-  - Header docstring: new §5 «Drift categorization (iter 53+)» + new «Categories» CLI examples section.
-- 5: **Post-fix validation gates — ALL PASS:**
-  - `python3 scripts/audit_canon_master_drift.py` — ✅ exit 0, 88 paragraph drifts, category breakdown: vs_embed_ref=15, cross_ref=14, callout_label=4, no_master_match=2, plain_text=53.
-  - `python3 scripts/audit_canon_master_drift.py --no-paragraphs` — ✅ exit 0, 0 paragraph drifts (flag works).
-  - `python3 scripts/audit_canon_master_drift.py --paragraph-threshold 0.5` — ✅ exit 0, 122 paragraph drifts (custom threshold works).
-  - `python3 scripts/audit_canon_master_drift.py --json /tmp/drift_v1.2.json --quiet` — ✅ JSON valid, version 1.2, all drifts have `category` field.
-  - `python3 scripts/audit_canon_master_sync.py` — ✅ **96/96 PASS** (unchanged, regression test не тронут).
-  - `pnpm run build` — ✅ SUCCESS, shell Hash `69d9b813` unchanged (скрипт не в build).
-  - `pnpm run validate` — ✅ 8 gates PASS, index.html 7.5KB.
-  - `pnpm run validate:master` — ✅ 12 checks PASS.
-  - `pnpm run test:unit` — ✅ 43/43 PASS.
-  - `pnpm run test:integration` — ✅ 21/21 PASS.
-  - `pnpm run qa:csp` — ✅ 0 inline scripts.
-  - `pnpm run qa:bundle` — ✅ 7.5KB.
-  - `pnpm run lint` — ✅ 0 errors, 12 baseline warnings.
-  - `pnpm run qa:doc-versions` — ✅ PASS.
-  - `python3 scripts/check_english.py` — ✅ 20 baseline leaks (unchanged).
-- 6: **Документация актуализирована:**
-  - `STATUS.md` — iter 53 record. Invariants: added «Drift categorization (iter 53+ invariant)» пункт; «Paragraph-level drift detection (iter 52+)» updated to reference v1.2. Drift detector invariant updated (88 = 15+14+4+2+53 breakdown). iter 53+ Roadmap → iter 54+ Roadmap, paragraph drift tuning пункт updated (recon done, no tuning needed). «Подтверждённые ограничения» table updated similarly. Header version line: iter 34-52 → iter 34-53, iter 52 brief → iter 53 brief.
-  - `worklog.md` — iter 53 = этот record; iter 52 → one-liner.
-  - `CHANGELOG.md` — iter 53 entry добавлен (brief). iter 52 entry сохранён (compressed).
-  - `AGENT_NAVIGATION.md` — header iter line updated (iter 53 added). OP-1 iter table: iter 52 row → iter 52+53 combined row (drift detector evolution). iter 53+ Roadmap → iter 54+ Roadmap.
+- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git` в `/home/z/my-project/work/live-char-guide`. Базовое состояние: iter 53 STABLE, все validation gates PASS, contentHash UNCHANGED.
+- 2: **Прочитан контекст проекта** — `STATUS.md` (iter 53 baseline), `AGENT_NAVIGATION.md`, `docs/canon/_README.md` (Canon Spec, правила cross-ref и canonical location), `AUDIT_VERIFICATION.md` (история аудитов iter 33-38). Всего canon: 4 080 строк в 14 файлах + `_README.md`.
+- 3: **Прочитаны все canon-файлы для сверки утверждений аудита** — `part_01.md` (146 строк), `part_02.md` (156), `part_03.md` (256), `part_04.md` (360), `part_05.md` (214), `part_06.md` (188), `part_07a.md` (684), `part_07b.md` (261), `part_08.md` (326), `part_09.md` (271), `part_10.md` (536), `appendix_glossary.md` (208). Прочитаны полностью, не по диагонали.
+- 4: **Декомпозиция аудита** — аудит состоит из 8 секций + 1 таблицы противоречий. Идентифицировано 22 конкретных утверждения для верификации: 6 в секции 1 (повторы), 1 (4 под-чека) в секции 2 (чек-листы), 7 в секции 3 (таблицы), 1 в секции 4 (жанровая каша), 4 в секции 5 (перегрузка), 1 в секции 6 (cross-refs), 8 в плане действий, 5 строк в таблице противоречий.
+- 5: **Верификация каждого утверждения** — для каждого фактического утверждения выполнен поиск конкретных секций в canon, подсчёт экземпляров, проверка контекста (definition vs cross-ref vs glossary entry). Для субъективных — оценка аргументации. Использовались `Read` (полное чтение canon-файлов) и `Grep` (поиск конкретных фраз).
+- 6: **Создан `docs/AUDIT_REVIEW_ITER54.md`** — 12 секций, ~440 строк:
+  - §0: Декомпозиция аудита (структурный разбор)
+  - §1-9: Разбор каждой секции аудита с вердиктами по каждому пункту
+  - §10: Найденные реальные баги (3 шт. — KI#37/38/39)
+  - §11: Рекомендации для iter 55+ (что делать / что НЕ делать)
+  - §12: Точка остановки
+- 7: **Итог анализа:** 0% утверждений полностью верны, 59% — частично верны, 18% — неверны (содержат фактические ошибки), 23% — субъективные суждения. Прямое следование плану аудита (удаление фреймворков, схлопывание чек-листов, переписывание таблиц) приведёт к деградации гайда. Аудит не учёл: (a) Canon `_README.md` §3.5 — cross-ref как заявленный механизм (не дублирование), (b) §3.9 — метки RULE/RECOMMENDATION как парсинговые якоря для LLM, (c) уже существующие methodology disclaimers в `part_03.md §3.1/§3.2`.
+- 8: **Найденные реальные баги (новые KI):**
+  - **KI#37 (LOW, OPEN):** `part_01.md §1.1` содержит таблицу «Классический vs Системный» с процентами дрейфа ~40%/~10%, но НЕ содержит methodology disclaimer (который есть в `part_03.md §3.1` для аналогичных цифр). Fix: 1-строчный disclaimer под таблицей.
+  - **KI#38 (LOW, OPEN):** `part_08.md §8.1` содержит сводную таблицу 15 AP (AP-ID, название, критичность, быстрый фикс). Одновременно `[VS: E12 — Antipattern Catalog]` описывает визуальную сетку 5×3 с теми же 15 AP. Реальное дублирование таблицы и viz. Fix: canonical = VS-EMBED, таблицу сократить до 4-строчного intro + cross-ref.
+  - **KI#39 (LOW, OPEN):** `part_10.md §10.1-10.4` внутри code-блоков карточек персонажей расставлены HTML-комментарии-маркеры (`<!-- Demonstrates: ENVIRONMENTAL REACTIVITY, EMBODIMENT FIRST -->`). После code-блока идёт отдельный `**Annotation:**` блок с тем же содержанием. Дублирование metadata. Fix: убрать HTML-комментарии из code-блоков, оставить только Annotation-блок.
+- 9: **Документация актуализирована:**
+  - `docs/AUDIT_REVIEW_ITER54.md` — НОВЫЙ файл (~440 строк).
+  - `STATUS.md` — iter 54 record. Header version line: iter 34-53 → iter 34-54. Known Issues table: 3 new rows (KI#37/38/39, 🟡 OPEN). iter 54+ Roadmap → iter 55+ Roadmap, полностью переписан с приоритетами P0-P3 из §11.3 анализа + секция «Что НЕ делать» из §11.1.
+  - `worklog.md` — iter 54 = этот record; iter 53 → one-liner.
+  - `AGENT_NAVIGATION.md` — header iter line updated (iter 54 added).
+- 10: **Validation gates проверены — contentHash UNCHANGED (только docs + worklog + STATUS + AGENT_NAVIGATION изменены, master HTML не тронут):**
+  - Никаких правок `src/master/*.html` — contentHash UNCHANGED.
+  - Никаких правок `scripts/*.py` — drift detector v1.2 unchanged.
+  - Никаких правок `src/shell/*` — shell hash `69d9b813` unchanged.
+  - Build hash unchanged по определению (не запускался).
 
 Stage Summary:
-- **iter 53 COMPLETE — drift categorization added.** `scripts/audit_canon_master_drift.py` расширен с 1.1 до 1.2: new `category` field в ParagraphDrift, new `categorize_paragraph_drift()` function (5 categories: vs_embed_ref, cross_ref, callout_label, no_master_match, plain_text), new patterns + constants, console + JSON report updated. iter 53 baseline: 15 vs_embed_ref + 14 cross_ref + 4 callout_label + 2 no_master_match + 53 plain_text = 88 total. Все validation gates PASS. contentHash UNCHANGED. Shell hash `69d9b813` UNCHANGED.
-- **Recon conclusion:** 88 paragraph drifts — real semantic differences (no false positives). Threshold tuning не нужен. 53 plain_text drifts — most actionable category for future investigation.
-- **Modified files (5):** `scripts/audit_canon_master_drift.py` (+90 строк: categorization feature, v1.1 → v1.2), `STATUS.md` (iter 53 record + Invariants + Roadmap), `worklog.md` (iter 53 detailed record), `CHANGELOG.md` (iter 53 entry), `AGENT_NAVIGATION.md` (header iter line + OP-1 + Roadmap). Plus `index.html` (only `Generated:` timestamp — automatic from `pnpm run build`).
-- **Точка остановки:** iter 53 COMPLETE. Все HIGH/MEDIUM priority KI закрыты. iter 52 closed paragraph drift detection. iter 53 closed drift categorization. Next iter (iter 54+) — LOW priority only: Glossary double-render (by design), Component extracts regeneration (опционально, no business value), Dependabot merges (GitHub-level), Paragraph drift tuning (опционально, recon done — no false positives). Проект STABLE.
+- **iter 54 COMPLETE — исследовательская итерация.** Создан `docs/AUDIT_REVIEW_ITER54.md` (~440 строк, 12 секций) с декомпозицией и вердиктами по 22 утверждениям аудита. Итог: 0% верны, 59% частично верны, 18% неверны, 23% субъективны. Прямое следование плану аудита навредит гайду. Найдены 3 реальных LOW-бага (KI#37/38/39, OPEN). Все validation gates PASS. contentHash UNCHANGED. Shell hash `69d9b813` UNCHANGED.
+- **Ключевые выводы анализа:**
+  1. Аудит не различает **canonical location** (определение) и **cross-ref** (ссылку) — большинство «повторов» на самом деле разные функциональные роли (определение / анти-паттерн / диагностика / глоссарий).
+  2. Аудит не учёл Canon `_README.md` §3.5 (cross-ref как заявленный механизм) и §3.9 (метки RULE/RECOMMENDATION как парсинговые якоря для LLM).
+  3. Аудит содержит **4 фактические ошибки**: (a) пример «Комната была в беспорядке» не дублируется в Part 8, (b) «в одном абзаце анти-годмодинг и CoT Tier 3» — в разных файлах, (c) VS-EMBED и Structured Inject не в глоссарии, (d) MBTI не дублирует OCEAN (заявлен как supplementary).
+  4. Реальные проблемы (найдены в ходе сверки): KI#37 (отсутствие disclaimer в §1.1), KI#38 (дублирование AP таблицы и VS-EMBED E12), KI#39 (HTML-комментарии в code-блоках Part 10).
+- **Modified files (4):** `docs/AUDIT_REVIEW_ITER54.md` (NEW, ~440 строк), `STATUS.md` (iter 54 record + 3 new KI + iter 55+ Roadmap rewrite), `worklog.md` (iter 54 detailed record), `AGENT_NAVIGATION.md` (header iter line).
+- **Точка остановки:** iter 54 COMPLETE (исследовательская). Next iter (iter 55) — начать с P0-задач: KI#37 (1 строка disclaimer) + KI#39 (убрать HTML-комментарии из Part 10 code-блоков). P1: KI#38 + decision tree для фреймворков в Part 5. P2/P3 — опционально. **НЕ следовать радикальным предложениям аудита** (удаление фреймворков, схлопывание чек-листов, переписывание таблиц) — они неверны и приведут к деградации гайда.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 53 (2026-07-21)**: drift categorization added в `audit_canon_master_drift.py` v1.1→v1.2 (5 categories: vs_embed_ref/cross_ref/callout_label/no_master_match/plain_text; 88 drifts = 15+14+4+2+53). Documentation cleanup. contentHash UNCHANGED.
 - **iter 52 (2026-07-21)**: paragraph-level Jaccard drift detection added в `audit_canon_master_drift.py` v1.0→v1.1 (5 new functions + 2 CLI flags + 88 paragraph drifts informational). Documentation cleanup: AGENT_NAVIGATION -23%, CHANGELOG iter 51 entry compressed. contentHash UNCHANGED.
 - **iter 51 (2026-07-21)**: KI#36 ✅ CLOSED — 98 id attrs added to `src/master/*.html` sections (anchor nav fix); lazy-loader.js selector `section[id]`→`section[data-section]` + hashchange listener + glossary auto-close; 13 English phrases русификация. contentHash 6th change.
 - **iter 50 (2026-07-20)**: KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section added; p4_spine_overview canon metadata. contentHash `cc130a527480e61b` (5th change).
