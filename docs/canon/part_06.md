@@ -13,6 +13,8 @@ migration_status: —
 
 `data-section: p6_cot_bridge`
 
+<!-- difficulty: INTERMEDIATE -->
+
 **CoT (цепочка рассуждений)** — механизм пошаговых рассуждений, который модель воспроизводит перед генерацией ответа. `[Model: see Appendix B — Model Capability Table]`
 
 **Что добавляет CoT:**
@@ -27,6 +29,9 @@ migration_status: —
 ## 6.2 CoT Basics
 
 `data-section: p6_cot_basics`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: CoT Basics (2-3 anchors max) -->
 
 **CoT** — техника задания внутреннего процесса персонажа. `[Model: see Appendix B — Model Capability Table]`
 
@@ -59,6 +64,9 @@ CoT Anchors строятся на фундаменте трёх систем: Se
 
 `data-section: p6_cot_tiers`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: CoT Tiers (Tier 0-3) -->
+
 CoT имеет 4 уровня сложности. Tier 0 — базовый якорь без внутреннего процесса. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.
 
 Формат каждого Tier показан выше в VS-EMBED E11 (staircase 4 ступени: Tier 0 → Tier 3, каждая со своим именем, model-pill и concrete-примером нотации). Таблица ниже — какие модели поддерживают каждый Tier и русскоязычный пример для справки (дополняет E11, не дублирует viz-нотацию).
@@ -79,6 +87,8 @@ CoT имеет 4 уровня сложности. Tier 0 — базовый як
 ## 6.4 Tier 2 CoT (рекомендован для 32B+)
 
 `data-section: p6_cot_tier2`
+
+<!-- difficulty: EXPERT -->
 
 Tier 2 связывает триггер с GHOST через внутренний процесс.
 
@@ -116,6 +126,8 @@ Tier 2 связывает триггер с GHOST через внутренни�
 ## 6.5 Tier 3 CoT (API only)
 
 `data-section: p6_cot_tier3`
+
+<!-- difficulty: EXPERT -->
 
 Tier 3 использует XML-структуру для полного описания внутреннего процесса.
 
@@ -165,6 +177,9 @@ resolution: отступить
 ## 6.6 CoT Anchors
 
 `data-section: p6_cot_anchors`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: CoT Anchors (stimulus/analysis/synthesis/resolution) -->
 
 **CoT Anchor** — Anchor, где действие = внутренний процесс.
 

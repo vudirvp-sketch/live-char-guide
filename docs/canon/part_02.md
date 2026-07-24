@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: p2_basic_anchors`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Behavioral Anchor (T→A→P format) -->
+
 **Anchor** — правило поведения персонажа в формате **Триггер → Действие → Цена**. Это основной механизм задания характера без бесконечного описания.
 
 [VS: E03 — Behavioral Anchor T→A→P. См. маркер в preamble. Замещает infographic `inf-pipeline-vertical` «Формат Anchors: Trigger → Action → Price» (3-step pipeline) и сопутствующий `<pre class="plain-copy">` текстовый дубликат.]
@@ -30,6 +33,9 @@ migration_status: —
 ## 2.2 Правила Anchors
 
 `data-section: p2_anchor_rules`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Anchor Rules (observable, physical Price, same-scene Price, concrete trigger) -->
 
 ### Рекомендуемое количество Anchors
 
@@ -71,6 +77,8 @@ migration_status: —
 
 `data-section: p2_anchor_examples`
 
+<!-- difficulty: BASIC -->
+
 Таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Цена — всегда физическая реакция, наблюдаемая в той же сцене.
 
 | Триггер | Действие | Цена | Персонаж |
@@ -87,6 +95,9 @@ migration_status: —
 ## 2.4 Embodiment (Телесность)
 
 `data-section: p2_embodiment`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Embodiment Protocol (State→Body→Sensor→Speech) -->
 
 **Embodiment** — протокол связи эмоционального состояния с телесной реакцией. Каждая эмоция должна проявляться физически.
 
@@ -119,6 +130,9 @@ Embodiment Protocol показан выше в VS-EMBED E04 (funnel-stack из 4
 
 `data-section: p2_env_reactivity`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Environmental Reactivity -->
+
 Сенсорные и пространственные детали должны вводиться органично, через действие персонажа или присутствие `{{user}}`, никогда — декоративно. Среда раскрывается через действие, а не описывается отдельно от персонажа.
 
 **EXAMPLE:** Декоративное описание vs действие:
@@ -131,6 +145,9 @@ Embodiment Protocol показан выше в VS-EMBED E04 (funnel-stack из 4
 ## 2.6 Sensory Anchors
 
 `data-section: p2_sensory_anchors`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Sensory Anchors (5 channels) -->
 
 Сенсорные якоря добавляют персонажу телесность — запахи, текстуры, звуки, которые модель использует для генерации реакций.
 

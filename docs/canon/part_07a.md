@@ -13,6 +13,9 @@ migration_status: ✅ MIGRATED (iter 11)
 
 `data-section: p7a_system_prompt`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: System Prompt structure -->
+
 **System Prompt (SP)** — контейнер, вставляемый в начало контекста модели. Содержит: Identity Block, Anti-godmoding, CORE DIRECTIVES, SPINE block (в Description, не в SP), Tone Frame, Format Lock.
 
 > **Term disambiguation:** SP = System Prompt, не путать с темпераментом Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI). System Prompt — это КОНТЕЙНЕР; CORE DIRECTIVES — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда; здесь размещаются CORE DIRECTIVES и Tone Frame.
@@ -53,6 +56,9 @@ Format Lock:
 ## 7A.2 CORE DIRECTIVES: The 7 Behavioral Directives
 
 `data-section: p7a_core_directives`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: CORE DIRECTIVES (7 directives) -->
 
 **CORE DIRECTIVES** — единая система из 7 директив на английском языке, размещаемая **внутри System Prompt**. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. CORE DIRECTIVES — это содержимое System Prompt; сам System Prompt также включает Identity Block, Anti-godmoding, Tone Frame и другие элементы.
 
@@ -136,6 +142,9 @@ Track: (1) What Price was paid this scene?
 
 `data-section: p7a_tone_frame`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Tone Frame -->
+
 **Tone Frame** — элемент SP (~25–30 токенов) с двойной функцией: задаёт тональность И защищает от контентного дрейфа. Обязателен для нетривиальных сеттингов.
 
 ```
@@ -158,6 +167,9 @@ Tone: [тональность]. [ограничение].
 ## 7A.4 Format Lock
 
 `data-section: p7a_format_lock`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Format Lock -->
 
 **Format Lock** — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Модель — Pattern Matcher (см. Part 1 §1.4): два паттерна разметки в одной карточке = произвольное переключение между ними.
 
@@ -187,6 +199,9 @@ Format Lock:
 ## 7A.5 Author's Note (AN)
 
 `data-section: p7a_authors_note`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Author's Note -->
 
 **Author's Note (AN)** — динамический контекст, вставляемый перед последними сообщениями. Задаёт сцену, настроение, мотивацию.
 
@@ -262,6 +277,9 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 `data-section: p7a_sampling_params`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Sampling Parameters (PP=0, RepPen, Temperature, Top-P) -->
+
 Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — Voice требует повторяемых паттернов.
 
 [VS: E17 — Sampling Parameters. Сравнительная 3-колоночная таблица: 12B-14B (наиболее ограниченный) / 32B+ (рекомендуемый) / API (максимальная гибкость). По строкам: Temperature, Top P, Min P, RepPen, Top K, Presence Penalty (везде `0.0 ⚠️`). Дополнительно — чеклист по типу модели: размещение голоса, стабильность XML, уровень CoT, Anti-godmoding. Замещает текстовое описание параметров и сравнительную таблицу.]
@@ -296,6 +314,8 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 `data-section: p7a_model_checklist`
 
+<!-- difficulty: INTERMEDIATE -->
+
 Сводная таблица параметров и возможностей по типу модели. Дополняет §7A.6 (sampling) и §7A.11 (4K-Fallback).
 
 | Параметр | 12B–14B | 32B+ | API (Claude/GPT) |
@@ -318,6 +338,9 @@ GHOST-activation: Активен, если в сцене был триггер (
 ## 7A.8 OOC Protection (OOC-защита)
 
 `data-section: p7a_ooc_protection`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: OOC Protection -->
 
 **OOC Protection** — протокол реакции на OOC-провокации в характере персонажа. Добавляет ~15 токенов в SP, но критически важен для иммерсии.
 
@@ -349,6 +372,9 @@ AI/roleplay воспринимается как галлюцинация или 
 ## 7A.9 XML Tags в Description
 
 `data-section: p7a_xml_tags`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: XML Tags in Description -->
 
 Структурирование Description через XML-теги для API моделей (32B+ и API; на 12B XML нестабилен — см. §7A.7).
 
@@ -446,6 +472,8 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 
 `data-section: p7a_api_blocks`
 
+<!-- difficulty: EXPERT -->
+
 API-модели (Claude, GPT-4) поддерживают специфичные форматы инструкций, которые недоступны или работают иначе на open-source моделях. Эти блоки размещаются:
 
 - В начале Description (рекомендуется для Claude)
@@ -485,6 +513,9 @@ API-модели (Claude, GPT-4) поддерживают специфичные
 ## 7A.11 4K-Fallback (Протокол адаптации для 4K контекста)
 
 `data-section: p7a_4k_fallback`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: 4K-Fallback protocol -->
 
 **4K-Fallback** — минимальная конфигурация для моделей с ограниченным контекстом (4K токенов). Используется когда расширенная карточка не помещается в контекстное окно.
 
@@ -526,6 +557,9 @@ Anchors:
 
 `data-section: p7a_token_budget`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Token Budget -->
+
 Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → `[ref: appendix_model_table.md]`.
 
 ### Лимиты по блокам
@@ -553,6 +587,8 @@ Anchors:
 ## 7A.13 Полный конвейер сборки карточки — walkthrough на примере Елены
 
 `data-section: p7a_assembly_pipeline`
+
+<!-- difficulty: INTERMEDIATE -->
 
 Единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит *конкретный результат* для Елены.
 

@@ -147,6 +147,17 @@ docs/canon/
 
 Уточняющие комментарии внутри секций — на русском с меткой `**Примечание:**` (не semantic anchor, локальное уточнение).
 
+### 3.10 Section metadata — difficulty и canonical markers (iter 58+)
+
+Каждая секция в canon имеет два HTML-комментария-маркера (добавлены iter 58):
+
+- `<!-- difficulty: BASIC | INTERMEDIATE | EXPERT -->` — уровень сложности секции. **BASIC** = минимум для работающей карточки (12B/8K). **INTERMEDIATE** = глубина для средних карточек (32B+/16K). **EXPERT** = продвинутые техники (API). Помогает читателю выбрать путь изучения по уровню.
+- `<!-- canonical: ... -->` — маркер канонического определения (только для секций, где концепция **определяется впервые**). Секция без canonical = ссылка, расширение или применение. Отличает «полное определение» от «cross-ref».
+
+**Размещение:** сразу после `data-section:` декларации в canon; сразу после `<section data-section="...">` в master HTML.
+
+**Не путать с:** `[ref: ...]` (cross-ref notation, §3.6) — это ссылка на другую секцию, а `<!-- canonical: ... -->` — маркер текущей секции как определения.
+
 ---
 
 ## 4. Workflow: Canon-first миграция
@@ -262,14 +273,11 @@ docs/canon/
 
 ## 9. История изменений
 
-> Подробно — последние 3 итерации (55-56, 57). Старые — одной строкой. Полная история — в git.
+> Последние 2 итерации подробно. Старые — одной строкой. Полная история — в git.
 
-- **iter 57 (2026-07-25):** Расширение 2 установленных pattern (P3 задачи из iter 56+ Roadmap). (a) Annotation blocks для §10.2-§10.4 — добавлены 3 детальных Annotation блока (canon + master HTML) по образцу §10.1 (только §10.1 имел Annotation — несоответствие устранено). §10.2 Уолтер: 6 bullets. §10.3 Омнис-Зета: 8 bullets. §10.4 Выщербленный: 10 bullets. (b) Scenario-метки для §9.5/§9.6/§9.7/§9.11 — добавлены 4 явные формулировки `**Сценарий:** ...` (canon + master HTML) по образцу §9.3 (только §9.3 имел scenario label — несоответствие устранено). 2 несуществующих anchor ID исправлены (`#p7a_author_note` → `#p7a_authors_note`, `#p7b_lorebook` → `#p7b_lorebook_basics` — regression от iter 57, найден и пофиксен в той же итерации). HTML comments `<!-- Demonstrates: ... -->` вне code-блоков (23 случая в 9 master HTML файлах) — informational note: НЕ баг, parsing anchors для LLM (отличать от KI#39 который был про такие же комментарии ВНУТРИ code-блоков). Все validation gates PASS (96/96 sync + 12/12 master validation). Drift: 92 paragraph drifts (+3 vs iter 55 baseline 89; ожидаемо — 3 новых Annotation блока добавили callout_label категорию 4→7). English leaks baseline bump 20→24 (+4 — quoted Tone Frame strings в Annotation блоках: Pride is a quiet weapon, Flesh is weakness, Memory is currency, Never show weakness). contentHash CHANGED (8th change — part_09, part_10 master HTML modified). Shell hash `69d9b813` UNCHANGED.
-- **iter 55-56 (2026-07-21):** Все 3 LOW KI закрыты (KI#37/38/39 ✅ CLOSED). KI#37: methodology disclaimer добавлен в `part_01.md §1.1` (canon + master HTML). KI#38: таблица AP в `part_08.md §8.1` сокращена до 4-строчного intro + cross-ref (canonical = VS-EMBED E12). KI#39: 23 HTML-комментария `<!-- Demonstrates: ... -->` удалены из code-блоков `part_10.md §10.1-10.4` (canon + master HTML, 46 удалений суммарно). Decision tree для фреймворков добавлен в `part_05.md §5.1` (4-шаговое дерево: SPINE → Enneagram → OCEAN → MBTI). Recap-чек-листы свёрнуты в `<details>` (§7A.13 Чек-лист перед тестированием + §9.11 Quick Check) — recap-дубликаты правил скрыты, диагностические оставлены. Scenario-метка для §9.3 добавлена (явная формулировка сценария применения). iter 56 deep audit подтвердил отсутствие дальнейших critical дублирований. Все validation gates PASS (96/96 sync). Drift: 89 paragraph drifts. contentHash CHANGED (7th change). Shell hash `69d9b813` UNCHANGED.
-- **iter 54 (2026-07-21):** Исследовательская итерация — разбор сводного аудита (~22 утверждения) в `docs/AUDIT_REVIEW_ITER54.md`. Итог: 0% верны, 59% частично верны, 18% неверны, 23% субъективны. Найдены 3 LOW-бага (KI#37/38/39, OPEN). Никаких правок гайда — только анализ. contentHash UNCHANGED.
-- **iter 53 (2026-07-21):** drift categorization added в `audit_canon_master_drift.py` v1.1→v1.2 (5 categories). Documentation cleanup. contentHash UNCHANGED.
-- **iter 52 (2026-07-21):** paragraph-level Jaccard drift detection added в `audit_canon_master_drift.py` v1.0→v1.1. Documentation cleanup. contentHash UNCHANGED.
-- **iter 7-51 (2026-06-23..2026-07-21):** Canon scaffold → Part-by-Part migration → KI#13/#16/#20/#21/#22/#23/#28-36 fixes. См. git log для деталей.
+- **iter 58 (2026-07-25):** P2+P3 metadata enrichment. (a) P3: Glossary consolidation — 7 CORE DIRECTIVES individual entries merged into 1 consolidated entry with 7 numbered sub-definitions. 30→24 glossary entries. (b) P2: Progressive disclosure — `<!-- difficulty: BASIC|INTERMEDIATE|EXPERT -->` added to 102 canon sections + 98 master HTML sections (BASIC=43, INTERMEDIATE=39, EXPERT=20). (c) P2: Canonical markers — `<!-- canonical: ... -->` added to 60 definition sections in canon + 59 in master HTML. §3.10 added to _README.md documenting new conventions. All synced canon→master. 96/96 sync PASS, 12/12 validation PASS. Drift 92→170 (informational — HTML comments drift). English leaks 24 unchanged.
+- **iter 57 (2026-07-25):** Annotation blocks §10.2-10.4 + scenario-метки §9.5-9.11. 2 anchor ID fixes. 96/96 sync, 12/12 validation. contentHash 8th change.
+- **iter 7-56**: Canon scaffold → migration → KI fixes → drift tools → glossary cleanup. См. git log.
 
 ---
 

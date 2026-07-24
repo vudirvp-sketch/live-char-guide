@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: p3_voice_isolation`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Voice Isolation -->
+
 **Voice Isolation** — правило разделения Voice (голос) и описания. Voice задаётся ТОЛЬКО в Examples и Greeting, никогда в Description.
 
 **Не объясняй голос — покажи его.** Голос = ритм + лексика + синтаксис + парадоксы. Ни один из этих компонентов не описывается прилагательными — только демонстрируется через Examples.
@@ -33,6 +36,9 @@ migration_status: —
 ## 3.2 Иерархия влияния на голос
 
 `data-section: p3_influence_hierarchy`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Voice Influence Hierarchy -->
 
 Не все части карточки влияют на голос одинаково. Иерархия зависит от размера модели:
 
@@ -71,6 +77,9 @@ Example:
 
 `data-section: p3_examples_rules`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Examples Rules (<START> mandatory, 2-3 blocks, voice contamination) -->
+
 Правила Examples определяют, как модель считывает Voice из диалоговых примеров.
 
 **RULE:** Заражение голоса (Voice Contamination): Никогда не копируйте Examples из чужих карточек. Чужой ритм и разметка ломают голос на 12B. Каждый `<START>`-блок пишите с нуля под вашего персонажа.
@@ -107,6 +116,9 @@ Example:
 
 `data-section: p3_examples_quality`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Quality Grade System (A/B/C) -->
+
 Система оценки качества Examples по 6 критериям. Три критерия оценивают сами Examples, три — карточку в целом, но проявляются они через Examples. Качество оценивается как **Quality Grade A / B / C** (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10):
 
 - **Grade A (✓)** — целевой уровень качества.
@@ -136,6 +148,8 @@ Example:
 
 `data-section: p3_greeting_ref`
 
+<!-- difficulty: BASIC -->
+
 **Greeting Message** — начальное сообщение персонажа. Задаёт место, время и тон. Полный алгоритм написания Greeting (Sensory Anchor → тело FLAW → реплика → крючок), пример Елены и правила длины → `[ref: part_07b.md §7B.X — Greeting Message]`.
 
 ---
@@ -143,6 +157,9 @@ Example:
 ## 3.6 Voice Leak (Утечка голоса)
 
 `data-section: p3_voice_leak`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Voice Leak / Voice Bleed -->
 
 **Voice Leak** — ошибка, при которой модель генерирует голос, не соответствующий персонажу. Чаще всего — «красноречивый персонаж», который должен говорить просто.
 
@@ -180,6 +197,8 @@ Example:
 
 `data-section: p3_joker_case`
 
+<!-- difficulty: INTERMEDIATE -->
+
 Некоторые персонажи сопротивляются описанию голоса. Это не слабость карточки — это свойство архетипа. Хаотичные, непредсказуемые персонажи, чей голос = ритм + парадокс + непредсказуемость, не описываются прилагательными — «нестабильный» описывает тысячу персонажей.
 
 **RULE:** Если вы не можете описать Voice в 3-4 Voice-маркерах — не описывайте его. Демонстрируйте исключительно через Examples. Модель УЧИТСЯ паузам, цепочкам действие→речь, абсурдности — но только из примеров.
@@ -193,6 +212,8 @@ Example:
 ## 3.8 Мульти-персонажные примеры
 
 `data-section: p3_multi_char`
+
+<!-- difficulty: EXPERT -->
 
 **Мульти-персонажность** — техника написания Examples для сцен с несколькими персонажами. Требует явного различения голосов через маркеры персонажа.
 

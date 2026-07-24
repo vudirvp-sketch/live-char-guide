@@ -215,34 +215,9 @@
 <p><strong>RULE:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
 </div>
 
-<h3>Сводная таблица анти-паттернов</h3>
+<p>Полный каталог 15 анти-паттернов (AP-1 … AP-15) с симптомом, причиной и быстрым фиксом — в визуализации E12 выше. Подробный разбор каждого AP (симптом → причина → решение → before/after) — в подсекциях §8.2–§8.16 ниже. Текстовая сводная таблица убрана в iter 55 как дублирующая VS-EMBED E12 (KI#38 ✅ CLOSED).</p>
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>AP</th><th>Название</th><th>Критичность</th><th>Быстрый фикс</th></tr>
-</thead>
-<tbody>
-<tr><td><a href="#p8_ap1_token_bloat">AP-1</a></td><td>Token Bloat</td><td>Высокая</td><td>Удалить повторы из Description</td></tr>
-<tr><td><a href="#p8_ap2_missing_price">AP-2</a></td><td>Missing Price</td><td>Высокая</td><td>Добавить физическую цену к Behavioral Anchor (поведенческий якорь)</td></tr>
-<tr><td><a href="#p8_ap3_voice_in_description">AP-3</a></td><td>Voice in Description</td><td>Высокая</td><td>Перенести голос в Examples</td></tr>
-<tr><td><a href="#p8_ap4_ghost_in_sp">AP-4</a></td><td>GHOST в SP</td><td>Высокая</td><td>Перенести SPINE в Description</td></tr>
-<tr><td><a href="#p8_ap5_reppen_high">AP-5</a></td><td>RepPen > 1.10</td><td>Средняя</td><td>Установить RepPen ≤ 1.10</td></tr>
-<tr><td><a href="#p8_ap6_no_anti_godmoding">AP-6</a></td><td>No Anti-godmoding</td><td>Высокая</td><td>Добавить "Never speak for {{user}}"</td></tr>
-<tr><td><a href="#p8_ap7_presence_penalty">AP-7</a></td><td>Presence Penalty > 0</td><td>Средняя</td><td>Установить Presence Penalty = 0</td></tr>
-<tr><td><a href="#p8_ap8_ghost_no_anchors">AP-8</a></td><td>GHOST без Anchors</td><td>Средняя</td><td>Добавить минимум 1 GHOST-Anchor</td></tr>
-<tr><td><a href="#p8_ap9_spine_broken">AP-9</a></td><td>Broken SPINE</td><td>Высокая</td><td>Проверить цепочку G→L→F→N→W</td></tr>
-<tr><td><a href="#p8_ap10_cot_overload">AP-10</a></td><td>CoT Overload</td><td>Средняя</td><td>Оставить 2–3 CoT Anchors</td></tr>
-<tr><td><a href="#p8_ap11_voice_bleed">AP-11</a></td><td>Voice Bleed</td><td>Высокая</td><td>Добавить Character Markers</td></tr>
-<tr><td><a href="#p8_ap12_xml_malformed">AP-12</a></td><td>XML Malformed</td><td>Средняя</td><td>Валидировать XML-теги</td></tr>
-<tr><td><a href="#p8_ap13_lorebook_conflict">AP-13</a></td><td>Lorebook Conflict</td><td>Средняя</td><td>Проверить консистентность записей</td></tr>
-<tr><td><a href="#p8_ap14_context_violation">AP-14</a></td><td>Context Violation</td><td>Высокая</td><td>Использовать 4K-Fallback Protocol</td></tr>
-<tr><td><a href="#p8_ap15_nested_anchors">AP-15</a></td><td>Nested Anchors</td><td>Средняя</td><td>Разбить на атомарные Anchors</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (<code>p5_ocean_warning</code>). В таблице не отображается — см. <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a>.</p>
+<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (<code>p5_ocean_warning</code>). В каталоге E12 не отображается — см. <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a>.</p>
 
 </section>
 <section  data-section="p8_ap1_token_bloat" id="p8_ap1_token_bloat">

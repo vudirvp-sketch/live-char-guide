@@ -18,6 +18,8 @@ migration_status: ✅ NEW (iter 38) — концептуальная секци�
 
 `data-section: p0_how_to_read`
 
+<!-- difficulty: BASIC -->
+
 Гайд — единый линейный поток от Part 1 до Part 10. Каждый Part — отдельный модуль, который строит на предыдущем. Читать последовательно; значимые нарративные переходы между Parts обозначены меткой **Bridge** (только 2 в гайде: Part 6→7A «от психологии к сборке», Part 9→10 «от диагностики к примерам»).
 
 **Что такое Part:** концептуальный модуль. Карта модулей:
@@ -61,6 +63,8 @@ migration_status: ✅ NEW (iter 38) — концептуальная секци�
 ## 0.2 TL;DR / Quick Start
 
 `data-section: p0_tldr_quick_start`
+
+<!-- difficulty: BASIC -->
 
 Минимальная карточка за 30 минут. Карточка = 4 блока: System Prompt (SP), Description, Examples, Greeting.
 

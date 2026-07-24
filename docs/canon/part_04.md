@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: p4_spine_overview`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: SPINE (5-element causal chain) -->
+
 **SPINE** — психологический каркас из 5 элементов, связывающих прошлое персонажа с его поведением. SPINE даёт Behavioral Anchors причину существовать, а не быть набором случайных правил.
 
 **Causal chain:** `GHOST → LIE → FLAW → NEED → WANT`
@@ -47,6 +50,9 @@ migration_status: —
 
 `data-section: p4_ghost`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: GHOST -->
+
 **GHOST** — конкретное событие из прошлого, сформировавшее LIE. НЕ психологический вывод, НЕ период. Это корень причинной цепочки SPINE: всё начинается с GHOST.
 
 ### Правила GHOST
@@ -77,6 +83,9 @@ migration_status: —
 
 `data-section: p4_lie`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: LIE -->
+
 **LIE** — ложное убеждение о мире или себе, которое персонаж носит в себе. Вытекает из GHOST: GHOST порождает LIE как защитный механизм от боли. LIE объясняет, **почему** существует FLAW.
 
 ### Правила LIE
@@ -97,6 +106,9 @@ migration_status: —
 ## 4.4 FLAW (Дефект)
 
 `data-section: p4_flaw`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: FLAW -->
 
 **FLAW** — конкретное поведение, блокирующее NEED. НЕ прилагательное. FLAW — прямое поведение из LIE: ложная установка заставляет персонажа действовать саморазрушительно.
 
@@ -134,6 +146,9 @@ migration_status: —
 
 `data-section: p4_need`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: NEED -->
+
 **NEED** — истинная потребность, которую персонаж может не осознавать. Часто противоречит WANT (напряжение, не прямой конфликт). FLAW блокирует NEED — именно поэтому персонаж не может получить то, в чём действительно нуждается.
 
 ### Правила NEED
@@ -155,6 +170,9 @@ migration_status: —
 ## 4.6 WANT (Желание)
 
 `data-section: p4_want`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: WANT -->
 
 **WANT** — осознанное желание персонажа. Внешняя цель, которую он может сформулировать. WANT совместим с LIE — персонаж не видит противоречия между своим желанием и своей ложной установкой.
 
@@ -179,6 +197,9 @@ migration_status: —
 ## 4.7 Полная цепочка SPINE
 
 `data-section: p4_spine_full_chain`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Full SPINE chain (walkthrough) -->
 
 Все 5 элементов SPINE образуют единую причинную цепочку: GHOST (событие прошлого) порождает LIE (ложную установку), LIE защищает от боли и вызывает FLAW (поведенческий недостаток), FLAW блокирует NEED (истинную потребность), WANT (осознанное желание) совместимо с LIE.
 
@@ -208,6 +229,9 @@ WANT: Стать цельным — заполнить пустоты внутр
 ## 4.8 SPINE → Карта Anchors
 
 `data-section: p4_spine_mapping`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: SPINE → Anchors mapping (FLAW-linked Anchors) -->
 
 Как выводить Anchors из элементов SPINE. Каждый элемент SPINE порождает Anchor определённого типа.
 
@@ -262,6 +286,9 @@ FLAW (см. §4.4): «Отталкивает людей сарказмом, ко
 
 `data-section: p4_spine_check`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: SPINE Consistency Check -->
+
 Цепочка GHOST → LIE → FLAW → NEED → WANT должна быть логичной. Используйте чек-лист ниже после построения SPINE.
 
 ### Чек-лист проверки SPINE
@@ -297,6 +324,8 @@ WANT: Доказать правоту самостоятельно
 
 `data-section: p4_spine_navigation`
 
+<!-- difficulty: INTERMEDIATE -->
+
 Когда все 5 элементов SPINE определены и проверены на консистентность (§4.9), следующий шаг — валидация через психологические инструменты (Part 5) и интеграция с CoT (Part 6).
 
 ### Pipeline (следующие Part'ы)
@@ -317,6 +346,9 @@ SPINE-профиль построен и проверен на консисте�
 ## 4.11 GHOST Layers (3-tier)
 
 `data-section: p4_ghost_layers`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: GHOST Layers (G1/G2/G3) -->
 
 Для большинства персонажей достаточно **одного GHOST** — единичного травматического опыта. Но некоторые backstory требуют нескольких травматических слоёв, каждый из которых формирует отдельный аспект личности. Это **GHOST Layers** — трёхуровневая структура GHOST для сложных персонажей.
 

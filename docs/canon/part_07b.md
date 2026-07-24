@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: p7b_structured_inject`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Structured Inject (Key/Content/Position/Depth/Probability) -->
+
 **Structured Inject** — техника использования XML-тегов в AN для динамической мотивации.
 
 ### Правила Structured Inject
@@ -38,6 +41,9 @@ migration_status: —
 ## 7B.2 Greeting Message (первое сообщение)
 
 `data-section: p7b_greeting`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Greeting Message algorithm (Sensory Anchor→FLAW body→line→hook) -->
 
 **Greeting Message** — начальное сообщение персонажа. Задаёт место, время и тон.
 
@@ -77,6 +83,9 @@ migration_status: —
 ## 7B.3 Lorebook (база знаний): основы
 
 `data-section: p7b_lorebook_basics`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Lorebook basics -->
 
 **Lorebook** — база знаний с триггерами. Используется для GHOST-связанных фактов.
 
@@ -173,6 +182,9 @@ migration_status: —
 
 `data-section: p7b_lorebook_mechanics`
 
+<!-- difficulty: EXPERT -->
+<!-- canonical: Lorebook behavioral mechanics -->
+
 Каждая запись Lorebook — это поведенческий триггер, а не хранилище лора. Рекомендуемый бюджет активации: 2–3 механики на сессию. Остальные отключить через `probability: 0` или удалить.
 
 **RECOMMENDATION (Область применения):** Параметры механик работают вместе с базовой структурой записи. Сначала изучите `[ref: §7B.3 — Структуру Lorebook]`.
@@ -228,6 +240,9 @@ migration_status: —
 ## 7B.5 Lorebook: продвинутые механики
 
 `data-section: p7b_lorebook_advanced`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: Lorebook advanced mechanics -->
 
 Продвинуто. Опционально.
 

@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: appendix_mbti`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: MBTI 16 types + Keirsey temperaments -->
+
 **MBTI** — модель из 16 типов на 4 осях. Менее научная, чем OCEAN, но популярная.
 
 ### 4 оси MBTI

@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: p5_ocean_basics`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: OCEAN (5 dimensions, golden rule: 1-2 extreme poles) -->
+
 **OCEAN** — модель из 5 личностных измерений. Используется для проверки внутренней консистентности персонажа и дополнения фреймворка SPINE (WANT/NEED/FLAW).
 
 **RULE:** Золотое правило профиля: Только 1–2 экстремальных полюса OCEAN (значения <30 или >70) — рекомендуемый максимум для всех контекстов. Для 8K+ допустимо до 3, для 16K+ — до 4 (см. §5.3 контекстные лимиты). Каждый дополнительный полюс сверх рекомендации снижает стабильность поведения. Нарушение = OCEAN Value Conflicts (см. §5.3).
@@ -61,6 +64,8 @@ Quick-reference для выбора фреймворка под задачу. Н
 
 `data-section: p5_elena_profile`
 
+<!-- difficulty: BASIC -->
+
 Елена — циничная журналистка-расследователь. Её OCEAN-профиль демонстрирует, как числовые значения связываются с SPINE-элементами.
 
 | Измерение | Значение | Интерпретация |
@@ -90,6 +95,9 @@ Quick-reference для выбора фреймворка под задачу. Н
 ## 5.3 OCEAN Value Conflicts (перегрузка)
 
 `data-section: p5_ocean_warning`
+
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: OCEAN Value Conflicts -->
 
 **RULE:** OCEAN Overload: Более 2 экстремальных полюсов OCEAN создают внутренние конфликты, которые модель не может разрешить последовательно.
 
@@ -123,6 +131,9 @@ Quick-reference для выбора фреймворка под задачу. Н
 
 `data-section: p5_enneagram_basics`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Enneagram (9 types, core fear/desire) -->
+
 OCEAN описывает «сколько» каждой черты у персонажа. Enneagram отвечает на другой вопрос: «почему персонаж действует именно так». Если OCEAN — это карта черт, то Enneagram — карта мотиваций.
 
 [VS: E10 — Enneagram × SPINE Mapping. Круг с 9 типами личности, привязанными к SPINE-элементам (Страх → LIE, Желание → WANT, Стресс → FLAW, Рост → NEED). Mini-card показывает тип/страх/желание/LIE/FLAW при hover. Замещает текстовое описание 9 типов как перечисление и даёт визуальный способ исследования маппинга.]
@@ -151,6 +162,8 @@ OCEAN описывает «сколько» каждой черты у перс�
 
 `data-section: p5_mbti_ref`
 
+<!-- difficulty: INTERMEDIATE -->
+
 MBTI доступен как справочный инструмент в `[ref: appendix_mbti]`. Для создания карточки используйте OCEAN (полюса → Anchors) и Enneagram (тип → SPINE). MBTI дополняет понимание, но не имеет прямого маппинга на SPINE.
 
 ---
@@ -158,6 +171,9 @@ MBTI доступен как справочный инструмент в `[ref:
 ## 5.6 Связь инструментов: OCEAN ↔ Enneagram ↔ MBTI
 
 `data-section: p5_cross_instrument_map`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: OCEAN ↔ Enneagram ↔ MBTI mapping tables -->
 
 Психологические инструменты **валидировали** SPINE — они не генерируют его. Сначала постройте SPINE-профиль (`[ref: part_04.md §4.1 — SPINE Overview]`, затем проверяйте его консистентность с помощью OCEAN, Enneagram и MBTI. Приведённые ниже таблицы — справочный инструмент для диагностики несоответствий, а не инструкция по созданию SPINE «снизу вверх».
 
@@ -196,6 +212,8 @@ OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+
 
 `data-section: p5_enneagram_wings`
 
+<!-- difficulty: EXPERT -->
+
 **Wing** — соседний тип, который модифицирует основное поведение.
 
 ### Алгоритм выбора крыла
@@ -223,6 +241,8 @@ OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+
 ## 5.8 OCEAN×Enneagram Matrix + Persona Synthesis
 
 `data-section: p5_cross_matrix`
+
+<!-- difficulty: EXPERT -->
 
 Матрица показывает корреляцию OCEAN×Enneagram: зелёные ячейки = высокая корреляция, красные = низкая. Нажмите на ячейку для деталей. Автоматическая валидация вашего профиля — **Персона Синтез** ниже.
 

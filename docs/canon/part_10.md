@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: p10_elena`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Elena full card (basic production) -->
+
 ~440 токенов (базовые блоки) / ~900 токенов (с SPINE и FLAW-linked Anchors). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.
 
 **Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.
@@ -101,6 +104,9 @@ FLAW-linked:
 ## 10.2 Уолтер Уайт — Реалистичный современный персонаж
 
 `data-section: p10_walter`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Walter White full card (basic modern) -->
 
 Уолтер Уайт — пример реалистичного современного персонажа. Никаких фэнтези-элементов: химия, деньги, семья. Конфликт WANT/NEED очевиден и психологически достоверен — обеспечение семьи vs. потребность в контроле и признании.
 
@@ -198,6 +204,9 @@ FLAW-linked:
 ## 10.3 Омнис-Зета 7-Квин — Полная карточка с аннотацией
 
 `data-section: p10_omnis`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: Omnis-Zeta 7-Queen full card (expert: GHOST Layers+CoT+Lorebook) -->
 
 ~1800 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, GHOST Layers, CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотациями.
 
@@ -356,6 +365,9 @@ CoT (2 Anchors максимум):
 ## 10.4 Выщербленный — Экспертная карточка
 
 `data-section: p10_vysherblenny`
+
+<!-- difficulty: EXPERT -->
+<!-- canonical: Vyshcherblenny full card (expert: multi-char) -->
 
 ~1500+ токенов. GHOST Layers, CoT, Sensory Anchors, XML.
 

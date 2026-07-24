@@ -13,6 +13,9 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 
 `data-section: p8_antipatterns_overview`
 
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: Anti-pattern overview (15 APs) -->
+
 **Анти-паттерн** — распространённая ошибка в создании карточек, приводящая к нестабильному поведению модели. Каждый анти-паттерн имеет симптом (что наблюдается), причину (почему возникает) и решение (как исправить).
 
 [VS: E12 — Antipattern Catalog. Сетка 5×3 с 15 AP-картами. Каждая карта: AP-ID, severity dot (high/medium), симптом, причина, fix. Замещает текстовое перечисление 15 AP в обзорной секции и даёт визуальный каталог для быстрого сканирования. **Canonical location** для сводного обзора анти-паттернов.]
@@ -28,6 +31,8 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 ## 8.2 AP-1: Раздувание токенов (Token Bloat)
 
 `data-section: p8_ap1_token_bloat`
+
+<!-- difficulty: BASIC -->
 
 **Симптом:** Description > 800 токенов.
 
@@ -54,6 +59,8 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 
 `data-section: p8_ap2_missing_price`
 
+<!-- difficulty: BASIC -->
+
 **Симптом:** Anchor без физической цены.
 
 **Решение:** Anchor Format: Триггер → Действие → Цена. Каждый Anchor обязан иметь Цену — без неё модель не показывает уязвимость (см. `[ref: part_02.md §2.X — Behavioral Anchors]`.
@@ -63,6 +70,8 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 ## 8.4 AP-3: Голос в Description
 
 `data-section: p8_ap3_voice_in_description`
+
+<!-- difficulty: INTERMEDIATE -->
 
 **Симптом:** Стилистические директивы в Description.
 
@@ -80,6 +89,8 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 
 `data-section: p8_ap4_ghost_in_sp`
 
+<!-- difficulty: BASIC -->
+
 **Симптом:** Психологический анализ (SPINE, GHOST) помещён в System Prompt.
 
 **Причина:** Попытка "инструктировать" модель о характере.
@@ -94,6 +105,8 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 
 `data-section: p8_ap5_reppen_high`
 
+<!-- difficulty: INTERMEDIATE -->
+
 **Симптом:** Repetition Penalty > 1.10.
 
 **Решение:** RepPen ≤ 1.10 для character cards. Превышение 1.10 подавляет характерные паттерны речи персонажа, делая генерацию monotone (см. `[ref: part_07a.md §7A.6 — Sampling Parameters]`.
@@ -103,6 +116,8 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 ## 8.7 AP-6: No Anti-godmoding
 
 `data-section: p8_ap6_no_anti_godmoding`
+
+<!-- difficulty: BASIC -->
 
 **Симптом:** Модель пишет за `{{user}}`.
 
@@ -128,6 +143,8 @@ Never speak or act for {{user}}.
 
 `data-section: p8_ap7_presence_penalty`
 
+<!-- difficulty: INTERMEDIATE -->
+
 **Симптом:** Presence Penalty > 0.
 
 **Решение:** Presence Penalty = 0.0 для всех character cards. PP > 0 нарушает согласованность персонажа — модель начинает вводить новые темы вместо удержания характерных паттернов (см. `[ref: part_07a.md §7A.6 — Sampling Parameters]`.
@@ -137,6 +154,8 @@ Never speak or act for {{user}}.
 ## 8.9 AP-8: GHOST без Anchors
 
 `data-section: p8_ap8_ghost_no_anchors`
+
+<!-- difficulty: INTERMEDIATE -->
 
 **Симптом:** GHOST описан, но нет Anchors, связанных с ним.
 
@@ -153,6 +172,8 @@ Never speak or act for {{user}}.
 ## 8.10 AP-9: Сломанный SPINE (Broken SPINE)
 
 `data-section: p8_ap9_spine_broken`
+
+<!-- difficulty: EXPERT -->
 
 **Симптом:** SPINE-элементы не связаны логически — WANT совместим с NEED (нет конфликта), FLAW существует без объяснения.
 
@@ -195,6 +216,8 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 
 `data-section: p8_ap10_cot_overload`
 
+<!-- difficulty: INTERMEDIATE -->
+
 **Симптом:** > 3 CoT Anchors в карточке.
 
 **Причина:** Попытка задать весь внутренний процесс.
@@ -219,6 +242,8 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 
 `data-section: p8_ap11_voice_bleed`
 
+<!-- difficulty: EXPERT -->
+
 **Симптом:** В мульти-персонажных сценах голоса смешиваются.
 
 **Причина:** Недостаточное различение голосов персонажей.
@@ -230,6 +255,8 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 ## 8.13 AP-12: Невалидный XML (XML Malformed)
 
 `data-section: p8_ap12_xml_malformed`
+
+<!-- difficulty: EXPERT -->
 
 **Симптом:** Невалидные XML теги в Description.
 
@@ -261,6 +288,8 @@ WANT: {{want}}
 
 `data-section: p8_ap13_lorebook_conflict`
 
+<!-- difficulty: INTERMEDIATE -->
+
 **Симптом:** Lorebook (база знаний) записи противоречат друг другу или Description.
 
 **Причина:** Независимое создание записей без проверки.
@@ -273,6 +302,8 @@ WANT: {{want}}
 
 `data-section: p8_ap14_context_violation`
 
+<!-- difficulty: INTERMEDIATE -->
+
 **Симптом:** Карточка + контекст > контекстное окно модели.
 
 **Причина:** Расширенная карточка для 4K модели.
@@ -284,6 +315,8 @@ WANT: {{want}}
 ## 8.16 AP-15: Nested Anchors (Вложенные Anchors)
 
 `data-section: p8_ap15_nested_anchors`
+
+<!-- difficulty: EXPERT -->
 
 **Симптом:** Anchor содержит вложенные условия: «Если X, а потом Y → делает Z».
 

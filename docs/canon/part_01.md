@@ -13,6 +13,8 @@ migration_status: —
 
 `data-section: p1_value_proposition`
 
+<!-- difficulty: BASIC -->
+
 Классический подход — интуитивное заполнение Description. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.
 
 | Параметр | Классический подход | Системный подход (SPINE) |
@@ -32,6 +34,8 @@ migration_status: —
 
 `data-section: p1_card_overview`
 
+<!-- difficulty: BASIC -->
+
 **Карточка персонажа** — документ, задающий поведение ИИ-модели при ролевой игре. Думать о ней нужно как о **поведенческом движке**: каждый элемент производит наблюдаемое действие, а не украшает описание. Карточка состоит из четырёх блоков, каждый выполняет свою функцию.
 
 **Сквозной пример:** На протяжении всего гайда строим карточку Елены — от базовых блоков до полной карточки со всеми инструментами. Это позволяет увидеть, как каждый инструмент добавляет глубину персонажу.
@@ -41,6 +45,8 @@ migration_status: —
 ### Структура гайда
 
 `data-section: p1_structure_overview`
+
+<!-- difficulty: BASIC -->
 
 Концептуальный поток гайда: какие концепции зависят от каких и в каком порядке изучать материал. Полная блок-схема зависимостей (OCEAN/Enneagram → SPINE → Anchors / Voice / CoT → System Prompt Assembly → Lorebook → Diagnostics → Examples; Anti-Patterns как параллельный fix-layer) ранее дублировалась Mermaid-диаграммой и auto-TOC. Mermaid удалён в iter 14 (дублировал TOC, не давая новой информации); auto-TOC остаётся единственным навигационным артефактом.
 
@@ -65,6 +71,9 @@ migration_status: —
 
 `data-section: p1_core_rules`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Pattern Matcher rule, 3 key principles (Anchor=T→A→P, Voice only in Examples, Psychology only in Description) -->
+
 Эти принципы обязательны для всех карточек. Нарушение любого из них приводит к ухудшению качества генерации.
 
 **Ключевые термины (используются далее без перевыполнения):**
@@ -85,6 +94,8 @@ migration_status: —
 
 `data-section: p1_token_budget_ref`
 
+<!-- difficulty: INTERMEDIATE -->
+
 Каждый блок карточки имеет токен-бюджет. Полная таблица лимитов и интерактивный калькулятор → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ---
@@ -93,6 +104,8 @@ migration_status: —
 
 `data-section: p1_pipeline_ref`
 
+<!-- difficulty: INTERMEDIATE -->
+
 Пошаговый конвейер сборки карточки → `[ref: part_07a.md §7A.X — Assembly Pipeline]`. Там же — Token Budget по блокам и walkthrough на примере Елены.
 
 ---
@@ -100,6 +113,9 @@ migration_status: —
 ## 1.7 Топ-3 критичные ошибки
 
 `data-section: p1_top3_problems`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Top-3 critical errors (godmoding, wrong voice, ideal character) -->
 
 Три самые частые ошибки начинающих, которые сильнее всего ломают качество карточки. Каждая разбирается подробно: симптом → причина → пошаговое исправление → пример до/после. Дополнительные проблемы → `[ref: part_09.md §9.4 — Additional Problems]`.
 
@@ -130,6 +146,9 @@ migration_status: —
 ## 1.8 Pre-build checklist
 
 `data-section: p1_prebuild_checklist`
+
+<!-- difficulty: BASIC -->
+<!-- canonical: Pre-build checklist (6 questions) -->
 
 6 вопросов перед началом сборки карточки. Каждый ответ определяет, какие инструменты понадобятся и сколько токенов заложить.
 

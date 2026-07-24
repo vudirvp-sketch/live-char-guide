@@ -13,6 +13,9 @@ migration_status: —
 
 `data-section: appendix_model_table`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Model capability table -->
+
 Эта таблица объединяет всю информацию о зависимости методов от размера модели. Ссылки на эту таблицу заменяют отдельные `MODEL_NOTE`-заметки в тексте гайда.
 
 | Feature | 12B Models | 32B+ Models | API Models |

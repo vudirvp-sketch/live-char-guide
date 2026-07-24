@@ -11,6 +11,9 @@ migration_status: ✅ NEW (iter 38) — концептуальный reference, 
 
 `data-section: appendix_character_map`
 
+<!-- difficulty: BASIC -->
+<!-- canonical: Character map (5-character comparison) -->
+
 5 канонических персонажей гайда. Каждый следующий добавляет новые инструменты. Используйте таблицу, чтобы выбрать персонажа под вашу задачу.
 
 | Персонаж | Где используется | Сложность | GHOST | SPINE | Enneagram | OCEAN (extreme + cautious) | CoT | Lorebook |
