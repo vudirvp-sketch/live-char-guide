@@ -4,6 +4,34 @@
 
 ---
 
+Task ID: 60
+Agent: main
+Task: iter 60 — Языковая политика revision + canon deduplication (no-repeat principle).
+
+Work Log:
+- 1: **Repo клонирован** — `git clone https://github.com/vudirvp-sketch/live-char-guide.git`. Прочитан STATUS.md, terminology_dictionary.md, glossary.json, all canon files.
+- 2: **iter60_analysis_plan.md прочитан и переработан** — ключевой revision: заменён подход `[ref:]` cross-references на принцип «не повторять, trust sequential reader». Гайд = единый последовательный документ, не википедия.
+- 3: **terminology_dictionary.md revision ✅ DONE** — §1 разделён на Category A (English mandatory in code/ID/SP) и Category B (Russian primary in headings/prose). 10 Category B терминов получили русский primary. §6 инвертирован: первое упоминание = RU + EN canonical. Добавлено правило 6: sequential reader principle. Examples updated.
+- 4: **glossary.json update ✅ DONE** — Category B терминов: Russian equivalents moved from deprecated to aliases. Added Sensory Anchors + Persona Synthesis. Added language_category field. Version → 9.2.0.
+- 5: **Canon deduplication ✅ DONE**:
+  - Part 0 §0.2: убрано дословное повторение 3 правил → краткое упоминание без `[ref:]` clutter
+  - Part 1 §1.5+§1.6: мерж в §1.2 subsection (устранены stub H2 секции)
+  - Part 4 §4.9: убран Elena chain example, чек-лист сохранён
+  - Part 4 §4.10: сокращён до 2 абзацев навигации
+- 6: **iter60_analysis_plan.md сохранён в docs/canon/** — как документированный план с revision
+- 7: **Validation gates:**
+  - `check_english.py` → 24 leaks (baseline unchanged)
+  - `validate_terms.py` → ✅ All terminology valid
+  - `check_duplicates.py` → ✅ no disallowed duplicates
+  - `audit_canon_master_sync.py` → 97/97 PASS
+
+Stage Summary:
+- **iter 60 PARTIAL.** Language policy revision complete. Canon dedup for Part 0/1/4 complete. Master HTML sync NOT done (deferred to iter 61, opened KI#40).
+- **Modified files:** terminology_dictionary.md, glossary.json, part_00.md, part_01.md, part_04.md, STATUS.md, worklog.md, docs/canon/iter60_analysis_plan.md = 8 files.
+- **Точка остановки:** iter 60 PARTIAL. Canon changes done, master HTML sync pending (KI#40). Next: iter 61 — заголовки унификация + canon→master sync.
+
+---
+
 Task ID: 58
 Agent: main
 Task: iter 58 — P2+P3 metadata enrichment. 3 задачи: (a) P3 glossary consolidation (7 CORE DIRECTIVES entries → 1 сводная), (b) P2 progressive disclosure labels `<!-- difficulty: BASIC|INTERMEDIATE|EXPERT -->` (102 секций), (c) P2 canonical markers `<!-- canonical: ... -->` (60 definition sections). Все synced canon→master HTML.
