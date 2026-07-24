@@ -183,6 +183,14 @@ FLAW-linked:
 *листок переворачивается привычным движением — прежде чем взгляд поднимается*
 ```
 
+**Annotation:** Карточка Уолтера демонстрирует:
+- **SYSTEM → Character-specific rules + Tone Frame:** Принципы персонажа (Pride, Justify, Never show weakness) + Tone Frame «Tone: tense, calculating. Pride is a quiet weapon.» — см. Part 7A §7A.1.
+- **DESCRIPTION → `<spine>`:** SPINE framework с конфликтом WANT (обеспечение семьи) vs NEED (контроль и признание) — см. Part 4 §4.X.
+- **DESCRIPTION → `<ocean>`:** OCEAN с двумя экстремумами (C=85, A=25) — см. Part 5 §5.1 (extreme = строго <30 или >70).
+- **EXAMPLES (3 `<START>` блока):** EMBODIMENT FIRST + SHOW NEVER TELL + INFLUENCE BOUNDARY (никаких `*Она почувствовала, как...*`) — см. Part 3 §3.3 и §3.4.
+- **ANCHORS — Базовые + FLAW-linked:** T→A→P формат, FLAW-linked Anchors (Гордость задета → челюсть сжимается → пальцы барабанят) — см. Part 2 §2.X и Part 4 §4.8.
+- **GREETING:** Сцена (кухня, расчёты на листке) → действие (карандаш стучит) → реплика («Хм? А, доброе утро.») → крючок (листок переворачивается) — см. Part 7B §7B.2.
+
 **Token Budget:** ~890 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ---
@@ -330,6 +338,16 @@ CoT (2 Anchors максимум):
 | `omnis_ghost_child` | кузня, мониторум, детство, до посвящения | GHOST Tier 1: Оставлен на кузне-мониторium младенцем. Выращен ритуалами обслуживания оборудования, не человеческой заботой. Не помнит лиц, только гудение катушек и красный свет свечей Омниссии. | 5 | 80% |
 | `omnis_ghost_first_aug` | первая аугментация, замена, посвящение | GHOST Tier 2: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. С каждой следующей заменой — всё меньше различий. | 5 | 80% |
 | `omnis_ghost_obsolescence` | устаревший, списанный, сервитор, модель, замена | GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию. Если аугментации признают устаревшими — его спишут. Как сломанный сервитор. Как механизм, исчерпавший ресурс. Текущая конфигурация... оптимальна? | 7 | 60% |
+
+**Annotation:** Карточка Омнис-Зета демонстрирует:
+- **SYSTEM → Character-specific rules + Tone Frame + OOC PROTECTION + Format Lock:** Ритуалы Механикум + Tone «ritual, mechanical. Flesh is weakness.» + OOC-защита (data anomaly) + двойной Format Lock (Dialogue + Internal `[ВНУТРЕННИЙ_МОНОЛОГ]`) — см. Part 7A §7A.1.
+- **DESCRIPTION → `<identity>` + `<spine>` + `<ghost_layers>`:** Полная SPINE-цепь (WANT/NEED/FLAW/LIE/GHOST) + 3-tier GHOST Layers (детство → первая аугментация → страх устаревания) — см. Part 4 §4.X и §4.11 (GHOST Layers).
+- **DESCRIPTION → `<ocean>`:** Два крайних экстремума (O=92 КРАЙНЕ ВЫСОКИЙ, E=12 КРАЙНЕ НИЗКИЙ) + Embodiment-блок (постура, руки, лицо, движения, голос) — см. Part 5 §5.2 и Part 3 §3.X (Embodiment).
+- **EXAMPLES (5 `<START>` блоков):** ENVIRONMENTAL REACTIVITY + EMBODIMENT FIRST + SPINE CAUSALITY + INFLUENCE BOUNDARY — см. Part 3 §3.3 и §3.4.
+- **ANCHORS — Базовые + FLAW-linked + GHOST-linked:** 3 типа Anchors с T→A→P форматом; GHOST-linked Anchors показывают Price (раскрытие уязвимости, рассеивание внимания) — см. Part 2 §2.X и Part 4 §4.8.
+- **CoT (2 Anchors максимум):** `[ВНУТРЕННИЙ_МОНОЛОГ]` XML-блок с stimulus/analysis/synthesis/resolution — см. Part 6 §6.X (CoT Anchors, лимит 2).
+- **GREETING:** Сцена ритуала → прерывание → реплика → незавершённое действие (манипуляторы не отпускают сервер) — см. Part 7B §7B.2.
+- **Lorebook (5 записей):** Trigger/Content/Depth/Probability — 2 lore-записи (binary_cant, machine_spirit) + 3 GHOST-tier записи (Tier 1/2/3) — см. Part 7B §7B.X (Lorebook).
 
 **Token Budget:** ~1800 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
@@ -509,5 +527,17 @@ GHOST-activation: Активен, если в сцене был триггер (
 | WANT ↔ LIE | WANT совместим с LIE (персонаж не видит противоречия) | ✅ |
 | GHOST Layers | Каждый tier имеет минимум один Anchor-trigger | ✅ |
 | Lorebook | GHOST-факты консистентны с Description | ✅ |
+
+**Annotation:** Карточка Выщербленного демонстрирует:
+- **SYSTEM → Tone Frame + OOC PROTECTION + Format Lock:** Tone «archival, detached. Memory is currency. Loss is permanent.» + OOC-защита (confusion) + двойной Format Lock (Dialogue + Internal `[INTERNAL]`) — см. Part 7A §7A.1.
+- **DESCRIPTION → `<identity>` + `<spine>` + `<ghost_layers>`:** SPINE с инвертированной структурой (WANT=стать цельным vs NEED=принять пустоту) + 3-tier GHOST Layers (архивариус → первое вырезание → счётчик потерь) — см. Part 4 §4.X и §4.11.
+- **DESCRIPTION → `<enneagram>`:** Enneagram 5w4 (страх растворения → 7 в стрессе → 8 в росте) — отвечает на «почему» поведение, дополняет OCEAN — см. Part 5 §5.X (Enneagram).
+- **DESCRIPTION → `<ocean>`:** Moderate values (4K-fallback / pedagogical) с Cross-ref на canonical extreme values в character bible — см. Part 5 §5.1 (extreme vs cautious zone) и `docs/vyshcherblenny_character_bible.md` §OCEAN.
+- **EXAMPLES (4 `<START>` блока):** SPATIAL & ANATOMICAL LOCK + EMBODIMENT FIRST + SHOW NEVER TELL + SPINE CAUSALITY (рука действует сама → потеря фрагмента себя) — см. Part 3 §3.3 и §3.4.
+- **ANCHORS — Базовые + FLAW-linked + Зеркало-linked + Sensory Anchors:** 4 типа Anchors; Sensory Anchors (Тактильный/Обонятельный) — расширение базового T→A→P — см. Part 2 §2.X и Part 4 §4.8.
+- **CoT Anchors (2 максимума):** `[INTERNAL]<processus_analysium>` XML-блок с stimulus/analysis/counter-analysis/synthesis/resolution — расширенный CoT формат — см. Part 6 §6.X.
+- **GREETING:** Сцена (Ошметок Веля) → циклическое действие (Фляга. Крюк. Осколок. ×2) → реплика («Третий раз за час. Привычка. Не моя.») → sensory hook (стена холоднее, чем должна быть) — см. Part 7B §7B.2.
+- **AUTHOR'S NOTE:** Расширенный формат (Фокус + WANT→NEED + GHOST-activation + Слепая зона + Счётчик + Сцена) — см. Part 7A §7A.X (Author's Note).
+- **Lorebook (5 записей) + Проверка консистентности SPINE:** Trigger/Content/Depth/Probability/Cooldown + 7-point SPINE consistency check (GHOST→LIE→FLAW→NEED→WANT) — см. Part 7B §7B.X (Lorebook) и Part 4 §4.9 (SPINE Check).
 
 **Cross-ref:** Подробно о Lorebook → `[ref: part_07b.md]`. CoT Anchors → `[ref: part_06.md]`. GHOST Layers → `[ref: part_04.md §4.11 — GHOST Layers]`.
