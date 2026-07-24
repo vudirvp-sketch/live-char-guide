@@ -9,7 +9,7 @@ migration_status: —
 
 ---
 
-## 7B.1 Structured Inject
+## 7B.1 Структурированная инъекция (Structured Inject)
 
 `data-section: p7b_structured_inject`
 
@@ -38,7 +38,7 @@ migration_status: —
 
 ---
 
-## 7B.2 Greeting Message (первое сообщение)
+## 7B.2 Приветствие — первое сообщение (Greeting Message)
 
 `data-section: p7b_greeting`
 

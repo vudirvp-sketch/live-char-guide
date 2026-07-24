@@ -10,15 +10,13 @@
         "p1_card_overview",
         "p1_structure_overview",
         "p1_core_rules",
-        "p1_token_budget_ref",
-        "p1_pipeline_ref",
         "p1_top3_problems",
         "p1_prebuild_checklist"
       ]
     },
     {
       "file": "part_02.html",
-      "title": "Behavioral Anchors (поведенческие якоря)",
+      "title": "Поведенческие якоря (Behavioral Anchors)",
       "anchors": [
         "p2_basic_anchors",
         "p2_anchor_rules",
@@ -30,7 +28,7 @@
     },
     {
       "file": "part_03.html",
-      "title": "Voice Isolation (изоляция голоса)",
+      "title": "Изоляция голоса (Voice Isolation)",
       "anchors": [
         "p3_voice_isolation",
         "p3_influence_hierarchy",

@@ -92,7 +92,7 @@ Quick-reference для выбора фреймворка под задачу. Н
 
 ---
 
-## 5.3 OCEAN Value Conflicts (перегрузка)
+## 5.3 Перегрузка OCEAN (Value Conflicts)
 
 `data-section: p5_ocean_warning`
 
@@ -238,7 +238,7 @@ OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+
 
 ---
 
-## 5.8 OCEAN×Enneagram Matrix + Persona Synthesis
+## 5.8 OCEAN×Enneagram Matrix + Синтез личности (Persona Synthesis)
 
 `data-section: p5_cross_matrix`
 

@@ -9,7 +9,7 @@ migration_status: —
 
 ---
 
-## 2.1 Behavioral Anchors (поведенческие якоря)
+## 2.1 Поведенческие якоря (Behavioral Anchors)
 
 `data-section: p2_basic_anchors`
 
@@ -92,7 +92,7 @@ migration_status: —
 
 ---
 
-## 2.4 Embodiment (Телесность)
+## 2.4 Телесность (Embodiment)
 
 `data-section: p2_embodiment`
 
@@ -142,7 +142,7 @@ Embodiment Protocol показан выше в VS-EMBED E04 (funnel-stack из 4
 
 ---
 
-## 2.6 Sensory Anchors
+## 2.6 Сенсорные якоря (Sensory Anchors)
 
 `data-section: p2_sensory_anchors`
 

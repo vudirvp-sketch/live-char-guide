@@ -26,11 +26,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
 | Зачем системный подход? | `p1_value_proposition` | §1.1 | Value Prop | Comparison table: Classic vs Systematic approach |
-| Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 4 блока карточки: SP, Description, Examples, Greeting |
+| Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 4 блока карточки: SP, Description, Examples, Greeting. iter 61: §1.5+§1.6 merged as subsection «Token Budget и конвейер сборки» |
 | Структура гайда (TOC) | `p1_structure_overview` | §1.3 | Navigation | Table of Contents (auto-generated) |
 | Core Rules | `p1_core_rules` | §1.4 | Rules | 3 foundational rules of character creation |
-| Token Budget (ссылка) | `p1_token_budget_ref` | §1.5 | Reference | Forward reference to Part 7A |
-| Конвейер сборки (ссылка) | `p1_pipeline_ref` | §1.6 | Reference | Forward reference to Part 7A |
 | Топ-3 критичные ошибки | `p1_top3_problems` | §1.7 | Detailed problems | Подробный разбор 3 ошибок |
 
 ### Part 2: Behavioral Anchors (Якоря) — `docs/canon/part_02.md`

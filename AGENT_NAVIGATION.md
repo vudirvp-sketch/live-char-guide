@@ -465,8 +465,8 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | 9 | `p10_omnis` | `p4_ghost_layers` | `href="#p4_ghost_layers"` | ✅ back-link added in TP-15 |
 | 10 | `p9_additional_problems` | `p1_top3_problems` | `href="#p1_top3_problems"` | ✅ back-link |
 | 11 | `p10_elena` | `p2_anchor_examples` | `href="#p2_anchor_examples"` | ✅ back-link |
-| 12 | `p1_token_budget_ref` | `p7a_token_budget` | `href="#p7a_token_budget"` | ✅ forward ref — canonical content in Part 7A |
-| 13 | `p1_pipeline_ref` | `p7a_assembly_pipeline` | `href="#p7a_assembly_pipeline"` | ✅ forward ref — pipeline in Part 7A |
+| 12 | `p1_card_overview` (Token Budget subsection) | `p7a_token_budget` | `href="#p7a_token_budget"` | ✅ forward ref — canonical content in Part 7A (iter 61: merged as subsection of §1.2) |
+| 13 | `p1_card_overview` (Конвейер сборки subsection) | `p7a_assembly_pipeline` | `href="#p7a_assembly_pipeline"` | ✅ forward ref — pipeline in Part 7A (iter 61: merged as subsection of §1.2) |
 | 14 | `p1_value_proposition` | — | Standalone section | ✅ top-level sibling before p1_card_overview |
 
 ### Validation Checklist

@@ -464,61 +464,29 @@ WANT: Стать цельным — заполнить пустоты внутр
 <section  data-section="p4_spine_check" id="p4_spine_check">
 <h3>Проверка консистентности SPINE</h3>
 
-<p>Цепочка GHOST → LIE → FLAW → NEED → WANT должна быть логичной.</p>
-
-<h4>Пример: Елена</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
-<pre><code>GHOST: Предательство редактора
-  ↓ объясняет
-LIE: "Мне не нужно ничьё одобрение"
-  ↓ защищает от боли
-FLAW: Отталкивает людей сарказмом когда сближается
-  ↓ поведение из LIE
-NEED: Принятие — связь без стены
-  ↑ FLAW мешает
-WANT: Доказать правоту самостоятельно
-  ↑ совместимо с LIE</code></pre>
+<p>После построения SPINE проверьте логичность причинной цепочки по чек-листу ниже.</p>
 
 <h4>Чек-лист проверки SPINE</h4>
 <ul>
-<li>☐ <strong>GHOST → LIE:</strong> Травма объясняет ложную установку</li>
+<li>☐ <strong>GHOST → LIE:</strong> Травма (конкретное событие) объясняет ложную установку</li>
 <li>☐ <strong>LIE → FLAW:</strong> Установка защищает от боли, вызывает поведение</li>
 <li>☐ <strong>FLAW → NEED:</strong> Поведение блокирует истинную потребность</li>
-<li>☐ <strong>NEED ← WANT:</strong> WANT и NEED несовместимы напрямую</li>
+<li>☐ <strong>NEED ← WANT:</strong> WANT и NEED несовместимы напрямую (напряжение)</li>
 <li>☐ <strong>WANT ↔ LIE:</strong> WANT совместим с LIE (персонаж не видит противоречия)</li>
 <li>☐ <strong>GHOST Layers:</strong> Каждый tier имеет минимум один Anchor-trigger</li>
 <li>☐ <strong>Lorebook:</strong> GHOST-факты консистентны с Description</li>
 </ul>
+
+<p>Примените чек-лист к цепочке любого персонажа — элементы Елены разобраны поэлементно выше в §4.2–§4.6, полная цепочка Выщербленного — в §4.7.</p>
 
 </section>
 
 <section  data-section="p4_spine_navigation" id="p4_spine_navigation" data-toc-nav>
 <h3>SPINE: следующие шаги</h3>
 
-<p>Когда все 5 элементов SPINE определены, следующий шаг — валидация через психологические инструменты (Part 5) и интеграция с CoT (Part 6).</p>
+<p>SPINE определён и проверен на консистентность (§4.9). Далее: валидация через OCEAN/Enneagram (Part 5), интеграция с CoT (Part 6), техническая реализация SP + XML (Part 7A), Lorebook (Part 7B), полная карточка (Part 10).</p>
 
-<div class="infographic inf-pipeline">
-<div class="inf-pipeline-step">
-<div class="inf-step-id">01</div>
-<div class="inf-step-label">Валидация</div>
-<div class="inf-step-desc">Part 5 — OCEAN, Enneagram, MBTI: проверка SPINE через психологические инструменты</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">02</div>
-<div class="inf-step-label">CoT Anchors</div>
-<div class="inf-step-desc">Part 6 — CoT персонажа в реальном времени</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">03</div>
-<div class="inf-step-label">Техническая реализация</div>
-<div class="inf-step-desc">Part 7A — System Prompt, CORE DIRECTIVES, XML-теги; Part 7B — Lorebook</div>
-</div>
-<div class="inf-pipeline-step">
-<div class="inf-step-id">04</div>
-<div class="inf-step-label">Полная карточка</div>
-<div class="inf-step-desc">Part 10 — пример собранной карточки со всеми элементами</div>
-</div>
-</div>
+<p>OCEAN и Enneagram валидируют SPINE, не генерируют его — если SPINE противоречит психологическому профилю, перепроверьте каузальную цепь.</p>
 
 </section>
 

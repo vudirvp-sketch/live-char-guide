@@ -238,7 +238,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 
 ---
 
-## 8.12 AP-11: Voice Bleed (переплетение голосов)
+## 8.12 AP-11: Переплетение голосов (Voice Bleed)
 
 `data-section: p8_ap11_voice_bleed`
 

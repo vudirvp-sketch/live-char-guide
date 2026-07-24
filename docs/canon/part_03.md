@@ -9,7 +9,7 @@ migration_status: —
 
 ---
 
-## 3.1 Voice Isolation (изоляция голоса)
+## 3.1 Изоляция голоса (Voice Isolation)
 
 `data-section: p3_voice_isolation`
 
@@ -144,7 +144,7 @@ Example:
 
 ---
 
-## 3.5 Greeting Message
+## 3.5 Приветствие (Greeting Message)
 
 `data-section: p3_greeting_ref`
 
@@ -154,7 +154,7 @@ Example:
 
 ---
 
-## 3.6 Voice Leak (Утечка голоса)
+## 3.6 Утечка голоса (Voice Leak)
 
 `data-section: p3_voice_leak`
 
