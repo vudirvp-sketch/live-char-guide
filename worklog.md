@@ -4,51 +4,63 @@
 
 ---
 
-Task ID: 71
+Task ID: 72
 Agent: main
-Task: iter 71 — Recon + KI#48 (stale v9.1 в master HTML comments) + Progressive disclosure gap closure (p6_cot_bridge).
+Task: iter 72 — Recon + KI#49 (stale section count в AGENT_NAVIGATION.md) + Scenario labels §9.9/§9.10 extension.
 
 Work Log:
-- 1: Repo клонирован. Прочитан STATUS.md (iter 70 COMPLETE, no open KI, проект STABLE), worklog.md (iter 70 detailed), AGENT_NAVIGATION.md (iter 71+ roadmap). Понятен контекст — приоритет iter 71: Recon → если чисто, Progressive disclosure метки.
-- 2: **Recon — все validation gates:**
-  - `pnpm install` (через `npm install -g pnpm` т.к. pnpm не был в PATH) → SUCCESS.
+- 1: Repo клонирован. Прочитан STATUS.md (iter 71 COMPLETE, no open KI, проект STABLE), worklog.md (iter 71 detailed), AGENT_NAVIGATION.md (iter 72+ roadmap). Понятен контекст — приоритет iter 72: Recon → если чисто, P3 Annotation blocks §10.2-10.4 (LOW).
+- 2: **Recon — все validation gates PASS:**
+  - `pnpm install` → SUCCESS (pnpm установлен через `npm install -g pnpm`).
   - `version-sync.mjs` → ✅ All versions 9.2.0 in sync.
   - `check_english.py` → 24 English leaks (baseline unchanged ✅).
   - `validate_terms.py` → ✅ All terminology valid.
   - `check_duplicates.py` → ✅ no disallowed duplicates (2 intentional).
   - `audit_canon_master_sync.py` → 96/96 PASS.
   - `audit_vs_embeds.py` → ✅ no regressions.
-  - `audit_canon_master_drift.py` → 170 paragraph drifts / 131 actionable (baseline unchanged ✅).
+  - `audit_canon_master_drift.py` → 170/131 baseline unchanged ✅.
   - `validate:master` → ✅ 12/12 checks PASS.
   - `pnpm run build` → SUCCESS, hash `4074bac5` (unchanged ✅).
 - 3: **Recon — поиск новых багов:**
-  - `rg "9\.1\.0|v9\.1\b"` по src/, docs/ → найдены 6 master HTML files с stale `v9.1 Master HTML` в top-of-file comment (line 3): part_01, part_02, part_05, part_06, part_07a, part_10. Это пропущенные в iter 70 source-side refs (тогда обновили `src/shell/styles.css` header, но не master HTML comments). **→ KI#48 (NEW).**
-  - Также найден 1 stale doc reference: `docs/architecture.md:59` говорил "95 sections in v9.1" — outdated (сейчас 96 sections в v9.2). **→ KI#48 (docs follow-up).**
-  - Historical references в `visual-system/PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/character_bible.md` (DELETED in v9.1) — НЕ трогать, это исторические записи.
-- 4: **Per user directive "Сначала документируй в STATUS.md как Known Issue, потом фиксий":** KI#48 задокументирован в STATUS.md перед фиксом.
-- 5: **KI#48 fix (6 master HTML files):** `Live Character Guide v9.1 Master HTML` → `Live Character Guide v9.2 Master HTML` в part_01.html, part_02.html, part_05.html, part_06.html, part_07a.html, part_10.html (line 3 в top-of-file comment). Verified: `rg "v9\.1 Master HTML" src/master/` → 0 hits ✅.
-- 6: **KI#48 fix (docs/architecture.md:59):** "Master guide HTML files (95 sections in v9.1)" → "Master guide HTML files (96 sections in v9.2)".
-- 7: **Progressive disclosure gap closure:** Проверено покрытие `<!-- difficulty: ... -->` маркеров — 95/96 секций покрыты. Единственная без маркера — `p6_cot_bridge` (intro секция Part 6). Добавлен `<!-- difficulty: BASIC -->` (соответствует паттерну других intro-секций: p1_value_proposition, p2_basic_anchors, p4_spine_overview, p5_ocean_basics — все BASIC). Теперь 96/96 секций покрыты.
-- 8: **Build + validation gates после фиксов:**
-  - `pnpm run build` → SUCCESS, version 9.2.0, hash `4074bac5` (unchanged — hash computed only from `src/shell/index.html`, master HTML comment edits не влияют на hash ✅).
+  - `rg "9\.1\.0|v9\.1\b"` по src/, docs/ → только historical references (changelog, deletion notes, anchor-redirect history) — by design, не трогать.
+  - Section count consistency check: `grep -cE '<section[^>]*data-section' src/master/*.html` = 96. `AGENT_NAVIGATION.md:11` говорил "97 секций" — STALE. iter 62 commit message правильно говорил "97→96 sections" (MBTI stub merge), но AGENT_NAVIGATION.md остался "97" (off-by-one). **→ KI#49 (NEW).**
+  - `check_syntax_mix.py` → 246 false positives (BEM class names `__text__` интерпретируются как Markdown bold). Не new bug — pre-existing с iter 4, не в validation gates.
+- 4: **Per user directive "Сначала документируй в STATUS.md как Known Issue, потом фиксий":** KI#49 задокументирован в STATUS.md перед фиксом.
+- 5: **KI#49 fix:** `AGENT_NAVIGATION.md:11` — "97 секций" → "96 секций". Verified: `rg "97 секц" AGENT_NAVIGATION.md` → 0 hits ✅. `rg "96 секц" AGENT_NAVIGATION.md` → 3 hits (lines 3, 11, 426 — все корректны).
+- 6: **Discovery: P3 tasks iter 71 roadmap STALE.** iter 71 STATUS.md roadmap упоминал "P3: Annotation blocks §10.2-10.4" и "P3: Расширение scenario-меток" как pending. Проверка показала:
+  - **Annotation blocks §10.2-10.4 — DONE в iter 57** (commit 5a23ea7). Все 3 карточки (Walter, Omnis, Vysherblenny) имеют `<strong>Annotation:</strong>` блок с `<ul>` списком Demonstrates-ссылок.
+  - **Scenario labels — DONE в iter 55/57** для §9.3/§9.5/§9.6/§9.7/§9.11. iter 55 создал паттерн (§9.3 basic_checklist), iter 57 расширил до §9.5/§9.6/§9.7/§9.11.
+- 7: **Scenario labels extension §9.9/§9.10** (extends iter 55/57 pattern to remaining checklists in Part 9):
+  - §9.9 (p9_test_requirements): добавлен `<strong>Сценарий:</strong>` маркер — "после тестирования по §9.7 — количественная проверка: минимум 6 сценариев + 6 метрик успеха" + cross-refs к §9.7, §9.8, §9.5.
+  - §9.10 (p9_12b_issues): добавлен `<strong>Сценарий:</strong>` маркер — "12B модели — 12B-специфичные симптомы с фиксом" + cross-refs к §9.5, §9.6, Part 7A.
+  - Остальные 4 секции Part 9 (§9.1 quality_scale, §9.2 one_change_rule, §9.4 additional_problems, §9.8 element_scenario_map) — reference/overview, не чек-листы, scenario-метки не нужны.
+  - Canon sync: `docs/canon/part_09.md` обновлён соответственно (§9.9 + §9.10 — те же scenario labels в canon формате с `[ref:]` маркерами).
+- 8: **Build + validation gates после изменений:**
+  - `pnpm run build` → SUCCESS, version 9.2.0, hash `4074bac5` (unchanged — content additions в master HTML не влияют на hash ✅).
   - `validate:master` → ✅ 12/12 checks PASS.
   - `audit_canon_master_sync.py` → 96/96 PASS.
-  - Root fallbacks `parts/part_01.html`, `parts/part_02.html`, `parts/part_05.html`, `parts/part_06.html`, `parts/part_07a.html`, `parts/part_10.html` regenerated via `pnpm run build` — отражают обе правки (v9.2 в comment + difficulty marker в part_06).
-- 9: **Docs cleanup:** STATUS.md rewritten (iter 71 entry, KI#48 closed, iter 72+ roadmap — removed "Progressive disclosure метки" т.к. выполнено в iter 71, добавлен invariant "Version sync iter 71+: v9.1 Master HTML comments устранены"). worklog.md — iter 71 detailed, iter 70 compressed to single line. AGENT_NAVIGATION.md updated (line 3 + line 510 hint).
-- 10: **Final verification:** `rg "v9\.1 Master HTML"` → 0 hits ✅. `rg "9\.1\.0"` в src/ и docs/ → 0 hits ✅. Все validation gates PASS.
+  - `audit_canon_master_drift.py` → 170/131 baseline unchanged (canon и master обновлены consistently, drift не вырос ✅).
+  - `version-sync.mjs` → ✅ sync.
+  - `check_english.py` → 24 leaks (baseline ✅).
+  - `validate_terms.py` → ✅ valid.
+  - `check_duplicates.py` → ✅ no disallowed.
+  - `audit_vs_embeds.py` → ✅ no regressions.
+  - Root fallbacks `parts/part_09.html` regenerated via `pnpm run build`.
+- 9: **Docs cleanup:** STATUS.md rewritten (iter 72 entry, KI#49 closed, iter 73+ roadmap — removed "Annotation blocks §10.2-10.4" и "Расширение scenario-меток" т.к. выполнено, добавлены invariants "Scenario labels" и "Annotation blocks" с указанием iter 57/72). worklog.md — iter 72 detailed, iter 71 compressed to single line.
 
 Stage Summary:
-- **iter 71 COMPLETE.** No open KI. Проект STABLE.
-- **Modified source files:** `src/master/part_01.html`, `src/master/part_02.html`, `src/master/part_05.html`, `src/master/part_06.html`, `src/master/part_07a.html`, `src/master/part_10.html` (KI#48: v9.1 → v9.2 в top comment; p6_cot_bridge: +difficulty BASIC).
-- **Modified docs:** `docs/architecture.md` (KI#48: 95 sections v9.1 → 96 sections v9.2).
-- **Modified meta:** `STATUS.md`, `AGENT_NAVIGATION.md`, `worklog.md`.
-- **Regenerated by build:** `parts/part_01.html`, `parts/part_02.html`, `parts/part_05.html`, `parts/part_06.html`, `parts/part_07a.html`, `parts/part_10.html` (root fallbacks).
+- **iter 72 COMPLETE.** No open KI. Проект STABLE.
+- **Modified source files:** `src/master/part_09.html` (scenario labels §9.9 + §9.10).
+- **Modified canon:** `docs/canon/part_09.md` (scenario labels §9.9 + §9.10, sync с master).
+- **Modified meta:** `AGENT_NAVIGATION.md` (KI#49: 97→96 секций), `STATUS.md`, `worklog.md`.
+- **Regenerated by build:** `parts/part_09.html` (root fallback).
 - **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks baseline ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, validate:master 12/12 ✅, drift 170/131 baseline ✅, build hash `4074bac5` (unchanged).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 71**: KI#48 (6 master HTML `v9.1 Master HTML` → `v9.2` top comment) + Progressive disclosure gap closure (p6_cot_bridge — теперь 96/96 секций покрыты).
 - **iter 70**: Docs version bump (5 stale docs 9.1.0 → 9.2.0) + Recon (KI#46 `src/master/VERSION` orphan, KI#47 `src/shell/styles.css` header).
 - **iter 69**: KI#45 (version bump 9.1.0 → 9.2.0 in 10 source files + build manifest verified).
 - **iter 68**: Recon + KI#44 (audit_vs_embeds.py path bug) + cleanup _DELETED_FILES.txt.
@@ -60,9 +72,8 @@ Stage Summary:
 - **iter 62**: R1 repetitions cleanup §2.2/§5.1→§5.6 + §5.5 MBTI stub merge.
 - **iter 61**: KI#40 closed (canon→master sync). 11 Cat B headings unified.
 - **iter 60**: Языковая политика revision + canon dedup.
-- **iter 58**: P2+P3 metadata enrichment. Glossary consolidation.
-- **iter 57**: Annotation blocks §10.2-10.4 + scenario-метки.
-- **iter 55-56**: KI#37/38/39 CLOSED + Decision tree.
+- **iter 57**: Annotation blocks §10.2-10.4 + scenario labels §9.5/§9.6/§9.7/§9.11 (pattern extension).
+- **iter 55-56**: KI#37/38/39 CLOSED + Decision tree + scenario label pattern (§9.3).
 - **iter 50-55**: KI#34-39 CLOSED + anchor nav + drift.
 - **iter 44-47**: KI#33 CLOSED — canon→master sync (57/57).
 - **iter 35-43**: Canon audit P0-P3 + OCEAN/MBTI labeling.
