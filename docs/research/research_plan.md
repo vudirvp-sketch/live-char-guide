@@ -13,12 +13,12 @@
 | # | Результат | KI |
 |---|-----------|----|
 | V1 | FALSE — canon полный, 740 строк, все §7A.1–§7A.13 | — |
-| V2 | CONFIRMED — Омнис Description Embodiment «Голос» | KI#51 |
-| V3 | CONFIRMED — «Какая из историй?» нефизический Price | KI#52 |
+| V2 | CONFIRMED → FIXED iter 75 — Embodiment «Голос:» → «Звук:» (Voice Isolation rule) | KI#51 CLOSED |
+| V3 | CONFIRMED → FIXED iter 75 — заменено на «Дрожь в руках, взгляд теряет фокус» | KI#52 CLOSED |
 | V4 | FALSE — changelog только в HTML-комментариях | — |
-| V5 | CONFIRMED — docs/canon/ видимые ссылки в part_01 | KI#54 |
+| V5 | CONFIRMED → FIXED iter 75 — заменены на <a href> ссылки на существующие секции гайда | KI#54 CLOSED |
 | V6 | FALSE — тонального конфликта нет | — |
-| V7 | CONFIRMED — N>70 дважды, заголовок один | KI#55 |
+| V7 | CONFIRMED → FIXED iter 75 — заголовки разделены на подтипы «тревожный»/«агрессивный» | KI#55 CLOSED |
 | V8 | Borderline — перцептивный фильтр в GHOST примере | Decision |
 | V9 | CONFIRMED — Matrix без disclaimer | Decision |
 
@@ -30,46 +30,37 @@
 
 **Принцип:** одна правка = одна итерация. После каждой — validation gates + commit.
 
-### iter 75 — Устранение мёртвых ссылок (P1.1)
+### iter 75 — KI#54, KI#55, KI#51, KI#52 ✅ COMPLETED
 
-- Если V5 подтверждено: убрать из `src/master/*.html` все `docs/canon/` ссылки.
-- Заменить на онлайн-эквиваленты или убрать совсем.
-- Validation: `pnpm run build` + `pnpm run qa`.
+Все 4 открытых KI закрыты в одной итерации (low effort каждый):
 
-### iter 76 — Fix конфликт типов стресса (P1.3)
+- **KI#54 CLOSED:** docs/canon/ мёртвые ссылки → заменены на `<a href>` ссылки на существующие секции гайда (#p1_prebuild_checklist, #p10_elena, #p10_walter, #p10_omnis, #p10_vysherblenny).
+- **KI#55 CLOSED:** N>70 дважды → заголовки разделены на подтипы «N > 70 / тревожный тип» и «N > 70 / агрессивный тип».
+- **KI#51 CLOSED:** Омнис-Зета Embodiment «Голос:» → «Звук:» (физические звуки машины), голос перенесён в Examples по Voice Isolation rule.
+- **KI#52 CLOSED:** Price «Какая из историй?» → «Дрожь в руках, взгляд теряет фокус» (физический Price). Sync: canon + character_bible.
 
-- Если V7 подтверждено: разделить условие в таблице типов стресса.
-- `N>70, E>60 → Взрывной` и `N>70, E<40 → Тревожно-реактивный`.
-- Sync canon → master.
-
-### iter 77 — Уточнение CoT Tier 0 (P1.7)
+### iter 76 — Уточнение CoT Tier 0 (P1.7)
 
 - Добавить явное примечание: «Tier 0 = нет отдельного CoT-блока, Embodiment Protocol действует всегда. CoT — дополнительный внутренний монолог сверх Embodiment».
 - Локация: §6.2 или §6.3 (canon + master).
 
-### iter 78 — Уточнение OCEAN-in-Description (P1.8)
+### iter 77 — Уточнение OCEAN-in-Description (P1.8)
 
 - Переформулировать принцип #3: «Психология (SPINE, OCEAN, Enneagram) размещается в блоке Description — компактно, в тегах, не нарративом. Никогда в System Prompt».
 - Добавить пример верной/неверной формулировки OCEAN.
 - Локация: §1.4 (принципы) + §5.1 (OCEAN basics).
 
-### iter 79 — Уточнение Anchors placement (P1.9)
+### iter 78 — Уточнение Anchors placement (P1.9)
 
 - Чётко определить: «Anchors = отдельный блок внутри Examples-зоны карточки (после `<START>`-блоков, до Greeting)».
 - Локация: Card Anatomy (Part 01) + Part 07A (Assembly Pipeline).
 
-### iter 80 — Уточнение Voice Isolation (P1.5)
+### iter 79 — Уточнение Voice Isolation (P1.5)
 
-- Если V2 подтверждено: уточнить правило «Лингвистический паттерн (слова, синтаксис) = только Examples. Физическая характеристика (тембр, хрип, механический гул) = Description/Embodiment».
+- Уточнить правило: «Лингвистический паттерн (слова, синтаксис) = только Examples. Физическая характеристика (тембр, хрип, механический гул) = Description/Embodiment».
 - Локация: §3.1 (Voice Isolation) + §1.4 (принципы).
 
-### iter 81 — Fix Price в примере Anchors (P1.6)
-
-- Если V3 подтверждено: заменить «Какая из историй?» на физический Price.
-- Пример: «сжимает виски, голос дрожит».
-- Локация: §2.X (примеры Anchors).
-
-### iter 82 — Удаление/обоснование OCEAN×Enneagram Matrix (P1.2)
+### iter 80 — Удаление/обоснование OCEAN×Enneagram Matrix (P1.2)
 
 - Если V9 подтверждено: либо убрать таблицу (§5.7), либо добавить дисклеймер.
 - Решение принять после обсуждения с автором.
