@@ -117,6 +117,8 @@
       "spine_connection": "Высокая N — прямой путь к GHOST (травма). Низкая N — защита от FLAW (устойчивость).",
       "stress_types": {
         "description": "Neuroticism определяет не только уровень тревожности, но и тип стрессовой реакции → конкретный FLAW и Behavioral Anchor",
+        "chain_formula": "Trigger → Stress Type → FLAW → Anchor (T→A→P)",
+        "chain_rule": "Каждый тип стресса требует минимум 1 trigger→FLAW→Anchor chain (iter 64+ invariant)",
         "types": [
           {
             "id": "anxious_reactive",
@@ -124,7 +126,9 @@
             "trigger": "N > 60 (cautious) or N > 70 (extreme)",
             "behavior": "Внутренняя тревога → defensive behavior, overthinking",
             "spine_pattern": "FLAW: defensive hostility, сарказм",
-            "example": "Елена (N=68)"
+            "example": "Елена (N=68)",
+            "trigger_categories": ["Близость/забота", "Неопределённость", "Потеря контроля"],
+            "anchor_template": "Когда [забота/неопределённость] → defensive сарказм → голос тише, вздрагивает"
           },
           {
             "id": "explosive_hostile",
@@ -132,7 +136,9 @@
             "trigger": "N > 70 (extreme) + moderate/high E",
             "behavior": "Стресс → anger → outward aggression",
             "spine_pattern": "FLAW: lashing out, verbal aggression",
-            "example": "Конфликтный персонаж (N=85, E=70)"
+            "example": "Конфликтный персонаж (N=85, E=70)",
+            "trigger_categories": ["Угроза авторитету", "Неуважение", "Физическая провокация"],
+            "anchor_template": "Когда [неуважение/провокация] → повышает голос → краснеет, сжимает кулаки"
           },
           {
             "id": "withdrawn_avoidant",
@@ -140,7 +146,9 @@
             "trigger": "N > 60 (cautious) or N > 70 (extreme) + low E",
             "behavior": "Стресс → withdrawal, dissociation, shutdown",
             "spine_pattern": "FLAW: isolation, emotional numbness",
-            "example": "Интроверт (N=72, E=25)"
+            "example": "Интроверт (N=72, E=25)",
+            "trigger_categories": ["Эмоциональная близость", "Конфронтация", "Перегруз стимулами"],
+            "anchor_template": "Когда [близость/конфронтация] → замолкает, отводит взгляд → дыхание поверхностное"
           },
           {
             "id": "stable_resilient",
@@ -148,7 +156,9 @@
             "trigger": "N < 30 (extreme low)",
             "behavior": "GHOST-resistant, FLAW формируется через другие измерения",
             "spine_pattern": "FLAW через A/C/O/E, не через N",
-            "example": "Стоический воин (N=15)"
+            "example": "Стоический воин (N=15)",
+            "trigger_categories": ["(FLAW не N-driven) — выводится через Low A / Low C / High O / Low E"],
+            "anchor_template": "Определяется через другое экстремальное измерение (см. §5.1 OCEAN→SPINE validation)"
           }
         ]
       }

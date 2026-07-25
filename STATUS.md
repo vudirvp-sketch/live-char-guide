@@ -9,15 +9,12 @@
 
 ## Текущее состояние
 
-**iter 63 — A59-1 (Neuroticism→stress type) + A59-3 (Personality sub-budget).** Выполнено:
+**iter 64 — A59-2 (Trigger→Stress→FLAW chain) + drift v1.3.** Выполнено:
 
-- **A59-1: Neuroticism→Stress Type taxonomy (§5.1):** Добавлена subsection «Тип стресса (Neuroticism → Stress Type)» после таблицы 5 измерений OCEAN. 4 типа: тревожно-реактивный (N>70), взрывной-враждебный (N>70+E↑), избегающ-замкнутый (N>60+E↓), стабильно-устойчивый (N<30). Каждый тип → конкретный SPINE-паттерн (FLAW) + пример персонажа.
-- **A59-1: §5.2 Elena profile:** N=68 row обновлен — добавлен «Тип стресса: тревожно-реактивный» и объяснение связи с FLAW. RULE paragraph обновлен — добавлено объяснение, почему FLAW = defensive сарказм.
-- **A59-1: §5.5 OCEAN→SPINE validation:** High Neuroticism row обновлен — ссылка на §5.1 stress types вместо generic «тревога, гнев, избегание». Признак противоречия расширен: проверка E и A при несогласованности типа стресса.
-- **A59-1: ocean.json:** Добавлен `stress_types` объект в N trait (4 типа с id, label, trigger, behavior, spine_pattern, example).
-- **A59-3: Personality Sub-Budget (§7A.12):** Добавлена subsection «Personality Sub-Budget (внутри Description)» после RULE paragraph. Таблица: SPINE core (80/150/350), OCEAN profile (30/50/80), Enneagram type (20/40/60), MBTI optional (—/20/40). RULE: personality sub-budgets ≤ Description budget. RECOMMENDATION: 4K = SPINE core + OCEAN numbers, 8K+ = Enneagram, 16K+ = все три.
-- **A59-3: character_schema.json:** Добавлен `personality_sub_budgets` объект в `token_budgets` (4 sub_blocks с min/standard/max/priority/notes).
-- **Canon→master HTML sync:** Все изменения synced в `src/master/part_05.html` + `parts/part_05.html` + `src/master/part_07a.html` + `parts/part_07a.html`.
+- **A59-2: Trigger → Stress Type → FLAW chain (§5.1 canon + master HTML):** Добавлена subsection «Trigger → Stress Type → FLAW chain» после таблицы stress types. Формализует 4-этапную цепочку: Trigger (§2.1) → Stress Type (таблица выше) → FLAW (§4.4) → Anchor T→A→P (§4.8). Канонический пример Елена (anxious-reactive) с поэтапной таблицей. RULE: каждый тип стресса требует минимум 1 trigger→FLAW→Anchor chain. RECOMMENDATION: 2–3 категории триггеров на тип. Таблица «Категории триггеров по типу стресса» с примерами Anchor для всех 4 типов.
+- **A59-2: ocean.json:** В `stress_types` добавлены `chain_formula`, `chain_rule`. В каждый из 4 типов добавлены `trigger_categories` (массив) и `anchor_template` (строка).
+- **A59-2: Canon→master HTML sync:** Все изменения synced в `src/master/part_05.html` + `parts/part_05.html` (H3 + 2 таблицы + RULE/RECOMMENDATION callouts).
+- **drift v1.3 (audit_canon_master_drift.py):** Добавлен `--actionable-only` flag — подавляет EXPECTED категории (vs_embed_ref, cross_ref, callout_label), оставляет только ACTIONABLE (plain_text, no_master_match) + все structural signals (canon-only sections, master-only sections, heading mismatches). В SUMMARY добавлена строка «Actionable drifts (plain_text + no_master_match, iter 64+): N». Категории в summary помечены `[actionable]` / `[expected]`. JSON report обновлён до version 1.3 с полями `expected_drift_categories`, `actionable_drift_categories`, `actionable_drift_count`, `actionable_only_mode`.
 
 **Ключевой принцип iter 60+:** Гайд — единый последовательный документ. Читатель идёт сверху вниз. Если концепция объяснена выше — не повторять. Просто использовать.
 
@@ -27,7 +24,7 @@ Validation gates:
 - `check_duplicates.py` → ✅ no disallowed duplicates.
 - `audit_canon_master_sync.py` → 96/96 PASS (regression test unchanged).
 - `build-unified.mjs` → 96 sections, 0 errors.
-- `audit_canon_master_drift.py` → 15 heading mismatches (pre-existing, informational).
+- `audit_canon_master_drift.py` → 170 paragraph drifts total (131 actionable, 39 expected). v1.3 features: `--actionable-only`, JSON v1.3.
 
 ---
 
@@ -54,15 +51,16 @@ Validation gates:
 - **OCEAN labeling (iter 40+):** extreme = `<30` or `>70`; cautious = `30–40` / `60–70`.
 - **Neuroticism stress types (iter 63+ invariant):** High N → 3 stress types (anxious-reactive / explosive-hostile / withdrawn-avoidant), Low N → stable-resilient. Each → specific SPINE FLAW pattern.
 - **Personality sub-budget (iter 63+ invariant):** Description budget splits into SPINE core (priority) + OCEAN + Enneagram + MBTI (optional). 4K = SPINE + OCEAN numbers only.
+- **Trigger→Stress→FLAW chain (iter 64+ invariant):** Каждый тип стресса требует минимум 1 trigger→FLAW→Anchor chain. Trigger categories: близость, конфликт, неопределённость, провал. Без explicit trigger тип стресса — абстракция.
+- **drift v1.3 (iter 64+ invariant):** `audit_canon_master_drift.py` поддерживает `--actionable-only` (подавляет EXPECTED категории). JSON report version 1.3.
 
 ---
 
-## iter 64+ Roadmap
+## iter 65+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 64** | A59-2 + P2-remaining + drift v1.3 | MEDIUM |
-| **iter 65** | A59-4 + A59-6 (optional) | LOW |
+| **iter 65** | P2-remaining (R1 repetitions cleanup) + A59-4 + A59-6 (optional) | MEDIUM |
 | **deferred** | Prose mentions Cat B in master HTML: invert «English (Russian)» → «Russian (English)» for full consistency with language policy iter 60 | LOW |
 
 ---

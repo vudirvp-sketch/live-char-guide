@@ -602,6 +602,13 @@ DRIFT_CATEGORIES = (
     "plain_text",
 )
 
+# iter 64+ (drift v1.3): expected drift categories — filtered out by --actionable-only.
+# These are drifts that are EXPECTED by design (VS-EMBEDs replace text, cross-refs are
+# structural pointers, callout labels are intentional). The remaining categories
+# (plain_text, no_master_match) MAY need investigation.
+EXPECTED_DRIFT_CATEGORIES = frozenset({"vs_embed_ref", "cross_ref", "callout_label"})
+ACTIONABLE_DRIFT_CATEGORIES = frozenset({"plain_text", "no_master_match"})
+
 
 def categorize_paragraph_drift(canon_text_preview: str, master_length: int) -> str:
     """Classify a paragraph drift into a category (iter 53+).
@@ -792,11 +799,20 @@ def compute_file_drift(canon_name: str) -> FileDrift:
 # Reporting
 # ---------------------------------------------------------------------------
 
-def print_console_report(drifts: list[FileDrift]) -> None:
-    """Print human-readable drift report to console."""
+def print_console_report(drifts: list[FileDrift], actionable_only: bool = False) -> None:
+    """Print human-readable drift report to console.
+
+    iter 64+ (drift v1.3): when `actionable_only=True`, suppress paragraph drifts
+    in EXPECTED_DRIFT_CATEGORIES (vs_embed_ref, cross_ref, callout_label) — these
+    are drifts that are EXPECTED by design. Keep plain_text + no_master_match
+    (may need investigation) plus all structural signals (canon-only sections,
+    master-only sections, heading mismatches).
+    """
     print("=" * 78)
     print("audit_canon_master_drift.py — general-purpose canon ↔ master drift detector")
     print("Informational report (iter 48+ tool). Exit 0 always.")
+    if actionable_only:
+        print("Mode: --actionable-only (suppressing expected drifts: vs_embed_ref, cross_ref, callout_label)")
     print("=" * 78)
     print()
 
@@ -806,6 +822,7 @@ def print_console_report(drifts: list[FileDrift]) -> None:
     total_content_hash_diff = 0
     total_content_hash_match = 0
     total_paragraph_drift = 0
+    total_actionable_drift = 0  # iter 64+: plain_text + no_master_match count
     category_counts: dict[str, int] = {}  # iter 53+: drift category breakdown
 
     for d in drifts:
@@ -866,20 +883,45 @@ def print_console_report(drifts: list[FileDrift]) -> None:
             print(f"  [OK] {d.content_hash_matches} section(s) with matching content hash")
 
         if d.paragraph_drifts:
-            print(f"  [INFO] {len(d.paragraph_drifts)} paragraph drift(s) below Jaccard {PARAGRAPH_DRIFT_THRESHOLD} (iter 52+, informational):")
-            for pd in d.paragraph_drifts[:MAX_PARAGRAPH_DISPLAY]:
-                print(f"    - id={pd.section_id!r} sim={pd.best_similarity} category={pd.category}")
-                print(f"        canon:   {pd.canon_text_preview!r} (len={pd.canon_length})")
-                if pd.best_master_text_preview:
-                    print(f"        master:  {pd.best_master_text_preview!r} (len={pd.master_length})")
-                else:
-                    print(f"        master:  <no candidate paragraph found>")
-            if len(d.paragraph_drifts) > MAX_PARAGRAPH_DISPLAY:
-                print(f"    ... and {len(d.paragraph_drifts) - MAX_PARAGRAPH_DISPLAY} more")
-            total_paragraph_drift += len(d.paragraph_drifts)
-            # Accumulate category counts across all files.
+            # iter 64+ (drift v1.3): apply --actionable-only filter.
+            visible_drifts = d.paragraph_drifts
+            if actionable_only:
+                visible_drifts = [
+                    pd for pd in d.paragraph_drifts
+                    if pd.category in ACTIONABLE_DRIFT_CATEGORIES
+                ]
+            # Accumulate category counts across all files (always full set).
             for pd in d.paragraph_drifts:
                 category_counts[pd.category] = category_counts.get(pd.category, 0) + 1
+            total_paragraph_drift += len(d.paragraph_drifts)
+            # Track actionable total (subset of total).
+            actionable_in_file = sum(
+                1 for pd in d.paragraph_drifts
+                if pd.category in ACTIONABLE_DRIFT_CATEGORIES
+            )
+            total_actionable_drift += actionable_in_file
+
+            # Only print per-file paragraph drift block if there's something to show.
+            # In actionable_only mode: skip block entirely if no actionable drifts.
+            should_print_block = (
+                visible_drifts
+                or (not actionable_only and d.paragraph_drifts)
+            )
+            if should_print_block:
+                if actionable_only:
+                    print(f"  [INFO] {len(visible_drifts)} actionable paragraph drift(s) "
+                          f"(plain_text + no_master_match, of {len(d.paragraph_drifts)} total):")
+                else:
+                    print(f"  [INFO] {len(d.paragraph_drifts)} paragraph drift(s) below Jaccard {PARAGRAPH_DRIFT_THRESHOLD} (iter 52+, informational):")
+                for pd in visible_drifts[:MAX_PARAGRAPH_DISPLAY]:
+                    print(f"    - id={pd.section_id!r} sim={pd.best_similarity} category={pd.category}")
+                    print(f"        canon:   {pd.canon_text_preview!r} (len={pd.canon_length})")
+                    if pd.best_master_text_preview:
+                        print(f"        master:  {pd.best_master_text_preview!r} (len={pd.master_length})")
+                    else:
+                        print(f"        master:  <no candidate paragraph found>")
+                if len(visible_drifts) > MAX_PARAGRAPH_DISPLAY:
+                    print(f"    ... and {len(visible_drifts) - MAX_PARAGRAPH_DISPLAY} more")
 
         total_content_hash_match += d.content_hash_matches
         print()
@@ -894,36 +936,55 @@ def print_console_report(drifts: list[FileDrift]) -> None:
     print(f"  Content hash diffs (informational): {total_content_hash_diff}")
     print(f"  Content hash matches (perfect sync): {total_content_hash_match}")
     print(f"  Paragraph drifts (iter 52+, informational): {total_paragraph_drift}")
+    print(f"  Actionable drifts (plain_text + no_master_match, iter 64+): {total_actionable_drift}")
     if category_counts:
         # Show category breakdown ordered by DRIFT_CATEGORIES definition order.
+        # iter 64+: tag actionable categories (plain_text, no_master_match).
         for cat in DRIFT_CATEGORIES:
             if cat in category_counts:
-                print(f"      - {cat:<18} {category_counts[cat]}")
+                tag = " [actionable]" if cat in ACTIONABLE_DRIFT_CATEGORIES else " [expected]"
+                print(f"      - {cat:<18} {category_counts[cat]}{tag}")
     print()
     print("NOTE: This is an informational tool. Content hash diffs and paragraph")
     print("      drifts are EXPECTED (master has VS-EMBEDs, expanded HTML; canon has")
     print("      [ref:...] markers, markdown). Canon-only and master-only sections")
     print("      are the actionable signals.")
+    if actionable_only:
+        print("      Use --actionable-only to focus on plain_text + no_master_match drifts")
+        print("      that may need investigation. See `--help` for full options.")
+    else:
+        print("      Run with --actionable-only to suppress expected drifts (iter 64+).")
     print("      See STATUS.md for documentation of known drift findings.")
 
 
-def build_json_report(drifts: list[FileDrift]) -> dict:
-    """Build a JSON-serializable report."""
+def build_json_report(drifts: list[FileDrift], actionable_only: bool = False) -> dict:
+    """Build a JSON-serializable report.
+
+    iter 64+ (drift v1.3): report includes `actionable_only` flag and
+    `expected_drift_categories` / `actionable_drift_categories` metadata.
+    """
     # Compute category breakdown across all files (iter 53+).
     category_counts: dict[str, int] = {cat: 0 for cat in DRIFT_CATEGORIES}
+    actionable_count = 0
     for d in drifts:
         for pd in d.paragraph_drifts:
             # Defensive: unknown categories are counted under "plain_text".
             cat = pd.category if pd.category in category_counts else "plain_text"
             category_counts[cat] += 1
+            if cat in ACTIONABLE_DRIFT_CATEGORIES:
+                actionable_count += 1
     return {
         "tool": "audit_canon_master_drift.py",
-        "version": "1.2",  # iter 53: drift categorization added
-        "iter": "48+ (paragraph drift: iter 52+, categories: iter 53+)",
+        "version": "1.3",  # iter 64: --actionable-only flag + actionable/expected category split
+        "iter": "48+ (paragraph drift: iter 52+, categories: iter 53+, actionable filter: iter 64+)",
         "paragraph_drift_threshold": PARAGRAPH_DRIFT_THRESHOLD,
         "min_paragraph_length": MIN_PARAGRAPH_LENGTH,
         "drift_categories": list(DRIFT_CATEGORIES),
+        "expected_drift_categories": sorted(EXPECTED_DRIFT_CATEGORIES),
+        "actionable_drift_categories": sorted(ACTIONABLE_DRIFT_CATEGORIES),
         "paragraph_drift_category_counts": category_counts,
+        "actionable_drift_count": actionable_count,  # iter 64+: subset of total
+        "actionable_only_mode": actionable_only,
         "files_scanned": len(drifts),
         "drifts": [asdict(d) for d in drifts],
     }
@@ -959,6 +1020,17 @@ def main() -> int:
         default=PARAGRAPH_DRIFT_THRESHOLD,
         help=f"Jaccard similarity threshold for paragraph drift (default: {PARAGRAPH_DRIFT_THRESHOLD}).",
     )
+    parser.add_argument(
+        "--actionable-only",
+        action="store_true",
+        help=(
+            "iter 64+ (drift v1.3): suppress paragraph drifts in EXPECTED categories "
+            "(vs_embed_ref, cross_ref, callout_label) — keep only plain_text + "
+            "no_master_match (which may need investigation). Structural signals "
+            "(canon-only sections, master-only sections, heading mismatches) are "
+            "always shown."
+        ),
+    )
     args = parser.parse_args()
 
     if args.no_paragraphs:
@@ -970,13 +1042,17 @@ def main() -> int:
     drifts = [compute_file_drift(name) for name in CANON_FILES]
 
     if not args.quiet:
-        print_console_report(drifts)
+        print_console_report(drifts, actionable_only=args.actionable_only)
 
     if args.json:
         out_path = Path(args.json)
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(
-            json.dumps(build_json_report(drifts), ensure_ascii=False, indent=2),
+            json.dumps(
+                build_json_report(drifts, actionable_only=args.actionable_only),
+                ensure_ascii=False,
+                indent=2,
+            ),
             encoding="utf-8",
         )
         if not args.quiet:
