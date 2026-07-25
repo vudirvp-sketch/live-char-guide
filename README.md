@@ -4,7 +4,7 @@
 
 - **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
 - **Версия:** 9.2.0
-- **Статус:** iter 71 COMPLETE. Нет открытых KI. См. `STATUS.md`.
+- **Статус:** iter 73 COMPLETE (Research: консолидация `guide_analysis.md`). Нет открытых KI. См. `STATUS.md`.
 
 ---
 
@@ -58,6 +58,8 @@ root fallbacks (index.html, parts/, widgets/, assets/, data/) — committed to g
 - `CHANGELOG.md` — история версий.
 - `docs/canon/_README.md` — Canon Spec (правила canon-файлов).
 - `docs/canon/iter60_analysis_plan.md` — iter 60–69 план (завершён; iter 70+ roadmap в `STATUS.md`).
+- `docs/research/guide_analysis_consolidated.md` — консолидированный анализ гайда из внешних источников (iter 73).
+- `docs/research/research_plan.md` — план верификации и правок iter 74+ (Фазы 1–5).
 
 ## Контакты
 

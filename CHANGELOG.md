@@ -1,14 +1,37 @@
 # Changelog
 
+## [9.2.73] - 2026-07-26
+
+### iter 73 — Research: консолидация guide_analysis.md
+
+- **Задача:** пользователь прислал `guide_analysis.md` (1774 строк, 7 разнородных анализов) с задачей консолидировать информацию без потери, для последующей верификации и правок в будущих итерациях.
+- **Дедупликация:** 7 анализов → 1 консолидированный документ `docs/research/guide_analysis_consolidated.md`. Дубликат секции (analysis #3) отсечён. Analysis #7 (анализ **другого** гайда) отсечён как нерелевантный.
+- **Структура консолидированного документа:** 12 разделов — контекст, структура Parts, смыслы, противоречия (15 шт. C1–C15), дубли (20 шт. D1–D20), бесполезная информация (15 шт. U1–U15), чек-листы (14 шт.), приоритизированные предложения (P1/P2/P3), критические пробелы (G1–G3), методологический референс, итоговые оценки, что требует верификации (9 шт. V1–V9), резюме.
+- **План следующих итераций:** `docs/research/research_plan.md` — Фаза 1 (Recon & Verification, 9 проверок), Фаза 2 (критичные исправления iter 75–82), Фаза 3 (улучшение структуры iter 83–90), Фаза 4 (опциональные iter 91+), Фаза 5 (спорные/отложенные).
+- **STATUS.md:** добавлена секция §«Pending Verification» с 9 утверждениями V1–V9 для iter 74.
+- **README.md:** статусная строка обновлена (iter 71 → iter 73), в секцию «Документация» добавлены ссылки на `docs/research/` файлы.
+- **Никаких правок контента гайда** — чисто исследовательская, подготовительная итерация.
+- **Validation:** все gates PASS (без изменений — iter 73 не трогал src/ или data/). Build hash `4074bac5` (unchanged).
+
+---
+
+## [9.2.72] - 2026-07-26
+
+### iter 72 — Recon + KI#49 + Scenario labels §9.9/§9.10
+
+- **Recon:** все validation gates PASS. Найден 1 новый баг — KI#49.
+- **KI#49 ✅ CLOSED:** `AGENT_NAVIGATION.md:11` говорил "97 секций" — фактически 96 секций. Off-by-one после iter 62 MBTI stub merge. Fix: "97 секций" → "96 секций".
+- **Scenario labels §9.9/§9.10:** iter 71 roadmap упоминал "P3: Annotation blocks §10.2-10.4 + Расширение scenario-меток" как pending. Recon показал что Annotation blocks уже сделаны в iter 57. iter 72 расширил паттерн до §9.9 (test_requirements) и §9.10 (12b_issues).
+
+---
+
 ## [9.2.71] - 2026-07-26
 
 ### iter 71 — Recon + KI#48 + Progressive disclosure gap closure
 
-- **Recon:** все validation gates PASS (version-sync ✅, 96/96 canon sync ✅, 24 English leaks baseline ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, validate:master 12/12 ✅, drift 170/131 baseline ✅, build hash `4074bac5` unchanged). Найден 1 новый баг — KI#48.
-- **KI#48 ✅ CLOSED:** 6 master HTML files имели stale `v9.1 Master HTML` в top-of-file comment (part_01, part_02, part_05, part_06, part_07a, part_10) — пропущено в iter 70 (тогда обновили `src/shell/styles.css` header, но не master HTML comments). Fix: `v9.1` → `v9.2` в 6 файлах. Root fallbacks `parts/part_*.html` regenerated via `pnpm run build`.
-- **KI#48 — docs follow-up:** `docs/architecture.md:59` содержал stale "95 sections in v9.1" → актуализировано на "96 sections in v9.2".
-- **Progressive disclosure gap closure:** `p6_cot_bridge` — единственная секция без `<!-- difficulty: ... -->` маркера (было 95/96). Добавлен `<!-- difficulty: BASIC -->` (соответствует паттерну других intro-секций). Теперь 96/96 секций покрыты.
-- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, validate:master 12/12 ✅, drift 170/131 baseline ✅, build hash `4074bac5` (unchanged — hash computed only from `src/shell/index.html`, master HTML comment edits не влияют на hash).
+- **KI#48 ✅ CLOSED:** 6 master HTML files имели stale `v9.1 Master HTML` в top-of-file comment. Fix: `v9.1` → `v9.2` в 6 файлах.
+- **KI#48 — docs follow-up:** `docs/architecture.md:59` содержал stale "95 sections in v9.1" → "96 sections in v9.2".
+- **Progressive disclosure gap closure:** `p6_cot_bridge` — единственная секция без `<!-- difficulty: ... -->` маркера. Добавлен `<!-- difficulty: BASIC -->`. Теперь 96/96 секций покрыты.
 
 ---
 
@@ -16,11 +39,9 @@
 
 ### iter 70 — Docs version bump + Recon (KI#46, KI#47)
 
-- **Recon:** найдены 2 пропущенных в iter 69 source-side 9.1.0 references.
-- **KI#46 ✅ CLOSED:** `src/master/VERSION` orphan file — был 9.1.0 (out of sync с `src/VERSION=9.2.0`). Файл не используется build-скриптами (orphan), но создавал drift. Fix: обновлён до 9.2.0. Deletion deferred.
-- **KI#47 ✅ CLOSED:** `src/shell/styles.css` header comment `v9.1.0` → `v9.2.0`. Был пропущен в iter 69. Root fallback `assets/shell-styles.css` regenerated via `pnpm run build`.
-- **Docs version bump (LOW):** 9.1.0 → 9.2.0 в 5 stale docs: `docs/content_map.md`, `docs/character_bible.md`, `docs/architecture.md`, `docs/components.md`, `docs/canon/iter60_analysis_plan.md`.
-- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, build hash `4074bac5` (unchanged).
+- **KI#46 ✅ CLOSED:** `src/master/VERSION` orphan file — обновлён до 9.2.0. Deletion deferred.
+- **KI#47 ✅ CLOSED:** `src/shell/styles.css` header comment `v9.1.0` → `v9.2.0`.
+- **Docs version bump (LOW):** 9.1.0 → 9.2.0 в 5 stale docs.
 
 ---
 
@@ -28,7 +49,7 @@
 
 ### iter 69 — KI#45 fix (version bump 9.1.0 → 9.2.0)
 
-- **KI#45 ✅ CLOSED:** Version drift устранён — bump 9.1.0 → 9.2.0 в 10 source files: `package.json`, `src/VERSION`, `data/character_schema.json`, `data/test_scenarios.json`, `src/shell/index.html` (meta + comment), `src/shell/lazy-loader.js` (CONFIG.VERSION), `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `scripts/build-unified.mjs`, `src/scripts/build-shell-unified.mjs`. Build hash changed `69d9b813` → `4074bac5`. 2 missed source-side refs (`src/master/VERSION` + `src/shell/styles.css` header) fixed в iter 70 (KI#46, KI#47).
+- **KI#45 ✅ CLOSED:** Version drift устранён — bump 9.1.0 → 9.2.0 в 10 source files. Build hash changed `69d9b813` → `4074bac5`. 2 missed source-side refs fixed в iter 70 (KI#46, KI#47).
 
 ---
 
@@ -36,8 +57,8 @@
 
 ### iter 68 — Recon + KI#44 fix + cleanup
 
-- **KI#44 ✅ CLOSED:** `scripts/audit_vs_embeds.py` path bug (`parents[2]` вместо `parents[1]` + hardcoded fallback `/home/z/my-project/work/live-char-guide`). Fix: `parents[1]` + удаление fallback.
-- **Cleanup:** удалён stale `_DELETED_FILES.txt` (iter 67 leftover).
+- **KI#44 ✅ CLOSED:** `scripts/audit_vs_embeds.py` path bug (`parents[2]` вместо `parents[1]` + hardcoded fallback). Fix: `parents[1]` + удаление fallback.
+- **Cleanup:** удалён stale `_DELETED_FILES.txt`.
 
 ---
 
@@ -46,8 +67,8 @@
 ### iter 67 — P2-remaining R1 cleanup + Cat B prose inversion
 
 - §4.10 (canon + master): убрано повторение OCEAN/Enneagram-валидация-SPINE.
-- Cat B prose inversion: 6 mentions «Behavioral Anchors (поведенческие якоря)» → «поведенческие якоря (Behavioral Anchors)» в `src/master/part_02/03/04/07a/07b/09.html`.
-- Cleanup: удалены `ITER51_README.md`, `_ITER51_DELETE_STALE.txt`, `AUDIT_VERIFICATION.md` (root + docs/), `docs/AUDIT_REVIEW_ITER54.md`, `docs/cross_reference_sync.md.DELETED`.
+- Cat B prose inversion: 6 mentions «Behavioral Anchors (поведенческие якоря)» → «поведенческие якоря (Behavioral Anchors)».
+- Cleanup: удалены stale файлы.
 
 ---
 
@@ -55,7 +76,7 @@
 
 ### iter 66 — KI#42 + KI#43 fixed
 
-- **KI#42:** E09 VS-EMBED в `src/master/part_05.html` + `parts/part_05.html` — 9 hardcoded dark-theme colors + 3 font-family → CSS variables (90 replacements).
+- **KI#42:** E09 VS-EMBED — 9 hardcoded dark-theme colors + 3 font-family → CSS variables.
 - **KI#43:** `pnpm run build` → все `parts/*.html` + root fallbacks regenerated.
 
 ---
@@ -64,7 +85,7 @@
 
 ### iter 65 — KI#41 fixed
 
-- **KI#41:** E10 VS-EMBED hardcoded dark-theme colors → CSS variables (scoped fix в src/master + parts, 90 replacements).
+- **KI#41:** E10 VS-EMBED hardcoded dark-theme colors → CSS variables.
 
 ---
 
@@ -72,8 +93,8 @@
 
 ### iter 64 — A59-2 + drift v1.3
 
-- **A59-2:** Trigger→Stress→FLAW chain formalized в §5.1 (canonical example: Елена anxious-reactive).
-- **Drift v1.3:** 170 paragraph drifts / 131 actionable (recon confirmed no false positives).
+- **A59-2:** Trigger→Stress→FLAW chain formalized в §5.1.
+- **Drift v1.3:** 170 paragraph drifts / 131 actionable.
 
 ---
 
@@ -91,7 +112,7 @@
 ### iter 62 — R1 repetitions cleanup + §5.5 MBTI stub merge
 
 - §2.2: T→A→P restatement removed. §5.1→§5.6: redundant preamble removed.
-- §5.5 MBTI stub merged as `<h4>` subsection в §5.6. manifest.json: 97→96 sections.
+- §5.5 MBTI stub merged as `<h4>` subsection. manifest.json: 97→96 sections.
 
 ---
 
@@ -117,7 +138,7 @@
 
 > Полная история — в git log.
 
-- **iter 58:** P2+P3 metadata enrichment — glossary consolidation (7 CD→1), progressive disclosure (102 difficulty labels), canonical markers (60 sections).
+- **iter 58:** P2+P3 metadata enrichment — glossary consolidation, progressive disclosure, canonical markers.
 - **iter 57:** Annotation blocks §10.2-10.4 + scenario labels §9.5/9.6/9.7/9.11.
 - **iter 55-56:** KI#37/38/39 CLOSED + Decision tree + recap-spoilers.
 - **iter 54:** audit review (research) — 3 LOW bugs found.
