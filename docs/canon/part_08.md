@@ -97,7 +97,7 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 
 **Решение:** SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты (см. `[ref: part_07a.md §7A.1 — System Prompt structure]`.
 
-**RULE:** Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description), не в инструкциях (SP).
+**RULE:** Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description) — как структурированные теги (`<spine>`, `<ocean>`, `<enneagram>`), не нарративом — не в инструкциях (SP).
 
 ---
 

@@ -61,7 +61,7 @@ migration_status: —
 | Блок | Проверка | Ссылка |
 |------|----------|--------|
 | **System Prompt** | ☐ Anti-godmoding? (строка «Never speak or act for {{user}}.») ☐ Person defined? ☐ Narrative tense? (прошедшее/настоящее) ☐ Format Lock? (одна система разметки во всех Examples) | `[ref: part_07a.md §7A.1 — System Prompt]` |
-| **Description** | ☐ Anchors с ценой? (формат T→A→P) ☐ Нет голоса? (голос только в Examples/Greeting) ☐ Психология только в Description? | `[ref: part_04.md §4.X — SPINE]` |
+| **Description** | ☐ Anchors с ценой? (формат T→A→P) ☐ Нет голоса? (голос только в Examples/Greeting) ☐ Психология в Description? (теги `<spine>`/`<ocean>`/`<enneagram>`, не нарратив) | `[ref: part_04.md §4.X — SPINE]` |
 | **Examples** | ☐ Уникальный голос? (только через Examples, не Description) ☐ Embodiment? (минимум одна физическая реакция) ☐ `<START>`? (в начале каждого блока) | `[ref: part_03.md §3.X — Voice Isolation]` |
 | **Greeting** | ☐ Сцена→Действие→Реплика? ☐ 50–100 токенов? | `[ref: part_07b.md §7B.X — Lorebook/Greeting]` |
 | **Parameters** | ☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05) ☐ PP = 0? (Presence Penalty = 0.0) ☐ Temperature в диапазоне? (0.6–0.8 для 12B) | `[ref: part_07a.md §7A.6 — Sampling Parameters]` |

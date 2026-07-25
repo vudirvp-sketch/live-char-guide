@@ -46,11 +46,14 @@
 - **Modified:** `src/master/part_06.html`, `docs/canon/part_06.md`, `visual-system/elements/E11-cot-tiers.html`, `visual-system/integration/component-extracts/E11-visual.html`, `src/master/part_01.html`, `docs/canon/part_01.md`, `src/master/appendix_glossary.html`, `scripts/audit_canon_master_sync.py`.
 - **Validation:** 96/96 canon→master sync PASS. 0 new English leaks (baseline 24).
 
-### iter 77 — Уточнение OCEAN-in-Description (P1.8)
+### iter 77 — Уточнение OCEAN-in-Description (P1.8) ✅ COMPLETED
 
 - Переформулировать принцип #3: «Психология (SPINE, OCEAN, Enneagram) размещается в блоке Description — компактно, в тегах, не нарративом. Никогда в System Prompt».
-- Добавить пример верной/неверной формулировки OCEAN.
-- Локация: §1.4 (принципы) + §5.1 (OCEAN basics).
+- Добавлен пример верной/неверной формулировки OCEAN (callout ex в §1.4).
+- Добавлен RULE в §5.1: «OCEAN-профиль размещается в Description как `<ocean>`-тег с числовыми значениями».
+- Локация: §1.4 (принципы) + §5.1 (OCEAN basics) + §9.3 (checklist) + §8.5 (AP-4) + Glossary.
+- **Modified:** `src/master/part_01.html`, `src/master/part_05.html`, `src/master/part_09.html`, `src/master/part_08.html`, `src/master/appendix_glossary.html`, `docs/canon/part_01.md`, `docs/canon/part_05.md`, `docs/canon/part_09.md`, `docs/canon/part_08.md`, `docs/canon/appendix_glossary.md`.
+- **Validation:** 96/96 canon→master sync PASS. 0 new English leaks (baseline 24).
 
 ### iter 78 — Уточнение Anchors placement (P1.9)
 

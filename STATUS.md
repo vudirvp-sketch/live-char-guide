@@ -9,20 +9,22 @@
 
 ## Текущее состояние
 
-**iter 76 — P1.7 — CoT Tier 0 уточнение.** Выполнено:
+**iter 77 — P1.8 — OCEAN-in-Description уточнение.** Выполнено:
 
-Tier 0 переписан как «без отдельного CoT-блока, Embodiment Protocol действует всегда». CoT (Tier 1+) — дополнительный внутренний монолог сверх Embodiment, не замена.
+Принцип #3 переформулирован: «Психология — только в Description» → «Психология — в Description компактно, в тегах, не нарративом». Добавлены пример верного/неверного формата OCEAN и явное RULE о `<ocean>`-тегах в §5.1.
 
 | Локация | Изменение |
 |---------|-----------|
-| `src/master/part_06.html` | E11 staircase label: «Без CoT» → «Только Embodiment». Panel: добавлено «Tier 0 ≠ "модель не думает" — Embodiment Protocol всегда действует». §6.3 canonical paragraph переформулирован. Table Tier 0 row: «12B+, базовый/стандартный» → «12B+, только Embodiment», example дополнен «(без `[INTERNAL]`-блока)». |
-| `docs/canon/part_06.md` | §6.3 canonical text + Tier 0 table row — sync с master. |
-| `visual-system/elements/E11-cot-tiers.html` | Staircase label + panel text — sync с master. |
-| `visual-system/integration/component-extracts/E11-visual.html` | Staircase label + panel text — sync с master. |
-| `src/master/part_01.html` | Pre-build checklist стр. 5: «Нет (Tier 0)» → «Нет (Tier 0 — Embodiment only)», объяснение переформулировано: Embodiment Protocol достаточен как микро-цепочка рассуждений. |
-| `docs/canon/part_01.md` | Pre-build checklist стр. 5 — sync с master. |
-| `src/master/appendix_glossary.html` | CoT glossary entry: «Tier 0 (basic Anchor)» → «Tier 0 (без отдельного `[INTERNAL]`-блока — Embodiment Protocol действует всегда как микро-цепочка рассуждений, baseline)» + явное «CoT = дополнительный внутренний монолог сверх Embodiment». |
-| `scripts/audit_canon_master_sync.py` | P1-6 check substring updated: «12B+, базовый/стандартный» → «12B+, только Embodiment» (iter 76 P1.7 label update). |
+| `src/master/part_01.html` | Принцип #3: «Психология — только в Description» → «Психология — в Description компактно, в тегах, не нарративом» с уточнением `<spine>/<ocean>/<enneagram>` теги. Добавлен `callout.ex` с верным/неверным примером OCEAN формата. |
+| `docs/canon/part_01.md` | Принцип #3 — sync с master + `callout ex` с верным/неверным примером. |
+| `src/master/part_05.html` | §5.1: добавлен RULE «OCEAN-профиль размещается в Description как `<ocean>`-тег с числовыми значениями, не нарративом». |
+| `docs/canon/part_05.md` | §5.1 — sync с master (RULE о `<ocean>`-тегах). |
+| `src/master/part_09.html` | §9.3 Description checklist: «Психология только в Description?» → «Психология в Description? (теги `<spine>/<ocean>/<enneagram>`, не нарратив)». |
+| `docs/canon/part_09.md` | §9.3 — sync с master. |
+| `src/master/part_08.html` | §8.5 AP-4 RULE: «Психология должна быть в контексте (Description), не в инструкциях (SP)» → добавлено «как структурированные теги, не нарративом». |
+| `docs/canon/part_08.md` | §8.5 — sync с master. |
+| `src/master/appendix_glossary.html` | OCEAN glossary entry: добавлено «В карточке OCEAN размещается в Description как тег `<ocean>` с числовыми значениями, не нарративным описанием черт — см. принцип #3 (§1.4)». |
+| `docs/canon/appendix_glossary.md` | OCEAN entry — sync с master. |
 
 **No open KI.** Decision items V8/V9 требуют обсуждения с автором.
 
@@ -48,11 +50,10 @@ Tier 0 переписан как «без отдельного CoT-блока, E
 
 ---
 
-## iter 77+ Roadmap
+## iter 78+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 77** | P1.8 — Уточнение OCEAN-in-Description (переформулировать принцип #3) | LOW |
 | **iter 78** | P1.9 — Уточнение Anchors placement (Anchors = отдельный блок внутри Examples-зоны) | LOW |
 | **iter 79** | P1.5 — Уточнение Voice Isolation (лингвистический паттерн vs физическая характеристика) | LOW |
 | **iter 80** | P1.2 — OCEAN×Enneagram Matrix disclaimer (Decision item V9) | MEDIUM |
@@ -60,7 +61,7 @@ Tier 0 переписан как «без отдельного CoT-блока, E
 | **iter 83–90** | P2 — улучшение структуры | HIGH |
 | **iter 91+** | P3 — опциональные улучшения | LOW–MEDIUM |
 
-**Рекомендация для следующего чата:** начать с iter 77 — P1.8 (OCEAN-in-Description). Потом P1.9, P1.5. Decision items V8/V9 — после обсуждения с автором.
+**Рекомендация для следующего чата:** начать с iter 78 — P1.9 (Anchors placement). Потом P1.5 (iter 79). Decision items V8/V9 — после обсуждения с автором.
 
 ---
 
