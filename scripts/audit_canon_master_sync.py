@@ -266,11 +266,14 @@ CHECKS = [
         "part_04 §4.8: Anchor type definitions section added (iter 36 P1-5 fix)",
     ),
     # ----- P1-6 (B6): part_06 Tier 0 → Tier 0+ -----
+    # iter 76 update: substring relaxed — exact label changed from
+    # «12B+, базовый/стандартный» to «12B+, только Embodiment» (P1.7 — Tier 0 clarification).
+    # Invariant preserved: «12B+» (not «12B»).
     (
         "P1-6",
         "part_06.html",
-        "<tr><td><strong>Tier 0</strong></td><td>12B+, базовый/стандартный</td>",
-        "part_06 §6.3: Tier 0 «12B» → «12B+» (iter 36 P1-6 fix)",
+        "<tr><td><strong>Tier 0</strong></td><td>12B+, только Embodiment</td>",
+        "part_06 §6.3: Tier 0 «12B» → «12B+» (iter 36 P1-6 fix; iter 76 P1.7 label update)",
     ),
     # ----- P1-7 (D1): part_04 secondary GHOST row deleted + note -----
     (

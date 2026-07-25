@@ -39,10 +39,12 @@
 - **KI#51 CLOSED:** Омнис-Зета Embodiment «Голос:» → «Звук:» (физические звуки машины), голос перенесён в Examples по Voice Isolation rule.
 - **KI#52 CLOSED:** Price «Какая из историй?» → «Дрожь в руках, взгляд теряет фокус» (физический Price). Sync: canon + character_bible.
 
-### iter 76 — Уточнение CoT Tier 0 (P1.7)
+### iter 76 — Уточнение CoT Tier 0 (P1.7) ✅ COMPLETED
 
-- Добавить явное примечание: «Tier 0 = нет отдельного CoT-блока, Embodiment Protocol действует всегда. CoT — дополнительный внутренний монолог сверх Embodiment».
-- Локация: §6.2 или §6.3 (canon + master).
+- Добавлено явное примечание: «Tier 0 = нет отдельного CoT-блока, Embodiment Protocol действует всегда. CoT — дополнительный внутренний монолог сверх Embodiment».
+- Локация: §6.3 (canon + master) + E11 visual + §1.8 Pre-build checklist стр. 5 + Glossary (CoT entry).
+- **Modified:** `src/master/part_06.html`, `docs/canon/part_06.md`, `visual-system/elements/E11-cot-tiers.html`, `visual-system/integration/component-extracts/E11-visual.html`, `src/master/part_01.html`, `docs/canon/part_01.md`, `src/master/appendix_glossary.html`, `scripts/audit_canon_master_sync.py`.
+- **Validation:** 96/96 canon→master sync PASS. 0 new English leaks (baseline 24).
 
 ### iter 77 — Уточнение OCEAN-in-Description (P1.8)
 

@@ -9,16 +9,20 @@
 
 ## Текущее состояние
 
-**iter 75 — P1 Fixes (KI#54, KI#55, KI#51, KI#52).** Выполнено:
+**iter 76 — P1.7 — CoT Tier 0 уточнение.** Выполнено:
 
-4 открытых KI закрыты:
+Tier 0 переписан как «без отдельного CoT-блока, Embodiment Protocol действует всегда». CoT (Tier 1+) — дополнительный внутренний монолог сверх Embodiment, не замена.
 
-| KI | Fix | Файлы |
-|----|-----|-------|
-| KI#54 | docs/canon/ мёртвые ссылки → `<a href>` на существующие секции гайда (#p1_prebuild_checklist, #p10_elena, #p10_walter, #p10_omnis, #p10_vysherblenny) | `src/master/part_01.html` стр. 398 |
-| KI#55 | N>70 дважды → заголовки разделены: «N > 70 / тревожный тип» и «N > 70 / агрессивный тип» | `src/master/part_05.html` стр. 184–185 |
-| KI#51 | Омнис-Зета Embodiment «Голос:» → «Звук:» (физические звуки машины), голос перенесён в Examples по Voice Isolation rule | `src/master/part_10.html` стр. 383, 477 |
-| KI#52 | Price «Какая из историй?» → «Дрожь в руках, взгляд теряет фокус» (физический Price) | `src/master/part_02.html` стр. 220, `docs/canon/part_02.md` стр. 90, `docs/vyshcherblenny_character_bible.md` стр. 34 |
+| Локация | Изменение |
+|---------|-----------|
+| `src/master/part_06.html` | E11 staircase label: «Без CoT» → «Только Embodiment». Panel: добавлено «Tier 0 ≠ "модель не думает" — Embodiment Protocol всегда действует». §6.3 canonical paragraph переформулирован. Table Tier 0 row: «12B+, базовый/стандартный» → «12B+, только Embodiment», example дополнен «(без `[INTERNAL]`-блока)». |
+| `docs/canon/part_06.md` | §6.3 canonical text + Tier 0 table row — sync с master. |
+| `visual-system/elements/E11-cot-tiers.html` | Staircase label + panel text — sync с master. |
+| `visual-system/integration/component-extracts/E11-visual.html` | Staircase label + panel text — sync с master. |
+| `src/master/part_01.html` | Pre-build checklist стр. 5: «Нет (Tier 0)» → «Нет (Tier 0 — Embodiment only)», объяснение переформулировано: Embodiment Protocol достаточен как микро-цепочка рассуждений. |
+| `docs/canon/part_01.md` | Pre-build checklist стр. 5 — sync с master. |
+| `src/master/appendix_glossary.html` | CoT glossary entry: «Tier 0 (basic Anchor)» → «Tier 0 (без отдельного `[INTERNAL]`-блока — Embodiment Protocol действует всегда как микро-цепочка рассуждений, baseline)» + явное «CoT = дополнительный внутренний монолог сверх Embodiment». |
+| `scripts/audit_canon_master_sync.py` | P1-6 check substring updated: «12B+, базовый/стандартный» → «12B+, только Embodiment» (iter 76 P1.7 label update). |
 
 **No open KI.** Decision items V8/V9 требуют обсуждения с автором.
 
@@ -44,11 +48,10 @@
 
 ---
 
-## iter 76+ Roadmap
+## iter 77+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 76** | P1.7 — Уточнение CoT Tier 0 (Tier 0 ≠ «модель не думает», Embodiment Protocol действует всегда) | LOW |
 | **iter 77** | P1.8 — Уточнение OCEAN-in-Description (переформулировать принцип #3) | LOW |
 | **iter 78** | P1.9 — Уточнение Anchors placement (Anchors = отдельный блок внутри Examples-зоны) | LOW |
 | **iter 79** | P1.5 — Уточнение Voice Isolation (лингвистический паттерн vs физическая характеристика) | LOW |
@@ -57,7 +60,7 @@
 | **iter 83–90** | P2 — улучшение структуры | HIGH |
 | **iter 91+** | P3 — опциональные улучшения | LOW–MEDIUM |
 
-**Рекомендация для следующего чата:** начать с iter 76 — P1.7 (CoT Tier 0 уточнение). Потом P1.8, P1.9, P1.5. Decision items V8/V9 — после обсуждения с автором.
+**Рекомендация для следующего чата:** начать с iter 77 — P1.8 (OCEAN-in-Description). Потом P1.9, P1.5. Decision items V8/V9 — после обсуждения с автором.
 
 ---
 
@@ -65,7 +68,7 @@
 
 | Ограничение | Описание |
 |-------------|----------|
-| Root fallbacks in git | `index.html`, `assets/`, `widgets/`, `parts/`, `event-bus.js`, `data/`, `build.hash` — regenerated на каждом build |
+| Root fallbacks in git | `index.html`, `assets/`, `widgets/`, `parts/`, `event-bus.js`, `data/`, `build.hash` — regenerated на каждом build (CI на push) |
 | CORE DIRECTIVES на English | SP directives = English, prose = Russian. 24 English leaks by design. |
 | Node >= 20, pnpm 10.x | Runtime + package manager. |
 | Canon migration COMPLETE | All 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED. |

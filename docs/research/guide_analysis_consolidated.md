@@ -148,7 +148,7 @@ Anchors (общее)
 | C9 | **Voice only in Examples vs Voice в Description в карточках Part 10** | По утверждению analysis #4: в Description карточек Walter/Omnis/Vyshcherblenny есть стилистические описания («говорит саркастично», «синтезированный, металлический резонанс»). По утверждению analysis #6: это не противоречие, т.к. физический голос (тембр) — часть Embodiment, допустима в Description; лингвистический голос (лексика) — только Examples | **Требует верификации** в `src/master/part_10.html`. Если противоречие подтверждено — уточнить правило: «Лингвистический паттерн = только Examples. Физическая характеристика (тембр, хрип, механический гул) = Description/Embodiment» |
 | C10 | **Anchors «живут только в Examples» vs отдельный [ANCHORS] тег** | Card Anatomy показывает Anchors под блоком «Examples + Anchors». Гайд пишет «Единственное место, где Anchors живут структурно». Но в полных карточках Anchors — отдельный [ANCHORS]-тег, отделённый от [EXAMPLES]-тегов | Чётко определить: Anchors = отдельный блок внутри Examples-зоны карточки (после `<START>`-блоков, до Greeting). Или признать, что в некоторых фронтендах Anchors — самостоятельное поле |
 | C11 | **OCEAN «only in Description» vs `<ocean>`-тег в карточках** | Принцип #3: «Психология — только в Description». Но пример Елены показывает `<ocean>N:68 O:45 C:72 A:32 E:55</ocean>` — отдельный тег, не «часть нарративного Description». Формулировка «only in Description» может заставить новичка писать OCEAN развёрнутым текстом | Переформулировать принцип #3: «Психология (SPINE, OCEAN, Enneagram) размещается в блоке Description — компактно, в тегах, не нарративом. Никогда в System Prompt». Добавить пример верной/неверной формулировки |
-| C12 | **CoT Tier 0 ≠ «модель не думает»** | Pre-build checklist: «Нет (Tier 0) / Да (Tier 1+)». Но Embodiment Protocol (State→Body→Sensor→Speech) — микро-цепочка рассуждений, структурно аналогична CoT Tier 1 | Уточнить: Tier 0 = нет отдельного CoT-блока, Embodiment Protocol действует всегда. CoT — дополнительный внутренний монолог сверх Embodiment |
+| C12 | **CoT Tier 0 ≠ «модель не думает»** | Pre-build checklist: «Нет (Tier 0) / Да (Tier 1+)». Но Embodiment Protocol (State→Body→Sensor→Speech) — микро-цепочка рассуждений, структурно аналогична CoT Tier 1 | **FIXED iter 76** — Tier 0 переписан как «без отдельного CoT-блока, Embodiment Protocol всегда действует». E11 label: «Без CoT» → «Только Embodiment». §6.3 canonical + table + Glossary entry переформулированы. Pre-build checklist стр. 5 обновлён. |
 | C13 | **«Отсутствие правил» во введении vs «обязательный чек-лист»** | Из analysis #7 (гайд по общим персонажам — может не относиться к live-char-guide): введение «нет строгих правил», чек-лист «должно быть так-то» | **Требует верификации** — относится ли к live-char-guide. Если да — смягчить тон чек-листа или убрать категоричность введения |
 | C14 | **«Слишком идеальный персонаж» — неверная причина** | Топ-3 ошибок (Ошибка 3): «Anchors не имеют цены». Но «идеальность» — следствие отсутствия/слабого FLAW в SPINE, не напрямую Price | Связать Ошибку 3 напрямую с FLAW: «Отсутствие работающего FLAW или отсутствие негативной физической цены за его проявление» |
 | C15 | **Price в Anchors — нефизический пример** | Analysis #4 утверждает: в таблице примеров Anchors есть строка `Вопрос о прошлом | Пауза, взгляд внутрь | Какая из историй?` — внутренний монолог вместо физической реакции | **FIXED iter 75** — заменено на «Дрожь в руках, взгляд теряет фокус» (физический Price) в part_02.html, canon, character_bible |
@@ -287,7 +287,7 @@ Anchors (общее)
 | P1.4 | Убрать дублирование Pre-build checklist (§1.5) и Pre-deploy checklist (§7A.14) | MEDIUM |
 | P1.5 | Уточнить правило Voice Isolation (Лингвистический = Examples; Физический = Description) — после верификации C9 | MEDIUM |
 | P1.6 | Проверить и при необходимости заменить нефизический Price в примере Anchors (после верификации C15) | LOW |
-| P1.7 | Уточнить CoT Tier 0 (Embodiment действует всегда, Tier 0 ≠ «модель не думает») | LOW |
+| P1.7 | Уточнить CoT Tier 0 (Embodiment действует всегда, Tier 0 ≠ «модель не думает») | LOW | **iter 76 ✅ COMPLETED** |
 | P1.8 | Уточнить OCEAN «only in Description» (теги, не нарратив) | LOW |
 | P1.9 | Уточнить Anchors placement (отдельный блок внутри Examples-зоны) | LOW |
 
@@ -415,7 +415,7 @@ Anchors (общее)
 4. Environmental Reactivity / Sensory Anchors — концептуальная выжимка в текущем месте, полный разбор в «родном» Part.
 5. Устранить quad-duplication Anti-godmoding и triple-duplication Price.
 6. Уточнить 3 противоречия: Tone Frame vs Voice, Anchors placement, OCEAN-in-Description wording.
-7. CoT Tier 0 — уточнить, что Embodiment действует всегда.
+7. CoT Tier 0 — уточнить, что Embodiment действует всегда. **✅ COMPLETED iter 76**
 8. Merge Diagnostic + Pre-Deploy checklist в Master Checklist с двумя секциями.
 9. Добавить Assembly Pipeline Checklist.
 10. Удалить из рендера: dev-комментарии, VS-EMBED метки, inline changelog.

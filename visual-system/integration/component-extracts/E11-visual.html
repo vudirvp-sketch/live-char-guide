@@ -8,11 +8,11 @@
 -->
 <div class="staircase">
 
-      <!-- Tier 0: No CoT — baseline -->
+      <!-- Tier 0: Embodiment-only baseline — Embodiment Protocol always acts; no separate CoT block -->
       <div class="stair-step stair-step--tier0 scroll-enter">
         <div class="stair-step__header">
           <span class="stair-step__tier">Tier 0</span>
-          <span class="stair-step__name">Без CoT</span>
+          <span class="stair-step__name">Только Embodiment</span>
           <span class="model-pill model-pill--12b">12B+ (все)</span>
           <span class="optional-label">Опционально: начните здесь</span>
         </div>
@@ -57,7 +57,11 @@
         Прогрессия Chain of Thought
       </div>
       <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
-        CoT <strong style="color:var(--text-primary);">не обязателен</strong> — Tier 0 работает для всех моделей.
+        CoT <strong style="color:var(--text-primary);">не обязателен</strong> — Tier 0 работает для всех моделей. На Tier 0 модель
+        <strong style="color:var(--text-primary);">не «не думает»</strong> — Embodiment Protocol (State → Body → Sensor → Speech)
+        действует всегда как микро-цепочка рассуждений. CoT (Tier 1+) добавляет отдельный
+        <code style="font-family:var(--font-mono); background:var(--bg-deep); padding:1px 4px; border-radius:3px;">[INTERNAL]</code>-блок
+        как явный внутренний монолог <strong style="color:var(--text-primary);">сверх</strong> Embodiment.
         Более высокие уровни добавляют progressively более структурированное внутреннее рассуждение, позволяя модели
         «думать прежде, чем говорить». Каждый формат показан выше в своей фактической нотации, поэтому этот элемент
         служит <strong style="color:var(--text-primary);">инструментом быстрого справочника</strong>, а не просто диаграммой.
