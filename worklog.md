@@ -4,6 +4,38 @@
 
 ---
 
+Task ID: 78
+Agent: main
+Task: iter 78 — P1.9 — Anchors placement (Anchors = отдельный блок внутри Examples-зоны).
+
+Work Log:
+- 1: Клонирован репозиторий, прочитан STATUS.md (iter 77 COMPLETE, no open KI). Понятна задача P1.9 — разрешить противоречие C10: Card Anatomy показывает «Examples + Anchors» (merged), но Anchors — отдельный [ANCHORS]-тег.
+- 2: Прочитаны все ключевые файлы: part_01.html (E01 Card Anatomy + §1.2 + §1.4), part_07a.html (§7A.1 + §7A.9 + §7A.11 + §7A.13), canon-файлы, E01 element, E01 component extract, glossary, research doc.
+- 3: Реализовано решение: Anchors = отдельный структурный блок внутри Examples-зоны. В большинстве фронтендов Anchors размещаются в Description как `<anchors>`-тег (нет отдельного поля); концептуально Anchors = behavioural patterns, Examples = voice patterns.
+- 4: src/master/part_01.html — E01: label «Examples + Anchors» → «Examples». Anchors sub-panel: badge «отдельный блок», описание обновлено. desc-callout: «структурно живут как отдельный блок в Examples-зоне». §1.2 table: добавлена строка Anchors. §1.4: добавлен RULE callout.
+- 5: docs/canon/part_01.md — sync с master: §1.2 table Anchors строка, §1.4 RULE, Card Anatomy текст.
+- 6: src/master/part_07a.html — §7A.1: добавлен RULE Anchors placement. §7A.9: `<anchors>` пояснение (для совместимости с фронтендами). §7A.11 4K-fallback: RULE Anchors placement. §7A.13 Elena budget: footnote * для Anchors.
+- 7: docs/canon/part_07a.md — sync: §7A.1 RULE, §7A.9, §7A.11, §7A.13 footnote.
+- 8: src/master/appendix_glossary.html + docs/canon/appendix_glossary.md — Behavioral Anchor entry: RULE Anchors placement.
+- 9: visual-system/elements/E01-card-anatomy.html + E01-visual.html — same E01 changes.
+- 10: docs/research/guide_analysis_consolidated.md — C10 FIXED, P1.9 COMPLETED, P1.6/P1.8 marked COMPLETED.
+- 11: STATUS.md updated, worklog.md updated.
+
+Stage Summary:
+- P1.9 COMPLETED — Anchors placement clarified across all locations
+- C10 contradiction resolved
+- No open KI, no new bugs introduced
+- Next: iter 79 — P1.5 (Voice Isolation)
+
+---
+
+## Предыдущие итерации (кратко)
+- iter 77: P1.8 — OCEAN-in-Description wording fix (принцип #3 переформулирован)
+- iter 76: P1.7 — CoT Tier 0 clarification (Embodiment always acts)
+- iter 75: P1.6 + C15 — нефизический Price replaced
+
+---
+
 Task ID: 77
 Agent: main
 Task: iter 77 — P1.8 — OCEAN-in-Description уточнение (принцип #3: «Психология — в Description компактно, в тегах, не нарративом»).

@@ -27,6 +27,8 @@ migration_status: ✅ MIGRATED (iter 11)
 - **CORE DIRECTIVES:** все 7 директив (см. §7A.2).
 - **Tone Frame:** тональность + ограничение сеттинга (см. §7A.3).
 
+**RULE:** Anchors placement — Anchors — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров и не часть SP. В большинстве фронтендов Anchors размещаются в Description как `<anchors>`-тег (отдельное поле Anchors отсутствует); в фронтендах с поддержкой — как отдельное поле. Концептуально Anchors принадлежат Examples-зоне: Anchors = behavioural patterns (Trigger → Action → Price), Examples = voice patterns (диалоговые примеры). → `[ref: part_01.md §1.4 — RULE]`, `[ref: part_02.md §2.2 — Anchor Rules]`.
+
 ### Канонический шаблон SP
 
 ```
@@ -376,7 +378,7 @@ AI/roleplay воспринимается как галлюцинация или 
 <!-- difficulty: EXPERT -->
 <!-- canonical: XML Tags in Description -->
 
-Структурирование Description через XML-теги для API моделей (32B+ и API; на 12B XML нестабилен — см. §7A.7).
+Структурирование Description через XML-теги для API моделей (32B+ и API; на 12B XML нестабилен — см. §7A.7). `<anchors>` размещён внутри Description как XML-тег для совместимости с фронтендами, не имеющими отдельного поля Anchors. Концептуально Anchors — отдельный структурный блок в Examples-зоне (см. §1.4 RULE и §7A.1 RULE).
 
 ### Структура
 
@@ -549,6 +551,8 @@ Anchors:
 - {{trigger}} → {{action}} → {{price}}
 ```
 
+**RULE:** Anchors в 4K-fallback размещаются в Description (как `<anchors>`-тег или список), поскольку фронтенд не имеет отдельного поля. Концептуально Anchors — отдельный блок в Examples-зоне (см. §1.4 RULE и §7A.1 RULE). При 8K+ и API используйте `<anchors>`-тег внутри Description для структурирования.
+
 **RECOMMENDATION:** 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.
 
 ---
@@ -705,11 +709,13 @@ GHOST: Предательство редактора — история, кот�
 | Блок | Токены | Лимит | Статус |
 |------|--------|-------|--------|
 | System Prompt | ~120 | 50–200 | ✓ |
-| Description (SPINE + OCEAN + Anchors) | ~250 | 150–700 | ✓ |
+| Description (SPINE + OCEAN + Anchors)* | ~250 | 150–700 | ✓ |
 | Examples (3 блока) | ~120 | 80–240 | ✓ |
 | Greeting | ~60 | 40–100 | ✓ |
 | CoT Anchor | ~60 | 0–160 | ✓ |
 | **Итого** | **~610** | 400–900 | ✓ |
+
+\* Anchors концептуально — отдельный блок в Examples-зоне, но структурно размещены в Description как `<anchors>`-тег для совместимости с большинством фронтендов (см. §1.4 RULE и §7A.1 RULE).
 
 ### Дополнительные шаги (необязательные для Елены)
 

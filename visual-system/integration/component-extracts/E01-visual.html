@@ -59,18 +59,18 @@
         <div class="block-content">
           Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
           <div class="desc-callout">
-            ↳ Anchors упомянуты здесь как ссылка — структурно вложены в Examples
+            ↳ Anchors упомянуты здесь как ссылка — структурно живут как отдельный блок в Examples-зоне
           </div>
         </div>
       </div>
 
       <div class="block-divider"></div>
 
-      <!-- Examples + Anchors Block — medium -->
+      <!-- Examples-зона: Examples + Anchors — два отдельных блока -->
       <div class="card-block card-block--examples scroll-enter scroll-enter--left">
         <div class="block-label">
           <span class="block-label__name">
-            Examples + Anchors
+            Examples
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
@@ -89,15 +89,16 @@
         </div>
         <div class="block-content">
           Примеры диалогов, демонстрирующие голос персонажа. 2–5 примеров, каждый ~40–80 токенов.
-          <!-- Anchors sub-panel — nested, violet accent -->
+          <!-- Anchors sub-panel — отдельный структурный блок внутри Examples-зоны, violet accent -->
           <div class="anchors-subpanel">
             <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
               <span style="font-family:var(--font-heading); font-weight:600; font-size:13px; color:var(--accent-violet);">Anchors</span>
               <span class="badge badge--violet">T→A→P</span>
+              <span class="optional-badge">отдельный блок</span>
             </div>
             <div style="font-size:12px; color:var(--text-secondary);">
               Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
-              Единственное место, где Anchors живут структурно.
+              Anchors — отдельный структурный блок в Examples-зоне, не часть диалоговых примеров. В большинстве фронтендов размещаются как &lt;code&gt;&lt;anchors&gt;&lt;/code&gt; внутри Description.
             </div>
           </div>
         </div>

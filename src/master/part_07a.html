@@ -21,6 +21,10 @@
 <li><strong>Tone Frame:</strong> тональность + ограничение сеттинга (Tone Frame ниже)</li>
 </ul>
 
+<div class="callout rule">
+<p><strong>RULE:</strong> Anchors placement — Anchors — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров и не часть SP. В большинстве фронтендов Anchors размещаются в Description как <code>&lt;anchors&gt;</code>-тег (отдельное поле Anchors отсутствует); в фронтендах с поддержкой — как отдельное поле. Концептуально Anchors принадлежат Examples-зоне: Anchors = behavioural patterns (Trigger → Action → Price), Examples = voice patterns (диалоговые примеры). → <a href="#p1_core_rules">§1.4 RULE</a>, <a href="#p2_anchor_rules">Part 2 §2.2</a></p>
+</div>
+
 <h3>Канонический шаблон SP</h3>
 <div class="example-label template">TEMPLATE</div>
 <pre><code>[System Prompt]
@@ -687,7 +691,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <!-- canonical: XML Tags in Description -->
 <h3>XML Tags в Description</h3>
 
-<p>Структурирование Description через XML-теги для API моделей.</p>
+<p>Структурирование Description через XML-теги для API моделей. <code>&lt;anchors&gt;</code> размещён внутри Description как XML-тег для совместимости с фронтендами, не имеющими отдельного поля Anchors. Концептуально Anchors — отдельный структурный блок в Examples-зоне (см. §1.4 RULE и <a href="#p2_anchor_rules">Part 2 §2.2</a>).</p>
 
 <h4>Структура</h4>
 <pre><code>&lt;identity&gt;
@@ -845,6 +849,10 @@ Anchors:
 - {{trigger}} → {{action}} → {{price}}
 - {{trigger}} → {{action}} → {{price}}
 - {{trigger}} → {{action}} → {{price}}</code></pre>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> Anchors в 4K-fallback размещаются в Description (как `<anchors>`-тег или список), поскольку фронтенд не имеет отдельного поля. Концептуально Anchors — отдельный блок в Examples-зоне (см. §1.4 RULE и §7A.1 RULE). При 8K+ и API используйте <code>&lt;anchors&gt;</code>-тег внутри Description для структурирования.</p>
+</div>
 
 <div class="callout rec">
 <p><strong>RECOMMENDATION:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
@@ -1136,7 +1144,7 @@ GHOST: Предательство редактора — история, кот�
 <thead><tr><th>Блок</th><th>Токены</th><th>Лимит</th><th>Статус</th></tr></thead>
 <tbody>
 <tr><td>System Prompt</td><td>~120</td><td>50–200</td><td>✓</td></tr>
-<tr><td>Description (SPINE + OCEAN + Anchors)</td><td>~250</td><td>150–700</td><td>✓</td></tr>
+<tr><td>Description (SPINE + OCEAN + Anchors)*</td><td>~250</td><td>150–700</td><td>✓</td></tr>
 <tr><td>Examples (3 блока)</td><td>~120</td><td>80–240</td><td>✓</td></tr>
 <tr><td>Greeting</td><td>~60</td><td>40–100</td><td>✓</td></tr>
 <tr><td>CoT Anchor</td><td>~60</td><td>0–160</td><td>✓</td></tr>
@@ -1144,6 +1152,8 @@ GHOST: Предательство редактора — история, кот�
 </tbody>
 </table>
 </div>
+
+<p><small>* Anchors концептуально — отдельный блок в Examples-зоне, но структурно размещены в Description как <code>&lt;anchors&gt;</code>-тег для совместимости с большинством фронтендов (см. §1.4 RULE и §7A.1 RULE).</small></p>
 
 <h4>Дополнительные шаги (необязательные для Елены)</h4>
 
