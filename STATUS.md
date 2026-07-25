@@ -9,20 +9,23 @@
 
 ## Текущее состояние
 
-**iter 69 — KI#45 fix (version bump 9.1.0 → 9.2.0).** Выполнено:
+**iter 70 — Docs version bump + Recon (KI#46, KI#47).** Выполнено:
 
-- **KI#45 ✅ CLOSED:** Version drift устранён — bump 9.1.0 → 9.2.0 в 10 source files (package.json, src/VERSION, data/character_schema.json, data/test_scenarios.json, src/shell/index.html, src/shell/lazy-loader.js, src/shell/widgets/js-flag.js + mermaid-init.js, scripts/build-unified.mjs, src/scripts/build-shell-unified.mjs). Build manifest verification: `pnpm run build` → SUCCESS, version-sync ✅ all 9.2.0, build hash changed `69d9b813` → `4074bac5` (expected — shell version string changed).
+- **Recon:** найдены 2 пропущенных в iter 69 source-side 9.1.0 references → KI#46 (`src/master/VERSION` orphan) + KI#47 (`src/shell/styles.css` header comment).
+- **KI#46 ✅ CLOSED:** `src/master/VERSION` orphan file обновлён 9.1.0 → 9.2.0 (synced с `src/VERSION`). Файл не используется build-скриптами — orphan, deletion deferred.
+- **KI#47 ✅ CLOSED:** `src/shell/styles.css` header comment `v9.1.0` → `v9.2.0`. Root fallback `assets/shell-styles.css` regenerated via `pnpm run build`.
+- **Docs version bump (LOW):** 9.1.0 → 9.2.0 в 5 stale docs — `docs/content_map.md`, `docs/character_bible.md`, `docs/architecture.md`, `docs/components.md`, `docs/canon/iter60_analysis_plan.md`. Titles `v9.1` → `v9.2` (4 файла). Last Updated даты bumped где применимо.
 
 **Ключевой принцип iter 60+:** Гайд — единый последовательный документ. Читатель идёт сверху вниз. Если концепция объяснена выше — не повторять. Просто использовать.
 
-Validation gates (post-iter 69):
+Validation gates (post-iter 70):
 - `version-sync.mjs` → ✅ All versions 9.2.0 in sync.
 - `check_english.py` → 24 English leaks (baseline unchanged).
 - `validate_terms.py` → ✅ All terminology valid.
 - `check_duplicates.py` → ✅ no disallowed duplicates.
 - `audit_canon_master_sync.py` → 96/96 PASS.
-- `audit_vs_embeds.py` → ✅ runs without symlink workaround.
-- `pnpm run build` → SUCCESS, shell hash `4074bac5`.
+- `audit_vs_embeds.py` → ✅ no regressions.
+- `pnpm run build` → SUCCESS, shell hash `4074bac5` (unchanged — hash computed from `index.html`, CSS comment edit doesn't affect hash).
 
 ---
 
@@ -30,9 +33,9 @@ Validation gates (post-iter 69):
 
 | KI | Статус | Описание | Iter |
 |----|--------|----------|------|
-No open KI.
+| No open KI. | | | |
 
-**Закрытые KI:** KI#45 (iter 69), KI#44 (iter 68), KI#41–43 (iter 65–66), KI#40 (iter 61), KI#33–39 (iter 44–56), KI#20–32 (iter 25–42), KI#1–19 (iter 1–24).
+**Закрытые KI:** KI#47 (iter 70), KI#46 (iter 70), KI#45 (iter 69), KI#44 (iter 68), KI#41–43 (iter 65–66), KI#40 (iter 61), KI#33–39 (iter 44–56), KI#20–32 (iter 25–42), KI#1–19 (iter 1–24).
 
 При обнаружении новых багов — сначала документировать в STATUS.md §«Known Issues» как KI#N, потом фиксить.
 
@@ -55,19 +58,22 @@ No open KI.
 
 ---
 
-## iter 70+ Roadmap
+## iter 71+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 70+** | P2/P3 опциональные задачи: canonical-location-маркер (~150 правок, MEDIUM), Progressive disclosure метки (~50 секций, LOW), Annotation blocks §10.2-10.4 (P3), Расширение scenario-меток (P3) | LOW-MEDIUM |
-| **iter 70+** | Recon — поиск новых багов или audit-задач | LOW |
-| **iter 70+** | Docs version bump (5 stale docs still say 9.1.0: content_map, character_bible, architecture, components, iter60_analysis_plan) | LOW |
-| by design | Glossary double-render inefficiency | — |
-| опционально | Component extracts regeneration (54 файла) | LOW |
+| **iter 71+** | P2 опционально: canonical-location-маркер (~150 правок) | MEDIUM |
+| **iter 71+** | P2 опционально: Progressive disclosure метки (~50 секций) | LOW |
+| **iter 71+** | P3: Annotation blocks §10.2-10.4 | LOW |
+| **iter 71+** | P3: Расширение scenario-меток | LOW |
+| **iter 71+** | Recon — поиск новых багов или audit-задач | LOW |
+| **iter 71+** | Опционально: Component extracts regeneration (54 файла) | LOW |
+| **iter 71+** | Опционально: `src/master/VERSION` orphan file deletion (KI#46 follow-up) | LOW |
 | GitHub-level | Dependabot merges (10 branches) | LOW |
+| by design | Glossary double-render inefficiency | — |
 | by design | Paragraph drift tuning (170 drifts / 131 actionable, false positives нет) | — |
 
-iter 60–69 plan (`docs/canon/iter60_analysis_plan.md`) — полностью выполнен.
+iter 60–69 plan (`docs/canon/iter60_analysis_plan.md`) — полностью выполнен. iter 70 — docs version sync + KI#46/47 cleanup.
 
 ---
 

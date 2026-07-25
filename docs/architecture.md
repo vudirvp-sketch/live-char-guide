@@ -1,8 +1,8 @@
 # Live Character Guide Architecture
 
-> **Version:** 9.1.0
-> **Last Updated:** 2026-05-15
-> **Status:** v9.1.0 — Unified single-pass guide (no layer system)
+> **Version:** 9.2.0
+> **Last Updated:** 2026-07-25
+> **Status:** v9.2.0 — Unified single-pass guide (no layer system)
 
 ---
 
@@ -340,4 +340,4 @@ live-char-guide/
 
 ---
 
-*Document prepared for Live Character Guide v9.1.0 + docs restructure iter 2*
+*Document prepared for Live Character Guide v9.2.0 + docs restructure iter 2*

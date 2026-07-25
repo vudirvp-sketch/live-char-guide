@@ -1,6 +1,6 @@
-# Content Ownership Map — Live Character Guide v9.1
+# Content Ownership Map — Live Character Guide v9.2
 
-> **Version:** 9.1.0
+> **Version:** 9.2.0
 > **Last Updated:** 2026-06-24 (iter 18 — mirror Canon)
 > **Status:** Canonical Reference (Canon mirror)
 

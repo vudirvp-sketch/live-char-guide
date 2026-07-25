@@ -1,7 +1,7 @@
-# Visual Component Registry — Live Character Guide v9.1
+# Visual Component Registry — Live Character Guide v9.2
 
-> **Version:** 9.1.0
-> **Last Updated:** 2026-05-16
+> **Version:** 9.2.0
+> **Last Updated:** 2026-07-25
 > **Status:** Canonical Reference
 
 ---
@@ -569,5 +569,4 @@ If you need a new CSS class:
 
 ---
 
-*Document prepared for Live Character Guide v9.1.0*
-*Updated 2026-05-16: Added .callout.rule, .callout.rec, .callout.ex; updated .tag.core styling; version bump to v9.1.0.*
+*Document prepared for Live Character Guide v9.2.0*

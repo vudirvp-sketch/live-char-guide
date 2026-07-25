@@ -1,4 +1,4 @@
-# Character Bible — Live Character Guide v9.1
+# Character Bible — Live Character Guide v9.2
 
 > **Role of this file (clarified in iter 4):** This file is the **registry of supporting characters** used in the guide (Geralt, Walter White, Joker, Jesse Pinkman, Edward Elric, Tyler Durden, Elliot Alderson, The Nameless One, Омнис-Зета 7-Квин). For the two **primary demonstration characters** with full canonical bibles, see:
 > - `docs/elena_character_bible.md` (Елена — Source of Truth, primary example)
@@ -6,7 +6,7 @@
 >
 > Per-character bibles take precedence for Elena and Выщербленный. Their entries below are pointer stubs only; the duplicated detail was removed in iter 4 to avoid drift.
 
-> **Version:** 9.1.0 (iter 4 trim — removed Elena + Выщербленный duplicates)
+> **Version:** 9.2.0 (iter 4 trim — removed Elena + Выщербленный duplicates)
 > **Last Updated:** 2026-06-23
 > **Status:** Supporting Characters Registry (canonical for non-per-character-bible characters)
 
