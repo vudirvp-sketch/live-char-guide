@@ -9,23 +9,31 @@
 
 ## Текущее состояние
 
-**iter 79 — P1.5 — Voice Isolation уточнение (лингвистический паттерн vs физическая характеристика).** Выполнено:
+**iter 80 — Разведочный аудит примеров карточек Part 10 + inline Parts 1–9 + Bible sync.** Исследовательская итерация: ~90 правил проверены против 4 полных карточек, 12 персонажей Bible, ~73 inline-примеров, ~19 шаблонов. **Никаких правок не сделано** — только документирование найденных проблем. Полный отчёт: `docs/research/examples_audit_iter80.md`.
 
-Противоречие C9 разрешено: правило Voice Isolation явно различает два уровня голоса. **Лингвистический голос** (слова, синтаксис, лексика, ритм фразы, парадоксы, речевые маркеры) — только в Examples и Greeting, никогда в Description. **Физическая характеристика голоса** (тембр, хрип, механический гул, синтезированный резонанс, сиплость) — это часть Embodiment, допустима в Description (сенсорный слой «Звук» Embodiment Protocol). Это формализует практику из iter 75 (fix Омнис-Зета «Голос:» → «Звук:» в Embodiment-блоке).
+**Found: 4 universal violations + 26 card-specific violations + 20 Bible-vs-card discrepancies + 4 self-contradictions.**
 
-| Локация | Изменение |
-|---------|-----------|
-| `src/master/part_03.html` (§3.1 Voice Isolation) | Definition переформулировано: «Лингвистический голос задаётся ТОЛЬКО в Examples». Добавлен RULE callout с явным разделением двух уровней + тест (лингвистический vs физический примеры). |
-| `src/master/part_03.html` (§3.2 Influence Hierarchy) | RULE уточнён: «0% влияния на лингвистический голос». EXAMPLE переписан: WRONG = лингвистический в Description; CORRECT = лингвистический в Examples + физическая характеристика (хрипловатый тембр) в Description как Embodiment. |
-| `src/master/part_01.html` (§1.4 принцип #2) | «Description = логика поведения, Examples = паттерны голоса» → явное разделение: лингвистический = только Examples; физическая характеристика (тембр, хрип, механический гул) = Description как часть Embodiment. |
-| `src/master/appendix_glossary.html` | Voice entry + Voice Isolation entry: добавлено разделение на два уровня. |
-| `docs/canon/part_03.md` | Sync с master: §3.1 RULE + §3.2 RULE/EXAMPLE. |
-| `docs/canon/part_01.md` | Sync с master: §1.4 принцип #2. |
-| `docs/canon/appendix_glossary.md` | Sync: Voice + Voice Isolation entries. |
-| `docs/research/guide_analysis_consolidated.md` | C9 → FIXED iter 79. P1.5 → iter 79 ✅ COMPLETED. |
-| `docs/research/research_plan.md` | iter 79 marked ✅ COMPLETED. |
+### Universal violations (ALL 4 cards)
 
-**No open KI.** Decision items V8/V9 требуют обсуждения с автором.
+| # | Проблема | Серьёзность |
+|---|----------|-------------|
+| U1 | Tone Frame недомер (0–8 tok вместо ~25–30) | HIGH |
+| U2 | CORE_DIRECTIVES не inline (shorthand reference) | DECISION |
+| U3 | Examples недомер (25–70 tok вместо 80–120) | HIGH |
+| U4 | Anchors `[ANCHORS]` plain text вместо `<anchors>` XML | MEDIUM |
+
+### Key card-specific violations
+
+| Card | Key issues |
+|------|------------|
+| **Elena** | Voice leak «саркастичная» in Description; missing Tone Frame + OOC; §9.11 claims Voice check PASS but it FAILS |
+| **Walter** | Missing `<identity>` tag; LIE = quote + explanatory clause (violates SPINE); no Format Lock + OOC; no GHOST-linked Anchor |
+| **Omnis-Zeta** | 5/7 Anchor Prices are non-physical (social/cognitive, not bodily); NEED/WANT tension weak |
+| **Vyshcherblenny** | GHOST in `<spine>` is 5-sentence narrative + cycle (should be concrete event); 3 Anchor Prices non-physical |
+
+### Bible-vs-card discrepancies (20 total, 15 HIGH)
+
+Most critical: Walter NEED fundamentally changed; Vyshcherblenny LIE/NEED/WANT all changed; Omnis-Zeta GHOST points to different tier; 7 unused supporting characters in Bible.
 
 ---
 
@@ -51,16 +59,24 @@
 
 ---
 
-## iter 80+ Roadmap
+## iter 81+ Roadmap (updated iter 80)
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 80** | P1.2 — OCEAN×Enneagram Matrix disclaimer (Decision item V9) | MEDIUM |
-| **iter 81+** | Decision item V8 (GHOST перцептивный фильтр) — после обсуждения | MEDIUM |
-| **iter 83–90** | P2 — улучшение структуры | HIGH |
-| **iter 91+** | P3 — опциональные улучшения | LOW–MEDIUM |
+| **iter 81** | A1 — Elena SP: Tone Frame + OOC | LOW |
+| **iter 82** | A2–A4 — Walter SP + `<identity>` + LIE fix | MEDIUM |
+| **iter 83** | A5 — Omnis-Zeta Anchors: physical Prices | MEDIUM |
+| **iter 84** | A6 — Vyshcherblenny GHOST: shorten to concrete event | LOW |
+| **iter 85** | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand | MEDIUM |
+| **iter 86** | B1 — Elena Examples expand + embodiment | MEDIUM |
+| **iter 87–88** | B2–B4 — Walter/Omnis/Vysherblenny Examples expand | LOW |
+| **iter 89** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
+| **iter 90** | C3–C4 — Vyshcherblenny Bible backfill + align | HIGH |
+| **iter 91** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
+| **iter 92+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
+| **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-**Рекомендация для следующего чата:** начать с iter 80 — P1.2 (OCEAN×Enneagram Matrix disclaimer, Decision item V9). Decision item V8 — после обсуждения с автором.
+**Рекомендация для следующего чата:** начать с iter 81 — Elena SP Tone Frame + OOC (самый простой fix, warm-up). Полный аудит: `docs/research/examples_audit_iter80.md`.
 
 ---
 

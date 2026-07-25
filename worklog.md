@@ -4,45 +4,43 @@
 
 ---
 
-Task ID: 79
+Task ID: 80
 Agent: main
-Task: iter 79 — P1.5 — Voice Isolation уточнение (лингвистический паттерн vs физическая характеристика).
+Task: iter 80 — Разведочный аудит примеров карточек персонажей (Part 10 + inline Parts 1–9 + Bible sync).
 
 Work Log:
-- 1: Клонирован репозиторий, прочитан STATUS.md (iter 78 COMPLETE, no open KI). Понятна задача P1.5 — разрешить противоречие C9: «Voice only in Examples» (§3.1) vs физический голос (тембр) в Description карточек Part 10. Решение V2 (из iter 75 Recon): физический голос (тембр) — часть Embodiment, допустим в Description; лингвистический голос (лексика) — только Examples.
-- 2: Прочитаны все ключевые файлы: part_03.html (§3.1 Voice Isolation + §3.2 Influence Hierarchy + EXAMPLE), part_01.html (§1.4 принцип #2), part_02.html (§2.3 Embodiment Protocol — сенсорный слой «Звук»), part_10.html (RULE голоса + Омнис-Зета Embodiment «Звук:» из iter 75 fix), canon-файлы, glossary, research docs (C9, V2, P1.5).
-- 3: src/master/part_03.html §3.1 — Definition переформулировано: «Лингвистический голос задаётся ТОЛЬКО в Examples и Greeting, никогда в Description». Добавлен RULE callout «Лингвистический паттерн vs физическая характеристика»: явное разделение двух уровней с примерами. Тест: «говорит саркастично» → Examples; «низкий хриплый тембр» → Description как Embodiment.
-- 4: src/master/part_03.html §3.2 — RULE уточнён: «0% влияния на лингвистический голос». EXAMPLE переписан: WRONG = лингвистический в Description; CORRECT = лингвистический в Examples + физическая характеристика (хрипловатый тембр) в Description как часть Embodiment. Добавлено пояснение.
-- 5: src/master/part_01.html §1.4 — принцип #2 уточнён: «Description = логика поведения, Examples = паттерны голоса» → «Лингвистический голос (слова, синтаксис, лексика, ритм фразы) — только Examples; физическая характеристика голоса (тембр, хрип, механический гул) — допустима в Description как часть Embodiment».
-- 6: src/master/appendix_glossary.html — Voice entry: добавлено «Два уровня: лингвистический (только Examples) vs физическая (часть Embodiment, в Description)». Voice Isolation entry: то же разделение добавлено явно.
-- 7: docs/canon/part_03.md — sync с master: §3.1 RULE + §3.2 RULE/EXAMPLE.
-- 8: docs/canon/part_01.md — sync с master: §1.4 принцип #2.
-- 9: docs/canon/appendix_glossary.md — sync: Voice + Voice Isolation entries.
-- 10: VERSION bump 9.2.0 → 9.2.1 (src/VERSION + src/master/VERSION).
-- 11: docs/research/guide_analysis_consolidated.md — C9 → FIXED iter 79. P1.5 → iter 79 ✅ COMPLETED.
-- 12: docs/research/research_plan.md — iter 79 marked ✅ COMPLETED.
-- 13: STATUS.md переписан — clean, no garbage. iter 79 complete, no open KI. Roadmap обновлен: iter 80+.
-- 14: worklog.md — iter 79 detailed, iter 78 → краткая история.
+- 1: Клонирован репозиторий, изучена структура (14 HTML master files, 10 canon parts, character bibles, widgets, scripts).
+- 2: Прочитан полный гайд — ~90 правил извлечены из canon Parts 1–9 как checklist для аудита.
+- 3: Извлечены все 4 полные карточки Part 10 (Elena, Walter, Omnis-Zeta, Vyshcherblenny) с полным содержанием SP/Description/Examples/Anchors/Greeting.
+- 4: Извлечены все character bibles (Elena, Vyshcherblenny, 7 supporting characters) — SPINE/OCEAN/Anchors/Embodiment/Voice data.
+- 5: Составлен полный инвентарь inline-примеров Parts 1–9 (~73 completed examples, ~19 templates, ~20 WRONG/CORRECT demonstrations).
+- 6: Проведён детальный аудит каждой Part 10 карточки против ~90 guide rules (Elena: 4 violations + 3 partials; Walter: 7 violations + 4 partials; Omnis-Zeta: 4 violations + 6 partials; Vyshcherblenny: 7 violations + 3 partials).
+- 7: Проведён Bible-vs-card cross-reference для всех 4 characters (20 discrepancies found, 15 HIGH).
+- 8: Выявлены 4 universal violations (Tone Frame undersize, CORE_DIRECTIVES shorthand, Examples undersize, Anchors format).
+- 9: Выявлены 4 guide self-contradictions (§9.11 claims Elena passes Voice check but she doesn't; OCEAN format mismatch; Anchors placement mismatch; CORE_DIRECTIVES convention undocumented).
+- 10: Обнаружен систематический паттерн FLAW reframing (3/4 characters: Bible = trait name → Card = behavior only).
+- 11: Выявлено 7 unused supporting characters in Bible (Geralt, Joker, Jesse, Edward, Elliot, Nameless One) — 0 appearances in Parts 1–9.
+- 12: Создан полный отчёт: docs/research/examples_audit_iter80.md.
+- 13: STATUS.md обновлен — iter 80 summary, roadmap updated для iter 81+.
+- 14: worklog.md обновлен.
 
 Stage Summary:
-- **iter 79 COMPLETE.** No open KI. P1.5 — Voice Isolation уточнение выполнено.
-- **Modified:** `src/master/part_03.html`, `src/master/part_01.html`, `src/master/appendix_glossary.html`, `docs/canon/part_03.md`, `docs/canon/part_01.md`, `docs/canon/appendix_glossary.md`, `src/VERSION`, `src/master/VERSION`, `STATUS.md`, `worklog.md`, `docs/research/research_plan.md`, `docs/research/guide_analysis_consolidated.md`.
-- **Не изменено:** `src/shell/`, `src/assets/`, `data/`, `parts/`, `widgets/`, `assets/`, `index.html`, `event-bus.js`, `visual-system/`, `scripts/`. `parts/` будет regenerated CI на push.
-- **Готовность к iter 80:** P1.2 — OCEAN×Enneagram Matrix disclaimer (Decision item V9) — после обсуждения с автором.
+- **iter 80 COMPLETE (research only, no code changes).** Full audit documented.
+- **Created:** `docs/research/examples_audit_iter80.md` (comprehensive findings + phased fix plan).
+- **Modified:** `STATUS.md` (iter 80 summary, roadmap iter 81+), `worklog.md`.
+- **Not modified:** Any master HTML files, canon files, card content, character bibles — this iteration is purely observational.
+- **Key findings:** 4 universal violations, 26 card-specific, 20 Bible-vs-card discrepancies, 4 self-contradictions.
+- **Next iter:** iter 81 — Elena SP Tone Frame + OOC (simplest fix, warm-up).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 79**: P1.5 — Voice Isolation уточнение (лингвистический vs физический).
 - **iter 78**: P1.9 — Anchors placement уточнение (отдельный блок в Examples-зоне).
 - **iter 77**: P1.8 — OCEAN-in-Description wording fix (принцип #3 переформулирован).
 - **iter 76**: P1.7 — CoT Tier 0 clarification (Embodiment always acts).
 - **iter 75**: P1 Fixes — KI#54, KI#55, KI#51, KI#52 CLOSED.
 - **iter 74**: Recon & Verification V1–V9 — 4 CONFIRMED, 3 FALSE, 2 Decision.
 - **iter 73**: Research — консолидация guide_analysis → guide_analysis_consolidated + research_plan.
-- **iter 72**: KI#49 + Scenario labels §9.9/§9.10.
-- **iter 71**: KI#48 + Progressive disclosure gap closure.
-- **iter 70**: Docs version bump + KI#46/47 Recon.
-- **iter 69**: KI#45 (version bump 9.1→9.2).
-- **iter 68**: KI#44 (audit_vs_embeds.py path bug) + cleanup.
-- **iter 1–67**: Docs restructure + KI cleanup + canon scaffold + migration + VS elements + CSS scoping + OCEAN labeling + drift.
+- **iter 1–72**: Docs restructure + KI cleanup + canon scaffold + migration + VS elements + CSS scoping + OCEAN labeling + drift.
