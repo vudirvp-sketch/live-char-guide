@@ -79,10 +79,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Елена OCEAN/Enneagram profile | `p5_elena_profile` | §5.2 | Example | OCEAN + Enneagram 6w5 mapping to SPINE |
 | OCEAN Value Conflicts | `p5_ocean_warning` | §5.3 | Warning | Moved from Part 8 AP-15 (Phase 2.2) |
 | Enneagram basics | `p5_enneagram_basics` | §5.4 | Tool+Interactive | 9 типов, SVG widget |
-| MBTI Reference | `p5_mbti_ref` | §5.5 | Reference | Brief note → Appendix A |
-| Enneagram → SPINE | `p5_cross_instrument_map` | §5.6 | Protocol | Страх→LIE, Желание→WANT, etc. |
-| Enneagram wings | `p5_enneagram_wings` | §5.7 | Full treatment | Wing selection |
-| OCEAN×Enneagram matrix | `p5_cross_matrix` | §5.8 | Interactive | 5×9 корреляция |
+| Связь инструментов + MBTI (merged) | `p5_cross_instrument_map` | §5.5 | Protocol+Reference | iter 62: §5.5 MBTI stub merged as subsection + §5.6 merged into §5.5; R1 repetitions removed |
+| Enneagram wings | `p5_enneagram_wings` | §5.6 | Full treatment | Wing selection (renumbered §5.7→§5.6 iter 62) |
+| OCEAN×Enneagram matrix | `p5_cross_matrix` | §5.7 | Interactive | 5×9 корреляция (renumbered §5.8→§5.7 iter 62) |
 
 ### Part 6: CoT — Chain of Thought (Цепочка рассуждений) — `docs/canon/part_06.md`
 
@@ -199,7 +198,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 2 | `part_02.md` | 6 | iter 14 | ✅ MIGRATED |
 | Part 3 | `part_03.md` | 8 | iter 14 | ✅ MIGRATED |
 | Part 4 | `part_04.md` | 11 | iter 7–9 | ✅ MIGRATED |
-| Part 5 | `part_05.md` | 8 | iter 16 | ✅ MIGRATED |
+| Part 5 | `part_05.md` | 7 | iter 16 | ✅ MIGRATED |
 | Part 6 | `part_06.md` | 6 | iter 16 | ✅ MIGRATED |
 | Part 7A | `part_07a.md` | 13 | iter 10–11 | ✅ MIGRATED |
 | Part 7B | `part_07b.md` | 5 | iter 16 | ✅ MIGRATED |
@@ -209,7 +208,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Appendix A (MBTI) | `appendix_mbti.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix B (Model Table) | `appendix_model_table.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix C (Glossary) | `appendix_glossary.md` | 1 | iter 18 | ✅ MIGRATED |
-| **Total** | | **98** | | **Canon COMPLETE** |
+| **Total** | | **97** | | **Canon COMPLETE** |
 
 ---
 
