@@ -75,8 +75,8 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| OCEAN | `p5_ocean_basics` | §5.1 | Tool+Interactive | Pentagon widget + золотое правило |
-| Елена OCEAN/Enneagram profile | `p5_elena_profile` | §5.2 | Example | OCEAN + Enneagram 6w5 mapping to SPINE |
+| OCEAN | `p5_ocean_basics` | §5.1 | Tool+Interactive | Pentagon widget + золотое правило + stress types (iter 63: A59-1) |
+| Елена OCEAN/Enneagram profile | `p5_elena_profile` | §5.2 | Example | OCEAN + Enneagram 6w5 mapping to SPINE + stress type (iter 63) |
 | OCEAN Value Conflicts | `p5_ocean_warning` | §5.3 | Warning | Moved from Part 8 AP-15 (Phase 2.2) |
 | Enneagram basics | `p5_enneagram_basics` | §5.4 | Tool+Interactive | 9 типов, SVG widget |
 | Связь инструментов + MBTI (merged) | `p5_cross_instrument_map` | §5.5 | Protocol+Reference | iter 62: §5.5 MBTI stub merged as subsection + §5.6 merged into §5.5; R1 repetitions removed |
@@ -100,7 +100,7 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|-----------------|---------|--------------|-------|
 | System Prompt (SP) | `p7a_system_prompt` | §7A.1 | Template+Rules | Container with all blocks |
 | CORE DIRECTIVES | `p7a_core_directives` | §7A.2 | System | 7 директив, English in SP |
-| Token Budget | `p7a_token_budget` | §7A.3 | Reference | Per-block limits + calculator |
+| Token Budget | `p7a_token_budget` | §7A.3 | Reference | Per-block limits + calculator + personality sub-budget (iter 63: A59-3) |
 | Tone Frame | `p7a_tone_frame` | §7A.4 | Technique | Dual-function SP element |
 | Format Lock | `p7a_format_lock` | §7A.5 | Rule | Output formatting rules |
 | Author's Note (AN) | `p7a_authors_note` | §7A.6 | Template+Rules | Short instruction after SP |

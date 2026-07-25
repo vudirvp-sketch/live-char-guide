@@ -881,6 +881,28 @@ Anchors:
 <p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
 </div>
 
+<h4>Personality Sub-Budget (внутри Description)</h4>
+<p>Description-бюджет (150/300/700) распределяется между SPINE и психологическими инструментами. Под-бюджеты помогают контролировать, сколько места каждый инструмент занимает, и избежать раздувания personality-секции в ущерб SPINE core.</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Sub-block</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td>SPINE core (GHOST&rarr;LIE&rarr;FLAW&rarr;NEED&rarr;WANT)</td><td>80</td><td>150</td><td>350</td><td>Основа Description — всегда приоритет</td></tr>
+<tr><td>OCEAN profile</td><td>30</td><td>50</td><td>80</td><td>5 значений + интерпретации полюсов</td></tr>
+<tr><td>Enneagram type</td><td>20</td><td>40</td><td>60</td><td>Тип + wing + стресс/рост + SPINE-связи</td></tr>
+<tr><td>MBTI (optional)</td><td>&mdash;</td><td>20</td><td>40</td><td>Только при использовании, справочная роль</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout rule">
+<p><strong>RULE:</strong> Personality sub-budgets должны укладываться в общий Description бюджет. Если OCEAN + Enneagram + MBTI превышают Description бюджет &rarr; сокращайте MBTI (optional) или уберите интерпретации OCEAN, оставив только числовые значения. SPINE core &mdash; приоритет: если Description бюджет ограничен (4K), минимум 80 токенов для SPINE, остальное &mdash; personality если позволяет.</p>
+</div>
+<div class="callout rec">
+<p><strong>RECOMMENDATION:</strong> Для 4K контекста достаточно SPINE core + OCEAN (числовые значения без интерпретаций). Enneagram и MBTI добавляются с 8K+. Для 16K+ &mdash; все три инструмента с интерпретациями.</p>
+</div>
+
 <h4>Калькулятор Token Budget</h4>
 
 <div class="token-calc" id="token-calc" data-toc-exclude>

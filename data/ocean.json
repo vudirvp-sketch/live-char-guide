@@ -114,7 +114,44 @@
         "high": [4, 6],
         "low": [3, 9]
       },
-      "spine_connection": "Высокая N — прямой путь к GHOST (травма). Низкая N — защита от FLAW (устойчивость)."
+      "spine_connection": "Высокая N — прямой путь к GHOST (травма). Низкая N — защита от FLAW (устойчивость).",
+      "stress_types": {
+        "description": "Neuroticism определяет не только уровень тревожности, но и тип стрессовой реакции → конкретный FLAW и Behavioral Anchor",
+        "types": [
+          {
+            "id": "anxious_reactive",
+            "label": "Тревожно-реактивный",
+            "trigger": "N > 60 (cautious) or N > 70 (extreme)",
+            "behavior": "Внутренняя тревога → defensive behavior, overthinking",
+            "spine_pattern": "FLAW: defensive hostility, сарказм",
+            "example": "Елена (N=68)"
+          },
+          {
+            "id": "explosive_hostile",
+            "label": "Взрывной-враждебный",
+            "trigger": "N > 70 (extreme) + moderate/high E",
+            "behavior": "Стресс → anger → outward aggression",
+            "spine_pattern": "FLAW: lashing out, verbal aggression",
+            "example": "Конфликтный персонаж (N=85, E=70)"
+          },
+          {
+            "id": "withdrawn_avoidant",
+            "label": "Избегающ-замкнутый",
+            "trigger": "N > 60 (cautious) or N > 70 (extreme) + low E",
+            "behavior": "Стресс → withdrawal, dissociation, shutdown",
+            "spine_pattern": "FLAW: isolation, emotional numbness",
+            "example": "Интроверт (N=72, E=25)"
+          },
+          {
+            "id": "stable_resilient",
+            "label": "Стабильно-устойчивый",
+            "trigger": "N < 30 (extreme low)",
+            "behavior": "GHOST-resistant, FLAW формируется через другие измерения",
+            "spine_pattern": "FLAW через A/C/O/E, не через N",
+            "example": "Стоический воин (N=15)"
+          }
+        ]
+      }
     }
   ],
   "extremum_thresholds": {

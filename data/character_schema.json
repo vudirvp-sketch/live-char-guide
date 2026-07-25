@@ -603,6 +603,47 @@
       "lorebook": true,
       "cot": "limited",
       "notes": "Full card with CoT"
+    },
+    "personality_sub_budgets": {
+      "description": "Description-бюджет распределяется между SPINE core и психологическими инструментами (A59-3, iter 63)",
+      "sub_blocks": [
+        {
+          "id": "spine_core",
+          "label": "SPINE core (GHOST→LIE→FLAW→NEED→WANT)",
+          "min": 80,
+          "standard": 150,
+          "max": 350,
+          "priority": "always",
+          "notes": "Основа Description — всегда приоритет"
+        },
+        {
+          "id": "ocean_profile",
+          "label": "OCEAN profile",
+          "min": 30,
+          "standard": 50,
+          "max": 80,
+          "priority": "recommended",
+          "notes": "5 значений + интерпретации полюсов"
+        },
+        {
+          "id": "enneagram_type",
+          "label": "Enneagram type",
+          "min": 20,
+          "standard": 40,
+          "max": 60,
+          "priority": "8K+",
+          "notes": "Тип + wing + стресс/рост + SPINE-связи"
+        },
+        {
+          "id": "mbti_optional",
+          "label": "MBTI (optional)",
+          "min": 0,
+          "standard": 20,
+          "max": 40,
+          "priority": "optional",
+          "notes": "Только при использовании, справочная роль"
+        }
+      ]
     }
   },
   "test_scenarios": {

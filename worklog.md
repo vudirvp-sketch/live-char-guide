@@ -4,37 +4,36 @@
 
 ---
 
-Task ID: 62
+Task ID: 63
 Agent: main
-Task: iter 62 — R1 repetitions cleanup (§2.2, §5.1→§5.6) + §5.5 MBTI stub merge в §5.6.
+Task: iter 63 — A59-1 Neuroticism→stress type taxonomy + A59-3 Personality sub-budget.
 
 Work Log:
-- 1: **Repo клонирован** — git clone. Прочитан STATUS.md (iter 61), worklog.md, AGENT_NAVIGATION.md, content_map.md, canon part_02.md, canon part_05.md, master HTML part_02.html, part_05.html (src/master + parts). Понятна структура и repetition targets.
-- 2: **R1 cleanup §2.2 (part_02.md):** Удалена рестатировка T→A→P формата из bullet «Цена в той же сцене» → оставлено «немедленная, не отложенная» (формат определён в §2.1). RULE о отложенном Price упрощён: «Price должен быть немедленным (см. §2.1)» вместо полного переопределения.
-- 3: **R1 cleanup §5.1→§5.6 (part_05.md):** §5.1 RULE/RECOMMENDATION оставлены (первое объяснение). §5.6 (now §5.5) preamble удалён — заменён на «Валидация SPINE описана выше (§5.1 RULE).» Closing RULE «OCEAN и Enneagram проверяют SPINE — не создают» — удалён (дословное повторение §5.1 RULE).
-- 4: **§5.5 MBTI stub merge (part_05.md):** §5.5 (1-line stub `p5_mbti_ref`) удалён как standalone section. Content merged как `###` subsection «MBTI (справочная роль)» внутри §5.6 (`p5_cross_instrument_map`). Section renumbered: §5.6→§5.5, §5.7→§5.6, §5.8→§5.7.
-- 5: **Canon→master HTML sync:**
-  - `src/master/part_02.html` + `parts/part_02.html`: §2.2 cleanup synced (2 edits: bullet + RULE simplification).
-  - `src/master/part_05.html` + `parts/part_05.html`: §5.5 stub removed, §5.6 preamble/RULE removed, MBTI subsection added, redundant RULE + OCEAN-MBTI paragraph removed (merged with Enneagram↔MBTI).
-- 6: **manifest.json:** Удалён `p5_mbti_ref` из anchors part_05 (8→7 anchors).
-- 7: **Doc updates:**
-  - `docs/content_map.md`: Part 5 entries обновлены (MBTI stub merged, renumbered §5.5/6/7), total 98→97→96 sections.
-  - `AGENT_NAVIGATION.md`: Updated section count 98→97.
-  - `STATUS.md`: Rewritten for iter 62 (clean, no мусор).
-- 8: **Validation gates: TBD (need to run).**
+- 1: **Repo клонирован** — git clone. Прочитан STATUS.md (iter 62), worklog.md, AGENT_NAVIGATION.md, content_map.md, iter60_analysis_plan.md, canon part_05.md, part_07a.md, ocean.json, character_schema.json. Понятна структура и A59-1/A59-3 scope.
+- 2: **A59-1 §5.1 (canon part_05.md):** Добавлена subsection «Тип стресса (Neuroticism → Stress Type)» после таблицы 5 измерений OCEAN. 4 типа: тревожно-реактивный, взрывной-враждебный, избегающ-замкнутый, стабильно-устойчивый. Каждый → SPINE FLAW pattern + пример. RECOMMENDATION: определяйте тип при N>60 or N>70.
+- 3: **A59-1 §5.2 Elena profile (canon):** N=68 row обновлен — добавлен «Тип стресса: тревожно-реактивный» + объяснение связи с FLAW. RULE paragraph обновлен — добавлено объяснение, почему FLAW = defensive сарказм.
+- 4: **A59-1 §5.5 validation table (canon):** High Neuroticism row обновлен — ссылка на §5.1 stress types, признак противоречия расширен (проверка E и A при несогласованности типа стресса).
+- 5: **A59-1 ocean.json:** Добавлен `stress_types` объект в N trait — 4 типа с id/label/trigger/behavior/spine_pattern/example.
+- 6: **A59-1 canon→master HTML sync:** Все §5.1/§5.2/§5.5 изменения synced в `src/master/part_05.html` + `parts/part_05.html` (stress type table + Elena N row + RULE paragraph + validation table row).
+- 7: **A59-3 §7A.12 (canon part_07a.md):** Добавлена subsection «Personality Sub-Budget (внутри Description)» после RULE paragraph. Таблица: SPINE core (80/150/350) + OCEAN (30/50/80) + Enneagram (20/40/60) + MBTI optional (—/20/40). RULE + RECOMMENDATION callouts.
+- 8: **A59-3 character_schema.json:** Добавлен `personality_sub_budgets` в `token_budgets` — 4 sub_blocks с min/standard/max/priority/notes.
+- 9: **A59-3 canon→master HTML sync:** Sub-budget synced в `src/master/part_07a.html` + `parts/part_07a.html`.
+- 10: **Validation gates: all PASS.** audit_canon_master_sync 96/96 ✅, build-unified 96 sections 0 errors ✅, validate_terms ✅, check_duplicates ✅, check_english 24 leaks baseline unchanged ✅.
+- 11: **Doc updates:** STATUS.md rewritten for iter 63 (clean, no мусор). worklog.md updated.
 
 Stage Summary:
-- **iter 62 IN PROGRESS.** R1 repetitions cleanup done for §2.2 and §5.1→§5.6. §5.5 MBTI stub merged into §5.6 (now §5.5) as subsection. Section renumbered. Canon→master HTML synced. Manifest updated. Docs cleaned.
-- **Modified files (12):** docs/canon/part_02.md, docs/canon/part_05.md, src/master/part_02.html, src/master/part_05.html, parts/part_02.html, parts/part_05.html, parts/manifest.json, docs/content_map.md, AGENT_NAVIGATION.md, STATUS.md, worklog.md = 11 files.
-- **Validation gates:** need to run (audit_canon_master_sync, validate_terms, check_duplicates, check_english, build-unified).
-- **Точка остановки:** iter 62 validation pending. After validation passes → iter 62 COMPLETE.
+- **iter 63 COMPLETE.** A59-1 stress type taxonomy added. A59-3 personality sub-budget added. All canon→master HTML synced. All data JSONs updated. All validation gates PASS.
+- **Modified files (10):** docs/canon/part_05.md, docs/canon/part_07a.md, src/master/part_05.html, src/master/part_07a.html, parts/part_05.html, parts/part_07a.html, data/ocean.json, data/character_schema.json, STATUS.md, worklog.md.
+- **New invariants:** Neuroticism stress types (iter 63+), Personality sub-budget (iter 63+).
+- **Section count unchanged:** 96 sections.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
-- **iter 61**: KI#40 closed (canon→master sync). 11 Cat B headings unified. Doc cleanup.
-- **iter 60**: Языковая политика revision + canon dedup. KI#40 открыт.
+- **iter 62**: R1 repetitions cleanup §2.2/§5.1→§5.6 + §5.5 MBTI stub merge. 96 sections.
+- **iter 61**: KI#40 closed (canon→master sync). 11 Cat B headings unified.
+- **iter 60**: Языковая политика revision + canon dedup.
 - **iter 58**: P2+P3 metadata enrichment. Glossary consolidation.
 - **iter 57**: Annotation blocks §10.2-10.4 + scenario-метки.
 - **iter 55-56**: KI#37/38/39 CLOSED + Decision tree.

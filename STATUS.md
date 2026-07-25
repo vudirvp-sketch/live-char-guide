@@ -9,13 +9,15 @@
 
 ## Текущее состояние
 
-**iter 62 — R1 repetitions cleanup + §5.5 MBTI stub merge.** Выполнено:
+**iter 63 — A59-1 (Neuroticism→stress type) + A59-3 (Personality sub-budget).** Выполнено:
 
-- **R1 cleanup §2.2:** Удалена дословная рестатировка T→A→P формата из bullet «Цена в той же сцене» (оставлено «немедленная, не отложенная», формат уже определён в §2.1). RULE о отложенном Price упрощён: «Price должен быть немедленным (см. §2.1)» вместо полного переопределения.
-- **R1 cleanup §5.1→§5.6:** §5.1 RULE «не собирать SPINE снизу вверх» — оставлен (первое объяснение). §5.6 preamble + closing RULE — удалены (дословное повторение §5.1 RULE). Preamble заменён на: «Валидация SPINE описана выше (§5.1 RULE).»
-- **§5.5 MBTI stub → merged в §5.6:** §5.5 (1-line stub `p5_mbti_ref`) удалён как standalone section, content merged как `<h4>` subsection «MBTI (справочная роль)» внутри §5.6 (`p5_cross_instrument_map`). §5.6 → §5.5 (renumbered). §5.7 → §5.6, §5.8 → §5.7.
-- **manifest.json:** Удалён `p5_mbti_ref` из anchors part_05 (8→7 anchors, total sections 97→96).
-- **content_map.md:** Part 5 entries обновлены (MBTI stub merged, renumbered §5.5/6/7), total 97→96 sections.
+- **A59-1: Neuroticism→Stress Type taxonomy (§5.1):** Добавлена subsection «Тип стресса (Neuroticism → Stress Type)» после таблицы 5 измерений OCEAN. 4 типа: тревожно-реактивный (N>70), взрывной-враждебный (N>70+E↑), избегающ-замкнутый (N>60+E↓), стабильно-устойчивый (N<30). Каждый тип → конкретный SPINE-паттерн (FLAW) + пример персонажа.
+- **A59-1: §5.2 Elena profile:** N=68 row обновлен — добавлен «Тип стресса: тревожно-реактивный» и объяснение связи с FLAW. RULE paragraph обновлен — добавлено объяснение, почему FLAW = defensive сарказм.
+- **A59-1: §5.5 OCEAN→SPINE validation:** High Neuroticism row обновлен — ссылка на §5.1 stress types вместо generic «тревога, гнев, избегание». Признак противоречия расширен: проверка E и A при несогласованности типа стресса.
+- **A59-1: ocean.json:** Добавлен `stress_types` объект в N trait (4 типа с id, label, trigger, behavior, spine_pattern, example).
+- **A59-3: Personality Sub-Budget (§7A.12):** Добавлена subsection «Personality Sub-Budget (внутри Description)» после RULE paragraph. Таблица: SPINE core (80/150/350), OCEAN profile (30/50/80), Enneagram type (20/40/60), MBTI optional (—/20/40). RULE: personality sub-budgets ≤ Description budget. RECOMMENDATION: 4K = SPINE core + OCEAN numbers, 8K+ = Enneagram, 16K+ = все три.
+- **A59-3: character_schema.json:** Добавлен `personality_sub_budgets` объект в `token_budgets` (4 sub_blocks с min/standard/max/priority/notes).
+- **Canon→master HTML sync:** Все изменения synced в `src/master/part_05.html` + `parts/part_05.html` + `src/master/part_07a.html` + `parts/part_07a.html`.
 
 **Ключевой принцип iter 60+:** Гайд — единый последовательный документ. Читатель идёт сверху вниз. Если концепция объяснена выше — не повторять. Просто использовать.
 
@@ -32,15 +34,6 @@ Validation gates:
 ## Known Issues
 
 **Открытые KI:** нет.
-
-Last 5 closed KI for reference:
-| KI | Severity | Status | Iter |
-|----|----------|--------|------|
-| KI#40 | MEDIUM | ✅ CLOSED | iter 61 |
-| KI#37-39 | LOW | ✅ CLOSED | iter 54-55 |
-| KI#36 | HIGH | ✅ CLOSED | iter 51 |
-| KI#34-35 | MEDIUM/LOW | ✅ CLOSED | iter 48-50 |
-| KI#33 | MEDIUM | ✅ CLOSED | iter 43-47 |
 
 При обнаружении новых багов — сначала документировать в STATUS.md §«Known Issues» как KI#N, потом фиксить.
 
@@ -59,14 +52,15 @@ Last 5 closed KI for reference:
 - **Canon → master HTML sync (iter 61+ invariant):** Regression test: 96/96 PASS.
 - **Callout class policy (iter 45+):** `.callout.rule/.rec/.ex` and plain `.callout` only.
 - **OCEAN labeling (iter 40+):** extreme = `<30` or `>70`; cautious = `30–40` / `60–70`.
+- **Neuroticism stress types (iter 63+ invariant):** High N → 3 stress types (anxious-reactive / explosive-hostile / withdrawn-avoidant), Low N → stable-resilient. Each → specific SPINE FLAW pattern.
+- **Personality sub-budget (iter 63+ invariant):** Description budget splits into SPINE core (priority) + OCEAN + Enneagram + MBTI (optional). 4K = SPINE + OCEAN numbers only.
 
 ---
 
-## iter 63+ Roadmap
+## iter 64+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 63** | A59-1 + A59-3 (psychology) | LOW |
 | **iter 64** | A59-2 + P2-remaining + drift v1.3 | MEDIUM |
 | **iter 65** | A59-4 + A59-6 (optional) | LOW |
 | **deferred** | Prose mentions Cat B in master HTML: invert «English (Russian)» → «Russian (English)» for full consistency with language policy iter 60 | LOW |
