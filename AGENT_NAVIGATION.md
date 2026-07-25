@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.2.0** + все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED + **iter 65: KI#41 fixed — E10 VS-EMBED hardcoded dark-theme colors → CSS variables (scoped fix в src/master + parts, 90 replacements, E09 region не затронут, deferred as KI#42). KI#43 (parts/ sync drift) documented as deferred. 96 sections unchanged. All validation gates PASS (96/96 sync, 96 sections build, terms ✅, duplicates ✅, 24 English leaks baseline, drift v1.3 170 paragraph drifts / 131 actionable)**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`.
+> **Entry document.** Read this first. Текущая версия: **9.2.0** + все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED + **iter 67: P2-remaining (R1 cleanup §4.10) + Cat B prose inversion (6 mentions) + cleanup 6 stale files. iter 60–67 plan COMPLETE. 96 sections unchanged. All validation gates PASS (96/96 sync, 24 English leaks baseline, terms ✅, duplicates ✅)**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`.
 
 ---
 
@@ -327,7 +327,6 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 ### Новые баги и противоречия
 
 24. **При обнаружении новых багов** — сначала документировать в `STATUS.md` §«Known Issues» как KI#N, потом фиксить.
-25. **При обнаружении новых противоречий в каноне** — добавлять в `docs/AUDIT_VERIFICATION.md` §2 таблицу + sub-ID (A11, B7, etc.) с пометкой P0-P3.
 
 ---
 
@@ -352,8 +351,19 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | `docs/CONTENT_RESTRUCTURE_PLAN.md` | При пересмотре стратегии переработки контента (iter 6+) |
 | `docs/canon/_README.md` | При изменении правил Canon (что это, как писать, как мигрировать) |
 | `docs/canon/part_NN.md` | При создании/обновлении Canonical Guide Spec — один файл на Part. Migration Status см. в `docs/canon/_README.md` §5. |
-| `docs/AUDIT_VERIFICATION.md` | При обнаружении новых противоречий в каноне — добавлять в §2 таблицу с sub-ID. Фикс-план iter 35-38 (KI#21 P0 ✅ CLOSED, P1-P3 pending) — canonical source. |
+| `docs/canon/iter60_analysis_plan.md` | iter 60–67 план (завершён). Историческая справка. |
 | `visual-system/PLAN.md` | При изменении visual system roadmap |
+
+### Удалено в iter 67 (cleanup устаревших файлов)
+
+| File | Reason |
+|------|--------|
+| `ITER51_README.md` | iter 51 README, дублирует info из worklog/STATUS/CHANGELOG. |
+| `_ITER51_DELETE_STALE.txt` | iter 51 cleanup marker, выполнен. |
+| `AUDIT_VERIFICATION.md` (root) | Дубликат `docs/AUDIT_VERIFICATION.md`, устаревший. |
+| `docs/AUDIT_VERIFICATION.md` | iter 33-45 audit verification. KI#21 ✅ CLOSED полностью. |
+| `docs/AUDIT_REVIEW_ITER54.md` | iter 54-56 research. KI#37/38/39 ✅ CLOSED. |
+| `docs/cross_reference_sync.md.DELETED` | Marker для файла, удалённого в iter 4 (контент слит в `AGENT_NAVIGATION.md` §9). |
 
 ### Удалено в iter 1+2+3+4 (docs restructure)
 
@@ -382,7 +392,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ### OP-1 — Docs restructure по образцу poe2-regex-ru
 
-**Статус:** iter 1-53 завершены. Полный анализ в `PLAN.md`. Compressed iter 52 — оставлены только milestone iters.
+**Статус:** iter 1-67 завершены. iter 60–67 plan (`docs/canon/iter60_analysis_plan.md`) — COMPLETE.
 
 **Iter milestones (compressed — full detail в `worklog.md` + `CHANGELOG.md` + git log):**
 
@@ -400,29 +410,36 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | 39-42 | Doc drift + OCEAN labeling + bible cross-ref + component-extracts audit | KI#25..#32 ✅ |
 | 43-47 | Canon→master HTML sync Phase 1-4 — 57/57 content fixes applied | KI#33 ✅ |
 | 48 | General-purpose drift detector `audit_canon_master_drift.py` added (informational, exit 0) | KI#34 🟡, KI#35 🟡 |
-| 50 | KI#34 + KI#35 ✅ CLOSED — p1_prebuild_checklist section; p4_spine_overview canon metadata | KI#34 ✅, KI#35 ✅ |
-| 51 | KI#36 ✅ CLOSED — anchor navigation: 98 id attrs added; lazy-loader.js selector fix; 13 русификаций | KI#36 ✅ |
-| 52 | Paragraph-level Jaccard drift detection added в `audit_canon_master_drift.py` v1.1; documentation cleanup | — |
-| 53 | Drift categorization added в `audit_canon_master_drift.py` v1.2 (5 категорий: vs_embed_ref / cross_ref / callout_label / no_master_match / plain_text); recon 88 drifts подтвердил: false positives нет | — |
-| 54 | Исследовательская итерация: разбор сводного аудита (~22 утверждения) в `docs/AUDIT_REVIEW_ITER54.md`. Найдены 3 LOW-бага (KI#37/38/39, OPEN). Никаких правок гайда. contentHash UNCHANGED. | — |
-| 55-56 | **Все 3 LOW KI ✅ CLOSED** (KI#37 disclaimer в §1.1; KI#38 AP table → intro+cross-ref canonical=VS-EMBED E12; KI#39 23 HTML-комментария удалены из code-блоков Part 10). Decision tree для фреймворков добавлен в `part_05.md §5.1`. 2 recap-чек-листа свёрнуты в `<details>` (§7A.13 + §9.11 Quick Check). Scenario-метка для §9.3 добавлена. iter 56 deep audit подтвердил отсутствие дальнейших critical дублирований. contentHash CHANGED (7th change). | KI#37, KI#38, KI#39 |
+| 50-51 | KI#34/35/36 ✅ CLOSED — anchor navigation: 98 id attrs added; lazy-loader.js selector fix | KI#34/35/36 ✅ |
+| 52-53 | Paragraph-level Jaccard drift detection v1.1 + drift categorization v1.2 (5 категорий) | — |
+| 54-56 | Audit review → KI#37/38/39 ✅ CLOSED + Decision tree + recap-spoilers | KI#37/38/39 ✅ |
+| 57-58 | Annotation blocks §10.2-10.4 + scenario labels + metadata enrichment (glossary consolidation, progressive disclosure, canonical markers) | — |
+| 60 | Language policy revision (Cat A/B split, RU primary in headings) + canon dedup (no-repeat principle, Part 0/1/4) | — |
+| 61 | KI#40 closed (canon→master sync) + 11 Cat B headings unified | KI#40 ✅ |
+| 62 | R1 repetitions cleanup §2.2/§5.1→§5.6 + §5.5 MBTI stub merge | — |
+| 63 | A59-1 Neuroticism→stress type taxonomy + A59-3 Personality sub-budget | — |
+| 64 | A59-2 Trigger→Stress→FLAW chain + drift v1.3 | — |
+| 65 | KI#41 fixed — E10 VS-EMBED hardcoded colors → CSS variables | KI#41 ✅ |
+| 66 | KI#42 (E09 embed CSS vars) + KI#43 (parts/ rebuild) | KI#42/43 ✅ |
+| 67 | P2-remaining (R1 cleanup §4.10) + Cat B prose inversion (6 mentions) + cleanup 6 stale files | — |
 
-**iter 57+ — что осталось (LOW priority only, проект STABLE):**
-- **LOW priority — Glossary double-render inefficiency:** structural, by design (canon = source of truth, HTML = render).
+**iter 68+ — что осталось (LOW priority only, проект STABLE):**
+- **Разведка (recon):** поиск новых багов или audit-задач.
+- **LOW priority — Glossary double-render inefficiency:** structural, by design.
 - **LOW priority — Component extracts regeneration (опционально):** regenerate 54 файла from master. Нет business value пока extracts не используются в build/runtime.
-- **LOW priority — Dependabot merges (informational, GitHub-level):** 10 unmerged branches (5 GitHub Actions + 5 npm/yarn bumps). Слияние через GitHub UI или `git merge origin/dependabot/...`.
-- **LOW priority — Paragraph drift tuning (опционально):** iter 55 baseline: 89 drifts (was 88; +1 = disclaimer параграф в §1.1). Real semantic differences, false positives нет. Threshold 0.3 / MIN_PARAGRAPH_LENGTH 30 остаются без изменений.
-- **P2 (опционально) — canonical-location-маркер:** ввести `[canonical: ...]` vs `[ref: ...]` для различения определений и cross-refs (~150 правок). Поможет читателю отличить «тут полное определение» от «тут ссылка».
+- **LOW priority — Dependabot merges (informational, GitHub-level).**
+- **LOW priority — Paragraph drift tuning (опционально):** iter 64 baseline: 170 drifts / 131 actionable. Real semantic differences, false positives нет.
+- **P2 (опционально) — canonical-location-маркер:** ввести `[canonical: ...]` vs `[ref: ...]` для различения определений и cross-refs (~150 правок).
 - **P2 (опционально) — Progressive disclosure метки:** `[BASIC]` / `[INTERMEDIATE]` / `[EXPERT]` к секциям (~50 секций).
-- **P3 (опционально) — Annotation blocks для §10.2-§10.4:** добавить детальные Annotation (как в §10.1) для карточек Уолтера, Омнис-Зета, Выщербленного. Несоответствие: только §10.1 имеет Annotation.
-- **P3 (опционально) — Расширение scenario-меток:** применить iter 55 pattern (scenario label в §9.3) к остальным чек-листам Part 9 (§9.5/§9.6/§9.7/§9.11).
-- **Принцип `viz > dry text` (iter 8+):** сохраняется. Unique контент не удаляется даже при дублировании. **Catalog vs Detail / Annotation Layer patterns** — NOT pure re-explanation, keep-by-design с documented rationale (см. KI#18-G/H).
-- **Recap-чек-листы в `<details>` (iter 55+ invariant):** recap-чек-листы (дублирующие уже изложенные правила) сворачиваются в `<details class="interactive"><summary>📋 Recap-чек-лист (сворачивается — дублирует правила из §X.Y)</summary>...</details>` с cross-refs. Диагностические чек-листы (§9.3 structural, §9.5 symptom, §9.6 decision tree, §9.11 pre-deploy gate) НЕ сворачиваются.
-- **VS scroll-animation invariant:** все animation classes в `src/assets/vs-styles.css` должны быть покрыты либо `SCROLL_ENTER_SELECTOR` в `vs-scroll-observer.js`, либо `scroll-enter` class на каждом элементе. Audit: `python3 scripts/audit_vs_embeds.py` (pre-existing path issue — symlink workaround `ln -sfn /path/to/repo /home/z/my-project/work/live-char-guide`).
-- **CSS scoping invariant (iter 34+):** VS-EMBED element CSS selectors должны быть scoped к element-specific parent, НЕ использовать generic class names глобально.
-- **YAML front-matter (iter 37+):** все canon-файлы (кроме `_README.md`) используют YAML front-matter.
-- **Callout labels English (iter 37+):** метки `RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`, `Demonstrates`, `Annotation` — English semantic anchors.
-- **Новые баги:** сначала документировать в `STATUS.md` как KI#N, потом фиксить. **Новые противоречия в каноне:** добавлять в `docs/AUDIT_VERIFICATION.md` §2 таблицу с sub-ID (A11, B7, и т.д.) и пометкой P0-P3.
+- **P3 (опционально) — Annotation blocks для §10.2-§10.4:** добавить детальные Annotation (как в §10.1) для карточек Уолтера, Омнис-Зета, Выщербленного.
+- **P3 (опционально) — Расширение scenario-меток:** применить iter 55 pattern к остальным чек-листам Part 9.
+- **Принцип `viz > dry text` (iter 8+):** сохраняется. Unique контент не удаляется даже при дублировании. **Catalog vs Detail / Annotation Layer patterns** — NOT pure re-explanation, keep-by-design.
+- **Recap-чек-листы в `<details>` (iter 55+ invariant):** recap-чек-листы сворачиваются в `<details>` с cross-refs. Диагностические чек-листы НЕ сворачиваются.
+- **VS scroll-animation invariant:** все animation classes должны быть покрыты либо `SCROLL_ENTER_SELECTOR`, либо `scroll-enter` class.
+- **CSS scoping invariant (iter 34+):** VS-EMBED element CSS selectors scoped к element-specific parent.
+- **YAML front-matter (iter 37+):** все canon-файлы используют YAML front-matter.
+- **Callout labels English (iter 37+):** метки `RULE`, `RECOMMENDATION`, `EXAMPLE` и др. — English semantic anchors.
+- **Новые баги:** сначала документировать в `STATUS.md` как KI#N, потом фиксить.
 
 **Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5 (все 10 Parts + 4 Appendix + Part 0 concept ✅ MIGRATED/ADDED, Canon COMPLETE).
 
@@ -490,4 +507,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом iter 57+ прочитай `STATUS.md` (iter 55-56 — все 3 LOW KI закрыты, проект STABLE), `worklog.md` (iter 55-56 record — самый подробный; iter 54 one-liner), этот файл (§8 OP-1 iter 55-56 row + iter 57+ roadmap — только LOW/P2/P3 опциональные задачи), `docs/canon/_README.md` (§5 migration status, §3.9 callout labels policy), `docs/AUDIT_REVIEW_ITER54.md` (разбор аудита + iter 55-56 fixes). **Приоритет iter 57+: только LOW/P2/P3 опционально** — Glossary double-render (by design), Component extracts regeneration (опционально, no business value), Dependabot merges (GitHub-level), Paragraph drift tuning (89 drifts, false positives нет), canonical-location-маркер (~150 правок, P2), Progressive disclosure метки (~50 секций, P2), Annotation blocks для §10.2-§10.4 (P3), Расширение scenario-меток (P3). Если новых багов нет — проект STABLE. **Invariants (iter 55+):** (1) `viz > dry text` (iter 8+). (2) VS scroll-animation — `python3 scripts/audit_vs_embeds.py` (symlink workaround). (3) Component extracts drift (iter 42+). (4) CSS scoping (iter 34+). (5) YAML front-matter (iter 37+). (6) Guide's role as example takes priority over character canon (iter 39+). (7) OCEAN labeling consistency (iter 40+). (8) Bible ↔ canon cross-ref symmetry (iter 41+). (9) **Anchor navigation (iter 51+, KI#36 ✅ CLOSED):** все `<section data-section="X">` имеют `id="X"`. (10) **Canon → master HTML sync (iter 43+, iter 50 ✅ 58/58, iter 51 ✅ +98 id attrs, iter 55 ✅ +5 edits):** `docs/canon/*.md` = source of truth. `src/master/*.html` = production HTML. Regression test `audit_canon_master_sync.py` 96/96 PASS. (11) **Drift detector (iter 48+, iter 52 ✅ paragraph-level, iter 53 ✅ categories, iter 55 baseline = 89 drifts):** `audit_canon_master_drift.py` v1.2 — informational, exit 0. (12) **Build hash vs contentHash (iter 44+, iter 55 ✅ CHANGED):** Shell hash `69d9b813` UNCHANGED. contentHash = 7th change (6 master HTML файлов модифицированы iter 55). (13) **Callout class policy (iter 45+):** разрешены `.callout.rule/.rec/.ex` и plain `.callout`. (14) **Recap-чек-листы в `<details>` (iter 55+ invariant):** recap-дубликаты правил сворачиваются в `<details class="interactive"><summary>📋 Recap-чек-лист ...</summary>...</details>` с cross-refs. Диагностические чек-листы НЕ сворачиваются. Если найден новый баг — сначала документируй в `STATUS.md` как KI#N, потом фиксий. Если найдено новое противоречие в каноне — добавляй в `docs/AUDIT_VERIFICATION.md` §2 с sub-ID (A11, B7) и P0-P3. **B3 — НЕ пытаться «укоротить Examples Омнис-Зета»** (KI#21-B3 INVALID). **НЕ следовать радикальным предложениям аудита** (удаление фреймворков, схлопывание чек-листов, переписывание таблиц) — они неверны и приведут к деградации гайда (см. `docs/AUDIT_REVIEW_ITER54.md` §11.1).
+**Подсказка следующему агенту:** Перед стартом iter 68+ прочитай `STATUS.md` (iter 67 — P2-remaining + Cat B prose inversion, проект STABLE), `worklog.md` (iter 67 record — самый подробный), этот файл (§8 OP-1 iter milestones + iter 68+ roadmap — только LOW/P2/P3 опциональные задачи), `docs/canon/_README.md` (§5 migration status, §3.9 callout labels policy). **Приоритет iter 68+: только LOW/P2/P3 опционально** — Glossary double-render (by design), Component extracts regeneration (опционально), Dependabot merges (GitHub-level), Paragraph drift tuning (170 drifts, false positives нет), canonical-location-маркер (~150 правок, P2), Progressive disclosure метки (~50 секций, P2), Annotation blocks для §10.2-10.4 (P3), Расширение scenario-меток (P3). Если новых багов нет — проект STABLE. **Invariants (iter 67+):** (1) `viz > dry text` (iter 8+). (2) VS scroll-animation — `python3 scripts/audit_vs_embeds.py` (symlink workaround). (3) Component extracts drift (iter 42+). (4) CSS scoping (iter 34+). (5) YAML front-matter (iter 37+). (6) Guide's role as example takes priority over character canon (iter 39+). (7) OCEAN labeling consistency (iter 40+). (8) Bible ↔ canon cross-ref symmetry (iter 41+). (9) **Anchor navigation (iter 51+, KI#36 ✅ CLOSED):** все `<section data-section="X">` имеют `id="X"`. (10) **Canon → master HTML sync (iter 43+, 96/96 PASS):** `docs/canon/*.md` = source of truth. `src/master/*.html` = production HTML. (11) **Drift detector (iter 48+, v1.3):** `audit_canon_master_drift.py` — informational, exit 0. (12) **Build hash `69d9b813` UNCHANGED с iter 34** (master HTML контент changes не входят в shell hash computation). (13) **Callout class policy (iter 45+):** разрешены `.callout.rule/.rec/.ex` и plain `.callout`. (14) **Recap-чек-листы в `<details>` (iter 55+ invariant).** (15) **Cat B prose mentions (iter 67+):** «Russian (English)» форма, не «English (Russian)». Если найден новый баг — сначала документируй в `STATUS.md` как KI#N, потом фиксий.
