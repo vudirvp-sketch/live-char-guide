@@ -6,26 +6,23 @@
 
 ---
 
-## Фаза 1 — Recon & Verification (iter 74)
+## Фаза 1 — Recon & Verification (iter 74) ✅ COMPLETED
 
-**Цель:** Проверить 9 утверждений из `guide_analysis.md`, которые могут быть сделаны на устаревшей версии репозитория или на неверном контенте.
+**Цель:** Проверить 9 утверждений V1–V9. **Результат:** 4 CONFIRMED (KI#51, KI#52, KI#54, KI#55), 3 FALSE (V1, V4, V6), 2 Decision items (V8, V9).
 
-| # | Утверждение | Файл для проверки | Команда верификации | Если подтверждено → KI |
-|---|-------------|-------------------|---------------------|------------------------|
-| V1 | `docs/canon/part_07a.md` обрезан | `docs/canon/part_07a.md` | `wc -l docs/canon/part_07a.md` + проверить наличие §7A.1–§7A.9 (System Prompt, CORE DIRECTIVES, Format Lock, XML, Sampling Parameters) | KI#50 |
-| V2 | Голос в Description карточек Part 10 | `src/master/part_10.html` | `grep -E 'голос|тембр|резонанс|саркаст' src/master/part_10.html` в блоках `<section data-section="...description">` | KI#51 |
-| V3 | Нефизический Price в примере Anchors | `src/master/part_02.html` | `grep -E 'Какая из историй' src/master/part_02.html` | KI#52 |
-| V4 | Inline changelog / dev notes в рендеримом контенте | `src/master/*.html` | `grep -E 'Fixed|scroll-enter|IntersectionObserver|aria-label' src/master/*.html` | KI#53 |
-| V5 | Мёртвые ссылки на `docs/canon/` в reader-facing контенте | `src/master/*.html` | `grep -E 'docs/canon/' src/master/*.html` | KI#54 |
-| V6 | «Отсутствие правил» vs «обязательный чек-лист» | `src/master/part_01.html` + `src/master/part_00.html` | Прочитать введение и тон чек-листов | (не KI, контент-решение) |
-| V7 | N>70 указан дважды в таблице типов стресса | `src/master/part_05.html` | `grep -A 2 -B 2 'N.*70' src/master/part_05.html` | KI#55 |
-| V8 | GHOST пример «видел, как дом сгорел» — перцептивный вывод | `src/master/part_05.html` | `grep -E 'видел|дом сгорел' src/master/part_05.html` | (не KI, контент-решение) |
-| V9 | OCEAN×Enneagram Matrix без обоснования | `src/master/part_05.html` | Проверить наличие §5.7 и контекста | (не KI, контент-решение) |
+| # | Результат | KI |
+|---|-----------|----|
+| V1 | FALSE — canon полный, 740 строк, все §7A.1–§7A.13 | — |
+| V2 | CONFIRMED — Омнис Description Embodiment «Голос» | KI#51 |
+| V3 | CONFIRMED — «Какая из историй?» нефизический Price | KI#52 |
+| V4 | FALSE — changelog только в HTML-комментариях | — |
+| V5 | CONFIRMED — docs/canon/ видимые ссылки в part_01 | KI#54 |
+| V6 | FALSE — тонального конфликта нет | — |
+| V7 | CONFIRMED — N>70 дважды, заголовок один | KI#55 |
+| V8 | Borderline — перцептивный фильтр в GHOST примере | Decision |
+| V9 | CONFIRMED — Matrix без disclaimer | Decision |
 
-**По результатам Recon:**
-- Обновить STATUS.md — добавить новые KI (если найдены).
-- Запустить validation gates: `pnpm run validate`, `pnpm run qa`.
-- Записать результаты в `worklog.md`.
+Детали — в STATUS.md §Known Issues и guide_analysis_consolidated.md §11.
 
 ---
 
