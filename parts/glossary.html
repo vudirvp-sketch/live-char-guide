@@ -1,111 +1,115 @@
 <section id="glossary" class="no-js-only" data-toc-exclude>
 <h2>Глоссарий</h2>
 <dl>
-<dt>System Prompt <small class="glossary-abbr">(SP)</small> <a href="#p7a_system_prompt" class="glossary-ref">→</a></dt>
-<dd>Определение, назначение, расположение в интерфейсе Отладка: проверьте конфликты с карточкой персонажа</dd>
-<dt>Description <a href="#p1_card_overview" class="glossary-ref">→</a></dt>
-<dd>Определение, назначение, расположение в карточке Оптимизация: проверьте баланс фактологии vs поведенческих инструкций</dd>
-<dt>Examples <a href="#p3_examples_rules" class="glossary-ref">→</a></dt>
-<dd>Определение, правило Voice Isolation Отладка: проверьте contamination от внешних <START> блоков</dd>
-<dt>Greeting Message <a href="#p7b_greeting" class="glossary-ref">→</a></dt>
-<dd>Определение, назначение, влияние на голос Диагностика: проверьте соответствие Examples vs Greeting Message</dd>
-<dt>Author's Note <small class="glossary-abbr">(AN)</small> <a href="#p7a_authors_note" class="glossary-ref">→</a></dt>
-<dd>Определение, назначение, частота обновления Отладка: проверьте приоритет инъекции и конфликт с LB</dd>
-<dt>Character Card <a href="#p1_card_overview" class="glossary-ref">→</a></dt>
-<dd>Определение, составные части Продвинутая конфигурация с CoT и AN</dd>
-<dt>Voice <a href="#p3_voice_isolation" class="glossary-ref">→</a></dt>
-<dd>Канонический термин для голоса персонажа. Определяется исключительно через Examples и Greeting Message, никогда через Description. Диагностика: если голос «плывёт», проверьте Voice Isolation и Voice Contamination</dd>
-<dt>Voice Isolation <a href="#p3_voice_isolation" class="glossary-ref">→</a></dt>
-<dd>Определение, правило для 12B Диагностика: отладка voice contamination</dd>
-<dt>SPINE <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
-<dd>Определение, 5 элементов, формула GHOST → LIE → FLAW Диагностика: проверьте внутреннюю консистентность SPINE</dd>
-<dt>WANT <a href="#p4_want" class="glossary-ref">→</a></dt>
-<dd>Определение, отличие от NEED Диагностика: WANT должен вести к FLAW</dd>
-<dt>NEED <a href="#p4_need" class="glossary-ref">→</a></dt>
-<dd>Определение, отличие от WANT Диагностика: NEED должен требовать преодоления FLAW</dd>
-<dt>FLAW <a href="#p4_flaw" class="glossary-ref">→</a></dt>
-<dd>Определение, связь с GHOST и LIE Проверьте: FLAW должен быть поведением, не чертой характера</dd>
-<dt>LIE <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
-<dd>Определение, связь с GHOST и FLAW Проверьте: LIE должен объяснять, почему FLAW существует</dd>
-<dt>GHOST <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
-<dd>Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры</dd>
-<dt>GHOST Layers <a href="#p4_ghost_layers" class="glossary-ref">→</a></dt>
-<dd>Трёхуровневая система GHOST. Расширяет одиночный GHOST-элемент SPINE в многослойную структуру для сложных персонажей. Диагностика: проверьте, что каждый слой связан с соответствующим LIE и FLAW</dd>
-<dt>Behavioral Anchor <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
-<dd>Определение, формат, назначение Диагностика: отладка false positives и nested anchors</dd>
-<dt>Trigger <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
-<dd>Определение, место в формате якоря Диагностика: проверьте, не слишком ли широкий триггер</dd>
+<dt>4K-Fallback <a href="#p7a_4k_fallback" class="glossary-ref">→</a></dt>
+<dd>Определение, назначение Примените fallback для старых моделей</dd>
 <dt>Action <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
 <dd>Определение, место в формате якоря Диагностика: проверьте, не является ли действие слишком общим</dd>
-<dt>Price <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
-<dd>Определение, правило обязательности для FLAW/GHOST якорей Диагностика: проверьте специфичность Price</dd>
-<dt>Nested Anchors <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
-<dd>Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Диагностика: проверьте, что вложенные якоря не создают противоречий</dd>
-<dt>OCEAN <a href="#p5_ocean_basics" class="glossary-ref">→</a></dt>
-<dd>Определение, 5 измерений Диагностика: проверьте соответствие OCEAN поведению</dd>
-<dt>Enneagram <a href="#p5_enneagram_basics" class="glossary-ref">→</a></dt>
-<dd>Определение, 9 типов, базовая структура Добавьте пути интеграции/дезинтеграции, инстинктивные варианты</dd>
-<dt>MBTI <a href="#appendix_mbti" class="glossary-ref">→</a></dt>
-<dd>Определение, 4 оси, 16 типов Добавьте когнитивные функции для глубины</dd>
+<dt>Anti-godmoding <a href="#p1_core_rules" class="glossary-ref">→</a></dt>
+<dd>Директива SP, запрещающая модель писать за {{user}}. Позитивная формулировка в SP. Отличать от «годмодинг» (диагностический термин — сам факт нарушения). Диагностика: проверьте наличие Anti-godmoding в SP</dd>
+<dt>Author's Note <small class="glossary-abbr">(AN)</small> <a href="#p7a_authors_note" class="glossary-ref">→</a></dt>
+<dd>Определение, назначение, частота обновления Отладка: проверьте приоритет инъекции и конфликт с LB</dd>
+<dt>Behavioral Anchor <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
+<dd>Определение, формат, назначение Диагностика: отладка false positives и nested anchors</dd>
 <dt>CORE DIRECTIVES <small class="glossary-abbr">(CD)</small> <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
 <dd>Определение, единая система из 7 директив для System Prompt. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER</dd>
-<dt>Tone Frame <small class="glossary-abbr">(TF)</small> <a href="#p7a_tone_frame" class="glossary-ref">→</a></dt>
-<dd>Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP. Отладка: проверьте конфликт Tone Frame с AN</dd>
-<dt>Show Never Tell <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
-<dd>Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском. Диагностика: проверьте, не рассказывает ли модель вместо демонстрации</dd>
+<dt>Character Card <a href="#p1_card_overview" class="glossary-ref">→</a></dt>
+<dd>Определение, составные части Продвинутая конфигурация с CoT и AN</dd>
+<dt>CoT <a href="#p6_cot_basics" class="glossary-ref">→</a></dt>
+<dd>Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Настройте CoT tier 3 для сложных сценариев</dd>
+<dt>Consequence Driven <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
+<dd>Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]</dd>
+<dt>Description <a href="#p1_card_overview" class="glossary-ref">→</a></dt>
+<dd>Определение, назначение, расположение в карточке Оптимизация: проверьте баланс фактологии vs поведенческих инструкций</dd>
 <dt>Embodiment First <a href="#p2_embodiment" class="glossary-ref">→</a></dt>
 <dd>Директива SP: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском. Диагностика: проверьте, не пропускает ли модель телесный шаг</dd>
 <dt>Embodiment Protocol <a href="#p2_embodiment" class="glossary-ref">→</a></dt>
 <dd>Техника реализации воплощения: State → Body → Sensor → Speech. Отличать от Embodiment First (директива). Embodiment Protocol — полная методика, Embodiment First — директива в SP.</dd>
-<dt>Spatial & Anatomical Lock <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
-<dd>Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском. Отладка: проверьте активацию при сложных сценах</dd>
+<dt>Enneagram <a href="#p5_enneagram_basics" class="glossary-ref">→</a></dt>
+<dd>Определение, 9 типов, базовая структура Добавьте пути интеграции/дезинтеграции, инстинктивные варианты</dd>
 <dt>Environmental Reactivity <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
 <dd>Директива SP: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском. Диагностика: проверьте, не генерирует ли модель декоративные описания</dd>
-<dt>Influence Boundary <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
-<dd>Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}</dd>
-<dt>Consequence Driven <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
-<dd>Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]</dd>
-<dt>Pre-Generation Filter <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
-<dd>CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]</dd>
-<dt>Identity Block <a href="#p7a_system_prompt" class="glossary-ref">→</a></dt>
-<dd>Секция System Prompt, определяющая идентичность персонажа. Включает имя, внешность, предысторию, тип личности. НЕ «блок идентичности» / «identity section». Диагностика: проверьте, что Identity Block не дублирует Description</dd>
-<dt>Token Budget <a href="#p7a_token_budget" class="glossary-ref">→</a></dt>
-<dd>Распределение токенов контекстного окна по компонентам System Prompt. Контролирует, какая часть контекста выделена на каждый блок карточки. Диагностика: проверьте, что Identity Block + CORE DIRECTIVES не превышают 40% бюджета</dd>
-<dt>Anti-godmoding <a href="#p1_core_rules" class="glossary-ref">→</a></dt>
-<dd>Директива SP, запрещающая модель писать за {{user}}. Позитивная формулировка в SP. Отличать от «годмодинг» (диагностический термин — сам факт нарушения). Диагностика: проверьте наличие Anti-godmoding в SP</dd>
-<dt>годмодинг <a href="#p1_core_rules" class="glossary-ref">→</a></dt>
-<dd>Определение, проявления Диагностика: отладка persistent годмодинг</dd>
-<dt>SP (MBTI temperament) <small class="glossary-abbr">(SP)</small> <a href="#appendix_mbti" class="glossary-ref">→</a></dt>
-<dd>Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения. При анализе кросс-типов уточняйте, какой SP имеется в виду</dd>
-<dt>Immersion Boundary <a href="#p7a_ooc_protection" class="glossary-ref">→</a></dt>
-<dd>Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли». Добавьте Immersion Boundary для максимальной иммерсии. Для базовой защиты используйте OOC Protection.</dd>
+<dt>Examples <a href="#p3_examples_rules" class="glossary-ref">→</a></dt>
+<dd>Определение, правило Voice Isolation Отладка: проверьте contamination от внешних <START> блоков</dd>
+<dt>FLAW <a href="#p4_flaw" class="glossary-ref">→</a></dt>
+<dd>Определение, связь с GHOST и LIE Проверьте: FLAW должен быть поведением, не чертой характера</dd>
 <dt>Format Lock <a href="#p7a_format_lock" class="glossary-ref">→</a></dt>
 <dd>Фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Диагностика: проверьте, что все Examples и Greeting Message используют одну систему разметки</dd>
-<dt>RepPen <a href="#p7a_sampling_params" class="glossary-ref">→</a></dt>
-<dd>Определение, рекомендуемые значения Диагностика: >1.10 убивает signature phrases</dd>
-<dt>Presence Penalty <small class="glossary-abbr">(PP)</small> <a href="#p7a_sampling_params" class="glossary-ref">→</a></dt>
-<dd>Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует. Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7</dd>
-<dt>CoT <a href="#p6_cot_basics" class="glossary-ref">→</a></dt>
-<dd>Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Настройте CoT tier 3 для сложных сценариев</dd>
-<dt>processus_analysium <a href="#p6_cot_tier3" class="glossary-ref">→</a></dt>
-<dd>Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL].</dd>
+<dt>GHOST <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
+<dd>Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры</dd>
+<dt>GHOST Layers <a href="#p4_ghost_layers" class="glossary-ref">→</a></dt>
+<dd>Трёхуровневая система GHOST. Расширяет одиночный GHOST-элемент SPINE в многослойную структуру для сложных персонажей. Диагностика: проверьте, что каждый слой связан с соответствующим LIE и FLAW</dd>
+<dt>Greeting Message <a href="#p7b_greeting" class="glossary-ref">→</a></dt>
+<dd>Определение, назначение, влияние на голос Диагностика: проверьте соответствие Examples vs Greeting Message</dd>
+<dt>Identity Block <a href="#p7a_system_prompt" class="glossary-ref">→</a></dt>
+<dd>Секция System Prompt, определяющая идентичность персонажа. Включает имя, внешность, предысторию, тип личности. НЕ «блок идентичности» / «identity section». Диагностика: проверьте, что Identity Block не дублирует Description</dd>
+<dt>Immersion Boundary <a href="#p7a_ooc_protection" class="glossary-ref">→</a></dt>
+<dd>Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли». Добавьте Immersion Boundary для максимальной иммерсии. Для базовой защиты используйте OOC Protection.</dd>
+<dt>Influence Boundary <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
+<dd>Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}</dd>
+<dt>LIE <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
+<dd>Определение, связь с GHOST и FLAW Проверьте: LIE должен объяснять, почему FLAW существует</dd>
 <dt>Lorebook <small class="glossary-abbr">(LB)</small> <a href="#p7b_lorebook_basics" class="glossary-ref">→</a></dt>
 <dd>Определение, назначение, структура записи Диагностика: проверьте приоритет и конфликт записей</dd>
-<dt>Structured Inject <a href="#p7b_structured_inject" class="glossary-ref">→</a></dt>
-<dd>Определение, назначение Диагностика: проверьте приоритет и конфликт инъекций</dd>
-<dt>4K-Fallback <a href="#p7a_4k_fallback" class="glossary-ref">→</a></dt>
-<dd>Определение, назначение Примените fallback для старых моделей</dd>
-<dt>OOC <a href="#p9_basic_checklist" class="glossary-ref">→</a></dt>
-<dd>Определение, проявления Диагностика: определение и исправление OOC</dd>
-<dt>Voice Contamination <a href="#p3_examples_rules" class="glossary-ref">→</a></dt>
-<dd>Нарушение голоса персонажа на 12B, вызванное копированием чужих <START> примеров. Диагностика: если голос «плывёт», проверьте источник Examples</dd>
-<dt>Narrator Bleed <a href="#p3_voice_leak" class="glossary-ref">→</a></dt>
-<dd>Смешивание голоса рассказчика с голосом персонажа в Examples. Диагностический термин. Отладка: сравните Examples с Greeting Message — голос должен быть единым</dd>
-<dt>Voice Bleed <a href="#p3_voice_isolation" class="glossary-ref">→</a></dt>
-<dd>В мульти-персонажных карточках голос одного персонажа «перетекает» в реплики другого. Диагностический термин. Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples</dd>
-<dt>One Change Rule <a href="#p9_one_change_rule" class="glossary-ref">→</a></dt>
-<dd>Принцип диагностики: изменение только одного параметра за итерацию для достоверной оценки результата. Формализуйте: логируйте каждое изменение и результат</dd>
 <dt>Lorebook Entry <small class="glossary-abbr">(LE)</small> <a href="#p7b_lorebook_basics" class="glossary-ref">→</a></dt>
 <dd>Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown. Добавьте мировые записи для углубления сеттинга</dd>
+<dt>MBTI <a href="#appendix_mbti" class="glossary-ref">→</a></dt>
+<dd>Определение, 4 оси, 16 типов Добавьте когнитивные функции для глубины</dd>
+<dt>NEED <a href="#p4_need" class="glossary-ref">→</a></dt>
+<dd>Определение, отличие от WANT Диагностика: NEED должен требовать преодоления FLAW</dd>
+<dt>Narrator Bleed <a href="#p3_voice_leak" class="glossary-ref">→</a></dt>
+<dd>Смешивание голоса рассказчика с голосом персонажа в Examples. Диагностический термин. Отладка: сравните Examples с Greeting Message — голос должен быть единым</dd>
+<dt>Nested Anchors <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
+<dd>Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Диагностика: проверьте, что вложенные якоря не создают противоречий</dd>
+<dt>OCEAN <a href="#p5_ocean_basics" class="glossary-ref">→</a></dt>
+<dd>Определение, 5 измерений Диагностика: проверьте соответствие OCEAN поведению</dd>
+<dt>OOC <a href="#p9_basic_checklist" class="glossary-ref">→</a></dt>
+<dd>Определение, проявления Диагностика: определение и исправление OOC</dd>
+<dt>One Change Rule <a href="#p9_one_change_rule" class="glossary-ref">→</a></dt>
+<dd>Принцип диагностики: изменение только одного параметра за итерацию для достоверной оценки результата. Формализуйте: логируйте каждое изменение и результат</dd>
+<dt>Persona Synthesis <a href="#p5_cross_matrix" class="glossary-ref">→</a></dt>
+<dd>Процесс интеграции SPINE + OCEAN + Enneagram в единый профиль персонажа.</dd>
+<dt>Pre-Generation Filter <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
+<dd>CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]</dd>
+<dt>Presence Penalty <small class="glossary-abbr">(PP)</small> <a href="#p7a_sampling_params" class="glossary-ref">→</a></dt>
+<dd>Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует. Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7</dd>
+<dt>Price <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
+<dd>Определение, правило обязательности для FLAW/GHOST якорей Диагностика: проверьте специфичность Price</dd>
+<dt>RepPen <a href="#p7a_sampling_params" class="glossary-ref">→</a></dt>
+<dd>Определение, рекомендуемые значения Диагностика: >1.10 убивает signature phrases</dd>
+<dt>SP (MBTI temperament) <small class="glossary-abbr">(SP)</small> <a href="#appendix_mbti" class="glossary-ref">→</a></dt>
+<dd>Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения. При анализе кросс-типов уточняйте, какой SP имеется в виду</dd>
+<dt>SPINE <a href="#p4_spine_overview" class="glossary-ref">→</a></dt>
+<dd>Определение, 5 элементов, формула GHOST → LIE → FLAW Диагностика: проверьте внутреннюю консистентность SPINE</dd>
+<dt>Sensory Anchors <a href="#p2_sensory_anchors" class="glossary-ref">→</a></dt>
+<dd>Anchor, привязанный к одному из 5 каналов восприятия. Используется для персонажей с GHOST Layers или травмой.</dd>
+<dt>Show Never Tell <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
+<dd>Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском. Диагностика: проверьте, не рассказывает ли модель вместо демонстрации</dd>
+<dt>Spatial & Anatomical Lock <a href="#p7a_core_directives" class="glossary-ref">→</a></dt>
+<dd>Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском. Отладка: проверьте активацию при сложных сценах</dd>
+<dt>Structured Inject <a href="#p7b_structured_inject" class="glossary-ref">→</a></dt>
+<dd>Определение, назначение Диагностика: проверьте приоритет и конфликт инъекций</dd>
+<dt>System Prompt <small class="glossary-abbr">(SP)</small> <a href="#p7a_system_prompt" class="glossary-ref">→</a></dt>
+<dd>Определение, назначение, расположение в интерфейсе Отладка: проверьте конфликты с карточкой персонажа</dd>
+<dt>Token Budget <a href="#p7a_token_budget" class="glossary-ref">→</a></dt>
+<dd>Распределение токенов контекстного окна по компонентам System Prompt. Контролирует, какая часть контекста выделена на каждый блок карточки. Диагностика: проверьте, что Identity Block + CORE DIRECTIVES не превышают 40% бюджета</dd>
+<dt>Tone Frame <small class="glossary-abbr">(TF)</small> <a href="#p7a_tone_frame" class="glossary-ref">→</a></dt>
+<dd>Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP. Отладка: проверьте конфликт Tone Frame с AN</dd>
+<dt>Trigger <a href="#p2_anchor_rules" class="glossary-ref">→</a></dt>
+<dd>Определение, место в формате якоря Диагностика: проверьте, не слишком ли широкий триггер</dd>
+<dt>Voice <a href="#p3_voice_isolation" class="glossary-ref">→</a></dt>
+<dd>Канонический термин для голоса персонажа. Определяется исключительно через Examples и Greeting Message, никогда через Description. Диагностика: если голос «плывёт», проверьте Voice Isolation и Voice Contamination</dd>
+<dt>Voice Bleed <a href="#p3_voice_isolation" class="glossary-ref">→</a></dt>
+<dd>В мульти-персонажных карточках голос одного персонажа «перетекает» в реплики другого. Диагностический термин. Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples</dd>
+<dt>Voice Contamination <a href="#p3_examples_rules" class="glossary-ref">→</a></dt>
+<dd>Нарушение голоса персонажа на 12B, вызванное копированием чужих <START> примеров. Диагностика: если голос «плывёт», проверьте источник Examples</dd>
+<dt>Voice Isolation <a href="#p3_voice_isolation" class="glossary-ref">→</a></dt>
+<dd>Определение, правило для 12B Диагностика: отладка voice contamination</dd>
+<dt>WANT <a href="#p4_want" class="glossary-ref">→</a></dt>
+<dd>Определение, отличие от NEED Диагностика: WANT должен вести к FLAW</dd>
+<dt>processus_analysium <a href="#p6_cot_tier3" class="glossary-ref">→</a></dt>
+<dd>Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL].</dd>
+<dt>годмодинг <a href="#p1_core_rules" class="glossary-ref">→</a></dt>
+<dd>Определение, проявления Диагностика: отладка persistent годмодинг</dd>
 </dl>
 </section>

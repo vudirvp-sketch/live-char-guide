@@ -47,29 +47,29 @@
 
         <!-- 25% ring -->
         <polygon class="pentagon-anim" points="250,167.5 290.4,196.9 275,245.6 225,245.6 209.6,196.9"
-                 fill="none" stroke="#1e2430" stroke-width="0.5" opacity="0.3"/>
+                 fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
         <!-- 50% ring -->
         <polygon class="pentagon-anim" points="250,125 330.9,183.8 299.9,281.2 200.1,281.2 169.1,183.8"
-                 fill="none" stroke="#1e2430" stroke-width="0.5" opacity="0.4"/>
+                 fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
         <!-- 75% ring -->
         <polygon class="pentagon-anim" points="250,82.5 371.3,170.6 324.9,316.8 175.1,316.8 128.7,170.6"
-                 fill="none" stroke="#1e2430" stroke-width="0.5" opacity="0.5"/>
+                 fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.5"/>
         <!-- 100% ring (outer) -->
         <polygon class="pentagon-anim" points="250,40 411.8,157.5 349.8,352.5 150.2,352.5 88.2,157.5"
-                 fill="none" stroke="#1e2430" stroke-width="0.7" opacity="0.6"/>
+                 fill="none" stroke="var(--border)" stroke-width="0.7" opacity="0.6"/>
 
         <!-- Axis lines -->
-        <line x1="250" y1="210" x2="250" y2="40" stroke="#1e2430" stroke-width="0.5" opacity="0.4"/>
-        <line x1="250" y1="210" x2="411.8" y2="157.5" stroke="#1e2430" stroke-width="0.5" opacity="0.4"/>
-        <line x1="250" y1="210" x2="349.8" y2="352.5" stroke="#1e2430" stroke-width="0.5" opacity="0.4"/>
-        <line x1="250" y1="210" x2="150.2" y2="352.5" stroke="#1e2430" stroke-width="0.5" opacity="0.4"/>
-        <line x1="250" y1="210" x2="88.2" y2="157.5" stroke="#1e2430" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="250" y2="40" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="411.8" y2="157.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="349.8" y2="352.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="150.2" y2="352.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="210" x2="88.2" y2="157.5" stroke="var(--border)" stroke-width="0.5" opacity="0.4"/>
 
         <!-- Scale labels along top axis -->
-        <text x="256" y="172" fill="#6b7590" font-family="'JetBrains Mono', monospace" font-size="8">25</text>
-        <text x="256" y="130" fill="#6b7590" font-family="'JetBrains Mono', monospace" font-size="8">50</text>
-        <text x="256" y="87" fill="#6b7590" font-family="'JetBrains Mono', monospace" font-size="8">75</text>
-        <text x="256" y="45" fill="#6b7590" font-family="'JetBrains Mono', monospace" font-size="8">100</text>
+        <text x="256" y="172" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">25</text>
+        <text x="256" y="130" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">50</text>
+        <text x="256" y="87" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">75</text>
+        <text x="256" y="45" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8">100</text>
 
         <!-- Character profile: Elena — Openness=72, Conscientiousness=65, Extraversion=41, Agreeableness=38, Neuroticism=68 -->
         <!-- O=72: 72% of radius 170 = 122.4 from center → y = 210 - 122.4 = 87.6 -->
@@ -87,39 +87,39 @@
 
         <polygon class="profile-anim"
                  points="250,87.6 355.2,175.9 290.9,268.4 212.1,264.2 140,174.3"
-                 fill="rgba(60,200,255,0.12)"
-                 stroke="#3cc8ff" stroke-width="1.5"/>
+                 fill="var(--cyan-12)"
+                 stroke="var(--accent-cyan)" stroke-width="1.5"/>
 
         <!-- Data points -->
-        <circle class="profile-anim" cx="250" cy="87.6" r="4" fill="#3cc8ff"/>
-        <circle class="profile-anim" cx="355.2" cy="175.9" r="4" fill="#3cc8ff"/>
-        <circle class="profile-anim" cx="290.9" cy="268.4" r="4" fill="#3cc8ff"/>
-        <circle class="profile-anim" cx="212.1" cy="264.2" r="4" fill="#3cc8ff"/>
-        <circle class="profile-anim" cx="140" cy="174.3" r="4" fill="#3cc8ff"/>
+        <circle class="profile-anim" cx="250" cy="87.6" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="355.2" cy="175.9" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="290.9" cy="268.4" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="212.1" cy="264.2" r="4" fill="var(--accent-cyan)"/>
+        <circle class="profile-anim" cx="140" cy="174.3" r="4" fill="var(--accent-cyan)"/>
 
         <!-- Axis labels -->
-        <text x="250" y="28" text-anchor="middle" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">
-          O <tspan fill="#f0a040" font-size="10">72</tspan>
+        <text x="250" y="28" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          O <tspan fill="var(--accent-amber)" font-size="10">72</tspan>
         </text>
-        <text x="425" y="155" text-anchor="start" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">
-          C <tspan fill="#8b95a8" font-size="10">65</tspan>
+        <text x="425" y="155" text-anchor="start" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          C <tspan fill="var(--text-secondary)" font-size="10">65</tspan>
         </text>
-        <text x="365" y="375" text-anchor="middle" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">
-          E <tspan fill="#8b95a8" font-size="10">41</tspan>
+        <text x="365" y="375" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          E <tspan fill="var(--text-secondary)" font-size="10">41</tspan>
         </text>
-        <text x="135" y="375" text-anchor="middle" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">
-          A <tspan fill="#f0a040" font-size="10">38</tspan>
+        <text x="135" y="375" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          A <tspan fill="var(--accent-amber)" font-size="10">38</tspan>
         </text>
-        <text x="60" y="155" text-anchor="end" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">
-          N <tspan fill="#3cc8ff" font-size="10">68</tspan>
+        <text x="60" y="155" text-anchor="end" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
+          N <tspan fill="var(--accent-cyan)" font-size="10">68</tspan>
         </text>
 
         <!-- Threshold zone indicators -->
-        <text x="250" y="415" text-anchor="middle" fill="#6b7590" font-family="'Inter', sans-serif" font-size="9">
-          <tspan fill="#d9455a">&lt;30</tspan> опасно &middot;
-          <tspan fill="#f0a040">30-40</tspan> осторожно &middot;
-          <tspan fill="#3fb68b">40-60</tspan> безопасно &middot;
-          <tspan fill="#f0a040">&gt;70</tspan> экстремально
+        <text x="250" y="415" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9">
+          <tspan fill="var(--danger)">&lt;30</tspan> опасно &middot;
+          <tspan fill="var(--accent-amber)">30-40</tspan> осторожно &middot;
+          <tspan fill="var(--success)">40-60</tspan> безопасно &middot;
+          <tspan fill="var(--accent-amber)">&gt;70</tspan> экстремально
         </text>
 
       </svg>

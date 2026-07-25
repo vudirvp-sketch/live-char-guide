@@ -8,6 +8,7 @@
         p1_assembly_pipeline replaced with p1_pipeline_ref (link to Part 7A)
 -->
 <section data-section="p1_value_proposition" id="p1_value_proposition" data-toc-nav>
+<!-- difficulty: BASIC -->
 <h2>Зачем системный подход?</h2>
 
 <p>Классический подход к созданию карточек — интуитивное заполнение Description. Системный подход — причинно-следственная архитектура, где каждый элемент производит наблюдаемое действие. Разница измерима.</p>
@@ -258,6 +259,7 @@
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E01 -->
 <section  data-section="p1_card_overview" id="p1_card_overview" data-toc-nav>
+<!-- difficulty: BASIC -->
 <h2>Базовые блоки карточки</h2>
 
 <p><strong>Карточка персонажа</strong> — это документ, который задаёт поведение ИИ-модели при ролевой игре. Но думать о ней нужно как о <strong>поведенческом движке</strong>: каждый элемент должен производить наблюдаемое действие, а не украшать описание. Карточка состоит из четырёх блоков, каждый из которых выполняет свою функцию.</p>
@@ -270,6 +272,7 @@
 </div>
 
 <section data-section="p1_structure_overview" id="p1_structure_overview" data-toc-nav>
+<!-- difficulty: BASIC -->
 <h3>Структура гайда</h3>
 
 <p>Оглавление ниже показывает концептуальный поток гайда: какие Parts зависят от каких и в каком порядке следует изучать материал.</p>
@@ -291,9 +294,9 @@
   <ul>
     <li><a href="#p2_anchor_rules">Правила Anchors</a></li>
     <li><a href="#p2_anchor_examples">Примеры Anchors</a></li>
-    <li><a href="#p2_embodiment">Телесность (Embodiment)</a></li>
+    <li><a href="#p2_embodiment">Embodiment Protocol</a></li>
     <li><a href="#p2_env_reactivity">Environmental Reactivity</a></li>
-    <li><a href="#p2_sensory_anchors">Сенсорные якоря (Sensory Anchors)</a></li>
+    <li><a href="#p2_sensory_anchors">Sensory Anchors</a></li>
   </ul>
 </li>
 <li><strong>Part 03:</strong> Voice & Isolation
@@ -301,8 +304,8 @@
     <li><a href="#p3_influence_hierarchy">Иерархия влияния</a></li>
     <li><a href="#p3_examples_rules">Правила Examples</a></li>
     <li><a href="#p3_examples_quality">Качество Examples</a></li>
-    <li><a href="#p3_greeting_ref">Приветствие (Greeting Message)</a></li>
-    <li><a href="#p3_voice_leak">Утечка голоса (Voice Leak)</a></li>
+    <li><a href="#p3_greeting_ref">greeting ref</a></li>
+    <li><a href="#p3_voice_leak">Voice Leak</a></li>
     <li><a href="#p3_joker_case">Крайний случай: голос без описания</a></li>
     <li><a href="#p3_multi_char">Мульти-персонажные примеры</a></li>
   </ul>
@@ -326,7 +329,6 @@
     <li><a href="#p5_elena_profile">Елена OCEAN/Enneagram profile</a></li>
     <li><a href="#p5_ocean_warning">OCEAN Value Conflicts</a></li>
     <li><a href="#p5_enneagram_basics">Enneagram basics</a></li>
-    <li><a href="#p5_mbti_ref">MBTI Reference</a></li>
     <li><a href="#p5_cross_instrument_map">Enneagram → SPINE</a></li>
     <li><a href="#p5_enneagram_wings">Enneagram wings</a></li>
     <li><a href="#p5_cross_matrix">OCEAN×Enneagram matrix</a></li>
@@ -359,7 +361,7 @@
 </li>
 <li><strong>Part 07B:</strong> Lorebook, Greeting & Compatibility
   <ul>
-    <li><a href="#p7b_greeting">Приветствие — первое сообщение (Greeting Message)</a></li>
+    <li><a href="#p7b_greeting">Greeting Message</a></li>
     <li><a href="#p7b_lorebook_basics">Lorebook (LB) basics</a></li>
     <li><a href="#p7b_lorebook_mechanics">Lorebook Mechanics</a></li>
     <li><a href="#p7b_lorebook_advanced">Lorebook Advanced</a></li>
@@ -377,7 +379,7 @@
     <li><a href="#p8_ap8_ghost_no_anchors">AP-8: GHOST no anchors</a></li>
     <li><a href="#p8_ap9_spine_broken">AP-9: Broken SPINE</a></li>
     <li><a href="#p8_ap10_cot_overload">AP-10: CoT overload</a></li>
-    <li><a href="#p8_ap11_voice_bleed">AP-11: Переплетение голосов (Voice Bleed)</a></li>
+    <li><a href="#p8_ap11_voice_bleed">AP-11: Voice Bleed</a></li>
     <li><a href="#p8_ap12_xml_malformed">AP-12: XML malformed</a></li>
     <li><a href="#p8_ap13_lorebook_conflict">AP-13: Lorebook conflict</a></li>
     <li><a href="#p8_ap14_context_violation">AP-14: Context violation</a></li>
@@ -447,6 +449,8 @@
 </section>
 
 <section  data-section="p1_core_rules" id="p1_core_rules" data-toc-nav>
+<!-- difficulty: BASIC -->
+<!-- canonical: Pattern Matcher rule, 3 key principles (Anchor=T→A→P, Voice only in Examples, Psychology only in Description) -->
 <h3>Три ключевых принципа</h3>
 
 <p>Эти принципы обязательны для всех карточек. Нарушение любого из них приводит к ухудшению качества генерации.</p>
@@ -474,6 +478,8 @@
 </section>
 
 <section  data-section="p1_top3_problems" id="p1_top3_problems">
+<!-- difficulty: BASIC -->
+<!-- canonical: Top-3 critical errors (godmoding, wrong voice, ideal character) -->
 <h3>Топ-3 критичные ошибки</h3>
 
 <p>Три самые частые ошибки начинающих, которые сильнее всего ломают качество карточки. Каждая разбирается подробно: симптом → причина → пошаговое исправление → пример до/после. Дополнительные проблемы → <a href="#p9_additional_problems">Диагностика: Дополнительные проблемы (Part 9)</a>.</p>
@@ -498,6 +504,8 @@
 </section>
 
 <section data-section="p1_prebuild_checklist" id="p1_prebuild_checklist" data-toc-nav>
+<!-- difficulty: BASIC -->
+<!-- canonical: Pre-build checklist (6 questions) -->
 <h3>Pre-build checklist</h3>
 
 <p>6 вопросов перед началом сборки карточки. Каждый ответ определяет, какие инструменты понадобятся и сколько токенов заложить.</p>
