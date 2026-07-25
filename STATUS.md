@@ -2,33 +2,28 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Версия:** 9.2.0
+> **Версия:** 9.2.1
 > **Дата:** 2026-07-26
 
 ---
 
 ## Текущее состояние
 
-**iter 78 — P1.9 — Anchors placement уточнение.** Выполнено:
+**iter 79 — P1.5 — Voice Isolation уточнение (лингвистический паттерн vs физическая характеристика).** Выполнено:
 
-Противоречие C10 разрешено: Anchors = отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров. В большинстве фронтендов Anchors размещаются в Description как `<anchors>`-тег (отдельное поле Anchors отсутствует); концептуально Anchors = behavioural patterns, Examples = voice patterns.
+Противоречие C9 разрешено: правило Voice Isolation явно различает два уровня голоса. **Лингвистический голос** (слова, синтаксис, лексика, ритм фразы, парадоксы, речевые маркеры) — только в Examples и Greeting, никогда в Description. **Физическая характеристика голоса** (тембр, хрип, механический гул, синтезированный резонанс, сиплость) — это часть Embodiment, допустима в Description (сенсорный слой «Звук» Embodiment Protocol). Это формализует практику из iter 75 (fix Омнис-Зета «Голос:» → «Звук:» в Embodiment-блоке).
 
 | Локация | Изменение |
 |---------|-----------|
-| `src/master/part_01.html` (E01 Card Anatomy) | Блок label: «Examples + Anchors» → «Examples». Anchors sub-panel: добавлен badge «отдельный блок», описание: Anchors — отдельный структурный блок, не часть диалоговых примеров, в большинстве фронтендов `<anchors>` в Description. desc-callout: «струкно вложены в Examples» → «структурно живут как отдельный блок в Examples-зоне». |
-| `src/master/part_01.html` (§1.2 table) | Добавлена строка Anchors (в Examples-зоне) с описанием «Ключевое — поведенческие триггеры, отдельный `<anchors>`-тег». |
-| `src/master/part_01.html` (§1.4) | Добавлен RULE callout: Anchors — отдельный структурный блок внутри Examples-зоны, Anchors = behavioural patterns, Examples = voice patterns. |
-| `docs/canon/part_01.md` | Sync с master: §1.2 table + Anchors строка, §1.4 RULE, текст о Card Anatomy (Anchors визуально вложены, структурно отдельный блок). |
-| `src/master/part_07a.html` (§7A.1) | Добавлен RULE callout: Anchors placement — отдельный блок в Examples-зоне, не часть SP и не часть Examples dialogs. |
-| `src/master/part_07a.html` (§7A.9) | XML Tags описание: добавлено пояснение `<anchors>` в Description для совместимости с фронтендами, концептуально Anchors — отдельный блок в Examples-зоне. |
-| `src/master/part_07a.html` (§7A.11 4K-fallback) | Добавлен RULE: Anchors в 4K-fallback в Description (фронтенд без отдельного поля), концептуально отдельный блок в Examples-зоне. |
-| `src/master/part_07a.html` (§7A.13 Elena budget) | «Description (SPINE + OCEAN + Anchors)» → «Description (SPINE + OCEAN + Anchors)*» + footnote: Anchors концептуально в Examples-зоне, структурно в Description. |
-| `docs/canon/part_07a.md` | Sync с master: §7A.1 RULE, §7A.9 XML описание, §7A.11 4K-fallback RULE, §7A.13 Elena footnote. |
-| `src/master/appendix_glossary.html` | Behavioral Anchor entry: добавлен RULE о Anchors placement. |
-| `docs/canon/appendix_glossary.md` | Behavioral Anchor entry: sync — RULE о Anchors placement. |
-| `visual-system/elements/E01-card-anatomy.html` | Same E01 changes as master: label, sub-panel, desc-callout. |
-| `visual-system/integration/component-extracts/E01-visual.html` | Same E01 changes. |
-| `docs/research/guide_analysis_consolidated.md` | C10 → FIXED iter 78. P1.9 → iter 78 ✅ COMPLETED. P1.6/P1.8 → ✅ COMPLETED. |
+| `src/master/part_03.html` (§3.1 Voice Isolation) | Definition переформулировано: «Лингвистический голос задаётся ТОЛЬКО в Examples». Добавлен RULE callout с явным разделением двух уровней + тест (лингвистический vs физический примеры). |
+| `src/master/part_03.html` (§3.2 Influence Hierarchy) | RULE уточнён: «0% влияния на лингвистический голос». EXAMPLE переписан: WRONG = лингвистический в Description; CORRECT = лингвистический в Examples + физическая характеристика (хрипловатый тембр) в Description как Embodiment. |
+| `src/master/part_01.html` (§1.4 принцип #2) | «Description = логика поведения, Examples = паттерны голоса» → явное разделение: лингвистический = только Examples; физическая характеристика (тембр, хрип, механический гул) = Description как часть Embodiment. |
+| `src/master/appendix_glossary.html` | Voice entry + Voice Isolation entry: добавлено разделение на два уровня. |
+| `docs/canon/part_03.md` | Sync с master: §3.1 RULE + §3.2 RULE/EXAMPLE. |
+| `docs/canon/part_01.md` | Sync с master: §1.4 принцип #2. |
+| `docs/canon/appendix_glossary.md` | Sync: Voice + Voice Isolation entries. |
+| `docs/research/guide_analysis_consolidated.md` | C9 → FIXED iter 79. P1.5 → iter 79 ✅ COMPLETED. |
+| `docs/research/research_plan.md` | iter 79 marked ✅ COMPLETED. |
 
 **No open KI.** Decision items V8/V9 требуют обсуждения с автором.
 
@@ -41,7 +36,7 @@
 
 ---
 
-## Invariants (iter 61+)
+## Invariants
 
 - **Language policy:** Cat A = English mandatory in code/ID/SP + headings. Cat B = Russian primary in headings/prose, English only in code/ID.
 - **No-repeat principle:** Гайд — единый последовательный документ. `[ref:]` только для навигации.
@@ -52,20 +47,20 @@
 - **Section count:** 96 секций в `src/master/`.
 - **Callout class policy:** `.callout.rule/.rec/.ex` and plain `.callout` only.
 - **Anchors placement:** Anchors = отдельный структурный блок внутри Examples-зоны. В большинстве фронтендов — `<anchors>`-тег в Description; концептуально Anchors = behavioural patterns, Examples = voice patterns.
+- **Voice Isolation (лингвистический vs физический):** Лингвистический голос (слова, синтаксис) — только Examples/Greeting. Физическая характеристика голоса (тембр, хрип, механический гул) — часть Embodiment, допустима в Description (сенсорный слой «Звук»).
 
 ---
 
-## iter 79+ Roadmap
+## iter 80+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 79** | P1.5 — Уточнение Voice Isolation (лингвистический паттерн vs физическая характеристика) | LOW |
 | **iter 80** | P1.2 — OCEAN×Enneagram Matrix disclaimer (Decision item V9) | MEDIUM |
 | **iter 81+** | Decision item V8 (GHOST перцептивный фильтр) — после обсуждения | MEDIUM |
 | **iter 83–90** | P2 — улучшение структуры | HIGH |
 | **iter 91+** | P3 — опциональные улучшения | LOW–MEDIUM |
 
-**Рекомендация для следующего чата:** начать с iter 79 — P1.5 (Voice Isolation). Потом P1.2 (iter 80). Decision items V8/V9 — после обсуждения с автором.
+**Рекомендация для следующего чата:** начать с iter 80 — P1.2 (OCEAN×Enneagram Matrix disclaimer, Decision item V9). Decision item V8 — после обсуждения с автором.
 
 ---
 

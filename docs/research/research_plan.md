@@ -55,15 +55,18 @@
 - **Modified:** `src/master/part_01.html`, `src/master/part_05.html`, `src/master/part_09.html`, `src/master/part_08.html`, `src/master/appendix_glossary.html`, `docs/canon/part_01.md`, `docs/canon/part_05.md`, `docs/canon/part_09.md`, `docs/canon/part_08.md`, `docs/canon/appendix_glossary.md`.
 - **Validation:** 96/96 canon→master sync PASS. 0 new English leaks (baseline 24).
 
-### iter 78 — Уточнение Anchors placement (P1.9)
+### iter 78 — Уточнение Anchors placement (P1.9) ✅ COMPLETED
 
 - Чётко определить: «Anchors = отдельный блок внутри Examples-зоны карточки (после `<START>`-блоков, до Greeting)».
 - Локация: Card Anatomy (Part 01) + Part 07A (Assembly Pipeline).
 
-### iter 79 — Уточнение Voice Isolation (P1.5)
+### iter 79 — Уточнение Voice Isolation (P1.5) ✅ COMPLETED
 
 - Уточнить правило: «Лингвистический паттерн (слова, синтаксис) = только Examples. Физическая характеристика (тембр, хрип, механический гул) = Description/Embodiment».
 - Локация: §3.1 (Voice Isolation) + §1.4 (принципы).
+- **Modified:** `src/master/part_03.html`, `src/master/part_01.html`, `src/master/appendix_glossary.html`, `docs/canon/part_03.md`, `docs/canon/part_01.md`, `docs/canon/appendix_glossary.md`.
+- **Validation:** 96/96 canon→master sync PASS. 0 new English leaks (baseline 24).
+- Формализует практику iter 75 (fix Омнис-Зета Embodiment «Голос:» → «Звук:»).
 
 ### iter 80 — Удаление/обоснование OCEAN×Enneagram Matrix (P1.2)
 
