@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.2.68] - 2026-07-25
+
+### iter 68 — Recon + KI#44 fix + cleanup
+
+- **Recon:** запущены все validation gates (96/96 sync ✅, 24 English leaks ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, build hash `69d9b813` unchanged). Audit-скрипты проверены.
+- **KI#44 ✅ CLOSED:** `scripts/audit_vs_embeds.py` — path bug (`parents[2]` вместо `parents[1]` + hardcoded fallback `/home/z/my-project/work/live-char-guide`). Скрипт падал без symlink workaround. Fix: `parents[1]` + удаление fallback. Cleanup того же pattern в `audit_component_extracts.py` и `audit_component_extracts_css.py` (primary path `parents[1]` уже работал, fallback удалён для consistency).
+- **KI#45 OPEN (LOW, deferred to iter 69):** Version drift — docs = 9.2.0, code (package.json/src/VERSION/character_schema.json) = 9.1.0. Bump кодовой версии отложен — требует координированного обновления 4 файлов + build manifest verification.
+- **Cleanup:** удалён stale `_DELETED_FILES.txt` (iter 67 leftover — все перечисленные файлы уже удалены).
+- **Validation:** 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅ (no symlink), build hash `69d9b813` unchanged.
+
+---
+
 ## [9.2.67] - 2026-07-25
 
 ### iter 67 — P2-remaining (R1 cleanup) + Cat B prose inversion + cleanup

@@ -40,9 +40,6 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-if not (REPO / "src" / "master").exists():
-    # Fallback for sandboxed environment with symlinked work dir
-    REPO = Path("/home/z/my-project/work/live-char-guide")
 MASTER_DIR = REPO / "src" / "master"
 EXTRACTS_DIR = REPO / "visual-system" / "integration" / "component-extracts"
 

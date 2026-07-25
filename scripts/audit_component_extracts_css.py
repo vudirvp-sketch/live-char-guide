@@ -31,8 +31,6 @@ import difflib
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-if not (REPO / "src" / "assets" / "vs-styles.css").exists():
-    REPO = Path("/home/z/my-project/work/live-char-guide")
 EXTRACTS_DIR = REPO / "visual-system" / "integration" / "component-extracts"
 VS_STYLES = REPO / "src" / "assets" / "vs-styles.css"
 

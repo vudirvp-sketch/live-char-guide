@@ -2,34 +2,39 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Версия:** 9.2.0
+> **Версия:** 9.2.0 (docs) / 9.1.0 (code) — см. KI#45
 > **Дата:** 2026-07-25
 
 ---
 
 ## Текущее состояние
 
-**iter 67 — P2-remaining (R1 cleanup) + Cat B prose inversion.** Выполнено:
+**iter 68 — Recon + KI#44 fix + cleanup.** Выполнено:
 
-- **P2-remaining R1 cleanup:** §4.10 (canon `part_04.md` + master `part_04.html`) — убрано повторение принципа «OCEAN и Enneagram валидируют SPINE, не генерируют его» (canonical home — §4.1 и §5.1). Секция сокращена до чистой навигации.
-- **Cat B prose inversion (deferred → iter 67):** 6 prose mentions «Behavioral Anchors (поведенческие якоря)» → «поведенческие якоря (Behavioral Anchors)» в `src/master/part_02.html` (HTML comment), `part_03.html` (table cell), `part_04.html` (paragraph), `part_07a.html` (link text), `part_07b.html` (callout body), `part_09.html` (table cell).
-- **A59-4 + A59-6 (optional):** SKIP — не описаны в репозитории (упоминания только в roadmap STATUS.md / iter60_analysis_plan.md, без спецификации).
-- **Cleanup:** удалены устаревшие файлы `ITER51_README.md`, `_ITER51_DELETE_STALE.txt`, `AUDIT_VERIFICATION.md` (root duplicate), `docs/AUDIT_VERIFICATION.md` (iter 33-45, KI#21 CLOSED), `docs/AUDIT_REVIEW_ITER54.md` (iter 54-56 research, KI#37/38/39 CLOSED), `docs/cross_reference_sync.md.DELETED` (marker). Ссылки на удалённые файлы убраны из `AGENT_NAVIGATION.md`/`README.md`/`CHANGELOG.md`.
+- **Recon:** запущены все validation gates (96/96 sync ✅, 24 English leaks ✅ baseline, terms ✅, duplicates ✅, build hash `69d9b813` unchanged). Audit-скрипты проверены. Найдены 2 новых KI + 1 stale файл для cleanup.
+- **KI#44 ✅ CLOSED:** `scripts/audit_vs_embeds.py` — сломанный path (`parents[2]` вместо `parents[1]` + hardcoded fallback `/home/z/my-project/work/live-char-guide`). Скрипт падал с "ERROR: required files not found" без symlink workaround. Fix: `parents[1]` + удаление fallback (по образцу `audit_canon_master_sync.py`). Убраны hardcoded fallbackи в `audit_component_extracts.py` и `audit_component_extracts_css.py` (там же pattern). AGENT_NAVIGATION.md §6 pitfall #14 — убран note про symlink workaround.
+- **KI#45 OPEN (LOW, deferred):** Version drift — docs (STATUS/README/AGENT_NAVIGATION/terminology_dictionary/glossary.json) говорят 9.2.0, code files (package.json/src/VERSION/character_schema.json) остались на 9.1.0 с iter 60. CHANGELOG использует `[9.2.NN]` формат. Не фикшу в iter 68 — bump кодовой версии требует координированного обновления 4 файлов + build manifest verification, лучше отдельной итерацией.
+- **Cleanup:** удалён stale `_DELETED_FILES.txt` (iter 67 leftover — все перечисленные файлы уже удалены, не нужен).
 
 **Ключевой принцип iter 60+:** Гайд — единый последовательный документ. Читатель идёт сверху вниз. Если концепция объяснена выше — не повторять. Просто использовать.
 
-Validation gates (post-iter 67):
+Validation gates (post-iter 68):
 - `check_english.py` → 24 English leaks (baseline unchanged).
 - `validate_terms.py` → ✅ All terminology valid.
 - `check_duplicates.py` → ✅ no disallowed duplicates.
 - `audit_canon_master_sync.py` → 96/96 PASS.
+- `audit_vs_embeds.py` → ✅ runs without symlink workaround (KI#44 fixed).
 - `pnpm run build` → SUCCESS, shell hash `69d9b813` unchanged.
 
 ---
 
 ## Known Issues
 
-**Нет открытых KI.** Все KI закрыты: KI#41 (iter 65), KI#42/KI#43 (iter 66).
+| KI | Статус | Описание | Iter |
+|----|--------|----------|------|
+| **KI#45** | OPEN (LOW) | Version drift: docs = 9.2.0, code (package.json/VERSION/character_schema.json) = 9.1.0. Bump кодовой версии отложен — требует координированного обновления 4 файлов + build manifest verification. Fix в отдельной итерации. | iter 68 |
+
+**Закрытые KI:** KI#44 (iter 68), KI#41–43 (iter 65–66), KI#40 (iter 61), KI#33–39 (iter 44–56), KI#20–32 (iter 25–42), KI#1–19 (iter 1–24).
 
 При обнаружении новых багов — сначала документировать в STATUS.md §«Known Issues» как KI#N, потом фиксить.
 
@@ -52,13 +57,19 @@ Validation gates (post-iter 67):
 
 ---
 
-## iter 68+ Roadmap
+## iter 69+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 68+** | Разведка (recon) — поиск новых багов или P3 опциональные задачи (canonical-location-маркер, Progressive disclosure метки, Annotation blocks §10.2-10.4, Расширение scenario-меток) | LOW |
+| **iter 69** | KI#45 fix — version bump 9.1.0 → 9.2.0 в package.json + src/VERSION + data/character_schema.json + build manifest verification | LOW |
+| **iter 69+** | P2/P3 опциональные задачи: canonical-location-маркер (~150 правок, MEDIUM), Progressive disclosure метки (~50 секций, LOW), Annotation blocks §10.2-10.4 (P3), Расширение scenario-меток (P3) | LOW-MEDIUM |
+| **iter 69+** | Recon — поиск новых багов или audit-задач | LOW |
+| by design | Glossary double-render inefficiency | — |
+| опционально | Component extracts regeneration (54 файла) | LOW |
+| GitHub-level | Dependabot merges (10 branches) | LOW |
+| by design | Paragraph drift tuning (170 drifts / 131 actionable, false positives нет) | — |
 
-iter 60–67 plan (`docs/canon/iter60_analysis_plan.md`) — полностью выполнен.
+iter 60–68 plan (`docs/canon/iter60_analysis_plan.md`) — полностью выполнен.
 
 ---
 

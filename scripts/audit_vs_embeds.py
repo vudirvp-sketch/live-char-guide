@@ -27,13 +27,10 @@ import sys
 from pathlib import Path
 from html.parser import HTMLParser
 
-REPO = Path(__file__).resolve().parents[2] / "work" / "live-char-guide"
-if not REPO.exists():
-    # Fallback for direct invocation from project root
-    REPO = Path("/home/z/my-project/work/live-char-guide")
-MASTER_DIR = REPO / "src/master"
-VS_STYLES = REPO / "src/assets/vs-styles.css"
-SCROLL_OBSERVER = REPO / "src/shell/widgets/vs-scroll-observer.js"
+REPO = Path(__file__).resolve().parents[1]
+MASTER_DIR = REPO / "src" / "master"
+VS_STYLES = REPO / "src" / "assets" / "vs-styles.css"
+SCROLL_OBSERVER = REPO / "src" / "shell" / "widgets" / "vs-scroll-observer.js"
 
 
 def parse_animation_classes_from_css(css_path: Path):
