@@ -9,16 +9,14 @@
 
 ## Текущее состояние
 
-**iter 64 — A59-2 (Trigger→Stress→FLAW chain) + drift v1.3.** Выполнено:
+**iter 65 — KI#41 fix (E10 embed hardcoded colors → CSS variables).** Выполнено:
 
-- **A59-2: Trigger → Stress Type → FLAW chain (§5.1 canon + master HTML):** Добавлена subsection «Trigger → Stress Type → FLAW chain» после таблицы stress types. Формализует 4-этапную цепочку: Trigger (§2.1) → Stress Type (таблица выше) → FLAW (§4.4) → Anchor T→A→P (§4.8). Канонический пример Елена (anxious-reactive) с поэтапной таблицей. RULE: каждый тип стресса требует минимум 1 trigger→FLAW→Anchor chain. RECOMMENDATION: 2–3 категории триггеров на тип. Таблица «Категории триггеров по типу стресса» с примерами Anchor для всех 4 типов.
-- **A59-2: ocean.json:** В `stress_types` добавлены `chain_formula`, `chain_rule`. В каждый из 4 типов добавлены `trigger_categories` (массив) и `anchor_template` (строка).
-- **A59-2: Canon→master HTML sync:** Все изменения synced в `src/master/part_05.html` + `parts/part_05.html` (H3 + 2 таблицы + RULE/RECOMMENDATION callouts).
-- **drift v1.3 (audit_canon_master_drift.py):** Добавлен `--actionable-only` flag — подавляет EXPECTED категории (vs_embed_ref, cross_ref, callout_label), оставляет только ACTIONABLE (plain_text, no_master_match) + все structural signals (canon-only sections, master-only sections, heading mismatches). В SUMMARY добавлена строка «Actionable drifts (plain_text + no_master_match, iter 64+): N». Категории в summary помечены `[actionable]` / `[expected]`. JSON report обновлён до version 1.3 с полями `expected_drift_categories`, `actionable_drift_categories`, `actionable_drift_count`, `actionable_only_mode`.
+- **KI#41 fixed:** E10 VS-EMBED в `src/master/part_05.html` (строки 417–539) и `parts/part_05.html` (строки 411–534) — заменены 7 hardcoded dark-theme colors/font-family на CSS variables, matching canonical source `visual-system/integration/component-extracts/E10-visual.html`. Mapping: `#1e2430`→`var(--border)`, `#8b5cf6`→`var(--accent-violet)`, `#d9455a`→`var(--danger)`, `#3fb68b`→`var(--success)`, `#0e1117`→`var(--bg-panel)`, `#e2e6ed`→`var(--text-primary)`, `'DM Sans', sans-serif`→`var(--font-heading)`. Total: 90 replacements (45 per file). Scoped fix — E09 region в тех же файлах НЕ затронут (deferred as KI#42).
+- **KI#42, KI#43 documented** как deferred (E09 similar drift; parts/ sync drift). См. § Known Issues.
 
 **Ключевой принцип iter 60+:** Гайд — единый последовательный документ. Читатель идёт сверху вниз. Если концепция объяснена выше — не повторять. Просто использовать.
 
-Validation gates:
+Validation gates (post-iter 65):
 - `check_english.py` → 24 English leaks (baseline unchanged).
 - `validate_terms.py` → ✅ All terminology valid.
 - `check_duplicates.py` → ✅ no disallowed duplicates.
@@ -30,7 +28,11 @@ Validation gates:
 
 ## Known Issues
 
-**Открытые KI:** нет.
+**Открытые KI:**
+
+- **KI#41 (iter 65, ✅ FIXED)** — E10 VS-EMBED в `src/master/part_05.html` + `parts/part_05.html` — заменены 7 hardcoded dark-theme colors/font-family на CSS variables. Scoped fix через `/home/z/my-project/scripts/fix_e10_embed.py` (90 replacements total). E09 region не затронут. Validation gates PASS.
+- **KI#42 (iter 65, deferred)** — E09 VS-EMBED в тех же файлах имеет аналогичный drift (hardcoded `#1e2430`, `#3cc8ff`, `#38bdf8`, `#0e1117`, `#e2e6ed`, и т.д.). Канон `visual-system/integration/component-extracts/E09-visual.html` использует CSS-переменные. **Не критично, отложено** до отдельной итерации чтобы не рисковать вместе с KI#41 (iter 65 = E10 only).
+- **KI#43 (iter 65, deferred)** — `parts/*.html` (root fallbacks) не полностью regenerated из `src/master/` на iter 64. Запуск `pnpm run build` в iter 65 показал, что 15 parts/ файлов устарели (missing `<!-- difficulty: ... -->` labels, glossary sorting drift, §5.6→§5.5 refs в part_05, и т.д.). Reverted чтобы iter 65 остался focused на KI#41. **Fix plan:** в iter 66+ запустить `pnpm run build` и закоммитить все regenerated parts/. Build hash unchanged (69d9b813), т.е. это чисто sync-layer drift, не semantic изменения.
 
 При обнаружении новых багов — сначала документировать в STATUS.md §«Known Issues» как KI#N, потом фиксить.
 
@@ -56,11 +58,12 @@ Validation gates:
 
 ---
 
-## iter 65+ Roadmap
+## iter 66+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 65** | P2-remaining (R1 repetitions cleanup) + A59-4 + A59-6 (optional) | MEDIUM |
+| **iter 66** | KI#42 (E09 embed hardcoded colors → CSS vars, scoped) + KI#43 (parts/ rebuild: запустить `pnpm run build` и закоммитить regenerated fallbacks) | LOW–MEDIUM |
+| **iter 67** | P2-remaining (R1 repetitions cleanup) + A59-4 + A59-6 (optional) | MEDIUM |
 | **deferred** | Prose mentions Cat B in master HTML: invert «English (Russian)» → «Russian (English)» for full consistency with language policy iter 60 | LOW |
 
 ---

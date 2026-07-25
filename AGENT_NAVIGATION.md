@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.2.0** + все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED + **iter 64: A59-2 Trigger→Stress→FLAW chain formalization (§5.1 subsection + ocean.json stress_types enrichment) + drift v1.3 (`--actionable-only` flag в audit_canon_master_drift.py). 96 sections unchanged. All validation gates PASS (96/96 sync, 96 sections build, terms ✅, duplicates ✅, 24 English leaks baseline, drift v1.3 170 paragraph drifts / 131 actionable)**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`.
+> **Entry document.** Read this first. Текущая версия: **9.2.0** + все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED + **iter 65: KI#41 fixed — E10 VS-EMBED hardcoded dark-theme colors → CSS variables (scoped fix в src/master + parts, 90 replacements, E09 region не затронут, deferred as KI#42). KI#43 (parts/ sync drift) documented as deferred. 96 sections unchanged. All validation gates PASS (96/96 sync, 96 sections build, terms ✅, duplicates ✅, 24 English leaks baseline, drift v1.3 170 paragraph drifts / 131 actionable)**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`.
 
 ---
 

@@ -4,32 +4,34 @@
 
 ---
 
-Task ID: 64
+Task ID: 65
 Agent: main
-Task: iter 64 — A59-2 Trigger→Stress→FLAW chain formalization + drift v1.3.
+Task: iter 65 — fix KI#41 (E10 VS-EMBED hardcoded colors → CSS variables in src/master + parts).
 
 Work Log:
-- 1: **Repo клонирован** — git clone. Прочитан STATUS.md (iter 63), worklog.md, AGENT_NAVIGATION.md, iter60_analysis_plan.md, canon part_02/part_04/part_05.md, ocean.json, character_schema.json, audit_canon_master_drift.py. Понятна структура и A59-2/drift v1.3 scope.
-- 2: **Baseline validation gates PASS:** 96/96 sync, 24 English leaks (baseline), terms ✅, duplicates ✅, build 96 sections 0 errors.
-- 3: **A59-2 §5.1 (canon part_05.md):** Добавлена subsection `### Trigger → Stress Type → FLAW chain` после RECOMMENDATION stress types. Содержит: формулу цепочки (4 этапа), канонический пример Елена (anxious-reactive) с таблицей по этапам + ссылками на §2.1/§4.4/§4.8, RULE (каждый тип стресса требует минимум 1 trigger→FLAW→Anchor chain), RECOMMENDATION (2–3 категории триггеров), таблицу «Категории триггеров по типу стресса» для всех 4 типов.
-- 4: **A59-2 ocean.json:** В `stress_types` объекта N добавлены `chain_formula` («Trigger → Stress Type → FLAW → Anchor (T→A→P)»), `chain_rule`. В каждый из 4 типов добавлены `trigger_categories` (массив из 3 категорий) и `anchor_template` (строка-шаблон). JSON валиден.
-- 5: **A59-2 canon→master HTML sync:** Все §5.1 изменения synced в `src/master/part_05.html` + `parts/part_05.html` (root fallback). H3 + intro paragraph + H4 пример Елены с таблицей + RULE callout + RECOMMENDATION callout + H4 категории триггеров с таблицей. HTML entities использованы корректно (`&rarr;`, `&mdash;`, `&sect;`, `&ndash;`, `&laquo;`/`&raquo;`, `&gt;`).
-- 6: **A59-2 validation gates PASS после изменений:** 96/96 sync ✅, 24 English leaks (baseline unchanged — Trigger/Stress Type/FLAW/Anchor это Category A термины) ✅, terms ✅, duplicates ✅, build 96 sections 0 errors ✅.
-- 7: **drift v1.3 (audit_canon_master_drift.py):** Добавлены константы `EXPECTED_DRIFT_CATEGORIES` (vs_embed_ref, cross_ref, callout_label) и `ACTIONABLE_DRIFT_CATEGORIES` (plain_text, no_master_match). `print_console_report` принимает `actionable_only: bool = False`. При `actionable_only=True` paragraph drift блок печатается только если есть actionable drifts, заголовок показывает «N actionable paragraph drift(s) (plain_text + no_master_match, of M total)». SUMMARY добавлена строка «Actionable drifts (plain_text + no_master_match, iter 64+): N». Категории в summary помечены `[actionable]`/`[expected]`. `build_json_report` updated до version 1.3 с полями `expected_drift_categories`, `actionable_drift_categories`, `actionable_drift_count`, `actionable_only_mode`. Main() парсит `--actionable-only` flag и прокидывает в обе функции.
-- 8: **drift v1.3 testing:** `--help` показывает новый flag. Default mode: 170 paragraph drifts, 131 actionable, breakdown с тегами `[actionable]`/`[expected]`. `--actionable-only` mode: 131 actionable показаны, 39 expected подавлены. JSON report: version=1.3, actionable_only_mode=True, actionable_drift_count=131, expected/actionable categories массивы. Все tests pass.
-- 9: **Doc updates:** STATUS.md rewritten для iter 64 (clean, новый invariant: Trigger→Stress→FLAW chain + drift v1.3). Roadmap обновлён: iter 65 = P2-remaining + A59-4 + A59-6. worklog.md updated.
+- 1: **Repo клонирован** — git clone. Прочитан STATUS.md (iter 64), worklog.md, AGENT_NAVIGATION.md. Понятна структура и текущее состояние.
+- 2: **Bug report от пользователя:** «E10 element сломан и отображается неверно». Пользователь дал snippet VS-EMBED markup с hardcoded цветами.
+- 3: **Diagnosis:** В `src/master/part_05.html` (строки 417–539) и `parts/part_05.html` (строки 411–534) E10 SVG markup использует hardcoded dark-theme colors (`#1e2430`, `#8b5cf6`, `#d9455a`, `#3fb68b`, `#0e1117`, `#e2e6ed`) и `font-family="'DM Sans', sans-serif"` вместо CSS variables. Канон `visual-system/integration/component-extracts/E10-visual.html` использует `var(--border)` / `var(--accent-violet)` / `var(--danger)` / `var(--success)` / `var(--bg-panel)` / `var(--text-primary)` / `var(--font-heading)`. **Эффект:** в light theme кружки типов заполнены `#0e1117` (почти чёрный), текст внутри `#e2e6ed` (светло-серый) — **невидим**; в dark theme цвета не theme-aware; connection lines `#1e2430` почти невидимы на тёмном фоне.
+- 4: **KI#41 documented в STATUS.md** (per workflow: bug → STATUS.md → fix).
+- 5: **Discovered KI#42** (E09 has same drift) — documented as deferred.
+- 6: **Discovered KI#43** (parts/*.html out of sync with src/master/ from iter 64 — running `pnpm run build` revealed 15 stale files) — documented as deferred; reverted parts/ to keep iter 65 focused.
+- 7: **Fix script written:** `/home/z/my-project/scripts/fix_e10_embed.py` — scoped replacement: только внутри `<!-- VS-EMBED: E10 -->` ... `<!-- REPLACED BY VISUAL SYSTEM: E10 -->` block. 7 hardcoded values → CSS variables. Не трогает E09 region.
+- 8: **Fix applied:** 45 replacements per file × 2 files = 90 total. Verified: 0 hardcoded colors remain in E10 block (master + parts). Verified: E10 block content в master HTML идентичен canonical source `E10-visual.html` (только wrapper div отличается).
+- 9: **Validation gates PASS (post-fix):** 96/96 sync ✅, 24 English leaks (baseline unchanged) ✅, terms ✅, duplicates ✅, build 96 sections 0 errors ✅, drift 170 paragraph drifts (131 actionable, baseline unchanged).
+- 10: **Build hash unchanged** (69d9b813) — confirms E10 fix не semantic изменение, только visual token mapping.
+- 11: **Doc updates:** STATUS.md rewritten для iter 65 (KI#41 fixed, KI#42/KI#43 deferred, roadmap iter 66+). worklog.md updated.
 
 Stage Summary:
-- **iter 64 COMPLETE.** A59-2 trigger→stress→FLAW chain formalized в §5.1 (canon + master HTML). drift script обновлён до v1.3 с `--actionable-only` flag. All validation gates PASS.
-- **Modified files (6):** docs/canon/part_05.md, src/master/part_05.html, parts/part_05.html, data/ocean.json, scripts/audit_canon_master_drift.py, STATUS.md, worklog.md.
-- **New invariants:** Trigger→Stress→FLAW chain (iter 64+), drift v1.3 (iter 64+).
-- **Section count unchanged:** 96 sections.
-- **P2-remaining deferred** до iter 65 — рискованно делать вместе с A59-2.
+- **iter 65 COMPLETE.** KI#41 fixed (E10 embed colors → CSS vars). 2 new KI documented as deferred (KI#42 E09 same drift, KI#43 parts/ sync drift).
+- **Modified files (3):** src/master/part_05.html, parts/part_05.html, STATUS.md. worklog.md updated.
+- **Validation:** 96/96 sync, 24 English leaks (baseline), terms ✅, duplicates ✅, 96 sections build, drift baseline unchanged.
+- **Scoped fix:** E09 region не затронут, parts/ rebuild reverted, только E10 fix committed.
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 64**: A59-2 Trigger→Stress→FLAW chain + drift v1.3. 96 sections.
 - **iter 63**: A59-1 Neuroticism→stress type taxonomy + A59-3 Personality sub-budget. 96 sections.
 - **iter 62**: R1 repetitions cleanup §2.2/§5.1→§5.6 + §5.5 MBTI stub merge. 96 sections.
 - **iter 61**: KI#40 closed (canon→master sync). 11 Cat B headings unified.
