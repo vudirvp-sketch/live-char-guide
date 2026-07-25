@@ -1,5 +1,16 @@
 # Changelog
 
+## [9.2.69] - 2026-07-25
+
+### iter 69 — KI#45 fix (version bump 9.1.0 → 9.2.0)
+
+- **KI#45 ✅ CLOSED:** Version drift устранён — bump 9.1.0 → 9.2.0 в 10 source files: `package.json`, `src/VERSION`, `data/character_schema.json`, `data/test_scenarios.json`, `src/shell/index.html` (meta + comment), `src/shell/lazy-loader.js` (CONFIG.VERSION), `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `scripts/build-unified.mjs`, `src/scripts/build-shell-unified.mjs`.
+- **Build manifest verification:** `pnpm run build` → SUCCESS. `version-sync.mjs` → ✅ all 9.2.0 in sync. Build hash changed `69d9b813` → `4074bac5` (expected — shell version string changed). Root fallbacks regenerated (index.html, assets/, widgets/, parts/, data/, build.hash).
+- **Remaining stale docs (deferred):** 5 docs still say 9.1.0 (`docs/content_map.md`, `docs/character_bible.md`, `docs/architecture.md`, `docs/components.md`, `docs/canon/iter60_analysis_plan.md`). Non-functional reference docs, deferred to iter 70+.
+- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, build hash `4074bac5`.
+
+---
+
 ## [9.2.68] - 2026-07-25
 
 ### iter 68 — Recon + KI#44 fix + cleanup

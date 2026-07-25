@@ -2,7 +2,7 @@
 /**
  * @fileoverview Build Unified Script for Live Character Guide v9
  * @module scripts/build-unified
- * @version 9.1.0
+ * @version 9.2.0
  *
  * @description
  * Reads src/master/part_*.html and appendix_*.html and produces

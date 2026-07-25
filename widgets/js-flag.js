@@ -1,7 +1,7 @@
 /**
  * @fileoverview js-flag.js — early 'js' class flag for <html> element.
  * @module src/shell/widgets/js-flag
- * @version 9.1.0
+ * @version 9.2.0
  *
  * @description
  * Extracted from inline `<script>` in `src/shell/index.html` per KI#16 fix (iter 19).

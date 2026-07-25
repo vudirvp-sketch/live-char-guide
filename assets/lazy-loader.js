@@ -32,7 +32,7 @@
   
   const CONFIG = {
     STORAGE_KEY: 'guide-unified',
-    VERSION: '9.1.0',
+    VERSION: '9.2.0',
     PARTS_DIR: 'parts'
   };
 

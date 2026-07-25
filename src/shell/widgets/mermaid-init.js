@@ -1,7 +1,7 @@
 /**
  * @fileoverview mermaid-init.js — Mermaid.js initialization (dark theme + brand colors).
  * @module src/shell/widgets/mermaid-init
- * @version 9.1.0
+ * @version 9.2.0
  *
  * @description
  * Extracted from inline `<script>` in `src/shell/index.html` per KI#16 fix (iter 19).
