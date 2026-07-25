@@ -4,49 +4,53 @@
 
 ---
 
-Task ID: 70
+Task ID: 71
 Agent: main
-Task: iter 70 — Docs version bump (LOW) + Recon (found KI#46, KI#47) + cleanup.
+Task: iter 71 — Recon + KI#48 (stale v9.1 в master HTML comments) + Progressive disclosure gap closure (p6_cot_bridge).
 
 Work Log:
-- 1: Repo клонирован. Прочитан STATUS.md (iter 69 — KI#45 ✅ CLOSED, version 9.2.0 synced), worklog.md (iter 69 detailed), AGENT_NAVIGATION.md (iter 70+ roadmap), CHANGELOG.md. Понятен контекст — приоритет iter 70: Docs version bump (5 stale docs) + Recon.
-- 2: **Recon — grep `9\.1\.0` по всему репо:** Найдены 2 пропущенных в iter 69 source-side references:
-  - `src/master/VERSION` (line 1) — orphan file (не используется build-скриптами), но говорил 9.1.0. Out of sync с `src/VERSION=9.2.0`. **→ KI#46 (NEW).**
-  - `src/shell/styles.css` (line 2 header comment) — `LIVE CHARACTER GUIDE - SHELL STYLES v9.1.0`. Root fallback `assets/shell-styles.css` наследовал stale header. В iter 69 обновили `src/shell/index.html` meta+comment, но CSS header пропустили. **→ KI#47 (NEW).**
-  - Также найдены: 5 stale docs (запланированный LOW priority), historical references в `visual-system/PLAN.md` (не трогать — historical), iter 69 records в STATUS/CHANGELOG/AGENT_NAVIGATION/worklog (исторические, не трогать).
-- 3: **Per user directive "Сначала документируй в STATUS.md как Known Issue, потом фиксись":** KI#46 + KI#47 задокументированы в STATUS.md §"Текущее состояние" + CHANGELOG.md iter 70 entry перед фиксом.
-- 4: **KI#46 fix:** `src/master/VERSION` content обновлён 9.1.0 → 9.2.0. Файл остаётся orphan (deletion deferred to iter 71+ as separate decision — risk-free, но пользователь сказал "Лучше недоделать, чем сломать").
-- 5: **KI#47 fix:** `src/shell/styles.css` header comment `v9.1.0` → `v9.2.0`. Verified no other 9.1.0 в `src/shell/`.
-- 6: **Docs version bump (LOW):** 9.1.0 → 9.2.0 в 5 stale docs:
-  - `docs/content_map.md` (Version + title v9.1 → v9.2)
-  - `docs/character_bible.md` (Version + title v9.1 → v9.2)
-  - `docs/architecture.md` (Version + Status + Last Updated 2026-05-15→2026-07-25 + footer)
-  - `docs/components.md` (Version + title v9.1 → v9.2 + Last Updated 2026-05-16→2026-07-25 + footer; stale changelog entry "Updated 2026-05-16: ... version bump to v9.1.0" removed — user directive: "Убирай длинную истории изменений, мусор")
-  - `docs/canon/iter60_analysis_plan.md` (Репозиторий v9.1.0 → v9.2.0)
-- 7: **Build manifest verification:** `pnpm install` (через `npm install -g pnpm` т.к. pnpm не был в PATH) → SUCCESS. `pnpm run build` → SUCCESS, version 9.2.0, hash `4074bac5` (unchanged — hash computed from `index.html`, CSS comment edit doesn't affect hash). Root fallback `assets/shell-styles.css` regenerated с correct `v9.2.0` header. Verified: `head -5 assets/shell-styles.css` → `v9.2.0` ✅.
-- 8: **Validation gates:**
-  - `version-sync.mjs` → ✅ All versions 9.2.0 in sync (src/VERSION, package.json, dist/index.html).
+- 1: Repo клонирован. Прочитан STATUS.md (iter 70 COMPLETE, no open KI, проект STABLE), worklog.md (iter 70 detailed), AGENT_NAVIGATION.md (iter 71+ roadmap). Понятен контекст — приоритет iter 71: Recon → если чисто, Progressive disclosure метки.
+- 2: **Recon — все validation gates:**
+  - `pnpm install` (через `npm install -g pnpm` т.к. pnpm не был в PATH) → SUCCESS.
+  - `version-sync.mjs` → ✅ All versions 9.2.0 in sync.
   - `check_english.py` → 24 English leaks (baseline unchanged ✅).
   - `validate_terms.py` → ✅ All terminology valid.
   - `check_duplicates.py` → ✅ no disallowed duplicates (2 intentional).
   - `audit_canon_master_sync.py` → 96/96 PASS.
   - `audit_vs_embeds.py` → ✅ no regressions.
-- 9: **Docs cleanup:** STATUS.md rewritten (iter 70 entry, KI#46+47 closed, roadmap updated — removed "5 stale docs" line, added iter 71+ roadmap). CHANGELOG.md rewritten (iter 70 entry added, iter 67/68/69 entries compressed to single lines per user directive "Убирай длинной истории изменений"). README.md updated (iter 67 → iter 70 COMPLETE). AGENT_NAVIGATION.md updated (line 3 + line 510 "Подсказка следующему агенту" — iter 70 invariants + iter 71+ roadmap, added invariant #16 "Version sync (iter 70+)"). worklog.md — iter 70 detailed, iter 69 compressed.
-- 10: **Final verification:** `rg "9\.1\.0"` — remaining hits только historical references в `visual-system/PLAN.md` (iter 1-2 historical fix logs — не трогать), iter 69 records в CHANGELOG/STATUS/AGENT_NAVIGATION/worklog (historical, не трогать). No source-side 9.1.0 left.
+  - `audit_canon_master_drift.py` → 170 paragraph drifts / 131 actionable (baseline unchanged ✅).
+  - `validate:master` → ✅ 12/12 checks PASS.
+  - `pnpm run build` → SUCCESS, hash `4074bac5` (unchanged ✅).
+- 3: **Recon — поиск новых багов:**
+  - `rg "9\.1\.0|v9\.1\b"` по src/, docs/ → найдены 6 master HTML files с stale `v9.1 Master HTML` в top-of-file comment (line 3): part_01, part_02, part_05, part_06, part_07a, part_10. Это пропущенные в iter 70 source-side refs (тогда обновили `src/shell/styles.css` header, но не master HTML comments). **→ KI#48 (NEW).**
+  - Также найден 1 stale doc reference: `docs/architecture.md:59` говорил "95 sections in v9.1" — outdated (сейчас 96 sections в v9.2). **→ KI#48 (docs follow-up).**
+  - Historical references в `visual-system/PLAN.md`, `docs/CONTENT_RESTRUCTURE_PLAN.md`, `docs/character_bible.md` (DELETED in v9.1) — НЕ трогать, это исторические записи.
+- 4: **Per user directive "Сначала документируй в STATUS.md как Known Issue, потом фиксий":** KI#48 задокументирован в STATUS.md перед фиксом.
+- 5: **KI#48 fix (6 master HTML files):** `Live Character Guide v9.1 Master HTML` → `Live Character Guide v9.2 Master HTML` в part_01.html, part_02.html, part_05.html, part_06.html, part_07a.html, part_10.html (line 3 в top-of-file comment). Verified: `rg "v9\.1 Master HTML" src/master/` → 0 hits ✅.
+- 6: **KI#48 fix (docs/architecture.md:59):** "Master guide HTML files (95 sections in v9.1)" → "Master guide HTML files (96 sections in v9.2)".
+- 7: **Progressive disclosure gap closure:** Проверено покрытие `<!-- difficulty: ... -->` маркеров — 95/96 секций покрыты. Единственная без маркера — `p6_cot_bridge` (intro секция Part 6). Добавлен `<!-- difficulty: BASIC -->` (соответствует паттерну других intro-секций: p1_value_proposition, p2_basic_anchors, p4_spine_overview, p5_ocean_basics — все BASIC). Теперь 96/96 секций покрыты.
+- 8: **Build + validation gates после фиксов:**
+  - `pnpm run build` → SUCCESS, version 9.2.0, hash `4074bac5` (unchanged — hash computed only from `src/shell/index.html`, master HTML comment edits не влияют на hash ✅).
+  - `validate:master` → ✅ 12/12 checks PASS.
+  - `audit_canon_master_sync.py` → 96/96 PASS.
+  - Root fallbacks `parts/part_01.html`, `parts/part_02.html`, `parts/part_05.html`, `parts/part_06.html`, `parts/part_07a.html`, `parts/part_10.html` regenerated via `pnpm run build` — отражают обе правки (v9.2 в comment + difficulty marker в part_06).
+- 9: **Docs cleanup:** STATUS.md rewritten (iter 71 entry, KI#48 closed, iter 72+ roadmap — removed "Progressive disclosure метки" т.к. выполнено в iter 71, добавлен invariant "Version sync iter 71+: v9.1 Master HTML comments устранены"). worklog.md — iter 71 detailed, iter 70 compressed to single line. AGENT_NAVIGATION.md updated (line 3 + line 510 hint).
+- 10: **Final verification:** `rg "v9\.1 Master HTML"` → 0 hits ✅. `rg "9\.1\.0"` в src/ и docs/ → 0 hits ✅. Все validation gates PASS.
 
 Stage Summary:
-- **iter 70 COMPLETE.** No open KI. Проект STABLE.
-- **Modified source files:** `src/master/VERSION` (KI#46), `src/shell/styles.css` (KI#47).
-- **Modified docs:** `docs/content_map.md`, `docs/character_bible.md`, `docs/architecture.md`, `docs/components.md`, `docs/canon/iter60_analysis_plan.md` (5 stale docs version bump).
-- **Modified meta:** `STATUS.md`, `CHANGELOG.md`, `README.md`, `AGENT_NAVIGATION.md`, `worklog.md`.
-- **Regenerated by build:** `assets/shell-styles.css` (root fallback, теперь говорит v9.2.0).
-- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks baseline ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, build hash `4074bac5` (unchanged).
+- **iter 71 COMPLETE.** No open KI. Проект STABLE.
+- **Modified source files:** `src/master/part_01.html`, `src/master/part_02.html`, `src/master/part_05.html`, `src/master/part_06.html`, `src/master/part_07a.html`, `src/master/part_10.html` (KI#48: v9.1 → v9.2 в top comment; p6_cot_bridge: +difficulty BASIC).
+- **Modified docs:** `docs/architecture.md` (KI#48: 95 sections v9.1 → 96 sections v9.2).
+- **Modified meta:** `STATUS.md`, `AGENT_NAVIGATION.md`, `worklog.md`.
+- **Regenerated by build:** `parts/part_01.html`, `parts/part_02.html`, `parts/part_05.html`, `parts/part_06.html`, `parts/part_07a.html`, `parts/part_10.html` (root fallbacks).
+- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks baseline ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, validate:master 12/12 ✅, drift 170/131 baseline ✅, build hash `4074bac5` (unchanged).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
-- **iter 69**: KI#45 (version bump 9.1.0 → 9.2.0 in 10 source files + build manifest verified). 2 source-side refs (`src/master/VERSION` + `src/shell/styles.css` header) пропущены — fixed в iter 70 как KI#46/47.
+- **iter 70**: Docs version bump (5 stale docs 9.1.0 → 9.2.0) + Recon (KI#46 `src/master/VERSION` orphan, KI#47 `src/shell/styles.css` header).
+- **iter 69**: KI#45 (version bump 9.1.0 → 9.2.0 in 10 source files + build manifest verified).
 - **iter 68**: Recon + KI#44 (audit_vs_embeds.py path bug) + cleanup _DELETED_FILES.txt.
 - **iter 67**: P2-remaining R1 cleanup §4.10 + Cat B prose inversion (6 mentions) + cleanup 6 stale files.
 - **iter 66**: KI#42 (E09 embed CSS vars) + KI#43 (parts/ rebuild). 17 files.

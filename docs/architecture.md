@@ -56,7 +56,7 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files (95 sections in v9.1) | Authors writing Parts |
+| `src/master/` | Author | Master guide HTML files (96 sections in v9.2) | Authors writing Parts |
 | `src/shell/` | Infrastructure | HTML/CSS/JS shell (loader, styles, panels) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
 | `docs/` | Author | Documentation (not included in build) | Authors |

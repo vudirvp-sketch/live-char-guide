@@ -4,7 +4,7 @@
 
 - **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
 - **Версия:** 9.2.0
-- **Статус:** iter 70 COMPLETE. Нет открытых KI. См. `STATUS.md`.
+- **Статус:** iter 71 COMPLETE. Нет открытых KI. См. `STATUS.md`.
 
 ---
 

@@ -1,19 +1,26 @@
 # Changelog
 
+## [9.2.71] - 2026-07-26
+
+### iter 71 — Recon + KI#48 + Progressive disclosure gap closure
+
+- **Recon:** все validation gates PASS (version-sync ✅, 96/96 canon sync ✅, 24 English leaks baseline ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, validate:master 12/12 ✅, drift 170/131 baseline ✅, build hash `4074bac5` unchanged). Найден 1 новый баг — KI#48.
+- **KI#48 ✅ CLOSED:** 6 master HTML files имели stale `v9.1 Master HTML` в top-of-file comment (part_01, part_02, part_05, part_06, part_07a, part_10) — пропущено в iter 70 (тогда обновили `src/shell/styles.css` header, но не master HTML comments). Fix: `v9.1` → `v9.2` в 6 файлах. Root fallbacks `parts/part_*.html` regenerated via `pnpm run build`.
+- **KI#48 — docs follow-up:** `docs/architecture.md:59` содержал stale "95 sections in v9.1" → актуализировано на "96 sections in v9.2".
+- **Progressive disclosure gap closure:** `p6_cot_bridge` — единственная секция без `<!-- difficulty: ... -->` маркера (было 95/96). Добавлен `<!-- difficulty: BASIC -->` (соответствует паттерну других intro-секций). Теперь 96/96 секций покрыты.
+- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, validate:master 12/12 ✅, drift 170/131 baseline ✅, build hash `4074bac5` (unchanged — hash computed only from `src/shell/index.html`, master HTML comment edits не влияют на hash).
+
+---
+
 ## [9.2.70] - 2026-07-25
 
 ### iter 70 — Docs version bump + Recon (KI#46, KI#47)
 
 - **Recon:** найдены 2 пропущенных в iter 69 source-side 9.1.0 references.
-- **KI#46 ✅ CLOSED:** `src/master/VERSION` orphan file — был 9.1.0 (out of sync с `src/VERSION=9.2.0`). Файл не используется build-скриптами (orphan), но создавал drift. Fix: обновлён до 9.2.0. Deletion deferred (separate iter decision).
-- **KI#47 ✅ CLOSED:** `src/shell/styles.css` header comment `v9.1.0` → `v9.2.0`. Был пропущен в iter 69 (тогда обновили `src/shell/index.html` meta + comment, но не CSS header). Root fallback `assets/shell-styles.css` regenerated via `pnpm run build`.
-- **Docs version bump (LOW):** 9.1.0 → 9.2.0 в 5 stale docs:
-  - `docs/content_map.md` (Version: 9.1.0 + title v9.1)
-  - `docs/character_bible.md` (Version: 9.1.0 + title v9.1)
-  - `docs/architecture.md` (Version: 9.1.0 + Status + footer)
-  - `docs/components.md` (Version: 9.1.0 + title v9.1 + footer; stale changelog entry removed)
-  - `docs/canon/iter60_analysis_plan.md` (репо v9.1.0)
-- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, build hash `4074bac5` (unchanged — hash computed from `index.html`, CSS comment edit doesn't affect hash).
+- **KI#46 ✅ CLOSED:** `src/master/VERSION` orphan file — был 9.1.0 (out of sync с `src/VERSION=9.2.0`). Файл не используется build-скриптами (orphan), но создавал drift. Fix: обновлён до 9.2.0. Deletion deferred.
+- **KI#47 ✅ CLOSED:** `src/shell/styles.css` header comment `v9.1.0` → `v9.2.0`. Был пропущен в iter 69. Root fallback `assets/shell-styles.css` regenerated via `pnpm run build`.
+- **Docs version bump (LOW):** 9.1.0 → 9.2.0 в 5 stale docs: `docs/content_map.md`, `docs/character_bible.md`, `docs/architecture.md`, `docs/components.md`, `docs/canon/iter60_analysis_plan.md`.
+- **Validation:** version-sync ✅, 96/96 sync ✅, 24 English leaks (baseline) ✅, terms ✅, duplicates ✅, audit_vs_embeds ✅, build hash `4074bac5` (unchanged).
 
 ---
 
@@ -21,9 +28,7 @@
 
 ### iter 69 — KI#45 fix (version bump 9.1.0 → 9.2.0)
 
-- **KI#45 ✅ CLOSED:** Version drift устранён — bump 9.1.0 → 9.2.0 в 10 source files: `package.json`, `src/VERSION`, `data/character_schema.json`, `data/test_scenarios.json`, `src/shell/index.html` (meta + comment), `src/shell/lazy-loader.js` (CONFIG.VERSION), `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `scripts/build-unified.mjs`, `src/scripts/build-shell-unified.mjs`.
-- **Build manifest verification:** `pnpm run build` → SUCCESS. Build hash changed `69d9b813` → `4074bac5`.
-- **2 missed source-side references:** `src/master/VERSION` (orphan) + `src/shell/styles.css` header — fixed in iter 70 (KI#46, KI#47).
+- **KI#45 ✅ CLOSED:** Version drift устранён — bump 9.1.0 → 9.2.0 в 10 source files: `package.json`, `src/VERSION`, `data/character_schema.json`, `data/test_scenarios.json`, `src/shell/index.html` (meta + comment), `src/shell/lazy-loader.js` (CONFIG.VERSION), `src/shell/widgets/js-flag.js`, `src/shell/widgets/mermaid-init.js`, `scripts/build-unified.mjs`, `src/scripts/build-shell-unified.mjs`. Build hash changed `69d9b813` → `4074bac5`. 2 missed source-side refs (`src/master/VERSION` + `src/shell/styles.css` header) fixed в iter 70 (KI#46, KI#47).
 
 ---
 
