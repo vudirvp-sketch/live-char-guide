@@ -4,6 +4,31 @@
 
 ---
 
+Task ID: 85
+Agent: main
+Task: iter 85 — A7/A8/KI#57: All cards `<anchors>` XML + Tone Frames expand (Omnis/Vyshcher ~25 tok) + Omnis-Zeta GHOST-linked Anchors bodily/mechanical.
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 84 state), worklog.md (iter 84 entry), docs/research/examples_audit_iter80.md §10 (A7/A8 plan).
+- 2: Прочитаны docs/canon/part_10.md и src/master/part_10.html — все 4 карточки Anchors (`[ANCHORS]` plain text) и Tone Frames (Omnis ~8 tok, Vyshcher ~8 tok).
+- 3: Прочитан docs/canon/part_07a.md §7A.9 (XML Tags template) + §7A.3 (Tone Frame ~25-30 tok target).
+- 4: A7: Elena `[ANCHORS]` → `<anchors>` XML + bullet `-` prefixes → docs/canon/part_10.md + src/master/part_10.html.
+- 5: A7: Walter `[ANCHORS]` → `<anchors>` XML + bullet `-` prefixes → both files.
+- 6: A7: Omnis-Zeta `[ANCHORS]` → `<anchors>` XML + bullet `-` prefixes + KI#57 GHOST-linked Anchors bodily/mechanical conversion → both files.
+- 7: A7: Vyshcherblenny `[ANCHORS]` → `<anchors>` XML + bullet `-` prefixes → both files.
+- 8: A8: Omnis-Zeta Tone Frame expanded ~8→~25 tok: "Tone: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol." → both files.
+- 9: A8: Vyshcherblenny Tone Frame expanded ~8→~25 tok: "Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search." → both files.
+- 10: KI#57: Omnis-Zeta GHOST-linked Anchor 1: «раскрывает уязвимость перед союзниками — они видят страх» → «оптика мерцает жёлтым (warning cycle), сервоприводы левого манипулятора дрожат — Allies detect diagnostic anomaly in his chassis». Anchor 2: «рассеивание внимания в критический момент, возможная ошибка в техно-ритуале» → «оптика гаснет на 0.8 сек (processing interrupt), периферийные сенсоры теряют calibration — techno-ritual timing drift ±2 sec». Both conversions: relational/cognitive → bodily/mechanical (P2-R1/P2-R3 compliance).
+- 11: Annotations updated in both files: Elena (ANCHORS merged to single line), Walter (ANCHORS XML), Omnis-Zeta (Tone Frame ~25 tok + Anchors bodily/mechanical), Vyshcherblenny (Tone Frame ~25 tok + Anchors XML).
+- 12: STATUS.md rewritten: iter 85 DONE, U4 closed, KI#57 closed, V2 closed, U1 all DONE, remaining violations updated, roadmap iter 86+, Anchors placement invariant updated.
+
+Stage Summary:
+- Closed: U4 (Anchors `<anchors>` XML), KI#57 (Omnis-Zeta GHOST-linked Anchors non-physical), V2 (Vyshcherblenny Tone Frame).
+- Remaining: U2 (CORE_DIRECTIVES — DECISION), U3 (Examples недомер all cards), V3 (Vyshcherblenny 3 Anchor Prices), V4 (OCEAN cautious zones), V5 (Vyshcherblenny Examples).
+- Next: iter 86 — B1: Elena Examples expand + embodiment.
+
+---
+
 Task ID: 84
 Agent: main
 Task: iter 84 — A6 Vyshcherblenny GHOST: сократить до concrete event, cycle → `<ghost_layers>` (part_10.html + docs/canon/part_10.md).

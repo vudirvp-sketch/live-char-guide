@@ -9,20 +9,19 @@
 
 ## Текущее состояние
 
-**iter 84 — A6 Vyshcherblenny GHOST: concrete event, cycle → `<ghost_layers>`.** GHOST in `<spine>` сокращён с 5 предложений + cycle pattern до 3 предложений concrete event (aligned с Bible и part_07a). Удалены: narrative detail ("не получил диссонанс, а"), explanatory clause ("Это дало время, но забрало..."), cycle pattern ("Цикл: вырезание →...") — cycle уже captured в `<ghost_layers>` Tier 2/3. Canon sync: docs/canon/part_10.md — та же правка.
+**iter 85 — A7/A8/KI#57 COMPLETE.** All 4 cards: `[ANCHORS]` → `<anchors>` XML wrapper (P7A-R16/P1-R6 compliance). Tone Frames expanded: Omnis-Zeta ~8→~25 tok, Vyshcherblenny ~8→~25 tok. KI#57 closed: Omnis-Zeta 2 GHOST-linked Anchor Prices converted from non-physical («раскрывает уязвимость», «рассеивание внимания») to bodily/mechanical (оптика мерцает жёлтым + сервоприводы дрожат; оптика гаснет 0.8 сек + периферийные сенсоры теряют calibration). Bullet list `-` prefixes added to all anchor items per `<anchors>` XML template §7A.9. Annotations updated in both docs/canon/part_10.md and src/master/part_10.html.
 
-**Closed:** V1 — GHOST in `<spine>` over-length (P4-R2/P4-R3 compliance).
+**Closed:** U4 (Anchors `<anchors>` XML), KI#57 (Omnis-Zeta GHOST-linked Anchors non-physical), V2 (Vyshcherblenny Tone Frame ~8 tok).
 
-**Still open for Vyshcherblenny:** V2 (Tone Frame ~8 tok), V3 (3 Anchor Prices non-physical), V4 (OCEAN cautious zones not linked), V5 (2 of 4 Examples under 80 tok).
+**Still open for Vyshcherblenny:** V3 (3 Anchor Prices non-physical → iter 87/88), V4 (OCEAN cautious zones → iter 90), V5 (2 Examples under 80 tok → iter 88).
 
-### Remaining universal violations (2 of 4 still open)
+### Remaining universal violations (1 of 4 still open)
 
 | # | Проблема | Серьёзность |
 |---|----------|-------------|
-| U1 | Tone Frame недомер — Elena DONE, Walter DONE; Omnis/Vyshcher still ~8 tok | HIGH |
+| U1 | Tone Frame недомер — ALL 4 cards DONE (Omnis/Vyshcher expanded to ~25 tok in iter 85) | ✅ CLOSED |
 | U2 | CORE_DIRECTIVES не inline (shorthand reference) | DECISION |
 | U3 | Examples недомер (25–70 tok вместо 80–120) | HIGH |
-| U4 | Anchors `[ANCHORS]` plain text вместо `<anchors>` XML | MEDIUM |
 
 ### Key remaining card-specific violations
 
@@ -30,18 +29,14 @@
 |------|---------------------|
 | **Elena** | Voice leak «саркастичная» in Description; Examples недомер; §9.11 claims Voice check PASS but it FAILS |
 | **Walter** | GHOST without Anchor-trigger; 1 Anchor Price temporal (non-physical); OCEAN cautious zones not linked |
-| **Omnis-Zeta** | 2/7 GHOST-linked Anchor Prices still non-physical; Tone Frame ~8 tok; NEED/WANT tension weak; OCEAN cautious zones not linked |
-| **Vyshcherblenny** | 3 Anchor Prices non-physical; Tone Frame ~8 tok; OCEAN cautious zones not linked; 2 Examples under 80 tok |
+| **Omnis-Zeta** | NEED/WANT tension weak; OCEAN cautious zones not linked |
+| **Vyshcherblenny** | 3 Anchor Prices non-physical; OCEAN cautious zones not linked; 2 Examples under 80 tok |
 
 ---
 
 ## Known Issues
 
-| KI# | Описание | Статус |
-|-----|----------|--------|
-| KI#57 | Omnis-Zeta GHOST-linked Anchor Prices (2) still non-physical: «раскрывает уязвимость», «рассеивание внимания» — deferred to iter 85 (requires `<anchors>` XML + GHOST-CoT alignment) | ⏳ OPEN |
-
-> KI#1–KI#56: ранее closed (история — в git log).
+> KI#1–KI#57: all closed (история — в git log). No open KI.
 
 ---
 
@@ -62,26 +57,26 @@
 - **OCEAN labeling:** extreme = `<30` or `>70`; cautious = `30–40` / `60–70`.
 - **Section count:** 96 секций в `src/master/`.
 - **Callout class policy:** `.callout.rule/.rec/.ex` and plain `.callout` only.
-- **Anchors placement:** Anchors = отдельный структурный блок внутри Examples-зоны.
+- **Anchors placement:** Anchors = `<anchors>` XML wrapper inside Examples-зона (P7A-R16). Template §7A.9.
 - **Voice Isolation:** Лингвистический голос — только Examples/Greeting. Физическая характеристика — Embodiment/Description.
 - **SP structure order:** Identity → Anti-godmoding → CORE_DIRECTIVES → Character-specific rules → Tone Frame → OOC Protection → Format Lock (P7A-R2).
+- **Anchor Price rule:** All Anchor Prices must be bodily/mechanical (P2-R1/P2-R3). Non-physical = violation.
 
 ---
 
-## iter 85+ Roadmap
+## iter 86+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 85** | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand (Omnis/Vyshcher до ~25 tok) + Omnis-Zeta GHOST-linked Anchors bodily/mechanical | MEDIUM |
 | **iter 86** | B1 — Elena Examples expand + embodiment | MEDIUM |
-| **iter 87–88** | B2–B4 — Walter/Omnis/Vysherblenny Examples expand | LOW |
+| **iter 87–88** | B2–B4 — Walter/Omnis/Vyshcherblenny Examples expand + Vyshcherblenny V3 (Anchor Prices → bodily) | LOW |
 | **iter 89** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
-| **iter 90** | C3–C4 — Vyshcherblenny/Elena Bible backfill + align | HIGH |
+| **iter 90** | C3–C4 — Vyshcherblenny/Elena Bible backfill + align + Vyshcherblenny V4 (OCEAN cautious zones) | HIGH |
 | **iter 91** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
 | **iter 92+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
 | **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-**Рекомендация для следующего чата:** iter 85 — A7–A8: All cards `<anchors>` XML + Tone Frames expand + Omnis-Zeta GHOST-linked Anchors bodily/mechanical.
+**Рекомендация для следующего чата:** iter 86 — B1: Elena Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block).
 
 ---
 
