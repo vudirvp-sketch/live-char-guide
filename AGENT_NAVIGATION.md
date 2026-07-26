@@ -201,6 +201,9 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 19. **Callout labels English** — метки `RULE`, `RECOMMENDATION`, `EXAMPLE`, `ILLUSTRATION`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`, `Demonstrates`, `Annotation` — English semantic anchors. `Примечание` — Russian локальное уточнение. Тело callouts — на русском.
 20. **YAML front-matter** — все canon-файлы (кроме `_README.md`) используют YAML front-matter.
 21. **OCEAN labeling consistency** — extreme = строго `<30` или `>70`; cautious zone = `30–40` / `60–70`. При рассинхроне bible vs canon Part 10 — правится bible (principle: guide's role as example takes priority).
+22. **OCEAN format consistency** — канонический формат: compact `O:72 C:65 E:41 A:38 N:68` (§5.1 RULE). Pipes и commas запрещены в `<ocean>` тегах. Bible-формат (per-dimension с объяснениями) — допустим как documentation, не card content.
+23. **Anchors format convention** — `<anchors>` XML = canonical (src/master/). `[ANCHORS]` plain text в parts/ = KI#58 drift (build artifact). Все правки Anchors — в src/master/ в `<anchors>` XML.
+24. **CORE_DIRECTIVES shorthand convention** — `{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}` accepted as convention (D4, iter 93). Shorthand = navigational reference per «одно определение — одно место».
 
 ### Anchor navigation
 
@@ -237,20 +240,21 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ## 8. Roadmap (iter 80+)
 
-Текущее состояние: **iter 80 COMPLETE — разведочный аудит примеров карточек (research-only, no fixes).** Полный отчёт: `docs/research/examples_audit_iter80.md`. Decision items V8/V9 остаются deferred.
+Текущее состояние: **iter 93 COMPLETE — D1/D2/D3/D4 Guide self-contradictions resolved.** Phase D closed. Next: E1/KI#60 (Elena Voice leak) + KI#61/KI#62 (parts/ sync + audit script) in iter 94.
 
-| Итерация | Задача | Усилие |
+| Итерация | Задача | Статус |
 |----------|--------|--------|
-| **iter 81** | A1 — Elena SP: Tone Frame + OOC | LOW |
-| **iter 82** | A2–A4 — Walter SP + `<identity>` + LIE fix | MEDIUM |
-| **iter 83** | A5 — Omnis-Zeta Anchors: physical Prices | MEDIUM |
-| **iter 84** | A6 — Vyshcherblenny GHOST: shorten to concrete event | LOW |
-| **iter 85** | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand | MEDIUM |
-| **iter 86–88** | B1–B4 — Examples enrichment (4 cards) | LOW–MEDIUM |
-| **iter 89–90** | C1–C4 — Bible sync (Walter / Omnis / Vyshcherblenny / Elena) | MEDIUM–HIGH |
-| **iter 91** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
-| **iter 92+** | E1–E2 — Dead weight cleanup | LOW |
-| **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
+| iter 81 | A1 — Elena SP: Tone Frame + OOC | ✅ COMPLETE |
+| iter 82 | A2–A4 — Walter SP + `<identity>` + LIE fix | ✅ COMPLETE |
+| iter 83 | A5 — Omnis-Zeta Anchors: physical Prices | ✅ COMPLETE |
+| iter 84 | A6 — Vyshcherblenny GHOST: shorten to concrete event | ✅ COMPLETE |
+| iter 85 | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand | ✅ COMPLETE |
+| iter 86–88 | B1–B4 — Examples enrichment (4 cards) | ✅ COMPLETE |
+| iter 89–90 | C1–C4 — Bible sync (Walter / Omnis / Vyshcherblenny / Elena) | ✅ COMPLETE |
+| iter 91 | D1–D4 — Guide self-contradictions | ✅ COMPLETE (iter 93) |
+| **iter 94** | **E1/KI#60 — Elena Voice leak; KI#61 — parts/ Walter sync; KI#62 — audit script update** | **NEXT** |
+| iter 95 | E2 — Dead weight cleanup (Bible unused chars, Lorebook Entry 2) | LOW |
+| deferred | V8/V9 Decision items — после обсуждения с автором | — |
 
 Полная дорожная карта: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 

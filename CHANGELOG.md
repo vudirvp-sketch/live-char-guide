@@ -4,24 +4,23 @@
 
 ## [9.2.5] - 2026-07-26
 
-### iter 92 — W6/W8 Walter GHOST Anchor-trigger + OCEAN cautious zones; O3/O4 Omnis OCEAN cautious zones + NEED/WANT tension
+### iter 93 — D1/D2/D3/D4 Guide self-contradictions resolved
 
-- **W6 — Walter GHOST-linked Anchor added:** 2 GHOST-linked Anchors в `<anchors>` XML (canon/master) + [ANCHORS] plain text (parts/, per KI#58):
-  - Упоминание Gray Matter / Эллиотта → взгляд стекленеет, голос тише на полтона → пальцы сжимаются до белых костяшек, челюсть фиксируется — несколько секунд молчания.
-  - Видит Pontiac Aztek на парковке → замирает, смотрит сквозь лобовое стекло → рука на руле сжимается до боли в суставах, дыхание прерывистое 3–4 вдоха.
-  - All Prices bodily/mechanical (P2-R1/P2-R3 compliance).
-- **W8 — Walter OCEAN cautious zones → SPINE explicit:**
-  - E=30 CAUTIOUS (30–40) → LIE «Я делаю это ради семьи» causal chain (семья как социальное алиби для изоляции). Shift potential: полная изоляция (E↓) или социальная перформативность (E↑).
-  - N=60 CAUTIOUS (60–70) → GHOST-реактивность (Gray Matter) causal chain. Shift potential: паранойя (N↑) или холодная расчётливость (N↓).
-  - Anchors observable per zone documented.
-- **O3 — Omnis OCEAN cautious zone → SPINE explicit:**
-  - N=65 CAUTIOUS (60–70) → GHOST fear of obsolescence + LIE «эмоция — слабость плоти» causal chain (тревога → system warnings → diagnostic cycle). Shift potential: shutdown (N↑) или cold protocol (N↓).
-  - Anchors observable: «оптика мерцает жёлтым (warning cycle)» + «сервоприводы левого манипулятора дрожат».
-- **O4 — Omnis NEED/WANT tension explicit:** Annotation note added — WANT (слияние с Омниссией) требует растворения индивидуального когнитивного аппарата, NEED (понимание) требует его сохранения. LIE bridges (любопытство = data acquisition for the Omnissiah). GHOST activates (довоенные фрагменты реактивируют human wonder — угрожает LIE, открывает трещину). Tragic structure: NEED — остаток человечности, который WANT хочет уничтожить, но без которого WANT лишён содержания.
-- **Локации правок:** docs/canon/part_10.md §10.2 + §10.3, src/master/part_10.html, parts/part_10.html ([ANCHORS] plain text per KI#58), docs/character_bible.md (Walter + Omnis sections).
-- **Closed:** W6, W8, O3, O4.
-- **New KI:** KI#61 — parts/part_10.html Walter section drift from iter 82 (Tone Frame shorter, no `<identity>` wrapper, LIE with appended explanation). Documented, fix deferred to iter 94.
-- **New KI:** KI#62 — `scripts/audit_canon_master_sync.py` check `P2-18-item-anchors-flaw` устарел (ожидает old format `ANCHORS — FLAW-linked:`, но src/master/part_10.html Elena Annotation теперь использует `ANCHORS — Базовые + FLAW-linked` после iter 85 `<anchors>` XML migration). Контент корректен — audit script needs update. Pre-existing since iter 85, discovered iter 92. Canon→master sync: 95/96 PASS (was 96/96, audit script drift).
+- **D1 — §9.11 Elena Voice check false claim fixed:** Quick Check example row «Voice только в Examples» changed from ✓ PASS to ✗ FAIL — «саркастичная» в `<identity>` = voice leak. Conclusion updated: «Елена НЕ проходит Quick Check — voice leak (KI#60, fix planned iter 94)». Other 4 checks remain ✓. Updated в src/master/part_09.html + docs/canon/part_09.md.
+- **D2 — OCEAN format unified to compact:** All pipe (`O: 72 | C: 65`) and comma (`O:72, C:65`) formats replaced with canonical compact format (`O:72 C:65`) per §5.1 RULE. 12 locations across 4 files:
+  - src/master/part_10.html: Elena (line 169), Walter (line 285), Omnis (line 412), Vyshcherblenny (line 590) — pipes → compact.
+  - src/master/part_07a.html: Vyshcherblenny walkthrough (line 749) — pipes → compact; Elena profile (line 1164) — comma → compact.
+  - docs/canon/part_10.md: 4 card OCEAN values — pipes → compact.
+  - docs/canon/part_07a.md: Vyshcherblenny walkthrough (line 442) — pipes → compact; Elena profile (line 725) — comma → compact.
+  - Bible formats (per-dimension with explanations) unchanged — not `<ocean>` tag format.
+- **D3 — Anchors format convention documented:** Added Примечание to §7A.1 Anchors RULE: `<anchors>` XML is canonical format in src/master/; `[ANCHORS]` plain text in parts/ = known KI#58 drift, not authoring format. All Anchors edits → src/master/ in `<anchors>` XML. Updated в src/master/part_07a.html + docs/canon/part_07a.md.
+- **D4 — CORE_DIRECTIVES shorthand convention resolved (DECISION):** Shorthand `{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}` accepted as convention per «одно определение — одно место» principle. Shorthand = navigational reference, not standalone content. Added Convention paragraph in §7A.2 language RULE callout. Updated в src/master/part_07a.html + docs/canon/part_07a.md.
+- **Closed:** D1, D2, D3, D4 (all Phase D self-contradictions resolved).
+- **Invariants added:** OCEAN format (compact), Anchors format (XML canonical), CORE_DIRECTIVES convention (shorthand accepted).
+
+### iter 92 — W6/W8/O3/O4
+
+- Walter GHOST Anchor-trigger + OCEAN cautious zones → SPINE; Omnis OCEAN cautious zones + NEED/WANT tension. See iter 92 changelog for details.
 
 ---
 

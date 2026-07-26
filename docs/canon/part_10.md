@@ -50,7 +50,7 @@ GHOST: Предательство редактора — история, кот�
 </spine>
 
 <ocean>
-O: 72 | C: 65 | E: 41 | A: 38 | N: 68
+O:72 C:65 E:41 A:38 N:68
 Экстремумы: Высокая O (>70, любопытство). Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — см. Part 5 §5.1 RULE: extreme = строго <30 или >70.
 </ocean>
 
@@ -164,7 +164,7 @@ GHOST: Gray Matter — продал свою долю за $5000. Партнёр
 </spine>
 
 <ocean>
-O: 65 | C: 85 | E: 30 | A: 25 | N: 60
+O:65 C:85 E:30 A:25 N:60
 Экстремумы: Высокая C (85), Низкая A (25)
 Cautious zones: E=30 (30–40, LIE surface), N=60 (60–70, GHOST-реактивность)
 SPINE explicit (cautious zones):
@@ -290,7 +290,7 @@ Tier 3: Настоящее — каждая новая аугментация с
 </ghost_layers>
 
 <ocean>
-O: 92 | C: 78 | E: 12 | A: 25 | N: 65
+O:92 C:78 E:12 A:25 N:65
 Экстремумы: O:92 (КРАЙНЕ ВЫСОКИЙ — одержимость познанием), E:12 (КРАЙНЕ НИЗКИЙ — минимальное социальное взаимодействие)
 Cautious zones: N=65 (60–70, GHOST fear of obsolescence + LIE «эмоция — слабость плоти»)
 SPINE explicit (cautious zones):
@@ -461,7 +461,7 @@ Tier 3: Каждое вырезание заполняет дыру, созда�
 </enneagram>
 
 <ocean>
-O: 60 | C: 55 | E: 25 | A: 30 | N: 70
+O:60 C:55 E:25 A:30 N:70
 Экстремумы: Низкая E (<30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной, см. Part 5 §5.1 RULE: extreme = строго <30 или >70).
 **Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see `docs/vyshcherblenny_character_bible.md` §OCEAN.
 </ocean>

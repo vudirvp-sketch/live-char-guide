@@ -259,12 +259,12 @@ migration_status: —
 | Проверка | Результат |
 |----------|-----------|
 | ☐ PP = 0.0 | ✓ Presence Penalty = 0.0 |
-| ☐ Voice только в Examples | ✓ Description = факты + SPINE, 0 стилистических директив |
+| ☐ Voice только в Examples | ✗ Voice leak: «саркастичная» в `<identity>` — стилистический дескриптор, не факт. Должен быть показан через Examples, не описан в Description (→ §3.1 Voice Isolation). KI#60 |
 | ☐ Price в каждом Anchor | ✓ Все 6 Anchors имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат) |
 | ☐ Format Lock | ✓ Система A: `*action*` «speech» во всех Examples + Greeting |
 | ☐ Anti-godmoding | ✓ "Never speak or act for `{{user}}`" + позитивная формулировка |
 
-**Итог:** Елена проходит Quick Check. Далее → Full Check (14 пунктов) для карточек с SPINE и OCEAN.
+**Итог:** Елена НЕ проходит Quick Check — voice leak «саркастичная» в `<identity>` (KI#60, fix planned iter 94). PP / Anchors / Format Lock / Anti-godmoding — ✓. После fix → Full Check (14 пунктов) для карточек с SPINE и OCEAN.
 
 ### Full Check (14 пунктов — рекомендуется)
 
