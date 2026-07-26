@@ -6,7 +6,7 @@
 >
 > Per-character bibles take precedence for Elena and Выщербленный. Their entries below are pointer stubs only; the duplicated detail was removed in iter 4 to avoid drift.
 
-> **Version:** 9.2.4 (iter 90 — Walter/Omnis Examples expanded 80–120 tok, Anchors Базовые/FLAW-linked/GHOST-aligned, bodily Prices)
+> **Version:** 9.2.4 (iter 91 — C3+C4 Vyshcherblenny/Elena Bible backfill: Anchors XML Базовые/FLAW-linked/Зеркало-linked/Sensory, bodily Prices, SPINE CAUSALITY annotations, Examples synced, V4 cautious zone fix)
 > **Last Updated:** 2026-07-26
 > **Status:** Supporting Characters Registry (canonical for non-per-character-bible characters)
 

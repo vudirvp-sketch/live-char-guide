@@ -4,6 +4,28 @@
 
 ---
 
+Task ID: 91
+Agent: main
+Task: iter 91 — C3+C4: Vyshcherblenny/Elena per-character Bible backfill + V4 (OCEAN cautious zones → SPINE explicit link).
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 90 state — Walter/Omnis Bible backfill DONE), worklog.md (iter 90 entry).
+- 2: Прочитаны docs/vyshcherblenny_character_bible.md и docs/elena_character_bible.md — compared against docs/canon/part_10.md §10.1 (Elena) и §10.4 (Vyshcherblenny).
+- 3: Identified gaps: Vyshcherblenny Bible — flat T→A→P Anchors table (not `<anchors>` XML), no 4 expanded `<START>` blocks, no Greeting/AN, non-bodily Prices. Elena Bible — flat T→A→P Anchors table (not `<anchors>` XML), no SPINE CAUSALITY annotations, no explicit Greeting, some non-bodily Prices.
+- 4: C3 (Vyshcherblenny): Replaced flat T→A→P Anchors with `<anchors>` XML (Базовые 3 + FLAW-linked 3 + Зеркало-linked 1 + Sensory 2), all Prices bodily/mechanical. Added SPINE mapping of Anchors → causal chain. Added 4 expanded `<START>` blocks (~80–100 tok each) with SPINE CAUSALITY annotations. Added CoT Anchors (2 maxim) from part_10. Added expanded AN Template B + Greeting. Updated AP-8 references to new anchor IDs. V4: E=60 cautious zone → explicit SPINE causal chain (LIE→formality→distance control + shift potential).
+- 5: C4 (Elena): Replaced flat T→A→P Anchors with `<anchors>` XML (Базовые 3 + FLAW-linked 3), all Prices bodily/mechanical. Added SPINE mapping of Anchors → causal chain. Verified 3 `<START>` blocks identical to part_10 (✅ synced). Added SPINE CAUSALITY annotations per example. Added explicit Greeting section. Added OCEAN cautious zones SPINE explicit chains (A=38→FLAW, N=68→GHOST).
+- 6: Updated docs/character_bible.md version header to reflect C3+C4.
+- 7: Rewrote STATUS.md: C3+C4 DONE, V4 DONE, KI#59 CLOSED, roadmap shifted to iter 92+.
+
+Stage Summary:
+- **iter 91 COMPLETE (C3+C4 — Vyshcherblenny/Elena Bible backfill + V4 fix).**
+- **Closed:** C3, C4, V4 (OCEAN cautious zones → SPINE), KI#59.
+- **Modified:** `docs/vyshcherblenny_character_bible.md`, `docs/elena_character_bible.md`, `docs/character_bible.md`, `STATUS.md`, `worklog.md`.
+- **Not modified (out of scope):** Walter/Elena remaining issues (E1, E8, W6, W8), Omnis (O3, O4), V8/V9 Decision items.
+- **Next:** iter 92 — W6/W8 Walter GHOST Anchor-trigger + OCEAN cautious zones; O3/O4 Omnis.
+
+---
+
 Task ID: 89
 Agent: main
 Task: iter 89 — B4 + V3: Vyshcherblenny Examples expand (4 `<START>` blocks → 80-120 tok) + V3 (3 Anchor Prices non-physical → bodily/mechanical).
