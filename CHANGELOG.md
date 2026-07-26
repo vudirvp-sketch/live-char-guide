@@ -2,6 +2,14 @@
 
 ## [9.2.3] - 2026-07-26
 
+### iter 84 — A6 — Vyshcherblenny GHOST: concrete event, cycle → `<ghost_layers>`
+
+- **A6 — Vyshcherblenny GHOST in `<spine>`:** Сокращён с 5 предложений + cycle pattern до 3 предложений concrete event. Удалены: narrative detail ("не получил диссонанс, а"), explanatory clause ("Это дало время, но забрало..."), cycle pattern ("Цикл: вырезание → краткое продление → потеря себя → страх → новое вырезание"). Cycle уже captured в `<ghost_layers>` Tier 2/3. Результат aligned с Bible и part_07a.
+- **Локации правок:** src/master/part_10.html (Vyshcherblenny GHOST line 541), docs/canon/part_10.md (sync line 415), parts/part_10.html (build output mirror line 526).
+- **Closed:** V1 (GHOST in `<spine>` over-length — P4-R2/P4-R3 compliance).
+
+---
+
 ### iter 83 — A5 — Omnis-Zeta Anchor Prices bodily/mechanical
 
 - **A5 — Omnis-Zeta Anchors:** 5 из 7 non-physical Anchor Prices заменены на bodily/mechanical equivalents (3 Базовых + 2 FLAW-linked). GHOST-linked Anchors (2) оставлены для iter 85.

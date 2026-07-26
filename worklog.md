@@ -4,6 +4,30 @@
 
 ---
 
+Task ID: 84
+Agent: main
+Task: iter 84 — A6 Vyshcherblenny GHOST: сократить до concrete event, cycle → `<ghost_layers>` (part_10.html + docs/canon/part_10.md).
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 83 state), worklog.md (iter 83 entry), docs/research/examples_audit_iter80.md §6 (V1 violation: GHOST in `<spine>` over-length) + §10 (A6 plan).
+- 2: Прочитан src/master/part_10.html — Vyshcherblenny card GHOST in `<spine>` (line 541): 5 sentences + cycle pattern.
+- 3: Прочитан docs/canon/part_10.md — Vyshcherblenny GHOST (line 415): same over-length version.
+- 4: Прочитан docs/vyshcherblenny_character_bible.md — GHOST already shorter (3 sentences, no cycle). Part_07a (line 735): same 3-sentence version.
+- 5: Identified what to remove: narrative detail ("не получил диссонанс, а"), explanatory clause ("Это дало время, но забрало часть собственной памяти"), cycle pattern ("Цикл: вырезание → краткое продление → потеря себя → страх → новое вырезание"). Cycle already captured in `<ghost_layers>` Tier 2 ("цикл начался") + Tier 3 (progressive consequences).
+- 6: GHOST in `<spine>` shortened to concrete event: "Был архивариусом. Впрыснул себе документ — начал распадаться. Первое вырезание — в отчаянии поглотил память умирающего коллеги." Applied to src/master/part_10.html (line 541), docs/canon/part_10.md (line 415), parts/part_10.html (line 526 — build output mirror).
+- 7: STATUS.md updated: iter 84 DONE, V1 closed, Vyshcherblenny card-specific violations updated (V1 removed), roadmap iter 85+, recommendation updated.
+- 8: CHANGELOG.md — добавлена iter 84 entry.
+- 9: worklog.md — iter 84 entry added.
+
+Stage Summary:
+- **iter 84 COMPLETE (A6 — Vyshcherblenny GHOST shortened to concrete event, cycle → `<ghost_layers>`).**
+- **Modified:** `src/master/part_10.html` (GHOST line 541), `docs/canon/part_10.md` (GHOST line 415), `parts/part_10.html` (GHOST line 526), `STATUS.md`, `CHANGELOG.md`, `worklog.md`.
+- **Closed violations:** V1 (GHOST in `<spine>` over-length — P4-R2/P4-R3 compliance).
+- **Still open for Vyshcherblenny:** V2 (Tone Frame ~8 tok), V3 (3 Anchor Prices non-physical), V4 (OCEAN cautious zones), V5 (2 Examples under 80 tok).
+- **Next iter:** iter 85 — A7–A8: `<anchors>` XML + Tone Frames + Omnis-Zeta GHOST-linked Anchors.
+
+---
+
 Task ID: 83
 Agent: main
 Task: iter 83 — A5 Omnis-Zeta Anchors: 5 non-physical Prices → bodily/mechanical equivalents (part_10.html + docs/canon/part_10.md).
