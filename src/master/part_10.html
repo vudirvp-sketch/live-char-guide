@@ -68,7 +68,7 @@
         <!-- Directives layer -->
         <div class="annotation-layer">
           <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-20">
-            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
+            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности<br>Tone Frame + OOC Protection
           </div>
           <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-280">
             Директива 2 (Embodiment)<br>Выражается через слой Action в Anchors
@@ -84,7 +84,9 @@
             <div class="card-block__label">[SP]</div>
             <div class="card-block__content">You are Елена, a 28-year-old investigative journalist...
 Do not speak or act for the user.
-You react only to observable actions and stated words.</div>
+You react only to observable actions and stated words.
+Tone: grounded, understated. No melodrama. Silence speaks.
+OOC: react in-character as confusion or ignore. Never acknowledge being an AI.</div>
           </div>
           <div class="card-block">
             <div class="card-block__label">[Description]</div>
@@ -127,7 +129,7 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
 
 <h3>Елена — Полная карточка с аннотацией</h3>
 
-<p>~440 токенов (базовые блоки) / ~900 токенов (с SPINE и FLAW-linked Anchors). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.</p>
+<p>~480 токенов (базовые блоки) / ~940 токенов (с SPINE и FLAW-linked Anchors). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.</p>
 
 <p><strong>Demonstrates:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>
 
@@ -141,6 +143,10 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
 You are Elena, a cynical investigative journalist. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 {{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
+
+Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+
+OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
 
 Format Lock:
 - Dialogue: *action* "speech"
@@ -199,7 +205,7 @@ FLAW-linked:
 *ручка всё ещё в руке, готовая вернуться к тексту*</code></pre>
 
 <h4>Token Budget (бюджет токенов)</h4>
-<p><strong>Итого:</strong> ~440 токенов (базовые) / ~900 токенов (с SPINE и FLAW-linked Anchors). Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
+<p><strong>Итого:</strong> ~480 токенов (базовые) / ~940 токенов (с SPINE и FLAW-linked Anchors). Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
 
 </details>
 
@@ -210,6 +216,7 @@ FLAW-linked:
 <li><strong>EXAMPLES (3 <code>&lt;START&gt;</code> блока):</strong> ENVIRONMENTAL REACTIVITY + EMBODIMENT FIRST + SHOW NEVER TELL + SPINE CAUSALITY — см. <a href="#p3_examples_rules">Part 3 §3.3</a> (Examples Rules) и <a href="#p3_examples_quality">§3.4</a> (Quality Grade).</li>
 <li><strong>ANCHORS — Базовые:</strong> At-rest Anchors (WANT-направленные) — см. <a href="#p2_basic_anchors">Part 2 §2.1</a> и <a href="#p4_spine_mapping">Part 4 §4.8</a>.</li>
 <li><strong>ANCHORS — FLAW-linked:</strong> SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price) — см. <a href="#p4_spine_mapping">Part 4 §4.8</a> (mapping table).</li>
+<li><strong>SYSTEM → Tone Frame + OOC PROTECTION + Format Lock:</strong> Tone «grounded, understated. No melodrama. Silence speaks.» + OOC-защита (confusion or ignore) + Format Lock (Dialogue: *action* "speech") — см. <a href="#p7a_system_prompt">Part 7A §7A.1</a>.</li>
 <li><strong>GREETING:</strong> Sensory Anchor → тело FLAW → реплика → крючок — см. <a href="#p7b_greeting">Part 7B §7B.2</a>.</li>
 </ul>
 
