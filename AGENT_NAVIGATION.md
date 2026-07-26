@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.2.3**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`, Research — в `docs/research/`. Все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED, 96 секций, 96/96 canon→master sync PASS.
+> **Entry document.** Read this first. Текущая версия: **9.2.4**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`, Research — в `docs/research/`. Все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED, 96 секций, 96/96 canon→master sync PASS.
 
 ---
 

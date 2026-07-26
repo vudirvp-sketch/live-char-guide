@@ -3,8 +3,8 @@
 > Инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд.
 
 - **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-- **Версия:** 9.2.1
-- **Статус:** iter 79 COMPLETE (P1.5 — Voice Isolation уточнение: лингвистический vs физический). Нет открытых KI. См. `STATUS.md`.
+- **Версия:** 9.2.4
+- **Статус:** iter 89 COMPLETE (B4 + V3 — Vyshcherblenny Examples expanded + Anchor Prices bodily). См. `STATUS.md`.
 
 ---
 

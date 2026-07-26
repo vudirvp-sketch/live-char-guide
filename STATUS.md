@@ -2,24 +2,24 @@
 
 > **Репозиторий:** https://github.com/vudirvp-sketch/live-char-guide
 > **Онлайн:** https://vudirvp-sketch.github.io/live-char-guide/
-> **Версия:** 9.2.3
+> **Версия:** 9.2.4
 > **Дата:** 2026-07-26
 
 ---
 
 ## Текущее состояние
 
-**iter 88 — B3 COMPLETE.** Omnis-Zeta Examples expanded from ~25–35 tok → ~90–110 tok each (P3-R7 compliance, 80–120 tok per block). All 5 blocks now include: scene context (Святилище + environmental details), embodied Anchor reactions (оптика/манипуляторы/сервоприводы/катушки/теплообменник), environmental reactivity (свечи дрогнули, серверные блоки гудят, озон и священное масло, пар термальных клапанов, firmware обновления), SPINE causality visible (LIE «эмоция — слабость плоти» mechanical framing в Ex2, GHOST довоенное имя leak в Ex3, FLAW «калибровка вместо утешения» в Ex4, GHOST fear of obsolescence + LIE «текущая конфигурация оптимальна» в Ex5). Token Budget updated ~1800→~2150. Annotation line дополнена SPINE CAUSALITY mention во всех 3 файлах.
+**iter 89 — B4 + V3 COMPLETE.** Vyshcherblenny Examples expanded from ~25–35 tok → ~85–110 tok each (P3-R7 compliance, 80–120 tok per block). Все 4 `<START>` блока теперь включают: SPATIAL & ANATOMICAL LOCK (Ошметок Веля, края стены, трещины, мерцание, расстояние до собеседника + конкретные части тела: пальцы/запястье/горло/лицо/челюсть), EMBODIMENT FIRST (тремор, онемение, тошнота, хрип, потеря чувствительности), SPINE CAUSALITY visible (GHOST residue «Привычка. Не моя» + холод лица в Ex1, LIE→FLAW cycle вырезание→потеря в Ex2, GHOST+FLAW через Зеркало+тошнота в Ex3, GHOST+LIE crack через имя+онемение в Ex4). V3 fixed: 3 Anchor Prices converted to bodily (Базовый 3 — хрип+пересыхание+рука вычерчивает; FLAW-linked 1 — ноет+потеря чувствительности; FLAW-linked 3 — желудок+рука к виску). Token Budget updated ~1250+→~1500+. Annotation lines дополнены SPINE CAUSALITY mention per example + bodily Price list во всех 3 файлах.
 
-**Closed:** O-Examples (Omnis-Zeta Examples недомер — часть U3).
+**Closed:** V3 (Vyshcherblenny Anchor Prices bodily), V5 (Vyshcherblenny Examples недомер), U3 (Examples недомер — ALL 4 cards DONE), B4.
 
-### Remaining universal violations (2 of 4 still open)
+### Remaining universal violations (1 of 4 still open)
 
 | # | Проблема | Серьёзность |
 |---|----------|-------------|
 | U1 | Tone Frame недомер — ALL 4 cards DONE | ✅ CLOSED |
 | U2 | CORE_DIRECTIVES не inline (shorthand reference) | DECISION |
-| U3 | Examples недомер — **Elena DONE (iter 86), Walter DONE (iter 87), Omnis DONE (iter 88)**, Vyshcher still under 80 tok | HIGH |
+| U3 | Examples недомер — **ALL 4 cards DONE (Elena iter 86, Walter iter 87, Omnis iter 88, Vyshcher iter 89)** | ✅ CLOSED |
 
 ### Key remaining card-specific violations
 
@@ -28,7 +28,7 @@
 | **Elena** | Voice leak «саркастичная» in `<identity>` (E1); §9.11 claims Voice check PASS but FAILS (E8) |
 | **Walter** | GHOST without Anchor-trigger (W6); 1 Anchor Price temporal (W7); OCEAN cautious zones (W8) |
 | **Omnis-Zeta** | NEED/WANT tension weak (O4); OCEAN cautious zones (O3) |
-| **Vyshcherblenny** | 3 Anchor Prices non-physical (V3); OCEAN cautious zones (V4); 2 Examples under 80 tok (V5) |
+| **Vyshcherblenny** | OCEAN cautious zones not linked to SPINE (V4) |
 
 ---
 
@@ -56,18 +56,17 @@
 
 ---
 
-## iter 89+ Roadmap
+## iter 90+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 89** | B4 — Vyshcherblenny Examples expand (4 `<START>` blocks, 2 under 80 tok → 80–120) + V3 (Anchor Prices → bodily) | LOW–MEDIUM |
 | **iter 90** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
 | **iter 91** | C3–C4 — Vyshcherblenny/Elena Bible backfill + align + Vyshcherblenny V4 (OCEAN cautious zones) | HIGH |
 | **iter 92** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
 | **iter 93+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
 | **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-**Рекомендация для следующего чата:** iter 89 — B4: Vyshcherblenny Examples expand (4 `<START>` блоков, 2 under 80 tok → расширить до 80–120 с SPATIAL & ANATOMICAL LOCK + SPINE causality + embodiment). Также V3: Vyshcherblenny 3 Anchor Prices non-physical → bodily/mechanical conversion.
+**Рекомендация для следующего чата:** iter 90 — C1–C2: Walter/Omnis Bible backfill + align. Bible (docs/character_bible.md) для Walter/Omnis ещё в shorter version — Примеры сообщений не обновлялись после iter 87/88. Нужно синхронизировать Bible Examples с canon/master Examples (expanded 80–120 tok). Также V8/V9 Decision items можно поднять с автором.
 
 ---
 
@@ -81,3 +80,12 @@
 | Canon migration COMPLETE | All 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED. |
 | Build hash computed only from `src/shell/index.html` | Comment edits + content additions в `src/master/*.html` НЕ влияют на hash. |
 | `src/master/VERSION` orphan | KI#46 — файл не используется build pipeline. Sync не требуется. |
+
+---
+
+## Known Issues (active drift)
+
+| ID | Описание | Origin |
+|----|----------|--------|
+| KI#58 | `parts/part_10.html` Vyshcherblenny [ANCHORS] plain text vs `<anchors>` XML in canon/master — known drift из iter 85. V3 fix applied in [ANCHORS] format preserving the drift. | iter 85 |
+| KI#59 | `docs/character_bible.md` Примеры сообщений (Omnis/Walter/Vyshcher/Elena) still in shorter version — не обновлялся после iter 86-89 Examples expansion. Will be fixed in iter 90-91 (C1-C4 Bible backfill). | iter 86 |
