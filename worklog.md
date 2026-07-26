@@ -4,6 +4,32 @@
 
 ---
 
+Task ID: 87
+Agent: main
+Task: iter 87 — B2: Walter Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block).
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 86 state — Elena Examples DONE), worklog.md (iter 86 entry), AGENT_NAVIGATION.md (rules + §6 Frequent Pitfalls).
+- 2: Прочитаны docs/canon/part_10.md + src/master/part_10.html + parts/part_10.html — Walter Examples section (3 `<START>` blocks, ~25–40 tok each — significant недомер).
+- 3: Прочитан docs/canon/part_03.md §3.3 (P3-R7: 80-120 tok per block, `<START>` mandatory, minimum one physical reaction per block, scene + action + реплика structure).
+- 4: Сверен Elena pattern (iter 86 expanded Examples) — каждая Example: scene (1–2 sent с environment), embodied Anchor reactions, dialogue beats, Anchor Price chain, SPINE causality visible.
+- 5: Прочитан docs/character_bible.md §3 (Walter White) — SPINE (Pride/GHOST Gray Matter/LIE «ради семьи»/NEED control/WANT family security), Anchors table, Voice signature («Controlled — but voice is the ONLY thing controlled» — body betrays what voice hides).
+- 6: Drafted 3 expanded Examples: Ex1 Neutral (кабинет химии, конец урока — мел в побелевших пальцах, холодильник с реактивами → GHOST/LIE leak через "Всё меняется" + рука дрожит), Ex2 Stress (кухня, Смит, банк-выписки → FLAW pride refusal + капля пота + челюсть дёрнулась + "Всё под контролем"), Ex3 Vulnerability (спальня, Pontiac Aztek за окном → GHOST Gray Matter leak + LIE crack "для себя... было живо" → стена снова).
+- 7: Applied to docs/canon/part_10.md — Examples expanded + Token Budget updated (~890→~1100) + Annotation line дополнена SPINE CAUSALITY mention (LIE crack, GHOST leak, FLAW refusal).
+- 8: Applied to src/master/part_10.html — Examples expanded (HTML-escaped inside `<pre><code>`) + Token Budget updated (~950→~1100) + Annotation line дополнена SPINE CAUSALITY mention.
+- 9: Applied to parts/part_10.html — Examples expanded + Token Budget updated (~890→~1100) + Annotation line дополнена SPINE CAUSALITY mention. Замечание: parts/ в OLD формате (Tone Frame короткий, `[ANCHORS]` plain text, без `<identity>` block) — это known drift из iter 85, в scope iter 87 НЕ входил.
+- 10: STATUS.md rewritten: iter 87 DONE, W-Examples closed (часть U3), U3 updated (Walter DONE), remaining violations updated, roadmap shifted to iter 88+ (Omnis Examples next).
+
+Stage Summary:
+- **iter 87 COMPLETE (B2 — Walter Examples expanded to ~95–105 tok per block + embodiment + SPINE causality).**
+- **Closed:** W-Examples (Walter Examples недомер — часть U3).
+- **Modified:** `docs/canon/part_10.md`, `src/master/part_10.html`, `parts/part_10.html`, `STATUS.md`.
+- **Not modified (out of scope):** Walter Tone Frame (short version in parts/, long version in canon/master — known drift), Walter Anchors format (`<anchors>` XML in canon/master vs `[ANCHORS]` plain in parts/), Walter `<identity>` block (in canon/master, NOT in parts/ — known drift from iter 85).
+- **Remaining:** U3 (Omnis/Vyshcher Examples still under 80 tok), E1 (Voice leak «саркастичная»), E8 (§9.11), W6-W8, O3-O4, V3-V5.
+- **Next:** iter 88 — B3: Omnis-Zeta Examples expand + embodiment (5 `<START>` blocks, часть короче 80 tok — расширить до 80–120 с сохранением GHOST Layers + CoT контекста).
+
+---
+
 Task ID: 86
 Agent: main
 Task: iter 86 — B1: Elena Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block).
