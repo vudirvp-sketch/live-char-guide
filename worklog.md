@@ -4,30 +4,26 @@
 
 ---
 
-Task ID: 93
+Task ID: 94
 Agent: main
-Task: iter 93 — D1/D2/D3/D4 Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention)
+Task: iter 94 — E1/KI#60 Elena Voice leak fix + KI#61 Walter parts/ sync + KI#62 audit script P2-18
 
 Work Log:
-- 1: Cloned repo, read STATUS.md (iter 92 state), AGENT_NAVIGATION.md, worklog.md.
-- 2: Read docs/research/examples_audit_iter80.md §10 Phase D — D1/D2/D3/D4 definitions confirmed.
-- 3: Read docs/research/guide_analysis_consolidated.md §3 Contradictions C1–C15 — D1 (§9.11 Voice check), D2 (OCEAN format), D3 (Anchors convention), D4 (CORE_DIRECTIVES convention) context gathered.
-- 4: Read src/master/part_09.html §9.11 — identified Elena Quick Check Voice row ✓ PASS (false claim — «саркастичная» в `<identity>` = voice leak). Read docs/canon/part_09.md — same false claim.
-- 5: Read src/master/part_10.html — OCEAN format inconsistency: Elena (line 169), Walter (line 285), Omnis (line 412), Vyshcherblenny (line 590) use pipes `O: 72 | C: 65`. Read src/master/part_07a.html — Vyshcherblenny walkthrough (line 749) uses pipes; Elena profile (line 1164) uses commas `O:72, C:65`. §5.1 RULE defines compact `O:72 C:65` as canonical.
-- 6: Read docs/canon/part_10.md + docs/canon/part_07a.md — same pipe/comma inconsistency. Bible files use per-dimension format (acceptable, not `<ocean>` tag format).
-- 7: D1 fix — src/master/part_09.html: Voice row changed from ✓ to ✗ with explanation (voice leak «саркастичная» в `<identity>`, ref §3.1 Voice Isolation, KI#60). Conclusion changed from «Елена проходит Quick Check» to «Елена НЕ проходит Quick Check — voice leak (KI#60, fix planned iter 94)». Same fix in docs/canon/part_09.md.
-- 8: D2 fix — src/master/part_10.html: all 4 pipe-format OCEAN values → compact (no pipes, no commas). src/master/part_07a.html: Vyshcherblenny walkthrough → compact; Elena profile → compact (commas removed). docs/canon/part_10.md: 4 pipe-format → compact. docs/canon/part_07a.md: 2 locations → compact. Bible per-dimension formats unchanged.
-- 9: D3 fix — Added Примечание to §7A.1 Anchors RULE in src/master/part_07a.html: `<anchors>` XML is canonical format; `[ANCHORS]` plain text in parts/ = KI#58 drift, not authoring format. Same note in docs/canon/part_07a.md.
-- 10: D4 fix — Added Convention paragraph to §7A.2 language RULE callout in src/master/part_07a.html: shorthand `{{CORE_DIRECTIVES — kanонический шаблон → Part 7A}}` accepted as convention per «одно определение — одно место». Same note in docs/canon/part_07a.md.
-- 11: Updated STATUS.md — iter 93 COMPLETE, D1/D2/D3/D4 closed, invariants updated (OCEAN format, Anchors format, CD convention), roadmap shifted to iter 94.
-- 12: Updated CHANGELOG.md — iter 93 entry added (D1/D2/D3/D4 details). iter 92 collapsed.
-- 13: Updated AGENT_NAVIGATION.md — §6 Frequent Pitfalls items 22-24 added (OCEAN format, Anchors format, CD shorthand convention). §8 Roadmap updated (iter 93 COMPLETE, iter 94 NEXT).
+- 1: Cloned repo, read STATUS.md (iter 93 state), worklog.md.
+- 2: Searched all files for «саркастичная» — found in 3 identity lines (src/master/part_10.html, parts/part_10.html, docs/canon/part_10.md), §9.11 Quick Check (✗ FAIL), §7A.1 walkthrough (2 layers), §8 Token Bloat ✅ example (3 layers), plus historical docs (CHANGELOG, worklog, research).
+- 3: KI#60 fix — Removed «саркастичная» from `<identity>` in all 3 layers. Updated §9.11 Voice check from ✗ FAIL → ✓ PASS + conclusion from «НЕ проходит» → «проходит» in both src/master/part_09.html + docs/canon/part_09.md. Updated §7A.1 walkthrough text in all 3 layers (added Voice Isolation note). Updated §8 Token Bloat ✅ example in all 3 layers.
+- 4: KI#61 — Analyzed Walter section drift between src/master and parts/. 8 differences identified: Tone Frame truncated, missing OOC PROTECTION, missing Format Lock, no `<identity>` wrapper (prose after spine), LIE appended explanation, OCEAN pipe format, [ANCHORS] vs `<anchors>` XML, Annotation bullets outdated.
+- 5: KI#61 fix — Synced Walter section in parts/part_10.html with src/master: Tone Frame expanded, OOC PROTECTION added, Format Lock added, `<identity>` wrapper added (prose moved before `<spine>`), LIE appended explanation removed, OCEAN format changed to compact, Anchors changed to `<anchors>` XML, Annotation bullets updated.
+- 6: KI#62 — Updated audit_canon_master_sync.py P2-18-item-anchors-flaw check: expected substring changed from old format `<strong>ANCHORS — FLAW-linked:</strong> SPINE-derived Anchors...` to current merged format `<strong>ANCHORS — Базовые + FLAW-linked</strong> в <code>&lt;anchors&gt;</code> XML: At-rest Anchors... + SPINE-derived Anchors...`.
+- 7: Ran audit script — 96/96 PASS. Ran drift detector — informational, no actionable regressions.
+- 8: Updated STATUS.md — version bump 9.2.5→9.2.6, iter 94 state, KI#60/KI#61/KI#62 closed, KI#58 scope narrowed (Omnis+Vyshcherblenny only), roadmap shifted to iter 95.
+- 9: Updated CHANGELOG.md — iter 94 entry added. Updated worklog.md.
 
 Stage Summary:
-- **iter 93 COMPLETE (D1/D2/D3/D4 — Guide self-contradictions resolved).**
-- D1: §9.11 Elena Voice check now ✗ FAIL (accurate reflection of KI#60 voice leak).
-- D2: OCEAN format unified to compact `O:72 C:65` across all files (12 locations).
-- D3: Anchors `<anchors>` XML vs `[ANCHORS]` plain text convention documented.
-- D4: CORE_DIRECTIVES shorthand convention resolved (DECISION: accepted per «одно определение — одно место»).
+- **iter 94 COMPLETE (E1/KI#60/KI#61/KI#62).**
+- KI#60: Elena Voice leak fixed — «саркастичная» removed from `<identity>` across 9 files. §9.11 Voice check now ✓ PASS.
+- KI#61: Walter parts/ synced with src/master — 8 structural differences resolved.
+- KI#62: Audit script P2-18 check updated — 96/96 PASS.
+- KI#58 narrowed: Elena+Walter Anchors XML in parts/ now correct; Omnis+Vyshcherblenny still [ANCHORS] drift.
 
 ---

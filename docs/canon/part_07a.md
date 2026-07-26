@@ -625,7 +625,7 @@ Description-бюджет (150/300/700) распределяется между S
 ```
 You are Elena, a cynical investigative journalist.
 ```
-~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая, саркастичная) уходят в Description как факты.
+~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая) уходят в Description как факты. Voice descriptors (саркастичная) → Examples only (§3.1 Voice Isolation).
 
 ### Шаг 2: Anti-godmoding
 

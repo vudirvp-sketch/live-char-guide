@@ -540,14 +540,14 @@
 <thead><tr><th>Проверка</th><th>Результат</th></tr></thead>
 <tbody>
 <tr><td>☐ PP = 0.0</td><td>✓ Presence Penalty = 0.0</td></tr>
-<tr><td>☐ Voice только в Examples</td><td>✗ Voice leak: «саркастичная» в <code>&lt;identity&gt;</code> — стилистический дескриптор, не факт. Должен быть показан через Examples, не описан в Description (→ <a href="#p3_voice_isolation">§3.1</a> Voice Isolation). KI#60</td></tr>
+<tr><td>☐ Voice только в Examples</td><td>✓ Voice descriptors only in Examples — «саркастичная» shown through behavior, not described in <code>&lt;identity&gt;</code> (→ <a href="#p3_voice_isolation">§3.1</a> Voice Isolation)</td></tr>
 <tr><td>☐ Price в каждом Anchor</td><td>✓ Все 6 Anchors имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат)</td></tr>
 <tr><td>☐ Format Lock</td><td>✓ Система A: *action* "speech" во всех Examples + Greeting</td></tr>
 <tr><td>☐ Anti-godmoding</td><td>✓ "Never speak or act for {{user}}" + позитивная формулировка</td></tr>
 </tbody>
 </table>
 
-<p><strong>Итог:</strong> Елена НЕ проходит Quick Check — voice leak «саркастичная» в <code>&lt;identity&gt;</code> (KI#60, fix planned iter 94). PP / Anchors / Format Lock / Anti-godmoding — ✓. После fix → Full Check (14 пунктов) для карточек с SPINE и OCEAN.</p>
+<p><strong>Итог:</strong> Елена проходит Quick Check — voice descriptors only in Examples. PP / Anchors / Format Lock / Anti-godmoding — ✓. → Full Check (14 пунктов) для карточек с SPINE и OCEAN.</p>
 
 <details class="interactive">
 <summary>📝 Full Check (14 пунктов — рекомендуется)</summary>

@@ -555,8 +555,8 @@ CHECKS = [
     (
         "P2-18-item-anchors-flaw",
         "part_10.html",
-        "<strong>ANCHORS — FLAW-linked:</strong> SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price)",
-        "part_10 §10.1 Annotation: ANCHORS — FLAW-linked item (iter 47 P2-18 fix)",
+        "<strong>ANCHORS — Базовые + FLAW-linked</strong> в <code>&lt;anchors&gt;</code> XML: At-rest Anchors (WANT-направленные) + SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price)",
+        "part_10 §10.1 Annotation: ANCHORS merged item with <anchors> XML wrapper (iter 85+ updated iter 94)",
     ),
 
     # ============================================================

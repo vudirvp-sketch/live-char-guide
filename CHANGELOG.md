@@ -2,6 +2,15 @@
 
 > Только последние итерации подробно. Старые — одной строкой. Полная история — в `git log`.
 
+## [9.2.6] - 2026-07-27
+
+### iter 94 — E1/KI#60/KI#61/KI#62 Voice leak + Walter sync + audit fix
+
+- **E1/KI#60 — Elena Voice leak fixed:** «саркастичная» removed from `<identity>` across all 3 layers (src/master/part_10.html, parts/part_10.html, docs/canon/part_10.md). Voice descriptors shown only through Examples (§3.1 Voice Isolation). §9.11 Quick Check Voice row updated from ✗ FAIL → ✓ PASS. Conclusion: «Елена проходит Quick Check». §7A.1 walkthrough text updated. Token Bloat ✅ example updated. 9 file changes total.
+- **KI#61 — Walter parts/ sync:** `parts/part_10.html` Walter section synced with `src/master/part_10.html` — Tone Frame expanded to full text, OOC PROTECTION added, Format Lock added, `<identity>` wrapper added (prose before `<spine>`), LIE appended explanation removed, OCEAN format fixed to compact (`O:65 C:85 E:30 A:25 N:60`), Anchors updated to `<anchors>` XML, Annotation bullets synced.
+- **KI#62 — Audit script P2-18 fix:** `scripts/audit_canon_master_sync.py` P2-18-item-anchors-flaw check updated — expected substring changed from old separate-item format (`ANCHORS — FLAW-linked:...`) to current merged format (`ANCHORS — Базовые + FLAW-linked в <anchors> XML:...`). Audit: 96/96 PASS.
+- **Closed:** E1, KI#60, KI#61, KI#62.
+
 ## [9.2.5] - 2026-07-26
 
 ### iter 93 — D1/D2/D3/D4 Guide self-contradictions resolved
