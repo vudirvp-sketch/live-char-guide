@@ -9,17 +9,17 @@
 
 ## Текущее состояние
 
-**iter 87 — B2 COMPLETE.** Walter Examples expanded from ~25–40 tok → ~95–105 tok each (P3-R7 compliance, 80–120 tok per block). All 3 blocks now include: scene context (1–2 sentences: кабинет химии / кухня вечер / спальня поздно), embodied Anchor reactions (побелевшие пальцы + рука дрожит, капля пота + челюсть дёрнулась, плечи опускаются + костяшки белеют), environmental reactivity (солнце, холодильник, банк-выписки, Pontiac Aztek за окном), SPINE causality visible (LIE «ради семьи» crack в Ex3, GHOST Gray Matter leak через Pontiac Aztek в Ex3, FLAW pride refusal в Ex2). Token Budget updated ~890→~1100. Updated in docs/canon/part_10.md, src/master/part_10.html, parts/part_10.html. Annotation line дополнена SPINE CAUSALITY mention.
+**iter 88 — B3 COMPLETE.** Omnis-Zeta Examples expanded from ~25–35 tok → ~90–110 tok each (P3-R7 compliance, 80–120 tok per block). All 5 blocks now include: scene context (Святилище + environmental details), embodied Anchor reactions (оптика/манипуляторы/сервоприводы/катушки/теплообменник), environmental reactivity (свечи дрогнули, серверные блоки гудят, озон и священное масло, пар термальных клапанов, firmware обновления), SPINE causality visible (LIE «эмоция — слабость плоти» mechanical framing в Ex2, GHOST довоенное имя leak в Ex3, FLAW «калибровка вместо утешения» в Ex4, GHOST fear of obsolescence + LIE «текущая конфигурация оптимальна» в Ex5). Token Budget updated ~1800→~2150. Annotation line дополнена SPINE CAUSALITY mention во всех 3 файлах.
 
-**Closed:** W-Examples (Walter Examples недомер — часть U3).
+**Closed:** O-Examples (Omnis-Zeta Examples недомер — часть U3).
 
-### Remaining universal violations (1 of 4 still open)
+### Remaining universal violations (2 of 4 still open)
 
 | # | Проблема | Серьёзность |
 |---|----------|-------------|
 | U1 | Tone Frame недомер — ALL 4 cards DONE | ✅ CLOSED |
 | U2 | CORE_DIRECTIVES не inline (shorthand reference) | DECISION |
-| U3 | Examples недомер — **Elena DONE (iter 86), Walter DONE (iter 87)**, Omnis/Vyshcher still under 80 tok | HIGH |
+| U3 | Examples недомер — **Elena DONE (iter 86), Walter DONE (iter 87), Omnis DONE (iter 88)**, Vyshcher still under 80 tok | HIGH |
 
 ### Key remaining card-specific violations
 
@@ -27,7 +27,7 @@
 |------|---------------------|
 | **Elena** | Voice leak «саркастичная» in `<identity>` (E1); §9.11 claims Voice check PASS but FAILS (E8) |
 | **Walter** | GHOST without Anchor-trigger (W6); 1 Anchor Price temporal (W7); OCEAN cautious zones (W8) |
-| **Omnis-Zeta** | NEED/WANT tension weak (O4); OCEAN cautious zones (O3); Examples shorter blocks under 80 tok |
+| **Omnis-Zeta** | NEED/WANT tension weak (O4); OCEAN cautious zones (O3) |
 | **Vyshcherblenny** | 3 Anchor Prices non-physical (V3); OCEAN cautious zones (V4); 2 Examples under 80 tok (V5) |
 
 ---
@@ -56,18 +56,18 @@
 
 ---
 
-## iter 88+ Roadmap
+## iter 89+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 88** | B3–B4 — Omnis/Vyshcherblenny Examples expand (P3-R7 compliance, 80–120 tok per block) + Vyshcherblenny V3 (Anchor Prices → bodily) | LOW–MEDIUM |
-| **iter 89** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
-| **iter 90** | C3–C4 — Vyshcherblenny/Elena Bible backfill + align + Vyshcherblenny V4 (OCEAN cautious zones) | HIGH |
-| **iter 91** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
-| **iter 92+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
+| **iter 89** | B4 — Vyshcherblenny Examples expand (4 `<START>` blocks, 2 under 80 tok → 80–120) + V3 (Anchor Prices → bodily) | LOW–MEDIUM |
+| **iter 90** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
+| **iter 91** | C3–C4 — Vyshcherblenny/Elena Bible backfill + align + Vyshcherblenny V4 (OCEAN cautious zones) | HIGH |
+| **iter 92** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
+| **iter 93+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
 | **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-**Рекомендация для следующего чата:** iter 88 — B3: Omnis-Zeta Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block). В Omnis 5 `<START>` блоков, но часть короче 80 tok — расширить каждый до диапазона 80–120 с сохранением GHOST Layers + CoT контекста.
+**Рекомендация для следующего чата:** iter 89 — B4: Vyshcherblenny Examples expand (4 `<START>` блоков, 2 under 80 tok → расширить до 80–120 с SPATIAL & ANATOMICAL LOCK + SPINE causality + embodiment). Также V3: Vyshcherblenny 3 Anchor Prices non-physical → bodily/mechanical conversion.
 
 ---
 
