@@ -9,11 +9,11 @@
 
 ## Текущее состояние
 
-**iter 82 — A2–A4 Walter SP + Description + LIE.** Walter SP приведён к canonical structure (Identity → Anti-godmoding → CD → Character-specific rules → Tone Frame → OOC → Format Lock). Tone Frame расширен с ~10 tok до ~25 tok. Добавлены OOC Protection и Format Lock (ранее отсутствовали). Description: prose-параграфы перенесены в `<identity>` XML wrapper (до `<spine>`). LIE очищен от explanatory clause (теперь clean quote). Annotation list и Token budget обновлены. Canon sync: docs/canon/part_10.md — те же правки.
+**iter 83 — A5 Omnis-Zeta Anchors: 5 non-physical Prices → bodily/mechanical.** Заменены 5 из 7 non-physical Anchor Prices в карточке Омнис-Зета (3 Базовых + 2 FLAW-linked) на bodily/mechanical equivalents: сервоприводы, термальные клапаны, аудиовывод, манипуляторы, теплообменник. GHOST-linked Anchors (2) оставлены для iter 85 — они требуют более аккуратной обработки при `<anchors>` XML конверсии. Annotation updated в обоих файлах. Canon sync: docs/canon/part_10.md — те же правки.
 
-**Closed:** W1 (Missing `<identity>`), W2 (LIE = quote + explanatory clause), W3 (Format Lock отсутствует), W4 (OOC Protection отсутствует), W5 (Tone Frame недомер). KI#56 (version drift 9.2.1 vs 9.2.2) — OPENED + CLOSED в iter 82.
+**Closed:** O1 частично — 5/7 non-physical Anchor Prices заменены (базовые + FLAW-linked). Оставшиеся 2/7 (GHOST-linked: «раскрывает уязвимость», «рассеивание внимания») → iter 85.
 
-**Still open for Walter:** W6 (GHOST without Anchor-trigger), W7 (1 Anchor Price non-physical — temporal), W8 (OCEAN cautious zones not linked to SPINE), W9 (Prose psychology — частично смягчён `<identity>` wrapper, но «Гордость — двигатель и клетка» всё ещё psychology-heavy).
+**Still open for Omnis-Zeta:** O2 (Tone Frame ~8 tok), O3 (OCEAN cautious zones not linked), O4 (NEED/WANT tension weak), O5 (GHOST lacks Anchor-trigger), O6 (Greeting не показывает FLAW), O7 (SP structure order), O1-partial (2 GHOST-linked Anchor Prices still non-physical).
 
 ### Remaining universal violations (2 of 4 still open)
 
@@ -30,7 +30,7 @@
 |------|---------------------|
 | **Elena** | Voice leak «саркастичная» in Description; Examples недомер; §9.11 claims Voice check PASS but it FAILS |
 | **Walter** | GHOST without Anchor-trigger; 1 Anchor Price temporal (non-physical); OCEAN cautious zones not linked |
-| **Omnis-Zeta** | 5/7 Anchor Prices non-physical; NEED/WANT tension weak |
+| **Omnis-Zeta** | 2/7 GHOST-linked Anchor Prices still non-physical; Tone Frame ~8 tok; NEED/WANT tension weak; OCEAN cautious zones not linked |
 | **Vyshcherblenny** | GHOST in `<spine>` over-length; 3 Anchor Prices non-physical |
 
 ---
@@ -39,9 +39,9 @@
 
 | KI# | Описание | Статус |
 |-----|----------|--------|
-| KI#56 | Version sync drift: STATUS.md=9.2.2 vs src/VERSION+package.json+data/character_schema.json=9.2.1 (iter 81 bumped STATUS.md only). FIXED iter 82: all bumped to 9.2.3. | ✅ CLOSED (iter 82) |
+| KI#57 | Omnis-Zeta GHOST-linked Anchor Prices (2) still non-physical: «раскрывает уязвимость», «рассеивание внимания» — deferred to iter 85 (requires `<anchors>` XML + GHOST-CoT alignment) | ⏳ OPEN |
 
-> KI#1–KI#55: ранее closed (история — в `worklog.md` Предыдущие итерации + git log).
+> KI#1–KI#56: ранее closed (история — в `worklog.md` Предыдущие итерации + git log).
 
 ---
 
@@ -68,13 +68,12 @@
 
 ---
 
-## iter 83+ Roadmap (updated iter 82)
+## iter 84+ Roadmap (updated iter 83)
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 83** | A5 — Omnis-Zeta Anchors: заменить 5 non-physical Prices на bodily/mechanical equivalents | MEDIUM |
 | **iter 84** | A6 — Vyshcherblenny GHOST: сократить до concrete event, cycle → `<ghost_layers>` | LOW |
-| **iter 85** | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand (Omnis/Vyshcher до ~25 tok) | MEDIUM |
+| **iter 85** | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand (Omnis/Vyshcher до ~25 tok) + Omnis-Zeta GHOST-linked Anchors bodily/mechanical | MEDIUM |
 | **iter 86** | B1 — Elena Examples expand + embodiment | MEDIUM |
 | **iter 87–88** | B2–B4 — Walter/Omnis/Vysherblenny Examples expand | LOW |
 | **iter 89** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
@@ -83,7 +82,7 @@
 | **iter 92+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
 | **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-**Рекомендация для следующего чата:** iter 83 — Omnis-Zeta Anchors: 5 non-physical Prices → bodily/mechanical equivalents (A5). Полный аудит: `docs/research/examples_audit_iter80.md` §5 + §10.
+**Рекомендация для следующего чата:** iter 84 — Vyshcherblenny GHOST: сократить до concrete event, cycle → `<ghost_layers>` (A6). Детали: `docs/research/examples_audit_iter80.md` §6.
 
 ---
 

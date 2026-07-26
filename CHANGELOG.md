@@ -2,6 +2,21 @@
 
 ## [9.2.3] - 2026-07-26
 
+### iter 83 — A5 — Omnis-Zeta Anchor Prices bodily/mechanical
+
+- **A5 — Omnis-Zeta Anchors:** 5 из 7 non-physical Anchor Prices заменены на bodily/mechanical equivalents (3 Базовых + 2 FLAW-linked). GHOST-linked Anchors (2) оставлены для iter 85.
+  - Anchor 1 (Базовый): «теряет situational awareness» → «сервоприводы блокируются в позиции сканирования — 3–5 секунд полной сенсорной изоляции»
+  - Anchor 2 (Базовый): «нарушает субординацию» → «манипуляторы выдвигаются без командного сигнала, термальные клапаны выбрасывают пар — корпус дрожит»
+  - Anchor 3 (Базовый): «отчуждает собеседника» → «аудиовывод транслирует ноосферный белый шум — собеседник слышит механический гул, оптика погашена 4–6 секунд»
+  - Anchor 4 (FLAW-linked): «не способен на эмпатию — эскалирует» → «манипуляторы рефлекторно выдвигаются для «диагностики», бинарный кант stuttering — собеседник отшатывается»
+  - Anchor 5 (FLAW-linked): «упускает модернизацию, копит технический долг» → «левая рука-аугментация дрожит, теплообменник переходит в режим перегрузки, оптика мерцает»
+- **Annotation updated:** «Базовые + FLAW-linked Anchors показывают bodily/mechanical Price».
+- **Локации правок:** src/master/part_10.html (Omnis-Zeta [ANCHORS] + annotation), docs/canon/part_10.md (sync).
+- **Closed:** O1 частично (5/7).
+- **KI#57 OPEN:** 2 GHOST-linked Anchor Prices still non-physical («раскрывает уязвимость», «рассеивание внимания») — deferred iter 85.
+
+---
+
 ### iter 82 — A2–A4 — Walter SP + Description + LIE
 
 - **A2 — Walter SP:** Tone Frame расширен с ~10 tok до ~25 tok (`Tone: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.`). Добавлены OOC PROTECTION (react in-character as irritation or ignore) и Format Lock (Dialogue: *action* "speech"). SP structure order теперь соответствует P7A-R2.

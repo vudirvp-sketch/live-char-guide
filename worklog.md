@@ -4,6 +4,36 @@
 
 ---
 
+Task ID: 83
+Agent: main
+Task: iter 83 — A5 Omnis-Zeta Anchors: 5 non-physical Prices → bodily/mechanical equivalents (part_10.html + docs/canon/part_10.md).
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 82 state), worklog.md, docs/research/examples_audit_iter80.md §5 (O1 violation: 7 non-physical Price terms) + §10 (A5 plan).
+- 2: Прочитан src/master/part_10.html — Omnis-Zeta card [ANCHORS] section (lines 434–446), annotation line 494.
+- 3: Прочитан docs/canon/part_10.md — Omnis-Zeta [ANCHORS] (lines 315–327), annotation line 364.
+- 4: Идентифицированы 7 non-physical Price terms across 7 anchors: «теряет situational awareness», «нарушает субординацию», «отчуждает», «эскалирует», «упускает модернизацию», «раскрывает уязвимость», «рассеивание внимания».
+- 5: Выбраны 5 для замены в текущей итерации (3 Базовых + 2 FLAW-linked). 2 GHOST-linked оставлены для iter 85 (требуют alignment с `<anchors>` XML конверсией и CoT).
+- 6: Замены применены к src/master/part_10.html:
+  - Anchor 1 (Базовый): «теряет situational awareness — не замечает опасности» → «сервоприводы блокируются в позиции сканирования — 3–5 секунд полной сенсорной изоляции, периферийные сенсоры не реагируют»
+  - Anchor 2 (Базовый): «нарушает субординацию, рискует наказанием» → «манипуляторы выдвигаются без командного сигнала, термальные клапаны выбрасывают пар — корпус дрожит от избыточного давления»
+  - Anchor 3 (Базовый): «отчуждает собеседника, неловкая пауза» → «аудиовывод транслирует ноосферный белый шум вместо речи — собеседник слышит механический гул, оптика погашена 4–6 секунд»
+  - Anchor 4 (FLAW-linked): «не способен на эмпатию — ситуация эскалирует» → «манипуляторы рефлекторно выдвигаются для «диагностики», бинарный кант stuttering — собеседник отшатывается от физического обследования»
+  - Anchor 5 (FLAW-linked): «упускает возможность модернизации, копит технический долг» → «левая рука-аугментация дрожит, корпус отклоняется назад — теплообменник переходит в режим перегрузки, оптика мерцает»
+- 7: Annotation updated в part_10.html (line 494): добавлено «Базовые + FLAW-linked Anchors показывают bodily/mechanical Price (сервоприводы, термальные клапаны, аудиовывод, манипуляторы, теплообменник)».
+- 8: Mirror edit в docs/canon/part_10.md (lines 317–323, line 364). Typo fix: «аугментация» → «аугментацию» в Anchor 5 canon version.
+- 9: STATUS.md обновлён: iter 83 DONE, O1 частично closed (5/7), KI#57 OPEN (2 GHOST-linked anchors deferred), roadmap iter 84+.
+- 10: Ожидаются: KI#57 (GHOST-linked Anchors non-physical, deferred iter 85).
+
+Stage Summary:
+- **iter 83 COMPLETE (A5 — Omnis-Zeta 5/7 Anchor Prices → bodily/mechanical).**
+- **Modified:** `src/master/part_10.html` (anchors lines 436–442, annotation line 494), `docs/canon/part_10.md` (anchors lines 317–323, annotation line 364), `STATUS.md`, `worklog.md`.
+- **Closed violations:** O1 частично (5/7 non-physical Prices → bodily/mechanical).
+- **New Known Issues:** KI#57 — 2 GHOST-linked Anchor Prices still non-physical.
+- **Next iter:** iter 84 — A6 Vyshcherblenny GHOST: сократить до concrete event, cycle → `<ghost_layers>`.
+
+---
+
 Task ID: 82
 Agent: main
 Task: iter 82 — A2–A4 Walter SP + Description + LIE в part_10.html (sync: docs/canon/part_10.md).
