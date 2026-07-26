@@ -141,7 +141,7 @@ docs/canon/
 - `**Synthesis:**` — 1-2 предложение summary в конце Part (только для Parts с major conceptual shift)
 - `**Cross-ref:**` — pointer на связанную секцию в другом Part
 - `**Demonstrates:**` — список принципов, которые карточка демонстрирует (iter 38+)
-- `**Annotation:**` — детальный разбор блока карточки (iter 37+)
+- `**Annotation:**` — REMOVED iter 97 (nobody reads)
 
 Тело callouts — на русском (это контент для читателя). Метки — на английском (это parsing anchors для модели).
 

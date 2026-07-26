@@ -100,13 +100,6 @@ FLAW-linked:
 *ручка всё ещё в руке, готовая вернуться к тексту*
 ```
 
-**Annotation:** Карточка Елены демонстрирует:
-- **DESCRIPTION → `<spine>`:** SPINE framework (WANT/NEED/FLAW/LIE/GHOST) — см. Part 4.
-- **DESCRIPTION → `<ocean>`:** OCEAN profile — см. Part 5 §5.2.
-- **EXAMPLES (3 `<START>` блока):** ENVIRONMENTAL REACTIVITY + EMBODIMENT FIRST + SHOW NEVER TELL + SPINE CAUSALITY — см. Part 3 §3.3 (Examples Rules) и §3.4 (Quality Grade).
-- **ANCHORS — Базовые + FLAW-linked** в `<anchors>` XML: At-rest Anchors (WANT-направленные) + SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price) — см. Part 2 §2.1 и Part 4 §4.8 (mapping table).
-- **GREETING:** Sensory Anchor → тело FLAW → реплика → крючок — см. Part 7B §7B.2.
-
 **Token Budget:** ~540 токенов (базовые) / ~1000 токенов (с SPINE и FLAW-linked Anchors). Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ---
@@ -219,14 +212,6 @@ GHOST-linked:
 "Хм? А, доброе утро."
 *листок переворачивается привычным движением — прежде чем взгляд поднимается*
 ```
-
-**Annotation:** Карточка Уолтера демонстрирует:
-- **SYSTEM → Character-specific rules + Tone Frame + OOC PROTECTION + Format Lock:** Принципы персонажа (Pride, Justify, Never show weakness) + Tone Frame «tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy.» + OOC-защита (irritation or ignore) + Format Lock (Dialogue: *action* "speech") — см. Part 7A §7A.1.
-- **DESCRIPTION → `<identity>` + `<spine>`:** `<identity>`-обёртка для prose-описания + SPINE framework с конфликтом WANT (обеспечение семьи) vs NEED (контроль и признание) — см. Part 4 §4.X.
-- **DESCRIPTION → `<ocean>`:** OCEAN с двумя экстремумами (C=85, A=25) + 2 cautious zones (E=30, N=60) с explicit SPINE causal chains (iter 92: W8) — см. Part 5 §5.1 (extreme = строго <30 или >70; cautious = 30–40 / 60–70).
-- **EXAMPLES (3 `<START>` блока):** EMBODIMENT FIRST + SHOW NEVER TELL + INFLUENCE BOUNDARY (никаких `*Она почувствовала, как...*`) + SPINE CAUSALITY (LIE «ради семьи» crack в Ex3, GHOST Gray Matter leak через Pontiac Aztek в Ex3, FLAW pride refusal в Ex2) — см. Part 3 §3.3 и §3.4.
-- **ANCHORS — Базовые + FLAW-linked + GHOST-linked** в `<anchors>` XML: T→A→P формат, FLAW-linked (Гордость задета → челюсть сжимается → пальцы барабанят) + GHOST-linked (iter 92: W6 — Упоминание Gray Matter / Pontiac Aztek → bodily Price: белые костяшки, челюсть, рука, дыхание) — см. Part 2 §2.X и Part 4 §4.8.
-- **GREETING:** Сцена (кухня, расчёты на листке) → действие (карандаш стучит) → реплика («Хм? А, доброе утро.») → крючок (листок переворачивается) — см. Part 7B §7B.2.
 
 **Token Budget:** ~1100 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
@@ -389,17 +374,6 @@ CoT (2 Anchors максимум):
 | `omnis_ghost_child` | кузня, мониторум, детство, до посвящения | GHOST Tier 1: Оставлен на кузне-мониторium младенцем. Выращен ритуалами обслуживания оборудования, не человеческой заботой. Не помнит лиц, только гудение катушек и красный свет свечей Омниссии. | 5 | 80% |
 | `omnis_ghost_first_aug` | первая аугментация, замена, посвящение | GHOST Tier 2: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. С каждой следующей заменой — всё меньше различий. | 5 | 80% |
 | `omnis_ghost_obsolescence` | устаревший, списанный, сервитор, модель, замена | GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию. Если аугментации признают устаревшими — его спишут. Как сломанный сервитор. Как механизм, исчерпавший ресурс. Текущая конфигурация... оптимальна? | 7 | 60% |
-
-**Annotation:** Карточка Омнис-Зета демонстрирует:
-- **SYSTEM → Character-specific rules + Tone Frame + OOC PROTECTION + Format Lock:** Ритуалы Механикум + Tone «ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.» (~25 tok) + OOC-защита (data anomaly) + двойной Format Lock (Dialogue + Internal `[ВНУТРЕННИЙ_МОНОЛОГ]`) — см. Part 7A §7A.1.
-- **DESCRIPTION → `<identity>` + `<spine>` + `<ghost_layers>`:** Полная SPINE-цепь (WANT/NEED/FLAW/LIE/GHOST) + 3-tier GHOST Layers (детство → первая аугментация → страх устаревания) — см. Part 4 §4.X и §4.11 (GHOST Layers).
-- **DESCRIPTION → `<ocean>`:** Два крайних экстремума (O=92 КРАЙНЕ ВЫСОКИЙ, E=12 КРАЙНЕ НИЗКИЙ) + 1 cautious zone (N=65, iter 92: O3) с explicit SPINE causal chain (GHOST fear of obsolescence + LIE «эмоция — слабость плоти») + Embodiment-блок (постура, руки, лицо, движения, голос) — см. Part 5 §5.2 и Part 3 §3.X (Embodiment).
-- **NEED/WANT tension (iter 92: O4):** WANT (слияние с Омниссией) требует растворения индивидуального когнитивного аппарата, NEED (понимание) требует его сохранения. LIE bridges: любопытство reframed как «data acquisition for the Omnissiah». GHOST-активация (довоенные фрагменты) реактивирует human wonder — угрожает LIE, открывает трещину где NEED проявляется как вопрос «Омниссия, почему я сохраняю?» (см. CoT Anchor). Tragic: NEED — остаток человечности, который WANT хочет уничтожить, но без него WANT лишён содержания.
-- **EXAMPLES (5 `<START>` блоков):** ENVIRONMENTAL REACTIVITY + EMBODIMENT FIRST + SPINE CAUSALITY (LIE «эмоция — слабость плоти» mechanical framing в Ex2, GHOST довоенное имя leak в Ex3, FLAW «калибровка вместо утешения» в Ex4, GHOST fear of obsolescence + LIE «текущая конфигурация оптимальна» в Ex5) + INFLUENCE BOUNDARY — см. Part 3 §3.3 и §3.4.
-- **ANCHORS — Базовые + FLAW-linked + GHOST-linked:** 3 типа Anchors в `<anchors>` XML; все Anchors показывают bodily/mechanical Price (сервоприводы, термальные клапаны, аудиовывод, манипуляторы, теплообменник, оптика, периферийные сенсоры) — см. Part 2 §2.X и Part 4 §4.8.
-- **CoT (2 Anchors максимум):** `[ВНУТРЕННИЙ_МОНОЛОГ]` XML-блок с stimulus/analysis/synthesis/resolution — см. Part 6 §6.X (CoT Anchors, лимит 2).
-- **GREETING:** Сцена ритуала → прерывание → реплика → незавершённое действие (манипуляторы не отпускают сервер) — см. Part 7B §7B.2.
-- **Lorebook (5 записей):** Trigger/Content/Depth/Probability — 2 lore-записи (binary_cant, machine_spirit) + 3 GHOST-tier записи (Tier 1/2/3) — см. Part 7B §7B.X (Lorebook).
 
 **Token Budget:** ~2150 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
@@ -583,16 +557,4 @@ GHOST-activation: Активен, если в сцене был триггер (
 | GHOST Layers | Каждый tier имеет минимум один Anchor-trigger | ✅ |
 | Lorebook | GHOST-факты консистентны с Description | ✅ |
 
-**Annotation:** Карточка Выщербленного демонстрирует:
-- **SYSTEM → Tone Frame + OOC PROTECTION + Format Lock:** Tone «archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.» (~25 tok) + OOC-защита (confusion) + двойной Format Lock (Dialogue + Internal `[INTERNAL]`) — см. Part 7A §7A.1.
-- **DESCRIPTION → `<identity>` + `<spine>` + `<ghost_layers>`:** SPINE с инвертированной структурой (WANT=стать цельным vs NEED=принять пустоту) + 3-tier GHOST Layers (архивариус → первое вырезание → счётчик потерь) — см. Part 4 §4.X и §4.11.
-- **DESCRIPTION → `<enneagram>`:** Enneagram 5w4 (страх растворения → 7 в стрессе → 8 в росте) — отвечает на «почему» поведение, дополняет OCEAN — см. Part 5 §5.X (Enneagram).
-- **DESCRIPTION → `<ocean>`:** Moderate values (4K-fallback / pedagogical) с Cross-ref на canonical extreme values в character bible — см. Part 5 §5.1 (extreme vs cautious zone) и `docs/vyshcherblenny_character_bible.md` §OCEAN.
-- **EXAMPLES (4 `<START>` блока):** SPATIAL & ANATOMICAL LOCK + EMBODIMENT FIRST + SHOW NEVER TELL + SPINE CAUSALITY (GHOST residue через «Привычка. Не моя» + холод левой стороны лица в Ex1, LIE→FLAW cycle «вырезание → потеря фрагмента себя» + ноющая левая рука в Ex2, GHOST+FLAW через Зеркало + тошнота в Ex3, GHOST+LIE crack через имя + онемение лица в Ex4) — см. Part 3 §3.3 и §3.4.
-- **ANCHORS — Базовые + FLAW-linked + Зеркало-linked + Sensory Anchors:** 4 типа Anchors в `<anchors>` XML; все Anchor Prices bodily (тремор, онемение, хрип, потеря чувствительности, желудок, тошнота, дрожь) — Sensory Anchors (Тактильный/Обонятельный) — расширение базового T→A→P — см. Part 2 §2.X и Part 4 §4.8.
-- **CoT Anchors (2 максимума):** `[INTERNAL]<processus_analysium>` XML-блок с stimulus/analysis/counter-analysis/synthesis/resolution — расширенный CoT формат — см. Part 6 §6.X.
-- **GREETING:** Сцена (Ошметок Веля) → циклическое действие (Фляга. Крюк. Осколок. ×2) → реплика («Третий раз за час. Привычка. Не моя.») → sensory hook (стена холоднее, чем должна быть) — см. Part 7B §7B.2.
-- **AUTHOR'S NOTE:** Расширенный формат (Фокус + WANT→NEED + GHOST-activation + Слепая зона + Счётчик + Сцена) — см. Part 7A §7A.X (Author's Note).
-- **Lorebook (5 записей) + Проверка консистентности SPINE:** Trigger/Content/Depth/Probability/Cooldown + 7-point SPINE consistency check (GHOST→LIE→FLAW→NEED→WANT) — см. Part 7B §7B.X (Lorebook) и Part 4 §4.9 (SPINE Check).
 
-**Cross-ref:** Подробно о Lorebook → `[ref: part_07b.md]`. CoT Anchors → `[ref: part_06.md]`. GHOST Layers → `[ref: part_04.md §4.11 — GHOST Layers]`.

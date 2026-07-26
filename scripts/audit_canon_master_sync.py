@@ -531,33 +531,10 @@ CHECKS = [
     ),
 
     # ============================================================
-    # iter 47 — Phase 4: P2-18 (F10) Elena inline annotations → Annotation callout
-    # 4 inline ↑ comments deleted; Annotation callout with 6 items added after card
+    # iter 97 — Annotation callout blocks REMOVED from all 4 Part 10 cards
+    # (Elena, Walter, Omnis-Zeta, Vyshcherblenny) + Cross-ref line removed.
+    # Previous iter 47 P2-18 positive checks converted to absent checks.
     # ============================================================
-    (
-        "P2-18-annotation",
-        "part_10.html",
-        "<p><strong>Annotation:</strong> Карточка Елены демонстрирует:</p>",
-        "part_10 §10.1 Elena: Annotation callout with 6 items added after card (iter 47 P2-18 fix)",
-    ),
-    (
-        "P2-18-item-spine",
-        "part_10.html",
-        "<strong>DESCRIPTION → <code>&lt;spine&gt;</code>:</strong> SPINE framework (WANT/NEED/FLAW/LIE/GHOST)",
-        "part_10 §10.1 Annotation: DESCRIPTION → spine item (iter 47 P2-18 fix)",
-    ),
-    (
-        "P2-18-item-ocean",
-        "part_10.html",
-        "<strong>DESCRIPTION → <code>&lt;ocean&gt;</code>:</strong> OCEAN profile",
-        "part_10 §10.1 Annotation: DESCRIPTION → ocean item (iter 47 P2-18 fix)",
-    ),
-    (
-        "P2-18-item-anchors-flaw",
-        "part_10.html",
-        "<strong>ANCHORS — Базовые + FLAW-linked</strong> в <code>&lt;anchors&gt;</code> XML: At-rest Anchors (WANT-направленные) + SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price)",
-        "part_10 §10.1 Annotation: ANCHORS merged item with <anchors> XML wrapper (iter 85+ updated iter 94)",
-    ),
 
     # ============================================================
     # iter 47 — Phase 4: P3-2 (D5) HTML comments → visible Demonstrates callouts
@@ -764,13 +741,48 @@ ABSENT_CHECKS = [
         "&lt;!-- ↑ Эти Anchors добавляет SPINE framework",
         "part_10 §10.1: deleted inline ↑ annotation for FLAW-linked Anchors (iter 47 P2-18 fix)",
     ),
+
+    # ============================================================
+    # iter 97 — Annotation callout blocks REMOVED from all 4 Part 10 cards
+    # Verifies no Annotation: Карточка ... демонстрирует: blocks remain.
+    # ============================================================
+    (
+        "iter97-no-elena-annotation",
+        "part_10.html",
+        "<p><strong>Annotation:</strong> Карточка Елены демонстрирует:</p>",
+        "part_10 §10.1: Annotation callout block removed (iter 97)",
+    ),
+    (
+        "iter97-no-walter-annotation",
+        "part_10.html",
+        "<p><strong>Annotation:</strong> Карточка Уолтера демонстрирует:</p>",
+        "part_10 §10.2: Annotation callout block removed (iter 97)",
+    ),
+    (
+        "iter97-no-omnis-annotation",
+        "part_10.html",
+        "<p><strong>Annotation:</strong> Карточка Омнис-Зета демонстрирует:</p>",
+        "part_10 §10.3: Annotation callout block removed (iter 97)",
+    ),
+    (
+        "iter97-no-vysherblenny-annotation",
+        "part_10.html",
+        "<p><strong>Annotation:</strong> Карточка Выщербленного демонстрирует:</p>",
+        "part_10 §10.4: Annotation callout block removed (iter 97)",
+    ),
+    (
+        "iter97-no-crossref",
+        "part_10.html",
+        "Подробно о Lorebook → Part 7B",
+        "part_10 §10.4: Cross-ref line removed (iter 97)",
+    ),
 ]
 
 
 def main() -> int:
     print("=" * 70)
-    print("audit_canon_master_sync.py — iter 44+45+46+47+50+51 regression guard")
-    print("Verifies that iter 44 + iter 45 + iter 46 + iter 47 + iter 50 canon→master HTML sync fixes are in place.")
+    print("audit_canon_master_sync.py — iter 44–97 regression guard")
+    print("Verifies that iter 44–51 + iter 97 canon→master HTML sync fixes are in place.")
     print("=" * 70)
     print()
 
@@ -822,15 +834,15 @@ def main() -> int:
     if failures:
         print(f"FAILED: {len(failures)} check(s) failed, {pass_count} passed")
         print()
-        print("Regression detected — iter 44+45+46+47+50+51 fixes are NOT all in place.")
+        print("Regression detected — iter 44–97 fixes are NOT all in place.")
         print("Investigate src/master/*.html and re-apply missing fixes.")
         return 1
     else:
         print(f"PASS: all {pass_count} checks passed")
         print()
-        print("iter 44+45+46+47+50+51 canon→master HTML sync fixes are in place.")
+        print("iter 44–97 canon→master HTML sync fixes are in place.")
         print()
-        print("NOTE: This is a focused regression test for iter 44+45+46+47+50+51 fixes.")
+        print("NOTE: This is a focused regression test for iter 44–97 fixes.")
         print("      A general-purpose canon↔master drift detector is available")
         print("      as `scripts/audit_canon_master_drift.py` (added iter 48).")
         return 0

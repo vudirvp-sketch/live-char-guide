@@ -4,13 +4,16 @@
 
 ## [9.2.6] - 2026-07-27
 
-### iter 96 — KI#63 version drift fix + build regeneration
+### iter 97 — Annotation callout blocks removal
 
-- **KI#63 — Version drift fixed:** `package.json` 9.2.5 → 9.2.6, `data/character_schema.json` 9.2.3 → 9.2.6 (synchronized with canonical `src/VERSION` = 9.2.6). `parts/manifest.json` regenerated → 9.2.6 by build. All 4 version sources (`src/VERSION`, `package.json`, `data/character_schema.json`, `parts/manifest.json`) now in sync at 9.2.6.
-- **Build regeneration:** `pnpm run build` executed (build hash `4074bac5` — `src/shell/index.html` content stable, only version meta updated). All root fallbacks regenerated: `index.html`, `event-bus.js`, `build.hash`, `assets/`, `widgets/` (17 files), `parts/` (17 files), `data/` (7 files).
-- **Propagation:** All iter 81–95 changes (Voice Isolation rule clarification, OCEAN compact format, Tone Frames + OOC Protection + Format Lock for 4 cards, `<anchors>` XML canonical format, dead weight cleanup, KI#58 Anchors parts/ sync) now reflected in root fallbacks → GitHub Pages deploy.
-- **Validation:** 96/96 canon→master sync PASS, 64/64 tests PASS, 12/12 master validation PASS, 8/8 artifact gates PASS, version sync ✓.
-- **Closed:** KI#63. **All Known Issues now closed.**
+- **Annotation callout blocks removed:** All 4 «Annotation: Карточка ... демонстрирует:» blocks (Elena §10.1, Walter §10.2, Omnis-Zeta §10.3, Vyshcherblenny §10.4) removed from canon, master HTML, and parts fallback. Per author request — text nobody reads.
+- **Cross-ref line removed:** «Подробно о Lorebook → Part 7B. CoT Anchors → Part 6. GHOST Layers → Part 4.» removed from all 3 Part 10 sources.
+- **Audit script updated:** P2-18 positive checks → negative checks. 97/97 PASS.
+- **Build regeneration:** Root fallbacks regenerated. Version sync ✓.
+
+### iter 96 — KI#63 version drift fix
+
+- KI#63 closed. All 4 version sources synced at 9.2.6. Root fallbacks regenerated.
 
 ### iter 95 — E2/KI#58 Dead weight cleanup + Anchors parts/ sync
 
