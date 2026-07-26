@@ -100,9 +100,9 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**iter 80 ✅ COMPLETE — разведочный аудит примеров карточек (research-only, no code changes).** Полный отчёт: `docs/research/examples_audit_iter80.md`. Найдено: 4 universal violations + 26 card-specific + 20 Bible-vs-card discrepancies + 4 guide self-contradictions. План правок (Phases A–E, iter 81–92) — в §10 отчёта.
+**iter 82 ✅ COMPLETE — A2–A4 Walter SP + Description `<identity>` + LIE fix.** Walter SP приведён к canonical structure (Tone Frame ~25 tok + OOC + Format Lock). Description: prose → `<identity>` wrapper. LIE: clean quote. Closed: W1–W5, BW4, KI#56 (version drift).
 
-**iter 81+ roadmap:** см. `STATUS.md` (Roadmap) и `docs/research/examples_audit_iter80.md` §10.
+**iter 83+ roadmap:** см. `STATUS.md` (Roadmap) и `docs/research/examples_audit_iter80.md` §10. Следующая задача: A5 — Omnis-Zeta Anchors (5 non-physical Prices → bodily/mechanical).
 
 **Принципы сохраняются:**
 - `viz > dry text` — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design.

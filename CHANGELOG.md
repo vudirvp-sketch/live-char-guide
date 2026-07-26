@@ -1,5 +1,19 @@
 # Changelog
 
+## [9.2.3] - 2026-07-26
+
+### iter 82 — A2–A4 — Walter SP + Description + LIE
+
+- **A2 — Walter SP:** Tone Frame расширен с ~10 tok до ~25 tok (`Tone: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.`). Добавлены OOC PROTECTION (react in-character as irritation or ignore) и Format Lock (Dialogue: *action* "speech"). SP structure order теперь соответствует P7A-R2.
+- **A3 — Walter Description:** Prose-параграфы перенесены в `<identity>` XML wrapper перед `<spine>`.
+- **A4 — Walter LIE:** Убран explanatory clause (`— но правда в том, что ему нужно чувствовать контроль`). LIE теперь clean quote.
+- **Локации правок:** src/master/part_10.html (Walter SP + Description + annotation + token budget), docs/canon/part_10.md (sync). Annotation list Walter: SYSTEM bullet расширен (Tone Frame + OOC + Format Lock), DESCRIPTION bullet (`<identity>` + `<spine>`).
+- **Closed:** W1 (Missing `<identity>`), W2 (LIE = quote + clause), W3 (Format Lock), W4 (OOC), W5 (Tone Frame недомер), BW4 (Bible vs Card LIE alignment).
+- **KI#56 ✅ CLOSED:** Version sync drift (STATUS.md=9.2.2 vs src/VERSION+package.json+data/character_schema.json=9.2.1) — все bumped to 9.2.3, AGENT_NAVIGATION.md тоже.
+- **Still open for Walter:** W6, W7, W8, W9 (prose psychology частично смягчён).
+
+---
+
 ## [9.2.79] - 2026-07-26
 
 ### iter 79 — P1.5 — Voice Isolation уточнение (лингвистический vs физический)
