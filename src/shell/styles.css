@@ -101,12 +101,12 @@
 }
 /* === VISUAL SYSTEM TOKENS (from token-migration.css) === */
 :root {
-  /* === ЦВЕТА — Основная палитра VS (из DESIGN-TOKENS.css v1.3) === */
-  --bg-deep:       #08090d;   /* Основной фоновый (темнее shell --bg: #121212) */
-  --bg-panel:      #0e1117;   /* Фон панели (ближе к --bg-surface: #1a1a1a) */
-  --bg-raised:     #161a22;   /* Приподнятый элемент (ближе к --bg-elevated: #222222) */
-  --border:        #1e2430;   /* Граница по умолчанию (перекрывается shell --border: #1f232b) */
-  --border-active: #2a3344;   /* Активная граница */
+  /* === ЦВЕТА — Основная палитра VS (OLED true-black default) === */
+  --bg-deep:       #000000;   /* OLED true-black */
+  --bg-panel:      #060709;   /* OLED near-black */
+  --bg-raised:     #0c0e12;   /* OLED dark raised */
+  --border:        #1e2430;   /* Граница по умолчанию */
+  --border-active: #1a1e28;   /* OLED active border */
   --text-primary:  #e2e6ed;   /* Основной текст (аналог shell --text: #E8E8E8) */
   --text-secondary:#8b95a8;   /* Вторичный текст (WCAG AA ~6.5:1 на --bg-deep) */
   --text-muted:    #6b7590;   /* Приглушённый текст (WCAG AA 4.6:1 на --bg-deep. НЕ для критичной инфо) */
@@ -240,7 +240,7 @@
   --vs-border:     var(--border);
 }
 
-/* OLED theme (default): VS-элементы используют тёмные цвета */
+/* Default (OLED/dark): VS-элементы используют :root значения */
 body:not(.theme-light) {
   --vs-bg:         var(--bg-deep);
   --vs-bg-surface: var(--bg-panel);
@@ -339,21 +339,6 @@ body.theme-light {
   --glow-amber:  0 0 10px rgba(217,119,6,0.25);
 }
 
-/* OLED theme: максимальная темнота */
-body.theme-oled {
-  --vs-bg:         #000000;
-  --vs-bg-surface: #060709;
-  --vs-bg-elevated:#0c0e12;
-  --vs-border:     #141820;
-
-  /* VS raw token overrides for OLED — true black */
-  --bg-deep:       #000000;
-  --bg-panel:      #060709;
-  --bg-raised:     #0c0e12;
-  --border-active: #1a1e28;
-}
-
-
 /* === LIGHT THEME VARIABLES === */
 :root {
   --bg-light: #fafafa;
@@ -363,16 +348,6 @@ body.theme-oled {
   --text-muted-light: #6b7280;
   --accent-light: #0284c7;
   --border-light: #e5e7eb;
-
-  /* OLED theme */
-  --bg-oled: #000000;
-  --bg-surface-oled: #0a0a0a;
-  --bg-elevated-oled: #111111;
-  --border-oled: #1a1a1a;
-  --code-bg-oled: #0a0a0a;
-  --table-header-oled: #0a0a0a;
-  --table-row-alt-oled: #050505;
-  --panel-shadow-oled: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
 
 /* === LIGHT THEME === */
@@ -392,19 +367,7 @@ body.theme-light {
   color-scheme: light;
 }
 
-/* === OLED THEME === */
-body.theme-oled {
-  --bg: var(--bg-oled);
-  --bg-surface: var(--bg-surface-oled);
-  --bg-elevated: var(--bg-elevated-oled);
-  --border: var(--border-oled);
-  --code-bg: var(--code-bg-oled);
-  --table-header: var(--table-header-oled);
-  --table-row-alt: var(--table-row-alt-oled);
-  --panel-shadow: var(--panel-shadow-oled);
-  --accent-soft: rgba(56, 189, 248, 0.15);
-  color-scheme: dark;
-}
+/* Default (no class) = OLED/dark — :root values apply automatically */
 
 /* === BASE STYLES === */
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -949,7 +912,7 @@ body.content-wide .fab-group {
   transform: scale(1.1);
 }
 
-/* Theme icons — OLED (moon) default, Light (sun) */
+/* Theme icons — dark (moon) default, light (sun) */
 body:not(.theme-light) .theme-icon-light { display: none; }
 body:not(.theme-light) .theme-icon-oled { display: inline !important; }
 body.theme-light .theme-icon-oled { display: none; }

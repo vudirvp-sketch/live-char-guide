@@ -6,11 +6,11 @@
 
 :root {
   /* === ЦВЕТА === */
-  --bg-deep:       #08090d;
-  --bg-panel:      #0e1117;
-  --bg-raised:     #161a22;
+  --bg-deep:       #000000;       /* OLED true-black default */
+  --bg-panel:      #060709;       /* OLED near-black */
+  --bg-raised:     #0c0e12;       /* OLED dark raised */
   --border:        #1e2430;
-  --border-active: #2a3344;
+  --border-active: #1a1e28;       /* OLED active border */
   --text-primary:  #e2e6ed;
   --text-secondary:#8b95a8;
   --text-muted:    #6b7590;        /* было #535c6e — не проходило WCAG AA (3.5:1). #6b7590 даёт 4.6:1 на --bg-deep */

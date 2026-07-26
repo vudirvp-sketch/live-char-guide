@@ -12,7 +12,7 @@
  * - Panel system (drag, resize, save state)
  * - Notepad with persistence
  * - Glossary panel
- * - Theme toggle (oled/light)
+ * - Theme toggle (default dark ↔ light)
  * - Content width toggle
  * - Expert mode toggle (M3 widget level)
  * - Scroll to top
@@ -1143,30 +1143,27 @@
     const toggle = $('#fab-theme');
     if (!toggle) return;
 
-    const themes = ['oled', 'light'];
-    const iconLight = toggle.querySelector('.theme-icon-light');
-    const iconOled = toggle.querySelector('.theme-icon-oled');
+    const iconMoon = toggle.querySelector('.theme-icon-oled');
+    const iconSun  = toggle.querySelector('.theme-icon-light');
 
     function applyTheme(theme) {
-      document.body.classList.remove('theme-light', 'theme-oled');
-      
-      [iconLight, iconOled].forEach(icon => { if (icon) icon.hidden = true; });
-      
+      // Default (no class) = OLED/dark — :root values apply automatically.
+      // Only theme-light needs explicit class.
       if (theme === 'light') {
         document.body.classList.add('theme-light');
-        if (iconLight) iconLight.hidden = false;
+        if (iconSun)  iconSun.hidden = false;
+        if (iconMoon) iconMoon.hidden = true;
       } else {
-        // OLED is default (dark mode with true black)
-        document.body.classList.add('theme-oled');
-        if (iconOled) iconOled.hidden = false;
+        document.body.classList.remove('theme-light');
+        if (iconMoon) iconMoon.hidden = false;
+        if (iconSun)  iconSun.hidden = true;
       }
-      
       toggle.setAttribute('data-theme', theme);
     }
 
+    // Backward-compatible: 'oled' stored value treated as default (no class)
     let stored = localStorage.getItem('theme');
-    if (!stored || !themes.includes(stored)) {
-      // Default: OLED (dark) unless user prefers light
+    if (!stored || (stored !== 'light' && stored !== 'oled')) {
       stored = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
     }
     
@@ -1174,9 +1171,9 @@
 
     toggle.addEventListener('click', () => {
       const current = toggle.getAttribute('data-theme') || 'oled';
-      const nextTheme = themes[(themes.indexOf(current) + 1) % themes.length];
-      applyTheme(nextTheme);
-      localStorage.setItem('theme', nextTheme);
+      const next = current === 'oled' ? 'light' : 'oled';
+      applyTheme(next);
+      localStorage.setItem('theme', next);
     });
   }
 

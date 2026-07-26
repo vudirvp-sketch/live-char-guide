@@ -675,8 +675,9 @@ async function runPlaywrightTests(baseUrl) {
         const currentTheme = await oledPage.evaluate(() => {
           return document.body.className;
         });
-        if (!currentTheme.includes('theme-oled')) {
-          throw new Error(`Not on OLED theme (current: ${currentTheme}). Body bg: rgb(${r},${g},${b})`);
+        // Default (no class) = OLED/dark. Only theme-light is explicit.
+        if (currentTheme.includes('theme-light')) {
+          throw new Error(`Not on dark/default theme (current: ${currentTheme}). Body bg: rgb(${r},${g},${b})`);
         }
       }
     });
@@ -792,8 +793,10 @@ async function runFallbackTests(baseUrl) {
     if (!css.includes('theme-light')) {
       throw new Error('body.theme-light styles not found in CSS');
     }
-    if (!css.includes('theme-oled')) {
-      throw new Error('body.theme-oled styles not found in CSS');
+    // theme-oled removed in iter 99: default (no class) = OLED/dark
+    // Verify :root has dark default values instead
+    if (!css.includes('--bg: #000000')) {
+      throw new Error(':root does not define OLED true-black as default (--bg: #000000 missing)');
     }
   });
 }

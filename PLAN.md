@@ -100,9 +100,9 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**iter 96 ✅ COMPLETE — KI#63 version drift fix + build regeneration.** Version drift across `package.json` (9.2.5), `data/character_schema.json` (9.2.3), `parts/manifest.json` (9.2.0) vs canonical `src/VERSION` (9.2.6) fixed. `pnpm run build` выполнен: все root fallbacks (index.html, widgets/, assets/, parts/, data/, event-bus.js, build.hash) регенерированы из актуальных `src/master/` + `src/shell/` + `data/`. Изменения iter 81–95 (Voice Isolation, OCEAN compact, Tone Frames, OOC Protection, Format Lock, `<anchors>` XML, dead weight cleanup, KI#58 Anchors parts/ sync) теперь пропагированы в root fallbacks → GitHub Pages деплой. Validation: 96/96 canon sync, 64/64 tests, version sync ✓. All Known Issues closed.
+**iter 99 ✅ COMPLETE — Theme chain simplification.** `body.theme-oled` class removed — redundant since `:root` already defines OLED true-black defaults. Theme toggle simplified: default (no class) = OLED/dark, `body.theme-light` = light. Only `theme-light` class is toggled. localStorage backward-compatible ('oled' value → no class). `-oled` token vars removed. VS/DESIGN-TOKENS `:root` synced to true-black. Known Issue: Mermaid diagrams don't dynamically re-render on theme switch (deferred).
 
-**iter 97+ roadmap:** технических багов нет. Только V8/V9 Decision items — deferred (после обсуждения с автором).
+**iter 100+ roadmap:** Mermaid dynamic theme re-render. V8/V9 Decision items — deferred.
 
 **Принципы сохраняются:**
 - `viz > dry text` — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design.

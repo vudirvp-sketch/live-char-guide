@@ -1,31 +1,35 @@
 # Live Character Guide — Статус проекта
 
-> **Версия:** 9.2.6 | **Дата:** 2026-07-27
+> **Версия:** 9.2.7 | **Дата:** 2026-07-27
 
 ---
 
 ## Текущее состояние
 
-**iter 98 — Theme system overhaul: Dark removed, OLED+Light only.**
+**iter 99 — Theme simplification: `body.theme-oled` removed, default = OLED via :root.**
 
-- Dark theme removed. Only 2 themes remain: **OLED** (default, true black) и **Light**.
-- Default для новых пользователей = OLED (тёмная тема, луна 🌙).
-- OLED icon changed from ⬛ → 🌙 (moon).
-- Light theme: VS raw tokens overridden (`--bg-deep`, `--bg-panel`, `--bg-raised`, `--text-primary`, `--text-secondary`, `--border-active`, all tint/glow tokens) → VS components now properly adapt.
-- Light theme: Hardcoded pastel colors fixed (code, tags, OCEAN legend/tags/SVG fills, MBTI spine labels, enneagram labels, violet accent elements, shadows).
-- OLED theme: VS raw tokens overridden to true black (`--bg-deep: #000000`, `--bg-panel: #060709`, `--bg-raised: #0c0e12`).
-- Panel shadow overridden for light theme (lighter: `0 4px 16px rgba(0,0,0,0.10)`).
-- JS cycling: `oled → light` (2-step). `data-theme="oled"` set on button by default.
-- Noscript fallback: `color:#e2e8f0` → `var(--text,#E8E8E8)`.
+- `body.theme-oled` CSS class removed entirely — redundant with `:root` defaults.
+- `:root` values already define OLED true-black (`--bg: #000000`, `--bg-surface: #0a0a0a`, `--bg-elevated: #111111`).
+- VS raw tokens in `:root` updated to OLED true-black (`--bg-deep: #000000`, `--bg-panel: #060709`, `--bg-raised: #0c0e12`, `--border-active: #1a1e28`).
+- DESIGN-TOKENS.css `:root` synced to same OLED true-black values.
+- `-oled` token variables (`--bg-oled`, `--bg-surface-oled`, etc.) removed — no longer needed.
+- JS theme toggle simplified: only `theme-light` class toggled. Default = no class = OLED/dark.
+- localStorage backward-compatible: 'oled' stored value works (no class applied = default).
+- Theme button title updated: "Тема (Тёмная ↔ Светлая)".
+- token-migration.css: `body.theme-oled` block removed, 3-theme comment → 2-theme (default/light).
+- visual-parity.mjs tests updated for new architecture.
+- Mirror files synced (assets/shell-styles.css, assets/lazy-loader.js).
 
-**No Known Issues open.**
+**Known Issues:**
+
+- **Mermaid diagrams**: statically initialized with `theme: 'dark'`. Does not dynamically re-render when switching to Light theme. Deferred to future iteration (requires `mermaid.run()` re-call on theme change).
 
 ---
 
 ## Invariants
 
-- **Version sync:** All 4 sources = 9.2.6.
-- **Themes:** OLED (default) + Light only. Dark theme removed.
+- **Version sync:** All 4 sources = 9.2.6 (shell VERSION not bumped yet).
+- **Themes:** Default (OLED/dark, no class) + Light (`body.theme-light`). No explicit dark class.
 - **Canon → master sync:** 97/97 PASS
 - **Voice Isolation:** Linguistic voice = Examples/Greeting only. Physical = Embodiment/Description.
 - **OCEAN format:** compact `O:72 C:65 E:41 A:38 N:68` (§5.1 RULE). No pipes, no commas.
@@ -38,6 +42,5 @@
 
 | Итерация | Задача | Статус |
 |----------|--------|--------|
+| **iter 100** | Mermaid dynamic theme re-render on toggle | planned |
 | **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
-
-Все технические баги закрыты. Дальнейшие итерации — по мере новых баг-репортов или решений автора по V8/V9.

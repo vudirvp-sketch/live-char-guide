@@ -125,10 +125,10 @@
 
 /* === АЛИАСЫ СОВМЕСТИМОСТИ === */
 /* Маппинг VS-токенов на shell-токены для элементов,
-   которые нужно работать в обеих темах (dark/light/OLED).
+   которые нужно работать в обеих темах (default dark / light).
    
    Shell-переменные (существующие):
-     --bg (#121212 dark / #fafafa light / #000000 oled)
+     --bg (#000000 default / #fafafa light)
      --bg-surface (--bg-surface-*)
      --bg-elevated (--bg-elevated-*)
      --text (--text-*)
@@ -136,13 +136,14 @@
      --accent (--accent-*)
      --border (--border-*)
    
-   VS-переменные (новые, только dark):
-     --bg-deep, --bg-panel, --bg-raised
+   VS-переменные (OLED true-black default):
+     --bg-deep (#000000), --bg-panel (#060709), --bg-raised (#0c0e12)
      --text-primary, --text-secondary, --text-muted
      --accent-cyan, --accent-violet, --accent-amber
    
-   РЕШЕНИЕ: VS-элементы в integrated версии будут использовать
-   shell-токены через алиасы. Это обеспечивает работу в 3 темах.
+   РЕШЕНИЕ: VS-элементы в integrated версии используют
+   shell-токены через алиасы. Default = OLED (no class needed).
+   Light theme overrides via body.theme-light.
    Оригинальные VS-токены сохраняются для обратной совместимости
    standalone-прототипов.
 */
@@ -158,7 +159,7 @@
   --vs-border:     var(--border);
 }
 
-/* Dark theme: VS-элементы используют свои собственные тёмные цвета */
+/* Default (OLED/dark): VS-элементы используют :root значения — no class needed */
 body:not(.theme-light) {
   --vs-bg:         var(--bg-deep);
   --vs-bg-surface: var(--bg-panel);
@@ -183,12 +184,4 @@ body.theme-light {
   --accent-amber:  #d97706;
   --danger:        #dc2626;
   --success:       #16a34a;
-}
-
-/* OLED theme: максимальная темнота */
-body.theme-oled {
-  --vs-bg:         #000000;
-  --vs-bg-surface: #060709;
-  --vs-bg-elevated:#0c0e12;
-  --vs-border:     #141820;
 }
