@@ -9,34 +9,26 @@
 
 ## Текущее состояние
 
-**iter 85 — A7/A8/KI#57 COMPLETE.** All 4 cards: `[ANCHORS]` → `<anchors>` XML wrapper (P7A-R16/P1-R6 compliance). Tone Frames expanded: Omnis-Zeta ~8→~25 tok, Vyshcherblenny ~8→~25 tok. KI#57 closed: Omnis-Zeta 2 GHOST-linked Anchor Prices converted from non-physical («раскрывает уязвимость», «рассеивание внимания») to bodily/mechanical (оптика мерцает жёлтым + сервоприводы дрожат; оптика гаснет 0.8 сек + периферийные сенсоры теряют calibration). Bullet list `-` prefixes added to all anchor items per `<anchors>` XML template §7A.9. Annotations updated in both docs/canon/part_10.md and src/master/part_10.html.
+**iter 86 — B1 COMPLETE.** Elena Examples expanded from ~25–50 tok → ~85–95 tok each (P3-R7 compliance, 80–120 tok per block). All 3 blocks now include: scene context (1-2 sentences), embodied Anchor reactions (neck rubbing + jaw clench, glass grip + headache spread, fists + stepping back), environmental reactivity (rain, bar, waterfront), SPINE causality visible. Example 1: `*пауза*` (tempo marker) → embodied reactions (neck rubbing, jaw clench). Example 2: added full bodily Anchor chain (palms → glass grip → headache from neck to temples). Example 3: added FLAW-FLAW cycle (vulnerability → «О, чувак» deflection → wall up → «плохо кончается»). Updated in docs/canon/part_10.md, src/master/part_10.html, parts/part_10.html, docs/elena_character_bible.md.
 
-**Closed:** U4 (Anchors `<anchors>` XML), KI#57 (Omnis-Zeta GHOST-linked Anchors non-physical), V2 (Vyshcherblenny Tone Frame ~8 tok).
-
-**Still open for Vyshcherblenny:** V3 (3 Anchor Prices non-physical → iter 87/88), V4 (OCEAN cautious zones → iter 90), V5 (2 Examples under 80 tok → iter 88).
+**Closed:** E5 (Elena Examples недомер), E6 (Elena Example 1 без Embodiment).
 
 ### Remaining universal violations (1 of 4 still open)
 
 | # | Проблема | Серьёзность |
 |---|----------|-------------|
-| U1 | Tone Frame недомер — ALL 4 cards DONE (Omnis/Vyshcher expanded to ~25 tok in iter 85) | ✅ CLOSED |
+| U1 | Tone Frame недомер — ALL 4 cards DONE | ✅ CLOSED |
 | U2 | CORE_DIRECTIVES не inline (shorthand reference) | DECISION |
-| U3 | Examples недомер (25–70 tok вместо 80–120) | HIGH |
+| U3 | Examples недомер — **Elena DONE**, Walter/Omnis/Vyshcher still under 80 tok | HIGH |
 
 ### Key remaining card-specific violations
 
 | Card | Key remaining issues |
 |------|---------------------|
-| **Elena** | Voice leak «саркастичная» in Description; Examples недомер; §9.11 claims Voice check PASS but it FAILS |
-| **Walter** | GHOST without Anchor-trigger; 1 Anchor Price temporal (non-physical); OCEAN cautious zones not linked |
-| **Omnis-Zeta** | NEED/WANT tension weak; OCEAN cautious zones not linked |
-| **Vyshcherblenny** | 3 Anchor Prices non-physical; OCEAN cautious zones not linked; 2 Examples under 80 tok |
-
----
-
-## Known Issues
-
-> KI#1–KI#57: all closed (история — в git log). No open KI.
+| **Elena** | Voice leak «саркастичная» in `<identity>` (E1); §9.11 claims Voice check PASS but FAILS (E8) |
+| **Walter** | GHOST without Anchor-trigger (W6); 1 Anchor Price temporal (W7); OCEAN cautious zones (W8); Examples under 80 tok |
+| **Omnis-Zeta** | NEED/WANT tension weak (O4); OCEAN cautious zones (O3); Examples shorter blocks under 80 tok |
+| **Vyshcherblenny** | 3 Anchor Prices non-physical (V3); OCEAN cautious zones (V4); 2 Examples under 80 tok (V5) |
 
 ---
 
@@ -64,11 +56,10 @@
 
 ---
 
-## iter 86+ Roadmap
+## iter 87+ Roadmap
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 86** | B1 — Elena Examples expand + embodiment | MEDIUM |
 | **iter 87–88** | B2–B4 — Walter/Omnis/Vyshcherblenny Examples expand + Vyshcherblenny V3 (Anchor Prices → bodily) | LOW |
 | **iter 89** | C1–C2 — Walter/Omnis Bible backfill + align | MEDIUM |
 | **iter 90** | C3–C4 — Vyshcherblenny/Elena Bible backfill + align + Vyshcherblenny V4 (OCEAN cautious zones) | HIGH |
@@ -76,7 +67,7 @@
 | **iter 92+** | E1–E2 — Dead weight cleanup (unused characters, non-canonical Lorebook) | LOW |
 | **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-**Рекомендация для следующего чата:** iter 86 — B1: Elena Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block).
+**Рекомендация для следующего чата:** iter 87 — B2: Walter Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block).
 
 ---
 

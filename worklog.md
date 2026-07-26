@@ -4,6 +4,31 @@
 
 ---
 
+Task ID: 86
+Agent: main
+Task: iter 86 — B1: Elena Examples expand + embodiment (P3-R7 compliance, 80–120 tok per block).
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 85 state), worklog.md (iter 85 entry), docs/research/examples_audit_iter80.md §3 (Elena violations E5/E6).
+- 2: Прочитаны docs/canon/part_10.md + src/master/part_10.html + parts/part_10.html — Elena Examples section (3 `<START>` blocks, ~25–50 tok each).
+- 3: Прочитаны docs/elena_character_bible.md — Example Messages section (source of truth, even shorter versions).
+- 4: Прочитаны docs/canon/part_03.md §3.3 (P3-R7: 80-120 tok per block, `<START>` mandatory, minimum one physical reaction per block) + §3.4 (Quality Grade system).
+- 5: Drafted 3 expanded Examples: Ex1 Neutral (office, rain, neck rubbing + jaw clench embodiment), Ex2 Stress (bar, confrontation, palms grip + glass + headache cascade), Ex3 Trust (waterfront, vulnerability → FLAW deflection «О, чувак» → wall up cycle).
+- 6: Applied to docs/canon/part_10.md — Examples expanded + Token Budget updated (~440→~540 / ~900→~1000).
+- 7: Applied to src/master/part_10.html — Examples expanded + Token Budget updated.
+- 8: Applied to parts/part_10.html — Examples expanded + Anchors synced to `<anchors>` XML (missed in iter 85 build mirror) + Token Budget updated.
+- 9: Applied to docs/elena_character_bible.md — Example Messages updated to match expanded versions + version header updated to 9.2.3 (iter 86).
+- 10: STATUS.md rewritten: iter 86 DONE, E5/E6 closed, U3 updated (Elena DONE, others still open), roadmap shifted to iter 87+.
+
+Stage Summary:
+- **iter 86 COMPLETE (B1 — Elena Examples expanded to ~85–95 tok per block + embodiment).**
+- **Closed:** E5 (Elena Examples недомер), E6 (Elena Example 1 без Embodiment).
+- **Modified:** `docs/canon/part_10.md`, `src/master/part_10.html`, `parts/part_10.html`, `docs/elena_character_bible.md`, `STATUS.md`.
+- **Remaining:** U3 (Walter/Omnis/Vyshcher Examples still under 80 tok), E1 (Voice leak), E8 (§9.11 self-contradiction), W6-W8, O3-O4, V3-V5.
+- **Next:** iter 87 — B2: Walter Examples expand + embodiment.
+
+---
+
 Task ID: 85
 Agent: main
 Task: iter 85 — A7/A8/KI#57: All cards `<anchors>` XML + Tone Frames expand (Omnis/Vyshcher ~25 tok) + Omnis-Zeta GHOST-linked Anchors bodily/mechanical.
