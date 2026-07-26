@@ -100,12 +100,13 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**iter 95 ✅ COMPLETE — E2/KI#58.** Dead weight cleanup: 5 unused characters removed from Bible (Geralt, Joker, Jesse, Edward, Elliot). Tyler Durden → Marginal. Lorebook Entry 2 (пожар) → ⚠️ NON-CANONICAL. KI#58: Omnis-Zeta + Vyshcherblenny Anchors synced in parts/ (→ `<anchors>` XML + bodily/mechanical Prices).
+**iter 96 ✅ COMPLETE — KI#63 version drift fix + build regeneration.** Version drift across `package.json` (9.2.5), `data/character_schema.json` (9.2.3), `parts/manifest.json` (9.2.0) vs canonical `src/VERSION` (9.2.6) fixed. `pnpm run build` выполнен: все root fallbacks (index.html, widgets/, assets/, parts/, data/, event-bus.js, build.hash) регенерированы из актуальных `src/master/` + `src/shell/` + `data/`. Изменения iter 81–95 (Voice Isolation, OCEAN compact, Tone Frames, OOC Protection, Format Lock, `<anchors>` XML, dead weight cleanup, KI#58 Anchors parts/ sync) теперь пропагированы в root fallbacks → GitHub Pages деплой. Validation: 96/96 canon sync, 64/64 tests, version sync ✓. All Known Issues closed.
 
-**iter 96+ roadmap:** Build regeneration (`pnpm run build`) to propagate parts/ + root fallback changes. V8/V9 — deferred (после обсуждения с автором).
+**iter 97+ roadmap:** технических багов нет. Только V8/V9 Decision items — deferred (после обсуждения с автором).
 
 **Принципы сохраняются:**
 - `viz > dry text` — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design.
 - Inline scripts forbidden (CSP compliance). Inline styles forbidden.
 - VS-EMBED animation classes — покрываются `vs-scroll-observer.js` selector или `scroll-enter` class. Audit: `scripts/audit_vs_embeds.py`.
+- **Version sync** — при bump обновлять ВСЕ 4 места (src/VERSION + package.json + data/character_schema.json вручную, parts/manifest.json регенерируется на build). KI#63 pitfall.
 - **Новые баги:** сначала документировать в `STATUS.md` как KI#N, потом фиксить.

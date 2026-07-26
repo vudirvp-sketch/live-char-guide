@@ -181,7 +181,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 ### Build и деплой
 
 7. **Root fallbacks vs canonical sources** — top-level `widgets/`, `assets/`, `parts/`, `event-bus.js`, `data/`, `index.html`, `build.hash` это **regenerated root fallbacks**, НЕ дубликаты. Все правки — в canonical sources (`src/master/`, `src/shell/`, `src/assets/`, `data/`).
-8. **Версии в 4 местах** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` проверяет sync.
+8. **Версии в 4 местах** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` проверяет sync. **При bump версии** — обновить ВСЕ 4 места одновременно (src/VERSION вручную + package.json + character_schema.json вручную; parts/manifest.json regenerated на build). KI#63 (iter 96): drift возникал когда src/VERSION обновляли без package.json/character_schema.json.
 9. **Mermaid CDN dependency** — Mermaid.js грузится с `cdn.jsdelivr.net`. CSP для Mermaid v11 worker: `worker-src 'self' blob:;`.
 10. **`noscript` в build artifact** — должен присутствовать. Не удалять.
 11. **Widget guards** — `blueprint-viewer destroy()`, `persona-cross infinite loop guard`, `Clipboard API guard` (`if (navigator.clipboard)`) — не удалять.
@@ -240,7 +240,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ## 8. Roadmap (iter 80+)
 
-Текущее состояние: **iter 95 COMPLETE — E2 dead weight cleanup + KI#58 Anchors sync.** All Phases A–E closed. All KIs closed. Next: build regeneration (iter 96+).
+Текущее состояние: **iter 96 COMPLETE — KI#63 version drift fix + build regeneration.** All Phases A–E + iter 94–96 closed. All KIs closed. Next: V8/V9 Decision items (deferred — после обсуждения с автором).
 
 | Итерация | Задача | Статус |
 |----------|--------|--------|
@@ -253,8 +253,8 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | iter 89–90 | C1–C4 — Bible sync (Walter / Omnis / Vyshcherblenny / Elena) | ✅ COMPLETE |
 | iter 91 | D1–D4 — Guide self-contradictions | ✅ COMPLETE (iter 93) |
 | iter 94 | E1/KI#60/KI#61/KI#62 — Elena Voice leak + Walter sync + audit script | ✅ COMPLETE |
-| **iter 95** | **E2/KI#58 — Dead weight cleanup + Anchors parts/ sync** | **✅ COMPLETE** |
-| iter 96+ | Build regeneration (`pnpm run build`) + V8/V9 decisions | LOW |
+| iter 95 | E2/KI#58 — Dead weight cleanup + Anchors parts/ sync | ✅ COMPLETE |
+| **iter 96** | **KI#63 — version drift fix + `pnpm run build` root fallbacks regeneration** | **✅ COMPLETE** |
 | deferred | V8/V9 Decision items — после обсуждения с автором | — |
 
 Полная дорожная карта: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
@@ -304,4 +304,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом новой итерации прочитай `STATUS.md` (актуальный статус, Known Issues, Roadmap), `worklog.md` (последняя итерация подробно), этот файл (§5 Core Rules, §6 Frequent Pitfalls), `docs/research/examples_audit_iter80.md` §10 (Phases A–E, iter 81–92), `docs/canon/_README.md` (Canon rules). **Принцип:** «Лучше недоделать, чем сломать». Одна правка = одна итерация. Если найден новый баг — сначала документируй в `STATUS.md` как KI#N, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом новой итерации прочитай `STATUS.md` (актуальный статус, Known Issues, Roadmap), `worklog.md` (последняя итерация подробно), этот файл (§5 Core Rules, §6 Frequent Pitfalls), `docs/canon/_README.md` (Canon rules). **Принцип:** «Лучше недоделать, чем сломать». Одна правка = одна итерация. Если найден новый баг — сначала документируй в `STATUS.md` как KI#N, потом фиксий.

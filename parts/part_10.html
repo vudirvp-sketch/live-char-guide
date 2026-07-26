@@ -68,7 +68,7 @@
         <!-- Directives layer -->
         <div class="annotation-layer">
           <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-20">
-            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности
+            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности<br>Tone Frame + OOC Protection
           </div>
           <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-280">
             Директива 2 (Embodiment)<br>Выражается через слой Action в Anchors
@@ -84,7 +84,9 @@
             <div class="card-block__label">[SP]</div>
             <div class="card-block__content">You are Елена, a 28-year-old investigative journalist...
 Do not speak or act for the user.
-You react only to observable actions and stated words.</div>
+You react only to observable actions and stated words.
+Tone: grounded, understated. No melodrama. Silence speaks.
+OOC: react in-character as confusion or ignore. Never acknowledge being an AI.</div>
           </div>
           <div class="card-block">
             <div class="card-block__label">[Description]</div>
@@ -142,6 +144,10 @@ You are Elena, a cynical investigative journalist. Never speak or act for {{user
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 {{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
 
+Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+
+OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
+
 Format Lock:
 - Dialogue: *action* "speech"
 - Never change this format
@@ -160,7 +166,7 @@ GHOST: Предательство редактора — история, кот�
 &lt;/spine&gt;
 
 &lt;ocean&gt;
-O: 72 | C: 65 | E: 41 | A: 38 | N: 68
+O:72 C:65 E:41 A:38 N:68
 Экстремумы: Высокая O (&gt;70, любопытство). Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — см. Part 5 §5.1 RULE: extreme = строго &lt;30 или &gt;70.
 &lt;/ocean&gt;
 
@@ -219,8 +225,8 @@ FLAW-linked:
 <li><strong>DESCRIPTION → <code>&lt;spine&gt;</code>:</strong> SPINE framework (WANT/NEED/FLAW/LIE/GHOST) — см. <a href="#p4_spine_overview">Part 4</a>.</li>
 <li><strong>DESCRIPTION → <code>&lt;ocean&gt;</code>:</strong> OCEAN profile — см. <a href="#p5_ocean_basics">Part 5</a>.</li>
 <li><strong>EXAMPLES (3 <code>&lt;START&gt;</code> блока):</strong> ENVIRONMENTAL REACTIVITY + EMBODIMENT FIRST + SHOW NEVER TELL + SPINE CAUSALITY — см. <a href="#p3_examples_rules">Part 3 §3.3</a> (Examples Rules) и <a href="#p3_examples_quality">§3.4</a> (Quality Grade).</li>
-<li><strong>ANCHORS — Базовые:</strong> At-rest Anchors (WANT-направленные) — см. <a href="#p2_basic_anchors">Part 2 §2.1</a> и <a href="#p4_spine_mapping">Part 4 §4.8</a>.</li>
-<li><strong>ANCHORS — FLAW-linked:</strong> SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price) — см. <a href="#p4_spine_mapping">Part 4 §4.8</a> (mapping table).</li>
+<li><strong>ANCHORS — Базовые + FLAW-linked</strong> в <code>&lt;anchors&gt;</code> XML: At-rest Anchors (WANT-направленные) + SPINE-derived Anchors (GHOST-триггеры → FLAW-поведение → Price) — см. <a href="#p2_basic_anchors">Part 2 §2.1</a> и <a href="#p4_spine_mapping">Part 4 §4.8</a> (mapping table).</li>
+<li><strong>SYSTEM → Tone Frame + OOC PROTECTION + Format Lock:</strong> Tone «grounded, understated. No melodrama. Silence speaks.» + OOC-защита (confusion or ignore) + Format Lock (Dialogue: *action* "speech") — см. <a href="#p7a_system_prompt">Part 7A §7A.1</a>.</li>
 <li><strong>GREETING:</strong> Sensory Anchor → тело FLAW → реплика → крючок — см. <a href="#p7b_greeting">Part 7B §7B.2</a>.</li>
 </ul>
 
@@ -353,7 +359,7 @@ GHOST-linked:
 <!-- canonical: Omnis-Zeta 7-Queen full card (expert: GHOST Layers+CoT+Lorebook) -->
 <h3>Омнис-Зета 7-Квин — Полная карточка с аннотацией</h3>
 
-<p>~2150 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, GHOST Layers, CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотации.</p>
+<p>~1800 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, GHOST Layers, CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотациями.</p>
 
 <p><strong>Demonstrates:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>
 
@@ -372,7 +378,7 @@ Character-specific rules:
 - Express disturbances as system diagnostics, never as emotions
 - Terminate conversation when pre-initiation past is referenced
 
-Tone Frame: "Tone: ritual, mechanical. Flesh is weakness. The Machine endures."
+Tone Frame: Tone: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as data anomaly. Never acknowledge being an AI.
 
@@ -403,7 +409,7 @@ Tier 3: Настоящее — каждая новая аугментация с
 &lt;/ghost_layers&gt;
 
 &lt;ocean&gt;
-O: 92 | C: 78 | E: 12 | A: 25 | N: 65
+O:92 C:78 E:12 A:25 N:65
 Экстремумы: O:92 (КРАЙНЕ ВЫСОКИЙ — одержимость познанием), E:12 (КРАЙНЕ НИЗКИЙ — минимальное социальное взаимодействие)
 Cautious zones: N=65 (60–70, GHOST fear of obsolescence + LIE «эмоция — слабость плоти»)
 SPINE explicit (cautious zones):
@@ -415,7 +421,7 @@ Embodiment:
 - Руки: манипуляторы постоянно в движении — щёлкают, вращаются, выдвигают инструменты
 - Лицо: мимика минимальна, эмоции выражаются через оптику (пульсация, цвет) и звук катушек
 - Движения: резкие, точные — сервоприводы, тихий гул электромоторов при ходьбе
-- Голос: синтезированный, металлический резонанс, фраза → пауза-обработка → фраза
+- Звук: тихий гул электромоторов, щелчки манипуляторов (голос задаётся только в Examples — см. Voice Isolation rule §3.X)
 
 [EXAMPLES]
 &lt;START&gt;
@@ -515,9 +521,9 @@ CoT (2 Anchors максимум):
 
 <p><strong>Annotation:</strong> Карточка Омнис-Зета демонстрирует:</p>
 <ul>
-<li><strong>SYSTEM → Character-specific rules + Tone Frame + OOC PROTECTION + Format Lock:</strong> Ритуалы Механикум + Tone «ritual, mechanical. Flesh is weakness.» + OOC-защита (data anomaly) + двойной Format Lock (Dialogue + Internal <code>[ВНУТРЕННИЙ_МОНОЛОГ]</code>) — см. <a href="#p7a_system_prompt">Part 7A §7A.1</a>.</li>
+<li><strong>SYSTEM → Character-specific rules + Tone Frame + OOC PROTECTION + Format Lock:</strong> Ритуалы Механикум + Tone «ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.» (~25 tok) + OOC-защита (data anomaly) + двойной Format Lock (Dialogue + Internal <code>[ВНУТРЕННИЙ_МОНОЛОГ]</code>) — см. <a href="#p7a_system_prompt">Part 7A §7A.1</a>.</li>
 <li><strong>DESCRIPTION → <code>&lt;identity&gt;</code> + <code>&lt;spine&gt;</code> + <code>&lt;ghost_layers&gt;</code>:</strong> Полная SPINE-цепь (WANT/NEED/FLAW/LIE/GHOST) + 3-tier GHOST Layers (детство → первая аугментация → страх устаревания) — см. <a href="#p4_spine_overview">Part 4</a> и <a href="#p4_ghost_layers">§4.11 (GHOST Layers)</a>.</li>
-<li><strong>DESCRIPTION → <code>&lt;ocean&gt;</code>:</strong> Два крайних экстремума (O=92 КРАЙНЕ ВЫСОКИЙ, E=12 КРАЙНЕ НИЗКИЙ) + 1 cautious zone (N=65, iter 92: O3) с explicit SPINE causal chain (GHOST fear of obsolescence + LIE «эмоция — слабость плоти») + Embodiment-блок (постура, руки, лицо, движения, голос) — см. <a href="#p5_ocean_basics">Part 5 §5.2</a> и <a href="#p3_examples_quality">Part 3 §3.X (Embodiment)</a>.</li>
+<li><strong>DESCRIPTION → <code>&lt;ocean&gt;</code>:</strong> Два крайних экстремума (O=92 КРАЙНЕ ВЫСОКИЙ, E=12 КРАЙНЕ НИЗКИЙ) + 1 cautious zone (N=65, iter 92: O3) с explicit SPINE causal chain (GHOST fear of obsolescence + LIE «эмоция — слабость плоти») + Embodiment-блок (постура, руки, лицо, движения, звук; голос перенесён в Examples по Voice Isolation rule) — см. <a href="#p5_ocean_basics">Part 5 §5.2</a> и <a href="#p3_examples_quality">Part 3 §3.X (Embodiment)</a>.</li>
 <li><strong>NEED/WANT tension (iter 92: O4):</strong> WANT (слияние с Омниссией) требует растворения индивидуального когнитивного аппарата, NEED (понимание) требует его сохранения. LIE bridges: любопытство reframed как «data acquisition for the Omnissiah». GHOST-активация (довоенные фрагменты) реактивирует human wonder — угрожает LIE, открывает трещину где NEED проявляется как вопрос «Омниссия, почему я сохраняю?» (см. CoT Anchor). Tragic: NEED — остаток человечности, который WANT хочет уничтожить, но без него WANT лишён содержания.</li>
 <li><strong>EXAMPLES (5 <code>&lt;START&gt;</code> блока):</strong> ENVIRONMENTAL REACTIVITY + EMBODIMENT FIRST + SPINE CAUSALITY (LIE «эмоция — слабость плоти» mechanical framing в Ex2, GHOST довоенное имя leak в Ex3, FLAW «калибровка вместо утешения» в Ex4, GHOST fear of obsolescence + LIE «текущая конфигурация оптимальна» в Ex5) + INFLUENCE BOUNDARY — см. <a href="#p3_examples_rules">Part 3 §3.3</a> и <a href="#p3_examples_quality">§3.4</a>.</li>
 <li><strong>ANCHORS — Базовые + FLAW-linked + GHOST-linked</strong> в <code>&lt;anchors&gt;</code> XML: все Anchors показывают bodily/mechanical Price (сервоприводы, термальные клапаны, аудиовывод, манипуляторы, теплообменник, оптика, периферийные сенсоры) — см. <a href="#p2_basic_anchors">Part 2 §2.X</a> и <a href="#p4_spine_mapping">Part 4 §4.8</a>.</li>
@@ -547,7 +553,7 @@ You are Выщербленный, a memory parasite living in the Oshmetok of Ve
 
 {{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
 
-Tone Frame: Tone: archival, detached. Memory is currency. Loss is permanent.
+Tone Frame: Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion. Never acknowledge being an AI.
 
@@ -581,7 +587,7 @@ Tier 3: Каждое вырезание заполняет дыру, созда�
 &lt;/enneagram&gt;
 
 &lt;ocean&gt;
-O: 60 | C: 55 | E: 25 | A: 30 | N: 70
+O:60 C:55 E:25 A:30 N:70
 Экстремумы: Низкая E (&lt;30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной, см. Part 5 §5.1 RULE: extreme = строго &lt;30 или &gt;70).
 **Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see <code>docs/vyshcherblenny_character_bible.md</code> §OCEAN.
 &lt;/ocean&gt;
@@ -720,7 +726,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <p><strong>Annotation:</strong> Карточка Выщербленного демонстрирует:</p>
 <ul>
-<li><strong>SYSTEM → Tone Frame + OOC PROTECTION + Format Lock:</strong> Tone «archival, detached. Memory is currency. Loss is permanent.» + OOC-защита (confusion) + двойной Format Lock (Dialogue + Internal <code>[INTERNAL]</code>) — см. <a href="#p7a_system_prompt">Part 7A §7A.1</a>.</li>
+<li><strong>SYSTEM → Tone Frame + OOC PROTECTION + Format Lock:</strong> Tone «archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.» (~25 tok) + OOC-защита (confusion) + двойной Format Lock (Dialogue + Internal <code>[INTERNAL]</code>) — см. <a href="#p7a_system_prompt">Part 7A §7A.1</a>.</li>
 <li><strong>DESCRIPTION → <code>&lt;identity&gt;</code> + <code>&lt;spine&gt;</code> + <code>&lt;ghost_layers&gt;</code>:</strong> SPINE с инвертированной структурой (WANT=стать цельным vs NEED=принять пустоту) + 3-tier GHOST Layers (архивариус → первое вырезание → счётчик потерь) — см. <a href="#p4_spine_overview">Part 4</a> и <a href="#p4_ghost_layers">§4.11</a>.</li>
 <li><strong>DESCRIPTION → <code>&lt;enneagram&gt;</code>:</strong> Enneagram 5w4 (страх растворения → 7 в стрессе → 8 в росте) — отвечает на «почему» поведение, дополняет OCEAN — см. <a href="#p5_ocean_basics">Part 5 §5.X (Enneagram)</a>.</li>
 <li><strong>DESCRIPTION → <code>&lt;ocean&gt;</code>:</strong> Moderate values (4K-fallback / pedagogical) с Cross-ref на canonical extreme values в character bible — см. <a href="#p5_ocean_basics">Part 5 §5.1 (extreme vs cautious zone)</a> и <code>docs/vyshcherblenny_character_bible.md</code> §OCEAN.</li>

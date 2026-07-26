@@ -16,11 +16,11 @@
 -->
 <div class="staircase">
 
-      <!-- Tier 0: No CoT — baseline -->
+      <!-- Tier 0: Embodiment-only baseline — Embodiment Protocol always acts; no separate CoT block -->
       <div class="stair-step stair-step--tier0 scroll-enter">
         <div class="stair-step__header">
           <span class="stair-step__tier">Tier 0</span>
-          <span class="stair-step__name">Без CoT</span>
+          <span class="stair-step__name">Только Embodiment</span>
           <span class="model-pill model-pill--12b">12B+ (все)</span>
           <span class="optional-label">Опционально: начните здесь</span>
         </div>
@@ -65,7 +65,10 @@
         Прогрессия Chain of Thought
       </div>
       <p class="vs-ki13-cot-text">
-        CoT <strong>не обязателен</strong> — Tier 0 работает для всех моделей.
+        CoT <strong>не обязателен</strong> — Tier 0 работает для всех моделей. На Tier 0 модель <strong>не «не думает»</strong> —
+        Embodiment Protocol (State → Body → Sensor → Speech, см. <a href="#p2_embodiment">Part 2: Embodiment Protocol</a>)
+        действует всегда как микро-цепочка рассуждений. CoT (Tier 1+) добавляет отдельный <code>[INTERNAL]</code>-блок
+        как явный внутренний монолог <strong>сверх</strong> Embodiment.
         Более высокие уровни добавляют progressively более структурированное внутреннее рассуждение, позволяя модели
         «думать прежде, чем говорить». Каждый формат показан выше в своей фактической нотации, поэтому этот элемент
         служит <strong>инструментом быстрого справочника</strong>, а не просто диаграммой.
@@ -133,7 +136,7 @@
 <!-- canonical: CoT Tiers (Tier 0-3) -->
 <h3>Tiers CoT</h3>
 
-<p>CoT имеет 4 уровня сложности. Tier 0 — базовый якорь без внутреннего процесса. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.</p>
+<p>CoT имеет 4 уровня сложности. <strong>Tier 0 — без отдельного CoT-блока:</strong> Embodiment Protocol (State → Body → Sensor → Speech) действует всегда как микро-цепочка рассуждений (см. <a href="#p2_embodiment">Part 2: Embodiment Protocol</a>) — это baseline, не «модель не думает». <strong>Tier 1+</strong> добавляет явный <code>[INTERNAL]</code>-блок как внутренний монолог сверх Embodiment. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.</p>
 
 <p>Формат каждого Tier показан выше в VS-EMBED E11 (staircase 4 ступени: Tier 0 → Tier 3, каждая со своим именем, model-pill и concrete-примером нотации). Таблица ниже — какие модели поддерживают каждый Tier и русскоязычный пример для справки (дополняет E11, не дублирует viz-нотацию).</p>
 
@@ -143,7 +146,7 @@
 <tr><th>Tier</th><th>Для моделей</th><th>Пример</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Tier 0</strong></td><td>12B+, базовый/стандартный</td><td>Стресс → Трёт шею</td></tr>
+<tr><td><strong>Tier 0</strong></td><td>12B+, только Embodiment</td><td>Стресс → Трёт шею (без <code>[INTERNAL]</code>-блока)</td></tr>
 <tr><td><strong>Tier 1</strong></td><td>32B, базовый уровень</td><td>[Тревога] → Перечитывает сообщение трижды</td></tr>
 <tr><td><strong>Tier 2</strong></td><td>32B+, рекомендован</td><td>[Напоминает предательство] → Закрывается</td></tr>
 <tr><td><strong>Tier 3</strong></td><td>Только API</td><td>&lt;processus_analysium&gt;...&lt;/processus_analysium&gt;</td></tr>

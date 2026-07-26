@@ -95,18 +95,18 @@
         <div class="block-content">
           Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
           <div class="desc-callout">
-            ↳ Anchors упомянуты здесь как ссылка — структурно вложены в Examples
+            ↳ Anchors упомянуты здесь как ссылка — структурно живут как отдельный блок в Examples-зоне
           </div>
         </div>
       </div>
 
       <div class="block-divider"></div>
 
-      <!-- Examples + Anchors Block — medium -->
+      <!-- Examples-зона: Examples + Anchors — два отдельных блока -->
       <div class="card-block card-block--examples scroll-enter scroll-enter--left">
         <div class="block-label">
           <span class="block-label__name">
-            Examples + Anchors
+            Examples
           </span>
           <div class="token-anno">
             <div class="token-anno__row">
@@ -125,15 +125,16 @@
         </div>
         <div class="block-content">
           Примеры диалогов, демонстрирующие голос персонажа. 2–5 примеров, каждый ~40–80 токенов.
-          <!-- Anchors sub-panel — nested, violet accent -->
+          <!-- Anchors sub-panel — отдельный структурный блок внутри Examples-зоны, violet accent -->
           <div class="anchors-subpanel">
             <div class="vs-ki13-anchor-header">
               <span class="vs-ki13-anchor-title">Anchors</span>
               <span class="badge badge--violet">T→A→P</span>
+              <span class="optional-badge">отдельный блок</span>
             </div>
             <div class="vs-ki13-anchor-desc">
               Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
-              Единственное место, где Anchors живут структурно.
+              Anchors — отдельный структурный блок в Examples-зоне, не часть диалоговых примеров. В большинстве фронтендов размещаются как <code>&lt;anchors&gt;</code> внутри Description.
             </div>
           </div>
         </div>
@@ -422,7 +423,7 @@
 
 <p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a></p>
 
-<p>Структура и содержимое блоков показаны выше в VS-EMBED E01 (Card Anatomy) — стек из 5 блоков с token-аннотациями (мин/стд/макс) и описаниями. Таблица ниже — структурные свойства, не видные в viz: влияние на модель и качественная доля бюджета.</p>
+<p>Структура и содержимое блоков показаны выше в VS-EMBED E01 (Card Anatomy) — стек из 5 блоков с token-аннотациями (мин/стд/макс) и описаниями. Anchors визуально вложены в Examples-зону, но структурно — отдельный блок (<code>&lt;anchors&gt;</code>-тег), не часть диалоговых примеров. Таблица ниже — структурные свойства, не видные в viz: влияние на модель и качественная доля бюджета.</p>
 
 <div class="table-wrap">
 <table>
@@ -433,6 +434,7 @@
 <tr><td><strong>System Prompt</strong></td><td>Высокое — задаёт рамки</td><td>Компактный</td></tr>
 <tr><td><strong>Description</strong></td><td>Среднее — контекст</td><td>Основной объём</td></tr>
 <tr><td><strong>Examples</strong></td><td>Ключевое — паттерны речи</td><td>Средний</td></tr>
+<tr><td><strong>Anchors</strong> (в Examples-зоне)</td><td>Ключевое — поведенческие триггеры</td><td>Средний (отдельный <code>&lt;anchors&gt;</code>-тег)</td></tr>
 <tr><td><strong>Greeting</strong></td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
 </tbody>
 </table>
@@ -469,9 +471,19 @@
 
 <ol>
 <li><strong>Anchor = Trigger → Action → Price</strong> — поведение задаётся Anchors, и у каждого Anchors обязательна Цена — физическая реакция в той же сцене. Без Цены Anchor = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></li>
-<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. Description = логика поведения, Examples = паттерны голоса → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
-<li><strong>Психология — только в Description</strong> — SPINE, OCEAN и другие психологические элементы размещаются исключительно в блоке Description, никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
+<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. <strong>Лингвистический голос</strong> (слова, синтаксис, лексика, ритм фразы) — только Examples; <strong>физическая характеристика голоса</strong> (тембр, хрип, механический гул) — допустима в Description как часть Embodiment → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
+<li><strong>Психология — в Description компактно, в тегах, не нарративом</strong> — SPINE, OCEAN, Enneagram размещаются в блоке Description как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>) с числовыми значениями и короткими пометками, не развёрнутым текстом. Никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
 </ol>
+
+<div class="callout rule">
+<p><strong>RULE:</strong> Anchors — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров. Anchors размещаются как самостоятельный <code>&lt;anchors&gt;</code>-тег (в Description для большинства фронтендов, где нет отдельного поля Anchors) или как отдельное поле (в фронтендах с поддержкой). Концептуально Anchors принадлежат Examples-зоне: их триггеры и паттерны влияют на генерацию наравне с диалоговыми примерами, но структурно они отделены от Examples — Anchors = behavioural patterns, Examples = voice patterns. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>, <a href="#p7a_assembly_pipeline">Part 7A: Assembly Pipeline</a></p>
+</div>
+
+<div class="callout ex">
+<p><strong>EXAMPLE — Верный vs неверный формат OCEAN в Description:</strong></p>
+<p>✓ <code>&lt;ocean&gt;O:72 C:65 E:41 A:38 N:68&lt;/ocean&gt;</code> — числовые значения, компактно, модель считывает как pattern. Экстремумы и cautious zone помечаются короткой пометкой после чисел.</p>
+<p>✗ <em>«Елена — любопытная и творческая журналистка, склонна к конфликту и сарказму, тревожная и реактивная…»</em> — нарративное описание черт. Модель хуже считывает нарратив как поведенческий pattern; длинный текст расходует токены Description без структурной ясности.</p>
+</div>
 
 <p><strong>Cross-ref:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>
 
@@ -520,7 +532,7 @@
 <tr><td>2</td><td><strong>Контекстное окно</strong></td><td>4K / 8K / 16K+</td><td>4K — Description ≤200 токенов, 2 Examples. 8K — Description ≤400, 3 Examples, базовый Lorebook. 16K+ — полная карточка, CoT, GHOST Layers. → <a href="#p7a_token_budget">Part 7A: Token Budget</a>.</td></tr>
 <tr><td>3</td><td><strong>Сложность персонажа</strong></td><td>Простая / Средняя / Экспертная</td><td>Простая — Уолтер Уайт (<a href="#p10_walter">§10.2</a>). Средняя — Елена (<a href="#p10_elena">§10.1</a>). Экспертная — Омнис-Зета (<a href="#p10_omnis">§10.3</a>), Выщербленный (<a href="#p10_vysherblenny">§10.4</a>).</td></tr>
 <tr><td>4</td><td><strong>GHOST один или Layers</strong></td><td>1 (single) / 3-tier (Layers)</td><td>1 — обычная карточка, GHOST = одно событие. 3-tier — временная хронология (детство → юность → настоящее), см. <a href="#p4_ghost_layers">Part 4: GHOST Layers</a>.</td></tr>
-<tr><td>5</td><td><strong>CoT нужен?</strong></td><td>Нет (Tier 0) / Да (Tier 1+)</td><td>Нет — персонаж без внутренних конфликтов в моменте. Да — нужен внутренний монолог для SPINE-триггеров. → <a href="#p6_cot_basics">Part 6: CoT</a>.</td></tr>
+<tr><td>5</td><td><strong>CoT нужен?</strong></td><td>Нет (Tier 0 — Embodiment only) / Да (Tier 1+)</td><td>Нет — Embodiment Protocol (State→Body→Sensor→Speech) достаточен как микро-цепочка рассуждений, отдельный <code>[INTERNAL]</code>-блок не нужен. Да — нужен явный внутренний монолог для SPINE-триггеров сверх Embodiment. → <a href="#p6_cot_basics">Part 6: CoT</a>.</td></tr>
 <tr><td>6</td><td><strong>Lorebook нужен?</strong></td><td>Нет / 1–3 записи / 5+ записей</td><td>Нет — все факты помещаются в Description. 1–3 — контекстные триггеры. 5+ — мир + GHOST-факты. → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>.</td></tr>
 </tbody>
 </table>
@@ -530,6 +542,6 @@
 <p><strong>RECOMMENDATION:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook». Это конфигурация Елены (~440 токенов). Не пытайтесь сразу строить экспертную карточку — это ведёт к перегрузке Description и Voice Leak.</p>
 </div>
 
-<p><strong>Cross-ref:</strong> TL;DR / Quick Start — в <code>docs/canon/part_00.md §0.2</code> (canon-only). Карта персонажей по сложности — в <code>docs/canon/appendix_character_map.md</code> (canon-only).</p>
+<p><strong>Cross-ref:</strong> Быстрый старт и 6 шагов сборки — <a href="#p1_prebuild_checklist">§1.8 Pre-build checklist</a>. Карта персонажей по сложности — <a href="#p10_elena">§10.1 Елена</a> (базовая), <a href="#p10_walter">§10.2 Уолтер</a> (базовая современная), <a href="#p10_omnis">§10.3 Омнис-Зета</a> (экспертная), <a href="#p10_vysherblenny">§10.4 Выщербленный</a> (экспертная).</p>
 
 </section>
