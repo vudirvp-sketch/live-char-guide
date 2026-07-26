@@ -682,9 +682,18 @@
       // Render Mermaid diagrams after content is loaded
       // FIX-26: Robust Mermaid rendering with re-initialization fallback
       // Use requestAnimationFrame for reliable DOM timing
+      // iter 100: Also save original diagram source to data-original for theme re-render
       if (typeof mermaid !== 'undefined') {
         requestAnimationFrame(async () => {
           try {
+            // Save original source text before mermaid.run() replaces it with SVG.
+            // This enables reRenderMermaid() to restore source on theme change.
+            document.querySelectorAll('.mermaid:not([data-original])').forEach(el => {
+              var src = el.textContent.trim();
+              if (src && !src.startsWith('<svg')) {
+                el.setAttribute('data-original', src);
+              }
+            });
             // Ensure mermaid is initialized (may not be if script loaded after DOM)
             if (typeof mermaid.initialize === 'function' && !mermaid._initialized) {
               mermaid.initialize({
@@ -1159,6 +1168,12 @@
         if (iconSun)  iconSun.hidden = true;
       }
       toggle.setAttribute('data-theme', theme);
+      // iter 100: Dynamic Mermaid theme re-render on toggle.
+      // reRenderMermaid() is defined in widgets/mermaid-init.js.
+      // Safe no-op if mermaid is unavailable or function not defined.
+      if (typeof window.reRenderMermaid === 'function') {
+        window.reRenderMermaid(theme);
+      }
     }
 
     // Backward-compatible: 'oled' stored value treated as default (no class)

@@ -100,9 +100,9 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**iter 99 ✅ COMPLETE — Theme chain simplification.** `body.theme-oled` class removed — redundant since `:root` already defines OLED true-black defaults. Theme toggle simplified: default (no class) = OLED/dark, `body.theme-light` = light. Only `theme-light` class is toggled. localStorage backward-compatible ('oled' value → no class). `-oled` token vars removed. VS/DESIGN-TOKENS `:root` synced to true-black. Known Issue: Mermaid diagrams don't dynamically re-render on theme switch (deferred).
+**iter 100 ✅ COMPLETE — Mermaid dynamic theme re-render.** `window.reRenderMermaid(theme)` added in mermaid-init.js — re-initializes mermaid with appropriate theme config and re-runs on all `.mermaid` diagrams. `applyTheme()` in lazy-loader.js calls `reRenderMermaid()` on toggle. Original diagram source saved to `data-original` before first render for safe re-render. Light theme CSS overrides for `.mermaid` containers added.
 
-**iter 100+ roadmap:** Mermaid dynamic theme re-render. V8/V9 Decision items — deferred.
+**iter 101+ roadmap:** V8/V9 Decision items — deferred.
 
 **Принципы сохраняются:**
 - `viz > dry text` — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design.

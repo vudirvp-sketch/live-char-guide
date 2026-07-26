@@ -1201,6 +1201,17 @@ body.theme-light .example-label.stub { color: #ca8a04; background: rgba(234, 179
   display: block;
 }
 
+/* iter 100: Light theme overrides for Mermaid containers */
+body.theme-light .mermaid {
+  border-color: var(--border-light, #e5e7eb);
+  background: #f8f9fb;
+}
+
+body.theme-light .concept-diagram {
+  border-color: var(--border-light, #e5e7eb);
+  background: #f8f9fb;
+}
+
 .concept-diagram {
   margin: 1.5em 0;
   padding: 1em;
