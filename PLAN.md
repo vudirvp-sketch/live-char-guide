@@ -100,9 +100,9 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**iter 82 ✅ COMPLETE — A2–A4 Walter SP + Description `<identity>` + LIE fix.** Walter SP приведён к canonical structure (Tone Frame ~25 tok + OOC + Format Lock). Description: prose → `<identity>` wrapper. LIE: clean quote. Closed: W1–W5, BW4, KI#56 (version drift).
+**iter 95 ✅ COMPLETE — E2/KI#58.** Dead weight cleanup: 5 unused characters removed from Bible (Geralt, Joker, Jesse, Edward, Elliot). Tyler Durden → Marginal. Lorebook Entry 2 (пожар) → ⚠️ NON-CANONICAL. KI#58: Omnis-Zeta + Vyshcherblenny Anchors synced in parts/ (→ `<anchors>` XML + bodily/mechanical Prices).
 
-**iter 83+ roadmap:** см. `STATUS.md` (Roadmap) и `docs/research/examples_audit_iter80.md` §10. Следующая задача: A5 — Omnis-Zeta Anchors (5 non-physical Prices → bodily/mechanical).
+**iter 96+ roadmap:** Build regeneration (`pnpm run build`) to propagate parts/ + root fallback changes. V8/V9 — deferred (после обсуждения с автором).
 
 **Принципы сохраняются:**
 - `viz > dry text` — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design.

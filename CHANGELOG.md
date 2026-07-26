@@ -4,6 +4,14 @@
 
 ## [9.2.6] - 2026-07-27
 
+### iter 95 — E2/KI#58 Dead weight cleanup + Anchors parts/ sync
+
+- **E2 — Dead weight cleanup:** 5 unused characters removed from `docs/character_bible.md` (Geralt §2, Joker §4, Jesse Pinkman §5, Edward Elric §6, Elliot Alderson §9) — all had 0 mentions in any guide Part. Список персонажей reduced from 11 → 6 entries. Tyler Durden status updated from ✅ Active → 🟡 Marginal (1 passing mention in Part 5). "Character Replacement Migration Notes" section removed (referenced obsolete characters). Bible version bumped to 9.2.6.
+- **E2 — Lorebook Entry 2 clarified:** «Пожар Елены» Lorebook entry explicitly marked ⚠️ NON-CANONICAL secondary GHOST in `docs/elena_character_bible.md`, `docs/canon/part_07b.md`, `src/master/part_07b.html`, `parts/part_07b.html`. Canonical Елена = 1 GHOST (предательство). «Пожар» only for secondary GHOST scenario.
+- **KI#58 — Omnis-Zeta Anchors parts/ sync:** `parts/part_10.html` Omnis-Zeta `[ANCHORS]` plain text + abstract Prices (теряет situational awareness, нарушает субординацию, отчуждает) → replaced with `<anchors>` XML + bodily/mechanical Prices (сервоприводы блокируются, манипуляторы выдвигаются, аудиовывод транслирует ноосферный белый шум, оптика мерцает жёлтым) from `src/master/part_10.html`. Annotation bullet updated to mention `<anchors>` XML + bodily/mechanical Prices.
+- **KI#58 — Vyshcherblenny Anchors parts/ sync:** `parts/part_10.html` Vyshcherblenny `[ANCHORS]` plain text → replaced with `<anchors>` XML + hyphen list format from `src/master/part_10.html`. Annotation bullet updated to add `<anchors>` XML label.
+- **Closed:** E2, KI#58. **All Known Issues now closed.**
+
 ### iter 94 — E1/KI#60/KI#61/KI#62 Voice leak + Walter sync + audit fix
 
 - **E1/KI#60 — Elena Voice leak fixed:** «саркастичная» removed from `<identity>` across all 3 layers (src/master/part_10.html, parts/part_10.html, docs/canon/part_10.md). Voice descriptors shown only through Examples (§3.1 Voice Isolation). §9.11 Quick Check Voice row updated from ✗ FAIL → ✓ PASS. Conclusion: «Елена проходит Quick Check». §7A.1 walkthrough text updated. Token Bloat ✅ example updated. 9 file changes total.

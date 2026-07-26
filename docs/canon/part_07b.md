@@ -127,9 +127,9 @@ migration_status: —
 | Probability | 90% |
 | Cooldown | 7 |
 
-**Пример 2: secondary GHOST (пожар)** — ILLUSTRATION (LOREBOOK, SECONDARY GHOST):
+**Пример 2: ⚠️ NON-CANONICAL — secondary GHOST (пожар)** — ILLUSTRATION (LOREBOOK, SECONDARY GHOST):
 
-> **Примечание:** используется только если в карточке выбран secondary GHOST-сценарий (см. `part_04.md` §4.2). Canonical Elena имеет ОДИН GHOST — предательство редактора.
+> **⚠️ NON-CANONICAL для Елены:** Этот пример показывает secondary GHOST-сценарий. Canonical Елена имеет ОДИН GHOST — предательство редактора (см. `docs/elena_character_bible.md` и `part_04.md` §4.2). «Пожар» используется только если в карточке автора выбран secondary GHOST-сценарий. Не включайте в production-карточку Елены без явного решения автора.
 
 | Поле | Значение |
 |------|----------|

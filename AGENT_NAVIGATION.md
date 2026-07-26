@@ -1,6 +1,6 @@
 # Live Character Guide — Agent Navigation
 
-> **Entry document.** Read this first. Текущая версия: **9.2.5**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`, Research — в `docs/research/`. Все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED, 96 секций, 96/96 canon→master sync PASS.
+> **Entry document.** Read this first. Текущая версия: **9.2.6**. Live-char-guide — инженерный пайплайн для RP-карточек персонажей (от SPINE до деплоя, для моделей 12B–32B+). Единый линейный гайд. Актуальный статус — в `STATUS.md`, история итераций — в `worklog.md`, Canon (источник правды) — в `docs/canon/`, Research — в `docs/research/`. Все 10 Parts + 4 Appendix + Part 0 ✅ MIGRATED, 96 секций, 96/96 canon→master sync PASS.
 
 ---
 
@@ -202,7 +202,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 20. **YAML front-matter** — все canon-файлы (кроме `_README.md`) используют YAML front-matter.
 21. **OCEAN labeling consistency** — extreme = строго `<30` или `>70`; cautious zone = `30–40` / `60–70`. При рассинхроне bible vs canon Part 10 — правится bible (principle: guide's role as example takes priority).
 22. **OCEAN format consistency** — канонический формат: compact `O:72 C:65 E:41 A:38 N:68` (§5.1 RULE). Pipes и commas запрещены в `<ocean>` тегах. Bible-формат (per-dimension с объяснениями) — допустим как documentation, не card content.
-23. **Anchors format convention** — `<anchors>` XML = canonical (src/master/). `[ANCHORS]` plain text в parts/ = KI#58 drift (build artifact). Все правки Anchors — в src/master/ в `<anchors>` XML.
+23. **Anchors format convention** — `<anchors>` XML = canonical format across src/master/ and parts/. KI#58 closed (iter 95): all 4 cards now use `<anchors>` XML in parts/. Все правки Anchors — в src/master/ в `<anchors>` XML.
 24. **CORE_DIRECTIVES shorthand convention** — `{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}` accepted as convention (D4, iter 93). Shorthand = navigational reference per «одно определение — одно место».
 
 ### Anchor navigation
@@ -240,7 +240,7 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ## 8. Roadmap (iter 80+)
 
-Текущее состояние: **iter 93 COMPLETE — D1/D2/D3/D4 Guide self-contradictions resolved.** Phase D closed. Next: E1/KI#60 (Elena Voice leak) + KI#61/KI#62 (parts/ sync + audit script) in iter 94.
+Текущее состояние: **iter 95 COMPLETE — E2 dead weight cleanup + KI#58 Anchors sync.** All Phases A–E closed. All KIs closed. Next: build regeneration (iter 96+).
 
 | Итерация | Задача | Статус |
 |----------|--------|--------|
@@ -252,8 +252,9 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 | iter 86–88 | B1–B4 — Examples enrichment (4 cards) | ✅ COMPLETE |
 | iter 89–90 | C1–C4 — Bible sync (Walter / Omnis / Vyshcherblenny / Elena) | ✅ COMPLETE |
 | iter 91 | D1–D4 — Guide self-contradictions | ✅ COMPLETE (iter 93) |
-| **iter 94** | **E1/KI#60 — Elena Voice leak; KI#61 — parts/ Walter sync; KI#62 — audit script update** | **NEXT** |
-| iter 95 | E2 — Dead weight cleanup (Bible unused chars, Lorebook Entry 2) | LOW |
+| iter 94 | E1/KI#60/KI#61/KI#62 — Elena Voice leak + Walter sync + audit script | ✅ COMPLETE |
+| **iter 95** | **E2/KI#58 — Dead weight cleanup + Anchors parts/ sync** | **✅ COMPLETE** |
+| iter 96+ | Build regeneration (`pnpm run build`) + V8/V9 decisions | LOW |
 | deferred | V8/V9 Decision items — после обсуждения с автором | — |
 
 Полная дорожная карта: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.

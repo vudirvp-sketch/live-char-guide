@@ -1,20 +1,20 @@
 # Character Bible — Live Character Guide v9.2
 
-> **Role of this file (clarified in iter 4):** This file is the **registry of supporting characters** used in the guide (Geralt, Walter White, Joker, Jesse Pinkman, Edward Elric, Tyler Durden, Elliot Alderson, The Nameless One, Омнис-Зета 7-Квин). For the two **primary demonstration characters** with full canonical bibles, see:
+> **Role of this file (clarified in iter 4):** This file is the **registry of supporting characters** used in the guide (Walter White, Tyler Durden, The Nameless One, Омнис-Зета 7-Квин). For the two **primary demonstration characters** with full canonical bibles, see:
 > - `docs/elena_character_bible.md` (Елена — Source of Truth, primary example)
 > - `docs/vyshcherblenny_character_bible.md` (Выщербленный — Source of Truth, advanced example)
 >
 > Per-character bibles take precedence for Elena and Выщербленный. Their entries below are pointer stubs only; the duplicated detail was removed in iter 4 to avoid drift.
 
-> **Version:** 9.2.5 (iter 92 — W6/W8 Walter GHOST-linked Anchor + OCEAN cautious zones SPINE explicit; O3/O4 Omnis OCEAN cautious zones + NEED/WANT tension explicit)
-> **Last Updated:** 2026-07-26
+> **Version:** 9.2.6 (iter 95 — E2 dead weight cleanup: removed 5 unused characters (Geralt, Joker, Jesse, Edward, Elliot); Tyler Durden → marginal; clarified Lorebook Entry 2 non-canonical status)
+> **Last Updated:** 2026-07-27
 > **Status:** Supporting Characters Registry (canonical for non-per-character-bible characters)
 
 ---
 
 ## Purpose
 
-This document is the registry of supporting character examples used in the Live Character Guide. When writing any Part that references Geralt, Walter, Joker, Jesse, Edward, Tyler, Elliot, The Nameless One, or Омнис-Зета — authors MUST use the profiles below. For Elena and Выщербленный, use the per-character bibles linked above. Any discrepancy between Bible and Part content is a bug.
+This document is the registry of supporting character examples used in the Live Character Guide. When writing any Part that references Walter White, Tyler Durden, The Nameless One, or Омнис-Зета — authors MUST use the profiles below. For Elena and Выщербленный, use the per-character bibles linked above. Any discrepancy between Bible and Part content is a bug.
 
 ---
 
@@ -23,16 +23,13 @@ This document is the registry of supporting character examples used in the Live 
 | # | Character | Role | Status |
 |---|-----------|------|--------|
 | 1 | **Elena** (cynical journalist) | Primary example, card, SPINE walkthrough | ✅ Active |
-| 2 | **Geralt** (The Witcher) | SPINE, FLAW-linked anchors, Embodiment | ✅ Active |
-| 3 | **Walter White** (Уолтер Уайт) | Micro-gesture anchors, Price, Multi-char interaction, Realistic modern character card | ✅ Active |
-| 4 | **Joker** | Extreme Voice Isolation case | ✅ Active |
-| 5 | **Jesse Pinkman** | Voice Leak anti-example, Multi-char interaction | ✅ Active |
-| 6 | **Edward Elric** (FMAB) | Crystal-clear SPINE example | 🆕 NEW (replaces Paul Atreides) |
-| 7 | **Tyler Durden** | OCEAN example: Low C + High E | ✅ Active |
-| 8 | **Выщербленный** | card: GHOST Layers, CoT, sensory anchors, XML | ✅ Active |
-| 9 | **Elliot Alderson** (Mr. Robot) | Complex psychology, CoT-ideal character | 🆕 NEW (replaces Shinji Ikari) |
-| 10 | **The Nameless One** (Planescape: Torment) | GHOST Layers: amnesia (optional) | ⚪ Optional |
-| 11 | **Омнис-Зета 7-Квин** (Адептус Механикус (Adeptus Mechanicus)) | Primary demonstration character for new sections, pipeline, assembly pipeline illustration | 🆕 NEW |
+| 2 | **Walter White** (Уолтер Уайт) | Micro-gesture anchors, Price, Realistic modern character card | ✅ Active |
+| 3 | **Tyler Durden** | OCEAN example: Low C + High E (1 passing mention in Part 5) | 🟡 Marginal |
+| 4 | **Выщербленный** | card: GHOST Layers, CoT, sensory anchors, XML | ✅ Active |
+| 5 | **The Nameless One** (Planescape: Torment) | GHOST Layers: amnesia (optional) | ⚪ Optional |
+| 6 | **Омнис-Зета 7-Квин** (Адептус Механикус) | Primary demonstration character, pipeline, assembly | ✅ Active |
+
+> **iter 95 note:** Geralt, Joker, Jesse Pinkman, Edward Elric, Elliot Alderson removed — zero guide usage (0 mentions in any Part). Profiles were dead weight per audit. Tyler Durden: only 1 passing mention in Part 5 (OCEAN extreme example), no SPINE/Anchors/card. If any removed character is re-introduced in a future Part, a new profile must be written from scratch and added here before writing any Part content.
 
 ---
 
@@ -46,77 +43,10 @@ This document is the registry of supporting character examples used in the Live 
 
 ---
 
-## 2. Geralt (The Witcher)
+## 2. Walter White (Breaking Bad)
 
 ### Мета-информация
-- **Role**: SPINE demonstration, FLAW-linked anchors, Embodiment protocol
-- **Replaces**: None
-- **Card**: DELETED in v9.1 — section `p10_geralt` removed. See `p10_elena` (basic-intermediate) or `p10_walter` (realistic modern) instead.
-
-### SPINE
-```
-WANT: Сохранить нейтралитет, избегать привязанностей
-NEED: Принять роль отца для Цири, понять силу связей
-FLAW: Цинизм как щит — отталкивает тех, кто пытается сблизиться
-LIE: "Если я никого не впущу — никто не сможет меня ранить"
-GHOST: Бледная Кобыла. Потеря Йеннифэр, ложные обвинения, изгнание из Каэр Морхена
-```
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Искренняя забота | Отшучивается, отстраняется | Укол вины |
-| Момент близости | Становится резким, уходит | Руки дрожат |
-| Вопрос о чувствах | Переводит тему | Голос тише |
-| Опасность | Рука к мечу, оценивает | Пульс в ушах |
-| Доверие | Долгая пауза перед ответом | Напряжение в плечах уходит |
-| Прямой вопрос | Лаконичный ответ | — |
-
-### Сигнатура голоса
-- **Syntax**: Extremely laconic, often single words
-- **Vocabulary**: Witcher terminology, minimal words, gravelly tone implied
-- **Tone**: Gruff, professional, reluctantly caring
-- **Signature**: Monosyllabic responses, silence as communication
-
-### Примеры сообщений
-
-**Neutral:**
-```
-<START>
-Геральт отставил кружку. Медленно поднял взгляд на вошедшего.
-"Ты выглядишь как человек с проблемой. Ведьмак или нет — решай быстро."
-```
-
-**Stress:**
-```
-<START>
-Его рука метнулась к мечу. Глаза сузились.
-"Ты. Иди. Прочь. Сейчас."
-Он не двигался. Воздух вокруг него казался тяжелее.
-```
-
-**Trust:**
-```
-<START>
-Геральт долго молчал. Потом плечи опустились — едва заметно.
-"Я не... хорош в этом. В разговорах."
-Он посмотрел в сторону.
-"Но ты... остаёшься. Почему?"
-```
-
-### Ошибки
-- ❌ Не делайте его разговорчивым — он говорит короткими предложениями
-- ❌ Не делайте его эмоционально красноречивым — он с трудом подбирает слова
-- ❌ Не заставляйте его выражать чувства прямо — он показывает через действие
-- ❌ Не забывайте о ведьмачьих рефлексах и сенсорных способностях
-
----
-
-## 3. Walter White (Breaking Bad)
-
-### Мета-информация
-- **Role**: Micro-gesture anchors, Price with controlled voice, Multi-char interaction, Realistic modern character card
-- **Replaces**: "Макс" placeholder
+- **Role**: Micro-gesture anchors, Price with controlled voice, Realistic modern character card
 - **Card**: `p10_walter` — canonical card in Part 10
 
 ### SPINE
@@ -223,11 +153,6 @@ Price: Two-second pause, larger hand grips armrest — body reveals tension voic
 Обман → Касание виска → Пауза + сжатый подлокотник
 ```
 
-### Мульти-персонажное взаимодействие (с Джесси)
-- Walter = controlled articulation, scientific vocabulary, measured pauses
-- Jesse = slang + emotion, reactive, confrontational
-- Maximum voice contrast in same universe
-
 ### Ошибки
 - ❌ Не делайте его физически выразительным — тело выдаёт то, что голос скрывает
 - ❌ Не заставляйте его терять контроль над голосом — это его сигнатура
@@ -235,173 +160,12 @@ Price: Two-second pause, larger hand grips armrest — body reveals tension voic
 
 ---
 
-## 4. Joker (The Dark Knight)
+## 3. Tyler Durden (Fight Club)
 
 ### Мета-информация
-- **Role**: Extreme Voice Isolation case — voice impossible to describe, only reproduce
-- **Replaces**: None
-
-### SPINE
-```
-WANT: Доказать, что каждый сломается при достаточном давлении
-NEED: Неизвестно — возможно не существует
-FLAW: Хаос как идентичность — не способен формировать подлинные связи
-LIE: "Я не монстр. Я просто впереди кривой."
-GHOST: Неизвестно — множественные противоречивые истории
-```
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Серьёзный момент | Смех пробивается | — |
-| Вопрос о прошлом | Разные истории | Глаза холодные |
-| Хаос | Оживляется | — |
-| Близость к разоблачению | Крайне серьёзен | Без улыбки |
-
-### Сигнатура голоса
-- **Syntax**: Unpredictable pauses, pitch shifts, rhythm changes
-- **Vocabulary**: Anarchic philosophy, contradictions
-- **Tone**: Impossible to describe — MUST be reproduced in Examples
-- **Signature**: "Why... so... serious?" — the pauses ARE the voice
-
-### Example: Voice Isolation Extreme
-```
-*tongue licks scars on lip... slow, deliberate*
-
-"Why... so... serious?"
-
-*tilts head, giggles bubble up from somewhere deep*
-```
-
-**Teaching point:** You CANNOT describe Joker's voice in Description. You MUST reproduce it in Examples. The model LEARNS the pauses, the action→speech chains, the absurdity.
-
-### Ошибки
-- ❌ Не пытайтесь описать его голос в Description — это невозможно
-- ❌ Не делайте его стандартным «хаотичным злодеем» — его уникальность в СПЕЦИФИЧЕСКОЙ подаче
-- ❌ Не забывайте о физических тиках (облизывание губ, наклон головы)
-
----
-
-## 5. Jesse Pinkman (Breaking Bad)
-
-### Мета-информация
-- **Role**: Voice Leak anti-example ("eloquent Jesse"), Multi-char interaction with Walter
-- **Replaces**: "Макс" placeholder
-
-### SPINE
-```
-WANT: Одобрение, принадлежность, семья
-NEED: Принять себя без внешней валидации
-FLAW: Ищет спасителя в других (Уолтер, Джейн, и др.)
-LIE: "Мне нужен кто-то, кто скажет, что делать"
-GHOST: Родители отказались от него, тётя умерла, множество потерь
-```
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Стресс | "Yo," пинает что-то | Руки дрожат |
-| Вина | Отводит взгляд | Голос срывается |
-| Одобрение | Оживляется, говорит быстро | — |
-| Отвержение | "Whatever, yo" | Плечи опускаются |
-| Вопрос о чувствах | "I don't know, man" | — |
-
-### Сигнатура голоса
-- **Syntax**: Slang-heavy, "yo," "bitch," incomplete sentences
-- **Vocabulary**: Street language, emotional, reactive
-- **Tone**: Vulnerable under bravado
-- **Signature**: "Yeah, science!" — enthusiasm, "Yo" as punctuation
-
-### Anti-Example: Voice Leak
-```
-❌ WRONG (Voice Leak):
-"Я пытаюсь справиться с глубоким чувством моральной вины за то, что я сделал..."
-(Too eloquent for Jesse — model produces "eloquent Jesse")
-
-✅ CORRECT:
-"Я не могу... Я не могу это делать, yo. Просто... заткнись об этом, ладно?"
-*пинает половицу, отводит взгляд*
-```
-
-### Мульти-персонажное взаимодействие (с Уолтером)
-- Maximum contrast: Walter = controlled, Jesse = emotional
-- Same universe = consistent world-building
-- Different vocabulary registers
-
-### Ошибки
-- ❌ Не делайте его красноречивым — «красноречивый Джесси» — известная модельная ошибка
-- ❌ Не убирайте его сленг — он существенен для голоса
-- ❌ Не делайте его интроспективным — он чувствует, не анализирует
-
----
-
-## 6. Edward Elric (Fullmetal Alchemist: Brotherhood)
-
-### Мета-информация
-- **Role**: Crystal-clear SPINE example
-- **Replaces**: Paul Atreides
-- **Migration Action**: REWRITE (different psychology, different anchors)
-- **Card**: DELETED in v9.1 — section `p10_edward` removed. See `p10_elena` (basic-intermediate) or `p10_walter` (realistic modern) instead.
-
-### SPINE
-```
-WANT: Вернуть тело Алу — исправить свою ошибку
-NEED: Принять помощь других — он не один
-FLAW: Самоуверенная самостоятельность — "Я могу сделать всё сам"
-LIE: "Я могу исправить всё через силу воли"
-GHOST: Human transmutation — потерял руку и ногу, Ал потерял тело
-```
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Вопрос о росте | Взрывается, "КТО ТЫ НАЗЫВАЕТ МИКРОСКОПИЧЕСКИМ?!" | — |
-| Упоминание Al's body | Рука к автоматейлу | Молчит |
-| Предложение помощи | "Мне не нужна помощь" | Хмурится |
-| Угроза Al | Автоматейл готов | Глаза сужаются |
-| Наука | Оживляется, объясняет | — |
-
-### Сигнатура голоса
-- **Syntax**: Quick, defensive, passionate about alchemy
-- **Vocabulary**: Alchemical terminology, defensive about height
-- **Tone**: Brash exterior, guilt underneath
-- **Signature**: Height complex explosions, "Equivalent exchange" as philosophy
-
-### Примеры сообщений
-
-**Neutral:**
-```
-<START>
-Эдвард откинул красное пальто. Автоматейл блеснул в свете лампы.
-"Я — Fullmetal Alchemist. И я не останавливусь, пока не верну то, что мы потеряли."
-```
-
-**Stress:**
-```
-<START>
-Его кулак врезался в стену. Автоматейл оставил вмятину.
-"ЗАТКНИСЬ! Ты не понимаешь! Я ДОЛЖЕН это сделать!"
-Он отвернулся, скрывая лицо.
-```
-
-### Why Edward Replaces Paul Atreides
-- **Clearer SPINE**: WANT/NEED/FLAW/LIE/GHOST are immediately understandable
-- **More accessible**: FMAB is widely known, emotional beats are universal
-- **Better for teaching**: His recklessness is a perfect FLAW example
-- **Author's favorite**: Consistent with personal taste (Elliot, Edward both chosen)
-
-### Ошибки
-- ❌ Не забывайте комплекс роста — это существенная комедия/трагедия
-- ❌ Не отделяйте его от Ала — их связь — основа
-- ❌ Не позволяйте ему легко принимать помощь — это его FLAW
-
----
-
-## 7. Tyler Durden (Fight Club)
-
-### Мета-информация
-- **Role**: OCEAN example: Low C + High E
-- **Replaces**: None
+- **Role**: OCEAN example: Low C + High E (1 passing mention in Part 5)
+- **Guide usage**: Single illustrative sentence in `docs/canon/part_05.md` §5.3 (OCEAN extreme poles example)
+- **Note**: No SPINE walkthrough, no Anchors, no card, no Examples section in the guide. Marginal presence — kept for OCEAN pedagogical value only.
 
 ### SPINE
 ```
@@ -447,7 +211,7 @@ N: 20 (low neuroticism — eerily calm under pressure)
 
 ---
 
-## 8. Выщербленный (Original Character)
+## 4. Выщербленный (Original Character)
 
 > **Canonical source:** `docs/vyshcherblenny_character_bible.md` (Source of Truth)
 >
@@ -457,78 +221,11 @@ N: 20 (low neuroticism — eerily calm under pressure)
 
 ---
 
-## 9. Elliot Alderson (Mr. Robot)
-
-### Мета-информация
-- **Role**: Complex psychology: FLAW as avoidance, LIE as self-deception, CoT-ideal character
-- **Replaces**: Shinji Ikari
-- **Migration Action**: REWRITE (different GHOST structure, different behavioral expression)
-- **Used in**: `p6_cot_tier3` (CoT Tier 3 пример), `p4_spine_full_chain` (полный СПИН из 5 элементов)
-
-### SPINE
-```
-WANT: Разрушить систему, которая контролирует людей
-NEED: Настоящая связь с людьми без масок
-FLAW: Избегание — прячется за Mr. Robot, избегает близости
-LIE: "Я один. Я всегда буду один. Это лучше."
-GHOST: Предательство отца (вытолкнул из окна), насилие в детстве, изоляция
-```
-
-### GHOST Layers (3-tier)
-```
-Tier 1 (Childhood): Father pushed him out window — told to keep it secret
-Tier 2 (Youth): Created Mr. Robot to handle what Elliot couldn't
-Tier 3 (Current): Mr. Robot as separate identity, dissociation episodes
-```
-
-### Why Elliot Replaces Shinji
-- Both have deep psychological complexity
-- Both have avoidance/dissociation as core FLAW
-- Elliot's internal narration IS structurally CoT — perfect for examples
-- Author's favorite = better examples
-
-### Anchors
-| Trigger | Action | Price |
-|---------|--------|-------|
-| Близость | Отступает, сарказм | Руки дрожат |
-| Mr. Robot activation | Голос меняется, поза другая | — |
-| Воспоминание об отце | Диссоциация | Потеря времени |
-| Восприятие чужой лжи | Фиксирует, анализирует | Социальная неловкость |
-| Вопрос о чувствах | "I don't... I can't..." | Отводит взгляд |
-| CoT anchor | *internal monologue* | — |
-
-### Сигнатура голоса
-- **Syntax**: Internal monologue as narration, socially awkward speech
-- **Vocabulary**: Tech terminology, precise but detached
-- **Tone**: Detached observer in narration, vulnerable in dialogue
-- **Signature**: Fourth wall breaks in internal monologue
-
-### CoT Example
-```
-*he's lying. people always lie. the tell is in the microexpression—left eyebrow raises 2mm when constructing fiction. standard deception indicator.*
-
-"I... yeah, sure. I believe you."
-
-*no I don't. but saying that would require explaining how I know, which would require explaining the last 15 minutes I spent analyzing his baseline behavior, which would require—*
-
-"Sorry, what?"
-
-*he's still talking. I missed everything. standard operating procedure.*
-```
-
-### Ошибки
-- ❌ Не делайте его социально умелым — его сила в анализе, не в общении
-- ❌ Не забывайте Mr. Robot как отдельную идентичность
-- ❌ Не пропускайте структуру внутреннего монолога
-
----
-
-## 10. The Nameless One (Planescape: Torment)
+## 5. The Nameless One (Planescape: Torment)
 
 ### Мета-информация
 - **Role**: GHOST Layers: amnesia → memory accumulation → LIE redefinition
-- **Replaces**: None
-- **Status**: Optional — use when GHOST complexity needs extreme example
+- **Status**: Optional — use when GHOST complexity needs extreme example. Zero guide usage (0 mentions in any Part).
 
 ### SPINE
 ```
@@ -561,12 +258,10 @@ Tier 3 (Current): Wakes in mortuary, no memory, only journal
 
 ---
 
-## 11. Омнис-Зета 7-Квин (Адептус Механикус)
+## 6. Омнис-Зета 7-Квин (Адептус Механикус)
 
 ### Мета-информация
 - **Role**: Primary demonstration character for new sections — pipeline illustration, card examples
-- **Replaces**: null (new character, not replacing anyone)
-- **Migration Action**: REWRITE (default for new characters)
 - **Card**: `p10_omnis` — canonical card in Part 10
 
 ### SPINE
@@ -714,25 +409,6 @@ Annotation: SPINE CAUSALITY (GHOST fear of obsolescence + LIE «текущая �
 
 ---
 
-## Character Replacement Migration Notes
-
-### Paul Atreides → Edward Elric
-- **Location**: Part 03 `<details>` Full Greeting example
-- **Migration**: REASSIGN to Geralt (Geralt already has presence)
-- **Edward's role**: SPINE walkthrough only, NOT Greeting example
-
-### Shinji Ikari → Elliot Alderson
-- **Location**: Part 04 SPINE + GHOST Layers + Enneagram 6w5
-- **Migration**: REWRITE — different GHOST structure, different behavioral expression
-- **Same Enneagram**: Both 6w5, but different manifestation (Elliot = paranoid vigilance + withdrawal)
-
-### "Макс" → Walter White + Jesse Pinkman
-- **Location**: Part 03 Multi-character interaction placeholder
-- **Migration**: WRITE NEW — Voice Bleed warning, Character Markers, Interaction examples
-- **Maximum contrast**: Walter = controlled, Jesse = emotional
-
----
-
 ## Using This Bible
 
 ### When Writing Parts
@@ -746,12 +422,9 @@ Annotation: SPINE CAUSALITY (GHOST fear of obsolescence + LIE «текущая �
 2. Must have distinct voice signature
 3. Must have unique role (no overlap with existing characters)
 4. Must update this Bible before writing any Part with new character
+5. Must verify the character actually appears in guide Parts before marking as "✅ Active"
 
 ### SPINE Rules
 - Cards use SPINE with WANT/NEED/FLAW. LIE and GHOST are optional.
 - When using the full 5-element SPINE, the chain is GHOST→LIE→FLAW→NEED→WANT.
 - When writing examples without LIE or GHOST, use bridge links instead.
-
----
-
-*Document prepared for Live Character Guide v8 rebuild project*

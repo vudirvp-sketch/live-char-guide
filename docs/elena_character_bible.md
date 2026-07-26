@@ -3,8 +3,8 @@
 > Any agent modifying Елена's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.2.5 (iter 92 — version bump only; Elena content unchanged since iter 91)
-**Last Updated:** 2026-07-26 (iter 92)
+**Version:** 9.2.6 (iter 95 — Lorebook «пожар» entry clarified as non-canonical secondary GHOST)
+**Last Updated:** 2026-07-27 (iter 95)
 
 ---
 
@@ -127,8 +127,8 @@ FLAW-linked:
 - External reaction: отводит взгляд, уголок рта дёргается → «О, чувак, какие чувства?» → сарказм как стена
 
 ## Lorebook Entries
-- Key: пожар, огонь, горел, сгорел → Content: Елена помнит запах горящего дерева. В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу.
-- Key: предательство, редактор, украдена → Content: История о коррупции была украдена редактором и опубликована под чужим именем.
+- **Canonical:** Key: предательство, редактор, украдена → Content: История о коррупции была украдена редактором и опубликована под чужим именем.
+- **⚠️ NON-CANONICAL (secondary GHOST):** Key: пожар, огонь, горел, сгорел → Content: Елена помнит запах горящего дерева. В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу. — Используется ТОЛЬКО при выборе secondary GHOST-сценария. Canonical Елена имеет ОДИН GHOST — предательство редактора (см. `docs/canon/part_04.md` §4.2 и `docs/canon/part_07b.md` §7B.3 Entry 2).
 - (Full Lorebook example in Part 7B, section p7b_lorebook_basics)
 
 ## Anti-Pattern Demonstrations
