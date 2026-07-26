@@ -46,18 +46,18 @@
   --radius-md: 0.5em;
   --radius-lg: 1em;
 
-  /* Base theme colors */
-  --bg: #121212;
-  --bg-surface: #1a1a1a;
-  --bg-elevated: #222222;
+  /* Base theme colors (OLED default — light theme overrides these) */
+  --bg: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-elevated: #111111;
   --text: #E8E8E8;
   --text-muted: #B0B0B0;
   --accent: #38bdf8;
-  --accent-soft: rgba(56, 189, 248, 0.12);
-  --border: #1f232b;
-  --code-bg: #1a1a1a;
-  --table-header: #1e1e1e;
-  --table-row-alt: #161616;
+  --accent-soft: rgba(56, 189, 248, 0.15);
+  --border: #1a1a1a;
+  --code-bg: #0a0a0a;
+  --table-header: #0a0a0a;
+  --table-row-alt: #050505;
   --warning-bg: rgba(234, 179, 8, 0.08);
   --warning-border: #eab308;
   --tip-bg: rgba(34, 197, 94, 0.08);
@@ -206,10 +206,10 @@
 
 /* === АЛИАСЫ СОВМЕСТИМОСТИ === */
 /* Маппинг VS-токенов на shell-токены для элементов,
-   которые нужно работать в обеих темах (dark/light/OLED).
+   которые нужно работать в обеих темах (OLED/light).
    
    Shell-переменные (существующие):
-     --bg (#121212 dark / #fafafa light / #000000 oled)
+     --bg (#000000 OLED default / #fafafa light)
      --bg-surface (--bg-surface-*)
      --bg-elevated (--bg-elevated-*)
      --text (--text-*)
@@ -217,13 +217,14 @@
      --accent (--accent-*)
      --border (--border-*)
    
-   VS-переменные (новые, только dark):
+   VS-переменные (переопределены в body.theme-light/oled):
      --bg-deep, --bg-panel, --bg-raised
      --text-primary, --text-secondary, --text-muted
      --accent-cyan, --accent-violet, --accent-amber
    
-   РЕШЕНИЕ: VS-элементы в integrated версии будут использовать
-   shell-токены через алиасы. Это обеспечивает работу в 3 темах.
+   РЕШЕНИЕ: VS-элементы в integrated версии используют
+   shell-токены через алиасы + raw VS tokens overridden per-theme.
+   Это обеспечивает работу в 2 темах (OLED default + light).
    Оригинальные VS-токены сохраняются для обратной совместимости
    standalone-прототипов.
 */
@@ -239,7 +240,7 @@
   --vs-border:     var(--border);
 }
 
-/* Dark theme: VS-элементы используют свои собственные тёмные цвета */
+/* OLED theme (default): VS-элементы используют тёмные цвета */
 body:not(.theme-light) {
   --vs-bg:         var(--bg-deep);
   --vs-bg-surface: var(--bg-panel);
@@ -259,11 +260,83 @@ body.theme-light {
   --vs-text-muted: #5c6370;
   --vs-accent:     #0284c7;
   --vs-border:     #d8dce4;
+
+  /* VS raw token overrides for light theme */
+  --bg-deep:       #f8f9fb;
+  --bg-panel:      #ffffff;
+  --bg-raised:     #f0f2f5;
+  --border-active: #c4cad4;
+  --text-primary:  #1a1d24;
+  --text-secondary:#5c6370;
+
+  /* Accent overrides for light backgrounds */
   --accent-cyan:   #0284c7;
   --accent-violet: #7c3aed;
   --accent-amber:  #d97706;
   --danger:        #dc2626;
   --success:       #16a34a;
+
+  /* Panel shadow override — lighter for light bg */
+  --panel-shadow:  0 4px 16px rgba(0, 0, 0, 0.10);
+
+  /* Tint overrides for light backgrounds (slightly more opaque) */
+  --cyan-3:   rgba(2,132,199,0.04);
+  --cyan-5:   rgba(2,132,199,0.06);
+  --cyan-6:   rgba(2,132,199,0.07);
+  --cyan-8:   rgba(2,132,199,0.09);
+  --cyan-10:  rgba(2,132,199,0.11);
+  --cyan-12:  rgba(2,132,199,0.13);
+  --cyan-15:  rgba(2,132,199,0.16);
+  --cyan-20:  rgba(2,132,199,0.21);
+  --cyan-25:  rgba(2,132,199,0.26);
+  --cyan-30:  rgba(2,132,199,0.31);
+  --cyan-40:  rgba(2,132,199,0.41);
+  --cyan-50:  rgba(2,132,199,0.51);
+  --cyan-60:  rgba(2,132,199,0.61);
+  --cyan-70:  rgba(2,132,199,0.71);
+  --violet-4:  rgba(124,58,237,0.05);
+  --violet-6:  rgba(124,58,237,0.07);
+  --violet-8:  rgba(124,58,237,0.09);
+  --violet-10: rgba(124,58,237,0.11);
+  --violet-12: rgba(124,58,237,0.13);
+  --violet-15: rgba(124,58,237,0.16);
+  --violet-20: rgba(124,58,237,0.21);
+  --violet-25: rgba(124,58,237,0.26);
+  --violet-30: rgba(124,58,237,0.31);
+  --violet-35: rgba(124,58,237,0.36);
+  --violet-50: rgba(124,58,237,0.51);
+  --violet-55: rgba(124,58,237,0.56);
+  --violet-65: rgba(124,58,237,0.66);
+  --violet-70: rgba(124,58,237,0.71);
+  --violet-85: rgba(124,58,237,0.86);
+  --amber-4:   rgba(217,119,6,0.05);
+  --amber-6:   rgba(217,119,6,0.07);
+  --amber-10:  rgba(217,119,6,0.11);
+  --amber-25:  rgba(217,119,6,0.26);
+  --amber-30:  rgba(217,119,6,0.31);
+  --amber-50:  rgba(217,119,6,0.51);
+  --danger-4:  rgba(220,38,38,0.05);
+  --danger-6:  rgba(220,38,38,0.07);
+  --danger-15: rgba(220,38,38,0.16);
+  --danger-25: rgba(220,38,38,0.26);
+  --danger-30: rgba(220,38,38,0.31);
+  --danger-40: rgba(220,38,38,0.41);
+  --danger-50: rgba(220,38,38,0.51);
+  --success-15: rgba(22,163,74,0.16);
+  --success-25: rgba(22,163,74,0.26);
+  --border-20: rgba(200,202,212,0.20);
+  --border-40: rgba(200,202,212,0.40);
+  --border-50: rgba(200,202,212,0.50);
+  --muted-15:  rgba(92,99,112,0.15);
+  --muted-20:  rgba(92,99,112,0.20);
+  --muted-25:  rgba(92,99,112,0.25);
+  --muted-30:  rgba(92,99,112,0.30);
+
+  /* Glow overrides for light theme */
+  --glow-cyan:   0 0 12px rgba(2,132,199,0.25);
+  --glow-violet: 0 0 12px rgba(124,58,237,0.25);
+  --glow-danger: 0 0 10px rgba(220,38,38,0.30);
+  --glow-amber:  0 0 10px rgba(217,119,6,0.25);
 }
 
 /* OLED theme: максимальная темнота */
@@ -272,6 +345,12 @@ body.theme-oled {
   --vs-bg-surface: #060709;
   --vs-bg-elevated:#0c0e12;
   --vs-border:     #141820;
+
+  /* VS raw token overrides for OLED — true black */
+  --bg-deep:       #000000;
+  --bg-panel:      #060709;
+  --bg-raised:     #0c0e12;
+  --border-active: #1a1e28;
 }
 
 
@@ -309,6 +388,7 @@ body.theme-light {
   --table-header: #e5e7eb;
   --table-row-alt: #f9fafb;
   --accent-soft: rgba(2, 132, 199, 0.08);
+  --panel-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
   color-scheme: light;
 }
 
@@ -455,6 +535,67 @@ body.theme-light .callout.rec { background: rgba(245, 158, 11, 0.05); }
 body.theme-light .callout.rec strong { color: #d97706; }
 body.theme-light .callout.ex { background: rgba(6, 182, 212, 0.05); }
 body.theme-light .callout.ex strong { color: #0891b2; }
+
+/* === COMPREHENSIVE LIGHT THEME HARD-CODED COLOR FIXES === */
+
+/* Code text — bright blue invisible on light bg */
+body.theme-light code { color: #1d4ed8; border-color: var(--border-light); background: #f3f4f6; }
+
+/* Tag — pastel red invisible */
+body.theme-light .tag.core { color: #dc2626; background: rgba(220, 38, 38, 0.10); border-color: rgba(220, 38, 38, 0.30); }
+
+/* FAB button shadow — too heavy for light */
+body.theme-light .fab-btn { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10); }
+body.theme-light .fab-btn:hover { background: rgba(2, 132, 199, 0.08); }
+
+/* OCEAN legend — pastel colors invisible */
+body.theme-light .ocean-legend-low { color: #dc2626; border-color: rgba(220, 38, 38, 0.30); background: rgba(220, 38, 38, 0.08); }
+body.theme-light .ocean-legend-high { color: #16a34a; border-color: rgba(22, 163, 74, 0.30); background: rgba(22, 163, 74, 0.08); }
+
+/* OCEAN SVG fills — pastels invisible on light */
+body.theme-light .ocean-vertex-medium { fill: #6b7280; }
+body.theme-light .ocean-label-low { fill: #dc2626; }
+body.theme-light .ocean-label-high { fill: #16a34a; }
+
+/* OCEAN tags */
+body.theme-light .ocean-tag-high { color: #dc2626; background: rgba(220, 38, 38, 0.10); border-color: rgba(220, 38, 38, 0.30); }
+body.theme-light .ocean-tag-low { color: #0284c7; background: rgba(2, 132, 199, 0.10); border-color: rgba(2, 132, 199, 0.30); }
+body.theme-light .ocean-tag-moderate { color: #6b7280; background: rgba(107, 114, 128, 0.10); border-color: rgba(107, 114, 128, 0.30); }
+
+/* MBTI spine labels — pastel invisible */
+body.theme-light .mbti-spine-field-label.label-WANT { color: #16a34a; background: rgba(22, 163, 74, 0.10); }
+body.theme-light .mbti-spine-field-label.label-FLAW { color: #dc2626; background: rgba(220, 38, 38, 0.10); }
+body.theme-light .mbti-spine-field-label.label-LIE { color: #d97706; background: rgba(217, 119, 6, 0.10); }
+body.theme-light .mbti-spine-field-label.label-GHOST { color: #7c3aed; background: rgba(124, 58, 237, 0.10); }
+
+/* MBTI Enneagram — violet pastel invisible */
+body.theme-light .mbti-enneagram-hint-chip { color: #7c3aed; background: rgba(124, 58, 237, 0.08); border-color: rgba(124, 58, 237, 0.25); }
+body.theme-light .mbti-enneagram-hint-chip:hover { background: rgba(124, 58, 237, 0.15); }
+body.theme-light .mbti-enneagram-checkbox input[type="checkbox"] { accent-color: #7c3aed; }
+body.theme-light .mbti-enneagram-link-btn { color: #7c3aed; background: rgba(124, 58, 237, 0.08); border-color: rgba(124, 58, 237, 0.25); }
+body.theme-light .mbti-enneagram-link-btn:hover { background: rgba(124, 58, 237, 0.15); border-color: rgba(124, 58, 237, 0.40); }
+body.theme-light .mbti-enneagram-link-btn.enneagram-match-highlight { box-shadow: 0 0 0 2px #7c3aed; background: rgba(124, 58, 237, 0.15); }
+
+/* Enneagram labels */
+body.theme-light .enneagram-spine-label.label-GHOST { color: #7c3aed; }
+
+/* Enneagram fear/desire values */
+body.theme-light .ennea-fear-val { color: #dc2626; }
+body.theme-light .ennea-desire-val { color: #16a34a; }
+
+/* OCEAN node labels */
+body.theme-light .ocean-node-low { color: #ef4444; }
+body.theme-light .ocean-node-high { color: #ef4444; }
+
+/* OCEAN comfort tooltip shadow */
+body.theme-light .ocean-comfort-tooltip { box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10); }
+
+/* VS component light overrides */
+body.theme-light .vs-embed { background: #ffffff; border-color: #e5e7eb; }
+body.theme-light .vs-panel { background: #ffffff; border-color: #e5e7eb; }
+body.theme-light .vs-element-title { color: #1a1d24; }
+body.theme-light .vs-hero-placeholder { background: #f8f9fb; border-color: #e5e7eb; }
+body.theme-light .vs-mini-map { background: #ffffff; border-color: #e5e7eb; }
 
 /* Tags — v9: only .tag.core remains; .opt, .risk, .advanced removed (Phase 2.4) */
 .tag { display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.75em; font-weight: 600; margin-right: 0.4em; }
@@ -808,13 +949,12 @@ body.content-wide .fab-group {
   transform: scale(1.1);
 }
 
-/* Theme icons */
-body.theme-light .theme-icon-dark { display: none; }
+/* Theme icons — OLED (moon) default, Light (sun) */
+body:not(.theme-light) .theme-icon-light { display: none; }
+body:not(.theme-light) .theme-icon-oled { display: inline !important; }
+body.theme-light .theme-icon-oled { display: none; }
 body.theme-light .theme-icon-light { display: inline !important; }
 body.theme-light .theme-icon-light[hidden] { display: inline !important; }
-body.theme-oled .theme-icon-dark { display: none; }
-body.theme-oled .theme-icon-light { display: none; }
-body.theme-oled .theme-icon-oled { display: inline !important; }
 
 /* === INTERACTIVE DETAILS === */
 details.interactive {

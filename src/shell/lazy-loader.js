@@ -12,7 +12,7 @@
  * - Panel system (drag, resize, save state)
  * - Notepad with persistence
  * - Glossary panel
- * - Theme toggle (dark/light/oled)
+ * - Theme toggle (oled/light)
  * - Content width toggle
  * - Expert mode toggle (M3 widget level)
  * - Scroll to top
@@ -689,7 +689,7 @@
             if (typeof mermaid.initialize === 'function' && !mermaid._initialized) {
               mermaid.initialize({
                 startOnLoad: false,
-                theme: 'dark',
+                theme: 'dark',  // OLED uses dark theme for Mermaid too
                 themeVariables: {
                   primaryColor: '#4a1a4a',
                   primaryTextColor: '#e2e8f0',
@@ -1143,24 +1143,22 @@
     const toggle = $('#fab-theme');
     if (!toggle) return;
 
-    const themes = ['dark', 'light', 'oled'];
-    const iconDark = toggle.querySelector('.theme-icon-dark');
+    const themes = ['oled', 'light'];
     const iconLight = toggle.querySelector('.theme-icon-light');
     const iconOled = toggle.querySelector('.theme-icon-oled');
 
     function applyTheme(theme) {
       document.body.classList.remove('theme-light', 'theme-oled');
       
-      [iconDark, iconLight, iconOled].forEach(icon => { if (icon) icon.hidden = true; });
+      [iconLight, iconOled].forEach(icon => { if (icon) icon.hidden = true; });
       
       if (theme === 'light') {
         document.body.classList.add('theme-light');
         if (iconLight) iconLight.hidden = false;
-      } else if (theme === 'oled') {
+      } else {
+        // OLED is default (dark mode with true black)
         document.body.classList.add('theme-oled');
         if (iconOled) iconOled.hidden = false;
-      } else {
-        if (iconDark) iconDark.hidden = false;
       }
       
       toggle.setAttribute('data-theme', theme);
@@ -1168,13 +1166,14 @@
 
     let stored = localStorage.getItem('theme');
     if (!stored || !themes.includes(stored)) {
-      stored = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      // Default: OLED (dark) unless user prefers light
+      stored = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
     }
     
     applyTheme(stored);
 
     toggle.addEventListener('click', () => {
-      const current = toggle.getAttribute('data-theme') || 'dark';
+      const current = toggle.getAttribute('data-theme') || 'oled';
       const nextTheme = themes[(themes.indexOf(current) + 1) % themes.length];
       applyTheme(nextTheme);
       localStorage.setItem('theme', nextTheme);

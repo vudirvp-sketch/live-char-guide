@@ -39,7 +39,7 @@
   <!-- Main content area (auto-loaded, no modal) -->
   <main id="content" class="content-hidden"></main>
   <noscript>
-    <div style="padding:2em;text-align:center;color:#e2e8f0;font-family:sans-serif;">
+    <div style="padding:2em;text-align:center;color:var(--text,#E8E8E8);font-family:sans-serif;">
       <h1>Live Character Guide</h1>
       <p>Для работы этого руководства требуется JavaScript. Пожалуйста, включите JavaScript в настройках браузера.</p>
     </div>
@@ -50,10 +50,9 @@
 
   <!-- FAB BUTTONS GROUP -->
   <div class="fab-group hidden" id="fab-group">
-    <button class="fab-btn" id="fab-theme" title="Тема (Dark → Light → OLED)" aria-label="Переключить тему" type="button">
-      <span class="theme-icon-dark">🌙</span>
-      <span class="theme-icon-light" hidden>☀️</span>
-      <span class="theme-icon-oled" hidden>⬛</span>
+    <button class="fab-btn" id="fab-theme" title="Тема (OLED → Светлая)" aria-label="Переключить тему" type="button" data-theme="oled">
+      <span class="theme-icon-light" hidden="">☀️</span>
+      <span class="theme-icon-oled">🌙</span>
     </button>
     <button class="fab-btn" id="fab-width" aria-label="Toggle content width" title="Ширина контента" type="button" aria-pressed="false">↔</button>
     <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
