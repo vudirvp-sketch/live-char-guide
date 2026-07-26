@@ -4,6 +4,38 @@
 
 ---
 
+Task ID: 92
+Agent: main
+Task: iter 92 — W6/W8 Walter GHOST Anchor-trigger + OCEAN cautious zones → SPINE; O3/O4 Omnis OCEAN cautious zones + NEED/WANT tension explicit.
+
+Work Log:
+- 1: Прочитаны STATUS.md (iter 91 state — C3+C4 COMPLETE), worklog.md (iter 91 entry), PLAN.md, AGENT_NAVIGATION.md.
+- 2: Прочитаны docs/canon/part_10.md §10.2 (Walter) и §10.3 (Omnis) — identified gaps: Walter — нет GHOST-linked Anchor (только Базовые + FLAW-linked), OCEAN без cautious zones SPINE explicit. Omnis — OCEAN без cautious zones SPINE explicit, NEED/WANT tension implicit.
+- 3: Прочитаны src/master/part_10.html и parts/part_10.html — Walter и Omnis секции. Discovered: parts/part_10.html Walter section drift from iter 82 (KI#61) — shorter Tone Frame, no `<identity>` wrapper, LIE has appended explanation «но правда в том, что ему нужно чувствовать контроль».
+- 4: Documented KI#61 в STATUS.md (parts/ Walter section drift from iter 82 — Tone Frame, `<identity>`, LIE; needs sync with src/master/).
+- 5: W6 (Walter GHOST-linked Anchor): Added 2 GHOST-linked Anchors — Упоминание Gray Matter / Эллиотта (bodily: белые костяшки, челюсть фиксируется, молчание) + Видит Pontiac Aztek на парковке (bodily: рука на руле, дыхание прерывистое). All Prices bodily/mechanical (P2-R1/P2-R3).
+- 6: W8 (Walter OCEAN cautious zones → SPINE explicit): E=30 (cautious low, 30–40) → LIE «Я делаю это ради семьи» causal chain (семья как социальное алиби для изоляции). N=60 (cautious high, 60–70) → GHOST-реактивность (Gray Matter) causal chain. Added shift potential для обеих zones.
+- 7: O3 (Omnis OCEAN cautious zones → SPINE explicit): N=65 (cautious high, 60–70) → GHOST fear of obsolescence + LIE «эмоция — слабость плоти» causal chain (тревога → system warnings → diagnostic cycle). Added shift potential.
+- 8: O4 (Omnis NEED/WANT tension explicit): Added annotation note в Annotation section — WANT (слияние с Омниссией) требует растворения индивидуального когнитивного аппарата, NEED (понимание) требует его сохранения. LIE bridges (любопытство = data acquisition). GHOST activates (довоенные фрагменты реактивируют human wonder). Tragic structure (NEED — остаток человечности, который WANT хочет уничтожить, но без которого WANT лишён содержания).
+- 9: Applied changes to docs/canon/part_10.md §10.2 (Walter) + §10.3 (Omnis) — `<ocean>` blocks updated + Annotation lines updated + GHOST-linked Anchor added.
+- 10: Applied changes to src/master/part_10.html — `<ocean>` blocks updated (HTML-encoded), Annotation `<li>` updated, GHOST-linked Anchor added в `<anchors>` XML.
+- 11: Applied changes to parts/part_10.html — `<ocean>` blocks updated, Annotation `<li>` updated, GHOST-linked Anchor added в [ANCHORS] plain text format (per KI#58 known drift). Not fixed: KI#61 (parts/ Walter Tone Frame/`<identity>`/LIE drift from iter 82) — out of scope.
+- 12: Updated docs/character_bible.md: Walter section — added OCEAN Profile section + GHOST-linked Anchor (2 entries, bodily Prices). Omnis section — OCEAN Profile updated with cautious zones SPINE explicit + Extreme poles summary + new NEED/WANT Tension subsection. Version bumped 9.2.4→9.2.5.
+- 13: Updated STATUS.md — iter 92 COMPLETE, KI#61 added (parts/ Walter drift), KI#62 added (audit script P2-18 check устарел — pre-existing regression since iter 85), roadmap shifted (iter 93: D1–D4 Guide self-contradictions; iter 94: E1/E8 + KI#61 + KI#62).
+- 14: Updated worklog.md — iter 92 entry added, iter 89 detail collapsed в одну строку (старая итерация).
+- 15: Bumped version 9.2.4→9.2.5 в package.json, src/VERSION, AGENT_NAVIGATION.md, character_bible.md header, elena_character_bible.md header, vyshcherblenny_character_bible.md header. Updated CHANGELOG.md с iter 92 entry.
+- 16: Ran audit_canon_master_sync.py — pre-existing 95/96 PASS regression (KI#62, pre-existing since iter 85, not introduced by iter 92). Verified via git stash + audit at iter 90 commit.
+
+Stage Summary:
+- **iter 92 COMPLETE (W6/W8 Walter + O3/O4 Omnis).**
+- **Closed:** W6 (Walter GHOST Anchor-trigger), W8 (Walter OCEAN cautious zones → SPINE), O3 (Omnis OCEAN cautious zones → SPINE), O4 (Omnis NEED/WANT tension explicit).
+- **Modified:** `docs/canon/part_10.md`, `src/master/part_10.html`, `parts/part_10.html`, `docs/character_bible.md`, `STATUS.md`, `worklog.md`, `AGENT_NAVIGATION.md`, `CHANGELOG.md`, `package.json`, `src/VERSION`, `docs/elena_character_bible.md`, `docs/vyshcherblenny_character_bible.md` (version header bumps only).
+- **New KI:** KI#61 (parts/ Walter section drift from iter 82 — Tone Frame, `<identity>`, LIE), KI#62 (audit script P2-18-item-anchors-flaw check устарел — pre-existing since iter 85, контент корректен).
+- **Not modified (out of scope):** KI#58 (parts/ [ANCHORS] plain text vs `<anchors>` XML drift — known, preserved), KI#61 fix (parts/ Walter drift from iter 82 — documented, fix deferred), KI#62 fix (audit script update — documented, fix deferred), E1/E8 (Elena Voice leak + §9.11), V8/V9 (Decision items).
+- **Next:** iter 93 — D1–D4 Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention).
+
+---
+
 Task ID: 91
 Agent: main
 Task: iter 91 — C3+C4: Vyshcherblenny/Elena per-character Bible backfill + V4 (OCEAN cautious zones → SPINE explicit link).
@@ -21,43 +53,14 @@ Stage Summary:
 - **iter 91 COMPLETE (C3+C4 — Vyshcherblenny/Elena Bible backfill + V4 fix).**
 - **Closed:** C3, C4, V4 (OCEAN cautious zones → SPINE), KI#59.
 - **Modified:** `docs/vyshcherblenny_character_bible.md`, `docs/elena_character_bible.md`, `docs/character_bible.md`, `STATUS.md`, `worklog.md`.
-- **Not modified (out of scope):** Walter/Elena remaining issues (E1, E8, W6, W8), Omnis (O3, O4), V8/V9 Decision items.
 - **Next:** iter 92 — W6/W8 Walter GHOST Anchor-trigger + OCEAN cautious zones; O3/O4 Omnis.
-
----
-
-Task ID: 89
-Agent: main
-Task: iter 89 — B4 + V3: Vyshcherblenny Examples expand (4 `<START>` blocks → 80-120 tok) + V3 (3 Anchor Prices non-physical → bodily/mechanical).
-
-Work Log:
-- 1: Прочитаны STATUS.md (iter 88 state — Omnis-Zeta Examples DONE), worklog.md (iter 88 entry).
-- 2: Прочитан docs/canon/part_10.md §10.4 (Vyshcherblenny full card) — Examples section (4 `<START>` blocks, ~25–35 tok each — significant недомер), Anchors (3 non-physical Prices), Annotation line, Token Budget (~1250+).
-- 3: Прочитан docs/canon/part_03.md §3.3 (P3-R7: 80-120 tok per block, `<START>` mandatory, minimum one physical reaction per block, scene + action + реплика structure) + §3.4 (Quality Grade system).
-- 4: Сверен Omnis/Walter pattern (iter 87-88 expanded Examples) — каждая Example: scene (1–2 sent с environment + character position), *action* beats, dialogue, environmental reactivity, SPINE causality visible, final physical reaction.
-- 5: Прочитан docs/vyshcherblenny_character_bible.md — SPINE (WANT стать полноценным/NEED принять пустоту/FLAW поглощение через вырезание/LIE «поглощу достаточно — стану цельным»/GHOST архивариус→инъекция документа→первое вырезание), Embodiment (левая рука действует сама, правая рука с крюком, тремор, холод/онемение левой стороны лица, тошнота), Anchors T→A→P, Sensory Anchors (Тактильный/Обонятельный), Voice (archival, detached, «прошу прощения» как verbal tic).
-- 6: Сверен docs/research/examples_audit_iter80.md — V3: «не помнит, зачем делал, теряет фрагмент себя» + «несколько дней не может спать» (cognitive/temporal). V5: 2 of 4 Examples below 80 tok (audit) — actually all 4 were ~25-35 tok on inspection.
-- 7: Идентифицированы 3 V3 candidates: Базовый 3 (hearing voices — no body), FLAW-linked 1 (memory loss only), FLAW-linked 3 (temporal «несколько дней»).
-- 8: Drafted 4 expanded Examples (~85-110 tok each): Ex1 Neutral (Ошметок Веля, край стены, пустота под ногами, мерцание дна, стены дышат → Фляга. Крюк. Осколок. ×2 → рука не слушается → «Привычка. Не моя» GHOST residue → холод левой стороны лица), Ex2 Stress (стены сжимаются, силуэт Венторы → левое запястье немеет → «Не снова»/«Делай» LIE→FLAW cycle → ноющая левая рука), Ex3 Зеркало (силуэт в мерцании, три шага пустоты, запах Сангвиса → отшатывается, крюк до белизны → «Почему ты счастлива?» GHOST+FLAW → тошнота+желудок), Ex4 имя (собеседник напротив, вытянутая рука, стена за спиной → мышцы отказывают по очереди → «Не моё. Уже не моё.»+«Было. Кажется, было. Прошу прощения.» GHOST+LIE crack → онемение лица до виска, челюсть фиксируется).
-- 9: Drafted 3 V3 Anchor Price conversions (bodily additions): Базовый 3 (voice хрип + горло пересыхает + левая рука вычерчивает паттерн вырезания), FLAW-linked 1 (левая рука ноет + пальцы теряют чувствительность), FLAW-linked 3 (желудок сжимается + рука непроизвольно к виску).
-- 10: Applied to docs/canon/part_10.md — Examples expanded + Anchors V3 fix + Annotation lines updated (SPINE causality per example + bodily Price list) + Token Budget updated (~1250+→~1500+).
-- 11: Applied to src/master/part_10.html — все те же правки (через Python script iter89_master_full.py из-за HTML-wrapped annotation markup). Examples + Anchors (`<anchors>` XML) + Annotation `<li>` + Token Budget `<p>`.
-- 12: Applied to parts/part_10.html — все те же правки (через Python script iter89_parts_full.py). Anchors сохранены в `[ANCHORS]` plain text format (known drift KI#58 из iter 85 — не в scope iter 89). V3 fix applied в plain text формате.
-- 13: STATUS.md rewritten: iter 89 DONE, V3/V5/U3/B4 closed, remaining violations updated (U3 ✅ CLOSED — все 4 cards DONE), roadmap shifted to iter 90+ (Bible backfill next), KI#58/KI#59 added в Known Issues.
-- 14: Версия bumped 9.2.3→9.2.4.
-
-Stage Summary:
-- **iter 89 COMPLETE (B4 + V3 — Vyshcherblenny Examples expanded to ~85–110 tok per block + 3 Anchor Prices converted to bodily).**
-- **Closed:** V3 (Vyshcherblenny Anchor Prices bodily), V5 (Vyshcherblenny Examples недомер), U3 (Examples недомер — ALL 4 cards DONE), B4.
-- **Modified:** `docs/canon/part_10.md`, `src/master/part_10.html`, `parts/part_10.html`, `STATUS.md`, `worklog.md`.
-- **Not modified (out of scope):** Vyshcherblenny [ANCHORS] format in parts/ (KI#58 known drift из iter 85), Vyshcherblenny V4 (OCEAN cautious zones — для iter 91), Vyshcherblenny Bible (docs/character_bible.md — для iter 91, C3-C4 Bible backfill).
-- **Remaining:** E1 (Voice leak «саркастичная»), E8 (§9.11), W6-W8, O3-O4, V4 (Vyshcherblenny OCEAN cautious zones).
-- **Next:** iter 90 — C1-C2: Walter/Omnis Bible backfill + align (Bible Примеры сообщений still in shorter version — KI#59).
 
 ---
 
 ## Предыдущие итерации (кратко)
 
+- **iter 90**: C1+C2 — Walter/Omnis Bible backfill + align (Bible Примеры сообщений synced с canon).
+- **iter 89**: B4+V3 — Vyshcherblenny Examples expanded to ~85–110 tok per block + 3 Anchor Prices converted to bodily. V3/V5/U3/B4 closed.
 - **iter 88**: B3 — Omnis-Zeta Examples expanded to ~90–110 tok per block + embodiment + SPINE causality. O-Examples closed.
 - **iter 87**: B2 — Walter Examples expanded to ~95–105 tok per block + embodiment + SPINE causality. W-Examples closed.
 - **iter 86**: B1 — Elena Examples expanded to ~85–95 tok per block + embodiment. E5/E6 closed.

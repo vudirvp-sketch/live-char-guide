@@ -3,7 +3,7 @@
 > Any agent modifying Выщербленный's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.2.4 (iter 91 — C3: Examples expanded 80–120 tok per block, Anchors Базовые/FLAW-linked/Зеркало-linked/Sensory, bodily/mechanical Prices, SPINE CAUSALITY annotations, Greeting+AN added, V4 cautious zone → SPINE explicit link)
+**Version:** 9.2.5 (iter 92 — version bump only; Vyshcherblenny content unchanged since iter 91)
 **Last Updated:** 2026-07-26 (iter 91)
 
 ---

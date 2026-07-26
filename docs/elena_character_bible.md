@@ -3,8 +3,8 @@
 > Any agent modifying Елена's profile in any Part MUST update this file first
 > and ensure all other Parts remain consistent with it.
 
-**Version:** 9.2.4 (iter 91 — C4: Anchors `<anchors>` XML Базовые/FLAW-linked, bodily/mechanical Prices, SPINE CAUSALITY annotations on Examples, Greeting added)
-**Last Updated:** 2026-07-26 (iter 91)
+**Version:** 9.2.5 (iter 92 — version bump only; Elena content unchanged since iter 91)
+**Last Updated:** 2026-07-26 (iter 92)
 
 ---
 
