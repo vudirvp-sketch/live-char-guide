@@ -100,16 +100,12 @@ Stage Summary:
 
 ## 5. Точка остановки
 
-**iter 32 ✅ DONE — Visual System Scroll-Animation Bug (KI#20) ✅ CLOSED.** Все 5 sub-items (A-E) fixed single-file edit'ом `vs-scroll-observer.js` (расширен selector для 8 animation classes). 43 элемента на 5 VS-EMBED (E06/E07/E08/E09/E15) теперь корректно отображаются на собранном сайте. Все validation gates PASS, build hash `fd3d96d3` unchanged.
+**iter 80 ✅ COMPLETE — разведочный аудит примеров карточек (research-only, no code changes).** Полный отчёт: `docs/research/examples_audit_iter80.md`. Найдено: 4 universal violations + 26 card-specific + 20 Bible-vs-card discrepancies + 4 guide self-contradictions. План правок (Phases A–E, iter 81–92) — в §10 отчёта.
 
-**iter 33+ roadmap:** none planned. Все Known Issues (KI#1..KI#20) ✅ CLOSED.
+**iter 81+ roadmap:** см. `STATUS.md` (Roadmap) и `docs/research/examples_audit_iter80.md` §10.
 
 **Принципы сохраняются:**
-- `viz > dry text` (iter 8+) — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design с documented rationale (KI#18-G/H).
-- Inline scripts forbidden (KI#16, CSP compliance).
-- Inline styles forbidden (KI#13, 123/123 → CSS classes).
-- VS-EMBED animation classes — покрываются `vs-scroll-observer.js` selector или `scroll-enter` class на элементе. Audit: `scripts/audit_vs_embeds.py`.
-
-**Новые баги:** сначала документировать в `STATUS.md` как KI#N, потом фиксить.
-
-**Полная дорожная карта:** `docs/CONTENT_RESTRUCTURE_PLAN.md` §5.2. **Canon migration status:** `docs/canon/_README.md` §5.
+- `viz > dry text` — viz = замещение, не дополнение. Catalog vs Detail / Annotation Layer patterns — keep-by-design.
+- Inline scripts forbidden (CSP compliance). Inline styles forbidden.
+- VS-EMBED animation classes — покрываются `vs-scroll-observer.js` selector или `scroll-enter` class. Audit: `scripts/audit_vs_embeds.py`.
+- **Новые баги:** сначала документировать в `STATUS.md` как KI#N, потом фиксить.

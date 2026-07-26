@@ -235,18 +235,24 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-## 8. Roadmap (iter 79+)
+## 8. Roadmap (iter 80+)
 
-Текущее состояние: iter 79 COMPLETE, no open KI. Decision items V8/V9 требуют обсуждения с автором.
+Текущее состояние: **iter 80 COMPLETE — разведочный аудит примеров карточек (research-only, no fixes).** Полный отчёт: `docs/research/examples_audit_iter80.md`. Decision items V8/V9 остаются deferred.
 
 | Итерация | Задача | Усилие |
 |----------|--------|--------|
-| **iter 80** | P1.2 — OCEAN×Enneagram Matrix disclaimer (Decision item V9) | MEDIUM |
-| **iter 81+** | Decision item V8 (GHOST перцептивный фильтр) — после обсуждения | MEDIUM |
-| **iter 83–90** | P2 — улучшение структуры (Anchors terminology, merge Voice разделов, Token Budget SoT, устранение дублей, Assembly Pipeline Checklist) | HIGH |
-| **iter 91+** | P3 — опциональные улучшения (карта зависимостей, Mermaid схемы, замена процентов, SysPrompt rename, API blocks → Appendix) | LOW–MEDIUM |
+| **iter 81** | A1 — Elena SP: Tone Frame + OOC | LOW |
+| **iter 82** | A2–A4 — Walter SP + `<identity>` + LIE fix | MEDIUM |
+| **iter 83** | A5 — Omnis-Zeta Anchors: physical Prices | MEDIUM |
+| **iter 84** | A6 — Vyshcherblenny GHOST: shorten to concrete event | LOW |
+| **iter 85** | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand | MEDIUM |
+| **iter 86–88** | B1–B4 — Examples enrichment (4 cards) | LOW–MEDIUM |
+| **iter 89–90** | C1–C4 — Bible sync (Walter / Omnis / Vyshcherblenny / Elena) | MEDIUM–HIGH |
+| **iter 91** | D1–D4 — Guide self-contradictions (§9.11, OCEAN format, Anchors, CD convention) | LOW |
+| **iter 92+** | E1–E2 — Dead weight cleanup | LOW |
+| **deferred** | V8/V9 Decision items — после обсуждения с автором | — |
 
-Полная дорожная карта: `docs/research/research_plan.md` (Фазы 1–5). Canon migration status: `docs/canon/_README.md` §5.
+Полная дорожная карта: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 
 ---
 
@@ -293,4 +299,4 @@ Pattern: `p{part_number}_{topic}` (например `p1_card_overview`, `p7a_cor
 
 ---
 
-**Подсказка следующему агенту:** Перед стартом новой итерации прочитай `STATUS.md` (актуальный статус, Known Issues, Roadmap), `worklog.md` (последняя итерация подробно), этот файл (§5 Core Rules, §6 Frequent Pitfalls), `docs/research/research_plan.md` (Фазы 1–5), `docs/canon/_README.md` (Canon rules). **Принцип:** «Лучше недоделать, чем сломать». Одна правка = одна итерация. Если найден новый баг — сначала документируй в `STATUS.md` как KI#N, потом фиксий.
+**Подсказка следующему агенту:** Перед стартом новой итерации прочитай `STATUS.md` (актуальный статус, Known Issues, Roadmap), `worklog.md` (последняя итерация подробно), этот файл (§5 Core Rules, §6 Frequent Pitfalls), `docs/research/examples_audit_iter80.md` §10 (Phases A–E, iter 81–92), `docs/canon/_README.md` (Canon rules). **Принцип:** «Лучше недоделать, чем сломать». Одна правка = одна итерация. Если найден новый баг — сначала документируй в `STATUS.md` как KI#N, потом фиксий.
