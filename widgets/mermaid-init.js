@@ -1,11 +1,12 @@
 /**
  * @fileoverview mermaid-init.js — Mermaid.js initialization + dynamic theme re-render.
  * @module src/shell/widgets/mermaid-init
- * @version 9.3.0
+ * @version 9.2.6
  *
  * @description
  * Extracted from inline `<script>` in `src/shell/index.html` per KI#16 fix (iter 19).
  * iter 100: Added `window.reRenderMermaid(theme)` for dynamic theme switching.
+ * iter 107: JSDoc @version rolled back 9.3.0 → 9.2.6 to restore 4-place version sync (KI#64 fix, Variant A — minimal intervention).
  *
  * Loading order (must be preserved in index.html):
  *   1. `<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js">` (CDN, sync)

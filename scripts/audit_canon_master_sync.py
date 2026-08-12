@@ -409,11 +409,12 @@ CHECKS = [
         "part_04 §4.2: «Запрещённые слова» → «Запрещённые формулировки» with examples (iter 37 P2-13 fix)",
     ),
     # ----- P2-14 (F5): part_05 §5.1 Cautious zone definition -----
+    # iter 107: cautious zone → осторожная зона (English gloss kept in parens on first mention); body fully Russian
     (
         "P2-14",
         "part_05.html",
-        "<p><strong>Cautious zone (30–40 / 60–70)</strong> — пограничная зона, не экстремальная, но влияющая на SPINE-связи (FLAW, GHOST-реактивность). Значения в cautious zone не считаются «экстремальными полюсами», но активно формируют поведение — например, Елена <code>A=38</code> и <code>N=68</code> напрямую связаны с её FLAW (отталкивает людей сарказмом) и GHOST (предательство редактора → недоверие).</p>",
-        "part_05 §5.1: Cautious zone definition added after RULE (iter 37 P2-14 fix)",
+        "<p><strong>Осторожная зона (cautious zone, 30–40 / 60–70)</strong> — пограничная зона, не экстремальная, но влияющая на SPINE-связи (FLAW, GHOST-реактивность). Значения в осторожной зоне не считаются «экстремальными полюсами», но активно формируют поведение — например, Елена <code>A=38</code> и <code>N=68</code> напрямую связаны с её FLAW (отталкивает людей сарказмом) и GHOST (предательство редактора → недоверие).</p>",
+        "part_05 §5.1: Cautious zone definition added after RULE (iter 37 P2-14 fix; iter 107 cautious zone → осторожная зона)",
     ),
     # ----- P2-16 (F7): part_07a §7A.1 Keirsey SP Artisan → Sensing-Perceiving -----
     (

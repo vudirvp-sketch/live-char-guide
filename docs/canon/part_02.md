@@ -97,13 +97,13 @@ migration_status: —
 `data-section: p2_embodiment`
 
 <!-- difficulty: BASIC -->
-<!-- canonical: Embodiment Protocol (State→Body→Sensor→Speech) -->
+<!-- canonical: Embodiment Protocol (Состояние→Тело→Сенсор→Речь, State→Body→Sensor→Speech) -->
 
 **Embodiment** — протокол связи эмоционального состояния с телесной реакцией. Каждая эмоция должна проявляться физически.
 
-[VS: E04 — Embodiment Protocol. Funnel-stack из 4 слоёв (State → Body → Sensor → Speech), каждый слой с примером. Замещает infographic `inf-pipeline` «Embodiment Protocol (протокол телесности)» (4-step pipeline). Embodiment = механизм внутри Anchor Action, см. E03.]
+[VS: E04 — Embodiment Protocol. Funnel-stack из 4 слоёв (Состояние → Тело → Сенсор → Речь, State → Body → Sensor → Speech), каждый слой с примером. Замещает infographic `inf-pipeline` «Embodiment Protocol (протокол телесности)» (4-step pipeline). Embodiment = механизм внутри Anchor Action, см. E03.]
 
-Embodiment Protocol показан выше в VS-EMBED E04 (funnel-stack из 4 слоёв: State → Body → Sensor → Speech, каждый с depth-label «Внутренний / Физический / Перцептивный / Вывод» и in-character примером). Таблица ниже — типовые категории примеров для каждого слоя (дополняет E04, не дублирует описания).
+Embodiment Protocol показан выше в VS-EMBED E04 (funnel-stack из 4 слоёв: Состояние → Тело → Сенсор → Речь (State → Body → Sensor → Speech), каждый с depth-label «Внутренний / Физический / Перцептивный / Вывод» и in-character примером). Таблица ниже — типовые категории примеров для каждого слоя (дополняет E04, не дублирует описания).
 
 | # | Слой | Пример |
 |---|------|--------|

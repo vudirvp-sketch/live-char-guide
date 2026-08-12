@@ -1,7 +1,7 @@
 # Agent Navigation — Live Character Guide
 
 > **Entry document.** Read this first (or read [`AGENTS.md`](./AGENTS.md) for the short version).
-> **Canonical version:** `9.2.6`. **Current iteration:** 101.
+> **Canonical version:** `9.2.6`. **Current iteration:** 107.
 > Live-char-guide is an engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models).
 > Single linear guide: Part 0 → Part 10 + 4 appendices. All 10 Parts + 4 Appendix + Part 0 are ✅ MIGRATED,
 > 97 sections, 97/97 canon→master sync PASS.
@@ -188,7 +188,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 ### Build and deploy
 
 7. **Root fallbacks vs canonical sources** — top-level `widgets/`, `assets/`, `parts/`, `event-bus.js`, `data/`, `index.html`, `build.hash` are **regenerated root fallbacks**, NOT duplicates. All edits go in canonical sources (`src/master/`, `src/shell/`, `src/assets/`, `data/`).
-8. **Versions in 4 places** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` verifies sync. **On version bump** — update ALL 4 places simultaneously (`src/VERSION` manually + `package.json` + `character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 (iter 96): drift occurred when `src/VERSION` was updated without `package.json` / `character_schema.json`. **KI#64 (iter 101, OPEN):** same drift pattern — `mermaid-init.js` JSDoc bumped to `9.3.0` alone; canonical sources remain `9.2.6`.
+8. **Versions in 4 places** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest + `mermaid-init.js` JSDoc. `pnpm run version:check` verifies sync. **On version bump** — update ALL 4 places simultaneously (`src/VERSION` manually + `package.json` + `character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 (iter 96): drift occurred when `src/VERSION` was updated without `package.json` / `character_schema.json`. KI#64 (iter 101, CLOSED iter-107): same drift pattern — `mermaid-init.js` JSDoc bumped to `9.3.0` alone; fixed via Variant A rollback (JSDoc → 9.2.6, no 4-place bump).
 9. **Mermaid CDN dependency** — Mermaid.js loads from `cdn.jsdelivr.net`. CSP for Mermaid v11 worker: `worker-src 'self' blob:;`.
 10. **`noscript` in build artifact** — must be present. Do not remove.
 11. **Widget guards** — `blueprint-viewer destroy()`, `persona-cross infinite loop guard`, `Clipboard API guard` (`if (navigator.clipbox)`) — do not remove.
@@ -248,9 +248,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ## 8. Roadmap (iter 101+)
 
-Current state: **iter 101 COMPLETE — Agent infrastructure English rewrite + actualization.**
-All Phases A–E + iter 94–100 closed. KI#63 closed; **KI#64 OPEN** (version drift on `mermaid-init.js`).
-Next: V8/V9 Decision items (deferred — pending author discussion) and KI#64 resolution.
+Current state: **iter 107 COMPLETE — Category B/C extended translation + KI#64 CLOSED.**
+All Phases A–E + iter 94–107 closed. KI#63 + KI#64 closed. No open KIs.
+Next: V8/V9 Decision items (deferred — pending author discussion) + optional iter-108 (Part 10 Elena card + Part 06 stair-step translation).
 
 | Iteration | Task | Status |
 |-----------|------|--------|
@@ -268,9 +268,14 @@ Next: V8/V9 Decision items (deferred — pending author discussion) and KI#64 re
 | iter 97 | Annotation callout blocks removal + audit script update | ✅ COMPLETE |
 | iter 98–99 | Theme simplification (dark removed, OLED + Light only) | ✅ COMPLETE |
 | iter 100 | Mermaid dynamic theme re-render on toggle | ✅ COMPLETE |
-| **iter 101** | **Agent infrastructure English rewrite + KI#64 documented** | **✅ COMPLETE** |
+| iter 101 | Agent infrastructure English rewrite + KI#64 documented | ✅ COMPLETE |
+| iter 102 | VS-EMBED placement audit + reorder (6 misplaced visuals fixed) | ✅ COMPLETE |
+| iter 103 | English terms audit + categorization (doc-only) | ✅ COMPLETE |
+| iter 104 | Category B translation pass (PLANNED, not committed — picked up in iter-106) | ⚠️ SUPERSEDED |
+| iter 105 | Category C borderline translation pass — Quick/Full Check + Grade A/B/C | ✅ COMPLETE |
+| iter 106 | Category B final polish — 3 heading translations + survey script fix | ✅ COMPLETE |
+| **iter 107** | **Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED (mermaid-init.js rollback)** | **✅ COMPLETE** |
 | deferred | V8/V9 Decision items — pending author discussion | — |
-| deferred | KI#64 — version drift on `mermaid-init.js` (needs 4-place sync OR rollback) | — |
 
 Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 

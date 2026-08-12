@@ -6,6 +6,34 @@
 
 ## [9.2.6] — 2026-08-13
 
+### iter 107 — Category B/C extended translation pass + KI#64 CLOSED (mermaid-init.js rollback)
+
+- **KI#64 CLOSED (Variant A — rollback):** `src/shell/widgets/mermaid-init.js` JSDoc `@version 9.3.0` → `9.2.6`. Restored 4-place version sync without touching `package.json` / `src/VERSION` / `character_schema.json`. No 4-place bump required. Build hash unchanged (8499b4e3). Minimal intervention per "better" recommendation — avoids package.json version field touch (§2 confirmation gate).
+- **Translations applied** (2 master HTML files, 2 canon MD files — all in sync):
+  - `part_05.html` / `.md`: `cautious zone` → `осторожная зона` (8 occurrences — heading, RULE body, RECOMMENDATION, 2 table cells, Elena OCEAN breakdown A=38/N=68 rows). English gloss `cautious zone` kept in parens on first mention (heading) per bilingual convention. Subsequent occurrences: clean Russian.
+  - `part_02.html` / `.md`: Embodiment Protocol quad `State → Body → Sensor → Speech` → `Состояние → Тело → Сенсор → Речь` — VS-EMBED E04 funnel-bar labels (4 `funnel-bar__name` divs) + canonical comment + prose reference + flow-node desc. English quad kept in parens on first mention for backward-compat with existing cross-references in part_01, part_06, part_07a, appendix_glossary.
+- **Audit script update:** `scripts/audit_canon_master_sync.py` P2-14 check substring updated (cautious zone → осторожная зона, English gloss in parens). 97/97 PASS maintained.
+- **Validation:** `pnpm run build` SUCCESS (hash 8499b4e3). `validate` 5/5 + SHELL-* PASS. `validate:master` 12/12 PASS. `version:check` 9.2.6 sync (4-place now includes mermaid-init.js JSDoc). `pnpm test` 64/64 PASS. Canon sync 97/97 PASS. CSP/bundle/doc-versions/VS-embeds all PASS.
+- **English leak baseline:** 17 → 17 (no change). `cautious zone` + `State/Body/Sensor/Speech` were single tokens below the 3+ word detector threshold. Translation improves Russian/English consistency, not leak count. Remaining 17 are by-design (Part 10 Elena example card + Part 06 stair-step + SP directives + Tone Frame).
+- **Category A untouched** per user directive. CORE DIRECTIVES, callout labels, XML tag names, SillyTavern field names, sampler params, acronyms — all remain English by design.
+- **Scope:** 7 source files (1 widget JS + 2 master HTML + 2 canon MD + 1 audit script + 1 widget root fallback) + 4 auto-regenerated root fallbacks via `pnpm run build`. Over 3–5 file soft limit, justified by combined translation + KI fix in one iteration.
+- **No KI opened.** KI#64 CLOSED iter-107. **No open KIs remain.**
+
+### iter 106 — Category B final polish: 3 heading translations + survey script fix + translation backlog CLOSED
+
+- **Translations applied** (3 master HTML files, 3 canon MD files — all in sync):
+  - `appendix_model_table.html` / `.md`: `<h2>Model Capability Table</h2>` → `<h2>Таблица возможностей моделей</h2>` (bilingual gloss already existed in HTML comment; cross-refs in `data/glossary.json` keep English proper noun).
+  - `part_07a.html` / `.md`: `<h4>Шаг 6: Token Budget Check</h4>` → `<h4>Шаг 6: Проверка бюджета токенов</h4>` (clean Russian, no English gloss — `Token Budget` reference to Part 1 section already in prose line 1151).
+  - `part_06.html` / `.md`: `<h3>Tier 3 CoT (API only)</h3>` → `<h3>Tier 3 CoT (только API)</h3>` (`Tier 3 CoT` compound kept as proper noun; parenthetical function-word leak translated).
+- **Survey script fix:** `scripts/survey_english_terms.py` — moved 14 tokens from `TRANSLATABLE_LEAKS` → `ALLOWED_SINGLE_WORDS` (callout labels `RULE`/`RECOMMENDATION`/`EXAMPLE`/`ILLUSTRATION`/`TEMPLATE`/`Bridge`/`Synthesis`/`Demonstrates`/`Annotation`/`Cross-ref` + format-notation triplet `Trigger`/`Action`/`Price` per Q1 iter-105 decision). Fixed `categorize_token()` bug: tokens that are part of `KEEP_ENGLISH_TERMS` multi-word phrases now return `ALLOWED` (was `UNKNOWN`). TRANSLATABLE count: 530 → 312 (-218, now reflects actual translation candidates, not parsing anchors).
+- **No `KEEP_ENGLISH_TERMS` update needed:** none of the 3 translated heading strings were in `check_english.py`'s `KEEP_ENGLISH_TERMS` whitelist; no removal required.
+- **Section IDs preserved:** `appendix_model_table`, `p6_cot_tier3`, `p7a_token_budget` — all unchanged. No inbound anchor breakage.
+- **Validation:** `pnpm run build` SUCCESS (hash 8499b4e3). `validate` 5/5 + SHELL-* PASS. `validate:master` 12/12 PASS. `version:check` 9.2.6 sync. `pnpm test` 64/64 PASS. Canon sync 97/97 PASS. CSP/bundle/doc-versions/VS-embeds all PASS.
+- **English leak baseline:** 19 → 17 (-2). The 2 removed leaks were `Token Budget Check` (part_07a) + `Model Capability Table` (appendix_model_table). Remaining 17 are by-design (Part 10 Elena example card + Part 06 stair-step format + SP directives + Tone Frame strings).
+- **Translation backlog CLOSED.** All Category A (KEEP ENGLISH), B (TRANSLATE), C (BORDERLINE) decisions from iter-103 audit are now resolved. No further translation iterations planned unless new English leaks are introduced.
+- **Scope:** 7 source files (3 master HTML + 3 canon MD + 1 survey script) + 4 auto-regenerated root fallbacks via `pnpm run build`. Over 3–5 file soft limit, justified by final-polish nature + cleanup of uncommitted iter-104 work.
+- **No KI opened or closed.** KI#64 still OPEN (untouched).
+
 ### iter 105 — Category C borderline translation pass: Quick/Full Check + Grade A/B/C tier labels translated
 
 - **Translations applied** (2 master HTML files, 2 canon MD files, 1 audit script — all in sync):
@@ -26,17 +54,9 @@
 - **Scope:** 5 source files (2 master HTML + 2 canon MD + 1 audit script) + 4 auto-regenerated root fallbacks via `pnpm run build`. Within 3–5 file soft limit.
 - **KI#65 DELETED** from STATUS.md (closed iter-102, now 2 iterations old — mandatory deletion per AGENTS.md §3 KI lifecycle rule). KI#64 still OPEN (untouched).
 
-### iter 104 — Category B translation pass: 4 clear English heading leaks translated
+### iter 104 — Category B translation pass: PLANNED but NOT COMMITTED
 
-- **Translations applied** (4 master HTML files, 4 canon MD files, 1 audit script — all in sync):
-  - `appendix_model_table.html` / `.md`: `<h2>Model Capability Table</h2>` → `<h2>Таблица возможностей моделей</h2>` (bilingual gloss already existed in HTML comment).
-  - `part_03.html` / `.md`: `<h4>До/После: Grade A vs Grade C</h4>` → `<h4>До/После: класс A vs класс C</h4>` (`Grade` is a common noun here, not part of a proper name).
-  - `part_06.html` / `.md`: `<h3>Tier 3 CoT (API only)</h3>` → `<h3>Tier 3 CoT (только API)</h3>` (parenthetical function-word leak).
-  - `part_07a.html` / `.md`: `<h4>Шаг 6: Token Budget Check</h4>` → `<h4>Шаг 6: Проверка бюджета токенов</h4>` (`Check` here is a verb, not the noun `Token Budget`).
-- **Section IDs preserved:** `appendix_model_table`, `p3_quality_grade`, `p6_cot_tier3`, `p7a_token_budget` — all unchanged. No inbound anchor breakage.
-- **Audit script update:** `scripts/audit_canon_master_sync.py` P2-12c check substring updated — was hardcoded to the old English heading as an iter-37 regression marker; now checks for the translated Russian heading. 97/97 PASS maintained.
-- **English leak baseline:** 21 → 18 (-3). The 3 removed leaks were the translated headings.
-- **No KI opened or closed.** KI#64 still OPEN (untouched).
+- iter-104 was documented in worklog/CHANGELOG but the commit was never made. iter-106 picks up the same 3 Category B heading translations (`Model Capability Table`, `Token Budget Check`, `Tier 3 CoT (API only)`) and completes them. See iter-106 entry above for the actual implementation.
 
 ### iter 103 — English terms audit + categorization (doc-only)
 
