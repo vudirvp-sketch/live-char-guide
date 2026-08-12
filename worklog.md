@@ -1,35 +1,40 @@
 # Worklog
 
-> Только последняя итерация подробно. Старые — одной строкой. Полная история — в git.
+> Only the latest iteration in detail. Older iterations = one-line summaries.
+> Full history is in git.
 
 ---
 
-Task ID: 100
+Task ID: iter-101-agent-infra-english
 Agent: main
-Task: iter 100 — Mermaid dynamic theme re-render on toggle (diagrams stay dark when switching to Light).
+Task: Rewrite all agent-facing documentation in English, fix structural issues, document discovered version drift (KI#64).
 
 Work Log:
-- 1: Cloned repo. Read STATUS.md (iter 99 state), mermaid-init.js, lazy-loader.js, shell-styles.css.
-- 2: Identified problem: mermaid initialized with `theme: 'dark'` only. No re-render on theme change. When switching to Light, diagrams remain dark.
-- 3: mermaid-init.js: Added `window.reRenderMermaid(theme)` function. Re-initializes mermaid with `DARK_CONFIG` (oled) or `LIGHT_CONFIG` (light). Saves original source to `data-original`, restores it, removes `data-processed`, and calls `mermaid.run()`.
-- 4: LIGHT_CONFIG: `theme: 'default'` with light themeVariables (light bg/text colors matching body.theme-light palette).
-- 5: lazy-loader.js: `applyTheme()` now calls `reRenderMermaid(theme)` after CSS class toggle. Safe no-op if function unavailable.
-- 6: lazy-loader.js: Before initial `mermaid.run()`, saves diagram source to `data-original` attribute (enables future re-render).
-- 7: shell-styles.css: Added `body.theme-light .mermaid` and `body.theme-light .concept-diagram` CSS overrides (light border/background).
-- 8: Mirror sync: Copied files to src/shell/ (mermaid-init.js, lazy-loader.js, styles.css).
-- 9: Updated STATUS.md, PLAN.md, worklog.md.
+- 1: Cloned repo. Read `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `CHANGELOG.md`, `PLAN.md`, `README.md`, `CONTRIBUTING.md`, `docs/architecture.md`, `docs/canon/_README.md`, `docs/components.md`, `package.json`, `src/VERSION`, `eslint.config.js`, `.gitignore`, `.husky/pre-commit`.
+- 2: Detected version drift (KI#64): `mermaid-init.js` JSDoc shows `9.3.0` (bumped alone in iter 100), but `package.json` + `src/VERSION` + `data/character_schema.json` all still say `9.2.6`. Documented as KI#64 in `STATUS.md`. Did NOT fix — requires either rollback or 4-place bump (needs user confirmation per §2 of `AGENTS.md`).
+- 3: Created new `AGENTS.md` — short LLM-friendly entry point (~150 lines). Standard filename recognized by coding agents (Cursor, Aider, Continue, etc.). Covers: project overview, iteration protocol, reading gradient, where things live, common commands, critical rules, git safety, stop-and-confirm list, output format, doc pointers.
+- 4: Rewrote `AGENT_NAVIGATION.md` in English (was Russian prose mixed with English anchors). Same 10-section structure, but cleaner tables, imperative mood, better cross-referencing. Updated roadmap to include iter 97–101. Added KI#64 to §6 pitfall #8 (alongside KI#63). Updated pitfall numbering (was duplicated #22 — fixed).
+- 5: Rewrote `STATUS.md` in English. Fixed version field (9.3.0 → 9.2.6 canonical). Added KI#64 to Known Issues table. Updated invariants to reflect canonical 9.2.6. Pruned prose, kept table format.
+- 6: Rewrote `worklog.md` in English. Pruned previous-iterations list to 5 entries (was 4, well within cap of 10). Added this iter-101 entry.
+- 7: Updated `CHANGELOG.md` — added `[9.2.6]` iter 101 entry. Pre-existing entries (iter 93–97) left intact (Russian) since they are historical record; per Keep a Changelog format, only the latest entries need full detail. Collapsed iter 1–92 section to one-line summary (already done in prior iters).
+- 8: Rewrote `PLAN.md` in English. Actualized stop-point to iter 101. Preserved historical context (§1–4) as record of the docs-restructure plan. Updated §5 stop-point with current state.
+- 9: Updated `README.md` — English consistency (was already mostly English). Added `AGENTS.md` reference. Confirmed version 9.2.6. Added pointer to `AGENTS.md` as "read first for agents".
+- 10: Scope note: 7 files modified. Exceeds 3–5 soft limit per iteration. Justified by user's explicit request: "обнови и актуализируй, исправь и улучши всю агентскую инфраструктуру" — the user asked for ALL agent infrastructure in one pass. Splitting across multiple iterations would break coherence (English rewrite must be atomic to avoid mixed-language state).
 
 Stage Summary:
-- **iter 100 COMPLETE — Mermaid dynamic theme re-render.**
-- `window.reRenderMermaid(theme)` in mermaid-init.js handles full re-render cycle.
-- Light theme uses `theme: 'default'` with light-appropriate colors.
-- `data-original` attribute preserves diagram source for safe re-render.
-- Mermaid Known Issue resolved — diagrams now switch theme dynamically.
+- **iter 101 COMPLETE — Agent infrastructure English rewrite + actualization.**
+- **New file:** `AGENTS.md` (short LLM entry point, ~150 lines).
+- **Rewritten in English:** `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `PLAN.md`.
+- **Updated:** `CHANGELOG.md`, `README.md`.
+- **KI#64 OPEN:** version drift on `mermaid-init.js` (9.3.0 vs canonical 9.2.6). Needs user decision: rollback OR 4-place bump.
+- No `src/`, `data/`, or root fallback files touched. No build run required (doc-only iteration). Pre-commit hook will run `pnpm run lint` only — safe to skip build via `SKIP_ARTIFACT_BUILD=1` if needed, but not required since lint passes on existing code.
 
 ---
 
-## Предыдущие итерации (кратко)
-- iter 99: Theme chain simplified — `body.theme-oled` removed, default = OLED/dark, only `theme-light` toggled — COMPLETE
-- iter 98: Dark theme removed, OLED+Light only — COMPLETE
-- iter 96: KI#63 version drift fix + build regeneration — COMPLETE
-- iter 95: E2/KI#58 Dead weight cleanup + Anchors parts/ sync — COMPLETE
+## Previous Iterations (brief)
+
+- iter 100: Mermaid dynamic theme re-render on toggle — `window.reRenderMermaid(theme)` in `mermaid-init.js`, light theme config, `data-original` source preservation. COMPLETE.
+- iter 99: Theme chain simplified — `body.theme-oled` removed, default = OLED/dark, only `theme-light` toggled. COMPLETE.
+- iter 98: Dark theme removed, OLED + Light only. COMPLETE.
+- iter 97: Annotation callout blocks removed (4 cards) + audit script updated (P2-18 positive → negative). 97/97 PASS. COMPLETE.
+- iter 96: KI#63 version drift fix + build regeneration. All 4 version sources synced at 9.2.6. COMPLETE.
