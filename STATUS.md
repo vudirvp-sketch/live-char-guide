@@ -2,34 +2,41 @@
 
 > **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
 > **Date:** 2026-08-13
-> **Iteration:** 102
+> **Iteration:** 103
 
 ---
 
 ## Current State
 
-**iter 102 — VS-EMBED placement audit + reorder (6 misplaced visual elements fixed).**
+**iter 103 — English terms audit + categorization (no source HTML changes).**
 
-User reported that some visual/interactive elements (tables, VS-EMBEDs, callouts) appear
-BEFORE the introductory/explanatory text that should logically precede them — the reader
-sees a visual first, then below it the text explaining what it represents. Full survey of
-all 14 master HTML files (~6,600 lines, 207 visual elements) identified 6 misplaced
-VS-EMBEDs across 4 files. All 6 moved inside their sections, after the intro `<p>`.
+User requested a comprehensive survey of all English words/terms in the guide that have
+direct Russian equivalents, with feasibility assessment for translation. Survey covered
+all 14 master HTML files (~6,600 lines, 3 238 Latin-token instances). Each token was
+categorized into one of 4 buckets: A (KEEP ENGLISH — intentional anchors, ~1 440),
+B (TRANSLATE — clear leaks, ~470), C (BORDERLINE — case-by-case, ~640), D (HTML
+artifacts — false positives, ~120).
 
-- **Survey:** 4 parallel agents scanned part_01–10 + appendices. 1 HIGH + 5 MEDIUM
-  confidence misplacements found; 7 LOW-confidence "preamble" patterns left as-is
-  (deliberate design — intro text explicitly references "показан выше").
-- **Fixes (6 VS-EMBED moves):** E14 (part_09), E06 (part_04), E09 (part_05),
-  E08 + E16 + E02 (part_07a). Each moved from BEFORE its `<section>` to INSIDE,
-  after the intro `<p>`. E14 intro text updated: "выше" → "ниже".
-- **Audit script updated:** `audit_canon_master_sync.py` P0-11 substring updated
-  ("показаны выше" → "показаны ниже") to match the reordered text.
-- **Validation:** `validate:master` PASS (12/12). Canon sync 97/97 PASS.
-  Build PASS. 64/64 tests PASS. QA: no new syntax/English leaks.
-  "Content outside section" warnings reduced 22 → 17 (5 VS-EMBEDs moved inside).
-- Scope: 4 master HTML + 1 audit script + 3 doc files = 8 files. Exceeds 3–5 soft
-  limit — justified: the 6 VS-EMBED fixes are atomic (partial reorder would leave
-  inconsistent placement). Doc updates are mandatory per iteration protocol.
+- **New artifacts:** `docs/research/english_terms_audit_iter103.md` (32KB analysis
+  report, 10 sections) + `docs/research/english_terms_audit_iter103.json` (749KB
+  companion data, all token instances with line numbers + context).
+- **New script:** `scripts/survey_english_terms.py` — superset of `check_english.py`.
+  Detects single English words (not just 3+ consecutive), categorizes, aggregates.
+  Re-runnable for future iterations.
+- **3-iteration plan proposed:** iter-104 (Category B clear leaks, 4 files, ~10 edits),
+  iter-105 (Category C borderline standardization, 5–6 files, ~30 edits), iter-106
+  (polish + canon sync). Total estimated effort: ~2 hours.
+- **10 open questions for author** in audit report §9 — decisions on
+  `Trigger → Action → Price` vs `триггер → действие → цена`, `Embodiment Protocol`
+  quad translation, `SP` vs `СП`, `AP-1`...`AP-15` prose labels, `Quick Check`/
+  `Full Check` labels, `cautious zone`, `Model Capability Table` heading,
+  `Token Budget Check` heading, `Quality Grade A/B/C` label, baseline leak policy.
+- **No KI opened or closed.** Doc-only iteration — no `pnpm run build`, no version
+  bump, no source HTML touched.
+- **Existing baseline confirmed:** `check_english.py` reports 21 leaks (was
+  documented as 24 — 3-leak discrepancy is pre-existing, noted in iter 102 worklog).
+  All 21 are by design (Tone Frame SP, Part 10 Elena card, Model Capability Table
+  heading, Token Budget Check heading, Quality Grade label).
 
 ---
 
@@ -63,7 +70,9 @@ Full invariants list: see `AGENT_NAVIGATION.md` §5 and §6.
 
 | Iteration | Task | Status |
 |-----------|------|--------|
-| **iter 102** | VS-EMBED placement audit + reorder (6 misplaced visuals fixed) | ✅ COMPLETE |
-| iter 101 | Agent infrastructure English rewrite + actualization | ✅ COMPLETE |
-| iter 103 (proposed) | Resolve KI#64 — version sync reconciliation | pending user decision |
+| **iter 103** | English terms audit + categorization (doc-only) | ✅ COMPLETE |
+| iter 104 (proposed) | Category B translation pass — clear English leaks (4 files, ~10 edits) | pending author approval + answers to 10 open questions in audit §9 |
+| iter 105 (proposed) | Category C borderline pass — bilingual-gloss standardization (5–6 files, ~30 edits) | pending iter 104 completion |
+| iter 106 (proposed) | Polish pass — re-run audits, sync canon, update `KEEP_ENGLISH_TERMS` if needed | pending iter 105 completion |
+| iter 107 (proposed) | Resolve KI#64 — version sync reconciliation | pending user decision |
 | deferred | V8/V9 Decision items — pending author discussion | — |

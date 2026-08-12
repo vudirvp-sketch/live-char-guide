@@ -6,6 +6,15 @@
 
 ## [9.2.6] — 2026-08-13
 
+### iter 103 — English terms audit + categorization (doc-only)
+
+- **Survey:** All 14 master HTML files (~6,600 lines, 3 238 Latin-token instances) audited for English words/terms with direct Russian equivalents. New script `scripts/survey_english_terms.py` authored — superset of `check_english.py` that detects single English words (not just 3+ consecutive), categorizes into ALLOWED / TRANSLATABLE / UNKNOWN, and outputs JSON companion data.
+- **Categorization:** ~1 440 KEEP ENGLISH (intentional anchors — CORE DIRECTIVES, callout labels, SPINE/OCEAN/MBTI/CoT framework terms, SillyTavern field names, sampler parameters, section IDs). ~470 TRANSLATE (clear leaks — pure function words, heading-only leaks, common-noun prose leaks). ~640 BORDERLINE (case-by-case — Anchor triplet, Embodiment Protocol quad, AP-N labels, cautious zone). ~120 HTML ARTIFACTS (false positives — `gt`, `lt`, `rarr`, `mdash`, `laquo`, `raquo`, `sect` entity names).
+- **New artifacts:** `docs/research/english_terms_audit_iter103.md` (32KB analysis report, 10 sections) + `docs/research/english_terms_audit_iter103.json` (749KB companion data) + `scripts/survey_english_terms.py` (8.5KB, re-runnable).
+- **3-iteration plan proposed:** iter-104 (Category B clear leaks, 4 files, ~10 edits) → iter-105 (Category C borderline standardization, 5–6 files, ~30 edits) → iter-106 (polish + canon sync).
+- **10 open questions for author** in audit report §9 — decisions on `Trigger → Action → Price` vs `триггер → действие → цена`, `Embodiment Protocol` quad translation, `SP` vs `СП`, `AP-N` prose labels, `Quick Check`/`Full Check` labels, `cautious zone`, `Model Capability Table` heading, `Token Budget Check` heading, `Quality Grade A/B/C` label, baseline leak policy.
+- **No source HTML changes.** Doc-only iteration — no `pnpm run build`, no version bump, no KI opened or closed. KI#64 still OPEN (untouched).
+
 ### iter 102 — VS-EMBED placement audit + reorder (6 misplaced visual elements fixed)
 
 - **Survey:** All 14 master HTML files (~6,600 lines, 207 visual elements) audited for misplaced visual/interactive elements — cases where a visual (table, VS-EMBED, callout, infographic) appears BEFORE the introductory/explanatory text that should logically precede it. 4 parallel agents scanned every section; 6 misplaced VS-EMBEDs identified (1 HIGH + 5 MEDIUM confidence). 7 LOW-confidence "preamble" patterns left as-is (deliberate design — intro text explicitly references "показан выше").

@@ -5,37 +5,34 @@
 
 ---
 
-Task ID: iter-102-vs-embed-reorder
+Task ID: iter-103-english-terms-audit
 Agent: main
-Task: Audit all 14 master HTML files for misplaced visual/interactive elements (visuals appearing BEFORE their introductory text); fix identified misplacements.
+Task: Survey + categorize + feasibility analysis of all English words/terms in `src/master/*.html` that have direct Russian equivalents. No source HTML changes — translation passes deferred to iter 104/105 pending author approval.
 
 Work Log:
-- 1: Cloned repo. Read `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `AGENTS.md`, `docs/canon/_README.md`, `docs/components.md`. Grepped 14 master files: 207 visual elements across 13 files.
-- 2: Launched 4 parallel survey agents (general-purpose) covering part_01–03+appendices, part_04–05, part_06–07a–07b, part_08–09–10. Each agent read every section, checked if visual elements (callouts, tables, VS-EMBEDs, infographics, widgets, diff-views, antipattern-cards) appear before their introductory `<p>`. Criteria: flag only HIGH/MEDIUM confidence; exclude self-explanatory reference tables, opening RULE callouts, preamble patterns with explicit "показан выше" references.
-- 3: Survey results: 6 misplaced VS-EMBEDs found (1 HIGH + 5 MEDIUM). 7 LOW-confidence "preamble" patterns left as-is (deliberate design — intro text explicitly references the visual above). No in-section misplacements (all callouts/tables/widgets correctly placed after intro prose).
-- 4: Identified 6 fixes: E14 (part_09 p9_quality_scale), E06 (part_04 p4_ghost_layers), E09 (part_05 p5_ocean_basics), E08+E16+E02 (part_07a: p7a_core_directives, p7a_authors_note, p7a_assembly_pipeline). Each VS-EMBED was placed BEFORE its `<section>` tag, between the previous section's `</section>` and the next `<section>`.
-- 5: Wrote Python script `/home/z/my-project/scripts/move_vs_embeds.py` (persisted per Rule 9). Script reads each file, finds VS-EMBED block by start/end markers (`<!-- VS-EMBED: EXX -->` ... `<!-- REPLACED BY VISUAL SYSTEM: EXX -->`), removes it from old location, inserts after destination anchor (intro `<p>`). Dry-run first — all 6 passed. Then applied for real — all 6 OK.
-- 6: E14 text update: intro `<p>` said "показаны выше" (shown above) — changed to "показаны ниже" (shown below) since E14 is now below the intro. Also "Ниже — конкретные паттерны" → "Затем — конкретные паттерны" (avoid "ниже...Ниже" repetition). Other 5 VS-EMBEDs needed no text changes.
-- 7: Ran `pnpm run validate:master` — PASS (12/12 checks). "Content outside section" warnings reduced 22 → 17 (5 VS-EMBEDs moved from outside to inside sections; E14 was already inside, just reordered).
-- 8: Ran `python3 scripts/audit_canon_master_sync.py` — 1 FAIL: P0-11 expected old text "показаны выше". Updated audit script P0-11 substring to "показаны ниже" + added iter 102 note. Re-ran: 97/97 PASS.
-- 9: Ran `pnpm run build` — SUCCESS (hash 8499b4e3). `pnpm run validate` — PASS. `pnpm run version:check` — sync (9.2.6). `pnpm test` — 64/64 PASS. QA syntax/english: counts identical before/after (235 Markdown patterns, 21 English leaks — all pre-existing; no new leaks introduced). VS embed audit: no regressions.
-- 10: Updated `STATUS.md` (iter 102, KI#65 closed, roadmap). Updated `worklog.md` (this entry). Updated `CHANGELOG.md` (iter 102 entry).
+- 1: Cloned repo. Read `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `AGENTS.md`, `docs/canon/_README.md`. Confirmed task scale = Deep (analysis across all 14 master HTML files). Read existing `scripts/check_english.py` — baseline 21 leaks (down from documented 24), all intentional (Tone Frame SP, Part 10 Elena card, Model Capability Table heading, Token Budget Check heading, Quality Grade).
+- 2: Authored `scripts/survey_english_terms.py` — superset of `check_english.py`. Inherits `KEEP_ENGLISH_TERMS`, `build_code_intervals`, `is_in_allowed_context` (no logic fork). Detects single English words (not just 3+ consecutive), categorizes into ALLOWED / TRANSLATABLE / UNKNOWN, aggregates per-file + global counters, outputs JSON companion.
+- 3: Ran survey on 14 master HTML files. Total: 3 238 token instances. Per-file counts in audit report §3. Top UNKNOWN: Anchors (118), Anchor (62), SP (50), AP- (50), Embodiment (42), Enneagram (38). Top TRANSLATABLE: RULE (51, callout label — keep), Voice (42, compound — keep), Part (35), Price (33), Trigger (14), Token (14), Budget (13), Check (13), Grade (11).
+- 4: Sampled context for top 50 UNKNOWN + top 30 TRANSLATABLE tokens to verify categorization. Confirmed glossary already has bilingual convention (`Anti-godmoding (анти-годмодинг)`, `Behavioral Anchor (поведенческий якорь)`, `Voice Bleed (переплетение голосов)`). HTML entity names (`gt`, `lt`, `rarr`, `mdash`, `laquo`, `raquo`, `sect`) flagged as Category D false positives — not real English.
+- 5: Wrote `docs/research/english_terms_audit_iter103.md` (analysis report — 10 sections: executive summary, methodology, per-file results, 4-category feasibility analysis, 3-iteration plan, risks, validation plan, companion data reference, 10 open questions for author, stop point). Wrote `docs/research/english_terms_audit_iter103.json` (companion data — 749KB, all token instances with line numbers + context).
+- 6: Copied survey script to `scripts/survey_english_terms.py` (re-runnable for future iterations). Updated path references to use `Path(__file__).parent` instead of hardcoded paths. Verified script runs from new location.
+- 7: Updated `STATUS.md` (iter 103, roadmap with proposed iter 104/105). Updated `worklog.md` (this entry — moved iter-102 to Previous Iterations brief list, total 8 entries — under 10 cap). Updated `CHANGELOG.md` (iter 103 entry under existing [9.2.6] header — version unchanged, doc-only iteration).
 
 Stage Summary:
-- **iter 102 COMPLETE — VS-EMBED placement audit + reorder.**
-- **6 VS-EMBEDs moved** from before their sections to inside (after intro `<p>`): E14, E06, E09, E08, E16, E02.
-- **4 master HTML files touched:** `part_04.html`, `part_05.html`, `part_07a.html`, `part_09.html`.
-- **1 audit script updated:** `audit_canon_master_sync.py` (P0-11 substring).
-- **3 doc files updated:** `STATUS.md`, `worklog.md`, `CHANGELOG.md`.
-- **Validation:** 12/12 master, 97/97 canon sync, 64/64 tests, build OK, version sync OK.
-- **KI#65 CLOSED** (found + fixed in same iteration).
-- **KI#64 still OPEN** (version drift on mermaid-init.js — needs user decision).
-- Root fallbacks regenerated by `pnpm run build` (parts/, index.html, assets/, etc.).
+- **iter 103 COMPLETE — English terms audit + categorization.**
+- **3 new files:** `docs/research/english_terms_audit_iter103.md` (analysis, 32KB), `docs/research/english_terms_audit_iter103.json` (companion data, 749KB), `scripts/survey_english_terms.py` (re-runnable script, 8.5KB).
+- **0 source HTML changes.** Doc-only iteration — no `pnpm run build` needed, no version bump, no KI opened or closed.
+- **Survey verdict:** 3 238 token instances surveyed. ~1 440 KEEP ENGLISH (intentional anchors), ~470 TRANSLATE (clear leaks), ~640 BORDERLINE (case-by-case), ~120 HTML ARTIFACTS (false positives).
+- **3-iteration plan proposed:** iter-104 (Category B clear leaks, 4 files, ~10 edits), iter-105 (Category C borderline standardization, 5-6 files, ~30 edits), iter-106 (polish + canon sync). Total estimated effort: ~2 hours.
+- **10 open questions for author** in audit report §9 — decisions on `Trigger → Action → Price` vs `триггер → действие → цена`, `Embodiment Protocol` quad, `SP` vs `СП`, `AP-1`...`AP-15` prose labels, `Quick Check`/`Full Check` labels, `cautious zone`, `Model Capability Table` heading, `Token Budget Check` heading, `Quality Grade A/B/C` label, baseline leak policy.
+- **KI#64 still OPEN** (version drift on mermaid-init.js — untouched this iteration).
+- **Next iteration (iter 104) requires author approval** of this plan + answers to the 10 open questions before any source HTML changes.
 
 ---
 
 ## Previous Iterations (brief)
 
+- iter 102: VS-EMBED placement audit + reorder. 6 misplaced visual elements (E14, E06, E09, E08, E16, E02) moved inside their sections after intro `<p>`. 4 master HTML + 1 audit script + 3 doc files. KI#65 CLOSED. COMPLETE.
 - iter 101: Agent infrastructure English rewrite + actualization. New `AGENTS.md`, `AGENT_NAVIGATION.md`/`STATUS.md`/`worklog.md`/`PLAN.md` rewritten in English. KI#64 documented. COMPLETE.
 - iter 100: Mermaid dynamic theme re-render on toggle — `window.reRenderMermaid(theme)` in `mermaid-init.js`, light theme config, `data-original` source preservation. COMPLETE.
 - iter 99: Theme chain simplified — `body.theme-oled` removed, default = OLED/dark, only `theme-light` toggled. COMPLETE.
