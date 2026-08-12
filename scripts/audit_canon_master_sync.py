@@ -212,11 +212,12 @@ CHECKS = [
     ),
     # ----- P0-12 (A10): part_09 Vysh Quick Check rename -----
     # iter 51 KI#36: substring updated — "5 items" → "5 пунктов", "universal Quick Check" → "универсального Quick Check"
+    # iter 105: Quick Check → Быстрая проверка (Category C translation pass)
     (
         "P0-12",
         "part_09.html",
-        "<h5>Структурная проверка Выщербленного (5 пунктов — отлична от универсального Quick Check выше)</h5>",
-        "part_09 Vysh Quick Check heading renamed + clarifier paragraph (iter 35 P0-12 fix; iter 51 русификация)",
+        "<h5>Структурная проверка Выщербленного (5 пунктов — отлична от универсальной Быстрой проверки выше)</h5>",
+        "part_09 Vysh Quick Check heading renamed + clarifier paragraph (iter 35 P0-12 fix; iter 51 русификация; iter 105 Quick Check → Быстрая проверка)",
     ),
     # ----- P0-13 (B1 GHOST): part_10 Omnis GHOST rewrite -----
     (
@@ -369,35 +370,36 @@ CHECKS = [
         "part_07a Format Lock RULE: Pattern Matcher ref updated with «модель выступает как» prefix + «(см. §1.4 Part 1)» suffix (iter 37 P2-9 fix)",
     ),
     # ----- P2-12 (B4): part_03 §3.4 Tier 1/2/3 → Quality Grade A/B/C -----
+    # iter 105: Grade A/B/C tier labels → класс A/B/C (Category C translation pass); Quality Grade compound kept as proper noun
     (
         "P2-12a",
         "part_03.html",
-        "<strong>Quality Grade A / B / C</strong> (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10)",
-        "part_03 §3.4: Quality Grade A/B/C disambiguation block added (iter 37 P2-12 fix)",
+        "<strong>Quality Grade</strong> (класс A / B / C) (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10)",
+        "part_03 §3.4: Quality Grade A/B/C disambiguation block added (iter 37 P2-12 fix; iter 105 Grade A/B/C → класс A/B/C)",
     ),
     (
         "P2-12b",
         "part_03.html",
-        "<tr><th>Критерий</th><th>Grade A (✓)</th><th>Grade B (⚠)</th><th>Grade C (✗)</th><th>Относится к</th></tr>",
-        "part_03 §3.4: quality table headers Tier 1/2/3 → Grade A/B/C (iter 37 P2-12 fix)",
+        "<tr><th>Критерий</th><th>класс A (✓)</th><th>класс B (⚠)</th><th>класс C (✗)</th><th>Относится к</th></tr>",
+        "part_03 §3.4: quality table headers Tier 1/2/3 → Grade A/B/C (iter 37 P2-12 fix; iter 105 Grade A/B/C → класс A/B/C)",
     ),
     (
         "P2-12c",
         "part_03.html",
-        "<h4>До/После: Grade A vs Grade C</h4>",
-        "part_03 §3.4: «До/После» heading Tier 1 vs Tier 3 → Grade A vs Grade C (iter 37 P2-12 fix)",
+        "<h4>До/После: класс A vs класс C</h4>",
+        "part_03 §3.4: «До/После» heading Tier 1 vs Tier 3 → Grade A vs Grade C (iter 37 P2-12 fix); Grade A/C → класс A/C (iter 104 translation pass)",
     ),
     (
         "P2-12d",
         "part_03.html",
-        "<div class=\"diff-label\">Grade C (плохо)</div>",
-        "part_03 §3.4: diff-view label Tier 3 → Grade C (iter 37 P2-12 fix)",
+        "<div class=\"diff-label\">класс C (плохо)</div>",
+        "part_03 §3.4: diff-view label Tier 3 → Grade C (iter 37 P2-12 fix; iter 105 Grade C → класс C)",
     ),
     (
         "P2-12e",
         "part_03.html",
-        "<div class=\"diff-label\">Grade A (хорошо)</div>",
-        "part_03 §3.4: diff-view label Tier 1 → Grade A (iter 37 P2-12 fix)",
+        "<div class=\"diff-label\">класс A (хорошо)</div>",
+        "part_03 §3.4: diff-view label Tier 1 → Grade A (iter 37 P2-12 fix; iter 105 Grade A → класс A)",
     ),
     # ----- P2-13 (F4): part_04 §4.2 «Запрещённые слова» → «Запрещённые формулировки» -----
     (

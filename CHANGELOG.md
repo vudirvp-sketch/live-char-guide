@@ -6,36 +6,49 @@
 
 ## [9.2.6] — 2026-08-13
 
+### iter 105 — Category C borderline translation pass: Quick/Full Check + Grade A/B/C tier labels translated
+
+- **Translations applied** (2 master HTML files, 2 canon MD files, 1 audit script — all in sync):
+  - `part_03.html` / `part_03.md`: `Grade A/B/C (✓/⚠/✗)` tier labels → `класс A/B/C (✓/⚠/✗)` — in list items, table headers, diff-view labels (`Grade C (плохо)` → `класс C (плохо)`, `Grade A (хорошо)` → `класс A (хорошо)`), and `<pre>` plain-copy block. `Quality Grade` compound kept as proper noun; intro line restructured: `Quality Grade A / B / C` → `Quality Grade (класс A / B / C)` to separate system name from tier labels.
+  - `part_09.html` / `part_09.md`: `Quick Check` → `Быстрая проверка` (nominative) / `Быструю проверку` (accusative per Russian grammar context); `Full Check` → `Полная проверка`. Applied to `<h4>`/`<h5>` headings, `<summary>` labels, prose references (`Елена проходит Быструю проверку`, `см. Быструю проверку выше`, `отлична от универсальной Быстрой проверки`), and HTML comment canonical tag.
+- **Translation policy decisions (documented for iter-106+):**
+  - Q1 `Trigger → Action → Price` → KEEP English (all occurrences are format-notation, not pedagogical prose).
+  - Q2 `Embodiment Protocol` quad (`State`/`Body`/`Sensor`/`Speech`) → KEEP English 4-tuple (matches protocol notation).
+  - Q3 `SP` → KEEP Latin (glossary establishes `SP (системный промпт)`; `СП` would break convention).
+  - Q4 `AP-N` → KEEP (matches section IDs, no drift risk).
+  - Q5 `Quick Check` / `Full Check` → TRANSLATED.
+  - Q6 `cautious zone` → KEEP as OCEAN jargon (already explained in prose).
+  - Q9 `Grade A/B/C` tier labels → TRANSLATED to `класс A/B/C`; `Quality Grade` compound → KEEP as proper noun.
+  - Q10 baseline leaks → LEAVE (by-design: Part 10 example card + Part 06 stair-step).
+- **Audit script update:** `scripts/audit_canon_master_sync.py` — 6 check substrings updated (P0-12 part_09 Vysh heading, P2-12a/b/d/e part_03 Quality Grade + table headers + diff-labels). Descriptions amended with iter-105 notes. 97/97 PASS maintained.
+- **Validation:** `pnpm run build` SUCCESS (hash 8499b4e3). `validate` 5/5 + SHELL-* PASS. `validate:master` 12/12 PASS. `version:check` 9.2.6 sync. `pnpm test` 64/64 PASS. Canon sync 97/97 PASS. CSP/bundle/doc-versions/VS-embeds all PASS.
+- **English leak baseline:** 18 → 17 (-1). Cumulative iter-104+105: 21 → 17 (-4). Remaining 17 are by-design (Part 10 Elena example card content + Part 06 stair-step format).
+- **Scope:** 5 source files (2 master HTML + 2 canon MD + 1 audit script) + 4 auto-regenerated root fallbacks via `pnpm run build`. Within 3–5 file soft limit.
+- **KI#65 DELETED** from STATUS.md (closed iter-102, now 2 iterations old — mandatory deletion per AGENTS.md §3 KI lifecycle rule). KI#64 still OPEN (untouched).
+
+### iter 104 — Category B translation pass: 4 clear English heading leaks translated
+
+- **Translations applied** (4 master HTML files, 4 canon MD files, 1 audit script — all in sync):
+  - `appendix_model_table.html` / `.md`: `<h2>Model Capability Table</h2>` → `<h2>Таблица возможностей моделей</h2>` (bilingual gloss already existed in HTML comment).
+  - `part_03.html` / `.md`: `<h4>До/После: Grade A vs Grade C</h4>` → `<h4>До/После: класс A vs класс C</h4>` (`Grade` is a common noun here, not part of a proper name).
+  - `part_06.html` / `.md`: `<h3>Tier 3 CoT (API only)</h3>` → `<h3>Tier 3 CoT (только API)</h3>` (parenthetical function-word leak).
+  - `part_07a.html` / `.md`: `<h4>Шаг 6: Token Budget Check</h4>` → `<h4>Шаг 6: Проверка бюджета токенов</h4>` (`Check` here is a verb, not the noun `Token Budget`).
+- **Section IDs preserved:** `appendix_model_table`, `p3_quality_grade`, `p6_cot_tier3`, `p7a_token_budget` — all unchanged. No inbound anchor breakage.
+- **Audit script update:** `scripts/audit_canon_master_sync.py` P2-12c check substring updated — was hardcoded to the old English heading as an iter-37 regression marker; now checks for the translated Russian heading. 97/97 PASS maintained.
+- **English leak baseline:** 21 → 18 (-3). The 3 removed leaks were the translated headings.
+- **No KI opened or closed.** KI#64 still OPEN (untouched).
+
 ### iter 103 — English terms audit + categorization (doc-only)
 
-- **Survey:** All 14 master HTML files (~6,600 lines, 3 238 Latin-token instances) audited for English words/terms with direct Russian equivalents. New script `scripts/survey_english_terms.py` authored — superset of `check_english.py` that detects single English words (not just 3+ consecutive), categorizes into ALLOWED / TRANSLATABLE / UNKNOWN, and outputs JSON companion data.
-- **Categorization:** ~1 440 KEEP ENGLISH (intentional anchors — CORE DIRECTIVES, callout labels, SPINE/OCEAN/MBTI/CoT framework terms, SillyTavern field names, sampler parameters, section IDs). ~470 TRANSLATE (clear leaks — pure function words, heading-only leaks, common-noun prose leaks). ~640 BORDERLINE (case-by-case — Anchor triplet, Embodiment Protocol quad, AP-N labels, cautious zone). ~120 HTML ARTIFACTS (false positives — `gt`, `lt`, `rarr`, `mdash`, `laquo`, `raquo`, `sect` entity names).
-- **New artifacts:** `docs/research/english_terms_audit_iter103.md` (32KB analysis report, 10 sections) + `docs/research/english_terms_audit_iter103.json` (749KB companion data) + `scripts/survey_english_terms.py` (8.5KB, re-runnable).
-- **3-iteration plan proposed:** iter-104 (Category B clear leaks, 4 files, ~10 edits) → iter-105 (Category C borderline standardization, 5–6 files, ~30 edits) → iter-106 (polish + canon sync).
-- **10 open questions for author** in audit report §9 — decisions on `Trigger → Action → Price` vs `триггер → действие → цена`, `Embodiment Protocol` quad translation, `SP` vs `СП`, `AP-N` prose labels, `Quick Check`/`Full Check` labels, `cautious zone`, `Model Capability Table` heading, `Token Budget Check` heading, `Quality Grade A/B/C` label, baseline leak policy.
-- **No source HTML changes.** Doc-only iteration — no `pnpm run build`, no version bump, no KI opened or closed. KI#64 still OPEN (untouched).
+- Surveyed all 14 master HTML files (~6,600 lines, 3 238 Latin-token instances). New script `scripts/survey_english_terms.py`. Categorized into A (KEEP ENGLISH ~1 440), B (TRANSLATE ~470), C (BORDERLINE ~640), D (HTML ARTIFACTS ~120). 3 new artifacts: audit report + companion JSON + re-runnable survey script. 3-iteration translation plan proposed. No source HTML changes.
 
 ### iter 102 — VS-EMBED placement audit + reorder (6 misplaced visual elements fixed)
 
-- **Survey:** All 14 master HTML files (~6,600 lines, 207 visual elements) audited for misplaced visual/interactive elements — cases where a visual (table, VS-EMBED, callout, infographic) appears BEFORE the introductory/explanatory text that should logically precede it. 4 parallel agents scanned every section; 6 misplaced VS-EMBEDs identified (1 HIGH + 5 MEDIUM confidence). 7 LOW-confidence "preamble" patterns left as-is (deliberate design — intro text explicitly references "показан выше").
-- **`src/master/part_09.html`:** E14 (Quality Scale thermometer) moved from before `<h3>Шкала качества карточки</h3>` to after the intro `<p>`. Intro text updated: "показаны выше" → "показаны ниже"; "Ниже — конкретные паттерны" → "Затем — конкретные паттерны" (avoid repetition).
-- **`src/master/part_04.html`:** E06 (GHOST Layers concentric rings) moved from before `<section p4_ghost_layers>` to after the Cross-ref `<p>` inside the section. E06 has no built-in explanation panel (unlike E05), so the reader previously saw G1/G2/G3 rings before learning what GHOST Layers means.
-- **`src/master/part_05.html`:** E09 (OCEAN Pentagon + Context Limits) moved from before `<section p5_ocean_basics>` to after the Cautious zone `<p>` (after both RULE callouts). E09 uses "экстремум" 4 times in its context-limits box — previously appeared before the concept of extreme poles was defined.
-- **`src/master/part_07a.html`:** E08 (CORE DIRECTIVES hub-spoke), E16 (Author's Note Mechanics), E02 (Assembly Pipeline 6-step) — all 3 moved from before their respective `<section>` tags to after their intro `<p>`s. E02's intro said "Ниже" (below) while the visual was above — now consistent.
-- **`scripts/audit_canon_master_sync.py`:** P0-11 check substring updated ("показаны выше" → "показаны ниже") to match the reordered E14 text. Added iter 102 note to comment.
-- **Validation:** `validate:master` 12/12 PASS. Canon sync 97/97 PASS. Build PASS (hash 8499b4e3). 64/64 tests PASS. Version sync OK (9.2.6). QA: no new syntax/English leaks. "Content outside section" warnings reduced 22 → 17.
-- **KI#65 CLOSED** (found + fixed in same iteration). KI#64 still OPEN.
+- 6 misplaced VS-EMBEDs (E14, E06, E09, E08, E16, E02) moved inside their sections after intro `<p>`. 4 master HTML + 1 audit script + 3 doc files. KI#65 CLOSED. 97/97 PASS. Build PASS. 64/64 tests PASS.
 
 ### iter 101 — Agent infrastructure English rewrite + actualization
 
-- **New file: `AGENTS.md`** — short LLM-friendly entry point at repo root. Standard filename recognized by coding agents (Cursor, Aider, Continue, etc.). Covers project overview, iteration protocol, reading gradient by task scale, directory map, common commands, critical rules, git safety, stop-and-confirm list, output format, and doc pointers.
-- **`AGENT_NAVIGATION.md` rewritten in English** — was Russian prose mixed with English anchors. Same 10-section structure preserved, but with cleaner tables, imperative mood, and better cross-referencing. Updated roadmap (§8) to include iter 97–101. Added KI#64 to §6 pitfall #8 (alongside KI#63). Fixed duplicated pitfall numbering (was two #22 entries).
-- **`STATUS.md` rewritten in English** — fixed version drift (was `9.3.0`, canonical is `9.2.6`). Added KI#64 to Known Issues. Replaced prose with table format for Known Issues + Roadmap.
-- **`worklog.md` rewritten in English** — added iter-101 entry with full Work Log + Stage Summary. Previous-iterations list pruned to 5 entries (within cap of 10).
-- **`PLAN.md` rewritten in English** — actualized stop-point (§5) to iter 101. Preserved historical context (§1–4) as record of docs-restructure plan.
-- **`README.md` updated** — added `AGENTS.md` reference. Confirmed canonical version `9.2.6`. Added pointer to `AGENTS.md` as "read first for agents".
-- **KI#64 OPEN (not fixed):** version drift detected — `src/shell/widgets/mermaid-init.js` JSDoc shows `9.3.0` (bumped alone in iter 100), but canonical sources (`package.json`, `src/VERSION`, `data/character_schema.json`) remain at `9.2.6`. Same pattern as KI#63. Resolution requires either (a) rollback `mermaid-init.js` JSDoc → `9.2.6`, or (b) 4-place bump to `9.3.0` (needs user confirmation per `AGENTS.md` §"Stop and confirm" — touching `package.json` version field).
-- **Scope note:** 7 files modified. Exceeds the 3–5 soft limit per iteration. Justified by user's explicit request to update "all agent infrastructure" in one pass — splitting across multiple iterations would break coherence (English rewrite must be atomic to avoid mixed-language state).
+- New `AGENTS.md` (short LLM-friendly entry point). `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `PLAN.md` rewritten in English. `README.md` updated with `AGENTS.md` reference. KI#64 documented (mermaid-init.js version drift).
 
 ### iter 100 — Mermaid dynamic theme re-render on toggle
 
