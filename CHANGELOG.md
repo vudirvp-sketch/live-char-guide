@@ -6,6 +6,17 @@
 
 ## [9.2.6] — 2026-08-13
 
+### iter 102 — VS-EMBED placement audit + reorder (6 misplaced visual elements fixed)
+
+- **Survey:** All 14 master HTML files (~6,600 lines, 207 visual elements) audited for misplaced visual/interactive elements — cases where a visual (table, VS-EMBED, callout, infographic) appears BEFORE the introductory/explanatory text that should logically precede it. 4 parallel agents scanned every section; 6 misplaced VS-EMBEDs identified (1 HIGH + 5 MEDIUM confidence). 7 LOW-confidence "preamble" patterns left as-is (deliberate design — intro text explicitly references "показан выше").
+- **`src/master/part_09.html`:** E14 (Quality Scale thermometer) moved from before `<h3>Шкала качества карточки</h3>` to after the intro `<p>`. Intro text updated: "показаны выше" → "показаны ниже"; "Ниже — конкретные паттерны" → "Затем — конкретные паттерны" (avoid repetition).
+- **`src/master/part_04.html`:** E06 (GHOST Layers concentric rings) moved from before `<section p4_ghost_layers>` to after the Cross-ref `<p>` inside the section. E06 has no built-in explanation panel (unlike E05), so the reader previously saw G1/G2/G3 rings before learning what GHOST Layers means.
+- **`src/master/part_05.html`:** E09 (OCEAN Pentagon + Context Limits) moved from before `<section p5_ocean_basics>` to after the Cautious zone `<p>` (after both RULE callouts). E09 uses "экстремум" 4 times in its context-limits box — previously appeared before the concept of extreme poles was defined.
+- **`src/master/part_07a.html`:** E08 (CORE DIRECTIVES hub-spoke), E16 (Author's Note Mechanics), E02 (Assembly Pipeline 6-step) — all 3 moved from before their respective `<section>` tags to after their intro `<p>`s. E02's intro said "Ниже" (below) while the visual was above — now consistent.
+- **`scripts/audit_canon_master_sync.py`:** P0-11 check substring updated ("показаны выше" → "показаны ниже") to match the reordered E14 text. Added iter 102 note to comment.
+- **Validation:** `validate:master` 12/12 PASS. Canon sync 97/97 PASS. Build PASS (hash 8499b4e3). 64/64 tests PASS. Version sync OK (9.2.6). QA: no new syntax/English leaks. "Content outside section" warnings reduced 22 → 17.
+- **KI#65 CLOSED** (found + fixed in same iteration). KI#64 still OPEN.
+
 ### iter 101 — Agent infrastructure English rewrite + actualization
 
 - **New file: `AGENTS.md`** — short LLM-friendly entry point at repo root. Standard filename recognized by coding agents (Cursor, Aider, Continue, etc.). Covers project overview, iteration protocol, reading gradient by task scale, directory map, common commands, critical rules, git safety, stop-and-confirm list, output format, and doc pointers.

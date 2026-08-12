@@ -202,11 +202,13 @@ CHECKS = [
     # The fix's intent (4-zone, not 3-level) is now verified via the
     # "4 зоны качества" phrasing in §9.11 main text (was "4 уровня" before
     # iter 47 sync completion).
+    # iter 102 update: "показаны выше" → "показаны ниже" — E14 VS-EMBED moved
+    # from before the intro <p> to after it (iter 102 VS-EMBED reorder fix).
     (
         "P0-11",
         "part_09.html",
-        "4 зоны качества показаны выше (VS-EMBED E14: Критический 0–25% / Слабый 25–50% / Хороший 50–85% / Отличный 85–100%)",
-        "part_09 §9.11: 3-level → 4-zone scale (iter 35 P0-11 fix, iter 47 sync completion — «4 уровня» → «4 зоны»)",
+        "4 зоны качества показаны ниже (VS-EMBED E14: Критический 0–25% / Слабый 25–50% / Хороший 50–85% / Отличный 85–100%)",
+        "part_09 §9.11: 3-level → 4-zone scale (iter 35 P0-11 fix, iter 47 sync completion — «4 уровня» → «4 зоны»; iter 102 — «выше» → «ниже» after E14 reorder)",
     ),
     # ----- P0-12 (A10): part_09 Vysh Quick Check rename -----
     # iter 51 KI#36: substring updated — "5 items" → "5 пунктов", "universal Quick Check" → "универсального Quick Check"

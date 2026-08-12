@@ -5,34 +5,38 @@
 
 ---
 
-Task ID: iter-101-agent-infra-english
+Task ID: iter-102-vs-embed-reorder
 Agent: main
-Task: Rewrite all agent-facing documentation in English, fix structural issues, document discovered version drift (KI#64).
+Task: Audit all 14 master HTML files for misplaced visual/interactive elements (visuals appearing BEFORE their introductory text); fix identified misplacements.
 
 Work Log:
-- 1: Cloned repo. Read `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `CHANGELOG.md`, `PLAN.md`, `README.md`, `CONTRIBUTING.md`, `docs/architecture.md`, `docs/canon/_README.md`, `docs/components.md`, `package.json`, `src/VERSION`, `eslint.config.js`, `.gitignore`, `.husky/pre-commit`.
-- 2: Detected version drift (KI#64): `mermaid-init.js` JSDoc shows `9.3.0` (bumped alone in iter 100), but `package.json` + `src/VERSION` + `data/character_schema.json` all still say `9.2.6`. Documented as KI#64 in `STATUS.md`. Did NOT fix — requires either rollback or 4-place bump (needs user confirmation per §2 of `AGENTS.md`).
-- 3: Created new `AGENTS.md` — short LLM-friendly entry point (~150 lines). Standard filename recognized by coding agents (Cursor, Aider, Continue, etc.). Covers: project overview, iteration protocol, reading gradient, where things live, common commands, critical rules, git safety, stop-and-confirm list, output format, doc pointers.
-- 4: Rewrote `AGENT_NAVIGATION.md` in English (was Russian prose mixed with English anchors). Same 10-section structure, but cleaner tables, imperative mood, better cross-referencing. Updated roadmap to include iter 97–101. Added KI#64 to §6 pitfall #8 (alongside KI#63). Updated pitfall numbering (was duplicated #22 — fixed).
-- 5: Rewrote `STATUS.md` in English. Fixed version field (9.3.0 → 9.2.6 canonical). Added KI#64 to Known Issues table. Updated invariants to reflect canonical 9.2.6. Pruned prose, kept table format.
-- 6: Rewrote `worklog.md` in English. Pruned previous-iterations list to 5 entries (was 4, well within cap of 10). Added this iter-101 entry.
-- 7: Updated `CHANGELOG.md` — added `[9.2.6]` iter 101 entry. Pre-existing entries (iter 93–97) left intact (Russian) since they are historical record; per Keep a Changelog format, only the latest entries need full detail. Collapsed iter 1–92 section to one-line summary (already done in prior iters).
-- 8: Rewrote `PLAN.md` in English. Actualized stop-point to iter 101. Preserved historical context (§1–4) as record of the docs-restructure plan. Updated §5 stop-point with current state.
-- 9: Updated `README.md` — English consistency (was already mostly English). Added `AGENTS.md` reference. Confirmed version 9.2.6. Added pointer to `AGENTS.md` as "read first for agents".
-- 10: Scope note: 7 files modified. Exceeds 3–5 soft limit per iteration. Justified by user's explicit request: "обнови и актуализируй, исправь и улучши всю агентскую инфраструктуру" — the user asked for ALL agent infrastructure in one pass. Splitting across multiple iterations would break coherence (English rewrite must be atomic to avoid mixed-language state).
+- 1: Cloned repo. Read `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `AGENTS.md`, `docs/canon/_README.md`, `docs/components.md`. Grepped 14 master files: 207 visual elements across 13 files.
+- 2: Launched 4 parallel survey agents (general-purpose) covering part_01–03+appendices, part_04–05, part_06–07a–07b, part_08–09–10. Each agent read every section, checked if visual elements (callouts, tables, VS-EMBEDs, infographics, widgets, diff-views, antipattern-cards) appear before their introductory `<p>`. Criteria: flag only HIGH/MEDIUM confidence; exclude self-explanatory reference tables, opening RULE callouts, preamble patterns with explicit "показан выше" references.
+- 3: Survey results: 6 misplaced VS-EMBEDs found (1 HIGH + 5 MEDIUM). 7 LOW-confidence "preamble" patterns left as-is (deliberate design — intro text explicitly references the visual above). No in-section misplacements (all callouts/tables/widgets correctly placed after intro prose).
+- 4: Identified 6 fixes: E14 (part_09 p9_quality_scale), E06 (part_04 p4_ghost_layers), E09 (part_05 p5_ocean_basics), E08+E16+E02 (part_07a: p7a_core_directives, p7a_authors_note, p7a_assembly_pipeline). Each VS-EMBED was placed BEFORE its `<section>` tag, between the previous section's `</section>` and the next `<section>`.
+- 5: Wrote Python script `/home/z/my-project/scripts/move_vs_embeds.py` (persisted per Rule 9). Script reads each file, finds VS-EMBED block by start/end markers (`<!-- VS-EMBED: EXX -->` ... `<!-- REPLACED BY VISUAL SYSTEM: EXX -->`), removes it from old location, inserts after destination anchor (intro `<p>`). Dry-run first — all 6 passed. Then applied for real — all 6 OK.
+- 6: E14 text update: intro `<p>` said "показаны выше" (shown above) — changed to "показаны ниже" (shown below) since E14 is now below the intro. Also "Ниже — конкретные паттерны" → "Затем — конкретные паттерны" (avoid "ниже...Ниже" repetition). Other 5 VS-EMBEDs needed no text changes.
+- 7: Ran `pnpm run validate:master` — PASS (12/12 checks). "Content outside section" warnings reduced 22 → 17 (5 VS-EMBEDs moved from outside to inside sections; E14 was already inside, just reordered).
+- 8: Ran `python3 scripts/audit_canon_master_sync.py` — 1 FAIL: P0-11 expected old text "показаны выше". Updated audit script P0-11 substring to "показаны ниже" + added iter 102 note. Re-ran: 97/97 PASS.
+- 9: Ran `pnpm run build` — SUCCESS (hash 8499b4e3). `pnpm run validate` — PASS. `pnpm run version:check` — sync (9.2.6). `pnpm test` — 64/64 PASS. QA syntax/english: counts identical before/after (235 Markdown patterns, 21 English leaks — all pre-existing; no new leaks introduced). VS embed audit: no regressions.
+- 10: Updated `STATUS.md` (iter 102, KI#65 closed, roadmap). Updated `worklog.md` (this entry). Updated `CHANGELOG.md` (iter 102 entry).
 
 Stage Summary:
-- **iter 101 COMPLETE — Agent infrastructure English rewrite + actualization.**
-- **New file:** `AGENTS.md` (short LLM entry point, ~150 lines).
-- **Rewritten in English:** `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `PLAN.md`.
-- **Updated:** `CHANGELOG.md`, `README.md`.
-- **KI#64 OPEN:** version drift on `mermaid-init.js` (9.3.0 vs canonical 9.2.6). Needs user decision: rollback OR 4-place bump.
-- No `src/`, `data/`, or root fallback files touched. No build run required (doc-only iteration). Pre-commit hook will run `pnpm run lint` only — safe to skip build via `SKIP_ARTIFACT_BUILD=1` if needed, but not required since lint passes on existing code.
+- **iter 102 COMPLETE — VS-EMBED placement audit + reorder.**
+- **6 VS-EMBEDs moved** from before their sections to inside (after intro `<p>`): E14, E06, E09, E08, E16, E02.
+- **4 master HTML files touched:** `part_04.html`, `part_05.html`, `part_07a.html`, `part_09.html`.
+- **1 audit script updated:** `audit_canon_master_sync.py` (P0-11 substring).
+- **3 doc files updated:** `STATUS.md`, `worklog.md`, `CHANGELOG.md`.
+- **Validation:** 12/12 master, 97/97 canon sync, 64/64 tests, build OK, version sync OK.
+- **KI#65 CLOSED** (found + fixed in same iteration).
+- **KI#64 still OPEN** (version drift on mermaid-init.js — needs user decision).
+- Root fallbacks regenerated by `pnpm run build` (parts/, index.html, assets/, etc.).
 
 ---
 
 ## Previous Iterations (brief)
 
+- iter 101: Agent infrastructure English rewrite + actualization. New `AGENTS.md`, `AGENT_NAVIGATION.md`/`STATUS.md`/`worklog.md`/`PLAN.md` rewritten in English. KI#64 documented. COMPLETE.
 - iter 100: Mermaid dynamic theme re-render on toggle — `window.reRenderMermaid(theme)` in `mermaid-init.js`, light theme config, `data-original` source preservation. COMPLETE.
 - iter 99: Theme chain simplified — `body.theme-oled` removed, default = OLED/dark, only `theme-light` toggled. COMPLETE.
 - iter 98: Dark theme removed, OLED + Light only. COMPLETE.
