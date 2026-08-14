@@ -1,7 +1,7 @@
 # Agent Navigation — Live Character Guide
 
 > **Entry document.** Read this first (or read [`AGENTS.md`](./AGENTS.md) for the short version).
-> **Canonical version:** `9.2.6`. **Current iteration:** 107.
+> **Canonical version:** `9.2.6`. **Current iteration:** 110.
 > Live-char-guide is an engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models).
 > Single linear guide: Part 0 → Part 10 + 4 appendices. All 10 Parts + 4 Appendix + Part 0 are ✅ MIGRATED,
 > 97 sections, 97/97 canon→master sync PASS.
@@ -158,7 +158,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 
 ### CORE DIRECTIVES (7, in System Prompt)
 
-Written in English (12B models historically follow English instructions more reliably; gap narrows on ≥128K vocabulary models):
+Layered by model (12B <64K vocab → English; ≥128K vocab 12B–14B → English or card language; 32B+/API → card language preferred — see §7A.2 RULE):
 
 1. Show Never Tell
 2. Embodiment First
@@ -181,7 +181,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 1. **`<style>` / `<script>` forbidden in master files** — all styles in `src/shell/styles.css` or `src/assets/vs-styles.css`, scripts in `src/shell/lazy-loader.js` or `src/shell/widgets/*.js`. Inline styles forbidden. Inline scripts forbidden (CSP compliance).
 2. **Content outside `<section data-section>`** — all content in master HTML MUST be inside a section with the `data-section` attribute.
 3. **Heading hierarchy** — one `<h1>` per page, `<h2>` for sections, `<h3>` for subsections. Do not skip levels.
-4. **English terms in Russian prose** — 3+ English words outside allowed contexts trigger `check_english.py`. Baseline: 24 English leaks by design (Tone Frame strings, SP directives, Part 10 examples, Quality Grade, Token Budget Check).
+4. **English terms in Russian prose** — 3+ English words outside allowed contexts trigger `check_english.py`. Baseline: 19 English leaks by design (Tone Frame strings, SP directives, Part 10 examples, Quality Grade, Token Budget Check). SP Language rule is layered (12B <64K → English; ≥128K 12B–14B → either; 32B+/API → card language) — see §7A.2 RULE.
 5. **CSS class creation without approval** — authors use ONLY components from `docs/components.md`. New classes require infrastructure approval.
 6. **Hardcoded widget data in JS** — all data lives in `data/*.json`. JS only reads.
 
@@ -248,9 +248,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ## 8. Roadmap (iter 101+)
 
-Current state: **iter 107 COMPLETE — Category B/C extended translation + KI#64 CLOSED.**
-All Phases A–E + iter 94–107 closed. KI#63 + KI#64 closed. No open KIs.
-Next: V8/V9 Decision items (deferred — pending author discussion) + optional iter-108 (Part 10 Elena card + Part 06 stair-step translation).
+Current state: **iter 110 COMPLETE — Multilingual forks A+B+C (SP language rule + Identity name rule + Script Tax/Vocabulary Size).**
+All Phases A–E + iter 94–110 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
+Next: Fork D (iter-113 — voice hierarchy + sampling + persona widget, JS infrastructure) — deferred, pending bandwidth.
 
 | Iteration | Task | Status |
 |-----------|------|--------|
@@ -274,8 +274,10 @@ Next: V8/V9 Decision items (deferred — pending author discussion) + optional i
 | iter 104 | Category B translation pass (PLANNED, not committed — picked up in iter-106) | ⚠️ SUPERSEDED |
 | iter 105 | Category C borderline translation pass — Quick/Full Check + Grade A/B/C | ✅ COMPLETE |
 | iter 106 | Category B final polish — 3 heading translations + survey script fix | ✅ COMPLETE |
-| **iter 107** | **Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED (mermaid-init.js rollback)** | **✅ COMPLETE** |
-| deferred | V8/V9 Decision items — pending author discussion | — |
+| iter 107 | Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED (mermaid-init.js rollback) | ✅ COMPLETE |
+| iter 108 | Multilingual actualization (safe text-only pass) — removed ~15-20% empirical claims + KI#65 CLOSED (canon→master directive drift) | ✅ COMPLETE |
+| **iter 110** | **Multilingual forks A+B+C — SP language rule layered + Identity name-language rule + Script Tax / Vocabulary Size as new Model Table concepts + Token Budget Script Tax RULE** | **✅ COMPLETE** |
+| deferred | Fork D (iter-113) — voice hierarchy + sampling + persona widget (JS infrastructure) | — |
 
 Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 

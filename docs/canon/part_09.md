@@ -212,7 +212,7 @@ migration_status: —
 
 **Сценарий:** карточка развёрнута на 12B-модели (Gemma 3 12B, Mistral Nemo 12B, Qwen 2.5 14B и подобные модели класса 12–14B актуальных поколений) — 12B-специфичные симптомы (быстрая деградация голоса, игнорирование SPINE, OOC, повторы, неспособность к CoT) с фиксом под архитектурные ограничения модели. Для общих симптомов (не 12B-специфичных) → `[ref: §9.5 — Таблица симптомов]`; для пошаговой диагностики → `[ref: §9.6 — Дерево решений]`; для рекомендованных параметров генерации под 12B → `[ref: part_07a.md §7A.6 — Sampling Parameters]`.
 
-12B модели имеют ограничения, требующие особого подхода. Рекомендуемые параметры генерации для 12B → `[ref: part_07a.md §7A.6 — Sampling Parameters]`.
+12B модели имеют ограничения, требующие особого подхода. Рекомендуемые параметры генерации для 12B → `[ref: part_07a.md §7A.6 — Sampling Parameters]`. Язык SP для 12B — многоуровневый: для ранних 12B с <64K словарём (Llama 2, Qwen 1.x) английский оптимален; для актуальных 12B–14B с ≥128K словарём (Gemma 3 12B, Mistral Nemo, Qwen 2.5 14B) язык карточки допустим — см. `[ref: part_07a.md §7A.2 — SP language rule]`.
 
 ### Симптомы 12B
 
@@ -274,7 +274,7 @@ migration_status: —
 |---|----------|---------------------|
 | 6 | CORE DIRECTIVES | Все 7 директив присутствуют |
 | 7 | Spatial & Anatomical Lock | Директива #3 в CORE DIRECTIVES |
-| 8 | Директивы на английском | SP directives in English, RP content in card language |
+| 8 | Язык SP | SP language rule per §7A.2 (12B <64K → English; 12B ≥128K → either; 32B+/API → card language). RP content always in card language |
 | 9 | Immersion Boundary | OOC-защита в SP |
 | 10 | GHOST-цепь | GHOST→LIE→FLAW→NEED→WANT логична |
 | 11 | Tone Frame | Присутствует для нетривиальных сеттингов |

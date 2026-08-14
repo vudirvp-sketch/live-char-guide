@@ -484,7 +484,7 @@
 
 <p><strong>Сценарий:</strong> карточка развёрнута на 12B-модели (Gemma 3 12B, Mistral Nemo 12B, Qwen 2.5 14B и подобные модели класса 12–14B актуальных поколений) — 12B-специфичные симптомы (быстрая деградация голоса, игнорирование SPINE, OOC, повторы, неспособность к CoT) с фиксом под архитектурные ограничения модели. Для общих симптомов (не 12B-специфичных) → <a href="#p9_symptom_table">§9.5: Таблица симптомов</a>; для пошаговой диагностики → <a href="#p9_decision_tree">§9.6: Дерево решений</a>; для рекомендованных параметров генерации под 12B → <a href="#p7a_sampling_params">Part 7A: Параметры генерации</a>.</p>
 
-<p>12B модели имеют ограничения, требующие особого подхода. Рекомендуемые параметры генерации для 12B → <a href="#p7a_sampling_params">Part 7A: Параметры генерации</a>.</p>
+<p>12B модели имеют ограничения, требующие особого подхода. Рекомендуемые параметры генерации для 12B → <a href="#p7a_sampling_params">Part 7A: Параметры генерации</a>. Язык SP для 12B — многоуровневый: для ранних 12B с &lt;64K словарём (Llama 2, Qwen 1.x) английский оптимален; для актуальных 12B–14B с ≥128K словарём (Gemma 3 12B, Mistral Nemo, Qwen 2.5 14B) язык карточки допустим — см. <a href="#p7a_core_directives">Part 7A §7A.2: SP language rule</a>.</p>
 
 <h4>Симптомы 12B</h4>
 <div class="table-wrap">
@@ -560,7 +560,7 @@
 <tbody>
 <tr><td>6</td><td>CORE DIRECTIVES</td><td>Все 7 директив присутствуют</td></tr>
 <tr><td>7</td><td>Spatial & Anatomical Lock</td><td>Директива #3 в CORE DIRECTIVES</td></tr>
-<tr><td>8</td><td>Директивы на английском</td><td>SP directives in English, RP content in card language</td></tr>
+<tr><td>8</td><td>Язык SP</td><td>SP language rule per §7A.2 (12B &lt;64K → English; 12B ≥128K → either; 32B+/API → card language). RP content always in card language</td></tr>
 <tr><td>9</td><td>Immersion Boundary</td><td>OOC-защита в SP</td></tr>
 <tr><td>10</td><td>GHOST-цепь</td><td>GHOST→LIE→FLAW→NEED→WANT логична</td></tr>
 <tr><td>11</td><td>Tone Frame</td><td>Присутствует для нетривиальных сеттингов</td></tr>
