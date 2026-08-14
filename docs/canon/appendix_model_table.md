@@ -26,10 +26,10 @@ migration_status: —
 | Consequence Driven (Directive #6) | Limited effect — insufficient reasoning capacity | Significant effect | Full effect |
 | Pre-Generation Filter (Directive #7) | ~40–60% compliance — often ignored | ~85–95% compliance | ~90–98% compliance |
 | Structured Inject (XML) | Limited | Good | Good |
-| English Instruction Adherence | ~15–20% higher than native-language instructions | Stable in both languages | Stable in both languages |
+| English Instruction Adherence | Historically higher on 12B (English-dominant training); narrows on ≥128K vocabulary | Stable in both languages | Stable in both languages |
 
 ### Ключевые следствия для сборки карточки
 
-- **12B модели:** Tier 0–1 CoT only, упрощённая SPINE, ожидать ~60–80% compliance с CORE DIRECTIVES. Английские инструкции в SP дают +15–20% к соблюдению директив.
+- **12B модели:** Tier 0–1 CoT only, упрощённая SPINE, ожидать ~60–80% compliance с CORE DIRECTIVES. Английские инструкции в SP соблюдаются стабильнее (смещение обучающей выборки ранних моделей).
 - **32B+ модели:** полный Tier 0–3 CoT, высокая SPINE adherence, ~85–95% compliance с директивами. Pre-Generation Filter работает надёжно.
 - **API модели:** максимальная стабильность, ~90–98% compliance. Structured Inject (XML) рекомендуется для сложных персонажей.

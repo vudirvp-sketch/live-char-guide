@@ -158,7 +158,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 
 ### CORE DIRECTIVES (7, in System Prompt)
 
-Written in English (12B models follow English instructions ~15–20% more reliably):
+Written in English (12B models historically follow English instructions more reliably; gap narrows on ≥128K vocabulary models):
 
 1. Show Never Tell
 2. Embodiment First
