@@ -1,7 +1,7 @@
 ---
 canonical_for: `src/master/part_07a.html` (1137 строк, 13 секций)
 vs_embedded: E08 (CORE DIRECTIVES), E16 (Author's Note Mechanics), E17 (Sampling Parameters), E02 (Assembly Pipeline)
-vs_cross_ref: E07 (Voice Hierarchy) — referenced inside E16; embedded in Part 3 (`p3_voice_hierarchy`)
+vs_cross_ref: E07 (Voice Hierarchy) — referenced inside E16; embedded in Part 3 (`p3_influence_hierarchy`)
 sections: `p7a_system_prompt`, `p7a_core_directives`, `p7a_tone_frame`, `p7a_format_lock`, `p7a_authors_note`, `p7a_sampling_params`, `p7a_model_checklist`, `p7a_ooc_protection`, `p7a_xml_tags`, `p7a_api_blocks`, `p7a_4k_fallback`, `p7a_token_budget`, `p7a_assembly_pipeline`
 last_synced: 2026-06-24 (iter 11 — master HTML migrated)
 migration_status: ✅ MIGRATED (iter 11)
@@ -222,7 +222,7 @@ Format Lock:
 
 [VS: E16 — Author's Note Mechanics. Вертикальный timeline: message stream с инъекцией `[AN]` в позицию 3–5 сообщений от конца. Position indicator: длина 100–200 токенов, частота каждые 5–10 сообщений. Template A/B toggle: A (3 секции, без GHOST) для простых персонажей; B (4 секции, с GHOST-activation) для персонажей с GHOST Layers. Cross-references на E07 (Voice Hierarchy — AN влияет на голос ~2–5%), E05 (SPINE — Template B GHOST-activation), E06 (GHOST Layers), E02 (Assembly Pipeline — шаг инъекции AN). Замещает текстовое описание механики AN и параметров.]
 
-> **Note on E07 (Voice Hierarchy):** E07 не является отдельным VS-EMBED в Part 7A — оно встроено в Part 3 (`p3_voice_hierarchy`). Здесь E07 только referenced из E16 как индикатор того, что AN влияет на голос модели в диапазоне ~2–5%. Это справедливо только для API-моделей; на 12B AN не влияет на голос (см. §7A.7).
+> **Note on E07 (Voice Hierarchy):** E07 не является отдельным VS-EMBED в Part 7A — оно встроено в Part 3 (`p3_influence_hierarchy`). Здесь E07 только referenced из E16 как индикатор того, что AN влияет на голос модели в диапазоне ~2–5%. Это справедливо только для API-моделей; на 12B AN не влияет на голос (см. §7A.7).
 
 ### Параметры AN
 

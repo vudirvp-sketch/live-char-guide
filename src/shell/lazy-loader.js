@@ -1076,6 +1076,9 @@
     if (window.PersonaCross && typeof window.PersonaCross.init === 'function') {
       window.PersonaCross.init();
     }
+    if (window.PersonaVoiceHierarchy && typeof window.PersonaVoiceHierarchy.init === 'function') {
+      window.PersonaVoiceHierarchy.init();
+    }
     initTokenCalc();
     initProgressBar();
 

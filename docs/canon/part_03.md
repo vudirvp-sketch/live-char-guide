@@ -51,6 +51,8 @@ migration_status: —
 
 [VS: E07 — Voice Influence Hierarchy. См. маркер в preamble. Замещает текстовое описание иерархии.]
 
+[INTERACTIVE WIDGET: persona-voice-hierarchy — Interactive Voice Influence Hierarchy. Контейнер `<div id="persona-voice-hierarchy" class="persona-voice-hierarchy-embed">` после таблицы. 3-кнопочный переключатель 12B / 32B+ / API переопределяет активный столбец процентов; hover на ряде таблицы подсвечивает соответствующий бар в SVG; кнопка «Экспорт Markdown» генерирует блок voice_sources для копирования в System Prompt. Данные не вынесены в data/*.json — встроены в виджет из canon-таблицы (6 источников × 3 модели). Поведение → `src/shell/widgets/persona-voice-hierarchy.js`. Дополняет E07, не замещает.]
+
 | Источник | 12B | 32B+ | API |
 |----------|-----|------|-----|
 | Recent chat | ~85% | ~80% | ~75% |

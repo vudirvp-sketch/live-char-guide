@@ -396,7 +396,7 @@ async function runPlaywrightTests(baseUrl) {
     await test('Widgets are interactive (not static gray blocks)', async () => {
       const widgetInfo = await page.evaluate(() => {
         const widgets = document.querySelectorAll(
-          '.ocean-embed, .ennea-embed, .mbti-grid, .ocean-validator-panel, .steps-grid'
+          '.ocean-embed, .ennea-embed, .mbti-grid, .ocean-validator-panel, .steps-grid, .persona-voice-hierarchy-embed'
         );
         if (widgets.length === 0) return { count: 0, interactive: 0, gray: 0 };
 

@@ -1,10 +1,10 @@
 # Agent Navigation — Live Character Guide
 
 > **Entry document.** Read this first (or read [`AGENTS.md`](./AGENTS.md) for the short version).
-> **Canonical version:** `9.2.6`. **Current iteration:** 110.
+> **Canonical version:** `9.2.6`. **Current iteration:** 111.
 > Live-char-guide is an engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models).
 > Single linear guide: Part 0 → Part 10 + 4 appendices. All 10 Parts + 4 Appendix + Part 0 are ✅ MIGRATED,
-> 97 sections, 97/97 canon→master sync PASS.
+> 97 sections, 97/97 canon→master sync PASS, 16 widgets.
 
 ---
 
@@ -13,8 +13,8 @@
 | Directory | Purpose | Rules |
 |-----------|---------|-------|
 | `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendices (`mbti`, `model_table`, `glossary`). 97 sections, ~6 600 lines of HTML. | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
-| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (15 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
-| `src/shell/widgets/` | 15 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e15-blueprint`, `vs-e16-author-note`. | Markup in HTML, data in `data/*.json`, behavior in `lazy-loader.js`. |
+| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (16 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
+| `src/shell/widgets/` | 16 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e15-blueprint`, `vs-e16-author-note`. | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
@@ -121,7 +121,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 
 ### Markup in HTML, Data in JSON, Behavior in JS
 
-15 widgets. Markup lives in `src/master/*.html` (via `<div data-widget="...">`), data in `data/*.json`, behavior in `src/shell/widgets/*.js`. JS only reads data, never hardcodes it.
+16 widgets. Markup lives in `src/master/*.html` (via `<div data-widget="...">`), data in `data/*.json`, behavior in `src/shell/widgets/*.js`. JS only reads data, never hardcodes it. Exception: `persona-voice-hierarchy` embeds canon-constant data (6 sources × 3 models from §3.2 table) directly in JS — these are canonical prose values, not user-editable widget data.
 
 ### Widget Data Files
 
@@ -131,6 +131,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 | `enneagram-builder` / `vs-e10-enneagram` | `data/enneagram.json` |
 | `mbti-composer` | `data/mbti.json` |
 | `persona-cross` / `persona-synthesis` | `data/character_schema.json` |
+| `persona-voice-hierarchy` | _(none — canon-embedded; values from §3.2 table)_ |
 | Glossary | `data/glossary.json` |
 | Anchor redirects | `data/anchor-redirects.json` |
 | Test scenarios | `data/test_scenarios.json` |
@@ -248,9 +249,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ## 8. Roadmap (iter 101+)
 
-Current state: **iter 110 COMPLETE — Multilingual forks A+B+C (SP language rule + Identity name rule + Script Tax/Vocabulary Size).**
-All Phases A–E + iter 94–110 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
-Next: Fork D (iter-113 — voice hierarchy + sampling + persona widget, JS infrastructure) — deferred, pending bandwidth.
+Current state: **iter 111 COMPLETE — Fork D (part 1/3): Voice Influence Hierarchy interactive widget + naming drift fix.**
+All Phases A–E + iter 94–110 closed. KI#63 + KI#64 + KI#65 closed. No open KIs. First new widget since iter 89.
+Next: Fork D (part 2/3) — iter-112 sampling widget (DEFERRED); part 3/3 — iter-113 persona widget (DEFERRED).
 
 | Iteration | Task | Status |
 |-----------|------|--------|
@@ -276,8 +277,10 @@ Next: Fork D (iter-113 — voice hierarchy + sampling + persona widget, JS infra
 | iter 106 | Category B final polish — 3 heading translations + survey script fix | ✅ COMPLETE |
 | iter 107 | Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED (mermaid-init.js rollback) | ✅ COMPLETE |
 | iter 108 | Multilingual actualization (safe text-only pass) — removed ~15-20% empirical claims + KI#65 CLOSED (canon→master directive drift) | ✅ COMPLETE |
-| **iter 110** | **Multilingual forks A+B+C — SP language rule layered + Identity name-language rule + Script Tax / Vocabulary Size as new Model Table concepts + Token Budget Script Tax RULE** | **✅ COMPLETE** |
-| deferred | Fork D (iter-113) — voice hierarchy + sampling + persona widget (JS infrastructure) | — |
+| iter 110 | Multilingual forks A+B+C — SP language rule layered + Identity name-language rule + Script Tax / Vocabulary Size + Token Budget Script Tax RULE | ✅ COMPLETE |
+| **iter 111** | **Fork D (part 1/3) — Voice Influence Hierarchy interactive widget (`persona-voice-hierarchy`) + naming drift fix in `part_07a.md`** | **✅ COMPLETE** |
+| deferred | Fork D (part 2/3) — iter-112 sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
+| deferred | Fork D (part 3/3) — iter-113 persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
 
 Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 
