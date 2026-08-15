@@ -1182,31 +1182,9 @@ body.theme-light .example-label.stub { color: #ca8a04; background: rgba(234, 179
   color: var(--text-muted);
 }
 
-/* === MERMAID / CONCEPT DIAGRAM (v9 Phase 9.4) === */
-/* FIX-26: Added .mermaid container styles for proper diagram rendering */
-.mermaid {
-  margin: 1.5em 0;
-  padding: 1em;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-surface);
-  overflow-x: auto;
-  display: flex;
-  justify-content: center;
-}
-
-.mermaid svg {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* iter 100: Light theme overrides for Mermaid containers */
-body.theme-light .mermaid {
-  border-color: var(--border-light, #e5e7eb);
-  background: #f8f9fb;
-}
-
+/* === CONCEPT DIAGRAM (v9 Phase 9.4) === */
+/* iter 113: Mermaid infrastructure removed (was dead code since iter 14 — content diagrams replaced by VS-EMBEDs).
+   .concept-diagram styling preserved for any non-Mermaid diagram containers. */
 body.theme-light .concept-diagram {
   border-color: var(--border-light, #e5e7eb);
   background: #f8f9fb;

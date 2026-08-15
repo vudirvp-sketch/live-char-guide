@@ -1,10 +1,10 @@
 # Agent Navigation — Live Character Guide
 
 > **Entry document.** Read this first (or read [`AGENTS.md`](./AGENTS.md) for the short version).
-> **Canonical version:** `9.2.6`. **Current iteration:** 111.
+> **Canonical version:** `9.2.6`. **Current iteration:** 113.
 > Live-char-guide is an engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models).
 > Single linear guide: Part 0 → Part 10 + 4 appendices. All 10 Parts + 4 Appendix + Part 0 are ✅ MIGRATED,
-> 97 sections, 97/97 canon→master sync PASS, 16 widgets.
+> 97 sections, 97/97 canon→master sync PASS, 12 widgets.
 
 ---
 
@@ -14,7 +14,7 @@
 |-----------|---------|-------|
 | `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendices (`mbti`, `model_table`, `glossary`). 97 sections, ~6 600 lines of HTML. | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
 | `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (12 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
-| `src/shell/widgets/` | 12 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `vs-mini-map`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`. | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. iter-112 removed 4 dead widgets: `diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint` (verified 0 container usages in master). |
+| `src/shell/widgets/` | 12 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `vs-mini-map`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`. (Plus `js-flag.js` infra script, not a widget.) | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. iter-112 removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint` — 0 container usages). iter-113 removed `mermaid-init.js` (Mermaid CDN dependency removed — content diagrams replaced by VS-EMBEDs in iter 14, only infra remained). |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
@@ -121,7 +121,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 
 ### Markup in HTML, Data in JSON, Behavior in JS
 
-16 widgets. Markup lives in `src/master/*.html` (via `<div data-widget="...">`), data in `data/*.json`, behavior in `src/shell/widgets/*.js`. JS only reads data, never hardcodes it. Exception: `persona-voice-hierarchy` embeds canon-constant data (6 sources × 3 models from §3.2 table) directly in JS — these are canonical prose values, not user-editable widget data.
+12 widgets. Markup lives in `src/master/*.html` (via `<div data-widget="...">`), data in `data/*.json`, behavior in `src/shell/widgets/*.js`. JS only reads data, never hardcodes it. Exception: `persona-voice-hierarchy` embeds canon-constant data (6 sources × 3 models from §3.2 table) directly in JS — these are canonical prose values, not user-editable widget data.
 
 ### Widget Data Files
 
@@ -189,8 +189,8 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 ### Build and deploy
 
 7. **Root fallbacks vs canonical sources** — top-level `widgets/`, `assets/`, `parts/`, `event-bus.js`, `data/`, `index.html`, `build.hash` are **regenerated root fallbacks**, NOT duplicates. All edits go in canonical sources (`src/master/`, `src/shell/`, `src/assets/`, `data/`).
-8. **Versions in 4 places** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest + `mermaid-init.js` JSDoc. `pnpm run version:check` verifies sync. **On version bump** — update ALL 4 places simultaneously (`src/VERSION` manually + `package.json` + `character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 (iter 96): drift occurred when `src/VERSION` was updated without `package.json` / `character_schema.json`. KI#64 (iter 101, CLOSED iter-107): same drift pattern — `mermaid-init.js` JSDoc bumped to `9.3.0` alone; fixed via Variant A rollback (JSDoc → 9.2.6, no 4-place bump).
-9. **Mermaid CDN dependency** — Mermaid.js loads from `cdn.jsdelivr.net`. CSP for Mermaid v11 worker: `worker-src 'self' blob:;`.
+8. **Versions in 4 places** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` verifies sync. **On version bump** — update ALL 4 places simultaneously (`src/VERSION` manually + `package.json` + `character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 (iter 96): drift occurred when `src/VERSION` was updated without `package.json` / `character_schema.json`. KI#64 (iter 101, CLOSED iter-107): same drift pattern — `mermaid-init.js` JSDoc bumped to `9.3.0` alone; fixed via Variant A rollback (JSDoc → 9.2.6, no 4-place bump). **iter-113:** `mermaid-init.js` deleted entirely (Mermaid CDN dependency removed — content diagrams were replaced by VS-EMBEDs in iter 14, only infrastructure remained). The 5th version-tracking point (`mermaid-init.js` JSDoc) is gone; sync is back to canonical 4 places.
+9. **Mermaid CDN dependency — REMOVED iter-113.** Mermaid.js was loaded from `cdn.jsdelivr.net` but had ZERO usages in `src/master/*.html` (content diagrams were replaced by VS-EMBEDs in iter 14). Removed in iter-113: CDN `<script>` tag, `widgets/mermaid-init.js`, lazy-loader init/render block + `reRenderMermaid()` call, `.mermaid` CSS in `src/shell/styles.css`. CSP tightened: `cdn.jsdelivr.net` dropped from `script-src`, `worker-src 'self' blob:;` directive dropped entirely (was Mermaid v11 Web Worker only). `cdn.jsdelivr.net` retained in `style-src` + `font-src` for Geist font CSS.
 10. **`noscript` in build artifact** — must be present. Do not remove.
 11. **Widget guards** — `persona-cross infinite loop guard`, `Clipboard API guard` (`if (navigator.clipbox)`) — do not remove. (iter-112: `blueprint-viewer destroy()` removed — widget was dead, 0 container usages.)
 
@@ -249,9 +249,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ## 8. Roadmap (iter 101+)
 
-Current state: **iter 112 COMPLETE — Dead code cleanup (4 dead widgets + .fi26 CSS utilities).**
-All Phases A–E + iter 94–111 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
-Next: iter-113 (deferred cleanup — Mermaid removal + dead V-pattern CSS) OR Fork D (part 2/3) sampling widget — pending user decision.
+Current state: **iter 113 COMPLETE — Mermaid infrastructure removed (dead code since iter 14).**
+All Phases A–E + iter 94–112 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
+Next: iter-114 (deferred cleanup — dead V-pattern CSS in `src/assets/vs-styles.css`) OR Fork D (part 2/3) sampling widget — pending user decision.
 
 | Iteration | Task | Status |
 |-----------|------|--------|
@@ -268,7 +268,7 @@ Next: iter-113 (deferred cleanup — Mermaid removal + dead V-pattern CSS) OR Fo
 | iter 96 | KI#63 — version drift fix + `pnpm run build` root fallbacks regeneration | ✅ COMPLETE |
 | iter 97 | Annotation callout blocks removal + audit script update | ✅ COMPLETE |
 | iter 98–99 | Theme simplification (dark removed, OLED + Light only) | ✅ COMPLETE |
-| iter 100 | Mermaid dynamic theme re-render on toggle | ✅ COMPLETE |
+| iter 100 | Mermaid dynamic theme re-render on toggle | ✅ COMPLETE (removed iter-113 — was dead code) |
 | iter 101 | Agent infrastructure English rewrite + KI#64 documented | ✅ COMPLETE |
 | iter 102 | VS-EMBED placement audit + reorder (6 misplaced visuals fixed) | ✅ COMPLETE |
 | iter 103 | English terms audit + categorization (doc-only) | ✅ COMPLETE |
@@ -278,11 +278,12 @@ Next: iter-113 (deferred cleanup — Mermaid removal + dead V-pattern CSS) OR Fo
 | iter 107 | Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED (mermaid-init.js rollback) | ✅ COMPLETE |
 | iter 108 | Multilingual actualization (safe text-only pass) — removed ~15-20% empirical claims + KI#65 CLOSED (canon→master directive drift) | ✅ COMPLETE |
 | iter 110 | Multilingual forks A+B+C — SP language rule layered + Identity name-language rule + Script Tax / Vocabulary Size + Token Budget Script Tax RULE | ✅ COMPLETE |
-| **iter 111** | **Fork D (part 1/3) — Voice Influence Hierarchy interactive widget (`persona-voice-hierarchy`) + naming drift fix in `part_07a.md`** | **✅ COMPLETE** |
-| **iter 112** | **Dead code cleanup — removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint`) + script tags + init calls + `.fi26-*` CSS utilities (262 lines)** | **✅ COMPLETE** |
+| iter 111 | Fork D (part 1/3) — Voice Influence Hierarchy interactive widget (`persona-voice-hierarchy`) + naming drift fix in `part_07a.md` | ✅ COMPLETE |
+| iter 112 | Dead code cleanup — removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint`) + script tags + init calls + `.fi26-*` CSS utilities (262 lines) | ✅ COMPLETE |
+| **iter 113** | **Mermaid infrastructure removal — `mermaid-init.js` deleted (141 lines) + CDN `<script>` + lazy-loader init/render block + `reRenderMermaid()` call + `.mermaid` CSS block. CSP tightened: `cdn.jsdelivr.net` dropped from `script-src`, `worker-src 'self' blob:;` directive dropped. Content had ZERO `.mermaid` usages (replaced by VS-EMBEDs in iter 14).** | **✅ COMPLETE** |
 | deferred | Fork D (part 2/3) — sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
 | deferred | Fork D (part 3/3) — persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
-| deferred | iter-113 cleanup — Mermaid removal + dead V-pattern CSS (inf-pipeline-vertical, spine-stack, spine-validator) + M3 dead CSS + vs-styles.css SECTION 3/4 utilities | — |
+| deferred | iter-114 cleanup — dead V-pattern CSS (inf-pipeline-vertical, spine-stack, spine-validator) + M3 dead CSS + vs-styles.css SECTION 3/4 utilities | — |
 
 Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
-<!-- Build: c5c429e2 -->
-<!-- Generated: 2026-08-14T23:54:15.756Z -->
+<!-- Build: 2ab607d6 -->
+<!-- Generated: 2026-08-15T00:22:30.215Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -14,12 +14,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/preview-card.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- FIX-25: Removed cdn.jsdelivr.net from script-src (no scripts loaded from CDN). Kept in style-src/font-src for Geist font CSS. -->
-  <!-- FIX-26: Added cdn.jsdelivr.net to script-src for Mermaid diagram rendering. -->
-  <!-- KI#23 fix (iter 34): Added worker-src 'self' blob: — Mermaid v11 creates Web Worker
-       from blob URL for parsing. Without worker-src, CSP falls back to script-src which
-       doesn't allow blob:, blocking worker creation (Mermaid degrades to single-threaded). -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
+  <!-- FIX-25: cdn.jsdelivr.net kept in style-src/font-src for Geist font CSS. NOT in script-src (no scripts loaded from CDN since iter-113 — Mermaid removed). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -108,10 +104,6 @@
     <div class="panel-resize-handle" data-resize-handle></div>
   </div>
 
-  <!-- Mermaid: diagram rendering library (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-  <!-- KI#16 fix (iter 19): externalized inline mermaid.initialize() → widgets/mermaid-init.js for CSP compliance -->
-  <script src="widgets/mermaid-init.js"></script>
   <script src="event-bus.js"></script>
   <script src="widgets/widget-utils.js"></script>
   <script src="assets/lazy-loader.js"></script>
