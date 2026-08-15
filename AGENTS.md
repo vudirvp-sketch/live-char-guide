@@ -15,7 +15,7 @@ no React/Vue/Svelte.**
 
 - **Live site:** https://vudirvp-sketch.github.io/live-char-guide/
 - **Canonical version:** `9.2.6` (see `package.json` / `src/VERSION` / `data/character_schema.json`)
-- **Current iteration:** 111
+- **Current iteration:** 115
 
 ---
 

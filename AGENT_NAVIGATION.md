@@ -1,7 +1,7 @@
 # Agent Navigation — Live Character Guide
 
 > **Entry document.** Read this first (or read [`AGENTS.md`](./AGENTS.md) for the short version).
-> **Canonical version:** `9.2.6`. **Current iteration:** 114.
+> **Canonical version:** `9.2.6`. **Current iteration:** 115.
 > Live-char-guide is an engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models).
 > Single linear guide: Part 0 → Part 10 + 4 appendices. All 10 Parts + 4 Appendix + Part 0 are ✅ MIGRATED,
 > 97 sections, 97/97 canon→master sync PASS, 12 widgets.
@@ -249,9 +249,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ## 8. Roadmap (iter 101+)
 
-Current state: **iter 114 COMPLETE — Dead CSS removed from `src/assets/vs-styles.css` (SECTION 3 + dead SECTION 4 utilities, 407 lines).**
-All Phases A–E + iter 94–113 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
-Next: iter-115 (deferred cleanup — dead V-pattern CSS + M3 dead CSS in `src/shell/styles.css`, separate file per iter-112 clean-diff convention) OR Fork D (part 2/3) sampling widget — pending user decision.
+Current state: **iter 115 COMPLETE — Dead CSS removed from `src/shell/styles.css` (V-pattern blocks V-02/V-06/V-15 + 6 specific dead M3 rules, 248 lines).**
+All Phases A–E + iter 94–114 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
+Next: Fork D (part 2/3) sampling widget (MEDIUM risk, new widget + lazy-loader registration) OR self-admitted dupes cleanup (content decisions requiring visual diff) — pending user decision.
 
 | Iteration | Task | Status |
 |-----------|------|--------|
@@ -281,10 +281,11 @@ Next: iter-115 (deferred cleanup — dead V-pattern CSS + M3 dead CSS in `src/sh
 | iter 111 | Fork D (part 1/3) — Voice Influence Hierarchy interactive widget (`persona-voice-hierarchy`) + naming drift fix in `part_07a.md` | ✅ COMPLETE |
 | iter 112 | Dead code cleanup — removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint`) + script tags + init calls + `.fi26-*` CSS utilities (262 lines) | ✅ COMPLETE |
 | iter 113 | Mermaid infrastructure removal — `mermaid-init.js` deleted (141 lines) + CDN `<script>` + lazy-loader init/render block + `reRenderMermaid()` call + `.mermaid` CSS block. CSP tightened. Content had ZERO `.mermaid` usages (replaced by VS-EMBEDs in iter 14). | ✅ COMPLETE |
-| **iter 114** | **Dead CSS cleanup in `src/assets/vs-styles.css` — SECTION 3 (VS Shared Patterns P1–P6, 196 lines) + 12 dead SECTION 4 utility blocks (211 lines) removed. 407 lines total, ~10.2 KB. Hash unchanged (vs-styles.css not in hash input). 4-axis grep verified: 0 usages in `src/master/` + `parts/` + 0 descendant selectors + 0 JS class injections.** | **✅ COMPLETE** |
+| iter 114 | Dead CSS cleanup in `src/assets/vs-styles.css` — SECTION 3 (VS Shared Patterns P1–P6, 196 lines) + 12 dead SECTION 4 utility blocks (211 lines) removed. 407 lines total, ~10.2 KB. Hash unchanged (vs-styles.css not in hash input). | ✅ COMPLETE |
+| **iter 115** | **Dead CSS cleanup in `src/shell/styles.css` — V-02/V-06/V-15 V-pattern blocks (240 lines) + 6 specific dead M3 rules (8 lines) removed. 248 lines total, ~5.3 KB. Hash unchanged (shell/styles.css not in hash input). M3 widget CSS confirmed LIVE (iter-114 deferred-task description was wrong — most M3 classes are used by widgets via `className =` injection). Both CSS files now trimmed to in-use rules only.** | **✅ COMPLETE** |
 | deferred | Fork D (part 2/3) — sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
 | deferred | Fork D (part 3/3) — persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
-| deferred | iter-115 cleanup — dead V-pattern CSS (`inf-pipeline-vertical`, `spine-stack`, `spine-validator`) + M3 dead CSS in `src/shell/styles.css` (separate file, clean diff per iter-112 convention) | — |
+| deferred | Self-admitted dupes cleanup — §7A.12 plain-copy pre-block + §9.11 quick-check table (content decisions requiring visual diff) | — |
 
 Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 
