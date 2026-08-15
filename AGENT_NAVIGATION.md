@@ -13,8 +13,8 @@
 | Directory | Purpose | Rules |
 |-----------|---------|-------|
 | `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendices (`mbti`, `model_table`, `glossary`). 97 sections, ~6 600 lines of HTML. | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
-| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (16 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
-| `src/shell/widgets/` | 16 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `blueprint-viewer`, `diagnostic-tree`, `vs-mini-map`, `author-note-viewer`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e15-blueprint`, `vs-e16-author-note`. | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. |
+| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (12 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
+| `src/shell/widgets/` | 12 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `vs-mini-map`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`. | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. iter-112 removed 4 dead widgets: `diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint` (verified 0 container usages in master). |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
@@ -192,7 +192,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 8. **Versions in 4 places** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest + `mermaid-init.js` JSDoc. `pnpm run version:check` verifies sync. **On version bump** — update ALL 4 places simultaneously (`src/VERSION` manually + `package.json` + `character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 (iter 96): drift occurred when `src/VERSION` was updated without `package.json` / `character_schema.json`. KI#64 (iter 101, CLOSED iter-107): same drift pattern — `mermaid-init.js` JSDoc bumped to `9.3.0` alone; fixed via Variant A rollback (JSDoc → 9.2.6, no 4-place bump).
 9. **Mermaid CDN dependency** — Mermaid.js loads from `cdn.jsdelivr.net`. CSP for Mermaid v11 worker: `worker-src 'self' blob:;`.
 10. **`noscript` in build artifact** — must be present. Do not remove.
-11. **Widget guards** — `blueprint-viewer destroy()`, `persona-cross infinite loop guard`, `Clipboard API guard` (`if (navigator.clipbox)`) — do not remove.
+11. **Widget guards** — `persona-cross infinite loop guard`, `Clipboard API guard` (`if (navigator.clipbox)`) — do not remove. (iter-112: `blueprint-viewer destroy()` removed — widget was dead, 0 container usages.)
 
 ### Visual System
 
@@ -249,9 +249,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ## 8. Roadmap (iter 101+)
 
-Current state: **iter 111 COMPLETE — Fork D (part 1/3): Voice Influence Hierarchy interactive widget + naming drift fix.**
-All Phases A–E + iter 94–110 closed. KI#63 + KI#64 + KI#65 closed. No open KIs. First new widget since iter 89.
-Next: Fork D (part 2/3) — iter-112 sampling widget (DEFERRED); part 3/3 — iter-113 persona widget (DEFERRED).
+Current state: **iter 112 COMPLETE — Dead code cleanup (4 dead widgets + .fi26 CSS utilities).**
+All Phases A–E + iter 94–111 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
+Next: iter-113 (deferred cleanup — Mermaid removal + dead V-pattern CSS) OR Fork D (part 2/3) sampling widget — pending user decision.
 
 | Iteration | Task | Status |
 |-----------|------|--------|
@@ -279,8 +279,10 @@ Next: Fork D (part 2/3) — iter-112 sampling widget (DEFERRED); part 3/3 — it
 | iter 108 | Multilingual actualization (safe text-only pass) — removed ~15-20% empirical claims + KI#65 CLOSED (canon→master directive drift) | ✅ COMPLETE |
 | iter 110 | Multilingual forks A+B+C — SP language rule layered + Identity name-language rule + Script Tax / Vocabulary Size + Token Budget Script Tax RULE | ✅ COMPLETE |
 | **iter 111** | **Fork D (part 1/3) — Voice Influence Hierarchy interactive widget (`persona-voice-hierarchy`) + naming drift fix in `part_07a.md`** | **✅ COMPLETE** |
-| deferred | Fork D (part 2/3) — iter-112 sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
-| deferred | Fork D (part 3/3) — iter-113 persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
+| **iter 112** | **Dead code cleanup — removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint`) + script tags + init calls + `.fi26-*` CSS utilities (262 lines)** | **✅ COMPLETE** |
+| deferred | Fork D (part 2/3) — sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
+| deferred | Fork D (part 3/3) — persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
+| deferred | iter-113 cleanup — Mermaid removal + dead V-pattern CSS (inf-pipeline-vertical, spine-stack, spine-validator) + M3 dead CSS + vs-styles.css SECTION 3/4 utilities | — |
 
 Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
 

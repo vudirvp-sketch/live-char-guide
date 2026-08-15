@@ -1087,15 +1087,6 @@
     if (window.VsMiniMap && typeof window.VsMiniMap.init === 'function') {
       window.VsMiniMap.init();
     }
-    if (window.VsDiagnosticTree && typeof window.VsDiagnosticTree.initAll === 'function') {
-      window.VsDiagnosticTree.initAll();
-    }
-    if (window.VsBlueprintViewer && typeof window.VsBlueprintViewer.initAll === 'function') {
-      window.VsBlueprintViewer.initAll();
-    }
-    if (window.VsAuthorNoteViewer && typeof window.VsAuthorNoteViewer.initAll === 'function') {
-      window.VsAuthorNoteViewer.initAll();
-    }
 
     // VS Scroll-анимации через IntersectionObserver
     initVsScrollAnimations();

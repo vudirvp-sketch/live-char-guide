@@ -2,22 +2,23 @@
 
 > **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
 > **Date:** 2026-08-15
-> **Iteration:** 111
+> **Iteration:** 112
 
 ---
 
 ## Current State
 
-**iter 111 — Fork D (part 1/3): Voice Influence Hierarchy interactive widget + naming drift fix.**
+**iter 112 — Dead code cleanup (4 dead widgets + .fi26 CSS utilities).**
 
-First new widget since iter 89. `persona-voice-hierarchy` (16th widget) adds interactivity to the previously static §3.2 percentage table: model-tier toggle (12B / 32B+ / API), hover-sync between widget rows and source table, and Markdown export of voice_sources block. Found+fixed a naming drift in `docs/canon/part_07a.md` (referenced non-existent `p3_voice_hierarchy` ID → corrected to canonical `p3_influence_hierarchy`).
+Removed verified-dead runtime code identified in iter-1-research audit. No functional change — all 4 widgets had 0 container usages in master HTML, .fi26-* classes had 0 HTML/JS references. Browser was downloading + parsing + executing 4 widget JS files (339 lines) on every page load with zero effect; same for 262 lines of unused CSS utilities.
 
-- **Widget architecture:** Combined design (model toggle + hover-sync + MD export) in one file `src/shell/widgets/persona-voice-hierarchy.js` (~290 lines). Follows established pattern: IIFE + `window.PersonaVoiceHierarchy = { init, destroy, exportMarkdown, generateMarkdown, get activeModel, get sources }` + `EventBus.whenReady(autoInit)` with 500 ms fallback. Dispatches `persona-voice-hierarchy://model-change` + `persona-voice-hierarchy://export` CustomEvents.
-- **Data policy exception:** Widget data (6 sources × 3 models = 18 percentage values) is canon-embedded in JS, NOT in `data/*.json`. Rationale: these are canonical prose values from §3.2 table, not user-editable widget data. Exception documented in AGENT_NAVIGATION §4 + widget header JSDoc.
-- **Naming drift fix:** `docs/canon/part_07a.md` frontmatter line 4 + body line 225 referenced `p3_voice_hierarchy` — never existed in any artifact. Canonical ID is `p3_influence_hierarchy` (verified via `docs/canon/part_03.md` §3.2 + `scripts/build-unified.mjs` line 182 + `parts/manifest.json`). Fixed both occurrences in same iteration per §3 rule (bug → doc → fix).
-- **Files edited (7 source + 6 auto-regenerated):** NEW `src/shell/widgets/persona-voice-hierarchy.js` + `src/master/part_03.html` (widget container in `p3_influence_hierarchy`) + `src/shell/index.html` (script tag) + `src/shell/lazy-loader.js` (re-init block) + `src/shell/styles.css` (CSS for `.persona-voice-hierarchy-embed` + `.vh-*` classes + source-table column highlight) + `docs/canon/part_03.md` (`[INTERACTIVE WIDGET: ...]` marker) + `docs/canon/part_07a.md` (drift fix) + `tests/visual-parity.mjs` (selector list extended) + `AGENT_NAVIGATION.md` (widget count 15 → 16, table row, exception note). Auto-regenerated via `pnpm run build`: `parts/part_03.html` + `index.html` + `build.hash` + 3 root fallbacks.
-- **Validation:** `pnpm run build` SUCCESS (hash 8499b4e3 → f70870c0 — first hash change since iter 96). `validate` 5/5 + SHELL-* PASS. `validate:master` 12/12 PASS. `version:check` 9.2.6 sync (no version bump). `pnpm test` 64/64 PASS. Canon sync 97/97 PASS. `qa:csp` / `qa:bundle` / `qa:doc-versions` PASS. `qa:english` 19 → 19 (no regression). `qa:syntax` 247 patterns / 11 files — pre-existing baseline.
-- **Ad-hoc widget smoke test (not committed):** 20/20 PASS via Puppeteer + local HTTP server — verified widget container populated, default model 12B, source table annotated (6/6 rows), toggle buttons switch active model + table column, export dispatches event + copies MD + shows feedback, public API all exposed.
+- **4 dead widget JS files removed (339 lines):** `diagnostic-tree.js` (79), `blueprint-viewer.js` (63), `author-note-viewer.js` (93), `vs-e15-blueprint.js` (104). Verified: 0 occurrences of `.vs-diagnostic-tree`, `.vs-blueprint-viewer`, `.vs-author-note-viewer`, `.layer-toggle[data-layer]` in `src/master/`. Tests in `tests/` do not reference any of these widgets.
+- **Script tags removed:** 4 `<script src="widgets/...">` entries deleted from `src/shell/index.html` (lines 127-131 in pre-iter-112 version).
+- **Init calls removed:** 3 `initAll()` invocations removed from `src/shell/lazy-loader.js` (VsDiagnosticTree, VsBlueprintViewer, VsAuthorNoteViewer at L1090-1098 pre-iter-112). `vs-e15-blueprint` had no init call in lazy-loader (it self-initialized via MutationObserver — now removed with the file).
+- **`.fi26-*` CSS utilities removed (262 lines):** Block at `src/shell/styles.css` lines 7296-7557 (FIX-26 utilities: `.fi26-cell-*`, `.fi26-c-*` colors, `.fi26-container-*`, `.fi26-delay-*` animation delays). Verified: 63 CSS class definitions, 0 usages in `src/master/` + `src/shell/lazy-loader.js` + `src/shell/widgets/*.js`.
+- **Files edited (3 source + 4 deleted + 3 docs + 6 auto-regenerated):** DELETED 4 widget JS files + EDITED `src/shell/index.html` (4 script tags removed) + `src/shell/lazy-loader.js` (3 init blocks removed) + `src/shell/styles.css` (262 lines removed, 7557 → 7295 lines) + `AGENT_NAVIGATION.md` (widget count 16 → 12, list updated, pitfall #11 updated) + `STATUS.md` (this entry) + `worklog.md` (iter-112 entry). Auto-regenerated via `pnpm run build`: `index.html` (root) + `widgets/` (root mirror, 18 → 14 files) + `build.hash` + `assets/` (root) + `event-bus.js` (root) + `data/` (root mirror).
+- **Validation:** `pnpm run build` SUCCESS (hash f70870c0 → c5c429e2 — second hash change since iter 96). `validate` 5/5 + SHELL-* PASS. `validate:master` 12/12 PASS. `version:check` 9.2.6 sync (no version bump). `pnpm test` 64/64 PASS. Canon sync 97/97 PASS. `qa:csp` PASS (no inline scripts). `qa:bundle` PASS (7.4 KB). `qa:contrast` PASS. `qa:english` 19 → 19 (no regression — baseline preserved). `qa:syntax` baseline (pre-existing, no regression). `qa:doc-versions` PASS.
+- **Scope:** 3 source files edited + 4 deleted (over 3–5 soft limit) — justified by coherent single-purpose iteration (dead code removal only, no logic change, no content change, no schema change, no version bump). All edits verified zero functional impact via grep + build + 64 tests + 5 QA gates.
 
 ---
 
@@ -35,7 +36,7 @@ First new widget since iter 89. `persona-voice-hierarchy` (16th widget) adds int
 - **SP Language rule (iter 110):** Layered — 12B <64K → English; ≥128K 12B–14B → either; 32B+/API → card language (§7A.2 RULE).
 - **Identity name-language (iter 110):** Canonical form preserved across all card blocks — transliteration forbidden (§7A.1 RULE).
 - **Script Tax (iter 110):** Non-Latin scripts cost ~1.5–2× tokens on 32K vocab; ≥128K → negligible (§7A.12 RULE).
-- **Widget count (iter 111):** 16 widgets in `src/shell/widgets/` (was 15). `persona-voice-hierarchy` is the 16th.
+- **Widget count (iter 112):** 12 widgets in `src/shell/widgets/` (was 16). 4 dead widgets removed: `diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint` — all had 0 container usages in master HTML.
 
 Full invariants list: see `AGENT_NAVIGATION.md` §5 and §6.
 
@@ -55,9 +56,11 @@ Full invariants list: see `AGENT_NAVIGATION.md` §5 and §6.
 
 | Iteration | Task | Status |
 |-----------|------|--------|
-| **iter 111** | Fork D (part 1/3) — Voice Influence Hierarchy interactive widget + naming drift fix | ✅ COMPLETE |
+| **iter 112** | Dead code cleanup — 4 dead widgets removed + .fi26 CSS utilities removed (601 lines total) | ✅ COMPLETE |
+| iter 111 | Fork D (part 1/3) — Voice Influence Hierarchy interactive widget + naming drift fix | ✅ COMPLETE |
 | iter 110 | Multilingual forks A+B+C — layered SP language rule + Identity name-language rule + Script Tax / Vocabulary Size + Token Budget Script Tax RULE | ✅ COMPLETE |
 | iter 108 | Multilingual actualization (safe text-only pass) — removed ~15-20% empirical claims + KI#65 CLOSED | ✅ COMPLETE |
 | iter 107 | Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED | ✅ COMPLETE |
-| deferred | Fork D (part 2/3) — iter-112 sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
-| deferred | Fork D (part 3/3) — iter-113 persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
+| deferred | iter-113 cleanup — Mermaid removal + dead V-pattern CSS (inf-pipeline-vertical, spine-stack, spine-validator) + M3 dead CSS + vs-styles.css SECTION 3/4 utilities | — |
+| deferred | Fork D (part 2/3) — sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
+| deferred | Fork D (part 3/3) — persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
