@@ -968,6 +968,31 @@ details.interactive summary::marker { display: none; content: ''; }
 .pre-wrapper:hover .copy-btn { opacity: 1; }
 .copy-btn.copied { color: var(--tip-border); border-color: var(--tip-border); }
 
+/* === LOAD ERROR (runtime UI — injected by lazy-loader.js, KI#69; not a content component) === */
+/* In-place placeholder for a guide part that failed to fetch after retries. */
+.load-error {
+  border-color: var(--color-error, #ef4444);
+  background: rgba(239, 68, 68, 0.06);
+}
+.load-error strong { color: #fca5a5; }
+.load-retry-btn {
+  padding: 0.45em 0.9em;
+  margin-top: 0.3em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.load-retry-btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+.load-retry-btn:disabled { opacity: 0.6; cursor: wait; }
+.load-retry-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+body.theme-light .load-error { background: rgba(239, 68, 68, 0.05); }
+body.theme-light .load-error strong { color: #dc2626; }
+
 /* === MOBILE ADAPTATIONS === */
 @media (max-width: 768px) {
 .panel {

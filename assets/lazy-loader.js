@@ -16,6 +16,8 @@
  * - Content width toggle
  * - Expert mode toggle (M3 widget level)
  * - Scroll to top
+ * - Part fetch resilience (KI#69: retry with backoff + visible
+ *   in-place error placeholders with one-click re-fetch)
  * 
  * Architecture:
  * - Shell (this file) loads once
@@ -33,7 +35,10 @@
   const CONFIG = {
     STORAGE_KEY: 'guide-unified',
     VERSION: '9.2.0',
-    PARTS_DIR: 'parts'
+    PARTS_DIR: 'parts',
+    // KI#69: per-part fetch resilience — attempts and backoff delays
+    PARTS_MAX_RETRIES: 2,
+    PARTS_RETRY_DELAYS_MS: [300, 900]
   };
 
   // ============================================================================
@@ -638,6 +643,131 @@
     $('#loading-overlay')?.classList.add('hidden');
   }
 
+  // ============================================================================
+  // PART FETCH RESILIENCE (KI#69)
+  // ============================================================================
+  // Before KI#69 a failed part fetch was silently replaced by an HTML comment
+  // (`.catch(() => '<!-- Failed to load ... -->')`): every table, VS-visual and
+  // widget container of that part vanished with no signal, while the loading
+  // overlay still hid normally (page "looked loaded"). Now each part gets up to
+  // PARTS_MAX_RETRIES retries for transient failures (network errors, 5xx, 429);
+  // persistent failures render a visible in-place callout with a one-click
+  // surgical re-fetch that re-runs the standard post-injection init sequence.
+
+  /**
+   * Fetch one part file with retry/backoff.
+   * Retries network-level errors, 5xx and 429; fails fast on other 4xx
+   * (the file is genuinely absent — retrying would only delay the error).
+   * @param {string} file part filename (e.g. 'part_07a.html')
+   * @returns {Promise<string>} part HTML text
+   */
+  async function fetchPartHtml(file) {
+    let lastError = null;
+    for (let attempt = 0; attempt <= CONFIG.PARTS_MAX_RETRIES; attempt++) {
+      if (attempt > 0) {
+        const delay = CONFIG.PARTS_RETRY_DELAYS_MS[
+          Math.min(attempt - 1, CONFIG.PARTS_RETRY_DELAYS_MS.length - 1)
+        ];
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+      try {
+        const response = await fetch(`${CONFIG.PARTS_DIR}/${file}`);
+        if (response.ok) return await response.text();
+        lastError = new Error(`HTTP ${response.status}`);
+        // Permanent client error (except 429 Too Many Requests) — no retry
+        if (response.status >= 400 && response.status < 500 && response.status !== 429) break;
+      } catch (e) {
+        lastError = e; // network-level failure — retryable
+      }
+    }
+    throw lastError;
+  }
+
+  /** Minimal HTML escaping for values interpolated into runtime UI markup. */
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /**
+   * Visible in-place placeholder rendered where a failed part belongs.
+   * Keeps the part's document position so the reader sees the actual gap.
+   * `data-part-file` is the hook for the surgical retry.
+   */
+  function partErrorHtml(part, error) {
+    const label = (part && part.title) || (part && part.file) || 'раздел';
+    const file = part ? part.file : '';
+    const reason = error && error.message ? error.message : 'сеть недоступна';
+    return '<div class="callout load-error" role="alert" data-part-file="' + escapeHtml(file) + '">'
+      + '<strong>Ошибка загрузки раздела</strong>'
+      + '<p>Раздел «' + escapeHtml(label) + '» (' + escapeHtml(file) + ') не удалось загрузить: '
+      + escapeHtml(reason) + '. Таблицы, визуализации и виджеты этого раздела отсутствуют до восстановления.</p>'
+      + '<button type="button" class="load-retry-btn">Повторить загрузку</button>'
+      + '</div>';
+  }
+
+  /**
+   * Wire retry buttons inside part-failure placeholders of `scope`.
+   * Idempotent (dataset.wired guard) — safe to call after any injection.
+   */
+  function wirePartRetryButtons(scope) {
+    scope.querySelectorAll('.load-error[data-part-file] .load-retry-btn').forEach(btn => {
+      if (btn.dataset.wired === '1') return;
+      btn.dataset.wired = '1';
+      btn.addEventListener('click', () => retryFailedPart(btn.closest('.load-error')));
+    });
+  }
+
+  /**
+   * Surgical re-fetch of a single failed part: replaces its placeholder with
+   * the recovered content in place (scroll position and all other parts are
+   * preserved), then re-runs the standard post-injection sequence used by
+   * loadContent(). All steps are re-entrant: copy-button wrappers skip
+   * already-wrapped <pre>, widget .init() re-scans containers, and parts
+   * carry no <script> so executeInlineScripts is a no-op for part content.
+   */
+  async function retryFailedPart(placeholder) {
+    if (!placeholder) return;
+    const content = $('#content');
+    const file = placeholder.getAttribute('data-part-file');
+    const btn = placeholder.querySelector('.load-retry-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Загрузка…';
+    }
+    try {
+      const html = await fetchPartHtml(file);
+      const holder = document.createElement('div');
+      holder.innerHTML = html;
+      const frag = document.createDocumentFragment();
+      while (holder.firstChild) frag.appendChild(holder.firstChild);
+      placeholder.replaceWith(frag);
+      if (content) {
+        executeInlineScripts(content);
+        initInteractiveElements();
+        generateTOC();
+        initActivePartHighlighting();
+        handleAnchor();
+      }
+      console.log('[LazyLoader] Part recovered on retry:', file);
+    } catch (e) {
+      console.warn('[LazyLoader] Part retry failed for ' + file + ':', e.message);
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Повторить загрузку';
+      }
+      const p = placeholder.querySelector('p');
+      if (p) {
+        p.textContent = 'Повторная загрузка не удалась: ' + (e.message || 'сеть недоступна')
+          + '. Проверьте соединение и нажмите «Повторить загрузку» ещё раз.';
+      }
+    }
+  }
+
   async function loadContent() {
     if (isLoading) return;
     isLoading = true;
@@ -656,17 +786,31 @@
       const manifest = await manifestResponse.json();
       const parts = manifest.parts || [];
 
-      const fetchPromises = parts.map(part => {
-        const url = `${CONFIG.PARTS_DIR}/${part.file}`;
-        return fetch(url).then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}`);
-          return r.text();
-        }).catch(() => `<!-- Failed to load: ${part.file} -->`);
+      const fetchPromises = parts.map(async part => {
+        try {
+          return { ok: true, html: await fetchPartHtml(part.file) };
+        } catch (e) {
+          return { ok: false, part, error: e };
+        }
       });
 
       const results = await Promise.all(fetchPromises);
-      content.innerHTML = results.join('\n');
+
+      const failedParts = [];
+      const chunks = results.map(result => {
+        if (result.ok) return result.html;
+        failedParts.push(result);
+        return partErrorHtml(result.part, result.error);
+      });
+      content.innerHTML = chunks.join('\n');
       content.classList.remove('content-hidden');
+
+      if (failedParts.length > 0) {
+        console.warn('[LazyLoader] ' + failedParts.length + ' of ' + parts.length
+          + ' part(s) failed after ' + (CONFIG.PARTS_MAX_RETRIES + 1) + ' attempt(s):',
+          failedParts.map(r => r.part.file + ' (' + (r.error ? r.error.message : '?') + ')').join(', '));
+        wirePartRetryButtons(content);
+      }
 
       // FIX: Execute inline scripts that were injected via innerHTML
       // (browsers don't execute <script> tags inserted via innerHTML)
@@ -680,7 +824,19 @@
       handleLegacyAnchor();
 
     } catch (e) {
-      content.innerHTML = `<div class="callout warn"><strong>Error</strong><p>Failed to load content: ${e.message}</p></div>`;
+      // Manifest-level failure: whole guide unavailable — visible error +
+      // one-click full reload (same runtime-UI classes as part placeholders).
+      // NB: content-hidden must be lifted here too, or the callout stays
+      // display:none (pre-existing invisibility of the old error message).
+      content.classList.remove('content-hidden');
+      content.innerHTML = '<div class="callout load-error" role="alert">'
+        + '<strong>Ошибка загрузки</strong>'
+        + '<p>Не удалось загрузить содержание руководства: ' + escapeHtml(e.message) + '.</p>'
+        + '<button type="button" class="load-retry-btn">Повторить загрузку</button></div>';
+      const manifestRetryBtn = content.querySelector('.load-retry-btn');
+      if (manifestRetryBtn) {
+        manifestRetryBtn.addEventListener('click', () => loadContent());
+      }
     }
 
     isLoading = false;
