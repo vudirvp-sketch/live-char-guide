@@ -61,9 +61,9 @@ migration_status: —
 | Блок | Проверка | Ссылка |
 |------|----------|--------|
 | **System Prompt** | ☐ Anti-godmoding? (строка «Never speak or act for {{user}}.») ☐ Персона определена? ☐ Нарративное время? (прошедшее/настоящее) ☐ Format Lock? (одна система разметки во всех Examples) | `[ref: part_07a.md §7A.1 — System Prompt]` |
-| **Description** | ☐ якоря (Anchors) с ценой? (формат T→A→P) ☐ Нет голоса? (голос только в Examples/Greeting) ☐ Психология в Description? (теги `<spine>`/`<ocean>`/`<enneagram>`, не нарратив) | `[ref: part_04.md §4.X — SPINE]` |
-| **Examples** | ☐ Уникальный голос? (только через Examples, не Description) ☐ Embodiment? (минимум одна физическая реакция) ☐ `<START>`? (в начале каждого блока) | `[ref: part_03.md §3.X — Voice Isolation]` |
-| **Greeting** | ☐ Сцена→Действие→Реплика? ☐ 50–100 токенов? | `[ref: part_07b.md §7B.X — Lorebook/Greeting]` |
+| **Description** | ☐ якоря (Anchors) с ценой? (формат T→A→P) ☐ Нет голоса? (голос только в Examples/Greeting) ☐ Психология в Description? (теги `<spine>`/`<ocean>`/`<enneagram>`, не нарратив) | `[ref: part_04.md §4.1 — SPINE]` |
+| **Examples** | ☐ Уникальный голос? (только через Examples, не Description) ☐ Embodiment? (минимум одна физическая реакция) ☐ `<START>`? (в начале каждого блока) | `[ref: part_03.md §3.3 — Правила Examples]` |
+| **Greeting** | ☐ Сцена→Действие→Реплика? ☐ 50–100 токенов? | `[ref: part_07b.md §7B.2 — Greeting]` |
 | **Parameters** | ☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05) ☐ PP = 0? (Presence Penalty = 0.0) ☐ Temperature в диапазоне? (0.6–0.8 для 12B) | `[ref: part_07a.md §7A.6 — Sampling Parameters]` |
 
 **Ссылка:** Расширенная версия — пред-деплой валидация (быстрая проверка — 5 пунктов + полная проверка — 14 пунктов) — см. `[ref: §9.11]`.
@@ -83,7 +83,7 @@ migration_status: —
 | **4** | Повторы фраз | Установите RepPen 1.0–1.05; проверьте PP = 0.0 |
 | **5** | Персонаж теряет характер | Добавьте 2–3 Examples с уникальным голосом |
 
-**Ссылка:** Top-3 Errors — `[ref: part_01.md §1.X — Top-3 Problems]`. Симптомы #4 и #5 также в `[ref: §9.5 — Таблица симптомов]`.
+**Ссылка:** Top-3 Errors — `[ref: part_01.md §1.7 — Top-3 Problems]`. Симптомы #4 и #5 также в `[ref: §9.5 — Таблица симптомов]`.
 
 ---
 
@@ -100,17 +100,17 @@ migration_status: —
 
 | Симптом | Проверка | Ссылка |
 |---------|----------|--------|
-| Модель игнорирует характер | Examples не показывают голос? | `[ref: part_03.md §3.X — Voice Isolation]` |
-| Персонаж слишком мягкий | Нет якорей FLAW-linked? | `[ref: part_04.md §4.X — SPINE→Anchors]` |
-| Голос «утекает» в длинных репликах | Менее 3 Examples? | `[ref: part_03.md §3.X — Examples Rules]` |
-| Персонаж не показывает уязвимость | Нет Цены у Anchors? | `[ref: part_02.md §2.X — Anchor Format]` |
+| Модель игнорирует характер | Examples не показывают голос? | `[ref: part_03.md §3.1 — Voice Isolation]` |
+| Персонаж слишком мягкий | Нет якорей FLAW-linked? | `[ref: part_04.md §4.8 — SPINE→Anchors]` |
+| Голос «утекает» в длинных репликах | Менее 3 Examples? | `[ref: part_03.md §3.3 — Examples Rules]` |
+| Персонаж не показывает уязвимость | Нет Цены у Anchors? | `[ref: part_02.md §2.2 — Anchor Format]` |
 | Внезапные OOC моменты | SPINE не консистентен? | `[ref: part_04.md §4.9 — SPINE Check]` |
 | Повторяющиеся фразы | RepPen > 1.10? | `[ref: part_08.md §8.6 — AP-5]` |
 | Персонаж слишком много говорит | Examples длиннее 120 токенов? | Укоротите Examples (≤120 токенов) |
 | Модель ломает формат | Нет Format Lock? | Добавить Format Lock в SP |
 | Персонаж забывает контекст | Карточка + контекст > контекстное окно? | `[ref: part_08.md §8.15 — AP-14]` |
 | Неестественные переходы | Нет transition sentences? | Добавить Embodiment-переходы |
-| Потеря внутренней логики персонажа | Нет CoT-якорь? | `[ref: part_06.md §6.X — CoT]` |
+| Потеря внутренней логики персонажа | Нет CoT-якорь? | `[ref: part_06.md §6.2 — CoT]` |
 
 ---
 
@@ -131,10 +131,10 @@ migration_status: —
 | | Достаточно ли Examples? | Добавить 2–3 Examples | → Следующая проверка |
 | | Совпадает ли формат Examples и Greeting? | Унифицировать формат (Format Lock) | → Проверить Voice Contamination |
 | Персонаж годмодит | Есть ли Anti-godmoding в SP? | Добавить 2 строки (AP-6 No-Anti-Godmoding) | → Усилить Influence Boundary |
-| Персонаж «слишком идеальный» | Есть ли FLAW в SPINE? | Добавить FLAW + FLAW-linked якорь (Anchor) | → Проверить OCEAN: >2 полюса? → `[ref: part_05.md §5.X — OCEAN Warning]` (AP-15 OCEAN-Overload) |
+| Персонаж «слишком идеальный» | Есть ли FLAW в SPINE? | Добавить FLAW + FLAW-linked якорь (Anchor) | → Проверить OCEAN: >2 полюса? → `[ref: part_05.md §5.3 — OCEAN Warning]` (AP-15 OCEAN-Overload) |
 | Повторы в ответах | RepPen > 1.10? | Fix → AP-5 (RepPen-High) | → Проверить PP: >0? (AP-7 PP-Leak) |
 | | Используете Ollama/LM Studio? | Сменить интерфейс (PP=0.7 hardcode) | → Проверить якоря на дублирование |
-| Модель теряет внутреннюю логику персонажа | Есть ли у персонажа внутренний процесс? | Fix → `[ref: part_06.md §6.X — CoT]` (AP-10 CoT-Overload) | → Проверить SPINE на консистентность (AP-9 SPINE-Broken) |
+| Модель теряет внутреннюю логику персонажа | Есть ли у персонажа внутренний процесс? | Fix → `[ref: part_06.md §6.2 — CoT]` (AP-10 CoT-Overload) | → Проверить SPINE на консистентность (AP-9 SPINE-Broken) |
 
 **Ссылка:** Визуальная версия дерева для 3 базовых симптомов — `[VS: E13]` в preamble Part 9.
 
@@ -224,7 +224,7 @@ migration_status: —
 | Повторы фраз | Паттерн-зависимость | RepPen 1.02-1.05, разнообразьте Examples |
 | Неспособность к CoT | Архитектура модели | Tier 0-1 CoT только, без XML |
 
-**Ссылка:** 4K-Fallback — `[ref: part_07a.md §7A.11]`. CoT Tiers — `[ref: part_06.md §6.X]`.
+**Ссылка:** 4K-Fallback — `[ref: part_07a.md §7A.11]`. CoT Tiers — `[ref: part_06.md §6.3]`.
 
 ---
 

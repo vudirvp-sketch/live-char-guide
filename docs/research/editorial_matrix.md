@@ -1210,8 +1210,8 @@ appendix content describes never-loaded containers.
 | R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |
 | R15 | §9.4 problems #4/#5 vs §9.5 rows | §9.5 | §9.4 (pending candidate #11) | DUPLICATE | ed-3 execution |
 | R16 | §9.11 quick-check `<details>` vs §9.3 | §9.3 + E14 | §9.11 (self-admitted) — **deleted iter 125 (dupes-1)** · **[B]** §0.2 step-6 «5 быстрых проверок» (1-line quick-start recall — REINFORCEMENT, keep) | DUPLICATE (§9.11 fixed; TL;DR = compliant recall) | dupes-1 ✅ iter 125 |
-| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. **[B] remaining non-rendering + canon-only locations:** `part_00.md` L13 preamble («Создан: iter 38 — KI#21») · `part_00.md` §0.1 L45 («отменены iter 123, DEC-16») + L58 («DEC-16, _README §3.9») · `part_06.md` §6.3 L83 («iter 29, KI#18-F partial fix» — canon-only, verified absent in master) · `appendix_character_map.md` L29 («фикс iter 40 — KI#29») · `part_08.md` §8.1 L27 («в v9 restructure» — reader-visible but navigational; optional strip) | — | Phase A locations (5, all executed iter 121) | DUPLICATE class (ed-6) | ed-6 follow-up (canon-side) |
-| R18 | Vague `§X.X` placeholder refs — **canon-only debt: master resolves every occurrence to a proper anchor (verified iter 126: zero `§X.X` strings in master `part_05/08/09/10.html`; part_04 L281 resolves correctly)** — **Phase B batch repaired iter 127 (ed-8/R18: 33 refs + 6 part_08 parens + KI#77-a–d; part_05 L21 → limits-table pointer with master mirror + sync-audit P0-16 update). Phase A remainder ~13 refs (grep-verified at iter 127 — the Phase A count below was undercounted): part_09 ×9 (L65/66/86/103/105/106/113/137/227), part_07a ×3 (L109/L340/L699 — L699 also unbalanced paren), part_03 ×1 (L165)** | — | Phase A: §3.5 (`§7B.X`) · §9.3 (3) · §9.5 (4) · §7A.5 unbalanced paren · **[B] part_08: 7 vague (`§3.X`×3, `§2.X`×3, `§6.X`, `§7B.X` — one overlaps AP-1 row) + 6 unbalanced parens (L44/66/78/98/112/150)** · **[B] glossary: 18 vague (5× `§7A.X`, 6× `§4.X`, 4× `§3.X`, 2× `§7B.X`, 1× `§2.X`)** · **[B] part_10: 4× `§7A.X` (Token Budget)** · **[B] part_05 L89 `§7A.X` (Assembly)** · **[B] appendix_mbti L39 `§7A.X`** · **[B] character_map «Part 6 §6.X»** · **[B] part_04 L281 wrong-but-specific ref → KI#77-a** · **[B] part_05 L21 «см. §5.3» imprecise internal ref** | Navigation debt (mechanical, canon-first) | ed-8 |
+| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. **[B] non-rendering + canon-only strips #14/#15/#17/#18 EXECUTED iter 128 (ed-8 continuation): `part_00.md` §0.1 L45 history clause + L58 repo pointers · `part_06.md` §6.3 L83 iter/KI label · `appendix_character_map.md` L29 fix label — substance kept in all four.** **[B] remaining:** `part_00.md` L13 preamble («Создан: iter 38 — KI#21» — outside sections, non-rendering) · `part_08.md` §8.1 L27 («в v9 restructure» — reader-visible but navigational; optional strip) | — | Phase A locations (5, all executed iter 121) | DUPLICATE class (ed-6) | ed-6 follow-up (canon-side) |
+| R18 | Vague `§X.X` placeholder refs — **canon-only debt: master resolves every occurrence to a proper anchor (verified iter 126: zero `§X.X` strings in master `part_05/08/09/10.html`; part_04 L281 resolves correctly)** — **Phase B batch repaired iter 127 (ed-8/R18: 33 refs + 6 part_08 parens + KI#77-a–d; part_05 L21 → limits-table pointer with master mirror + sync-audit P0-16 update). Phase A remainder REPAIRED iter 128 (ed-8/R18 continuation): 16 refs (grep recount — the ~13 estimate was undercounted again): part_09 ×12 (L64/65/66/86/103/104/105/106/113/134/137/227 — L64 + L134 were matrix-unflagged), part_07a ×3 (L109/L340/L699 + L699 paren closed), part_03 ×1 (L165) — every target verified against the existing master anchor; 2 labels aligned to the master target (L65 → §3.3 «Правила Examples», L66 → §7B.2 «Greeting»)** | — | Remaining vague forms (out-of-scope by design): `_README.md` L103 (ref-notation format example) · character_map L41 «Part 10 §10.X» (generic form, matrix-unflagged) | Navigation debt (mechanical, canon-first) | ed-8 ✅ Phase A+B complete |
 | R19 | Voice Leak causes | §3.6 | §9.5 voice rows | REINFORCEMENT (lookup form) | — |
 | R20 | 12B symptoms | §9.10 | §9.5 general rows | SPECIAL CASE | — |
 | R21 | Simple-characters implicit GHOST/LIE rule («для простых персонажей призрак и ложь могут быть неявными; полная цепочка должна быть логически связана») | `p4_spine_overview::06` (§4.1) | §4.7 L223 **near-verbatim re-statement** (candidate #16 — fold to pointer) · §4.11 L354–359 expert-side mirror (compliant — different decision) · §8.10 L193 «критерий сломанной SPINE» (reconciliation nuance — must survive) · **[B]** glossary SPINE entry (clause, acceptable) | DUPLICATE (§4.7 only) | candidate #16 / ed-7 |
@@ -1291,16 +1291,16 @@ cumulative list with execution status:**
 11. `p9_additional_problems::02` — #4/#5 symptom pairs (R15) → MOVE into §9.5 — open (ed-3)
 12. `p9_pre_deploy::03` — self-admitted quick-check dupe (R16) → DELETE — **✅ executed iter 125 (dupes-1)**
 13. `p9_test_requirements::02` — «минимум 6 сценариев» restatement → COMPRESS — open
-14. `p0_how_to_read::05` — callout-labels history clause (R17, non-rendering) → COMPRESS — open (Phase B)
-15. `p0_how_to_read::06` — DEC-16 repo pointers (R17, non-rendering) → COMPRESS — open (Phase B)
+14. `p0_how_to_read::05` — callout-labels history clause (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
+15. `p0_how_to_read::06` — DEC-16 repo pointers (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 16. `p4_spine_full_chain::04` — implicit-GHOST/LIE near-verbatim re-statement (R21) → CROSS-REFERENCE — open (Phase B)
-17. `p6_cot_tiers::05` — iter-29/KI#18-F canon-only note (R17) → COMPRESS — open (Phase B)
-18. `appendix_character_map::04` — iter-40/KI#29 history label (R17, non-rendering) → COMPRESS — open (Phase B)
+17. `p6_cot_tiers::05` — iter-29/KI#18-F canon-only note (R17) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
+18. `appendix_character_map::04` — iter-40/KI#29 history label (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — open (Phase B; KI#70 dependency)
 20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
 
-Execution status: 5 of 13 Phase A candidates executed (iters 121/125); 15 candidates open overall
-(#4–#8, #10, #11, #13 from Phase A + #14–#20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
+Execution status: 9 of 13 Phase A candidates executed (iters 121/125/128); 11 candidates open overall
+(#4–#8, #10, #11, #13 from Phase A + #16, #19, #20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
 carry owner decisions; the rest are ready for ed-* execution under the Editorial Policy.
 
 Plus one **pair-level** candidate: R04 drift-numbers — one of the two occurrences
@@ -1336,9 +1336,9 @@ action; no Phase B deletion carries unique information (research §22 category 1
   §7A.11 4K table is legitimately distinct. **[B] R27:** character_map card-total ranges
   (~440–890 / ~1500–1800) vs Part 10 budgets — decide whether the ranges re-frame to match the
   cards or the cards' feature-sets get stated as the range condition.
-- **ed-6 (repo-meta):** rendered-prose strips done (iter 121). **[B] remainder = canon-side only:**
-  part_00 L13/L45/L58, part_06 §6.3 L83, character_map L29 (candidates #14/#15/#17/#18) + the
-  optional part_08 «v9 restructure» phrase. Non-rendering → fold into any canon-touching iteration.
+- **ed-6 (repo-meta):** rendered-prose strips done (iter 121); canon-side strips #14/#15/#17/#18
+  **executed iter 128**. **[B] remainder = `part_00.md` L13 preamble + the optional part_08
+  «v9 restructure» phrase.** Non-rendering → fold into any canon-touching iteration.
 - **ed-7 (readability):** R05 methodology pair; §7A.5 unbalanced paren; rule-strength classes for
   numeric claims (incl. KI#72 values once reconciled); **[B] R25** pole-limits triple statement +
   its imprecise §5.1→§5.3 ref (**ref fixed iter 127** — triple statement remains); **[B] R29** terminology drift pairs («Юность/Отрочество»,
@@ -1350,7 +1350,9 @@ action; no Phase B deletion carries unique information (research §22 category 1
   but canon text changes require the usual master mirror edits for changed paragraphs.
   **Phase B batch EXECUTED iter 127 (33 refs + parens + KI#77-a–d + part_05 L21 imprecise ref →
   «Контекстные лимиты полюсов» table pointer, master mirror + sync-audit P0-16 update).**
-  Remaining: Phase A set (~13 refs — grep-verified, see R18 row) + KI#77-e (ed-5 framing decision).
+  **Phase A batch EXECUTED iter 128 (16 refs + part_07a L699 paren — R18 registry row for the
+  recount; every target verified against master anchors).** Remaining: KI#77-e (ed-5 framing
+  decision) + the 2 out-of-scope generic forms (R18 row).
 - **dupes-N (self-admitted dupes):** Phase B found none beyond the R21 §4.7 re-statement — the
   «self-admitted duplicate» class is exhausted; remaining work is the matrix candidate list.
 
