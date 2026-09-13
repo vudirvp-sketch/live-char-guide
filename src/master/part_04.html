@@ -527,10 +527,20 @@ WANT: Стать цельным — заполнить пустоты внутр
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E06-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E06-script.js
+  KI#73 (iter 124): restructured to a real two-column layout — .ghost-rings-visual
+         (SVG, geometry only) + .ghost-rings-annotations (HTML .ring-label column).
+         Rings re-centered cx 260 -> 300 (the left shift existed only to leave room for
+         the former absolute overlays). Label tops 8/38/65% never matched ring geometry.
+  KI#74 (iter 124): duplicated SVG <text> labels removed (byte-level copies of the HTML
+         .ring-label titles/quotes — viz > dry text, NAV pitfall #12); this also removes
+         the master-only literal hex text fills (#8b95a8/#6b7590/#e2e6ed, hardcoded
+         'DM Sans'/'Inter') of the KI#41/KI#42 Light-theme defect class. Gradient outer
+         stop #08090d -> rgba(8,9,13,0) (was a hardcoded dark-theme background).
 -->
 <div class="ghost-rings scroll-enter">
 
-<svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Слои GHOST: три концентрических кольца, показывающих глубину травмы от G1 (источник/ядро) до G3 (поверхностный/настоящее)">
+  <div class="ghost-rings-visual">
+  <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Слои GHOST: три концентрических кольца, показывающих глубину травмы от G1 (источник/ядро) до G3 (поверхностный/настоящее)">
         <title>Слои GHOST — визуализация 3-уровневой глубины травмы</title>
 
         <!-- ПРИМЕЧАНИЕ: SVG-атрибуты fill/stroke/stop-color не могут надёжно
@@ -539,7 +549,7 @@ WANT: Стать цельным — заполнить пустоты внутр
         <defs>
           <radialGradient id="ghost-grad" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="rgba(139,92,246,0.15)"/>
-            <stop offset="100%" stop-color="#08090d"/>
+            <stop offset="100%" stop-color="rgba(8,9,13,0)"/>
           </radialGradient>
           <!-- Core glow -->
           <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
@@ -548,43 +558,31 @@ WANT: Стать цельным — заполнить пустоты внутр
           </radialGradient>
         </defs>
 
-        <!-- Background -->
         <rect width="600" height="480" fill="url(#ghost-grad)"/>
 
         <!-- G3 — Surface (outer ring) — lightest violet -->
-        <circle class="ring-anim vs-ki13-ring-delay-0" cx="260" cy="240" r="200" fill="rgba(139,92,246,0.06)"
+        <circle class="ring-anim vs-ki13-ring-delay-0" cx="300" cy="240" r="200" fill="rgba(139,92,246,0.06)"
                 stroke="rgba(139,92,246,0.25)" stroke-width="1.5"/>
 
         <!-- G2 — Secondary (middle ring) — medium violet -->
-        <circle class="ring-anim vs-ki13-ring-delay-200" cx="260" cy="240" r="130" fill="rgba(139,92,246,0.12)"
+        <circle class="ring-anim vs-ki13-ring-delay-200" cx="300" cy="240" r="130" fill="rgba(139,92,246,0.12)"
                 stroke="rgba(139,92,246,0.35)" stroke-width="1.5"/>
 
         <!-- G1 — Core (inner ring) — deep violet -->
-        <circle class="ring-anim vs-ki13-ring-delay-400" cx="260" cy="240" r="65" fill="rgba(139,92,246,0.22)"
+        <circle class="ring-anim vs-ki13-ring-delay-400" cx="300" cy="240" r="65" fill="rgba(139,92,246,0.22)"
                 stroke="rgba(139,92,246,0.55)" stroke-width="1.5"/>
 
         <!-- Core glow -->
-        <circle class="ring-anim vs-ki13-ring-delay-500" cx="260" cy="240" r="30" fill="url(#core-glow)"/>
+        <circle class="ring-anim vs-ki13-ring-delay-500" cx="300" cy="240" r="30" fill="url(#core-glow)"/>
 
-        <!-- Ring text labels inside SVG -->
-        <text class="ring-text-anim vs-ki13-ring-delay-600" x="260" y="100" text-anchor="middle" fill="#8b95a8"
-              font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">G3 — Поверхностный</text>
-        <text class="ring-text-anim vs-ki13-ring-delay-650" x="260" y="115" text-anchor="middle" fill="#6b7590"
-              font-family="'Inter', sans-serif" font-size="9">"Избегает обязательств"</text>
-
-        <text class="ring-text-anim vs-ki13-ring-delay-700" x="260" y="155" text-anchor="middle" fill="#8b95a8"
-              font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">G2 — Промежуточный</text>
-        <text class="ring-text-anim vs-ki13-ring-delay-750" x="260" y="170" text-anchor="middle" fill="#6b7590"
-              font-family="'Inter', sans-serif" font-size="9">"Брошен в 16 лет"</text>
-
-        <text class="ring-text-anim vs-ki13-ring-delay-800" x="260" y="230" text-anchor="middle" fill="#e2e6ed"
-              font-family="'DM Sans', sans-serif" font-size="13" font-weight="600">G1 — Ядро</text>
-        <text class="ring-text-anim vs-ki13-ring-delay-850" x="260" y="248" text-anchor="middle" fill="#8b95a8"
-              font-family="'Inter', sans-serif" font-size="9">"Отец ушёл, когда мне было 5"</text>
+        <!-- Ring text labels inside SVG: REMOVED iter 124 (KI#74) — duplicated the
+             HTML .ring-label annotations byte-level; HTML column is the readable layer. -->
 
       </svg>
+  </div>
 
-<!-- HTML labels on the right -->
+<!-- Annotation column (HTML) -->
+  <div class="ghost-rings-annotations">
       <div class="ring-label ring-label--g3 scroll-enter">
         <div class="ring-label__title vs-ki13-ring-title--g3">G3 — Поверхностный</div>
         <div class="ring-label__timeline">Настоящее: триггеры сейчас</div>
@@ -605,6 +603,7 @@ WANT: Стать цельным — заполнить пустоты внутр
         <div class="ring-label__event">"Отец ушёл, когда мне было 5"</div>
         <div class="ring-label__causal">G1 → формирует LIE</div>
       </div>
+  </div>
     </div>
 
     <div class="ghost-link-back scroll-enter">

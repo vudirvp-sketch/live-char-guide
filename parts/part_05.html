@@ -429,11 +429,33 @@
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E10-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E10-script.js
+  KI#75 (iter 124): graph corrected against data/enneagram.json — hexad completed
+         (was 3 of 6 lines: 8-5, 5-7, 7-1 missing); stress 6->1 and growth 9->1
+         contradicted the JSON directions (6 stress -> 3, 9 growth -> 3) — corrected
+         to 6->3 and 9->3; direction is now visually encoded (arrowhead markers,
+         previously plain lines); direction-line geometry trimmed to node edges
+         (node r=22 + gap) so arrowheads render OUTSIDE the node circles; stroke-width
+         0.5 -> 1.25, opacity 0.2 -> 0.6, dash 3 3 -> 5 3 for legibility. Static
+         mini-card defaults aligned to data/enneagram.json (type 4 wording)
+         together with the widget fetch fix (KI#76).
 -->
 <div class="enneagram-container scroll-enter" id="enneagram-wrap">
 
 <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Круг Enneagram с 9 типами личности, привязанными к элементам фреймворка SPINE">
         <title>Маппинг Enneagram × SPINE</title>
+
+        <!-- KI#75 (iter 124): arrowhead markers — direction of stress/growth lines
+             is now visually encoded (data/enneagram.json directions). -->
+        <defs>
+          <marker id="e10-arrow-danger" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="12" markerHeight="12" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M 0 1 L 9 5 L 0 9 Z" fill="var(--danger)"/>
+          </marker>
+          <marker id="e10-arrow-success" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="12" markerHeight="12" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M 0 1 L 9 5 L 0 9 Z" fill="var(--success)"/>
+          </marker>
+        </defs>
 
         <!-- Main circle -->
         <circle class="enneagram-anim" cx="300" cy="260" r="200" fill="none" stroke="var(--border)" stroke-width="1" opacity="0.5"/>
@@ -443,18 +465,29 @@
                  points="300,60 473,360 127,360"
                  fill="none" stroke="var(--accent-violet)" stroke-width="1" stroke-dasharray="6 4" opacity="0.4"/>
 
-        <!-- Connection lines (1-4-2-8-5-7-1 pattern) — simplified -->
+        <!-- Connection lines — hexad 1-4-2-8-5-7-1 (complete since iter 124/KI#75:
+             was 3 of 6 — 8-5, 5-7, 7-1 were missing) -->
         <line x1="171" y1="107" x2="232" y2="448" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
         <line x1="232" y1="448" x2="103" y2="225" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
         <line x1="103" y1="225" x2="429" y2="107" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="429" y1="107" x2="368" y2="448" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="368" y1="448" x2="497" y2="225" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+        <line x1="497" y1="225" x2="171" y2="107" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
 
-        <!-- Stress arrows (danger/red) — simplified directional hints -->
-        <line x1="300" y1="60" x2="473" y2="360" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
-        <line x1="473" y1="360" x2="171" y2="107" stroke="var(--danger)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <!-- Stress arrows (danger/red) — directions per data/enneagram.json
+             (KI#75: 6->1 contradicted the JSON — type 6 stress -> 3; corrected).
+             Endpoints trimmed to node edges (node r=22 + gap) so arrowheads
+             render OUTSIDE the node circles (previously hidden underneath).
+             The 9-6 segment carries BOTH stress 9->6 and growth 6->9 — the two
+             lines are offset 3.5u perpendicular to each side so both render
+             as distinct parallel dashed lines with opposite arrowheads. -->
+        <line x1="311" y1="85.8" x2="457" y2="339.3" stroke="var(--danger)" stroke-width="1.25" opacity="0.6" stroke-dasharray="5 3" marker-end="url(#e10-arrow-danger)"/>
+        <line x1="445" y1="360" x2="153" y2="360" stroke="var(--danger)" stroke-width="1.25" opacity="0.6" stroke-dasharray="5 3" marker-end="url(#e10-arrow-danger)"/>
 
-        <!-- Growth arrows (success/green) — simplified -->
-        <line x1="300" y1="60" x2="171" y2="107" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
-        <line x1="473" y1="360" x2="300" y2="60" stroke="var(--success)" stroke-width="0.5" opacity="0.2" stroke-dasharray="3 3"/>
+        <!-- Growth arrows (success/green) — directions per data/enneagram.json
+             (KI#75: 9->1 contradicted the JSON — type 9 growth -> 3; corrected) -->
+        <line x1="286" y1="84" x2="140" y2="337.5" stroke="var(--success)" stroke-width="1.25" opacity="0.6" stroke-dasharray="5 3" marker-end="url(#e10-arrow-success)"/>
+        <line x1="462" y1="334" x2="316" y2="80.8" stroke="var(--success)" stroke-width="1.25" opacity="0.6" stroke-dasharray="5 3" marker-end="url(#e10-arrow-success)"/>
 
         <!-- Type nodes — positioned on circle -->
         <!-- Type 9 — top center -->
@@ -516,10 +549,10 @@
 <!-- Mini-card (hidden by default, shown on hover) -->
       <div class="mini-card" id="mini-card">
         <div class="mini-card__type" id="mc-type">Тип 4 — Индивидуалист</div>
-        <div class="mini-card__row"><span class="mini-card__label">Основной страх:</span> <span id="mc-fear">Быть незначительным</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">Основное желание:</span> <span id="mc-desire">Быть уникальным</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">Шаблон LIE:</span> <span id="mc-lie">"Я фундаментально ущербен"</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">Паттерн FLAW:</span> <span id="mc-flaw">Уходит в себя когда ранен</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Основной страх:</span> <span id="mc-fear">Быть обычным, незначимым, без индивидуальности</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Основное желание:</span> <span id="mc-desire">Быть уникальным, особенным, аутентичным</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Шаблон LIE:</span> <span id="mc-lie">Что-то фундаментально отсутствует во мне</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Паттерн FLAW:</span> <span id="mc-flaw">Зависть, драматизация, эмоциональная нестабильность</span></div>
       </div>
     </div>
 

@@ -1167,22 +1167,38 @@ a:hover {
          Uses CSS custom properties from DESIGN-TOKENS.css.
 */
 
+/* KI#73 (iter 124): real two-column layout — .ghost-rings-visual (SVG geometry)
+   + .ghost-rings-annotations (HTML .ring-label column). Replaces the former
+   absolute-overlay architecture (labels floating over the full-size SVG, tops
+   8/38/65% not tied to ring geometry). Mobile keeps the genuine reflow (stack). */
 .ghost-rings {
       max-width: 700px;
       margin: 0 auto;
-      position: relative;
-      aspect-ratio: 1 / 0.8;
+      display: flex;
+      align-items: center;
+      gap: var(--gap-lg);
     }
 
-    .ghost-rings svg {
+    .ghost-rings-visual {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .ghost-rings-visual svg {
       width: 100%;
-      height: 100%;
+      height: auto;
+      display: block;
     }
 
-    /* Ring labels — positioned on the right side */
+    .ghost-rings-annotations {
+      flex: 0 0 250px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    /* Ring labels — annotation column items (static flow, not overlays) */
     .ring-label {
-      position: absolute;
-      right: 0;
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -1213,11 +1229,6 @@ a:hover {
       opacity: 0.7;
     }
 
-    /* Position labels at different heights */
-    .ring-label--g3 { top: 8%; }
-    .ring-label--g2 { top: 38%; }
-    .ring-label--g1 { top: 65%; }
-
     /* Scroll animations */
     .ghost-rings svg circle.ring-anim {
       transform-origin: center;
@@ -1229,14 +1240,8 @@ a:hover {
       transform: scale(1);
     }
 
-    .ghost-rings svg text.ring-text-anim {
-      opacity: 0;
-      transition: opacity 400ms var(--ease-out-expo);
-    }
-
-    .ghost-rings svg text.ring-text-anim.is-visible {
-      opacity: 1;
-    }
+    /* KI#74 (iter 124): text.ring-text-anim rules removed together with the
+       duplicated SVG <text> labels — HTML .ring-label is the readable layer. */
 
     .ring-label {
       opacity: 0;
@@ -1259,14 +1264,18 @@ a:hover {
 
     @media (max-width: 768px) {
       .ghost-rings {
-        aspect-ratio: auto;
+        flex-direction: column;
+        gap: var(--gap-md);
       }
-      .ghost-rings svg {
+      .ghost-rings-annotations {
+        flex: 0 0 auto;
+        width: 100%;
+      }
+      .ghost-rings-visual svg {
         max-height: 400px;
       }
       .ring-label {
-        position: static;
-        margin-bottom: var(--gap-sm);
+        width: 100%;
         padding: var(--gap-xs) var(--gap-sm);
         background: var(--bg-panel);
         border-radius: var(--radius-sm);
@@ -1274,7 +1283,6 @@ a:hover {
       .ring-label--g3,
       .ring-label--g2,
       .ring-label--g1 {
-        top: auto;
         transition-delay: 0ms;
       }
     }
@@ -3105,18 +3113,13 @@ a:hover {
 }
 
 /* --- E05 SPINE Framework — GHOST Layers ring animation delays (iter 21) --- */
-/* Staggered transition-delay values for ring-anim circles + ring-text-anim texts.
-   Applied to SVG elements inside .ghost-rings (see SECTION 2 for base transitions). */
+/* Staggered transition-delay values for ring-anim circles (see SECTION 2 for base
+   transitions). Delay 600–850 (ring-text-anim texts) removed iter 124 with the
+   duplicated SVG <text> labels (KI#74). */
 .vs-ki13-ring-delay-0   { transition-delay: 0ms; }
 .vs-ki13-ring-delay-200 { transition-delay: 200ms; }
 .vs-ki13-ring-delay-400 { transition-delay: 400ms; }
 .vs-ki13-ring-delay-500 { transition-delay: 500ms; }
-.vs-ki13-ring-delay-600 { transition-delay: 600ms; }
-.vs-ki13-ring-delay-650 { transition-delay: 650ms; }
-.vs-ki13-ring-delay-700 { transition-delay: 700ms; }
-.vs-ki13-ring-delay-750 { transition-delay: 750ms; }
-.vs-ki13-ring-delay-800 { transition-delay: 800ms; }
-.vs-ki13-ring-delay-850 { transition-delay: 850ms; }
 
 /* --- E05 SPINE Framework — GHOST Layers ring label titles (iter 21) --- */
 /* Per-tier color overrides for .ring-label__title (base styles in SECTION 2). */
