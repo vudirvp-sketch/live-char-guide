@@ -1,13 +1,16 @@
 # Editorial Matrix — Live Character Guide
 
-> **Phase A: Parts 1 / 3 / 7A / 9** — block-level editorial audit per `PLAN.md` row `ed-matrix`
-> and `docs/research/editorial_research_en.md` §32 (matrix spec), §24 (repeat classification),
-> §22 (functional-load test), §20 (useful-repetition whitelist).
-> **Provenance:** iter 120, BASE `bd2134f06c5116113b9c9f180c13d151c51b4302`, worktree clean at start.
-> **Read-only analysis:** no content files (`docs/canon/`, `src/master/`) were edited in this iteration.
-> **Phase decision:** Parts 1/3/7A/9 selected per `docs/research/backlog_audit_iter118.md` §2/§4
-> (the four highest-conflict zones per research §26). Phase B (Part 0, 2, 4, 5, 6, 7B, 8, 10 +
-> appendices) remains pending in `PLAN.md` — visible re-scope, not silent narrowing.
+> **Phases A + B: full guide coverage (Parts 0–10 + 4 appendices).** Block-level editorial audit per
+> `PLAN.md` row `ed-matrix` and `docs/research/editorial_research_en.md` §32 (matrix spec), §24
+> (repeat classification), §22 (functional-load test), §20 (useful-repetition whitelist).
+> **Phase A (iter 120, BASE `bd2134f0`):** Parts 1 / 3 / 7A / 9 — 38 sections, 210 rows.
+> **Phase B (iter 126, BASE `03f48fa3`, worktree clean at start):** Part 0, 2, 4, 5, 6, 7B, 8, 10 +
+> appendices (character_map / glossary / mbti / model_table) — 61 sections, 290 rows.
+> Combined: **99 canon-declared section IDs (96 rendering + Part 0 ×2 + Appendix D ×1 conceptual-only,
+> per the `content_map.md` counting convention), 500 block rows.**
+> **Read-only analysis (both phases):** no content files (`docs/canon/`, `src/master/`) were edited.
+> **Phase decision:** A = the four highest-conflict zones per research §26 (`backlog_audit_iter118.md`
+> §2/§4); B = the remainder. Non-rendering sections audited canon-side only.
 > Language: English (repo law). Russian snippets quote the audited canon verbatim.
 
 ---
@@ -501,40 +504,734 @@ ed-policy Rule 3/§15 navigation-debt decision).
 
 ---
 
-## 6. Repeat registry — second pass (research §24 classification)
+## 6. Part 0 — Before You Start (`docs/canon/part_00.md`, 2 sections — **non-rendering**)
 
-> Cross-cutting repeated concepts found in Phase A. `Canonical` = the KEEP-side owner; the other
-> occurrences carry the classification. Only `DUPLICATE` rows are automatic compression candidates.
+> Non-rendering by design: Part 0 has no master HTML artifact (`migration_status: NEW iter 38` in
+> front-matter; verified — zero `p0_*` sections in `src/master/`). Audited canon-side only; editorial
+> findings here are canon hygiene, not reader-facing.
 
-| # | Concept | Canonical owner | Other occurrences (Phase A) | Classification | Feeds |
-|---|---|---|---|---|---|
-| R01 | Anchors-placement rule (separate block in Examples-zone) | `p1_core_rules::05` (§1.4) | §7A.1 L33 **full copy** · §7A.9 L394 short+ref · §7A.11 L567 short+ref · §7A.13 L732 footnote · §1.2 L57 clarification | DUPLICATE (§7A.1 full copy); rest = compliant refs | ed-2-style compress, canon-first |
-| R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · appendix_glossary full annotated copy (Phase B — backlog audit §2) · Part 10 uses shorthand ✓ | DUPLICATE (§7A.13; glossary pending Phase B verdict) | ed-2 |
-| R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 **full re-teach** · §1.7 L128 application · §7A.4 L189/L199 applications+ref | DUPLICATE (§3.1); rest compliant | ed-1/ed-4 |
-| R04 | Voice drift numbers (~40% vs ~10% at 20–30 msgs) | §3.1 table (granular) | §1.1 table row | DUPLICATE (same data, same persuasive purpose) | ed-1/ed-4 |
-| R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 near-verbatim | DUPLICATE | ed-7 |
-| R06 | Linguistic vs physical voice (Тест family) | `p3_voice_isolation::03–04` (§3.1) | §3.2 L67–80 example (unique demo) · §3.2 L82 Пояснение (re-explainer) | DUPLICATE (Пояснение only) | ed-4 |
-| R07 | Anti-godmoding exact line «Never speak or act for {{user}}.» | §7A.1 template | §1.7 fix · §9.3 check · §9.11 examples · §7A.13 step 2 | REINFORCEMENT (each = changed function: teach/fix/check/example) | — |
-| R08 | OOC Protection template | §7A.8 | §7A.13 step 3 partial re-print | REINFORCEMENT (assembled-SP view) — ed-2 audit item | ed-2 |
-| R09 | Format Lock template | §7A.4 | §7A.1 template tail · §7A.13 step 3 | REINFORCEMENT (template/apply/assemble) — ed-2 audit item | ed-2 |
-| R10 | Tone Frame example string | §7A.3 table | §7A.13 step 3 | REINFORCEMENT (apply-layer) | ed-2 |
-| R11 | Token budget numbers | `p7a_token_budget::03` (§7A.12) | §7A.11 4K table (RELATED BUT DISTINCT ✓) · §1.8 Q2 (UNCLEAR framing: ≤200/≤400 vs 150/300/700) · §7A.13 step 6 ✓ · §9.11 «Description ≤ 800» vs max 700 (CONTRADICTORY) | MIXED — see per-row | ed-5 |
-| R12 | Sampling parameter values | `p7a_sampling_params::03` (§7A.6) | §7A.7 rows — **CONTRADICTORY** (KI#72) · §9.3 Parameters row = compliance check ✓ · §9.10 refs ✓ | CONTRADICTORY (§7A.7) | KI#72 fix |
-| R13 | SP language rule | §7A.2 | §7A.7 footnote ✓ · §9.10 summary ✓ | Compliant refs | — |
-| R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |
-| R15 | §9.4 problems #4/#5 vs §9.5 rows | §9.5 | §9.4 | DUPLICATE | ed-3 execution |
-| R16 | §9.11 quick-check `<details>` vs §9.3 | §9.3 | §9.11 (self-admitted) | DUPLICATE | dupes-1 |
-| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6 executed; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. Post-Phase-A discoveries (non-rendering, pending Phase B rows): `part_06.md` §6.3 L83 (iter 29 / KI#18-F note) · `part_00.md` L13 («Создан: iter 38») · `appendix_character_map.md` L29 (iter 40 / KI#29) | — | §1.2 L51 (Mermaid iter 14) · §1.2 L53 (build internals) · §7A.1 L35 (**stale** [ANCHORS] claim) · §7A.2 L82 (D4 iter 93) · §7A.12 L616 (**stale** migration note) · + Part 8 (out of Phase A, confirmed by backlog audit) | DUPLICATE class (ed-6) | ed-6 ✅ iter 121 |
-| R18 | Vague `§X.X` placeholder refs | — | §3.5 (`§7B.X`) · §9.3 (`§7B.X`, `§4.X`, `§3.X`) · §9.5 (`§3.X`, `§4.X`, `§2.X`, `§6.X`) · §7A.5 unbalanced paren | Navigation debt | ed-8 |
-| R19 | Voice Leak causes | §3.6 | §9.5 voice rows | REINFORCEMENT (lookup form) | — |
-| R20 | 12B symptoms | §9.10 | §9.5 general rows | SPECIAL CASE | — |
+### p0_how_to_read (§0.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p0_how_to_read::01 | L23 | linear flow + 2 declared Bridges (6→7A, 9→10) | NAVIGATION | KEEP | YES | — | Matches the two-bridge invariant («Переход» labels, §0.1 list) |
+| p0_how_to_read::02 | L25–39 | «Что такое Part» + module map table (12 rows) | NAVIGATION | KEEP | YES | — | Canon-side orientation; unique (no TOC equivalent in canon) |
+| p0_how_to_read::03 | L41 | VS-EMBED notation (`[VS: E0X — …]`, `viz > dry text`) | METADATA | KEEP | YES | — | Notation documentation |
+| p0_how_to_read::04 | L43 | `[ref: …]` notation | METADATA | KEEP | YES | — | Notation documentation |
+| p0_how_to_read::05 | L45–56 | callout labels list (10 labels) | METADATA | COMPRESS | YES | DUPLICATE | **R17:** carries history «английские метки отменены iter 123, DEC-16» inside a current-state list — strip the history clause, keep the label inventory |
+| p0_how_to_read::06 | L58 | English placement note | METADATA | COMPRESS | YES | DUPLICATE | **R17:** repo pointers «(DEC-16, `docs/canon/_README.md` §3.9)»; substance (English only in executable containers/identifiers/proper names) stays |
+
+### p0_tldr_quick_start (§0.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p0_tldr_quick_start::01 | L68 | minimal card = 4 blocks | DEFINITION | KEEP | YES | — | |
+| p0_tldr_quick_start::02 | L70–77 | 6-step assembly list | APPLICATION | KEEP | YES | REINFORCEMENT | R07 (step-1 anti-godmoding line, apply-layer) + R16-family (step-6 five-checks — quick-start recall of the §9.3+E14 canonical pair; 1-line form) |
+| p0_tldr_quick_start::03 | L79 | 3 principles short-form + «подробно в Part 1» | NAVIGATION | KEEP | YES | — | Compliant introduce-once pointer |
+| p0_tldr_quick_start::04 | L81 | «С чего начать» (Elena first, not Omnis) | APPLICATION | KEEP | YES | — | Unique guidance |
+| p0_tldr_quick_start::05 | L83 | Ссылка (§1.8, §9.11, §10.1) | NAVIGATION | KEEP | YES | — | |
+
+**Part 0 verdict:** low editorial load. Two history strips (R17 — non-rendering, canon hygiene only);
+everything else is compliant orientation/quick-start. The preamble line L13 «Создан: iter 38 — закрытие
+KI#21 G1+G2» sits outside section blocks — recorded in the R17 registry (non-rendering preamble).
 
 ---
 
-## 7. Summary statistics
+## 7. Part 2 — Behavioral Anchors (`docs/canon/part_02.md`, 6 sections)
 
-> Counts verified by script against the `id` column (sandbox tooling, iter 120): 210 rows,
-> 210 unique IDs, 0 duplicates.
+### p2_basic_anchors (§2.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p2_basic_anchors::01 | L19 | Anchor definition (T→A→P) | DEFINITION | KEEP | YES | — | Canonical |
+| p2_basic_anchors::02 | L21 | `[VS: E03]` marker | METADATA | KEEP | YES | — | Declared replacement (inf-pipeline + plain-copy dupe) |
+| p2_basic_anchors::03 | L23 | E03 complement note | METADATA | KEEP | YES | — | Declared complement: table = concrete per-stage examples |
+| p2_basic_anchors::04 | L25–29 | stage example table | APPLICATION | KEEP | YES | — | |
+
+### p2_anchor_rules (§2.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p2_anchor_rules::01 | L40–46 | recommended anchor count table (3-5 / 5-7 / 7-12) | DEFINITION | KEEP | YES | — | Consistent with §0.2 step-5 «3–5» |
+| p2_anchor_rules::02 | L48–53 | quality criteria (4 bullets) | DEFINITION | KEEP | YES | — | |
+| p2_anchor_rules::03 | L55 | RULE: anchors/FLAW = concrete actions («Он неуверенный» ≠ якорь) → §4.4 | DEFINITION | KEEP | YES | REINFORCEMENT | R24 (formulation principle, anchor-side; §4.4 = FLAW-side; ref correct) |
+| p2_anchor_rules::04 | L57 | RULE: delayed price invalid («потом будет жалеть») | DEFINITION | KEEP | YES | REINFORCEMENT | Price = whitelisted recurrence (§20) |
+| p2_anchor_rules::05 | L59–63 | delayed vs immediate price table | EXAMPLE | KEEP | YES | — | |
+| p2_anchor_rules::06 | L65–70 | Price types table (2 types; Walter ref §10.2 ✓) | DEFINITION | KEEP | YES | — | |
+| p2_anchor_rules::07 | L72 | RULE: influence boundary → §7A.2 CD#5 | DEFINITION | KEEP | YES | REINFORCEMENT | Apply-layer of Influence Boundary, correct ref |
+
+### p2_anchor_examples (§2.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p2_anchor_examples::01 | L82 | intro | NAVIGATION | KEEP | YES | — | |
+| p2_anchor_examples::02 | L84–91 | ready anchors by trigger table (6 rows) | EXAMPLE | KEEP | YES | — | Canonical examples; Part 10 cards reuse rows as protected card content |
+
+### p2_embodiment (§2.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p2_embodiment::01 | L102 | Embodiment definition | DEFINITION | KEEP | YES | — | Canonical |
+| p2_embodiment::02 | L104 | `[VS: E04]` marker | METADATA | KEEP | YES | — | Declared replacement |
+| p2_embodiment::03 | L106 | E04 complement note | METADATA | KEEP | YES | — | Declared complement |
+| p2_embodiment::04 | L108–113 | 4-layer example categories table | APPLICATION | KEEP | YES | — | |
+| p2_embodiment::05 | L115 | sensory layer note (texture THROUGH action) | DEFINITION | KEEP | YES | — | |
+| p2_embodiment::06 | L117–123 | embodiment examples table (3 rows) | EXAMPLE | KEEP | YES | — | |
+| p2_embodiment::07 | L125 | RECOMMENDATION: every Example ≥1 physical reaction | APPLICATION | KEEP | YES | REINFORCEMENT | CD#2 apply-layer |
+
+### p2_env_reactivity (§2.5)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p2_env_reactivity::01 | L136 | definition (environment through action) | DEFINITION | KEEP | YES | REINFORCEMENT | CD#4 teaching site (canonical; §7A.2 and glossary apply it) |
+| p2_env_reactivity::02 | L138–141 | ПРИМЕР: декорация vs действие | EXAMPLE | KEEP | YES | — | |
+
+### p2_sensory_anchors (§2.6)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p2_sensory_anchors::01 | L152 | intro | NAVIGATION | KEEP | YES | — | |
+| p2_sensory_anchors::02 | L154 | Sensory Anchor definition | DEFINITION | KEEP | YES | — | |
+| p2_sensory_anchors::03 | L156–164 | 5 sensory channels table | DEFINITION | KEEP | YES | — | Canonical |
+| p2_sensory_anchors::04 | L166–173 | Пример: Выщербленный (3 sensory anchors, code) | EXAMPLE | KEEP | YES | REINFORCEMENT | **R22:** re-used near-verbatim in the §10.4 production card (teach vs card = changed function, §21 protection) |
+
+**Part 2 verdict:** canonical teaching part, near-clean. Zero compression candidates; repeats are
+compliant applications (R24, R07-family, Price whitelist) or protected example re-use (R22).
+
+---
+
+## 8. Part 4 — SPINE (`docs/canon/part_04.md`, 11 sections)
+
+### p4_spine_overview (§4.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_spine_overview::01 | L19 | SPINE definition | DEFINITION | KEEP | YES | — | Canonical |
+| p4_spine_overview::02 | L21 | causal chain line `GHOST → LIE → FLAW → NEED → WANT` | DEFINITION | KEEP | YES | — | |
+| p4_spine_overview::03 | L23–27 | chain bullets (5) | DEFINITION | KEEP | YES | REINFORCEMENT | SPINE causality = whitelisted recurrence (§20) |
+| p4_spine_overview::04 | L29 | `[VS: E05]` marker | METADATA | KEEP | YES | — | Declared replacement |
+| p4_spine_overview::05 | L31–41 | observable-units rule + ❌/✅ table | DEFINITION | KEEP | YES | REINFORCEMENT | R24-family (observable-unit formulation); canonical table |
+| p4_spine_overview::06 | L43–45 | Упрощение для простых персонажей | DEFINITION | KEEP | YES | — | **Canonical owner of R21** (implicit GHOST/LIE + full-chain-must-be-linked; refs §4.9) |
+
+### p4_ghost (§4.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_ghost::01 | L56 | GHOST definition | DEFINITION | KEEP | YES | — | Canonical |
+| p4_ghost::02 | L58–62 | правила призрака (3 bullets) | DEFINITION | KEEP | YES | — | |
+| p4_ghost::03 | L64 | запрещённые формулировки | DEFINITION | KEEP | YES | — | Canonical forbidden-words list |
+| p4_ghost::04 | L66–69 | Anti-pattern / Solution | EXAMPLE | KEEP | YES | — | §21-protected demo |
+| p4_ghost::05 | L71–76 | канонические примеры призрака table | EXAMPLE | KEEP | YES | — | |
+| p4_ghost::06 | L78 | Примечание: один призрак на учебного персонажа | DEFINITION | KEEP | YES | — | Canonical rule; mirrored by the §7B.3 пример-2 «ВНЕ КАНОНА» warning ✓ |
+
+### p4_lie (§4.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_lie::01 | L89 | LIE definition | DEFINITION | KEEP | YES | — | Canonical |
+| p4_lie::02 | L91–95 | правила лжи | DEFINITION | KEEP | YES | — | |
+| p4_lie::03 | L97–102 | канонические примеры лжи table | EXAMPLE | KEEP | YES | — | |
+
+### p4_flaw (§4.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_flaw::01 | L113 | FLAW definition | DEFINITION | KEEP | YES | — | Canonical |
+| p4_flaw::02 | L115–120 | правила дефекта | DEFINITION | KEEP | YES | — | |
+| p4_flaw::03 | L122–134 | Anti-pattern/Solution tables (прилагательное vs поведение; плохой/хороший FLAW) | EXAMPLE | KEEP | YES | REINFORCEMENT | R24 (FLAW-side of the formulation principle) |
+| p4_flaw::04 | L136–141 | канонические примеры дефекта table | EXAMPLE | KEEP | YES | — | |
+
+### p4_need (§4.5)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_need::01 | L152 | NEED definition | DEFINITION | KEEP | YES | — | Canonical |
+| p4_need::02 | L154–158 | правила потребности | DEFINITION | KEEP | YES | — | |
+| p4_need::03 | L160–166 | канонические примеры (WANT↔NEED tension table) | EXAMPLE | KEEP | YES | — | |
+
+### p4_want (§4.6)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_want::01 | L177 | WANT definition | DEFINITION | KEEP | YES | — | Canonical |
+| p4_want::02 | L179–184 | правила желания | DEFINITION | KEEP | YES | — | |
+| p4_want::03 | L186–193 | канонические примеры желания table | EXAMPLE | KEEP | YES | — | |
+
+### p4_spine_full_chain (§4.7)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_spine_full_chain::01 | L204 | full-chain prose walkthrough | DEFINITION | KEEP | YES | REINFORCEMENT | Chain restated in prose — walkthrough function (whitelist: SPINE causality) |
+| p4_spine_full_chain::02 | L206 | `[VS: E05]` second marker («повторное обращение») | METADATA | KEEP | YES | — | Declared repeat-appeal |
+| p4_spine_full_chain::03 | L208–221 | канонический пример полной цепочки: Выщербленный (code) | EXAMPLE | KEEP | YES | — | Canonical worked example |
+| p4_spine_full_chain::04 | L223 | Правило: implicit GHOST/LIE for simple characters | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | **R21:** near-verbatim of §4.1::06 (~180 lines apart, same part); fold to pointer (§4.1 + чек-лист §4.9 — the check-questions variant lives in §4.9) |
+| p4_spine_full_chain::05 | L225 | Ссылка (Part 10; §4.2–§4.6 поэлементно) | NAVIGATION | KEEP | YES | — | |
+
+### p4_spine_mapping (§4.8)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_spine_mapping::01 | L236 | intro | NAVIGATION | KEEP | YES | — | |
+| p4_spine_mapping::02 | L238–246 | SPINE → тип якоря table (5 rows) | DEFINITION | KEEP | YES | — | Canonical mapping |
+| p4_spine_mapping::03 | L248 | Правило: каждый дефект ≥1 якорь FLAW-linked | DEFINITION | KEEP | YES | — | Canonical (mirrored by AP-8 ✓) |
+| p4_spine_mapping::04 | L250–254 | определения типов якорей (3) | DEFINITION | KEEP | YES | — | |
+| p4_spine_mapping::05 | L256–260 | Якоря FLAW-linked (детально) + пример intro | DEFINITION | KEEP | YES | — | |
+| p4_spine_mapping::06 | L262–267 | алгоритм создания якорей FLAW-linked (4 шага) | APPLICATION | KEEP | YES | — | |
+| p4_spine_mapping::07 | L269–277 | канонический пример: Елена (якоря FLAW-linked table) | EXAMPLE | KEEP | YES | — | |
+| p4_spine_mapping::08 | L279–281 | Динамика SPINE (РЕКОМЕНДАЦИЯ, Consequence Driven) | APPLICATION | KEEP | YES | — | **KI#77-a:** canon ref `[part_07a.md §7A.6 — Consequence Driven]` points to Sampling Params; directive #6 = §7A.2. Master link already resolves to `#p7a_core_directives` (canon-side repair only) |
+
+### p4_spine_check (§4.9)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_spine_check::01 | L292 | intro | NAVIGATION | KEEP | YES | — | |
+| p4_spine_check::02 | L294–302 | чек-лист проверки SPINE (7 ☐) | VALIDATION | KEEP | YES | REINFORCEMENT | Check-form of the chain definitions — changed function (§24); mirrored apply-side in §10.4 ✓ |
+| p4_spine_check::03 | L304 | применение чек-листа | NAVIGATION | KEEP | YES | — | |
+
+### p4_spine_navigation (§4.10)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_spine_navigation::01 | L314 | next-steps pointer | NAVIGATION | KEEP | YES | — | |
+
+### p4_ghost_layers (§4.11)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p4_ghost_layers::01 | L325 | intro (one GHOST vs layers) | DEFINITION | KEEP | YES | REINFORCEMENT | R21 expert-side dual of §4.1::06 — different decision (when to USE layers), keep both |
+| p4_ghost_layers::02 | L327 | `[VS: E06]` marker | METADATA | KEEP | YES | — | E06 = two-column embed (fixed iter 124, KI#73/74) |
+| p4_ghost_layers::03 | L329–335 | архитектура слоёв table (G1/G2/G3) | DEFINITION | KEEP | YES | — | Canonical; «G2 — Юность (13–25)» vs glossary «Отрочество» → R29 |
+| p4_ghost_layers::04 | L337–343 | канонический пример: Выщербленный (3-tier table) | EXAMPLE | KEEP | YES | — | |
+| p4_ghost_layers::05 | L345 | Ссылка | NAVIGATION | KEEP | YES | — | |
+| p4_ghost_layers::06 | L347–352 | когда использовать слои | APPLICATION | KEEP | YES | — | |
+| p4_ghost_layers::07 | L354–359 | когда достаточно одного | APPLICATION | KEEP | YES | REINFORCEMENT | R21 mirror (expert-side) |
+| p4_ghost_layers::08 | L361 | РЕКОМЕНДАЦИЯ: 3 слоя не всем (Walter §10.2 ✓) | APPLICATION | KEEP | YES | — | |
+| p4_ghost_layers::09 | L363 | Синтез | DEFINITION | KEEP | YES | — | Part-level synthesis (label convention ✓) |
+
+**Part 4 verdict:** canonical SPINE part. One intra-part duplicate (R21 §4.7::04 — fold to pointer),
+one wrong canon ref (KI#77-a §4.8::08). Everything else canonical or compliant.
+
+---
+
+## 9. Part 5 — Psychology (`docs/canon/part_05.md`, 7 sections)
+
+### p5_ocean_basics (§5.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_ocean_basics::01 | L19 | OCEAN definition | DEFINITION | KEEP | YES | — | Canonical |
+| p5_ocean_basics::02 | L21 | ПРАВИЛО: золотое правило профиля (1–2 extremes) | DEFINITION | KEEP | YES | REINFORCEMENT | **R25 canonical owner.** Internal ref «(см. §5.3 контекстные лимиты)» imprecise — the limits table is §5.1 L80–87; §5.3 carries only a partial restatement (reader-visible, feeds ed-8) |
+| p5_ocean_basics::03 | L23 | ПРАВИЛО: `<ocean>` tag format (compact) | DEFINITION | KEEP | YES | — | Canonical (NAV invariant) |
+| p5_ocean_basics::04 | L25 | осторожная зона definition | DEFINITION | KEEP | YES | — | Canonical (NAV invariant) |
+| p5_ocean_basics::05 | L27–35 | 5 измерений table | DEFINITION | KEEP | YES | — | |
+| p5_ocean_basics::06 | L37–39 | тип стресса intro | DEFINITION | KEEP | YES | — | |
+| p5_ocean_basics::07 | L41–46 | stress-type table (4 rows) | DEFINITION | KEEP | YES | — | Canonical |
+| p5_ocean_basics::08 | L48 | РЕКОМЕНДАЦИЯ: определяйте тип стресса | APPLICATION | KEEP | YES | — | |
+| p5_ocean_basics::09 | L50–56 | Trigger → Stress Type → FLAW chain (intro + formula + linkage) | APPLICATION | KEEP | YES | — | Unique cross-part synthesis; refs §2.1/§4.4/§4.8 all correct |
+| p5_ocean_basics::10 | L58–65 | канонический пример: Елена (anxious-reactive table) | EXAMPLE | KEEP | YES | — | |
+| p5_ocean_basics::11 | L67 | ПРАВИЛО: каждый тип стресса ≥1 цепочку | DEFINITION | KEEP | YES | — | |
+| p5_ocean_basics::12 | L69 | РЕКОМЕНДАЦИЯ: 2–3 категории триггеров | APPLICATION | KEEP | YES | — | |
+| p5_ocean_basics::13 | L71–78 | категории триггеров по типу стресса table | DEFINITION | KEEP | YES | — | |
+| p5_ocean_basics::14 | L80–87 | контекстные лимиты полюсов table (4K/8K/16K/32K) | DEFINITION | KEEP | YES | REINFORCEMENT | R25 2nd statement (values consistent with ::02 + §5.3) |
+| p5_ocean_basics::15 | L89 | Ссылка: OCEAN при сборке → `[ref: part_07a.md §7A.X — Assembly Pipeline]` | NAVIGATION | KEEP | YES | — | R18: `§7A.X` vague (target §7A.13; master resolves to `#p7a_assembly_pipeline` — canon-side hygiene) |
+| p5_ocean_basics::16 | L91–100 | decision tree: какой фреймворк (intro + table) | APPLICATION | KEEP | YES | — | Canonical framework chooser |
+| p5_ocean_basics::17 | L102 | ПРАВИЛО: не собирайте SPINE снизу вверх | DEFINITION | KEEP | YES | — | Canonical |
+| p5_ocean_basics::18 | L104 | РЕКОМЕНДАЦИЯ: 90% карточек = SPINE + OCEAN | APPLICATION | KEEP | YES | — | **R26 statement #1** (decision-tree site) |
+
+### p5_elena_profile (§5.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_elena_profile::01 | L114 | intro | DEFINITION | KEEP | YES | — | |
+| p5_elena_profile::02 | L116–122 | OCEAN-профиль Елены table | EXAMPLE | KEEP | YES | — | Protected worked example; A=38/N=68 cautious + O=72 extreme — consistent with character_map L30 ✓ |
+| p5_elena_profile::03 | L124 | ПРАВИЛО: 1 экстремум + 2 осторожных зоны | DEFINITION | KEEP | YES | REINFORCEMENT | Apply of the golden rule — consistent ✓ |
+| p5_elena_profile::04 | L126–134 | Enneagram 6w5 table (стресс 6→3, рост 6→9) | EXAMPLE | KEEP | YES | — | Directions consistent with `data/enneagram.json` (E10 fixed iter 124) ✓ |
+| p5_elena_profile::05 | L136 | Валидация | DEFINITION | KEEP | YES | — | |
+
+### p5_ocean_warning (§5.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_ocean_warning::01 | L147 | ПРАВИЛО: OCEAN Overload | DEFINITION | KEEP | YES | — | Canonical |
+| p5_ocean_warning::02 | L149–155 | сценарий 1 (Низкая A + Высокая E + Высокий N) | EXAMPLE | KEEP | YES | — | |
+| p5_ocean_warning::03 | L157–161 | сценарий 2 (Высокая O + Низкая C + Высокий N) | EXAMPLE | KEEP | YES | — | |
+| p5_ocean_warning::04 | L163–167 | сценарий 3 (Высокая E + Низкая A + Низкий N) | EXAMPLE | KEEP | YES | REINFORCEMENT | R25 3rd statement («максимум 3 для 8K+, 2 для 4K» — consistent) |
+| p5_ocean_warning::05 | L169–171 | OCEAN×Enneagram: проверка через тип | DEFINITION | KEEP | YES | — | |
+
+### p5_enneagram_basics (§5.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_enneagram_basics::01 | L182 | OCEAN «сколько» vs Enneagram «почему» | DEFINITION | KEEP | YES | — | Canonical framing |
+| p5_enneagram_basics::02 | L184 | `[VS: E10]` marker | METADATA | KEEP | YES | — | Declared replacement (9-type enumeration) |
+| p5_enneagram_basics::03 | L186 | Enneagram definition | DEFINITION | KEEP | YES | — | |
+| p5_enneagram_basics::04 | L188–200 | 9 типов Enneagram table (7 columns) | DEFINITION | KEEP | YES | — | Canonical; data-layer source for `data/enneagram.json` + E10 (fence #8 — duplication by design) |
+| p5_enneagram_basics::05 | L202 | РЕКОМЕНДАЦИЯ: столбец LIE — справочный (ref §4.3 ✓) | APPLICATION | KEEP | YES | — | |
+
+### p5_cross_instrument_map (§5.5)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_cross_instrument_map::01 | L213 | intro (валидация описана §5.1) | NAVIGATION | KEEP | YES | — | |
+| p5_cross_instrument_map::02 | L215–217 | MBTI (справочная роль) | DEFINITION | KEEP | YES | REINFORCEMENT | **R26 statement #2** (cross-map site; ref appendix ✓) |
+| p5_cross_instrument_map::03 | L219–228 | Enneagram → SPINE table (4 rows) | DEFINITION | KEEP | YES | — | Canonical |
+| p5_cross_instrument_map::04 | L230–240 | OCEAN → SPINE validation table (5 rows) | DEFINITION | KEEP | YES | — | Canonical |
+| p5_cross_instrument_map::05 | L242–244 | Enneagram ↔ MBTI (widgets M2+) | METADATA | KEEP | YES | — | Widget-behavior note |
+
+### p5_enneagram_wings (§5.6)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_enneagram_wings::01 | L254 | Wing definition | DEFINITION | KEEP | YES | — | |
+| p5_enneagram_wings::02 | L256–265 | алгоритм выбора крыла (критерии table + closing para) | APPLICATION | KEEP | YES | — | |
+| p5_enneagram_wings::03 | L267–274 | примеры крыльев table | EXAMPLE | KEEP | YES | — | |
+
+### p5_cross_matrix (§5.7)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p5_cross_matrix::01 | L284 | матрица OCEAN×Enneagram (widget description) | METADATA | KEEP | YES | — | Interactive matrix description |
+| p5_cross_matrix::02 | L286 | Persona Synthesis definition | METADATA | KEEP | YES | — | Widget definition |
+
+**Part 5 verdict:** canonical psychology part, near-clean. Findings: R25 pole-limits stated 3× (all
+values consistent; one imprecise internal ref), R26 MBTI-role stated 4× (compliant layering), one
+R18 vague ref. Zero compression candidates.
+
+---
+
+## 10. Part 6 — CoT (`docs/canon/part_06.md`, 6 sections)
+
+### p6_cot_bridge (§6.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p6_cot_bridge::01 | L18 | CoT definition + Model ref (Appendix B) | DEFINITION | KEEP | YES | — | Canonical bridge definition |
+| p6_cot_bridge::02 | L20–25 | «Что добавляет CoT» list (4 bullets) | NAVIGATION | KEEP | YES | — | Part-6 feature map |
+
+### p6_cot_basics (§6.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p6_cot_basics::01 | L36 | CoT definition (техника) + Model ref | DEFINITION | KEEP | YES | REINFORCEMENT | Complementary framing to §6.1::01 (mechanism vs technique), not a copy |
+| p6_cot_basics::02 | L38 | foundation para (Part 2 + Part 4 + CoT principles) | DEFINITION | KEEP | YES | — | |
+| p6_cot_basics::03 | L40 | ПРАВИЛО: 2–3 CoT-якоря max (AP-10 ref ✓) | DEFINITION | KEEP | YES | — | Canonical |
+| p6_cot_basics::04 | L42–47 | почему ограничение (4 bullets) | DEFINITION | KEEP | YES | — | |
+| p6_cot_basics::05 | L49–53 | как выбрать 2–3 якоря (3 bullets) | APPLICATION | KEEP | YES | — | |
+| p6_cot_basics::06 | L55–59 | зачем нужен CoT (3 bullets; Tier gating) | DEFINITION | KEEP | YES | — | Tier gating consistent with Appendix B ✓ |
+
+### p6_cot_tiers (§6.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p6_cot_tiers::01 | L70 | intro: 4 Tiers; Tier 0 = Embodiment baseline | DEFINITION | KEEP | YES | — | Canonical (Tier 0 ≠ «модель не думает») |
+| p6_cot_tiers::02 | L72 | E11 note (staircase; table complements) | METADATA | KEEP | YES | — | Declared complement |
+| p6_cot_tiers::03 | L74–79 | tier table (Tier / модели / пример) | DEFINITION | KEEP | YES | — | Consistent with Appendix B CoT row ✓ |
+| p6_cot_tiers::04 | L81 | Ссылка: E11 в preamble | NAVIGATION | KEEP | YES | — | |
+| p6_cot_tiers::05 | L83 | Примечание (iter 29, KI#18-F partial fix) — rus/eng overlap rationale | METADATA | COMPRESS | YES | DUPLICATE | **R17:** canon-only note (verified — absent in master `part_06.html`); strip the iter/KI history label, keep the accessibility rationale («сохранены для accessibility — русские переводы примеров») as a plain current-state note |
+
+### p6_cot_tier2 (§6.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p6_cot_tier2::01 | L93 | intro | DEFINITION | KEEP | YES | — | |
+| p6_cot_tier2::02 | L95–105 | Синтаксис + ШАБЛОН (code) | DEFINITION | KEEP | YES | — | Canonical Tier 2 template |
+| p6_cot_tier2::03 | L107–122 | Пример: Елена (ILLUSTRATION + code) | EXAMPLE | KEEP | YES | — | Canon carries the EN label `**ILLUSTRATION** — Demonstrates:`; master renders the RU label + EN list in an HTML comment (verified) — presentation variance only |
+
+### p6_cot_tier3 (§6.5)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p6_cot_tier3::01 | L132 | intro | DEFINITION | KEEP | YES | — | |
+| p6_cot_tier3::02 | L134–152 | Синтаксис + ШАБЛОН (code) | DEFINITION | KEEP | YES | — | Canonical Tier 3 template |
+| p6_cot_tier3::03 | L154 | processus_analysium naming rationale | DEFINITION | KEEP | YES | — | Canonical (why this tag name) |
+| p6_cot_tier3::04 | L156–173 | Пример: Выщербленный (code) | EXAMPLE | KEEP | YES | — | **R23 source** — re-used in §6.6 (table) + §10.4 (card, verbatim) |
+
+### p6_cot_anchors (§6.6)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p6_cot_anchors::01 | L184 | CoT-якорь definition | DEFINITION | KEEP | YES | — | Canonical |
+| p6_cot_anchors::02 | L186–190 | Структура (formula code) | DEFINITION | KEEP | YES | — | |
+| p6_cot_anchors::03 | L192–199 | Примеры table (2 Выщербленный rows) | EXAMPLE | KEEP | YES | REINFORCEMENT | R23 compressed-table form of §6.5 example |
+| p6_cot_anchors::04 | L201 | ПРАВИЛО: CoT Overload AP-10 (ref §8.11 ✓) | DEFINITION | KEEP | YES | REINFORCEMENT | Catalog-site of §6.2::03 (changed function, correct ref) |
+| p6_cot_anchors::05 | L203 | Переход → Part 7A | NAVIGATION | KEEP | YES | — | 1 of the 2 declared bridges ✓ |
+
+**Part 6 verdict:** clean. One canon-only repo-meta note (R17, §6.3::05); the CoT example family
+(R23) = 3 compliant functions (teach / summary table / production card).
+
+---
+
+## 11. Part 7B — Greeting & Lorebook (`docs/canon/part_07b.md`, 5 sections)
+
+### p7b_structured_inject (§7B.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p7b_structured_inject::01 | L19 | Structured Inject definition | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_structured_inject::02 | L21–25 | правила Structured Inject (3 bullets) | DEFINITION | KEEP | YES | — | |
+| p7b_structured_inject::03 | L27–37 | пример Structured Inject (code) | EXAMPLE | KEEP | YES | — | |
+
+### p7b_greeting (§7B.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p7b_greeting::01 | L48 | Greeting definition | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_greeting::02 | L50–57 | Алгоритм Greeting (4 шага table) | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_greeting::03 | L59 | Сенсорный якорь definition | DEFINITION | KEEP | YES | — | |
+| p7b_greeting::04 | L61–72 | Разобранный пример: Greeting Елены (учебный) + Примечание учебный-vs-canonical | EXAMPLE | KEEP | YES | REINFORCEMENT | **R28:** dual presentation with §10.1 — both sides carry explicit disambiguation Примечания (IMP-48-compliant pair) |
+| p7b_greeting::05 | L74–79 | правила Greeting (50–100 токенов) | DEFINITION | KEEP | YES | — | Consistent with §0.2 step-4 + glossary entry ✓ |
+
+### p7b_lorebook_basics (§7B.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p7b_lorebook_basics::01 | L90 | Lorebook definition | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_lorebook_basics::02 | L92–99 | структура записи table | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_lorebook_basics::03 | L101–107 | рекомендованные параметры table | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_lorebook_basics::04 | L109 | РЕКОМЕНДАЦИЯ: сенсорные активации + контекстные факты | APPLICATION | KEEP | YES | — | |
+| p7b_lorebook_basics::05 | L111–115 | правила Lorebook (3 bullets) | DEFINITION | KEEP | YES | — | |
+| p7b_lorebook_basics::06 | L117–128 | Примеры записей для Елены: пример 1 (GHOST предательство) | EXAMPLE | KEEP | YES | — | |
+| p7b_lorebook_basics::07 | L130–141 | пример 2: secondary GHOST + «⚠️ ВНЕ КАНОНА» warning | EXAMPLE | KEEP | YES | — | Unique pedagogical value (out-of-canon discipline; back-refs §4.2 + bible ✓) |
+| p7b_lorebook_basics::08 | L143–152 | пример 3: Контакт Елены | EXAMPLE | KEEP | YES | — | |
+| p7b_lorebook_basics::09 | L154–163 | пример 4: Город Елены | EXAMPLE | KEEP | YES | — | |
+| p7b_lorebook_basics::10 | L165–175 | Совместимость EVENT: по фронтендам table | APPLICATION | KEEP | YES | — | Unique (frontend support matrix) |
+| p7b_lorebook_basics::11 | L177 | Ссылка → §7B.4 | NAVIGATION | KEEP | YES | — | |
+
+### p7b_lorebook_mechanics (§7B.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p7b_lorebook_mechanics::01 | L188 | intro: запись = поведенческий триггер; 2–3 механики на сессию | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_lorebook_mechanics::02 | L190 | РЕКОМЕНДАЦИЯ (область применения, ref §7B.3 ✓) | NAVIGATION | KEEP | YES | — | |
+| p7b_lorebook_mechanics::03 | L192 | ПРАВИЛО: никогда не вставляйте действия/мысли `{{user}}` в content | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (anti-godmoding principle, lorebook-site) |
+| p7b_lorebook_mechanics::04 | L194–200 | таблица механик (3 механики) | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_lorebook_mechanics::05 | L202–211 | практика — быстрая таблица (6 задач) | APPLICATION | KEEP | YES | — | |
+| p7b_lorebook_mechanics::06 | L213–232 | пример: структурированная инъекция в content (+ XML альтернатива) | EXAMPLE | KEEP | YES | — | |
+| p7b_lorebook_mechanics::07 | L234 | Ссылка → §7B.5 | NAVIGATION | KEEP | YES | — | |
+| p7b_lorebook_mechanics::08 | L236 | РЕКОМЕНДАЦИЯ: механики для GHOST-триггеров | APPLICATION | KEEP | YES | — | |
+
+### p7b_lorebook_advanced (§7B.5)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p7b_lorebook_advanced::01 | L247 | intro («Продвинуто. Опционально.») | NAVIGATION | KEEP | YES | — | |
+| p7b_lorebook_advanced::02 | L249–255 | таблица продвинутых механик (3) | DEFINITION | KEEP | YES | — | Canonical |
+| p7b_lorebook_advanced::03 | L257 | ПРАВИЛО: эмуляция усталости — GHOST-якоря пересказаны в content | DEFINITION | KEEP | YES | — | Canonical warning; ref «§4.2 — GHOST» should target §4.8/§4.11 for anchor coverage (R18-minor) |
+| p7b_lorebook_advanced::04 | L259 | ПРАВИЛО: ложная память — только для экспертов | DEFINITION | KEEP | YES | — | |
+| p7b_lorebook_advanced::05 | L261–267 | контекстные бюджеты table (4K/8K/16K+) | DEFINITION | KEEP | YES | — | |
+| p7b_lorebook_advanced::06 | L269–276 | чеклист интеграции Lorebook (6 ☐) | VALIDATION | KEEP | YES | — | «призрак Anchors» word-order slip → R29 cosmetic |
+
+**Part 7B verdict:** clean; zero compression candidates. R28 (Elena Greeting dual presentation)
+documented as a compliant IMP-48 pattern — the model pair for future dual-presentation decisions.
+
+---
+
+## 12. Part 8 — Anti-patterns (`docs/canon/part_08.md`, 16 sections)
+
+> Design note: E12 (viz) = quick-scan catalog («Canonical location для сводного обзора», §8.1 marker);
+> per-AP subsections = detail layer with before/after demos. Keep-by-design rationale documented
+> iter 31 (KI#18-G, canon front-matter). The matrix treats the per-AP sections as catalog-application
+> rows, not E12 duplicates.
+
+### p8_antipatterns_overview (§8.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_antipatterns_overview::01 | L19 | Анти-паттерн definition | DEFINITION | KEEP | YES | — | Canonical |
+| p8_antipatterns_overview::02 | L21 | `[VS: E12]` marker (canonical location) | METADATA | KEEP | YES | — | Declared replacement for the 15-AP enumeration |
+| p8_antipatterns_overview::03 | L23 | ПРАВИЛО: проверяйте карточку по списку | DEFINITION | KEEP | YES | — | |
+| p8_antipatterns_overview::04 | L25 | catalog pointer (E12 above; детали в §8.2–§8.16) | NAVIGATION | KEEP | YES | — | |
+| p8_antipatterns_overview::05 | L27 | Ссылка: OCEAN Overload ранее AP-15 → Part 5 §5.3 | NAVIGATION | KEEP | YES | — | R17-lite: «в v9 restructure» version-history phrase (reader-visible, master L222); navigational substance stays — optional history strip |
+
+### p8_ap1_token_bloat (§8.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap1_token_bloat::01 | L37–46 | AP-1 card (симптом/причина/решение/пример) | APPLICATION | KEEP | YES | REINFORCEMENT | **R11-family:** «Description > 800 токенов» symptom vs §7A.12 max 700 (same numeric tension as §9.11 «≤800»); ref `§3.X` vague + unbalanced paren (R18) |
+| p8_ap1_token_bloat::02 | L48–52 | До/После: раздувание токенов — Елена | EXAMPLE | KEEP | YES | — | §21-protected demo |
+| p8_ap1_token_bloat::03 | L54 | Ссылка: полная карточка Елены (`p10_elena`) | NAVIGATION | KEEP | YES | — | |
+
+### p8_ap2_missing_price (§8.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap2_missing_price::01 | L64–66 | AP-2 card | APPLICATION | KEEP | YES | REINFORCEMENT | Anchor-format apply (ref `§2.X` vague R18 + unbalanced paren) |
+
+### p8_ap3_voice_in_description (§8.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap3_voice_in_description::01 | L76–78 | AP-3 card | APPLICATION | KEEP | YES | REINFORCEMENT | R06-family (Voice Isolation violation, catalog-site; ref `§3.X` vague R18 + unbalanced paren) |
+| p8_ap3_voice_in_description::02 | L80–84 | До/После: голос в Description — Елена | EXAMPLE | KEEP | YES | — | |
+
+### p8_ap4_ghost_in_sp (§8.5)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap4_ghost_in_sp::01 | L94–98 | AP-4 card | APPLICATION | KEEP | YES | REINFORCEMENT | 3rd key principle, catalog-site (ref §7A.1 ✓ + unbalanced paren) |
+| p8_ap4_ghost_in_sp::02 | L100 | ПРАВИЛО: модель не следует инструкциям о психологии | DEFINITION | KEEP | YES | — | Canonical statement |
+
+### p8_ap5_reppen_high (§8.6)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap5_reppen_high::01 | L110–112 | AP-5 card | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | R12-family: RepPen ≤ 1.10 boundary — consistent with §7A.6 32B+/API 1.05–1.10 (ref ✓ + unbalanced paren); stays valid under either KI#72 reconciliation (both candidate ranges ≤ 1.10) |
+
+### p8_ap6_no_anti_godmoding (§8.7)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap6_no_anti_godmoding::01 | L122–130 | AP-6 card + code («Never speak or act for {{user}}.») | APPLICATION | KEEP | YES | REINFORCEMENT | R07 (exact line, fix-site) |
+| p8_ap6_no_anti_godmoding::02 | L132–136 | До/После: годмодинг vs anti-godmoding | EXAMPLE | KEEP | YES | — | |
+| p8_ap6_no_anti_godmoding::03 | L138 | позитивная формулировка работает лучше запрета | APPLICATION | KEEP | YES | REINFORCEMENT | R07-subfamily: rationale — canonical explanation = §7A.1::09; 3rd statement (glossary A-entry carries the 4th) |
+
+### p8_ap7_presence_penalty (§8.8)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap7_presence_penalty::01 | L148–150 | AP-7 card | APPLICATION | KEEP | YES | — | PP = 0.0 (§7A.6 canonical ✓; unbalanced paren R18-cosmetic) |
+
+### p8_ap8_ghost_no_anchors (§8.9)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap8_ghost_no_anchors::01 | L160–166 | AP-8 card + Elena пример | APPLICATION | KEEP | YES | REINFORCEMENT | §4.8/§4.11 GHOST-anchor requirement, catalog-site |
+| p8_ap8_ghost_no_anchors::02 | L168 | Ссылка: §4.8 (FLAW-linked обязательны) | NAVIGATION | KEEP | YES | — | Correct ref ✓ |
+
+### p8_ap9_spine_broken (§8.10)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap9_spine_broken::01 | L178–182 | AP-9 card (симптом/причина/решение; refs §4.7 + §4.9 ✓) | APPLICATION | KEEP | YES | REINFORCEMENT | Broken-SPINE diagnostics, catalog-site |
+| p8_ap9_spine_broken::02 | L184–191 | ❌ Сломанный SPINE (code + explanation) | EXAMPLE | KEEP | YES | — | |
+| p8_ap9_spine_broken::03 | L193 | Критерий сломанной SPINE (диагностика) | DEFINITION | KEEP | YES | — | Unique diagnostic nuance — reconciles the AP-9 symptom with §4.1 implicit-GHOST rule; **must survive any R21 compression** |
+| p8_ap9_spine_broken::04 | L195–209 | ✅ Цельный SPINE (code + closing) | EXAMPLE | KEEP | YES | — | |
+| p8_ap9_spine_broken::05 | L211 | Ссылка: пример Елены — §4.9 | NAVIGATION | KEEP | YES | — | Correct ref ✓ («canonical location = Part 4») |
+
+### p8_ap10_cot_overload (§8.11)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap10_cot_overload::01 | L221–227 | AP-10 card + ПРАВИЛО | APPLICATION | KEEP | YES | REINFORCEMENT | §6.2::03 catalog-site |
+| p8_ap10_cot_overload::02 | L229–231 | ❌ Перегрузка CoT | EXAMPLE | KEEP | YES | — | |
+| p8_ap10_cot_overload::03 | L233–235 | ✅ Максимум 2–3 CoT-якоря | EXAMPLE | KEEP | YES | — | |
+| p8_ap10_cot_overload::04 | L237 | Ссылка: `[ref: part_06.md §6.X — CoT-якоря]` | NAVIGATION | KEEP | YES | — | R18: `§6.X` vague (target §6.6) |
+
+### p8_ap11_voice_bleed (§8.12)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap11_voice_bleed::01 | L247–251 | AP-11 card | APPLICATION | KEEP | YES | REINFORCEMENT | §3.8 catalog-site (ref `§3.X` vague R18); teach(§3.8)/catalog(AP-11)/viz(E12) triple — all needed |
+
+### p8_ap12_xml_malformed (§8.13)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap12_xml_malformed::01 | L261–265 | AP-12 card | APPLICATION | KEEP | YES | — | Refs §7A.9 + §7A.4 ✓ |
+| p8_ap12_xml_malformed::02 | L267–273 | ❌ Неправильно (code) | EXAMPLE | KEEP | YES | — | |
+| p8_ap12_xml_malformed::03 | L275–281 | ✅ Правильно (code) | EXAMPLE | KEEP | YES | — | |
+| p8_ap12_xml_malformed::04 | L283 | Ссылка: §7A.9 + §7A.4 | NAVIGATION | KEEP | YES | — | Correct refs ✓ |
+
+### p8_ap13_lorebook_conflict (§8.14)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap13_lorebook_conflict::01 | L293–297 | AP-13 card | APPLICATION | KEEP | YES | — | Ref `§7B.X` vague R18 |
+
+### p8_ap14_context_violation (§8.15)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap14_context_violation::01 | L307–311 | AP-14 card | APPLICATION | KEEP | YES | — | Refs §7A.11 + §7A.12 ✓ |
+
+### p8_ap15_nested_anchors (§8.16)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p8_ap15_nested_anchors::01 | L321–325 | AP-15 card (принцип атомарности) | APPLICATION | KEEP | YES | — | Canonical atomicity principle (ref `§2.X` vague R18) |
+| p8_ap15_nested_anchors::02 | L327–331 | ❌ Вложенный якорь (code) | EXAMPLE | KEEP | YES | — | |
+| p8_ap15_nested_anchors::03 | L333–338 | ✅ Атомарные якоря (code) | EXAMPLE | KEEP | YES | — | |
+| p8_ap15_nested_anchors::04 | L340 | Синтез (part-level) | DEFINITION | KEEP | YES | — | |
+
+**Part 8 verdict:** deliberate two-layer design (E12 catalog + per-AP teach), zero compression
+candidates. The defect load is navigation hygiene: **7 vague refs** (`§3.X`×3, `§2.X`×3, `§6.X`,
+`§7B.X` — see rows) + **6 unbalanced parentheses** (L44, L66, L78, L98, L112, L150 — every
+`(см. [ref: …]` opener unclosed) + AP-1 «>800» R11-family + one version-history phrase (R17-lite).
+All canon-side: master resolves every ref to a proper anchor and carries no `§X.X` strings (verified).
+
+---
+
+## 13. Part 10 — Examples (`docs/canon/part_10.md`, 4 sections)
+
+> All four sections are protected example cards (research §21 / Editorial Policy Rule 5): copy-paste
+> production artifacts. In-card re-use of teaching material (R22/R23) is the card's function.
+
+### p10_elena (§10.1)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p10_elena::01 | L19 | budget intro (~540 / ~1000) | DEFINITION | KEEP | YES | — | R27 inputs |
+| p10_elena::02 | L21 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | EN list = executable-adjacent metadata (qa:english baseline class) |
+| p10_elena::03 | L23 | Примечание: canonical vs учебный Greeting | NAVIGATION | KEEP | YES | REINFORCEMENT | R28 back-ref to §7B.2 ✓ (IMP-48 pair) |
+| p10_elena::04 | L25–101 | ШАБЛОН: полная карточка Елены (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | `{{CORE_DIRECTIVES — …}}` shorthand ✓ (R02-compliant); OCEAN annotations consistent with §5.1/§5.2 ✓ |
+| p10_elena::05 | L103 | Бюджет токенов + `[ref: §7A.X — Token Budget]` | NAVIGATION | KEEP | YES | — | R18: `§7A.X` vague (target §7A.12; master resolves ✓) |
+
+### p10_walter (§10.2)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p10_walter::01 | L114 | intro (реалистичный современный персонаж) | DEFINITION | KEEP | YES | — | |
+| p10_walter::02 | L116 | Демонстрирует (6 principles) | METADATA | KEEP | YES | — | |
+| p10_walter::03 | L118–214 | ШАБЛОН: полная карточка Уолтера (code) | EXAMPLE | KEEP | YES | — | OCEAN cautious-zone «SPINE explicit» annotations — unique pedagogy (no other card carries it) |
+| p10_walter::04 | L216 | Бюджет токенов (~1100) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | R18 vague; R27: ~1100 outside the character-map «~440–890» base range |
+
+### p10_omnis (§10.3)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p10_omnis::01 | L227 | intro (~1800, все инструменты) | DEFINITION | KEEP | YES | — | |
+| p10_omnis::02 | L229 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | |
+| p10_omnis::03 | L231–366 | ШАБЛОН: полная карточка Омнис-Зета (code) | EXAMPLE | KEEP | YES | — | GHOST Layers + CoT×2 + no `<enneagram>` tag = character_map «—» ✓ |
+| p10_omnis::04 | L368–376 | Lorebook (5 записей table) | EXAMPLE | KEEP | YES | — | |
+| p10_omnis::05 | L378 | Бюджет токенов (~2150) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | R18 vague; R27: ~2150 outside «~1500–1800» expert range |
+
+### p10_vysherblenny (§10.4)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| p10_vysherblenny::01 | L389 | intro (~1500+, expert) | DEFINITION | KEEP | YES | — | |
+| p10_vysherblenny::02 | L391 | Демонстрирует (8 principles) | METADATA | KEEP | YES | — | |
+| p10_vysherblenny::03 | L393–534 | ШАБЛОН: полная карточка Выщербленного (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | R22 (sensory anchors ← §2.6) + R23 (CoT anchors ← §6.5 verbatim — production-card function); **obs-6:** «Выщебленного» misspelling in the card heading L395 (pre-existing, recorded iter 125) |
+| p10_vysherblenny::04 | L536 | бюджет токенов (~1500+) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | R18 vague |
+| p10_vysherblenny::05 | L538–546 | Lorebook записи (5 шт table) | EXAMPLE | KEEP | YES | — | |
+| p10_vysherblenny::06 | L548–558 | Проверка консистентности SPINE table (7 ✅) | VALIDATION | KEEP | YES | REINFORCEMENT | §4.9 checklist in applied form — changed function ✓ |
+
+**Part 10 verdict:** protected example layer; zero compression candidates. Card-level repeats
+(R22/R23) = teach-vs-production dual function. All four budget refs are vague `§7A.X` (R18 — master
+resolves each to `#p7a_token_budget`, canon-side hygiene).
+
+---
+
+## 14. Appendices (`docs/canon/appendix_*.md`, 4 sections)
+
+> Glossary / MBTI / Model Table render in master (`appendix_*.html`) but are runtime-blocked by
+> KI#70 (never loaded by `lazy-loader.js`). Appendix D (character_map) is canon-only, non-rendering.
+
+### appendix_character_map (Appendix D — **non-rendering**)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| appendix_character_map::01 | L17 | intro: 5 канонических персонажей | DEFINITION | KEEP | YES | — | |
+| appendix_character_map::02 | L19–25 | карта персонажей table (9 columns) | DEFINITION | KEEP | YES | UNCLEAR | **KI#77-b/c:** stale usage refs — Omnis «Part 5 §5.2 (OCEAN extreme)»: no «Омнис» in `part_05.md` (byte-verified); Omnis «Part 8 §8.X (AP-15 OCEAN Overload)»: stale — concept moved to Part 5 §5.3 per §8.1, AP-15 is now Nested Anchors; Выщербленный «Part 5 (эннеаграмма)»: no occurrence in part_05 (5w4 lives in §10.4); + «Part 6 §6.X» vague R18 |
+| appendix_character_map::03 | L27 | Ссылка (карточки, библии, примеры) | NAVIGATION | KEEP | YES | — | |
+| appendix_character_map::04 | L29–33 | Метки OCEAN note | METADATA | COMPRESS | YES | DUPLICATE | **R17:** «(фикс iter 40 — KI#29)» history in a non-rendering note; substance (extreme/cautious labeling) = R25-family restatement — strip the history label, keep the labeling statement |
+| appendix_character_map::05 | L35–39 | РЕКОМЕНДАЦИЯ: выбирайте персонажа по сложности | APPLICATION | KEEP | YES | UNCLEAR | **R27:** budget ranges «~440–890» (Elena 540 ✓ / Walter ~1100 ✗) and «~1500–1800» (Omnis ~2150 ✗ / Выщербленный ~1500+ boundary) vs the Part 10 stated budgets — framing drift, feeds ed-5 (→ KI#77-e) |
+| appendix_character_map::06 | L41 | Правило: персонаж задаётся ровно один раз | DEFINITION | KEEP | YES | — | Canonical (governs the R22/R23/R28 «keep both sides» classifications) |
+
+### appendix_glossary (Appendix C)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| appendix_glossary::01 | L19 | intro (definition + ref pattern) | NAVIGATION | KEEP | YES | — | Declares the glossary's own entry pattern |
+| appendix_glossary::02 | L21–25 | A — Anti-godmoding | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (2-line form + positive-formulation rationale echo of §7A.1::09); ref `§7A.X` vague R18 |
+| appendix_glossary::03 | L27–31 | B — Behavioral Anchor | DEFINITION | COMPRESS | YES | DUPLICATE | **R01 reference-layer occurrence:** carries the placement ПРАВИЛО (2-sentence statement of the §1.4 rule); fold to 1 sentence + ref §1.4 per the glossary's own pattern; the `§2.1` ref itself is correct |
+| appendix_glossary::04 | L33–37 | C — CoT | DEFINITION | KEEP | YES | — | R29: «Tier 0 (basic Anchor)» vs §6.3 «Tier 0 — без отдельного CoT-блока»; ref §6.2 ✓ |
+| appendix_glossary::05 | L39–51 | C — CORE DIRECTIVES (full annotated 7-item list) | DEFINITION | COMPRESS | YES | DUPLICATE | **R02 verdict (ed-2 input, required by the ed-matrix PLAN row):** full annotated copy exceeds the glossary's own 1-sentence+ref pattern — the annotations restate §7A.2::06–::12; compress to definition + 7-name index + fixed ref §7A.2; **KI#70 dependency:** master renders the full list but the appendix never runtime-loads — the compression should ride the KI#70 wire/drop decision; ref `§7A.X` vague R18 |
+| appendix_glossary::06 | L53–57 | E — Embodiment Protocol | DEFINITION | KEEP | YES | — | Protocol-vs-Directive distinction preserved ✓; ref `§2.X` vague |
+| appendix_glossary::07 | L59–63 | E — Enneagram | DEFINITION | KEEP | YES | — | Ref §5.4 ✓ |
+| appendix_glossary::08 | L65–69 | F — FLAW | DEFINITION | KEEP | YES | REINFORCEMENT | R24 reference-side; ref `§4.X` vague |
+| appendix_glossary::09 | L71–75 | G — GHOST | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
+| appendix_glossary::10 | L77–81 | G — GHOST Layers | DEFINITION | KEEP | YES | — | R29: «G2=Отрочество» vs §4.11 «Юность»; ref `§4.X` vague |
+| appendix_glossary::11 | L83–87 | G — Greeting Message | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague |
+| appendix_glossary::12 | L89–93 | I — Identity Block | DEFINITION | KEEP | YES | — | Name-language rule echo of §7A.1::04 (reference layer); ref `§7A.X` vague |
+| appendix_glossary::13 | L95–99 | L — LIE | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
+| appendix_glossary::14 | L101–105 | L — Lorebook | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague |
+| appendix_glossary::15 | L107–111 | M — MBTI | DEFINITION | KEEP | YES | REINFORCEMENT | **R26 statement #4**; ref appendix ✓ |
+| appendix_glossary::16 | L113–117 | N — NEED | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
+| appendix_glossary::17 | L119–123 | O — OCEAN | DEFINITION | KEEP | YES | REINFORCEMENT | R25 reference-side restatement (golden rule); refs §5.1 + §1.4 ✓ |
+| appendix_glossary::18 | L125–129 | S — SPINE | DEFINITION | KEEP | YES | REINFORCEMENT | R21 clause (implicit GHOST/LIE); ref §4.1 ✓ |
+| appendix_glossary::19 | L131–135 | S — System Prompt / SP | DEFINITION | KEEP | YES | — | Container-vs-content distinction ✓; ref `§7A.X` vague |
+| appendix_glossary::20 | L137–141 | T — T→A→P | DEFINITION | KEEP | YES | — | Ref §2.1 ✓ |
+| appendix_glossary::21 | L143–147 | T — Token Budget | DEFINITION | KEEP | YES | — | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block); ref `§7A.X` vague |
+| appendix_glossary::22 | L149–153 | V — Voice | DEFINITION | KEEP | YES | REINFORCEMENT | R03 clause («Модель — копировщик паттернов») + R06 two-level rule (reference echo); ref `§3.X` vague |
+| appendix_glossary::23 | L155–159 | V — Voice Bleed (cross-character) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague |
+| appendix_glossary::24 | L161–165 | V — Voice Bleed (degradation) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague |
+| appendix_glossary::25 | L167–171 | V — Voice Isolation | DEFINITION | KEEP | YES | — | Ref `§3.X` vague |
+| appendix_glossary::26 | L173–177 | W — WANT | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
+
+### appendix_mbti (Appendix A)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| appendix_mbti::01 | L19 | MBTI definition | DEFINITION | KEEP | YES | — | |
+| appendix_mbti::02 | L21–28 | 4 оси MBTI table | DEFINITION | KEEP | YES | — | |
+| appendix_mbti::03 | L30–37 | Темпераменты (Keirsey) table | DEFINITION | KEEP | YES | — | |
+| appendix_mbti::04 | L39 | NOTE: S·P ≠ SP disambiguation | DEFINITION | KEEP | YES | — | Canonical disambiguation (glossary-consistent ✓); EN label «NOTE» — DEC-16 cosmetic; ref `§7A.X` vague R18 |
+| appendix_mbti::05 | L41–43 | MBTI Composer (interactive) container note | METADATA | KEEP | YES | — | **KI#70 dependency:** documents a container that never runtime-renders (mbti-composer path never exercised) |
+| appendix_mbti::06 | L45–47 | РЕКОМЕНДАЦИЯ: MBTI — справочный инструмент | APPLICATION | KEEP | YES | REINFORCEMENT | **R26 statement #3** (appendix site) |
+
+### appendix_model_table (Appendix B)
+
+| id | lines | block | tag | decision | load | repeat | notes |
+|---|---|---|---|---|---|---|---|
+| appendix_model_table::01 | L19 | intro (объединяет MODEL_NOTE-заметки) | NAVIGATION | KEEP | YES | — | Declares its replacement function (referenced by `[Model: see Appendix B]` markers ×2 in Part 6) |
+| appendix_model_table::02 | L21–31 | таблица возможностей моделей (9 rows) | DEFINITION | KEEP | YES | — | Canonical; values consistent with §6.3 tiers / §7A.2 SP-language / §7A.12 Script Tax ✓ |
+| appendix_model_table::03 | L33–37 | ключевые следствия для сборки (3 bullets) | APPLICATION | KEEP | YES | REINFORCEMENT | Apply-layer summary of the table (SP-language ref §7A.2 ✓; Script Tax 1.5–2× consistent ✓) |
+
+**Appendices verdict:** reference layer healthy. Two entries over-carry canonical material (glossary
+CORE DIRECTIVES — the R02/ed-2 input; Behavioral Anchor placement ПРАВИЛО — R01 reference-layer
+side). 18 vague glossary refs (mechanical R18: 5× `§7A.X`, 6× `§4.X`, 4× `§3.X`, 2× `§7B.X`, 1× `§2.X`).
+KI#77-b/c/d stale refs + R27 budget-range drift in character_map; KI#70 dependencies noted where
+appendix content describes never-loaded containers.
+
+---
+
+## 15. Repeat registry — second pass (research §24 classification)
+
+> Cross-cutting repeated concepts found in Phases A + B. `Canonical` = the KEEP-side owner; the other
+> occurrences carry the classification. Only `DUPLICATE` rows are automatic compression candidates.
+> Phase B extensions are marked **[B]**; unmarked occurrence lists are Phase A scope.
+
+| # | Concept | Canonical owner | Other occurrences | Classification | Feeds |
+|---|---|---|---|---|---|
+| R01 | Anchors-placement rule (separate block in Examples-zone) | `p1_core_rules::05` (§1.4) | §7A.1 L33 full copy — **compressed iter 125 (dupes-1)** · §7A.9 L394 short+ref · §7A.11 L567 short+ref · §7A.13 L732 footnote · §1.2 L57 clarification · **[B]** glossary «B — Behavioral Anchor» entry (reference-layer ПРАВИЛО statement — compress to 1 sentence + ref §1.4) | DUPLICATE (glossary entry; §7A.1 fixed) | ed-2-style compress, canon-first |
+| R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · **[B]** glossary «C — CORE DIRECTIVES» full annotated copy — **verdict: DUPLICATE → COMPRESS** (definition + 7-name index + fixed ref §7A.2; the annotations restate §7A.2::06–::12; KI#70 dependency: appendix never runtime-loads — compression should ride the KI#70 wire/drop decision) · Part 10 uses shorthand ✓ | DUPLICATE (§7A.13 primary; glossary classified) | ed-2 |
+| R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 **full re-teach** (pending candidate #5) · §1.7 L128 application · §7A.4 L189/L199 applications+ref · **[B]** glossary «V — Voice» entry (1-sentence reference clause — acceptable) | DUPLICATE (§3.1); rest compliant | ed-1/ed-4 |
+| R04 | Voice drift numbers (~40% vs ~10% at 20–30 msgs) | §3.1 table (granular) | §1.1 table row | DUPLICATE (same data, same persuasive purpose) | ed-1/ed-4 |
+| R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 near-verbatim (pending candidate #4) | DUPLICATE | ed-7 |
+| R06 | Linguistic vs physical voice (Тест family) | `p3_voice_isolation::03–04` (§3.1) | §3.2 L67–80 example (unique demo) · §3.2 L82 Пояснение (re-explainer, pending candidate #6) · **[B]** AP-3 catalog-site (compliant apply) · **[B]** glossary Voice/Voice Isolation entries (reference echo) | DUPLICATE (Пояснение only) | ed-4 |
+| R07 | Anti-godmoding exact line «Never speak or act for {{user}}.» | §7A.1 template | §1.7 fix · §9.3 check · §9.11 examples · §7A.13 step 2 · **[B]** §0.2 step-1 (quick-start apply) · **[B]** AP-6 code + До/После (fix-site) · **[B]** §7B.4 ПРАВИЛО (content no-user-actions principle) · **[B]** glossary A-entry (2-line form + positive-formulation rationale — rationale stated 3×: §7A.1::09 canonical / AP-6 / glossary) | REINFORCEMENT (each = changed function: teach/fix/check/example/reference) | — |
+| R08 | OOC Protection template | §7A.8 | §7A.13 step 3 partial re-print | REINFORCEMENT (assembled-SP view) — ed-2 audit item | ed-2 |
+| R09 | Format Lock template | §7A.4 | §7A.1 template tail · §7A.13 step 3 · **[B]** all four Part 10 cards (Format Lock block inside each SP — production-artifact function) | REINFORCEMENT (template/apply/assemble/card) | ed-2 |
+| R10 | Tone Frame example string | §7A.3 table | §7A.13 step 3 · **[B]** Part 10 cards carry character-specific Tone Frame strings (unique per card, not re-prints) | REINFORCEMENT (apply-layer) | ed-2 |
+| R11 | Token budget numbers (per-block) | `p7a_token_budget::03` (§7A.12) | §7A.11 4K table (RELATED BUT DISTINCT ✓) · §1.8 Q2 (UNCLEAR framing: ≤200/≤400 vs 150/300/700) · §7A.13 step 6 ✓ · §9.11 «Description ≤ 800» vs max 700 (CONTRADICTORY) · **[B]** AP-1 symptom «Description > 800» (same ≥800-vs-700 tension) · **[B]** glossary Token Budget entry («4K ~430–580 на карточку» — card-total framing) | MIXED — see per-row | ed-5 |
+| R12 | Sampling parameter values | `p7a_sampling_params::03` (§7A.6) | §7A.7 rows — **CONTRADICTORY** (KI#72) · §9.3 Parameters row = compliance check ✓ · §9.10 refs ✓ · **[B]** AP-5 RepPen ≤ 1.10 boundary (consistent with §7A.6 under either KI#72 outcome) · **[B]** AP-7 PP = 0.0 (consistent ✓) | CONTRADICTORY (§7A.7) | KI#72 fix |
+| R13 | SP language rule | §7A.2 | §7A.7 footnote ✓ · §9.10 summary ✓ · **[B]** Appendix B следствия (ref ✓) · **[B]** glossary CORE DIRECTIVES entry (full 3-tier restatement — folds into the R02 compression) | Compliant refs + glossary full copy (folds into R02) | — |
+| R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |
+| R15 | §9.4 problems #4/#5 vs §9.5 rows | §9.5 | §9.4 (pending candidate #11) | DUPLICATE | ed-3 execution |
+| R16 | §9.11 quick-check `<details>` vs §9.3 | §9.3 + E14 | §9.11 (self-admitted) — **deleted iter 125 (dupes-1)** · **[B]** §0.2 step-6 «5 быстрых проверок» (1-line quick-start recall — REINFORCEMENT, keep) | DUPLICATE (§9.11 fixed; TL;DR = compliant recall) | dupes-1 ✅ iter 125 |
+| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. **[B] remaining non-rendering + canon-only locations:** `part_00.md` L13 preamble («Создан: iter 38 — KI#21») · `part_00.md` §0.1 L45 («отменены iter 123, DEC-16») + L58 («DEC-16, _README §3.9») · `part_06.md` §6.3 L83 («iter 29, KI#18-F partial fix» — canon-only, verified absent in master) · `appendix_character_map.md` L29 («фикс iter 40 — KI#29») · `part_08.md` §8.1 L27 («в v9 restructure» — reader-visible but navigational; optional strip) | — | Phase A locations (5, all executed iter 121) | DUPLICATE class (ed-6) | ed-6 follow-up (canon-side) |
+| R18 | Vague `§X.X` placeholder refs — **canon-only debt: master resolves every occurrence to a proper anchor (verified iter 126: zero `§X.X` strings in master `part_05/08/09/10.html`; part_04 L281 resolves correctly)** | — | Phase A: §3.5 (`§7B.X`) · §9.3 (3) · §9.5 (4) · §7A.5 unbalanced paren · **[B] part_08: 7 vague (`§3.X`×3, `§2.X`×3, `§6.X`, `§7B.X` — one overlaps AP-1 row) + 6 unbalanced parens (L44/66/78/98/112/150)** · **[B] glossary: 18 vague (5× `§7A.X`, 6× `§4.X`, 4× `§3.X`, 2× `§7B.X`, 1× `§2.X`)** · **[B] part_10: 4× `§7A.X` (Token Budget)** · **[B] part_05 L89 `§7A.X` (Assembly)** · **[B] appendix_mbti L39 `§7A.X`** · **[B] character_map «Part 6 §6.X»** · **[B] part_04 L281 wrong-but-specific ref → KI#77-a** · **[B] part_05 L21 «см. §5.3» imprecise internal ref** | Navigation debt (mechanical, canon-first) | ed-8 |
+| R19 | Voice Leak causes | §3.6 | §9.5 voice rows | REINFORCEMENT (lookup form) | — |
+| R20 | 12B symptoms | §9.10 | §9.5 general rows | SPECIAL CASE | — |
+| R21 | Simple-characters implicit GHOST/LIE rule («для простых персонажей призрак и ложь могут быть неявными; полная цепочка должна быть логически связана») | `p4_spine_overview::06` (§4.1) | §4.7 L223 **near-verbatim re-statement** (candidate #16 — fold to pointer) · §4.11 L354–359 expert-side mirror (compliant — different decision) · §8.10 L193 «критерий сломанной SPINE» (reconciliation nuance — must survive) · **[B]** glossary SPINE entry (clause, acceptable) | DUPLICATE (§4.7 only) | candidate #16 / ed-7 |
+| R22 | Выщербленный sensory anchors (тактильный/обонятельный/проприоцептивный) | §2.6 L166–173 (teaching example) | §10.4 L491–493 (production card — near-verbatim) | REINFORCEMENT (teach vs production artifact; §21 protection; governed by the character-map «one place per character, elsewhere = ref» rule for definitions, not card content) | — |
+| R23 | CoT Tier-3 Выщербленный example (`processus_analysium` block) | §6.5 L156–173 (teach, full) | §6.6 L192–199 (summary table, compressed) · §10.4 L496–517 (production card, verbatim) | REINFORCEMENT (3 functions: teach / summary / production) | — |
+| R24 | Adjective-vs-behavior formulation principle («не прилагательное, а наблюдаемое поведение») | §4.4 anti-pattern tables (FLAW-side) | §2.2 L55 RULE (anchor-side, ref §4.4 ✓) · **[B]** glossary F-FLAW + B-Anchor entries (reference-side) · §4.1::05 observable-units (family) | REINFORCEMENT (different objects: anchor / FLAW / reference) | — |
+| R25 | OCEAN pole-limits numbers (1–2 extremes; 8K→3, 16K→4) | `p5_ocean_basics::02` RULE + ::14 limits table (§5.1) | §5.3 L167 scenario-3 solution (partial, consistent) · **[B]** glossary O-OCEAN entry (restatement) · **[B]** character_map ::04 labels note (R17-decorated) | REINFORCEMENT (values consistent everywhere); §5.1::02's internal ref «см. §5.3» imprecise (the table is §5.1) | ed-7/ed-8 ref fix |
+| R26 | MBTI reference-role statement («справочный инструмент, без прямого маппинга на SPINE») | §5.1 L104 РЕКОМЕНДАЦИЯ (decision site) | §5.5 L215–217 (cross-map site) · **[B]** appendix_mbti L45–47 (appendix site) · **[B]** glossary M-MBTI entry | REINFORCEMENT ×4 (decision/validation/reference layers — all consistent) | — |
+| R27 | Card-level budget totals framing | Part 10 per-card budgets (~540/1000, ~1100, ~2150, ~1500+) | **[B]** character_map L37–38 ranges «~440–890» (Walter ~1100 outside) and «~1500–1800» (Omnis ~2150 outside) | UNCLEAR (framing drift, card-total layer of the R11 family) | ed-5 / KI#77 |
+| R28 | Elena Greeting dual presentation | §10.1 L97–100 (canonical production greeting) | §7B.2 L61–72 (учебный разбор по алгоритму) | REINFORCEMENT — **compliant pattern:** both sides carry explicit disambiguation Примечания (IMP-48); the model pair for dual-presentation decisions | — |
+| R29 | Terminology drift in the reference layer | §4.11 «G2 — Юность (13–25)» · §6.3 «Tier 0 — без отдельного CoT-блока» | **[B]** glossary G-GHOST Layers «G2=Отрочество» · glossary C-CoT «Tier 0 (basic Anchor)» · §7B.5 checklist «призрак Anchors» word-order slip · appendix_mbti EN label «NOTE» (DEC-16 cosmetic) | DUPLICATE class (wording-level, not semantic) | ed-7 normalization |
+
+---
+
+## 16. Summary statistics
+
+> Counts verified by script against the `id` column (Phase A: iter 120 sandbox tooling; Phase B:
+> iter 126 — unique IDs, per-part counts, column vocabularies; see `worklog.md` iter-126).
+
+### 16.1 Phase A (Parts 1 / 3 / 7A / 9 — iter 120)
 
 | Metric | Part 1 | Part 3 | Part 7A | Part 9 | Total |
 |---|---|---|---|---|---|
@@ -546,63 +1243,154 @@ ed-policy Rule 3/§15 navigation-debt decision).
 | MOVE | 0 | 0 | 0 | 1 | 1 |
 | DELETE | 0 | 1 | 3 | 1 | 5 |
 | Blocks with `repeat = DUPLICATE` | 2 | 4 | 7 | 3 | 16 |
-| Blocks with `repeat = CONTRADICTORY` | 0 | 0 | 1 (KI#72) | 0 | 1 (+ R11 §9.11 numeric tension noted in row) |
 
-**Automatic compression candidates (decision ≠ KEEP **and** `repeat = DUPLICATE`, research §32):**
+### 16.2 Phase B (Part 0, 2, 4, 5, 6, 7B, 8, 10 + appendices — iter 126)
 
-1. `p7a_system_prompt::05` — verbatim duplicate RULE line (KI#71) → DELETE
-2. `p7a_system_prompt::06` — Anchors-placement full copy (R01) → CROSS-REFERENCE
-3. `p7a_system_prompt::07` — stale `[ANCHORS]`/KI#58 repo-meta note (R17) → DELETE
-4. `p3_voice_isolation::06` — methodology copy (R05) → CROSS-REFERENCE
-5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS
-6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE
-7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS
-8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE
-9. `p7a_token_budget::11` — stale migration note (R17) → DELETE
-10. `p7a_assembly_pipeline::05` — CORE DIRECTIVES verbatim (R02) → CROSS-REFERENCE
-11. `p9_additional_problems::02` — #4/#5 symptom pairs (R15) → MOVE into §9.5
-12. `p9_pre_deploy::03` — self-admitted quick-check dupe (R16) → DELETE (+ dangling-ref repair)
-13. `p9_test_requirements::02` — «минимум 6 сценариев» restatement → COMPRESS
+| Metric | Part 0* | Part 2 | Part 4 | Part 5 | Part 6 | Part 7B | Part 8 | Part 10 | Appx* | Total |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Sections covered | 2 | 6 | 11 | 7 | 6 | 5 | 16 | 4 | 4 | 61 |
+| Blocks (rows) | 11 | 26 | 51 | 43 | 25 | 33 | 40 | 20 | 41 | 290 |
+| KEEP | 9 | 26 | 50 | 43 | 24 | 33 | 40 | 20 | 38 | 283 |
+| COMPRESS | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 3 | 6 |
+| CROSS-REFERENCE | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+| MOVE | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| DELETE | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Blocks with `repeat = DUPLICATE` | 2 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 3 | 7 |
+
+\* Part 0 (2 sections) and Appendix D character_map (1 section) are non-rendering — canon-side
+hygiene rows. Appendix totals = character_map (6) + glossary (26) + mbti (6) + model_table (3).
+
+### 16.3 Combined (A + B)
+
+| Metric | Total |
+|---|---|
+| Canon-declared section IDs audited | **99** (96 rendering + 3 conceptual-only) |
+| Block rows | **500** (210 + 290), all IDs unique |
+| KEEP | 473 (94.6%) |
+| COMPRESS | 16 |
+| CROSS-REFERENCE | 5 |
+| MOVE | 1 |
+| DELETE | 5 |
+| Blocks with `repeat = DUPLICATE` | 23 |
+| Blocks with `repeat = CONTRADICTORY` | 1 (KI#72) + R11 numeric tensions noted in rows |
+| Repeat registry | R01–R29 |
+
+**Automatic compression candidates (decision ≠ KEEP **and** `repeat = DUPLICATE`, research §32) —
+cumulative list with execution status:**
+
+1. `p7a_system_prompt::05` — verbatim duplicate RULE line (KI#71) → DELETE — **✅ executed iter 121 (ed-6)**
+2. `p7a_system_prompt::06` — Anchors-placement full copy (R01) → CROSS-REFERENCE — **✅ executed iter 125 (dupes-1)**
+3. `p7a_system_prompt::07` — stale `[ANCHORS]`/KI#58 repo-meta note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
+4. `p3_voice_isolation::06` — methodology copy (R05) → CROSS-REFERENCE — open (ed-7 family)
+5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS — open (ed-1/ed-4)
+6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE — open (ed-4)
+7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — open (owner value decision)
+8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — open
+9. `p7a_token_budget::11` — stale migration note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
+10. `p7a_assembly_pipeline::05` — CORE DIRECTIVES verbatim (R02) → CROSS-REFERENCE — open (primary ed-2 target)
+11. `p9_additional_problems::02` — #4/#5 symptom pairs (R15) → MOVE into §9.5 — open (ed-3)
+12. `p9_pre_deploy::03` — self-admitted quick-check dupe (R16) → DELETE — **✅ executed iter 125 (dupes-1)**
+13. `p9_test_requirements::02` — «минимум 6 сценариев» restatement → COMPRESS — open
+14. `p0_how_to_read::05` — callout-labels history clause (R17, non-rendering) → COMPRESS — open (Phase B)
+15. `p0_how_to_read::06` — DEC-16 repo pointers (R17, non-rendering) → COMPRESS — open (Phase B)
+16. `p4_spine_full_chain::04` — implicit-GHOST/LIE near-verbatim re-statement (R21) → CROSS-REFERENCE — open (Phase B)
+17. `p6_cot_tiers::05` — iter-29/KI#18-F canon-only note (R17) → COMPRESS — open (Phase B)
+18. `appendix_character_map::04` — iter-40/KI#29 history label (R17, non-rendering) → COMPRESS — open (Phase B)
+19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — open (Phase B; KI#70 dependency)
+20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
+
+Execution status: 5 of 13 Phase A candidates executed (iters 121/125); 15 candidates open overall
+(#4–#8, #10, #11, #13 from Phase A + #14–#20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
+carry owner decisions; the rest are ready for ed-* execution under the Editorial Policy.
 
 Plus one **pair-level** candidate: R04 drift-numbers — one of the two occurrences
 (`p1_value_proposition::02` table row vs `p3_voice_isolation::05` table) becomes a cross-reference;
 the owner picks the surviving side in ed-1/ed-4 (both marked KEEP at block level here).
 
-Everything else flagged KEEP (190 of 210 blocks, 90%) — consistent with the research verdict
-"semantic consolidation, not aggressive shortening" (§33). Functional load is preserved (load = YES)
-for every recommended action; the deletions carry no unique information (research §22 category 1).
+**Phase B confirms the research verdict at guide scale:** 283 of 290 blocks (97.6%) KEEP — the
+remaining parts carry no new teaching-layer duplication load. The Phase B defect surface is
+*navigation hygiene* (R18 vague refs — canon-only, master already resolves), *reference-layer
+over-carry* (2 glossary entries), *repo-meta history labels* (R17, mostly non-rendering), and
+*numeric framing drift* (R11/R27). Functional load is preserved (load = YES) for every recommended
+action; no Phase B deletion carries unique information (research §22 category 1).
 
 ---
 
-## 8. Re-scope notes for the executing iterations (ed-1…ed-8)
+## 17. Re-scope notes for the executing iterations (ed-1…ed-8)
 
 - **ed-1 (Part 1):** evidence narrows the scope — Part 1 does **not** block-level re-teach
   Parts 2–7A (refs already 1-sentence; §1.4/§1.7/§1.8 are canonical owners). Remaining ed-1 work:
   R04 drift-row decision, R17 Part-1 meta strips, R11 §1.8 framing. Expect a much smaller edit set
-  than research §2/§4 assumed.
+  than research §2/§4 assumed. Phase B adds: nothing (Part 1 untouched by B).
 - **ed-2 (CORE DIRECTIVES):** primary target = §7A.13 step 3 verbatim block → DEC-08 shorthand.
-  Secondary audit: R08/R09/R10 re-prints in the assembled-SP view. Glossary copy = Phase B.
-- **ed-3 (Part 9):** already check-form; remaining = R15 fold + R16 delete + R14 router decision.
+  Secondary audit: R08/R09/R10 re-prints in the assembled-SP view (R09/R10 now include the four
+  Part 10 card-side Format Lock / Tone Frame blocks — production-artifact function, likely KEEP).
+  **Glossary copy classified (Phase B):** compress to definition + 7-name index + fixed ref §7A.2
+  (candidate #19); rides the KI#70 wire/drop decision. Part 10 shorthand usage verified compliant.
+- **ed-3 (Part 9):** already check-form; remaining = R15 fold + R14 router decision.
 - **ed-4 (Voice):** hierarchy framing only; the R06 family (Тест/example/Пояснение) is the single
-  in-part consolidation candidate. No merges (§24 protects RELATED BUT DISTINCT).
-- **ed-5 (Token budget):** R11 — resolve §1.8 Q2 framing + §9.11 «≤800» vs §7A.12 max 700;
-  §7A.11 4K table is legitimately distinct.
-- **ed-6 (repo-meta):** R17 registry now itemizes 5 Phase-A locations (2 stale, 3 live repo-meta)
-  + Part 8 (confirmed by backlog audit).
+  in-part consolidation candidate. No merges (§24 protects RELATED BUT DISTINCT). Phase B adds:
+  AP-3/AP-11 catalog-sites and the glossary voice entries are compliant — out of ed-4 scope.
+- **ed-5 (Token budget):** R11 — resolve §1.8 Q2 framing + §9.11 «≤800» vs §7A.12 max 700 +
+  **[B]** AP-1 «>800» (same tension) + **[B]** glossary «4K ~430–580» card-total framing;
+  §7A.11 4K table is legitimately distinct. **[B] R27:** character_map card-total ranges
+  (~440–890 / ~1500–1800) vs Part 10 budgets — decide whether the ranges re-frame to match the
+  cards or the cards' feature-sets get stated as the range condition.
+- **ed-6 (repo-meta):** rendered-prose strips done (iter 121). **[B] remainder = canon-side only:**
+  part_00 L13/L45/L58, part_06 §6.3 L83, character_map L29 (candidates #14/#15/#17/#18) + the
+  optional part_08 «v9 restructure» phrase. Non-rendering → fold into any canon-touching iteration.
 - **ed-7 (readability):** R05 methodology pair; §7A.5 unbalanced paren; rule-strength classes for
-  numeric claims (incl. KI#72 values once reconciled).
-- **ed-8 (cross-ref quality):** R18 vague-ref list + R14 router decision.
+  numeric claims (incl. KI#72 values once reconciled); **[B] R25** pole-limits triple statement +
+  its imprecise §5.1→§5.3 ref; **[B] R29** terminology drift pairs («Юность/Отрочество»,
+  «Tier 0 basic Anchor», «призрак Anchors», EN label «NOTE»).
+- **ed-8 (cross-ref quality):** R18 vague-ref list is now the **largest mechanical family**:
+  ~32 Phase B vague refs (part_08 ×7 + glossary ×18 + part_10 ×4 + part_05 + appendix_mbti +
+  character_map) + 6 unbalanced parens (part_08) + Phase A's §3.5/§9.3/§9.5 set + KI#77-a wrong
+  ref. Canon-first mechanical pass; master needs no link changes (already resolves correctly) —
+  but canon text changes require the usual master mirror edits for changed paragraphs.
+- **dupes-N (self-admitted dupes):** Phase B found none beyond the R21 §4.7 re-statement — the
+  «self-admitted duplicate» class is exhausted; remaining work is the matrix candidate list.
 
-## 9. New defects recorded this iteration (fixes deferred — read-only scope)
+## 18. New defects recorded (fixes deferred — read-only scope)
+
+**Phase A (iter 120):**
 
 - **KI#71** — canon `part_07a.md` L30–L31: identity-name RULE duplicated byte-identical (master
   carries it once). Fix = delete one canon line; fold into the next canon-touching iteration
-  (dupes-1/ed-6 family). Recorded in `STATUS.md`.
+  (dupes-1/ed-6 family). Recorded in `STATUS.md`. **CLOSED iter 121 (ed-6).**
 - **KI#72** — sampling contradictions §7A.6 ↔ §7A.7: 32B+ Temperature 0.7–1.0 (and 0.7–0.9 in the
   model-specific table) vs 0.85–1.1; 32B+ RepPen 1.05–1.10 vs 1.0–1.05. Reconciliation needs a
   content decision (which range is canonical) — `PLAN.md` row `ki-72`. Recorded in `STATUS.md`.
 
-Phase B (remaining parts + appendices) will extend this document per the same block-ID scheme.
+**Phase B (iter 126):**
+
+- **KI#77** — canon-side wrong/stale cross-references in Phase B parts (master resolves every
+  affected link correctly — reader impact is canon navigability only):
+  - **(a)** `part_04.md` L281: `[ref: part_07a.md §7A.6 — Consequence Driven]` → directive #6
+    lives in §7A.2; §7A.6 = Sampling Params. Master link already points to `#p7a_core_directives`
+    (verified) — canon-side ref text repair.
+  - **(b)** `appendix_character_map.md` L23 (Omnis row): «Part 5 §5.2 (OCEAN extreme)» — no
+    «Омнис» occurrence in `part_05.md` (byte-verified); «Part 8 §8.X (AP-15 OCEAN Overload)» —
+    stale: the concept moved to Part 5 §5.3 (per §8.1's own pointer) and AP-15 is now Nested
+    Anchors.
+  - **(c)** `appendix_character_map.md` L24 (Выщербленный row): «Part 5 (эннеаграмма)» — no
+    occurrence in part_05; the 5w4 mapping lives in `part_10.md` §10.4 (`<enneagram>` tag).
+  - **(d)** `appendix_character_map.md` L24: «Part 6 §6.X (CoT)» — vague form (target §6.5/§6.6).
+  - **(e)** `appendix_character_map.md` L37–38: budget ranges «~440–890» / «~1500–1800» vs Part 10
+    stated budgets (Elena ~540/1000 ✓; Walter ~1100 ✗; Omnis ~2150 ✗; Выщербленный ~1500+ boundary)
+    — framing drift (R27), needs an explicit re-frame decision (ed-5 input).
+  Character_map is non-rendering (no master artifact) — (b)–(e) have zero reader impact; (a)
+  renders through a correct master link. Fix = targeted canon ref repair, fold into ed-8 or any
+  canon-touching iteration. Recorded in `STATUS.md`.
+
+**Observations (not KIs):**
+
+- NAV/AGENTS «97 sections» phrasing: the sync audit's 97 = its check count; actual = 96 rendered
+  master sections + 99 canon-declared IDs (the `content_map.md` counting convention, verified
+  iter 117 and re-verified iter 126). Doc-precision nit for a future NAV touch — no action required.
+- KI#70 dependency noted twice in Phase B rows: the glossary CORE DIRECTIVES compression
+  (candidate #19) and the appendix_mbti container note both describe appendix content that never
+  runtime-loads — their editorial fate should ride the KI#70 wire/drop decision.
 
 
 
