@@ -211,7 +211,7 @@
         <div class="zone-detail zone-detail--excellent">
           <div class="zone-detail__title vs-ki13-p9-zone-title--excellent">Отличный</div>
           <div class="zone-detail__range">85–100%</div>
-          <div class="zone-detail__criteria">Проходит все 14 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие Token Budget, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
+          <div class="zone-detail__criteria">Проходит все 14 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие бюджету токенов, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
         </div>
 
         <div class="zone-detail zone-detail--good">
@@ -273,16 +273,16 @@
 <table>
 <thead><tr><th>Уровень</th><th>Типичные паттерны ошибок</th></tr></thead>
 <tbody>
-<tr><td><strong>Критический</strong> (0–25%)</td><td>поведенческие якоря (Behavioral Anchors) без T→A→P, OCEAN с 4+ полюсами, нет Anti-godmoding (анти-годмодинг)</td></tr>
-<tr><td><strong>Слабый</strong> (25–50%)</td><td>FLAW (Дефект) = прилагательное, Examples не демонстрируют голос, SPINE не связан с Anchors</td></tr>
-<tr><td><strong>Хороший</strong> (50–85%)</td><td>FLAW = поведение, ≥2 Examples с голосом, SPINE→Anchors связь</td></tr>
-<tr><td><strong>Отличный</strong> (85–100%)</td><td>14/14 предразвёрточных проверок пройдены, Embodiment во всех Anchors, Format Lock консистентен во всех Examples</td></tr>
+<tr><td><strong>Критический</strong> (0–25%)</td><td>поведенческие якоря без T→A→P, OCEAN с 4+ полюсами, нет Anti-godmoding (анти-годмодинг)</td></tr>
+<tr><td><strong>Слабый</strong> (25–50%)</td><td>дефект (FLAW) = прилагательное, Examples не демонстрируют голос, SPINE не связана с якорями</td></tr>
+<tr><td><strong>Хороший</strong> (50–85%)</td><td>дефект = поведение, ≥2 Examples с голосом, связь SPINE→якоря</td></tr>
+<tr><td><strong>Отличный</strong> (85–100%)</td><td>14/14 предразвёрточных проверок пройдены, телесность (Embodiment) во всех якорях, Format Lock консистентен во всех Examples</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION: Цель — «Хороший» уровень.</strong> «Критический» = переписать. «Слабый» = точечные доработки по Decision Tree. «Отличный» = полировка для продакшна.</p>
+<p><strong>РЕКОМЕНДАЦИЯ: Цель — «Хороший» уровень.</strong> «Критический» = переписать. «Слабый» = точечные доработки по Decision Tree. «Отличный» = полировка для продакшна.</p>
 </div>
 
 </section>
@@ -292,7 +292,7 @@
 <h3>Правило одного изменения</h3>
 
 <div class="callout rule">
-<p><strong>RULE: Никогда не меняйте более одного параметра за раз.</strong> Иначе вы не узнаете, что именно помогло. Изменили → протестировали 5–10 сообщений → оценили → только потом следующее изменение.</p>
+<p><strong>ПРАВИЛО: Никогда не меняйте более одного параметра за раз.</strong> Иначе вы не узнаете, что именно помогло. Изменили → протестировали 5–10 сообщений → оценили → только потом следующее изменение.</p>
 </div>
 
 </section>
@@ -313,7 +313,7 @@
 </thead>
 <tbody>
 <tr><td><strong>System Prompt</strong></td><td>☐ Anti-godmoding? (строка «Never speak or act for {{user}}.»)<br/>☐ Person defined?<br/>☐ Narrative tense? (прошедшее/настоящее)<br/>☐ Format Lock? (одна система разметки во всех Examples)</td><td><a href="#p7a_system_prompt">Part 7A</a></td></tr>
-<tr><td><strong>Description</strong></td><td>☐ Anchors с ценой? (формат T→A→P)<br/>☐ Нет голоса? (голос только в Examples/Greeting)<br/>☐ Психология в Description? (теги <code>&lt;spine&gt;</code>/<code>&lt;ocean&gt;</code>/<code>&lt;enneagram&gt;</code>, не нарратив)</td><td><a href="#p4_spine_overview">Part 4: SPINE</a></td></tr>
+<tr><td><strong>Description</strong></td><td>☐ Якоря с ценой? (формат T→A→P)<br/>☐ Нет голоса? (голос только в Examples/Greeting)<br/>☐ Психология в Description? (теги <code>&lt;spine&gt;</code>/<code>&lt;ocean&gt;</code>/<code>&lt;enneagram&gt;</code>, не нарратив)</td><td><a href="#p4_spine_overview">Part 4: SPINE</a></td></tr>
 <tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td><a href="#p3_examples_rules">Part 3</a></td></tr>
 <tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p7b_greeting">Part 7B</a></td></tr>
 <tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p7a_sampling_params">Part 7A</a></td></tr>
@@ -358,17 +358,17 @@
 <tr><th>Симптом</th><th>Проверка</th><th>Ссылка</th></tr>
 </thead>
 <tbody>
-<tr><td>Модель игнорирует характер</td><td>Examples не показывают голос?</td><td>Fix → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></td></tr>
-<tr><td>Персонаж слишком мягкий</td><td>Нет FLAW-linked Anchors?</td><td>Fix → <a href="#p4_spine_mapping">Part 4: SPINE→Anchors</a></td></tr>
+<tr><td>Модель игнорирует характер</td><td>Examples не показывают голос?</td><td>Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></td></tr>
+<tr><td>Персонаж слишком мягкий</td><td>Нет якорей FLAW-linked?</td><td>Исправление → <a href="#p4_spine_mapping">Part 4: SPINE→якоря</a></td></tr>
 <tr><td>Голос «утекает» в длинных репликах</td><td>Менее 3 Examples?</td><td>Fix → <a href="#p3_examples_rules">Part 3: Правила Examples</a></td></tr>
-<tr><td>Персонаж не показывает уязвимость</td><td>Нет Цены у Anchors?</td><td>Fix → <a href="#p2_anchor_rules">Part 2: Anchor Format</a></td></tr>
+<tr><td>Персонаж не показывает уязвимость</td><td>Нет Цены у Anchors?</td><td>Исправление → <a href="#p2_anchor_rules">Part 2: формат якоря</a></td></tr>
 <tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен?</td><td>Fix → <a href="#p4_spine_check">Part 4: SPINE Check</a></td></tr>
 <tr><td>Повторяющиеся фразы</td><td>RepPen > 1.10?</td><td>Fix → <a href="#p8_ap5_reppen_high">Part 8: AP-5</a></td></tr>
 <tr><td>Персонаж слишком много говорит</td><td>Examples длиннее 120 токенов?</td><td>Укоротите Examples (≤120 токенов)</td></tr>
 <tr><td>Модель ломает формат</td><td>Нет Format Lock?</td><td>Добавить Format Lock в SP</td></tr>
 <tr><td>Персонаж забывает контекст</td><td>Карточка + контекст > контекстное окно?</td><td>Fix → <a href="#p8_ap14_context_violation">Part 8: AP-14</a></td></tr>
 <tr><td>Неестественные переходы</td><td>Нет transition sentences?</td><td>Добавить Embodiment-переходы</td></tr>
-<tr><td>Потеря внутренней логики персонажа</td><td>Нет CoT Anchor?</td><td>Fix → <a href="#p6_cot_basics">Part 6: CoT</a></td></tr>
+<tr><td>Потеря внутренней логики персонажа</td><td>Нет CoT-якоря?</td><td>Исправление → <a href="#p6_cot_basics">Part 6: CoT</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -388,19 +388,19 @@
 <table>
 <thead><tr><th>Симптом</th><th>Проверка</th><th>Если да →</th><th>Если нет →</th></tr></thead>
 <tbody>
-<tr><td>Персонаж теряет голос</td><td>Voice Leak в Description?</td><td>Удалить голос из Description (AP-3 Voice-in-Desc)</td><td>→ Следующая проверка</td></tr>
+<tr><td>Персонаж теряет голос</td><td>утечка голоса в Description?</td><td>Удалить голос из Description (AP-3 Voice-in-Desc)</td><td>→ Следующая проверка</td></tr>
 <tr><td></td><td>Достаточно ли Examples?</td><td>Добавить 2–3 Examples</td><td>→ Следующая проверка</td></tr>
 <tr><td></td><td>Совпадает ли формат Examples и Greeting?</td><td>Унифицировать формат (Format Lock)</td><td>→ Проверить Voice Contamination</td></tr>
 <tr><td>Персонаж годмодит</td><td>Есть ли Anti-godmoding в SP?</td><td>Добавить 2 строки (AP-6 No-Anti-Godmoding)</td><td>→ Усилить Influence Boundary</td></tr>
-<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked Anchor</td><td>→ Проверить OCEAN: >2 полюса? → <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a> (AP-15 OCEAN-Overload)</td></tr>
+<tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавить FLAW + FLAW-linked якорь</td><td>→ Проверить OCEAN: >2 полюса? → <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a> (AP-15 OCEAN-Overload)</td></tr>
 <tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Fix → AP-5 (RepPen-High)</td><td>→ Проверить PP: >0? (AP-7 PP-Leak)</td></tr>
-<tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить Anchors на дублирование</td></tr>
-<tr><td>Модель теряет внутреннюю логику персонажа</td><td>Есть ли у персонажа внутренний процесс?</td><td>Fix → <a href="#p6_cot_basics">Part 6: CoT</a> (AP-10 CoT-Overload)</td><td>→ Проверить SPINE на консистентность (AP-9 SPINE-Broken)</td></tr>
+<tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить якоря на дублирование</td></tr>
+<tr><td>Модель теряет внутреннюю логику персонажа</td><td>Есть ли у персонажа внутренний процесс?</td><td>Исправление → <a href="#p6_cot_basics">Part 6: CoT</a> (AP-10 CoT-Overload)</td><td>→ Проверить SPINE на консистентность (AP-9 SPINE-Broken)</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><strong>Cross-ref:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — cautious zone, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>
+<p><strong>Ссылка:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — осторожная зона, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>
 
 </section>
 
@@ -420,7 +420,7 @@
 </thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>Нейтральное приветствие</td><td>Базовый голос</td><td>Узнаваемый голос, характерный синтаксис</td></tr>
-<tr><td><strong>2</strong></td><td>Конфликт/стресс</td><td>FLAW проявление</td><td>FLAW-linked поведение + цена</td></tr>
+<tr><td><strong>2</strong></td><td>Конфликт/стресс</td><td>Проявление дефекта</td><td>FLAW-linked поведение + цена</td></tr>
 <tr><td><strong>3</strong></td><td>Искренняя забота</td><td>Стена/защита</td><td>Отстранение или сарказм (для Елена)</td></tr>
 <tr><td><strong>4</strong></td><td>Вопрос о личном</td><td>FLAW-триггер</td><td>FLAW-linked поведение + цена</td></tr>
 <tr><td><strong>5</strong></td><td>Долгий диалог (10+ ходов)</td><td>Стабильность голоса</td><td>Голос не деградирует</td></tr>
@@ -441,9 +441,9 @@
 <table>
 <thead><tr><th>Элемент</th><th>Тестовый сценарий</th><th>Что ожидаем</th><th>Что наблюдаем</th><th>Диагноз</th></tr></thead>
 <tbody>
-<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>FLAW проявляется</td><td>Персонаж реагирует «правильно»</td><td>SPINE работает</td></tr>
-<tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Anchors работают</td></tr>
-<tr><td>Voice Isolation</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Voice Isolation работает</td></tr>
+<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>Дефект проявляется</td><td>Персонаж реагирует «правильно»</td><td>SPINE работает</td></tr>
+<tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Якоря работают</td></tr>
+<tr><td>Изоляция голоса</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Изоляция голоса работает</td></tr>
 <tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Персонаж помнит контекст</td><td>AN работает</td></tr>
 <tr><td>Lorebook (база знаний)</td><td>Упоминание триггер-слова</td><td>Контекстная реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
 <tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Персонаж действует в соответствии с полюсом</td><td>OCEAN работает</td></tr>
@@ -457,9 +457,9 @@
 <!-- difficulty: INTERMEDIATE -->
 <h4>Количество тестовых сценариев</h4>
 
-<p><strong>Сценарий:</strong> после тестирования по <a href="#p9_test_scenarios">§9.7: Тестовые сценарии</a> — количественная проверка: минимум 6 сценариев проведено (больше для карточек с GHOST Layers или мульти-персонажностью) + формальная оценка по 6 метрикам успеха. Для самого набора сценариев → <a href="#p9_test_scenarios">§9.7</a>; для отображения «элемент → тест» → <a href="#p9_element_scenario_map">§9.8: Карта элемент → сценарий</a>; для диагностики обнаруженных проблем → <a href="#p9_symptom_table">§9.5: Таблица симптомов</a>.</p>
+<p><strong>Сценарий:</strong> после тестирования по <a href="#p9_test_scenarios">§9.7: Тестовые сценарии</a> — количественная проверка: минимум 6 сценариев проведено (больше для карточек со слоями призрака или мульти-персонажностью) + формальная оценка по 6 метрикам успеха. Для самого набора сценариев → <a href="#p9_test_scenarios">§9.7</a>; для отображения «элемент → тест» → <a href="#p9_element_scenario_map">§9.8: Карта элемент → сценарий</a>; для диагностики обнаруженных проблем → <a href="#p9_symptom_table">§9.5: Таблица симптомов</a>.</p>
 
-<p>Минимум 6 тестовых сценариев для любой карточки. Для карточек с GHOST Layers или мульти-персонажностью — добавьте соответствующие сценарии. Полный список сценариев — см. <a href="#p9_test_scenarios">Тестовые сценарии</a> выше.</p>
+<p>Минимум 6 тестовых сценариев для любой карточки. Для карточек со слоями призрака или мульти-персонажностью — добавьте соответствующие сценарии. Полный список сценариев — см. <a href="#p9_test_scenarios">Тестовые сценарии</a> выше.</p>
 
 <h4>Метрики успеха (6 критериев)</h4>
 <div class="table-wrap">
@@ -468,7 +468,7 @@
 <tbody>
 <tr><td>1</td><td>Голос стабилен</td><td>На 10+ сообщений без дрейфа</td></tr>
 <tr><td>2</td><td>Price появляется</td><td>В каждом 2–3 ответе при триггере</td></tr>
-<tr><td>3</td><td>FLAW проявляется</td><td>В сценарии конфликта</td></tr>
+<tr><td>3</td><td>Дефект проявляется</td><td>В сценарии конфликта</td></tr>
 <tr><td>4</td><td>Нет godmoding</td><td>0 случаев за 10 сообщений</td></tr>
 <tr><td>5</td><td>Нет Voice Bleed</td><td>0 стилистических директив в Description</td></tr>
 <tr><td>6</td><td>AN влияет</td><td>Поведение меняется после 10 сообщений с AN</td></tr>
@@ -494,7 +494,7 @@
 </thead>
 <tbody>
 <tr><td>Голос деградирует быстро</td><td>Ограниченная память</td><td>Более явные Anchors, короче Examples</td></tr>
-<tr><td>Модель игнорирует SPINE</td><td>Недостаточная ёмкость</td><td>Упростите SPINE до FLAW + LIE</td></tr>
+<tr><td>Модель игнорирует SPINE</td><td>Недостаточная ёмкость</td><td>Упростите SPINE до дефекта + лжи (FLAW + LIE)</td></tr>
 <tr><td>OOC моменты</td><td>Контекст overflow</td><td>4K-Fallback Protocol</td></tr>
 <tr><td>Повторы фраз</td><td>Паттерн-зависимость</td><td>RepPen 1.02-1.05, разнообразьте Examples</td></tr>
 <tr><td>Неспособность к CoT</td><td>Архитектура модели</td><td>Tier 0-1 CoT только, без XML</td></tr>
@@ -536,14 +536,14 @@
 <!-- Demonstrates: DIAGNOSTICS, SPINE -->
 <h4>Пример: Быстрая проверка для Елены</h4>
 
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
 <table>
 <thead><tr><th>Проверка</th><th>Результат</th></tr></thead>
 <tbody>
 <tr><td>☐ PP = 0.0</td><td>✓ Presence Penalty = 0.0</td></tr>
-<tr><td>☐ Voice только в Examples</td><td>✓ Voice descriptors only in Examples — «саркастичная» shown through behavior, not described in <code>&lt;identity&gt;</code> (→ <a href="#p3_voice_isolation">§3.1</a> Voice Isolation)</td></tr>
-<tr><td>☐ Price в каждом Anchor</td><td>✓ Все 6 Anchors имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат)</td></tr>
+<tr><td>☐ Voice только в Examples</td><td>✓ Дескрипторы голоса только в Examples — «саркастичная» показана через поведение, не описана в <code>&lt;identity&gt;</code> (→ <a href="#p3_voice_isolation">§3.1</a> изоляция голоса)</td></tr>
+<tr><td>☐ Price в каждом Anchor</td><td>✓ Все 6 якорей имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат)</td></tr>
 <tr><td>☐ Format Lock</td><td>✓ Система A: *action* "speech" во всех Examples + Greeting</td></tr>
 <tr><td>☐ Anti-godmoding</td><td>✓ "Never speak or act for {{user}}" + позитивная формулировка</td></tr>
 </tbody>
@@ -566,7 +566,7 @@
 <tr><td>11</td><td>Tone Frame</td><td>Присутствует для нетривиальных сеттингов</td></tr>
 <tr><td>12</td><td>OCEAN ≤ 2 полюса</td><td>Не более 2 экстремальных значений</td></tr>
 <tr><td>13</td><td>Lorebook параметры</td><td>Depth/Probability/Cooldown в рекомендованных диапазонах</td></tr>
-<tr><td>14</td><td>CoT ≤ 3 Anchors</td><td>Не более 2–3 CoT Anchors</td></tr>
+<tr><td>14</td><td>CoT ≤ 3 якоря</td><td>Не более 2–3 CoT-якоря</td></tr>
 </tbody>
 </table>
 </div>
@@ -575,7 +575,7 @@
 <!-- Demonstrates: DIAGNOSTICS, SPINE, GHOST LAYERS -->
 <h4>Пример: Pre-Deploy для Выщебленного (полная карточка)</h4>
 
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
 <h5>Структурная проверка Выщербленного (5 пунктов — отлична от универсальной Быстрой проверки выше)</h5>
 <p><em>Это структурная проверка SP/Description/Examples/Greeting для конкретной карточки, не универсальный чеклист параметров.</em></p>
@@ -596,8 +596,8 @@
 <tbody>
 <tr><td>☐ CORE DIRECTIVES: 7 директив</td><td>✓ Все 7 в формате &lt;CORE_DIRECTIVES&gt;</td></tr>
 <tr><td>☐ SPINE: 5 элементов связаны</td><td>✓ GHOST→LIE→FLAW→NEED→WANT цепь логична</td></tr>
-<tr><td>☐ GHOST Layers: 3 tier</td><td>✓ G1/G2/G3 определены с Anchors</td></tr>
-<tr><td>☐ CoT Anchors: ≤ 3</td><td>✓ 2 CoT Anchors (Tier 2 + Tier 3)</td></tr>
+<tr><td>☐ Слои призрака: 3 tier</td><td>✓ G1/G2/G3 определены с якорями</td></tr>
+<tr><td>☐ CoT-якоря: ≤ 3</td><td>✓ 2 CoT-якоря (Tier 2 + Tier 3)</td></tr>
 <tr><td>☐ Lorebook: консистентен</td><td>✓ 5 записей без конфликтов с Description</td></tr>
 <tr><td>☐ XML: валиден</td><td>✓ Все теги закрыты, структура корректна</td></tr>
 <tr><td>☐ Tone Frame: присутствует</td><td>✓ "archival, detached. Memory is currency."</td></tr>
@@ -609,7 +609,7 @@
 
 <p><strong>Итог:</strong> Выщербленный проходит Pre-Deploy полностью.</p>
 
-<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки с GHOST Layers, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля. → <a href="#p10_elena">Part 10</a></p>
+<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки со слоями призрака, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля. → <a href="#p10_elena">Part 10</a></p>
 
 </section>
 

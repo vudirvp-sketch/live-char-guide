@@ -2,7 +2,7 @@
 
 > **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
 > **Date:** 2026-09-14
-> **Iteration:** 122
+> **Iteration:** 123
 > Full rules: `AGENTS.md` (operating law) · `AGENT_NAVIGATION.md` (system map) · `PLAN.md` (backlog)
 > Iteration detail: `worklog.md` · History: `CHANGELOG.md` + git
 
@@ -10,7 +10,7 @@
 
 ## Current State
 
-**iter 122 — ed-policy: Editorial Policy adopted as content-editing law (doc-only, owner decision).** Owner accepted the research rule set (§27) **with amendments** (chat, 2026-09-14); the amended text is now law, verbatim: `AGENTS.md` → **Editorial Policy (content-editing law)** section + **fence #13** (compact normative pointer) + Content/canon-change row of the reading gradient now routes through it. Canon-side application: `docs/canon/_README.md` **§4.4** + anti-pattern #8 + validation-checklist item. Conflicts vs existing law resolved explicitly by the owner's amendments and recorded in **DEC-15**: functional repetition preserved (subsumes the useful-repetition whitelist — Price / SPINE causality / Show Never Tell / Embodiment), consistent with `viz > dry text` (DEC-03) and IMP-48 cross-refs (fence #11). `PLAN.md` preamble binds all content rows (`ed-1`…`ed-8`, `dupes-1`, `ki-72`) to the policy. Guide content untouched (policy text only). Doc-only verification: `version:check` PASS (9.2.6) · `qa:doc-versions` exit 0 (1 pre-existing obs-3 warning) · `git diff --check` clean.
+**iter 123 — ru-policy: two-layer guide language policy (owner request, DEC-16).** Owner requested full russification of the guide (chat, 2026-09-14): «все русифицировать что можно». Implemented as a **two-layer policy** (fence #12 rewritten, DEC-16 supersedes the pre-iter-123 "English semantic anchors" rule): (1) guide prose — headings, callout labels (`ПРАВИЛО`, `РЕКОМЕНДАЦИЯ`, `ПРИМЕР`, `ИЛЛЮСТРАЦИЯ`, `ШАБЛОН`, `Переход`, `Синтез`, `Ссылка`, `Демонстрирует`), ordinary terminology (`token → токен`, `lie → ложь`, `GHOST Layers → слои призрака`, `Bridge/Basics/Tiers/Overload headings → русские`) — Russian; (2) executable/recommended prompt content (SP blocks, `<CORE_DIRECTIVES>` canonical wording, Tone Frame strings, card examples, copy-paste templates) — English preserved with adjacent Russian explanations; technical identifiers and proper names untouched. Policy encoded in `AGENTS.md` fence #12, `AGENT_NAVIGATION.md` pitfall #4, `docs/canon/_README.md` §3.8/§3.9, `docs/terminology_dictionary.md`, `DECISIONS.md` DEC-16. Applied across all 19 canon files + 14 master files + 15 root-fallback files (rebuilt): callout labels, SPINE prose glosses, directive names in prose (рус. + англ. глосса), glossary entry labels, appendix titles. `qa:english` baseline re-baselined **19 → 18** (one prose leak legitimately translated; remaining 18 = executable-content leaks by design) — updated in `AGENTS.md`, `AGENT_NAVIGATION.md`, `docs/architecture.md`. `audit_canon_master_sync.py` expectations updated to the russified canonical strings (case: policy encoded in validation). Full verification green: build PASS (hash `2ab607d6` unchanged) · validate 5/5 + SHELL-* · validate:master 12/12 (0 errors, 17 pre-existing warnings) · version:check 9.2.6 · tests 64/64 · canon sync 97/97 · qa:csp/bundle/contrast PASS · qa:english 18 / qa:syntax 247 · qa:doc-versions 1 pre-existing warning · lint 0 errors (1 pre-existing warning, untouched file) · `git diff --check` clean. Informational drift 133 → 159 actionable (paragraph-similarity artifacts of the mass translation, exit 0; MUST-gate sync 97/97 unaffected).
 
 ---
 
@@ -30,6 +30,7 @@
 - **Script Tax:** non-Latin scripts ~1.5–2× tokens on 32K vocab; ≥128K → negligible (§7A.12 RULE).
 - **Widgets:** 12 in `src/shell/widgets/`.
 - **Editorial Policy (DEC-15, iter 122):** all `docs/canon/` + `src/master/` content edits — compress redundant presentation, never unique capability; 5-point functional-load check; UNCLEAR ≠ delete; success ≠ word count.
+- **Language policy (DEC-16, iter 123):** two-layer — guide prose/labels/headings Russian (ordinary terminology translated); English only in executable prompt content (with adjacent Russian explanation), technical identifiers, proper names. `qa:english` baseline 18 (executable-content leaks by design; must not increase).
 
 Full rules and fences: `AGENTS.md` → Hard fences. Content semantics: `docs/canon/`.
 
@@ -60,4 +61,4 @@ Re-pinned every iteration. **Owner-gated rows are not auto-candidates — the ow
 5. **ki-72 (small canon fix, MEDIUM — value decision):** reconcile §7A.6 ↔ §7A.7 sampling values (32B+ Temperature 0.7–1.0 vs 0.85–1.1; RepPen 1.05–1.10 vs 1.0–1.05) — matrix recommends §7A.6 = canonical, §7A.7 param rows → defer/ref (see `editorial_matrix.md` R12 + `p7a_model_checklist::02`). Executes under the Editorial Policy (DEC-15).
 6. obs-4 — stale version headers in remaining docs (`components.md`, `terminology_dictionary.md` — each needs its own content-verification pass before refresh). Note: after the ki-67 fix the gate parses their date headers (both currently drift 0d); obs-4 is about version staleness, not dates. obs-3 — `CONTENT_RESTRUCTURE_PLAN.md` header/status (now also the gate's 1 warning).
 
-A new agent: run the preflight in `AGENTS.md`, confirm this Next step against the worktree (`git log` vs iteration above), then start.
+A new agent: run the preflight in `AGENTS.md`, confirm this Next step against the worktree (`git log` vs iteration above), then start. iter-123 (ru-policy) is complete and verified; the backlog below is unchanged.

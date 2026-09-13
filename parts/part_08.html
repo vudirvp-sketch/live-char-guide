@@ -112,7 +112,7 @@
           <span class="ap-card__id">AP-8</span>
           <span class="severity-dot severity-dot--medium"></span>
         </div>
-        <div class="ap-card__symptom">GHOST без Anchors</div>
+        <div class="ap-card__symptom">призрак без якорей</div>
         <div class="ap-card__cause">SPINE определён, но нет Anchors для его выражения</div>
         <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Добавьте FLAW-связанные Anchors в блок Examples.</div>
@@ -197,7 +197,7 @@
           <span class="severity-dot severity-dot--medium"></span>
         </div>
         <div class="ap-card__symptom">Вложенные Anchors</div>
-        <div class="ap-card__cause">Anchors рекурсивно ссылаются друг на друга</div>
+        <div class="ap-card__cause">якоря рекурсивно ссылаются друг на друга</div>
         <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Выровняйте структуру Anchors. Только один уровень ссылок.</div>
       </div>
@@ -214,7 +214,7 @@
 <p><strong>Анти-паттерн</strong> — распространённая ошибка в создании карточек, приводящая к нестабильному поведению модели. Каждый анти-паттерн имеет симптом, причину и решение.</p>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
+<p><strong>ПРАВИЛО:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
 </div>
 
 <p>Полный каталог 15 анти-паттернов (AP-1 … AP-15) с симптомом, причиной и быстрым фиксом — в визуализации E12 выше. Подробный разбор каждого AP (симптом → причина → решение → before/after) — в подсекциях §8.2–§8.16 ниже.</p>
@@ -230,16 +230,16 @@
 <p><strong>Причина:</strong> Избыточное описание, дублирование, голос в Description</p>
 <p><strong>Решение:</strong></p>
 <ul>
-<li>Fix → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
+<li>Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></li>
 <li>Удалите дубликаты</li>
-<li>Оставьте только факты и Anchors</li>
+<li>Оставьте только факты и якоря</li>
 </ul>
 <div class="example-block">
 <p><strong>Пример:</strong> Description 1200 токенов → модель игнорирует половину → персонаж inconsistent</p>
 </div>
 
-<div class="example-label illustration">ILLUSTRATION</div>
-<h4>До/После: Token Bloat — Елена</h4>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
+<h4>До/После: раздувание токенов — Елена</h4>
 <div class="diff-view">
 <div class="diff-card diff-del">
 <div class="diff-label">❌ Раздутый Description (600+ токенов)</div>
@@ -260,8 +260,8 @@
 <!-- difficulty: BASIC -->
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
-<p><strong>Симптом:</strong> Anchor без физической цены</p>
-<p><strong>Решение:</strong> Anchor Format: Триггер → Действие → Цена. Fix → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
+<p><strong>Симптом:</strong> якорь без физической цены</p>
+<p><strong>Решение:</strong> Формат якоря (Anchor Format): Триггер → Действие → Цена. Исправление → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a></p>
 </div>
 </section>
 <section  data-section="p8_ap3_voice_in_description" id="p8_ap3_voice_in_description">
@@ -269,9 +269,9 @@
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
-<p><strong>Решение:</strong> Description = только факты. Голос → Examples/Greeting. Fix → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
+<p><strong>Решение:</strong> Description = только факты. Голос → Examples/Greeting. Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></p>
 
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <h4>До/После: Voice in Description — Елена</h4>
 <div class="diff-view">
 <div class="diff-card diff-del">
@@ -299,9 +299,9 @@
 <p><strong>Симптом:</strong> Психологический анализ (SPINE, GHOST) помещён в System Prompt</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
 <p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты.</p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="callout rule">
-<p><strong>RULE:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description) — как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>), не нарративом — не в инструкциях (SP).</p>
+<p><strong>ПРАВИЛО:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description) — как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>), не нарративом — не в инструкциях (SP).</p>
 </div>
 </div>
 </section>
@@ -310,21 +310,21 @@
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
-<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding" id="p8_ap6_no_anti_godmoding">
 <!-- difficulty: BASIC -->
 <div class="antipattern-card">
-<h3>AP-6: No Anti-godmoding (анти-годмодинг)</h3>
+<h3>AP-6: Отсутствие анти-годмодинга (No Anti-godmoding)</h3>
 <p><strong>Симптом:</strong> Модель пишет за {{user}}</p>
 <p><strong>Причина:</strong> Нет инструкции "Never speak or act for {{user}}" в SP</p>
 <p><strong>Решение:</strong> Обязательно добавьте в SP:</p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>Never speak or act for {{user}}.</code></pre>
 <p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <!-- Demonstrates: INFLUENCE BOUNDARY --><code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
-<p>Fix → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
+<p>Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
 </section>
 <p>Следующий анти-паттерн связан с параметрами генерации — даже правильная карточка может «сломаться» при неверных настройках сэмплинга.</p>
@@ -333,21 +333,21 @@
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
-<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Fix → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
 <section  data-section="p8_ap8_ghost_no_anchors" id="p8_ap8_ghost_no_anchors">
 <!-- difficulty: INTERMEDIATE -->
 
 <div class="antipattern-card">
-<h3>AP-8: GHOST без Anchors (GHOST without Anchors)</h3>
-<p><strong>Симптом:</strong> GHOST описан, но нет Anchors, связанных с ним</p>
-<p><strong>Причина:</strong> GHOST как описание, не как поведенческий драйвер</p>
-<p><strong>Решение:</strong> Каждый GHOST = минимум 1 Anchor-trigger</p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<h3>AP-8: Призрак без якорей (GHOST without Anchors)</h3>
+<p><strong>Симптом:</strong> призрак описан, но нет якорей, связанных с ним</p>
+<p><strong>Причина:</strong> призрак как описание, а не поведенческий драйвер</p>
+<p><strong>Решение:</strong> Каждый призрак (GHOST) = минимум 1 якорь-триггер. Призрак — корень причинной цепочки SPINE, должен выражаться в поведении через якорь.</p>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="example-block">
-<p><strong>Пример:</strong> Елена — GHOST "предательство редактора" → Anchor "Когда вопрос о лояльности → напрягается"</p>
+<p><strong>Пример:</strong> Елена — призрак «предательство редактора» → якорь «Когда вопрос о лояльности → напрягается»</p>
 </div>
 
 </div>
@@ -356,16 +356,16 @@
 <!-- difficulty: EXPERT -->
 <div class="antipattern-card">
 <h3>AP-9: Сломанный SPINE (Broken SPINE)</h3>
-<p><strong>Симптом:</strong> SPINE-элементы не связаны логически — WANT совместим с NEED (нет конфликта), FLAW существует без объяснения</p>
-<p><strong>Причина:</strong> WANT, NEED, FLAW, LIE, GHOST написаны независимо, без причинно-следственной связи</p>
-<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT. Fix → <a href="#p4_spine_full_chain">Part 4: SPINE</a>. Каждый элемент должен объясняться предыдущим.</p>
+<p><strong>Симптом:</strong> SPINE-элементы не связаны логически — желание совместимо с потребностью (нет конфликта), дефект существует без объяснения</p>
+<p><strong>Причина:</strong> желание, потребность, дефект, ложь, призрак написаны независимо, без причинно-следственной связи</p>
+<p><strong>Решение:</strong> Проверьте цепочку: GHOST → LIE → FLAW → NEED → WANT. Исправление → <a href="#p4_spine_full_chain">Part 4: SPINE</a>. Каждый элемент должен объясняться предыдущим.</p>
 <div class="problem-block">
 <h4>❌ Сломанный SPINE</h4>
 <pre><code>GHOST: (отсутствует)  →  LIE: (отсутствует)  →  FLAW: Избегает близости
 NEED: Нуждается в доверии  ←  WANT: Хочет быть любимым</code></pre>
-<p>WANT совместим с NEED — нет конфликта. FLAW блокирует BOTH — но откуда FLAW? Без объяснения через LIE/GHOST цепь разорвана.</p>
+<p>желание совместимо с потребностью — нет конфликта. Дефект блокирует обе потребности — но откуда дефект? Без объяснения через ложь/призрак цепь разорвана.</p>
 
-<p><strong>Критерий broken SPINE</strong> (сохраняется как диагностика): «WANT совместим с NEED — нет конфликта» + FLAW не объяснён через LIE/GHOST. Это не то же самое, что «GHOST/LIE текстуально отсутствуют» — per Part 4 §4.1, GHOST/LIE могут быть <strong>неявными</strong> для простых персонажей. Diagnose broken SPINE по разрыву каузальной цепи (FLAW без корня в LIE/GHOST), а не по текстовому отсутствию элементов.</p>
+<p><strong>Критерий сломанной SPINE (broken SPINE)</strong> (сохраняется как диагностика): «желание совместимо с потребностью — нет конфликта» + дефект не объяснён через ложь/призрак. Это не то же самое, что «призрак/ложь текстуально отсутствуют» — по Part 4 §4.1, призрак и ложь могут быть <strong>неявными</strong> для простых персонажей. Диагностируйте сломанную SPINE по разрыву каузальной цепи (дефект без корня в лжи/призраке), а не по текстовому отсутствию элементов.</p>
 </div>
 <div class="solution-block">
 <h4>✅ Цельный SPINE</h4>
@@ -390,20 +390,20 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 <!-- difficulty: INTERMEDIATE -->
 <div class="antipattern-card">
 <h3>AP-10: Перегрузка CoT (CoT Overload)</h3>
-<p><strong>Симптом:</strong> > 3 CoT Anchors в карточке</p>
+<p><strong>Симптом:</strong> > 3 CoT-якоря в карточке</p>
 <p><strong>Причина:</strong> Попытка задать весь внутренний процесс</p>
-<p><strong>Решение:</strong> 2-3 CoT Anchors максимум. Остальное — обычные Anchors.</p>
+<p><strong>Решение:</strong> 2-3 CoT-якоря максимум. Остальное — обычные якоря.</p>
 <div class="callout rule">
-<p><strong>RULE:</strong> Модель генерирует внутренние монологи вместо действий, персонаж "думает" больше чем "делает".</p>
+<p><strong>ПРАВИЛО:</strong> Модель генерирует внутренние монологи вместо действий, персонаж "думает" больше чем "делает".</p>
 </div>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="problem-block">
-<h4>❌ CoT Overload</h4>
-<p>Карточка содержит 5 CoT Anchors. Модель тратит >50% ответа на внутренний процесс → внешний ответ обеднён.</p>
+<h4>❌ Перегрузка CoT</h4>
+<p>Карточка содержит 5 CoT-якоря. Модель тратит >50% ответа на внутренний процесс → внешний ответ обеднён.</p>
 </div>
 <div class="solution-block">
-<h4>✅ Максимум 2–3 CoT Anchors</h4>
-<p>Оставьте только ключевые триггеры (GHOST-связь, критический конфликт). Остальные Anchors — обычные T→A→P без CoT.</p>
+<h4>✅ Максимум 2–3 CoT-якоря</h4>
+<p>Оставьте только ключевые триггеры (GHOST-связь, критический конфликт). Остальные якоря — обычные T→A→P без CoT.</p>
 </div>
 
 </div>
@@ -415,7 +415,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 <p><strong>Симптом:</strong> В мульти-персонажных сценах голоса смешиваются</p>
 <p><strong>Причина:</strong> Недостаточное различение голосов персонажей</p>
 <p><strong>Решение:</strong> Character Markers (Маркеры персонажа) — явные маркеры уникальности голоса. Примеры: специфичная лексика, синтаксические паттерны, телесные реакции, catchphrases.</p>
-<p>Fix → <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
+<p>Исправление → <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
 </div>
 </section>
 <p>Voice Bleed — поведенческая проблема. Следующие два анти-паттерна — технические: невалидный XML и конфликт записей Lorebook.</p>
@@ -426,7 +426,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 <p><strong>Симптом:</strong> Невалидные XML теги в Description</p>
 <p><strong>Причина:</strong> Опечатки, незакрытые теги</p>
 <p><strong>Решение:</strong> Валидация XML перед использованием</p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="problem-block">
 <p><strong>❌ Неправильно:</strong></p>
 <pre><code>&lt;spine&gt;
@@ -449,8 +449,8 @@ WANT: {{want}}
 <h3>AP-13: Конфликт Lorebook (Lorebook Conflict)</h3>
 <p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
-<p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description. Fix → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a></p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description. Исправление → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a></p>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
 </div>
 </section>
@@ -460,32 +460,32 @@ WANT: {{want}}
 <h3>AP-14: Нарушение контекстного окна</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
-<p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Fix → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a></p>
-<div class="example-label illustration">ILLUSTRATION</div>
+<p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Исправление → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a></p>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
 <section  data-section="p8_ap15_nested_anchors" id="p8_ap15_nested_anchors">
 <!-- difficulty: EXPERT -->
-<h3>AP-15: Nested Anchors</h3>
+<h3>AP-15: Вложенные якоря (Nested Anchors)</h3>
 
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>❌ Проблема</h4>
-<p>Anchor содержит вложенные условия: «Если X, а потом Y → делает Z». Модель не может надёжно исполнить цепочку из 3+ вложенных условий на ≤14B.</p>
+<p>якорь содержит вложенные условия: «Если X, а потом Y → делает Z». Модель не может надёжно исполнить цепочку из 3+ вложенных условий на ≤14B.</p>
 </div>
 <div class="solution-block">
 <h4>✅ Решение</h4>
-<p>Разбить на атомарные Anchors: один Anchor = одна связь T→A→P. Fix → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a> Принцип атомарности.</p>
+<p>Разбить на атомарные якоря: один якорь = одна связь T→A→P. Исправление → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a> Принцип атомарности.</p>
 </div>
 <div class="example-block">
 <h4>📝 Пример</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>❌ Вложенный: "Когда лгут → если уже лгали раньше → хлопает дверью → кричит: «Вон!»"
 ✅ Атомарные: "Когда лгут → сжимает челюсти → голос становится тише"
            + "Когда обнаруживает ложь повторно → хлопает дверью → уходит в другую комнату"</code></pre>
 </div>
 </div>
 
-<p><strong>Synthesis:</strong> 15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (broken SPINE), AP-15 (nested Anchors).</p>
+<p><strong>Синтез:</strong> 15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (сломанная SPINE), AP-15 (вложенные якоря).</p>
 
 </section>

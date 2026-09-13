@@ -42,7 +42,7 @@
     },
     {
       "file": "part_04.html",
-      "title": "SPINE Framework",
+      "title": "Обзор SPINE",
       "anchors": [
         "p4_spine_overview",
         "p4_ghost",
@@ -84,7 +84,7 @@
     },
     {
       "file": "part_07a.html",
-      "title": "System Prompt: Structure and Assembly",
+      "title": "Системный промпт (System Prompt): структура и сборка",
       "anchors": [
         "p7a_system_prompt",
         "p7a_core_directives",
@@ -179,7 +179,7 @@
     },
     {
       "file": "appendix_model_table.html",
-      "title": "Model Capability Table",
+      "title": "Таблица возможностей моделей (Model Capability Table)",
       "anchors": [
         "appendix_model_table"
       ]

@@ -125,7 +125,7 @@ pnpm run validate:master                  # validate master HTML invariants
 pnpm run version:check                    # 4-place version sync (MUST pass)
 pnpm test                                 # all tests — run AFTER pnpm run build (tests read dist/)
 pnpm run qa:csp | qa:bundle | qa:contrast | qa:doc-versions   # PASS/FAIL gates
-pnpm run qa:english                       # exit 1 expected: 19 leaks by design — count must not increase
+pnpm run qa:english                       # exit 1 expected: 18 leaks by design — count must not increase
 pnpm run qa:syntax                        # exit 1 expected: 247 baseline findings — count must not increase
 pnpm run dev                              # build + serve on http://localhost:3000
 
@@ -136,7 +136,7 @@ python3 scripts/audit_canon_master_drift.py   # informational, exit 0
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates
 > individually: PASS/FAIL for csp/bundle/contrast/doc-versions; **baseline counts must not
-> increase** for english (19) and syntax (247).
+> increase** for english (18) and syntax (247).
 
 ---
 
@@ -153,7 +153,7 @@ python3 scripts/audit_canon_master_drift.py   # informational, exit 0
 9. **Version sync (4 places, ALL must match):** `package.json` · `src/VERSION` · `data/character_schema.json` · build manifest. Verify with `pnpm run version:check`. When bumping: update `src/VERSION` + `package.json` + `data/character_schema.json` MANUALLY in the same commit; `parts/manifest.json` regenerates on build.
 10. **Canon sync:** `docs/canon/part_NN.md` = single source of truth. `src/master/part_NN.html` = production HTML derived from canon. Audit: `python3 scripts/audit_canon_master_sync.py` (MUST PASS). Drift detector: `python3 scripts/audit_canon_master_drift.py` (informational).
 11. **Cross-references (IMP-48):** when section A references section B, B MUST back-link to A. One canonical definition per concept; everywhere else = 1-sentence link.
-12. **Language convention:** CORE DIRECTIVES block in English (12B models follow English ~15–20% more reliably). Guide prose explaining them: Russian. Callout labels (`RULE`, `RECOMMENDATION`, `EXAMPLE`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`, `Demonstrates`): English semantic anchors. Callout bodies: Russian. Local clarifications: `**Примечание:**` (Russian).
+12. **Language convention (two-layer, DEC-16):** Russian is the default language of the guide — all explanatory, normative, instructional, and descriptive prose (including callout labels `ПРАВИЛО`, `РЕКОМЕНДАЦИЯ`, `ПРИМЕР`, `ИЛЛЮСТРАЦИЯ`, `ШАБЛОН`, `Переход`, `Синтез`, `Ссылка`, `Демонстрирует`) is Russian; ordinary English terminology is translated whenever a natural Russian equivalent exists (`token → токен`, `lie → ложь`, `rule → правило`). English is preserved only where its exact form is technically significant: (a) executable/recommended prompt content the guide prescribes writing in English (SP blocks, `<CORE_DIRECTIVES>` wording, Tone Frame strings, card examples, copy-paste templates) — every such English block MUST carry a Russian explanation/translation next to it; (b) technical identifiers (section IDs, XML tags, `{{placeholders}}`, class names, filenames, machine-readable values, API/parameter names, card field names); (c) proper names. `CORE DIRECTIVES` English wording is canonical inside the executable SP form; in prose use «основные директивы» / «директива» — each directive keeps a Russian explanation (§7A.2). Local clarifications: `**Примечание:**`. Baseline `qa:english` leaks (18, DEC-16 — was 19 before iter-123 russification) are executable-content leaks by design.
 13. **Editorial Policy (content-editing law, DEC-15):** gates every content edit in `docs/canon/` + `src/master/` (extends fence #11's one-canonical-definition rule). Core principle: **compress redundant presentation, never unique capability** — no editorial change may reduce semantic or functional load. Every deletion/merge/move/cross-ref replacement passes the 5-point functional-load check (capability · coverage · retrieval · context · dependency — full text: [Editorial Policy](#editorial-policy-content-editing-law) below). Uncertain cases are classified **UNCLEAR**, never deleted by assumption. Success metric: reduced redundant semantic load + improved navigability — never word count.
 
 ---

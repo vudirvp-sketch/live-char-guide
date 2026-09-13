@@ -20,14 +20,14 @@
 </thead>
 <tbody>
 <tr><td>Дрейф голоса (20+ сообщений)</td><td>~40% отклонение от исходного тона</td><td>~10% отклонение при том же токен-бюджете</td></tr>
-<tr><td>Консистентность поведения</td><td>Модель заполняет пробелы дефолтами</td><td>Anchors задают конкретные триггеры → модель следует паттернам</td></tr>
+<tr><td>Консистентность поведения</td><td>Модель заполняет пробелы дефолтами</td><td>Якоря (Anchors) задают конкретные триггеры → модель следует паттернам</td></tr>
 <tr><td>Токен-эффективность</td><td>Description (Описание) = 500+ токенов общих характеристик</td><td>OCEAN: <code>N:68</code> = 5 токенов вместо 30 текста</td></tr>
 <tr><td>Динамика персонажа</td><td>Статичное поведение</td><td>WANT→NEED сдвиг через Price — персонаж развивается в сессии</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><strong>Методология:</strong> проценты и другие количественные оценки в гайде — эмпирические ориентиры на основе тестирования ~50 карточек на 12B–32B моделях 2024–2025 годов (Llama 2, Qwen 1.x, ранний Mistral). Для современных моделей со словарём от 128K токенов (Llama 3, Qwen 3, Gemma 3) разрывы могут быть меньше указанных. Воспринимайте как качественные маркеры (стабилен / дрейфует / сломан), не как точные измерения. Подробный disclaimer — <a href="#p3_voice_isolation">Part 3 §3.1: Voice Isolation</a>.</p>
+<p><strong>Методология:</strong> проценты и другие количественные оценки в гайде — эмпирические ориентиры на основе тестирования ~50 карточек на 12B–32B моделях 2024–2025 годов (Llama 2, Qwen 1.x, ранний Mistral). Для современных моделей со словарём от 128K токенов (Llama 3, Qwen 3, Gemma 3) разрывы могут быть меньше указанных. Воспринимайте как качественные маркеры (стабилен / дрейфует / сломан), не как точные измерения. Подробные оговорки — <a href="#p3_voice_isolation">Part 3 §3.1: изоляция голоса</a>.</p>
 
 <p>Этот гайд учит строить карточку как поведенческий движок — каждый элемент производит действие, а не украшает описание.</p>
 </section>
@@ -95,7 +95,7 @@
         <div class="block-content">
           Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
           <div class="desc-callout">
-            ↳ Anchors упомянуты здесь как ссылка — структурно живут как отдельный блок в Examples-зоне
+            ↳ Якоря упомянуты здесь как ссылка — структурно живут как отдельный блок в Examples-зоне
           </div>
         </div>
       </div>
@@ -128,13 +128,13 @@
           <!-- Anchors sub-panel — отдельный структурный блок внутри Examples-зоны, violet accent -->
           <div class="anchors-subpanel">
             <div class="vs-ki13-anchor-header">
-              <span class="vs-ki13-anchor-title">Anchors</span>
+              <span class="vs-ki13-anchor-title">Якоря (Anchors)</span>
               <span class="badge badge--violet">T→A→P</span>
               <span class="optional-badge">отдельный блок</span>
             </div>
             <div class="vs-ki13-anchor-desc">
               Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
-              Anchors — отдельный структурный блок в Examples-зоне, не часть диалоговых примеров. В большинстве фронтендов размещаются как <code>&lt;anchors&gt;</code> внутри Description.
+              Якоря — отдельный структурный блок в Examples-зоне, не часть диалоговых примеров. В большинстве фронтендов размещаются как <code>&lt;anchors&gt;</code> внутри Description.
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@
             <td class="vs-ki13-token-td-source">Part 7A</td>
           </tr>
           <tr class="vs-ki13-token-row">
-            <td class="vs-ki13-token-td">Anchors (each)</td>
+            <td class="vs-ki13-token-td">Anchors (каждый)</td>
             <td class="vs-ki13-token-td-right">~15</td>
             <td class="vs-ki13-token-td-right">~25</td>
             <td class="vs-ki13-token-td-right">~40</td>
@@ -268,8 +268,8 @@
 <p><strong>Сквозной пример:</strong> На протяжении всего гайда мы будем строить карточку Елены — от базовых блоков до полной карточки со всеми инструментами. Это позволит увидеть, как каждый инструмент добавляет глубину персонажу.</p>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> О примерах и стиле</p>
-<p>Этот гайд учит механике, не эстетике. Все примеры намеренно сухие — они иллюстрируют структурные принципы (причинность SPINE, триггеры Behavioral Anchors (поведенческие якоря), маркеры Voice, логику CoT), а не качество письма. Когда пример содержит нарративный язык («Дождь барабанил по стеклу»), он существует для демонстрации конкретной директивы (в данном случае Environmental Reactivity) и помечен соответствующим образом. Стиль вашего персонажа — качество прозы, глубина лора, сенсорная насыщенность — ваша_domain. Этот гайд гарантирует, что модель его уважает.</p>
+<p><strong>ПРАВИЛО:</strong> О примерах и стиле</p>
+<p>Этот гайд учит механике, не эстетике. Все примеры намеренно сухие — они иллюстрируют структурные принципы (причинность SPINE, триггеры поведенческих якорей, маркеры Voice, логику CoT), а не качество письма. Когда пример содержит нарративный язык («Дождь барабанил по стеклу»), он существует для демонстрации конкретной директивы (в данном случае Environmental Reactivity) и помечен соответствующим образом. Стиль вашего персонажа — качество прозы, глубина лора, сенсорная насыщенность — ваша предметная область. Этот гайд гарантирует, что модель её уважает.</p>
 </div>
 
 <section data-section="p1_structure_overview" id="p1_structure_overview" data-toc-nav>
@@ -288,7 +288,7 @@
 
 <p>Этот раздел — краткий обзор базовых блоков. Порядок чтения: ① Базовые Anchors (Part 2) → ② Голос и изоляция (Part 3) → ③ SPINE (Part 4) → ④ OCEAN/Enneagram (Part 5) → ⑤ CoT (Part 6). Полный конвейер сборки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a></p>
 
-<p>Структура и содержимое блоков показаны выше в VS-EMBED E01 (Card Anatomy) — стек из 5 блоков с token-аннотациями (мин/стд/макс) и описаниями. Anchors визуально вложены в Examples-зону, но структурно — отдельный блок (<code>&lt;anchors&gt;</code>-тег), не часть диалоговых примеров. Таблица ниже — структурные свойства, не видные в viz: влияние на модель и качественная доля бюджета.</p>
+<p>Структура и содержимое блоков показаны выше в VS-EMBED E01 (Card Anatomy) — стек из 5 блоков с токен-аннотациями (мин/стд/макс) и описаниями. Якоря визуально вложены в Examples-зону, но структурно — отдельный блок (<code>&lt;anchors&gt;</code>-тег), не часть диалоговых примеров. Таблица ниже — структурные свойства, не видные в viz: влияние на модель и качественная доля бюджета.</p>
 
 <div class="table-wrap">
 <table>
@@ -299,19 +299,19 @@
 <tr><td><strong>System Prompt</strong></td><td>Высокое — задаёт рамки</td><td>Компактный</td></tr>
 <tr><td><strong>Description</strong></td><td>Среднее — контекст</td><td>Основной объём</td></tr>
 <tr><td><strong>Examples</strong></td><td>Ключевое — паттерны речи</td><td>Средний</td></tr>
-<tr><td><strong>Anchors</strong> (в Examples-зоне)</td><td>Ключевое — поведенческие триггеры</td><td>Средний (отдельный <code>&lt;anchors&gt;</code>-тег)</td></tr>
+<tr><td><strong>Якоря (Anchors)</strong> (в Examples-зоне)</td><td>Ключевое — поведенческие триггеры</td><td>Средний (отдельный <code>&lt;anchors&gt;</code>-тег)</td></tr>
 <tr><td><strong>Greeting</strong></td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Правило голоса → 3 ключевых принципа (выше)</p>
+<p><strong>ПРАВИЛО:</strong> Правило голоса → 3 ключевых принципа (выше)</p>
 </div>
 
-<h4>Token Budget и конвейер сборки</h4>
+<h4>Бюджет токенов и конвейер сборки</h4>
 
-<p>Каждый блок карточки имеет токен-бюджет. Полная таблица лимитов и интерактивный калькулятор — в <a href="#p7a_token_budget">Part 7A: Token Budget</a>. Пошаговый конвейер сборки карточки — в <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>. Там же — walkthrough на примере Елены.</p>
+<p>Каждый блок карточки имеет токен-бюджет. Полная таблица лимитов и интерактивный калькулятор — в <a href="#p7a_token_budget">Part 7A: Бюджет токенов</a>. Пошаговый конвейер сборки карточки — в <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>. Там же — пошаговый разбор на примере Елены.</p>
 
 </section>
 
@@ -324,33 +324,33 @@
 
 <p><strong>Ключевые термины (используются далее без перевыполнения):</strong></p>
 <ul>
-<li><strong>Anchor</strong> (поведенческий якорь) — конкретное правило поведения в формате Trigger → Action → Price (см. Part 2).</li>
+<li><strong>Якорь (Anchor)</strong> — конкретное правило поведения в формате Trigger → Action → Price (см. Part 2).</li>
 <li><strong>Voice</strong> (голос) — уникальный стиль речи персонажа; задаётся только в Examples и Greeting (см. Part 3).</li>
 <li><strong>SPINE</strong> — психологический каркас из 5 элементов (GHOST/LIE/FLAW/NEED/WANT), см. Part 4.</li>
 <li><strong>OCEAN</strong> — модель личности из 5 измерений (O/C/E/A/N), см. Part 5.</li>
 </ul>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Фундаментальный принцип: LLM = <strong>Pattern Matcher</strong>, не Исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
+<p><strong>ПРАВИЛО:</strong> Фундаментальный принцип: LLM = <strong>сопоставитель паттернов (Pattern Matcher)</strong>, не исполнитель правил. Директива в SP без паттерна в Examples нестабильна на моделях ≤14B (~40–60% следование директивам). Поэтому Examples — главный инструмент, а Description — логика поведения.</p>
 </div>
 
 <ol>
-<li><strong>Anchor = Trigger → Action → Price</strong> — поведение задаётся Anchors, и у каждого Anchors обязательна Цена — физическая реакция в той же сцене. Без Цены Anchor = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></li>
-<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. <strong>Лингвистический голос</strong> (слова, синтаксис, лексика, ритм фразы) — только Examples; <strong>физическая характеристика голоса</strong> (тембр, хрип, механический гул) — допустима в Description как часть Embodiment → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></li>
+<li><strong>Якорь = Trigger → Action → Price</strong> — поведение задаётся якорями, и у каждого якоря обязательна Цена — физическая реакция в той же сцене. Без Цены якорь = инструкция без паттерна → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a></li>
+<li><strong>Голос — только в Examples и Greeting</strong> — модель считывает характер персонажа из примеров диалога, а не из описания. <strong>Лингвистический голос</strong> (слова, синтаксис, лексика, ритм фразы) — только Examples; <strong>физическая характеристика голоса</strong> (тембр, хрип, механический гул) — допустима в Description как часть Embodiment → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></li>
 <li><strong>Психология — в Description компактно, в тегах, не нарративом</strong> — SPINE, OCEAN, Enneagram размещаются в блоке Description как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>) с числовыми значениями и короткими пометками, не развёрнутым текстом. Никогда в System Prompt → <a href="#p4_spine_overview">Part 4: SPINE</a>, <a href="#p5_ocean_basics">Part 5: OCEAN</a></li>
 </ol>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Anchors — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров. Anchors размещаются как самостоятельный <code>&lt;anchors&gt;</code>-тег (в Description для большинства фронтендов, где нет отдельного поля Anchors) или как отдельное поле (в фронтендах с поддержкой). Концептуально Anchors принадлежат Examples-зоне: их триггеры и паттерны влияют на генерацию наравне с диалоговыми примерами, но структурно они отделены от Examples — Anchors = behavioural patterns, Examples = voice patterns. → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a>, <a href="#p7a_assembly_pipeline">Part 7A: Assembly Pipeline</a></p>
+<p><strong>ПРАВИЛО:</strong> Якоря — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров. Якоря размещаются как самостоятельный <code>&lt;anchors&gt;</code>-тег (в Description для большинства фронтендов, где нет отдельного поля Anchors) или как отдельное поле (в фронтендах с поддержкой). Концептуально якоря принадлежат Examples-зоне: их триггеры и паттерны влияют на генерацию наравне с диалоговыми примерами, но структурно они отделены от Examples — якоря = поведенческие паттерны, Examples = голосовые паттерны. → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a>, <a href="#p7a_assembly_pipeline">Part 7A: Assembly Pipeline</a></p>
 </div>
 
 <div class="callout ex">
 <p><strong>EXAMPLE — Верный vs неверный формат OCEAN в Description:</strong></p>
-<p>✓ <code>&lt;ocean&gt;O:72 C:65 E:41 A:38 N:68&lt;/ocean&gt;</code> — числовые значения, компактно, модель считывает как pattern. Экстремумы и cautious zone помечаются короткой пометкой после чисел.</p>
+<p>✓ <code>&lt;ocean&gt;O:72 C:65 E:41 A:38 N:68&lt;/ocean&gt;</code> — числовые значения, компактно, модель считывает как pattern. Экстремумы и осторожная зона помечаются короткой пометкой после чисел.</p>
 <p>✗ <em>«Елена — любопытная и творческая журналистка, склонна к конфликту и сарказму, тревожная и реактивная…»</em> — нарративное описание черт. Модель хуже считывает нарратив как поведенческий pattern; длинный текст расходует токены Description без структурной ясности.</p>
 </div>
 
-<p><strong>Cross-ref:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>
+<p><strong>Ссылка:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>
 
 </section>
 
@@ -369,21 +369,21 @@
 <h4>Ошибка 2: Голос не соответствует описанию</h4>
 <p><strong>Симптом:</strong> Вы описали персонажа как «лаконичного и холодного», но модель отвечает многословно и эмоционально.</p>
 <p><strong>Причина:</strong> Голос помещён в Description вместо Examples (правило #3). Модель — Pattern Matcher: она копирует паттерны из Examples, но почти не следует стилистическим директивам в Description.</p>
-<p><strong>Исправление:</strong> Полный разбор Voice Isolation → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a></p>
+<p><strong>Исправление:</strong> Полный разбор изоляции голоса → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></p>
 
 <h4>Ошибка 3: Персонаж «слишком идеальный»</h4>
 <p><strong>Симптом:</strong> Персонаж не проявляет уязвимость, не ошибается, реагирует «правильно» на все стимулы.</p>
-<p><strong>Причина:</strong> Anchors не имеют цены (Price). Без физической реакции Anchor = инструкция без паттерна.</p>
-<p><strong>Исправление:</strong> Критерии качества Anchors → <a href="#p2_anchor_rules">Part 2: Behavioral Anchors</a></p>
+<p><strong>Причина:</strong> Якоря не имеют цены (Price). Без физической реакции якорь = инструкция без паттерна.</p>
+<p><strong>Исправление:</strong> Критерии качества якорей → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a></p>
 
-<p><strong>Synthesis:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (Anchor = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>
+<p><strong>Синтез:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>
 
 </section>
 
 <section data-section="p1_prebuild_checklist" id="p1_prebuild_checklist" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: Pre-build checklist (6 questions) -->
-<h3>Pre-build checklist</h3>
+<h3>Чек-лист перед сборкой</h3>
 
 <p>6 вопросов перед началом сборки карточки. Каждый ответ определяет, какие инструменты понадобятся и сколько токенов заложить.</p>
 
@@ -394,19 +394,19 @@
 </thead>
 <tbody>
 <tr><td>1</td><td><strong>Размер модели</strong></td><td>12B / 32B+ / API</td><td>12B — упор на Examples и Anchors, минимальный SP. 32B+ — можно CoT, Author's Note, Lorebook. API — максимум инструментов. → <a href="#appendix_model_table">Appendix: Model Table</a>.</td></tr>
-<tr><td>2</td><td><strong>Контекстное окно</strong></td><td>4K / 8K / 16K+</td><td>4K — Description ≤200 токенов, 2 Examples. 8K — Description ≤400, 3 Examples, базовый Lorebook. 16K+ — полная карточка, CoT, GHOST Layers. → <a href="#p7a_token_budget">Part 7A: Token Budget</a>.</td></tr>
+<tr><td>2</td><td><strong>Контекстное окно</strong></td><td>4K / 8K / 16K+</td><td>4K — Description ≤200 токенов, 2 Examples. 8K — Description ≤400, 3 Examples, базовый Lorebook. 16K+ — полная карточка, CoT, слои призрака (GHOST Layers). → <a href="#p7a_token_budget">Part 7A: Бюджет токенов</a>.</td></tr>
 <tr><td>3</td><td><strong>Сложность персонажа</strong></td><td>Простая / Средняя / Экспертная</td><td>Простая — Уолтер Уайт (<a href="#p10_walter">§10.2</a>). Средняя — Елена (<a href="#p10_elena">§10.1</a>). Экспертная — Омнис-Зета (<a href="#p10_omnis">§10.3</a>), Выщербленный (<a href="#p10_vysherblenny">§10.4</a>).</td></tr>
-<tr><td>4</td><td><strong>GHOST один или Layers</strong></td><td>1 (single) / 3-tier (Layers)</td><td>1 — обычная карточка, GHOST = одно событие. 3-tier — временная хронология (детство → юность → настоящее), см. <a href="#p4_ghost_layers">Part 4: GHOST Layers</a>.</td></tr>
-<tr><td>5</td><td><strong>CoT нужен?</strong></td><td>Нет (Tier 0 — Embodiment only) / Да (Tier 1+)</td><td>Нет — Embodiment Protocol (State→Body→Sensor→Speech) достаточен как микро-цепочка рассуждений, отдельный <code>[INTERNAL]</code>-блок не нужен. Да — нужен явный внутренний монолог для SPINE-триггеров сверх Embodiment. → <a href="#p6_cot_basics">Part 6: CoT</a>.</td></tr>
+<tr><td>4</td><td><strong>Призрак (GHOST): один или слои призрака</strong></td><td>1 (одиночный) / 3-tier (слои)</td><td>1 — обычная карточка, призрак = одно событие. 3-tier — временная хронология (детство → юность → настоящее), см. <a href="#p4_ghost_layers">Part 4: слои призрака</a>.</td></tr>
+<tr><td>5</td><td><strong>CoT нужен?</strong></td><td>Нет (Tier 0 — только телесность) / Да (Tier 1+)</td><td>Нет — протокол телесности (Embodiment Protocol, State→Body→Sensor→Speech) достаточен как микро-цепочка рассуждений, отдельный <code>[INTERNAL]</code>-блок не нужен. Да — нужен явный внутренний монолог для SPINE-триггеров сверх телесности. → <a href="#p6_cot_basics">Part 6: CoT</a>.</td></tr>
 <tr><td>6</td><td><strong>Lorebook нужен?</strong></td><td>Нет / 1–3 записи / 5+ записей</td><td>Нет — все факты помещаются в Description. 1–3 — контекстные триггеры. 5+ — мир + GHOST-факты. → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a>.</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook». Это конфигурация Елены (~440 токенов). Не пытайтесь сразу строить экспертную карточку — это ведёт к перегрузке Description и Voice Leak.</p>
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook». Это конфигурация Елены (~440 токенов). Не пытайтесь сразу строить экспертную карточку — это ведёт к перегрузке Description и утечке голоса.</p>
 </div>
 
-<p><strong>Cross-ref:</strong> Быстрый старт и 6 шагов сборки — <a href="#p1_prebuild_checklist">§1.8 Pre-build checklist</a>. Карта персонажей по сложности — <a href="#p10_elena">§10.1 Елена</a> (базовая), <a href="#p10_walter">§10.2 Уолтер</a> (базовая современная), <a href="#p10_omnis">§10.3 Омнис-Зета</a> (экспертная), <a href="#p10_vysherblenny">§10.4 Выщербленный</a> (экспертная).</p>
+<p><strong>Ссылка:</strong> Быстрый старт и 6 шагов сборки — <a href="#p1_prebuild_checklist">§1.8 Чек-лист перед сборкой</a>. Карта персонажей по сложности — <a href="#p10_elena">§10.1 Елена</a> (базовая), <a href="#p10_walter">§10.2 Уолтер</a> (базовая современная), <a href="#p10_omnis">§10.3 Омнис-Зета</a> (экспертная), <a href="#p10_vysherblenny">§10.4 Выщербленный</a> (экспертная).</p>
 
 </section>

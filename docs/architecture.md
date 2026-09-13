@@ -280,7 +280,7 @@ to skip build + validate (lint always runs).
 - `pnpm run validate:master` — master HTML invariants (12 checks)
 - `pnpm run version:check` — 4-place version sync (MUST pass)
 - `pnpm run qa:csp` / `qa:bundle` / `qa:contrast` / `qa:doc-versions` — PASS/FAIL gates
-- `pnpm run qa:english` / `qa:syntax` — fixed baselines (19 / 247) that must not increase
+- `pnpm run qa:english` / `qa:syntax` — fixed baselines (18 / 247) that must not increase
 - `python3 scripts/audit_canon_master_sync.py` — canon→master sync (MUST pass)
 - `python3 scripts/audit_canon_master_drift.py` — informational drift detector
 - `python3 scripts/audit_vs_embeds.py` — VS scroll-animation invariant

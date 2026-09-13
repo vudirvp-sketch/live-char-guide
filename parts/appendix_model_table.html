@@ -8,25 +8,25 @@
 <section  data-section="appendix_model_table" id="appendix_model_table" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: Model capability table -->
-<h2>Model Capability Table</h2>
+<h2>Таблица возможностей моделей (Model Capability Table)</h2>
 
 <p>Эта таблица объединяет всю информацию о зависимости методов от размера модели. Ссылки на эту таблицу заменяют отдельные MODEL_NOTE-заметки в тексте гайда.</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Feature</th><th>12B Models</th><th>32B+ Models</th><th>API Models</th></tr>
+<tr><th>Возможность</th><th>12B-модели</th><th>32B+ модели</th><th>API-модели</th></tr>
 </thead>
 <tbody>
-<tr><td>CoT Effectiveness</td><td>Basic (Tier 0–1 only)</td><td>Full (Tier 0–3)</td><td>Full (Tier 0–3)</td></tr>
-<tr><td>SPINE Adherence</td><td>Moderate</td><td>High</td><td>High</td></tr>
-<tr><td>CORE DIRECTIVES Compliance</td><td>~60–80%</td><td>~85–95%</td><td>~90–98%</td></tr>
-<tr><td>Consequence Driven (Directive #6)</td><td>Limited effect — insufficient reasoning capacity</td><td>Significant effect</td><td>Full effect</td></tr>
-<tr><td>Pre-Generation Filter (Directive #7)</td><td>~40–60% compliance — often ignored</td><td>~85–95% compliance</td><td>~90–98% compliance</td></tr>
-<tr><td>Structured Inject (XML)</td><td>Limited</td><td>Good</td><td>Good</td></tr>
-<tr><td>English Instruction Adherence</td><td>Historically higher on 12B (English-dominant training); narrows on ≥128K vocabulary</td><td>Stable in both languages</td><td>Stable in both languages</td></tr>
-<tr><td>Vocabulary Size</td><td>32K (ранние 12B); 128K (актуальные 12B–14B: Gemma 3, Qwen 2.5, Mistral Nemo)</td><td>32K–128K (зависит от поколения)</td><td>100K+ (Claude 200K, GPT-4 128K, Gemini 1M+)</td></tr>
-<tr><td>Script Tax (non-Latin)</td><td>Высокий на 32K словаре (Cyrillic ≈1.5–2× Latin; CJK ≈1–2×)</td><td>Средний на 32K; низкий на ≥128K</td><td>Низкий (200K+ словарь покрывает большинство письменностей)</td></tr>
+<tr><td>Эффективность CoT</td><td>Базовая (только Tier 0–1)</td><td>Полная (Tier 0–3)</td><td>Полная (Tier 0–3)</td></tr>
+<tr><td>Следование SPINE</td><td>Умеренное</td><td>Высокое</td><td>Высокое</td></tr>
+<tr><td>Следование CORE DIRECTIVES</td><td>~60–80%</td><td>~85–95%</td><td>~90–98%</td></tr>
+<tr><td>Управление последствиями (директива №6)</td><td>Ограниченный эффект — недостаточная глубина рассуждений</td><td>Значительный эффект</td><td>Полный эффект</td></tr>
+<tr><td>Фильтр предгенерации (директива №7)</td><td>~40–60% соблюдения — часто игнорируется</td><td>~85–95% соблюдения</td><td>~90–98% соблюдения</td></tr>
+<tr><td>Структурированная инъекция (XML)</td><td>Ограничена</td><td>Хорошая</td><td>Хорошая</td></tr>
+<tr><td>Следование английским инструкциям</td><td>Исторически выше на 12B (доминирование английского в обучении); разрыв сужается на словаре ≥128K</td><td>Стабильно в обоих языках</td><td>Стабильно в обоих языках</td></tr>
+<tr><td>Размер словаря</td><td>32K (ранние 12B); 128K (актуальные 12B–14B: Gemma 3, Qwen 2.5, Mistral Nemo)</td><td>32K–128K (зависит от поколения)</td><td>100K+ (Claude 200K, GPT-4 128K, Gemini 1M+)</td></tr>
+<tr><td>Налог на письменность (Script Tax, нелатиница)</td><td>Высокий на 32K-словаре (кириллица ≈1.5–2× латиницы; CJK ≈1–2×)</td><td>Средний на 32K; низкий на ≥128K</td><td>Низкий (200K+ словарь покрывает большинство письменностей)</td></tr>
 </tbody>
 </table>
 </div>

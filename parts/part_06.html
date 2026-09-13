@@ -66,7 +66,7 @@
       </div>
       <p class="vs-ki13-cot-text">
         CoT <strong>не обязателен</strong> — Tier 0 работает для всех моделей. На Tier 0 модель <strong>не «не думает»</strong> —
-        Embodiment Protocol (State → Body → Sensor → Speech, см. <a href="#p2_embodiment">Part 2: Embodiment Protocol</a>)
+        Протокол телесности (Embodiment Protocol, State → Body → Sensor → Speech, см. <a href="#p2_embodiment">Part 2: протокол телесности</a>)
         действует всегда как микро-цепочка рассуждений. CoT (Tier 1+) добавляет отдельный <code>[INTERNAL]</code>-блок
         как явный внутренний монолог <strong>сверх</strong> Embodiment.
         Более высокие уровни добавляют progressively более структурированное внутреннее рассуждение, позволяя модели
@@ -87,7 +87,7 @@
 <p>Что добавляет CoT:</p>
 <ul>
 <li><strong>4 уровня сложности</strong> — от простых внутренних рассуждений до структурированного анализа</li>
-<li><strong>CoT Anchors</strong> — триггер → [внутренний процесс] → реакция → цена</li>
+<li><strong>CoT-якоря</strong> — триггер → [внутренний процесс] → реакция → цена</li>
 <li><strong>XML-синтаксис</strong> — <code>&lt;processus_analysium&gt;</code> для структурированных размышлений</li>
 <li><strong>Quickstart (CoT)</strong> — 60-минутный конвейер сборки экспертной карточки</li>
 </ul>
@@ -101,31 +101,31 @@
 
 <p><strong>CoT</strong> — техника задания внутреннего процесса персонажа. <span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
 
-<p>CoT Anchors строятся на фундаменте трёх систем: Sensory Anchors (Part 2) задают физическое воплощение, GHOST-цепочка (Part 4) определяет скрытое напряжение, а базовые принципы CoT (ниже) связывают их в осознанный внутренний монолог. Ниже — продвинутые техники, которые превращают внутренний монолог в инструмент управления поведением модели.</p>
+<p>CoT-якоря строятся на фундаменте трёх систем: сенсорные якоря (Part 2) задают физическое воплощение, GHOST-цепочка (Part 4) определяет скрытое напряжение, а базовые принципы CoT (ниже) связывают их в осознанный внутренний монолог. Ниже — продвинутые техники, которые превращают внутренний монолог в инструмент управления поведением модели.</p>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Правило CoT: Не более 2-3 CoT Anchors (поведенческие якоря) на карточку. Перегрузка = анти-паттерн AP-10 (CoT Overload).</p>
+<p><strong>ПРАВИЛО:</strong> Правило CoT: Не более 2-3 CoT-якоря (поведенческие якоря) на карточку. Перегрузка = анти-паттерн AP-10 (CoT Overload).</p>
 
 <p><strong>Почему ограничение:</strong></p>
 <ul>
-<li><strong>Токены:</strong> Каждый CoT Anchor добавляет ~50-80 токенов внутреннего процесса на ответ</li>
-<li><strong>Баланс:</strong> При 3+ CoT Anchors модель тратит >50% ответа на внутренний монолог вместо действий</li>
+<li><strong>Токены:</strong> Каждый CoT-якорь добавляет ~50-80 токенов внутреннего процесса на ответ</li>
+<li><strong>Баланс:</strong> При 3+ CoT-якорях модель тратит >50% ответа на внутренний монолог вместо действий</li>
 <li><strong>Качество:</strong> Перегрузка снижает качество внешней реакции — модель "забывает" реагировать физически</li>
 <li><strong>Утомляемость:</strong> Читатель устаёт от бесконечного внутреннего монолога</li>
 </ul>
 
-<p><strong>Как выбрать 2-3 Anchors:</strong></p>
+<p><strong>Как выбрать 2-3 якоря:</strong></p>
 <ul>
 <li>Выберите 2-3 ключевых триггера, где внутренний процесс критичен</li>
-<li>Остальные триггеры — обычные Anchors без CoT</li>
-<li>Пример: CoT для GHOST-триггеров, обычные Anchors для бытовых реакций</li>
+<li>Остальные триггеры — обычные якоря без CoT</li>
+<li>Пример: CoT для GHOST-триггеров, обычные якоря для бытовых реакций</li>
 </ul>
 </div>
 
 <h3>Зачем нужен CoT</h3>
 <ul>
 <li><strong>Глубина реакции:</strong> Модель понимает, ПОЧЕМУ персонаж реагирует так</li>
-<li><strong>GHOST связь:</strong> Внутренний процесс связывает триггеры с травмой</li>
+<li><strong>Связь с призраком (GHOST):</strong> Внутренний процесс связывает триггеры с травмой</li>
 <li><strong>Уровни сложности CoT:</strong> Tier 0-1 (базовый, все модели) → Tier 2-3 (продвинутый, ≥32B и API) — выбор уровня зависит от возможностей модели</li>
 </ul>
 
@@ -134,9 +134,9 @@
 <section  data-section="p6_cot_tiers" id="p6_cot_tiers" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: CoT Tiers (Tier 0-3) -->
-<h3>Tiers CoT</h3>
+<h3>Уровни CoT (Tiers)</h3>
 
-<p>CoT имеет 4 уровня сложности. <strong>Tier 0 — без отдельного CoT-блока:</strong> Embodiment Protocol (State → Body → Sensor → Speech) действует всегда как микро-цепочка рассуждений (см. <a href="#p2_embodiment">Part 2: Embodiment Protocol</a>) — это baseline, не «модель не думает». <strong>Tier 1+</strong> добавляет явный <code>[INTERNAL]</code>-блок как внутренний монолог сверх Embodiment. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.</p>
+<p>CoT имеет 4 уровня сложности. <strong>Tier 0 — без отдельного CoT-блока:</strong> протокол телесности (Embodiment Protocol, State → Body → Sensor → Speech) действует всегда как микро-цепочка рассуждений (см. <a href="#p2_embodiment">Part 2: протокол телесности</a>) — это baseline, не «модель не думает». <strong>Tier 1+</strong> добавляет явный <code>[INTERNAL]</code>-блок как внутренний монолог сверх телесности. Tier 3 — полный XML-процесс для API моделей. Выбор Tier зависит от размера модели и желаемой глубины внутреннего процесса.</p>
 
 <p>Формат каждого Tier показан выше в VS-EMBED E11 (staircase 4 ступени: Tier 0 → Tier 3, каждая со своим именем, model-pill и concrete-примером нотации). Таблица ниже — какие модели поддерживают каждый Tier и русскоязычный пример для справки (дополняет E11, не дублирует viz-нотацию).</p>
 
@@ -163,7 +163,7 @@
 <p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
 
 <h4>Синтаксис</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>[INTERNAL: {{GHOST-connection}}]
 {{внутренний процесс}}
 [/INTERNAL]
@@ -171,7 +171,7 @@
 {{внешняя реакция}}</code></pre>
 
 <h4>Пример: Елена</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <!-- Demonstrates: EMBODIMENT FIRST, SHOW NEVER TELL, SPINE CAUSALITY -->
 <pre><code>[INTERNAL: Напоминает, как редактор украл её историю]
 Боль в груди. Опять. Всегда, когда кто-то проявляет искренний интерес.
@@ -193,7 +193,7 @@
 <p>Tier 3 использует XML-структуру для полного описания внутреннего процесса.</p>
 
 <h4>Синтаксис</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: {{триггер из сцены}}
@@ -211,7 +211,7 @@ resolution: {{решение — действие персонажа}}
 <p><em>processus_analysium — каноническое имя XML-тега для внутреннего процесса. "Processus" = процесс, "analysium" = анализ. Возможно использование других имён (inner_thought, mental_process), но этот формат протестирован на API моделях (Claude, GPT-4) и показывает стабильные результаты.</em></p>
 
 <h4>Пример: Выщербленный</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <!-- Demonstrates: CONSEQUENCE DRIVEN, EMBODIMENT FIRST, CoT LOGIC -->
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
@@ -231,15 +231,15 @@ resolution: отступить
 <section  data-section="p6_cot_anchors" id="p6_cot_anchors">
 <!-- difficulty: EXPERT -->
 <!-- canonical: CoT Anchors (stimulus/analysis/synthesis/resolution) -->
-<h3>CoT Anchors</h3>
+<h3>CoT-якоря</h3>
 
-<p>CoT Anchor — Anchor, где действие = внутренний процесс.</p>
+<p>CoT-якорь — якорь (Anchor), где действие = внутренний процесс.</p>
 
 <h4>Структура</h4>
 <pre><code>Триггер → [Внутренний процесс] → Внешняя реакция → Цена</code></pre>
 
 <h4>Примеры</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="table-wrap">
 <table>
 <thead>
@@ -253,7 +253,7 @@ resolution: отступить
 </div>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> CoT Overload (AP-10) — больше 3 CoT Anchors. Модель начинает генерировать внутренние монологи вместо действий. → <a href="#p8_ap10_cot_overload">Part 8: AP-10 CoT Overload</a>.</p>
+<p><strong>ПРАВИЛО:</strong> CoT Overload (AP-10) — больше 3 CoT-якоря. Модель начинает генерировать внутренние монологи вместо действий. → <a href="#p8_ap10_cot_overload">Part 8: AP-10 CoT Overload</a>.</p>
 </div>
 
 <p class="bridge-paragraph">Все компоненты спроектированы. Теперь их нужно собрать в единый System Prompt, который модель получает в начале контекста. Порядок сборки, токен-бюджет и модель-специфичные настройки определяют, попадут ли ваши SPINE и CoT к модели. → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>

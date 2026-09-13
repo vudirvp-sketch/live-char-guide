@@ -16,13 +16,13 @@ migration_status: —
 <!-- difficulty: BASIC -->
 <!-- canonical: Elena full card (basic production) -->
 
-~540 токенов (базовые блоки) / ~1000 токенов (с SPINE и FLAW-linked Anchors). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.
+~540 токенов (базовые блоки) / ~1000 токенов (с SPINE и якорями FLAW-linked). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.
 
-**Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.
+**Демонстрирует:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.
 
 **Примечание:** Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Учебный разбор Greeting по 4-шаговому алгоритму (бар, ночь) — `[ref: part_07b.md §7B.2 — Greeting алгоритм]`.
 
-**TEMPLATE:**
+**ШАБЛОН:**
 
 ### Полная карточка Елены с аннотациями
 
@@ -100,7 +100,7 @@ FLAW-linked:
 *ручка всё ещё в руке, готовая вернуться к тексту*
 ```
 
-**Token Budget:** ~540 токенов (базовые) / ~1000 токенов (с SPINE и FLAW-linked Anchors). Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
+**Бюджет токенов:** ~540 токенов (базовые) / ~1000 токенов (с SPINE и якорями FLAW-linked). Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ---
 
@@ -113,9 +113,9 @@ FLAW-linked:
 
 Уолтер Уайт — пример реалистичного современного персонажа. Никаких фэнтези-элементов: химия, деньги, семья. Конфликт WANT/NEED очевиден и психологически достоверен — обеспечение семьи vs. потребность в контроле и признании.
 
-**Demonstrates:** EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.
+**Демонстрирует:** EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.
 
-**TEMPLATE:**
+**ШАБЛОН:**
 
 ### Полная карточка Уолтера Уайта
 
@@ -213,7 +213,7 @@ GHOST-linked:
 *листок переворачивается привычным движением — прежде чем взгляд поднимается*
 ```
 
-**Token Budget:** ~1100 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
+**Бюджет токенов:** ~1100 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ---
 
@@ -224,11 +224,11 @@ GHOST-linked:
 <!-- difficulty: EXPERT -->
 <!-- canonical: Omnis-Zeta 7-Queen full card (expert: GHOST Layers+CoT+Lorebook) -->
 
-~1800 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, GHOST Layers, CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотациями.
+~1800 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, слои призрака (GHOST Layers), CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотациями.
 
-**Demonstrates:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.
+**Демонстрирует:** EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.
 
-**TEMPLATE:**
+**ШАБЛОН:**
 
 ### Полная карточка Омнис-Зета
 
@@ -265,7 +265,7 @@ WANT: Слияние с Омниссией — постичь Машинный �
 NEED: Понимание — разобраться в устройстве неизвестного
 FLAW: Анализирует эмоции органиков как «сбои химической регуляции», предлагает «калибровку» вместо утешения
 LIE: «Эмоция — слабость плоти»
-GHOST: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. (См. Tier 1/2 GHOST Layers ниже для полной хронологии.)
+GHOST: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. (См. слои призрака, Tier 1/2, ниже для полной хронологии.)
 </spine>
 
 <ghost_layers>
@@ -375,7 +375,7 @@ CoT (2 Anchors максимум):
 | `omnis_ghost_first_aug` | первая аугментация, замена, посвящение | GHOST Tier 2: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. С каждой следующей заменой — всё меньше различий. | 5 | 80% |
 | `omnis_ghost_obsolescence` | устаревший, списанный, сервитор, модель, замена | GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию. Если аугментации признают устаревшими — его спишут. Как сломанный сервитор. Как механизм, исчерпавший ресурс. Текущая конфигурация... оптимальна? | 7 | 60% |
 
-**Token Budget:** ~2150 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
+**Бюджет токенов:** ~2150 токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ---
 
@@ -386,11 +386,11 @@ CoT (2 Anchors максимум):
 <!-- difficulty: EXPERT -->
 <!-- canonical: Vyshcherblenny full card (expert: multi-char) -->
 
-~1500+ токенов. GHOST Layers, CoT, Sensory Anchors, XML.
+~1500+ токенов. Слои призрака (GHOST Layers), CoT, сенсорные якоря, XML.
 
-**Demonstrates:** SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.
+**Демонстрирует:** SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.
 
-**TEMPLATE:**
+**ШАБЛОН:**
 
 ### Полная карточка Выщебленного
 
@@ -533,14 +533,14 @@ GHOST-activation: Активен, если в сцене был триггер (
 Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.
 ```
 
-**Token Budget:** ~1500+ токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
+**бюджет токенов:** ~1500+ токенов. Канонический бюджет по блокам → `[ref: part_07a.md §7A.X — Token Budget]`.
 
 ### Lorebook записи (5 шт)
 
 | Название | Key | Content | Depth | Prob | Cooldown |
 |----------|-----|---------|-------|------|----------|
-| **GHOST: Сангвис** | Сангвис, сырой, запах крови, сопротивление | Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение. | 5 | 85% | 5 |
-| **GHOST: имя** | имя, как тебя зовут, кто ты был, архивариус | Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет. | 5 | 80% | 7 |
+| **призрак: Сангвис** | Сангвис, сырой, запах крови, сопротивление | Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение. | 5 | 85% | 5 |
+| **призрак: имя** | имя, как тебя зовут, кто ты был, архивариус | Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет. | 5 | 80% | 7 |
 | **Персонаж: Зеркало** | зеркало, катализатор, заражённая | Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается. | 6 | 80% | 6 |
 | **Система: Вентора** | Вентора, иммунитет, система, замена, гладкий | Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя. | 7 | 70% | 8 |
 | **Счётчик вырезаний** | вырезание, поглощение, цена | После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь». | 4 | 60% | 10 |
@@ -552,9 +552,9 @@ GHOST-activation: Активен, если в сцене был триггер (
 | GHOST → LIE | Травма (распад после инъекции документа) объясняет ложную установку | ✅ |
 | LIE → FLAW | Установка («поглощу и стану цельным») защищает от боли, вызывает поведение | ✅ |
 | FLAW → NEED | Поведение (вырезание) блокирует истинную потребность (принятие утрат) | ✅ |
-| NEED ← WANT | WANT (стать цельным) и NEED (принять пустоту) несовместимы напрямую | ✅ |
-| WANT ↔ LIE | WANT совместим с LIE (персонаж не видит противоречия) | ✅ |
-| GHOST Layers | Каждый tier имеет минимум один Anchor-trigger | ✅ |
+| потребность ← желание (WANT) | желание (стать цельным) и NEED (принять пустоту) несовместимы напрямую | ✅ |
+| WANT ↔ LIE | желание совместим с LIE (персонаж не видит противоречия) | ✅ |
+| Слои призрака (GHOST Layers) | Каждый tier имеет минимум один якорь-триггер | ✅ |
 | Lorebook | GHOST-факты консистентны с Description | ✅ |
 
 

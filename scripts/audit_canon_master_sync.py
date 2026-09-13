@@ -84,7 +84,7 @@ CHECKS = [
     (
         "P0-2",
         "part_07a.html",
-        "Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — cautious zone",
+        "Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — осторожная зона (cautious zone, 30–40 / 60–70), напрямую связаны с дефектом (FLAW) и призраком (GHOST)",
         "Елена OCEAN: extreme poles 3→1 + cautious zone labels (iter 35 P0-2 fix)",
     ),
     # ----- P0-3 / KI#21-A3: G3 row «после 7-го» addition in part_04 -----
@@ -223,7 +223,7 @@ CHECKS = [
     (
         "P0-13",
         "part_10.html",
-        "GHOST: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. (См. Tier 1/2 GHOST Layers ниже для полной хронологии.)",
+        "GHOST: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. (См. слои призрака, Tier 1/2, ниже для полной хронологии.)",
         "part_10 Omnis GHOST: concrete event replacing abstract fear (iter 35 P0-13 fix)",
     ),
     # ----- P0-14 (B1 FLAW): part_10 Omnis FLAW rewrite -----
@@ -244,7 +244,7 @@ CHECKS = [
     (
         "P1-1",
         "part_08.html",
-        "<strong>Критерий broken SPINE</strong> (сохраняется как диагностика): «WANT совместим с NEED — нет конфликта» + FLAW не объяснён через LIE/GHOST.",
+        "<strong>Критерий сломанной SPINE (broken SPINE)</strong> (сохраняется как диагностика): «желание совместимо с потребностью — нет конфликта» + дефект не объяснён через ложь/призрак",
         "part_08 AP-9: Критерий broken SPINE clarification paragraph added (iter 36 P1-1 fix)",
     ),
     # ----- P1-3 (A8): part_08 OCEAN Overload orphan row deleted + footnote -----
@@ -265,7 +265,7 @@ CHECKS = [
     (
         "P1-5",
         "part_04.html",
-        "<h4>Определения типов Anchors</h4>",
+        "<h4>Определения типов якорей</h4>",
         "part_04 §4.8: Anchor type definitions section added (iter 36 P1-5 fix)",
     ),
     # ----- P1-6 (B6): part_06 Tier 0 → Tier 0+ -----
@@ -282,7 +282,7 @@ CHECKS = [
     (
         "P1-7",
         "part_04.html",
-        "<p><strong>Примечание:</strong> В учебном гайде каждый персонаж имеет ОДИН canonical GHOST. У Елены — предательство редактора. Множественная травма (GHOST Layers) — см. Выщербленный §4.11.</p>",
+        "<p><strong>Примечание:</strong> В учебном гайде каждый персонаж имеет ОДИН канонический призрак (GHOST). У Елены — предательство редактора. Множественная травма (слои призрака, GHOST Layers) — см. Выщербленный §4.11.</p>",
         "part_04 §4.2: secondary GHOST row deleted + Примечание added (iter 36 P1-7 fix)",
     ),
     # ----- P1-10 (D4+NEW-2): part_07a Lorebook example пожар → предательство -----
@@ -353,7 +353,7 @@ CHECKS = [
     (
         "P2-1c",
         "part_01.html",
-        "LLM = <strong>Pattern Matcher</strong>, не Исполнитель правил",
+        "LLM = <strong>сопоставитель паттернов (Pattern Matcher)</strong>, не исполнитель правил",
         "part_01 §1.4: bold **Pattern Matcher** in RULE (iter 37 P2-1 fix)",
     ),
     # ----- P2-9 (E6): part_07a Pattern Matcher refs ×2 -----
@@ -374,7 +374,7 @@ CHECKS = [
     (
         "P2-12a",
         "part_03.html",
-        "<strong>Quality Grade</strong> (класс A / B / C) (не путать с CoT Tier 0–3 из Part 6 или GHOST Layers Tier 1–3 из Part 10)",
+        "<strong>Quality Grade</strong> (класс A / B / C) (не путать с CoT Tier 0–3 из Part 6 или слоями призрака Tier 1–3 из Part 10)",
         "part_03 §3.4: Quality Grade A/B/C disambiguation block added (iter 37 P2-12 fix; iter 105 Grade A/B/C → класс A/B/C)",
     ),
     (
@@ -405,7 +405,7 @@ CHECKS = [
     (
         "P2-13",
         "part_04.html",
-        "<p><strong>RULE:</strong> Запрещённые формулировки — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». GHOST = ЧТО произошло, не вывод. Вместо них — конкретное событие: «в 7 лет видел, как дом сгорел, а пожарные не приехали вовремя».</p>",
+        "<p><strong>ПРАВИЛО:</strong> Запрещённые формулировки — это выводы-ярлыки, не события. Примеры запрещённых: «травма», «пережил», «столкнулся с», «пострадал», «испытал». Призрак (GHOST) = ЧТО произошло, не вывод. Вместо них — конкретное событие: «в 7 лет видел, как дом сгорел, а пожарные не приехали вовремя».</p>",
         "part_04 §4.2: «Запрещённые слова» → «Запрещённые формулировки» with examples (iter 37 P2-13 fix)",
     ),
     # ----- P2-14 (F5): part_05 §5.1 Cautious zone definition -----
@@ -470,19 +470,19 @@ CHECKS = [
     (
         "P3-4a",
         "part_01.html",
-        "<p><strong>Cross-ref:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "<p><strong>Ссылка:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_01 §1.4: Cross-ref to Walter §10.2 (realistic modern character) added (iter 38 P3-4 fix)",
     ),
     (
         "P3-4b",
         "part_04.html",
-        "<p><strong>Cross-ref:</strong> Пример простой карточки без GHOST Layers (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "<p><strong>Ссылка:</strong> Пример простой карточки без слоёв призрака (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_04 §4.11: Cross-ref to Walter §10.2 (simple SPINE without GHOST Layers) added (iter 38 P3-4 fix)",
     ),
     (
         "P3-4c",
         "part_09.html",
-        "<p><strong>Cross-ref:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — cautious zone, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "<p><strong>Ссылка:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — осторожная зона, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_09 §9.6: Cross-ref to Walter §10.2 (OCEAN testing example) added (iter 38 P3-4 fix)",
     ),
 
@@ -513,25 +513,25 @@ CHECKS = [
     (
         "P2-7-syn-01",
         "part_01.html",
-        "<p><strong>Synthesis:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (Anchor = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
+        "<p><strong>Синтез:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
         "part_01 §1-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
     (
         "P2-7-syn-04",
         "part_04.html",
-        "<p><strong>Synthesis:</strong> SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без SPINE Anchors — набор случайных правил.</p>",
+        "<p><strong>Синтез:</strong> SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без якорей SPINE — набор случайных правил.</p>",
         "part_04 §4-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
     (
         "P2-7-syn-07a",
         "part_07a.html",
-        "<p><strong>Synthesis:</strong> System Prompt — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
+        "<p><strong>Синтез:</strong> Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
         "part_07a §7A-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
     (
         "P2-7-syn-08",
         "part_08.html",
-        "<p><strong>Synthesis:</strong> 15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (broken SPINE), AP-15 (nested Anchors).</p>",
+        "<p><strong>Синтез:</strong> 15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (сломанная SPINE), AP-15 (вложенные якоря).</p>",
         "part_08 §8-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
 
@@ -548,25 +548,25 @@ CHECKS = [
     (
         "P3-2-elena",
         "part_10.html",
-        "<p><strong>Demonstrates:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>",
+        "<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>",
         "part_10 §10.1 Elena: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
     (
         "P3-2-walter",
         "part_10.html",
-        "<p><strong>Demonstrates:</strong> EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>",
+        "<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>",
         "part_10 §10.2 Walter: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
     (
         "P3-2-omnis",
         "part_10.html",
-        "<p><strong>Demonstrates:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
+        "<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
         "part_10 §10.3 Omnis-Zeta: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
     (
         "P3-2-vysh",
         "part_10.html",
-        "<p><strong>Demonstrates:</strong> SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
+        "<p><strong>Демонстрирует:</strong> SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
         "part_10 §10.4 Vyshcherblenny: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
 
@@ -593,7 +593,7 @@ CHECKS = [
     (
         "KI#34-callout",
         "part_01.html",
-        "<p><strong>RECOMMENDATION:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook».",
+        "<p><strong>РЕКОМЕНДАЦИЯ:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook».",
         "part_01 §1.8 Pre-build checklist: RECOMMENDATION callout (iter 50 KI#34 fix)",
     ),
     # ----- KI#36 (iter 51): id attributes on <section> elements -----

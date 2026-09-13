@@ -1,52 +1,54 @@
 # Терминологический словарь Live Character Guide
 
-**Версия:** 9.2.0
-**Дата:** 2026-07-25 (iter 60 — языковая политика revision)
+**Версия:** 9.2.6
+**Дата:** 2026-09-14 (iter 123 — языковая политика revision, DEC-16)
 **Источник правды:** `docs/canon/*.md` (определения) + этот файл (canonical forms + language policy)
 
 ---
 
 ## 1. Канонические формы терминов
 
-Каноническая форма — единственная допустимая в `data-section` ID, XML-тегах, SP-содержимом и кодоподобных контекстах. В заголовках секций и беглом тексте русский эквивалент допустим как первичный (см. §6).
+Каноническая форма — единственная допустимая в `data-section` ID, XML-тегах, SP-содержимом и кодоподобных контекстах. В прозе и заголовках гайда русский эквивалент — первичный, английская каноническая форма — в скобках при первом упоминании в Part (см. §6).
 
-### Категория A: English mandatory (функциональная причина — входит в SP/card output)
+### Категория A: English в code/ID/SP (исполняемый контент и идентификаторы)
 
-Эти термины попадают в System Prompt карточки или являются кодоподобными идентификаторами. English canonical — единственная допустимая форма в `data-section` ID, XML-тегах, SP-содержимом. Заголовки секций для Category A — тоже English (SP-содержимое).
+Эти термины попадают в System Prompt карточки (в английском варианте SP), являются XML-ключами или идентификаторами полей/параметров. English canonical — единственная допустимая форма в `data-section` ID, XML-тегах и SP-содержимом, когда гайд предписывает английский. В прозе используется русский эквивалент (первичное упоминание: «русский (English)»).
 
-| Канонический термин | Аббр. | ❌ Forbidden in code/ID/SP | Категория |
-|---------------------|-------|---------------------------|-----------|
-| **CORE DIRECTIVES** | CD | ядерные директивы, Core Directives | directive |
-| **System Prompt** | SP | системный промпт, System Prompt block, SP block | parameter |
-| **Anti-godmoding** | — | анти-годмодинг, anti-godmode, godmoding protection | directive |
-| **Format Lock** | — | (без перевода) | technique |
-| **Tone Frame** | — | (без перевода) | technique |
-| **Show Never Tell** | — | показывай не рассказывай, show don't tell | directive |
-| **Embodiment First** | — | воплощение прежде всего | directive |
-| **Spatial & Anatomical Lock** | — | анатомический лок, spatial lock | directive |
-| **Environmental Reactivity** | — | экологическая реактивность, реактивность окружения | directive |
-| **Influence Boundary** | — | граница влияния, boundary of influence | directive |
-| **Consequence Driven** | — | управляемый последствиями, consequences matter | directive |
-| **Pre-Generation Filter** | — | предгенерационный фильтр, pregen filter | directive |
-| **SPINE** | — | Spine, spine chain, SPINE chain, SPINE-цепочка | framework |
-| **GHOST** | — | призрак (в техн. контексте), ghost layer (ед. ч.) | framework |
-| **GHOST Layers** | — | ghost layers, призрачные слои, 3-tier GHOST | framework |
-| **WANT** | — | Хочет (как глоссарийный термин) | framework |
-| **NEED** | — | Нуждается, Нужда | framework |
-| **FLAW** | — | Изъян (как глоссарийный термин) | framework |
-| **LIE** | — | ложная установка (в техн. контексте) | framework |
-| **OCEAN** | — | Big Five, big five, Большая пятёрка | framework |
-| **Enneagram** | — | эннеаграмма (в заголовках/ID/метках) | framework |
-| **MBTI** | — | Myers-Briggs (без перевода) | framework |
-| **CoT** | CoT | цепочка рассуждений (в техн. конт.), Chain of Thought | technique |
-| **Lorebook** | LB | лорбук, World Info, world info | parameter |
-| **Author's Note** | AN | Авторские заметки, Авторка | parameter |
-| **Token Budget** | — | бюджет токенов (в заголовках/метках), token budget allocation | parameter |
-| **Repetition Penalty** | RepPen | штраф за повторы | parameter |
-| **Presence Penalty** | — | штраф за присутствие | parameter |
-| **Top P / Min P / Top K** | — | (без перевода) | parameter |
-| **OOC** | OOC | out of character | diagnostic |
-| **4K-Fallback** | — | (без перевода) | technique |
+| Канонический термин | Русский эквивалент (проза) | ❌ Forbidden in code/ID/SP | Категория |
+|---------------------|------------------------------|---------------------------|-----------|
+| **CORE DIRECTIVES** | основные директивы / директива | ядерные директивы, Core Directives | directive |
+| **System Prompt** | системный промпт (SP) | системный промпт, System Prompt block, SP block | parameter |
+| **Anti-godmoding** | анти-годмодинг | анти-годмодинг, anti-godmode, godmoding protection | directive |
+| **Format Lock** | фиксация формата | (без перевода) | technique |
+| **Tone Frame** | тональный фрейм | (без перевода) | technique |
+| **Show Never Tell** | показывай, не говори | показывай не рассказывай, show don't tell | directive |
+| **Embodiment First** | воплощение прежде всего | воплощение прежде всего | directive |
+| **Spatial & Anatomical Lock** | пространственная и анатомическая фиксация | анатомический лок, spatial lock | directive |
+| **Environmental Reactivity** | реактивность окружения | экологическая реактивность | directive |
+| **Influence Boundary** | граница влияния | boundary of influence | directive |
+| **Consequence Driven** | управление последствиями | управляемый последствиями, consequences matter | directive |
+| **Pre-Generation Filter** | фильтр предгенерации | предгенерационный фильтр, pregen filter | directive |
+| **SPINE** | SPINE (аббр., без перевода) | Spine, spine chain, SPINE chain, SPINE-цепочка | framework |
+| **GHOST** | призрак | призрак (в техн. контексте), ghost layer (ед. ч.) | framework |
+| **GHOST Layers** | слои призрака | ghost layers, призрачные слои, 3-tier GHOST | framework |
+| **WANT** | желание | Хочет (как глоссарийный термин) | framework |
+| **NEED** | потребность | Нуждается, Нужда | framework |
+| **FLAW** | дефект | Изъян (как глоссарийный термин) | framework |
+| **LIE** | ложь | ложная установка (в техн. контексте) | framework |
+| **OCEAN** | OCEAN (аббр., без перевода) | Big Five, big five, Большая пятёрка | framework |
+| **Enneagram** | эннеаграмма | эннеаграмма (в заголовках/ID/метках) | framework |
+| **MBTI** | MBTI (аббр., без перевода) | Myers-Briggs (без перевода) | framework |
+| **CoT** | CoT (аббр., без перевода) | цепочка рассуждений (в техн. конт.), Chain of Thought | technique |
+| **Lorebook** | Lorebook / лорбук | лорбук, World Info, world info | parameter |
+| **Author's Note** | заметка автора (AN) | Авторские заметки, Авторка | parameter |
+| **Token Budget** | бюджет токенов | бюджет токенов (в заголовках/метках), token budget allocation | parameter |
+| **Repetition Penalty** | RepPen (аббр.) | штраф за повторы | parameter |
+| **Presence Penalty** | Presence Penalty (имя параметра) | штраф за присутствие | parameter |
+| **Top P / Min P / Top K** | (имена параметров) | (без перевода) | parameter |
+| **OOC** | OOC (аббр.) | out of character | diagnostic |
+| **4K-Fallback** | 4K-Fallback (имя протокола) | (без перевода) | technique |
+
+> **Колонка «Русский эквивалент (проза)»** — первичная форма для прозы, меток callouts и заголовков гайда (DEC-16). Английская каноническая форма сохраняется в SP-блоках, XML-тегах, `data-section` ID, именах параметров и полей, именах собственных. Русские имена директив №1–7 согласованы с SVG-диаграммой E08 (§7A.2). Аббревиатуры (SP, AN, RepPen, CoT, OOC, CD) в прозе допустимы после первого развёрнутого упоминания.
 
 ### Категория B: Russian primary in headings/prose (нет функциональной причины для English-only)
 
@@ -133,37 +135,41 @@
 
 ---
 
-## 6. Языковая политика (iter 60 revision)
+## 6. Языковая политика (iter 123 revision, DEC-16)
 
 ### Основные правила
 
-1. **Русский — основной язык прозы и заголовков секций.** Все описательные тексты и заголовки на русском.
-2. **English canonical — только в кодоподобных контекстах:** `data-section` ID, XML-теги в card output, SP-содержимое, акронимы (SPINE, OCEAN, SP, CoT).
-3. **Первое упоминание в Part:** русский текст + English canonical в скобках. Пример: «поведенческий якорь (Behavioral Anchor) определяется форматом T→A→P»
-4. **Последующие упоминания в Part:** русский термин или акроним без English. Пример: «каждый якорь задаёт поведение» или «SPINE определяет каркас»
-5. **Заголовки секций:** русский первичный + English canonical в скобках для Category B/C терминов. Category A заголовки — English only (SP-содержимое). `data-section` ID — всегда English.
+1. **Русский — основной язык гайда.** Вся проза, метки callouts, заголовки секций, правила, пояснения и инструктивный текст — на русском. Обычная английская терминология переводится при наличии естественного русского эквивалента (`token → токен`, `lie → ложь`).
+2. **English canonical — только там, где форма технически значима:** `data-section` ID, XML-теги в card output, SP-содержимое (когда гайд предписывает английский), имена полей и параметров, акронимы (SPINE, OCEAN, SP, CoT), машинно-читаемые значения, имена собственные.
+3. **Первое упоминание в Part:** русский термин + English canonical в скобках. Пример: «поведенческий якорь (Behavioral Anchor) определяется форматом T→A→P», «ложь (LIE) защищает от боли призрака (GHOST)».
+4. **Последующие упоминания в Part:** русский термин или аббревиатура без English. Пример: «каждый якорь задаёт поведение» или «SPINE определяет каркас», «ложь объясняет дефект».
+5. **Заголовки секций:** русский первичный + English canonical в скобках (для терминов с канонической английской формой). `data-section` ID — всегда English. Английские заголовки-как-SP-содержимое упразднены (DEC-16).
 6. **Гайд — единый последовательный документ, не википедия.** Читатель идёт сверху вниз. Если концепция объяснена выше — не повторять и не добавлять кросс-референс. Просто использовать концепцию.
+7. **Исполняемые промпт-контейнеры не переводятся:** если гайд предписывает писать блок на английском (SP, `<CORE_DIRECTIVES>`, Tone Frame, карточки-примеры) — контейнер остаётся английским, а рядом даётся русское пояснение/перевод. Язык гайда и язык рекомендуемого промпта — разные слои.
 
 ### Контекстные правила
 
-| Контекст | Category A (SP-содержимое) | Category B (не SP-содержимое) |
-|----------|---------------------------|------------------------------|
-| Заголовок секции | English only: `## CORE DIRECTIVES` | Русский первичный: `## Поведенческие якоря (Behavioral Anchors)` |
+| Контекст | Category A (SP/ID/протокол) | Category B (не SP-содержимое) |
+|----------|------------------------------|-------------------------------|
+| Заголовок секции | Русский первичный: `## Основные директивы (CORE DIRECTIVES)` | Русский первичный: `## Поведенческие якоря (Behavioral Anchors)` |
 | `data-section` ID | English: `p7a_core_directives` | English: `p2_basic_anchors` |
-| Беглый текст | English canonical + RU при первом упоминании | Русский + English canonical при первом упоминании |
-| RULE/RECOMMENDATION label | English (parsing anchor) | English (parsing anchor) |
+| Беглый текст | Русский + English canonical при первом упоминании: «основные директивы (CORE DIRECTIVES)» | Русский + English canonical при первом упоминании |
+| Метка callout | Русская (ПРАВИЛО / РЕКОМЕНДАЦИЯ / ПРИМЕР) | Русская (ПРАВИЛО / РЕКОМЕНДАЦИЯ / ПРИМЕР) |
 | Таблицы заголовки | Русские | Русские |
 | Глоссарий | English canonical + русский перевод | English canonical + русский перевод |
+| Исполняемый промпт-контейнер | English (когда предписан) + русское пояснение рядом | English (когда предписан) + русское пояснение рядом |
 
 ### Примеры
 
 | Контекст | ✅ Правильно | ❌ Неправильно |
 |----------|--------------|----------------|
-| Заголовок (Cat A) | `## CORE DIRECTIVES` | `## Ядерные директивы` |
-| Заголовок (Cat B) | `## Поведенческие якоря (Behavioral Anchors)` | `## Behavioral Anchors` (English only) |
+| Заголовок (Cat A) | `## Основные директивы (CORE DIRECTIVES)` | `## CORE DIRECTIVES` (английский без русского слоя) |
+| Заголовок (Cat B) | `## Поведенческие якоря (Behavioral Anchors)` | `## Behavioral Anchors` (английский только) |
 | `data-section` ID | `data-section="identity-block"` | `data-section="блок-идентичности"` |
 | Первое упоминание (Cat B) | «поведенческий якорь (Behavioral Anchor) задаёт...» | «Behavioral Anchor задаёт...» |
 | Последующее | «каждый якорь задаёт поведение» | «каждый Behavioral Anchor задаёт поведение» |
+| SPINE-элементы в прозе | «ложь (LIE) объясняет дефект (FLAW)», далее «ложь», «дефект» | «LIE объясняет FLAW» (английский без нужды в прозе) |
+| Исполняемый SP-блок | `<CORE_DIRECTIVES>` с английским текстом + русское пояснение директив рядом | Механический перевод текста SP-блока |
 | Беглый текст | «...эннеаграмма типа 4...» | — (допустимо) |
 
 ### Аббревиатуры (после первого упоминания)
@@ -228,4 +234,4 @@
 
 ---
 
-*Источник правды: `docs/canon/*.md`. Updated 2026-07-25 iter 60 — language policy revision: split Category A/B, invert first-mention rule (RU primary + EN canonical), add §6 rule 6 (sequential reader principle), add Category B table with ⚠️ Restricted notation.*
+*Источник правды: `docs/canon/*.md`. Updated 2026-09-14 iter 123 — language policy revision (DEC-16): двухслойная политика (русская проза + английские исполняемые контейнеры/идентификаторы), русские метки callouts, русские эквиваленты в колонке «проза» для Category A, упразднено правило «Category A заголовки — English only». Прежние iter-60 правила: split Category A/B, invert first-mention rule, add §6 rule 6.*

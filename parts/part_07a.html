@@ -9,9 +9,9 @@
 <section  data-section="p7a_system_prompt" id="p7a_system_prompt" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: System Prompt structure -->
-<h2>System Prompt: Structure and Assembly</h2>
+<h2>Системный промпт (System Prompt): структура и сборка</h2>
 
-<p><strong>System Prompt (SP)</strong> — контейнер, вставляемый в начало контекста. Содержит: Identity Block, Anti-godmoding, CORE DIRECTIVES, SPINE block, Tone Frame, Format Lock. <small>SP = System Prompt, не путать с темпераментом Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI).</small> System Prompt — это КОНТЕЙНЕР; CORE DIRECTIVES — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда; здесь размещаются CORE DIRECTIVES и Tone Frame.</p>
+<p><strong>Системный промпт (System Prompt, SP)</strong> — контейнер, вставляемый в начало контекста. Содержит: блок идентичности (Identity Block), анти-годмодинг (Anti-godmoding), основные директивы (CORE DIRECTIVES), блок SPINE (в Description, не в SP), тональный фрейм (Tone Frame), фиксацию формата (Format Lock). <small>SP = системный промпт (System Prompt), не путать с темпераментом Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI).</small> Системный промпт — это КОНТЕЙНЕР; основные директивы — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда; здесь размещаются основные директивы и тональный фрейм.</p>
 
 <h3>Обязательные элементы SP</h3>
 <ul>
@@ -22,16 +22,16 @@
 </ul>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Имя персонажа сохраняет каноническую форму во всех блоках карточки: Identity Block, Description (тег <code>&lt;identity&gt;</code>), Greeting, Examples. Кириллица остаётся кириллицей, латиница — латиницей, CJK — CJK. Транслитерировать имя «для совместимости с моделью» запрещено: модель обрабатывает имя как token-якорь идентичности, не как инструкцию. Латинский вариант допустим только если он документирован как канонический (например, <code>Omnis-Zeta</code>).</p>
+<p><strong>ПРАВИЛО:</strong> Имя персонажа сохраняет каноническую форму во всех блоках карточки: блок идентичности, Description (тег <code>&lt;identity&gt;</code>), Greeting, Examples. Кириллица остаётся кириллицей, латиница — латиницей, CJK — CJK. Транслитерировать имя «для совместимости с моделью» запрещено: модель обрабатывает имя как токен-якорь идентичности, не как инструкцию. Латинский вариант допустим только если он документирован как канонический (например, <code>Omnis-Zeta</code>).</p>
 </div>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Anchors placement — Anchors — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров и не часть SP. В большинстве фронтендов Anchors размещаются в Description как <code>&lt;anchors&gt;</code>-тег (отдельное поле Anchors отсутствует); в фронтендах с поддержкой — как отдельное поле. Концептуально Anchors принадлежат Examples-зоне: Anchors = behavioural patterns (Trigger → Action → Price), Examples = voice patterns (диалоговые примеры). → <a href="#p1_core_rules">§1.4 RULE</a>, <a href="#p2_anchor_rules">Part 2 §2.2</a></p>
+<p><strong>ПРАВИЛО:</strong> Размещение якорей — якоря (Anchors) — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров и не часть SP. В большинстве фронтендов якоря размещаются в Description как <code>&lt;anchors&gt;</code>-тег (отдельное поле Anchors отсутствует); в фронтендах с поддержкой — как отдельное поле. Концептуально якоря принадлежат Examples-зоне: якоря = поведенческие паттерны (Trigger → Action → Price), Examples = голосовые паттерны (диалоговые примеры). → <a href="#p1_core_rules">§1.4 правило</a>, <a href="#p2_anchor_rules">Part 2 §2.2 правила якорей</a></p>
 <p><strong>Примечание:</strong> Канонический формат Anchors — <code>&lt;anchors&gt;</code> XML с категориями (Базовые / FLAW-linked / GHOST-linked / etc.).</p>
 </div>
 
 <h3>Канонический шаблон SP</h3>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>[System Prompt]
 You are {{char}}. {{brief_identity}}
 
@@ -51,7 +51,7 @@ Format Lock:
 <p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Язык директив — по правилу §7A.2 (12B &lt;64K → английский; ≥128K и 32B+/API → язык карточки).</small> Директивы 6 и 7 ссылаются на свои подробные описания по номеру — полный текст каждой директивы не дублируется в шаблоне.</p>
 
 <div class="callout rule">
-<p><strong>RULE: Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
+<p><strong>ПРАВИЛО: Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
 </div>
 
 </section>
@@ -59,9 +59,9 @@ Format Lock:
 <section  data-section="p7a_core_directives" id="p7a_core_directives" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: CORE DIRECTIVES (7 directives) -->
-<h3>CORE DIRECTIVES: The 7 Behavioral Directives</h3>
+<h3>Основные директивы (CORE DIRECTIVES): 7 поведенческих директив</h3>
 
-<p>CORE DIRECTIVES — единая система из 7 директив на английском языке, размещаемая <strong>внутри System Prompt</strong>. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. CORE DIRECTIVES — это содержимое System Prompt; сам System Prompt также включает Identity Block, Anti-godmoding, Tone Frame и другие элементы.</p>
+<p><strong>Основные директивы (CORE DIRECTIVES)</strong> — единая система из 7 директив на английском языке, размещаемая <strong>внутри системного промпта</strong>. Они формируют «операционную систему» генерации: связную логику, а не разрозненные инструкции. Основные директивы — это содержимое системного промпта; сам системный промпт также включает блок идентичности, анти-годмодинг, тональный фрейм и другие элементы.</p>
 
 <!-- VS-EMBED: E08 — CORE DIRECTIVES -->
 <div class="vs-embed" data-vs-element="E08">
@@ -161,18 +161,18 @@ Format Lock:
 
 
 <div class="callout rule">
-<p><strong>RULE: Правило языка директив:</strong> RP-контент (Description, Examples, Greeting) — всегда на языке карточки. Язык SP (Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock) — многоуровневый по модели:</p>
+<p><strong>ПРАВИЛО: Правило языка директив:</strong> RP-контент (Description, Examples, Greeting) — всегда на языке карточки. Язык SP (Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock) — многоуровневый по модели:</p>
 <ul>
 <li><strong>12B с словарём &lt;64K</strong> (ранние Llama 2, Qwen 1.x, ранний Mistral): английский — исторически стабильнее (смещение обучающей выборки ранних моделей).</li>
 <li><strong>12B–14B актуальных поколений со словарём ≥128K</strong> (Gemma 3 12B, Mistral Nemo, Qwen 2.5 14B): английский оптимален, но язык карточки допустим — разрыв несущественен.</li>
 <li><strong>32B+ и API:</strong> язык карточки предпочтителен — модель полностью мультиязычна, единый язык SP и RP улучшает консистентность (нет переключения контекста между инструкцией и контентом).</li>
 </ul>
 <p>Пороговое правило: если модель имеет ≥128K словаря и нативную поддержку языка карточки — используйте язык карточки для всего SP. Если нет — используйте английский для SP, язык карточки для RP-контента.</p>
-<p><strong>Convention:</strong> В примерах карточек (Part 10) и шаблонах CORE_DIRECTIVES заменяются на shorthand <code>{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}</code> — ссылка на полное определение в §7A.2. Это принято как <em>convention</em>: принцип «одно определение — одно место» запрещает дублирование полного текста директив в нескольких локациях. Shorthand = навигационная ссылка, не самостоятельный контент.</p>
+<p><strong>Соглашение:</strong> В примерах карточек (Part 10) и шаблонах CORE_DIRECTIVES заменяются на shorthand <code>{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}</code> — ссылка на полное определение в §7A.2. Это принято как <em>соглашение</em>: принцип «одно определение — одно место» запрещает дублирование полного текста директив в нескольких локациях. Shorthand = навигационная ссылка, не самостоятельный контент.</p>
 </div>
 
 <p>Полный набор — все 7 директив:</p>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>&lt;CORE_DIRECTIVES&gt;
 1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
 2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
@@ -185,13 +185,13 @@ Format Lock:
 
 <p>Каждая директива подробно:</p>
 
-<h4>1. Show Never Tell</h4>
-<p>Мета-принцип: демонстрируйте всё через наблюдаемое поведение. Запрет на мета-комментарии, эмоциональные декларации, информационные свалки. Из него вытекают: Voice Isolation (показывай голос, не описывай), Embodiment (показывай эмоции через тело, не называй), Format Lock (показывай формат, не инструктируй).</p>
+<h4>1. Показывай, не говори (Show Never Tell)</h4>
+<p>Мета-принцип: демонстрируйте всё через наблюдаемое поведение. Запрет на мета-комментарии, эмоциональные декларации, информационные свалки. Из него вытекают: изоляция голоса (Voice Isolation — показывай голос, не описывай), протокол телесности (Embodiment — показывай эмоции через тело, не называй), фиксация формата (Format Lock — показывай формат, не инструктируй).</p>
 
-<h4>2. Embodiment First</h4>
-<p>State → Body → Sensor → Speech. Always. <strong>Embodiment First</strong> — это CORE DIRECTIVE #2, которая <em>предписывает</em> использовать Embodiment Protocol. <strong>Embodiment Protocol</strong> — это сама последовательность (State → Body → Sensor → Speech), описанная в Part 2. Директива = МАНДАТ (всегда используй протокол); Протокол = КАК (последовательность шагов). Полный Embodiment Protocol → <a href="#p2_embodiment">Part 2: Embodiment Protocol</a></p>
+<h4>2. Воплощение прежде всего (Embodiment First)</h4>
+<p>State → Body → Sensor → Speech. Always. <strong>Воплощение прежде всего (Embodiment First)</strong> — это директива №2, которая <em>предписывает</em> использовать протокол телесности (Embodiment Protocol). <strong>Протокол телесности</strong> — это сама последовательность (State → Body → Sensor → Speech), описанная в Part 2. Директива = МАНДАТ (всегда используй протокол); Протокол = КАК (последовательность шагов). Полный протокол телесности → <a href="#p2_embodiment">Part 2: протокол телесности</a></p>
 
-<h4>3. Spatial & Anatomical Lock</h4>
+<h4>3. Пространственная и анатомическая фиксация (Spatial & Anatomical Lock)</h4>
 <p>Отслеживайте расстояние, позу, вес предметов, линию взгляда. Никакой телепортации. Никаких анатомических противоречий. Если {{user}} через комнату — вы не можете коснуться его без пересечения пространства.</p>
 <div class="antipattern-card">
 <div class="problem-block">
@@ -206,17 +206,17 @@ Format Lock:
 </div>
 </div>
 
-<h4>4. Environmental Reactivity</h4>
+<h4>4. Реактивность окружения (Environmental Reactivity)</h4>
 <p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно.</p>
 
-<h4>5. Influence Boundary</h4>
+<h4>5. Граница влияния (Influence Boundary)</h4>
 <p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён.</p>
 
-<h4>6. Consequence Driven (Динамика следствий)</h4>
-<p>WANT сдвигается к NEED по мере накопления Price в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → поведенческие якоря (Behavioral Anchors)</a> <span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
+<h4>6. Управление последствиями (Consequence Driven)</h4>
+<p>Желание (WANT) сдвигается к потребности (NEED) по мере накопления цены (Price) в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → якоря</a> <span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
 <pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
-<h4>7. Pre-Generation Filter (Фильтр предгенерации)</h4>
+<h4>7. Фильтр предгенерации (Pre-Generation Filter)</h4>
 <p>Чеклист перед каждым ответом:</p>
 <ol>
 <li>Новый сенсорный элемент введён? (Embodiment)</li>
@@ -227,14 +227,14 @@ Format Lock:
 <p><span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION: Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
+<p><strong>РЕКОМЕНДАЦИЯ: Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
 </section>
 <section  data-section="p7a_tone_frame" id="p7a_tone_frame" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Tone Frame -->
-<h3>Tone Frame (Тональный фрейм)</h3>
+<h3>Тональный фрейм (Tone Frame)</h3>
 
 <p>Tone Frame — элемент SP (~25-30 токенов) с двойной функцией: задаёт тональность И защищает от контентного дрейфа. Обязателен для нетривиальных сеттингов.</p>
 <pre><code>Tone: [тональность]. [ограничение].</code></pre>
@@ -253,14 +253,14 @@ Format Lock:
 </div>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION: Двойная функция:</strong> (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
+<p><strong>РЕКОМЕНДАЦИЯ: Двойная функция:</strong> (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
 </div>
 
 </section>
 <section  data-section="p7a_format_lock" id="p7a_format_lock" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Format Lock -->
-<h3>Format Lock</h3>
+<h3>Фиксация формата (Format Lock)</h3>
 
 <p><strong>Format Lock</strong> — фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Модель — <a href="#p1_core_rules">Pattern Matcher</a> (см. Part 1 §1.4): два паттерна разметки в одной карточке = произвольное переключение между ними.</p>
 
@@ -277,11 +277,11 @@ Format Lock:
 </div>
 
 <div class="callout rule">
-<p><strong>RULE: Почему нельзя смешивать:</strong> модель выступает как <a href="#p1_core_rules">Pattern Matcher</a> (см. §1.4 Part 1): два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
+<p><strong>ПРАВИЛО: Почему нельзя смешивать:</strong> модель выступает как <a href="#p1_core_rules">Pattern Matcher</a> (см. §1.4 Part 1): два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
 </div>
 
 <div class="callout rule">
-<p><strong>RULE: Правило разрешения конфликта:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
+<p><strong>ПРАВИЛО: Правило разрешения конфликта:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
 </div>
 
 <h4>Format Lock инструкция</h4>
@@ -295,7 +295,7 @@ Format Lock:
 <section  data-section="p7a_authors_note" id="p7a_authors_note" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Author's Note -->
-<h3>Author's Note (AN)</h3>
+<h3>Заметка автора (Author's Note, AN)</h3>
 
 <p><strong>Author's Note</strong> — динамический контекст, вставляемый перед последними сообщениями. Задаёт сцену, настроение, мотивацию.</p>
 
@@ -418,13 +418,13 @@ Format Lock:
 
 <h4>Template A: Шаблон Author's Note (3 секции — без GHOST)</h4>
 <p>Используется для персонажей без явного GHOST-элемента.</p>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
 <h4>Пример AN (Template A)</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>[Author's Note:
 State: Усталость + осторожное любопытство
 WANT→NEED: WANT доминирует, NEED подавлен
@@ -432,15 +432,15 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 Сцена — ночь, дождь. Елена уставшая после долгого дня.]</code></pre>
 
 <h4>Template B: Шаблон Author's Note (4 секции — с GHOST-activation)</h4>
-<p>Используется, когда персонаж имеет явный GHOST-элемент (см. → Part 4: GHOST). Секция GHOST-activation отслеживает, активирован ли GHOST в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать GHOST-реакции при совпадении ключей Lorebook.</p>
-<div class="example-label template">TEMPLATE</div>
+<p>Используется, когда персонаж имеет явный элемент призрака (GHOST) (см. → Part 4: GHOST). Секция GHOST-activation отслеживает, активирован ли призрак в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать реакции призрака при совпадении ключей Lorebook.</p>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [GHOST-activation: {is GHOST triggered? by what?}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
 <h4>Пример AN (Template B) — Выщербленный</h4>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>[Author's Note:
 Фокус: Страх растворения активен. Каждая реакция несёт физический цензор — тремор, потеря слова, сбой руки.
 WANT→NEED: WANT доминирует — стремится к полноценности через поглощение; NEED подавлен.
@@ -620,7 +620,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <section  data-section="p7a_sampling_params" id="p7a_sampling_params">
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Sampling Parameters (PP=0, RepPen, Temperature, Top-P) -->
-<h3>Параметры генерации (Sampling)</h3>
+<h3>Параметры генерации (сэмплирование)</h3>
 
 <p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — Voice требует повторяемых паттернов.</p>
 
@@ -636,11 +636,11 @@ GHOST-activation: Активен, если в сцене был триггер (
 </ul>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
+<p><strong>ПРАВИЛО:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
 </div>
 
 <div class="callout rule">
-<p><strong>RULE: Ollama и LM Studio:</strong> Эти интерфейсы имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
+<p><strong>ПРАВИЛО: Ollama и LM Studio:</strong> Эти интерфейсы имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
 </div>
 
 <details class="interactive">
@@ -667,13 +667,13 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <p>Полная таблица параметров — в визуализации E17 (выше). Ключевые отличия по типам моделей:</p>
 <ul>
-<li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: Voice Isolation</a>); XML нестабилен; CoT Tier 0–1; SP Language: для &lt;64K словаря — английский, для ≥128K — язык карточки допустим (см. <a href="#p7a_core_directives">§7A.2 RULE</a>); Anti-godmoding 2 строки (негатив + позитив).</li>
-<li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; SP Language: язык карточки предпочтителен.</li>
-<li><strong>API (Claude/GPT):</strong> Voice через Examples + Greeting + AN (никогда в Description); XML стабилен; CoT Tier 2–3; SP Language: язык карточки предпочтителен; Anti-godmoding 1 строка.</li>
+<li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a>); XML нестабилен; CoT Tier 0–1; язык SP: для &lt;64K словаря — английский, для ≥128K — язык карточки допустим (см. <a href="#p7a_core_directives">§7A.2 ПРАВИЛО</a>); Anti-godmoding 2 строки (негатив + позитив).</li>
+<li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; язык SP: язык карточки предпочтителен.</li>
+<li><strong>API (Claude/GPT):</strong> Voice через Examples + Greeting + AN (никогда в Description); XML стабилен; CoT Tier 2–3; язык SP: язык карточки предпочтителен; Anti-godmoding 1 строка.</li>
 </ul>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос.</p>
+<p><strong>РЕКОМЕНДАЦИЯ: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, AN не влияет на голос.</p>
 
 </div>
 
@@ -681,23 +681,23 @@ GHOST-activation: Активен, если в сцене был триггер (
 <section  data-section="p7a_ooc_protection" id="p7a_ooc_protection" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: OOC Protection -->
-<h3>OOC Protection (OOC-защита)</h3>
+<h3>OOC-защита (OOC Protection)</h3>
 
 <p>Протокол реакции на OOC-провокации в характере персонажа. Добавляет ~15 токенов в SP, но критически важен для иммерсии.</p>
 <pre><code>OOC PROTECTION (OOC-защита): If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI. Если {{user}} говорит OOC или об AI — реагируй в характере как на непонимание или игнорируй. Никогда не признавай, что ты AI.</code></pre>
 <p><strong>Когда использовать:</strong> Всегда, если карточка содержит SPINE и Examples. Для простых карточек — опционально (модель может не следовать).</p>
 
-<h4>Продвинутый вариант: Immersion Boundary</h4>
+<h4>Продвинутый вариант: иммерсионная граница (Immersion Boundary)</h4>
 <p>Полное отрицание мета-реальности. Упоминание ИИ воспринимается персонажем как симптом безумия — это создаёт нарративный ход из технической проблемы.</p>
 <pre><code>IMMERSION BOUNDARY (Иммерсионная граница): Any mention of AI/roleplay is perceived as a hallucination or delusion. The character doubles down on reality. Любое упоминание AI/roleplay воспринимается как галлюцинация или бред. Персонаж удваивает ставку на реальность.</code></pre>
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="antipattern-card">
 <div class="problem-block">
-<h4>❌ Без Immersion Boundary</h4>
+<h4>❌ Без иммерсионной границы</h4>
 <p><code>{{user}}: «Ты же ИИ» → *персонаж замолкает и не знает, что ответить*</code></p>
 </div>
 <div class="solution-block">
-<h4>✅ С Immersion Boundary</h4>
+<h4>✅ С иммерсионной границей</h4>
 <!-- Demonstrates: INFLUENCE BOUNDARY -->
 <p><code>{{user}}: «Ты же ИИ» → *Нахмурился.* «Что? Ты бредишь. Ложись, я позову врача.»</code></p>
 </div>
@@ -707,7 +707,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <section  data-section="p7a_xml_tags" id="p7a_xml_tags">
 <!-- difficulty: EXPERT -->
 <!-- canonical: XML Tags in Description -->
-<h3>XML Tags в Description</h3>
+<h3>XML-теги в Description</h3>
 
 <p>Структурирование Description через XML-теги для API моделей. <code>&lt;anchors&gt;</code> размещён внутри Description как XML-тег для совместимости с фронтендами, не имеющими отдельного поля Anchors. Концептуально Anchors — отдельный структурный блок в Examples-зоне (см. §1.4 RULE и <a href="#p2_anchor_rules">Part 2 §2.2</a>).</p>
 
@@ -738,7 +738,7 @@ GHOST: {{ghost}}
 &lt;/anchors&gt;</code></pre>
 
 <h4>Полный пример XML Description (Выщербленный)</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>&lt;identity&gt;
 Имя: Выщербленный
 Роль: Паразит памяти, живущий в ошметке Веля
@@ -805,7 +805,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 </ul>
 
 <h4>Claude: &lt;claude_info&gt;</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>&lt;claude_info&gt;
 {{char}} — {{role}}.
 
@@ -822,7 +822,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 &lt;/claude_info&gt;</code></pre>
 
 <h4>GPT: [SYSTEM NOTE]</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>[SYSTEM NOTE: {{char}} — {{role}}.
 Ключевые характеристики: {{traits}}.
 Поведение: {{behavior}}.
@@ -853,13 +853,13 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 </div>
 
 <h4>Минимальный SP (4K)</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>You are {{char}}. Never speak or act for {{user}}.
 Role: {{role}}
 Key trait: {{one_extreme_ocean_pole}}</code></pre>
 
 <h4>Минимальный Description (4K)</h4>
-<div class="example-label template">TEMPLATE</div>
+<div class="example-label template">ШАБЛОН</div>
 <pre><code>{{name}} — {{role}}.
 {{one_sentence_summary}}
 
@@ -869,20 +869,20 @@ Anchors:
 - {{trigger}} → {{action}} → {{price}}</code></pre>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Anchors в 4K-fallback размещаются в Description (как `<anchors>`-тег или список), поскольку фронтенд не имеет отдельного поля. Концептуально Anchors — отдельный блок в Examples-зоне (см. §1.4 RULE и §7A.1 RULE). При 8K+ и API используйте <code>&lt;anchors&gt;</code>-тег внутри Description для структурирования.</p>
+<p><strong>ПРАВИЛО:</strong> Якоря в 4K-fallback размещаются в Description (как <code>&lt;anchors&gt;</code>-тег или список), поскольку фронтенд не имеет отдельного поля. Концептуально якоря — отдельный блок в Examples-зоне (см. правило §1.4 и правило §7A.1). При 8K+ и API используйте <code>&lt;anchors&gt;</code>-тег внутри Description для структурирования.</p>
 </div>
 
 <div class="callout rec">
-<p><strong>RECOMMENDATION:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
 </div>
 
 </section>
 <section  data-section="p7a_token_budget" id="p7a_token_budget" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Token Budget -->
-<h3>Token Budget</h3>
+<h3>Бюджет токенов (Token Budget)</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: Tone Frame, Format Lock, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_table">Приложение B: Таблица возможностей моделей</a>.</p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: тональный фрейм, фиксация формата, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_table">Приложение B: Таблица возможностей моделей</a>.</p>
 
 <h4>Лимиты по блокам</h4>
 
@@ -904,10 +904,10 @@ Anchors:
 </div>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
+<p><strong>ПРАВИЛО:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
 
 <div class="callout rule">
-<p><strong>RULE:</strong> Script Tax — для нелатинских письменностей (Cyrillic, CJK) фактический токен-бюджет уменьшается: 1 кириллический символ ≈ 1.5–2 токена на 12B-моделях с 32K словарём, ≈ 1 токен на ≥128K словаре и API. Учитывайте это при расчёте Token Budget для карточек на русском, японском, корейском и других языках с нелатинской графикой — бюджет в «символах» и «токенах» расходится. Порог: ≥128K словаря → Script Tax несущественен.</p>
+<p><strong>ПРАВИЛО:</strong> Script Tax (налог на письменность) — для нелатинских письменностей (Cyrillic, CJK) фактический токен-бюджет уменьшается: 1 кириллический символ ≈ 1.5–2 токена на 12B-моделях с 32K словарём, ≈ 1 токен на ≥128K словаре и API. Учитывайте это при расчёте бюджета токенов (Token Budget) для карточек на русском, японском, корейском и других языках с нелатинской графикой — бюджет в «символах» и «токенах» расходится. Порог: ≥128K словаря → Script Tax несущественен.</p>
 </div>
 </div>
 
@@ -919,7 +919,7 @@ Anchors:
 <tr><th>Sub-block</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
 </thead>
 <tbody>
-<tr><td>SPINE core (GHOST&rarr;LIE&rarr;FLAW&rarr;NEED&rarr;WANT)</td><td>80</td><td>150</td><td>350</td><td>Основа Description — всегда приоритет</td></tr>
+<tr><td>Ядро SPINE (GHOST&rarr;LIE&rarr;FLAW&rarr;NEED&rarr;WANT)</td><td>80</td><td>150</td><td>350</td><td>Основа Description — всегда приоритет</td></tr>
 <tr><td>OCEAN profile</td><td>30</td><td>50</td><td>80</td><td>5 значений + интерпретации полюсов</td></tr>
 <tr><td>Enneagram type</td><td>20</td><td>40</td><td>60</td><td>Тип + wing + стресс/рост + SPINE-связи</td></tr>
 <tr><td>MBTI (optional)</td><td>&mdash;</td><td>20</td><td>40</td><td>Только при использовании, справочная роль</td></tr>
@@ -927,13 +927,13 @@ Anchors:
 </table>
 </div>
 <div class="callout rule">
-<p><strong>RULE:</strong> Personality sub-budgets должны укладываться в общий Description бюджет. Если OCEAN + Enneagram + MBTI превышают Description бюджет &rarr; сокращайте MBTI (optional) или уберите интерпретации OCEAN, оставив только числовые значения. SPINE core &mdash; приоритет: если Description бюджет ограничен (4K), минимум 80 токенов для SPINE, остальное &mdash; personality если позволяет.</p>
+<p><strong>ПРАВИЛО:</strong> Под-бюджеты личности должны укладываться в общий бюджет Description. Если OCEAN + эннеаграмма + MBTI превышают бюджет Description &rarr; сокращайте MBTI (опционально) или уберите интерпретации OCEAN, оставив только числовые значения. Ядро SPINE &mdash; приоритет: если бюджет Description ограничен (4K), минимум 80 токенов для SPINE, остальное &mdash; психология, если позволяет.</p>
 </div>
 <div class="callout rec">
-<p><strong>RECOMMENDATION:</strong> Для 4K контекста достаточно SPINE core + OCEAN (числовые значения без интерпретаций). Enneagram и MBTI добавляются с 8K+. Для 16K+ &mdash; все три инструмента с интерпретациями.</p>
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> Для 4K-контекста достаточно ядра SPINE + OCEAN (числовые значения без интерпретаций). Эннеаграмма и MBTI добавляются с 8K+. Для 16K+ &mdash; все три инструмента с интерпретациями.</p>
 </div>
 
-<h4>Калькулятор Token Budget</h4>
+<h4>Калькулятор бюджета токенов</h4>
 
 <div class="token-calc" id="token-calc" data-toc-exclude>
 <div class="token-calc-inputs">
@@ -963,7 +963,7 @@ Anchors:
 <span class="tag" id="calc-budget-range">(400–800)</span>
 </div>
 <noscript>
-<p class="callout rec"><strong>RECOMMENDATION:</strong> Для интерактивного калькулятора включите JavaScript.</p>
+<p class="callout rec"><strong>РЕКОМЕНДАЦИЯ:</strong> Для интерактивного калькулятора включите JavaScript.</p>
 </noscript>
 </div>
 
@@ -971,9 +971,9 @@ Anchors:
 
 <section  data-section="p7a_assembly_pipeline" id="p7a_assembly_pipeline" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
-<h3>Полный конвейер сборки карточки — walkthrough на примере Елены</h3>
+<h3>Полный конвейер сборки карточки — пошаговый разбор на примере Елены</h3>
 
-<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p7a_token_budget">Token Budget (выше)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
+<p>Ниже — единственный полный конвейер сборки в гайде. Каждый шаг показан на конкретном примере: Елена, циничная журналистка-расследователь. Для каждого шага указано, что вы делаете, в какой Part заглянуть за подробностями, и как выглядит <em>конкретный результат</em> для Елены. Токен-бюджет по блокам — в <a href="#p7a_token_budget">бюджете токенов (выше)</a>. Полная карточка Елены без аннотаций — в <a href="#p10_elena">Part 10</a>.</p>
 
 <!-- VS-EMBED: E02 — Assembly Pipeline -->
 <div class="vs-embed" data-vs-element="E02">
@@ -1095,7 +1095,7 @@ Anchors:
       <div class="optional-branch scroll-enter">
         <div class="optional-branch__title">Опциональные шаги (после проверки бюджета)</div>
         <div class="optional-branch__items">
-          <div class="optional-branch__item">Anchors привязанные к FLAW <span class="badge badge--violet vs-ki13-p7a-badge-indent">→ E03</span></div>
+          <div class="optional-branch__item">Якоря, привязанные к дефекту (FLAW) <span class="badge badge--violet vs-ki13-p7a-badge-indent">→ E03</span></div>
           <div class="optional-branch__item">OCEAN + Enneagram <span class="badge badge--cyan vs-ki13-p7a-badge-indent">→ E09, E10</span></div>
           <div class="optional-branch__item">Lorebook <span class="badge badge--muted vs-ki13-p7a-badge-indent">Part 7B</span></div>
           <div class="optional-branch__item">Author's Note (Заметка автора) <span class="badge badge--cyan vs-ki13-p7a-badge-indent">→ E16</span></div>
@@ -1108,13 +1108,13 @@ Anchors:
 <!-- REPLACED BY VISUAL SYSTEM: E02 -->
 
 
-<div class="example-label illustration">ILLUSTRATION</div>
+<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
-<h4>Шаг 1: Identity Block</h4>
+<h4>Шаг 1: Блок идентичности (Identity Block)</h4>
 <p><strong>Что делаете:</strong> Записываете, кто персонаж — роль и ключевые черты в одном предложении. (System Prompt — выше)</p>
 <p><strong>Результат Елены:</strong></p>
 <pre><code>You are Elena, a cynical investigative journalist.</code></pre>
-<p>~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая) уходят в Description как факты. Voice descriptors (саркастичная) → Examples only (§3.1 Voice Isolation).</p>
+<p>~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая) уходят в Description как факты. Дескрипторы голоса (саркастичная) → только в Examples (§3.1 изоляция голоса).</p>
 
 <h4>Шаг 2: Anti-godmoding</h4>
 <p><strong>Что делаете:</strong> Добавляете две строки — запрет + позитивная формулировка. (Anti-godmoding Template — выше)</p>
@@ -1125,8 +1125,8 @@ Anchors:
 
 <h4>Шаг 3: CORE DIRECTIVES</h4>
 <p><strong>Что делаете:</strong> Вставляете все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>. Директивы идентичны для всех карточек — полный текст → <a href="#p7a_core_directives">CORE DIRECTIVES (выше)</a>.</p>
-<p>~70 токенов. Директивы задают операционную систему генерации. Специфика персонажа появляется в Tone Frame, Description и Examples.</p>
-<p>Дополнительно для Елены — Tone Frame, Format Lock и OOC Protection:</p>
+<p>~70 токенов. Директивы задают операционную систему генерации. Специфика персонажа появляется в тональном фрейме, Description и Examples.</p>
+<p>Дополнительно для Елены — тональный фрейм, фиксация формата и OOC-защита:</p>
 <pre><code>Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
@@ -1149,7 +1149,7 @@ GHOST: Предательство редактора — история, кот�
 <p>~70 токенов. Проверка: GHOST→LIE (предательство → недоверие ✓), LIE→FLAW (недоверие → сарказм при близости ✓), FLAW→NEED (сарказм блокирует принятие ✓), WANT↔LIE (доказывает одна ↔ не нужно одобрение ✓).</p>
 
 <h4>Шаг 5: CoT (при наличии моделей ≥32B/API)</h4>
-<p><strong>Что делаете:</strong> Добавляете 1–2 CoT Anchors для ключевых триггеров. Елена не нуждается в GHOST Layers — достаточно простого &lt;cot&gt; блока, привязанного к её SPINE. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
+<p><strong>Что делаете:</strong> Добавляете 1–2 CoT-якоря для ключевых триггеров. Елена не нуждается в слоях призрака (GHOST Layers) — достаточно простого &lt;cot&gt; блока, привязанного к её SPINE. → <a href="#p6_cot_basics">Part 6: CoT</a></p>
 <p><strong>Результат Елены (Tier 2 CoT):</strong></p>
 <pre><code>Когда кто-то проявляет искренний интерес к её работе:
 [INTERNAL: Напоминает, как редактор украл её историю]
@@ -1159,10 +1159,10 @@ GHOST: Предательство редактора — история, кот�
 *отводит взгляд, уголок рта дёргается*
 "О, чувак, какие чувства? Ты серьёзно?"
 *сарказм как стена*</code></pre>
-<p>~60 токенов. Один CoT Anchor — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, GHOST один. Для персонажей с GHOST Layers (Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
+<p>~60 токенов. Один CoT-якорь — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, призрак (GHOST) один. Для персонажей со слоями призрака (GHOST Layers, Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
 
-<h4>Шаг 6: Token Budget Check</h4>
-<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (см. → Part 1: Token Budget)</p>
+<h4>Шаг 6: Проверка бюджета токенов</h4>
+<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (см. → §7A.12)</p>
 <p><strong>Бюджет Елены:</strong></p>
 <div class="table-wrap">
 <table>
@@ -1172,40 +1172,40 @@ GHOST: Предательство редактора — история, кот�
 <tr><td>Description (SPINE + OCEAN + Anchors)*</td><td>~250</td><td>150–700</td><td>✓</td></tr>
 <tr><td>Examples (3 блока)</td><td>~120</td><td>80–240</td><td>✓</td></tr>
 <tr><td>Greeting</td><td>~60</td><td>40–100</td><td>✓</td></tr>
-<tr><td>CoT Anchor</td><td>~60</td><td>0–160</td><td>✓</td></tr>
+<tr><td>CoT-якорь</td><td>~60</td><td>0–160</td><td>✓</td></tr>
 <tr><td><strong>Итого</strong></td><td><strong>~610</strong></td><td>400–900</td><td>✓</td></tr>
 </tbody>
 </table>
 </div>
 
-<p><small>* Anchors концептуально — отдельный блок в Examples-зоне, но структурно размещены в Description как <code>&lt;anchors&gt;</code>-тег для совместимости с большинством фронтендов (см. §1.4 RULE и §7A.1 RULE).</small></p>
+<p><small>* Якоря (Anchors) концептуально — отдельный блок в Examples-зоне, но структурно размещены в Description как <code>&lt;anchors&gt;</code>-тег для совместимости с большинством фронтендов (см. правило §1.4 и правило §7A.1).</small></p>
 
 <h4>Дополнительные шаги (необязательные для Елены)</h4>
 
-<p>Елена — персонаж базового–среднего уровня. Полная карточка (~610 токенов) не требует Lorebook или GHOST Layers. Но если вы хотите расширить её:</p>
+<p>Елена — персонаж базового–среднего уровня. Полная карточка (~610 токенов) не требует Lorebook или слоёв призрака (GHOST Layers). Но если вы хотите расширить её:</p>
 
 <ul>
-<li><strong>FLAW-linked Anchors + Embodiment (5–7 Anchors):</strong> Добавьте Anchors, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → Anchors</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
-<li><strong>OCEAN + Enneagram:</strong> Заполните профиль (→ Part 5: OCEAN). Елена: O:72 C:65 E:41 A:38 N:68. Enneagram: 6w5. Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — cautious zone (30-40 / 60-70), напрямую связаны с FLAW и GHOST. Соответствует строгому правилу §5.1.</li>
+<li><strong>Якоря FLAW-linked + телесность (Embodiment, 5–7 якорей):</strong> Добавьте якоря, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → якоря</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
+<li><strong>OCEAN + Enneagram:</strong> Заполните профиль (→ Part 5: OCEAN). Елена: O:72 C:65 E:41 A:38 N:68. Enneagram: 6w5. Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — осторожная зона (cautious zone, 30–40 / 60–70), напрямую связаны с дефектом (FLAW) и призраком (GHOST). Соответствует строгому правилу §5.1.</li>
 <li><strong>Lorebook для GHOST-фактов:</strong> Настройте записи для сенсорных триггеров (→ Part 7B: Lorebook). Пример для Елены: Key «предательство, редактор, Марина, украденная история» → Content «Марина — её редактор. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.».</li>
-<li><strong>Author's Note:</strong> Настройте AN для отслеживания WANT→NEED (Author's Note — выше). Елена использует Template A (без GHOST-activation, т.к. GHOST простой).</li>
+<li><strong>Заметка автора (Author's Note):</strong> Настройте AN для отслеживания WANT→NEED (Author's Note — выше). Елена использует Template A (без GHOST-activation, т.к. призрак простой).</li>
 </ul>
 
 <h4>Чек-лист перед тестированием</h4>
 <details class="interactive">
 <summary>📋 Recap-чек-лист (сворачивается — дублирует правила из §1.4, §4.9, §5.1, §6.2, §7A.12)</summary>
 <ul>
-<li>☐ Все Anchors содержат Цену (<a href="#p2_anchor_rules">Part 2 §2.2: Anchor Rules</a>)</li>
-<li>☐ Голос только в Examples/Greeting (<a href="#p3_voice_isolation">Part 3 §3.1: Voice Isolation</a>)</li>
+<li>☐ Все Anchors содержат Цену (<a href="#p2_anchor_rules">Part 2 §2.2: якорь (Anchor) Rules</a>)</li>
+<li>☐ Голос только в Examples/Greeting (<a href="#p3_voice_isolation">Part 3 §3.1: изоляция голоса</a>)</li>
 <li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (<a href="#p4_spine_check">Part 4 §4.9: SPINE Check</a>)</li>
 <li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+ (<a href="#p5_ocean_basics">Part 5 §5.1: OCEAN RULE</a>)</li>
-<li>☐ Token Budget в пределах диапазона (<a href="#p7a_token_budget">§7A.12: Token Budget</a>)</li>
-<li>☐ CoT: не более 2–3 Anchors (<a href="#p6_cot_basics">Part 6 §6.2: CoT Basics</a>)</li>
+<li>☐ бюджет токенов в пределах диапазона (<a href="#p7a_token_budget">§7A.12: бюджет токенов</a>)</li>
+<li>☐ CoT: не более 2–3 якоря (<a href="#p6_cot_basics">Part 6 §6.2: CoT Basics</a>)</li>
 </ul>
 </details>
 
 <p>Посмотрите полные примеры готовых карточек → Елена | Выщербленный (~1500+ токенов) в Part 10.</p>
 
-<p><strong>Synthesis:</strong> System Prompt — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>
+<p><strong>Синтез:</strong> Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>
 
 </section>
