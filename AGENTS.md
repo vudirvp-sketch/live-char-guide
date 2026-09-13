@@ -89,7 +89,7 @@ the current task requires them.
 | Task type | Read before starting |
 |-----------|----------------------|
 | Trivial (typo, single value) | `STATUS.md` |
-| Content / canon change | `STATUS.md` → `docs/canon/part_NN.md` (source of truth) → open `src/master/part_NN.html` only to edit |
+| Content / canon change | `STATUS.md` → Editorial Policy (this file, below the hard fences) → `docs/canon/part_NN.md` (source of truth) → open `src/master/part_NN.html` only to edit |
 | Widget / component | `STATUS.md` → `AGENT_NAVIGATION.md` §4 (widget architecture) → `docs/components.md` → the target widget's JS |
 | CSS / visual system | `STATUS.md` → `AGENT_NAVIGATION.md` §5–§6 → `docs/components.md` |
 | Build / deploy / CI | `STATUS.md` → `AGENT_NAVIGATION.md` §2 (pipeline) → relevant `scripts/` + `.github/workflows/` |
@@ -154,6 +154,46 @@ python3 scripts/audit_canon_master_drift.py   # informational, exit 0
 10. **Canon sync:** `docs/canon/part_NN.md` = single source of truth. `src/master/part_NN.html` = production HTML derived from canon. Audit: `python3 scripts/audit_canon_master_sync.py` (MUST PASS). Drift detector: `python3 scripts/audit_canon_master_drift.py` (informational).
 11. **Cross-references (IMP-48):** when section A references section B, B MUST back-link to A. One canonical definition per concept; everywhere else = 1-sentence link.
 12. **Language convention:** CORE DIRECTIVES block in English (12B models follow English ~15–20% more reliably). Guide prose explaining them: Russian. Callout labels (`RULE`, `RECOMMENDATION`, `EXAMPLE`, `TEMPLATE`, `Bridge`, `Synthesis`, `Cross-ref`, `Demonstrates`): English semantic anchors. Callout bodies: Russian. Local clarifications: `**Примечание:**` (Russian).
+13. **Editorial Policy (content-editing law, DEC-15):** gates every content edit in `docs/canon/` + `src/master/` (extends fence #11's one-canonical-definition rule). Core principle: **compress redundant presentation, never unique capability** — no editorial change may reduce semantic or functional load. Every deletion/merge/move/cross-ref replacement passes the 5-point functional-load check (capability · coverage · retrieval · context · dependency — full text: [Editorial Policy](#editorial-policy-content-editing-law) below). Uncertain cases are classified **UNCLEAR**, never deleted by assumption. Success metric: reduced redundant semantic load + improved navigability — never word count.
+
+---
+
+## Editorial Policy (content-editing law)
+
+> Adopted iter 122 (`ed-policy`, owner decision — [`DECISIONS.md`](./DECISIONS.md) DEC-15). Gates **all** content edits in
+> `docs/canon/` + `src/master/` (hard fence #13); content iterations (`ed-1`…`ed-8`, `dupes-1`) execute under it.
+> Source: owner-amended editorial rule set — research intake
+> [`docs/research/editorial_research_en.md`](./docs/research/editorial_research_en.md) §27 + §20/§22/§24/§32
+> (classification vocabulary: duplicate / reinforcement / special case / related / contradictory / unclear —
+> research §24, in use in [`docs/research/editorial_matrix.md`](./docs/research/editorial_matrix.md)).
+> Canon-side application notes: [`docs/canon/_README.md`](./docs/canon/_README.md) §4.4.
+> The text below is the owner's verbatim wording — amend only by owner decision.
+
+**Core principle: compress redundant presentation, never unique capability.**
+
+The guide may be made shorter, clearer, and easier to navigate, but no editorial change may reduce its semantic or functional load.
+
+Maintain **one canonical teaching explanation per major concept**. Other appearances are not duplicates merely because they cover similar content. Preserve them when they serve a distinct function, including application, decision-making, exception handling, demonstration, diagnostics, navigation, or memory reinforcement.
+
+Before deleting, merging, moving, or replacing content with a cross-reference, verify:
+
+1. **Capability preservation** — what semantic or functional capability would disappear from this location?
+2. **Coverage preservation** — where does every required rule, nuance, exception, boundary condition, example, or diagnostic signal remain?
+3. **Retrieval** — can the reader find and use that information at the moment it is needed?
+4. **Context** — would removing the local wording make the surrounding rule harder to understand or apply correctly?
+5. **Dependency** — does another section, table, example, checklist, or diagnostic procedure rely on this specific presentation?
+
+A cross-reference may replace repeated explanation only when it leads directly to the canonical material and preserves correct use. Keep a local reminder when the reader needs it to make the current decision, apply the rule, recognize an exception, or perform a check.
+
+Use **progressive disclosure** to control cognitive load, but do not defer information whose absence could cause an incorrect implementation, invalid inference, unsafe assumption, or loss of an important exception.
+
+Prefer **one primary reader job per paragraph or block**, while allowing tightly coupled rules, constraints, and exceptions to remain together when separating them would increase ambiguity or retrieval cost.
+
+Repeated wording may be compressed when it is genuinely redundant. Do not compress content solely because the same idea appears elsewhere. Classify uncertain cases as **UNCLEAR** rather than deleting by assumption.
+
+Preserve examples, tables, decision trees, diagnostics, checklists, and other structured representations when they provide a distinct retrieval, application, validation, or recognition function, even when their underlying concept is explained elsewhere.
+
+**Editorial success is measured by reduced redundant semantic load and improved navigability — never by word count alone.**
 
 ---
 

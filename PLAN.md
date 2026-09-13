@@ -6,6 +6,10 @@
 > History of completed work: `worklog.md` · `CHANGELOG.md` · git. This file carries no history.
 >
 > Every backlog row MUST carry: Task · Scope · Acceptance criteria · Required verification · Owner gate (if any).
+>
+> **Editorial law (iter 122+):** every content row (`ed-1`…`ed-8`, `dupes-1`, `ki-72`) executes under the
+> **Editorial Policy** — `AGENTS.md` → Editorial Policy (content-editing law), DEC-15. Its acceptance
+> criteria are cumulative with each row's own.
 
 ---
 
@@ -14,7 +18,6 @@
 | ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
 |----|------|-------|---------------------|----------------------|------------|
 | fork-d-3-intent | Fork D (part 3/3) — persona widget: owner defines intent (new 3rd widget vs extend `persona-synthesis`) | TBD after decision | TBD | TBD | **YES — owner must define intent before planning** |
-| ed-policy | Adopt the Editorial Rule Set (`docs/research/editorial_research_en.md` §27) as content-editing law: one canonical explanation; repetition requires a changed function; one paragraph = one primary job; progressive disclosure; preserve examples with unique functional value; duplicate/reinforcement/special-case/related/contradictory/unclear classification; functional-load test for every deletion; cross-reference instead of re-teach; observable diagnostics; reader/repo-metadata separation | `AGENTS.md` (content fences — add editorial rules alongside fence #11) + `docs/canon/_README.md` (canon editing rules) — policy text only, no content change | Rule set cited once in owner doc; content iterations (ed-1…) reference it; conflicts vs existing law (IMP-48 cross-refs, `viz > dry text` replacement principle, useful-repetition whitelist: Price / SPINE causality / Show Never Tell / Embodiment) resolved explicitly by the owner | doc-only: `pnpm run version:check` + `qa:doc-versions`; commit with `SKIP_ARTIFACT_BUILD=1` | **YES — editorial law change; rule set §27 + §20/§22/§24/§32 of the research are the input** |
 | ki-70 | Decide + implement appendix runtime loading (KI#70): `parts/manifest.json` carries `appendices` (appendix_mbti / appendix_model_table / appendix_glossary) that `lazy-loader.js` never reads — Appendix A (MBTI Reference + `mbti-composer` container), B (Model Capability Table), C (Glossary appendix) never render; auto-injected TOC `#appendix_*` links (built `part_01.html:414+`) are dead. Owner decision: WIRE (append `manifest.appendices` to the load list after `manifest.parts` — they inherit KI#69 retry/placeholder machinery for free) or DROP (remove appendices from manifest + TOC injection in `build-unified.mjs`) | If WIRE: `src/shell/lazy-loader.js` (load list, ~1 line + TOC grouping decision for `appendix_*` IDs) + verification of never-exercised paths (`mbti-composer` init on live container, appendix rendering, anchor links). If DROP: `scripts/build-unified.mjs` (manifest assembly + TOC injection) + master/appendix files stay as-is (unused) or get an owner-separate fate | WIRE: all 3 appendix sections render on the live page; `#appendix_mbti` TOC link scrolls; `mbti-composer` initializes without page errors; KI#70 closed. DROP: no dead `#appendix_*` links in the rendered TOC; manifest carries no unused array; KI#70 closed | WIRE: extend the iter-119 headless runtime suite (appendix sections count 93→96, link target check, mbti-composer page-error check) + full battery (build/validate/tests/qa) + hash changes only if `src/shell/index.html` touched. DROP: build + validate + tests + artifact checks | **YES — activates never-exercised widget+content paths (WIRE) or removes shipped content from the deploy contract (DROP); both change reader-visible scope** |
 
 ## Backlog (deferred work, ordered by readiness)
@@ -55,3 +58,4 @@
 - `qa:doc-versions` gate fix (iter 120: KI#67 CLOSED — regex accepts bold + `**Дата:**` headers; 8/8 docs parsed) — COMPLETE.
 - Editorial matrix Phase A (iter 120: Parts 1/3/7A/9, 210 block rows, repeat registry R01–R20) — COMPLETE (Phase B = backlog row `ed-matrix`).
 - Reader/repo-metadata separation ed-6 + KI#71 (iter 121: rendered prose zero `KI#…`/`iter NN`, canon+master, Part 1/7A/8) — COMPLETE.
+- Editorial policy adoption ed-policy (iter 122: owner-amended rule set → `AGENTS.md` Editorial Policy + fence #13, canon `_README.md` §4.4, DEC-15) — COMPLETE.

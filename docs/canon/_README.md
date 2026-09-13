@@ -197,6 +197,17 @@ docs/canon/
 5. **Cross-refs вместо re-explanation.** Концепция определена в одном месте, в остальных — ссылка.
 6. **Git-коммит после каждого Part.** Не накапливать изменения.
 
+### 4.4 Editorial Policy — закон контент-редактирования (iter 122+)
+
+Любая правка контента (canon + master, не только миграция) выполняется под **Editorial Policy** — законом редактирования, принятым владельцем в iter 122 (доработанный rule set из `docs/research/editorial_research_en.md` §27). Полный текст: `AGENTS.md` → «Editorial Policy (content-editing law)» — приводится там ровно один раз (one fact — one owner, NAV §10), здесь не дублируется.
+
+Применение к canon-редактированию:
+
+- **Canon-first:** функциональные проверки политики (capability / coverage / retrieval / context / dependency) проходят сначала на тексте canon, затем правка зеркалится в master.
+- **Сжатие = замещение, не сложение** (`viz > dry text`, DEC-03): если блок сжимается или удаляется, его нагрузка должна быть покрыта — VS-маркером, cross-ref (`[ref: …]`) или каноническим блоком в другом месте. Каждое удаление/слияние/перенос/замена на cross-ref проходит 5 проверок до правки, не после.
+- **UNCLEAR ≠ DELETE:** сомнительные случаи классифицируются как UNCLEAR и не удаляются по предположению — решение выносится в `PLAN.md` / владельцу.
+- **Метрика успеха** — сниженная избыточная семантическая нагрузка и навигабельность, никогда не количество слов.
+
 ---
 
 ## 5. Migration Status (canonical registry)
@@ -251,6 +262,7 @@ docs/canon/
 | 5 | Включить устаревший контент "для истории" | Удалить. Git history = для истории. |
 | 6 | Смешать Canon creation и HTML migration в одной итерации | Раздельно: iter N = Canon, iter N+1 = HTML |
 | 7 | Править Canon без правки STATUS.md (migration status) | Обновлять `_README.md` §5 + STATUS.md |
+| 8 | Сжать/удалить контент «потому что дублируется» без функциональных проверок | Editorial Policy (`AGENTS.md`): 5 проверок функциональной нагрузки + классификация UNCLEAR (§4.4) |
 
 ---
 
@@ -264,6 +276,7 @@ docs/canon/
 - [ ] Примеры персонажей — каждый в одном canonical location, в остальных cross-ref
 - [ ] Определения концепций — каждое в одном месте, не дублируются между секциями
 - [ ] Cross-refs на другие Canon-файлы — формат `[ref: part_XX.md §X.Y]`
+- [ ] Editorial Policy (`AGENTS.md`, DEC-15): для каждого удаления/сжатия пройдены 5 функциональных проверок (capability / coverage / retrieval / context / dependency); сомнительные случаи → UNCLEAR, не удаление (§4.4)
 - [ ] Таблицы — только с уникальными данными, не продублированными в VS-EMBED
 - [ ] `_README.md` §5 Migration Status обновлён
 - [ ] `STATUS.md` обновлён (Canon created)
@@ -275,9 +288,9 @@ docs/canon/
 
 > Последние 2 итерации подробно. Старые — одной строкой. Полная история — в git.
 
+- **iter 122 (2026-09-14):** Editorial Policy принята как закон контент-редактирования (владелец, доработанный rule set §27): полный текст — `AGENTS.md` → «Editorial Policy (content-editing law)» + fence #13; canon-применение — §4.4 этого файла + анти-паттерн №8 + пункт чек-листа §8. DEC-15. Контент гайда не менялся (policy text only).
 - **iter 58 (2026-07-25):** P2+P3 metadata enrichment. (a) P3: Glossary consolidation — 7 CORE DIRECTIVES individual entries merged into 1 consolidated entry with 7 numbered sub-definitions. 30→24 glossary entries. (b) P2: Progressive disclosure — `<!-- difficulty: BASIC|INTERMEDIATE|EXPERT -->` added to 102 canon sections + 98 master HTML sections (BASIC=43, INTERMEDIATE=39, EXPERT=20). (c) P2: Canonical markers — `<!-- canonical: ... -->` added to 60 definition sections in canon + 59 in master HTML. §3.10 added to _README.md documenting new conventions. All synced canon→master. 96/96 sync PASS, 12/12 validation PASS. Drift 92→170 (informational — HTML comments drift). English leaks 24 unchanged.
-- **iter 57 (2026-07-25):** Annotation blocks §10.2-10.4 + scenario-метки §9.5-9.11. 2 anchor ID fixes. 96/96 sync, 12/12 validation. contentHash 8th change.
-- **iter 7-56**: Canon scaffold → migration → KI fixes → drift tools → glossary cleanup. См. git log.
+- **iter 7-57**: Canon scaffold → migration → KI fixes → drift tools → glossary cleanup → metadata enrichment. См. git log.
 
 ---
 

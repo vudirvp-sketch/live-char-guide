@@ -2,7 +2,7 @@
 
 > **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
 > **Date:** 2026-09-14
-> **Iteration:** 121
+> **Iteration:** 122
 > Full rules: `AGENTS.md` (operating law) · `AGENT_NAVIGATION.md` (system map) · `PLAN.md` (backlog)
 > Iteration detail: `worklog.md` · History: `CHANGELOG.md` + git
 
@@ -10,9 +10,7 @@
 
 ## Current State
 
-**iter 121 — ed-6 reader/repo-metadata separation (content iteration, canon-first) + KI#71.** Rendered guide prose now carries **zero repo-internal references** — acceptance sweep `KI#|iter NN` over `src/master/` + `parts/` + `dist/` returns a single hit inside the E18 VS-EMBED provenance **HTML comment** (byte-verified non-rendering). Stripped: Part 1 §1.2 Mermaid/iter-14 history + `AUTO_TOC_PLACEHOLDER` build internals (canon-only, master was already clean); Part 7A §7A.1 stale `[ANCHORS]`-drift/KI#58 note → 1-sentence reader-useful canonical-format note (substance kept), §7A.2 `(D4, iter 93)` marker, §7A.12 stale iter-11 migration note deleted (described plain-copy block no longer exists; canon-only); Part 8 §8.1 `iter 55 / KI#38` history sentence. **KI#71 CLOSED:** byte-identical duplicate identity-name RULE line deleted from canon `part_07a.md` (master already carried it once — untouched by that fix). Non-rendering repo-meta left as-is per scope discipline, recorded for Phase B: `part_06.md` L83, `part_00.md` L13, `appendix_character_map.md` L29 (+ canon system docs `_README.md` / `iter60_analysis_plan.md`, native repo docs). Full battery green, hash `2ab607d6` unchanged, baselines 19/247 unchanged, deliverables built (`parts/part_07a.html` + `parts/part_08.html` regenerated).
-
-Baselines re-verified BEFORE edits at `BASE_COMMIT 6fe532b6` (worktree clean, iter 120): drift actionable 134 / canon-only sections 3 / sync 97/97. After edits: build PASS (hash `2ab607d6` unchanged — `src/shell/` untouched) · validate 5/5 + SHELL-* · validate:master 12/12 · version:check PASS (9.2.6) · tests 64/64 · canon sync 97/97 · drift exit 0 (actionable 134→**133** — repo-meta removal reduces drift; canon-only sections 3 unchanged) · qa:csp/bundle/contrast PASS · qa:english 19 / qa:syntax 247 (baselines unchanged) · qa:doc-versions 8/8 parsed, 1 pre-existing warning (obs-3), exit 0 · lint 0 errors (1 pre-existing warning, untouched) · `git diff --check` clean · `index.html` timestamp churn kept (real deliverable build this iteration).
+**iter 122 — ed-policy: Editorial Policy adopted as content-editing law (doc-only, owner decision).** Owner accepted the research rule set (§27) **with amendments** (chat, 2026-09-14); the amended text is now law, verbatim: `AGENTS.md` → **Editorial Policy (content-editing law)** section + **fence #13** (compact normative pointer) + Content/canon-change row of the reading gradient now routes through it. Canon-side application: `docs/canon/_README.md` **§4.4** + anti-pattern #8 + validation-checklist item. Conflicts vs existing law resolved explicitly by the owner's amendments and recorded in **DEC-15**: functional repetition preserved (subsumes the useful-repetition whitelist — Price / SPINE causality / Show Never Tell / Embodiment), consistent with `viz > dry text` (DEC-03) and IMP-48 cross-refs (fence #11). `PLAN.md` preamble binds all content rows (`ed-1`…`ed-8`, `dupes-1`, `ki-72`) to the policy. Guide content untouched (policy text only). Doc-only verification: `version:check` PASS (9.2.6) · `qa:doc-versions` exit 0 (1 pre-existing obs-3 warning) · `git diff --check` clean.
 
 ---
 
@@ -31,6 +29,7 @@ Baselines re-verified BEFORE edits at `BASE_COMMIT 6fe532b6` (worktree clean, it
 - **Identity name-language:** canonical form preserved across all card blocks — transliteration forbidden (§7A.1 RULE).
 - **Script Tax:** non-Latin scripts ~1.5–2× tokens on 32K vocab; ≥128K → negligible (§7A.12 RULE).
 - **Widgets:** 12 in `src/shell/widgets/`.
+- **Editorial Policy (DEC-15, iter 122):** all `docs/canon/` + `src/master/` content edits — compress redundant presentation, never unique capability; 5-point functional-load check; UNCLEAR ≠ delete; success ≠ word count.
 
 Full rules and fences: `AGENTS.md` → Hard fences. Content semantics: `docs/canon/`.
 
@@ -54,11 +53,11 @@ Full rules and fences: `AGENTS.md` → Hard fences. Content semantics: `docs/can
 
 Re-pinned every iteration. **Owner-gated rows are not auto-candidates — the owner decides.**
 
-1. **Owner's choice between (see `PLAN.md` for scope/acceptance/verification per row):** Fork D part 2/3 — sampling widget · dupes-1 — self-admitted dupes cleanup (reduced scope after iter 121: §9.11 `<details>` dupe R16 + R01 §7A.1 full-copy compress + dangling-ref repair; the KI#71 line + §7A.12 stale-note halves are CLOSED iter-121) · **ed-policy — adopt the editorial rule set (research §27) as content-editing law (gates all editorial work)**.
+1. **Owner's choice between (see `PLAN.md` for scope/acceptance/verification per row):** Fork D part 2/3 — sampling widget · dupes-1 — self-admitted dupes cleanup (reduced scope after iter 121: §9.11 `<details>` dupe R16 + R01 §7A.1 full-copy compress + dangling-ref repair; the KI#71 line + §7A.12 stale-note halves are CLOSED iter-121). Both rows now execute under the **Editorial Policy** (adopted iter 122 — `AGENTS.md` → Editorial Policy, DEC-15).
 2. **ki-70 (owner-gated) — decide appendix runtime loading:** wire `manifest.appendices` into `loadContent()` (KI#70) or drop appendices from the manifest/TOC. 1-line change either way, but it activates never-exercised `mbti-composer`+appendix paths → needs its own verification iteration (runtime suite exists from iter 119 and covers the wiring pattern).
 3. Fork D part 3/3 (persona widget) needs owner definition of intent before planning.
 4. **ed-matrix Phase B (non-gated, read-only):** extend `docs/research/editorial_matrix.md` to Part 0, 2, 4, 5, 6, 7B, 8, 10 + appendices using the same block-ID scheme (Phase A done iter 120; phasing recorded in `PLAN.md`). Now also carries the iter-121 discovered repo-meta locations (part_06 §6.3 L83, part_00 L13, appendix_character_map L29 — non-rendering, pending Phase B rows).
-5. **ki-72 (small canon fix, MEDIUM — value decision):** reconcile §7A.6 ↔ §7A.7 sampling values (32B+ Temperature 0.7–1.0 vs 0.85–1.1; RepPen 1.05–1.10 vs 1.0–1.05) — matrix recommends §7A.6 = canonical, §7A.7 param rows → defer/ref (see `editorial_matrix.md` R12 + `p7a_model_checklist::02`).
+5. **ki-72 (small canon fix, MEDIUM — value decision):** reconcile §7A.6 ↔ §7A.7 sampling values (32B+ Temperature 0.7–1.0 vs 0.85–1.1; RepPen 1.05–1.10 vs 1.0–1.05) — matrix recommends §7A.6 = canonical, §7A.7 param rows → defer/ref (see `editorial_matrix.md` R12 + `p7a_model_checklist::02`). Executes under the Editorial Policy (DEC-15).
 6. obs-4 — stale version headers in remaining docs (`components.md`, `terminology_dictionary.md` — each needs its own content-verification pass before refresh). Note: after the ki-67 fix the gate parses their date headers (both currently drift 0d); obs-4 is about version staleness, not dates. obs-3 — `CONTENT_RESTRUCTURE_PLAN.md` header/status (now also the gate's 1 warning).
 
 A new agent: run the preflight in `AGENTS.md`, confirm this Next step against the worktree (`git log` vs iteration above), then start.
