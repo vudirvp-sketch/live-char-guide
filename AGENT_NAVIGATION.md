@@ -168,7 +168,9 @@ Layered by model (12B <64K vocab → English; ≥128K vocab 12B–14B → Englis
 4. Environmental Reactivity
 5. Influence Boundary
 6. Consequence Driven
-7. Format Lock
+7. Pre-Generation Filter
+
+(Format Lock is a separate SP element — §7A.4 — not CORE DIRECTIVE #7; verified against `docs/canon/part_07a.md` iter 117.)
 
 ### Version Control
 
@@ -241,6 +243,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | `docs/architecture.md` | On structural changes. |
 | `docs/content_map.md` | On adding/removing sections. |
 | `docs/components.md` | On adding new CSS components. |
+| `docs/CONTENT_RESTRUCTURE_PLAN.md` | Historical (iter 6): restructure strategy that produced the canon migration (iter 7–18, COMPLETE). Read-only context, referenced by `docs/canon/_README.md`. |
 | `docs/terminology_dictionary.md` | On adding new terms. |
 | `docs/character_bible.md` | On changes to canonical characters. |
 | `docs/canon/_README.md` | On changes to Canon rules. |

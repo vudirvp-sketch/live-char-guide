@@ -1,8 +1,8 @@
 # Content Ownership Map — Live Character Guide v9.2
 
-> **Version:** 9.2.0
-> **Last Updated:** 2026-06-24 (iter 18 — mirror Canon)
-> **Status:** Canonical Reference (Canon mirror)
+> Version: 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
+> Last Updated: 2026-09-13 (iter 117 — re-verified: IDs vs `src/master/*.html`, Canon § vs `docs/canon/*.md` headers)
+> Status: Canonical Reference (Canon mirror)
 
 ---
 
@@ -21,15 +21,25 @@ This document is the **single source of truth** for "where does concept X live."
 
 ## Content Ownership Table
 
+### Part 0: Orientation (conceptual — canon-only, no master HTML) — `docs/canon/part_00.md`
+
+> Created iter 38. Conceptual entry section: **no master HTML artifact by design** (`migration_status` in canon frontmatter). Do not look for these `data-section` IDs in `src/master/`.
+
+| Concept | data-section ID | Canon § | Content Type | Notes |
+|---------|-----------------|---------|--------------|-------|
+| Как читать этот гайд | `p0_how_to_read` | §0.1 | Orientation | Модульная карта гайда, порядок чтения |
+| TL;DR / Quick Start | `p0_tldr_quick_start` | §0.2 | Quick start | Минимальный quick-start для нового читателя |
+
 ### Part 1: Basic Blocks (Базовые блоки) — `docs/canon/part_01.md`
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
 | Зачем системный подход? | `p1_value_proposition` | §1.1 | Value Prop | Comparison table: Classic vs Systematic approach |
-| Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 4 блока карточки: SP, Description, Examples, Greeting. iter 61: §1.5+§1.6 merged as subsection «Token Budget и конвейер сборки» |
-| Структура гайда (TOC) | `p1_structure_overview` | §1.3 | Navigation | Table of Contents (auto-generated) |
+| Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 4 блока карточки: SP, Description, Examples, Greeting + subsections «Структура гайда» и «Token Budget и конвейер сборки» (refs → §7A.12/§7A.13) |
+| Структура гайда (TOC) | `p1_structure_overview` | §1.2 (subsection) | Navigation | Auto-TOC, генерируется build-скриптом (`AUTO_TOC_PLACEHOLDER`); в каноне — subsection внутри §1.2, без собственного H2 |
 | Core Rules | `p1_core_rules` | §1.4 | Rules | 3 foundational rules of character creation |
 | Топ-3 критичные ошибки | `p1_top3_problems` | §1.7 | Detailed problems | Подробный разбор 3 ошибок |
+| Pre-build checklist | `p1_prebuild_checklist` | §1.8 | Checklist | 6 вопросов перед сборкой: модель, контекст, сложность, GHOST (1/Layers), CoT, Lorebook |
 
 ### Part 2: Behavioral Anchors (Якоря) — `docs/canon/part_02.md`
 
@@ -100,16 +110,16 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|-----------------|---------|--------------|-------|
 | System Prompt (SP) | `p7a_system_prompt` | §7A.1 | Template+Rules | Container with all blocks |
 | CORE DIRECTIVES | `p7a_core_directives` | §7A.2 | System | 7 директив, English in SP |
-| Token Budget | `p7a_token_budget` | §7A.3 | Reference | Per-block limits + calculator + personality sub-budget (iter 63: A59-3) |
-| Tone Frame | `p7a_tone_frame` | §7A.4 | Technique | Dual-function SP element |
-| Format Lock | `p7a_format_lock` | §7A.5 | Rule | Output formatting rules |
-| Author's Note (AN) | `p7a_authors_note` | §7A.6 | Template+Rules | Short instruction after SP |
-| Sampling parameters | `p7a_sampling_params` | §7A.7 | Reference | Temperature, RepPen, etc. |
-| Model Type Checklist | `p7a_model_checklist` | §7A.8 | Reference | 12B vs 32B+ vs API |
-| OOC Protection | `p7a_ooc_protection` | §7A.9 | Technique | Anti-OOC mechanisms |
-| XML tags | `p7a_xml_tags` | §7A.10 | Full treatment | `<identity>`, `<appearance>`, etc. |
-| API blocks | `p7a_api_blocks` | §7A.11 | Template | API-only extensions |
-| 4K-Fallback | `p7a_4k_fallback` | §7A.12 | Protocol | Compressed card for 4K context |
+| Token Budget | `p7a_token_budget` | §7A.12 | Reference | Per-block limits + calculator + personality sub-budget (iter 63: A59-3) |
+| Tone Frame | `p7a_tone_frame` | §7A.3 | Technique | Dual-function SP element |
+| Format Lock | `p7a_format_lock` | §7A.4 | Rule | Output formatting rules |
+| Author's Note (AN) | `p7a_authors_note` | §7A.5 | Template+Rules | Short instruction after SP |
+| Sampling parameters | `p7a_sampling_params` | §7A.6 | Reference | Temperature, RepPen, etc. |
+| Model Type Checklist | `p7a_model_checklist` | §7A.7 | Reference | 12B vs 32B+ vs API |
+| OOC Protection | `p7a_ooc_protection` | §7A.8 | Technique | Anti-OOC mechanisms |
+| XML tags | `p7a_xml_tags` | §7A.9 | Full treatment | `<identity>`, `<appearance>`, etc. |
+| API blocks | `p7a_api_blocks` | §7A.10 | Template | API-only extensions |
+| 4K-Fallback | `p7a_4k_fallback` | §7A.11 | Protocol | Compressed card for 4K context |
 | Assembly Pipeline | `p7a_assembly_pipeline` | §7A.13 | Pipeline | Order of assembly operations |
 
 ### Part 7B: Lorebook, Greeting & Compatibility — `docs/canon/part_07b.md`
@@ -188,13 +198,22 @@ This document is the **single source of truth** for "where does concept X live."
 |---------|-----------------|---------|--------------|-------|
 | Глоссарий | `appendix_glossary` | §C.1 | Reference | 27 терминов, алфавитный указатель |
 
+### Appendix D: Character Map (conceptual — canon-only, no master HTML) — `docs/canon/appendix_character_map.md`
+
+> Created iter 38. Conceptual reference (5-character comparison table): **no master HTML artifact by design**. Content lives at H1 level in the canon file (no H2).
+
+| Concept | data-section ID | Canon § | Content Type | Notes |
+|---------|-----------------|---------|--------------|-------|
+| Карта персонажей | `appendix_character_map` | H1-level | Reference | 5 канонических персонажей: сравнение инструментов (GHOST/SPINE/Enneagram/OCEAN/CoT/Lorebook) |
+
 ---
 
 ## Summary Table
 
 | Part | Canon file | Sections | Iter | Status |
 |------|-----------|----------|------|--------|
-| Part 1 | `part_01.md` | 7 | iter 14 | ✅ MIGRATED |
+| Part 0 (conceptual) | `part_00.md` | 0 master / 2 canon § | iter 38 | ✅ CANON-ONLY (no master artifact) |
+| Part 1 | `part_01.md` | 6 | iter 14 | ✅ MIGRATED |
 | Part 2 | `part_02.md` | 6 | iter 14 | ✅ MIGRATED |
 | Part 3 | `part_03.md` | 8 | iter 14 | ✅ MIGRATED |
 | Part 4 | `part_04.md` | 11 | iter 7–9 | ✅ MIGRATED |
@@ -208,7 +227,10 @@ This document is the **single source of truth** for "where does concept X live."
 | Appendix A (MBTI) | `appendix_mbti.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix B (Model Table) | `appendix_model_table.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix C (Glossary) | `appendix_glossary.md` | 1 | iter 18 | ✅ MIGRATED |
-| **Total** | | **97** | | **Canon COMPLETE** |
+| Appendix D (Character Map, conceptual) | `appendix_character_map.md` | 0 master / 1 canon § | iter 38 | ✅ CANON-ONLY (no master artifact) |
+| **Total** | | **96 master sections** | | **Canon COMPLETE** |
+
+> **Counting convention (verified iter 117):** "Sections" = `data-section` elements rendered in `src/master/*.html` (96 total). Canon carries 97 H2 sections + 2 declared-without-H2 IDs (`p1_structure_overview` — subsection of §1.2; `appendix_character_map` — H1-level) = 99 declared IDs. Part 0 (2 §) and Appendix D (1 §) are conceptual-only by design (`migration_status` in canon frontmatter) and never appear in master HTML. Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`.
 
 ---
 
@@ -250,4 +272,4 @@ Before finalizing any Part, verify:
 
 ---
 
-*Document mirror of Canon. Source of truth: `docs/canon/*.md` + `docs/canon/_README.md`. Updated 2026-06-24 iter 18.*
+*Document mirror of Canon. Source of truth: `docs/canon/*.md` + `docs/canon/_README.md`. Updated 2026-09-13, iter 117.*

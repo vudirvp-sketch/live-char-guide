@@ -1,8 +1,8 @@
 # Live Character Guide Architecture
 
-> **Version:** 9.2.0
-> **Last Updated:** 2026-07-25
-> **Status:** v9.2.0 — Unified single-pass guide (no layer system)
+> Version: 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
+> Last Updated: 2026-09-13 (iter 117 — re-verified against the repository: build scripts, hook, workflows, docs tree)
+> Status: Unified single-pass guide v9.2.x (no layer system)
 
 ---
 
@@ -56,12 +56,16 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files (96 sections in v9.2) | Authors writing Parts |
-| `src/shell/` | Infrastructure | HTML/CSS/JS shell (loader, styles, panels) | Infrastructure only |
+| `src/master/` | Author | Master guide HTML files (96 `data-section` sections; see `docs/content_map.md` for the 96/97 canon-vs-master counting) | Authors writing Parts |
+| `src/shell/` | Infrastructure | HTML/CSS/JS shell (`index.html`, `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` — 12 widgets) | Infrastructure only |
+| `src/assets/` | Infrastructure | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/` | Infrastructure only |
+| `src/scripts/` | Infrastructure | `build-shell-unified.mjs` (shell build stage) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
-| `docs/` | Author | Documentation (not included in build) | Authors |
-| `build/` | Generated | Build artifacts (gitignored) | Auto-generated only |
+| `docs/` | Author | Documentation (not included in build) + `canon/` (source of truth) | Authors |
+| `build/` | Generated | Build intermediate output (gitignored, regenerable from source) | Auto-generated only |
 | `dist/` | Generated | Deployment output (gitignored) | Auto-generated only |
+| `parts/`, `widgets/`, `assets/`, `data/`, `index.html`, `event-bus.js`, `build.hash` (root) | Generated | Root fallbacks — regenerated on every build, committed for GitHub Pages backward-compat | **NEVER hand-edit** |
+| `visual-system/` | Infrastructure | Visual-system prototype (isolated-first; feeds `qa:contrast` via `tokens.json`) | Infrastructure only |
 | `scripts/` | Infrastructure | Build and validation scripts | Infrastructure only |
 | `tests/` | Infrastructure | Test suite | Infrastructure only |
 
@@ -100,14 +104,16 @@ dist/ (deployed to GitHub Pages)
 
 ### Shell Stage: build-shell-unified.mjs
 
-**Input:** `src/shell/` + `build/parts/` + `data/`
+**Input:** `src/shell/` + `src/assets/` + `build/parts/` + `data/`
 
 **Process:**
 1. Copy shell HTML/CSS/JS
-2. Copy generated parts and data files
+2. Copy generated parts, assets and data files
 3. Generate deployment-ready output
 
-**Output:** `dist/` directory ready for GitHub Pages deployment
+**Output:**
+- `dist/` directory ready for GitHub Pages deployment
+- **Root fallbacks** — `parts/`, `widgets/`, `assets/`, `data/`, `index.html`, `event-bus.js`, `build.hash` copied from `dist/` and committed for GitHub Pages backward-compatibility (regenerated on every build — never hand-edit)
 
 ---
 
@@ -124,13 +130,14 @@ Part 1 (Foundations) → Part 2 (Anchors) → Part 3 (Voice) → Part 4 (SPINE) 
 ### Section Markup in Master HTML
 
 ```html
-<section data-section="p2_basic_anchors" data-toc-nav>
+<section data-section="p2_basic_anchors" id="p2_basic_anchors" data-toc-nav>
   <!-- Content visible to ALL readers -->
 </section>
 ```
 
 **Key attributes:**
 - `data-section`: Unique identifier across entire guide (convention: `p{N}_{topic}`)
+- `id`: REQUIRED and must equal `data-section` — the browser anchor mechanism (`<a href="#X">`) works off `id`, not `data-section`
 - `data-toc-nav`: Optional — marks section for inclusion in Table of Navigation
 
 ### Section ID Naming Convention
@@ -141,7 +148,7 @@ Examples:
 - `p1_card_overview` — Part 1, card anatomy overview
 - `p2_basic_anchors` — Part 2, anchor basics
 - `p4_spine_overview` — Part 4, SPINE framework
-- `p7_core_directives` — Part 7, CORE DIRECTIVES
+- `p7a_core_directives` — Part 7A, CORE DIRECTIVES (Part 7 split into 7A/7B in v9.0.0)
 - `p8_ap15_ocean_overload` — Part 8, anti-pattern 15
 
 **Rule:** Each `data-section` ID must be unique across the ENTIRE master guide, not just within a Part.
@@ -174,13 +181,13 @@ CORE DIRECTIVES is a unified directive system for the System Prompt, consisting 
 
 ## Widget Architecture
 
-### Markup in HTML, Data in JSON
+### Markup in HTML, Data in JSON, Behavior in Widgets
 
-Widgets use the existing model:
+12 widgets follow the split model:
 
-1. **SVG/HTML markup** stays in master HTML
-2. **Text data** lives in `data/*.json` files
-3. **Behavior** is in `src/shell/lazy-loader.js`
+1. **SVG/HTML markup** stays in master HTML (`<div data-widget="...">`)
+2. **Text data** lives in `data/*.json` files (exception: `persona-voice-hierarchy` embeds canon-constant values — see the widget header)
+3. **Behavior** lives in `src/shell/widgets/*.js`; `src/shell/lazy-loader.js` scans the DOM on scroll-into-view and loads the matching widget module dynamically
 
 ### Widget Data Files
 
@@ -196,7 +203,7 @@ Widgets use the existing model:
 
 ### Widget Lifecycle
 
-Widgets activate when the user scrolls to the relevant Part. All widgets are always visible — no layer gating or conditional activation. The `lazy-loader.js` initializes interactive elements on page load.
+Widgets activate when the user scrolls the relevant Part into view — `lazy-loader.js` scans the DOM on `scroll-into-view` and dynamically imports the widget module. All widgets are always visible — no layer gating or conditional activation.
 
 Panels (TOC, Glossary, Notepad) survive navigation — they are outside `#content`.
 
@@ -257,87 +264,74 @@ When content changes are made, the following MUST be updated:
 
 ## Build Validation
 
-### Pre-commit Hooks
+### Pre-commit Hook
 
-The following checks run before each commit:
+The Husky hook (`.husky/pre-commit`) runs on every commit:
 
-1. `validate_terms.py` — No prohibited translations
-2. `check_english.py` — No English leaks (3+ words outside allowed contexts)
-3. `check_duplicates.py` — No duplicate concepts across Parts
-4. `validate-master.mjs` Check 3 — All anchor links resolve
-5. `data-section` validation — All sections have required attributes
-6. Master HTML content restriction check — No prohibited elements
-7. CSS class check — All classes are from registry
-8. Syntax mix check — No Markdown patterns in HTML
-9. `validate-migration.mjs` — No `data-layer-switch` or `data-layer` on body (v8 requirement)
+1. `pnpm run lint` — ESLint over `src/`
+2. `pnpm run build` — full build (unified + shell + root fallbacks)
+3. `pnpm run validate` — build artifact validation
+
+For doc-only commits that touch no `src/` or `data/` files, set `SKIP_ARTIFACT_BUILD=1`
+to skip build + validate (lint always runs).
+
+### QA Gates and Audits (not pre-commit — run per task type)
+
+- `pnpm run validate:master` — master HTML invariants (12 checks)
+- `pnpm run version:check` — 4-place version sync (MUST pass)
+- `pnpm run qa:csp` / `qa:bundle` / `qa:contrast` / `qa:doc-versions` — PASS/FAIL gates
+- `pnpm run qa:english` / `qa:syntax` — fixed baselines (19 / 247) that must not increase
+- `python3 scripts/audit_canon_master_sync.py` — canon→master sync (MUST pass)
+- `python3 scripts/audit_canon_master_drift.py` — informational drift detector
+- `python3 scripts/audit_vs_embeds.py` — VS scroll-animation invariant
 
 ### CI/CD Pipeline
 
-GitHub Actions workflow:
+GitHub Actions workflows (`.github/workflows/`, branch filter `[main]`):
 
-1. **On PR:** Validate build, run tests
-2. **On merge to main:** Build + deploy to GitHub Pages
+- `build-artifact.yml` — builds artifacts on push/PR touching buildable paths (`src/**`, `assets/**`, `data/**`, `docs/**`, `scripts/**`, `tests/**`, `visual-system/**`, workflows, `package.json`, `pnpm-lock.yaml`, `index.html`, `eslint.config.js`)
+- `deploy-pages.yml` — build + deploy to GitHub Pages on push to `main`
+- `validate.yml` — validation track on `src/**`, `data/**`, `scripts/**` changes
 
 ---
 
-## Directory Structure (v8)
+## Directory Structure (current)
 
 ```
 live-char-guide/
 ├── .github/
-│   └── workflows/        # GitHub Actions
-├── build/                # Generated artifacts (gitignored)
-│   ├── parts/            # Unified HTML output
-│   ├── build-manifest.json
-│   └── section-registry.json
-├── data/                 # Widget data + glossary
-│   ├── glossary.json
-│   ├── ocean.json
-│   ├── enneagram.json
-│   ├── mbti.json
-│   ├── test_scenarios.json
-│   ├── character_schema.json
-│   └── anchor-redirects.json
-├── docs/                 # Author documentation
-│   ├── architecture.md
-│   ├── character_bible.md
-│   ├── content_map.md
-│   ├── cross_reference_sync.md
-│   ├── user_journeys.md
-│   ├── components.md
-│   └── terminology_dictionary.md
-├── scripts/              # Build and validation scripts
-│   ├── build-unified.mjs
-│   ├── validate-artifact.mjs
-│   ├── validate-migration.mjs
-│   └── ...
+│   └── workflows/        # build-artifact.yml · deploy-pages.yml · validate.yml
 ├── src/
-│   ├── master/           # Author content
-│   │   └── part_*.html
-│   ├── shell/            # Infrastructure
-│   │   ├── index.html
-│   │   ├── styles.css
-│   │   └── lazy-loader.js
+│   ├── master/           # Author content: part_01..10 (incl. 7A/7B) + 3 appendices
+│   ├── shell/            # Infrastructure: index.html, styles.css, lazy-loader.js,
+│   │                     #   event-bus.js, widgets/ (12 widgets + js-flag.js)
+│   ├── assets/           # favicon.svg, preview-card.png, vs-styles.css, fonts/
+│   ├── scripts/          # build-shell-unified.mjs
 │   └── VERSION
-├── tests/                # Test suite
-├── dist/                 # Deployment output (gitignored)
+├── data/                 # Widget data + glossary (JSON, 7 files)
+├── docs/                 # Tech docs (architecture, content_map, components,
+│   │                     #   terminology, character bibles, CONTENT_RESTRUCTURE_PLAN)
+│   │                     #   + canon/ (source of truth) + research/
+├── scripts/              # Build + validation + QA scripts
+├── tests/                 # Node test runner (test-*.mjs + integration/)
+├── visual-system/         # Visual-system prototype (isolated-first)
+├── build/                 # Generated intermediate output (gitignored)
+├── dist/                  # Deployment output (gitignored)
+├── parts/  widgets/  assets/  data/  index.html  event-bus.js  build.hash
+│                         # Root fallbacks — regenerated, committed, never hand-edit
+├── AGENTS.md  AGENT_NAVIGATION.md  STATUS.md  PLAN.md  DECISIONS.md
+├── worklog.md  CHANGELOG.md  README.md  CONTRIBUTING.md
 └── package.json
 ```
 
 ---
 
-## Version History (Compact)
+## Version History
 
-| Version | Date | Summary |
-|---------|------|---------|
-| v9.1.x | 2026-05-16 | FIX-01..FIX-31: bug fixes (executeInlineScripts, persona-cross loop, Clipboard API, dual assembly, CSP, blueprint-viewer destroy, heading hierarchy, noscript, accessibility). |
-| v9.0.0 | 2026-05-15 | Restructure (split Part 7 → 7A/7B, MBTI → Appendix A, AP-15 → Part 5, renumber AP-16 → AP-15). Deduplication, terminology standardization, 3 callout types, character bibles. |
-| v8.0.0 | 2026-05-14 | Unified single-pass architecture (eliminated L1/L2/L3 layer system). Section IDs without `_l2`/`_l3` suffixes. SPINE unified. CORE DIRECTIVES unified. |
-| v7 | pre-2026-05-14 | Layered system (L1/L2/L3) with `data-layer` attributes. See git history. |
-| v6 / v5.12 | pre-2026-04-27 | Earlier versions. See git history. |
+Release history has a single owner: [`CHANGELOG.md`](../CHANGELOG.md) (latest iterations in detail, older as one-liners; full history in `git log`). This file does not duplicate it.
 
 > Для детальной migration info по старым версиям — см. git history (`git log -- docs/`).
 
 ---
 
-*Document prepared for Live Character Guide v9.2.0 + docs restructure iter 2*
+*Live Character Guide v9.2.6 · architecture re-verified against the repository at iter 117 (2026-09-13): build scripts, pre-commit hook, workflows, directory tree.*

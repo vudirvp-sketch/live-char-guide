@@ -2,7 +2,7 @@
 
 > **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
 > **Date:** 2026-09-13
-> **Iteration:** 116
+> **Iteration:** 117
 > Full rules: `AGENTS.md` (operating law) · `AGENT_NAVIGATION.md` (system map) · `PLAN.md` (backlog)
 > Iteration detail: `worklog.md` · History: `CHANGELOG.md` + git
 
@@ -10,11 +10,11 @@
 
 ## Current State
 
-**iter 116 — Agent operating-system rework (meta-iteration, doc-only).**
+**iter 117 — Documentation hygiene (obs-1/obs-2 closure, doc-only).**
 
-Reworked the agent-facing operational layer after a canonsim-principles analysis (authority order, preflight, anti-loop, scope discipline, DoD, reproducible delivery). Changes: `AGENTS.md` rewritten as operating law (authority order · preflight · anti-loop · scope discipline · task-type reading gradient · Definition of Done · delivery vs BASE_COMMIT · doc caps); `AGENT_NAVIGATION.md` stripped of history/roadmap → current-state map + new §10 information ownership; this file restructured (state snapshot + authoritative Next step); `PLAN.md` repurposed from a completed 2026 docs-restructure plan (stale: claimed KI#64 OPEN) into the live backlog; `DECISIONS.md` created (append-only "why" home); `README.md` stale "iter 101" status line fixed. No product/content/build code touched — hash `2ab607d6` unchanged. Detail: `worklog.md` iter-116.
+Closed PLAN.md observations obs-1/obs-2 (stale doc headers): `docs/content_map.md` — header 9.2.0/2026-06-24 → 9.2.6/2026-09-13; added missing `p1_prebuild_checklist` row + conceptual Part 0 (2 §) + Appendix D (1 §); fixed 10 shifted Canon § in Part 7A (Token Budget = §7A.12, not §7A.3); Summary counts 97→96 master sections with explicit 96/97 counting convention. `docs/architecture.md` — header refreshed; pre-commit section rewritten to reality (lint + build + validate, `SKIP_ARTIFACT_BUILD=1` for doc-only); directory tree rebuilt from the actual repo (removed nonexistent `cross_reference_sync.md`/`user_journeys.md`/`validate-migration.mjs`); version-history table → CHANGELOG pointer (information ownership); section-markup example now carries `id`; `p7_core_directives` → `p7a_core_directives`. `AGENT_NAVIGATION.md` §5: CORE DIRECTIVE #7 corrected to **Pre-Generation Filter** (was wrongly "Format Lock"; verified vs canon §7A.2 + master) + §7 row for `docs/CONTENT_RESTRUCTURE_PLAN.md` (historical, referenced by canon `_README`). **KI#67 opened:** `qa:doc-versions` gate is blind — regex misses `**Last Updated:**` bold format, so every docs/*.md is skipped; both fixed files now use the gate-visible plain format. No product/content/build code touched — hash `2ab607d6` unchanged.
 
-Baseline re-verified BEFORE the rework at `BASE_COMMIT c212a024`: build PASS · tests 64/64 (after build) · version:check PASS · canon sync 97/97 · drift exit 0 · qa:csp/bundle/contrast/doc-versions PASS · qa:english 19 (baseline) · qa:syntax 247 (baseline). Workflow branch filters byte-verified as `[main]` (intact) — an initially suspected CI corruption turned out to be a terminal display artifact (see `worklog.md` iter-116, pitfall #27).
+Baseline re-verified BEFORE edits at `BASE_COMMIT 01a4f9d1`: build PASS · tests 64/64 · version:check PASS · canon sync 97/97 · drift exit 0 · qa:csp/bundle/contrast PASS · qa:english 19 (baseline) · qa:syntax 247 (baseline) · qa:doc-versions "PASS" (but blind — KI#67).
 
 ---
 
@@ -42,10 +42,10 @@ Full rules and fences: `AGENTS.md` → Hard fences. Content semantics: `docs/can
 
 | KI# | Description | Status | Opened |
 |-----|-------------|--------|--------|
-| _(none — all KIs resolved)_ | — | — | — |
+| KI#67 | `qa:doc-versions` gate blind: `check-doc-versions.mjs` regex `(?:Last Updated\|Date):\s*YYYY-MM-DD` does not match the bold-markdown header format `**Last Updated:** YYYY-MM-DD` used by docs/*.md — every file is skipped, gate always "passes" without checking. Fix options: update the script regex (accept optional `**`) or normalize doc headers to plain format. `docs/content_map.md` + `docs/architecture.md` already switched to the gate-visible plain format (iter 117). | OPEN | 2026-09-13 (iter 117) |
 
 > **KI lifecycle:** record → fix only if in scope → close as `CLOSED iter-<N>` → delete after 2+ iterations closed. Full rules: `AGENTS.md` → Bug → doc → fix.
-> **iter-116 note:** a suspected KI#66 ("workflow branch filters corrupted") was WITHDRAWN in the same iteration — byte-level verification (`str.count('[main]')`) proved the filters intact; the "corruption" was a terminal display artifact eating the `[m` sequence. Lesson recorded as pitfall #27. No KI remains open.
+> **iter-116 note (historical):** a suspected KI#66 ("workflow branch filters corrupted") was WITHDRAWN in the same iteration — byte-level verification proved the filters intact; the "corruption" was a terminal display artifact (pitfall #27).
 
 ---
 
@@ -55,6 +55,7 @@ Re-pinned every iteration. **Owner-gated rows are not auto-candidates — the ow
 
 1. **Owner's choice between (see `PLAN.md` for scope/acceptance/verification per row):** Fork D part 2/3 — sampling widget · dupes-1 — self-admitted dupes cleanup (§7A.12 + §9.11).
 2. Fork D part 3/3 (persona widget) needs owner definition of intent before planning.
-3. Observations obs-1/obs-2 (stale version headers in `docs/content_map.md` + `docs/architecture.md`) — low priority, record-only until scheduled.
+3. ki-67 — fix the `qa:doc-versions` gate (script regex vs header normalization; see KI#67 in this file).
+4. obs-4 — stale version headers in remaining docs (`components.md`, `terminology_dictionary.md` — each needs its own content-verification pass before refresh).
 
 A new agent: run the preflight in `AGENTS.md`, confirm this Next step against the worktree (`git log` vs iteration above), then start.
