@@ -2,8 +2,9 @@
 /**
  * check-doc-versions.mjs
  *
- * Compares the "Last Updated" date in each docs/*.md file header
- * with the date of the last git commit that touched that file.
+ * Compares the "Last Updated" / "Date" / "Дата" date in each docs/*.md file
+ * header (plain or bold-markdown format, KI#67) with the date of the last git
+ * commit that touched that file.
  * Warns when the declared date is older than the commit date by >7 days.
  *
  * Usage:
@@ -27,8 +28,9 @@ for (const file of files) {
   const filepath = join(DOCS_DIR, file);
   const content = readFileSync(filepath, 'utf-8');
 
-  // Extract "Last Updated: YYYY-MM-DD" or "Date: YYYY-MM-DD"
-  const dateMatch = content.match(/(?:Last Updated|Date):\s*(\d{4}-\d{2}-\d{2})/);
+  // Extract "Last Updated: YYYY-MM-DD" / "Date: YYYY-MM-DD" / "Дата: YYYY-MM-DD",
+  // each optionally wrapped in bold markdown: "**Last Updated:** YYYY-MM-DD" (KI#67).
+  const dateMatch = content.match(/\*{0,2}(?:Last Updated|Date|Дата):\*{0,2}\s*(\d{4}-\d{2}-\d{2})/);
   if (!dateMatch) {
     console.log(`ℹ️  ${file}: no date header found — skipping`);
     continue;
