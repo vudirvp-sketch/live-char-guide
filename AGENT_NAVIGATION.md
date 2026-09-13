@@ -251,6 +251,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | `docs/research/guide_analysis_consolidated.md` | Consolidated guide analysis (iter 73+). 12 sections: contradictions C1–C15, duplicates D1–D20, checklists, prioritized proposals P1/P2/P3. |
 | `docs/research/research_plan.md` | Verification and edit plan iter 74+ (Phases 1–5). |
 | `docs/research/editorial_research_en.md` | External editorial research intake (iter 118): textual-layer audit (semantic duplication, cognitive density, information timing, rule strength, reading modes) + proposed editorial rule set (§27). Claims verified at intake — KI#68 fixed same iteration. Backlog: PLAN rows ed-policy / ed-matrix / ed-1…ed-8. |
+| `docs/research/backlog_audit_iter118.md` | Backlog audit (post-iter-118 research session, BASE `bd06f8a1`): evidence-based verdicts for all 16 PLAN entries; re-scope evidence for dupes-1 (§7A.12 half stale — plain-copy block already removed from master); external-review claim check (repo-state consistency CONFIRMED); recommended execution order (ki-67 → ed-6 → ed-matrix Phase A). |
 
 ---
 
