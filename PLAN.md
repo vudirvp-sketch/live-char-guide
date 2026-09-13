@@ -1,150 +1,41 @@
-# Live Character Guide — Docs-Restructure Plan
+# Live Character Guide — Plan & Backlog
 
-> **Plan version:** 1.2 (actualized iter 101)
-> **Date:** 2026-08-13
-> **Author:** main agent
-> **Pattern source:** https://github.com/vudirvp-sketch/poe2-regex-ru
-> **Status:** iter 1–101 COMPLETE. This document preserves the historical context of the docs-restructure plan (§1–4) and the current stop-point (§5). Full iter-by-iter history: `worklog.md` + `CHANGELOG.md` + `git log`.
-
----
-
-## 1. Analysis of the poe2-regex-ru Pattern
-
-AI-agent documentation organization pattern:
-
-| File | Role |
-|------|------|
-| `AGENTS.md` | Short entry point. Stack, conventions, critical rules, common commands, pointers. |
-| `AGENT_NAVIGATION.md` | Full entry document. Where things live, aliases, dependency rules, pitfalls, dialect spec, doc map. |
-| `STATUS.md` | Current iteration (iter N), Known Issues, Open Proposals, constraints. |
-| `worklog.md` | Only the latest iteration in detail. Others = one-line summaries. |
-| `README.md` | User-facing: what this is, capabilities, technologies, run, deploy. |
-| `docs/*.md` | Detailed technical documents. |
-
-Principles: entry document first, iter-based status, compact worklog, documentation map, FAQ-style pitfalls, open proposals.
+> **What is pending, and in what order.** Order authority: `STATUS.md` **Next step** (re-pinned
+> every iteration) picks from this backlog; owner-gated rows are not auto-candidates.
+> Scope/acceptance live HERE — one row = one future iteration (or a numbered part of one).
+> History of completed work: `worklog.md` · `CHANGELOG.md` · git. This file carries no history.
+>
+> Every backlog row MUST carry: Task · Scope · Acceptance criteria · Required verification · Owner gate (if any).
 
 ---
 
-## 2. Plan iter 1 (historical, COMPLETE)
+## Owner-gated queue (decision needed before any agent work)
 
-Create `AGENT_NAVIGATION.md` / `STATUS.md` / `worklog.md`, delete obsolete `docs/migration_map.md` / `transition_guide.md` / `ap_reference_inventory.md`, update `README.md` / `CHANGELOG.md` / `docs/architecture.md`.
+| ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
+|----|------|-------|---------------------|----------------------|------------|
+| fork-d-3-intent | Fork D (part 3/3) — persona widget: owner defines intent (new 3rd widget vs extend `persona-synthesis`) | TBD after decision | TBD | TBD | **YES — owner must define intent before planning** |
 
-✅ **DONE iter 1–4.** Details: `worklog.md` (Previous Iterations) + `git log`.
+## Backlog (deferred work, ordered by readiness)
 
----
+| ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
+|----|------|-------|---------------------|----------------------|------------|
+| fork-d-2 | Fork D (part 2/3) — sampling widget: slider configurator for `p7a_sampling_params` | New widget JS in `src/shell/widgets/` + `<div data-widget>` markup in `src/master/part_07a.html` + `data/*.json` (if parameter data) + `lazy-loader.js` registration + `docs/components.md` classes | Widget renders in Part 7A; data-driven (no hardcoded data in JS); CSP-clean; follows markup/data/behavior split | build + validate + validate:master + version:check + tests + qa gates + canon sync + `audit_vs_embeds.py`; hash changes only if `src/shell/index.html` touched | MEDIUM risk — new widget = infrastructure approval |
+| dupes-1 | Self-admitted dupes cleanup — §7A.12 plain-copy pre-block + §9.11 quick-check table | `docs/canon/part_07a.md` + `part_09.md` FIRST, then `src/master/part_07a.html` + `part_09.html`; content decisions require visual diff | Dupes removed per `viz > dry text` (replacement, not addition); cross-refs (IMP-48) stay valid | Canon sync 97/97 (or updated count) + drift informational + build + tests + qa:english no new leaks | Content semantics — canon-first edits |
 
-## 3. Plan iter 6+ — Canon migration (historical, COMPLETE)
+## Low priority / observations (recorded, not scheduled)
 
-Strategy: Canonical Guide Spec in `docs/canon/part_NN.md` as the source of truth for each Part's content. Master HTML is migrated against Canon.
-
-✅ **DONE iter 7–18.** All 10 Parts + 3 Appendix ✅ MIGRATED. See `docs/canon/_README.md` §5.
-
----
-
-## 4. File Templates (reference)
-
-### `AGENTS.md`
-
-```markdown
-# AGENTS.md — Live Character Guide
-
-> Read this first. Short entry point for any LLM agent working in this repo.
-> For the full reference, see AGENT_NAVIGATION.md.
-
-## What this project is
-## Iteration protocol
-## Where things live
-## Common commands
-## Critical rules (do not break)
-## Git safety
-## Stop and confirm before proceeding
-## Bug → doc → fix
-## Output format (every iteration)
-## Pointers
-```
-
-### `AGENT_NAVIGATION.md`
-
-```markdown
-# Agent Navigation — Live Character Guide
-
-> Entry document. Read this first (or read AGENTS.md for the short version).
-
-## 1. Where Things Are (directory map + ownership + rules)
-## 2. Build Pipeline (master → unified → shell → dist)
-## 3. Section Model (data-section, naming convention)
-## 4. Widget Architecture (markup in HTML, data in JSON, behavior in JS)
-## 5. Core Rules (3 principles, 7 CORE DIRECTIVES)
-## 6. Frequent Pitfalls (numbered list with symptom + fix)
-## 7. Documentation Map (when to update what)
-## 8. Roadmap (iter N+)
-## 9. Cross-Reference Pairs (synced registry)
-## 10. Useful Links
-```
-
-### `STATUS.md`
-
-```markdown
-# Live Character Guide — Project Status
-
-> Version: <canonical version>
-> Date: <YYYY-MM-DD>
-> Iteration: <N>
-
-## Current State (iter N — what was done)
-## Invariants
-## Known Issues (KI#<N> with status — table format, max 15 entries)
-## Roadmap
-```
-
-### `worklog.md`
-
-```markdown
-# Worklog
-
-> Only the latest iteration in detail. Older = one-line summaries.
-
----
-Task ID: iter-<N>-<short-desc>
-Agent: main
-Task: <one-line task description>
-
-Work Log:
-- step 1
-- step 2
-
-Stage Summary:
-- results
-
----
-## Previous Iterations (brief)
-- iter N-1: <one-line summary>
-- iter N-2: <one-line summary>
-```
+| ID | Observation |
+|----|-------------|
+| obs-1 | `docs/content_map.md` header still declares v9.2.0 / "Last Updated 2026-06-24 (iter 18)" — likely stale vs the 97-section reality; needs a content pass with `audit_canon_master_sync.py` counts. Doc-only, no deploy impact. |
+| obs-2 | `docs/architecture.md` header declares v9.2.0 / 2026-07-25 — same pattern as obs-1. |
 
 ---
 
-## 5. Stop Point
+## Completed tracks (one-liners — detail in worklog/CHANGELOG/git)
 
-**iter 101 ✅ COMPLETE — Agent infrastructure English rewrite + actualization.**
-
-All agent-facing documentation rewritten in English for consistent LLM consumption:
-- **New:** `AGENTS.md` (short LLM entry point, ~150 lines).
-- **Rewritten in English:** `AGENT_NAVIGATION.md`, `STATUS.md`, `worklog.md`, `PLAN.md`.
-- **Updated:** `CHANGELOG.md`, `README.md`.
-- **Discovered:** version drift on `mermaid-init.js` (KI#64, OPEN — needs user decision: rollback vs 4-place bump).
-
-**iter 102 roadmap (proposed):**
-- Resolve KI#64 — version sync reconciliation. Either:
-  - **Option A (smaller blast radius):** rollback `mermaid-init.js` JSDoc `@version` from `9.3.0` → `9.2.6`. Safe, doc-only.
-  - **Option B (full bump):** 4-place sync to `9.3.0` — update `src/VERSION` + `package.json` + `data/character_schema.json` manually + `pnpm run build` to regenerate `parts/manifest.json`. Requires user confirmation per `AGENTS.md` §"Stop and confirm" (touches `package.json` version field).
-
-**Deferred:** V8/V9 Decision items — pending author discussion.
-
-**Principles preserved:**
-- `viz > dry text` — viz = replacement, not addition. Catalog vs Detail / Annotation Layer patterns = keep-by-design.
-- Inline scripts forbidden (CSP compliance). Inline styles forbidden.
-- VS-EMBED animation classes — covered by `vs-scroll-observer.js` selector or `scroll-enter` class. Audit: `scripts/audit_vs_embeds.py`.
-- **Version sync** — on bump, update ALL 4 places (`src/VERSION` + `package.json` + `data/character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 pitfall. KI#64 is the same pattern recurring.
-- **New bugs:** first document in `STATUS.md` as `KI#<N>`, then fix.
-- **Doc cap enforcement:** `STATUS.md` Known Issues ≤ 15 entries; `worklog.md` ≤ 10 entries; `CHANGELOG.md` latest 2–3 iterations in detail, older collapsed to one-line. Housekeeping trims happen in the same edit, not deferred.
+- Docs-restructure plan (iter 1–101) — COMPLETE (agent docs in English since iter 101).
+- Canon migration (iter 7–18) — COMPLETE: 10 Parts + 4 Appendices + Part 0 migrated, 97/97 sync.
+- Phases A–E content work (iter 81–108) — COMPLETE.
+- Multilingual forks A–C (iter 110), Fork D 1/3 voice-hierarchy widget (iter 111) — COMPLETE.
+- Dead code/CSS debt (iter 112–115: dead widgets, Mermaid infra, both CSS files) — COMPLETE.
+- Agent operating-system rework (iter 116) — COMPLETE (this iteration's predecessor context).

@@ -1,10 +1,11 @@
 # Agent Navigation — Live Character Guide
 
-> **Entry document.** Read this first (or read [`AGENTS.md`](./AGENTS.md) for the short version).
-> **Canonical version:** `9.2.6`. **Current iteration:** 115.
-> Live-char-guide is an engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models).
-> Single linear guide: Part 0 → Part 10 + 4 appendices. All 10 Parts + 4 Appendix + Part 0 are ✅ MIGRATED,
-> 97 sections, 97/97 canon→master sync PASS, 12 widgets.
+> **Current-state map.** Describes what IS, not what happened — no history, no narrative
+> (history lives in `worklog.md`, `DECISIONS.md`, `CHANGELOG.md`, git). Update the affected
+> section in the same iteration any structure changes.
+> Read after [`AGENTS.md`](./AGENTS.md) (the operating law). Current state: [`STATUS.md`](./STATUS.md).
+> **Canonical version:** `9.2.6`. Engineering pipeline for RP character cards (SPINE → deploy, 12B–32B+ models).
+> Single linear guide: Part 0 → Part 10 + 4 appendices · 97 sections · 12 widgets · canon→master sync green.
 
 ---
 
@@ -14,7 +15,7 @@
 |-----------|---------|-------|
 | `src/master/` | Author content — 10 Parts (`part_01..10.html`) + 3 appendices (`mbti`, `model_table`, `glossary`). 97 sections, ~6 600 lines of HTML. | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
 | `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (12 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
-| `src/shell/widgets/` | 12 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `vs-mini-map`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`. (Plus `js-flag.js` infra script, not a widget.) | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. iter-112 removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint` — 0 container usages). iter-113 removed `mermaid-init.js` (Mermaid CDN dependency removed — content diagrams replaced by VS-EMBEDs in iter 14, only infra remained). |
+| `src/shell/widgets/` | 12 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `vs-mini-map`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`. (Plus `js-flag.js` infra script, not a widget.) | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
@@ -64,11 +65,11 @@ git push origin main        # Trigger GitHub Actions → GitHub Pages
 # Online in ~30–60 s: https://vudirvp-sketch.github.io/live-char-guide/
 ```
 
-**What enters the build hash (functionally deploys):** `src/master/*.html`, `src/shell/`, `src/assets/`, `data/*.json`, `parts/` (root fallbacks).
+**What functionally deploys:** `src/master/*.html`, `src/shell/`, `src/assets/`, `data/*.json`, `parts/` (root fallbacks).
 
-**What does NOT enter the build hash (doc-only, does NOT deploy):** `docs/canon/*.md`, `docs/*.md`, root `*.md`, `visual-system/`, `scripts/`, `tests/`.
+**What does NOT deploy (doc-only):** `docs/canon/*.md`, `docs/*.md`, root `*.md`, `visual-system/`, `scripts/`, `tests/`.
 
-**Critical invariant:** Build hash is computed only from `src/shell/index.html`. Comment edits + content additions in `src/master/*.html` do NOT affect the hash.
+**Build hash scope (verified in code, `src/scripts/build-shell-unified.mjs`):** `build.hash` = first 8 hex chars of `sha256(src/shell/index.html)` — a **cache-busting value, NOT a content digest**. Consequences: changes to `src/master/*.html`, CSS, or `data/*.json` do NOT change the hash; only `src/shell/index.html` edits do. A run of `pnpm run build` may still touch root `index.html` (the `Generated:` timestamp comment) without any functional change.
 
 ---
 
@@ -220,6 +221,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 ### New bugs and contradictions
 
 26. **On discovering a new bug** — first document it in `STATUS.md` as `KI#<N>`, then fix.
+27. **Display artifacts vs file content** — a terminal may eat bracket sequences in *output* (e.g. `[main]` rendering as `ain]`), which can masquerade as file corruption. Before recording such a KI, verify at byte level: `python3 -c "print(open('<file>').read().count('[main]'))"` or `grep -c 'branches: \[main\]' <file>` (anchored, escaped). An empty pickaxe (`git log -S '<suspect string>'`) is a truthful signal — a display is not. Recorded iter-116 after a suspected "workflow corruption" proved to be an output artifact.
 
 ---
 
@@ -229,9 +231,10 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 |------|----------------|
 | `AGENTS.md` | Short entry point. Update on stack / convention / invariant changes. |
 | `AGENT_NAVIGATION.md` | On structural changes (this file). |
-| `STATUS.md` | On status change (current iter + Known Issues + Roadmap). |
-| `worklog.md` | Every iteration — append a new Task ID section. |
-| `PLAN.md` | On revision of the docs-restructure plan. |
+| `STATUS.md` | On status change (current iter + KIs + **Next step** — authoritative). |
+| `worklog.md` | Every iteration — prepend a new Task ID section. |
+| `PLAN.md` | On backlog change (new deferred items, order, scope/acceptance criteria). |
+| `DECISIONS.md` | On a new standing decision (append-only — the long-term "why"). |
 | `README.md` | On changes to capabilities / commands / structure. |
 | `CHANGELOG.md` | On release (MAJOR.MINOR.PATCH). |
 | `CONTRIBUTING.md` | On changes to contributor workflow. |
@@ -247,60 +250,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ---
 
-## 8. Roadmap (iter 101+)
+## 8. Cross-Reference Pairs
 
-Current state: **iter 115 COMPLETE — Dead CSS removed from `src/shell/styles.css` (V-pattern blocks V-02/V-06/V-15 + 6 specific dead M3 rules, 248 lines).**
-All Phases A–E + iter 94–114 closed. KI#63 + KI#64 + KI#65 closed. No open KIs.
-Next: Fork D (part 2/3) sampling widget (MEDIUM risk, new widget + lazy-loader registration) OR self-admitted dupes cleanup (content decisions requiring visual diff) — pending user decision.
-
-| Iteration | Task | Status |
-|-----------|------|--------|
-| iter 81 | A1 — Elena SP: Tone Frame + OOC | ✅ COMPLETE |
-| iter 82 | A2–A4 — Walter SP + `<identity>` + LIE fix | ✅ COMPLETE |
-| iter 83 | A5 — Omnis-Zeta Anchors: physical Prices | ✅ COMPLETE |
-| iter 84 | A6 — Vyshcherblenny GHOST: shorten to concrete event | ✅ COMPLETE |
-| iter 85 | A7–A8 — All cards: `<anchors>` XML + Tone Frames expand | ✅ COMPLETE |
-| iter 86–88 | B1–B4 — Examples enrichment (4 cards) | ✅ COMPLETE |
-| iter 89–90 | C1–C4 — Bible sync (Walter / Omnis / Vyshcherblenny / Elena) | ✅ COMPLETE |
-| iter 91 | D1–D4 — Guide self-contradictions | ✅ COMPLETE (iter 93) |
-| iter 94 | E1/KI#60/KI#61/KI#62 — Elena Voice leak + Walter sync + audit script | ✅ COMPLETE |
-| iter 95 | E2/KI#58 — Dead weight cleanup + Anchors parts/ sync | ✅ COMPLETE |
-| iter 96 | KI#63 — version drift fix + `pnpm run build` root fallbacks regeneration | ✅ COMPLETE |
-| iter 97 | Annotation callout blocks removal + audit script update | ✅ COMPLETE |
-| iter 98–99 | Theme simplification (dark removed, OLED + Light only) | ✅ COMPLETE |
-| iter 100 | Mermaid dynamic theme re-render on toggle | ✅ COMPLETE (removed iter-113 — was dead code) |
-| iter 101 | Agent infrastructure English rewrite + KI#64 documented | ✅ COMPLETE |
-| iter 102 | VS-EMBED placement audit + reorder (6 misplaced visuals fixed) | ✅ COMPLETE |
-| iter 103 | English terms audit + categorization (doc-only) | ✅ COMPLETE |
-| iter 104 | Category B translation pass (PLANNED, not committed — picked up in iter-106) | ⚠️ SUPERSEDED |
-| iter 105 | Category C borderline translation pass — Quick/Full Check + Grade A/B/C | ✅ COMPLETE |
-| iter 106 | Category B final polish — 3 heading translations + survey script fix | ✅ COMPLETE |
-| iter 107 | Category B/C extended translation — cautious zone + Embodiment Protocol quad + KI#64 CLOSED (mermaid-init.js rollback) | ✅ COMPLETE |
-| iter 108 | Multilingual actualization (safe text-only pass) — removed ~15-20% empirical claims + KI#65 CLOSED (canon→master directive drift) | ✅ COMPLETE |
-| iter 110 | Multilingual forks A+B+C — SP language rule layered + Identity name-language rule + Script Tax / Vocabulary Size + Token Budget Script Tax RULE | ✅ COMPLETE |
-| iter 111 | Fork D (part 1/3) — Voice Influence Hierarchy interactive widget (`persona-voice-hierarchy`) + naming drift fix in `part_07a.md` | ✅ COMPLETE |
-| iter 112 | Dead code cleanup — removed 4 dead widgets (`diagnostic-tree`, `blueprint-viewer`, `author-note-viewer`, `vs-e15-blueprint`) + script tags + init calls + `.fi26-*` CSS utilities (262 lines) | ✅ COMPLETE |
-| iter 113 | Mermaid infrastructure removal — `mermaid-init.js` deleted (141 lines) + CDN `<script>` + lazy-loader init/render block + `reRenderMermaid()` call + `.mermaid` CSS block. CSP tightened. Content had ZERO `.mermaid` usages (replaced by VS-EMBEDs in iter 14). | ✅ COMPLETE |
-| iter 114 | Dead CSS cleanup in `src/assets/vs-styles.css` — SECTION 3 (VS Shared Patterns P1–P6, 196 lines) + 12 dead SECTION 4 utility blocks (211 lines) removed. 407 lines total, ~10.2 KB. Hash unchanged (vs-styles.css not in hash input). | ✅ COMPLETE |
-| **iter 115** | **Dead CSS cleanup in `src/shell/styles.css` — V-02/V-06/V-15 V-pattern blocks (240 lines) + 6 specific dead M3 rules (8 lines) removed. 248 lines total, ~5.3 KB. Hash unchanged (shell/styles.css not in hash input). M3 widget CSS confirmed LIVE (iter-114 deferred-task description was wrong — most M3 classes are used by widgets via `className =` injection). Both CSS files now trimmed to in-use rules only.** | **✅ COMPLETE** |
-| deferred | Fork D (part 2/3) — sampling widget (slider configurator for `p7a_sampling_params`, MEDIUM risk) | — |
-| deferred | Fork D (part 3/3) — persona widget (meaning TBD: new 3rd widget or extend persona-synthesis) | — |
-| deferred | Self-admitted dupes cleanup — §7A.12 plain-copy pre-block + §9.11 quick-check table (content decisions requiring visual diff) | — |
-
-Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Canon migration status: `docs/canon/_README.md` §5.
-
----
-
-## 9. Cross-Reference Pairs
-
-> Per IMP-48: when section A references section B, B MUST reference back to A.
-
-### v9.1 Restructure Changes
-
-- `p1_assembly_pipeline` DELETED → replaced by `p1_pipeline_ref` (forward ref to Part 7A)
-- `p1_token_budget` MOVED → now `p7a_token_budget` in Part 7A
-- `p10_geralt` / `p10_edward` DELETED
-- New sections: `p1_value_proposition`, `p7a_token_budget`
+> Per IMP-48: when section A references section B, B MUST reference back to A. One canonical definition per concept — everywhere else = 1-sentence link. Registry of section-inventory pairs: `docs/content_map.md`.
 
 ### Known Cross-Reference Pairs
 
@@ -323,7 +275,7 @@ Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Cano
 
 ---
 
-## 10. Useful Links
+## 9. Useful Links
 
 | Resource | URL |
 |----------|-----|
@@ -334,4 +286,28 @@ Full roadmap: `docs/research/examples_audit_iter80.md` §10 (Phases A–E). Cano
 
 ---
 
-**Hint for the next agent:** Before starting a new iteration, read `STATUS.md` (current status, Known Issues, Roadmap), `worklog.md` (latest iteration in detail), this file (§5 Core Rules, §6 Frequent Pitfalls), `docs/canon/_README.md` (Canon rules). **Principle:** "Better to underdeliver than to break things." One edit = one iteration. If you find a new bug — first document it in `STATUS.md` as `KI#<N>`, then fix it.
+## 10. Information Ownership (anti-drift map)
+
+One fact — one owner. Everyone else links; a copy is a link or a one-line summary, never a second full statement.
+
+| Information | Single owner | Everyone else |
+|---|---|---|
+| Current iteration, KIs, **authoritative Next step** | `STATUS.md` | link; re-pin Next step every iteration |
+| Backlog: what is pending, order, scope/acceptance criteria | `PLAN.md` | link |
+| Agent operating law: authority order, preflight, fences, scope, DoD | `AGENTS.md` | `STATUS.md` carries one-liners only |
+| Directory map, build pipeline, section/widget model | this file | link |
+| Standing decisions — the long-term "why" | `DECISIONS.md` | link; worklog records what, not why |
+| Iteration history (what happened) | `worklog.md` + `CHANGELOG.md` + git | link |
+| Content semantics per Part | `docs/canon/part_NN.md` | master HTML derives; never restate |
+| Section inventory / concept ownership | `docs/content_map.md` | link |
+| CSS component registry | `docs/components.md` | link |
+| Guide version (4-place sync) | `package.json` + `src/VERSION` + `data/character_schema.json` + build manifest | `pnpm run version:check` |
+| Character canon (bible cards) | `docs/character_bible.md` + per-character bibles | link |
+| Research/audit analyses | `docs/research/` | link |
+
+Update rule: if a fact must appear in two documents, the second occurrence is a link.
+If ownership of a fact changes, update this table in the same iteration.
+
+---
+
+**Hint for the next agent:** run the preflight from `AGENTS.md` — read `STATUS.md` (state + authoritative **Next step**) → the reading gradient for your task type (`AGENTS.md`) → the sections of this file it names. **Principle:** "Better to underdeliver than to break things." One edit = one iteration. Found a bug — record it as `KI#<N>` first; fix immediately only if it is in scope (`AGENTS.md` → Scope discipline).

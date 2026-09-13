@@ -4,7 +4,7 @@
 
 - **Live site:** https://vudirvp-sketch.github.io/live-char-guide/
 - **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
-- **Status:** iter 101 COMPLETE — agent infrastructure English rewrite + actualization. See [`STATUS.md`](./STATUS.md).
+- **Status:** current state (iteration, KIs, authoritative next step) lives in [`STATUS.md`](./STATUS.md).
 
 ---
 
