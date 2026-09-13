@@ -250,6 +250,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | `docs/canon/part_NN.md` | On creating/updating the Canonical Guide Spec for a Part. |
 | `docs/research/guide_analysis_consolidated.md` | Consolidated guide analysis (iter 73+). 12 sections: contradictions C1–C15, duplicates D1–D20, checklists, prioritized proposals P1/P2/P3. |
 | `docs/research/research_plan.md` | Verification and edit plan iter 74+ (Phases 1–5). |
+| `docs/research/editorial_research_en.md` | External editorial research intake (iter 118): textual-layer audit (semantic duplication, cognitive density, information timing, rule strength, reading modes) + proposed editorial rule set (§27). Claims verified at intake — KI#68 fixed same iteration. Backlog: PLAN rows ed-policy / ed-matrix / ed-1…ed-8. |
 
 ---
 
