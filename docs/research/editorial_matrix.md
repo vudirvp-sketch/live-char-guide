@@ -524,7 +524,7 @@ ed-policy Rule 3/§15 navigation-debt decision).
 | R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |
 | R15 | §9.4 problems #4/#5 vs §9.5 rows | §9.5 | §9.4 | DUPLICATE | ed-3 execution |
 | R16 | §9.11 quick-check `<details>` vs §9.3 | §9.3 | §9.11 (self-admitted) | DUPLICATE | dupes-1 |
-| R17 | Repo-meta in reader prose | — | §1.2 L51 (Mermaid iter 14) · §1.2 L53 (build internals) · §7A.1 L35 (**stale** [ANCHORS] claim) · §7A.2 L82 (D4 iter 93) · §7A.12 L616 (**stale** migration note) · + Part 8 (out of Phase A, confirmed by backlog audit) | DUPLICATE class (ed-6) | ed-6 |
+| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6 executed; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. Post-Phase-A discoveries (non-rendering, pending Phase B rows): `part_06.md` §6.3 L83 (iter 29 / KI#18-F note) · `part_00.md` L13 («Создан: iter 38») · `appendix_character_map.md` L29 (iter 40 / KI#29) | — | §1.2 L51 (Mermaid iter 14) · §1.2 L53 (build internals) · §7A.1 L35 (**stale** [ANCHORS] claim) · §7A.2 L82 (D4 iter 93) · §7A.12 L616 (**stale** migration note) · + Part 8 (out of Phase A, confirmed by backlog audit) | DUPLICATE class (ed-6) | ed-6 ✅ iter 121 |
 | R18 | Vague `§X.X` placeholder refs | — | §3.5 (`§7B.X`) · §9.3 (`§7B.X`, `§4.X`, `§3.X`) · §9.5 (`§3.X`, `§4.X`, `§2.X`, `§6.X`) · §7A.5 unbalanced paren | Navigation debt | ed-8 |
 | R19 | Voice Leak causes | §3.6 | §9.5 voice rows | REINFORCEMENT (lookup form) | — |
 | R20 | 12B symptoms | §9.10 | §9.5 general rows | SPECIAL CASE | — |
