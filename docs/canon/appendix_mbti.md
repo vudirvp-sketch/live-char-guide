@@ -36,7 +36,7 @@ migration_status: —
 | **SJ** (Стражи) | ISTJ, ISFJ, ESTJ, ESFJ | Голубой |
 | **S·P** (Исследователи) | ISTP, ISFP, ESTP, ESFP | Оранжевый |
 
-**NOTE:** S·P = темперамент Keirsey **S**ensing-**P**erceiving, не **SP** (System Prompt). В виджете и таблицах используется `S·P` (с точкой) для устранения коллизии с аббревиатурой SP → `[ref: part_07a.md §7A.X — System Prompt]`.
+**NOTE:** S·P = темперамент Keirsey **S**ensing-**P**erceiving, не **SP** (System Prompt). В виджете и таблицах используется `S·P` (с точкой) для устранения коллизии с аббревиатурой SP → `[ref: part_07a.md §7A.1 — System Prompt]`.
 
 ### MBTI Composer (interactive)
 
