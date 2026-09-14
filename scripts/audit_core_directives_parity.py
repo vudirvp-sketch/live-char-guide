@@ -11,8 +11,9 @@ presentation layer of the v1 inventory (migration_foundation_iter131.md §5.1):
                                (§7A.2 owns; parity-locked by this audit)
     §7A.1 / §7A.13 / Part 10 = DEC-08 shorthand references only
     glossary (registry C-5)  = 1-sentence definition + 7-name index + §7A.2 link
-    prototype/extract E08    = stale derived copies — REMOVED_WITH_REASON deferred
-                               on map §6.1 (visual-markup ownership, owner decision)
+    prototype/extract E08    = stale derived copies — REMOVED_WITH_REASON executed
+                               iter 138 (DEC-19: master embed = canonical visual
+                               markup; files removed)
 
 Checks:
  1. Canonical record (canon §7A.2): exactly one <CORE_DIRECTIVES> block; exactly 7
@@ -44,7 +45,7 @@ Checks:
 
 Deferred layers (reported as notes, never failures):
   - visual-system/elements/E08-core-directives.html + component-extracts/E08-*
-    (disposition REMOVED_WITH_REASON, blocked on map §6.1 owner decision);
+    (disposition REMOVED_WITH_REASON — DECIDED DEC-19, executed iter 138: removed);
   - docs/canon/appendix_glossary.md + src/master/appendix_glossary.html (frozen
     v1 migration source; full annotated copy superseded by registry C-5 —
     disposed at the v2 switch, DEC-18);
@@ -433,7 +434,7 @@ def main():
     ):
         deferred.append(f"{p.relative_to(REPO)}: "
                         f"{'present' if p.exists() else 'MISSING'} "
-                        f"(REMOVED_WITH_REASON deferred — map §6.1)")
+                        f"(REMOVED_WITH_REASON executed iter 138, DEC-19)")
     for p in (CANON_DIR / "appendix_glossary.md",
               MASTER_DIR / "appendix_glossary.html"):
         deferred.append(f"{p.relative_to(REPO)}: "

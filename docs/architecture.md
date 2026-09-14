@@ -65,7 +65,7 @@ dist/ (deployed to GitHub Pages)
 | `build/` | Generated | Build intermediate output (gitignored, regenerable from source) | Auto-generated only |
 | `dist/` | Generated | Deployment output (gitignored) | Auto-generated only |
 | `parts/`, `widgets/`, `assets/`, `data/`, `index.html`, `event-bus.js`, `build.hash` (root) | Generated | Root fallbacks — regenerated on every build, committed for GitHub Pages backward-compat | **NEVER hand-edit** |
-| `visual-system/` | Infrastructure | Visual-system prototype (isolated-first; feeds `qa:contrast` via `tokens.json`) | Infrastructure only |
+| `visual-system/` | Infrastructure | Visual-system frozen design artifacts (DEC-19, iter 138: master embed = canonical visual markup; E01/E08/E10/E15 prototype+extract copies removed — REMOVED_WITH_REASON; feeds `qa:contrast` via `tokens.json`) | Infrastructure only |
 | `scripts/` | Infrastructure | Build and validation scripts | Infrastructure only |
 | `tests/` | Infrastructure | Test suite | Infrastructure only |
 
@@ -314,7 +314,7 @@ live-char-guide/
 │   │                     #   + canon/ (source of truth) + research/
 ├── scripts/              # Build + validation + QA scripts
 ├── tests/                 # Node test runner (test-*.mjs + integration/)
-├── visual-system/         # Visual-system prototype (isolated-first)
+├── visual-system/         # Visual-system frozen design artifacts (DEC-19; tokens.json feeds qa:contrast)
 ├── build/                 # Generated intermediate output (gitignored)
 ├── dist/                  # Deployment output (gitignored)
 ├── parts/  widgets/  assets/  data/  index.html  event-bus.js  build.hash

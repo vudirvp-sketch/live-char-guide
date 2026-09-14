@@ -25,8 +25,9 @@ Verifies the Enneagram data cluster architecture across every layer of the slice
                                 the generated layer, drawn statically per KI#75)
     canon [VS: E10] marker    = declares §5.4 ownership + SHARED_REFERENCE + the
                                 generated data layer (map E10 disposition)
-    prototype/extract E10     = stale derived copies — REMOVED_WITH_REASON deferred
-                                on map §6.1 (visual-markup ownership)
+    prototype/extract E10     = stale derived copies — REMOVED_WITH_REASON
+                                executed iter 138 (DEC-19: master embed =
+                                canonical visual markup; files removed)
 
 Checks:
  1. Canonical record (canon §5.4): 9 rows; every canonical field == the acceptance
@@ -63,7 +64,7 @@ Checks:
 Deferred layers (reported as notes, never failures):
   - visual-system prototype E10 + component extract (disposition
     REMOVED_WITH_REASON — «Я фундаментально ущербен» 3-way drift, foundation §4.3 —
-    blocked on map §6.1 owner decision);
+    DECIDED DEC-19, executed iter 138: files removed);
   - E10 hexad graph geometry = VISUAL_CANONICAL (SVG static, directions data in
     the generated layer; KI#75 verified the drawing — not re-audited geometrically);
   - machine-layer fields without a direct runtime reader (wings, wing_pairs,
@@ -452,7 +453,7 @@ def main():
     notes.append(
         f"{proto.relative_to(REPO)}: {'present' if proto.exists() else 'MISSING'}; "
         f"{extract.relative_to(REPO)}: {'present' if extract.exists() else 'MISSING'} "
-        "(E10 prototype/extract — REMOVED_WITH_REASON deferred, map §6.1: stale "
+        "(E10 prototype/extract — REMOVED_WITH_REASON executed iter 138 (DEC-19): stale "
         "«Я фундаментально ущербен» 3-way drift, foundation §4.3)"
     )
     notes.append(
@@ -479,7 +480,8 @@ def finish():
         sys.exit(1)
     print("\nPASS — single canonical value owner intact: §5.4 canonical table → "
           "generated data/enneagram.json (LIE folded to one internal copy) → "
-          "E10 SHARED_REFERENCE + re-pointed widgets; prototype/extract §6.1-deferred.")
+          "E10 SHARED_REFERENCE + re-pointed widgets; prototype/extract REMOVED_WITH_REASON "
+          "executed iter 138 (DEC-19).")
 
 
 if __name__ == "__main__":

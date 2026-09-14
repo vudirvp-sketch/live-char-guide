@@ -23,7 +23,8 @@ of the slice (migration_foundation_iter131.md §5.5 evidence; map Registry B row
                                part_10.md side)
     glossary (registry C-21) = values deferred to §7A.12 (executed iter 133)
     prototype/extract E01/E15 = stale derived copies — REMOVED_WITH_REASON
-                               deferred on map §6.1 (visual-markup ownership)
+                               executed iter 138 (DEC-19: master embed = canonical
+                               visual markup; files removed)
 
 Checks:
  1. Canonical record (canon §7A.12): budget table rows == acceptance invariants
@@ -57,7 +58,7 @@ Checks:
 
 Deferred layers (reported as notes, never failures):
   - visual-system prototype + extract copies of E01/E15 (disposition
-    REMOVED_WITH_REASON, blocked on map §6.1 owner decision);
+    REMOVED_WITH_REASON — DECIDED DEC-19, executed iter 138: files removed);
   - R11/R27 budget-adjacent prose layers OUTSIDE the slice (owner-gated ed-5 /
     KI#77-e): §7A.11 4K table, §1.8 prebuild Q2, §7A.13 step 6 (consistent ✓),
     §9.11 «Description ≤ 800», §8.2 AP-1 «> 800», Part 10 card totals,
@@ -418,7 +419,7 @@ def main():
         deferred.append(
             f"{proto.relative_to(REPO)}: {'present' if proto.exists() else 'MISSING'}; "
             f"{extract.relative_to(REPO)}: {'present' if extract.exists() else 'MISSING'} "
-            f"({el} prototype/extract — REMOVED_WITH_REASON deferred, map §6.1)")
+            f"({el} prototype/extract — REMOVED_WITH_REASON executed iter 138, DEC-19)")
     deferred.append(
         "out-of-slice budget-adjacent prose (owner-gated ed-5 / KI#77-e, R11/R27 "
         "family): §7A.11 4K table · §1.8 prebuild Q2 · §9.11 «≤800» · §8.2 AP-1 "

@@ -49,8 +49,8 @@ assigning a disposition. Uncertain cases stay `UNKNOWN`, never deleted.
 | L1 canon MD | source of truth | stays single source of truth for prose rules |
 | L2 master HTML (incl. 18 embeds) | sync-audited (prose) | production; embeds reference canonical values instead of re-encoding them |
 | L3 root fallbacks | build-generated | unchanged (DEC-04) |
-| L4 `visual-system/elements/` prototypes | **none, drifted** | frozen design artifacts (archive) — or re-established as canonical visual source; **decision §6.1** |
-| L5 `component-extracts/` | **none, stale** | superseded by whatever owns visual markup (L4 or L2); disposition §6.1 |
+| L4 `visual-system/elements/` prototypes | **none, drifted** | **DECIDED (DEC-19, iter 138):** frozen design artifacts (archive = git history + recorded reasons); master embed (L2) = canonical visual markup; E01/E08/E10/E15 copies → `REMOVED_WITH_REASON` iter 138; remaining families ride the freeze at their slice time |
+| L5 `component-extracts/` | **none, stale** | **DECIDED (DEC-19, iter 138):** superseded by the master embed (L2); E01/E08/E10/E15 extract copies → `REMOVED_WITH_REASON` iter 138 |
 | L6 `data/*.json` | version field only | **derived** from the canonical source wherever it carries knowledge (glossary: **DECIDED DEC-17** — canonical record → generated `glossary.json`; enneagram: **executed iter 136** — §5.4 → generated `enneagram.json`; remaining clusters per disposition) |
 | L7 widget-embedded constants | manual (DEC-09) | keep only with declared canon provenance in header |
 | L8 shell runtime | tests | unchanged |
@@ -66,36 +66,36 @@ textual canonical home); drift = known prototype↔embed divergence
 
 | El | Master home | P/I | E∖C | Drift | Embedded payload (disposition PROPOSED) |
 |----|-------------|-----|-----|-------|------------------------------------------|
-| E01 | `part_01.html` p1_card_overview | 38/44 | 27 | russification lag | block roles + derived budget ranges: budget numbers → `TEXTUAL_CANONICAL` (§7A.12 owns values); anchors-placement rule prose → `TEXTUAL_CANONICAL` (extend §1.4 rule text); labels → `REFERENCE_ONLY`. **Executed iter 135 (mig-4, slice §5.3):** budget values verified == §7A.12 at every layer — the §4.4 «SP ~100–200 wrong-side copy» claim found absent (registry corrected); values parity-locked by `scripts/audit_token_budget_parity.py`; canon `[VS: E01]` marker added (TB-3); Lorebook row = declared estimate; prototype/extract deferred → §6.1 |
+| E01 | `part_01.html` p1_card_overview | 38/44 | 27 | russification lag | block roles + derived budget ranges: budget numbers → `TEXTUAL_CANONICAL` (§7A.12 owns values); anchors-placement rule prose → `TEXTUAL_CANONICAL` (extend §1.4 rule text); labels → `REFERENCE_ONLY`. **Executed iter 135 (mig-4, slice §5.3):** budget values verified == §7A.12 at every layer — the §4.4 «SP ~100–200 wrong-side copy» claim found absent (registry corrected); values parity-locked by `scripts/audit_token_budget_parity.py`; canon `[VS: E01]` marker added (TB-3); Lorebook row = declared estimate; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E02 | `part_07a.html` p7a_assembly_pipeline | 29/30 | 19 | none detected | assembly step names → `SHARED_REFERENCE` (canonical pipeline = §7A.13) |
 | E03 | `part_02.html` p2_anchor_examples | 21/22 | 19 | none detected | T→A→P example rows → `VISUAL_CANONICAL` (demonstration; examples stay visual) |
 | E04 | `part_02.html` p2_embodiment | 15/19 | 10 | minor | State→Body→Sensor→Speech stages → `SHARED_REFERENCE` (§2.4 owns) |
 | E05 | `part_04.html` p4_spine_overview | 16/28 | 16 | russification lag | SPINE element names/glosses → `SHARED_REFERENCE` (§4.1 owns; «WANT сходится к NEED…» causal caption → `TEXTUAL_CANONICAL`, unique rule statement) |
 | E06 | `part_04.html` p4_ghost_layers | 12/13 | 10 | russification lag | G1/G2/G3 layer labels + example quotes → `SHARED_REFERENCE` (§4.11 owns); layer quotes («Отец ушёл, когда мне было 5») → `VISUAL_CANONICAL` example |
 | E07 | `part_03.html` p3_influence_hierarchy | 33/33 | 20 | none detected | compressed ~75–85% scale → `SHARED_REFERENCE` (§3.2 owns exact table); «Пользователи часто предполагают…» prose + «Хранилище vs Влияние» distinction → `TEXTUAL_CANONICAL` candidate (unique explanation, needs §3.2 home decision) |
-| E08 | `part_07a.html` p7a_core_directives | 17/17 | 7 | none detected | 7 directive titles+one-liners → `SHARED_REFERENCE` (§7A.2 owns); visual = canonical presentation of the list (ed-2 mechanism, DEC-08). **Executed iter 134 (mig-2):** titles/numbering/#6–#7 model-gating parity-locked by `scripts/audit_core_directives_parity.py`; node-7 title aligned to the canonical h4 («Фильтр предгенерации»); prototype/extract copies deferred → §6.1 |
+| E08 | `part_07a.html` p7a_core_directives | 17/17 | 7 | none detected | 7 directive titles+one-liners → `SHARED_REFERENCE` (§7A.2 owns); visual = canonical presentation of the list (ed-2 mechanism, DEC-08). **Executed iter 134 (mig-2):** titles/numbering/#6–#7 model-gating parity-locked by `scripts/audit_core_directives_parity.py`; node-7 title aligned to the canonical h4 («Фильтр предгенерации»); prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E09 | `part_05.html` p5_ocean_basics | 17/17 | 9 | hex literals (KI#41/42 class) | pentagon axis labels → `REFERENCE_ONLY`; extreme-zone labels → `SHARED_REFERENCE` (§5.1 owns) |
-| E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract deferred → §6.1 |
+| E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E11 | `part_06.html` p6_cot_tiers | 35/37 | 24 | none detected | tier definitions + model applicability (12B+/32B+/API) + template snippets → `SHARED_REFERENCE` (§6.3–§6.5 own); «Tier 0 работает для всех…» explanatory lines → `TEXTUAL_CANONICAL` candidates |
 | E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family) |
-| E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2. **Recommendation iter 137:** `TEXTUAL_CANONICAL` → §9.6 (`owner_gates_iter137.md` §3.2) |
+| E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2. **Recommendation iter 137:** `TEXTUAL_CANONICAL` → §9.6 (`owner_gates_iter137.md` §3.2). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — execution = mig-3 (unblocked) |
 | E14 | `part_09.html` p9_quality_scale | 17/18 | 9 | none detected | quality grade names → `SHARED_REFERENCE` (§9.1 owns) |
-| E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2). **Executed iter 135 (mig-4, slice §5.3):** min–max values verified == canonical; Examples total now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; canon `[VS: E15]` marker added with the derivation rule (TB-4/TB-5); parity-locked; prototype/extract deferred → §6.1 |
+| E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2). **Executed iter 135 (mig-4, slice §5.3):** min–max values verified == canonical; Examples total now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; canon `[VS: E15]` marker added with the derivation rule (TB-4/TB-5); parity-locked; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E16 | `part_07a.html` p7a_authors_note | 31/31 | 20 | none detected | AN template A/B labels → `SHARED_REFERENCE` (§7A.5 owns) |
 | E17 | `part_07a.html` p7a_sampling_params | 43/44 | 13 | none detected | 3-tier param table → `SHARED_REFERENCE` — **blocked on KI#72 value decision** (embed carries both sides labeled «базовая»/«чеклист»); annotations («Только Examples» etc.) → `REFERENCE_ONLY` |
 | E18 | `part_07b.html` p7b_greeting | 16/16 | 5 | none detected | greeting algorithm steps → `SHARED_REFERENCE` (§7B.2 owns) |
-| hero | — (unintegrated) | n/a | n/a | never integrated | `UNKNOWN` — §6.4. **iter 137 evidence:** runs on Three.js via `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead `.vs-hero-placeholder` CSS stub in `src/shell/styles.css` (5 rules, zero consumers — KI#81). **Recommendation iter 137:** remove/archive (`owner_gates_iter137.md` §3.4) |
+| hero | — (unintegrated) | n/a | n/a | never integrated | `UNKNOWN` — §6.4. **iter 137 evidence:** runs on Three.js via `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead `.vs-hero-placeholder` CSS stub in `src/shell/styles.css` (5 rules, zero consumers — KI#81). **Recommendation iter 137:** remove/archive (`owner_gates_iter137.md` §3.4). **DECIDED (DEC-19, iter 138):** remove/archive — disposal slice pending (KI#81 CSS cleanup rides it) |
 
 ## 4. Registry B — concept clusters → canonical ownership (v2 dispositions PROPOSED)
 
 | Cluster | Canonical owner (v1→v2) | Competing copies found (v1) | Proposed v2 disposition |
 |---|---|---|---|
-| CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused). **EXECUTED iter 134 (mig-2, slice §5.2 D-1…D-8):** §7A.13 full copy → DEC-08 shorthand (canon + master mirror); E08 parity-locked; §7A.1/Part 10 verified shorthand ×4; prototype/extract still gated on §6.1 |
+| CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused). **EXECUTED iter 134 (mig-2, slice §5.2 D-1…D-8):** §7A.13 full copy → DEC-08 shorthand (canon + master mirror); E08 parity-locked; §7A.1/Part 10 verified shorthand ×4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
 | Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
-| Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode) |
+| Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — mappings → §9.6, E13 = visual presentation; mig-3 unblocked |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice. **EXECUTED iter 135 (mig-4, slice §5.3 TB-1…TB-8):** E01 values verified canonical at every layer (the wrong-side-copy claim corrected — not found in the repo); E15 derivation note added (master + canon marker); `[VS: E01/E15]` canon markers added; glossary already deferred (iter 133); no value decision needed |
-| Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift). **EXECUTED iter 136 (mig-5, slice §5.4):** chain implemented §5.4 → `scripts/generate_enneagram.mjs` (owns the machine-layer supplement) → generated `data/enneagram.json` (v2.1.0) → widgets (builder + synthesis re-pointed to `types[].lie_template`; vs-e10 unchanged); E10 mini-cards SHARED_REFERENCE; prototype/extract copy stays §6.1-gated |
+| Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift). **EXECUTED iter 136 (mig-5, slice §5.4):** chain implemented §5.4 → `scripts/generate_enneagram.mjs` (owns the machine-layer supplement) → generated `data/enneagram.json` (v2.1.0) → widgets (builder + synthesis re-pointed to `types[].lie_template`; vs-e10 unchanged); E10 mini-cards SHARED_REFERENCE; prototype/extract copy → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | Voice influence % | §3.2 table | E07 compressed scale + unique prose · `persona-voice-hierarchy.js` constants (sanctioned DEC-09) | E07 scale → `SHARED_REFERENCE`; E07 unique prose → `TEXTUAL_CANONICAL` candidate (§3.2 home decision); widget constants keep DEC-09 provenance header |
 
 ## 5. Registry C — block-level rows (mechanism)
@@ -357,31 +357,31 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
 
 ## 6. Owner decision points (blocking, in recommended order)
 
-> **Recommendation package (iter 137, agent-prepared — NOT decisions; every gate
-> stays owner-called):** verified evidence + a recommended call per gate + call
-> order: [`owner_gates_iter137.md`](./owner_gates_iter137.md). Summary — §6.1:
-> master embed canonical / L4-L5 frozen (stale copies → `REMOVED_WITH_REASON` at
-> slice time); §6.2: `TEXTUAL_CANONICAL` (mappings → §9.6, E13 = visual reference);
-> §6.5: ratify RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL (+ UNKNOWN = temporary
-> uncertainty only; incremental application); §6.4: remove/archive (rides the §6.1
-> freeze; dead `.vs-hero-placeholder` CSS stub → KI#81). Recommended call order:
-> **§6.1 → §6.2 → §6.5 → §6.4** (unblock value; §6.4 gates nothing).
+> **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
+> §6.1/§6.4 → **DEC-19** (master embed = canonical visual markup / L4-L5 frozen; hero
+> remove/archive); §6.2/§6.5 → **DEC-20** (`TEXTUAL_CANONICAL` → §9.6; rule-strength
+> ratified). The called plan = the iter-137 recommendation package
+> ([`owner_gates_iter137.md`](./owner_gates_iter137.md) — verified evidence per gate
+> §3.1–§3.4). Execution order: §6.1 disposal slice = **iter 138** (E08/E01/E15/E10
+> prototype+extract copies → `REMOVED_WITH_REASON`); §6.2 → **mig-3 next**; §6.5 applied
+> incrementally by consuming slices; §6.4 disposal slice pending (last — gates nothing).
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
    prototypes/extracts become frozen design artifacts (default), or
    visual-system/ is re-established as the canonical visual source with a sync
    mechanism. Evidence: 93% identity, drift in E10/E01/E05/E06, no sync tooling
    (foundation §4.3).
-   **Recommendation (iter 137, pending owner call):** master embed = canonical;
-   L4/L5 frozen design artifacts; the four executed families' stale copies →
-   `REMOVED_WITH_REASON` in a mechanical disposal slice (parity locks already in
-   place). Detail: `owner_gates_iter137.md` §3.1.
+   **DECIDED (DEC-19, owner chat 2026-09-14 «начинай работу по планам»):** master
+   embed = canonical; L4/L5 frozen design artifacts; the four executed families'
+   stale copies → `REMOVED_WITH_REASON` — **disposal slice executed iter 138** (16
+   files: 4 prototypes + 12 extracts; parity-audit deferred-layer notes updated;
+   NAV §1 visual-system row → frozen). Detail: `owner_gates_iter137.md` §3.1.
 2. **E13 diagnostic mappings**: canonicalize in §9.6 vs visual-canonical
    (Registry B row 4).
-   **Recommendation (iter 137, pending owner call):** `TEXTUAL_CANONICAL` —
+   **DECIDED (DEC-20, owner chat 2026-09-14):** `TEXTUAL_CANONICAL` —
    canonicalize the unique mappings in §9.6 (canon §9.6 L139 already claims E13 is
    its visual version — the claim is currently false); E13 = visual presentation /
-   decision aid; unblocks mig-3 on the established slice pattern.
+   decision aid; **mig-3 unblocked** on the established slice pattern.
    Detail: `owner_gates_iter137.md` §3.2.
 3. **Glossary cluster (first bounded area) — DECIDED (DEC-17, owner chat 2026-09-14):**
    (a) canonical term-set = **merged-with-review** (per-term evidence: §5.1;
@@ -397,16 +397,17 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
    **executed iter 133 (mig-1)**.
 4. **Hero prototype** (`visual-system/hero/`): integrate, archive, or remove
    (unintegrated since VS phase 1; carries its own labels).
-   **Recommendation (iter 137, pending owner call):** remove/archive — never
+   **DECIDED (DEC-19, owner chat 2026-09-14):** remove/archive — never
    integrated (INTEGRATION-MAP row unexecuted); runs on Three.js via
    `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead
    `.vs-hero-placeholder` CSS stub in shell styles (KI#81) is the only
-   production-side residue. Detail: `owner_gates_iter137.md` §3.4.
+   production-side residue — **disposal slice pending** (call order: last).
+   Detail: `owner_gates_iter137.md` §3.4.
 5. **Rule-strength convention** for v2 (RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL/
    UNKNOWN markup) — needed before the Part 7A/8 v2 slices (model-capability
    percentages are OBSERVATION-strength; research §19 vocabulary).
-   **Recommendation (iter 137, pending owner call):** ratify the four classes +
-   UNKNOWN-as-temporary-only; apply incrementally per slice (no mass annotation);
+   **DECIDED (DEC-20, owner chat 2026-09-14):** ratified — the four classes +
+   UNKNOWN-as-temporary-only; applied incrementally per slice (no mass annotation);
    ПРАВИЛО/РЕКОМЕНДАЦИЯ map to RULE/GUIDELINE (existing callout classes);
    OBSERVATION/EXPERIMENTAL markup representation = first consuming slice. Note:
    the sampling cluster additionally needs the KI#72 value decision.
@@ -488,3 +489,22 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
   Full package: `owner_gates_iter137.md`; §6 preamble + per-item recommendation lines +
   Registry A hero/E13 notes updated (this entry). v1 untouched; no battery (doc-only,
   iter-131 precedent).
+- **iter 138 (owner-gates-ratified + §6.1 disposal, BASE_COMMIT `5de8fc9c`):** owner chat
+  2026-09-14 «начинай работу по планам» = the go-ahead on the iter-137 package — all four
+  gates recorded: §6.1+§6.4 → DEC-19, §6.2+§6.5 → DEC-20 (§6 preamble + rows 1/2/4/5 →
+  DECIDED; §2 L4/L5 → frozen; Registry A hero/E13 + Registry B rows 1/4/6 notes). §6.1
+  disposal slice executed: **16 files REMOVED_WITH_REASON** (`visual-system/elements/`
+  E01/E08/E10/E15 prototypes + `integration/component-extracts/` E01/E08/E10/E15 ×3 —
+  stale second copies of parity-locked embeds; archive = git history; Registry A/B →
+  executed). Verification: the three family parity audits' deferred-layer notes updated
+  (E08 / E01+E15 / E10 — recommendation §3.1 wording said "four parity audits": three
+  scripts cover the four families; `audit_glossary_parity.py` carries no prototype
+  notes — verified); `audit_component_extracts.py` + `_css.py` degrade gracefully to
+  MISSING (pre-existing `exists()` guards — no edit needed); production `Source:
+  elements/E##-*.html` provenance comments in `src/master/` + stylesheets left untouched
+  (frozen v1 — resolve to git history, DEC-19). NAV §1 visual-system row → frozen;
+  architecture.md role row updated. Doc+disposal-only: no `src/` or `data/` file touched —
+  Python audit battery re-run green (sync 97/97; glossary/core-directives/token-budget/
+  enneagram parity PASS; drift actionable 160 unchanged); no node battery (no build input
+  touched — iter-131 doc-only precedent). mig-3 unblocked = next (DEC-20); §6.4 hero
+  disposal slice pending (DEC-19; KI#81 cleanup rides it).
