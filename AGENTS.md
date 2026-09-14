@@ -134,6 +134,7 @@ python3 scripts/audit_canon_master_sync.py    # MUST PASS (97/97 or current coun
 python3 scripts/audit_canon_master_drift.py   # informational, exit 0
 python3 scripts/audit_glossary_parity.py      # MUST PASS (glossary registry ↔ migration map ↔ generated JSON — DEC-17/18)
 python3 scripts/audit_core_directives_parity.py  # MUST PASS (CORE DIRECTIVES single-canonical-presentation parity — DEC-08/mig-2)
+python3 scripts/audit_token_budget_parity.py  # MUST PASS (Token budget §7A.12 canonical ↔ E01/E15 SHARED_REFERENCE parity — mig-4)
 ```
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates

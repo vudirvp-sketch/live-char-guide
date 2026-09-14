@@ -89,7 +89,7 @@
 | p1_structure_overview::01 | L51 | concept flow + Mermaid history | NAVIGATION | COMPRESS | YES | — | Function = reading order (keep); carries repo history «Mermaid удалён в iter 14» → ed-6 strip (R17) |
 | p1_structure_overview::02 | L53 | Cross-ref: AUTO_TOC | NAVIGATION | COMPRESS | YES | — | Reader job = "TOC exists"; build internals (`AUTO_TOC_PLACEHOLDER`, build-скрипт) → ed-6 strip (R17) |
 | p1_structure_overview::03 | L55 | порядок чтения (①–⑤) | NAVIGATION | KEEP | YES | — | Compliant orientation |
-| p1_structure_overview::04 | L57 | E01 note: Anchors visually nested, structurally separate | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | Feeds R01 (Anchors-placement); clarifies viz, not re-teach |
+| p1_structure_overview::04 | L57 | E01 note: Anchors visually nested, structurally separate | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | Feeds R01 (Anchors-placement); clarifies viz, not re-teach; → migration_map_v2 TB-3 ([VS: E01] canon marker added iter 135 — budget semantics declared: §7A.12 SHARED_REFERENCE) |
 | p1_structure_overview::05 | L59–65 | table: 5 blocks influence/budget share | DEFINITION | KEEP | YES | — | Structural properties not visible in E01 — declared complement, not dupe |
 | p1_structure_overview::06 | L67 | RULE 1-sentence: voice rule → §1.4 | NAVIGATION | KEEP | YES | — | Compliant pointer form |
 | p1_structure_overview::07 | L69–71 | Token Budget + assembly refs | NAVIGATION | KEEP | YES | — | 1-sentence refs to §7A.12/§7A.13 — ed-5 already verified compliant |
@@ -361,7 +361,7 @@ not a merge.
 |---|---|---|---|---|---|---|---|
 | p7a_token_budget::01 | L580 | intro: budget pipeline | DEFINITION | KEEP | YES | — | |
 | p7a_token_budget::02 | L584 | intro to limits (3 levels, color semantics) | DEFINITION | KEEP | YES | — | Describes master-side table coloring |
-| p7a_token_budget::03 | L586–593 | budget table (min/std/max) | DEFINITION | KEEP | YES | — | **Canonical** budget table (R11) |
+| p7a_token_budget::03 | L586–593 | budget table (min/std/max) | DEFINITION | KEEP | YES | — | **Canonical** budget table (R11); → migration_map_v2 TB-1 (canonical owner, unchanged — mig-4 verified iter 135) |
 | p7a_token_budget::04 | L594 | RULE: превышение бюджета | DEFINITION | KEEP | YES | — | |
 | p7a_token_budget::05 | L596 | RULE: Script Tax | DEFINITION | KEEP | YES | — | Canonical (NAV invariant) |
 | p7a_token_budget::06 | L597–599 | Personality Sub-Budget intro | DEFINITION | KEEP | YES | — | |
@@ -1070,7 +1070,7 @@ All canon-side: master resolves every ref to a proper anchor and carries no `§X
 
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
-| p10_elena::01 | L19 | budget intro (~540 / ~1000) | DEFINITION | KEEP | YES | — | R27 inputs |
+| p10_elena::01 | L19 | budget intro (~540 / ~1000) | DEFINITION | KEEP | YES | — | R27 inputs; → migration_map_v2 TB-4/TB-5 (E15 embed + canon marker — mig-4 executed iter 135: derivation note on the Examples total) |
 | p10_elena::02 | L21 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | EN list = executable-adjacent metadata (qa:english baseline class) |
 | p10_elena::03 | L23 | Примечание: canonical vs учебный Greeting | NAVIGATION | KEEP | YES | REINFORCEMENT | R28 back-ref to §7B.2 ✓ (IMP-48 pair) |
 | p10_elena::04 | L25–101 | ШАБЛОН: полная карточка Елены (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | `{{CORE_DIRECTIVES — …}}` shorthand ✓ (R02-compliant); OCEAN annotations consistent with §5.1/§5.2 ✓; → migration_map_v2 D-4 (verified iter 134, shorthand ×4 across the four cards) |
@@ -1156,7 +1156,7 @@ resolves each to `#p7a_token_budget`, canon-side hygiene).
 | appendix_glossary::18 | L125–129 | S — SPINE | DEFINITION | KEEP | YES | REINFORCEMENT | R21 clause (implicit GHOST/LIE); ref §4.1 ✓; → migration_map_v2 C-18 |
 | appendix_glossary::19 | L131–135 | S — System Prompt / SP | DEFINITION | KEEP | YES | — | Container-vs-content distinction ✓; ref `§7A.X` vague; → migration_map_v2 C-19 |
 | appendix_glossary::20 | L137–141 | T — T→A→P | DEFINITION | KEEP | YES | — | Ref §2.1 ✓; → migration_map_v2 C-20 |
-| appendix_glossary::21 | L143–147 | T — Token Budget | DEFINITION | KEEP | YES | — | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block); ref `§7A.X` vague; → migration_map_v2 C-21 |
+| appendix_glossary::21 | L143–147 | T — Token Budget | DEFINITION | KEEP | YES | — | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block); ref `§7A.X` vague; → migration_map_v2 C-21; → migration_map_v2 TB-6 (verified iter 135) |
 | appendix_glossary::22 | L149–153 | V — Voice | DEFINITION | KEEP | YES | REINFORCEMENT | R03 clause («Модель — копировщик паттернов») + R06 two-level rule (reference echo); ref `§3.X` vague; → migration_map_v2 C-22 |
 | appendix_glossary::23 | L155–159 | V — Voice Bleed (cross-character) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-23 |
 | appendix_glossary::24 | L161–165 | V — Voice Bleed (degradation) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-24 |
@@ -1208,7 +1208,7 @@ appendix content describes never-loaded containers.
 | R08 | OOC Protection template | §7A.8 | §7A.13 step 3 partial re-print | REINFORCEMENT (assembled-SP view) — ed-2 audit item | ed-2 |
 | R09 | Format Lock template | §7A.4 | §7A.1 template tail · §7A.13 step 3 · **[B]** all four Part 10 cards (Format Lock block inside each SP — production-artifact function) | REINFORCEMENT (template/apply/assemble/card) | ed-2 |
 | R10 | Tone Frame example string | §7A.3 table | §7A.13 step 3 · **[B]** Part 10 cards carry character-specific Tone Frame strings (unique per card, not re-prints) | REINFORCEMENT (apply-layer) | ed-2 |
-| R11 | Token budget numbers (per-block) | `p7a_token_budget::03` (§7A.12) | §7A.11 4K table (RELATED BUT DISTINCT ✓) · §1.8 Q2 (UNCLEAR framing: ≤200/≤400 vs 150/300/700) · §7A.13 step 6 ✓ · §9.11 «Description ≤ 800» vs max 700 (CONTRADICTORY) · **[B]** AP-1 symptom «Description > 800» (same ≥800-vs-700 tension) · **[B]** glossary Token Budget entry («4K ~430–580 на карточку» — card-total framing) | MIXED — see per-row | ed-5 |
+| R11 | Token budget numbers (per-block) | `p7a_token_budget::03` (§7A.12) | §7A.11 4K table (RELATED BUT DISTINCT ✓) · §1.8 Q2 (UNCLEAR framing: ≤200/≤400 vs 150/300/700) · §7A.13 step 6 ✓ · §9.11 «Description ≤ 800» vs max 700 (CONTRADICTORY) · **[B]** AP-1 symptom «Description > 800» (same ≥800-vs-700 tension) · **[B]** glossary Token Budget entry («4K ~430–580 на карточку» — card-total framing) · §7B.2 Greeting «Длина: 50–100 токенов» vs §7A.12 Greeting row 40/60/100 (**instance found iter 135, mig-4 TB-8**) | MIXED — see per-row | ed-5; E01/E15 embed side dispositioned+locked by mig-4 (map §5.3, iter 135) |
 | R12 | Sampling parameter values | `p7a_sampling_params::03` (§7A.6) | §7A.7 rows — **CONTRADICTORY** (KI#72) · §9.3 Parameters row = compliance check ✓ · §9.10 refs ✓ · **[B]** AP-5 RepPen ≤ 1.10 boundary (consistent with §7A.6 under either KI#72 outcome) · **[B]** AP-7 PP = 0.0 (consistent ✓) | CONTRADICTORY (§7A.7) | KI#72 fix |
 | R13 | SP language rule | §7A.2 | §7A.7 footnote ✓ · §9.10 summary ✓ · **[B]** Appendix B следствия (ref ✓) · **[B]** glossary CORE DIRECTIVES entry (full 3-tier restatement — folds into the R02 compression) | Compliant refs + glossary full copy (folds into R02) | — |
 | R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |

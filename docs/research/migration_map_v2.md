@@ -66,7 +66,7 @@ textual canonical home); drift = known prototype↔embed divergence
 
 | El | Master home | P/I | E∖C | Drift | Embedded payload (disposition PROPOSED) |
 |----|-------------|-----|-----|-------|------------------------------------------|
-| E01 | `part_01.html` p1_card_overview | 38/44 | 27 | russification lag | block roles + derived budget ranges: budget numbers → `TEXTUAL_CANONICAL` (§7A.12 owns values; E01 SP ~100–200 is a wrong-side copy → fix in v2 slice); anchors-placement rule prose → `TEXTUAL_CANONICAL` (extend §1.4 rule text); labels → `REFERENCE_ONLY` |
+| E01 | `part_01.html` p1_card_overview | 38/44 | 27 | russification lag | block roles + derived budget ranges: budget numbers → `TEXTUAL_CANONICAL` (§7A.12 owns values); anchors-placement rule prose → `TEXTUAL_CANONICAL` (extend §1.4 rule text); labels → `REFERENCE_ONLY`. **Executed iter 135 (mig-4, slice §5.3):** budget values verified == §7A.12 at every layer — the §4.4 «SP ~100–200 wrong-side copy» claim found absent (registry corrected); values parity-locked by `scripts/audit_token_budget_parity.py`; canon `[VS: E01]` marker added (TB-3); Lorebook row = declared estimate; prototype/extract deferred → §6.1 |
 | E02 | `part_07a.html` p7a_assembly_pipeline | 29/30 | 19 | none detected | assembly step names → `SHARED_REFERENCE` (canonical pipeline = §7A.13) |
 | E03 | `part_02.html` p2_anchor_examples | 21/22 | 19 | none detected | T→A→P example rows → `VISUAL_CANONICAL` (demonstration; examples stay visual) |
 | E04 | `part_02.html` p2_embodiment | 15/19 | 10 | minor | State→Body→Sensor→Speech stages → `SHARED_REFERENCE` (§2.4 owns) |
@@ -80,7 +80,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family) |
 | E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2 |
 | E14 | `part_09.html` p9_quality_scale | 17/18 | 9 | none detected | quality grade names → `SHARED_REFERENCE` (§9.1 owns) |
-| E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2) |
+| E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2). **Executed iter 135 (mig-4, slice §5.3):** min–max values verified == canonical; Examples total now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; canon `[VS: E15]` marker added with the derivation rule (TB-4/TB-5); parity-locked; prototype/extract deferred → §6.1 |
 | E16 | `part_07a.html` p7a_authors_note | 31/31 | 20 | none detected | AN template A/B labels → `SHARED_REFERENCE` (§7A.5 owns) |
 | E17 | `part_07a.html` p7a_sampling_params | 43/44 | 13 | none detected | 3-tier param table → `SHARED_REFERENCE` — **blocked on KI#72 value decision** (embed carries both sides labeled «базовая»/«чеклист»); annotations («Только Examples» etc.) → `REFERENCE_ONLY` |
 | E18 | `part_07b.html` p7b_greeting | 16/16 | 5 | none detected | greeting algorithm steps → `SHARED_REFERENCE` (§7B.2 owns) |
@@ -94,7 +94,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
 | Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode) |
-| Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice |
+| Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice. **EXECUTED iter 135 (mig-4, slice §5.3 TB-1…TB-8):** E01 values verified canonical at every layer (the wrong-side-copy claim corrected — not found in the repo); E15 derivation note added (master + canon marker); `[VS: E01/E15]` canon markers added; glossary already deferred (iter 133); no value decision needed |
 | Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift) |
 | Voice influence % | §3.2 table | E07 compressed scale + unique prose · `persona-voice-hierarchy.js` constants (sanctioned DEC-09) | E07 scale → `SHARED_REFERENCE`; E07 unique prose → `TEXTUAL_CANONICAL` candidate (§3.2 home decision); widget constants keep DEC-09 provenance header |
 
@@ -277,6 +277,45 @@ references (`AGENT_NAVIGATION.md` §5, `docs/architecture.md` CORE DIRECTIVES
 table), `data/character_schema.json` L319 directive-name schema description
 (technical identifiers, no definitions) — REFERENCE_ONLY.
 
+### 5.3 Token budget slice (seeded + executed iter 135 — mig-4 build slice)
+
+Scope: the Token budget cluster — third bounded area (Registry B row 5;
+foundation §5.5 evidence; PLAN row mig-4, LOW gate — values already canonical,
+presentation fix, no semantic decision). Mechanism: mig-2 pattern (canonical
+record → embed re-point/fix → parity audit). Canonical owner unchanged:
+§7A.12 (per-block min/std/max table + personality sub-budgets + Script Tax
+RULE + calculator). **Pre-edit verification finding (iter 135):** the
+foundation §4.4 claim «E01 embed SP ~100–200 = wrong-side copy of 50/100/200»
+does **not exist in the repository** — every E01/E15 layer (master embed,
+prototype, extract, root fallback; verified at HEAD `886a2c24` and at the
+iter-131 BASE `987e4f3`) already carries the canonical values; «100–200»
+exists only as the E16/§7A.5 Author's Note length (canonical there). The
+registry records the verified truth; the foundation doc stays the historical
+iter-131 artifact. Affected matrix rows copied per the §5 mechanism;
+acceptance gate = `scripts/audit_token_budget_parity.py` (MUST PASS).
+
+| TB# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| TB-1 | `p7a_token_budget::03` (+ ::04/::05 RULEs, ::07 sub-budgets, ::10 calculator) | §7A.12 canonical budget table + rules + sub-budgets + calculator | unchanged — THE canonical owner (raw per-block values + example counts; calculator slider bounds = its own UI, canon-declared 400–800 result range) | UNCHANGED — canonical owner | Registry B row 5; verified iter 118 |
+| TB-2 | E01 embed (`part_01.html`, between §1.1/§1.2) | token annotations мин/стд/макс + summary table: SP 50/100/200, Description 150/300/700, Greeting 40/60/100 (== canonical); Examples totals 80/180/400 + source column «Part 7A (40/60/80 per)» + «2–5 примеров, каждый ~40–80 токенов»; Anchors ~15–40; Lorebook «Est.» row | verified `SHARED_REFERENCE` — values parity-locked by `scripts/audit_token_budget_parity.py` (arithmetic: totals = per-example × count per level); foundation §4.4 wrong-side-copy claim corrected (see slice intro); Lorebook row = declared estimate, §7B-side canonicalization = future material | SHARED_REFERENCE **— executed iter 135 (verification; no value edit needed)** | Registry A E01; foundation §4.4 correction |
+| TB-3 | `p1_structure_overview::04` | canon prose reference to E01 (L57) — no `[VS: E01]` marker | `[VS: E01]` marker added: budget values = §7A.12 (SHARED_REFERENCE); Examples totals derivation declared; Lorebook = declared estimate | ADDED **— executed iter 135** | PLAN mig-4 scope; `_README.md` §3.3 marker format |
+| TB-4 | E15 embed (`part_10.html`, before §10.1) | structure annotations: SP ~50-200, Description ~150-700, Greeting ~40-100 (== canonical min–max); Examples ~80-400 (derived total, derivation NOT declared) | Examples annotation now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; min–max values parity-locked | SHARED_REFERENCE + derivation note **— executed iter 135** | Registry A E15; map row 5 disposition |
+| TB-5 | `p10_elena::01` | no E15 marker in canon `part_10.md` (embed without canonical description) | `[VS: E15]` marker added before §10.1: min–max ranges shared with §7A.12; the derivation rule stated canonically («итог = бюджет на один пример × количество примеров») | ADDED **— executed iter 135** | PLAN mig-4 scope; TEXTUAL_CANONICAL derivation note |
+| TB-6 | `appendix_glossary::21` | glossary C-21 «Бюджет токенов (Token Budget)» — values deferred to §7A.12 | unchanged — verified (registry + generated JSON) | MERGED **— executed iter 133 (C-21), verified iter 135** | C-21; T-47 |
+| TB-7 | prototype E01/E15 + extracts (`visual-system/`) | stale derived copies (values == embed at HEAD; russification lag on E01) | `REMOVED_WITH_REASON` (stale derived copies) | PROPOSED — **blocked on §6.1** (visual-markup ownership) | map §6.1; E08/D-7 precedent |
+| TB-8 | — (aggregate observation, non-slice) | budget-adjacent prose layers outside the slice: §7A.11 4K table («Полный» column + Итого 850–1450/~430–580) · §1.8 prebuild Q2 (≤200/≤400) · §7A.13 Шаг 6 (consistent ✓) · §9.11 «Description ≤ 800» · §8.2 AP-1 «> 800» · Part 10 card totals (~540…~2150+) · §7B.2 Greeting «50–100» vs §7A.12 Greeting row 40/60/100 (**R11-family instance found iter 135**) | out of mig-4 slice — R11/R27 framing family, owner-gated (ed-5 / KI#77-e); untouched by the slice | OBSERVED — deferred to owner gates | matrix R11 row; scope discipline |
+
+Accounting: 1 canonical owner unchanged (TB-1) + 2 SHARED_REFERENCE
+verifications/locks (TB-2 value-verified, TB-4 derivation-note edit) + 2 canon
+markers added (TB-3/TB-5) + 1 already-executed glossary verified (TB-6) + 1
+blocked on §6.1 (TB-7) + 1 aggregate observation (TB-8). Budget values (SP
+50/100/200, Description 150/300/700, Examples 40/60/80 per, Greeting
+40/60/100, Anchors 15/25/40 per) unchanged everywhere — enforced by the parity
+audit. Root fallbacks (`parts/part_01.html` byte-identical — master part_01
+untouched; `parts/part_10.html` regenerated with the derivation note).
+Non-guide reference layers (not presentations, no action): agent-doc condensed
+references — REFERENCE_ONLY.
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
@@ -339,4 +378,17 @@ table), `data/character_schema.json` L319 directive-name schema description
   already executed iter 133 (C-5, D-8). Prototype/extract copies stay PROPOSED/blocked (D-7,
   §6.1). KI#80 (master «наппряжён» typo, §7A.2 directive-5 paragraph) recorded + folded
   (master → canon alignment, KI#78 fold precedent). Battery: sync 97/97, build hash
+  `2ab607d6` unchanged, tests/qa green, baselines exact (english 18 / syntax 247).
+- **iter 135 (mig-4 execution, BASE_COMMIT `886a2c24`):** Token budget slice executed on the
+  mig-2 pattern (Registry B row 5; §7A.12 stays canonical — unchanged). **Pre-edit verification:
+  the foundation §4.4 «E01 SP ~100–200 wrong-side copy» claim is absent from the repo** (every
+  E01/E15 layer verified at HEAD and the iter-131 BASE; «100–200» = E16/§7A.5 AN length,
+  canonical there) — registry corrected, foundation stays the historical artifact. Real gaps
+  closed: E15 Examples total now carries the derivation note (master + regenerated
+  `parts/part_10.html`); canon `[VS: E01]` + `[VS: E15]` markers added (embeds previously had
+  no canonical description); E01 verified SHARED_REFERENCE (totals arithmetic + in-embed
+  derivation declarations + Lorebook «Est.» estimate). Acceptance gate
+  `scripts/audit_token_budget_parity.py` PASS (10 checks + deferred-layer notes: prototype/
+  extract §6.1; R11/R27 out-of-slice family owner-gated). New R11-family instance recorded:
+  §7B.2 Greeting «50–100» vs §7A.12 Greeting row (TB-8). Battery: sync 97/97, build hash
   `2ab607d6` unchanged, tests/qa green, baselines exact (english 18 / syntax 247).
