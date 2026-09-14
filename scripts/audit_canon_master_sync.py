@@ -251,8 +251,8 @@ CHECKS = [
     (
         "P1-3",
         "part_08.html",
-        "<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3",
-        "part_08 §8.1: OCEAN Overload orphan row deleted + footnote added (iter 36 P1-3 fix)",
+        "<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3",
+        "part_08 §8.1: OCEAN Overload orphan row deleted + footnote added (iter 36 P1-3 fix; «v9 restructure» repo-meta strip iter 129 — R17 [B])",
     ),
     # ----- P1-4 (B2): part_10 Walter GHOST rewrite -----
     (
@@ -331,8 +331,8 @@ CHECKS = [
     (
         "P3-6",
         "part_03.html",
-        "<p><strong>Методология:</strong> проценты отклонения — эмпирические оценки авторов гайда на основе тестирования ~50 карточек",
-        "part_03 §3.1: Voice Isolation % methodology note added (iter 38 P3-6 fix)",
+        "<p><strong>Методология:</strong> проценты — качественные ориентиры, не точные измерения; эмпирическая база и её ограничения — <a href=\"#p1_value_proposition\">",
+        "part_03 §3.1: Voice Isolation % methodology note (iter 38 P3-6 fix; compressed to §1.1 pointer iter 129 — R05/ed-7)",
     ),
     # ================================================================
     # iter 46 — Phase 3 canon→master HTML sync (8 fixes, P1-8/9 SKIP)

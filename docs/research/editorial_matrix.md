@@ -1196,9 +1196,9 @@ appendix content describes never-loaded containers.
 |---|---|---|---|---|---|
 | R01 | Anchors-placement rule (separate block in Examples-zone) | `p1_core_rules::05` (§1.4) | §7A.1 L33 full copy — **compressed iter 125 (dupes-1)** · §7A.9 L394 short+ref · §7A.11 L567 short+ref · §7A.13 L732 footnote · §1.2 L57 clarification · **[B]** glossary «B — Behavioral Anchor» entry (reference-layer ПРАВИЛО statement — compress to 1 sentence + ref §1.4) | DUPLICATE (glossary entry; §7A.1 fixed) | ed-2-style compress, canon-first |
 | R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · **[B]** glossary «C — CORE DIRECTIVES» full annotated copy — **verdict: DUPLICATE → COMPRESS** (definition + 7-name index + fixed ref §7A.2; the annotations restate §7A.2::06–::12; KI#70 dependency: appendix never runtime-loads — compression should ride the KI#70 wire/drop decision) · Part 10 uses shorthand ✓ | DUPLICATE (§7A.13 primary; glossary classified) | ed-2 |
-| R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 **full re-teach** (pending candidate #5) · §1.7 L128 application · §7A.4 L189/L199 applications+ref · **[B]** glossary «V — Voice» entry (1-sentence reference clause — acceptable) | DUPLICATE (§3.1); rest compliant | ed-1/ed-4 |
+| R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 — **compressed iter 129 (ed-7 family): 1 sentence + ref §1.4, applied outcome contrast kept** · §1.7 L128 application · §7A.4 L189/L199 applications+ref · **[B]** glossary «V — Voice» entry (1-sentence reference clause — acceptable) | DUPLICATE (§3.1 fixed iter 129); rest compliant | ed-1/ed-4 ✅ §3.1 iter 129 |
 | R04 | Voice drift numbers (~40% vs ~10% at 20–30 msgs) | §3.1 table (granular) | §1.1 table row | DUPLICATE (same data, same persuasive purpose) | ed-1/ed-4 |
-| R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 near-verbatim (pending candidate #4) | DUPLICATE | ed-7 |
+| R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 — **compressed iter 129 (ed-7 family): 1-sentence pointer to §1.1 + §3.2 note kept locally; sync-audit P3-6 updated** | DUPLICATE (§3.1 fixed iter 129) | ed-7 ✅ iter 129 |
 | R06 | Linguistic vs physical voice (Тест family) | `p3_voice_isolation::03–04` (§3.1) | §3.2 L67–80 example (unique demo) · §3.2 L82 Пояснение (re-explainer, pending candidate #6) · **[B]** AP-3 catalog-site (compliant apply) · **[B]** glossary Voice/Voice Isolation entries (reference echo) | DUPLICATE (Пояснение only) | ed-4 |
 | R07 | Anti-godmoding exact line «Never speak or act for {{user}}.» | §7A.1 template | §1.7 fix · §9.3 check · §9.11 examples · §7A.13 step 2 · **[B]** §0.2 step-1 (quick-start apply) · **[B]** AP-6 code + До/После (fix-site) · **[B]** §7B.4 ПРАВИЛО (content no-user-actions principle) · **[B]** glossary A-entry (2-line form + positive-formulation rationale — rationale stated 3×: §7A.1::09 canonical / AP-6 / glossary) | REINFORCEMENT (each = changed function: teach/fix/check/example/reference) | — |
 | R08 | OOC Protection template | §7A.8 | §7A.13 step 3 partial re-print | REINFORCEMENT (assembled-SP view) — ed-2 audit item | ed-2 |
@@ -1210,7 +1210,7 @@ appendix content describes never-loaded containers.
 | R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |
 | R15 | §9.4 problems #4/#5 vs §9.5 rows | §9.5 | §9.4 (pending candidate #11) | DUPLICATE | ed-3 execution |
 | R16 | §9.11 quick-check `<details>` vs §9.3 | §9.3 + E14 | §9.11 (self-admitted) — **deleted iter 125 (dupes-1)** · **[B]** §0.2 step-6 «5 быстрых проверок» (1-line quick-start recall — REINFORCEMENT, keep) | DUPLICATE (§9.11 fixed; TL;DR = compliant recall) | dupes-1 ✅ iter 125 |
-| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. **[B] non-rendering + canon-only strips #14/#15/#17/#18 EXECUTED iter 128 (ed-8 continuation): `part_00.md` §0.1 L45 history clause + L58 repo pointers · `part_06.md` §6.3 L83 iter/KI label · `appendix_character_map.md` L29 fix label — substance kept in all four.** **[B] remaining:** `part_00.md` L13 preamble («Создан: iter 38 — KI#21» — outside sections, non-rendering) · `part_08.md` §8.1 L27 («в v9 restructure» — reader-visible but navigational; optional strip) | — | Phase A locations (5, all executed iter 121) | DUPLICATE class (ed-6) | ed-6 follow-up (canon-side) |
+| R17 | Repo-meta in reader prose — **rendered-prose locations stripped iter 121 (ed-6; Part 1 ×2, §7A.1, §7A.2, §7A.12, Part 8 + the KI#71 duplicate RULE line)**. **[B] non-rendering + canon-only strips #14/#15/#17/#18 EXECUTED iter 128 (ed-8 continuation): `part_00.md` §0.1 L45 history clause + L58 repo pointers · `part_06.md` §6.3 L83 iter/KI label · `appendix_character_map.md` L29 fix label — substance kept in all four.** **[B] remainder EXECUTED iter 129 (ed-7 fold): `part_00.md` L13 preamble («Создан: iter 38 — KI#21») deleted · `part_08.md` §8.1 L27 «v9 restructure» stripped (canon + master mirror + sync-audit P1-3 update) — R17 family now COMPLETE** | — | Phase A locations (5, all executed iter 121) | DUPLICATE class (ed-6) | ed-6 ✅ A+B complete iter 129 |
 | R18 | Vague `§X.X` placeholder refs — **canon-only debt: master resolves every occurrence to a proper anchor (verified iter 126: zero `§X.X` strings in master `part_05/08/09/10.html`; part_04 L281 resolves correctly)** — **Phase B batch repaired iter 127 (ed-8/R18: 33 refs + 6 part_08 parens + KI#77-a–d; part_05 L21 → limits-table pointer with master mirror + sync-audit P0-16 update). Phase A remainder REPAIRED iter 128 (ed-8/R18 continuation): 16 refs (grep recount — the ~13 estimate was undercounted again): part_09 ×12 (L64/65/66/86/103/104/105/106/113/134/137/227 — L64 + L134 were matrix-unflagged), part_07a ×3 (L109/L340/L699 + L699 paren closed), part_03 ×1 (L165) — every target verified against the existing master anchor; 2 labels aligned to the master target (L65 → §3.3 «Правила Examples», L66 → §7B.2 «Greeting»)** | — | Remaining vague forms (out-of-scope by design): `_README.md` L103 (ref-notation format example) · character_map L41 «Part 10 §10.X» (generic form, matrix-unflagged) | Navigation debt (mechanical, canon-first) | ed-8 ✅ Phase A+B complete |
 | R19 | Voice Leak causes | §3.6 | §9.5 voice rows | REINFORCEMENT (lookup form) | — |
 | R20 | 12B symptoms | §9.10 | §9.5 general rows | SPECIAL CASE | — |
@@ -1222,7 +1222,7 @@ appendix content describes never-loaded containers.
 | R26 | MBTI reference-role statement («справочный инструмент, без прямого маппинга на SPINE») | §5.1 L104 РЕКОМЕНДАЦИЯ (decision site) | §5.5 L215–217 (cross-map site) · **[B]** appendix_mbti L45–47 (appendix site) · **[B]** glossary M-MBTI entry | REINFORCEMENT ×4 (decision/validation/reference layers — all consistent) | — |
 | R27 | Card-level budget totals framing | Part 10 per-card budgets (~540/1000, ~1100, ~2150, ~1500+) | **[B]** character_map L37–38 ranges «~440–890» (Walter ~1100 outside) and «~1500–1800» (Omnis ~2150 outside) | UNCLEAR (framing drift, card-total layer of the R11 family) | ed-5 / KI#77 |
 | R28 | Elena Greeting dual presentation | §10.1 L97–100 (canonical production greeting) | §7B.2 L61–72 (учебный разбор по алгоритму) | REINFORCEMENT — **compliant pattern:** both sides carry explicit disambiguation Примечания (IMP-48); the model pair for dual-presentation decisions | — |
-| R29 | Terminology drift in the reference layer | §4.11 «G2 — Юность (13–25)» · §6.3 «Tier 0 — без отдельного CoT-блока» | **[B]** glossary G-GHOST Layers «G2=Отрочество» · glossary C-CoT «Tier 0 (basic Anchor)» · §7B.5 checklist «призрак Anchors» word-order slip · appendix_mbti EN label «NOTE» (DEC-16 cosmetic) | DUPLICATE class (wording-level, not semantic) | ed-7 normalization |
+| R29 | Terminology drift in the reference layer | §4.11 «G2 — Юность (13–25)» · §6.3 «Tier 0 — без отдельного CoT-блока» · §7B.5 RULE «якоря призрака (GHOST-якоря)» | **[B] all 4 drift sites FIXED iter 129 (ed-7 normalization):** glossary G-GHOST Layers «G2=Отрочество»→«G2=Юность» (canon + master mirror) · glossary C-CoT «Tier 0 (basic Anchor)»→«Tier 0 (без отдельного CoT-блока)» (canon; master already carried the aligned long form) · §7B.5 checklist «призрак Anchors»→«якоря призрака (GHOST-якоря)» (canon + master mirror, aligned to the L257 RULE wording) · appendix_mbti EN label «NOTE»→«Примечание» (canon-only, DEC-16) | DUPLICATE class (wording-level, not semantic) — resolved | ed-7 normalization ✅ iter 129 |
 
 ---
 
@@ -1281,8 +1281,8 @@ cumulative list with execution status:**
 1. `p7a_system_prompt::05` — verbatim duplicate RULE line (KI#71) → DELETE — **✅ executed iter 121 (ed-6)**
 2. `p7a_system_prompt::06` — Anchors-placement full copy (R01) → CROSS-REFERENCE — **✅ executed iter 125 (dupes-1)**
 3. `p7a_system_prompt::07` — stale `[ANCHORS]`/KI#58 repo-meta note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
-4. `p3_voice_isolation::06` — methodology copy (R05) → CROSS-REFERENCE — open (ed-7 family)
-5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS — open (ed-1/ed-4)
+4. `p3_voice_isolation::06` — methodology copy (R05) → CROSS-REFERENCE — **✅ executed iter 129 (ed-7 family; sync-audit P3-6 updated)**
+5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS — **✅ executed iter 129 (ed-7 family)**
 6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE — open (ed-4)
 7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — open (owner value decision)
 8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — open
@@ -1299,8 +1299,8 @@ cumulative list with execution status:**
 19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — open (Phase B; KI#70 dependency)
 20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
 
-Execution status: 9 of 13 Phase A candidates executed (iters 121/125/128); 11 candidates open overall
-(#4–#8, #10, #11, #13 from Phase A + #16, #19, #20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
+Execution status: 11 of 20 combined candidates executed (iters 121/125/128/129); 9 open overall
+(#6, #8, #10, #11, #13 from Phase A + #16, #19, #20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
 carry owner decisions; the rest are ready for ed-* execution under the Editorial Policy.
 
 Plus one **pair-level** candidate: R04 drift-numbers — one of the two occurrences
@@ -1337,12 +1337,12 @@ action; no Phase B deletion carries unique information (research §22 category 1
   (~440–890 / ~1500–1800) vs Part 10 budgets — decide whether the ranges re-frame to match the
   cards or the cards' feature-sets get stated as the range condition.
 - **ed-6 (repo-meta):** rendered-prose strips done (iter 121); canon-side strips #14/#15/#17/#18
-  **executed iter 128**. **[B] remainder = `part_00.md` L13 preamble + the optional part_08
-  «v9 restructure» phrase.** Non-rendering → fold into any canon-touching iteration.
-- **ed-7 (readability):** R05 methodology pair; §7A.5 unbalanced paren; rule-strength classes for
+  **executed iter 128**. **[B] remainder (`part_00.md` L13 preamble + the optional part_08
+  «v9 restructure» phrase) — executed iter 129 (ed-7 fold).** R17 family complete.
+- **ed-7 (readability):** R05 methodology pair — **compressed iter 129 (§3.1 → §1.1 pointer)**; §7A.5 unbalanced paren; rule-strength classes for
   numeric claims (incl. KI#72 values once reconciled); **[B] R25** pole-limits triple statement +
-  its imprecise §5.1→§5.3 ref (**ref fixed iter 127** — triple statement remains); **[B] R29** terminology drift pairs («Юность/Отрочество»,
-  «Tier 0 basic Anchor», «призрак Anchors», EN label «NOTE»).
+  its imprecise §5.1→§5.3 ref (**ref fixed iter 127** — triple statement remains); **[B] R29** terminology drift pairs — **all 4 fixed iter 129
+  («Юность/Отрочество», «Tier 0 basic Anchor», «призрак Anchors», EN label «NOTE»)**.
 - **ed-8 (cross-ref quality):** R18 vague-ref list is now the **largest mechanical family**:
   ~32 Phase B vague refs (part_08 ×7 + glossary ×18 + part_10 ×4 + part_05 + appendix_mbti +
   character_map) + 6 unbalanced parens (part_08) + Phase A's §3.5/§9.3/§9.5 set + KI#77-a wrong

@@ -24,7 +24,7 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ iter 31 DGA keep-by-design ration
 
 Полный каталог 15 анти-паттернов (AP-1 … AP-15) с симптомом, причиной и быстрым фиксом — в визуализации E12 выше. Подробный разбор каждого AP (симптом → причина → решение → before/after) — в подсекциях §8.2–§8.16 ниже.
 
-**Ссылка:** OCEAN Overload ранее был AP-15, в v9 restructure перенесён в Part 5 §5.3 (`p5_ocean_warning`). В каталоге E12 не отображается — см. Part 5.
+**Ссылка:** OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3 (`p5_ocean_warning`). В каталоге E12 не отображается — см. Part 5.
 
 ---
 
