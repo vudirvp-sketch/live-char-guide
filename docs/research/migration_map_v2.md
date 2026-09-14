@@ -51,7 +51,7 @@ assigning a disposition. Uncertain cases stay `UNKNOWN`, never deleted.
 | L3 root fallbacks | build-generated | unchanged (DEC-04) |
 | L4 `visual-system/elements/` prototypes | **none, drifted** | frozen design artifacts (archive) — or re-established as canonical visual source; **decision §6.1** |
 | L5 `component-extracts/` | **none, stale** | superseded by whatever owns visual markup (L4 or L2); disposition §6.1 |
-| L6 `data/*.json` | version field only | **derived** from the canonical source wherever it carries knowledge (glossary cluster first) |
+| L6 `data/*.json` | version field only | **derived** from the canonical source wherever it carries knowledge (glossary: **DECIDED DEC-17** — canonical record → generated `glossary.json`; remaining clusters per disposition) |
 | L7 widget-embedded constants | manual (DEC-09) | keep only with declared canon provenance in header |
 | L8 shell runtime | tests | unchanged |
 | L9–L11 research / registries / bibles | manual | unchanged (registries updated by the same iterations that change facts) |
@@ -91,8 +91,8 @@ textual canonical home); drift = known prototype↔embed divergence
 | Cluster | Canonical owner (v1→v2) | Competing copies found (v1) | Proposed v2 disposition |
 |---|---|---|---|
 | CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused) |
-| Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
-| Glossary | **owner decision** (§6.3) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | single canonical term registry; machine layer (JSON/no-JS/panel) becomes **derived**; dead `core_rules` → `REMOVED_WITH_REASON` (stale locations `01_core_principles.html#…`, unconsumed); appendix layer rides the v2 Reference-mode design — **first bounded area** |
+| Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · `glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132) | one canonical table; §7A.7/E17/E12/glossary.json → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
+| Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executes in mig-1** |
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode) |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice |
 | Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift) |
@@ -106,8 +106,131 @@ coverage, iter 126; 12 of 20 candidates executed iters 125–130). This registry
 does **not duplicate** those rows (one fact — one owner, DEC-10). Mechanism:
 when a v2 build slice touches a Part, its affected matrix rows are copied here
 with `OLD LOCATION → NEW LOCATION` + status; the matrix row gets a back-pointer
-`→ migration_map_v2 C-<n>`. Seed rows will appear starting with the first
-bounded-area iteration (expected: glossary cluster).
+`→ migration_map_v2 C-<n>`. First slice seeded iter 132 (glossary, §5.1);
+subsequent Parts seed at their own build-slice time.
+
+### 5.1 Glossary slice (seeded iter 132; executes in mig-1)
+
+Scope: the glossary cluster — first bounded area, decisions **DEC-17**.
+Canon-side blocks = matrix rows `appendix_glossary::01–::26` (matrix §14);
+machine-layer terms = `data/glossary.json` `canonical_terms` (55). The v1
+term-set partition (re-derived by script iter 132, matches foundation §5.3):
+**25 canon / 55 JSON / 21 overlap / 4 canon-only / 34 JSON-only**. All
+statuses and head-forms below are **PROPOSED** — per-term evidence for the
+owner's ratification (DEC-17a: canonicality is decided per term; JSON-only
+terms do not become canonical merely by existing in the machine layer) — and
+execute in the mig-1 build slice.
+
+Head-form policy (DEC-16 applied to the registry, owner directive iter 132):
+Russian head where a natural direct translation exists (`Ложь (LIE)`,
+`Бюджет токенов (Token Budget)`); English survives only as technical
+identifiers (XML/API/parameter names, SP-element names, protocol names,
+framework acronyms); ⚑ = identifier-vs-prose boundary case flagged for the
+owner at ratification. The 18 vague glossary refs (matrix R18: 5× `§7A.X`,
+6× `§4.X`, 4× `§3.X`, 2× `§7B.X`, 1× `§2.X`) are repaired mechanically at
+migration (targets re-derived from each registry entry's canonical home).
+
+**5.1a Canon appendix blocks → registry entries (26 matrix rows)**
+
+| C# | Matrix row | OLD (v1 canon) | NEW (v2 entry, head PROPOSED) | Status | Basis / fold-ins |
+|---|---|---|---|---|---|
+| C-1 | `appendix_glossary::01` | L19 intro (entry pattern) | registry pattern declaration | MOVED | entry pattern relocates with the registry (DEC-17c) |
+| C-2 | `::02` | L21–25 «A — Anti-godmoding» | «Анти-годмодинг (Anti-godmoding)» | MERGED | +T-03 (aliases; disambiguation vs «Годмодинг» T-55); R07 2-line form kept; ref → §7A.1 |
+| C-3 | `::03` | L27–31 «B — Behavioral Anchor» | «Поведенческий якорь (Behavioral Anchor)» | MERGED | +T-05; **matrix verdict COMPRESS (R01)**: placement ПРАВИЛО folds to 1 sentence + ref §1.4; ref → §2.1 |
+| C-4 | `::04` | L33–37 «C — CoT» | «CoT (цепочка рассуждений)» | MERGED | +T-09; R29-aligned Tier framing; ref → §6.2 |
+| C-5 | `::05` | L39–51 «C — CORE DIRECTIVES» | «Основные директивы (CORE DIRECTIVES)» | MERGED | +T-08 + the 7 per-directive entries fold into the 7-name index (T-07/11/14/23/35/41/43); **matrix verdict COMPRESS (R02)**: definition + 7-name index + fixed ref §7A.2; R13 SP-language rule folds; ref → §7A.2 |
+| C-6 | `::06` | L53–57 «E — Embodiment Protocol» | «Протокол телесности (Embodiment Protocol)» | MERGED | +T-12 (protocol-vs-directive distinction kept); ref → §2.4 |
+| C-7 | `::07` | L59–63 «E — Enneagram» | «Эннеаграмма (Enneagram)» | MERGED | +T-13; ref → §5.4 |
+| C-8 | `::08` | L65–69 «F — FLAW» | «Дефект (FLAW)» | MERGED | +T-16; R24 reference-side; ref → §4.4 |
+| C-9 | `::09` | L71–75 «G — GHOST» | «Призрак (GHOST)» | MERGED | +T-18; ref → §4.2 |
+| C-10 | `::10` | L77–81 «G — GHOST Layers» | «Слои призрака (GHOST Layers)» | MERGED | +T-19 — **canon definition wins** (JSON carries stale pre-canon layer framing: «поверхностный/промежуточный/глубинный» vs canonical G1/G2/G3); ref → §4.11 |
+| C-11 | `::11` | L83–87 «G — Greeting Message» | «Приветственное сообщение (Greeting Message)» | MERGED | +T-20; ref → §7B.2 |
+| C-12 | `::12` | L89–93 «I — Identity Block» | «Блок идентичности (Identity Block)» | MERGED | +T-21 — canon definition wins (JSON overcarries: «внешность, предысторию, тип личности» vs canonical «имя, роль, ключевые черты» + ~10 токенов); ref → §7A.1 |
+| C-13 | `::13` | L95–99 «L — LIE» | «Ложь (LIE)» | MERGED | +T-24; owner's explicit example (lie → ложь — translated immediately, EN form not kept as head); ref → §4.3 |
+| C-14 | `::14` | L101–105 «L — Lorebook» | «База знаний (Lorebook)» | MERGED | +T-25 +T-26 (entry fields Key/Content/Position/Depth/Probability/Cooldown = §7B.3 canonical); ref → §7B.3 |
+| C-15 | `::15` | L107–111 «M — MBTI» | «MBTI (типология Майерс-Бриггс)» | MERGED | +T-27; R26 reference-role statement; ref → appendix_mbti |
+| C-16 | `::16` | L113–117 «N — NEED» | «Потребность (NEED)» | MERGED | +T-29; ref → §4.5 |
+| C-17 | `::17` | L119–123 «O — OCEAN» | «OCEAN (Большая пятёрка)» | MERGED | +T-31; R25 golden-rule clause; ref → §5.1 |
+| C-18 | `::18` | L125–129 «S — SPINE» | «SPINE (позвоночник)» | MERGED | +T-44; R21 implicit-GHOST/LIE clause; ref → §4.1 |
+| C-19 | `::19` | L131–135 «S — System Prompt / SP» | «System Prompt / SP (системный промпт)» ⚑ | MERGED | +T-46; container-vs-content distinction kept; head-form = identifier boundary case (guide prose uses «System Prompt» as the container name throughout); ref → §7A.1 |
+| C-20 | `::20` | L137–141 «T — T→A→P» | «T→A→P (Триггер → Действие → Цена)» | MERGED | +T-02 Action + T-37 Price + T-49 Trigger fold in as components; ref → §2.1 |
+| C-21 | `::21` | L143–147 «T — Token Budget» | «Бюджет токенов (Token Budget)» | MERGED | +T-47; R11 card-total framing («4K ~430–580») aligns to §7A.12 per-block at merge; ref → §7A.12 |
+| C-22 | `::22` | L149–153 «V — Voice» | «Голос (Voice)» | MERGED | +T-50; R03/R06 reference clauses; ref → §3.1 |
+| C-23 | `::23` | L155–159 «V — Voice Bleed (cross-character)» | «Переплетение голосов (Voice Bleed, между персонажами)» | MERGED | +T-51 (JSON single «Voice Bleed» = cross-character sense); ref → §3.8 |
+| C-24 | `::24` | L161–165 «V — Voice Bleed (degradation)» | «Утечка голоса (Voice Bleed, деградация)» | MERGED | +T-28 Narrator Bleed (narrator-side leak); ref → §3.6 |
+| C-25 | `::25` | L167–171 «V — Voice Isolation» | «Изоляция голоса (Voice Isolation)» | MERGED | +T-53; two-level rule; ref → §3.1 |
+| C-26 | `::26` | L173–177 «W — WANT» | «Желание (WANT)» | MERGED | +T-54; ref → §4.6 |
+
+**5.1b Machine-layer terms → per-term review (55 JSON terms, DEC-17a evidence)**
+
+| T# | v1 term (JSON) | Status | Target | Basis |
+|---|---|---|---|---|
+| T-01 | 4K-Fallback | MOVED | new entry «4K-Fallback (протокол адаптации для 4K)» | canonical home §7A.11; protocol name (identifier-like head, EN kept) |
+| T-02 | Action | MERGED | C-20 | T→A→P component («Действие»); §2.1 canonical |
+| T-03 | Anti-godmoding | MERGED | C-2 | overlap term; R07 |
+| T-04 | Author's Note | MOVED | new entry «Author's Note (AN)» ⚑ | §7A.5; SP-element name = identifier boundary case |
+| T-05 | Behavioral Anchor | MERGED | C-3 | overlap term |
+| T-06 | Character Card | MOVED | new entry «Карточка персонажа (Character Card)» | §1.2 |
+| T-07 | Consequence Driven | MERGED | C-5 | directive #6 → 7-name index; definition stays §7A.2 |
+| T-08 | CORE DIRECTIVES | MERGED | C-5 | overlap term; R02 |
+| T-09 | CoT | MERGED | C-4 | overlap term |
+| T-10 | Description | MOVED | new entry «Description (блок описания)» ⚑ | §1.2; card field name = identifier boundary case |
+| T-11 | Embodiment First | MERGED | C-5 | directive #2 → index |
+| T-12 | Embodiment Protocol | MERGED | C-6 | overlap term |
+| T-13 | Enneagram | MERGED | C-7 | overlap term |
+| T-14 | Environmental Reactivity | MERGED | C-5 | directive #4 → index (v1 anchor `p2_anchor_rules` is a wrong-home artifact; registry re-derives refs) |
+| T-15 | Examples | MOVED | new entry «Examples (примеры диалогов)» ⚑ | §3.2 + §1.2; card field name = identifier boundary case |
+| T-16 | FLAW | MERGED | C-8 | overlap term |
+| T-17 | Format Lock | MOVED | new entry «Format Lock (фиксация формата)» ⚑ | §7A.4; SP-element name |
+| T-18 | GHOST | MERGED | C-9 | overlap term |
+| T-19 | GHOST Layers | MERGED | C-10 | overlap term; canon definition wins (JSON stale) |
+| T-20 | Greeting Message | MERGED | C-11 | overlap term |
+| T-21 | Identity Block | MERGED | C-12 | overlap term; canon definition wins |
+| T-22 | Immersion Boundary | MOVED | new entry «Иммерсионная граница (Immersion Boundary)» | §7A.8 advanced OOC variant (canon L370 heads Russian first) |
+| T-23 | Influence Boundary | MERGED | C-5 | directive #5 → index |
+| T-24 | LIE | MERGED | C-13 | overlap term |
+| T-25 | Lorebook | MERGED | C-14 | overlap term |
+| T-26 | Lorebook Entry | MERGED | C-14 | entry fields = §7B.3 canonical |
+| T-27 | MBTI | MERGED | C-15 | overlap term |
+| T-28 | Narrator Bleed | MERGED | C-24 | narrator-side leak = degradation sense; §3.6 |
+| T-29 | NEED | MERGED | C-16 | overlap term |
+| T-30 | Nested Anchors | MOVED | new entry «Вложенные якоря (Nested Anchors)» | §8 AP-15 |
+| T-31 | OCEAN | MERGED | C-17 | overlap term |
+| T-32 | One Change Rule | MOVED | new entry «Правило одного изменения» | §9.2 |
+| T-33 | OOC | MOVED | new entry «OOC (вне образа)» | §7A.8 OOC Protection + §9 |
+| T-34 | Persona Synthesis | MOVED | new entry «Синтез личности (Persona Synthesis)» | §5.7 |
+| T-35 | Pre-Generation Filter | MERGED | C-5 | directive #7 → index; JSON numbers (~40–60% / ~85–95%) stay §7A.2-side (OBSERVATION-strength; rule-strength convention §6.5 pending) |
+| T-36 | Presence Penalty | MOVED | new entry «Presence Penalty (PP)» | §7A.6; PP = 0 stable (AP-7); API-parameter identifier head |
+| T-37 | Price | MERGED | C-20 | T→A→P component («Цена»); §2.1 |
+| T-38 | processus_analysium | MOVED | new entry «processus_analysium» | §6 Tier 3 XML tag = identifier (name stays verbatim) |
+| T-39 | RepPen | MOVED | new entry «RepPen (Repetition Penalty)» | §7A.6; ⚠ JSON value «1.00–1.10» = 5th KI#72-family location (Registry B row 2) — registry entry defers values to the canonical table |
+| T-40 | Sensory Anchors | MOVED | new entry «Сенсорные якоря (Sensory Anchors)» | §2 (p2_sensory_anchors) |
+| T-41 | Show Never Tell | MERGED | C-5 | directive #1 → index |
+| T-42 | SP (MBTI temperament) | MOVED | new entry «S·P (MBTI-темперамент)» | appendix_mbti S·P ≠ SP disambiguation (canonical per matrix `appendix_mbti::04`) |
+| T-43 | Spatial & Anatomical Lock | MERGED | C-5 | directive #3 → index |
+| T-44 | SPINE | MERGED | C-18 | overlap term |
+| T-45 | Structured Inject | MOVED | new entry «Структурированная инъекция (Structured Inject)» | §7B.6 |
+| T-46 | System Prompt | MERGED | C-19 | overlap term (single container term) |
+| T-47 | Token Budget | MERGED | C-21 | overlap term |
+| T-48 | Tone Frame | MOVED | new entry «Tone Frame (тональный фрейм)» ⚑ | §7A.3; SP-element name |
+| T-49 | Trigger | MERGED | C-20 | T→A→P component («Триггер»); §2.1 |
+| T-50 | Voice | MERGED | C-22 | overlap term |
+| T-51 | Voice Bleed | MERGED | C-23 | JSON definition = cross-character sense |
+| T-52 | Voice Contamination | MOVED | new entry «Заражение голоса (Voice Contamination)» | §3 RULE (canon L95 heads Russian first) |
+| T-53 | Voice Isolation | MERGED | C-25 | overlap term |
+| T-54 | WANT | MERGED | C-26 | overlap term |
+| T-55 | годмодинг | MOVED | new entry «Годмодинг» | §8.7 AP-6; diagnostic term (the violation) — disambiguation vs C-2 (the directive) kept |
+
+Accounting: 55 JSON terms = **35 MERGED** (21 overlap + 14 fold-ins: Action /
+Price / Trigger → C-20; 7 CORE DIRECTIVE names → C-5 index; Lorebook Entry →
+C-14; System Prompt → C-19; Voice Bleed → C-23; Narrator Bleed → C-24) +
+**20 MOVED** (new entries, canonical homes verified iter 132). Canon side:
+25 entries MERGED (21 overlap + 4 fold-in receivers: System Prompt / SP,
+T→A→P, both Voice Bleed senses), intro MOVED. **Unified registry = 45
+entries** (25 merged canon entries + 20 promoted). Dead layers: `core_rules`
+(5 rows, pre-restructure `01_core_principles.html` targets, consumed by
+nothing — verified iter 131) → `REMOVED_WITH_REASON` (generator does not emit
+it); `version` field (9.2.0 stale) → generated from the guide version.
 
 ## 6. Owner decision points (blocking, in recommended order)
 
@@ -118,11 +241,17 @@ bounded-area iteration (expected: glossary cluster).
    (foundation §4.3).
 2. **E13 diagnostic mappings**: canonicalize in §9.6 vs visual-canonical
    (Registry B row 4).
-3. **Glossary cluster (first bounded area)**: (a) canonical term-set
-   composition — 25 canon / 55 JSON / merged-with-review (34 JSON-only terms
-   need per-term disposition); (b) source-of-truth direction for the machine
-   layer (canon MD → generated JSON vs JSON → generated MD); (c) disposition of
-   the never-loaded appendix layer (input: KI#70 wire/drop analysis).
+3. **Glossary cluster (first bounded area) — DECIDED (DEC-17, owner chat 2026-09-14):**
+   (a) canonical term-set = **merged-with-review** (per-term evidence: §5.1;
+   canonicality decided per term — JSON-only terms do not become canonical
+   merely by existing in the machine layer; Russian-first head-forms per
+   DEC-16: `lie → ложь`, `token → токен`, English only as technical
+   identifiers); (b) source-of-truth chain = **canonical term record →
+   generated `glossary.json` → runtime panel / no-JS glossary**; (c) glossary
+   stays the **v2 Reference-layer** representation of the unified registry
+   (appendix layer rides the v2 Reference-mode design; the v1 KI#70
+   wire/drop question stays deferred/superseded). Gate cleared — mig-1
+   execution awaits the owner's phase call + §5.1 ratification.
 4. **Hero prototype** (`visual-system/hero/`): integrate, archive, or remove
    (unintegrated since VS phase 1; carries its own labels).
 5. **Rule-strength convention** for v2 (RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL/
@@ -136,3 +265,10 @@ bounded-area iteration (expected: glossary cluster).
 - **iter 131 (seed, BASE_COMMIT `987e4f3`):** registry created; layer model (§2), 18 element
   dispositions (§3, all PROPOSED), 7 cluster rows (§4), decision points (§6).
   Evidence base: `migration_foundation_iter131.md`.
+- **iter 132 (glossary slice, BASE_COMMIT `8f12c07`):** owner decisions recorded as DEC-17
+  (§4 glossary row + §6.3 → DECIDED; §2 L6 updated). Registry C seeded with the glossary
+  slice (§5.1): 26 matrix rows copied as C-1…C-26 (back-pointers added in the matrix), 55 JSON
+  terms dispositioned as T-01…T-55 (35 MERGED / 20 MOVED, canonical homes verified), 6
+  head-forms flagged ⚑ (identifier-vs-prose boundary). New finding: `glossary.json` RepPen
+  «1.00–1.10» = 5th KI#72-family value location (§4 row 2). Term-set partition re-derived by
+  script (25/55/21/34/4 — matches foundation). Doc-only; v1 untouched.

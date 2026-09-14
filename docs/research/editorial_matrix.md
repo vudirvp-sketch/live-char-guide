@@ -1130,34 +1130,38 @@ resolves each to `#p7a_token_budget`, canon-side hygiene).
 
 ### appendix_glossary (Appendix C)
 
+> **iter 132:** all 26 rows seeded into `migration_map_v2.md` §5.1 (glossary slice, DEC-17) —
+> back-pointers `→ migration_map_v2 C-<n>` appended per row; editorial verdicts below stand
+> (v1 audit record).
+
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
-| appendix_glossary::01 | L19 | intro (definition + ref pattern) | NAVIGATION | KEEP | YES | — | Declares the glossary's own entry pattern |
-| appendix_glossary::02 | L21–25 | A — Anti-godmoding | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (2-line form + positive-formulation rationale echo of §7A.1::09); ref `§7A.X` vague R18 |
-| appendix_glossary::03 | L27–31 | B — Behavioral Anchor | DEFINITION | COMPRESS | YES | DUPLICATE | **R01 reference-layer occurrence:** carries the placement ПРАВИЛО (2-sentence statement of the §1.4 rule); fold to 1 sentence + ref §1.4 per the glossary's own pattern; the `§2.1` ref itself is correct |
-| appendix_glossary::04 | L33–37 | C — CoT | DEFINITION | KEEP | YES | — | R29: «Tier 0 (basic Anchor)» vs §6.3 «Tier 0 — без отдельного CoT-блока»; ref §6.2 ✓ |
-| appendix_glossary::05 | L39–51 | C — CORE DIRECTIVES (full annotated 7-item list) | DEFINITION | COMPRESS | YES | DUPLICATE | **R02 verdict (ed-2 input, required by the ed-matrix PLAN row):** full annotated copy exceeds the glossary's own 1-sentence+ref pattern — the annotations restate §7A.2::06–::12; compress to definition + 7-name index + fixed ref §7A.2; **KI#70 dependency:** master renders the full list but the appendix never runtime-loads — the compression should ride the KI#70 wire/drop decision; ref `§7A.X` vague R18 |
-| appendix_glossary::06 | L53–57 | E — Embodiment Protocol | DEFINITION | KEEP | YES | — | Protocol-vs-Directive distinction preserved ✓; ref `§2.X` vague |
-| appendix_glossary::07 | L59–63 | E — Enneagram | DEFINITION | KEEP | YES | — | Ref §5.4 ✓ |
-| appendix_glossary::08 | L65–69 | F — FLAW | DEFINITION | KEEP | YES | REINFORCEMENT | R24 reference-side; ref `§4.X` vague |
-| appendix_glossary::09 | L71–75 | G — GHOST | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
-| appendix_glossary::10 | L77–81 | G — GHOST Layers | DEFINITION | KEEP | YES | — | R29: «G2=Отрочество» vs §4.11 «Юность»; ref `§4.X` vague |
-| appendix_glossary::11 | L83–87 | G — Greeting Message | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague |
-| appendix_glossary::12 | L89–93 | I — Identity Block | DEFINITION | KEEP | YES | — | Name-language rule echo of §7A.1::04 (reference layer); ref `§7A.X` vague |
-| appendix_glossary::13 | L95–99 | L — LIE | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
-| appendix_glossary::14 | L101–105 | L — Lorebook | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague |
-| appendix_glossary::15 | L107–111 | M — MBTI | DEFINITION | KEEP | YES | REINFORCEMENT | **R26 statement #4**; ref appendix ✓ |
-| appendix_glossary::16 | L113–117 | N — NEED | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
-| appendix_glossary::17 | L119–123 | O — OCEAN | DEFINITION | KEEP | YES | REINFORCEMENT | R25 reference-side restatement (golden rule); refs §5.1 + §1.4 ✓ |
-| appendix_glossary::18 | L125–129 | S — SPINE | DEFINITION | KEEP | YES | REINFORCEMENT | R21 clause (implicit GHOST/LIE); ref §4.1 ✓ |
-| appendix_glossary::19 | L131–135 | S — System Prompt / SP | DEFINITION | KEEP | YES | — | Container-vs-content distinction ✓; ref `§7A.X` vague |
-| appendix_glossary::20 | L137–141 | T — T→A→P | DEFINITION | KEEP | YES | — | Ref §2.1 ✓ |
-| appendix_glossary::21 | L143–147 | T — Token Budget | DEFINITION | KEEP | YES | — | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block); ref `§7A.X` vague |
-| appendix_glossary::22 | L149–153 | V — Voice | DEFINITION | KEEP | YES | REINFORCEMENT | R03 clause («Модель — копировщик паттернов») + R06 two-level rule (reference echo); ref `§3.X` vague |
-| appendix_glossary::23 | L155–159 | V — Voice Bleed (cross-character) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague |
-| appendix_glossary::24 | L161–165 | V — Voice Bleed (degradation) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague |
-| appendix_glossary::25 | L167–171 | V — Voice Isolation | DEFINITION | KEEP | YES | — | Ref `§3.X` vague |
-| appendix_glossary::26 | L173–177 | W — WANT | DEFINITION | KEEP | YES | — | Ref `§4.X` vague |
+| appendix_glossary::01 | L19 | intro (definition + ref pattern) | NAVIGATION | KEEP | YES | — | Declares the glossary's own entry pattern; → migration_map_v2 C-1 |
+| appendix_glossary::02 | L21–25 | A — Anti-godmoding | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (2-line form + positive-formulation rationale echo of §7A.1::09); ref `§7A.X` vague R18; → migration_map_v2 C-2 |
+| appendix_glossary::03 | L27–31 | B — Behavioral Anchor | DEFINITION | COMPRESS | YES | DUPLICATE | **R01 reference-layer occurrence:** carries the placement ПРАВИЛО (2-sentence statement of the §1.4 rule); fold to 1 sentence + ref §1.4 per the glossary's own pattern; the `§2.1` ref itself is correct; → migration_map_v2 C-3 |
+| appendix_glossary::04 | L33–37 | C — CoT | DEFINITION | KEEP | YES | — | R29: «Tier 0 (basic Anchor)» vs §6.3 «Tier 0 — без отдельного CoT-блока»; ref §6.2 ✓; → migration_map_v2 C-4 |
+| appendix_glossary::05 | L39–51 | C — CORE DIRECTIVES (full annotated 7-item list) | DEFINITION | COMPRESS | YES | DUPLICATE | **R02 verdict (ed-2 input, required by the ed-matrix PLAN row):** full annotated copy exceeds the glossary's own 1-sentence+ref pattern — the annotations restate §7A.2::06–::12; compress to definition + 7-name index + fixed ref §7A.2; **KI#70 dependency:** master renders the full list but the appendix never runtime-loads — the compression should ride the KI#70 wire/drop decision; ref `§7A.X` vague R18; → migration_map_v2 C-5 |
+| appendix_glossary::06 | L53–57 | E — Embodiment Protocol | DEFINITION | KEEP | YES | — | Protocol-vs-Directive distinction preserved ✓; ref `§2.X` vague; → migration_map_v2 C-6 |
+| appendix_glossary::07 | L59–63 | E — Enneagram | DEFINITION | KEEP | YES | — | Ref §5.4 ✓; → migration_map_v2 C-7 |
+| appendix_glossary::08 | L65–69 | F — FLAW | DEFINITION | KEEP | YES | REINFORCEMENT | R24 reference-side; ref `§4.X` vague; → migration_map_v2 C-8 |
+| appendix_glossary::09 | L71–75 | G — GHOST | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-9 |
+| appendix_glossary::10 | L77–81 | G — GHOST Layers | DEFINITION | KEEP | YES | — | R29: «G2=Отрочество» vs §4.11 «Юность»; ref `§4.X` vague; → migration_map_v2 C-10 |
+| appendix_glossary::11 | L83–87 | G — Greeting Message | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague; → migration_map_v2 C-11 |
+| appendix_glossary::12 | L89–93 | I — Identity Block | DEFINITION | KEEP | YES | — | Name-language rule echo of §7A.1::04 (reference layer); ref `§7A.X` vague; → migration_map_v2 C-12 |
+| appendix_glossary::13 | L95–99 | L — LIE | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-13 |
+| appendix_glossary::14 | L101–105 | L — Lorebook | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague; → migration_map_v2 C-14 |
+| appendix_glossary::15 | L107–111 | M — MBTI | DEFINITION | KEEP | YES | REINFORCEMENT | **R26 statement #4**; ref appendix ✓; → migration_map_v2 C-15 |
+| appendix_glossary::16 | L113–117 | N — NEED | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-16 |
+| appendix_glossary::17 | L119–123 | O — OCEAN | DEFINITION | KEEP | YES | REINFORCEMENT | R25 reference-side restatement (golden rule); refs §5.1 + §1.4 ✓; → migration_map_v2 C-17 |
+| appendix_glossary::18 | L125–129 | S — SPINE | DEFINITION | KEEP | YES | REINFORCEMENT | R21 clause (implicit GHOST/LIE); ref §4.1 ✓; → migration_map_v2 C-18 |
+| appendix_glossary::19 | L131–135 | S — System Prompt / SP | DEFINITION | KEEP | YES | — | Container-vs-content distinction ✓; ref `§7A.X` vague; → migration_map_v2 C-19 |
+| appendix_glossary::20 | L137–141 | T — T→A→P | DEFINITION | KEEP | YES | — | Ref §2.1 ✓; → migration_map_v2 C-20 |
+| appendix_glossary::21 | L143–147 | T — Token Budget | DEFINITION | KEEP | YES | — | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block); ref `§7A.X` vague; → migration_map_v2 C-21 |
+| appendix_glossary::22 | L149–153 | V — Voice | DEFINITION | KEEP | YES | REINFORCEMENT | R03 clause («Модель — копировщик паттернов») + R06 two-level rule (reference echo); ref `§3.X` vague; → migration_map_v2 C-22 |
+| appendix_glossary::23 | L155–159 | V — Voice Bleed (cross-character) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-23 |
+| appendix_glossary::24 | L161–165 | V — Voice Bleed (degradation) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-24 |
+| appendix_glossary::25 | L167–171 | V — Voice Isolation | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-25 |
+| appendix_glossary::26 | L173–177 | W — WANT | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-26 |
 
 ### appendix_mbti (Appendix A)
 
