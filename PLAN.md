@@ -6,12 +6,37 @@
 > History of completed work: `worklog.md` · `CHANGELOG.md` · git. This file carries no history.
 >
 > Every backlog row MUST carry: Task · Scope · Acceptance criteria · Required verification · Owner gate (if any).
->
-> **Editorial law (iter 122+):** every content row (`ed-1`…`ed-8`, `dupes-1`, `ki-72`) executes under the
-> **Editorial Policy** — `AGENTS.md` → Editorial Policy (content-editing law), DEC-15. Its acceptance
-> criteria are cumulative with each row's own.
 
 ---
+
+## ACTIVE TRACK (since iter 131): v1 → v2 architecture migration
+
+> Owner track-switch directive (chat 2026-09-14): the incremental editorial cleanup/research track is
+> **superseded**; Fork D 2/3, KI#70 (standalone), Fork D 3/3, KI#72 (as content decision), and `dupes-N`
+> cleanup passes are **not auto-candidates**. Old work = input only where a direct migration dependency
+> exists. **v1 is frozen as immutable migration source; v2 = editable target.**
+> Migration order: `semantic extraction → v2 architecture → v2 build → parity audit → canonical audit →
+> reader-path audit → switch`. Reader modes: **Learn → Build → Debug → Reference**.
+> Evidence base: `docs/research/migration_foundation_iter131.md` · living registry: `docs/research/migration_map_v2.md`.
+
+| ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
+|----|------|-------|---------------------|----------------------|------------|
+| mig-1 | **First bounded area — Glossary cluster** (recommended by foundation §6; Reference-mode backbone): unify the 3 competing term sets (canon appendix 25 / `data/glossary.json` 55 with 21 overlap + 34 JSON-only / derived no-JS page), decide the machine-layer source direction, dispose of dead layers (`core_rules`, never-loaded appendix). v2-side build slice: demonstrates the one-canonical-source + derived-layers pattern end-to-end | v2 target location (to be designed) + `migration_map_v2.md` Registry C seed rows for the glossary cluster; **no v1 content edits** (v1 frozen) | single canonical term registry; machine layer derived from it; every v1 glossary term has a disposition row (25 + 55 with overlap handling); dead layers `REMOVED_WITH_REASON` or re-wired; decision points recorded | map rows complete for the cluster; parity check vs the 3 v1 term sets; no `docs/canon/`/`src/master/`/`data/` edits unless the owner unfreezes | **YES — term-set composition (25/55/merged), source-of-truth direction, appendix-layer disposition (KI#70 input)** |
+| mig-registry | **Registry C seeding (non-gated, Phase 1 completion):** extend `migration_map_v2.md` Registry C with block-level rows from `editorial_matrix.md` (99 IDs / 500 rows — reuse, no re-audit): copy affected rows per cluster with `OLD → NEW` + status, back-pointer from the matrix row; one Part per slice, glossary first | `docs/research/migration_map_v2.md` Registry C + back-pointers in `editorial_matrix.md` (touched rows only) | every seeded row carries OLD location, NEW location (or UNKNOWN), status, and cluster link; matrix rows get back-pointers; no duplication of matrix evidence (DEC-10) | doc-only checks: registry/table integrity, `git diff --check` | NONE — deterministic, no content decisions |
+| mig-2 | **Second bounded area — CORE DIRECTIVES cluster** (ed-2 evidence reused; DEC-08 shorthand mechanism): one canonical definition (§7A.2) + E08 as the single visual presentation + shorthand elsewhere; dispositions for glossary entry, Part 10 manifestations, assembly references | v2 build slice (after mig-1 pattern established); map Registry B row 1 executes | directive count (7) and numbering (#6 Consequence Driven, #7 Pre-Generation Filter) unchanged; every presentation layer has a disposition; no competing full definitions remain in the v2 slice | parity audit vs v1 presentation inventory (foundation §5.1); reader-path audit Learn+Build modes | MEDIUM — content semantics inherited from ed-2 (pre-approved analysis) |
+| mig-3 | **Third bounded area — Diagnostics cluster** (Debug mode): E13 unique symptom→check→fix mappings vs §9.5/§9.6 canonicalization decision; §9.3/§9.11 checklist dispositions | blocked on the E13 decision (map §6.2): canonicalize mappings in §9.6 vs declare E13 VISUAL_CANONICAL | E13 payload either has a canonical textual home or a declared visual-canonical status; no competing diagnostic sources in the v2 slice | parity audit vs E13 inventory + Debug reader-path audit (symptom → cause → test → one-change → validation) | **YES — E13 disposition decision** |
+
+> Superseded-but-valid analyses reused as migration input: `editorial_matrix.md` (block-level audit),
+> `editorial_research_en.md` §23 reading modes / §19 rule strength, ed-1…ed-8 row scopes (cluster evidence),
+> KI#72 matrix recommendation (§7A.6 canonical), KI#70 wire/drop analysis (Reference-mode input),
+> `vs-audit` open questions (folded into map Registry A / foundation §4).
+
+---
+
+## Superseded queues (pre-iter-131 incremental track — NOT auto-candidates)
+
+> Owner directive: do not resume these automatically. Rows kept as input/evidence; scope/acceptance
+> detail remains valid for any future owner decision to re-activate under a migration slice.
 
 ## Owner-gated queue (decision needed before any agent work)
 
@@ -20,7 +45,7 @@
 | fork-d-3-intent | Fork D (part 3/3) — persona widget: owner defines intent (new 3rd widget vs extend `persona-synthesis`) | TBD after decision | TBD | TBD | **YES — owner must define intent before planning** |
 | ki-70 | Decide + implement appendix runtime loading (KI#70): `parts/manifest.json` carries `appendices` (appendix_mbti / appendix_model_table / appendix_glossary) that `lazy-loader.js` never reads — Appendix A (MBTI Reference + `mbti-composer` container), B (Model Capability Table), C (Glossary appendix) never render; auto-injected TOC `#appendix_*` links (built `part_01.html:414+`) are dead. Owner decision: WIRE (append `manifest.appendices` to the load list after `manifest.parts` — they inherit KI#69 retry/placeholder machinery for free) or DROP (remove appendices from manifest + TOC injection in `build-unified.mjs`) | If WIRE: `src/shell/lazy-loader.js` (load list, ~1 line + TOC grouping decision for `appendix_*` IDs) + verification of never-exercised paths (`mbti-composer` init on live container, appendix rendering, anchor links). If DROP: `scripts/build-unified.mjs` (manifest assembly + TOC injection) + master/appendix files stay as-is (unused) or get an owner-separate fate | WIRE: all 3 appendix sections render on the live page; `#appendix_mbti` TOC link scrolls; `mbti-composer` initializes without page errors; KI#70 closed. DROP: no dead `#appendix_*` links in the rendered TOC; manifest carries no unused array; KI#70 closed | WIRE: extend the iter-119 headless runtime suite (appendix sections count 93→96, link target check, mbti-composer page-error check) + full battery (build/validate/tests/qa) + hash changes only if `src/shell/index.html` touched. DROP: build + validate + tests + artifact checks | **YES — activates never-exercised widget+content paths (WIRE) or removes shipped content from the deploy contract (DROP); both change reader-visible scope** |
 
-## Backlog (deferred work, ordered by readiness)
+## Backlog (superseded — deferred unless a migration slice requires it)
 
 | ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
 |----|------|-------|---------------------|----------------------|------------|
