@@ -156,7 +156,7 @@ subsections are 1-sentence refs (verified iter 118, re-confirmed here). The bloc
 | p3_influence_hierarchy::04 | L56–63 | table: 6 sources × 3 tiers | DEFINITION | KEEP | YES | — | Canonical data (also feeds the widget) |
 | p3_influence_hierarchy::05 | L65 | RULE: 12B Description = 0% voice influence | DEFINITION | KEEP | YES | REINFORCEMENT | Applies §3.1 rule to the 12B case; refs §3.1 — compliant |
 | p3_influence_hierarchy::06 | L67–80 | EXAMPLE: WRONG vs CORRECT card text | EXAMPLE | KEEP | YES | REINFORCEMENT | Unique worked demo of R06 (card-level, not classifier-level) |
-| p3_influence_hierarchy::07 | L82 | Пояснение to the example | DUPLICATE | DELETE | YES | DUPLICATE | Re-explains the §3.1::04 Тест classification a third time (R06); the example is self-demonstrating |
+| p3_influence_hierarchy::07 | L82 | Пояснение to the example | DUPLICATE | DELETE | YES | DUPLICATE | Re-explains the §3.1::04 Тест classification a third time (R06); the example is self-demonstrating — **✅ executed iter 130 (ed-4 family)** |
 | p3_influence_hierarchy::08 | L84 | transition to Examples rules | NAVIGATION | KEEP | YES | — | |
 
 ### p3_examples_rules (§3.3)
@@ -1199,7 +1199,7 @@ appendix content describes never-loaded containers.
 | R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 — **compressed iter 129 (ed-7 family): 1 sentence + ref §1.4, applied outcome contrast kept** · §1.7 L128 application · §7A.4 L189/L199 applications+ref · **[B]** glossary «V — Voice» entry (1-sentence reference clause — acceptable) | DUPLICATE (§3.1 fixed iter 129); rest compliant | ed-1/ed-4 ✅ §3.1 iter 129 |
 | R04 | Voice drift numbers (~40% vs ~10% at 20–30 msgs) | §3.1 table (granular) | §1.1 table row | DUPLICATE (same data, same persuasive purpose) | ed-1/ed-4 |
 | R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 — **compressed iter 129 (ed-7 family): 1-sentence pointer to §1.1 + §3.2 note kept locally; sync-audit P3-6 updated** | DUPLICATE (§3.1 fixed iter 129) | ed-7 ✅ iter 129 |
-| R06 | Linguistic vs physical voice (Тест family) | `p3_voice_isolation::03–04` (§3.1) | §3.2 L67–80 example (unique demo) · §3.2 L82 Пояснение (re-explainer, pending candidate #6) · **[B]** AP-3 catalog-site (compliant apply) · **[B]** glossary Voice/Voice Isolation entries (reference echo) | DUPLICATE (Пояснение only) | ed-4 |
+| R06 | Linguistic vs physical voice (Тест family) | `p3_voice_isolation::03–04` (§3.1) | §3.2 L67–80 example (unique demo) · §3.2 L82 Пояснение — **deleted iter 130 (ed-4 family, candidate #6)** · **[B]** AP-3 catalog-site (compliant apply) · **[B]** glossary Voice/Voice Isolation entries (reference echo) | DUPLICATE (Пояснение fixed iter 130) | ed-4 ✅ iter 130 |
 | R07 | Anti-godmoding exact line «Never speak or act for {{user}}.» | §7A.1 template | §1.7 fix · §9.3 check · §9.11 examples · §7A.13 step 2 · **[B]** §0.2 step-1 (quick-start apply) · **[B]** AP-6 code + До/После (fix-site) · **[B]** §7B.4 ПРАВИЛО (content no-user-actions principle) · **[B]** glossary A-entry (2-line form + positive-formulation rationale — rationale stated 3×: §7A.1::09 canonical / AP-6 / glossary) | REINFORCEMENT (each = changed function: teach/fix/check/example/reference) | — |
 | R08 | OOC Protection template | §7A.8 | §7A.13 step 3 partial re-print | REINFORCEMENT (assembled-SP view) — ed-2 audit item | ed-2 |
 | R09 | Format Lock template | §7A.4 | §7A.1 template tail · §7A.13 step 3 · **[B]** all four Part 10 cards (Format Lock block inside each SP — production-artifact function) | REINFORCEMENT (template/apply/assemble/card) | ed-2 |
@@ -1283,7 +1283,7 @@ cumulative list with execution status:**
 3. `p7a_system_prompt::07` — stale `[ANCHORS]`/KI#58 repo-meta note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
 4. `p3_voice_isolation::06` — methodology copy (R05) → CROSS-REFERENCE — **✅ executed iter 129 (ed-7 family; sync-audit P3-6 updated)**
 5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS — **✅ executed iter 129 (ed-7 family)**
-6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE — open (ed-4)
+6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE — **✅ executed iter 130 (ed-4 family)**
 7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — open (owner value decision)
 8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — open
 9. `p7a_token_budget::11` — stale migration note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
@@ -1299,8 +1299,8 @@ cumulative list with execution status:**
 19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — open (Phase B; KI#70 dependency)
 20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
 
-Execution status: 11 of 20 combined candidates executed (iters 121/125/128/129); 9 open overall
-(#6, #8, #10, #11, #13 from Phase A + #16, #19, #20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
+Execution status: 12 of 20 combined candidates executed (iters 121/125/128/129/130); 8 open overall
+(#8, #10, #11, #13 from Phase A + #16, #19, #20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
 carry owner decisions; the rest are ready for ed-* execution under the Editorial Policy.
 
 Plus one **pair-level** candidate: R04 drift-numbers — one of the two occurrences
@@ -1329,8 +1329,12 @@ action; no Phase B deletion carries unique information (research §22 category 1
   (candidate #19); rides the KI#70 wire/drop decision. Part 10 shorthand usage verified compliant.
 - **ed-3 (Part 9):** already check-form; remaining = R15 fold + R14 router decision.
 - **ed-4 (Voice):** hierarchy framing only; the R06 family (Тест/example/Пояснение) is the single
-  in-part consolidation candidate. No merges (§24 protects RELATED BUT DISTINCT). Phase B adds:
-  AP-3/AP-11 catalog-sites and the glossary voice entries are compliant — out of ed-4 scope.
+  in-part consolidation candidate — **Пояснение deleted iter 130 (candidate #6; canon + master
+  mirror); Тест (§3.1::04) and the §3.2 example are KEEP, so the family is now consolidated.**
+  Hierarchy framing itself: the §3.1 → §3.8 section sequence already forms the concept-family
+  hierarchy — no further ed-4 edits evidenced (no framing text invented). No merges (§24 protects
+  RELATED BUT DISTINCT). Phase B adds: AP-3/AP-11 catalog-sites and the glossary voice entries are
+  compliant — out of ed-4 scope.
 - **ed-5 (Token budget):** R11 — resolve §1.8 Q2 framing + §9.11 «≤800» vs §7A.12 max 700 +
   **[B]** AP-1 «>800» (same tension) + **[B]** glossary «4K ~430–580» card-total framing;
   §7A.11 4K table is legitimately distinct. **[B] R27:** character_map card-total ranges
