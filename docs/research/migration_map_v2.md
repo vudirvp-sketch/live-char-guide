@@ -78,13 +78,13 @@ textual canonical home); drift = known prototype↔embed divergence
 | E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract deferred → §6.1 |
 | E11 | `part_06.html` p6_cot_tiers | 35/37 | 24 | none detected | tier definitions + model applicability (12B+/32B+/API) + template snippets → `SHARED_REFERENCE` (§6.3–§6.5 own); «Tier 0 работает для всех…» explanatory lines → `TEXTUAL_CANONICAL` candidates |
 | E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family) |
-| E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2 |
+| E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2. **Recommendation iter 137:** `TEXTUAL_CANONICAL` → §9.6 (`owner_gates_iter137.md` §3.2) |
 | E14 | `part_09.html` p9_quality_scale | 17/18 | 9 | none detected | quality grade names → `SHARED_REFERENCE` (§9.1 owns) |
 | E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2). **Executed iter 135 (mig-4, slice §5.3):** min–max values verified == canonical; Examples total now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; canon `[VS: E15]` marker added with the derivation rule (TB-4/TB-5); parity-locked; prototype/extract deferred → §6.1 |
 | E16 | `part_07a.html` p7a_authors_note | 31/31 | 20 | none detected | AN template A/B labels → `SHARED_REFERENCE` (§7A.5 owns) |
 | E17 | `part_07a.html` p7a_sampling_params | 43/44 | 13 | none detected | 3-tier param table → `SHARED_REFERENCE` — **blocked on KI#72 value decision** (embed carries both sides labeled «базовая»/«чеклист»); annotations («Только Examples» etc.) → `REFERENCE_ONLY` |
 | E18 | `part_07b.html` p7b_greeting | 16/16 | 5 | none detected | greeting algorithm steps → `SHARED_REFERENCE` (§7B.2 owns) |
-| hero | — (unintegrated) | n/a | n/a | never integrated | `UNKNOWN` — §6.4 |
+| hero | — (unintegrated) | n/a | n/a | never integrated | `UNKNOWN` — §6.4. **iter 137 evidence:** runs on Three.js via `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead `.vs-hero-placeholder` CSS stub in `src/shell/styles.css` (5 rules, zero consumers — KI#81). **Recommendation iter 137:** remove/archive (`owner_gates_iter137.md` §3.4) |
 
 ## 4. Registry B — concept clusters → canonical ownership (v2 dispositions PROPOSED)
 
@@ -357,13 +357,32 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
 
 ## 6. Owner decision points (blocking, in recommended order)
 
+> **Recommendation package (iter 137, agent-prepared — NOT decisions; every gate
+> stays owner-called):** verified evidence + a recommended call per gate + call
+> order: [`owner_gates_iter137.md`](./owner_gates_iter137.md). Summary — §6.1:
+> master embed canonical / L4-L5 frozen (stale copies → `REMOVED_WITH_REASON` at
+> slice time); §6.2: `TEXTUAL_CANONICAL` (mappings → §9.6, E13 = visual reference);
+> §6.5: ratify RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL (+ UNKNOWN = temporary
+> uncertainty only; incremental application); §6.4: remove/archive (rides the §6.1
+> freeze; dead `.vs-hero-placeholder` CSS stub → KI#81). Recommended call order:
+> **§6.1 → §6.2 → §6.5 → §6.4** (unblock value; §6.4 gates nothing).
+
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
    prototypes/extracts become frozen design artifacts (default), or
    visual-system/ is re-established as the canonical visual source with a sync
    mechanism. Evidence: 93% identity, drift in E10/E01/E05/E06, no sync tooling
    (foundation §4.3).
+   **Recommendation (iter 137, pending owner call):** master embed = canonical;
+   L4/L5 frozen design artifacts; the four executed families' stale copies →
+   `REMOVED_WITH_REASON` in a mechanical disposal slice (parity locks already in
+   place). Detail: `owner_gates_iter137.md` §3.1.
 2. **E13 diagnostic mappings**: canonicalize in §9.6 vs visual-canonical
    (Registry B row 4).
+   **Recommendation (iter 137, pending owner call):** `TEXTUAL_CANONICAL` —
+   canonicalize the unique mappings in §9.6 (canon §9.6 L139 already claims E13 is
+   its visual version — the claim is currently false); E13 = visual presentation /
+   decision aid; unblocks mig-3 on the established slice pattern.
+   Detail: `owner_gates_iter137.md` §3.2.
 3. **Glossary cluster (first bounded area) — DECIDED (DEC-17, owner chat 2026-09-14):**
    (a) canonical term-set = **merged-with-review** (per-term evidence: §5.1;
    canonicality decided per term — JSON-only terms do not become canonical
@@ -378,9 +397,20 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
    **executed iter 133 (mig-1)**.
 4. **Hero prototype** (`visual-system/hero/`): integrate, archive, or remove
    (unintegrated since VS phase 1; carries its own labels).
+   **Recommendation (iter 137, pending owner call):** remove/archive — never
+   integrated (INTEGRATION-MAP row unexecuted); runs on Three.js via
+   `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead
+   `.vs-hero-placeholder` CSS stub in shell styles (KI#81) is the only
+   production-side residue. Detail: `owner_gates_iter137.md` §3.4.
 5. **Rule-strength convention** for v2 (RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL/
    UNKNOWN markup) — needed before the Part 7A/8 v2 slices (model-capability
    percentages are OBSERVATION-strength; research §19 vocabulary).
+   **Recommendation (iter 137, pending owner call):** ratify the four classes +
+   UNKNOWN-as-temporary-only; apply incrementally per slice (no mass annotation);
+   ПРАВИЛО/РЕКОМЕНДАЦИЯ map to RULE/GUIDELINE (existing callout classes);
+   OBSERVATION/EXPERIMENTAL markup representation = first consuming slice. Note:
+   the sampling cluster additionally needs the KI#72 value decision.
+   Detail: `owner_gates_iter137.md` §3.3.
 
 ---
 
@@ -447,3 +477,14 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
   deferred-layer notes: prototype/extract §6.1; hexad geometry VISUAL_CANONICAL;
   unconsumed machine fields informational). Battery: sync 97/97, tests/qa green, baselines
   exact (english 18 / syntax 247).
+- **iter 137 (owner-gates recommendation, BASE_COMMIT `9b8d3138`):** doc-only — agent
+  recommendation package prepared for the four open §6 gates (nothing DECIDED, no gate
+  passed, no DEC-NN assigned): §6.1 master-embed-canonical / L4-L5 frozen · §6.2
+  `TEXTUAL_CANONICAL` (mappings → §9.6) · §6.5 ratify RULE/GUIDELINE/OBSERVATION/
+  EXPERIMENTAL + UNKNOWN-as-temporary-only, incremental application · §6.4 hero
+  remove/archive; recommended call order §6.1 → §6.2 → §6.5 → §6.4. New verified evidence:
+  hero Three.js CDN importmap; dead `.vs-hero-placeholder` CSS in `src/shell/styles.css`
+  (5 rules, zero consumers — KI#81 opened, cleanup deferred to the §6.4 slice).
+  Full package: `owner_gates_iter137.md`; §6 preamble + per-item recommendation lines +
+  Registry A hero/E13 notes updated (this entry). v1 untouched; no battery (doc-only,
+  iter-131 precedent).

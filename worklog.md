@@ -5,6 +5,26 @@
 
 ---
 
+Task ID: iter-137-owner-gates-recommendation
+Agent: main
+Task: owner chat directive — analyze the four open map-§6 owner decision points and the owner's drafted decision package; where correct, refine with verified evidence and record it in the repo (doc-only; no gate is passed, nothing marked DECIDED — the owner still calls every gate).
+
+Work Log:
+- 0: Preflight: `BASE_COMMIT = 9b8d31386fb219006019d934a606e2113ff8ef0a` (iter 136), worktree clean at start. Laws read: AGENTS.md, STATUS.md (iter 136 Next step — owner decision points map §6), AGENT_NAVIGATION.md, PLAN.md (mig-3 row + owner-gated queue), `migration_map_v2.md` (§1–§7), `migration_foundation_iter131.md` (§4.2–§4.4, §5, §8), `editorial_research_en.md` §19, DECISIONS.md (append-only convention; next free DEC-19 — untouched this iteration).
+- 1: **Fact check of the owner's draft (all four calls) against the repo — CONFIRMED:** §6.1 (93% identity = 494/532 foundation §4.2; no L4/L5 sync tooling map §2; drift E10 3-way + E01/E05/E06 russification lag + extracts `var(--token)` foundation §4.3; foundation INFERENCE: master embeds = de-facto production canonical) · §6.2 (E13 unique symptom→check→branch→AP/E mappings for 3 symptoms, absent from §9.5 11-row / §9.6 5-group tables, foundation §4.4; P/I 40/40 — prototype not stale) · §6.4 (never integrated: no hero section in `src/shell/index.html`, INTEGRATION-MAP row unexecuted, own label-overlay markup) · §6.5 (vocabulary already owner-directed foundation §8.4/map §6.5; research §19 «Some Statements Are Too Normative» four-class table verified).
+- 2: **Refinements added to the package:** (a) §6.1 disposal mechanics in the repo's own vocabulary — L4/L5 frozen design artifacts + per-family stale copies → `REMOVED_WITH_REASON` at slice time (Registry B rows 1/6 prepared dispositions), archive = git history; spells out the runnable consequence (mechanical disposal slice + parity-audit deferred-layer note updates + NAV §1 freeze row). (b) §6.2 — canon §9.6 L139 already claims E13 is its visual version (currently false — the mappings are not a subset); TEXTUAL_CANONICAL makes the existing canon claim true; mig-3 rides the established slice pattern (canon → master mirror → E13 re-point → `audit_diagnostics_parity.py` + Debug reader-path audit). (c) §6.5 — v1→v2 continuity mapping (ПРАВИЛО `.callout.rule` ↔ RULE, РЕКОМЕНДАЦИЯ `.callout.rec` ↔ GUIDELINE exist; OBSERVATION/EXPERIMENTAL new, markup representation = first consuming slice, fence #7); research-§19→owner-token mapping incl. Diagnostic-threshold-per-case; **dependency note: the sampling cluster also waits on the KI#72 value decision — §6.5 alone does not unblock Part 7A**. (d) Call order §6.1 → §6.2 → §6.5 → §6.4 recorded (unblock value; differs from the map's numbered order only by demoting §6.4).
+- 3: **New evidence found (iter 137, byte-verified):** (a) hero runs on Three.js from `cdn.jsdelivr.net` importmap (`three@0.164.1` + EffectComposer/RenderPass/UnrealBloomPass, hero file L85–95) — integration would reintroduce the CDN script-dependency class iter-113 removed (Mermaid, CSP `script-src` tightened) or require vendoring a large bundle (visual-system PLAN budgets <300 KB, optional-with-static-fallback); (b) dead `.vs-hero-placeholder` CSS stub in `src/shell/styles.css` (L557/7006/7015/7027/7043; zero consumers across `src/`+`parts/`+`widgets/`; introduced by the never-executed Phase-4 integration commit `0addf38d`; root fallback `assets/shell-styles.css` mirrors) → **KI#81 opened** (STATUS.md), cleanup deferred to the §6.4 disposal slice — out of current scope per scope discipline.
+- 4: **Recorded (doc-only):** new `docs/research/owner_gates_iter137.md` (recommendation package: situation, framing, per-gate recommendation + evidence + consequence, call order, what-it-does-NOT-do, verification) · `migration_map_v2.md` (§6 preamble + per-item Recommendation lines for items 1/2/4/5; Registry A hero row + E13 row notes; §7 iteration log iter-137 entry) · `STATUS.md` (iter 137 Current State; KI#81; Next step re-pinned with the package pointer + recommended calls + call order) · `AGENT_NAVIGATION.md` (§7 research-doc row) · `CHANGELOG.md` (iter-137 entry; iter-134 collapsed to one-line per detail cap) · this worklog (iter-127 one-liner dropped per ≤10 cap). 6 files — above the 3–5 soft limit, noted: the package + the 5 state-doc owners all mandated an update (iter-132 doc-only precedent: 7 files).
+- 5: **Deliberately NOT done:** no §6 status flipped to DECIDED, no DEC-NN assigned (DECISIONS.md = post-call record), no prototype/extract file deleted, no v1 content touched (frozen migration source), no KI#81 fix, no rule-strength markup added.
+
+Stage Summary:
+- The owner's four-gate decision package is fact-checked, refined, and recorded as an agent recommendation (NOT decisions): `docs/research/owner_gates_iter137.md` + map §6 recommendation lines + STATUS Next step.
+- Recommended calls: §6.1 master embed canonical / L4-L5 frozen · §6.2 TEXTUAL_CANONICAL (→ §9.6) · §6.5 ratify 4 classes + UNKNOWN-as-temporary, incremental · §6.4 hero remove/archive; call order §6.1 → §6.2 → §6.5 → §6.4.
+- New verified evidence: hero Three.js CDN importmap; dead `.vs-hero-placeholder` CSS (KI#81 opened, deferred to the §6.4 slice).
+- Next: the owner calls the gates (chat); after §6.1 → mechanical disposal slice for E08+E01+E15+E10; after §6.2 → mig-3; §6.5 before Part 7A/8 slices (+ the separate KI#72 value call for the sampling cluster).
+
+---
+
 Task ID: iter-136-mig5-enneagram-data
 Agent: main
 Task: execute the STATUS Next-step row 1 (pinned iter 135): the mig-5 Enneagram data v2 build slice on the mig-1 generator pattern (map Registry B row 6; foundation §5.6; PLAN row mig-5, LOW-MEDIUM gate — derivation direction pre-set by DEC-17/DEC-18 map §2 L6, LIE fold mechanical). Canonical record (§5.4) → generator → generated data layer → widget re-point → parity audit + full battery.
@@ -83,10 +103,5 @@ Task ID: iter-129-ed7-family (one-line summary)
 
 Task ID: iter-128-ed8-r18-phase-a (one-line summary)
 - iter 128 — ed-8/R18 Phase A remainder + R17 canon-side strips #14/#15/#17/#18: 16 refs + 1 paren + 4 strips, every target master-verified; battery green, hash `2ab607d6` unchanged. Detail: git `bb4ed292`.
-
----
-
-Task ID: iter-127-ed8-r18 (one-line summary)
-- iter 127 — ed-8/R18 Phase B: canon vague-ref repair batch — 33 refs + 6 part_08 parens + KI#77-a–d; part_05 L21 mirror + sync-audit P0-16 update; battery green, hash `2ab607d6` unchanged. Detail: git `8a365553`.
 
 ---
