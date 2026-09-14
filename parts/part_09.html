@@ -14,6 +14,10 @@
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E13-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E13-script.js
+  mig-3 (iter 139): TEXTUAL_CANONICAL (DEC-20) — the symptom→check→branch→AP/E
+         mapping is canonically owned by §9.6 (p9_decision_tree); this embed is
+         the visual presentation / decision aid of that mapping — values
+         parity-locked by scripts/audit_diagnostics_parity.py.
 -->
 <div class="tree-container">
 
@@ -295,6 +299,8 @@
 <p><strong>ПРАВИЛО: Никогда не меняйте более одного параметра за раз.</strong> Иначе вы не узнаете, что именно помогло. Изменили → протестировали 5–10 сообщений → оценили → только потом следующее изменение.</p>
 </div>
 
+<p><strong>Применение:</strong> относится ко всем правкам карточки — параметры сэмплирования (RepPen, PP, Temperature), структура Anchors, Examples, SPINE-цепь. Не объединяйте правки в одном тест-цикле. Сам диагноз перед правкой ставят по дереву решений — <a href="#p9_decision_tree">§9.6: Дерево решений</a>.</p>
+
 </section>
 
 <section  data-section="p9_basic_checklist" id="p9_basic_checklist" data-toc-nav>
@@ -382,7 +388,7 @@
 
 <p><strong>Сценарий:</strong> симптом-таблица (<a href="#p9_symptom_table">§9.5</a>) не помогла локализовать проблему или симптом затрагивает несколько блоков одновременно — последовательный пошаговый поиск с ветвлением «Если да → / Если нет →». Для структурной проверки по блокам карточки → <a href="#p9_basic_checklist">§9.3: Чек-лист диагностики</a>; для пред-деплой валидации → <a href="#p9_pre_deploy">§9.11: Пред-деплой валидация</a>.</p>
 
-<p>Если симптом-таблица не помогла локализовать проблему, используйте пошаговое дерево:</p>
+<p>Если симптом-таблица не помогла локализовать проблему, используйте пошаговое дерево. Формат: Симптом → Проверка → Если да → / Если нет → следующая проверка. Три самых частых симптома разобраны до конца — полный маппинг «проверка → диагноз» ниже; остальные группы симптомов — в таблице выше.</p>
 
 <div class="table-wrap">
 <table>
@@ -396,6 +402,24 @@
 <tr><td>Повторы в ответах</td><td>RepPen > 1.10?</td><td>Fix → AP-5 (RepPen-High)</td><td>→ Проверить PP: >0? (AP-7 PP-Leak)</td></tr>
 <tr><td></td><td>Используете Ollama/LM Studio?</td><td>Сменить интерфейс (PP=0.7 hardcode)</td><td>→ Проверить якоря на дублирование</td></tr>
 <tr><td>Модель теряет внутреннюю логику персонажа</td><td>Есть ли у персонажа внутренний процесс?</td><td>Исправление → <a href="#p6_cot_basics">Part 6: CoT</a> (AP-10 CoT-Overload)</td><td>→ Проверить SPINE на консистентность (AP-9 SPINE-Broken)</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Три базовых симптома: полный маппинг</h4>
+
+<p>Ниже — полный маппинг трёх базовых симптомов: от проверки к диагнозу с анти-паттерном и эталонным разделом. Визуальная версия маппинга — дерево в VS-EMBED E13 (в начале Part 9): те же ветвления «Нет → / Да →», значения общие с таблицей ниже. Каждый найденный диагноз отрабатывается по правилу одного изменения — <a href="#p9_one_change_rule">§9.2: Правило одного изменения</a>; после правки поведение проверяется тест-сценариями — <a href="#p9_test_scenarios">§9.7: Тестовые сценарии</a>.</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Симптом</th><th>Проверка</th><th>Ветка «Нет» → диагноз</th><th>Ветка «Да»</th></tr></thead>
+<tbody>
+<tr><td>Персонаж дрейфует после 5–10 сообщений</td><td>У персонажа есть рабочие Anchors?</td><td><strong>Отсутствует структура Anchors</strong> — AP-2 (отсутствующая цена), AP-8 (призрак без якорей)</td><td>→ следующая проверка</td></tr>
+<tr><td></td><td>SPINE причинно согласован?</td><td><strong>Нарушенная цепь SPINE</strong> — AP-9 (сломанный SPINE)</td><td><strong>Дрейф голоса (доминирование недавнего чата)</strong> — AP-11 (переплетение голосов); <a href="#p7a_authors_note">Part 7A: Author's Note</a> (E16)</td></tr>
+<tr><td>Голос звучит типично / неразличимо</td><td>Голос записан только в Examples?</td><td><strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description), AP-11 (переплетение голосов)</td><td>→ следующая проверка</td></tr>
+<tr><td></td><td>Достаточно ли диалоговых примеров (3+)?</td><td><strong>Недостаточно образцов голоса</strong> — E01 (структура блоков карточки, <a href="#p1_card_overview">Part 1: базовые блоки</a>), E07 (иерархия источников голоса, <a href="#p3_influence_hierarchy">Part 3: иерархия влияния</a>)</td><td><strong>Проблема параметров сэмплирования</strong> — AP-5 (RepPen > 1.10), E17 (<a href="#p7a_sampling_params">Part 7A: Sampling Parameters</a>)</td></tr>
+<tr><td>Персонаж игнорирует действия пользователя</td><td>Anti-godmoding присутствует в SP?</td><td><strong>Отсутствует Anti-godmoding</strong> — AP-6 (отсутствие анти-годмодинга), E02 (конвейер сборки SP, <a href="#p7a_assembly_pipeline">Part 7A: конвейер сборки</a>)</td><td>→ следующая проверка</td></tr>
+<tr><td></td><td>Персонаж использует протокол Embodiment?</td><td><strong>Embodiment отсутствует</strong> — E04 (протокол телесности, <a href="#p2_embodiment">Part 2: телесность</a>), директива 2 (<a href="#p7a_core_directives">Part 7A: Embodiment First</a>, E08)</td><td><strong>Нарушение границы влияния</strong> — директива 5 (<a href="#p7a_core_directives">Part 7A: Influence Boundary</a>, E08), E03 (формат якоря T→A→P, <a href="#p2_basic_anchors">Part 2: поведенческие якоря</a>)</td></tr>
 </tbody>
 </table>
 </div>

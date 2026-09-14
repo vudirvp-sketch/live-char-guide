@@ -414,7 +414,7 @@ notes (L35, L82 partial, L616), KI#71 (verbatim duplicate line), KI#72 (sampling
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
 | p9_one_change_rule::01 | L44 | RULE: one change at a time | DEFINITION | KEEP | YES | — | Canonical; unique to Part 9 |
-| p9_one_change_rule::02 | L46 | Применение scope | APPLICATION | KEEP | YES | — | |
+| p9_one_change_rule::02 | L46 | Применение scope | APPLICATION | KEEP | YES | — | Tree back-link added (§9.2↔§9.6 IMP-48 pair, master mirror restored) — → migration_map_v2 DT-6 (mig-3 executed iter 139) |
 
 ### p9_basic_checklist (§9.3)
 
@@ -447,8 +447,9 @@ notes (L35, L82 partial, L616), KI#71 (verbatim duplicate line), KI#72 (sampling
 |---|---|---|---|---|---|---|---|
 | p9_decision_tree::01 | L124 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
 | p9_decision_tree::02 | L126 | format explanation | NAVIGATION | COMPRESS | YES | — | Merge into ::01 |
-| p9_decision_tree::03 | L128–137 | decision tree table | VALIDATION | KEEP | YES | SPECIAL CASE | Canonical branching form — different diagnostic mode than §9.5 (§24: same family, different condition) |
-| p9_decision_tree::04 | L139 | Cross-ref E13 | NAVIGATION | KEEP | YES | — | |
+| p9_decision_tree::03 | L128–137 | decision tree table | VALIDATION | KEEP | YES | SPECIAL CASE | Canonical branching form — different diagnostic mode than §9.5 (§24: same family, different condition) — → migration_map_v2 DT-1 (canonical owner, unchanged — mig-3 verified iter 139) |
+| p9_decision_tree::04 | L139 | Cross-ref E13 | NAVIGATION | KEEP | YES | — | Weak «Ссылка» upgraded to the full `[VS: E13]` marker (TEXTUAL_CANONICAL declared; claim now true) — → migration_map_v2 DT-3 (mig-3 executed iter 139) |
+| p9_decision_tree::05 | L143–150 (seeded iter 139) | E13 mapping sub-table «Три базовых симптома: полный маппинг» (6 rows: 3 symptoms, 6 checks, 9 diagnoses, AP/E refs) | VALIDATION | KEEP | YES | — | Canonical textual home of the E13 payload (DEC-20; values parity-locked by `scripts/audit_diagnostics_parity.py`) — → migration_map_v2 DT-2 (mig-3 executed iter 139) |
 
 ### p9_test_scenarios (§9.7)
 

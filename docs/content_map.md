@@ -162,7 +162,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Диагностика и чек-лист | `p9_basic_checklist` | §9.3 | Checklist | Cross-references на p1_core_rules |
 | Дополнительные проблемы | `p9_additional_problems` | §9.4 | Quick reference | Beyond top-3 |
 | Symptom table | `p9_symptom_table` | §9.5 | Diagnostic | 10 строк симптом→диагноз→решение |
-| Decision Tree | `p9_decision_tree` | §9.6 | Diagnostic | Branching symptom→check→fix |
+| Decision Tree | `p9_decision_tree` | §9.6 | Diagnostic | Branching symptom→check→fix + E13 mapping sub-table «Три базовых симптома» (canonical home of the E13 payload, DEC-20; values parity-locked by `scripts/audit_diagnostics_parity.py`) |
 | Test scenarios | `p9_test_scenarios` | §9.7 | Protocol | 6 тестовых сценариев |
 | Element→Scenario Mapping | `p9_element_scenario_map` | §9.8 | Reference | Element → test scenario |
 | Test Requirements | `p9_test_requirements` | §9.9 | Reference | Min scenarios + 6 success metrics |

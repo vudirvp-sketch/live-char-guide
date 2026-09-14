@@ -78,7 +78,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E11 | `part_06.html` p6_cot_tiers | 35/37 | 24 | none detected | tier definitions + model applicability (12B+/32B+/API) + template snippets → `SHARED_REFERENCE` (§6.3–§6.5 own); «Tier 0 работает для всех…» explanatory lines → `TEXTUAL_CANONICAL` candidates |
 | E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family) |
-| E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2. **Recommendation iter 137:** `TEXTUAL_CANONICAL` → §9.6 (`owner_gates_iter137.md` §3.2). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — execution = mig-3 (unblocked) |
+| E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2. **Recommendation iter 137:** `TEXTUAL_CANONICAL` → §9.6 (`owner_gates_iter137.md` §3.2). **DECIDED (DEC-20, iter 138) and EXECUTED iter 139 (mig-3):** `TEXTUAL_CANONICAL` — mappings canonicalized in §9.6 (sub-table + full `[VS: E13]` marker), embed re-pointed as the visual presentation / decision aid, values parity-locked by `scripts/audit_diagnostics_parity.py` (map §5.5 DT-1..DT-8) |
 | E14 | `part_09.html` p9_quality_scale | 17/18 | 9 | none detected | quality grade names → `SHARED_REFERENCE` (§9.1 owns) |
 | E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2). **Executed iter 135 (mig-4, slice §5.3):** min–max values verified == canonical; Examples total now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; canon `[VS: E15]` marker added with the derivation rule (TB-4/TB-5); parity-locked; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E16 | `part_07a.html` p7a_authors_note | 31/31 | 20 | none detected | AN template A/B labels → `SHARED_REFERENCE` (§7A.5 owns) |
@@ -93,7 +93,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused). **EXECUTED iter 134 (mig-2, slice §5.2 D-1…D-8):** §7A.13 full copy → DEC-08 shorthand (canon + master mirror); E08 parity-locked; §7A.1/Part 10 verified shorthand ×4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
 | Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
-| Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — mappings → §9.6, E13 = visual presentation; mig-3 unblocked |
+| Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — mappings → §9.6, E13 = visual presentation. **EXECUTED iter 139 (mig-3, slice §5.5 DT-1..DT-8):** §9.6 = the canonical home (E13 mapping sub-table + `[VS: E13]` marker), E13 re-pointed (parity audit), §9.2↔§9.6 Debug chain wired, §9.3/§9.11 verified checklists |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice. **EXECUTED iter 135 (mig-4, slice §5.3 TB-1…TB-8):** E01 values verified canonical at every layer (the wrong-side-copy claim corrected — not found in the repo); E15 derivation note added (master + canon marker); `[VS: E01/E15]` canon markers added; glossary already deferred (iter 133); no value decision needed |
 | Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift). **EXECUTED iter 136 (mig-5, slice §5.4):** chain implemented §5.4 → `scripts/generate_enneagram.mjs` (owns the machine-layer supplement) → generated `data/enneagram.json` (v2.1.0) → widgets (builder + synthesis re-pointed to `types[].lie_template`; vs-e10 unchanged); E10 mini-cards SHARED_REFERENCE; prototype/extract copy → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | Voice influence % | §3.2 table | E07 compressed scale + unique prose · `persona-voice-hierarchy.js` constants (sanctioned DEC-09) | E07 scale → `SHARED_REFERENCE`; E07 unique prose → `TEXTUAL_CANONICAL` candidate (§3.2 home decision); widget constants keep DEC-09 provenance header |
@@ -355,6 +355,45 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
 (mini-card defaults). Non-guide reference layers: agent-doc condensed references
 — REFERENCE_ONLY.
 
+### 5.5 Diagnostics slice (seeded + executed iter 139 — mig-3 build slice)
+
+Scope: the Diagnostics cluster — fifth bounded area (Registry B row 4; PLAN row
+mig-3; gate **cleared by DEC-20**: `TEXTUAL_CANONICAL` → §9.6, E13 = visual
+presentation / decision aid). Mechanism: mig-2 pattern (canonical record →
+re-point → parity audit; no machine layer — no data file carries diagnostic
+knowledge). Canonical owner: **§9.6** (existing 5-group tree table unchanged +
+NEW E13 mapping sub-table — the canonical textual home of the E13 payload).
+Editorial Policy 5-point check applied at edit time: capability (diagnostic
+knowledge gains search/testing/authority in text), coverage (every E13 row —
+symptom, check, both branches, diagnosis, AP/E refs — preserved in §9.6),
+retrieval (Debug-mode lookup without the visual), context (§9.6 router/intro
+extended, existing table untouched), dependency (E13 keeps its visual function;
+L139 claim becomes true). Acceptance gate =
+`scripts/audit_diagnostics_parity.py` (MUST PASS).
+
+| DT# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| DT-1 | `p9_decision_tree::03` | §9.6 existing tree table (5 symptom groups) | unchanged — canonical branching form (§9.5 = flat lookup, different diagnostic mode) | UNCHANGED — canonical owner | matrix SPECIAL CASE verdict (§24) |
+| DT-2 | `p9_decision_tree::05` (seeded iter 139) | E13 embed-only payload: 3 symptoms × (2 checks + 2 branches) × diagnosis + AP/E refs — not present in any canon text (foundation §4.4: competing diagnostic source) | §9.6 NEW sub-table «Три базовых симптома: полный маппинг» (6 rows, 9 diagnoses, 7 APs, 8 E-targets) — the canonical textual home; matrix row seeded | MOVED **— executed iter 139** | DEC-20; PLAN mig-3 |
+| DT-3 | `p9_decision_tree::04` | canon L139 weak «Ссылка» («визуальная версия дерева… — [VS: E13]» — the claim was false: mapping ⊄ §9.6) | full `[VS: E13]` marker in the `_README.md` §3.3 format declaring TEXTUAL_CANONICAL (§9.6 canonical source; E13 = visual presentation / decision aid; parity audit named) — the claim is now true | REPLACED_BY_CANONICAL **— executed iter 139** | DEC-20; marker precedents E01/E10/E15 |
+| DT-4 | — (master mirror) | master §9.6: no E13 mapping; intro missing the «Формат:» sentence (pre-existing drift); Walter P3-4c cross-ref | h4 sub-heading + intro (§9.2/§9.7 Debug-chain links) + mirrored 6-row table; «Формат:» sentence restored (drift closed); Walter cross-ref kept byte-identical (sync-audit P3-4c anchor) | MOVED **— executed iter 139** | PLAN mig-3 scope; sync-audit anchor |
+| DT-5 | E13 embed (`part_09.html` preamble) | embed owns the only copy of the diagnostic mapping (visual-canonical de facto) | re-pointed: comment declares §9.6 canonical ownership (TEXTUAL_CANONICAL, DEC-20); values parity-locked by `audit_diagnostics_parity.py`; visual function kept (decision aid) | SHARED_REFERENCE **— executed iter 139 (audit-locked)** | Registry A E13; DEC-20 |
+| DT-6 | `p9_one_change_rule::02` (+ master §9.2) | §9.2 Применение had no tree link; master §9.2 lacked the Применение paragraph entirely (pre-existing no-master-match drift) | canon Применение + master mirror carry the §9.6 tree back-link (IMP-48 pair §9.2↔§9.6) — the Debug reader path (symptom → cause → test → one-change → validation) is wired end-to-end | MOVED **— executed iter 139** | PLAN mig-3 (Debug reader-path audit); IMP-48 |
+| DT-7 | `p9_basic_checklist` / `p9_pre_deploy` (§9.3/§9.11) | checklist / pre-deploy validation layers | unchanged — stay checklists (structural block scan / pre-deploy gate); asserted by the parity audit's no-competing-sources check (no E13 symptoms there) | REFERENCE_ONLY (verified iter 139) | Registry B row 4 disposition |
+| DT-8 | prototype E13 (`visual-system/elements/E13-diagnostic-tree.html`) | design prototype, P/I 40/40 identical to the embed (owner_gates §3.2) | frozen design artifact (DEC-19: master embed = canonical visual markup; archive = git history) — no action in this slice | FROZEN (DEC-19) | map §2 L4/L5; §6.1 |
+
+Accounting: 1 canonical owner unchanged (DT-1) + 1 MOVED canonical home created
+(DT-2, matrix row seeded) + 1 marker upgrade (DT-3) + 1 master mirror (DT-4) +
+1 embed re-point audit-locked (DT-5) + 1 Debug-chain wiring with the master
+mirror restored (DT-6) + 2 verified dispositions (DT-7/DT-8). E13 payload
+values (3 symptoms, 6 checks, 9 diagnoses, AP set, E-target set) unchanged
+everywhere — enforced by the parity audit. Root fallback `parts/part_09.html`
+regenerated with the slice. Non-guide reference layers (agent docs):
+REFERENCE_ONLY. Deferred (informational): drift-tool [ref:]↔<a>
+normalization asymmetry — new §9.6 paragraphs may appear as plain_text drift
+entries (exit 0 by design); the §9.2 master mirror CLOSES a pre-existing
+no-master-match entry.
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -508,3 +547,22 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
   enneagram parity PASS; drift actionable 160 unchanged); no node battery (no build input
   touched — iter-131 doc-only precedent). mig-3 unblocked = next (DEC-20); §6.4 hero
   disposal slice pending (DEC-19; KI#81 cleanup rides it).
+- **iter 139 (mig-3 execution, BASE_COMMIT `3a667688`):** Diagnostics cluster (Debug mode)
+  executed on the mig-2 pattern (Registry B row 4; DEC-20 `TEXTUAL_CANONICAL` → §9.6).
+  Chain implemented: canon §9.6 gains the E13 mapping sub-table «Три базовых симптома:
+  полный маппинг» (6 rows: 3 symptoms, 6 checks, 9 diagnoses, 7 APs, 8 E-targets — the
+  canonical textual home; the L139 claim becomes true) + the full `[VS: E13]` marker
+  (weak «Ссылка» upgraded, `_README.md` §3.3 format, TEXTUAL_CANONICAL declared);
+  master §9.6 mirrored (h4 + intro with §9.2/§9.7 Debug-chain links + table; «Формат:»
+  sentence restored — pre-existing drift closed; Walter P3-4c cross-ref kept
+  byte-identical); E13 embed re-pointed (comment declares §9.6 canonical ownership;
+  values parity-locked); §9.2↔§9.6 wired (IMP-48 pair; master Применение mirror added —
+  pre-existing no-master-match drift closed). §9.3/§9.11 verified as checklists
+  (no E13 symptoms there — no competing sources). Acceptance gate
+  `scripts/audit_diagnostics_parity.py` PASS (7 checks + deferred-layer notes;
+  prototype E13 = frozen DEC-19). Matrix row `p9_decision_tree::05` seeded +
+  back-pointers on ::03/::04 + `p9_one_change_rule::02` (DT-1..DT-8). Battery: sync
+  97/97, tests 64/64, qa baselines exact (english 18 / syntax 247); build hash
+  unchanged (`2ab607d6` — `src/shell/index.html` untouched); root fallback
+  `parts/part_09.html` regenerated. Remaining Registry B rows: sampling values
+  (KI#72 owner call) + voice influence % (E07/§3.2 disposition).

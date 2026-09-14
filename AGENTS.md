@@ -136,6 +136,7 @@ python3 scripts/audit_glossary_parity.py      # MUST PASS (glossary registry ↔
 python3 scripts/audit_core_directives_parity.py  # MUST PASS (CORE DIRECTIVES single-canonical-presentation parity — DEC-08/mig-2)
 python3 scripts/audit_token_budget_parity.py  # MUST PASS (Token budget §7A.12 canonical ↔ E01/E15 SHARED_REFERENCE parity — mig-4)
 python3 scripts/audit_enneagram_parity.py     # MUST PASS (Enneagram §5.4 canonical ↔ generated data layer ↔ E10 SHARED_REFERENCE parity — mig-5)
+python3 scripts/audit_diagnostics_parity.py   # MUST PASS (Diagnostics §9.6 canonical ↔ E13 visual presentation parity — DEC-20/mig-3)
 ```
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates
