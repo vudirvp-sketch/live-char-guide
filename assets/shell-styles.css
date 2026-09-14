@@ -554,7 +554,6 @@ body.theme-light .ocean-node-high { color: #ef4444; }
 body.theme-light .vs-embed { background: #ffffff; border-color: #e5e7eb; }
 body.theme-light .vs-panel { background: #ffffff; border-color: #e5e7eb; }
 body.theme-light .vs-element-title { color: #1a1d24; }
-body.theme-light .vs-hero-placeholder { background: #f8f9fb; border-color: #e5e7eb; }
 body.theme-light .vs-mini-map { background: #ffffff; border-color: #e5e7eb; }
 
 /* Tags — v9: only .tag.core remains; .opt, .risk, .advanced removed (Phase 2.4) */
@@ -7002,32 +7001,6 @@ pre, table { page-break-inside: auto; }
   }
 }
 
-/* === VS HERO PLACEHOLDER === */
-.vs-hero-placeholder {
-  margin: 2em 0;
-  padding: 3em 2em;
-  border: 1px dashed var(--vs-border, var(--border));
-  border-radius: 14px;
-  background: var(--vs-bg-surface, var(--bg-surface));
-  text-align: center;
-  color: var(--text-muted);
-}
-.vs-hero-placeholder button {
-  margin-top: 1em;
-  padding: 0.6em 1.5em;
-  background: rgba(60,200,255,0.12);
-  color: var(--accent-cyan, var(--accent));
-  border: 1px solid rgba(60,200,255,0.25);
-  border-radius: 999px;
-  font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.vs-hero-placeholder button:hover {
-  background: rgba(60,200,255,0.25);
-}
-
 /* === LIGHT THEME OVERRIDES FOR VS === */
 body.theme-light .vs-embed {
   background: #ffffff;
@@ -7039,10 +7012,6 @@ body.theme-light .vs-panel {
 }
 body.theme-light .vs-element-title {
   color: #1a1d24;
-}
-body.theme-light .vs-hero-placeholder {
-  background: #f8f9fb;
-  border-color: #e5e7eb;
 }
 body.theme-light .vs-mini-map {
   background: #ffffff;

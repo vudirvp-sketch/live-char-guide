@@ -84,7 +84,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | E16 | `part_07a.html` p7a_authors_note | 31/31 | 20 | none detected | AN template A/B labels → `SHARED_REFERENCE` (§7A.5 owns) |
 | E17 | `part_07a.html` p7a_sampling_params | 43/44 | 13 | none detected | 3-tier param table → `SHARED_REFERENCE` — **blocked on KI#72 value decision** (embed carries both sides labeled «базовая»/«чеклист»); annotations («Только Examples» etc.) → `REFERENCE_ONLY` |
 | E18 | `part_07b.html` p7b_greeting | 16/16 | 5 | none detected | greeting algorithm steps → `SHARED_REFERENCE` (§7B.2 owns) |
-| hero | — (unintegrated) | n/a | n/a | never integrated | `UNKNOWN` — §6.4. **iter 137 evidence:** runs on Three.js via `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead `.vs-hero-placeholder` CSS stub in `src/shell/styles.css` (5 rules, zero consumers — KI#81). **Recommendation iter 137:** remove/archive (`owner_gates_iter137.md` §3.4). **DECIDED (DEC-19, iter 138):** remove/archive — disposal slice pending (KI#81 CSS cleanup rides it) |
+| hero | — (unintegrated) | n/a | n/a | never integrated | **EXECUTED iter 140 (§6.4 disposal, DEC-19):** `REMOVED_WITH_REASON` — `visual-system/hero/` deleted (never integrated: no hero section in the shell, INTEGRATION-MAP row unexecuted; Three.js via `cdn.jsdelivr.net` importmap = the external-CDN dependency class iter-113 removed; archive = git history); KI#81 dead `.vs-hero-placeholder` CSS (5 selectors, zero consumers) removed from `src/shell/styles.css` + root fallback regenerated; zero occurrences verified across `src/`/`parts/`/`assets/`/`widgets/` |
 
 ## 4. Registry B — concept clusters → canonical ownership (v2 dispositions PROPOSED)
 
@@ -403,7 +403,8 @@ no-master-match entry.
 > ([`owner_gates_iter137.md`](./owner_gates_iter137.md) — verified evidence per gate
 > §3.1–§3.4). Execution order: §6.1 disposal slice = **iter 138** (E08/E01/E15/E10
 > prototype+extract copies → `REMOVED_WITH_REASON`); §6.2 → **mig-3 next**; §6.5 applied
-> incrementally by consuming slices; §6.4 disposal slice pending (last — gates nothing).
+> incrementally by consuming slices; §6.4 disposal slice = **iter 140** (hero
+> removed; KI#81 closed — all four §6 gates now executed).
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
    prototypes/extracts become frozen design artifacts (default), or
@@ -440,7 +441,10 @@ no-master-match entry.
    integrated (INTEGRATION-MAP row unexecuted); runs on Three.js via
    `cdn.jsdelivr.net` importmap (the dependency class iter-113 removed); dead
    `.vs-hero-placeholder` CSS stub in shell styles (KI#81) is the only
-   production-side residue — **disposal slice pending** (call order: last).
+   production-side residue — **disposal slice EXECUTED iter 140**:
+   `visual-system/hero/` → `REMOVED_WITH_REASON` (archive = git history) +
+   KI#81 CLOSED (5 dead rules removed from `src/shell/styles.css`; root
+   fallback regenerated; full battery green — map Registry A hero row).
    Detail: `owner_gates_iter137.md` §3.4.
 5. **Rule-strength convention** for v2 (RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL/
    UNKNOWN markup) — needed before the Part 7A/8 v2 slices (model-capability
@@ -566,3 +570,27 @@ no-master-match entry.
   unchanged (`2ab607d6` — `src/shell/index.html` untouched); root fallback
   `parts/part_09.html` regenerated. Remaining Registry B rows: sampling values
   (KI#72 owner call) + voice influence % (E07/§3.2 disposition).
+- **iter 140 (§6.4 hero disposal, BASE_COMMIT `6348dd61`):** hero disposal slice
+  executed (STATUS Next-step row 1, pinned iter 139; DEC-19 recorded iter 138 —
+  ready mechanical candidate, gates nothing). `visual-system/hero/` →
+  `REMOVED_WITH_REASON` (1 file, `architecture-skeleton.html` — never integrated:
+  no hero section in the shell, INTEGRATION-MAP row unexecuted; Three.js via
+  `cdn.jsdelivr.net` importmap = the external-CDN dependency class iter-113
+  removed; archive = git history). **KI#81 CLOSED:** the 5 dead
+  `.vs-hero-placeholder` selectors removed from `src/shell/styles.css` in 3 edit
+  sites (`/* === VS HERO PLACEHOLDER === */` section = 3 rule blocks + 2
+  `body.theme-light` overrides; −31 lines) — zero consumers verified pre-edit
+  (repo-wide grep) and post-edit (0 across `src/`/`parts/`/`assets/`/`widgets/`);
+  root fallback `assets/shell-styles.css` regenerated (mirror −31); root
+  `index.html` = delivery-build timestamp churn only. Build hash `2ab607d6`
+  unchanged (`src/shell/index.html` untouched). Frozen `visual-system/` design
+  docs (PLAN.md / QA-CHECKLIST.md / INTEGRATION-MAP.md) left untouched
+  (iter-138 precedent — design artifacts frozen; hero references resolve to git
+  history). Registry A hero row → EXECUTED; §6 preamble + §6.4 row → executed
+  iter 140. Verification (executed): build + validate ✓ + validate:master 12/12
+  + version:check 9.2.6 ✓ + tests 64/64 + qa:csp/bundle/contrast PASS +
+  qa:doc-versions 1 pre-existing warning + qa:english **18** / qa:syntax
+  **247** (baselines exact) + sync **97/97** + drift actionable **159**
+  (unchanged — CSS-only delta, canon↔master untouched) + parity ×5 PASS +
+  `git diff --check` clean. Remaining bounded areas: voice influence %
+  (E07/§3.2 — owner call) + sampling values (KI#72 owner call).
