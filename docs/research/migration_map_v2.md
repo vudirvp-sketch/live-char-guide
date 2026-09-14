@@ -73,7 +73,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | E05 | `part_04.html` p4_spine_overview | 16/28 | 16 | russification lag | SPINE element names/glosses → `SHARED_REFERENCE` (§4.1 owns; «WANT сходится к NEED…» causal caption → `TEXTUAL_CANONICAL`, unique rule statement) |
 | E06 | `part_04.html` p4_ghost_layers | 12/13 | 10 | russification lag | G1/G2/G3 layer labels + example quotes → `SHARED_REFERENCE` (§4.11 owns); layer quotes («Отец ушёл, когда мне было 5») → `VISUAL_CANONICAL` example |
 | E07 | `part_03.html` p3_influence_hierarchy | 33/33 | 20 | none detected | compressed ~75–85% scale → `SHARED_REFERENCE` (§3.2 owns exact table); «Пользователи часто предполагают…» prose + «Хранилище vs Влияние» distinction → `TEXTUAL_CANONICAL` candidate (unique explanation, needs §3.2 home decision) |
-| E08 | `part_07a.html` p7a_core_directives | 17/17 | 7 | none detected | 7 directive titles+one-liners → `SHARED_REFERENCE` (§7A.2 owns); visual = canonical presentation of the list (ed-2 mechanism, DEC-08) |
+| E08 | `part_07a.html` p7a_core_directives | 17/17 | 7 | none detected | 7 directive titles+one-liners → `SHARED_REFERENCE` (§7A.2 owns); visual = canonical presentation of the list (ed-2 mechanism, DEC-08). **Executed iter 134 (mig-2):** titles/numbering/#6–#7 model-gating parity-locked by `scripts/audit_core_directives_parity.py`; node-7 title aligned to the canonical h4 («Фильтр предгенерации»); prototype/extract copies deferred → §6.1 |
 | E09 | `part_05.html` p5_ocean_basics | 17/17 | 9 | hex literals (KI#41/42 class) | pentagon axis labels → `REFERENCE_ONLY`; extreme-zone labels → `SHARED_REFERENCE` (§5.1 owns) |
 | E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL` |
 | E11 | `part_06.html` p6_cot_tiers | 35/37 | 24 | none detected | tier definitions + model applicability (12B+/32B+/API) + template snippets → `SHARED_REFERENCE` (§6.3–§6.5 own); «Tier 0 работает для всех…» explanatory lines → `TEXTUAL_CANONICAL` candidates |
@@ -90,7 +90,7 @@ textual canonical home); drift = known prototype↔embed divergence
 
 | Cluster | Canonical owner (v1→v2) | Competing copies found (v1) | Proposed v2 disposition |
 |---|---|---|---|
-| CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused) |
+| CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused). **EXECUTED iter 134 (mig-2, slice §5.2 D-1…D-8):** §7A.13 full copy → DEC-08 shorthand (canon + master mirror); E08 parity-locked; §7A.1/Part 10 verified shorthand ×4; prototype/extract still gated on §6.1 |
 | Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
 | Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode) |
@@ -243,6 +243,40 @@ entries** (25 merged canon entries + 20 promoted). Dead layers: `core_rules`
 nothing — verified iter 131) → `REMOVED_WITH_REASON` (generator does not emit
 it); `version` field (9.2.0 stale) → generated from the guide version.
 
+### 5.2 CORE DIRECTIVES slice (seeded + executed iter 134 — mig-2 build slice)
+
+Scope: the CORE DIRECTIVES cluster — second bounded area. Mechanism pre-approved:
+DEC-08 shorthand convention + matrix R02 verdict (ed-2 evidence; PLAN row mig-2,
+MEDIUM gate — content semantics inherited). v1 presentation inventory
+(foundation §5.1): ~6 parallel presentations, 3 outside the deployed page.
+Canonical owner unchanged: §7A.2 (prose + `<CORE_DIRECTIVES>` template +
+per-directive explanations). Affected matrix rows copied per the §5 mechanism
+(back-pointers added in `editorial_matrix.md`); acceptance gate =
+`scripts/audit_core_directives_parity.py` (MUST PASS).
+
+| D# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| D-1 | `p7a_core_directives::05` | §7A.2 full 7-directive `<CORE_DIRECTIVES>` block | unchanged — THE canonical definition (prose + template + per-directive explanations) | UNCHANGED — canonical owner (disposition target for D-2/D-5) | one definition — one place (ed-2, DEC-08) |
+| D-2 | `p7a_assembly_pipeline::05` | §7A.13 Шаг 3: byte-identical verbatim re-print (canon) + divergent link-form (master) | DEC-08 shorthand `{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}` (canon + master mirror; «Результат Елены» block + ~70-токенов commentary kept) | REPLACED_BY_CANONICAL **— executed iter 134** | R02 DUPLICATE verdict; matrix CROSS-REFERENCE (primary ed-2 target) |
+| D-3 | `p7a_system_prompt::08` | §7A.1 canonical SP template | unchanged — `{{CORE_DIRECTIVES 1-7 — полный текст → §7A.2}}` shorthand | REFERENCE_ONLY (verified iter 134) | DEC-08 sanctioned |
+| D-4 | `p10_elena::04` (+ Walter / Омнис-Зета / Выщербленный cards) | Part 10 card SP blocks | unchanged — shorthand ×4 (canon + master) | REFERENCE_ONLY (verified iter 134) | DEC-08 sanctioned |
+| D-5 | `appendix_glossary::05` | appendix «C — CORE DIRECTIVES» full annotated copy (canon + master; never runtime-loaded, KI#70) | superseded by registry entry C-5 (1-sentence + 7-name index + §7A.2 ref, executed iter 133); the frozen v1 file is disposed at the v2 switch | REPLACED_BY_CANONICAL (deferred to v2 switch) | R02 [B]; DEC-18 freeze |
+| D-6 | E08 embed (`part_07a.html` p7a_core_directives) | 7 directive titles + one-liners (hub-spoke SVG) | the ONE visual presentation — `SHARED_REFERENCE`: §7A.2 owns; titles/numbering/#6–#7 model-gating parity-locked by `scripts/audit_core_directives_parity.py`; node-7 title aligned to canonical h4 | SHARED_REFERENCE **— executed iter 134 (audit-locked)** | Registry A E08; ed-2 |
+| D-7 | prototype E08 + extract E08 (`visual-system/`) | stale derived copies (prototype = `var(--token)` markup; extract = same) | `REMOVED_WITH_REASON` (stale derived copies) | PROPOSED — **blocked on §6.1** (visual-markup ownership) | map §6.1 |
+| D-8 | glossary entry | v1: canon appendix full annotated copy + 55-term JSON set | registry C-5 «Основные директивы (CORE DIRECTIVES)» = 1-sentence + 7-name index + §7A.2 ref (generated `glossary.json`) | MERGED **— executed iter 133 (C-5)** | R02; C-5 |
+
+Accounting: 1 canonical owner unchanged (D-1) + 1 re-point executed (D-2) + 2
+verified references (D-3/D-4) + 1 deferred-to-switch (D-5) + 1 visual
+SHARED_REFERENCE audit-locked (D-6) + 1 blocked on §6.1 (D-7) + 1 already
+executed via the glossary slice (D-8). Directive count (7) and numbering
+(#6 Consequence Driven, #7 Pre-Generation Filter) unchanged — enforced by the
+parity audit. Root fallbacks (`parts/part_07a.html`, `parts/glossary.html`,
+`parts/appendix_glossary.html`) = build outputs, regenerated with the slice.
+Non-guide reference layers (not presentations, no action): agent-doc condensed
+references (`AGENT_NAVIGATION.md` §5, `docs/architecture.md` CORE DIRECTIVES
+table), `data/character_schema.json` L319 directive-name schema description
+(technical identifiers, no definitions) — REFERENCE_ONLY.
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
@@ -294,3 +328,15 @@ it); `version` field (9.2.0 stale) → generated from the guide version.
   ⚑ verbatim; english-rule = the owner's control check; JSON↔registry equality).
   T-45 basis corrected (§7B.6 → §7B.1). RepPen value dropped from the machine layer
   (KI#72-family: 5th location eliminated). v1 canon/master content untouched.
+- **iter 134 (mig-2 execution, BASE_COMMIT `306af0f7`):** CORE DIRECTIVES slice executed on the
+  mig-1 pattern (canonical record → re-point → parity audit; no machine layer — no data file
+  carries directive knowledge, map §2 L6 "remaining clusters per disposition"). §7A.13 Шаг 3
+  full verbatim copy → DEC-08 shorthand `{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}`
+  (canon + master mirror, R02/matrix `p7a_assembly_pipeline::05`, D-2). E08 = the one visual
+  presentation, SHARED_REFERENCE parity-locked (`scripts/audit_core_directives_parity.py`,
+  10 checks + deferred-layer notes); node-7 title aligned to the canonical h4 («Фильтр
+  предгенерации»). §7A.1 template + Part 10 ×4 verified shorthand (D-3/D-4). Glossary side
+  already executed iter 133 (C-5, D-8). Prototype/extract copies stay PROPOSED/blocked (D-7,
+  §6.1). KI#80 (master «наппряжён» typo, §7A.2 directive-5 paragraph) recorded + folded
+  (master → canon alignment, KI#78 fold precedent). Battery: sync 97/97, build hash
+  `2ab607d6` unchanged, tests/qa green, baselines exact (english 18 / syntax 247).

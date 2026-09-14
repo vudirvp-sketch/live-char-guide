@@ -651,15 +651,7 @@ Never speak or act for {{user}}.
 
 **Результат Елены:**
 ```
-<CORE_DIRECTIVES>
-1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
-2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
-3. SPATIAL & ANATOMICAL LOCK: Track distance, posture, weight. No teleportation.
-4. ENVIRONMENTAL REACTIVITY: Sensory details only through character action.
-5. INFLUENCE BOUNDARY: React to {{user}}'s observable symptoms only.
-6. CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates.
-7. PRE-GENERATION FILTER: Verify embodiment, observability, zero-meta before response.
-</CORE_DIRECTIVES>
+{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}
 ```
 ~70 токенов. Директивы идентичны для всех карточек — они задают операционную систему генерации. Специфика персонажа появляется в тональном фрейме, Description и Examples.
 

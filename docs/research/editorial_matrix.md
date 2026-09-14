@@ -241,7 +241,7 @@ not a merge.
 | p7a_system_prompt::05 | L31 | RULE: identity name-language — **second verbatim copy** | DUPLICATE | DELETE | YES | DUPLICATE | **KI#71 (new):** canon L30 and L31 are byte-identical; master carries the paragraph once. Pure intra-canon duplication defect |
 | p7a_system_prompt::06 | L33 | RULE: Anchors placement | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | Full copy of p1_core_rules::05 (R01); compress to 1 sentence + ref (§7A.9/§7A.11 already use the short+ref form) |
 | p7a_system_prompt::07 | L35 | Примечание: `[ANCHORS]` drift | METADATA | DELETE | YES | DUPLICATE | **Stale + repo-meta.** Claim «в parts/ используется [ANCHORS] plain text — известный drift (KI#58)» is stale: KI#58 CLOSED iter 95; the only `[ANCHORS]` occurrence in `parts/part_07a.html` is this note itself, actual content is `<anchors>` XML. Reader-facing repo internals → ed-6 (R17) |
-| p7a_system_prompt::08 | L37–55 | канонический шаблон SP (code) | DEFINITION | KEEP | YES | — | Canonical template; uses `{{CORE_DIRECTIVES 1-7 — …}}` shorthand ✓ (DEC-08) |
+| p7a_system_prompt::08 | L37–55 | канонический шаблон SP (code) | DEFINITION | KEEP | YES | — | Canonical template; uses `{{CORE_DIRECTIVES 1-7 — …}}` shorthand ✓ (DEC-08); → migration_map_v2 D-3 (verified iter 134) |
 | p7a_system_prompt::09 | L57 | позитивная формулировка explanation | APPLICATION | KEEP | YES | — | Why positive form beats prohibition |
 | p7a_system_prompt::10 | L59 | RULE: SP structure order | DEFINITION | KEEP | YES | REINFORCEMENT | Compact restatement of the template order — navigational, compliant |
 
@@ -253,7 +253,7 @@ not a merge.
 | p7a_core_directives::02 | L72 | `[VS: E08]` marker | METADATA | KEEP | YES | — | Viz replacement |
 | p7a_core_directives::03 | L74–80 | RULE: SP language (3-tier) | DEFINITION | KEEP | YES | — | Canonical SP-language rule (NAV invariant); §7A.7 footnote + §9.10 summary are compliant refs |
 | p7a_core_directives::04 | L82 | Convention: CORE_DIRECTIVES shorthand | DEFINITION | COMPRESS | YES | — | Substance is the DEC-08 shorthand convention (keep); «(D4, iter 93)» repo-meta → ed-6 strip (R17) |
-| p7a_core_directives::05 | L84–96 | full 7-directive code block | DEFINITION | KEEP | YES | — | **THE canonical list.** Verbatim re-print in §7A.13 (R02) is the compression side |
+| p7a_core_directives::05 | L84–96 | full 7-directive code block | DEFINITION | KEEP | YES | — | **THE canonical list.** Verbatim re-print in §7A.13 (R02) is the compression side; → migration_map_v2 D-1 (canonical owner, unchanged) |
 | p7a_core_directives::06 | L100–102 | directive 1 Show Never Tell (desc) | DEFINITION | KEEP | YES | — | Whitelisted recurrence (§20) |
 | p7a_core_directives::07 | L104–110 | directive 2 Embodiment First (desc + Cross-ref) | DEFINITION | KEEP | YES | — | Directive-vs-Protocol distinction preserved |
 | p7a_core_directives::08 | L112–118 | directive 3 Spatial & Anatomical Lock (desc + table) | DEFINITION | KEEP | YES | — | |
@@ -379,7 +379,7 @@ not a merge.
 | p7a_assembly_pipeline::02 | L628 | `[VS: E02]` marker | METADATA | KEEP | YES | — | Declared replacement: pipeline description |
 | p7a_assembly_pipeline::03 | L630–638 | Шаг 1: Identity Block (+ Elena result) | APPLICATION | KEEP | YES | — | |
 | p7a_assembly_pipeline::04 | L640–649 | Шаг 2: Anti-godmoding (+ Elena result) | APPLICATION | KEEP | YES | REINFORCEMENT | R07 apply-layer reuse of the canonical lines |
-| p7a_assembly_pipeline::05 | L651–667 | Шаг 3: CORE DIRECTIVES — full verbatim re-print of the 7-directive block | APPLICATION | CROSS-REFERENCE | YES | DUPLICATE | **R02:** byte-identical to p7a_core_directives::05. DEC-08 shorthand exists exactly for this: replace the code block with `{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}`. Primary ed-2 target |
+| p7a_assembly_pipeline::05 | L651–667 | Шаг 3: CORE DIRECTIVES — full verbatim re-print of the 7-directive block | APPLICATION | CROSS-REFERENCE | YES | DUPLICATE | **R02:** byte-identical to p7a_core_directives::05. DEC-08 shorthand exists exactly for this: replace the code block with `{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}`. Primary ed-2 target — **EXECUTED iter 134 (mig-2); → migration_map_v2 D-2** |
 | p7a_assembly_pipeline::06 | L669–681 | Шаг 3 дополнительно: Tone Frame + OOC + Format Lock Елены | APPLICATION | KEEP | YES | REINFORCEMENT | R08/R09/R10 re-prints inside the assembled-SP view — walkthrough function (ed-2 audit decides whether these also become shorthand) |
 | p7a_assembly_pipeline::07 | L683–698 | Шаг 4: SPINE (+ Elena result + consistency check) | APPLICATION | KEEP | YES | — | SPINE causality = whitelisted recurrence |
 | p7a_assembly_pipeline::08 | L700–715 | Шаг 5: CoT (+ Elena Tier 2 result) | APPLICATION | KEEP | YES | — | |
@@ -1073,7 +1073,7 @@ All canon-side: master resolves every ref to a proper anchor and carries no `§X
 | p10_elena::01 | L19 | budget intro (~540 / ~1000) | DEFINITION | KEEP | YES | — | R27 inputs |
 | p10_elena::02 | L21 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | EN list = executable-adjacent metadata (qa:english baseline class) |
 | p10_elena::03 | L23 | Примечание: canonical vs учебный Greeting | NAVIGATION | KEEP | YES | REINFORCEMENT | R28 back-ref to §7B.2 ✓ (IMP-48 pair) |
-| p10_elena::04 | L25–101 | ШАБЛОН: полная карточка Елены (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | `{{CORE_DIRECTIVES — …}}` shorthand ✓ (R02-compliant); OCEAN annotations consistent with §5.1/§5.2 ✓ |
+| p10_elena::04 | L25–101 | ШАБЛОН: полная карточка Елены (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | `{{CORE_DIRECTIVES — …}}` shorthand ✓ (R02-compliant); OCEAN annotations consistent with §5.1/§5.2 ✓; → migration_map_v2 D-4 (verified iter 134, shorthand ×4 across the four cards) |
 | p10_elena::05 | L103 | Бюджет токенов + `[ref: §7A.X — Token Budget]` | NAVIGATION | KEEP | YES | — | R18: `§7A.X` vague (target §7A.12; master resolves ✓) |
 
 ### p10_walter (§10.2)
@@ -1140,7 +1140,7 @@ resolves each to `#p7a_token_budget`, canon-side hygiene).
 | appendix_glossary::02 | L21–25 | A — Anti-godmoding | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (2-line form + positive-formulation rationale echo of §7A.1::09); ref `§7A.X` vague R18; → migration_map_v2 C-2 |
 | appendix_glossary::03 | L27–31 | B — Behavioral Anchor | DEFINITION | COMPRESS | YES | DUPLICATE | **R01 reference-layer occurrence:** carries the placement ПРАВИЛО (2-sentence statement of the §1.4 rule); fold to 1 sentence + ref §1.4 per the glossary's own pattern; the `§2.1` ref itself is correct; → migration_map_v2 C-3 |
 | appendix_glossary::04 | L33–37 | C — CoT | DEFINITION | KEEP | YES | — | R29: «Tier 0 (basic Anchor)» vs §6.3 «Tier 0 — без отдельного CoT-блока»; ref §6.2 ✓; → migration_map_v2 C-4 |
-| appendix_glossary::05 | L39–51 | C — CORE DIRECTIVES (full annotated 7-item list) | DEFINITION | COMPRESS | YES | DUPLICATE | **R02 verdict (ed-2 input, required by the ed-matrix PLAN row):** full annotated copy exceeds the glossary's own 1-sentence+ref pattern — the annotations restate §7A.2::06–::12; compress to definition + 7-name index + fixed ref §7A.2; **KI#70 dependency:** master renders the full list but the appendix never runtime-loads — the compression should ride the KI#70 wire/drop decision; ref `§7A.X` vague R18; → migration_map_v2 C-5 |
+| appendix_glossary::05 | L39–51 | C — CORE DIRECTIVES (full annotated 7-item list) | DEFINITION | COMPRESS | YES | DUPLICATE | **R02 verdict (ed-2 input, required by the ed-matrix PLAN row):** full annotated copy exceeds the glossary's own 1-sentence+ref pattern — the annotations restate §7A.2::06–::12; compress to definition + 7-name index + fixed ref §7A.2; **KI#70 dependency:** master renders the full list but the appendix never runtime-loads — the compression should ride the KI#70 wire/drop decision; ref `§7A.X` vague R18; → migration_map_v2 C-5; v2 file disposition → migration_map_v2 D-5 (deferred to v2 switch) |
 | appendix_glossary::06 | L53–57 | E — Embodiment Protocol | DEFINITION | KEEP | YES | — | Protocol-vs-Directive distinction preserved ✓; ref `§2.X` vague; → migration_map_v2 C-6 |
 | appendix_glossary::07 | L59–63 | E — Enneagram | DEFINITION | KEEP | YES | — | Ref §5.4 ✓; → migration_map_v2 C-7 |
 | appendix_glossary::08 | L65–69 | F — FLAW | DEFINITION | KEEP | YES | REINFORCEMENT | R24 reference-side; ref `§4.X` vague; → migration_map_v2 C-8 |
@@ -1199,7 +1199,7 @@ appendix content describes never-loaded containers.
 | # | Concept | Canonical owner | Other occurrences | Classification | Feeds |
 |---|---|---|---|---|---|
 | R01 | Anchors-placement rule (separate block in Examples-zone) | `p1_core_rules::05` (§1.4) | §7A.1 L33 full copy — **compressed iter 125 (dupes-1)** · §7A.9 L394 short+ref · §7A.11 L567 short+ref · §7A.13 L732 footnote · §1.2 L57 clarification · **[B]** glossary «B — Behavioral Anchor» entry (reference-layer ПРАВИЛО statement — compress to 1 sentence + ref §1.4) | DUPLICATE (glossary entry; §7A.1 fixed) | ed-2-style compress, canon-first |
-| R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · **[B]** glossary «C — CORE DIRECTIVES» full annotated copy — **verdict: DUPLICATE → COMPRESS** (definition + 7-name index + fixed ref §7A.2; the annotations restate §7A.2::06–::12; KI#70 dependency: appendix never runtime-loads — compression should ride the KI#70 wire/drop decision) · Part 10 uses shorthand ✓ | DUPLICATE (§7A.13 primary; glossary classified) | ed-2 |
+| R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · **[B]** glossary «C — CORE DIRECTIVES» full annotated copy — **verdict: DUPLICATE → COMPRESS** (definition + 7-name index + fixed ref §7A.2; the annotations restate §7A.2::06–::12; KI#70 dependency: appendix never runtime-loads — compression should ride the KI#70 wire/drop decision) · Part 10 uses shorthand ✓ — **EXECUTED: §7A.13 → shorthand iter 134 (migration_map_v2 D-2); glossary side iter 133 via registry C-5/D-8** | DUPLICATE (§7A.13 primary; glossary classified) | ed-2 |
 | R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 — **compressed iter 129 (ed-7 family): 1 sentence + ref §1.4, applied outcome contrast kept** · §1.7 L128 application · §7A.4 L189/L199 applications+ref · **[B]** glossary «V — Voice» entry (1-sentence reference clause — acceptable) | DUPLICATE (§3.1 fixed iter 129); rest compliant | ed-1/ed-4 ✅ §3.1 iter 129 |
 | R04 | Voice drift numbers (~40% vs ~10% at 20–30 msgs) | §3.1 table (granular) | §1.1 table row | DUPLICATE (same data, same persuasive purpose) | ed-1/ed-4 |
 | R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 — **compressed iter 129 (ed-7 family): 1-sentence pointer to §1.1 + §3.2 note kept locally; sync-audit P3-6 updated** | DUPLICATE (§3.1 fixed iter 129) | ed-7 ✅ iter 129 |
@@ -1291,7 +1291,7 @@ cumulative list with execution status:**
 7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — open (owner value decision)
 8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — open
 9. `p7a_token_budget::11` — stale migration note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
-10. `p7a_assembly_pipeline::05` — CORE DIRECTIVES verbatim (R02) → CROSS-REFERENCE — open (primary ed-2 target)
+10. `p7a_assembly_pipeline::05` — CORE DIRECTIVES verbatim (R02) → CROSS-REFERENCE — **executed iter 134 (migration_map_v2 D-2: DEC-08 shorthand)**
 11. `p9_additional_problems::02` — #4/#5 symptom pairs (R15) → MOVE into §9.5 — open (ed-3)
 12. `p9_pre_deploy::03` — self-admitted quick-check dupe (R16) → DELETE — **✅ executed iter 125 (dupes-1)**
 13. `p9_test_requirements::02` — «минимум 6 сценариев» restatement → COMPRESS — open
@@ -1300,12 +1300,13 @@ cumulative list with execution status:**
 16. `p4_spine_full_chain::04` — implicit-GHOST/LIE near-verbatim re-statement (R21) → CROSS-REFERENCE — open (Phase B)
 17. `p6_cot_tiers::05` — iter-29/KI#18-F canon-only note (R17) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 18. `appendix_character_map::04` — iter-40/KI#29 history label (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
-19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — open (Phase B; KI#70 dependency)
+19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — compression executed iter 133 in the v2 registry (C-5); the frozen v1 file rides the v2 switch (migration_map_v2 D-5)
 20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
 
-Execution status: 12 of 20 combined candidates executed (iters 121/125/128/129/130); 8 open overall
-(#8, #10, #11, #13 from Phase A + #16, #19, #20 from Phase B). #7 (KI#72) and #19 (KI#70 dependency)
-carry owner decisions; the rest are ready for ed-* execution under the Editorial Policy.
+Execution status: 13 of 20 combined candidates executed (iters 121/125/128/129/130/134); 7 open overall
+(#8, #11, #13 from Phase A + #16, #20 from Phase B). #7 (KI#72) carries an owner decision; #19's
+registry-side compression landed iter 133 (file rides the v2 switch); the rest are ready for ed-* execution
+under the Editorial Policy.
 
 Plus one **pair-level** candidate: R04 drift-numbers — one of the two occurrences
 (`p1_value_proposition::02` table row vs `p3_voice_isolation::05` table) becomes a cross-reference;
@@ -1326,7 +1327,7 @@ action; no Phase B deletion carries unique information (research §22 category 1
   Parts 2–7A (refs already 1-sentence; §1.4/§1.7/§1.8 are canonical owners). Remaining ed-1 work:
   R04 drift-row decision, R17 Part-1 meta strips, R11 §1.8 framing. Expect a much smaller edit set
   than research §2/§4 assumed. Phase B adds: nothing (Part 1 untouched by B).
-- **ed-2 (CORE DIRECTIVES):** primary target = §7A.13 step 3 verbatim block → DEC-08 shorthand.
+- **ed-2 (CORE DIRECTIVES):** primary target = §7A.13 step 3 verbatim block → DEC-08 shorthand — executed iter 134 (migration_map_v2 §5.2, D-2).
   Secondary audit: R08/R09/R10 re-prints in the assembled-SP view (R09/R10 now include the four
   Part 10 card-side Format Lock / Tone Frame blocks — production-artifact function, likely KEEP).
   **Glossary copy classified (Phase B):** compress to definition + 7-name index + fixed ref §7A.2

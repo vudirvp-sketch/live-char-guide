@@ -147,7 +147,7 @@ Format Lock:
           <line class="spoke-line" x1="350" y1="280" x2="530" y2="460" stroke="#3cc8ff" stroke-width="1" opacity="0.4"/>
           <rect x="430" y="425" width="200" height="65" rx="8" fill="#0e1117" stroke="#1e2430" stroke-width="1"/>
           <text x="530" y="447" text-anchor="middle" fill="#3cc8ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity="0.7">7</text>
-          <text x="530" y="463" text-anchor="middle" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">Пре-генерационный фильтр</text>
+          <text x="530" y="463" text-anchor="middle" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">Фильтр предгенерации</text>
           <text x="530" y="480" text-anchor="middle" fill="#6b7590" font-family="'Geist', sans-serif" font-size="10">4-пунктовая самопроверка перед ответом</text>
           <text x="625" y="433" class="model-badge">[Model ↗]</text>
         </g>
@@ -210,7 +210,7 @@ Format Lock:
 <p>Сенсорные и пространственные детали вводятся органично через действие персонажа или присутствие {{user}}, не декоративно.</p>
 
 <h4>5. Граница влияния (Influence Boundary)</h4>
-<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} наппряжён.</p>
+<p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напряжён.</p>
 
 <h4>6. Управление последствиями (Consequence Driven)</h4>
 <p>Желание (WANT) сдвигается к потребности (NEED) по мере накопления цены (Price) в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → якоря</a> <span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
@@ -1123,9 +1123,11 @@ Anchors:
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.</code></pre>
 <p>~20 токенов. Две строки — канонический Anti-godmoding для всех карточек. Формулировка идентична для любого персонажа; менять её под характер не нужно — это технический запрет, не голос.</p>
 
-<h4>Шаг 3: CORE DIRECTIVES</h4>
-<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>. Директивы идентичны для всех карточек — полный текст → <a href="#p7a_core_directives">CORE DIRECTIVES (выше)</a>.</p>
-<p>~70 токенов. Директивы задают операционную систему генерации. Специфика персонажа появляется в тональном фрейме, Description и Examples.</p>
+<h4>Шаг 3: Основные директивы (CORE DIRECTIVES)</h4>
+<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>. (Основные директивы — <a href="#p7a_core_directives">§7A.2</a>)</p>
+<p><strong>Результат Елены:</strong></p>
+<pre><code>{{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">§7A.2</a>}}</code></pre>
+<p>~70 токенов. Директивы идентичны для всех карточек — они задают операционную систему генерации. Специфика персонажа появляется в тональном фрейме, Description и Examples.</p>
 <p>Дополнительно для Елены — тональный фрейм, фиксация формата и OOC-защита:</p>
 <pre><code>Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
 
