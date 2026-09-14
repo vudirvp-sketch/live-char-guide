@@ -1,8 +1,8 @@
 {
-  "version": "9.2.0",
+  "version": "9.2.6",
   "canonical_terms": [
     {
-      "term": "4K-Fallback",
+      "term": "4K-Fallback (протокол адаптации для 4K)",
       "abbreviation": null,
       "aliases": [
         "4K-Fallback",
@@ -17,53 +17,11 @@
       "cross_refs": [
         "#p7a_4k_fallback"
       ],
-      "unified_definition": "Определение, назначение Примените fallback для старых моделей",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "Action",
+      "term": "Author's Note (AN)",
       "abbreviation": null,
-      "aliases": [
-        "Action",
-        "Действие",
-        "Anchor Action"
-      ],
-      "definition": "Наблюдаемое поведение персонажа в ответ на триггер.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules"
-      ],
-      "unified_definition": "Определение, место в формате якоря Диагностика: проверьте, не является ли действие слишком общим"
-    },
-    {
-      "term": "Anti-godmoding",
-      "abbreviation": null,
-      "aliases": [
-        "Anti-godmoding",
-        "анти-годмодинг",
-        "anti-godmode",
-        "godmoding protection"
-      ],
-      "definition": "Директива в System Prompt, запрещающая модели писать за пользователя (действия, мысли, чувства {{user}}). Позитивная формулировка: указание, что модель НЕ должна делать, а не просто запрет.",
-      "prohibited": [],
-      "deprecated": [
-        "анти-годмодинг",
-        "anti-godmode",
-        "godmoding protection"
-      ],
-      "anchor_id": "p1_core_rules",
-      "cross_refs": [
-        "#p1_core_rules",
-        "#p7a_system_prompt"
-      ],
-      "unified_definition": "Директива SP, запрещающая модель писать за {{user}}. Позитивная формулировка в SP. Отличать от «годмодинг» (диагностический термин — сам факт нарушения). Диагностика: проверьте наличие Anti-godmoding в SP",
-      "language_category": "A"
-    },
-    {
-      "term": "Author's Note",
-      "abbreviation": "AN",
       "aliases": [
         "AN",
         "Author Note",
@@ -71,7 +29,7 @@
         "Author's Note",
         "Динамический контекст"
       ],
-      "definition": "Динамический слой контекста для длинных сессий. Обновляется каждые 3–5 сообщений.",
+      "definition": "Заметка автора: динамический слой контекста для длинных сессий; обновляется каждые 3–5 сообщений. Используется для полного отслеживания WANT→NEED (директива #6) и живого контекста сцены.",
       "prohibited": [
         "Авторские заметки",
         "Авторка",
@@ -87,84 +45,10 @@
         "#p7a_authors_note",
         "#p7b_structured_inject"
       ],
-      "unified_definition": "Определение, назначение, частота обновления Отладка: проверьте приоритет инъекции и конфликт с LB",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "Behavioral Anchor",
-      "abbreviation": null,
-      "aliases": [
-        "Behavioral Anchor",
-        "Anchors",
-        "Anchor",
-        "Якоря",
-        "Поведенческий якорь",
-        "Поведенческие якоря",
-        "якорь",
-        "behavioural anchor",
-        "behavior trigger",
-        "поведенческий якорь"
-      ],
-      "definition": "Поведенческие якоря — правила поведения в формате «Trigger → Action → Price». Канонический термин для якоря в технических контекстах. Отличать от общего русского слова «якорь» в нетехнических контекстах.",
-      "prohibited": [],
-      "deprecated": [
-        "behavioural anchor",
-        "behavior trigger"
-      ],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules"
-      ],
-      "unified_definition": "Определение, формат, назначение Диагностика: отладка false positives и nested anchors",
-      "language_category": "B"
-    },
-    {
-      "term": "CORE DIRECTIVES",
-      "abbreviation": "CD",
-      "aliases": [
-        "CD",
-        "Core Directives",
-        "core directives",
-        "Основные директивы",
-        "ядерные директивы"
-      ],
-      "definition": "Единая система из 7 директив на английском языке, размещаемая в System Prompt.",
-      "prohibited": [],
-      "deprecated": [
-        "Core Directives",
-        "core directives",
-        "ядерные директивы"
-      ],
-      "anchor_id": "p7a_core_directives",
-      "cross_refs": [
-        "#p7a_core_directives",
-        "#p7a_system_prompt"
-      ],
-      "unified_definition": "Определение, единая система из 7 директив для System Prompt. Добавьте директивы 6–7: CONSEQUENCE DRIVEN, PRE-GENERATION FILTER",
-      "language_category": "A"
-    },
-    {
-      "term": "Character Card",
-      "abbreviation": null,
-      "aliases": [
-        "Character Card",
-        "Card",
-        "Карточка",
-        "Карточка персонажа"
-      ],
-      "definition": "Полный пакет поведенческого движка персонажа.",
-      "prohibited": [],
-      "deprecated": [
-        "Персонаж"
-      ],
-      "anchor_id": "p1_card_overview",
-      "cross_refs": [
-        "#p1_card_overview"
-      ],
-      "unified_definition": "Определение, составные части Продвинутая конфигурация с CoT и AN"
-    },
-    {
-      "term": "CoT",
+      "term": "CoT (цепочка рассуждений)",
       "abbreviation": null,
       "aliases": [
         "CoT",
@@ -172,7 +56,7 @@
         "Цепочка рассуждений",
         "цепочка рассуждений"
       ],
-      "definition": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+.",
+      "definition": "Система рассуждений внутри карточки, направляющая модель через SPINE-осознанные решения: пошаговый внутренний процесс, который модель воспроизводит перед генерацией ответа. Четыре уровня сложности: Tier 0 (без отдельного CoT-блока) — Tier 3 (полный XML-процесс для API). Не более 2–3 CoT-якорей на карточку.",
       "prohibited": [],
       "deprecated": [
         "цепочка рассуждений",
@@ -180,38 +64,13 @@
       ],
       "anchor_id": "p6_cot_basics",
       "cross_refs": [
-        "#p6_cot_basics"
+        "#p6_cot_basics",
+        "#p6_cot_tiers"
       ],
-      "unified_definition": "Chain of Thought — цепочка рассуждений. Инструмент для моделей 12B и 32B+. Настройте CoT tier 3 для сложных сценариев",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "Consequence Driven",
-      "abbreviation": null,
-      "aliases": [
-        "Consequence Driven",
-        "CONSEQUENCE DRIVEN",
-        "Последовательность следствий",
-        "Consequence driven",
-        "управляемый последствиями",
-        "consequences matter"
-      ],
-      "definition": "Директива CORE DIRECTIVES #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском.",
-      "prohibited": [],
-      "deprecated": [
-        "Consequence driven",
-        "управляемый последствиями",
-        "consequences matter"
-      ],
-      "anchor_id": "p7a_core_directives",
-      "cross_refs": [
-        "#p7a_core_directives",
-        "#p4_spine_mapping"
-      ],
-      "unified_definition": "Директива SP #6: WANT сдвигается к NEED по мере накопления Price в сессии. CORE DIRECTIVE. Пишется на английском. [Model: see Appendix B — Model Capability Table]"
-    },
-    {
-      "term": "Description",
+      "term": "Description (блок описания)",
       "abbreviation": null,
       "aliases": [
         "Description",
@@ -219,7 +78,7 @@
         "Описание",
         "Описание персонажа"
       ],
-      "definition": "Блок карточки с фактами, SPINE, якорями и OCEAN. Не содержит голосовых директив.",
+      "definition": "Блок карточки с фактами, SPINE, якорями и OCEAN; не содержит голосовых директив — лингвистический голос задаётся только в Examples/Greeting (Voice Isolation), физическая характеристика голоса допустима как часть Embodiment.",
       "prohibited": [
         "Описание персонажа"
       ],
@@ -231,103 +90,10 @@
         "#p1_card_overview",
         "#p4_spine_overview"
       ],
-      "unified_definition": "Определение, назначение, расположение в карточке Оптимизация: проверьте баланс фактологии vs поведенческих инструкций"
+      "language_category": "en"
     },
     {
-      "term": "Embodiment First",
-      "abbreviation": null,
-      "aliases": [
-        "Embodiment First",
-        "EMBODIMENT FIRST",
-        "Телесность прежде всего",
-        "Embodiment first",
-        "воплощение прежде всего"
-      ],
-      "definition": "Директива CORE DIRECTIVES: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском.",
-      "prohibited": [],
-      "deprecated": [
-        "Embodiment first",
-        "воплощение прежде всего"
-      ],
-      "anchor_id": "p2_embodiment",
-      "cross_refs": [
-        "#p2_embodiment",
-        "#p7a_core_directives"
-      ],
-      "unified_definition": "Директива SP: цепочка Состояние→Тело→Сенсор→Речь. Пишется на английском. Диагностика: проверьте, не пропускает ли модель телесный шаг"
-    },
-    {
-      "term": "Embodiment Protocol",
-      "abbreviation": null,
-      "aliases": [
-        "Embodiment Protocol",
-        "протокол воплощения",
-        "embodiment sequence",
-        "протокол телесности"
-      ],
-      "definition": "Техника реализации воплощения: последовательность State → Body → Sensor → Speech. Отличать от Embodiment First (это директива CORE DIRECTIVES, а Embodiment Protocol — техника реализации воплощения в карточке).",
-      "prohibited": [],
-      "deprecated": [
-        "embodiment sequence"
-      ],
-      "anchor_id": "p2_embodiment",
-      "cross_refs": [
-        "#p2_embodiment",
-        "#p7a_core_directives"
-      ],
-      "unified_definition": "Техника реализации воплощения: State → Body → Sensor → Speech. Отличать от Embodiment First (директива). Embodiment Protocol — полная методика, Embodiment First — директива в SP.",
-      "language_category": "B",
-      "note": "Russian primary in headings: «Протокол телесности (Embodiment Protocol)». «протокол воплощения» stays deprecated — not the correct Russian equivalent."
-    },
-    {
-      "term": "Enneagram",
-      "abbreviation": null,
-      "aliases": [
-        "Enneagram",
-        "Эннеаграмма",
-        "Эннеа",
-        "эннеаграмма"
-      ],
-      "definition": "Система типов личности из 9 типов со стрессом, ростом и крыльями.",
-      "prohibited": [],
-      "deprecated": [
-        "Эннеа"
-      ],
-      "note": "В заголовках/ID/метках/коде — всегда Enneagram. «эннеаграмма» допустима только в беглом тексте.",
-      "anchor_id": "p5_enneagram_basics",
-      "cross_refs": [
-        "#p5_enneagram_basics"
-      ],
-      "unified_definition": "Определение, 9 типов, базовая структура Добавьте пути интеграции/дезинтеграции, инстинктивные варианты",
-      "language_category": "A"
-    },
-    {
-      "term": "Environmental Reactivity",
-      "abbreviation": null,
-      "aliases": [
-        "Environmental Reactivity",
-        "ENVIRONMENTAL REACTIVITY",
-        "Реактивность среды",
-        "Environmental reactivity",
-        "экологическая реактивность",
-        "реактивность окружения"
-      ],
-      "definition": "Директива CORE DIRECTIVES: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском.",
-      "prohibited": [],
-      "deprecated": [
-        "Environmental reactivity",
-        "экологическая реактивность",
-        "реактивность окружения"
-      ],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules",
-        "#p7a_core_directives"
-      ],
-      "unified_definition": "Директива SP: сенсорные детали только через действие персонажа, не декоративно. Пишется на английском. Диагностика: проверьте, не генерирует ли модель декоративные описания"
-    },
-    {
-      "term": "Examples",
+      "term": "Examples (примеры диалогов)",
       "abbreviation": null,
       "aliases": [
         "Examples",
@@ -335,48 +101,27 @@
         "Примеры",
         "Примеры диалогов"
       ],
-      "definition": "Примеры диалогов, задающие Voice через демонстрацию. Единственное место для голосовых паттернов (вместе с Greeting Message).",
+      "definition": "Примеры диалогов, задающие Voice через демонстрацию. Единственное место для лингвистических голосовых паттернов (вместе с Greeting Message) — иерархия влияния §3.2; правила написания — §3.3.",
       "prohibited": [
         "Примерные сообщения"
       ],
       "deprecated": [],
-      "anchor_id": "p3_examples_rules",
+      "anchor_id": "p3_influence_hierarchy",
       "cross_refs": [
-        "#p3_examples_rules",
-        "#p3_voice_isolation"
+        "#p3_influence_hierarchy",
+        "#p1_card_overview",
+        "#p3_examples_rules"
       ],
-      "unified_definition": "Определение, правило Voice Isolation Отладка: проверьте contamination от внешних <START> блоков"
+      "language_category": "en"
     },
     {
-      "term": "FLAW",
-      "abbreviation": null,
-      "aliases": [
-        "FLAW",
-        "Flaw",
-        "Изъян",
-        "Дефект"
-      ],
-      "definition": "Изъян персонажа — конкретное поведение, которое мешает ему получить NEED.",
-      "prohibited": [],
-      "deprecated": [
-        "Изъян",
-        "ДЕФЕКТ",
-        "Дефект"
-      ],
-      "anchor_id": "p4_flaw",
-      "cross_refs": [
-        "#p4_flaw"
-      ],
-      "unified_definition": "Определение, связь с GHOST и LIE Проверьте: FLAW должен быть поведением, не чертой характера"
-    },
-    {
-      "term": "Format Lock",
+      "term": "Format Lock (фиксация формата)",
       "abbreviation": null,
       "aliases": [
         "Format Lock",
         "Фиксация формата"
       ],
-      "definition": "Фиксация формата диалога в конце SP. Предотвращает дрейф разметки.",
+      "definition": "Фиксация формата диалога в конце SP; предотвращает дрейф разметки. Все Examples и Greeting Message должны использовать одну систему разметки.",
       "prohibited": [],
       "deprecated": [],
       "anchor_id": "p7a_format_lock",
@@ -384,211 +129,10 @@
         "#p7a_format_lock",
         "#p7a_system_prompt"
       ],
-      "unified_definition": "Фиксация формата диалога в конце SP. Предотвращает дрейф разметки. Диагностика: проверьте, что все Examples и Greeting Message используют одну систему разметки",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "GHOST",
-      "abbreviation": null,
-      "aliases": [
-        "GHOST",
-        "Ghost",
-        "Призрак",
-        "Тень",
-        "призрак",
-        "ghost layer"
-      ],
-      "definition": "Событие из прошлого, сформировавшее FLAW и LIE.",
-      "prohibited": [
-        "GHOST-Слой",
-        "Слой призрака"
-      ],
-      "deprecated": [
-        "призрак",
-        "ghost layer"
-      ],
-      "anchor_id": "p4_spine_overview",
-      "cross_refs": [
-        "#p4_spine_overview",
-        "#p2_anchor_rules"
-      ],
-      "unified_definition": "Событие прошлого персонажа, сформировавшее LIE и FLAW (цепочка: GHOST → LIE → FLAW). 3-tier структура травмы для сложных персонажей. Диагностика: проверьте активацию GHOST через LB триггеры"
-    },
-    {
-      "term": "GHOST Layers",
-      "abbreviation": null,
-      "aliases": [
-        "GHOST Layers",
-        "ghost layers",
-        "Призрачные слои",
-        "призрачные слои",
-        "3-tier GHOST"
-      ],
-      "definition": "Трёхуровневая система GHOST для сложных персонажей: поверхностный слой (наблюдаемое поведение), промежуточный слой (ложные установки), глубинный слой (первопричина). Отличать от GHOST (одиночный элемент SPINE).",
-      "prohibited": [],
-      "deprecated": [
-        "ghost layers",
-        "призрачные слои",
-        "3-tier GHOST"
-      ],
-      "anchor_id": "p4_ghost_layers",
-      "cross_refs": [
-        "#p4_ghost_layers",
-        "#p4_spine_overview"
-      ],
-      "unified_definition": "Трёхуровневая система GHOST. Расширяет одиночный GHOST-элемент SPINE в многослойную структуру для сложных персонажей. Диагностика: проверьте, что каждый слой связан с соответствующим LIE и FLAW"
-    },
-    {
-      "term": "Greeting Message",
-      "abbreviation": null,
-      "aliases": [
-        "Greeting Message",
-        "Greeting",
-        "First Message",
-        "Приветствие",
-        "Первое сообщение",
-        "приветствие"
-      ],
-      "definition": "Первое сообщение персонажа в чате. Демонстрирует Voice, SPINE, Behavioral Anchors в действии. Задаёт начальное состояние и голос.",
-      "prohibited": [],
-      "deprecated": [],
-      "note": "Russian primary in headings: «Приветствие (Greeting Message)».",
-      "anchor_id": "p7b_greeting",
-      "cross_refs": [
-        "#p7b_greeting"
-      ],
-      "unified_definition": "Определение, назначение, влияние на голос Диагностика: проверьте соответствие Examples vs Greeting Message",
-      "language_category": "B"
-    },
-    {
-      "term": "Identity Block",
-      "abbreviation": null,
-      "aliases": [
-        "Identity Block",
-        "блок идентичности",
-        "identity section",
-        "Блок идентичности"
-      ],
-      "definition": "Секция System Prompt, определяющая, кто персонаж. Включает имя, внешность, предысторию, тип личности и т. д. Отличать от Description (который находится в карточке, а не в SP).",
-      "prohibited": [],
-      "deprecated": [
-        "identity section"
-      ],
-      "anchor_id": "p7a_system_prompt",
-      "cross_refs": [
-        "#p7a_system_prompt",
-        "#p7a_core_directives"
-      ],
-      "unified_definition": "Секция System Prompt, определяющая идентичность персонажа. Включает имя, внешность, предысторию, тип личности. НЕ «блок идентичности» / «identity section». Диагностика: проверьте, что Identity Block не дублирует Description",
-      "language_category": "B"
-    },
-    {
-      "term": "Immersion Boundary",
-      "abbreviation": null,
-      "aliases": [
-        "Immersion Boundary",
-        "Иммерсионная граница"
-      ],
-      "definition": "Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли».",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p7a_ooc_protection",
-      "cross_refs": [
-        "#p7a_ooc_protection"
-      ],
-      "unified_definition": "Продвинутая OOC-защита: отрицание мета-реальности. Персонаж не признаёт существование «игры» или «роли». Добавьте Immersion Boundary для максимальной иммерсии. Для базовой защиты используйте OOC Protection."
-    },
-    {
-      "term": "Influence Boundary",
-      "abbreviation": null,
-      "aliases": [
-        "Influence Boundary",
-        "INFLUENCE BOUNDARY",
-        "Граница влияния",
-        "Influence boundary",
-        "граница влияния",
-        "boundary of influence"
-      ],
-      "definition": "Директива CORE DIRECTIVES: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском.",
-      "prohibited": [],
-      "deprecated": [
-        "Influence boundary",
-        "граница влияния",
-        "boundary of influence"
-      ],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules",
-        "#p7a_core_directives"
-      ],
-      "unified_definition": "Директива SP: реагировать только на наблюдаемые симптомы от {{user}}. Не декларировать факты о {{user}}. Пишется на английском. Диагностика: проверьте, не декларирует ли модель эмоции {{user}}"
-    },
-    {
-      "term": "LIE",
-      "abbreviation": null,
-      "aliases": [
-        "LIE",
-        "Lie",
-        "Ложь",
-        "Ложная установка"
-      ],
-      "definition": "Ложная установка — во что персонаж верит, часто мешая себе получить NEED.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p4_spine_overview",
-      "cross_refs": [
-        "#p4_spine_overview"
-      ],
-      "unified_definition": "Определение, связь с GHOST и FLAW Проверьте: LIE должен объяснять, почему FLAW существует"
-    },
-    {
-      "term": "Lorebook",
-      "abbreviation": "LB",
-      "aliases": [
-        "LB",
-        "Lorebook",
-        "Lore Book",
-        "World Info",
-        "WI",
-        "База знаний",
-        "лорбук",
-        "world info"
-      ],
-      "definition": "База знаний с триггерами для активации контента по ключевым словам.",
-      "prohibited": [
-        "Лорбук"
-      ],
-      "deprecated": [
-        "лорбук",
-        "World Info",
-        "world info"
-      ],
-      "anchor_id": "p7b_lorebook_basics",
-      "cross_refs": [
-        "#p7b_lorebook_basics"
-      ],
-      "unified_definition": "Определение, назначение, структура записи Диагностика: проверьте приоритет и конфликт записей",
-      "language_category": "A"
-    },
-    {
-      "term": "Lorebook Entry",
-      "abbreviation": "LE",
-      "aliases": [
-        "Lorebook Entry",
-        "Запись Lorebook",
-        "LB Entry"
-      ],
-      "definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p7b_lorebook_basics",
-      "cross_refs": [
-        "#p7b_lorebook_basics"
-      ],
-      "unified_definition": "Отдельная запись в Lorebook с полями Key, Content, Position, Depth, Probability, Cooldown. Добавьте мировые записи для углубления сеттинга"
-    },
-    {
-      "term": "MBTI",
+      "term": "MBTI (типология Майерс-Бриггс)",
       "abbreviation": null,
       "aliases": [
         "MBTI",
@@ -596,253 +140,95 @@
         "16 типов",
         "Типология Майерс-Бриггс"
       ],
-      "definition": "Типология личности Майерс-Бриггс из 16 типов на основе 4 осей.",
+      "definition": "Типология из 16 типов на основе 4 осей (E/I, S/N, T/F, J/P). Для создания карточки рекомендуется OCEAN (полюса → якоря) и Enneagram (тип → SPINE); MBTI дополняет понимание, но не имеет прямого маппинга на SPINE. Доступна как справочный инструмент в Appendix A.",
       "prohibited": [],
       "deprecated": [],
       "anchor_id": "appendix_mbti",
       "cross_refs": [
         "#appendix_mbti"
       ],
-      "unified_definition": "Определение, 4 оси, 16 типов Добавьте когнитивные функции для глубины",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "NEED",
-      "abbreviation": null,
-      "aliases": [
-        "NEED",
-        "Need",
-        "Нужно",
-        "Потребность"
-      ],
-      "definition": "Истинная потребность персонажа — то, что ему на самом деле нужно для роста.",
-      "prohibited": [
-        "НУЖДА"
-      ],
-      "deprecated": [
-        "Нуждается",
-        "Нужда"
-      ],
-      "anchor_id": "p4_need",
-      "cross_refs": [
-        "#p4_need"
-      ],
-      "unified_definition": "Определение, отличие от WANT Диагностика: NEED должен требовать преодоления FLAW"
-    },
-    {
-      "term": "Narrator Bleed",
-      "abbreviation": null,
-      "aliases": [
-        "Narrator Bleed",
-        "Утечка рассказчика"
-      ],
-      "definition": "Смешивание голоса рассказчика с Voice персонажа в Examples. Диагностический термин.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p3_voice_leak",
-      "cross_refs": [
-        "#p3_voice_leak",
-        "#p3_voice_isolation",
-        "#p8_ap11_voice_bleed"
-      ],
-      "unified_definition": "Смешивание голоса рассказчика с голосом персонажа в Examples. Диагностический термин. Отладка: сравните Examples с Greeting Message — голос должен быть единым"
-    },
-    {
-      "term": "Nested Anchors",
-      "abbreviation": null,
-      "aliases": [
-        "Nested Anchors",
-        "Вложенные якоря",
-        "Nested Anchor"
-      ],
-      "definition": "Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules"
-      ],
-      "unified_definition": "Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Диагностика: проверьте, что вложенные якоря не создают противоречий"
-    },
-    {
-      "term": "OCEAN",
+      "term": "OCEAN (Большая пятёрка)",
       "abbreviation": null,
       "aliases": [
         "OCEAN",
         "Ocean"
       ],
-      "definition": "Модель личности из 5 измерений: Открытость (O), Добросовестность (C), Экстраверсия (E), Доброжелательность (A), Нейротизм (N).",
+      "definition": "Модель личности: Openness (Открытость), Conscientiousness (Добросовестность), Extraversion (Экстраверсия), Agreeableness (Доброжелательность), Neuroticism (Нейротизм). Используется для проверки внутренней консистентности персонажа и дополнения SPINE. Золотое правило: только 1–2 экстремальных полюса (значения <30 или >70). В карточке размещается в Description как тег `<ocean>` с числовыми значениями, не нарративным описанием черт (принцип #3, §1.4).",
       "prohibited": [],
       "deprecated": [
         "Big Five",
-        "big five",
-        "Большая пятёрка"
+        "big five"
       ],
       "anchor_id": "p5_ocean_basics",
       "cross_refs": [
         "#p5_ocean_basics"
       ],
-      "unified_definition": "Определение, 5 измерений Диагностика: проверьте соответствие OCEAN поведению",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "OOC",
+      "term": "OOC (вне образа)",
       "abbreviation": null,
       "aliases": [
         "OOC",
         "Out of Character",
         "Вне образа"
       ],
-      "definition": "Out of Character — выход из образа.",
+      "definition": "Out of Character: выход персонажа из образа (модель отвечает как ассистент, ломает тон, признаёт «игру»). Базовая защита — OOC Protection (§7A.8); диагностика — Part 9.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p9_basic_checklist",
+      "anchor_id": "p7a_ooc_protection",
       "cross_refs": [
+        "#p7a_ooc_protection",
         "#p9_basic_checklist"
       ],
-      "unified_definition": "Определение, проявления Диагностика: определение и исправление OOC"
+      "language_category": "en"
     },
     {
-      "term": "One Change Rule",
+      "term": "Presence Penalty (PP)",
       "abbreviation": null,
-      "aliases": [
-        "One Change Rule",
-        "Правило одного изменения"
-      ],
-      "definition": "Принцип диагностики: изменение только одного параметра за итерацию для достоверной оценки результата.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p9_one_change_rule",
-      "cross_refs": [
-        "#p9_one_change_rule"
-      ],
-      "unified_definition": "Принцип диагностики: изменение только одного параметра за итерацию для достоверной оценки результата. Формализуйте: логируйте каждое изменение и результат"
-    },
-    {
-      "term": "Persona Synthesis",
-      "abbreviation": null,
-      "aliases": [
-        "синтез личности",
-        "Persona Synthesis"
-      ],
-      "definition": "Процесс интеграции SPINE + OCEAN + Enneagram в единый профиль персонажа.",
-      "prohibited": [],
-      "deprecated": [],
-      "language_category": "B",
-      "anchor_id": "p5_cross_matrix",
-      "cross_refs": [
-        "#p5_cross_matrix"
-      ]
-    },
-    {
-      "term": "Pre-Generation Filter",
-      "abbreviation": null,
-      "aliases": [
-        "Pre-Generation Filter",
-        "PRE-GENERATION FILTER",
-        "Фильтр предгенерации",
-        "Pre-generation filter",
-        "предгенерационный фильтр",
-        "pregen filter"
-      ],
-      "definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%.",
-      "prohibited": [],
-      "deprecated": [
-        "Pre-generation filter",
-        "предгенерационный фильтр",
-        "pregen filter"
-      ],
-      "anchor_id": "p7a_core_directives",
-      "cross_refs": [
-        "#p7a_core_directives",
-        "#p7a_system_prompt"
-      ],
-      "unified_definition": "CORE DIRECTIVE #7. Чеклист перед каждым ответом: embodiment, physical lock, observability, zero-meta. На 12B соблюдается ~40-60%, на API ~85-95%. [Model: see Appendix B — Model Capability Table]"
-    },
-    {
-      "term": "Presence Penalty",
-      "abbreviation": "PP",
       "aliases": [
         "Presence Penalty",
         "PP",
         "Штраф за присутствие"
       ],
-      "definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует.",
+      "definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — обязательно 0.0 (анти-паттерн AP-7): ненулевой PP вызывает дрейф голоса.",
       "prohibited": [],
       "deprecated": [],
       "anchor_id": "p7a_sampling_params",
       "cross_refs": [
         "#p7a_sampling_params"
       ],
-      "unified_definition": "Параметр генерации, штрафующий повторение тем. Для карточек персонажей — ОБЯЗАТЕЛЬНО 0.0, иначе голос дрейфует. Диагностика: если голос дрейфует, проверьте PP в интерфейсе — Ollama/LM Studio захардкодили 0.7",
-      "language_category": "A"
+      "language_category": "en"
     },
     {
-      "term": "Price",
-      "abbreviation": null,
-      "aliases": [
-        "Price",
-        "Цена"
-      ],
-      "definition": "Немедленная физическая или вербальная манифестация последствия.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules"
-      ],
-      "unified_definition": "Определение, правило обязательности для FLAW/GHOST якорей Диагностика: проверьте специфичность Price"
-    },
-    {
-      "term": "RepPen",
+      "term": "RepPen (Repetition Penalty)",
       "abbreviation": null,
       "aliases": [
         "RepPen",
         "Repetition Penalty",
         "Штраф за повторы"
       ],
-      "definition": "Repetition Penalty — параметр сэмплинга, штрафующий повторение токенов. Рекомендуемый диапазон: 1.00–1.10.",
+      "definition": "Параметр сэмплирования, штрафующий повторение токенов. Канонический диапазон — таблица §7A.6; превышение 1.10 — анти-паттерн AP-5 (потеря фирменных речевых оборотов).",
       "prohibited": [],
       "deprecated": [],
       "anchor_id": "p7a_sampling_params",
       "cross_refs": [
-        "#p7a_sampling_params"
+        "#p7a_sampling_params",
+        "#p8_ap5_reppen_high"
       ],
-      "unified_definition": "Определение, рекомендуемые значения Диагностика: >1.10 убивает signature phrases"
+      "language_category": "en"
     },
     {
-      "term": "SP (MBTI temperament)",
-      "abbreviation": "SP",
-      "aliases": [
-        "SP (MBTI)",
-        "Sensing-Perceiving",
-        "S·P",
-        "Исследователи (MBTI)",
-        "Ремесленники"
-      ],
-      "definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "appendix_mbti",
-      "cross_refs": [
-        "#appendix_mbti",
-        "#p1_core_rules"
-      ],
-      "unified_definition": "Sensing-Perceiving — темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP). В гайде обозначается как S·P для различения. При анализе кросс-типов уточняйте, какой SP имеется в виду"
-    },
-    {
-      "term": "SPINE",
+      "term": "SPINE (позвоночник)",
       "abbreviation": null,
       "aliases": [
         "SPINE",
-        "Spine",
-        "Спин",
-        "Мотивационное ядро",
-        "spine chain",
-        "SPINE chain",
-        "SPINE-цепочка"
+        "Мотивационное ядро"
       ],
-      "definition": "Мотивационное ядро персонажа: 5 элементов (GHOST, LIE, FLAW, NEED, WANT) в причинно-следственной цепочке. Для простых персонажей GHOST и LIE могут быть неявными.",
+      "definition": "5-элементная причинно-следственная цепочка: GHOST → LIE → FLAW → NEED → WANT. SPINE даёт якорям причину существовать, а не быть набором случайных правил; каждый элемент = наблюдаемая единица, не абстрактный ярлык. Для простых персонажей GHOST и LIE могут быть неявными, но при использовании полной цепочки она должна быть логически связана.",
       "prohibited": [],
       "deprecated": [
         "Spine",
@@ -855,77 +241,637 @@
         "#p4_spine_overview",
         "#p4_spine_mapping"
       ],
-      "unified_definition": "Определение, 5 элементов, формула GHOST → LIE → FLAW Диагностика: проверьте внутреннюю консистентность SPINE"
+      "language_category": "en"
     },
     {
-      "term": "Sensory Anchors",
+      "term": "S·P (MBTI-темперамент)",
       "abbreviation": null,
       "aliases": [
-        "сенсорные якоря",
-        "Sensory Anchors"
+        "SP (MBTI)",
+        "Sensing-Perceiving",
+        "S·P",
+        "Исследователи (MBTI)",
+        "Ремесленники"
       ],
-      "definition": "Anchor, привязанный к одному из 5 каналов восприятия. Используется для персонажей с GHOST Layers или травмой.",
+      "definition": "Sensing-Perceiving: темперамент Keirsey (ISTP, ISFP, ESTP, ESFP). Не путать с System Prompt (SP); в гайде обозначается S·P для различения.",
       "prohibited": [],
       "deprecated": [],
-      "language_category": "B",
+      "anchor_id": "appendix_mbti",
+      "cross_refs": [
+        "#appendix_mbti",
+        "#p1_core_rules"
+      ],
+      "language_category": "en"
+    },
+    {
+      "term": "System Prompt / SP (системный промпт)",
+      "abbreviation": null,
+      "aliases": [
+        "SP",
+        "System Prompt",
+        "System Prompts",
+        "Системный промпт",
+        "системный промпт",
+        "System Prompt block",
+        "SP block"
+      ],
+      "definition": "Контейнер, вставляемый в начало контекста. Содержит: Identity Block, Anti-godmoding, CORE DIRECTIVES, блок SPINE, Tone Frame, Format Lock, OOC Protection. System Prompt — это КОНТЕЙНЕР; CORE DIRECTIVES — это СОДЕРЖИМОЕ (7 поведенческих директив внутри контейнера). SP — единственная техническая часть карточки, которую модель видит всегда.",
+      "prohibited": [
+        "Системка",
+        "Системник"
+      ],
+      "deprecated": [
+        "системный промпт",
+        "Системный промпт",
+        "System Prompt block",
+        "SP block"
+      ],
+      "anchor_id": "p7a_system_prompt",
+      "cross_refs": [
+        "#p7a_system_prompt",
+        "#p7a_format_lock"
+      ],
+      "language_category": "en"
+    },
+    {
+      "term": "T→A→P (Триггер → Действие → Цена)",
+      "abbreviation": null,
+      "aliases": [
+        "Action",
+        "Действие",
+        "Anchor Action",
+        "Price",
+        "Цена",
+        "Trigger",
+        "Триггер",
+        "Anchor Trigger"
+      ],
+      "definition": "Формат поведенческого якоря: Триггер (внешний стимул, активирующий якорь) → Действие (наблюдаемая реакция персонажа) → Цена (немедленная физическая реакция в той же сцене — манифестация последствия). Базовая единица задания поведения в карточке; каждый якорь обязан содержать все три элемента, иначе якорь = инструкция без паттерна, и модель его проигнорирует.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p2_basic_anchors",
+      "cross_refs": [
+        "#p2_basic_anchors",
+        "#p2_anchor_rules"
+      ],
+      "language_category": "en"
+    },
+    {
+      "term": "Tone Frame (тональный фрейм)",
+      "abbreviation": "TF",
+      "aliases": [
+        "TF",
+        "Tone Frame",
+        "Тональный фрейм"
+      ],
+      "definition": "Тональный фрейм: двойной SP-элемент (~25–30 токенов), задаёт тон и фиксирует формат; пишется на английском в SP (правило языка — §7A.2).",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p7a_tone_frame",
+      "cross_refs": [
+        "#p7a_tone_frame",
+        "#p7a_system_prompt"
+      ],
+      "language_category": "en"
+    },
+    {
+      "term": "processus_analysium",
+      "abbreviation": null,
+      "aliases": [
+        "processus_analysium",
+        "внутренний процесс XML"
+      ],
+      "definition": "Каноническое имя XML-тега для внутреннего процесса персонажа (CoT Tier 3, внутри [INTERNAL]): processus = процесс, analysium = анализ. Протестировано на API-моделях (Claude, GPT-4).",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p6_cot_tier3",
+      "cross_refs": [
+        "#p6_cot_tier3"
+      ],
+      "language_category": "en"
+    },
+    {
+      "term": "Анти-годмодинг (Anti-godmoding)",
+      "abbreviation": null,
+      "aliases": [
+        "Anti-godmoding",
+        "анти-годмодинг",
+        "anti-godmode",
+        "godmoding protection"
+      ],
+      "definition": "Директива в System Prompt, запрещающая модели писать за пользователя (действия, мысли, чувства `{{user}}`). Оформляется двумя строками: запрет («Never speak or act for {{user}}») и позитивная формулировка («respond only to observable actions and words»); позитивная формулировка работает лучше чистого запрета — она даёт модели паттерн для подражания. Диагностический термин «годмодинг» обозначает сам факт нарушения (см. отдельную статью).",
+      "prohibited": [],
+      "deprecated": [
+        "anti-godmode",
+        "godmoding protection"
+      ],
+      "anchor_id": "p7a_system_prompt",
+      "cross_refs": [
+        "#p7a_system_prompt",
+        "#p1_core_rules"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "База знаний (Lorebook)",
+      "abbreviation": "LB",
+      "aliases": [
+        "Lorebook",
+        "LB",
+        "Lore Book",
+        "World Info",
+        "WI",
+        "База знаний",
+        "Запись Lorebook",
+        "LB Entry"
+      ],
+      "definition": "Система инъекции ключ-значение, вставляющая знания персонажа в контекст по требованию. Каждая запись (Lorebook Entry) содержит: Key (триггер-слово), Content (факт для вставки), Position (куда вставлять), Depth (глубина поиска), Probability, Cooldown. Особенно полезна для GHOST-связанных фактов и сенсорных активаций.",
+      "prohibited": [
+        "Лорбук"
+      ],
+      "deprecated": [
+        "лорбук",
+        "World Info",
+        "world info"
+      ],
+      "anchor_id": "p7b_lorebook_basics",
+      "cross_refs": [
+        "#p7b_lorebook_basics",
+        "#p7b_lorebook_mechanics",
+        "#p7b_lorebook_advanced"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Блок идентичности (Identity Block)",
+      "abbreviation": null,
+      "aliases": [
+        "Identity Block",
+        "Блок идентичности",
+        "блок идентичности",
+        "identity section"
+      ],
+      "definition": "Раздел System Prompt, определяющий, кто персонаж: имя, роль, ключевые черты. Оформляется одной строкой: «You are {{char}}. {{brief_identity}}». Занимает ~10 токенов; остальные черты уходят в Description как факты, не как голос. Имя сохраняет каноническую форму (кириллица/латиница/CJK) во всех блоках карточки — транслитерация запрещена; модель обрабатывает имя как токен-якорь, не как инструкцию.",
+      "prohibited": [],
+      "deprecated": [
+        "identity section"
+      ],
+      "anchor_id": "p7a_system_prompt",
+      "cross_refs": [
+        "#p7a_system_prompt"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Бюджет токенов (Token Budget)",
+      "abbreviation": null,
+      "aliases": [
+        "Token Budget",
+        "Бюджет токенов",
+        "бюджет токенов"
+      ],
+      "definition": "Распределение токенов контекстного окна между компонентами карточки — определяет, какие элементы попадут к модели. Бюджет зависит от размера окна (4K / 8K / 16K+ / API); канонические значения по блокам — таблица §7A.12.",
+      "prohibited": [],
+      "deprecated": [
+        "бюджет токенов",
+        "token budget allocation"
+      ],
+      "anchor_id": "p7a_token_budget",
+      "cross_refs": [
+        "#p7a_token_budget",
+        "#p7a_system_prompt"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Вложенные якоря (Nested Anchors)",
+      "abbreviation": null,
+      "aliases": [
+        "Nested Anchors",
+        "Вложенные якоря",
+        "Nested Anchor"
+      ],
+      "definition": "Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Риск перегрузки — анти-паттерн AP-15.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p8_ap15_nested_anchors",
+      "cross_refs": [
+        "#p8_ap15_nested_anchors"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Голос (Voice)",
+      "abbreviation": null,
+      "aliases": [
+        "Voice",
+        "голос персонажа",
+        "голос"
+      ],
+      "definition": "Лингвистический отпечаток персонажа: словарь, синтаксис, ритм, регистр. Голос = ритм + лексика + синтаксис + парадоксы; ни один из этих компонентов не описывается прилагательными — только демонстрируется через Examples (модель — копировщик паттернов, не исполнитель инструкций). Два уровня: лингвистический голос (слова, синтаксис) — только Examples и Greeting; физическая характеристика голоса (тембр, хрип, механический гул) — часть Embodiment, допустима в Description.",
+      "prohibited": [],
+      "deprecated": [
+        "voice profile"
+      ],
+      "anchor_id": "p3_voice_isolation",
+      "cross_refs": [
+        "#p3_voice_isolation",
+        "#p3_examples_rules",
+        "#p7b_greeting"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Годмодинг",
+      "abbreviation": null,
+      "aliases": [
+        "годмодинг",
+        "godmoding",
+        "god mode",
+        "Godmoding"
+      ],
+      "definition": "Диагностический термин: модель пишет за пользователя (действия, мысли, чувства `{{user}}`) — сам факт нарушения. Директива Anti-godmoding (§7A.1) предотвращает годмодинг; отсутствие директивы — анти-паттерн AP-6.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p8_ap6_no_anti_godmoding",
+      "cross_refs": [
+        "#p8_ap6_no_anti_godmoding",
+        "#p7a_system_prompt"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Дефект (FLAW)",
+      "abbreviation": null,
+      "aliases": [
+        "FLAW",
+        "Flaw",
+        "Дефект",
+        "Изъян"
+      ],
+      "definition": "Конкретное поведение персонажа, мешающее ему получить NEED. Рождается из LIE: ложная установка заставляет персонажа действовать саморазрушительно. FLAW — всегда наблюдаемое поведение, не прилагательное («отталкивает людей сарказмом» ≠ «циничный»). Каждый FLAW требует минимум один FLAW-linked якорь.",
+      "prohibited": [],
+      "deprecated": [
+        "Изъян"
+      ],
+      "anchor_id": "p4_flaw",
+      "cross_refs": [
+        "#p4_flaw"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Желание (WANT)",
+      "abbreviation": null,
+      "aliases": [
+        "WANT",
+        "Want",
+        "Желание"
+      ],
+      "definition": "Осознанное желание персонажа — то, что он думает, что ему нужно. Внешняя цель, которую персонаж может сформулировать. WANT совместим с LIE: персонаж не видит противоречия между своим желанием и своей ложной установкой. Часто противоречит NEED, создавая нарративное напряжение.",
+      "prohibited": [
+        "ХОЧУ",
+        "Хочет"
+      ],
+      "deprecated": [
+        "Хочет",
+        "ХОЧУ"
+      ],
+      "anchor_id": "p4_want",
+      "cross_refs": [
+        "#p4_want"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Заражение голоса (Voice Contamination)",
+      "abbreviation": null,
+      "aliases": [
+        "Voice Contamination",
+        "Заражение голоса"
+      ],
+      "definition": "Нарушение Voice на 12B, вызванное копированием чужих `<START>`-примеров: чужой ритм и разметка ломают голос. Правило: каждый `<START>`-блок пишется с нуля под вашего персонажа.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p3_examples_rules",
+      "cross_refs": [
+        "#p3_examples_rules"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Изоляция голоса (Voice Isolation)",
+      "abbreviation": null,
+      "aliases": [
+        "Voice Isolation",
+        "Изоляция голоса",
+        "изоляция голоса"
+      ],
+      "definition": "Техника отделения Voice персонажа от Voice рассказчика и голосов других персонажей. Лингвистический голос (слова, синтаксис, лексика, ритм фразы) задаётся ТОЛЬКО в Examples и Greeting, никогда в Description; для 12B моделей Description = 0% влияния на лингвистический голос — стилистические директивы в Description являются ошибкой сборки. Физическая характеристика голоса (тембр, хрип, механический гул) — часть Embodiment, допустима в Description (сенсорный слой «Звук»).",
+      "prohibited": [],
+      "deprecated": [
+        "voice separation"
+      ],
+      "anchor_id": "p3_voice_isolation",
+      "cross_refs": [
+        "#p3_voice_isolation",
+        "#p3_examples_rules"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Иммерсионная граница (Immersion Boundary)",
+      "abbreviation": null,
+      "aliases": [
+        "Immersion Boundary",
+        "Иммерсионная граница"
+      ],
+      "definition": "Продвинутая OOC-защита: отрицание мета-реальности — персонаж не признаёт существования «игры» или «роли». Для базовой защиты используется OOC Protection.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p7a_ooc_protection",
+      "cross_refs": [
+        "#p7a_ooc_protection"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Карточка персонажа (Character Card)",
+      "abbreviation": null,
+      "aliases": [
+        "Character Card",
+        "Card",
+        "Карточка",
+        "Карточка персонажа"
+      ],
+      "definition": "Полный пакет поведенческого движка персонажа — все блоки карточки (Description, System Prompt, Examples, якоря, Greeting Message; состав — §1.2).",
+      "prohibited": [],
+      "deprecated": [
+        "Персонаж"
+      ],
+      "anchor_id": "p1_card_overview",
+      "cross_refs": [
+        "#p1_card_overview"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Ложь (LIE)",
+      "abbreviation": null,
+      "aliases": [
+        "LIE",
+        "Lie",
+        "Ложь",
+        "Ложная установка"
+      ],
+      "definition": "Ложная установка, в которую верит персонаж, часто мешая получить NEED. Вытекает из GHOST как защитный механизм от боли. Оформляется как фраза в кавычках — то, что персонаж сказал бы о себе. LIE объясняет, почему существует FLAW: ложная установка заставляет действовать саморазрушительно.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p4_lie",
+      "cross_refs": [
+        "#p4_lie"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Основные директивы (CORE DIRECTIVES)",
+      "abbreviation": "CD",
+      "aliases": [
+        "CORE DIRECTIVES",
+        "CD",
+        "Core Directives",
+        "Основные директивы",
+        "ядерные директивы",
+        "Show Never Tell",
+        "Embodiment First",
+        "Spatial & Anatomical Lock",
+        "Environmental Reactivity",
+        "Influence Boundary",
+        "Consequence Driven",
+        "Pre-Generation Filter"
+      ],
+      "definition": "Набор из 7 поведенческих директив внутри System Prompt — «операционная система» генерации: связная логика, не разрозненные инструкции. Состав: (1) Show Never Tell; (2) Embodiment First; (3) Spatial & Anatomical Lock; (4) Environmental Reactivity; (5) Influence Boundary; (6) Consequence Driven; (7) Pre-Generation Filter. Определение каждой директивы и многоуровневое правило языка (по модели) — §7A.2.",
+      "prohibited": [],
+      "deprecated": [
+        "Core Directives",
+        "core directives",
+        "ядерные директивы"
+      ],
+      "anchor_id": "p7a_core_directives",
+      "cross_refs": [
+        "#p7a_core_directives",
+        "#p7a_system_prompt"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Переплетение голосов (Voice Bleed, между персонажами)",
+      "abbreviation": null,
+      "aliases": [
+        "Voice Bleed",
+        "Утечка голоса между персонажами",
+        "voice leak",
+        "утечка голоса"
+      ],
+      "definition": "Режим отказа, при котором голос одного персонажа просачивается в речь другого: в мульти-персонажных сценах модель генерирует реплики одного персонажа в стиле другого. Диагностический термин; отличается от деградации голоса одного персонажа (см. «Утечка голоса»). Предотвращается через минимум 3 голосовых маркера на каждого персонажа и явное различение голосов в Examples.",
+      "prohibited": [],
+      "deprecated": [
+        "voice leak"
+      ],
+      "anchor_id": "p3_multi_char",
+      "cross_refs": [
+        "#p3_multi_char",
+        "#p8_ap11_voice_bleed"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Поведенческий якорь (Behavioral Anchor)",
+      "abbreviation": null,
+      "aliases": [
+        "Behavioral Anchor",
+        "Anchors",
+        "Anchor",
+        "Якоря",
+        "Поведенческий якорь",
+        "Поведенческие якоря",
+        "якорь"
+      ],
+      "definition": "Триггер-действие-паттерн (T→A→P), активирующий конкретное поведение; основной механизм задания характера без бесконечного описания. Anchor Format: Триггер (внешний стимул) → Действие (наблюдаемая реакция) → Цена (физическая реакция в той же сцене); каждый FLAW требует минимум один FLAW-linked якорь. Якоря — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров (правило размещения — §1.4); в большинстве фронтендов размещаются как `<anchors>`-тег в Description; концептуально якоря задают поведенческие паттерны, Examples — голосовые.",
+      "prohibited": [],
+      "deprecated": [
+        "behavioural anchor",
+        "behavior trigger"
+      ],
+      "anchor_id": "p2_basic_anchors",
+      "cross_refs": [
+        "#p2_basic_anchors",
+        "#p1_core_rules",
+        "#p2_anchor_examples"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Потребность (NEED)",
+      "abbreviation": null,
+      "aliases": [
+        "NEED",
+        "Need",
+        "Потребность"
+      ],
+      "definition": "Истинная потребность персонажа — то, что ему на самом деле нужно для роста. Часто противоречит WANT. FLAW блокирует NEED: именно поэтому персонаж не может получить то, в чём действительно нуждается. Обычно связано с людьми и связями; персонаж может не осознавать свою NEED.",
+      "prohibited": [
+        "НУЖДА"
+      ],
+      "deprecated": [
+        "Нуждается",
+        "Нужда"
+      ],
+      "anchor_id": "p4_need",
+      "cross_refs": [
+        "#p4_need"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Правило одного изменения",
+      "abbreviation": null,
+      "aliases": [
+        "One Change Rule",
+        "Правило одного изменения"
+      ],
+      "definition": "Принцип диагностики: изменение только одного параметра за итерацию — для достоверной оценки результата.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p9_one_change_rule",
+      "cross_refs": [
+        "#p9_one_change_rule"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Приветственное сообщение (Greeting Message)",
+      "abbreviation": null,
+      "aliases": [
+        "Greeting Message",
+        "Greeting",
+        "First Message",
+        "Приветствие",
+        "Первое сообщение",
+        "приветствие"
+      ],
+      "definition": "Первое сообщение персонажа в разговоре, демонстрирующее Voice, SPINE и Anchors в действии. Строится по алгоритму: Sensory Anchor → тело FLAW → реплика → крючок. Длина: 50–100 токенов. Задаёт место, время и тон, но не сюжет.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p7b_greeting",
+      "cross_refs": [
+        "#p7b_greeting"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Призрак (GHOST)",
+      "abbreviation": null,
+      "aliases": [
+        "GHOST",
+        "Ghost",
+        "Призрак",
+        "призрак"
+      ],
+      "definition": "Формирующая травма или опыт прошлого, лежащий в основе цепочки SPINE. Призрак — конкретное событие, не психологический вывод; корень причинной цепочки: призрак порождает ложь (LIE) как защитный механизм от боли. Запрещённые слова в описании призрака: «травма», «пережил», «столкнулся с».",
+      "prohibited": [
+        "GHOST-Слой",
+        "Слой призрака"
+      ],
+      "deprecated": [
+        "призрак",
+        "ghost layer"
+      ],
+      "anchor_id": "p4_ghost",
+      "cross_refs": [
+        "#p4_ghost",
+        "#p4_ghost_layers"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Протокол телесности (Embodiment Protocol)",
+      "abbreviation": null,
+      "aliases": [
+        "Embodiment Protocol",
+        "Протокол телесности",
+        "протокол телесности",
+        "протокол воплощения",
+        "embodiment sequence"
+      ],
+      "definition": "Поведенческая последовательность: Состояние → Тело → Сенсор → Речь. Каждый эмоциональный сигнал проявляется физически: внутренний вес/баланс → напряжение/дрожь → контакт со средой (текстура, звук, запах) → тон/темп/лексика. Отличается от директивы «Embodiment First»: Протокол описывает КАК (последовательность), Директива — ОБЯЗАТЕЛЬСТВО (всегда использовать).",
+      "prohibited": [],
+      "deprecated": [
+        "embodiment sequence"
+      ],
+      "anchor_id": "p2_embodiment",
+      "cross_refs": [
+        "#p2_embodiment",
+        "#p7a_core_directives"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Сенсорные якоря (Sensory Anchors)",
+      "abbreviation": null,
+      "aliases": [
+        "Sensory Anchors",
+        "сенсорные якоря"
+      ],
+      "definition": "Якорь, привязанный к одному из 5 каналов восприятия; используется для персонажей с GHOST Layers или травмой.",
+      "prohibited": [],
+      "deprecated": [],
       "anchor_id": "p2_sensory_anchors",
       "cross_refs": [
         "#p2_sensory_anchors",
         "#p4_ghost_layers"
-      ]
+      ],
+      "language_category": "ru"
     },
     {
-      "term": "Show Never Tell",
+      "term": "Синтез личности (Persona Synthesis)",
       "abbreviation": null,
       "aliases": [
-        "Show Never Tell",
-        "SHOW NEVER TELL",
-        "Показывай, не рассказывай",
-        "Show never tell",
-        "show don't tell",
-        "показывай не рассказывай"
+        "Persona Synthesis",
+        "синтез личности"
       ],
-      "definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском.",
+      "definition": "Процесс интеграции SPINE + OCEAN + Enneagram в единый профиль персонажа.",
       "prohibited": [],
-      "deprecated": [
-        "Show never tell",
-        "показывай не рассказывай",
-        "show don't tell"
-      ],
-      "anchor_id": "p7a_core_directives",
+      "deprecated": [],
+      "anchor_id": "p5_cross_matrix",
       "cross_refs": [
-        "#p7a_core_directives"
+        "#p5_cross_matrix"
       ],
-      "unified_definition": "Мета-принцип: демонстрируйте через поведение, не описывайте. Основа CORE DIRECTIVES. Пишется на английском. Диагностика: проверьте, не рассказывает ли модель вместо демонстрации"
+      "language_category": "ru"
     },
     {
-      "term": "Spatial & Anatomical Lock",
+      "term": "Слои призрака (GHOST Layers)",
       "abbreviation": null,
       "aliases": [
-        "Spatial & Anatomical Lock",
-        "SPATIAL LOCK",
-        "Spatial Lock",
-        "spatial lock",
-        "Пространственная блокировка",
-        "анатомический лок",
-        "spatial and anatomical lock"
+        "GHOST Layers",
+        "Призрачные слои"
       ],
-      "definition": "Директива CORE DIRECTIVES: предотвращает телепортацию и анатомические ошибки. Пишется на английском.",
+      "definition": "3-уровневая архитектура (G1=Детство, G2=Юность, G3=Настоящее) для сложной травмы. G1 формирует ложь (LIE), G2 укрепляет дефект (FLAW), G3 определяет текущие триггеры. Не всем персонажам нужны 3 слоя — если предыстория простая, достаточно одного призрака (GHOST).",
       "prohibited": [],
       "deprecated": [
-        "spatial lock",
-        "анатомический лок",
-        "spatial and anatomical lock",
-        "Spatial Lock"
+        "ghost layers",
+        "призрачные слои",
+        "3-tier GHOST"
       ],
-      "anchor_id": "p7a_core_directives",
+      "anchor_id": "p4_ghost_layers",
       "cross_refs": [
-        "#p7a_core_directives"
+        "#p4_ghost_layers",
+        "#p4_spine_overview"
       ],
-      "unified_definition": "Директива SP: предотвращает телепортацию и анатомические ошибки. Пишется на английском. Отладка: проверьте активацию при сложных сценах"
+      "language_category": "ru"
     },
     {
-      "term": "Structured Inject",
+      "term": "Структурированная инъекция (Structured Inject)",
       "abbreviation": null,
       "aliases": [
         "Structured Inject",
@@ -939,264 +885,47 @@
       "cross_refs": [
         "#p7b_structured_inject"
       ],
-      "unified_definition": "Определение, назначение Диагностика: проверьте приоритет и конфликт инъекций",
-      "language_category": "B"
+      "language_category": "ru"
     },
     {
-      "term": "System Prompt",
-      "abbreviation": "SP",
-      "aliases": [
-        "SP",
-        "System Prompt",
-        "System Prompts",
-        "Системный промпт",
-        "System Prompt block",
-        "SP block"
-      ],
-      "definition": "Системные инструкции для модели: ограничения, запреты, формат.",
-      "prohibited": [
-        "Системка",
-        "Системник"
-      ],
-      "deprecated": [
-        "системный промпт",
-        "Системный промпт",
-        "System Prompt block",
-        "SP block"
-      ],
-      "note": "В тексте гайда используется SP как общепринятая аббревиатура. Русский термин 'системный промпт' допустим в пояснениях.",
-      "anchor_id": "p7a_system_prompt",
-      "cross_refs": [
-        "#p7a_system_prompt",
-        "#p7a_format_lock"
-      ],
-      "unified_definition": "Определение, назначение, расположение в интерфейсе Отладка: проверьте конфликты с карточкой персонажа",
-      "language_category": "A"
-    },
-    {
-      "term": "Token Budget",
+      "term": "Утечка голоса (Voice Bleed, деградация)",
       "abbreviation": null,
       "aliases": [
-        "Token Budget",
-        "бюджет токенов",
-        "token budget allocation",
-        "Бюджет токенов"
+        "Narrator Bleed",
+        "Утечка рассказчика",
+        "Voice Bleed degradation"
       ],
-      "definition": "Распределение токенов контекстного окна между компонентами System Prompt (Identity Block, CORE DIRECTIVES, SPINE, Anchors, Examples и т. д.).",
-      "prohibited": [],
-      "deprecated": [
-        "бюджет токенов",
-        "token budget allocation"
-      ],
-      "anchor_id": "p7a_token_budget",
-      "cross_refs": [
-        "#p7a_token_budget",
-        "#p7a_system_prompt"
-      ],
-      "unified_definition": "Распределение токенов контекстного окна по компонентам System Prompt. Контролирует, какая часть контекста выделена на каждый блок карточки. Диагностика: проверьте, что Identity Block + CORE DIRECTIVES не превышают 40% бюджета",
-      "language_category": "A"
-    },
-    {
-      "term": "Tone Frame",
-      "abbreviation": "TF",
-      "aliases": [
-        "TF",
-        "Tone Frame",
-        "Тональный фрейм"
-      ],
-      "definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP.",
+      "definition": "Деградация голоса одного персонажа: модель генерирует неверный голос — голос рассказчика (Narrator Bleed) или ассистента просачивается в речь персонажа. Возникает, когда стилистические директивы помещены в Description вместо Examples: модель не следует голосовым инструкциям, а копирует паттерны из примеров диалога. Предотвращается через Voice Isolation — голос задаётся только в Examples и Greeting, никогда в Description.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p7a_tone_frame",
+      "anchor_id": "p3_voice_leak",
       "cross_refs": [
-        "#p7a_tone_frame",
-        "#p7a_system_prompt"
-      ],
-      "unified_definition": "Двойной SP-элемент (~25-30 токенов): задаёт тон и фиксирует формат. Пишется на английском в SP. Отладка: проверьте конфликт Tone Frame с AN",
-      "language_category": "A"
-    },
-    {
-      "term": "Trigger",
-      "abbreviation": null,
-      "aliases": [
-        "Trigger",
-        "Триггер",
-        "Anchor Trigger"
-      ],
-      "definition": "Ситуация или стимул, активирующий поведенческий якорь.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p2_anchor_rules",
-      "cross_refs": [
-        "#p2_anchor_rules"
-      ],
-      "unified_definition": "Определение, место в формате якоря Диагностика: проверьте, не слишком ли широкий триггер"
-    },
-    {
-      "term": "Voice",
-      "abbreviation": null,
-      "aliases": [
-        "Voice",
-        "голос персонажа",
-        "voice profile",
-        "голос"
-      ],
-      "definition": "Канонический термин для голоса персонажа — уникального речевого паттерна, определяемого через Examples и Greeting Message. Голос включает синтаксис, лексику, ритм и характерные речевые обороты.",
-      "prohibited": [],
-      "deprecated": [
-        "voice profile"
-      ],
-      "anchor_id": "p3_voice_isolation",
-      "cross_refs": [
-        "#p3_voice_isolation",
-        "#p3_examples_rules",
-        "#p7b_greeting"
-      ],
-      "unified_definition": "Канонический термин для голоса персонажа. Определяется исключительно через Examples и Greeting Message, никогда через Description. Диагностика: если голос «плывёт», проверьте Voice Isolation и Voice Contamination",
-      "language_category": "B"
-    },
-    {
-      "term": "Voice Bleed",
-      "abbreviation": null,
-      "aliases": [
-        "Voice Bleed",
-        "Утечка голоса между персонажами",
-        "voice leak",
-        "утечка голоса"
-      ],
-      "definition": "В мульти-персонажных карточках Voice одного персонажа «перетекает» в реплики другого. Диагностический термин. Отличать от Narrator Bleed (смешивание голоса рассказчика).",
-      "prohibited": [],
-      "deprecated": [
-        "voice leak"
-      ],
-      "anchor_id": "p3_voice_isolation",
-      "cross_refs": [
+        "#p3_voice_leak",
         "#p3_voice_isolation",
         "#p8_ap11_voice_bleed"
       ],
-      "unified_definition": "В мульти-персонажных карточках голос одного персонажа «перетекает» в реплики другого. Диагностический термин. Диагностика: в мульти-персонажных карточках проверьте, что каждый персонаж имеет уникальный синтаксис и лексику в Examples",
-      "language_category": "B"
+      "language_category": "ru"
     },
     {
-      "term": "Voice Contamination",
+      "term": "Эннеаграмма (Enneagram)",
       "abbreviation": null,
       "aliases": [
-        "Voice Contamination",
-        "Заражение голоса"
+        "Enneagram",
+        "Эннеаграмма",
+        "эннеаграмма",
+        "Эннеа"
       ],
-      "definition": "Нарушение Voice персонажа на 12B, вызванное копированием чужих <START> примеров.",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p3_examples_rules",
-      "cross_refs": [
-        "#p3_examples_rules"
-      ],
-      "unified_definition": "Нарушение голоса персонажа на 12B, вызванное копированием чужих <START> примеров. Диагностика: если голос «плывёт», проверьте источник Examples"
-    },
-    {
-      "term": "Voice Isolation",
-      "abbreviation": null,
-      "aliases": [
-        "Voice Isolation",
-        "Изоляция голоса",
-        "voice separation",
-        "изоляция голоса"
-      ],
-      "definition": "Принцип разделения: Voice персонажа определяется через Examples, а Description содержит только фактологию и поведенческие инструкции.",
+      "definition": "9-типная модель личности, сопоставляемая с элементами SPINE. Каждый тип имеет ключевой страх, ключевое желание, направление стресса и направление роста — что позволяет вывести LIE, WANT, FLAW и NEED из типа. OCEAN описывает «сколько» черты, Enneagram отвечает на «почему» персонаж действует именно так.",
       "prohibited": [],
       "deprecated": [
-        "voice separation"
+        "Эннеа"
       ],
-      "anchor_id": "p3_voice_isolation",
+      "anchor_id": "p5_enneagram_basics",
       "cross_refs": [
-        "#p3_voice_isolation"
+        "#p5_enneagram_basics",
+        "#p5_enneagram_wings"
       ],
-      "unified_definition": "Определение, правило для 12B Диагностика: отладка voice contamination",
-      "language_category": "B"
-    },
-    {
-      "term": "WANT",
-      "abbreviation": null,
-      "aliases": [
-        "WANT",
-        "Want",
-        "Хочет",
-        "Желание"
-      ],
-      "definition": "Осознанное желание персонажа — то, что он думает, что ему нужно.",
-      "prohibited": [
-        "ХОЧУ",
-        "Хочет"
-      ],
-      "deprecated": [
-        "Хочет",
-        "ХОЧУ"
-      ],
-      "anchor_id": "p4_want",
-      "cross_refs": [
-        "#p4_want"
-      ],
-      "unified_definition": "Определение, отличие от NEED Диагностика: WANT должен вести к FLAW"
-    },
-    {
-      "term": "processus_analysium",
-      "aliases": [
-        "processus_analysium",
-        "внутренний процесс XML"
-      ],
-      "category": "technique",
-      "definition": "Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4).",
-      "anchor_id": "p6_cot_tier3",
-      "cross_refs": [
-        "#p6_cot_tier3"
-      ],
-      "deprecated": [],
-      "unified_definition": "Каноническое имя XML-тега для внутреннего процесса персонажа. Processus = процесс, analysium = анализ. Протестировано на API моделях (Claude, GPT-4). XML-тег для CoT Tier 3. Используется внутри [INTERNAL].[/INTERNAL]."
-    },
-    {
-      "term": "годмодинг",
-      "abbreviation": null,
-      "aliases": [
-        "годмодинг",
-        "godmoding",
-        "god mode",
-        "Godmoding"
-      ],
-      "definition": "Диагностический термин: модель пишет за пользователя (действия, мысли, чувства {{user}}). Отличать от Anti-godmoding (директива, предотвращающая годмодинг).",
-      "prohibited": [],
-      "deprecated": [],
-      "anchor_id": "p1_core_rules",
-      "cross_refs": [
-        "#p1_core_rules"
-      ],
-      "unified_definition": "Определение, проявления Диагностика: отладка persistent годмодинг"
-    }
-  ],
-  "core_rules": [
-    {
-      "id": "ocean-poles",
-      "rule": "OCEAN: Только 1–2 экстремальных полюса",
-      "location": "01_core_principles.html#core-principles"
-    },
-    {
-      "id": "price-mandatory",
-      "rule": "Price обязателен для FLAW/GHOST якорей",
-      "location": "01_core_principles.html#core-principles"
-    },
-    {
-      "id": "voice-isolation",
-      "rule": "Voice задаётся ТОЛЬКО в Examples и Greeting Message, никогда в Description.",
-      "location": "01_core_principles.html#core-principles"
-    },
-    {
-      "id": "ghost-placement",
-      "rule": "GHOST только в Description, никогда в SP",
-      "location": "01_core_principles.html#core-principles"
-    },
-    {
-      "id": "anchor-format",
-      "rule": "Trigger → Action → Price: Каноническая схема Behavioral Anchor",
-      "location": "01_core_principles.html#core-principles"
+      "language_category": "ru"
     }
   ]
 }

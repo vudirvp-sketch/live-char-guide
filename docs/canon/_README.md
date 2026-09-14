@@ -36,11 +36,14 @@ docs/canon/
 ├── part_10.md            ← Part 10 (Examples)
 ├── appendix_mbti.md      ← Appendix A: MBTI
 ├── appendix_model_table.md ← Appendix B: Model Capability Table
-├── appendix_glossary.md  ← Appendix C: Glossary
+├── appendix_glossary.md  ← Appendix C: Glossary (frozen v1 migration source — see glossary_registry.md)
+├── glossary_registry.md  ← v2 canonical term record (iter 133): source for the GENERATED data/glossary.json (DEC-17/18)
 └── appendix_character_map.md ← Appendix D: Character map (iter 38)
 ```
 
 **Один файл = один Part master HTML.** Это позволяет агенту загружать в контекст только нужный Part, а не весь гайд.
+
+**Исключение (v2, iter 133):** `glossary_registry.md` — структурированный канон-источник терминов (45 статей, строгий entry-паттерн для парсера), машинным аналогом является не master HTML, а генерируемый `data/glossary.json` (`scripts/generate_glossary.mjs`, первая стадия `pnpm run build`; parity-гейт — `scripts/audit_glossary_parity.py`). `appendix_glossary.md` (25 статей) заморожен как v1-источник миграции до переключения на v2 (диспозиции — `docs/research/migration_map_v2.md` §5.1).
 
 ---
 

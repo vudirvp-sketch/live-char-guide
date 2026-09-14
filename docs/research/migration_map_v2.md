@@ -91,8 +91,8 @@ textual canonical home); drift = known prototype↔embed divergence
 | Cluster | Canonical owner (v1→v2) | Competing copies found (v1) | Proposed v2 disposition |
 |---|---|---|---|
 | CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused) |
-| Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · `glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132) | one canonical table; §7A.7/E17/E12/glossary.json → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
-| Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executes in mig-1** |
+| Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
+| Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode) |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice |
 | Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift) |
@@ -109,30 +109,41 @@ with `OLD LOCATION → NEW LOCATION` + status; the matrix row gets a back-pointe
 `→ migration_map_v2 C-<n>`. First slice seeded iter 132 (glossary, §5.1);
 subsequent Parts seed at their own build-slice time.
 
-### 5.1 Glossary slice (seeded iter 132; executes in mig-1)
+### 5.1 Glossary slice (seeded iter 132; **executed iter 133 — mig-1 build slice**)
 
 Scope: the glossary cluster — first bounded area, decisions **DEC-17**.
 Canon-side blocks = matrix rows `appendix_glossary::01–::26` (matrix §14);
 machine-layer terms = `data/glossary.json` `canonical_terms` (55). The v1
 term-set partition (re-derived by script iter 132, matches foundation §5.3):
-**25 canon / 55 JSON / 21 overlap / 4 canon-only / 34 JSON-only**. All
-statuses and head-forms below are **PROPOSED** — per-term evidence for the
-owner's ratification (DEC-17a: canonicality is decided per term; JSON-only
-terms do not become canonical merely by existing in the machine layer) — and
-execute in the mig-1 build slice.
+**25 canon / 55 JSON / 21 overlap / 4 canon-only / 34 JSON-only**. Statuses
+and head-forms below were seeded **PROPOSED** (per-term evidence, DEC-17a:
+canonicality is decided per term; JSON-only terms do not become canonical
+merely by existing in the machine layer) — **RATIFIED by the owner (chat
+2026-09-14, DEC-18)**: 35 MERGED / 20 MOVED / 45 unified entries confirmed,
+6 ⚑ head-forms resolved as identifier heads. **Executed iter 133**:
+registry = `docs/canon/glossary_registry.md` (45 entries) · generator =
+`scripts/generate_glossary.mjs` (first stage of `pnpm run build`) · machine
+layer = generated `data/glossary.json` (version 9.2.6; no `core_rules`, no
+`unified_definition`) · parity audit = `scripts/audit_glossary_parity.py`
+(PASS: 81 provenance refs, dispositions vs map, anchors, ⚑ verbatim,
+english-rule check, JSON↔registry equality).
 
 Head-form policy (DEC-16 applied to the registry, owner directive iter 132):
 Russian head where a natural direct translation exists (`Ложь (LIE)`,
 `Бюджет токенов (Token Budget)`); English survives only as technical
 identifiers (XML/API/parameter names, SP-element names, protocol names,
-framework acronyms); ⚑ = identifier-vs-prose boundary case flagged for the
-owner at ratification. The 18 vague glossary refs (matrix R18: 5× `§7A.X`,
-6× `§4.X`, 4× `§3.X`, 2× `§7B.X`, 1× `§2.X`) are repaired mechanically at
-migration (targets re-derived from each registry entry's canonical home).
+framework acronyms); ⚑ = identifier-vs-prose boundary case — **resolved at
+ratification (DEC-18): all 6 kept as English identifier heads with adjacent
+Russian gloss** (System Prompt / SP, Author's Note, Description, Examples,
+Format Lock, Tone Frame); the owner's control check (no ⚑ term violating
+"English only as technical identifier" in the v2 prose) is enforced by the
+parity audit's english-rule check. The 18 vague glossary refs (matrix R18 —
+repaired in canon iter 127) are re-derived in the registry from each entry's
+canonical home.
 
 **5.1a Canon appendix blocks → registry entries (26 matrix rows)**
 
-| C# | Matrix row | OLD (v1 canon) | NEW (v2 entry, head PROPOSED) | Status | Basis / fold-ins |
+| C# | Matrix row | OLD (v1 canon) | NEW (v2 entry, head — ratified DEC-18) | Status | Basis / fold-ins |
 |---|---|---|---|---|---|
 | C-1 | `appendix_glossary::01` | L19 intro (entry pattern) | registry pattern declaration | MOVED | entry pattern relocates with the registry (DEC-17c) |
 | C-2 | `::02` | L21–25 «A — Anti-godmoding» | «Анти-годмодинг (Anti-godmoding)» | MERGED | +T-03 (aliases; disambiguation vs «Годмодинг» T-55); R07 2-line form kept; ref → §7A.1 |
@@ -209,7 +220,7 @@ migration (targets re-derived from each registry entry's canonical home).
 | T-42 | SP (MBTI temperament) | MOVED | new entry «S·P (MBTI-темперамент)» | appendix_mbti S·P ≠ SP disambiguation (canonical per matrix `appendix_mbti::04`) |
 | T-43 | Spatial & Anatomical Lock | MERGED | C-5 | directive #3 → index |
 | T-44 | SPINE | MERGED | C-18 | overlap term |
-| T-45 | Structured Inject | MOVED | new entry «Структурированная инъекция (Structured Inject)» | §7B.6 |
+| T-45 | Structured Inject | MOVED | new entry «Структурированная инъекция (Structured Inject)» | §7B.1 (iter-133 correction: seed said «§7B.6» — canon has no §7B.6; canonical home p7b_structured_inject) |
 | T-46 | System Prompt | MERGED | C-19 | overlap term (single container term) |
 | T-47 | Token Budget | MERGED | C-21 | overlap term |
 | T-48 | Tone Frame | MOVED | new entry «Tone Frame (тональный фрейм)» ⚑ | §7A.3; SP-element name |
@@ -250,8 +261,9 @@ it); `version` field (9.2.0 stale) → generated from the guide version.
    generated `glossary.json` → runtime panel / no-JS glossary**; (c) glossary
    stays the **v2 Reference-layer** representation of the unified registry
    (appendix layer rides the v2 Reference-mode design; the v1 KI#70
-   wire/drop question stays deferred/superseded). Gate cleared — mig-1
-   execution awaits the owner's phase call + §5.1 ratification.
+   wire/drop question stays deferred/superseded). Gate cleared — §5.1
+   **ratified + phase call received (owner chat 2026-09-14, DEC-18)** —
+   **executed iter 133 (mig-1)**.
 4. **Hero prototype** (`visual-system/hero/`): integrate, archive, or remove
    (unintegrated since VS phase 1; carries its own labels).
 5. **Rule-strength convention** for v2 (RULE/GUIDELINE/OBSERVATION/EXPERIMENTAL/
@@ -272,3 +284,13 @@ it); `version` field (9.2.0 stale) → generated from the guide version.
   head-forms flagged ⚑ (identifier-vs-prose boundary). New finding: `glossary.json` RepPen
   «1.00–1.10» = 5th KI#72-family value location (§4 row 2). Term-set partition re-derived by
   script (25/55/21/34/4 — matches foundation). Doc-only; v1 untouched.
+- **iter 133 (mig-1 execution, BASE_COMMIT `4a7f94d`):** owner ratified §5.1 + opened the v2 build
+  phase (chat 2026-09-14 → DEC-18): 6 ⚑ resolved as identifier heads. Chain implemented:
+  `docs/canon/glossary_registry.md` (45 entries; entry pattern relocated per C-1/DEC-17c) →
+  `scripts/generate_glossary.mjs` (wired as the first `pnpm run build` stage) → generated
+  `data/glossary.json` (9.2.6; `core_rules`/`unified_definition` → REMOVED_WITH_REASON) →
+  runtime panel + `parts/glossary.html` (re-pointed via the data layer; shell code untouched).
+  Parity audit `scripts/audit_glossary_parity.py` PASS (81 provenance refs; anchors resolve;
+  ⚑ verbatim; english-rule = the owner's control check; JSON↔registry equality).
+  T-45 basis corrected (§7B.6 → §7B.1). RepPen value dropped from the machine layer
+  (KI#72-family: 5th location eliminated). v1 canon/master content untouched.

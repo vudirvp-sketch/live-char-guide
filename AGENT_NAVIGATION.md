@@ -19,7 +19,7 @@
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
-| `data/` | JSON widget data: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Authors own data. Infrastructure owns schemas. **Never hardcode widget data in JS.** |
+| `data/` | JSON widget data: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Authors own data. Infrastructure owns schemas. **Never hardcode widget data in JS.** **`glossary.json` is GENERATED** from `docs/canon/glossary_registry.md` (`scripts/generate_glossary.mjs`, first stage of `pnpm run build`) — never hand-edit; term changes go through the registry only (DEC-17/18). |
 | `scripts/` | Build + validation scripts. **package.json-wired:** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs`. **QA scripts:** `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs`. | `pnpm run <script>` for wired. `pnpm run qa:*` for ad-hoc QA. |
 | `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` runs all. |
 | `docs/` | Technical documentation (not in build). | Update on structural changes. See §7. |
@@ -32,20 +32,27 @@
 ## 2. Build Pipeline
 
 ```
+docs/canon/glossary_registry.md  (canonical term record — 45 entries, iter 133+)
+        ↓
+scripts/generate_glossary.mjs   →   data/glossary.json  (generated — NEVER hand-edit)
+        ↓
 src/master/part_*.html  (author content)
         ↓
-scripts/build-unified.mjs   →   parts/*.html (unified) + manifest.json
+scripts/build-unified.mjs   →   parts/*.html (unified) + manifest.json  (reads data/glossary.json → parts/glossary.html)
         ↓
 src/scripts/build-shell-unified.mjs   →   dist/  for GitHub Pages + root fallbacks
         ↓
 dist/  (deployed to GitHub Pages)
 ```
 
+The glossary chain (DEC-17/18): canonical term record → generated `glossary.json` → runtime panel (`src/shell/lazy-loader.js`) / no-JS page (`parts/glossary.html`). Parity gate: `python3 scripts/audit_glossary_parity.py` MUST PASS.
+
 ### Commands
 
 ```bash
 pnpm install              # Install dependencies (Node >= 20, pnpm 10.x)
-pnpm run build            # Full build (unified + shell)
+pnpm run build            # Full build (glossary generation + unified + shell)
+pnpm run build:glossary   # Registry → data/glossary.json only
 pnpm run validate         # Validate build artifact
 pnpm run validate:master  # Validate master files
 pnpm run version:check    # Check 4-place version sync
@@ -133,7 +140,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 | `mbti-composer` | `data/mbti.json` |
 | `persona-cross` / `persona-synthesis` | `data/character_schema.json` |
 | `persona-voice-hierarchy` | _(none — canon-embedded; values from §3.2 table)_ |
-| Glossary | `data/glossary.json` |
+| Glossary | `data/glossary.json` (**generated** from `docs/canon/glossary_registry.md` — DEC-17/18) |
 | Anchor redirects | `data/anchor-redirects.json` |
 | Test scenarios | `data/test_scenarios.json` |
 
@@ -247,6 +254,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | `docs/terminology_dictionary.md` | On adding new terms. |
 | `docs/character_bible.md` | On changes to canonical characters. |
 | `docs/canon/_README.md` | On changes to Canon rules. |
+| `docs/canon/glossary_registry.md` | On glossary term changes — the v2 canonical term record (45 entries; `data/glossary.json` is generated from it, DEC-17/18). |
 | `docs/canon/part_NN.md` | On creating/updating the Canonical Guide Spec for a Part. |
 | `docs/research/guide_analysis_consolidated.md` | Consolidated guide analysis (iter 73+). 12 sections: contradictions C1–C15, duplicates D1–D20, checklists, prioritized proposals P1/P2/P3. |
 | `docs/research/research_plan.md` | Verification and edit plan iter 74+ (Phases 1–5). |
