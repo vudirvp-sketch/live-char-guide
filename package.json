@@ -6,9 +6,10 @@
   "description": "Live Character Guide for LLM \u2014 Engineering pipeline for RP character cards",
   "scripts": {
     "build:glossary": "node scripts/generate_glossary.mjs",
+    "build:enneagram": "node scripts/generate_enneagram.mjs",
     "build:unified": "node scripts/build-unified.mjs",
     "build:shell": "node src/scripts/build-shell-unified.mjs",
-    "build": "node scripts/generate_glossary.mjs && node scripts/build-unified.mjs && node src/scripts/build-shell-unified.mjs",
+    "build": "node scripts/generate_glossary.mjs && node scripts/generate_enneagram.mjs && node scripts/build-unified.mjs && node src/scripts/build-shell-unified.mjs",
     "build:check": "pnpm run build && pnpm run validate",
     "build:watch": "chokidar 'src/master/**/*' -c 'pnpm run build'",
     "validate": "node scripts/validate-artifact.mjs",

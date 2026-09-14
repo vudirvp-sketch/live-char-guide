@@ -19,7 +19,7 @@
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
-| `data/` | JSON widget data: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Authors own data. Infrastructure owns schemas. **Never hardcode widget data in JS.** **`glossary.json` is GENERATED** from `docs/canon/glossary_registry.md` (`scripts/generate_glossary.mjs`, first stage of `pnpm run build`) — never hand-edit; term changes go through the registry only (DEC-17/18). |
+| `data/` | JSON widget data: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Authors own data. Infrastructure owns schemas. **Never hardcode widget data in JS.** **`glossary.json` is GENERATED** from `docs/canon/glossary_registry.md` (`scripts/generate_glossary.mjs`, first stage of `pnpm run build`) — never hand-edit; term changes go through the registry only (DEC-17/18). **`enneagram.json` is GENERATED** from the §5.4 table (`scripts/generate_enneagram.mjs`, second stage of `pnpm run build`) — never hand-edit; canonical value changes go through `docs/canon/part_05.md` §5.4, machine-layer supplement changes through the generator (mig-5). |
 | `scripts/` | Build + validation scripts. **package.json-wired:** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs`. **QA scripts:** `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs`. | `pnpm run <script>` for wired. `pnpm run qa:*` for ad-hoc QA. |
 | `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` runs all. |
 | `docs/` | Technical documentation (not in build). | Update on structural changes. See §7. |
@@ -36,6 +36,11 @@ docs/canon/glossary_registry.md  (canonical term record — 45 entries, iter 133
         ↓
 scripts/generate_glossary.mjs   →   data/glossary.json  (generated — NEVER hand-edit)
         ↓
+docs/canon/part_05.md §5.4      (canonical Enneagram 9-type table — mig-5, iter 136)
+        ↓
+scripts/generate_enneagram.mjs  →   data/enneagram.json (generated — NEVER hand-edit;
+        ↓                              canonical fields from §5.4; machine-layer
+                                     supplement lives in the generator)
 src/master/part_*.html  (author content)
         ↓
 scripts/build-unified.mjs   →   parts/*.html (unified) + manifest.json  (reads data/glossary.json → parts/glossary.html)
@@ -46,13 +51,15 @@ dist/  (deployed to GitHub Pages)
 ```
 
 The glossary chain (DEC-17/18): canonical term record → generated `glossary.json` → runtime panel (`src/shell/lazy-loader.js`) / no-JS page (`parts/glossary.html`). Parity gate: `python3 scripts/audit_glossary_parity.py` MUST PASS.
+The enneagram chain (mig-5, DEC-17 direction precedent): §5.4 table (`docs/canon/part_05.md`) → generated `enneagram.json` → E10 mini-cards + builder/synthesis widgets. Parity gate: `python3 scripts/audit_enneagram_parity.py` MUST PASS.
 
 ### Commands
 
 ```bash
 pnpm install              # Install dependencies (Node >= 20, pnpm 10.x)
-pnpm run build            # Full build (glossary generation + unified + shell)
+pnpm run build            # Full build (glossary + enneagram generation + unified + shell)
 pnpm run build:glossary   # Registry → data/glossary.json only
+pnpm run build:enneagram  # Canon §5.4 → data/enneagram.json only
 pnpm run validate         # Validate build artifact
 pnpm run validate:master  # Validate master files
 pnpm run version:check    # Check 4-place version sync
@@ -136,7 +143,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 | Widget | Data File |
 |--------|-----------|
 | `ocean-insight` | `data/ocean.json` |
-| `enneagram-builder` / `vs-e10-enneagram` | `data/enneagram.json` |
+| `enneagram-builder` / `vs-e10-enneagram` | `data/enneagram.json` (**generated** from the §5.4 table — mig-5; LIE lives once in `types[].lie_template`) |
 | `mbti-composer` | `data/mbti.json` |
 | `persona-cross` / `persona-synthesis` | `data/character_schema.json` |
 | `persona-voice-hierarchy` | _(none — canon-embedded; values from §3.2 table)_ |

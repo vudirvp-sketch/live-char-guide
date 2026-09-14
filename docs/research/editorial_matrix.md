@@ -745,7 +745,7 @@ one wrong canon ref (KI#77-a §4.8::08). Everything else canonical or compliant.
 | p5_elena_profile::01 | L114 | intro | DEFINITION | KEEP | YES | — | |
 | p5_elena_profile::02 | L116–122 | OCEAN-профиль Елены table | EXAMPLE | KEEP | YES | — | Protected worked example; A=38/N=68 cautious + O=72 extreme — consistent with character_map L30 ✓ |
 | p5_elena_profile::03 | L124 | ПРАВИЛО: 1 экстремум + 2 осторожных зоны | DEFINITION | KEEP | YES | REINFORCEMENT | Apply of the golden rule — consistent ✓ |
-| p5_elena_profile::04 | L126–134 | Enneagram 6w5 table (стресс 6→3, рост 6→9) | EXAMPLE | KEEP | YES | — | Directions consistent with `data/enneagram.json` (E10 fixed iter 124) ✓ |
+| p5_elena_profile::04 | L126–134 | Enneagram 6w5 table (стресс 6→3, рост 6→9) | EXAMPLE | KEEP | YES | — | Directions consistent with `data/enneagram.json` (E10 fixed iter 124) ✓; parity-locked vs the generated layer (§5.2 ↔ type-6 directions) — → migration_map_v2 EN-8 (mig-5 executed iter 136) |
 | p5_elena_profile::05 | L136 | Валидация | DEFINITION | KEEP | YES | — | |
 
 ### p5_ocean_warning (§5.3)
@@ -763,9 +763,9 @@ one wrong canon ref (KI#77-a §4.8::08). Everything else canonical or compliant.
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
 | p5_enneagram_basics::01 | L182 | OCEAN «сколько» vs Enneagram «почему» | DEFINITION | KEEP | YES | — | Canonical framing |
-| p5_enneagram_basics::02 | L184 | `[VS: E10]` marker | METADATA | KEEP | YES | — | Declared replacement (9-type enumeration) |
+| p5_enneagram_basics::02 | L184 | `[VS: E10]` marker | METADATA | KEEP | YES | — | Declared replacement (9-type enumeration); ownership declaration added (SHARED_REFERENCE: mini-card values = §5.4 via the generated data layer) — → migration_map_v2 EN-2 (mig-5 executed iter 136) |
 | p5_enneagram_basics::03 | L186 | Enneagram definition | DEFINITION | KEEP | YES | — | |
-| p5_enneagram_basics::04 | L188–200 | 9 типов Enneagram table (7 columns) | DEFINITION | KEEP | YES | — | Canonical; data-layer source for `data/enneagram.json` + E10 (fence #8 — duplication by design) |
+| p5_enneagram_basics::04 | L188–200 | 9 типов Enneagram table (7 columns) | DEFINITION | KEEP | YES | — | Canonical; data-layer source for `data/enneagram.json` + E10 — duplication now DERIVED, not copied (generator, fence #8 compliant) — → migration_map_v2 EN-1 (mig-5 executed iter 136) |
 | p5_enneagram_basics::05 | L202 | РЕКОМЕНДАЦИЯ: столбец LIE — справочный (ref §4.3 ✓) | APPLICATION | KEEP | YES | — | |
 
 ### p5_cross_instrument_map (§5.5)

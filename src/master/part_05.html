@@ -438,6 +438,13 @@
          0.5 -> 1.25, opacity 0.2 -> 0.6, dash 3 3 -> 5 3 for legibility. Static
          mini-card defaults aligned to data/enneagram.json (type 4 wording)
          together with the widget fetch fix (KI#76).
+  mig-5 (iter 136): data/enneagram.json is GENERATED from canon §5.4
+         (scripts/generate_enneagram.mjs) — mini-card values (страх/желание/LIE/
+         дефект) = §5.4 canonical table, SHARED_REFERENCE; static defaults below
+         carry the §5.4 type-4 wording (was: pre-mig-5 extended JSON variants);
+         runtime fill (vs-e10-enneagram.js) reads the same generated layer
+         unchanged. Hexad graph directions = VISUAL_CANONICAL (direction data
+         lives in the generated layer; drawn statically per KI#75).
 -->
 <div class="enneagram-container scroll-enter" id="enneagram-wrap">
 
@@ -549,10 +556,10 @@
 <!-- Mini-card (hidden by default, shown on hover) -->
       <div class="mini-card" id="mini-card">
         <div class="mini-card__type" id="mc-type">Тип 4 — Индивидуалист</div>
-        <div class="mini-card__row"><span class="mini-card__label">Основной страх:</span> <span id="mc-fear">Быть обычным, незначимым, без индивидуальности</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">Основное желание:</span> <span id="mc-desire">Быть уникальным, особенным, аутентичным</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Основной страх:</span> <span id="mc-fear">Быть обычным, незначимым</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Основное желание:</span> <span id="mc-desire">Быть уникальным, аутентичным</span></div>
         <div class="mini-card__row"><span class="mini-card__label">Шаблон LIE:</span> <span id="mc-lie">Что-то фундаментально отсутствует во мне</span></div>
-        <div class="mini-card__row"><span class="mini-card__label">Паттерн FLAW:</span> <span id="mc-flaw">Зависть, драматизация, эмоциональная нестабильность</span></div>
+        <div class="mini-card__row"><span class="mini-card__label">Паттерн FLAW:</span> <span id="mc-flaw">Отстранённость</span></div>
       </div>
     </div>
 

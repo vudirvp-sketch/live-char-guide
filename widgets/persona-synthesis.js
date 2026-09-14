@@ -19,7 +19,9 @@
  *   synthesis:exported  — { format, content } on Character Card export
  *
  * Data Sources (§0.5 Single Data Owner):
- *   enneagram.json — ocean_correlation, ocean_defaults, spine_templates, mbti_suggestions
+ *   enneagram.json — ocean_correlation, ocean_defaults, spine_templates, mbti_suggestions,
+ *                    types[].lie_template (v2.1.0 — GENERATED from canon §5.4, mig-5
+ *                    iter 136; single internal LIE copy, spine_templates.LIE folded)
  *   mbti.json      — ocean_suggestions, enneagram_suggestions, spine_patterns
  *   ocean.json     — traits[], extremum_thresholds
  *
@@ -93,7 +95,9 @@
 
   /**
    * Generate unified SPINE narrative combining all three systems.
-   * Base: enneagram.json.spine_templates
+   * Base: enneagram.json.spine_templates (WANT/NEED/FLAW/GHOST) + types[].lie_template
+   * (mig-5 iter 136: single internal LIE copy — §5.4 canonical value; the v1
+   * spine_templates.LIE second copy is folded away)
    * Enrich: mbti.json.spine_patterns
    * Adjust: OCEAN profile vocabulary
    */
@@ -109,7 +113,12 @@
       narrative.WANT = template.WANT || '';
       narrative.NEED = template.NEED || '';
       narrative.FLAW = template.FLAW || '';
-      narrative.LIE = template.LIE || '';
+      // mig-5 (iter 136): single internal LIE copy — spine_templates no longer
+      // carries a second LIE; the §5.4 canonical value lives in types[].lie_template
+      var lieType = enneagramDataCache.types
+        ? enneagramDataCache.types.find(function(t) { return String(t.id) === typeId; })
+        : null;
+      narrative.LIE = (lieType && lieType.lie_template) || '';
       narrative.GHOST = template.GHOST || '';
     }
 

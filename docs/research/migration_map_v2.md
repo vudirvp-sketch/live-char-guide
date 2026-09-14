@@ -51,7 +51,7 @@ assigning a disposition. Uncertain cases stay `UNKNOWN`, never deleted.
 | L3 root fallbacks | build-generated | unchanged (DEC-04) |
 | L4 `visual-system/elements/` prototypes | **none, drifted** | frozen design artifacts (archive) — or re-established as canonical visual source; **decision §6.1** |
 | L5 `component-extracts/` | **none, stale** | superseded by whatever owns visual markup (L4 or L2); disposition §6.1 |
-| L6 `data/*.json` | version field only | **derived** from the canonical source wherever it carries knowledge (glossary: **DECIDED DEC-17** — canonical record → generated `glossary.json`; remaining clusters per disposition) |
+| L6 `data/*.json` | version field only | **derived** from the canonical source wherever it carries knowledge (glossary: **DECIDED DEC-17** — canonical record → generated `glossary.json`; enneagram: **executed iter 136** — §5.4 → generated `enneagram.json`; remaining clusters per disposition) |
 | L7 widget-embedded constants | manual (DEC-09) | keep only with declared canon provenance in header |
 | L8 shell runtime | tests | unchanged |
 | L9–L11 research / registries / bibles | manual | unchanged (registries updated by the same iterations that change facts) |
@@ -75,7 +75,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | E07 | `part_03.html` p3_influence_hierarchy | 33/33 | 20 | none detected | compressed ~75–85% scale → `SHARED_REFERENCE` (§3.2 owns exact table); «Пользователи часто предполагают…» prose + «Хранилище vs Влияние» distinction → `TEXTUAL_CANONICAL` candidate (unique explanation, needs §3.2 home decision) |
 | E08 | `part_07a.html` p7a_core_directives | 17/17 | 7 | none detected | 7 directive titles+one-liners → `SHARED_REFERENCE` (§7A.2 owns); visual = canonical presentation of the list (ed-2 mechanism, DEC-08). **Executed iter 134 (mig-2):** titles/numbering/#6–#7 model-gating parity-locked by `scripts/audit_core_directives_parity.py`; node-7 title aligned to the canonical h4 («Фильтр предгенерации»); prototype/extract copies deferred → §6.1 |
 | E09 | `part_05.html` p5_ocean_basics | 17/17 | 9 | hex literals (KI#41/42 class) | pentagon axis labels → `REFERENCE_ONLY`; extreme-zone labels → `SHARED_REFERENCE` (§5.1 owns) |
-| E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL` |
+| E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract deferred → §6.1 |
 | E11 | `part_06.html` p6_cot_tiers | 35/37 | 24 | none detected | tier definitions + model applicability (12B+/32B+/API) + template snippets → `SHARED_REFERENCE` (§6.3–§6.5 own); «Tier 0 работает для всех…» explanatory lines → `TEXTUAL_CANONICAL` candidates |
 | E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family) |
 | E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2 |
@@ -95,7 +95,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode) |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice. **EXECUTED iter 135 (mig-4, slice §5.3 TB-1…TB-8):** E01 values verified canonical at every layer (the wrong-side-copy claim corrected — not found in the repo); E15 derivation note added (master + canon marker); `[VS: E01/E15]` canon markers added; glossary already deferred (iter 133); no value decision needed |
-| Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift) |
+| Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift). **EXECUTED iter 136 (mig-5, slice §5.4):** chain implemented §5.4 → `scripts/generate_enneagram.mjs` (owns the machine-layer supplement) → generated `data/enneagram.json` (v2.1.0) → widgets (builder + synthesis re-pointed to `types[].lie_template`; vs-e10 unchanged); E10 mini-cards SHARED_REFERENCE; prototype/extract copy stays §6.1-gated |
 | Voice influence % | §3.2 table | E07 compressed scale + unique prose · `persona-voice-hierarchy.js` constants (sanctioned DEC-09) | E07 scale → `SHARED_REFERENCE`; E07 unique prose → `TEXTUAL_CANONICAL` candidate (§3.2 home decision); widget constants keep DEC-09 provenance header |
 
 ## 5. Registry C — block-level rows (mechanism)
@@ -316,6 +316,45 @@ untouched; `parts/part_10.html` regenerated with the derivation note).
 Non-guide reference layers (not presentations, no action): agent-doc condensed
 references — REFERENCE_ONLY.
 
+### 5.4 Enneagram data slice (seeded + executed iter 136 — mig-5 build slice)
+
+Scope: the Enneagram data cluster — fourth bounded area (Registry B row 6;
+foundation §5.6 evidence; PLAN row mig-5, LOW-MEDIUM gate — derivation direction
+pre-set by DEC-17/DEC-18 (map §2 L6); LIE fold mechanical). Mechanism: mig-1
+generator pattern (canonical record → generator → generated JSON → widget
+re-point → parity audit). Canonical owner unchanged: the §5.4 9-type table
+(7 columns: Тип / Название / Альт-название / Ключевой страх / Ключевое желание /
+Ложь (LIE) / Дефект из стресса). Design decision inside the slice (PLAN
+sanctioned): no new canon-side registry file — §5.4 already IS the canonical
+record; the machine-layer supplement (widget data §5.4 does not carry: SPINE
+WANT/NEED/GHOST templates, stress/growth directions, wings, ocean_correlation,
+ocean_defaults, flaw_anchors, mbti_suggestions) lives in the generator
+(`scripts/generate_enneagram.mjs`), the single hand-edited source for every
+non-canonical field. Acceptance gate = `scripts/audit_enneagram_parity.py`
+(MUST PASS).
+
+| EN# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| EN-1 | `p5_enneagram_basics::04` | §5.4 9-type table — canonical record; data layer copied its values with extended variants | unchanged — THE canonical owner + the generator's parse source (7 canonical fields per type; schema-version 2.1.0 emitted) | UNCHANGED — canonical owner + generator source | Registry B row 6; matrix verdict KEEP (fence #8 duplication now derived, not copied) |
+| EN-2 | `p5_enneagram_basics::02` | `[VS: E10]` marker — replacement declaration only, no value ownership | marker declares SHARED_REFERENCE: mini-card values (страх/желание/LIE/дефект) = §5.4 table via the generated `data/enneagram.json`; hexad graph = visual canonical (direction data in the generated layer) | ADDED **— executed iter 136** | PLAN mig-5 scope; `_README.md` §3.3 marker format; E01/E15 marker precedent (TB-3/TB-5) |
+| EN-3 | — (`data/enneagram.json`, machine layer) | hand-edited v1 file: canonical fields carried extended non-canonical variants («, дефектным», «Работоголизм, поверхностность…»); LIE duplicated ×2 (`lie_template` + `spine_templates.LIE`, divergent wording) | **generated** by `scripts/generate_enneagram.mjs` (wired into `pnpm run build` after the glossary stage): canonical fields = §5.4 verbatim; LIE folded to ONE internal copy (`types[].lie_template`); `spine_templates` = WANT/NEED/FLAW/GHOST (FLAW from the §5.4 cell — single parsed source emitted to both keys; NEED == `need_direction` — single supplement source); machine-layer supplement lives in the generator | GENERATED **— executed iter 136** | Registry B row 6 disposition; DEC-17 chain; E15 derived-value lock pattern |
+| EN-4 | — (widget code) | `enneagram-builder.js` + `persona-synthesis.js` read the second LIE copy (`template.LIE`) | re-pointed to `types[].lie_template` (§5.4 canonical value); headers declare the v2.1.0 generated contract | RE_POINTed **— executed iter 136** | PLAN mig-5 "widget re-point"; LIE fold consequence |
+| EN-5 | E10 embed (`part_05.html`, between §5.3/§5.4) | mini-card static defaults carried the pre-mig-5 extended JSON variants (type-4 wording) | static defaults = §5.4 type-4 canonical values; embed comment declares the §5.4 derivation (SHARED_REFERENCE); runtime fill (`vs-e10-enneagram.js`) reads the same generated layer | SHARED_REFERENCE **— executed iter 136** | Registry A E10 disposition; KI#76 fetch chain |
+| EN-6 | — (`vs-e10-enneagram.js`) | consumes `data/enneagram.json` (name/core_fear/core_desire/lie_template/flaw_pattern) | unchanged — field shape preserved by the generated layer; parity audit locks the read-path | VERIFIED **— executed iter 136** | PLAN mig-5 "consumes the generated file unchanged" |
+| EN-7 | prototype E10 + extract (`visual-system/`) | stale derived copies («Я фундаментально ущербен» 3-way drift, foundation §4.3) | `REMOVED_WITH_REASON` (stale derived copies) | PROPOSED — **blocked on §6.1** (visual-markup ownership) | map §6.1; E08/D-7 + TB-7 precedent |
+| EN-8 | `p5_elena_profile::04` + aggregate observation | §5.2 Elena 6w5 directions (6→3 stress / 6→9 growth) — consistent with the JSON (noted iter 124, unchecked); machine fields `wings`/`wing_pairs`/`need_direction`/`stress_direction`/`growth_direction` carry no direct runtime reader (builder computes wings itself; directions drawn statically + builder constants) | directions consistency parity-locked (§5.2 ↔ generated type-6); unconsumed fields kept for data-shape compatibility (informational — no removal in slice scope) | OBSERVED — locked/deferred | scope discipline; widget constants = DEC-09-adjacent observation |
+
+Accounting: 1 canonical owner unchanged + generator source (EN-1) + 1 marker
+ownership declaration (EN-2) + 1 generated machine layer with the LIE fold (EN-3)
++ 2 widgets re-pointed (EN-4) + 1 embed SHARED_REFERENCE alignment (EN-5) + 1
+verified consumer (EN-6) + 1 blocked prototype disposal (EN-7) + 1 aggregate
+observation (EN-8). The v1 extended canonical-field variants are dropped from
+the data layer as non-canonical drift (map Registry B row 6: "JSON becomes
+derived from §5.4 — single internal copy of each value"); §5.4 canon + master
+table untouched (canonical). Root fallback `parts/part_05.html` regenerated
+(mini-card defaults). Non-guide reference layers: agent-doc condensed references
+— REFERENCE_ONLY.
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
@@ -392,3 +431,19 @@ references — REFERENCE_ONLY.
   extract §6.1; R11/R27 out-of-slice family owner-gated). New R11-family instance recorded:
   §7B.2 Greeting «50–100» vs §7A.12 Greeting row (TB-8). Battery: sync 97/97, build hash
   `2ab607d6` unchanged, tests/qa green, baselines exact (english 18 / syntax 247).
+- **iter 136 (mig-5 execution, BASE_COMMIT `27de84b2`):** Enneagram data slice executed on the
+  mig-1 generator pattern (Registry B row 6; §5.4 stays canonical — unchanged). Chain
+  implemented: §5.4 table → `scripts/generate_enneagram.mjs` (new; wired into `pnpm run build`
+  after the glossary stage; owns the machine-layer supplement — the in-slice design decision,
+  no parallel canon registry created) → generated `data/enneagram.json` (schema 2.1.0:
+  canonical fields = §5.4 verbatim, v1 extended variants dropped as non-canonical drift;
+  LIE folded to ONE internal copy — `types[].lie_template`, `spine_templates.LIE` removed;
+  spine FLAW from the §5.4 cell, NEED == need_direction) → consumers: `enneagram-builder.js` +
+  `persona-synthesis.js` re-pointed to `types[].lie_template`; `vs-e10-enneagram.js`
+  unchanged (shape preserved). E10 mini-cards → SHARED_REFERENCE: master static defaults
+  aligned to §5.4 (type-4 wording; `parts/part_05.html` regenerated) + canon `[VS: E10]`
+  marker declares §5.4 ownership + the generated layer. §5.2 Elena 6w5 directions
+  parity-locked. Acceptance gate `scripts/audit_enneagram_parity.py` PASS (11 checks +
+  deferred-layer notes: prototype/extract §6.1; hexad geometry VISUAL_CANONICAL;
+  unconsumed machine fields informational). Battery: sync 97/97, tests/qa green, baselines
+  exact (english 18 / syntax 247).

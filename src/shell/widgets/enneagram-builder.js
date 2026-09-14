@@ -17,7 +17,10 @@
  * Event Subscription: mbti:selected via EventBus (M3, for live MBTI hints)
  *
  * Contract:
- *   - Reads: data/enneagram.json (v2.0.0)
+ *   - Reads: data/enneagram.json (v2.1.0 — GENERATED from canon §5.4 by
+ *     scripts/generate_enneagram.mjs, mig-5 iter 136; never hand-edit). LIE lives
+ *     in a single internal copy — types[].lie_template (§5.4 canonical value);
+ *     spine_templates carries WANT/NEED/FLAW/GHOST only.
  *   - Reads: data/ocean.json (v2.0.0 — for extremum thresholds)
  *   - Emits: enneagram:selected { typeId, wings } via window.EventBus
  *   - Subscribes: ocean:updated { O, C, E, A, N } via window.EventBus (M2+)
@@ -447,7 +450,10 @@
     // LIE field — hidden on L2, shown on L3 (check getGuideLayer per spec §4.2)
     var guideLayer = (typeof window.getGuideLayer === 'function') ? window.getGuideLayer() : (typeof window.getWidgetLevel === 'function' ? window.getWidgetLevel() : 1);
     if (guideLayer >= 3) {
-      html += buildSpineField('LIE', template.LIE);
+      // mig-5 (iter 136): single internal LIE copy — spine_templates no longer
+      // carries a second LIE; the §5.4 canonical value lives in types[].lie_template
+      var lieInfo = getTypeInfo(selectedTypeId);
+      html += buildSpineField('LIE', lieInfo ? lieInfo.lie_template : '');
     }
 
     // GHOST field — hidden on L2, shown on L3
