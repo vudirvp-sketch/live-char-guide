@@ -150,14 +150,15 @@ subsections are 1-sentence refs (verified iter 118, re-confirmed here). The bloc
 
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
-| p3_influence_hierarchy::01 | L50 | intro: influence differs by model size | DEFINITION | KEEP | YES | — | |
-| p3_influence_hierarchy::02 | L52 | `[VS: E07]` marker | METADATA | KEEP | YES | — | Viz replacement (DEC-03); canon = source for E07 |
-| p3_influence_hierarchy::03 | L54 | `[INTERACTIVE WIDGET: persona-voice-hierarchy]` marker | METADATA | KEEP | YES | — | Canon-embedded data exception (NAV §4); complements E07 |
-| p3_influence_hierarchy::04 | L56–63 | table: 6 sources × 3 tiers | DEFINITION | KEEP | YES | — | Canonical data (also feeds the widget) |
-| p3_influence_hierarchy::05 | L65 | RULE: 12B Description = 0% voice influence | DEFINITION | KEEP | YES | REINFORCEMENT | Applies §3.1 rule to the 12B case; refs §3.1 — compliant |
-| p3_influence_hierarchy::06 | L67–80 | EXAMPLE: WRONG vs CORRECT card text | EXAMPLE | KEEP | YES | REINFORCEMENT | Unique worked demo of R06 (card-level, not classifier-level) |
+| p3_influence_hierarchy::01 | L50 | intro: influence differs by model size | DEFINITION | KEEP | YES | — | — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::02 | L52 | `[VS: E07]` marker | METADATA | KEEP | YES | — | Viz replacement (DEC-03); canon = source for E07 — weak marker upgraded to the full format (SHARED_REFERENCE + TEXTUAL_CANONICAL + audit name, DEC-21) — → migration_map_v2 VC-1 (voice-cluster executed iter 142) |
+| p3_influence_hierarchy::03 | L54 | `[INTERACTIVE WIDGET: persona-voice-hierarchy]` marker | METADATA | KEEP | YES | — | Canon-embedded data exception (NAV §4); complements E07 — notes disposition added (2 quantitative claims canonicalized in §3.2; 4 restatements stay DEC-09) — → migration_map_v2 VC-4 (voice-cluster executed iter 142) |
+| p3_influence_hierarchy::04 | L56–63 | table: 6 sources × 3 tiers | DEFINITION | KEEP | YES | — | Canonical data (also feeds the widget) — row-1 label russified «Недавний чат» (V-e); 18 values unchanged — → migration_map_v2 VC-3 (voice-cluster executed iter 142) |
+| p3_influence_hierarchy::05 | L65 | RULE: 12B Description = 0% voice influence | DEFINITION | KEEP | YES | REINFORCEMENT | Applies §3.1 rule to the 12B case; refs §3.1 — compliant — → migration_map_v2 VC-5 (audit anchor, unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::06 | L67–80 | EXAMPLE: WRONG vs CORRECT card text | EXAMPLE | KEEP | YES | REINFORCEMENT | Unique worked demo of R06 (card-level, not classifier-level) — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
 | p3_influence_hierarchy::07 | L82 | Пояснение to the example | DUPLICATE | DELETE | YES | DUPLICATE | Re-explains the §3.1::04 Тест classification a third time (R06); the example is self-demonstrating — **✅ executed iter 130 (ed-4 family)** |
-| p3_influence_hierarchy::08 | L84 | transition to Examples rules | NAVIGATION | KEEP | YES | — | |
+| p3_influence_hierarchy::08 | L84 | transition to Examples rules | NAVIGATION | KEEP | YES | — | — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::09 | L65 (seeded iter 142) | prose block «Хранилище ≠ Влияние»: storage-vs-influence distinction + SP-primacy misconception + drift implication + 2 widget quantitative claims (~10–20 сообщений; ~5 реплик) | DEFINITION | KEEP | YES | — | Canonical textual home of the E07 inset payload + widget claims (DEC-21 V-b/V-c; DEC-20/E13 precedent); E07 inset = visual presentation; parity-locked by `scripts/audit_voice_parity.py` — → migration_map_v2 VC-2 (voice-cluster executed iter 142) |
 
 ### p3_examples_rules (§3.3)
 

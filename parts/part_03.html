@@ -5,7 +5,7 @@
   v8: p3_tier_quality renamed to p3_examples_quality,
       explicit <START> tag requirement added
 -->
-<!-- VS-EMBED: E07 — Voice Isolation -->
+<!-- VS-EMBED: E07 — Voice Influence Hierarchy -->
 <div class="vs-embed" data-vs-element="E07">
 <!-- 
   Element: E07 — Voice Influence Hierarchy
@@ -14,6 +14,10 @@
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E07-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E07-script.js
+  voice-cluster (iter 142): values SHARED_REFERENCE (§3.2 owns the table);
+         inset prose TEXTUAL_CANONICAL (DEC-21) — canonicalized in canon §3.2
+         ("Хранилище ≠ Влияние" block); this embed is the visual presentation
+         of both; parity locked by scripts/audit_voice_parity.py.
 -->
 <div class="chart-container">
       <div class="chart-svg-wrap">
@@ -183,7 +187,7 @@
 <tr><th>Источник</th><th>12B</th><th>32B+</th><th>API</th></tr>
 </thead>
 <tbody>
-<tr><td>Recent chat</td><td>~85%</td><td>~80%</td><td>~75%</td></tr>
+<tr><td>Недавний чат</td><td>~85%</td><td>~80%</td><td>~75%</td></tr>
 <tr><td>Examples</td><td>~10%</td><td>~12%</td><td>~15%</td></tr>
 <tr><td>Greeting</td><td>~3%</td><td>~5%</td><td>~5%</td></tr>
 <tr><td>Author's Note</td><td>~2%</td><td>~3%</td><td>~5%</td></tr>
@@ -194,6 +198,8 @@
 </div>
 
 <div id="persona-voice-hierarchy" class="persona-voice-hierarchy-embed" data-model="12B" data-source-table="p3_influence_hierarchy"></div>
+
+<p><strong>Хранилище ≠ Влияние.</strong> Хранилище (где голосовые паттерны записаны) — не то же самое, что влияние (что формирует поведение модели). Пользователи часто предполагают, что наибольшее влияние имеет System Prompt, потому что это «первый» блок карточки; фактически доминирует недавний чат (~75–85% по моделям) — модель копирует последние ~10–20 сообщений, и именно он остаётся основным источником дрейфа голоса с течением времени. Сами голосовые паттерны живут только в Examples и Greeting — на 12B Description для лингвистического голоса запрещён (ПРАВИЛО ниже); влияние Greeting падает после ~5 реплик, он лишь задаёт стартовый тон.</p>
 
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Для 12B: Description = 0% влияния на лингвистический голос. Правило голоса: стилистические директивы в Description — ошибка сборки. Токены, потраченные на лингвистический голос в Description — потеряны или вредят. Физическая характеристика (тембр, хрип) — допустима в Description как часть Embodiment (см. ПРАВИЛО выше в §3.1).</p>

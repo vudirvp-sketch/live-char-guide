@@ -57,7 +57,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
 | Voice Isolation | `p3_voice_isolation` | §3.1 | Rule+Hierarchy | Core principle |
-| Иерархия влияния | `p3_influence_hierarchy` | §3.2 | Reference | SP > Description > Examples > Greeting |
+| Иерархия влияния | `p3_influence_hierarchy` | §3.2 | Reference | Недавний чат ≫ Examples > Greeting > AN > Description > SP (SP слабейший, ~0–2%); канонический владелец значений + проза «Хранилище ≠ Влияние» (DEC-21) |
 | Правила Examples | `p3_examples_rules` | §3.3 | Rules | Как писать Examples |
 | Качество Examples | `p3_examples_quality` | §3.4 | Classification | Quality tiers |
 | Greeting (ссылка) | `p3_greeting_ref` | §3.5 | Reference | Forward reference → Part 7B |

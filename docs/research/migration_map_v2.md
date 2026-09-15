@@ -72,7 +72,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | E04 | `part_02.html` p2_embodiment | 15/19 | 10 | minor | State→Body→Sensor→Speech stages → `SHARED_REFERENCE` (§2.4 owns) |
 | E05 | `part_04.html` p4_spine_overview | 16/28 | 16 | russification lag | SPINE element names/glosses → `SHARED_REFERENCE` (§4.1 owns; «WANT сходится к NEED…» causal caption → `TEXTUAL_CANONICAL`, unique rule statement) |
 | E06 | `part_04.html` p4_ghost_layers | 12/13 | 10 | russification lag | G1/G2/G3 layer labels + example quotes → `SHARED_REFERENCE` (§4.11 owns); layer quotes («Отец ушёл, когда мне было 5») → `VISUAL_CANONICAL` example |
-| E07 | `part_03.html` p3_influence_hierarchy | 33/33 | 20 | none detected | compressed ~75–85% scale → `SHARED_REFERENCE` (§3.2 owns exact table); «Пользователи часто предполагают…» prose + «Хранилище vs Влияние» distinction → `TEXTUAL_CANONICAL` candidate (unique explanation, needs §3.2 home decision). **Recommendation iter 141:** V-a SHARED_REFERENCE + V-b TEXTUAL_CANONICAL (unique prose + 2 widget quantitative claims → §3.2) — package [`voice_cluster_iter141.md`](./voice_cluster_iter141.md) §4; disposition owner-called (map §6 row 6) |
+| E07 | `part_03.html` p3_influence_hierarchy | 33/33 | 20 | none detected | compressed ~75–85% scale → `SHARED_REFERENCE` (§3.2 owns exact table); «Пользователи часто предполагают…» prose + «Хранилище vs Влияние» distinction → `TEXTUAL_CANONICAL` candidate (unique explanation, needs §3.2 home decision). **Recommendation iter 141:** V-a SHARED_REFERENCE + V-b TEXTUAL_CANONICAL (unique prose + 2 widget quantitative claims → §3.2) — package [`voice_cluster_iter141.md`](./voice_cluster_iter141.md) §4. **DECIDED (DEC-21, owner chat 2026-09-15 «продолжай работу по плану!») and EXECUTED iter 142 (voice-cluster build slice, map §5.6):** values SHARED_REFERENCE + inset prose TEXTUAL_CANONICAL — canonicalized in §3.2 («Хранилище ≠ Влияние» block); full `[VS: E07]` marker; row-label set locked (row 1 «Недавний чат», embed keeps «SP»); parity-locked by `scripts/audit_voice_parity.py`; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 142 (DEC-19) |
 | E08 | `part_07a.html` p7a_core_directives | 17/17 | 7 | none detected | 7 directive titles+one-liners → `SHARED_REFERENCE` (§7A.2 owns); visual = canonical presentation of the list (ed-2 mechanism, DEC-08). **Executed iter 134 (mig-2):** titles/numbering/#6–#7 model-gating parity-locked by `scripts/audit_core_directives_parity.py`; node-7 title aligned to the canonical h4 («Фильтр предгенерации»); prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E09 | `part_05.html` p5_ocean_basics | 17/17 | 9 | hex literals (KI#41/42 class) | pentagon axis labels → `REFERENCE_ONLY`; extreme-zone labels → `SHARED_REFERENCE` (§5.1 owns) |
 | E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
@@ -96,7 +96,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — mappings → §9.6, E13 = visual presentation. **EXECUTED iter 139 (mig-3, slice §5.5 DT-1..DT-8):** §9.6 = the canonical home (E13 mapping sub-table + `[VS: E13]` marker), E13 re-pointed (parity audit), §9.2↔§9.6 Debug chain wired, §9.3/§9.11 verified checklists |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice. **EXECUTED iter 135 (mig-4, slice §5.3 TB-1…TB-8):** E01 values verified canonical at every layer (the wrong-side-copy claim corrected — not found in the repo); E15 derivation note added (master + canon marker); `[VS: E01/E15]` canon markers added; glossary already deferred (iter 133); no value decision needed |
 | Enneagram data | §5.4 table | `enneagram.json` (LIE duplicated ×2) · E10 embed mini-cards · stale prototype E10 | JSON becomes derived from §5.4 (single internal copy of each value); prototype copy → `REMOVED_WITH_REASON` (stale, «Я фундаментально ущербен» 3-way drift). **EXECUTED iter 136 (mig-5, slice §5.4):** chain implemented §5.4 → `scripts/generate_enneagram.mjs` (owns the machine-layer supplement) → generated `data/enneagram.json` (v2.1.0) → widgets (builder + synthesis re-pointed to `types[].lie_template`; vs-e10 unchanged); E10 mini-cards SHARED_REFERENCE; prototype/extract copy → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
-| Voice influence % | §3.2 table | E07 compressed scale + unique prose · `persona-voice-hierarchy.js` constants (sanctioned DEC-09) | E07 scale → `SHARED_REFERENCE`; E07 unique prose → `TEXTUAL_CANONICAL` candidate (§3.2 home decision); widget constants keep DEC-09 provenance header. **iter 141:** evidence/recommendation package prepared ([`voice_cluster_iter141.md`](./voice_cluster_iter141.md)) — value parity verified green at every layer (widget 6/6 rows == canon; no KI#72-style contradiction); sub-calls surfaced: widget-notes split (V-c), AN-12B framing (V-d, the only value-adjacent question), row-label set (V-e); disposition + build slice owner-called (map §6 row 6) |
+| Voice influence % | §3.2 table | E07 compressed scale + unique prose · `persona-voice-hierarchy.js` constants (sanctioned DEC-09) | E07 scale → `SHARED_REFERENCE`; E07 unique prose → `TEXTUAL_CANONICAL` candidate (§3.2 home decision); widget constants keep DEC-09 provenance header. **iter 141:** evidence/recommendation package prepared ([`voice_cluster_iter141.md`](./voice_cluster_iter141.md)) — value parity verified green at every layer (widget 6/6 rows == canon; no KI#72-style contradiction); sub-calls surfaced: widget-notes split (V-c), AN-12B framing (V-d, the only value-adjacent question), row-label set (V-e). **DECIDED (DEC-21, owner chat 2026-09-15 «продолжай работу по плану!») and EXECUTED iter 142 (voice-cluster build slice, §5.6):** V-a/V-b/V-c/V-e as recommended; V-d = Option A (table wins — AN 12B stays ~2%, «не влияет» statements re-framed to «пренебрежимо мало (~2%)», no numeric change); §3.2 = canonical owner of table + prose block; widget DEC-09 header declares note deference; parity gate `scripts/audit_voice_parity.py`; KI#82 CLOSED |
 
 ## 5. Registry C — block-level rows (mechanism)
 
@@ -394,6 +394,52 @@ normalization asymmetry — new §9.6 paragraphs may appear as plain_text drift
 entries (exit 0 by design); the §9.2 master mirror CLOSES a pre-existing
 no-master-match entry.
 
+### 5.6 Voice influence % slice (seeded + executed iter 142 — voice-cluster build slice)
+
+Scope: the Voice influence % cluster — the LAST bounded area (Registry B row 7;
+PLAN row voice-cluster; gate **cleared by DEC-21**: V-a `SHARED_REFERENCE` /
+V-b `TEXTUAL_CANONICAL` → §3.2 / V-c widget-notes split / V-d **Option A** /
+V-e row-label set; owner chat 2026-09-15 «продолжай работу по плану!» — the
+go-ahead on the iter-141 package). Mechanism: mig-2/mig-3 pattern (canonical
+record → re-point → parity audit; **no machine layer** — DEC-09 already covers
+the widget side). Canonical owner: **§3.2** (6×3 table = the value owner, new
+«Хранилище ≠ Влияние» prose block = the textual home of the E07 inset payload
++ the two widget quantitative claims). Editorial Policy 5-point check applied
+at edit time: capability (the misconception correction + operational windows
+gain a textual home — searchable, no-JS-visible, testable), coverage (every
+inset sentence and both widget claims preserved in the block; the inset keeps
+its visual function), retrieval (Learn-mode lookup without the visual),
+context (the block interprets the table it follows), dependency (E07 keeps its
+visual function; the `[VS: E07]` marker declares the relationship). Acceptance
+gate = `scripts/audit_voice_parity.py` (MUST PASS).
+
+| VC# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| VC-1 | `p3_influence_hierarchy::02` | weak `[VS: E07]` marker («См. маркер в preamble», no ownership declaration) | full `[VS: E07]` marker in the `_README.md` §3.3 format declaring both dispositions (values SHARED_REFERENCE · inset prose TEXTUAL_CANONICAL) + the audit name | REPLACED_BY_CANONICAL **— executed iter 142** | DEC-21 V-a/V-b; marker precedents E01/E10/E13/E15 |
+| VC-2 | `p3_influence_hierarchy::09` (seeded iter 142) | E07 inset + widget JS: «Хранилище vs Влияние» distinction, SP-primacy misconception + drift implication, ~10–20 messages, ~5 replies — embed/JS-only (invisible to canon, no-JS readers, every audit) | §3.2 NEW prose block «Хранилище ≠ Влияние» — the canonical textual home; E07 inset = visual presentation; widget notes = DEC-09 restatements | MOVED **— executed iter 142** | DEC-21 V-b/V-c; DEC-20/E13 precedent |
+| VC-3 | `p3_influence_hierarchy::04` | table row-1 label «Recent chat» (English; E07 already russified) | «Недавний чат» (canon + master + widget/export; DEC-16 ordinary concept; embed label unchanged); 18 values byte-unchanged | MOVED **— executed iter 142** | DEC-21 V-e; F4 divergence eliminated |
+| VC-4 | `p3_influence_hierarchy::03` | `[INTERACTIVE WIDGET]` marker (no notes disposition) | extended: the 2 quantitative claims declared canonicalized in §3.2; the 4 rule-restatement notes stay widget-local (DEC-09); data/*.json extraction rejected (package §4.3) | MOVED **— executed iter 142** | DEC-21 V-c |
+| VC-5 | `p3_influence_hierarchy::05` | RULE: 12B Description = 0% | unchanged — audit anchor (byte-identical canon↔master; «0% ЗАПРЕЩЕНО» keeps RULE semantics — the argument for V-d Option A) | UNCHANGED (verified iter 142) | DEC-21 V-d Option A |
+| VC-6 | `p3_influence_hierarchy::01` + `::06` + `::08` | intro / EXAMPLE block / transition to §3.3 | unchanged — verified (no overlap with the new prose block; 5-point check passed at insertion) | UNCHANGED (verified iter 142) | Editorial Policy (DEC-15) |
+| VC-7 | — (Part 7A; no matrix seeding — that Part's v2 slice is future, KI#72-dependent) | AN-12B framing tension: §3.2 ~2% vs «AN не влияет на голос» ×2 canon (§7A.5 L224, §7A.7 L348) + ×1 widget | re-framed per **V-d Option A**: «влияние AN на голос пренебрежимо мало (~2%)» (§7A.5 + §7A.7 canon; §7A.7 master mirror; widget note); E16 canon marker + master badge gain the derivation «диапазон = мин–макс строки AN — §3.2» (E15 pattern); zero numeric change | MOVED **— executed iter 142** | DEC-21 V-d; fence #11 (table = value owner) |
+| VC-8 | — (master layer) | E07 embed = de-facto only copy of the inset prose; outer comment mislabeled «Voice Isolation»; E16 badge carried an underived «~2–5%» | E07 embed re-pointed (comment declares §3.2 ownership, DEC-21; outer comment label corrected → «Voice Influence Hierarchy»); E16 position-indicator value carries the derivation note | SHARED_REFERENCE **— executed iter 142 (audit-locked)** | Registry A E07/E16; DEC-19 |
+| VC-9 | — (widget layer) | DEC-09 sanctioned constants; AN-12B note contradicted the table framing; row-1 label «Recent chat» | constants unchanged (18 values == §3.2, parity-locked); header gains the note-deference declaration; AN-12B note re-framed; label «Недавний чат»; root fallback regenerated | DEC-09 + **executed iter 142** | DEC-21 V-c/V-d/V-e |
+| VC-10 | — (gate/registries/disposal) | no parity audit covered the cluster; KI#82 (content_map §3.2 stale Notes); E07 prototype + 3 extracts frozen | `scripts/audit_voice_parity.py` (9 check groups; MUST-PASS gate wired into AGENTS.md); map Registries A/B + §6 row 6 → DECIDED/EXECUTED; content_map Notes corrected (**KI#82 CLOSED**); E07 prototype + E07-script/styles/visual extracts → `REMOVED_WITH_REASON` (4 files, DEC-19 — archive = git history) | EXECUTED **— iter 142** | DEC-19; KI#81 disposal precedent |
+
+Accounting: 1 marker upgrade (VC-1) + 1 canonical home created (VC-2, matrix
+row seeded) + 1 one-word label edit (VC-3) + 1 widget-marker extension (VC-4) +
+3 verified-unchanged rows (VC-5/VC-6) + 3 cross-layer executions (VC-7/VC-8/VC-9)
++ 1 gate/registry/disposal package (VC-10). The 18 table values and the E07
+geometry are byte-unchanged everywhere — enforced by the parity audit. Root
+fallbacks `parts/part_03.html` + `parts/part_07a.html` +
+`widgets/persona-voice-hierarchy.js` regenerated with the slice. Deferred
+(informational): visual-system/PLAN.md L605 table copy (frozen design doc,
+DEC-19); E16 prototype/extract (frozen — E16 family slice pending; the
+derivation note intentionally lives only in the embed); canon front-matter
+`vs_embedded` staleness (repo-wide, rides the v2 canon format). Glossary entry
+verified deferring (value restatement in the ratified Voice Isolation entry,
+§3.1 ref — DEC-17/18 chain, no action per package F6).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -402,9 +448,11 @@ no-master-match entry.
 > ratified). The called plan = the iter-137 recommendation package
 > ([`owner_gates_iter137.md`](./owner_gates_iter137.md) — verified evidence per gate
 > §3.1–§3.4). Execution order: §6.1 disposal slice = **iter 138** (E08/E01/E15/E10
-> prototype+extract copies → `REMOVED_WITH_REASON`); §6.2 → **mig-3 next**; §6.5 applied
+> prototype+extract copies → `REMOVED_WITH_REASON`); §6.2 → **mig-3 iter 139**; §6.5 applied
 > incrementally by consuming slices; §6.4 disposal slice = **iter 140** (hero
-> removed; KI#81 closed — all four §6 gates now executed).
+> removed; KI#81 closed).
+> **Fifth gate (row 6): owner call received (chat 2026-09-15 «продолжай работу по плану!»)
+> — DECIDED (DEC-21, iter 142), build slice executed iter 142** (map §5.6).
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
    prototypes/extracts become frozen design artifacts (default), or
@@ -462,9 +510,15 @@ no-master-match entry.
    **Package prepared iter 141** ([`voice_cluster_iter141.md`](./voice_cluster_iter141.md)):
    verified evidence + recommended calls V-a…V-e (V-a/V-b = the map's own
    proposals; V-d Option A recommended — table wins, two prose statements
-   re-frame); value parity verified green at every layer. **Awaiting the owner
-   call** — disposition and build slice stay owner-called (STATUS Next step
-   row 1); next free DEC = DEC-21.
+   re-frame); value parity verified green at every layer.
+   **DECIDED (DEC-21, owner chat 2026-09-15 «продолжай работу по плану!»):**
+   V-a/V-b/V-c/V-e as recommended; V-d = **Option A** — table wins (AN 12B
+   stays ~2%; «не влияет» statements re-frame to «пренебрежимо мало (~2%)»;
+   no numeric change). **Build slice EXECUTED iter 142** (map §5.6 VC-1..VC-10):
+   §3.2 canonicalization (prose block + full marker + label set) → §7A
+   re-frames → master mirrors + E07/E16 re-point → widget header/notes →
+   `audit_voice_parity.py` (new MUST-PASS) → KI#82 CLOSED → E07 prototype/extract
+   disposal (DEC-19). Detail: `voice_cluster_iter141.md` §4–§5.
 
 ---
 
@@ -622,3 +676,22 @@ no-master-match entry.
   E07 + Registry B row 7 recommendation notes + §6 row 6 + this entry. v1
   untouched; Python battery re-run green (sync 97/97; parity ×5 PASS; drift
   actionable 159 unchanged); no node battery (doc-only, iter-131 precedent).
+- **iter 142 (voice-cluster build slice, BASE_COMMIT `9f4712bc`):** owner call
+  received (chat 2026-09-15 «продолжай работу по плану!» — DEC-18/19/20
+  go-ahead precedent) = the go-ahead on the iter-141 package → **DEC-21
+  recorded** (V-a/V-b/V-c/V-e as recommended; V-d Option A). Registry B row 7 —
+  the LAST bounded area — executed on the mig-2/mig-3 pattern (§5.6 VC-1..VC-10):
+  canon §3.2 gains the «Хранилище ≠ Влияние» prose block (canonical home of the
+  E07 inset payload + the 2 widget quantitative claims) + the full `[VS: E07]`
+  marker (SHARED_REFERENCE + TEXTUAL_CANONICAL + audit name) + row-1 label
+  «Недавний чат» (V-e) + the widget-marker notes disposition (V-c); §7A.5 +
+  §7A.7 AN-12B statements re-framed per Option A («пренебрежимо мало (~2%)» —
+  no numeric change); master mirrors (§3.2 prose + label; §7A.7; E07 embed
+  re-pointed + outer comment label fix; E16 badge derivation note — E15
+  pattern); widget: DEC-09 header deference line + AN-12B note + label;
+  **KI#82 CLOSED** (content_map §3.2 Notes corrected); **4 E07 prototype/extract
+  files REMOVED_WITH_REASON** (DEC-19; archive = git history). Acceptance gate
+  `scripts/audit_voice_parity.py` PASS (9 check groups). Remaining Registry B
+  row: sampling values only (KI#72 owner call — the last bounded area left).
+  Battery: full (canon + master + widget touched) — see STATUS/worklog for the
+  executed list.

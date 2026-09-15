@@ -34,12 +34,17 @@
   // ========================================================================
   // CANON DATA — sourced from docs/canon/part_03.md §3.2 table
   // Do NOT edit these values without updating the canon table first.
+  // voice-cluster (iter 142, DEC-21): row notes defer to canon §3.2 — the two
+  // quantitative claims (recent-chat window ~10–20 messages; greeting decay
+  // after ~5 replies) are canonicalized in the §3.2 "Хранилище ≠ Влияние"
+  // prose block; the rest are operational rule reminders (DEC-09). Values
+  // parity-locked by scripts/audit_voice_parity.py.
   // ========================================================================
   const VOICE_SOURCES = [
-    { id: 'recent_chat',  label: 'Recent chat',   models: { '12B': 85, '32B+': 80, 'API': 75 }, note: 'Самый сильный фактор на любой модели — модель копирует последние ~10–20 сообщений.' },
+    { id: 'recent_chat',  label: 'Недавний чат',   models: { '12B': 85, '32B+': 80, 'API': 75 }, note: 'Самый сильный фактор на любой модели — модель копирует последние ~10–20 сообщений.' },
     { id: 'examples',     label: 'Examples',      models: { '12B': 10, '32B+': 12, 'API': 15 }, note: 'Voice-маркеры копируются из <START>-блоков. Качество Examples > количество.' },
     { id: 'greeting',     label: 'Greeting',      models: { '12B': 3,  '32B+': 5,  'API': 5  }, note: 'Задаёт стартовый тон; влияние падает после ~5 реплик.' },
-    { id: 'authors_note', label: "Author's Note", models: { '12B': 2,  '32B+': 3,  'API': 5  }, note: 'На 12B AN не влияет на лингвистический голос (см. §7A.7).' },
+    { id: 'authors_note', label: "Author's Note", models: { '12B': 2,  '32B+': 3,  'API': 5  }, note: 'На 12B влияние AN на лингвистический голос пренебрежимо мало (~2%, §3.2; см. §7A.7).' },
     { id: 'description',  label: 'Description',   models: { '12B': 0,  '32B+': 3,  'API': 5  }, note: '12B: 0% — ЗАПРЕЩЕНО. Стилистические директивы в Description — ошибка сборки.' },
     { id: 'system_prompt',label: 'System Prompt', models: { '12B': 0,  '32B+': 1,  'API': 2  }, note: 'На 12B лингвистические директивы в SP игнорируются; работают только CORE DIRECTIVES.' }
   ];
