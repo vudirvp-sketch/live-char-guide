@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–8: iters 147–155); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–9: iters 147–156); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -454,107 +454,107 @@ recorded as deferred observations (map §5.14 P7A-4).
 
 ### p9_quality_scale (§9.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_quality_scale::01 | L19 | `[VS: E14]` marker | METADATA | KEEP | YES | — | Declared replacement: quality levels + 5 quick checks |
-| p9_quality_scale::02 | L21–23 | шкала intro + E14 note | NAVIGATION | KEEP | YES | — | Declares table = error patterns (complements E14 criteria, non-duplicate) |
-| p9_quality_scale::03 | L25–30 | table: error patterns per zone | DEFINITION | KEEP | YES | — | |
-| p9_quality_scale::04 | L32 | RECOMMENDATION: target zone | APPLICATION | KEEP | YES | — | |
-| p9_quality_scale::05 | L34 | Cross-ref §9.11 | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_quality_scale::01 | L19 | `[VS: E14]` marker | METADATA | KEEP | YES | — | open | Declared replacement: quality levels + 5 quick checks |
+| p9_quality_scale::02 | L21–23 | шкала intro + E14 note | NAVIGATION | KEEP | YES | — | open | Declares table = error patterns (complements E14 criteria, non-duplicate) |
+| p9_quality_scale::03 | L25–30 | table: error patterns per zone | DEFINITION | KEEP | YES | — | open |  |
+| p9_quality_scale::04 | L32 | RECOMMENDATION: target zone | APPLICATION | KEEP | YES | — | open |  |
+| p9_quality_scale::05 | L34 | Cross-ref §9.11 | NAVIGATION | KEEP | YES | — | open |  |
 
 ### p9_one_change_rule (§9.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_one_change_rule::01 | L44 | RULE: one change at a time | DEFINITION | KEEP | YES | — | Canonical; unique to Part 9 |
-| p9_one_change_rule::02 | L46 | Применение scope | APPLICATION | KEEP | YES | — | Tree back-link added (§9.2↔§9.6 IMP-48 pair, master mirror restored) — → migration_map_v2 DT-6 (mig-3 executed iter 139) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_one_change_rule::01 | L44 | RULE: one change at a time | DEFINITION | KEEP | YES | — | open | Canonical; unique to Part 9 |
+| p9_one_change_rule::02 | L46 | Применение scope | APPLICATION | KEEP | YES | — | open | Tree back-link added (§9.2↔§9.6 IMP-48 pair, master mirror restored) — → migration_map_v2 DT-6 (mig-3 executed iter 139) |
 
 ### p9_basic_checklist (§9.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_basic_checklist::01 | L57 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14: one of 7 diagnostic-mode routers repeating the same destination set; aggregate compression candidate pending ed-policy |
-| p9_basic_checklist::02 | L59 | «начните с этого чек-листа» | NAVIGATION | COMPRESS | YES | — | Overlaps ::01 — merge |
-| p9_basic_checklist::03 | L61–67 | checklist table (per block) | VALIDATION | KEEP | YES | REINFORCEMENT | Canonical per-block diagnosis; check-form of Parts 2/3/7A rules = changed function (R07 occurrences inside are checks, not re-teach). **iter 145:** Parameters-row RepPen hint 12B-qualified (DEC-22 S-d) → migration_map_v2 SP-5 |
-| p9_basic_checklist::04 | L69 | Cross-ref §9.11 | NAVIGATION | KEEP | YES | — | Repeats ::01 pointer — fold into router (R14) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_basic_checklist::01 | L57 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | open | R14: one of 7 diagnostic-mode routers repeating the same destination set; aggregate compression candidate pending ed-policy |
+| p9_basic_checklist::02 | L59 | «начните с этого чек-листа» | NAVIGATION | COMPRESS | YES | — | open | Overlaps ::01 — merge |
+| p9_basic_checklist::03 | L61–67 | checklist table (per block) | VALIDATION | KEEP | YES | REINFORCEMENT | open | Canonical per-block diagnosis; check-form of Parts 2/3/7A rules = changed function (R07 occurrences inside are checks, not re-teach). **iter 145:** Parameters-row RepPen hint 12B-qualified (DEC-22 S-d) → migration_map_v2 SP-5 |
+| p9_basic_checklist::04 | L69 | Cross-ref §9.11 | NAVIGATION | KEEP | YES | — | open | Repeats ::01 pointer — fold into router (R14) |
 
 ### p9_additional_problems (§9.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_additional_problems::01 | L79 | intro: top-3 live in Part 1 | NAVIGATION | KEEP | YES | — | |
-| p9_additional_problems::02 | L81–84 | table: problems #4/#5 | DEFINITION | MOVE | YES | DUPLICATE | Both rows are symptom→fix pairs already carried by §9.5 rows («Повторяющиеся фразы», «Персонаж теряет характер») — fold into the symptom table, keep the #4/#5 numbering as row labels. **iter 145:** #4 RepPen fix re-framed to the model-range defer (DEC-22 S-d); the fold candidate stays open → migration_map_v2 SP-6 |
-| p9_additional_problems::03 | L86 | Cross-ref | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_additional_problems::01 | L79 | intro: top-3 live in Part 1 | NAVIGATION | KEEP | YES | — | open |  |
+| p9_additional_problems::02 | L81–84 | table: problems #4/#5 | DEFINITION | MOVE | YES | DUPLICATE | canonical-link | Both rows are symptom→fix pairs already carried by §9.5 rows («Повторяющиеся фразы», «Персонаж теряет характер») — fold into the symptom table, keep the #4/#5 numbering as row labels. **iter 145:** #4 RepPen fix re-framed to the model-range defer (DEC-22 S-d) → migration_map_v2 SP-6. **iter 156 (fold EXECUTED):** the §9.4 table folded into §9.5 — rows relabeled «#4: Повторяющиеся фразы» / «#5: Модель игнорирует характер»; §9.4 keeps the pointer form (canon + master); the #4 model-range defer rides the §9.5 #4 row's AP-5 chain → migration_map_v2 §5.17 P9-2 (the sampling-audit check 7 re-pointed in step) |
+| p9_additional_problems::03 | L86 | Cross-ref | NAVIGATION | KEEP | YES | — | open |  |
 
 ### p9_symptom_table (§9.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_symptom_table::01 | L97 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
-| p9_symptom_table::02 | L99 | «Каждый симптом связан…» | NAVIGATION | COMPRESS | YES | — | Merge into ::01 |
-| p9_symptom_table::03 | L101–113 | symptom table (11 rows) | VALIDATION | KEEP | YES | — | **Canonical** flat lookup; absorbs §9.4 #4/#5 if MOVE applied. Table refs use `§3.X`/`§4.X`/`§2.X`/`§6.X` placeholder forms — R18 vague refs, ed-8 fix, mechanical |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_symptom_table::01 | L97 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | open | R14 |
+| p9_symptom_table::02 | L99 | «Каждый симптом связан…» | NAVIGATION | COMPRESS | YES | — | open | Merge into ::01 |
+| p9_symptom_table::03 | L101–113 | symptom table (11 rows) | VALIDATION | KEEP | YES | — | open | **Canonical** flat lookup. **Stale notes refreshed iter 156:** (a) the R18 vague refs (`§3.X` placeholder forms) were normalized to specific refs iter 128 (ed-8/r18-phase-a `bb4ed292`) — the note described the pre-repair state; (b) the §9.4 #4/#5 absorption EXECUTED iter 156 — the rows now carry the «#4:»/«#5:» labels (map §5.17 P9-2) |
 
 ### p9_decision_tree (§9.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_decision_tree::01 | L124 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
-| p9_decision_tree::02 | L126 | format explanation | NAVIGATION | COMPRESS | YES | — | Merge into ::01 |
-| p9_decision_tree::03 | L128–137 | decision tree table | VALIDATION | KEEP | YES | SPECIAL CASE | Canonical branching form — different diagnostic mode than §9.5 (§24: same family, different condition) — → migration_map_v2 DT-1 (canonical owner, unchanged — mig-3 verified iter 139) |
-| p9_decision_tree::04 | L139 | Cross-ref E13 | NAVIGATION | KEEP | YES | — | Weak «Ссылка» upgraded to the full `[VS: E13]` marker (TEXTUAL_CANONICAL declared; claim now true) — → migration_map_v2 DT-3 (mig-3 executed iter 139) |
-| p9_decision_tree::05 | L143–150 (seeded iter 139) | E13 mapping sub-table «Три базовых симптома: полный маппинг» (6 rows: 3 symptoms, 6 checks, 9 diagnoses, AP/E refs) | VALIDATION | KEEP | YES | — | Canonical textual home of the E13 payload (DEC-20; values parity-locked by `scripts/audit_diagnostics_parity.py`) — → migration_map_v2 DT-2 (mig-3 executed iter 139) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_decision_tree::01 | L124 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | open | R14 |
+| p9_decision_tree::02 | L126 | format explanation | NAVIGATION | COMPRESS | YES | — | open | Merge into ::01 |
+| p9_decision_tree::03 | L128–137 | decision tree table | VALIDATION | KEEP | YES | SPECIAL CASE | open | Canonical branching form — different diagnostic mode than §9.5 (§24: same family, different condition) — → migration_map_v2 DT-1 (canonical owner, unchanged — mig-3 verified iter 139) **iter 156:** §9.6 record byte-stable through the Part 9 slice (sha-verified; the mig-3 lock held) |
+| p9_decision_tree::04 | L139 | Cross-ref E13 | NAVIGATION | KEEP | YES | — | open | Weak «Ссылка» upgraded to the full `[VS: E13]` marker (TEXTUAL_CANONICAL declared; claim now true) — → migration_map_v2 DT-3 (mig-3 executed iter 139) |
+| p9_decision_tree::05 | L143–150 (seeded iter 139) | E13 mapping sub-table «Три базовых симптома: полный маппинг» (6 rows: 3 symptoms, 6 checks, 9 diagnoses, AP/E refs) | VALIDATION | KEEP | YES | — | open | Canonical textual home of the E13 payload (DEC-20; values parity-locked by `scripts/audit_diagnostics_parity.py`) — → migration_map_v2 DT-2 (mig-3 executed iter 139) |
 
 ### p9_test_scenarios (§9.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_test_scenarios::01 | L150 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
-| p9_test_scenarios::02 | L152 | «Протестируйте карточку…» | NAVIGATION | COMPRESS | YES | — | Merge into ::01 |
-| p9_test_scenarios::03 | L154–161 | 6 scenarios table | VALIDATION | KEEP | YES | — | Canonical |
-| p9_test_scenarios::04 | L163 | Cross-ref (12B set, metrics, WW example) | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_test_scenarios::01 | L150 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | open | R14 |
+| p9_test_scenarios::02 | L152 | «Протестируйте карточку…» | NAVIGATION | COMPRESS | YES | — | open | Merge into ::01 |
+| p9_test_scenarios::03 | L154–161 | 6 scenarios table | VALIDATION | KEEP | YES | — | open | Canonical |
+| p9_test_scenarios::04 | L163 | Cross-ref (12B set, metrics, WW example) | NAVIGATION | KEEP | YES | — | open |  |
 
 ### p9_element_scenario_map (§9.8)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_element_scenario_map::01 | L173–181 | element → scenario table | VALIDATION | KEEP | YES | — | Unique map; no router para (only Part 9 section without one) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_element_scenario_map::01 | L173–181 | element → scenario table | VALIDATION | KEEP | YES | — | open | Unique map; no router para (only Part 9 section without one) |
 
 ### p9_test_requirements (§9.9)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_test_requirements::01 | L190 | Сценарий router para (4 refs) | NAVIGATION | KEEP | YES | UNCLEAR | R14 — heaviest router |
-| p9_test_requirements::02 | L192 | «Минимум 6 тестовых сценариев» | DEFINITION | COMPRESS | YES | DUPLICATE | Restates §9.7's requirement + points back to it; 1 sentence + ref already exists in ::01 |
-| p9_test_requirements::03 | L194–203 | 6 success metrics table | VALIDATION | KEEP | YES | — | Canonical |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_test_requirements::01 | L190 | Сценарий router para (4 refs) | NAVIGATION | KEEP | YES | UNCLEAR | open | R14 — heaviest router |
+| p9_test_requirements::02 | L192 | «Минимум 6 тестовых сценариев» | DEFINITION | COMPRESS | YES | DUPLICATE | open | Restates §9.7's requirement + points back to it; 1 sentence + ref already exists in ::01 |
+| p9_test_requirements::03 | L194–203 | 6 success metrics table | VALIDATION | KEEP | YES | — | open | Canonical |
 
 ### p9_12b_issues (§9.10)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_12b_issues::01 | L213 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
-| p9_12b_issues::02 | L215 | 12B intro + SP-language summary | APPLICATION | KEEP | YES | REINFORCEMENT | Summary + refs to §7A.6/§7A.2 — compliant |
-| p9_12b_issues::03 | L217–225 | 12B symptoms table | VALIDATION | KEEP | YES | SPECIAL CASE | §24: same family as §9.5 rows, materially different condition (12B architecture). **iter 145:** «Повторы фраз» row qualified (12B-диапазон — §7A.6, DEC-22 S-d) → migration_map_v2 SP-7 |
-| p9_12b_issues::04 | L227 | Cross-ref (4K-Fallback, CoT Tiers) | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_12b_issues::01 | L213 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | open | R14 |
+| p9_12b_issues::02 | L215 | 12B intro + SP-language summary | APPLICATION | KEEP | YES | REINFORCEMENT | open | Summary + refs to §7A.6/§7A.2 — compliant |
+| p9_12b_issues::03 | L217–225 | 12B symptoms table | VALIDATION | KEEP | YES | SPECIAL CASE | open | §24: same family as §9.5 rows, materially different condition (12B architecture). **iter 145:** «Повторы фраз» row qualified (12B-диапазон — §7A.6, DEC-22 S-d) → migration_map_v2 SP-7 |
+| p9_12b_issues::04 | L227 | Cross-ref (4K-Fallback, CoT Tiers) | NAVIGATION | KEEP | YES | — | open |  |
 
 ### p9_pre_deploy (§9.11)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p9_pre_deploy::01 | L238 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
-| p9_pre_deploy::02 | L240–242 | Быстрая проверка intro | NAVIGATION | KEEP | YES | — | |
-| p9_pre_deploy::03 | L244–255 | `<details>`: «дубликат §9.3 в формате ожидаемый результат» | DUPLICATE | DELETE | YES | DUPLICATE | **Self-admitted duplicate (dupes-1 §9.11 half).** All 5 items preserved in §9.3 table + E14 «5 быстрых проверок» block. Repair required on deletion: 14-item list L271 «Пункты 1–5: см. Быструю проверку выше» must re-point to §9.3 |
-| p9_pre_deploy::04 | L257–267 | EXAMPLE: Elena quick check | EXAMPLE | KEEP | YES | — | Unique worked example |
-| p9_pre_deploy::05 | L269–283 | 14-item full check table | VALIDATION | KEEP | YES | — | Canonical pre-deploy list |
-| p9_pre_deploy::06 | L285–297 | EXAMPLE: Vyshcherblenny structural check | EXAMPLE | KEEP | YES | — | «Description ≤ 800 токенов» vs §7A.12 max 700 — numeric tension, R11, feeds ed-5/ed-7 |
-| p9_pre_deploy::07 | L299–313 | EXAMPLE: Vyshcherblenny full check | EXAMPLE | KEEP | YES | — | |
-| p9_pre_deploy::08 | L314 | Итог | APPLICATION | KEEP | YES | — | |
-| p9_pre_deploy::09 | L316–318 | Bridge to Part 10 | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p9_pre_deploy::01 | L238 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | open | R14 |
+| p9_pre_deploy::02 | L240–242 | Быстрая проверка intro | NAVIGATION | KEEP | YES | — | open |  |
+| p9_pre_deploy::03 | L244–255 | `<details>`: «дубликат §9.3 в формате ожидаемый результат» | DUPLICATE | DELETE | YES | DUPLICATE | — | **Disposed iter 125 (dupes-1, R16) — stale note refreshed iter 156.** The `<details>` quick-check duplicate was deleted + the L271 dangling ref repaired (→ §9.3 + E14 — both in place at HEAD); the note described the pre-execution state. The `—` presentation = the historical audit row of an executed pre-slice decision (the Part 7A `—` row rule) |
+| p9_pre_deploy::04 | L257–267 | EXAMPLE: Elena quick check | EXAMPLE | KEEP | YES | — | open | Unique worked example |
+| p9_pre_deploy::05 | L269–283 | 14-item full check table | VALIDATION | KEEP | YES | — | collapsible | Canonical pre-deploy list **iter 156:** the pre-existing `<details class="interactive">` documented as the v2 F6 presentation (the Part 7B precedent) |
+| p9_pre_deploy::06 | L285–297 | EXAMPLE: Vyshcherblenny structural check | EXAMPLE | KEEP | YES | — | collapsible | «Description ≤ 800 токенов» vs §7A.12 max 700 — numeric tension, R11, feeds ed-5/ed-7 **iter 156:** F6-wrapped (master layer) — the long worked example (>200 words, supplementary demo of the «рекомендуется»-tier full check); the canon block unchanged |
+| p9_pre_deploy::07 | L299–313 | EXAMPLE: Vyshcherblenny full check | EXAMPLE | KEEP | YES | — | collapsible | **iter 156:** F6-wrapped together with ::06 (one `<details>` for the Выщербленный worked example) |
+| p9_pre_deploy::08 | L314 | Итог | APPLICATION | KEEP | YES | — | open |  |
+| p9_pre_deploy::09 | L316–318 | Bridge to Part 10 | NAVIGATION | KEEP | YES | — | open |  |
 
 **Part 9 verdict:** strongly compliant with "validate, not re-teach" (research §10) — every table is
 check/lookup/decision form with refs. The exceptions: §9.4 #4/#5 (problem-list form → fold into
 §9.5), §9.11 `<details>` self-admitted duplicate (dupes-1), and the R14 router-para repetition
 (7 sections open with near-identical routing paragraphs — aggregate compression candidate, needs
-ed-policy Rule 3/§15 navigation-debt decision).
+ed-policy Rule 3/§15 navigation-debt decision). **iter 156 slice note (Part 9 v2 build slice, map §5.17):** presentation column seeded — 43 rows: 38 `open` + 3 `collapsible` (§9.11::05 pre-existing + ::06/::07 wrapped this slice) + 1 `canonical-link` (§9.4::02 — the fold executed) + 1 `—` (§9.11::03, disposed iter 125). Verdict exceptions at HEAD: the §9.11 `<details>` duplicate exception was already executed (dupes-1, iter 125 — the verdict line described the pre-execution state); the §9.4 #4/#5 fold EXECUTED this slice; the R14 router-para aggregate stays the one open exception (7 sections — navigation-debt, owner-gated ed-policy per research §15). The §9.6 diagnostics cluster owner byte-stable (mig-3 lock; `audit_diagnostics_parity.py` PASS).
 
 ---
 

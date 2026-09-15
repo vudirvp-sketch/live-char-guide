@@ -1028,6 +1028,74 @@ their full master mirrors — verified by the JSON pre/post diff; zero new rows)
 reader-path backbone Part; the appendix/Reference slice after Part 10 carries the KI#70 WIRE
 implementation per DEC-24 Q7).
 
+### 5.17 Part 9 v2 build slice (seeded + executed iter 156 — v2 build phase, tenth Part)
+
+Scope: **Part 9 — Diagnostics** (11 sections, 43 block rows; DEC-24 Q6 guide order — Part 9 tenth;
+the per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate
+cleared by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape (evidence → canon
+restructure → master mirror → full battery) — tenth application, reusing the §5.8–§5.16 pattern.
+Primary reader mode: **Debug** (§9.5 symptom table / §9.6 decision tree (E13) / §9.3 block
+checklist = the wired Debug chain, mig-3 iter 139 — the spec §3 Debug row's backbone Part).
+Editorial Policy 5-point check applied per edit (documented per row below). Acceptance gate: the
+full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines) — **no new cluster
+parity gate**: Part 9 *hosts* the diagnostics cluster owner §9.6 (mig-3/DEC-20) — the slice's
+special duty was the **byte-stability lock** (the §9.6 record untouched; sha-verified pre/post;
+`audit_diagnostics_parity.py` PASS) rather than a new gate. The E12/§9.x sampling hints (DEC-22
+SP-5/SP-6/SP-7) and the §9.11 OBSERVATION family (TB-8 «Description ≤ 800» — R11/ed-5) are
+deployed — the slice documents, does not re-decide.
+
+**F2 presentation map (spec §4.1 mechanism, tenth application):** the Part 9 matrix tables now
+carry the `presentation` column (43 rows; matrix §1.2 scope note extended to Parts 1–9).
+Disposition: **38 `open` + 3 `collapsible` + 1 `canonical-link` + 1 `—`**. The 38 `open` = the
+Debug-mode decision aids (the §9.5 lookup / §9.6 tree / §9.3 block checklist / §9.8 element map /
+§9.9 metrics — the recognition-and-decision core; the R14 router paras + the ::02 merge
+COMPRESS rows stay `open` — the aggregate navigation-debt decision is owner-gated ed-policy, the
+Part 1–8 precedent). The 3 `collapsible` = §9.11::05 (the pre-existing `<details>` around the
+14-item «рекомендуется»-tier full check — documented, the Part 7B precedent) + §9.11::06/::07 (the
+Выщербленный worked example — the long-worked-scenario family the Part 1 slice flagged as
+«collapsible candidates at Parts 9/10»; >200 words, supplementary demo of the recommended-tier
+check on the EXPERT card — honest qualification, not forced). The 1 `canonical-link` =
+`p9_additional_problems::02` — **the §9.4↔§9.5 fold EXECUTED** (P9-2; the standing candidate the
+STATUS Next-step note pinned to this slice). The 1 `—` = `p9_pre_deploy::03` (disposed iter 125,
+dupes-1 — the historical-row rule). F3: §9.3 + §9.11 = the validation class (the pre-existing ☐
+affordances — the F3 reserved class, compliant); zero teaching/decision-input checklists in the
+Part. F4: worked tier = the §9.11 Elena + Выщербленный examples (chipped ИЛЛЮСТРАЦИЯ — deployed);
+inline tier = the §9.7 scenario table + the woven AP/demo fragments. F5: verified per section
+(Сценарий → table/RULE → «Ссылка» — F5-approximate; the §9.4 fold tightened the Part's weakest
+Reference branch). F6: **two new `<details class="interactive">`** (the ::06/::07 wrap — one
+block; 16 → 17 master usages) + the pre-existing ::05 documented.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P9-1 | — (evidence) | matrix Part 9 tables: 8 columns, no presentation axis; notes carrying pre-execution defect states (the R18 vague-ref claim — repaired iter 128; the §9.11 `<details>` dupe — deleted iter 125; the §9.4 fold — open) | `presentation` column seeded (43 rows: 38 `open` + 3 `collapsible` + 1 `canonical-link` + 1 `—`); matrix §1.2 scope note extended to Parts 1–9; the Part 9 verdict appended with the iter-156 slice note (the §9.11-duplicate exception marked executed iter 125; the §9.4 fold marked executed; R14 = the one open exception); **three stale row notes refreshed** — `p9_symptom_table::03` (the R18 `§3.X` placeholder refs normalized iter 128, ed-8/r18-phase-a `bb4ed292` — pickaxe-verified; the note described the pre-repair state), `p9_pre_deploy::03` (the dupes-1 execution + the L271 re-point repair — both in place at HEAD; the note described the pre-execution state), `p9_additional_problems::02` (the fold executed — see P9-2) + four slice notes appended (the ::03/::05/::06/::07 dispositions) | EXECUTED **— iter 156** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…155 stale-note-refresh precedent |
+| P9-2 | `p9_additional_problems::02` (canon) + `p9_symptom_table::03` rows #4/#5 (canon) | §9.4 carried the #4/#5 symptom→fix table («Повторы фраз» → RepPen range + PP=0.0; «Персонаж теряет характер» → 2–3 Examples) — matrix DUPLICATE/MOVE since iter 126, the standing fold candidate the STATUS Next-step note pinned to this slice (the P4-2 precedent: fold candidates ride the v2 build slices); §9.5's two carrying rows unlabeled | **the §9.4↔§9.5 fold EXECUTED** (canon `part_09.md`): the §9.4 table folded into §9.5 — the carrying rows relabeled «**#4:** Повторяющиеся фразы» / «**#5:** Модель игнорирует характер» (the #4/#5 numbering kept as row labels — the Part 1 Top-3→#4/#5 continuity); §9.4 keeps the canonical-link form (intro sentence 2 re-pointed: «Проблемы #4 («Повторы фраз») и #5 («Персонаж теряет характер») — строки #4/#5 в таблице симптомов» + the «Ссылка» re-pointed, «также» dropped); **the sampling-audit check 7 re-pointed in step** (`scripts/audit_sampling_parity.py` — the §9.4 S-d re-frame substring guards became the fold-form guards + new §9.5 row-label guards, canon + master; the DEC-22 invariant preserved: every «1.0–1.05» line still requires a 12B qualifier — §9.4 now carries none; the iter-148/155 in-step probe-adjustment precedent, disclosed). 5-point check: capability — the #4/#5 symptom→fix lookup + the numbering continuity preserved (§9.5 rows #4/#5 + the §9.4 pointer; the fix text dispersed to its canonical owners: #4 → AP-5/§7A.6 + PP=0 at §9.3/§9.6/AP-7; #5 → §9.6 tree («Добавить 2–3 Examples») + §3.1/§3.3); coverage — every fix instruction reachable within one hop from the symptom row; retrieval — the `#p9_additional_problems` anchor + TOC entry keep the pointer (part_01 L362 inbound link verified live); context — §9.5's checks/refs byte-unchanged (labels only), §9.4 still opens on the Top-3 sentence; dependency — no sync probe pins §9.4/§9.5 (the part_09 probe list verified: P0-11/P0-12/P2-17a–g/P3-4c/P2-3-keep-09); the diagnostics-parity no-competing-sources check unaffected (the E13 3 symptoms ≠ these rows); the §9.6 record byte-stable (sha `2b33049e5fdf` pre = post) | MOVED **— executed iter 156** | matrix `p9_additional_problems::02` (MOVE/DUPLICATE — the ed-matrix's deliberate classification); DEC-24 Q2 (canonical-link); the P4-2 R21-fold precedent; DEC-15 Editorial Policy (compress redundant presentation, never unique capability) |
+| P9-3 | `p9_quality_scale::05` + `p9_basic_checklist::04` + `p9_additional_problems::03` + `p9_test_scenarios::04` + `p9_12b_issues::04` (master layer) | five canon «Ссылка» rows with no master mirror (the v9-era slimming gaps; drift actionable entries): §9.1::05 (the pre-deploy validation pointer), §9.3::04 (the расширенная-версия pointer), §9.4::03 (folded form — P9-2), §9.7::04 (12B set + metrics + the Walter testing example — master carried only a mangled v9-era fragment «Расширенный 12B-специфика → текущая часть»), §9.10::04 (4K-Fallback + CoT Tiers) | five mirror completions in `src/master/part_09.html` (the canon text rendered with refs as anchors — the part_04…08 «Ссылка» mirror forms; the §9.7 mangled fragment replaced by the canon row verbatim); new anchors navigating: `#p9_pre_deploy` ×2, `#p1_top3_problems` ×2, `#p9_symptom_table` ×2, `#p9_12b_issues`, `#p9_test_requirements`, `#p10_walter`, `#p7a_4k_fallback`, `#p6_cot_tiers`; 5-point check per mirror: capability — the canon-declared navigation now renders (nothing moved, canon was already the authority); coverage — every restored row lives at its canon-declared location; retrieval — ten new live anchors; context — the surrounding blocks byte-unchanged; dependency — no probe pins these lines (grep-verified); the drift effect: 148 → 143 (five canon-side matches gained — verified by the JSON pre/post diff) | MOVED **— executed iter 156** | fence #10 (canon = source of truth, master mirrors); DEC-16 «Ссылка» label law; the P5-3/P6-3/P7A-3/P7B-3/P8-3 mirror-completion precedents |
+| P9-4 | `p9_pre_deploy::06` + `::07` (master layer) | the Выщербленный worked example rendered fully open (h4 «Пример: Pre-Deploy для Выщебленного (полная карточка)» + ИЛЛЮСТРАЦИЯ chip + the structural-check h5/em/table + the full-check h5/table — ~300 words of EXPERT-card demo tables in a BASIC section); the h4 carried the typo «Выщебленного» vs canon «Выщербленного» | F6-wrapped (master layer): one `<details class="interactive">` with summary «📝 Пример: Pre-Deploy для Выщербленного (полная карточка)» (the typo repaired — fence #10); the chip + h5s + tables inside; the «Итог» line + the bridge stay open (the section synthesis); the canon blocks unchanged (the F2 disposition records the presentation — the Part 7B precedent); 5-point check: capability — the worked example fully preserved on demand (disclosure, not deletion; the registered Collapsible criteria honestly met: >200 words, supplementary, optional advanced); coverage — nothing removed; retrieval — the mandatory quick check + the Elena demo + the 14-item list stay open above (the Debug-mode default visibility); context — the section closes on «Итог» + the bridge unchanged; dependency — the P0-12 probe substring (the structural-check h5) preserved inside the details (grep-verified), the drift tool un-affected (summaries untracked) | MOVED **— executed iter 156** | DEC-24 Q4 (F5/F6); `docs/components.md` #5 Collapsible criteria; the Part 1 slice's standing note («long worked scenarios = collapsible candidates at Parts 9/10»); fence #10 (the typo repair) |
+| P9-5 | — (observed) | master-only enrichments + variances, never canonized/resolved: (a) **KI#84** (see P9-6); (b) the canon §9.7::04 Walter-line framing «(C=85, A=25, E=30 — выраженные экстремумы)» — E=30 is a cautious-zone boundary per §10.2's own list («Экстремумы: Высокая C (85), Низкая A (25); Cautious zones: E=30, N=60») + §5.1 RULE (extreme = строго <30) — wording-level imprecision, R11-adjacent; (c) the canon §9.11::06 EN blockquote («This is structural check…») vs the master RU em-paraphrase — the DEC-16 canon catch-up pending (the SP-3 family); (d) master §9.3 EN leftovers «☐ Person defined?» / «☐ Narrative tense?» vs canon «Персона определена?» / «Нарративное время?» (DEC-16 master-side); (e) canon `part_10.md` L397 «Выщебленного» typo (cross-Part — rides the Part 10 slice); (f) formatting churn — Greeting «50-100» dash, quote-style variances («speech» vs «speech»), canon §9.5 «CoT-якорь?» vs master «CoT-якоря?»; (g) the 10 comment-noise no_master_match drift entries (KI#79-adjacent tool boundary, pre-existing, exit 0) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge or non-rendering metadata; the disposals ride the canonical-audit stage per the P4-5…P8-4 chain) | RECORDED **— deferred (iter 156)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy; rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P9-6 | — (KI) | the master §9.6 P3-4c Walter cross-ref line («Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — осторожная зона, без экстремальных полюсов кроме O=72) — Уолтер Уайт, §10.2») carries **Елена's OCEAN values attributed to Walter** — §10.2's actual profile: O:65 C:85 E:30 A:25 N:60 (экстремумы C=85/A=25); born wrong iter 38 (pickaxe: Walter carried C=85/A=25 at the P3-4 fix commit); never flagged by any prior iteration or matrix row; the slice's §9.7::04 mirror (canon verbatim) makes the latent contradiction reader-visible | **KI#84 OPENED** (STATUS.md) — not fixed in-slice: the line is pinned byte-identical by TWO tool anchors (the sync probe P3-4c + the diagnostics-parity `WALTER_ANCHOR`) + the §9.6 byte-stability lock (the slice's explicit duty) — the fix requires moving both anchors together = an owner call / the canonical-audit stage | RECORDED **— deferred (iter 156)** | AGENTS.md Bug→doc→fix (record first; fix only if in scope); the §9.6 lock (mig-3/DEC-20); scope discipline |
+| P9-7 | — (state) | STATUS iter-155 / PLAN row v2-build-part-9 open / no map §5.17 | map §5.17 + STATUS iter-156 (Next step re-pinned to the Part 10 slice; the v2-architecture invariant extended to Parts 1–9 / maps §5.8–§5.17; KI#84 opened; iter-156 KI-note) + PLAN v2-build-part-10 + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–9) | EXECUTED **— iter 156** | iter-147…155 state-package pattern |
+
+Accounting: 1 presentation-column seeding (43 rows: 38 `open` + 3 `collapsible` + 1
+`canonical-link` + 1 `—`) + 1 canon fold (P9-2 — the only canon content edit: §9.4's table
+removed + §9.5's two row labels; the §9.6 record byte-stable — sha `2b33049e5fdf` pre = post;
+every other canon block byte-unchanged) + 1 in-step sampling-audit re-point (P9-2, disclosed —
+check 7's §9.4 substring guards → fold-form guards + new §9.5 row-label guards) + 5 master
+«Ссылка» mirror completions (P9-3; the §9.7 mangled fragment replaced) + 1 F6 wrap with the typo
+repair (P9-4; `<details>` count 16 → 17) + 1 observation package deferred (P9-5) + 1 KI opened
+(P9-6) + 1 state package (P9-7). Byte-unchanged: canon `part_09.md` outside §9.4/§9.5 (the §9.6
+cluster record + the E13/E14 markers verified); master outside the seven edit sites (the E13/E14
+embeds, the §9.6 tree + Walter line, the §9.3/§9.5/§9.6/§9.7/§9.8/§9.9/§9.10/§9.11 tables);
+matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope): the P9-5
+observation package (canonical-audit stage / ed-* batch); KI#84 (owner call / canonical audit);
+KI#77-e + KI#79 (open, untouched); KI#70 rides the appendix/Reference slice per DEC-24 Q7; the
+R14 router aggregate (owner-gated ed-policy). Root fallback `parts/part_09.html` regenerated with
+the slice (+ root `index.html` timestamp). Drift actionable **148 → 143** (five canon-side
+«Ссылка» matches gained — verified by the JSON pre/post diff; zero new rows). Next Part:
+**Part 10 (Examples)** (guide order; its own slice reuses this shape — the Learn-mode worked-
+examples Part; the appendix/Reference slice after Part 10 carries the KI#70 WIRE implementation
+per DEC-24 Q7).
+
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -1125,6 +1193,12 @@ implementation per DEC-24 Q7).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 156 — Part 9 v2 build slice (map §5.17 P9-1..P9-7):** F2 presentation column 43 rows
+  (38 `open` + 3 `collapsible` — the §9.11 worked-example F6 wraps — + 1 `canonical-link` — the
+  §9.4↔§9.5 fold EXECUTED, canon + master + the sampling-audit check-7 re-point in step — + 1 `—`);
+  the §9.6 diagnostics cluster owner byte-stable (sha-verified, `audit_diagnostics_parity.py`
+  PASS); five «Ссылка» mirror completions; KI#84 opened (the master §9.6 Walter line value
+  defect — deferred); drift 148→143.
 - **iter 155 (Part 8 v2 build slice, BASE_COMMIT `9891433f`):** the pinned STATUS Next-step
   row 1 (PLAN row v2-build-part-8, **not owner-gated** — the DEC-24 ratification gate cleared)
   executed per map **§5.16 (P8-1..P8-5)** on the spec §7 shape (ninth application, reusing the

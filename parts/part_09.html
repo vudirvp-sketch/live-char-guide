@@ -289,6 +289,8 @@
 <p><strong>РЕКОМЕНДАЦИЯ: Цель — «Хороший» уровень.</strong> «Критический» = переписать. «Слабый» = точечные доработки по Decision Tree. «Отличный» = полировка для продакшна.</p>
 </div>
 
+<p><strong>Ссылка:</strong> Полная пред-деплой валидация (быстрая проверка — 5 пунктов + полная проверка — 14 пунктов) — см. <a href="#p9_pre_deploy">§9.11</a>.</p>
+
 </section>
 
 <section  data-section="p9_one_change_rule" id="p9_one_change_rule">
@@ -327,25 +329,17 @@
 </table>
 </div>
 
+<p><strong>Ссылка:</strong> Расширенная версия — пред-деплой валидация (быстрая проверка — 5 пунктов + полная проверка — 14 пунктов) — см. <a href="#p9_pre_deploy">§9.11</a>.</p>
+
 </section>
 
 <section  data-section="p9_additional_problems" id="p9_additional_problems" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <h3>Дополнительные проблемы</h3>
 
-<p>Три главные ошибки (годмодинг, голос в Description, отсутствующая цена) разобраны в <a href="#p1_top3_problems">Part 1: Top-3 Errors</a>. Ниже — проблемы #4 и #5.</p>
+<p>Три главные ошибки (годмодинг, голос в Description, отсутствующая цена) разобраны в <a href="#p1_top3_problems">Part 1: Top-3 Errors</a>. Проблемы #4 («Повторы фраз») и #5 («Персонаж теряет характер») — строки #4/#5 в таблице симптомов (те же пары «симптом → проверка → Fix»).</p>
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>#</th><th>Проблема</th><th>Решение</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>Установите RepPen в диапазоне своей модели (для 12B — 1.0–1.05; <a href="#p7a_sampling_params">§7A.6</a>); проверьте PP = 0.0</td></tr>
-<tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Добавьте 2–3 Examples с уникальным голосом</td></tr>
-</tbody>
-</table>
-</div>
+<p><strong>Ссылка:</strong> Top-3 Errors — <a href="#p1_top3_problems">Part 1: Top-3 Problems</a>. Симптомы #4 и #5 — <a href="#p9_symptom_table">§9.5: Таблица симптомов</a>.</p>
 
 </section>
 
@@ -364,12 +358,12 @@
 <tr><th>Симптом</th><th>Проверка</th><th>Ссылка</th></tr>
 </thead>
 <tbody>
-<tr><td>Модель игнорирует характер</td><td>Examples не показывают голос?</td><td>Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></td></tr>
+<tr><td>#5: Модель игнорирует характер</td><td>Examples не показывают голос?</td><td>Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></td></tr>
 <tr><td>Персонаж слишком мягкий</td><td>Нет якорей FLAW-linked?</td><td>Исправление → <a href="#p4_spine_mapping">Part 4: SPINE→якоря</a></td></tr>
 <tr><td>Голос «утекает» в длинных репликах</td><td>Менее 3 Examples?</td><td>Fix → <a href="#p3_examples_rules">Part 3: Правила Examples</a></td></tr>
 <tr><td>Персонаж не показывает уязвимость</td><td>Нет Цены у Anchors?</td><td>Исправление → <a href="#p2_anchor_rules">Part 2: формат якоря</a></td></tr>
 <tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен?</td><td>Fix → <a href="#p4_spine_check">Part 4: SPINE Check</a></td></tr>
-<tr><td>Повторяющиеся фразы</td><td>RepPen > 1.10?</td><td>Fix → <a href="#p8_ap5_reppen_high">Part 8: AP-5</a></td></tr>
+<tr><td>#4: Повторяющиеся фразы</td><td>RepPen > 1.10?</td><td>Fix → <a href="#p8_ap5_reppen_high">Part 8: AP-5</a></td></tr>
 <tr><td>Персонаж слишком много говорит</td><td>Examples длиннее 120 токенов?</td><td>Укоротите Examples (≤120 токенов)</td></tr>
 <tr><td>Модель ломает формат</td><td>Нет Format Lock?</td><td>Добавить Format Lock в SP</td></tr>
 <tr><td>Персонаж забывает контекст</td><td>Карточка + контекст > контекстное окно?</td><td>Fix → <a href="#p8_ap14_context_violation">Part 8: AP-14</a></td></tr>
@@ -453,7 +447,7 @@
 </table>
 </div>
 
-<a href="#p9_12b_issues">Расширенный 12B-специфика → текущая часть</a>
+<p><strong>Ссылка:</strong> Расширенный набор для 12B-моделей — см. <a href="#p9_12b_issues">§9.10</a>. Метрики успеха — см. <a href="#p9_test_requirements">§9.9</a>. Пример тестирования карточки с OCEAN-полюсами — Уолтер Уайт (C=85, A=25, E=30 — выраженные экстремумы), см. <a href="#p10_walter">§10.2</a>.</p>
 
 </section>
 
@@ -526,6 +520,8 @@
 </table>
 </div>
 
+<p><strong>Ссылка:</strong> 4K-Fallback — <a href="#p7a_4k_fallback">§7A.11</a>. CoT Tiers — <a href="#p6_cot_tiers">§6.3</a>.</p>
+
 </section>
 
 <section  data-section="p9_pre_deploy" id="p9_pre_deploy">
@@ -579,7 +575,8 @@
 </details>
 
 <!-- Demonstrates: DIAGNOSTICS, SPINE, GHOST LAYERS -->
-<h4>Пример: Pre-Deploy для Выщебленного (полная карточка)</h4>
+<details class="interactive">
+<summary>📝 Пример: Pre-Deploy для Выщербленного (полная карточка)</summary>
 
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
@@ -612,6 +609,8 @@
 <tr><td>☐ Immersion Boundary</td><td>✓ Присутствует (для 32B+ и API)</td></tr>
 </tbody>
 </table>
+
+</details>
 
 <p><strong>Итог:</strong> Выщербленный проходит Pre-Deploy полностью.</p>
 

@@ -418,7 +418,7 @@ def main():
     notes.append("E12 embed: AP-5 fix card re-framed (model-qualified defer + "
                  "AP-5 boundary), re-point comment present")
 
-    # ---------- 7. Hint re-frames (§9.3 / §9.4 / §9.10, canon + master) ----------
+    # ---------- 7. Hint re-frames (§9.3 / §9.4 / §9.5 / §9.10, canon + master) ----------
     c93 = md_section(canon9, r"^## 9\.3 ", r"^## 9\.4 ")
     if c93 is None:
         err("canon §9.3 section not found")
@@ -431,10 +431,25 @@ def main():
     if c94 is None:
         err("canon §9.4 section not found")
     else:
-        if "в диапазоне своей модели" not in c94 or "для 12B — 1.0–1.05" not in c94:
-            err("canon §9.4: problem #4 not re-framed (model-range defer)")
-        if "Установите RepPen 1.0–1.05;" in c94:
-            err("canon §9.4: stale unqualified fix remains")
+        # iter 156 (v2 Part 9 build slice, matrix p9_additional_problems::02 →
+        # map §5.17 P9-2): the #4/#5 table folded into §9.5 (rows #4/#5) — the
+        # S-d re-framed #4 fix text moved out of §9.4 with the fold; the
+        # model-range defer for the repeats symptom rides the §9.5 #4 row's
+        # AP-5 target + §9.3 (above) + §9.10 (below). Fold-form guards:
+        if "строки #4/#5" not in c94:
+            err("canon §9.4: #4/#5 fold pointer missing (folded iter 156)")
+        if "Персонаж теряет характер" not in c94:
+            err("canon §9.4: #5 symptom name dropped from the fold pointer")
+        if "Установите RepPen 1.0–1.05;" in c94 or "для 12B — 1.0–1.05" in c94:
+            err("canon §9.4: pre-fold #4 fix text remains (folded iter 156)")
+    c95 = md_section(canon9, r"^## 9\.5 ", r"^## 9\.6 ")
+    if c95 is None:
+        err("canon §9.5 section not found")
+    else:
+        if "| #4: Повторяющиеся фразы |" not in c95:
+            err("canon §9.5: #4 row label missing (iter 156 fold)")
+        if "| #5: Модель игнорирует характер |" not in c95:
+            err("canon §9.5: #5 row label missing (iter 156 fold)")
     c910 = md_section(canon9, r"^## 9\.10 ", r"^## 9\.11 ")
     if c910 is None:
         err("canon §9.10 section not found")
@@ -455,13 +470,19 @@ def main():
     if m93 and "(1.0–1.05 для 12B" not in m93:
         err("master §9.3: RepPen check not 12B-qualified")
     m94 = html_section(master9, "p9_additional_problems")
-    if m94 and "в диапазоне своей модели" not in m94:
-        err("master §9.4: problem #4 mirror not re-framed")
+    if m94 and "строки #4/#5" not in m94:
+        err("master §9.4: #4/#5 fold mirror missing (folded iter 156)")
+    m95 = html_section(master9, "p9_symptom_table")
+    if m95 and ("#4: Повторяющиеся фразы" not in m95
+                or "#5: Модель игнорирует характер" not in m95):
+        err("master §9.5: #4/#5 row labels missing (iter 156 fold)")
     m910 = html_section(master9, "p9_12b_issues")
     if m910 and "(12B-диапазон — <a href=\"#p7a_sampling_params\">§7A.6</a>)" not in m910:
         err("master §9.10: «Повторы фраз» row mirror not qualified")
-    notes.append("hint re-frames: §9.3 / §9.4 / §9.10 model-qualified (canon + "
-                 "master); every Part 9 «1.0–1.05» line carries a 12B qualifier")
+    notes.append("hint re-frames: §9.3 / §9.10 model-qualified (canon + master) "
+                 "+ the §9.4→§9.5 #4/#5 fold (iter 156, map §5.17 P9-2 — the "
+                 "#4 model-range defer rides the §9.5 #4 row's AP-5 chain); "
+                 "every Part 9 «1.0–1.05» line carries a 12B qualifier")
 
     # ---------- 8. Appendix B OBSERVATION (DEC-20 first application) ----------
     for anchor in OBSERVATION_ANCHORS:
