@@ -6,6 +6,10 @@
 
 ## [9.2.6] — 2026-08-15
 
+### iter 141 — voice-cluster-evidence: Registry B row 7 owner-gate package prepared (doc-only) — one-line
+
+- iter 141 — voice-cluster-evidence: verified evidence + recommended calls V-a…V-e for the Voice influence % cluster disposition (`docs/research/voice_cluster_iter141.md`; value parity green at every layer — widget 6/6 == canon; unique prose = 0 canon occurrences; AN-12B framing tension surfaced — Option A recommended); nothing DECIDED; KI#82 opened (content_map §3.2 stale Notes — fix rides the build slice). Doc-only. Detail: git (iter-141 commit).
+
 ### iter 140 — hero-disposal: §6.4 hero disposal slice executed — `visual-system/hero/` REMOVED_WITH_REASON + KI#81 dead CSS closed (DEC-19); all four map-§6 gates now executed
 
 - **Scope (STATUS Next-step row 1, pinned iter 139):** the §6.4 hero disposal slice — the last map-§6 gate (DEC-19 recorded iter 138; ready mechanical candidate, gates nothing). PLAN row hero-disposal: `visual-system/hero/` git-rm + KI#81 `.vs-hero-placeholder` CSS cleanup + root fallback rebuild + map Registry A hero row → REMOVED_WITH_REASON executed + KI#81 CLOSED. Own iteration — production CSS touched → full battery + rebuild.

@@ -271,6 +271,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | `docs/research/migration_foundation_iter131.md` | V2 migration foundation (iter 131, BASE `987e4f31`): v1 baseline, information-layer map L1–L11, visual-layer embedded-knowledge analysis (532 embed strings, 63% without canonical textual home; prototype↔embed identity 93%; drift evidence), competing-knowledge clusters, first-bounded-area proposal (glossary). Read for any migration-track work. |
 | `docs/research/migration_map_v2.md` | **Living registry (v1 → v2 migration map, iter 131+):** status vocabulary + visual dispositions, 18 VS-element dispositions (Registry A), 7 concept clusters (Registry B), block-level mechanism via `editorial_matrix.md` back-pointers (Registry C), owner decision points. Extended every migration iteration. |
 | `docs/research/owner_gates_iter137.md` | Owner-gate recommendation package (iter 137, doc-only): verified evidence + recommended calls for the open map §6 gates (§6.1/§6.2/§6.4/§6.5) + call order — agent-prepared input; every gate stays owner-called (nothing DECIDED). |
+| `docs/research/voice_cluster_iter141.md` | Voice influence % cluster owner-gate package (iter 141, doc-only): verified evidence inventory (all live locations of the §3.2 values/prose) + recommended calls V-a…V-e + build-slice sketch (`audit_voice_parity.py` checklist) — agent-prepared input; the disposition stays owner-called (map §6 row 6; nothing DECIDED). |
 
 ---
 
