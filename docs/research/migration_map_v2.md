@@ -1167,6 +1167,69 @@ Appendix D (character_map) = canon-only, rides its own slice) → parity audit �
 P4-5 + P5-5 + P6-4 + P7A-4 + P7B-4 + P8-4 + P9-5 + **P10-4** master-only enrichment observations
 ride this stage) → reader-path audit → switch.
 
+### 5.19 Appendix A v2 build slice + the KI#70 WIRE (seeded + executed iter 158 — v2 build phase, first appendix/Reference slice)
+
+Scope: **Appendix A — MBTI Reference** (`docs/canon/appendix_mbti.md` + `src/master/appendix_mbti.html`,
+1 section / 6 matrix rows; DEC-24 Q6 guide order — first appendix; the pinned STATUS Next-step row 1,
+**not owner-gated** — Q7 decided WIRE, the appendix slices are the pinned track continuation)
+**+ the KI#70 WIRE implementation (DEC-24 Q7)** — the ki-70 row's WIRE scope riding this slice per
+the recorded PLAN recommendation ("append `manifest.appendices` to the load list after
+`manifest.parts` — they inherit KI#69 retry/placeholder machinery for free"). Mechanism: the
+ratified spec §7 slice shape (evidence → canon restructure → master mirror → full battery) — twelfth
+application, reusing the §5.8–§5.18 pattern. Primary reader mode: **Reference** (spec §3: compact
+term/rule entries with canonical-home links; the appendices = the Reference-mode backbone whose
+runtime presence is the Q7 question the WIRE answers). Editorial Policy 5-point check applied per
+edit (documented per row below). Acceptance gate: the full battery **+ the ki-70 WIRE acceptance**
+(the iter-119 headless-suite extension: appendix sections 93→96, the `#appendix_mbti` link-target
+check, the `mbti-composer` page-error/init check). **No new cluster parity gate** (Appendix A hosts
+no cluster owner; the seven cluster owners sit in the Parts — verified §5.18 P10-1's list). The
+KI#77-e/R27 budget-framing family stays owner-gated (ed-5) — the slice documents, does not re-decide.
+
+**F2 presentation map (spec §4.1 mechanism, twelfth application):** the appendix_mbti matrix table
+now carries the `presentation` column (**6 rows: 6 `open`** — count script-verified); matrix §1.2
+scope note extended to Parts 1–10 + Appendix A; the §14 header note de-staled (the appendices render
+at runtime since the WIRE); two stale row notes refreshed (::04 — the pre-iter-123 «EN label „NOTE"»
+state + the pre-iter-127 «`§7A.X` vague» state; ::05 — the KI#70 dependency resolved) + the
+appendices verdict refreshed (the pre-iter-127 «18 vague glossary refs» line corrected — the per-row
+glossary notes stay stale for that appendix's own slice; the «never-loaded» dependency resolved).
+Zero `collapsible` / `canonical-link` / `reference-relocate` / `delete-candidate` / `—` — the
+Reference-layer verdict holds (compact lookup payload: intro → 2 reference tables → 1-line
+disambiguation → the interactive tool → the РЕКОМЕНДАЦИЯ decision statement). F5: verified
+F5-approximate — the Reference-layer shape is the target form (Concept → reference payload →
+decision); zero restructure (the Parts 5/6/7B/8 zero-restructure precedent). F6: zero wraps. F3/F4:
+no checklists / no example tiering in the appendix.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P-app-1 | — (evidence) | matrix appendix_mbti table: 8 columns, no presentation axis; the §14 header note asserting the appendices are runtime-blocked by KI#70; ::04's note carrying the pre-iter-123 «EN label „NOTE"» + pre-iter-127 «`§7A.X` vague» states; ::05's note carrying the open KI#70 dependency; the verdict's «18 vague glossary refs» + «never-loaded containers» claims (both stale) | `presentation` column seeded (6 rows: 6 `open` — count script-verified); matrix §1.2 scope note extended to Parts 1–10 + Appendix A; the §14 header note refreshed (runtime render since iter 158, the WIRE pointer); ::04 + ::05 stale notes refreshed; the appendices verdict refreshed (stale claims corrected with pickaxe disclosures — the R18 repair `8a365553`, the WIRE) | EXECUTED **— iter 158** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…157 stale-note-refresh precedent |
+| P-app-2 | — (canon) | `appendix_mbti.md` 47 lines: intro → 4-оси table → Keirsey table → Примечание → container note → РЕКОМЕНДАЦИЯ | **verified F5-approximate — zero restructure, canon byte-stable** (the Reference-layer shape is the target form; the Parts 5/6/7B/8 zero-restructure precedent). Section ID `appendix_mbti` preserved (fences #4/#5 clean). The canon ref forms verified full (`[ref: part_07a.md §7A.1 — System Prompt]`) | VERIFIED **— byte-stable iter 158** | spec §3 Reference row; Editorial Policy (nothing to compress: zero redundant presentation) |
+| P-app-3 | `appendix_mbti::03/::04/::06` (master) | the master's v9-Phase-6-slimmed mirror gaps: (a) the S·P note carried only sentence 1 in em-parenthetical form — the canon's sentence 2 (the `S·P`-dot convention) + the `§7A.1` ref dropped; (b) the table header «Цвет» vs canon «Цвет (в виджете)»; (c) the РЕКОМЕНДАЦИЯ body «полюса → якоря» vs canon «полюса → Anchors (поведенческие якоря)» — the gloss dropped; (d) the master-only stale v9-era transition «Следующие секции: Enneagram Wings, OCEAN×Enneagram Matrix» (the v9 Part-5-move leftover pointing back into Part 5 from a post-Part-10 appendix) | **three mirror completions executed** (fence #10 canon wins, the iter-155 v9-slimming-gap precedent): (a) the S·P note restored to the canon form («Примечание:» label + sentence 2 + the `#p7a_system_prompt` link); (b) the header restored to «Цвет (в виджете)»; (c) the «(поведенческие якоря)» gloss restored (the guide's own «полюса → Anchors» phrase-form, part_05 §5.5 L330-consistent). **The transition disposed REMOVED_WITH_REASON** — 5-point check: capability — a stale forward pointer whose targets (§5.6/§5.7) sit 5 Parts back from the appendix's real position, zero navigation capability lost; coverage — §5.6/§5.7 stay reachable via the sidebar TOC + Part-5 context; retrieval — no reader at the guide's tail needs a pointer into mid-Part-5; context — the appendix closes on the РЕКОМЕНДАЦИЯ + resume; dependency — grep-verified zero tool probes / zero back-link registry entries (the iter-148 §2.3 disposal precedent) | MOVED **— executed iter 158** | fence #10; Editorial Policy 5-point check; the iter-148 §2.3 + iter-155 mirror-completion precedents |
+| P-app-4 | — (observed) | master-only / metadata variances, never canonized: (a) the `part-resume` block «Что вы теперь умеете» (v7-era closing block; all three appendix masters carry the same family — A/B/C co-travelers; benign Learn-mode framing in a Reference-layer appendix); (b) the canon container-note drift entry (canon metadata describing the embedded interactive element — the master renders the container itself; informational); (c) the canon front-matter staleness (`canonical_for: —` etc. — the repo-wide iter-152 family); (d) the manifest `appendices` array order = alphabetical (a build-unified.mjs `.sort()` artifact) — NOT the guide lettering; (e) the appendix_glossary + character_map matrix tables' per-row «`§X.X` vague» notes remain stale (repaired iter 127) — deferred to their own slices; (f) the part_05 §5.5 row «MBTI (Appendix A) — supplementary» (text mention, no link) vs the L641 linked form — link-vs-text variance family | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (the B/C/D slices own their families; the manifest-order refinement = a supersedeable future DEC if the owner prefers the manifest to carry guide order; the canonical-audit stage owns the cross-family reconciliations) | RECORDED **— deferred (iter 158)** | AGENTS.md scope discipline; the P4-5…P10-4 observation-package chain |
+| P-app-5 | — (KI#70 — the DEC-24 Q7 WIRE) | **KI#70** (opened iter 119): `parts/manifest.json`'s `appendices` array (3 entries) never read by `src/shell/lazy-loader.js` (it iterated only `manifest.parts`) — Appendix A (MBTI Reference + the `mbti-composer` container), B (Model Capability Table), C (Glossary) never rendered; the auto-injected TOC's `#appendix_*` links (built `part_01.html:414+`) dead; the `mbti-composer` init path never exercised | **the WIRE executed** in `src/shell/lazy-loader.js` (`loadContent()`): the load list = `(manifest.parts \|\| []).concat(appendices)` where `appendices` = `manifest.appendices` re-ordered by `APPENDIX_GUIDE_ORDER` (guide lettering A→B→C — the manifest array is an alphabetical build artifact; unknown files sort last, stable) — the appendices inherit the KI#69 retry/placeholder machinery for free (same `fetchPartHtml` pipeline + `partErrorHtml` placeholders + surgical retry). **TOC-grouping sub-decision** (the ki-70 row's recorded open point): `generateTOC()` gains an «Приложения» group after the Part groups — the same convention the auto-injected part-01 TOC uses; entry text = each appendix section's own h2; DOM order = load order (A→B→C); Part-number active highlighting intentionally does not apply (its regex is Part-scoped by design). **Runtime verification executed** (the iter-119 headless-suite extension, sandbox): pre-WIRE probe — 93 sections, zero appendix sections, the TOC link present-but-dead, no `#mbti-embed`; post-WIRE probe — **96 sections** (93→96), appendix order `appendix_mbti → appendix_model_table → appendix_glossary` (A→B→C verified), the `#appendix_mbti` TOC link target rendered **and anchor navigation scrolls into view** (scrollY 142112 → top 80), the `#mbti-embed` container present, **the mbti-composer widget built (initialized) with zero page errors / zero console errors**; the sidebar TOC «Приложения» group carries the 3 entries in guide order. **KI#70 CLOSED** | MOVED **— executed iter 158 (KI#70 CLOSED)** | DEC-24 Q7 (WIRE); the PLAN ki-70 row's recorded recommendation + WIRE acceptance; the iter-119 headless-suite pattern |
+| P-app-6 | — (state) | STATUS iter-157 / PLAN row v2-build-appendix-a open / no map §5.19 | map §5.19 + STATUS iter-158 (Current State; the v2-architecture invariant + Next-step preamble extended to the appendix-slice stage; KI#70 → CLOSED iter-158; iter-158 KI-note; Next step re-pinned to the Appendix B slice) + PLAN v2-build-appendix-a → COMPLETE + the appendix-b row + iter-158 history note + worklog + CHANGELOG + NAV §7 de-stale (the appendix slices) | EXECUTED **— iter 158** | iter-147…157 state-package pattern |
+
+Accounting: 1 presentation-column seeding (6 rows: 6 `open`, count script-verified) + 0 canon edits
+(**canon `appendix_mbti.md` byte-stable — git-diff-verified**) + 3 master mirror completions
+(P-app-3: the S·P note, the table header, the gloss) + 1 master disposal (P-app-3: the stale v9-era
+transition, REMOVED_WITH_REASON) + **1 infrastructure WIRE** (P-app-5: the lazy-loader load list +
+the «Приложения» TOC group + the guide-order map; `src/shell/` touched under the DEC-24 Q7
+authorization — NAV §1's infrastructure-request path satisfied by the recorded decision) + 1
+observation package deferred (P-app-4) + 1 state package (P-app-6). Byte-unchanged: canon
+`appendix_mbti.md` entirely; master `appendix_mbti.html` outside the four P-app-3 edits; all other
+master/canon files; matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of
+scope): the P-app-4 observation package (the B/C/D slices + the canonical-audit stage); KI#77-e
+(open, untouched); KI#79 (open, untouched); the R02/R01 glossary compression candidates (ed-2
+family — the Appendix C slice's scope, riding the KI#70-wire dependency note recorded in the matrix
+§14 ::05-era notes). Root fallbacks regenerated with the slice (`assets/lazy-loader.js` + root
+`index.html` timestamp; hash `2ab607d6` unchanged — `src/shell/index.html` untouched). Drift: see
+the iter-158 worklog for the pre/post capture (the S·P-note mirror completion is expected to clear
+the appendix_mbti plain-text drift entry — attribution there). Next: **the Appendix B (Model
+Capability Table) v2 build slice** (the OBSERVATION-strength percentages, DEC-20; PLAN row
+v2-build-appendix-b) → Appendix C (the v2 Reference-layer representation, DEC-17c — the R01/R02
+compression candidates ride it) → Appendix D (character_map, canon-only; the KI#77-b/c/d + R27
+notes) → parity audit → canonical audit (the P4-5…P10-4 + P-app-4 master-only enrichment
+observations ride this stage) → reader-path audit → switch.
+
 
 ## 6. Owner decision points (blocking, in recommended order)
 
@@ -1265,6 +1328,19 @@ ride this stage) → reader-path audit → switch.
 
 ## 7. Iteration log (registry changes)
 
+- **iter 158 — Appendix A v2 build slice + the KI#70 WIRE (map §5.19 P-app-1..P-app-6):** F2
+  presentation column 6 rows (**all `open`** — the Reference-layer verdict holds; count
+  script-verified); matrix §1.2 extended to Parts 1–10 + Appendix A; the §14 header + two stale
+  row notes + the appendices verdict refreshed (the pre-iter-127 vague-refs line corrected; the
+  KI#70 never-loaded dependency resolved); canon — **zero edits** (`appendix_mbti.md` byte-stable —
+  F5-approximate verified); master — **three mirror completions** (the S·P note sentence 2 + the
+  `#p7a_system_prompt` link; the «Цвет (в виджете)» header; the «(поведенческие якоря)» gloss —
+  fence #10) + **the stale v9-era transition disposed** (REMOVED_WITH_REASON, the iter-148 §2.3
+  precedent); **KI#70 EXECUTED per DEC-24 Q7** (the lazy-loader WIRE: `manifest.appendices` appended
+  to the load list after `manifest.parts` in guide order A→B→C + the «Приложения» sidebar-TOC group;
+  runtime-verified headless — 93→96 sections, the `#appendix_mbti` TOC link scrolls, the
+  `mbti-composer` initializes with zero page errors; KI#70 CLOSED); the P-app-4 observation package
+  deferred (the part-resume family, the manifest-order artifact, the B/C/D stale matrix notes).
 - **iter 157 — Part 10 v2 build slice + the owner-called KI#84 reconciliation (map §5.18
   P10-1..P10-6):** F2 presentation column 20 rows (**9 `open` + 11 `collapsible`** — all
   pre-existing v7-era F6 wraps documented, zero new wraps); canon — the L397 «Выщебленного»→

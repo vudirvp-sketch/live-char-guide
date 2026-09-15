@@ -41,6 +41,18 @@
     PARTS_RETRY_DELAYS_MS: [300, 900]
   };
 
+  // KI#70 WIRE (DEC-24 Q7, iter 158): appendix render order = the guide
+  // lettering A → B → C per the canon appendix files (appendix_mbti.md A.1,
+  // appendix_model_table.md B.1, appendix_glossary.md C.1). The manifest
+  // `appendices` array is alphabetical (a build-unified.mjs artifact), so the
+  // load list re-orders it here. Files not listed sort last (stable sort) —
+  // future appendices degrade gracefully.
+  const APPENDIX_GUIDE_ORDER = [
+    'appendix_mbti.html',        // Appendix A — MBTI Reference
+    'appendix_model_table.html', // Appendix B — Model Capability Table
+    'appendix_glossary.html'     // Appendix C — Глоссарий
+  ];
+
   // ============================================================================
   // STATE
   // ============================================================================
@@ -784,7 +796,13 @@
       if (!manifestResponse.ok) throw new Error(`Failed to load manifest: HTTP ${manifestResponse.status}`);
 
       const manifest = await manifestResponse.json();
-      const parts = manifest.parts || [];
+      // KI#70 WIRE (DEC-24 Q7, iter 158): appendices load after the Parts on
+      // the same fetch pipeline — they inherit the KI#69 retry/placeholder
+      // machinery for free. Guide order A → B → C (APPENDIX_GUIDE_ORDER).
+      const appendices = (manifest.appendices || []).slice().sort((a, b) =>
+        APPENDIX_GUIDE_ORDER.indexOf(a.file) - APPENDIX_GUIDE_ORDER.indexOf(b.file)
+      );
+      const parts = (manifest.parts || []).concat(appendices);
 
       const fetchPromises = parts.map(async part => {
         try {
@@ -1035,6 +1053,33 @@
 
       tocHtml += `</li>`;
     });
+
+    // KI#70 WIRE (DEC-24 Q7, iter 158): appendix sections get their own TOC
+    // group after the Parts — the same «Приложения» convention the
+    // auto-injected part-01 TOC uses. Entry text = the appendix section's own
+    // h2; DOM order = load order (guide lettering A → B → C). Part-number
+    // active highlighting intentionally does not apply (its regex is
+    // Part-scoped by design).
+    const appendixSections = Array.from(sections).filter(section => {
+      if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return false;
+      const sectionId = section.getAttribute('data-section') || section.id;
+      return sectionId.startsWith('appendix_') && section.hasAttribute('data-toc-nav');
+    });
+    if (appendixSections.length > 0) {
+      tocHtml += `<li class="toc-part">`;
+      tocHtml += `<button class="toc-part-toggle" data-part="appendices" aria-expanded="false">`;
+      tocHtml += `<span class="toc-part-arrow">\u25B8</span>`;
+      tocHtml += `<span class="toc-part-title">Приложения</span>`;
+      tocHtml += `</button>`;
+      tocHtml += `<ul class="toc-sections hidden">`;
+      appendixSections.forEach(section => {
+        const h2 = section.querySelector('h2');
+        const linkText = h2 ? h2.textContent.trim() : section.getAttribute('data-section');
+        tocHtml += `<li class="toc-indent"><a href="#${section.id}">${linkText}</a></li>`;
+      });
+      tocHtml += `</ul>`;
+      tocHtml += `</li>`;
+    }
 
     tocHtml += '</ul>';
     tocContent.innerHTML = tocHtml;

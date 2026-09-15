@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–10: iters 147–157); the appendices get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts/appendices already sliced (Parts 1–10 + Appendix A: iters 147–158); the remaining appendices (B/C/D) get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -1307,8 +1307,9 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 
 ## 14. Appendices (`docs/canon/appendix_*.md`, 4 sections)
 
-> Glossary / MBTI / Model Table render in master (`appendix_*.html`) but are runtime-blocked by
-> KI#70 (never loaded by `lazy-loader.js`). Appendix D (character_map) is canon-only, non-rendering.
+> MBTI / Model Table / Glossary render in master (`appendix_*.html`) and — since iter 158 — at runtime
+> (the KI#70 WIRE executed, DEC-24 Q7: `lazy-loader.js` loads `manifest.appendices` after
+> `manifest.parts`, guide order A→B→C; map §5.19). Appendix D (character_map) is canon-only, non-rendering.
 
 ### appendix_character_map (Appendix D — **non-rendering**)
 
@@ -1358,14 +1359,14 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 
 ### appendix_mbti (Appendix A)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| appendix_mbti::01 | L19 | MBTI definition | DEFINITION | KEEP | YES | — | |
-| appendix_mbti::02 | L21–28 | 4 оси MBTI table | DEFINITION | KEEP | YES | — | |
-| appendix_mbti::03 | L30–37 | Темпераменты (Keirsey) table | DEFINITION | KEEP | YES | — | |
-| appendix_mbti::04 | L39 | NOTE: S·P ≠ SP disambiguation | DEFINITION | KEEP | YES | — | Canonical disambiguation (glossary-consistent ✓); EN label «NOTE» — DEC-16 cosmetic; ref `§7A.X` vague R18 |
-| appendix_mbti::05 | L41–43 | MBTI Composer (interactive) container note | METADATA | KEEP | YES | — | **KI#70 dependency:** documents a container that never runtime-renders (mbti-composer path never exercised) |
-| appendix_mbti::06 | L45–47 | РЕКОМЕНДАЦИЯ: MBTI — справочный инструмент | APPLICATION | KEEP | YES | REINFORCEMENT | **R26 statement #3** (appendix site) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| appendix_mbti::01 | L19 | MBTI definition | DEFINITION | KEEP | YES | — | open | Reference-layer intro (spec §3: compact entry, canonical-home links) |
+| appendix_mbti::02 | L21–28 | 4 оси MBTI table | DEFINITION | KEEP | YES | — | open | The reference payload — lookup form; zero compression candidates |
+| appendix_mbti::03 | L30–37 | Темпераменты (Keirsey) table | DEFINITION | KEEP | YES | — | open | The reference payload; «Цвет (в виджете)» column restored in master iter 158 (fence #10 — the canon header form) |
+| appendix_mbti::04 | L39 | Примечание: S·P ≠ SP disambiguation | DEFINITION | KEEP | YES | — | open | Canonical disambiguation (glossary-consistent ✓). **Stale notes refreshed iter 158:** the canon label is «Примечание:» (russified iter 123 — the prior note carried the pre-russification «EN label «NOTE»» state) and the ref is the full `[ref: part_07a.md §7A.1 — System Prompt]` form (repaired iter 127, ed-8/R18 — the «`§7A.X` vague» note was stale). **iter 158 master mirror:** the master note restored the canon sentence 2 (the `S·P`-dot convention) + the `#p7a_system_prompt` link (fence #10) |
+| appendix_mbti::05 | L41–43 | MBTI Composer (interactive) container note | METADATA | KEEP | YES | — | open | **KI#70 dependency RESOLVED iter 158** (the WIRE executed, DEC-24 Q7): the container now runtime-renders — the `mbti-composer` widget initializes on the live container (verified headless: no page errors, widget built; map §5.19 P-app-5). The canon container-note paragraph keeps its informational drift entry (canon metadata describing an embedded interactive element — the master renders the container itself, not the prose) |
+| appendix_mbti::06 | L45–47 | РЕКОМЕНДАЦИЯ: MBTI — справочный инструмент | APPLICATION | KEEP | YES | REINFORCEMENT | open | **R26 statement #3** (appendix site). **iter 158 master mirror:** the «(поведенческие якоря)» gloss restored (fence #10 — canon carries «полюса → Anchors (поведенческие якоря)»; the master's v9-slimmed «полюса → якоря» dropped the gloss). The master-only stale v9-era transition («Следующие секции: Enneagram Wings, OCEAN×Enneagram Matrix» — pointed back into Part 5 from a post-Part-10 appendix) disposed iter 158 (REMOVED_WITH_REASON, the iter-148 §2.3 precedent; map §5.19 P-app-3) |
 
 ### appendix_model_table (Appendix B)
 
@@ -1377,9 +1378,14 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 
 **Appendices verdict:** reference layer healthy. Two entries over-carry canonical material (glossary
 CORE DIRECTIVES — the R02/ed-2 input; Behavioral Anchor placement ПРАВИЛО — R01 reference-layer
-side). 18 vague glossary refs (mechanical R18: 5× `§7A.X`, 6× `§4.X`, 4× `§3.X`, 2× `§7B.X`, 1× `§2.X`).
-KI#77-b/c/d stale refs + R27 budget-range drift in character_map; KI#70 dependencies noted where
-appendix content describes never-loaded containers.
+side). **Stale claims corrected iter 158:** the «18 vague glossary refs» line described the
+pre-iter-127 state (the R18 Phase B batch `8a365553` repaired the appendix canon refs to the full
+`[ref: part_NN.md §X.Y — Label]` forms — the per-row «`§X.X` vague» notes in the appendix_glossary
+table below remain stale, deferred to that appendix's own slice); the «KI#70 never-loaded»
+dependency is resolved by the iter-158 WIRE (all three appendices render at runtime, DEC-24 Q7).
+KI#77-b/c/d stale refs + R27 budget-range drift in character_map (owner-gated ed-5 — that slice
+documents, does not re-decide). **Appendix A sliced iter 158** (map §5.19): 6 rows **all `open`**,
+zero compression candidates — the Reference-layer verdict holds (compact lookup payload; spec §3).
 
 ---
 
