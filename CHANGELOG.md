@@ -6,6 +6,10 @@
 
 ## [9.2.6] — 2026-08-15
 
+### iter 144 — owner-gates-recommendation: decision package for the two remaining owner calls prepared, verified, recorded (doc-only) — one-line
+
+- iter 144 — owner-gates-recommendation: `docs/research/owner_gates_iter144.md` — verified evidence + recommended calls for G1 (KI#72 sampling values: 12-row live-location inventory — the documented 4 canonical-range locations + 3 NEW hint-side spots §9.3/§9.4/§9.5; E17 carries neither candidate value as such; recommended S-a…S-d, §7A.6 canonical per matrix R12; Options B/C rejected with reasons) + G2 (v2 architecture phase opening: first-slice options P-a/P-b/P-c, P-a consolidated v2 architecture specification recommended; order = G1 first → sampling slice → phase); nothing DECIDED; doc-only battery green (sync 97/97 · drift 159 · parity ×6 · `git diff --check` clean). Detail: git (iter-144 commit).
+
 ### iter 142 — voice-cluster-build: LAST bounded area executed — §3.2 canonical prose + full `[VS: E07]` marker (DEC-21); AN-12B re-framed per Option A; `audit_voice_parity.py` gate; KI#82 closed; E07 disposed
 
 - **Scope (STATUS Next-step row 1, pinned iter 141):** the Voice influence % cluster build slice (Registry B row 7 — the last unexecuted bounded area; PLAN row voice-cluster stage 2) per the iter-141 package §5. Owner call received: chat 2026-09-15 «продолжай работу по плану!» — the go-ahead on the iter-141 recommended package (the only prepared plan pending a call; recorded with verbatim provenance, DEC-18/19/20 go-ahead precedent) → **DEC-21**: V-a/V-b/V-c/V-e as recommended; V-d = **Option A** (table wins — no numeric change).
