@@ -251,8 +251,8 @@ CHECKS = [
     (
         "P1-3",
         "part_08.html",
-        "<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3",
-        "part_08 §8.1: OCEAN Overload orphan row deleted + footnote added (iter 36 P1-3 fix; «v9 restructure» repo-meta strip iter 129 — R17 [B])",
+        "<p><strong>Ссылка:</strong> OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3",
+        "part_08 §8.1: OCEAN Overload orphan row deleted + footnote added (iter 36 P1-3 fix; «v9 restructure» repo-meta strip iter 129 — R17 [B]; footnote label re-pointed Примечание→Ссылка iter 155 — canon L27 «Ссылка:» mirror, the part-8 v2 build slice)",
     ),
     # ----- P1-4 (B2): part_10 Walter GHOST rewrite -----
     (

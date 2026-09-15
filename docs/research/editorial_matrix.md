@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–7B: iters 147–154); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–8: iters 147–155); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -1097,129 +1097,154 @@ R29 pre-fix state). Master-only enrichments + variances recorded as deferred obs
 
 ### p8_antipatterns_overview (§8.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_antipatterns_overview::01 | L19 | Анти-паттерн definition | DEFINITION | KEEP | YES | — | Canonical |
-| p8_antipatterns_overview::02 | L21 | `[VS: E12]` marker (canonical location) | METADATA | KEEP | YES | — | Declared replacement for the 15-AP enumeration |
-| p8_antipatterns_overview::03 | L23 | ПРАВИЛО: проверяйте карточку по списку | DEFINITION | KEEP | YES | — | |
-| p8_antipatterns_overview::04 | L25 | catalog pointer (E12 above; детали в §8.2–§8.16) | NAVIGATION | KEEP | YES | — | |
-| p8_antipatterns_overview::05 | L27 | Ссылка: OCEAN Overload ранее AP-15 → Part 5 §5.3 | NAVIGATION | KEEP | YES | — | R17-lite: «в v9 restructure» version-history phrase (reader-visible, master L222); navigational substance stays — optional history strip |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_antipatterns_overview::01 | L19 | Анти-паттерн definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p8_antipatterns_overview::02 | L21 | `[VS: E12]` marker (canonical location) | METADATA | KEEP | YES | — | open | Declared replacement for the 15-AP enumeration |
+| p8_antipatterns_overview::03 | L23 | ПРАВИЛО: проверяйте карточку по списку | DEFINITION | KEEP | YES | — | open | Canonical |
+| p8_antipatterns_overview::04 | L25 | catalog pointer (E12 выше; детали в §8.2–§8.16) | NAVIGATION | KEEP | YES | — | open | |
+| p8_antipatterns_overview::05 | L27 | Ссылка: OCEAN Overload ранее AP-15 → Part 5 §5.3 | NAVIGATION | KEEP | YES | — | open | **Stale note refreshed iter 155:** the «в v9 restructure» version-history phrase was stripped iter 129 (R17 [B] — recorded in the sync P1-3 probe comment); the row now carries navigational substance only. The master mirror gained the canon «Ссылка:» label this slice (map §5.16 P8-3) — was «Примечание:» |
 
 ### p8_ap1_token_bloat (§8.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap1_token_bloat::01 | L37–46 | AP-1 card (симптом/причина/решение/пример) | APPLICATION | KEEP | YES | REINFORCEMENT | **R11-family:** «Description > 800 токенов» symptom vs §7A.12 max 700 (same numeric tension as §9.11 «≤800»); ref `§3.X` vague + unbalanced paren (R18) |
-| p8_ap1_token_bloat::02 | L48–52 | До/После: раздувание токенов — Елена | EXAMPLE | KEEP | YES | — | §21-protected demo |
-| p8_ap1_token_bloat::03 | L54 | Ссылка: полная карточка Елены (`p10_elena`) | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap1_token_bloat::01 | L37–46 | AP-1 card (симптом/причина/решение/пример) | APPLICATION | KEEP | YES | REINFORCEMENT | open | **R11-family:** «Description > 800 токенов» symptom vs §7A.12 max 700 (same numeric tension as §9.11 «≤800»). **Stale note refreshed iter 155:** the «ref `§3.X` vague + unbalanced paren (R18)» pair was repaired iter 127 (ed-8/R18 Phase B — pickaxe `8a365553`; canon now carries `§3.1`, parens balanced) |
+| p8_ap1_token_bloat::02 | L48–52 | До/После: раздувание токенов — Елена | EXAMPLE | KEEP | YES | — | open | §21-protected demo |
+| p8_ap1_token_bloat::03 | L54 | Ссылка: полная карточка Елены (`p10_elena`) | NAVIGATION | KEEP | YES | — | open | Gained its master mirror this slice (map §5.16 P8-3) — was absent (a plain_text drift row) |
 
 ### p8_ap2_missing_price (§8.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap2_missing_price::01 | L64–66 | AP-2 card | APPLICATION | KEEP | YES | REINFORCEMENT | Anchor-format apply (ref `§2.X` vague R18 + unbalanced paren) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap2_missing_price::01 | L64–66 | AP-2 card | APPLICATION | KEEP | YES | REINFORCEMENT | open | Anchor-format apply. **Stale note refreshed iter 155:** the «ref `§2.X` vague R18 + unbalanced paren» pair was repaired iter 127 (ed-8/R18 — canon now carries `§2.2`, parens balanced); the canon WHY-clause («Каждый якорь обязан иметь Цену — без неё модель не показывает уязвимость») gained its master mirror this slice (map §5.16 P8-3) |
 
 ### p8_ap3_voice_in_description (§8.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap3_voice_in_description::01 | L76–78 | AP-3 card | APPLICATION | KEEP | YES | REINFORCEMENT | R06-family (Voice Isolation violation, catalog-site; ref `§3.X` vague R18 + unbalanced paren) |
-| p8_ap3_voice_in_description::02 | L80–84 | До/После: голос в Description — Елена | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap3_voice_in_description::01 | L76–78 | AP-3 card | APPLICATION | KEEP | YES | REINFORCEMENT | open | R06-family (Voice Isolation violation, catalog-site). **Stale note refreshed iter 155:** the «ref `§3.X` vague R18 + unbalanced paren» pair was repaired iter 127 (ed-8/R18 — canon now carries `§3.1`, parens balanced); the canon mechanism sentence («Модель считывает характер из примеров диалога, а не из описания») gained its master mirror this slice (map §5.16 P8-3) |
+| p8_ap3_voice_in_description::02 | L80–84 | До/После: голос в Description — Елена | EXAMPLE | KEEP | YES | — | open | |
 
 ### p8_ap4_ghost_in_sp (§8.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap4_ghost_in_sp::01 | L94–98 | AP-4 card | APPLICATION | KEEP | YES | REINFORCEMENT | 3rd key principle, catalog-site (ref §7A.1 ✓ + unbalanced paren) |
-| p8_ap4_ghost_in_sp::02 | L100 | ПРАВИЛО: модель не следует инструкциям о психологии | DEFINITION | KEEP | YES | — | Canonical statement |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap4_ghost_in_sp::01 | L94–98 | AP-4 card | APPLICATION | KEEP | YES | REINFORCEMENT | open | 3rd key principle, catalog-site (ref §7A.1 ✓). **Stale note refreshed iter 155:** the unbalanced paren was repaired iter 127 (ed-8/R18); the §7A.1 ref gained its master link this slice (map §5.16 P8-3) — the section carried no link at all |
+| p8_ap4_ghost_in_sp::02 | L100 | ПРАВИЛО: модель не следует инструкциям о психологии | DEFINITION | KEEP | YES | — | open | Canonical statement |
 
 ### p8_ap5_reppen_high (§8.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap5_reppen_high::01 | L110–112 | AP-5 card | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | R12-family: RepPen ≤ 1.10 boundary — consistent with §7A.6 32B+/API 1.05–1.10 (ref ✓ + unbalanced paren); stays valid under either KI#72 reconciliation (both candidate ranges ≤ 1.10). **iter 145:** E12 AP-5 fix card re-framed to the model-qualified defer (DEC-22 S-d; §8.6 prose unchanged) → migration_map_v2 SP-4 |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap5_reppen_high::01 | L110–112 | AP-5 card | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | open | R12-family: RepPen ≤ 1.10 boundary — consistent with §7A.6 32B+/API 1.05–1.10 (ref ✓). **Stale note refreshed iter 155:** the «stays valid under either KI#72 reconciliation» conditional is superseded — KI#72 CLOSED iter 145 (DEC-22: §7A.6 = the canonical owner, 1.05–1.10); the unbalanced paren repaired iter 127 (ed-8/R18). The E12 AP-5 fix card re-frame (DEC-22 S-d; §8.6 prose unchanged) deployed iter 145 → migration_map_v2 SP-4; the canon suppression clause («Превышение 1.10 подавляет характерные паттерны речи персонажа, делая генерацию monotone») gained its master mirror this slice (map §5.16 P8-3) |
 
 ### p8_ap6_no_anti_godmoding (§8.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap6_no_anti_godmoding::01 | L122–130 | AP-6 card + code («Never speak or act for {{user}}.») | APPLICATION | KEEP | YES | REINFORCEMENT | R07 (exact line, fix-site) |
-| p8_ap6_no_anti_godmoding::02 | L132–136 | До/После: годмодинг vs anti-godmoding | EXAMPLE | KEEP | YES | — | |
-| p8_ap6_no_anti_godmoding::03 | L138 | позитивная формулировка работает лучше запрета | APPLICATION | KEEP | YES | REINFORCEMENT | R07-subfamily: rationale — canonical explanation = §7A.1::09; 3rd statement (glossary A-entry carries the 4th) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap6_no_anti_godmoding::01 | L122–130 | AP-6 card + code («Never speak or act for {{user}}.») | APPLICATION | KEEP | YES | REINFORCEMENT | open | R07 (exact line, fix-site) |
+| p8_ap6_no_anti_godmoding::02 | L132–136 | До/После: годмодинг vs anti-godmoding | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap6_no_anti_godmoding::03 | L138 | позитивная формулировка работает лучше запрета | APPLICATION | KEEP | YES | REINFORCEMENT | open | R07-subfamily: rationale — canonical explanation = §7A.1::09; 3rd statement (glossary A-entry carries the 4th). Gained its master mirror this slice (map §5.16 P8-3) — was a no_master_match drift row |
 
 ### p8_ap7_presence_penalty (§8.8)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap7_presence_penalty::01 | L148–150 | AP-7 card | APPLICATION | KEEP | YES | — | PP = 0.0 (§7A.6 canonical ✓; unbalanced paren R18-cosmetic) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap7_presence_penalty::01 | L148–150 | AP-7 card | APPLICATION | KEEP | YES | — | open | PP = 0.0 (§7A.6 canonical ✓). **Stale note refreshed iter 155:** the «unbalanced paren R18-cosmetic» was repaired iter 127 (ed-8/R18); the canon explanation clause («PP > 0 нарушает согласованность персонажа — модель начинает вводить новые темы вместо удержания характерных паттернов») gained its master mirror this slice (map §5.16 P8-3) |
 
 ### p8_ap8_ghost_no_anchors (§8.9)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap8_ghost_no_anchors::01 | L160–166 | AP-8 card + Elena пример | APPLICATION | KEEP | YES | REINFORCEMENT | §4.8/§4.11 GHOST-anchor requirement, catalog-site |
-| p8_ap8_ghost_no_anchors::02 | L168 | Ссылка: §4.8 (FLAW-linked обязательны) | NAVIGATION | KEEP | YES | — | Correct ref ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap8_ghost_no_anchors::01 | L160–166 | AP-8 card + Елена пример | APPLICATION | KEEP | YES | REINFORCEMENT | open | §4.8/§4.11 GHOST-anchor requirement, catalog-site |
+| p8_ap8_ghost_no_anchors::02 | L168 | Ссылка: §4.8 (FLAW-linked обязательны) | NAVIGATION | KEEP | YES | — | open | Correct ref ✓. Gained its master mirror this slice (map §5.16 P8-3) — was absent (a no_master_match drift row) |
 
 ### p8_ap9_spine_broken (§8.10)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap9_spine_broken::01 | L178–182 | AP-9 card (симптом/причина/решение; refs §4.7 + §4.9 ✓) | APPLICATION | KEEP | YES | REINFORCEMENT | Broken-SPINE diagnostics, catalog-site |
-| p8_ap9_spine_broken::02 | L184–191 | ❌ Сломанный SPINE (code + explanation) | EXAMPLE | KEEP | YES | — | |
-| p8_ap9_spine_broken::03 | L193 | Критерий сломанной SPINE (диагностика) | DEFINITION | KEEP | YES | — | Unique diagnostic nuance — reconciles the AP-9 symptom with §4.1 implicit-GHOST rule; **must survive any R21 compression** |
-| p8_ap9_spine_broken::04 | L195–209 | ✅ Цельный SPINE (code + closing) | EXAMPLE | KEEP | YES | — | |
-| p8_ap9_spine_broken::05 | L211 | Ссылка: пример Елены — §4.9 | NAVIGATION | KEEP | YES | — | Correct ref ✓ («canonical location = Part 4») |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap9_spine_broken::01 | L178–182 | AP-9 card (симптом/причина/решение; refs §4.7 + §4.9 ✓) | APPLICATION | KEEP | YES | REINFORCEMENT | open | Broken-SPINE diagnostics, catalog-site |
+| p8_ap9_spine_broken::02 | L184–191 | ❌ Сломанный SPINE (code + explanation) | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap9_spine_broken::03 | L193 | Критерий сломанной SPINE (диагностика) | DEFINITION | KEEP | YES | — | open | Unique diagnostic nuance — reconciles the AP-9 symptom with §4.1 implicit-GHOST rule; **must survive any R21 compression** |
+| p8_ap9_spine_broken::04 | L195–209 | ✅ Цельный SPINE (code + closing) | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap9_spine_broken::05 | L211 | Ссылка: пример Елены — §4.9 | NAVIGATION | KEEP | YES | — | open | Correct ref ✓ («canonical location = Part 4») |
 
 ### p8_ap10_cot_overload (§8.11)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap10_cot_overload::01 | L221–227 | AP-10 card + ПРАВИЛО | APPLICATION | KEEP | YES | REINFORCEMENT | §6.2::03 catalog-site |
-| p8_ap10_cot_overload::02 | L229–231 | ❌ Перегрузка CoT | EXAMPLE | KEEP | YES | — | |
-| p8_ap10_cot_overload::03 | L233–235 | ✅ Максимум 2–3 CoT-якоря | EXAMPLE | KEEP | YES | — | |
-| p8_ap10_cot_overload::04 | L237 | Ссылка: `[ref: part_06.md §6.X — CoT-якоря]` | NAVIGATION | KEEP | YES | — | R18: `§6.X` vague (target §6.6) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap10_cot_overload::01 | L221–227 | AP-10 card + ПРАВИЛО | APPLICATION | KEEP | YES | REINFORCEMENT | open | §6.2::03 catalog-site |
+| p8_ap10_cot_overload::02 | L229–231 | ❌ Перегрузка CoT | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap10_cot_overload::03 | L233–235 | ✅ Максимум 2–3 CoT-якоря | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap10_cot_overload::04 | L237 | Ссылка: `[ref: part_06.md §6.X — CoT-якоря]` | NAVIGATION | KEEP | YES | — | open | **Stale note refreshed iter 155:** the `§6.X` vague ref was repaired iter 127 (ed-8/R18 — canon now carries `§6.6`); the vague form no longer exists. Gained its master mirror this slice (map §5.16 P8-3) — was absent |
 
 ### p8_ap11_voice_bleed (§8.12)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap11_voice_bleed::01 | L247–251 | AP-11 card | APPLICATION | KEEP | YES | REINFORCEMENT | §3.8 catalog-site (ref `§3.X` vague R18); teach(§3.8)/catalog(AP-11)/viz(E12) triple — all needed |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap11_voice_bleed::01 | L247–251 | AP-11 card | APPLICATION | KEEP | YES | REINFORCEMENT | open | §3.8 catalog-site; teach(§3.8)/catalog(AP-11)/viz(E12) triple — all needed. **Stale note refreshed iter 155:** the «ref `§3.X` vague R18» note described the pre-iter-127 form — canon now carries `§3.8` |
 
 ### p8_ap12_xml_malformed (§8.13)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap12_xml_malformed::01 | L261–265 | AP-12 card | APPLICATION | KEEP | YES | — | Refs §7A.9 + §7A.4 ✓ |
-| p8_ap12_xml_malformed::02 | L267–273 | ❌ Неправильно (code) | EXAMPLE | KEEP | YES | — | |
-| p8_ap12_xml_malformed::03 | L275–281 | ✅ Правильно (code) | EXAMPLE | KEEP | YES | — | |
-| p8_ap12_xml_malformed::04 | L283 | Ссылка: §7A.9 + §7A.4 | NAVIGATION | KEEP | YES | — | Correct refs ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap12_xml_malformed::01 | L261–265 | AP-12 card | APPLICATION | KEEP | YES | — | open | Refs §7A.9 + §7A.4 ✓. The Format Lock sentence gained its master mirror this slice (map §5.16 P8-3) |
+| p8_ap12_xml_malformed::02 | L267–273 | ❌ Неправильно (code) | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap12_xml_malformed::03 | L275–281 | ✅ Правильно (code) | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap12_xml_malformed::04 | L283 | Ссылка: §7A.9 + §7A.4 | NAVIGATION | KEEP | YES | — | open | Correct refs ✓. Gained its master mirror this slice (map §5.16 P8-3) — was absent |
 
 ### p8_ap13_lorebook_conflict (§8.14)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap13_lorebook_conflict::01 | L293–297 | AP-13 card | APPLICATION | KEEP | YES | — | Ref `§7B.X` vague R18 |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap13_lorebook_conflict::01 | L293–297 | AP-13 card | APPLICATION | KEEP | YES | — | open | **Stale note refreshed iter 155:** the «Ref `§7B.X` vague R18» note described the pre-iter-127 form — canon now carries `§7B.3` (master target `#p7b_lorebook_basics` ✓) |
 
 ### p8_ap14_context_violation (§8.15)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap14_context_violation::01 | L307–311 | AP-14 card | APPLICATION | KEEP | YES | — | Refs §7A.11 + §7A.12 ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap14_context_violation::01 | L307–311 | AP-14 card | APPLICATION | KEEP | YES | — | open | Refs §7A.11 + §7A.12 ✓. The §7A.12 link gained its master mirror this slice (map §5.16 P8-3) |
 
 ### p8_ap15_nested_anchors (§8.16)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p8_ap15_nested_anchors::01 | L321–325 | AP-15 card (принцип атомарности) | APPLICATION | KEEP | YES | — | Canonical atomicity principle (ref `§2.X` vague R18) |
-| p8_ap15_nested_anchors::02 | L327–331 | ❌ Вложенный якорь (code) | EXAMPLE | KEEP | YES | — | |
-| p8_ap15_nested_anchors::03 | L333–338 | ✅ Атомарные якоря (code) | EXAMPLE | KEEP | YES | — | |
-| p8_ap15_nested_anchors::04 | L340 | Синтез (part-level) | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p8_ap15_nested_anchors::01 | L321–325 | AP-15 card (принцип атомарности) | APPLICATION | KEEP | YES | — | open | Canonical atomicity principle. **Stale note refreshed iter 155:** the «ref `§2.X` vague R18» note described the pre-iter-127 form — canon now carries `§2.2`. The «Причина» line gained its master mirror this slice (map §5.16 P8-3) |
+| p8_ap15_nested_anchors::02 | L327–331 | ❌ Вложенный якорь (code) | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap15_nested_anchors::03 | L333–338 | ✅ Атомарные якоря (code) | EXAMPLE | KEEP | YES | — | open | |
+| p8_ap15_nested_anchors::04 | L340 | Синтез (part-level) | DEFINITION | KEEP | YES | — | open | |
 
 **Part 8 verdict:** deliberate two-layer design (E12 catalog + per-AP teach), zero compression
 candidates. The defect load is navigation hygiene: **7 vague refs** (`§3.X`×3, `§2.X`×3, `§6.X`,
 `§7B.X` — see rows) + **6 unbalanced parentheses** (L44, L66, L78, L98, L112, L150 — every
 `(см. [ref: …]` opener unclosed) + AP-1 «>800» R11-family + one version-history phrase (R17-lite).
 All canon-side: master resolves every ref to a proper anchor and carries no `§X.X` strings (verified).
+**Stale verdict claims refreshed iter 155:** every vague ref + all 6 unbalanced parens were repaired
+iter 127 (ed-8/R18 Phase B — pickaxe `8a365553`) and the version-history phrase stripped iter 129
+(R17 [B]); the canon side carries zero `§X.X` / unclosed-paren defects at HEAD (byte-verified —
+only the AP-1 «>800» R11-family numeric tension remains live, matrix row above).
+**iter 155 slice note (v2 build, map [`migration_map_v2.md`](./migration_map_v2.md) §5.16):** the
+`presentation` column seeded on all Part 8 rows — **40 × `open`** (the Debug-mode catalog Part: the
+per-AP cards + the before/after demos = the recognition core the reader navigates to; zero blocks
+meet the registered Collapsible criteria — every demo is short with a distinct recognition function;
+the «Ссылка» navigation rows stay `open` per the Part 1–7B precedent); zero `collapsible` /
+`canonical-link` / `—` (the AP cards = catalog-application forms, not full-form cluster-owner
+restatements; no disposed rows). F3: zero checklists in the Part (the §8.1::03 ПРАВИЛО points to
+the E12 catalog — a catalog pointer, not a checkbox instrument; zero checkbox affordances — nothing
+to triage). F4: worked tier = the chipped Before/After + ❌/✅ demos (master `example-label
+illustration` chips / problem-solution blocks); inline tier = the «Пример:» blocks woven into the
+AP cards (::01 rows — §8.2, §8.9). F5: verified per section — the AP-card pattern (Симптом →
+Причина → Решение → demo → «Ссылка»/inline ref) = F5-approximate (Concept → Why → Rule → Core
+example → Reference); §8.1 (definition → RULE → pointer → «Ссылка») and §8.16 (closes with the
+part-level Синтез) hold. F6: zero new `<details class="interactive">` (zero existing usages in
+`part_08.html` — verified; no qualifying block). Canon: **zero content edits** (`part_08.md`
+byte-stable — the Part hosts no cluster owner, no fold candidate; the R18/paren repairs were
+pre-executed iter 127). Master: 16 mirror completions (map §5.16 P8-3 — the dropped canon clauses /
+sentences / «Ссылка» rows / links restored; + the §8.1 label re-point with the sync P1-3 probe
+update). Stale notes refreshed: 11 rows + the verdict defect-load line (the iter-127/129/145
+pre-fix states). Master-only enrichments + variances recorded as deferred observations
+(map §5.16 P8-4).
 
 ---
 

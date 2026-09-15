@@ -970,6 +970,64 @@ pre/post diff). Next Part: **Part 8 (Anti-patterns)** (guide order; 16 sections 
 Part; its own slice reuses this shape; the appendix/Reference slice after Part 10 carries the KI#70
 WIRE implementation per DEC-24 Q7).
 
+### 5.16 Part 8 v2 build slice (seeded + executed iter 155 — v2 build phase, ninth Part)
+
+Scope: **Part 8 — Anti-patterns** (16 sections, 40 block rows — the second-largest Part by section
+count; DEC-24 Q6 guide order — Part 8 ninth; the per-Part track pinned by STATUS Next-step row 1,
+**not owner-gated** — the ratification gate cleared by DEC-24). Mechanism: the ratified spec §7
+per-Part slice shape (evidence → canon restructure → master mirror → full battery) — ninth
+application, reusing the §5.8–§5.15 pattern. Primary reader mode: **Debug** (the AP-catalog Part —
+the spec §3 Debug row: E12 = the quick-scan entry, the per-AP subsections = the detail layer the
+reader navigates to deliberately; the two-layer design = the iter-31 keep-by-design rationale,
+canon front-matter). Editorial Policy 5-point check applied per edit (documented per row below).
+Acceptance gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines)
+— **no new cluster parity gate**: Part 8 hosts no cluster owner (verified: the seven cluster owners
+— §7A.2 / §7A.6 / §7A.12 / §5.4 / §9.6 / §3.2 / glossary registry — sit outside Part 8). The E12
+embed (the Part's one VS-EMBED; `vs_embedded: E12` front-matter correct; Registry A disposition
+disposed iter 145 with the DEC-19 freeze) carries the AP-5 model-qualified defer (DEC-22 S-d, SP-4)
+— the slice documents, does not re-decide.
+
+**F2 presentation map (spec §4.1 mechanism, ninth application):** the Part 8 matrix tables now
+carry the `presentation` column (40 rows; matrix §1.2 scope note extended to Parts 1–8).
+Disposition: **40 × `open`** (the Debug-mode catalog Part: the per-AP cards + the before/after
+demos = the recognition core; zero blocks meet the registered Collapsible criteria
+(`docs/components.md` #5 — every demo is short with a distinct recognition function; the «Ссылка»
+navigation rows stay `open` per the Part 1–7B precedent)) **+ 0 `collapsible` + 0 `canonical-link`
++ 0 `—`** (the AP cards = catalog-application forms, not full-form cluster-owner restatements —
+the deliberate two-layer design; zero disposed rows — the matrix verdict «deliberate two-layer
+design, zero compression candidates» held). F3: zero checklists in the Part (the §8.1::03 ПРАВИЛО
+points to the E12 catalog — a catalog pointer, not a checkbox instrument; zero checkbox
+affordances — nothing to triage). F4: worked tier = the chipped Before/After + ❌/✅ demos; inline
+tier = the «Пример:» blocks woven into the AP cards (::01 rows — §8.2, §8.9). F5: verified per
+section — the AP-card pattern (Симптом → Причина → Решение → demo → «Ссылка»/inline ref) =
+F5-approximate (Concept → Why → Rule → Core example → Reference); §8.1 and §8.16 (the part-level
+Синтез) hold. F6: **zero new `<details class="interactive">`** (zero existing usages in
+`part_08.html` — verified; no qualifying block).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P8-1 | — (evidence) | matrix Part 8 tables: 8 columns, no presentation axis; notes carrying pre-iter-127/129/145 defect states (7 vague refs + 6 unbalanced parens + the R17-lite phrase + the KI#72 conditional — all long-repaired) | `presentation` column seeded (40 rows: 40 `open`); matrix §1.2 scope note extended to Parts 1–8; the Part 8 verdict appended with the stale-claims refresh + the iter-155 slice note; **eleven stale row notes refreshed** — overview::05 (the «в v9 restructure» phrase stripped iter 129, R17 [B]), ap1::01 / ap2::01 / ap3::01 / ap4::01 / ap5::01 / ap7::01 / ap10::04 / ap11::01 / ap13::01 / ap15::01 (the vague-ref + unbalanced-paren defects repaired iter 127, ed-8/R18 Phase B — pickaxe `8a365553`; the KI#72 conditional superseded by DEC-22 iter 145) — the notes described pre-fix states | EXECUTED **— iter 155** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…154 stale-note-refresh precedent |
+| P8-2 | — (canon) | canon `part_08.md` (341 lines) — preflight full read: the AP-card pattern F5-approximate per section; the matrix verdict «zero compression candidates»; zero unexecuted COMPRESS/DELETE rows; all refs specific post-iter-127; parens balanced | **unchanged — verified byte-stable** (zero canon content edits: `part_08.md` byte-unchanged through the slice — sha256 `8f4a4e02…` pre = post; the Part hosts no cluster owner) | VERIFIED **— unchanged (iter 155)** | fence #10 (canon = source of truth); Editorial Policy (no edit without functional load); the iter-148/149/151/152/154 zero-canon-edit precedents |
+| P8-3 | `p8_antipatterns_overview::03` + `::05` + `p8_ap1_token_bloat::01`+`::03` + `p8_ap2_missing_price::01` + `p8_ap3_voice_in_description::01` + `p8_ap4_ghost_in_sp::01` + `p8_ap5_reppen_high::01` + `p8_ap6_no_anti_godmoding::03` + `p8_ap7_presence_penalty::01` + `p8_ap8_ghost_no_anchors::02` + `p8_ap10_cot_overload::04` + `p8_ap12_xml_malformed::01`+`::04` + `p8_ap14_context_violation::01` + `p8_ap15_nested_anchors::01` (master layer) | sixteen master render gaps vs canon (the v9 «Phase 6: Reduced content duplication» slimming dropped canon-declared reader-visible content): the §8.1 ПРАВИЛО tail («выявляемая на этапе валидации»), the §8.1 «Примечание» label vs canon «Ссылка», the §8.2 «Голос → Examples» bullet imperative + the ::03 «Ссылка» row, the §8.3 WHY-clause («Каждый якорь обязан иметь Цену…»), the §8.4 mechanism sentence («Модель считывает характер…»), the §8.5 missing §7A.1 link (the section carried no link at all), the §8.6 suppression clause («Превышение 1.10 подавляет…»), the §8.7 rationale sentence («Позитивная формулировка…»), the §8.8 explanation clause («PP > 0 нарушает согласованность…»), the §8.9::02 «Ссылка» row, the §8.11::04 «Ссылка» row, the §8.13 Format Lock sentence + the ::04 «Ссылка» row, the §8.15 §7A.12 link, the §8.16 «Причина» line | sixteen mirror completions in `src/master/part_08.html` (16 edit sites — 16 insertions + 11 deletions): every dropped clause/sentence/«Ссылка»-row/link restored per canon (fence #10 — canon wins; the canon text rendered with refs as anchors, the part_04/05/06 «Ссылка» mirror forms); the §8.1 label re-pointed «Примечание» → «Ссылка» (the P7B-3(b) label family) **with the sync P1-3 probe substring updated in step** (2 lines in `scripts/audit_canon_master_sync.py` — the expected substring + the probe description note — the probe's documented purpose, the orphan-row deletion + footnote, unchanged; the iter-148 sampling-audit-extension precedent for in-slice probe adjustments); 5-point check per edit: capability — the reader-visible substance canon declares now renders (nothing moved, canon was already the authority); coverage — every restored clause lives at its canon-declared location; retrieval — the «Ссылка» rows now navigate (four new anchors: `#p10_elena`, `#p4_spine_mapping`, `#p6_cot_anchors`, `#p7a_xml_tags` + `#p7a_format_lock` + `#p7a_token_budget`); context — the surrounding Симптом/Причина/Решение lines unchanged; dependency — the five part_08 probes verified untouched by the diff (P0-10 / P1-1 / P1-3 updated-in-step / P2-7-syn-08 / P2-3-del-08), the E12 embed untouched (the sampling parity SP-4 anchors intact), no inbound refs target the edited lines (grep-verified) | MOVED **— executed iter 155** | fence #10 (canon = source of truth, master mirrors); DEC-16 «Ссылка» label law; the P5-3/P6-3/P7A-3/P7B-3 mirror-completion precedents; the iter-148 probe-extension precedent |
+| P8-4 | — (observed) | master-only enrichments + variances, never canonized/resolved: (a) four master-only inter-section transitions (L335/L393/L426/L450 — outside `<section>` wrappers, the v9-era «reduced duplication» glide text; the P7B-4(c) family); (b) stray/vacant `example-label illustration` chips with no following worked content (§8.5/§8.7/§8.13/§8.14 — the F4-label placement quirk; §8.4's chip precedes the ПРАВИЛО callout); (c) the §8.7 До/После table rendered as an inline paragraph (table→paragraph variance); (d) EN-terminology variances (canon «дефект»/«призрак» vs master «FLAW»/«GHOST» in §8.5; canon «(Елена, Выщербленный)» gloss dropped in §8.9); (e) the §8.1 definition parenthetical glosses («что наблюдается» etc.) + trailing-period variances — formatting churn, not F-policy; (f) the §8.16 h3 outside the antipattern-card wrapper + the «Симптом» label-less problem-block (structural quirks); (g) the §8.8 «Симптом: Presence Penalty > 0» master paragraph below the drift tool's MIN_PARAGRAPH_LENGTH (29 < 30 chars) → the informational plain_text flag (KI#79-adjacent tool-boundary artifact, pre-existing, exit 0) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge or non-rendering metadata; the disposals ride the canonical-audit stage per the P4-5/P5-5/P6-4/P7A-4/P7B-4 chain) | RECORDED **— deferred (iter 155)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy (compress redundant presentation, never unique capability); rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P8-5 | — (state) | STATUS iter-154 / PLAN row v2-build-part-8 open / no map §5.16 | map §5.16 + STATUS iter-155 (Next step re-pinned to the Part 9 slice; the v2-architecture invariant extended to Parts 1–8 / maps §5.8–§5.16) + PLAN v2-build-part-9 + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–8) | EXECUTED **— iter 155** | iter-147…154 state-package pattern |
+
+Accounting: 1 presentation-column seeding (40 rows: 40 `open`) + 1 verified-unchanged canon
+(P8-2 — **zero canon content edits**; `part_08.md` byte-unchanged) + 16 master mirror completions
+(P8-3; `part_08.html` 16 edit sites — 16 insertions + 11 deletions) + 1 sync-probe substring update (P1-3, disclosed — 2 lines
+in `scripts/audit_canon_master_sync.py`: the expected substring + the description note) + 1 observation package deferred (P8-4) + 1 state package
+(P8-5). Byte-unchanged: canon `part_08.md` entirely + master outside the 16 mirrored lines (the E12
+embed, the ❌/✅ pre blocks, the tables — untouched); matrix tag/decision/load/repeat columns
+unchanged. Deferred (recorded, out of scope): the P8-4 master-only enrichments + variances
+(canonical-audit stage / ed-* batch); KI#77-e + KI#79 (open, untouched); KI#70 rides the
+appendix/Reference slice per DEC-24 Q7. Root fallback `parts/part_08.html` regenerated with the
+slice (+ root `index.html` timestamp). Drift actionable **154 → 148** (six canon-side matches
+gained: §8.2::03 + §8.6 + §8.7 + §8.8 + §8.9::02 + §8.16 left the actionable lists by gaining
+their full master mirrors — verified by the JSON pre/post diff; zero new rows). Next Part:
+**Part 9 (Diagnostics)** (guide order; 11 sections; its own slice reuses this shape — the Debug
+reader-path backbone Part; the appendix/Reference slice after Part 10 carries the KI#70 WIRE
+implementation per DEC-24 Q7).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -1067,6 +1125,22 @@ WIRE implementation per DEC-24 Q7).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 155 (Part 8 v2 build slice, BASE_COMMIT `9891433f`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-8, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.16 (P8-1..P8-5)** on the spec §7 shape (ninth application, reusing the
+  §5.8–§5.15 pattern): evidence — the matrix Part 8 tables gain the F2 `presentation` column
+  (**40 rows: 40 `open`** — the Debug-mode catalog Part, zero qualifying Collapsible blocks; zero
+  `canonical-link` / `—`); matrix §1.2 extended to Parts 1–8; **eleven stale row notes + the verdict
+  defect-load line refreshed** (the vague-ref/paren defects repaired iter 127 ed-8/R18 — pickaxe
+  `8a365553`; the R17-lite phrase stripped iter 129; the KI#72 conditional superseded by DEC-22);
+  canon — **zero content edits** (`part_08.md` byte-unchanged — the Part hosts no cluster owner);
+  master — **sixteen mirror completions** (P8-3: the dropped canon clauses / sentences /
+  «Ссылка» rows / links restored — the v9 Phase-6 slimming gaps; the §8.1 label re-point
+  «Примечание»→«Ссылка» with the sync P1-3 probe substring updated in step, disclosed); the
+  master-only enrichments + variances recorded as deferred observations (P8-4); drift
+  154 → **148** (six canon-side matches gained — verified by the JSON pre/post diff; zero new
+  rows); full battery green (sync 97/97, parity ×7, tests 64/64, english 18, syntax 238, hash
+  unchanged); Next step re-pinned to the Part 9 slice.
 - **iter 154 (Part 7B v2 build slice, BASE_COMMIT `c16a9354`):** the pinned STATUS Next-step
   row 1 (PLAN row v2-build-part-7b, **not owner-gated** — the DEC-24 ratification gate cleared)
   executed per map **§5.15 (P7B-1..P7B-5)** on the spec §7 shape (eighth application, reusing the

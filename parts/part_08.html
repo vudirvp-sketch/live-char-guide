@@ -218,12 +218,12 @@
 <p><strong>Анти-паттерн</strong> — распространённая ошибка в создании карточек, приводящая к нестабильному поведению модели. Каждый анти-паттерн имеет симптом, причину и решение.</p>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка.</p>
+<p><strong>ПРАВИЛО:</strong> Проверяйте карточку по этому списку перед тестом. Каждый анти-паттерн — частая ошибка, выявляемая на этапе валидации.</p>
 </div>
 
 <p>Полный каталог 15 анти-паттернов (AP-1 … AP-15) с симптомом, причиной и быстрым фиксом — в визуализации E12 выше. Подробный разбор каждого AP (симптом → причина → решение → before/after) — в подсекциях §8.2–§8.16 ниже.</p>
 
-<p><strong>Примечание:</strong> OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3 (<code>p5_ocean_warning</code>). В каталоге E12 не отображается — см. <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a>.</p>
+<p><strong>Ссылка:</strong> OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3 (<code>p5_ocean_warning</code>). В каталоге E12 не отображается — см. <a href="#p5_ocean_warning">Part 5: OCEAN Warning</a>.</p>
 
 </section>
 <section  data-section="p8_ap1_token_bloat" id="p8_ap1_token_bloat">
@@ -234,7 +234,7 @@
 <p><strong>Причина:</strong> Избыточное описание, дублирование, голос в Description</p>
 <p><strong>Решение:</strong></p>
 <ul>
-<li>Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></li>
+<li>Голос → Examples — <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></li>
 <li>Удалите дубликаты</li>
 <li>Оставьте только факты и якоря</li>
 </ul>
@@ -258,6 +258,7 @@
 </div>
 </div>
 
+<p><strong>Ссылка:</strong> Полная карточка Елены — <a href="#p10_elena">Part 10: Елена</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap2_missing_price" id="p8_ap2_missing_price">
@@ -265,7 +266,7 @@
 <div class="antipattern-card">
 <h3>AP-2: Отсутствующая цена (Missing Price)</h3>
 <p><strong>Симптом:</strong> якорь без физической цены</p>
-<p><strong>Решение:</strong> Формат якоря (Anchor Format): Триггер → Действие → Цена. Исправление → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a></p>
+<p><strong>Решение:</strong> Формат якоря (Anchor Format): Триггер → Действие → Цена. Каждый якорь обязан иметь Цену — без неё модель не показывает уязвимость. Исправление → <a href="#p2_anchor_rules">Part 2: поведенческие якоря</a></p>
 </div>
 </section>
 <section  data-section="p8_ap3_voice_in_description" id="p8_ap3_voice_in_description">
@@ -273,7 +274,7 @@
 <div class="antipattern-card">
 <h3>AP-3: Голос в Description</h3>
 <p><strong>Симптом:</strong> Стилистические директивы в Description</p>
-<p><strong>Решение:</strong> Description = только факты. Голос → Examples/Greeting. Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></p>
+<p><strong>Решение:</strong> Description = только факты. Голос → Examples/Greeting. Модель считывает характер из примеров диалога, а не из описания. Исправление → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></p>
 
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <h4>До/После: Voice in Description — Елена</h4>
@@ -302,7 +303,7 @@
 <h3>AP-4: Психология в SP</h3>
 <p><strong>Симптом:</strong> Психологический анализ (SPINE, GHOST) помещён в System Prompt</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
-<p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты.</p>
+<p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты. Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description) — как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>), не нарративом — не в инструкциях (SP).</p>
@@ -314,7 +315,7 @@
 <div class="antipattern-card">
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
-<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
+<p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Превышение 1.10 подавляет характерные паттерны речи персонажа, делая генерацию monotone. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
@@ -328,7 +329,7 @@
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>Never speak or act for {{user}}.</code></pre>
 <p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце user забилось чаще.*</code> ❌ → <!-- Demonstrates: INFLUENCE BOUNDARY --><code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
-<p>Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
+<p>Позитивная формулировка ("respond only to observable actions") работает лучше чистого запрета. Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
 </section>
 <p>Следующий анти-паттерн связан с параметрами генерации — даже правильная карточка может «сломаться» при неверных настройках сэмплинга.</p>
@@ -337,7 +338,7 @@
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
-<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
+<p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. PP > 0 нарушает согласованность персонажа — модель начинает вводить новые темы вместо удержания характерных паттернов. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
@@ -354,6 +355,7 @@
 <p><strong>Пример:</strong> Елена — призрак «предательство редактора» → якорь «Когда вопрос о лояльности → напрягается»</p>
 </div>
 
+<p><strong>Ссылка:</strong> <a href="#p4_spine_mapping">Part 4: SPINE → карта якорей</a> (FLAW-linked якоря обязательны).</p>
 </div>
 </section>
 <section  data-section="p8_ap9_spine_broken" id="p8_ap9_spine_broken">
@@ -410,6 +412,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 <p>Оставьте только ключевые триггеры (GHOST-связь, критический конфликт). Остальные якоря — обычные T→A→P без CoT.</p>
 </div>
 
+<p><strong>Ссылка:</strong> <a href="#p6_cot_anchors">Part 6: CoT-якоря</a>.</p>
 </div>
 </section>
 <section  data-section="p8_ap11_voice_bleed" id="p8_ap11_voice_bleed">
@@ -429,7 +432,7 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 <h3>AP-12: Невалидный XML (XML Malformed)</h3>
 <p><strong>Симптом:</strong> Невалидные XML теги в Description</p>
 <p><strong>Причина:</strong> Опечатки, незакрытые теги</p>
-<p><strong>Решение:</strong> Валидация XML перед использованием</p>
+<p><strong>Решение:</strong> Валидация XML перед использованием. Используйте Format Lock (1 система разметки).</p>
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="problem-block">
 <p><strong>❌ Неправильно:</strong></p>
@@ -444,6 +447,7 @@ WANT: {{want}}
 &lt;/spine&gt;</code></pre>
 </div>
 
+<p><strong>Ссылка:</strong> <a href="#p7a_xml_tags">Part 7A: XML structure</a> + <a href="#p7a_format_lock">Part 7A: Format Lock</a>.</p>
 </div>
 </section>
 <p>XML валиден — но записи внутри него могут противоречить друг другу. Lorebook Conflict — анти-паттерн, при котором записи базы знаний конфликтуют с Description.</p>
@@ -464,7 +468,7 @@ WANT: {{want}}
 <h3>AP-14: Нарушение контекстного окна</h3>
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
-<p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Исправление → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a></p>
+<p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Исправление → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a> + <a href="#p7a_token_budget">Part 7A: Token Budget</a></p>
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
@@ -476,6 +480,7 @@ WANT: {{want}}
 <div class="problem-block">
 <h4>❌ Проблема</h4>
 <p>якорь содержит вложенные условия: «Если X, а потом Y → делает Z». Модель не может надёжно исполнить цепочку из 3+ вложенных условий на ≤14B.</p>
+<p><strong>Причина:</strong> Попытка задать сложную поведенческую логику в одном якоре.</p>
 </div>
 <div class="solution-block">
 <h4>✅ Решение</h4>
