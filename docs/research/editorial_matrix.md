@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–3: iters 147–149); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–4: iters 147–150); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -654,112 +654,143 @@ pre-existing rows = audit-time anchors (iter 126), not re-based — iter-147 sli
 
 ### p4_spine_overview (§4.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_spine_overview::01 | L19 | SPINE definition | DEFINITION | KEEP | YES | — | Canonical |
-| p4_spine_overview::02 | L21 | causal chain line `GHOST → LIE → FLAW → NEED → WANT` | DEFINITION | KEEP | YES | — | |
-| p4_spine_overview::03 | L23–27 | chain bullets (5) | DEFINITION | KEEP | YES | REINFORCEMENT | SPINE causality = whitelisted recurrence (§20) |
-| p4_spine_overview::04 | L29 | `[VS: E05]` marker | METADATA | KEEP | YES | — | Declared replacement |
-| p4_spine_overview::05 | L31–41 | observable-units rule + ❌/✅ table | DEFINITION | KEEP | YES | REINFORCEMENT | R24-family (observable-unit formulation); canonical table |
-| p4_spine_overview::06 | L43–45 | Упрощение для простых персонажей | DEFINITION | KEEP | YES | — | **Canonical owner of R21** (implicit GHOST/LIE + full-chain-must-be-linked; refs §4.9) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_spine_overview::01 | L19 | SPINE definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p4_spine_overview::02 | L21 | causal chain line `GHOST → LIE → FLAW → NEED → WANT` | DEFINITION | KEEP | YES | — | open | |
+| p4_spine_overview::03 | L23–27 | chain bullets (5) | DEFINITION | KEEP | YES | REINFORCEMENT | open | SPINE causality = whitelisted recurrence (§20) |
+| p4_spine_overview::04 | L29 | `[VS: E05]` marker | METADATA | KEEP | YES | — | open | Declared replacement |
+| p4_spine_overview::05 | L31–41 | observable-units rule + ❌/✅ table | DEFINITION | KEEP | YES | REINFORCEMENT | open | R24-family (observable-unit formulation); canonical table |
+| p4_spine_overview::06 | L43–45 | Упрощение для простых персонажей | DEFINITION | KEEP | YES | — | open | **Canonical owner of R21** (implicit GHOST/LIE + full-chain-must-be-linked; refs §4.9) — the §4.7 re-statement folded to this owner iter 150 |
 
 ### p4_ghost (§4.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_ghost::01 | L56 | GHOST definition | DEFINITION | KEEP | YES | — | Canonical |
-| p4_ghost::02 | L58–62 | правила призрака (3 bullets) | DEFINITION | KEEP | YES | — | |
-| p4_ghost::03 | L64 | запрещённые формулировки | DEFINITION | KEEP | YES | — | Canonical forbidden-words list |
-| p4_ghost::04 | L66–69 | Anti-pattern / Solution | EXAMPLE | KEEP | YES | — | §21-protected demo |
-| p4_ghost::05 | L71–76 | канонические примеры призрака table | EXAMPLE | KEEP | YES | — | |
-| p4_ghost::06 | L78 | Примечание: один призрак на учебного персонажа | DEFINITION | KEEP | YES | — | Canonical rule; mirrored by the §7B.3 пример-2 «ВНЕ КАНОНА» warning ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_ghost::01 | L56 | GHOST definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p4_ghost::02 | L58–62 | правила призрака (3 bullets) | DEFINITION | KEEP | YES | — | open | |
+| p4_ghost::03 | L64 | запрещённые формулировки | DEFINITION | KEEP | YES | — | open | Canonical forbidden-words list |
+| p4_ghost::04 | L66–69 | Anti-pattern / Solution | EXAMPLE | KEEP | YES | — | open | §21-protected demo |
+| p4_ghost::05 | L71–76 | канонические примеры призрака table | EXAMPLE | KEEP | YES | — | open | |
+| p4_ghost::06 | L78 | Примечание: один призрак на учебного персонажа | DEFINITION | KEEP | YES | — | open | Canonical rule; mirrored by the §7B.3 пример-2 «ВНЕ КАНОНА» warning ✓ |
 
 ### p4_lie (§4.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_lie::01 | L89 | LIE definition | DEFINITION | KEEP | YES | — | Canonical |
-| p4_lie::02 | L91–95 | правила лжи | DEFINITION | KEEP | YES | — | |
-| p4_lie::03 | L97–102 | канонические примеры лжи table | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_lie::01 | L89 | LIE definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p4_lie::02 | L91–95 | правила лжи | DEFINITION | KEEP | YES | — | open | |
+| p4_lie::03 | L97–102 | канонические примеры лжи table | EXAMPLE | KEEP | YES | — | open | |
 
 ### p4_flaw (§4.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_flaw::01 | L113 | FLAW definition | DEFINITION | KEEP | YES | — | Canonical |
-| p4_flaw::02 | L115–120 | правила дефекта | DEFINITION | KEEP | YES | — | |
-| p4_flaw::03 | L122–134 | Anti-pattern/Solution tables (прилагательное vs поведение; плохой/хороший FLAW) | EXAMPLE | KEEP | YES | REINFORCEMENT | R24 (FLAW-side of the formulation principle) |
-| p4_flaw::04 | L136–141 | канонические примеры дефекта table | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_flaw::01 | L113 | FLAW definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p4_flaw::02 | L115–120 | правила дефекта | DEFINITION | KEEP | YES | — | open | |
+| p4_flaw::03 | L122–134 | Anti-pattern/Solution tables (прилагательное vs поведение; плохой/хороший FLAW) | EXAMPLE | KEEP | YES | REINFORCEMENT | open | R24 (FLAW-side of the formulation principle) |
+| p4_flaw::04 | L136–141 | канонические примеры дефекта table | EXAMPLE | KEEP | YES | — | open | |
 
 ### p4_need (§4.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_need::01 | L152 | NEED definition | DEFINITION | KEEP | YES | — | Canonical |
-| p4_need::02 | L154–158 | правила потребности | DEFINITION | KEEP | YES | — | |
-| p4_need::03 | L160–166 | канонические примеры (WANT↔NEED tension table) | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_need::01 | L152 | NEED definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p4_need::02 | L154–158 | правила потребности | DEFINITION | KEEP | YES | — | open | |
+| p4_need::03 | L160–166 | канонические примеры (WANT↔NEED tension table) | EXAMPLE | KEEP | YES | — | open | |
 
 ### p4_want (§4.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_want::01 | L177 | WANT definition | DEFINITION | KEEP | YES | — | Canonical |
-| p4_want::02 | L179–184 | правила желания | DEFINITION | KEEP | YES | — | |
-| p4_want::03 | L186–193 | канонические примеры желания table | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_want::01 | L177 | WANT definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p4_want::02 | L179–184 | правила желания | DEFINITION | KEEP | YES | — | open | |
+| p4_want::03 | L186–193 | канонические примеры желания table | EXAMPLE | KEEP | YES | — | open | |
 
 ### p4_spine_full_chain (§4.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_spine_full_chain::01 | L204 | full-chain prose walkthrough | DEFINITION | KEEP | YES | REINFORCEMENT | Chain restated in prose — walkthrough function (whitelist: SPINE causality) |
-| p4_spine_full_chain::02 | L206 | `[VS: E05]` second marker («повторное обращение») | METADATA | KEEP | YES | — | Declared repeat-appeal |
-| p4_spine_full_chain::03 | L208–221 | канонический пример полной цепочки: Выщербленный (code) | EXAMPLE | KEEP | YES | — | Canonical worked example |
-| p4_spine_full_chain::04 | L223 | Правило: implicit GHOST/LIE for simple characters | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | **R21:** near-verbatim of §4.1::06 (~180 lines apart, same part); fold to pointer (§4.1 + чек-лист §4.9 — the check-questions variant lives in §4.9) |
-| p4_spine_full_chain::05 | L225 | Ссылка (Part 10; §4.2–§4.6 поэлементно) | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_spine_full_chain::01 | L204 | full-chain prose walkthrough | DEFINITION | KEEP | YES | REINFORCEMENT | open | Chain restated in prose — walkthrough function (whitelist: SPINE causality) |
+| p4_spine_full_chain::02 | L206 | `[VS: E05]` second marker («повторное обращение») | METADATA | KEEP | YES | — | open | Declared repeat-appeal |
+| p4_spine_full_chain::03 | L208–221 | канонический пример полной цепочки: Выщербленный (code) | EXAMPLE | KEEP | YES | — | open | Canonical worked example |
+| p4_spine_full_chain::04 | L223 | Правило: implicit GHOST/LIE for simple characters | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | canonical-link | **R21:** near-verbatim of §4.1::06 (~180 lines apart, same part) — **folded to the canonical-link form iter 150** (v2-build-part-4 P4-2: 1-sentence local reminder + pointers to §4.1 (the canonical owner) and the §4.9 checklist (the check-questions variant lives there); Editorial Policy 5-point check passed; the §4.11 expert-side dual, the §8.10 nuance and the glossary clause untouched) |
+| p4_spine_full_chain::05 | L225 | Ссылка (Part 10; §4.2–§4.6 поэлементно) | NAVIGATION | KEEP | YES | — | open | Master mirror completed iter 150 (the «Ссылка:» label + the Elena half — the P1-5/P3-5 family) |
 
 ### p4_spine_mapping (§4.8)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_spine_mapping::01 | L236 | intro | NAVIGATION | KEEP | YES | — | |
-| p4_spine_mapping::02 | L238–246 | SPINE → тип якоря table (5 rows) | DEFINITION | KEEP | YES | — | Canonical mapping |
-| p4_spine_mapping::03 | L248 | Правило: каждый дефект ≥1 якорь FLAW-linked | DEFINITION | KEEP | YES | — | Canonical (mirrored by AP-8 ✓) |
-| p4_spine_mapping::04 | L250–254 | определения типов якорей (3) | DEFINITION | KEEP | YES | — | |
-| p4_spine_mapping::05 | L256–260 | Якоря FLAW-linked (детально) + пример intro | DEFINITION | KEEP | YES | — | |
-| p4_spine_mapping::06 | L262–267 | алгоритм создания якорей FLAW-linked (4 шага) | APPLICATION | KEEP | YES | — | |
-| p4_spine_mapping::07 | L269–277 | канонический пример: Елена (якоря FLAW-linked table) | EXAMPLE | KEEP | YES | — | |
-| p4_spine_mapping::08 | L279–281 | Динамика SPINE (РЕКОМЕНДАЦИЯ, Consequence Driven) | APPLICATION | KEEP | YES | — | **KI#77-a:** canon ref `[part_07a.md §7A.6 — Consequence Driven]` points to Sampling Params; directive #6 = §7A.2. Master link already resolves to `#p7a_core_directives` (canon-side repair only) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_spine_mapping::01 | L236 | intro | NAVIGATION | KEEP | YES | — | open | |
+| p4_spine_mapping::02 | L238–246 | SPINE → тип якоря table (5 rows) | DEFINITION | KEEP | YES | — | open | Canonical mapping |
+| p4_spine_mapping::03 | L248 | Правило: каждый дефект ≥1 якорь FLAW-linked | DEFINITION | KEEP | YES | — | open | Canonical (mirrored by AP-8 ✓) |
+| p4_spine_mapping::04 | L250–254 | определения типов якорей (3) | DEFINITION | KEEP | YES | — | open | |
+| p4_spine_mapping::05 | L256–260 | Якоря FLAW-linked (детально) + пример intro | DEFINITION | KEEP | YES | — | open | |
+| p4_spine_mapping::06 | L262–267 | алгоритм создания якорей FLAW-linked (4 шага) | APPLICATION | KEEP | YES | — | open | |
+| p4_spine_mapping::07 | L269–277 | канонический пример: Елена (якоря FLAW-linked table) | EXAMPLE | KEEP | YES | — | open | |
+| p4_spine_mapping::08 | L279–281 | Динамика SPINE (РЕКОМЕНДАЦИЯ, Consequence Driven) | APPLICATION | KEEP | YES | — | open | **KI#77-a FIXED iter 127 (ed-8/R18 Phase B):** the canon ref repaired `§7A.6 → §7A.2` (the Consequence Driven home); the master link already resolved to `#p7a_core_directives` — canon↔master consistent. The model-tier qualification («≥32B и API; 12B — ограниченно») = the DEC-22 cluster hint-side pattern, compliant |
 
 ### p4_spine_check (§4.9)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_spine_check::01 | L292 | intro | NAVIGATION | KEEP | YES | — | |
-| p4_spine_check::02 | L294–302 | чек-лист проверки SPINE (7 ☐) | VALIDATION | KEEP | YES | REINFORCEMENT | Check-form of the chain definitions — changed function (§24); mirrored apply-side in §10.4 ✓ |
-| p4_spine_check::03 | L304 | применение чек-листа | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_spine_check::01 | L292 | intro | NAVIGATION | KEEP | YES | — | open | |
+| p4_spine_check::02 | L294–302 | чек-лист проверки SPINE (7 ☐) | VALIDATION | KEEP | YES | REINFORCEMENT | open | Check-form of the chain definitions — changed function (§24); mirrored apply-side in §10.4 ✓. F3 (iter 150): validation class — the pre-existing ☐ affordance compliant (a true pass/fail verification moment); zero other checkbox affordances in Part 4 |
+| p4_spine_check::03 | L304 | применение чек-листа | NAVIGATION | KEEP | YES | — | open | |
 
 ### p4_spine_navigation (§4.10)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_spine_navigation::01 | L314 | next-steps pointer | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_spine_navigation::01 | L314 | next-steps pointer | NAVIGATION | KEEP | YES | — | open | |
 
 ### p4_ghost_layers (§4.11)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p4_ghost_layers::01 | L325 | intro (one GHOST vs layers) | DEFINITION | KEEP | YES | REINFORCEMENT | R21 expert-side dual of §4.1::06 — different decision (when to USE layers), keep both |
-| p4_ghost_layers::02 | L327 | `[VS: E06]` marker | METADATA | KEEP | YES | — | E06 = two-column embed (fixed iter 124, KI#73/74) |
-| p4_ghost_layers::03 | L329–335 | архитектура слоёв table (G1/G2/G3) | DEFINITION | KEEP | YES | — | Canonical; «G2 — Юность (13–25)» vs glossary «Отрочество» → R29 |
-| p4_ghost_layers::04 | L337–343 | канонический пример: Выщербленный (3-tier table) | EXAMPLE | KEEP | YES | — | |
-| p4_ghost_layers::05 | L345 | Ссылка | NAVIGATION | KEEP | YES | — | |
-| p4_ghost_layers::06 | L347–352 | когда использовать слои | APPLICATION | KEEP | YES | — | |
-| p4_ghost_layers::07 | L354–359 | когда достаточно одного | APPLICATION | KEEP | YES | REINFORCEMENT | R21 mirror (expert-side) |
-| p4_ghost_layers::08 | L361 | РЕКОМЕНДАЦИЯ: 3 слоя не всем (Walter §10.2 ✓) | APPLICATION | KEEP | YES | — | |
-| p4_ghost_layers::09 | L363 | Синтез | DEFINITION | KEEP | YES | — | Part-level synthesis (label convention ✓) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p4_ghost_layers::01 | L325 | intro (one GHOST vs layers) | DEFINITION | KEEP | YES | REINFORCEMENT | open | R21 expert-side dual of §4.1::06 — different decision (when to USE layers), keep both |
+| p4_ghost_layers::02 | L327 | `[VS: E06]` marker | METADATA | KEEP | YES | — | open | E06 = two-column embed (fixed iter 124, KI#73/74) |
+| p4_ghost_layers::03 | L329–335 | архитектура слоёв table (G1/G2/G3) | DEFINITION | KEEP | YES | — | open | Canonical; the R29 terminology drift («G2 — Юность» vs glossary «Отрочество») FIXED iter 129 (ed-7 normalization: the glossary G2 entry re-pointed to «Юность», canon + master mirror) — consistent since |
+| p4_ghost_layers::04 | L337–343 | канонический пример: Выщербленный (3-tier table) | EXAMPLE | KEEP | YES | — | open | |
+| p4_ghost_layers::05 | L345 | Ссылка | NAVIGATION | KEEP | YES | — | open | Master mirror added iter 150 (the missing «Ссылка» block — the P1-5 canon-side-drift restoration family) |
+| p4_ghost_layers::06 | L347–352 | когда использовать слои | APPLICATION | KEEP | YES | — | open | |
+| p4_ghost_layers::07 | L354–359 | когда достаточно одного | APPLICATION | KEEP | YES | REINFORCEMENT | open | R21 mirror (expert-side) |
+| p4_ghost_layers::08 | L361 | РЕКОМЕНДАЦИЯ: 3 слоя не всем (Walter §10.2 ✓) | APPLICATION | KEEP | YES | — | open | |
+| p4_ghost_layers::09 | L363 | Синтез | DEFINITION | KEEP | YES | — | open | Part-level synthesis (label convention ✓) |
 
-**Part 4 verdict:** canonical SPINE part. One intra-part duplicate (R21 §4.7::04 — fold to pointer),
-one wrong canon ref (KI#77-a §4.8::08). Everything else canonical or compliant.
+**Part 4 verdict (audit time, iter 126):** canonical SPINE part. One intra-part duplicate (R21 §4.7::04 —
+fold to pointer), one wrong canon ref (KI#77-a §4.8::08). Everything else canonical or compliant.
+Both were executed/fixed after the audit: KI#77-a repaired iter 127 (ed-8/R18 Phase B); the R21 fold
+executed iter 150 (this slice).
+
+**v2 build slice executed iter 150** (DEC-24 Q6 guide order — fourth Part of the v2 build phase;
+Registry C map [`migration_map_v2.md`](./migration_map_v2.md) §5.11): the `presentation` column
+seeded on all 51 Part 4 rows — **50 `open` + 1 `canonical-link`**: Part 4 is the Learn-mode core
+teaching Part for SPINE (BASIC §4.1–§4.7, INTERMEDIATE §4.9–§4.10, EXPERT §4.11 per the canon
+difficulty markers; §4.8 BASIC) and every other block is canonical teaching content (definitions,
+rules, mapping tables, protected examples — all under the registered Collapsible thresholds; the
+longest, the §4.7 full-chain code block ~100 words, is the section's core demonstration = required
+reading) → zero qualifying F6 blocks (honest application, not forced). The one `canonical-link` =
+`p4_spine_full_chain::04` — the R21 near-verbatim re-statement folded to the 1-sentence pointer
+form (the only canon content edit of the slice; Editorial Policy 5-point check passed — the §4.1
+owner, the §4.11 expert-side dual, the §8.10 nuance and the glossary clause all untouched).
+F3: the §4.9 checklist = validation class (the pre-existing ☐ affordance at a true pass/fail
+verification moment — compliant; checkboxes otherwise reserved §9.3/§9.11); the §4.8 algorithm +
+the §4.11 when-lists = teaching/application lists, zero checkbox affordances; zero decision-input
+checklists (the Build entry instrument = §1.8, executed iter 147). F4: worked tier = §4.7 full-chain
+code + §4.8 Елена table (chipped ИЛЛЮСТРАЦИЯ) and the §4.2 anti-pattern card (the registered
+unchipped variant — no chip invented); the per-element canonical value tables (§4.2/§4.3/§4.4/
+§4.5/§4.6) = inline tier. F5: verified (Concept→Rule→Core example per section; Reference branches
+live: §4.1::06→§4.9, §4.7::05→Part 10 + §4.2–§4.6, §4.8::08→§7A.2, §4.11::05→§4.7 + Part 10,
+§4.11::08→§10.2); the fold tightens §4.7's Rule branch to the fence-#11 form. F6: zero new
+`<details class="interactive">`. Master: §4.6 mirror completed (the iter-123 russification miss:
+definition + the missing 4th rule bullet + the examples-table canon form) + §4.7::05/§4.11::05
+«Ссылка» mirrors restored (map §5.11 P4-3/P4-4). Observed, deferred (map §5.11): the master-only
+§4.8 infographic + the table's «Пример (Елена)» 4th column + the §4.4 FLAW-Anchors nav callout
+(registered components, live reader-visible knowledge without a canon home — disposition rides the
+canonical-audit stage / an ed-* batch, not forced here); §4.2/§4.9 wording-level variances
+(v7-era compressions, not F-policy). Line refs on pre-existing rows = audit-time anchors
+(iter 126), not re-based — iter-147 slice precedent.
 
 ---
 
@@ -1268,7 +1299,7 @@ appendix content describes never-loaded containers.
 | R18 | Vague `§X.X` placeholder refs — **canon-only debt: master resolves every occurrence to a proper anchor (verified iter 126: zero `§X.X` strings in master `part_05/08/09/10.html`; part_04 L281 resolves correctly)** — **Phase B batch repaired iter 127 (ed-8/R18: 33 refs + 6 part_08 parens + KI#77-a–d; part_05 L21 → limits-table pointer with master mirror + sync-audit P0-16 update). Phase A remainder REPAIRED iter 128 (ed-8/R18 continuation): 16 refs (grep recount — the ~13 estimate was undercounted again): part_09 ×12 (L64/65/66/86/103/104/105/106/113/134/137/227 — L64 + L134 were matrix-unflagged), part_07a ×3 (L109/L340/L699 + L699 paren closed), part_03 ×1 (L165) — every target verified against the existing master anchor; 2 labels aligned to the master target (L65 → §3.3 «Правила Examples», L66 → §7B.2 «Greeting»)** | — | Remaining vague forms (out-of-scope by design): `_README.md` L103 (ref-notation format example) · character_map L41 «Part 10 §10.X» (generic form, matrix-unflagged) | Navigation debt (mechanical, canon-first) | ed-8 ✅ Phase A+B complete |
 | R19 | Voice Leak causes | §3.6 | §9.5 voice rows | REINFORCEMENT (lookup form) | — |
 | R20 | 12B symptoms | §9.10 | §9.5 general rows | SPECIAL CASE | — |
-| R21 | Simple-characters implicit GHOST/LIE rule («для простых персонажей призрак и ложь могут быть неявными; полная цепочка должна быть логически связана») | `p4_spine_overview::06` (§4.1) | §4.7 L223 **near-verbatim re-statement** (candidate #16 — fold to pointer) · §4.11 L354–359 expert-side mirror (compliant — different decision) · §8.10 L193 «критерий сломанной SPINE» (reconciliation nuance — must survive) · **[B]** glossary SPINE entry (clause, acceptable) | DUPLICATE (§4.7 only) | candidate #16 / ed-7 |
+| R21 | Simple-characters implicit GHOST/LIE rule («для простых персонажей призрак и ложь могут быть неявными; полная цепочка должна быть логически связана») | `p4_spine_overview::06` (§4.1) | §4.7 L223 re-statement **folded to the canonical-link pointer iter 150 (v2-build-part-4 — candidate #16 executed: 1-sentence local reminder + refs §4.1/§4.9)** · §4.11 L354–359 expert-side mirror (compliant — different decision) · §8.10 L193 «критерий сломанной SPINE» (reconciliation nuance — must survive) · **[B]** glossary SPINE entry (clause, acceptable) | DUPLICATE (§4.7 only) — **resolved iter 150** | candidate #16 ✅ executed iter 150 |
 | R22 | Выщербленный sensory anchors (тактильный/обонятельный/проприоцептивный) | §2.6 L166–173 (teaching example) | §10.4 L491–493 (production card — near-verbatim) | REINFORCEMENT (teach vs production artifact; §21 protection; governed by the character-map «one place per character, elsewhere = ref» rule for definitions, not card content) | — |
 | R23 | CoT Tier-3 Выщербленный example (`processus_analysium` block) | §6.5 L156–173 (teach, full) | §6.6 L192–199 (summary table, compressed) · §10.4 L496–517 (production card, verbatim) | REINFORCEMENT (3 functions: teach / summary / production) | — |
 | R24 | Adjective-vs-behavior formulation principle («не прилагательное, а наблюдаемое поведение») | §4.4 anti-pattern tables (FLAW-side) | §2.2 L55 RULE (anchor-side, ref §4.4 ✓) · **[B]** glossary F-FLAW + B-Anchor entries (reference-side) · §4.1::05 observable-units (family) | REINFORCEMENT (different objects: anchor / FLAW / reference) | — |
@@ -1347,14 +1378,14 @@ cumulative list with execution status:**
 13. `p9_test_requirements::02` — «минимум 6 сценариев» restatement → COMPRESS — open
 14. `p0_how_to_read::05` — callout-labels history clause (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 15. `p0_how_to_read::06` — DEC-16 repo pointers (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
-16. `p4_spine_full_chain::04` — implicit-GHOST/LIE near-verbatim re-statement (R21) → CROSS-REFERENCE — open (Phase B)
+16. `p4_spine_full_chain::04` — implicit-GHOST/LIE near-verbatim re-statement (R21) → CROSS-REFERENCE — **✅ executed iter 150 (v2-build-part-4 P4-2 — the R21 fold to the canonical-link form; the §9.4↔§9.5-fold precedent of fold candidates riding the v2 build slices)**
 17. `p6_cot_tiers::05` — iter-29/KI#18-F canon-only note (R17) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 18. `appendix_character_map::04` — iter-40/KI#29 history label (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — compression executed iter 133 in the v2 registry (C-5); the frozen v1 file rides the v2 switch (migration_map_v2 D-5)
 20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
 
-Execution status: 13 of 20 combined candidates executed (iters 121/125/128/129/130/134); 7 open overall
-(#8, #11, #13 from Phase A + #16, #20 from Phase B). #7 (KI#72) carries an owner decision; #19's
+Execution status: 14 of 20 combined candidates executed (iters 121/125/128/129/130/134/150); 6 open
+overall (#8, #11, #13 from Phase A + #20 from Phase B). #7 (KI#72) carries an owner decision; #19's
 registry-side compression landed iter 133 (file rides the v2 switch); the rest are ready for ed-* execution
 under the Editorial Policy.
 

@@ -666,6 +666,66 @@ with the slice (+ root `index.html` timestamp). Drift actionable **158 → 157**
 class, verified by the post-edit run; the disposals were master-side and did not affect the
 count). Next Part: **Part 4** (guide order; its own slice reuses this shape).
 
+### 5.11 Part 4 v2 build slice (seeded + executed iter 150 — v2 build phase, fourth Part)
+
+Scope: **Part 4 — SPINE** (11 sections, 51 block rows; DEC-24 Q6 guide order — Part 4 fourth; the
+per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate cleared
+by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape (evidence → canon restructure →
+master mirror → full battery) — fourth application, reusing the §5.8/§5.9/§5.10 pattern. Primary
+reader mode: **Learn** (the core teaching Part for SPINE — full-narrative default visibility per the
+spec §3). Editorial Policy 5-point check applied per edit (documented per row below). Acceptance
+gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines) —
+**no new cluster parity gate**: Part 4 owns no cluster values (verified: the seven cluster owners —
+§7A.2 / §7A.12 / §7A.6 / §5.4 / §9.6 / §3.2 / glossary registry — sit outside Part 4; the §4.8::08
+Consequence-Driven hint defers to §7A.2, the §4.8::03 FLAW-linked rule mirrors AP-8 compliantly);
+SPINE causality recurrence = whitelisted useful repetition (matrix §1.3 rule 3).
+
+**F2 presentation map (spec §4.1 mechanism, fourth application):** the Part 4 matrix tables now
+carry the `presentation` column (51 rows; matrix §1.2 scope note extended to Parts 1–4).
+Disposition: **50 `open` + 1 `canonical-link`** — Part 4 is the Learn-mode core teaching Part for
+SPINE (BASIC §4.1–§4.8, INTERMEDIATE §4.9–§4.10, EXPERT §4.11 per the canon difficulty markers) and
+every other block is canonical teaching content (definitions, rules, mapping tables, protected
+examples — all under the registered Collapsible thresholds; the longest, the §4.7 full-chain code
+block ~100 words, is the section's core demonstration = required reading) → zero qualifying F6
+blocks (honest application, not forced). The one `canonical-link` = `p4_spine_full_chain::04` (the
+R21 near-verbatim re-statement — executed as P4-2 below). F3: the §4.9 checklist = validation class
+(the pre-existing ☐ affordance at a true pass/fail verification moment — compliant; checkboxes
+otherwise reserved §9.3/§9.11); the §4.8 algorithm + the §4.11 when-lists = teaching/application
+lists, zero checkbox affordances; zero decision-input checklists (the Build entry instrument =
+§1.8, executed iter 147). F4: worked tier = the §4.7 full-chain code + the §4.8 Елена table (chipped
+ИЛЛЮСТРАЦИЯ) + the §4.2 anti-pattern card (the registered unchipped variant — no chip invented);
+the per-element canonical value tables (§4.2/§4.3/§4.4/§4.5/§4.6) = inline tier. F5: verified
+(Concept→Rule→Core example per section; Reference branches live: §4.1::06→§4.9, §4.7::05→Part 10 +
+§4.2–§4.6, §4.8::08→§7A.2, §4.11::05→§4.7 + Part 10, §4.11::08→§10.2); the fold tightens §4.7's
+Rule branch to the fence-#11 form. F6: zero new `<details class="interactive">`.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P4-1 | — (evidence) | matrix Part 4 tables: 8 columns, no presentation axis | `presentation` column seeded (51 rows: 50 `open` + 1 `canonical-link`); matrix §1.2 scope note extended to Parts 1–4; the Part 4 verdict re-labeled audit-time + the iter-150 slice note appended; two stale notes refreshed — `p4_spine_mapping::08` (the KI#77-a §7A.6→§7A.2 repair was executed iter 127, ed-8 Phase B; the note described the pre-repair state) and `p4_ghost_layers::03` (the R29 «Отрочество»→«Юность» glossary normalization executed iter 129); R21 registry row + §16.3 candidate #16 marked executed (14/20, 6 open) | EXECUTED **— iter 150** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149 stale-note-refresh precedent |
+| P4-2 | `p4_spine_full_chain::04` | «**Правило:** для простых персонажей призрак и ложь могут быть неявными. Но если используется полная цепочка — она должна быть логически связана. Проверьте: призрак объясняет ложь? Ложь защищает от боли призрака? Дефект — прямое поведение из лжи?» — near-verbatim re-statement of §4.1::06 (R21, matrix DUPLICATE/CROSS-REFERENCE since iter 126; candidate #16, owner gate NONE) | folded to the canonical-link form: «**Правило:** полная цепочка должна быть логически связана (для простых персонажей призрак и ложь могут быть неявными — правило упрощения: §4.1; проверка связности: чек-лист §4.9).» — 1-sentence local reminder + pointers to the canonical owner (§4.1::06) and the §4.9 checklist (the check-questions variant lives there); the §4.11 expert-side dual, the §8.10 L193 nuance and the glossary clause untouched | MOVED **— executed iter 150** | R21/candidate #16 (matrix-evidenced, DEC-15); DEC-24 Q2 (canonical-link); the §9.4↔§9.5-fold precedent (fold candidates ride the v2 build slices); 5-point check: capability (the rule stays locally; the check-questions = §4.9 checklist items 1–3 verbatim-equivalent), coverage (§4.1::06 owner + §4.9), retrieval (local reminder kept; the procedure one hop), context (§4.7 closes on the Ссылка branch — flow intact), dependency (grep-verified: the folded wording absent from scripts/tests/audits; no sync-audit probe locks this callout — the part_04 probe list verified: P0-3/P0-7/P0-8/P0-9/P1-5/P1-7/P2-13/P3-4b/P2-7) |
+| P4-3 | `p4_want::01`/`::02`/`::03` | master §4.6 definition mangled («<strong>желание</strong> — осознанное Желание… желание совместим с LIE» — a partial russification that left broken casing + the pre-DEC-16 «LIE» wording); the rules list missing the 4th bullet «Совместимо с ложью (WANT ↔ LIE — персонаж не видит противоречия)» (never present in master in any form, pickaxe-verified `--all`); the examples table dropping «опубликовать» + the variant labels + the canon row order | the full canon iter-123 form restored: definition «**Желание (WANT)** — осознанное желание персонажа… Желание совместимо с ложью…»; the 4th bullet added; the table rows restored to the canon form (Елена / Елена (variant) / Выщербленный / Выщербленный (variant), «опубликовать историю» wording) | MOVED **— executed iter 150** | the P3-5 mirror-restoration family (the iter-123 DEC-16 russification that never reached master; pickaxe-verified: «Совместимо с ложью» never in master pre-slice); fence #10 (canon wins); the §4.5 table already carries the variant labels (master-internal consistency restored) |
+| P4-4 | `p4_spine_full_chain::05`, `p4_ghost_layers::05` | (a) master §4.7 Ссылка without the «Ссылка:» label and without the canon Elena half («Полная цепочка Елены (другой канонический пример) — §4.2–§4.6 (поэлементно)» — never in master, pickaxe-verified); (b) canon §4.11::05 «Ссылка» (Полная цепочка Выщербленного — §4.7. Полная карточка — Part 10) with NO master counterpart at all | (a) the full canon form restored (bold label + `<a href="#p4_ghost">§4.2–§4.6</a>` anchor); (b) the missing «Ссылка» block added after the §4.11 3-tier example table (canon position; `<a href="#p4_spine_full_chain">§4.7</a>` + `<a href="#p10_vysherblenny">Part 10</a>`) | MOVED **— executed iter 150** | the P1-5/P3-5 Reference-branch mirror family (F5 Reference branch duty; DEC-16 «Ссылка» label law); the P3-4b Walter-line probe untouched (different block) |
+| P4-5 | — (master layer, observed) | three master-only §4.8/§4.4 enrichments, never canonized: the `inf-pipeline` infographic «SPINE → Anchors: мнемоническая связь» (v7-era `eb4b91bd`; registered components; a *distinct* anchor-anatomy mnemonic — призрак→ТРИГГЕР / дефект→ЦЕНА — not covered by the canon type table), the mapping table's 4th «Пример (Елена)» column, the §4.4 nav callout «ПРАВИЛО: FLAW-linked Anchors → SPINE → Карта Anchors: FLAW-Anchors (ниже)» | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge: disposal loses unique capability, canonicalization adds canon content — an editorial value decision outside this slice's forced scope) | RECORDED **— deferred (iter 150)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy (compress redundant presentation, never unique capability); rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P4-6 | — (state) | STATUS iter-149 / PLAN row v2-build-part-4 open / no map §5.11 | map §5.11 + STATUS iter-150 (Next step re-pinned to the Part 5 slice) + PLAN v2-build-part-5 + worklog + CHANGELOG + NAV §7 de-stale (v2_architecture + editorial_matrix rows: Parts 1–4) | EXECUTED **— iter 150** | iter-147/148/149 state-package pattern |
+
+Accounting: 1 presentation-column seeding (51 rows: 50 `open` + 1 `canonical-link`) + 1 canon R21
+fold (P4-2 — the only canon content edit; the §4.7 chain code block, the §4.11 tables, every
+canonical value table byte-unchanged) + 1 §4.6 mirror completion (P4-3) + 2 Reference-branch
+mirrors (P4-4) + 1 observation package deferred (P4-5) + 1 state package (P4-6). Byte-unchanged:
+canon `part_04.md` outside the §4.7::04 line (front-matter staleness deferred, repo-wide); master
+§4.1/§4.2/§4.3/§4.4/§4.5/§4.8/§4.9/§4.10 entirely + §4.6/§4.7/§4.11 outside the edited blocks (the
+E05/E06 embeds, the §4.8 infographic + 4th column + §4.4 nav callout — recorded P4-5, untouched);
+matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope): the P4-5
+master-only enrichments (canonical-audit stage / ed-* batch); canon front-matter `vs_embedded`
+staleness (rides the v2 canon format); KI#79 drift-tool regex (tooling); §4.2/§4.9 wording-level
+variances (v7-era master compressions — «НЕ период» drop, mixed-identifier checklist item 4 —
+formatting churn, not F-policy); quote-style variances (straight vs guillemet). Root fallback
+`parts/part_04.html` regenerated with the slice (+ root `index.html` timestamp). Drift actionable
+**157 → 155** (−2, both canon-side matches gained: the §4.6 restoration resolved the mangled
+definition's no_master_match entry + the rules-list pairing, the §4.11::05 «Ссылка» canon paragraph
+gained its master mirror — verified by the JSON pre/post diff; the §4.7 fold kept its pairing).
+Next Part: **Part 5** (guide order; its own slice reuses this shape).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -763,6 +823,24 @@ count). Next Part: **Part 4** (guide order; its own slice reuses this shape).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 150 (Part 4 v2 build slice, BASE_COMMIT `b0c21c3b`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-4, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.11 (P4-1..P4-6)** on the spec §7 shape (fourth application, reusing the
+  §5.8/§5.9/§5.10 pattern): evidence — the matrix Part 4 tables gain the F2 `presentation`
+  column (51 rows: 50 `open` + 1 `canonical-link`; the Collapsible criteria honestly applied:
+  zero qualifying blocks; two stale notes refreshed — the KI#77-a repair iter 127 on
+  `p4_spine_mapping::08`, the R29 normalization iter 129 on `p4_ghost_layers::03`; the R21
+  registry row + §16.3 candidate #16 marked executed, 14/20 / 6 open) + this §5.11 registry;
+  canon — the single content edit = the **R21 §4.7::04 fold** to the canonical-link form
+  (1-sentence local reminder + §4.1/§4.9 pointers; Editorial Policy 5-point check passed; the
+  §4.1 owner, the §4.11 expert-side dual, the §8.10 nuance, the glossary clause untouched);
+  master — the §4.7 rule-callout fold mirror + the §4.6 mirror completion (the iter-123
+  russification miss: definition + the never-present 4th rule bullet + the examples-table canon
+  form) + the §4.7::05/§4.11::05 «Ссылка» Reference-branch mirrors; the three master-only
+  §4.8/§4.4 enrichments (infographic + 4th table column + nav callout) recorded as deferred
+  observations (P4-5); drift 157 → **155** (−2, canon-side matches gained); full battery green
+  (sync 97/97, parity ×7, tests 64/64, english 18, syntax 238, hash unchanged); Next step
+  re-pinned to the Part 5 slice.
 - **iter 131 (seed, BASE_COMMIT `987e4f3`):** registry created; layer model (§2), 18 element
   dispositions (§3, all PROPOSED), 7 cluster rows (§4), decision points (§6).
   Evidence base: `migration_foundation_iter131.md`.
