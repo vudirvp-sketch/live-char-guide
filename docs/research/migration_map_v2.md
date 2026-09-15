@@ -1096,6 +1096,78 @@ examples Part; the appendix/Reference slice after Part 10 carries the KI#70 WIRE
 per DEC-24 Q7).
 
 
+### 5.18 Part 10 v2 build slice + the owner-called KI#84 reconciliation (seeded + executed iter 157 — v2 build phase, eleventh Part)
+
+Scope: **Part 10 — Examples** (4 sections, 20 block rows; DEC-24 Q6 guide order — Part 10 eleventh;
+the per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate
+cleared by DEC-24) **+ the owner-called KI#84 canonical-audit reconciliation** (the owner's session
+directive 2026-09-16: «продолжай работы по планам! + KI#84: DELETE the §9.6 Walter OCEAN
+cross-reference line; keep §9.7 as the sole Part-9 reference to Walter's OCEAN example. Execute the
+deletion during canonical-audit reconciliation, updating both affected audit anchors accordingly» —
+the KI#84 row's deferred "owner call / canonical-audit stage" precondition answered; executed in the
+same iteration per the DEC-24+Part-1 combined-iteration precedent). Mechanism: the ratified spec §7
+per-Part slice shape (evidence → canon restructure → master mirror → full battery) — eleventh
+application, reusing the §5.8–§5.17 pattern. Primary reader mode: **Learn** (the worked-examples
+Part — the F4 worked tier's canonical home per spec §4.3). Editorial Policy 5-point check applied
+per edit (documented per row below). Acceptance gate: the full battery (sync 97/97 + parity ×7 +
+build + validate + tests + qa baselines) — **no new cluster parity gate**: Part 10 hosts no cluster
+owner (verified: the seven cluster owners — §7A.2 / §7A.6 / §7A.12 / §5.4 / §9.6 / §3.2 / glossary
+registry — sit outside Part 10); KI#84's two tool anchors were re-pointed in step (P10-5,
+disclosed). The R11/KI#77-e budget-framing family stays owner-gated (ed-5) — the slice documents,
+does not re-decide.
+
+**F2 presentation map (spec §4.1 mechanism, eleventh application):** the Part 10 matrix tables now
+carry the `presentation` column (20 rows; matrix §1.2 scope note extended to Parts 1–10).
+Disposition: **9 `open` + 11 `collapsible`** (count script-verified). The 9 `open` = the four
+section intros + the four «Демонстрирует» metadata lines + Elena's «Примечание» (Greeting
+canonical-vs-учебный pointer — IMP-48 pair with §7B.2). The 11 `collapsible` = all four cards +
+their attached budget rows (×4) + the Omnis/Выщербленный Lorebook tables (×2) + the §10.4
+SPINE-consistency table — **all render inside the pre-existing v7-era F6 wraps** (`eb4b91bd`, one
+`<details class="interactive">` per card, 4 usages; master total stays 17): the Part-1-slice standing
+note («long worked scenarios = `collapsible` candidates at Parts 9/10») has been satisfied since the
+v7 migration — documented, not re-wrapped (the Part 7B pre-existing-F6 precedent). Zero
+`canonical-link` / `reference-relocate` / `delete-candidate` / `—` (the verdict «protected example
+layer; zero compression candidates» held). F3: zero checklists in the Part (the §10.4
+SPINE-consistency table = the §4.9 checklist in applied demo form inside the card — no ☐
+affordances; not an F3 checkbox moment). F4: the four cards = the worked tier's canonical home
+(spec §4.3, EXAMPLE-139 family); the «Демонстрирует» lines + «ШАБЛОН» chips = the deployed labelling;
+E15 = the Elena-card visual walkthrough (SHARED_REFERENCE, mig-4). F5: verified F5-approximate —
+intro (Concept+budget) → «Демонстрирует» (metadata) → card (Core example) → budget `[ref: §7A.12]`
+(Reference); the Parts 5/6/7B/8 zero-restructure precedent. F6: zero new wraps.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P10-1 | — (evidence) | matrix Part 10 tables: 8 columns, no presentation axis; the four budget-row notes carrying the pre-iter-127 R18 «`§7A.X` vague» state; the verdict line asserting «all four budget refs are vague» (stale — repaired ed-8/R18 iter 127 `8a365553`, pickaxe-verified); the `p10_vysherblenny::03` note carrying the iter-125 obs-6 typo state | `presentation` column seeded (20 rows: 9 `open` + 11 `collapsible` — count script-verified); matrix §1.2 scope note extended to Parts 1–10; the Part 10 verdict refreshed with the iter-157 slice note (the R18 repair disclosed; the R27/KI#77-e framing family stays owner-gated ed-5); **four stale budget-row notes refreshed** (`p10_elena::05` / `p10_walter::04` / `p10_omnis::05` / `p10_vysherblenny::04` — the refs repaired iter 127; master resolves to `#p7a_token_budget`) + the obs-6 typo note marked EXECUTED this slice | EXECUTED **— iter 157** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…156 stale-note-refresh precedent |
+| P10-2 | `p10_vysherblenny::03` (canon, L397) | the card heading carried the «Выщебленного» misspelling (recorded iter 125 as obs-6; re-flagged P9-5(e) iter 156; pinned to this slice by the PLAN row note) | **the typo repaired**: canon `part_10.md` L397 `### Полная карточка Выщебленного` → `### Полная карточка Выщербленного` — the only canon edit of the slice. 5-point check: capability — a heading spelling fix, zero semantic change (the correct form already lives in the §10.4 heading, `data-section: p10_vysherblenny`, master h3); coverage — the card content byte-unchanged; retrieval — no anchor/ID touched (fence #4/#5 clean); context — the heading opens the same ШАБЛОН block; dependency — no sync probe pins the heading (grep-verified); F5 verified F5-approximate — zero restructure (the Parts 5/6/7B/8 precedent) | MOVED **— executed iter 157** | fence #10 (correctness); the iter-156 §9.11 typo-repair precedent; the PLAN v2-build-part-10 note (P9-5(e) rides this slice) |
+| P10-3 | `p10_vysherblenny::03` (master, the F6 summary) | the master `<summary>Полная карточка Выщебленного</summary>` carried the same misspelling | **the mirror repair**: master `part_10.html` L521 summary → «Полная карточка Выщербленного». Zero mirror gaps found: the drift pre-capture classifies all 7 part_10 actionable entries as 4 comment-noise + 3 KI#79-boundary budget-`<p>` absorptions (the «Итого» lines inside `<details>` swallowed by pre-blobs — informational; no «Ссылка»-family gap; the v9 Phase-6 slimming never hit Part 10 — the master retains the full cards). Zero new F6 wraps (the 4 pre-existing v7 wraps documented — P10-1) | MOVED **— executed iter 157** | fence #10 (canon = source of truth, master mirrors); the iter-156 typo-repair precedent |
+| P10-4 | — (observed) | master-only enrichments + variances, never canonized/resolved: (a) the Omnis Embodiment 5th-item variance — master «Звук: тихий гул электромоторов, щелчки манипуляторов (голос задаётся только в Examples — см. Voice Isolation rule §3.X)» vs canon «Голос: синтезированный, металлический резонанс, фраза → пауза-обработка → фраза»: the iter-75 KI#51 master-only fix (pickaxe `6b5ab1e0` — «Voice в Description Омнис-Зета… Embodiment „Голос:“ заменён на „Звук:“») never synced to canon; carries the R18 vague-ref («§3.X») + DEC-16 EN-label («Voice Isolation rule») families; the DEC-21-era physical/linguistic voice split (STATUS invariant: physical = Embodiment/Description) makes the canon form legal again — both directions change reader-visible card content → the canonical-audit stage; (b) Elena's master-only card lines — «Tone Frame: Tone: grounded, understated…» + «OOC PROTECTION: …» (canon's Elena card carries neither; the E15-embed alignment family — the E15 card-template shows the same strings); (c) the master-only top-of-part «ПРАВИЛО: Правило голоса…» callout (v8 Task 2.2 addition; the «никогда в Description» framing predates the §3.1 physical/linguistic split — the P9-5-family tension); (d) the canon front-matter staleness (`vs_embedded: none` vs the file-level `[VS: E15]` marker — the iter-152 repo-wide family); (e) the 7 part_10 drift entries (4 comment-noise + 3 KI#79-boundary — informational, pre-existing); (f) the STATUS iter-156 Next-step row said «5 sections» — the verified count is 4 (corrected in this registry; no reader impact) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge or non-rendering metadata; the disposals ride the canonical-audit stage per the P4-5…P9-5 chain) | RECORDED **— deferred (iter 157)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy; rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P10-5 | — (KI — the owner-called canonical-audit reconciliation) | **KI#84** (opened iter 156): the master §9.6 P3-4c Walter cross-ref line «Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — осторожная зона, без экстремальных полюсов кроме O=72) — Уолтер Уайт, §10.2» carried **Елена's OCEAN values attributed to Walter** (born wrong iter 38 — the P3-4 fix commit itself; §10.2 actual: O:65 C:85 E:30 A:25 N:60); pinned byte-identical by TWO tool anchors (the sync probe P3-4c + the diagnostics-parity WALTER_ANCHOR) + the §9.6 byte-stability lock — deferred to the owner call / canonical-audit stage | **the owner-called DELETE executed**: the master §9.6 Walter line removed (`src/master/part_09.html` — one `<p>` + its blank line; canon §9.6 carried no Walter line → **canon `part_09.md` byte-stable through the reconciliation**, the §9.6 sha pre = post — the mig-3 record untouched); **§9.7 stays the sole Part-9 reference** to Walter's OCEAN example (the canon+master line with Walter's actual extremes C=85/A=25/E=30 — verified present both sides). **Both tool anchors moved together**: (1) the sync probe P3-4c → `ABSENT_CHECKS` as **P3-4c-del** (a negative check — the line must stay absent; total count 97 preserved: 73 positive + 24 negative; the iter-148/155 in-step probe-adjustment precedent, disclosed in the script docstring); (2) the diagnostics-parity `WALTER_ANCHOR` → `WALTER_DELETED` (the absence guard) + a NEW check **2b** (the §9.7 sole-reference guarantee — canon §9.7 + master §9.7 must both carry the Walter OCEAN example line with the actual extremes; `audit_diagnostics_parity.py` PASS). 5-point check: capability — the §9.6→§10.2 navigation pointer removed from §9.6 (a 1-sentence cross-ref link, not a teaching block — fence #11's "everywhere else = 1-sentence link" pattern loses one redundant pointer whose VALUES were wrong); coverage — the Walter OCEAN testing example remains fully reachable via §9.7 (the same `#p10_walter` link + the correct values); retrieval — §9.6's diagnostic core (the E13 mapping table + the 5-group table) unchanged, §9.7 carries the testing-example pointer where the testing scenario table lives; context — the §9.6 decision-tree flow unchanged (the line sat after the closing table); dependency — both dependent tool anchors re-pointed in step; grep-verified no other consumer («Уолтер» in master part_09 = the §9.7 line only) | MOVED **— executed iter 157 (KI#84 CLOSED)** | the owner's session directive (2026-09-16, quoted above); Editorial Policy 5-point check; fence #10; the KI lifecycle (AGENTS.md Bug→doc→fix) |
+| P10-6 | — (state) | STATUS iter-156 / PLAN row v2-build-part-10 open / no map §5.18 | map §5.18 + STATUS iter-157 (Current State; the v2-architecture invariant + Next-step preamble extended to Parts 1–10 / iters 147–157 / maps §5.8–§5.18; KI#84 → CLOSED iter-157; iter-157 KI-note; Next step re-pinned to the appendix/Reference slice carrying the KI#70 WIRE per DEC-24 Q7) + PLAN v2-build-part-10 → COMPLETE + the appendix-slice row + iter-157 history note + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–10) | EXECUTED **— iter 157** | iter-147…156 state-package pattern |
+
+Accounting: 1 presentation-column seeding (20 rows: 9 `open` + 11 `collapsible`, count
+script-verified) + 1 canon typo repair (P10-2 — the only canon content edit; zero F5 restructure) +
+1 master summary typo repair (P10-3) + **1 owner-called master deletion (P10-5 — the KI#84 §9.6
+Walter line; canon part_09.md byte-stable, git-diff-verified)** + 2 tool-anchor re-points in step
+(P10-5, disclosed: the sync P3-4c → P3-4c-del negative check — count 97 preserved; the
+diagnostics-parity WALTER_DELETED absence guard + the new check 2b §9.7 sole-reference guarantee) +
+1 observation package deferred (P10-4) + 1 state package (P10-6). Byte-unchanged: canon
+`part_10.md` outside L397; master `part_10.html` outside L521; canon `part_09.md` entirely; master
+`part_09.html` outside the §9.6 deletion (the E13 embed, the §9.7 tables, the §9.11 F6 wrap
+verified); matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope):
+the P10-4 observation package (canonical-audit stage / ed-* batch); KI#77-e + KI#79 (open,
+untouched); KI#70 rides the appendix/Reference slice per DEC-24 Q7. Root fallbacks
+`parts/part_10.html` + `parts/part_09.html` regenerated with the slice (+ root `index.html`
+timestamp). Drift actionable **143 → 143** (unchanged, expected: the deleted master-only `<p>` had
+no canon counterpart; the typo repairs touch a canon heading + a master summary — both
+drift-untracked; verified by the JSON pre/post diff; zero new rows). Next: **the appendix/Reference
+slices** (guide order A → B → C, each its own bounded slice per the spec §7 / STATUS row-2 wording;
+the first appendix slice carries the **KI#70 WIRE implementation per DEC-24 Q7** + its runtime-suite
+verification — 93→96 sections, the `mbti-composer` init check, the `#appendix_*` TOC links;
+Appendix D (character_map) = canon-only, rides its own slice) → parity audit → canonical audit (the
+P4-5 + P5-5 + P6-4 + P7A-4 + P7B-4 + P8-4 + P9-5 + **P10-4** master-only enrichment observations
+ride this stage) → reader-path audit → switch.
+
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -1193,6 +1265,18 @@ per DEC-24 Q7).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 157 — Part 10 v2 build slice + the owner-called KI#84 reconciliation (map §5.18
+  P10-1..P10-6):** F2 presentation column 20 rows (**9 `open` + 11 `collapsible`** — all
+  pre-existing v7-era F6 wraps documented, zero new wraps); canon — the L397 «Выщебленного»→
+  «Выщербленного» typo repair (the only canon edit; zero F5 restructure); master — the F6-summary
+  mirror repair; zero mirror gaps (drift pre-capture: 4 comment-noise + 3 KI#79-boundary entries);
+  **KI#84 EXECUTED per the owner's session directive** (the master §9.6 Walter OCEAN cross-ref line
+  DELETED — Elena's values had been attributed to Walter since iter 38; §9.7 = the sole Part-9
+  Walter reference; canon `part_09.md` byte-stable; BOTH tool anchors moved together: the sync
+  probe P3-4c → `P3-4c-del` negative check — count 97 preserved — + the diagnostics-parity
+  `WALTER_DELETED` absence guard + the new check 2b §9.7 sole-reference guarantee; KI#84 CLOSED);
+  the P10-4 observation package deferred (the Omnis «Звук»/«Голос» iter-75 KI#51 variance incl.);
+  drift 143 unchanged.
 - **iter 156 — Part 9 v2 build slice (map §5.17 P9-1..P9-7):** F2 presentation column 43 rows
   (38 `open` + 3 `collapsible` — the §9.11 worked-example F6 wraps — + 1 `canonical-link` — the
   §9.4↔§9.5 fold EXECUTED, canon + master + the sampling-audit check-7 re-point in step — + 1 `—`);

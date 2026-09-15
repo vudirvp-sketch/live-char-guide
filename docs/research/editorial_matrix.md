@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–9: iters 147–156); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–10: iters 147–157); the appendices get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -1255,47 +1255,53 @@ pre-fix states). Master-only enrichments + variances recorded as deferred observ
 
 ### p10_elena (§10.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p10_elena::01 | L19 | budget intro (~540 / ~1000) | DEFINITION | KEEP | YES | — | R27 inputs; → migration_map_v2 TB-4/TB-5 (E15 embed + canon marker — mig-4 executed iter 135: derivation note on the Examples total) |
-| p10_elena::02 | L21 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | EN list = executable-adjacent metadata (qa:english baseline class) |
-| p10_elena::03 | L23 | Примечание: canonical vs учебный Greeting | NAVIGATION | KEEP | YES | REINFORCEMENT | R28 back-ref to §7B.2 ✓ (IMP-48 pair) |
-| p10_elena::04 | L25–101 | ШАБЛОН: полная карточка Елены (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | `{{CORE_DIRECTIVES — …}}` shorthand ✓ (R02-compliant); OCEAN annotations consistent with §5.1/§5.2 ✓; → migration_map_v2 D-4 (verified iter 134, shorthand ×4 across the four cards) |
-| p10_elena::05 | L103 | Бюджет токенов + `[ref: §7A.X — Token Budget]` | NAVIGATION | KEEP | YES | — | R18: `§7A.X` vague (target §7A.12; master resolves ✓) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p10_elena::01 | L19 | budget intro (~540 / ~1000) | DEFINITION | KEEP | YES | — | open | R27 inputs; → migration_map_v2 TB-4/TB-5 (E15 embed + canon marker — mig-4 executed iter 135: derivation note on the Examples total) |
+| p10_elena::02 | L21 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | open | EN list = executable-adjacent metadata (qa:english baseline class) |
+| p10_elena::03 | L23 | Примечание: canonical vs учебный Greeting | NAVIGATION | KEEP | YES | REINFORCEMENT | open | R28 back-ref to §7B.2 ✓ (IMP-48 pair) |
+| p10_elena::04 | L25–101 | ШАБЛОН: полная карточка Елены (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | collapsible | `{{CORE_DIRECTIVES — …}}` shorthand ✓ (R02-compliant); OCEAN annotations consistent with §5.1/§5.2 ✓; → migration_map_v2 D-4 (verified iter 134, shorthand ×4 across the four cards). **iter 157:** pre-existing F6 (v7 `eb4b91bd`) — one `<details class="interactive">` (summary «📋 Полная карточка Елены с аннотациями»); the Part-1-slice standing note («long worked scenarios = `collapsible` candidates at Parts 9/10») satisfied since the v7 migration — documented, not re-wrapped |
+| p10_elena::05 | L103 | Бюджет токенов + `[ref: §7A.X — Token Budget]` | NAVIGATION | KEEP | YES | — | collapsible | renders inside the card's F6 wrap (h4 «Бюджет токенов (Token Budget)» + «Итого» — the deployed rendering form; the drift entry = the KI#79 pre-blob absorption, informational). **Stale note refreshed iter 157:** the R18 vague `§7A.X` refs were repaired iter 127 (ed-8/R18 `8a365553`, pickaxe-verified — canon carries `[ref: part_07a.md §7A.12 — Token Budget]`; master resolves to `#p7a_token_budget`) |
 
 ### p10_walter (§10.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p10_walter::01 | L114 | intro (реалистичный современный персонаж) | DEFINITION | KEEP | YES | — | |
-| p10_walter::02 | L116 | Демонстрирует (6 principles) | METADATA | KEEP | YES | — | |
-| p10_walter::03 | L118–214 | ШАБЛОН: полная карточка Уолтера (code) | EXAMPLE | KEEP | YES | — | OCEAN cautious-zone «SPINE explicit» annotations — unique pedagogy (no other card carries it) |
-| p10_walter::04 | L216 | Бюджет токенов (~1100) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | R18 vague; R27: ~1100 outside the character-map «~440–890» base range |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p10_walter::01 | L114 | intro (реалистичный современный персонаж) | DEFINITION | KEEP | YES | — | open | |
+| p10_walter::02 | L116 | Демонстрирует (6 principles) | METADATA | KEEP | YES | — | open | |
+| p10_walter::03 | L118–214 | ШАБЛОН: полная карточка Уолтера (code) | EXAMPLE | KEEP | YES | — | collapsible | OCEAN cautious-zone «SPINE explicit» annotations — unique pedagogy (no other card carries it). **iter 157:** pre-existing F6 (v7 `eb4b91bd`) — summary «📝 Полная карточка Уолтера Уайта» |
+| p10_walter::04 | L216 | Бюджет токенов (~1100) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | collapsible | renders inside the card's F6 wrap. **Stale note refreshed iter 157:** the R18 vague form repaired iter 127 (ed-8/R18 — canon carries §7A.12); R27: ~1100 outside the character-map «~440–890» base range — framing stays owner-gated (ed-5 / KI#77-e; the slice documents, does not re-decide) |
 
 ### p10_omnis (§10.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p10_omnis::01 | L227 | intro (~1800, все инструменты) | DEFINITION | KEEP | YES | — | |
-| p10_omnis::02 | L229 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | |
-| p10_omnis::03 | L231–366 | ШАБЛОН: полная карточка Омнис-Зета (code) | EXAMPLE | KEEP | YES | — | GHOST Layers + CoT×2 + no `<enneagram>` tag = character_map «—» ✓ |
-| p10_omnis::04 | L368–376 | Lorebook (5 записей table) | EXAMPLE | KEEP | YES | — | |
-| p10_omnis::05 | L378 | Бюджет токенов (~2150) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | R18 vague; R27: ~2150 outside «~1500–1800» expert range |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p10_omnis::01 | L227 | intro (~1800, все инструменты) | DEFINITION | KEEP | YES | — | open | |
+| p10_omnis::02 | L229 | Демонстрирует (9 principles) | METADATA | KEEP | YES | — | open | |
+| p10_omnis::03 | L231–366 | ШАБЛОН: полная карточка Омнис-Зета (code) | EXAMPLE | KEEP | YES | — | collapsible | GHOST Layers + CoT×2 + no `<enneagram>` tag = character_map «—» ✓. **iter 157:** pre-existing F6 (v7 `eb4b91bd`) — summary «Полная карточка Омнис-Зета». **Variance recorded, deferred (map §5.18 P10-4):** master's Embodiment 5th item «Звук: … (голос задаётся только в Examples — см. Voice Isolation rule §3.X)» vs canon «Голос: синтезированный, металлический резонанс…» — the iter-75 KI#51 master-only fix never synced to canon (R18 vague-ref + DEC-16 EN-label families; the DEC-21-era physical/linguistic voice split makes the reconciliation a canonical-audit-stage call) |
+| p10_omnis::04 | L368–376 | Lorebook (5 записей table) | EXAMPLE | KEEP | YES | — | collapsible | renders inside the card's F6 wrap (h4 Lorebook + table-wrap) |
+| p10_omnis::05 | L378 | Бюджет токенов (~2150) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | collapsible | renders inside the card's F6 wrap. **Stale note refreshed iter 157:** the R18 vague form repaired iter 127 (ed-8/R18 — canon carries §7A.12); R27: ~2150 outside «~1500–1800» expert range — framing stays owner-gated (ed-5 / KI#77-e) |
 
 ### p10_vysherblenny (§10.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p10_vysherblenny::01 | L389 | intro (~1500+, expert) | DEFINITION | KEEP | YES | — | |
-| p10_vysherblenny::02 | L391 | Демонстрирует (8 principles) | METADATA | KEEP | YES | — | |
-| p10_vysherblenny::03 | L393–534 | ШАБЛОН: полная карточка Выщербленного (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | R22 (sensory anchors ← §2.6) + R23 (CoT anchors ← §6.5 verbatim — production-card function); **obs-6:** «Выщебленного» misspelling in the card heading L395 (pre-existing, recorded iter 125) |
-| p10_vysherblenny::04 | L536 | бюджет токенов (~1500+) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | R18 vague |
-| p10_vysherblenny::05 | L538–546 | Lorebook записи (5 шт table) | EXAMPLE | KEEP | YES | — | |
-| p10_vysherblenny::06 | L548–558 | Проверка консистентности SPINE table (7 ✅) | VALIDATION | KEEP | YES | REINFORCEMENT | §4.9 checklist in applied form — changed function ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p10_vysherblenny::01 | L389 | intro (~1500+, expert) | DEFINITION | KEEP | YES | — | open | |
+| p10_vysherblenny::02 | L391 | Демонстрирует (8 principles) | METADATA | KEEP | YES | — | open | |
+| p10_vysherblenny::03 | L393–534 | ШАБЛОН: полная карточка Выщербленного (code) | EXAMPLE | KEEP | YES | REINFORCEMENT | collapsible | R22 (sensory anchors ← §2.6) + R23 (CoT anchors ← §6.5 verbatim — production-card function). **iter 157:** pre-existing F6 (v7 `eb4b91bd`); **obs-6 EXECUTED this slice:** the «Выщебленного» misspelling in the card heading repaired — canon L397 + the master summary (fence #10; the iter-125 obs, re-flagged P9-5(e) iter 156, pinned to this slice) |
+| p10_vysherblenny::04 | L536 | бюджет токенов (~1500+) + `[ref: §7A.X]` | NAVIGATION | KEEP | YES | — | collapsible | renders inside the card's F6 wrap. **Stale note refreshed iter 157:** the R18 vague form repaired iter 127 (ed-8/R18 — canon carries §7A.12) |
+| p10_vysherblenny::05 | L538–546 | Lorebook записи (5 шт table) | EXAMPLE | KEEP | YES | — | collapsible | renders inside the card's F6 wrap (h4 Lorebook записи) |
+| p10_vysherblenny::06 | L548–558 | Проверка консистентности SPINE table (7 ✅) | VALIDATION | KEEP | YES | REINFORCEMENT | collapsible | §4.9 checklist in applied form — changed function ✓; renders inside the card's F6 wrap (h4 Проверка консистентности SPINE) |
 
 **Part 10 verdict:** protected example layer; zero compression candidates. Card-level repeats
-(R22/R23) = teach-vs-production dual function. All four budget refs are vague `§7A.X` (R18 — master
-resolves each to `#p7a_token_budget`, canon-side hygiene).
+(R22/R23) = teach-vs-production dual function. **iter 157 (v2 build slice, map §5.18):** F2
+presentation column seeded — 20 rows: **9 `open` + 11 `collapsible`** (all four cards + their
+attached budget/Lorebook/SPINE-check blocks render inside the pre-existing v7-era F6 wraps —
+the Part-1-slice «long worked scenarios = collapsible candidates at Parts 9/10» standing note
+has been satisfied since the v7 migration; zero new wraps). The prior verdict line («all four
+budget refs are vague `§7A.X`») described the pre-iter-127 state — the refs were repaired
+ed-8/R18 (`8a365553`); the R27/KI#77-e budget-framing family stays owner-gated (ed-5). The
+L397 «Выщебленного» typo repaired canon + master (the P9-5(e) observation executed).
 
 ---
 

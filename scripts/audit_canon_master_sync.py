@@ -63,6 +63,13 @@ Scope:
     Also detects A3 collateral drift:
       - src/master/part_10.html L611 — «Счётчик вырезаний» in §10.4 AN
 
+    Probe maintenance (in-step re-points, disclosed per the iter-148/155 precedent):
+      - iter 157 (KI#84 canonical-audit reconciliation, owner-called): P3-4c moved
+        CHECKS -> ABSENT_CHECKS as "P3-4c-del" — the master §9.6 Walter OCEAN
+        cross-ref line deleted (carried Elena's values since iter 38; §9.7 = the
+        sole Part-9 Walter reference). Total count unchanged: 73 positive + 24
+        negative = 97.
+
 Exit codes:
     0 — all checks PASS
     1 — one or more checks FAILED (regression detected)
@@ -479,12 +486,6 @@ CHECKS = [
         "<p><strong>Ссылка:</strong> Пример простой карточки без слоёв призрака (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_04 §4.11: Cross-ref to Walter §10.2 (simple SPINE without GHOST Layers) added (iter 38 P3-4 fix)",
     ),
-    (
-        "P3-4c",
-        "part_09.html",
-        "<p><strong>Ссылка:</strong> Пример тестирования карточки с OCEAN-профилем (A=38, N=68 — осторожная зона, без экстремальных полюсов кроме O=72) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
-        "part_09 §9.6: Cross-ref to Walter §10.2 (OCEAN testing example) added (iter 38 P3-4 fix)",
-    ),
 
     # ============================================================
     # iter 47 — Phase 4: P2-3 (C5) Bridge paragraphs cleanup
@@ -672,6 +673,20 @@ ABSENT_CHECKS = [
         "part_08.html",
         "Анти-паттерны указывают, чего избегать. Диагностика показывает",
         "part_08: deleted bridge-paragraph to Part 9 (iter 47 P2-3 fix)",
+    ),
+
+    # ----- P3-4c (D7/KI#84): part_09 §9.6 Walter OCEAN cross-ref line DELETED -----
+    # iter 157 (KI#84 canonical-audit reconciliation, owner-called): the line carried
+    # Elena's OCEAN values (A=38, N=68, cautious zones, O=72) attributed to Walter
+    # since iter 38 (Walter §10.2 actual: O:65 C:85 E:30 A:25 N:60); §9.7 keeps the
+    # sole Part-9 reference to Walter's OCEAN example (C=85, A=25, E=30). The probe
+    # moved CHECKS -> ABSENT_CHECKS in step with the deletion — both tool anchors
+    # (this probe + audit_diagnostics_parity.py WALTER_ANCHOR) moved together.
+    (
+        "P3-4c-del",
+        "part_09.html",
+        "Пример тестирования карточки с OCEAN-профилем (A=38, N=68",
+        "part_09 §9.6: Walter OCEAN cross-ref line DELETED (iter 157 KI#84 reconciliation — Elena's values had been attributed to Walter; §9.7 = the sole Part-9 Walter reference)",
     ),
 
     # ----- P2-7 (E4): 11 deleted part-resume sections -----

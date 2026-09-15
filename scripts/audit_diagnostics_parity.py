@@ -26,9 +26,17 @@ Checks:
     diagnosis names, AP set (2/8/9/11/3/5/6), E-target set (16/1/7/17/2/4/8/3);
     full [VS: E13] marker in the _README §3.3 format.
  2. Master §9.6 mirror: same sub-heading + intro (links to #p9_one_change_rule
-    and #p9_test_scenarios); same table payload; the P3-4c Walter cross-ref
-    paragraph intact (sync-audit anchor, pre-existing master-only drift);
+    and #p9_test_scenarios); same table payload; the KI#84-deleted Walter OCEAN
+    cross-ref paragraph ABSENT (deleted iter 157 — the canonical-audit
+    reconciliation, owner-called: the line had carried Elena's OCEAN values
+    attributed to Walter since iter 38; both tool anchors — the sync probe P3-4c
+    (now "P3-4c-del", a negative check) and this audit — moved together with the
+    deletion); §9.7 keeps the sole Part-9 Walter reference (checked in 2b);
     existing 5-group table intact (P2-17 one-word symptoms).
+ 2b. §9.7 sole-reference guarantee (KI#84): canon §9.7 and master §9.7 both
+    carry the Walter OCEAN example line with Walter's actual extremes
+    (C=85, A=25, E=30); no other Part-9 location references Walter's OCEAN
+    example.
  3. E13 embed (visual presentation / decision aid): comment declares §9.6
     canonical ownership (mig-3 re-point); 3 tree-root symptoms == canon symptom
     titles; 9 diagnosis-node names == canon diagnoses; 6 check questions ==
@@ -105,11 +113,17 @@ E_SET = {"E16", "E01", "E07", "E17", "E02", "E04", "E08", "E03"}
 SUBHEADING_CANON = "### Три базовых симптома: полный маппинг (канонический источник дерева E13)"
 SUBHEADING_MASTER = "<h4>Три базовых симптома: полный маппинг</h4>"
 
-# Sync-audit anchor that MUST stay byte-identical inside master §9.6 (P3-4c).
-WALTER_ANCHOR = (
-    '<p><strong>Ссылка:</strong> Пример тестирования карточки с OCEAN-профилем '
-    '(A=38, N=68 — осторожная зона, без экстремальных полюсов кроме O=72) — '
-    'Уолтер Уайт, <a href="#p10_walter">§10.2</a>.</p>'
+# KI#84 canonical-audit reconciliation (iter 157, owner-called): the §9.6 Walter
+# cross-ref paragraph ("Пример тестирования карточки с OCEAN-профилем (A=38, N=68 —
+# осторожная зона, без экстремальных полюсов кроме O=72) — Уолтер Уайт, §10.2") was
+# DELETED from master §9.6 — it had carried Elena's OCEAN values attributed to
+# Walter since iter 38. This constant now guards the DELETION (must stay absent).
+WALTER_DELETED = "Пример тестирования карточки с OCEAN-профилем (A=38, N=68"
+# §9.7 = the sole Part-9 reference to Walter's OCEAN example (canon + master
+# identical wording; Walter's actual extremes per §10.2: O:65 C:85 E:30 A:25 N:60).
+WALTER_97_ANCHOR = (
+    "Пример тестирования карточки с OCEAN-полюсами — Уолтер Уайт "
+    "(C=85, A=25, E=30 — выраженные экстремумы)"
 )
 # P2-17 one-word symptom kept in the existing (5-group) §9.6 table.
 P217_ANCHOR = "Удалить голос из Description (AP-3 Voice-in-Desc)"
@@ -215,13 +229,27 @@ def main():
         err("master §9.6: intro link to #p9_one_change_rule (§9.2) missing")
     if 'href="#p9_test_scenarios"' not in m96:
         err("master §9.6: intro link to #p9_test_scenarios (§9.7) missing")
-    if WALTER_ANCHOR not in m96:
-        err("master §9.6: P3-4c Walter cross-ref paragraph altered/missing "
-            "(sync-audit anchor — must stay byte-identical)")
+    if WALTER_DELETED in m96:
+        err("master §9.6: the KI#84-deleted Walter OCEAN cross-ref line is present "
+            "(deleted iter 157 — Elena's values had been attributed to Walter; "
+            "§9.7 is the sole Part-9 Walter reference)")
     if P217_ANCHOR not in m96:
         err("master §9.6: existing 5-group table altered (P2-17 anchor missing)")
     notes.append("master §9.6 mirror: sub-table + intro + chain links present; "
-                 "P3-4c Walter + P2-17 anchors intact")
+                 "the KI#84-deleted Walter line absent (deleted iter 157); "
+                 "P2-17 anchor intact")
+
+    # ---------- 2b. §9.7 sole-reference guarantee (KI#84) ----------
+    sec97_canon = md_section(canon, r"^## 9\.7 ", r"^## 9\.8 ")
+    m97 = html_section(master, "p9_test_scenarios")
+    for label, blob in (("canon §9.7", sec97_canon), ("master §9.7", m97)):
+        if blob is None:
+            err(f"{label}: section not found (KI#84 sole-reference check)")
+        elif WALTER_97_ANCHOR not in blob:
+            err(f"{label}: the §9.7 Walter OCEAN reference (C=85, A=25, E=30) "
+                "missing — must stay the sole Part-9 Walter reference (KI#84)")
+    notes.append("§9.7 sole-reference (KI#84): the Walter OCEAN example line "
+                 "present canon + master (C=85, A=25, E=30 — actual §10.2 extremes)")
 
     # ---------- 3. E13 embed (visual presentation / decision aid) ----------
     e13 = re.search(
