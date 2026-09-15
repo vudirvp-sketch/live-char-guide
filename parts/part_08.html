@@ -19,6 +19,10 @@
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E12-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E12-script.js
+  sampling-cluster (iter 145): AP fix imperatives with numeric values
+         defer to the canonical owners — AP-5 RepPen ranges → §7A.6
+         (via the §8.6 AP-5 boundary ≤ 1.10); parity locked by
+         scripts/audit_sampling_parity.py.
 -->
 <div class="ap-grid">
 
@@ -79,7 +83,7 @@
         <div class="ap-card__symptom">RepPen &gt; 1.10</div>
         <div class="ap-card__cause">Repetition Penalty установлен слишком высоким</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Держите RepPen 1.0–1.05. Используйте MinP вместо этого.</div>
+        <div class="ap-card__fix">Держите RepPen в диапазоне своей модели — §7A.6 (никогда &gt; 1.10). Используйте MinP вместо повышения RepPen.</div>
       </div>
 
       <!-- AP-6 -->

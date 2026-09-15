@@ -469,6 +469,12 @@ GHOST-activation: Активен, если в сцене был триггер (
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E17-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E17-script.js
+  sampling-cluster (iter 145): values SHARED_REFERENCE (§7A.6 owns the
+         canonical tables); this embed is the one visual presentation;
+         the 32B+ column = the canonical «32B+ / API» column (Temperature
+         0.7–1.0, RepPen 1.05–1.10 — DEC-22); the 12B–32B middle tier =
+         declared omission (values live in the §7A.6 canonical table only);
+         parity locked by scripts/audit_sampling_parity.py.
 -->
 <div class="params-container scroll-enter">
 
@@ -515,10 +521,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
           <div class="param-row">
             <span class="param-row__name">Temperature</span>
-            <span class="param-row__value">0.7–1.1*</span>
-          </div>
-          <div class="sub-range">
-            <span class="sub-range__green">0.7–0.9 базовая</span> | <span class="sub-range__amber">0.85–1.1 чеклист</span>
+            <span class="param-row__value">0.7–1.0</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top P</span>
@@ -530,10 +533,7 @@ GHOST-activation: Активен, если в сцене был триггер (
           </div>
           <div class="param-row param-row--warning">
             <span class="param-row__name">RepPen</span>
-            <span class="param-row__value">1.0–1.10</span>
-          </div>
-          <div class="sub-range">
-            <span class="sub-range__green">1.0–1.05 рекомендуется</span> | <span class="sub-range__amber">1.05–1.10 с осторожностью</span>
+            <span class="param-row__value">1.05–1.10</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top K</span>
@@ -665,7 +665,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <!-- difficulty: INTERMEDIATE -->
 <h3>Чеклист по типу модели</h3>
 
-<p>Полная таблица параметров — в визуализации E17 (выше). Ключевые отличия по типам моделей:</p>
+<p>Сводная таблица возможностей по типу модели. Числовые параметры сэмплирования (Temperature, Top P, Min P, RepPen, Top K, Presence Penalty = 0.0) — в визуализации E17 (выше; канонический владелец значений — <a href="#p7a_sampling_params">§7A.6</a>). Ключевые отличия по типам моделей:</p>
 <ul>
 <li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a>); XML нестабилен; CoT Tier 0–1; язык SP: для &lt;64K словаря — английский, для ≥128K — язык карточки допустим (см. <a href="#p7a_core_directives">§7A.2 ПРАВИЛО</a>); Anti-godmoding 2 строки (негатив + позитив).</li>
 <li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; язык SP: язык карточки предпочтителен.</li>

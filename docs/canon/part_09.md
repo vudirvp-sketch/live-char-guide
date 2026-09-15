@@ -64,7 +64,7 @@ migration_status: —
 | **Description** | ☐ якоря (Anchors) с ценой? (формат T→A→P) ☐ Нет голоса? (голос только в Examples/Greeting) ☐ Психология в Description? (теги `<spine>`/`<ocean>`/`<enneagram>`, не нарратив) | `[ref: part_04.md §4.1 — SPINE]` |
 | **Examples** | ☐ Уникальный голос? (только через Examples, не Description) ☐ Embodiment? (минимум одна физическая реакция) ☐ `<START>`? (в начале каждого блока) | `[ref: part_03.md §3.3 — Правила Examples]` |
 | **Greeting** | ☐ Сцена→Действие→Реплика? ☐ 50–100 токенов? | `[ref: part_07b.md §7B.2 — Greeting]` |
-| **Parameters** | ☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05) ☐ PP = 0? (Presence Penalty = 0.0) ☐ Temperature в диапазоне? (0.6–0.8 для 12B) | `[ref: part_07a.md §7A.6 — Sampling Parameters]` |
+| **Parameters** | ☐ RepPen ≤ 1.10? (1.0–1.05 для 12B; диапазоны по типам моделей — §7A.6) ☐ PP = 0? (Presence Penalty = 0.0) ☐ Temperature в диапазоне? (0.6–0.8 для 12B) | `[ref: part_07a.md §7A.6 — Sampling Parameters]` |
 
 **Ссылка:** Расширенная версия — пред-деплой валидация (быстрая проверка — 5 пунктов + полная проверка — 14 пунктов) — см. `[ref: §9.11]`.
 
@@ -80,7 +80,7 @@ migration_status: —
 
 | # | Проблема | Решение |
 |---|----------|---------|
-| **4** | Повторы фраз | Установите RepPen 1.0–1.05; проверьте PP = 0.0 |
+| **4** | Повторы фраз | Установите RepPen в диапазоне своей модели (для 12B — 1.0–1.05; `[ref: part_07a.md §7A.6 — Sampling Parameters]`); проверьте PP = 0.0 |
 | **5** | Персонаж теряет характер | Добавьте 2–3 Examples с уникальным голосом |
 
 **Ссылка:** Top-3 Errors — `[ref: part_01.md §1.7 — Top-3 Problems]`. Симптомы #4 и #5 также в `[ref: §9.5 — Таблица симптомов]`.
@@ -234,7 +234,7 @@ migration_status: —
 | Голос деградирует быстро | Ограниченная память | Более явные Anchors, короче Examples |
 | Модель игнорирует SPINE | Недостаточная ёмкость | Упростите SPINE до FLAW + ложь (LIE) |
 | OOC моменты | Контекст overflow | 4K-Fallback Protocol |
-| Повторы фраз | Паттерн-зависимость | RepPen 1.02-1.05, разнообразьте Examples |
+| Повторы фраз | Паттерн-зависимость | RepPen 1.02–1.05 (12B-диапазон — `[ref: part_07a.md §7A.6]`), разнообразьте Examples |
 | Неспособность к CoT | Архитектура модели | Tier 0-1 CoT только, без XML |
 
 **Ссылка:** 4K-Fallback — `[ref: part_07a.md §7A.11]`. CoT Tiers — `[ref: part_06.md §6.3]`.

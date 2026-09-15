@@ -77,12 +77,12 @@ textual canonical home); drift = known prototype↔embed divergence
 | E09 | `part_05.html` p5_ocean_basics | 17/17 | 9 | hex literals (KI#41/42 class) | pentagon axis labels → `REFERENCE_ONLY`; extreme-zone labels → `SHARED_REFERENCE` (§5.1 owns) |
 | E10 | `part_05.html` p5_enneagram_basics | 13/17 | 12 | **value drift** (proto stale, §4.3) | type mini-cards (fear/desire/LIE) → `SHARED_REFERENCE` (canonical = §5.4 table; data layer `enneagram.json` must derive from it); hexad graph → `VISUAL_CANONICAL`. **Executed iter 136 (mig-5, slice §5.4):** mini-card values = §5.4 via the generated data layer (`scripts/generate_enneagram.mjs` → `data/enneagram.json`, LIE folded to one internal copy) — parity-locked by `scripts/audit_enneagram_parity.py`; canon `[VS: E10]` marker declares ownership; static defaults aligned to §5.4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E11 | `part_06.html` p6_cot_tiers | 35/37 | 24 | none detected | tier definitions + model applicability (12B+/32B+/API) + template snippets → `SHARED_REFERENCE` (§6.3–§6.5 own); «Tier 0 работает для всех…» explanatory lines → `TEXTUAL_CANONICAL` candidates |
-| E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family) |
+| E12 | `part_08.html` p8_antipatterns_overview | 59/61 | 38 | none detected | AP names/symptoms → `SHARED_REFERENCE` (Part 8 owns); per-AP fix imperatives with numbers («Держите RepPen 1.0–1.05…») → `TEXTUAL_CANONICAL` (numeric recommendation must have one canonical home — currently sides with §7A.7 against §7A.6, KI#72 family). **DECIDED (DEC-22, owner chat 2026-09-15) and EXECUTED iter 145 (sampling-cluster build slice, map §5.7):** AP-5 fix card re-framed to the model-qualified defer («в диапазоне своей модели — §7A.6; никогда > 1.10») — numeric recommendations now defer to §7A.6 via §8.6; `[VS: E12]` marker declares the numeric-fix defer; parity-locked by `scripts/audit_sampling_parity.py`; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 145 (DEC-19) |
 | E13 | `part_09.html` p9_decision_tree | 40/40 | 37 | none detected | **unique diagnostic tree** (3 symptoms, checks, AP/E mappings absent from §9.5/§9.6) → `TEXTUAL_CANONICAL` decision required: canonicalize mappings in §9.6 (visual demonstrates) or declare `VISUAL_CANONICAL` (tree owns Debug knowledge); §6.2. **Recommendation iter 137:** `TEXTUAL_CANONICAL` → §9.6 (`owner_gates_iter137.md` §3.2). **DECIDED (DEC-20, iter 138) and EXECUTED iter 139 (mig-3):** `TEXTUAL_CANONICAL` — mappings canonicalized in §9.6 (sub-table + full `[VS: E13]` marker), embed re-pointed as the visual presentation / decision aid, values parity-locked by `scripts/audit_diagnostics_parity.py` (map §5.5 DT-1..DT-8) |
 | E14 | `part_09.html` p9_quality_scale | 17/18 | 9 | none detected | quality grade names → `SHARED_REFERENCE` (§9.1 owns) |
 | E15 | `part_10.html` p10_annotated_blueprint | 42/45 | 42 | none detected | per-block budget ranges (min–max, derived totals) → `TEXTUAL_CANONICAL` derivation note needed (§7A.12 owns raw values; E15 shows totals — derivation rule must be stated once); block roles → `SHARED_REFERENCE` (§1.2). **Executed iter 135 (mig-4, slice §5.3):** min–max values verified == canonical; Examples total now carries the derivation note «(итог: 40–80 на пример × 2–5 примеров — §7A.12)»; canon `[VS: E15]` marker added with the derivation rule (TB-4/TB-5); parity-locked; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
 | E16 | `part_07a.html` p7a_authors_note | 31/31 | 20 | none detected | AN template A/B labels → `SHARED_REFERENCE` (§7A.5 owns) |
-| E17 | `part_07a.html` p7a_sampling_params | 43/44 | 13 | none detected | 3-tier param table → `SHARED_REFERENCE` — **blocked on KI#72 value decision** (embed carries both sides labeled «базовая»/«чеклист»); annotations («Только Examples» etc.) → `REFERENCE_ONLY` |
+| E17 | `part_07a.html` p7a_sampling_params | 43/44 | 13 | none detected | 3-tier param table → `SHARED_REFERENCE` — **blocked on KI#72 value decision** (embed carries both sides labeled «базовая»/«чеклист»); annotations («Только Examples» etc.) → `REFERENCE_ONLY`. **DECIDED (DEC-22, owner chat 2026-09-15 «я согласен с рекомендациями, сделай как лучше и качественнее») and EXECUTED iter 145 (sampling-cluster build slice, map §5.7):** values SHARED_REFERENCE — 32B+ column re-pointed to the canonical «32B+/API» values (Temperature **0.7–1.0**, RepPen **1.05–1.10**), dual-side display + orphan asterisk removed; 12B–32B middle tier = **declared omission**; parity-locked by `scripts/audit_sampling_parity.py`; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 145 (DEC-19) |
 | E18 | `part_07b.html` p7b_greeting | 16/16 | 5 | none detected | greeting algorithm steps → `SHARED_REFERENCE` (§7B.2 owns) |
 | hero | — (unintegrated) | n/a | n/a | never integrated | **EXECUTED iter 140 (§6.4 disposal, DEC-19):** `REMOVED_WITH_REASON` — `visual-system/hero/` deleted (never integrated: no hero section in the shell, INTEGRATION-MAP row unexecuted; Three.js via `cdn.jsdelivr.net` importmap = the external-CDN dependency class iter-113 removed; archive = git history); KI#81 dead `.vs-hero-placeholder` CSS (5 selectors, zero consumers) removed from `src/shell/styles.css` + root fallback regenerated; zero occurrences verified across `src/`/`parts/`/`assets/`/`widgets/` |
 
@@ -91,7 +91,7 @@ textual canonical home); drift = known prototype↔embed divergence
 | Cluster | Canonical owner (v1→v2) | Competing copies found (v1) | Proposed v2 disposition |
 |---|---|---|---|
 | CORE DIRECTIVES (7) | §7A.2 (prose + template) | E08 embed (titles+one-liners) · prototype E08 · extract E08 · fallback copy · glossary (canon app. + glossary.json) · Part 10 shorthand (sanctioned DEC-08) | E08 = the one visual presentation (`SHARED_REFERENCE`); Part 10/assembly keep `{{CORE_DIRECTIVES — …}}` shorthand; glossary entry = 1-sentence + link; **prototype/extract copies → `REMOVED_WITH_REASON` (stale derived copies) once visual-markup ownership decided (§6.1)** — second bounded area (ed-2 evidence reused). **EXECUTED iter 134 (mig-2, slice §5.2 D-1…D-8):** §7A.13 full copy → DEC-08 shorthand (canon + master mirror); E08 parity-locked; §7A.1/Part 10 verified shorthand ×4; prototype/extract copies → `REMOVED_WITH_REASON` executed iter 138 (DEC-19) |
-| Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision** |
+| Sampling values (KI#72 family) | **owner decision** (§7A.6 recommended by matrix) | §7A.7 checklist · E17 (both sides) · E12 AP-5 fix («1.0–1.05») · ~~`glossary.json` RepPen entry («1.00–1.10» — 5th location, found iter 132)~~ **eliminated iter 133: the generated registry defers values to §7A.6** | one canonical table; §7A.7/E17/E12 → `REPLACED_BY_CANONICAL` (defer/reference); **blocked on value decision**. **DECIDED (DEC-22, owner chat 2026-09-15 «я согласен с рекомендациями, сделай как лучше и качественнее») and EXECUTED iter 145 (map §5.7 SP-1..SP-12):** §7A.6 = the single value owner (S-a); §7A.7 param rows → defer (S-b); E17 → SHARED_REFERENCE re-point (S-c); E12/§9.x hints → model-qualified defers (S-d); Appendix B percentages = first OBSERVATION application (DEC-20); parity gate `scripts/audit_sampling_parity.py`; **KI#72 CLOSED** — semantic extraction COMPLETE (7/7) |
 | Glossary | **v2 canonical term registry** (DEC-17: merged-with-review, 45 entries; canonical term record = source) | canon appendix 25 terms · `glossary.json` 55 terms (21 overlap, divergent definitions, version 9.2.0, dead `core_rules`) · generated no-JS `glossary.html` · never-loaded master appendix (KI#70) · runtime panel | **DECIDED (DEC-17):** single canonical term registry — per-term evidence §5.1 (25 canon entries MERGED + 20 machine-layer terms MOVED/promoted, 35 JSON terms folded in); chain = canonical term record → generated `glossary.json` → runtime panel / no-JS page; glossary stays the Reference-layer v2 representation of the registry; dead `core_rules` → `REMOVED_WITH_REASON`; KI#70 v1 wire/drop stays deferred (superseded by the v2 Reference-mode design) — **executed iter 133 (mig-1): registry + generator + generated machine layer + parity audit, all PASS** |
 | Diagnostics (symptom→fix) | §9.5 + §9.6 (prose tables) | E13 unique tree (3 symptoms, mappings not in canon) | E13 mappings → owner decision: canonicalize into §9.6 (`TEXTUAL_CANONICAL`) or declare tree `VISUAL_CANONICAL`; §9.3/§9.11 stay checklists — third bounded area (Debug mode). **DECIDED (DEC-20, iter 138):** `TEXTUAL_CANONICAL` — mappings → §9.6, E13 = visual presentation. **EXECUTED iter 139 (mig-3, slice §5.5 DT-1..DT-8):** §9.6 = the canonical home (E13 mapping sub-table + `[VS: E13]` marker), E13 re-pointed (parity audit), §9.2↔§9.6 Debug chain wired, §9.3/§9.11 verified checklists |
 | Token budget | §7A.12 (tables + rules) | E01 (~100–200 SP — wrong-side copy) · E15 (min–max + derived totals) | E01/E15 → `SHARED_REFERENCE` with derivation note («totals = per-example × count»); E01 SP range corrected to canonical 50–200 in the v2 slice. **EXECUTED iter 135 (mig-4, slice §5.3 TB-1…TB-8):** E01 values verified canonical at every layer (the wrong-side-copy claim corrected — not found in the repo); E15 derivation note added (master + canon marker); `[VS: E01/E15]` canon markers added; glossary already deferred (iter 133); no value decision needed |
@@ -440,6 +440,61 @@ derivation note intentionally lives only in the embed); canon front-matter
 verified deferring (value restatement in the ratified Voice Isolation entry,
 §3.1 ref — DEC-17/18 chain, no action per package F6).
 
+### 5.7 Sampling values slice (seeded + executed iter 145 — sampling-cluster build slice)
+
+Scope: the Sampling values cluster (KI#72 family) — the LAST bounded area
+(Registry B row 2; PLAN row sampling-cluster; gate **cleared by DEC-22**:
+S-a §7A.6 canonical / S-b §7A.7 param rows → defer / S-c E17 SHARED_REFERENCE
+re-point / S-d hint re-frames; owner chat 2026-09-15 «я согласен с
+рекомендациями, сделай как лучше и качественнее» — the go-ahead on the
+iter-144 package §2, Option A + S-a…S-d; Options B/C rejected in the package).
+Mechanism: mig-2/mig-3/voice pattern (canonical record → re-point → parity
+audit; no machine layer — widgets/data/tests verified value-clean iter 144).
+Canonical owner: **§7A.6** («Базовые параметры» 3-tier table + «Модель-
+специфичные рекомендации» point recs + PP = 0.0 rules; AP-5 boundary ≤ 1.10
+unchanged — Phase B verified). Editorial Policy 5-point check applied at edit
+time: capability (one canonical value set, machine-checkable by the new
+audit), coverage (§7A.7 param rows → defer line names every dropped parameter;
+PP rule stays double-homed §7A.6 table + ПРАВИЛО callouts), retrieval (values
+findable at §7A.6 / E17 / model-specific details; every hint now names its
+model class or defers), context (§7A.7 table keeps the capability rows it
+summarizes; E17 checklist untouched), dependency (§8.6/§9.3/§9.5 refs to §7A.6
+stay valid; E17 embed ↔ canon marker declare each other). Acceptance gate =
+`scripts/audit_sampling_parity.py` (MUST PASS). KI#72 CLOSED (reader-visible
+contradiction open since iter 120 resolved). Semantic extraction is now
+**100% COMPLETE** (all seven bounded areas executed).
+
+| SP# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| SP-1 | `p7a_sampling_params::02` | weak `[VS: E17]` marker (no ownership declaration) | full `[VS: E17]` marker in the `_README.md` §3.3 format: values SHARED_REFERENCE (§7A.6 owns both tables), E17 = the one visual presentation, 12B–32B middle tier = declared omission, audit named | REPLACED_BY_CANONICAL **— executed iter 145** | DEC-22 S-c; marker precedents E01/E07/E10/E13/E15 |
+| SP-2 | `p7a_sampling_params::03` | canonical «Базовые параметры» table (the KI#72 «Option A» side) | unchanged — THE canonical value owner (S-a); 6×3 values byte-identical; audit-locked | UNCHANGED (verified iter 145) | DEC-22 S-a; matrix R12 |
+| SP-3 | `p7a_model_checklist::02` | summary table: 3 param rows (Temperature **0.85–1.1**, RepPen **1.0–1.05** — the contradicting side) + 5 capability rows | param rows dropped; header «Параметр» → «Возможность»; defer line added (canon + master mirror: «Числовые параметры сэмплирования … — §7A.6») — canon catches up to the deployed master shape | REPLACED_BY_CANONICAL **— executed iter 145** | DEC-22 S-b; matrix `p7a_model_checklist::02` recommendation |
+| SP-4 | `p8_ap5_reppen_high::01` | E12 AP-5 fix card «Держите RepPen 1.0–1.05» (unqualified — wrong for 32B+ under S-a); canon §8.6 prose already defers | E12 card re-framed: «Держите RepPen в диапазоне своей модели — §7A.6 (никогда > 1.10). Используйте MinP вместо повышения RepPen.»; `[VS: E12]` canon marker declares the numeric-fix defer | MOVED **— executed iter 145** | DEC-22 S-d; Registry A E12 «numeric recommendation must have one canonical home» |
+| SP-5 | `p9_basic_checklist::03` | §9.3 Parameters row «(рекомендация 1.0–1.05)» (unqualified) | «(1.0–1.05 для 12B; диапазоны по типам моделей — §7A.6)» — 12B-qualified like the adjacent Temperature check (canon + master) | MOVED **— executed iter 145** | DEC-22 S-d |
+| SP-6 | `p9_additional_problems::02` | §9.4 problem #4 «Установите RepPen 1.0–1.05» (unqualified) | «Установите RepPen в диапазоне своей модели (для 12B — 1.0–1.05; [ref: §7A.6])» (canon + master) | MOVED **— executed iter 145** | DEC-22 S-d; fold-into-§9.5 stays an open editorial candidate (out of scope) |
+| SP-7 | `p9_12b_issues::03` | §9.10 12B row «RepPen 1.02-1.05» (12B-consistent, unqualified in-cell) | «RepPen 1.02–1.05 (12B-диапазон — [ref: §7A.6])» (canon + master) — the §9.5 «Повторяющиеся фразы» row already defers via AP-5, verified unchanged | MOVED **— executed iter 145** | DEC-22 S-d; §2.4 «12B hints stay valid» |
+| SP-8 | — (master layer) | E17 32B+ column: Temperature «0.7–1.1*» split «0.7–0.9 базовая \| 0.85–1.1 чеклист», RepPen «1.0–1.10» split «1.0–1.05 рекомендуется \| 1.05–1.10 с осторожностью» — the production display of BOTH sides, orphan asterisk, no footnote | 32B+ column = the canonical «32B+ / API» values (Temperature **0.7–1.0**, RepPen **1.05–1.10**); both sub-range splits + the asterisk removed; 12B column + sanctioned 12B sub-range + API column untouched; re-point comment (iter 145 / DEC-22 / declared omission / audit); 12B–32B middle tier = **declared omission** (no embed representation pre- or post-slice — now declared in the embed comment + canon marker) | SHARED_REFERENCE **— executed iter 145 (audit-locked)** | Registry A E17; DEC-22 S-c |
+| SP-9 | — (master layer) | E12 embed = 59/61 prototype-identical catalog incl. the contradicting AP-5 fix | AP-5 card re-framed (SP-4) + re-point comment declares the numeric-fix defer chain | SHARED_REFERENCE **— executed iter 145 (audit-locked)** | Registry A E12; DEC-22 S-d |
+| SP-10 | — (rule-strength, §6.5/DEC-20) | Appendix B model-capability percentages (~60–80% / ~85–95% / ~90–98%) carried no strength class | **first OBSERVATION-strength application**: «НАБЛЮДЕНИЕ» callout (base `.callout` — registered component, fence #7 clean; ПРАВИЛО↔RULE / РЕКОМЕНДАЦИЯ↔GUIDELINE mapping untouched) in canon `appendix_model_table.md` + master + root fallback | EXECUTED **— iter 145** | DEC-20 «first consuming slice»; PLAN row sampling-cluster |
+| SP-11 | — (gate) | no parity audit covered the cluster (verified iter 144) | `scripts/audit_sampling_parity.py` (12 check groups; MUST-PASS gate wired into `AGENTS.md` canon-audits — parity ×7) | EXECUTED **— iter 145** | mig-2/mig-3/voice gate pattern |
+| SP-12 | — (disposal/state) | E17/E12 prototype+extract frozen (DEC-19 at-slice-time); KI#72 OPEN since iter 120; semantic extraction 6/7 | 8 files → `REMOVED_WITH_REASON` (E17 prototype + 3 extracts + E12 prototype + 3 extracts; archive = git history); **KI#72 CLOSED**; map Registries A/B + §6 + §7 → DECIDED/EXECUTED; matrix back-pointers; STATUS/PLAN/worklog/CHANGELOG/NAV updated; semantic extraction **COMPLETE (7/7)** | EXECUTED **— iter 145** | DEC-19; KI#81 disposal precedent |
+
+Accounting: 1 marker upgrade (SP-1) + 1 canonical-owner verification (SP-2,
+byte-unchanged) + 1 param-row drop with defer (SP-3) + 4 hint re-frames
+(SP-4…SP-7) + 3 cross-layer executions (SP-8/SP-9/SP-10) + 1 gate + 1
+disposal/state package (SP-11/SP-12). The §7A.6 canonical table, the 12B and
+API columns of E17, the E17 checklist, §8.6 AP-5 prose and the glossary RepPen
+entry are byte-unchanged — enforced by the parity audit. Root fallbacks
+`parts/part_07a.html` + `parts/part_08.html` + `parts/part_09.html` +
+`parts/appendix_model_table.html` regenerated with the slice. Deferred
+(informational): visual-system/PLAN.md E17/E12 table copies (frozen design
+doc, DEC-19); canon front-matter `vs_embedded` staleness (repo-wide, rides
+the v2 canon format); the §9.4↔§9.5 fold candidate (matrix `::02`, open
+editorial candidate — not this slice's scope). Consequence of S-a (stated in
+the ratified package): the «0.85–1.1» Temperature side disappears from the
+live site — the canonical top for 32B+ becomes 1.0; AP-5's ≤ 1.10 boundary
+framing is unaffected.
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -453,6 +508,12 @@ verified deferring (value restatement in the ratified Voice Isolation entry,
 > removed; KI#81 closed).
 > **Fifth gate (row 6): owner call received (chat 2026-09-15 «продолжай работу по плану!»)
 > — DECIDED (DEC-21, iter 142), build slice executed iter 142** (map §5.6).
+> **Sixth gate (Registry B row 2 — the KI#72 sampling values): owner call received
+> (chat 2026-09-15 «я согласен с рекомендациями, сделай как лучше и качественнее»)
+> — DECIDED (DEC-22, iter 145), build slice executed iter 145** (map §5.7; KI#72 CLOSED).
+> **v2 architecture phase opening (STATUS Next-step row 2): owner call received (same
+> chat) — DECIDED (DEC-23, iter 145): phase OPEN, first slice = P-a consolidated v2
+> architecture specification; no v2 build slice before the owner ratifies the spec.**
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
    prototypes/extracts become frozen design artifacts (default), or
@@ -695,3 +756,35 @@ verified deferring (value restatement in the ratified Voice Isolation entry,
   row: sampling values only (KI#72 owner call — the last bounded area left).
   Battery: full (canon + master + widget touched) — see STATUS/worklog for the
   executed list.
+- **iter 145 (sampling-cluster execution, BASE_COMMIT `28367020`):** owner go-ahead on
+  the iter-144 package (chat 2026-09-15 «я согласен с рекомендациями, сделай как
+  лучше и качественнее») → **DEC-22** (S-a…S-d: §7A.6 = the single canonical sampling
+  value owner; §7A.7 param rows → defer; E17 → SHARED_REFERENCE re-point with the
+  12B–32B middle tier as a declared omission; E12/§9.x hints → model-qualified
+  defers) + **DEC-23** (v2 architecture phase OPEN; first slice = P-a consolidated
+  specification). Slice executed per map §5.7 (SP-1..SP-12): canon §7A.6 full
+  `[VS: E17]` marker + §7A.7 capability-only table + defer line; canon §9.3/§9.4/§9.10
+  hint re-frames; Appendix B «НАБЛЮДЕНИЕ» callout = the first OBSERVATION-strength
+  application (DEC-20, base `.callout`); master mirrors (E17 32B+ column →
+  canonical 0.7–1.0 / 1.05–1.10, dual-side splits + orphan asterisk removed; E12
+  AP-5 card re-frame; §7A.7 intro defer); `[VS: E12]` marker declares the numeric-fix
+  defer; **KI#72 CLOSED** (reader-visible contradiction since iter 120 resolved);
+  **8 E17/E12 prototype/extract files REMOVED_WITH_REASON** (DEC-19; archive = git
+  history). Acceptance gate `scripts/audit_sampling_parity.py` PASS (12 check
+  groups; parity ×7 now). **Semantic extraction COMPLETE (7/7 bounded areas).**
+  Battery: full (canon + master + root fallbacks touched) — see STATUS/worklog for
+  the executed list.
+- **iter 146 (v2 architecture spec, BASE_COMMIT `0ed3d787`):** the DEC-23 phase's first slice
+  (P-a) executed — NEW `docs/research/v2_architecture.md`, the consolidated v2 architecture
+  specification, **PROPOSED for owner ratification** (nothing DECIDED inside; ratification →
+  DEC-NN → v2 build slices unblocked). Consolidates: the layer model (§2 above, post-extraction
+  state), the reader-mode specification (F1 — Learn/Build/Debug/Reference as structural overlays:
+  entry point / default visibility / on-demand disclosure per mode), the presentation policy
+  (F2 five-value disposition vocabulary on the matrix · F3 checklist triage · F4 example tiering
+  · F5 Part micro-template · F6 `<details class="interactive">` disclosure), the rule-strength
+  convention (DEC-20 + the iter-145 OBSERVATION first application; EXPERIMENTAL = open
+  question), the complete 7/7 cluster+gate inventory (§4 above), the v2 build plan (one Part per
+  iteration; guide order proposed — Part 1 first), and the audit & switch plan (parity →
+  canonical → reader-path audits → switch criteria). Collects **9 ratification questions
+  (Q1–Q9)** incl. KI#70 wire/drop (Reference backbone) and the v1 fate at switch. Doc-only
+  battery green (sync 97/97 · drift 159 · parity ×7 · `git diff --check` clean).

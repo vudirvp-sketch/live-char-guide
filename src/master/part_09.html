@@ -322,7 +322,7 @@
 <tr><td><strong>Description</strong></td><td>☐ Якоря с ценой? (формат T→A→P)<br/>☐ Нет голоса? (голос только в Examples/Greeting)<br/>☐ Психология в Description? (теги <code>&lt;spine&gt;</code>/<code>&lt;ocean&gt;</code>/<code>&lt;enneagram&gt;</code>, не нарратив)</td><td><a href="#p4_spine_overview">Part 4: SPINE</a></td></tr>
 <tr><td><strong>Examples</strong></td><td>☐ Уникальный голос? (только через Examples, не Description)<br/>☐ Embodiment? (минимум одна физическая реакция)<br/>☐ &lt;START&gt;? (в начале каждого блока)</td><td><a href="#p3_examples_rules">Part 3</a></td></tr>
 <tr><td><strong>Greeting</strong></td><td>☐ Сцена→Действие→Реплика?<br/>☐ 50-100 токенов?</td><td><a href="#p7b_greeting">Part 7B</a></td></tr>
-<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (рекомендация 1.0–1.05)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p7a_sampling_params">Part 7A</a></td></tr>
+<tr><td><strong>Parameters</strong></td><td>☐ RepPen ≤ 1.10? (1.0–1.05 для 12B; диапазоны по типам моделей — <a href="#p7a_sampling_params">§7A.6</a>)<br/>☐ PP = 0? (Presence Penalty = 0.0)<br/>☐ Temperature в диапазоне? (0.6–0.8 для 12B)</td><td><a href="#p7a_sampling_params">Part 7A</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -341,7 +341,7 @@
 <tr><th>#</th><th>Проблема</th><th>Решение</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>Установите RepPen 1.0–1.05; проверьте PP = 0.0</td></tr>
+<tr><td><strong>4</strong></td><td>Повторы фраз</td><td>Установите RepPen в диапазоне своей модели (для 12B — 1.0–1.05; <a href="#p7a_sampling_params">§7A.6</a>); проверьте PP = 0.0</td></tr>
 <tr><td><strong>5</strong></td><td>Персонаж теряет характер</td><td>Добавьте 2–3 Examples с уникальным голосом</td></tr>
 </tbody>
 </table>
@@ -520,7 +520,7 @@
 <tr><td>Голос деградирует быстро</td><td>Ограниченная память</td><td>Более явные Anchors, короче Examples</td></tr>
 <tr><td>Модель игнорирует SPINE</td><td>Недостаточная ёмкость</td><td>Упростите SPINE до дефекта + лжи (FLAW + LIE)</td></tr>
 <tr><td>OOC моменты</td><td>Контекст overflow</td><td>4K-Fallback Protocol</td></tr>
-<tr><td>Повторы фраз</td><td>Паттерн-зависимость</td><td>RepPen 1.02-1.05, разнообразьте Examples</td></tr>
+<tr><td>Повторы фраз</td><td>Паттерн-зависимость</td><td>RepPen 1.02–1.05 (12B-диапазон — <a href="#p7a_sampling_params">§7A.6</a>), разнообразьте Examples</td></tr>
 <tr><td>Неспособность к CoT</td><td>Архитектура модели</td><td>Tier 0-1 CoT только, без XML</td></tr>
 </tbody>
 </table>

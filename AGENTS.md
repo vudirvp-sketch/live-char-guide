@@ -138,6 +138,7 @@ python3 scripts/audit_token_budget_parity.py  # MUST PASS (Token budget §7A.12 
 python3 scripts/audit_enneagram_parity.py     # MUST PASS (Enneagram §5.4 canonical ↔ generated data layer ↔ E10 SHARED_REFERENCE parity — mig-5)
 python3 scripts/audit_diagnostics_parity.py   # MUST PASS (Diagnostics §9.6 canonical ↔ E13 visual presentation parity — DEC-20/mig-3)
 python3 scripts/audit_voice_parity.py        # MUST PASS (Voice §3.2 canonical ↔ E07 ↔ widget constants parity — DEC-21/voice-cluster)
+python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling §7A.6 canonical ↔ E17 ↔ E12/§9.x hints parity — DEC-22/sampling-cluster)
 ```
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates

@@ -302,8 +302,8 @@ not a merge.
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
 | p7a_sampling_params::01 | L298 | intro | DEFINITION | KEEP | YES | — | |
-| p7a_sampling_params::02 | L300 | `[VS: E17]` marker | METADATA | KEEP | YES | — | Declared replacement: params description + comparative table |
-| p7a_sampling_params::03 | L302–311 | base params table | DEFINITION | KEEP | YES | CONTRADICTORY | **Canonical** sampling table. Contradicts §7A.7 rows (KI#72, new): 32B+ Temperature 0.7–1.0 vs 0.85–1.1; 32B+ RepPen 1.05–1.10 vs 1.0–1.05 |
+| p7a_sampling_params::02 | L300 | `[VS: E17]` marker | METADATA | KEEP | YES | — | Declared replacement: params description + comparative table. **iter 145:** upgraded to the full `_README.md` §3.3 format (SHARED_REFERENCE + declared 12B–32B omission + audit name) → migration_map_v2 SP-1 |
+| p7a_sampling_params::03 | L302–311 | base params table | DEFINITION | KEEP | YES | CONTRADICTORY | **Canonical** sampling table. Contradicts §7A.7 rows (KI#72, new): 32B+ Temperature 0.7–1.0 vs 0.85–1.1; 32B+ RepPen 1.05–1.10 vs 1.0–1.05. **iter 145:** KI#72 resolved — DEC-22 S-a (§7A.6 = the single value owner, table byte-unchanged, audit-locked); the §7A.7 side dropped → migration_map_v2 SP-2 |
 | p7a_sampling_params::04 | L313 | RULE: PP = 0.0 always | DEFINITION | KEEP | YES | — | Canonical |
 | p7a_sampling_params::05 | L315 | RULE: Ollama/LM Studio hardcode | DEFINITION | KEEP | YES | — | Canonical; KoboldCPP/TabbyAPI/vLLM list |
 | p7a_sampling_params::06 | L317–324 | model-specific recommendations table | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | Per-model rows consistent with ::03; §7A.7 conflicts (KI#72) |
@@ -312,8 +312,8 @@ not a merge.
 
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
-| p7a_model_checklist::01 | L334 | intro: «дополняет §7A.6 и §7A.11» | NAVIGATION | KEEP | YES | — | |
-| p7a_model_checklist::02 | L336–345 | summary table (params + capabilities) | APPLICATION | COMPRESS | YES | DUPLICATE | Param rows (Temperature/PP/RepPen) duplicate §7A.6 **with contradictions** (KI#72 — R12); capability rows (Voice Placement/XML/CoT/SP-language/Anti-godmoding) are unique summary. Recommendation: drop param rows, defer to §7A.6, keep capability rows |
+| p7a_model_checklist::01 | L334 | intro: «дополняет §7A.6 и §7A.11» | NAVIGATION | KEEP | YES | — | **iter 145:** intro + new defer line carry the §7A.6 param defer (DEC-22 S-b) → migration_map_v2 SP-3 |
+| p7a_model_checklist::02 | L336–345 | summary table (params + capabilities) | APPLICATION | COMPRESS | YES | DUPLICATE | Param rows (Temperature/PP/RepPen) duplicate §7A.6 **with contradictions** (KI#72 — R12); capability rows (Voice Placement/XML/CoT/SP-language/Anti-godmoding) are unique summary. Recommendation: drop param rows, defer to §7A.6, keep capability rows. **iter 145:** EXECUTED (DEC-22 S-b — param rows dropped, header «Возможность», defer line added) → migration_map_v2 SP-3 |
 | p7a_model_checklist::03 | L347 | footnote ¹: SP language | NAVIGATION | KEEP | YES | — | Compliant short + ref |
 | p7a_model_checklist::04 | L349 | RECOMMENDATION: AN and voice per model | DEFINITION | KEEP | YES | — | Unique |
 
@@ -423,7 +423,7 @@ notes (L35, L82 partial, L616), KI#71 (verbatim duplicate line), KI#72 (sampling
 |---|---|---|---|---|---|---|---|
 | p9_basic_checklist::01 | L57 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14: one of 7 diagnostic-mode routers repeating the same destination set; aggregate compression candidate pending ed-policy |
 | p9_basic_checklist::02 | L59 | «начните с этого чек-листа» | NAVIGATION | COMPRESS | YES | — | Overlaps ::01 — merge |
-| p9_basic_checklist::03 | L61–67 | checklist table (per block) | VALIDATION | KEEP | YES | REINFORCEMENT | Canonical per-block diagnosis; check-form of Parts 2/3/7A rules = changed function (R07 occurrences inside are checks, not re-teach) |
+| p9_basic_checklist::03 | L61–67 | checklist table (per block) | VALIDATION | KEEP | YES | REINFORCEMENT | Canonical per-block diagnosis; check-form of Parts 2/3/7A rules = changed function (R07 occurrences inside are checks, not re-teach). **iter 145:** Parameters-row RepPen hint 12B-qualified (DEC-22 S-d) → migration_map_v2 SP-5 |
 | p9_basic_checklist::04 | L69 | Cross-ref §9.11 | NAVIGATION | KEEP | YES | — | Repeats ::01 pointer — fold into router (R14) |
 
 ### p9_additional_problems (§9.4)
@@ -431,7 +431,7 @@ notes (L35, L82 partial, L616), KI#71 (verbatim duplicate line), KI#72 (sampling
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
 | p9_additional_problems::01 | L79 | intro: top-3 live in Part 1 | NAVIGATION | KEEP | YES | — | |
-| p9_additional_problems::02 | L81–84 | table: problems #4/#5 | DEFINITION | MOVE | YES | DUPLICATE | Both rows are symptom→fix pairs already carried by §9.5 rows («Повторяющиеся фразы», «Персонаж теряет характер») — fold into the symptom table, keep the #4/#5 numbering as row labels |
+| p9_additional_problems::02 | L81–84 | table: problems #4/#5 | DEFINITION | MOVE | YES | DUPLICATE | Both rows are symptom→fix pairs already carried by §9.5 rows («Повторяющиеся фразы», «Персонаж теряет характер») — fold into the symptom table, keep the #4/#5 numbering as row labels. **iter 145:** #4 RepPen fix re-framed to the model-range defer (DEC-22 S-d); the fold candidate stays open → migration_map_v2 SP-6 |
 | p9_additional_problems::03 | L86 | Cross-ref | NAVIGATION | KEEP | YES | — | |
 
 ### p9_symptom_table (§9.5)
@@ -481,7 +481,7 @@ notes (L35, L82 partial, L616), KI#71 (verbatim duplicate line), KI#72 (sampling
 |---|---|---|---|---|---|---|---|
 | p9_12b_issues::01 | L213 | Сценарий router para | NAVIGATION | KEEP | YES | UNCLEAR | R14 |
 | p9_12b_issues::02 | L215 | 12B intro + SP-language summary | APPLICATION | KEEP | YES | REINFORCEMENT | Summary + refs to §7A.6/§7A.2 — compliant |
-| p9_12b_issues::03 | L217–225 | 12B symptoms table | VALIDATION | KEEP | YES | SPECIAL CASE | §24: same family as §9.5 rows, materially different condition (12B architecture) |
+| p9_12b_issues::03 | L217–225 | 12B symptoms table | VALIDATION | KEEP | YES | SPECIAL CASE | §24: same family as §9.5 rows, materially different condition (12B architecture). **iter 145:** «Повторы фраз» row qualified (12B-диапазон — §7A.6, DEC-22 S-d) → migration_map_v2 SP-7 |
 | p9_12b_issues::04 | L227 | Cross-ref (4K-Fallback, CoT Tiers) | NAVIGATION | KEEP | YES | — | |
 
 ### p9_pre_deploy (§9.11)
@@ -977,7 +977,7 @@ documented as a compliant IMP-48 pattern — the model pair for future dual-pres
 
 | id | lines | block | tag | decision | load | repeat | notes |
 |---|---|---|---|---|---|---|---|
-| p8_ap5_reppen_high::01 | L110–112 | AP-5 card | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | R12-family: RepPen ≤ 1.10 boundary — consistent with §7A.6 32B+/API 1.05–1.10 (ref ✓ + unbalanced paren); stays valid under either KI#72 reconciliation (both candidate ranges ≤ 1.10) |
+| p8_ap5_reppen_high::01 | L110–112 | AP-5 card | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | R12-family: RepPen ≤ 1.10 boundary — consistent with §7A.6 32B+/API 1.05–1.10 (ref ✓ + unbalanced paren); stays valid under either KI#72 reconciliation (both candidate ranges ≤ 1.10). **iter 145:** E12 AP-5 fix card re-framed to the model-qualified defer (DEC-22 S-d; §8.6 prose unchanged) → migration_map_v2 SP-4 |
 
 ### p8_ap6_no_anti_godmoding (§8.7)
 
@@ -1211,7 +1211,7 @@ appendix content describes never-loaded containers.
 | R09 | Format Lock template | §7A.4 | §7A.1 template tail · §7A.13 step 3 · **[B]** all four Part 10 cards (Format Lock block inside each SP — production-artifact function) | REINFORCEMENT (template/apply/assemble/card) | ed-2 |
 | R10 | Tone Frame example string | §7A.3 table | §7A.13 step 3 · **[B]** Part 10 cards carry character-specific Tone Frame strings (unique per card, not re-prints) | REINFORCEMENT (apply-layer) | ed-2 |
 | R11 | Token budget numbers (per-block) | `p7a_token_budget::03` (§7A.12) | §7A.11 4K table (RELATED BUT DISTINCT ✓) · §1.8 Q2 (UNCLEAR framing: ≤200/≤400 vs 150/300/700) · §7A.13 step 6 ✓ · §9.11 «Description ≤ 800» vs max 700 (CONTRADICTORY) · **[B]** AP-1 symptom «Description > 800» (same ≥800-vs-700 tension) · **[B]** glossary Token Budget entry («4K ~430–580 на карточку» — card-total framing) · §7B.2 Greeting «Длина: 50–100 токенов» vs §7A.12 Greeting row 40/60/100 (**instance found iter 135, mig-4 TB-8**) | MIXED — see per-row | ed-5; E01/E15 embed side dispositioned+locked by mig-4 (map §5.3, iter 135) |
-| R12 | Sampling parameter values | `p7a_sampling_params::03` (§7A.6) | §7A.7 rows — **CONTRADICTORY** (KI#72) · §9.3 Parameters row = compliance check ✓ · §9.10 refs ✓ · **[B]** AP-5 RepPen ≤ 1.10 boundary (consistent with §7A.6 under either KI#72 outcome) · **[B]** AP-7 PP = 0.0 (consistent ✓) | CONTRADICTORY (§7A.7) | KI#72 fix |
+| R12 | Sampling parameter values | `p7a_sampling_params::03` (§7A.6) | §7A.7 rows — **CONTRADICTORY** (KI#72) · §9.3 Parameters row = compliance check ✓ · §9.10 refs ✓ · **[B]** AP-5 RepPen ≤ 1.10 boundary (consistent with §7A.6 under either KI#72 outcome) · **[B]** AP-7 PP = 0.0 (consistent ✓) | CONTRADICTORY (§7A.7) | KI#72 fix — **EXECUTED iter 145 (DEC-22): §7A.6 canonical, §7A.7 param rows dropped, E17/E12/§9.x re-pointed; audit_sampling_parity.py locks the set** |
 | R13 | SP language rule | §7A.2 | §7A.7 footnote ✓ · §9.10 summary ✓ · **[B]** Appendix B следствия (ref ✓) · **[B]** glossary CORE DIRECTIVES entry (full 3-tier restatement — folds into the R02 compression) | Compliant refs + glossary full copy (folds into R02) | — |
 | R14 | Diagnostic-mode routers («Сценарий:» paras) | — (7 near-identical: §9.3/9.5/9.6/9.7/9.9/9.10/9.11) | — | UNCLEAR — navigation-debt (research §15); candidate: one canonical routing block | ed-8/ed-policy |
 | R15 | §9.4 problems #4/#5 vs §9.5 rows | §9.5 | §9.4 (pending candidate #11) | DUPLICATE | ed-3 execution |
@@ -1290,7 +1290,7 @@ cumulative list with execution status:**
 4. `p3_voice_isolation::06` — methodology copy (R05) → CROSS-REFERENCE — **✅ executed iter 129 (ed-7 family; sync-audit P3-6 updated)**
 5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS — **✅ executed iter 129 (ed-7 family)**
 6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE — **✅ executed iter 130 (ed-4 family)**
-7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — open (owner value decision)
+7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — **EXECUTED iter 145** (DEC-22 S-b; map §5.7 SP-3)
 8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — open
 9. `p7a_token_budget::11` — stale migration note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
 10. `p7a_assembly_pipeline::05` — CORE DIRECTIVES verbatim (R02) → CROSS-REFERENCE — **executed iter 134 (migration_map_v2 D-2: DEC-08 shorthand)**
