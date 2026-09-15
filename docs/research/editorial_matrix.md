@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–4: iters 147–150); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–5: iters 147–151); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -798,85 +798,105 @@ canonical-audit stage / an ed-* batch, not forced here); §4.2/§4.9 wording-lev
 
 ### p5_ocean_basics (§5.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_ocean_basics::01 | L19 | OCEAN definition | DEFINITION | KEEP | YES | — | Canonical |
-| p5_ocean_basics::02 | L21 | ПРАВИЛО: золотое правило профиля (1–2 extremes) | DEFINITION | KEEP | YES | REINFORCEMENT | **R25 canonical owner.** Internal ref «(см. §5.3 контекстные лимиты)» imprecise — the limits table is §5.1 L80–87; §5.3 carries only a partial restatement (reader-visible, feeds ed-8) |
-| p5_ocean_basics::03 | L23 | ПРАВИЛО: `<ocean>` tag format (compact) | DEFINITION | KEEP | YES | — | Canonical (NAV invariant) |
-| p5_ocean_basics::04 | L25 | осторожная зона definition | DEFINITION | KEEP | YES | — | Canonical (NAV invariant) |
-| p5_ocean_basics::05 | L27–35 | 5 измерений table | DEFINITION | KEEP | YES | — | |
-| p5_ocean_basics::06 | L37–39 | тип стресса intro | DEFINITION | KEEP | YES | — | |
-| p5_ocean_basics::07 | L41–46 | stress-type table (4 rows) | DEFINITION | KEEP | YES | — | Canonical |
-| p5_ocean_basics::08 | L48 | РЕКОМЕНДАЦИЯ: определяйте тип стресса | APPLICATION | KEEP | YES | — | |
-| p5_ocean_basics::09 | L50–56 | Trigger → Stress Type → FLAW chain (intro + formula + linkage) | APPLICATION | KEEP | YES | — | Unique cross-part synthesis; refs §2.1/§4.4/§4.8 all correct |
-| p5_ocean_basics::10 | L58–65 | канонический пример: Елена (anxious-reactive table) | EXAMPLE | KEEP | YES | — | |
-| p5_ocean_basics::11 | L67 | ПРАВИЛО: каждый тип стресса ≥1 цепочку | DEFINITION | KEEP | YES | — | |
-| p5_ocean_basics::12 | L69 | РЕКОМЕНДАЦИЯ: 2–3 категории триггеров | APPLICATION | KEEP | YES | — | |
-| p5_ocean_basics::13 | L71–78 | категории триггеров по типу стресса table | DEFINITION | KEEP | YES | — | |
-| p5_ocean_basics::14 | L80–87 | контекстные лимиты полюсов table (4K/8K/16K/32K) | DEFINITION | KEEP | YES | REINFORCEMENT | R25 2nd statement (values consistent with ::02 + §5.3) |
-| p5_ocean_basics::15 | L89 | Ссылка: OCEAN при сборке → `[ref: part_07a.md §7A.X — Assembly Pipeline]` | NAVIGATION | KEEP | YES | — | R18: `§7A.X` vague (target §7A.13; master resolves to `#p7a_assembly_pipeline` — canon-side hygiene) |
-| p5_ocean_basics::16 | L91–100 | decision tree: какой фреймворк (intro + table) | APPLICATION | KEEP | YES | — | Canonical framework chooser |
-| p5_ocean_basics::17 | L102 | ПРАВИЛО: не собирайте SPINE снизу вверх | DEFINITION | KEEP | YES | — | Canonical |
-| p5_ocean_basics::18 | L104 | РЕКОМЕНДАЦИЯ: 90% карточек = SPINE + OCEAN | APPLICATION | KEEP | YES | — | **R26 statement #1** (decision-tree site) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_ocean_basics::01 | L19 | OCEAN definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p5_ocean_basics::02 | L21 | ПРАВИЛО: золотое правило профиля (1–2 extremes) | DEFINITION | KEEP | YES | REINFORCEMENT | open | **R25 canonical owner.** The internal-ref imprecision the audit flagged (the pre-repair «(см. §5.3 контекстные лимиты)» form) was repaired iter 127 (ed-8 Phase B) — the RULE now points to the §5.1 limits table (L80–87, «см. таблицу … ниже»); §5.3 keeps a partial restatement (values consistent) |
+| p5_ocean_basics::03 | L23 | ПРАВИЛО: `<ocean>` tag format (compact) | DEFINITION | KEEP | YES | — | open | Canonical (NAV invariant) |
+| p5_ocean_basics::04 | L25 | осторожная зона definition | DEFINITION | KEEP | YES | — | open | Canonical (NAV invariant) |
+| p5_ocean_basics::05 | L27–35 | 5 измерений table | DEFINITION | KEEP | YES | — | open | |
+| p5_ocean_basics::06 | L37–39 | тип стресса intro | DEFINITION | KEEP | YES | — | open | |
+| p5_ocean_basics::07 | L41–46 | stress-type table (4 rows) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p5_ocean_basics::08 | L48 | РЕКОМЕНДАЦИЯ: определяйте тип стресса | APPLICATION | KEEP | YES | — | open | |
+| p5_ocean_basics::09 | L50–56 | Trigger → Stress Type → FLAW chain (intro + formula + linkage) | APPLICATION | KEEP | YES | — | open | Unique cross-part synthesis; refs §2.1/§4.4/§4.8 all correct |
+| p5_ocean_basics::10 | L58–65 | канонический пример: Елена (anxious-reactive table) | EXAMPLE | KEEP | YES | — | open | |
+| p5_ocean_basics::11 | L67 | ПРАВИЛО: каждый тип стресса ≥1 цепочку | DEFINITION | KEEP | YES | — | open | |
+| p5_ocean_basics::12 | L69 | РЕКОМЕНДАЦИЯ: 2–3 категории триггеров | APPLICATION | KEEP | YES | — | open | |
+| p5_ocean_basics::13 | L71–78 | категории триггеров по типу стресса table | DEFINITION | KEEP | YES | — | open | |
+| p5_ocean_basics::14 | L80–87 | контекстные лимиты полюсов table (4K/8K/16K/32K) | DEFINITION | KEEP | YES | REINFORCEMENT | open | R25 2nd statement (values consistent with ::02 + §5.3) |
+| p5_ocean_basics::15 | L89 | Ссылка: OCEAN при сборке → `[ref: part_07a.md §7A.13 — Assembly Pipeline]` | NAVIGATION | KEEP | YES | — | open | Stale R18 note refreshed iter 151: the `§7A.X` vague placeholder the audit flagged was repaired iter 127 (ed-8 Phase B — commit `8a365553`; byte-verified: the current canon carries the precise §7A.13 target = the master anchor resolution `#p7a_assembly_pipeline`); master gains the «Ссылка:» label mirror iter 151 (P5-3 — map §5.12) |
+| p5_ocean_basics::16 | L91–100 | decision tree: какой фреймворк (intro + table) | APPLICATION | KEEP | YES | — | open | Canonical framework chooser |
+| p5_ocean_basics::17 | L102 | ПРАВИЛО: не собирайте SPINE снизу вверх | DEFINITION | KEEP | YES | — | open | Canonical |
+| p5_ocean_basics::18 | L104 | РЕКОМЕНДАЦИЯ: 90% карточек = SPINE + OCEAN | APPLICATION | KEEP | YES | — | open | **R26 statement #1** (decision-tree site) |
 
 ### p5_elena_profile (§5.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_elena_profile::01 | L114 | intro | DEFINITION | KEEP | YES | — | |
-| p5_elena_profile::02 | L116–122 | OCEAN-профиль Елены table | EXAMPLE | KEEP | YES | — | Protected worked example; A=38/N=68 cautious + O=72 extreme — consistent with character_map L30 ✓ |
-| p5_elena_profile::03 | L124 | ПРАВИЛО: 1 экстремум + 2 осторожных зоны | DEFINITION | KEEP | YES | REINFORCEMENT | Apply of the golden rule — consistent ✓ |
-| p5_elena_profile::04 | L126–134 | Enneagram 6w5 table (стресс 6→3, рост 6→9) | EXAMPLE | KEEP | YES | — | Directions consistent with `data/enneagram.json` (E10 fixed iter 124) ✓; parity-locked vs the generated layer (§5.2 ↔ type-6 directions) — → migration_map_v2 EN-8 (mig-5 executed iter 136) |
-| p5_elena_profile::05 | L136 | Валидация | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_elena_profile::01 | L114 | intro | DEFINITION | KEEP | YES | — | open | |
+| p5_elena_profile::02 | L116–122 | OCEAN-профиль Елены table | EXAMPLE | KEEP | YES | — | open | Protected worked example; A=38/N=68 cautious + O=72 extreme — consistent with character_map L30 ✓ |
+| p5_elena_profile::03 | L124 | ПРАВИЛО: 1 экстремум + 2 осторожных зоны | DEFINITION | KEEP | YES | REINFORCEMENT | open | Apply of the golden rule — consistent ✓ |
+| p5_elena_profile::04 | L126–134 | Enneagram 6w5 table (стресс 6→3, рост 6→9) | EXAMPLE | KEEP | YES | — | open | Directions consistent with `data/enneagram.json` (E10 fixed iter 124) ✓; parity-locked vs the generated layer (§5.2 ↔ type-6 directions) — → migration_map_v2 EN-8 (mig-5 executed iter 136) |
+| p5_elena_profile::05 | L136 | Валидация | DEFINITION | KEEP | YES | — | open | |
 
 ### p5_ocean_warning (§5.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_ocean_warning::01 | L147 | ПРАВИЛО: OCEAN Overload | DEFINITION | KEEP | YES | — | Canonical |
-| p5_ocean_warning::02 | L149–155 | сценарий 1 (Низкая A + Высокая E + Высокий N) | EXAMPLE | KEEP | YES | — | |
-| p5_ocean_warning::03 | L157–161 | сценарий 2 (Высокая O + Низкая C + Высокий N) | EXAMPLE | KEEP | YES | — | |
-| p5_ocean_warning::04 | L163–167 | сценарий 3 (Высокая E + Низкая A + Низкий N) | EXAMPLE | KEEP | YES | REINFORCEMENT | R25 3rd statement («максимум 3 для 8K+, 2 для 4K» — consistent) |
-| p5_ocean_warning::05 | L169–171 | OCEAN×Enneagram: проверка через тип | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_ocean_warning::01 | L147 | ПРАВИЛО: OCEAN Overload | DEFINITION | KEEP | YES | — | open | Canonical |
+| p5_ocean_warning::02 | L149–155 | сценарий 1 (Низкая A + Высокая E + Высокий N) | EXAMPLE | KEEP | YES | — | open | |
+| p5_ocean_warning::03 | L157–161 | сценарий 2 (Высокая O + Низкая C + Высокий N) | EXAMPLE | KEEP | YES | — | open | |
+| p5_ocean_warning::04 | L163–167 | сценарий 3 (Высокая E + Низкая A + Низкий N) | EXAMPLE | KEEP | YES | REINFORCEMENT | open | R25 3rd statement («максимум 3 для 8K+, 2 для 4K» — consistent) |
+| p5_ocean_warning::05 | L169–171 | OCEAN×Enneagram: проверка через тип | DEFINITION | KEEP | YES | — | open | |
 
 ### p5_enneagram_basics (§5.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_enneagram_basics::01 | L182 | OCEAN «сколько» vs Enneagram «почему» | DEFINITION | KEEP | YES | — | Canonical framing |
-| p5_enneagram_basics::02 | L184 | `[VS: E10]` marker | METADATA | KEEP | YES | — | Declared replacement (9-type enumeration); ownership declaration added (SHARED_REFERENCE: mini-card values = §5.4 via the generated data layer) — → migration_map_v2 EN-2 (mig-5 executed iter 136) |
-| p5_enneagram_basics::03 | L186 | Enneagram definition | DEFINITION | KEEP | YES | — | |
-| p5_enneagram_basics::04 | L188–200 | 9 типов Enneagram table (7 columns) | DEFINITION | KEEP | YES | — | Canonical; data-layer source for `data/enneagram.json` + E10 — duplication now DERIVED, not copied (generator, fence #8 compliant) — → migration_map_v2 EN-1 (mig-5 executed iter 136) |
-| p5_enneagram_basics::05 | L202 | РЕКОМЕНДАЦИЯ: столбец LIE — справочный (ref §4.3 ✓) | APPLICATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_enneagram_basics::01 | L182 | OCEAN «сколько» vs Enneagram «почему» | DEFINITION | KEEP | YES | — | open | Canonical framing |
+| p5_enneagram_basics::02 | L184 | `[VS: E10]` marker | METADATA | KEEP | YES | — | open | Declared replacement (9-type enumeration); ownership declaration added (SHARED_REFERENCE: mini-card values = §5.4 via the generated data layer) — → migration_map_v2 EN-2 (mig-5 executed iter 136) |
+| p5_enneagram_basics::03 | L186 | Enneagram definition | DEFINITION | KEEP | YES | — | open | |
+| p5_enneagram_basics::04 | L188–200 | 9 типов Enneagram table (7 columns) | DEFINITION | KEEP | YES | — | open | Canonical; data-layer source for `data/enneagram.json` + E10 — duplication now DERIVED, not copied (generator, fence #8 compliant) — → migration_map_v2 EN-1 (mig-5 executed iter 136) |
+| p5_enneagram_basics::05 | L202 | РЕКОМЕНДАЦИЯ: столбец LIE — справочный (ref §4.3 ✓) | APPLICATION | KEEP | YES | — | open | |
 
 ### p5_cross_instrument_map (§5.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_cross_instrument_map::01 | L213 | intro (валидация описана §5.1) | NAVIGATION | KEEP | YES | — | |
-| p5_cross_instrument_map::02 | L215–217 | MBTI (справочная роль) | DEFINITION | KEEP | YES | REINFORCEMENT | **R26 statement #2** (cross-map site; ref appendix ✓) |
-| p5_cross_instrument_map::03 | L219–228 | Enneagram → SPINE table (4 rows) | DEFINITION | KEEP | YES | — | Canonical |
-| p5_cross_instrument_map::04 | L230–240 | OCEAN → SPINE validation table (5 rows) | DEFINITION | KEEP | YES | — | Canonical |
-| p5_cross_instrument_map::05 | L242–244 | Enneagram ↔ MBTI (widgets M2+) | METADATA | KEEP | YES | — | Widget-behavior note |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_cross_instrument_map::01 | L213 | intro (валидация описана §5.1) | NAVIGATION | KEEP | YES | — | open | |
+| p5_cross_instrument_map::02 | L215–217 | MBTI (справочная роль) | DEFINITION | KEEP | YES | REINFORCEMENT | open | **R26 statement #2** (cross-map site; ref appendix ✓) |
+| p5_cross_instrument_map::03 | L219–228 | Enneagram → SPINE table (4 rows) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p5_cross_instrument_map::04 | L230–240 | OCEAN → SPINE validation table (5 rows) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p5_cross_instrument_map::05 | L242–244 | Enneagram ↔ MBTI (widgets M2+) | METADATA | KEEP | YES | — | open | Widget-behavior note; the two-sentence head (MBTI Composer / OCEAN Insight capabilities) restored to master iter 151 (P5-4 — the iter-62 master-side cleanup had dropped it while canon kept it; map §5.12) |
 
 ### p5_enneagram_wings (§5.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_enneagram_wings::01 | L254 | Wing definition | DEFINITION | KEEP | YES | — | |
-| p5_enneagram_wings::02 | L256–265 | алгоритм выбора крыла (критерии table + closing para) | APPLICATION | KEEP | YES | — | |
-| p5_enneagram_wings::03 | L267–274 | примеры крыльев table | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_enneagram_wings::01 | L254 | Wing definition | DEFINITION | KEEP | YES | — | open | |
+| p5_enneagram_wings::02 | L256–265 | алгоритм выбора крыла (критерии table + closing para) | APPLICATION | KEEP | YES | — | open | |
+| p5_enneagram_wings::03 | L267–274 | примеры крыльев table | EXAMPLE | KEEP | YES | — | open | |
 
 ### p5_cross_matrix (§5.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p5_cross_matrix::01 | L284 | матрица OCEAN×Enneagram (widget description) | METADATA | KEEP | YES | — | Interactive matrix description |
-| p5_cross_matrix::02 | L286 | Persona Synthesis definition | METADATA | KEEP | YES | — | Widget definition |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p5_cross_matrix::01 | L284 | матрица OCEAN×Enneagram (widget description) | METADATA | KEEP | YES | — | open | Interactive matrix description |
+| p5_cross_matrix::02 | L286 | Persona Synthesis definition | METADATA | KEEP | YES | — | open | Widget definition |
 
-**Part 5 verdict:** canonical psychology part, near-clean. Findings: R25 pole-limits stated 3× (all
-values consistent; one imprecise internal ref), R26 MBTI-role stated 4× (compliant layering), one
-R18 vague ref. Zero compression candidates.
+**Part 5 verdict (audit-time, iter 126):** canonical psychology part, near-clean. Findings: R25
+pole-limits stated 3× (all values consistent; the one imprecise internal ref was repaired iter
+127), R26 MBTI-role stated 4× (compliant layering), one R18 vague ref (repaired iter 127 — the
+iter-151 slice refreshed the stale matrix note). Zero compression candidates.
+
+**v2 build slice executed iter 151** (DEC-24 — fifth Part of the v2 build phase; Registry C map
+[`migration_map_v2.md`](./migration_map_v2.md) §5.12): the `presentation` column seeded on all
+43 Part 5 rows — **all `open`**: Part 5 is the Learn-mode core teaching Part for psychology (BASIC
+§5.1–§5.2, INTERMEDIATE §5.3–§5.4, EXPERT §5.5–§5.7) and every block is canonical teaching
+content (definitions, rules, canonical value tables, the protected §5.2 worked example) under the
+registered Collapsible thresholds → zero qualifying F6 blocks (honest application, not forced).
+F3: zero checklists (the §5.1 decision tree + the §5.6 wing algorithm = teaching/application
+tables; zero checkbox affordances; the Build entry instrument = §1.8, executed iter 147). F4:
+worked tier = the §5.2 Elena profile (chipped ИЛЛЮСТРАЦИЯ); the §5.1::10 chain example + the
+§5.3 scenarios + the §5.6::03 wings table = inline tier (h4-labelled demonstrations — the
+registered unchipped variant; no chip invented). F5: verified per section (Concept → Rule → Core
+example → Reference; ▸Failure modes = the §5.3 scenarios); the §5.1 Reference branch precise
+(§7A.13 — repaired iter 127). F6: zero new `<details class="interactive">`. Canon: verified
+F5-approximate as-is, **zero content edits** (the §5.4 enneagram record + the §5.2 Elena tables
+byte-stable per the mig-5 lock — the iter-149 §3.2 voice precedent). Master: the «Ссылка:» label
+mirror (P5-3) + the §5.5::05 mirror completion restoring the two canon sentences the iter-62
+master-side cleanup dropped (P5-4). The master-only enrichments recorded as deferred observations
+(map §5.12 P5-5).
 
 ---
 

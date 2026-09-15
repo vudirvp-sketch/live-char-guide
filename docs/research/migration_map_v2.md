@@ -726,6 +726,67 @@ definition's no_master_match entry + the rules-list pairing, the §4.11::05 «С
 gained its master mirror — verified by the JSON pre/post diff; the §4.7 fold kept its pairing).
 Next Part: **Part 5** (guide order; its own slice reuses this shape).
 
+### 5.12 Part 5 v2 build slice (seeded + executed iter 151 — v2 build phase, fifth Part)
+
+Scope: **Part 5 — Psychology** (7 sections, 43 block rows; DEC-24 Q6 guide order — Part 5 fifth; the
+per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate cleared
+by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape (evidence → canon restructure →
+master mirror → full battery) — fifth application, reusing the §5.8–§5.11 pattern. Primary reader
+mode: **Learn** (the core teaching Part for psychology — full-narrative default visibility per the
+spec §3). Editorial Policy 5-point check applied per edit (documented per row below). Acceptance
+gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines) —
+**no new cluster parity gate**: Part 5 **hosts** the enneagram cluster owner (§5.4, mig-5) — the
+§5.4 canonical 9-type record + the E10 embed + the generated `data/enneagram.json` chain stay
+**byte-stable** through the slice (`audit_enneagram_parity.py` PASS — the iter-149 §3.2 voice
+precedent); the §5.2 Elena 6w5 directions stay byte-stable (the audit's cross-layer check); the
+other six cluster owners (§7A.2 / §7A.12 / §7A.6 / §9.6 / §3.2 / glossary registry) sit outside
+Part 5 entirely.
+
+**F2 presentation map (spec §4.1 mechanism, fifth application):** the Part 5 matrix tables now
+carry the `presentation` column (43 rows; matrix §1.2 scope note extended to Parts 1–5).
+Disposition: **43 × `open`** — Part 5 is the Learn-mode core teaching Part for psychology (BASIC
+§5.1–§5.2, INTERMEDIATE §5.3–§5.4, EXPERT §5.5–§5.7 per the canon difficulty markers) and every
+block is canonical teaching content (definitions, RULE/РЕКОМЕНДАЦИЯ callouts, canonical value
+tables — the §5.1 dimensions/stress-type/trigger-categories/limits tables, the §5.4 9-type record,
+the §5.5 validation tables — and the protected §5.2 worked example; all under the registered
+Collapsible thresholds; the longest prose blocks, the §5.3 scenarios, are ~60–70 words each and
+ARE the section's failure-mode demonstration = required reading) → zero qualifying F6 blocks
+(honest application, not forced). F3: zero checklists — the §5.1 decision tree + the §5.6
+wing-selection algorithm = teaching/application tables, zero checkbox affordances; zero
+decision-input checklists (the Build entry instrument = §1.8, executed iter 147). F4: worked tier =
+the §5.2 Elena OCEAN-profile + 6w5 tables (the section is chipped ИЛЛЮСТРАЦИЯ in master); the
+§5.1::10 canonical chain example, the §5.3 conflict scenarios and the §5.6::03 wings-examples
+table = inline tier (h4-labelled demonstrations — the registered unchipped variant; no chip
+invented). F5: verified per section (Concept → Rule → Core example → Reference; ▸Failure modes =
+the §5.3 scenarios; Reference branches live: §5.1::15→§7A.13, §5.4::05→§4.3, §5.5::01→§5.1,
+§5.2::05 Валидация). F6: zero new `<details class="interactive">` (the one existing §5.1 usage =
+the pre-existing interactive-pentagon widget container, untouched).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P5-1 | — (evidence) | matrix Part 5 tables: 8 columns, no presentation axis | `presentation` column seeded (43 rows, all `open`); matrix §1.2 scope note extended to Parts 1–5; the Part 5 verdict re-labeled audit-time + the iter-151 slice note appended; **two stale notes refreshed** — `p5_ocean_basics::02` (the §5.1::02 internal-ref imprecision was repaired iter 127, ed-8 Phase B — the note described the pre-repair state; the R25 registry row already records the fix) and `p5_ocean_basics::15` (the R18 `§7A.X` vague placeholder was repaired iter 127, ed-8 Phase B, commit `8a365553` — byte-verified this slice at HEAD: the canon carries the precise §7A.13 target; the note described the pre-repair state) | EXECUTED **— iter 151** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149/150 stale-note-refresh precedent; NAV pitfall #27 discipline (byte-level verification before treating a display as ground truth — the audit-time note refreshed, not re-repaired) |
+| P5-2 | `p5_ocean_basics::15` (canon) | canon L89 «**Ссылка:** Как применить OCEAN при сборке карточки → `[ref: part_07a.md §7A.13 — Assembly Pipeline]`» — already precise (the iter-127 ed-8 Phase B repair; this slice's preflight initially mis-read the line as still `§7A.X` from the stale matrix note — byte-verification + pickaxe disproved it) | **unchanged — verified byte-stable** (canon `part_05.md` byte-unchanged through the slice: zero canon content edits; the §5.4 enneagram record + the §5.2 Elena tables byte-stable per the mig-5 lock — the iter-149 §3.2 voice precedent) | VERIFIED **— unchanged (iter 151)** | fence #10 (canon = source of truth, already correct); Editorial Policy (no edit without functional load); pitfall #27 (display artifacts ≠ file content) |
+| P5-3 | `p5_ocean_basics::15` (master side) | master §5.1 Ссылка paragraph without the «Ссылка:» label: `<p>Как применить OCEAN при сборке карточки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>.</p>` (pickaxe-verified: `<strong>Ссылка:</strong>` never present in master part_05 — `git log -S` empty) | the bold label added: `<p><strong>Ссылка:</strong> Как применить OCEAN при сборке карточки → …</p>` — the canon `**Ссылка:**` form | MOVED **— executed iter 151** | the P4-4/P3-5(b) Reference-branch mirror family (F5 Reference branch duty; DEC-16 «Ссылка» label law); the «Ссылка:» bold-label convention verified in master part_01/part_03 |
+| P5-4 | `p5_cross_instrument_map::05` | master §5.5 «Enneagram ↔ MBTI» paragraph carrying only the canon tail («Каждый Enneagram-тип имеет вероятные MBTI-типы (и наоборот). Enneagram Builder и MBTI Composer показывают эти подсказки при M2+.»); the canon head missing («OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+) показывает рекомендованные OCEAN-значения для выбранного типа; OCEAN Insight (M2+) прогнозирует вероятные MBTI-типы на основе профиля.») — git-verified: the iter-62 «R1 repetitions cleanup + §5.5 MBTI stub merge» removed the two sentences from MASTER while canon kept them (a fence-#10 divergence, not a dual-side disposal) | the full canon paragraph restored to master (head + tail as one `<p>`) | MOVED **— executed iter 151** | fence #10 (canon wins); the P4-3 mirror-completion family (canon block exists, master counterpart incomplete); matrix ::05 KEEP/YES (widget-behavior note — the MBTI Composer / OCEAN Insight capabilities the sentence pair declares) |
+| P5-5 | — (master layer, observed) | master-only enrichments, never canonized: (a) the §5.1 E09 VS-EMBED (pentagon + context-limits inset) with NO canon `[VS: E09]` declaration (canon front-matter `vs_embedded: none` — stale, repo-wide family); (b) the §5.1 stress-type table rows 1–2 master-only suffixes «/ тревожный тип», «/ агрессивный тип»; (c) the §5.2 A-row «дефект» vs canon «FLAW» (v7-era wording variance); (d) the §5.4 master-only «Интерактивный Builder» heading + «Дополнительный контент:» callout prefix + noscript/embed/nav lines; (e) the §5.5 master-only nav line «Интерактивный выбор типа с автозаполнением SPINE — Enneagram Builder (выше)»; (f) the §5.5 OCEAN→SPINE table lowercase-start compressions (v7-era) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge; the E09 canon-declaration gap rides the front-matter/v2-canon-format deferral) | RECORDED **— deferred (iter 151)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy (compress redundant presentation, never unique capability); rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P5-6 | — (state) | STATUS iter-150 / PLAN row v2-build-part-5 open / no map §5.12 | map §5.12 + STATUS iter-151 (Next step re-pinned to the Part 6 slice) + PLAN v2-build-part-6 + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–5) | EXECUTED **— iter 151** | iter-147…150 state-package pattern |
+
+Accounting: 1 presentation-column seeding (43 rows, all `open`) + 1 verified-unchanged canon with
+recorded stale-note refreshes (P5-2 — **zero canon content edits**; `part_05.md` byte-unchanged:
+the §5.4 9-type record, the §5.2 Elena tables, every canonical value table byte-stable; front-matter
+staleness deferred, repo-wide) + 1 «Ссылка» label mirror (P5-3) + 1 §5.5::05 mirror completion
+(P5-4) + 1 observation package deferred (P5-5) + 1 state package (P5-6). Byte-unchanged: master
+§5.2/§5.3/§5.4/§5.6/§5.7 entirely + §5.1/§5.5 outside the edited blocks (the E09/E10 embeds, the
+interactive pentagon, the §5.4 builder widget containers — recorded P5-5, untouched); matrix
+tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope): the P5-5
+master-only enrichments (canonical-audit stage / ed-* batch); canon front-matter staleness (rides
+the v2 canon format); KI#79 drift-tool regex (tooling); the §5.2 «дефект»/«FLAW» and §5.5 casing
+wording variances (formatting churn, not F-policy). Root fallback `parts/part_05.html` regenerated
+with the slice (+ root `index.html` timestamp). Drift actionable **155 → 155** (unchanged — the
+two repaired master paragraphs already matched their canon counterparts above the paragraph
+threshold; the P5-4 restoration raises the §5.5::05 pair's similarity, no count effect; verified
+by the JSON pre/post diff). Next Part: **Part 6** (guide order; its own slice reuses this shape).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -823,6 +884,24 @@ Next Part: **Part 5** (guide order; its own slice reuses this shape).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 151 (Part 5 v2 build slice, BASE_COMMIT `ebdfe412`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-5, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.12 (P5-1..P5-6)** on the spec §7 shape (fifth application, reusing the
+  §5.8–§5.11 pattern): evidence — the matrix Part 5 tables gain the F2 `presentation` column
+  (43 rows, all `open`; the Collapsible criteria honestly applied: zero qualifying blocks; two
+  stale notes refreshed — both describe pre-iter-127 states: the ::02 internal-ref imprecision
+  and the ::15 R18 `§7A.X` placeholder, both repaired by ed-8 Phase B `8a365553`; the ::15
+  refresh byte-verified at HEAD per pitfall #27) + this §5.12 registry; canon — **zero content
+  edits** (`part_05.md` byte-unchanged; the §5.4 enneagram record + the §5.2 Elena tables
+  byte-stable per the mig-5 lock — the iter-149 §3.2 voice precedent; `audit_enneagram_parity.py`
+  PASS); master — the §5.1::15 «Ссылка:» label mirror (P3-5/P4-4 family) + the §5.5::05 mirror
+  completion restoring the two canon sentences (MBTI Composer / OCEAN Insight) the iter-62
+  master-side cleanup dropped while canon kept them (P5-4); the six master-only enrichments
+  (E09 canon-declaration gap, stress-type suffixes, «дефект»/«FLAW» variance, §5.4 builder
+  chrome, §5.5 nav line, table casing) recorded as deferred observations (P5-5); drift 155 →
+  **155** (unchanged — verified by the JSON pre/post diff); full battery green (sync 97/97,
+  parity ×7, tests 64/64, english 18, syntax 238, hash unchanged); Next step re-pinned to the
+  Part 6 slice.
 - **iter 150 (Part 4 v2 build slice, BASE_COMMIT `b0c21c3b`):** the pinned STATUS Next-step
   row 1 (PLAN row v2-build-part-4, **not owner-gated** — the DEC-24 ratification gate cleared)
   executed per map **§5.11 (P4-1..P4-6)** on the spec §7 shape (fourth application, reusing the
