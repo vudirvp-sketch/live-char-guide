@@ -101,8 +101,10 @@ textual canonical home); drift = known prototype↔embed divergence
 ## 5. Registry C — block-level rows (mechanism)
 
 The block-level semantic audit of the prose layer is **owned by
-`editorial_matrix.md`** (99 IDs / 500 rows, repeat registry R01–R29 — full
-coverage, iter 126; 12 of 20 candidates executed iters 125–130). This registry
+`editorial_matrix.md`** (99 IDs / 500 rows at the iter-126 audit — **504 current**: +4 post-audit row additions (iter
+139 p9_decision_tree::05, iter 142 p3_influence_hierarchy::09, iter 147 p1_core_rules::07 — each
+disclosed at its slice — + the iter-159 appendix_model_table::03 НАБЛЮДЕНИЕ row); repeat registry
+R01–R29 — full coverage, iter 126; 12 of 20 candidates executed iters 125–130). This registry
 does **not duplicate** those rows (one fact — one owner, DEC-10). Mechanism:
 when a v2 build slice touches a Part, its affected matrix rows are copied here
 with `OLD LOCATION → NEW LOCATION` + status; the matrix row gets a back-pointer
@@ -1230,6 +1232,69 @@ compression candidates ride it) → Appendix D (character_map, canon-only; the K
 notes) → parity audit → canonical audit (the P4-5…P10-4 + P-app-4 master-only enrichment
 observations ride this stage) → reader-path audit → switch.
 
+### 5.20 Appendix B v2 build slice (seeded + executed iter 159 — v2 build phase, second appendix/Reference slice)
+
+Scope: **Appendix B — Model Capability Table** (`docs/canon/appendix_model_table.md` +
+`src/master/appendix_model_table.html`, 1 section / 4 matrix rows — 3 re-derived + the НАБЛЮДЕНИЕ
+row added this slice; DEC-24 Q6 guide order — second appendix; the pinned STATUS Next-step row 1,
+**not owner-gated** — the appendix slices are the pinned track continuation). Mechanism: the ratified
+spec §7 slice shape (evidence → canon restructure → master mirror → full battery) — thirteenth
+application, reusing the §5.8–§5.19 pattern. Primary reader mode: **Reference** (spec §3: compact
+term/rule entries with canonical-home links; the appendix runtime-renders since the iter-158 WIRE —
+no infrastructure work remains in this slice). Editorial Policy 5-point check applied per edit
+(documented per row below). Acceptance gate: the full battery **+ the sampling-parity OBSERVATION
+anchor** (check 8 references the Appendix B framing — any master restructure must keep the gate
+green; verified PASS). **No new cluster parity gate** (Appendix B hosts no cluster owner; the seven
+cluster owners sit in the Parts — verified §5.18 P10-1's list).
+
+**F2 presentation map (spec §4.1 mechanism, thirteenth application):** the appendix_model_table
+matrix table now carries the `presentation` column (**4 rows: 4 `open`** — count script-verified);
+matrix §1.2 scope note extended to Parts 1–10 + Appendices A/B; the audit-total header note
+discloses the row-count reality (**500 → 504** — the iter-159 script-examined count found +4
+post-audit row additions never folded into the header: iter 139/142/147's rows (each disclosed at
+its own slice) + the НАБЛЮДЕНИЕ row added this slice — the block post-dated the iter-126 audit
+(added iter 145 as DEC-20's first OBSERVATION application, no matrix row at the time); the slice
+repairs the coverage gap per the matrix's own §1.1 re-derivation convention); the ::01 stale marker
+inventory refreshed (was «markers ×2 in Part 6» — the current inbound links = canon ×4 + master
+`model-note` spans ×5, all live since the WIRE); the ::04 (ex-::03) L-refs refreshed (the iter-145
+insertion had shifted the block); the appendices verdict extended with the B-sliced line. Zero
+`collapsible` / `canonical-link` / `reference-relocate` / `delete-candidate` / `—` — the
+Reference-layer verdict holds (compact lookup payload: intro → the reference table → the
+OBSERVATION strength framing → the apply-layer следствия). F5: verified F5-approximate — the
+Reference-layer shape is the target form; zero restructure (the Parts 5/6/7B/8 + Appendix A
+zero-restructure precedent). F6: zero wraps. F3/F4: no checklists / no example tiering in the
+appendix.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P-B-1 | — (evidence) | matrix appendix_model_table table: 8 columns, no presentation axis; 3 rows with pre-iter-145 L-refs (::03 «L33–37») and the stale «markers ×2 in Part 6» inventory; the iter-145 НАБЛЮДЕНИЕ block carrying no row (audit-coverage gap); the audit-total «500 block rows» header claim | `presentation` column seeded (4 rows: 4 `open` — count script-verified); the НАБЛЮДЕНИЕ row added (::03, METADATA — the §1.1 document-order re-derivation; ex-::03 следствия → ::04 with L35–39); §1.2 scope note extended to Parts 1–10 + Appendices A/B; the header audit-total disclosed (500 → **504** — the script-examined count: +4 post-audit additions attributed (iter 139/142/147's rows + the iter-159 НАБЛЮДЕНИЕ row)); the ::01 marker inventory refreshed (canon ×4 + master ×5, WIRE-live); the appendices verdict extended | EXECUTED **— iter 159** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…158 stale-note-refresh precedent; the matrix's own §1.1 re-derivation convention |
+| P-B-2 | — (canon) | `appendix_model_table.md` 39 lines: intro → 9-row capability table → НАБЛЮДЕНИЕ → Ключевые следствия (3 bullets) | **verified F5-approximate — zero restructure, canon byte-stable** (the Reference-layer shape is the target form: Concept → reference payload → strength framing → apply summary; the zero-restructure precedent chain). Section ID `appendix_model_table` preserved (fences #4/#5 clean). The OBSERVATION anchor intact (the sampling gate's check-8 canon probe — verified PASS). The front-matter staleness recorded as an observation (P-B-4c — the repo-wide iter-152 family, not this slice's scope) | VERIFIED **— byte-stable iter 159** | spec §3 Reference row; Editorial Policy (nothing to compress: zero redundant presentation) |
+| P-B-3 | `appendix_model_table::02/::04` (master) | the master's v9-Phase-6-slimmed state: (a) the entire «Ключевые следствия для сборки карточки» block (h3 + 3 bullets — canon ::04) absent from master; (b) the Script Tax API-column word order «200K+ словарь покрывает…» vs canon «словарь 200K+ покрывает…»; (c) the master-only v7-era `part-resume` block «Что вы теперь умеете» whose bullet 2 («Учитывать MODEL_NOTE при выборе техник…») directs the reader at markers that no longer exist anywhere (grep-verified: the only MODEL_NOTE mentions repo-wide = this appendix's own intro + header comment + the stale bullet itself — the v9 Phase 3.3 consolidation replaced them with this very table) | **two mirror completions executed** (fence #10 canon wins, the iter-155/158 v9-slimming-gap precedent): (a) the следствия block restored (h3 + 3 `<li>` + the `#p7a_core_directives` link on «см. §7A.2 ПРАВИЛО» — the part_07a §7A.12-row link pattern); (b) the Script Tax cell restored to the canon word order. **The `part-resume` block disposed REMOVED_WITH_REASON** — the iter-158-recorded «B/C slices co-decide» sub-decision executed at B. 5-point check: capability — a Learn-mode recap («Что вы теперь умеете») in a Reference-layer appendix adds zero lookup capability, and its bullet 2 is a live factual misdirection since the WIRE made the appendix render; coverage — bullet 1 restates the table payload (::02), bullet 2 = stale, no unique rule/nuance/example lost; retrieval — the Reference reader arrives via the `[Model: see Appendix B]` markers / TOC and needs the table + OBSERVATION + следствия (all retained, open); context — the section closes on the restored следствия apply summary (the Appendix A close-on-decision precedent); dependency — grep-verified zero tool probes (the sync audit carries no appendix_model_table checks; the sampling gate probes only the НАБЛЮДЕНИЕ callout — untouched; zero tests reference the block) + zero back-link registry entries. Family precedent: the iter-47 P2-7 cleanup already deleted the part-resume blocks from the Parts (11 deletes — the sync audit's `P2-7-del-*` negative checks) with the appendices explicitly out of that KI's scope; A's benign instance remains recorded (P-app-4a), C's slice follows the B precedent, the `.part-resume` component stays registered (components.md) with 2 live usages | MOVED **— executed iter 159** | fence #10; Editorial Policy 5-point check; the iter-47 P2-7 + iter-148 §2.3 + iter-158 P-app-3 disposal precedents; the iter-158 «B/C slices co-decide» record |
+| P-B-4 | — (observed) | master-only / metadata variances, never canonized: (a) the remaining appendix `part-resume` co-travelers — A (benign bullets; P-app-4a) and C (the glossary instance — its slice follows the B precedent); (b) the heading-mismatch informational family (canon «B.1 Таблица…» vs master h2 «Таблица…» — the repo-wide non-numbered-master-h2 convention, 15 drift WARNs, informational by design); (c) the canon front-matter staleness (`canonical_for: —` etc. — the repo-wide iter-152 family); (d) the master part_04 `model-note` span = the master-side form of the canon's inline model qualification (P4-4 enrichment family — canon part_04 L281 carries «≥32B и API; 12B — ограниченно» inline); (e) the comment-noise drift entry stays (canon HTML comments vs master — informational; canon byte-stable) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (the C/D slices + the canonical-audit stage own their families; the heading-mismatch family = the drift tool's informational WARN layer, no reader impact) | RECORDED **— deferred (iter 159)** | AGENTS.md scope discipline; the P4-5…P10-4 + P-app-4 observation-package chain |
+| P-B-5 | — (state) | STATUS iter-158 / PLAN row v2-build-appendix-b open / no map §5.20 | map §5.20 + STATUS iter-159 (Current State; the v2-architecture invariant extended to Appendices A/B; KI#84 row deleted per lifecycle — 2 iterations elapsed 158/159; iter-159 KI-note; Next step re-pinned to the Appendix C slice) + PLAN v2-build-appendix-b → COMPLETE + the appendix-c row + iter-159 history note + worklog + CHANGELOG + NAV §7 de-stale (the appendix slices: A/B) | EXECUTED **— iter 159** | iter-147…158 state-package pattern |
+
+Accounting: 1 presentation-column seeding (4 rows: 4 `open`, count script-verified; +1 row added —
+the НАБЛЮДЕНИЕ audit-coverage repair, total 500→**504** disclosed in the matrix header + this
+registry's §5 preamble — the script-examined count surfaced 3 pre-existing undisclosed post-audit
+additions (iter 139/142/147), now attributed) + 0 canon edits (**canon `appendix_model_table.md` byte-stable —
+git-diff-verified**) + 2 master mirror completions (P-B-3: the следствия block, the Script Tax
+cell) + 1 master disposal (P-B-3: the v7-era `part-resume`, REMOVED_WITH_REASON — the
+«B/C slices co-decide» sub-decision executed at B) + 1 observation package deferred (P-B-4) + 1
+state package (P-B-5). Byte-unchanged: canon `appendix_model_table.md` entirely; master
+`appendix_model_table.html` outside the three P-B-3 edits; all other master/canon files; matrix
+tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope): the P-B-4
+observation package (the C/D slices + the canonical-audit stage); KI#77-e (open, untouched);
+KI#79 (open, untouched); the R02/R01 glossary compression candidates (ed-2 family — the
+Appendix C slice's scope). Root fallbacks regenerated with the slice (`parts/appendix_model_table.html`;
+root `index.html` timestamp; hash `2ab607d6` unchanged — `src/shell/index.html` untouched).
+Drift: **142 → 141 expected** (the следствия mirror completion clears the appendix_model_table
+plain-text entry — simulation pre-verified with the drift tool's own tokenizer: best-Jaccard
+0.660 ≥ threshold 0.3; the remaining entry = comment-noise, informational). Next: **the Appendix C
+(Glossary) v2 build slice** (the v2 Reference-layer representation, DEC-17c — the R01/R02
+compression candidates ride it; PLAN row v2-build-appendix-c) → Appendix D (character_map,
+canon-only; the KI#77-b/c/d + R27 notes) → parity audit → canonical audit (the P4-5…P10-4 +
+P-app-4 + P-B-4 master-only enrichment observations ride this stage) → reader-path audit → switch.
+
 
 ## 6. Owner decision points (blocking, in recommended order)
 
@@ -1328,6 +1393,19 @@ observations ride this stage) → reader-path audit → switch.
 
 ## 7. Iteration log (registry changes)
 
+- **iter 159 — Appendix B v2 build slice (map §5.20 P-B-1..P-B-5):** F2
+  presentation column 4 rows (**all `open`** — the Reference-layer verdict holds; count
+  script-verified; +1 row — the iter-145 НАБЛЮДЕНИЕ audit-coverage repair, total 500→**504** disclosed
+  in the matrix header + the §5 preamble); matrix §1.2 extended to Parts 1–10 + Appendices A/B;
+  the ::01 marker inventory + the ::04 L-refs refreshed + the appendices verdict extended; canon —
+  **zero edits** (`appendix_model_table.md` byte-stable — F5-approximate verified; the OBSERVATION
+  anchor intact); master — **two mirror completions** (the «Ключевые следствия для сборки карточки»
+  block restored with the `#p7a_core_directives` link + the Script Tax API-cell word order —
+  fence #10) + **the v7-era `part-resume` disposed REMOVED_WITH_REASON** (the iter-158 «B/C slices
+  co-decide» sub-decision executed at B; the iter-47 P2-7 family precedent; 5-point check +
+  grep-verified zero tool deps; the stale MODEL_NOTE bullet disclosed); the P-B-4 observation
+  package deferred (the A/C part-resume co-travelers, the heading-mismatch family, the front-matter
+  staleness, the part_04 master-side span).
 - **iter 158 — Appendix A v2 build slice + the KI#70 WIRE (map §5.19 P-app-1..P-app-6):** F2
   presentation column 6 rows (**all `open`** — the Reference-layer verdict holds; count
   script-verified); matrix §1.2 extended to Parts 1–10 + Appendix A; the §14 header + two stale

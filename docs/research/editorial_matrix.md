@@ -7,7 +7,12 @@
 > **Phase B (iter 126, BASE `03f48fa3`, worktree clean at start):** Part 0, 2, 4, 5, 6, 7B, 8, 10 +
 > appendices (character_map / glossary / mbti / model_table) — 61 sections, 290 rows.
 > Combined: **99 canon-declared section IDs (96 rendering + Part 0 ×2 + Appendix D ×1 conceptual-only,
-> per the `content_map.md` counting convention), 500 block rows.**
+> per the `content_map.md` counting convention), 500 block rows** (the iter-126 audit total; +4 post-audit
+> row additions — iter 139 `p9_decision_tree::05`, iter 142 `p3_influence_hierarchy::09`, iter 147
+> `p1_core_rules::07` (each disclosed at its slice, never folded into this header) + iter 159
+> `appendix_model_table::03` (the НАБЛЮДЕНИЕ block post-dated the audit — added iter 145 as DEC-20's
+> first OBSERVATION application, no matrix row at the time; re-derived per §1.1 document order —
+> map §5.20); the count verified script-examined at the iter-159 slice — **current total 504**).
 > **Read-only analysis (both phases):** no content files (`docs/canon/`, `src/master/`) were edited.
 > **Phase decision:** A = the four highest-conflict zones per research §26 (`backlog_audit_iter118.md`
 > §2/§4); B = the remainder. Non-rendering sections audited canon-side only.
@@ -43,7 +48,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts/appendices already sliced (Parts 1–10 + Appendix A: iters 147–158); the remaining appendices (B/C/D) get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts/appendices already sliced (Parts 1–10 + Appendices A/B: iters 147–159); the remaining appendices (C/D) get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -1370,11 +1375,12 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 
 ### appendix_model_table (Appendix B)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| appendix_model_table::01 | L19 | intro (объединяет MODEL_NOTE-заметки) | NAVIGATION | KEEP | YES | — | Declares its replacement function (referenced by `[Model: see Appendix B]` markers ×2 in Part 6) |
-| appendix_model_table::02 | L21–31 | таблица возможностей моделей (9 rows) | DEFINITION | KEEP | YES | — | Canonical; values consistent with §6.3 tiers / §7A.2 SP-language / §7A.12 Script Tax ✓ |
-| appendix_model_table::03 | L33–37 | ключевые следствия для сборки (3 bullets) | APPLICATION | KEEP | YES | REINFORCEMENT | Apply-layer summary of the table (SP-language ref §7A.2 ✓; Script Tax 1.5–2× consistent ✓) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| appendix_model_table::01 | L19 | intro (объединяет MODEL_NOTE-заметки) | NAVIGATION | KEEP | YES | — | open | Declares its replacement function. **Stale marker inventory refreshed iter 159** (was «markers ×2 in Part 6»): the inbound links = canon `[Model: see Appendix B]` markers **×4** (Part 6 ×2 + Part 7A ×2) + master `model-note` spans ×5 (Part 4 ×1 + Part 6 ×2 + Part 7A ×2; the Part-4 span = the master-side form of the canon's inline qualification — P4-4 enrichment family); all live at runtime since the iter-158 WIRE |
+| appendix_model_table::02 | L21–31 | таблица возможностей моделей (9 rows) | DEFINITION | KEEP | YES | — | open | Canonical; values consistent with §6.3 tiers / §7A.2 SP-language / §7A.12 Script Tax ✓. **iter 159 master mirror:** the Script Tax API-column word order restored to the canon form («словарь 200K+ покрывает…»; was «200K+ словарь покрывает…» — fence #10) |
+| appendix_model_table::03 | L33 | НАБЛЮДЕНИЕ: процентные оценки — эмпирические наблюдения | METADATA | KEEP | YES | — | open | **Row added iter 159** (the block post-dated the Phase-A/B audit — added iter 145 as DEC-20's first OBSERVATION application, base `.callout` — registered component; `audit_sampling_parity.py` check 8 anchors the canon + master + root-fallback forms). The OBSERVATION framing = the strength statement: percentages are empirical observations, not normative thresholds; rules live in the профильные разделы |
+| appendix_model_table::04 | L35–39 | ключевые следствия для сборки (3 bullets) | APPLICATION | KEEP | YES | REINFORCEMENT | open | Apply-layer summary of the table (SP-language ref §7A.2 ✓; Script Tax 1.5–2× consistent ✓). **L-refs + ordinal refreshed iter 159** (was ::03 «L33–37» — the iter-145 НАБЛЮДЕНИЕ insertion shifted the block; re-derived per §1.1 document order). **iter 159 master mirror:** the block restored in master (the v9-Phase-6-slimming gap — h3 + 3 bullets + the `#p7a_core_directives` link, fence #10; the appendix_model_table plain-text drift entry cleared) |
 
 **Appendices verdict:** reference layer healthy. Two entries over-carry canonical material (glossary
 CORE DIRECTIVES — the R02/ed-2 input; Behavioral Anchor placement ПРАВИЛО — R01 reference-layer
@@ -1386,6 +1392,13 @@ dependency is resolved by the iter-158 WIRE (all three appendices render at runt
 KI#77-b/c/d stale refs + R27 budget-range drift in character_map (owner-gated ed-5 — that slice
 documents, does not re-decide). **Appendix A sliced iter 158** (map §5.19): 6 rows **all `open`**,
 zero compression candidates — the Reference-layer verdict holds (compact lookup payload; spec §3).
+**Appendix B sliced iter 159** (map §5.20): 4 rows (3 re-derived + the iter-145 НАБЛЮДЕНИЕ row
+added — the audit-coverage repair) **all `open`**, zero compression candidates — the
+Reference-layer verdict holds; the master v9-slimming gap closed (the следствия block restored,
+fence #10) + the v7-era `part-resume` disposed REMOVED_WITH_REASON (the iter-47 P2-7 family
+precedent — the Parts were cleaned then, the appendices were out of that KI's scope; the iter-158
+recorded «B/C slices co-decide» sub-decision executed at B; A's benign instance remains recorded,
+C's slice follows the B precedent).
 
 ---
 
