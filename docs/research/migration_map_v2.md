@@ -843,6 +843,71 @@ by the JSON pre/post diff).
 Next Part: **Part 7A** (guide order; its own slice reuses this shape — the largest so far: 13
 sections, 94 matrix rows; `src/master/part_07a.html` is a grep-first huge file per AGENTS.md).
 
+### 5.14 Part 7A v2 build slice (seeded + executed iter 153 — v2 build phase, seventh Part)
+
+Scope: **Part 7A — System Prompt & Assembly** (13 sections, 94 block rows — the largest slice so far;
+DEC-24 Q6 guide order — Part 7A seventh; the per-Part track pinned by STATUS Next-step row 1, **not
+owner-gated** — the ratification gate cleared by DEC-24). Mechanism: the ratified spec §7 per-Part
+slice shape (evidence → canon restructure → master mirror → full battery) — seventh application,
+reusing the §5.8–§5.13 pattern; the full Part executed in one slice (the sub-slicing option recorded
+in STATUS/PLAN was not needed — the slice's canon/master surface proved bounded: one fold + one
+mirror). Primary reader mode: **Build** (spec §3: the Build-mode entry = §7A.13 assembly pipeline +
+§7A.12 budgets; the Part also carries the Learn-mode core teaching for SP elements §7A.1–§7A.5 —
+honest F2 application kept both flows `open`; only the two technical-reference blocks stay behind
+the existing F6 wraps). Editorial Policy 5-point check applied per edit (documented per row below).
+Acceptance gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines)
+— **no new cluster parity gate**: Part 7A *hosts* three of the seven cluster owners (§7A.2 CORE
+DIRECTIVES mig-2, §7A.6 sampling DEC-22, §7A.12 token budget mig-4) — the STATUS-declared
+byte-stability locks honored (their canonical records + the E08/E17 presentation chains untouched;
+the three existing audits PASS — the iter-149 §3.2 / iter-151 §5.4 precedents). The E02/E16 embeds
+(non-cluster, Registry A dispositions PROPOSED) untouched — they ride their own audit time.
+
+**F2 presentation map (spec §4.1 mechanism, seventh application):** the Part 7A matrix tables now
+carry the `presentation` column (94 rows; matrix §1.2 scope note extended to Parts 1–7A + the `—`
+historical-row rule documented). Disposition: **86 × `open`** (canonical definitions, RULE/REC
+callouts, templates, canonical tables, the §7A.13 walkthrough steps — Build+Learn required reading;
+the §7A.13::10 optional extensions considered for `collapsible` and rejected: the text list is the
+accessible-text counterpart of the E02 embed's optional-branch section, each bullet short) **+ 4 ×
+`canonical-link`** (three already-deployed forms re-verified: §7A.1::06 — the iter-125 dupes-1 fold;
+§7A.9::01 — the R01 compliant short+refs intro; §7A.13::05 — the iter-134 R02/mig-2 shorthand; plus
+§7A.11::05 — the R01 #8 fold executed this slice, P7A-2) **+ 2 × `collapsible`** (both pre-existing
+deployed F6 usages documented as the v2 presentation: §7A.6::06 the model-specific recommendations
+table — technical reference per `components.md` #5 — and §7A.13::11 the recap checklist — F3
+validation class) **+ 2 × `—`** (blocks disposed pre-slice by executed decisions, historical audit
+rows: `p7a_system_prompt::05` — the KI#71 duplicate line, disposed ed-6 iter 121; and
+`p7a_token_budget::11` — the stale migration note, stripped ed-6 iter 121). F3: §7A.7 = decision-input
+class (the iter-145 capability table; zero checkbox affordances — correct, reserved for §9.3/§9.11);
+the §7A.13 checklist = validation class (the existing `<details>`); zero teaching checklists needing
+affordance work. F4: worked tier = the §7A.5 AN examples + §7A.9 Выщербленный + the §7A.8 comparison +
+the §7A.13 step results (Elena blocks); inline tier = the §7A.3 settings table + the §7A.4 markup
+systems table (woven, no chips invented). F5: verified per section — every §7A.NN already carries
+Concept → Rule → Core example → Reference branches (`[ref:]` + `[VS: E##]` markers); zero
+restructure forced (honest application: the Part is F5-approximate as-is). F6: **zero new
+`<details class="interactive">`** (the two existing usages documented; no new qualifying block).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P7A-1 | — (evidence) | matrix Part 7A tables: 8 columns, no presentation axis | `presentation` column seeded (94 rows: 86 `open` + 4 `canonical-link` + 2 `collapsible` + 2 `—`); matrix §1.2 scope note extended to Parts 1–7A + the `—` historical-row rule; the Part 7A verdict appended with the iter-153 slice note; **seven stale notes refreshed** — `p7a_system_prompt::05` (KI#71 disposed iter 121, ed-6 — the note described the pre-fix duplicate), `::06` (the iter-125 dupes-1 execution — the note described the pre-fold full copy), `::07` (the stale `[ANCHORS]`-drift claim stripped iter 121 — the note described the pre-strip state; the surviving canonical-format note dispositioned `open`), `p7a_core_directives::04` (the «(D4, iter 93)» repo-meta stripped iter 121), `p7a_authors_note::07` (the R18 ref normalization executed iter 128 — parens balanced at HEAD), `p7a_token_budget::11` (the migration note stripped iter 121 — the note described the pre-strip state) + the ::03/::05 byte-stability re-verification notes | EXECUTED **— iter 153** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…152 stale-note-refresh precedent |
+| P7A-2 | `p7a_4k_fallback::05` | canon §7A.11 L565 full RULE: «Якоря в 4K-fallback размещаются в Description (как `<anchors>`-тег или список), поскольку фронтенд не имеет отдельного поля. **Концептуально якоря — отдельный блок в Examples-зоне (см. правило §1.4 и правило §7A.1).** При 8K+ и API…» — the R01 family 4th occurrence (the conceptual sentence = the §1.4 canonical rule restated; matrix decision CROSS-REFERENCE «fold to pointer») | the R01 #8 fold executed (the Part-4 R21-#16 iter-150 precedent): the conceptual sentence → inline pointer «— концепция и полное правило размещения: `[ref: part_01.md §1.4 — правило]`»; the 4K substance kept verbatim (list form allowed in fallback; the 8K+ `<anchors>`-tag tail). 5-point check: capability — the concept lives at §1.4 (canonical) + the §7A.9/§7A.13 compliant short forms (verified by grep, nothing lost); coverage — every 4K nuance kept in place; retrieval — the local placement rule survives compressed; context — sits right after the minimal-Description code block showing the list form; dependency — no sync probe touches the paragraph (verified), no cross-ref targets it (grep: only section-level §7A.11 refs) | MOVED **— executed iter 153** | Editorial Policy (compress redundant presentation, never unique capability); fence #11 (one canonical definition — everywhere else 1-sentence + link); the matrix R01 verdict (dupes-2 candidate #8, picked up by its Part slice per the R21-#16 precedent) |
+| P7A-3 | `p7a_4k_fallback::05` (master layer) | master §7A.11 callout — the same full RULE paragraph (verbatim mirror incl. the conceptual sentence) | the fold mirror: the conceptual sentence → `<a href="#p1_core_rules">§1.4 правило</a>` (the master §7A.1::06 anchor convention; `[ref: …]` → link render per the P5-3 notation-render precedent); the 4K substance byte-stable | MOVED **— executed iter 153** | fence #10 (canon = source of truth, master mirrors); the master §7A.1::06 mirror form |
+| P7A-4 | — (observed) | master-only enrichments + variances, never canonized/resolved: (a) the §7A.13 master-only intro sentences («Ниже — единственный…» prefix + «Токен-бюджет по блокам — в бюджете токенов (выше). Полная карточка Елены без аннотаций — в Part 10.» — pickaxe-verified never in canon); (b) the §7A.7 presentation+value variances: master renders the capability table as a by-model-tier `<ul>` (canon = the `Возможность` table) with CoT-tier drift (master «Tier 0–1 / Tier 1–2» vs canon «✗ / Tier 1 / Tier 2–3») + the E17 embed's checklist section (CoT «0–1 / 1–2 / 3»; Anti-godmoding API «2 строки» vs canon «1 строка») — pre-existing family variance, not gated by `audit_sampling_parity.py` (which locks the params tables); (c) the §7A.13 recap-checklist summary label variance (canon «Сводный чек-лист» vs master «Recap-чек-лист» — the P6-4(f) EN-label family); (d) the §7A.5 «Пояснение секций» render variance (canon table vs master `<ul>` — content equivalent); (e) the E02/E16 canon-declaration gaps (front-matter `vs_embedded` lists E08/E16/E17/E02 — E02/E16 Registry A dispositions still PROPOSED; the `[VS: …]` markers carry the full `_README.md` §3.3 format for E16/E17/E02, E08 the short form) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge or non-rendering metadata; the §7A.7 value variances need the reconciliation owner call — they pre-date the slice and touch no gate) | RECORDED **— deferred (iter 153)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy (compress redundant presentation, never unique capability); rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P7A-5 | — (state) | STATUS iter-152 / PLAN row v2-build-part-7a open / no map §5.14 | map §5.14 + STATUS iter-153 (Next step re-pinned to the Part 7B slice; the v2-architecture invariant extended to Parts 1–7A / maps §5.8–§5.14) + PLAN v2-build-part-7b + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–7A) | EXECUTED **— iter 153** | iter-147…152 state-package pattern |
+
+Accounting: 1 presentation-column seeding (94 rows) + 1 canon content edit (P7A-2 — the R01 #8 fold;
+`part_07a.md` 1 line changed, everything else byte-stable — the §7A.2/§7A.6/§7A.12 cluster-owner
+records verified untouched by the diff) + 1 master mirror (P7A-3; `part_07a.html` 1 line changed) + 1
+observation package deferred (P7A-4) + 1 state package (P7A-5). Byte-unchanged: §7A.1–§7A.10, §7A.12,
+§7A.13 canon entirely (outside the §7A.11 fold) + the E08/E16/E17/E02 embeds + the master §7A.7
+`<ul>`/E17 checklist (recorded P7A-4, not touched); matrix tag/decision/load/repeat columns unchanged.
+Deferred (recorded, out of scope): the P7A-4 master-only enrichments + §7A.7 family variances
+(canonical-audit stage / owner call); the R01 family is now COMPLETE on the canon side (§7A.11 was
+the last full-form non-owner occurrence); the appendix_glossary R01/R02 reference-layer folds ride
+the appendix/Reference slice (KI#70 WIRE). Root fallback `parts/part_07a.html` regenerated with the
+slice (+ root `index.html` timestamp). Drift actionable **155 → 155** (expected unchanged — the folded
+paragraph keeps its canon↔master match; verified by the JSON pre/post diff).
+Next Part: **Part 7B** (guide order; its own slice reuses this shape; the appendix/Reference slice
+after Part 10 carries the KI#70 WIRE implementation per DEC-24 Q7).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -940,6 +1005,23 @@ sections, 94 matrix rows; `src/master/part_07a.html` is a grep-first huge file p
 
 ## 7. Iteration log (registry changes)
 
+- **iter 153 (Part 7A v2 build slice, BASE_COMMIT `2822c818`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-7a, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.14 (P7A-1..P7A-5)** on the spec §7 shape (seventh application, reusing the
+  §5.8–§5.13 pattern; the largest slice — 13 sections / 94 rows, executed whole — the sub-slicing
+  option not needed): evidence — the matrix Part 7A tables gain the F2 `presentation` column
+  (94 rows: 86 `open` + 4 `canonical-link` + 2 `collapsible` — both pre-existing F6 usages
+  documented — + 2 `—` historical rows; matrix §1.2 extended to Parts 1–7A + the `—` rule; seven
+  stale notes refreshed — the KI#71/ed-6/iter-125/iter-128 pre-fix states) + this §5.14 registry;
+  canon — **one content edit**: the R01 #8 §7A.11 fold (the matrix CROSS-REFERENCE verdict, the
+  Part-4 R21-#16 precedent; 5-point check passed; the §7A.2/§7A.6/§7A.12 cluster-owner records
+  byte-stable — the three cluster parity audits PASS); master — the fold mirror (§7A.11 callout,
+  the `[ref:]` rendered as the §1.4 anchor); the master-only enrichments + §7A.7 family variances
+  (CoT-tier drift, the E17 checklist values, the Recap label, the `<ul>` render variances, the
+  E02/E16 declaration gaps) recorded as deferred observations (P7A-4); drift 155 → **155**
+  (expected unchanged — verified by the JSON pre/post diff); full battery green (sync 97/97,
+  parity ×7, tests 64/64, english 18, syntax 238, hash unchanged); Next step re-pinned to the
+  Part 7B slice.
 - **iter 152 (Part 6 v2 build slice, BASE_COMMIT `f5087a8c`):** the pinned STATUS Next-step
   row 1 (PLAN row v2-build-part-6, **not owner-gated** — the DEC-24 ratification gate cleared)
   executed per map **§5.13 (P6-1..P6-5)** on the spec §7 shape (sixth application, reusing the

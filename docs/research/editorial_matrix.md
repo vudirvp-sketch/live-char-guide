@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–6: iters 147–152); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–7A: iters 147–153); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -266,168 +266,187 @@ Reference-branch mirrors restored (P3-5). Line refs on pre-existing rows = audit
 
 ### p7a_system_prompt (§7A.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_system_prompt::01 | L19 | SP definition + contents | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_system_prompt::02 | L21 | term disambiguation: SP vs Keirsey S·P | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | Glossary carries the S·P disambiguation too — reference-layer repetition, fine |
-| p7a_system_prompt::03 | L23–28 | обязательные элементы SP (list) | DEFINITION | KEEP | YES | — | |
-| p7a_system_prompt::04 | L30 | RULE: identity name-language | DEFINITION | KEEP | YES | — | Canonical (NAV invariant «Identity name-language») |
-| p7a_system_prompt::05 | L31 | RULE: identity name-language — **second verbatim copy** | DUPLICATE | DELETE | YES | DUPLICATE | **KI#71 (new):** canon L30 and L31 are byte-identical; master carries the paragraph once. Pure intra-canon duplication defect |
-| p7a_system_prompt::06 | L33 | RULE: Anchors placement | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | Full copy of p1_core_rules::05 (R01); compress to 1 sentence + ref (§7A.9/§7A.11 already use the short+ref form) |
-| p7a_system_prompt::07 | L35 | Примечание: `[ANCHORS]` drift | METADATA | DELETE | YES | DUPLICATE | **Stale + repo-meta.** Claim «в parts/ используется [ANCHORS] plain text — известный drift (KI#58)» is stale: KI#58 CLOSED iter 95; the only `[ANCHORS]` occurrence in `parts/part_07a.html` is this note itself, actual content is `<anchors>` XML. Reader-facing repo internals → ed-6 (R17) |
-| p7a_system_prompt::08 | L37–55 | канонический шаблон SP (code) | DEFINITION | KEEP | YES | — | Canonical template; uses `{{CORE_DIRECTIVES 1-7 — …}}` shorthand ✓ (DEC-08); → migration_map_v2 D-3 (verified iter 134) |
-| p7a_system_prompt::09 | L57 | позитивная формулировка explanation | APPLICATION | KEEP | YES | — | Why positive form beats prohibition |
-| p7a_system_prompt::10 | L59 | RULE: SP structure order | DEFINITION | KEEP | YES | REINFORCEMENT | Compact restatement of the template order — navigational, compliant |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_system_prompt::01 | L19 | SP definition + contents | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_system_prompt::02 | L21 | term disambiguation: SP vs Keirsey S·P | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | open | Glossary carries the S·P disambiguation too — reference-layer repetition, fine |
+| p7a_system_prompt::03 | L23–28 | обязательные элементы SP (list) | DEFINITION | KEEP | YES | — | open | |
+| p7a_system_prompt::04 | L30 | RULE: identity name-language | DEFINITION | KEEP | YES | — | open | Canonical (NAV invariant «Identity name-language») |
+| p7a_system_prompt::05 | L31 | RULE: identity name-language — **second verbatim copy** | DUPLICATE | DELETE | YES | DUPLICATE | — | **KI#71:** canon L30/L31 byte-identical — **disposed iter 121** (ed-6; KI#71 CLOSED iter-121, row deleted iter 124); historical audit row, no presentation target |
+| p7a_system_prompt::06 | L33 | RULE: Anchors placement | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | canonical-link | Full copy of p1_core_rules::05 (R01) — **compressed to 1 sentence + refs iter 125** (dupes-1; + E01 viz pointer); the short+ref form is the deployed canonical-link presentation — re-verified iter 153 |
+| p7a_system_prompt::07 | L35 | Примечание: `[ANCHORS]` drift | METADATA | DELETE | YES | DUPLICATE | open | **Stale + repo-meta — the stale claim disposed iter 121** (ed-6: the «в parts/ используется [ANCHORS] — известный drift (KI#58)» sentence stripped; KI#58 CLOSED iter 95, actual content = `<anchors>` XML). Surviving block = the canonical anchors-format note (L34 at HEAD) — KEEP, `open`; master mirror present (§7A.1 callout) |
+| p7a_system_prompt::08 | L37–55 | канонический шаблон SP (code) | DEFINITION | KEEP | YES | — | open | Canonical template; uses `{{CORE_DIRECTIVES 1-7 — …}}` shorthand ✓ (DEC-08); → migration_map_v2 D-3 (verified iter 134) |
+| p7a_system_prompt::09 | L57 | позитивная формулировка explanation | APPLICATION | KEEP | YES | — | open | Why positive form beats prohibition; ~35 words — under the Collapsible floor (`components.md` #5: not <100 words; the Part-1 Методология-disclaimer precedent) |
+| p7a_system_prompt::10 | L59 | RULE: SP structure order | DEFINITION | KEEP | YES | REINFORCEMENT | open | Compact restatement of the template order — navigational, compliant |
 
 ### p7a_core_directives (§7A.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_core_directives::01 | L70 | CORE DIRECTIVES definition | DEFINITION | KEEP | YES | — | Canonical (single full definition per ed-2) |
-| p7a_core_directives::02 | L72 | `[VS: E08]` marker | METADATA | KEEP | YES | — | Viz replacement |
-| p7a_core_directives::03 | L74–80 | RULE: SP language (3-tier) | DEFINITION | KEEP | YES | — | Canonical SP-language rule (NAV invariant); §7A.7 footnote + §9.10 summary are compliant refs |
-| p7a_core_directives::04 | L82 | Convention: CORE_DIRECTIVES shorthand | DEFINITION | COMPRESS | YES | — | Substance is the DEC-08 shorthand convention (keep); «(D4, iter 93)» repo-meta → ed-6 strip (R17) |
-| p7a_core_directives::05 | L84–96 | full 7-directive code block | DEFINITION | KEEP | YES | — | **THE canonical list.** Verbatim re-print in §7A.13 (R02) is the compression side; → migration_map_v2 D-1 (canonical owner, unchanged) |
-| p7a_core_directives::06 | L100–102 | directive 1 Show Never Tell (desc) | DEFINITION | KEEP | YES | — | Whitelisted recurrence (§20) |
-| p7a_core_directives::07 | L104–110 | directive 2 Embodiment First (desc + Cross-ref) | DEFINITION | KEEP | YES | — | Directive-vs-Protocol distinction preserved |
-| p7a_core_directives::08 | L112–118 | directive 3 Spatial & Anatomical Lock (desc + table) | DEFINITION | KEEP | YES | — | |
-| p7a_core_directives::09 | L120–122 | directive 4 Environmental Reactivity | DEFINITION | KEEP | YES | — | |
-| p7a_core_directives::10 | L124–126 | directive 5 Influence Boundary | DEFINITION | KEEP | YES | — | |
-| p7a_core_directives::11 | L128–139 | directive 6 Consequence Driven (+ Track code) | DEFINITION | KEEP | YES | — | Model-gating note + Appendix B ref |
-| p7a_core_directives::12 | L141–150 | directive 7 Pre-Generation Filter (+ checklist) | DEFINITION | KEEP | YES | — | |
-| p7a_core_directives::13 | L152 | RECOMMENDATION: bidirectional sync | NAVIGATION | KEEP | YES | — | IMP-48 statement at directive level |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_core_directives::01 | L70 | CORE DIRECTIVES definition | DEFINITION | KEEP | YES | — | open | Canonical (single full definition per ed-2) |
+| p7a_core_directives::02 | L72 | `[VS: E08]` marker | METADATA | KEEP | YES | — | open | Viz replacement |
+| p7a_core_directives::03 | L74–80 | RULE: SP language (3-tier) | DEFINITION | KEEP | YES | — | open | Canonical SP-language rule (NAV invariant); §7A.7 footnote + §9.10 summary are compliant refs |
+| p7a_core_directives::04 | L82 | Convention: CORE_DIRECTIVES shorthand | DEFINITION | COMPRESS | YES | — | open | Substance = the DEC-08 shorthand convention (kept); «(D4, iter 93)» repo-meta **stripped iter 121** (ed-6/R17) — the post-strip form verified iter 153 |
+| p7a_core_directives::05 | L84–96 | full 7-directive code block | DEFINITION | KEEP | YES | — | open | **THE canonical list.** Verbatim re-print in §7A.13 (R02) is the compression side; → migration_map_v2 D-1 (canonical owner, unchanged) |
+| p7a_core_directives::06 | L100–102 | directive 1 Show Never Tell (desc) | DEFINITION | KEEP | YES | — | open | Whitelisted recurrence (§20) |
+| p7a_core_directives::07 | L104–110 | directive 2 Embodiment First (desc + Cross-ref) | DEFINITION | KEEP | YES | — | open | Directive-vs-Protocol distinction preserved |
+| p7a_core_directives::08 | L112–118 | directive 3 Spatial & Anatomical Lock (desc + table) | DEFINITION | KEEP | YES | — | open | |
+| p7a_core_directives::09 | L120–122 | directive 4 Environmental Reactivity | DEFINITION | KEEP | YES | — | open | |
+| p7a_core_directives::10 | L124–126 | directive 5 Influence Boundary | DEFINITION | KEEP | YES | — | open | |
+| p7a_core_directives::11 | L128–139 | directive 6 Consequence Driven (+ Track code) | DEFINITION | KEEP | YES | — | open | Model-gating note + Appendix B ref |
+| p7a_core_directives::12 | L141–150 | directive 7 Pre-Generation Filter (+ checklist) | DEFINITION | KEEP | YES | — | open | |
+| p7a_core_directives::13 | L152 | RECOMMENDATION: bidirectional sync | NAVIGATION | KEEP | YES | — | open | IMP-48 statement at directive level |
 
 ### p7a_tone_frame (§7A.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_tone_frame::01 | L163 | Tone Frame definition (dual function) | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_tone_frame::02 | L165–167 | format template | DEFINITION | KEEP | YES | — | |
-| p7a_tone_frame::03 | L169–176 | table: 4 setting examples | EXAMPLE | KEEP | YES | REINFORCEMENT | «grounded, understated…» string reused §7A.13 step 3 (R10) — apply-layer reuse |
-| p7a_tone_frame::04 | L178 | RECOMMENDATION: dual function explained | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_tone_frame::01 | L163 | Tone Frame definition (dual function) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_tone_frame::02 | L165–167 | format template | DEFINITION | KEEP | YES | — | open | |
+| p7a_tone_frame::03 | L169–176 | table: 4 setting examples | EXAMPLE | KEEP | YES | REINFORCEMENT | open | «grounded, understated…» string reused §7A.13 step 3 (R10) — apply-layer reuse. F4: inline tier (woven into the canonical template-explanation table; no chip invented — the Part-6 §6.3 tier-table precedent) |
+| p7a_tone_frame::04 | L178 | RECOMMENDATION: dual function explained | DEFINITION | KEEP | YES | — | open | |
 
 ### p7a_format_lock (§7A.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_format_lock::01 | L189 | Format Lock definition | DEFINITION | KEEP | YES | REINFORCEMENT | Pattern Matcher applied to markup (R03) with ref — compliant |
-| p7a_format_lock::02 | L191–197 | table: 3 markup systems | DEFINITION | KEEP | YES | — | |
-| p7a_format_lock::03 | L199 | RULE: почему нельзя смешивать | DEFINITION | KEEP | YES | REINFORCEMENT | R03 application |
-| p7a_format_lock::04 | L201 | RULE: conflict resolution (example wins) | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_format_lock::05 | L203–210 | Format Lock инструкция (code) | DEFINITION | KEEP | YES | REINFORCEMENT | Template appears also in §7A.1 SP template tail + §7A.13 step 3 (R09) — template/apply/assemble functions |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_format_lock::01 | L189 | Format Lock definition | DEFINITION | KEEP | YES | REINFORCEMENT | open | Pattern Matcher applied to markup (R03) with ref — compliant |
+| p7a_format_lock::02 | L191–197 | table: 3 markup systems | DEFINITION | KEEP | YES | — | open | |
+| p7a_format_lock::03 | L199 | RULE: почему нельзя смешивать | DEFINITION | KEEP | YES | REINFORCEMENT | open | R03 application |
+| p7a_format_lock::04 | L201 | RULE: conflict resolution (example wins) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_format_lock::05 | L203–210 | Format Lock инструкция (code) | DEFINITION | KEEP | YES | REINFORCEMENT | open | Template appears also in §7A.1 SP template tail + §7A.13 step 3 (R09) — template/apply/assemble functions |
 
 ### p7a_authors_note (§7A.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_authors_note::01 | L221 | AN definition | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_authors_note::02 | L223 | `[VS: E16]` marker | METADATA | KEEP | YES | — | Declared replacement: mechanics + params |
-| p7a_authors_note::03 | L225 | note on E07 reference | NAVIGATION | KEEP | YES | — | Prevents false expectation of an E07 embed in Part 7A |
-| p7a_authors_note::04 | L227–233 | параметры AN (table) | DEFINITION | KEEP | YES | — | Canon source shadowed by E16 master-side (method rule 4) |
-| p7a_authors_note::05 | L235–243 | Template A (code) | DEFINITION | KEEP | YES | — | |
-| p7a_authors_note::06 | L245–253 | EXAMPLE: Elena AN (Template A) | EXAMPLE | KEEP | YES | — | |
-| p7a_authors_note::07 | L255–264 | Template B (code) | DEFINITION | KEEP | YES | — | Ref target `§4.2` valid; unbalanced paren in source (cosmetic, ed-7 class) |
-| p7a_authors_note::08 | L266–276 | EXAMPLE: Vyshcherblenny AN (Template B) | EXAMPLE | KEEP | YES | — | |
-| p7a_authors_note::09 | L278–287 | Пояснение секций AN (table) | DEFINITION | KEEP | YES | — | Canon source shadowed by E16 |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_authors_note::01 | L221 | AN definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_authors_note::02 | L223 | `[VS: E16]` marker | METADATA | KEEP | YES | — | open | Declared replacement: mechanics + params |
+| p7a_authors_note::03 | L225 | note on E07 reference | NAVIGATION | KEEP | YES | — | open | Prevents false expectation of an E07 embed in Part 7A; canon-only (shadowed by the E16 embed master-side — method rule 4; the 12B/API split sentence lives at §7A.7) |
+| p7a_authors_note::04 | L227–233 | параметры AN (table) | DEFINITION | KEEP | YES | — | open | Canon source shadowed by E16 master-side (method rule 4) |
+| p7a_authors_note::05 | L235–243 | Template A (code) | DEFINITION | KEEP | YES | — | open | |
+| p7a_authors_note::06 | L245–253 | EXAMPLE: Elena AN (Template A) | EXAMPLE | KEEP | YES | — | open | |
+| p7a_authors_note::07 | L255–264 | Template B (code) | DEFINITION | KEEP | YES | — | open | Ref target `§4.2` valid; R18 ref normalization executed iter 128 (part_07a ×3) — parens balanced at HEAD |
+| p7a_authors_note::08 | L266–276 | EXAMPLE: Vyshcherblenny AN (Template B) | EXAMPLE | KEEP | YES | — | open | |
+| p7a_authors_note::09 | L278–287 | Пояснение секций AN (table) | DEFINITION | KEEP | YES | — | open | Canon source shadowed by E16 (master renders the equivalent as a `<ul>` — presentation variance, content equivalent; recorded P7A-4(d)) |
 
 ### p7a_sampling_params (§7A.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_sampling_params::01 | L298 | intro | DEFINITION | KEEP | YES | — | |
-| p7a_sampling_params::02 | L300 | `[VS: E17]` marker | METADATA | KEEP | YES | — | Declared replacement: params description + comparative table. **iter 145:** upgraded to the full `_README.md` §3.3 format (SHARED_REFERENCE + declared 12B–32B omission + audit name) → migration_map_v2 SP-1 |
-| p7a_sampling_params::03 | L302–311 | base params table | DEFINITION | KEEP | YES | CONTRADICTORY | **Canonical** sampling table. Contradicts §7A.7 rows (KI#72, new): 32B+ Temperature 0.7–1.0 vs 0.85–1.1; 32B+ RepPen 1.05–1.10 vs 1.0–1.05. **iter 145:** KI#72 resolved — DEC-22 S-a (§7A.6 = the single value owner, table byte-unchanged, audit-locked); the §7A.7 side dropped → migration_map_v2 SP-2 |
-| p7a_sampling_params::04 | L313 | RULE: PP = 0.0 always | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_sampling_params::05 | L315 | RULE: Ollama/LM Studio hardcode | DEFINITION | KEEP | YES | — | Canonical; KoboldCPP/TabbyAPI/vLLM list |
-| p7a_sampling_params::06 | L317–324 | model-specific recommendations table | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | Per-model rows consistent with ::03; §7A.7 conflicts (KI#72) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_sampling_params::01 | L298 | intro | DEFINITION | KEEP | YES | — | open | |
+| p7a_sampling_params::02 | L300 | `[VS: E17]` marker | METADATA | KEEP | YES | — | open | Declared replacement: params description + comparative table. **iter 145:** upgraded to the full `_README.md` §3.3 format (SHARED_REFERENCE + declared 12B–32B omission + audit name) → migration_map_v2 SP-1 |
+| p7a_sampling_params::03 | L302–311 | base params table | DEFINITION | KEEP | YES | CONTRADICTORY | open | **Canonical** sampling table. Contradicts §7A.7 rows (KI#72, new): 32B+ Temperature 0.7–1.0 vs 0.85–1.1; 32B+ RepPen 1.05–1.10 vs 1.0–1.05. **iter 145:** KI#72 resolved — DEC-22 S-a (§7A.6 = the single value owner, table byte-unchanged, audit-locked); the §7A.7 side dropped → migration_map_v2 SP-2. **iter 153:** byte-stability re-verified (DEC-22 lock; `audit_sampling_parity.py` PASS) |
+| p7a_sampling_params::04 | L313 | RULE: PP = 0.0 always | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_sampling_params::05 | L315 | RULE: Ollama/LM Studio hardcode | DEFINITION | KEEP | YES | — | open | Canonical; KoboldCPP/TabbyAPI/vLLM list |
+| p7a_sampling_params::06 | L317–324 | model-specific recommendations table | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | collapsible | Per-model rows consistent with ::03; §7A.7 conflicts (KI#72). Master already deploys this table inside `<details class="interactive"><summary>📋 Модель-специфичные рекомендации</summary>` (pre-existing F6 usage) — `collapsible` documents the deployed v2 presentation (technical reference / model-specific notes per `components.md` #5); canon stays the plain-table source |
 
 ### p7a_model_checklist (§7A.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_model_checklist::01 | L334 | intro: «дополняет §7A.6 и §7A.11» | NAVIGATION | KEEP | YES | — | **iter 145:** intro + new defer line carry the §7A.6 param defer (DEC-22 S-b) → migration_map_v2 SP-3 |
-| p7a_model_checklist::02 | L336–345 | summary table (params + capabilities) | APPLICATION | COMPRESS | YES | DUPLICATE | Param rows (Temperature/PP/RepPen) duplicate §7A.6 **with contradictions** (KI#72 — R12); capability rows (Voice Placement/XML/CoT/SP-language/Anti-godmoding) are unique summary. Recommendation: drop param rows, defer to §7A.6, keep capability rows. **iter 145:** EXECUTED (DEC-22 S-b — param rows dropped, header «Возможность», defer line added) → migration_map_v2 SP-3 |
-| p7a_model_checklist::03 | L347 | footnote ¹: SP language | NAVIGATION | KEEP | YES | — | Compliant short + ref |
-| p7a_model_checklist::04 | L349 | RECOMMENDATION: AN and voice per model | DEFINITION | KEEP | YES | — | Unique |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_model_checklist::01 | L334 | intro: «дополняет §7A.6 и §7A.11» | NAVIGATION | KEEP | YES | — | open | **iter 145:** intro + new defer line carry the §7A.6 param defer (DEC-22 S-b) → migration_map_v2 SP-3 |
+| p7a_model_checklist::02 | L336–345 | summary table (params + capabilities) | APPLICATION | COMPRESS | YES | DUPLICATE | open | Param rows (Temperature/PP/RepPen) duplicate §7A.6 **with contradictions** (KI#72 — R12); capability rows (Voice Placement/XML/CoT/SP-language/Anti-godmoding) are unique summary. Recommendation: drop param rows, defer to §7A.6, keep capability rows. **iter 145:** EXECUTED (DEC-22 S-b — param rows dropped, header «Возможность», defer line added) → migration_map_v2 SP-3. F3: decision-input class (model-class capability summary feeding the build profile) — table form stays, zero checkbox affordances (correct — reserved for §9.3/§9.11 validation) |
+| p7a_model_checklist::03 | L347 | footnote ¹: SP language | NAVIGATION | KEEP | YES | — | open | Compliant short + ref |
+| p7a_model_checklist::04 | L349 | RECOMMENDATION: AN and voice per model | DEFINITION | KEEP | YES | — | open | Unique |
 
 ### p7a_ooc_protection (§7A.8)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_ooc_protection::01 | L360 | OOC Protection definition | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_ooc_protection::02 | L362–367 | OOC template (code) | DEFINITION | KEEP | YES | — | Partial re-print in §7A.13 step 3 (R08) — apply-layer |
-| p7a_ooc_protection::03 | L369 | когда использовать | APPLICATION | KEEP | YES | — | |
-| p7a_ooc_protection::04 | L371–373 | Immersion Boundary intro | DEFINITION | KEEP | YES | — | |
-| p7a_ooc_protection::05 | L375–379 | Immersion Boundary template | DEFINITION | KEEP | YES | — | |
-| p7a_ooc_protection::06 | L381–383 | table: without vs with Immersion Boundary | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_ooc_protection::01 | L360 | OOC Protection definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_ooc_protection::02 | L362–367 | OOC template (code) | DEFINITION | KEEP | YES | — | open | Partial re-print in §7A.13 step 3 (R08) — apply-layer |
+| p7a_ooc_protection::03 | L369 | когда использовать | APPLICATION | KEEP | YES | — | open | |
+| p7a_ooc_protection::04 | L371–373 | Immersion Boundary intro | DEFINITION | KEEP | YES | — | open | |
+| p7a_ooc_protection::05 | L375–379 | Immersion Boundary template | DEFINITION | KEEP | YES | — | open | |
+| p7a_ooc_protection::06 | L381–383 | table: without vs with Immersion Boundary | EXAMPLE | KEEP | YES | — | open | F4 worked tier in master (antipattern-card + ИЛЛЮСТРАЦИЯ chip, Demonstrates comment) |
 
 ### p7a_xml_tags (§7A.9)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_xml_tags::01 | L394 | intro: XML structuring + Anchors placement | DEFINITION | KEEP | YES | REINFORCEMENT | R01 short + refs form — compliant |
-| p7a_xml_tags::02 | L396–423 | XML structure (code) | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_xml_tags::03 | L425–480 | полный пример XML Description (Выщербленный) | EXAMPLE | KEEP | YES | — | Unique worked example; OCEAN note carries bible cross-ref |
-| p7a_xml_tags::04 | L482 | примечание: SP and Examples separate | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_xml_tags::01 | L394 | intro: XML structuring + Anchors placement | DEFINITION | KEEP | YES | REINFORCEMENT | canonical-link | R01 short + refs form — compliant; the deployed canonical-link presentation (re-verified iter 153) |
+| p7a_xml_tags::02 | L396–423 | XML structure (code) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_xml_tags::03 | L425–480 | полный пример XML Description (Выщербленный) | EXAMPLE | KEEP | YES | — | open | Unique worked example; OCEAN note carries bible cross-ref |
+| p7a_xml_tags::04 | L482 | примечание: SP and Examples separate | NAVIGATION | KEEP | YES | — | open | |
 
 ### p7a_api_blocks (§7A.10)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_api_blocks::01 | L492–496 | intro + placement list | DEFINITION | KEEP | YES | — | |
-| p7a_api_blocks::02 | L498–514 | Claude `<claude_info>` template | DEFINITION | KEEP | YES | — | |
-| p7a_api_blocks::03 | L517–523 | GPT `[SYSTEM NOTE]` template | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_api_blocks::01 | L492–496 | intro + placement list | DEFINITION | KEEP | YES | — | open | |
+| p7a_api_blocks::02 | L498–514 | Claude `<claude_info>` template | DEFINITION | KEEP | YES | — | open | |
+| p7a_api_blocks::03 | L517–523 | GPT `[SYSTEM NOTE]` template | DEFINITION | KEEP | YES | — | open | |
 
 ### p7a_4k_fallback (§7A.11)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_4k_fallback::01 | L535 | 4K-Fallback definition | DEFINITION | KEEP | YES | — | Canonical |
-| p7a_4k_fallback::02 | L537–545 | токен-лимиты 4K (table) | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | R11: full vs 4K configs — different framing than §7A.12 min/std/max, feeds ed-5 |
-| p7a_4k_fallback::03 | L547–553 | минимальный SP 4K (code) | DEFINITION | KEEP | YES | — | |
-| p7a_4k_fallback::04 | L555–565 | минимальный Description 4K (code) | DEFINITION | KEEP | YES | — | |
-| p7a_4k_fallback::05 | L567 | RULE: Anchors in 4K fallback | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | R01 short + refs; fold to pointer (4th occurrence of the family) |
-| p7a_4k_fallback::06 | L569 | RECOMMENDATION: 4K vs standard profile | APPLICATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_4k_fallback::01 | L535 | 4K-Fallback definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7a_4k_fallback::02 | L537–545 | токен-лимиты 4K (table) | DEFINITION | KEEP | YES | RELATED BUT DISTINCT | open | R11: full vs 4K configs — different framing than §7A.12 min/std/max, feeds ed-5 |
+| p7a_4k_fallback::03 | L547–553 | минимальный SP 4K (code) | DEFINITION | KEEP | YES | — | open | |
+| p7a_4k_fallback::04 | L555–565 | минимальный Description 4K (code) | DEFINITION | KEEP | YES | — | open | |
+| p7a_4k_fallback::05 | L567 | RULE: Anchors in 4K fallback | DUPLICATE | CROSS-REFERENCE | YES | DUPLICATE | canonical-link | R01 4th occurrence — **folded to the short+pointer form iter 153** (the Part 7A v2 slice, 5-point check passed; the Part-4 R21-#16 precedent): the conceptual sentence («Концептуально якоря — отдельный блок… см. §1.4 и §7A.1») → inline `[ref: part_01.md §1.4]` pointer; the 4K substance (list form allowed; 8K+ → `<anchors>`-тег) kept; canon + master mirror |
+| p7a_4k_fallback::06 | L569 | RECOMMENDATION: 4K vs standard profile | APPLICATION | KEEP | YES | — | open | |
 
 ### p7a_token_budget (§7A.12)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_token_budget::01 | L580 | intro: budget pipeline | DEFINITION | KEEP | YES | — | |
-| p7a_token_budget::02 | L584 | intro to limits (3 levels, color semantics) | DEFINITION | KEEP | YES | — | Describes master-side table coloring |
-| p7a_token_budget::03 | L586–593 | budget table (min/std/max) | DEFINITION | KEEP | YES | — | **Canonical** budget table (R11); → migration_map_v2 TB-1 (canonical owner, unchanged — mig-4 verified iter 135) |
-| p7a_token_budget::04 | L594 | RULE: превышение бюджета | DEFINITION | KEEP | YES | — | |
-| p7a_token_budget::05 | L596 | RULE: Script Tax | DEFINITION | KEEP | YES | — | Canonical (NAV invariant) |
-| p7a_token_budget::06 | L597–599 | Personality Sub-Budget intro | DEFINITION | KEEP | YES | — | |
-| p7a_token_budget::07 | L601–607 | sub-budget table | DEFINITION | KEEP | YES | — | |
-| p7a_token_budget::08 | L608 | RULE: sub-budgets fit Description budget | DEFINITION | KEEP | YES | — | |
-| p7a_token_budget::09 | L610 | RECOMMENDATION: 4K/8K/16K profiles | APPLICATION | KEEP | YES | — | |
-| p7a_token_budget::10 | L612–614 | калькулятор description | METADATA | KEEP | YES | — | Describes the reader-visible interactive calculator |
-| p7a_token_budget::11 | L616 | «При миграции (iter 11)» note | METADATA | DELETE | YES | DUPLICATE | **Stale + repo-meta** (dupes-1 §7A.12 half, confirmed by backlog audit): describes a plain-copy pre-block that no longer exists in master; noscript now says only «включите JavaScript». Nothing reader-useful remains |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_token_budget::01 | L580 | intro: budget pipeline | DEFINITION | KEEP | YES | — | open | |
+| p7a_token_budget::02 | L584 | intro to limits (3 levels, color semantics) | DEFINITION | KEEP | YES | — | open | Describes master-side table coloring |
+| p7a_token_budget::03 | L586–593 | budget table (min/std/max) | DEFINITION | KEEP | YES | — | open | **Canonical** budget table (R11); → migration_map_v2 TB-1 (canonical owner, unchanged — mig-4 verified iter 135; byte-stability re-verified iter 153) |
+| p7a_token_budget::04 | L594 | RULE: превышение бюджета | DEFINITION | KEEP | YES | — | open | |
+| p7a_token_budget::05 | L596 | RULE: Script Tax | DEFINITION | KEEP | YES | — | open | Canonical (NAV invariant) |
+| p7a_token_budget::06 | L597–599 | Personality Sub-Budget intro | DEFINITION | KEEP | YES | — | open | |
+| p7a_token_budget::07 | L601–607 | sub-budget table | DEFINITION | KEEP | YES | — | open | |
+| p7a_token_budget::08 | L608 | RULE: sub-budgets fit Description budget | DEFINITION | KEEP | YES | — | open | |
+| p7a_token_budget::09 | L610 | RECOMMENDATION: 4K/8K/16K profiles | APPLICATION | KEEP | YES | — | open | |
+| p7a_token_budget::10 | L612–614 | калькулятор description | METADATA | KEEP | YES | — | open | Describes the reader-visible interactive calculator |
+| p7a_token_budget::11 | L616 | «При миграции (iter 11)» note | METADATA | DELETE | YES | DUPLICATE | — | **Stale + repo-meta — disposed iter 121** (ed-6: the migration-note sentence stripped from the calculator description; the plain-copy pre-block it described was already absent, noscript says only «включите JavaScript»); historical audit row, no presentation target |
 
 ### p7a_assembly_pipeline (§7A.13)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7a_assembly_pipeline::01 | L626 | intro: единственный полный конвейер | DEFINITION | KEEP | YES | — | Canonical walkthrough role |
-| p7a_assembly_pipeline::02 | L628 | `[VS: E02]` marker | METADATA | KEEP | YES | — | Declared replacement: pipeline description |
-| p7a_assembly_pipeline::03 | L630–638 | Шаг 1: Identity Block (+ Elena result) | APPLICATION | KEEP | YES | — | |
-| p7a_assembly_pipeline::04 | L640–649 | Шаг 2: Anti-godmoding (+ Elena result) | APPLICATION | KEEP | YES | REINFORCEMENT | R07 apply-layer reuse of the canonical lines |
-| p7a_assembly_pipeline::05 | L651–667 | Шаг 3: CORE DIRECTIVES — full verbatim re-print of the 7-directive block | APPLICATION | CROSS-REFERENCE | YES | DUPLICATE | **R02:** byte-identical to p7a_core_directives::05. DEC-08 shorthand exists exactly for this: replace the code block with `{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}`. Primary ed-2 target — **EXECUTED iter 134 (mig-2); → migration_map_v2 D-2** |
-| p7a_assembly_pipeline::06 | L669–681 | Шаг 3 дополнительно: Tone Frame + OOC + Format Lock Елены | APPLICATION | KEEP | YES | REINFORCEMENT | R08/R09/R10 re-prints inside the assembled-SP view — walkthrough function (ed-2 audit decides whether these also become shorthand) |
-| p7a_assembly_pipeline::07 | L683–698 | Шаг 4: SPINE (+ Elena result + consistency check) | APPLICATION | KEEP | YES | — | SPINE causality = whitelisted recurrence |
-| p7a_assembly_pipeline::08 | L700–715 | Шаг 5: CoT (+ Elena Tier 2 result) | APPLICATION | KEEP | YES | — | |
-| p7a_assembly_pipeline::09 | L717–732 | Шаг 6: Budget check (+ Elena budget table) | VALIDATION | KEEP | YES | RELATED BUT DISTINCT | R11 apply-layer; Elena numbers consistent with §7A.12 ✓ |
-| p7a_assembly_pipeline::10 | L734–741 | дополнительные шаги (optional extensions) | APPLICATION | KEEP | YES | — | |
-| p7a_assembly_pipeline::11 | L743–755 | recap checklist (`<details>`, self-labeled «дублирует правила») | VALIDATION | KEEP | YES | REINFORCEMENT | Research §20/§33: checklists preserved; changed function (pre-test verification) |
-| p7a_assembly_pipeline::12 | L757 | pointer to Part 10 | NAVIGATION | KEEP | YES | — | |
-| p7a_assembly_pipeline::13 | L759 | Synthesis: SP = container | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7a_assembly_pipeline::01 | L626 | intro: единственный полный конвейер | DEFINITION | KEEP | YES | — | open | Canonical walkthrough role; the Build-mode entry point (spec §3) |
+| p7a_assembly_pipeline::02 | L628 | `[VS: E02]` marker | METADATA | KEEP | YES | — | open | Declared replacement: pipeline description |
+| p7a_assembly_pipeline::03 | L630–638 | Шаг 1: Identity Block (+ Elena result) | APPLICATION | KEEP | YES | — | open | |
+| p7a_assembly_pipeline::04 | L640–649 | Шаг 2: Anti-godmoding (+ Elena result) | APPLICATION | KEEP | YES | REINFORCEMENT | open | R07 apply-layer reuse of the canonical lines |
+| p7a_assembly_pipeline::05 | L651–667 | Шаг 3: CORE DIRECTIVES — full verbatim re-print of the 7-directive block | APPLICATION | CROSS-REFERENCE | YES | DUPLICATE | canonical-link | **R02:** byte-identical to p7a_core_directives::05. DEC-08 shorthand exists exactly for this: replace the code block with `{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}`. Primary ed-2 target — **EXECUTED iter 134 (mig-2); → migration_map_v2 D-2**; the deployed shorthand form re-verified iter 153 |
+| p7a_assembly_pipeline::06 | L669–681 | Шаг 3 дополнительно: Tone Frame + OOC + Format Lock Елены | APPLICATION | KEEP | YES | REINFORCEMENT | open | R08/R09/R10 re-prints inside the assembled-SP view — walkthrough function (ed-2 audit decides whether these also become shorthand) |
+| p7a_assembly_pipeline::07 | L683–698 | Шаг 4: SPINE (+ Elena result + consistency check) | APPLICATION | KEEP | YES | — | open | SPINE causality = whitelisted recurrence |
+| p7a_assembly_pipeline::08 | L700–715 | Шаг 5: CoT (+ Elena Tier 2 result) | APPLICATION | KEEP | YES | — | open | |
+| p7a_assembly_pipeline::09 | L717–732 | Шаг 6: Budget check (+ Elena budget table) | VALIDATION | KEEP | YES | RELATED BUT DISTINCT | open | R11 apply-layer; Elena numbers consistent with §7A.12 ✓ |
+| p7a_assembly_pipeline::10 | L734–741 | дополнительные шаги (optional extensions) | APPLICATION | KEEP | YES | — | open | Considered for `collapsible` (optional extensions) — rejected: the text list is the accessible-text counterpart of the E02 embed's optional-branch section (viz > dry text; wrapping would desync text↔viz), each bullet short; retrieval at the pipeline tail |
+| p7a_assembly_pipeline::11 | L743–755 | recap checklist (`<details>`, self-labeled «дублирует правила») | VALIDATION | KEEP | YES | REINFORCEMENT | collapsible | Research §20/§33: checklists preserved; changed function (pre-test verification). F3: validation class. Master deploys it as `<details class="interactive">` (pre-existing F6 usage) — `collapsible` documents the deployed presentation; canon carries the raw `<details>` source |
+| p7a_assembly_pipeline::12 | L757 | pointer to Part 10 | NAVIGATION | KEEP | YES | — | open | |
+| p7a_assembly_pipeline::13 | L759 | Synthesis: SP = container | DEFINITION | KEEP | YES | — | open | |
 
 **Part 7A verdict:** the assembly half is healthy (walkthrough = apply layer, uses refs correctly
 except the §7A.13 CORE DIRECTIVES verbatim block — the one clear R02 compression target). The
 defect load concentrates in: R01 family (Anchors-placement rule printed 4×), 3 stale/repo-meta
 notes (L35, L82 partial, L616), KI#71 (verbatim duplicate line), KI#72 (sampling contradictions
 §7A.6 ↔ §7A.7).
+
+**v2 build slice executed iter 153** (DEC-24 — seventh Part of the v2 build phase, the largest
+slice: 13 sections / 94 rows; Registry C map
+[`migration_map_v2.md`](./migration_map_v2.md) §5.14): the `presentation` column seeded on all
+Part 7A rows — **86 `open` + 4 `canonical-link`** (§7A.1::06 iter 125 / §7A.9::01 / §7A.13::05
+iter 134 — already-deployed forms re-verified; §7A.11::05 — the R01 #8 fold executed this
+slice, canon + master mirror, the Part-4 R21-#16 precedent) **+ 2 `collapsible`** (both
+already-deployed F6 usages documented: §7A.6::06 model-specific table + §7A.13::11 recap
+checklist) **+ 2 `—`** (blocks disposed pre-slice by executed decisions: ::05 KI#71 line +
+§7A.12::11 migration note, both ed-6 iter 121). F3: §7A.7 = decision-input class (capability
+summary, zero checkbox affordances — correct); the §7A.13 checklist = validation class (the
+existing `<details>`). F4: worked = the AN examples + §7A.9 Выщербленный + §7A.13 step results;
+inline = the Tone Frame settings table. F5: verified per section — every §7A.NN already carries
+Concept → Rule → Core example → Reference branches (`[ref:]` + [VS: E##] markers); zero
+restructure forced. Byte-stability locks honored: §7A.2 (CORE DIRECTIVES, mig-2), §7A.6
+(sampling, DEC-22), §7A.12 (token budget, mig-4) — canonical records untouched; the three
+cluster parity audits PASS. Stale notes refreshed: ::05/::06/::07 (§7A.1), ::04 (§7A.2), ::07
+(§7A.5 — R18 iter 128), ::11 (§7A.12). Master-only enrichments + presentation variances
+recorded as deferred observations (map §5.14 P7A-4).
 
 ---
 
