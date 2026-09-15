@@ -35,7 +35,16 @@ MARKDOWN_PATTERNS = [
     (r'__[^_\s][^_]*[^_\s]__', 'Markdown bold (__text__)'),
 
     # Italic: *text* or _text_ (but not standalone underscores in IDs)
-    (r'(?<![a-zA-Z0-9])\*[^*\s][^*]*[^*\s]\*(?![a-zA-Z0-9])', 'Markdown italic (*text*)'),
+    # iter 149 (KI#83): [^*]* bounded to [^*\n]* — Markdown emphasis is a
+    # single-line construct; the unbounded class matched across lines/contexts
+    # (e.g. a `shared/*.css` glob in an embed comment pairing with a `<code>*`
+    # marker dozens of lines later), producing cross-context false positives
+    # that the allowed-context exemption cannot suppress (the match is never
+    # fully inside one <code>/<pre>/comment span). Same regex-quality family
+    # as KI#79. The bold patterns above keep the latent cross-line potential
+    # (no live finding depends on it — verified iter 149); re-bounding them
+    # shifts the baseline and rides KI#83's own verification pass.
+    (r'(?<![a-zA-Z0-9])\*[^*\s][^*\n]*[^*\s]\*(?![a-zA-Z0-9])', 'Markdown italic (*text*)'),
 
     # Links: [text](url)
     (r'\[[^\]]+\]\([^)]+\)', 'Markdown link ([text](url))'),

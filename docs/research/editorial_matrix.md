@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–2: iters 147–148); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–3: iters 147–149); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -148,89 +148,89 @@ rows = audit-time anchors (iter 120), not re-based — iter-142/145 slice preced
 
 ### p3_voice_isolation (§3.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_voice_isolation::01 | L19 | Voice Isolation definition | DEFINITION | KEEP | YES | — | Canonical |
-| p3_voice_isolation::02 | L21 | «Не объясняй голос — покажи его» | DEFINITION | KEEP | YES | — | Voice = ритм + лексика + синтаксис + парадоксы |
-| p3_voice_isolation::03 | L23–26 | RULE: linguistic vs physical voice | DEFINITION | KEEP | YES | — | **Canonical owner** of the two-level voice rule (R06) |
-| p3_voice_isolation::04 | L28 | Тест: classifier examples | VALIDATION | KEEP | YES | — | Observable test — research §9 approved form |
-| p3_voice_isolation::05 | L30–35 | table: voice drift by message count | APPLICATION | KEEP | YES | DUPLICATE | Granular canonical occurrence of R04 (drift numbers); §1.1 row is the compression side |
-| p3_voice_isolation::06 | L37 | Методология disclaimer | METADATA | CROSS-REFERENCE | YES | DUPLICATE | Near-verbatim copy of §1.1::03 (R05); replace with 1-sentence pointer to §1.1 |
-| p3_voice_isolation::07 | L39 | RULE: модель — копировщик паттернов | DUPLICATE | COMPRESS | YES | DUPLICATE | Full re-teach of p1_core_rules::03 (R03); compress to 1 sentence + ref |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_voice_isolation::01 | L19 | Voice Isolation definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p3_voice_isolation::02 | L21 | «Не объясняй голос — покажи его» | DEFINITION | KEEP | YES | — | open | Voice = ритм + лексика + синтаксис + парадоксы |
+| p3_voice_isolation::03 | L23–26 | RULE: linguistic vs physical voice | DEFINITION | KEEP | YES | — | open | **Canonical owner** of the two-level voice rule (R06) |
+| p3_voice_isolation::04 | L28 | Тест: classifier examples | VALIDATION | KEEP | YES | — | open | Observable test — research §9 approved form |
+| p3_voice_isolation::05 | L30–35 | table: voice drift by message count | APPLICATION | KEEP | YES | DUPLICATE | open | Granular canonical occurrence of R04 (drift numbers); §1.1 row is the compression side |
+| p3_voice_isolation::06 | L37 | Методология disclaimer | METADATA | CROSS-REFERENCE | YES | DUPLICATE | open | Near-verbatim copy of §1.1::03 (R05); replace with 1-sentence pointer to §1.1 |
+| p3_voice_isolation::07 | L39 | RULE: модель — копировщик паттернов | DUPLICATE | COMPRESS | YES | DUPLICATE | open | Full re-teach of p1_core_rules::03 (R03); compress to 1 sentence + ref |
 
 ### p3_influence_hierarchy (§3.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_influence_hierarchy::01 | L50 | intro: influence differs by model size | DEFINITION | KEEP | YES | — | — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
-| p3_influence_hierarchy::02 | L52 | `[VS: E07]` marker | METADATA | KEEP | YES | — | Viz replacement (DEC-03); canon = source for E07 — weak marker upgraded to the full format (SHARED_REFERENCE + TEXTUAL_CANONICAL + audit name, DEC-21) — → migration_map_v2 VC-1 (voice-cluster executed iter 142) |
-| p3_influence_hierarchy::03 | L54 | `[INTERACTIVE WIDGET: persona-voice-hierarchy]` marker | METADATA | KEEP | YES | — | Canon-embedded data exception (NAV §4); complements E07 — notes disposition added (2 quantitative claims canonicalized in §3.2; 4 restatements stay DEC-09) — → migration_map_v2 VC-4 (voice-cluster executed iter 142) |
-| p3_influence_hierarchy::04 | L56–63 | table: 6 sources × 3 tiers | DEFINITION | KEEP | YES | — | Canonical data (also feeds the widget) — row-1 label russified «Недавний чат» (V-e); 18 values unchanged — → migration_map_v2 VC-3 (voice-cluster executed iter 142) |
-| p3_influence_hierarchy::05 | L65 | RULE: 12B Description = 0% voice influence | DEFINITION | KEEP | YES | REINFORCEMENT | Applies §3.1 rule to the 12B case; refs §3.1 — compliant — → migration_map_v2 VC-5 (audit anchor, unchanged — voice-cluster iter 142) |
-| p3_influence_hierarchy::06 | L67–80 | EXAMPLE: WRONG vs CORRECT card text | EXAMPLE | KEEP | YES | REINFORCEMENT | Unique worked demo of R06 (card-level, not classifier-level) — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
-| p3_influence_hierarchy::07 | L82 | Пояснение to the example | DUPLICATE | DELETE | YES | DUPLICATE | Re-explains the §3.1::04 Тест classification a third time (R06); the example is self-demonstrating — **✅ executed iter 130 (ed-4 family)** |
-| p3_influence_hierarchy::08 | L84 | transition to Examples rules | NAVIGATION | KEEP | YES | — | — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
-| p3_influence_hierarchy::09 | L65 (seeded iter 142) | prose block «Хранилище ≠ Влияние»: storage-vs-influence distinction + SP-primacy misconception + drift implication + 2 widget quantitative claims (~10–20 сообщений; ~5 реплик) | DEFINITION | KEEP | YES | — | Canonical textual home of the E07 inset payload + widget claims (DEC-21 V-b/V-c; DEC-20/E13 precedent); E07 inset = visual presentation; parity-locked by `scripts/audit_voice_parity.py` — → migration_map_v2 VC-2 (voice-cluster executed iter 142) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_influence_hierarchy::01 | L50 | intro: influence differs by model size | DEFINITION | KEEP | YES | — | open | — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::02 | L52 | `[VS: E07]` marker | METADATA | KEEP | YES | — | open | Viz replacement (DEC-03); canon = source for E07 — weak marker upgraded to the full format (SHARED_REFERENCE + TEXTUAL_CANONICAL + audit name, DEC-21) — → migration_map_v2 VC-1 (voice-cluster executed iter 142) |
+| p3_influence_hierarchy::03 | L54 | `[INTERACTIVE WIDGET: persona-voice-hierarchy]` marker | METADATA | KEEP | YES | — | open | Canon-embedded data exception (NAV §4); complements E07 — notes disposition added (2 quantitative claims canonicalized in §3.2; 4 restatements stay DEC-09) — → migration_map_v2 VC-4 (voice-cluster executed iter 142) |
+| p3_influence_hierarchy::04 | L56–63 | table: 6 sources × 3 tiers | DEFINITION | KEEP | YES | — | open | Canonical data (also feeds the widget) — row-1 label russified «Недавний чат» (V-e); 18 values unchanged — → migration_map_v2 VC-3 (voice-cluster executed iter 142) |
+| p3_influence_hierarchy::05 | L65 | RULE: 12B Description = 0% voice influence | DEFINITION | KEEP | YES | REINFORCEMENT | open | Applies §3.1 rule to the 12B case; refs §3.1 — compliant — → migration_map_v2 VC-5 (audit anchor, unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::06 | L67–80 | EXAMPLE: WRONG vs CORRECT card text | EXAMPLE | KEEP | YES | REINFORCEMENT | open | Unique worked demo of R06 (card-level, not classifier-level) — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::07 | L82 | Пояснение to the example | DUPLICATE | DELETE | YES | DUPLICATE | open | Re-explains the §3.1::04 Тест classification a third time (R06); the example is self-demonstrating — **✅ executed iter 130 (ed-4 family)** |
+| p3_influence_hierarchy::08 | L84 | transition to Examples rules | NAVIGATION | KEEP | YES | — | open | — → migration_map_v2 VC-6 (verified unchanged — voice-cluster iter 142) |
+| p3_influence_hierarchy::09 | L65 (seeded iter 142) | prose block «Хранилище ≠ Влияние»: storage-vs-influence distinction + SP-primacy misconception + drift implication + 2 widget quantitative claims (~10–20 сообщений; ~5 реплик) | DEFINITION | KEEP | YES | — | open | Canonical textual home of the E07 inset payload + widget claims (DEC-21 V-b/V-c; DEC-20/E13 precedent); E07 inset = visual presentation; parity-locked by `scripts/audit_voice_parity.py` — → migration_map_v2 VC-2 (voice-cluster executed iter 142) |
 
 ### p3_examples_rules (§3.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_examples_rules::01 | L95 | intro | DEFINITION | KEEP | YES | — | |
-| p3_examples_rules::02 | L97 | RULE: Voice Contamination | DEFINITION | KEEP | YES | — | Canonical |
-| p3_examples_rules::03 | L99–105 | table: recommended example count | DEFINITION | KEEP | YES | — | |
-| p3_examples_rules::04 | L107–112 | list: example structure (4 bullets) | DEFINITION | KEEP | YES | REINFORCEMENT | «Стиль: совпадать с Greeting» applies Format Lock (R09) |
-| p3_examples_rules::05 | L114 | RULE: `<START>` mandatory | DEFINITION | KEEP | YES | — | Canonical |
-| p3_examples_rules::06 | L116–123 | TEMPLATE: example format | DEFINITION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_examples_rules::01 | L95 | intro | DEFINITION | KEEP | YES | — | open | |
+| p3_examples_rules::02 | L97 | RULE: Voice Contamination | DEFINITION | KEEP | YES | — | open | Canonical |
+| p3_examples_rules::03 | L99–105 | table: recommended example count | DEFINITION | KEEP | YES | — | open | |
+| p3_examples_rules::04 | L107–112 | list: example structure (4 bullets) | DEFINITION | KEEP | YES | REINFORCEMENT | open | «Стиль: совпадать с Greeting» applies Format Lock (R09) |
+| p3_examples_rules::05 | L114 | RULE: `<START>` mandatory | DEFINITION | KEEP | YES | — | open | Canonical |
+| p3_examples_rules::06 | L116–123 | TEMPLATE: example format | DEFINITION | KEEP | YES | — | open | |
 
 ### p3_examples_quality (§3.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_examples_quality::01 | L134 | intro: 6 criteria, A/B/C grades | DEFINITION | KEEP | YES | — | Canonical Quality Grade; disambiguation vs CoT Tier / GHOST Tier |
-| p3_examples_quality::02 | L136–138 | class list A/B/C | DEFINITION | KEEP | YES | — | |
-| p3_examples_quality::03 | L140–147 | table: 6 criteria × 3 grades | DEFINITION | KEEP | YES | — | |
-| p3_examples_quality::04 | L149 | RECOMMENDATION: card-wide vs example criteria | DEFINITION | KEEP | YES | — | |
-| p3_examples_quality::05 | L151–155 | До/После: A vs C | EXAMPLE | KEEP | YES | — | Unique contrast demo |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_examples_quality::01 | L134 | intro: 6 criteria, A/B/C grades | DEFINITION | KEEP | YES | — | open | Canonical Quality Grade; disambiguation vs CoT Tier / GHOST Tier |
+| p3_examples_quality::02 | L136–138 | class list A/B/C | DEFINITION | KEEP | YES | — | open | |
+| p3_examples_quality::03 | L140–147 | table: 6 criteria × 3 grades | DEFINITION | KEEP | YES | — | open | |
+| p3_examples_quality::04 | L149 | RECOMMENDATION: card-wide vs example criteria | DEFINITION | KEEP | YES | — | open | |
+| p3_examples_quality::05 | L151–155 | До/После: A vs C | EXAMPLE | KEEP | YES | — | open | Unique contrast demo |
 
 ### p3_greeting_ref (§3.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_greeting_ref::01 | L165 | Greeting definition + forward ref | NAVIGATION | KEEP | YES | — | Compliant reference stub. Ref target reads `§7B.X` — vague placeholder form (R18, ed-8); actual target §7B.2 |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_greeting_ref::01 | L165 | Greeting definition + forward ref | NAVIGATION | KEEP | YES | — | open | Compliant reference stub. The R18 vague `§7B.X` placeholder was repaired to `§7B.2` iter 128 (ed-8 Phase A); the master link text «Part 7B: приветствие» = the deliberate iter-123 DEC-16 translation (pickaxe-verified; target anchor `#p7b_greeting` correct) — compliant |
 
 ### p3_voice_leak (§3.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_voice_leak::01 | L176 | Voice Leak definition | DEFINITION | KEEP | YES | — | Canonical |
-| p3_voice_leak::02 | L178–183 | table: Voice Leak vs Narrator Bleed | DEFINITION | KEEP | YES | — | |
-| p3_voice_leak::03 | L185–189 | table: Narrator Bleed vs Voice example | EXAMPLE | KEEP | YES | — | |
-| p3_voice_leak::04 | L191–195 | До/После: Выщербленный | EXAMPLE | KEEP | YES | — | Unique worked example |
-| p3_voice_leak::05 | L197–202 | причины Voice Leak (list) | VALIDATION | KEEP | YES | REINFORCEMENT | §9.5 carries the lookup form of the same diagnostics — changed function |
-| p3_voice_leak::06 | L204 | Cross-ref AP-11 | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_voice_leak::01 | L176 | Voice Leak definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p3_voice_leak::02 | L178–183 | table: Voice Leak vs Narrator Bleed | DEFINITION | KEEP | YES | — | open | |
+| p3_voice_leak::03 | L185–189 | table: Narrator Bleed vs Voice example | EXAMPLE | KEEP | YES | — | open | |
+| p3_voice_leak::04 | L191–195 | До/После: Выщербленный | EXAMPLE | KEEP | YES | — | open | Unique worked example |
+| p3_voice_leak::05 | L197–202 | причины Voice Leak (list) | VALIDATION | KEEP | YES | REINFORCEMENT | open | §9.5 carries the lookup form of the same diagnostics — changed function |
+| p3_voice_leak::06 | L204 | Cross-ref AP-11 | NAVIGATION | KEEP | YES | — | open | |
 
 ### p3_joker_case (§3.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_joker_case::01 | L214 | intro: archetypes resisting description | DEFINITION | KEEP | YES | — | |
-| p3_joker_case::02 | L216 | RULE: 3–4 markers or pure demonstration | DEFINITION | KEEP | YES | — | Canonical |
-| p3_joker_case::03 | L218 | practical test (3 attempts) | VALIDATION | KEEP | YES | — | |
-| p3_joker_case::04 | L220 | Cross-ref §3.8 | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_joker_case::01 | L214 | intro: archetypes resisting description | DEFINITION | KEEP | YES | — | open | |
+| p3_joker_case::02 | L216 | RULE: 3–4 markers or pure demonstration | DEFINITION | KEEP | YES | — | open | Canonical |
+| p3_joker_case::03 | L218 | practical test (3 attempts) | VALIDATION | KEEP | YES | — | open | |
+| p3_joker_case::04 | L220 | Cross-ref §3.8 | NAVIGATION | KEEP | YES | — | open | |
 
 ### p3_multi_char (§3.8)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p3_multi_char::01 | L230 | мульти-персонажность definition | DEFINITION | KEEP | YES | — | |
-| p3_multi_char::02 | L232 | сквозные персонажи (Выщербленный, Йоуёма) | METADATA | KEEP | YES | — | Reader-useful scope note (Йоуёма local to §3.8) |
-| p3_multi_char::03 | L234–236 | маркеры персонажа definition | DEFINITION | KEEP | YES | — | |
-| p3_multi_char::04 | L238–241 | table: markers per character | DEFINITION | KEEP | YES | — | |
-| p3_multi_char::05 | L243–245 | Voice Bleed definition | DEFINITION | KEEP | YES | REINFORCEMENT | §3.8 = teaching site; Part 8 AP-11 = catalog site — different function, both needed |
-| p3_multi_char::06 | L247–257 | EXAMPLE (ошибка) | EXAMPLE | KEEP | YES | — | |
-| p3_multi_char::07 | L259–271 | EXAMPLE (правильно) | EXAMPLE | KEEP | YES | — | |
-| p3_multi_char::08 | L273–289 | full multi-character scene | EXAMPLE | KEEP | YES | — | Unique scene demo |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p3_multi_char::01 | L230 | мульти-персонажность definition | DEFINITION | KEEP | YES | — | open | |
+| p3_multi_char::02 | L232 | сквозные персонажи (Выщербленный, Йоуёма) | METADATA | KEEP | YES | — | open | Reader-useful scope note (Йоуёма local to §3.8) |
+| p3_multi_char::03 | L234–236 | маркеры персонажа definition | DEFINITION | KEEP | YES | — | open | |
+| p3_multi_char::04 | L238–241 | table: markers per character | DEFINITION | KEEP | YES | — | open | |
+| p3_multi_char::05 | L243–245 | Voice Bleed definition | DEFINITION | KEEP | YES | REINFORCEMENT | open | §3.8 = teaching site; Part 8 AP-11 = catalog site — different function, both needed |
+| p3_multi_char::06 | L247–257 | EXAMPLE (ошибка) | EXAMPLE | KEEP | YES | — | open | |
+| p3_multi_char::07 | L259–271 | EXAMPLE (правильно) | EXAMPLE | KEEP | YES | — | open | |
+| p3_multi_char::08 | L273–289 | full multi-character scene | EXAMPLE | KEEP | YES | — | open | Unique scene demo |
 
 **Part 3 verdict:** near-clean. The consolidation candidates are all inside the R06 family
 (linguistic-vs-physical voice: §3.1 canonical Тест → §3.2 example → §3.2 Пояснение re-explainer)
@@ -238,6 +238,27 @@ plus two cross-part duplicates (R03 Pattern Matcher re-teach, R05 methodology co
 sequence 3.1 → 3.8 already forms the concept-family hierarchy ed-4 wants to make explicit
 (isolation → hierarchy → rules → quality → leak → extreme → multi-char); ed-4 is a framing pass,
 not a merge.
+
+**v2 build slice executed iter 149** (DEC-24 Q6 guide order — third Part of the v2 build phase;
+Registry C map [`migration_map_v2.md`](./migration_map_v2.md) §5.10): the `presentation` column
+seeded on all 46 Part 3 rows — **all `open`**: Part 3 is the Learn-mode core teaching Part for
+voice (BASIC §3.1/§3.3/§3.5, INTERMEDIATE §3.2/§3.4/§3.6/§3.7, EXPERT §3.8) and every block is
+canonical teaching content (definitions, rules, tables, protected examples — all under the
+registered Collapsible thresholds; the longest block, the §3.8 full scene ~100 words, is the
+section's core demonstration = required reading for the technique); zero supplementary /
+technical-reference / >200-word material → zero qualifying F6 blocks (honest application, not
+forced). F3: the §3.3 structure list + §3.4 class list + §3.6 causes list = teaching class (stay
+prose/list; zero checkbox affordances — reserved §9.3/§9.11; zero decision-input checklists —
+the Build entry instrument = §1.8, executed iter 147). F4: worked tier = §3.2 ПРИМЕР (labelled),
+§3.4/§3.6 diff-views + §3.8 scene (chip ИЛЛЮСТРАЦИЯ), §3.8 ПРИМЕР pair (labelled); the §3.6
+Narrator Bleed antipattern-card = worked tier via the card form (НЕВЕРНО/ВЕРНО labels — the
+part_04/part_08 unchipped variant; both registered components, the chip+card combination is not
+mandated — no chip invented). F5: verified as-is (Concept→Rule→Core example per section; Reference
+branches live: §3.1::06→§1.1, §3.5→§7B.2, §3.6::06→§8.12, §3.7::04→§3.8, §3.8::02→§10.4) —
+zero canon content edits. Master: §3.6 stray v9-era heading + 2 unregistered `plain-copy`
+duplicates disposed (map §5.10 P3-3/P3-4); §3.2 label russification completed + §3.6/§3.7
+Reference-branch mirrors restored (P3-5). Line refs on pre-existing rows = audit-time anchors
+(iter 120), not re-based — iter-142/145/148 slice precedent.
 
 ---
 

@@ -605,6 +605,67 @@ Part 9 slice). Root fallback `parts/part_02.html` regenerated with the slice (+ 
 — not a canon-side actionable class; verified by tool-mechanism analysis pre-edit and by the
 post-edit run). Next Part: **Part 3** (guide order; its own slice reuses this shape).
 
+### 5.10 Part 3 v2 build slice (seeded + executed iter 149 — v2 build phase, third Part)
+
+Scope: **Part 3 — Voice** (8 sections, 46 block rows; DEC-24 Q6 guide order — Part 3 third; the
+per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate
+cleared by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape (evidence → canon
+restructure → master mirror → full battery) — third application, reusing the §5.8/§5.9 pattern.
+Primary reader mode: **Learn** (the core teaching Part for voice — full-narrative default
+visibility per the spec §3). Editorial Policy 5-point check applied per edit (documented per row
+below). Acceptance gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests +
+qa baselines) — **no new cluster parity gate**: Part 3 hosts one cluster owner (§3.2 voice
+influence, DEC-21) and the slice keeps `audit_voice_parity.py` green (verified: the §3.2
+canonical record — 6×3 table, «Хранилище ≠ Влияние» prose, both `[VS: E07]` / widget markers,
+the 12B RULE — byte-unchanged; every master edit sits outside the parity-locked inventory).
+
+**F2 presentation map (spec §4.1 mechanism, third application):** the Part 3 matrix tables now
+carry the `presentation` column (46 rows; matrix §1.2 scope note extended to Parts 1–3).
+Disposition: **all `open`** — Part 3 is the Learn-mode core teaching Part for voice (BASIC
+§3.1/§3.3/§3.5, INTERMEDIATE §3.2/§3.4/§3.6/§3.7, EXPERT §3.8) and every block is canonical
+teaching content (definitions, rules, tables, protected examples — all under the registered
+Collapsible thresholds; the longest block, the §3.8 full scene ~100 words, is the section's core
+demonstration = required reading for the technique); zero supplementary / technical-reference /
+>200-word material → zero qualifying F6 blocks (honest application, not forced). F3: the §3.3
+structure list + §3.4 class list + §3.6 causes list = teaching class (stay prose/list; zero
+checkbox affordances — reserved §9.3/§9.11; zero decision-input checklists — the Build entry
+instrument = §1.8, executed iter 147). F4: worked tier = §3.2 ПРИМЕР (labelled), §3.4/§3.6
+diff-views + §3.8 scene (chip ИЛЛЮСТРАЦИЯ), §3.8 ПРИМЕР pair (labelled); the §3.6 Narrator
+Bleed antipattern-card = worked tier via the card form (НЕВЕРНО/ВЕРНО labels — the part_04/
+part_08 unchipped variant; both registered components, the chip+card combination is not
+mandated — no chip invented). F5: canon verified as-is, **zero content edits** (Concept→Rule→
+Core example per section; Reference branches live: §3.1::06→§1.1, §3.5→§7B.2, §3.6::06→§8.12,
+§3.7::04→§3.8, §3.8::02→§10.4 — the matrix verdict «near-clean» holds at v2).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P3-1 | — (evidence) | matrix Part 3 tables: 8 columns, no presentation axis | `presentation` column seeded (46 rows, all `open`); matrix §1.2 scope note extended to Parts 1–3; Part 3 verdict + iter-149 slice note appended; the stale R18 note on `p3_greeting_ref::01` refreshed (the `§7B.X` vague placeholder was repaired to `§7B.2` iter 128, ed-8 Phase A — the note described the pre-repair state; the master link text «Part 7B: приветствие» recorded as the deliberate iter-123 DEC-16 translation, compliant) | EXECUTED **— iter 149** | DEC-24 Q2 (F2 matrix-column mechanism) |
+| P3-2 | — (canon F5/F6) | canon `part_03.md` vs the F5 micro-template | verified F5-approximate as-is (Concept→Rule→Core example per section pair; ▸Failure modes = §3.6 variants + causes; ▸Edge cases = §3.7; Reference = live inline refs); F6 = zero qualifying blocks; **zero canon content edits** — the §3.2 voice-cluster canonical record byte-unchanged (DEC-21 parity lock) | VERIFIED **— iter 149** | DEC-24 Q4 (F5/F6); Editorial Policy (no redundant presentation found) |
+| P3-3 | — (master layer) | master §3.6 heading pair: `<h4>Пример: Выщербленный</h4>` + (zero content) + `<h4>До/После: утечка голоса</h4>` — the first heading master-only since the v9 Phase 3.2 rename (git pickaxe `66605363` 2026-05-15, renamed from «Пример: Джесси Пинкман»), never canonized, degenerate (empty scope); canon merged the pair into one heading `### До/После: утечка голоса (Выщербленный)` (iter 123) | stray heading removed; the surviving heading restored to the canon form `<h4>До/После: утечка голоса (Выщербленный)</h4>` | REMOVED_WITH_REASON **— executed iter 149** | 5-point check: capability (empty heading — nothing unique; the character qualifier lives in the canon heading), coverage (canon heading form), retrieval (unchanged — same position, same anchor flow), context (the diff-view follows the heading directly), dependency (grep-verified: «Пример: Выщербленный» absent from scripts/tests/audits); fence #10 (canon wins) |
+| P3-4 | — (master layer) | master §3.4 + §3.6 trailing `<pre class="plain-copy">` blocks (Quality Grade / Voice Leak До/После textual re-statements) — master-only since the v7 unified migration (`eb4b91bd`), never canonized; the `plain-copy` class is undefined in both stylesheets + unregistered in `docs/components.md` (fence #7 legacy violation); the E03 marker in Part 2 documents this exact family as replaced («Замещает… сопутствующий `<pre class="plain-copy">` текстовый дубликат») | both blocks removed: the adjacent diff-view cards carry the full canon table content; the pre blocks were lossy compressed re-statements of the cards directly above them | REMOVED_WITH_REASON **— executed iter 149** | 5-point check: capability (nothing — pure re-statement), coverage (diff-view cards + canon tables), retrieval (cards directly above), context (sections close on the diff-views per canon), dependency (grep-verified: no script/test/audit probes the plain-copy text; NAV §5 pitfall #12 «viz > dry text» — replacement, not addition); the only `plain-copy` usages in the corpus were these two (post-disposal grep = 0 in src/) |
+| P3-5 | `p3_influence_hierarchy::06`, `p3_voice_leak::06`, `p3_joker_case::04` | (a) master §3.2 callout label `EXAMPLE — …` (canon `**ПРИМЕР — …**` since iter 123 — the russification pass missed the `EXAMPLE — ` variant, pickaxe-verified); (b) master §3.6::06 paragraph without the `**Ссылка:**` label, pre-iter-123 wording («возникает Voice Bleed» vs canon «возникает межперсонажная утечка голоса (Voice Bleed)»), link text «Part 8: AP-11» (no §8.12); (c) master §3.7::04 paragraph without the label, plain-text «Мульти-персонажные примеры (ниже)» instead of the canon ref `[ref: §3.8 — Мульти-персонажные примеры]` | (a) label → `ПРИМЕР —`; (b) full canon form restored: `<strong>Ссылка:</strong>` + canon wording + link `Part 8: §8.12 — AP-11 Voice Bleed`; (c) label + anchor `<a href="#p3_multi_char">§3.8 — Мульти-персонажные примеры</a>` | MOVED **— executed iter 149** | the P1-5 mirror-restoration family (canon blocks without master mirrors — the labels/refs never existed in master, pickaxe-verified `--all`); DEC-16 label law («Ссылка» = Russian guide label); F5 Reference-branch mirror duty |
+| P3-6 | — (state) | STATUS iter-148 / PLAN row v2-build-part-3 open / no map §5.10 | map §5.10 + STATUS iter-149 (KI#83 recorded + CLOSED; Next step re-pinned to the Part 4 slice) + PLAN v2-build-part-4 + worklog + CHANGELOG + NAV §7 de-stale (v2_architecture + editorial_matrix rows: Parts 1–3) + AGENTS.md syntax-baseline sync (247→238 — stale against the iter-145 245 and the iter-149 238) + `check_syntax_mix.py` italic regex line-bounded (KI#83 — the only infrastructure touch, forced by the slice's baseline gate: the plain-copy disposal changed the asterisk topology and tripped 2 cross-line false positives 245→247; fix verified — both corpora 238, the 7 eliminated BASE findings all cross-context artifacts, zero legitimate findings lost; the bold-pattern re-bounding deferred inside the KI) | EXECUTED **— iter 149** | iter-147/148 state-package pattern; authority order (AGENTS.md law > tool snapshot); the iter-148 audit-check precedent |
+
+Accounting: 1 presentation-column seeding (46 rows, all `open`) + 1 canon F5 verification with
+zero content edits + 1 stray-heading disposal with canon-heading restoration (P3-3) + 1
+plain-copy disposal ×2 blocks (P3-4) + 1 mirror-completion package ×3 blocks (P3-5) + 1 state
+package (P3-6, incl. the `check_syntax_mix.py` KI#83 italic-regex line-bounding — the only
+infrastructure touch, forced by the slice's baseline gate, the iter-148 audit-check precedent;
+the syntax baseline re-based 245 → **238**, both corpora equal — the content delta contributes
+0). Byte-unchanged: canon `part_03.md` entirely (front-matter staleness deferred,
+repo-wide); master §3.1/§3.3/§3.5/§3.8 entirely + §3.2/§3.4/§3.6/§3.7 outside the edited
+blocks; the §3.2 parity-locked inventory (table / prose / markers / widget container / E07
+embed); matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope):
+canon front-matter `vs_embedded` staleness (rides the v2 canon format); KI#79 drift-tool regex
+(tooling); KI#83's bold-pattern re-bounding (215 pre-existing `__` BEM artifacts — separate
+baseline re-derivation); typography-level variances (straight vs guillemet quotes in §3.6 —
+formatting churn, not F-policy); the §3.5 master link text (deliberate iter-123 translation —
+recorded in the matrix note, not a deficit). Root fallback `parts/part_03.html` regenerated
+with the slice (+ root `index.html` timestamp). Drift actionable **158 → 157** (−1: the
+§3.6::06 canon paragraph matched by the P3-5(b) mirror restoration — canon-side actionable
+class, verified by the post-edit run; the disposals were master-side and did not affect the
+count). Next Part: **Part 4** (guide order; its own slice reuses this shape).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -936,3 +997,27 @@ post-edit run). Next Part: **Part 3** (guide order; its own slice reuses this sh
   mandate); root fallback `parts/part_02.html` regenerated. Drift actionable 158 → 158
   (master-side disposal — the canon-side actionable classes untouched). Battery: full — see
   STATUS/worklog. Next: Part 3 slice (guide order).
+- **iter 149 (Part 3 v2 build slice, BASE_COMMIT `767c3d23`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-3, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.10 (P3-1..P3-6)** on the spec §7 shape (third application, reusing the
+  §5.8/§5.9 pattern): evidence — the matrix Part 3 tables gain the F2 `presentation` column
+  (46 rows, all `open` — Learn-mode core teaching Part for voice; the Collapsible criteria
+  honestly applied: zero qualifying blocks; the stale R18 note on `p3_greeting_ref::01`
+  refreshed — the `§7B.X` repair executed iter 128) + this §5.10 registry; canon — verified
+  F5-approximate as-is, **zero content edits** (the §3.2 voice-cluster canonical record
+  byte-unchanged; `audit_voice_parity.py` stays green); master — the §3.6 stray v9-era heading
+  («Пример: Выщербленный», degenerate, never canonized) disposed with the canon heading form
+  restored + the two unregistered `plain-copy` pre-duplicates (§3.4/§3.6, v7-era, class
+  undefined in CSS + unregistered per fence #7) disposed REMOVED_WITH_REASON + three
+  mirror completions (§3.2 `EXAMPLE —` → `ПРИМЕР —` label russification miss; §3.6::06 +
+  §3.7::04 «Ссылка» Reference-branch mirrors restored to the canon forms); NAV §7 de-staled
+  (Parts 1–3); root fallback `parts/part_03.html` regenerated. **KI#83** (opened + CLOSED
+  in-slice, forced by the baseline gate — the iter-148 audit-check precedent):
+  `check_syntax_mix.py`'s italic regex matched across lines; the plain-copy disposal's changed
+  asterisk topology tripped 2 cross-context false positives (qa:syntax 245→247); the class
+  line-bounded (`[^*\n]*`) and verified (both corpora 238; the 7 eliminated BASE findings all
+  cross-context artifacts; zero legitimate findings lost; the bold-pattern re-bounding
+  deferred inside the KI); the syntax baseline re-based 245 → **238** (AGENTS.md synced).
+  Drift actionable 158 → **157** (−1: the §3.6::06 canon paragraph matched by the mirror
+  restoration — canon-side actionable class). Battery: full — see STATUS/worklog. Next:
+  Part 4 slice (guide order).

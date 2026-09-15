@@ -126,7 +126,7 @@ pnpm run version:check                    # 4-place version sync (MUST pass)
 pnpm test                                 # all tests — run AFTER pnpm run build (tests read dist/)
 pnpm run qa:csp | qa:bundle | qa:contrast | qa:doc-versions   # PASS/FAIL gates
 pnpm run qa:english                       # exit 1 expected: 18 leaks by design — count must not increase
-pnpm run qa:syntax                        # exit 1 expected: 247 baseline findings — count must not increase
+pnpm run qa:syntax                        # exit 1 expected: 238 baseline findings — count must not increase (245→238 iter 149, KI#83 italic-regex fix)
 pnpm run dev                              # build + serve on http://localhost:3000
 
 # Canon audits (run after touching src/master/ or docs/canon/):
@@ -143,7 +143,7 @@ python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling §7A.6 canoni
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates
 > individually: PASS/FAIL for csp/bundle/contrast/doc-versions; **baseline counts must not
-> increase** for english (18) and syntax (247).
+> increase** for english (18) and syntax (238).
 
 ---
 
