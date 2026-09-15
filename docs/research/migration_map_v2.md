@@ -908,6 +908,68 @@ paragraph keeps its canon↔master match; verified by the JSON pre/post diff).
 Next Part: **Part 7B** (guide order; its own slice reuses this shape; the appendix/Reference slice
 after Part 10 carries the KI#70 WIRE implementation per DEC-24 Q7).
 
+### 5.15 Part 7B v2 build slice (seeded + executed iter 154 — v2 build phase, eighth Part)
+
+Scope: **Part 7B — Greeting & Lorebook** (5 sections, 33 block rows; DEC-24 Q6 guide order — Part 7B
+eighth; the per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification
+gate cleared by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape (evidence → canon
+restructure → master mirror → full battery) — eighth application, reusing the §5.8–§5.14 pattern.
+Primary reader mode: **Learn** (the teaching Part for Greeting / Lorebook / Structured Inject —
+full-narrative default visibility; the EXPERT §7B.4/§7B.5 depth stays behind the eight already-
+deployed F6 wraps). Editorial Policy 5-point check applied per edit (documented per row below).
+Acceptance gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines)
+— **no new cluster parity gate**: Part 7B hosts no cluster owner (verified: the seven cluster owners
+— §7A.2 / §7A.6 / §7A.12 / §5.4 / §9.6 / §3.2 / glossary registry — sit outside Part 7B). The E18
+embed (the Part's one VS-EMBED; Registry A disposition still PROPOSED) stays untouched — the
+E09/E05/E06/E11/E02/E16 precedent (non-cluster embeds ride their own audit time; the canon-
+declaration gap recorded P7B-4(b)).
+
+**F2 presentation map (spec §4.1 mechanism, eighth application):** the Part 7B matrix tables now
+carry the `presentation` column (33 rows; matrix §1.2 scope note extended to Parts 1–7B).
+Disposition: **25 × `open`** (canonical definitions, RULE/REC callouts, the canonical structure/
+params/mechanics/budgets tables, the teaching rule-lists — Learn-mode required reading; the
+«Ссылка» navigation rows stay `open` per the Part 1–6 precedent) **+ 8 × `collapsible`** (all eight
+pre-existing deployed F6 usages documented as the v2 presentation: §7B.2::04 the Elena Greeting
+worked example; §7B.3::06–::10 the four Lorebook entry examples + the EVENT frontend-compatibility
+table (technical reference behind disclosure — the §7A.6::06 precedent); §7B.4::06 the content-
+injection example; §7B.5::06 the integration checklist — F3 validation class with checkbox
+affordances) **+ 0 `canonical-link` + 0 `—`** (zero full-form cluster-owner restatements — the
+R07-family §7B.4::03 is the compliant application form, not the template line; zero disposed
+blocks — the matrix verdict «clean; zero compression candidates» held). F3: §7B.5::06 = the one
+validation-class checklist (checkboxes correct — the reserved class); §7B.1::02 / §7B.2::05 /
+§7B.3::05 = teaching rule-lists, zero checkbox affordances; zero decision-input checklists (the
+Build entry instrument = §1.8, executed iter 147). F4: worked tier = §7B.1::03 + §7B.2::04 +
+§7B.3::06–::09 + §7B.4::06 (all chipped ИЛЛЮСТРАЦИЯ in master); inline tier = the «Пример» column
+inside the §7B.3::02 structure table (woven, no chip invented). F5: verified per section —
+Concept → Rule → Core example → Reference holds for §7B.2 (the R28 Примечание → §10.1), §7B.3
+(::04 + ::11 → §7B.4), §7B.4 (::02 → §7B.3, ::07 → §7B.5, ::08 GHOST), §7B.5 (::03 → §4.2);
+§7B.1 is F5-approximate without a Reference branch — honest state recorded, not forced (the
+self-contained 3-block section; a new link = an invented requirement). F6: **zero new
+`<details class="interactive">`** (the eight existing usages documented; no new qualifying block).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P7B-1 | — (evidence) | matrix Part 7B tables: 8 columns, no presentation axis | `presentation` column seeded (33 rows: 25 `open` + 8 `collapsible`); matrix §1.2 scope note extended to Parts 1–7B; the Part 7B verdict appended with the iter-154 slice note; **one stale note refreshed** — `p7b_lorebook_advanced::06` (the «призрак Anchors» word-order slip was FIXED iter 129 — ed-7 R29 normalization: «якоря призрака (GHOST-якоря)» canon + master mirror; the note described the pre-fix state) + the ::02 E18 VS-shadow note + the ::03 §4.2-target re-verification note added | EXECUTED **— iter 154** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…153 stale-note-refresh precedent |
+| P7B-2 | — (canon) | canon `part_07b.md` (276 lines) — preflight full read: F5-approximate per section; the matrix verdict «clean; zero compression candidates»; zero unexecuted COMPRESS/DELETE rows | **unchanged — verified byte-stable** (zero canon content edits: `part_07b.md` byte-unchanged through the slice; the Greeting algorithm table = the E18 SHARED_REFERENCE source; front-matter staleness `vs_embedded: none` deferred, repo-wide — recorded P7B-4(b)) | VERIFIED **— unchanged (iter 154)** | fence #10 (canon = source of truth); Editorial Policy (no edit without functional load); the iter-148/149/151/152 zero-canon-edit precedents |
+| P7B-3 | `p7b_lorebook_basics::04` + `::11` + `p7b_lorebook_mechanics::07` (master layer) | three master render gaps vs canon: (a) the §7B.3 РЕКОМЕНДАЦИЯ callout linked `#p7b_lorebook_advanced` while canon carries `[ref: §7B.4 — Lorebook механики]` (v9-era divergence — pickaxe: master `7957a9be` Phases 2–3 vs canon `49a17ab8` iter 16; the GHOST-activation statement lives §7B.4::08, not §7B.5); (b) the §7B.3::11 «Ссылка» line rendered without the `<strong>Ссылка:</strong>` label; (c) the §7B.4::07 «Ссылка» line rendered as plain text «Продвинутые механики Lorebook (ниже)» — no label, no anchor | three mirror completions: (a) the link re-pointed to `<a href="#p7b_lorebook_mechanics">механиках Lorebook</a>` (fence #10 — canon wins; «продвинутых» dropped with the wrong target); (b) the «Ссылка:» label + trailing period added (the iter-150 §4.7::05 label family); (c) the «Ссылка:» label + the `<a href="#p7b_lorebook_advanced">Продвинутые механики Lorebook</a>` anchor (the P6-3 missing-link family; «(ниже)» plain-text pointer → the link). 5-point check (a): capability — the callout now sends the reader to the §7B.4 РЕКОМЕНДАЦИЯ that actually states GHOST-activation (nothing moved, the canon ref was already the authority); coverage — §7B.5 stays reachable via the ::07 link; retrieval — the stated content and the target now coincide; context — the sentence substance unchanged; dependency — no sync probe targets the line (the 3 part_07b probes verified: P1-11 / P3-1-7b / P2-7-del-07b), no other section refs this callout (grep-verified) | MOVED **— executed iter 154** | fence #10 (canon = source of truth, master mirrors); DEC-16 «Ссылка» label law; the P5-3/P6-3/P7A-3 mirror-completion precedents |
+| P7B-4 | — (observed) | master-only enrichments + variances, never canonized/resolved: (a) the §7B.2 master-only intro enrichment («Алгоритм из 4 шагов … показан выше (VS-EMBED E18); разобранный пример на Елене — ниже.» — pickaxe-verified never in canon); (b) the E18 canon-declaration gap (canon front-matter `vs_embedded: none` stale; no `[VS: E18]` marker in §7B.2; Registry A disposition still PROPOSED — the E11/E02/E16 family); (c) the §7B.5 master-only closing transition → Part 8 (canon ends at the checklist); (d) the EN-label presentation variance (canon «**ИЛЛЮСТРАЦИЯ:**» / «ILLUSTRATION — Demonstrates:» labels vs master RU chips + HTML-comment lists — the P6-4(f) family; its part_07b sibling was noted there); (e) trivial punctuation variances (::02 bullet periods, the §7B.5 intro periods, «50-100» vs «50–100» — formatting churn, not F-policy); (f) the §7B.5::03 `[ref: §4.2 — GHOST]` target nuance (§4.8/§4.11 anchor-coverage R18-minor — current observation, not stale) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge or non-rendering metadata) | RECORDED **— deferred (iter 154)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy (compress redundant presentation, never unique capability); rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P7B-5 | — (state) | STATUS iter-153 / PLAN row v2-build-part-7b open / no map §5.15 | map §5.15 + STATUS iter-154 (Next step re-pinned to the Part 8 slice; the v2-architecture invariant extended to Parts 1–7B / maps §5.8–§5.15) + PLAN v2-build-part-8 + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–7B) | EXECUTED **— iter 154** | iter-147…153 state-package pattern |
+
+Accounting: 1 presentation-column seeding (33 rows: 25 `open` + 8 `collapsible`) + 1 verified-unchanged
+canon (P7B-2 — **zero canon content edits**; `part_07b.md` byte-unchanged) + 3 master mirror
+completions (P7B-3; `part_07b.html` 3 lines changed) + 1 observation package deferred (P7B-4) + 1
+state package (P7B-5). Byte-unchanged: canon `part_07b.md` entirely + master outside the 3 mirrored
+lines (the E18 embed, all eight `<details>` wraps, the tables — untouched); matrix
+tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope): the P7B-4 master-only
+enrichments + variances (canonical-audit stage / ed-* batch); the E18 canon-declaration gap (rides
+the front-matter/v2-canon-format deferral); KI#79 drift-tool regex (tooling). Root fallback
+`parts/part_07b.html` regenerated with the slice (+ root `index.html` timestamp). Drift actionable
+**155 → 154** (one canon-side match gained: the §7B.4::07 «Ссылка» paragraph left the plain_text
+list (127→126) by gaining its full master mirror — the label + the anchor; verified by the JSON
+pre/post diff). Next Part: **Part 8 (Anti-patterns)** (guide order; 16 sections — the second-largest
+Part; its own slice reuses this shape; the appendix/Reference slice after Part 10 carries the KI#70
+WIRE implementation per DEC-24 Q7).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -1005,6 +1067,23 @@ after Part 10 carries the KI#70 WIRE implementation per DEC-24 Q7).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 154 (Part 7B v2 build slice, BASE_COMMIT `c16a9354`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-7b, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.15 (P7B-1..P7B-5)** on the spec §7 shape (eighth application, reusing the
+  §5.8–§5.14 pattern): evidence — the matrix Part 7B tables gain the F2 `presentation` column
+  (33 rows: 25 `open` + 8 `collapsible` — all eight pre-existing deployed F6 usages documented;
+  zero `canonical-link` / `—`); matrix §1.2 extended to Parts 1–7B; one stale note refreshed
+  (`p7b_lorebook_advanced::06` — the R29 fix executed iter 129; the note described the pre-fix
+  state) + the E18 VS-shadow + §4.2-target re-verification notes added; canon — **zero content
+  edits** (`part_07b.md` byte-unchanged — the Part hosts no cluster owner, no fold candidate;
+  the iter-148/149/151/152 zero-canon-edit precedent); master — **three mirror completions**
+  (P7B-3: the §7B.3::04 ref-target fix — canon `[ref: §7B.4]` vs the v9-era `#p7b_lorebook_advanced`
+  link, pickaxe-verified, fence #10 canon wins; the §7B.3::11 + §7B.4::07 «Ссылка» label/anchor
+  completions — the P5-3/P6-3 families); the master-only enrichments + variances (the E18
+  canon-declaration gap, the EN-label family sibling, the closing transition) recorded as deferred
+  observations (P7B-4); drift 155 → **154** (the §7B.4::07 «Ссылка» paragraph gained its master
+  mirror — verified by the JSON pre/post diff); full battery green (sync 97/97, parity ×7, tests
+  64/64, english 18, syntax 238, hash unchanged); Next step re-pinned to the Part 8 slice.
 - **iter 153 (Part 7A v2 build slice, BASE_COMMIT `2822c818`):** the pinned STATUS Next-step
   row 1 (PLAN row v2-build-part-7a, **not owner-gated** — the DEC-24 ratification gate cleared)
   executed per map **§5.14 (P7A-1..P7A-5)** on the spec §7 shape (seventh application, reusing the

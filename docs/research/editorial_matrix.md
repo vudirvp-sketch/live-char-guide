@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–7A: iters 147–153); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts already sliced (Parts 1–7B: iters 147–154); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -1005,64 +1005,86 @@ gap incl.) recorded as deferred observations (P6-4, map §5.13).
 
 ### p7b_structured_inject (§7B.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7b_structured_inject::01 | L19 | Structured Inject definition | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_structured_inject::02 | L21–25 | правила Structured Inject (3 bullets) | DEFINITION | KEEP | YES | — | |
-| p7b_structured_inject::03 | L27–37 | пример Structured Inject (code) | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7b_structured_inject::01 | L19 | Structured Inject definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_structured_inject::02 | L21–25 | правила Structured Inject (3 bullets) | DEFINITION | KEEP | YES | — | open | |
+| p7b_structured_inject::03 | L27–37 | пример Structured Inject (code) | EXAMPLE | KEEP | YES | — | open | Worked tier (chipped ИЛЛЮСТРАЦИЯ in master); the section's core demonstration — the code block is required reading (~4 lines, far under the Collapsible floor) |
 
 ### p7b_greeting (§7B.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7b_greeting::01 | L48 | Greeting definition | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_greeting::02 | L50–57 | Алгоритм Greeting (4 шага table) | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_greeting::03 | L59 | Сенсорный якорь definition | DEFINITION | KEEP | YES | — | |
-| p7b_greeting::04 | L61–72 | Разобранный пример: Greeting Елены (учебный) + Примечание учебный-vs-canonical | EXAMPLE | KEEP | YES | REINFORCEMENT | **R28:** dual presentation with §10.1 — both sides carry explicit disambiguation Примечания (IMP-48-compliant pair) |
-| p7b_greeting::05 | L74–79 | правила Greeting (50–100 токенов) | DEFINITION | KEEP | YES | — | Consistent with §0.2 step-4 + glossary entry ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7b_greeting::01 | L48 | Greeting definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_greeting::02 | L50–57 | Алгоритм Greeting (4 шага table) | DEFINITION | KEEP | YES | — | open | Canonical; VS-shadowed in master by E18 (DEC-03 `viz > dry text`) — the canon table = the source for the embed (Registry A row E18: steps → `SHARED_REFERENCE`, §7B.2 owns); the E18 canon-declaration gap (front-matter `vs_embedded: none`, no `[VS: E18]` marker) deferred → map §5.15 P7B-4(b) |
+| p7b_greeting::03 | L59 | Сенсорный якорь definition | DEFINITION | KEEP | YES | — | open | |
+| p7b_greeting::04 | L61–72 | Разобранный пример: Greeting Елены (учебный) + Примечание учебный-vs-canonical | EXAMPLE | KEEP | YES | REINFORCEMENT | collapsible | **R28:** dual presentation with §10.1 — both sides carry explicit disambiguation Примечания (IMP-48-compliant pair). Deployed F6 usage (master `<details class="interactive">`) — documented as the v2 presentation this slice; the canon EN-label forms («ILLUSTRATION — Demonstrates:») vs master RU chip + comment = the P6-4(f) variance family, deferred (map §5.15 P7B-4(d)) |
+| p7b_greeting::05 | L74–79 | правила Greeting (50–100 токенов) | DEFINITION | KEEP | YES | — | open | Consistent with §0.2 step-4 + glossary entry ✓ (and with §7A.12's 4K-fallback «Полный» column 50–100; the canonical tier split 40/60/100 stays §7A.12's) |
 
 ### p7b_lorebook_basics (§7B.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7b_lorebook_basics::01 | L90 | Lorebook definition | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_lorebook_basics::02 | L92–99 | структура записи table | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_lorebook_basics::03 | L101–107 | рекомендованные параметры table | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_lorebook_basics::04 | L109 | РЕКОМЕНДАЦИЯ: сенсорные активации + контекстные факты | APPLICATION | KEEP | YES | — | |
-| p7b_lorebook_basics::05 | L111–115 | правила Lorebook (3 bullets) | DEFINITION | KEEP | YES | — | |
-| p7b_lorebook_basics::06 | L117–128 | Примеры записей для Елены: пример 1 (GHOST предательство) | EXAMPLE | KEEP | YES | — | |
-| p7b_lorebook_basics::07 | L130–141 | пример 2: secondary GHOST + «⚠️ ВНЕ КАНОНА» warning | EXAMPLE | KEEP | YES | — | Unique pedagogical value (out-of-canon discipline; back-refs §4.2 + bible ✓) |
-| p7b_lorebook_basics::08 | L143–152 | пример 3: Контакт Елены | EXAMPLE | KEEP | YES | — | |
-| p7b_lorebook_basics::09 | L154–163 | пример 4: Город Елены | EXAMPLE | KEEP | YES | — | |
-| p7b_lorebook_basics::10 | L165–175 | Совместимость EVENT: по фронтендам table | APPLICATION | KEEP | YES | — | Unique (frontend support matrix) |
-| p7b_lorebook_basics::11 | L177 | Ссылка → §7B.4 | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7b_lorebook_basics::01 | L90 | Lorebook definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_lorebook_basics::02 | L92–99 | структура записи table | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_lorebook_basics::03 | L101–107 | рекомендованные параметры table | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_lorebook_basics::04 | L109 | РЕКОМЕНДАЦИЯ: сенсорные активации + контекстные факты | APPLICATION | KEEP | YES | — | open | Carries the `[ref: §7B.4]` pointer — the master link target fixed this slice to match canon (map §5.15 P7B-3) |
+| p7b_lorebook_basics::05 | L111–115 | правила Lorebook (3 bullets) | DEFINITION | KEEP | YES | — | open | |
+| p7b_lorebook_basics::06 | L117–128 | Примеры записей для Елены: пример 1 (GHOST предательство) | EXAMPLE | KEEP | YES | — | collapsible | Deployed F6 usage (master `<details>` + ИЛЛЮСТРАЦИЯ chip); worked tier |
+| p7b_lorebook_basics::07 | L130–141 | пример 2: secondary GHOST + «⚠️ ВНЕ КАНОНА» warning | EXAMPLE | KEEP | YES | — | collapsible | Unique pedagogical value (out-of-canon discipline; back-refs §4.2 + bible ✓). Deployed F6 usage (master `<details>`; the compressed summary carries the warning) |
+| p7b_lorebook_basics::08 | L143–152 | пример 3: Контакт Елены | EXAMPLE | KEEP | YES | — | collapsible | Deployed F6 usage (master `<details>`); worked tier |
+| p7b_lorebook_basics::09 | L154–163 | пример 4: Город Елены | EXAMPLE | KEEP | YES | — | collapsible | Deployed F6 usage (master `<details>`); worked tier |
+| p7b_lorebook_basics::10 | L165–175 | Совместимость EVENT: по фронтендам table | APPLICATION | KEEP | YES | — | collapsible | Unique (frontend support matrix). Deployed F6 usage (master `<details>`) — technical reference behind disclosure, the §7A.6::06 precedent |
+| p7b_lorebook_basics::11 | L177 | Ссылка → §7B.4 | NAVIGATION | KEEP | YES | — | open | Master mirror completed this slice (the «Ссылка:» label — map §5.15 P7B-3) |
 
 ### p7b_lorebook_mechanics (§7B.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7b_lorebook_mechanics::01 | L188 | intro: запись = поведенческий триггер; 2–3 механики на сессию | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_lorebook_mechanics::02 | L190 | РЕКОМЕНДАЦИЯ (область применения, ref §7B.3 ✓) | NAVIGATION | KEEP | YES | — | |
-| p7b_lorebook_mechanics::03 | L192 | ПРАВИЛО: никогда не вставляйте действия/мысли `{{user}}` в content | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (anti-godmoding principle, lorebook-site) |
-| p7b_lorebook_mechanics::04 | L194–200 | таблица механик (3 механики) | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_lorebook_mechanics::05 | L202–211 | практика — быстрая таблица (6 задач) | APPLICATION | KEEP | YES | — | |
-| p7b_lorebook_mechanics::06 | L213–232 | пример: структурированная инъекция в content (+ XML альтернатива) | EXAMPLE | KEEP | YES | — | |
-| p7b_lorebook_mechanics::07 | L234 | Ссылка → §7B.5 | NAVIGATION | KEEP | YES | — | |
-| p7b_lorebook_mechanics::08 | L236 | РЕКОМЕНДАЦИЯ: механики для GHOST-триггеров | APPLICATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7b_lorebook_mechanics::01 | L188 | intro: запись = поведенческий триггер; 2–3 механики на сессию | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_lorebook_mechanics::02 | L190 | РЕКОМЕНДАЦИЯ (область применения, ref §7B.3 ✓) | NAVIGATION | KEEP | YES | — | open | |
+| p7b_lorebook_mechanics::03 | L192 | ПРАВИЛО: никогда не вставляйте действия/мысли `{{user}}` в content | DEFINITION | KEEP | YES | REINFORCEMENT | open | R07-family (anti-godmoding principle, lorebook-site) — application-form, not the full template line; compliant short form |
+| p7b_lorebook_mechanics::04 | L194–200 | таблица механик (3 механики) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_lorebook_mechanics::05 | L202–211 | практика — быстрая таблица (6 задач) | APPLICATION | KEEP | YES | — | open | |
+| p7b_lorebook_mechanics::06 | L213–232 | пример: структурированная инъекция в content (+ XML альтернатива) | EXAMPLE | KEEP | YES | — | collapsible | Deployed F6 usage (master `<details>` + ИЛЛЮСТРАЦИЯ chip); worked tier (both code variants inside one wrap) |
+| p7b_lorebook_mechanics::07 | L234 | Ссылка → §7B.5 | NAVIGATION | KEEP | YES | — | open | Master mirror completed this slice (the «Ссылка:» label + the §7B.5 anchor — map §5.15 P7B-3) |
+| p7b_lorebook_mechanics::08 | L236 | РЕКОМЕНДАЦИЯ: механики для GHOST-триггеров | APPLICATION | KEEP | YES | — | open | The GHOST-activation statement this §7B.3::04 ref targets (the master link-target fix rationale) |
 
 ### p7b_lorebook_advanced (§7B.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p7b_lorebook_advanced::01 | L247 | intro («Продвинуто. Опционально.») | NAVIGATION | KEEP | YES | — | |
-| p7b_lorebook_advanced::02 | L249–255 | таблица продвинутых механик (3) | DEFINITION | KEEP | YES | — | Canonical |
-| p7b_lorebook_advanced::03 | L257 | ПРАВИЛО: эмуляция усталости — GHOST-якоря пересказаны в content | DEFINITION | KEEP | YES | — | Canonical warning; ref «§4.2 — GHOST» should target §4.8/§4.11 for anchor coverage (R18-minor) |
-| p7b_lorebook_advanced::04 | L259 | ПРАВИЛО: ложная память — только для экспертов | DEFINITION | KEEP | YES | — | |
-| p7b_lorebook_advanced::05 | L261–267 | контекстные бюджеты table (4K/8K/16K+) | DEFINITION | KEEP | YES | — | |
-| p7b_lorebook_advanced::06 | L269–276 | чеклист интеграции Lorebook (6 ☐) | VALIDATION | KEEP | YES | — | «призрак Anchors» word-order slip → R29 cosmetic |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p7b_lorebook_advanced::01 | L247 | intro («Продвинуто. Опционально.») | NAVIGATION | KEEP | YES | — | open | |
+| p7b_lorebook_advanced::02 | L249–255 | таблица продвинутых механик (3) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p7b_lorebook_advanced::03 | L257 | ПРАВИЛО: эмуляция усталости — GHOST-якоря пересказаны в content | DEFINITION | KEEP | YES | — | open | Canonical warning; the `[ref: part_04.md §4.2 — GHOST]` target re-verified ✓ (GHOST definition lives §4.2; anchor coverage §4.8/§4.11 noted R18-minor at audit time — the §4.2 target remains the correct concept ref); master mirror = the iter-130 KI#78-fold form (`<a href="#p4_ghost">`) |
+| p7b_lorebook_advanced::04 | L259 | ПРАВИЛО: ложная память — только для экспертов | DEFINITION | KEEP | YES | — | open | |
+| p7b_lorebook_advanced::05 | L261–267 | контекстные бюджеты table (4K/8K/16K+) | DEFINITION | KEEP | YES | — | open | |
+| p7b_lorebook_advanced::06 | L269–276 | чеклист интеграции Lorebook (6 ☐) | VALIDATION | KEEP | YES | — | collapsible | F3 validation class (checkbox affordances present — correct, reserved class) + deployed F6 usage (master `<details>`). **Stale note refreshed iter 154:** the «призрак Anchors» word-order slip was FIXED iter 129 (ed-7 R29 normalization: «якоря призрака (GHOST-якоря)» in canon + master mirror, aligned to the L257 RULE wording) — the pre-fix form no longer exists |
 
 **Part 7B verdict:** clean; zero compression candidates. R28 (Elena Greeting dual presentation)
 documented as a compliant IMP-48 pattern — the model pair for future dual-presentation decisions.
+**v2 build slice executed iter 154** (DEC-24 — eighth Part of the v2 build phase; Registry C map
+[`migration_map_v2.md`](./migration_map_v2.md) §5.15): the `presentation` column seeded on all
+Part 7B rows — **25 `open` + 8 `collapsible`** (all eight already-deployed F6 usages documented:
+§7B.2::04 the Elena Greeting worked example; §7B.3::06–::10 the four Lorebook entry examples +
+the EVENT frontend-compatibility table; §7B.4::06 the content-injection example; §7B.5::06 the
+integration checklist — F3 validation class with checkbox affordances) **+ 0 `canonical-link` +
+0 `—`** (zero cluster-owner restatements in full form; zero disposed blocks — the Part verdict
+"clean; zero compression candidates" held). F3: §7B.5::06 = validation class (the only checkbox
+checklist); §7B.1::02 / §7B.2::05 / §7B.3::05 = teaching rule-lists, zero checkbox affordances —
+correct; zero decision-input checklists (the Build entry instrument = §1.8, executed iter 147).
+F4: worked tier = §7B.1::03 + §7B.2::04 + §7B.3::06–::09 + §7B.4::06 (all chipped ИЛЛЮСТРАЦИЯ in
+master); inline tier = the «Пример» column inside the §7B.3::02 structure table (woven, no chip
+invented). F5: verified per section — Concept → Rule → Core example → Reference holds for
+§7B.2 (the R28 Примечание → §10.1), §7B.3 (::04 + ::11 → §7B.4), §7B.4 (::02 → §7B.3, ::07 →
+§7B.5, ::08 GHOST), §7B.5 (::03 → §4.2); §7B.1 is F5-approximate without a Reference branch —
+honest state recorded, not forced (the self-contained 3-block section; inventing a link = a new
+requirement). F6: zero new `<details class="interactive">` (the eight existing usages documented;
+no new qualifying block). Canon: **zero content edits** (`part_07b.md` byte-stable — the Part
+hosts no cluster owner, no fold candidate). Master: three mirror completions (map §5.15 P7B-3 —
+the §7B.3::04 ref-target fix + two «Ссылка» completions). Stale notes refreshed: §7B.5::06 (the
+R29 pre-fix state). Master-only enrichments + variances recorded as deferred observations (map
+§5.15 P7B-4).
 
 ---
 
