@@ -555,6 +555,56 @@ root `index.html` timestamp). Drift actionable 159 → **158** (−1: the §1.8
 canonical-marker/intro pairing resolved by the reframe + matching markers).
 Next Part: **Part 2** (guide order; its own slice reuses this shape).
 
+### 5.9 Part 2 v2 build slice (seeded + executed iter 148 — v2 build phase, second Part)
+
+Scope: **Part 2 — Behavioral Anchors** (6 sections, 26 block rows; DEC-24 Q6 guide order — Part 2
+second; the per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the
+ratification gate cleared by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape
+(evidence → canon restructure → master mirror → full battery) — second application, reusing the
+§5.8 pattern. Primary reader mode: **Learn** (the core teaching Part — full-narrative default
+visibility per the spec §3). Editorial Policy 5-point check applied per edit (documented per row
+below). Acceptance gate: the full battery (sync 97/97 + parity ×7 + build + validate + tests +
+qa baselines) — **no new cluster parity gate**: Part 2 owns no cluster values (verified: the
+seven cluster owners — §7A.2 / §7A.12 / §7A.6 / §5.4 / §9.6 / §3.2 / glossary registry —
+untouched; Part 2's RULEs are compliant apply-layers, matrix R24 / R07-family / Price whitelist).
+
+**F2 presentation map (spec §4.1 mechanism, second application):** the Part 2 matrix tables now
+carry the `presentation` column (26 rows; matrix §1.2 scope note extended to Parts 1–2).
+Disposition: **all `open`** — Part 2 is the Learn-mode core teaching Part (BASIC §2.1–§2.4,
+INTERMEDIATE §2.5–§2.6) and its blocks are core teaching content (canonical definitions, rules,
+tables, protected examples — every block under 100 words); no block meets the registered
+Collapsible criteria (`docs/components.md` #5: nothing supplementary, nothing >200 words, no
+technical-reference material). F3: the §2.2 «Критерии качества якорей» list = teaching class
+(stays prose/list; checkbox affordances reserved for §9.3/§9.11); zero decision-input checklists
+in Part 2 (the Build-mode entry instrument = §1.8, executed iter 147). F4: the §2.2
+antipattern-card + §2.6 Выщербленный = worked tier (labelled ИЛЛЮСТРАЦИЯ, recognition function);
+the §2.1/§2.3 tables = inline tier — compliant. F5: canon verified F5-approximate as-is —
+§2.1+§2.2 form the Concept→Rule→Core-example pair (failure-mode demo = ::04 RULE + ::05 table;
+edge cases = §2.6; Reference = live inline refs ::03/::06/::07) — **zero canon content edits**.
+F6: **zero new `<details class="interactive">`** — no qualifying block (honest application of
+the component criteria, not forced).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P2-1 | — (evidence) | matrix Part 2 tables: 8 columns, no presentation axis | `presentation` column seeded (26 rows, all `open`); matrix §1.2 scope note extended to Parts 1–2; Part 2 verdict + iter-148 slice note appended | EXECUTED **— iter 148** | DEC-24 Q2 (F2 matrix-column mechanism) |
+| P2-2 | `p2_anchor_rules::02` | quality-criteria 4-bullet list (matrix row, KEEP) | unchanged — F3 teaching class (walks anchor-quality concepts; stays prose/list); zero checkbox affordances (reserved §9.3/§9.11); zero decision-input checklists in Part 2 | UNCHANGED (verified iter 148) | DEC-24 Q3 (F3 triage); Editorial Policy: no edit = no load change |
+| P2-3 | `p2_anchor_rules::05`, `p2_sensory_anchors::04` | worked examples (antipattern-card + Выщербленный code, ИЛЛЮСТРАЦИЯ-labelled) | unchanged — F4 compliant: worked tier where labelled + recognition function (anti-pattern «потом будет жалеть» / sensory-anchor format); §2.1/§2.3 tables = inline tier | UNCHANGED (verified iter 148) | DEC-24 Q3 (F4); research §21 example protection (R22) |
+| P2-4 | — (master layer) | master §2.3 closing transition «Якоря определяют, **что** делает персонаж. Но поведение — это не только действие, но и **голос**. Следующая часть — о том, где голос живёт в карточке и как его изолировать от описания.» — master-only since the v7 unified migration (`eb4b91bd`, 2026-05-14), never canonized; «Следующая часть» factually premature at §2.3 (§2.4–§2.6 follow); no `bridge-paragraph` class; escaped the iter-47 bridge cleanup (probe P2-3-del-02 targeted the other, older bridge text) | paragraph removed: §2.3 closes on the anchors table; the E04 embed's link-back («Embodiment = механизм внутри Anchor Action → См. E03») carries the §2.3→§2.4 flow; Part-3 navigation stays at §1.7 Ошибка 2 (`[ref: part_03.md §3.1]`) + TOC + linear order | REMOVED_WITH_REASON **— executed iter 148** | 5-point check: capability (premature Part-3 pointer — nothing unique; the action/voice split is owned by §1.4 principle 2 + Part 3), coverage (§1.4 / §2.1 / Part 3), retrieval (mid-Part reader does not need Part-3 anticipation), context (§2.3 closes on the table; the E04 embed follows naturally), dependency (grep-verified: «Якоря определяют» / «где голос живёт» absent from scripts/tests/docs); corpus law: «Переход» budget «только 1–2 на гайд» (canon `_README.md` §3.9) already spent by the two sanctioned canon-synced bridges (part_06 `p6_cot_bridge`, part_09) |
+| P2-5 | — (canon F5/F6) | canon `part_02.md` vs the F5 micro-template | verified F5-approximate as-is (Concept→Rule→Core example per section pair; ▸Failure modes = §2.2 ::04/::05; ▸Edge cases = §2.6; Reference = live inline refs ::03/::06/::07); F6 = zero qualifying blocks; **zero canon content edits** — the matrix verdict «canonical teaching part, near-clean» holds at v2 | VERIFIED **— iter 148** | DEC-24 Q4 (F5/F6); Editorial Policy (no redundant presentation found) |
+| P2-6 | — (state) | STATUS iter-147 / PLAN row v2-build-part-2 open / no map §5.9 | map §5.9 + STATUS iter-148 (KI#72 row deleted per lifecycle) + PLAN v2-build-part-3 + worklog + CHANGELOG + NAV §7 de-stale (v2_architecture + editorial_matrix rows — current-state mandate) + `audit_sampling_parity.py` check 12 KI#72 sub-check extended to accept the lifecycle-deleted state (row deleted per AGENTS.md KI lifecycle ⇔ the audit still required the live CLOSED row — stale against the law; the check now accepts EITHER the live row OR the recorded lifecycle-deletion note; protective intent preserved); Next step re-pinned to the Part 3 slice | EXECUTED **— iter 148** | iter-147 state-package pattern; authority order (AGENTS.md law > tool snapshot) |
+
+Accounting: 1 presentation-column seeding (26 rows, all `open`) + 3 F-policy verifications with
+zero content edits (F3 / F4 / F5-F6) + 1 master-side drift disposal (P2-4) + 1 state package
+(P2-6, incl. the `audit_sampling_parity.py` KI#72 lifecycle-check extension — the only
+infrastructure touch, forced by the AGENTS.md-mandated row deletion). Byte-unchanged: canon `part_02.md` entirely (front-matter staleness deferred,
+repo-wide); master §2.1/§2.2/§2.4/§2.5/§2.6 entirely; matrix tag/decision/load/repeat columns
+unchanged. Deferred (recorded, out of scope): canon front-matter `vs_embedded` staleness (rides
+the v2 canon format); KI#79 drift-tool regex (tooling); the §9.4↔§9.5 fold candidate (rides the
+Part 9 slice). Root fallback `parts/part_02.html` regenerated with the slice (+ root
+`index.html` timestamp). Drift actionable **158 → 158** (the disposed paragraph was master-side
+— not a canon-side actionable class; verified by tool-mechanism analysis pre-edit and by the
+post-edit run). Next Part: **Part 3** (guide order; its own slice reuses this shape).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -868,3 +918,21 @@ Next Part: **Part 2** (guide order; its own slice reuses this shape).
   mirrors + §1.7 Ссылка paragraph restored + §1.8 drift closing line (dead self-link) disposed
   REMOVED_WITH_REASON; root fallback `parts/part_01.html` regenerated. Drift actionable
   159 → 158. Battery: full — see STATUS/worklog. Next: Part 2 slice (guide order).
+- **iter 148 (Part 2 v2 build slice, BASE_COMMIT `8e988916`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-2, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.9 (P2-1..P2-6)** on the spec §7 shape (second application, reusing the
+  §5.8 pattern): evidence — the matrix Part 2 tables gain the F2 `presentation` column
+  (26 rows, all `open` — Learn-mode core teaching Part; the Collapsible criteria honestly
+  applied: zero qualifying blocks) + this §5.9 registry; canon — verified F5-approximate as-is,
+  **zero content edits** (the matrix verdict «canonical teaching part, near-clean» holds at v2);
+  master — the §2.3 master-only v7-era closing transition (never canonized; «Следующая часть»
+  premature — §2.4–§2.6 follow) disposed REMOVED_WITH_REASON (5-point check + grep-verified
+  zero dependencies; the «Переход» budget 1–2 per guide already spent by part_06/part_09);
+  KI#72 row deleted from STATUS (lifecycle — closed iter-145, iterations 146/147 elapsed), with
+  `audit_sampling_parity.py` check 12's KI#72 sub-check extended to accept the lifecycle-deleted
+  state (the audit still required the live CLOSED row — stale against the AGENTS.md KI lifecycle;
+  accepts the live row OR the recorded deletion note);
+  NAV §7 de-staled (v2_architecture RATIFIED + editorial_matrix Phases A+B rows — current-state
+  mandate); root fallback `parts/part_02.html` regenerated. Drift actionable 158 → 158
+  (master-side disposal — the canon-side actionable classes untouched). Battery: full — see
+  STATUS/worklog. Next: Part 3 slice (guide order).

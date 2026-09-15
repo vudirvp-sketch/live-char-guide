@@ -68,7 +68,10 @@ Checks:
 12. Map/matrix/registries parity: §5.7 SP-1..SP-12; Registry A E17 + E12;
     Registry B sampling row → DECIDED (DEC-22) / executed iter 145; §6
     preamble; §7 iteration log; matrix back-pointers; STATUS KI#72 CLOSED
-    iter-145; disposal complete; AGENTS.md canon-audits carries the gate.
+    iter-145 (or, from iter 148+, its recorded lifecycle deletion — the row
+    is deleted after 2+ closed iterations per the AGENTS.md KI lifecycle;
+    git history = the archive); disposal complete; AGENTS.md canon-audits
+    carries the gate.
 
 Deferred layers (reported as notes, never failures):
   - visual-system/PLAN.md table copy (frozen design doc, DEC-19 — archive =
@@ -572,12 +575,17 @@ def main():
         err("editorial_matrix.md: R12 row does not record the iter-145 execution")
 
     status = read(STATUS)
-    if "KI#72" not in status:
-        err("STATUS.md: KI#72 row missing")
-    else:
-        ki72 = next((ln for ln in status.split("\n") if ln.startswith("| KI#72 |")), None)
-        if ki72 is None or "CLOSED iter-145" not in ki72:
+    ki72 = next((ln for ln in status.split("\n") if ln.startswith("| KI#72 |")), None)
+    if ki72 is not None:
+        # Pre-deletion state (iters 145-147): the live row carries the fix.
+        if "CLOSED iter-145" not in ki72:
             err("STATUS.md: KI#72 not marked CLOSED iter-145")
+    elif "KI#72 (CLOSED iter-145) row deleted per lifecycle" not in status:
+        # Lifecycle-deleted state (iter 148+): AGENTS.md KI lifecycle deletes
+        # the row after 2+ closed iterations; the durable record = the
+        # lifecycle note here + git history (iter-145 commit 0ed3d787).
+        err("STATUS.md: KI#72 neither a CLOSED iter-145 row nor a recorded "
+            "lifecycle deletion")
 
     if "audit_sampling_parity.py" not in read(AGENTS):
         err("AGENTS.md: canon-audits block does not carry audit_sampling_parity.py")

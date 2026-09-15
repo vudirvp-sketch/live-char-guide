@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Part 1 since iter 147); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–2: iters 147–148); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -555,62 +555,77 @@ KI#21 G1+G2» sits outside section blocks — recorded in the R17 registry (non-
 
 ### p2_basic_anchors (§2.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p2_basic_anchors::01 | L19 | Anchor definition (T→A→P) | DEFINITION | KEEP | YES | — | Canonical |
-| p2_basic_anchors::02 | L21 | `[VS: E03]` marker | METADATA | KEEP | YES | — | Declared replacement (inf-pipeline + plain-copy dupe) |
-| p2_basic_anchors::03 | L23 | E03 complement note | METADATA | KEEP | YES | — | Declared complement: table = concrete per-stage examples |
-| p2_basic_anchors::04 | L25–29 | stage example table | APPLICATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p2_basic_anchors::01 | L19 | Anchor definition (T→A→P) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p2_basic_anchors::02 | L21 | `[VS: E03]` marker | METADATA | KEEP | YES | — | open | Declared replacement (inf-pipeline + plain-copy dupe) |
+| p2_basic_anchors::03 | L23 | E03 complement note | METADATA | KEEP | YES | — | open | Declared complement: table = concrete per-stage examples |
+| p2_basic_anchors::04 | L25–29 | stage example table | APPLICATION | KEEP | YES | — | open | |
 
 ### p2_anchor_rules (§2.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p2_anchor_rules::01 | L40–46 | recommended anchor count table (3-5 / 5-7 / 7-12) | DEFINITION | KEEP | YES | — | Consistent with §0.2 step-5 «3–5» |
-| p2_anchor_rules::02 | L48–53 | quality criteria (4 bullets) | DEFINITION | KEEP | YES | — | |
-| p2_anchor_rules::03 | L55 | RULE: anchors/FLAW = concrete actions («Он неуверенный» ≠ якорь) → §4.4 | DEFINITION | KEEP | YES | REINFORCEMENT | R24 (formulation principle, anchor-side; §4.4 = FLAW-side; ref correct) |
-| p2_anchor_rules::04 | L57 | RULE: delayed price invalid («потом будет жалеть») | DEFINITION | KEEP | YES | REINFORCEMENT | Price = whitelisted recurrence (§20) |
-| p2_anchor_rules::05 | L59–63 | delayed vs immediate price table | EXAMPLE | KEEP | YES | — | |
-| p2_anchor_rules::06 | L65–70 | Price types table (2 types; Walter ref §10.2 ✓) | DEFINITION | KEEP | YES | — | |
-| p2_anchor_rules::07 | L72 | RULE: influence boundary → §7A.2 CD#5 | DEFINITION | KEEP | YES | REINFORCEMENT | Apply-layer of Influence Boundary, correct ref |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p2_anchor_rules::01 | L40–46 | recommended anchor count table (3-5 / 5-7 / 7-12) | DEFINITION | KEEP | YES | — | open | Consistent with §0.2 step-5 «3–5» |
+| p2_anchor_rules::02 | L48–53 | quality criteria (4 bullets) | DEFINITION | KEEP | YES | — | open | |
+| p2_anchor_rules::03 | L55 | RULE: anchors/FLAW = concrete actions («Он неуверенный» ≠ якорь) → §4.4 | DEFINITION | KEEP | YES | REINFORCEMENT | open | R24 (formulation principle, anchor-side; §4.4 = FLAW-side; ref correct) |
+| p2_anchor_rules::04 | L57 | RULE: delayed price invalid («потом будет жалеть») | DEFINITION | KEEP | YES | REINFORCEMENT | open | Price = whitelisted recurrence (§20) |
+| p2_anchor_rules::05 | L59–63 | delayed vs immediate price table | EXAMPLE | KEEP | YES | — | open | |
+| p2_anchor_rules::06 | L65–70 | Price types table (2 types; Walter ref §10.2 ✓) | DEFINITION | KEEP | YES | — | open | |
+| p2_anchor_rules::07 | L72 | RULE: influence boundary → §7A.2 CD#5 | DEFINITION | KEEP | YES | REINFORCEMENT | open | Apply-layer of Influence Boundary, correct ref |
 
 ### p2_anchor_examples (§2.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p2_anchor_examples::01 | L82 | intro | NAVIGATION | KEEP | YES | — | |
-| p2_anchor_examples::02 | L84–91 | ready anchors by trigger table (6 rows) | EXAMPLE | KEEP | YES | — | Canonical examples; Part 10 cards reuse rows as protected card content |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p2_anchor_examples::01 | L82 | intro | NAVIGATION | KEEP | YES | — | open | |
+| p2_anchor_examples::02 | L84–91 | ready anchors by trigger table (6 rows) | EXAMPLE | KEEP | YES | — | open | Canonical examples; Part 10 cards reuse rows as protected card content |
 
 ### p2_embodiment (§2.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p2_embodiment::01 | L102 | Embodiment definition | DEFINITION | KEEP | YES | — | Canonical |
-| p2_embodiment::02 | L104 | `[VS: E04]` marker | METADATA | KEEP | YES | — | Declared replacement |
-| p2_embodiment::03 | L106 | E04 complement note | METADATA | KEEP | YES | — | Declared complement |
-| p2_embodiment::04 | L108–113 | 4-layer example categories table | APPLICATION | KEEP | YES | — | |
-| p2_embodiment::05 | L115 | sensory layer note (texture THROUGH action) | DEFINITION | KEEP | YES | — | |
-| p2_embodiment::06 | L117–123 | embodiment examples table (3 rows) | EXAMPLE | KEEP | YES | — | |
-| p2_embodiment::07 | L125 | RECOMMENDATION: every Example ≥1 physical reaction | APPLICATION | KEEP | YES | REINFORCEMENT | CD#2 apply-layer |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p2_embodiment::01 | L102 | Embodiment definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p2_embodiment::02 | L104 | `[VS: E04]` marker | METADATA | KEEP | YES | — | open | Declared replacement |
+| p2_embodiment::03 | L106 | E04 complement note | METADATA | KEEP | YES | — | open | Declared complement |
+| p2_embodiment::04 | L108–113 | 4-layer example categories table | APPLICATION | KEEP | YES | — | open | |
+| p2_embodiment::05 | L115 | sensory layer note (texture THROUGH action) | DEFINITION | KEEP | YES | — | open | |
+| p2_embodiment::06 | L117–123 | embodiment examples table (3 rows) | EXAMPLE | KEEP | YES | — | open | |
+| p2_embodiment::07 | L125 | RECOMMENDATION: every Example ≥1 physical reaction | APPLICATION | KEEP | YES | REINFORCEMENT | open | CD#2 apply-layer |
 
 ### p2_env_reactivity (§2.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p2_env_reactivity::01 | L136 | definition (environment through action) | DEFINITION | KEEP | YES | REINFORCEMENT | CD#4 teaching site (canonical; §7A.2 and glossary apply it) |
-| p2_env_reactivity::02 | L138–141 | ПРИМЕР: декорация vs действие | EXAMPLE | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p2_env_reactivity::01 | L136 | definition (environment through action) | DEFINITION | KEEP | YES | REINFORCEMENT | open | CD#4 teaching site (canonical; §7A.2 and glossary apply it) |
+| p2_env_reactivity::02 | L138–141 | ПРИМЕР: декорация vs действие | EXAMPLE | KEEP | YES | — | open | |
 
 ### p2_sensory_anchors (§2.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p2_sensory_anchors::01 | L152 | intro | NAVIGATION | KEEP | YES | — | |
-| p2_sensory_anchors::02 | L154 | Sensory Anchor definition | DEFINITION | KEEP | YES | — | |
-| p2_sensory_anchors::03 | L156–164 | 5 sensory channels table | DEFINITION | KEEP | YES | — | Canonical |
-| p2_sensory_anchors::04 | L166–173 | Пример: Выщербленный (3 sensory anchors, code) | EXAMPLE | KEEP | YES | REINFORCEMENT | **R22:** re-used near-verbatim in the §10.4 production card (teach vs card = changed function, §21 protection) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p2_sensory_anchors::01 | L152 | intro | NAVIGATION | KEEP | YES | — | open | |
+| p2_sensory_anchors::02 | L154 | Sensory Anchor definition | DEFINITION | KEEP | YES | — | open | |
+| p2_sensory_anchors::03 | L156–164 | 5 sensory channels table | DEFINITION | KEEP | YES | — | open | Canonical |
+| p2_sensory_anchors::04 | L166–173 | Пример: Выщербленный (3 sensory anchors, code) | EXAMPLE | KEEP | YES | REINFORCEMENT | open | **R22:** re-used near-verbatim in the §10.4 production card (teach vs card = changed function, §21 protection) |
 
 **Part 2 verdict:** canonical teaching part, near-clean. Zero compression candidates; repeats are
 compliant applications (R24, R07-family, Price whitelist) or protected example re-use (R22).
+
+**v2 build slice executed iter 148** (DEC-24 — second Part of the v2 build phase; Registry C map
+[`migration_map_v2.md`](./migration_map_v2.md) §5.9): the `presentation` column seeded on all 26
+Part 2 rows — **all `open`**: Part 2 is the Learn-mode core teaching Part (BASIC difficulty §2.1–§2.4,
+INTERMEDIATE §2.5–§2.6; full-narrative default visibility per the spec §3), every block is core
+teaching content under 100 words, and no block meets the registered Collapsible criteria
+(`docs/components.md` #5: nothing supplementary, nothing >200 words, no technical-reference
+material). F3: the §2.2 «Критерии качества якорей» list = teaching class (stays prose/list; zero
+checkbox affordances — reserved for §9.3/§9.11); no decision-input checklist lives in Part 2 (the
+Build-mode entry instrument = §1.8, executed iter 147). F4: §2.2 antipattern-card and §2.6
+Выщербленный = worked tier (labelled ИЛЛЮСТРАЦИЯ, recognition function); §2.1/§2.3 tables =
+inline tier — compliant. F5/F6: canon verified F5-approximate as-is (zero content edits); master
+§2.3 closing transition — a master-only v7-era leftover (never canonized; «Следующая часть»
+premature — §2.4–§2.6 follow) — disposed REMOVED_WITH_REASON (map §5.9 P2-4). Line refs on
+pre-existing rows = audit-time anchors (iter 126), not re-based — iter-147 slice precedent.
 
 ---
 
