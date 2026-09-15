@@ -43,7 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–5: iters 147–151); other Parts get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Parts 1–6: iters 147–152); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -904,61 +904,81 @@ master-side cleanup dropped (P5-4). The master-only enrichments recorded as defe
 
 ### p6_cot_bridge (§6.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p6_cot_bridge::01 | L18 | CoT definition + Model ref (Appendix B) | DEFINITION | KEEP | YES | — | Canonical bridge definition |
-| p6_cot_bridge::02 | L20–25 | «Что добавляет CoT» list (4 bullets) | NAVIGATION | KEEP | YES | — | Part-6 feature map |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p6_cot_bridge::01 | L18 | CoT definition + Model ref (Appendix B) | DEFINITION | KEEP | YES | — | open | Canonical bridge definition |
+| p6_cot_bridge::02 | L20–25 | «Что добавляет CoT» list (4 bullets) | NAVIGATION | KEEP | YES | — | open | Part-6 feature map |
 
 ### p6_cot_basics (§6.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p6_cot_basics::01 | L36 | CoT definition (техника) + Model ref | DEFINITION | KEEP | YES | REINFORCEMENT | Complementary framing to §6.1::01 (mechanism vs technique), not a copy |
-| p6_cot_basics::02 | L38 | foundation para (Part 2 + Part 4 + CoT principles) | DEFINITION | KEEP | YES | — | |
-| p6_cot_basics::03 | L40 | ПРАВИЛО: 2–3 CoT-якоря max (AP-10 ref ✓) | DEFINITION | KEEP | YES | — | Canonical |
-| p6_cot_basics::04 | L42–47 | почему ограничение (4 bullets) | DEFINITION | KEEP | YES | — | |
-| p6_cot_basics::05 | L49–53 | как выбрать 2–3 якоря (3 bullets) | APPLICATION | KEEP | YES | — | |
-| p6_cot_basics::06 | L55–59 | зачем нужен CoT (3 bullets; Tier gating) | DEFINITION | KEEP | YES | — | Tier gating consistent with Appendix B ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p6_cot_basics::01 | L36 | CoT definition (техника) + Model ref | DEFINITION | KEEP | YES | REINFORCEMENT | open | Complementary framing to §6.1::01 (mechanism vs technique), not a copy |
+| p6_cot_basics::02 | L38 | foundation para (Part 2 + Part 4 + CoT principles) | DEFINITION | KEEP | YES | — | open | |
+| p6_cot_basics::03 | L40 | ПРАВИЛО: 2–3 CoT-якоря max (AP-10 ref ✓) | DEFINITION | KEEP | YES | — | open | Canonical |
+| p6_cot_basics::04 | L42–47 | почему ограничение (4 bullets) | DEFINITION | KEEP | YES | — | open | ▸Why branch of the §6.2 F5 shape |
+| p6_cot_basics::05 | L49–53 | как выбрать 2–3 якоря (3 bullets) | APPLICATION | KEEP | YES | — | open | |
+| p6_cot_basics::06 | L55–59 | зачем нужен CoT (3 bullets; Tier gating) | DEFINITION | KEEP | YES | — | open | Tier gating consistent with Appendix B ✓ |
 
 ### p6_cot_tiers (§6.3)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p6_cot_tiers::01 | L70 | intro: 4 Tiers; Tier 0 = Embodiment baseline | DEFINITION | KEEP | YES | — | Canonical (Tier 0 ≠ «модель не думает») |
-| p6_cot_tiers::02 | L72 | E11 note (staircase; table complements) | METADATA | KEEP | YES | — | Declared complement |
-| p6_cot_tiers::03 | L74–79 | tier table (Tier / модели / пример) | DEFINITION | KEEP | YES | — | Consistent with Appendix B CoT row ✓ |
-| p6_cot_tiers::04 | L81 | Ссылка: E11 в preamble | NAVIGATION | KEEP | YES | — | |
-| p6_cot_tiers::05 | L83 | Примечание (iter 29, KI#18-F partial fix) — rus/eng overlap rationale | METADATA | COMPRESS | YES | DUPLICATE | **R17:** canon-only note (verified — absent in master `part_06.html`); strip the iter/KI history label, keep the accessibility rationale («сохранены для accessibility — русские переводы примеров») as a plain current-state note |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p6_cot_tiers::01 | L70 | intro: 4 Tiers; Tier 0 = Embodiment baseline | DEFINITION | KEEP | YES | — | open | Canonical (Tier 0 ≠ «модель не думает») |
+| p6_cot_tiers::02 | L72 | E11 note (staircase; table complements) | METADATA | KEEP | YES | — | open | Declared complement |
+| p6_cot_tiers::03 | L74–79 | tier table (Tier / модели / пример) | DEFINITION | KEEP | YES | — | open | Consistent with Appendix B CoT row ✓ |
+| p6_cot_tiers::04 | L81 | Ссылка: E11 в preamble | NAVIGATION | KEEP | YES | — | open | Master mirror added iter 152 (the missing «Ссылка» block — the P4-4(b)/`p4_ghost_layers::05` canon-side-drift restoration family; map §5.13 P6-3) |
+| p6_cot_tiers::05 | L83 | Примечание — rus/eng overlap rationale (accessibility) | METADATA | COMPRESS | YES | DUPLICATE | open | **R17:** canon-only note by design (verified — absent from master `part_06.html`); the iter/KI history label was stripped iter 128 (ed-8 Phase B continuation — the current canon form keeps the accessibility rationale + the deferred rus/eng-overlap decision); stays canon-side only — → migration_map_v2 §5.13 P6-4(e) |
 
 ### p6_cot_tier2 (§6.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p6_cot_tier2::01 | L93 | intro | DEFINITION | KEEP | YES | — | |
-| p6_cot_tier2::02 | L95–105 | Синтаксис + ШАБЛОН (code) | DEFINITION | KEEP | YES | — | Canonical Tier 2 template |
-| p6_cot_tier2::03 | L107–122 | Пример: Елена (ILLUSTRATION + code) | EXAMPLE | KEEP | YES | — | Canon carries the EN label `**ILLUSTRATION** — Demonstrates:`; master renders the RU label + EN list in an HTML comment (verified) — presentation variance only |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p6_cot_tier2::01 | L93 | intro | DEFINITION | KEEP | YES | — | open | |
+| p6_cot_tier2::02 | L95–105 | Синтаксис + ШАБЛОН (code) | DEFINITION | KEEP | YES | — | open | Canonical Tier 2 template |
+| p6_cot_tier2::03 | L107–122 | Пример: Елена (ILLUSTRATION + code) | EXAMPLE | KEEP | YES | — | open | Canon carries the EN label `**ILLUSTRATION** — Demonstrates:`; master renders the RU label + EN list in an HTML comment (verified) — presentation variance only (deferred P6-4(f), map §5.13) |
 
 ### p6_cot_tier3 (§6.5)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p6_cot_tier3::01 | L132 | intro | DEFINITION | KEEP | YES | — | |
-| p6_cot_tier3::02 | L134–152 | Синтаксис + ШАБЛОН (code) | DEFINITION | KEEP | YES | — | Canonical Tier 3 template |
-| p6_cot_tier3::03 | L154 | processus_analysium naming rationale | DEFINITION | KEEP | YES | — | Canonical (why this tag name) |
-| p6_cot_tier3::04 | L156–173 | Пример: Выщербленный (code) | EXAMPLE | KEEP | YES | — | **R23 source** — re-used in §6.6 (table) + §10.4 (card, verbatim) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p6_cot_tier3::01 | L132 | intro | DEFINITION | KEEP | YES | — | open | |
+| p6_cot_tier3::02 | L134–152 | Синтаксис + ШАБЛОН (code) | DEFINITION | KEEP | YES | — | open | Canonical Tier 3 template |
+| p6_cot_tier3::03 | L154 | processus_analysium naming rationale | DEFINITION | KEEP | YES | — | open | Canonical (why this tag name) |
+| p6_cot_tier3::04 | L156–173 | Пример: Выщербленный (code) | EXAMPLE | KEEP | YES | — | open | **R23 source** — re-used in §6.6 (table) + §10.4 (card, verbatim); the EN-label presentation variance deferred P6-4(f), map §5.13 |
 
 ### p6_cot_anchors (§6.6)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p6_cot_anchors::01 | L184 | CoT-якорь definition | DEFINITION | KEEP | YES | — | Canonical |
-| p6_cot_anchors::02 | L186–190 | Структура (formula code) | DEFINITION | KEEP | YES | — | |
-| p6_cot_anchors::03 | L192–199 | Примеры table (2 Выщербленный rows) | EXAMPLE | KEEP | YES | REINFORCEMENT | R23 compressed-table form of §6.5 example |
-| p6_cot_anchors::04 | L201 | ПРАВИЛО: CoT Overload AP-10 (ref §8.11 ✓) | DEFINITION | KEEP | YES | REINFORCEMENT | Catalog-site of §6.2::03 (changed function, correct ref) |
-| p6_cot_anchors::05 | L203 | Переход → Part 7A | NAVIGATION | KEEP | YES | — | 1 of the 2 declared bridges ✓ |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p6_cot_anchors::01 | L184 | CoT-якорь definition | DEFINITION | KEEP | YES | — | open | Canonical |
+| p6_cot_anchors::02 | L186–190 | Структура (formula code) | DEFINITION | KEEP | YES | — | open | |
+| p6_cot_anchors::03 | L192–199 | Примеры table (2 Выщербленный rows) | EXAMPLE | KEEP | YES | REINFORCEMENT | open | R23 compressed-table form of §6.5 example |
+| p6_cot_anchors::04 | L201 | ПРАВИЛО: CoT Overload AP-10 (ref §8.11 ✓) | DEFINITION | KEEP | YES | REINFORCEMENT | open | Catalog-site of §6.2::03 (changed function, correct ref) |
+| p6_cot_anchors::05 | L203 | Переход → Part 7A | NAVIGATION | KEEP | YES | — | open | 1 of the 2 declared bridges ✓ |
 
-**Part 6 verdict:** clean. One canon-only repo-meta note (R17, §6.3::05); the CoT example family
-(R23) = 3 compliant functions (teach / summary table / production card).
+**Part 6 verdict (audit-time, iter 126):** clean. One canon-only repo-meta note (R17, §6.3::05); the CoT
+example family (R23) = 3 compliant functions (teach / summary table / production card).
+
+**v2 build slice executed iter 152** (DEC-24 — sixth Part of the v2 build phase; Registry C map
+[`migration_map_v2.md`](./migration_map_v2.md) §5.13): the `presentation` column seeded on all
+25 Part 6 rows — **all `open`**: Part 6 is the Learn-mode core teaching Part for CoT (INTERMEDIATE
+§6.1–§6.3, EXPERT §6.4–§6.6 per the canon difficulty markers) and every block is canonical teaching
+content (definitions, RULE callouts, the canonical Tier 0–3 table, the Tier 2/Tier 3 templates and
+their protected worked examples, the §6.6 examples table) under the registered Collapsible
+thresholds → zero qualifying F6 blocks (honest application, not forced). F3: zero checklists (the
+§6.2 «как выбрать 2–3 якоря» list + the §6.1 «Что добавляет CoT» map = teaching/application lists,
+zero checkbox affordances; zero decision-input checklists — the Build entry instrument = §1.8,
+executed iter 147). F4: worked tier = the §6.4 Елена + §6.5 Выщербленный code examples + the §6.6
+examples table (all chipped ИЛЛЮСТРАЦИЯ in master); the §6.3 tier-table «Пример» column = inline
+tier (woven into the canonical table; no chip invented). F5: verified per section (Concept → Rule →
+Core example → Reference; ▸Why = the §6.2 «почему ограничение» bullets; Reference branches live:
+§6.3::04→E11 — the master mirror completed this slice, §6.6::05 Переход→Part 7A). F6: zero new
+`<details class="interactive">` (zero existing in part_06 master). Canon: verified F5-approximate
+as-is, **zero content edits** (`part_06.md` byte-unchanged; the R17 ::05 strip already executed
+iter 128). Master: the §6.3::04 «Ссылка» mirror added (P6-3 — the missing Reference-branch block,
+pickaxe-verified never present). The master-only enrichments + variances (the E11 canon-declaration
+gap incl.) recorded as deferred observations (P6-4, map §5.13).
 
 ---
 

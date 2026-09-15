@@ -787,6 +787,62 @@ two repaired master paragraphs already matched their canon counterparts above th
 threshold; the P5-4 restoration raises the §5.5::05 pair's similarity, no count effect; verified
 by the JSON pre/post diff). Next Part: **Part 6** (guide order; its own slice reuses this shape).
 
+### 5.13 Part 6 v2 build slice (seeded + executed iter 152 — v2 build phase, sixth Part)
+
+Scope: **Part 6 — CoT** (6 sections, 25 block rows; DEC-24 Q6 guide order — Part 6 sixth; the
+per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate cleared
+by DEC-24). Mechanism: the ratified spec §7 per-Part slice shape (evidence → canon restructure →
+master mirror → full battery) — sixth application, reusing the §5.8–§5.12 pattern. Primary reader
+mode: **Learn** (the core teaching Part for CoT — full-narrative default visibility per the spec
+§3). Editorial Policy 5-point check applied per edit (documented per row below). Acceptance gate:
+the full battery (sync 97/97 + parity ×7 + build + validate + tests + qa baselines) — **no new
+cluster parity gate**: Part 6 hosts no cluster owner (verified: the seven cluster owners — §7A.2 /
+§7A.12 / §7A.6 / §5.4 / §9.6 / §3.2 / glossary registry — sit outside Part 6; Part 6 references
+Appendix B / CoT mechanics only); the E11 embed (the Part's one VS-EMBED; Registry A disposition
+still PROPOSED) stays untouched — the E09/E05/E06 precedent (non-cluster embeds ride their own
+audit time; the canon-declaration gap recorded P6-4(d)).
+
+**F2 presentation map (spec §4.1 mechanism, sixth application):** the Part 6 matrix tables now
+carry the `presentation` column (25 rows; matrix §1.2 scope note extended to Parts 1–6).
+Disposition: **25 × `open`** — Part 6 is the Learn-mode core teaching Part for CoT (INTERMEDIATE
+§6.1–§6.3, EXPERT §6.4–§6.6 per the canon difficulty markers) and every block is canonical teaching
+content (definitions, RULE callouts, the canonical Tier 0–3 table, the Tier 2/Tier 3 templates and
+their protected worked examples — the code blocks ~60–90 words each are the sections' core
+demonstrations = required reading; the R23 CoT example family = whitelisted useful repetition,
+matrix §1.3 rule 5) → zero qualifying F6 blocks (honest application, not forced). F3: zero
+checklists — the §6.2 «как выбрать 2–3 якоря» list + the §6.1 «Что добавляет CoT» map =
+teaching/application lists, zero checkbox affordances; zero decision-input checklists (the Build
+entry instrument = §1.8, executed iter 147). F4: worked tier = the §6.4 Елена + §6.5 Выщербленный
+code examples + the §6.6 examples table (all chipped ИЛЛЮСТРАЦИЯ in master, with the Demonstrates
+lists as HTML comments); the §6.3 tier-table «Пример» column = inline tier (woven into the
+canonical table; no chip invented). F5: verified per section (Concept → Rule → Core example →
+Reference; ▸Why = the §6.2 «почему ограничение» bullets; Reference branches live: §6.3::04→E11 —
+the master mirror completed this slice (P6-3), §6.6::05 Переход→Part 7A). F6: zero new
+`<details class="interactive">` (zero existing in part_06 master).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P6-1 | — (evidence) | matrix Part 6 tables: 8 columns, no presentation axis | `presentation` column seeded (25 rows, all `open`); matrix §1.2 scope note extended to Parts 1–6; the Part 6 verdict re-labeled audit-time + the iter-152 slice note appended; **one stale note refreshed** — `p6_cot_tiers::05` (the R17 iter/KI-history-label strip was executed iter 128, ed-8 Phase B continuation — the note described the pre-strip state with the «iter 29, KI#18-F partial fix» descriptor; the current canon form keeps only the accessibility rationale + the deferred rus/eng-overlap decision); the ::04 note extended with the P6-3 mirror record; the ::03/::04 EN-label variances re-pointed to the P6-4(f) deferral | EXECUTED **— iter 152** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149/150/151 stale-note-refresh precedent |
+| P6-2 | — (canon) | canon `part_06.md` (203 lines) — preflight full read: F5-approximate per section (Concept → Rule → Core example → Reference; ▸Why = the §6.2 bullets); zero unexecuted COMPRESS/DELETE rows (the one R17 candidate #17 executed iter 128) | **unchanged — verified byte-stable** (zero canon content edits: `part_06.md` byte-unchanged through the slice; the Tier 0–3 canonical table, the Tier 2/Tier 3 templates, the §6.5 naming rationale byte-stable; front-matter staleness `vs_embedded: none` deferred, repo-wide — recorded P6-4(d)) | VERIFIED **— unchanged (iter 152)** | fence #10 (canon = source of truth); Editorial Policy (no edit without functional load); the iter-148/149/151 zero-canon-edit precedents |
+| P6-3 | `p6_cot_tiers::04` | canon §6.3 «**Ссылка:** Визуальная версия staircase — `[VS: E11]` в preamble Part 6.» with NO master counterpart at all (pickaxe-verified: «Ссылка» never present in master part_06 — `git log -S` empty; the «Примечание» ::05 sibling stays canon-only per the executed R17 verdict) | the missing «Ссылка» block added after the §6.3 tier table (canon position): `<p><strong>Ссылка:</strong> Визуальная версия staircase — VS-EMBED E11 в начале Part 6.</p>` — the canon ref-notation rendered reader-facing (the P5-3 notation-render precedent: `[ref: …]` → anchor/label text; DEC-16 fence #12 for the new master prose: «в preamble» → «в начале»); no anchor — the E11 embed carries no id (plain-text reference, no dead links) | MOVED **— executed iter 152** | the P4-4(b)/`p4_ghost_layers::05` Reference-branch mirror family (F5 Reference branch duty; DEC-16 «Ссылка» label law); the «Ссылка:» bold-label convention verified in master part_01/part_03/part_05 |
+| P6-4 | — (observed) | master-only enrichments + variances, never canonized/resolved: (a) the §6.1 closing sentence «В этой части — от базового CoT до продвинутых техник интеграции с якорями.» (pickaxe-verified: never in canon); (b) the §6.1 difficulty-comment divergence (canon `INTERMEDIATE` vs master `BASIC` — pre-existing since the iter-71 progressive-disclosure gap closure; comments non-rendering, no runtime consumer — grep-verified); (c) the §6.2::06 bullet wording (canon «призрак (GHOST) связь» vs master «Связь с призраком (GHOST)» — v7-era variance); (d) the E11 canon-declaration gap (canon front-matter `vs_embedded: none` stale; no `[VS: E11]` marker in §6.3; Registry A disposition still PROPOSED — the E09 family, map §5.12 P5-5(a)); (e) the ::05 canon-only note's English residue («cols», «accessibility» — pre-DEC-16 form, non-rendering); (f) the canon EN `**ILLUSTRATION** — Demonstrates:` labels (§6.4::03 + §6.5::04 + the part_07b sibling) vs master RU chips + comment lists — presentation variance (matrix-noted) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (both directions change reader-visible knowledge or non-rendering metadata; the E11 gap rides the front-matter/v2-canon-format deferral) | RECORDED **— deferred (iter 152)** | AGENTS.md scope discipline (discovering ≠ permission to fix); Editorial Policy (compress redundant presentation, never unique capability); rides the canonical-audit stage (spec §8.3) or an ed-* batch |
+| P6-5 | — (state) | STATUS iter-151 / PLAN row v2-build-part-6 open / no map §5.13 | map §5.13 + STATUS iter-152 (KI#83 row lifecycle-deleted — closed iter-149, 3 iterations elapsed; Next step re-pinned to the Part 7A slice) + PLAN v2-build-part-7a + worklog + CHANGELOG + NAV §7 de-stale (Parts 1–6) | EXECUTED **— iter 152** | iter-147…151 state-package pattern |
+
+Accounting: 1 presentation-column seeding (25 rows, all `open`) + 1 verified-unchanged canon (P6-2 —
+**zero canon content edits**; `part_06.md` byte-unchanged) + 1 «Ссылка» mirror (P6-3) + 1
+observation package deferred (P6-4) + 1 state package (P6-5). Byte-unchanged: master §6.1/§6.2/
+§6.4/§6.5/§6.6 entirely + §6.3 outside the added block (the E11 embed, the tier table — untouched);
+matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of scope): the P6-4
+master-only enrichments + variances (canonical-audit stage / ed-* batch); canon front-matter
+staleness (rides the v2 canon format); KI#79 drift-tool regex (tooling); the §6.2::06 wording
+variance (formatting churn, not F-policy). Root fallback `parts/part_06.html` regenerated with the
+slice (+ root `index.html` timestamp). Drift actionable **155 → 155** (unchanged — the canon
+«Ссылка» paragraph left the informational vs_embed_ref paragraph-drift list (14→13) by gaining its
+master mirror; the actionable categories (no_master_match 28 + plain_text 127) unchanged — verified
+by the JSON pre/post diff).
+Next Part: **Part 7A** (guide order; its own slice reuses this shape — the largest so far: 13
+sections, 94 matrix rows; `src/master/part_07a.html` is a grep-first huge file per AGENTS.md).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -884,6 +940,23 @@ by the JSON pre/post diff). Next Part: **Part 6** (guide order; its own slice re
 
 ## 7. Iteration log (registry changes)
 
+- **iter 152 (Part 6 v2 build slice, BASE_COMMIT `f5087a8c`):** the pinned STATUS Next-step
+  row 1 (PLAN row v2-build-part-6, **not owner-gated** — the DEC-24 ratification gate cleared)
+  executed per map **§5.13 (P6-1..P6-5)** on the spec §7 shape (sixth application, reusing the
+  §5.8–§5.12 pattern): evidence — the matrix Part 6 tables gain the F2 `presentation` column
+  (25 rows, all `open`; the Collapsible criteria honestly applied: zero qualifying blocks; one
+  stale note refreshed — `p6_cot_tiers::05`, the R17 strip executed iter 128, the note described
+  the pre-strip state) + this §5.13 registry; canon — **zero content edits**
+  (`part_06.md` byte-unchanged; the Tier 0–3 canonical table + the Tier 2/Tier 3 templates
+  byte-stable; the front-matter `vs_embedded: none` staleness deferred, repo-wide); master —
+  the §6.3::04 «Ссылка» mirror (the missing Reference-branch block, pickaxe-verified never
+  present; the P4-4(b) family; ref-notation rendered reader-facing per the P5-3 precedent);
+  the six master-only enrichments + variances (the §6.1 closing sentence, the difficulty-comment
+  divergence, the §6.2::06 wording, the E11 canon-declaration gap, the ::05 English residue,
+  the EN ILLUSTRATION labels) recorded as deferred observations (P6-4); drift 155 → **155**
+  (unchanged — verified by the JSON pre/post diff); full battery green (sync 97/97, parity ×7,
+  tests 64/64, english 18, syntax 238, hash unchanged); Next step re-pinned to the Part 7A
+  slice.
 - **iter 151 (Part 5 v2 build slice, BASE_COMMIT `ebdfe412`):** the pinned STATUS Next-step
   row 1 (PLAN row v2-build-part-5, **not owner-gated** — the DEC-24 ratification gate cleared)
   executed per map **§5.12 (P5-1..P5-6)** on the spec §7 shape (fifth application, reusing the
