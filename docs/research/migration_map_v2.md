@@ -495,6 +495,66 @@ the ratified package): the «0.85–1.1» Temperature side disappears from the
 live site — the canonical top for 32B+ becomes 1.0; AP-5's ≤ 1.10 boundary
 framing is unaffected.
 
+### 5.8 Part 1 v2 build slice (seeded + executed iter 147 — v2 build phase, first Part)
+
+Scope: **Part 1 — Foundations** (6 sections, 30 block rows; DEC-24 Q6 guide
+order — Part 1 first; the ratification gate cleared by the same owner reply,
+chat 2026-09-15 «продолжай работы по планам!»). Mechanism: the ratified spec
+§7 per-Part slice shape (evidence → canon restructure → master mirror → full
+battery) — **first application**. Primary reader mode: **Learn** (entry Part —
+full-narrative default visibility per the spec §3; the Build-mode entry
+instrument lives here as §1.8). Editorial Policy 5-point check applied per
+edit (documented per row below). Acceptance gate: the full battery (sync
+97/97 + parity ×7 + build + validate + tests + qa baselines) — **no new
+cluster parity gate**: Part 1 owns no cluster values (verified: §7A.12/§7A.6
+owners untouched; §1.1 carries the canonical Методология caveat whose §3.1
+copy already defers — B10's verified exemplar, unchanged).
+
+**F2 presentation map (spec §4.1 mechanism, first application):** the Part 1
+matrix tables now carry the `presentation` column (29 existing rows
+re-verified + 1 new row = 30; matrix §1.2 documents the mechanism).
+Disposition: **all `open`** — Part 1 is the Learn-mode entry Part and its
+blocks are already compressed (ed-1 executed iters 125/129); no block meets
+the registered Collapsible criteria (`docs/components.md` #5: short content
+<100 words — the §1.1 Методология disclaimer ~70 words considered and
+rejected; retrieval: it qualifies the adjacent evidence table). The other F2
+values go live at the Parts carrying matching blocks (e.g. the §7A.1 anchors
+full copy = `canonical-link` candidate at Part 7A's slice; long worked
+scenarios = `collapsible` candidates at Parts 9/10). F3: §1.8 =
+decision-input checklist → reframed as the Build-mode entry instrument
+(P1-1); zero checkbox affordances in Part 1 (compliant — reserved for §9.3 /
+§9.11 validation). F4: the §1.4 OCEAN callout = worked tier (labelled
+ПРИМЕР) — compliant; no unlabelled standalone examples found. F5: the
+micro-template regularized — §1.4 gains its Reference branch (P1-4), §1.7's
+Reference branch restored to master (P1-5). F6: **zero new
+`<details class="interactive">`** — no qualifying block (honest application
+of the component criteria, not forced).
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P1-1 | `p1_prebuild_checklist::01` | intro: «6 вопросов перед началом сборки карточки. Каждый ответ определяет…» (matrix row, KEEP) | **F3 reframe:** «**Профиль сборки** — входной инструмент режима сборки (Build). 6 вопросов перед началом работы; каждый ответ определяет… Путь сборки по готовому профилю: конвейер — [ref: part_07a.md §7A.13], бюджеты блоков — [ref: part_07a.md §7A.12]» + canonical marker extended «— Build-mode entry instrument (build profile)» (canon + master mirror; section ID/title/table/РЕКОМЕНДАЦИЯ byte-unchanged) | MOVED **— executed iter 147** | DEC-24 Q3 (F3 decision-input / Build-mode entry instrument); intake B2; the original sentence pair preserved inside the reframe (capability/coverage); 5-point check documented in worklog |
+| P1-2 | `p1_prebuild_checklist::02` | 6-question table (Q2 budget numbers vs §7A.12 = R11 framing tension, UNCLEAR) | unchanged — the instrument's content stays; R11 remains the recorded open candidate (owner-gated ed-5 family) | UNCHANGED (verified iter 147) | Editorial Policy: UNCLEAR ≠ change; out of scope |
+| P1-3 | — (master layer) | master §1.8 closing line: self-link «Быстрый старт и 6 шагов сборки — §1.8 Чек-лист перед сборкой» + character-complexity map (content duplicating canon §1.7::06); no canon counterpart | line removed: the self-link = zero navigation capability (§1.8 links to itself); the character-map pointers render at their canon home §1.7 (P1-5); the build path is carried by the P1-1 intro | REMOVED_WITH_REASON **— executed iter 147** | 5-point check: capability (nothing lost — dead self-link; map content re-homed), coverage (§1.7), retrieval (build path at P1-1), context (§1.8 closes on the РЕКОМЕНДАЦИЯ), dependency (no audit probe/test/link depends on the line — grep verified: «Быстрый старт» absent from scripts/tests) |
+| P1-4 | `p1_core_rules::07` (NEW matrix row) | master-only line «Ссылка: Пример реалистичного современного персонажа… — Уолтер Уайт, §10.2» (sync probe P3-4; no canon block = master-side drift) | canon §1.4 gains the **Reference branch** (F5): «**Ссылка:** Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, [ref: part_10.md §10.2]» — canon catches up to the deployed master line; master byte-unchanged | MOVED **— executed iter 147** | DEC-24 Q4 (F5 Reference branch); drift closure (master-only block canonicalized) |
+| P1-5 | `p1_top3_problems::06` | canon «Ссылка: Готовые карточки разной сложности — … → [ref: part_10.md], [ref: appendix_character_map.md]» (matrix row exists; master paragraph missing = canon-side drift) | master §1.7 mirror added: 4 Part-10 anchors (#p10_elena/#p10_walter/#p10_omnis/#p10_vysherblenny) + «Карта всех персонажей — Appendix D» as plain text (no link — Appendix D has no master HTML; DEC-24 Q7 WIRE covers the 3 manifest appendices only) | MOVED **— executed iter 147** | F5 Reference branch restored canon→master; drift closure |
+| P1-6 | — (evidence) | matrix Part 1 tables: 8 columns, no presentation axis (the missing piece B-final/F2 flagged iter 143) | `presentation` column seeded (30 rows, all `open`); matrix §1.2 documents the mechanism + scope (Part-sliced, not global) | EXECUTED **— iter 147** | DEC-24 Q2 (F2 matrix-column mechanism) |
+| P1-7 | — (state) | spec PROPOSED; STATUS Next step = the ratification call; PLAN row v2-ratify owner-gated | spec header → RATIFIED (DEC-24; content untouched); DEC-24 recorded; STATUS/PLAN/worklog/CHANGELOG updated; Next step re-pinned to the Part 2 slice | EXECUTED **— iter 147** | DEC-24; iter-142/145 DEC-plus-slice pattern |
+
+Accounting: 1 F3 reframe (P1-1) + 1 verified-unchanged with recorded defers
+(P1-2) + 1 master-side drift disposal (P1-3) + 2 Reference-branch
+regularizations (P1-4/P1-5) + 1 presentation-column seeding (P1-6) + 1 state
+package (P1-7). Byte-unchanged: §1.1 entirely (incl. the Методология
+canonical caveat + the R04-flagged evidence row — owner-gated ed-1/ed-4),
+§1.2/p1_structure_overview (all 7 rows), §1.4 ::01–::06 (rules, terms, the
+OCEAN example), §1.7 ::01–::05 + Синтез, the §1.8 6-question table +
+РЕКОМЕНДАЦИЯ. Deferred (recorded, out of scope): R04 drift-row owner decision
+(ed-1/ed-4); R11 Q2 budget framing (ed-5); KI#79 drift-tool regex (tooling);
+canon front-matter `vs_embedded` staleness (repo-wide, rides the v2 canon
+format). Root fallback `parts/part_01.html` regenerated with the slice (+
+root `index.html` timestamp). Drift actionable 159 → **158** (−1: the §1.8
+canonical-marker/intro pairing resolved by the reframe + matching markers).
+Next Part: **Part 2** (guide order; its own slice reuses this shape).
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -514,6 +574,13 @@ framing is unaffected.
 > **v2 architecture phase opening (STATUS Next-step row 2): owner call received (same
 > chat) — DECIDED (DEC-23, iter 145): phase OPEN, first slice = P-a consolidated v2
 > architecture specification; no v2 build slice before the owner ratifies the spec.**
+> **Spec ratification (the P-a §9 question list Q1–Q9): owner call received (chat
+> 2026-09-15 «продолжай работы по планам!») — DECIDED (DEC-24, iter 147): the spec
+> RATIFIED as tabled (Q1–Q4/Q6/Q8) + recorded recommendations/conservative defaults
+> (Q5 defer / Q7 WIRE / Q9 freeze); the v2 build phase starts — Part 1 slice executed
+> iter 147** (map §5.8; all §6 gates now closed — remaining owner calls live at their
+> owning slices: KI#70 WIRE implementation at the Reference/appendix slice, switch
+> criteria verification at the switch).
 
 1. **Visual-markup ownership** (Registry A/L4-L5): master embed = canonical and
    prototypes/extracts become frozen design artifacts (default), or
@@ -788,3 +855,16 @@ framing is unaffected.
   canonical → reader-path audits → switch criteria). Collects **9 ratification questions
   (Q1–Q9)** incl. KI#70 wire/drop (Reference backbone) and the v1 fate at switch. Doc-only
   battery green (sync 97/97 · drift 159 · parity ×7 · `git diff --check` clean).
+- **iter 147 (Part 1 v2 build slice + spec ratification, BASE_COMMIT `01999852`):** owner
+  go-ahead on the iter-146 ratification package (chat 2026-09-15 «продолжай работы по планам!»)
+  → **DEC-24** (spec Q1–Q9 ratified; Q5 EXPERIMENTAL representation deferred to its first
+  consuming slice; Q7 KI#70 = WIRE, rides the Reference/appendix slice; Q9 v1 = freeze at
+  switch) — the v2 build phase starts. First Part slice executed per map **§5.8 (P1-1..P1-7)**
+  on the spec §7 shape (first application): evidence — the matrix Part 1 tables gain the F2
+  `presentation` column (30 rows, all `open` — Learn-mode entry Part; the Collapsible criteria
+  honestly applied: zero qualifying blocks) + this §5.8 registry; canon — §1.8 F3 reframe
+  («**Профиль сборки** — входной инструмент режима сборки (Build)» + build-path refs) + §1.4
+  Reference branch (Уолтер Ссылка canonicalized from the master-only P3-4 line); master —
+  mirrors + §1.7 Ссылка paragraph restored + §1.8 drift closing line (dead self-link) disposed
+  REMOVED_WITH_REASON; root fallback `parts/part_01.html` regenerated. Drift actionable
+  159 → 158. Battery: full — see STATUS/worklog. Next: Part 2 slice (guide order).

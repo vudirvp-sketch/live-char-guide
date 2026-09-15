@@ -43,6 +43,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. Column exists only on the Parts already sliced (Part 1 since iter 147); other Parts get it at their own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -67,68 +68,79 @@
 
 ### p1_value_proposition (§1.1)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p1_value_proposition::01 | L18 | intro: classic vs systematic approach | DEFINITION | KEEP | YES | — | Orientation thesis; unique |
-| p1_value_proposition::02 | L20–25 | table: value-prop evidence (4 rows) | APPLICATION | KEEP | YES | DUPLICATE | Row «Дрейф голоса … ~40% → ~10%» duplicates §3.1 drift table (R04). Other 3 rows unique. Owner decision in ed-1/ed-4: keep one occurrence of the drift row |
-| p1_value_proposition::03 | L27 | Методология disclaimer | METADATA | KEEP | YES | DUPLICATE | Canonical owner of the empirical-evidence caveat (research §19 pattern). Near-verbatim copy in §3.1 (R05) is the compression side |
-| p1_value_proposition::04 | L29 | closing: «поведенческий движок» | DEFINITION | KEEP | YES | — | One-line thesis |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p1_value_proposition::01 | L18 | intro: classic vs systematic approach | DEFINITION | KEEP | YES | — | open | Orientation thesis; unique |
+| p1_value_proposition::02 | L20–25 | table: value-prop evidence (4 rows) | APPLICATION | KEEP | YES | DUPLICATE | open | Row «Дрейф голоса … ~40% → ~10%» duplicates §3.1 drift table (R04). Other 3 rows unique. Owner decision in ed-1/ed-4: keep one occurrence of the drift row |
+| p1_value_proposition::03 | L27 | Методология disclaimer | METADATA | KEEP | YES | DUPLICATE | open | Canonical owner of the empirical-evidence caveat (research §19 pattern). Near-verbatim copy in §3.1 (R05) is the compression side. Collapsible considered and rejected at the iter-147 slice (registered Collapsible criteria: short content <100 words; retrieval: qualifies the adjacent evidence table) |
+| p1_value_proposition::04 | L29 | closing: «поведенческий движок» | DEFINITION | KEEP | YES | — | open | One-line thesis |
 
 ### p1_card_overview (§1.2)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p1_card_overview::01 | L39 | card definition: 5 blocks, behavioral engine | DEFINITION | KEEP | YES | — | Canonical anatomy (KI#68 fixed here, iter 118). E01 stack + block table agree on 5 |
-| p1_card_overview::02 | L41 | сквозной пример (Елена) | NAVIGATION | KEEP | YES | — | Running-example announcement |
-| p1_card_overview::03 | L43 | RULE: examples and style contract | DEFINITION | KEEP | YES | — | Unique style-scoping rule |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p1_card_overview::01 | L39 | card definition: 5 blocks, behavioral engine | DEFINITION | KEEP | YES | — | open | Canonical anatomy (KI#68 fixed here, iter 118). E01 stack + block table agree on 5 |
+| p1_card_overview::02 | L41 | сквозной пример (Елена) | NAVIGATION | KEEP | YES | — | open | Running-example announcement |
+| p1_card_overview::03 | L43 | RULE: examples and style contract | DEFINITION | KEEP | YES | — | open | Unique style-scoping rule |
 
 ### p1_structure_overview (§1.2 subsection)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p1_structure_overview::01 | L51 | concept flow + Mermaid history | NAVIGATION | COMPRESS | YES | — | Function = reading order (keep); carries repo history «Mermaid удалён в iter 14» → ed-6 strip (R17) |
-| p1_structure_overview::02 | L53 | Cross-ref: AUTO_TOC | NAVIGATION | COMPRESS | YES | — | Reader job = "TOC exists"; build internals (`AUTO_TOC_PLACEHOLDER`, build-скрипт) → ed-6 strip (R17) |
-| p1_structure_overview::03 | L55 | порядок чтения (①–⑤) | NAVIGATION | KEEP | YES | — | Compliant orientation |
-| p1_structure_overview::04 | L57 | E01 note: Anchors visually nested, structurally separate | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | Feeds R01 (Anchors-placement); clarifies viz, not re-teach; → migration_map_v2 TB-3 ([VS: E01] canon marker added iter 135 — budget semantics declared: §7A.12 SHARED_REFERENCE) |
-| p1_structure_overview::05 | L59–65 | table: 5 blocks influence/budget share | DEFINITION | KEEP | YES | — | Structural properties not visible in E01 — declared complement, not dupe |
-| p1_structure_overview::06 | L67 | RULE 1-sentence: voice rule → §1.4 | NAVIGATION | KEEP | YES | — | Compliant pointer form |
-| p1_structure_overview::07 | L69–71 | Token Budget + assembly refs | NAVIGATION | KEEP | YES | — | 1-sentence refs to §7A.12/§7A.13 — ed-5 already verified compliant |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p1_structure_overview::01 | L51 | concept flow + Mermaid history | NAVIGATION | COMPRESS | YES | — | open | Function = reading order (keep); carries repo history «Mermaid удалён в iter 14» → ed-6 strip (R17) — executed (history mention absent from the current canon) |
+| p1_structure_overview::02 | L53 | Cross-ref: AUTO_TOC | NAVIGATION | COMPRESS | YES | — | open | Reader job = "TOC exists"; build internals (`AUTO_TOC_PLACEHOLDER`, build-скрипт) → ed-6 strip (R17) — executed canon-side (internals live in master only, by design) |
+| p1_structure_overview::03 | L55 | порядок чтения (①–⑤) | NAVIGATION | KEEP | YES | — | open | Compliant orientation |
+| p1_structure_overview::04 | L57 | E01 note: Anchors visually nested, structurally separate | APPLICATION | KEEP | YES | RELATED BUT DISTINCT | open | Feeds R01 (Anchors-placement); clarifies viz, not re-teach; → migration_map_v2 TB-3 ([VS: E01] canon marker added iter 135 — budget semantics declared: §7A.12 SHARED_REFERENCE) |
+| p1_structure_overview::05 | L59–65 | table: 5 blocks influence/budget share | DEFINITION | KEEP | YES | — | open | Structural properties not visible in E01 — declared complement, not dupe |
+| p1_structure_overview::06 | L67 | RULE 1-sentence: voice rule → §1.4 | NAVIGATION | KEEP | YES | — | open | Compliant pointer form |
+| p1_structure_overview::07 | L69–71 | Token Budget + assembly refs | NAVIGATION | KEEP | YES | — | open | 1-sentence refs to §7A.12/§7A.13 — ed-5 already verified compliant |
 
 ### p1_core_rules (§1.4)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p1_core_rules::01 | L82 | intro: principles mandatory | DEFINITION | KEEP | YES | — | |
-| p1_core_rules::02 | L84–88 | key terms list (Anchor/Voice/SPINE/OCEAN) | DEFINITION | KEEP | YES | — | «используются далее без повторного объяснения» — compliant introduce-once pattern (ed-7 anchor) |
-| p1_core_rules::03 | L90 | RULE: LLM = Pattern Matcher | DEFINITION | KEEP | YES | REINFORCEMENT | **Canonical owner** of the principle. Re-teach in §3.1 (R03) is the compression side; §1.7/§7A.4 usages are compliant applications |
-| p1_core_rules::04 | L92–94 | the 3 key principles (numbered) | DEFINITION | KEEP | YES | — | Canonical mental model; NAV §5 mirrors it |
-| p1_core_rules::05 | L96 | RULE: Anchors placement (separate block in Examples-zone) | DEFINITION | KEEP | YES | REINFORCEMENT | **Canonical owner** of R01. Full copy in §7A.1 is the compression side; §7A.9/§7A.11 short+ref forms compliant |
-| p1_core_rules::06 | L98–106 | callout EXAMPLE: OCEAN right vs wrong | EXAMPLE | KEEP | YES | — | Unique demonstration (§21 protection) |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p1_core_rules::01 | L82 | intro: principles mandatory | DEFINITION | KEEP | YES | — | open | |
+| p1_core_rules::02 | L84–88 | key terms list (Anchor/Voice/SPINE/OCEAN) | DEFINITION | KEEP | YES | — | open | «используются далее без повторного объяснения» — compliant introduce-once pattern (ed-7 anchor) |
+| p1_core_rules::03 | L90 | RULE: LLM = Pattern Matcher | DEFINITION | KEEP | YES | REINFORCEMENT | open | **Canonical owner** of the principle. Re-teach in §3.1 (R03) is the compression side; §1.7/§7A.4 usages are compliant applications |
+| p1_core_rules::04 | L92–94 | the 3 key principles (numbered) | DEFINITION | KEEP | YES | — | open | Canonical mental model; NAV §5 mirrors it |
+| p1_core_rules::05 | L96 | RULE: Anchors placement (separate block in Examples-zone) | DEFINITION | KEEP | YES | REINFORCEMENT | open | **Canonical owner** of R01. Full copy in §7A.1 is the compression side; §7A.9/§7A.11 short+ref forms compliant |
+| p1_core_rules::06 | L98–106 | callout EXAMPLE: OCEAN right vs wrong | EXAMPLE | KEEP | YES | — | open | Unique demonstration (§21 protection). F4 tier: worked (labelled ПРИМЕР) — compliant |
+| p1_core_rules::07 | L110 | Ссылка: Уолтер — realistic modern character | NAVIGATION | KEEP | YES | — | open | NEW row (iter 147): F5 Reference branch — canonicalized from the master-only P3-4 line (canon catches up to the deployed master rendering; master byte-unchanged); → migration_map_v2 §5.8 P1-4 |
 
 ### p1_top3_problems (§1.7)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p1_top3_problems::01 | L117 | intro + ref §9.4 | NAVIGATION | KEEP | YES | — | |
-| p1_top3_problems::02 | L119–123 | Ошибка 1: godmoding (симптом/причина/исправление) | APPLICATION | KEEP | YES | REINFORCEMENT | Anti-godmoding string reuse = changed function (fix usage), R07 |
-| p1_top3_problems::03 | L125–129 | Ошибка 2: voice mismatch | APPLICATION | KEEP | YES | REINFORCEMENT | Applies §3.1 + refs it — compliant application, not re-teach |
-| p1_top3_problems::04 | L131–135 | Ошибка 3: ideal character / missing Price | APPLICATION | KEEP | YES | REINFORCEMENT | Price is whitelisted useful repetition (§20) |
-| p1_top3_problems::05 | L137 | Synthesis | DEFINITION | KEEP | YES | — | |
-| p1_top3_problems::06 | L139 | Cross-ref: ready cards | NAVIGATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p1_top3_problems::01 | L117 | intro + ref §9.4 | NAVIGATION | KEEP | YES | — | open | |
+| p1_top3_problems::02 | L119–123 | Ошибка 1: godmoding (симптом/причина/исправление) | APPLICATION | KEEP | YES | REINFORCEMENT | open | Anti-godmoding string reuse = changed function (fix usage), R07 |
+| p1_top3_problems::03 | L125–129 | Ошибка 2: voice mismatch | APPLICATION | KEEP | YES | REINFORCEMENT | open | Applies §3.1 + refs it — compliant application, not re-teach |
+| p1_top3_problems::04 | L131–135 | Ошибка 3: ideal character / missing Price | APPLICATION | KEEP | YES | REINFORCEMENT | open | Price is whitelisted useful repetition (§20) |
+| p1_top3_problems::05 | L137 | Synthesis | DEFINITION | KEEP | YES | — | open | |
+| p1_top3_problems::06 | L139 | Cross-ref: ready cards | NAVIGATION | KEEP | YES | — | open | Master mirror restored iter 147 (F5 Reference branch; 4 Part-10 anchors + Appendix D mention); → migration_map_v2 §5.8 P1-5 |
 
 ### p1_prebuild_checklist (§1.8)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| p1_prebuild_checklist::01 | L150 | intro: 6 questions | NAVIGATION | KEEP | YES | — | |
-| p1_prebuild_checklist::02 | L152–159 | table: 6 pre-build questions | APPLICATION | KEEP | YES | UNCLEAR | Q2 budget numbers («4K — Description ≤200 … 8K — ≤400») vs §7A.12 table (150/300/700 min/std/max) — different framings of one budget; R11, feeds ed-5 |
-| p1_prebuild_checklist::03 | L161 | RECOMMENDATION: first config | APPLICATION | KEEP | YES | — | |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| p1_prebuild_checklist::01 | L150 | intro: 6 questions | NAVIGATION | KEEP | YES | — | open | F3 reframe executed iter 147: «**Профиль сборки** — входной инструмент режима сборки (Build)» + build-path refs (§7A.13 / §7A.12) — the original sentence pair preserved inside the reframe; → migration_map_v2 §5.8 P1-1 |
+| p1_prebuild_checklist::02 | L152–159 | table: 6 pre-build questions | APPLICATION | KEEP | YES | UNCLEAR | open | Q2 budget numbers («4K — Description ≤200 … 8K — ≤400») vs §7A.12 table (150/300/700 min/std/max) — different framings of one budget; R11, feeds ed-5 (owner-gated defer — unchanged by the iter-147 slice) |
+| p1_prebuild_checklist::03 | L161 | RECOMMENDATION: first config | APPLICATION | KEEP | YES | — | open | |
 
 **Part 1 verdict:** structurally compliant with the orientation role already — token-budget/pipeline
 subsections are 1-sentence refs (verified iter 118, re-confirmed here). The block-level findings are:
 2 repo-meta strips (R17), 1 duplicate evidence row (R04), 1 framing tension (R11). The aggressive
 "Part 1 re-teaches Parts 2–7A" expectation from research §2 is **not confirmed at block level**;
 §1.4/§1.7/§1.8 are canonical owners or compliant applications. This refines ed-1's scope.
+
+**v2 build slice executed iter 147** (DEC-24 — first Part of the v2 build phase; Registry C map
+[`migration_map_v2.md`](./migration_map_v2.md) §5.8): the `presentation` column seeded on all Part 1
+rows (29 existing re-verified + 1 new `p1_core_rules::07` = 30) — **all `open`**: Part 1 is the
+Learn-mode entry Part (full-narrative default visibility per the spec §3) and already compressed
+(ed-1 executed), and no block meets the registered Collapsible criteria (`docs/components.md` #5 —
+e.g. the §1.1 Методология disclaimer ~70 words: considered, rejected); F3 reframe of §1.8 =
+Build-mode entry instrument («Профиль сборки», P1-1); F5 Reference branches regularized (§1.4 canon
+P1-4, §1.7 master P1-5); master §1.8 drift closing line disposed (P1-3). Line refs on pre-existing
+rows = audit-time anchors (iter 120), not re-based — iter-142/145 slice precedent.
 
 ---
 

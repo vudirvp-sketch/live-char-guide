@@ -1,14 +1,23 @@
-# v2 Architecture Specification — Live Character Guide (P-a, PROPOSED)
+# v2 Architecture Specification — Live Character Guide (P-a, RATIFIED)
 
-> **Status: PROPOSED for owner ratification.** This is the P-a first slice of the
+> **Status: RATIFIED by owner decision — DEC-24 (2026-09-15, iter 147; owner chat
+> «продолжай работы по планам!» — the go-ahead on the iter-146 ratification package).
+> Q1–Q9 dispositions recorded in `DECISIONS.md` DEC-24:** Q1–Q4/Q6/Q8 as tabled
+> below; Q5 = OBSERVATION stands («НАБЛЮДЕНИЕ» + base `.callout`), EXPERIMENTAL
+> representation deferred to its first consuming slice; Q7 = KI#70 **WIRE**
+> (implementation rides the Reference/appendix slice); Q9 = v1 freeze/archive at
+> switch (DEC-19 pattern). The v2 build phase is OPEN — per-Part slices in guide
+> order (Part 1 executed iter 147, map §5.8). This document's content is the
+> ratified specification (unchanged from the PROPOSED iter-146 text except this
+> header).**
+> This is the P-a first slice of the
 > v2 architecture phase (phase OPENED by DEC-23, owner chat 2026-09-15 «я согласен
 > с рекомендациями, сделай как лучше и качественнее»; package
 > [`owner_gates_iter144.md`](./owner_gates_iter144.md) §3.2). It **consolidates
-> verified in-repo inputs into one design document** — it decides nothing by
-> itself: every item below is either (a) already DECIDED by a standing DEC-NN
-> (cited), or (b) a **ratification question** collected in §9. Ratification →
-> DEC-NN entries → v2 build slices unblocked (DEC-23: no v2 build slice before
-> that).
+> verified in-repo inputs into one design document** — every item below is either
+> (a) already DECIDED by a standing DEC-NN
+> (cited), or (b) a **ratification question** collected in §9 (all resolved by
+> DEC-24).
 > Task: `iter-146-v2-architecture-spec` (doc-only; v1 frozen, no production file
 > touched — iter-131/143/144 precedent). BASE_COMMIT `0ed3d787` (iter 145).
 > Consolidated from: `migration_foundation_iter131.md` (§2 inventories, §3 layer
