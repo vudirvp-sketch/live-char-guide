@@ -121,9 +121,12 @@ SUBHEADING_MASTER = "<h4>Три базовых симптома: полный м
 WALTER_DELETED = "Пример тестирования карточки с OCEAN-профилем (A=38, N=68"
 # §9.7 = the sole Part-9 reference to Walter's OCEAN example (canon + master
 # identical wording; Walter's actual extremes per §10.2: O:65 C:85 E:30 A:25 N:60).
+# iter 163 (P9-5(b) canonical-audit disposition): E=30 relabeled to its canonical
+# classification (§5.1 RULE extreme = strictly <30/>70; §10.2 lists E=30 as a
+# cautious zone) — the anchor re-pointed in step (iter-148/155/156 precedent).
 WALTER_97_ANCHOR = (
     "Пример тестирования карточки с OCEAN-полюсами — Уолтер Уайт "
-    "(C=85, A=25, E=30 — выраженные экстремумы)"
+    "(C=85, A=25 — выраженные экстремумы; E=30 — осторожная зона)"
 )
 # P2-17 one-word symptom kept in the existing (5-group) §9.6 table.
 P217_ANCHOR = "Удалить голос из Description (AP-3 Voice-in-Desc)"

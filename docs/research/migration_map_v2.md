@@ -1467,6 +1467,122 @@ audit → switch (Q8 criteria: stages 2–4 green in two consecutive full-batter
 in the affected families + owner call; Q9: v1 freezes/archives at switch).
 
 
+### 5.24 Canonical audit stage record (executed iter 163 — the migration tail's second stage, spec §8 stage 3)
+
+Scope: **the machine-checkable cross-pass on the full corpus** — `docs/content_map.md` ↔
+`docs/canon/*.md` ↔ `docs/canon/glossary_registry.md` ↔ `src/master/*.html` — every concept
+checked for a single canonical home (fence #11 / one definition — one place; the KI#82-style
+Notes checks extended repo-wide) + the 12 observation packages' dispositions (the pinned STATUS
+Next-step row 1, **not owner-gated** — the migration tail's continuation, PLAN row
+v2-canonical-audit; the owner's session go-ahead «продолжай работы по планам!»). Semantic
+dispositions follow the scope discipline: fix only when the canonical owner is unambiguous
+(canon wins, fence #10); owner-gate where semantics are involved; the front-matter/E-declaration
+families ride the v2 canon-format decision (switch-time D-5). Content edits only as disclosed
+dispositions (5-point check, Editorial Policy). Acceptance: every concept verified single-homed
+(or the variance recorded + dispositioned); the stage report records the corpus state + the
+package dispositions.
+
+**Stage gate battery (executed at HEAD `cf329734`; the in-sandbox stage tool
+`/home/z/my-project/scripts/iter163_canonical_audit.py` — the iter162_f2_coverage.py precedent;
+all commands run in the sandbox; pnpm via `npx pnpm@10`):**
+
+| CA# | Gate | Verified result | Status | Basis |
+|---|---|---|---|---|
+| CA-1 | content_map → canon (structural) | **99/99 map rows resolve**: every row's Canon § matches an actual `## §num` header in the named canon file + the row's `data-section` ID is declared via `` `data-section: …` `` inside that § block (the §1.2 subsection + the Appendix D H1-level conventions verified as declared) | VERIFIED **— iter 163 (99/99)** | fence #11; the map's Validation Checklist; PLAN row scope |
+| CA-2 | canon → content_map (orphan check) | **99 canon-declared IDs, zero orphans** — every `data-section` declaration across the 16 canon files has a map row (96 rendering + Part 0 ×2 + Appendix D ×1 = 99, the counting convention verified) | VERIFIED **— iter 163 (99/99)** | the map's Purpose rules («no row = orphan») |
+| CA-3 | content_map ↔ master (rendering) | **96 == 96 both directions**: every rendering map ID exists as `data-section="…"` in `src/master/*.html` and vice versa; zero duplicate IDs; the conceptual-only IDs (Part 0 ×2, Appendix D ×1) do **not** render — by design | VERIFIED **— iter 163 (96/96)** | fences #4/#5; the iter-158 WIRE corpus state |
+| CA-4 | glossary registry ↔ map/canon | **45 entries, heads unique; 45/45 `home=` targets are declared canon section IDs with map rows; 45/45 `[ref: file §num — Title]` targets resolve** to actual canon headers (the DEC-17/18 chain's pointer layer fully wired) | VERIFIED **— iter 163 (45/45/45)** | DEC-17/18; the registry pattern |
+| CA-5 | concept single-home | **zero duplicate concepts, zero duplicate IDs** across the whole map; the seven cluster owners' homes verified consistent with the invariants (§7A.2 / §7A.6 / §7A.12 / §5.4 / §9.6 / §3.2 / the glossary registry — each re-verified green by its parity gate, CA-7 below) | VERIFIED **— iter 163 (0 violations)** | fence #11 (one definition — one place) |
+| CA-6 | KI#82-style Notes checks (repo-wide extension) | **4 stale Notes found + repaired** (doc-layer, the audit's own surface): (1) `p1_card_overview` — «4 блока карточки: SP, Description, Examples, Greeting» → the canon §1.2/E01 form «5 блоков: System Prompt / Description / Examples + Anchors / Greeting / Lorebook» + the subsection title «Token Budget и конвейер сборки» → the DEC-16 canon form «Бюджет токенов и конвейер сборки»; (2) `appendix_model_table` — «7-row table» → the actual **9-row** capability table (+ НАБЛЮДЕНИЕ + «Ключевые следствия»); (3) `appendix_glossary` — «27 терминов» → **25 статей** v1-источника + the registry relationship recorded (45 = 25 merged-canonical + 20 machine-layer, DEC-17/18); (4) the map header/footer stamps (iter 117 → iter 163). Counter-claims verified correct: §9.5 «10 строк» (12 table lines = 10 data rows), Appendix D «5 канонических персонажей», §1.8 «6 вопросов», Part 8 «15 анти-паттернов», AUTO_TOC mechanism | EXECUTED **— iter 163 (4 repaired, 5 verified correct)** | the KI#82 precedent (iter 142: §3.2 stale Notes repaired at the slice); the map's mirror role |
+| CA-7 | the full gate battery (post-disposition re-run) | the 7 cluster parity gates **×7 PASS** · sync **97/97 PASS** · drift **140 actionable, pre/post JSON identical** (zero drift-mover entries — the §9.7 canon+master pair edited in lockstep, the §9.3 mirror completion sits inside a table row the paragraph tool does not blob) · build ✓ (hash `2ab607d6` unchanged) · validate ✓ · validate:master ✓ · version:check ✓ 9.2.6 · tests **64/64** · lint ✓ · qa:csp/bundle/contrast PASS · qa:doc-versions exit 0 (1 pre-existing warning) · qa:english **18** / qa:syntax **238** (baselines exact — the EN-leftover repair touched no baseline-counted leak) | VERIFIED **— iter 163 (all green)** | AGENTS.md common commands; DEC-13 |
+| CA-8 | — (the observation-package dispositions) | see the disposition table below | EXECUTED **— iter 163** | the PLAN row's disposition clause |
+
+**The executed dispositions (content edits — each passes the 5-point check, Editorial Policy):**
+
+1. **P9-5(b) — the §9.7 Walter-line E=30 mislabel — EXECUTED (canon wins):** the canon
+   `part_09.md` §9.7::04 line + the master mirror re-labeled — «Уолтер Уайт (C=85, A=25, E=30 —
+   выраженные экстремумы)» → «(C=85, A=25 — выраженные экстремумы; E=30 — осторожная зона)».
+   Rationale: a fence-#11 single-canonical-definition violation with an unambiguous canonical
+   owner — §5.1 RULE (extreme = строго <30 или >70) + §10.2's own list («Экстремумы: Высокая C
+   (85), Низкая A (25); Cautious zones: E=30, N=60») classify E=30 as a cautious zone; §9.7
+   contradicted both. No value decision involved (the classification is already canonical
+   elsewhere; all three values kept, only the labels aligned). 5-point check: capability — the
+   Walter test-example reference retained with correct classification; coverage — §10.2's full
+   analysis untouched; retrieval — same position/ref-target; context — reads naturally;
+   dependency — one tool anchor pinned the old wording (`audit_diagnostics_parity.py`
+   `WALTER_97_ANCHOR`) — re-pointed in step (the iter-148/155/156 disclosed tooling-alignment
+   precedent); zero sync-audit probes (grep-verified).
+2. **P9-5(d) — the master §9.3 EN leftovers — EXECUTED (fence #10 mirror completion):**
+   «☐ Person defined?<br/>☐ Narrative tense?» → «☐ Персона определена?<br/>☐ Нарративное
+   время?» — the canon §9.3 row already carries the Russian forms (DEC-16); master lagged
+   (pre-DEC-16 residue). The iter-155/158 mirror-completion precedent. qa:english baseline
+   unaffected (the strings were not counted among the 18 leaks — verified pre/post = 18).
+3. **P-C-4(f) — the components.md `.part-resume` Location note — EXECUTED (doc de-stale):**
+   «End of each Part (Part 1 through Part 10)» → the actual state: 1 live usage (Appendix A,
+   `src/master/appendix_mbti.html`); the Part 1–10 instances removed iter 47 (P2-7); the
+   Appendix B/C instances disposed iters 159/160; the class stays registered. The doc's
+   Last-Updated stamp aligned (2026-09-16) per the qa:doc-versions convention.
+4. **P-C-4(b) — the count record corrected:** the iter-160 observation recorded «the appendix
+   carries 26 of the registry's 45 entries» — the verified count is **25** (25 canon `###`
+   articles + 25 master `glossary-entry` divs; the registry's own split: 25 merged-canonical +
+   20 machine-layer = 45 — the arithmetic now fits exactly). The matrix row corrected in step.
+   The coverage question itself (the «всех технических терминов» claim vs the 25/45 reality)
+   stays **D-5's switch-time disposition** per its record.
+5. **The 4 map-layer stale Notes (CA-6) — EXECUTED** (the audit's own surface — see CA-6).
+
+**The recorded dispositions (deferred — the scope discipline: discovering ≠ permission to fix):**
+
+- **OWNER-GATE (the master-only enrichment / variance families — both directions change
+  reader-visible knowledge; editorial value decisions):** P4-5 (all three §4.8/§4.4
+  enrichments) · P5-5(b)(c)(e)(f) · P6-4(a)(c) · P7A-4(a)(c)(d) — **incl. the §7A.7
+  presentation+value variances (the recorded «needs the reconciliation owner call»)** ·
+  P7B-4(a)(c)(d) · P8-4(a)–(d)(f) · P9-5(c) (the §9.11 EN blockquote — the DEC-16 canon
+  catch-up, semantic) · P10-4(a)(b)(c) (the Omnis «Звук/Голос» variance, Elena's card lines,
+  the top-of-part ПРАВИЛО callout) · P-app-4(f) (the link-vs-text variance family) ·
+  P-B-4(d) (the part_04 model-note span, the P4-4 family) · P-C-4(a) (the master CoT Tier-0
+  enrichment). These ride the owner's ed-* / reconciliation calls (the KI#77-e/ed-5 family
+  shape) — the stage documents, the owner decides.
+- **KI#77-e / R27 (ed-5) — stays owner-gated** per the PLAN row's explicit clause: the stage
+  documents (the Part 10 budgets ~540/1000, ~1100, ~2150, ~1500+ vs the ::05 ranges
+  ~440–890 / ~1500–1800 — re-verified unchanged at this stage), the owner decides.
+- **V2-CANON-FORMAT DEFERRAL (switch-time, D-5):** the front-matter staleness family
+  (P5-5(a), P6-4(d)(e), P7A-4(e), P7B-4(b), P10-4(d), P-app-4(c), P-B-4(c), P-C-4(c),
+  P-D-4(a) — the repo-wide iter-152 family) + the E-declaration gaps (E09/E11/E02/E16/E18 —
+  the Registry A dispositions stay PROPOSED until the v2 canon-format decision).
+- **NO ACTION (recorded, by design):** the formatting-churn items (P7B-4(e), P8-4(e),
+  P9-5(f)) — not F-policy material; the drift-tool boundary artifacts (P8-4(g), P9-5(g),
+  P10-4(e), P-B-4(b)(e), P-C-4(d)(e), P-D-4(c)) — informational by design (KI#79-adjacent);
+  the heading-mismatch family (P-B-4(b), P-C-4(d)) — the non-numbered-master-h2 convention;
+  P-D-4(b) — R18's declared out-of-scope generic form; P-app-4(d) — the manifest alphabetical
+  order (a supersedeable future DEC if the owner prefers guide order in the manifest);
+  P6-4(b) — the difficulty-comment divergence (non-rendering, no runtime consumer).
+- **RESOLVED (verified at HEAD — no action needed):** P9-5(a) = KI#84 (CLOSED iter 157, the
+  WALTER_DELETED absence guard green) · P9-5(e) = the L397 typo (EXECUTED iter 157, P10-2) ·
+  P10-4(f) = the iter-156 «5 sections» miscount (corrected in the registry iter 157) ·
+  P-app-4(e) = the stale matrix vague-notes (the B/C/D slices refreshed them, verified at
+  HEAD) · P-B-4(a) = the part-resume co-travelers (B disposed iter 159, C iter 160; **A's
+  benign instance KEPT** per the iter-159 5-point record — the family's 1 live usage,
+  documented in components.md by this stage's disposition 3).
+
+Accounting: **7 files changed** — `docs/content_map.md` (4 stale Notes + stamps) ·
+`docs/canon/part_09.md` (the §9.7 re-label) · `src/master/part_09.html` (the §9.7 mirror + the
+§9.3 RU mirror completion) · `parts/part_09.html` (the regenerated root fallback — staged
+together with the master edit per AGENTS.md git safety) · `scripts/audit_diagnostics_parity.py`
+(the WALTER_97_ANCHOR re-point) · `docs/components.md` (the .part-resume Location de-stale +
+stamp) · `docs/research/editorial_matrix.md` (the P-C-4(b) count correction). Runtime unchanged
+(**96 sections** — zero structural edits; the content edits are in-place wording/label repairs).
+Drift **140 pre/post identical** (no re-baseline needed — the PLAN row's clause satisfied with
+zero delta). KI state: **zero new KI** (the executed items were all pre-recorded observations
+dispositioned per their records; no new defect discovered — the 4 stale Notes = the audit's own
+doc surface, repaired in place; the map-layer findings carry no reader impact); **KI#77-e stays
+OPEN (owner-gated ed-5)**; KI#79 stays OPEN (the drift-tool regex family — informational).
+Next: **the reader-path audit** (spec §8 stage 4: per mode Learn/Build/Debug/Reference — entry
+point → task completion without leaving the mode's backbone; the iter-139 Debug precedent
+`debug_readerpath_audit_iter139.py` replicated for the other three modes) → switch (Q8
+criteria: stages 2–4 green in two consecutive full-battery runs + no OPEN KI in the affected
+families + owner call; Q9: v1 freezes/archives at switch).
+
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -1564,6 +1680,30 @@ in the affected families + owner call; Q9: v1 freezes/archives at switch).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 163 — Canonical audit stage (map §5.24 CA-1..CA-8; the migration tail's second
+  stage, spec §8 stage 3 — the stage COMPLETE):** the machine-checkable cross-pass
+  content_map ↔ canon ↔ glossary-registry ↔ master on the full corpus — **CA-1 99/99 map
+  rows resolve · CA-2 99 canon IDs, zero orphans · CA-3 96 == 96 rendering both directions ·
+  CA-4 45/45/45 registry heads/home=/[ref:] targets · CA-5 zero duplicate concepts/IDs · CA-6
+  the KI#82-style Notes checks repo-wide: 4 stale Notes repaired** (the §1.2 «4 блока» → the
+  canon «5 блоков» + the DEC-16 subsection title; Appendix B «7-row» → 9-row; Appendix C
+  «27 терминов» → 25 статей + the registry relationship; the map stamps) + 5 counter-claims
+  verified correct. **The 12 observation packages dispositioned:** 3 executed as disclosed
+  content dispositions (**P9-5(b)** — the §9.7 Walter E=30 re-label to its canonical
+  classification, canon+master in lockstep, the `WALTER_97_ANCHOR` tool anchor re-pointed in
+  step; **P9-5(d)** — the master §9.3 EN leftovers → the canon RU forms, fence #10 mirror
+  completion; **P-C-4(f)** — the components.md `.part-resume` Location de-stale) + 1 record
+  correction (**P-C-4(b)**: 26 → 25 of 45) + the rest classified: owner-gate (the
+  master-only enrichment/variance families, incl. §7A.7 — the stage documents, the owner
+  decides) / v2-canon-format deferral (the front-matter + E-declaration families, D-5
+  switch-time) / no-action (formatting churn, drift-tool boundaries, by-design conventions) /
+  resolved-verified (KI#84, the L397 typo, the iter-156 miscount, the matrix vague-notes,
+  the part-resume co-travelers — A's benign instance kept). **KI#77-e/R27 (ed-5) stays
+  owner-gated — documented, not re-decided.** Post-disposition battery: the 7 cluster gates
+  ×7 PASS · sync 97/97 · drift **140 pre/post identical** · build/validate/validate:master/
+  version:check 9.2.6 green · tests 64/64 · lint · qa gates PASS · baselines exact
+  english 18 / syntax 238 · hash `2ab607d6` unchanged · runtime 96 sections unchanged.
+  Zero new KI. Detail: git (iter-163 commit).
 - **iter 162 — Parity audit stage (map §5.23 PA-1..PA-7; the migration tail's first stage,
   spec §8 stage 2 — the stage COMPLETE):** a full-corpus re-verification pass on the completed
   v2 corpus (Parts 1–10 + Appendices A/B/C/D post-slicing), zero content edits — the seven

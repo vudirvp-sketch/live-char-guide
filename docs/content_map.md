@@ -1,7 +1,7 @@
 # Content Ownership Map — Live Character Guide v9.2
 
 > Version: 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
-> Last Updated: 2026-09-13 (iter 117 — re-verified: IDs vs `src/master/*.html`, Canon § vs `docs/canon/*.md` headers)
+> Last Updated: 2026-09-16 (iter 163 — canonical audit: full cross-pass re-verified + stale Notes repaired)
 > Status: Canonical Reference (Canon mirror)
 
 ---
@@ -35,7 +35,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
 | Зачем системный подход? | `p1_value_proposition` | §1.1 | Value Prop | Comparison table: Classic vs Systematic approach |
-| Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 4 блока карточки: SP, Description, Examples, Greeting + subsections «Структура гайда» и «Token Budget и конвейер сборки» (refs → §7A.12/§7A.13) |
+| Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 5 блоков карточки: System Prompt / Description / Examples + Anchors / Greeting / Lorebook (E01) + subsections «Структура гайда» и «Бюджет токенов и конвейер сборки» (refs → §7A.12/§7A.13) |
 | Структура гайда (TOC) | `p1_structure_overview` | §1.2 (subsection) | Navigation | Auto-TOC, генерируется build-скриптом (`AUTO_TOC_PLACEHOLDER`); в каноне — subsection внутри §1.2, без собственного H2 |
 | Core Rules | `p1_core_rules` | §1.4 | Rules | 3 foundational rules of character creation |
 | Топ-3 критичные ошибки | `p1_top3_problems` | §1.7 | Detailed problems | Подробный разбор 3 ошибок |
@@ -190,13 +190,13 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| Model Capability Table | `appendix_model_table` | §B.1 | Reference | 7-row table: 12B / 32B+ / API capabilities |
+| Model Capability Table | `appendix_model_table` | §B.1 | Reference | 9-row capability table: 12B / 32B+ / API (+ НАБЛЮДЕНИЕ + «Ключевые следствия») |
 
 ### Appendix C: Glossary — `docs/canon/appendix_glossary.md`
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| Глоссарий | `appendix_glossary` | §C.1 | Reference | 27 терминов, алфавитный указатель |
+| Глоссарий | `appendix_glossary` | §C.1 | Reference | 25 статей v1-источника (алфавитный указатель); канонический реестр терминов — `glossary_registry.md` (45 статей → generated `data/glossary.json`, DEC-17/18) |
 
 ### Appendix D: Character Map (conceptual — canon-only, no master HTML) — `docs/canon/appendix_character_map.md`
 
@@ -272,4 +272,4 @@ Before finalizing any Part, verify:
 
 ---
 
-*Document mirror of Canon. Source of truth: `docs/canon/*.md` + `docs/canon/_README.md`. Updated 2026-09-13, iter 117.*
+*Document mirror of Canon. Source of truth: `docs/canon/*.md` + `docs/canon/_README.md`. Updated 2026-09-16, iter 163.*

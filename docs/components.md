@@ -1,7 +1,7 @@
 # Visual Component Registry — Live Character Guide v9.2
 
 > **Version:** 9.2.0
-> **Last Updated:** 2026-07-25
+> **Last Updated:** 2026-09-16
 > **Status:** Canonical Reference
 
 ---
@@ -532,7 +532,7 @@ Copy buttons are **automatically added** by `lazy-loader.js` to all `<pre>` bloc
 </div>
 ```
 
-**Location:** End of each Part (Part 1 through Part 10), before the closing `</section>`.
+**Location:** 1 live usage: Appendix A (`src/master/appendix_mbti.html`). The Part 1–10 instances were removed (iter 47, P2-7) and the Appendix B/C instances disposed (iters 159/160 — REMOVED_WITH_REASON per DEC-19 pattern); the class stays registered.
 
 **Notes:**
 - Replaces the old "Что дальше?" / "What's next?" bridge sections
