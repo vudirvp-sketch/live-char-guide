@@ -48,7 +48,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts/appendices already sliced (Parts 1–10 + Appendices A/B/C: iters 147–160); the remaining appendix (D) gets it at its own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists on all Parts/appendices (**Parts 1–10 + Appendices A/B/C/D: iters 147–161 — full guide coverage; no unsliced target remains**) |
 
 ### 1.3 Interpretation rules
 
@@ -1318,14 +1318,26 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 
 ### appendix_character_map (Appendix D — **non-rendering**)
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| appendix_character_map::01 | L17 | intro: 5 канонических персонажей | DEFINITION | KEEP | YES | — | |
-| appendix_character_map::02 | L19–25 | карта персонажей table (9 columns) | DEFINITION | KEEP | YES | UNCLEAR | **KI#77-b/c:** stale usage refs — Omnis «Part 5 §5.2 (OCEAN extreme)»: no «Омнис» in `part_05.md` (byte-verified); Omnis «Part 8 §8.X (AP-15 OCEAN Overload)»: stale — concept moved to Part 5 §5.3 per §8.1, AP-15 is now Nested Anchors; Выщербленный «Part 5 (эннеаграмма)»: no occurrence in part_05 (5w4 lives in §10.4); + «Part 6 §6.X» vague R18 |
-| appendix_character_map::03 | L27 | Ссылка (карточки, библии, примеры) | NAVIGATION | KEEP | YES | — | |
-| appendix_character_map::04 | L29–33 | Метки OCEAN note | METADATA | COMPRESS | YES | DUPLICATE | **R17:** «(фикс iter 40 — KI#29)» history in a non-rendering note; substance (extreme/cautious labeling) = R25-family restatement — strip the history label, keep the labeling statement |
-| appendix_character_map::05 | L35–39 | РЕКОМЕНДАЦИЯ: выбирайте персонажа по сложности | APPLICATION | KEEP | YES | UNCLEAR | **R27:** budget ranges «~440–890» (Elena 540 ✓ / Walter ~1100 ✗) and «~1500–1800» (Omnis ~2150 ✗ / Выщербленный ~1500+ boundary) vs the Part 10 stated budgets — framing drift, feeds ed-5 (→ KI#77-e) |
-| appendix_character_map::06 | L41 | Правило: персонаж задаётся ровно один раз | DEFINITION | KEEP | YES | — | Canonical (governs the R22/R23/R28 «keep both sides» classifications) |
+> **iter 161 (the Appendix D v2 build slice):** the `presentation` column seeded (**6 rows: all
+> `open`** — count script-verified; zero `collapsible` / `canonical-link` / `reference-relocate` /
+> `delete-candidate` / `—` — the Reference-layer verdict holds); **the stale-note family refreshed** —
+> the ::02 KI#77-b/c stale-ref claims describe the pre-iter-127 state (repaired ed-8/R18 — the
+> canon now carries «Part 5 §5.1/§5.3», no Part-8 stale ref, no «Part 5 (эннеаграмма)», the full
+> «§6.5–§6.6» form — verified at this slice) and the ::04 R17 note describes the pre-strip state
+> (executed iter 128 — the history label gone, the labeling substance kept); the ::05 R27 note kept
+> — **KI#77-e / the budget-range framing stays owner-gated (ed-5)** — documented, not re-decided;
+> the L-refs verified unchanged per §1.1 (the block lines hold at HEAD); the appendix's
+> conceptual-only section-ID status documented (the `content_map.md` counting convention: 96
+> rendering + Part 0 ×2 + Appendix D ×1 = 99 declared IDs).
+
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| appendix_character_map::01 | L17 | intro: 5 канонических персонажей | DEFINITION | KEEP | YES | — | open | |
+| appendix_character_map::02 | L19–25 | карта персонажей table (9 columns) | DEFINITION | KEEP | YES | UNCLEAR | open | **Stale notes refreshed iter 161 (the pre-iter-127 state described below):** the KI#77-b/c stale usage refs REPAIRED iter 127 (ed-8/R18 — pickaxe `8a365553`) — the Omnis row now carries «Part 5 §5.1/§5.3 (концепты полюсов и перегрузки OCEAN)» (the stale «Part 5 §5.2» + «Part 8 §8.X (AP-15 OCEAN Overload)» forms gone); the Выщербленный row's «Part 5 (эннеаграмма)» dropped (5w4 lives in §10.4, already listed) and «Part 6 §6.X» now the full «§6.5–§6.6» form. Historical audit record (pre-iter-127): Omnis «Part 5 §5.2 (OCEAN extreme)»: no «Омнис» in `part_05.md` (byte-verified); Omnis «Part 8 §8.X (AP-15 OCEAN Overload)»: stale — concept moved to Part 5 §5.3 per §8.1, AP-15 is now Nested Anchors; Выщербленный «Part 5 (эннеаграмма)»: no occurrence in part_05 (5w4 lives in §10.4); «Part 6 §6.X» vague R18 |
+| appendix_character_map::03 | L27 | Ссылка (карточки, библии, примеры) | NAVIGATION | KEEP | YES | — | open | |
+| appendix_character_map::04 | L29–33 | Метки OCEAN note | METADATA | COMPRESS | YES | DUPLICATE | open | **R17 verdict EXECUTED iter 128 (ed-8 continuation — pickaxe `bb4ed292`):** the «(фикс iter 40 — KI#29)» history label stripped from the non-rendering note, the extreme/cautious labeling substance kept (R25-family restatement — values verified consistent with §5.1 at the iter-161 slice: extreme = strictly `<30`/`>70`, cautious zone 30–40/60–70; the bible-side 16K+ values verified) |
+| appendix_character_map::05 | L35–39 | РЕКОМЕНДАЦИЯ: выбирайте персонажа по сложности | APPLICATION | KEEP | YES | UNCLEAR | open | **R27:** budget ranges «~440–890» (Elena 540 ✓ / Walter ~1100 ✗) and «~1500–1800» (Omnis ~2150 ✗ / Выщербленный ~1500+ boundary) vs the Part 10 stated budgets — framing drift, feeds ed-5 (→ KI#77-e). **Owner-gated (ed-5) — the iter-161 slice documents, does not re-decide** |
+| appendix_character_map::06 | L41 | Правило: персонаж задаётся ровно один раз | DEFINITION | KEEP | YES | — | open | Canonical (governs the R22/R23/R28 «keep both sides» classifications). The «Part 10 §10.X» generic form = R18's declared out-of-scope remainder (matrix-unflagged by design) |
 
 ### appendix_glossary (Appendix C)
 
@@ -1398,8 +1410,9 @@ pre-iter-127 state (the R18 Phase B batch `8a365553` repaired the appendix canon
 `[ref: part_NN.md §X.Y — Label]` forms — the per-row «`§X.X` vague» notes in the appendix_glossary
 table above were refreshed at that appendix's own slice iter 160); the «KI#70 never-loaded»
 dependency is resolved by the iter-158 WIRE (all three appendices render at runtime, DEC-24 Q7).
-KI#77-b/c/d stale refs + R27 budget-range drift in character_map (owner-gated ed-5 — that slice
-documents, does not re-decide). **Appendix A sliced iter 158** (map §5.19): 6 rows **all `open`**,
+KI#77-b/c/d stale refs + R27 budget-range drift in character_map — the KI#77-b/c/d notes de-staled
+at the D slice iter 161 (repaired iter 127); **KI#77-e / R27 stays owner-gated (ed-5) — the D
+slice documented it, did not re-decide**. **Appendix A sliced iter 158** (map §5.19): 6 rows **all `open`**,
 zero compression candidates — the Reference-layer verdict holds (compact lookup payload; spec §3).
 **Appendix B sliced iter 159** (map §5.20): 4 rows (3 re-derived + the iter-145 НАБЛЮДЕНИЕ row
 added — the audit-coverage repair) **all `open`**, zero compression candidates — the
@@ -1414,7 +1427,15 @@ compression candidates — **both EXECUTED this slice** (the registry C-3/C-5 de
 KI#70-wire dependency resolved since iter 158); the v7-era `part-resume` disposed
 REMOVED_WITH_REASON (the B precedent executed at C — A's benign instance remains the family's
 sole survivor; the `.part-resume` component keeps 1 live usage); the stale-note family refreshed
-(the R18 refs + the two R29 quotes).
+(the R18 refs + the two R29 quotes). **Appendix D sliced iter 161** (map §5.22): 6 rows **all
+`open`** — the Reference-layer verdict holds (the comparison table = the lookup payload; spec §3);
+zero compression candidates (the only COMPRESS verdict ::04 executed iter 128 — the R17 strip,
+verified at this slice); the KI#77-b/c/d stale-ref notes de-staled (repaired iter 127 — verified);
+**KI#77-e / R27 budget-range framing stays owner-gated (ed-5)** — documented, not re-decided; the
+canon verified F5-approximate (byte-stable — the A/B zero-restructure precedent); the appendix
+stays canon-only/non-rendering (the content_map counting convention: 96 rendering + Part 0 ×2 +
+Appendix D ×1 = 99 declared IDs); **the appendix-slice stage COMPLETE — the F2 column now covers
+the full guide (Parts 1–10 + Appendices A/B/C/D, iters 147–161)**.
 
 ---
 

@@ -1361,6 +1361,69 @@ owner-gated ed-5 gate — the slice documents, does not re-decide; PLAN row v2-b
 parity audit → canonical audit (the P4-5…P10-4 + P-app-4 + P-B-4 + **P-C-4** master-only
 enrichment observations ride this stage) → reader-path audit → switch.
 
+### 5.22 Appendix D v2 build slice (seeded + executed iter 161 — v2 build phase, fourth appendix/Reference slice; **the appendix-slice stage COMPLETE**)
+
+Scope: **Appendix D — Character Map** (`docs/canon/appendix_character_map.md` — **canon-only**:
+no master HTML artifact, never runtime-rendered — the iter-158 WIRE loads Appendices A/B/C only,
+per the `APPENDIX_GUIDE_ORDER` map; the appendix's conceptual-only section-ID status = the
+`content_map.md` counting convention: **96 rendering + Part 0 ×2 + Appendix D ×1 = 99 declared
+IDs**; 1 section / 6 matrix rows; DEC-24 Q6 guide order — fourth appendix; the pinned STATUS
+Next-step row 1, **not owner-gated** — the appendix slices are the pinned track continuation).
+Mechanism: the ratified spec §7 slice shape (evidence → canon restructure → full battery) —
+fifteenth application, reusing the §5.8–§5.21 pattern with the canon-only adaptation (the master
+step N/A — zero mirror work, zero root fallbacks; the build-side expectation = the `index.html`
+timestamp churn only, restored per AGENTS.md delivery discipline). Primary reader mode:
+**Reference** (spec §3: compact rule/lookup entries with canonical-home links — the comparison
+table IS the lookup payload). Editorial Policy 5-point check applied per candidate evaluation
+(zero edits qualified — documented below). Acceptance gate: the full battery (sync 97/97 ·
+parity ×7 · tests · baselines · build/validate/validate:master/version:check · runtime unchanged
+— 96 sections) **+ the PLAN row's canon-only scope clauses** (KI#77-e/R27 documented, not
+re-decided; the conceptual-only section-ID status documented). No cluster parity gate extends
+this slice (Appendix D hosts no cluster owner — the seven cluster owners sit in the Parts,
+verified §5.18 P10-1's list).
+
+**F2 presentation map (spec §4.1 mechanism, fifteenth application):** the appendix_character_map
+matrix table now carries the `presentation` column (**6 rows: 6 `open`** — count
+script-verified); the stale-note family refreshed (the ::02 KI#77-b/c stale-ref claims described
+the pre-iter-127 state — repaired ed-8/R18, pickaxe `8a365553`, verified at this slice: the Omnis
+row carries «Part 5 §5.1/§5.3 (концепты полюсов и перегрузки OCEAN)», zero Part-8 refs, zero
+«Part 5 (эннеаграмма)», the full «§6.5–§6.6» form; the ::04 R17 note described the pre-strip
+state — executed iter 128, pickaxe `bb4ed292`, verified: the history label gone, the labeling
+substance kept); the L-refs verified unchanged per §1.1 (all six block line-ranges verified
+against HEAD); the appendices verdict extended with the D-sliced line + **the appendix-slice
+stage COMPLETE** (the F2 column now covers the full guide — Parts 1–10 + Appendices A/B/C/D,
+iters 147–161); matrix §1.2 scope note extended to full coverage. Zero `collapsible` /
+`canonical-link` / `reference-relocate` / `delete-candidate` / `—` — the Reference-layer verdict
+holds (the comparison table + the labeling note + the apply-layer recommendation + the one-place
+rule = compact lookup payload; spec §3). F5: verified F5-approximate — the Reference-layer shape
+is the target form (intro → the lookup table → canonical-home links → the labeling note → the
+apply recommendation → the governing rule); zero restructure. F6: zero wraps (non-rendering — no
+master HTML carries the blocks). F3/F4: no checklists / no example tiering in the appendix.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P-D-1 | — (evidence) | matrix appendix_character_map table: 8 columns, no presentation axis; 6 rows carrying the pre-iter-127 KI#77-b/c stale-ref claims (::02) + the pre-strip R17 note (::04) | `presentation` column seeded (6 rows: 6 `open` — count script-verified); the stale-note family refreshed (the KI#77-b/c claims marked REPAIRED iter 127 — the fixed forms verified at HEAD, the historical audit record kept; the R17 verdict marked EXECUTED iter 128 — the strip verified); the ::05 R27 note kept + the owner-gate line made explicit (ed-5/KI#77-e — documented, not re-decided); the L-refs verified unchanged per §1.1; the §14 preamble note added; the appendices verdict extended (the D-sliced line + the stage-COMPLETE line); §1.2 extended to full-guide coverage | EXECUTED **— iter 161** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…160 stale-note-refresh precedent; the matrix's own §1.1 re-derivation convention |
+| P-D-2 | `appendix_character_map::01–::06` (canon) | the 41-line canon file — verified at HEAD: the intro (::01), the 5-row comparison table (::02 — all usage refs the post-iter-127 fixed forms; the OCEAN values consistent with §5.1/§9.7/§10.1–§10.4/the bible), the Ссылка row (::03 — full `[ref: …]` forms), the Метки OCEAN note (::04 — the post-iter-128 stripped form), the РЕКОМЕНДАЦИЯ (::05 — the R27 budget ranges present), the one-place Правило (::06) | **zero edits — byte-stable** (sha256-verified pre/post: `9947569b92b2dc4a…`; the Appendix A/B zero-restructure precedent). F5-approximate verified: the Reference-layer shape is the target form; the only COMPRESS verdict (::04 R17) executed iter 128 pre-slice; zero open compression candidates (the ::05 R27 ranges + the KI#77-e framing stay **owner-gated ed-5** — the slice documents, does not re-decide); the ::06 «Part 10 §10.X» generic form = R18's declared out-of-scope remainder (matrix-unflagged by design — kept); section ID `appendix_character_map` preserved (fences #4/#5 clean; the conceptual-only convention intact); zero tool probes on the file's content (the sync audit carries no appendix_character_map probes; the drift tool's CANON_ONLY_FILES listing = informational by design) | VERIFIED **— zero edits (iter 161)** | Editorial Policy (compress redundant presentation, never unique capability — zero qualifying edits); the iter-158/159 A/B canon-byte-stable precedents; the R27/KI#77-e owner-gate record |
+| P-D-3 | — (master) | N/A — canon-only appendix: no `src/master/appendix_character_map.html` exists (verified); never runtime-rendered (the iter-158 WIRE's `APPENDIX_GUIDE_ORDER` = A/B/C) | N/A — zero mirror work, zero root fallbacks (the PLAN row's canon-only clause); the verification build regenerates only the root `index.html` timestamp churn — restored per AGENTS.md delivery discipline; runtime unchanged (96 sections — structural probe on `dist/`) | N/A **— by design** | the content_map counting convention (iter 117/126); DEC-24 Q7 (the WIRE scope = the manifest's three appendix files) |
+| P-D-4 | — (observed) | canon-side variances, never rendered: (a) the front-matter staleness (`last_synced: 2026-07-08 (iter 40 — KI#29 OCEAN labeling fix)` + the `migration_status` history tail — the repo-wide iter-152 family, rides the v2 canon-format decision); (b) the ::06 «Part 10 §10.X» generic ref form (R18's declared out-of-scope remainder — matrix-unflagged by design); (c) the drift tool's canon-only file listing (appendix_character_map: 1 canon-only section, 0 master — informational by design, `CANON_ONLY_FILES`) | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (the front-matter family rides the v2 canon-format decision; the generic form rides R18's out-of-scope design; the drift listing is the tool's by-design classification) | RECORDED **— deferred (iter 161)** | AGENTS.md scope discipline; the P4-5…P10-4 + P-app-4 + P-B-4 + P-C-4 observation-package chain |
+| P-D-5 | — (state) | STATUS iter-160 / PLAN row v2-build-appendix-d open / no map §5.22 | map §5.22 + STATUS iter-161 (Current State; the v2-architecture invariant extended — **the appendix-slice stage COMPLETE** (A + the KI#70 WIRE iter 158, B 159, C 160, D 161); iter-161 KI-note — no lifecycle deletions due, no new KI; Next step re-pinned to **the parity-audit stage**) + PLAN v2-build-appendix-d → COMPLETE + the v2-parity-audit row + iter-161 history note + worklog + CHANGELOG + NAV §7 de-stale (the appendix slices: A/B/C/D — stage COMPLETE) | EXECUTED **— iter 161** | iter-147…160 state-package pattern |
+
+Accounting: 1 presentation-column seeding (6 rows: 6 `open`, count script-verified; zero rows
+added — the total stays 504) + 0 canon edits (P-D-2: byte-stable, sha256-verified) + 0 master
+edits (P-D-3: canon-only by design) + 1 observation package deferred (P-D-4) + 1 state package
+(P-D-5). Byte-unchanged: canon `appendix_character_map.md` (sha256 `9947569b92b2dc4a…` pre/post);
+all master/canon files; `data/*.json`; matrix tag/decision/load/repeat columns unchanged. Deferred
+(recorded, out of scope): the P-D-4 observation package (the front-matter family / the R18
+out-of-scope generic form / the drift canon-only listing — the audit/switch stages own their
+families); **KI#77-e (open — the R27 budget-range framing owner-gated ed-5, documented, not
+re-decided)**; KI#79 (open, untouched). No root fallbacks regenerate with this slice
+(non-rendering; the `index.html` timestamp churn restored — the PLAN row's clause). Drift: 140
+pre/post — zero canon/master content edits, zero drift-mover entries expected (verified by JSON
+pre/post diff). Next: **the parity-audit stage** (spec §8 stage 2: the 7 cluster gates + sync +
+drift must pass on the completed v2 corpus; any new cluster discovered during the build gets its
+own gate before the stage closes; PLAN row v2-parity-audit) → canonical audit (the P4-5…P10-4 +
+P-app-4 + P-B-4 + P-C-4 + **P-D-4** observations ride this stage) → reader-path audit → switch.
+
 
 ## 6. Owner decision points (blocking, in recommended order)
 
@@ -1459,6 +1522,25 @@ enrichment observations ride this stage) → reader-path audit → switch.
 
 ## 7. Iteration log (registry changes)
 
+- **iter 161 — Appendix D v2 build slice (map §5.22 P-D-1..P-D-5; the appendix-slice stage
+  COMPLETE):** F2 presentation column 6 rows (**all `open`** — the Reference-layer verdict holds;
+  count script-verified; zero rows added — the total stays 504); matrix §1.2 extended to
+  full-guide coverage (Parts 1–10 + Appendices A/B/C/D, iters 147–161); the stale-note family
+  refreshed (the ::02 KI#77-b/c claims describe the pre-iter-127 state — repaired ed-8/R18,
+  pickaxe-verified + verified at HEAD; the ::04 R17 note described the pre-strip state — executed
+  iter 128, verified; the ::05 R27 note kept — **KI#77-e owner-gated ed-5, documented, not
+  re-decided**); the L-refs verified unchanged per §1.1; the appendices verdict extended (the
+  D-sliced line + the stage-COMPLETE line); canon — **zero edits** (`appendix_character_map.md`
+  byte-stable, sha256-verified pre/post — F5-approximate; the A/B zero-restructure precedent;
+  zero open compression candidates); master — **N/A by design** (canon-only appendix: no master
+  file, never runtime-rendered — the WIRE's `APPENDIX_GUIDE_ORDER` = A/B/C; zero root fallbacks;
+  the index.html timestamp churn restored per AGENTS.md delivery discipline); the conceptual-only
+  section-ID status documented (the content_map convention: 96 rendering + Part 0 ×2 + Appendix
+  D ×1 = 99 declared IDs); the P-D-4 observation package deferred (the front-matter staleness,
+  the R18 out-of-scope generic form, the drift canon-only listing); drift 140 unchanged (zero
+  canon/master content edits — JSON pre/post diff); full battery green (sync 97/97 · parity ×7 ·
+  tests 64/64 · baselines exact english 18 / syntax 238 · hash `2ab607d6` unchanged · runtime
+  unchanged — 96 sections).
 - **iter 160 — Appendix C v2 build slice (map §5.21 P-C-1..P-C-5):** F2
   presentation column 26 rows (**all `open`** — the Reference-layer verdict holds; count
   script-verified; zero rows added — the total stays 504); matrix §1.2 extended to Parts 1–10 +
