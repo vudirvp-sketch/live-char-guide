@@ -1425,6 +1425,48 @@ own gate before the stage closes; PLAN row v2-parity-audit) → canonical audit 
 P-app-4 + P-B-4 + P-C-4 + **P-D-4** observations ride this stage) → reader-path audit → switch.
 
 
+### 5.23 Parity audit stage record (executed iter 162 — the migration tail's first stage, spec §8 stage 2)
+
+Scope: **the completed v2 corpus** (Parts 1–10 + Appendices A/B/C/D post-slicing — the F2
+full-coverage matrix state, iters 147–161; the pinned STATUS Next-step row 1, **not owner-gated**
+— the migration tail's first stage, PLAN row v2-parity-audit). Mechanism: **a full-corpus
+re-verification pass, not the per-slice green batteries** — the existing audits re-run as one
+stage battery at HEAD `b8e61adf` (fresh clone, clean worktree) + the corpus-snapshot verification
+(the 96-section runtime + the F2 full-coverage matrix state — both script-verified) + the
+discovered-cluster sweep + the deferred observation packages' disposition-ownership sweep.
+Acceptance gate (the PLAN row): all gates PASS on the completed corpus; any FAIL = a KI +
+reconciliation before the stage closes — **zero FAILed, zero content edits, zero reconciliation**
+(canon stays untouched; fence #10 unexercised); runtime unchanged (96 sections).
+
+**Stage gate battery (executed on the corpus, zero edits — all commands run in the sandbox;
+pnpm via `npx pnpm@10`):**
+
+| PA# | Gate | Verified result | Status | Basis |
+|---|---|---|---|---|
+| PA-1 | the seven cluster parity gates | `audit_glossary_parity.py` PASS (DEC-17/18 chain intact) · `audit_core_directives_parity.py` PASS (§7A.2 canonical, E08 the one visual) · `audit_token_budget_parity.py` PASS (§7A.12 owner, E01/E15 SHARED_REFERENCE) · `audit_enneagram_parity.py` PASS (§5.4 → generated `data/enneagram.json`) · `audit_diagnostics_parity.py` PASS (§9.6 canonical, E13 re-pointed) · `audit_voice_parity.py` PASS (§3.2 owner, widget constants parity-locked) · `audit_sampling_parity.py` PASS (§7A.6 owner, E17 re-pointed, OBSERVATION intact) | VERIFIED **— iter 162 (×7 PASS)** | spec §8 stage 2 + the cluster inventory (spec §6); AGENTS.md canon-audits |
+| PA-2 | canon→master sync + drift | sync **97/97 PASS** (`audit_canon_master_sync.py`); drift **140 actionable** (`audit_canon_master_drift.py --actionable-only`, informational exit 0 — the JSON pre/post capture **identical**, zero drift-mover entries: the stage made zero content edits; the 140 baseline attributed to the v9-era paragraph families + the comment-noise/KI#79-boundary entries per the slice records) | VERIFIED **— iter 162** | fence #10; the PLAN row's drift clause (KI#79's regex family stays OPEN — informational tool, no reader impact) |
+| PA-3 | the full battery | build ✓ (unified + shell + root fallbacks; hash `2ab607d6` unchanged — shell untouched) · validate ✓ · validate:master ✓ (12 checks) · version:check ✓ 9.2.6 (4-place sync) · tests **64/64** · lint ✓ (eslint `src/` clean) · qa:csp PASS · qa:bundle PASS · qa:contrast PASS · qa:doc-versions exit 0 (1 pre-existing warning — CONTENT_RESTRUCTURE_PLAN.md, not this stage's file) · qa:english **18** / qa:syntax **238** (baselines exact, counts not increased) | VERIFIED **— iter 162** | AGENTS.md common commands + DEC-13 (gates judged individually) |
+| PA-4 | the corpus snapshot | **runtime:** 96 sections on `dist/` (structural probe: every `<section data-section>` of the 11 parts + 3 appendices == the manifest anchors, exact order; the loader's `APPENDIX_GUIDE_ORDER` sorts A→B→C — Appendix D absent by design; the content_map convention: 96 rendering + Part 0 ×2 + Appendix D ×1 = 99 declared IDs). **matrix:** F2 full coverage — **15/15 slice targets** (Parts 1–10 + A/B/C/D) carry the `presentation` column, zero missing, zero values outside the ratified vocabulary (count script: `/home/z/my-project/scripts/iter162_f2_coverage.py` — the in-sandbox stage tool, the iter-147…161 per-Part count precedent): Part 1 = 30 · Part 2 = 26 · Part 3 = 46 · Part 4 = 51 (50 `open` + 1 `canonical-link`) · Part 5 = 43 · Part 6 = 25 · Part 7A = 94 (86/4/2/2) · Part 7B = 33 (25/8) · Part 8 = 40 · Part 9 = 43 (38/3/1/1) · Part 10 = 20 (9/11) · A = 6 · B = 4 · C = 26 · D = 6 — **every count == its slice record**; total 493 presentation rows + 11 Part 0 pre-F2 rows = **504 = the disclosed living total** | VERIFIED **— iter 162 (corpus snapshot recorded)** | the PLAN row's acceptance clause (the corpus snapshot = the 96-section runtime + the F2 matrix state) |
+| PA-5 | the discovered-cluster sweep (spec §8 stage 2: «any cluster discovered during the build gets its own gate before the stage closes») | **zero new clusters** — every build slice's record carries the explicit `no new cluster parity gate` verification (Parts 1–10 + the appendices: the seven cluster owners — §7A.2 / §7A.6 / §7A.12 / §5.4 / §9.6 / §3.2 / the glossary registry — cover the corpus; KI#84 was a single-value defect, not a cluster — CLOSED iter 157); the seven existing gates re-verified green as one corpus pass (PA-1) | VERIFIED **— zero (no new gate needed)** | spec §8 stage 2; the per-slice no-new-cluster records (maps §5.8–§5.22) |
+| PA-6 | the deferred observation packages' disposition-ownership sweep | **12/12 packages recorded deferred** (P4-5 / P5-5 / P6-4 / P7A-4 / P7B-4 / P8-4 / P9-5 / P10-4 / P-app-4 / P-B-4 / P-C-4 / P-D-4 — each one map row, grep-verified; every record's disposition = deferred, ownership = **the canonical-audit stage**); nothing moves at this stage — the parity audit verifies the gates, not the observations (the PLAN row's clause) | VERIFIED **— ownership confirmed, nothing moved** | the PLAN row's sweep clause; the observation-package chain (maps §5.11–§5.22) |
+| PA-7 | — (state) | STATUS iter-162 (Current State; the v2-architecture invariant extended — **the parity-audit stage COMPLETE**; iter-162 KI-note — no lifecycle deletions due, no new KI; Next step re-pinned to **the canonical-audit stage**) + PLAN v2-parity-audit → COMPLETE + the v2-canonical-audit row + the iter-162 history note + worklog (iter-161 → one-liner; the ≤10 cap trim) + CHANGELOG (iter-162 entry; iter-160 collapsed) + NAV §7 de-stale (the migration tail: parity audit COMPLETE) | EXECUTED **— iter 162** | the iter-147…161 state-package pattern |
+
+Accounting: **zero content edits** — canon byte-stable, master byte-stable, `data/*.json`
+byte-stable, matrix rows unchanged (the §5 preamble count stays 504; no presentation value
+touched); zero root fallbacks regenerate (the verification build's only worktree effect = the
+root `index.html` timestamp churn — **restored** per AGENTS.md delivery discipline; hash
+`2ab607d6` unchanged); drift 140 pre/post **identical** (JSON pre/post diff). KI state: zero
+new KI (all gates green); **KI#77-e stays OPEN (owner-gated ed-5 — the R27 budget-range framing
+family, rides the canonical-audit/ed-5 owner call)**; KI#79 stays OPEN (the drift-tool regex
+family — informational, the PLAN ki-79 row deferred unless a migration slice requires it). The
+stage closes with the existing seven cluster gates — no new gate, no reconciliation. Next: **the
+canonical-audit stage** (spec §8 stage 3: one canonical home per concept across the whole guide —
+the machine-checkable content-map ↔ canon ↔ glossary-registry pass + the master-only enrichment
+observation packages P4-5…P-D-4 ride this stage; PLAN row v2-canonical-audit) → reader-path
+audit → switch (Q8 criteria: stages 2–4 green in two consecutive full-battery runs + no OPEN KI
+in the affected families + owner call; Q9: v1 freezes/archives at switch).
+
+
 ## 6. Owner decision points (blocking, in recommended order)
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
@@ -1522,6 +1564,23 @@ P-app-4 + P-B-4 + P-C-4 + **P-D-4** observations ride this stage) → reader-pat
 
 ## 7. Iteration log (registry changes)
 
+- **iter 162 — Parity audit stage (map §5.23 PA-1..PA-7; the migration tail's first stage,
+  spec §8 stage 2 — the stage COMPLETE):** a full-corpus re-verification pass on the completed
+  v2 corpus (Parts 1–10 + Appendices A/B/C/D post-slicing), zero content edits — the seven
+  cluster parity gates **×7 PASS** (glossary / core-directives / token-budget / enneagram /
+  diagnostics / voice / sampling) · canon→master sync **97/97 PASS** · drift **140 actionable
+  unchanged** (JSON pre/post identical — informational; KI#79 stays OPEN) · the full battery
+  green (build hash `2ab607d6` unchanged · validate · validate:master 12 checks ·
+  version:check 9.2.6 · tests 64/64 · lint · qa:csp/bundle/contrast PASS · qa:doc-versions
+  exit 0 · baselines exact english 18 / syntax 238); the corpus snapshot recorded (runtime
+  **96 sections** — all == the manifest anchors in exact order, the WIRE order A→B→C, D absent
+  by design; the F2 matrix full coverage **15/15 targets / 493 presentation rows + 11 Part 0
+  pre-F2 rows = 504**, every per-Part count == its slice record — count script-verified); the
+  discovered-cluster sweep — **zero new clusters** (the per-slice no-new-cluster-gate records
+  147–161; the seven owners cover the corpus; no new gate needed); the observation-package
+  ownership sweep — **12/12 deferred packages ride the canonical-audit stage** (nothing moved);
+  zero new KI; KI#77-e (owner-gated ed-5) + KI#79 unchanged; the `index.html` timestamp churn
+  restored. **The stage closes green — the canonical-audit stage next (spec §8 stage 3).**
 - **iter 161 — Appendix D v2 build slice (map §5.22 P-D-1..P-D-5; the appendix-slice stage
   COMPLETE):** F2 presentation column 6 rows (**all `open`** — the Reference-layer verdict holds;
   count script-verified; zero rows added — the total stays 504); matrix §1.2 extended to
