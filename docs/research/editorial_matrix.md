@@ -48,7 +48,7 @@
 | `decision` | `KEEP / COMPRESS / MOVE / CROSS-REFERENCE / DELETE` | Recommended treatment (research §32) |
 | `load` | `YES / NO / UNCERTAIN` | Functional load preserved **if the decision is applied** — "what capability disappears?" (research §22) |
 | `repeat` | `DUPLICATE / REINFORCEMENT / SPECIAL CASE / RELATED BUT DISTINCT / CONTRADICTORY / UNCLEAR / —` | Second-pass classification of repeated semantics (research §24); `—` = single occurrence |
-| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts/appendices already sliced (Parts 1–10 + Appendices A/B: iters 147–159); the remaining appendices (C/D) get it at their own slice time |
+| `presentation` | `open / collapsible / reference-relocate / delete-candidate / canonical-link` | F2 presentation disposition (v2 architecture spec §4.1, ratified DEC-24): seeded at the Part's build-slice evidence step and executed in the same slice. `open` = stays in the page flow; `collapsible` = wraps in `<details class="interactive">`; `reference-relocate` = moves to the Reference layer (glossary/appendix); `delete-candidate` = redundant presentation (Editorial Policy 5-point check); `canonical-link` = 1-sentence + link to the canonical owner. `—` = block already disposed by an executed pre-slice decision (historical audit row). Column exists only on the Parts/appendices already sliced (Parts 1–10 + Appendices A/B/C: iters 147–160); the remaining appendix (D) gets it at its own slice time |
 
 ### 1.3 Interpretation rules
 
@@ -1332,35 +1332,43 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 > **iter 132:** all 26 rows seeded into `migration_map_v2.md` §5.1 (glossary slice, DEC-17) —
 > back-pointers `→ migration_map_v2 C-<n>` appended per row; editorial verdicts below stand
 > (v1 audit record).
+> **iter 160 (the Appendix C v2 build slice):** the `presentation` column seeded (**26 rows:
+> all `open`** — count script-verified); **the stale-note family refreshed** — every pre-slice
+> «ref `§X.X` vague» claim predates the iter-127 R18 repair (the canon refs verified as the
+> full `[ref: part_NN.md §X.Y — Label]` forms at this slice), and the two R29 mismatch quotes
+> (::04 «Tier 0 (basic Anchor)», ::10 «G2=Отрочество») are likewise stale — the canon aligns
+> with §6.3 («без отдельного CoT-блока») and §4.11 («Юность»); the R01/R02 compressions
+> EXECUTED (::03/::05 — see the rows); the L-refs re-derived per §1.1 (the ::05 compression
+> shifted the tail blocks).
 
-| id | lines | block | tag | decision | load | repeat | notes |
-|---|---|---|---|---|---|---|---|
-| appendix_glossary::01 | L19 | intro (definition + ref pattern) | NAVIGATION | KEEP | YES | — | Declares the glossary's own entry pattern; → migration_map_v2 C-1 |
-| appendix_glossary::02 | L21–25 | A — Anti-godmoding | DEFINITION | KEEP | YES | REINFORCEMENT | R07-family (2-line form + positive-formulation rationale echo of §7A.1::09); ref `§7A.X` vague R18; → migration_map_v2 C-2 |
-| appendix_glossary::03 | L27–31 | B — Behavioral Anchor | DEFINITION | COMPRESS | YES | DUPLICATE | **R01 reference-layer occurrence:** carries the placement ПРАВИЛО (2-sentence statement of the §1.4 rule); fold to 1 sentence + ref §1.4 per the glossary's own pattern; the `§2.1` ref itself is correct; → migration_map_v2 C-3 |
-| appendix_glossary::04 | L33–37 | C — CoT | DEFINITION | KEEP | YES | — | R29: «Tier 0 (basic Anchor)» vs §6.3 «Tier 0 — без отдельного CoT-блока»; ref §6.2 ✓; → migration_map_v2 C-4 |
-| appendix_glossary::05 | L39–51 | C — CORE DIRECTIVES (full annotated 7-item list) | DEFINITION | COMPRESS | YES | DUPLICATE | **R02 verdict (ed-2 input, required by the ed-matrix PLAN row):** full annotated copy exceeds the glossary's own 1-sentence+ref pattern — the annotations restate §7A.2::06–::12; compress to definition + 7-name index + fixed ref §7A.2; **KI#70 dependency:** master renders the full list but the appendix never runtime-loads — the compression should ride the KI#70 wire/drop decision; ref `§7A.X` vague R18; → migration_map_v2 C-5; v2 file disposition → migration_map_v2 D-5 (deferred to v2 switch) |
-| appendix_glossary::06 | L53–57 | E — Embodiment Protocol | DEFINITION | KEEP | YES | — | Protocol-vs-Directive distinction preserved ✓; ref `§2.X` vague; → migration_map_v2 C-6 |
-| appendix_glossary::07 | L59–63 | E — Enneagram | DEFINITION | KEEP | YES | — | Ref §5.4 ✓; → migration_map_v2 C-7 |
-| appendix_glossary::08 | L65–69 | F — FLAW | DEFINITION | KEEP | YES | REINFORCEMENT | R24 reference-side; ref `§4.X` vague; → migration_map_v2 C-8 |
-| appendix_glossary::09 | L71–75 | G — GHOST | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-9 |
-| appendix_glossary::10 | L77–81 | G — GHOST Layers | DEFINITION | KEEP | YES | — | R29: «G2=Отрочество» vs §4.11 «Юность»; ref `§4.X` vague; → migration_map_v2 C-10 |
-| appendix_glossary::11 | L83–87 | G — Greeting Message | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague; → migration_map_v2 C-11 |
-| appendix_glossary::12 | L89–93 | I — Identity Block | DEFINITION | KEEP | YES | — | Name-language rule echo of §7A.1::04 (reference layer); ref `§7A.X` vague; → migration_map_v2 C-12 |
-| appendix_glossary::13 | L95–99 | L — LIE | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-13 |
-| appendix_glossary::14 | L101–105 | L — Lorebook | DEFINITION | KEEP | YES | — | Ref `§7B.X` vague; → migration_map_v2 C-14 |
-| appendix_glossary::15 | L107–111 | M — MBTI | DEFINITION | KEEP | YES | REINFORCEMENT | **R26 statement #4**; ref appendix ✓; → migration_map_v2 C-15 |
-| appendix_glossary::16 | L113–117 | N — NEED | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-16 |
-| appendix_glossary::17 | L119–123 | O — OCEAN | DEFINITION | KEEP | YES | REINFORCEMENT | R25 reference-side restatement (golden rule); refs §5.1 + §1.4 ✓; → migration_map_v2 C-17 |
-| appendix_glossary::18 | L125–129 | S — SPINE | DEFINITION | KEEP | YES | REINFORCEMENT | R21 clause (implicit GHOST/LIE); ref §4.1 ✓; → migration_map_v2 C-18 |
-| appendix_glossary::19 | L131–135 | S — System Prompt / SP | DEFINITION | KEEP | YES | — | Container-vs-content distinction ✓; ref `§7A.X` vague; → migration_map_v2 C-19 |
-| appendix_glossary::20 | L137–141 | T — T→A→P | DEFINITION | KEEP | YES | — | Ref §2.1 ✓; → migration_map_v2 C-20 |
-| appendix_glossary::21 | L143–147 | T — Token Budget | DEFINITION | KEEP | YES | — | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block); ref `§7A.X` vague; → migration_map_v2 C-21; → migration_map_v2 TB-6 (verified iter 135) |
-| appendix_glossary::22 | L149–153 | V — Voice | DEFINITION | KEEP | YES | REINFORCEMENT | R03 clause («Модель — копировщик паттернов») + R06 two-level rule (reference echo); ref `§3.X` vague; → migration_map_v2 C-22 |
-| appendix_glossary::23 | L155–159 | V — Voice Bleed (cross-character) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-23 |
-| appendix_glossary::24 | L161–165 | V — Voice Bleed (degradation) | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-24 |
-| appendix_glossary::25 | L167–171 | V — Voice Isolation | DEFINITION | KEEP | YES | — | Ref `§3.X` vague; → migration_map_v2 C-25 |
-| appendix_glossary::26 | L173–177 | W — WANT | DEFINITION | KEEP | YES | — | Ref `§4.X` vague; → migration_map_v2 C-26 |
+| id | lines | block | tag | decision | load | repeat | presentation | notes |
+|---|---|---|---|---|---|---|---|---|
+| appendix_glossary::01 | L19 | intro (definition + ref pattern) | NAVIGATION | KEEP | YES | — | open | Declares the glossary's own entry pattern; → migration_map_v2 C-1. **iter 160 observation (P-C-4b):** the «всех технических терминов» coverage claim overstates — the appendix carries 26 of the registry's 45 entries (the 20 promoted machine-layer terms absent); the appendix↔registry relationship rides D-5's switch-time disposition |
+| appendix_glossary::02 | L21–25 | A — Anti-godmoding | DEFINITION | KEEP | YES | REINFORCEMENT | open | R07-family (2-line form + positive-formulation rationale echo of §7A.1::09); ref §7A.1 ✓ (R18-repaired iter 127); → migration_map_v2 C-2 |
+| appendix_glossary::03 | L27–31 | B — Behavioral Anchor | DEFINITION | COMPRESS | YES | DUPLICATE | open | **R01 reference-layer occurrence — COMPRESSED iter 160** (this slice, the matrix verdict): the placement ПРАВИЛО folded to 1 sentence + the §1.4 parenthetical ref per the glossary's own pattern — the registry C-3 deployed form (the bolded ПРАВИЛО marker + the 2-sentence standalone statement dropped; the «Anchors = behavioural patterns» EN tail russified to «якоря задают поведенческие паттерны, Examples — голосовые»); the `§2.1` ref correct; → migration_map_v2 C-3 |
+| appendix_glossary::04 | L33–37 | C — CoT | DEFINITION | KEEP | YES | — | open | Ref §6.2 ✓; → migration_map_v2 C-4. **Stale notes refreshed iter 160:** (a) the R29 «Tier 0 (basic Anchor)» mismatch no longer exists — the canon carries «Tier 0 (без отдельного CoT-блока)», aligned with §6.3; (b) the master-side Tier-0 enrichment recorded as P-C-4a (the master over-carries the §6.3 Embodiment-as-micro-CoT framing + the «CoT = дополнительный внутренний монолог» sentence — master-only, never canonized; the P4-4 enrichment family) |
+| appendix_glossary::05 | L39–43 | C — CORE DIRECTIVES (definition + 7-name index) | DEFINITION | COMPRESS | YES | DUPLICATE | open | **R02 verdict EXECUTED iter 160** (this slice; the matrix/ed-2 verdict + the R13 fold): the full annotated 7-item copy → definition + 7-name index + the fixed §7A.2 pointer («Определение каждой директивы и многоуровневое правило языка (по модели) — §7A.2») — the registry C-5 deployed form (DEC-17c = the v2 Reference-layer representation); the KI#70-wire dependency resolved since iter 158 (the appendix renders — the live duplicate disposed; the matrix §14 R02 note's condition met); the master `<ol>`'s #3-li Russian-gloss gap died with the list (canon+master now identical); ref §7A.2 ✓ (R18-repaired iter 127); → migration_map_v2 C-5; v2 file disposition → migration_map_v2 D-5 (deferred to v2 switch) |
+| appendix_glossary::06 | L45–49 | E — Embodiment Protocol | DEFINITION | KEEP | YES | — | open | Protocol-vs-Directive distinction preserved ✓; ref §2.4 ✓ (R18-repaired iter 127); → migration_map_v2 C-6 |
+| appendix_glossary::07 | L51–55 | E — Enneagram | DEFINITION | KEEP | YES | — | open | Ref §5.4 ✓; → migration_map_v2 C-7 |
+| appendix_glossary::08 | L57–61 | F — FLAW | DEFINITION | KEEP | YES | REINFORCEMENT | open | R24 reference-side; ref §4.4 ✓ (R18-repaired iter 127); → migration_map_v2 C-8 |
+| appendix_glossary::09 | L63–67 | G — GHOST | DEFINITION | KEEP | YES | — | open | Ref §4.2 ✓ (R18-repaired iter 127); → migration_map_v2 C-9 |
+| appendix_glossary::10 | L69–73 | G — GHOST Layers | DEFINITION | KEEP | YES | — | open | **Stale notes refreshed iter 160:** (a) the R29 «G2=Отрочество» mismatch no longer exists — the canon carries «G2=Юность», aligned with §4.11; (b) ref §4.11 ✓ (R18-repaired iter 127); → migration_map_v2 C-10 |
+| appendix_glossary::11 | L75–79 | G — Greeting Message | DEFINITION | KEEP | YES | — | open | Ref §7B.2 ✓ (R18-repaired iter 127); → migration_map_v2 C-11 |
+| appendix_glossary::12 | L81–85 | I — Identity Block | DEFINITION | KEEP | YES | — | open | Name-language rule echo of §7A.1::04 (reference layer); ref §7A.1 ✓ (R18-repaired iter 127); → migration_map_v2 C-12 |
+| appendix_glossary::13 | L87–91 | L — LIE | DEFINITION | KEEP | YES | — | open | Ref §4.3 ✓ (R18-repaired iter 127); → migration_map_v2 C-13 |
+| appendix_glossary::14 | L93–97 | L — Lorebook | DEFINITION | KEEP | YES | — | open | Ref §7B.3 ✓ (R18-repaired iter 127); → migration_map_v2 C-14 |
+| appendix_glossary::15 | L99–103 | M — MBTI | DEFINITION | KEEP | YES | REINFORCEMENT | open | **R26 statement #4**; ref appendix ✓; → migration_map_v2 C-15 |
+| appendix_glossary::16 | L105–109 | N — NEED | DEFINITION | KEEP | YES | — | open | Ref §4.5 ✓ (R18-repaired iter 127); → migration_map_v2 C-16 |
+| appendix_glossary::17 | L111–115 | O — OCEAN | DEFINITION | KEEP | YES | REINFORCEMENT | open | R25 reference-side restatement (golden rule); refs §5.1 + §1.4 ✓; → migration_map_v2 C-17 |
+| appendix_glossary::18 | L117–121 | S — SPINE | DEFINITION | KEEP | YES | REINFORCEMENT | open | R21 clause (implicit GHOST/LIE); ref §4.1 ✓; → migration_map_v2 C-18 |
+| appendix_glossary::19 | L123–127 | S — System Prompt / SP | DEFINITION | KEEP | YES | — | open | Container-vs-content distinction ✓; ref §7A.1 ✓ (R18-repaired iter 127); → migration_map_v2 C-19 |
+| appendix_glossary::20 | L129–133 | T — T→A→P | DEFINITION | KEEP | YES | — | open | Ref §2.1 ✓; → migration_map_v2 C-20 |
+| appendix_glossary::21 | L135–139 | T — Token Budget | DEFINITION | KEEP | YES | — | open | R11-family («4K ~430–580 на карточку» — card-total framing vs §7A.12 per-block; the owner-gated ed-5 family — the slice documents, does not re-decide; the registry C-21 side aligned at its merge); ref §7A.12 ✓ (R18-repaired iter 127); → migration_map_v2 C-21; → migration_map_v2 TB-6 (verified iter 135) |
+| appendix_glossary::22 | L141–145 | V — Voice | DEFINITION | KEEP | YES | REINFORCEMENT | open | R03 clause («Модель — копировщик паттернов») + R06 two-level rule (reference echo); ref §3.1 ✓ (R18-repaired iter 127); → migration_map_v2 C-22 |
+| appendix_glossary::23 | L147–151 | V — Voice Bleed (cross-character) | DEFINITION | KEEP | YES | — | open | Ref §3.8 ✓ (R18-repaired iter 127); → migration_map_v2 C-23 |
+| appendix_glossary::24 | L153–157 | V — Voice Bleed (degradation) | DEFINITION | KEEP | YES | — | open | Ref §3.6 ✓ (R18-repaired iter 127); → migration_map_v2 C-24 |
+| appendix_glossary::25 | L159–163 | V — Voice Isolation | DEFINITION | KEEP | YES | — | open | Ref §3.1 ✓ (R18-repaired iter 127); → migration_map_v2 C-25 |
+| appendix_glossary::26 | L165–169 | W — WANT | DEFINITION | KEEP | YES | — | open | Ref §4.6 ✓ (R18-repaired iter 127); → migration_map_v2 C-26 |
 
 ### appendix_mbti (Appendix A)
 
@@ -1382,12 +1390,13 @@ L397 «Выщебленного» typo repaired canon + master (the P9-5(e) obse
 | appendix_model_table::03 | L33 | НАБЛЮДЕНИЕ: процентные оценки — эмпирические наблюдения | METADATA | KEEP | YES | — | open | **Row added iter 159** (the block post-dated the Phase-A/B audit — added iter 145 as DEC-20's first OBSERVATION application, base `.callout` — registered component; `audit_sampling_parity.py` check 8 anchors the canon + master + root-fallback forms). The OBSERVATION framing = the strength statement: percentages are empirical observations, not normative thresholds; rules live in the профильные разделы |
 | appendix_model_table::04 | L35–39 | ключевые следствия для сборки (3 bullets) | APPLICATION | KEEP | YES | REINFORCEMENT | open | Apply-layer summary of the table (SP-language ref §7A.2 ✓; Script Tax 1.5–2× consistent ✓). **L-refs + ordinal refreshed iter 159** (was ::03 «L33–37» — the iter-145 НАБЛЮДЕНИЕ insertion shifted the block; re-derived per §1.1 document order). **iter 159 master mirror:** the block restored in master (the v9-Phase-6-slimming gap — h3 + 3 bullets + the `#p7a_core_directives` link, fence #10; the appendix_model_table plain-text drift entry cleared) |
 
-**Appendices verdict:** reference layer healthy. Two entries over-carry canonical material (glossary
+**Appendices verdict:** reference layer healthy. Two entries over-carried canonical material (glossary
 CORE DIRECTIVES — the R02/ed-2 input; Behavioral Anchor placement ПРАВИЛО — R01 reference-layer
-side). **Stale claims corrected iter 158:** the «18 vague glossary refs» line described the
+side) — **both compressed iter 160** (the Appendix C slice; the registry C-3/C-5 deployed forms).
+**Stale claims corrected iter 158:** the «18 vague glossary refs» line described the
 pre-iter-127 state (the R18 Phase B batch `8a365553` repaired the appendix canon refs to the full
 `[ref: part_NN.md §X.Y — Label]` forms — the per-row «`§X.X` vague» notes in the appendix_glossary
-table below remain stale, deferred to that appendix's own slice); the «KI#70 never-loaded»
+table above were refreshed at that appendix's own slice iter 160); the «KI#70 never-loaded»
 dependency is resolved by the iter-158 WIRE (all three appendices render at runtime, DEC-24 Q7).
 KI#77-b/c/d stale refs + R27 budget-range drift in character_map (owner-gated ed-5 — that slice
 documents, does not re-decide). **Appendix A sliced iter 158** (map §5.19): 6 rows **all `open`**,
@@ -1398,7 +1407,14 @@ Reference-layer verdict holds; the master v9-slimming gap closed (the следс
 fence #10) + the v7-era `part-resume` disposed REMOVED_WITH_REASON (the iter-47 P2-7 family
 precedent — the Parts were cleaned then, the appendices were out of that KI's scope; the iter-158
 recorded «B/C slices co-decide» sub-decision executed at B; A's benign instance remains recorded,
-C's slice follows the B precedent).
+C's slice follows the B precedent). **Appendix C sliced iter 160** (map §5.21): 26 rows **all
+`open`** — the Reference-layer verdict holds (compact term entries with canonical-home links,
+spec §3); the two DUPLICATE-classified rows (::03 R01 / ::05 R02+R13) are the appendix's only
+compression candidates — **both EXECUTED this slice** (the registry C-3/C-5 deployed forms; the
+KI#70-wire dependency resolved since iter 158); the v7-era `part-resume` disposed
+REMOVED_WITH_REASON (the B precedent executed at C — A's benign instance remains the family's
+sole survivor; the `.part-resume` component keeps 1 live usage); the stale-note family refreshed
+(the R18 refs + the two R29 quotes).
 
 ---
 
@@ -1410,8 +1426,8 @@ C's slice follows the B precedent).
 
 | # | Concept | Canonical owner | Other occurrences | Classification | Feeds |
 |---|---|---|---|---|---|
-| R01 | Anchors-placement rule (separate block in Examples-zone) | `p1_core_rules::05` (§1.4) | §7A.1 L33 full copy — **compressed iter 125 (dupes-1)** · §7A.9 L394 short+ref · §7A.11 L567 short+ref · §7A.13 L732 footnote · §1.2 L57 clarification · **[B]** glossary «B — Behavioral Anchor» entry (reference-layer ПРАВИЛО statement — compress to 1 sentence + ref §1.4) | DUPLICATE (glossary entry; §7A.1 fixed) | ed-2-style compress, canon-first |
-| R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · **[B]** glossary «C — CORE DIRECTIVES» full annotated copy — **verdict: DUPLICATE → COMPRESS** (definition + 7-name index + fixed ref §7A.2; the annotations restate §7A.2::06–::12; KI#70 dependency: appendix never runtime-loads — compression should ride the KI#70 wire/drop decision) · Part 10 uses shorthand ✓ — **EXECUTED: §7A.13 → shorthand iter 134 (migration_map_v2 D-2); glossary side iter 133 via registry C-5/D-8** | DUPLICATE (§7A.13 primary; glossary classified) | ed-2 |
+| R01 | Anchors-placement rule (separate block in Examples-zone) | `p1_core_rules::05` (§1.4) | §7A.1 L33 full copy — **compressed iter 125 (dupes-1)** · §7A.9 L394 short+ref · §7A.11 L567 short+ref · §7A.13 L732 footnote · §1.2 L57 clarification · **[B]** glossary «B — Behavioral Anchor» entry (reference-layer ПРАВИЛО statement — **compressed iter 160**: 1 sentence + §1.4 ref, the registry C-3 form) | DUPLICATE (glossary entry; §7A.1 fixed) — **R01 family COMPLETE iter 160** | ed-2-style compress, canon-first |
+| R02 | CORE DIRECTIVES full 7-line block | `p7a_core_directives::05` (§7A.2) | §7A.13 L657–665 **verbatim** · **[B]** glossary «C — CORE DIRECTIVES» full annotated copy — **verdict: DUPLICATE → COMPRESS** (definition + 7-name index + fixed ref §7A.2; the annotations restate §7A.2::06–::12; the KI#70 dependency resolved iter 158 — compression executed) · Part 10 uses shorthand ✓ — **EXECUTED: §7A.13 → shorthand iter 134 (migration_map_v2 D-2); glossary registry side iter 133 via C-5/D-8; glossary appendix side iter 160 (map §5.21 P-C-2)** | DUPLICATE (§7A.13 primary; glossary classified) — **R02 family COMPLETE iter 160** | ed-2 |
 | R03 | Pattern Matcher principle | `p1_core_rules::03` (§1.4) | §3.1 L39 — **compressed iter 129 (ed-7 family): 1 sentence + ref §1.4, applied outcome contrast kept** · §1.7 L128 application · §7A.4 L189/L199 applications+ref · **[B]** glossary «V — Voice» entry (1-sentence reference clause — acceptable) | DUPLICATE (§3.1 fixed iter 129); rest compliant | ed-1/ed-4 ✅ §3.1 iter 129 |
 | R04 | Voice drift numbers (~40% vs ~10% at 20–30 msgs) | §3.1 table (granular) | §1.1 table row | DUPLICATE (same data, same persuasive purpose) | ed-1/ed-4 |
 | R05 | Методология empirical-evidence disclaimer | `p1_value_proposition::03` (§1.1) | §3.1 L37 — **compressed iter 129 (ed-7 family): 1-sentence pointer to §1.1 + §3.2 note kept locally; sync-audit P3-6 updated** | DUPLICATE (§3.1 fixed iter 129) | ed-7 ✅ iter 129 |
@@ -1501,7 +1517,7 @@ cumulative list with execution status:**
 5. `p3_voice_isolation::07` — Pattern Matcher re-teach (R03) → COMPRESS — **✅ executed iter 129 (ed-7 family)**
 6. `p3_influence_hierarchy::07` — Пояснение re-explainer (R06) → DELETE — **✅ executed iter 130 (ed-4 family)**
 7. `p7a_model_checklist::02` — param rows with contradictory values (R12, KI#72) → COMPRESS — **EXECUTED iter 145** (DEC-22 S-b; map §5.7 SP-3)
-8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — open
+8. `p7a_4k_fallback::05` — Anchors-placement 4th occurrence (R01) → CROSS-REFERENCE — **EXECUTED iter 153** (the Part 7A v2 slice — the short+pointer form; the stale «open» status de-staled iter 160 per the p7a_4k_fallback::05 row's iter-153 record)
 9. `p7a_token_budget::11` — stale migration note (R17) → DELETE — **✅ executed iter 121 (ed-6)**
 10. `p7a_assembly_pipeline::05` — CORE DIRECTIVES verbatim (R02) → CROSS-REFERENCE — **executed iter 134 (migration_map_v2 D-2: DEC-08 shorthand)**
 11. `p9_additional_problems::02` — #4/#5 symptom pairs (R15) → MOVE into §9.5 — open (ed-3)
@@ -1512,13 +1528,13 @@ cumulative list with execution status:**
 16. `p4_spine_full_chain::04` — implicit-GHOST/LIE near-verbatim re-statement (R21) → CROSS-REFERENCE — **✅ executed iter 150 (v2-build-part-4 P4-2 — the R21 fold to the canonical-link form; the §9.4↔§9.5-fold precedent of fold candidates riding the v2 build slices)**
 17. `p6_cot_tiers::05` — iter-29/KI#18-F canon-only note (R17) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
 18. `appendix_character_map::04` — iter-40/KI#29 history label (R17, non-rendering) → COMPRESS — **✅ executed iter 128 (ed-8 continuation)**
-19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — compression executed iter 133 in the v2 registry (C-5); the frozen v1 file rides the v2 switch (migration_map_v2 D-5)
-20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — open (Phase B)
+19. `appendix_glossary::05` (C — CORE DIRECTIVES) — full annotated copy (R02) → COMPRESS — compression executed iter 133 in the v2 registry (C-5); **the appendix canon+master side executed iter 160** (the Appendix C slice — the registry C-5 form deployed; D-5's switch-time file disposition unchanged)
+20. `appendix_glossary::03` (B — Behavioral Anchor) — placement ПРАВИЛО clause (R01, reference layer) → COMPRESS — **EXECUTED iter 160** (the Appendix C slice — 1 sentence + §1.4 ref, the registry C-3 form)
 
-Execution status: 14 of 20 combined candidates executed (iters 121/125/128/129/130/134/150); 6 open
-overall (#8, #11, #13 from Phase A + #20 from Phase B). #7 (KI#72) carries an owner decision; #19's
-registry-side compression landed iter 133 (file rides the v2 switch); the rest are ready for ed-* execution
-under the Editorial Policy.
+Execution status: 18 of 20 combined candidates executed (iters 121/125/128/129/130/134/145/150/153/160);
+2 open overall (#11, #13 from Phase A — both ed-3/ed-8-scope). #7 executed iter 145 (DEC-22);
+#19 closed both sides (registry iter 133 + the appendix canon+master side iter 160); #20 executed
+iter 160; #8's iter-153 execution status de-staled iter 160.
 
 Plus one **pair-level** candidate: R04 drift-numbers — one of the two occurrences
 (`p1_value_proposition::02` table row vs `p3_voice_isolation::05` table) becomes a cross-reference;
@@ -1527,9 +1543,9 @@ the owner picks the surviving side in ed-1/ed-4 (both marked KEEP at block level
 **Phase B confirms the research verdict at guide scale:** 283 of 290 blocks (97.6%) KEEP — the
 remaining parts carry no new teaching-layer duplication load. The Phase B defect surface is
 *navigation hygiene* (R18 vague refs — canon-only, master already resolves), *reference-layer
-over-carry* (2 glossary entries), *repo-meta history labels* (R17, mostly non-rendering), and
-*numeric framing drift* (R11/R27). Functional load is preserved (load = YES) for every recommended
-action; no Phase B deletion carries unique information (research §22 category 1).
+over-carry* (2 glossary entries — **both compressed iter 160**), *repo-meta history labels* (R17,
+mostly non-rendering), and *numeric framing drift* (R11/R27). Functional load is preserved (load = YES)
+for every recommended action; no Phase B deletion carries unique information (research §22 category 1).
 
 ---
 

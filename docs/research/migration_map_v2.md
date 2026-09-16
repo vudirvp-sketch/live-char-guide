@@ -1295,6 +1295,72 @@ compression candidates ride it; PLAN row v2-build-appendix-c) → Appendix D (ch
 canon-only; the KI#77-b/c/d + R27 notes) → parity audit → canonical audit (the P4-5…P10-4 +
 P-app-4 + P-B-4 master-only enrichment observations ride this stage) → reader-path audit → switch.
 
+### 5.21 Appendix C v2 build slice (seeded + executed iter 160 — v2 build phase, third appendix/Reference slice)
+
+Scope: **Appendix C — Glossary** (`docs/canon/appendix_glossary.md` + `src/master/appendix_glossary.html`,
+1 section / 26 matrix rows; DEC-24 Q6 guide order — third appendix; the pinned STATUS Next-step row 1,
+**not owner-gated** — the appendix slices are the pinned track continuation). Mechanism: the ratified
+spec §7 slice shape (evidence → canon restructure → master mirror → full battery) — fourteenth
+application, reusing the §5.8–§5.20 pattern. Primary reader mode: **Reference** (spec §3: compact
+term/rule entries with canonical-home links; the appendix runtime-renders since the iter-158 WIRE —
+no infrastructure work remains in this slice). **The R01/R02 compression candidates ride this slice**
+(the pinned track's recorded scope; the KI#70-wire dependency recorded in the matrix §14 R02-era
+notes resolved since iter 158 — the appendix renders, so the full annotated copy is a live competing
+presentation of §7A.2). Editorial Policy 5-point check applied per edit (documented per row below).
+Acceptance gate: the full battery **+ the glossary-parity chain** (`audit_glossary_parity.py` MUST
+PASS — the registry ↔ generated `data/glossary.json` ↔ map §5.1 dispositions chain stays intact;
+the appendix edit touches no registry row) **+ the core-directives parity gate**
+(`audit_core_directives_parity.py` MUST PASS — check 8's numbered-template scan covers
+`appendix_glossary.html`; the compressed index form carries no template lines; check 7 anchors the
+registry C-5 entry, untouched).
+
+**F2 presentation map (spec §4.1 mechanism, fourteenth application):** the appendix_glossary
+matrix table now carries the `presentation` column (**26 rows: 26 `open`** — count script-verified);
+matrix §1.2 scope note extended to Parts 1–10 + Appendices A/B/C; the stale-note family refreshed
+(every pre-slice «ref `§X.X` vague» claim predates the iter-127 R18 repair — the canon refs
+verified as the full `[ref: part_NN.md §X.Y — Label]` forms; the two R29 mismatch quotes (::04
+«Tier 0 (basic Anchor)», ::10 «G2=Отрочество») likewise stale — the canon aligns with §6.3 and
+§4.11); the L-refs re-derived per §1.1 (the ::05 compression shifted the tail blocks L45–L169);
+the appendices verdict extended with the C-sliced line; §16's execution-status summary re-counted
+(18 of 20 — #8's iter-153 fold de-staled with it). Zero `collapsible` / `canonical-link` /
+`reference-relocate` / `delete-candidate` / `—` — the Reference-layer verdict holds (compact term
+entries with canonical-home links; spec §3). The two DUPLICATE-classified rows (::03 R01 / ::05
+R02+R13) are the appendix's only compression candidates — both executed **inside** their blocks
+(the entries keep their definition payload; the F2 disposition of every block stays `open`). F5:
+verified F5-approximate — the Reference-layer shape is the target form (term → definition → ref);
+zero restructure beyond the two compressions. F6: zero wraps. F3/F4: no checklists / no example
+tiering in the appendix.
+
+| P# | Matrix row | OLD (v1) | NEW (v2) | Status | Basis |
+|---|---|---|---|---|---|
+| P-C-1 | — (evidence) | matrix appendix_glossary table: 8 columns, no presentation axis; 26 rows carrying pre-iter-127 «ref `§X.X` vague» claims + two stale R29 mismatch quotes (::04/::10) + pre-compression L-refs; §16's execution-status summary carrying the pre-iter-153/160 open statuses (#8/#19/#20) | `presentation` column seeded (26 rows: 26 `open` — count script-verified); the stale-note family refreshed (the R18 refs verified full; the R29 quotes de-staled — the canon aligns with §6.3 «без отдельного CoT-блока» / §4.11 «Юность»); the L-refs re-derived per §1.1; the appendices verdict extended (the C-sliced line + the «two entries over-carry» claim marked compressed); the R01/R02 §15 rows marked COMPLETE iter 160; §16 items #19/#20 marked executed + #8 de-staled + the summary re-counted (18 of 20) | EXECUTED **— iter 160** | DEC-24 Q2 (F2 matrix-column mechanism); the iter-149…159 stale-note-refresh precedent; the matrix's own §1.1 re-derivation convention |
+| P-C-2 | `appendix_glossary::03` + `::05` (canon) | ::03 carried the placement ПРАВИЛО as a bolded 2-sentence standalone statement (**ПРАВИЛО:** «Якоря — отдельный структурный блок… не часть диалоговых примеров. В большинстве фронтендов… Anchors = behavioural patterns, Examples = voice patterns»); ::05 carried the full annotated 7-item numbered list (the annotations restating §7A.2::06–::12) + the R13 full 3-tier SP-language restatement («12B с <64K словарём → английский; … 32B+ и API → язык карточки предпочтителен») | **R01 EXECUTED (::03):** the ПРАВИЛО folded to 1 sentence + the §1.4 parenthetical ref — the registry C-3 deployed form («…не часть диалоговых примеров (правило размещения — §1.4); в большинстве фронтендов размещаются как `<anchors>`-тег в Description; концептуально якоря задают поведенческие паттерны, Examples — голосовые»); the bolded marker dropped (rule-strength markup belongs to the canonical owner §1.4 — DEC-20); the «behavioural patterns» EN tail russified (DEC-16; the registry's ratified form). **R02 + R13 EXECUTED (::05):** the full annotated copy → definition + 7-name index («Состав: (1) Show Never Tell; … (7) Pre-Generation Filter») + the fixed §7A.2 pointer («Определение каждой директивы и многоуровневое правило языка (по модели) — §7A.2») — the registry C-5 deployed form (DEC-17c = the v2 Reference-layer representation); the entry keeps its own definitional sentences («Формируют „операционную систему“…» — связную логику, the appendix's grammatical form). 5-point check (R02): capability — the directive semantics remain one hop away at §7A.2 (the DEC-08 single-presentation invariant: glossary entry = definition + link); coverage — every rule/nuance of the annotations lives in §7A.2 (byte-stable), the 7 names stay (index); retrieval — the glossary's own declared pattern (definition + canonical-home ref) now honored; context — the entry remains a self-contained definition; dependency — grep-verified zero tool probes on the list (the sync audit probes only the T→A→P heading + the section id; the core-directives gate's check-8 template-line regex never matched the `<li>` form and matches nothing in the index form; the drift tool's CORE-DIRECTIVES plain-text entry clears — see the drift note below). Section ID `appendix_glossary` preserved (fences #4/#5 clean); canon −10/+2 lines | MOVED **— executed iter 160** | the matrix COMPRESS/ed-2 verdicts (R01/R02); DEC-17c; DEC-08/mig-2 (D-5/D-8); the registry C-3/C-5 deployed forms (iter 133); Editorial Policy 5-point check; the iter-125/134/153 R01/R02 fold precedents |
+| P-C-3 | `appendix_glossary::03/::05` (master) + the v7-era `part-resume` | the master mirrored both v1 full forms (the `<strong>ПРАВИЛО:</strong>` block; the `<ol>` with 7 annotated `<li>` — the #3 `<li>` carrying a pre-existing Russian-gloss gap vs canon «(#3, «пространственная и анатомическая фиксация»)»); the v7-era `part-resume` block «Что вы теперь умеете» (2 bullets — «Находить определения всех технических терминов гайда» / «Использовать кросс-ссылки…») | **two mirror completions executed** (fence #10 canon wins): ::03 → the folded sentence with the linked parenthetical `(<a href="#p1_core_rules">правило размещения — §1.4</a>)`; ::05 → the compressed paragraph with the `#p7a_core_directives` link on the §7A.2 pointer (the entry's established inline-link pattern). **The `part-resume` block disposed REMOVED_WITH_REASON** — the iter-158-recorded «B/C slices co-decide» sub-decision executed at C (the B precedent, map §5.20 P-B-3): 5-point check — capability — a Learn-mode recap in a Reference-layer lookup appendix adds zero retrieval capability (the reader arrives for a term, not a curriculum); coverage — bullet 1 restates the intro's own declaration (::01), bullet 2 restates the entry pattern (the `→` ref lines themselves), no unique rule/nuance/example lost; retrieval — the glossary's retrieval instrument = the alphabetical entries + the refs, all retained; context — the section closes on the W—WANT entry (the natural alphabetical end); dependency — grep-verified zero tool probes (the sync audit's P2-7 absence checks cover only the Parts; `check_duplicates.py` excludes the family) + zero back-link registry entries. Family precedent: the iter-47 P2-7 cleanup (Parts) + iter-159 B disposal; A's benign instance remains the family's sole survivor (the `.part-resume` component keeps 1 live usage, stays registered in components.md) | MOVED **— executed iter 160** | fence #10; Editorial Policy 5-point check; the iter-47 P2-7 + iter-159 P-B-3 disposal precedents; the iter-158 «B/C slices co-decide» record |
+| P-C-4 | — (observed) | master-only / metadata variances, never canonized: (a) the master CoT entry's Tier-0 enrichment (the master over-carries the §6.3 Embodiment-as-micro-CoT framing + the «CoT = дополнительный внутренний монолог сверх Embodiment, не замена ему» sentence vs the canon's compact «Tier 0 (без отдельного CoT-блока)» — the P4-4 enrichment family); (b) the intro's «всех технических терминов» coverage claim (the appendix carries 26 of the registry's 45 entries — the 20 promoted machine-layer terms absent; the appendix↔registry relationship rides D-5's switch-time disposition); (c) the canon front-matter staleness (`canonical_for: —` etc. — the repo-wide iter-152 family); (d) the heading-mismatch informational family (canon «C.1 Глоссарий» vs master h2 «Глоссарий» — the repo-wide non-numbered-master-h2 convention, informational by design); (e) the comment-noise drift entry stays (canon HTML comments vs master — informational); (f) components.md's `.part-resume` «Location: End of each Part» note now describes zero Part usages (the family's 1 live usage = Appendix A) — doc-accuracy staleness, no reader impact | recorded as OBSERVATIONS, deferred — no disposal, no canonicalization (the D slice + the canonical-audit + switch stages own their families; the appendix↔registry coverage question is D-5's recorded switch-time decision, not re-decided here; the CoT enrichment = the canonical-audit stage's master-side reconciliation family) | RECORDED **— deferred (iter 160)** | AGENTS.md scope discipline; the P4-5…P10-4 + P-app-4 + P-B-4 observation-package chain |
+| P-C-5 | — (state) | STATUS iter-159 / PLAN row v2-build-appendix-c open / no map §5.21 | map §5.21 + STATUS iter-160 (Current State; the v2-architecture invariant extended to Appendices A/B/C; KI#70 row deleted per lifecycle — closed iter-158, 2 iterations elapsed 159/160; iter-160 KI-note; Next step re-pinned to the Appendix D slice) + PLAN v2-build-appendix-c → COMPLETE + the appendix-d row + iter-160 history note + worklog + CHANGELOG + NAV §7 de-stale (the appendix slices: A/B/C) | EXECUTED **— iter 160** | iter-147…159 state-package pattern |
+
+Accounting: 1 presentation-column seeding (26 rows: 26 `open`, count script-verified; zero rows
+added — the total stays 504) + 2 canon compressions (P-C-2: ::03 R01 −0 net lines [1 line rewritten];
+::05 R02+R13 −10/+2 lines — the git diff `2 insertions(+), 10 deletions(-)`) + 2 master mirror
+completions (P-C-3: the ::03 fold + the ::05 compression) + 1 master disposal (P-C-3: the v7-era
+`part-resume`, REMOVED_WITH_REASON — the iter-158 «B/C slices co-decide» sub-decision executed at
+C) + 1 observation package deferred (P-C-4) + 1 state package (P-C-5). Byte-unchanged: canon
+`appendix_glossary.md` outside the two entry rewrites; master `appendix_glossary.html` outside the
+three P-C-3 edits; `docs/canon/glossary_registry.md` + `data/glossary.json` byte-stable (the
+appendix edit touches no registry row — the glossary-parity chain re-verified); all other
+master/canon files; matrix tag/decision/load/repeat columns unchanged. Deferred (recorded, out of
+scope): the P-C-4 observation package (the D slice + the canonical-audit/switch stages); KI#77-e
+(open, untouched — the ::21 R11 card-total framing documented, not re-decided); KI#79 (open,
+untouched). Root fallbacks regenerated with the slice (`parts/appendix_glossary.html`; root
+`index.html` timestamp; hash `2ab607d6` unchanged — `src/shell/index.html` untouched). Drift: see
+the iter-160 worklog for the pre/post capture (141 → expected ≤141 — the CORE-DIRECTIVES
+plain-text entry clears: the canon paragraph and the master paragraph now match on the compressed
+form; the comment-noise entry stays). Next: **the Appendix D (character_map) v2 build slice**
+(canon-only appendix; the KI#77-b/c/d stale-ref family + the R27 budget-range framing ride the
+owner-gated ed-5 gate — the slice documents, does not re-decide; PLAN row v2-build-appendix-d) →
+parity audit → canonical audit (the P4-5…P10-4 + P-app-4 + P-B-4 + **P-C-4** master-only
+enrichment observations ride this stage) → reader-path audit → switch.
+
 
 ## 6. Owner decision points (blocking, in recommended order)
 
@@ -1393,6 +1459,25 @@ P-app-4 + P-B-4 master-only enrichment observations ride this stage) → reader-
 
 ## 7. Iteration log (registry changes)
 
+- **iter 160 — Appendix C v2 build slice (map §5.21 P-C-1..P-C-5):** F2
+  presentation column 26 rows (**all `open`** — the Reference-layer verdict holds; count
+  script-verified; zero rows added — the total stays 504); matrix §1.2 extended to Parts 1–10 +
+  Appendices A/B/C; the stale-note family refreshed (the pre-iter-127 «`§X.X` vague» claims + the
+  two R29 quotes — the canon aligns with §6.3/§4.11); the L-refs re-derived per §1.1; the
+  appendices verdict extended; the R01/R02 §15 rows marked COMPLETE; §16 re-counted (18 of 20 —
+  #8's iter-153 status de-staled); canon — **the R01/R02 compressions EXECUTED** (::03 the
+  placement ПРАВИЛО → 1 sentence + the §1.4 parenthetical ref; ::05 the full annotated 7-item copy
+  + the R13 3-tier restatement → definition + 7-name index + the fixed §7A.2 pointer — the
+  registry C-3/C-5 deployed forms, DEC-17c; 5-point checks documented); master — **two mirror
+  completions** (the linked §1.4 parenthetical + the compressed ::05 paragraph with the
+  `#p7a_core_directives` link — fence #10) + **the v7-era `part-resume` disposed
+  REMOVED_WITH_REASON** (the iter-158 «B/C slices co-decide» sub-decision executed at C — the B
+  precedent; 5-point check + grep-verified zero tool deps; A's benign instance remains the family's
+  sole survivor); the P-C-4 observation package deferred (the master CoT Tier-0 enrichment, the
+  intro's coverage claim, the front-matter staleness, the heading-mismatch family, the
+  components.md location note); root fallback `parts/appendix_glossary.html` regenerated (+ the
+  index.html timestamp; hash `2ab607d6` unchanged); drift 141 → post-capture in the iter-160
+  worklog (the CORE-DIRECTIVES plain-text entry expected to clear); full battery green.
 - **iter 159 — Appendix B v2 build slice (map §5.20 P-B-1..P-B-5):** F2
   presentation column 4 rows (**all `open`** — the Reference-layer verdict holds; count
   script-verified; +1 row — the iter-145 НАБЛЮДЕНИЕ audit-coverage repair, total 500→**504** disclosed
