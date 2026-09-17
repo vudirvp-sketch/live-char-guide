@@ -1583,7 +1583,90 @@ criteria: stages 2–4 green in two consecutive full-battery runs + no OPEN KI i
 families + owner call; Q9: v1 freezes/archives at switch).
 
 
+### 5.25 Reader-path audit stage record (executed iter 164 — the migration tail's third stage, spec §8 stage 4)
+
+Scope: **the per-mode reader-path verification on the completed v2 corpus** — the reader-mode
+spec §3 (Learn/Build/Debug/Reference — the structural overlays on the same canonical content):
+each mode's entry point → its backbone sections → task completion, without requiring the reader
+to leave the mode's path (the pinned STATUS Next-step row 1, **not owner-gated** — the
+migration tail's continuation, PLAN row v2-readerpath-audit; the owner's session go-ahead
+«продолжай работы по планам!»). Mechanism: the iter-139 Debug precedent re-run for the Debug
+mode + **the committed per-mode stage tool `scripts/readerpath_audit_iter164.py`** (the iter-139
+replication for the other three modes — one-shot verification on the built artifact:
+parts/*.html + the manifest + data/glossary.json + the shell; hard checks fail the run, recorded
+findings print with their dispositions). Discovered path gaps = record + disposition (fix only
+if in scope — structural/navigation wiring, not content semantics; semantic/owner-gated
+families stay owner-gated per §5.24). Acceptance: every mode verified entry→completion on its
+backbone (or the gap recorded + dispositioned); the stage report records the per-mode path
+state. **Content edits: zero** (the two discovered gaps are owner-gated structural decisions —
+see the findings table below).
+
+**Stage gate battery (executed at HEAD `5a30f610`; all commands run in the sandbox; pnpm via
+`npx pnpm@10`):**
+
+| RP# | Mode / gate | Verified result | Status | Basis |
+|---|---|---|---|---|
+| RP-1 | DEBUG — the iter-139 precedent re-run | `debug_readerpath_audit_iter139.py` **PASS** — the chain symptom → cause → test → one-change → validation green on the built artifact (3 symptoms reachable in §9.6 master+built + the E13 embed; every diagnosis anchor resolves; §9.7 test + §9.2 one-change back-linked + §9.9/§9.11 validation wired) — the mig-3 chain unbroken by the post-iter-139 corpus work | VERIFIED **— iter 164** | PLAN row (the Debug re-verification clause); map §5.5 |
+| RP-2 | LEARN — entry + the linear backbone | **entry:** the shell TOC panel + FAB present; the lazy-loader manifest auto-load starts at `part_01.html` → `p1_value_proposition` (the first content section) · **the linear order:** the manifest parts == the guide order (part_01…part_10, 7A before 7B); every part renders its manifest anchors in **exact order** (the PA-4 structural probe re-verified per part); **96 rendering sections** · **the visibility model:** difficulty metadata **96/96** (one comment per master section) + F6 `<details class="interactive">` = 17 live usages · **completion:** the manifest tail = Part 10's 4 worked blueprints, the appendices follow (the Reference tail) | VERIFIED **— iter 164 (the mode's linear task completes in-backbone)** | spec §3 (Learn row); F1/F5/F6 (DEC-24) |
+| RP-3 | BUILD — entry + the assembly backbone | **entry:** `p1_prebuild_checklist` (the F3 decision-input instrument, iter 147) + `p7a_assembly_pipeline` (§7A.13) + `p7a_token_budget` (§7A.12) + the Part 10 blueprints — all present master+built · **the wiring:** every link target in the three entry blocks resolves in the built artifact (prebuild → 11 targets incl. all 4 blueprints + the model table; pipeline → 10 targets; §7A.12 → `appendix_model_table`, the Build→Reference value hop); the expected target sets verified · **default visibility:** §7A.6 + §7A.7 + §7A.12 + 9 ШАБЛОН callouts in 7A/7B + the §7A.13 budget table with the «Итого» row · **completion:** the §7A.13 final assembly checklist (6 ☐ items) + 4 «Демонстрирует» blueprint annotations. NOTE (by design, recorded): the validation handoff (§9.3 block checklist / §9.11 pre-deploy) lives in the **Debug** backbone per spec §3 — F3's validation class = §9's territory; the Build path completes at the assembly checklist | VERIFIED **— iter 164 (the mode's construction task completes in-backbone)** | spec §3 (Build row); F3 (DEC-24); map §5.8 (the iter-147 prebuild reframe) |
+| RP-4 | REFERENCE — entry + the lookup hop + the appendix layer | **entry (JS-on):** the shell glossary side-tab + panel + content div; the lazy-loader `loadGlossaryContent` + the `glossary-link` anchor mechanism; `data/glossary.json` = 45 generated terms (DEC-17/18) · **entry (no-JS):** `parts/glossary.html` present (the `no-js-only` generated page, required by the artifact contract — `validate-artifact.mjs` special files) · **the lookup hop:** the 45 entries' `anchor_id`/`cross_refs` = **48 distinct targets, 48/48 resolve** in the built artifact — zero broken canonical-home links; the no-JS page's `glossary-ref` links all resolve · **the appendix layer:** the manifest appendices == A/B/C; `APPENDIX_GUIDE_ORDER` = A→B→C; the «Приложения» TOC group; Appendix D canon-only — zero master file, zero runtime links, the content_map record verified | VERIFIED **— iter 164 (the mode's lookup task completes in-backbone; Appendix D stays the declared canon-only exception)** | spec §3 (Reference row); DEC-17/18; the iter-158 WIRE (DEC-24 Q7) |
+| RP-5 | the findings sweep (the PLAN row's gap clause) | **2 gaps discovered → recorded + dispositioned (both owner-gated structural decisions; zero in-scope structural/navigation wiring fixes were executable without owner calls):** **LEARN-1** — the spec §3 Learn entry names Part 0 (how to read) — Part 0 is canon-only since iter 38 (no master file, no manifest entry, never rendered; the content_map convention) → the runtime Learn entry = the TOC + the Part 1 auto-load (verified working, RP-2); **REFERENCE-1** — the no-JS Reference entry (`parts/glossary.html`) is not navigable from the site root: the shell `<noscript>` block carries an enable-JS notice with no link, no built page links `parts/glossary`, the page is reachable only by direct URL (the JS-on entry is fully wired, RP-4). Both ride the owner's switch-time call — see the findings dispositions below | RECORDED **— iter 164 (2 findings, 2 owner-gates)** | the PLAN row's disposition clause; AGENTS.md scope discipline; spec §7 (the shell-change exclusion) |
+| RP-6 | the full battery + diff discipline | the 7 cluster parity gates **×7 PASS** · sync **97/97 PASS** · drift **140 actionable, pre/post JSON identical** (zero content edits) · build ✓ (hash `2ab607d6` unchanged — shell untouched) · validate ✓ · validate:master ✓ (12 checks) · version:check ✓ 9.2.6 · tests **64/64** · lint ✓ · qa:csp/bundle/contrast PASS · qa:doc-versions exit 0 (1 pre-existing warning) · qa:english **18** / qa:syntax **238** (baselines exact) · the stage tool **PASS** · the iter-139 tool **PASS** · `git diff --check` clean · runtime **96 sections** unchanged | VERIFIED **— iter 164 (all green)** | AGENTS.md common commands; DEC-13; the PLAN row's verification clause |
+| RP-7 | — (state) | STATUS iter-164 (Current State; the v2-architecture invariant extended — **the reader-path audit stage COMPLETE**; iter-164 KI-note — no lifecycle deletions due, no new KI; Next step re-pinned to **the switch — the owner call**) + PLAN v2-readerpath-audit → COMPLETE + the iter-164 history note + worklog (iter-163 → one-liner; the ≤10 cap trim) + CHANGELOG (iter-164 entry; iter-162 collapsed) + NAV §7 de-stale (the migration tail: reader-path audit COMPLETE) + **the committed stage tool** `scripts/readerpath_audit_iter164.py` (the iter-139 replication precedent — re-runnable for the Q8 second-run verification) | EXECUTED **— iter 164** | the iter-147…163 state-package pattern |
+
+**The recorded findings (gaps + dispositions — the PLAN row's clause; both change the ratified
+spec/corpus state, neither is a navigation-wiring repair executable in-scope):**
+
+1. **LEARN-1 — the spec §3 Learn entry (Part 0) is canon-only, not runtime-visible.** Part 0
+   («Как читать этот гайд» + TL;DR; `p0_how_to_read` / `p0_tldr_quick_start`) is canon-only
+   since iter 38 — no master file, no manifest entry, never rendered (the content_map
+   convention: 96 rendering + Part 0 ×2 + Appendix D ×1 = 99 declared IDs). The ratified spec
+   §3 names it the Learn entry point; the runtime Learn entry = the TOC panel + the Part 1
+   auto-load (verified working, RP-2). Disposition: **OWNER-GATE** — two resolutions: (a) wire
+   Part 0 into the runtime corpus (+2 sections, manifest/TOC/corpus-snapshot changes, a build
+   slice) or (b) re-spec the §3 entry to the TOC/Part-1 form (a ratified-spec edit, doc-only).
+   The linear backbone itself is complete either way.
+2. **REFERENCE-1 — the no-JS Reference entry is not navigable from the site root.**
+   `parts/glossary.html` (the generated no-JS page, DEC-17/18; the artifact contract requires
+   it — `validate-artifact.mjs` special files) is linked from nowhere: the shell `<noscript>`
+   block carries an enable-JS notice with no link, and no built page links `parts/glossary` —
+   reachable only by direct URL. The JS-on Reference entry (the runtime panel) is fully wired
+   (RP-4). Disposition: **OWNER-GATE** — the fix = a shell-infrastructure change (a
+   `<noscript>` link/notice rework in `src/shell/index.html`), explicitly excluded from the
+   v2 build scope without an owner call (spec §7: «any CSP/shell-infrastructure change»);
+   `build.hash` would change (the shell file is the hash source).
+
+Accounting: **1 file added** (`scripts/readerpath_audit_iter164.py`) + the state package (map
+§5.25 + the §7 log; STATUS; PLAN; worklog; CHANGELOG; NAV §7 de-stale). **Zero content edits** —
+canon byte-stable, master byte-stable, `data/*.json` byte-stable, matrix rows unchanged (the §5
+preamble count stays 504); zero root fallbacks regenerate (the verification build's only
+worktree effect = the root `index.html` timestamp churn — **restored** per AGENTS.md delivery
+discipline; hash `2ab607d6` unchanged); drift 140 pre/post **identical** (JSON pre/post diff).
+Runtime 96 sections unchanged. KI state: **zero new KI** (the 2 findings = recorded owner-gated
+dispositions per the §5.24 owner-gate-candidates pattern, not defects — the stage documents,
+the owner decides); **KI#77-e stays OPEN (owner-gated ed-5)**; KI#79 stays OPEN (the drift-tool
+regex family — informational). The migration tail is now complete: parity audit ✓ (iter 162) →
+canonical audit ✓ (iter 163) → reader-path audit ✓ (iter 164). Next: **the switch — the owner
+call** (Q8 criteria: stages 2–4 green in two consecutive full-battery runs — the stage batteries
+162/163/164 each green; a one-pass re-run at switch time completes the pair + no OPEN KI in the
+affected families (the KI#77-e disposition) + the owner call; Q9: v1 freezes/archives at switch).
+The owner-gate candidates: map §5.24 (the §7A.7 variances, the master-only enrichment families,
+KI#77-e/ed-5, the v2 canon-format decision D-5) **+ map §5.25 (LEARN-1, REFERENCE-1)** ride
+their recorded owner calls before/at the switch.
+
 ## 6. Owner decision points (blocking, in recommended order)
+
+> **Switch-time call package PREPARED (iter 165, doc-only — the iter-137/141/144 precedent):
+> [`owner_gates_iter165.md`](./owner_gates_iter165.md)** — the verified evidence + options +
+> recommendations for the migration tail's owner-gated set: **G1** the §7A.7
+> capability-checklist reconciliation (canon wins / the §6.3-aligned CoT values / the E17
+> re-point + gate) · **G2** the master-only enrichment families (the per-item rule:
+> unique→canonize · duplicate→align · presentation→keep · unclear→UNKNOWN) · **G3**
+> KI#77-e/ed-5 (the Appendix D ranges → illustrative, §7A.12 the sole normative owner,
+> recommended) · **G4** the two §5.25 structural calls (LEARN-1 wire Part 0 / REFERENCE-1 the
+> noscript glossary link). **Nothing DECIDED — every gate stays owner-called; awaiting the
+> owner's reply per the package's §7 format.** After the calls: each called reconciliation
+> executes as its own bounded slice, then the switch (Q8/Q9).
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
 > §6.1/§6.4 → **DEC-19** (master embed = canonical visual markup / L4-L5 frozen; hero
@@ -1680,6 +1763,53 @@ families + owner call; Q9: v1 freezes/archives at switch).
 
 ## 7. Iteration log (registry changes)
 
+- **iter 165 — Switch-time owner-call package prepared (doc-only — the iter-137/141/144
+  precedent):** [`owner_gates_iter165.md`](./owner_gates_iter165.md) tables the migration
+  tail's owner-gated set with verified evidence + options + consequences + recommendations +
+  the exact owner-call format: **G1** the §7A.7 capability-checklist reconciliation (the
+  three-form value variance — canon «✗ / Tier 1 / Tier 2–3» vs master «Tier 0–1 / Tier 1–2 /
+  Tier 2–3» vs E17 «0–1 / 1–2 / 3» for CoT, canon 2/2/1 vs E17 2/2/2 for Anti-godmoding; the
+  §6.3 tier-definition owner reconciles the values; recommended: canon wins with the
+  §6.3-aligned CoT row + the E17 re-point + a parity gate) · **G2** the master-only
+  enrichment families (the per-item rule unique→canonize / duplicate→align /
+  presentation→keep / unclear→UNKNOWN — the 27-item table with per-item recommendations) ·
+  **G3** KI#77-e/ed-5 (the Part 10 factual totals ~540/1000, ~1100, ~1800/~2150, ~1500+ vs
+  the Appendix D ::05 ranges ~440–890 / ~1500–1800; recommended: **B** — the ranges
+  illustrative/НАБЛЮДЕНИЕ-framed, §7A.12 the sole normative budget owner, the KI closes) ·
+  **G4** the two §5.25 structural calls (LEARN-1: recommended (a) wire Part 0 — corpus
+  96→98 disclosed; REFERENCE-1: recommended (a) the noscript glossary link — a
+  shell-infrastructure change, `build.hash` changes, disclosed) + the explicit out-of-scope
+  records (D-5 stays switch-time per its own record; KI#79 informational). **Nothing
+  DECIDED — every gate stays owner-called.** Doc-only battery: the 7 cluster gates ×7 PASS ·
+  sync 97/97 · `git diff --check` clean; no production file touched (the owner commit may use
+  `SKIP_ARTIFACT_BUILD=1`). Awaiting the owner's reply (the package §7 format); then: each
+  called reconciliation as its own bounded slice → the switch (Q8/Q9). Detail: git (iter-165
+  commit).
+- **iter 164 — Reader-path audit stage (map §5.25 RP-1..RP-7; the migration tail's third
+  stage, spec §8 stage 4 — the stage COMPLETE):** the per-mode reader-path verification on the
+  completed v2 corpus — **RP-1** the Debug re-verification (`debug_readerpath_audit_iter139.py`
+  **PASS** — the mig-3 chain unbroken) + **the committed stage tool
+  `scripts/readerpath_audit_iter164.py`** (the iter-139 replication for
+  Learn/Build/Reference): **RP-2** LEARN green (the TOC/Part-1 entry; the manifest == the guide
+  order == the per-part render order; 96 sections; 96/96 difficulty metadata; 17 F6 usages;
+  Part 10 completion) · **RP-3** BUILD green (the §1.6 prebuild profile → §7A.13/§7A.12 + the
+  Part 10 blueprints; every wiring target resolves; the value/checklist/template surfaces; the
+  assembly checklist + «Итого» + 4 «Демонстрирует»; the validation handoff = the Debug
+  backbone per spec §3/F3, by design) · **RP-4** REFERENCE green (the runtime panel + the
+  no-JS page + the 45-term chain; **48/48 anchor targets resolve** — zero broken
+  canonical-home links; the appendices A/B/C wired A→B→C; Appendix D canon-only, zero runtime
+  links). **RP-5 — 2 gaps discovered → recorded + dispositioned (both OWNER-GATE):** **LEARN-1**
+  (the spec §3 Learn entry Part 0 is canon-only since iter 38 — not runtime-visible; the
+  runtime entry = the TOC + Part 1; resolutions: wire Part 0 / re-spec the entry) ·
+  **REFERENCE-1** (the no-JS glossary entry is not navigable from the site root — the shell
+  noscript block carries no link; the fix = a shell-infrastructure change, out of build scope
+  per spec §7). **RP-6** the full battery green (the 7 cluster gates ×7 PASS · sync 97/97 ·
+  drift 140 pre/post identical · build/validate/validate:master/version:check 9.2.6 · tests
+  64/64 · lint · qa gates PASS · baselines exact english 18 / syntax 238 · hash `2ab607d6`
+  unchanged · runtime 96 sections). **Zero content edits; zero new KI** (the 2 findings =
+  owner-gated dispositions, the §5.24 candidates pattern); KI#77-e/KI#79 unchanged. **The
+  migration tail COMPLETE: parity ✓ canonical ✓ reader-path ✓ — the switch (owner call)
+  next; the owner-gate candidates = map §5.24 + §5.25.** Detail: git (iter-164 commit).
 - **iter 163 — Canonical audit stage (map §5.24 CA-1..CA-8; the migration tail's second
   stage, spec §8 stage 3 — the stage COMPLETE):** the machine-checkable cross-pass
   content_map ↔ canon ↔ glossary-registry ↔ master on the full corpus — **CA-1 99/99 map
