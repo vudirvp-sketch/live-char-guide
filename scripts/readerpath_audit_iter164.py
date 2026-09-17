@@ -44,8 +44,9 @@ MASTER = REPO / "src" / "master"
 PARTS = REPO / "parts"
 SHELL = REPO / "src" / "shell"
 
+# iter 169 (G4-LEARN (a)): Part 0 wired — corpus 96 -> 98, the Learn entry = Part 0 -> Part 1
 GUIDE_ORDER = [
-    "part_01.html", "part_02.html", "part_03.html", "part_04.html",
+    "part_00.html", "part_01.html", "part_02.html", "part_03.html", "part_04.html",
     "part_05.html", "part_06.html", "part_07a.html", "part_07b.html",
     "part_08.html", "part_09.html", "part_10.html",
 ]
@@ -109,10 +110,10 @@ def main():
         err("LEARN L1: shell TOC panel / TOC FAB missing")
     if "manifest.json" not in loader or "manifest.parts" not in loader:
         err("LEARN L1: lazy-loader manifest auto-load missing")
-    if not manifest["parts"] or manifest["parts"][0]["file"] != "part_01.html":
-        err("LEARN L1: manifest does not start at part_01.html")
-    elif manifest["parts"][0]["anchors"][0] != "p1_value_proposition":
-        err("LEARN L1: Part 1 first anchor is not p1_value_proposition")
+    if not manifest["parts"] or manifest["parts"][0]["file"] != "part_00.html":
+        err("LEARN L1: manifest does not start at part_00.html (the Learn entry)")
+    elif manifest["parts"][0]["anchors"][0] != "p0_how_to_read":
+        err("LEARN L1: Part 0 first anchor is not p0_how_to_read")
 
     # L2 — the linear backbone: manifest == guide order; per-part render order
     files = [e["file"] for e in manifest["parts"]]
@@ -124,8 +125,8 @@ def main():
         if built != entry["anchors"]:
             err(f"LEARN L2: {entry['file']} renders {built} != manifest {entry['anchors']}")
     total = sum(len(e["anchors"]) for e in manifest["parts"] + manifest["appendices"])
-    if total != 96:
-        err(f"LEARN L2: rendering section count {total} != 96")
+    if total != 98:
+        err(f"LEARN L2: rendering section count {total} != 98 (96 + Part 0 x2, iter 169)")
 
     # L3 — difficulty metadata + F6 disclosure (the Learn visibility model)
     diff = sum(len(re.findall(r"<!--\s*difficulty:\s*(?:BASIC|INTERMEDIATE|EXPERT)\s*-->", t))
@@ -149,24 +150,17 @@ def main():
     ] and {e["file"] for e in manifest.get("appendices", [])} != set(APPENDIX_ORDER):
         err("LEARN L4: manifest appendices set unexpected")
 
-    # LEARN-1 — recorded finding: the spec's Part 0 entry is canon-only
+    # LEARN-1 — RESOLVED iter 169 (G4-LEARN (a), the owner-called switch package):
+    # Part 0 wired into the runtime corpus — the guard verifies the resolved state
     part0 = (REPO / "docs" / "canon" / "part_00.md").exists()
     part0_master = (MASTER / "part_00.html").exists()
     part0_manifest = any(e["file"].startswith("part_00") for e in manifest["parts"])
     cmap = read(REPO / "docs" / "content_map.md")
-    if part0 and not part0_master and not part0_manifest and "CANON-ONLY" in cmap:
-        finding(
-            "LEARN-1",
-            "the spec §3 Learn entry names Part 0 (how to read) — Part 0 is "
-            "canon-only since iter 38 (no master file, no manifest entry, never "
-            "rendered; content_map records CANON-ONLY); the runtime Learn entry "
-            "= the TOC + the Part 1 auto-load",
-            "OWNER-GATE (structural decision: wire Part 0 into the runtime corpus "
-            "or re-spec the §3 entry — both change the ratified spec/corpus state)",
-        )
-    else:
-        err(f"LEARN-1 state check failed: canon={part0} master={part0_master} "
-            f"manifest={part0_manifest}")
+    if not (part0 and part0_master and part0_manifest
+            and manifest["parts"][0]["file"] == "part_00.html"
+            and "wired 169" in cmap):
+        err(f"LEARN-1 resolved-state check failed: canon={part0} "
+            f"master={part0_master} manifest={part0_manifest}")
 
     # ================= BUILD =================
     m01 = read(MASTER / "part_01.html")
@@ -284,22 +278,12 @@ def main():
     if "appendix_character_map" not in cmap:
         err("REFERENCE R3: content_map does not carry the Appendix D canon-only record")
 
-    # REFERENCE-1 — recorded finding: the no-JS entry is not navigable
-    linked = ("parts/glossary" in shell_index) or any(
-        "parts/glossary" in read(PARTS / f) for f in GUIDE_ORDER + APPENDIX_ORDER)
+    # REFERENCE-1 — RESOLVED iter 169 (G4-REF (a), the owner-called switch
+    # package): the shell <noscript> block links the no-JS glossary page
+    linked = "parts/glossary" in shell_index
     if not linked:
-        finding(
-            "REFERENCE-1",
-            "the no-JS Reference entry (parts/glossary.html, spec §3 / DEC-17/18) "
-            "is not navigable from the site root — the shell <noscript> block "
-            "carries an enable-JS notice with no link, and no built page links "
-            "parts/glossary; the page is reachable only by direct URL",
-            "OWNER-GATE (shell-infrastructure change — spec §7 excludes shell/"
-            "CSP changes from the build scope without an owner call)",
-        )
-    else:
-        err("REFERENCE-1 state check failed: an unexpected parts/glossary link "
-            "exists — re-audit the no-JS entry wiring")
+        err("REFERENCE-1 resolved-state check failed: the shell noscript "
+            "glossary link (iter 169) is missing")
 
     return finish()
 
@@ -321,8 +305,8 @@ def finish():
             print(f"  ✗ {e}")
         sys.exit(1)
     print("\nPASS — every mode travels entry -> backbone -> completion on the "
-          "built corpus: Learn (TOC/Part-1 entry, 11-part linear order == "
-          "manifest == render order, 96/96 difficulty metadata, F6 disclosure, "
+          "built corpus: Learn (TOC/Part-0 entry, 12-part linear order == "
+          "manifest == render order, 98/98 difficulty metadata (incl. Part 0), F6 disclosure, "
           "Part 10 completion); Build (§1.6 profile -> §7A.13/§7A.12 + Part 10 "
           "blueprints, all wiring targets resolve, value/checklist/template "
           "surfaces present, assembly checklist + Итого + 4 annotations); "

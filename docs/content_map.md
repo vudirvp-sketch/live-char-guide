@@ -1,7 +1,7 @@
 # Content Ownership Map — Live Character Guide v9.2
 
 > Version: 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
-> Last Updated: 2026-09-16 (iter 163 — canonical audit: full cross-pass re-verified + stale Notes repaired)
+> Last Updated: 2026-09-18 (iter 169–170 — Part 0 wired to runtime: 98 rendering sections; the counting convention updated)
 > Status: Canonical Reference (Canon mirror)
 
 ---
@@ -21,9 +21,9 @@ This document is the **single source of truth** for "where does concept X live."
 
 ## Content Ownership Table
 
-### Part 0: Orientation (conceptual — canon-only, no master HTML) — `docs/canon/part_00.md`
+### Part 0: Orientation — `docs/canon/part_00.md`
 
-> Created iter 38. Conceptual entry section: **no master HTML artifact by design** (`migration_status` in canon frontmatter). Do not look for these `data-section` IDs in `src/master/`.
+> Created iter 38 (canon-only); **wired to runtime iter 169 (G4-LEARN (a), the owner-called switch package)**: `src/master/part_00.html` renders before Part 1 (the spec §3 Learn entry; corpus 96 -> 98).
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
@@ -212,7 +212,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Part | Canon file | Sections | Iter | Status |
 |------|-----------|----------|------|--------|
-| Part 0 (conceptual) | `part_00.md` | 0 master / 2 canon § | iter 38 | ✅ CANON-ONLY (no master artifact) |
+| Part 0 | `part_00.md` | 2 | iter 38, wired 169 | ✅ MIGRATED (wired iter 169, G4-LEARN (a)) |
 | Part 1 | `part_01.md` | 6 | iter 14 | ✅ MIGRATED |
 | Part 2 | `part_02.md` | 6 | iter 14 | ✅ MIGRATED |
 | Part 3 | `part_03.md` | 8 | iter 14 | ✅ MIGRATED |
@@ -228,9 +228,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Appendix B (Model Table) | `appendix_model_table.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix C (Glossary) | `appendix_glossary.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix D (Character Map, conceptual) | `appendix_character_map.md` | 0 master / 1 canon § | iter 38 | ✅ CANON-ONLY (no master artifact) |
-| **Total** | | **96 master sections** | | **Canon COMPLETE** |
+| **Total** | | **98 master sections** (96 + Part 0 ×2, iter 169) | | **Canon COMPLETE** |
 
-> **Counting convention (verified iter 117):** "Sections" = `data-section` elements rendered in `src/master/*.html` (96 total). Canon carries 97 H2 sections + 2 declared-without-H2 IDs (`p1_structure_overview` — subsection of §1.2; `appendix_character_map` — H1-level) = 99 declared IDs. Part 0 (2 §) and Appendix D (1 §) are conceptual-only by design (`migration_status` in canon frontmatter) and never appear in master HTML. Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`.
+> **Counting convention (verified iter 117; updated iter 169 — G4-LEARN (a)):** "Sections" = `data-section` elements rendered in `src/master/*.html` (98 total — 96 + Part 0 ×2 wired iter 169). Canon carries 97 H2 sections + 2 declared-without-H2 IDs (`p1_structure_overview` — subsection of §1.2; `appendix_character_map` — H1-level) = 99 declared IDs (unchanged by the wiring — Part 0's 2 IDs were always declared; they now render). Appendix D (1 §) stays conceptual-only by design (`migration_status` in canon frontmatter) and never appears in master HTML. Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`.
 
 ---
 

@@ -601,15 +601,15 @@ GHOST-activation: Активен, если в сцене был триггер (
         </div>
         <div class="checklist-row">
           <span>Уровень CoT</span>
-          <span class="vs-ki13-p7a-text-muted">0–1</span>
-          <span>1–2</span>
-          <span class="vs-ki13-p7a-text-violet">3</span>
+          <span class="vs-ki13-p7a-text-muted">Tier 0</span>
+          <span>Tier 1–2</span>
+          <span class="vs-ki13-p7a-text-violet">Tier 2–3</span>
         </div>
         <div class="checklist-row">
           <span>Anti-godmoding</span>
           <span class="vs-ki13-p7a-text-success">2 строки</span>
           <span class="vs-ki13-p7a-text-success">2 строки</span>
-          <span class="vs-ki13-p7a-text-success">2 строки</span>
+          <span class="vs-ki13-p7a-text-success">1 строка</span>
         </div>
       </div>
 
@@ -667,8 +667,8 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <p>Сводная таблица возможностей по типу модели. Числовые параметры сэмплирования (Temperature, Top P, Min P, RepPen, Top K, Presence Penalty = 0.0) — в визуализации E17 (выше; канонический владелец значений — <a href="#p7a_sampling_params">§7A.6</a>). Ключевые отличия по типам моделей:</p>
 <ul>
-<li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a>); XML нестабилен; CoT Tier 0–1; язык SP: для &lt;64K словаря — английский, для ≥128K — язык карточки допустим (см. <a href="#p7a_core_directives">§7A.2 ПРАВИЛО</a>); Anti-godmoding 2 строки (негатив + позитив).</li>
-<li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; язык SP: язык карточки предпочтителен.</li>
+<li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a>); XML нестабилен; CoT Tier 0 (<a href="#p6_cot_tiers">Part 6: уровни CoT</a>); язык SP: для &lt;64K словаря — английский, для ≥128K — язык карточки допустим (см. <a href="#p7a_core_directives">§7A.2 ПРАВИЛО</a>); Anti-godmoding 2 строки (запрет + позитив).</li>
+<li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; язык SP: язык карточки предпочтителен; Anti-godmoding 2 строки.</li>
 <li><strong>API (Claude/GPT):</strong> Voice через Examples + Greeting + AN (никогда в Description); XML стабилен; CoT Tier 2–3; язык SP: язык карточки предпочтителен; Anti-godmoding 1 строка.</li>
 </ul>
 
@@ -1195,7 +1195,7 @@ GHOST: Предательство редактора — история, кот�
 
 <h4>Чек-лист перед тестированием</h4>
 <details class="interactive">
-<summary>📋 Recap-чек-лист (сворачивается — дублирует правила из §1.4, §4.9, §5.1, §6.2, §7A.12)</summary>
+<summary>📋 Сводный чек-лист (сворачивается — дублирует правила из §1.4, §4.9, §5.1, §6.2, §7A.12)</summary>
 <ul>
 <li>☐ Все Anchors содержат Цену (<a href="#p2_anchor_rules">Part 2 §2.2: якорь (Anchor) Rules</a>)</li>
 <li>☐ Голос только в Examples/Greeting (<a href="#p3_voice_isolation">Part 3 §3.1: изоляция голоса</a>)</li>

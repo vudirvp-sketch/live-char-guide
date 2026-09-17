@@ -1,0 +1,81 @@
+<!--
+  Part 0: Перед стартом — Как читать этот гайд и TL;DR
+  Live Character Guide v9.2 Master HTML
+
+  Wired to runtime iter 169 (G4-LEARN (a) — the owner-called switch package,
+  owner_gates_iter165.md §5.1): the spec §3 Learn entry renders before Part 1
+  (corpus 96 -> 98 sections). Source of truth: docs/canon/part_00.md.
+-->
+<section data-section="p0_how_to_read" id="p0_how_to_read" data-toc-nav>
+<!-- difficulty: BASIC -->
+<h2>Как читать этот гайд</h2>
+
+<p>Гайд — единый линейный поток от Part 1 до Part 10. Каждый Part — отдельный модуль, который строит на предыдущем. Читать последовательно; значимые нарративные переходы между Parts обозначены меткой <strong>Переход (Bridge)</strong> (только 2 в гайде: Part 6→7A «от психологии к сборке», Part 9→10 «от диагностики к примерам»).</p>
+
+<p><strong>Что такое Part:</strong> концептуальный модуль. Карта модулей:</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Part</th><th>Тема</th><th>Что даёт</th></tr>
+</thead>
+<tbody>
+<tr><td>Part 1</td><td>Основы (Foundations)</td><td>Зачем системный подход, базовые блоки, 3 ключевых правила, чек-лист перед сборкой</td></tr>
+<tr><td>Part 2</td><td>Якоря (Anchors)</td><td>Поведенческие якоря: Trigger → Action → Price</td></tr>
+<tr><td>Part 3</td><td>Голос (Voice)</td><td>Изоляция голоса, Examples, мульти-персонажность</td></tr>
+<tr><td>Part 4</td><td>SPINE</td><td>Психологический каркас: GHOST → LIE → FLAW → NEED → WANT</td></tr>
+<tr><td>Part 5</td><td>Психология</td><td>OCEAN, эннеаграмма, MBTI — валидация SPINE</td></tr>
+<tr><td>Part 6</td><td>CoT</td><td>Цепочка рассуждений (Chain of Thought) для внутренних конфликтов в моменте</td></tr>
+<tr><td>Part 7A</td><td>System Prompt</td><td>Сборка SP, основные директивы (CORE DIRECTIVES), XML-теги, бюджет токенов</td></tr>
+<tr><td>Part 7B</td><td>Lorebook</td><td>База знаний с триггерами</td></tr>
+<tr><td>Part 8</td><td>Анти-паттерны</td><td>15 типовых ошибок и их фиксы</td></tr>
+<tr><td>Part 9</td><td>Диагностика</td><td>Дерево решений, тестовые сценарии, валидация перед деплоем</td></tr>
+<tr><td>Part 10</td><td>Примеры</td><td>4 готовые карточки разной сложности</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><strong>Что такое VS-EMBED:</strong> визуализация, замещающая длинное текстовое описание. В canon-файлах помечена маркером <code>[VS: E0X — описание. Что замещает.]</code>. В master HTML рендерится как <code>&lt;div class="vs-embed" data-vs-element="E0X"&gt;</code>. 18 VS-элементов (E01–E18) в <code>visual-system/elements/</code>. Принцип <em>viz &gt; dry text</em> — визуализация замещает, а не дублирует текст.</p>
+
+<p><strong>Нотация <code>[ref: ...]</code>:</strong> навигационный указатель между canon-файлами. Форматы: <code>[ref: part_XX.md §X.Y — Topic]</code> (между файлами) или <code>[ref: §X.Y]</code> (внутри файла). Используется только для навигации между Parts (указание, где находится конкретный блок), не для повторного объяснения уже введённых концепций.</p>
+
+<p><strong>Метки callouts</strong> (русские — проза гайда; тело callouts — на русском):</p>
+<ul>
+<li><strong>ПРАВИЛО:</strong> — каноническое правило (нарушение = регрессия качества).</li>
+<li><strong>РЕКОМЕНДАЦИЯ:</strong> — мягкая рекомендация.</li>
+<li><strong>ПРИМЕР:</strong> — пример выполнения.</li>
+<li><strong>ИЛЛЮСТРАЦИЯ:</strong> — визуальная демонстрация (diff-view, мульти-персонажная сцена).</li>
+<li><strong>ШАБЛОН:</strong> — шаблон для копирования.</li>
+<li><strong>Переход:</strong> — нарративный переход между Parts (только 2 в гайде).</li>
+<li><strong>Синтез:</strong> — 1–2 предложения итога в конце Part.</li>
+<li><strong>Ссылка:</strong> — навигационный указатель на секцию в другом Part.</li>
+<li><strong>Демонстрирует:</strong> — список принципов, которые карточка демонстрирует.</li>
+<li><strong>Примечание:</strong> — уточняющий комментарий.</li>
+</ul>
+
+<p>Английский остаётся только внутри исполняемых промпт-контейнеров (где гайд предписывает английский), идентификаторов и имён собственных — с русским пояснением рядом.</p>
+
+</section>
+<section data-section="p0_tldr_quick_start" id="p0_tldr_quick_start" data-toc-nav>
+<!-- difficulty: BASIC -->
+<h2>TL;DR / Быстрый старт</h2>
+
+<p>Минимальная карточка за 30 минут. Карточка = 4 блока: System Prompt (SP), Description, Examples, Greeting.</p>
+
+<p><strong>6 шагов сборки:</strong></p>
+<ol>
+<li><strong>System Prompt (SP):</strong> <code>You are [имя], [роль]. Never speak or act for {{user}}.</code> + Tone Frame + Format Lock. ~50 токенов.</li>
+<li><strong>Description:</strong> <code>&lt;identity&gt;</code> + <code>&lt;spine&gt;</code> (WANT/NEED/FLAW/LIE/GHOST — 1 строка на каждый элемент). ~150 токенов.</li>
+<li><strong>Examples (2–3 блока <code>&lt;START&gt;</code>):</strong> каждый 80–120 токенов, демонстрирует голос + минимум один embodiment (физическая реакция). Голос задаётся ТОЛЬКО здесь.</li>
+<li><strong>Greeting:</strong> 50–100 токенов, 4 шага (сенсорный якорь → тело FLAW → реплика → крючок).</li>
+<li><strong>Якоря (Anchors, 3–5):</strong> Trigger → Action → Price (Price = наблюдаемый физический маркер в той же сцене).</li>
+<li><strong>Проверка перед деплоем:</strong> 5 быстрых проверок (PP=0, Voice в Examples, Price в Anchors, Format Lock, Anti-godmoding).</li>
+</ol>
+
+<p>Гайд строится на трёх обязательных принципах, которые подробно разбираются в Part 1: якорь (Anchor) = T→A→P (без Price якорь = инструкция без паттерна), голос задаётся только в Examples и Greeting (Voice в Description = потеря токенов), психология размещается только в Description (никогда в System Prompt).</p>
+
+<p><strong>С чего начать:</strong> если вы делаете карточку впервые — начните с Елены, скопируйте структуру, замените содержимое. Не пытайтесь сразу строить Омнис-Зета (~2150 токенов, слои призрака, CoT, Lorebook) — это ведёт к перегрузке и утечке голоса.</p>
+
+<p><strong>Ссылка:</strong> Чек-лист перед сборкой (6 вопросов перед стартом) → <a href="#p1_prebuild_checklist">Part 1 §1.8: чек-лист перед сборкой</a>. Валидация перед деплоем (5+14 проверок) → <a href="#p9_pre_deploy">Part 9 §9.11: пред-деплой валидация</a>. Готовые карточки → <a href="#p10_elena">Part 10 §10.1: Елена</a>.</p>
+
+</section>

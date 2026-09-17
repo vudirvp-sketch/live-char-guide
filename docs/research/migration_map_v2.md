@@ -1654,19 +1654,47 @@ The owner-gate candidates: map §5.24 (the §7A.7 variances, the master-only enr
 KI#77-e/ed-5, the v2 canon-format decision D-5) **+ map §5.25 (LEARN-1, REFERENCE-1)** ride
 their recorded owner calls before/at the switch.
 
+### 5.26 The called reconciliations + the switch (executed iters 166–170 — DEC-25; the migration terminal step)
+
+Scope: **the owner-called execution of the iter-165 package** (the go-ahead «продолжай работы по
+планам!» 2026-09-18 — the DEC-18/19+20/21/22+23/24 single-reply precedent: the only prepared plan
+pending a call) — each gate as its own bounded slice per the package §7 call order, then the switch
+(Q8 one-pass re-run + Q9 v1 freeze). Every slice left the full battery green (the per-slice records
+below); zero new KI (all executed dispositions were pre-recorded observations called per DEC-25).
+
+| SW# | Slice | Executed delta | Battery |
+|---|---|---|---|
+| SW-1 | **iter 166 — G1 (A1)** | canon §7A.7 CoT row → Tier 0 (`[ref: part_06.md §6.3]`) / Tier 1–2 / Tier 2–3; AG 2/2/1 (canon unchanged); master §7A.7 ul mirrored (Tier 0 + the `#p6_cot_tiers` link, the 32B+ AG gap filled, «запрет + позитив»); the E17 checklist cells re-pointed (Tier 0 / Tier 1–2 / Tier 2–3; API AG 1 строка); `audit_sampling_parity.py` extended — the §7A.7 capability locks (canon/master/E17/fallback) | x7 PASS · sync 97/97 · drift 140 · hash `2ab607d6` · tests 64/64 · baselines 18/238 |
+| SW-2 | **iter 167 — G2 (the 27-item table as printed)** | canonizations: part_04 §4.8 (the mnemonic + the Пример (Елена) column) · part_05 §5.1 (the stress-type suffixes) · part_06 §6.3 (the CoT-not-replacement sentence) · part_07a §7A.13 (the 2 [ref:] pointers) · part_09 §9.11 (the RU explanation — the P9-5(c) sub-call) · part_10 §10.1 (Tone Frame + OOC PROTECTION); alignments: part_05 (FLAW + the MBTI link) · part_07a (Сводный чек-лист) · part_08 §8.5 (призрак/дефект) · part_10 (the Omnis mirror — the §3.X ref dies); disposals/repairs: part_08 (4 outside-wrapper transitions REMOVED_WITH_REASON · 4 vacant chips · §8.9 gloss · §8.16 h3) · part_10 (the voice-rule re-frame — the P10-4(c) sub-call) | x7 PASS · sync 97/97 · drift 141 (+1 disclosed: the canonized mnemonic — master renders it as the infographic) · tests 64/64 · baselines 18/238 |
+| SW-3 | **iter 168 — G3 (B + the Omnis align)** | `appendix_character_map.md` ::05 → the НАБЛЮДЕНИЕ/«ориентировочно» illustrative framing + the §7A.12 normative-owner defer (the ranges kept as printed — the framing re-label per the called consequence); the Omnis intro ~1800→~2150 (canon+master+part_00); **KI#77 (e) CLOSED** | x7 PASS · sync 97/97 · drift 141 · tests 64/64 · baselines 18/238 |
+| SW-4 | **iter 169 — G4-LEARN (a) + G4-REF (a)** | `src/master/part_00.html` (2 sections) + the build-script label entries; canon part_00 de-staled (front-matter, «Что это», ~2150); the shell `<noscript>` glossary link; **the corpus 96→98** (manifest: part_00 first, 12 parts, 98 anchors == master); content_map conventions + the readerpath tool aligned (GUIDE_ORDER/L1/98 + the LEARN-1/REFERENCE-1 guards → the resolved-state checks — the disclosed iter-148/155 precedent); **hash `2ab607d6`→`c1518874`** (the shell-file hash source — disclosed) | x7 PASS · sync 97/97 · drift 143 (+2 disclosed: the part_00 rendering blobs — the KI#79-adjacent boundary) · tests 64/64 · baselines 18/238 · both reader-path tools PASS |
+| SW-5 | **iter 170 — the switch (Q8/Q9)** | **Q8:** the one-pass full-battery re-run at the final state — build (hash `c1518874`) · the 7 cluster gates ×7 PASS · sync 97/97 · drift 143 (informational) · validate · validate:master (12) · version:check 9.2.6 · tests 64/64 · lint · qa:csp/bundle/contrast PASS · qa:doc-versions exit 0 · baselines exact 18/238 · **both reader-path tools PASS** (Learn: the Part-0 entry, 12-part linear, 98/98; Build: all wiring resolves; Reference: 45-term chain + the noscript link; Debug: the iter-139 chain) · the CA cross-pass re-verified inline (99 declared / 98 rendering / master==manifest / Appendix D the sole conceptual-only / every canon ID in content_map) · `git diff --check` clean — **the consecutive pair with the stage batteries 162–164 complete, every 166–169 slice green in between**. **Q9:** v1 frozen/archived as the immutable migration source forever (the DEC-19 pattern: git history + the DEC-25 record; no disposal) | ALL GREEN |
+| SW-6 | — (state) | DEC-25 appended (the call + the provenance + the Q9 record); the package status header → CALLED+EXECUTED; STATUS iter 170 (Current State · the v2-invariant switch extension · KI#77 CLOSED iter-168 · the iter-170 KI-note · the Next step re-pinned post-migration: D-5 = the next open owner call, content work resumes under the Editorial Policy); PLAN v2-switch → RESOLVED; worklog (the iter-170 detail + the 166–169 one-liners); CHANGELOG (the iter-170 entry; iter-165 collapsed); NAV de-staled (98 sections · the noscript link · the readerpath-tool row); this map §5.26 + the §7 log | EXECUTED — iter 170 |
+
+Accounting: the session delta vs `BASE_COMMIT 0b1429fd` (35 M + 2 NEW) — **canon 8 files**
+(part_00, part_04, part_05, part_06, part_07a, part_09, part_10, appendix_character_map) ·
+**master 6 files** (part_00 NEW, part_05, part_06, part_07a, part_08, part_10) · **shell 1**
+(src/shell/index.html — the noscript link) · **scripts 3** (audit_sampling_parity.py extended;
+build-unified.mjs labels; readerpath_audit_iter164.py aligned) · **root fallbacks 10**
+(parts/part_00.html NEW, part_05, part_06, part_07a, part_08, part_10, part_01 (the AUTO_TOC
+gains the Part 00 entry), manifest.json (12 parts / 98 anchors), index.html, build.hash
+`2ab607d6`→`c1518874`) · **docs/state 8** (content_map, DECISIONS, STATUS, PLAN, worklog,
+CHANGELOG, NAV, the map + the package status header).
+Drift 140→143 (the three disclosed deltas). KI#77 CLOSED iter-168 (row kept per lifecycle);
+KI#79 unchanged. **The migration is COMPLETE; D-5 (the v2 canon-format) stays owner-gated —
+the next open owner call.**
+
 ## 6. Owner decision points (blocking, in recommended order)
 
-> **Switch-time call package PREPARED (iter 165, doc-only — the iter-137/141/144 precedent):
-> [`owner_gates_iter165.md`](./owner_gates_iter165.md)** — the verified evidence + options +
-> recommendations for the migration tail's owner-gated set: **G1** the §7A.7
-> capability-checklist reconciliation (canon wins / the §6.3-aligned CoT values / the E17
-> re-point + gate) · **G2** the master-only enrichment families (the per-item rule:
-> unique→canonize · duplicate→align · presentation→keep · unclear→UNKNOWN) · **G3**
-> KI#77-e/ed-5 (the Appendix D ranges → illustrative, §7A.12 the sole normative owner,
-> recommended) · **G4** the two §5.25 structural calls (LEARN-1 wire Part 0 / REFERENCE-1 the
-> noscript glossary link). **Nothing DECIDED — every gate stays owner-called; awaiting the
-> owner's reply per the package's §7 format.** After the calls: each called reconciliation
-> executes as its own bounded slice, then the switch (Q8/Q9).
+> **The iter-165 package CALLED + EXECUTED (iters 166–170, DEC-25 — map §5.26):** the owner's
+> go-ahead «продолжай работы по планам!» (2026-09-18, the DEC-18/19+20/21/22+23/24 single-reply
+> precedent) called **G1: A1 · G2: approve as printed (the sub-calls per recommendations) · G3: B
+> (+ the Omnis align) · G4-LEARN: (a) · G4-REF: (a) → the switch**. The original preparation
+> record (evidence + options + recommendations) lives in
+> [`owner_gates_iter165.md`](./owner_gates_iter165.md) (status header updated to CALLED+EXECUTED).
+> **D-5 (the v2 canon-format decision) remains the next open owner call** (switch-time per its own
+> record — map §5.24; the recommended shape: ratify → one bounded front-matter pass → the
+> E-declarations closed in the same pass).
 
 > **Owner calls received (chat 2026-09-14 «начинай работу по планам») — all four gates DECIDED (iter 138):**
 > §6.1/§6.4 → **DEC-19** (master embed = canonical visual markup / L4-L5 frozen; hero
@@ -1762,6 +1790,11 @@ their recorded owner calls before/at the switch.
 ---
 
 ## 7. Iteration log (registry changes)
+
+> **iter 170 (DEC-25) — the called package executed + the switch:** map §5.26 added (SW-1..SW-6);
+> the §6 preamble re-pointed to the CALLED+EXECUTED state; the corpus 96→98 (Part 0 wired — the
+> map's counting conventions updated via content_map); D-5 remains the sole open owner gate. The
+> per-slice records: iters 166–169 (worklog one-liners) + the switch battery (§5.26 SW-5).
 
 - **iter 165 — Switch-time owner-call package prepared (doc-only — the iter-137/141/144
   precedent):** [`owner_gates_iter165.md`](./owner_gates_iter165.md) tables the migration

@@ -301,9 +301,9 @@
 <!-- difficulty: BASIC -->
 <div class="antipattern-card">
 <h3>AP-4: Психология в SP</h3>
-<p><strong>Симптом:</strong> Психологический анализ (SPINE, GHOST) помещён в System Prompt</p>
+<p><strong>Симптом:</strong> Психологический анализ (SPINE, призрак) помещён в System Prompt</p>
 <p><strong>Причина:</strong> Попытка "инструктировать" модель о характере</p>
-<p><strong>Решение:</strong> SPINE (WANT/NEED/FLAW)/GHOST = только в Description. SP = только инструкции и запреты. Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
+<p><strong>Решение:</strong> SPINE (WANT/NEED/дефект)/призрак = только в Description. SP = только инструкции и запреты. Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 <div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description) — как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>), не нарративом — не в инструкциях (SP).</p>
@@ -316,7 +316,6 @@
 <h3>AP-5: RepPen > 1.10</h3>
 <p><strong>Симптом:</strong> Repetition Penalty > 1.10</p>
 <p><strong>Решение:</strong> RepPen ≤ 1.10 для character cards. Превышение 1.10 подавляет характерные паттерны речи персонажа, делая генерацию monotone. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
 <section  data-section="p8_ap6_no_anti_godmoding" id="p8_ap6_no_anti_godmoding">
@@ -332,21 +331,19 @@
 <p>Позитивная формулировка ("respond only to observable actions") работает лучше чистого запрета. Исправление → <a href="#p7a_system_prompt">Part 7A: System Prompt</a></p>
 </div>
 </section>
-<p>Следующий анти-паттерн связан с параметрами генерации — даже правильная карточка может «сломаться» при неверных настройках сэмплинга.</p>
 <section  data-section="p8_ap7_presence_penalty" id="p8_ap7_presence_penalty">
 <!-- difficulty: INTERMEDIATE -->
 <div class="antipattern-card">
 <h3>AP-7: Presence Penalty > 0</h3>
 <p><strong>Симптом:</strong> Presence Penalty > 0</p>
 <p><strong>Решение:</strong> Presence Penalty = 0.0 для всех character cards. PP > 0 нарушает согласованность персонажа — модель начинает вводить новые темы вместо удержания характерных паттернов. Исправление → <a href="#p7a_sampling_params">Part 7A: Sampling</a></p>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
 <section  data-section="p8_ap8_ghost_no_anchors" id="p8_ap8_ghost_no_anchors">
 <!-- difficulty: INTERMEDIATE -->
 
 <div class="antipattern-card">
-<h3>AP-8: Призрак без якорей (GHOST without Anchors)</h3>
+<h3>AP-8: Призрак без якорей</h3>
 <p><strong>Симптом:</strong> призрак описан, но нет якорей, связанных с ним</p>
 <p><strong>Причина:</strong> призрак как описание, а не поведенческий драйвер</p>
 <p><strong>Решение:</strong> Каждый призрак (GHOST) = минимум 1 якорь-триггер. Призрак — корень причинной цепочки SPINE, должен выражаться в поведении через якорь.</p>
@@ -391,7 +388,6 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 
 </div>
 </section>
-<p>Структура SPINE правильна — но избыточность тоже вредит. Перегрузка CoT — анти-паттерн, при котором персонаж «думает» больше, чем «действует».</p>
 <section  data-section="p8_ap10_cot_overload" id="p8_ap10_cot_overload">
 <!-- difficulty: INTERMEDIATE -->
 <div class="antipattern-card">
@@ -425,7 +421,6 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 <p>Исправление → <a href="#p3_multi_char">Part 3: Мульти-персонажные примеры</a></p>
 </div>
 </section>
-<p>Voice Bleed — поведенческая проблема. Следующие два анти-паттерна — технические: невалидный XML и конфликт записей Lorebook.</p>
 <section  data-section="p8_ap12_xml_malformed" id="p8_ap12_xml_malformed">
 <!-- difficulty: EXPERT -->
 <div class="antipattern-card">
@@ -450,7 +445,6 @@ WANT: {{want}}
 <p><strong>Ссылка:</strong> <a href="#p7a_xml_tags">Part 7A: XML structure</a> + <a href="#p7a_format_lock">Part 7A: Format Lock</a>.</p>
 </div>
 </section>
-<p>XML валиден — но записи внутри него могут противоречить друг другу. Lorebook Conflict — анти-паттерн, при котором записи базы знаний конфликтуют с Description.</p>
 <section  data-section="p8_ap13_lorebook_conflict" id="p8_ap13_lorebook_conflict">
 <!-- difficulty: INTERMEDIATE -->
 <div class="antipattern-card">
@@ -458,7 +452,6 @@ WANT: {{want}}
 <p><strong>Симптом:</strong> Lorebook (база знаний) записи противоречат друг другу или Description</p>
 <p><strong>Причина:</strong> Независимое создание записей без проверки</p>
 <p><strong>Решение:</strong> Проверяйте консистентность всех Lorebook записей с Description. Исправление → <a href="#p7b_lorebook_basics">Part 7B: Lorebook</a></p>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
 </div>
 </section>
@@ -469,14 +462,12 @@ WANT: {{want}}
 <p><strong>Симптом:</strong> Карточка + контекст > контекстное окно модели</p>
 <p><strong>Причина:</strong> Расширенная карточка для 4K модели</p>
 <p><strong>Решение:</strong> Используйте 4K-Fallback Protocol или выберите модель с большим контекстом. Исправление → <a href="#p7a_4k_fallback">Part 7A: 4K-Fallback</a> + <a href="#p7a_token_budget">Part 7A: Token Budget</a></p>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 </div>
 </section>
 <section  data-section="p8_ap15_nested_anchors" id="p8_ap15_nested_anchors">
 <!-- difficulty: EXPERT -->
-<h3>AP-15: Вложенные якоря (Nested Anchors)</h3>
-
 <div class="antipattern-card">
+<h3>AP-15: Вложенные якоря (Nested Anchors)</h3>
 <div class="problem-block">
 <h4>❌ Проблема</h4>
 <p>якорь содержит вложенные условия: «Если X, а потом Y → делает Z». Модель не может надёжно исполнить цепочку из 3+ вложенных условий на ≤14B.</p>

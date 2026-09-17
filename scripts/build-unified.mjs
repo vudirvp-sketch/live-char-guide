@@ -166,6 +166,8 @@ function parseUnifiedHTML(content, filename) {
 function anchorToTitle(anchor) {
   // Map of known section IDs to their titles
   const titleMap = {
+    'p0_how_to_read': 'Как читать этот гайд',
+    'p0_tldr_quick_start': 'TL;DR / Быстрый старт',
     'p1_card_overview': 'Базовые блоки карточки',
     'p1_structure_overview': 'Структура гайда',
     'p1_core_rules': 'Три ключевых принципа',
@@ -271,6 +273,7 @@ function anchorToTitle(anchor) {
  */
 function generateTOC(parts, appendices) {
   const partLabels = {
+    '00': 'Перед стартом — как читать этот гайд',
     '01': 'Базовые блоки карточки',
     '02': 'Behavioral Anchors',
     '03': 'Voice & Isolation',

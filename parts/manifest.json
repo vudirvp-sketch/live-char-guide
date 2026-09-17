@@ -3,6 +3,14 @@
   "format": "unified",
   "parts": [
     {
+      "file": "part_00.html",
+      "title": "Как читать этот гайд",
+      "anchors": [
+        "p0_how_to_read",
+        "p0_tldr_quick_start"
+      ]
+    },
+    {
       "file": "part_01.html",
       "title": "Зачем системный подход?",
       "anchors": [

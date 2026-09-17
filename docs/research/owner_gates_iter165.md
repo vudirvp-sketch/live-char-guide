@@ -1,10 +1,15 @@
 # Owner-gates recommendation package — iter 165 (doc-only)
 
-> **Status:** agent-prepared input for the switch-time owner calls — the iter-137 /
-> iter-141 / iter-144 package precedent. **Nothing below is DECIDED.** Every gate stays
-> owner-called; the recommendations carry evidence + consequences, not decisions. After the
-> owner's reply, each called reconciliation executes as its own bounded slice (the DEC-21/22
-> build-slice precedent) and the switch proceeds per Q8/Q9.
+> **Status: CALLED 2026-09-18 + EXECUTED iters 166–170 (DEC-25).** The owner's
+> session go-ahead «продолжай работы по планам!» (the DEC-18/19+20/21/22+23/24
+> single-reply precedent — the only prepared plan pending a call) called the package
+> per its recommendations: **G1: A1 · G2: approve as printed (the sub-calls per their
+> recommendations) · G3: B (+ the Omnis intro align) · G4-LEARN: (a) · G4-REF: (a)
+> → the switch.** Execution: iter 166 (G1) · iter 167 (G2) · iter 168 (G3, KI#77-e
+> closed) · iter 169 (G4, corpus 96→98, hash `2ab607d6`→`c1518874`) · iter 170 (the
+> switch: the Q8 one-pass battery green + the Q9 v1-freeze record). The body below is
+> the original iter-165 preparation record (evidence + options), kept as the decision's
+> provenance.
 > **BASE:** `5a30f610` (iter 163) with the iter-164 stage on top (map §5.25 — the reader-path
 > audit COMPLETE; the migration tail done, the switch pending).
 > Sources verified by direct read this iteration: map §5.24 + §5.25 (the owner-gate

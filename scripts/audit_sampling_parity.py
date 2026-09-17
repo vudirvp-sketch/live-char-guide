@@ -299,8 +299,33 @@ def main():
             err("canon §7A.7: stale intro («параметров и возможностей») remains")
         if "пренебрежимо мало (~2%)" not in sec77:
             err("canon §7A.7: voice-slice РЕКОМЕНДАЦИЯ anchor altered")
+        # G1 (iter 166): capability values locked — CoT row §6.3-aligned
+        # (Tier 0 / Tier 1–2 / Tier 2–3), Anti-godmoding 2/2/1; canon = the
+        # sole §7A.7 value owner (owner call G1: A1).
+        cot_row = next((r for r in parse_canon_table(sec77, 4)
+                        if r and r[0] == "Уровень CoT"), None)
+        if cot_row is None:
+            err("canon §7A.7: CoT capability row missing/unparseable")
+        else:
+            for cell, needle in zip(cot_row[1:4],
+                                    ("Tier 0", "Tier 1–2", "Tier 2–3")):
+                if needle not in cell:
+                    err(f"canon §7A.7: CoT cell must carry {needle!r} — got {cell!r}")
+            if "part_06.md §6.3" not in cot_row[1]:
+                err("canon §7A.7: CoT row §6.3 tier-owner ref missing")
+        ag_row = next((r for r in parse_canon_table(sec77, 4)
+                       if r and r[0] == "Anti-godmoding"), None)
+        if ag_row is None:
+            err("canon §7A.7: Anti-godmoding row missing/unparseable")
+        else:
+            for cell, needle in zip(ag_row[1:4],
+                                    ("2 строки", "2 строки", "1 строка")):
+                if needle not in cell:
+                    err(f"canon §7A.7: Anti-godmoding cell must carry "
+                        f"{needle!r} — got {cell!r}")
     notes.append("canon §7A.7: param rows dropped (S-b), 5 capability rows + "
-                 "defer line present, voice-slice anchor intact")
+                 "defer line present, voice-slice anchor intact; G1 iter 166: "
+                 "CoT row §6.3-aligned (Tier 0 / Tier 1–2 / Tier 2–3) + AG 2/2/1 locked")
 
     # ---------- 3. Master §7A.6 mirror ----------
     m76 = html_section(master7a, "p7a_sampling_params")
@@ -339,7 +364,19 @@ def main():
             err("master §7A.7: voice-slice РЕКОМЕНДАЦИЯ anchor altered")
         if "<th>Параметр</th>" in m77 or "<th>Temperature</th>" in m77:
             err("master §7A.7: param table must not reappear")
-    notes.append("master §7A.7 mirror: capability bullets + defer link; no param table")
+        # G1 (iter 166): master mirrors the canon capability values (ul shape
+        # kept — identical values, owner call G1: A1)
+        for needle in ("CoT Tier 0", "CoT Tier 1–2", "CoT Tier 2–3",
+                       "Anti-godmoding 2 строки (запрет + позитив)",
+                       "Anti-godmoding 2 строки.", "Anti-godmoding 1 строка"):
+            if needle not in m77:
+                err(f"master §7A.7: capability value missing: {needle!r}")
+        if "Tier 0–1" in m77:
+            err("master §7A.7: stale «Tier 0–1» CoT value remains")
+        if 'href="#p6_cot_tiers"' not in m77:
+            err("master §7A.7: §6.3 tier-definitions link missing")
+    notes.append("master §7A.7 mirror: capability bullets + defer link; no param table; "
+                 "G1 iter 166: CoT values §6.3-aligned + AG 2/2/1 + §6.3 link")
 
     # ---------- 5. E17 embed (S-c) ----------
     e17 = re.search(
@@ -391,9 +428,23 @@ def main():
             err("E17 embed: PP = 0.0 must appear in all three columns")
         if "Чеклист по типу модели" not in e17_text:
             err("E17 embed: model-type checklist section missing")
+        # G1 (iter 166): the E17 capability checklist re-pointed to the §7A.7
+        # canon values (SHARED_REFERENCE — the DEC-22 re-point pattern)
+        for needle in (">Tier 0</span>", ">Tier 1–2</span>",
+                       ">Tier 2–3</span>"):
+            if needle not in e17_text:
+                err(f"E17 checklist: CoT cell missing canon value: {needle!r}")
+        for banned in (">0–1</span>", ">1–2</span>", ">3</span>"):
+            if banned in e17_text:
+                err(f"E17 checklist: stale CoT cell remains: {banned!r}")
+        if e17_text.count(">2 строки</span>") != 2 \
+                or ">1 строка</span>" not in e17_text:
+            err("E17 checklist: Anti-godmoding row must be 2/2/1 (canon §7A.7)")
     notes.append("E17 embed: re-pointed to §7A.6 (32B+ column = canonical "
                  "0.7–1.0 / 1.05–1.10; no dual-side split, no orphan asterisk; "
-                 "12B–32B middle tier = declared omission)")
+                 "12B–32B middle tier = declared omission); G1 iter 166: the "
+                 "capability checklist carries the §7A.7 canon values "
+                 "(CoT Tier 0 / Tier 1–2 / Tier 2–3; AG 2/2/1)")
 
     # ---------- 6. E12 embed (S-d) ----------
     e12 = re.search(
@@ -527,7 +578,8 @@ def main():
     # ---------- 11. Root fallbacks current ----------
     for path, needles in (
         (FALLBACK_7A, [">0.7–1.0</span>", ">1.05–1.10</span>",
-                       "sampling-cluster (iter 145)"]),
+                       "sampling-cluster (iter 145)",
+                       ">Tier 0</span>", ">1 строка</span>"]),
         (FALLBACK_8, ["Держите RepPen в диапазоне своей модели — §7A.6"]),
         (FALLBACK_9, ["(1.0–1.05 для 12B", "(12B-диапазон — "
                       "<a href=\"#p7a_sampling_params\">§7A.6</a>)"]),
