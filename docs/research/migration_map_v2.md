@@ -359,6 +359,9 @@ table untouched (canonical). Root fallback `parts/part_05.html` regenerated
 
 ### 5.5 Diagnostics slice (seeded + executed iter 139 — mig-3 build slice)
 
+> iter 173 (v3 S3): §9.6 was renumbered to §9.3 (canonical E13 mapping home stays the section id
+> `p9_decision_tree`; the embed now lives inside it). This slice record stays historical (KI#86).
+
 Scope: the Diagnostics cluster — fifth bounded area (Registry B row 4; PLAN row
 mig-3; gate **cleared by DEC-20**: `TEXTUAL_CANONICAL` → §9.6, E13 = visual
 presentation / decision aid). Mechanism: mig-2 pattern (canonical record →
@@ -974,6 +977,9 @@ WIRE implementation per DEC-24 Q7).
 
 ### 5.16 Part 8 v2 build slice (seeded + executed iter 155 — v2 build phase, ninth Part)
 
+> iter 173 (v3 S3): the Part was restructured to 2 sections (catalog + worked examples); the 15
+> per-AP ids below are pre-S3 registry keys, kept for the SP- back-pointers (KI#86).
+
 Scope: **Part 8 — Anti-patterns** (16 sections, 40 block rows — the second-largest Part by section
 count; DEC-24 Q6 guide order — Part 8 ninth; the per-Part track pinned by STATUS Next-step row 1,
 **not owner-gated** — the ratification gate cleared by DEC-24). Mechanism: the ratified spec §7
@@ -1031,6 +1037,9 @@ reader-path backbone Part; the appendix/Reference slice after Part 10 carries th
 implementation per DEC-24 Q7).
 
 ### 5.17 Part 9 v2 build slice (seeded + executed iter 156 — v2 build phase, tenth Part)
+
+> iter 173 (v3 S3): the Part was restructured to 7 sections; this slice record stays historical —
+> the section ids/§ numbers below are the pre-S3 ones (KI#86). DT-1…DT-8 back-pointers stay valid.
 
 Scope: **Part 9 — Diagnostics** (11 sections, 43 block rows; DEC-24 Q6 guide order — Part 9 tenth;
 the per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate
@@ -1099,6 +1108,9 @@ per DEC-24 Q7).
 
 
 ### 5.18 Part 10 v2 build slice + the owner-called KI#84 reconciliation (seeded + executed iter 157 — v2 build phase, eleventh Part)
+
+> iter 173 (v3 S3): `p10_index` was added and the in-card lecture sites moved out of the templates;
+> this slice record (4 cards, 20 rows) stays historical (KI#86) — §10.1–§10.4 ids/numbers unchanged.
 
 Scope: **Part 10 — Examples** (4 sections, 20 block rows; DEC-24 Q6 guide order — Part 10 eleventh;
 the per-Part track pinned by STATUS Next-step row 1, **not owner-gated** — the ratification gate

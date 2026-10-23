@@ -452,6 +452,12 @@ async function checkVisualComponents(allContent) {
   const allowedCallouts = ['callout rule', 'callout rec', 'callout ex', 'callout'];
   const prohibitedCallouts = ['callout info', 'callout note', 'callout sidebar', 'callout box', 'callout custom', 'callout warn', 'callout tip', 'callout important'];
 
+  // F-20 (iter 178): ONE label vocabulary + ONE treatment. Every callout block opens with
+  // <p><strong>LABEL:</strong> where LABEL is one of the four guide labels; the retired
+  // `example-label` chip class must never return.
+  const CALLOUT_LABELS = ['ПРАВИЛО', 'РЕКОМЕНДАЦИЯ', 'ПРИМЕР', 'НАБЛЮДЕНИЕ'];
+  const labelAlternation = CALLOUT_LABELS.join('|');
+
   const allowedTags = ['tag core', 'tag'];
   const prohibitedTags = ['tag warn', 'tag opt', 'tag risk', 'tag advanced', 'tag tip'];
 
@@ -463,6 +469,32 @@ async function checkVisualComponents(allContent) {
         errors.push(`${file}: Prohibited callout class "${prohibited}" found — use .callout.rule/.rec/.ex only`);
         errorCount++;
       }
+    }
+
+    // F-20: ONE label vocabulary + ONE treatment (callout opens with <p><strong>LABEL:</strong>)
+    const calloutBlockRegex = /<div\s+class=["'](callout(?:\s+(?:rule|rec|ex))?)["'][^>]*>([\s\S]*?)<\/div>/gi;
+    let calloutMatch;
+    while ((calloutMatch = calloutBlockRegex.exec(content)) !== null) {
+      const body = calloutMatch[2];
+      const labelMatch = body.match(/<p><strong>(.+?)<\/strong>/);
+      if (!labelMatch) {
+        errors.push(`${file}: Callout block has no <p><strong>LABEL:</strong> opener — one treatment only (F-20)`);
+        errorCount++;
+        continue;
+      }
+      const label = labelMatch[1].trim();
+      if (!new RegExp(`^(${labelAlternation}):$`).test(label)) {
+        errors.push(`${file}: Callout label "${label}" is not one of the four guide labels (ПРАВИЛО/РЕКОМЕНДАЦИЯ/ПРИМЕР/НАБЛЮДЕНИЕ)`);
+        errorCount++;
+      }
+      if (!/^\s*<p>/.test(body)) {
+        errors.push(`${file}: Callout body must open with <p> (F-20 one treatment)`);
+        errorCount++;
+      }
+    }
+    if (/class=["'][^"']*example-label/.test(content)) {
+      errors.push(`${file}: Retired "example-label" chip class found — labels live only in .callout blocks (F-20)`);
+      errorCount++;
     }
 
     // Check prohibited tag types
@@ -643,10 +675,7 @@ async function checkWidgetContainers(allSections) {
 
   const requiredWidgets = [
     { id: 'ocean-embed', sectionContains: 'ocean' },
-    { id: 'enneagram-embed', sectionContains: 'enneagram' },
     { id: 'mbti-embed', sectionContains: 'mbti', optional: true },
-    { id: 'persona-cross', sectionContains: 'cross' },
-    { id: 'persona-synthesis', sectionContains: 'cross' },
     { id: 'ocean-static', sectionContains: 'ocean' },
     { id: 'token-calc', sectionContains: ['token_budget', 'p1_token'] },
   ];

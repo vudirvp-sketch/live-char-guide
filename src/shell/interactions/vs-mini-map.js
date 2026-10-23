@@ -12,7 +12,7 @@
     { label: 'Основа', elements: ['E01', 'E02'] },
     { label: 'Механики ядра', elements: ['E03', 'E04', 'E07', 'E08'] },
     { label: 'Личность', elements: ['E05', 'E06', 'E09', 'E10'] },
-    { label: 'Продвинутые', elements: ['E11', 'E12', 'E13', 'E14', 'E15', 'E16', 'E17'] }
+    { label: 'Продвинутые', elements: ['E11', 'E12', 'E13', 'E14', 'E16', 'E17', 'E18'] }
   ];
 
   // Stored click handlers for cleanup

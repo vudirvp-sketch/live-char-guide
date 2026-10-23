@@ -59,9 +59,8 @@ ELEMENT_MAP = {
     "E12": ("part_08.html", "E12 — Antipatterns"),
     "E13": ("part_09.html", "E13 — Diagnostics"),
     "E14": ("part_09.html", "E14 — Quality Scale"),
-    "E15": ("part_10.html", "E15 — Elena Card Walkthrough"),
     "E16": ("part_07a.html", "E16 — Author's Note"),
-    "E17": ("part_07a.html", "E17 — Sampling Parameters"),
+    "E17": ("appendix_model_params.html", "E17 — Sampling Parameters"),
     "E18": ("part_07b.html", "E18 — Greeting Algorithm"),
 }
 

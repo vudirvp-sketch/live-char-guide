@@ -8,17 +8,21 @@ across every presentation layer of the v1 inventory
 (voice_cluster_iter141.md §2; migration foundation §5.7):
 
     §3.2 (canon + master)   = THE canonical value owner of the 6×3 table
-                              (SHARED_REFERENCE) + the canonical home of the
-                              E07 inset prose and the two widget quantitative
-                              claims (TEXTUAL_CANONICAL, DEC-21 V-b/V-c) —
+                              (SHARED_REFERENCE) — the ONLY numeric surface —
+                              + the canonical home of the «Хранилище ≠ Влияние»
+                              prose block (TEXTUAL_CANONICAL, DEC-21 V-b/V-c) —
                               full [VS: E07] marker + prose block
-    E07 master embed         = the visual presentation of both — re-pointed,
+    E07 master embed         = the visual presentation of the values — re-pointed,
                               values + row-label set parity-locked by this
-                              audit (V-a/V-e)
-    persona-voice-hierarchy  = DEC-09 sanctioned constants — header declares
-                              note deference to §3.2; values parity-locked;
-                              AN-12B note re-framed per V-d Option A
-    §7A.5 / §7A.7            = AN-12B framing re-framed (V-d Option A: table
+                              audit (V-a/V-e); it never re-tells the canonical
+                              prose (iter 180 removed the duplicate inset)
+    persona-voice-hierarchy  = the CONTROL STRIP for the §3.2 table (iter 180):
+                              model toggle → column highlight, Markdown export;
+                              DEC-09 sanctioned constants — header declares note
+                              deference to §3.2; values parity-locked; it must
+                              NOT re-render the matrix (one numeric surface),
+                              guard below
+    §7A.5 / Appendix E       = AN-12B framing re-framed (V-d Option A: table
                               wins — «пренебрежимо мало (~2%)», no numeric
                               change); E16 badge carries the derivation note
                               (диапазон = мин–макс строки AN — §3.2, E15
@@ -38,18 +42,22 @@ Checks:
     <p> + widget container + the 12B RULE callout intact.
  3. E07 embed (visual presentation): re-point comment (DEC-21); declared
     row-label set (embed set — SP stays the compressed form, V-e);
-    «0% ЗАПРЕЩЕНО» + «~0%» + «~75-85% (сжатая шкала)» markers; «Хранилище vs
-    Влияние» inset present; no stale «Recent chat».
+    «0% ЗАПРЕЩЕНО» + «~0%» + «~75-85% (сжатая шкала)» markers; split-axis
+    note present; the «Хранилище ≠ Влияние» inset must NOT return (the §3.2
+    prose owns that text — one statement per site, iter 180); no stale
+    «Recent chat».
  4. Widget: VOICE_SOURCES 18 values == canon table 6/6 rows; label set ==
     canonical set; the two canonicalized claims present; AN-12B note =
-    Option A wording; header note-deference declaration.
+    Option A wording; header note-deference declaration; control-strip shape
+    (no .vh-row / .vh-bar-track matrix re-render — the table is the single
+    numeric surface); the toolbar markers present.
  5. V-d Option A re-frames: canon §7A.5 note + §7A.7 РЕКОМЕНДАЦИЯ; master
     §7A.7 mirror; E16 badge derivation note (master) + canon E16 marker
     derivation sentence; zero «AN не влияет» statements anywhere.
  6. Glossary defers: registry entry carries the value restatement + §3.1
     ref; generated data/glossary.json matches.
  7. No competing sources: prose-block anchors counted per layer.
- 8. Root fallback current: parts/part_03.html + parts/part_07a.html +
+ 8. Root fallback current: parts/part_03.html + parts/appendix_model_params.html +
     widgets/persona-voice-hierarchy.js carry the slice.
  9. Map/matrix/registries parity: §5.6 VC-1..VC-10; Registry A E07 +
     Registry B row 7 + §6 row 6 → DECIDED (DEC-21) / executed iter 142;
@@ -78,12 +86,15 @@ CANON_3 = REPO / "docs" / "canon" / "part_03.md"
 MASTER_3 = REPO / "src" / "master" / "part_03.html"
 CANON_7A = REPO / "docs" / "canon" / "part_07a.md"
 MASTER_7A = REPO / "src" / "master" / "part_07a.html"
+CANON_APPE = REPO / "docs" / "canon" / "appendix_model_params.md"
+MASTER_APPE = REPO / "src" / "master" / "appendix_model_params.html"
 WIDGET = REPO / "src" / "shell" / "widgets" / "persona-voice-hierarchy.js"
 WIDGET_FALLBACK = REPO / "widgets" / "persona-voice-hierarchy.js"
 GLOSSARY_REGISTRY = REPO / "docs" / "canon" / "glossary_registry.md"
 GLOSSARY_JSON = REPO / "data" / "glossary.json"
 FALLBACK_3 = REPO / "parts" / "part_03.html"
 FALLBACK_7A = REPO / "parts" / "part_07a.html"
+FALLBACK_APPE = REPO / "parts" / "appendix_model_params.html"
 MAP = REPO / "docs" / "research" / "migration_map_v2.md"
 MATRIX = REPO / "docs" / "research" / "editorial_matrix.md"
 CONTENT_MAP = REPO / "docs" / "content_map.md"
@@ -304,9 +315,12 @@ def main():
             if f">{label}</text>" not in e07_text:
                 err(f"E07 embed: row label missing: {label}")
         for token in ("0% ЗАПРЕЩЕНО", "~0%", "~75-85% (сжатая шкала)",
-                      "Хранилище vs Влияние"):
+                      "Диаграмма использует разделённую ось"):
             if token not in e07_text:
                 err(f"E07 embed: presentation marker missing: {token}")
+        if "inset-box" in e07_text:
+            err("E07 embed: the storage-vs-influence inset markup is back — "
+                "the §3.2 prose is the single statement (iter 180)")
         if "Recent chat" in e07_text:
             err("E07 embed: stale «Recent chat» label present")
     if "Recent chat" in sec32:
@@ -324,6 +338,15 @@ def main():
             err(f"widget: canonicalized claim missing from notes: {claim}")
     if "пренебрежимо мало (~2%" not in widget:
         err("widget: AN-12B note not re-framed (V-d Option A wording missing)")
+    # iter 180: the widget is the table's control strip, not a second matrix.
+    for banned in ('class="vh-row"', 'class="vh-bar-track"', 'class="vh-readout-rows"'):
+        if banned in widget:
+            err(f"widget: re-renders the 6×3 matrix ({banned}) — the §3.2 "
+                f"table is the single numeric surface")
+    for needed in ("vh-toggle-btn", "vh-export-btn",
+                   "vh-active-model"):
+        if needed not in widget:
+            err(f"widget: control-strip marker missing: {needed}")
 
     # ---------- 5. V-d Option A re-frames + E16 derivation ----------
     sec75 = md_section(canon7a, r"^## 7A\.5 ", r"^## 7A\.6 ")
@@ -334,13 +357,26 @@ def main():
             err("canon §7A.5: AN-12B note not re-framed (Option A)")
         if "мин–макс строки AN" not in sec75:
             err("canon §7A.5: E16 range derivation sentence missing")
+    # v3 stage 2 (iter 172): the AN-и-голос claim moved out of §7A.7 into
+    # Appendix E (model/runtime layer). §7A.7 is a pointer now; the re-framed
+    # wording must live in the appendix (canon + master), and must NOT be
+    # duplicated back into §7A.7.
     sec77 = md_section(canon7a, r"^## 7A\.7 ", r"^## 7A\.8 ")
     if sec77 is None:
         err("canon §7A.7 section not found")
-    elif RE_FRAME not in sec77:
-        err("canon §7A.7: РЕКОМЕНДАЦИЯ not re-framed (Option A wording missing)")
-    if RE_FRAME not in master7a:
-        err("master §7A.7: mirror of the re-framed РЕКОМЕНДАЦИЯ missing")
+    else:
+        if "appendix_model_params.md" not in sec77:
+            err("canon §7A.7: pointer to Appendix E missing")
+        if RE_FRAME in sec77:
+            err("canon §7A.7: the AN-и-голос claim is back in §7A.7 "
+                "(it must live in Appendix E only)")
+    cappe = read(CANON_APPE)
+    mappe = read(MASTER_APPE)
+    if RE_FRAME not in cappe:
+        err("canon Appendix E: РЕКОМЕНДАЦИЯ AN и голос not re-framed "
+            "(Option A wording missing)")
+    if RE_FRAME not in mappe:
+        err("master Appendix E: mirror of the re-framed РЕКОМЕНДАЦИЯ missing")
     e16 = re.search(
         r'<div class="vs-embed" data-vs-element="E16">.*?'
         r"<!-- REPLACED BY VISUAL SYSTEM: E16 -->",
@@ -360,7 +396,7 @@ def main():
                 f"statement(s) remain")
     if "AN не влияет" in widget:
         err("widget: stale «AN не влияет» note remains")
-    notes.append("V-d Option A: §7A.5 + §7A.7 re-framed, master mirror current, "
+    notes.append("V-d Option A: §7A.5 + Appendix E re-framed, master mirror current, "
                  "E16 derivation note in embed + canon marker; zero stale "
                  "«AN не влияет» statements")
 
@@ -386,7 +422,9 @@ def main():
     # allows links, never a second full statement).
     checks = [
         ("Хранилище ≠ Влияние", {CANON_3: 2, MASTER_3: 2, WIDGET: 1}),
-        ("Хранилище vs Влияние", {MASTER_3: 1}),  # E07 inset title (visual)
+        # iter 180: the E07 inset is retired — its text duplicated the §3.2
+        # prose. Allowed count 0 everywhere keeps it from coming back.
+        ("Хранилище vs Влияние", {}),
         ("~10–20 сообщений", {CANON_3: 2, MASTER_3: 1, WIDGET: 1}),
         ("после ~5 реплик", {CANON_3: 2, MASTER_3: 1, WIDGET: 1}),
     ]
@@ -404,7 +442,7 @@ def main():
     # ---------- 8. Root fallback current ----------
     for path, needles in (
         (FALLBACK_3, ["Хранилище ≠ Влияние", "Недавний чат"]),
-        (FALLBACK_7A, [RE_FRAME]),
+        (FALLBACK_APPE, [RE_FRAME]),
         (WIDGET_FALLBACK, ["Недавний чат", "пренебрежимо мало"]),
     ):
         if not path.exists():

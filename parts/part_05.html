@@ -25,7 +25,7 @@
   - Removed part-resume div
 -->
 
-<section  data-section="p5_ocean_basics" id="p5_ocean_basics" data-toc-nav>
+<section  data-section="p5_ocean_basics" id="p5_ocean_basics" data-toc-nav data-part-title="Психология: OCEAN и типология">
 <!-- difficulty: BASIC -->
 <!-- canonical: OCEAN (5 dimensions, golden rule: 1-2 extreme poles) -->
 <h2>Психологический инструментарий</h2>
@@ -34,8 +34,10 @@
 
 <p><strong>OCEAN</strong> — модель из 5 личностных измерений. Используется для проверки внутренней консистентности персонажа и дополнения фреймворка SPINE (WANT/NEED/FLAW).</p>
 
+<p><strong>Для 90% карточек достаточно SPINE + OCEAN (1–2 экстремума).</strong> Enneagram добавляется для персонажей с противоречивой мотивацией, MBTI — опциональная справка (§5.3–§5.5). Углубляйтесь только при необходимости: лишний слой психологии стоит токенов и не улучшает карточку сам по себе.</p>
+
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Золотое правило профиля: Только 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70) — рекомендуемый максимум для всех контекстов. Для 8K+ допустимо до 3, для 16K+ — до 4 (см. таблицу «Контекстные лимиты полюсов» ниже). Каждый дополнительный полюс сверх рекомендации снижает стабильность поведения. Нарушение = OCEAN Value Conflicts (см. §5.3).</p>
+<p><strong>ПРАВИЛО:</strong> Золотое правило профиля: 1–2 экстремальных полюса OCEAN (значения &lt;30 или &gt;70) — рекомендуемый максимум в любом контексте. Потолок задаёт бюджет контекста (таблица «Контекстные лимиты полюсов» ниже): 4K — 2, 8K — 3, 16K+ — 4, 32K+ — 5. Каждая крайность сверх двух допустима только со SPINE-связкой (GHOST/LIE/FLAW/NEED/WANT): без неё модель не разрешает конфликт последовательно — это OCEAN Overload (см. ниже). Число экстремумов проверяется в §9.5, пункт 12.</p>
 </div>
 
 <div class="callout rule">
@@ -122,7 +124,7 @@
           O <tspan fill="var(--accent-amber)" font-size="10">72</tspan>
         </text>
         <text x="425" y="155" text-anchor="start" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
-          C <tspan fill="var(--text-secondary)" font-size="10">65</tspan>
+          C <tspan fill="var(--accent-amber)" font-size="10">65</tspan>
         </text>
         <text x="365" y="375" text-anchor="middle" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
           E <tspan fill="var(--text-secondary)" font-size="10">41</tspan>
@@ -131,34 +133,19 @@
           A <tspan fill="var(--accent-amber)" font-size="10">38</tspan>
         </text>
         <text x="60" y="155" text-anchor="end" fill="var(--text-primary)" font-family="var(--font-heading)" font-size="12" font-weight="600">
-          N <tspan fill="var(--accent-cyan)" font-size="10">68</tspan>
+          N <tspan fill="var(--accent-amber)" font-size="10">68</tspan>
         </text>
 
         <!-- Threshold zone indicators -->
         <text x="250" y="415" text-anchor="middle" fill="var(--text-muted)" font-family="var(--font-micro)" font-size="9">
-          <tspan fill="var(--danger)">&lt;30</tspan> опасно &middot;
-          <tspan fill="var(--accent-amber)">30-40</tspan> осторожно &middot;
-          <tspan fill="var(--success)">40-60</tspan> безопасно &middot;
-          <tspan fill="var(--accent-amber)">&gt;70</tspan> экстремально
+          <tspan fill="var(--danger)">&lt;30 &gt; &gt;70</tspan> экстремум &middot;
+          <tspan fill="var(--accent-amber)">30-40 / 60-70</tspan> осторожно &middot;
+          <tspan fill="var(--success)">40-60</tspan> безопасно
         </text>
 
       </svg>
 
 </div>
-
-    <!-- Context Limits inset -->
-    <div class="context-limits-box scroll-enter">
-      <div class="context-limits-box__title">Контекстные ограничения для экстремумов личности</div>
-      <div class="context-limits-box__data">
-        <span class="context-limits-box__highlight">4K контекст</span> → максимум 1–2 экстремума<br>
-        <span class="context-limits-box__highlight">8K контекст</span> → 2–3 экстремума<br>
-        <span class="context-limits-box__highlight">16K+</span> → 3–4 экстремума<br>
-        <span class="context-limits-box__highlight">32K+</span> → до 5 экстремумов<br>
-        <span class="vs-ki13-context-limits-note">
-          Елена (O=72, N=68) имеет 1 экстремум → работает при контексте 4K+
-        </span>
-      </div>
-    </div>
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E09 -->
@@ -168,7 +155,7 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Измерение</th><th>Низкий полюс (&lt;30)</th><th>Высокий полюс (&gt;70)</th></tr>
+<tr><th scope="col">Измерение</th><th scope="col">Низкий полюс (&lt;30)</th><th scope="col">Высокий полюс (&gt;70)</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>O</strong>penness (Открытость)</td><td>Практичный, предпочитает знакомое</td><td>Любопытный, творческий</td></tr>
@@ -185,17 +172,19 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>N-полюс</th><th>Тип стресса</th><th>Поведение под стрессом</th><th>&rarr; SPINE паттерн</th><th>Пример</th></tr>
+<tr><th scope="col">N-полюс</th><th scope="col">Тип стресса</th><th scope="col">Поведение под стрессом</th><th scope="col">&rarr; SPINE паттерн</th><th scope="col">Пример</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>N &gt; 70</strong> / тревожный тип</td><td>Тревожно-реактивный</td><td>Внутренняя тревога &rarr; defensive behavior, overthinking</td><td>FLAW: defensive hostility, сарказм</td><td>Елена (N=68, осторожная зона &rarr; реактивный при N&gt;70)</td></tr>
+<tr><td><strong>N &gt; 70</strong> / тревожный тип</td><td>Тревожно-реактивный</td><td>Внутренняя тревога &rarr; defensive behavior, overthinking</td><td>FLAW: defensive hostility, сарказм</td><td>Елена при усилении N до экстремальной зоны (проекция её cautious-зоны N=68; каноническая Елена — строкой ниже)</td></tr>
 <tr><td><strong>N &gt; 70</strong> / агрессивный тип</td><td>Взрывной-враждебный</td><td>Стресс &rarr; anger &rarr; outward aggression</td><td>FLAW: lashing out, verbal aggression</td><td>Конфликтный персонаж (N=85, E=70)</td></tr>
-<tr><td><strong>N &gt; 60</strong> (осторожная зона)</td><td>Избегающ-замкнутый</td><td>Стресс &rarr; withdrawal, dissociation, shutdown</td><td>FLAW: isolation, emotional numbness</td><td>Интроверт (N=72, E=25)</td></tr>
+<tr><td><strong>N 60–70</strong> (осторожная зона)</td><td>Избегающ-замкнутый</td><td>Стресс &rarr; withdrawal, dissociation, shutdown</td><td>FLAW: isolation, emotional numbness</td><td>Елена (N=68 — тревожно-реактивный оттенок при низкой E); Интроверт (N=65, E=25)</td></tr>
 <tr><td><strong>N &lt; 30</strong> (экстремальный)</td><td>Стабильно-устойчивый</td><td>GHOST-resistant, дефект формируется через другие измерения</td><td>FLAW через A/C/O/E</td><td>Стоический воин (N=15)</td></tr>
 </tbody>
 </table>
 </div>
-<div class="callout rec">РЕКОМЕНДАЦИЯ: Определяйте тип стресса при N &gt; 60 (осторожная зона) или N &gt; 70 (экстремальный). Тип стресса уточняет, какой FLAW и поведенческий якорь нужны персонажу — и делает OCEAN&rarr;SPINE связь точнее, чем просто &laquo;тревожный, реактивный&raquo;.</div>
+<div class="callout rec">
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> Определяйте тип стресса при N 60–70 (осторожная зона) или N &gt; 70 (экстремальный). Тип стресса уточняет, какой FLAW и поведенческий якорь нужны персонажу — и делает OCEAN&rarr;SPINE связь точнее, чем просто &laquo;тревожный, реактивный&raquo;.</p>
+</div>
 
 <h3>Trigger &rarr; Stress Type &rarr; цепочка FLAW</h3>
 <p>Тип стресса определяет <strong>КАК</strong> персонаж реагирует, но не <strong>КОГДА</strong>. Чтобы тип стресса не остался абстракцией, формализуйте цепочку от конкретного стимула до конкретного поведения:</p>
@@ -206,7 +195,7 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Этап</th><th>Содержание</th><th>Источник в гайде</th></tr>
+<tr><th scope="col">Этап</th><th scope="col">Содержание</th><th scope="col">Источник в гайде</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>Trigger</strong></td><td>Искренняя забота о ней со стороны коллеги/друга</td><td>&sect;2.1 (Trigger)</td></tr>
@@ -216,14 +205,18 @@
 </tbody>
 </table>
 </div>
-<div class="callout rule">ПРАВИЛО: Каждый тип стресса требует минимум 1 цепочку триггер→FLAW→якорь. Без явного триггера тип стресса остаётся абстракцией &mdash; модель не сможет активировать дефект в нужный момент сессии. Если тип стресса не проявляется в наблюдаемом якоре &mdash; это сигнал, что либо тип выбран неверно, либо дефект сформулирован слишком абстрактно.</div>
-<div class="callout rec">РЕКОМЕНДАЦИЯ: Определите 2&ndash;3 категории триггеров для каждого типа стресса. Типичные категории: &laquo;близость/забота&raquo;, &laquo;конфликт/угроза&raquo;, &laquo;неопределённость/контроль&raquo;, &laquo;провал/критика&raquo;. Это даёт модели конкретные сцены для активации дефекта вместо ожидания &laquo;когда персонажу стрессово&raquo;.</div>
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Каждый тип стресса требует минимум 1 цепочку триггер→FLAW→якорь. Без явного триггера тип стресса остаётся абстракцией &mdash; модель не сможет активировать дефект в нужный момент сессии. Если тип стресса не проявляется в наблюдаемом якоре &mdash; это сигнал, что либо тип выбран неверно, либо дефект сформулирован слишком абстрактно.</p>
+</div>
+<div class="callout rec">
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> Определите 2&ndash;3 категории триггеров для каждого типа стресса. Типичные категории: &laquo;близость/забота&raquo;, &laquo;конфликт/угроза&raquo;, &laquo;неопределённость/контроль&raquo;, &laquo;провал/критика&raquo;. Это даёт модели конкретные сцены для активации дефекта вместо ожидания &laquo;когда персонажу стрессово&raquo;.</p>
+</div>
 
 <h4>Категории триггеров по типу стресса</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Тип стресса</th><th>Типичные категории триггеров</th><th>FLAW-паттерн</th><th>Пример Anchor</th></tr>
+<tr><th scope="col">Тип стресса</th><th scope="col">Типичные категории триггеров</th><th scope="col">FLAW-паттерн</th><th scope="col">Пример Anchor</th></tr>
 </thead>
 <tbody>
 <tr><td>Тревожно-реактивный</td><td>Близость, неопределённость, потеря контроля</td><td>Defensive hostility, сарказм</td><td>Забота &rarr; отшучивается &rarr; голос тише</td></tr>
@@ -235,19 +228,41 @@
 </div>
 
 <h3>Контекстные лимиты полюсов</h3>
+<p>Единственная шкала лимита: другие разделы гайда ссылаются сюда и не переопределяют порог.</p>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Контекст</th><th>Экстремальных полюсов</th><th>Рекомендация</th></tr>
+<tr><th scope="col">Контекст</th><th scope="col">Потолок экстремумов</th><th scope="col">Что это значит на практике</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>4K</strong></td><td>1-2</td><td>Минимум — выбрать самые важные</td></tr>
-<tr><td><strong>8K</strong></td><td>2-3</td><td>Средний профиль</td></tr>
-<tr><td><strong>16K+</strong></td><td>3-4</td><td>Богатый профиль</td></tr>
-<tr><td><strong>32K+</strong></td><td>Полный (5)</td><td>Только для сложных персонажей</td></tr>
+<tr><td><strong>4K</strong></td><td>2</td><td>рекомендация и максимум: выбирайте самые важные черты</td></tr>
+<tr><td><strong>8K</strong></td><td>3</td><td>средний профиль: каждая крайность сверх двух — со SPINE-связкой</td></tr>
+<tr><td><strong>16K+</strong></td><td>4</td><td>эксперт-профиль: эталон — <a href="#p10_vysherblenny">карточка §10.4</a>, каждая крайность объяснена SPINE</td></tr>
+<tr><td><strong>32K+</strong></td><td>5</td><td>полный профиль — только для сложных персонажей с полной SPINE-цепочкой</td></tr>
 </tbody>
 </table>
 </div>
+
+<h3>Перегрузка OCEAN (Value Conflicts)</h3>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Каждая крайность сверх двух — только со SPINE-связкой (полное правило и следствия — <a href="#p5_ocean_basics">§5.1 RULE</a> выше).</p>
+</div>
+
+<h4>Конфликт-сценарии при 3+ экстремальных полюсах</h4>
+
+<p><strong>Сценарий 1: Низкая A + Высокая E + Высокий N.</strong> Низкая Доброжелательность (агрессивный) + Высокая Экстраверсия (доминирующий) + Высокий Нейротизм (тревожный). Модель мечется между агрессией, доминированием и тревогой — персонаж получается непредсказуемым не в смысле «сложный», а в смысле «неконсистентный». Решение: уберите один экстремум или добавьте связующий контекст в SPINE.</p>
+
+<p><strong>Сценарий 2: Высокая O + Низкая C + Высокий N.</strong> Высокая Открытость (творческий) + Низкая Добросовестность (импульсивный) + Высокий Нейротизм (тревожный). Персонаж генерирует идеи, но не доводит до конца, и при этом тревожится о результатах. Модель производит хаотичный, невротичный текст вместо целенаправленного творчества. Решение: добавьте FLAW, который объясняет импульсивность.</p>
+
+<p><strong>Сценарий 3: Высокая E + Низкая A + Низкий N.</strong> Высокая Экстраверсия (харизматичный) + Низкая Доброжелательность (манипулятивный) + Низкий Нейротизм (бесстрашный). «Харизматичный социопат» — работает для Tyler Durden, но при добавлении четвёртого экстремального полюса (например, Высокая O) модель начинает добавлять черты, противоречащие ключевой концепции. Решение: уберите экстремум или обоснуйте каждую крайность SPINE-элементом — тогда потолок 16K+ (4) законен, эталон — <a href="#p10_vysherblenny">карточка §10.4</a>.</p>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> 4+ экстремума без SPINE-обоснования каждой крайности = критический перегруз: карточка попадает на уровень «Критический» в <a href="#p9_pre_deploy">§9.5</a> (пункт 12).</p>
+</div>
+
+<h4>OCEAN×Enneagram: проверка через тип</h4>
+<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен.</p>
 
 <details class="interactive">
 <summary>OCEAN Interactive Pentagon</summary>
@@ -313,20 +328,20 @@
 
 </details>
 
-<p><strong>Ссылка:</strong> Как применить OCEAN при сборке карточки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>.</p>
+<p>Как применить OCEAN при сборке карточки → <a href="#p7a_assembly_pipeline">Part 7A: Конвейер сборки</a>.</p>
 
 <h4>Decision tree: какой фреймворк применять</h4>
 
-<p>Quick-reference для выбора фреймворка под задачу. Не заменяет чтение §5.1–§5.6 — это контрольная точка после прочтения.</p>
+<p>Quick-reference для выбора фреймворка под задачу. Не заменяет чтение §5.1–§5.5 — это контрольная точка после прочтения.</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Шаг</th><th>Вопрос</th><th>Если да →</th><th>Если нет →</th></tr>
+<tr><th scope="col">Шаг</th><th scope="col">Вопрос</th><th scope="col">Если да →</th><th scope="col">Если нет →</th></tr>
 </thead>
 <tbody>
-<tr><td>1</td><td>У вас уже построен SPINE (<a href="#p4_spine_full_chain">Part 4 §4.7</a>)?</td><td>→ Шаг 2</td><td>Сначала постройте SPINE. Психологические фреймворки валидируют, не генерируют.</td></tr>
-<tr><td>2</td><td>Нужна ли глубина мотивации («почему персонаж так действует»)?</td><td>→ Enneagram (§5.4) — тип → страх/желание → LIE/FLAW</td><td>→ Шаг 3</td></tr>
+<tr><td>1</td><td>У вас уже построен SPINE (<a href="#p4_spine_full_chain">Part 4 §4.6</a>)?</td><td>→ Шаг 2</td><td>Сначала постройте SPINE. Психологические фреймворки валидируют, не генерируют.</td></tr>
+<tr><td>2</td><td>Нужна ли глубина мотивации («почему персонаж так действует»)?</td><td>→ Enneagram (§5.3) — тип → страх/желание → LIE/FLAW</td><td>→ Шаг 3</td></tr>
 <tr><td>3</td><td>Нужны ли количественные черты («сколько каждой черты», для экстремальных полюсов)?</td><td>→ OCEAN (§5.1) — полюса → Anchors</td><td>→ Шаг 4</td></tr>
 <tr><td>4</td><td>Нужна ли справочная типология для общения с командой / пользователем?</td><td>→ MBTI (<a href="#appendix_mbti">Appendix A</a>) — supplementary, без прямого маппинга на SPINE</td><td>→ Готово. Карточка валидирована через SPINE.</td></tr>
 </tbody>
@@ -334,11 +349,7 @@
 </div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Не пытайтесь собрать SPINE «снизу вверх» из OCEAN/Enneagram/MBTI — это приведёт к механическому комбинированию без каузальной логики. Сначала SPINE (GHOST→LIE→FLAW→NEED→WANT), затем валидация через §5.5 таблицы.</p>
-</div>
-
-<div class="callout rec">
-<p><strong>РЕКОМЕНДАЦИЯ:</strong> Для 90% карточек достаточно SPINE + OCEAN (1–2 экстремума). Enneagram добавляется для персонажей с противоречивой мотивацией. MBTI — опциональная справка, не обязательна для качества карточки.</p>
+<p><strong>ПРАВИЛО:</strong> Не пытайтесь собрать SPINE «снизу вверх» из OCEAN/Enneagram/MBTI — это приведёт к механическому комбинированию без каузальной логики. Сначала SPINE (GHOST→LIE→FLAW→NEED→WANT), затем валидация через §5.4 таблицы.</p>
 </div>
 
 </section>
@@ -347,7 +358,6 @@
 <!-- difficulty: BASIC -->
 <h3>Пример: OCEAN-профиль Елены</h3>
 
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
 <!-- Demonstrates: OCEAN, SPINE -->
 <p>Елена — циничная журналистка-расследователь. Её OCEAN-профиль демонстрирует, как числовые значения связываются с SPINE-элементами.</p>
@@ -355,20 +365,20 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Измерение</th><th>Значение</th><th>Интерпретация</th></tr>
+<tr><th scope="col">Измерение</th><th scope="col">Значение</th><th scope="col">Интерпретация</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>O</strong>penness</td><td>72</td><td>Любопытная, творческая — следует за зацепками, которые другие игнорируют. Экстремальный полюс → WANT: «Доказать правоту» требует открытости к неочевидным историям.</td></tr>
 <tr><td><strong>C</strong>onscientiousness</td><td>65</td><td>Методичная в исследованиях, менее организованная в личной жизни. Умеренная — достаточно дисциплины для расследований, но не перфекционистка.</td></tr>
 <tr><td><strong>E</strong>xtraversion</td><td>41</td><td>Работает одна, предпочитает бары вечеринкам. Не экстремум, но склонность к интроверсии подкрепляет LIE: «Я работаю одна».</td></tr>
-<tr><td><strong>A</strong>greeableness</td><td>38</td><td>Конфликтная, склонна вызывать собеседника. Низкая A &rarr; FLAW: отталкивает сарказмом, когда сближается. Осторожная зона (30–40) — на границе с экстремальной зоной (&lt;30), напрямую связана с FLAW.</td></tr>
-<tr><td><strong>N</strong>euroticism</td><td>68</td><td>Циничная, тревожная, реагирует на предательство. <strong>Тип стресса: тревожно-реактивный</strong> — внутренняя тревога перетекает в defensive сарказм (FLAW). Высокая N &rarr; GHOST-реактивность: предательство редактора активирует сильнейший эмоциональный ответ. Осторожная зона (60–70) — на границе с экстремальной зоной (&gt;70), напрямую связана с GHOST.</td></tr>
+<tr><td><strong>A</strong>greeableness</td><td>38</td><td>Конфликтная, склонна вызывать собеседника. Низкая A &rarr; FLAW: отталкивает сарказмом, когда сближается. Осторожная зона — на границе с экстремальной, напрямую связана с FLAW (зоны и пороги — <a href="#p5_ocean_basics">§5.1</a>).</td></tr>
+<tr><td><strong>N</strong>euroticism</td><td>68</td><td>Циничная, тревожная, реагирует на предательство. <strong>Тип стресса: тревожно-реактивный</strong> — внутренняя тревога перетекает в defensive сарказм (FLAW). Высокая N &rarr; GHOST-реактивность: предательство редактора активирует сильнейший эмоциональный ответ. Осторожная зона — на границе с экстремальной, напрямую связана с GHOST (зоны и пороги — <a href="#p5_ocean_basics">§5.1</a>).</td></tr>
 </tbody>
 </table>
 </div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> У Елены 1 экстремальный полюс (O=72 &gt; 70) + 2 значения в осторожной зоне (A=38, N=68 — на границе 30–40 / 60–70). Соответствует строгому правилу (значения &lt;30 или &gt;70 = экстремальные). Профиль допустим для 4K+ контекста (1 экстремум). A=38 и N=68 напрямую связаны с SPINE (дефект и GHOST-реактивность) — при 8K+ можно усилить их до экстремальной зоны (A&lt;30 или N&gt;70) для более выраженного конфликта. Её тип стресса (тревожно-реактивный) объясняет, почему FLAW = defensive сарказм, а не агрессия или замкнутость.</p>
+<p><strong>ПРАВИЛО:</strong> У Елены 1 экстремальный полюс + 2 значения в осторожной зоне — профиль соответствует правилу <a href="#p5_ocean_basics">§5.1</a> (пороги, потолки и SPINE-связка — там; профили 4K+ допустимы с 1 экстремумом). A=38 и N=68 напрямую связаны с SPINE (дефект и GHOST-реактивность) — при 8K+ можно усилить их до экстремальной зоны для более выраженного конфликта. Её тип стресса (тревожно-реактивный) объясняет, почему FLAW = defensive сарказм, а не агрессия или замкнутость.</p>
 </div>
 
 <h4>Enneagram: Тип 6w5 (Скептик/Лоялист)</h4>
@@ -376,7 +386,7 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Элемент Enneagram</th><th>Значение</th><th>→ SPINE элемент</th></tr>
+<tr><th scope="col">Элемент Enneagram</th><th scope="col">Значение</th><th scope="col">→ SPINE элемент</th></tr>
 </thead>
 <tbody>
 <tr><td>Ключевой страх</td><td>Быть без поддержки, брошенной</td><td>→ LIE: «Мне не нужно ничьё одобрение» (защита от страха)</td></tr>
@@ -392,33 +402,12 @@
 
 </section>
 
-<section  data-section="p5_ocean_warning" id="p5_ocean_warning" data-toc-nav>
+<section  data-section="p5_enneagram_basics" id="p5_enneagram_basics" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
-<!-- canonical: OCEAN Value Conflicts -->
-<h3>Перегрузка OCEAN (Value Conflicts)</h3>
+<!-- canonical: Enneagram (9 types, core fear/desire) -->
+<h3>Enneagram</h3>
 
-<div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> OCEAN Overload: Более 2 экстремальных полюсов OCEAN создают внутренние конфликты, которые модель не может разрешить последовательно.</p>
-</div>
-
-<h4>Конфликт-сценарии при 3+ экстремальных полюсах</h4>
-
-<h4>Сценарий 1: Низкая A + Высокая E + Высокий N</h4>
-<p><strong>Расшифровка:</strong> Низкая Доброжелательность (агрессивный) + Высокая Экстраверсия (доминирующий) + Высокий Нейротизм (тревожный).</p>
-<p>Модель мечется между агрессией, доминированием и тревогой — персонаж получается непредсказуемым не в смысле «сложный», а в смысле «неконсистентный». Решение: уберите один экстремум или добавьте связующий контекст в SPINE.</p>
-
-<h4>Сценарий 2: Высокая O + Низкая C + Высокий N</h4>
-<p><strong>Расшифровка:</strong> Высокая Открытость (творческий) + Низкая Добросовестность (импульсивный) + Высокий Нейротизм (тревожный).</p>
-<p>Персонаж генерирует идеи, но не доводит до конца, и при этом тревожится о результатах. Модель производит хаотичный, невротичный текст вместо целенаправленного творчества. Решение: добавьте FLAW, который объясняет импульсивность.</p>
-
-<h4>Сценарий 3: Высокая E + Низкая A + Низкий N</h4>
-<p><strong>Расшифровка:</strong> Высокая Экстраверсия (харизматичный) + Низкая Доброжелательность (манипулятивный) + Низкий Нейротизм (бесстрашный).</p>
-<p>«Харизматичный социопат» — работает для Tyler Durden, но при добавлении четвёртого экстремального полюса (например, Высокая O) модель начинает добавлять черты, противоречащие ключевой концепции. Решение: максимум 3 экстремума для 8K+, 2 для 4K.</p>
-
-<h4>OCEAN×Enneagram: проверка через тип</h4>
-<p>Если OCEAN-профиль конфликтует с Enneagram-типом — один из них ошибочен.</p>
-
-</section>
+<p>OCEAN описывает «сколько» каждой черты у персонажа. Enneagram отвечает на другой вопрос: «почему персонаж действует именно так». Если OCEAN — это карта черт, то Enneagram — карта мотиваций.</p>
 
 <!-- VS-EMBED: E10 — Enneagram -->
 <div class="vs-embed" data-vs-element="E10">
@@ -438,10 +427,10 @@
          0.5 -> 1.25, opacity 0.2 -> 0.6, dash 3 3 -> 5 3 for legibility. Static
          mini-card defaults aligned to data/enneagram.json (type 4 wording)
          together with the widget fetch fix (KI#76).
-  mig-5 (iter 136): data/enneagram.json is GENERATED from canon §5.4
+  mig-5 (iter 136): data/enneagram.json is GENERATED from canon §5.3
          (scripts/generate_enneagram.mjs) — mini-card values (страх/желание/LIE/
-         дефект) = §5.4 canonical table, SHARED_REFERENCE; static defaults below
-         carry the §5.4 type-4 wording (was: pre-mig-5 extended JSON variants);
+         дефект) = §5.3 canonical table, SHARED_REFERENCE; static defaults below
+         carry the §5.3 type-4 wording (was: pre-mig-5 extended JSON variants);
          runtime fill (vs-e10-enneagram.js) reads the same generated layer
          unchanged. Hexad graph directions = VISUAL_CANONICAL (direction data
          lives in the generated layer; drawn statically per KI#75).
@@ -585,22 +574,12 @@
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E10 -->
-<section  data-section="p5_enneagram_basics" id="p5_enneagram_basics" data-toc-nav>
-<!-- difficulty: INTERMEDIATE -->
-<!-- canonical: Enneagram (9 types, core fear/desire) -->
-<h3>Enneagram</h3>
-
-<p>OCEAN описывает «сколько» каждой черты у персонажа. Enneagram отвечает на другой вопрос: «почему персонаж действует именно так». Если OCEAN — это карта черт, то Enneagram — карта мотиваций.</p>
-
-<h4>Интерактивный Builder</h4>
-
-<p><strong>Enneagram</strong> — модель из 9 типов личности. Используется для выведения SPINE из типа.</p>
 
 <h4>9 типов Enneagram</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Тип</th><th>Название</th><th>Альт-название</th><th>Ключевой страх</th><th>Ключевое желание</th><th>Ложь (LIE, ложная установка)</th><th>Дефект из стресса</th></tr>
+<tr><th scope="col">Тип</th><th scope="col">Название</th><th scope="col">Альт-название</th><th scope="col">Ключевой страх</th><th scope="col">Ключевое желание</th><th scope="col">Ложь (LIE, ложная установка)</th><th scope="col">Дефект из стресса</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>1</strong></td><td>Перфекционист</td><td>Реформатор</td><td>Быть плохим, коррумпированным</td><td>Быть хорошим, цельным</td><td>Если я буду идеальным, меня будут любить</td><td>Критика себя и других, негибкость</td></tr>
@@ -620,14 +599,40 @@
 <p><strong>РЕКОМЕНДАЦИЯ:</strong> Дополнительный контент: Столбец «Ложь (LIE)» — справочные данные для понимания типа. Ложь и призрак подробно разобраны в <a href="#p4_lie">Part 4: SPINE</a>.</p>
 </div>
 
-<noscript>
-<p><em>Интерактивная диаграмма Enneagram доступна при включённом JavaScript. Описания всех 9 типов см. в таблице выше.</em></p>
-</noscript>
-
-<div id="enneagram-embed" class="enneagram-embed"></div>
-
 <p>Подробнее о маппинге Enneagram→SPINE — в таблице ниже (Связь инструментов).</p>
 
+
+<h4>Крылья (Wings)</h4>
+
+<p><strong>Wing</strong> — соседний тип, который модифицирует основное поведение.</p>
+
+<p><strong>Алгоритм выбора крыла.</strong></p>
+<p>Каждый эннеаграмм-тип имеет два смежных крыла. Выберите первичное крыло по двум критериям:</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Критерий</th><th scope="col">Первичное крыло</th><th scope="col">Вторичное крыло</th></tr></thead>
+<tbody>
+<tr><td>Функция</td><td>Стратегия разрешения базового страха</td><td>Вариант совладания со стрессом</td></tr>
+<tr><td>Пример (Тип 6)</td><td>6w5: Интеллектуализация страха (анализ, подготовка)</td><td>6w7: Активный поиск безопасности (связи, отвлечение)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Если персонаж реагирует на страх анализом → первичное крыло 5. Если реагирует поиском поддержки → первичное крыло 7.</p>
+
+<h5>Примеры крыльев</h5>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th scope="col">Основной тип</th><th scope="col">Wing</th><th scope="col">Разница</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>6w5</strong></td><td>5 (Исследователь)</td><td>Более замкнутый, аналитичный, параноидный</td></tr>
+<tr><td><strong>6w7</strong></td><td>7 (Энтузиаст)</td><td>Более активный, реактивный, тревожный</td></tr>
+<tr><td><strong>8w7</strong></td><td>7 (Энтузиаст)</td><td>Более харизматичный, экспансивный</td></tr>
+<tr><td><strong>8w9</strong></td><td>9 (Миротворец)</td><td>Более спокойный, защитный, "тихий силач"</td></tr>
+</tbody>
+</table>
+</div>
 </section>
 
 <section  data-section="p5_cross_instrument_map" id="p5_cross_instrument_map" data-toc-nav>
@@ -647,18 +652,18 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Enneagram элемент</th><th>SPINE элемент</th><th>Как использовать для валидации</th></tr>
+<tr><th scope="col">Enneagram элемент</th><th scope="col">SPINE элемент</th><th scope="col">Как использовать для валидации</th></tr>
 </thead>
 <tbody>
 <tr><td>Ключевой страх</td><td>→ LIE (ложная установка, защищающая от страха) — <a href="#p4_lie">Part 4: ложь</a></td><td>Если страх = «быть покинутым», а LIE ≠ «меня нельзя любить» → проверьте логику</td></tr>
 <tr><td>Ключевое желание</td><td>→ WANT (осознанное желание)</td><td>Если желание = «быть нужным», а WANT ≠ «помогать всем» → несоответствие</td></tr>
-<tr><td>Направление стресса</td><td>→ FLAW (поведение под стрессом)</td><td>Если тип 6 в стрессе → подозрительность, а FLAW ≠ паранойя → ошибка</td></tr>
+<tr><td>Направление стресса</td><td>→ FLAW (поведение под стрессом)</td><td>Если тип 6 в стрессе → тревожное ожидание (стресс-линия 6→3: конкурентность, трудоголизм — §5.3), а FLAW ему противоречит → ошибка</td></tr>
 <tr><td>Направление роста</td><td>→ NEED (потенциал роста)</td><td>Если рост = «доверять себе», а NEED ≠ «самостоятельность» → проверьте</td></tr>
 </tbody>
 </table>
 </div>
 
-<p>Интерактивный выбор типа с автозаполнением SPINE — Enneagram Builder (выше).</p>
+<p>SPINE не собирается из Enneagram «снизу вверх»: таблица выше — карта для сверки, а не генератор профиля (<a href="#p5_ocean_basics">§5.1: фреймворки валидируют, не генерируют</a>).</p>
 
 <h4>OCEAN → SPINE: Validation Reference</h4>
 
@@ -667,68 +672,57 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>OCEAN-полюс</th><th>Ожидаемый SPINE-паттерн</th><th>Признак противоречия</th></tr>
+<tr><th scope="col">OCEAN-полюс</th><th scope="col">Ожидаемый SPINE-паттерн</th><th scope="col">Признак противоречия</th></tr>
 </thead>
 <tbody>
-<tr><td>High Neuroticism (&gt;70)</td><td>дефект связан с эмоциональной реактивностью — уточните тип стресса (&sect;5.1): тревожно-реактивный, взрывной-враждебный или избегающ-замкнутый &rarr; конкретный FLAW</td><td>Если FLAW &ne; эмоциональная реакция &rarr; проверьте, не занижен ли Neuroticism. Если тип стресса не согласуется с FLAW &rarr; проверьте E и A</td></tr>
-<tr><td>Low Agreeableness (&lt;30)</td><td>дефект связан с конфликтом, желание = доминирование или контроль</td><td>Если WANT = «помогать другим» при Low A → вероятно, ошибка в OCEAN</td></tr>
-<tr><td>High Openness (&gt;70)</td><td>потребность связан с поиском нового, творчеством, альтернативами</td><td>Если NEED = «стабильность и предсказуемость» → противоречие</td></tr>
-<tr><td>Low Extraversion (&lt;30)</td><td>дефект связан с изоляцией, желание ≠ «быть в центре внимания»</td><td>Если WANT требует социального доминирования → проверьте E</td></tr>
-<tr><td>High Conscientiousness (&gt;70)</td><td>Ложь связана с перфекционизмом, «если я буду идеальным, меня будут любить»</td><td>Если LIE про «я недостаточно хорош» при Low C → несоответствие</td></tr>
+<tr><td>High Neuroticism</td><td>дефект связан с эмоциональной реактивностью — уточните тип стресса (&sect;5.1): тревожно-реактивный, взрывной-враждебный или избегающ-замкнутый &rarr; конкретный FLAW</td><td>Если FLAW &ne; эмоциональная реакция &rarr; проверьте, не занижен ли Neuroticism. Если тип стресса не согласуется с FLAW &rarr; проверьте E и A</td></tr>
+<tr><td>Low Agreeableness</td><td>дефект связан с конфликтом, желание = доминирование или контроль</td><td>Если WANT = «помогать другим» при Low A → вероятно, ошибка в OCEAN</td></tr>
+<tr><td>High Openness</td><td>потребность связан с поиском нового, творчеством, альтернативами</td><td>Если NEED = «стабильность и предсказуемость» → противоречие</td></tr>
+<tr><td>Low Extraversion</td><td>дефект связан с изоляцией, желание ≠ «быть в центре внимания»</td><td>Если WANT требует социального доминирования → проверьте E</td></tr>
+<tr><td>High Conscientiousness</td><td>Ложь связана с перфекционизмом, «если я буду идеальным, меня будут любить»</td><td>Если LIE про «я недостаточно хорош» при Low C → несоответствие</td></tr>
 </tbody>
 </table>
 </div>
 
 <h4>Enneagram ↔ MBTI</h4>
-<p>OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (M2+) показывает рекомендованные OCEAN-значения для выбранного типа; OCEAN Insight (M2+) прогнозирует вероятные MBTI-типы на основе профиля. Каждый Enneagram-тип имеет вероятные MBTI-типы (и наоборот). Enneagram Builder и MBTI Composer показывают эти подсказки при M2+.</p>
+<p>OCEAN-полюса коррелируют с MBTI-осями. MBTI Composer (<a href="#appendix_mbti">Appendix A</a>) показывает рекомендованные OCEAN-значения для выбранного типа; OCEAN Insight (<a href="#p5_ocean_basics">§5.1</a>) прогнозирует вероятные MBTI-типы на основе профиля. Каждый Enneagram-тип имеет вероятные MBTI-типы (и наоборот) — эти подсказки показывает MBTI Composer.</p>
 
 </section>
 
-<section  data-section="p5_enneagram_wings" id="p5_enneagram_wings">
+<section  data-section="p5_cross_matrix" id="p5_cross_matrix" data-toc-nav>
 <!-- difficulty: EXPERT -->
-<h3>Enneagram Wings</h3>
+<h3>OCEAN×Enneagram Matrix + сверка трёх систем</h3>
 
-<p><strong>Wing</strong> — соседний тип, который модифицирует основное поведение.</p>
+<p>Матрица — справочная корреляция OCEAN-измерений и типов Enneagram: значение от −1.0 до +1.0; <strong>|значение| ≥ 0.5</strong> (выделено жирным) — сильная связь, 0.2–0.5 — умеренная, ближе к нулю — нейтральная. Матрица не выводит SPINE из типа: она показывает, какие полюса OCEAN ожидаемы при типе, — это проверка (§5.1, §5.4), а не генератор.</p>
 
-<h4>Алгоритм выбора крыла</h4>
-<p>Каждый эннеаграмм-тип имеет два смежных крыла. Выберите первичное крыло по двум критериям:</p>
-<div class="table-wrap">
-<table>
-<thead><tr><th>Критерий</th><th>Первичное крыло</th><th>Вторичное крыло</th></tr></thead>
-<tbody>
-<tr><td>Функция</td><td>Стратегия разрешения базового страха</td><td>Вариант совладания со стрессом</td></tr>
-<tr><td>Пример (Тип 6)</td><td>6w5: Интеллектуализация страха (анализ, подготовка)</td><td>6w7: Активный поиск безопасности (связи, отвлечение)</td></tr>
-</tbody>
-</table>
-</div>
-<p>Если персонаж реагирует на страх анализом → первичное крыло 5. Если реагирует поиском поддержки → первичное крыло 7.</p>
-
-<h4>Примеры</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Основной тип</th><th>Wing</th><th>Разница</th></tr>
+<tr><th scope="col">Тип</th><th scope="col">O<br><small>Открытость</small></th><th scope="col">C<br><small>Добросовестность</small></th><th scope="col">E<br><small>Экстраверсия</small></th><th scope="col">A<br><small>Доброжелательность</small></th><th scope="col">N<br><small>Нейротизм</small></th></tr>
 </thead>
 <tbody>
-<tr><td><strong>6w5</strong></td><td>5 (Исследователь)</td><td>Более замкнутый, аналитичный, параноидный</td></tr>
-<tr><td><strong>6w7</strong></td><td>7 (Энтузиаст)</td><td>Более активный, реактивный, тревожный</td></tr>
-<tr><td><strong>8w7</strong></td><td>7 (Энтузиаст)</td><td>Более харизматичный, экспансивный</td></tr>
-<tr><td><strong>8w9</strong></td><td>9 (Миротворец)</td><td>Более спокойный, защитный, "тихий силач"</td></tr>
+<tr><th scope="col">1<br><small>Перфекционист</small></th><td><strong>+0.5</strong></td><td><strong>+0.8</strong></td><td>+0.3</td><td>+0.4</td><td>+0.4</td></tr>
+<tr><th scope="col">2<br><small>Помощник</small></th><td><strong>+0.5</strong></td><td><strong>+0.5</strong></td><td><strong>+0.7</strong></td><td><strong>+0.8</strong></td><td>+0.4</td></tr>
+<tr><th scope="col">3<br><small>Достигатель</small></th><td>+0.4</td><td><strong>+0.7</strong></td><td><strong>+0.8</strong></td><td>+0.3</td><td>−0.3</td></tr>
+<tr><th scope="col">4<br><small>Индивидуалист</small></th><td><strong>+0.8</strong></td><td>+0.4</td><td>+0.3</td><td>+0.4</td><td><strong>+0.7</strong></td></tr>
+<tr><th scope="col">5<br><small>Исследователь</small></th><td><strong>+0.8</strong></td><td><strong>+0.6</strong></td><td>−0.3</td><td>+0.3</td><td>+0.4</td></tr>
+<tr><th scope="col">6<br><small>Лоялист</small></th><td>+0.3</td><td><strong>+0.5</strong></td><td>+0.4</td><td><strong>+0.6</strong></td><td><strong>+0.7</strong></td></tr>
+<tr><th scope="col">7<br><small>Энтузиаст</small></th><td><strong>+0.8</strong></td><td>+0.2</td><td><strong>+0.8</strong></td><td>+0.4</td><td>+0.2</td></tr>
+<tr><th scope="col">8<br><small>Челленджер</small></th><td>+0.4</td><td>+0.4</td><td><strong>+0.8</strong></td><td>−0.4</td><td>+0.3</td></tr>
+<tr><th scope="col">9<br><small>Миротворец</small></th><td>+0.4</td><td>+0.4</td><td>−0.2</td><td><strong>+0.7</strong></td><td>+0.2</td></tr>
 </tbody>
 </table>
 </div>
 
-</section>
+<h4>Сверка трёх систем</h4>
 
-<section  data-section="p5_cross_matrix" id="p5_cross_matrix">
-<!-- difficulty: EXPERT -->
-<h3>OCEAN×Enneagram Matrix + Синтез личности (Persona Synthesis)</h3>
+<p>Автоматической агрегации трёх систем нет — сверка выполняется вручную за четыре шага; расхождение — сигнал ошибки, а не повод «подогнать» SPINE.</p>
 
-<p>Матрица показывает корреляцию OCEAN×Enneagram: зелёные ячейки = высокая корреляция, красные = низкая. Нажмите на ячейку для деталей. Автоматическая валидация вашего профиля — <strong>Персона Синтез</strong> ниже.</p>
-
-<div id="persona-cross" class="persona-cross-embed"></div>
-
-<h4>Персона Синтез (агрегация всех трёх систем)</h4>
-<div id="persona-synthesis" class="persona-synthesis-embed"></div>
+<ol>
+<li><strong>Enneagram → SPINE.</strong> Сверьте тип с картой §5.4: страх → LIE, желание → WANT, стресс → FLAW, рост → NEED. Тип задаёт ожидаемый профиль, не готовый SPINE.</li>
+<li><strong>OCEAN → SPINE.</strong> Сверьте полюса с проверочной таблицей §5.4: High N → FLAW эмоциональной реактивности; Low A → WANT контроля; High O → NEED новизны; Low E → WANT ≠ публичность; High C → LIE перфекционизма.</li>
+<li><strong>MBTI (если используете).</strong> MBTI — справочный инструмент без прямого маппинга на SPINE (<a href="#appendix_mbti">Appendix A</a>): сверяйте поведенческие следствия темперамента, не буквы типа.</li>
+<li><strong>Расхождение.</strong> Если системы указывают на разные SPINE-профили — ищите ошибку в SPINE, а не подстраивайте фреймворки под него; локализация — <a href="#p9_decision_tree">§9.3 ладдер диагностики</a>.</li>
+</ol>
 
 </section>

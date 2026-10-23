@@ -6,15 +6,15 @@ Verifies the Diagnostics cluster (Debug mode) single-canonical-owner architectur
 across every presentation layer of the v1 inventory (migration foundation §4.4,
 owner_gates_iter137.md §3.2):
 
-    §9.6 (canon + master)   = THE canonical home of the E13 symptom→check→branch→
+    §9.3 (canon + master)   = THE canonical home of the E13 symptom→check→branch→
                                AP/E mapping (TEXTUAL_CANONICAL, DEC-20) — new
                                sub-table + upgraded [VS: E13] marker
     E13 master embed         = the visual presentation / decision aid of that
                                mapping — re-pointed, values parity-locked by
                                this audit
-    §9.5 / §9.3 / §9.11      = stay flat lookup / checklists — no E13 mappings
+    §9.2 / §9.1 / §9.5       = flat lookup / entry / the ONE checklist — no E13 mappings
                                there (no competing diagnostic sources)
-    §9.2 (canon + master)    = Debug reader-path wiring: one-change rule ↔ tree
+    §9.4 (canon + master)    = Debug reader-path wiring: one-change rule ↔ tree
                                back-link (IMP-48 pair)
     prototype E13            = frozen design artifact (DEC-19; archive = git
                                history) — no action, reported as a note
@@ -129,7 +129,10 @@ WALTER_97_ANCHOR = (
     "(C=85, A=25 — выраженные экстремумы; E=30 — осторожная зона)"
 )
 # P2-17 one-word symptom kept in the existing (5-group) §9.6 table.
-P217_ANCHOR = "Удалить голос из Description (AP-3 Voice-in-Desc)"
+# iter 173 (v3 Stage 3): the old 5-group tree table was retired as a duplicate of the
+# flat lookup + the E13 mapping; its two unique rows moved into §9.2 (symptom table).
+# The P2-17 anchor guard therefore retires with the table — the E13 mapping table
+# below is now guarded by the ONE-checklist / mapping checks instead.
 
 errors = []
 notes = []
@@ -169,7 +172,7 @@ def main():
     master = read(MASTER_9)
 
     # ---------- 1. Canonical record (canon §9.6 E13 block) ----------
-    sec96 = md_section(canon, r"^## 9\.6 ", r"^## 9\.7 ")
+    sec96 = md_section(canon, r"^## 9\.3 ", r"^## 9\.4 ")
     if sec96 is None:
         err("canon §9.6 section not found")
         return finish()
@@ -200,11 +203,11 @@ def main():
                 err(f"canon §9.6 [VS: E13] marker: token missing: {token}")
     # Debug reader-path wiring: §9.2 + §9.7 refs in the E13 intro paragraph.
     intro = re.search(r"^Ниже — полный маппинг трёх базовых симптомов.*?\n\n", sec96, re.DOTALL | re.MULTILINE)
-    if intro is None or "[ref: §9.2 — Правило одного изменения]" not in intro.group(0):
-        err("canon §9.6: E13 intro paragraph missing the §9.2 one-change ref")
-    if intro is None or "[ref: §9.7 — Тестовые сценарии]" not in intro.group(0):
-        err("canon §9.6: E13 intro paragraph missing the §9.7 test-scenarios ref")
-    notes.append(f"canonical record §9.6: {len(SYMPTOMS)} symptoms, "
+    if intro is None or "[ref: §9.4 — Правило одного изменения]" not in intro.group(0):
+        err("canon §9.3: E13 intro paragraph missing the §9.4 one-change ref")
+    if intro is None or "[ref: §9.6 — Тестовые сценарии]" not in intro.group(0):
+        err("canon §9.3: E13 intro paragraph missing the §9.6 test-scenarios ref")
+    notes.append(f"canonical record §9.3: {len(SYMPTOMS)} symptoms, "
                  f"{len(CHECKS)} checks, {len(DIAGNOSES)} diagnoses, "
                  f"AP set {sorted(AP_SET)}, E set {sorted(E_SET)}, "
                  "full [VS: E13] marker")
@@ -233,17 +236,14 @@ def main():
     if 'href="#p9_test_scenarios"' not in m96:
         err("master §9.6: intro link to #p9_test_scenarios (§9.7) missing")
     if WALTER_DELETED in m96:
-        err("master §9.6: the KI#84-deleted Walter OCEAN cross-ref line is present "
+        err("master §9.3: the KI#84-deleted Walter OCEAN cross-ref line is present "
             "(deleted iter 157 — Elena's values had been attributed to Walter; "
-            "§9.7 is the sole Part-9 Walter reference)")
-    if P217_ANCHOR not in m96:
-        err("master §9.6: existing 5-group table altered (P2-17 anchor missing)")
-    notes.append("master §9.6 mirror: sub-table + intro + chain links present; "
-                 "the KI#84-deleted Walter line absent (deleted iter 157); "
-                 "P2-17 anchor intact")
+            "§9.6 is the sole Part-9 Walter reference)")
+    notes.append("master §9.3 mirror: sub-table + intro + chain links present; "
+                 "the KI#84-deleted Walter line absent (deleted iter 157)")
 
     # ---------- 2b. §9.7 sole-reference guarantee (KI#84) ----------
-    sec97_canon = md_section(canon, r"^## 9\.7 ", r"^## 9\.8 ")
+    sec97_canon = md_section(canon, r"^## 9\.6 ", r"^## 9\.7 ")
     m97 = html_section(master, "p9_test_scenarios")
     for label, blob in (("canon §9.7", sec97_canon), ("master §9.7", m97)):
         if blob is None:
@@ -301,11 +301,11 @@ def main():
                      "re-point comment present")
 
     # ---------- 4. §9.2 back-link (Debug chain) ----------
-    sec92 = md_section(canon, r"^## 9\.2 ", r"^## 9\.3 ")
+    sec92 = md_section(canon, r"^## 9\.4 ", r"^## 9\.5 ")
     if sec92 is None:
-        err("canon §9.2 section not found")
-    elif "[ref: §9.6 — Дерево решений]" not in sec92:
-        err("canon §9.2: Применение back-link to §9.6 missing")
+        err("canon §9.4 section not found")
+    elif "[ref: §9.3 — Дерево решений]" not in sec92:
+        err("canon §9.4: Применение back-link to §9.3 missing")
     m92 = html_section(master, "p9_one_change_rule")
     if m92 is None:
         err("master: p9_one_change_rule section not found")
@@ -314,8 +314,8 @@ def main():
     elif "<strong>Применение:</strong>" not in m92:
         err("master §9.2: Применение paragraph missing (mirror required for "
             "the Debug reader path)")
-    notes.append("§9.2 back-link: canon [ref: §9.6] + master #p9_decision_tree "
-                 "(IMP-48 pair §9.2↔§9.6)")
+    notes.append("§9.4 back-link: canon [ref: §9.3] + master #p9_decision_tree "
+                 "(IMP-48 pair §9.4↔§9.3)")
 
     # ---------- 5. No competing diagnostic sources ----------
     for path in sorted(CANON_DIR.glob("part_*.md")):
@@ -333,9 +333,9 @@ def main():
             if count != allowed:
                 err(f"src/master/{path.name}: symptom count {count} != "
                     f"{allowed}: {s}")
-    sec95_canon = md_section(canon, r"^## 9\.5 ", r"^## 9\.6 ")
+    sec95_canon = md_section(canon, r"^## 9\.2 ", r"^## 9\.3 ")
     sec95_master = html_section(master, "p9_symptom_table")
-    for label, blob in (("canon §9.5", sec95_canon), ("master §9.5", sec95_master)):
+    for label, blob in (("canon §9.2", sec95_canon), ("master §9.2", sec95_master)):
         if blob is None:
             err(f"{label}: section not found")
             continue
@@ -343,8 +343,30 @@ def main():
             if s in blob:
                 err(f"{label}: E13 symptom present in the flat lookup — "
                     f"competing diagnostic source: {s}")
-    notes.append("no competing sources: symptoms only in §9.6 canon (1×) / "
-                 "master table + E13 embed (2×); §9.5 clean")
+    notes.append("no competing sources: symptoms only in §9.3 canon (1×) / "
+                 "master table + E13 embed (2×); §9.2 clean")
+
+    # ---------- 5b. ONE checklist (v3 Stage 3, F-07) ----------
+    # The guide carries exactly ONE deploy checklist: 14 numbered items, of which
+    # 1–5 are the quick checks and 6–14 the full ones. Guarded in canon + master.
+    c95 = md_section(canon, r"^## 9\.5 ", r"^## 9\.6 ")
+    m95 = html_section(master, "p9_pre_deploy")
+    if c95 is None or m95 is None:
+        err("§9.5 one-checklist guard: canon or master section not found")
+    else:
+        for n in range(1, 15):
+            if f"| **{n}** |" not in c95:
+                err(f"canon §9.5: checklist item {n} missing (one checklist 1–14)")
+            if f"<strong>{n}</strong></td>" not in m95:
+                err(f"master §9.5: checklist item {n} missing (one checklist 1–14)")
+        for blob, label in ((c95, "canon §9.5"), (m95, "master §9.5")):
+            if "Пункты 1–5" in blob:
+                err(f"{label}: the retired «Пункты 1–5» pointer is back "
+                    "(the 14 items must be enumerated)")
+        if c95.count("### Единый чек-лист") != 1:
+            err("canon §9.5: expected exactly one «Единый чек-лист» heading")
+    notes.append("ONE checklist (F-07): 14 numbered items in canon + master, "
+                 "no «Пункты 1–5» displacement")
 
     # ---------- 6. Root fallback ----------
     if FALLBACK_9.exists():
@@ -417,10 +439,10 @@ def finish():
         for e in errors:
             print(f"  ✗ {e}")
         sys.exit(1)
-    print("\nPASS — single canonical owner intact: §9.6 canonical (E13 mapping "
+    print("\nPASS — single canonical owner intact: §9.3 canonical (E13 mapping "
           "sub-table + [VS: E13] marker), E13 the one visual presentation "
-          "(re-pointed), §9.2↔§9.6 Debug chain wired, no competing sources, "
-          "root fallback current.")
+          "(re-pointed, inside the section), §9.4↔§9.3 Debug chain wired, ONE "
+          "checklist 1–14, no competing sources, root fallback current.")
 
 
 if __name__ == "__main__":

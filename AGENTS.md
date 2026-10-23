@@ -7,7 +7,7 @@
 ## What this project is
 
 **Live Character Guide** is an engineering pipeline for building RP character cards
-for LLMs (12B–32B+). Single linear guide: Part 0 → Part 10 + 4 appendices.
+for LLMs (12B–32B+). Single linear guide: Part 0 → Part 10 + 3 appendices.
 Stack: static HTML + CSS + vanilla JS ES modules. **No build framework, no TypeScript,
 no React/Vue/Svelte.**
 
@@ -125,25 +125,25 @@ pnpm run validate:master                  # validate master HTML invariants
 pnpm run version:check                    # 4-place version sync (MUST pass)
 pnpm test                                 # all tests — run AFTER pnpm run build (tests read dist/)
 pnpm run qa:csp | qa:bundle | qa:contrast | qa:doc-versions   # PASS/FAIL gates
-pnpm run qa:english                       # exit 1 expected: 18 leaks by design — count must not increase
-pnpm run qa:syntax                        # exit 1 expected: 238 baseline findings — count must not increase (245→238 iter 149, KI#83 italic-regex fix)
+pnpm run qa:english                       # exit 1 expected: 1 leak (iter 174; unchanged — an executable-content leak by design) — count must not increase
+pnpm run qa:syntax                        # exit 1 expected: 226 baseline findings — count must not increase (245→238 iter 149; 238→230 iter 172; 230→229 iter 173; 229→226 iter 174 with the merged sections)
 pnpm run dev                              # build + serve on http://localhost:3000
 
 # Canon audits (run after touching src/master/ or docs/canon/):
-python3 scripts/audit_canon_master_sync.py    # MUST PASS (97/97 or current count)
+python3 scripts/audit_canon_master_sync.py    # MUST PASS (87/87 or current count)
 python3 scripts/audit_canon_master_drift.py   # informational, exit 0
 python3 scripts/audit_glossary_parity.py      # MUST PASS (glossary registry ↔ migration map ↔ generated JSON — DEC-17/18)
 python3 scripts/audit_core_directives_parity.py  # MUST PASS (CORE DIRECTIVES single-canonical-presentation parity — DEC-08/mig-2)
-python3 scripts/audit_token_budget_parity.py  # MUST PASS (Token budget §7A.12 canonical ↔ E01/E15 SHARED_REFERENCE parity — mig-4)
-python3 scripts/audit_enneagram_parity.py     # MUST PASS (Enneagram §5.4 canonical ↔ generated data layer ↔ E10 SHARED_REFERENCE parity — mig-5)
-python3 scripts/audit_diagnostics_parity.py   # MUST PASS (Diagnostics §9.6 canonical ↔ E13 visual presentation parity — DEC-20/mig-3)
+python3 scripts/audit_token_budget_parity.py  # MUST PASS (Token budget §7A.12 canonical ↔ E01 SHARED_REFERENCE parity — mig-4; E15 retired iter 172)
+python3 scripts/audit_enneagram_parity.py     # MUST PASS (Enneagram §5.3 canonical — renumbered iter 174 — ↔ generated data layer ↔ E10 SHARED_REFERENCE parity; mig-5)
+python3 scripts/audit_diagnostics_parity.py   # MUST PASS (Diagnostics §9.3 canonical ↔ E13 visual presentation parity — DEC-20/mig-3; § numbering iter 173)
 python3 scripts/audit_voice_parity.py        # MUST PASS (Voice §3.2 canonical ↔ E07 ↔ widget constants parity — DEC-21/voice-cluster)
-python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling §7A.6 canonical ↔ E17 ↔ E12/§9.x hints parity — DEC-22/sampling-cluster)
+python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling Appendix E «Параметры генерации» canonical ↔ E17 ↔ E12/§9.x hints — DEC-22 + DEC-27 owner move, iter 172)
 ```
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates
 > individually: PASS/FAIL for csp/bundle/contrast/doc-versions; **baseline counts must not
-> increase** for english (18) and syntax (238).
+> increase** for english (1) and syntax (226).
 
 ---
 
@@ -152,7 +152,7 @@ python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling §7A.6 canoni
 1. **Master HTML is restricted.** Content MUST live inside `<section data-section="p{N}_{topic}" id="p{N}_{topic}">`. FORBIDDEN inside master HTML: `<style>`, `<script>`, `<link>`, `<meta>`, inline `style="..."`, inline `on*=` handlers (CSP compliance is enforced).
 2. **FORBIDDEN attributes:** `data-layer`, `data-layer-switch`, `class="layer-remark"` (removed in v8, validator rejects).
 3. **FORBIDDEN:** Markdown patterns inside HTML (use real tags).
-4. **Section IDs:** pattern `p{N}_{topic}` (e.g. `p4_spine_overview`, `p7a_core_directives`, `p8_ap15_ocean_overload`). MUST be unique across the entire guide.
+4. **Section IDs:** pattern `p{N}_{topic}` (e.g. `p4_spine_overview`, `p7a_core_directives`, `p5_ocean_basics`). MUST be unique across the entire guide.
 5. **When adding a new section:** ALWAYS add both `data-section` AND `id` attributes (browsers need `id` for `#anchor` navigation).
 6. **Heading hierarchy:** one `<h1>` per page (auto-injected by shell), `<h2>` for sections, `<h3>` for subsections. Do not skip levels.
 7. **CSS classes:** use ONLY components from [`docs/components.md`](./docs/components.md). NEVER invent new classes without infrastructure approval.
@@ -160,7 +160,7 @@ python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling §7A.6 canoni
 9. **Version sync (4 places, ALL must match):** `package.json` · `src/VERSION` · `data/character_schema.json` · build manifest. Verify with `pnpm run version:check`. When bumping: update `src/VERSION` + `package.json` + `data/character_schema.json` MANUALLY in the same commit; `parts/manifest.json` regenerates on build.
 10. **Canon sync:** `docs/canon/part_NN.md` = single source of truth. `src/master/part_NN.html` = production HTML derived from canon. Audit: `python3 scripts/audit_canon_master_sync.py` (MUST PASS). Drift detector: `python3 scripts/audit_canon_master_drift.py` (informational).
 11. **Cross-references (IMP-48):** when section A references section B, B MUST back-link to A. One canonical definition per concept; everywhere else = 1-sentence link.
-12. **Language convention (two-layer, DEC-16):** Russian is the default language of the guide — all explanatory, normative, instructional, and descriptive prose (including callout labels `ПРАВИЛО`, `РЕКОМЕНДАЦИЯ`, `ПРИМЕР`, `ИЛЛЮСТРАЦИЯ`, `ШАБЛОН`, `Переход`, `Синтез`, `Ссылка`, `Демонстрирует`) is Russian; ordinary English terminology is translated whenever a natural Russian equivalent exists (`token → токен`, `lie → ложь`, `rule → правило`). English is preserved only where its exact form is technically significant: (a) executable/recommended prompt content the guide prescribes writing in English (SP blocks, `<CORE_DIRECTIVES>` wording, Tone Frame strings, card examples, copy-paste templates) — every such English block MUST carry a Russian explanation/translation next to it; (b) technical identifiers (section IDs, XML tags, `{{placeholders}}`, class names, filenames, machine-readable values, API/parameter names, card field names); (c) proper names. `CORE DIRECTIVES` English wording is canonical inside the executable SP form; in prose use «основные директивы» / «директива» — each directive keeps a Russian explanation (§7A.2). Local clarifications: `**Примечание:**`. Baseline `qa:english` leaks (18, DEC-16 — was 19 before iter-123 russification) are executable-content leaks by design.
+12. **Language convention (two-layer, DEC-16):** Russian is the default language of the guide — all explanatory, normative, instructional, and descriptive prose (including the four callout labels `ПРАВИЛО`, `РЕКОМЕНДАЦИЯ`, `ПРИМЕР`, `НАБЛЮДЕНИЕ` — the only label vocabulary, F-20/DEC-32) is Russian; ordinary English terminology is translated whenever a natural Russian equivalent exists (`token → токен`, `lie → ложь`, `rule → правило`). English is preserved only where its exact form is technically significant: (a) executable/recommended prompt content the guide prescribes writing in English (SP blocks, `<CORE_DIRECTIVES>` wording, Tone Frame strings, card examples, copy-paste templates) — every such English block MUST carry a Russian explanation/translation next to it; (b) technical identifiers (section IDs, XML tags, `{{placeholders}}`, class names, filenames, machine-readable values, API/parameter names, card field names); (c) proper names. `CORE DIRECTIVES` English wording is canonical inside the executable SP form; in prose use «основные директивы» / «директива» — each directive keeps a Russian explanation (§7A.2). Baseline `qa:english` leaks (**1**, iter 174; 18 before the v3 stage-2 deletions of English contributor text; 19 before iter-123 russification) are executable-content leaks by design.
 13. **Editorial Policy (content-editing law, DEC-15):** gates every content edit in `docs/canon/` + `src/master/` (extends fence #11's one-canonical-definition rule). Core principle: **compress redundant presentation, never unique capability** — no editorial change may reduce semantic or functional load. Every deletion/merge/move/cross-ref replacement passes the 5-point functional-load check (capability · coverage · retrieval · context · dependency — full text: [Editorial Policy](#editorial-policy-content-editing-law) below). Uncertain cases are classified **UNCLEAR**, never deleted by assumption. Success metric: reduced redundant semantic load + improved navigability — never word count.
 
 ---
@@ -308,6 +308,7 @@ Check the current size before writing; the trim is part of the task, not future 
 | [`worklog.md`](./worklog.md) | Latest iteration detail (older = one-line summaries) |
 | [`CHANGELOG.md`](./CHANGELOG.md) | Release history |
 | [`docs/architecture.md`](./docs/architecture.md) | Deep architecture: build stages, ownership, section model, validation |
+| [`docs/RESTRUCTURE_V3_PLAN.md`](./docs/RESTRUCTURE_V3_PLAN.md) | **Active v3 restructure track (DEC-26):** stages, the findings registry, standing constraints, handoff protocol — read first in a fresh context |
 | [`docs/canon/_README.md`](./docs/canon/_README.md) | Canon rules: how `docs/canon/*.md` relates to `src/master/*.html` |
 | [`docs/components.md`](./docs/components.md) | CSS component registry — use ONLY classes defined here |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Human contributor workflow (PRs, branches, conventions) |

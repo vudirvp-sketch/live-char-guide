@@ -45,8 +45,10 @@ What it checks (per canon/master file pair):
        - Reported as a category summary in console output + JSON report.
 
 Scope:
-    Covers all 16 canon files: part_00, part_01..part_10, part_07a, part_07b,
-    appendix_glossary, appendix_mbti, appendix_model_table, appendix_character_map.
+    Covers all 15 canon files: part_00, part_01..part_10, part_07a, part_07b,
+    appendix_mbti, appendix_model_params, appendix_character_map.
+    (appendix_glossary was retired iter 177 — F-19/DEC-31: one glossary surface,
+    the registry -> generated JSON -> panel/no-JS page chain.)
     Two canon files (part_00, appendix_character_map) have no master HTML
     counterpart — reported as INFO (canon-only files, by design).
 
@@ -104,9 +106,8 @@ CANON_FILES = [
     "part_08",
     "part_09",
     "part_10",
-    "appendix_glossary",
     "appendix_mbti",
-    "appendix_model_table",
+    "appendix_model_params",
     "appendix_character_map",
 ]
 

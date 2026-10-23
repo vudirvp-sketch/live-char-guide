@@ -4,14 +4,14 @@ vs_embedded: none
 vs_cross_ref: none
 sections: —
 last_synced: —
-migration_status: v2 canonical term record (iter 133)
+migration_status: v2 canonical term record (iter 133) — the SOLE glossary surface since iter 177 (Appendix C deleted, F-19/DEC-31)
 ---
 
 # Glossary Registry — канонический реестр терминов (v2)
 
 > **Canonical source for:** `data/glossary.json` — генерируется скриптом `scripts/generate_glossary.mjs` (первая стадия `pnpm run build`); сгенерированный файл никогда не правится руками.
 > **Runtime-поверхности:** панель глоссария (`src/shell/lazy-loader.js`) · no-JS страница (`scripts/build-unified.mjs` → `parts/glossary.html`).
-> **Замещает (миграция):** `docs/canon/appendix_glossary.md` (замороженный v1-источник, 25 статей) и правившийся руками `data/glossary.json` (55 терминов) — диспозиции: `docs/research/migration_map_v2.md` §5.1 (DEC-17/DEC-18).
+> **Замещает (миграция):** правившийся руками `data/glossary.json` (55 терминов) — диспозиции: `docs/research/migration_map_v2.md` §5.1 (DEC-17/DEC-18). **Единственная поверхность:** Appendix C (`appendix_glossary.md`, 25 статей v1) удалён в iter 177 (F-19/DEC-31) — второй набор терминов с другими заголовками не сохраняется.
 > **Создан:** iter 133 (2026-09-14). **Статей:** 45 (25 объединённых канонических + 20 продвинутых терминов машинного слоя).
 
 ## Registry pattern (релокация entry-паттерна v1-приложения — migration_map_v2 C-1)
@@ -54,7 +54,7 @@ migration_status: v2 canonical term record (iter 133)
 
 **CoT (цепочка рассуждений)** — система рассуждений внутри карточки, направляющая модель через SPINE-осознанные решения: пошаговый внутренний процесс, который модель воспроизводит перед генерацией ответа. Четыре уровня сложности: Tier 0 (без отдельного CoT-блока) — Tier 3 (полный XML-процесс для API). Не более 2–3 CoT-якорей на карточку.
 
-→ `[ref: part_06.md §6.2 — Основы CoT]`
+→ `[ref: part_06.md §6.1 — Основы CoT]`
 → `[meta: sources=C-4+T-09; lang=en; home=p6_cot_basics; xrefs=p6_cot_tiers; aliases=CoT, Chain of Thought, Цепочка рассуждений, цепочка рассуждений; deprecated=цепочка рассуждений, Chain of Thought]`
 
 ### Description (блок описания)
@@ -103,22 +103,22 @@ migration_status: v2 canonical term record (iter 133)
 
 **Presence Penalty (PP)** — параметр генерации, штрафующий повторение тем. Для карточек персонажей — обязательно 0.0 (анти-паттерн AP-7): ненулевой PP вызывает дрейф голоса.
 
-→ `[ref: part_07a.md §7A.6 — Параметры генерации (сэмплирование)]`
+→ `[ref: appendix_model_params.md — Параметры генерации (сэмплирование)]`
 → `[meta: sources=T-36; lang=en; home=p7a_sampling_params; aliases=Presence Penalty, PP, Штраф за присутствие]`
 
 ### RepPen (Repetition Penalty)
 
-**RepPen (Repetition Penalty)** — параметр сэмплирования, штрафующий повторение токенов. Канонический диапазон — таблица §7A.6; превышение 1.10 — анти-паттерн AP-5 (потеря фирменных речевых оборотов).
+**RepPen (Repetition Penalty)** — параметр сэмплирования, штрафующий повторение токенов. Канонический диапазон — таблица Приложения E (параметры генерации); превышение 1.10 — анти-паттерн AP-5 (потеря фирменных речевых оборотов).
 
-→ `[ref: part_07a.md §7A.6 — Параметры генерации (сэмплирование)]`
-→ `[meta: sources=T-39; lang=en; home=p7a_sampling_params; xrefs=p8_ap5_reppen_high; aliases=RepPen, Repetition Penalty, Штраф за повторы]`
+→ `[ref: appendix_model_params.md — Параметры генерации (сэмплирование)]`
+→ `[meta: sources=T-39; lang=en; home=p7a_sampling_params; xrefs=p8_worked_examples; aliases=RepPen, Repetition Penalty, Штраф за повторы]`
 
 ### SPINE (позвоночник)
 
 **SPINE (позвоночник)** — 5-элементная причинно-следственная цепочка: GHOST → LIE → FLAW → NEED → WANT. SPINE даёт якорям причину существовать, а не быть набором случайных правил; каждый элемент = наблюдаемая единица, не абстрактный ярлык. Для простых персонажей GHOST и LIE могут быть неявными, но при использовании полной цепочки она должна быть логически связана.
 
 → `[ref: part_04.md §4.1 — Обзор SPINE]`
-→ `[meta: sources=C-18+T-44; lang=en; home=p4_spine_overview; xrefs=p4_spine_mapping; aliases=SPINE, Мотивационное ядро; deprecated=Spine, spine chain, SPINE chain, SPINE-цепочка]`
+→ `[meta: sources=C-18+T-44; lang=en; home=p4_spine_overview; xrefs=p4_spine_full_chain; aliases=SPINE, Мотивационное ядро; deprecated=Spine, spine chain, SPINE chain, SPINE-цепочка]`
 
 ### S·P (MBTI-темперамент)
 
@@ -152,7 +152,7 @@ migration_status: v2 canonical term record (iter 133)
 
 **processus_analysium** — каноническое имя XML-тега для внутреннего процесса персонажа (CoT Tier 3, внутри [INTERNAL]): processus = процесс, analysium = анализ. Протестировано на API-моделях (Claude, GPT-4).
 
-→ `[ref: part_06.md §6.5 — Tier 3 CoT (API only)]`
+→ `[ref: part_06.md §6.4 — Tier 3 CoT (API only)]`
 → `[meta: sources=T-38; lang=en; home=p6_cot_tier3; aliases=processus_analysium, внутренний процесс XML]`
 
 ### Анти-годмодинг (Anti-godmoding)
@@ -187,8 +187,8 @@ migration_status: v2 canonical term record (iter 133)
 
 **Вложенные якоря (Nested Anchors)** — якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Риск перегрузки — анти-паттерн AP-15.
 
-→ `[ref: part_08.md §8.16 — AP-15: Вложенные якоря (Nested Anchors)]`
-→ `[meta: sources=T-30; lang=ru; home=p8_ap15_nested_anchors; aliases=Nested Anchors, Вложенные якоря, Nested Anchor]`
+→ `[ref: part_08.md §8.2 — AP-15: Вложенные якоря (Nested Anchors)]`
+→ `[meta: sources=T-30; lang=ru; home=p8_worked_examples; aliases=Nested Anchors, Вложенные якоря, Nested Anchor]`
 
 ### Голос (Voice)
 
@@ -201,8 +201,8 @@ migration_status: v2 canonical term record (iter 133)
 
 **Годмодинг** — диагностический термин: модель пишет за пользователя (действия, мысли, чувства `{{user}}`) — сам факт нарушения. Директива Anti-godmoding (§7A.1) предотвращает годмодинг; отсутствие директивы — анти-паттерн AP-6.
 
-→ `[ref: part_08.md §8.7 — AP-6: Отсутствие анти-годмодинга (No Anti-godmoding)]`
-→ `[meta: sources=T-55; lang=ru; home=p8_ap6_no_anti_godmoding; xrefs=p7a_system_prompt; aliases=годмодинг, godmoding, god mode, Godmoding]`
+→ `[ref: part_08.md §8.2 — AP-6: Отсутствие анти-годмодинга (No Anti-godmoding)]`
+→ `[meta: sources=T-55; lang=ru; home=p8_worked_examples; xrefs=p7a_system_prompt; aliases=годмодинг, godmoding, god mode, Godmoding]`
 
 ### Дефект (FLAW)
 
@@ -215,8 +215,8 @@ migration_status: v2 canonical term record (iter 133)
 
 **Желание (WANT)** — осознанное желание персонажа — то, что он думает, что ему нужно. Внешняя цель, которую персонаж может сформулировать. WANT совместим с LIE: персонаж не видит противоречия между своим желанием и своей ложной установкой. Часто противоречит NEED, создавая нарративное напряжение.
 
-→ `[ref: part_04.md §4.6 — Желание (WANT)]`
-→ `[meta: sources=C-26+T-54; lang=ru; home=p4_want; aliases=WANT, Want, Желание; deprecated=Хочет, ХОЧУ; prohibited=ХОЧУ, Хочет]`
+→ `[ref: part_04.md §4.5 — Желание (WANT)]`
+→ `[meta: sources=C-26+T-54; lang=ru; home=p4_need; aliases=WANT, Want, Желание; deprecated=Хочет, ХОЧУ; prohibited=ХОЧУ, Хочет]`
 
 ### Заражение голоса (Voice Contamination)
 
@@ -264,15 +264,15 @@ migration_status: v2 canonical term record (iter 133)
 
 **Переплетение голосов (Voice Bleed, между персонажами)** — режим отказа, при котором голос одного персонажа просачивается в речь другого: в мульти-персонажных сценах модель генерирует реплики одного персонажа в стиле другого. Диагностический термин; отличается от деградации голоса одного персонажа (см. «Утечка голоса»). Предотвращается через минимум 3 голосовых маркера на каждого персонажа и явное различение голосов в Examples.
 
-→ `[ref: part_03.md §3.8 — Мульти-персонажные примеры]`
-→ `[meta: sources=C-23+T-51; lang=ru; home=p3_multi_char; xrefs=p8_ap11_voice_bleed; aliases=Voice Bleed, Утечка голоса между персонажами, voice leak, утечка голоса; deprecated=voice leak]`
+→ `[ref: part_03.md §3.5 — Мульти-персонажные примеры]`
+→ `[meta: sources=C-23+T-51; lang=ru; home=p3_voice_leak; xrefs=p8_worked_examples; aliases=Voice Bleed, Утечка голоса между персонажами, voice leak, утечка голоса; deprecated=voice leak]`
 
 ### Поведенческий якорь (Behavioral Anchor)
 
 **Поведенческий якорь (Behavioral Anchor)** — триггер-действие-паттерн (T→A→P), активирующий конкретное поведение; основной механизм задания характера без бесконечного описания. Anchor Format: Триггер (внешний стимул) → Действие (наблюдаемая реакция) → Цена (физическая реакция в той же сцене); каждый FLAW требует минимум один FLAW-linked якорь. Якоря — отдельный структурный блок внутри Examples-зоны карточки, не часть диалоговых примеров (правило размещения — §1.4); в большинстве фронтендов размещаются как `<anchors>`-тег в Description; концептуально якоря задают поведенческие паттерны, Examples — голосовые.
 
 → `[ref: part_02.md §2.1 — Поведенческие якоря (Behavioral Anchors)]`
-→ `[meta: sources=C-3+T-05; lang=ru; home=p2_basic_anchors; xrefs=p1_core_rules, p2_anchor_examples; aliases=Behavioral Anchor, Anchors, Anchor, Якоря, Поведенческий якорь, Поведенческие якоря, якорь; deprecated=behavioural anchor, behavior trigger]`
+→ `[meta: sources=C-3+T-05; lang=ru; home=p2_basic_anchors; xrefs=p1_core_rules, p2_anchor_rules; aliases=Behavioral Anchor, Anchors, Anchor, Якоря, Поведенческий якорь, Поведенческие якоря, якорь; deprecated=behavioural anchor, behavior trigger]`
 
 ### Потребность (NEED)
 
@@ -285,7 +285,7 @@ migration_status: v2 canonical term record (iter 133)
 
 **Правило одного изменения** — принцип диагностики: изменение только одного параметра за итерацию — для достоверной оценки результата.
 
-→ `[ref: part_09.md §9.2 — Правило одного изменения]`
+→ `[ref: part_09.md §9.4 — Правило одного изменения]`
 → `[meta: sources=T-32; lang=ru; home=p9_one_change_rule; aliases=One Change Rule, Правило одного изменения]`
 
 ### Приветственное сообщение (Greeting Message)
@@ -300,35 +300,35 @@ migration_status: v2 canonical term record (iter 133)
 **Призрак (GHOST)** — формирующая травма или опыт прошлого, лежащий в основе цепочки SPINE. Призрак — конкретное событие, не психологический вывод; корень причинной цепочки: призрак порождает ложь (LIE) как защитный механизм от боли. Запрещённые слова в описании призрака: «травма», «пережил», «столкнулся с».
 
 → `[ref: part_04.md §4.2 — Призрак (GHOST)]`
-→ `[meta: sources=C-9+T-18; lang=ru; home=p4_ghost; xrefs=p4_ghost_layers; aliases=GHOST, Ghost, Призрак, призрак; deprecated=призрак, ghost layer; prohibited=GHOST-Слой, Слой призрака]`
+→ `[meta: sources=C-9+T-18; lang=ru; home=p4_ghost; xrefs=p4_spine_overview; aliases=GHOST, Ghost, Призрак, призрак; deprecated=призрак, ghost layer; prohibited=GHOST-Слой, Слой призрака]`
 
 ### Протокол телесности (Embodiment Protocol)
 
 **Протокол телесности (Embodiment Protocol)** — поведенческая последовательность: Состояние → Тело → Сенсор → Речь. Каждый эмоциональный сигнал проявляется физически: внутренний вес/баланс → напряжение/дрожь → контакт со средой (текстура, звук, запах) → тон/темп/лексика. Отличается от директивы «Embodiment First»: Протокол описывает КАК (последовательность), Директива — ОБЯЗАТЕЛЬСТВО (всегда использовать).
 
-→ `[ref: part_02.md §2.4 — Телесность (Embodiment)]`
+→ `[ref: part_02.md §2.3 — Телесность (Embodiment)]`
 → `[meta: sources=C-6+T-12; lang=ru; home=p2_embodiment; xrefs=p7a_core_directives; aliases=Embodiment Protocol, Протокол телесности, протокол телесности, протокол воплощения, embodiment sequence; deprecated=embodiment sequence]`
 
 ### Сенсорные якоря (Sensory Anchors)
 
 **Сенсорные якоря (Sensory Anchors)** — якорь, привязанный к одному из 5 каналов восприятия; используется для персонажей с GHOST Layers или травмой.
 
-→ `[ref: part_02.md §2.6 — Сенсорные якоря (Sensory Anchors)]`
-→ `[meta: sources=T-40; lang=ru; home=p2_sensory_anchors; xrefs=p4_ghost_layers; aliases=Sensory Anchors, сенсорные якоря]`
+→ `[ref: part_02.md §2.5 — Сенсорные якоря (Sensory Anchors)]`
+→ `[meta: sources=T-40; lang=ru; home=p2_sensory_anchors; xrefs=p4_ghost; aliases=Sensory Anchors, сенсорные якоря]`
 
 ### Синтез личности (Persona Synthesis)
 
 **Синтез личности (Persona Synthesis)** — процесс интеграции SPINE + OCEAN + Enneagram в единый профиль персонажа.
 
-→ `[ref: part_05.md §5.7 — OCEAN×Enneagram Matrix + Синтез личности (Persona Synthesis)]`
+→ `[ref: part_05.md §5.5 — OCEAN×Enneagram Matrix + Синтез личности (Persona Synthesis)]`
 → `[meta: sources=T-34; lang=ru; home=p5_cross_matrix; aliases=Persona Synthesis, синтез личности]`
 
 ### Слои призрака (GHOST Layers)
 
 **Слои призрака (GHOST Layers)** — 3-уровневая архитектура (G1=Детство, G2=Юность, G3=Настоящее) для сложной травмы. G1 формирует ложь (LIE), G2 укрепляет дефект (FLAW), G3 определяет текущие триггеры. Не всем персонажам нужны 3 слоя — если предыстория простая, достаточно одного призрака (GHOST).
 
-→ `[ref: part_04.md §4.11 — Слои призрака (GHOST Layers, 3-tier)]`
-→ `[meta: sources=C-10+T-19; lang=ru; home=p4_ghost_layers; xrefs=p4_spine_overview; aliases=GHOST Layers, Призрачные слои; deprecated=ghost layers, призрачные слои, 3-tier GHOST]`
+→ `[ref: part_04.md §4.2 — Слои призрака (GHOST Layers, 3-tier)]`
+→ `[meta: sources=C-10+T-19; lang=ru; home=p4_ghost; xrefs=p4_spine_overview; aliases=GHOST Layers, Призрачные слои; deprecated=ghost layers, призрачные слои, 3-tier GHOST]`
 
 ### Структурированная инъекция (Structured Inject)
 
@@ -341,12 +341,12 @@ migration_status: v2 canonical term record (iter 133)
 
 **Утечка голоса (Voice Bleed, деградация)** — деградация голоса одного персонажа: модель генерирует неверный голос — голос рассказчика (Narrator Bleed) или ассистента просачивается в речь персонажа. Возникает, когда стилистические директивы помещены в Description вместо Examples: модель не следует голосовым инструкциям, а копирует паттерны из примеров диалога. Предотвращается через Voice Isolation — голос задаётся только в Examples и Greeting, никогда в Description.
 
-→ `[ref: part_03.md §3.6 — Утечка голоса (Voice Leak)]`
-→ `[meta: sources=C-24+T-28; lang=ru; home=p3_voice_leak; xrefs=p3_voice_isolation, p8_ap11_voice_bleed; aliases=Narrator Bleed, Утечка рассказчика, Voice Bleed degradation]`
+→ `[ref: part_03.md §3.5 — Утечка голоса (Voice Leak)]`
+→ `[meta: sources=C-24+T-28; lang=ru; home=p3_voice_leak; xrefs=p3_voice_isolation, p8_worked_examples; aliases=Narrator Bleed, Утечка рассказчика, Voice Bleed degradation]`
 
 ### Эннеаграмма (Enneagram)
 
 **Эннеаграмма (Enneagram)** — 9-типная модель личности, сопоставляемая с элементами SPINE. Каждый тип имеет ключевой страх, ключевое желание, направление стресса и направление роста — что позволяет вывести LIE, WANT, FLAW и NEED из типа. OCEAN описывает «сколько» черты, Enneagram отвечает на «почему» персонаж действует именно так.
 
-→ `[ref: part_05.md §5.4 — Enneagram: 9 типов личности]`
-→ `[meta: sources=C-7+T-13; lang=ru; home=p5_enneagram_basics; xrefs=p5_enneagram_wings; aliases=Enneagram, Эннеаграмма, эннеаграмма, Эннеа; deprecated=Эннеа]`
+→ `[ref: part_05.md §5.3 — Enneagram: 9 типов личности]`
+→ `[meta: sources=C-7+T-13; lang=ru; home=p5_enneagram_basics; xrefs=; aliases=Enneagram, Эннеаграмма, эннеаграмма, Эннеа; deprecated=Эннеа]`

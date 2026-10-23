@@ -151,6 +151,24 @@ async function buildShell() {
     log('WARN', 'shell/widgets/ not found, skipping');
   }
 
+  // 3b2. Copy shell/interactions/ → dist/interactions/ (F-18: VS interaction scripts)
+  const interactionsSrc = join(SHELL_DIR, 'interactions');
+  const interactionsDist = join(DIST_DIR, 'interactions');
+  if (existsSync(interactionsSrc)) {
+    await copyDir(interactionsSrc, interactionsDist);
+    const interactionFiles = await readdir(interactionsDist);
+    log('INFO', `Copied shell/interactions/ → dist/interactions/ (${interactionFiles.length} files)`);
+  }
+
+  // 3b3. Copy shell/lib/ → dist/lib/ (shared widget libraries)
+  const libSrc = join(SHELL_DIR, 'lib');
+  const libDist = join(DIST_DIR, 'lib');
+  if (existsSync(libSrc)) {
+    await copyDir(libSrc, libDist);
+    const libFiles = await readdir(libDist);
+    log('INFO', `Copied shell/lib/ → dist/lib/ (${libFiles.length} files)`);
+  }
+
   // 3c. Copy event-bus.js to dist root
   const eventBusSrc = join(SHELL_DIR, 'event-bus.js');
   if (existsSync(eventBusSrc)) {
@@ -267,6 +285,26 @@ async function buildShell() {
     await copyDir(widgetsDist, rootWidgets);
     const widgetRootFiles = await readdir(rootWidgets);
     log('INFO', `Copied dist/widgets/ → widgets/ (root fallback, ${widgetRootFiles.length} files)`);
+  }
+
+  // 13b. Copy interactions/ to root (F-18)
+  const rootInteractions = join(ROOT, 'interactions');
+  if (existsSync(rootInteractions)) {
+    await rm(rootInteractions, { recursive: true });
+  }
+  if (existsSync(join(DIST_DIR, 'interactions'))) {
+    await copyDir(join(DIST_DIR, 'interactions'), rootInteractions);
+    log('INFO', `Copied dist/interactions/ → interactions/ (root fallback)`);
+  }
+
+  // 13c. Copy lib/ to root
+  const rootLib = join(ROOT, 'lib');
+  if (existsSync(rootLib)) {
+    await rm(rootLib, { recursive: true });
+  }
+  if (existsSync(join(DIST_DIR, 'lib'))) {
+    await copyDir(join(DIST_DIR, 'lib'), rootLib);
+    log('INFO', `Copied dist/lib/ → lib/ (root fallback)`);
   }
 
   // 14. Copy data/ to root

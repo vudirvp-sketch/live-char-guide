@@ -5,7 +5,7 @@
 > section in the same iteration any structure changes.
 > Read after [`AGENTS.md`](./AGENTS.md) (the operating law). Current state: [`STATUS.md`](./STATUS.md).
 > **Canonical version:** `9.2.6`. Engineering pipeline for RP character cards (SPINE → deploy, 12B–32B+ models).
-> Single linear guide: Part 0 → Part 10 + 4 appendices · 98 sections · 12 widgets · canon→master sync green. **v2 is the live site (the switch iter 170, DEC-25; runtime 98, hash `c1518874`).**
+> Single linear guide: Part 0 → Part 10 + 3 appendices (A/D/E — B absorbed into E, iter 172; C deleted iter 177, F-19/DEC-31) · 68 sections (iter 177: Appendix C removed; iter 174: v3 S4a — Parts 2/3/4/5/6 38→26; iter 173: Part 8 16→2, Part 9 11→7, Part 10 4→5) · 3 widgets · canon→master sync green (87/87). **v2 is the live site (the switch iter 170, DEC-25; runtime 68, hash `6f563edc`); v3 stage 2 (DEC-27) moved the model/runtime layer into Appendix E.**
 
 ---
 
@@ -13,18 +13,20 @@
 
 | Directory | Purpose | Rules |
 |-----------|---------|-------|
-| `src/master/` | Author content — 12 part files (`part_00` + `part_01..10.html` incl. `07a`/`07b`) + 3 appendices (`mbti`, `model_table`, `glossary`). 98 sections (Part 0 wired iter 169 — G4-LEARN (a)). | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
-| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (12 widgets). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
-| `src/shell/widgets/` | 12 widgets: `ocean-insight`, `enneagram-builder`, `mbti-composer`, `persona-cross`, `persona-voice-hierarchy`, `persona-synthesis`, `vs-mini-map`, `widget-utils`, `vs-scroll-observer`, `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`. (Plus `js-flag.js` infra script, not a widget.) | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded data — see widget header), behavior in `lazy-loader.js`. |
+| `src/master/` | Author content — 12 part files (`part_00` + `part_01..10.html` incl. `07a`/`07b`) + 2 appendices (`mbti`, `model_params` — `model_table` absorbed into `model_params` iter 172; `glossary` deleted iter 177, F-19/DEC-31). 68 sections (Part 0 wired iter 169; 98 at the v2 switch — v3 S3/S4a de-duplicated the corpus). | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
+| `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (3 widgets), `interactions/` (5 VS behaviour scripts), `lib/` (2 shared scripts). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
+| `src/shell/widgets/` | **3 content widgets** (iter 176, F-18): `ocean-insight`, `mbti-composer`, `persona-voice-hierarchy`. | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded §3.2 constants — see widget header). |
+| `src/shell/interactions/` | **5 VS behaviour scripts** (iter 176): `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`, `vs-scroll-observer`, `vs-mini-map`. No own data; attach behaviour to embed markup. | Loaded by `index.html`; paths mirrored in the build + root fallbacks. |
+| `src/shell/lib/` | **2 shared scripts**: `widget-utils.js` (fetchJson cache, escapeHtml, OCEAN constants), `js-flag.js` (`.js` class pre-paint, CSP/FOUC). | `widget-utils.js` MUST load before widgets/interactions. |
 | `src/assets/` | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/`. | Read by `build-shell-unified.mjs` (`ASSETS_SRC = src/assets/`). |
 | `src/scripts/` | Build script `build-shell-unified.mjs` (copies shell + parts + data → `dist/`). | Run via `pnpm run build:shell`. |
 | `src/VERSION` | Plain text file with the version. | Synchronized with `package.json` + `data/character_schema.json` + build manifest. |
-| `data/` | JSON widget data: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`, `test_scenarios.json`. | Authors own data. Infrastructure owns schemas. **Never hardcode widget data in JS.** **`glossary.json` is GENERATED** from `docs/canon/glossary_registry.md` (`scripts/generate_glossary.mjs`, first stage of `pnpm run build`) — never hand-edit; term changes go through the registry only (DEC-17/18). **`enneagram.json` is GENERATED** from the §5.4 table (`scripts/generate_enneagram.mjs`, second stage of `pnpm run build`) — never hand-edit; canonical value changes go through `docs/canon/part_05.md` §5.4, machine-layer supplement changes through the generator (mig-5). |
+| `data/` | JSON widget data: `glossary.json`, `ocean.json`, `enneagram.json`, `mbti.json`, `character_schema.json`, `anchor-redirects.json`. | Authors own data. Infrastructure owns schemas. **Never hardcode widget data in JS.** **`glossary.json` is GENERATED** from `docs/canon/glossary_registry.md` (`scripts/generate_glossary.mjs`, first stage of `pnpm run build`) — never hand-edit; term changes go through the registry only (DEC-17/18). **`enneagram.json` is GENERATED** from the §5.3 table (`scripts/generate_enneagram.mjs`, second stage of `pnpm run build`) — never hand-edit; canonical value changes go through `docs/canon/part_05.md` §5.3, machine-layer supplement changes through the generator (mig-5). |
 | `scripts/` | Build + validation scripts. **package.json-wired:** `build-unified.mjs`, `validate-artifact.mjs`, `validate-master.mjs`, `version-sync.mjs`. **QA scripts:** `csp_check.mjs`, `bundle_check.mjs`, `contrast_checker.mjs`, `check_english.py`, `check_syntax_mix.py`, `check-doc-versions.mjs`, `test-interactive.mjs`. | `pnpm run <script>` for wired. `pnpm run qa:*` for ad-hoc QA. |
-| `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` runs all. |
+| `tests/` | Node test runner: `test-build.mjs`, `test-validate-artifact.mjs`, `test-version-sync.mjs`, `test-toc-coverage.mjs`, `widget-smoke.mjs`, `visual-parity.mjs`, `tests/integration/test-full-build.mjs`. | `pnpm test` runs `tests/test-*.mjs` + `tests/integration/*.mjs` (68 tests; `widget-smoke.mjs` and `visual-parity.mjs` are manual — run via `tests/run-tests.sh all`). |
 | `docs/` | Technical documentation (not in build). | Update on structural changes. See §7. |
 | `visual-system/` | Visual system prototypes: `PLAN.md`, `DESIGN-TOKENS.css`, `shared/`, `elements/` (E02–E06, E09, E11, E13, E14, E16, E18 — E01/E08/E10/E15 → `REMOVED_WITH_REASON` iter 138, E07 → iter 142, E12/E17 → iter 145, DEC-19), `hero/` → `REMOVED_WITH_REASON` iter 140 (DEC-19 §6.4 disposal; archive = git history), `integration/` (component-extracts). `tokens.json` feeds `qa:contrast`. | **Frozen design artifacts (DEC-19, iter 138):** master embed (L2) = the canonical visual markup; archive = git history; remaining families ride the freeze at their slice time. |
-| `parts/`, `widgets/`, `assets/`, `event-bus.js`, `data/`, `index.html`, `build.hash` | **Root fallbacks** — regenerated on every `pnpm run build` from `dist/`. Committed to git for GitHub Pages backward-compat. | **NEVER edit directly.** All edits go in `src/master/`, `src/shell/`, `src/assets/`, `data/`. |
+| `parts/`, `widgets/`, `interactions/`, `lib/`, `assets/`, `event-bus.js`, `data/`, `index.html`, `build.hash` | **Root fallbacks** — regenerated on every `pnpm run build` from `dist/`. Committed to git for GitHub Pages backward-compat. | **NEVER edit directly.** All edits go in `src/master/`, `src/shell/`, `src/assets/`, `data/`. |
 | `dist/` | Deployment output (gitignored). | Auto-generated → GitHub Pages. |
 
 ---
@@ -36,10 +38,10 @@ docs/canon/glossary_registry.md  (canonical term record — 45 entries, iter 133
         ↓
 scripts/generate_glossary.mjs   →   data/glossary.json  (generated — NEVER hand-edit)
         ↓
-docs/canon/part_05.md §5.4      (canonical Enneagram 9-type table — mig-5, iter 136)
+docs/canon/part_05.md §5.3      (canonical Enneagram 9-type table — mig-5, iter 136; renumbered §5.4→§5.3 iter 174)
         ↓
 scripts/generate_enneagram.mjs  →   data/enneagram.json (generated — NEVER hand-edit;
-        ↓                              canonical fields from §5.4; machine-layer
+        ↓                              canonical fields from §5.3; machine-layer
                                      supplement lives in the generator)
 src/master/part_*.html  (author content)
         ↓
@@ -51,7 +53,7 @@ dist/  (deployed to GitHub Pages)
 ```
 
 The glossary chain (DEC-17/18): canonical term record → generated `glossary.json` → runtime panel (`src/shell/lazy-loader.js`) / no-JS page (`parts/glossary.html`). Parity gate: `python3 scripts/audit_glossary_parity.py` MUST PASS.
-The enneagram chain (mig-5, DEC-17 direction precedent): §5.4 table (`docs/canon/part_05.md`) → generated `enneagram.json` → E10 mini-cards + builder/synthesis widgets. Parity gate: `python3 scripts/audit_enneagram_parity.py` MUST PASS.
+The enneagram chain (mig-5, DEC-17 direction precedent): §5.3 table (`docs/canon/part_05.md`) → generated `enneagram.json` → E10 mini-cards (the E10 reader script). Parity gate: `python3 scripts/audit_enneagram_parity.py` MUST PASS.
 
 ### Commands
 
@@ -59,7 +61,7 @@ The enneagram chain (mig-5, DEC-17 direction precedent): §5.4 table (`docs/cano
 pnpm install              # Install dependencies (Node >= 20, pnpm 10.x)
 pnpm run build            # Full build (glossary + enneagram generation + unified + shell)
 pnpm run build:glossary   # Registry → data/glossary.json only
-pnpm run build:enneagram  # Canon §5.4 → data/enneagram.json only
+pnpm run build:enneagram  # Canon §5.3 → data/enneagram.json only
 pnpm run validate         # Validate build artifact
 pnpm run validate:master  # Validate master files
 pnpm run version:check    # Check 4-place version sync
@@ -110,11 +112,26 @@ Part 8 (Anti-patterns) → Part 9 (Diagnostics) → Part 10 (Examples)
 </section>
 ```
 
+The first section of each Part additionally carries the authored Part label:
+
+```html
+<section data-section="p4_spine_overview" id="p4_spine_overview" data-toc-nav data-part-title="SPINE: психологический каркас">
+```
+
 | Attribute | Required | Format | Example |
 |-----------|----------|--------|---------|
-| `data-section` | Yes | `p{N}_{topic}` | `data-section="p4_spine_overview"` |
+| `data-section` | Yes | `p{N}_{topic}` / `p{7a}_{topic}` | `data-section="p4_spine_overview"` |
 | `id` | Yes (must equal `data-section`) | `p{N}_{topic}` | `id="p4_spine_overview"` |
-| `data-toc-nav` | No | boolean | `data-toc-nav` |
+| `data-toc-nav` | **Yes** (iter 171 — every rendered section) | boolean | `data-toc-nav` |
+| `data-part-title` | **Yes, once per Part** (iter 171 — on the Part's first section) | short Russian label | `data-part-title="Голос и изоляция"` |
+
+**Navigation contract (DEC-26).** There is exactly ONE navigation surface: the shell
+TOC panel built by `generateTOC()` in `src/shell/lazy-loader.js`. It groups sections by
+`^p(\d+[ab]?)_`, titles each Part from `data-part-title` (fallback: its first `<h2>`,
+then `Part N`), and labels each entry with the section's own first `h2|h3`.
+`data-toc-nav` is therefore mandatory — a section without it is invisible to readers.
+`tests/test-toc-coverage.mjs` enforces all four rules; the inline auto-TOC
+(`AUTO_TOC_PLACEHOLDER`) was deleted in iter 171 and must not return.
 
 ### Naming Convention
 
@@ -136,16 +153,15 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 
 ### Markup in HTML, Data in JSON, Behavior in JS
 
-12 widgets. Markup lives in `src/master/*.html` (via `<div data-widget="...">`), data in `data/*.json`, behavior in `src/shell/widgets/*.js`. JS only reads data, never hardcodes it. Exception: `persona-voice-hierarchy` embeds canon-constant data (6 sources × 3 models from §3.2 table) directly in JS — these are canonical prose values, not user-editable widget data.
+**3 content widgets** (iter 176, F-18). Markup lives in `src/master/*.html`, data in `data/*.json`, behavior in `src/shell/widgets/*.js` (`ocean-insight`, `mbti-composer`, `persona-voice-hierarchy`); the standalone VS behaviour lives in `src/shell/interactions/*.js`, shared helpers in `src/shell/lib/*.js`. JS only reads data, never hardcodes it. Exception: `persona-voice-hierarchy` embeds canon-constant data (6 sources × 3 models from §3.2 table) directly in JS — these are canonical prose values, not user-editable widget data. Since iter 180 it is the **control strip for the §3.2 table** (model toggle → column highlight, Markdown export) and does not re-render the matrix: the section table is the single numeric surface (`audit_voice_parity.py` fails if row/bar markup returns).
 
 ### Widget Data Files
 
 | Widget | Data File |
 |--------|-----------|
 | `ocean-insight` | `data/ocean.json` |
-| `enneagram-builder` / `vs-e10-enneagram` | `data/enneagram.json` (**generated** from the §5.4 table — mig-5; LIE lives once in `types[].lie_template`) |
+| `vs-e10-enneagram` (interactions) | `data/enneagram.json` (**generated** from the §5.3 table — mig-5; LIE lives once in `types[].lie_template`) |
 | `mbti-composer` | `data/mbti.json` |
-| `persona-cross` / `persona-synthesis` | `data/character_schema.json` |
 | `persona-voice-hierarchy` | _(none — canon-embedded; values from §3.2 table)_ |
 | Glossary | `data/glossary.json` (**generated** from `docs/canon/glossary_registry.md` — DEC-17/18) |
 | Anchor redirects | `data/anchor-redirects.json` |
@@ -154,7 +170,7 @@ Pattern: `p{part_number}_{topic}` (e.g. `p1_card_overview`, `p7a_core_directives
 ### Widget Lifecycle
 
 1. `lazy-loader.js` scans the DOM on `scroll-into-view`.
-2. Loads the corresponding `src/shell/widgets/<widget>.js` dynamically.
+2. Loads the corresponding `src/shell/widgets/<widget>.js` (or `interactions/…`, `lib/…`) dynamically.
 3. Widget initializes, reads `data/*.json` via `fetch()`.
 4. `event-bus.js` coordinates inter-widget events.
 
@@ -196,10 +212,10 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 ### Master HTML basics
 
-1. **`<style>` / `<script>` forbidden in master files** — all styles in `src/shell/styles.css` or `src/assets/vs-styles.css`, scripts in `src/shell/lazy-loader.js` or `src/shell/widgets/*.js`. Inline styles forbidden. Inline scripts forbidden (CSP compliance).
+1. **`<style>` / `<script>` forbidden in master files** — all styles in `src/shell/styles.css` or `src/assets/vs-styles.css`, scripts in `src/shell/lazy-loader.js`, `src/shell/widgets/*.js`, `src/shell/interactions/*.js` or `src/shell/lib/*.js`. Inline styles forbidden. Inline scripts forbidden (CSP compliance).
 2. **Content outside `<section data-section>`** — all content in master HTML MUST be inside a section with the `data-section` attribute.
 3. **Heading hierarchy** — one `<h1>` per page, `<h2>` for sections, `<h3>` for subsections. Do not skip levels.
-4. **English terms in Russian prose (two-layer policy, DEC-16)** — 3+ English words outside allowed contexts trigger `check_english.py`. Baseline: 18 English leaks by design (was 19 before iter-123 russification) — all executable prompt content (Tone Frame strings, SP directives, Part 10 card examples, Quality Grade, Token Budget Check). Guide prose, labels, and headings are Russian; ordinary English terminology is translated (`token → токен`, `lie → ложь`). English stays only in executable prompt containers (prescribed English), technical identifiers, and proper names. SP Language rule is layered (12B <64K → English; ≥128K 12B–14B → either; 32B+/API → card language) — see §7A.2 RULE.
+4. **English terms in Russian prose (two-layer policy, DEC-16)** — 3+ English words outside allowed contexts trigger `check_english.py`. Baseline: 1 English leak by design (was 19 before iter-123 russification) — all executable prompt content (Tone Frame strings, SP directives, Part 10 card examples, Quality Grade, Token Budget Check). Guide prose, labels, and headings are Russian; ordinary English terminology is translated (`token → токен`, `lie → ложь`). English stays only in executable prompt containers (prescribed English), technical identifiers, and proper names. SP Language rule is layered (12B <64K → English; ≥128K 12B–14B → either; 32B+/API → card language) — see §7A.2 RULE.
 5. **CSS class creation without approval** — authors use ONLY components from `docs/components.md`. New classes require infrastructure approval.
 6. **Hardcoded widget data in JS** — all data lives in `data/*.json`. JS only reads.
 
@@ -209,21 +225,21 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 8. **Versions in 4 places** — `package.json`, `src/VERSION`, `data/character_schema.json`, build manifest. `pnpm run version:check` verifies sync. **On version bump** — update ALL 4 places simultaneously (`src/VERSION` manually + `package.json` + `character_schema.json` manually; `parts/manifest.json` regenerates on build). KI#63 (iter 96): drift occurred when `src/VERSION` was updated without `package.json` / `character_schema.json`. KI#64 (iter 101, CLOSED iter-107): same drift pattern — `mermaid-init.js` JSDoc bumped to `9.3.0` alone; fixed via Variant A rollback (JSDoc → 9.2.6, no 4-place bump). **iter-113:** `mermaid-init.js` deleted entirely (Mermaid CDN dependency removed — content diagrams were replaced by VS-EMBEDs in iter 14, only infrastructure remained). The 5th version-tracking point (`mermaid-init.js` JSDoc) is gone; sync is back to canonical 4 places.
 9. **Mermaid CDN dependency — REMOVED iter-113.** Mermaid.js was loaded from `cdn.jsdelivr.net` but had ZERO usages in `src/master/*.html` (content diagrams were replaced by VS-EMBEDs in iter 14). Removed in iter-113: CDN `<script>` tag, `widgets/mermaid-init.js`, lazy-loader init/render block + `reRenderMermaid()` call, `.mermaid` CSS in `src/shell/styles.css`. CSP tightened: `cdn.jsdelivr.net` dropped from `script-src`, `worker-src 'self' blob:;` directive dropped entirely (was Mermaid v11 Web Worker only). `cdn.jsdelivr.net` retained in `style-src` + `font-src` for Geist font CSS.
 10. **`noscript` in build artifact** — must be present. Do not remove.
-11. **Widget guards** — `persona-cross infinite loop guard`, `Clipboard API guard` (`if (navigator.clipbox)`) — do not remove. (iter-112: `blueprint-viewer destroy()` removed — widget was dead, 0 container usages.)
+11. **Widget guards** — `Clipboard API guard` (`if (navigator.clipbox)`) — do not remove. (iter-112: `blueprint-viewer destroy()` removed — widget was dead, 0 container usages.)
 
 ### Visual System
 
 12. **`viz > dry text` principle** — visualization = **replacement**, not **addition**. If a VS-EMBED shows a concept, text MUST NOT re-explain it. Unique visualizations are not deleted even when duplicated.
 13. **VS scroll-animation invariant** — all animation classes in `src/assets/vs-styles.css` MUST be covered either by `SCROLL_ENTER_SELECTOR` in `vs-scroll-observer.js` (11 classes) or by the `scroll-enter` class. Audit: `python3 scripts/audit_vs_embeds.py`.
 14. **CSS scoping invariant** — VS-EMBED element CSS selectors MUST be scoped to an element-specific parent (`.blueprint-area`, `.funnel-stack`, `.spine-flow`, etc.).
-15. **VS elements registry** — 18 VS elements: E01–E18. Styles in `src/assets/vs-styles.css` SECTION 5.
+15. **VS elements registry** — 11 files in `visual-system/elements/` (E02, E03, E04, E05, E06, E09, E11, E13, E14, E16, E18); the shipped element CSS lives in `src/assets/vs-styles.css` SECTION 5 (the registry originally covered E01–E18 — E01/E07/E08/E10/E12/E15/E17 were disposed, DEC-19).
 
 ### Canon sync and drift detection
 
-16. **Canon → master HTML sync** — `docs/canon/*.md` = source of truth. `src/master/*.html` = production HTML. Regression test: `python3 scripts/audit_canon_master_sync.py` (97/97 PASS).
+16. **Canon → master HTML sync** — `docs/canon/*.md` = source of truth. `src/master/*.html` = production HTML. Regression test: `python3 scripts/audit_canon_master_sync.py` (87/87 PASS).
 17. **Drift detector** — `python3 scripts/audit_canon_master_drift.py` — informational, exit 0. ~88 paragraph drifts expected (VS-EMBEDs replace text).
 18. **Callout class policy** — allowed: `.callout.rule` / `.rec` / `.ex` and plain `.callout`. FORBIDDEN: `.callout.note` / `.info` / `.warn` / `.tip` / `.box` / `.sidebar` / `.custom` / `.important`.
-19. **Callout labels in Russian (DEC-16)** — labels `ПРАВИЛО`, `РЕКОМЕНДАЦИЯ`, `ПРИМЕР`, `ИЛЛЮСТРАЦИЯ`, `ШАБЛОН`, `Переход`, `Синтез`, `Ссылка`, `Демонстрирует` are Russian guide prose (former English semantic-anchor labels were retired iter 123). Callout bodies are Russian. `Примечание` is a Russian local clarification. English callout-label text is allowed ONLY inside copy-paste prompt containers where the guide prescribes English. Chip labels rendered by `example-label` components (`ИЛЛЮСТРАЦИЯ`, `ШАБЛОН`) follow the same rule.
+19. **Callout labels — exactly four (F-20, iter 178 / DEC-32)** — `ПРАВИЛО`, `РЕКОМЕНДАЦИЯ`, `ПРИМЕР`, `НАБЛЮДЕНИЕ`, in ONE treatment: every labelled block is a `.callout` whose first paragraph is `<p><strong>LABEL:</strong> …</p>`. The retired vocabulary (`ИЛЛЮСТРАЦИЯ`, `ШАБЛОН`, `Переход`, `Синтез`, `Ссылка`, `Демонстрирует`, `Примечание`) is prose now, and the `example-label` chip class is forbidden. `scripts/validate-master.mjs` Check 8 rejects any deviation. Callout bodies are Russian; English label text is allowed ONLY inside copy-paste prompt containers where the guide prescribes English.
 20. **YAML front-matter** — all canon files (except `_README.md`) use YAML front-matter.
 21. **OCEAN labeling consistency** — extreme = strictly `<30` or `>70`; cautious zone = `30–40` / `60–70`. On mismatch between bible and canon Part 10 — fix the bible (principle: the guide's role as example takes priority).
 22. **OCEAN format consistency** — canonical format: compact `O:72 C:65 E:41 A:38 N:68` (§5.1 RULE). Pipes and commas are FORBIDDEN inside `<ocean>` tags. Bible format (per-dimension with explanations) is allowed as documentation, not card content.
@@ -294,10 +310,10 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | 5 | `p7a_authors_note` | `p7b_lorebook_mechanics` | ✅ upstream |
 | 6 | `p7b_lorebook_advanced` | `p7a_authors_note` | ✅ upstream |
 | 7 | `p7b_lorebook_advanced` | `p7b_structured_inject` | ✅ forward only |
-| 8 | `p4_spine_navigation` | `p7a_xml_tags` | ✅ downstream |
-| 9 | `p10_omnis` | `p4_ghost_layers` | ✅ back-link (TP-15) |
+| 8 | `p4_spine_overview` | `p7a_xml_tags` | ✅ downstream |
+| 9 | `p10_omnis` | `p4_ghost` | ✅ back-link (TP-15) |
 | 10 | `p9_additional_problems` | `p1_top3_problems` | ✅ back-link |
-| 11 | `p10_elena` | `p2_anchor_examples` | ✅ back-link |
+| 11 | `p10_elena` | `p2_anchor_rules` | ✅ back-link |
 | 12 | `p1_card_overview` | `p7a_token_budget` | ✅ forward ref |
 | 13 | `p1_card_overview` | `p7a_assembly_pipeline` | ✅ forward ref |
 | 14 | `p1_value_proposition` | — | ✅ standalone |

@@ -230,7 +230,7 @@
 
 ## 8. Глоссарий (определения)
 
-Полные определения всех терминов — в `docs/canon/appendix_glossary.md` (24 entries, алфавитный указатель). Этот файл задаёт **canonical forms + language policy**; Appendix C Canon задаёт **deep definitions**.
+Полные определения всех терминов — в каноническом реестре `docs/canon/glossary_registry.md` (45 статей, единственная поверхность терминов с iter 177 — F-19/DEC-31; Appendix C удалён); читательские поверхности — панель «Глоссарий» и её no-JS страница, обе из generated `data/glossary.json`. Этот файл задаёт **canonical forms + language policy**, реестр — **deep definitions**.
 
 ---
 

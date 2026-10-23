@@ -18,7 +18,8 @@ Scope:
       - KI#29/30/31 (iter 40/41 canon): part_07a, part_10 (4 fixes)
 
     iter 45 (24 fixes — Phase 2, KI#33 PARTIAL → closer to COMPLETE):
-      - P0-1 (A1): appendix_glossary — T→A→P Pattern → Price
+      - P0-1 (A1): appendix_glossary — T→A→P Pattern → Price (retired iter 177
+        with Appendix C — F-19/DEC-31; the glossary is the registry/panel chain)
       - P0-7/P0-8/P0-9 (A4): part_04 — Выщербленный NEED text + variant row delete
       - P0-10 (A6): part_08 — AP-15 immediate Price
       - P0-11 (A9): part_09 — 3-level → 4-zone scale
@@ -144,20 +145,11 @@ CHECKS = [
         "part_10 §10.1 Елена OCEAN: A=38/N=68 labeled as cautious zone (iter 41 KI#30 fix)",
     ),
     # ----- KI#31 (iter 41): Cross-ref Notes (2 locations) -----
-    # Note: inside <pre><code> blocks the **Cross-ref:** markdown is shown as
-    # literal text (not rendered as <strong>), matching canon's source markdown.
-    (
-        "KI#31-7a",
-        "part_07a.html",
-        "**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see <code>docs/vyshcherblenny_character_bible.md</code> §OCEAN.",
-        "part_07a §7A.9 OCEAN: Cross-ref Note to bible (iter 41 KI#31 fix)",
-    ),
-    (
-        "KI#31-10",
-        "part_10.html",
-        "**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see <code>docs/vyshcherblenny_character_bible.md</code> §OCEAN.",
-        "part_10 §10.4 OCEAN: Cross-ref Note to bible (iter 41 KI#31 fix)",
-    ),
+    # REMOVED iter 172 (v3 stage 2, F-05): both Notes carried a repository path
+    # (`docs/vyshcherblenny_character_bible.md`) inside a copy-paste template.
+    # The templates no longer contain the note; the 16K+ canonical OCEAN values
+    # they carried now live in a Russian note OUTSIDE the template (§7A.9 and
+    # §10.4). The probe count drops 97 → 95 (disclosed in the iter-172 worklog).
     # ----- A3 collateral: «Счётчик вырезаний» in §10.4 AN -----
     (
         "A3-10",
@@ -168,13 +160,8 @@ CHECKS = [
     # ================================================================
     # iter 45 — Phase 2 canon→master HTML sync (24 fixes)
     # ================================================================
-    # ----- P0-1 (A1): Glossary heading T→A→P Pattern → Price -----
-    (
-        "P0-1",
-        "appendix_glossary.html",
-        '<h3 id="gloss_tap">T→A→P (Trigger → Action → Price)</h3>',
-        "appendix_glossary T→A→P heading: Pattern → Price (iter 35 P0-1 fix)",
-    ),
+    # ----- P0-1 (A1): Glossary heading T→A→P Pattern → Price — RETIRED iter 177
+    # (Appendix C deleted per F-19/DEC-31; the probe target no longer exists) -----
     # ----- P0-7 (A4): part_04 Выщербленный NEED text update -----
     (
         "P0-7",
@@ -193,8 +180,8 @@ CHECKS = [
     (
         "P0-9",
         "part_04.html",
-        "<tr><td>Елена (variant)</td><td>Избегать привязанностей</td>",
-        "part_04 NEED table: variant rows now labeled + Выщербленный variant deleted (iter 35 P0-9 fix)",
+        "<tr><td>Елена (variant — показывает, что WANT может маскировать NEED)</td><td>Избегать привязанностей</td>",
+        "part_04 NEED table: variant rows now labeled + Выщербленный variant deleted (iter 35 P0-9 fix; needle re-pointed iter 181 — audit-181 variant-row purpose labels)",
     ),
     # ----- P0-10 (A6): part_08 AP-15 immediate Price -----
     (
@@ -217,14 +204,16 @@ CHECKS = [
         "4 зоны качества показаны ниже (VS-EMBED E14: Критический 0–25% / Слабый 25–50% / Хороший 50–85% / Отличный 85–100%)",
         "part_09 §9.11: 3-level → 4-zone scale (iter 35 P0-11 fix, iter 47 sync completion — «4 уровня» → «4 зоны»; iter 102 — «выше» → «ниже» after E14 reorder)",
     ),
-    # ----- P0-12 (A10): part_09 Vysh Quick Check rename -----
-    # iter 51 KI#36: substring updated — "5 items" → "5 пунктов", "universal Quick Check" → "универсального Quick Check"
-    # iter 105: Quick Check → Быстрая проверка (Category C translation pass)
+    # ----- P0-12 (A10): part_09 Vysh Quick Check — retired by the v3 S3 merge -----
+    # iter 173 (v3 Stage 3): the separate Vysh «Структурная проверка / Полная проверка»
+    # pair was merged into the ONE 14-item checklist — the iter-35 Quick Check rename
+    # no longer has a standalone heading to protect. The probe now guards the merge.
     (
         "P0-12",
         "part_09.html",
-        "<h5>Структурная проверка Выщербленного (5 пунктов — отлична от универсальной Быстрой проверки выше)</h5>",
-        "part_09 Vysh Quick Check heading renamed + clarifier paragraph (iter 35 P0-12 fix; iter 51 русификация; iter 105 Quick Check → Быстрая проверка)",
+        "<h4>Единый чек-лист (14 пунктов)</h4>",
+        "part_09 §9.5: ONE deploy checklist (14 numbered items; the Vysh example merged "
+        "into it, iter 173 — supersedes the iter-35/51/105 Quick Check rename)",
     ),
     # ----- P0-13 (B1 GHOST): part_10 Omnis GHOST rewrite -----
     (
@@ -244,8 +233,8 @@ CHECKS = [
     (
         "P0-16",
         "part_05.html",
-        "— рекомендуемый максимум для всех контекстов. Для 8K+ допустимо до 3, для 16K+ — до 4 (см. таблицу «Контекстные лимиты полюсов» ниже).",
-        "part_05 §5.1 RULE: context limits expansion (iter 35 P0-16 fix)",
+        "Потолок задаёт бюджет контекста (таблица «Контекстные лимиты полюсов» ниже): 4K — 2, 8K — 3, 16K+ — 4, 32K+ — 5.",
+        "part_05 §5.1 RULE: the SINGLE OCEAN pole-limit scale (F-01 closed iter 174: one owner, context ceilings, SPINE-bridge requirement)",
     ),
     # ----- P1-1 (A5): part_08 AP-9 broken SPINE criterion -----
     (
@@ -258,7 +247,7 @@ CHECKS = [
     (
         "P1-3",
         "part_08.html",
-        "<p><strong>Ссылка:</strong> OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.3",
+        "<p>OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.1",
         "part_08 §8.1: OCEAN Overload orphan row deleted + footnote added (iter 36 P1-3 fix; «v9 restructure» repo-meta strip iter 129 — R17 [B]; footnote label re-pointed Примечание→Ссылка iter 155 — canon L27 «Ссылка:» mirror, the part-8 v2 build slice)",
     ),
     # ----- P1-4 (B2): part_10 Walter GHOST rewrite -----
@@ -289,7 +278,7 @@ CHECKS = [
     (
         "P1-7",
         "part_04.html",
-        "<p><strong>Примечание:</strong> В учебном гайде каждый персонаж имеет ОДИН канонический призрак (GHOST). У Елены — предательство редактора. Множественная травма (слои призрака, GHOST Layers) — см. Выщербленный §4.11.</p>",
+        "<p><strong>НАБЛЮДЕНИЕ:</strong> В учебном гайде каждый персонаж имеет ОДИН канонический призрак (GHOST). У Елены — предательство редактора. Множественная травма (слои призрака, GHOST Layers) — см. Выщербленный, «Слои призрака» ниже.</p>",
         "part_04 §4.2: secondary GHOST row deleted + Примечание added (iter 36 P1-7 fix)",
     ),
     # ----- P1-10 (D4+NEW-2): part_07a Lorebook example пожар → предательство -----
@@ -310,14 +299,14 @@ CHECKS = [
     (
         "P3-1-7b",
         "part_07b.html",
-        "<p><strong>Примечание:</strong> Greeting Елены здесь — учебный пример для разбора 4-шагового алгоритма (бар, ночь).",
+        "<p><strong>НАБЛЮДЕНИЕ:</strong> Greeting Елены здесь — учебный пример для разбора 4-шагового алгоритма (бар, ночь).",
         "part_07b §7B.2: Greeting scene clarification note (iter 38 P3-1 fix)",
     ),
     # ----- P3-1 (D3): part_10 Greeting note added -----
     (
         "P3-1-10",
         "part_10.html",
-        "<p><strong>Примечание:</strong> Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки.",
+        "<p><strong>НАБЛЮДЕНИЕ:</strong> Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки.",
         "part_10 §10.1: Greeting scene clarification note (iter 38 P3-1 fix)",
     ),
     # ----- P3-3 (D6): part_03 Йоуёма context added -----
@@ -331,7 +320,7 @@ CHECKS = [
     (
         "P3-5",
         "part_02.html",
-        "<th>Тип</th><th>Механика</th><th>Категории реакций</th><th>Пример (конкретный)</th>",
+        "<th scope=\"col\">Тип</th><th scope=\"col\">Механика</th><th scope=\"col\">Категории реакций</th><th scope=\"col\">Пример (конкретный)</th>",
         "part_02 §2.2 Price table: 4th column «Пример (конкретный)» added (iter 38 P3-5 fix)",
     ),
     # ----- P3-6 (F3): part_03 Voice Isolation methodology note added -----
@@ -387,7 +376,7 @@ CHECKS = [
     (
         "P2-12b",
         "part_03.html",
-        "<tr><th>Критерий</th><th>класс A (✓)</th><th>класс B (⚠)</th><th>класс C (✗)</th><th>Относится к</th></tr>",
+        "<tr><th scope=\"col\">Критерий</th><th scope=\"col\">класс A (✓)</th><th scope=\"col\">класс B (⚠)</th><th scope=\"col\">класс C (✗)</th><th scope=\"col\">Относится к</th></tr>",
         "part_03 §3.4: quality table headers Tier 1/2/3 → Grade A/B/C (iter 37 P2-12 fix; iter 105 Grade A/B/C → класс A/B/C)",
     ),
     (
@@ -430,60 +419,28 @@ CHECKS = [
         "Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI)",
         "part_07a §7A.1: Keirsey SP Artisan/Ремесленник → Sensing-Perceiving (iter 37 P2-16 fix)",
     ),
-    # ----- P2-17 (F9): part_09 §9.6 Decision Tree 1-word symptoms -----
+    # ----- P2-17 (F9): part_09 §9.3 E13 mapping AP labels -----
+    # iter 173 (v3 Stage 3): the 5-group shorthand tree table was retired (its two
+    # unique rows moved into §9.2); the 1-word AP shorthand labels died with it.
+    # The full AP labels in the E13 mapping table are the surviving form.
     (
-        "P2-17a",
+        "P2-17",
         "part_09.html",
-        "Удалить голос из Description (AP-3 Voice-in-Desc)",
-        "part_09 §9.6: AP-3 1-word symptom «Voice-in-Desc» added (iter 37 P2-17 fix)",
-    ),
-    (
-        "P2-17b",
-        "part_09.html",
-        "Добавить 2 строки (AP-6 No-Anti-Godmoding)",
-        "part_09 §9.6: AP-6 1-word symptom «No-Anti-Godmoding» added (iter 37 P2-17 fix)",
-    ),
-    (
-        "P2-17c",
-        "part_09.html",
-        "Part 5: OCEAN Warning</a> (AP-15 OCEAN-Overload)",
-        "part_09 §9.6: AP-15 1-word symptom «OCEAN-Overload» added (iter 37 P2-17 fix)",
-    ),
-    (
-        "P2-17d",
-        "part_09.html",
-        "Fix → AP-5 (RepPen-High)",
-        "part_09 §9.6: AP-5 1-word symptom «RepPen-High» added (iter 37 P2-17 fix)",
-    ),
-    (
-        "P2-17e",
-        "part_09.html",
-        "→ Проверить PP: >0? (AP-7 PP-Leak)",
-        "part_09 §9.6: AP-7 1-word symptom «PP-Leak» added (iter 37 P2-17 fix)",
-    ),
-    (
-        "P2-17f",
-        "part_09.html",
-        "Part 6: CoT</a> (AP-10 CoT-Overload)",
-        "part_09 §9.6: AP-10 1-word symptom «CoT-Overload» added (iter 37 P2-17 fix)",
-    ),
-    (
-        "P2-17g",
-        "part_09.html",
-        "→ Проверить SPINE на консистентность (AP-9 SPINE-Broken)",
-        "part_09 §9.6: AP-9 1-word symptom «SPINE-Broken» added (iter 37 P2-17 fix)",
+        "<strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description), AP-11 (переплетение голосов)",
+        "part_09 §9.3: E13 mapping keeps the full AP labels (the 1-word shorthand tree "
+        "table retired, iter 173)",
     ),
     # ----- P3-4 (D7): Уолтер cross-refs (3 locations) -----
     (
         "P3-4a",
         "part_01.html",
-        "<p><strong>Ссылка:</strong> Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "<p>Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_01 §1.4: Cross-ref to Walter §10.2 (realistic modern character) added (iter 38 P3-4 fix)",
     ),
     (
         "P3-4b",
         "part_04.html",
-        "<p><strong>Ссылка:</strong> Пример простой карточки без слоёв призрака (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
+        "<p>Пример простой карточки без слоёв призрака (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
         "part_04 §4.11: Cross-ref to Walter §10.2 (simple SPINE without GHOST Layers) added (iter 38 P3-4 fix)",
     ),
 
@@ -514,25 +471,25 @@ CHECKS = [
     (
         "P2-7-syn-01",
         "part_01.html",
-        "<p><strong>Синтез:</strong> Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
+        "<p>Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
         "part_01 §1-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
     (
         "P2-7-syn-04",
         "part_04.html",
-        "<p><strong>Синтез:</strong> SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без якорей SPINE — набор случайных правил.</p>",
-        "part_04 §4-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
+        "<p>SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без SPINE якоря — набор случайных правил.</p>",
+        "part_04 §4-end: Synthesis paragraph added (iter 47 P2-7 fix; needle re-pointed iter 181 — audit-181 inverted-echo fix)",
     ),
     (
         "P2-7-syn-07a",
         "part_07a.html",
-        "<p><strong>Синтез:</strong> Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
+        "<p>Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
         "part_07a §7A-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
     (
         "P2-7-syn-08",
         "part_08.html",
-        "<p><strong>Синтез:</strong> 15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (сломанная SPINE), AP-15 (вложенные якоря).</p>",
+        "<p>15 анти-паттернов покрывают ~90% ошибок сборки. Симптом → причина → исправление. Наиболее частые: AP-3 (голос в Description), AP-9 (сломанная SPINE), AP-15 (вложенные якоря).</p>",
         "part_08 §8-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
 
@@ -549,30 +506,30 @@ CHECKS = [
     (
         "P3-2-elena",
         "part_10.html",
-        "<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>",
+        "<p>Карточка демонстрирует: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>",
         "part_10 §10.1 Elena: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
     (
         "P3-2-walter",
         "part_10.html",
-        "<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>",
+        "<p>Карточка демонстрирует: EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>",
         "part_10 §10.2 Walter: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
     (
         "P3-2-omnis",
         "part_10.html",
-        "<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
+        "<p>Карточка демонстрирует: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
         "part_10 §10.3 Omnis-Zeta: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
     (
         "P3-2-vysh",
         "part_10.html",
-        "<p><strong>Демонстрирует:</strong> SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
+        "<p>Карточка демонстрирует: SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>",
         "part_10 §10.4 Vyshcherblenny: Demonstrates callout before card (iter 47 P3-2 fix)",
     ),
 
     # ================================================================
-    # iter 50 — KI#34 fix: §1.8 Pre-build checklist section added to master HTML
+    # iter 50 — KI#34 fix: §1.6 Pre-build checklist section added to master HTML
     # ================================================================
     # Canon `docs/canon/part_01.md` L128-145 declares `data-section: p1_prebuild_checklist`
     # but master HTML was missing the section (7 sections vs canon 8).
@@ -583,19 +540,19 @@ CHECKS = [
         "KI#34-section",
         "part_01.html",
         'data-section="p1_prebuild_checklist"',
-        "part_01 §1.8 Pre-build checklist: section block added (iter 50 KI#34 fix; iter 51 KI#36: id attr added, substring relaxed)",
+        "part_01 §1.6 Pre-build checklist: section block added (iter 50 KI#34 fix; iter 51 KI#36: id attr added, substring relaxed)",
     ),
     (
         "KI#34-table",
         "part_01.html",
-        "<th>#</th><th>Вопрос</th><th>Варианты</th><th>Что это определяет</th>",
-        "part_01 §1.8 Pre-build checklist: 6-row table header (iter 50 KI#34 fix)",
+        "<th scope=\"col\">#</th><th scope=\"col\">Вопрос</th><th scope=\"col\">Варианты</th><th scope=\"col\">Что это определяет</th>",
+        "part_01 §1.6 Pre-build checklist: 6-row table header (iter 50 KI#34 fix)",
     ),
     (
         "KI#34-callout",
         "part_01.html",
         "<p><strong>РЕКОМЕНДАЦИЯ:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook».",
-        "part_01 §1.8 Pre-build checklist: RECOMMENDATION callout (iter 50 KI#34 fix)",
+        "part_01 §1.6 Pre-build checklist: RECOMMENDATION callout (iter 50 KI#34 fix)",
     ),
     # ----- KI#36 (iter 51): id attributes on <section> elements -----
     # All <section data-section="X"> must now have id="X" too, so that
@@ -619,12 +576,7 @@ CHECKS = [
         'data-section="p7a_system_prompt" id="p7a_system_prompt"',
         "part_07a: id attribute on p7a_system_prompt section (iter 51 KI#36 fix — anchor nav)",
     ),
-    (
-        "KI#36-id-appendix-glossary",
-        "appendix_glossary.html",
-        'data-section="appendix_glossary" id="appendix_glossary"',
-        "appendix_glossary: id attribute on appendix_glossary section (iter 51 KI#36 fix — anchor nav)",
-    ),
+    # KI#36-id-appendix-glossary retired iter 177 (Appendix C deleted, F-19/DEC-31).
 ]
 
 # Negative checks: substrings that MUST NOT appear in master HTML.

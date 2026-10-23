@@ -56,8 +56,8 @@ dist/ (deployed to GitHub Pages)
 
 | Directory | Owner | Purpose | Editable By |
 |-----------|-------|---------|-------------|
-| `src/master/` | Author | Master guide HTML files (96 `data-section` sections; see `docs/content_map.md` for the 96/97 canon-vs-master counting) | Authors writing Parts |
-| `src/shell/` | Infrastructure | HTML/CSS/JS shell (`index.html`, `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` — 12 widgets) | Infrastructure only |
+| `src/master/` | Author | Master guide HTML files (68 `data-section` sections; see `docs/content_map.md` for the canon-vs-master counting — Appendix C deleted iter 177, F-19/DEC-31) | Authors writing Parts |
+| `src/shell/` | Infrastructure | HTML/CSS/JS shell (`index.html`, `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` — 3 widgets, `interactions/` — 5 VS scripts, `lib/` — 2 shared scripts) | Infrastructure only |
 | `src/assets/` | Infrastructure | Static assets — `favicon.svg`, `preview-card.png`, `vs-styles.css`, `fonts/` | Infrastructure only |
 | `src/scripts/` | Infrastructure | `build-shell-unified.mjs` (shell build stage) | Infrastructure only |
 | `data/` | Shared | Widget data + glossary (JSON) | Authors (data), Infrastructure (schema) |
@@ -113,7 +113,7 @@ dist/ (deployed to GitHub Pages)
 
 **Output:**
 - `dist/` directory ready for GitHub Pages deployment
-- **Root fallbacks** — `parts/`, `widgets/`, `assets/`, `data/`, `index.html`, `event-bus.js`, `build.hash` copied from `dist/` and committed for GitHub Pages backward-compatibility (regenerated on every build — never hand-edit)
+- **Root fallbacks** — `parts/`, `widgets/`, `interactions/`, `lib/`, `assets/`, `data/`, `index.html`, `event-bus.js`, `build.hash` copied from `dist/` and committed for GitHub Pages backward-compatibility (regenerated on every build — never hand-edit)
 
 ---
 
@@ -183,11 +183,11 @@ CORE DIRECTIVES is a unified directive system for the System Prompt, consisting 
 
 ### Markup in HTML, Data in JSON, Behavior in Widgets
 
-12 widgets follow the split model:
+**3 content widgets** follow the split model (iter 176, F-18) — plus 5 VS behaviour scripts in `src/shell/interactions/` and 2 shared libs in `src/shell/lib/`:
 
 1. **SVG/HTML markup** stays in master HTML (`<div data-widget="...">`)
 2. **Text data** lives in `data/*.json` files (exception: `persona-voice-hierarchy` embeds canon-constant values — see the widget header)
-3. **Behavior** lives in `src/shell/widgets/*.js`; `src/shell/lazy-loader.js` scans the DOM on scroll-into-view and loads the matching widget module dynamically
+3. **Behavior** lives in `src/shell/widgets/*.js`; VS interaction behaviour lives in `src/shell/interactions/*.js`; `src/shell/lazy-loader.js` scans the DOM on scroll-into-view and loads the matching module dynamically
 
 ### Widget Data Files
 
@@ -304,11 +304,11 @@ live-char-guide/
 ├── src/
 │   ├── master/           # Author content: part_01..10 (incl. 7A/7B) + 3 appendices
 │   ├── shell/            # Infrastructure: index.html, styles.css, lazy-loader.js,
-│   │                     #   event-bus.js, widgets/ (12 widgets + js-flag.js)
+│   │                     #   event-bus.js, widgets/ (3 widgets), interactions/, lib/
 │   ├── assets/           # favicon.svg, preview-card.png, vs-styles.css, fonts/
 │   ├── scripts/          # build-shell-unified.mjs
 │   └── VERSION
-├── data/                 # Widget data + glossary (JSON, 7 files)
+├── data/                 # Widget data + glossary (JSON, 6 files)
 ├── docs/                 # Tech docs (architecture, content_map, components,
 │   │                     #   terminology, character bibles, CONTENT_RESTRUCTURE_PLAN)
 │   │                     #   + canon/ (source of truth) + research/
@@ -317,7 +317,7 @@ live-char-guide/
 ├── visual-system/         # Visual-system frozen design artifacts (DEC-19; tokens.json feeds qa:contrast)
 ├── build/                 # Generated intermediate output (gitignored)
 ├── dist/                  # Deployment output (gitignored)
-├── parts/  widgets/  assets/  data/  index.html  event-bus.js  build.hash
+├── parts/  widgets/  interactions/  lib/  assets/  data/  index.html  event-bus.js  build.hash
 │                         # Root fallbacks — regenerated, committed, never hand-edit
 ├── AGENTS.md  AGENT_NAVIGATION.md  STATUS.md  PLAN.md  DECISIONS.md
 ├── worklog.md  CHANGELOG.md  README.md  CONTRIBUTING.md

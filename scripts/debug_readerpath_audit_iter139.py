@@ -89,38 +89,38 @@ def main():
             err(f"§9.6 E13 block: anchor target missing in built artifact: #{h}")
     expected = {
         "p9_one_change_rule", "p9_test_scenarios", "p7a_authors_note",
-        "p1_card_overview", "p3_influence_hierarchy", "p7a_sampling_params",
+        "p1_card_overview", "p3_influence_hierarchy", "appendix_model_params",
         "p7a_assembly_pipeline", "p2_embodiment", "p7a_core_directives",
         "p2_basic_anchors",
     }
     if expected - set(hrefs):
-        err(f"§9.6 E13 block: expected targets not linked: {expected - set(hrefs)}")
+        err(f"§9.3 E13 block: expected targets not linked: {expected - set(hrefs)}")
 
-    # ---- 3. TEST: §9.7 exists, carries the scenario table ----
+    # ---- 3. TEST: §9.6 exists, carries the scenario table ----
     b97 = section(built9, "p9_test_scenarios")
     if b97 is None:
-        err("built §9.7 (p9_test_scenarios) missing")
+        err("built §9.6 (p9_test_scenarios) missing")
     elif "Нейтральное приветствие" not in b97:
-        err("built §9.7: 6-scenario table missing")
+        err("built §9.6: 6-scenario table missing")
 
-    # ---- 4. ONE-CHANGE: §9.2 rule + back-link (IMP-48 pair) ----
+    # ---- 4. ONE-CHANGE: §9.4 rule + back-link (IMP-48 pair) ----
     b92 = section(built9, "p9_one_change_rule")
     if b92 is None:
-        err("built §9.2 (p9_one_change_rule) missing")
+        err("built §9.4 (p9_one_change_rule) missing")
     else:
         if "Никогда не меняйте более одного параметра" not in b92:
-            err("built §9.2: RULE text missing")
+            err("built §9.4: RULE text missing")
         if 'href="#p9_decision_tree"' not in b92:
-            err("built §9.2: back-link to §9.6 missing (IMP-48 pair)")
-    if "[ref: §9.6 — Дерево решений]" not in canon9:
-        err("canon §9.2: back-link to §9.6 missing")
+            err("built §9.4: back-link to §9.3 missing (IMP-48 pair)")
+    if "[ref: §9.3 — Дерево решений]" not in canon9:
+        err("canon §9.4: back-link to §9.3 missing")
 
-    # ---- 5. VALIDATION: §9.7 → §9.9 + §9.11 ----
+    # ---- 5. VALIDATION: §9.6 → the checklist + the 12B delta ----
     if b97 is not None:
-        if 'href="#p9_test_requirements"' not in b97:
-            err("built §9.7: link to §9.9 (metrics) missing")
         if 'href="#p9_pre_deploy"' not in b97:
-            err("built §9.7: link to §9.11 (pre-deploy validation) missing")
+            err("built §9.6: link to §9.5 (pre-deploy checklist) missing")
+        if 'href="#p9_12b_issues"' not in b97:
+            err("built §9.6: link to §9.7 (12B delta) missing")
 
     return finish()
 
@@ -133,10 +133,10 @@ def finish():
         for e in errors:
             print(f"  ✗ {e}")
         sys.exit(1)
-    print("\nPASS — all 3 symptoms reachable in §9.6 (master + built) and the "
+    print("\nPASS — all 3 symptoms reachable in §9.3 (master + built) and the "
           "E13 embed; every diagnosis anchor resolves in the built artifact; "
-          "§9.7 (test) + §9.2 (one-change, back-linked) + §9.9/§9.11 "
-          "(validation) wired.")
+          "§9.6 (test) + §9.4 (one-change, back-linked) + §9.5/§9.7 "
+          "(validation + 12B delta) wired. § numbering per v3 S3 (iter 173).")
 
 
 if __name__ == "__main__":

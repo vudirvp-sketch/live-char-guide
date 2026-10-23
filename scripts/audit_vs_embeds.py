@@ -5,7 +5,7 @@ Audit VS-EMBED elements in master HTML files for scroll-animation regressions.
 Logic:
 1. Parse `src/assets/vs-styles.css` to find all CSS classes that have an
    `is-visible`-dependent rule (initial state opacity:0 / transform:scale(0)).
-2. Read `src/shell/widgets/vs-scroll-observer.js` to get the actual
+2. Read `src/shell/interactions/vs-scroll-observer.js` to get the actual
    `SCROLL_ENTER_SELECTOR` — the set of classes the IntersectionObserver
    watches.
 3. For each VS-EMBED element in `src/master/*.html`:
@@ -30,7 +30,7 @@ from html.parser import HTMLParser
 REPO = Path(__file__).resolve().parents[1]
 MASTER_DIR = REPO / "src" / "master"
 VS_STYLES = REPO / "src" / "assets" / "vs-styles.css"
-SCROLL_OBSERVER = REPO / "src" / "shell" / "widgets" / "vs-scroll-observer.js"
+SCROLL_OBSERVER = REPO / "src" / "shell" / "interactions" / "vs-scroll-observer.js"
 
 
 def parse_animation_classes_from_css(css_path: Path):

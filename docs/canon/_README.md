@@ -35,15 +35,14 @@ docs/canon/
 ├── part_09.md            ← Part 9 (Diagnostics)
 ├── part_10.md            ← Part 10 (Examples)
 ├── appendix_mbti.md      ← Appendix A: MBTI
-├── appendix_model_table.md ← Appendix B: Model Capability Table
-├── appendix_glossary.md  ← Appendix C: Glossary (frozen v1 migration source — see glossary_registry.md)
 ├── glossary_registry.md  ← v2 canonical term record (iter 133): source for the GENERATED data/glossary.json (DEC-17/18)
-└── appendix_character_map.md ← Appendix D: Character map (iter 38)
+├── appendix_character_map.md ← Appendix D: Character map (iter 38)
+└── appendix_model_params.md  ← Appendix E: Model, context & parameters (iter 172 — absorbs Appendix B)
 ```
 
 **Один файл = один Part master HTML.** Это позволяет агенту загружать в контекст только нужный Part, а не весь гайд.
 
-**Исключение (v2, iter 133):** `glossary_registry.md` — структурированный канон-источник терминов (45 статей, строгий entry-паттерн для парсера), машинным аналогом является не master HTML, а генерируемый `data/glossary.json` (`scripts/generate_glossary.mjs`, первая стадия `pnpm run build`; parity-гейт — `scripts/audit_glossary_parity.py`). `appendix_glossary.md` (25 статей) заморожен как v1-источник миграции до переключения на v2 (диспозиции — `docs/research/migration_map_v2.md` §5.1).
+**Исключение (v2, iter 133):** `glossary_registry.md` — структурированный канон-источник терминов (45 статей, строгий entry-паттерн для парсера), машинным аналогом является не master HTML, а генерируемый `data/glossary.json` (`scripts/generate_glossary.mjs`, первая стадия `pnpm run build`; parity-гейт — `scripts/audit_glossary_parity.py`). Это **единственная** канон-поверхность терминов: Appendix C (`appendix_glossary.md`, 25 статей v1) удалён в iter 177 (F-19/DEC-31) как дубликат с другим набором слов; читательские поверхности — панель «Глоссарий» и её no-JS страница, обе из одного generated JSON.
 
 ---
 
@@ -105,7 +104,7 @@ docs/canon/
 
 **Принцип:** каждый пример персонажа (Елена, Выщербленный) даётся **ровно один раз** в Canon. В остальных местах — ссылка `[ref: §4.X — пример Елены]`.
 
-**Пример:** цепочка Елены (GHOST = "Предательство редактора") описана в §4.2 GHOST. В §4.5 consistency check — ссылка, не повтор.
+**ПРИМЕР:** цепочка Елены (GHOST = "Предательство редактора") описана в §4.2 GHOST. В §4.5 consistency check — ссылка, не повтор.
 
 ### 3.6 Cross-references
 
@@ -141,18 +140,14 @@ docs/canon/
 2. **Технические идентификаторы** — `data-section` ID, XML-теги, `{{плейсхолдеры}}`, имена полей карточки (System Prompt, Description, Examples, Greeting), имена параметров, имена файлов, машинно-читаемые значения.
 3. **Имена собственные** — названия моделей, фронтендов, фреймворков (SPINE, OCEAN, MBTI, Lorebook).
 
-**Метки callouts — на русском** (это проза гайда, не парсинг-якоря; прежнее правило «English semantic anchors» отменено iter 123):
+**Метки callouts — на русском; набор ровно из четырёх** (F-20/DEC-32; прежнее правило «English semantic anchors» отменено iter 123):
 
 - `**ПРАВИЛО:**` — каноническое правило (нарушение = регрессия качества)
-- `**РЕКОМЕНДАЦИЯ:**` — мягкая рекомендация
+- `**РЕКОМЕНДАЦИЯ:**` — мягкая рекомендация (желательно, но не обязательно)
 - `**ПРИМЕР:**` — пример выполнения
-- `**ИЛЛЮСТРАЦИЯ:**` — визуальная демонстрация (diff-view, multi-char scene)
-- `**ШАБЛОН:**` — шаблон для копирования
-- `**Переход:**` — нарративный переход между Parts (только 1-2 на гайд, не во всех Parts)
-- `**Синтез:**` — 1-2 предложения итога в конце Part (только для Parts с major conceptual shift)
-- `**Ссылка:**` — указатель на связанную секцию в другом Part (нотация `[ref: …]` остаётся машинно-читаемой)
-- `**Демонстрирует:**` — список принципов, которые карточка демонстрирует (iter 38+)
-- `**Примечание:**` — локальное уточнение (русское, как и раньше)
+- `**НАБЛЮДЕНИЕ:**` — уточнение из практики, не правило
+
+Навигационные пометки (переход, синтез, ссылка, «карточка демонстрирует», примечание) — **обычная проза**, а не метки; маркеры `ШАБЛОН`/`ИЛЛЮСТРАЦИЯ`/`Ссылка`/`Синтез`/`Переход`/`Демонстрирует` удалены вместе с чипами (iter 178).
 
 Тело callouts — на русском. Английский текст внутри копируемых промпт-контейнеров не переводится механически — рядом с контейнером даётся русское пояснение.
 
@@ -238,13 +233,12 @@ docs/canon/
 | Part 9 | `part_09.md` | ✅ iter 13 | ✅ iter 13 | iter 13 (DONE) |
 | Part 10 | `part_10.md` | ✅ iter 16 | ✅ iter 16 | iter 16 (DONE) |
 | Appendix A MBTI | `appendix_mbti.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
-| Appendix B Model Table | `appendix_model_table.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
-| Appendix C Glossary | `appendix_glossary.md` | ✅ iter 18 | ✅ iter 18 | iter 18 (DONE) |
+| Appendix E Model/Context/Params | `appendix_model_params.md` | ✅ iter 172 | ✅ iter 172 | iter 172 (CREATED — absorbs Appendix B) |
 | Appendix D Character Map | `appendix_character_map.md` | ✅ iter 38 | n/a (no master HTML) | iter 38 (NEW) |
 
 **Обновлять эту таблицу при каждом изменении статуса Canon-файла.**
 
-**Все 10 Parts + 4 Appendix + Part 0 (concept) — Canon COMPLETE (iter 18 + iter 38 concept additions).**
+**Все 10 Parts + 3 Appendix (A/D/E — B absorbed into E, iter 172; C deleted iter 177, F-19/DEC-31) + Part 0 (concept) — Canon COMPLETE.**
 
 ---
 

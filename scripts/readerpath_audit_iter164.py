@@ -15,13 +15,13 @@ parts/manifest.json + data/glossary.json + the shell):
                pipeline + §7A.12 budgets + the Part 10 blueprints), the
                assembly wiring (every entry/backbone link target resolves in
                the built artifact), the default-visibility surfaces
-               (§7A.6/§7A.7/§7A.12 + ШАБЛОН templates), completion (the
+               (§7A.6/§7A.7/§7A.12 + the copyable template blocks), completion (the
                §7A.13 final checklist + budget table + blueprint
                annotations).
   REFERENCE  — entry (the runtime glossary panel chain + the no-JS
                glossary.html page), the lookup hop (every glossary
                anchor_id/cross_ref resolves in the built artifact), the
-               appendix layer (A/B/C wired per APPENDIX_GUIDE_ORDER, the TOC
+               appendix layer (A/E wired per APPENDIX_GUIDE_ORDER, the TOC
                «Приложения» group, Appendix D canon-only with zero runtime
                links).
 
@@ -44,28 +44,35 @@ MASTER = REPO / "src" / "master"
 PARTS = REPO / "parts"
 SHELL = REPO / "src" / "shell"
 
-# iter 169 (G4-LEARN (a)): Part 0 wired — corpus 96 -> 98, the Learn entry = Part 0 -> Part 1
+# iter 169 (G4-LEARN (a)): Part 0 wired — corpus 96 -> 98; iter 173 (v3 S3): 98 -> 81
+# (Part 8 16->2, Part 9 11->7, Part 10 4->5); iter 174 (v3 S4a): 81 -> 69
+# (Part 2 6->5, Part 3 8->5, Part 4 11->6, Part 5 7->5, Part 6 6->5) — the Learn entry = Part 0 -> Part 1
+# iter 177 (v3 S4b, F-19/DEC-31): 69 -> 68 (Appendix C deleted; the glossary is
+# the registry -> generated JSON -> panel/no-JS page chain)
 GUIDE_ORDER = [
     "part_00.html", "part_01.html", "part_02.html", "part_03.html", "part_04.html",
     "part_05.html", "part_06.html", "part_07a.html", "part_07b.html",
     "part_08.html", "part_09.html", "part_10.html",
 ]
-# DEC-24 Q7 / the KI#70 WIRE (iter 158): runtime appendix order A -> B -> C
+# DEC-24 Q7 / the KI#70 WIRE (iter 158): runtime appendix order. v3 stage 2
+# (iter 172): B was absorbed into E -> A -> C -> E (D stays canon-only);
+# iter 177 (F-19/DEC-31): C deleted -> A -> E.
 APPENDIX_ORDER = [
-    "appendix_mbti.html", "appendix_model_table.html", "appendix_glossary.html",
+    "appendix_mbti.html", "appendix_model_params.html",
 ]
 PART_10_BLUEPRINTS = [
-    "p10_elena", "p10_walter", "p10_omnis", "p10_vysherblenny",
+    "p10_index", "p10_elena", "p10_walter", "p10_omnis", "p10_vysherblenny",
 ]
+PART_10_CARDS = [sid for sid in PART_10_BLUEPRINTS if sid != "p10_index"]
 BUILD_PREBUILD_EXPECTED = {
-    "p7a_assembly_pipeline", "p7a_token_budget", "appendix_model_table",
+    "p7a_assembly_pipeline", "p7a_token_budget", "appendix_model_params",
     "p10_elena", "p10_walter", "p10_omnis", "p10_vysherblenny",
-    "p4_ghost_layers", "p6_cot_basics", "p7b_lorebook_basics",
+    "p4_ghost", "p6_cot_basics", "p7b_lorebook_basics",
 }
 BUILD_PIPELINE_EXPECTED = {
     "p7a_token_budget", "p10_elena", "p7a_core_directives",
-    "p4_spine_overview", "p6_cot_basics", "p4_spine_mapping",
-    "p2_anchor_rules", "p3_voice_isolation", "p4_spine_check",
+    "p4_spine_overview", "p6_cot_basics", "p4_spine_full_chain",
+    "p2_anchor_rules", "p3_voice_isolation",
     "p5_ocean_basics",
 }
 
@@ -125,8 +132,10 @@ def main():
         if built != entry["anchors"]:
             err(f"LEARN L2: {entry['file']} renders {built} != manifest {entry['anchors']}")
     total = sum(len(e["anchors"]) for e in manifest["parts"] + manifest["appendices"])
-    if total != 98:
-        err(f"LEARN L2: rendering section count {total} != 98 (96 + Part 0 x2, iter 169)")
+    if total != 68:
+        err(f"LEARN L2: rendering section count {total} != 68 "
+            "(v3 stage 3: Part 8 16->2, Part 9 11->7, Part 10 4->5; stage 4a: "
+            "Parts 2/3/4/5/6 de-duplicated; stage 4b/F-19: Appendix C deleted)")
 
     # L3 — difficulty metadata + F6 disclosure (the Learn visibility model)
     diff = sum(len(re.findall(r"<!--\s*difficulty:\s*(?:BASIC|INTERMEDIATE|EXPERT)\s*-->", t))
@@ -145,9 +154,7 @@ def main():
         err("LEARN L4: manifest does not end at part_10.html")
     elif manifest["parts"][-1]["anchors"] != PART_10_BLUEPRINTS:
         err("LEARN L4: Part 10 blueprints missing from the manifest tail")
-    if [e["file"] for e in manifest.get("appendices", [])] != [
-        "appendix_glossary.html", "appendix_mbti.html", "appendix_model_table.html",
-    ] and {e["file"] for e in manifest.get("appendices", [])} != set(APPENDIX_ORDER):
+    if {e["file"] for e in manifest.get("appendices", [])} != set(APPENDIX_ORDER):
         err("LEARN L4: manifest appendices set unexpected")
 
     # LEARN-1 — RESOLVED iter 169 (G4-LEARN (a), the owner-called switch package):
@@ -194,17 +201,19 @@ def main():
     if pipeline and not BUILD_PIPELINE_EXPECTED <= hrefs(pipeline):
         err(f"BUILD B2: pipeline expected targets not linked: "
             f"{sorted(BUILD_PIPELINE_EXPECTED - hrefs(pipeline))}")
-    if budget and "appendix_model_table" not in hrefs(budget):
+    if budget and "appendix_model_params" not in hrefs(budget):
         err("BUILD B2: §7A.12 does not link the model capability table")
 
     # B3 — default visibility: value tables + capability checklist + templates
     for sid in ("p7a_sampling_params", "p7a_model_checklist"):
         if section(m07a, sid) is None or section(b07a, sid) is None:
             err(f"BUILD B3: §7A value/checklist surface {sid} missing")
-    shablon = read(MASTER / "part_07a.html").count("ШАБЛОН") + \
-        read(MASTER / "part_07b.html").count("ШАБЛОН")
-    if shablon < 1:
-        err("BUILD B3: no ШАБЛОН template callouts in 7A/7B")
+    # F-20 (iter 178): the ШАБЛОН chip is retired — the copyable template surface is the
+    # <pre><code> block itself (the 4-label vocabulary has no template label).
+    pre_blocks = read(MASTER / "part_07a.html").count("<pre><code>") + \
+        read(MASTER / "part_07b.html").count("<pre><code>")
+    if pre_blocks < 1:
+        err("BUILD B3: no copyable template block (<pre><code>) in 7A/7B")
     if pipeline and "Итого" not in pipeline:
         err("BUILD B3: §7A.13 budget table has no totals (Итого) row")
 
@@ -214,9 +223,9 @@ def main():
         if checks < 5:
             err(f"BUILD B4: §7A.13 final checklist has only {checks} items")
     m10 = read(MASTER / "part_10.html")
-    dem = m10.count("Демонстрирует")
-    if dem != len(PART_10_BLUEPRINTS):
-        err(f"BUILD B4: Part 10 «Демонстрирует» annotations {dem} != {len(PART_10_BLUEPRINTS)}")
+    dem = m10.count("Карточка демонстрирует:")
+    if dem != len(PART_10_CARDS):
+        err(f"BUILD B4: Part 10 «Карточка демонстрирует:» annotations {dem} != {len(PART_10_CARDS)}")
 
     # ================= REFERENCE =================
     # R1 — entry: runtime panel + no-JS page + the generated data layer
@@ -252,17 +261,18 @@ def main():
     if missing:
         err(f"REFERENCE R2: glossary anchor targets missing in the built artifact: {missing}")
 
-    # R3 — the appendix layer: A/B/C wired, D canon-only, zero broken links
+    # R3 — the appendix layer: A/E wired, B absorbed into E, C retired (F-19),
+    # D canon-only, zero broken links
     app_files = {e["file"] for e in manifest.get("appendices", [])}
     if app_files != set(APPENDIX_ORDER):
-        err(f"REFERENCE R3: manifest appendices {sorted(app_files)} != A/B/C set")
+        err(f"REFERENCE R3: manifest appendices {sorted(app_files)} != A/E set")
     order_re = re.search(r"APPENDIX_GUIDE_ORDER\s*=\s*\[(.*?)\]", loader, re.DOTALL)
     if not order_re:
         err("REFERENCE R3: APPENDIX_GUIDE_ORDER not found in lazy-loader")
     else:
         declared = re.findall(r"'([^']+\.html)'", order_re.group(1))
         if declared != APPENDIX_ORDER:
-            err(f"REFERENCE R3: APPENDIX_GUIDE_ORDER {declared} != A/B/C guide order")
+            err(f"REFERENCE R3: APPENDIX_GUIDE_ORDER {declared} != A/E guide order")
     if "Приложения" not in loader:
         err("REFERENCE R3: TOC «Приложения» group missing in lazy-loader")
     for f in APPENDIX_ORDER:
@@ -306,12 +316,12 @@ def finish():
         sys.exit(1)
     print("\nPASS — every mode travels entry -> backbone -> completion on the "
           "built corpus: Learn (TOC/Part-0 entry, 12-part linear order == "
-          "manifest == render order, 98/98 difficulty metadata (incl. Part 0), F6 disclosure, "
+          "manifest == render order, 68/68 difficulty metadata (incl. Part 0), F6 disclosure, "
           "Part 10 completion); Build (§1.6 profile -> §7A.13/§7A.12 + Part 10 "
           "blueprints, all wiring targets resolve, value/checklist/template "
           "surfaces present, assembly checklist + Итого + 4 annotations); "
           "Reference (runtime panel + no-JS page + 45-term chain, every "
-          "anchor_id/cross_ref resolves, appendices A/B/C wired A->B->C with "
+          "anchor_id/cross_ref resolves, appendices A/E wired A->E with "
           "Appendix D canon-only and zero broken links).")
 
 

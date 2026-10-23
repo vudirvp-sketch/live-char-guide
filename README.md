@@ -32,10 +32,10 @@ A guide for building character cards for AI role-playing (SillyTavern-compatible
 
 | Directory | Purpose |
 |-----------|---------|
-| `src/master/` | Author content — 10 Parts + 3 appendix HTML. **Authors edit here.** |
+| `src/master/` | Author content — 12 part files (`part_00` + `part_01..10`, incl. `07a`/`07b`) + 3 appendix HTML. **Authors edit here.** |
 | `src/shell/` | Infrastructure shell (`index.html`, `styles.css`, `lazy-loader.js`, `widgets/`). **Do NOT touch when writing Parts.** |
 | `docs/canon/` | Canon markdown — source of truth for content (not in build). |
-| `data/` | JSON widget data (glossary, ocean, enneagram, mbti, character_schema). |
+| `data/` | JSON widget data — 6 files (glossary, ocean, enneagram, mbti, character_schema, anchor-redirects). |
 | `scripts/` | Build + validation scripts. |
 | `parts/`, `widgets/`, `assets/`, `index.html`, `event-bus.js`, `build.hash` | Root fallbacks — regenerated on every `pnpm run build`. **Do NOT edit directly.** |
 
@@ -59,13 +59,15 @@ pnpm run dev              # Build + serve on http://localhost:3000
 ## Build pipeline
 
 ```
+docs/canon/glossary_registry.md  →  scripts/generate_glossary.mjs   →  data/glossary.json
+docs/canon/part_05.md §5.3       →  scripts/generate_enneagram.mjs  →  data/enneagram.json
 src/master/*.html  (author content)
         ↓
-scripts/build-unified.mjs   →   parts/*.html (unified) + manifest.json
+scripts/build-unified.mjs   →   build/parts/*.html (unified) + manifest.json
         ↓
 src/scripts/build-shell-unified.mjs   →   dist/  (deployed to GitHub Pages)
         ↓
-root fallbacks (index.html, parts/, widgets/, assets/, data/)  — committed to git
+root fallbacks (index.html, parts/, widgets/, assets/, data/, event-bus.js, build.hash)  — committed to git
 ```
 
 Full diagram: [`AGENT_NAVIGATION.md`](./AGENT_NAVIGATION.md) §2.
@@ -82,7 +84,7 @@ Full diagram: [`AGENT_NAVIGATION.md`](./AGENT_NAVIGATION.md) §2.
 - [`docs/canon/_README.md`](./docs/canon/_README.md) — Canon Spec (rules for canon files).
 - [`docs/architecture.md`](./docs/architecture.md) — deep architecture (build stages, ownership, section model, validation).
 - [`docs/components.md`](./docs/components.md) — CSS component registry (use ONLY classes defined here).
-- [`docs/research/guide_analysis_consolidated.md`](./docs/research/guide_analysis_consolidated.md) — consolidated guide analysis from external sources.
+- [`docs/research/guide_analysis_consolidated.md`](./docs/research/guide_analysis_consolidated.md) — historical (iter 72, v9.2.0) consolidated guide analysis from external sources.
 
 ---
 

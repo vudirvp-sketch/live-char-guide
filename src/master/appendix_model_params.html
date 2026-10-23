@@ -1,0 +1,399 @@
+<!--
+  Appendix E: Model, Context & Generation Parameters
+  (Модель, контекст и параметры генерации)
+  Live Character Guide v9.2 Master HTML
+
+  Created in the v3 restructure (stage 2, iter 172). Absorbs:
+    - Appendix B (Model Capability Table) — whole table + OBSERVATION + следствия;
+    - §7A.6 sampling tables + interface notes (core check line stays in §7A.6);
+    - §7A.7 capability checklist (the section is now a pointer);
+    - §7A.10 API wrappers (the section is now a collapsed pointer);
+    - §7A.11 4K-Fallback (the section is now a pointer);
+    - §7A.12 Script Tax detail (the RULE keeps one line in §7A.12);
+    - §7A.2 SP-language thresholds (the RULE keeps one line in §7A.2);
+    - §7B.3 EVENT frontend compatibility (the section keeps a footnote);
+  Plus the E17 visual embed (moved here from Part 7A).
+-->
+<section  data-section="appendix_model_params" id="appendix_model_params" data-toc-nav>
+<!-- difficulty: INTERMEDIATE -->
+<!-- canonical: model capabilities + context profiles + sampling + Script Tax + SP language + API wrappers + frontend EVENT compatibility -->
+<h2>Модель, контекст и параметры генерации</h2>
+
+<p><strong>Приложение E.</strong> Отвечает на три вопроса, которые читатель задаёт <em>один раз — до сборки карточки</em> и которые больше не живут в линейном потоке:</p>
+<ol>
+<li><strong>Какую модель взять</strong> — что умеют 12B–14B, 32B+ и API-модели.</li>
+<li><strong>Сколько контекста ей нужно</strong> — профили 4K / 8K / 16K+ и 4K-Fallback.</li>
+<li><strong>Какие параметры выставить</strong> — сэмплирование, Presence Penalty, интерфейс запуска.</li>
+</ol>
+
+<p>Сама карточка собирается по <a href="#p7a_assembly_pipeline">§7A.13 — конвейер сборки</a>, её бюджет — по <a href="#p7a_token_budget">§7A.12 — бюджет токенов</a>. Здесь — только модель, рантайм и параметры.</p>
+
+<h3>Возможности моделей (12B–14B / 32B+ / API)</h3>
+
+<p>Эта таблица объединяет всю зависимость методов от размера модели. Ссылки на неё заменяют отдельные заметки <code>[Модель: …]</code> в тексте гайда: упоминание модели в Part 6/7A означает «строка этой таблицы».</p>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th scope="col">Возможность</th><th scope="col">12B–14B</th><th scope="col">32B+</th><th scope="col">API (Claude/GPT)</th></tr>
+</thead>
+<tbody>
+<tr><td>Эффективность CoT</td><td>Базовая: Tier 0–1</td><td>Полная: Tier 0–3</td><td>Полная: Tier 0–3</td></tr>
+<tr><td>Рабочий уровень CoT</td><td>Tier 0 (<a href="#p6_cot_tiers">Part 6 §6.2 — уровни CoT</a>)</td><td>Tier 1–2</td><td>Tier 2–3</td></tr>
+<tr><td>Следование SPINE</td><td>Умеренное</td><td>Высокое</td><td>Высокое</td></tr>
+<tr><td>Следование основным директивам</td><td>~60–80%</td><td>~85–95%</td><td>~90–98%</td></tr>
+<tr><td>Директива №6 (Consequence Driven)</td><td>Ограниченный эффект — недостаточная глубина рассуждений</td><td>Значительный эффект</td><td>Полный эффект</td></tr>
+<tr><td>Директива №7 (Pre-Generation Filter)</td><td>~40–60% соблюдения — часто игнорируется</td><td>~85–95% соблюдения</td><td>~90–98% соблюдения</td></tr>
+<tr><td>Размещение голоса</td><td>Examples + Greeting — <strong>никогда в Description</strong> (<a href="#p3_voice_isolation">Part 3 §3.1 — изоляция голоса</a>)</td><td>Examples + Greeting — никогда в Description</td><td>Examples + Greeting + AN — никогда в Description</td></tr>
+<tr><td>XML-теги</td><td>&#9888;&#65039; нестабильны — структурированная инъекция ограничена</td><td>&#10003; стабильны</td><td>&#10003; стабильны</td></tr>
+<tr><td>Anti-godmoding</td><td>2 строки (запрет + позитив)</td><td>2 строки</td><td>1 строка</td></tr>
+<tr><td>Язык SP</td><td>Английский для словаря &lt;64K&sup1;; язык карточки допустим для &ge;128K</td><td>Язык карточки предпочтителен</td><td>Язык карточки предпочтителен</td></tr>
+<tr><td>Следование инструкциям на английском</td><td>Исторически выше (доминирование английского в обучении); разрыв сужается на словаре &ge;128K</td><td>Стабильно в обоих языках</td><td>Стабильно в обоих языках</td></tr>
+<tr><td>Размер словаря</td><td>32K (ранние 12B); 128K (актуальные 12B–14B: Gemma 3, Qwen 2.5, Mistral Nemo)</td><td>32K–128K (зависит от поколения)</td><td>100K+ (Claude 200K, GPT-4 128K, Gemini 1M+)</td></tr>
+<tr><td>Налог на письменность (Script Tax, нелатиница)</td><td>Высокий на 32K-словаре (кириллица &asymp;1.5–2&times; латиницы; CJK &asymp;1–2&times;)</td><td>Средний на 32K; низкий на &ge;128K</td><td>Низкий (словарь 200K+ покрывает большинство письменностей)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><small>&sup1; Язык SP: многоуровневое правило — <a href="#p7a_core_directives">§7A.2 — правило языка SP</a>; пороги и обоснование — подраздел «Язык системного промпта» ниже.</small></p>
+
+<div class="callout">
+<p><strong>НАБЛЮДЕНИЕ:</strong> Процентные оценки возможностей (~60–80% / ~85–95% / ~90–98%) — эмпирические наблюдения, а не нормативные пороги: они ориентировочны и зависят от промпта, фронтенда и поколения модели. Правила и рекомендации гайд задаёт в профильных разделах, а не этой таблицей.</p>
+</div>
+
+<h4>Ключевые следствия для сборки карточки</h4>
+
+<ul>
+<li><strong>12B–14B:</strong> только Tier 0–1 CoT, упрощённая SPINE, ожидать ~60–80% следования основным директивам. Язык SP — по порогам модели (см. «Язык системного промпта»). Script Tax на 32K-словаре увеличивает расход токенов для нелатинских письменностей в 1.5–2 раза.</li>
+<li><strong>32B+:</strong> полный Tier 0–3 CoT, высокое следование SPINE, ~85–95% следования директивам. Фильтр предгенерации работает надёжно.</li>
+<li><strong>API-модели:</strong> максимальная стабильность, ~90–98% следования. Структурированная инъекция (XML) рекомендуется для сложных персонажей.</li>
+</ul>
+
+<h3>Сколько контекста: 4K / 8K / 16K+</h3>
+
+<p>Бюджет блоков по профилям контекста живёт в <a href="#p7a_token_budget">§7A.12 — бюджет токенов</a> (Мин = 4K &middot; Стандарт = 8K+ &middot; Макс = 16K+). Ниже — минимальная конфигурация для моделей с ограниченным контекстом.</p>
+
+<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с контекстом 4K токенов. Используется, когда расширенная карточка не помещается в контекстное окно.</p>
+
+<h4>Токен-лимиты 4K (конфигурация развёртывания в пределах лимитов §7A.12)</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th scope="col">Блок</th><th scope="col">Полный</th><th scope="col">4K-Fallback</th></tr>
+</thead>
+<tbody>
+<tr><td>System Prompt</td><td>50–200 (§7A.12)</td><td>80–100</td></tr>
+<tr><td>Description</td><td>150–700 (§7A.12)</td><td>150–200</td></tr>
+<tr><td>Examples</td><td>80–400 (§7A.12: 2–5 × 40–80)</td><td>130–160 (2 × 65–80)</td></tr>
+<tr><td>Greeting</td><td>40–100 (§7A.12)</td><td>50–80</td></tr>
+<tr><td><strong>Итого</strong></td><td>850–1450</td><td>~430–580</td></tr>
+</tbody>
+</table>
+</div>
+
+<h4>Минимальный SP (4K)</h4>
+<pre><code>You are {{char}}. Never speak or act for {{user}}.
+Role: {{role}}
+Key trait: {{one_extreme_ocean_pole}}</code></pre>
+
+<h4>Минимальный Description (4K)</h4>
+<pre><code>{{name}} — {{role}}.
+{{one_sentence_summary}}
+
+Anchors:
+- {{trigger}} → {{action}} → {{price}}
+- {{trigger}} → {{action}} → {{price}}
+- {{trigger}} → {{action}} → {{price}}</code></pre>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Якоря в 4K-fallback размещаются в Description (как <code>&lt;anchors&gt;</code>-тег или список), поскольку фронтенд не имеет отдельного поля — концепция и полное правило размещения: <a href="#p1_core_rules">§1.4 правило</a>. При 8K+ и API используйте <code>&lt;anchors&gt;</code>-тег внутри Description для структурирования.</p>
+</div>
+
+<div class="callout rec">
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
+</div>
+
+<h3>Параметры генерации (сэмплирование)</h3>
+
+<p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — голос персонажа требует повторяемых паттернов. Ниже — визуальная сводка (E17), затем канонические таблицы.</p>
+
+<!-- VS-EMBED: E17 — Sampling Parameters -->
+<div class="vs-embed" data-vs-element="E17">
+<!--
+  Element: E17 — Sampling Parameters
+  Source: elements/E17-sampling-params.html
+  Pattern: P5 — Comparison (grouped columns)
+  Dependencies: DESIGN-TOKENS.css, shared/*.css, E17-styles.css
+  Notes: Core visualization markup extracted from <main> element.
+         scroll-enter classes require IntersectionObserver from E17-script.js
+  sampling-cluster (iter 145) values, locked by DEC-22; v3 stage 2 (iter 172):
+         moved from Part 7A (it was un-sectioned between §7A.5 and §7A.6) into
+         Appendix E, the canonical owner of the sampling values. Values
+         SHARED_REFERENCE: Appendix E «Базовые параметры» owns the canonical
+         tables; this embed is the one visual presentation; the 32B+ column =
+         the canonical «32B+ / API» column (Temperature 0.7–1.0, RepPen
+         1.05–1.10 — DEC-22); the 12B–32B middle tier = declared omission
+         (values live in the Appendix E canonical table only); parity locked by
+         scripts/audit_sampling_parity.py.
+-->
+<div class="params-container scroll-enter">
+
+      <div class="params-grid">
+
+        <!-- 12B-14B column -->
+        <div class="param-column param-column--12b scroll-enter">
+          <div class="param-column__tier">12B-14B</div>
+          <div class="param-column__sub">Наиболее ограниченный</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.6–0.8</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.0–1.05</span>
+          </div>
+          <div class="sub-range">
+            <span class="sub-range__green">1.0–1.05 рекомендуется</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- 32B+ column -->
+        <div class="param-column param-column--32b scroll-enter">
+          <div class="param-column__tier">32B+</div>
+          <div class="param-column__sub">Рекомендуемый уровень</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.7–1.0</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row param-row--warning">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value">1.05–1.10</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–100</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+        <!-- API column -->
+        <div class="param-column param-column--api scroll-enter">
+          <div class="param-column__tier">API</div>
+          <div class="param-column__sub">Максимальная гибкость</div>
+
+          <div class="param-row">
+            <span class="param-row__name">Temperature</span>
+            <span class="param-row__value">0.8–1.0</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top P</span>
+            <span class="param-row__value">0.9–0.95</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Min P</span>
+            <span class="param-row__value">0.05–0.1</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">RepPen</span>
+            <span class="param-row__value vs-ki13-p7a-text-muted">N/A</span>
+          </div>
+          <div class="param-row">
+            <span class="param-row__name">Top K</span>
+            <span class="param-row__value">40–100</span>
+          </div>
+          <div class="param-row param-row--danger">
+            <span class="param-row__name">PP</span>
+            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Model Type Checklist -->
+      <div class="checklist-section scroll-enter">
+        <div class="checklist-section__title">Чеклист по типу модели</div>
+        <div class="checklist-row checklist-row__header">
+          <span>Проверка</span>
+          <span>12B-14B</span>
+          <span>32B+</span>
+          <span>API</span>
+        </div>
+        <div class="checklist-row">
+          <span>Размещение голоса</span>
+          <span class="vs-ki13-p7a-text-danger">Только Examples</span>
+          <span>Examples основной</span>
+          <span>Examples + AN</span>
+        </div>
+        <div class="checklist-row">
+          <span>Стабильность XML</span>
+          <span class="vs-ki13-p7a-text-muted">Минимальная</span>
+          <span>Стабильная</span>
+          <span>Полная</span>
+        </div>
+        <div class="checklist-row">
+          <span>Уровень CoT</span>
+          <span class="vs-ki13-p7a-text-muted">Tier 0</span>
+          <span>Tier 1–2</span>
+          <span class="vs-ki13-p7a-text-violet">Tier 2–3</span>
+        </div>
+        <div class="checklist-row">
+          <span>Anti-godmoding</span>
+          <span class="vs-ki13-p7a-text-success">2 строки</span>
+          <span class="vs-ki13-p7a-text-success">2 строки</span>
+          <span class="vs-ki13-p7a-text-success">1 строка</span>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+<!-- REPLACED BY VISUAL SYSTEM: E17 -->
+
+<h4>Базовые параметры</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th scope="col">Параметр</th><th scope="col">12B</th><th scope="col">12B–32B</th><th scope="col">32B+ / API</th><th scope="col">Примечание</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Temperature</strong></td><td>0.6–0.8</td><td>0.7–0.9</td><td>0.7–1.0</td><td>Ниже = предсказуемее, выше = разнообразнее</td></tr>
+<tr><td><strong>Top P</strong></td><td>0.9</td><td>0.9–0.95</td><td>0.9–0.95</td><td>Nucleus sampling, обычно не трогать</td></tr>
+<tr><td><strong>Min P</strong></td><td>0.05</td><td>0.05–0.1</td><td>0.05–0.1</td><td>Отсечение маловероятных токенов</td></tr>
+<tr><td><strong>RepPen</strong></td><td>1.0–1.05</td><td>1.05–1.10</td><td>1.05–1.10</td><td>Никогда &gt; 1.10 — убьёт голос (AP-5)</td></tr>
+<tr><td><strong>Top K</strong></td><td>40</td><td>40–80</td><td>40–100</td><td>Ограничение выбора токенов</td></tr>
+<tr><td><strong>Presence Penalty</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td><strong>0.0</strong></td><td>Обязательно 0 — иначе голос дрейфует (AP-7)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
+</div>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Ollama и LM Studio имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
+</div>
+
+<h4>Модель-специфичные рекомендации</h4>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th scope="col">Модель</th><th scope="col">Temperature</th><th scope="col">RepPen</th><th scope="col">Особенности</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>12B (4K)</strong></td><td>0.6-0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback (см. выше)</td></tr>
+<tr><td><strong>32B+</strong></td><td>0.7-0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
+<tr><td><strong>Claude API</strong></td><td>0.8-1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt; (см. ниже)</td></tr>
+<tr><td><strong>GPT API</strong></td><td>0.8-1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций (см. ниже)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout rec">
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> На API-моделях заметка автора (AN) может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, влияние AN на голос пренебрежимо мало (~2%).</p>
+</div>
+
+<h3>Налог на письменность (Script Tax)</h3>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Script Tax (налог на письменность) — для нелатинских письменностей (Cyrillic, CJK) фактический бюджет токенов уменьшается: 1 кириллический символ &asymp; 1.5–2 токена на 12B-моделях с 32K словарём, &asymp; 1 токен на &ge;128K словаре и API. Учитывайте это при расчёте бюджета токенов (Token Budget) для карточек на русском, японском, корейском и других языках с нелатинской графикой — бюджет в «символах» и «токенах» расходится. Порог: &ge;128K словаря &rarr; Script Tax несущественен.</p>
+</div>
+
+<p>Практическое следствие для бюджета: русская карточка на 32K-словаре идёт по <strong>нижней границе</strong> диапазона <a href="#p7a_token_budget">§7A.12 — бюджет токенов</a>; на &ge;128K-словаре и API — Script Tax не меняет расчёт.</p>
+
+<h3>Язык системного промпта</h3>
+
+<p>Правило языка (включая RP-контент — всегда на языке карточки) — <a href="#p7a_core_directives">§7A.2 — правило языка SP</a>. Ниже — пороги для SP и обоснование.</p>
+
+<div class="callout rule">
+<p><strong>ПРАВИЛО:</strong> Язык SP (Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock) — многоуровневый по модели:</p>
+<ul>
+<li><strong>12B со словарём &lt;64K</strong> (ранние Llama 2, Qwen 1.x, ранний Mistral): английский — исторически стабильнее (смещение обучающей выборки ранних моделей).</li>
+<li><strong>12B–14B актуальных поколений со словарём &ge;128K</strong> (Gemma 3 12B, Mistral Nemo, Qwen 2.5 14B): английский оптимален, но язык карточки допустим — разрыв несущественен.</li>
+<li><strong>32B+ и API:</strong> язык карточки предпочтителен — модель полностью мультиязычна, единый язык SP и RP улучшает консистентность (нет переключения контекста между инструкцией и контентом).</li>
+</ul>
+<p>Пороговое правило: если модель имеет &ge;128K словаря и нативную поддержку языка карточки — используйте язык карточки для всего SP. Если нет — используйте английский для SP, язык карточки для RP-контента.</p>
+</div>
+
+<h3>API-обёртки: &lt;claude_info&gt; и [SYSTEM NOTE]</h3>
+
+<p>API-модели (Claude, GPT-4) поддерживают специфичные форматы инструкций, которые недоступны или работают иначе на open-source моделях. Эти блоки размещаются:</p>
+<ul>
+<li>В начале Description (рекомендуется для Claude);</li>
+<li>Как отдельные инъекционные элементы (GPT System Message);</li>
+<li>В First Message (для некоторых конфигураций).</li>
+</ul>
+
+<h4>Claude: &lt;claude_info&gt;</h4>
+<pre><code>&lt;claude_info&gt;
+{{char}} — {{role}}.
+
+Ключевые характеристики:
+- {{trait_1}}
+- {{trait_2}}
+
+Поведение:
+{{behavior_guidelines}}
+
+Ограничения:
+- Не нарушай характер
+- Не говори за {{user}}
+&lt;/claude_info&gt;</code></pre>
+
+<h4>GPT: [SYSTEM NOTE]</h4>
+<pre><code>[SYSTEM NOTE: {{char}} — {{role}}.
+Ключевые характеристики: {{traits}}.
+Поведение: {{behavior}}.
+Ограничения: не нарушай характер, не говори за {{user}}.]</code></pre>
+
+<h3>Совместимость EVENT: по фронтендам</h3>
+
+<p>Синтаксис <code>EVENT:</code> для range-триггеров Lorebook поддерживается не всеми фронтендами. Базовые механики Lorebook — <a href="#p7b_lorebook_basics">§7B.3 — основы Lorebook</a>.</p>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Фронтенд</th><th scope="col">Поддержка</th><th scope="col">Примечание</th></tr></thead>
+<tbody>
+<tr><td>SillyTavern</td><td>Полная</td><td>EVENT:, SECONDARY_KEYS, selective activation</td></tr>
+<tr><td>Soul of Waifu</td><td>Есть аналоги</td><td>Расширенные возможности</td></tr>
+<tr><td>KoboldAI</td><td>Частичная</td><td>Использовать conditionals в entry content, KEYWORD без EVENT:</td></tr>
+<tr><td>Oobabooga</td><td>Нет</td><td>Использовать Lorebook (World Info) или встройте триггеры в Description/AN</td></tr>
+<tr><td>Faraday.dev / Agnai</td><td>Ограниченная</td><td>Проверяйте документацию конкретного фронтенда</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Если фронтенд не поддерживает <code>EVENT:</code> — триггеры задаются через conditionals в <code>content</code> записи или через Description/AN карточки.</p>
+
+<p>Модель, контекст и параметры — один раз на проект, а не на карточку. Выберите строку таблицы возможностей, профиль контекста и параметры сэмплирования; дальше собирайте карточку по <a href="#p7a_assembly_pipeline">§7A.13 — конвейер сборки</a> и проверяйте бюджет по <a href="#p7a_token_budget">§7A.12 — бюджет токенов</a>.</p>
+
+</section>

@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="assets/shell-styles.css">
   <link rel="stylesheet" href="assets/vs-styles.css">
   <!-- KI#16 fix (iter 19): externalized inline script → widgets/js-flag.js for CSP compliance -->
-  <script src="widgets/js-flag.js"></script>
+  <script src="lib/js-flag.js"></script>
 </head>
 <body>
   <!-- Loading overlay -->
@@ -104,19 +104,16 @@
   </div>
 
   <script src="event-bus.js"></script>
-  <script src="widgets/widget-utils.js"></script>
+  <script src="lib/widget-utils.js"></script>
   <script src="assets/lazy-loader.js"></script>
-  <script src="widgets/persona-cross.js"></script>
-  <script src="widgets/persona-voice-hierarchy.js"></script>
+    <script src="widgets/persona-voice-hierarchy.js"></script>
   <script src="widgets/ocean-insight.js"></script>
-  <script src="widgets/enneagram-builder.js"></script>
-  <script src="widgets/mbti-composer.js"></script>
-  <script src="widgets/persona-synthesis.js"></script>
-  <!-- VS Widget Scripts -->
-  <script src="widgets/vs-mini-map.js"></script>
-  <script src="widgets/vs-scroll-observer.js"></script>
-  <script src="widgets/vs-e10-enneagram.js"></script>
-  <script src="widgets/vs-e13-diagnostic.js"></script>
-  <script src="widgets/vs-e16-author-note.js"></script>
+    <script src="widgets/mbti-composer.js"></script>
+    <!-- VS Widget Scripts -->
+  <script src="interactions/vs-mini-map.js"></script>
+  <script src="interactions/vs-scroll-observer.js"></script>
+  <script src="interactions/vs-e10-enneagram.js"></script>
+  <script src="interactions/vs-e13-diagnostic.js"></script>
+  <script src="interactions/vs-e16-author-note.js"></script>
 </body>
 </html>

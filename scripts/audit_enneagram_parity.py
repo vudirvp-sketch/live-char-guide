@@ -86,9 +86,7 @@ FALLBACK_05 = REPO / "parts" / "part_05.html"
 DATA_JSON = REPO / "data" / "enneagram.json"
 GENERATOR = REPO / "scripts" / "generate_enneagram.mjs"
 PACKAGE = REPO / "package.json"
-WIDGET_E10 = REPO / "src" / "shell" / "widgets" / "vs-e10-enneagram.js"
-WIDGET_BUILDER = REPO / "src" / "shell" / "widgets" / "enneagram-builder.js"
-WIDGET_SYNTH = REPO / "src" / "shell" / "widgets" / "persona-synthesis.js"
+WIDGET_E10 = REPO / "src" / "shell" / "interactions" / "vs-e10-enneagram.js"
 MAP = REPO / "docs" / "research" / "migration_map_v2.md"
 MATRIX = REPO / "docs" / "research" / "editorial_matrix.md"
 
@@ -139,7 +137,7 @@ def read(path):
 
 
 def canon_section_54(text):
-    m = re.search(r"^## 5\.4 .*?(?=^## 5\.5 )", text, re.DOTALL | re.MULTILINE)
+    m = re.search(r"^## 5\.3 .*?(?=^## 5\.4 )", text, re.DOTALL | re.MULTILINE)
     return m.group(0) if m else None
 
 
@@ -179,7 +177,7 @@ def main():
     canon = read(CANON_05)
     sec54 = canon_section_54(canon)
     if sec54 is None:
-        err("canon part_05.md: §5.4 section not found")
+        err("canon part_05.md: §5.3 section not found")
         return finish()
     canon_rows = parse_canon_types(sec54)
     if canon_rows is None:
@@ -315,7 +313,7 @@ def main():
             elif m.group(1) != want:
                 err(f"E10 embed: static default #{el_id} {m.group(1)!r} != "
                     f"§5.4 type-4 value {want!r}")
-        if "§5.4" not in embed or "SHARED_REFERENCE" not in embed:
+        if "§5.3" not in embed or "SHARED_REFERENCE" not in embed:
             err("E10 embed: mig-5 comment (§5.4 derivation + SHARED_REFERENCE "
                 "declaration) missing")
         notes.append("E10 embed: mini-card static defaults == §5.4 type-4 values; "
@@ -327,11 +325,11 @@ def main():
         err("canon part_05.md: [VS: E10] marker not found")
     else:
         body = m.group(1)
-        for token in ("§5.4", "SHARED_REFERENCE", "data/enneagram.json",
+        for token in ("§5.3", "SHARED_REFERENCE", "data/enneagram.json",
                       "генерируется"):
             if token not in body:
                 err(f"canon part_05.md [VS: E10] marker: '{token}' missing")
-    notes.append("E10 canon marker: present — §5.4 ownership (SHARED_REFERENCE) "
+    notes.append("E10 canon marker: present — §5.3 ownership (SHARED_REFERENCE) "
                  "and the generated data layer declared")
 
     # ---------- 7. Widget read-paths (data-shape verification) ----------
@@ -341,16 +339,9 @@ def main():
         if token not in e10js:
             err(f"vs-e10-enneagram.js: field read '{token}' missing "
                 "(shape contract broken)")
-    for widget_path, widget_name in ((WIDGET_BUILDER, "enneagram-builder.js"),
-                                     (WIDGET_SYNTH, "persona-synthesis.js")):
-        src = read(widget_path)
-        if re.search(r"template\.LIE", src):
-            err(f"{widget_name}: stale `template.LIE` read remains "
-                "(spine_templates.LIE is folded — read types[].lie_template)")
-        if "lie_template" not in src:
-            err(f"{widget_name}: lie_template read missing (LIE re-point incomplete)")
-        if "data/enneagram.json" not in src and "enneagram.json" not in src:
-            err(f"{widget_name}: enneagram.json data source declaration missing")
+    # F-18 (iter 176): `enneagram-builder.js` + `persona-synthesis.js` retired —
+    # the SPINE autofill they carried is banned by §5.1's rule (frameworks validate,
+    # they do not generate). Only the E10 mini-card script consumes the data now.
     # Simulated read-path over the generated JSON: every field every widget
     # accesses must resolve non-empty for all 9 types.
     for t in data.get("types", []):
@@ -376,9 +367,10 @@ def main():
         ms = data.get("mbti_suggestions", {}).get(str(tid))
         if not ms:
             err(f"widget read-path: mbti_suggestions[{tid}] missing")
-    notes.append("widget read-paths: vs-e10 field shape preserved (file untouched); "
-                 "builder + synthesis re-pointed to types[].lie_template; simulated "
-                 "read over the generated JSON fills every consumed field (9/9 types)")
+    notes.append("widget read-paths: vs-e10 field shape preserved (file untouched; "
+                 "the retired builder/synthesis readers are no longer checked, F-18); "
+                 "simulated read over the generated JSON fills every consumed field "
+                 "(9/9 types)")
 
     # ---------- 8. Root fallback ----------
     if FALLBACK_05.exists():
@@ -478,7 +470,7 @@ def finish():
         for e in errors:
             print(f"  ✗ {e}")
         sys.exit(1)
-    print("\nPASS — single canonical value owner intact: §5.4 canonical table → "
+    print("\nPASS — single canonical value owner intact: §5.3 canonical table → "
           "generated data/enneagram.json (LIE folded to one internal copy) → "
           "E10 SHARED_REFERENCE + re-pointed widgets; prototype/extract REMOVED_WITH_REASON "
           "executed iter 138 (DEC-19).")

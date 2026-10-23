@@ -89,10 +89,9 @@ Pre-commit hooks will automatically:
 1. Lint source files with ESLint
 2. Build both artifacts (if SKIP_ARTIFACT_BUILD is not set)
 3. Validate generated artifacts
-4. Format staged files with Prettier (via lint-staged)
 
 ```bash
-git add .
+git add <specific files>   # NEVER `git add .` / `-A` (AGENTS.md → Git safety)
 git commit -m "feat: add new section for advanced prompts"
 ```
 

@@ -1,7 +1,0 @@
-{
-  "*.html": ["prettier --write"],
-  "*.css": ["prettier --write"],
-  "*.js": ["prettier --write"],
-  "*.mjs": ["prettier --write"],
-  "*.json": ["prettier --write"]
-}

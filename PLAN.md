@@ -9,6 +9,28 @@
 
 ---
 
+## ACTIVE TRACK (since iter 171): v3 restructure — **COMPLETE (iters 171–178)**
+
+> Owner directive (chat 2026-10-22, DEC-26): «приступай к правкам… смысловая и функциональная нагрузка
+> не потерялась, а вся вода, повторения и дубликаты исчезли/консолидировались», worked in bounded
+> stages so a fresh context can continue. Governing law: **DEC-15** (compress redundant presentation,
+> never unique capability). Full stage definitions, the 24-finding registry, standing constraints and
+> the handoff protocol live in **`docs/RESTRUCTURE_V3_PLAN.md`** — this section is the index.
+> **Every row below is COMPLETE; all 24 findings are burnt down (KI#85 CLOSED, iter 178).**
+
+| ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
+|----|------|-------|---------------------|----------------------|------------|
+| v3-s1-nav-entry | **COMPLETE — executed iter 171:** TOC contract (Part regex `^p(\d+[ab]?)_`, `data-part-title` ×12, Tier-2 = own heading), `data-toc-nav` ×50, inline auto-TOC + its 174-line dead build code deleted, Part 0 rewritten as a reader on-ramp (routes + module map + Elena skeleton + 4-label legend), 5-block card model, §9.9 heading, `tests/test-toc-coverage.mjs`. 98/98 sections navigable (was 35/98). | — | — | battery green (tests 68/68, sync 97/97, 7 parity gates, both reader-path tools, baselines 18/238) | — |
+| v3-s2-boundary-7ab | **COMPLETE — executed iter 172:** Appendix E created (merged capability table 13 rows + 4K profile + sampling tables + E17 + Script Tax + SP-language thresholds + API wrappers + EVENT compat; Appendix B absorbed/deleted; TOC group A/C/E); §7A.6/7A.7/7A.10/7A.11 = pointers (two hard constraints stay inline), §7A.12 keeps budgets + one Script Tax line, §7A.2 SP-language = one line; §7A.13 payoff (one assembled SP + the single per-card budget calculation); template blockers F-05 fixed; E15 deleted; E17 moved to Appendix E, E18 into §7B.2; all §7A/§7B ids frozen. | — | — | battery green (build 98 sections, sync 95/95, 7 parity gates, reader-path tools, tests 68/68; baselines english 1 / syntax 230 — down, not up; browser proof: TOC 98, zero broken anchors) | — |
+| v3-s3-diagnostics-8-9-10 | **COMPLETE — executed iter 173** (plan §5.2): Part 9 11 → 7 sections (ONE instrument: entry route → symptom lookup → decision tree → one-change → **ONE checklist 1–14** → tests → 12B delta); Part 8 16 → 2 (E12 catalog inside the section + 15 worked-example `<details>`); Part 10 4 → 5 (`p10_index`, 13 in-template lectures moved out); 20 redirects; 4 findings burnt down (F-07, F-08, F-11, F-15). | — | — | battery green (build 81 sections, sync 89/89, 7 parity gates, both reader-path tools, tests 68/68; baselines english 1 / syntax 229) | — |
+| v3-s4a-modules | **COMPLETE — executed iter 174** (plan §5.3): Parts 2/3/4/5/6 merged 38 → 26 sections; 12 absorbed ids → redirects (126 total); **F-01 closed** — §5.1 owns the single OCEAN pole-limit ladder (1–2 recommended · 4K 2 / 8K 3 / 16K+ 4 / 32K+ 5 · SPINE bridge required · 4+ unjustified = critical) and §9.5/§9.2/§7A.13/appendix-map reference it; F-12 90% claim up front; E10 inside §5.3; Part 1 headings 1.1–1.6; 11 findings burnt down (F-01, F-06, F-09, F-10, F-12, F-13, F-14, F-21, F-22, F-23); gates re-pointed in-step (sync still 89 probes; enneagram gate + generator §5.3; sampling Appendix-E ref §6.2; readerpath 69). Detail: DEC-29. | — | — | — |
+| v3-s4b-apparatus | **COMPLETE — executed iters 175–178:** F-17 (all 17 VS-embeds inside their sections, canon markers complete, `validate:master` 6 → 0 warnings) · F-18 (11 widgets → 3 content widgets + 5 interactions + 2 libs; the `enneagram-builder` SPINE autofill removed; §5.3 contradiction fixed) · F-24 (Appendix A's 16-type promise points at the kept composer) · F-19 (Appendix C deleted, one registry→panel glossary surface, Part 0 prose pointer) · F-20 (4 labels / one treatment, chips retired, Part 0 legend 4, dead CSS removed, validator guard). Detail: DEC-30…DEC-32. | — | 0 VS-embeds outside `<section>`, widget count = 3, one glossary surface, label set = 4, `validate:master` outside-section warnings = 0 — all met | battery green (build 68 sections, sync 87/87, 7 parity gates + `audit_vs_embeds`, both reader-path tools, tests 68/68, baselines english 1 / syntax 226) + browser proof | — |
+| v3-d5-canon-format | **Owner-gated (unchanged, D-5):** the v2 canon-format decision (front-matter + E-declarations) | — | — | — | **YES — owner call** |
+
+> v2-switch — **COMPLETE** (see the v1 → v2 track below, kept as history).
+
+---
+
 ## ACTIVE TRACK (since iter 131): v1 → v2 architecture migration
 
 > Owner track-switch directive (chat 2026-09-14): the incremental editorial cleanup/research track is

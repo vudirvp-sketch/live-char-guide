@@ -203,7 +203,7 @@ describe('Validation Integration', () => {
     try {
       execSync('node scripts/validate-artifact.mjs', {
         cwd: ROOT,
-        stdio: 'pipe',
+        stdio: 'inherit',
         timeout: 30000
       });
     } catch (error) {

@@ -211,13 +211,13 @@
         "Repetition Penalty",
         "Штраф за повторы"
       ],
-      "definition": "Параметр сэмплирования, штрафующий повторение токенов. Канонический диапазон — таблица §7A.6; превышение 1.10 — анти-паттерн AP-5 (потеря фирменных речевых оборотов).",
+      "definition": "Параметр сэмплирования, штрафующий повторение токенов. Канонический диапазон — таблица Приложения E (параметры генерации); превышение 1.10 — анти-паттерн AP-5 (потеря фирменных речевых оборотов).",
       "prohibited": [],
       "deprecated": [],
       "anchor_id": "p7a_sampling_params",
       "cross_refs": [
         "#p7a_sampling_params",
-        "#p8_ap5_reppen_high"
+        "#p8_worked_examples"
       ],
       "language_category": "en"
     },
@@ -239,7 +239,7 @@
       "anchor_id": "p4_spine_overview",
       "cross_refs": [
         "#p4_spine_overview",
-        "#p4_spine_mapping"
+        "#p4_spine_full_chain"
       ],
       "language_category": "en"
     },
@@ -454,9 +454,9 @@
       "definition": "Якоря с условным ветвлением: один триггер → несколько действий в зависимости от контекста. Риск перегрузки — анти-паттерн AP-15.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p8_ap15_nested_anchors",
+      "anchor_id": "p8_worked_examples",
       "cross_refs": [
-        "#p8_ap15_nested_anchors"
+        "#p8_worked_examples"
       ],
       "language_category": "ru"
     },
@@ -493,9 +493,9 @@
       "definition": "Диагностический термин: модель пишет за пользователя (действия, мысли, чувства `{{user}}`) — сам факт нарушения. Директива Anti-godmoding (§7A.1) предотвращает годмодинг; отсутствие директивы — анти-паттерн AP-6.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p8_ap6_no_anti_godmoding",
+      "anchor_id": "p8_worked_examples",
       "cross_refs": [
-        "#p8_ap6_no_anti_godmoding",
+        "#p8_worked_examples",
         "#p7a_system_prompt"
       ],
       "language_category": "ru"
@@ -537,9 +537,9 @@
         "Хочет",
         "ХОЧУ"
       ],
-      "anchor_id": "p4_want",
+      "anchor_id": "p4_need",
       "cross_refs": [
-        "#p4_want"
+        "#p4_need"
       ],
       "language_category": "ru"
     },
@@ -678,10 +678,10 @@
       "deprecated": [
         "voice leak"
       ],
-      "anchor_id": "p3_multi_char",
+      "anchor_id": "p3_voice_leak",
       "cross_refs": [
-        "#p3_multi_char",
-        "#p8_ap11_voice_bleed"
+        "#p3_voice_leak",
+        "#p8_worked_examples"
       ],
       "language_category": "ru"
     },
@@ -707,7 +707,7 @@
       "cross_refs": [
         "#p2_basic_anchors",
         "#p1_core_rules",
-        "#p2_anchor_examples"
+        "#p2_anchor_rules"
       ],
       "language_category": "ru"
     },
@@ -790,7 +790,7 @@
       "anchor_id": "p4_ghost",
       "cross_refs": [
         "#p4_ghost",
-        "#p4_ghost_layers"
+        "#p4_spine_overview"
       ],
       "language_category": "ru"
     },
@@ -829,7 +829,7 @@
       "anchor_id": "p2_sensory_anchors",
       "cross_refs": [
         "#p2_sensory_anchors",
-        "#p4_ghost_layers"
+        "#p4_ghost"
       ],
       "language_category": "ru"
     },
@@ -863,9 +863,9 @@
         "призрачные слои",
         "3-tier GHOST"
       ],
-      "anchor_id": "p4_ghost_layers",
+      "anchor_id": "p4_ghost",
       "cross_refs": [
-        "#p4_ghost_layers",
+        "#p4_ghost",
         "#p4_spine_overview"
       ],
       "language_category": "ru"
@@ -902,7 +902,7 @@
       "cross_refs": [
         "#p3_voice_leak",
         "#p3_voice_isolation",
-        "#p8_ap11_voice_bleed"
+        "#p8_worked_examples"
       ],
       "language_category": "ru"
     },
@@ -922,8 +922,7 @@
       ],
       "anchor_id": "p5_enneagram_basics",
       "cross_refs": [
-        "#p5_enneagram_basics",
-        "#p5_enneagram_wings"
+        "#p5_enneagram_basics"
       ],
       "language_category": "ru"
     }

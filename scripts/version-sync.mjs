@@ -30,6 +30,7 @@ const ROOT = join(__dirname, '..');
 const VERSION_PATH = join(ROOT, 'src', 'VERSION');
 const PACKAGE_PATH = join(ROOT, 'package.json');
 const INDEX_PATH = join(ROOT, 'dist', 'index.html');
+const SCHEMA_PATH = join(ROOT, 'data', 'character_schema.json');
 
 // ============================================================================
 // VERSION EXTRACTION
@@ -116,6 +117,29 @@ async function checkVersionSync() {
     versions.index = null;
   }
 
+  // 3b. Read data/character_schema.json version (fence #9, 4th place)
+  if (existsSync(SCHEMA_PATH)) {
+    try {
+      const content = await readFile(SCHEMA_PATH, 'utf-8');
+      const schema = JSON.parse(content);
+      versions.schema = schema.version || null;
+      if (versions.schema) {
+        console.log(`✓ data/character_schema.json: ${versions.schema}`);
+      } else {
+        errors.push('data/character_schema.json has no "version" field');
+        console.log('✗ data/character_schema.json: NO VERSION FIELD');
+      }
+    } catch (e) {
+      errors.push('Failed to parse data/character_schema.json');
+      versions.schema = null;
+      console.log('✗ data/character_schema.json: PARSE ERROR');
+    }
+  } else {
+    errors.push('data/character_schema.json not found');
+    versions.schema = null;
+    console.log('✗ data/character_schema.json: NOT FOUND');
+  }
+
   // 4. Compare versions
   console.log('\n============================================');
   console.log('VERSION SYNC ANALYSIS');
@@ -138,6 +162,7 @@ async function checkVersionSync() {
     sourceVersion: versions.source,
     packageVersion: versions.package,
     indexVersion: versions.index,
+    schemaVersion: versions.schema,
     status,
     errors: errors.length > 0 ? errors : undefined
   };

@@ -42,15 +42,16 @@
   };
 
   // KI#70 WIRE (DEC-24 Q7, iter 158): appendix render order = the guide
-  // lettering A → B → C per the canon appendix files (appendix_mbti.md A.1,
-  // appendix_model_table.md B.1, appendix_glossary.md C.1). The manifest
-  // `appendices` array is alphabetical (a build-unified.mjs artifact), so the
-  // load list re-orders it here. Files not listed sort last (stable sort) —
-  // future appendices degrade gracefully.
+  // lettering A → E per the canon appendix files (appendix_mbti.md A.1,
+  // appendix_model_params.md E.1 — v3 stage 2, iter 172: Appendix B was absorbed
+  // into Appendix E, D stays canon-only; F-19/iter 177: Appendix C deleted, the
+  // glossary lives in the panel + its generated no-JS page). The
+  // manifest `appendices` array is alphabetical (a build-unified.mjs artifact),
+  // so the load list re-orders it here. Files not listed sort last (stable
+  // sort) — future appendices degrade gracefully.
   const APPENDIX_GUIDE_ORDER = [
     'appendix_mbti.html',        // Appendix A — MBTI Reference
-    'appendix_model_table.html', // Appendix B — Model Capability Table
-    'appendix_glossary.html'     // Appendix C — Глоссарий
+    'appendix_model_params.html' // Appendix E — Model, context & parameters
   ];
 
   // ============================================================================
@@ -72,10 +73,10 @@
     '06_cot': 'p6_cot_basics',
     '07_tech': 'p7a_system_prompt',
     '08_anti': 'p8_antipatterns_overview',
-    '09_diag': 'p9_troubleshooting',
+    '09_diag': 'p9_basic_checklist',
     '01_intro': 'p1_card_overview',
     '02_voice': 'p3_voice_isolation',
-    '10_examples': 'p10_elena_full'
+    '10_examples': 'p10_elena'
   };
 
   // Active redirect map — initialized from JSON fetch or fallback
@@ -798,7 +799,7 @@
       const manifest = await manifestResponse.json();
       // KI#70 WIRE (DEC-24 Q7, iter 158): appendices load after the Parts on
       // the same fetch pipeline — they inherit the KI#69 retry/placeholder
-      // machinery for free. Guide order A → B → C (APPENDIX_GUIDE_ORDER).
+      // machinery for free. Guide order A → E (APPENDIX_GUIDE_ORDER).
       const appendices = (manifest.appendices || []).slice().sort((a, b) =>
         APPENDIX_GUIDE_ORDER.indexOf(a.file) - APPENDIX_GUIDE_ORDER.indexOf(b.file)
       );
@@ -973,12 +974,31 @@
    * Tier 2: Section-level entries from NAV sections (data-toc-nav), hidden by default
    *
    * Mechanism:
-   * - Group sections by Part (using data-section prefix p{N}_)
-   * - First section of each Part (containing <h2>) becomes Tier 1 entry
-   * - Sections with data-toc-nav attribute become Tier 2 entries
+   * - Group sections by Part (using data-section prefix p{N}_ / p{NA}_ / p{NB}_)
+   * - The Part's first section supplies the Tier 1 label: `data-part-title`
+   *   when authored, else its own <h2>, else `Part N`
+   * - Sections with data-toc-nav attribute become Tier 2 entries (label = the
+   *   section's own first h2/h3, so a section is never labelled by its child)
    * - Sections with data-toc-exclude or id="glossary" are skipped entirely
    * - Text truncation removed (NAV-01): CSS text-overflow:ellipsis handles overflow
    */
+  /**
+   * Tier-1 TOC label for a Part.
+   * `data-part-title` on the Part's first section is the authored, single-source
+   * label (it matches the Part 0 module map and `parts/manifest.json`).
+   * Fallbacks preserve the pre-existing behaviour for parts without it.
+   * @param {Element} section - first section of the Part
+   * @param {string} partNum - part key parsed from data-section ("1"…"10", "7a", "7b")
+   * @returns {string}
+   */
+  function partTitleOf(section, partNum) {
+    const authored = (section.getAttribute('data-part-title') || '').trim();
+    if (authored) return authored;
+    const h2 = section.querySelector('h2');
+    if (h2) return h2.textContent.replace(/^[0-9.]+\s*/, '').trim();
+    return `Part ${partNum.toUpperCase()}`;
+  }
+
   function generateTOC() {
     const tocContent = $('#toc-content');
     if (!tocContent) return;
@@ -993,9 +1013,9 @@
       // Skip glossary and data-toc-exclude sections (NAV-01 §2.4, §3.6)
       if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return;
 
-      // Extract part number from data-section (format: p{N}_{topic})
+      // Extract part key from data-section (format: p{N}_{topic}, p{7a}_…, p{7b}_…)
       const sectionId = section.getAttribute('data-section') || section.id;
-      const partMatch = sectionId.match(/^p(\d+)_/);
+      const partMatch = sectionId.match(/^p(\d+[ab]?)_/);
       if (!partMatch) return;
 
       const partNum = partMatch[1];
@@ -1013,13 +1033,9 @@
       const partSections = partGroups[partNum];
       if (partSections.length === 0) return;
 
-      // Tier 1: Find h2 in first section of this Part
+      // Tier 1: authored Part title (data-part-title) — never the bare first heading
       const firstSection = partSections[0];
-      const h2 = firstSection.querySelector('h2');
-      if (!h2) return;
-
-      const partTitle = h2.textContent.replace(/^[0-9.]+\s*/, '').trim();
-      // partId intentionally not used — data-part attribute uses partNum directly
+      const partTitle = partTitleOf(firstSection, partNum);
 
       // Collect Tier 2 entries (sections with data-toc-nav)
       const navSections = partSections.filter(s => s.hasAttribute('data-toc-nav'));
@@ -1035,15 +1051,17 @@
       if (navSections.length > 0) {
         tocHtml += `<ul class="toc-sections hidden">`;
         navSections.forEach(navSection => {
-          // Display text: first h3 textContent, cleaned
-          const h3 = navSection.querySelector('h3');
+          // Display text: the section's own heading (h2 or h3 — whichever opens
+          // the section). Never a child heading: that mislabels sections whose
+          // title itself is an <h2> (the first section of every Part).
+          const ownHeading = navSection.querySelector('h2, h3');
           let linkText;
-          if (h3) {
-            linkText = h3.textContent.replace(/^[0-9.]+\s*/, '').trim();
+          if (ownHeading) {
+            linkText = ownHeading.textContent.replace(/^(?:\u00a7\s*)?\d+(?:\.\d+)+[.:]?\s*/, '').trim();
           } else {
             // Fallback: use data-section ID as slug-derived label
             linkText = navSection.getAttribute('data-section')
-              .replace(/^p\d+_/, '')
+              .replace(/^p\d+[ab]?_/, '')
               .replace(/_/g, ' ');
           }
           tocHtml += `<li class="toc-indent"><a href="#${navSection.id}">${linkText}</a></li>`;
@@ -1057,7 +1075,7 @@
     // KI#70 WIRE (DEC-24 Q7, iter 158): appendix sections get their own TOC
     // group after the Parts — the same «Приложения» convention the
     // auto-injected part-01 TOC uses. Entry text = the appendix section's own
-    // h2; DOM order = load order (guide lettering A → B → C). Part-number
+    // h2; DOM order = load order (guide lettering A → E). Part-number
     // active highlighting intentionally does not apply (its regex is
     // Part-scoped by design).
     const appendixSections = Array.from(sections).filter(section => {
@@ -1132,18 +1150,17 @@
     }
 
     const sections = $$('section[data-section]');
-    const partSections = []; // first section of each Part (contains h2)
+    const partSections = []; // first section of each Part (carries data-part-title or an h2)
 
     sections.forEach(section => {
       if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return;
       const sectionId = section.getAttribute('data-section') || section.id;
-      const partMatch = sectionId.match(/^p(\d+)_/);
+      const partMatch = sectionId.match(/^p(\d+[ab]?)_/);
       if (!partMatch) return;
       const partNum = partMatch[1];
       // Only track the first section of each Part
       if (partSections.find(ps => ps.partNum === partNum)) return;
-      const h2 = section.querySelector('h2');
-      if (h2) {
+      if (section.querySelector('h2') || section.hasAttribute('data-part-title')) {
         partSections.push({ partNum, section });
       }
     });
@@ -1589,11 +1606,11 @@
       if (total < 400) {
         budgetRangeEl.textContent = 'Минимум (<400)';
         budgetRangeEl.classList.add('over');
-      } else if (total <= 800) {
-        budgetRangeEl.textContent = 'Базовый (400–800)';
+      } else if (total <= 900) {
+        budgetRangeEl.textContent = 'Базовый (400–900)';
         budgetRangeEl.classList.add('budget-basic');
       } else if (total <= 1500) {
-        budgetRangeEl.textContent = 'Стандартный (800–1500)';
+        budgetRangeEl.textContent = 'Стандартный (900–1500)';
         budgetRangeEl.classList.add('budget-standard');
       } else if (total <= 2500) {
         budgetRangeEl.textContent = 'Расширенный (1500–2500)';

@@ -4,6 +4,13 @@
 
   Unified: All content at maximum depth
 -->
+<section  data-section="p2_basic_anchors" id="p2_basic_anchors" data-toc-nav data-part-title="Якоря: поведение в три шага">
+<!-- difficulty: BASIC -->
+<!-- canonical: Behavioral Anchor (T→A→P format) -->
+<h2>Поведенческие якоря (Behavioral Anchors)</h2>
+
+<p><strong>Якорь (Anchor)</strong> — это правило поведения персонажа в формате <strong>Триггер → Действие → Цена</strong>. Это основной механизм задания характера без бесконечного описания.</p>
+
 <!-- VS-EMBED: E03 — Behavioral Anchors / T→A→P -->
 <div class="vs-embed" data-vs-element="E03">
 <!-- 
@@ -113,19 +120,13 @@
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E03 -->
-<section  data-section="p2_basic_anchors" id="p2_basic_anchors" data-toc-nav>
-<!-- difficulty: BASIC -->
-<!-- canonical: Behavioral Anchor (T→A→P format) -->
-<h2>Поведенческие якоря (Behavioral Anchors)</h2>
-
-<p><strong>Якорь (Anchor)</strong> — это правило поведения персонажа в формате <strong>Триггер → Действие → Цена</strong>. Это основной механизм задания характера без бесконечного описания.</p>
 
 <p>Формат якорей показан выше в VS-EMBED E03 (сравнение верного и неверного T→A→P: Trigger → Action → Price с описанием каждого этапа). Таблица ниже — конкретные примеры для каждого этапа (дополняет E03, не дублирует описания).</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>#</th><th>Этап</th><th>Пример</th></tr>
+<tr><th scope="col">#</th><th scope="col">Этап</th><th scope="col">Пример</th></tr>
 </thead>
 <tbody>
 <tr><td>01</td><td><strong>TRIGGER (Триггер)</strong></td><td>Кто-то лжёт</td></tr>
@@ -139,14 +140,14 @@
 
 <section  data-section="p2_anchor_rules" id="p2_anchor_rules" data-toc-nav>
 <!-- difficulty: BASIC -->
-<!-- canonical: Anchor Rules (observable, physical Price, same-scene Price, concrete trigger) -->
+<!-- canonical: Anchor Rules (observable, physical Price, same-scene Price, concrete trigger) + ready anchors per trigger -->
 <h3>Правила якорей</h3>
 
 <h4>Рекомендуемое количество якорей</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Количество</th><th>Покрытие</th></tr>
+<tr><th scope="col">Количество</th><th scope="col">Покрытие</th></tr>
 </thead>
 <tbody>
 <tr><td>3-5</td><td>спокойствие, стресс, радость, разговор</td></tr>
@@ -172,7 +173,6 @@
 <p><strong>ПРАВИЛО:</strong> «Потом будет жалеть» — НЕ валидная цена (Price). Цена должна быть немедленной (см. §2.1). Если цена не появляется в ответе модели — якорь не работает.</p>
 </div>
 
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>НЕВЕРНО — Отложенная цена</h4>
@@ -187,9 +187,9 @@
 <p><strong>Типы цены (Price):</strong></p>
 <div class="table-wrap">
 <table>
-<thead><tr><th>Тип</th><th>Механика</th><th>Категории реакций</th><th>Пример (конкретный)</th></tr></thead>
+<thead><tr><th scope="col">Тип</th><th scope="col">Механика</th><th scope="col">Категории реакций</th><th scope="col">Пример (конкретный)</th></tr></thead>
 <tbody>
-<tr><td>Физиологический</td><td>Ограничивает действия тела</td><td>Усталость, боль, потеря равновесия → не может действовать так же</td><td>Ложь собеседника → прищуривается, молчит → <strong>напряжение в челюсти</strong> (Елена, §2.3)</td></tr>
+<tr><td>Физиологический</td><td>Ограничивает действия тела</td><td>Усталость, боль, потеря равновесия → не может действовать так же</td><td>Ложь собеседника → прищуривается, молчит → <strong>напряжение в челюсти</strong> (Елена, примеры ниже)</td></tr>
 <tr><td>Вербально-поведенческий</td><td>Наблюдаемый вербальный маркер</td><td>голос становится тише, обрывание фразы, лексика упрощается</td><td>Сарказм собеседника → пауза 2 сек → <strong>обрывание фразы, голос тише</strong> (Уолтер, <a href="#p10_walter">Part 10 §10.2 — якоря FLAW-linked</a>)</td></tr>
 </tbody>
 </table>
@@ -199,31 +199,34 @@
 <p><strong>ПРАВИЛО:</strong> Граница влияния: Персонаж реагирует только на наблюдаемые действия {{user}} (может заметить, что {{user}} вздрогнул — не может заявить, что {{user}} напуган). → <a href="#p7a_core_directives">Part 7A: CORE DIRECTIVES #5</a></p>
 </div>
 
-</section>
+<h4>Примеры якорей по триггерам</h4>
 
-<section  data-section="p2_anchor_examples" id="p2_anchor_examples">
-<!-- difficulty: BASIC -->
-<h3>Примеры якорей по триггерам</h3>
-
-<p>Ниже — таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Цена — всегда физическая реакция, наблюдаемая в той же сцене.</p>
+<p>Таблица готовых якорей для разных триггеров. Каждый якорь следует формату Триггер → Действие → Цена. Цена — всегда физическая реакция, наблюдаемая в той же сцене.</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Триггер</th><th>Действие</th><th>Цена</th><th>Персонаж</th></tr>
+<tr><th scope="col">Триггер</th><th scope="col">Действие</th><th scope="col">Цена</th><th scope="col">Персонаж</th></tr>
 </thead>
 <tbody>
 <tr><td>Ложь</td><td>Прищуривается, молчит</td><td>Напряжение в челюсти</td><td>Елена</td></tr>
-<tr><td>Стресс</td><td>Трёт шею</td><td>Головная боль</td><td>Елена</td></tr>
-<tr><td>Радость</td><td>Редкая улыбка</td><td>Краснеет</td><td>Елена</td></tr>
-<tr><td>Чужая память</td><td>Поглощает, глаза закатываются</td><td>Теряет своё воспоминание</td><td>Выщербленный</td></tr>
+<tr><td>Вопрос о её работе вслух (похвала)</td><td>Трёт шею, щёки горят</td><td>Пальцы сжимают ручку до белизны</td><td>Елена</td></tr>
+<tr><td>Неожиданная похвала</td><td>Редкая улыбка, взгляд в сторону</td><td>Краснеет, отворачивается</td><td>Елена</td></tr>
+<tr><td>Чужая память рядом</td><td>Поглощает, глаза закатываются</td><td>Левая рука ноет остаток дня, пальцы теряют чувствительность</td><td>Выщербленный</td></tr>
 <tr><td>Вопрос о прошлом</td><td>Пауза, взгляд внутрь</td><td>Дрожь в руках, взгляд теряет фокус</td><td>Выщербленный</td></tr>
-<tr><td>Разговор</td><td>Короткие фразы</td><td>—</td><td>Елена</td></tr>
+<tr><td>Small talk с незнакомцем</td><td>Короткие фразы, скрещивает руки</td><td>Сжимает чашку, голос становится тише</td><td>Елена</td></tr>
 </tbody>
 </table>
 </div>
 
 </section>
+
+<section  data-section="p2_embodiment" id="p2_embodiment" data-toc-nav>
+<!-- difficulty: BASIC -->
+<!-- canonical: Embodiment Protocol (Состояние→Тело→Сенсор→Речь, State→Body→Sensor→Speech) -->
+<h3>Телесность (Embodiment)</h3>
+
+<p><strong>Embodiment</strong> — протокол связи эмоционального состояния с телесной реакцией. Каждая эмоция должна проявляться физически.</p>
 
 <!-- VS-EMBED: E04 — Embodiment Protocol -->
 <div class="vs-embed" data-vs-element="E04">
@@ -314,19 +317,13 @@
 
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E04 -->
-<section  data-section="p2_embodiment" id="p2_embodiment" data-toc-nav>
-<!-- difficulty: BASIC -->
-<!-- canonical: Embodiment Protocol (Состояние→Тело→Сенсор→Речь, State→Body→Sensor→Speech) -->
-<h3>Телесность (Embodiment)</h3>
-
-<p><strong>Embodiment</strong> — протокол связи эмоционального состояния с телесной реакцией. Каждая эмоция должна проявляться физически.</p>
 
 <p>Протокол телесности показан выше в VS-EMBED E04 (funnel-stack из 4 слоёв: Состояние → Тело → Сенсор → Речь (State → Body → Sensor → Speech), каждый с depth-меткой «Внутренний / Физический / Перцептивный / Вывод» и примером в характере). Таблица ниже — типовые категории примеров для каждого слоя (дополняет E04, не дублирует описания).</p>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>#</th><th>Слой</th><th>Пример</th></tr>
+<tr><th scope="col">#</th><th scope="col">Слой</th><th scope="col">Пример</th></tr>
 </thead>
 <tbody>
 <tr><td>01</td><td><strong>СОСТОЯНИЕ</strong></td><td>Вес / Баланс / Дыхание / Микро-движение</td></tr>
@@ -343,7 +340,7 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Персонаж</th><th>Состояние</th><th>Тело</th><th>Сенсор</th><th>Речь</th></tr>
+<tr><th scope="col">Персонаж</th><th scope="col">Состояние</th><th scope="col">Тело</th><th scope="col">Сенсор</th><th scope="col">Речь</th></tr>
 </thead>
 <tbody>
 <tr><td>Выщербленный</td><td>Тяга к чужой памяти</td><td>Руки дрожат</td><td>Запах старой бумаги</td><td>Формальные фразы с сбоями</td></tr>
@@ -359,7 +356,7 @@
 
 </section>
 
-<section  data-section="p2_env_reactivity" id="p2_env_reactivity">
+<section  data-section="p2_env_reactivity" id="p2_env_reactivity" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Environmental Reactivity -->
 <h3>Реактивность среды (Environmental Reactivity)</h3>
@@ -374,7 +371,7 @@
 
 </section>
 
-<section  data-section="p2_sensory_anchors" id="p2_sensory_anchors">
+<section  data-section="p2_sensory_anchors" id="p2_sensory_anchors" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Sensory Anchors (5 channels) -->
 <h3>Сенсорные якоря (Sensory Anchors)</h3>
@@ -387,7 +384,7 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Канал</th><th>Пример триггера</th><th>Пример действия</th></tr>
+<tr><th scope="col">Канал</th><th scope="col">Пример триггера</th><th scope="col">Пример действия</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>Тактильный</strong></td><td>Прикосновение к спине</td><td>Вздрагивает, отступает</td></tr>
@@ -400,7 +397,6 @@
 </div>
 
 <h4>Пример: Выщербленный</h4>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <!-- Demonstrates: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY -->
 <pre><code>Sensory Anchors:
 - Тактильный: Когда чужое касание → тело реагирует раньше ума → дрожь

@@ -457,6 +457,12 @@ recorded as deferred observations (map §5.14 P7A-4).
 
 ## 5. Part 9 — Diagnostics (`docs/canon/part_09.md`, 11 sections)
 
+> **iter 173 (v3 restructure S3):** Part 9 is now **7 sections** — the row keys below are the pre-S3
+> registry keys, kept as historical audit records (KI#86). Absorbed: `p9_quality_scale` → §9.5,
+> `p9_additional_problems` → §9.2, `p9_element_scenario_map` → §9.6, `p9_test_requirements` → §9.6;
+> renumbered: entry = `p9_basic_checklist` §9.1, symptoms §9.2, tree §9.3, one-change §9.4,
+> checklist §9.5, tests §9.6, 12B §9.7. The live diagnostics gate was re-pointed in the same iteration.
+
 ### p9_quality_scale (§9.1)
 
 | id | lines | block | tag | decision | load | repeat | presentation | notes |
@@ -1095,6 +1101,11 @@ R29 pre-fix state). Master-only enrichments + variances recorded as deferred obs
 
 ## 12. Part 8 — Anti-patterns (`docs/canon/part_08.md`, 16 sections)
 
+> **iter 173 (v3 restructure S3):** Part 8 is now **2 sections** — `p8_antipatterns_overview`
+> (E12 catalog inside the section) + `p8_worked_examples` (15 `<details>`). The per-AP row keys
+> below are the pre-S3 registry keys, kept for the `migration_map_v2 SP-` back-pointers (the
+> sampling gate still asserts `p8_ap5_reppen_high::01`) and as the historical audit record (KI#86).
+
 > Design note: E12 (viz) = quick-scan catalog («Canonical location для сводного обзора», §8.1 marker);
 > per-AP subsections = detail layer with before/after demos. Keep-by-design rationale documented
 > iter 31 (KI#18-G, canon front-matter). The matrix treats the per-AP sections as catalog-application
@@ -1254,6 +1265,11 @@ pre-fix states). Master-only enrichments + variances recorded as deferred observ
 ---
 
 ## 13. Part 10 — Examples (`docs/canon/part_10.md`, 4 sections)
+
+> **iter 173 (v3 restructure S3):** Part 10 is now **5 sections** — `p10_index` «Какую карточку взять»
+> was added ahead of the four cards (which keep their ids, numbering and `<details>` collapse). The
+> four rows below remain the card registry; the in-card lecture/annotation sites listed there were
+> moved out of the templates into post-template notes in iter 173 (KI#86 for the historical record).
 
 > All four sections are protected example cards (research §21 / Editorial Policy Rule 5): copy-paste
 > production artifacts. In-card re-use of teaching material (R22/R23) is the card's function.

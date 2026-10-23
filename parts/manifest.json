@@ -4,7 +4,7 @@
   "parts": [
     {
       "file": "part_00.html",
-      "title": "Как читать этот гайд",
+      "title": "Перед стартом",
       "anchors": [
         "p0_how_to_read",
         "p0_tldr_quick_start"
@@ -12,7 +12,7 @@
     },
     {
       "file": "part_01.html",
-      "title": "Зачем системный подход?",
+      "title": "Основы: анатомия карточки",
       "anchors": [
         "p1_value_proposition",
         "p1_card_overview",
@@ -24,11 +24,10 @@
     },
     {
       "file": "part_02.html",
-      "title": "Поведенческие якоря (Behavioral Anchors)",
+      "title": "Якоря: поведение в три шага",
       "anchors": [
         "p2_basic_anchors",
         "p2_anchor_rules",
-        "p2_anchor_examples",
         "p2_embodiment",
         "p2_env_reactivity",
         "p2_sensory_anchors"
@@ -36,53 +35,42 @@
     },
     {
       "file": "part_03.html",
-      "title": "Изоляция голоса (Voice Isolation)",
+      "title": "Голос и изоляция",
       "anchors": [
         "p3_voice_isolation",
         "p3_influence_hierarchy",
         "p3_examples_rules",
-        "p3_examples_quality",
         "p3_greeting_ref",
-        "p3_voice_leak",
-        "p3_joker_case",
-        "p3_multi_char"
+        "p3_voice_leak"
       ]
     },
     {
       "file": "part_04.html",
-      "title": "Обзор SPINE",
+      "title": "SPINE: психологический каркас",
       "anchors": [
         "p4_spine_overview",
         "p4_ghost",
         "p4_lie",
         "p4_flaw",
         "p4_need",
-        "p4_want",
-        "p4_spine_full_chain",
-        "p4_spine_mapping",
-        "p4_spine_check",
-        "p4_spine_navigation",
-        "p4_ghost_layers"
+        "p4_spine_full_chain"
       ]
     },
     {
       "file": "part_05.html",
-      "title": "Психологический инструментарий",
+      "title": "Психология: OCEAN и типология",
       "anchors": [
         "p5_ocean_basics",
         "p5_elena_profile",
-        "p5_ocean_warning",
         "p5_enneagram_basics",
         "p5_cross_instrument_map",
-        "p5_enneagram_wings",
         "p5_cross_matrix"
       ]
     },
     {
       "file": "part_06.html",
-      "title": "CoT (цепочка рассуждений)",
+      "title": "CoT: внутренний монолог",
       "anchors": [
-        "p6_cot_bridge",
         "p6_cot_basics",
         "p6_cot_tiers",
         "p6_cot_tier2",
@@ -92,7 +80,7 @@
     },
     {
       "file": "part_07a.html",
-      "title": "Системный промпт (System Prompt): структура и сборка",
+      "title": "Системный промпт и сборка",
       "anchors": [
         "p7a_system_prompt",
         "p7a_core_directives",
@@ -111,7 +99,7 @@
     },
     {
       "file": "part_07b.html",
-      "title": "Part 07b",
+      "title": "Lorebook, приветствие и инъекции",
       "anchors": [
         "p7b_structured_inject",
         "p7b_greeting",
@@ -125,44 +113,27 @@
       "title": "Анти-паттерны",
       "anchors": [
         "p8_antipatterns_overview",
-        "p8_ap1_token_bloat",
-        "p8_ap2_missing_price",
-        "p8_ap3_voice_in_description",
-        "p8_ap4_ghost_in_sp",
-        "p8_ap5_reppen_high",
-        "p8_ap6_no_anti_godmoding",
-        "p8_ap7_presence_penalty",
-        "p8_ap8_ghost_no_anchors",
-        "p8_ap9_spine_broken",
-        "p8_ap10_cot_overload",
-        "p8_ap11_voice_bleed",
-        "p8_ap12_xml_malformed",
-        "p8_ap13_lorebook_conflict",
-        "p8_ap14_context_violation",
-        "p8_ap15_nested_anchors"
+        "p8_worked_examples"
       ]
     },
     {
       "file": "part_09.html",
       "title": "Диагностика и тестирование",
       "anchors": [
-        "p9_quality_scale",
-        "p9_one_change_rule",
         "p9_basic_checklist",
-        "p9_additional_problems",
         "p9_symptom_table",
         "p9_decision_tree",
+        "p9_one_change_rule",
+        "p9_pre_deploy",
         "p9_test_scenarios",
-        "p9_element_scenario_map",
-        "p9_test_requirements",
-        "p9_12b_issues",
-        "p9_pre_deploy"
+        "p9_12b_issues"
       ]
     },
     {
       "file": "part_10.html",
-      "title": "Полные примеры карточек",
+      "title": "Полные карточки",
       "anchors": [
+        "p10_index",
         "p10_elena",
         "p10_walter",
         "p10_omnis",
@@ -172,13 +143,6 @@
   ],
   "appendices": [
     {
-      "file": "appendix_glossary.html",
-      "title": "Глоссарий",
-      "anchors": [
-        "appendix_glossary"
-      ]
-    },
-    {
       "file": "appendix_mbti.html",
       "title": "MBTI (Appendix A)",
       "anchors": [
@@ -186,10 +150,10 @@
       ]
     },
     {
-      "file": "appendix_model_table.html",
-      "title": "Таблица возможностей моделей (Model Capability Table)",
+      "file": "appendix_model_params.html",
+      "title": "Модель, контекст и параметры генерации",
       "anchors": [
-        "appendix_model_table"
+        "appendix_model_params"
       ]
     }
   ]

@@ -1,6 +1,6 @@
 # Visual Component Registry — Live Character Guide v9.2
 
-> **Version:** 9.2.0
+> **Version:** 9.2.6
 > **Last Updated:** 2026-09-16
 > **Status:** Canonical Reference
 
@@ -27,32 +27,39 @@ This document defines the **complete set of CSS classes and HTML structures** av
 
 ## 1. CALLOUT — Highlighted Information Block
 
-### Available Variants
+**F-20 (iter 178): ONE label vocabulary, ONE treatment.** Every labelled block in the guide is a
+`.callout` whose first paragraph is `<p><strong>LABEL:</strong> …</p>`, where `LABEL` is exactly one of:
 
-| Class | Purpose | Visual |
-|-------|---------|--------|
-| `.callout` | Base callout (gray) | Gray left border |
-| `.callout.warn` | Warning/anti-pattern | Red/orange accent |
-| `.callout.tip` | Recommendation | Green accent |
-| `.callout.important` | Important note | Blue/cyan accent |
-| `.callout.rule` | Mandatory principle / rule | Solid red left border |
-| `.callout.rec` | Best practice / recommendation | Dashed amber left border |
-| `.callout.ex` | Illustrative example | Dotted blue left border |
+| Label | Class | Strength (DEC-20) | Visual |
+|-------|-------|-------------------|--------|
+| `ПРАВИЛО` | `.callout.rule` | RULE — violation is a quality regression | solid red left border |
+| `РЕКОМЕНДАЦИЯ` | `.callout.rec` | GUIDELINE — desirable, not mandatory | dashed amber left border |
+| `ПРИМЕР` | `.callout.ex` | EXAMPLE — how it looks in practice | dotted blue left border |
+| `НАБЛЮДЕНИЕ` | `.callout` | OBSERVATION — practical note, not a rule | gray left border |
+
+`scripts/validate-master.mjs` (Check 8) rejects any other callout label, a callout that does not
+open with `<p><strong>LABEL:</strong>`, and any use of the retired `example-label` chip class.
+The former `.callout.warn` / `.tip` / `.important` / `.info` variants are prohibited (not defined).
 
 ### HTML Structure
 
 ```html
-<div class="callout warn">
-  <p><strong>⚠️ Warning:</strong> Description here.</p>
-  <p>Additional details.</p>
+<div class="callout rule">
+  <p><strong>ПРАВИЛО:</strong> У каждого якоря есть цена (Price) в той же сцене.</p>
 </div>
 
-<div class="callout tip">
-  <p><strong>💡 Tip:</strong> Description here.</p>
+<div class="callout rec">
+  <p><strong>РЕКОМЕНДАЦИЯ:</strong> Каждый пример содержит хотя бы одну физическую реакцию.</p>
 </div>
 
-<div class="callout important">
-  <p><strong>📌 Important:</strong> Description here.</p>
+<div class="callout ex">
+  <p><strong>ПРИМЕР:</strong> описание-украшение против действия.</p>
+  <p>❌ «Комната была украшена гобеленами.» — украшение.</p>
+  <p>✅ «Елена провела пальцами по стойке — липко.» — действие и сенсорика.</p>
+</div>
+
+<div class="callout">
+  <p><strong>НАБЛЮДЕНИЕ:</strong> В учебном гайде у каждого персонажа один канонический GHOST.</p>
 </div>
 ```
 
@@ -66,72 +73,19 @@ This document defines the **complete set of CSS classes and HTML structures** av
   background: rgba(128, 128, 128, 0.05);
 }
 
-.callout.warn {
-  border-left-color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
-}
-
-.callout.tip {
-  border-left-color: #22c55e;
-  background: rgba(34, 197, 94, 0.1);
-}
-
-.callout.important {
-  border-left-color: #38bdf8;
-  background: rgba(56, 189, 248, 0.1);
-}
-```
-
-### `.callout.rule` — Mandatory Principle
-
-Used for foundational rules that must be followed. Solid red left border signals importance.
-
-```html
-<div class="callout rule">
-  <p><strong>RULE:</strong> Every anchor must have a Price.</p>
-</div>
-```
-
-```css
 .callout.rule {
   border-color: var(--color-error, #ef4444);
   background: rgba(239, 68, 68, 0.06);
 }
 .callout.rule strong { color: #fca5a5; }
-```
 
-### `.callout.rec` — Best Practice / Recommendation
-
-Used for recommended practices. Dashed amber left border distinguishes from mandatory rules.
-
-```html
-<div class="callout rec">
-  <p><strong>RECOMMENDATION:</strong> Each Example should contain at least one physical reaction.</p>
-</div>
-```
-
-```css
 .callout.rec {
   border-color: var(--color-warning, #f59e0b);
   border-left-style: dashed;
   background: rgba(245, 158, 11, 0.06);
 }
 .callout.rec strong { color: #fde047; }
-```
 
-### `.callout.ex` — Illustrative Example
-
-Used for inline examples that demonstrate a concept. Dotted blue left border.
-
-```html
-<div class="callout ex">
-  <p><strong>EXAMPLE:</strong> Decorative description vs action:</p>
-  <p><strong>WRONG:</strong> "The room was decorated with tapestries."</p>
-  <p><strong>CORRECT:</strong> "Elena ran her fingers along the bar — sticky."</p>
-</div>
-```
-
-```css
 .callout.ex {
   border-color: var(--color-info, #06b6d4);
   border-left-style: dotted;
@@ -142,8 +96,6 @@ Used for inline examples that demonstrate a concept. Dotted blue left border.
 
 ### Light Theme Overrides
 
-All three new callout variants have light theme overrides:
-
 ```css
 body.theme-light .callout.rule { background: rgba(239, 68, 68, 0.05); }
 body.theme-light .callout.rule strong { color: #dc2626; }
@@ -152,9 +104,6 @@ body.theme-light .callout.rec strong { color: #d97706; }
 body.theme-light .callout.ex { background: rgba(6, 182, 212, 0.05); }
 body.theme-light .callout.ex strong { color: #0891b2; }
 ```
-
-### BUG-3 Fix Note
-`.callout.important` was used in v5.12 HTML but not defined in CSS. v6 adds this definition.
 
 ---
 
@@ -396,7 +345,7 @@ details.interactive[open] summary {
     <p>Description of the solution.</p>
   </div>
   <div class="example-block">
-    <h4>📝 Example</h4>
+    <p>Пример: описание проблемы в одном предложении.</p>
     <pre><code>Example code here</code></pre>
   </div>
 </div>
@@ -548,8 +497,9 @@ Copy buttons are **automatically added** by `lazy-loader.js` to all `<pre>` bloc
 
 | Prohibited | Reason | Alternative |
 |------------|--------|-------------|
-| `.callout.info` | Not defined | Use `.callout.important` |
-| `.tag.warn` | Not defined | Use `.tag.risk` |
+| `.callout.warn` / `.tip` / `.important` / `.info` | Not defined; validator rejects them | One of the four labels: `.callout.rule` / `.rec` / `.ex` / base `.callout` |
+| `.example-label` | Retired chip (F-20) | `.callout` with the label in the first `<p>` |
+| `.tag.warn` / `.opt` / `.risk` / `.advanced` / `.tip` | Validator rejects them | `.tag.core` |
 | Inline `<style>` | All styles in CSS file | Use registry classes |
 | Custom CSS classes | Not in registry | Request infrastructure approval |
 
@@ -569,4 +519,4 @@ If you need a new CSS class:
 
 ---
 
-*Document prepared for Live Character Guide v9.2.0*
+*Document prepared for Live Character Guide v9.2.6*

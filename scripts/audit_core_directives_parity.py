@@ -46,9 +46,9 @@ Checks:
 Deferred layers (reported as notes, never failures):
   - visual-system/elements/E08-core-directives.html + component-extracts/E08-*
     (disposition REMOVED_WITH_REASON — DECIDED DEC-19, executed iter 138: removed);
-  - docs/canon/appendix_glossary.md + src/master/appendix_glossary.html (frozen
-    v1 migration source; full annotated copy superseded by registry C-5 —
-    disposed at the v2 switch, DEC-18);
+  - docs/canon/appendix_glossary.md + src/master/appendix_glossary.html (deleted
+    iter 177 — F-19/DEC-31: one glossary surface; the registry -> generated JSON
+    -> panel/no-JS page chain replaced the 25-term frozen v1 appendix);
   - agent-doc condensed references (AGENT_NAVIGATION.md §5, docs/architecture.md
     CORE DIRECTIVES table) — REFERENCE_ONLY, not guide presentations.
 
@@ -80,10 +80,12 @@ INVARIANT_7 = "PRE-GENERATION FILTER"
 
 # Canonical shorthand forms (DEC-08).
 SHORTHAND_ASSEMBLY = "{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}"
-SHORTHAND_MASTER_LINK = (
-    '{{CORE_DIRECTIVES — канонический шаблон → '
-    '<a href="#p7a_core_directives">§7A.2</a>}}'
-)
+# v3 stage 2 (iter 172, F-05): the master form is PLAIN TEXT. The previous master
+# form embedded <a href="#p7a_core_directives">§7A.2</a> INSIDE <pre><code> — an
+# anchor inside a copy-paste template (the F-05 blocker). The navigation link now
+# lives in the surrounding prose (§7A.13 step 3), outside the template; the
+# section still links #p7a_core_directives (checked separately below).
+SHORTHAND_MASTER_LINK = SHORTHAND_ASSEMBLY
 
 # A numbered-template directive line, e.g. "3. SPATIAL & ANATOMICAL LOCK: Track ...".
 DIRECTIVE_LINE_RE = re.compile(
@@ -439,7 +441,7 @@ def main():
               MASTER_DIR / "appendix_glossary.html"):
         deferred.append(f"{p.relative_to(REPO)}: "
                         f"{'present' if p.exists() else 'MISSING'} "
-                        f"(frozen v1 — disposed at the v2 switch, DEC-18)")
+                        f"(frozen v1 — DELETED iter 177, F-19/DEC-31: one glossary surface)")
     notes.extend(deferred)
 
     return finish()

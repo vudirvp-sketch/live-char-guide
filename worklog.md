@@ -4,51 +4,77 @@
 > Full history is in `git`.
 
 ---
-Task ID: iter-170-switch (iters 166-169 below)
-Agent: main
-Task: the DEC-25 called package executed end-to-end: the G1-G4 reconciliations as their own bounded slices -> the switch (Q8 one-pass full-battery re-run + the Q9 v1-freeze record). The owner's session go-ahead «продолжай работы по планам!» = the go-ahead on the iter-165 package (the DEC-18/19+20/21/22+23/24 single-reply precedent — the only prepared plan pending a call).
+
+Task ID: iter-181-audit-fix-sweep
+Agent: main (lead), solo
+Task: Owner-mandated fix sweep of the audit-181 findings — all visualizations, tables and rule blocks (37 findings: 16 P1 / 18 P2 / 3 tooling).
 
 Work Log:
-- 0: Preflight: clone at BASE_COMMIT `0b1429fd` (iter 165), worktree clean; the law docs re-read (AGENTS, NAV, STATUS, the package, the spec §3/§7/§8, map §5.24/§5.25, DEC-24); the baseline battery re-verified green in the sandbox before any edit (x7 PASS, sync 97/97, drift 140, build hash `2ab607d6`, validate/validate:master, version 9.2.6, tests 64/64, lint, qa gates, baselines 18/238, both reader-path tools PASS).
-- 1: **iter 166 — G1 (A1) executed:** canon `part_07a.md` §7A.7 — the CoT row «✗ / Tier 1 / Tier 2–3» -> «Tier 0 (`[ref: part_06.md §6.3 — Уровни CoT (Tiers)]`) / Tier 1–2 / Tier 2–3» (the §6.3 tier-definition owner alignment); master `part_07a.html` §7A.7 — the ul values aligned (Tier 0 + the `#p6_cot_tiers` link; the 32B+ AG gap filled «Anti-godmoding 2 строки»; «(негатив + позитив)» -> the canon «(запрет + позитив)»); the E17 checklist cells re-pointed (0–1 -> Tier 0, 1–2 -> Tier 1–2, 3 -> Tier 2–3; the API AG cell 2 -> 1 строка); `scripts/audit_sampling_parity.py` extended — the §7A.7 capability locks (canon CoT/AG row values + the §6.3 ref; the master ul needles + the stale «Tier 0–1» ban; the E17 cell needles/bans + the AG 2/2/1 count; the root-fallback needles). Battery green (drift 140 unchanged — the canon/master edits in lockstep).
-- 2: **iter 167 — G2 executed (the 27-item table as printed; the sub-calls per recommendations):** canonizations — part_04 §4.8 (the «Пример (Елена)» 4th column + the «Мнемоника (SPINE → Anchors)» line), part_05 §5.1 (the «/ тревожный тип» + «/ агрессивный тип» suffixes), part_06 §6.3 (the «CoT — дополнительный внутренний монолог сверх Embodiment, не замена ему» sentence), part_07a §7A.13 (the two [ref:] pointer lines — §7A.12 + part_10 §10.1), part_09 §9.11::06 (the RU explanation under the EN blockquote — the executable-adjacent sub-call), part_10 §10.1 (Elena's Tone Frame + OOC PROTECTION lines); master alignments — part_05 §5.2 («дефект:» -> the canon «FLAW:») + §5.5 (the MBTI Appendix A link — P-app-4(f)), part_07a («Recap-чек-лист» -> «Сводный чек-лист»), part_08 §8.5 (GHOST/FLAW -> призрак/дефект), part_10 (the Omnis Embodiment 5th item mirrored to the canon «Голос: синтезированный…» — the §3.X vague ref dies with the old line); disposals/repairs — part_08 (the four outside-wrapper glide transitions REMOVED_WITH_REASON (the Part-2 §2.3 v7 precedent), the four vacant example-label chips disposed, the §8.9 title EN gloss dropped, the §8.16 h3 moved inside the antipattern-card), part_10 (the top-of-part voice ПРАВИЛО re-framed to the §3.1 linguistic/physical split — the P10-4(c) sub-call); part_06 master §6.3 mirrored the new sentence. The ~10 keep/no-action items untouched. Battery green; drift 140 -> 141 (+1 — the canonized §4.8 mnemonic has no master paragraph: master renders it as the infographic; disclosed).
-- 3: **iter 168 — G3 (B + the Omnis align) executed:** `appendix_character_map.md` ::05 — the РЕКОМЕНДАЦИЯ block re-framed to НАБЛЮДЕНИЕ («ориентировочно», «выведены из фактических карточек Part 10; фактические итоги примеров могут выходить за них», the `[ref: part_07a.md §7A.12]` normative-owner defer; the ranges kept as printed — the framing re-label per the called consequence); the Omnis intro line ~1800 -> ~2150 (canon part_10 + master mirror + part_00 — one value family). **KI#77 (e) CLOSED.** Battery green; drift 141.
-- 4: **iter 169 — G4 (a)+(a) executed:** `src/master/part_00.html` created (2 sections, the canon mirror; h2/h2, data-toc-nav, difficulty comments, the [ref:]-><a> links, EN snippets in <code>); canon part_00 front-matter + the «Что это» blockquote de-staled + the ~2150 alignment; `scripts/build-unified.mjs` — the partLabels['00'] + anchorToTitle p0 entries (the TOC placement); `src/shell/index.html` — the `<noscript>` glossary link («Глоссарий (версия без JavaScript)»); `scripts/readerpath_audit_iter164.py` aligned to the wired corpus (GUIDE_ORDER + part_00, L1 the part_00 entry, 96 -> 98, the LEARN-1/REFERENCE-1 finding guards flipped to the resolved-state checks — the disclosed iter-148/155 tooling-alignment precedent); `docs/content_map.md` — the Part 0 rows/summary/counting-convention updated (98 rendering; 99 declared unchanged; Appendix D the sole conceptual-only). Build: **hash `2ab607d6` -> `c1518874`** (the shell-file hash source — the disclosed G4-REF consequence); the manifest: part_00 first, 12 parts, 98 anchors == master sections. Battery green; drift 141 -> 143 (+2 — the part_00 canon/master list-blob rendering boundary, the KI#79-adjacent family; disclosed).
-- 5: **iter 170 — the switch executed:** Q8 — the one-pass full-battery re-run at the final HEAD: build (hash `c1518874`) · the 7 cluster gates x7 PASS (incl. the iter-166-extended sampling gate) · sync 97/97 · drift 143 (informational) · validate · validate:master (12 checks) · version:check 9.2.6 · tests 64/64 · lint · qa:csp/bundle/contrast PASS · qa:doc-versions exit 0 · baselines exact english 18 / syntax 238 · **both reader-path tools PASS** (`readerpath_audit_iter164.py` — Learn (the Part-0 entry, 12-part linear, 98/98) / Build / Reference green; `debug_readerpath_audit_iter139.py` — the Debug chain green) · the CA cross-pass re-verified inline (99 canon IDs declared / 98 rendering / master == manifest / the sole conceptual-only = Appendix D / every canon ID in content_map) · `git diff --check` clean. Q9 — v1 frozen/archived as the immutable migration source forever (the DEC-19 pattern: git history + the DEC-25 record; no disposal). DEC-25 appended; the package status header updated (CALLED + EXECUTED); STATUS (iter 170, the KI#77 closure, the v2-invariant extension, the Next step re-pinned post-migration); PLAN v2-switch -> COMPLETE; this worklog; CHANGELOG; NAV; map §5.26 + the §7 log.
+- 0: Preflight — BASE_COMMIT `3189699e` (iters 171-180 uncommitted, preserved as the review-candidate base). Full audit battery before edits: 18/18 gates green, baselines english 1 / syntax 226.
+- 1: **Garbage cluster** (part_04/07b/08/09): «Продвинуто Опционально» deleted; «§4.6, §4.6» ×3 (checklist row 10, AP-9 fix, AP-9 summary) fixed; `{{user}}` braces restored; EN remnant removed; AP-9 problem-block annotation rewritten (lowercase + verbatim echo); AP-10 ПРАВИЛО→НАБЛЮДЕНИЕ (label semantics); AP-2/5/7 gained «Проверка»/«Различающий сигнал» lines (§8.2 contract: every block adds unique material); AP-8 example anchor gained its Price; part_04: inverted echo, РЕКОМЕНДАЦИЯ→НАБЛЮДЕНИЕ exposition, «одиночный призрак»→GHOST Layers label, dangling referent, pseudo-heading→h4, cross-ref label matched, variant rows labeled + full NEED restored, E06-duplicate architecture table compressed to a transition line (unique per-level data kept in the Выщербленный example), anchor-price pairs unified across the 3 sites (canon L269/285 + master L581/601/619), Vyshcherblenny LIE unified to the full form (4 sites incl. canon), E05 hex examples → canonical Elena (LIE/FLAW/NEED/WANT), E05 panel «двигает→блокирует» + agreement fixed; part_09: «якоре»→«якорь» ×2.
+- 2: **Visual honesty cluster**: E07 — two-scale axis made honest (top labels = row-1 compressed scale 20/40/80%, lower labels 10/20/40% added under the split line, grid comment corrected + grid confined to the lower section, split-axis note states both scales); E09 — legend «<30 >70 экстремум · 30-40/60-70 осторожно · 40-60 безопасно» + value colors: N=68 cyan→amber, C=65 neutral→amber (band-consistent with A=38); E17 — Top K 40–80→40–100 (canonical «32B+/API»); E08 — badge `[Model ↗]` x=695 clips in viewBox 700 → `text-anchor="end" x="698"`.
+- 3: **Numeric drift cluster**: Examples budget → §7A.12 40/60/80 everywhere (part_00 «80–120»→«~40–80», part_03 «80-120 (40-80 минимально)»→«~40–80», part_09 symptom «длиннее 120→80», «≤120→≤80»); token calculator → §7A.12/§7A.13 (Examples slider 80–400 default 180, static Итого 510 = 80+200+180+50, range 400–900; lazy-loader.js JS band thresholds + canon calculator description synced); Omnis §10.3 note → all 4 extremes named + SPINE grounding (16K+ ceiling legality); Appendix E 4K table → re-based inside §7A.12 (Examples 130–160 = 2×65–80; SP/Description/Greeting full-column = §7A.12 ranges); stress-type table → disjoint bands (N>70 vs N 60–70) + in-band examples (Елена N=68 row-3 + projected N>70 row-1; Интроверт N=72→N=65); §5.2 RULE restatement → §5.1 link (Elena verdict kept); §5.1 inner duplicate → cross-ref; §5.4 per-row pole numerics stripped (intro carries the §5.1 link once); type-6 stress example → «тревожное ожидание» (6→3, matches §5.3 + data/enneagram.json); part_02 ready-anchors → concrete triggers (похвала вслух / small talk) + observable prices (рука ноет остаток дня — instead of «теряет воспоминание», ручка до белизны — instead of «головная боль»); «мульти-персонажность» false label → «полная структура с GHOST Layers + CoT + Lorebook» (part_01 + part_10 comment + canon); «Елена | Выщербленный» one-link pair → two links.
+- 4: **A11y cluster**: `scope="col"` added to all 302 `<th>` across 14 master files; 3 bare part_09 details-tables wrapped in `.table-wrap`.
+- 5: **Tooling cluster**: `qa:english`/`qa:syntax` wrappers — node resolves `python`(win)/`python3`(unix) + `PYTHONIOENCODING=utf-8` env (both gates now RUN and report baselines 1/224 on Windows; before: crashed on `python3` before checking); `version:check` — `data/character_schema.json` added as the 4th fence-#9 place; integration test `execSync(stdio:'pipe')`→`'inherit'` (Windows EPERM — `node tests/integration/test-full-build.mjs` now 21/21 exit 0); vs-mini-map registry + E18 (Greeting Algorithm was unreachable from the mini-map nav).
+- 6: **Parity needles re-pointed to the FIXED state** (a needle that locks the defect cannot catch regressions): audit_canon_master_sync (P0-9 variant labels, P2-7-syn-04 corrected synthesis, P3-5/P2-12b/KI#34-table scope="col" forms), audit_sampling_parity (E17 Top K 40–100), audit_token_budget_parity (400–900).
+- 7: **Verification (full battery after the last edit):** build **68 sections / 0 errors** / hash `6f563edc` unchanged (DEC-05: index.html-only) · validate **126 redirects** · validate:master **12/12, 0 warnings** · tests **68/68** (47 unit + 21 integration, runner-green through direct files) · lint PASS · sync **87/87** · 7 cluster parity gates + `audit_vs_embeds` PASS · qa:csp/bundle/contrast/doc-versions PASS · **english 1 / syntax 224** (baselines exact, now actually running via pnpm on Windows) · version:check 9.2.6 **×4 places**.
 
 Stage Summary:
-- **The v1->v2 migration COMPLETE (DEC-25): G1 A1 · G2 as printed · G3 B · G4 (a)/(a) executed as bounded slices (iters 166-169) + the switch (iter 170).** v2 is the live site: runtime 98 sections, hash `c1518874`, every gate green.
-- The corpus delta disclosed: 96 -> 98 (Part 0 wired); the hash delta disclosed (`2ab607d6` -> `c1518874`, the shell noscript link); drift 140 -> 143 (the three disclosed content deltas); KI#77 CLOSED iter-168; KI#79 unchanged (informational).
-- Next: D-5 (the v2 canon-format decision) = the next open owner call; content work resumes under the Editorial Policy + the standing fences.
+- All 37 audit-181 findings closed: 16 P1 (reader-facing wrong data), 18 P2, 3 tooling. Canon-first discipline held: every master edit paired with its `docs/canon/*.md` mirror (part_00/02/03/04/05/07a/09/10 + appendix_model_params).
+- Tooling hardened: qa gates runnable on Windows, version fence complete, integration test fixed at the source, mini-map knows E18.
+- Next: owner review → commit (iters 171-181 uncommitted in worktree); optional follow-ups: KI#79 (drift regex), KI#86 (research registries re-keying) — both pre-existing, informational.
 
 ---
-Task ID: iter-166-g1 (one-line summary)
-- iter 166 — G1 (A1): the §7A.7 capability reconciliation — the CoT row §6.3-aligned (Tier 0 / Tier 1–2 / Tier 2–3), AG 2/2/1, master mirror, E17 re-point, the sampling-parity gate extended to §7A.7. Battery green; drift 140.
+
+Task ID: iter-180-voice-one-surface (one-line summary)
+- iter 180 — §3.2 «Иерархия влияния на голос»: one numeric surface (widget → control strip + export; E07 prose inset removed; CSS −210 across two files; `tools/audit-dom-dup.mjs` added). Detail: git + DEC-15/DEC-21.
+
 
 ---
-Task ID: iter-167-g2 (one-line summary)
-- iter 167 — G2: the 27-item enrichment batch (7 canonizations + 4 alignments + 5 disposals/repairs + 2 sub-calls per recommendations). Battery green; drift 141 (+1 disclosed).
+
+Task ID: iter-179-post-v3-seam-audit (one-line summary)
+- iter 179 — post-v3 seam audit: measured the finished corpus (42 exact / 75 near cross-section duplicates → 39 / —; 1 duplicate heading → 0); §7A.6 stopped re-printing Appendix E (pointer + the two hard constraints, retitled «Параметры генерации: две жёсткие константы»), Appendix E's SP-language ladder reduced to one statement per site. Detail: git + this worklog's previous revision.
 
 ---
-Task ID: iter-168-g3 (one-line summary)
-- iter 168 — G3 (B): the ::05 ranges -> illustrative НАБЛЮДЕНИЕ (§7A.12 the sole normative owner); the Omnis intro ~2150; KI#77-e CLOSED. Battery green; drift 141.
+
+Task ID: iter-178-v3-restructure-s4b-slice4 (one-line summary)
+- iter 178 — v3 S4b slice 4: **F-20 closed** (four labels, one treatment; 44 chips retired; `styles.css` 7019 → 6028; validator Check 8 guard) — the v3 track COMPLETE, KI#85 CLOSED. Detail: git + DEC-32.
+
 
 ---
-Task ID: iter-169-g4 (one-line summary)
-- iter 169 — G4 (a)+(a): Part 0 wired (corpus 96->98; the manifest/TOC/content_map/tool alignments) + the noscript glossary link (hash `c1518874`). Battery green; drift 143 (+2 disclosed).
+
+Task ID: iter-177-v3-restructure-s4b-slice3 (one-line summary)
+- iter 177 — v3 S4b slice 3: **F-19 closed** — Appendix C (25 frozen-v1 terms) deleted; the registry → generated `glossary.json` → panel/no-JS chain is the only glossary surface; Part 0 prose pointer added; legacy anchors → `p0_how_to_read`; corpus 69 → 68; sync 89 → 87. Detail: git + DEC-31.
 
 ---
-Task ID: iter-165-owner-gates-package (one-line summary)
-- iter 165 — doc-only: the switch-time owner-call package `docs/research/owner_gates_iter165.md` (G1–G4, nothing DECIDED). Detail: git `0b1429fd`.
+
+Task ID: iter-176-v3-restructure-s4b-slice2 (one-line summary)
+- iter 176 — v3 S4b slice 2: **F-18 + F-24 closed** — the apparatus is 3 content widgets (`ocean-insight`, `mbti-composer`, `persona-voice-hierarchy`), the 5 VS scripts moved to `src/shell/interactions/`, `widget-utils`/`js-flag` to `src/shell/lib/`; `persona-cross`/`persona-synthesis` replaced by the static 5×9 §5.5 matrix + the «сверка трёх систем» protocol; `enneagram-builder` SPINE autofill removed and the §5.3 contradiction fixed; hash `c1518874` → `6f563edc`. Detail: git + plan §5.4.
 
 ---
-Task ID: iter-164-readerpath-audit (one-line summary)
-- iter 164 — reader-path audit stage (map §5.25): the four modes verified entry->completion; 2 structural gaps owner-gated (LEARN-1, REFERENCE-1 — both resolved iter 169); zero content edits. Detail: git (iter-164 commit).
+
+Task ID: iter-175-v3-restructure-s4b-slice1 (one-line summary)
+- iter 175 — v3 S4b slice 1: **F-17 closed** — six VS-embeds (E01/E03/E04/E05/E07/E11) moved inside their canonical sections (E01 → §1.2, E11 → §6.2), canon markers completed (`[VS: E09]`/`[VS: E11]`/`[VS: E18]`, `[VS: E03]` fixed), `validate:master` warnings 6 → 0; browser proof 17/17 embeds inside sections. Detail: git + plan §5.4.
 
 ---
-Task ID: iter-163-canonical-audit (one-line summary)
-- iter 163 — canonical-audit stage (map §5.24): every concept single-homed (99/99 · 96/96 · 45/45/45); the 12 observation packages dispositioned (the enrichment families -> the G2 batch). Detail: git `5a30f610`.
+
+Task ID: iter-174-v3-restructure-s4a (one-line summary)
+- iter 174 — v3 S4a: teaching modules 2/3/4/5/6 de-duplicated 38 → 26 sections, one owner per rule (F-01 OCEAN ladder in §5.1, F-13/F-14 de-dup, Part 1 numbering), 11 findings burnt; redirects 114 → 126; sync 89 probes; battery green (tests 68/68, english 1, syntax 229 → 226). Detail: git + `docs/RESTRUCTURE_V3_PLAN.md` §5.3.
 
 ---
-Task ID: iter-162-parity-audit (one-line summary)
-- iter 162 — parity-audit stage (map §5.23): the full battery re-verified green on the completed corpus, zero content edits; the corpus snapshot recorded (96 sections). Detail: git `cf329734`.
+
+Task ID: iter-173-v3-restructure-s3 (one-line summary)
+- iter 173 — v3 S3: Part 9 11 → 7 (one troubleshooting instrument), Part 8 16 → 2 (catalog + worked examples), Part 10 4 → 5 (index + cards); 20 redirects + `audit_diagnostics_parity.py` ONE-checklist guard; build 81 sections, sync 89 probes. Detail: git + plan §5.2.
+
+---
+
+Task ID: iter-172-v3-restructure-s2 (one-line summary)
+- iter 172 — v3 S2: guide boundary drawn — Appendix E «Параметры генерации» created (absorbs Appendix B, sampling values move there), E15 deleted, §7A.13 = the single per-card budget calculation, copy-paste templates cleaned (F-02…F-05), §7A.6/§7A.7/§7A.10/§7A.11 → pointers with frozen ids; sync 97 → 95 probes; build 98 → 97 sections. Detail: git + DEC-27.
+
+---
+
+Task ID: iters 165–171 (one-line summaries, condensed)
+- iter 171 — v3 S1: one navigation surface (TOC contract + `data-part-title` ×12 + `data-toc-nav` ×50, inline TOC deleted), Part 0 rewritten as a reader on-ramp, `tests/test-toc-coverage.mjs`; build 98 sections. Detail: git + `docs/RESTRUCTURE_V3_PLAN.md` §4 / DEC-26.
+- iter 165 — doc-only: the switch-time owner-call package `docs/research/owner_gates_iter165.md` (G1–G4, nothing DECIDED).
+- iter 166–169 — the owner-called reconciliations: the §7A.7 capability alignment + the 27-item enrichment batch; KI#77-e closed (Appendix D ranges illustrative, §7A.12 the sole normative budget owner); Part 0 wired into the runtime corpus (96→98) + the noscript glossary link (hash `c1518874`). Detail: git `0b1429fd`.
+

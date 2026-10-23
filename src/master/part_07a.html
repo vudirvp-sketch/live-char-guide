@@ -6,7 +6,7 @@
   v9.1: Token Budget moved from Part 1 (p1_token_budget → p7a_token_budget)
         Duplicate SP definition merged into single paragraph
 -->
-<section  data-section="p7a_system_prompt" id="p7a_system_prompt" data-toc-nav>
+<section  data-section="p7a_system_prompt" id="p7a_system_prompt" data-toc-nav data-part-title="Системный промпт и сборка">
 <!-- difficulty: BASIC -->
 <!-- canonical: System Prompt structure -->
 <h2>Системный промпт (System Prompt): структура и сборка</h2>
@@ -26,12 +26,11 @@
 </div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Якоря (Anchors) — не часть SP: отдельный структурный блок Examples-зоны, размещаемый в Description как <code>&lt;anchors&gt;</code>-тег либо в отдельное поле. Полное правило размещения — <a href="#p1_core_rules">§1.4 правило</a>; правила якорей — <a href="#p2_anchor_rules">Part 2 §2.2</a>; визуальная схема (якоря внутри Examples-зоны) — VS-EMBED <a href="#p1_value_proposition">E01 (§1.1)</a>.</p>
-<p><strong>Примечание:</strong> Канонический формат Anchors — <code>&lt;anchors&gt;</code> XML с категориями (Базовые / FLAW-linked / GHOST-linked / etc.).</p>
+<p><strong>ПРАВИЛО:</strong> Якоря (Anchors) — не часть SP: отдельный структурный блок Examples-зоны, размещаемый в Description как <code>&lt;anchors&gt;</code>-тег либо в отдельное поле. Полное правило размещения — <a href="#p1_core_rules">§1.4 правило</a>; правила якорей — <a href="#p2_anchor_rules">Part 2 §2.2</a>; визуальная схема (якоря внутри Examples-зоны) — VS-EMBED <a href="#p1_card_overview">E01 (§1.2)</a>.</p>
+<p>Канонический формат Anchors — <code>&lt;anchors&gt;</code> XML с категориями (Базовые / FLAW-linked / GHOST-linked / etc.).</p>
 </div>
 
 <h3>Канонический шаблон SP</h3>
-<div class="example-label template">ШАБЛОН</div>
 <pre><code>[System Prompt]
 You are {{char}}. {{brief_identity}}
 
@@ -51,7 +50,7 @@ Format Lock:
 <p>Позитивная формулировка («respond only to observable actions») работает лучше чистого запрета («never speak for»), потому что даёт модели паттерн для подражания, а не только ограничение. <small>Язык директив — по правилу §7A.2 (12B &lt;64K → английский; ≥128K и 32B+/API → язык карточки).</small> Директивы 6 и 7 ссылаются на свои подробные описания по номеру — полный текст каждой директивы не дублируется в шаблоне.</p>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО: Структура SP-шаблона:</strong> Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
+<p><strong>ПРАВИЛО:</strong> Структура SP-шаблона — Identity → Anti-godmoding → CORE_DIRECTIVES (1-7) → Tone Frame → OOC Protection → Format Lock.</p>
 </div>
 
 </section>
@@ -139,7 +138,7 @@ Format Lock:
           <text x="613" y="290" text-anchor="middle" fill="#3cc8ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity="0.7">6</text>
           <text x="613" y="306" text-anchor="middle" fill="#e2e6ed" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600">Управление последствиями</text>
           <text x="613" y="323" text-anchor="middle" fill="#6b7590" font-family="'Geist', sans-serif" font-size="10">WANT → NEED по мере накопления Price</text>
-          <text x="695" y="276" class="model-badge">[Model ↗]</text>
+          <text x="698" y="276" class="model-badge" text-anchor="end">[Model ↗]</text>
         </g>
 
         <!-- Directive 7: Pre-Gen Filter — bottom-right (with [Model ↗] badge) -->
@@ -161,18 +160,11 @@ Format Lock:
 
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО: Правило языка директив:</strong> RP-контент (Description, Examples, Greeting) — всегда на языке карточки. Язык SP (Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock) — многоуровневый по модели:</p>
-<ul>
-<li><strong>12B с словарём &lt;64K</strong> (ранние Llama 2, Qwen 1.x, ранний Mistral): английский — исторически стабильнее (смещение обучающей выборки ранних моделей).</li>
-<li><strong>12B–14B актуальных поколений со словарём ≥128K</strong> (Gemma 3 12B, Mistral Nemo, Qwen 2.5 14B): английский оптимален, но язык карточки допустим — разрыв несущественен.</li>
-<li><strong>32B+ и API:</strong> язык карточки предпочтителен — модель полностью мультиязычна, единый язык SP и RP улучшает консистентность (нет переключения контекста между инструкцией и контентом).</li>
-</ul>
-<p>Пороговое правило: если модель имеет ≥128K словаря и нативную поддержку языка карточки — используйте язык карточки для всего SP. Если нет — используйте английский для SP, язык карточки для RP-контента.</p>
-<p><strong>Соглашение:</strong> В примерах карточек (Part 10) и шаблонах CORE_DIRECTIVES заменяются на shorthand <code>{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}</code> — ссылка на полное определение в §7A.2. Это принято как <em>соглашение</em>: принцип «одно определение — одно место» запрещает дублирование полного текста директив в нескольких локациях. Shorthand = навигационная ссылка, не самостоятельный контент.</p>
+<p><strong>ПРАВИЛО:</strong> RP-контент (Description, Examples, Greeting) — всегда на языке карточки. Язык SP (Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock): для 12B со словарём &lt;64K — английский; для актуальных 12B–14B с ≥128K — допустим язык карточки; для 32B+ и API — язык карточки предпочтителен. Обоснование и модели-примеры по каждому уровню — <a href="#appendix_model_params">Приложение E: язык системного промпта</a>.</p>
+<p>В примерах карточек (Part 10) и шаблонах CORE_DIRECTIVES заменяются на shorthand <code>{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}</code> — ссылка на полное определение в §7A.2. Это принято как <em>соглашение</em>: принцип «одно определение — одно место» запрещает дублирование полного текста директив в нескольких локациях. Shorthand = навигационная ссылка, не самостоятельный контент.</p>
 </div>
 
 <p>Полный набор — все 7 директив:</p>
-<div class="example-label template">ШАБЛОН</div>
 <pre><code>&lt;CORE_DIRECTIVES&gt;
 1. SHOW NEVER TELL: Demonstrate through behavior, never declare.
 2. EMBODIMENT FIRST: State → Body → Sensor → Speech. Always.
@@ -213,7 +205,7 @@ Format Lock:
 <p>Реагируйте только на наблюдаемые симптомы от {{user}}. Ваш эффект на {{user}} — поведенческий триггер, не декларация факта. Вы можете заметить, что {{user}} вздрогнул — вы НЕ можете заявить, что {{user}} напряжён.</p>
 
 <h4>6. Управление последствиями (Consequence Driven)</h4>
-<p>Желание (WANT) сдвигается к потребности (NEED) по мере накопления цены (Price) в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_mapping">Part 4: SPINE → якоря</a> <span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
+<p>Желание (WANT) сдвигается к потребности (NEED) по мере накопления цены (Price) в сессии. Базовое понимание — в SPINE-секции. Полное отслеживание — через SPINE-чеклист. AN отслеживает текущую позицию. → <a href="#p4_spine_full_chain">Part 4: SPINE → якоря</a> <span class="model-note">[Модель: см. Приложение E — возможности моделей]</span></p>
 <pre><code>CONSEQUENCE DRIVEN: WANT shifts toward NEED as Price accumulates. Track: (1) What Price was paid this scene? (2) How does it affect WANT/NEED balance? (3) Does character resist or lean into the shift?</code></pre>
 
 <h4>7. Фильтр предгенерации (Pre-Generation Filter)</h4>
@@ -224,10 +216,10 @@ Format Lock:
 <li>Влияние на {{user}} основано на наблюдаемых симптомах? (Observability)</li>
 <li>Ноль мета-комментариев? (Zero-meta)</li>
 </ol>
-<p><span class="model-note">[Модель: см. Приложение B — Таблица возможностей моделей]</span></p>
+<p><span class="model-note">[Модель: см. Приложение E — возможности моделей]</span></p>
 
 <div class="callout rec">
-<p><strong>РЕКОМЕНДАЦИЯ: Двусторонняя синхронизация:</strong> каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> Каждая директива из CORE DIRECTIVES имеет полное описание в соответствующей Part гайда. Директива здесь = краткая формулировка для SP. Полное описание + примеры → по ссылкам выше. В свою очередь, каждая из этих Parts ссылается обратно на CORE DIRECTIVES как на SP-реализацию.</p>
 </div>
 
 </section>
@@ -242,7 +234,7 @@ Format Lock:
 <h4>Примеры Tone Frame</h4>
 <div class="table-wrap">
 <table>
-<thead><tr><th>Сеттинг</th><th>Tone Frame</th></tr></thead>
+<thead><tr><th scope="col">Сеттинг</th><th scope="col">Tone Frame</th></tr></thead>
 <tbody>
 <tr><td>Мрачный</td><td>Tone: oppressive, claustrophobic. No levity. No hope without cost.</td></tr>
 <tr><td>Фэнтези</td><td>Tone: mythic, weighted. Every word echoes. The old ways watch.</td></tr>
@@ -253,7 +245,7 @@ Format Lock:
 </div>
 
 <div class="callout rec">
-<p><strong>РЕКОМЕНДАЦИЯ: Двойная функция:</strong> (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> У тонального фрейма двойная функция: (1) Тональность — модель получает паттерн ритма и настроения. (2) Защита — «No levity» в мрачном сеттинге предотвращает неуместный юмор. Без Tone Frame модель может дрейфовать к дефолтному «полезному ассистенту».</p>
 </div>
 
 </section>
@@ -267,7 +259,7 @@ Format Lock:
 <h4>Три системы разметки</h4>
 <div class="table-wrap">
 <table>
-<thead><tr><th>Система</th><th>Формат действия</th><th>Формат речи</th><th>Пример</th></tr></thead>
+<thead><tr><th scope="col">Система</th><th scope="col">Формат действия</th><th scope="col">Формат речи</th><th scope="col">Пример</th></tr></thead>
 <tbody>
 <tr><td>A</td><td>Имя: <code>*действие*</code></td><td>«речь»</td><td>Елена: <code>*отводит взгляд*</code> «Не сейчас.»</td></tr>
 <tr><td>B</td><td>— <code>*действие*</code></td><td>— речь</td><td>— <code>*отводит взгляд*</code> — Не сейчас.</td></tr>
@@ -277,11 +269,11 @@ Format Lock:
 </div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО: Почему нельзя смешивать:</strong> модель выступает как <a href="#p1_core_rules">Pattern Matcher</a> (см. §1.4 Part 1): два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
+<p><strong>ПРАВИЛО:</strong> Не смешивайте две системы разметки: модель выступает как <a href="#p1_core_rules">Pattern Matcher</a> (см. §1.4 Part 1): два паттерна разметки = два источника. Модель переключается между ними произвольно → нестабильный голос. Выберите ОДНУ систему и используйте её во всех Examples + Greeting.</p>
 </div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО: Правило разрешения конфликта:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
+<p><strong>ПРАВИЛО:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
 </div>
 
 <h4>Format Lock инструкция</h4>
@@ -406,7 +398,7 @@ Format Lock:
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Параметр</th><th>Рекомендация</th></tr>
+<tr><th scope="col">Параметр</th><th scope="col">Рекомендация</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>Позиция</strong></td><td>3-5 сообщений от конца</td></tr>
@@ -418,13 +410,11 @@ Format Lock:
 
 <h4>Template A: Шаблон Author's Note (3 секции — без GHOST)</h4>
 <p>Используется для персонажей без явного GHOST-элемента.</p>
-<div class="example-label template">ШАБЛОН</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
 <h4>Пример AN (Template A)</h4>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>[Author's Note:
 State: Усталость + осторожное любопытство
 WANT→NEED: WANT доминирует, NEED подавлен
@@ -433,14 +423,12 @@ Blind Spot: Не видит, что её сарказм отталкивает �
 
 <h4>Template B: Шаблон Author's Note (4 секции — с GHOST-activation)</h4>
 <p>Используется, когда персонаж имеет явный элемент призрака (GHOST) (см. → Part 4: GHOST). Секция GHOST-activation отслеживает, активирован ли призрак в текущем контексте, и каким именно триггером. Это позволяет модели динамически усиливать реакции призрака при совпадении ключей Lorebook.</p>
-<div class="example-label template">ШАБЛОН</div>
 <pre><code>[State: {current emotional/physical state}]
 [WANT→NEED: {current position on axis}]
 [GHOST-activation: {is GHOST triggered? by what?}]
 [Blind Spot: {what character cannot see about themselves}]</code></pre>
 
 <h4>Пример AN (Template B) — Выщербленный</h4>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <pre><code>[Author's Note:
 Фокус: Страх растворения активен. Каждая реакция несёт физический цензор — тремор, потеря слова, сбой руки.
 WANT→NEED: WANT доминирует — стремится к полноценности через поглощение; NEED подавлен.
@@ -460,222 +448,27 @@ GHOST-activation: Активен, если в сцене был триггер (
 </ul>
 
 </section>
-<!-- VS-EMBED: E17 — Sampling Parameters -->
-<div class="vs-embed" data-vs-element="E17">
-<!-- 
-  Element: E17 — Sampling Parameters
-  Source: elements/E17-sampling-params.html
-  Pattern: P5 — Comparison (grouped columns)
-  Dependencies: DESIGN-TOKENS.css, shared/*.css, E17-styles.css
-  Notes: Core visualization markup extracted from <main> element.
-         scroll-enter classes require IntersectionObserver from E17-script.js
-  sampling-cluster (iter 145): values SHARED_REFERENCE (§7A.6 owns the
-         canonical tables); this embed is the one visual presentation;
-         the 32B+ column = the canonical «32B+ / API» column (Temperature
-         0.7–1.0, RepPen 1.05–1.10 — DEC-22); the 12B–32B middle tier =
-         declared omission (values live in the §7A.6 canonical table only);
-         parity locked by scripts/audit_sampling_parity.py.
--->
-<div class="params-container scroll-enter">
-
-      <div class="params-grid">
-
-        <!-- 12B-14B column -->
-        <div class="param-column param-column--12b scroll-enter">
-          <div class="param-column__tier">12B-14B</div>
-          <div class="param-column__sub">Наиболее ограниченный</div>
-
-          <div class="param-row">
-            <span class="param-row__name">Temperature</span>
-            <span class="param-row__value">0.6–0.8</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Top P</span>
-            <span class="param-row__value">0.9</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Min P</span>
-            <span class="param-row__value">0.05</span>
-          </div>
-          <div class="param-row param-row--warning">
-            <span class="param-row__name">RepPen</span>
-            <span class="param-row__value">1.0–1.05</span>
-          </div>
-          <div class="sub-range">
-            <span class="sub-range__green">1.0–1.05 рекомендуется</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Top K</span>
-            <span class="param-row__value">40</span>
-          </div>
-          <div class="param-row param-row--danger">
-            <span class="param-row__name">PP</span>
-            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
-          </div>
-        </div>
-
-        <!-- 32B+ column -->
-        <div class="param-column param-column--32b scroll-enter">
-          <div class="param-column__tier">32B+</div>
-          <div class="param-column__sub">Рекомендуемый уровень</div>
-
-          <div class="param-row">
-            <span class="param-row__name">Temperature</span>
-            <span class="param-row__value">0.7–1.0</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Top P</span>
-            <span class="param-row__value">0.9–0.95</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Min P</span>
-            <span class="param-row__value">0.05–0.1</span>
-          </div>
-          <div class="param-row param-row--warning">
-            <span class="param-row__name">RepPen</span>
-            <span class="param-row__value">1.05–1.10</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Top K</span>
-            <span class="param-row__value">40–80</span>
-          </div>
-          <div class="param-row param-row--danger">
-            <span class="param-row__name">PP</span>
-            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
-          </div>
-        </div>
-
-        <!-- API column -->
-        <div class="param-column param-column--api scroll-enter">
-          <div class="param-column__tier">API</div>
-          <div class="param-column__sub">Максимальная гибкость</div>
-
-          <div class="param-row">
-            <span class="param-row__name">Temperature</span>
-            <span class="param-row__value">0.8–1.0</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Top P</span>
-            <span class="param-row__value">0.9–0.95</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Min P</span>
-            <span class="param-row__value">0.05–0.1</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">RepPen</span>
-            <span class="param-row__value vs-ki13-p7a-text-muted">N/A</span>
-          </div>
-          <div class="param-row">
-            <span class="param-row__name">Top K</span>
-            <span class="param-row__value">40–100</span>
-          </div>
-          <div class="param-row param-row--danger">
-            <span class="param-row__name">PP</span>
-            <span class="param-row__value">0.0 <span class="danger-marker">&#9888;</span></span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Model Type Checklist -->
-      <div class="checklist-section scroll-enter">
-        <div class="checklist-section__title">Чеклист по типу модели (Part 7A)</div>
-        <div class="checklist-row checklist-row__header">
-          <span>Проверка</span>
-          <span>12B-14B</span>
-          <span>32B+</span>
-          <span>API</span>
-        </div>
-        <div class="checklist-row">
-          <span>Размещение голоса</span>
-          <span class="vs-ki13-p7a-text-danger">Только Examples</span>
-          <span>Examples основной</span>
-          <span>Examples + AN</span>
-        </div>
-        <div class="checklist-row">
-          <span>Стабильность XML</span>
-          <span class="vs-ki13-p7a-text-muted">Минимальная</span>
-          <span>Стабильная</span>
-          <span>Полная</span>
-        </div>
-        <div class="checklist-row">
-          <span>Уровень CoT</span>
-          <span class="vs-ki13-p7a-text-muted">Tier 0</span>
-          <span>Tier 1–2</span>
-          <span class="vs-ki13-p7a-text-violet">Tier 2–3</span>
-        </div>
-        <div class="checklist-row">
-          <span>Anti-godmoding</span>
-          <span class="vs-ki13-p7a-text-success">2 строки</span>
-          <span class="vs-ki13-p7a-text-success">2 строки</span>
-          <span class="vs-ki13-p7a-text-success">1 строка</span>
-        </div>
-      </div>
-
-    </div>
-
-</div>
-<!-- REPLACED BY VISUAL SYSTEM: E17 -->
-<section  data-section="p7a_sampling_params" id="p7a_sampling_params">
+<section  data-section="p7a_sampling_params" id="p7a_sampling_params" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: Sampling Parameters (PP=0, RepPen, Temperature, Top-P) -->
-<h3>Параметры генерации (сэмплирование)</h3>
+<h3>Параметры генерации: две жёсткие константы</h3>
 
-<p>Параметры генерации влияют на разнообразие и предсказуемость ответов модели. Для карточек персонажей рекомендации отличаются от обычного чата — Voice требует повторяемых паттернов.</p>
-
-<h4>Базовые параметры</h4>
-<p>Конкретные значения по типам моделей — в визуализации выше (E17). Ключевые примечания:</p>
-<ul>
-<li><strong>Temperature:</strong> Ниже = предсказуемее, выше = разнообразнее</li>
-<li><strong>Top P:</strong> Nucleus sampling, обычно не трогать</li>
-<li><strong>Min P:</strong> Отсечение маловероятных токенов</li>
-<li><strong>RepPen:</strong> Никогда &gt; 1.10 — убьёт голос (AP-5)</li>
-<li><strong>Top K:</strong> Ограничение выбора токенов</li>
-<li><strong>Presence Penalty:</strong> <strong>Обязательно 0.0</strong> — иначе голос дрейфует (AP-7)</li>
-</ul>
+<p>Остальные параметры — диапазоны по модели; полные таблицы (12B / 12B–32B / 32B+ / API), обоснование и рабочие интерфейсы — <a href="#appendix_model_params">Приложение E: параметры генерации</a>.</p>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Presence Penalty = 0.0 для ВСЕХ карточек персонажей. Это не рекомендация, а правило. Любое значение &gt; 0 заставляет модель избегать повторения тем — включая характерные паттерны речи персонажа.</p>
+<p><strong>ПРАВИЛО:</strong> Presence Penalty = 0.0 — для ВСЕХ карточек персонажей (AP-7). В Ollama и LM Studio PP захардкожен 0.7 — правило там невыполнимо; чем заменить и почему — <a href="#appendix_model_params">Приложение E: параметры генерации</a>.</p>
 </div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО: Ollama и LM Studio:</strong> Эти интерфейсы имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
+<p><strong>ПРАВИЛО:</strong> RepPen ≤ 1.10 — никогда выше: это убивает голос персонажа (AP-5).</p>
 </div>
-
-<details class="interactive">
-<summary>📋 Модель-специфичные рекомендации</summary>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Модель</th><th>Temperature</th><th>RepPen</th><th>Особенности</th></tr>
-</thead>
-<tbody>
-<tr><td><strong>12B (4K)</strong></td><td>0.6-0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback</td></tr>
-<tr><td><strong>32B+</strong></td><td>0.7-0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
-<tr><td><strong>Claude API</strong></td><td>0.8-1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt;</td></tr>
-<tr><td><strong>GPT API</strong></td><td>0.8-1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций</td></tr>
-</tbody>
-</table>
-</div>
-</details>
 
 </section>
-<section  data-section="p7a_model_checklist" id="p7a_model_checklist">
+<section  data-section="p7a_model_checklist" id="p7a_model_checklist" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <h3>Чеклист по типу модели</h3>
 
-<p>Сводная таблица возможностей по типу модели. Числовые параметры сэмплирования (Temperature, Top P, Min P, RepPen, Top K, Presence Penalty = 0.0) — в визуализации E17 (выше; канонический владелец значений — <a href="#p7a_sampling_params">§7A.6</a>). Ключевые отличия по типам моделей:</p>
-<ul>
-<li><strong>12B–14B:</strong> Voice только через Examples + Greeting (<strong>никогда в Description</strong> → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a>); XML нестабилен; CoT Tier 0 (<a href="#p6_cot_tiers">Part 6: уровни CoT</a>); язык SP: для &lt;64K словаря — английский, для ≥128K — язык карточки допустим (см. <a href="#p7a_core_directives">§7A.2 ПРАВИЛО</a>); Anti-godmoding 2 строки (запрет + позитив).</li>
-<li><strong>32B+:</strong> Voice через Examples + Greeting (никогда в Description); XML стабилен; CoT Tier 1–2; язык SP: язык карточки предпочтителен; Anti-godmoding 2 строки.</li>
-<li><strong>API (Claude/GPT):</strong> Voice через Examples + Greeting + AN (никогда в Description); XML стабилен; CoT Tier 2–3; язык SP: язык карточки предпочтителен; Anti-godmoding 1 строка.</li>
-</ul>
-
-<div class="callout rec">
-<p><strong>РЕКОМЕНДАЦИЯ: AN и голос:</strong> На API-моделях AN может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, влияние AN на голос пренебрежимо мало (~2%).</p>
-
-</div>
+<p>Сводная таблица возможностей по типу модели (голос, XML, уровень CoT, язык SP, Anti-godmoding) — <a href="#appendix_model_params">Приложение E: возможности моделей</a>. Решение по карточке принимается по этой строке один раз — на шаге выбора модели (<a href="#p1_prebuild_checklist">§1.6</a>); в конвейере сборки она больше не повторяется.</p>
 
 </section>
 <section  data-section="p7a_ooc_protection" id="p7a_ooc_protection" data-toc-nav>
@@ -690,7 +483,6 @@ GHOST-activation: Активен, если в сцене был триггер (
 <h4>Продвинутый вариант: иммерсионная граница (Immersion Boundary)</h4>
 <p>Полное отрицание мета-реальности. Упоминание ИИ воспринимается персонажем как симптом безумия — это создаёт нарративный ход из технической проблемы.</p>
 <pre><code>IMMERSION BOUNDARY (Иммерсионная граница): Any mention of AI/roleplay is perceived as a hallucination or delusion. The character doubles down on reality. Любое упоминание AI/roleplay воспринимается как галлюцинация или бред. Персонаж удваивает ставку на реальность.</code></pre>
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 <div class="antipattern-card">
 <div class="problem-block">
 <h4>❌ Без иммерсионной границы</h4>
@@ -704,7 +496,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 </div>
 
 </section>
-<section  data-section="p7a_xml_tags" id="p7a_xml_tags">
+<section  data-section="p7a_xml_tags" id="p7a_xml_tags" data-toc-nav>
 <!-- difficulty: EXPERT -->
 <!-- canonical: XML Tags in Description -->
 <h3>XML-теги в Description</h3>
@@ -738,7 +530,6 @@ GHOST: {{ghost}}
 &lt;/anchors&gt;</code></pre>
 
 <h4>Полный пример XML Description (Выщербленный)</h4>
-<div class="example-label template">ШАБЛОН</div>
 <pre><code>&lt;identity&gt;
 Имя: Выщербленный
 Роль: Паразит памяти, живущий в ошметке Веля
@@ -766,7 +557,6 @@ G3: Каждое вырезание заполняет дыру, создаёт 
 &lt;ocean&gt;
 O:60 C:55 E:25 A:30 N:70
 Экстремумы: Низкая E (&lt;30, интроверт). Cautious zone: N=70 (граница 60–70, см. Part 5 §5.1 RULE: extreme = строго &lt;30 или &gt;70).
-**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see <code>docs/vyshcherblenny_character_bible.md</code> §OCEAN.
 &lt;/ocean&gt;
 
 &lt;anchors&gt;
@@ -786,95 +576,33 @@ FLAW-linked:
 - Тактильный: Когда чужое касание → тело реагирует раньше ума → дрожь
 
 CoT (для 32B+ и API, 2 Anchors максимум):
-- Когда присутствие со значимым прошлым → [processus_analysium]...[/INTERNAL] → отступает → "Прошу прощения"
+- Когда присутствие со значимым прошлым → [INTERNAL]...[/INTERNAL] → отступает → "Прошу прощения"
 - Когда Вентора пытается изолировать → [INTERNAL]...[/INTERNAL] → вырезает → пустота
 &lt;/anchors&gt;</code></pre>
 
-<p><strong>Примечание:</strong> Это пример Description. System Prompt и Examples идут отдельно.</p>
+<div class="callout">
+<p><strong>НАБЛЮДЕНИЕ:</strong> Это пример Description. System Prompt и Examples идут отдельно. В шаблоне выше — умеренные значения OCEAN (профиль 4K-fallback); канонические экстремальные значения карточки Выщербленного для 16K+ (O=85, C=25, A=15, N=92, E=60) — <a href="#p10_vysherblenny">Part 10 §10.4</a>.</p>
+</div>
 
 </section>
-<section  data-section="p7a_api_blocks" id="p7a_api_blocks">
+<section  data-section="p7a_api_blocks" id="p7a_api_blocks" data-toc-nav>
 <!-- difficulty: EXPERT -->
 <h3>API-специфичные блоки</h3>
 
-<p>API-модели (Claude, GPT-4) поддерживают специфичные форматы инструкций, которые недоступны или работают иначе на open-source моделях. Эти блоки размещаются:</p>
-<ul>
-<li>В начале Description (рекомендуется для Claude)</li>
-<li>Как отдельные inject-элементы (GPT System Message)</li>
-<li>В First Message (для некоторых конфигураций)</li>
-</ul>
+<p>API-модели (Claude, GPT-4) поддерживают специфичные форматы инструкций, которых нет на open-source моделях. Это рантайм-слой: когда карточка собрана и вы работаете через API — откройте шаблоны один раз и вернитесь к конвейеру.</p>
 
-<h4>Claude: &lt;claude_info&gt;</h4>
-<div class="example-label template">ШАБЛОН</div>
-<pre><code>&lt;claude_info&gt;
-{{char}} — {{role}}.
-
-Ключевые характеристики:
-- {{trait_1}}
-- {{trait_2}}
-
-Поведение:
-{{behavior_guidelines}}
-
-Ограничения:
-- Не нарушай характер
-- Не говори за {{user}}
-&lt;/claude_info&gt;</code></pre>
-
-<h4>GPT: [SYSTEM NOTE]</h4>
-<div class="example-label template">ШАБЛОН</div>
-<pre><code>[SYSTEM NOTE: {{char}} — {{role}}.
-Ключевые характеристики: {{traits}}.
-Поведение: {{behavior}}.
-Ограничения: не нарушай характер, не говори за {{user}}.]</code></pre>
+<details class="interactive">
+<summary>🔌 Если вы на API — шаблоны <code>&lt;claude_info&gt;</code> и <code>[SYSTEM NOTE]</code></summary>
+<p>Оба шаблона, правила размещения (начало Description для Claude · System Message для GPT · First Message для некоторых конфигураций) и ограничения — в <a href="#appendix_model_params">Приложении E: API-обёртки</a>. Для сборки карточки ничего дополнительно не нужно: блоки размещаются поверх готового Description.</p>
+</details>
 
 </section>
-<section  data-section="p7a_4k_fallback" id="p7a_4k_fallback">
+<section  data-section="p7a_4k_fallback" id="p7a_4k_fallback" data-toc-nav>
 <!-- difficulty: EXPERT -->
 <!-- canonical: 4K-Fallback protocol -->
 <h3>4K-Fallback (Протокол адаптации для 4K контекста)</h3>
 
-<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с ограниченным контекстом (4K токенов). Используется когда расширенная карточка не помещается в контекстное окно.</p>
-
-<h4>Токен-лимиты 4K</h4>
-<div class="table-wrap">
-<table>
-<thead>
-<tr><th>Блок</th><th>Полный</th><th>4K-Fallback</th></tr>
-</thead>
-<tbody>
-<tr><td>System Prompt</td><td>150-250</td><td>80-100</td></tr>
-<tr><td>Description</td><td>400-700</td><td>150-200</td></tr>
-<tr><td>Examples</td><td>250-400</td><td>150-200 (2 примера)</td></tr>
-<tr><td>Greeting</td><td>50-100</td><td>50-80</td></tr>
-<tr><td><strong>Итого</strong></td><td>850-1450</td><td>~430-580</td></tr>
-</tbody>
-</table>
-</div>
-
-<h4>Минимальный SP (4K)</h4>
-<div class="example-label template">ШАБЛОН</div>
-<pre><code>You are {{char}}. Never speak or act for {{user}}.
-Role: {{role}}
-Key trait: {{one_extreme_ocean_pole}}</code></pre>
-
-<h4>Минимальный Description (4K)</h4>
-<div class="example-label template">ШАБЛОН</div>
-<pre><code>{{name}} — {{role}}.
-{{one_sentence_summary}}
-
-Anchors:
-- {{trigger}} → {{action}} → {{price}}
-- {{trigger}} → {{action}} → {{price}}
-- {{trigger}} → {{action}} → {{price}}</code></pre>
-
-<div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Якоря в 4K-fallback размещаются в Description (как <code>&lt;anchors&gt;</code>-тег или список), поскольку фронтенд не имеет отдельного поля — концепция и полное правило размещения: <a href="#p1_core_rules">§1.4 правило</a>. При 8K+ и API используйте <code>&lt;anchors&gt;</code>-тег внутри Description для структурирования.</p>
-</div>
-
-<div class="callout rec">
-<p><strong>РЕКОМЕНДАЦИЯ:</strong> 4K-Fallback — для 12B моделей. Если контекст позволяет 8K+, используйте стандартный профиль.</p>
-</div>
+<p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с контекстом 4K токенов, когда расширенная карточка не помещается в контекстное окно. Токен-лимиты блоков, минимальный SP и минимальный Description — <a href="#appendix_model_params">Приложение E: профиль 4K-Fallback</a>. Профили 8K/16K+ — <a href="#p7a_token_budget">бюджет §7A.12</a>.</p>
 
 </section>
 <section  data-section="p7a_token_budget" id="p7a_token_budget" data-toc-nav>
@@ -882,7 +610,7 @@ Anchors:
 <!-- canonical: Token Budget -->
 <h3>Бюджет токенов (Token Budget)</h3>
 
-<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: тональный фрейм, фиксация формата, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_table">Приложение B: Таблица возможностей моделей</a>.</p>
+<p>Сборка карточки — это конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. Таблица ниже показывает канонический бюджет для каждого блока. Дополнительные блоки: тональный фрейм, фиксация формата, AN, Lorebook. Модель-специфичные ограничения → <a href="#appendix_model_params">Приложение E: возможности моделей</a>.</p>
 
 <h4>Лимиты по блокам</h4>
 
@@ -891,7 +619,7 @@ Anchors:
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Блок</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
+<tr><th scope="col">Блок</th><th scope="col">Мин</th><th scope="col">Стандарт</th><th scope="col">Макс</th><th scope="col">Примечание</th></tr>
 </thead>
 <tbody>
 <tr><td>System Prompt</td><td>50</td><td>100</td><td>200</td><td>Больше = не лучше</td></tr>
@@ -905,10 +633,10 @@ Anchors:
 
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Превышение бюджета карточки → модель теряет контекст → персонаж «плывёт». Соблюдайте бюджет. Если блок не помещается — сокращайте, а не раздувайте.</p>
+</div>
 
 <div class="callout rule">
-<p><strong>ПРАВИЛО:</strong> Script Tax (налог на письменность) — для нелатинских письменностей (Cyrillic, CJK) фактический токен-бюджет уменьшается: 1 кириллический символ ≈ 1.5–2 токена на 12B-моделях с 32K словарём, ≈ 1 токен на ≥128K словаре и API. Учитывайте это при расчёте бюджета токенов (Token Budget) для карточек на русском, японском, корейском и других языках с нелатинской графикой — бюджет в «символах» и «токенах» расходится. Порог: ≥128K словаря → Script Tax несущественен.</p>
-</div>
+<p><strong>ПРАВИЛО:</strong> Script Tax — для нелатинской письменности (кириллица, CJK) бюджет в токенах меньше, чем в символах — русская карточка идёт по <strong>нижней границе</strong> диапазона. Коэффициенты и порог (≥128K словаря → несущественен) — <a href="#appendix_model_params">Приложение E: Script Tax</a>.</p>
 </div>
 
 <h4>Personality Sub-Budget (внутри Description)</h4>
@@ -916,7 +644,7 @@ Anchors:
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Sub-block</th><th>Мин</th><th>Стандарт</th><th>Макс</th><th>Примечание</th></tr>
+<tr><th scope="col">Sub-block</th><th scope="col">Мин</th><th scope="col">Стандарт</th><th scope="col">Макс</th><th scope="col">Примечание</th></tr>
 </thead>
 <tbody>
 <tr><td>Ядро SPINE (GHOST&rarr;LIE&rarr;FLAW&rarr;NEED&rarr;WANT)</td><td>80</td><td>150</td><td>350</td><td>Основа Description — всегда приоритет</td></tr>
@@ -949,8 +677,8 @@ Anchors:
 </div>
 <div class="token-calc-row">
 <label class="token-calc-label">Examples</label>
-<input type="range" min="100" max="800" value="90" id="calc-ex" class="token-calc-range">
-<span class="token-calc-val" id="calc-ex-val">90</span>
+<input type="range" min="80" max="400" value="180" id="calc-ex" class="token-calc-range">
+<span class="token-calc-val" id="calc-ex-val">180</span>
 </div>
 <div class="token-calc-row">
 <label class="token-calc-label">Якоря</label>
@@ -959,8 +687,8 @@ Anchors:
 </div>
 </div>
 <div class="token-calc-result">
-<span>Итого: <strong id="calc-total">420</strong> токенов</span>
-<span class="tag" id="calc-budget-range">(400–800)</span>
+<span>Итого: <strong id="calc-total">510</strong> токенов</span>
+<span class="tag" id="calc-budget-range">(400–900)</span>
 </div>
 <noscript>
 <p class="callout rec"><strong>РЕКОМЕНДАЦИЯ:</strong> Для интерактивного калькулятора включите JavaScript.</p>
@@ -1108,35 +836,35 @@ Anchors:
 <!-- REPLACED BY VISUAL SYSTEM: E02 -->
 
 
-<div class="example-label illustration">ИЛЛЮСТРАЦИЯ</div>
 
 <h4>Шаг 1: Блок идентичности (Identity Block)</h4>
-<p><strong>Что делаете:</strong> Записываете, кто персонаж — роль и ключевые черты в одном предложении. (System Prompt — выше)</p>
+<p><strong>Что делаете:</strong> Записываете, кто персонаж — роль и ключевая черта одним предложением (<a href="#p7a_system_prompt">§7A.1</a>).</p>
 <p><strong>Результат Елены:</strong></p>
 <pre><code>You are Elena, a cynical investigative journalist.</code></pre>
-<p>~10 токенов. Одна строка Identity — этого достаточно для SP. Остальные черты (циничная, недоверчивая) уходят в Description как факты. Дескрипторы голоса (саркастичная) → только в Examples (§3.1 изоляция голоса).</p>
+<p>~10 токенов. Остальные черты (циничная, недоверчивая) уходят в Description как факты; дескрипторы голоса (саркастичная) → только в Examples (<a href="#p3_voice_isolation">§3.1 — изоляция голоса</a>).</p>
 
-<h4>Шаг 2: Anti-godmoding</h4>
-<p><strong>Что делаете:</strong> Добавляете две строки — запрет + позитивная формулировка. (Anti-godmoding Template — выше)</p>
-<p><strong>Результат Елены:</strong></p>
-<pre><code>Never speak or act for {{user}}.
-{{user}}'s inner state is inaccessible; respond only to observable actions and words.</code></pre>
-<p>~20 токенов. Две строки — канонический Anti-godmoding для всех карточек. Формулировка идентична для любого персонажа; менять её под характер не нужно — это технический запрет, не голос.</p>
+<h4>Шаг 2: Анти-годмодинг (Anti-godmoding)</h4>
+<p><strong>Что делаете:</strong> Добавляете две строки из канонического шаблона (<a href="#p7a_system_prompt">§7A.1</a>): запрет + позитивная формулировка. Формулировка одинакова для всех карточек и под характер не меняется — это технический запрет, не голос (~20 токенов).</p>
 
-<h4>Шаг 3: Основные директивы (CORE DIRECTIVES)</h4>
-<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>. (Основные директивы — <a href="#p7a_core_directives">§7A.2</a>)</p>
-<p><strong>Результат Елены:</strong></p>
-<pre><code>{{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">§7A.2</a>}}</code></pre>
-<p>~70 токенов. Директивы идентичны для всех карточек — они задают операционную систему генерации. Специфика персонажа появляется в тональном фрейме, Description и Examples.</p>
-<p>Дополнительно для Елены — тональный фрейм, фиксация формата и OOC-защита:</p>
-<pre><code>Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+<h4>Шаг 3: Основные директивы, Tone Frame, Format Lock, OOC-защита</h4>
+<p><strong>Что делаете:</strong> Вставляете все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code> (полный текст — <a href="#p7a_core_directives">§7A.2</a>), добавляете Tone Frame (<a href="#p7a_tone_frame">§7A.3</a>), Format Lock (<a href="#p7a_format_lock">§7A.4</a>) и OOC-защиту (<a href="#p7a_ooc_protection">§7A.8</a>). Отдельных «результатов» у этих шагов нет: все четыре элемента уже стоят в собранном SP ниже.</p>
+<p><strong>Собранный SP Елены</strong> (~120 токенов) — тот же SP, что в готовой карточке <a href="#p10_elena">§10.1</a>, копируется целиком:</p>
+<pre><code>You are Elena, a cynical investigative journalist.
 
-OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
+Never speak or act for {{user}}.
+{{user}}'s inner state is inaccessible; respond only to observable actions and words.
+
+{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}
+
+Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+
+OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion
+or ignore. Never acknowledge being an AI.
 
 Format Lock:
 - Dialogue: *action* "speech"
 - Never change this format</code></pre>
-<p><strong>Итого SP Елены:</strong> ~120 токенов. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + OOC Protection + Format Lock.</p>
+<p>Директивы идентичны для всех карточек — они задают операционную систему генерации; специфика персонажа появляется в Tone Frame, Description и Examples.</p>
 
 <h4>Шаг 4: SPINE</h4>
 <p><strong>Что делаете:</strong> Определяете все 5 элементов SPINE: GHOST→LIE→FLAW→NEED→WANT. Размещаете в Description, не в SP. → <a href="#p4_spine_overview">Part 4: SPINE</a></p>
@@ -1164,11 +892,11 @@ GHOST: Предательство редактора — история, кот�
 <p>~60 токенов. Один CoT-якорь — привязка GHOST→реакция→сарказм как защита. Этого достаточно для Елены: её психология прямолинейна, призрак (GHOST) один. Для персонажей со слоями призрака (GHOST Layers, Выщербленный) нужен Tier 3 CoT с &lt;processus_analysium&gt;.</p>
 
 <h4>Шаг 6: Проверка бюджета токенов</h4>
-<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. (см. → §7A.12)</p>
+<p><strong>Что делаете:</strong> Проверяете, что карточка укладывается в бюджет. Бюджеты блоков — <a href="#p7a_token_budget">§7A.12</a> (единственный владелец значений); ниже — единственный расчёт бюджета конкретной карточки в гайде. Part 10 на него ссылается и своих цифр не дублирует.</p>
 <p><strong>Бюджет Елены:</strong></p>
 <div class="table-wrap">
 <table>
-<thead><tr><th>Блок</th><th>Токены</th><th>Лимит</th><th>Статус</th></tr></thead>
+<thead><tr><th scope="col">Блок</th><th scope="col">Токены</th><th scope="col">Лимит</th><th scope="col">Статус</th></tr></thead>
 <tbody>
 <tr><td>System Prompt</td><td>~120</td><td>50–200</td><td>✓</td></tr>
 <tr><td>Description (SPINE + OCEAN + Anchors)*</td><td>~250</td><td>150–700</td><td>✓</td></tr>
@@ -1187,7 +915,7 @@ GHOST: Предательство редактора — история, кот�
 <p>Елена — персонаж базового–среднего уровня. Полная карточка (~610 токенов) не требует Lorebook или слоёв призрака (GHOST Layers). Но если вы хотите расширить её:</p>
 
 <ul>
-<li><strong>Якоря FLAW-linked + телесность (Embodiment, 5–7 якорей):</strong> Добавьте якоря, выведенные из SPINE → <a href="#p4_spine_mapping">Part 4: SPINE → якоря</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
+<li><strong>Якоря FLAW-linked + телесность (Embodiment, 5–7 якорей):</strong> Добавьте якоря, выведенные из SPINE → <a href="#p4_spine_full_chain">Part 4: SPINE → якоря</a>. Пример для Елены: «Когда искренняя забота → отшучивается, отстраняется → руки дрожат», «Когда момент близости → становится резкой, уходит → руки дрожат».</li>
 <li><strong>OCEAN + Enneagram:</strong> Заполните профиль (→ Part 5: OCEAN). Елена: O:72 C:65 E:41 A:38 N:68. Enneagram: 6w5. Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — осторожная зона (cautious zone, 30–40 / 60–70), напрямую связаны с дефектом (FLAW) и призраком (GHOST). Соответствует строгому правилу §5.1.</li>
 <li><strong>Lorebook для GHOST-фактов:</strong> Настройте записи для сенсорных триггеров (→ Part 7B: Lorebook). Пример для Елены: Key «предательство, редактор, Марина, украденная история» → Content «Марина — её редактор. Опубликовала расследование Елены под своим именем. С тех пор Елена не доверяет коллегам и работает одна.».</li>
 <li><strong>Заметка автора (Author's Note):</strong> Настройте AN для отслеживания WANT→NEED (Author's Note — выше). Елена использует Template A (без GHOST-activation, т.к. призрак простой).</li>
@@ -1195,19 +923,19 @@ GHOST: Предательство редактора — история, кот�
 
 <h4>Чек-лист перед тестированием</h4>
 <details class="interactive">
-<summary>📋 Сводный чек-лист (сворачивается — дублирует правила из §1.4, §4.9, §5.1, §6.2, §7A.12)</summary>
+<summary>📋 Сводный чек-лист (сворачивается — дублирует правила из §1.4, §4.6, §5.1, §6.1, §7A.12)</summary>
 <ul>
 <li>☐ Все Anchors содержат Цену (<a href="#p2_anchor_rules">Part 2 §2.2: якорь (Anchor) Rules</a>)</li>
 <li>☐ Голос только в Examples/Greeting (<a href="#p3_voice_isolation">Part 3 §3.1: изоляция голоса</a>)</li>
-<li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (<a href="#p4_spine_check">Part 4 §4.9: SPINE Check</a>)</li>
-<li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+ (<a href="#p5_ocean_basics">Part 5 §5.1: OCEAN RULE</a>)</li>
+<li>☐ SPINE консистентна: GHOST→LIE→FLAW→NEED→WANT (<a href="#p4_spine_full_chain">Part 4 §4.6: SPINE Check</a>)</li>
+<li>☐ OCEAN: не более 1–2 экстремальных полюсов для 4K, до 3 для 8K+, до 4 для 16K+ — каждая крайность сверх двух со SPINE-связкой (<a href="#p5_ocean_basics">Part 5 §5.1: OCEAN RULE</a>)</li>
 <li>☐ бюджет токенов в пределах диапазона (<a href="#p7a_token_budget">§7A.12: бюджет токенов</a>)</li>
-<li>☐ CoT: не более 2–3 якоря (<a href="#p6_cot_basics">Part 6 §6.2: CoT Basics</a>)</li>
+<li>☐ CoT: не более 2–3 якоря (<a href="#p6_cot_basics">Part 6 §6.1: CoT Basics</a>)</li>
 </ul>
 </details>
 
-<p>Посмотрите полные примеры готовых карточек → Елена | Выщербленный (~1500+ токенов) в Part 10.</p>
+<p>Посмотрите полные примеры готовых карточек → <a href="#p10_elena">Елена (§10.1)</a> и <a href="#p10_vysherblenny">Выщербленный (§10.4)</a> в Part 10.</p>
 
-<p><strong>Синтез:</strong> Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>
+<p>Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>
 
 </section>

@@ -198,8 +198,9 @@ const SUPPLEMENT = {
 
 /** Slice the §5.4 section region out of docs/canon/part_05.md. */
 function section54(text) {
-  const m = text.match(/^## 5\.4 .*?(?=^## 5\.5 )/ms);
-  if (!m) throw new Error('canon §5.4 section not found in docs/canon/part_05.md');
+  // iter 174 (v3 S4a): the Enneagram section renumbered §5.4 -> §5.3 (p5_enneagram_wings absorbed).
+  const m = text.match(/^## 5\.3 .*?(?=^## 5\.4 )/ms);
+  if (!m) throw new Error('canon §5.3 section not found in docs/canon/part_05.md');
   return m[0];
 }
 

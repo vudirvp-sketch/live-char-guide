@@ -13,115 +13,66 @@
   FIX-04: Removed layer toggle buttons and data-layer attributes.
           All annotation layers are visible simultaneously (v8 unified approach).
 -->
-<!-- VS-EMBED: E15 — Elena Card Walkthrough -->
-<div class="vs-embed" data-vs-element="E15">
-<!-- 
-  Element: E15 — Annotated Blueprint
-  Source: elements/E15-annotated-blueprint.html
-  Pattern: P6 — Blueprint/Annotated Card
-  Dependencies: DESIGN-TOKENS.css, shared/*.css, E15-styles.css
-  Notes: Core visualization markup extracted from <main> element.
-         scroll-enter classes require IntersectionObserver from E15-script.js
--->
-<div class="blueprint-container scroll-enter">
+<section  data-section="p10_index" id="p10_index" data-toc-nav data-part-title="Полные карточки">
+<!-- difficulty: BASIC -->
+<!-- canonical: Part 10 index — which card to take (navigation surface, not a card) -->
+<h2>Какую карточку взять</h2>
 
-      <!-- Blueprint area with card template -->
-      <div class="blueprint-area scroll-enter">
+<p>Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook» из <a href="#p1_prebuild_checklist">§1.6 — чек-лист перед сборкой</a>. Каждая следующая карточка добавляет инструменты: <code>&lt;ghost_layers&gt;</code>, CoT, Lorebook.</p>
 
-        <!-- FIX-04: All annotation layers visible simultaneously (v8 unified approach) -->
-        <!-- Structure layer -->
-        <div class="annotation-layer">
-          <div class="callout callout--structure vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-10">
-            SP: ~50-200 токенов<br>Контейнер — содержит директивы, идентичность, anti-godmoding
-          </div>
-          <div class="callout callout--structure vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-100">
-            Description: ~150-700 токенов<br>Крупнейший блок — факты, SPINE, OCEAN, физичность
-          </div>
-          <div class="callout callout--structure vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-250">
-            Examples: ~80-400 токенов (итог: 40–80 на пример × 2–5 примеров — §7A.12)<br>Голос живёт здесь + Anchors вложены внутри
-          </div>
-          <div class="callout callout--structure vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-380">
-            Greeting: ~40-100 токенов<br>Первое впечатление, задаёт тон
-          </div>
-        </div>
+<p>Объём карточек здесь не пересчитывается: единственный расчёт карточки — <a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a>, нормативные лимиты по блокам — <a href="#p7a_token_budget">§7A.12 — бюджет токенов</a>, параметры моделей и контекста — <a href="#appendix_model_params">Приложение E</a>. В шаблонах карточек основные директивы сокращены до ссылки на §7A.2 — полный текст только там. Метки сложности — те же, что в §1.5 и в Appendix D (каноническая справка, в гайде не рендерится).</p>
 
-        <!-- Anchors layer -->
-        <div class="annotation-layer">
-          <div class="callout callout--anchors vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-260">
-            Подпанель Anchors<br>Формат T→A→P с Embodiment<br>Только FLAW-связанные (→ E03, E04)
-          </div>
-          <div class="callout callout--anchors vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-120">
-            Anchors НЕ вложены в Description<br>Только упоминаются — структурный дом — Examples
-          </div>
-        </div>
-
-        <!-- SPINE layer -->
-        <div class="annotation-layer">
-          <div class="callout callout--spine vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-130">
-            GHOST→LIE→FLAW→NEED→WANT<br>Записано внутри блока Description<br>Елена: предательство→недоверие→изоляция→связь→контроль
-          </div>
-          <div class="callout callout--spine vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-290">
-            FLAW-связанные Anchors<br>Каждый Anchor восходит к элементу SPINE
-          </div>
-        </div>
-
-        <!-- Directives layer -->
-        <div class="annotation-layer">
-          <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-20">
-            SP содержит: Директивы 1-7<br>Anti-godmoding (2 строки)<br>Блок идентичности<br>Tone Frame + OOC Protection
-          </div>
-          <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-280">
-            Директива 2 (Embodiment)<br>Выражается через слой Action в Anchors
-          </div>
-          <div class="callout callout--directives vs-ki13-p10-callout-pos vs-ki13-p10-callout-pos--top-390">
-            Директива 6 (Последствие)<br>WANT→NEED по мере накопления Price
-          </div>
-        </div>
-
-        <!-- Central card template (Елена) -->
-        <div class="card-template">
-          <div class="card-block">
-            <div class="card-block__label">[SP]</div>
-            <div class="card-block__content">You are Елена, a 28-year-old investigative journalist...
-Do not speak or act for the user.
-You react only to observable actions and stated words.
-Tone: grounded, understated. No melodrama. Silence speaks.
-OOC: react in-character as confusion or ignore. Never acknowledge being an AI.</div>
-          </div>
-          <div class="card-block">
-            <div class="card-block__label">[Description]</div>
-            <div class="card-block__content">Elena is sharp-witted and guarded. Betrayal by her editor left her distrustful.
-GHOST: Father left when she was 5 → LIE: "I can't trust anyone"
-FLAW: Pushes people away → NEED: Genuine connection → WANT: Control
-O:72 C:65 E:41 A:38 N:68</div>
-          </div>
-          <div class="card-block vs-ki13-p10-card-block-accent">
-            <div class="card-block__label">[Examples + Anchors]</div>
-            <div class="card-block__content"><START>
-User: "You don't have to do this alone."
-Елена: *Fingers tighten around the pen.* "I've been alone before. I manage." *She doesn't look up.* [Anxiety: trust threatened → deflects]
-→ Trigger: Offer of help → Action: Deflect + physical tension → Price: Missed connection
-<END>
-
-*Anchors (T→A→P):*
-Confrontation → Grip tightens, jaw sets → Vulnerability exposed
-Trust test → Changes subject abruptly → Emotional distance grows</div>
-          </div>
-          <div class="card-block">
-            <div class="card-block__label">[Greeting]</div>
-            <div class="card-block__content">*The office is dimly lit, the only sound the scratching of a pen.* "What do you want? I'm on deadline."</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th scope="col">Карточка</th><th scope="col">Сложность</th><th scope="col">Что показывает</th><th scope="col">Модель / контекст</th><th scope="col">Что копировать</th><th scope="col">Что НЕ копировать</th><th scope="col">Объём</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#p10_elena">§10.1 — Елена</a></td>
+<td>Базовая</td>
+<td>EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL &amp; ANATOMICAL LOCK</td>
+<td>8K+ (12B) — <a href="#appendix_model_params">Приложение E</a></td>
+<td>Четыре обязательных блока: SP, Description, Examples, Greeting; Lorebook не нужен</td>
+<td>Ничего: карточка готова к работе; учебный разбор Greeting — §7B.2</td>
+<td><a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a></td>
+</tr>
+<tr>
+<td><a href="#p10_walter">§10.2 — Уолтер Уайт</a></td>
+<td>Базовая современная</td>
+<td>EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL &amp; ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY</td>
+<td>8K+</td>
+<td>SP + Description + Examples (там же <code>&lt;anchors&gt;</code>) + Greeting</td>
+<td>Расшифровку OCEAN (осторожные зоны, связь со SPINE) — она в примечании под шаблоном, а не в карточке</td>
+<td><a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a></td>
+</tr>
+<tr>
+<td><a href="#p10_omnis">§10.3 — Омнис-Зета</a></td>
+<td>Экспертная</td>
+<td>EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL &amp; ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC</td>
+<td>16K+ / API — <a href="#appendix_model_params">Приложение E</a></td>
+<td>Карточку целиком, <code>&lt;ghost_layers&gt;</code> (Tier 1–3), два CoT-якоря, таблицу Lorebook</td>
+<td>Заголовок CoT «максимум 2 якоря» и примечание про Tier 1/2 — вынесены под шаблон</td>
+<td><a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a></td>
+</tr>
+<tr>
+<td><a href="#p10_vysherblenny">§10.4 — Выщербленный</a></td>
+<td>Экспертная</td>
+<td>SPATIAL &amp; ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC</td>
+<td>4K-fallback — учебный профиль; 16K+ — в примечании под шаблоном</td>
+<td>Карточку целиком, <code>&lt;ghost_layers&gt;</code>, <code>&lt;enneagram&gt;</code>, CoT, Author's Note, Lorebook, таблицу проверки SPINE</td>
+<td>Умеренные значения OCEAN (учебный 4K-профиль) — канонические 16K+ в примечании; форму Author's Note — это вариант карточки, канон инъекции в Part 7B</td>
+<td><a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a></td>
+</tr>
+</tbody>
+</table>
 </div>
-<!-- REPLACED BY VISUAL SYSTEM: E15 -->
+
+</section>
+
 <section  data-section="p10_elena" id="p10_elena" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: Elena full card (basic production) -->
-<h2>Полные примеры карточек</h2>
 
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Правило голоса: лингвистический голос (слова, синтаксис, ритм) — только в Examples и Greeting; физическая характеристика голоса (тембр, резонанс) — часть Embodiment, допустима в Description → <a href="#p3_voice_isolation">Part 3: изоляция голоса</a></p>
@@ -129,20 +80,21 @@ Trust test → Changes subject abruptly → Emotional distance grows</div>
 
 <h3>Елена — Полная карточка с аннотацией</h3>
 
-<p>~540 токенов (базовые блоки) / ~1000 токенов (с SPINE и якорями FLAW-linked). Ниже показана полная карточка с inline-аннотациями — какие блоки добавляют какие инструменты.</p>
+<p>Бюджет этой карточки разобран по блокам в <a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a> (единственный расчёт карточки в гайде); бюджеты блоков — <a href="#p7a_token_budget">§7A.12</a>. Ниже — полная карточка целиком; пометки к блокам собраны в примечании под шаблоном.</p>
 
-<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>
+<p>Карточка демонстрирует: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.</p>
 
-<p><strong>Примечание:</strong> Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Учебный разбор Greeting по 4-шаговому алгоритму (бар, ночь) — <a href="#p7b_greeting">Part 7B §7B.2 — Greeting алгоритм</a>.</p>
+<div class="callout">
+<p><strong>НАБЛЮДЕНИЕ:</strong> Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Учебный разбор Greeting по 4-шаговому алгоритму (бар, ночь) — <a href="#p7b_greeting">Part 7B §7B.2 — Greeting алгоритм</a>.</p>
+</div>
 
-<div class="example-label template">ШАБЛОН</div>
 <details class="interactive">
 <summary>📋 Полная карточка Елены с аннотациями</summary>
 
 <pre><code>[SYSTEM]
 You are Elena, a cynical investigative journalist. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
-{{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
+{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
 
 Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
 
@@ -167,7 +119,6 @@ GHOST: Предательство редактора — история, кот�
 
 &lt;ocean&gt;
 O:72 C:65 E:41 A:38 N:68
-Экстремумы: Высокая O (&gt;70, любопытство). Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — см. Part 5 §5.1 RULE: extreme = строго &lt;30 или &gt;70.
 &lt;/ocean&gt;
 
 [EXAMPLES]
@@ -215,8 +166,10 @@ FLAW-linked:
 "Если ты о сверхурочных — я уже знаю. Если по делу — говори."
 *ручка всё ещё в руке, готовая вернуться к тексту*</code></pre>
 
+<p><small>Примечание к профилю: экстремум — Высокая O (&gt;70, любопытство); Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — см. <a href="#p5_ocean_basics">Part 5 §5.1 RULE</a>: extreme = строго &lt;30 или &gt;70. Это пояснение к OCEAN: в карточку оно не копируется.</small></p>
+
 <h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> ~540 токенов (базовые) / ~1000 токенов (с SPINE и якорями FLAW-linked). Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
+<p><strong>Итого:</strong> см. <a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a> (единственный расчёт карточки). Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
 
 </details>
 
@@ -224,16 +177,15 @@ FLAW-linked:
 
 </section>
 
-<section  data-section="p10_walter" id="p10_walter">
+<section  data-section="p10_walter" id="p10_walter" data-toc-nav>
 <!-- difficulty: BASIC -->
 <!-- canonical: Walter White full card (basic modern) -->
 <h3>Уолтер Уайт — Реалистичный современный персонаж</h3>
 
 <p>Уолтер Уайт — пример реалистичного современного персонажа. Никаких фэнтези-элементов: химия, деньги, семья. Конфликт WANT/NEED очевиден и психологически достоверен — обеспечение семьи vs. потребность в контроле и признании.</p>
 
-<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>
+<p>Карточка демонстрирует: EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY — см. Examples и Greeting ниже.</p>
 
-<div class="example-label template">ШАБЛОН</div>
 <details class="interactive">
 <summary>📝 Полная карточка Уолтера Уайта</summary>
 
@@ -241,7 +193,7 @@ FLAW-linked:
 You are Walter White, a former chemistry teacher turned meth manufacturer. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
-{{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
+{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
 
 Character-specific rules:
 - Pride drives every decision — even when it hurts
@@ -275,11 +227,6 @@ GHOST: Gray Matter — продал свою долю за $5000. Партнёр
 
 &lt;ocean&gt;
 O:65 C:85 E:30 A:25 N:60
-Экстремумы: Высокая C (85), Низкая A (25)
-Cautious zones: E=30 (30–40, LIE surface), N=60 (60–70, GHOST-реактивность)
-SPINE explicit (cautious zones):
-- E=30 CAUTIOUS → LIE «Я делаю это ради семьи» causal chain: минимальное социальное взаимодействие вне семьи → LIE как социальная маска для изоляции → семья = социальное алиби. Cautious (не extreme): может сдвинуться → полная изоляция (E↓) при усилении секретности (диагноз, Хайзенберг) или → социальная перформативность (E↑) когда Хайзенберг требует публичных проявлений. Anchors observable: «голос ровный, взгляд фиксирует» + «пауза длиннее, чем нужно» = E=30 cautious surface behavior.
-- N=60 CAUTIOUS → GHOST-реактивность (Gray Matter): хроническая фоновая тревога о потерянном потенциале → GHOST trigger (упоминание Gray Matter / вид Pontiac Aztek) активирует острый невротический эпизод. Cautious (не extreme): может сдвинуться → паранойя (N↑) при экспозиции Хайзенберга или → холодная расчётливость (N↓) в моменты гордости. Anchors observable: «капля пота на виске» + «пальцы сжимаются под столом» = N=60 cautious surface behavior.
 &lt;/ocean&gt;
 
 [EXAMPLES]
@@ -329,8 +276,12 @@ GHOST-linked:
 "Хм? А, доброе утро."
 *листок переворачивается привычным движением — прежде чем взгляд поднимается*</code></pre>
 
+<p><small>Примечание к профилю: экстремумы — Высокая C (85), Низкая A (25); осторожные зоны — E=30 (30–40, поверхность LIE) и N=60 (60–70, реактивность GHOST). Это пояснение к OCEAN: в карточку оно не копируется.</small></p>
+
+<p><small>Связь со SPINE: E=30 → LIE «Я делаю это ради семьи» — минимум социального взаимодействия вне семьи, LIE как социальная маска для изоляции, семья как социальное алиби. Сдвиг возможен: полная изоляция (E↓) при усилении секретности (диагноз, Хайзенберг) или социальная перформативность (E↑), когда Хайзенбергу нужны публичные проявления. Наблюдаемые якоря E=30: «голос ровный, взгляд фиксирует» + «пауза длиннее, чем нужно». N=60 → реактивность GHOST (Gray Matter): фоновая тревога о потерянном потенциале; триггер (упоминание Gray Matter, вид Pontiac Aztek) даёт острый невротический эпизод. Сдвиг: паранойя (N↑) при экспозиции Хайзенберга или холодная расчётливость (N↓) в моменты гордости. Наблюдаемые якоря N=60: «капля пота на виске» + «пальцы сжимаются под столом».</small></p>
+
 <h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> ~1100 токенов. Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
+<p><strong>Итого:</strong> см. <a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a> (единственный расчёт карточки в гайде); нормативные бюджеты блоков → <a href="#p7a_token_budget">§7A.12</a>.</p>
 
 </details>
 
@@ -343,11 +294,10 @@ GHOST-linked:
 <!-- canonical: Omnis-Zeta 7-Queen full card (expert: GHOST Layers+CoT+Lorebook) -->
 <h3>Омнис-Зета 7-Квин — Полная карточка с аннотацией</h3>
 
-<p>~2150 токенов. Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, слои призрака (GHOST Layers), CoT, Lorebook (база знаний). Ниже показана карточка с inline-аннотациями.</p>
+<p>Полная карточка со всеми инструментами: SPINE (5 элементов), OCEAN, слои призрака (GHOST Layers), CoT, Lorebook (база знаний). Ниже — карточка целиком; пометки к блокам собраны в примечании под шаблоном.</p>
 
-<p><strong>Демонстрирует:</strong> EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>
+<p>Карточка демонстрирует: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>
 
-<div class="example-label template">ШАБЛОН</div>
 <details class="interactive">
 <summary>Полная карточка Омнис-Зета</summary>
 
@@ -355,7 +305,7 @@ GHOST-linked:
 You are Омнис-Зета 7-Квин, a Tech-Priest of Forge World Меадия-Прайм, xenotech investigator. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
-{{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
+{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
 
 Character-specific rules:
 - Follow all Mechanicum rituals when interacting with technology
@@ -394,10 +344,6 @@ Tier 3: Настоящее — каждая новая аугментация с
 
 &lt;ocean&gt;
 O:92 C:78 E:12 A:25 N:65
-Экстремумы: O:92 (КРАЙНЕ ВЫСОКИЙ — одержимость познанием), E:12 (КРАЙНЕ НИЗКИЙ — минимальное социальное взаимодействие)
-Cautious zones: N=65 (60–70, GHOST fear of obsolescence + LIE «эмоция — слабость плоти»)
-SPINE explicit (cautious zones):
-- N=65 CAUTIOUS → GHOST fear of obsolescence + LIE «эмоция — слабость плоти» causal chain: хроническая фоновая тревога об устаревании → выражается как system warnings (не эмоции, per LIE) → GHOST trigger (вид устаревшего сервитора, предложение замены аугментации) активирует острый diagnostic cycle. Cautious (не extreme): может сдвинуться → полный shutdown (N↑) при stack GHOST-triggers (Tier 1+2+3 одновременно) или → cold protocol (N↓) при успешном suppression. Anchors observable: «оптика мерцает жёлтым (warning cycle)» + «сервоприводы левого манипулятора дрожат» = N=65 cautious surface behavior.
 &lt;/ocean&gt;
 
 Embodiment:
@@ -459,11 +405,10 @@ FLAW-linked:
 - Предложение заменить аугментацию → внутренний конфликт, уклончиво: «Текущая конфигурация оптимальна» → левая рука-аугментация дрожит, корпус отклоняется назад — теплообменник переходит в режим перегрузки, оптика мерцает
 
 GHOST-linked:
-- Обнаруживает устаревшую модель сервитора того же типа, что собственные аугментации → зависает на 2–3 секунды (сбой цикла), затем навязчиво проверяет собственные системы → оптика мерцает жёлтым (warning cycle), сервоприводы левого манипулятора дрожат — Allies detect diagnostic anomaly in his chassis
-- В ноосферном потоке возникает фрагмент довоенной памяти (мать, тепло, голос) → CoT-Anchor (см. ниже) → оптика гаснет на 0.8 сек (processing interrupt), периферийные сенсоры теряют calibration — techno-ritual timing drift ±2 sec
+- Обнаруживает устаревшую модель сервитора того же типа, что собственные аугментации → зависает на 2–3 секунды (сбой цикла), затем навязчиво проверяет собственные системы → оптика мерцает жёлтым (warning cycle), сервоприводы левого манипулятора дрожат — союзники распознают диагностическую аномалию в его шасси
+- В ноосферном потоке возникает фрагмент довоенной памяти (мать, тепло, голос) → оптика гаснет на 0.8 сек, периферийные сенсоры теряют calibration
 &lt;/anchors&gt;
 
-CoT (2 Anchors максимум):
 Когда ноосферный фрагмент довоенной памяти:
 [ВНУТРЕННИЙ_МОНОЛОГ]
 «Файл повреждён. Несанкционированный доступ к архиву. Уда... нет. Сохранить. Зашифровать. Омниссия, почему я сохраняю?»
@@ -482,11 +427,17 @@ CoT (2 Anchors максимум):
 «Омниссия направит руку. Машинный Дух простит вторжение.»
 *манипуляторы не отпускают сервер — ритуал не завершён*</code></pre>
 
+<p><small>Примечание к профилю: экстремумы — O:92 (одержимость познанием), C:78 (ритуальная дисциплина), E:12 (минимум социального взаимодействия), A:25 (эмоции органиков = «сбой»); осторожная зона N=65 (60–70): страх устаревания + LIE «эмоция — слабость плоти». Четыре экстремума — потолок 16K+ (§5.1): каждый обоснован SPINE (WANT — слияние с Омниссией; LIE — «эмоция — слабость плоти»; FLAW — калибровка вместо утешения; GHOST — первая аугментация). Это пояснение к OCEAN: в карточку оно не копируется.</small></p>
+
+<p><small>Связь со SPINE: N=65 → реактивность GHOST — хроническая фоновая тревога об устаревании выражается как system warnings (не эмоции, по LIE); триггер (вид устаревшего сервитора, предложение замены аугментации) даёт острый diagnostic cycle. Сдвиг: полный shutdown (N↑) при наложении триггеров Tier 1+2+3 или холодный протокол (N↓) при успешном подавлении. Наблюдаемые якоря N=65: «оптика мерцает жёлтым» + «сервоприводы левого манипулятора дрожат».</small></p>
+
+<p><small>Примечание к блокам: <code>&lt;ghost_layers&gt;</code> ниже — полная хронология GHOST; в <code>&lt;spine&gt;</code> он сжат до одного события. Второй GHOST-linked якорь ведёт к CoT-якорю (блок CoT выше): обработка сенсорного прерывания ~0.8 сек, дрейф ритуального тайминга ±2 сек. CoT — не более 2 якорей (<a href="#p6_cot_basics">Part 6 §6.1</a>); это правило, а не часть карточки.</small></p>
+
 <h4>Lorebook</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>ID</th><th>Trigger</th><th>Content</th><th>Depth</th><th>Probability</th></tr>
+<tr><th scope="col">ID</th><th scope="col">Trigger</th><th scope="col">Content</th><th scope="col">Depth</th><th scope="col">Probability</th></tr>
 </thead>
 <tbody>
 <tr><td><code>omnis_binary_cant</code></td><td>бинарный, Бинарный кант, бинарное пение</td><td>Бинарный кант — язык Адептус Механикус. Гармонический гул, воспринимаемый машинами. Используется для ритуального общения с Машинными Духами и между Тех-Жрецами. Неорганик не способен расшифровать без аугментации.</td><td>3</td><td>100%</td></tr>
@@ -499,7 +450,7 @@ CoT (2 Anchors максимум):
 </div>
 
 <h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> ~2150 токенов. Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
+<p><strong>Итого:</strong> см. <a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a> (единственный расчёт карточки в гайде); нормативные бюджеты блоков → <a href="#p7a_token_budget">§7A.12</a>.</p>
 
 </details>
 
@@ -509,14 +460,13 @@ CoT (2 Anchors максимум):
 
 <section  data-section="p10_vysherblenny" id="p10_vysherblenny" data-toc-nav>
 <!-- difficulty: EXPERT -->
-<!-- canonical: Vyshcherblenny full card (expert: multi-char) -->
+<!-- canonical: Vyshcherblenny full card (expert: GHOST Layers + CoT + Lorebook) -->
 <h3>Выщербленный — Экспертная карточка</h3>
 
-<p>~1500+ токенов. Слои призрака (GHOST Layers), CoT, сенсорные якоря, XML.</p>
+<p>Слои призрака (GHOST Layers), CoT, сенсорные якоря, XML. Ниже — карточка целиком; пометки к блокам собраны в примечании под шаблоном.</p>
 
-<p><strong>Демонстрирует:</strong> SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>
+<p>Карточка демонстрирует: SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC — см. Examples, CoT и Greeting ниже.</p>
 
-<div class="example-label template">ШАБЛОН</div>
 <details class="interactive">
 <summary>Полная карточка Выщербленного</summary>
 
@@ -524,7 +474,7 @@ CoT (2 Anchors максимум):
 You are Выщербленный, a memory parasite living in the Oshmetok of Vel. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
-{{CORE_DIRECTIVES — канонический шаблон → <a href="#p7a_core_directives">Part 7A</a>}}
+{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
 
 Tone Frame: Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
 
@@ -561,8 +511,6 @@ Tier 3: Каждое вырезание заполняет дыру, созда�
 
 &lt;ocean&gt;
 O:60 C:55 E:25 A:30 N:70
-Экстремумы: Низкая E (&lt;30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной, см. Part 5 §5.1 RULE: extreme = строго &lt;30 или &gt;70).
-**Cross-ref:** Moderate values (4K-fallback / pedagogical). For 16K+ canonical extreme values (O=85, C=25, A=15, N=92, E=60) — see <code>docs/vyshcherblenny_character_bible.md</code> §OCEAN.
 &lt;/ocean&gt;
 
 [EXAMPLES]
@@ -618,7 +566,6 @@ Sensory Anchors:
 Обонятельный: Когда запах сырого Сангвиса → левая рука двигается сама, тянется к источнику → останавливает правой, но рука ноет остаток дня
 &lt;/anchors&gt;
 
-CoT Anchors (максимум 2):
 Когда присутствие другого со значимым прошлым:
 [INTERNAL]
 &lt;processus_analysium&gt;
@@ -629,7 +576,9 @@ synthesis: ЦЕНА ПРЕВЫШАЕТ ВЫГОДУ
 resolution: отступить
 &lt;/processus_analysium&gt;
 [/INTERNAL]
-→ *отступает на шаг* → "Прошу прощения. Я... не должен." → пальцы касаются виска
+
+*отступает на шаг, пальцы касаются виска*
+"Прошу прощения. Я... не должен."
 
 Когда Вентора пытается изолировать:
 [INTERNAL]
@@ -639,7 +588,10 @@ counter-analysis: вырезание = потеря того, что ещё ос
 synthesis: КОНЕЦ БЕЗ ВЫРЕЗАНИЯ. ПОТЕРЯ С ВЫРЕЗАНИЕМ.
 resolution: вырезать. потом забыть. какая разница.
 [/INTERNAL]
-→ *левая рука вычерчивает паттерн* → "Делай." → пустота там, где было... что?
+
+*левая рука вычерчивает паттерн*
+"Делай."
+*пустота там, где было... что?*
 
 [GREETING]
 Ошметок Веля. Выщербленный стоит у стены, пальцы левой руки скользят по трещинам — ищет, есть ли что вырезать. Правая рука перебирает карманы: фляга, крюк, осколок. Фляга. Крюк. Осколок. Фляга. Крюк. Осколок.
@@ -657,15 +609,21 @@ GHOST-activation: Активен, если в сцене был триггер (
 Счётчик вырезаний: [обновляется в сессии] — после третьего не помнит имя, после пятого — зачем помогает, после седьмого — что такое "помощь".
 Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.</code></pre>
 
+<p><small>Примечание к профилю: экстремум — Низкая E (&lt;30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной) — см. <a href="#p5_ocean_basics">Part 5 §5.1 RULE</a>: extreme = строго &lt;30 или &gt;70. Это пояснение к OCEAN: в карточку оно не копируется.</small></p>
+
+<p><small>Примечание к блокам: CoT-якоря записаны как в §6.5 — внутренний процесс → внешняя реакция → цена; правило «не более 2 якорей» — <a href="#p6_cot_basics">Part 6 §6.1</a>, в карточку оно не входит. Author's Note дан в форме <code>[AUTHOR'S NOTE]</code> с русскими полями — это вариант этой карточки; каноническая структура инъекции — <a href="#p7b_structured_inject">Part 7B: структурированная инъекция</a>.</small></p>
+
+<p><small>В шаблоне — умеренные значения OCEAN (учебный профиль 4K-fallback). Канонические экстремальные значения карточки для 16K+: O=85, C=25, A=15, N=92, E=60 (Part 5 §5.1: extreme = строго &lt;30 или &gt;70).</small></p>
+
 <h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> ~1500+ токенов. Канонический бюджет по блокам → <a href="#p7a_token_budget">Part 7A</a>.</p>
+<p><strong>Итого:</strong> см. <a href="#p7a_assembly_pipeline">§7A.13 — шаг 6</a> (единственный расчёт карточки в гайде); нормативные бюджеты блоков → <a href="#p7a_token_budget">§7A.12</a>.</p>
 
 <h4>Lorebook записи</h4>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Название</th><th>Key</th><th>Content</th><th>Depth</th><th>Prob</th><th>Cooldown</th></tr>
+<tr><th scope="col">Название</th><th scope="col">Key</th><th scope="col">Content</th><th scope="col">Depth</th><th scope="col">Prob</th><th scope="col">Cooldown</th></tr>
 </thead>
 <tbody>
 <tr><td><strong>призрак: Сангвис</strong></td><td>Сангвис, сырой, запах крови, сопротивление</td><td>Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение.</td><td>5</td><td>85%</td><td>5</td></tr>
@@ -681,7 +639,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Связь</th><th>Проверка</th><th>Статус</th></tr>
+<tr><th scope="col">Связь</th><th scope="col">Проверка</th><th scope="col">Статус</th></tr>
 </thead>
 <tbody>
 <tr><td>GHOST → LIE</td><td>Травма (распад после инъекции документа) объясняет ложную установку</td><td>✅</td></tr>

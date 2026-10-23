@@ -57,7 +57,7 @@ Checks:
  7. Hint re-frames (canon + master): §9.3 12B-qualified; §9.4 model-range
     defer; §9.10 12B-qualified + §7A.6 ref; every «1.0–1.05» line in Part 9
     is 12B-qualified (no unqualified hint anywhere).
- 8. Appendix B OBSERVATION: canon + master + root fallback; no new component
+ 8. Appendix E OBSERVATION: canon + master + root fallback; no new component
     class (base .callout).
  9. Glossary defers: registry RepPen entry + generated data/glossary.json.
 10. No competing ranges anywhere in the content layers (canon + master +
@@ -92,17 +92,17 @@ REPO = Path(__file__).resolve().parents[1]
 CANON_7A = REPO / "docs" / "canon" / "part_07a.md"
 CANON_8 = REPO / "docs" / "canon" / "part_08.md"
 CANON_9 = REPO / "docs" / "canon" / "part_09.md"
-CANON_APPB = REPO / "docs" / "canon" / "appendix_model_table.md"
+CANON_APPE = REPO / "docs" / "canon" / "appendix_model_params.md"
 MASTER_7A = REPO / "src" / "master" / "part_07a.html"
 MASTER_8 = REPO / "src" / "master" / "part_08.html"
 MASTER_9 = REPO / "src" / "master" / "part_09.html"
-MASTER_APPB = REPO / "src" / "master" / "appendix_model_table.html"
+MASTER_APPE = REPO / "src" / "master" / "appendix_model_params.html"
 GLOSSARY_REGISTRY = REPO / "docs" / "canon" / "glossary_registry.md"
 GLOSSARY_JSON = REPO / "data" / "glossary.json"
 FALLBACK_7A = REPO / "parts" / "part_07a.html"
 FALLBACK_8 = REPO / "parts" / "part_08.html"
 FALLBACK_9 = REPO / "parts" / "part_09.html"
-FALLBACK_APPB = REPO / "parts" / "appendix_model_table.html"
+FALLBACK_APPE = REPO / "parts" / "appendix_model_params.html"
 MAP = REPO / "docs" / "research" / "migration_map_v2.md"
 MATRIX = REPO / "docs" / "research" / "editorial_matrix.md"
 STATUS = REPO / "STATUS.md"
@@ -237,49 +237,65 @@ def main():
     canon7a = read(CANON_7A)
     canon8 = read(CANON_8)
     canon9 = read(CANON_9)
-    canon_appb = read(CANON_APPB)
+    canon_appe = read(CANON_APPE)
     master7a = read(MASTER_7A)
     master8 = read(MASTER_8)
     master9 = read(MASTER_9)
-    master_appb = read(MASTER_APPB)
+    master_appe = read(MASTER_APPE)
 
-    # ---------- 1. Canonical record (canon §7A.6, S-a) ----------
+    # ---------- 1. Canonical record (Appendix E, SW-1 since iter 172) ----------
     sec76 = md_section(canon7a, r"^## 7A\.6 ", r"^## 7A\.7 ")
     if sec76 is None:
         err("canon §7A.6 section not found")
         return finish()
-    marker = re.search(r"^\[VS: E17 — .+\]$", sec76, re.MULTILINE)
-    if not marker:
-        err("canon §7A.6: [VS: E17] marker (full format) missing")
-    else:
-        m_text = marker.group(0)
-        for token in ("SHARED_REFERENCE", "12B–32B", "audit_sampling_parity.py"):
-            if token not in m_text:
-                err(f"canon §7A.6 [VS: E17] marker: token missing: {token}")
-    base_rows = parse_canon_table(sec76, 5)
-    got = [
-        (r[0].replace("**", ""), [c.replace("**", "") for c in r[1:4]])
-        for r in base_rows
-        if r[0].replace("**", "") in dict(CANON_TABLE)
-    ]
-    if got != CANON_TABLE:
-        err(f"canon §7A.6: «Базовые параметры» table mismatch — expected "
-            f"{CANON_TABLE}, got {got}")
-    if sec76.count("**ПРАВИЛО:**") != 2:
-        err("canon §7A.6: PP = 0.0 ПРАВИЛО callouts != 2")
-    if "Ollama и LM Studio" not in sec76:
-        err("canon §7A.6: Ollama/LM Studio PP rule missing")
-    for model, temp, reppen in MODEL_SPECIFIC:
-        row = next((r for r in parse_canon_table(sec76, 4)
-                    if r and r[0] == f"**{model}**"), None)
-        if row is None or temp not in row[1] or reppen not in row[2]:
-            err(f"canon §7A.6: «Модель-специфичные» row wrong/missing: {model}")
-    if "Никогда > 1.10" not in sec76:
-        err("canon §7A.6: AP-5 boundary note (Никогда > 1.10) missing")
-    notes.append("canonical record §7A.6: 6×3 table (S-a values exact) + full "
-                 "[VS: E17] marker + PP rules ×2 + model-specific point recs ×4")
+    # §7A.6 is a pointer now: the two hard constraints stay inline, the tables
+    # live in Appendix E (v3 stage 2, iter 172 — the sampling ownership move).
+    if "[ref: appendix_model_params.md — параметры генерации]" not in sec76:
+        err("canon §7A.6: pointer to Appendix E missing")
+    if "Presence Penalty = 0.0" not in sec76:
+        err("canon §7A.6: PP = 0.0 hard constraint missing")
+    if "RepPen ≤ 1.10" not in sec76:
+        err("canon §7A.6: RepPen ≤ 1.10 hard constraint missing")
+    if parse_canon_table(sec76, 5):
+        err("canon §7A.6: value table must not live here (Appendix E owns it)")
 
-    # ---------- 2. Canon §7A.7 (S-b) ----------
+    secE_sample = md_section(canon_appe, r"^### Параметры генерации", r"^### Налог")
+    if secE_sample is None:
+        err("canon Appendix E: «Параметры генерации» subsection not found")
+    else:
+        marker = re.search(r"^\[VS: E17 — .+\]$", secE_sample, re.MULTILINE)
+        if not marker:
+            err("canon Appendix E: [VS: E17] marker (full format) missing")
+        else:
+            m_text = marker.group(0)
+            for token in ("SHARED_REFERENCE", "12B–32B", "audit_sampling_parity.py"):
+                if token not in m_text:
+                    err(f"canon Appendix E [VS: E17] marker: token missing: {token}")
+        base_rows = parse_canon_table(secE_sample, 5)
+        got = [
+            (r[0].replace("**", ""), [c.replace("**", "") for c in r[1:4]])
+            for r in base_rows
+            if r[0].replace("**", "") in dict(CANON_TABLE)
+        ]
+        if got != CANON_TABLE:
+            err(f"canon Appendix E: «Базовые параметры» table mismatch — expected "
+                f"{CANON_TABLE}, got {got}")
+        if secE_sample.count("**ПРАВИЛО:**") != 2:
+            err("canon Appendix E: PP = 0.0 / Ollama ПРАВИЛО callouts != 2")
+        if "Ollama и LM Studio" not in secE_sample:
+            err("canon Appendix E: Ollama/LM Studio PP rule missing")
+        for model, temp, reppen in MODEL_SPECIFIC:
+            row = next((r for r in parse_canon_table(secE_sample, 4)
+                        if r and r[0] == f"**{model}**"), None)
+            if row is None or temp not in row[1] or reppen not in row[2]:
+                err(f"canon Appendix E: «Модель-специфичные» row wrong/missing: {model}")
+        if "Никогда > 1.10" not in secE_sample:
+            err("canon Appendix E: AP-5 boundary note (Никогда > 1.10) missing")
+    notes.append("canonical record Appendix E: 6×3 table (S-a values exact) + full "
+                 "[VS: E17] marker + PP rules ×2 + model-specific point recs ×4; "
+                 "§7A.6 keeps the two hard constraints + a pointer")
+
+    # ---------- 2. Canon §7A.7 (S-b) pointer + Appendix E capability rows ----------
     sec77 = md_section(canon7a, r"^## 7A\.7 ", r"^## 7A\.8 ")
     if sec77 is None:
         err("canon §7A.7 section not found")
@@ -287,105 +303,101 @@ def main():
         for param in ("Temperature", "Presence Penalty", "RepPen"):
             if re.search(rf"^\| {re.escape(param)} \|", sec77, re.MULTILINE):
                 err(f"canon §7A.7: param row still present: {param}")
-        for row in CAPABILITY_ROWS:
-            if f"| {row} |" not in sec77:
-                err(f"canon §7A.7: capability row missing: {row}")
-        if "| Возможность | 12B–14B | 32B+ | API (Claude/GPT) |" not in sec77:
-            err("canon §7A.7: capability table header missing/renamed wrong")
-        if "Числовые параметры сэмплирования" not in sec77 \
-                or "[ref: §7A.6 — Параметры генерации (сэмплирование)]" not in sec77:
-            err("canon §7A.7: defer line to §7A.6 missing")
-        if "параметров и возможностей" in sec77:
-            err("canon §7A.7: stale intro («параметров и возможностей») remains")
-        if "пренебрежимо мало (~2%)" not in sec77:
-            err("canon §7A.7: voice-slice РЕКОМЕНДАЦИЯ anchor altered")
-        # G1 (iter 166): capability values locked — CoT row §6.3-aligned
-        # (Tier 0 / Tier 1–2 / Tier 2–3), Anti-godmoding 2/2/1; canon = the
-        # sole §7A.7 value owner (owner call G1: A1).
-        cot_row = next((r for r in parse_canon_table(sec77, 4)
-                        if r and r[0] == "Уровень CoT"), None)
-        if cot_row is None:
-            err("canon §7A.7: CoT capability row missing/unparseable")
-        else:
-            for cell, needle in zip(cot_row[1:4],
-                                    ("Tier 0", "Tier 1–2", "Tier 2–3")):
-                if needle not in cell:
-                    err(f"canon §7A.7: CoT cell must carry {needle!r} — got {cell!r}")
-            if "part_06.md §6.3" not in cot_row[1]:
-                err("canon §7A.7: CoT row §6.3 tier-owner ref missing")
-        ag_row = next((r for r in parse_canon_table(sec77, 4)
-                       if r and r[0] == "Anti-godmoding"), None)
-        if ag_row is None:
-            err("canon §7A.7: Anti-godmoding row missing/unparseable")
-        else:
-            for cell, needle in zip(ag_row[1:4],
-                                    ("2 строки", "2 строки", "1 строка")):
-                if needle not in cell:
-                    err(f"canon §7A.7: Anti-godmoding cell must carry "
-                        f"{needle!r} — got {cell!r}")
-    notes.append("canon §7A.7: param rows dropped (S-b), 5 capability rows + "
-                 "defer line present, voice-slice anchor intact; G1 iter 166: "
-                 "CoT row §6.3-aligned (Tier 0 / Tier 1–2 / Tier 2–3) + AG 2/2/1 locked")
+        if parse_canon_table(sec77, 4):
+            err("canon §7A.7: capability table must live in Appendix E now")
+        if "[ref: appendix_model_params.md — возможности моделей]" not in sec77:
+            err("canon §7A.7: pointer to Appendix E missing")
 
-    # ---------- 3. Master §7A.6 mirror ----------
+    cap_rows = parse_canon_table(canon_appe, 4)
+
+    def cap_row(name):
+        return next((r for r in cap_rows if r and r[0] == name), None)
+
+    # G1 (iter 166) values stay locked, now in the Appendix E merged table:
+    # CoT working level §6.2-aligned (v3 S4a: bridge merged into basics; tiers = §6.2) (Tier 0 / Tier 1–2 / Tier 2–3), AG 2/2/1.
+    cot_row = cap_row("Рабочий уровень CoT")
+    if cot_row is None:
+        err("canon Appendix E: CoT capability row missing/unparseable")
+    else:
+        for cell, needle in zip(cot_row[1:4],
+                                ("Tier 0", "Tier 1–2", "Tier 2–3")):
+            if needle not in cell:
+                err(f"canon Appendix E: CoT cell must carry {needle!r} — got {cell!r}")
+        if "part_06.md §6.2" not in cot_row[1]:
+            err("canon Appendix E: CoT row §6.2 tier-owner ref missing")
+    eff_row = cap_row("Эффективность CoT")
+    if eff_row is None:
+        err("canon Appendix E: CoT capability-envelope row missing")
+    else:
+        for cell, needle in zip(eff_row[1:4], ("Tier 0–1", "Tier 0–3", "Tier 0–3")):
+            if needle not in cell:
+                err(f"canon Appendix E: CoT envelope cell must carry {needle!r}")
+    ag_row = cap_row("Anti-godmoding")
+    if ag_row is None:
+        err("canon Appendix E: Anti-godmoding row missing/unparseable")
+    else:
+        for cell, needle in zip(ag_row[1:4], ("2 строки", "2 строки", "1 строка")):
+            if needle not in cell:
+                err(f"canon Appendix E: Anti-godmoding cell must carry "
+                    f"{needle!r} — got {cell!r}")
+    voice_row = cap_row("Размещение голоса")
+    if voice_row is None:
+        err("canon Appendix E: voice-placement row missing")
+    else:
+        for cell in voice_row[1:4]:
+            if "никогда в Description" not in cell:
+                err("canon Appendix E: voice-placement cell lost «никогда в Description»")
+    lang_row = cap_row("Язык SP")
+    if lang_row is None or "64K" not in lang_row[1] or "128K" not in lang_row[1]:
+        err("canon Appendix E: SP-language thresholds row missing/limp")
+    for row in CAPABILITY_ROWS:
+        if row not in ("Уровень CoT",) and cap_row(row) is None:
+            err(f"canon Appendix E: capability row missing: {row}")
+    notes.append("canon §7A.7: params + capability table moved to Appendix E (pointer "
+                 "only); G1 iter 166 values stay locked in the Appendix E merged "
+                 "table (CoT Tier 0 / Tier 1–2 / Tier 2–3, AG 2/2/1, voice, SP language)")
+
+    # ---------- 3. Master §7A.6 pointer mirror ----------
     m76 = html_section(master7a, "p7a_sampling_params")
     if m76 is None:
         err("master: p7a_sampling_params section not found")
     else:
-        if "в визуализации выше (E17)" not in m76:
-            err("master §7A.6: E17 pointer line missing")
-        if "RepPen:</strong> Никогда &gt; 1.10" not in m76:
-            err("master §7A.6: qualitative RepPen note missing")
+        if 'href="#appendix_model_params"' not in m76:
+            err("master §7A.6: Appendix E pointer link missing")
+        if "Presence Penalty = 0.0" not in m76:
+            err("master §7A.6: PP = 0.0 hard constraint missing")
+        if "RepPen ≤ 1.10" not in m76:
+            err("master §7A.6: RepPen ≤ 1.10 hard constraint missing")
         if m76.count("ПРАВИЛО:") != 2:
-            err("master §7A.6: PP ПРАВИЛО callouts != 2")
-        if "Модель-специфичные рекомендации" not in m76:
-            err("master §7A.6: model-specific details block missing")
-        for model, temp, reppen in MODEL_SPECIFIC:
-            # master uses hyphen ranges in this table (pre-existing); normalize
-            m76_norm = re.sub(r"(\d)-(\d)", r"\1–\2", m76)
-            row = (f"<td><strong>{model}</strong></td><td>{temp}</td>"
-                   f"<td>{reppen}</td>")
-            if row not in m76_norm:
-                err(f"master §7A.6: model-specific row wrong/missing: {model}")
-        if re.search(r"<th>12B</th>\s*<th>12B–32B</th>", m76):
-            err("master §7A.6: value table must stay replaced by the E17 pointer")
-    notes.append("master §7A.6 mirror: E17 pointer + qualitative notes + PP rules "
-                 "+ model-specific details (4 rows)")
+            err("master §7A.6: ПРАВИЛО callouts != 2")
+        if "<th>12B</th>" in m76 or "Модель-специфичные рекомендации" in m76:
+            err("master §7A.6: value/model tables must live in Appendix E now")
+    notes.append("master §7A.6 mirror: two hard constraints + Appendix E pointer; "
+                 "no value table")
 
-    # ---------- 4. Master §7A.7 mirror ----------
+    # ---------- 4. Master §7A.7 pointer mirror ----------
     m77 = html_section(master7a, "p7a_model_checklist")
     if m77 is None:
         err("master: p7a_model_checklist section not found")
     else:
-        if "Числовые параметры сэмплирования" not in m77 \
-                or 'href="#p7a_sampling_params"' not in m77:
-            err("master §7A.7: defer intro with §7A.6 link missing")
-        if "пренебрежимо мало (~2%)" not in m77:
-            err("master §7A.7: voice-slice РЕКОМЕНДАЦИЯ anchor altered")
-        if "<th>Параметр</th>" in m77 or "<th>Temperature</th>" in m77:
-            err("master §7A.7: param table must not reappear")
-        # G1 (iter 166): master mirrors the canon capability values (ul shape
-        # kept — identical values, owner call G1: A1)
-        for needle in ("CoT Tier 0", "CoT Tier 1–2", "CoT Tier 2–3",
-                       "Anti-godmoding 2 строки (запрет + позитив)",
-                       "Anti-godmoding 2 строки.", "Anti-godmoding 1 строка"):
-            if needle not in m77:
-                err(f"master §7A.7: capability value missing: {needle!r}")
-        if "Tier 0–1" in m77:
-            err("master §7A.7: stale «Tier 0–1» CoT value remains")
-        if 'href="#p6_cot_tiers"' not in m77:
-            err("master §7A.7: §6.3 tier-definitions link missing")
-    notes.append("master §7A.7 mirror: capability bullets + defer link; no param table; "
-                 "G1 iter 166: CoT values §6.3-aligned + AG 2/2/1 + §6.3 link")
+        if 'href="#appendix_model_params"' not in m77:
+            err("master §7A.7: Appendix E pointer link missing")
+        if "<th>Параметр</th>" in m77 or "<th>Temperature</th>" in m77 \
+                or "<th>Возможность</th>" in m77:
+            err("master §7A.7: param/capability table must not reappear")
+        if "CoT Tier 0" in m77:
+            err("master §7A.7: capability bullets must be gone (Appendix E owns them)")
+    notes.append("master §7A.7 mirror: pointer only (capability table lives in "
+                 "Appendix E)")
 
     # ---------- 5. E17 embed (S-c) ----------
     e17 = re.search(
         r'<div class="vs-embed" data-vs-element="E17">.*?'
         r"<!-- REPLACED BY VISUAL SYSTEM: E17 -->",
-        master7a, re.DOTALL,
+        master_appe, re.DOTALL,
     )
     if not e17:
-        err("master: E17 embed not found")
+        err("master Appendix E: E17 embed not found")
     else:
         e17_text = e17.group(0)
         for token in E17_COMMENT_TOKENS:
@@ -400,7 +412,7 @@ def main():
                            ">RepPen</span>", ">1.05–1.10</span>",
                            ">Top P</span>", ">0.9–0.95</span>",
                            ">Min P</span>", ">0.05–0.1</span>",
-                           ">Top K</span>", ">40–80</span>", ">0.0"):
+                           ">Top K</span>", ">40–100</span>", ">0.0"):
                 if needle not in col32:
                     err(f"E17 32B+ column: canonical value missing: {needle}")
             for banned in ("sub-range", "0.7–1.1", "0.85–1.1", "1.0–1.10",
@@ -469,47 +481,39 @@ def main():
     notes.append("E12 embed: AP-5 fix card re-framed (model-qualified defer + "
                  "AP-5 boundary), re-point comment present")
 
-    # ---------- 7. Hint re-frames (§9.3 / §9.4 / §9.5 / §9.10, canon + master) ----------
-    c93 = md_section(canon9, r"^## 9\.3 ", r"^## 9\.4 ")
+    # ---------- 7. Hint re-frames (§9.1 / §9.2 / §9.7, canon + master) ----------
+    # iter 173 (v3 Stage 3): Part 9 renumbered 9.1–9.7 — the per-block scan is §9.1,
+    # the symptom table §9.2 (absorbs the retired §9.4 pointer-only section),
+    # the 12B delta §9.7. The old §9.4 block is gone; its #4/#5 fold pointer guard
+    # moved into the §9.2 check below.
+    c93 = md_section(canon9, r"^## 9\.1 ", r"^## 9\.2 ")
     if c93 is None:
-        err("canon §9.3 section not found")
+        err("canon §9.1 section not found")
     else:
         if "(1.0–1.05 для 12B" not in c93:
-            err("canon §9.3: RepPen check not 12B-qualified")
+            err("canon §9.1: RepPen check not 12B-qualified")
         if "(рекомендация 1.0–1.05)" in c93:
-            err("canon §9.3: stale unqualified parenthetical remains")
-    c94 = md_section(canon9, r"^## 9\.4 ", r"^## 9\.5 ")
-    if c94 is None:
-        err("canon §9.4 section not found")
-    else:
-        # iter 156 (v2 Part 9 build slice, matrix p9_additional_problems::02 →
-        # map §5.17 P9-2): the #4/#5 table folded into §9.5 (rows #4/#5) — the
-        # S-d re-framed #4 fix text moved out of §9.4 with the fold; the
-        # model-range defer for the repeats symptom rides the §9.5 #4 row's
-        # AP-5 target + §9.3 (above) + §9.10 (below). Fold-form guards:
-        if "строки #4/#5" not in c94:
-            err("canon §9.4: #4/#5 fold pointer missing (folded iter 156)")
-        if "Персонаж теряет характер" not in c94:
-            err("canon §9.4: #5 symptom name dropped from the fold pointer")
-        if "Установите RepPen 1.0–1.05;" in c94 or "для 12B — 1.0–1.05" in c94:
-            err("canon §9.4: pre-fold #4 fix text remains (folded iter 156)")
-    c95 = md_section(canon9, r"^## 9\.5 ", r"^## 9\.6 ")
+            err("canon §9.1: stale unqualified parenthetical remains")
+    c95 = md_section(canon9, r"^## 9\.2 ", r"^## 9\.3 ")
     if c95 is None:
-        err("canon §9.5 section not found")
+        err("canon §9.2 section not found")
     else:
         if "| #4: Повторяющиеся фразы |" not in c95:
-            err("canon §9.5: #4 row label missing (iter 156 fold)")
+            err("canon §9.2: #4 row label missing (iter 156 fold, kept iter 173)")
         if "| #5: Модель игнорирует характер |" not in c95:
-            err("canon §9.5: #5 row label missing (iter 156 fold)")
-    c910 = md_section(canon9, r"^## 9\.10 ", r"^## 9\.11 ")
+            err("canon §9.2: #5 row label missing (iter 156 fold, kept iter 173)")
+        # the retired §9.4 pointer section's living form: the #4/#5 fold note
+        if "строки #4/#5" not in c95:
+            err("canon §9.2: #4/#5 fold pointer missing (absorbed §9.4, iter 173)")
+    c910 = md_section(canon9, r"^## 9\.7 ", r"(?!)")
     if c910 is None:
-        err("canon §9.10 section not found")
+        err("canon §9.7 section not found")
     else:
         if "RepPen 1.02–1.05 (12B-диапазон —" not in c910 \
                 or "`[ref: part_07a.md §7A.6]`" not in c910:
-            err("canon §9.10: «Повторы фраз» row not 12B-qualified with §7A.6 ref")
+            err("canon §9.7: «Повторы фраз» row not 12B-qualified with §7A.6 ref")
         if "RepPen 1.02-1.05," in c910:
-            err("canon §9.10: stale unqualified row remains")
+            err("canon §9.7: stale unqualified row remains")
     for line in canon9.split("\n"):
         if "1.0–1.05" in line and "12B" not in line:
             err(f"canon part_09.md: unqualified «1.0–1.05» line: {line.strip()[:80]}")
@@ -519,46 +523,45 @@ def main():
                 f"{line.strip()[:80]}")
     m93 = html_section(master9, "p9_basic_checklist")
     if m93 and "(1.0–1.05 для 12B" not in m93:
-        err("master §9.3: RepPen check not 12B-qualified")
-    m94 = html_section(master9, "p9_additional_problems")
-    if m94 and "строки #4/#5" not in m94:
-        err("master §9.4: #4/#5 fold mirror missing (folded iter 156)")
+        err("master §9.1: RepPen check not 12B-qualified")
     m95 = html_section(master9, "p9_symptom_table")
     if m95 and ("#4: Повторяющиеся фразы" not in m95
                 or "#5: Модель игнорирует характер" not in m95):
-        err("master §9.5: #4/#5 row labels missing (iter 156 fold)")
+        err("master §9.2: #4/#5 row labels missing (iter 156 fold)")
+    if m95 and "строки #4/#5" not in m95:
+        err("master §9.2: #4/#5 fold pointer missing (absorbed §9.4, iter 173)")
     m910 = html_section(master9, "p9_12b_issues")
     if m910 and "(12B-диапазон — <a href=\"#p7a_sampling_params\">§7A.6</a>)" not in m910:
         err("master §9.10: «Повторы фраз» row mirror not qualified")
-    notes.append("hint re-frames: §9.3 / §9.10 model-qualified (canon + master) "
-                 "+ the §9.4→§9.5 #4/#5 fold (iter 156, map §5.17 P9-2 — the "
-                 "#4 model-range defer rides the §9.5 #4 row's AP-5 chain); "
+    notes.append("hint re-frames: §9.1 / §9.7 model-qualified (canon + master) "
+                 "+ the #4/#5 fold pointer (iter 156) now lives in §9.2 "
+                 "(§9.4 absorbed, iter 173); "
                  "every Part 9 «1.0–1.05» line carries a 12B qualifier")
 
-    # ---------- 8. Appendix B OBSERVATION (DEC-20 first application) ----------
+    # ---------- 8. Appendix E OBSERVATION (DEC-20 first application) ----------
     for anchor in OBSERVATION_ANCHORS:
-        if anchor not in canon_appb:
-            err(f"canon Appendix B: OBSERVATION anchor missing: {anchor}")
-    if "<strong>НАБЛЮДЕНИЕ:</strong>" not in master_appb:
-        err("master Appendix B: НАБЛЮДЕНИЕ callout missing")
-    elif 'class="callout"' not in master_appb:
-        err("master Appendix B: callout wrapper missing (base .callout)")
-    elif 'class="callout rule"' in master_appb or 'class="callout rec"' in master_appb:
-        err("master Appendix B: OBSERVATION must not borrow RULE/GUIDELINE classes")
-    notes.append("Appendix B: first OBSERVATION-strength application "
+        if anchor not in canon_appe:
+            err(f"canon Appendix E: OBSERVATION anchor missing: {anchor}")
+    obs = re.search(
+        r'<div class="callout">\s*<p><strong>НАБЛЮДЕНИЕ:</strong>.*?</div>',
+        master_appe, re.DOTALL,
+    )
+    if not obs:
+        err("master Appendix E: НАБЛЮДЕНИЕ callout missing (base .callout)")
+    notes.append("Appendix E: first OBSERVATION-strength application preserved "
                  "(«НАБЛЮДЕНИЕ» + base .callout — registered component)")
 
     # ---------- 9. Glossary defers ----------
     registry = read(GLOSSARY_REGISTRY)
-    if "Канонический диапазон — таблица §7A.6" not in registry:
-        err("glossary_registry: RepPen entry no longer defers to §7A.6")
+    if "Канонический диапазон — таблица Приложения E" not in registry:
+        err("glossary_registry: RepPen entry no longer defers to Appendix E")
     if GLOSSARY_JSON.exists():
-        if "таблица §7A.6" not in read(GLOSSARY_JSON):
+        if "таблица Приложения E" not in read(GLOSSARY_JSON):
             err("data/glossary.json: RepPen defer missing (regenerate: "
                 "pnpm run build:glossary)")
     else:
         err("data/glossary.json not found")
-    notes.append("glossary defers: registry + generated JSON point at §7A.6 "
+    notes.append("glossary defers: registry + generated JSON point at Appendix E "
                  "(5th location stays eliminated)")
 
     # ---------- 10. No competing ranges anywhere (content layers) ----------
@@ -577,13 +580,14 @@ def main():
 
     # ---------- 11. Root fallbacks current ----------
     for path, needles in (
-        (FALLBACK_7A, [">0.7–1.0</span>", ">1.05–1.10</span>",
-                       "sampling-cluster (iter 145)",
-                       ">Tier 0</span>", ">1 строка</span>"]),
+        (FALLBACK_7A, ["Presence Penalty = 0.0", "RepPen ≤ 1.10",
+                       'href="#appendix_model_params"']),
         (FALLBACK_8, ["Держите RepPen в диапазоне своей модели — §7A.6"]),
         (FALLBACK_9, ["(1.0–1.05 для 12B", "(12B-диапазон — "
                       "<a href=\"#p7a_sampling_params\">§7A.6</a>)"]),
-        (FALLBACK_APPB, ["НАБЛЮДЕНИЕ:"]),
+        (FALLBACK_APPE, [">0.7–1.0</span>", ">1.05–1.10</span>",
+                         "sampling-cluster (iter 145)",
+                         ">Tier 0</span>", ">1 строка</span>", "НАБЛЮДЕНИЕ:"]),
     ):
         if not path.exists():
             err(f"{path.relative_to(REPO)} not found — rebuild required "
@@ -598,7 +602,7 @@ def main():
                 if needle in text:
                     err(f"{path.relative_to(REPO)}: stale — «{needle}» present")
     notes.append("root fallbacks current: part_07a / part_08 / part_09 / "
-                 "appendix_model_table carry the slice")
+                 "appendix_model_params carry the slice")
 
     # ---------- 12. Map / matrix / registries / state parity ----------
     map_text = read(MAP)
@@ -636,7 +640,7 @@ def main():
     for row_id in ("p7a_sampling_params::02", "p7a_sampling_params::03",
                    "p7a_model_checklist::01", "p7a_model_checklist::02",
                    "p8_ap5_reppen_high::01", "p9_basic_checklist::03",
-                   "p9_additional_problems::02", "p9_12b_issues::03"):
+                   "p9_12b_issues::03"):
         row = next((ln for ln in matrix.split("\n") if f"| {row_id} |" in ln), None)
         if row is None:
             err(f"editorial_matrix.md: row {row_id} not found")
@@ -689,11 +693,12 @@ def finish():
         for e in errors:
             print(f"  ✗ {e}")
         sys.exit(1)
-    print("\nPASS — single canonical owner intact: §7A.6 canonical (6×3 table + "
-          "model-specific recs + full [VS: E17] marker), §7A.7 capability-only "
-          "with defer, E17 the one visual presentation (re-pointed to "
+    print("\nPASS — single canonical owner intact: Appendix E «Параметры "
+          "генерации» canonical (6×3 table + model-specific recs + full "
+          "[VS: E17] marker), §7A.6 = the two hard constraints + pointer, "
+          "§7A.7 = pointer, E17 the one visual presentation (re-pointed to "
           "«32B+ / API» values, declared 12B–32B omission), E12/§9.x hints "
-          "model-qualified, Appendix B OBSERVATION applied, glossary defers, "
+          "model-qualified, Appendix E OBSERVATION applied, glossary defers, "
           "no competing ranges, root fallbacks current, KI#72 CLOSED.")
 
 

@@ -22,7 +22,7 @@
  * - .pentagon-anim, .profile-anim — E09 OCEAN Pentagon (KI#20-D)
  * - .callout                   — E15 Annotated Blueprint (KI#20-E)
  *
- * Load order: must be loaded AFTER widget-utils.js in shell/index.html
+ * Load order: must be loaded AFTER lib/widget-utils.js in shell/index.html
  *
  * KI#12 fix (iter 5): migrated inline scripts → shell widget module.
  * KI#20 fix (iter 32): extended selector to cover all animation classes

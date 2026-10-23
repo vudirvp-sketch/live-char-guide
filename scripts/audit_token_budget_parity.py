@@ -14,10 +14,9 @@ of the slice (migration_foundation_iter131.md §5.5 evidence; map Registry B row
                                derivation declared in-embed («40/60/80 per» +
                                «каждый ~40–80 токенов»); Lorebook row = declared
                                estimate («Est.»), no canonical owner
-    E15 master embed         = SHARED_REFERENCE — min–max annotations == canonical
-                               min/max; Examples TOTAL carries the derivation note
+                                   min/max; Examples TOTAL carries the derivation note
                                («итог: 40–80 на пример × 2–5 примеров — §7A.12»)
-    canon markers            = [VS: E01] (part_01.md) + [VS: E15] (part_10.md) —
+    canon markers            = [VS: E01] (part_01.md) —
                                canonical descriptions of what the embeds show,
                                incl. the derivation rule (stated canonically once,
                                part_10.md side)
@@ -30,7 +29,7 @@ Checks:
  1. Canonical record (canon §7A.12): budget table rows == acceptance invariants
     (SP 50/100/200, Description 150/300/700, Examples per 40/60/80, Greeting
     40/60/100, Anchors per 15/25/40); Script Tax RULE; personality sub-budget
-    table (SPINE core 80/150/350); calculator description (400–800).
+    table (SPINE core 80/150/350); calculator description (400–900, iter 181 — §7A.13-aligned).
  2. Master §7A.12 mirror: table rows == canon; calculator div present.
  3. E01 embed (SHARED_REFERENCE): per-block token annotations == canonical values
     (SP/Description/Greeting); Examples == derived totals 80/180/400 with the
@@ -40,19 +39,20 @@ Checks:
     declared «Est.» (estimate, non-canonical).
  4. E01 canon marker (part_01.md): present; declares §7A.12 ownership
     (SHARED_REFERENCE), the Examples totals derivation, and the Lorebook estimate.
- 5. E15 embed (SHARED_REFERENCE + derivation note): SP ~50-200, Description
+ 5. (removed iter 172 — E15 deleted with the v3 stage-2 restructure; the
+   E01 embed remains the only SHARED_REFERENCE card presentation)
     ~150-700, Greeting ~40-100 == canonical min–max; Examples ~80-400 == derived
     total; the Examples annotation carries the derivation note (итог / на пример /
     × / §7A.12).
- 6. E15 canon marker (part_10.md): present; declares §7A.12 ownership
+ 6. (removed iter 172 — [VS: E15] marker deleted with the embed)
     (SHARED_REFERENCE) + the derivation rule (итог = бюджет на один пример ×
     количество примеров).
  7. Glossary C-21: registry entry defers values to §7A.12; generated
     data/glossary.json mirrors (anchor p7a_token_budget).
  8. Root fallbacks: parts/part_01.html E01 annotations current; parts/part_10.html
-    E15 derivation note present (build output current with master).
+    E01 annotations present (build output current with master).
  9. Map parity: migration_map_v2.md §5.3 slice present (TB-1..TB-8); Registry B
-    row 5 + Registry A E01/E15 rows record the iter-135 execution.
+    row 5 + Registry A E01 row record the iter-135 execution.
 10. Matrix parity: affected editorial_matrix.md rows carry
     → migration_map_v2 TB-<n> back-pointers.
 
@@ -60,7 +60,7 @@ Deferred layers (reported as notes, never failures):
   - visual-system prototype + extract copies of E01/E15 (disposition
     REMOVED_WITH_REASON — DECIDED DEC-19, executed iter 138: files removed);
   - R11/R27 budget-adjacent prose layers OUTSIDE the slice (owner-gated ed-5 /
-    KI#77-e): §7A.11 4K table, §1.8 prebuild Q2, §7A.13 step 6 (consistent ✓),
+    KI#77-e): §7A.11 4K table, §1.6 prebuild Q2, §7A.13 step 6 (consistent ✓),
     §9.11 «Description ≤ 800», §8.2 AP-1 «> 800», Part 10 card totals,
     §7B.2 Greeting «50–100» (R11-family instance found iter 135);
   - calculator slider bounds = §7A.12's own UI affordances (canon-declared,
@@ -99,15 +99,6 @@ CANONICAL_ROWS = {
 # Derived totals shown by E01 (block-level): per-example x count per level
 # (2 базовых / 3 с FLAW / 3–5 с CoT — §7A.12 Examples row note).
 E01_EXAMPLES_TOTALS = (2 * 40, 3 * 60, 5 * 80)  # 80 / 180 / 400
-# E15 min–max pairs (canonical min–max; Examples = derived total min–max).
-E15_RANGES = {
-    "SP": (50, 200),
-    "Description": (150, 700),
-    "Examples": (80, 400),
-    "Greeting": (40, 100),
-}
-E15_DERIVATION_NOTE = "итог: 40–80 на пример × 2–5 примеров — §7A.12"
-E15_MARKER_RULE = "итог = бюджет на один пример × количество примеров"
 
 errors = []
 notes = []
@@ -200,8 +191,8 @@ def main():
     spine_row = re.search(r"\| Ядро SPINE .*?\| (\d+) \| (\d+) \| (\d+) \|", sec712)
     if not spine_row or (int(spine_row.group(1)), int(spine_row.group(2)), int(spine_row.group(3))) != (80, 150, 350):
         err("canon §7A.12: personality sub-budget table (SPINE core 80/150/350) missing")
-    if "400–800" not in sec712:
-        err("canon §7A.12: calculator description (400–800 range) missing")
+    if "400–900" not in sec712:
+        err("canon §7A.12: calculator description (400–900 range, §7A.13-aligned, missing")
     notes.append(f"canonical record §7A.12: {len(canon_rows)}/5 rows exact, "
                  "Script Tax + sub-budgets + calculator present")
 
@@ -285,37 +276,11 @@ def main():
     notes.append("E01 canon marker: present — §7A.12 ownership + Examples "
                  "derivation + Lorebook estimate declared")
 
-    # ---------- 5. E15 embed (SHARED_REFERENCE + derivation note) ----------
-    master10 = read(MASTER_10)
-    e15 = embed_region(master10, "E15")
-    if e15 is None:
-        err("master: E15 embed not found")
-        return finish()
-    for label, (lo, hi) in E15_RANGES.items():
-        m = re.search(
-            rf"{label}: ~(\d+)-(\d+) токенов", e15,
-        )
-        if not m:
-            err(f"E15 embed: annotation '{label}: ~{lo}-{hi} токенов' not found")
-        elif (int(m.group(1)), int(m.group(2))) != (lo, hi):
-            err(f"E15 embed: annotation '{label}' ({m.group(1)}-{m.group(2)}) "
-                f"!= canonical min–max ({lo}-{hi})")
-    if E15_DERIVATION_NOTE not in e15:
-        err(f"E15 embed: Examples derivation note ('{E15_DERIVATION_NOTE}') missing")
-    notes.append("E15 embed: SP/Description/Greeting == canonical min–max, "
-                 "Examples total 80–400 carries the derivation note")
-
-    # ---------- 6. E15 canon marker ----------
-    canon10 = read(CANON_10)
-    m = re.search(r"^\[VS: E15 — (.+?)\]$", canon10, re.MULTILINE)
-    if not m:
-        err("canon part_10.md: [VS: E15] marker not found")
-    else:
-        body = m.group(1)
-        for token in ("§7A.12", "SHARED_REFERENCE", E15_MARKER_RULE):
-            if token not in body:
-                err(f"canon part_10.md [VS: E15] marker: '{token}' missing")
-    notes.append("E15 canon marker: present — derivation rule stated canonically")
+    # ---------- 5-6. E15 embed + canon marker ----------
+    # REMOVED iter 172 (v3 stage 2): the E15 annotated-blueprint embed and
+    # its [VS: E15] canon marker were deleted with Part 10's duplicate
+    # Elena card (F-02/F-03). E01 remains the only SHARED_REFERENCE
+    # card presentation; §7A.12 stays the single budget owner.
 
     # ---------- 7. Glossary C-21 ----------
     registry = read(REGISTRY)
@@ -350,12 +315,7 @@ def main():
     notes.append("glossary C-21: values deferred to §7A.12 (registry + generated JSON)")
 
     # ---------- 8. Root fallbacks ----------
-    if FALLBACK_10.exists():
-        fb10 = read(FALLBACK_10)
-        if E15_DERIVATION_NOTE not in fb10:
-            err("parts/part_10.html (root fallback): E15 derivation note missing — "
-                "rebuild required (pnpm run build)")
-    else:
+    if not FALLBACK_10.exists():
         err("parts/part_10.html (root fallback) not found — rebuild required")
     if FALLBACK_01.exists():
         fb01 = read(FALLBACK_01)
@@ -386,12 +346,10 @@ def main():
         err("migration_map_v2.md: Registry B row 5 (Token budget) not found")
     elif "executed iter 135" not in row_b5.lower():
         err("migration_map_v2.md: Registry B row 5 does not record the iter-135 execution")
-    for el in ("E01", "E15"):
-        row = next((ln for ln in map_text.split("\n")
-                    if ln.startswith(f"| {el} |")), None)
-        if row is None or "iter 135" not in row:
-            err(f"migration_map_v2.md: Registry A {el} row does not record the "
-                f"iter-135 execution")
+    row = next((ln for ln in map_text.split("\n") if ln.startswith("| E01 |")), None)
+    if row is None or "iter 135" not in row:
+        err("migration_map_v2.md: Registry A E01 row does not record the "
+            "iter-135 execution")
 
     # ---------- 10. Matrix parity ----------
     matrix = read(MATRIX)
@@ -412,7 +370,6 @@ def main():
     deferred = []
     for el, proto in (
         ("E01", REPO / "visual-system" / "elements" / "E01-card-anatomy.html"),
-        ("E15", REPO / "visual-system" / "elements" / "E15-annotated-blueprint.html"),
     ):
         extract = (REPO / "visual-system" / "integration" / "component-extracts"
                    / f"{el}-visual.html")
@@ -422,12 +379,12 @@ def main():
             f"({el} prototype/extract — REMOVED_WITH_REASON executed iter 138, DEC-19)")
     deferred.append(
         "out-of-slice budget-adjacent prose (owner-gated ed-5 / KI#77-e, R11/R27 "
-        "family): §7A.11 4K table · §1.8 prebuild Q2 · §9.11 «≤800» · §8.2 AP-1 "
+        "family): §7A.11 4K table · §1.6 prebuild Q2 · §9.11 «≤800» · §8.2 AP-1 "
         "«>800» · Part 10 card totals · §7B.2 Greeting «50–100» (instance found "
         "iter 135) — untouched by mig-4")
     deferred.append(
         "calculator slider bounds = §7A.12's own UI affordances (canon-declared "
-        "«400–800» result range) — part of the canonical section, not a competing table")
+        "«400–900» result range) — part of the canonical section, not a competing table")
     notes.extend(deferred)
 
     return finish()
@@ -443,8 +400,8 @@ def finish():
             print(f"  ✗ {e}")
         sys.exit(1)
     print("\nPASS — single canonical value owner intact: §7A.12 canonical, "
-          "E01/E15 SHARED_REFERENCE (E15 totals + derivation note), canon "
-          "markers present, glossary defers values, root fallbacks current.")
+          "E01 SHARED_REFERENCE, canon markers present, glossary defers values, "
+          "root fallbacks current (E15 checks retired iter 172 with the embed).")
 
 
 if __name__ == "__main__":

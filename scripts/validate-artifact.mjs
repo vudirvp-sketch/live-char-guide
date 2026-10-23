@@ -13,6 +13,7 @@
  * - Required shell elements presence
  * - HTML validity checks
  * - WCAG 1.4.10 Reflow compliance
+ * - Legacy anchor redirects: every target must be a live section id (SHELL-REDIRECTS)
  */
 
 import { readFile, stat } from 'fs/promises';
@@ -312,6 +313,95 @@ async function checkShellArchitecture() {
     }
   }
 
+  // SHELL-REDIRECTS: legacy anchor redirects must point at live, non-chained ids
+  // (data/anchor-redirects.json + the hardcoded fallback in lazy-loader.js).
+  const redirectsPath = join(DIST_DIR, 'data', 'anchor-redirects.json');
+  if (!existsSync(redirectsPath)) {
+    results.push({
+      gate: 'SHELL-REDIRECTS',
+      pass: false,
+      error: 'dist/data/anchor-redirects.json not found'
+    });
+  } else {
+    const rawRedirects = await readFile(redirectsPath, 'utf-8');
+    const problems = [];
+    let jsonMap = {};
+
+    try {
+      const parsed = JSON.parse(rawRedirects);
+      jsonMap = (parsed && parsed.redirects) || {};
+    } catch (e) {
+      problems.push(`invalid JSON: ${e.message}`);
+    }
+
+    // JSON.parse silently keeps the last of two identical keys — detect them in the source.
+    const seenKeys = new Set();
+    const dupKeys = new Set();
+    for (const m of rawRedirects.matchAll(/^\s*"([^"]+)"\s*:/gm)) {
+      if (seenKeys.has(m[1])) dupKeys.add(m[1]);
+      else seenKeys.add(m[1]);
+    }
+    if (dupKeys.size > 0) problems.push(`duplicate keys: ${[...dupKeys].join(', ')}`);
+
+    // Live anchors the SPA can actually scroll to: shell ids + every anchor the
+    // manifest routes (parts + appendices). Standalone pages such as
+    // parts/glossary.html are NOT routed by lazy-loader.js and do not count.
+    const liveIds = new Set();
+    for (const m of (await readFile(INDEX_PATH, 'utf-8')).matchAll(/\bid="([^"]+)"/g)) liveIds.add(m[1]);
+    const manifestPath = join(DIST_DIR, 'parts', 'manifest.json');
+    if (!existsSync(manifestPath)) {
+      problems.push('dist/parts/manifest.json not found');
+    } else {
+      const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
+      for (const entry of [...(manifest.parts || []), ...(manifest.appendices || [])]) {
+        for (const anchor of entry.anchors || []) liveIds.add(anchor);
+      }
+    }
+
+    // Fallback map from lazy-loader.js — merged under the JSON map at runtime.
+    const fallbackMap = {};
+    const loaderPath = join(assetsDir, 'lazy-loader.js');
+    if (existsSync(loaderPath)) {
+      const js = await readFile(loaderPath, 'utf-8');
+      const block = js.match(/ANCHOR_REDIRECTS_FALLBACK\s*=\s*\{([\s\S]*?)\};/);
+      if (!block) {
+        problems.push('ANCHOR_REDIRECTS_FALLBACK not found in lazy-loader.js');
+      } else {
+        for (const m of block[1].matchAll(/'([^']+)'\s*:\s*'([^']+)'/g)) fallbackMap[m[1]] = m[2];
+      }
+    } else {
+      problems.push('dist/assets/lazy-loader.js not found');
+    }
+
+    const merged = { ...fallbackMap, ...jsonMap };
+    const deadTargets = [];
+    const chains = [];
+    const selfMaps = [];
+    const shadowed = [];
+
+    for (const [from, to] of Object.entries(merged)) {
+      if (from === to) selfMaps.push(from);
+      if (Object.prototype.hasOwnProperty.call(merged, to) && to !== from) chains.push(`${from} -> ${to}`);
+      if (!liveIds.has(to)) deadTargets.push(`${from} -> ${to}`);
+      if (liveIds.has(from)) shadowed.push(from);
+    }
+
+    if (deadTargets.length > 0) problems.push(`targets not in the built artifact (${deadTargets.length}): ${deadTargets.join(', ')}`);
+    if (chains.length > 0) problems.push(`redirect chains (${chains.length}): ${chains.join(', ')}`);
+    if (selfMaps.length > 0) problems.push(`self-maps: ${selfMaps.join(', ')}`);
+    if (shadowed.length > 0) problems.push(`keys shadow a live anchor: ${shadowed.join(', ')}`);
+
+    if (problems.length > 0) {
+      results.push({ gate: 'SHELL-REDIRECTS', pass: false, error: problems.join(' | ') });
+    } else {
+      results.push({
+        gate: 'SHELL-REDIRECTS',
+        pass: true,
+        note: `${Object.keys(jsonMap).length} redirects (+${Object.keys(fallbackMap).length} fallback), all targets live`
+      });
+    }
+  }
+
   return results;
 }
 
@@ -392,6 +482,8 @@ async function validate() {
       console.log(`  Error: ${result.error}`);
     } else if (result.sizeKB) {
       console.log(`  Size: ${result.sizeKB.toFixed(1)} KB`);
+    } else if (result.note) {
+      console.log(`  ${result.note}`);
     }
   }
 

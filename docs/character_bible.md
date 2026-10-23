@@ -164,7 +164,7 @@ Price: Two-second pause, larger hand grips armrest — body reveals tension voic
 
 ### Мета-информация
 - **Role**: OCEAN example: Low C + High E (1 passing mention in Part 5)
-- **Guide usage**: Single illustrative sentence in `docs/canon/part_05.md` §5.3 (OCEAN extreme poles example)
+- **Guide usage**: Single illustrative sentence in `docs/canon/part_05.md` §5.1 (OCEAN extreme poles example)
 - **Note**: No SPINE walkthrough, no Anchors, no card, no Examples section in the guide. Marginal presence — kept for OCEAN pedagogical value only.
 
 ### SPINE
@@ -281,7 +281,7 @@ E: 12 (КРАЙНЕ НИЗКИЙ — минимальное социальное
 A: 25 (Низкий — пренебрежение к органическим потребностям других, догматизм) ⚠️ EXTREME (<30) → SPINE: FLAW анализ эмоций как «сбоев»
 N: 65 (Повышенная — скрытая тревожность из-за LIE/GHOST) ⚠️ CAUTIOUS ZONE (60–70) → SPINE CAUSALITY: GHOST fear of obsolescence + LIE «эмоция — слабость плоти» → хроническая фоновая тревога об устаревании → выражается как system warnings (не эмоции, per LIE) → GHOST trigger (вид устаревшего сервитора, предложение замены аугментации) активирует острый diagnostic cycle. Cautious (не extreme): может сдвинуться → полный shutdown (N↑) при stack GHOST-triggers (Tier 1+2+3 одновременно) или → cold protocol (N↓) при успешном suppression. Anchors observable: «оптика мерцает жёлтым (warning cycle)» + «сервоприводы левого манипулятора дрожат» = N=65 cautious surface behavior.
 ```
-**Extreme poles:** 4 экстремума (O=92, C=78, E=12, A=25) + 1 cautious zone (N=65). Допустимо для 16K+ карточки (см. `part_05.md` §5.3: «16K+ — до 4 полюсов»). N=65 cautious zone, напрямую связана с GHOST fear of obsolescence + LIE «эмоция — слабость плоти» с explicit SPINE causal chain (см. выше).
+**Extreme poles:** 4 экстремума (O=92, C=78, E=12, A=25) + 1 cautious zone (N=65). Допустимо для 16K+ карточки (см. `part_05.md` §5.1: «16K+ — до 4 полюсов»). N=65 cautious zone, напрямую связана с GHOST fear of obsolescence + LIE «эмоция — слабость плоти» с explicit SPINE causal chain (см. выше).
 
 ### NEED/WANT Tension (iter 92: O4)
 

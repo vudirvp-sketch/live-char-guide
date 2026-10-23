@@ -4,19 +4,19 @@
  * ============================================================================
  *
  * Interactive companion to the static E07 visual and §3.2 percentage table.
- * Renders a model-tier toggle (12B / 32B+ / API), hover-syncs the §3.2 table
- * rows with the E07 SVG bars, and exports a Markdown voice_sources block.
+ * It is a CONTROL STRIP for that table, not a second rendering of it (iter 180):
+ * renders the model-tier toggle (12B / 32B+ / API) and the Markdown export
+ * button, and switches the highlight in the §3.2 table's active model column.
+ * The 6×3 matrix itself is printed once — by the table.
  *
  * Contract (§0.8):
  * - Input: <div id="persona-voice-hierarchy" data-model="12B"
  *           data-source-table="p3_influence_hierarchy"> placeholder in
  *           src/master/part_03.html (inside section p3_influence_hierarchy).
- * - Output: toggle toolbar + dynamic readout + export button.
+ * - Output: toggle toolbar + export button + one hint line.
  * - Side effect: adds `.vh-active-model` class to the corresponding <th> and
- *   <td> cells of the sibling <table> so the existing static table visually
- *   reflects the selected model tier.
- * - Side effect: on row hover, highlights the matching SVG bar group via the
- *   `data-vh-source` attribute on each <tr> (added at init).
+ *   `data-vh-model` to the sibling <table> so the static table reflects the
+ *   selected model tier.
  * - Event bus: dispatches `persona-voice-hierarchy://model-change` with
  *   `{ model: '12B'|'32B+'|'API' }` and `persona-voice-hierarchy://export`
  *   with `{ format: 'markdown', content }`.
@@ -24,6 +24,8 @@
  * - Data: hardcoded from canon part_03.md §3.2 table (6 sources × 3 models).
  *   Not extracted to data/*.json because the values are canonical prose,
  *   not user-editable widget data.
+ * - Guard: `scripts/audit_voice_parity.py` fails if this file re-introduces a
+ *   row/bar matrix (.vh-row / .vh-bar-track) — one numeric surface only.
  *
  * @version 9.2.6
  */
@@ -74,21 +76,6 @@
   }
 
   /**
-   * Tag each <tr> in the source table with data-vh-source so we can
-   * hover-sync between the table and the widget's own UI.
-   */
-  function annotateSourceTable() {
-    if (!sourceTableEl) return;
-    const rows = sourceTableEl.querySelectorAll('tbody tr');
-    rows.forEach((row, idx) => {
-      const source = VOICE_SOURCES[idx];
-      if (!source) return;
-      row.setAttribute('data-vh-source', source.id);
-      row.setAttribute('data-vh-label', source.label);
-    });
-  }
-
-  /**
    * Update the source table's <th> and <td> classes to reflect the
    * active model tier. The first <th> column (Source label) is skipped.
    */
@@ -121,31 +108,13 @@
 
   /**
    * Render the widget UI into the container.
+   * Rendering the 6×3 matrix again here would duplicate the §3.2 table —
+   * the widget only carries the controls.
    */
   function render() {
-    const total = VOICE_SOURCES.reduce((sum, s) => sum + (s.models[activeModel] || 0), 0);
-    const forbiddenSource = VOICE_SOURCES.find(s => s.models[activeModel] === 0 && s.id === 'description');
-
     const toggleHtml = MODELS.map(m => {
       const isActive = m === activeModel;
       return `<button type="button" class="vh-toggle-btn${isActive ? ' vh-toggle-btn--active' : ''}" data-model="${esc(m)}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Показать влияние для модели ${esc(m)}">${esc(m)}</button>`;
-    }).join('');
-
-    const rowsHtml = VOICE_SOURCES.map(s => {
-      const pct = s.models[activeModel] || 0;
-      const isForbidden = pct === 0 && s.id === 'description';
-      const barWidth = Math.max(2, pct); // min 2% so the bar is visible
-      const barClass = isForbidden ? 'vh-bar vh-bar--forbidden' : 'vh-bar';
-      const valueClass = isForbidden ? 'vh-value vh-value--forbidden' : 'vh-value';
-      const valueLabel = isForbidden ? '0% (ЗАПРЕЩЕНО)' : `~${pct}%`;
-      return `
-        <div class="vh-row" data-source="${esc(s.id)}" data-label="${esc(s.label)}">
-          <div class="vh-row-label">${esc(s.label)}</div>
-          <div class="vh-bar-track">
-            <div class="${barClass}" style="width:${barWidth}%"></div>
-          </div>
-          <div class="${valueClass}">${esc(valueLabel)}</div>
-        </div>`;
     }).join('');
 
     containerEl.innerHTML = `
@@ -153,23 +122,15 @@
         <div class="vh-toggle-group" role="group" aria-label="Выбор модели">${toggleHtml}</div>
         <button type="button" class="vh-export-btn" data-action="export" aria-label="Экспорт блок voice_sources в Markdown">📋 Экспорт Markdown</button>
       </div>
-      <div class="vh-readout">
-        <div class="vh-readout-rows">${rowsHtml}</div>
-        <div class="vh-readout-total">
-          <span class="vh-total-label">Сумма (ориентир):</span>
-          <span class="vh-total-value">~${total}%</span>
-        </div>
-      </div>
-      <p class="vh-hint"><strong>Примечание:</strong> Проценты — качественные ориентиры (см. §3.1 Методология), не точные измерения. Hover на ряде таблицы выше подсвечивает соответствующий источник. Переключатель модели меняет активный столбец.</p>
-      ${forbiddenSource ? `<div class="vh-warning">⚠ На модели <strong>${esc(activeModel)}</strong>: ${esc(forbiddenSource.label)} = 0% влияния на лингвистический голос. Физическая характеристика (тембр, хрип) допустима в Description как часть Embodiment (§3.1).</div>` : ''}
+      <p class="vh-hint">Переключатель подсвечивает активный столбец таблицы выше; проценты — качественные ориентиры (см. <a href="#p3_voice_isolation">§3.1</a>), не точные измерения.</p>
     `;
 
     bindEvents();
   }
 
   /**
-   * Bind click handlers on toggle buttons + export button,
-   * and hover handlers on .vh-row + source-table rows.
+   * Bind click handlers on the toggle buttons + the export button.
+   * (No hover wiring: the table and the widget no longer show the same rows.)
    */
   function bindEvents() {
     // Toggle buttons
@@ -189,38 +150,6 @@
     const exportBtn = containerEl.querySelector('.vh-export-btn');
     if (exportBtn) {
       exportBtn.addEventListener('click', exportMarkdown);
-    }
-
-    // Hover-sync: widget row ↔ source table row
-    containerEl.querySelectorAll('.vh-row').forEach(row => {
-      const sourceId = row.getAttribute('data-source');
-      row.addEventListener('mouseenter', () => highlightSource(sourceId, true));
-      row.addEventListener('mouseleave', () => highlightSource(sourceId, false));
-    });
-
-    // Reverse direction: hover on the source <table> row highlights widget row
-    if (sourceTableEl) {
-      sourceTableEl.querySelectorAll('tbody tr[data-vh-source]').forEach(tr => {
-        const sourceId = tr.getAttribute('data-vh-source');
-        tr.addEventListener('mouseenter', () => highlightSource(sourceId, true));
-        tr.addEventListener('mouseleave', () => highlightSource(sourceId, false));
-      });
-    }
-  }
-
-  /**
-   * Highlight a source row both in the widget and in the source table.
-   */
-  function highlightSource(sourceId, on) {
-    const widgetRow = containerEl.querySelector(`.vh-row[data-source="${sourceId}"]`);
-    if (widgetRow) {
-      widgetRow.classList.toggle('vh-row--highlighted', on);
-    }
-    if (sourceTableEl) {
-      const tableRow = sourceTableEl.querySelector(`tbody tr[data-vh-source="${sourceId}"]`);
-      if (tableRow) {
-        tableRow.classList.toggle('vh-row--highlighted', on);
-      }
     }
   }
 
@@ -315,7 +244,6 @@
     }
 
     sourceTableEl = findSourceTable();
-    annotateSourceTable();
     syncSourceTableModel();
     render();
     isInitialized = true;
@@ -328,11 +256,6 @@
     if (containerEl) containerEl.innerHTML = '';
     if (sourceTableEl) {
       sourceTableEl.removeAttribute('data-vh-model');
-      sourceTableEl.querySelectorAll('[data-vh-source]').forEach(el => {
-        el.removeAttribute('data-vh-source');
-        el.removeAttribute('data-vh-label');
-        el.classList.remove('vh-row--highlighted');
-      });
       sourceTableEl.querySelectorAll('.vh-active-model').forEach(el => el.classList.remove('vh-active-model'));
     }
     isInitialized = false;

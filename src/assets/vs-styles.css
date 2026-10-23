@@ -1307,36 +1307,6 @@ a:hover {
       overflow-x: auto;
     }
 
-    /* Inset box: Storage vs Influence */
-    .inset-box {
-      background: var(--bg-raised);
-      border: var(--line-width) solid var(--border-active);
-      border-radius: var(--radius-md);
-      padding: var(--gap-md);
-      margin-top: var(--gap-lg);
-      max-width: 800px;
-    }
-
-    .inset-box__title {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--accent-cyan);
-      margin-bottom: var(--gap-sm);
-    }
-
-    .inset-box__text {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .inset-box__highlight {
-      color: var(--danger);
-      font-weight: 500;
-    }
-
     /* Split axis note */
     .split-axis-note {
       font-family: var(--font-micro);
@@ -1369,9 +1339,6 @@ a:hover {
       }
       .chart-svg-wrap {
         -webkit-overflow-scrolling: touch;
-      }
-      .inset-box {
-        font-size: 11px;
       }
     }
 
