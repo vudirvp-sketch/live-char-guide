@@ -13,7 +13,7 @@
 
 import { createHash } from 'crypto';
 import { readFile, writeFile, readdir, mkdir, copyFile, rm, stat } from 'fs/promises';
-import { existsSync } from 'fs';
+import { existsSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { substituteSiteTokens } from '../../scripts/site-config.mjs';
@@ -330,6 +330,22 @@ async function buildShell() {
   // documents stay identical. lazy-loader.js detects data-prerendered and skips
   // the network path (same post-injection sequence, never a double paint).
   await prerenderIndex();
+
+  // 8c. Copy search-engine verification files to the site ROOT.
+  // Yandex/GSC/IndexNow all demand `https://<host>/<name>` — a subdirectory does
+  // not count. Dropping the file in `seo-verification/` is the whole workflow
+  // (see that directory's README); README.md there is documentation, not a file
+  // any engine looks for, so it is skipped.
+  const verificationDir = join(ROOT, 'seo-verification');
+  if (existsSync(verificationDir)) {
+    let copied = 0;
+    for (const entry of readdirSync(verificationDir, { withFileTypes: true })) {
+      if (entry.isDirectory() || entry.name === 'README.md') continue;
+      await copyFile(join(verificationDir, entry.name), join(DIST_DIR, entry.name));
+      copied++;
+    }
+    if (copied > 0) log('INFO', `Copied ${copied} search-engine verification file(s) → dist/ root`);
+  }
 
   // === ROOT FALLBACK COPIES ===
 
