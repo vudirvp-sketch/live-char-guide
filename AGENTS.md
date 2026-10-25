@@ -3,6 +3,9 @@
 > **Read this first.** Operating law for any LLM agent working in this repo.
 > Full system map: [`AGENT_NAVIGATION.md`](./AGENT_NAVIGATION.md). Current state: [`STATUS.md`](./STATUS.md).
 > Repo language: English for docs/code/commits. Chat with the owner: Russian.
+> **Exception — `README.md` is Russian-first** (+ a short English summary at the end): it is the
+> public landing page for a Russian-language guide and must match the audience's query language.
+> Do not "fix" it back to English. Rationale: [`docs/PROMOTION_PLAN.md`](./docs/PROMOTION_PLAN.md) §5 / D-3.
 
 ## What this project is
 

@@ -4,7 +4,11 @@
  * Uses stat() for accurate file sizes (not du which shows disk blocks).
  * 
  * Updated 2026: Modern limits for rich content guides
- * - index.html: 500 KB (was 350 KB)
+ * - index.html: 900 KB (was 500 KB) — the guide is now PRERENDERED into the
+ *   document instead of being fetched at runtime (docs/PROMOTION_PLAN.md §3 A1),
+ *   so index.html legitimately carries the whole corpus (~470 KB of text, ~90 KB
+ *   after gzip). Budget must stay above the corpus or every content iteration
+ *   breaks the build for the wrong reason.
  * - zero-install: 750 KB (was 500 KB)
  */
 import { statSync, readdirSync } from 'fs';
@@ -12,7 +16,7 @@ import { join } from 'path';
 
 const budgets = [
   { file: 'live-char-guide-zero-install.html', maxKb: 750 },
-  { file: 'index.html', maxKb: 500 },
+  { file: 'index.html', maxKb: 900 },
 ];
 
 // Handle assets directory for main.js

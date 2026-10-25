@@ -9,12 +9,24 @@ import { join } from 'path';
 const distDir = '.';
 let exitCode = 0;
 
+// Non-executable <script> types are data, not code, and are explicitly allowed:
+// JSON-LD is how the guide's structured data ships (docs/PROMOTION_SEO.md §1.2).
+// This allowlist applies ONLY here — master HTML still forbids every <script>
+// (AGENTS.md hard fence #1), and that is enforced by validate-master.
+const NON_EXECUTABLE_SCRIPT_TYPES = ['application/ld+json', 'application/json'];
+
+function isExecutableInlineScript(tag) {
+  return !NON_EXECUTABLE_SCRIPT_TYPES.some((type) => tag.includes(`type="${type}"`) || tag.includes(`type='${type}'`));
+}
+
 // Check index.html (web version) — no inline scripts allowed
 try {
   const indexHtml = readFileSync(join(distDir, 'index.html'), 'utf-8');
   // Match <script> tags without src attribute (inline scripts)
-  const inlineScripts = indexHtml.match(/<script(?![^>]*\bsrc\b)[^>]*>[\s\S]*?<\/script>/gi);
-  if (inlineScripts && inlineScripts.length > 0) {
+  const inlineScripts = (indexHtml.match(/<script(?![^>]*\bsrc\b)[^>]*>[\s\S]*?<\/script>/gi) || []).filter(
+    isExecutableInlineScript
+  );
+  if (inlineScripts.length > 0) {
     console.log(`FAIL: index.html has ${inlineScripts.length} inline script(s)`);
     exitCode = 1;
   } else {

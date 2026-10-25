@@ -16,6 +16,7 @@ import { readFile, writeFile, readdir, mkdir, copyFile, rm, stat } from 'fs/prom
 import { existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { substituteSiteTokens } from '../../scripts/site-config.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -60,6 +61,70 @@ function log(level, message) {
 }
 
 // ============================================================================
+// PRERENDER (docs/PROMOTION_PLAN.md §3 A1)
+// ============================================================================
+
+/** Guide lettering A → E; mirrors APPENDIX_GUIDE_ORDER in lazy-loader.js. */
+const APPENDIX_GUIDE_ORDER = ['appendix_mbti.html', 'appendix_model_params.html'];
+
+/**
+ * Inject the guide's sections into `<main id="content">` of dist/index.html.
+ *
+ * WHY: the shipped document used to be an empty shell — a crawler saw 249
+ * characters of "enable JavaScript" and none of the ~27 000 words of guide.
+ * `lazy-loader.js` detects `data-prerendered` and adopts this DOM instead of
+ * re-fetching, so the browser downloads one document instead of 17 fragments.
+ *
+ * Fails the build loudly if the marker is missing: a silent no-op would look
+ * like success while shipping an invisible site.
+ */
+async function prerenderIndex() {
+  const indexPath = join(DIST_DIR, 'index.html');
+  const manifestPath = join(BUILD_DIR, 'parts', 'manifest.json');
+
+  if (!existsSync(indexPath) || !existsSync(manifestPath)) {
+    log('ERROR', 'prerender: dist/index.html or build/parts/manifest.json missing');
+    process.exit(1);
+  }
+
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf-8'));
+  const appendices = (manifest.appendices || [])
+    .slice()
+    .sort((a, b) => APPENDIX_GUIDE_ORDER.indexOf(a.file) - APPENDIX_GUIDE_ORDER.indexOf(b.file));
+  const parts = (manifest.parts || []).concat(appendices);
+
+  const chunks = [];
+  let sectionCount = 0;
+  for (const part of parts) {
+    const partPath = join(BUILD_DIR, 'parts', part.file);
+    if (!existsSync(partPath)) {
+      log('ERROR', `prerender: missing part file ${part.file}`);
+      process.exit(1);
+    }
+    const html = await readFile(partPath, 'utf-8');
+    sectionCount += (html.match(/<section\s+data-section=/g) || []).length;
+    chunks.push(html);
+  }
+
+  let index = await readFile(indexPath, 'utf-8');
+  const marker = /<main id="content"([^>]*)><\/main>/;
+  if (!marker.test(index)) {
+    log('ERROR', 'prerender: <main id="content"></main> marker not found in shell/index.html');
+    process.exit(1);
+  }
+
+  index = index.replace(marker, (_match, attrs) => {
+    // Drop content-hidden (the loader lifts it at runtime) and keep any other attrs.
+    const cleaned = attrs.replace(/\s*class="content-hidden"/, '').trim();
+    return `<main id="content" data-prerendered="true"${cleaned ? ' ' + cleaned : ''}>${chunks.join('\n')}</main>`;
+  });
+
+  await writeFile(indexPath, index, 'utf-8');
+  const kb = (Buffer.byteLength(index, 'utf-8') / 1024).toFixed(0);
+  log('INFO', `Prerendered ${sectionCount} sections into dist/index.html (${kb} KB)`);
+}
+
+// ============================================================================
 // BUILD SHELL
 // ============================================================================
 
@@ -93,6 +158,10 @@ async function buildShell() {
   let buildHash;
   if (existsSync(shellIndex)) {
     let indexContent = await readFile(shellIndex, 'utf-8');
+
+    // Resolve absolute URLs (canonical, og:url, og:image, JSON-LD @id) from the
+    // single site-config origin — no hard-coded host in the shell.
+    indexContent = substituteSiteTokens(indexContent);
 
     // Calculate hash for cache busting
     buildHash = createHash('sha256')
@@ -251,6 +320,13 @@ async function buildShell() {
     await copyFile(robots, join(DIST_DIR, 'robots.txt'));
     log('INFO', 'Copied robots.txt → dist/robots.txt');
   }
+
+  // 8b. PRERENDER: inject the guide's sections into <main> so the content is in
+  // the HTML response instead of arriving via fetch() — the whole point of
+  // docs/PROMOTION_PLAN.md §3 A1. Runs BEFORE the root fallback copy so both
+  // documents stay identical. lazy-loader.js detects data-prerendered and skips
+  // the network path (same post-injection sequence, never a double paint).
+  await prerenderIndex();
 
   // === ROOT FALLBACK COPIES ===
 

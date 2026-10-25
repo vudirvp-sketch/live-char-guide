@@ -6,18 +6,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="livechar-version" content="9.2.0">
-  <meta name="description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
-  <meta property="og:title" content="Live Character for LLM — Guide">
-  <meta property="og:description" content="Engineering pipeline for RP character cards: Spine to deploy. For 12B–32B+ models.">
+  <!-- SEO head (see docs/PROMOTION_SEO.md §3). Language: Russian — matches lang="ru"
+       and the audience (DEC-16). {{SITE_URL}} is substituted at build time from
+       scripts/site-config.mjs, so a future origin move is a one-line change. -->
+  <meta name="description" content="Как собрать карточку персонажа для LLM: SPINE, якоря поведения, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика. SillyTavern, 12B–32B+, 62 раздела.">
+  <link rel="canonical" href="{{SITE_URL}}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/preview-card.png">
+  <meta property="og:site_name" content="Live Character Guide">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="{{SITE_URL}}">
+  <meta property="og:title" content="Гайд по карточкам персонажей для LLM">
+  <meta property="og:description" content="SPINE, якоря поведения, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика — инженерный пайплайн сборки RP-карточки.">
+  <meta property="og:image" content="{{SITE_URL}}assets/preview-card-1200x630.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Live Character Guide — пайплайн сборки карточки персонажа">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Гайд по карточкам персонажей для LLM">
+  <meta name="twitter:description" content="SPINE, якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика.">
+  <meta name="twitter:image" content="{{SITE_URL}}assets/preview-card-1200x630.png">
   <!-- FIX-25: cdn.jsdelivr.net kept in style-src/font-src for Geist font CSS. NOT in script-src (no scripts loaded from CDN since iter-113 — Mermaid removed). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
-  <title>Live Character for LLM — Guide</title>
+  <title>Гайд по карточкам персонажей для LLM — Live Character Guide</title>
+  <!-- JSON-LD is allowed by the CSP above (script-src 'unsafe-inline') and is NOT
+       executable code; qa:csp allowlists type="application/ld+json" explicitly.
+       datePublished is intentionally absent until the owner supplies the real
+       first-publication date (D-7) — a wrong date is worse than none. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": "{{SITE_URL}}#article",
+        "headline": "Гайд по карточкам персонажей для LLM",
+        "description": "Инженерный пайплайн сборки RP-карточек персонажей: SPINE, поведенческие якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика.",
+        "inLanguage": "ru",
+        "url": "{{SITE_URL}}",
+        "mainEntityOfPage": "{{SITE_URL}}",
+        "image": "{{SITE_URL}}assets/preview-card-1200x630.png",
+        "author": { "@type": "Organization", "name": "TITAN FUSE Team" },
+        "publisher": { "@type": "Organization", "name": "TITAN FUSE Team" },
+        "isAccessibleForFree": true,
+        "license": "https://opensource.org/licenses/MIT",
+        "keywords": "карточка персонажа, SillyTavern, роль, LLM, системный промпт, SPINE, CoT, лорбук"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{SITE_URL}}#website",
+        "url": "{{SITE_URL}}",
+        "name": "Live Character Guide",
+        "inLanguage": "ru",
+        "publisher": { "@type": "Organization", "name": "TITAN FUSE Team" }
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="assets/shell-styles.css">
   <link rel="stylesheet" href="assets/vs-styles.css">
   <!-- KI#16 fix (iter 19): externalized inline script → widgets/js-flag.js for CSP compliance -->

@@ -5,8 +5,24 @@
 
 ---
 
-Task ID: iter-190-v4-chapters9-10-appendices-final
+Task ID: iter-191-192-discovery-prerender
 Agent: lead
+Task: make the guide findable — head metadata + JSON-LD + sitemap gate (iter 191), then build-time prerender of `<main>` so the content is in the HTML response (iter 192); plus the README/metadata/docs layer.
+
+Work Log:
+- 0: Preflight — clean worktree except an untracked `_tmp_measure.py` (pre-existing, not mine, untouched). Baseline battery green (62 sections, validate 132 redirects, tests 68/68, english 1 / syntax 224). Diagnosis by measurement, not by assumption: `curl https://vudirvp-sketch.github.io/live-char-guide/` returned 6 815 B with an EMPTY `<main>` and 249 chars of hex-ASCII fallback text, while the corpus is 27 200 words — no canonical, no JSON-LD, no `og:url`, relative `og:image`, English title on Russian content, `robots.txt` inert at a non-host-root path.
+- 1: `scripts/site-config.mjs` — one SITE object + `substituteSiteTokens()`; the shell carries `{{SITE_URL}}` and the build resolves it, so the future D-1 origin move is a one-line change and `qa:seo` fails if a token survives.
+- 2: Head rewritten in `src/shell/index.html` (RU title/description, canonical, absolute OG/Twitter set, JSON-LD `@graph` TechArticle+WebSite, `datePublished` omitted until the owner supplies it). Generated `src/assets/preview-card-1200x630.png` (GDI+, 1200×630, 30 KB) because the old asset was 1344×768 and `og:image` was relative.
+- 3: `scripts/generate-sitemap.mjs` wired into `pnpm run build` (absolute `<loc>`, `<lastmod>`, `CHAPTER_PAGES` hook for D-2, one-language now). `scripts/seo_check.mjs` = new `qa:seo` gate, 24 assertions (Cyrillic title, single canonical == SITE.url, no unsubstituted tokens, absolute og:*, image exists in the build, JSON-LD parses/substituted/inLanguage, sitemap absolutes + no `#fragment` URLs + lastmod). `csp_check.mjs` allowlists `type="application/ld+json"` only — the fence for master HTML is untouched. `bundle_check` index.html budget 500 → 900 KB, disclosed.
+- 4: Prerender — `prerenderIndex()` in `src/scripts/build-shell-unified.mjs` reads `build/parts/manifest.json`, concatenates the 12 parts + appendices in guide order (A→E), and injects them into `<main id="content" data-prerendered="true">` BEFORE the root-fallback copy; fails the build loudly if the marker or a part file is missing. `lazy-loader.js` adoption guard runs the same post-injection sequence (TOC, anchors, glossary, interactive init) and falls back to the fetch path if it throws; the `content.innerHTML = ''` wipe is skipped on that path.
+- 5: New tests `tests/test-prerender.mjs` (8 assertions: flag, no content-hidden, 62 == manifest anchors, >10 000 words, root == dist, parts still emitted, guard present) and `tools/verify-prerender.mjs` (Puppeteer: 62 sections, 0 fragment requests, TOC 62 items, `#p4_spine_overview` scrolls, one section instance, overlay hidden).
+- 6: Verification — build 62 sections / 464 KB / hash `55aea5f8`; crawler-visible text 249 chars → **22 016 words**; tests **76/76**; both browser and static gates green; baselines untouched (english 1, syntax 224); validate 12/12 + 132 redirects; version:check sync; lint PASS.
+- 7: Docs layer — `docs/PROMOTION_PLAN.md` (workstreams, proposed iterations, D-1…D-8, measurement, no-spam list), `docs/PROMOTION_SEO.md` (technical SEO), `docs/I18N_PLAN.md` (RU/EN design, 235–275 h), `docs/promotion/{README.proposed,repo-metadata,root-site-migration}.md`; `README.md` rewritten Russian-first + English summary with the exception recorded in `AGENTS.md`; repo description + 20 topics applied via `gh api`.
+
+---
+
+Agent: lead
+Task ID: iter-190-v4-chapters9-10-appendices-final
 Task: v4-9 + v4-10 + the v4 tail — chapter 9 (Parts 8 + 9: one reference, Part 9 7 → 5 sections, one master checklist + RepPen/Temperature/budget/Embodiment), chapter 10 (Part 10 link-free + KI#89), appendices A/B, then the gate re-pointing and the full battery.
 
 Work Log:

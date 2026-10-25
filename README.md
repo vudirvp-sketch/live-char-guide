@@ -1,94 +1,134 @@
 # Live Character Guide
 
-> Engineering pipeline for RP character cards (SPINE → deploy, for 12B–32B+ models). Single linear guide.
+**Инженерный конвейер для карточек персонажей LLM.** Не сборник промптов, а процесс: SPINE (психологический каркас) → якоря поведения → изоляция голоса → системный промпт → готовая карточка. Для моделей 12B–32B+, совместимо с SillyTavern.
 
-- **Live site:** https://vudirvp-sketch.github.io/live-char-guide/
-- **Version:** 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
-- **Status:** current state (iteration, KIs, authoritative next step) lives in [`STATUS.md`](./STATUS.md).
+[**→ Открыть гайд**](https://vudirvp-sketch.github.io/live-char-guide/) · 10 частей · 62 раздела · 4 полные карточки-примера · v9.2.6
 
----
+[![Deploy](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml)
+[![Version](https://img.shields.io/github/package-json/v/vudirvp-sketch/live-char-guide)](package.json)
+[![License](https://img.shields.io/github/license/vudirvp-sketch/live-char-guide)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/vudirvp-sketch/live-char-guide)](https://github.com/vudirvp-sketch/live-char-guide/commits/main)
+![Язык](https://img.shields.io/badge/%D0%B3%D0%B0%D0%B9%D0%B4-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-blue)
 
-## What this is
-
-A guide for building character cards for AI role-playing (SillyTavern-compatible). It treats the card as a behavioral engine: SPINE (psychological skeleton) → Behavioral Anchors → Voice Isolation → System Prompt → finished card.
-
-10 Parts + 4 Appendices + Part 0 (quick orientation) — a single sequential flow, not a wiki.
+![Live Character Guide](https://raw.githubusercontent.com/vudirvp-sketch/live-char-guide/main/src/assets/preview-card-1200x630.png)
 
 ---
 
-## Reading the repo
+## Какую проблему это решает
 
-| If you are... | Start here |
-|---------------|------------|
-| An LLM agent (Cursor, Aider, Continue, etc.) | [`AGENTS.md`](./AGENTS.md) — short entry point |
-| An agent needing the full reference | [`AGENT_NAVIGATION.md`](./AGENT_NAVIGATION.md) |
-| A human contributor | [`CONTRIBUTING.md`](./CONTRIBUTING.md) |
-| Looking for current state | [`STATUS.md`](./STATUS.md) |
-| Looking for the latest iteration | [`worklog.md`](./worklog.md) |
+Три типовые поломки RP-карточки — и все три лечатся не «улучшением промпта», а конструкцией:
+
+- **Голос сползает к дефолту модели.** Персонаж говорит «как ассистент» на третьем сообщении. Лечится изоляцией голоса, а не добавлением прилагательных.
+- **Поведение без причины.** Персонаж добрый «потому что в описании написано добрый». Лечится SPINE: у каждого проявления есть источник, которого персонаж сам не осознаёт.
+- **Ошибку не видно.** Карточка вроде работает, но непонятно, где именно ломается. Лечится диагностикой: симптом → причина → правка.
+
+Гайд ведёт по этим трём уровням последовательно, от пустого файла до готовой карточки и проверки перед деплоем.
+
+## Что внутри
+
+| # | Часть | О чём |
+|---|-------|-------|
+| 0 | [Перед стартом](https://vudirvp-sketch.github.io/live-char-guide/#p0_how_to_read) | Как читать гайд, TL;DR, маршрут |
+| 1 | [Основы: анатомия карточки](https://vudirvp-sketch.github.io/live-char-guide/#p1_value_proposition) | Из чего состоит карточка и что чем управляет |
+| 2 | [Якоря: поведение в три шага](https://vudirvp-sketch.github.io/live-char-guide/#p2_basic_anchors) | Поведение, воплощение, реактивность, сенсорика |
+| 3 | [Голос и изоляция](https://vudirvp-sketch.github.io/live-char-guide/#p3_voice_isolation) | Почему голос течёт и как его запереть |
+| 4 | [SPINE: психологический каркас](https://vudirvp-sketch.github.io/live-char-guide/#p4_spine_overview) | GHOST / LIE / FLAW / NEED / WANT |
+| 5 | [Психология: OCEAN и типология](https://vudirvp-sketch.github.io/live-char-guide/#p5_ocean_basics) | Числовые оси, эннеаграмма, кросс-матрица |
+| 6 | [CoT: внутренний монолог](https://vudirvp-sketch.github.io/live-char-guide/#p6_cot_basics) | Уровни внутренней речи и их бюджет |
+| 7A | [Системный промпт и сборка](https://vudirvp-sketch.github.io/live-char-guide/#p7a_system_prompt) | CORE DIRECTIVES, Tone Frame, сборка, бюджет токенов |
+| 7B | [Lorebook, приветствие и инъекции](https://vudirvp-sketch.github.io/live-char-guide/#p7b_greeting) | Первое сообщение, записи лора, структурные инъекции |
+| 8 | [Анти-паттерны](https://vudirvp-sketch.github.io/live-char-guide/#p8_antipatterns_overview) | 15 разобранных способов сломать карточку |
+| 9 | [Диагностика и тестирование](https://vudirvp-sketch.github.io/live-char-guide/#p9_basic_checklist) | Чек-лист деплоя, дерево решений, тест-сценарии |
+| 10 | [Полные карточки](https://vudirvp-sketch.github.io/live-char-guide/#p10_index) | 4 готовых карточки целиком, с разбором |
+
+Приложения: [MBTI](https://vudirvp-sketch.github.io/live-char-guide/#appendix_mbti) · [Модель, контекст и параметры генерации](https://vudirvp-sketch.github.io/live-char-guide/#appendix_model_params)
+
+## С чего начать
+
+1. **[Перед стартом](https://vudirvp-sketch.github.io/live-char-guide/#p0_how_to_read)** — 10 минут, понять маршрут.
+2. **Идти по частям 1 → 10 подряд.** Гайд линейный: каждая часть опирается на предыдущую.
+3. **Карточка не работает** — сразу в [Диагностику](https://vudirvp-sketch.github.io/live-char-guide/#p9_basic_checklist), не перечитывать всё.
+
+## Кому подойдёт
+
+- Тем, кто собирает персонажей для SillyTavern / RP-фронтендов и хочет предсказуемого поведения, а не «повезёт/не повезёт».
+- Тем, кто работает с локальными моделями 12B–32B+, где цена лишнего токена заметна.
+- Тем, кто хочет разобрать готовую карточку по частям и понять, почему она работает.
+
+**Не подойдёт**, если нужен список готовых промптов для копирования без разбора — это гайд про конструкцию, а не коллекция сниппетов.
 
 ---
 
-## Repository structure
+## Репозиторий
 
-| Directory | Purpose |
-|-----------|---------|
-| `src/master/` | Author content — 12 part files (`part_00` + `part_01..10`, incl. `07a`/`07b`) + 3 appendix HTML. **Authors edit here.** |
-| `src/shell/` | Infrastructure shell (`index.html`, `styles.css`, `lazy-loader.js`, `widgets/`). **Do NOT touch when writing Parts.** |
-| `docs/canon/` | Canon markdown — source of truth for content (not in build). |
-| `data/` | JSON widget data — 6 files (glossary, ocean, enneagram, mbti, character_schema, anchor-redirects). |
-| `scripts/` | Build + validation scripts. |
-| `parts/`, `widgets/`, `assets/`, `index.html`, `event-bus.js`, `build.hash` | Root fallbacks — regenerated on every `pnpm run build`. **Do NOT edit directly.** |
+| Если вы... | Начните здесь |
+|---|---|
+| Читатель | [Сайт](https://vudirvp-sketch.github.io/live-char-guide/) |
+| Контрибьютор | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
+| LLM-агент (Cursor, Aider, Continue…) | [`AGENTS.md`](AGENTS.md) — короткая точка входа |
+| Агент, нужен полный справочник | [`AGENT_NAVIGATION.md`](AGENT_NAVIGATION.md) |
+| Нужно текущее состояние проекта | [`STATUS.md`](STATUS.md) |
 
----
+### Стек
 
-## Commands
+Статический HTML + CSS + ванильный JS (ES-модули). Без фреймворков, без сборщика фронтенда, без TypeScript. Сайт собирается скриптами Node и деплоится на GitHub Pages.
+
+### Структура
+
+| Путь | Назначение |
+|---|---|
+| `docs/canon/` | Канон — источник правды для контента |
+| `src/master/` | Авторский контент (12 файлов частей + приложения) |
+| `src/shell/` | Оболочка: HTML, стили, загрузчик, виджеты |
+| `data/` | JSON-данные виджетов (глоссарий, OCEAN, эннеаграмма, MBTI, схема) |
+| `scripts/` | Сборка и валидация |
+| `parts/`, `widgets/`, `assets/`, `index.html`, `build.hash` | Корневые fallback-и — генерируются сборкой, руками не правятся |
+
+### Команды
 
 ```bash
-pnpm install              # Install dependencies (Node >= 20, pnpm 10.x)
-pnpm run build            # Full build (unified + shell + root fallbacks)
-pnpm run validate         # Validate build artifact
-pnpm run validate:master  # Validate master files
-pnpm run version:check    # 4-place version sync (MUST pass)
-pnpm test                 # All tests
-pnpm run qa               # Aggregate QA (csp + bundle + english + syntax + doc-versions)
-pnpm run dev              # Build + serve on http://localhost:3000
+pnpm install              # Node >= 20, pnpm 10.x
+pnpm run build            # полная сборка
+pnpm run validate         # проверка артефакта сборки
+pnpm run version:check    # синхронизация версии в 4 местах
+pnpm test                 # тесты
+pnpm run qa               # агрегированные QA-гейты
+pnpm run dev              # сборка + локальный сервер на :3000
 ```
+
+### Как устроена сборка
+
+```
+docs/canon/*.md            → генераторы            → data/*.json
+src/master/*.html          → scripts/build-unified.mjs → parts/ + manifest.json
+                                                     ↓
+                              src/scripts/build-shell-unified.mjs → dist/ → GitHub Pages
+```
+
+Контент встраивается в `dist/index.html` на этапе сборки (пререндер), поэтому гайд читается и без JavaScript, и индексируется поисковиками.
+
+Подробно: [`docs/architecture.md`](docs/architecture.md) · [`AGENT_NAVIGATION.md` §2](AGENT_NAVIGATION.md).
 
 ---
 
-## Build pipeline
+## Участие
 
-```
-docs/canon/glossary_registry.md  →  scripts/generate_glossary.mjs   →  data/glossary.json
-docs/canon/part_05.md §5.3       →  scripts/generate_enneagram.mjs  →  data/enneagram.json
-src/master/*.html  (author content)
-        ↓
-scripts/build-unified.mjs   →   build/parts/*.html (unified) + manifest.json
-        ↓
-src/scripts/build-shell-unified.mjs   →   dist/  (deployed to GitHub Pages)
-        ↓
-root fallbacks (index.html, parts/, widgets/, assets/, data/, event-bus.js, build.hash)  — committed to git
-```
+Issues и PR — приветствуются: [issues](https://github.com/vudirvp-sketch/live-char-guide/issues). Перед PR прочитайте [`CONTRIBUTING.md`](CONTRIBUTING.md) и [`AGENTS.md`](AGENTS.md) — в проекте жёсткие правила по секциям, CSS-классам, CSP и синхронизации канона.
 
-Full diagram: [`AGENT_NAVIGATION.md`](./AGENT_NAVIGATION.md) §2.
+## Лицензия
+
+[MIT](LICENSE) — можно использовать, форкать, брать куски в свои проекты.
+
+## Ключевые слова
+
+карточка персонажа · карточки персонажей для LLM · SillyTavern · RP · roleplay · промпт-инжиниринг · системный промпт · SPINE · OCEAN · эннеаграмма · CoT · внутренний монолог · лорбук · lorebook · бюджет токенов · локальные модели · 12B · 32B
 
 ---
 
-## Documentation
+## English summary
 
-- [`AGENTS.md`](./AGENTS.md) — short entry point for LLM agents. Read this first.
-- [`AGENT_NAVIGATION.md`](./AGENT_NAVIGATION.md) — full reference for agents (directory map, build pipeline, section model, widget architecture, pitfalls, cross-references).
-- [`STATUS.md`](./STATUS.md) — current status, Known Issues, Roadmap.
-- [`worklog.md`](./worklog.md) — latest iteration in detail, previous iterations as one-line summaries.
-- [`CHANGELOG.md`](./CHANGELOG.md) — version history.
-- [`docs/canon/_README.md`](./docs/canon/_README.md) — Canon Spec (rules for canon files).
-- [`docs/architecture.md`](./docs/architecture.md) — deep architecture (build stages, ownership, section model, validation).
-- [`docs/components.md`](./docs/components.md) — CSS component registry (use ONLY classes defined here).
-- [`docs/research/guide_analysis_consolidated.md`](./docs/research/guide_analysis_consolidated.md) — historical (iter 72, v9.2.0) consolidated guide analysis from external sources.
+**Live Character Guide** is a Russian-language engineering guide for building LLM roleplay character cards (SillyTavern-compatible, 12B–32B+ models). It treats the card as a behavioural engine: SPINE (psychological skeleton) → behavioural anchors → voice isolation → system prompt → finished card. 10 parts, 62 sections, 4 complete worked cards, plus a diagnostics track. Static HTML/CSS/vanilla JS, built by Node scripts, deployed to GitHub Pages.
 
----
+→ <https://vudirvp-sketch.github.io/live-char-guide/>
 
-## Contacts
-
-- Issues/PR: [github.com/vudirvp-sketch/live-char-guide/issues](https://github.com/vudirvp-sketch/live-char-guide/issues)
-- Author: TITAN FUSE Team
+Questions, issues and PRs in English are welcome.

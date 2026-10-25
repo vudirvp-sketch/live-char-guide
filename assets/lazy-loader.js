@@ -789,6 +789,36 @@
     const content = $('#content');
     if (!content) { isLoading = false; hideLoading(); return; }
 
+    // PRERENDER ADOPTION (docs/PROMOTION_PLAN.md §3 A1)
+    // dist/index.html ships the guide already inside <main>, so crawlers see the
+    // full text and returning visitors skip 17 fragment requests. The DOM is
+    // byte-identical to what the fetch path builds, therefore we run the SAME
+    // post-injection sequence and never re-fetch, never repaint.
+    // The `content.innerHTML = ''` wipe below MUST NOT run on this path.
+    if (content.dataset.prerendered === 'true' && content.children.length > 0) {
+      try {
+        content.classList.remove('content-hidden');
+        initInteractiveElements();
+        generateTOC();
+        initActivePartHighlighting();
+        handleAnchor();
+        loadGlossaryContent();
+        handleLegacyAnchor();
+        isLoading = false;
+        hideLoading();
+        return;
+      } catch (e) {
+        // A prerendered DOM that fails to initialise must degrade to the fetch
+        // path, not to a blank page.
+        console.warn('[LazyLoader] Prerendered content failed to initialise, falling back to fetch:', e);
+        delete content.dataset.prerendered;
+        content.innerHTML = '';
+        isLoading = false;
+        hideLoading();
+        return loadContent();
+      }
+    }
+
     content.innerHTML = '';
     loadedParts.clear();
 
