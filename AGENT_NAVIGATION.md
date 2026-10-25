@@ -5,7 +5,7 @@
 > section in the same iteration any structure changes.
 > Read after [`AGENTS.md`](./AGENTS.md) (the operating law). Current state: [`STATUS.md`](./STATUS.md).
 > **Canonical version:** `9.2.6`. Engineering pipeline for RP character cards (SPINE → deploy, 12B–32B+ models).
-> Single linear guide: Part 0 → Part 10 + 3 appendices (A/D/E — B absorbed into E, iter 172; C deleted iter 177, F-19/DEC-31) · 68 sections (iter 177: Appendix C removed; iter 174: v3 S4a — Parts 2/3/4/5/6 38→26; iter 173: Part 8 16→2, Part 9 11→7, Part 10 4→5) · 3 widgets · canon→master sync green (87/87). **v2 is the live site (the switch iter 170, DEC-25; runtime 68, hash `6f563edc`); v3 stage 2 (DEC-27) moved the model/runtime layer into Appendix E.**
+> Single linear guide: Part 0 → Part 10 + 3 appendices (A/D/E — B absorbed into E, iter 172; C deleted iter 177, F-19/DEC-31) · 62 sections (iter 177: Appendix C removed; iter 174: v3 S4a — Parts 2/3/4/5/6 38→26; iter 173: Part 8 16→2, Part 9 11→7, Part 10 4→5; iter 188: v4-7 — Part 7B 5→3; iter 189: v4-8 — §7A.11 absorbed into §7A.12; iter 190: v4-9 — Part 9 7→5, §1.5 → Part 9) · 3 widgets · canon→master sync green (87/87). **v2 is the live site (the switch iter 170, DEC-25; runtime 62, hash `6f563edc`); v3 stage 2 (DEC-27) moved the model/runtime layer into Appendix E; the v4 track (ACTIVE since iter 182) re-cuts chapters so every fact is printed where it is applied — chapters 0–9 are done, links in them are 0 (the only chapter-level link left is the Part 10 bridge in §9.7).**
 
 ---
 
@@ -13,7 +13,7 @@
 
 | Directory | Purpose | Rules |
 |-----------|---------|-------|
-| `src/master/` | Author content — 12 part files (`part_00` + `part_01..10.html` incl. `07a`/`07b`) + 2 appendices (`mbti`, `model_params` — `model_table` absorbed into `model_params` iter 172; `glossary` deleted iter 177, F-19/DEC-31). 68 sections (Part 0 wired iter 169; 98 at the v2 switch — v3 S3/S4a de-duplicated the corpus). | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
+| `src/master/` | Author content — 12 part files (`part_00` + `part_01..10.html` incl. `07a`/`07b`) + 2 appendices (`mbti`, `model_params` — `model_table` absorbed into `model_params` iter 172; `glossary` deleted iter 177, F-19/DEC-31). 62 sections (Part 0 wired iter 169; 98 at the v2 switch — v3 S3/S4a and v4 chapters 0–9 de-duplicated the corpus). | **Authors edit here.** All content inside `<section data-section>`. FORBIDDEN: `<style>` / `<script>` / `<link>` / `<meta>`. |
 | `src/shell/` | Infrastructure shell — `index.html` (auto-load), `styles.css`, `lazy-loader.js`, `event-bus.js`, `widgets/` (3 widgets), `interactions/` (5 VS behaviour scripts), `lib/` (2 shared scripts). | **Do NOT touch when writing Parts.** Changes go through an infrastructure request. |
 | `src/shell/widgets/` | **3 content widgets** (iter 176, F-18): `ocean-insight`, `mbti-composer`, `persona-voice-hierarchy`. | Markup in HTML, data in `data/*.json` (exception: `persona-voice-hierarchy` uses canon-embedded §3.2 constants — see widget header). |
 | `src/shell/interactions/` | **5 VS behaviour scripts** (iter 176): `vs-e10-enneagram`, `vs-e13-diagnostic`, `vs-e16-author-note`, `vs-scroll-observer`, `vs-mini-map`. No own data; attach behaviour to embed markup. | Loaded by `index.html`; paths mirrored in the build + root fallbacks. |
@@ -298,21 +298,22 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 ## 8. Cross-Reference Pairs
 
 > Per IMP-48: when section A references section B, B MUST reference back to A. One canonical definition per concept — everywhere else = 1-sentence link. Registry of section-inventory pairs: `docs/content_map.md`.
+> **Superseded for the re-cut chapters (v4, ACTIVE since iter 182):** a chapter prints the facts it uses, so it links to no other chapter's definition; only a different level (appendix / reference) may be linked. The pairs below are the pre-v4 registry; ✅ rows still describe the untouched Parts, ❌ rows are retired by the v4 slices.
 
 ### Known Cross-Reference Pairs
 
 | # | Source | Target | Status |
 |---|--------|--------|--------|
-| 1 | `p1_top3_problems` | `p9_basic_checklist` | ✅ back-link |
+| 1 | `p1_top3_problems` | `p9_basic_checklist` | ❌ id absorbed → legacy redirect `p9_basic_checklist`; the three errors are rows 1–3 of «Пять самых частых ошибок» (iter 190) |
 | 2 | `p7a_system_prompt` | `p7a_core_directives` | ✅ sub-section |
 | 3 | `p7a_system_prompt` | `p7a_tone_frame` | ✅ sub-section |
-| 4 | `p7b_lorebook_basics` | `p7b_lorebook_mechanics` | ✅ callout link |
-| 5 | `p7a_authors_note` | `p7b_lorebook_mechanics` | ✅ upstream |
-| 6 | `p7b_lorebook_advanced` | `p7a_authors_note` | ✅ upstream |
-| 7 | `p7b_lorebook_advanced` | `p7b_structured_inject` | ✅ forward only |
+| 4 | `p7b_lorebook_basics` | `p7b_lorebook_mechanics` | ❌ retired — v4 chapter 6 states both jobs in place (iter 188) |
+| 5 | `p7a_authors_note` | `p7b_lorebook_mechanics` | ❌ retired — v4 chapter 6 (iter 188) |
+| 6 | `p7b_lorebook_advanced` | `p7a_authors_note` | ❌ id absorbed → legacy redirect `p7b_lorebook_mechanics` (iter 188) |
+| 7 | `p7b_structured_inject` | — | ❌ id absorbed → legacy redirect `p7a_authors_note` (iter 188) |
 | 8 | `p4_spine_overview` | `p7a_xml_tags` | ✅ downstream |
 | 9 | `p10_omnis` | `p4_ghost` | ✅ back-link (TP-15) |
-| 10 | `p9_additional_problems` | `p1_top3_problems` | ✅ back-link |
+| 10 | `p9_additional_problems` | `p1_top3_problems` | ❌ both ids absorbed — legacy redirect to `p9_basic_checklist` (iter 190) |
 | 11 | `p10_elena` | `p2_anchor_rules` | ✅ back-link |
 | 12 | `p1_card_overview` | `p7a_token_budget` | ✅ forward ref |
 | 13 | `p1_card_overview` | `p7a_assembly_pipeline` | ✅ forward ref |

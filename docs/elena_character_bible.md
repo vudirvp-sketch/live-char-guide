@@ -128,7 +128,7 @@ FLAW-linked:
 
 ## Lorebook Entries
 - **Canonical:** Key: предательство, редактор, украдена → Content: История о коррупции была украдена редактором и опубликована под чужим именем.
-- **⚠️ NON-CANONICAL (secondary GHOST):** Key: пожар, огонь, горел, сгорел → Content: Елена помнит запах горящего дерева. В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу. — Используется ТОЛЬКО при выборе secondary GHOST-сценария. Canonical Елена имеет ОДИН GHOST — предательство редактора (см. `docs/canon/part_04.md` §4.2 и `docs/canon/part_07b.md` §7B.3 Entry 2).
+- **⚠️ NON-CANONICAL (secondary GHOST):** Key: пожар, огонь, горел, сгорел → Content: Елена помнит запах горящего дерева. В 7 лет стояла во дворе и смотрела, как пламя охватывает крышу. — Используется ТОЛЬКО при выборе secondary GHOST-сценария. Canonical Елена имеет ОДИН GHOST — предательство редактора (см. `docs/canon/part_04.md` §4.2 и `docs/canon/part_07b.md` §7B.2 Entry 2).
 - (Full Lorebook example in Part 7B, section p7b_lorebook_basics)
 
 ## Anti-Pattern Demonstrations

@@ -49,6 +49,9 @@ SHELL = REPO / "src" / "shell"
 # (Part 2 6->5, Part 3 8->5, Part 4 11->6, Part 5 7->5, Part 6 6->5) — the Learn entry = Part 0 -> Part 1
 # iter 177 (v3 S4b, F-19/DEC-31): 69 -> 68 (Appendix C deleted; the glossary is
 # the registry -> generated JSON -> panel/no-JS page chain)
+# iter 188 (v4-7, chapters 5-6): 68 -> 66 (p7b_structured_inject absorbed into
+# p7a_authors_note; p7b_lorebook_advanced merged into p7b_lorebook_mechanics —
+# both ids are legacy-anchor redirects now, per the owner call of iter 188)
 GUIDE_ORDER = [
     "part_00.html", "part_01.html", "part_02.html", "part_03.html", "part_04.html",
     "part_05.html", "part_06.html", "part_07a.html", "part_07b.html",
@@ -64,17 +67,33 @@ PART_10_BLUEPRINTS = [
     "p10_index", "p10_elena", "p10_walter", "p10_omnis", "p10_vysherblenny",
 ]
 PART_10_CARDS = [sid for sid in PART_10_BLUEPRINTS if sid != "p10_index"]
-BUILD_PREBUILD_EXPECTED = {
+# iter 188 (v4-7): the chapter-0 Build profile (`p1_prebuild_checklist`) was de-linked by design
+# in v4-2 (iter 183) — the six questions state the budget/tool options in place, so the entry
+# surface no longer routes to §7A.13 / §7A.12 / Part 10 / the appendix. The former link-set
+# expectation became a NEGATIVE gate (these routing targets must not come back), and the
+# functional coverage (the three decision axes) is asserted as text — the ABSENT_CHECKS
+# precedent used for retired sync needles.
+BUILD_PREBUILD_RETIRED_LINKS = {
     "p7a_assembly_pipeline", "p7a_token_budget", "appendix_model_params",
     "p10_elena", "p10_walter", "p10_omnis", "p10_vysherblenny",
     "p4_ghost", "p6_cot_basics", "p7b_lorebook_basics",
 }
-BUILD_PIPELINE_EXPECTED = {
+BUILD_PREBUILD_AXES = ("Размер модели", "Контекстное окно", "Сложность персонажа")
+# iter 189 (v4-8): chapters 7-8 close the Build chapter as a self-contained place — the
+# assembly chapter prints its six steps + the one per-card budget and links to no other
+# chapter (v4: «one place, on time»). The former positive link-set became a NEGATIVE gate;
+# the functional coverage is asserted as content (six step rows, the per-card total, the
+# canonical range), and the ONE master checklist moved to §9.5.
+BUILD_PIPELINE_RETIRED_LINKS = {
     "p7a_token_budget", "p10_elena", "p7a_core_directives",
     "p4_spine_overview", "p6_cot_basics", "p4_spine_full_chain",
     "p2_anchor_rules", "p3_voice_isolation",
     "p5_ocean_basics",
 }
+BUILD_PIPELINE_CONTENT = ("1. Блок идентичности", "2. Анти-годмодинг", "3. Директивы и обвязка",
+                          "4. SPINE", "5. CoT", "6. Проверка бюджета", "~610", "400–900")
+BUILD_BUDGET_CONTENT = ("System Prompt", "Description", "Examples", "Greeting", "Anchors",
+                        "Что помещается в 4K", "4K-Fallback", "400–900")
 
 errors = []
 findings = []
@@ -132,10 +151,14 @@ def main():
         if built != entry["anchors"]:
             err(f"LEARN L2: {entry['file']} renders {built} != manifest {entry['anchors']}")
     total = sum(len(e["anchors"]) for e in manifest["parts"] + manifest["appendices"])
-    if total != 68:
-        err(f"LEARN L2: rendering section count {total} != 68 "
+    if total != 62:
+        err(f"LEARN L2: rendering section count {total} != 62 "
             "(v3 stage 3: Part 8 16->2, Part 9 11->7, Part 10 4->5; stage 4a: "
-            "Parts 2/3/4/5/6 de-duplicated; stage 4b/F-19: Appendix C deleted)")
+            "Parts 2/3/4/5/6 de-duplicated; stage 4b/F-19: Appendix C deleted; "
+            "v4-7: Part 7B 5->3; v4-8: §7A.11 4K-Fallback absorbed into §7A.12; "
+            "v4-9: Part 9 7->5 — p9_symptom_table into p9_basic_checklist, "
+            "p9_one_change_rule into p9_test_scenarios — and p1_top3_problems "
+            "absorbed into Part 9)")
 
     # L3 — difficulty metadata + F6 disclosure (the Learn visibility model)
     diff = sum(len(re.findall(r"<!--\s*difficulty:\s*(?:BASIC|INTERMEDIATE|EXPERT)\s*-->", t))
@@ -195,14 +218,29 @@ def main():
         missing = hrefs(block) - all_ids
         if missing:
             err(f"BUILD B2: {name} links do not resolve in the built artifact: {sorted(missing)}")
-    if prebuild and not BUILD_PREBUILD_EXPECTED <= hrefs(prebuild):
-        err(f"BUILD B2: prebuild expected targets not linked: "
-            f"{sorted(BUILD_PREBUILD_EXPECTED - hrefs(prebuild))}")
-    if pipeline and not BUILD_PIPELINE_EXPECTED <= hrefs(pipeline):
-        err(f"BUILD B2: pipeline expected targets not linked: "
-            f"{sorted(BUILD_PIPELINE_EXPECTED - hrefs(pipeline))}")
-    if budget and "appendix_model_params" not in hrefs(budget):
-        err("BUILD B2: §7A.12 does not link the model capability table")
+    if prebuild is not None:
+        leaked = BUILD_PREBUILD_RETIRED_LINKS & hrefs(prebuild)
+        if leaked:
+            err(f"BUILD B2: prebuild profile must stay self-contained (v4 chapter 0), "
+                f"retired routing links returned: {sorted(leaked)}")
+        for axis in BUILD_PREBUILD_AXES:
+            if axis not in prebuild:
+                err(f"BUILD B2: prebuild profile lost the «{axis}» decision axis")
+    if pipeline is not None:
+        leaked = BUILD_PIPELINE_RETIRED_LINKS & hrefs(pipeline)
+        if leaked:
+            err(f"BUILD B2: §7A.13 assembly must stay self-contained (v4 chapter 8), "
+                f"retired chapter links returned: {sorted(leaked)}")
+        for token in BUILD_PIPELINE_CONTENT:
+            if token not in pipeline:
+                err(f"BUILD B2: §7A.13 lost «{token}» (six-step table / per-card total)")
+    if budget is not None:
+        if hrefs(budget):
+            err(f"BUILD B2: §7A.12 budget chapter must stay self-contained (v4 chapter 7), "
+                f"found links: {sorted(hrefs(budget))}")
+        for token in BUILD_BUDGET_CONTENT:
+            if token not in budget:
+                err(f"BUILD B2: §7A.12 lost «{token}» (budget table / 4K profile / calculator range)")
 
     # B3 — default visibility: value tables + capability checklist + templates
     for sid in ("p7a_sampling_params", "p7a_model_checklist"):
@@ -217,11 +255,14 @@ def main():
     if pipeline and "Итого" not in pipeline:
         err("BUILD B3: §7A.13 budget table has no totals (Итого) row")
 
-    # B4 — completion: the §7A.13 final checklist + blueprint annotations
-    if pipeline:
-        checks = pipeline.count("☐")
-        if checks < 5:
-            err(f"BUILD B4: §7A.13 final checklist has only {checks} items")
+    # B4 — completion: the ONE master checklist (iter 189/v4-8: it lives in §9.5,
+    # `p9_pre_deploy`; §7A.13 ends with the per-card budget table and must not re-grow a copy)
+    if pipeline and pipeline.count("☐"):
+        err(f"BUILD B4: §7A.13 re-grew a checklist ({pipeline.count('☐')} items) — "
+            "the one master checklist is §9.5")
+    deploy = section(read(MASTER / "part_09.html"), "p9_pre_deploy")
+    if deploy is None or deploy.count("☐") < 5:
+        err("BUILD B4: §9.5 master checklist missing or has < 5 items")
     m10 = read(MASTER / "part_10.html")
     dem = m10.count("Карточка демонстрирует:")
     if dem != len(PART_10_CARDS):
@@ -316,7 +357,7 @@ def finish():
         sys.exit(1)
     print("\nPASS — every mode travels entry -> backbone -> completion on the "
           "built corpus: Learn (TOC/Part-0 entry, 12-part linear order == "
-          "manifest == render order, 68/68 difficulty metadata (incl. Part 0), F6 disclosure, "
+          "manifest == render order, 65/65 difficulty metadata (incl. Part 0), F6 disclosure, "
           "Part 10 completion); Build (§1.6 profile -> §7A.13/§7A.12 + Part 10 "
           "blueprints, all wiring targets resolve, value/checklist/template "
           "surfaces present, assembly checklist + Итого + 4 annotations); "

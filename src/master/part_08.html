@@ -2,13 +2,15 @@
   Part 8: Anti-patterns (Анти-паттерны)
   Live Character Guide v9 Master HTML
 
-  v3 stage 3 (iter 173) — F-11: 16 sections → 2, all 15 anti-patterns in one place.
+  v3 stage 3 (iter 173) — F-11: 16 sections -> 2, all 15 anti-patterns in one place.
   - p8_antipatterns_overview = the catalog: the E12 embed moved INSIDE the section
     (it used to sit outside every <section>); the 15 cards carry symptom / cause /
-    fast fix only, aligned with the owner sections.
-  - p8_worked_examples = the detail layer: 15 collapsible blocks (details.interactive), one per AP —
-    three lines (симптом / причина / исправление → владелец) plus the one payload the
-    owner section does not carry (проверка, различающий сигнал или пример до/после).
+    fast fix only.
+  - p8_worked_examples = the detail layer: 15 collapsible blocks (details.interactive),
+    one per AP — the check, the distinguishing signal or the before/after example
+    that the card does not carry. The three-line symptom/cause/fix triple is NOT
+    repeated here (it is the card above); iter 190 (v4-9) removed the duplication,
+    the owner routing and the § numbers around what stays.
   Absorbed ids p8_ap1…p8_ap15 stay reachable via data/anchor-redirects.json
   (→ p8_worked_examples).
 -->
@@ -208,7 +210,7 @@
         <div class="ap-card__symptom">Нарушение контекстного окна</div>
         <div class="ap-card__cause">Карточка + контекст превышают окно модели</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">4K-Fallback Protocol или модель с большим контекстом (§7A.11, §7A.12).</div>
+        <div class="ap-card__fix">4K-Fallback Protocol или модель с большим контекстом (§7A.12).</div>
       </div>
 
       <!-- AP-15 -->
@@ -228,25 +230,20 @@
 </div>
 <!-- REPLACED BY VISUAL SYSTEM: E12 -->
 
-<p><strong>Как читать каталог.</strong> Карточка — быстрый скан: симптом, причина, быстрый фикс. Полный разбор каждого анти-паттерна — симптом, причина, проверка и пример до/после — в <a href="#p8_worked_examples">§8.2: разборы 15 анти-паттернов</a>. Правило целиком остаётся у своего владельца (раздел-владелец указан в каждой карточке и в каждом разборе): каталог не переобъясняет канонические разделы.</p>
-
-<p>OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.1 (<code>p5_ocean_basics</code>). В каталоге E12 не отображается — см. <a href="#p5_ocean_basics">Part 5: OCEAN</a>.</p>
+<p><strong>Как читать каталог.</strong> Карточка — быстрый скан: симптом, причина, быстрый фикс. Разборы ниже добавляют к каждой ошибке то, чего в карточке нет: проверку, различающий сигнал или пример до/после.</p>
 
 </section>
 <section  data-section="p8_worked_examples" id="p8_worked_examples" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
-<h2>Разборы: 15 анти-паттернов, симптом → исправление</h2>
+<h2>Разборы: 15 анти-паттернов, проверка и пример</h2>
 
-<p>Один разбор = три строки (симптом, причина, исправление со ссылкой на владельца) плюс только тот материал, которого нет в разделе-владельце: проверка, различающий сигнал или пример до/после. Правило целиком — по ссылке владельца; здесь — распознавание и применение.</p>
+<p>Один разбор = одна ошибка из каталога выше, развёрнутая до того, что нельзя уместить в карточку: проверка, различающий сигнал или пара «до/после».</p>
 
 <details class="interactive">
-<summary>AP-1 · Раздувание токенов · владелец §7A.12 · уровень BASIC</summary>
+<summary>AP-1 · Раздувание токенов · BASIC</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> Description выходит за бюджет блока.</p>
-<p><strong>Причина:</strong> избыточное описание, дублирование, голос в Description.</p>
-<p><strong>Исправление:</strong> сократите до бюджета Description, детали — в Lorebook. Владелец правила — <a href="#p7a_token_budget">Part 7A §7A.12 — бюджет токенов</a>; голос → <a href="#p3_voice_isolation">Part 3 §3.1 — изоляция голоса</a>.</p>
 <div class="example-block">
-<p>Пример: Description 1200 токенов → модель игнорирует половину → персонаж теряет консистентность.</p>
+<p>Description 1200 токенов → модель игнорирует половину → персонаж теряет консистентность.</p>
 </div>
 
 <div class="diff-view">
@@ -262,28 +259,19 @@
 <p>Факты + Anchors + SPINE. Голос → Examples.</p>
 </div>
 </div>
-
-<p>Полная карточка Елены — <a href="#p10_elena">Part 10: Елена</a>.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-2 · Отсутствующая цена · владелец §2.2 · уровень BASIC</summary>
+<summary>AP-2 · Отсутствующая цена · BASIC</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> у якоря (Anchor) нет физической цены.</p>
-<p><strong>Причина:</strong> у якоря нет последствия, наблюдаемого в той же сцене.</p>
-<p><strong>Исправление:</strong> формат якоря Триггер → Действие → Цена; каждый якорь обязан иметь Цену — без неё модель не показывает уязвимость → <a href="#p2_anchor_rules">Part 2 §2.2 — поведенческие якоря</a>.</p>
 <p><strong>Проверка:</strong> прочитайте якорь вслух и спросите: «что в этой сцене увидит собеседник?» Если ответа нет — цены нет. «Потом пожалеет», «устаёт от людей» — не цены: они не наблюдаемы в текущей сцене.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-3 · Голос в Description · владелец §3.1 · уровень INTERMEDIATE</summary>
+<summary>AP-3 · Голос в Description · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> стилистические директивы в Description.</p>
-<p><strong>Причина:</strong> голос описан словами вместо демонстрации в примерах диалога.</p>
-<p><strong>Исправление:</strong> Description = только факты; голос → Examples/Greeting. Модель считывает характер из примеров диалога, а не из описания → <a href="#p3_voice_isolation">Part 3 §3.1 — изоляция голоса</a>.</p>
-
 <div class="diff-view">
 <div class="diff-card diff-del">
 <div class="diff-label">❌ Голос в Description</div>
@@ -304,11 +292,8 @@
 </details>
 
 <details class="interactive">
-<summary>AP-4 · Психология в SP · владелец §7A.1 · уровень BASIC</summary>
+<summary>AP-4 · Психология в SP · BASIC</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> психологический анализ (SPINE, призрак) помещён в System Prompt.</p>
-<p><strong>Причина:</strong> попытка «проинструктировать» модель о характере.</p>
-<p><strong>Исправление:</strong> SPINE (WANT/NEED/дефект) и призрак — только в Description; SP = только инструкции и запреты → <a href="#p7a_system_prompt">Part 7A §7A.1 — System Prompt</a>.</p>
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Модель не следует инструкциям о психологии. Психология должна быть в контексте (Description) — как структурированные теги (<code>&lt;spine&gt;</code>, <code>&lt;ocean&gt;</code>, <code>&lt;enneagram&gt;</code>), не нарративом — не в инструкциях (SP).</p>
 </div>
@@ -316,21 +301,16 @@
 </details>
 
 <details class="interactive">
-<summary>AP-5 · RepPen &gt; 1.10 · владелец §7A.6 · уровень INTERMEDIATE</summary>
+<summary>AP-5 · RepPen &gt; 1.10 · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> Repetition Penalty &gt; 1.10.</p>
-<p><strong>Причина:</strong> превышение подавляет характерные речевые обороты персонажа — генерация становится монотонной.</p>
-<p><strong>Исправление:</strong> держите RepPen в диапазоне своей модели — §7A.6 (никогда &gt; 1.10); повышайте MinP вместо RepPen → <a href="#p7a_sampling_params">Part 7A §7A.6 — параметры генерации</a>.</p>
 <p><strong>Различающий сигнал:</strong> персонаж «теряет» фирменные повторы и речевые маркеры, но лексика остаётся богатой — это RepPen, а не слабые Examples (при слабых Examples голос пустой с самого начала).</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-6 · Отсутствие анти-годмодинга · владелец §7A.1 · уровень BASIC</summary>
+<summary>AP-6 · Отсутствие анти-годмодинга · BASIC</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> модель пишет за {{user}} — действия, мысли, чувства.</p>
-<p><strong>Причина:</strong> в SP нет директивы anti-godmoding.</p>
-<p><strong>Исправление:</strong> обязательно добавьте в SP две строки — запрет и позитивную формулировку → <a href="#p7a_system_prompt">Part 7A §7A.1 — System Prompt</a>:</p>
+<p>В SP нужны две строки — запрет и позитивная формулировка:</p>
 <pre><code>Never speak or act for {{user}}.</code></pre>
 <p><strong>До/После:</strong> <code>{{user}} подошёл. *Она почувствовала, как сердце {{user}} забилось чаще.*</code> ❌ → <code>{{user}} подошёл. *Она отступила на шаг.* «Так... и что теперь?»</code> ✅</p>
 <p>Позитивная формулировка ("respond only to observable actions") работает лучше чистого запрета.</p>
@@ -338,21 +318,15 @@
 </details>
 
 <details class="interactive">
-<summary>AP-7 · Presence Penalty &gt; 0 · владелец §7A.6 · уровень INTERMEDIATE</summary>
+<summary>AP-7 · Presence Penalty &gt; 0 · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> Presence Penalty &gt; 0.</p>
-<p><strong>Причина:</strong> ненулевой PP заставляет модель вводить новые темы вместо удержания характерных паттернов персонажа.</p>
-<p><strong>Исправление:</strong> Presence Penalty = 0.0 для всех карточек персонажей → <a href="#p7a_sampling_params">Part 7A §7A.6 — параметры генерации</a> (значения — Appendix E).</p>
-<p><strong>Различающий сигнал:</strong> персонаж избегает тем, которые сам поднимал 2–3 реплики назад, и «расползается» на новые — при этом одиночные реплики остаются в характере. В Ollama/LM Studio PP захардкожен 0.7 — проверьте настройки интерфейса (Appendix E).</p>
+<p><strong>Различающий сигнал:</strong> персонаж избегает тем, которые сам поднимал 2–3 реплики назад, и «расползается» на новые — при этом одиночные реплики остаются в характере. В Ollama/LM Studio PP захардкожен 0.7 — проверьте настройки интерфейса: KoboldCPP, TabbyAPI и vLLM позволяют выставить PP = 0.0.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-8 · Призрак без якорей · владелец §4.6 · уровень INTERMEDIATE</summary>
+<summary>AP-8 · Призрак без якорей · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> призрак (GHOST) описан, но нет якорей, связанных с ним.</p>
-<p><strong>Причина:</strong> призрак остаётся описанием, а не поведенческим драйвером.</p>
-<p><strong>Исправление:</strong> каждый GHOST = минимум один GHOST-linked якорь в теге <code>&lt;anchors&gt;</code> (Description); призрак — корень причинной цепочки SPINE, он должен выражаться в поведении через якорь → <a href="#p4_spine_full_chain">Part 4 §4.6 — SPINE → карта якорей</a>.</p>
 <div class="example-block">
 <p>Пример: Елена — призрак «предательство редактора» → якорь «Когда вопрос о лояльности → напрягается → желваки сжимаются, короткий выдох».</p>
 </div>
@@ -360,18 +334,15 @@
 </details>
 
 <details class="interactive">
-<summary>AP-9 · Сломанный SPINE · владелец §4.6 · уровень EXPERT</summary>
+<summary>AP-9 · Сломанный SPINE · EXPERT</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> SPINE-элементы не связаны логически — желание совместимо с потребностью (нет конфликта), дефект существует без объяснения.</p>
-<p><strong>Причина:</strong> желание, потребность, дефект, ложь, призрак написаны независимо, без причинно-следственной связи.</p>
-<p><strong>Исправление:</strong> проверьте цепочку GHOST → LIE → FLAW → NEED → WANT; каждый элемент объясняется предыдущим → <a href="#p4_spine_full_chain">Part 4 §4.6 — полная цепочка SPINE</a>; проверка консистентности → <a href="#p4_spine_full_chain">Part 4 §4.6 — проверка SPINE</a>.</p>
 <div class="problem-block">
 <p><strong>❌ Сломанный SPINE</strong></p>
 <pre><code>GHOST: (отсутствует)  →  LIE: (отсутствует)  →  FLAW: Избегает близости
 NEED: Нуждается в доверии  ←  WANT: Хочет быть любимым</code></pre>
 <p>Здесь желание совместимо с потребностью — конфликта нет, и дефект не объяснён: без ложи/призрака цепь разорвана.</p>
 
-<p><strong>Критерий сломанной SPINE (broken SPINE)</strong> (сохраняется как диагностика): «желание совместимо с потребностью — нет конфликта» + дефект не объяснён через ложь/призрак. Это не то же самое, что «призрак/ложь текстуально отсутствуют» — по Part 4 §4.1, призрак и ложь могут быть <strong>неявными</strong> для простых персонажей. Диагностируйте сломанную SPINE по разрыву каузальной цепи (дефект без корня в лжи/призраке), а не по текстовому отсутствию элементов.</p>
+<p><strong>Критерий сломанной SPINE (broken SPINE)</strong> (сохраняется как диагностика): «желание совместимо с потребностью — нет конфликта» + дефект не объяснён через ложь/призрак. Это не то же самое, что «призрак/ложь текстуально отсутствуют»: призрак и ложь могут быть <strong>неявными</strong> для простых персонажей. Диагностируйте сломанную SPINE по разрыву каузальной цепи (дефект без корня в лжи/призраке), а не по текстовому отсутствию элементов.</p>
 </div>
 <div class="solution-block">
 <p><strong>✅ Цельный SPINE</strong></p>
@@ -386,17 +357,12 @@ NEED: Доверие без стен (FLAW мешает)
 WANT: Быть любимым (совместимо с LIE — "хочу любви, но боюсь близости")</code></pre>
 <p>Цепь замкнута — каждый элемент объясняется предыдущим.</p>
 </div>
-
-<p>Пример Елены — проверка SPINE → <a href="#p4_spine_full_chain">Part 4 §4.6 — проверка консистентности SPINE</a>.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-10 · Перегрузка CoT · владелец §6.5 · уровень INTERMEDIATE</summary>
+<summary>AP-10 · Перегрузка CoT · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> больше 3 CoT-якорей в карточке.</p>
-<p><strong>Причина:</strong> попытка задать весь внутренний процесс.</p>
-<p><strong>Исправление:</strong> 2–3 CoT-якоря максимум, остальные — обычные T→A→P. Уровень CoT выбирается по модели — <a href="#p6_cot_tiers">Part 6 §6.2 — уровни CoT</a>; владелец правила якорей — <a href="#p6_cot_anchors">Part 6 §6.5 — CoT-якоря</a>.</p>
 <div class="callout">
 <p><strong>НАБЛЮДЕНИЕ:</strong> При перегрузке CoT модель генерирует внутренние монологи вместо действий — персонаж «думает» больше, чем «делает».</p>
 </div>
@@ -412,20 +378,15 @@ WANT: Быть любимым (совместимо с LIE — "хочу люб�
 </details>
 
 <details class="interactive">
-<summary>AP-11 · Переплетение голосов · владелец §3.5 · уровень EXPERT</summary>
+<summary>AP-11 · Переплетение голосов · EXPERT</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> в мульти-персонажных сценах голоса смешиваются.</p>
-<p><strong>Причина:</strong> недостаточное различение голосов персонажей.</p>
-<p><strong>Исправление:</strong> маркеры персонажа (Character Markers) — явные маркеры уникальности голоса: специфичная лексика, синтаксические паттерны, телесные реакции, повторяющиеся фразы → <a href="#p3_voice_leak">Part 3 §3.5 — мульти-персонажные примеры</a>. Утечка голоса в сторону нарратора — отдельный случай: <a href="#p3_voice_leak">Part 3 §3.5 — утечка голоса</a>.</p>
+<p>Маркеры персонажа (Character Markers) — явные маркеры уникальности голоса: специфичная лексика, синтаксические паттерны, телесные реакции, повторяющиеся фразы. В мульти-персонажной сцене у каждого персонажа должно быть 3 непересекающихся маркера; если при чтении вслух реплики двух персонажей можно поменять местами — маркеров нет.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-12 · Невалидный XML · владелец §7A.9/§7A.4 · уровень EXPERT</summary>
+<summary>AP-12 · Невалидный XML · EXPERT</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> невалидные XML-теги в Description.</p>
-<p><strong>Причина:</strong> опечатки, незакрытые теги.</p>
-<p><strong>Исправление:</strong> валидируйте XML перед использованием; одна система разметки — Format Lock → <a href="#p7a_xml_tags">Part 7A §7A.9 — XML-теги</a> + <a href="#p7a_format_lock">Part 7A §7A.4 — Format Lock</a>.</p>
 <div class="problem-block">
 <p><strong>❌ Неправильно:</strong></p>
 <pre><code>&lt;spine&gt;
@@ -442,29 +403,22 @@ WANT: {{want}}
 </details>
 
 <details class="interactive">
-<summary>AP-13 · Конфликт Lorebook · владелец §7B.3 · уровень INTERMEDIATE</summary>
+<summary>AP-13 · Конфликт Lorebook · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> записи Lorebook (база знаний) противоречат друг другу или Description.</p>
-<p><strong>Причина:</strong> независимое создание записей без проверки.</p>
-<p><strong>Исправление:</strong> проверяйте консистентность всех записей Lorebook с Description → <a href="#p7b_lorebook_basics">Part 7B §7B.3 — Lorebook</a>.</p>
+<p><strong>Проверка:</strong> выпишите из записей Lorebook всё, что касается внешности, биографии и отношений персонажа, и сравните с Description. Расхождение в факте (возраст, имя, событие) модель разрешит в пользу того блока, который попал в контекст первым, — и карточка начнёт противоречить себе.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-14 · Нарушение контекстного окна · владелец §7A.11/§7A.12 · уровень INTERMEDIATE</summary>
+<summary>AP-14 · Нарушение контекстного окна · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> карточка + контекст больше контекстного окна модели.</p>
-<p><strong>Причина:</strong> расширенная карточка для 4K-модели.</p>
-<p><strong>Исправление:</strong> 4K-Fallback Protocol или модель с большим контекстом → <a href="#p7a_4k_fallback">Part 7A §7A.11 — 4K-Fallback</a> + <a href="#p7a_token_budget">Part 7A §7A.12 — бюджет токенов</a>.</p>
+<p><strong>Что делать:</strong> минимальная конфигурация для 4K-контекста — System Prompt 50, Description 150, два Examples по 40, Greeting 40 (около 320 токенов до якорей). CoT, интерпретации OCEAN и Lorebook отключаются, а не сжимаются до нечитаемого.</p>
 </div>
 </details>
 
 <details class="interactive">
-<summary>AP-15 · Вложенные якоря · владелец §2.2 · уровень EXPERT</summary>
+<summary>AP-15 · Вложенные якоря · EXPERT</summary>
 <div class="antipattern-card">
-<p><strong>Симптом:</strong> якорь содержит вложенные условия: «Если X, а потом Y → делает Z» — модель не исполняет надёжно цепочку из 3+ вложенных условий на моделях до 14B.</p>
-<p><strong>Причина:</strong> попытка задать сложную поведенческую логику в одном якоре.</p>
-<p><strong>Исправление:</strong> разбейте на атомарные якоря — один якорь = одна связь T→A→P; принцип атомарности → <a href="#p2_anchor_rules">Part 2 §2.2 — поведенческие якоря</a>.</p>
 <div class="example-block">
 <pre><code>❌ Вложенный: "Когда лгут → если уже лгали раньше → хлопает дверью → кричит: «Вон!»"
 ✅ Атомарные: "Когда лгут → сжимает челюсти → голос становится тише"

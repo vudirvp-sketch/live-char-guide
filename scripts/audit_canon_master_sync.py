@@ -88,13 +88,8 @@ MASTER_DIR = REPO / "src" / "master"
 # Substrings are chosen to be unique and stable across future content edits.
 # HTML-escaped variants are used where canon uses raw < or >.
 CHECKS = [
-    # ----- P0-2 / KI#21-A2: Елена OCEAN extreme poles 3→1 -----
-    (
-        "P0-2",
-        "part_07a.html",
-        "Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — осторожная зона (cautious zone, 30–40 / 60–70), напрямую связаны с дефектом (FLAW) и призраком (GHOST)",
-        "Елена OCEAN: extreme poles 3→1 + cautious zone labels (iter 35 P0-2 fix)",
-    ),
+    # P0-2 moved to ABSENT_CHECKS as P0-2-del — iter 189 (v4-8) retired the §7A.13 extra-steps
+    # bullet that carried it (a duplicate of §5.2/§10.1); the labels live in Part 10 §10.1.
     # ----- P0-3 / KI#21-A3: G3 row «после 7-го» addition in part_04 -----
     (
         "P0-3",
@@ -206,14 +201,17 @@ CHECKS = [
     ),
     # ----- P0-12 (A10): part_09 Vysh Quick Check — retired by the v3 S3 merge -----
     # iter 173 (v3 Stage 3): the separate Vysh «Структурная проверка / Полная проверка»
-    # pair was merged into the ONE 14-item checklist — the iter-35 Quick Check rename
+    # pair was merged into the ONE checklist — the iter-35 Quick Check rename
     # no longer has a standalone heading to protect. The probe now guards the merge.
+    # iter 190 (v4-9 chapter 9): the ONE checklist grew 14 → 18 items (RepPen,
+    # Temperature, block budget, Embodiment) — the needle moved with the heading.
     (
         "P0-12",
         "part_09.html",
-        "<h4>Единый чек-лист (14 пунктов)</h4>",
-        "part_09 §9.5: ONE deploy checklist (14 numbered items; the Vysh example merged "
-        "into it, iter 173 — supersedes the iter-35/51/105 Quick Check rename)",
+        "<h4>Единый чек-лист (18 пунктов)</h4>",
+        "part_09 §9.5: ONE deploy checklist (18 numbered items; the Vysh example merged "
+        "into it, iter 173; +4 pre-deploy checks iter 190 — supersedes the iter-35/51/105 "
+        "Quick Check rename)",
     ),
     # ----- P0-13 (B1 GHOST): part_10 Omnis GHOST rewrite -----
     (
@@ -244,12 +242,9 @@ CHECKS = [
         "part_08 AP-9: Критерий broken SPINE clarification paragraph added (iter 36 P1-1 fix)",
     ),
     # ----- P1-3 (A8): part_08 OCEAN Overload orphan row deleted + footnote -----
-    (
-        "P1-3",
-        "part_08.html",
-        "<p>OCEAN Overload ранее был AP-15, перенесён в Part 5 §5.1",
-        "part_08 §8.1: OCEAN Overload orphan row deleted + footnote added (iter 36 P1-3 fix; «v9 restructure» repo-meta strip iter 129 — R17 [B]; footnote label re-pointed Примечание→Ссылка iter 155 — canon L27 «Ссылка:» mirror, the part-8 v2 build slice)",
-    ),
+    # iter 190 (v4-9 chapter 9): the footnote itself retired — it was pure guide-meta
+    # («ранее был AP-15, перенесён в Part 5») inside the anti-pattern reference, and
+    # chapter 9 carries no routing. Moved to ABSENT_CHECKS as P1-3-del; count 87 kept.
     # ----- P1-4 (B2): part_10 Walter GHOST rewrite -----
     (
         "P1-4",
@@ -284,9 +279,9 @@ CHECKS = [
     # ----- P1-10 (D4+NEW-2): part_07a Lorebook example пожар → предательство -----
     (
         "P1-10",
-        "part_07a.html",
-        "Key «предательство, редактор, Марина, украденная история»",
-        "part_07a §7A.13 Lorebook example: primary GHOST «предательство» (iter 36 P1-10 fix)",
+        "part_07b.html",
+        "<td>предательство, редактор, Марина, украденная история</td>",
+        "part_07b §7B.2 Lorebook example: primary GHOST «предательство» — moved from the retired §7A.13 extra-steps bullet (iter 36 P1-10 fix; re-pointed iter 189 v4-8)",
     ),
     # ----- P1-11 (D4): part_07b Пример 1 (предательство) added + Пример 2/3/4 renamed -----
     (
@@ -327,25 +322,16 @@ CHECKS = [
     (
         "P3-6",
         "part_03.html",
-        "<p><strong>Методология:</strong> проценты — качественные ориентиры, не точные измерения; эмпирическая база и её ограничения — <a href=\"#p1_value_proposition\">",
-        "part_03 §3.1: Voice Isolation % methodology note (iter 38 P3-6 fix; compressed to §1.1 pointer iter 129 — R05/ed-7)",
+        "<p><strong>Методология:</strong> проценты — качественные ориентиры, не точные измерения. Замеры сделаны на 12B–32B моделях ранних поколений",
+        "part_03 §3.1: Voice Isolation % methodology note (iter 38 P3-6 fix; compressed to §1.1 pointer iter 129 — R05/ed-7; de-linked iter 187 — v4-6 chapter 4, the caveat stands in place)",
     ),
     # ================================================================
     # iter 46 — Phase 3 canon→master HTML sync (8 fixes, P1-8/9 SKIP)
     # ================================================================
     # ----- P2-1 (C1): part_01 §1.4 Ключевые термины block -----
-    (
-        "P2-1a",
-        "part_01.html",
-        "<p><strong>Ключевые термины (используются далее без перевыполнения):</strong></p>",
-        "part_01 §1.4: Ключевые термины block added with Anchor/Voice/SPINE/OCEAN definitions (iter 37 P2-1 fix)",
-    ),
-    (
-        "P2-1b",
-        "part_01.html",
-        "<li><strong>SPINE</strong> — психологический каркас из 5 элементов (GHOST/LIE/FLAW/NEED/WANT), см. Part 4.</li>",
-        "part_01 §1.4: SPINE definition in Ключевые термины block (iter 37 P2-1 fix)",
-    ),
+    # iter 183 (v4-2 chapter 0): the terms list was retired by design — each term is defined
+    # where it is used (glossary panel is the single term surface). P2-1a/P2-1b moved to
+    # ABSENT_CHECKS as P2-1a-del / P2-1b-del (the block must not come back). Count unchanged.
     (
         "P2-1c",
         "part_01.html",
@@ -356,14 +342,14 @@ CHECKS = [
     (
         "P2-9a",
         "part_07a.html",
-        "Модель — <a href=\"#p1_core_rules\">Pattern Matcher</a> (см. Part 1 §1.4): два паттерна разметки в одной карточке = произвольное переключение между ними.",
-        "part_07a Format Lock: Pattern Matcher ref updated with «Модель —» prefix + «(см. Part 1 §1.4)» suffix (iter 37 P2-9 fix)",
+        "Модель — сопоставитель паттернов (Pattern Matcher): два паттерна разметки в одной карточке дают два источника",
+        "part_07a Format Lock: Pattern Matcher principle stated locally (no cross-part link) — v4 pilot ch.1 (iter 182; iter 37 P2-9 intent preserved)",
     ),
     (
         "P2-9b",
         "part_07a.html",
-        "модель выступает как <a href=\"#p1_core_rules\">Pattern Matcher</a> (см. §1.4 Part 1): два паттерна разметки = два источника",
-        "part_07a Format Lock RULE: Pattern Matcher ref updated with «модель выступает как» prefix + «(см. §1.4 Part 1)» suffix (iter 37 P2-9 fix)",
+        "Выберите ОДНУ систему разметки и используйте её во всех Examples + Greeting. Смешение двух систем",
+        "part_07a Format Lock RULE: one-markup rule stated locally (no cross-part link) — v4 pilot ch.1 (iter 182; iter 37 P2-9 intent preserved)",
     ),
     # ----- P2-12 (B4): part_03 §3.4 Tier 1/2/3 → Quality Grade A/B/C -----
     # iter 105: Grade A/B/C tier labels → класс A/B/C (Category C translation pass); Quality Grade compound kept as proper noun
@@ -416,8 +402,8 @@ CHECKS = [
     (
         "P2-16",
         "part_07a.html",
-        "Keirsey SP (Sensing-Perceiving, см. Appendix A — MBTI)",
-        "part_07a §7A.1: Keirsey SP Artisan/Ремесленник → Sensing-Perceiving (iter 37 P2-16 fix)",
+        "Keirsey SP (Sensing-Perceiving)",
+        "part_07a §7A.1: Keirsey SP Artisan/Ремесленник → Sensing-Perceiving (iter 37 P2-16 fix; v4 pilot ch.1 dropped the Appendix-A link, iter 182)",
     ),
     # ----- P2-17 (F9): part_09 §9.3 E13 mapping AP labels -----
     # iter 173 (v3 Stage 3): the 5-group shorthand tree table was retired (its two
@@ -431,18 +417,10 @@ CHECKS = [
         "table retired, iter 173)",
     ),
     # ----- P3-4 (D7): Уолтер cross-refs (3 locations) -----
-    (
-        "P3-4a",
-        "part_01.html",
-        "<p>Пример реалистичного современного персонажа (без фэнтези-элементов, простая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
-        "part_01 §1.4: Cross-ref to Walter §10.2 (realistic modern character) added (iter 38 P3-4 fix)",
-    ),
-    (
-        "P3-4b",
-        "part_04.html",
-        "<p>Пример простой карточки без слоёв призрака (один GHOST, упрощённая SPINE) — Уолтер Уайт, <a href=\"#p10_walter\">§10.2</a>.</p>",
-        "part_04 §4.11: Cross-ref to Walter §10.2 (simple SPINE without GHOST Layers) added (iter 38 P3-4 fix)",
-    ),
+    # iter 183 (v4-2 chapter 0): the §1.4 Walter cross-ref was retired with the term list
+    # (chapter 0 carries no cross-chapter links). P3-4a moved to ABSENT_CHECKS as P3-4a-del.
+    # iter 184 (v4-3 chapter 2): P3-4b retired with the same rule (chapter 2 carries no
+    # cross-chapter links) — moved to ABSENT_CHECKS as P3-4b-del. Count unchanged (87).
 
     # ============================================================
     # iter 47 — Phase 4: P2-3 (C5) Bridge paragraphs cleanup
@@ -480,12 +458,8 @@ CHECKS = [
         "<p>SPINE — это причинная цепочка GHOST → LIE → FLAW → NEED → WANT. Она объясняет, ПОЧЕМУ персонаж действует так, а не иначе. Без SPINE якоря — набор случайных правил.</p>",
         "part_04 §4-end: Synthesis paragraph added (iter 47 P2-7 fix; needle re-pointed iter 181 — audit-181 inverted-echo fix)",
     ),
-    (
-        "P2-7-syn-07a",
-        "part_07a.html",
-        "<p>Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
-        "part_07a §7A-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
-    ),
+    # P2-7-syn-07a moved to ABSENT_CHECKS as P2-7-syn-07a-del — iter 189 (v4-8): the §7A.13
+    # closing transition was a duplicate of §7A.1's "SP is a container" framing.
     (
         "P2-7-syn-08",
         "part_08.html",
@@ -583,6 +557,52 @@ CHECKS = [
 # Used to verify that iter 47 deletes (bridge-paragraph cleanup, part-resume
 # removal, Elena inline ↑ annotations) actually took effect.
 ABSENT_CHECKS = [
+    # ----- iter 190 (v4-9 chapter 9): retired-by-design sites (guards, not deletes) -----
+    (
+        "P1-3-del",
+        "part_08.html",
+        "OCEAN Overload ранее был AP-15",
+        "part_08 §8.1: the OCEAN-Overload footnote retired — pure guide-meta routing inside "
+        "the anti-pattern reference (iter 190 v4-9 chapter 9; former P1-3)",
+    ),
+    # ----- iter 189 (v4-8 chapters 7-8): retired-by-design sites (guards, not deletes) -----
+    (
+        "P0-2-del",
+        "part_07a.html",
+        "Экстремальных полюса: 1 (O=72 &gt; 70). A=38 и N=68 — осторожная зона (cautious zone, 30–40 / 60–70), напрямую связаны с дефектом (FLAW) и призраком (GHOST)",
+        "part_07a §7A.13: Elena OCEAN bullet retired with the extra-steps list — the labels live in §5.2/§10.1 (iter 189 v4-8; former P0-2)",
+    ),
+    (
+        "P2-7-syn-07a-del",
+        "part_07a.html",
+        "<p>Системный промпт — контейнер, который модель видит всегда. Identity + Anti-godmoding + CORE DIRECTIVES + Tone Frame + Format Lock. Всё остальное (SPINE, OCEAN, Examples) живёт в Description и Examples.</p>",
+        "part_07a §7A.13: closing transition retired — §7A.1 already states the container framing (iter 189 v4-8; former P2-7-syn-07a)",
+    ),
+    # ----- iter 183 (v4-2 chapter 0): three retired-by-design sites (guards, not deletes) -----
+    (
+        "P2-1a-del",
+        "part_01.html",
+        "Ключевые термины (используются далее без перевыполнения)",
+        "part_01 §1.4: terms list retired by design — each term is defined where used; glossary is the single term surface (iter 183 v4-2; former P2-1a)",
+    ),
+    (
+        "P2-1b-del",
+        "part_01.html",
+        "<li><strong>SPINE</strong> — психологический каркас из 5 элементов (GHOST/LIE/FLAW/NEED/WANT), см. Part 4.</li>",
+        "part_01 §1.4: SPINE term-list row retired with the block (iter 183 v4-2; former P2-1b)",
+    ),
+    (
+        "P3-4a-del",
+        "part_01.html",
+        "<a href=\"#p10_walter\">§10.2</a>.</p>",
+        "part_01 §1.4: Walter cross-ref retired with the term list — chapter 0 carries no cross-chapter links (iter 183 v4-2; former P3-4a)",
+    ),
+    (
+        "P3-4b-del",
+        "part_04.html",
+        "Пример простой карточки без слоёв призрака (один GHOST, упрощённая SPINE) — Уолтер Уайт",
+        "part_04 §4.2: Walter cross-ref retired — chapter 2 carries no cross-chapter links (iter 184 v4-3; former P3-4b)",
+    ),
     # ----- P2-3 (C5): 7 deleted bridge-paragraphs -----
     (
         "P2-3-del-01",

@@ -481,12 +481,14 @@ def main():
     notes.append("E12 embed: AP-5 fix card re-framed (model-qualified defer + "
                  "AP-5 boundary), re-point comment present")
 
-    # ---------- 7. Hint re-frames (§9.1 / §9.2 / §9.7, canon + master) ----------
+    # ---------- 7. Hint re-frames (§9.1 / §9.7, canon + master) ----------
     # iter 173 (v3 Stage 3): Part 9 renumbered 9.1–9.7 — the per-block scan is §9.1,
-    # the symptom table §9.2 (absorbs the retired §9.4 pointer-only section),
-    # the 12B delta §9.7. The old §9.4 block is gone; its #4/#5 fold pointer guard
-    # moved into the §9.2 check below.
-    c93 = md_section(canon9, r"^## 9\.1 ", r"^## 9\.2 ")
+    # the symptom table §9.2, the 12B delta §9.7.
+    # v4-9 (iter 190): Part 9 is 5 sections — §9.2 (flat lookup) was absorbed into
+    # §9.1 together with the five most common errors (ex-p1_top3_problems), so both
+    # hint blocks now read from §9.1; the retired «#4/#5» cross-section numbering
+    # became one 1–5 list of the five most common errors.
+    c93 = md_section(canon9, r"^## 9\.1 ", r"^## 9\.3 ")
     if c93 is None:
         err("canon §9.1 section not found")
     else:
@@ -494,24 +496,26 @@ def main():
             err("canon §9.1: RepPen check not 12B-qualified")
         if "(рекомендация 1.0–1.05)" in c93:
             err("canon §9.1: stale unqualified parenthetical remains")
-    c95 = md_section(canon9, r"^## 9\.2 ", r"^## 9\.3 ")
+    c95 = c93
     if c95 is None:
-        err("canon §9.2 section not found")
+        err("canon §9.1: five-common-errors block not found")
     else:
-        if "| #4: Повторяющиеся фразы |" not in c95:
-            err("canon §9.2: #4 row label missing (iter 156 fold, kept iter 173)")
-        if "| #5: Модель игнорирует характер |" not in c95:
-            err("canon §9.2: #5 row label missing (iter 156 fold, kept iter 173)")
-        # the retired §9.4 pointer section's living form: the #4/#5 fold note
-        if "строки #4/#5" not in c95:
-            err("canon §9.2: #4/#5 fold pointer missing (absorbed §9.4, iter 173)")
+        if "| **4** | Повторяющиеся фразы |" not in c95:
+            err("canon §9.1: «Повторяющиеся фразы» row missing (v4-9 five-error list)")
+        if "| **5** | Модель игнорирует характер |" not in c95:
+            err("canon §9.1: «Модель игнорирует характер» row missing "
+                "(v4-9 five-error list)")
+        if "строки #4/#5" in c95:
+            err("canon §9.1: the retired «строки #4/#5» cross-section numbering is back")
     c910 = md_section(canon9, r"^## 9\.7 ", r"(?!)")
     if c910 is None:
         err("canon §9.7 section not found")
     else:
-        if "RepPen 1.02–1.05 (12B-диапазон —" not in c910 \
-                or "`[ref: part_07a.md §7A.6]`" not in c910:
-            err("canon §9.7: «Повторы фраз» row not 12B-qualified with §7A.6 ref")
+        if "RepPen 1.02–1.05 (12B-диапазон)" not in c910:
+            err("canon §9.7: «Повторы фраз» row not 12B-qualified")
+        if "[ref: part_07a.md §7A.6]" in c910:
+            err("canon §9.7: the retired §7A.6 routing ref is back "
+                "(v4-9 states the range in place)")
         if "RepPen 1.02-1.05," in c910:
             err("canon §9.7: stale unqualified row remains")
     for line in canon9.split("\n"):
@@ -524,18 +528,18 @@ def main():
     m93 = html_section(master9, "p9_basic_checklist")
     if m93 and "(1.0–1.05 для 12B" not in m93:
         err("master §9.1: RepPen check not 12B-qualified")
-    m95 = html_section(master9, "p9_symptom_table")
-    if m95 and ("#4: Повторяющиеся фразы" not in m95
-                or "#5: Модель игнорирует характер" not in m95):
-        err("master §9.2: #4/#5 row labels missing (iter 156 fold)")
-    if m95 and "строки #4/#5" not in m95:
-        err("master §9.2: #4/#5 fold pointer missing (absorbed §9.4, iter 173)")
+    m95 = m93
+    if m95 and ("Повторяющиеся фразы" not in m95
+                or "Модель игнорирует характер" not in m95):
+        err("master §9.1: the five most common errors rows are missing (v4-9)")
+    if m95 and "строки #4/#5" in m95:
+        err("master §9.1: the retired «строки #4/#5» cross-section numbering is back")
     m910 = html_section(master9, "p9_12b_issues")
-    if m910 and "(12B-диапазон — <a href=\"#p7a_sampling_params\">§7A.6</a>)" not in m910:
-        err("master §9.10: «Повторы фраз» row mirror not qualified")
+    if m910 and "RepPen 1.02–1.05 (12B-диапазон)" not in m910:
+        err("master §9.7: «Повторы фраз» row mirror not qualified")
     notes.append("hint re-frames: §9.1 / §9.7 model-qualified (canon + master) "
-                 "+ the #4/#5 fold pointer (iter 156) now lives in §9.2 "
-                 "(§9.4 absorbed, iter 173); "
+                 "+ the five most common errors with the 1–5 list "
+                 "(v4-9: §9.2 absorbed into §9.1, #4/#5 fold retired); "
                  "every Part 9 «1.0–1.05» line carries a 12B qualifier")
 
     # ---------- 8. Appendix E OBSERVATION (DEC-20 first application) ----------
@@ -583,8 +587,7 @@ def main():
         (FALLBACK_7A, ["Presence Penalty = 0.0", "RepPen ≤ 1.10",
                        'href="#appendix_model_params"']),
         (FALLBACK_8, ["Держите RepPen в диапазоне своей модели — §7A.6"]),
-        (FALLBACK_9, ["(1.0–1.05 для 12B", "(12B-диапазон — "
-                      "<a href=\"#p7a_sampling_params\">§7A.6</a>)"]),
+        (FALLBACK_9, ["(1.0–1.05 для 12B", "RepPen 1.02–1.05 (12B-диапазон)"]),
         (FALLBACK_APPE, [">0.7–1.0</span>", ">1.05–1.10</span>",
                          "sampling-cluster (iter 145)",
                          ">Tier 0</span>", ">1 строка</span>", "НАБЛЮДЕНИЕ:"]),

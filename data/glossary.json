@@ -13,9 +13,9 @@
       "definition": "Протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p7a_4k_fallback",
+      "anchor_id": "p7a_token_budget",
       "cross_refs": [
-        "#p7a_4k_fallback"
+        "#p7a_token_budget"
       ],
       "language_category": "en"
     },
@@ -42,8 +42,7 @@
       ],
       "anchor_id": "p7a_authors_note",
       "cross_refs": [
-        "#p7a_authors_note",
-        "#p7b_structured_inject"
+        "#p7a_authors_note"
       ],
       "language_category": "en"
     },
@@ -397,8 +396,7 @@
       "anchor_id": "p7b_lorebook_basics",
       "cross_refs": [
         "#p7b_lorebook_basics",
-        "#p7b_lorebook_mechanics",
-        "#p7b_lorebook_advanced"
+        "#p7b_lorebook_mechanics"
       ],
       "language_category": "ru"
     },
@@ -743,9 +741,9 @@
       "definition": "Принцип диагностики: изменение только одного параметра за итерацию — для достоверной оценки результата.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p9_one_change_rule",
+      "anchor_id": "p9_test_scenarios",
       "cross_refs": [
-        "#p9_one_change_rule"
+        "#p9_test_scenarios"
       ],
       "language_category": "ru"
     },
@@ -881,9 +879,9 @@
       "definition": "Механизм динамического обновления мотивации через AN или LB с XML-тегами.",
       "prohibited": [],
       "deprecated": [],
-      "anchor_id": "p7b_structured_inject",
+      "anchor_id": "p7a_authors_note",
       "cross_refs": [
-        "#p7b_structured_inject"
+        "#p7a_authors_note"
       ],
       "language_category": "ru"
     },

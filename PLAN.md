@@ -9,7 +9,25 @@
 
 ---
 
-## ACTIVE TRACK (since iter 171): v3 restructure — **COMPLETE (iters 171–178)**
+## ACTIVE TRACK (since iter 182): v4 restructure «одно место, вовремя» — **COMPLETE (iters 182–190)**
+
+> Owner directive (DEC-15 governed): «ссылки бесят; переписать и организовать так, чтобы все смысловые и
+> функциональные блоки были в одном месте и вовремя; ссылки — только в крайних случаях.» The chapter map,
+> per-chapter scope, acceptance criteria and the standing constraints live in
+> **`docs/RESTRUCTURE_V4_PLAN.md`** — this is the index.
+> **Every chapter is executed** (1: 182 · 0: 183 · 2: 184–185 · 3: 186 · 4: 187 · 5–6: 188 · 7–8: 189 ·
+> 9–10 + appendices A/B + gate re-pointing: 190). Closing numbers: internal links **270 → 10** (the 10 are
+> cross-level only: 7 frozen-id Appendix-E pointers in Part 7A, 2 in Appendix E, 1 Part 10 bridge in §9.7),
+> sections **68 → 62**, words **24 046 → ~21 000**, 132 redirects all live. No v4 row remains open; what is
+> pending is the owner's review of the uncommitted worktree candidate.
+
+| ID | Task | Scope | Acceptance criteria | Required verification | Owner gate |
+|----|------|-------|---------------------|----------------------|------------|
+| v4-1…v4-3 | **COMPLETE — iters 182–187:** chapters 1, 0, 2, 3, 4 — every one at 0 internal links | per the v4 plan §2 chapter map | chapter prints the fact it uses; no cross-chapter routing | full battery per iteration (see `worklog.md`) | none |
+| v4-4…v4-7 | **COMPLETE — iters 188–190:** chapters 5–6 (greeting one site, lorebook 3 → 2), 7–8 (4K profile absorbed, six-step assembly), 9 (Parts 8+9: 94 → 1 anchor, checklist 14 → 18, Part 9 7 → 5 sections), 10 (31 → 0 anchors, KI#89) | per the v4 plan §2/§3 | one budget owner, ONE master checklist, Part 8 + Part 9 + Part 10 link-free | full battery after each slice | `data/anchor-redirects.json` merges (owner-called iter 188, DEC-33) |
+| v4-8 | **COMPLETE — iters 189–190:** appendices A/B (13 → 2 anchors) + the gate re-pointing (two parity gates, sync 87, reader-path corpus) + the full battery | per the v4 plan §3 v4-5/v4-6 | total links ≤10; sync 87; 7 parity gates; tests 68/68; baselines exact | full battery: green, iter 190 | none |
+
+
 
 > Owner directive (chat 2026-10-22, DEC-26): «приступай к правкам… смысловая и функциональная нагрузка
 > не потерялась, а вся вода, повторения и дубликаты исчезли/консолидировались», worked in bounded

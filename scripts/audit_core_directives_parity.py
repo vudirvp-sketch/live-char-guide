@@ -79,7 +79,9 @@ INVARIANT_6 = "CONSEQUENCE DRIVEN"
 INVARIANT_7 = "PRE-GENERATION FILTER"
 
 # Canonical shorthand forms (DEC-08).
-SHORTHAND_ASSEMBLY = "{{CORE_DIRECTIVES — канонический шаблон → §7A.2}}"
+SHORTHAND_ASSEMBLY = ("{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, "
+                      "Environmental Reactivity, Influence Boundary, Consequence Driven, "
+                      "Pre-Generation Filter}}")
 # v3 stage 2 (iter 172, F-05): the master form is PLAIN TEXT. The previous master
 # form embedded <a href="#p7a_core_directives">§7A.2</a> INSIDE <pre><code> — an
 # anchor inside a copy-paste template (the F-05 blocker). The navigation link now
@@ -216,8 +218,11 @@ def main():
     if canon_713 is None:
         err("canon §7A.13 section not found")
     else:
-        if SHORTHAND_ASSEMBLY not in canon_713:
-            err("canon §7A.13: DEC-08 shorthand not found in the assembly section")
+        # iter 189 (v4-8): the assembly chapter no longer re-prints the SP block — it names
+        # the `<CORE_DIRECTIVES>` format in its step table (one place: §7A.1 owns the template).
+        if "<CORE_DIRECTIVES>" not in canon_713:
+            err("canon §7A.13: the `<CORE_DIRECTIVES>` format mention is missing "
+                "(the assembly chapter must name the format, the template lives in §7A.1)")
         if re.search(r"<CORE_DIRECTIVES>\n\d\.", canon_713):
             err("canon §7A.13: full <CORE_DIRECTIVES> expansion still present")
     m713 = re.search(
@@ -228,15 +233,16 @@ def main():
         err("master: p7a_assembly_pipeline section not found")
     else:
         m713_text = m713.group(0)
-        if SHORTHAND_MASTER_LINK not in m713_text:
-            err("master §7A.13: DEC-08 shorthand (master link form) not found "
-                "in the assembly section")
-        if '<a href="#p7a_core_directives">§7A.2</a>' not in m713_text:
-            err("master §7A.13: shorthand link to #p7a_core_directives missing")
+        if "<code>&lt;CORE_DIRECTIVES&gt;</code>" not in m713_text:
+            err("master §7A.13: the `<CORE_DIRECTIVES>` format mention is missing "
+                "(the assembly chapter must name the format, the template lives in §7A.1)")
+        if 'href="#p7a_core_directives"' in m713_text:
+            err("master §7A.13: the assembly chapter must not link the canonical "
+                "directives — v4 chapter 8 is self-contained (iter 189)")
         if "&lt;CORE_DIRECTIVES&gt;\n1. SHOW NEVER TELL" in m713_text:
             err("master §7A.13: full <CORE_DIRECTIVES> expansion still present")
-    notes.append("§7A.13 re-point: shorthand in place (canon + master), "
-                 "no full expansion")
+    notes.append("§7A.13 re-point: the `<CORE_DIRECTIVES>` format is named (canon + master), "
+                 "the template stays in §7A.1, no full expansion")
 
     # ---------- 4. §7A.1 canonical SP template ----------
     canon_71 = section(canon, r"^## 7A\.1 ", r"^## 7A\.2 ")
@@ -263,7 +269,9 @@ def main():
         err(f"Part 10: expected 4 shorthand occurrences each in canon/master, "
             f"got {len(canon_occurrences)}/{len(master_occurrences)}")
     for occ in canon_occurrences:
-        if occ != "{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}":
+        if occ != ("{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, "
+                   "Environmental Reactivity, Influence Boundary, Consequence Driven, "
+                   "Pre-Generation Filter}}"):
             err(f"Part 10 canon: non-canonical shorthand form: {occ}")
     for text, label in ((p10_canon, "canon"), (p10_master, "master")):
         for line in text.split("\n"):
@@ -377,9 +385,9 @@ def main():
     # ---------- 9. Root fallback ----------
     if FALLBACK_7A.exists():
         fallback = read(FALLBACK_7A)
-        if SHORTHAND_MASTER_LINK not in fallback:
-            err("parts/part_07a.html (root fallback): §7A.13 shorthand missing — "
-                "rebuild required (pnpm run build)")
+        if "<code>&lt;CORE_DIRECTIVES&gt;</code>" not in fallback:
+            err("parts/part_07a.html (root fallback): §7A.13 `<CORE_DIRECTIVES>` format "
+                "mention missing — rebuild required (pnpm run build)")
         fb_count = sum(1 for line in fallback.split("\n")
                        if DIRECTIVE_LINE_RE.match(line))
         if fb_count != 7:

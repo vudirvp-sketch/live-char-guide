@@ -126,7 +126,7 @@ pnpm run version:check                    # 4-place version sync (MUST pass)
 pnpm test                                 # all tests — run AFTER pnpm run build (tests read dist/)
 pnpm run qa:csp | qa:bundle | qa:contrast | qa:doc-versions   # PASS/FAIL gates
 pnpm run qa:english                       # exit 1 expected: 1 leak (iter 174; unchanged — an executable-content leak by design) — count must not increase
-pnpm run qa:syntax                        # exit 1 expected: 226 baseline findings — count must not increase (245→238 iter 149; 238→230 iter 172; 230→229 iter 173; 229→226 iter 174 with the merged sections)
+pnpm run qa:syntax                        # exit 1 expected: 224 baseline findings — count must not increase (245→238 iter 149; 238→230 iter 172; 230→229 iter 173; 229→226 iter 174 with the merged sections; 226→224 iter 190 with the chapter-9/10 merges)
 pnpm run dev                              # build + serve on http://localhost:3000
 
 # Canon audits (run after touching src/master/ or docs/canon/):
@@ -143,7 +143,7 @@ python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling Appendix E «
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates
 > individually: PASS/FAIL for csp/bundle/contrast/doc-versions; **baseline counts must not
-> increase** for english (1) and syntax (226).
+> increase** for english (1) and syntax (224).
 
 ---
 
@@ -308,7 +308,8 @@ Check the current size before writing; the trim is part of the task, not future 
 | [`worklog.md`](./worklog.md) | Latest iteration detail (older = one-line summaries) |
 | [`CHANGELOG.md`](./CHANGELOG.md) | Release history |
 | [`docs/architecture.md`](./docs/architecture.md) | Deep architecture: build stages, ownership, section model, validation |
-| [`docs/RESTRUCTURE_V3_PLAN.md`](./docs/RESTRUCTURE_V3_PLAN.md) | **Active v3 restructure track (DEC-26):** stages, the findings registry, standing constraints, handoff protocol — read first in a fresh context |
+| [`docs/RESTRUCTURE_V4_PLAN.md`](./docs/RESTRUCTURE_V4_PLAN.md) | **v4 restructure track (done, iters 182–190):** the chapter map, acceptance and the closing numbers — «one place, on time» |
+| [`docs/RESTRUCTURE_V3_PLAN.md`](./docs/RESTRUCTURE_V3_PLAN.md) | v3 restructure track (COMPLETE, DEC-26): stages, the findings registry, standing constraints — history |
 | [`docs/canon/_README.md`](./docs/canon/_README.md) | Canon rules: how `docs/canon/*.md` relates to `src/master/*.html` |
 | [`docs/components.md`](./docs/components.md) | CSS component registry — use ONLY classes defined here |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Human contributor workflow (PRs, branches, conventions) |

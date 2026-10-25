@@ -1,7 +1,7 @@
 # Content Ownership Map — Live Character Guide v9.2
 
 > Version: 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
-> Last Updated: 2026-09-18 (iter 169–170 — Part 0 wired to runtime: 98 rendering sections; the counting convention updated)
+> Last Updated: 2026-10-25 (iter 190 — v4-9 chapter 9: Parts 8/9 link-free, 62 rendering sections)
 > Status: Canonical Reference (Canon mirror)
 
 ---
@@ -37,8 +37,8 @@ This document is the **single source of truth** for "where does concept X live."
 | Зачем системный подход? | `p1_value_proposition` | §1.1 | Value Prop | Comparison table: Classic vs Systematic approach |
 | Карточка персонажа | `p1_card_overview` | §1.2 | Definition | 5 блоков карточки: System Prompt / Description / Examples + Anchors / Greeting / Lorebook (E01) + subsections «Структура гайда» и «Бюджет токенов и конвейер сборки» (refs → §7A.12/§7A.13) |
 | Структурные свойства блоков | `p1_structure_overview` | §1.3 | Reference | Влияние блоков на модель + доля бюджета; ссылки на §7A.12/§7A.13 (iter 171: был «Структура гайда» с inline-TOC — дублирующая навигация удалена, маршрут чтения переехал в Part 0 §0.1) |
-| Core Rules | `p1_core_rules` | §1.4 | Rules | 3 foundational rules of character creation |
-| Топ-3 критичные ошибки | `p1_top3_problems` | §1.5 | Detailed problems | Подробный разбор 3 ошибок |
+| Core Rules | `p1_core_rules` | §1.4 | Rules | 3 foundational rules of character creation + the closing synthesis (iter 190: the retired §1.5 synthesis paragraph landed here) |
+| ~~Топ-3 критичные ошибки~~ | → `p9_basic_checklist` | — | absorbed | iter 190 (v4-9 chapter 9): the three worst errors merged into Part 9 «Пять самых частых ошибок» (with the ex-§9.2 #4/#5 rows); the id is a legacy redirect |
 | Pre-build checklist | `p1_prebuild_checklist` | §1.6 | Checklist | 6 вопросов перед сборкой: модель, контекст, сложность, GHOST (1/Layers), CoT, Lorebook |
 
 ### Part 2: Behavioral Anchors (Якоря) — `docs/canon/part_02.md`
@@ -107,37 +107,36 @@ This document is the **single source of truth** for "where does concept X live."
 | OOC Protection | `p7a_ooc_protection` | §7A.8 | Technique | Anti-OOC mechanisms |
 | XML tags | `p7a_xml_tags` | §7A.9 | Full treatment | `<identity>`, `<appearance>`, etc. |
 | API blocks | `p7a_api_blocks` | §7A.10 | Pointer (collapsed) | «Если вы на API» disclosure; templates → Appendix E (iter 172) |
-| 4K-Fallback | `p7a_4k_fallback` | §7A.11 | Pointer | Profile (limits + minimal SP/Description) → Appendix E (iter 172) |
+| 4K-Fallback | → `p7a_token_budget` | §7A.12 | absorbed | iter 189: one paragraph «Что помещается в 4K» inside the budget section; the id is a legacy redirect |
 | Assembly Pipeline | `p7a_assembly_pipeline` | §7A.13 | Pipeline | Order of assembly operations |
 
 ### Part 7B: Lorebook, Greeting & Compatibility — `docs/canon/part_07b.md`
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| Structured Inject | `p7b_structured_inject` | §7B.1 | Technique | XML-based content injection |
-| Greeting Message | `p7b_greeting` | §7B.2 | Structure+Rules | Sensory Anchor → тело FLAW → реплика → крючок |
-| Lorebook (LB) basics | `p7b_lorebook_basics` | §7B.3 | Template+Rules | Key/Content/Position/Depth; EVENT frontend compatibility → Appendix E (iter 172) |
-| Lorebook Mechanics | `p7b_lorebook_mechanics` | §7B.4 | Full treatment | 3 mechanics (range cascade, combined trigger, context filter) |
-| Lorebook Advanced | `p7b_lorebook_advanced` | §7B.5 | Full treatment | 3 advanced mechanics + integration |
+| Greeting Message | `p7b_greeting` | §7B.1 | Structure+Rules | Sensory Anchor → тело FLAW → реплика → крючок; the E18 embed |
+| Lorebook (LB): структура записи | `p7b_lorebook_basics` | §7B.2 | Template+Rules | Key/Content/Position/Depth; EVENT support is stated in place (v4-7, iter 188) |
+| Lorebook: механики и бюджет | `p7b_lorebook_mechanics` | §7B.3 | Full treatment | 3 mechanics + 3 advanced mechanics + context budgets + integration checklist (iter 188: `p7b_lorebook_advanced` merged here) |
+| ~~Structured Inject~~ | → `p7a_authors_note` | §7A.5 | absorbed | iter 188: the technique lives inside the AN section; the id is a legacy redirect |
+| ~~Lorebook Advanced~~ | → `p7b_lorebook_mechanics` | — | absorbed | iter 188: merged into the mechanics section; the id is a legacy redirect |
 
 ### Part 8: Anti-patterns (Анти-паттерны) — `docs/canon/part_08.md`
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| Anti-pattern catalog | `p8_antipatterns_overview` | §8.1 | Catalog | All 15 anti-patterns in one place — the E12 grid (inside the section) + the corrected card payloads; OCEAN-Overload pointer |
-| Anti-pattern worked examples | `p8_worked_examples` | §8.2 | Catalog | 15 `<details>` bodies: symptom / cause / fix → owner section + the unique demonstration payload (iter 173: the 15 per-AP stub sections were absorbed — see the redirects) |
+| Anti-pattern catalog | `p8_antipatterns_overview` | §8.1 | Catalog | All 15 anti-patterns in one place — the E12 grid (inside the section) + the corrected card payloads (iter 190: the OCEAN-Overload footnote and every owner/§ pointer removed — the reference carries no routing) |
+| Anti-pattern worked examples | `p8_worked_examples` | §8.2 | Catalog | 15 `<details>` bodies carrying ONLY the unique payload (check / distinguishing signal / before-after) — iter 190 removed the symptom-cause-fix triple that repeated the cards above and all 22 owner links (`p8_ap*` ids stay redirects) |
 
 ### Part 9: Diagnostics and Debugging (Диагностика) — `docs/canon/part_09.md`
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| Диагностика: с чего начать | `p9_basic_checklist` | §9.1 | Checklist | The ONE entry: 4-step route + per-block localization scan (iter 173: absorbed `p9_quality_scale`) |
-| Symptom table | `p9_symptom_table` | §9.2 | Diagnostic | 13 rows symptom→check→fix; #4/#5 labels; absorbed the §9.4 pointer section |
-| Decision Tree | `p9_decision_tree` | §9.3 | Diagnostic | E13 mapping sub-table «Три базовых симптома» + the E13 embed now INSIDE the section (canonical home of the E13 payload, DEC-20; parity `scripts/audit_diagnostics_parity.py`) |
-| One Change Rule | `p9_one_change_rule` | §9.4 | Rule | Never change >1 parameter at a time |
-| Чек-лист перед деплоем | `p9_pre_deploy` | §9.5 | Checklist | ONE checklist 1–14 (5 quick + 9 full) + E14 quality scale + Elena/Vysh worked examples (iter 173: absorbed `p9_quality_scale`) |
-| Testing: scenarios, map, metrics | `p9_test_scenarios` | §9.6 | Protocol | 6 scenarios + element→scenario map + min-6 + 6 success metrics (iter 173: absorbed `p9_element_scenario_map`, `p9_test_requirements`) |
-| 12B-specific issues | `p9_12b_issues` | §9.7 | Special | 12B model delta over §9.2/§9.3 |
+| Диагностика: с чего начать | `p9_basic_checklist` | §9.1 | Checklist | The ONE entry (4-step route) + the five most common errors (iter 190: absorbed `p1_top3_problems` and the ex-§9.2 symptom table) + per-block localization scan + the flat symptom→check→fix lookup |
+| ~~Symptom table~~ | → `p9_basic_checklist` | — | absorbed | iter 190 (v4-9): merged into §9.1 as the flat lookup (its #4/#5 rows became part of the 1–5 most-common list); the id is a legacy redirect |
+| Decision Tree | `p9_decision_tree` | §9.3 | Diagnostic | E13 mapping sub-table «Три базовых симптома» + the E13 embed INSIDE the section (canonical home of the E13 payload, DEC-20; parity `scripts/audit_diagnostics_parity.py`); link-free since iter 190 |
+| Чек-лист перед деплоем | `p9_pre_deploy` | §9.5 | Checklist | ONE checklist 1–18 (5 quick + 13 full — iter 190 added RepPen, Temperature, block budget, Embodiment) + E14 quality scale + Elena/Vysh worked examples |
+| Testing / edit loop | `p9_test_scenarios` | §9.6 | Protocol | The one-change RULE (iter 190: absorbed `p9_one_change_rule`) + 6 scenarios + element→scenario map + min-6 + 6 success metrics |
+| 12B-specific issues | `p9_12b_issues` | §9.7 | Special | 12B model delta over §9.1/§9.3; the chapter's only outbound link is the Part 10 bridge here |
 
 ### Part 10: Full Card Examples (Примеры карточек) — `docs/canon/part_10.md`
 
@@ -178,7 +177,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Part | Canon file | Sections | Iter | Status |
 |------|-----------|----------|------|--------|
 | Part 0 | `part_00.md` | 2 | iter 38, wired 169 | ✅ MIGRATED (wired iter 169, G4-LEARN (a)) |
-| Part 1 | `part_01.md` | 6 | iter 14 | ✅ MIGRATED |
+| Part 1 | `part_01.md` | 5 | iter 14 | ✅ MIGRATED (v4-9 iter 190: §1.5 → Part 9) |
 | Part 2 | `part_02.md` | 5 | iter 14 | ✅ MIGRATED |
 | Part 3 | `part_03.md` | 5 | iter 14 | ✅ MIGRATED |
 | Part 4 | `part_04.md` | 6 | iter 7–9 | ✅ MIGRATED |
@@ -187,14 +186,14 @@ This document is the **single source of truth** for "where does concept X live."
 | Part 7A | `part_07a.md` | 13 | iter 10–11 | ✅ MIGRATED |
 | Part 7B | `part_07b.md` | 5 | iter 16 | ✅ MIGRATED |
 | Part 8 | `part_08.md` | 2 | iter 12 | ✅ MIGRATED |
-| Part 9 | `part_09.md` | 7 | iter 13 | ✅ MIGRATED |
+| Part 9 | `part_09.md` | 5 | iter 13 | ✅ MIGRATED (v4-9 iter 190: 7 → 5) |
 | Part 10 | `part_10.md` | 5 | iter 16 | ✅ MIGRATED |
 | Appendix A (MBTI) | `appendix_mbti.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix E (Model, Context & Params) | `appendix_model_params.md` | 1 | iter 172 | ✅ CREATED (v3 stage 2; absorbs Appendix B) |
 | Appendix D (Character Map, conceptual) | `appendix_character_map.md` | 0 master / 1 canon § | iter 38 | ✅ CANON-ONLY (no master artifact) |
-| **Total** | | **68 master sections** (69 − Appendix C, deleted iter 177) | | **Canon COMPLETE** |
+| **Total** | | **62 master sections** (65 − v4-9's three absorbed ids; 69 − Appendix C, deleted iter 177) | | **Canon COMPLETE** |
 
-> **Counting convention (verified iter 117; re-verified iter 177):** "Sections" = `data-section` elements rendered in `src/master/*.html` — **68** after v3 (S3 built Parts 8/9/10 down; S4a de-duplicated Parts 2/3/4/5/6; S4b/F-19 deleted Appendix C). Canon declares **69** IDs: the 68 rendering ones + the canon-only `appendix_character_map` (H1-level, no master HTML by design). The term layer is `glossary_registry.md` → generated `data/glossary.json` → runtime panel + no-JS page (Appendix C deleted iter 177, F-19/DEC-31). Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`.
+> **Counting convention (verified iter 117; re-verified iter 190):** "Sections" = `data-section` elements rendered in `src/master/*.html` — **62** after v3 (S3 built Parts 8/9/10 down; S4a de-duplicated Parts 2/3/4/5/6; S4b/F-19 deleted Appendix C) and v4 (chapters 0–9: 65 → 62, the retired ids are legacy redirects). Canon declares **63** IDs: the 62 rendering ones + the canon-only `appendix_character_map` (H1-level, no master HTML by design). The term layer is `glossary_registry.md` → generated `data/glossary.json` → runtime panel + no-JS page (Appendix C deleted iter 177, F-19/DEC-31). Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`.
 
 ---
 
@@ -210,8 +209,8 @@ Part 5 (OCEAN) ──can reference──▶ Part 4 (SPINE)
 Part 6 (CoT) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
 Part 7A (System Prompt & Assembly) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
 Part 7B (Lorebook & Greeting) ──can reference──▶ Part 2 (Anchors), Part 4 (SPINE)
-Part 8 (Anti-patterns) ──can reference──▶ Parts 2, 3, 4, 5
-Part 9 (Diagnostics) ──can reference──▶ Parts 7A, 7B, 8
+Part 8 (Anti-patterns) ──can reference──▶ (none — the reference layer carries no routing; v4-9 iter 190)
+Part 9 (Diagnostics) ──can reference──▶ Part 10 only (the chapter-end bridge; v4-9 iter 190)
 Part 10 (Examples) ──can reference──▶ All Parts
 
 Part 2 (Anchors) ──CANNOT reference──▶ Part 4 (SPINE)

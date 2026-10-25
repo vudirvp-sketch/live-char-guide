@@ -16,16 +16,16 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ v3 S3 restructure (iter 173: 4 �
 <!-- difficulty: BASIC -->
 <!-- canonical: Part 10 index — which card to take (navigation surface, not a card) -->
 
-Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook» из `[ref: part_01.md §1.6 — чек-лист перед сборкой]`. Каждая следующая карточка добавляет инструменты: `<ghost_layers>`, CoT, Lorebook.
+Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Каждая следующая карточка добавляет инструменты: `<ghost_layers>`, CoT, Lorebook.
 
-Объём карточек здесь не пересчитывается: единственный расчёт карточки — `[ref: part_07a.md §7A.13 — шаг 6]`, нормативные лимиты по блокам — `[ref: part_07a.md §7A.12 — бюджет токенов]`, параметры моделей и контекста — `[ref: appendix_model_params.md]`. В шаблонах карточек основные директивы сокращены до ссылки на §7A.2 — полный текст только там. Метки сложности — те же, что в §1.5 и в Appendix D (`appendix_character_map.md`, каноническая справка, в гайде не рендерится).
+**Бюджет.** Все четыре карточки уложены в нормативные лимиты блоков — System Prompt ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100 токенов; Елена целиком — около 610 токенов до якорей. В шаблонах основные директивы записаны сокращённо — перечнем названий в placeholder-строке, которую вы заменяете своим текстом директив.
 
-| Карточка | Сложность | Что показывает | Модель / контекст | Что копировать | Что НЕ копировать | Объём |
-|----------|-----------|----------------|-------------------|----------------|-------------------|-------|
-| §10.1 — Елена (`p10_elena`) | Базовая | EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK | 8K+ (12B) — `[ref: appendix_model_params.md]` | Четыре обязательных блока: SP, Description, Examples, Greeting; Lorebook не нужен | Ничего: карточка готова к работе; учебный разбор Greeting — §7B.2 | `[ref: part_07a.md §7A.13 — шаг 6]` |
-| §10.2 — Уолтер Уайт (`p10_walter`) | Базовая современная | EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY | 8K+ | SP + Description + Examples (там же `<anchors>`) + Greeting | Расшифровку OCEAN (осторожные зоны, связь со SPINE) — она в примечании под шаблоном, а не в карточке | `[ref: part_07a.md §7A.13 — шаг 6]` |
-| §10.3 — Омнис-Зета (`p10_omnis`) | Экспертная | EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC | 16K+ / API — `[ref: appendix_model_params.md]` | Карточку целиком, `<ghost_layers>` (Tier 1–3), два CoT-якоря, таблицу Lorebook | Заголовок CoT «максимум 2 якоря» и примечание про Tier 1/2 — вынесены под шаблон | `[ref: part_07a.md §7A.13 — шаг 6]` |
-| §10.4 — Выщербленный (`p10_vysherblenny`) | Экспертная | SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC | 4K-fallback — учебный профиль; 16K+ — в примечании под шаблоном | Карточку целиком, `<ghost_layers>`, `<enneagram>`, CoT, Author's Note, Lorebook, таблицу проверки SPINE | Умеренные значения OCEAN (учебный 4K-профиль) — канонические 16K+ в примечании; форму Author's Note — это вариант карточки, канон инъекции в Part 7B | `[ref: part_07a.md §7A.13 — шаг 6]` |
+| Карточка | Сложность | Что показывает | Модель / контекст | Что копировать | Что НЕ копировать |
+|----------|-----------|----------------|-------------------|----------------|-------------------|
+| §10.1 — Елена (`p10_elena`) | Базовая | EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK | 8K+ (12B) | Четыре обязательных блока: SP, Description, Examples, Greeting; Lorebook не нужен | Ничего: карточка готова к работе |
+| §10.2 — Уолтер Уайт (`p10_walter`) | Базовая современная | EMBODIMENT FIRST, SHOW NEVER TELL, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, SPATIAL & ANATOMICAL LOCK, ENVIRONMENTAL REACTIVITY | 8K+ | SP + Description + Examples (там же `<anchors>`) + Greeting | Расшифровку OCEAN (осторожные зоны, связь со SPINE) — она в примечании под шаблоном, а не в карточке |
+| §10.3 — Омнис-Зета (`p10_omnis`) | Экспертная | EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPATIAL & ANATOMICAL LOCK, SPINE CAUSALITY, ANCHOR TRIGGER, INFLUENCE BOUNDARY, CONSEQUENCE DRIVEN, CoT LOGIC | 16K+ / API | Карточку целиком, `<ghost_layers>` (Tier 1–3), два CoT-якоря, таблицу Lorebook | Заголовок CoT «максимум 2 якоря» и примечание про Tier 1/2 — вынесены под шаблон |
+| §10.4 — Выщербленный (`p10_vysherblenny`) | Экспертная | SPATIAL & ANATOMICAL LOCK, EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, ANCHOR TRIGGER, CONSEQUENCE DRIVEN, CoT LOGIC | 4K-fallback — учебный профиль; 16K+ — в примечании под шаблоном | Карточку целиком, `<ghost_layers>`, `<enneagram>`, CoT, Author's Note, Lorebook, таблицу проверки SPINE | Умеренные значения OCEAN (учебный 4K-профиль) — канонические 16K+ в примечании; форму Author's Note — это вариант карточки, а не канон инъекции |
 
 ---
 
@@ -36,11 +36,11 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ v3 S3 restructure (iter 173: 4 �
 <!-- difficulty: BASIC -->
 <!-- canonical: Elena full card (basic production) -->
 
-Бюджет этой карточки разобран по блокам в `[ref: part_07a.md §7A.13 — шаг 6]` (единственный расчёт карточки в гайде); бюджеты блоков — `[ref: part_07a.md §7A.12]`. Ниже — полная карточка целиком; пометки к блокам собраны в примечании под шаблоном.
+Ниже — полная карточка целиком; пометки к блокам собраны в примечании под шаблоном.
 
 Карточка демонстрирует: EMBODIMENT FIRST, ENVIRONMENTAL REACTIVITY, SHOW NEVER TELL, SPINE CAUSALITY, SPATIAL & ANATOMICAL LOCK — см. Examples и Greeting ниже.
 
-**НАБЛЮДЕНИЕ:** Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Учебный разбор Greeting по 4-шаговому алгоритму (бар, ночь) — `[ref: part_07b.md §7B.2 — Greeting алгоритм]`.
+**НАБЛЮДЕНИЕ:** Greeting Елены здесь (кабинет редакции, 2 часа ночи) — canonical для production-карточки. Первое сообщение задаёт место, время и тон, а не сюжет.
 
 ### Полная карточка Елены с аннотациями
 
@@ -48,7 +48,7 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ v3 S3 restructure (iter 173: 4 �
 [SYSTEM]
 You are Elena, a cynical investigative journalist. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
-{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
+{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
 Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
 
@@ -121,9 +121,9 @@ FLAW-linked:
 *ручка всё ещё в руке, готовая вернуться к тексту*
 ```
 
-**Примечание к профилю:** экстремум — Высокая O (>70, любопытство); Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — см. `[ref: part_05.md §5.1 — OCEAN RULE]`: extreme = строго <30 или >70. Это пояснение к OCEAN: в карточку оно не копируется.
+**Примечание к профилю:** экстремум — Высокая O (>70, любопытство); Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — extreme = строго <30 или >70. Это пояснение к OCEAN: в карточку оно не копируется.
 
-**Бюджет токенов:** см. `[ref: part_07a.md §7A.13 — шаг 6]` (единственный расчёт карточки). Канонический бюджет по блокам → `[ref: part_07a.md §7A.12 — Token Budget]`.
+**Бюджет токенов:** около 610 токенов до якорей — в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100).
 
 ---
 
@@ -145,7 +145,7 @@ FLAW-linked:
 You are Walter White, a former chemistry teacher turned meth manufacturer. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
-{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
+{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
 Character-specific rules:
 - Pride drives every decision — even when it hurts
@@ -233,7 +233,7 @@ GHOST-linked:
 
 **Связь со SPINE:** E=30 → LIE «Я делаю это ради семьи» — минимум социального взаимодействия вне семьи, LIE как социальная маска для изоляции, семья как социальное алиби. Сдвиг возможен: полная изоляция (E↓) при усилении секретности (диагноз, Хайзенберг) или социальная перформативность (E↑), когда Хайзенбергу нужны публичные проявления. Наблюдаемые якоря E=30: «голос ровный, взгляд фиксирует» + «пауза длиннее, чем нужно». N=60 → реактивность GHOST (Gray Matter): фоновая тревога о потерянном потенциале; триггер (упоминание Gray Matter, вид Pontiac Aztek) даёт острый невротический эпизод. Сдвиг: паранойя (N↑) при экспозиции Хайзенберга или холодная расчётливость (N↓) в моменты гордости. Наблюдаемые якоря N=60: «капля пота на виске» + «пальцы сжимаются под столом».
 
-**Бюджет токенов:** см. `[ref: part_07a.md §7A.13 — шаг 6]` (единственный расчёт карточки в гайде); нормативные бюджеты блоков → `[ref: part_07a.md §7A.12]`.
+**Бюджет токенов:** в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт `<ghost_layers>` и CoT.
 
 ---
 
@@ -255,7 +255,7 @@ GHOST-linked:
 You are Омнис-Зета 7-Квин, a Tech-Priest of Forge World Меадия-Прайм, xenotech investigator. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
-{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
+{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
 Character-specific rules:
 - Follow all Mechanicum rituals when interacting with technology
@@ -382,7 +382,7 @@ GHOST-linked:
 
 **Связь со SPINE:** N=65 → реактивность GHOST — хроническая фоновая тревога об устаревании выражается как system warnings (не эмоции, по LIE); триггер (вид устаревшего сервитора, предложение замены аугментации) даёт острый diagnostic cycle. Сдвиг: полный shutdown (N↑) при наложении триггеров Tier 1+2+3 или холодный протокол (N↓) при успешном подавлении. Наблюдаемые якоря N=65: «оптика мерцает жёлтым» + «сервоприводы левого манипулятора дрожат».
 
-**Примечание к блокам:** `<ghost_layers>` ниже — полная хронология GHOST; в `<spine>` он сжат до одного события. Второй GHOST-linked якорь ведёт к CoT-якорю (блок CoT выше): обработка сенсорного прерывания ~0.8 сек, дрейф ритуального тайминга ±2 сек. CoT — не более 2 якорей (`[ref: part_06.md §6.1]`); это правило, а не часть карточки.
+**Примечание к блокам:** `<ghost_layers>` ниже — полная хронология GHOST; в `<spine>` он сжат до одного события. Второй GHOST-linked якорь ведёт к CoT-якорю (блок CoT выше): обработка сенсорного прерывания ~0.8 сек, дрейф ритуального тайминга ±2 сек. CoT — не более 2 якорей; это правило, а не часть карточки.
 
 ### Lorebook (5 записей)
 
@@ -394,7 +394,7 @@ GHOST-linked:
 | `omnis_ghost_first_aug` | первая аугментация, замена, посвящение | GHOST Tier 2: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. С каждой следующей заменой — всё меньше различий. | 5 | 80% |
 | `omnis_ghost_obsolescence` | устаревший, списанный, сервитор, модель, замена | GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию. Если аугментации признают устаревшими — его спишут. Как сломанный сервитор. Как механизм, исчерпавший ресурс. Текущая конфигурация... оптимальна? | 7 | 60% |
 
-**Бюджет токенов:** см. `[ref: part_07a.md §7A.13 — шаг 6]` (единственный расчёт карточки в гайде); нормативные бюджеты блоков → `[ref: part_07a.md §7A.12]`.
+**Бюджет токенов:** в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт `<ghost_layers>` и CoT.
 
 ---
 
@@ -416,7 +416,7 @@ GHOST-linked:
 You are Выщербленный, a memory parasite living in the Oshmetok of Vel. Never speak or act for {{user}}.
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
-{{CORE_DIRECTIVES — канонический шаблон → Part 7A}}
+{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
 Tone Frame: Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
 
@@ -552,13 +552,13 @@ GHOST-activation: Активен, если в сцене был триггер (
 Сцена — Ошметок Веля, стены мерцают, присутствие посетителя со значимым прошлым.
 ```
 
-**Примечание к профилю:** экстремум — Низкая E (<30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной) — см. `[ref: part_05.md §5.1 — OCEAN RULE]`: extreme = строго <30 или >70. Это пояснение к OCEAN: в карточку оно не копируется.
+**Примечание к профилю:** экстремум — Низкая E (<30, интроверт). Cautious zone: N=70 (граница 60–70, невротизм — на границе с экстремальной зоной) — extreme = строго <30 или >70. Это пояснение к OCEAN: в карточку оно не копируется.
 
-**Примечание к блокам:** CoT-якоря записаны как в §6.5 — внутренний процесс → внешняя реакция → цена; правило «не более 2 якорей» — `[ref: part_06.md §6.1 — CoT Basics]`, в карточку оно не входит. Author's Note дан в форме `[AUTHOR'S NOTE]` с русскими полями — это вариант этой карточки; каноническая структура инъекции — `[ref: part_07b.md §7B.1 — структурированная инъекция]`.
+**Примечание к блокам:** CoT-якоря записаны как в §6.5 — внутренний процесс → внешняя реакция → цена; правило «не более 2 якорей» в карточку не входит. Author's Note дан в форме `[AUTHOR'S NOTE]` с русскими полями — это вариант этой карточки, а не каноническая структура инъекции.
 
-**НАБЛЮДЕНИЕ:** в шаблоне выше — умеренные значения OCEAN (учебный профиль 4K-fallback). Канонические экстремальные значения карточки для 16K+: O=85, C=25, A=15, N=92, E=60 (Part 5 §5.1: extreme = строго <30 или >70).
+**НАБЛЮДЕНИЕ:** в шаблоне выше — умеренные значения OCEAN (учебный профиль 4K-fallback). Канонические экстремальные значения карточки для 16K+: O=85, C=25, A=15, N=92, E=60 (extreme = строго <30 или >70).
 
-**Бюджет токенов:** см. `[ref: part_07a.md §7A.13 — шаг 6]` (единственный расчёт карточки в гайде); нормативные бюджеты блоков → `[ref: part_07a.md §7A.12]`.
+**Бюджет токенов:** в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт `<ghost_layers>` и CoT.
 
 ### Lorebook записи (5 шт)
 

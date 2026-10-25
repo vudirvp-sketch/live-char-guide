@@ -18,7 +18,6 @@
         "p1_card_overview",
         "p1_structure_overview",
         "p1_core_rules",
-        "p1_top3_problems",
         "p1_prebuild_checklist"
       ]
     },
@@ -92,7 +91,6 @@
         "p7a_ooc_protection",
         "p7a_xml_tags",
         "p7a_api_blocks",
-        "p7a_4k_fallback",
         "p7a_token_budget",
         "p7a_assembly_pipeline"
       ]
@@ -101,11 +99,9 @@
       "file": "part_07b.html",
       "title": "Lorebook, приветствие и инъекции",
       "anchors": [
-        "p7b_structured_inject",
         "p7b_greeting",
         "p7b_lorebook_basics",
-        "p7b_lorebook_mechanics",
-        "p7b_lorebook_advanced"
+        "p7b_lorebook_mechanics"
       ]
     },
     {
@@ -121,9 +117,7 @@
       "title": "Диагностика и тестирование",
       "anchors": [
         "p9_basic_checklist",
-        "p9_symptom_table",
         "p9_decision_tree",
-        "p9_one_change_rule",
         "p9_pre_deploy",
         "p9_test_scenarios",
         "p9_12b_issues"

@@ -40,15 +40,15 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **4K-Fallback (протокол адаптации для 4K)** — протокол адаптации карточки для моделей с ограничением контекста ~4096 токенов.
 
-→ `[ref: part_07a.md §7A.11 — 4K-Fallback (Протокол адаптации для 4K контекста)]`
-→ `[meta: sources=T-01; lang=en; home=p7a_4k_fallback; aliases=4K-Fallback, 4K Fallback, 4096 fallback, Протокол адаптации]`
+→ `[ref: part_07a.md §7A.12 — Что помещается в 4K]`
+→ `[meta: sources=T-01; lang=en; home=p7a_token_budget; aliases=4K-Fallback, 4K Fallback, 4096 fallback, Протокол адаптации]`
 
 ### Author's Note (AN)
 
 **Author's Note (AN)** — заметка автора: динамический слой контекста для длинных сессий; обновляется каждые 3–5 сообщений. Используется для полного отслеживания WANT→NEED (директива #6) и живого контекста сцены.
 
 → `[ref: part_07a.md §7A.5 — Заметка автора (Author's Note, AN)]`
-→ `[meta: sources=T-04; lang=en; home=p7a_authors_note; xrefs=p7b_structured_inject; aliases=AN, Author Note, Authors Notes, Author's Note, Динамический контекст; deprecated=Авторские заметки, Авторка, Авторка Заметки; prohibited=Авторские заметки, Авторка, Авторка Заметки]`
+→ `[meta: sources=T-04; lang=en; home=p7a_authors_note; aliases=AN, Author Note, Authors Notes, Author's Note, Динамический контекст; deprecated=Авторские заметки, Авторка, Авторка Заметки; prohibited=Авторские заметки, Авторка, Авторка Заметки]`
 
 ### CoT (цепочка рассуждений)
 
@@ -166,8 +166,8 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **База знаний (Lorebook)** — система инъекции ключ-значение, вставляющая знания персонажа в контекст по требованию. Каждая запись (Lorebook Entry) содержит: Key (триггер-слово), Content (факт для вставки), Position (куда вставлять), Depth (глубина поиска), Probability, Cooldown. Особенно полезна для GHOST-связанных фактов и сенсорных активаций.
 
-→ `[ref: part_07b.md §7B.3 — Lorebook (база знаний): основы]`
-→ `[meta: sources=C-14+T-25+T-26; lang=ru; home=p7b_lorebook_basics; xrefs=p7b_lorebook_mechanics, p7b_lorebook_advanced; abbr=LB; aliases=Lorebook, LB, Lore Book, World Info, WI, База знаний, Запись Lorebook, LB Entry; deprecated=лорбук, World Info, world info; prohibited=Лорбук]`
+→ `[ref: part_07b.md §7B.2 — Lorebook: структура записи]`
+→ `[meta: sources=C-14+T-25+T-26; lang=ru; home=p7b_lorebook_basics; xrefs=p7b_lorebook_mechanics; abbr=LB; aliases=Lorebook, LB, Lore Book, World Info, WI, База знаний, Запись Lorebook, LB Entry; deprecated=лорбук, World Info, world info; prohibited=Лорбук]`
 
 ### Блок идентичности (Identity Block)
 
@@ -285,14 +285,14 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **Правило одного изменения** — принцип диагностики: изменение только одного параметра за итерацию — для достоверной оценки результата.
 
-→ `[ref: part_09.md §9.4 — Правило одного изменения]`
-→ `[meta: sources=T-32; lang=ru; home=p9_one_change_rule; aliases=One Change Rule, Правило одного изменения]`
+→ `[ref: part_09.md §9.6 — Правка и проверка: сценарии, карта, метрики]`
+→ `[meta: sources=T-32; lang=ru; home=p9_test_scenarios; aliases=One Change Rule, Правило одного изменения]`
 
 ### Приветственное сообщение (Greeting Message)
 
 **Приветственное сообщение (Greeting Message)** — первое сообщение персонажа в разговоре, демонстрирующее Voice, SPINE и Anchors в действии. Строится по алгоритму: Sensory Anchor → тело FLAW → реплика → крючок. Длина: 50–100 токенов. Задаёт место, время и тон, но не сюжет.
 
-→ `[ref: part_07b.md §7B.2 — Приветствие — первое сообщение (Greeting Message)]`
+→ `[ref: part_07b.md §7B.1 — Приветствие — первое сообщение (Greeting Message)]`
 → `[meta: sources=C-11+T-20; lang=ru; home=p7b_greeting; aliases=Greeting Message, Greeting, First Message, Приветствие, Первое сообщение, приветствие]`
 
 ### Призрак (GHOST)
@@ -334,8 +334,8 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **Структурированная инъекция (Structured Inject)** — механизм динамического обновления мотивации через AN или LB с XML-тегами.
 
-→ `[ref: part_07b.md §7B.1 — Структурированная инъекция (Structured Inject)]`
-→ `[meta: sources=T-45; lang=ru; home=p7b_structured_inject; aliases=Structured Inject, Структурированная инъекция, структурированная инъекция]`
+→ `[ref: part_07a.md §7A.5 — Структурированная инъекция в AN]`
+→ `[meta: sources=T-45; lang=ru; home=p7a_authors_note; aliases=Structured Inject, Структурированная инъекция, структурированная инъекция]`
 
 ### Утечка голоса (Voice Bleed, деградация)
 
