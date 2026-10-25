@@ -3,8 +3,8 @@
 > **Язык этого файла — русский осознанно:** он написан для владельца репозитория, а не для агентов.
 > Остальные документы в `docs/` — английские по конвенции `AGENTS.md`.
 >
-> Сайт: **https://vudirvp-sketch.github.io/** · Репозиторий: **https://github.com/vudirvp-sketch/vudirvp-sketch.github.io**
-> Проверено 2026-10-26 после переезда с `/live-char-guide/`.
+> Сайт: **https://vudirvp-sketch.github.io/live-char-guide/** · Репозиторий: **https://github.com/vudirvp-sketch/live-char-guide**
+> Проверено 2026-10-26 (переезд на корневой домен пробовали и откатили — см. §3).
 
 ---
 
@@ -12,11 +12,11 @@
 
 | Что | Состояние |
 |---|---|
-| Контент в HTML (пререндер), `canonical`, `og:*`, JSON-LD, `sitemap.xml`, `robots.txt` | ✅ работает, генерируется сборкой |
+| Контент в HTML (пререндер), `canonical`, `og:*`, JSON-LD, `sitemap.xml` | ✅ работает, генерируется сборкой |
 | Description + 20 topics репозитория | ✅ заполнены |
-| Домен | ✅ корневой `vudirvp-sketch.github.io`, бесплатно, без покупки домена |
+| Адрес сайта | `https://vudirvp-sketch.github.io/live-char-guide/` — **проектный сайт, имя репозитория `live-char-guide` сохранено** (переезд на корень пробовали и откатили: он превращал имя репозитория в имя пользователя) |
 | Деплой | ✅ автодеплой на каждый push в `main` (workflow «Build and Deploy to GitHub Pages») |
-| Старый адрес `/live-char-guide/` | ✅ редиректит на новый корень |
+| `robots.txt` | ⚠️ лежит в `/live-char-guide/` — краулеры читают только корень хоста, поэтому файл не действует. Это **не мешает индексации**: sitemap просто нужно добавить в Вебмастер и Search Console руками (§2.1, §2.2) |
 
 **Не редактируйте вручную** эти файлы — они перезаписываются сборкой:
 `index.html` (корень), `build.hash`, `assets/`, `widgets/`, `interactions/`, `lib/`, `parts/`, `data/`, `dist/`.
@@ -49,7 +49,7 @@
 Блок **About** справа на главной странице репозитория → шестерёнка **⚙**.
 
 - **Description** — одно-два предложения. Текущий текст уже с ключевыми словами; меняйте только если меняется суть.
-- **Website** — должно остаться `https://vudirvp-sketch.github.io/`.
+- **Website** — должно остаться `https://vudirvp-sketch.github.io/live-char-guide/`.
 - **Topics** — до 20 штук, только латиница в нижнем регистре и дефисы. Текущие 20 подобраны по категориям (продукт / экосистема / ремесло / техника / язык).
 
 ### 1.4 Релизы — завести один на следующую веху
@@ -61,7 +61,7 @@
 Через терминал (если удобнее):
 
 ```bash
-gh release create v9.3.0 --title "v9.3.0 — что нового" --notes-file notes.md --repo vudirvp-sketch/vudirvp-sketch.github.io
+gh release create v9.3.0 --title "v9.3.0 — что нового" --notes-file notes.md --repo vudirvp-sketch/live-char-guide
 ```
 
 Не публикуйте задним числом 9 релизов — начните со следующей вехи.
@@ -82,7 +82,7 @@ gh release create v9.3.0 --title "v9.3.0 — что нового" --notes-file n
 ### 2.1 Яндекс.Вебмастер (приоритет: аудитория русская)
 
 1. Откройте <https://webmaster.yandex.ru/> → **Добавить сайт**.
-2. Введите `https://vudirvp-sketch.github.io/` (именно корень, со слэшем в конце).
+2. Введите `https://vudirvp-sketch.github.io/live-char-guide/` (именно корень, со слэшем в конце).
 3. Способ подтверждения — **HTML-файл**: Яндекс даст файл вида `yandex_XXXXXXXXXXXXXXXX.html` и попросит положить его в корень сайта.
 4. Положите этот файл в папку **`seo-verification/`** в репозитории (имя файла не меняйте!) и закоммитьте:
 
@@ -92,17 +92,17 @@ git commit -m "seo: yandex webmaster verification file"
 git push origin main
 ```
 
-5. Через ~2 минуты после деплоя проверьте в браузере: `https://vudirvp-sketch.github.io/yandex_XXXXXXXXXXXXXXXX.html` — должна открыться страница с текстом подтверждения.
+5. Через ~2 минуты после деплоя проверьте в браузере: `https://vudirvp-sketch.github.io/live-char-guide/yandex_XXXXXXXXXXXXXXXX.html` — должна открыться страница с текстом подтверждения.
 6. В Вебмастере нажмите **Проверить**.
-7. После подтверждения: **Индексирование → Файлы Sitemap** → добавьте `https://vudirvp-sketch.github.io/sitemap.xml`.
-8. Затем: **Индексирование → Переобход страниц** → добавьте `https://vudirvp-sketch.github.io/`.
+7. После подтверждения: **Индексирование → Файлы Sitemap** → добавьте `https://vudirvp-sketch.github.io/live-char-guide/sitemap.xml`.
+8. Затем: **Индексирование → Переобход страниц** → добавьте `https://vudirvp-sketch.github.io/live-char-guide/`.
 
 Дальше смотрите **Индексирование → Страницы в поиске** — это главная метрика успеха.
 
 ### 2.2 Google Search Console
 
 1. <https://search.google.com/search-console> → **Добавить ресурс** → **Префикс URL** (не «Домен»).
-2. Введите `https://vudirvp-sketch.github.io/`.
+2. Введите `https://vudirvp-sketch.github.io/live-char-guide/`.
 3. Подтверждение → **HTML-файл** → файл вида `googleXXXXXXXXXXXXXXXX.html` → та же папка **`seo-verification/`** → коммит → пуш → **Проверить**.
 4. После: **Файлы Sitemap** → `sitemap.xml`; **Проверка URL** → вставьте главную → **Запросить индексирование**.
 
@@ -118,23 +118,30 @@ git push origin main
 1. Сгенерируйте ключ: любая строка 8–128 символов (например, `openssl rand -hex 16`).
 2. Создайте файл `<ключ>.txt` в папке **`seo-verification/`** — его содержимое должно совпадать с именем (без `.txt`).
 3. Попросите добавить шаг в деплой-workflow (или сделайте это сами): после успешного деплоя вызвать
-   `https://api.indexnow.org/indexnow?url=https://vudirvp-sketch.github.io/&key=<ключ>`.
+   `https://api.indexnow.org/indexnow?url=https://vudirvp-sketch.github.io/live-char-guide/&key=<ключ>`.
 
 ---
 
-## 3. Если понадобится откатить переезд
+## 3. Про переезд на корень `vudirvp-sketch.github.io` — пробовали, откатили
 
-Переезд был: переименование репозитория + одна строка в конфиге. Откат — те же два шага назад:
+2026-10-26 сайт переносили на корневой адрес `https://vudirvp-sketch.github.io/` (переименование репозитория в
+`vudirvp-sketch.github.io`) и в тот же день вернули назад: технически всё работало, но имя репозитория
+превращалось в имя пользователя, и по URL переставало быть понятно, что это за проект. Решение владельца:
+**имя проекта важнее корневого `robots.txt`**.
 
-1. **Settings** → **General** → **Repository name** → вернуть `live-char-guide` → **Rename**.
-2. В файле `scripts/site-config.mjs` вернуть строку:
-   ```js
-   url: 'https://vudirvp-sketch.github.io/live-char-guide/',
-   ```
-3. `pnpm run build && pnpm run qa:seo && pnpm test`, затем коммит и пуш.
-4. На сайте `qa:seo` сам проверит, что все абсолютные ссылки соответствуют новому адресу — если что-то забыли, гейт упадёт.
+Почему это почти ничего не стоило: единственный реальный плюс корневого сайта — краулеры читают только
+`https://<host>/robots.txt`, а не копию в подпапке. `robots.txt` нужен ровно для одного — сообщить адрес
+sitemap. Этот адрес всё равно добавляется вручную в Яндекс.Вебмастер и Search Console (§2.1, §2.2), так что
+функциональной потери нет.
 
-Всё остальное (README, бейджи, ссылки в документации) придётся обновить тем же поиском-заменой: `vudirvp-sketch/vudirvp-sketch.github.io` → `vudirvp-sketch/live-char-guide` и `https://vudirvp-sketch.github.io/` → `https://vudirvp-sketch.github.io/live-char-guide/`.
+Если когда-нибудь захочется получить и то и другое без потери имени: создайте **отдельный** репозиторий
+`vudirvp-sketch.github.io` (два файла — `robots.txt` и редирект-заглушка), оставив гайд в `live-char-guide`.
+`robots.txt` действует на весь хост, поэтому покроет и проектный сайт. Детали — в
+[`root-site-migration.md`](root-site-migration.md), «Option 3».
+
+Как это сделать самому, если понадобится: **Settings** → **General** → **Repository name** → новое имя →
+**Rename**; затем в `scripts/site-config.mjs` поменять одну строку `url:`; затем `pnpm run build && pnpm run qa:seo`
+— гейт сам поймает все абсолютные ссылки, которые не сошлись с новым адресом.
 
 ---
 

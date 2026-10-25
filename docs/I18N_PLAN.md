@@ -355,16 +355,16 @@ The guide is **one page per language** with 62 in-page anchors, so the sitemap s
 
 ```html
 <!-- dist/index.html (RU) -->
-<link rel="alternate" hreflang="ru" href="https://vudirvp-sketch.github.io/">
-<link rel="alternate" hreflang="en" href="https://vudirvp-sketch.github.io/en/">
-<link rel="alternate" hreflang="x-default" href="https://vudirvp-sketch.github.io/">
-<link rel="canonical" href="https://vudirvp-sketch.github.io/">
+<link rel="alternate" hreflang="ru" href="https://vudirvp-sketch.github.io/live-char-guide/">
+<link rel="alternate" hreflang="en" href="https://vudirvp-sketch.github.io/live-char-guide/en/">
+<link rel="alternate" hreflang="x-default" href="https://vudirvp-sketch.github.io/live-char-guide/">
+<link rel="canonical" href="https://vudirvp-sketch.github.io/live-char-guide/">
 <meta property="og:locale" content="ru_RU">
 ```
 
 ```html
 <!-- dist/en/index.html (EN) — same alternates, self-referencing canonical -->
-<link rel="canonical" href="https://vudirvp-sketch.github.io/en/">
+<link rel="canonical" href="https://vudirvp-sketch.github.io/live-char-guide/en/">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="ru_RU">
 ```
@@ -374,14 +374,14 @@ The guide is **one page per language** with 62 in-page anchors, so the sitemap s
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://vudirvp-sketch.github.io/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vudirvp-sketch.github.io/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://vudirvp-sketch.github.io/en/"/>
+    <loc>https://vudirvp-sketch.github.io/live-char-guide/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vudirvp-sketch.github.io/live-char-guide/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vudirvp-sketch.github.io/live-char-guide/en/"/>
   </url>
   <url>
-    <loc>https://vudirvp-sketch.github.io/en/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vudirvp-sketch.github.io/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://vudirvp-sketch.github.io/en/"/>
+    <loc>https://vudirvp-sketch.github.io/live-char-guide/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vudirvp-sketch.github.io/live-char-guide/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vudirvp-sketch.github.io/live-char-guide/en/"/>
   </url>
 </urlset>
 ```

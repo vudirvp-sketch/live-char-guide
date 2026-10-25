@@ -12,7 +12,7 @@
 
 export const SITE = {
   /** Absolute URL of the deployed site, WITH trailing slash. */
-  url: 'https://vudirvp-sketch.github.io/',
+  url: 'https://vudirvp-sketch.github.io/live-char-guide/',
   name: 'Live Character Guide',
   language: 'ru',
   locale: 'ru_RU',

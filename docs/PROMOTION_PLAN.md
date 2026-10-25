@@ -11,9 +11,11 @@
 >
 > **Status 2026-10-26:** A1–A5 and A7 are **implemented and verified** (see §3.1). B is applied
 > except the web-UI-only items. C is applied (`README.md`). D not started. E deferred by the owner
-> («пока только для ru аудитории»). Owner decisions taken: D-1 `<user>.github.io` — yes, later, via
-> [`promotion/root-site-migration.md`](./promotion/root-site-migration.md); D-3 Russian-first README
-> — done, recorded in `AGENTS.md`; D-4 languages later.
+> («пока только для ru аудитории»). D-1 was **executed and reverted the same day** — the root site cost the
+> repository its project name, which the owner judged worse than the root `robots.txt`; the repo is back to
+> `live-char-guide` and the site stays at `…/live-char-guide/`. Record and the remaining "Option 3"
+> (host-root helper repo): [`promotion/root-site-migration.md`](./promotion/root-site-migration.md).
+> D-3 Russian-first README — done, recorded in `AGENTS.md`; D-4 languages later.
 
 ---
 
@@ -26,7 +28,7 @@
 | Homepage URL | ✅ set | `gh api repos/...` |
 | Releases | ❌ none | 0 releases; deploys tagged `deploy-YYYYmmdd-HHMMSS` |
 | Social preview | ❌ unset | web UI only |
-| Words visible to a crawler on the live home page | **249 characters** ("включите JavaScript") | fetched `https://vudirvp-sketch.github.io/` → 6 815 bytes = the bare shell |
+| Words visible to a crawler on the live home page | **249 characters** ("включите JavaScript") | fetched `https://vudirvp-sketch.github.io/live-char-guide/` → 6 815 bytes = the bare shell |
 | Words in the actual guide | **≈27 200** (62 sections) | `dist/parts/*.html` |
 | `<link rel="canonical">` | ❌ absent | 0 matches in `src/shell/index.html` |
 | JSON-LD | ❌ absent | 0 matches |
@@ -34,7 +36,7 @@
 | `og:image` | ⚠️ **relative** path — breaks every unfurl | `content="assets/preview-card.png"` |
 | `<title>` / `<meta description>` | ⚠️ English on 100 % Russian content | `Live Character for LLM — Guide` |
 | `hreflang` | ❌ absent (fine today — one language) | 0 matches |
-| `robots.txt` | ⚠️ **dead where it sits** — crawlers read only `https://vudirvp-sketch.github.io/robots.txt`, never `/live-char-guide/robots.txt` | Google robots.txt spec (cited in `PROMOTION_SEO.md` §4.1) |
+| `robots.txt` | ⚠️ **dead where it sits** — crawlers read only `https://vudirvp-sketch.github.io/live-char-guide/robots.txt`, never `/live-char-guide/robots.txt` | Google robots.txt spec (cited in `PROMOTION_SEO.md` §4.1) |
 | `sitemap.xml` | ⚠️ 1 URL, no `lastmod` | file is 4 lines |
 
 **Reading of the situation.** The guide is not "under-optimised"; it is **structurally invisible**. Every one of its 27 200 words is fetched by `lazy-loader.js` at runtime, and the only always-present text is a request to enable JavaScript. Topics, descriptions and READMEs cannot compensate for that — they are cheap, and they were worth doing, but they are not the bottleneck.
@@ -70,12 +72,12 @@ Full analysis and alternatives in [`PROMOTION_SEO.md`](./PROMOTION_SEO.md) §2�
 | **A6** | Domain decision — see D-1. Until then `robots.txt` and host-level verification stay degraded | owner | — |
 | **A7** | New gate `qa:seo` (`scripts/seo_check.mjs`): Cyrillic title, exactly one canonical, absolute `og:*`, valid JSON-LD whose `version` == `src/VERSION`, sitemap `<loc>` all resolve inside `dist/` | 2–3 h | Low, but it is what keeps A2/A3 from rotting on the next build |
 
-**Acceptance for workstream A:** `curl https://vudirvp-sketch.github.io/` returns HTML containing all 62 `<section>` elements; `view-source` shows a Russian `<title>`, one canonical, one valid JSON-LD block, absolute `og:image`; `qa:seo` and `qa:csp` both PASS; existing battery unchanged (build 62 sections, validate redirects, tests 68/68, sync 87/87, english 1 / syntax 224).
+**Acceptance for workstream A:** `curl https://vudirvp-sketch.github.io/live-char-guide/` returns HTML containing all 62 `<section>` elements; `view-source` shows a Russian `<title>`, one canonical, one valid JSON-LD block, absolute `og:image`; `qa:seo` and `qa:csp` both PASS; existing battery unchanged (build 62 sections, validate redirects, tests 68/68, sync 87/87, english 1 / syntax 224).
 
 ### 3.1 Implemented (2026-10-26) and how it was proved
 
 **Deployed:** `d647c56b` (the whole track) + `54fd44d8` (404 CTA fix); Pages run green. Verified against the live
-URL, not only locally: `https://vudirvp-sketch.github.io/` now serves 62 `<section>` elements,
+URL, not only locally: `https://vudirvp-sketch.github.io/live-char-guide/` now serves 62 `<section>` elements,
 a Russian `<title>`, one absolute canonical, one JSON-LD block, absolute `og:image`, and **22 016 crawler-visible
 words** (was 249 characters). `sitemap.xml` is regenerated with `<lastmod>`; `/does-not-exist` returns the custom
 404 whose CTA now points at the guide instead of the GitHub org root.
@@ -180,7 +182,7 @@ Two iterations (191, 192) are enough to see a real signal in Yandex Webmaster. M
 
 | ID | Decision | Options | Recommendation |
 |---|---|---|---|
-| **D-1** | Domain | (a) stay on `…github.io/live-char-guide/`; (b) custom domain; (c) move to a `<user>.github.io` root repo | **DECIDED 2026-10-26: no custom domain; (c) accepted.** Implementation is one line in `scripts/site-config.mjs` — ready-to-run plan in [`promotion/root-site-migration.md`](./promotion/root-site-migration.md). Recommend doing it after 2–3 weeks of measurement, while no external links point at the current URL |
+| **D-1** | Domain | (a) stay on `…github.io/live-char-guide/`; (b) custom domain; (c) move to a `<user>.github.io` root repo | **DECIDED 2026-10-26 → (a), after trying (c).** (c) was executed and reverted the same day: it works technically but turns the repository name into a username, so the project name disappears from the URL. Lost benefit is small — the root `robots.txt` only advertises the sitemap, which is submitted by hand once anyway. Both runs documented in [`promotion/root-site-migration.md`](./promotion/root-site-migration.md); its "Option 3" (a two-file host-root helper repo) gives the `robots.txt` without the rename, if it ever matters |
 | **D-2** | Per-chapter landing pages | accept / reject | **accept, but only after measuring option A for 4–6 weeks.** 13 URLs × 13 intents is the strongest available lever; it also introduces a second entry surface into the v4 «one place, on time» model, so it needs a conscious yes |
 | **D-3** | README language | (a) English (per `AGENTS.md`); (b) Russian primary + English summary; (c) fully bilingual | **DECIDED 2026-10-26: (b), applied.** `README.md` is now Russian-first with an English summary; the exception is recorded in `AGENTS.md` so the next agent does not revert it |
 | **D-4** | Language switcher scope | (a) UI strings only; (b) UI + navigation + widget data; (c) full content translation | **(a) now** — the chrome mechanism, ≈3 iterations. **(b)/(c) only after an English channel exists.** Full translation is ≈235–275 h / 22–28 iterations and doubles every future content iteration — see §7 |

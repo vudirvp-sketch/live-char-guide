@@ -16,7 +16,7 @@ import { readFile, writeFile, readdir, mkdir, copyFile, rm, stat } from 'fs/prom
 import { existsSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { substituteSiteTokens } from '../../scripts/site-config.mjs';
+import { substituteSiteTokens, SITE } from '../../scripts/site-config.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -347,12 +347,14 @@ async function buildShell() {
     if (copied > 0) log('INFO', `Copied ${copied} search-engine verification file(s) → dist/ root`);
   }
 
-  // 8d. Legacy alias: the project-site era URL (`/live-char-guide/`) was public
-  // for months and may already be known to crawlers or bookmarks. After the D-1
-  // move it would 404, so serve a one-hop alias that canonicalises to the root.
-  const legacyDir = join(DIST_DIR, 'live-char-guide');
-  await ensureDir(legacyDir);
-  const legacyHtml = substituteSiteTokens(`<!DOCTYPE html>
+  // 8d. Legacy alias: only when the site has MOVED to a different path than the
+  // project-site URL. Writing this unconditionally would be fatal on a project
+  // site — /live-char-guide/ would redirect to itself, an infinite loop.
+  const hostRoot = new URL(SITE.url).origin + '/';
+  if (SITE.url === hostRoot) {
+    const legacyDir = join(DIST_DIR, 'live-char-guide');
+    await ensureDir(legacyDir);
+    const legacyHtml = substituteSiteTokens(`<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -366,8 +368,11 @@ async function buildShell() {
 </body>
 </html>
 `);
-  await writeFile(join(legacyDir, 'index.html'), legacyHtml, 'utf-8');
-  log('INFO', 'Wrote legacy alias dist/live-char-guide/index.html → site root');
+    await writeFile(join(legacyDir, 'index.html'), legacyHtml, 'utf-8');
+    log('INFO', 'Wrote legacy alias dist/live-char-guide/index.html → site root');
+  } else {
+    log('INFO', 'Skipped legacy alias: the site lives at the project path (would self-redirect)');
+  }
 
   // === ROOT FALLBACK COPIES ===
 
