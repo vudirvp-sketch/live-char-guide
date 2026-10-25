@@ -74,6 +74,12 @@ Full analysis and alternatives in [`PROMOTION_SEO.md`](./PROMOTION_SEO.md) §2�
 
 ### 3.1 Implemented (2026-10-26) and how it was proved
 
+**Deployed:** `d647c56b` (the whole track) + `54fd44d8` (404 CTA fix); Pages run green. Verified against the live
+URL, not only locally: `https://vudirvp-sketch.github.io/live-char-guide/` now serves 62 `<section>` elements,
+a Russian `<title>`, one absolute canonical, one JSON-LD block, absolute `og:image`, and **22 016 crawler-visible
+words** (was 249 characters). `sitemap.xml` is regenerated with `<lastmod>`; `/does-not-exist` returns the custom
+404 whose CTA now points at the guide instead of the GitHub org root.
+
 | Step | Where | Evidence |
 |---|---|---|
 | A1 prerender | `src/scripts/build-shell-unified.mjs` (`prerenderIndex`), `src/shell/lazy-loader.js` (adoption guard) | build log `Prerendered 62 sections into dist/index.html (464 KB)`; crawler-visible text went **249 chars → 22 016 words**; browser check `tools/verify-prerender.mjs`: 62 sections rendered, **no fragment refetch**, TOC 62 items, deep link `#p4_spine_overview` scrolls, no double paint |
