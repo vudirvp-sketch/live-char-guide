@@ -347,6 +347,28 @@ async function buildShell() {
     if (copied > 0) log('INFO', `Copied ${copied} search-engine verification file(s) → dist/ root`);
   }
 
+  // 8d. Legacy alias: the project-site era URL (`/live-char-guide/`) was public
+  // for months and may already be known to crawlers or bookmarks. After the D-1
+  // move it would 404, so serve a one-hop alias that canonicalises to the root.
+  const legacyDir = join(DIST_DIR, 'live-char-guide');
+  await ensureDir(legacyDir);
+  const legacyHtml = substituteSiteTokens(`<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гайд переехал — Live Character Guide</title>
+<link rel="canonical" href="{{SITE_URL}}">
+<meta http-equiv="refresh" content="0; url={{SITE_URL}}">
+</head>
+<body>
+<p>Гайд теперь на <a href="{{SITE_URL}}">главной странице</a>.</p>
+</body>
+</html>
+`);
+  await writeFile(join(legacyDir, 'index.html'), legacyHtml, 'utf-8');
+  log('INFO', 'Wrote legacy alias dist/live-char-guide/index.html → site root');
+
   // === ROOT FALLBACK COPIES ===
 
   // 9. Create root index.html for backward compatibility
