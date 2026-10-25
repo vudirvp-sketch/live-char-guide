@@ -305,8 +305,11 @@ async function buildShell() {
   // 7. Copy 404.html from src/404.html
   const notFound = join(SRC_DIR, '404.html');
   if (existsSync(notFound)) {
-    await copyFile(notFound, join(DIST_DIR, '404.html'));
-    log('INFO', 'Copied src/404.html → dist/404.html');
+    // "На главную" must point at the SITE root, not at the GitHub org root:
+    // href="/" on a project site throws the reader out of the guide entirely.
+    const notFoundContent = substituteSiteTokens(await readFile(notFound, 'utf-8'));
+    await writeFile(join(DIST_DIR, '404.html'), notFoundContent);
+    log('INFO', 'Copied src/404.html → dist/404.html (site tokens resolved)');
   }
 
   // 8. Copy sitemap.xml and robots.txt for SEO
