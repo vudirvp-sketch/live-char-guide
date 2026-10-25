@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
-<!-- Build: 55aea5f8 -->
-<!-- Generated: 2026-10-25T21:44:28.892Z -->
+<!-- Build: f427c9a0 -->
+<!-- Generated: 2026-10-25T21:53:22.251Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -9,24 +9,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="livechar-version" content="9.2.6">
   <!-- SEO head (see docs/PROMOTION_SEO.md §3). Language: Russian — matches lang="ru"
-       and the audience (DEC-16). https://vudirvp-sketch.github.io/live-char-guide/ is substituted at build time from
+       and the audience (DEC-16). https://vudirvp-sketch.github.io/ is substituted at build time from
        scripts/site-config.mjs, so a future origin move is a one-line change. -->
   <meta name="description" content="Как собрать карточку персонажа для LLM: SPINE, якоря поведения, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика. SillyTavern, 12B–32B+, 62 раздела.">
-  <link rel="canonical" href="https://vudirvp-sketch.github.io/live-char-guide/">
+  <link rel="canonical" href="https://vudirvp-sketch.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Live Character Guide">
   <meta property="og:locale" content="ru_RU">
-  <meta property="og:url" content="https://vudirvp-sketch.github.io/live-char-guide/">
+  <meta property="og:url" content="https://vudirvp-sketch.github.io/">
   <meta property="og:title" content="Гайд по карточкам персонажей для LLM">
   <meta property="og:description" content="SPINE, якоря поведения, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика — инженерный пайплайн сборки RP-карточки.">
-  <meta property="og:image" content="https://vudirvp-sketch.github.io/live-char-guide/assets/preview-card-1200x630.png">
+  <meta property="og:image" content="https://vudirvp-sketch.github.io/assets/preview-card-1200x630.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Live Character Guide — пайплайн сборки карточки персонажа">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Гайд по карточкам персонажей для LLM">
   <meta name="twitter:description" content="SPINE, якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика.">
-  <meta name="twitter:image" content="https://vudirvp-sketch.github.io/live-char-guide/assets/preview-card-1200x630.png">
+  <meta name="twitter:image" content="https://vudirvp-sketch.github.io/assets/preview-card-1200x630.png">
   <!-- FIX-25: cdn.jsdelivr.net kept in style-src/font-src for Geist font CSS. NOT in script-src (no scripts loaded from CDN since iter-113 — Mermaid removed). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net fonts.googleapis.com; img-src 'self' data:; font-src 'self' cdn.jsdelivr.net fonts.gstatic.com; connect-src 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -43,13 +43,13 @@
     "@graph": [
       {
         "@type": "TechArticle",
-        "@id": "https://vudirvp-sketch.github.io/live-char-guide/#article",
+        "@id": "https://vudirvp-sketch.github.io/#article",
         "headline": "Гайд по карточкам персонажей для LLM",
         "description": "Инженерный пайплайн сборки RP-карточек персонажей: SPINE, поведенческие якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика.",
         "inLanguage": "ru",
-        "url": "https://vudirvp-sketch.github.io/live-char-guide/",
-        "mainEntityOfPage": "https://vudirvp-sketch.github.io/live-char-guide/",
-        "image": "https://vudirvp-sketch.github.io/live-char-guide/assets/preview-card-1200x630.png",
+        "url": "https://vudirvp-sketch.github.io/",
+        "mainEntityOfPage": "https://vudirvp-sketch.github.io/",
+        "image": "https://vudirvp-sketch.github.io/assets/preview-card-1200x630.png",
         "author": { "@type": "Organization", "name": "TITAN FUSE Team" },
         "publisher": { "@type": "Organization", "name": "TITAN FUSE Team" },
         "isAccessibleForFree": true,
@@ -58,8 +58,8 @@
       },
       {
         "@type": "WebSite",
-        "@id": "https://vudirvp-sketch.github.io/live-char-guide/#website",
-        "url": "https://vudirvp-sketch.github.io/live-char-guide/",
+        "@id": "https://vudirvp-sketch.github.io/#website",
+        "url": "https://vudirvp-sketch.github.io/",
         "name": "Live Character Guide",
         "inLanguage": "ru",
         "publisher": { "@type": "Organization", "name": "TITAN FUSE Team" }

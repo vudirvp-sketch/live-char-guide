@@ -5,7 +5,7 @@ verification files that search engines insist on serving from the root actually 
 
 | Service | File it asks for | Ends up at |
 |---|---|---|
-| Yandex Webmaster | `yandex_<hash>.html` | `https://vudirvp-sketch.github.io/live-char-guide/yandex_<hash>.html` |
+| Yandex Webmaster | `yandex_<hash>.html` | `https://vudirvp-sketch.github.io/yandex_<hash>.html` |
 | Google Search Console (URL-prefix property) | `google<hash>.html` | `…/live-char-guide/google<hash>.html` |
 | Bing Webmaster | same as Google (import) | — |
 | IndexNow | `<key>.txt` (the key itself) | `…/live-char-guide/<key>.txt` |

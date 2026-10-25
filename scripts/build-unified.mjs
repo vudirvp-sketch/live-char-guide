@@ -379,7 +379,7 @@ async function buildUnified() {
 
   // Generate footer.html
   const footerHtml = `<footer class="guide-footer">
-<div class="guide-meta">Live Character Guide v${version} &middot; <a href="https://github.com/vudirvp-sketch/live-char-guide" target="_blank" rel="noopener">GitHub</a></div>
+<div class="guide-meta">Live Character Guide v${version} &middot; <a href="https://github.com/vudirvp-sketch/vudirvp-sketch.github.io" target="_blank" rel="noopener">GitHub</a></div>
 </footer>`;
   await writeFile(join(outputDir, 'footer.html'), footerHtml);
   log('INFO', 'Generated: build/parts/footer.html');

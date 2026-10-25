@@ -26,7 +26,7 @@
 | Homepage URL | ✅ set | `gh api repos/...` |
 | Releases | ❌ none | 0 releases; deploys tagged `deploy-YYYYmmdd-HHMMSS` |
 | Social preview | ❌ unset | web UI only |
-| Words visible to a crawler on the live home page | **249 characters** ("включите JavaScript") | fetched `https://vudirvp-sketch.github.io/live-char-guide/` → 6 815 bytes = the bare shell |
+| Words visible to a crawler on the live home page | **249 characters** ("включите JavaScript") | fetched `https://vudirvp-sketch.github.io/` → 6 815 bytes = the bare shell |
 | Words in the actual guide | **≈27 200** (62 sections) | `dist/parts/*.html` |
 | `<link rel="canonical">` | ❌ absent | 0 matches in `src/shell/index.html` |
 | JSON-LD | ❌ absent | 0 matches |
@@ -70,12 +70,12 @@ Full analysis and alternatives in [`PROMOTION_SEO.md`](./PROMOTION_SEO.md) §2�
 | **A6** | Domain decision — see D-1. Until then `robots.txt` and host-level verification stay degraded | owner | — |
 | **A7** | New gate `qa:seo` (`scripts/seo_check.mjs`): Cyrillic title, exactly one canonical, absolute `og:*`, valid JSON-LD whose `version` == `src/VERSION`, sitemap `<loc>` all resolve inside `dist/` | 2–3 h | Low, but it is what keeps A2/A3 from rotting on the next build |
 
-**Acceptance for workstream A:** `curl https://vudirvp-sketch.github.io/live-char-guide/` returns HTML containing all 62 `<section>` elements; `view-source` shows a Russian `<title>`, one canonical, one valid JSON-LD block, absolute `og:image`; `qa:seo` and `qa:csp` both PASS; existing battery unchanged (build 62 sections, validate redirects, tests 68/68, sync 87/87, english 1 / syntax 224).
+**Acceptance for workstream A:** `curl https://vudirvp-sketch.github.io/` returns HTML containing all 62 `<section>` elements; `view-source` shows a Russian `<title>`, one canonical, one valid JSON-LD block, absolute `og:image`; `qa:seo` and `qa:csp` both PASS; existing battery unchanged (build 62 sections, validate redirects, tests 68/68, sync 87/87, english 1 / syntax 224).
 
 ### 3.1 Implemented (2026-10-26) and how it was proved
 
 **Deployed:** `d647c56b` (the whole track) + `54fd44d8` (404 CTA fix); Pages run green. Verified against the live
-URL, not only locally: `https://vudirvp-sketch.github.io/live-char-guide/` now serves 62 `<section>` elements,
+URL, not only locally: `https://vudirvp-sketch.github.io/` now serves 62 `<section>` elements,
 a Russian `<title>`, one absolute canonical, one JSON-LD block, absolute `og:image`, and **22 016 crawler-visible
 words** (was 249 characters). `sitemap.xml` is regenerated with `<lastmod>`; `/does-not-exist` returns the custom
 404 whose CTA now points at the guide instead of the GitHub org root.

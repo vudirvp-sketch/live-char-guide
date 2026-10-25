@@ -1,4 +1,10 @@
-# Moving the site to `vudirvp-sketch.github.io` — ready-to-run, NOT executed
+# Moving the site to `vudirvp-sketch.github.io` — **DONE 2026-10-26**
+
+> Executed: repository renamed `live-char-guide` → `vudirvp-sketch.github.io` (free on GitHub Pages — no domain
+> purchase, nothing to pay). GitHub re-pointed Pages automatically to `https://vudirvp-sketch.github.io/`;
+> `scripts/site-config.mjs` changed one line; 26 repo URLs + 81 site URLs across 17 files were rewritten;
+> rebuilt, gated, deployed and verified live at the new origin.
+> Kept as the record of **why** and **how** — the option comparison below is now history.
 
 Owner decision (2026-10-26): no custom domain, everything stays on GitHub, the `<user>.github.io` root site is acceptable.
 
@@ -18,7 +24,7 @@ Honest ceiling: this is a **small** gain, not a ranking breakthrough. The conten
 **One line.** `scripts/site-config.mjs`:
 
 ```js
-url: 'https://vudirvp-sketch.github.io/live-char-guide/',
+url: 'https://vudirvp-sketch.github.io/',
    ↓
 url: 'https://vudirvp-sketch.github.io/',
 ```

@@ -13,7 +13,7 @@ Why Russian: the guide is Russian (DEC-16), so the description should match the 
 Revert:
 
 ```bash
-gh api -X PATCH repos/vudirvp-sketch/live-char-guide -F description=""
+gh api -X PATCH repos/vudirvp-sketch/vudirvp-sketch.github.io -F description=""
 ```
 
 ## 2. Topics (APPLIED — 20/20)
@@ -40,7 +40,7 @@ Rules respected: lowercase, hyphens, ≤50 chars each, ≤20 total.
 Revert / replace:
 
 ```bash
-gh api -X PUT repos/vudirvp-sketch/live-char-guide/topics \
+gh api -X PUT repos/vudirvp-sketch/vudirvp-sketch.github.io/topics \
   -H "Accept: application/vnd.github+json" \
   --input topics.json    # {"names":[...]}
 ```

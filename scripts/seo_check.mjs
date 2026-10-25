@@ -154,13 +154,16 @@ for (const candidate of [join(ROOT, 'dist', 'sitemap.xml'), join(ROOT, 'sitemap.
 }
 
 // ---------------------------------------------------------------------------
-// 8. robots.txt — honest check: it is inert on a project subpath, so WARN only
+// 8. robots.txt — only meaningful at the HOST root; say so honestly
 // ---------------------------------------------------------------------------
 const robotsPath = join(ROOT, 'robots.txt');
 if (existsSync(robotsPath)) {
   const robots = readFileSync(robotsPath, 'utf-8');
-  if (/Sitemap:\s*https?:\/\//i.test(robots)) {
-    warn('robots.txt declares a Sitemap, but crawlers only read the HOST root robots.txt — this one is inert until the site moves to <user>.github.io (D-1)');
+  const hostRoot = new URL(SITE.url).origin + '/';
+  if (SITE.url === hostRoot) {
+    pass('robots.txt is at the host root — crawlers will read it');
+  } else if (/Sitemap:\s*https?:\/\//i.test(robots)) {
+    warn(`robots.txt declares a Sitemap, but crawlers only read the HOST root robots.txt — this one is inert while the site sits at ${SITE.url} instead of ${hostRoot} (D-1)`);
   }
 }
 

@@ -32,7 +32,7 @@ git clone https://github.com/YOUR_USERNAME/live-char-guide.git
 cd live-char-guide
 
 # Add upstream remote
-git remote add upstream https://github.com/vudirvp-sketch/live-char-guide.git
+git remote add upstream https://github.com/vudirvp-sketch/vudirvp-sketch.github.io.git
 
 # Install dependencies
 pnpm install

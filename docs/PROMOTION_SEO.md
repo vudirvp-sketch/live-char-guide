@@ -1,7 +1,7 @@
 # PROMOTION_SEO — Practical Discoverability Plan
 
 > **Status:** plan (no code changed by this document). Owner: repository owner. Agent-executable parts marked `agent`.
-> **Site:** https://vudirvp-sketch.github.io/live-char-guide/ · **Repo:** https://github.com/vudirvp-sketch/live-char-guide
+> **Site:** https://vudirvp-sketch.github.io/ · **Repo:** https://github.com/vudirvp-sketch/vudirvp-sketch.github.io
 > **Measured against:** `HEAD 6605b87`, version `9.2.6`, 62 sections, 13 part fragments + 2 appendix fragments,
 > **27 230 words** in `dist/parts/*.html` (includes the generated 1 731-word glossary).
 > **Audience:** Russian-speaking RP / local-LLM practitioners → **Yandex is the priority engine, Google second.**
@@ -113,15 +113,15 @@ Insert after `<meta name="viewport" …>` and **replace** the existing `descript
   <!-- SEO (see docs/PROMOTION_SEO.md §3) -->
   <title>Гайд по карточкам персонажей для LLM 12B–32B+ — SPINE, голос, CoT, диагностика</title>
   <meta name="description" content="Инженерный гайд по сборке RP-карточек персонажей (SillyTavern): SPINE, поведенческие якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика. 10 частей и приложения.">
-  <link rel="canonical" href="https://vudirvp-sketch.github.io/live-char-guide/">
+  <link rel="canonical" href="https://vudirvp-sketch.github.io/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Live Character Guide">
   <meta property="og:locale" content="ru_RU">
-  <meta property="og:url" content="https://vudirvp-sketch.github.io/live-char-guide/">
+  <meta property="og:url" content="https://vudirvp-sketch.github.io/">
   <meta property="og:title" content="Гайд по карточкам персонажей для LLM 12B–32B+">
   <meta property="og:description" content="SPINE, поведенческие якоря, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика — инженерный пайплайн сборки RP-карточки.">
-  <meta property="og:image" content="https://vudirvp-sketch.github.io/live-char-guide/assets/preview-card-1200x630.png">
+  <meta property="og:image" content="https://vudirvp-sketch.github.io/assets/preview-card-1200x630.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Live Character Guide — схема сборки RP-карточки персонажа">
@@ -129,7 +129,7 @@ Insert after `<meta name="viewport" …>` and **replace** the existing `descript
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Гайд по карточкам персонажей для LLM 12B–32B+">
   <meta name="twitter:description" content="SPINE, якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика.">
-  <meta name="twitter:image" content="https://vudirvp-sketch.github.io/live-char-guide/assets/preview-card-1200x630.png">
+  <meta name="twitter:image" content="https://vudirvp-sketch.github.io/assets/preview-card-1200x630.png">
 ```
 
 Notes: (1) `og:image` **must be absolute** (D6) and must exist as a real 1200×630 asset — add `src/assets/preview-card-1200x630.png` (current asset is 1344×768, D7); (2) do **not** add `hreflang` (one language) and do **not** add `meta keywords` (ignored, D13); (3) keep `name="livechar-version"` and the CSP meta untouched — `version:check` and `qa:csp` read them.
@@ -147,13 +147,13 @@ Notes: (1) `og:image` **must be absolute** (D6) and must exist as a real 1200×6
     "@graph": [
       {
         "@type": "TechArticle",
-        "@id": "https://vudirvp-sketch.github.io/live-char-guide/#article",
+        "@id": "https://vudirvp-sketch.github.io/#article",
         "headline": "Гайд по карточкам персонажей для LLM 12B–32B+",
         "description": "Инженерный пайплайн сборки RP-карточек персонажей: SPINE, поведенческие якоря, изоляция голоса, CoT, системный промпт, анти-паттерны, диагностика.",
         "inLanguage": "ru",
-        "url": "https://vudirvp-sketch.github.io/live-char-guide/",
-        "mainEntityOfPage": "https://vudirvp-sketch.github.io/live-char-guide/",
-        "image": "https://vudirvp-sketch.github.io/live-char-guide/assets/preview-card-1200x630.png",
+        "url": "https://vudirvp-sketch.github.io/",
+        "mainEntityOfPage": "https://vudirvp-sketch.github.io/",
+        "image": "https://vudirvp-sketch.github.io/assets/preview-card-1200x630.png",
         "datePublished": "2025-01-01",
         "dateModified": "2026-10-25",
         "version": "9.2.6",
@@ -164,17 +164,17 @@ Notes: (1) `og:image` **must be absolute** (D6) and must exist as a real 1200×6
       },
       {
         "@type": "WebSite",
-        "@id": "https://vudirvp-sketch.github.io/live-char-guide/#website",
-        "url": "https://vudirvp-sketch.github.io/live-char-guide/",
+        "@id": "https://vudirvp-sketch.github.io/#website",
+        "url": "https://vudirvp-sketch.github.io/",
         "name": "Live Character Guide",
         "inLanguage": "ru",
-        "publisher": { "@id": "https://vudirvp-sketch.github.io/live-char-guide/#article" }
+        "publisher": { "@id": "https://vudirvp-sketch.github.io/#article" }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Live Character Guide",
-            "item": "https://vudirvp-sketch.github.io/live-char-guide/" }
+            "item": "https://vudirvp-sketch.github.io/" }
         ]
       }
     ]
@@ -212,7 +212,7 @@ Current file lists one URL with no `lastmod`. After option B the sitemap still h
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vudirvp-sketch.github.io/live-char-guide/</loc>
+    <loc>https://vudirvp-sketch.github.io/</loc>
     <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -250,14 +250,14 @@ The obstacle is structural, and must be stated plainly: Webmaster verifies a **h
 
 Do **not** spend time on option C first; test it only because it is cheap.
 
-After verification: **Индексирование → Файлы Sitemap** → add `https://vudirvp-sketch.github.io/live-char-guide/sitemap.xml`; **Индексирование → Переобход страниц** for the index URL after each content release.
+After verification: **Индексирование → Файлы Sitemap** → add `https://vudirvp-sketch.github.io/sitemap.xml`; **Индексирование → Переобход страниц** for the index URL after each content release.
 
 ### 5.2 Google Search Console
 
 Per [Search Console verification](https://support.google.com/webmasters/answer/9008080): an **HTML file upload works for URL-prefix properties**, and "if you verified ownership … any child properties you add will be auto-verified". Steps:
 
-1. Add property → **URL prefix**: `https://vudirvp-sketch.github.io/live-char-guide/`.
-2. Choose **HTML file** → download `google<token>.html` → commit it to the **repo root of the deployed tree** and copy it into `dist/` in `build-shell-unified.mjs` (same pattern as `sitemap.xml`), so it is served at `https://vudirvp-sketch.github.io/live-char-guide/google<token>.html`.
+1. Add property → **URL prefix**: `https://vudirvp-sketch.github.io/`.
+2. Choose **HTML file** → download `google<token>.html` → commit it to the **repo root of the deployed tree** and copy it into `dist/` in `build-shell-unified.mjs` (same pattern as `sitemap.xml`), so it is served at `https://vudirvp-sketch.github.io/google<token>.html`.
    - **Caution:** it must survive every build. A file placed only in `dist/` is deleted (`build-shell-unified.mjs` does `rm -rf dist`), which silently unverifies the property.
 3. Verify; then **Sitemaps → add sitemap**; then **URL Inspection → Request indexing** once after the prerender lands.
 4. Add the `<meta name="google-site-verification" …>` variant as a second method in the head — cheap insurance against the file being lost in a refactor.
@@ -298,8 +298,8 @@ Automation sketch (a new step **after** `Deploy to GitHub Pages` in `.github/wor
             -d '{
               "host": "vudirvp-sketch.github.io",
               "key": "${{ secrets.INDEXNOW_KEY }}",
-              "keyLocation": "https://vudirvp-sketch.github.io/live-char-guide/${{ secrets.INDEXNOW_KEY }}.txt",
-              "urlList": ["https://vudirvp-sketch.github.io/live-char-guide/"]
+              "keyLocation": "https://vudirvp-sketch.github.io/${{ secrets.INDEXNOW_KEY }}.txt",
+              "urlList": ["https://vudirvp-sketch.github.io/"]
             }'
 ```
 
@@ -324,7 +324,7 @@ Automation sketch (a new step **after** `Deploy to GitHub Pages` in `.github/wor
 | **Description** (≤350 chars) | Set in the About panel | Ready text (RU, keywords, 230 chars): `Инженерный гайд по RP-карточкам персонажей для LLM 12B–32B+ (SillyTavern): SPINE, поведенческие якоря, изоляция голоса, CoT, системный промпт, Lorebook, анти-паттерны, диагностика. 10 частей + приложения, 62 раздела, версия 9.2.6.` |
 | **Topics** | 20 max in the picker; format is `lowercase`, digits, hyphens ([GitHub docs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics)) | `llm` · `roleplay` · `character-card` · `sillytavern` · `prompt-engineering` · `system-prompt` · `ai-roleplay` · `persona-design` · `character-design` · `local-llm` · `chain-of-thought` · `ocean-model` · `enneagram` · `mbti` · `lorebook` · `russian` · `static-site` · `engineering-guide` · `ai-writing` · `tavern` |
 | **Social preview** | Settings → Social preview → upload 1280×640 PNG | Current asset is 1344×768 (D7) — render a proper 1280×640 crop with the title text; it is the first thing shown when the repo is linked anywhere |
-| **About → Website** | Set to `https://vudirvp-sketch.github.io/live-char-guide/` | Free internal-link equity from a high-authority domain (github.com → your page) |
+| **About → Website** | Set to `https://vudirvp-sketch.github.io/` | Free internal-link equity from a high-authority domain (github.com → your page) |
 | **Releases** | Publish one Release per meaningful version (`9.2.6`), notes from `CHANGELOG.md` | Releases get indexed, appear in `/releases`, and are what awesome-lists/reviews link to. **Conflict to resolve:** the deploy workflow tags every deploy (`deploy-YYYYmmdd-HHMMSS`, D15) — that noise should stop (owner approval: workflow change) or the deploy tags should be excluded from the release narrative |
 | **Discussions** | Enable, seed 1–2 threads ("Покажите свою карточку", "Вопросы по SPINE") | Adds indexable UGC to the repo and gives the Reddit/Telegram audience a home that is not an issue tracker |
 | **README badges** | Version + license + Pages only | Static shields: `version-9.2.6`, `license-MIT`, `pages-live`. No vanity counters; a broken/fake badge costs more trust than it buys |
@@ -385,7 +385,7 @@ Cross-cutting rule: **distribution produces backlinks.** One genuine technical p
 | **P1-4** | Enable Discussions + 2 seed threads | Indexable UGC, a home for the audience | 0.5 h | **owner** |
 | **P1-5** | IndexNow: key file in repo root + build copy + CI step (§5.4) | Fast re-crawl on release | 2–3 h | agent, **workflow change needs owner approval** + secret |
 | **P1-6** | Chapter landing pages (§2C), start with Parts 4/3/7A/8/9 | 5–14 URLs, one intent each — the real ranking lever | 12–20 h + 4 h verify | agent, **owner decision** (navigation contract) |
-| **P2-1** | Fix `src/404.html` CTA: `/` → `https://vudirvp-sketch.github.io/live-char-guide/` | No dead exit for inbound dead links | 0.5 h | agent |
+| **P2-1** | Fix `src/404.html` CTA: `/` → `https://vudirvp-sketch.github.io/` | No dead exit for inbound dead links | 0.5 h | agent |
 | **P2-2** | Habr article (human-written, one in-context link) | Best RU backlink + qualified traffic | 6–10 h | **owner** |
 | **P2-3** | Reddit r/SillyTavernAI + r/LocalLLaMA posts (content-first) | Targeted traffic, backlinks | 2–4 h | **owner** |
 | **P2-4** | 1–2 awesome-list PRs after reading their `CONTRIBUTING.md` | Durable backlink from a curated list | 2–3 h | agent draft, owner submits |

@@ -14,7 +14,7 @@ for LLMs (12B–32B+). Single linear guide: Part 0 → Part 10 + 3 appendices.
 Stack: static HTML + CSS + vanilla JS ES modules. **No build framework, no TypeScript,
 no React/Vue/Svelte.**
 
-- **Live site:** https://vudirvp-sketch.github.io/live-char-guide/
+- **Live site:** https://vudirvp-sketch.github.io/
 - **Canonical version:** `9.2.6` (see `package.json` / `src/VERSION` / `data/character_schema.json`)
 - **Current iteration / task / next step:** [`STATUS.md`](./STATUS.md) — the only state owner
 

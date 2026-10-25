@@ -78,7 +78,7 @@ pnpm run validate:master    # Validate master files
 git add <specific files>    # Including regenerated root fallbacks
 git commit -m "iter N: <description>"
 git push origin main        # Trigger GitHub Actions → GitHub Pages
-# Online in ~30–60 s: https://vudirvp-sketch.github.io/live-char-guide/
+# Online in ~30–60 s: https://vudirvp-sketch.github.io/
 ```
 
 **What functionally deploys:** `src/master/*.html`, `src/shell/`, `src/assets/`, `data/*.json`, `parts/` (root fallbacks).
@@ -325,9 +325,9 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 
 | Resource | URL |
 |----------|-----|
-| Live guide | https://vudirvp-sketch.github.io/live-char-guide/ |
-| Repository | https://github.com/vudirvp-sketch/live-char-guide |
-| Issues | https://github.com/vudirvp-sketch/live-char-guide/issues |
+| Live guide | https://vudirvp-sketch.github.io/ |
+| Repository | https://github.com/vudirvp-sketch/vudirvp-sketch.github.io |
+| Issues | https://github.com/vudirvp-sketch/vudirvp-sketch.github.io/issues |
 | Navigation pattern source | https://github.com/vudirvp-sketch/poe2-regex-ru |
 
 ---
