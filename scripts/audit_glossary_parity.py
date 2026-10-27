@@ -2,16 +2,20 @@
 """
 audit_glossary_parity.py — mig-1 acceptance audit (iter 133, DEC-17/DEC-18).
 
-Verifies that the 45-entry unified glossary registry, the generated machine layer,
+Verifies that the 48-entry unified glossary registry, the generated machine layer,
 and the ratified migration-map dispositions are mutually consistent, and that the
 DEC-17 chain is actually implemented:
 
     docs/canon/glossary_registry.md  →  data/glossary.json (generated)  →  runtime/no-JS
 
 Checks:
-  1. Registry parses to exactly 45 entries (+ the standalone pattern source C-1).
+  1. Registry parses to exactly 48 entries: 45 migration-derived + 3 native
+     (iter 199: Script Tax, Pattern Matcher, Quality Grade carry `native-N` instead
+     of a migration row — the ratified map is NOT extended, so those three have no
+     C-/T- provenance and must not claim one).
   2. Migration-map coverage: every C-1..C-26 and every T-01..T-55 appears exactly
-     once in the registry provenance (sources) — 26 + 55 = 81 references.
+     once in the registry provenance (sources) — 26 + 55 = 81 references. The only
+     allowed non-map refs are the native-N additions.
   3. Disposition fidelity (map §5.1a/§5.1b → registry):
        - MERGED T-rows land in the registry entry carrying their map target C-n;
        - MOVED T-rows are standalone entries;
@@ -48,6 +52,8 @@ MASTER_DIR = REPO / "src" / "master"
 JSON_PATH = REPO / "data" / "glossary.json"
 VERSION_PATH = REPO / "src" / "VERSION"
 PACKAGE = REPO / "package.json"
+
+NATIVE_REFS = {"native-1", "native-2", "native-3"}
 
 RATIFIED_FLAG_HEADS = [
     "System Prompt / SP (системный промпт)",
@@ -157,8 +163,8 @@ def main():
     # ---------- 1. registry ----------
     registry_text = REGISTRY.read_text(encoding="utf-8")
     entries, standalone = parse_registry(registry_text)
-    if len(entries) != 45:
-        err(f"registry: expected 45 entries, parsed {len(entries)}")
+    if len(entries) != 48:
+        err(f"registry: expected 48 entries, parsed {len(entries)}")
     for e in entries:
         if "definition" not in e or "ref" not in e or "meta" not in e:
             err(f'registry: incomplete entry "{e.get("head")}"')
@@ -201,7 +207,7 @@ def main():
         err(f"map §5.1b: T-row set mismatch: {sorted(set(t_rows) ^ expected_t)}")
 
     missing = (expected_c | expected_t) - set(all_sources)
-    extra = set(all_sources) - (expected_c | expected_t)
+    extra = set(all_sources) - (expected_c | expected_t | NATIVE_REFS)
     if missing:
         err(f"registry provenance: missing map rows: {sorted(missing)}")
     if extra:
@@ -318,8 +324,8 @@ def main():
     if version != pkg:
         err(f"json: src/VERSION {version} != package.json {pkg}")
     terms = data.get("canonical_terms", [])
-    if len(terms) != 45:
-        err(f"json: expected 45 terms, got {len(terms)}")
+    if len(terms) != 48:
+        err(f"json: expected 48 terms, got {len(terms)}")
     reg_by_head = {e["head"]: e for e in entries}
     for t in terms:
         e = reg_by_head.get(t["term"])
@@ -367,7 +373,9 @@ def main():
           f"{sum(1 for e in entries if e['meta'].get('lang') == 'ru')}/"
           f"{sum(1 for e in entries if e['meta'].get('lang') == 'en')})")
     print(f"Map rows parsed: {len(c_rows)} C-rows, {len(t_rows)} T-rows")
-    print(f"Provenance refs: {len(all_sources)} (expected 81 = 26 C + 55 T)")
+    native_used = len(set(all_sources) & NATIVE_REFS)
+    print(f"Provenance refs: {len(all_sources)} "
+          f"(81 map = 26 C + 55 T, plus {native_used} native)")
     print(f"Master section ids: {len(ids)}; JSON terms: {len(terms)}; JSON version: {data.get('version')}")
     for n in notes:
         print(f"  note: {n}")

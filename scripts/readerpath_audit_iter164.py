@@ -291,8 +291,17 @@ def main():
             err(f"REFERENCE R1: no-JS glossary page links do not resolve: {sorted(bad)}")
     gloss = json.loads(read(REPO / "data" / "glossary.json"))
     terms = gloss.get("canonical_terms") or gloss.get("terms") or []
-    if len(terms) != 45:
-        err(f"REFERENCE R1: glossary.json carries {len(terms)} terms != 45")
+    # The registry is the source of truth for how many terms exist: compare against it
+    # rather than a fixed number (this check said "45" while the registry grew to 48).
+    reg_entries, in_fence = 0, False
+    for line in read(REPO / "docs" / "canon" / "glossary_registry.md").split("\n"):
+        if line.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if not in_fence and line.startswith("### "):
+            reg_entries += 1
+    if len(terms) != reg_entries:
+        err(f"REFERENCE R1: glossary.json carries {len(terms)} terms != {reg_entries} registry entries")
 
     # R2 — the lookup hop: every registry entry links a rendering section
     targets = set()
@@ -349,6 +358,7 @@ def finish():
                for t in (read(MASTER / f) for f in GUIDE_ORDER))
     master_secs = sum(len(re.findall(r'data-section="([^"]+)"', read(MASTER / f)))
                       for f in GUIDE_ORDER)
+    glossary_terms = len(json.loads((REPO / "data" / "glossary.json").read_text(encoding="utf-8"))["canonical_terms"])
     print("Reader-path audit (spec §8 stage 4, iter 164)")
     print("  modes: LEARN (entry/order/metadata/disclosure/completion) · "
           "BUILD (profile/assembly/budgets/completion) · "
@@ -370,7 +380,7 @@ def finish():
           "Part 10 completion); Build (§1.6 profile -> §7A.13/§7A.12 + Part 10 "
           "blueprints, all wiring targets resolve, value/checklist/template "
           "surfaces present, assembly checklist + Итого + 4 annotations); "
-          "Reference (runtime panel + no-JS page + 45-term chain, every "
+          f"Reference (runtime panel + no-JS page + {glossary_terms}-term chain, every "
           "anchor_id/cross_ref resolves, appendices A/E wired A->E with "
           "Appendix D canon-only and zero broken links).")
 

@@ -6,6 +6,14 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 199 — the glossary now covers the three systems it names (48 entries).
+
+- **Three native entries added:** `Класс качества (Quality Grade)` (§3.3), `Плата за письменность (Script Tax)` (§7A.12), `Сопоставитель паттернов (Pattern Matcher)` (§7A.4) — Russian heads with the English identifier in parentheses (DEC-16), each with aliases and a link to its owning section. Registry 45 → 48, `data/glossary.json` regenerated, no-JS page carries all three.
+- **Provenance is honest:** the new entries carry `native-1..3` rather than invented C-/T- rows — the migration map's dispositions are owner-ratified (DEC-17/18). **DEC-38** records the extension and the rule that adding a term to the ratified map stays an owner act.
+- **Hardcoded counts became measurements:** the glossary parity gate accepts the native class and expects 48; the reader-path audit compares `glossary.json` against the registry's own entry count and prints the measured term count.
+- **One prose number deleted:** §0.1 no longer prints «45 ключевых терминов» (false the day the registry grew) — «Ключевые термины собраны в панели «Глоссарий»».
+- **Verified:** build 61 sections · glossary 48 terms · tests **91/91** · validate 12 gates + 133 redirects · master 12/12, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
+
 ### iter 198 — the audit's last seven items: unmeasured claims, one budget range, and the missing Russian.
 
 - **Claims without evidence removed or repaired:** §1.1 «Разница измерима» → «разница в предсказуемости поведения»; §1.2 «собирается по всем главам» → «элементы разбираются по частям, целиком — в части 10»; §7A.1 no longer calls SP the only block the model always sees (§7B puts Description in every response) — it is the always-on instruction layer; §8's «~90% ошибок сборки» loses a percentage that had no sample behind it.

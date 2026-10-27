@@ -614,6 +614,26 @@
       "language_category": "ru"
     },
     {
+      "term": "Класс качества (Quality Grade)",
+      "abbreviation": null,
+      "aliases": [
+        "Quality Grade",
+        "класс качества",
+        "класс A",
+        "класс B",
+        "класс C"
+      ],
+      "definition": "Оценка Examples по шести критериям: три оценивают сами примеры, три — карточку в целом, но проявляются тоже через примеры. Классов три: A — целевой уровень, B — допустимо с доработкой, C — критическое отклонение. Не путать с уровнями CoT и слоями призрака: это разные шкалы.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p3_examples_rules",
+      "cross_refs": [
+        "#p3_examples_rules",
+        "#p3_voice_leak"
+      ],
+      "language_category": "ru"
+    },
+    {
       "term": "Ложь (LIE)",
       "abbreviation": null,
       "aliases": [
@@ -680,6 +700,23 @@
       "cross_refs": [
         "#p3_voice_leak",
         "#p8_worked_examples"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Плата за письменность (Script Tax)",
+      "abbreviation": null,
+      "aliases": [
+        "Script Tax",
+        "плата за письменность"
+      ],
+      "definition": "Надбавка в токенах за нелатинскую письменность: на словаре около 32 тысяч русский текст стоит примерно в полтора-два раза больше токенов, чем даёт счёт по символам; на словаре от 128 тысяч разница пренебрежимо мала. Практическое следствие: русская карточка идёт по нижней границе бюджета.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p7a_token_budget",
+      "cross_refs": [
+        "#p7a_token_budget",
+        "#p7a_system_prompt"
       ],
       "language_category": "ru"
     },
@@ -865,6 +902,23 @@
       "cross_refs": [
         "#p4_ghost",
         "#p4_spine_overview"
+      ],
+      "language_category": "ru"
+    },
+    {
+      "term": "Сопоставитель паттернов (Pattern Matcher)",
+      "abbreviation": null,
+      "aliases": [
+        "Pattern Matcher",
+        "сопоставитель паттернов"
+      ],
+      "definition": "Рабочая модель поведения RP-чата: карточка читается как набор образцов, и ответ воспроизводит ближайший образец, а не исполняет инструкцию буквально. Отсюда два следствия: примеры и якоря задают поведение сильнее описания, а две системы разметки дают два образца, между которыми модель переключается.",
+      "prohibited": [],
+      "deprecated": [],
+      "anchor_id": "p7a_format_lock",
+      "cross_refs": [
+        "#p7a_format_lock",
+        "#p7a_tone_frame"
       ],
       "language_category": "ru"
     },

@@ -12,7 +12,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 > **Canonical source for:** `data/glossary.json` — генерируется скриптом `scripts/generate_glossary.mjs` (первая стадия `pnpm run build`); сгенерированный файл никогда не правится руками.
 > **Runtime-поверхности:** панель глоссария (`src/shell/lazy-loader.js`) · no-JS страница (`scripts/build-unified.mjs` → `parts/glossary.html`).
 > **Замещает (миграция):** правившийся руками `data/glossary.json` (55 терминов) — диспозиции: `docs/research/migration_map_v2.md` §5.1 (DEC-17/DEC-18). **Единственная поверхность:** Appendix C (`appendix_glossary.md`, 25 статей v1) удалён в iter 177 (F-19/DEC-31) — второй набор терминов с другими заголовками не сохраняется.
-> **Создан:** iter 133 (2026-09-14). **Статей:** 45 (25 объединённых канонических + 20 продвинутых терминов машинного слоя).
+> **Создан:** iter 133 (2026-09-14). **Статей:** 48 — 45 миграционных (25 объединённых канонических + 20 продвинутых терминов машинного слоя) и 3 нативных, добавленных iter 199 без миграционного provenance (`native-1..3`): Script Tax, Pattern Matcher, Quality Grade — системы, которые гайд называет, но реестр не покрывал.
 
 ## Registry pattern (релокация entry-паттерна v1-приложения — migration_map_v2 C-1)
 
@@ -246,6 +246,13 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 → `[ref: part_01.md §1.2 — Базовые блоки карточки]`
 → `[meta: sources=T-06; lang=ru; home=p1_card_overview; aliases=Character Card, Card, Карточка, Карточка персонажа; deprecated=Персонаж]`
 
+### Класс качества (Quality Grade)
+
+**Класс качества (Quality Grade)** — оценка Examples по шести критериям: три оценивают сами примеры, три — карточку в целом, но проявляются тоже через примеры. Классов три: A — целевой уровень, B — допустимо с доработкой, C — критическое отклонение. Не путать с уровнями CoT и слоями призрака: это разные шкалы.
+
+→ `[ref: part_03.md §3.3 — Система уровней качества Examples]`
+→ `[meta: sources=native-1; lang=ru; home=p3_examples_rules; xrefs=p3_voice_leak; aliases=Quality Grade, класс качества, класс A, класс B, класс C]`
+
 ### Ложь (LIE)
 
 **Ложь (LIE)** — ложная установка, в которую верит персонаж, часто мешая получить NEED. Вытекает из GHOST как защитный механизм от боли. Оформляется как фраза в кавычках — то, что персонаж сказал бы о себе. LIE объясняет, почему существует FLAW: ложная установка заставляет действовать саморазрушительно.
@@ -266,6 +273,13 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 → `[ref: part_03.md §3.5 — Мульти-персонажные примеры]`
 → `[meta: sources=C-23+T-51; lang=ru; home=p3_voice_leak; xrefs=p8_worked_examples; aliases=Voice Bleed, Утечка голоса между персонажами, voice leak, утечка голоса; deprecated=voice leak]`
+
+### Плата за письменность (Script Tax)
+
+**Плата за письменность (Script Tax)** — надбавка в токенах за нелатинскую письменность: на словаре около 32 тысяч русский текст стоит примерно в полтора-два раза больше токенов, чем даёт счёт по символам; на словаре от 128 тысяч разница пренебрежимо мала. Практическое следствие: русская карточка идёт по нижней границе бюджета.
+
+→ `[ref: part_07a.md §7A.12 — Бюджет токенов (Token Budget)]`
+→ `[meta: sources=native-2; lang=ru; home=p7a_token_budget; xrefs=p7a_system_prompt; aliases=Script Tax, плата за письменность]`
 
 ### Поведенческий якорь (Behavioral Anchor)
 
@@ -329,6 +343,13 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 → `[ref: part_04.md §4.2 — Слои призрака (GHOST Layers, 3-tier)]`
 → `[meta: sources=C-10+T-19; lang=ru; home=p4_ghost; xrefs=p4_spine_overview; aliases=GHOST Layers, Призрачные слои; deprecated=ghost layers, призрачные слои, 3-tier GHOST]`
+
+### Сопоставитель паттернов (Pattern Matcher)
+
+**Сопоставитель паттернов (Pattern Matcher)** — рабочая модель поведения RP-чата: карточка читается как набор образцов, и ответ воспроизводит ближайший образец, а не исполняет инструкцию буквально. Отсюда два следствия: примеры и якоря задают поведение сильнее описания, а две системы разметки дают два образца, между которыми модель переключается.
+
+→ `[ref: part_07a.md §7A.4 — Фиксация формата (Format Lock)]`
+→ `[meta: sources=native-3; lang=ru; home=p7a_format_lock; xrefs=p7a_tone_frame; aliases=Pattern Matcher, сопоставитель паттернов]`
 
 ### Структурированная инъекция (Structured Inject)
 
