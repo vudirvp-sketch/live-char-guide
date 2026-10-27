@@ -6,6 +6,15 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 197 — the deferred half of the truth pass: budget self-claims, the 4K-fallback label, four divergences.
+
+- **§9.5 п.17** stopped claiming «✓ блоки в пределах лимитов; итог — в диапазоне 400–900» for the expert card (its Examples are full scenes, ~1 000–1 600 tokens against an «≤80 per example» orientir) and now reports what the card is. **Part 10's budget pointer** states the same and tells the reader to trim Examples when copying.
+- **Canon was five blocks behind master:** `part_10.md` still asserted «все четыре карточки уложены в нормативные лимиты … около 610 токенов» plus three per-card «в пределах нормативных лимитов» notes (Walter's also crediting him with `<ghost_layers>` and CoT he does not have). Deleted or replaced — canon↔master parity restored on the claims iter 196 removed from master.
+- **§10.4 is not a 4K-Fallback** and no longer says it is: the card uses CoT, Author's Note and Lorebook, which §7A.12 excludes from 4K-Fallback. The label now reads «16K+ / API; OCEAN — умеренный учебный вариант».
+- **One fact, one wording:** Elena has six anchors (was «три базовых»); the Vyshcherblenny GHOST is «Был архивариусом. Впрыснул себе документ — начал распадаться» at all four sites (the §4.2/§4.6 «Брошен в архиве» variant is gone); §5.1's rule no longer calls 1–2 poles a universal maximum while its table allows 3 at 8K, and its heading names the real failure — three or more extremes *without* a SPINE link.
+- **Hygiene:** the doubled phrase in `part_06` and the English adverb «progressively» inside Russian prose; `readerpath_audit_iter164.py` now measures its counts instead of printing a hardcoded «65/65» (prints 59/59).
+- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · master 12/12, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
+
 ### iter 196 — truth pass: the first screen, the budgets, and every surface that printed a structure count.
 
 - **§0.1 no longer lies about its own order.** «Главы идут в том же порядке, в котором вы собираете карточку» is gone: render order is layers (behaviour → psychology → assembly), SP is last because it is a container, and build order is a different thing (§0.2/§7A.13). The skeleton is now the *minimal* card it claims to be — 4 blocks + anchors, two anti-godmoding lines, 2 `<START>`, greeting — a subset of §10.1.

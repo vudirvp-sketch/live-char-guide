@@ -5,6 +5,25 @@
 
 ---
 
+Task ID: iter-197-truth-pass-2
+Agent: lead
+Task: owner: «так коммить все и продолжай работу если осталась» — the deferred half of the same audit (items #15, #16, #18, #19, #20) plus the two hygiene findings. Content + canon, paired.
+
+BASE: 6c8a7609
+
+Work Log:
+- 0: Preflight — worktree clean after the iter-196 commit. Measured first: all four cards' blocks in characters (SP 604/868/1065/811; Description 431/653/1491/1400; Examples 1568/2166/5115/3949; Greeting 370/311/375/354) so the budget claims could be replaced by what is actually there instead of another guess.
+- 1: **§9.5 п.17** no longer reports «✓ блоки в пределах лимитов; итог — в диапазоне 400–900» (false for the expert card: Examples are 987–1580 tokens against an «≤80 per example» orientir, and the total is several times the Elena profile). It now states the measured shape and why: Description in limit, SP and Greeting at the upper edge, Examples are full scenes, total above the Elena profile by design (16K+ card with CoT, Author's Note, Lorebook).
+- 2: **Part 10 budget pointer** gained the same disclosure (worked cards print full scenes; trim Examples when copying).
+- 3: **Canon was five blocks behind master** and still carried pass-1's claims: `part_10.md` «Все четыре карточки уложены в нормативные лимиты… около 610 токенов до якорей», Elena's per-card «около 610… в пределах нормативных лимитов блоков», and three identical «Бюджет токенов: в пределах нормативных лимитов…» notes for Walter/Omnis/Vyshcherblenny (Walter's also claiming `<ghost_layers>` and CoT he does not have). Replaced with the honest paragraph / deleted — canon↔master parity restored on every claim pass 1 removed from master.
+- 4: **§10.4 label** — «4K-fallback — учебный профиль» (index row), «учебный 4K-профиль» («что НЕ копировать») and «учебный профиль 4K-fallback» (note under the card) all removed: the card uses CoT, Author's Note and Lorebook, which §7A.12 excludes from 4K-Fallback. Now: «16K+ / API; OCEAN — умеренный учебный вариант» + «Это не 4K-Fallback: …».
+- 5: **Single-fact divergences:** Elena «три базовых якоря» → «шесть якорей — три базовых и три FLAW-linked» (card has 6, §9.5 counts 6); Vyshcherblenny GHOST unified at four sites to the card's «Был архивариусом. Впрыснул себе документ — начал распадаться.» (was «Брошен в архиве, воспитан документами» in §4.2 and §4.6); §5.1 RULE «рекомендация и максимум в любом контексте» → «рекомендация; жёсткий потолок задаёт бюджет контекста» (its own table allows 3 at 8K) and the heading now names the real condition «при трёх и больше экстремумах без SPINE-связки».
+- 6: **Hygiene:** `part_06` duplicated phrase «действует всегда как микро-цепочка рассуждений.» ×2 in one sentence + English adverb «progressively» in Russian prose; `readerpath_audit_iter164.py` printed a hardcoded «65/65 difficulty metadata» — now measured in `finish()`, prints **59/59** (12 parts; appendices have no difficulty comments, and the L3 equality check confirms 59 == 59).
+- 7: **Gates re-pointed, never weakened:** sync `P0-16` needle follows the reworded §5.1 RULE — 87/87 kept. One self-inflicted defect caught and fixed in-iteration: the first attempt put the f-string in `finish()` while `diff`/`master_secs` are locals of `main()` → `NameError`; recomputed from `MASTER`/`GUIDE_ORDER` inside `finish()`.
+- 8: **Verification (full battery after the last edit):** build **61 sections** / 462 KB · hash `8b3a917d` (unchanged — content-only) · tests **91/91** · validate 12 gates + **133 redirects** · validate:master **12/12, 0 warnings** · sync **87/87** · 8 parity gates PASS · reader-path PASS (measured 59/59) · qa csp/bundle/contrast/seo PASS · doc-versions exit 0 (7 pre-existing, none in touched files) · english **1** / syntax **224** (baselines exact) · lint 0 · version:check 9.2.6 · drift informational exit 0 · 18 artifact assertions (7 strings present, 11 absent) in `dist/index.html` + root fallback.
+
+Verification: green (step 8).
+
 Task ID: iter-196-truth-pass
 Agent: lead
 Task: owner: «продолжай работу» on the audit package `_scratch/audit-2026-10-28/REPORT.md` — two passes in one delivery. Pass 1: the first screen (§0.1 order paragraph, honest minimal-card skeleton, «голос только здесь») and the budget class (exact totals → ranges, one 4K-Fallback, §7A.13 retitled). Pass 2: the remaining truth items — Tone Frame ×4, AP-7 exception, Lorebook §10.4 vs §7B, three minimum-card definitions, 6w5 at A=38, Part 3 forward-ref, §9.7 «готовые к копированию» — plus every surface that printed a structure count (README, meta, AGENTS/NAV, STATUS link inventory, content_map, V4 chapter map).

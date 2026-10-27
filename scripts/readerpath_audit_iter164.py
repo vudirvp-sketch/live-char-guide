@@ -343,6 +343,12 @@ def main():
 
 
 def finish():
+    # Counts for the PASS summary are measured here, not hardcoded: the message
+    # used to claim "65/65" long after the corpus moved to 61 sections.
+    diff = sum(len(re.findall(r"<!--\s*difficulty:\s*(?:BASIC|INTERMEDIATE|EXPERT)\s*-->", t))
+               for t in (read(MASTER / f) for f in GUIDE_ORDER))
+    master_secs = sum(len(re.findall(r'data-section="([^"]+)"', read(MASTER / f)))
+                      for f in GUIDE_ORDER)
     print("Reader-path audit (spec §8 stage 4, iter 164)")
     print("  modes: LEARN (entry/order/metadata/disclosure/completion) · "
           "BUILD (profile/assembly/budgets/completion) · "
@@ -360,7 +366,7 @@ def finish():
         sys.exit(1)
     print("\nPASS — every mode travels entry -> backbone -> completion on the "
           "built corpus: Learn (TOC/Part-0 entry, 12-part linear order == "
-          "manifest == render order, 65/65 difficulty metadata (incl. Part 0), F6 disclosure, "
+          f"manifest == render order, {diff}/{master_secs} difficulty metadata (incl. Part 0), F6 disclosure, "
           "Part 10 completion); Build (§1.6 profile -> §7A.13/§7A.12 + Part 10 "
           "blueprints, all wiring targets resolve, value/checklist/template "
           "surfaces present, assembly checklist + Итого + 4 annotations); "
