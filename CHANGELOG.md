@@ -6,6 +6,16 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 196 — truth pass: the first screen, the budgets, and every surface that printed a structure count.
+
+- **§0.1 no longer lies about its own order.** «Главы идут в том же порядке, в котором вы собираете карточку» is gone: render order is layers (behaviour → psychology → assembly), SP is last because it is a container, and build order is a different thing (§0.2/§7A.13). The skeleton is now the *minimal* card it claims to be — 4 blocks + anchors, two anti-godmoding lines, 2 `<START>`, greeting — a subset of §10.1.
+- **Budgets are ranges, not fake totals.** `510`/`610`/`604`/`320`, «все четыре уложены в лимиты», four Part-10 budget blocks (incl. Walter's false justification) and Appendix E's «Итого 850–1450» deleted; one 4K-Fallback (SP 80–100 · Desc 150–200 · 2×Examples 130–160 · Greeting 50–80) stated identically in four places; §7A.13 retitled to what it does — six steps of SP + Description assembly — and closes on 400–900.
+- **Tone Frame** in all four cards is the §7A.3 form (`Tone Frame: Tone:` → `Tone Frame:`). **AP-7** no longer says «без исключений» against §7A.6's documented Ollama/LM Studio hardcode. **§10.4 Lorebook** moved into §7B ranges and §9.5 п.13 now checks parameters, not «no conflicts».
+- **One definition per claim:** minimum card (§1.4) vs its build path (§0.2) vs SP completeness (§7A.1); Elena's 6w5 names its §5.4 matrix disagreement (A +0.6 expected, 38 actual); §3.3 flags the Part 4 forward reference; §9.7 says «карточки-шаблоны» and points to §7A.2.
+- **Surfaces:** README/meta/promotion — **12 parts · 61 sections** (was 10 · 62) and the route «0 → 10, in layers»; STATUS 132 → **133 redirects** and a measured link inventory (3 Part 7A links are cross-chapter — the «no cross-chapter routing» claim was false); AGENTS/NAV 2 rendered appendices; content_map totals + §-numbering holes documented; V4 map «build order = card block order» retired.
+- **Gates re-pointed, not weakened:** sync 87/87 (2 needles follow the rewritten canon sentences), `verify-prerender` 62 → 61.
+- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · master 12/12, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
+
 ### iter 195 — Part 5 rebuilt: **«Психология: OCEAN и типология» is 4 sections with one reader job each — one notation, no §-routing, no descriptive English, 3 RULE instead of 6 in the OCEAN section.**
 
 - **Distribution, not wording.** Part 5 carried 2 536 rendered words over 5 sections, `p5_ocean_basics` alone 1 124 / 11 headings / 6 tables / 6 RULE / 4 §-routes (Parts 4/6/9 sit at 269/140/383 words and ≤2 RULE). Sentence length was already house-grade (avg 16.2 = Part 9's).

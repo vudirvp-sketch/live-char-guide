@@ -4,7 +4,7 @@ Status: **applied 2026-10-26** via `gh api` (reversible). Everything here is own
 
 ## 1. Description (APPLIED)
 
-> Инженерный гайд по карточкам персонажей для LLM: SPINE → якоря поведения → голос → системный промпт. Конвейер сборки карточки, а не сборник промптов: 10 частей, 62 раздела, 4 полные карточки-примера. SillyTavern-совместимо, 12B–32B+.
+> Инженерный гайд по карточкам персонажей для LLM: SPINE → якоря поведения → голос → системный промпт. Конвейер сборки карточки, а не сборник промптов: 12 частей, 61 раздел, 4 полные карточки-примера. SillyTavern-совместимо, 12B–32B+.
 
 233 / 350 chars. Structure on purpose: (1) what it is, (2) what makes it different, (3) concrete size signal, (4) compatibility keywords that people actually type.
 

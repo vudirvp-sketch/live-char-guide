@@ -445,7 +445,7 @@ CHECKS = [
     (
         "P2-3-keep-09",
         "part_09.html",
-        '<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки',
+        '<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные карточки-шаблоны',
         "part_09 §9-end: Bridge to Part 10 KEPT with bridge-paragraph CSS class (iter 47 P2-3 fix)",
     ),
 
@@ -456,7 +456,7 @@ CHECKS = [
     (
         "P2-7-syn-01",
         "part_01.html",
-        "<p>Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
+        "<p>Если в карточке есть SP, Description, Examples, Greeting — она уже работает: это и есть минимальная рабочая карточка, минимум — четыре блока. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>",
         "part_01 §1-end: Synthesis paragraph added (iter 47 P2-7 fix, replaces removed resume section)",
     ),
     (

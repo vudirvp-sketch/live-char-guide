@@ -1,7 +1,7 @@
 # Content Ownership Map — Live Character Guide v9.2
 
 > Version: 9.2.6 (canonical — `package.json` + `src/VERSION` + `data/character_schema.json`)
-> Last Updated: 2026-10-25 (iter 190 — v4-9 chapter 9: Parts 8/9 link-free, 62 rendering sections)
+> Last Updated: 2026-10-28 (61 rendering sections after iter 195's §5.4 merge; §0.1 and §3.4 rows corrected to what those sections now say)
 > Status: Canonical Reference (Canon mirror)
 
 ---
@@ -27,7 +27,7 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| Как читать этот гайд | `p0_how_to_read` | §0.1 | Orientation | Что читатель получит, три маршрута чтения, карта модулей, скелет карточки Елены как цель, легенда меток (iter 171: rewritten as the reader on-ramp — contributor conventions removed) |
+| Как читать этот гайд | `p0_how_to_read` | §0.1 | Orientation | Что читатель получит: таблица 5 блоков с колонкой «Где учится», порядок чтения (слоями) и отдельно порядок сборки, два маршрута («собираю сейчас» → §0.2; «карточка не работает» → часть 9), минимальная карточка Елены (4 блока + якоря), легенда 4 меток |
 | TL;DR / Quick Start | `p0_tldr_quick_start` | §0.2 | Quick start | Минимальный quick-start для нового читателя; карточка = 5 блоков (4 обязательных + Lorebook) |
 
 ### Part 1: Basic Blocks (Базовые блоки) — `docs/canon/part_01.md`
@@ -58,7 +58,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Voice Isolation | `p3_voice_isolation` | §3.1 | Rule+Hierarchy | Core principle |
 | Иерархия влияния | `p3_influence_hierarchy` | §3.2 | Reference | Недавний чат ≫ Examples > Greeting > AN > Description > SP (SP слабейший, ~0–2%); канонический владелец значений + проза «Хранилище ≠ Влияние». Одна числовая поверхность — таблица (E07 = визуализация, виджет = панель управления: переключение модели + экспорт; iter 180) |
 | Правила Examples + качество | `p3_examples_rules` | §3.3 | Rules+Classification | Как писать Examples + quality tiers и демонстрация A-vs-C (absorbed `p3_examples_quality`, v3 S4a iter 174) |
-| Greeting (ссылка) | `p3_greeting_ref` | §3.4 | Reference | Forward reference → Part 7B |
+| Проверка голоса | `p3_greeting_ref` | §3.4 | Checklist | Семь пунктов проверки Examples перед переходом к Greeting (id остался от прежней ссылки на Part 7B — сам forward reference убран) |
 | Voice Leak + крайние случаи | `p3_voice_leak` | §3.5 | Anti-pattern+Examples | Выщербленный — пример ошибки; joker case (absorbed `p3_joker_case`) + мульти-персонаж/Voice Bleed (absorbed `p3_multi_char`) |
 
 ### Part 4: SPINE Framework (СПИН) — `docs/canon/part_04.md`
@@ -190,9 +190,9 @@ This document is the **single source of truth** for "where does concept X live."
 | Appendix A (MBTI) | `appendix_mbti.md` | 1 | iter 18 | ✅ MIGRATED |
 | Appendix E (Model, Context & Params) | `appendix_model_params.md` | 1 | iter 172 | ✅ CREATED (v3 stage 2; absorbs Appendix B) |
 | Appendix D (Character Map, conceptual) | `appendix_character_map.md` | 0 master / 1 canon § | iter 38 | ✅ CANON-ONLY (no master artifact) |
-| **Total** | | **62 master sections** (65 − v4-9's three absorbed ids; 69 − Appendix C, deleted iter 177) | | **Canon COMPLETE** |
+| **Total** | | **61 master sections** (62 − iter 195's §5.4 merge; 65 − v4-9's three absorbed ids; 69 − Appendix C, deleted iter 177) | | **Canon COMPLETE** |
 
-> **Counting convention (verified iter 117; re-verified iter 190):** "Sections" = `data-section` elements rendered in `src/master/*.html` — **62** after v3 (S3 built Parts 8/9/10 down; S4a de-duplicated Parts 2/3/4/5/6; S4b/F-19 deleted Appendix C) and v4 (chapters 0–9: 65 → 62, the retired ids are legacy redirects). Canon declares **63** IDs: the 62 rendering ones + the canon-only `appendix_character_map` (H1-level, no master HTML by design). The term layer is `glossary_registry.md` → generated `data/glossary.json` → runtime panel + no-JS page (Appendix C deleted iter 177, F-19/DEC-31). Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`.
+> **Counting convention (verified iter 117; re-verified iter 190):** "Sections" = `data-section` elements rendered in `src/master/*.html` — **61** after v3 (S3 built Parts 8/9/10 down; S4a de-duplicated Parts 2/3/4/5/6; S4b/F-19 deleted Appendix C) and v4 (chapters 0–9: 65 → 62, the retired ids are legacy redirects). Canon declares **62** IDs: the 61 rendering ones + the canon-only `appendix_character_map` (H1-level, no master HTML by design). The term layer is `glossary_registry.md` → generated `data/glossary.json` → runtime panel + no-JS page (Appendix C deleted iter 177, F-19/DEC-31). Canon→master sync audit: `python3 scripts/audit_canon_master_sync.py`. **Section numbers keep their historical holes** where a section was absorbed — there is no §1.5, §7A.11, §9.2 or §9.4 — and they are deliberately not renumbered: navigate by `data-section` id, not by the number.
 
 ---
 

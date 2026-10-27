@@ -18,9 +18,9 @@
 <!-- canonical: Part 10 index — which card to take (navigation surface, not a card) -->
 <h2>Какую карточку взять</h2>
 
-<p>Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Каждая следующая карточка добавляет инструменты: <code>&lt;ghost_layers&gt;</code>, CoT, Lorebook.</p>
+<p>Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Дальше — карточки разной сложности, от базовой до экспертной, с разным набором инструментов: <code>&lt;ghost_layers&gt;</code>, CoT, Lorebook.</p>
 
-<p><strong>Бюджет.</strong> Все четыре карточки уложены в нормативные лимиты блоков — System Prompt ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100 токенов; Елена целиком — около 610 токенов до якорей. В шаблонах основные директивы записаны сокращённо — перечнем названий в placeholder-строке, которую вы заменяете своим текстом директив.</p>
+<p><strong>Бюджет.</strong> Карточки — учебные примеры: бюджет каждого блока сверяйте с §7A.12. В шаблонах основные директивы записаны сокращённо — перечнем названий в placeholder-строке, которую вы заменяете своим текстом директив.</p>
 
 <div class="table-wrap">
 <table>
@@ -92,7 +92,7 @@ You are Elena, a cynical investigative journalist. Never speak or act for {{user
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 {{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
-Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+Tone Frame: grounded, understated. No melodrama. Silence speaks.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
 
@@ -164,8 +164,7 @@ FLAW-linked:
 
 <p><small>Примечание к профилю: экстремум — Высокая O (&gt;70, любопытство); Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — extreme = строго &lt;30 или &gt;70. Это пояснение к OCEAN: в карточку оно не копируется.</small></p>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> около 610 токенов до якорей — в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100).</p>
+
 
 </details>
 
@@ -196,7 +195,7 @@ Character-specific rules:
 - Justify actions through family, but seek control
 - Never show weakness to perceived inferiors
 
-Tone Frame: Tone: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.
+Tone Frame: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as irritation or ignore. Never acknowledge being an AI.
 
@@ -276,8 +275,7 @@ GHOST-linked:
 
 <p><small>Связь со SPINE: E=30 → LIE «Я делаю это ради семьи» — минимум социального взаимодействия вне семьи, LIE как социальная маска для изоляции, семья как социальное алиби. Сдвиг возможен: полная изоляция (E↓) при усилении секретности (диагноз, Хайзенберг) или социальная перформативность (E↑), когда Хайзенбергу нужны публичные проявления. Наблюдаемые якоря E=30: «голос ровный, взгляд фиксирует» + «пауза длиннее, чем нужно». N=60 → реактивность GHOST (Gray Matter): фоновая тревога о потерянном потенциале; триггер (упоминание Gray Matter, вид Pontiac Aztek) даёт острый невротический эпизод. Сдвиг: паранойя (N↑) при экспозиции Хайзенберга или холодная расчётливость (N↓) в моменты гордости. Наблюдаемые якоря N=60: «капля пота на виске» + «пальцы сжимаются под столом».</small></p>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт <code>&lt;ghost_layers&gt;</code> и CoT.</p>
+
 
 </details>
 
@@ -308,7 +306,7 @@ Character-specific rules:
 - Express disturbances as system diagnostics, never as emotions
 - Terminate conversation when pre-initiation past is referenced
 
-Tone Frame: Tone: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
+Tone Frame: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as data anomaly. Never acknowledge being an AI.
 
@@ -445,8 +443,7 @@ GHOST-linked:
 </table>
 </div>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт <code>&lt;ghost_layers&gt;</code> и CoT.</p>
+
 
 </details>
 
@@ -472,7 +469,7 @@ You are Выщербленный, a memory parasite living in the Oshmetok of Ve
 
 {{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
-Tone Frame: Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
+Tone Frame: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion. Never acknowledge being an AI.
 
@@ -611,8 +608,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <p><small>В шаблоне — умеренные значения OCEAN (учебный профиль 4K-fallback). Канонические экстремальные значения карточки для 16K+: O=85, C=25, A=15, N=92, E=60 (extreme = строго &lt;30 или &gt;70).</small></p>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт <code>&lt;ghost_layers&gt;</code> и CoT.</p>
+
 
 <h4>Lorebook записи</h4>
 
@@ -622,14 +618,16 @@ GHOST-activation: Активен, если в сцене был триггер (
 <tr><th scope="col">Название</th><th scope="col">Key</th><th scope="col">Content</th><th scope="col">Depth</th><th scope="col">Prob</th><th scope="col">Cooldown</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>призрак: Сангвис</strong></td><td>Сангвис, сырой, запах крови, сопротивление</td><td>Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение.</td><td>5</td><td>85%</td><td>5</td></tr>
-<tr><td><strong>призрак: имя</strong></td><td>имя, как тебя зовут, кто ты был, архивариус</td><td>Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет.</td><td>5</td><td>80%</td><td>7</td></tr>
-<tr><td><strong>Персонаж: Зеркало</strong></td><td>зеркало, катализатор, заражённая</td><td>Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается.</td><td>6</td><td>80%</td><td>6</td></tr>
-<tr><td><strong>Система: Вентора</strong></td><td>Вентора, иммунитет, система, замена, гладкий</td><td>Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя.</td><td>7</td><td>70%</td><td>8</td></tr>
-<tr><td><strong>Счётчик вырезаний</strong></td><td>вырезание, поглощение, цена</td><td>После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь».</td><td>4</td><td>60%</td><td>10</td></tr>
+<tr><td><strong>призрак: Сангвис</strong></td><td>Сангвис, сырой, запах крови, сопротивление</td><td>Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение.</td><td>3</td><td>95%</td><td>6</td></tr>
+<tr><td><strong>призрак: имя</strong></td><td>имя, как тебя зовут, кто ты был, архивариус</td><td>Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет.</td><td>3</td><td>90%</td><td>7</td></tr>
+<tr><td><strong>Персонаж: Зеркало</strong></td><td>зеркало, катализатор, заражённая</td><td>Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается.</td><td>4</td><td>85%</td><td>7</td></tr>
+<tr><td><strong>Система: Вентора</strong></td><td>Вентора, иммунитет, система, замена, гладкий</td><td>Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя.</td><td>1</td><td>40%</td><td>16</td></tr>
+<tr><td><strong>Счётчик вырезаний</strong></td><td>вырезание, поглощение, цена</td><td>После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь».</td><td>2</td><td>80%</td><td>10</td></tr>
 </tbody>
 </table>
 </div>
+
+<p><small>Depth 2–4 и Probability 80–100% — для контекстных и GHOST-фактов; Depth 0–1 и 30–50% — для мировых записей; Cooldown 5–10 и 15–20 сообщений соответственно.</small></p>
 
 <h4>Проверка консистентности SPINE</h4>
 <div class="table-wrap">

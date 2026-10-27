@@ -91,7 +91,7 @@ BUILD_PIPELINE_RETIRED_LINKS = {
     "p5_ocean_basics",
 }
 BUILD_PIPELINE_CONTENT = ("1. Блок идентичности", "2. Анти-годмодинг", "3. Директивы и обвязка",
-                          "4. SPINE", "5. CoT", "6. Проверка бюджета", "~610", "400–900")
+                          "4. SPINE", "5. CoT", "6. Проверка бюджета", "400–900")
 BUILD_BUDGET_CONTENT = ("System Prompt", "Description", "Examples", "Greeting", "Anchors",
                         "Что помещается в 4K", "4K-Fallback", "400–900")
 

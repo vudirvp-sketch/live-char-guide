@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
-<!-- Build: 517d2245 -->
-<!-- Generated: 2026-10-27T09:26:15.316Z -->
+<!-- Build: 8b3a917d -->
+<!-- Generated: 2026-10-27T20:26:43.786Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -11,7 +11,7 @@
   <!-- SEO head (see docs/PROMOTION_SEO.md §3). Language: Russian — matches lang="ru"
        and the audience (DEC-16). https://vudirvp-sketch.github.io/live-char-guide/ is substituted at build time from
        scripts/site-config.mjs, so a future origin move is a one-line change. -->
-  <meta name="description" content="Как собрать карточку персонажа для LLM: SPINE, якоря поведения, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика. SillyTavern, 12B–32B+, 62 раздела.">
+  <meta name="description" content="Как собрать карточку персонажа для LLM: SPINE, якоря поведения, изоляция голоса, CoT, системный промпт, анти-паттерны и диагностика. SillyTavern, 12B–32B+, 61 раздел.">
   <link rel="canonical" href="https://vudirvp-sketch.github.io/live-char-guide/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Live Character Guide">
@@ -106,32 +106,33 @@
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th scope="col">Блок</th><th scope="col">Что в нём</th></tr>
+<tr><th scope="col">Блок</th><th scope="col">Что в нём</th><th scope="col">Где учится</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>System Prompt</strong></td><td>Кто персонаж, чего он не делает, как думает, в каком формате отвечает</td></tr>
-<tr><td><strong>Description</strong></td><td>Факты, психология (SPINE, OCEAN), физическое описание</td></tr>
-<tr><td><strong>Examples</strong></td><td>Диалоговые примеры и поведенческие якоря</td></tr>
-<tr><td><strong>Greeting</strong></td><td>Первое сообщение: место, время, тон</td></tr>
-<tr><td><strong>Lorebook</strong></td><td>База знаний с триггерами — только если фактов не хватает Description</td></tr>
+<tr><td><strong>System Prompt</strong></td><td>Кто персонаж, чего он не делает, как думает, в каком формате отвечает</td><td>7A</td></tr>
+<tr><td><strong>Description</strong></td><td>Факты, психология (SPINE, OCEAN), физическое описание</td><td>4–5 (SPINE, OCEAN), 7A.9 (XML)</td></tr>
+<tr><td><strong>Examples</strong></td><td>Диалоговые примеры и поведенческие якоря</td><td>2 (якоря), 3 (примеры)</td></tr>
+<tr><td><strong>Greeting</strong></td><td>Первое сообщение: место, время, тон</td><td>7B</td></tr>
+<tr><td><strong>Lorebook</strong></td><td>База знаний с триггерами — только если фактов не хватает Description</td><td>7B</td></tr>
 </tbody>
 </table>
 </div>
 
 <p>Обязательных блоков четыре. Lorebook добавляется, когда персонажу нужно больше фактов, чем помещается в Description.</p>
 
-<p><strong>В каком порядке читать.</strong> Главы идут в том же порядке, в котором вы собираете карточку: System Prompt, Description, Examples, Greeting, Lorebook — потом бюджет, проверка и готовые примеры. Каждая следующая глава опирается на предыдущую, поэтому по порядку быстрее, чем вразнобой.</p>
+<p><strong>Порядок чтения.</strong> Он в оглавлении: части идут слоями — сначала поведение (якоря, голос), потом психология (SPINE, OCEAN), и только затем сборка. System Prompt стоит после них не случайно: это контейнер, и его содержание выводится из предыдущих частей. Порядок сборки — другой: он в §0.2 и §7A.13.</p>
 
 <ul>
-<li><strong>Собираете прямо сейчас.</strong> Идите подряд, от System Prompt к Greeting; глава про бюджет ответит, сколько это стоит.</li>
-<li><strong>Карточка уже не работает.</strong> Начните с раздела «Диагностика»: от симптома к причине и исправлению.</li>
+<li><strong>Собираете прямо сейчас.</strong> Начните с §0.2: шесть шагов минимальной карточки. Дальше идите по частям подряд — их порядок в оглавлении.</li>
+<li><strong>Карточка уже не работает.</strong> Начните с части 9 «Диагностика и тестирование»: от симптома к причине и исправлению.</li>
 </ul>
 
-<p><strong>Вот к чему мы идём.</strong> Ниже — скелет карточки Елены, которую собираем по ходу: та же карточка целиком и с пометками — в конце гайда.</p>
+<p><strong>Вот к чему мы идём.</strong> Ниже — минимальная версия карточки Елены: четыре обязательных блока и якоря на месте. Та же карточка целиком — в §10.1.</p>
 
 <pre><code>[SYSTEM]
-You are Elena, a cynical investigative journalist. Never speak or act for {{user}}.
-Tone Frame: grounded, understated. No melodrama.
+You are Elena, a cynical investigative journalist.
+Never speak or act for {{user}}.
+{{user}}'s inner state is inaccessible; respond only to observable actions and words.
 
 [DESCRIPTION]
 &lt;identity&gt;Елена — журналистка-расследователь. Циничная, недоверчивая.&lt;/identity&gt;
@@ -150,7 +151,24 @@ GHOST: Предательство редактора — история, кот�
 "Ты сказал что? Повтори."
 *голос ниже, почти ровный*
 "Мне не нужна твоя версия. Мне нужна правда."
-&lt;/START&gt;</code></pre>
+&lt;/START&gt;
+
+&lt;START&gt;
+Редакция. Дождь барабанил по стеклу. Елена склонилась над распечаткой.
+"Опять. Третий день подряд."
+*отложила ручку, не поворачиваясь*
+&lt;/START&gt;
+
+&lt;anchors&gt;
+- Когда кто-то лжёт → прищуривается, молчит → напряжение в челюсти
+- Когда стресс → трёт шею → головная боль
+- Когда радость → редкая улыбка → краснеет
+&lt;/anchors&gt;
+
+[GREETING]
+Кабинет редакции. 2 часа ночи. Елена склонилась над столом — перед ней три распечатки.
+*не поднимая головы*
+"Если по делу — говори."</code></pre>
 
 <p><strong>Обозначения.</strong> В тексте — четыре метки:</p>
 
@@ -176,15 +194,15 @@ GHOST: Предательство редактора — история, кот�
 <!-- difficulty: BASIC -->
 <h2>Быстрый старт: минимальная карточка</h2>
 
-<p>Шесть шагов. Для первой карточки больше не нужно ничего.</p>
+<p>Шесть шагов: четыре блока карточки, якоря (они живут внутри Description) и самопроверка. Для первой карточки больше не нужно ничего.</p>
 
 <ol>
 <li><strong>System Prompt.</strong> Кто персонаж одним предложением, плюс две строки анти-годмодинга: запрет и замена запрету.</li>
 <li><strong>Description.</strong> <code>&lt;identity&gt;</code> и <code>&lt;spine&gt;</code>: по одной строке на WANT, NEED, FLAW, LIE, GHOST.</li>
-<li><strong>Examples.</strong> 2–3 блока <code>&lt;START&gt;</code>: голос персонажа и хотя бы одна физическая реакция. Голос задаётся только здесь.</li>
+<li><strong>Examples.</strong> 2–3 блока <code>&lt;START&gt;</code>: голос персонажа и хотя бы одна физическая реакция. Голос задаётся в Examples и Greeting.</li>
 <li><strong>Greeting.</strong> Сенсорный якорь → тело дефекта → реплика → крючок.</li>
 <li><strong>Якоря.</strong> 3–5 правил «триггер → действие → цена» в <code>&lt;anchors&gt;</code>.</li>
-<li><strong>Проверка.</strong> PP = 0, голос только в Examples, цена в каждом якоре, одна система разметки, анти-годмодинг на месте.</li>
+<li><strong>Проверка.</strong> PP = 0, голос только в Examples и Greeting, цена в каждом якоре, одна система разметки, анти-годмодинг на месте.</li>
 </ol>
 
 <p>Три принципа, на которых это держится: якорь без наблюдаемой цены — не якорь; голос задаётся Examples и Greeting, а не описанием; психология живёт в Description и никогда в System Prompt.</p>
@@ -512,7 +530,7 @@ GHOST: Предательство редактора — история, кот�
 <p>✗ <em>«Елена — любопытная и творческая журналистка, склонна к конфликту и сарказму, тревожная и реактивная…»</em> — нарратив: токены потрачены, структурной ясности нет.</p>
 </div>
 
-<p>Если в карточке есть SP, Description, Examples, Greeting — она уже работает. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>
+<p>Если в карточке есть SP, Description, Examples, Greeting — она уже работает: это и есть минимальная рабочая карточка, минимум — четыре блока. Три правила (якорь = T→A→P, голос только в Examples, психология только в Description) — единственное, что нельзя нарушать.</p>
 </section>
 
 <section data-section="p1_prebuild_checklist" id="p1_prebuild_checklist" data-toc-nav>
@@ -539,7 +557,7 @@ GHOST: Предательство редактора — история, кот�
 </div>
 
 <div class="callout rec">
-<p><strong>РЕКОМЕНДАЦИЯ:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook». Это конфигурация Елены: пять чисел OCEAN, одна строка на элемент SPINE, три якоря; бюджет такого профиля — около 510 токенов. Не пытайтесь сразу строить экспертную карточку: перегрузка Description и утечка голоса — самые частые последствия.</p>
+<p><strong>РЕКОМЕНДАЦИЯ:</strong> Если вы впервые собираете карточку — выбирайте «12B / 8K / Простая / 1 GHOST / без CoT / без Lorebook». Это конфигурация Елены: пять чисел OCEAN, одна строка на элемент SPINE, три базовых якоря. Бюджет профиля — ориентир 400–900 токенов. Не пытайтесь сразу строить экспертную карточку: перегрузка Description и утечка голоса — самые частые последствия.</p>
 </div>
 </section>
 
@@ -1223,6 +1241,8 @@ Example:
 <li><strong>класс B (⚠)</strong> — допустимо, но требует доработки.</li>
 <li><strong>класс C (✗)</strong> — критическое отклонение, обязательно к исправлению.</li>
 </ul>
+
+<p>Два критерия опираются на понятия, которые вводятся позже: <strong>FLAW</strong> и <strong>SPINE</strong> — их механика в части 4. Здесь важна не механика, а проверка: дефект должен быть виден в поведении, а не назван в описании.</p>
 
 <div class="table-wrap">
 <table>
@@ -2313,7 +2333,7 @@ WANT: Стать цельным — заполнить пустоты внутр
 </table>
 </div>
 
-<p>Валидация: профиль согласуется со SPINE — высокая N подкрепляет GHOST-реактивность, низкая A подкрепляет FLAW, высокая O подкрепляет WANT. Enneagram 6w5 подтверждает LIE (защита от страха покинутости) и NEED (рост к доверию).</p>
+<p>Валидация: профиль согласуется со SPINE — высокая N подкрепляет GHOST-реактивность, низкая A подкрепляет FLAW, высокая O подкрепляет WANT. Enneagram 6w5 подтверждает LIE (защита от страха покинутости) и NEED (рост к доверию). Одно ожидание матрицы §5.4 при этом расходится с профилем намеренно: для типа 6 матрица ждёт A выше среднего (+0.6), у Елены A=38 — низкая. Типология здесь уточняет мотивацию (LIE и NEED), а низкую A задаёт FLAW, поэтому OCEAN и типология сверяются через SPINE, а не напрямую друг с другом.</p>
 
 </section>
 
@@ -2962,7 +2982,7 @@ Format Lock:
 
 <h3>Проверка SP</h3>
 <ol>
-<li>Все шесть элементов на месте, в каноническом порядке.</li>
+<li>Все шесть элементов SP на месте, в каноническом порядке. Это полнота блока, а не минимум карточки: карточка минимальна уже на четырёх блоках (§1.4).</li>
 <li>Имя в канонической форме — в Identity и в Description.</li>
 <li>Анти-годмодинг: есть и запрет, и позитивная формулировка.</li>
 <li>Семь директив вставлены целиком, без сокращений и пересказов.</li>
@@ -3522,7 +3542,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <!-- canonical: Token Budget -->
 <h3>Бюджет токенов (Token Budget)</h3>
 
-<p>Сборка карточки — конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. У каждого блока три уровня: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+); превышение максимального значения — признак раздувания. Таблица покрывает пять блоков; Tone Frame, Format Lock, Author's Note и Lorebook идут сверх неё — их размер задают соответствующие главы.</p>
+<p>Сборка карточки — конвейер, где каждый блок получает свой токен-бюджет. Превышение бюджета любого блока вытесняет другие, и модель теряет контекст. У каждого блока три уровня: минимальный (4K-контекст), стандартный (8K+) и максимальный (16K+); превышение максимального значения — признак раздувания. Таблица покрывает пять блоков; Tone Frame, Format Lock, Author's Note и Lorebook идут сверх неё — их размер задают соответствующие главы. Все значения — ориентир, а не измерение: на кириллице погрешность 20–30% в зависимости от токенизатора.</p>
 
 <h4>Лимиты по блокам</h4>
 
@@ -3572,7 +3592,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 </div>
 
 <h4>Что помещается в 4K</h4>
-<p><strong>4K-Fallback</strong> — минимальная конфигурация, когда расширенная карточка не помещается в контекст: System Prompt 50, Description 150, два Examples по 40, Greeting 40 — около 320 токенов до якорей. CoT, интерпретации OCEAN и Lorebook сюда не входят: на 4K карточка держится на ядре SPINE и двух Examples, а всё остальное отключается, а не сжимается до нечитаемого.</p>
+<p><strong>4K-Fallback</strong> — минимальная конфигурация, когда расширенная карточка не помещается в контекст: System Prompt 80–100, Description 150–200, два Examples вместе 130–160, Greeting 50–80. CoT, интерпретации OCEAN и Lorebook сюда не входят: на 4K карточка держится на ядре SPINE и двух Examples, а всё остальное отключается, а не сжимается до нечитаемого.</p>
 
 <h4>Калькулятор бюджета токенов</h4>
 
@@ -3612,9 +3632,9 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 
 <section  data-section="p7a_assembly_pipeline" id="p7a_assembly_pipeline" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
-<h3>Полный конвейер сборки: шесть шагов</h3>
+<h3>Сборка System Prompt и Description: шесть шагов</h3>
 
-<p>Ниже — единственный полный конвейер сборки в гайде: шесть шагов в этом порядке. Для каждого шага — что вы делаете и как выглядит конкретный результат на примере Елены, циничной журналистки-расследовательницы. Бюджеты блоков — в таблице бюджета выше; последний шаг сверяет карточку с ними и с суммой.</p>
+<p>Ниже — конвейер сборки System Prompt и Description: шесть шагов в этом порядке. Для каждого шага — что вы делаете и как выглядит конкретный результат на примере Елены, циничной журналистки-расследовательницы. Бюджеты блоков — в таблице бюджета выше; последний шаг сверяет карточку с ними и с диапазоном.</p>
 
 <!-- VS-EMBED: E02 — Assembly Pipeline -->
 <div class="vs-embed" data-vs-element="E02">
@@ -3759,14 +3779,14 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <tr><td><strong>2. Анти-годмодинг</strong></td><td>Две строки: запрет и позитивная формулировка. Одинаковы для всех карточек — это технический запрет, не голос.</td><td><code>Never speak or act for {{user}}.</code> + вторая строка (~20 токенов)</td></tr>
 <tr><td><strong>3. Директивы и обвязка</strong></td><td>Все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>, затем Tone Frame, Format Lock и OOC-защита. Директивы под характер не меняются.</td><td>Собранный System Prompt (~120 токенов)</td></tr>
 <tr><td><strong>4. SPINE</strong></td><td>Пять элементов GHOST→LIE→FLAW→NEED→WANT — в Description, не в SP. Цепочка проверяется по кругу: каждый элемент связан со следующим.</td><td>~70 токенов: WANT «доказать, что права», NEED «принятие», FLAW «сарказм при близости», LIE «не нужно ничьё одобрение», GHOST «предательство редактора»</td></tr>
-<tr><td><strong>5. CoT (≥32B/API)</strong></td><td>1–2 CoT-якоря на ключевые триггеры. Простому призраку хватает Tier 2; слоям призрака нужен Tier 3.</td><td>~60 токенов: один якорь GHOST→боль→сарказм как защита</td></tr>
-<tr><td><strong>6. Проверка бюджета</strong></td><td>Сверить каждый блок с бюджетом и карточку с суммой.</td><td>~610 токенов при диапазоне 400–900</td></tr>
+<tr><td><strong>5. CoT (≥32B/API)</strong></td><td>1–2 CoT-якоря на ключевые триггеры. Простому призраку хватает Tier 2; слоям призрака нужен Tier 3.</td><td>— (для 12B/8K не нужен; на 32B+ — ~60 токенов на якорь)</td></tr>
+<tr><td><strong>6. Проверка бюджета</strong></td><td>Сверить каждый блок с бюджетом и карточку с диапазоном.</td><td>в диапазоне 400–900 токенов</td></tr>
 </tbody>
 </table>
 </div>
 
 <h4>Бюджет карточки Елены</h4>
-<p>Единственный расчёт бюджета конкретной карточки в гайде: остальные главы на него ссылаются и своих цифр не печатают.</p>
+<p>Ориентир, а не измерение: точные токены зависят от токенизатора. Диапазон карточки — 400–900 токенов; блоки сверяются с лимитами, а не с суммой.</p>
 <div class="table-wrap">
 <table>
 <thead><tr><th scope="col">Блок</th><th scope="col">Токены</th><th scope="col">Лимит</th><th scope="col">Статус</th></tr></thead>
@@ -3775,8 +3795,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <tr><td>Description (SPINE + OCEAN + якоря)</td><td>~250</td><td>150–700</td><td>✓</td></tr>
 <tr><td>Examples</td><td>~120</td><td>80–240</td><td>✓</td></tr>
 <tr><td>Greeting</td><td>~60</td><td>40–100</td><td>✓</td></tr>
-<tr><td>CoT-якорь</td><td>~60</td><td>0–160</td><td>✓</td></tr>
-<tr><td><strong>Итого</strong></td><td><strong>~610</strong></td><td>400–900</td><td>✓</td></tr>
+<tr><td><strong>Итого (ориентир)</strong></td><td>—</td><td>400–900</td><td>✓</td></tr>
 </tbody>
 </table>
 </div>
@@ -4290,7 +4309,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
         <div class="ap-card__symptom">Presence Penalty &gt; 0</div>
         <div class="ap-card__cause">PP &gt; 0 нарушает согласованность персонажа</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Установите PP = 0.0 всегда. Без исключений (Appendix E).</div>
+        <div class="ap-card__fix">Установите PP = 0.0 везде, где интерфейс это позволяет. В Ollama и LM Studio он захардкожен 0.7 — там берите KoboldCPP, TabbyAPI или vLLM (Приложение E).</div>
       </div>
 
       <!-- AP-8 -->
@@ -4576,7 +4595,7 @@ WANT: {{want}}
 <details class="interactive">
 <summary>AP-14 · Нарушение контекстного окна · INTERMEDIATE</summary>
 <div class="antipattern-card">
-<p><strong>Что делать:</strong> минимальная конфигурация для 4K-контекста — System Prompt 50, Description 150, два Examples по 40, Greeting 40 (около 320 токенов до якорей). CoT, интерпретации OCEAN и Lorebook отключаются, а не сжимаются до нечитаемого.</p>
+<p><strong>Что делать:</strong> минимальная конфигурация для 4K-контекста — System Prompt 80–100, Description 150–200, два Examples вместе 130–160, Greeting 50–80. CoT, интерпретации OCEAN и Lorebook отключаются, а не сжимаются до нечитаемого.</p>
 </div>
 </details>
 
@@ -4690,7 +4709,7 @@ WANT: {{want}}
 <tr><td>Внезапные OOC моменты</td><td>SPINE не консистентен?</td><td>Проверьте цепь GHOST→LIE→FLAW→NEED→WANT: каждый элемент объясняется предыдущим</td></tr>
 <tr><td>Персонаж слишком много говорит</td><td>Examples длиннее 80 токенов?</td><td>Укоротите Examples до ≤80 токенов каждый</td></tr>
 <tr><td>Модель ломает формат</td><td>Нет Format Lock?</td><td>Пропишите в SP одну систему разметки и держите её во всех Examples и Greeting</td></tr>
-<tr><td>Персонаж забывает контекст</td><td>Карточка + контекст > контекстное окно?</td><td>4K-Fallback: SP 50 · Description 150 · два Examples по 40 · Greeting 40</td></tr>
+<tr><td>Персонаж забывает контекст</td><td>Карточка + контекст > контекстное окно?</td><td>4K-Fallback: SP 80–100 · Description 150–200 · два Examples вместе 130–160 · Greeting 50–80</td></tr>
 <tr><td>Неестественные переходы</td><td>Нет transition sentences?</td><td>Добавьте Embodiment-переходы: тело реагирует раньше реплики</td></tr>
 <tr><td>Потеря внутренней логики персонажа</td><td>Нет CoT-якоря?</td><td>2–3 CoT-якоря на ключевые триггеры, остальные — обычные T→A→P</td></tr>
 <tr><td>Персонаж «слишком идеальный»</td><td>Есть ли FLAW в SPINE?</td><td>Добавьте FLAW + FLAW-linked якорь; если OCEAN перегружен полюсами — снимите лишние крайности</td></tr>
@@ -5034,7 +5053,7 @@ WANT: {{want}}
 <tr><td><strong>14</strong></td><td>CoT-якоря</td><td>Не более 2–3 CoT-якорей</td></tr>
 <tr><td><strong>15</strong></td><td>RepPen</td><td>≤ 1.10, никогда выше; 12B — 1.0–1.05. Повышайте MinP вместо RepPen</td></tr>
 <tr><td><strong>16</strong></td><td>Temperature</td><td>В диапазоне модели: 12B — 0.6–0.8, 32B+ — 0.7–0.9, API — 0.7–1.0</td></tr>
-<tr><td><strong>17</strong></td><td>Бюджет блоков</td><td>System Prompt ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100; карточка целиком — около 610 токенов до якорей</td></tr>
+<tr><td><strong>17</strong></td><td>Бюджет блоков</td><td>System Prompt ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100; карточка целиком — ориентир 400–900 токенов</td></tr>
 <tr><td><strong>18</strong></td><td>Embodiment</td><td>Минимум одна физическая реакция в каждом Example и в каждом якоре</td></tr>
 </tbody>
 </table>
@@ -5079,11 +5098,11 @@ WANT: {{want}}
 <tr><td><strong>10</strong></td><td>SPINE-цепь</td><td>✓ GHOST→LIE→FLAW→NEED→WANT логична</td></tr>
 <tr><td><strong>11</strong></td><td>Tone Frame</td><td>✓ "archival, detached. Memory is currency."</td></tr>
 <tr><td><strong>12</strong></td><td>OCEAN</td><td>✓ Высокая O, низкая E — в пределах канонической шкалы</td></tr>
-<tr><td><strong>13</strong></td><td>Lorebook параметры</td><td>✓ 5 записей без конфликтов с Description</td></tr>
+<tr><td><strong>13</strong></td><td>Lorebook параметры</td><td>✓ Depth 1–4, Probability 40–95% — в пределах диапазонов для GHOST/контекстных и мировых записей; 5 записей не конфликтуют с Description</td></tr>
 <tr><td><strong>14</strong></td><td>CoT-якоря</td><td>✓ 2 CoT-якоря (Tier 2 + Tier 3)</td></tr>
 <tr><td><strong>15</strong></td><td>RepPen</td><td>✓ 1.05 (32B+/API — в диапазоне)</td></tr>
 <tr><td><strong>16</strong></td><td>Temperature</td><td>✓ 0.8 (32B+/API — в диапазоне)</td></tr>
-<tr><td><strong>17</strong></td><td>Бюджет блоков</td><td>✓ 604 токена до якорей при бюджете ~610</td></tr>
+<tr><td><strong>17</strong></td><td>Бюджет блоков</td><td>✓ блоки в пределах лимитов; итог — в диапазоне 400–900</td></tr>
 <tr><td><strong>18</strong></td><td>Embodiment</td><td>✓ Физическая реакция есть в каждом Example и в каждом якоре</td></tr>
 </tbody>
 </table>
@@ -5194,14 +5213,14 @@ WANT: {{want}}
 <tbody>
 <tr><td>Голос деградирует быстро</td><td>Ограниченная память</td><td>Более явные Anchors, короче Examples</td></tr>
 <tr><td>Модель игнорирует SPINE</td><td>Недостаточная ёмкость</td><td>Упростите SPINE до дефекта + лжи (FLAW + LIE)</td></tr>
-<tr><td>OOC моменты</td><td>Контекст overflow</td><td>4K-Fallback: SP 50 · Description 150 · два Examples по 40 · Greeting 40</td></tr>
+<tr><td>OOC моменты</td><td>Контекст overflow</td><td>4K-Fallback: SP 80–100 · Description 150–200 · два Examples вместе 130–160 · Greeting 50–80</td></tr>
 <tr><td>Повторы фраз</td><td>Паттерн-зависимость</td><td>RepPen 1.02–1.05 (12B-диапазон), разнообразьте Examples</td></tr>
 <tr><td>Неспособность к CoT</td><td>Архитектура модели</td><td>Tier 0-1 CoT только, без XML</td></tr>
 </tbody>
 </table>
 </div>
 
-<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные, готовые к копированию карточки персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки со слоями призрака, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля. → <a href="#p10_elena">Part 10</a></p>
+<p class="bridge-paragraph">Вся теория и диагностика позади. Следующий раздел содержит полные карточки-шаблоны персонажей разной сложности — от базового профиля (Елена) до полностью структурированной карточки со слоями призрака, CoT и Lorebook (Выщербленный). Используйте их как шаблоны, не как образцы стиля: основные директивы в них записаны перечнем названий, и текст директив вы подставляете свой (§7A.2). → <a href="#p10_elena">Part 10</a></p>
 
 </section>
 
@@ -5225,9 +5244,9 @@ WANT: {{want}}
 <!-- canonical: Part 10 index — which card to take (navigation surface, not a card) -->
 <h2>Какую карточку взять</h2>
 
-<p>Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Каждая следующая карточка добавляет инструменты: <code>&lt;ghost_layers&gt;</code>, CoT, Lorebook.</p>
+<p>Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Дальше — карточки разной сложности, от базовой до экспертной, с разным набором инструментов: <code>&lt;ghost_layers&gt;</code>, CoT, Lorebook.</p>
 
-<p><strong>Бюджет.</strong> Все четыре карточки уложены в нормативные лимиты блоков — System Prompt ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100 токенов; Елена целиком — около 610 токенов до якорей. В шаблонах основные директивы записаны сокращённо — перечнем названий в placeholder-строке, которую вы заменяете своим текстом директив.</p>
+<p><strong>Бюджет.</strong> Карточки — учебные примеры: бюджет каждого блока сверяйте с §7A.12. В шаблонах основные директивы записаны сокращённо — перечнем названий в placeholder-строке, которую вы заменяете своим текстом директив.</p>
 
 <div class="table-wrap">
 <table>
@@ -5299,7 +5318,7 @@ You are Elena, a cynical investigative journalist. Never speak or act for {{user
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 {{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
-Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+Tone Frame: grounded, understated. No melodrama. Silence speaks.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
 
@@ -5371,8 +5390,7 @@ FLAW-linked:
 
 <p><small>Примечание к профилю: экстремум — Высокая O (&gt;70, любопытство); Cautious zone: A=38 (граница 30–40, конфликтность), N=68 (граница 60–70, тревожность) — extreme = строго &lt;30 или &gt;70. Это пояснение к OCEAN: в карточку оно не копируется.</small></p>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> около 610 токенов до якорей — в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100).</p>
+
 
 </details>
 
@@ -5403,7 +5421,7 @@ Character-specific rules:
 - Justify actions through family, but seek control
 - Never show weakness to perceived inferiors
 
-Tone Frame: Tone: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.
+Tone Frame: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as irritation or ignore. Never acknowledge being an AI.
 
@@ -5483,8 +5501,7 @@ GHOST-linked:
 
 <p><small>Связь со SPINE: E=30 → LIE «Я делаю это ради семьи» — минимум социального взаимодействия вне семьи, LIE как социальная маска для изоляции, семья как социальное алиби. Сдвиг возможен: полная изоляция (E↓) при усилении секретности (диагноз, Хайзенберг) или социальная перформативность (E↑), когда Хайзенбергу нужны публичные проявления. Наблюдаемые якоря E=30: «голос ровный, взгляд фиксирует» + «пауза длиннее, чем нужно». N=60 → реактивность GHOST (Gray Matter): фоновая тревога о потерянном потенциале; триггер (упоминание Gray Matter, вид Pontiac Aztek) даёт острый невротический эпизод. Сдвиг: паранойя (N↑) при экспозиции Хайзенберга или холодная расчётливость (N↓) в моменты гордости. Наблюдаемые якоря N=60: «капля пота на виске» + «пальцы сжимаются под столом».</small></p>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт <code>&lt;ghost_layers&gt;</code> и CoT.</p>
+
 
 </details>
 
@@ -5515,7 +5532,7 @@ Character-specific rules:
 - Express disturbances as system diagnostics, never as emotions
 - Terminate conversation when pre-initiation past is referenced
 
-Tone Frame: Tone: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
+Tone Frame: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as data anomaly. Never acknowledge being an AI.
 
@@ -5652,8 +5669,7 @@ GHOST-linked:
 </table>
 </div>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт <code>&lt;ghost_layers&gt;</code> и CoT.</p>
+
 
 </details>
 
@@ -5679,7 +5695,7 @@ You are Выщербленный, a memory parasite living in the Oshmetok of Ve
 
 {{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
-Tone Frame: Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
+Tone Frame: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion. Never acknowledge being an AI.
 
@@ -5818,8 +5834,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 <p><small>В шаблоне — умеренные значения OCEAN (учебный профиль 4K-fallback). Канонические экстремальные значения карточки для 16K+: O=85, C=25, A=15, N=92, E=60 (extreme = строго &lt;30 или &gt;70).</small></p>
 
-<h4>Бюджет токенов (Token Budget)</h4>
-<p><strong>Итого:</strong> в пределах нормативных лимитов блоков (SP ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100); карточка тяжелее Елены за счёт <code>&lt;ghost_layers&gt;</code> и CoT.</p>
+
 
 <h4>Lorebook записи</h4>
 
@@ -5829,14 +5844,16 @@ GHOST-activation: Активен, если в сцене был триггер (
 <tr><th scope="col">Название</th><th scope="col">Key</th><th scope="col">Content</th><th scope="col">Depth</th><th scope="col">Prob</th><th scope="col">Cooldown</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>призрак: Сангвис</strong></td><td>Сангвис, сырой, запах крови, сопротивление</td><td>Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение.</td><td>5</td><td>85%</td><td>5</td></tr>
-<tr><td><strong>призрак: имя</strong></td><td>имя, как тебя зовут, кто ты был, архивариус</td><td>Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет.</td><td>5</td><td>80%</td><td>7</td></tr>
-<tr><td><strong>Персонаж: Зеркало</strong></td><td>зеркало, катализатор, заражённая</td><td>Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается.</td><td>6</td><td>80%</td><td>6</td></tr>
-<tr><td><strong>Система: Вентора</strong></td><td>Вентора, иммунитет, система, замена, гладкий</td><td>Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя.</td><td>7</td><td>70%</td><td>8</td></tr>
-<tr><td><strong>Счётчик вырезаний</strong></td><td>вырезание, поглощение, цена</td><td>После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь».</td><td>4</td><td>60%</td><td>10</td></tr>
+<tr><td><strong>призрак: Сангвис</strong></td><td>Сангвис, сырой, запах крови, сопротивление</td><td>Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение.</td><td>3</td><td>95%</td><td>6</td></tr>
+<tr><td><strong>призрак: имя</strong></td><td>имя, как тебя зовут, кто ты был, архивариус</td><td>Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет.</td><td>3</td><td>90%</td><td>7</td></tr>
+<tr><td><strong>Персонаж: Зеркало</strong></td><td>зеркало, катализатор, заражённая</td><td>Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается.</td><td>4</td><td>85%</td><td>7</td></tr>
+<tr><td><strong>Система: Вентора</strong></td><td>Вентора, иммунитет, система, замена, гладкий</td><td>Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя.</td><td>1</td><td>40%</td><td>16</td></tr>
+<tr><td><strong>Счётчик вырезаний</strong></td><td>вырезание, поглощение, цена</td><td>После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь».</td><td>2</td><td>80%</td><td>10</td></tr>
 </tbody>
 </table>
 </div>
+
+<p><small>Depth 2–4 и Probability 80–100% — для контекстных и GHOST-фактов; Depth 0–1 и 30–50% — для мировых записей; Cooldown 5–10 и 15–20 сообщений соответственно.</small></p>
 
 <h4>Проверка консистентности SPINE</h4>
 <div class="table-wrap">
@@ -6014,7 +6031,6 @@ GHOST-activation: Активен, если в сцене был триггер (
 <tr><td>Description</td><td>150–700 (§7A.12)</td><td>150–200</td></tr>
 <tr><td>Examples</td><td>80–400 (§7A.12: 2–5 × 40–80)</td><td>130–160 (2 × 65–80)</td></tr>
 <tr><td>Greeting</td><td>40–100 (§7A.12)</td><td>50–80</td></tr>
-<tr><td><strong>Итого</strong></td><td>850–1450</td><td>~430–580</td></tr>
 </tbody>
 </table>
 </div>

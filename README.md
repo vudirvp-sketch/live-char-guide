@@ -2,7 +2,7 @@
 
 **Инженерный конвейер для карточек персонажей LLM.** Не сборник промптов, а процесс: SPINE (психологический каркас) → якоря поведения → изоляция голоса → системный промпт → готовая карточка. Для моделей 12B–32B+, совместимо с SillyTavern.
 
-[**→ Открыть гайд**](https://vudirvp-sketch.github.io/live-char-guide/) · 10 частей · 62 раздела · 4 полные карточки-примера · v9.2.6
+[**→ Открыть гайд**](https://vudirvp-sketch.github.io/live-char-guide/) · 12 частей · 61 раздел · 4 полные карточки-примера · v9.2.6
 
 [![Deploy](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml)
 [![Version](https://img.shields.io/github/package-json/v/vudirvp-sketch/live-char-guide)](package.json)
@@ -46,7 +46,7 @@
 ## С чего начать
 
 1. **[Перед стартом](https://vudirvp-sketch.github.io/live-char-guide/#p0_how_to_read)** — 10 минут, понять маршрут.
-2. **Идти по частям 1 → 10 подряд.** Гайд линейный: каждая часть опирается на предыдущую.
+2. **Идти по частям подряд, от 0 к 10.** Порядок — в оглавлении: сначала поведение (якоря, голос), затем психология (SPINE, OCEAN), в конце — сборка.
 3. **Карточка не работает** — сразу в [Диагностику](https://vudirvp-sketch.github.io/live-char-guide/#p9_basic_checklist), не перечитывать всё.
 
 ## Кому подойдёт
@@ -127,7 +127,7 @@ Issues и PR — приветствуются: [issues](https://github.com/vudir
 
 ## English summary
 
-**Live Character Guide** is a Russian-language engineering guide for building LLM roleplay character cards (SillyTavern-compatible, 12B–32B+ models). It treats the card as a behavioural engine: SPINE (psychological skeleton) → behavioural anchors → voice isolation → system prompt → finished card. 10 parts, 62 sections, 4 complete worked cards, plus a diagnostics track. Static HTML/CSS/vanilla JS, built by Node scripts, deployed to GitHub Pages.
+**Live Character Guide** is a Russian-language engineering guide for building LLM roleplay character cards (SillyTavern-compatible, 12B–32B+ models). It treats the card as a behavioural engine: SPINE (psychological skeleton) → behavioural anchors → voice isolation → system prompt → finished card. 12 parts, 61 sections, 4 complete worked cards, plus a diagnostics track. Static HTML/CSS/vanilla JS, built by Node scripts, deployed to GitHub Pages.
 
 → <https://vudirvp-sketch.github.io/live-char-guide/>
 

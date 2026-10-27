@@ -68,7 +68,6 @@ migration_status: ✅ CREATED (v3 stage 2 — absorbs Appendix B + the model/run
 | Description | 150–700 | 150–200 |
 | Examples | 80–400 (2–5 × 40–80) | 130–160 (2 × 65–80) |
 | Greeting | 40–100 | 50–80 |
-| **Итого** | 850–1450 | ~430–580 |
 
 #### Минимальный SP (4K)
 

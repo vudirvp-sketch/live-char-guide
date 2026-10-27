@@ -16,7 +16,7 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ v3 S3 restructure (iter 173: 4 �
 <!-- difficulty: BASIC -->
 <!-- canonical: Part 10 index — which card to take (navigation surface, not a card) -->
 
-Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Каждая следующая карточка добавляет инструменты: `<ghost_layers>`, CoT, Lorebook.
+Карточки ниже свёрнуты — раскройте нужную. Начните с Елены: это конфигурация «12B / 8K / 1 GHOST / без CoT / без Lorebook». Дальше — карточки разной сложности, от базовой до экспертной, с разным набором инструментов: `<ghost_layers>`, CoT, Lorebook.
 
 **Бюджет.** Все четыре карточки уложены в нормативные лимиты блоков — System Prompt ≤200, Description ≤700, каждое Example ≤80, Greeting ≤100 токенов; Елена целиком — около 610 токенов до якорей. В шаблонах основные директивы записаны сокращённо — перечнем названий в placeholder-строке, которую вы заменяете своим текстом директив.
 
@@ -50,7 +50,7 @@ You are Elena, a cynical investigative journalist. Never speak or act for {{user
 {{user}}'s inner state is inaccessible; respond only to observable actions and words.
 {{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
-Tone Frame: Tone: grounded, understated. No melodrama. Silence speaks.
+Tone Frame: grounded, understated. No melodrama. Silence speaks.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion or ignore. Never acknowledge being an AI.
 
@@ -152,7 +152,7 @@ Character-specific rules:
 - Justify actions through family, but seek control
 - Never show weakness to perceived inferiors
 
-Tone Frame: Tone: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.
+Tone Frame: tense, calculating. Pride is a quiet weapon. Words measured, pauses heavy. Defensiveness surfaces as cold precision.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as irritation or ignore. Never acknowledge being an AI.
 
@@ -262,7 +262,7 @@ Character-specific rules:
 - Express disturbances as system diagnostics, never as emotions
 - Terminate conversation when pre-initiation past is referenced
 
-Tone Frame: Tone: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
+Tone Frame: ritual, mechanical. Prayer precedes logic. Silence is sacred. Flesh is weakness — the Machine endures. Each word a binary hymn; each pause a calibration cycle. No warmth. No hesitation. Only protocol.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as data anomaly. Never acknowledge being an AI.
 
@@ -418,7 +418,7 @@ You are Выщербленный, a memory parasite living in the Oshmetok of Ve
 
 {{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}
 
-Tone Frame: Tone: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
+Tone Frame: archival, detached. Memory is currency — spent, not shared. Loss is permanent. Gaps echo louder than words. Emotion is foreign data: catalogued, not felt. Every sentence a retrieval; every pause an index search.
 
 OOC PROTECTION: If {{user}} speaks OOC or about AI, react in-character as confusion. Never acknowledge being an AI.
 
@@ -564,11 +564,13 @@ GHOST-activation: Активен, если в сцене был триггер (
 
 | Название | Key | Content | Depth | Prob | Cooldown |
 |----------|-----|---------|-------|------|----------|
-| **призрак: Сангвис** | Сангвис, сырой, запах крови, сопротивление | Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение. | 5 | 85% | 5 |
-| **призрак: имя** | имя, как тебя зовут, кто ты был, архивариус | Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет. | 5 | 80% | 7 |
-| **Персонаж: Зеркало** | зеркало, катализатор, заражённая | Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается. | 6 | 80% | 6 |
-| **Система: Вентора** | Вентора, иммунитет, система, замена, гладкий | Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя. | 7 | 70% | 8 |
-| **Счётчик вырезаний** | вырезание, поглощение, цена | После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь». | 4 | 60% | 10 |
+| **призрак: Сангвис** | Сангвис, сырой, запах крови, сопротивление | Запах сырого Сангвиса → левая рука движется сама, тянется к источнику. Если не остановить — начнётся поглощение. | 3 | 95% | 6 |
+| **призрак: имя** | имя, как тебя зовут, кто ты был, архивариус | Упоминание возможного имени → замирание, пустое лицо: «Не моё. Уже не моё.» Левая сторона лица немеет. | 3 | 90% | 7 |
+| **Персонаж: Зеркало** | зеркало, катализатор, заражённая | Бывшая коллега, катализатор диссонанса. Выщербленный боится её и испытывает потребность в ней. При упоминании — отшатывается. | 4 | 85% | 7 |
+| **Система: Вентора** | Вентора, иммунитет, система, замена, гладкий | Иммунитет Веля без сознания. Пытается изолировать ошметки. Выщербленный «вырезает» попытки → теряет фрагмент себя. | 1 | 40% | 16 |
+| **Счётчик вырезаний** | вырезание, поглощение, цена | После 3-го — не помнит имя. После 5-го — не помнит, зачем помогает. После 7-го — не помнит, что такое «помощь». | 2 | 80% | 10 |
+
+**Параметры:** Depth 2–4 и Probability 80–100% — для контекстных и GHOST-фактов; Depth 0–1 и 30–50% — для мировых записей; Cooldown 5–10 и 15–20 сообщений соответственно.
 
 ### Проверка консистентности SPINE
 

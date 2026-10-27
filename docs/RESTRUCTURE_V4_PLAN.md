@@ -20,7 +20,7 @@ what is being used right now. Local reminders are allowed and capped at one sent
 Why: v3/v4 measurements show literal duplication is exhausted (4 near-dup paragraph pairs; 270 cross-refs).
 The residual load is architectural — explanation and application sit in different Parts, so the reader walks.
 
-## 2. Chapter map (build order = card block order)
+## 2. Chapter map (content-ownership map — not the card's field order; render order and build order are separate)
 
 | Ch | One reader job | Absorbs (current ids) | Target words | Links in |
 |---|---|---|---|---|
@@ -38,7 +38,7 @@ The residual load is architectural — explanation and application sit in differ
 | A | MBTI reference | `appendix_mbti` — **DONE iter 190**: 1 → 0 links (the §7A.1 collision pointer dropped, the collision rule stays local) | 120 | — |
 | B | Model / API / sampling reference | Appendix E — **DONE iter 190**: 12 → 2 links (budget/assembly/language/Lorebook pointers stated in place; the two capability-table owner refs kept) | 600 → 1 507 | — |
 
-Sections: 68 at track start → **62 now**. Words: 24 046 at track start → **~21 000**. Internal links: 270 at track start → **10 now** (7 frozen-id Appendix-E pointers in Part 7A, 2 in Appendix E, 1 Part 10 bridge in §9.7 — all cross-level).
+Sections: 68 at track start → **62 at track close (61 after iter 195's §5.4 merge)**. Words: 24 046 at track start → **~21 000**. Internal links: 270 at track start → **10 now** (4 Appendix-E pointers in Part 7A, 2 in Appendix E, 1 Part 10 bridge in §9.7, and 3 Part 7A cross-chapter links — all sanctioned).
 
 ## 3. Iteration plan
 

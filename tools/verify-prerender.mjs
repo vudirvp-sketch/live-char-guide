@@ -5,10 +5,10 @@
  * real browser against the committed root document and asserts the four things
  * that prerendering could plausibly break:
  *
- *   1. the content renders (62 sections),
+ *   1. the content renders (61 sections),
  *   2. the shell took the adoption path (no fragment refetch),
  *   3. the TOC still builds from the prerendered DOM,
- *   4. deep-link anchors still scroll (the 62-anchor / 132-redirect contract).
+ *   4. deep-link anchors still scroll (the 61-anchor / 133-redirect contract).
  *
  * Requires a static server on http://localhost:3000 (pnpm run serve).
  * Usage: node tools/verify-prerender.mjs
@@ -32,7 +32,7 @@ try {
 
   // 1. Sections rendered
   const sections = await page.$$eval('main#content section[data-section]', (nodes) => nodes.length);
-  sections === 62 ? ok(`62 sections rendered (got ${sections})`) : bad('section count', `expected 62, got ${sections}`);
+  sections === 61 ? ok(`61 sections rendered (got ${sections})`) : bad('section count', `expected 61, got ${sections}`);
 
   // 2. Adoption path: no parts/*.html fragment re-fetch
   const fragmentRequests = requests.filter((url) => /\/parts\/part_\d|appendix_/.test(url));

@@ -10,7 +10,7 @@
 ## What this project is
 
 **Live Character Guide** is an engineering pipeline for building RP character cards
-for LLMs (12B–32B+). Single linear guide: Part 0 → Part 10 + 3 appendices.
+for LLMs (12B–32B+). Single linear guide: Part 0 → Part 10 + 2 rendered appendices (A, E; D is canon-only).
 Stack: static HTML + CSS + vanilla JS ES modules. **No build framework, no TypeScript,
 no React/Vue/Svelte.**
 
