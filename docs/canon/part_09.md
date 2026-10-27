@@ -163,7 +163,7 @@ migration_status: ✅ MIGRATED (iter 12) + ✅ v3 S3 restructure (iter 173: 11 �
 | **1** | PP = 0.0 | ✓ Presence Penalty = 0.0 |
 | **2** | Голос только в Examples | ✓ Голос только в Examples и Greeting |
 | **3** | Цена в каждом якорь | ✓ 6 якорей T→A→P, цена физическая |
-| **4** | Format Lock | ✓ «Dialogue: `*action*` «speech»» |
+| **4** | Format Lock | ✓ Dialogue: `*action*` "speech" |
 | **5** | Anti-godmoding | ✓ "Never speak or act for `{{user}}`" |
 | **6** | CORE DIRECTIVES | ✓ Все 7 в формате `<CORE_DIRECTIVES>` |
 | **7** | Spatial & Anatomical Lock | ✓ Директива #3 присутствует |

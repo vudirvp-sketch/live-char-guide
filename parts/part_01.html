@@ -101,7 +101,7 @@
         <div class="block-content">
           Факты, SPINE, оценки OCEAN, физическое описание, черты личности.
           <div class="desc-callout">
-            ↳ Якоря упомянуты здесь как ссылка — структурно живут как отдельный блок в Examples-зоне
+            ↳ Якоря упомянуты здесь как ссылка — в карточке это <code>&lt;anchors&gt;</code>-тег в конце Description; на схеме они показаны в Examples-зоне
           </div>
         </div>
       </div>
@@ -140,7 +140,7 @@
             </div>
             <div class="vs-ki13-anchor-desc">
               Формат Trigger → Action → Price. Каждый anchor: ~15–40 токенов.<br>
-              Якоря — отдельный структурный блок в Examples-зоне, не часть диалоговых примеров. В большинстве фронтендов размещаются как <code>&lt;anchors&gt;</code> внутри Description.
+              Якоря — отдельный структурный блок, не часть диалоговых примеров. В карточке это <code>&lt;anchors&gt;</code> внутри Description: отдельного поля Anchors у типового фронтенда нет. На схеме они показаны в Examples-зоне, потому что задают поведение, а Examples — голос.
             </div>
           </div>
         </div>
@@ -285,7 +285,7 @@
 <tr><td><strong>System Prompt</strong></td><td>Высокое — задаёт рамки</td><td>Компактный</td></tr>
 <tr><td><strong>Description</strong></td><td>Среднее — контекст</td><td>Основной объём</td></tr>
 <tr><td><strong>Examples</strong></td><td>Ключевое — паттерны речи</td><td>Средний</td></tr>
-<tr><td><strong>Якоря (Anchors)</strong> (в Examples-зоне)</td><td>Ключевое — поведенческие триггеры</td><td>Средний (отдельный <code>&lt;anchors&gt;</code>-тег)</td></tr>
+<tr><td><strong>Якоря (Anchors)</strong> (<code>&lt;anchors&gt;</code> в Description)</td><td>Ключевое — поведенческие триггеры</td><td>Средний — входит в Description</td></tr>
 <tr><td><strong>Greeting</strong></td><td>Поддерживающее — тон</td><td>Минимальный</td></tr>
 </tbody>
 </table>

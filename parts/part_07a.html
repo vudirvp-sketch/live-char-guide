@@ -58,7 +58,7 @@ Format Lock:
 <p><strong>ПРАВИЛО:</strong> Имя персонажа сохраняет каноническую форму во всех блоках карточки: Identity, <code>&lt;identity&gt;</code> в Description, Greeting, Examples. Кириллица остаётся кириллицей, латиница — латиницей, CJK — CJK. Транслитерация «для совместимости с моделью» запрещена: имя обрабатывается как токен-якорь идентичности, не как инструкция. Латинский вариант допустим, только если он документирован как канонический (например, <code>Omnis-Zeta</code>).</p>
 </div>
 
-<p><strong>Якоря — не часть SP.</strong> Это отдельный блок Examples-зоны: <code>&lt;anchors&gt;</code> с категориями (базовые, FLAW-linked, GHOST-linked), который размещается в Description. В системном промпте для него нет ни места, ни функции.</p>
+<p><strong>Якоря — не часть SP.</strong> Это отдельный структурный блок карточки: <code>&lt;anchors&gt;</code> с категориями (базовые, FLAW-linked, GHOST-linked), который размещается в Description (на схеме E01 — в Examples-зоне). В системном промпте для него нет ни места, ни функции.</p>
 
 <h3>Проверка SP</h3>
 <ol>
@@ -283,6 +283,8 @@ Format Lock:
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Выберите ОДНУ систему разметки и используйте её во всех Examples + Greeting. Смешение двух систем — самый частый источник нестабильного голоса на 12B.</p>
 </div>
+
+<p>Форма кавычек в системе A не нормирована: прямые <code>"…"</code> и «…» — одна и та же система. Важно, чтобы во всех Examples и в Greeting карточки стоял один глиф.</p>
 
 <div class="callout rule">
 <p><strong>ПРАВИЛО:</strong> Если директива SP и пример Examples конфликтуют, модель следует примеру. Всегда. Поэтому Examples должны использовать ту же систему разметки, что указана в Format Lock. Если они расходятся — исправляйте Examples, не SP.</p>
@@ -521,7 +523,7 @@ GHOST-activation: Активен, если в сцене был триггер (
 <!-- canonical: XML Tags in Description -->
 <h3>XML-теги в Description</h3>
 
-<p>Структурирование Description через XML-теги для API моделей. <code>&lt;anchors&gt;</code> размещён внутри Description как XML-тег для совместимости с фронтендами, не имеющими отдельного поля Anchors. Концептуально Anchors — отдельный структурный блок в Examples-зоне (см. §1.4 RULE и <a href="#p2_anchor_rules">Part 2 §2.2</a>).</p>
+<p>Структурирование Description через XML-теги для API моделей. <code>&lt;anchors&gt;</code> размещён внутри Description как XML-тег: отдельного поля Anchors у типового фронтенда нет. Если фронтенд такое поле предлагает — якоря идут в него. На схеме E01 якоря показаны в Examples-зоне, потому что задают поведение, а Examples — голос (см. <a href="#p2_anchor_rules">правила якорей</a>).</p>
 
 <h4>Структура</h4>
 <pre><code>&lt;identity&gt;
@@ -636,7 +638,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <tr><td>Description</td><td>150</td><td>300</td><td>700</td><td>Растёт с детализацией персонажа</td></tr>
 <tr><td>Examples (каждый)</td><td>40</td><td>60</td><td>80</td><td>2 базовых, 3 с FLAW, 3–5 с CoT</td></tr>
 <tr><td>Greeting</td><td>40</td><td>60</td><td>100</td><td>Не раздувайте</td></tr>
-<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>T→A→P, компактно</td></tr>
+<tr><td>Anchors (каждый)</td><td>15</td><td>25</td><td>40</td><td>T→A→P; входит в бюджет Description</td></tr>
 </tbody>
 </table>
 </div>
