@@ -76,11 +76,10 @@ This document is the **single source of truth** for "where does concept X live."
 
 | Concept | data-section ID | Canon § | Content Type | Notes |
 |---------|-----------------|---------|--------------|-------|
-| OCEAN + перегрузка | `p5_ocean_basics` | §5.1 | Tool+Interactive | Pentagon widget + золотое правило + stress types + the SINGLE pole-limit scale + OCEAN Overload (absorbed §5.3 `p5_ocean_warning`, v3 S4a iter 174; F-01/F-12 closed) |
-| Елена OCEAN/Enneagram profile | `p5_elena_profile` | §5.2 | Example | OCEAN + Enneagram 6w5 mapping to SPINE + stress type (iter 63) |
-| Enneagram basics + wings | `p5_enneagram_basics` | §5.3 | Tool+Interactive | 9 типов, E10 SVG widget, крылья (absorbed §5.6 `p5_enneagram_wings`, v3 S4a iter 174) |
-| Связь инструментов + MBTI (merged) | `p5_cross_instrument_map` | §5.4 | Protocol+Reference | iter 62: MBTI stub merged as subsection; R1 repetitions removed |
-| OCEAN×Enneagram matrix | `p5_cross_matrix` | §5.5 | Reference | Статическая 5×9 корреляция (9 строк, |r| ≥ 0.5 жирным) + 4-шаговая сверка трёх систем (iter 176: интерактивные persona-cross/synthesis удалены, F-18) |
+| OCEAN: проверка SPINE числами | `p5_ocean_basics` | §5.1 | Tool+Interactive | Pentagon embed (E09) + формат `<ocean>` + the SINGLE pole-limit scale + 5 измерений + осторожная зона + типы стресса и цепочка триггер→якорь + перегруз OCEAN (absorbed `p5_ocean_warning`, v3 S4a iter 174; F-01/F-12 closed) |
+| Елена: OCEAN/Enneagram profile | `p5_elena_profile` | §5.2 | Example | OCEAN + Enneagram 6w5 mapping to SPINE + stress type (iter 63) |
+| Enneagram: карта мотивации | `p5_enneagram_basics` | §5.3 | Tool+Interactive | 9 типов, E10 SVG widget, крылья (absorbed `p5_enneagram_wings`, v3 S4a iter 174) |
+| Сверка трёх систем | `p5_cross_matrix` | §5.4 | Protocol+Reference | iter 195: §5.4 «Связь инструментов» absorbed (`p5_cross_instrument_map` → redirect) — выбор инструмента + карты Enneagram→SPINE и OCEAN→SPINE + MBTI-справка + корреляционная матрица (9 строк, \|r\| ≥ 0.5 жирным) + сверка в 4 шага |
 
 ### Part 6: CoT — Chain of Thought (Цепочка рассуждений) — `docs/canon/part_06.md`
 

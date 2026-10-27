@@ -5,6 +5,28 @@
 
 ---
 
+Task ID: iter-195-part5-rewrite
+Agent: lead
+Task: owner: «делай качественно в долгосрок а не быстро и костыльное» (follow-up to the Part-5 analysis package). Deliverable: rebuild Part 5 «Психология: OCEAN и типология» so it reads like Parts 4/6/9 — one reader job per section, no §-routing, one notation, no descriptive English, label discipline. Content + canon + the two sync probes + one legacy redirect.
+
+BASE: e0415d12
+
+Work Log:
+- 0: Preflight — BASE `e0415d12`, worktree clean (only the two pre-existing untracked preview/temp files). Measured before writing: Part 5 rendered 2 536 words over 5 sections with a 1124-word §5.1 carrying 11 headings, 6 tables, **6 RULE** callouts and 5 §-routes; house band is 269/140/383 words per section (Parts 4/6/9) with ≤2 RULE per section. Sentence length was NOT the defect (avg 16.2 = Part 9's), so the fix is distribution, not wording.
+- 1: **Canon rebuilt first** (`docs/canon/part_05.md`, source of truth): 5 → 4 sections. §5.1 = «OCEAN: проверка SPINE числами» (одна работа: числовой профиль) — ответ-таблица перед теорией, 6 RULE слиты в 3, три «конфликт-сценария» → одна таблица «Комбинация / Что видит модель / Что сделать», две стресс-таблицы → одна (N-полюс · тип · поведение · FLAW-паттерн · якорь), категории триггеров → список из 4 строк. §5.2 Elena-only, its RULE → `НАБЛЮДЕНИЕ` (разбор примера — не правило). §5.3: 9 типов **не тронуты** (7-колоночная таблица — вход `generate_enneagram.mjs`), сноска-«РЕКОМЕНДАЦИЯ: Дополнительный контент…» снята в пользу одного предложения, h5 → h4. §5.4 = **«Сверка трёх систем»** (iter 62-merge завершён: §5.4 «Связь инструментов» + §5.5 «Матрица» сведены в одну работу — выбор инструмента + 2 карты соответствий + MBTI-справка + матрица + 4 шага + синтез личности).
+- 2: **Master mirrored** (`src/master/part_05.html` 725 → 659 lines) with fence #1 intact: `<section data-section>` only, 4 labels only, `table-wrap` on all 14 tables, zero inline style/on*. The E09 embed, the E10 embed and the `<details class="interactive">` pentagon block were **spliced byte-identically** from the previous file by `_tmp_assemble.mjs` (verified: one `data-vs-element="E09"`/`E10`, one `#ocean-embed`, one `#ocean-static`, one `#enneagram-wrap`, one `#mini-card`) so the widget contract (`ocean-insight.js`, `vs-e10-enneagram.js`, `validate-master.mjs` Check 12) is untouched. Two defects fixed on the way: `</tr></tr>` ×2 (§5.1 stress table + the ceilings table — `<tr>` 82 open / 84 close → 81/81) and the corpus' only English `<summary>` («OCEAN Interactive Pentagon» → «Интерактивный пентагон OCEAN»).
+- 3: **Notation + language unification:** `High N`/`Low A` (§5.4/§5.5) and `Высокий N`/`Низкая A` (§5.1) → one form «высокий N / низкая A» everywhere; `(значения &lt;30 или &gt;70)` → «значение ниже 30 или выше 70» (no HTML entities in prose); `defensive behavior, overthinking` / `lashing out, verbal aggression` / `withdrawal, dissociation, shutdown` / `GHOST-resistant` / `anxious-reactive` → Russian (DEC-16: descriptive English goes, identifiers stay). The `(cautious zone, …)` first-mention gloss is **kept** — it is the iter-107 decision and the house `Термин (ENG)` pattern, not a leak.
+- 4: **Gate re-pointing, no gate weakening** (2 edits, both disclosed in the probe descriptions): `scripts/audit_canon_master_sync.py` **P0-16** — the needle was the old 71-word rule built around «(таблица «Контекстные лимиты полюсов» ниже)»; re-pointed to the new single-scale rule carrying the SAME numbers (4K — 2 · 8K — 3 · 16K+ — 4 · 32K+ — 5) and the same claims (SPINE bridge, 4+ = «Критический»). **P2-14** — the cautious-zone paragraph kept its term, both bounds, the SPINE-link claim and both Elena values; needle re-pointed. Count stays **87/87**. **+1 legacy redirect** (`p5_cross_instrument_map` → `p5_cross_matrix`, DEC-33 pattern) — `data/anchor-redirects.json` + build → **133 redirects, all live, no chains**.
+- 5: **Downstream surfaces re-pointed in the same iteration:** `docs/canon/glossary_registry.md` — 3 `[ref: part_05.md §…]` pointers de-staled to the new §-titles (§5.1 / §5.3 / §5.4; the §5.5 pointer had become dangling); `docs/content_map.md` — Part-5 table 5 rows → 4 (merged row records the absorption); `scripts/readerpath_audit_iter164.py` — LEARN corpus expectation **62 → 61** with the absorption recorded in the message.
+- 6: **Verification (full battery after the last edit):** build **61 sections** · hash `517d2245` · tests **91/91** · validate **12 gates + 133 redirects** · validate:master **12/12, 0 warnings** · sync **87/87** · enneagram / glossary / core-directives / token-budget / diagnostics / voice / sampling parity **PASS** · `audit_vs_embeds` PASS · reader-path PASS (Learn 65/65 difficulty metadata, Reference 45-term chain) · version:check 9.2.6 · qa csp/bundle/contrast/seo/doc-versions PASS · english **1** (part_06, baseline) · syntax **224** (baseline, unchanged — the 8 part_05 findings are the preserved E10 class names) · lint 0 · `component_extracts` exit 1 = its documented informational drift (E10 extract REMOVED_WITH_REASON iter 138; E09 drift unchanged — the embed was not edited).
+
+Stage Summary:
+- Part 5 Part-level: **5 → 4 sections**, rendered **2 536 → 2 172 words** (−14 %), RULE callouts **7 → 4**, НАБЛЮДЕНИЕ **0 → 1**, §-routes in reader text **5 → 0**, descriptive-English cells **17 → 0**, headings in §5.1 **11 → 8**, and the chapter's two sections with an empty/one-sentence job (MBTI h4, «Enneagram↔MBTI») are gone.
+- No capability lost: every number (30/70 · 30–40/60–70 · 4K/8K/16K+/32K+ ceilings · 1–2 / 4+ critical), every table payload (5 измерений · 4 типа стресса · цепочка Елены · 9 типов · 5 крыльев · 2 карты соответствий · матрица 9×5), the decision tree and the MBTI widget facts survive — the editorial pass compressed presentation only (DEC-15 5-point check applied per block).
+- Deferred (recorded, not fixed): there is **no `audit_ocean_parity.py`** — the 30/70 thresholds live in §5.1 + `data/ocean.json` (`threshold` ×10) + the widget without a parity gate; out of scope for a text iteration. `pnpm run validate:master` reports 0 warnings only because the re-added «синтез личности» sentence closed the pre-existing glossary warning; `component_extracts` stays exit-1 informational.
+
+---
+
 Task ID: iter-194-layout-corrections
 Agent: lead
 Task: owner review of the iter-193 single-file preview — «весь текст смещён влево, тогда как справа пустота, нормально выровняй элементы», «этот элемент [E01–E18 mini-map] можно убрать», «кнопку ↔ починить или убрать», «по умолчанию можно ещё тему поставить тёмную, а не oled и светлую». Deliverable: centre the wide composition, retire the two dead controls, make soft dark the default. Shell infrastructure only: zero content/canon edits.
@@ -176,56 +198,9 @@ Stage Summary:
 
 ---
 
-Task ID: iter-185-v4-chapter2-ocean
-Agent: lead
-Task: v4-4 — finish chapter 2: Part 5 (OCEAN + typology) anchor-free.
-
-Work Log:
-- 0: Preflight — Part 5 held 19 anchors over 5 sections; §5.1 alone carried five reader jobs (dimensions / stress type / pole ceilings / overload / framework choice) plus a second pentagon.
-- 1: **§5.1 opener** now states the job («проверяет SPINE числами; SPINE уже построен — OCEAN ничего не генерирует») and the «90% карточек» line without § pointers; the two RULE callouts keep the probed pole ladder verbatim and drop «см. §9.5 пункт 12» / self-references.
-- 2: **Stress-type table:** the «Елена при усилении N до экстремальной зоны (проекция её cautious-зоны)» hedge (a hypothetical stacked on a hypothetical) replaced with an in-band example; row 3 keeps the canonical Elena reading.
-- 3: **Trigger chain:** the «источник в гайде» column (three § cells) and the «каждый этап уже определён в гайде» paragraph removed; the Elena chain table now carries content only.
-- 4: **Ceilings / overload:** the «единственная шкала лимита» guide-meta replaced by a reader-facing sentence; the self-link rule rewritten as a usable test («если не можете назвать элемент SPINE — черта лишняя»); the 16K+ row and scenario 3 lost their Part-10 links.
-- 5: **Widget:** the pentagon kept (required container) but stopped posing as an «OCEAN×Enneagram check» — retitled «Интерактивный OCEAN-профиль», with a one-sentence description.
-- 6: **Decision tree** retitled «Когда нужен OCEAN, а когда Enneagram» and de-referenced (4 rows, no § numbers); the `§7A.13` build link after the widget deleted.
-- 7: **§5.2:** three self-links removed — zone labels (30–40 / 60–70) and the pole rule are stated in place.
-- 8: **§5.3–§5.5:** textual de-linking only (`[ref:]`/§ → local phrasing); all tables untouched, including the generated Enneagram record — `data/enneagram.json` came out byte-identical.
-- 9: **Canon mirror:** `docs/canon/part_05.md` §5.1–§5.2 rebuilt in pair, §5.3–§5.5 text-patched; E09/E10 markers preserved; `generate_enneagram.mjs` still parses the same table (build green, no data change).
-- 10: **Tag hygiene:** the iter-184 stack scanner caught 7 unmatched `</p>` + 1 `</div>` from the splices; removed before the battery.
-- 11: **Verification:** build 68 sections · hash `6f563edc` · validate 126 redirects · validate:master 12/12, 0 warnings · tests 68/68 · sync **87/87** · 8 parity gates PASS · english **1** / syntax **224** · lint PASS.
-
-Stage Summary:
-- Part 5: 2 601 → 2 488 words, anchors **19 → 0**.
-- Corpus: 23 436 → 23 370 words; anchors **215 → 196** (`part_09` = 70, `part_07a` = 33, `part_10` = 31 are the remaining pools).
-- Next: chapter 3 (Examples: behaviour) — Part 2 (anchors) + Part 6 (CoT).
-
----
-
-Task ID: iter-184-v4-chapter2-spine
-Agent: lead
-Task: v4-3 — chapter 2 core: Part 4 (SPINE) as one self-contained place, zero cross-chapter anchors.
-
-Work Log:
-- 0: Preflight — worktree carried iters 182–183; measured Part 4 (2 104 words, 9 anchors, 6 sections) and its 11 sync probes.
-- 1: **§4.1:** the anchors-comparison and «структура — VS-EMBED E05 выше» meta dropped; the «поэлементно §4.2–§4.5» routing sentence deleted; the roadmap paragraph (Part 5/6/7A/7B/10) replaced by one line about the OCEAN numeric check; the simplification recommendation states its own check instead of a § reference.
-- 2: **§4.2 GHOST:** the LIE column removed from the canonical table (the GHOST↔LIE pair now lives once, in §4.3); the four Elena/one-GHOST repetitions collapsed to one sentence; the Walter cross-ref deleted (probe → `ABSENT_CHECKS`); the layers-example intro de-meta'd («показаны в VS-EMBED E06 выше» gone).
-- 3: **§4.3 LIE** gained the derivation rule the old table implied: LIE sounds like the character speaking about himself; «люди плохие» is an evaluation, not a lie.
-- 4: **§4.4 FLAW:** two ❌/✅ tables merged into one (both probed rows kept); the FLAW-linked rule states the requirement and points to the algorithm at the end of the part (no §-link).
-- 5: **§4.5 NEED:** the WANT-only table and the paired table merged into one WANT↔NEED table; the probed variant row kept verbatim.
-- 6: **§4.6 full chain:** the infographic mnemonic deleted (the map table below carries the same five mappings, richer); «см. VS-EMBED E05 в §4.1» and both Part-10 links dropped; anchor-type definitions compressed to one paragraph; the duplicate Elena anchor table deleted (the map's FLAW row already carries that anchor); the Consequence-Driven model note rewritten without links; the SPINE checklist lost its Lorebook row (7 → 6; Lorebook facts are Part 7B's domain).
-- 7: **Canon mirror:** `docs/canon/part_04.md` 4.1–4.6 rebuilt in pair (E05/E06 `[VS:]` markers preserved); probe P3-4b moved to `ABSENT_CHECKS` (87 total kept).
-- 8: **Verification:** build 68 sections · hash `6f563edc` · validate 126 redirects · validate:master 12/12, 0 warnings · tests 68/68 · sync **87/87** · 8 parity gates PASS · english **1** / syntax **224** · lint PASS.
-- 9: **Defect class caught by a self-check (KI#87 opened):** the span-splice edits left 7 unmatched `</div>` + 4 unmatched `</p>` in part_01/part_04/part_07a, and every gate stayed green because `validate-master.mjs` does not check tag balance. Found with a stack scanner, removed only the unmatched closers, rebuilt, full battery re-run green. KI#87 records the missing guard (add a balance check to Check 4).
-
-Stage Summary:
-- Part 4: 2 104 → 1 848 words, anchors **9 → 0**.
-- Corpus: 23 713 → 23 436 words; anchors **224 → 215** (`part_09` = 70, `part_07a` = 33, `part_10` = 31 remain the pools).
-- Next: finish chapter 2 — Part 5 (OCEAN, `p5_cross_*` collapse, Enneagram/MBTI collapsed).
-
----
-
-
-Task ID: iters 179–183 (one-line summaries)
+Task ID: iters 179–185 (one-line summaries)
+- iter 185 — v4-4, chapter 2 (Part 5) anchor-free: §5.1 opener states the job, stress table loses the hypothetical hedge, trigger chain loses the «источник в гайде» column, ceilings/overload de-meta'd, pentagon retitled «Интерактивный OCEAN-профиль», §5.2–§5.5 de-linked textually (tables untouched, `data/enneagram.json` byte-identical); Part 5 2 601 → 2 488 words, anchors **19 → 0**. Detail: git + STATUS iter-185.
+- iter 184 — v4-3, chapter 2 core (Part 4, SPINE) as one self-contained place: GHOST table loses its LIE column (the pair lives in §4.3), §4.4 two ❌/✅ tables merged, §4.5 WANT↔NEED merged, §4.6 infographic + duplicate Elena anchor table + Lorebook checklist row dropped; Part 4 2 104 → 1 848 words, anchors **9 → 0**; **KI#87** opened (validate-master has no tag-balance check). Detail: git + STATUS iter-184.
 - iter 183 — v4-2, chapter 0 (Part 0 + Part 1) as one self-contained place: the module map → a 5-block anatomy table, TL;DR → the six build steps, the term list with its four «см. Part N» deleted (the glossary panel is the single term surface), the anchors-placement callout and the top-3 routing gone; chapter 0 2 341 → 1 542 words, anchors **19 → 0**; 3 probes → `ABSENT_CHECKS`; one duplicated `</section>` fixed (validate:master → 0 warnings). Detail: git + STATUS iter-183.
 - iter 182 — v4 pilot, chapter 1 (System Prompt): §7A.1 rewritten as six elements + order, CORE DIRECTIVES/Tone Frame/Format Lock de-meta'd, cluster 5 → 0 links (1 631 → 1 357 words); 3 sync probes re-pointed. Detail: git + STATUS iter-182.
 - iter 181 — owner-mandated audit fix sweep (37 findings: 16 P1 / 18 P2 / 3 tooling — visual honesty E07/E09/E17/E08, numeric drift unified to the §7A.12/§7A.13 owners, canon consistency, garbage; `scope="col"` ×302; `qa:english`/`qa:syntax` made runnable on Windows, `version:check` 4th place, integration-test EPERM fix; parity needles re-pointed to the FIXED state). Detail: git + this worklog’s previous revision.

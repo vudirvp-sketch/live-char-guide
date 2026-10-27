@@ -228,11 +228,15 @@ CHECKS = [
         "part_10 Omnis FLAW: concrete behavior replacing abstract adjective (iter 35 P0-14 fix)",
     ),
     # ----- P0-16 (NEW-3): part_05 §5.1 RULE expansion -----
+    # iter 195 (ch.2 Part 5 rewrite): the rule was re-worded together with the section
+    # (5 → 4 sections; two RULEs merged into one scale owner). The needle is re-pointed
+    # to the NEW canonical sentence, intent preserved: one owner, context ceilings,
+    # SPINE-bridge requirement, 4+ = critical. Same numbers, same single home.
     (
         "P0-16",
         "part_05.html",
-        "Потолок задаёт бюджет контекста (таблица «Контекстные лимиты полюсов» ниже): 4K — 2, 8K — 3, 16K+ — 4, 32K+ — 5.",
-        "part_05 §5.1 RULE: the SINGLE OCEAN pole-limit scale (F-01 closed iter 174: one owner, context ceilings, SPINE-bridge requirement)",
+        "<p><strong>ПРАВИЛО:</strong> 1–2 экстремальных полюса OCEAN (значение ниже 30 или выше 70) — рекомендация и максимум в любом контексте; потолок задаёт бюджет контекста: 4K — 2, 8K — 3, 16K+ — 4, 32K+ — 5. Каждая крайность сверх двух допустима только со SPINE-связкой (GHOST/LIE/FLAW/NEED/WANT) — без неё модель не разрешает конфликт последовательно. Четыре и больше крайностей без обоснования — критический перегруз: в чек-листе перед деплоем карточка получает уровень «Критический».</p>",
+        "part_05 §5.1 RULE: the SINGLE OCEAN pole-limit scale (F-01 closed iter 174: one owner, context ceilings, SPINE-bridge requirement; re-pointed iter 195 after the §5.1 rewrite)",
     ),
     # ----- P1-1 (A5): part_08 AP-9 broken SPINE criterion -----
     (
@@ -392,11 +396,14 @@ CHECKS = [
     ),
     # ----- P2-14 (F5): part_05 §5.1 Cautious zone definition -----
     # iter 107: cautious zone → осторожная зона (English gloss kept in parens on first mention); body fully Russian
+    # iter 195 (ch.2 Part 5 rewrite): the paragraph kept its meaning and its English first-mention
+    # gloss, and lost the second half-sentence that repeated the example. Needle re-pointed to the
+    # NEW wording — same invariants: term + both bounds + the SPINE-link claim + both Elena values.
     (
         "P2-14",
         "part_05.html",
-        "<p><strong>Осторожная зона (cautious zone, 30–40 / 60–70)</strong> — пограничная зона, не экстремальная, но влияющая на SPINE-связи (FLAW, GHOST-реактивность). Значения в осторожной зоне не считаются «экстремальными полюсами», но активно формируют поведение — например, Елена <code>A=38</code> и <code>N=68</code> напрямую связаны с её FLAW (отталкивает людей сарказмом) и GHOST (предательство редактора → недоверие).</p>",
-        "part_05 §5.1: Cautious zone definition added after RULE (iter 37 P2-14 fix; iter 107 cautious zone → осторожная зона)",
+        "<p><strong>Осторожная зона (cautious zone, 30–40 / 60–70)</strong> — пограничная зона, не экстремальная, но уже влияющая на SPINE-связи (FLAW, GHOST-реактивность). Например, у Елены <code>A=38</code> держит FLAW (отталкивает людей сарказмом), а <code>N=68</code> — GHOST-реактивность (предательство редактора → недоверие).</p>",
+        "part_05 §5.1: Cautious zone definition after the profile rule (iter 37 P2-14 fix; iter 107 cautious zone → осторожная зона; re-pointed iter 195 after the §5.1 rewrite)",
     ),
     # ----- P2-16 (F7): part_07a §7A.1 Keirsey SP Artisan → Sensing-Perceiving -----
     (

@@ -118,6 +118,7 @@
     "p1_assembly_pipeline": "p7a_assembly_pipeline",
     "p5_ocean_warning": "p5_ocean_basics",
     "p5_enneagram_wings": "p5_enneagram_basics",
+    "p5_cross_instrument_map": "p5_cross_matrix",
     "p6_cot_bridge": "p6_cot_basics",
     "p2_anchor_examples": "p2_anchor_rules",
     "p3_examples_quality": "p3_examples_rules",

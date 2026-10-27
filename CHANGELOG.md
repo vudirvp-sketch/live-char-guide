@@ -6,6 +6,17 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 195 — Part 5 rebuilt: **«Психология: OCEAN и типология» is 4 sections with one reader job each — one notation, no §-routing, no descriptive English, 3 RULE instead of 6 in the OCEAN section.**
+
+- **Distribution, not wording.** Part 5 carried 2 536 rendered words over 5 sections, `p5_ocean_basics` alone 1 124 / 11 headings / 6 tables / 6 RULE / 4 §-routes (Parts 4/6/9 sit at 269/140/383 words and ≤2 RULE). Sentence length was already house-grade (avg 16.2 = Part 9's).
+- **§5.1 «OCEAN: проверка SPINE числами»** (1 124 → 757 words, 11 → 8 headings): the ceilings table now precedes the theory it answers, the two pole-limit RULEs are one rule again, three «конфликт-сценария» paragraphs → one table, two stress tables → one, trigger categories → a four-line list.
+- **§5.2** keeps its shape; its RULE became `НАБЛЮДЕНИЕ` (a worked example is not a rule).
+- **§5.3** keeps the 9-type table untouched (7 columns = the `generate_enneagram.mjs` parser contract); the footnote-shaped «РЕКОМЕНДАЦИЯ: Дополнительный контент…» callout became one sentence; h5 → h4.
+- **§5.4 «Сверка трёх систем»** — the iter-62 split completed: «Связь инструментов» + «Матрица» were one job told twice; `p5_cross_instrument_map` → redirect, `+1` (133 total, all live).
+- **Language/notation:** `High N` / `Low A` / `Высокий N` unified to «высокий N»; `(значения <30 или >70)` → «значение ниже 30 или выше 70»; 17 descriptive-English cells → Russian (DEC-16); the `(cautious zone, …)` first-mention gloss kept (iter-107).
+- **Gates:** sync `P0-16` + `P2-14` re-pointed to the new canonical wording, **87/87** kept, both disclosures in the probe descriptions; `readerpath_audit_iter164.py` corpus 62 → 61. Two markup defects fixed: `</tr></tr>` ×2, and the corpus' only English `<summary>`.
+- **Verified:** build 61 sections · hash `517d2245` · tests 91/91 · validate 12 gates + 133 redirects · master 12/12, 0 warnings · sync 87/87 · 7 parity gates + `audit_vs_embeds` · reader-path · qa gates · english 1 / syntax 224 (baselines exact) · lint 0.
+
 ### iter 194 — reading-layout corrections: **the wide composition is centred, two dead controls are gone (the E01–E18 mini-map nav and the ↔ width toggle), and soft dark is the default theme.**
 
 - **Centring (owner: «весь текст смещён влево, тогда как справа пустота»).** The ≥1220px `.layout-grid` gained `justify-content: center`: measured before 36px left / 783px right gutter at 1920px (text 276px left of centre), after equal gutters at 1280/1440/1920/2560 (90/90 · 170/170 · 410/410 · 730/730) with the 72ch measure and 0 horizontal scroll untouched. `#content { grid-column: 2 }` + `.tool-dock { grid-column: 3 }` pin the zones and the `body.rail-hidden` two-column re-template is deleted — hiding the rail with 📑 no longer moves the text (708–1406px @1920 before and after).

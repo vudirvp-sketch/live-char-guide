@@ -142,7 +142,7 @@
           },
           {
             "id": "withdrawn_avoidant",
-            "label": "Избегающ-замкнутый",
+            "label": "Избегающе-замкнутый",
             "trigger": "N > 60 (cautious) or N > 70 (extreme) + low E",
             "behavior": "Стресс → withdrawal, dissociation, shutdown",
             "spine_pattern": "FLAW: isolation, emotional numbness",

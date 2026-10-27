@@ -89,7 +89,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **OCEAN (Большая пятёрка)** — модель личности: Openness (Открытость), Conscientiousness (Добросовестность), Extraversion (Экстраверсия), Agreeableness (Доброжелательность), Neuroticism (Нейротизм). Используется для проверки внутренней консистентности персонажа и дополнения SPINE. Золотое правило: только 1–2 экстремальных полюса (значения <30 или >70). В карточке размещается в Description как тег `<ocean>` с числовыми значениями, не нарративным описанием черт (принцип #3, §1.4).
 
-→ `[ref: part_05.md §5.1 — OCEAN: 5 измерений личности]`
+→ `[ref: part_05.md §5.1 — OCEAN: проверка SPINE числами]`
 → `[meta: sources=C-17+T-31; lang=en; home=p5_ocean_basics; aliases=OCEAN, Ocean; deprecated=Big Five, big five]`
 
 ### OOC (вне образа)
@@ -320,7 +320,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **Синтез личности (Persona Synthesis)** — процесс интеграции SPINE + OCEAN + Enneagram в единый профиль персонажа.
 
-→ `[ref: part_05.md §5.5 — OCEAN×Enneagram Matrix + Синтез личности (Persona Synthesis)]`
+→ `[ref: part_05.md §5.4 — Сверка трёх систем: OCEAN, Enneagram, MBTI]`
 → `[meta: sources=T-34; lang=ru; home=p5_cross_matrix; aliases=Persona Synthesis, синтез личности]`
 
 ### Слои призрака (GHOST Layers)
@@ -348,5 +348,5 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 **Эннеаграмма (Enneagram)** — 9-типная модель личности, сопоставляемая с элементами SPINE. Каждый тип имеет ключевой страх, ключевое желание, направление стресса и направление роста — что позволяет вывести LIE, WANT, FLAW и NEED из типа. OCEAN описывает «сколько» черты, Enneagram отвечает на «почему» персонаж действует именно так.
 
-→ `[ref: part_05.md §5.3 — Enneagram: 9 типов личности]`
+→ `[ref: part_05.md §5.3 — Enneagram: карта мотивации]`
 → `[meta: sources=C-7+T-13; lang=ru; home=p5_enneagram_basics; xrefs=; aliases=Enneagram, Эннеаграмма, эннеаграмма, Эннеа; deprecated=Эннеа]`

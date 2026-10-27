@@ -151,14 +151,15 @@ def main():
         if built != entry["anchors"]:
             err(f"LEARN L2: {entry['file']} renders {built} != manifest {entry['anchors']}")
     total = sum(len(e["anchors"]) for e in manifest["parts"] + manifest["appendices"])
-    if total != 62:
-        err(f"LEARN L2: rendering section count {total} != 62 "
+    if total != 61:
+        err(f"LEARN L2: rendering section count {total} != 61 "
             "(v3 stage 3: Part 8 16->2, Part 9 11->7, Part 10 4->5; stage 4a: "
             "Parts 2/3/4/5/6 de-duplicated; stage 4b/F-19: Appendix C deleted; "
             "v4-7: Part 7B 5->3; v4-8: §7A.11 4K-Fallback absorbed into §7A.12; "
             "v4-9: Part 9 7->5 — p9_symptom_table into p9_basic_checklist, "
             "p9_one_change_rule into p9_test_scenarios — and p1_top3_problems "
-            "absorbed into Part 9)")
+            "absorbed into Part 9; iter 195: Part 5 5->4 — §5.4 «Связь инструментов» "
+            "absorbed into §5.4 «Сверка трёх систем»)")
 
     # L3 — difficulty metadata + F6 disclosure (the Learn visibility model)
     diff = sum(len(re.findall(r"<!--\s*difficulty:\s*(?:BASIC|INTERMEDIATE|EXPERT)\s*-->", t))
