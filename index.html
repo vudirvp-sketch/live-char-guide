@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
 <!-- Build: 8b3a917d -->
-<!-- Generated: 2026-10-27T23:09:26.669Z -->
+<!-- Generated: 2026-10-27T23:16:20.920Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -3603,32 +3603,43 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 
 <h3>Калькулятор бюджета токенов</h3>
 
+<p>Выберите профиль карточки и поставьте ползунки по блокам. Ползунок Description включает якоря — отдельного слайдера Anchors нет. Статус каждого блока сверяется с лимитами профиля, итог — подсказка, а не вердикт: блоки сверяются с лимитами, а не с суммой.</p>
+
 <div class="token-calc" id="token-calc" data-toc-exclude>
+<div class="token-calc-row token-calc-profile">
+<label class="token-calc-label" for="calc-profile">Профиль</label>
+<select id="calc-profile" class="token-calc-select">
+<option value="4k">4K-Fallback (410–540)</option>
+<option value="8k" selected>8K+ (400–900)</option>
+<option value="16k">16K+ (740–1140)</option>
+</select>
+</div>
 <div class="token-calc-inputs">
 <div class="token-calc-row">
-<label class="token-calc-label">System Prompt</label>
-<input type="range" min="50" max="500" value="80" id="calc-sp" class="token-calc-range">
-<span class="token-calc-val" id="calc-sp-val">80</span>
+<label class="token-calc-label" for="calc-sp">System Prompt</label>
+<input type="range" min="40" max="200" value="100" id="calc-sp" class="token-calc-range">
+<span class="token-calc-val" id="calc-sp-val">100</span>
 </div>
 <div class="token-calc-row">
-<label class="token-calc-label">Description</label>
-<input type="range" min="100" max="1000" value="200" id="calc-desc" class="token-calc-range">
-<span class="token-calc-val" id="calc-desc-val">200</span>
+<label class="token-calc-label" for="calc-desc">Description (с якорями)</label>
+<input type="range" min="100" max="700" value="300" id="calc-desc" class="token-calc-range">
+<span class="token-calc-val" id="calc-desc-val">300</span>
 </div>
 <div class="token-calc-row">
-<label class="token-calc-label">Examples</label>
-<input type="range" min="80" max="400" value="180" id="calc-ex" class="token-calc-range">
+<label class="token-calc-label" for="calc-ex">Examples (всего)</label>
+<input type="range" min="40" max="400" value="180" id="calc-ex" class="token-calc-range">
 <span class="token-calc-val" id="calc-ex-val">180</span>
 </div>
 <div class="token-calc-row">
-<label class="token-calc-label">Якоря</label>
-<input type="range" min="0" max="400" value="50" id="calc-anc" class="token-calc-range">
-<span class="token-calc-val" id="calc-anc-val">50</span>
+<label class="token-calc-label" for="calc-greeting">Greeting</label>
+<input type="range" min="40" max="100" value="60" id="calc-greeting" class="token-calc-range">
+<span class="token-calc-val" id="calc-greeting-val">60</span>
 </div>
 </div>
+<div class="token-calc-status" id="calc-status" aria-live="polite"></div>
 <div class="token-calc-result">
-<span>Итого: <strong id="calc-total">510</strong> токенов</span>
-<span class="tag" id="calc-budget-range">(полоса 8K: 400–900)</span>
+<span>Итого: <strong id="calc-total" aria-live="polite">640</strong> токенов</span>
+<span class="tag" id="calc-budget-range">Базовый (400–900)</span>
 </div>
 <noscript>
 <p class="callout rec"><strong>РЕКОМЕНДАЦИЯ:</strong> Для интерактивного калькулятора включите JavaScript.</p>
@@ -3641,7 +3652,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <!-- difficulty: INTERMEDIATE -->
 <h2>Сборка System Prompt и Description: шесть шагов</h2>
 
-<p>Ниже — конвейер сборки System Prompt и Description: шесть шагов в этом порядке. Для каждого шага — что вы делаете и как выглядит конкретный результат на примере Елены, циничной журналистки-расследовательницы. Бюджеты блоков — в таблице бюджета выше; последний шаг сверяет карточку с ними и с диапазоном.</p>
+<p>Ниже — конвейер сборки System Prompt и Description: шесть шагов в этом порядке. Для каждого шага — что вы делаете и как выглядит конкретный результат на примере Елены, циничной журналистки-расследовательницы. Бюджеты блоков — в таблице бюджета выше; последний шаг сверяет карточку с ними и с полосой профиля.</p>
 
 <!-- VS-EMBED: E02 — Assembly Pipeline -->
 <div class="vs-embed" data-vs-element="E02">

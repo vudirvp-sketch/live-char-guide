@@ -1832,73 +1832,97 @@
   // ============================================================================
 
   /**
-   * Initialize the token budget calculator widget.
-   * Updates total and layer recommendation in real-time as user adjusts sliders.
-   * Progressive enhancement: without JS, static table remains functional.
+   * Initialize the token budget calculator widget (iter C, iter 201).
+   * Profile-aware: the block limits come from §7A.12 (4K = the 4K-Fallback spec,
+   * 8K/16K = the table's Min/Max windows), the total class comes from the printed
+   * size scale, and the profile band is a hint, never a verdict.
+   * Progressive enhancement: without JS the static tables remain functional.
    */
   function initTokenCalc() {
     const calcEl = $('#token-calc');
     if (!calcEl) return;
 
-    const spSlider = $('#calc-sp');
-    const descSlider = $('#calc-desc');
-    const exSlider = $('#calc-ex');
-    const ancSlider = $('#calc-anc');
+    const profileEl = $('#calc-profile');
+    const blocks = [
+      { key: 'sp', slider: $('#calc-sp'), valEl: $('#calc-sp-val') },
+      { key: 'desc', slider: $('#calc-desc'), valEl: $('#calc-desc-val') },
+      { key: 'ex', slider: $('#calc-ex'), valEl: $('#calc-ex-val') },
+      { key: 'greeting', slider: $('#calc-greeting'), valEl: $('#calc-greeting-val') },
+    ];
     const totalEl = $('#calc-total');
-    const budgetRangeEl = $('#calc-budget-range');
+    const rangeEl = $('#calc-budget-range');
+    const statusEl = $('#calc-status');
 
-    if (!spSlider || !descSlider || !exSlider || !ancSlider || !totalEl || !budgetRangeEl) return;
+    if (!profileEl || !totalEl || !rangeEl || !statusEl ||
+        blocks.some((b) => !b.slider)) return;
 
-    const spValEl = $('#calc-sp-val');
-    const descValEl = $('#calc-desc-val');
-    const exValEl = $('#calc-ex-val');
-    const ancValEl = $('#calc-anc-val');
+    // Limits: [min, max] per block, plus the profile's total band (orientir).
+    const PROFILES = {
+      '4k': { label: '4K', band: [410, 540], limits: { sp: [80, 100], desc: [150, 200], ex: [130, 160], greeting: [50, 80] } },
+      '8k': { label: '8K', band: [400, 900], limits: { sp: [50, 200], desc: [150, 700], ex: [80, 400], greeting: [40, 100] } },
+      '16k': { label: '16K+', band: [740, 1140], limits: { sp: [50, 200], desc: [150, 700], ex: [80, 400], greeting: [40, 100] } },
+    };
+    const NAMES = { sp: 'System Prompt', desc: 'Description', ex: 'Examples', greeting: 'Greeting' };
+    const MARK = { ok: '✓', high: '⚠', low: '▲' };
 
-    function updateCalc() {
-      const sp = parseInt(spSlider.value, 10);
-      const desc = parseInt(descSlider.value, 10);
-      const ex = parseInt(exSlider.value, 10);
-      const anc = parseInt(ancSlider.value, 10);
-      const total = sp + desc + ex + anc;
-
-      // Update value displays
-      if (spValEl) spValEl.textContent = sp;
-      if (descValEl) descValEl.textContent = desc;
-      if (exValEl) exValEl.textContent = ex;
-      if (ancValEl) ancValEl.textContent = anc;
-
-      // Update total
-      totalEl.textContent = total;
-
-      // Update budget range indicator
-      budgetRangeEl.className = 'tag';
-      if (total < 400) {
-        budgetRangeEl.textContent = 'Минимум (<400)';
-        budgetRangeEl.classList.add('over');
-      } else if (total <= 900) {
-        budgetRangeEl.textContent = 'Базовый (400–900)';
-        budgetRangeEl.classList.add('budget-basic');
-      } else if (total <= 1500) {
-        budgetRangeEl.textContent = 'Стандартный (900–1500)';
-        budgetRangeEl.classList.add('budget-standard');
-      } else if (total <= 2500) {
-        budgetRangeEl.textContent = 'Расширенный (1500–2500)';
-        budgetRangeEl.classList.add('budget-extended');
-      } else {
-        budgetRangeEl.textContent = 'Перегруз (>2500)';
-        budgetRangeEl.classList.add('over');
-      }
+    function statusFor(value, min, max) {
+      if (value < min) return 'low';
+      if (value > max) return 'high';
+      return 'ok';
     }
 
-    // Bind slider events
-    spSlider.addEventListener('input', updateCalc);
-    descSlider.addEventListener('input', updateCalc);
-    exSlider.addEventListener('input', updateCalc);
-    ancSlider.addEventListener('input', updateCalc);
+    function updateCalc() {
+      const profile = PROFILES[profileEl.value] || PROFILES['8k'];
+      let total = 0;
 
-    // Initial update
+      blocks.forEach((b) => {
+        const value = parseInt(b.slider.value, 10);
+        total += value;
+        if (b.valEl) b.valEl.textContent = value;
+      });
+      totalEl.textContent = total;
+
+      statusEl.replaceChildren();
+      blocks.forEach((b) => {
+        const value = parseInt(b.slider.value, 10);
+        const [min, max] = profile.limits[b.key];
+        const state = statusFor(value, min, max);
+        const chip = document.createElement('span');
+        chip.className = 'token-calc-chip token-calc-chip--' + state;
+        chip.textContent = NAMES[b.key] + ' ' + MARK[state];
+        chip.title = state === 'ok'
+          ? `${value} — в лимите ${profile.label} (${min}–${max})`
+          : state === 'high'
+            ? `${value} — выше лимита ${profile.label} (${max})`
+            : `${value} — ниже лимита ${profile.label} (${min})`;
+        statusEl.appendChild(chip);
+      });
+
+      let cls = 'over';
+      let clsName = 'Перегруз (>2500)';
+      if (total < 400) {
+        cls = 'over';
+        clsName = 'Минимум (<400)';
+      } else if (total <= 900) {
+        cls = 'budget-basic';
+        clsName = 'Базовый (400–900)';
+      } else if (total <= 1500) {
+        cls = 'budget-standard';
+        clsName = 'Стандартный (900–1500)';
+      } else if (total <= 2500) {
+        cls = 'budget-extended';
+        clsName = 'Расширенный (1500–2500)';
+      }
+      rangeEl.className = 'tag ' + cls;
+      rangeEl.textContent = clsName;
+      rangeEl.title = `Полоса ${profile.label}: ${profile.band[0]}–${profile.band[1]} (ориентир, не гейт)`;
+      statusEl.dataset.band = (total >= profile.band[0] && total <= profile.band[1]) ? 'in' : 'out';
+    }
+
+    profileEl.addEventListener('change', updateCalc);
+    blocks.forEach((b) => b.slider.addEventListener('input', updateCalc));
+
     updateCalc();
-
     console.log('[TokenCalc] Initialized');
   }
 

@@ -6,6 +6,16 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 202 — the budget widget now computes the model the text prints.
+
+- **Profile-aware:** a profile selector (4K-Fallback / 8K+ / 16K+) switches the per-block windows (4K = the 4K-Fallback spec; 8K/16K+ = the §7A.12 Min/Max windows) and the total band (410–540 / 400–900 / 740–1140) is an orientir in the tooltip, never a verdict.
+- **Per-block status:** ✓ в лимите · ⚠ выше · ▲ ниже, with the limit in each chip's tooltip.
+- **Greeting counted:** a fourth slider (40–100) — «Итого» is the whole card.
+- **Anchors inside Description:** the separate Anchors slider is gone; the Description slider is «с якорями» (iter-201 truth), so no double counting.
+- **Class scale:** the total gets the printed size class (<400 · 400–900 · 900–1500 · 1500–2500 · >2500); «Перегруз» is the only red signal.
+- **Browser-proved:** 8K 640 / «Базовый» / 4✓ · 4K flags Description and Examples, band out · Greeting 60→80 moves the total 640→660 · 16K+ 880 in band.
+- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · lint 0.
+
 ### iter 201 — the v2-audit truth pass: four single truths, a budget model, and `§`-notation retired from reader text.
 
 - **Anchors live in Description.** The §0.2 skeleton and all four Part 10 cards moved `<anchors>` from between `[EXAMPLES]`/`[GREETING]` to the end of `[DESCRIPTION]` (block text unchanged); the §10.0 index cell, Part 1 captions/table, §7A.9 (plus the "if the frontend has an Anchors field" sentence) and the glossary article follow. The E01 diagram keeps showing the Examples *zone* — a semantic grouping, not a field.
@@ -30,13 +40,7 @@
 - **Lifecycle:** four long-closed KIs deleted, five closed with evidence — **zero open KIs**.
 - **Verified:** build 61 sections · tests **91/91** · validate 12 gates + 133 redirects · master **13/13**, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
 
-### iter 199 — the glossary now covers the three systems it names (48 entries).
-
-- **Three native entries added:** `Класс качества (Quality Grade)` (§3.3), `Плата за письменность (Script Tax)` (§7A.12), `Сопоставитель паттернов (Pattern Matcher)` (§7A.4) — Russian heads with the English identifier in parentheses (DEC-16), each with aliases and a link to its owning section. Registry 45 → 48, `data/glossary.json` regenerated, no-JS page carries all three.
-- **Provenance is honest:** the new entries carry `native-1..3` rather than invented C-/T- rows — the migration map's dispositions are owner-ratified (DEC-17/18). **DEC-38** records the extension and the rule that adding a term to the ratified map stays an owner act.
-- **Hardcoded counts became measurements:** the glossary parity gate accepts the native class and expects 48; the reader-path audit compares `glossary.json` against the registry's own entry count and prints the measured term count.
-- **One prose number deleted:** §0.1 no longer prints «45 ключевых терминов» (false the day the registry grew) — «Ключевые термины собраны в панели «Глоссарий»».
-- **Verified:** build 61 sections · glossary 48 terms · tests **91/91** · validate 12 gates + 133 redirects · master 12/12, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
+### iter 199 — the glossary grows to 48 entries; three native articles, honest native provenance (DEC-38).
 
 ### iter 198 — the audit's last seven items: unmeasured claims, one budget range, and the missing Russian.
 
