@@ -7,7 +7,7 @@
  * All connections between widgets go through standardized events on this bus.
  * Never through direct API calls between components.
  * 
- * Architecture (§0.3):
+ * Architecture (0.3):
  * - If subscribers or event sources are absent — nothing breaks
  * - Each widget works autonomously
  * - Events go into void if no subscribers
@@ -18,7 +18,7 @@
  * - getLast() method for explicit state queries
  * - Prevents the "missed event" race condition between widgets
  * 
- * Event Contract (§2.1-2.2):
+ * Event Contract (2.1-2.2):
  * 
  * Emitted Events:
  *   ocean:updated       — { O, C, E, A, N } (numbers 0–100)
@@ -154,7 +154,7 @@
     }
   };
 
-  // Global event contract — must be consistent across all widgets (§2.1)
+  // Global event contract — must be consistent across all widgets (2.1)
   const GuideEvents = {
     OCEAN_UPDATED: 'ocean:updated',           // Emitted by OCEAN Insight
     ENNEAGRAM_SELECTED: 'enneagram:selected',  // Emitted by Enneagram Builder

@@ -5,6 +5,22 @@
 
 ---
 
+Task ID: iter-205-support-and-notation
+Agent: lead
+Task: audit v2 iteration E — the no-JS glossary page, the OCEAN widget's boundary/copy defects, and the last section-glyph debt in comments.
+
+BASE: b26ded80
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `b26ded80`. Read `generateGlossaryHTML()` (fragment-only), the OCEAN widget's state/copy functions, and counted the remaining § glyphs (25 master + 30 shell/widget, all inside comments).
+- 1: **Glossary page** (`scripts/build-unified.mjs`): emits `<!DOCTYPE html>` with `<head>` (charset, viewport, title, description), palette styles matching the guide's soft dark, «← Live Character Guide» back link, measured term count, and `href="../index.html#<anchor>"` per term (was `#<anchor>` — dead on a standalone page). The `no-js-only` marker is kept (reader-path gate anchor). Browser: 48 terms, 48 refs, styled page, working back link.
+- 2: **OCEAN widget** (`ocean-insight.js`): `<= 30`/`>= 70` → `< 30`/`> 70` in `getState`, `getTraitLabel`, `countExtrema`, the forecast and the extrema summary; `generateCopyText` returns the canonical compact `<ocean>…</ocean>` tag instead of a narrative list. Browser-proofs: 30/70 = «Умеренная», 29 = low label, 71 = high label; captured copy = `<ocean>O:72 C:65 E:41 A:38 N:68</ocean>`.
+- 3: **Notation debt**: removed the remaining 55 `§` glyphs from master HTML comments and shell/widget JS comments (comments only — visible text was already at zero since iter 201); `audit_enneagram_parity.py` accepts the glyph-free E10 derivation reference.
+- 4: **Verify:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+- 5: **Deliberately not done:** regenerating the six missing E-prototypes (E01/E07/E08/E10/E12/E17) — DEC-19 freezes `visual-system/` as design artifacts, every embed is live with no 404, and the audit classes it maintenance; the OCEAN widget's Enneagram forecast declaration and static `high/low` labels stay recorded in `PLAN.md` a2-E.
+
+Verification: green. S6 (§7A.7 deletion) remains an owner-gated redirect call.
+
 Task ID: iter-204-visuals-glossary
 Agent: lead
 Task: audit v2 iteration D2 — the three visual defects the v1/v2 audit measured (E04 funnel widths, E07 clipped strip, E08 badge) and the glossary rendering defect (markdown backticks + a live `<anchors>` tag on both reader surfaces).

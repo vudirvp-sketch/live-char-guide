@@ -170,13 +170,10 @@ async function generateGlossaryHTML() {
   const glossaryData = JSON.parse(await readFile(GLOSSARY_PATH, 'utf-8'));
   const terms = glossaryData.canonical_terms || glossaryData.terms || [];
 
-  let html = `<section id="glossary" class="no-js-only" data-toc-exclude>
-<h2>Глоссарий</h2>
-<dl>
-`;
-
-  // iter-204: the no-JS page had the same defect as the panel — definitions are
-  // plain text with markdown `code` spans, so escape then code-format.
+  // iter-205 (audit v2 §4.9/G1): the no-JS glossary was a bare <section> fragment —
+  // no <head>, no styles, no way back to the guide, and every term arrow pointed at
+  // "#anchor" which resolves nowhere on a standalone page. It is now a full page:
+  // own head, readable styles, a back link, and per-term links into the guide.
   const escapeHtml = (value) => String(value)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -186,28 +183,68 @@ async function generateGlossaryHTML() {
   const renderDefinition = (value) =>
     escapeHtml(value).replace(/`([^`]+)`/g, '<code>$1</code>');
 
+  let items = '';
   for (const term of terms) {
-    const termName = term.term || '';
-    // Use unified_definition (GD-2)
+    const termName = escapeHtml(term.term || '');
     const definition = renderDefinition(term.unified_definition || term.definition || '');
     const anchorId = term.anchor_id || '';
 
-    html += `<dt>${termName}`;
+    items += `<dt>${termName}`;
     if (term.abbreviation) {
-      html += ` <small class="glossary-abbr">(${term.abbreviation})</small>`;
+      items += ` <small class="glossary-abbr">(${escapeHtml(term.abbreviation)})</small>`;
     }
     if (anchorId) {
-      html += ` <a href="#${anchorId}" class="glossary-ref">→</a>`;
+      items += ` <a href="../index.html#${anchorId}" class="glossary-ref" title="Открыть раздел в гайде">→</a>`;
     }
-    html += `</dt>
+    items += `</dt>
 <dd>${definition}</dd>
 `;
   }
 
-  html += `</dl>
-</section>`;
-
-  return html;
+  return `<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Глоссарий — Live Character Guide</title>
+<meta name="description" content="Ключевые термины Live Character Guide: SPINE, OCEAN, якоря, CoT, Format Lock и другие. Страница работает без JavaScript.">
+<style>
+  :root { --bg: #0f1218; --panel: #161b24; --text: #d9dde4; --muted: #9aa4b5; --accent: #3cc8ff; --border: #242c39; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 2rem 1rem 3rem; background: var(--bg); color: var(--text);
+         font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 72ch; margin: 0 auto; }
+  h1 { font-size: 1.6rem; line-height: 1.3; margin: 0.5rem 0 0.75rem; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .back { margin: 0 0 1.25rem; font-size: 0.9rem; }
+  .intro { color: var(--muted); margin: 0 0 1.75rem; }
+  dl { display: grid; gap: 1rem; margin: 0; }
+  dt { font-weight: 600; }
+  dt .glossary-abbr { color: var(--muted); font-weight: 400; }
+  dd { margin: 0.25rem 0 0; }
+  dd code { background: var(--panel); color: var(--text); padding: 0.1em 0.35em;
+            border-radius: 4px; font-size: 0.9em; }
+  .glossary-ref { margin-left: 0.35rem; text-decoration: none; }
+  .glossary-ref:hover { text-decoration: underline; }
+  footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+           color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<main>
+<section id="glossary" class="no-js-only" data-toc-exclude>
+<p class="back"><a href="../index.html">← Live Character Guide</a></p>
+<h1>Глоссарий</h1>
+<p class="intro">${terms.length} терминов. Страница работает без JavaScript; ссылки «→» открывают раздел гайда.</p>
+<dl>
+${items}</dl>
+<footer>Live Character Guide v9.2.6 — глоссарий генерируется из <code>docs/canon/glossary_registry.md</code>.</footer>
+</section>
+</main>
+</body>
+</html>
+`;
 }
 
 // ============================================================================

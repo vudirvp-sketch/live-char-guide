@@ -3,13 +3,13 @@
  * PERSONA-VOICE-HIERARCHY — Voice Influence Hierarchy Interactive Widget
  * ============================================================================
  *
- * Interactive companion to the static E07 visual and §3.2 percentage table.
+ * Interactive companion to the static E07 visual and 3.2 percentage table.
  * It is a CONTROL STRIP for that table, not a second rendering of it (iter 180):
  * renders the model-tier toggle (12B / 32B+ / API) and the Markdown export
- * button, and switches the highlight in the §3.2 table's active model column.
+ * button, and switches the highlight in the 3.2 table's active model column.
  * The 6×3 matrix itself is printed once — by the table.
  *
- * Contract (§0.8):
+ * Contract (0.8):
  * - Input: <div id="persona-voice-hierarchy" data-model="12B"
  *           data-source-table="p3_influence_hierarchy"> placeholder in
  *           src/master/part_03.html (inside section p3_influence_hierarchy).
@@ -21,7 +21,7 @@
  *   `{ model: '12B'|'32B+'|'API' }` and `persona-voice-hierarchy://export`
  *   with `{ format: 'markdown', content }`.
  * - Fallback: if no placeholder container is present, init is a no-op.
- * - Data: hardcoded from canon part_03.md §3.2 table (6 sources × 3 models).
+ * - Data: hardcoded from canon part_03.md 3.2 table (6 sources × 3 models).
  *   Not extracted to data/*.json because the values are canonical prose,
  *   not user-editable widget data.
  * - Guard: `scripts/audit_voice_parity.py` fails if this file re-introduces a
@@ -34,11 +34,11 @@
   'use strict';
 
   // ========================================================================
-  // CANON DATA — sourced from docs/canon/part_03.md §3.2 table
+  // CANON DATA — sourced from docs/canon/part_03.md 3.2 table
   // Do NOT edit these values without updating the canon table first.
-  // voice-cluster (iter 142, DEC-21): row notes defer to canon §3.2 — the two
+  // voice-cluster (iter 142, DEC-21): row notes defer to canon 3.2 — the two
   // quantitative claims (recent-chat window ~10–20 messages; greeting decay
-  // after ~5 replies) are canonicalized in the §3.2 "Хранилище ≠ Влияние"
+  // after ~5 replies) are canonicalized in the 3.2 "Хранилище ≠ Влияние"
   // prose block; the rest are operational rule reminders (DEC-09). Values
   // parity-locked by scripts/audit_voice_parity.py.
   // ========================================================================
@@ -108,7 +108,7 @@
 
   /**
    * Render the widget UI into the container.
-   * Rendering the 6×3 matrix again here would duplicate the §3.2 table —
+   * Rendering the 6×3 matrix again here would duplicate the 3.2 table —
    * the widget only carries the controls.
    */
   function render() {
@@ -230,7 +230,7 @@
 
   /**
    * Initialize the widget. Reads data-model from the container to restore
-   * the user's last selection (defaults to '12B' per §3.2 RULE).
+   * the user's last selection (defaults to '12B' per 3.2 RULE).
    */
   function init() {
     if (isInitialized) return;

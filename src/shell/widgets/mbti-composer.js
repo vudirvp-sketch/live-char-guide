@@ -4,7 +4,7 @@
  * ============================================================================
  *
  * Interactive MBTI type selector with grid and axis slider modes.
- * Part of the Persona Synthesis Framework (§4.3).
+ * Part of the Persona Synthesis Framework (4.3).
  * v9 Note: MBTI moved to Appendix A. This widget serves the appendix reference page.
  *
  * Milestone Levels:
@@ -564,7 +564,7 @@
         var typeId = parseInt(btn.dataset.enneagramEmit, 10);
         if (isNaN(typeId)) return;
         // FIX-06: Emit suggestion event instead of directly selecting Enneagram type
-        // Per §0.3 (no direct API calls between components) and §0.5 (Single Data Owner)
+        // Per 0.3 (no direct API calls between components) and 0.5 (Single Data Owner)
         if (window.EventBus) {
           window.EventBus.emit('mbti:enneagram-suggest', {
             typeId: typeId,

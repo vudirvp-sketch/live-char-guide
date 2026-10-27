@@ -4,7 +4,7 @@
  * ============================================================================
  * 
  * Interactive OCEAN Big Five personality profiler.
- * Part of the Persona Synthesis Framework (§4.1).
+ * Part of the Persona Synthesis Framework (4.1).
  * 
  * Functionality Levels:
  *   M1 — Clickable pentagon vertices, 3 states (low/medium/high), auto-labels
@@ -92,7 +92,7 @@
     return arrow + value;
   }
 
-  // FIX-28: Pending Enneagram suggestion state (sovereignty §0.1 — user must confirm)
+  // FIX-28: Pending Enneagram suggestion state (sovereignty 0.1 — user must confirm)
   let _pendingEnneagramSuggestion = null;
 
   // Highlight notification auto-dismiss timer
@@ -120,8 +120,10 @@
   // ============================================================================
 
   function getState(value) {
-    if (value <= 30) return STATE_LOW;
-    if (value >= 70) return STATE_HIGH;
+    // Canon 5.1: extreme = strictly below 30 / above 70; 30 and 70 are the
+    // cautious zone edge, not extremes (iter 205, audit v2 S5).
+    if (value < 30) return STATE_LOW;
+    if (value > 70) return STATE_HIGH;
     return STATE_MEDIUM;
   }
 
@@ -142,8 +144,8 @@
   // ============================================================================
 
   function getTraitLabel(traitId, value) {
-    if (value <= 30) return TRAIT_LABELS_LOW[traitId];
-    if (value >= 70) return TRAIT_LABELS_HIGH[traitId];
+    if (value < 30) return TRAIT_LABELS_LOW[traitId];
+    if (value > 70) return TRAIT_LABELS_HIGH[traitId];
     return 'Умеренная';
   }
 
@@ -151,8 +153,8 @@
     let count = 0;
     const extremaList = [];
     TRAIT_IDS.forEach(function(id) {
-      if (profile[id] >= thresholds.high) { count++; extremaList.push(id + '_high'); }
-      if (profile[id] <= thresholds.low) { count++; extremaList.push(id + '_low'); }
+      if (profile[id] > thresholds.high) { count++; extremaList.push(id + '_high'); }
+      if (profile[id] < thresholds.low) { count++; extremaList.push(id + '_low'); }
     });
     return { count: count, extremaList: extremaList };
   }
@@ -161,7 +163,7 @@
     // Check which poles are extreme
     var extremePoles = [];
     TRAIT_IDS.forEach(function(id) {
-      if (profile[id] >= thresholds.high) extremePoles.push(id + '_high');
+      if (profile[id] > thresholds.high) extremePoles.push(id + '_high');
       if (profile[id] <= thresholds.low) extremePoles.push(id + '_low');
     });
 
@@ -208,32 +210,11 @@
     }, 300);
   }
 
-  function generateCopyText(profile, thresholds) {
-    var lines = ['**OCEAN Profile:**'];
-    TRAIT_IDS.forEach(function(id) {
-      var val = profile[id];
-      var label = getTraitLabel(id, val);
-      lines.push('- ' + TRAIT_NAMES[id] + ' (' + id + '): ' + val + ' — ' + label);
-
-      // M3: Include comments if present
-      if (currentWidgetLevel >= 3 && oceanComments[id]) {
-        lines.push('  Комментарий: ' + oceanComments[id]);
-      }
-    });
-
-    // Extrema summary
-    var extResult = countExtrema(profile, thresholds);
-    if (extResult.count > 0) {
-      var extParts = [];
-      TRAIT_IDS.forEach(function(id) {
-        if (profile[id] >= thresholds.high) extParts.push(id + ':' + profile[id] + ' (высокий)');
-        if (profile[id] <= thresholds.low) extParts.push(id + ':' + profile[id] + ' (низкий)');
-      });
-      lines.push('');
-      lines.push('Экстремумы: ' + extParts.join(', '));
-    }
-
-    return lines.join('\n');
+  function generateCopyText(profile) {
+    // iter 205 (audit v2 S6): the card field takes the compact canonical form
+    // `<ocean>O:72 C:65 E:41 A:38 N:68</ocean>` — not a narrative list.
+    return '<ocean>O:' + profile.O + ' C:' + profile.C + ' E:' + profile.E +
+      ' A:' + profile.A + ' N:' + profile.N + '</ocean>';
   }
 
   function copyToClipboard(text) {
@@ -675,7 +656,7 @@
       });
     }
 
-    // FIX-28: Bind "Apply Enneagram suggestion" button (sovereignty §0.1)
+    // FIX-28: Bind "Apply Enneagram suggestion" button (sovereignty 0.1)
     const applySuggBtn = container.querySelector('#ocean-apply-suggestion');
     if (applySuggBtn) {
       applySuggBtn.addEventListener('click', function() {
@@ -838,7 +819,7 @@
       console.log('[OCEAN] Subscribed to mbti:ocean-apply (M2+)');
     }
     // M2+: enneagram:ocean-suggest — FIX-28: Show suggestion instead of auto-applying
-    // Per §0.1 sovereignty: user must confirm changes to their OCEAN profile
+    // Per 0.1 sovereignty: user must confirm changes to their OCEAN profile
     if (window.EventBus) {
       window.EventBus.on('enneagram:ocean-suggest', function(data) {
         if (!data) return;

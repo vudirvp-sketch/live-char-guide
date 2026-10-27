@@ -19,6 +19,6 @@
  *   `defer` / `async` — browser blocks parsing, fetches, executes, continues.
  *   For a ~50-byte file the latency cost is negligible and cached after first load.
  *
- * Reference: AGENT_NAVIGATION.md §6 pitfall #34 (KI#16, fixed iter 19).
+ * Reference: AGENT_NAVIGATION.md 6 pitfall #34 (KI#16, fixed iter 19).
  */
 document.documentElement.classList.add('js');

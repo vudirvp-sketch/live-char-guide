@@ -62,7 +62,7 @@
   let loadedParts = new Set();
 
   // ============================================================================
-  // ANCHOR REDIRECT MAP (§0.18: v5.12 → v6 backward compatibility)
+  // ANCHOR REDIRECT MAP (0.18: v5.12 → v6 backward compatibility)
   // ============================================================================
 
   // Hardcoded fallback — used if data/anchor-redirects.json is not available
@@ -166,7 +166,7 @@
   }
 
   // ============================================================================
-  // GUIDE LAYER VISIBILITY HELPERS (§0.6)
+  // GUIDE LAYER VISIBILITY HELPERS (0.6)
   // v8: No layer system — all widgets always active
   // ============================================================================
 
@@ -790,7 +790,7 @@
     const content = $('#content');
     if (!content) { isLoading = false; hideLoading(); return; }
 
-    // PRERENDER ADOPTION (docs/PROMOTION_PLAN.md §3 A1)
+    // PRERENDER ADOPTION (docs/PROMOTION_PLAN.md 3 A1)
     // dist/index.html ships the guide already inside <main>, so crawlers see the
     // full text and returning visitors skip 17 fragment requests. The DOM is
     // byte-identical to what the fetch path builds, therefore we run the SAME
@@ -1043,7 +1043,7 @@
     const partOrder = [];
 
     sections.forEach(section => {
-      // Skip glossary and data-toc-exclude sections (NAV-01 §2.4, §3.6)
+      // Skip glossary and data-toc-exclude sections (NAV-01 2.4, 3.6)
       if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return;
 
       // Extract part key from data-section (format: p{N}_{topic}, p{7a}_…, p{7b}_…)
@@ -1570,7 +1570,7 @@
     // VS Scroll-анимации через IntersectionObserver
     initVsScrollAnimations();
 
-    // EventBus integration (§0.3): ensure EventBus is available after content load
+    // EventBus integration (0.3): ensure EventBus is available after content load
     if (typeof window.EventBus === 'undefined') {
       console.warn('[LazyLoader] EventBus not found — widgets will work standalone');
     }
@@ -1837,7 +1837,7 @@
 
   /**
    * Initialize the token budget calculator widget (iter C, iter 201).
-   * Profile-aware: the block limits come from §7A.12 (4K = the 4K-Fallback spec,
+   * Profile-aware: the block limits come from 7A.12 (4K = the 4K-Fallback spec,
    * 8K/16K = the table's Min/Max windows), the total class comes from the printed
    * size scale, and the profile band is a hint, never a verdict.
    * Progressive enhancement: without JS the static tables remain functional.
@@ -2101,10 +2101,10 @@
   async function init() {
     console.log('[LazyLoader] Initializing v' + CONFIG.VERSION + '...');
 
-    // Load auto-generated anchor redirects (§0.18) before handling legacy anchors
+    // Load auto-generated anchor redirects (0.18) before handling legacy anchors
     await loadAnchorRedirects();
     
-    // Handle v5.12 legacy anchor redirects (§0.18)
+    // Handle v5.12 legacy anchor redirects (0.18)
     handleLegacyAnchor();
 
     initTheme();

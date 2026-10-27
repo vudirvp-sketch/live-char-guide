@@ -313,7 +313,9 @@ def main():
             elif m.group(1) != want:
                 err(f"E10 embed: static default #{el_id} {m.group(1)!r} != "
                     f"§5.4 type-4 value {want!r}")
-        if "§5.3" not in embed or "SHARED_REFERENCE" not in embed:
+        # iter 205: the section glyph is gone from master comments, so accept the
+        # glyph-free section reference too (same invariant: derivation declared).
+        if not ("§5.3" in embed or "5.3" in embed) or "SHARED_REFERENCE" not in embed:
             err("E10 embed: mig-5 comment (§5.4 derivation + SHARED_REFERENCE "
                 "declaration) missing")
         notes.append("E10 embed: mini-card static defaults == §5.4 type-4 values; "

@@ -6,6 +6,14 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 205 — support surfaces: a real no-JS glossary page and an honest OCEAN widget.
+
+- **No-JS glossary page:** full document (head, title, palette styles, back link, measured term count); 48 term arrows now point at `../index.html#<id>` instead of a dead `#<id>`.
+- **OCEAN widget:** strict §5.1 boundaries (`< 30` / `> 70`, so 30 and 70 are cautious-zone edges, not extremes) in state, labels, extrema count and forecast; «Copy for card» copies the canonical `<ocean>O:… C:… E:… A:… N:…</ocean>` tag instead of a narrative list.
+- **Notation debt:** remaining 55 `§` glyphs in master/shell comments removed; enneagram gate accepts the glyph-free derivation ref.
+- **Deliberately not done:** E-prototype regeneration (DEC-19 frozen artifacts; all embeds live) — recorded in `PLAN.md` a2-E.
+- **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+
 ### iter 204 — the audit visuals and the glossary render honestly.
 
 - **E04 funnel:** `nth-of-type(1/3/5/7)` targeted the link-back chip and arrows, never the bars; now `2/4/6/8` in both stylesheets — measured **100/85/70/55 %**.

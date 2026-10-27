@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
 <!-- Build: 8b3a917d -->
-<!-- Generated: 2026-10-27T23:33:10.194Z -->
+<!-- Generated: 2026-10-27T23:42:36.956Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -1045,9 +1045,9 @@ Example:
   Dependencies: DESIGN-TOKENS.css, shared/*.css, E07-styles.css
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E07-script.js
-  voice-cluster (iter 142): values SHARED_REFERENCE (§3.2 owns the table);
+  voice-cluster (iter 142): values SHARED_REFERENCE (3.2 owns the table);
          TEXTUAL_CANONICAL (DEC-21) — the «Хранилище ≠ Влияние» prose lives in
-         §3.2 BELOW the table, not inside this embed (iter 180 removed the
+         3.2 BELOW the table, not inside this embed (iter 180 removed the
          duplicate inset; the visualization never re-tells the canonical text);
          parity locked by scripts/audit_voice_parity.py.
 -->
@@ -1151,7 +1151,7 @@ Example:
 </div>
 
       <!-- Split-axis note only: the canonical storage-vs-influence prose lives
-           in §3.2 BELOW the table and is not repeated here (iter 180). -->
+           in 3.2 BELOW the table and is not repeated here (iter 180). -->
       <p class="split-axis-note">
         Диаграмма использует разделённую ось с двумя шкалами: верхняя секция (Недавний чат, 75–85%) —
         сжатая шкала (подписи 20/40/80% сверху); нижняя секция (источники на уровне карточки, 0–15%) —
@@ -2364,10 +2364,10 @@ WANT: Стать цельным — заполнить пустоты внутр
          0.5 -> 1.25, opacity 0.2 -> 0.6, dash 3 3 -> 5 3 for legibility. Static
          mini-card defaults aligned to data/enneagram.json (type 4 wording)
          together with the widget fetch fix (KI#76).
-  mig-5 (iter 136): data/enneagram.json is GENERATED from canon §5.3
+  mig-5 (iter 136): data/enneagram.json is GENERATED from canon 5.3
          (scripts/generate_enneagram.mjs) — mini-card values (страх/желание/LIE/
-         дефект) = §5.3 canonical table, SHARED_REFERENCE; static defaults below
-         carry the §5.3 type-4 wording (was: pre-mig-5 extended JSON variants);
+         дефект) = 5.3 canonical table, SHARED_REFERENCE; static defaults below
+         carry the 5.3 type-4 wording (was: pre-mig-5 extended JSON variants);
          runtime fill (vs-e10-enneagram.js) reads the same generated layer
          unchanged. Hexad graph directions = VISUAL_CANONICAL (direction data
          lives in the generated layer; drawn statically per KI#75).
@@ -2565,7 +2565,7 @@ WANT: Стать цельным — заполнить пустоты внутр
 
 <section  data-section="p5_cross_matrix" id="p5_cross_matrix" data-toc-nav>
 <!-- difficulty: EXPERT -->
-<!-- canonical: OCEAN ↔ Enneagram ↔ MBTI mapping + correlation matrix (merged §5.4/§5.5, iter 195) -->
+<!-- canonical: OCEAN ↔ Enneagram ↔ MBTI mapping + correlation matrix (merged 5.4/5.5, iter 195) -->
 <h2>Сверка трёх систем: OCEAN, Enneagram, MBTI</h2>
 
 <p>Сверка отвечает на один вопрос: не противоречат ли системы друг другу. Расхождение — сигнал ошибки, а не повод «подогнать» SPINE под фреймворк.</p>
@@ -4211,7 +4211,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
     one per AP — the check, the distinguishing signal or the before/after example
     that the card does not carry. The three-line symptom/cause/fix triple is NOT
     repeated here (it is the card above); iter 190 (v4-9) removed the duplication,
-    the owner routing and the § numbers around what stays.
+    the owner routing and the  numbers around what stays.
   Absorbed ids p8_ap1…p8_ap15 stay reachable via data/anchor-redirects.json
   (→ p8_worked_examples).
 -->
@@ -4236,8 +4236,8 @@ CoT (для 32B+ и API, 2 Anchors максимум):
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E12-script.js
   sampling-cluster (iter 145): AP fix imperatives with numeric values
-         defer to the canonical owners — AP-5 RepPen ranges → §7A.6
-         (via the AP-5 boundary ≤ 1.10, former §8.6); parity locked by
+         defer to the canonical owners — AP-5 RepPen ranges → 7A.6
+         (via the AP-5 boundary ≤ 1.10, former 8.6); parity locked by
          scripts/audit_sampling_parity.py.
   v3 stage 3 (iter 173): embed moved inside p8_antipatterns_overview (was outside
          every section); card texts re-aligned with the owner sections (AP-1, AP-4,
@@ -4757,7 +4757,7 @@ WANT: {{want}}
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E13-script.js
   mig-3 (iter 139): TEXTUAL_CANONICAL (DEC-20) — the symptom→check→branch→AP/E
-         mapping is canonically owned by §9.3 (p9_decision_tree); this embed is
+         mapping is canonically owned by 9.3 (p9_decision_tree); this embed is
          the visual presentation / decision aid of that mapping — values
          parity-locked by scripts/audit_diagnostics_parity.py.
 -->
@@ -5948,13 +5948,13 @@ GHOST-activation: Активен, если в сцене был триггер (
 
   Created in the v3 restructure (stage 2, iter 172). Absorbs:
     - Appendix B (Model Capability Table) — whole table + OBSERVATION + следствия;
-    - §7A.6 sampling tables + interface notes (core check line stays in §7A.6);
-    - §7A.7 capability checklist (the section is now a pointer);
-    - §7A.10 API wrappers (the section is now a collapsed pointer);
-    - §7A.11 4K-Fallback (absorbed into §7A.12 in iter 189 — the 4K profile is one paragraph there);
-    - §7A.12 Script Tax detail (the RULE keeps one line in §7A.12);
-    - §7A.2 SP-language thresholds (the RULE keeps one line in §7A.2);
-    - §7B.3 EVENT frontend compatibility (the section keeps a footnote);
+    - 7A.6 sampling tables + interface notes (core check line stays in 7A.6);
+    - 7A.7 capability checklist (the section is now a pointer);
+    - 7A.10 API wrappers (the section is now a collapsed pointer);
+    - 7A.11 4K-Fallback (absorbed into 7A.12 in iter 189 — the 4K profile is one paragraph there);
+    - 7A.12 Script Tax detail (the RULE keeps one line in 7A.12);
+    - 7A.2 SP-language thresholds (the RULE keeps one line in 7A.2);
+    - 7B.3 EVENT frontend compatibility (the section keeps a footnote);
   Plus the E17 visual embed (moved here from Part 7A).
 -->
 <section  data-section="appendix_model_params" id="appendix_model_params" data-toc-nav>
@@ -6071,7 +6071,7 @@ Anchors:
   Notes: Core visualization markup extracted from <main> element.
          scroll-enter classes require IntersectionObserver from E17-script.js
   sampling-cluster (iter 145) values, locked by DEC-22; v3 stage 2 (iter 172):
-         moved from Part 7A (it was un-sectioned between §7A.5 and §7A.6) into
+         moved from Part 7A (it was un-sectioned between 7A.5 and 7A.6) into
          Appendix E, the canonical owner of the sampling values. Values
          SHARED_REFERENCE: Appendix E «Базовые параметры» owns the canonical
          tables; this embed is the one visual presentation; the 32B+ column =
