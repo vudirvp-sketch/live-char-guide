@@ -1771,8 +1771,12 @@
       html += '<div class="glossary-section"><h4>' + letter + '</h4><ul>';
 
       groupedTerms[letter].forEach(term => {
-        // Use unified definition if available, fallback to regular definition
-        let definition = term.unified_definition || term.definition || '';
+        // Use unified definition if available, fallback to regular definition.
+        // iter-204: definitions are plain text with markdown `code` spans — escape the
+        // text first, then turn backticked spans into <code> (they used to render as
+        // literal backticks and a raw <anchors> tag in the panel).
+        let definition = escapeHtml(term.unified_definition || term.definition || '')
+          .replace(/`([^`]+)`/g, '<code>$1</code>');
 
         html += '<li class="glossary-item" data-term="' + term.term.toLowerCase() + '">';
         html += '<strong>' + term.term + '</strong>';

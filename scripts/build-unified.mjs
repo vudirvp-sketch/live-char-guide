@@ -175,10 +175,21 @@ async function generateGlossaryHTML() {
 <dl>
 `;
 
+  // iter-204: the no-JS page had the same defect as the panel — definitions are
+  // plain text with markdown `code` spans, so escape then code-format.
+  const escapeHtml = (value) => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+  const renderDefinition = (value) =>
+    escapeHtml(value).replace(/`([^`]+)`/g, '<code>$1</code>');
+
   for (const term of terms) {
     const termName = term.term || '';
     // Use unified_definition (GD-2)
-    const definition = term.unified_definition || term.definition || '';
+    const definition = renderDefinition(term.unified_definition || term.definition || '');
     const anchorId = term.anchor_id || '';
 
     html += `<dt>${termName}`;

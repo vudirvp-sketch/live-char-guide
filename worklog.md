@@ -5,6 +5,22 @@
 
 ---
 
+Task ID: iter-204-visuals-glossary
+Agent: lead
+Task: audit v2 iteration D2 — the three visual defects the v1/v2 audit measured (E04 funnel widths, E07 clipped strip, E08 badge) and the glossary rendering defect (markdown backticks + a live `<anchors>` tag on both reader surfaces).
+
+BASE: e3d36281
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `e3d36281`. Located the embeds: E04 in `part_02` (`.funnel-stack`), E07 SVG in `part_03`, E08 SVG in `part_07a`; the funnel rules ship TWICE (`vs-styles.css` + `shell/styles.css`), so both were patched.
+- 1: **E04.** `nth-of-type` counts all `div` siblings of the stack (link-back = 1, bar = 2, arrow = 3, …), and the rules targeted `1/3/5/7` — the link-back and arrows, never a bar. Re-pointed to `2/4/6/8` for widths and transition delays in both files. Browser: bar widths 600/510/420/330 px = **100/85/70/55 %**.
+- 2: **E07.** The last `rect.bar-rect` was `y=410 h=12` → bottom 422 inside `viewBox="0 0 780 420"`; moved to `y=408`. Browser: all 16 strip rects end ≤ 420, last one exactly 420.
+- 3: **E08.** Directive 7's `<text class="model-badge">[Model ↗]</text>` lacked `text-anchor` (directive 6's had `end`), so it overflowed the node frame; added `text-anchor="end"`. Browser `getBBox`: text right 625, frame right 630.
+- 4: **Glossary rendering.** `data/glossary.json` definitions are plain text with markdown backticks; the panel (`loadGlossaryContent`) and the no-JS generator (`build-unified.mjs` → `parts/glossary.html`) both interpolated them as HTML — hence literal backticks and a real `<anchors>` element. Both now escape (`& < > " '`) and then convert `` `x` `` → `<code>x</code>`. Browser-proved on the panel and on `/parts/glossary.html`: `&lt;anchors&gt;` in the DOM, zero `anchors` elements, `<code>` present, no backticks in text.
+- 5: **Verification:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+
+Verification: green. Remaining: iteration E (no-JS glossary page styling, OCEAN widget, prototypes).
+
 Task ID: iter-203-part9-numbers
 Agent: lead
 Task: audit v2 iteration D1 — Part 9 becomes one diagnostic instrument, and the numeric contradictions close: one checklist, an honest scenario map, AP-11 out of E13, one Temperature model, the card-level number truths.

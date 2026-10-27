@@ -6,6 +6,14 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 204 — the audit visuals and the glossary render honestly.
+
+- **E04 funnel:** `nth-of-type(1/3/5/7)` targeted the link-back chip and arrows, never the bars; now `2/4/6/8` in both stylesheets — measured **100/85/70/55 %**.
+- **E07 strip:** bottom bar 422 in a 420 viewBox → `y=408`; all 16 strip rects end ≤ 420.
+- **E08 badge:** directive 7's `[Model ↗]` got `text-anchor="end"` — text right 625 vs frame right 630.
+- **Glossary:** panel + no-JS page escaped definitions and converted markdown backticks to `<code>`; `<anchors>` is text now, not an element, on both surfaces.
+- **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+
 ### iter 203 — Part 9 becomes one instrument; the numeric contradictions close.
 
 - **One checklist:** the «Быстрая проверка 1–5» block is deleted (strict subset of the 18-item checklist; 5-point Editorial check recorded). The reader-path gate now counts the 18 numbered rows instead of the deleted block's ☐ boxes.
