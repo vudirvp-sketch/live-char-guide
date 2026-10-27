@@ -154,8 +154,8 @@ E17_COMMENT_TOKENS = [
 # E12 AP-5 card (S-d) — old vs new
 E12_OLD_FIX = "Держите RepPen 1.0–1.05. Используйте MinP вместо этого."
 E12_NEW_FIX_ANCHORS = [
-    "Держите RepPen в диапазоне своей модели — §7A.6",
-    "никогда &gt; 1.10",
+    "Держите RepPen в диапазоне своей модели",  # iter 201: §-pointer removed
+    "никогда выше 1.10",
     "Используйте MinP вместо повышения RepPen",
 ]
 
@@ -586,7 +586,7 @@ def main():
     for path, needles in (
         (FALLBACK_7A, ["Presence Penalty = 0.0", "RepPen ≤ 1.10",
                        'href="#appendix_model_params"']),
-        (FALLBACK_8, ["Держите RepPen в диапазоне своей модели — §7A.6"]),
+        (FALLBACK_8, ["Держите RepPen в диапазоне своей модели"]),  # iter 201: §-pointer removed
         (FALLBACK_9, ["(1.0–1.05 для 12B", "RepPen 1.02–1.05 (12B-диапазон)"]),
         (FALLBACK_APPE, [">0.7–1.0</span>", ">1.05–1.10</span>",
                          "sampling-cluster (iter 145)",

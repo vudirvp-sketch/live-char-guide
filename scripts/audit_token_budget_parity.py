@@ -295,8 +295,11 @@ def main():
         err("glossary registry: Token Budget entry (C-21 pattern) not found "
             "or malformed")
     else:
-        if "§7A.12" not in m.group(1):
-            err("glossary C-21: definition does not defer values to §7A.12")
+        # iter 201: the reader-facing glossary may not print §-notation, so the
+        # deferral is checked by name («таблица бюджета в части 7A») as well.
+        _def = m.group(1)
+        if not ("§7A.12" in _def or ("таблиц" in _def and "7A" in _def)):
+            err("glossary C-21: definition does not defer values to the budget table (§7A.12)")
         if "home=p7a_token_budget" not in m.group(2):
             err("glossary C-21: meta home=p7a_token_budget missing")
     glossary = json.loads(read(GLOSSARY_JSON))
@@ -310,8 +313,9 @@ def main():
     else:
         if term.get("anchor_id") != "p7a_token_budget":
             err("data/glossary.json: Token Budget anchor_id != p7a_token_budget")
-        if "§7A.12" not in term.get("definition", ""):
-            err("data/glossary.json: Token Budget definition does not defer to §7A.12")
+        _def = term.get("definition", "")
+        if not ("§7A.12" in _def or ("таблиц" in _def and "7A" in _def)):
+            err("data/glossary.json: Token Budget definition does not defer to the budget table (§7A.12)")
     notes.append("glossary C-21: values deferred to §7A.12 (registry + generated JSON)")
 
     # ---------- 8. Root fallbacks ----------

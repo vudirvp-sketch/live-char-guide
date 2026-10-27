@@ -51,7 +51,7 @@
 <section  data-section="p6_cot_tiers" id="p6_cot_tiers" data-toc-nav>
 <!-- difficulty: INTERMEDIATE -->
 <!-- canonical: CoT Tiers (Tier 0-3) -->
-<h3>Уровни CoT (Tiers)</h3>
+<h2>Уровни CoT (Tiers)</h2>
 
 <p>CoT имеет четыре уровня. <strong>Tier 0 — без отдельного блока:</strong> телесность (состояние → тело → сенсор → речь) уже работает как микро-цепочка рассуждений — это baseline, а не «модель не думает». <strong>Tier 1+</strong> добавляет явный <code>[INTERNAL]</code>-блок поверх телесности. Tier 3 — полный XML-процесс для API. Выбор уровня зависит от размера модели и нужной глубины; CoT не заменяет телесность.</p>
 
@@ -151,18 +151,18 @@
 
 <section  data-section="p6_cot_tier2" id="p6_cot_tier2" data-toc-nav>
 <!-- difficulty: EXPERT -->
-<h3>Tier 2 CoT (рекомендован для 32B+)</h3>
+<h2>Tier 2 CoT (рекомендован для 32B+)</h2>
 
 <p>Tier 2 связывает триггер с GHOST через внутренний процесс.</p>
 
-<h4>Синтаксис</h4>
+<h3>Синтаксис</h3>
 <pre><code>[INTERNAL: {{GHOST-connection}}]
 {{внутренний процесс}}
 [/INTERNAL]
 
 {{внешняя реакция}}</code></pre>
 
-<h4>Пример: Елена</h4>
+<h3>Пример: Елена</h3>
 <!-- Demonstrates: EMBODIMENT FIRST, SHOW NEVER TELL, SPINE CAUSALITY -->
 <pre><code>[INTERNAL: Напоминает, как редактор украл её историю]
 Боль в груди. Опять. Всегда, когда кто-то проявляет искренний интерес.
@@ -179,11 +179,11 @@
 
 <section  data-section="p6_cot_tier3" id="p6_cot_tier3" data-toc-nav>
 <!-- difficulty: EXPERT -->
-<h3>Tier 3 CoT (API only)</h3>
+<h2>Tier 3 CoT (API only)</h2>
 
 <p>Tier 3 использует XML-структуру для полного описания внутреннего процесса.</p>
 
-<h4>Синтаксис</h4>
+<h3>Синтаксис</h3>
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
 stimulus: {{триггер из сцены}}
@@ -200,7 +200,7 @@ resolution: {{решение — действие персонажа}}
 
 <p><em>processus_analysium — каноническое имя тега для внутреннего процесса. Другие имена (inner_thought, mental_process) тоже работают, но этот формат стабильнее всего показывает себя на API-моделях.</em></p>
 
-<h4>Пример: Выщербленный</h4>
+<h3>Пример: Выщербленный</h3>
 <!-- Demonstrates: CONSEQUENCE DRIVEN, EMBODIMENT FIRST, CoT LOGIC -->
 <pre><code>[INTERNAL]
 &lt;processus_analysium&gt;
@@ -220,14 +220,14 @@ resolution: отступить
 <section  data-section="p6_cot_anchors" id="p6_cot_anchors" data-toc-nav>
 <!-- difficulty: EXPERT -->
 <!-- canonical: CoT Anchors (stimulus/analysis/synthesis/resolution) -->
-<h3>CoT-якоря</h3>
+<h2>CoT-якоря</h2>
 
 <p>CoT-якорь — якорь (Anchor), где действие = внутренний процесс.</p>
 
-<h4>Структура</h4>
+<h3>Структура</h3>
 <pre><code>Триггер → [Внутренний процесс] → Внешняя реакция → Цена</code></pre>
 
-<h4>Примеры</h4>
+<h3>Примеры</h3>
 <div class="table-wrap">
 <table>
 <thead>

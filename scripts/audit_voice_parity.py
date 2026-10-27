@@ -384,7 +384,7 @@ def main():
     )
     if not e16:
         err("master: E16 embed not found")
-    elif "диапазон = мин–макс строки AN — §3.2" not in e16.group(0):
+    elif "диапазон = мин–макс строки AN" not in e16.group(0):  # iter 201: §-pointer removed
         err("E16 embed: badge derivation note missing (E15 pattern)")
     if "диапазон = мин–макс строки AN по моделям" not in canon7a:
         err("canon §7A.5 E16 marker: derivation sentence missing")

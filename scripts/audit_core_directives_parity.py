@@ -141,10 +141,11 @@ def parse_h4_headings(region, html=False):
     """Parse per-directive headings: {n: (RU title, EN name)}.
 
     Canon:  '#### 1. Показывай, не говори (Show Never Tell)'
-    Master: '<h4>1. Показывай, не говори (Show Never Tell)</h4>'
+    Master: '<h3>1. Показывай, не говори (Show Never Tell)</h3>'
+    (iter 201: §7A.2 is an <h2> section, so its per-directive subsections are h3.)
     """
     if html:
-        pat = re.compile(r"<h4>(\d)\. (.+?) \((.+?)\)</h4>")
+        pat = re.compile(r"<h3>(\d)\. (.+?) \((.+?)\)</h3>")
         found = pat.findall(region)
     else:
         pat = re.compile(r"^#### (\d)\. (.+) \((.+)\)$", re.MULTILINE)

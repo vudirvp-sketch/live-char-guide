@@ -46,7 +46,7 @@
     { id: 'recent_chat',  label: 'Недавний чат',   models: { '12B': 85, '32B+': 80, 'API': 75 }, note: 'Самый сильный фактор на любой модели — модель копирует последние ~10–20 сообщений.' },
     { id: 'examples',     label: 'Examples',      models: { '12B': 10, '32B+': 12, 'API': 15 }, note: 'Voice-маркеры копируются из <START>-блоков. Качество Examples > количество.' },
     { id: 'greeting',     label: 'Greeting',      models: { '12B': 3,  '32B+': 5,  'API': 5  }, note: 'Задаёт стартовый тон; влияние падает после ~5 реплик.' },
-    { id: 'authors_note', label: "Author's Note", models: { '12B': 2,  '32B+': 3,  'API': 5  }, note: 'На 12B влияние AN на лингвистический голос пренебрежимо мало (~2%, §3.2; см. §7A.7).' },
+    { id: 'authors_note', label: "Author's Note", models: { '12B': 2,  '32B+': 3,  'API': 5  }, note: 'На 12B влияние AN на лингвистический голос пренебрежимо мало (~2%).' },
     { id: 'description',  label: 'Description',   models: { '12B': 0,  '32B+': 3,  'API': 5  }, note: '12B: 0% — ЗАПРЕЩЕНО. Стилистические директивы в Description — ошибка сборки.' },
     { id: 'system_prompt',label: 'System Prompt', models: { '12B': 0,  '32B+': 1,  'API': 2  }, note: 'На 12B лингвистические директивы в SP игнорируются; работают только CORE DIRECTIVES.' }
   ];
@@ -122,7 +122,7 @@
         <div class="vh-toggle-group" role="group" aria-label="Выбор модели">${toggleHtml}</div>
         <button type="button" class="vh-export-btn" data-action="export" aria-label="Экспорт блок voice_sources в Markdown">📋 Экспорт Markdown</button>
       </div>
-      <p class="vh-hint">Переключатель подсвечивает активный столбец таблицы выше; проценты — качественные ориентиры (см. <a href="#p3_voice_isolation">§3.1</a>), не точные измерения.</p>
+      <p class="vh-hint">Переключатель подсвечивает активный столбец таблицы выше; проценты — качественные ориентиры, не точные измерения.</p>
     `;
 
     bindEvents();
@@ -198,7 +198,7 @@
       lines.push(`| ${s.label} | ${pctLabel} | ${note} |`);
     });
     lines.push('');
-    lines.push('> Качественные ориентиры. См. §3.1 Методология и §3.2 Иерархия влияния.');
+    lines.push('> Качественные ориентиры, не точные измерения.');
     return lines.join('\n');
   }
 

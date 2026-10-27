@@ -116,7 +116,7 @@ AP_SET = {"AP-2", "AP-8", "AP-9", "AP-11", "AP-3", "AP-5", "AP-6"}
 E_SET = {"E16", "E01", "E07", "E17", "E02", "E04", "E08", "E03"}
 
 SUBHEADING_CANON = "### Три базовых симптома: полный маппинг (канонический источник дерева E13)"
-SUBHEADING_MASTER = "<h4>Три базовых симптома: полный маппинг</h4>"
+SUBHEADING_MASTER = "<h3>Три базовых симптома: полный маппинг</h3>"  # iter 201: §9.6 is h2, subsections h3
 
 # KI#84 canonical-audit reconciliation (iter 157, owner-called): the §9.6 Walter
 # cross-ref paragraph ("Пример тестирования карточки с OCEAN-профилем (A=38, N=68 —

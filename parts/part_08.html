@@ -52,7 +52,7 @@
           <span class="severity-dot severity-dot--high"><span class="visually-hidden">высокая серьёзность</span></span>
         </div>
         <div class="ap-card__symptom">Раздувание токенов</div>
-        <div class="ap-card__cause">Description выходит за бюджет блока (§7A.12)</div>
+        <div class="ap-card__cause">Description выходит за бюджет блока</div>
         <div class="ap-card__fix-label">Исправление:</div>
         <div class="ap-card__fix">Сократите до бюджета Description. Перенесите детали в Lorebook.</div>
       </div>
@@ -66,7 +66,7 @@
         <div class="ap-card__symptom">Отсутствует Price</div>
         <div class="ap-card__cause">У Anchor нет последствия в той же сцене</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Добавьте физический, внутри-сценовый Price каждому Anchor (§2.2).</div>
+        <div class="ap-card__fix">Добавьте физический, внутри-сценовый Price каждому Anchor.</div>
       </div>
 
       <!-- AP-3 -->
@@ -78,7 +78,7 @@
         <div class="ap-card__symptom">Голос в Description</div>
         <div class="ap-card__cause">Голосовые паттерны записаны в блоке Description</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Перенесите весь голос в Examples. Description = только факты (§3.1).</div>
+        <div class="ap-card__fix">Перенесите весь голос в Examples. Description = только факты.</div>
       </div>
 
       <!-- AP-4 -->
@@ -90,7 +90,7 @@
         <div class="ap-card__symptom">Психология в SP</div>
         <div class="ap-card__cause">Элементы SPINE помещены в System Prompt</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Перенесите SPINE в Description. SP = только инструкции и запреты (§7A.1).</div>
+        <div class="ap-card__fix">Перенесите SPINE в Description. SP = только инструкции и запреты.</div>
       </div>
 
       <!-- AP-5 -->
@@ -102,7 +102,7 @@
         <div class="ap-card__symptom">RepPen &gt; 1.10</div>
         <div class="ap-card__cause">Repetition Penalty установлен слишком высоким</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Держите RepPen в диапазоне своей модели — §7A.6 (никогда &gt; 1.10). Используйте MinP вместо повышения RepPen.</div>
+        <div class="ap-card__fix">Держите RepPen в диапазоне своей модели и никогда выше 1.10. Используйте MinP вместо повышения RepPen.</div>
       </div>
 
       <!-- AP-6 -->
@@ -114,7 +114,7 @@
         <div class="ap-card__symptom">Нет Anti-godmoding</div>
         <div class="ap-card__cause">Отсутствует 2-строчный anti-godmoding в SP</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Добавьте негативную + позитивную строки ограничений в SP (§7A.1).</div>
+        <div class="ap-card__fix">Добавьте негативную + позитивную строки ограничений в SP.</div>
       </div>
 
       <!-- AP-7 -->
@@ -138,7 +138,7 @@
         <div class="ap-card__symptom">Призрак без якорей</div>
         <div class="ap-card__cause">GHOST описан, но нет якорей, выражающих его в поведении</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Добавьте GHOST-linked якоря в тег &lt;anchors&gt; (Description) — минимум один на призрак (§4.6).</div>
+        <div class="ap-card__fix">Добавьте GHOST-linked якоря в тег &lt;anchors&gt; (Description) — минимум один на призрак.</div>
       </div>
 
       <!-- AP-9 -->
@@ -150,7 +150,7 @@
         <div class="ap-card__symptom">Нарушенный SPINE</div>
         <div class="ap-card__cause">Элементы SPINE не образуют причинную цепь</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Проверьте причинный поток GHOST→LIE→FLAW→NEED→WANT (§4.6, §4.6).</div>
+        <div class="ap-card__fix">Проверьте причинный поток GHOST→LIE→FLAW→NEED→WANT.</div>
       </div>
 
       <!-- AP-10 -->
@@ -162,7 +162,7 @@
         <div class="ap-card__symptom">Перегрузка CoT</div>
         <div class="ap-card__cause">Больше 3 CoT-якорей в карточке</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Оставьте 2–3 CoT-якоря, остальные — обычные T→A→P. Уровень CoT — по модели (§6.2, §6.5).</div>
+        <div class="ap-card__fix">Оставьте 2–3 CoT-якоря, остальные — обычные T→A→P. Уровень CoT — по модели.</div>
       </div>
 
       <!-- AP-11 -->
@@ -174,7 +174,7 @@
         <div class="ap-card__symptom">Переплетение голосов</div>
         <div class="ap-card__cause">В мульти-персонажных сценах голоса смешиваются</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Добавьте маркеры персонажа (Character Markers): лексика, синтаксис, телесные реакции, повторяющиеся фразы (§3.5).</div>
+        <div class="ap-card__fix">Добавьте маркеры персонажа (Character Markers): лексика, синтаксис, телесные реакции, повторяющиеся фразы.</div>
       </div>
 
       <!-- AP-12 -->
@@ -186,7 +186,7 @@
         <div class="ap-card__symptom">Некорректный XML</div>
         <div class="ap-card__cause">Теги неправильно закрыты или вложены</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Проверьте все XML-теги. Одна система разметки — Format Lock (§7A.9, §7A.4).</div>
+        <div class="ap-card__fix">Проверьте все XML-теги. Одна система разметки — Format Lock.</div>
       </div>
 
       <!-- AP-13 -->
@@ -198,7 +198,7 @@
         <div class="ap-card__symptom">Конфликт Lorebook</div>
         <div class="ap-card__cause">Запись Lorebook противоречит Description</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Проверьте все записи Lorebook на согласованность с Description (§7B.3).</div>
+        <div class="ap-card__fix">Проверьте все записи Lorebook на согласованность с Description.</div>
       </div>
 
       <!-- AP-14 -->
@@ -210,7 +210,7 @@
         <div class="ap-card__symptom">Нарушение контекстного окна</div>
         <div class="ap-card__cause">Карточка + контекст превышают окно модели</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">4K-Fallback Protocol или модель с большим контекстом (§7A.12).</div>
+        <div class="ap-card__fix">4K-Fallback Protocol или модель с большим контекстом.</div>
       </div>
 
       <!-- AP-15 -->
@@ -222,7 +222,7 @@
         <div class="ap-card__symptom">Вложенные Anchors</div>
         <div class="ap-card__cause">В одном якоре задана цепочка вложенных условий</div>
         <div class="ap-card__fix-label">Исправление:</div>
-        <div class="ap-card__fix">Разбейте на атомарные якоря: один якорь = одна связь T→A→P (§2.2).</div>
+        <div class="ap-card__fix">Разбейте на атомарные якоря: один якорь = одна связь T→A→P.</div>
       </div>
 
     </div>

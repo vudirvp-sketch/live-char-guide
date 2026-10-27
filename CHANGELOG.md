@@ -6,6 +6,19 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 201 — the v2-audit truth pass: four single truths, a budget model, and `§`-notation retired from reader text.
+
+- **Anchors live in Description.** The §0.2 skeleton and all four Part 10 cards moved `<anchors>` from between `[EXAMPLES]`/`[GREETING]` to the end of `[DESCRIPTION]` (block text unchanged); the §10.0 index cell, Part 1 captions/table, §7A.9 (plus the "if the frontend has an Anchors field" sentence) and the glossary article follow. The E01 diagram keeps showing the Examples *zone* — a semantic grouping, not a field.
+- **Anchor count is one scale:** 3–5 *base* anchors + FLAW-linked on top (Elena 6 = 3 + 3); the missing word «базовых» was the defect.
+- **Elena's stress type = тревожно-реактивный** — the N 60–70 row split on E (<30 avoidant / ≥30 reactive), the cautious-zone sentence added, «2 значения» corrected to 3.
+- **Format Lock:** quote glyph declared free but uniform inside a card; Omnis's private `[ВНУТРЕННИЙ_МОНОЛОГ]` wrapper → canonical `[INTERNAL]` (5 lines); the checklist row quotes the lock in ASCII.
+- **Budgets are a profile model:** 4K-Fallback (410–540) is the single 4K spec and the table's «Мин» is the block floor; «400–900» is labelled the 8K band; the widget's size-class scale is printed in §7A.12; CoT-anchor row (50/60/80, 32B+/API); Script Tax in two units; §9.5 п.17, the Vysh result («17 из 18») and the §10.0 declaration now say what the cards are — no card shortened.
+- **`§`-notation retired (57 visible labels, 0 left).** All cross-chapter links removed; 4 internal links remain, all Appendix-E pointers in Part 7A. **Fence #11 amended** (navigation = TOC/rail, local reminder over back-link, link text = visible name) so this cannot lawfully regress. The voice widget's note/export cleaned.
+- **Headings:** 61 `h2` sections / 123 `h3` / 14 `h4`, zero skipped levels (was 15/69/108/6 h5).
+- **Gates re-pointed, not weakened:** 5 sync probes and 6 parity-gate anchors moved to the new wording/heading level; each disclosed in the script; sync stays **87/87**, all 8 parity gates PASS.
+- **DEC-39** records the four truths, the budget model and the fence amendment; S5/S6 deferred with reasons in `STATUS.md` Next step.
+- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13**, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0 · version 9.2.6.
+
 ### iter 200 — cleanup, four KIs closed, and the authoritative/historical split written down.
 
 - **Junk deleted:** `_tmp_measure.py` and a 1 MB `live-char-guide-preview-iter194.html` review snapshot — both untracked, both regenerable, both unreferenced.

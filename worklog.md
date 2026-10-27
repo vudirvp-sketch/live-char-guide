@@ -5,6 +5,24 @@
 
 ---
 
+Task ID: iter-201-truth-pass
+Agent: lead
+Task: owner: «какие решения? делай как качественно и правильно ало. продолжай работу.» — the v2-audit decisions are delegated, so they are taken and executed: four reader-visible contradictions, the budget model, and the dead `§`-notation (source: `_scratch/lcg-audit/AUDIT-REPORT-v2.md` §4–§5).
+
+BASE: 82f92d4d
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `82f92d4d` (iter 200). Re-read the audit's verified inventory (`AUDIT-REPORT-v2.md`, `verify-*.md`) and measured the current state first-hand: 57 reader-visible `§` labels (41 master + 5 widget + 11 glossary), 15 `h2` / 69 `h3` / 108 `h4` / 6 `h5`, 10 internal links.
+- 1: **Anchors — one truth (commit `b28efc98`).** Appendix E's РУЛЕ is the norm; the §0.2 skeleton and all four cards now place `<anchors>` at the end of `[DESCRIPTION]` (text moved verbatim), and 9 sync points follow: §10.0 index cell, Part 1 caption/sub-panel/table (E01 keeps its Examples-zone *drawing*), §7A.9 + the "separate Anchors field" sentence, §7A.1 "not part of SP" line, §7A.12 anchors-row note, glossary article (wrong "§1.4" target deleted), §0.2 "Examples" table cell. Counter and FLAW-linked wording fixed: 3–5 **base** anchors, six for Elena.
+- 2: **Elena + Format Lock (same commit).** Stress table row split on E (N 60–70: E<30 avoidant / E≥30 reactive), the cautious-zone sentence added, the «2 значения в осторожной зоне» observation corrected to 3 (A=38, C=65, N=68) in master+canon. Format Lock: the glyph paragraph (free, uniform inside a card), Omnis's `[ВНУТРЕННИЙ_МОНОЛОГ]` → `[INTERNAL]` (5 lines, master+canon), the §9.5 checklist row re-quoted in ASCII.
+- 3: **Budget model (commit `64a66f97`).** §7A.12: «Мин» = block floor, separate 4K profile; 4K-Fallback = the single 4K spec with its total (410–540); CoT-anchor row 50/60/80; the five size classes (<400 · 400–900 · 900–1500 · 1500–2500 · >2500) printed; the profile bands (4K 410–540 / 8K 400–900 / 16K+ 740–1140 / ceiling 1400–2060); Script Tax stated in two units in §7A.12 and Appendix E; sub-budget rule says anchors ride inside Description (floor on 8K). Consumers re-said honestly: part_01 8K-profile line, §7A.13 step 6, the Elena budget table, §9.5 item 17, the Vysh result («17 из 18 — п.17 заявленное исключение»), the §10.0 declaration (Examples *and* CoT anchors). No card shortened.
+- 4: **`§`-notation retired + sequence fixes + headings.** A scan script (`_scratch/lcg-audit/scan_sections_targets.py`) inventories every visible label; 57 removed via an exact replacement map (`fix_sections_iter201c.py`, no regex guessing — a miss aborts the run), canon mirrors applied in two rounds. Sequence: §0.2 gets the five SPINE glosses + «Presence Penalty (PP)» + «одна система разметки — действия и речь записаны одинаково» (S1); §2.2's anchor-count table speaks plain language (S2); §3.4 stops requiring Format Lock before it is defined (S3); §9.5 item 13 gets its own numbers (S4); the wrong "Tier 1–3 из Part 10" address dies (S7). Headings: 46 section titles h3→h2, their 100 h4→h3, 6 h5→h4 — **61/123/14, zero skipped levels** (`fix_headings_iter201e.py`). Appendix E's opening no longer claims to be read "once before assembly".
+- 5: **Law + decision.** Fence #11 rewritten (navigation = TOC/rail; local reminder beats a back-link; a link only to a reference surface, text = visible name, never a number; `§` banned on every reader surface). **DEC-39** records the four truths, the budget model, the `§` retirement, and the two deferred audit items (S5 contradicts DEC-27's boundary and the local six-question table; S6 is an owner-gated `data/anchor-redirects.json` change).
+- 6: **Gates re-pointed, never weakened.** Six literal anchors moved to the new content: 5 sync probes (`KI#30-7a`, `P0-12`, `P1-5`, `P2-12a`, `P2-12c` — heading level and the removed `§`-pointer) and 6 parity anchors (`core_directives` per-directive headings h4→h3; `token_budget` glossary deferral by name now that `§` is banned from the glossary; `diagnostics` E13 sub-heading; `voice` E16 badge note; `sampling` AP-5 fix line). Same invariants, each re-point disclosed in the script comment.
+- 7: **Verification (full battery after the last edit):** build **61 sections** · hash `8b3a917d` (shell untouched) · tests **91/91** · validate 12 gates + **133 redirects** · validate:master **13/13, 0 warnings** · sync **87/87** · **8 parity gates PASS** · reader-path PASS · qa csp/bundle/contrast/seo PASS · doc-versions exit 0 · english **1** / syntax **224** (baselines exact) · lint 0 · version:check 9.2.6.
+
+Verification: green (step 7). Deferred with reasons: audit S5, S6; the remaining audit work is iterations C–E (budget widget, Part 9/numbers, support), listed in `STATUS.md` Next step.
+
 Task ID: iter-200-cleanup-and-ki-close
 Agent: lead
 Task: owner: «давай от мусора избавимся, чтобы он не путал агента и тебя. и почини что нужно. главное уяснить что актуально а что уже нет.» — delete junk, fix the four open KIs (gate gaps + tool defects), and write down the authoritative/historical split.
@@ -95,198 +113,10 @@ Work Log:
 
 Verification: green (see step 6). Not committed before now — this delivery is the one commit for both passes.
 
-Task ID: iter-195-part5-rewrite
+Task ID: iters 193–195 (one-line summaries, condensed)
 Agent: lead
-Task: owner: «делай качественно в долгосрок а не быстро и костыльное» (follow-up to the Part-5 analysis package). Deliverable: rebuild Part 5 «Психология: OCEAN и типология» so it reads like Parts 4/6/9 — one reader job per section, no §-routing, one notation, no descriptive English, label discipline. Content + canon + the two sync probes + one legacy redirect.
-
-BASE: e0415d12
-
-Work Log:
-- 0: Preflight — BASE `e0415d12`, worktree clean (only the two pre-existing untracked preview/temp files). Measured before writing: Part 5 rendered 2 536 words over 5 sections with a 1124-word §5.1 carrying 11 headings, 6 tables, **6 RULE** callouts and 5 §-routes; house band is 269/140/383 words per section (Parts 4/6/9) with ≤2 RULE per section. Sentence length was NOT the defect (avg 16.2 = Part 9's), so the fix is distribution, not wording.
-- 1: **Canon rebuilt first** (`docs/canon/part_05.md`, source of truth): 5 → 4 sections. §5.1 = «OCEAN: проверка SPINE числами» (одна работа: числовой профиль) — ответ-таблица перед теорией, 6 RULE слиты в 3, три «конфликт-сценария» → одна таблица «Комбинация / Что видит модель / Что сделать», две стресс-таблицы → одна (N-полюс · тип · поведение · FLAW-паттерн · якорь), категории триггеров → список из 4 строк. §5.2 Elena-only, its RULE → `НАБЛЮДЕНИЕ` (разбор примера — не правило). §5.3: 9 типов **не тронуты** (7-колоночная таблица — вход `generate_enneagram.mjs`), сноска-«РЕКОМЕНДАЦИЯ: Дополнительный контент…» снята в пользу одного предложения, h5 → h4. §5.4 = **«Сверка трёх систем»** (iter 62-merge завершён: §5.4 «Связь инструментов» + §5.5 «Матрица» сведены в одну работу — выбор инструмента + 2 карты соответствий + MBTI-справка + матрица + 4 шага + синтез личности).
-- 2: **Master mirrored** (`src/master/part_05.html` 725 → 659 lines) with fence #1 intact: `<section data-section>` only, 4 labels only, `table-wrap` on all 14 tables, zero inline style/on*. The E09 embed, the E10 embed and the `<details class="interactive">` pentagon block were **spliced byte-identically** from the previous file by `_tmp_assemble.mjs` (verified: one `data-vs-element="E09"`/`E10`, one `#ocean-embed`, one `#ocean-static`, one `#enneagram-wrap`, one `#mini-card`) so the widget contract (`ocean-insight.js`, `vs-e10-enneagram.js`, `validate-master.mjs` Check 12) is untouched. Two defects fixed on the way: `</tr></tr>` ×2 (§5.1 stress table + the ceilings table — `<tr>` 82 open / 84 close → 81/81) and the corpus' only English `<summary>` («OCEAN Interactive Pentagon» → «Интерактивный пентагон OCEAN»).
-- 3: **Notation + language unification:** `High N`/`Low A` (§5.4/§5.5) and `Высокий N`/`Низкая A` (§5.1) → one form «высокий N / низкая A» everywhere; `(значения &lt;30 или &gt;70)` → «значение ниже 30 или выше 70» (no HTML entities in prose); `defensive behavior, overthinking` / `lashing out, verbal aggression` / `withdrawal, dissociation, shutdown` / `GHOST-resistant` / `anxious-reactive` → Russian (DEC-16: descriptive English goes, identifiers stay). The `(cautious zone, …)` first-mention gloss is **kept** — it is the iter-107 decision and the house `Термин (ENG)` pattern, not a leak.
-- 4: **Gate re-pointing, no gate weakening** (2 edits, both disclosed in the probe descriptions): `scripts/audit_canon_master_sync.py` **P0-16** — the needle was the old 71-word rule built around «(таблица «Контекстные лимиты полюсов» ниже)»; re-pointed to the new single-scale rule carrying the SAME numbers (4K — 2 · 8K — 3 · 16K+ — 4 · 32K+ — 5) and the same claims (SPINE bridge, 4+ = «Критический»). **P2-14** — the cautious-zone paragraph kept its term, both bounds, the SPINE-link claim and both Elena values; needle re-pointed. Count stays **87/87**. **+1 legacy redirect** (`p5_cross_instrument_map` → `p5_cross_matrix`, DEC-33 pattern) — `data/anchor-redirects.json` + build → **133 redirects, all live, no chains**.
-- 5: **Downstream surfaces re-pointed in the same iteration:** `docs/canon/glossary_registry.md` — 3 `[ref: part_05.md §…]` pointers de-staled to the new §-titles (§5.1 / §5.3 / §5.4; the §5.5 pointer had become dangling); `docs/content_map.md` — Part-5 table 5 rows → 4 (merged row records the absorption); `scripts/readerpath_audit_iter164.py` — LEARN corpus expectation **62 → 61** with the absorption recorded in the message.
-- 6: **Verification (full battery after the last edit):** build **61 sections** · hash `517d2245` · tests **91/91** · validate **12 gates + 133 redirects** · validate:master **12/12, 0 warnings** · sync **87/87** · enneagram / glossary / core-directives / token-budget / diagnostics / voice / sampling parity **PASS** · `audit_vs_embeds` PASS · reader-path PASS (Learn 65/65 difficulty metadata, Reference 45-term chain) · version:check 9.2.6 · qa csp/bundle/contrast/seo/doc-versions PASS · english **1** (part_06, baseline) · syntax **224** (baseline, unchanged — the 8 part_05 findings are the preserved E10 class names) · lint 0 · `component_extracts` exit 1 = its documented informational drift (E10 extract REMOVED_WITH_REASON iter 138; E09 drift unchanged — the embed was not edited).
-
-Stage Summary:
-- Part 5 Part-level: **5 → 4 sections**, rendered **2 536 → 2 172 words** (−14 %), RULE callouts **7 → 4**, НАБЛЮДЕНИЕ **0 → 1**, §-routes in reader text **5 → 0**, descriptive-English cells **17 → 0**, headings in §5.1 **11 → 8**, and the chapter's two sections with an empty/one-sentence job (MBTI h4, «Enneagram↔MBTI») are gone.
-- No capability lost: every number (30/70 · 30–40/60–70 · 4K/8K/16K+/32K+ ceilings · 1–2 / 4+ critical), every table payload (5 измерений · 4 типа стресса · цепочка Елены · 9 типов · 5 крыльев · 2 карты соответствий · матрица 9×5), the decision tree and the MBTI widget facts survive — the editorial pass compressed presentation only (DEC-15 5-point check applied per block).
-- Deferred (recorded, not fixed): there is **no `audit_ocean_parity.py`** — the 30/70 thresholds live in §5.1 + `data/ocean.json` (`threshold` ×10) + the widget without a parity gate; out of scope for a text iteration. `pnpm run validate:master` reports 0 warnings only because the re-added «синтез личности» sentence closed the pre-existing glossary warning; `component_extracts` stays exit-1 informational.
-
----
-
-Task ID: iter-194-layout-corrections
-Agent: lead
-Task: owner review of the iter-193 single-file preview — «весь текст смещён влево, тогда как справа пустота, нормально выровняй элементы», «этот элемент [E01–E18 mini-map] можно убрать», «кнопку ↔ починить или убрать», «по умолчанию можно ещё тему поставить тёмную, а не oled и светлую». Deliverable: centre the wide composition, retire the two dead controls, make soft dark the default. Shell infrastructure only: zero content/canon edits.
-
-Work Log:
-- 0: Preflight — BASE `55842da3`; the worktree carried the whole uncommitted iter-193 shell iteration (STATUS called it the review candidate). Measurement first, not opinion: Puppeteer geometry of the delivered preview at 1280/1440/1920/2560 — at 1920px the left gutter was 36px and the right one 783px (text 276px left of the viewport centre). Cause: `.layout-grid` had no `justify-content`, so its three fixed tracks hugged the padding edge.
-- 1: `src/shell/styles.css` — the ≥1220px block gained `justify-content: center`; `#content { grid-column: 2 }` + `.tool-dock { grid-column: 3 }` pin the zones, and the `body.rail-hidden .layout-grid` two-column re-template is deleted (with `display:none` on the rail the text would have auto-placed into track 1 and jumped 300px). Measured after: gutters 90/90 · 170/170 · 410/410 · 730/730 at 1280/1440/1920/2560, text column 698px (the 72ch measure) unchanged, 0px horizontal scroll, and 📑 keeps the text at 708–1406px @1920.
-- 2: mini-map retired (owner: «этот элемент можно убрать») — `src/shell/interactions/vs-mini-map.js` deleted (it injected the nav on every load, duplicated the rail, and `VsMiniMap.setActive` had no caller: the scrollspy never highlighted it), script tag removed from `src/shell/index.html`, the guarded `window.VsMiniMap.init()` call removed from `lazy-loader.js`, `.vs-mini-map*` CSS (~60 lines incl. two light-theme overrides) removed; the build now ships `interactions/` = 4 files (root fallback re-generated by the build).
-- 3: ↔ retired, not fixed — `body.content-wide { --max-width: min(72ch, 1000px) }` was byte-identical to the `:root` value, and a child cannot outgrow its grid track, so `#fab-width` only flipped `aria-pressed`; nothing was clipped without it (`.table-wrap` scrolls, `pre` has `white-space: pre-wrap`). Removed: the button (dock 6 → 5), `initWidthToggle()` + its call in `init()`, the `content-width` storage key, `body.content-wide` + its `.table-wrap/pre` rule + the old `.fab-group` reposition rule.
-- 4: default theme = soft dark — `<body class="theme-dark">` in the markup (first paint #0f1218, no OLED flash), `initTheme()` defaults to `'dark'` instead of `prefers-color-scheme`, `#fab-theme` markup `data-theme="dark"` + title «Тема (Тёмная → Светлая → OLED)»; the closed cycle and a stored preference are unchanged.
-- 5: Gates — `tests/test-shell-layout.mjs` 11 → 15 invariants (centred composition, explicit placement, soft-dark default, mini-map + ↔ absent); `tools/verify-reading-rail.mjs` 12 → 15 proofs: repaired the composition check (it ended in `Math.abs(...) > -1` — always true, so the 783px dead gutter shipped green) into an equal-gutter assertion @1440/@1920, added a fresh-profile default-theme boot check (bg must be `rgb(15, 18, 24)`), the 5-button dock inventory and the mini-map absence. `tools/build-preview-single-file.cjs` lost the mini-map entry and carries iter-194 markers.
-- 6: **Verification (full battery after the last edit):** build 62 sections · hash `2b6ac682` → **`517d2245`** · tests **91/91** · validate 12 gates + **132 redirects** · validate:master **12/12, 0 warnings** · qa:csp PASS · browser proofs **15/15**, 0 page errors, gutters equal at four widths, 375px no-hscroll. **Process disclosure:** one CSS edit went through PowerShell `Get-Content/Set-Content`, which re-encoded the UTF-8 file (BOM + CP1251 mojibake — exactly the hazard the STATUS Windows note forbids); recovered byte-for-byte from the pre-edit build copy `dist/assets/shell-styles.css`, both edits re-applied through Node, recovery diff-verified (only the intended hunks differ).
-
-Stage Summary:
-- Wide composition centred (equal gutters, 72ch measure preserved); 📑 no longer re-flows the text.
-- Two dead controls removed (E01–E18 mini-map nav, ↔ width toggle) — dock 6 → 5, `interactions/` 5 → 4.
-- Default theme soft dark with a correct first paint; the three-state cycle stays.
-- New standing checks: equal-gutter composition, default-theme boot, dock inventory, retired-control absence.
-- Next: owner's read-through of the pushed page.
-
----
-
-Task ID: iter-193-reading-rail
-Agent: lead
-Task: implement the owner-approved reading-layout demo (DEC-35) in the production shell — persistent TOC rail (variant A) + reading bar for narrow screens + docked tools + the demo's reading typography and three-theme model. Shell infrastructure only: zero content/canon edits.
-
-Work Log:
-- 0: Preflight — BASE `55842da3`, worktree clean except the pre-existing untracked `_tmp_measure.py` (untouched). Baseline battery green (62 sections, validate 132 redirects, tests 68/68, english 1 / syntax 224).
-- 1: `src/shell/index.html` — `.layout-grid` (rail | `#content` | dock) wrapping the content; `#toc-rail` + `#tool-dock` + the `.reading-bar` block with its ☰ `#toc-rail-sheet`; the theme button collapsed to the single ◐ glyph (three-state); the glossary side tab markup deleted; the fab-group kept as the button source (the dock re-parents on init).
-- 2: `src/shell/styles.css` — `body.theme-dark` soft palette (#0f1218/#d9dde4/#9aa4b5/#4cc2f7, DEC-35); reading measure `--max-width` 85ch → `min(72ch, 1000px)` + `body.content-wide` no longer widens paragraphs (tables/pre only); line-height 1.7, `text-wrap: pretty/balance`, `tabular-nums`, `hyphens:auto` <700px; the rail/bar/dock/tree style families (~200 lines) with the ≥1220px override block placed AFTER the base rules (equal specificity — the first build failed composition until the cascade was fixed, caught by the new browser proof); `.glossary-tab` CSS + `--z-glossary-tab` retired; print rules updated (rail/dock/bar hidden); light-theme accent #0284c7 → #0369a1 (5.7:1), light muted → #5b6472, OLED muted #B0B0B0 → #9aa4b5 (7.5:1).
-- 3: `src/shell/lazy-loader.js` — `collectNavModel()` (the same grouping as `generateTOC()` incl. the appendices group), `railTreeHtml()`, `buildRailTOC()` (rail + sheet, manual-open state per part), `updateRailFromScroll()` (scrollspy: .on/.read classes, part auto-expand + part-progress, global % + bar fill + crumb; rAF-throttled passive), `initReadingRail()` (bar visibility via matchMedia ≥1220px, ☰ sheet toggle, smooth-scroll link handler honoring prefers-reduced-motion, `rail-hidden` persistence); `initTheme()` → the closed ◐ cycle OLED→dark→light with legacy-value mapping; `initPanels()` → 📑 dual-mode (wide: toggle rail; narrow: classic panel); `initGlossary()` side-tab handlers deleted; `showFABs()` re-parents the six buttons into `#tool-dock`; `buildRailTOC()` wired into all three post-injection sequences (prerender/fetch/retry) + `init()`.
-- 4: Gates — NEW `tests/test-shell-layout.mjs` (11 invariants: grid/rail/bar/dock present, `main#content` inside the grid, no glossary-tab anywhere, ◐ + no sun/moon, three theme surfaces, soft-dark values, rail/bar/dock styles, 72ch measure, loader wiring ≥4 call sites, focus-visible intact) + NEW `tools/verify-reading-rail.mjs` (12 Puppeteer proofs incl. composition geometry: rail@36–286, content@334–1075, dock@1123–1179 at 1440px; the closed 3-click theme cycle from any start state; scrollspy at `#p4_spine_overview`; mobile 375px no-hscroll).
-- 5: Gate re-pointing, not weakening — `scripts/readerpath_audit_iter164.py` R1 marker `id="glossary-tab"` → `id="fab-glossary"` (the same three-marker check; the surface moved with the side tab's retirement). The retire/adopt of `data/anchor-redirects.json` untouched; no master file touched.
-- 6: **Verification (full battery after the last edit):** build 62 sections / hash `55aea5f8` → **`e4dbb274`** · validate 12 gates PASS + **132 redirects** · validate:master **12/12, 0 warnings** · tests **87/87** (was 68/68 + 11 new + 8 prerender) · sync **87/87** · 7 cluster parity gates + `audit_vs_embeds` PASS · reader-path PASS (after the R1 re-point) · qa csp/bundle/contrast/seo PASS · english **1** / syntax **224** (baselines exact) · lint 0 problems · both browser proofs PASS (`verify-prerender`, `verify-reading-rail`). One defect caught by the new composition check and fixed in-iteration: the rail was `display:none` on wide screens because the ≥1220px override preceded the base rules in the cascade (equal specificity, later wins) — the block was moved after; `body`'s 72ch `max-width` was also capping the whole grid (reset to `none` ≥1220px).
-
-Stage Summary:
-- Shell: 3-zone reading layout ≥1220px (rail 250px | text 72ch | dock 56px); reading bar + sheet below; 3-theme ◐ cycle; side tab + sun/moon retired; typography measure 72ch, line-height 1.7, contrast fixes (7.5:1 OLED muted / 5.7:1 light accent).
-- Zero content/canon edits; DEC-15 not engaged; all fences intact (master HTML untouched, CSP clean).
-- New standing gates: `tests/test-shell-layout.mjs` + `tools/verify-reading-rail.mjs`.
-- Next: owner's read-through of the whole uncommitted review candidate (v4 content + this shell iteration).
-
----
-
-Task ID: iter-191-192-discovery-prerender
-Agent: lead
-Task: make the guide findable — head metadata + JSON-LD + sitemap gate (iter 191), then build-time prerender of `<main>` so the content is in the HTML response (iter 192); plus the README/metadata/docs layer.
-
-Work Log:
-- 0: Preflight — clean worktree except an untracked `_tmp_measure.py` (pre-existing, not mine, untouched). Baseline battery green (62 sections, validate 132 redirects, tests 68/68, english 1 / syntax 224). Diagnosis by measurement, not by assumption: `curl https://vudirvp-sketch.github.io/live-char-guide/` returned 6 815 B with an EMPTY `<main>` and 249 chars of hex-ASCII fallback text, while the corpus is 27 200 words — no canonical, no JSON-LD, no `og:url`, relative `og:image`, English title on Russian content, `robots.txt` inert at a non-host-root path.
-- 1: `scripts/site-config.mjs` — one SITE object + `substituteSiteTokens()`; the shell carries `{{SITE_URL}}` and the build resolves it, so the future D-1 origin move is a one-line change and `qa:seo` fails if a token survives.
-- 2: Head rewritten in `src/shell/index.html` (RU title/description, canonical, absolute OG/Twitter set, JSON-LD `@graph` TechArticle+WebSite, `datePublished` omitted until the owner supplies it). Generated `src/assets/preview-card-1200x630.png` (GDI+, 1200×630, 30 KB) because the old asset was 1344×768 and `og:image` was relative.
-- 3: `scripts/generate-sitemap.mjs` wired into `pnpm run build` (absolute `<loc>`, `<lastmod>`, `CHAPTER_PAGES` hook for D-2, one-language now). `scripts/seo_check.mjs` = new `qa:seo` gate, 24 assertions (Cyrillic title, single canonical == SITE.url, no unsubstituted tokens, absolute og:*, image exists in the build, JSON-LD parses/substituted/inLanguage, sitemap absolutes + no `#fragment` URLs + lastmod). `csp_check.mjs` allowlists `type="application/ld+json"` only — the fence for master HTML is untouched. `bundle_check` index.html budget 500 → 900 KB, disclosed.
-- 4: Prerender — `prerenderIndex()` in `src/scripts/build-shell-unified.mjs` reads `build/parts/manifest.json`, concatenates the 12 parts + appendices in guide order (A→E), and injects them into `<main id="content" data-prerendered="true">` BEFORE the root-fallback copy; fails the build loudly if the marker or a part file is missing. `lazy-loader.js` adoption guard runs the same post-injection sequence (TOC, anchors, glossary, interactive init) and falls back to the fetch path if it throws; the `content.innerHTML = ''` wipe is skipped on that path.
-- 5: New tests `tests/test-prerender.mjs` (8 assertions: flag, no content-hidden, 62 == manifest anchors, >10 000 words, root == dist, parts still emitted, guard present) and `tools/verify-prerender.mjs` (Puppeteer: 62 sections, 0 fragment requests, TOC 62 items, `#p4_spine_overview` scrolls, one section instance, overlay hidden).
-- 6: Verification — build 62 sections / 464 KB / hash `55aea5f8`; crawler-visible text 249 chars → **22 016 words**; tests **76/76**; both browser and static gates green; baselines untouched (english 1, syntax 224); validate 12/12 + 132 redirects; version:check sync; lint PASS.
-- 7: Docs layer — `docs/PROMOTION_PLAN.md` (workstreams, proposed iterations, D-1…D-8, measurement, no-spam list), `docs/PROMOTION_SEO.md` (technical SEO), `docs/I18N_PLAN.md` (RU/EN design, 235–275 h), `docs/promotion/{README.proposed,repo-metadata,root-site-migration}.md`; `README.md` rewritten Russian-first + English summary with the exception recorded in `AGENTS.md`; repo description + 20 topics applied via `gh api`.
-
----
-
-Agent: lead
-Task ID: iter-190-v4-chapters9-10-appendices-final
-Task: v4-9 + v4-10 + the v4 tail — chapter 9 (Parts 8 + 9: one reference, Part 9 7 → 5 sections, one master checklist + RepPen/Temperature/budget/Embodiment), chapter 10 (Part 10 link-free + KI#89), appendices A/B, then the gate re-pointing and the full battery.
-
-Work Log:
-- 0: Preflight — drift from HEAD `d6e26ec8`, all v4 work uncommitted (as designed); baseline battery green at 65 sections / 145 anchors / sync 87/87 / tests 68/68 / english 1 / syntax 226. Inventory: Part 8 = 24 anchors (2 sections), Part 9 = 70 (7 sections), Part 1 §1.5 = the top-3 errors (plan says chapter 9 absorbs it), Part 10 = 31, Appendix E = 12, Appendix A = 1.
-- 1: **Part 9 7 → 5.** `p9_symptom_table` absorbed into `p9_basic_checklist` (ONE "find it" section: 4-step route → the five most common errors → per-block scan → flat symptom→check→fix lookup); `p9_one_change_rule` absorbed into `p9_test_scenarios`, which became «Правка и проверка» (one-change RULE + Применение + 6 scenarios + element map + 6 metrics). Both ids → live redirects; canon mirrored as 5 sections (9.1 / 9.3 / 9.5 / 9.6 / 9.7 — gaps kept, the §7A.11 precedent, so no § renumbering ripple).
-- 2: **`p1_top3_problems` absorbed** (Part 1 6 → 5 sections): the three worst errors are now rows 1–3 of «Пять самых частых ошибок», rows 4–5 are the ex-symptom-table #4/#5 rows — the "строки #4/#5" cross-section numbering retired with the merge; id → redirect `p9_basic_checklist`; the §1.4 synthesis paragraph (sync probe P2-7-syn-01) moved to the end of `p1_core_rules`.
-- 3: **The ONE checklist 14 → 18 items** (v4-4's mandate): + RepPen ≤ 1.10 (12B 1.0–1.05), + Temperature by model (12B 0.6–0.8 / 32B+ 0.7–0.9 / API 0.7–1.0), + block budget (SP ≤200 · Description ≤700 · Example ≤80 · Greeting ≤100; ~610 до якорей), + Embodiment in every Example and anchor; the "Владелец" column deleted (pure routing), the Vysh worked example extended to 18 rows, E14's «все 14 проверок» → 18.
-- 4: **Part 8 stays a two-section reference but stops routing**: 24 → 0 anchors; the «Как читать каталог» meta and the OCEAN-Overload footnote (pure guide-meta, probe P1-3 → `P1-3-del`) deleted; each of the 15 details keeps ONLY its unique payload (check · distinguishing signal · before/after · criterion) — the symptom/cause/fix triple repeated from the card above was cut under DEC-15 point 1–5 (the card carries the triple; the demonstration has no other home); 2 049 → 1 392 words. The E12 embed is untouched (DEC-19 locked visual markup).
-- 5: **Chapter 9 de-linked 94 → 1**: every owner pointer, § number and the intra-chapter routing in Part 9/Part 8 is gone; the ONE surviving link is the Part 10 bridge, moved to the chapter end (§9.7).
-- 6: **Chapter 10: 31 → 0 anchors, KI#89 EXECUTED.** Index table 7 → 6 columns (the «Объём» column was only a §7A.13 link farm), the four «Бюджет токенов» blocks → one index line + one fact line per card («Бюджет токенов» ×4 → one line), every OCEAN/CoT/Lorebook/App-E pointer replaced by the fact in place; the placeholder is now the directive list itself — `{{CORE_DIRECTIVES: Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter}}` — in the 4 card templates, the §7A.1 template and the §7A.2 shorthand rule (the «канонический шаблон → Part 7A» repo tail is gone from executable content).
-- 7: **Appendices A/B: 13 → 2 anchors** — Appendix E's budget/assembly/language/Lorebook pointers became local statements (kept the two capability-table owner refs — CoT tier, voice placement), Appendix A's §7A.1 collision pointer dropped; Appendix E 1 533 → 1 507 words.
-- 8: **Ids → redirects (plan-mandated merges, the DEC-33 rule):** +3 (`p9_symptom_table` → `p9_basic_checklist`, `p9_one_change_rule` → `p9_test_scenarios`, `p1_top3_problems` → `p9_basic_checklist`) and 3 legacy keys re-pointed off the new redirects (`p9_additional_problems`, `p9_top5_problems`, `token-budget`) — 129 → 132, all live, no chains (`SHELL-REDIRECTS` PASS). Glossary: the «Правило одного изменения» entry re-homed to `p9_test_scenarios` + its ref re-pointed; the §9.6 heading «Правило одного изменения» restored so the term stays findable in master.
-- 9: **Gates re-pointed the honest way, never weakened:** `audit_diagnostics_parity` — new canon locators (§9.1 / §9.3 / §9.5 / §9.6), the 18-item ONE-checklist guard + an 18/18 heading assertion, the one-change rule asserted inside §9.6, and a NEW negative gate that bans the retired routing links; `audit_sampling_parity` — the five-error rows replace the #4/#5 fold guards, §9.7 states its range in place (no §7A.6 ref); `audit_core_directives_parity` — the shorthand constant + the Part-10 form check moved to the new placeholder; `audit_canon_master_sync` — P0-12 needle → «Единый чек-лист (18 пунктов)», P1-3 → `P1-3-del`, still **87**; `readerpath_audit_iter164` — corpus 65 → 62. No gate was relaxed to make a defect pass.
-- 10: **Verification (full battery after the last edit):** build **62 sections** · hash `6f563edc` · validate **132 redirects** · validate:master **12/12, 0 warnings** · tests **68/68** · sync **87/87** · 7 cluster parity gates + `audit_vs_embeds` PASS · both reader-path tools PASS · qa csp/bundle/contrast/doc-versions PASS · english **1** / syntax **224** (226 → 224) · version:check 9.2.6 · lint PASS · drift actionable 109 (informational) · tag-balance scan clean on every edited master file.
-
-Stage Summary:
-- Chapter 9: Part 9 2 427 → 2 575 words / **70 → 1 anchor**; Part 8 2 049 → 1 392 / **24 → 0**; Part 1 1 177 → 989 / 0.
-- Chapter 10: 4 771 → 4 706 words / **31 → 0 anchors**. Appendices: 13 → 2 anchors.
-- Whole guide: **145 → 10** internal links, **65 → 62** sections, 132 redirects, runtime hash unchanged (`6f563edc`).
-- **The v4 content track is complete.** Next: the owner's read-through of the uncommitted review candidate; the open owner calls (D-5 v2 canon format; DECISIONS.md over its cap) are unchanged.
-
----
-
-Task ID: iter-189-v4-chapters7-8-budget-assembly
-Agent: lead
-Task: v4-8 — chapters 7 (what the card costs) + 8 (assembly end-to-end): the 4K profile absorbed into the budget section, the assembly chapter reduced to its six-step table + the one per-card budget, both link-free.
-
-Work Log:
-- 0: Preflight — §7A.12 carried 2 anchors (both to Appendix E), §7A.13 carried 22 (a routing hub into Parts 1–10), §7A.11 was a 43-word pointer with 2 links and no reader job of its own. Gate-locked surfaces: the §7A.12 table rows/values, the Script Tax RULE, the sub-budget table, the «400–900» calculator, the E01 embed, and E02's embed terminator.
-- 1: **§7A.11 absorbed:** one paragraph «Что помещается в 4K» inside §7A.12 (System Prompt 50 · Description 150 · два Examples по 40 · Greeting 40 ≈ 320 токенов до якорей + «отключать, а не сжимать»); the id → redirect `p7a_token_budget`, the legacy key `4k-fallback` re-pointed (its old target had become a redirect), the glossary entry's home/ref re-pointed, AP-14's owner label + link in Part 8 re-pointed to §7A.12.
-- 2: **§7A.12 de-linked:** the model-limits and Script-Tax appendix pointers replaced by the facts themselves — the Script Tax coefficient is now stated in place (~1.5–2× на 32K-словаре, пренебрежимо на ≥128K). The canonical table, the sub-budgets, the calculator and both RULEs are untouched (token-budget parity green).
-- 3: **§7A.13 rebuilt as the six-step table** (step → what you do → Elena's result) + the one per-card budget table. Cut as repeats: the assembled-SP copy (§7A.1 owns it), the SPINE copy (Part 4), the CoT copy (Part 6), the «Дополнительные шаги» list (Parts 4/5/6/7B), the closing checklist (its own summary said it duplicated §1.4/§4.6/§5.1/§6.1/§7A.12 — the ONE master checklist is §9.5), and the two transitions. Fixed a stale cell: the Examples row read «7 директив» → ~120 under the 80–240 envelope; the ~610 total is unchanged and arithmetic-consistent.
-- 4: **Gates re-pointed the honest way — negative gates + content assertions, never weakened:** reader-path BUILD — retired link sets for the prebuild profile and both Build chapters, the six step rows + «~610» + «400–900» + the budget-table/4K tokens asserted, and the ONE master checklist now asserted in §9.5; core-directives — the §7A.13 *format mention* asserted and re-linking §7A.2 banned; sync — P0-2 and P2-7-syn-07a moved to ABSENT_CHECKS, P1-10 re-pointed to `part_07b.html` (the Lorebook example's new home), still **87 checks**; reader-path corpus count 66 → 65.
-- 5: **Verification (full battery after the last edit):** build 65 sections · hash `6f563edc` · validate **129 redirects** · validate:master **12/12, 0 warnings** · tests 68/68 · sync **87/87** · 7 cluster parity gates + `audit_vs_embeds` PASS · both reader-path tools PASS · qa csp/bundle/contrast/doc-versions PASS · english **1** / syntax **224** · lint PASS · drift actionable 112 → 109 · tag-balance scan clean on the three edited master files.
-
-Stage Summary:
-- §7A.12 380 → 404 words (the 4K paragraph lands here), §7A.13 1 081 → 384; their anchors 4 + 22 → 0.
-- Corpus: 66 → 65 sections, anchors 172 → 145, words 26 664 → 25 943.
-- Next: chapter 9 (Part 8 + Part 9 — 94 anchors; one master checklist + 7 → 5 sections), then chapter 10 (Part 10 + KI#89), appendices A/B.
-
----
-
-Task ID: iter-188-v4-chapters5-6-lorebook-greeting
-Agent: lead
-Task: v4-7 — chapters 5 (Greeting) + 6 (Lorebook, AN, injections): greeting as a single site, lorebook 3 → 2 sections, structured inject absorbed into the AN section.
-
-Work Log:
-- 0: Preflight — Part 7B held 5 sections / 8 anchors: three lorebook sections carried 6, the greeting 1 (to the Part-10 canonical greeting), the structured-inject stub none. Plan §2 requires 3 lorebook sections → 2 and the injection absorbed; the glossary registry homes two of the retired ids and legacy anchors resolve into them, so **the owner was asked (AGENTS stop-condition on `data/anchor-redirects.json`) and called it in this iteration: merges retire the absorbed ids to legacy redirects, glossary re-pointed, disclosed.**
-- 1: **Chapter 5 — greeting:** the intro stopped narrating the guide («алгоритм показан ниже… пример ниже») and now states the job — four fixed steps, and why the order cannot be rearranged (the hook works only after the scene is seen). The НАБЛЮДЕНИЕ callout lost its Part-10 routing sentence and now says locally that this is a teaching scene, not a ready card block; the probe prefix P3-1-7b is kept verbatim. The E18 embed and the worked example are untouched. 290 words, anchors **1 → 0**.
-- 2: **Chapter 6 — lorebook 3 → 2:** `p7b_lorebook_basics` = «структура записи» (record table, parameter table, rules, the four worked examples, and the `EVENT:` support fact stated in place instead of the appendix pointer); `p7b_lorebook_mechanics` = «механики и бюджет», absorbing the advanced table (fatigue / meta-lore / false memory), the context-budget table and the integration checklist, plus the content-injection example; `p7b_lorebook_advanced` → redirect. The two cross-section transitions and the closing «→ Part 8» hop are gone; the РЕКОМЕНДАЦИЯ that routed to mechanics now states the Description boundary the reader needs before writing a record.
-- 3: **Structured inject absorbed (chapter 6's AN half):** the 54-word stub section became one `<h4>` inside `p7a_authors_note` — definition, the three constraints, the XML example — and its id → redirect `p7a_authors_note`. The AN section also lost two plain-text pointers (`см. → Part 4`, `см. Выщербленный §10.4`). Probe-locked strings kept verbatim: P0-4 «после седьмого…», P1-2 «Счётчик вырезаний» row, P1-11 «Пример 1».
-- 4: **Ids → redirects (owner-approved):** `data/anchor-redirects.json` +2 (`p7b_structured_inject` → `p7a_authors_note`, `p7b_lorebook_advanced` → `p7b_lorebook_mechanics`); the legacy key `structured-inject` was re-pointed to the live target (it had become a chain once its old target retired). 126 → **128 redirects**, every target live (`SHELL-REDIRECTS` PASS, no chains / no shadowing).
-- 5: **Glossary re-pointed:** registry `home` for Structured Inject → `p7a_authors_note`, AN's `xrefs` dropped, Lorebook `xrefs` → mechanics only; the canon § numbers in the three ref lines corrected; `data/glossary.json` + the no-JS page regenerated by the build (45 terms, parity gate PASS). Stale §7B references re-pointed in the same slot-rule pass: `src/master/part_08/09/10` + `appendix_model_params`, `docs/canon/part_08/09/10` + `appendix_model_params` + `appendix_character_map`, `docs/elena_character_bible.md`, `docs/content_map.md`, `AGENT_NAVIGATION.md` (§8 pairs retired, section count 66).
-- 6: **Corpus:** 66 sections (Part 7B 5 → 3); the reader-path expectation moved 68 → 66; `p7b_greeting` now carries the Part's `data-part-title` (the absorbed stub used to).
-- 7: **Defect caught by the battery, not by a reader:** the reader-path audit's BUILD B2 still expected the chapter-0 profile to link §7A.13 / §7A.12 / Part 10 / the appendix — v4-2 (iter 183) had de-linked it by design, so that gate had been red for iters 183–187 while STATUS claimed both reader-path tools PASS. Fixed the honest way: the link-set expectation became a **negative** gate (the retired routing must not come back) and the three decision axes are asserted as text. Recorded as KI#88 (opened + closed in this iteration).
-- 8: **Verification (full battery after the last edit):** build 66 sections · hash `6f563edc` · validate **128 redirects** · validate:master **12/12, 0 warnings** · tests **68/68** · sync **87/87** · 7 cluster parity gates + `audit_vs_embeds` PASS · both reader-path tools PASS · qa csp/bundle/contrast/doc-versions PASS · english **1** / syntax **224** (baselines exact) · version:check 9.2.6 · lint PASS · drift actionable 116 → 112 (informational).
-
-Stage Summary:
-- Greeting 290 words / 0 anchors · lorebook basics 401 / 0 · lorebook mechanics 608 / 0 (the advanced section's 303 absorbed) · AN 471 → 530 (holds the injection technique now), 0 anchors.
-- Part 7B: 1 364 → 1 299 words, anchors **8 → 0**; corpus anchors **180 → 172**.
-- Next: chapters 7–8 (`p7a_token_budget` + `p7a_assembly_pipeline`, both in Part 7A — 2 + 22 anchors), then chapter 9 (Parts 8 + 9), 10 (Part 10), appendices A/B.
-
----
-
-Task ID: iter-187-v4-chapter4-voice
-Agent: lead
-Task: v4-6 — chapter 4 (Examples: voice): Part 3 anchor-free; the pure-redirect section replaced by a local check.
-
-Work Log:
-- 0: Preflight — Part 3 held 8 anchors over 5 sections; `p3_greeting_ref` was a 35-word pure redirect to Part 7B (flagged by the reader audit as a section with no job of its own); the voice-parity gate locks the §3.2 table + prose + widget + a 12B RULE phrase.
-- 1: **§3.1:** the physical-voice bullet lost its Part-2 pointer (the sensor layer is named in place); the methodology caveat lost its Part-1 pointer (probe P3-6 re-pointed); the Pattern-Matcher rule became a local statement.
-- 2: **§3.2:** the 12B RULE lost its self-part link; its audited phrase «Description = 0% влияния на лингвистический голос» was preserved — **the voice-parity gate failed the first draft of that sentence and the text was re-worded around the anchor rather than weakening the gate**.
-- 3: **§3.3:** Examples length bullet dropped its §7A.12 parenthetical; quality-grade disambiguation left intact (probe-locked and still useful).
-- 4: **§3.4 repurposed:** «Приветствие (Greeting Message)» (a redirect) → «Проверка голоса», a 7-point local gate (voice audible without description, `<START>` in every block, a physical reaction per block, no two identical blocks, markup matches Format Lock, no narrator bleed, three non-overlapping markers per character in a multi-character scene). Id unchanged → no redirect needed; the chapter now ends with a check instead of a hop.
-- 5: **§3.5:** Voice Bleed states the error and the cure locally (AP-11 link gone); the cross-cutting-characters paragraph lost the Part-10 link and the «в остальных Parts гайда» guide-meta (probe prefix kept verbatim).
-- 6: **Canon mirror:** `docs/canon/part_03.md` §3.4 rebuilt as the check, six lines patched (the physical-voice line needed a second pass — first prefix missed the leading list dash).
-- 7: **Tag hygiene:** 5 unmatched `</p>` from the splices caught by the iter-184 scanner.
-- 8: **Verification:** build 68 sections · hash `6f563edc` · validate 126 redirects · validate:master 12/12, 0 warnings · tests 68/68 · sync **87/87** · 8 parity gates PASS · english **1** / syntax **224** · lint PASS.
-
-Stage Summary:
-- Part 3: 1 584 → 1 644 words (the new 7-point check adds ~70), anchors **8 → 0**.
-- Corpus: 23 261 → 23 305 words; anchors **188 → 180** (`part_09` = 70, `part_07a` = 33, `part_10` = 31 remain).
-- Next: chapters 5–6 (Greeting + Lorebook/AN) — both in Part 7B.
-
----
-
-Task ID: iter-186-v4-chapter3-behaviour
-Agent: lead
-Task: v4-5 — chapter 3 (Examples: behaviour): Part 2 (anchors) + Part 6 (CoT) anchor-free.
-
-Work Log:
-- 0: Preflight — Part 2 held 3 anchors over 5 sections, Part 6 held 5 over 5; the probes require the price-table header, the Tier-0 row and the bridge paragraph to survive.
-- 1: **§2.1:** the E03-meta intro («показан выше… дополняет E03, не дублирует») replaced by the actual rule: three steps are rigid, a deferred/abstract price kills the anchor.
-- 2: **§2.2:** FLAW rule de-linked (the statement is self-contained); the deferred-price rule lost its §2.1 self-reference; the price-type table's Walter cell lost the Part-10 reference; the influence-boundary rule kept its one-sentence reminder without the CORE-#5 link.
-- 3: **§2.3:** E04-meta intro replaced by the layer logic; the duplicate sensor-layer paragraph below the table deleted.
-- 4: **§2.5:** the sensory-anchor definition stopped forward-referencing GHOST Layers (they appear later in the reading order) and now explains why sensory anchors exist (a trigger reaches the past before the character can think).
-- 5: **§6.1:** CoT intro lost the model-note chip and the «three systems» map; the limit rule dropped the AP-10 label and kept the operational reason; the tiers link became «в таблице ниже».
-- 6: **§6.2:** the tiers intro states Tier 0 locally (no Part-2 link); the table intro lost the E11-meta sentence; the duplicate «визуальная версия» line deleted; the E11 panel's parenthetical reduced to «State → Body → Sensor → Speech» (embed markup untouched, marker intact, `audit_vs_embeds` PASS).
-- 7: **§6.4/§6.5:** Tier 3 etymology removed (the practical note kept); the overload rule de-linked from AP-10; the bridge paragraph kept its probed wording and lost the trailing Part-7A link.
-- 8: **Canon mirror:** `docs/canon/part_02.md` + `part_06.md` patched line-for-line in pair.
-- 9: **Tag hygiene:** 11 unmatched `</p>` from the splices caught by the iter-184 scanner and removed before the battery.
-- 10: **Verification:** build 68 sections · hash `6f563edc` · validate 126 redirects · validate:master 12/12, 0 warnings · tests 68/68 · sync **87/87** · 8 parity gates PASS · english **1** / syntax **224** · lint PASS.
-
-Stage Summary:
-- Part 2: 903 → 873 words, anchors **3 → 0**. Part 6: 817 → 738 words, anchors **5 → 0**.
-- Corpus: 23 370 → 23 261 words; anchors **196 → 188** (`part_09` = 70, `part_07a` = 33, `part_10` = 31 remain).
-- Next: chapter 4 (Examples: voice) — Part 3 (8 anchors), then chapter 5 (Greeting).
-
----
+Task: the reading layout and its corrections, then the Part 5 rebuild — 193: `.layout-grid` TOC rail + reading bar + three themes + scrollspy + the browser proofs; 194: centred composition, the dead ↔ and E01–E18 mini-map controls retired, soft dark becomes the default; 195: Part 5 rebuilt as four sections with one reader job each (DEC-37), OCEAN ladder in ONE rule, 6 RULE → 3.
+Detail: `git` + `STATUS.md` invariants.
 
 Task ID: iters 179–185 (one-line summaries)
 - iter 185 — v4-4, chapter 2 (Part 5) anchor-free: §5.1 opener states the job, stress table loses the hypothetical hedge, trigger chain loses the «источник в гайде» column, ceilings/overload de-meta'd, pentagon retitled «Интерактивный OCEAN-профиль», §5.2–§5.5 de-linked textually (tables untouched, `data/enneagram.json` byte-identical); Part 5 2 601 → 2 488 words, anchors **19 → 0**. Detail: git + STATUS iter-185.

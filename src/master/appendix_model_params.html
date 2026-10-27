@@ -19,7 +19,7 @@
 <!-- canonical: model capabilities + context profiles + sampling + Script Tax + SP language + API wrappers + frontend EVENT compatibility -->
 <h2>Модель, контекст и параметры генерации</h2>
 
-<p><strong>Приложение E.</strong> Отвечает на три вопроса, которые читатель задаёт <em>один раз — до сборки карточки</em> и которые больше не живут в линейном потоке:</p>
+<p><strong>Приложение E.</strong> Справочник по трём вопросам — какая модель, сколько контекста, какие параметры: он нужен при выборе модели и контекста, поэтому читается выборочно, а не по порядку.</p>
 <ol>
 <li><strong>Какую модель взять</strong> — что умеют 12B–14B, 32B+ и API-модели.</li>
 <li><strong>Сколько контекста ей нужно</strong> — профили 4K / 8K / 16K+ и 4K-Fallback.</li>
@@ -39,12 +39,12 @@
 </thead>
 <tbody>
 <tr><td>Эффективность CoT</td><td>Базовая: Tier 0–1</td><td>Полная: Tier 0–3</td><td>Полная: Tier 0–3</td></tr>
-<tr><td>Рабочий уровень CoT</td><td>Tier 0 (<a href="#p6_cot_tiers">Part 6 §6.2 — уровни CoT</a>)</td><td>Tier 1–2</td><td>Tier 2–3</td></tr>
+<tr><td>Рабочий уровень CoT</td><td>Tier 0</td><td>Tier 1–2</td><td>Tier 2–3</td></tr>
 <tr><td>Следование SPINE</td><td>Умеренное</td><td>Высокое</td><td>Высокое</td></tr>
 <tr><td>Следование основным директивам</td><td>~60–80%</td><td>~85–95%</td><td>~90–98%</td></tr>
 <tr><td>Директива №6 (Consequence Driven)</td><td>Ограниченный эффект — недостаточная глубина рассуждений</td><td>Значительный эффект</td><td>Полный эффект</td></tr>
 <tr><td>Директива №7 (Pre-Generation Filter)</td><td>~40–60% соблюдения — часто игнорируется</td><td>~85–95% соблюдения</td><td>~90–98% соблюдения</td></tr>
-<tr><td>Размещение голоса</td><td>Examples + Greeting — <strong>никогда в Description</strong> (<a href="#p3_voice_isolation">Part 3 §3.1 — изоляция голоса</a>)</td><td>Examples + Greeting — никогда в Description</td><td>Examples + Greeting + AN — никогда в Description</td></tr>
+<tr><td>Размещение голоса</td><td>Examples + Greeting — <strong>никогда в Description</strong></td><td>Examples + Greeting — никогда в Description</td><td>Examples + Greeting + AN — никогда в Description</td></tr>
 <tr><td>XML-теги</td><td>&#9888;&#65039; нестабильны — структурированная инъекция ограничена</td><td>&#10003; стабильны</td><td>&#10003; стабильны</td></tr>
 <tr><td>Anti-godmoding</td><td>2 строки (запрет + позитив)</td><td>2 строки</td><td>1 строка</td></tr>
 <tr><td>Язык SP</td><td>Английский для словаря &lt;64K&sup1;; язык карточки допустим для &ge;128K</td><td>Язык карточки предпочтителен</td><td>Язык карточки предпочтителен</td></tr>
@@ -75,17 +75,17 @@
 
 <p><strong>4K-Fallback</strong> — минимальная конфигурация для моделей с контекстом 4K токенов. Используется, когда расширенная карточка не помещается в контекстное окно.</p>
 
-<h4>Токен-лимиты 4K (конфигурация развёртывания в пределах лимитов §7A.12)</h4>
+<h4>Токен-лимиты 4K (конфигурация развёртывания в пределах лимитов бюджета токенов)</h4>
 <div class="table-wrap">
 <table>
 <thead>
 <tr><th scope="col">Блок</th><th scope="col">Полный</th><th scope="col">4K-Fallback</th></tr>
 </thead>
 <tbody>
-<tr><td>System Prompt</td><td>50–200 (§7A.12)</td><td>80–100</td></tr>
-<tr><td>Description</td><td>150–700 (§7A.12)</td><td>150–200</td></tr>
-<tr><td>Examples</td><td>80–400 (§7A.12: 2–5 × 40–80)</td><td>130–160 (2 × 65–80)</td></tr>
-<tr><td>Greeting</td><td>40–100 (§7A.12)</td><td>50–80</td></tr>
+<tr><td>System Prompt</td><td>50–200</td><td>80–100</td></tr>
+<tr><td>Description</td><td>150–700</td><td>150–200</td></tr>
+<tr><td>Examples</td><td>80–400 (2–5 × 40–80)</td><td>130–160 (2 × 65–80)</td></tr>
+<tr><td>Greeting</td><td>40–100</td><td>50–80</td></tr>
 </tbody>
 </table>
 </div>

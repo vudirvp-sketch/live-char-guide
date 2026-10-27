@@ -129,8 +129,8 @@ CHECKS = [
     (
         "KI#30-7a",
         "part_07a.html",
-        "Cautious zone: N=70 (граница 60–70, см. Part 5 §5.1 RULE",
-        "part_07a §7A.9 Выщербленный OCEAN: N=70 labeled as cautious zone (iter 41 KI#30 fix)",
+        "Cautious zone: N=70 (граница 60–70; экстремум — строго ниже 30 или выше 70)",
+        "part_07a §7A.9 Выщербленный OCEAN: N=70 labeled as cautious zone (iter 41 KI#30 fix; re-pointed iter 201 — §-pointer removed from the card note, same threshold semantics)",
     ),
     # ----- KI#30 (iter 41): Елена §10.1 OCEAN labels -----
     (
@@ -208,7 +208,7 @@ CHECKS = [
     (
         "P0-12",
         "part_09.html",
-        "<h4>Единый чек-лист (18 пунктов)</h4>",
+        "<h3>Единый чек-лист (18 пунктов)</h3>",
         "part_09 §9.5: ONE deploy checklist (18 numbered items; the Vysh example merged "
         "into it, iter 173; +4 pre-deploy checks iter 190 — supersedes the iter-35/51/105 "
         "Quick Check rename)",
@@ -260,7 +260,7 @@ CHECKS = [
     (
         "P1-5",
         "part_04.html",
-        "<h4>Определения типов якорей</h4>",
+        "<h3>Определения типов якорей</h3>",
         "part_04 §4.8: Anchor type definitions section added (iter 36 P1-5 fix)",
     ),
     # ----- P1-6 (B6): part_06 Tier 0 → Tier 0+ -----
@@ -360,7 +360,7 @@ CHECKS = [
     (
         "P2-12a",
         "part_03.html",
-        "<strong>Quality Grade</strong> (класс A / B / C) (не путать с CoT Tier 0–3 из Part 6 или слоями призрака Tier 1–3 из Part 10)",
+        "<strong>Quality Grade</strong> (класс A / B / C) (не путать с CoT Tier 0–3)",
         "part_03 §3.4: Quality Grade A/B/C disambiguation block added (iter 37 P2-12 fix; iter 105 Grade A/B/C → класс A/B/C)",
     ),
     (
@@ -372,7 +372,7 @@ CHECKS = [
     (
         "P2-12c",
         "part_03.html",
-        "<h4>До/После: класс A vs класс C</h4>",
+        "<h3>До/После: класс A vs класс C</h3>",
         "part_03 §3.4: «До/После» heading Tier 1 vs Tier 3 → Grade A vs Grade C (iter 37 P2-12 fix); Grade A/C → класс A/C (iter 104 translation pass)",
     ),
     (

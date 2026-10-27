@@ -66,7 +66,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### Examples (примеры диалогов)
 
-**Examples (примеры диалогов)** — примеры диалогов, задающие Voice через демонстрацию. Единственное место для лингвистических голосовых паттернов (вместе с Greeting Message) — иерархия влияния §3.2; правила написания — §3.3.
+**Examples (примеры диалогов)** — примеры диалогов, задающие Voice через демонстрацию. Единственное место для лингвистических голосовых паттернов (вместе с Greeting Message) — иерархия влияния — в части 3; правила написания — там же.
 
 → `[ref: part_03.md §3.2 — Иерархия влияния на голос]`
 → `[meta: sources=T-15; lang=en; home=p3_influence_hierarchy; xrefs=p1_card_overview, p3_examples_rules; aliases=Examples, Dialogue Examples, Примеры, Примеры диалогов; prohibited=Примерные сообщения]`
@@ -87,14 +87,14 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### OCEAN (Большая пятёрка)
 
-**OCEAN (Большая пятёрка)** — модель личности: Openness (Открытость), Conscientiousness (Добросовестность), Extraversion (Экстраверсия), Agreeableness (Доброжелательность), Neuroticism (Нейротизм). Используется для проверки внутренней консистентности персонажа и дополнения SPINE. Золотое правило: только 1–2 экстремальных полюса (значения <30 или >70). В карточке размещается в Description как тег `<ocean>` с числовыми значениями, не нарративным описанием черт (принцип #3, §1.4).
+**OCEAN (Большая пятёрка)** — модель личности: Openness (Открытость), Conscientiousness (Добросовестность), Extraversion (Экстраверсия), Agreeableness (Доброжелательность), Neuroticism (Нейротизм). Используется для проверки внутренней консистентности персонажа и дополнения SPINE. Золотое правило: только 1–2 экстремальных полюса (значения <30 или >70). В карточке размещается в Description как тег `<ocean>` с числовыми значениями, не нарративным описанием черт (третий из трёх ключевых принципов).
 
 → `[ref: part_05.md §5.1 — OCEAN: проверка SPINE числами]`
 → `[meta: sources=C-17+T-31; lang=en; home=p5_ocean_basics; aliases=OCEAN, Ocean; deprecated=Big Five, big five]`
 
 ### OOC (вне образа)
 
-**OOC (вне образа)** — Out of Character: выход персонажа из образа (модель отвечает как ассистент, ломает тон, признаёт «игру»). Базовая защита — OOC Protection (§7A.8); диагностика — Part 9.
+**OOC (вне образа)** — Out of Character: выход персонажа из образа (модель отвечает как ассистент, ломает тон, признаёт «игру»). Базовая защита — OOC Protection (часть 7A); диагностика — часть 9.
 
 → `[ref: part_07a.md §7A.8 — OOC-защита (OOC Protection)]`
 → `[meta: sources=T-33; lang=en; home=p7a_ooc_protection; xrefs=p9_basic_checklist; aliases=OOC, Out of Character, Вне образа]`
@@ -143,7 +143,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### Tone Frame (тональный фрейм)
 
-**Tone Frame (тональный фрейм)** — тональный фрейм: двойной SP-элемент (~25–30 токенов), задаёт тон и фиксирует формат; пишется на английском в SP (правило языка — §7A.2).
+**Tone Frame (тональный фрейм)** — тональный фрейм: двойной SP-элемент (~25–30 токенов), задаёт тон и фиксирует формат; пишется на английском в SP (правило языка — часть 7A).
 
 → `[ref: part_07a.md §7A.3 — Тональный фрейм (Tone Frame)]`
 → `[meta: sources=T-48; lang=en; home=p7a_tone_frame; xrefs=p7a_system_prompt; abbr=TF; aliases=TF, Tone Frame, Тональный фрейм]`
@@ -178,7 +178,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### Бюджет токенов (Token Budget)
 
-**Бюджет токенов (Token Budget)** — распределение токенов контекстного окна между компонентами карточки — определяет, какие элементы попадут к модели. Бюджет зависит от размера окна (4K / 8K / 16K+ / API); канонические значения по блокам — таблица §7A.12.
+**Бюджет токенов (Token Budget)** — распределение токенов контекстного окна между компонентами карточки — определяет, какие элементы попадут к модели. Бюджет зависит от размера окна (4K / 8K / 16K+ / API); канонические значения по блокам — таблица бюджета в части 7A.
 
 → `[ref: part_07a.md §7A.12 — Бюджет токенов (Token Budget)]`
 → `[meta: sources=C-21+T-47; lang=ru; home=p7a_token_budget; xrefs=p7a_system_prompt; aliases=Token Budget, Бюджет токенов, бюджет токенов; deprecated=бюджет токенов, token budget allocation]`
@@ -199,7 +199,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### Годмодинг
 
-**Годмодинг** — диагностический термин: модель пишет за пользователя (действия, мысли, чувства `{{user}}`) — сам факт нарушения. Директива Anti-godmoding (§7A.1) предотвращает годмодинг; отсутствие директивы — анти-паттерн AP-6.
+**Годмодинг** — диагностический термин: модель пишет за пользователя (действия, мысли, чувства `{{user}}`) — сам факт нарушения. Директива Anti-godmoding (часть 7A) предотвращает годмодинг; отсутствие директивы — анти-паттерн AP-6.
 
 → `[ref: part_08.md §8.2 — AP-6: Отсутствие анти-годмодинга (No Anti-godmoding)]`
 → `[meta: sources=T-55; lang=ru; home=p8_worked_examples; xrefs=p7a_system_prompt; aliases=годмодинг, godmoding, god mode, Godmoding]`
@@ -241,7 +241,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### Карточка персонажа (Character Card)
 
-**Карточка персонажа (Character Card)** — полный пакет поведенческого движка персонажа — все блоки карточки (Description, System Prompt, Examples, якоря, Greeting Message; состав — §1.2).
+**Карточка персонажа (Character Card)** — полный пакет поведенческого движка персонажа — все блоки карточки (Description, System Prompt, Examples, якоря, Greeting Message; состав — часть 1).
 
 → `[ref: part_01.md §1.2 — Базовые блоки карточки]`
 → `[meta: sources=T-06; lang=ru; home=p1_card_overview; aliases=Character Card, Card, Карточка, Карточка персонажа; deprecated=Персонаж]`
@@ -262,7 +262,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 
 ### Основные директивы (CORE DIRECTIVES)
 
-**Основные директивы (CORE DIRECTIVES)** — набор из 7 поведенческих директив внутри System Prompt — «операционная система» генерации: связная логика, не разрозненные инструкции. Состав: (1) Show Never Tell; (2) Embodiment First; (3) Spatial & Anatomical Lock; (4) Environmental Reactivity; (5) Influence Boundary; (6) Consequence Driven; (7) Pre-Generation Filter. Определение каждой директивы и многоуровневое правило языка (по модели) — §7A.2.
+**Основные директивы (CORE DIRECTIVES)** — набор из 7 поведенческих директив внутри System Prompt — «операционная система» генерации: связная логика, не разрозненные инструкции. Состав: (1) Show Never Tell; (2) Embodiment First; (3) Spatial & Anatomical Lock; (4) Environmental Reactivity; (5) Influence Boundary; (6) Consequence Driven; (7) Pre-Generation Filter. Определение каждой директивы и многоуровневое правило языка (по модели) — часть 7A.
 
 → `[ref: part_07a.md §7A.2 — Основные директивы (CORE DIRECTIVES)]`
 → `[meta: sources=C-5+T-07+T-08+T-11+T-14+T-23+T-35+T-41+T-43; lang=ru; home=p7a_core_directives; xrefs=p7a_system_prompt; abbr=CD; aliases=CORE DIRECTIVES, CD, Core Directives, Основные директивы, ядерные директивы, Show Never Tell, Embodiment First, Spatial & Anatomical Lock, Environmental Reactivity, Influence Boundary, Consequence Driven, Pre-Generation Filter; deprecated=Core Directives, core directives, ядерные директивы]`
