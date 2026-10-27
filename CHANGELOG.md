@@ -6,6 +6,13 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 207 — OCEAN widget: dead suggestion branch removed, forecast named in prose.
+
+- **Dead branch removed:** `enneagram:ocean-suggest` subscription, hidden «Применить предложение Enneagram» button and its handler — the emitter was retired in v3, so the function never existed.
+- **Forecast named:** §5.4 now says OCEAN Insight forecasts probable Enneagram types from extreme poles, and both forecast types are called hints for manual review.
+- **Recorded as UNCLEAR:** re-deriving `data/ocean.json`'s correlation lists from the matrix would change suggested types — a product call, logged in `PLAN.md` a2-E.
+- **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+
 ### iter 206 — leftover reader-facing findings.
 
 - **Vocabulary ≠ context:** Appendix E's «Размер словаря» row no longer prints Claude 200K / GPT-4 128K / Gemini 1M+ (context windows); API = vocabularies unpublished, models multilingual.

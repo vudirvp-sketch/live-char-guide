@@ -93,7 +93,6 @@
   }
 
   // FIX-28: Pending Enneagram suggestion state (sovereignty 0.1 — user must confirm)
-  let _pendingEnneagramSuggestion = null;
 
   // Highlight notification auto-dismiss timer
   let highlightNotifTimer = null;
@@ -567,7 +566,6 @@
         </div>
         <div class="ocean-actions">
           <button class="ocean-copy-btn" id="ocean-copy-btn">Copy for card</button>
-          <button class="ocean-apply-suggestion-btn" id="ocean-apply-suggestion" style="display:none;">Применить предложение Enneagram</button>
         </div>
       </div>
     `;
@@ -656,37 +654,6 @@
       });
     }
 
-    // FIX-28: Bind "Apply Enneagram suggestion" button (sovereignty 0.1)
-    const applySuggBtn = container.querySelector('#ocean-apply-suggestion');
-    if (applySuggBtn) {
-      applySuggBtn.addEventListener('click', function() {
-        if (!_pendingEnneagramSuggestion) return;
-        TRAIT_IDS.forEach(function(trait) {
-          if (_pendingEnneagramSuggestion[trait] !== undefined) {
-            oceanProfile[trait] = _pendingEnneagramSuggestion[trait];
-          }
-        });
-        _pendingEnneagramSuggestion = null;
-        applySuggBtn.style.display = 'none';
-        // Re-render the widget with new values
-        var pentagonEl = container.querySelector('#ocean-pentagon');
-        if (pentagonEl) pentagonEl.innerHTML = buildM2PentagonSVG();
-        TRAIT_IDS.forEach(function(trait) {
-          var slider = container.querySelector('.ocean-slider-input[data-trait="' + trait + '"]');
-          if (slider) slider.value = oceanProfile[trait];
-          var valueEl = container.querySelector('[data-value-trait="' + trait + '"]');
-          if (valueEl) valueEl.textContent = formatOCEANValue(oceanProfile[trait]);
-        });
-        updateExtremum(container, oceanDataCache, mbtiDataCache, thresholds);
-        updateForecast(container, oceanDataCache, mbtiDataCache, thresholds);
-        debounceEmit();
-      });
-    }
-
-    // FIX-28: Show apply button when there's a pending suggestion
-    if (_pendingEnneagramSuggestion && applySuggBtn) {
-      applySuggBtn.style.display = '';
-    }
   }
 
   function updateExtremum(container, oceanData, mbtiData, thresholds) {
@@ -817,19 +784,6 @@
         }
       });
       console.log('[OCEAN] Subscribed to mbti:ocean-apply (M2+)');
-    }
-    // M2+: enneagram:ocean-suggest — FIX-28: Show suggestion instead of auto-applying
-    // Per 0.1 sovereignty: user must confirm changes to their OCEAN profile
-    if (window.EventBus) {
-      window.EventBus.on('enneagram:ocean-suggest', function(data) {
-        if (!data) return;
-        // Show suggestion as comfort zones instead of auto-applying
-        highlightComfortZones(data, 'enneagram');
-        showHighlightNotification('Рекомендованные значения Enneagram подсвечены на слайдерах. Нажмите «Заполнить по типу» для применения.');
-        // Store suggested values for manual apply
-        _pendingEnneagramSuggestion = data;
-      });
-      console.log('[OCEAN] Subscribed to enneagram:ocean-suggest (M2+)');
     }
     m2EventSubscribed = true;
   }

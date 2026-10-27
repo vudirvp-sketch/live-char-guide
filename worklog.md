@@ -5,6 +5,22 @@
 
 ---
 
+Task ID: iter-207-ocean-widget-cleanup
+Agent: lead
+Task: audit v2 support S7/S8 — the OCEAN widget's forecast was not named in prose and a dead `enneagram:ocean-suggest` branch promised a retired function.
+
+BASE: 0a2877a7
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `0a2877a7`; read the widget's M2/M3 subscriptions, the generated button, the pending-suggestion state and the §5.4 prose.
+- 1: **Dead branch removed** (`ocean-insight.js`): `enneagram:ocean-suggest` subscription (never emitted after the v3 retirement of the Enneagram Builder), the hidden «Применить предложение Enneagram» button markup, its click handler and `_pendingEnneagramSuggestion`. The live `mbti:ocean-apply` highlight path and the M3 `enneagram:selected` reader are untouched.
+- 2: **Forecast named** (`part_05` prose, master + canon): the MBTI paragraph now says OCEAN Insight also forecasts probable Enneagram types from extreme poles; «Автоматической агрегации трёх систем нет» now adds «прогнозы виджетов остаются подсказками».
+- 3: **S9 recorded, not silently changed:** the `enneagram_correlation.high/low` lists are the widget's strongest-correlation heuristic; re-deriving them from the §5.4 matrix changes the suggested type set (a product call), so it is logged in `PLAN.md` a2-E as UNCLEAR instead of being rewritten.
+- 4: **Browser smoke:** 5 sliders, Copy → `<ocean>O:50 C:50 E:50 A:50 N:50</ocean>`, forecast renders, apply button absent, no JS errors.
+- 5: **Verification:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+
+Verification: green. Only S6 (owner-gated §7A.7 deletion) remains from the audit plan.
+
 Task ID: iter-206-leftover-findings
 Agent: lead
 Task: the reader-facing findings left after iterations A–E — vocabulary vs context, the three meanings of «пять блоков», the CoT ceiling, the bilingual executable blocks and the Marina contradiction.
@@ -89,13 +105,9 @@ Work Log:
 
 Verification: green. No card, table or rule touched — the widget now reads the model iter 201 printed.
 
-Task ID: iters 196–199 (one-line summaries, condensed)
+Task ID: iters 196–202 (one-line summaries, condensed)
 Agent: lead
-Task: the audit package closure before iter 200 — 196 the truth pass over the first screen and the budget claims; 197 the deferred half (budget self-claims, the 4K label, single-fact divergences); 198 the last seven audit items (unmeasured claims, one Greeting range, English labels); 199 the glossary grows to 48 entries with honest native provenance (DEC-38). Detail: `git` + `STATUS.md`.
-
-Task ID: iters 201–202 (one-line summaries, condensed)
-Agent: lead
-Task: 201 the v2-audit truth pass (anchors in Description, anchor count, Elena stress type, Format Lock glyph, profile budgets, §-notation to zero, h2/h3, fence #11 amended, DEC-39); 202 the profile-aware budget widget (selector, per-block status, Greeting, anchors inside Description). Detail: git + STATUS.
+Task: the audit-package closure before iter 200 (196–199: truth pass, deferred half, last seven items, glossary 48 with native provenance), then the v2-audit truth pass and the budget widget (201–202: anchors in Description, anchor count, Elena, Format Lock, profile budgets, §-notation to zero, h2/h3, fence #11 amended, DEC-39; widget = profile selector + per-block status + Greeting). Detail: git + STATUS.
 
 Task ID: iter-200-cleanup-and-ki-close
 Agent: lead
@@ -122,16 +134,9 @@ Agent: lead
 Task: the reading layout and its corrections, then the Part 5 rebuild — 193: `.layout-grid` TOC rail + reading bar + three themes + scrollspy + the browser proofs; 194: centred composition, the dead ↔ and E01–E18 mini-map controls retired, soft dark becomes the default; 195: Part 5 rebuilt as four sections with one reader job each (DEC-37), OCEAN ladder in ONE rule, 6 RULE → 3.
 Detail: `git` + `STATUS.md` invariants.
 
-Task ID: iters 179–185 (one-line summaries)
-- iter 185 — v4-4, chapter 2 (Part 5) anchor-free: §5.1 opener states the job, stress table loses the hypothetical hedge, trigger chain loses the «источник в гайде» column, ceilings/overload de-meta'd, pentagon retitled «Интерактивный OCEAN-профиль», §5.2–§5.5 de-linked textually (tables untouched, `data/enneagram.json` byte-identical); Part 5 2 601 → 2 488 words, anchors **19 → 0**. Detail: git + STATUS iter-185.
-- iter 184 — v4-3, chapter 2 core (Part 4, SPINE) as one self-contained place: GHOST table loses its LIE column (the pair lives in §4.3), §4.4 two ❌/✅ tables merged, §4.5 WANT↔NEED merged, §4.6 infographic + duplicate Elena anchor table + Lorebook checklist row dropped; Part 4 2 104 → 1 848 words, anchors **9 → 0**; **KI#87** opened (validate-master has no tag-balance check). Detail: git + STATUS iter-184.
-- iter 183 — v4-2, chapter 0 (Part 0 + Part 1) as one self-contained place: the module map → a 5-block anatomy table, TL;DR → the six build steps, the term list with its four «см. Part N» deleted (the glossary panel is the single term surface), the anchors-placement callout and the top-3 routing gone; chapter 0 2 341 → 1 542 words, anchors **19 → 0**; 3 probes → `ABSENT_CHECKS`; one duplicated `</section>` fixed (validate:master → 0 warnings). Detail: git + STATUS iter-183.
-- iter 182 — v4 pilot, chapter 1 (System Prompt): §7A.1 rewritten as six elements + order, CORE DIRECTIVES/Tone Frame/Format Lock de-meta'd, cluster 5 → 0 links (1 631 → 1 357 words); 3 sync probes re-pointed. Detail: git + STATUS iter-182.
-- iter 181 — owner-mandated audit fix sweep (37 findings: 16 P1 / 18 P2 / 3 tooling — visual honesty E07/E09/E17/E08, numeric drift unified to the §7A.12/§7A.13 owners, canon consistency, garbage; `scope="col"` ×302; `qa:english`/`qa:syntax` made runnable on Windows, `version:check` 4th place, integration-test EPERM fix; parity needles re-pointed to the FIXED state). Detail: git + this worklog’s previous revision.
-- iter 180 — §3.2 «Иерархия влияния на голос»: one numeric surface (widget → control strip + export; E07 prose inset removed; CSS −210 across two files; `tools/audit-dom-dup.mjs` added). Detail: git + DEC-15/DEC-21.
-- iter 179 — post-v3 seam audit: measured the finished corpus (42 exact / 75 near cross-section duplicates → 39 / —; 1 duplicate heading → 0); §7A.6 stopped re-printing Appendix E (pointer + the two hard constraints, retitled «Параметры генерации: две жёсткие константы»), Appendix E's SP-language ladder reduced to one statement per site. Detail: git + this worklog's previous revision.
-
----
+Task ID: iters 165–185 (one-line summaries, condensed)
+Agent: lead
+Task: post-v3 quality and the v4 prelude — 165–178 the owner-gated recon, v2 switch, S4b apparatus/glossary/labels, v3 findings closed; 179–185 the seam audit, the §3.2 single surface, the full viz/tables sweep and the v4 chapter re-cut start. Detail: git + `docs/RESTRUCTURE_V4_PLAN.md`.
 
 Task ID: iters 165–178 (one-line summaries, condensed)
 - iter 175 — v3 S4b slice 1: **F-17 closed** — six VS-embeds (E01/E03/E04/E05/E07/E11) moved inside their canonical sections (E01 → §1.2, E11 → §6.2), canon markers completed (`[VS: E09]`/`[VS: E11]`/`[VS: E18]`, `[VS: E03]` fixed), `validate:master` warnings 6 → 0; browser proof 17/17 embeds inside sections. Detail: git + plan §5.4.
