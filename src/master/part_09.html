@@ -171,7 +171,6 @@
               <div class="diagnosis-node">
                 <div class="diagnosis-node__name">Дрейф голоса (доминирование недавнего чата)</div>
                 <div class="diagnosis-node__chips">
-                  <span class="badge badge--cyan">→ AP-11</span>
                   <span class="badge badge--cyan">→ E16 (AN)</span>
                 </div>
               </div>
@@ -197,7 +196,6 @@
               <div class="diagnosis-node__name">Утечка голоса в Description/SP</div>
               <div class="diagnosis-node__chips">
                 <span class="badge badge--cyan">→ AP-3</span>
-                <span class="badge badge--cyan">→ AP-11</span>
               </div>
             </div>
           </div>
@@ -292,8 +290,8 @@
 <thead><tr><th scope="col">Симптом</th><th scope="col">Проверка</th><th scope="col">Ветка «Нет» → диагноз</th><th scope="col">Ветка «Да»</th></tr></thead>
 <tbody>
 <tr><td>Персонаж дрейфует после 5–10 сообщений</td><td>У персонажа есть рабочие Anchors?</td><td><strong>Отсутствует структура Anchors</strong> — AP-2 (отсутствующая цена), AP-8 (призрак без якорей)</td><td>→ следующая проверка</td></tr>
-<tr><td></td><td>SPINE причинно согласован?</td><td><strong>Нарушенная цепь SPINE</strong> — AP-9 (сломанный SPINE)</td><td><strong>Дрейф голоса (доминирование недавнего чата)</strong> — AP-11 (переплетение голосов); Author's Note (E16)</td></tr>
-<tr><td>Голос звучит типично / неразличимо</td><td>Голос записан только в Examples?</td><td><strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description), AP-11 (переплетение голосов)</td><td>→ следующая проверка</td></tr>
+<tr><td></td><td>SPINE причинно согласован?</td><td><strong>Нарушенная цепь SPINE</strong> — AP-9 (сломанный SPINE)</td><td><strong>Дрейф голоса (доминирование недавнего чата)</strong> — Author's Note (E16)</td></tr>
+<tr><td>Голос звучит типично / неразличимо</td><td>Голос записан только в Examples?</td><td><strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description)</td><td>→ следующая проверка</td></tr>
 <tr><td></td><td>Достаточно ли диалоговых примеров (3+)?</td><td><strong>Недостаточно образцов голоса</strong> — E01 (структура блоков карточки), E07 (иерархия источников голоса)</td><td><strong>Проблема параметров сэмплирования</strong> — AP-5 (RepPen > 1.10), E17 (параметры генерации)</td></tr>
 <tr><td>Персонаж игнорирует действия пользователя</td><td>Anti-godmoding присутствует в SP?</td><td><strong>Отсутствует Anti-godmoding</strong> — AP-6 (отсутствие анти-годмодинга), E02 (конвейер сборки SP)</td><td>→ следующая проверка</td></tr>
 <tr><td></td><td>Персонаж использует протокол Embodiment?</td><td><strong>Embodiment отсутствует</strong> — E04 (протокол телесности), директива 2 (Embodiment First, E08)</td><td><strong>Нарушение границы влияния</strong> — директива 5 (Influence Boundary, E08), E03 (формат якоря T→A→P)</td></tr>
@@ -342,7 +340,7 @@
         <div class="zone-detail zone-detail--excellent">
           <div class="zone-detail__title vs-ki13-p9-zone-title--excellent">Отличный</div>
           <div class="zone-detail__range">85–100%</div>
-          <div class="zone-detail__criteria">Проходит все 18 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие бюджету токенов, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
+          <div class="zone-detail__criteria">Проходит все 18 пунктов чек-листа выше: PP, голос, якоря, Format Lock, Anti-godmoding, директивы, Spatial Lock, язык SP, OOC, SPINE, Tone Frame, OCEAN, Lorebook, CoT-якоря, RepPen, Temperature, бюджет, Embodiment.</div>
         </div>
 
         <div class="zone-detail zone-detail--good">
@@ -417,6 +415,8 @@
 
 <h3>Единый чек-лист (18 пунктов)</h3>
 
+<p>Первые пять пунктов — быстрые: проверяются за минуту. С шестого по восемнадцатый — полные: нужны карточке со SPINE, психологией и параметрами. Чек-лист один; отдельных «быстрых проверок» нет.</p>
+
 <div class="table-wrap">
 <table>
 <thead><tr><th scope="col">#</th><th scope="col">Проверка</th><th scope="col">Ожидаемый результат</th></tr></thead>
@@ -436,32 +436,12 @@
 <tr><td><strong>13</strong></td><td>Lorebook параметры</td><td>Depth 2–4 (0–1 для мировых), Probability 80–100 % (30–50 % для мировых), Cooldown 5–10 сообщений (15–20 для мировых)</td></tr>
 <tr><td><strong>14</strong></td><td>CoT-якоря</td><td>Не более 2–3 CoT-якорей</td></tr>
 <tr><td><strong>15</strong></td><td>RepPen</td><td>≤ 1.10, никогда выше; 12B — 1.0–1.05. Повышайте MinP вместо RepPen</td></tr>
-<tr><td><strong>16</strong></td><td>Temperature</td><td>В диапазоне модели: 12B — 0.6–0.8, 32B+ — 0.7–0.9, API — 0.7–1.0</td></tr>
+<tr><td><strong>16</strong></td><td>Temperature</td><td>12B — 0.6–0.8; 32B+ / API — 0.7–1.0. Стартовые значения внутри диапазона — в таблице параметров Приложения E</td></tr>
 <tr><td><strong>17</strong></td><td>Бюджет блоков</td><td>Каждый блок — в пределах лимитов своего профиля (4K / 8K+ / 16K+, включая строку CoT-якоря); итог карточки — ориентир полосы профиля, а не гейт (8K — 400–900); учебные примеры части 10 — заявленное исключение (декларация в начале части 10)</td></tr>
 <tr><td><strong>18</strong></td><td>Embodiment</td><td>Минимум одна физическая реакция в каждом Example и в каждом якоре</td></tr>
 </tbody>
 </table>
 </div>
-
-<details class="interactive">
-<summary>📋 Пример: Быстрая проверка (1–5) для Елены</summary>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th scope="col">Проверка</th><th scope="col">Результат</th></tr></thead>
-<tbody>
-<tr><td>☐ PP = 0.0</td><td>✓ Presence Penalty = 0.0</td></tr>
-<tr><td>☐ Voice только в Examples</td><td>✓ Дескрипторы голоса только в Examples — «саркастичная» показана через поведение, не описана в <code>&lt;identity&gt;</code></td></tr>
-<tr><td>☐ Price в каждом Anchor</td><td>✓ Все 6 якорей имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат)</td></tr>
-<tr><td>☐ Format Lock</td><td>✓ Система A: <code>*action*</code> "speech" во всех Examples + Greeting</td></tr>
-<tr><td>☐ Anti-godmoding</td><td>✓ "Never speak or act for {{user}}" + позитивная формулировка</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><strong>Итог:</strong> Елена проходит быструю часть чек-листа. Полная часть (6–18) — для карточек со SPINE и OCEAN; пример такой карточки — Выщербленный ниже.</p>
-
-</details>
 
 <details class="interactive">
 <summary>📝 Пример: Полная проверка (1–18) для Выщербленного</summary>
@@ -472,7 +452,7 @@
 <tbody>
 <tr><td><strong>1</strong></td><td>PP = 0.0</td><td>✓ Presence Penalty = 0.0</td></tr>
 <tr><td><strong>2</strong></td><td>Голос только в Examples</td><td>✓ Голос только в Examples и Greeting</td></tr>
-<tr><td><strong>3</strong></td><td>Цена в каждом якорь</td><td>✓ 6 якорей T→A→P, цена физическая</td></tr>
+<tr><td><strong>3</strong></td><td>Цена в каждом якорь</td><td>✓ 9 якорей T→A→P, цена физическая</td></tr>
 <tr><td><strong>4</strong></td><td>Format Lock</td><td>✓ Dialogue: <code>*action*</code> "speech"</td></tr>
 <tr><td><strong>5</strong></td><td>Anti-godmoding</td><td>✓ "Never speak or act for {{user}}"</td></tr>
 <tr><td><strong>6</strong></td><td>CORE DIRECTIVES</td><td>✓ Все 7 в формате <code>&lt;CORE_DIRECTIVES&gt;</code></td></tr>
@@ -549,14 +529,14 @@
 
 <div class="table-wrap">
 <table>
-<thead><tr><th scope="col">Элемент</th><th scope="col">Тестовый сценарий</th><th scope="col">Что ожидаем</th><th scope="col">Что наблюдаем</th><th scope="col">Диагноз</th></tr></thead>
+<thead><tr><th scope="col">Элемент</th><th scope="col">Тестовый сценарий</th><th scope="col">Признак, что работает</th><th scope="col">Признак дефекта — что чинить</th></tr></thead>
 <tbody>
-<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>Дефект проявляется</td><td>Персонаж реагирует «правильно»</td><td>SPINE работает</td></tr>
-<tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Якоря работают</td></tr>
-<tr><td>Изоляция голоса</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Изоляция голоса работает</td></tr>
-<tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Персонаж помнит контекст</td><td>AN работает</td></tr>
-<tr><td>Lorebook (база знаний)</td><td>Упоминание триггер-слова</td><td>Контекстная реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
-<tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Персонаж действует в соответствии с полюсом</td><td>OCEAN работает</td></tr>
+<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>Дефект проявляется: персонаж действует по FLAW и платит цену</td><td>Дефект описан, но в сцене не срабатывает — проверьте связь FLAW → якорь</td></tr>
+<tr><td>Якоря</td><td>Нейтральная сцена</td><td>В покое поведение тянется к WANT</td><td>В покое направления нет — якорь не всплывает</td></tr>
+<tr><td>Изоляция голоса</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос дрейфует к дефолту — вынесите дескрипторы из Description</td></tr>
+<tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Состояние «сбрасывается» — AN не в актуальной позиции</td></tr>
+<tr><td>Lorebook (база знаний)</td><td>Упоминание триггер-слова</td><td>Контекстная реакция по триггеру</td><td>Реакции нет или срабатывает на любое слово</td></tr>
+<tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Полюс не влияет — профиль не связан со SPINE</td></tr>
 </tbody>
 </table>
 </div>

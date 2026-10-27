@@ -262,8 +262,12 @@ def main():
         err(f"BUILD B4: §7A.13 re-grew a checklist ({pipeline.count('☐')} items) — "
             "the one master checklist is §9.5")
     deploy = section(read(MASTER / "part_09.html"), "p9_pre_deploy")
-    if deploy is None or deploy.count("☐") < 5:
-        err("BUILD B4: §9.5 master checklist missing or has < 5 items")
+    # iter 203: the retired 1–5 quick-check block carried the only ☐ boxes in §9.5;
+    # the checklist itself is the 18 numbered rows, so the check anchors on them.
+    deploy_rows = len(re.findall(r"<td><strong>\d{1,2}</strong></td>", deploy or ""))
+    if deploy is None or "Единый чек-лист (18 пунктов)" not in deploy or deploy_rows < 18:
+        err(f"BUILD B4: §9.5 one master checklist missing or has < 18 numbered "
+            f"items (found {deploy_rows})")
     m10 = read(MASTER / "part_10.html")
     dem = m10.count("Карточка демонстрирует:")
     if dem != len(PART_10_CARDS):

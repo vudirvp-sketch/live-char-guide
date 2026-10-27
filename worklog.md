@@ -5,6 +5,24 @@
 
 ---
 
+Task ID: iter-203-part9-numbers
+Agent: lead
+Task: audit v2 iteration D1 — Part 9 becomes one diagnostic instrument, and the numeric contradictions close: one checklist, an honest scenario map, AP-11 out of E13, one Temperature model, the card-level number truths.
+
+BASE: 4acbcdb7
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `4acbcdb7`. Read §4.8/§4.9 of the audit next to the live Part 9/10/Appendix E text; located every number the audit names (algorithm counts, AP-11, Temperature, Lorebook rows, WANT, type-5 fear).
+- 1: **One checklist (§9.5).** Deleted the «Быстрая проверка (1–5) для Елены» `<details>` block: it was a strict subset of the 18-item checklist directly above (5-point Editorial check: capability = none unique, coverage = checklist + Vysh full pass, retrieval = same screen, context = none lost, dependency = none). Added the plain-language split («первые пять пунктов — быстрые»). The reader-path gate used to count the deleted block's ☐ boxes; it now counts the **18 numbered rows** + the «Единый чек-лист (18 пунктов)» heading — stronger, and it caught the risk in the same run.
+- 2: **Scenario map (§9.6).** The old «Что ожидаем / Что наблюдаем / Диагноз» table recorded confirmation, not diagnosis (expected = defect, observed = «reacts correctly», verdict constant). Replaced by a two-signal map: «Признак, что работает» vs «Признак дефекта — что чинить» for SPINE / anchors / voice isolation / AN / Lorebook / OCEAN.
+- 3: **AP-11.** Removed from both E13 branches and from the §9.6 mapping (voice mixing is multi-character, not single-character drift). Diagnostics gate's `AP_SET` re-pointed with a comment (AP-11 still lives in the Part 8 catalog); sync probe P2-17 re-pointed to the AP-3-only cell.
+- 4: **Temperature.** E17's API column prints the canonical 32B+/API range 0.7–1.0 (was 0.8–1.0); the «Модель-специфичные рекомендации» table is retitled «Стартовые значения (внутри диапазона модели)», its cells use en dashes and a note states every start value lies inside the range; §9.5 item 16 = 12B 0.6–0.8, 32B+/API 0.7–1.0, start values in Appendix E. Sampling gate re-pointed (API needle 0.8→0.7).
+- 5: **Card truths.** Elena's WANT aligned to the §4 owner in the card, the §0.2 skeleton and §7A.13 («Доказать правоту — опубликовать историю, которую от неё требуют замолчать»); Vysh's type-5 fear aligned to the canonical Enneagram record («некомпетентным, истощённым» + its own continuation); Omnis's three Lorebook rows moved into §7B.2 ranges (Depth 5/5/7 → 4/4/3; Probability 80/80/60 → 90/90/85 %).
+- 6: **Counts.** Vysh checklist item 3: 6 → **9** anchors (the card has 3 base + 3 FLAW + 1 mirror + 2 sensory); the «проходит все 18 проверок» sentence now enumerates all 18; Part 5's trigger categories match its own table (no «провал/критика»).
+- 7: **Verification:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13, 0 warnings** · sync **87/87** · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
+
+Verification: green. Remaining audit work: D2 (E04/E07/E08 + glossary rendering) and E (support surfaces).
+
 Task ID: iter-202-budget-widget
 Agent: lead
 Task: audit v2 iteration C — the budget widget must compute the model the text prints: profile selector, per-block status, Greeting counted, anchors inside Description, class scale from §7A.12.

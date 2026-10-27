@@ -6,6 +6,16 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 203 — Part 9 becomes one instrument; the numeric contradictions close.
+
+- **One checklist:** the «Быстрая проверка 1–5» block is deleted (strict subset of the 18-item checklist; 5-point Editorial check recorded). The reader-path gate now counts the 18 numbered rows instead of the deleted block's ☐ boxes.
+- **Scenario map:** the inverted confirmation table («ожидаем/наблюдаем/диагноз», constant verdict) is replaced by a two-signal map — works vs fails — for SPINE / anchors / voice / AN / Lorebook / OCEAN.
+- **AP-11 leaves E13:** voice mixing is not a cause of single-character drift; badge and mapping rows removed (it stays in the Part 8 catalog). Diagnostics gate AP set re-pointed.
+- **Temperature one model:** E17 API column 0.8–1.0 → **0.7–1.0** (canonical 32B+/API); model-specific table retitled «Стартовые значения (внутри диапазона модели)»; §9.5 item 16 = 12B 0.6–0.8 / 32B+ и API 0.7–1.0.
+- **Card truths:** Elena's WANT = §4 wording everywhere; type-5 fear = canonical «некомпетентным, истощённым»; Omnis Lorebook Depth 4/4/3, Probability 90/90/85 %.
+- **Counts:** Vysh 6 → 9 anchors; «все 18 проверок» enumerates 18; Part 5 trigger categories match the table.
+- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync **87/87** · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
+
 ### iter 202 — the budget widget now computes the model the text prints.
 
 - **Profile-aware:** a profile selector (4K-Fallback / 8K+ / 16K+) switches the per-block windows (4K = the 4K-Fallback spec; 8K/16K+ = the §7A.12 Min/Max windows) and the total band (410–540 / 400–900 / 740–1140) is an orientir in the tooltip, never a verdict.
@@ -29,16 +39,7 @@
 - **DEC-39** records the four truths, the budget model and the fence amendment; S5/S6 deferred with reasons in `STATUS.md` Next step.
 - **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13**, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0 · version 9.2.6.
 
-### iter 200 — cleanup, four KIs closed, and the authoritative/historical split written down.
-
-- **Junk deleted:** `_tmp_measure.py` and a 1 MB `live-char-guide-preview-iter194.html` review snapshot — both untracked, both regenerable, both unreferenced.
-- **KI#79 (drift tool):** `P_TAG_RE` `<p[^>]*>` → `<p\b[^>]*>` — it no longer swallows `<pre>`/`<path>`/`<picture>`; actionable drift re-baselined 91 → 87.
-- **KI#90 (term gate):** word-boundary matching for `prohibited` variants + the ordinary verb «Хочет» removed from the WANT list — prose «хочет» no longer trips CI.
-- **KI#87 (tag balance):** `validate-master` **Check 13** (13 checks). Its first run found three real strays that every previous gate passed: part_02 an extra `</td>`, part_03 and part_06 a doubled `</li>`.
-- **KI#92 (OCEAN):** new `scripts/audit_ocean_parity.py` — §5.1 thresholds + ceilings ↔ `data/ocean.json` ↔ widget literals, negative-tested; **8 cluster gates** now.
-- **What is current vs history:** `AGENT_NAVIGATION.md` **§11** states the rule (a historical number is a measurement, never an instruction) and maps every live value to where it is computed; six stale-number docs carry a frozen-record banner (KI#86 closed this way — the ratified map is labelled, not rewritten).
-- **Lifecycle:** four long-closed KIs deleted, five closed with evidence — **zero open KIs**.
-- **Verified:** build 61 sections · tests **91/91** · validate 12 gates + 133 redirects · master **13/13**, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
+### iter 200 — cleanup, four KIs closed, authoritative/historical split written down (detail: git + STATUS).
 
 ### iter 199 — the glossary grows to 48 entries; three native articles, honest native provenance (DEC-38).
 

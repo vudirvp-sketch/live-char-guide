@@ -213,7 +213,7 @@ Anchors:
 
           <div class="param-row">
             <span class="param-row__name">Temperature</span>
-            <span class="param-row__value">0.8–1.0</span>
+            <span class="param-row__value">0.7–1.0</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top P</span>
@@ -304,20 +304,21 @@ Anchors:
 <p><strong>ПРАВИЛО:</strong> Ollama и LM Studio имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
 </div>
 
-<h4>Модель-специфичные рекомендации</h4>
+<h4>Стартовые значения (внутри диапазона модели)</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th scope="col">Модель</th><th scope="col">Temperature</th><th scope="col">RepPen</th><th scope="col">Особенности</th></tr>
+<tr><th scope="col">Модель</th><th scope="col">Temperature (старт)</th><th scope="col">RepPen</th><th scope="col">Особенности</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>12B (4K)</strong></td><td>0.6-0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback (см. выше)</td></tr>
-<tr><td><strong>32B+</strong></td><td>0.7-0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
-<tr><td><strong>Claude API</strong></td><td>0.8-1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt; (см. ниже)</td></tr>
-<tr><td><strong>GPT API</strong></td><td>0.8-1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций (см. ниже)</td></tr>
+<tr><td><strong>12B (4K)</strong></td><td>0.6–0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback (см. выше)</td></tr>
+<tr><td><strong>32B+</strong></td><td>0.7–0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
+<tr><td><strong>Claude API</strong></td><td>0.8–1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt; (см. ниже)</td></tr>
+<tr><td><strong>GPT API</strong></td><td>0.8–1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций (см. ниже)</td></tr>
 </tbody>
 </table>
 </div>
+<p><small>Стартовые значения лежат внутри допустимого диапазона из таблицы выше: 12B — 0.6–0.8, 32B+ / API — 0.7–1.0.</small></p>
 
 <div class="callout rec">
 <p><strong>РЕКОМЕНДАЦИЯ:</strong> На API-моделях заметка автора (AN) может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, влияние AN на голос пренебрежимо мало (~2%).</p>

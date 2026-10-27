@@ -112,7 +112,10 @@ DIAGNOSES = [
     "Нарушение границы влияния",
 ]
 
-AP_SET = {"AP-2", "AP-8", "AP-9", "AP-11", "AP-3", "AP-5", "AP-6"}
+# iter 203 (audit v2 §4.8): AP-11 (voice mixing between characters) is NOT a cause of
+# single-character voice drift — it left both E13 branches and its badge. It still lives
+# in the Part 8 catalog (AP-1…AP-15); this set is only what the §9.6 tree may cite.
+AP_SET = {"AP-2", "AP-8", "AP-9", "AP-3", "AP-5", "AP-6"}
 E_SET = {"E16", "E01", "E07", "E17", "E02", "E04", "E08", "E03"}
 
 SUBHEADING_CANON = "### Три базовых симптома: полный маппинг (канонический источник дерева E13)"

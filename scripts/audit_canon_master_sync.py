@@ -419,7 +419,7 @@ CHECKS = [
     (
         "P2-17",
         "part_09.html",
-        "<strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description), AP-11 (переплетение голосов)",
+        "<strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description)",
         "part_09 §9.3: E13 mapping keeps the full AP labels (the 1-word shorthand tree "
         "table retired, iter 173)",
     ),

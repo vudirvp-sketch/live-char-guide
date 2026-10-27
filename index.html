@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
 <!-- Build: 8b3a917d -->
-<!-- Generated: 2026-10-27T23:16:20.920Z -->
+<!-- Generated: 2026-10-27T23:25:47.914Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -137,7 +137,7 @@ Never speak or act for {{user}}.
 [DESCRIPTION]
 &lt;identity&gt;Елена — журналистка-расследователь. Циничная, недоверчивая.&lt;/identity&gt;
 &lt;spine&gt;
-WANT: Доказать, что она права — историю, которую никто не хочет публиковать
+WANT: Доказать правоту — опубликовать историю, которую от неё требуют замолчать
 NEED: Принятие — связь с людьми без стены цинизма
 FLAW: Отталкивает людей сарказмом, когда сближается
 LIE: "Мне не нужно ничьё одобрение. Я работаю одна."
@@ -2193,7 +2193,7 @@ WANT: Стать цельным — заполнить пустоты внутр
 <p><strong>ПРАВИЛО:</strong> каждый тип стресса требует минимум 1 цепочку триггер→FLAW→якорь. Без явного триггера тип стресса остаётся абстракцией — модель не сможет активировать дефект в нужный момент сессии. Если тип стресса не проявляется в наблюдаемом якоре, значит либо тип выбран неверно, либо дефект сформулирован слишком абстрактно.</p>
 </div>
 
-<p>Категорий обычно четыре: близость/забота, конфликт/угроза, неопределённость/контроль, провал/критика. Берите 2–3 на тип — модель получает конкретные сцены вместо ожидания «когда персонажу стрессово»:</p>
+<p>Категории триггеров: близость, угроза и конфликт, неопределённость, перегруз стимулами. Берите 2–3 на тип — модель получает конкретные сцены вместо ожидания «когда персонажу стрессово»:</p>
 <div class="table-wrap">
 <table>
 <thead>
@@ -3796,7 +3796,7 @@ CoT (для 32B+ и API, 2 Anchors максимум):
 <tr><td><strong>1. Блок идентичности</strong></td><td>Роль и одна ключевая черта одним предложением. Дескрипторы голоса сюда не идут — они живут в Examples.</td><td><code>You are Elena, a cynical investigative journalist.</code> (~10 токенов)</td></tr>
 <tr><td><strong>2. Анти-годмодинг</strong></td><td>Две строки: запрет и позитивная формулировка. Одинаковы для всех карточек — это технический запрет, не голос.</td><td><code>Never speak or act for {{user}}.</code> + вторая строка (~20 токенов)</td></tr>
 <tr><td><strong>3. Директивы и обвязка</strong></td><td>Все 7 директив в формате <code>&lt;CORE_DIRECTIVES&gt;</code>, затем Tone Frame, Format Lock и OOC-защита. Директивы под характер не меняются.</td><td>Собранный System Prompt (~120 токенов)</td></tr>
-<tr><td><strong>4. SPINE</strong></td><td>Пять элементов GHOST→LIE→FLAW→NEED→WANT — в Description, не в SP. Цепочка проверяется по кругу: каждый элемент связан со следующим.</td><td>~70 токенов: WANT «доказать, что права», NEED «принятие», FLAW «сарказм при близости», LIE «не нужно ничьё одобрение», GHOST «предательство редактора»</td></tr>
+<tr><td><strong>4. SPINE</strong></td><td>Пять элементов GHOST→LIE→FLAW→NEED→WANT — в Description, не в SP. Цепочка проверяется по кругу: каждый элемент связан со следующим.</td><td>~70 токенов: WANT «доказать правоту», NEED «принятие», FLAW «сарказм при близости», LIE «не нужно ничьё одобрение», GHOST «предательство редактора»</td></tr>
 <tr><td><strong>5. CoT (≥32B/API)</strong></td><td>1–2 CoT-якоря на ключевые триггеры. Простому призраку хватает Tier 2; слоям призрака нужен Tier 3.</td><td>— (для 12B/8K не нужен; на 32B+ — ~60 токенов на якорь)</td></tr>
 <tr><td><strong>6. Проверка бюджета</strong></td><td>Сверить каждый блок с бюджетом и карточку с полосой профиля.</td><td>в полосе 8K-профиля: 400–900 токенов</td></tr>
 </tbody>
@@ -4805,7 +4805,6 @@ WANT: {{want}}
               <div class="diagnosis-node">
                 <div class="diagnosis-node__name">Дрейф голоса (доминирование недавнего чата)</div>
                 <div class="diagnosis-node__chips">
-                  <span class="badge badge--cyan">→ AP-11</span>
                   <span class="badge badge--cyan">→ E16 (AN)</span>
                 </div>
               </div>
@@ -4831,7 +4830,6 @@ WANT: {{want}}
               <div class="diagnosis-node__name">Утечка голоса в Description/SP</div>
               <div class="diagnosis-node__chips">
                 <span class="badge badge--cyan">→ AP-3</span>
-                <span class="badge badge--cyan">→ AP-11</span>
               </div>
             </div>
           </div>
@@ -4926,8 +4924,8 @@ WANT: {{want}}
 <thead><tr><th scope="col">Симптом</th><th scope="col">Проверка</th><th scope="col">Ветка «Нет» → диагноз</th><th scope="col">Ветка «Да»</th></tr></thead>
 <tbody>
 <tr><td>Персонаж дрейфует после 5–10 сообщений</td><td>У персонажа есть рабочие Anchors?</td><td><strong>Отсутствует структура Anchors</strong> — AP-2 (отсутствующая цена), AP-8 (призрак без якорей)</td><td>→ следующая проверка</td></tr>
-<tr><td></td><td>SPINE причинно согласован?</td><td><strong>Нарушенная цепь SPINE</strong> — AP-9 (сломанный SPINE)</td><td><strong>Дрейф голоса (доминирование недавнего чата)</strong> — AP-11 (переплетение голосов); Author's Note (E16)</td></tr>
-<tr><td>Голос звучит типично / неразличимо</td><td>Голос записан только в Examples?</td><td><strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description), AP-11 (переплетение голосов)</td><td>→ следующая проверка</td></tr>
+<tr><td></td><td>SPINE причинно согласован?</td><td><strong>Нарушенная цепь SPINE</strong> — AP-9 (сломанный SPINE)</td><td><strong>Дрейф голоса (доминирование недавнего чата)</strong> — Author's Note (E16)</td></tr>
+<tr><td>Голос звучит типично / неразличимо</td><td>Голос записан только в Examples?</td><td><strong>Утечка голоса в Description/SP</strong> — AP-3 (голос в Description)</td><td>→ следующая проверка</td></tr>
 <tr><td></td><td>Достаточно ли диалоговых примеров (3+)?</td><td><strong>Недостаточно образцов голоса</strong> — E01 (структура блоков карточки), E07 (иерархия источников голоса)</td><td><strong>Проблема параметров сэмплирования</strong> — AP-5 (RepPen > 1.10), E17 (параметры генерации)</td></tr>
 <tr><td>Персонаж игнорирует действия пользователя</td><td>Anti-godmoding присутствует в SP?</td><td><strong>Отсутствует Anti-godmoding</strong> — AP-6 (отсутствие анти-годмодинга), E02 (конвейер сборки SP)</td><td>→ следующая проверка</td></tr>
 <tr><td></td><td>Персонаж использует протокол Embodiment?</td><td><strong>Embodiment отсутствует</strong> — E04 (протокол телесности), директива 2 (Embodiment First, E08)</td><td><strong>Нарушение границы влияния</strong> — директива 5 (Influence Boundary, E08), E03 (формат якоря T→A→P)</td></tr>
@@ -4976,7 +4974,7 @@ WANT: {{want}}
         <div class="zone-detail zone-detail--excellent">
           <div class="zone-detail__title vs-ki13-p9-zone-title--excellent">Отличный</div>
           <div class="zone-detail__range">85–100%</div>
-          <div class="zone-detail__criteria">Проходит все 18 проверок предразвёртывания: изоляция голоса, качество Anchors, соответствие бюджету токенов, согласованность SPINE, полнота Embodiment, отсутствие антипаттернов, действительный Format Lock, корректное сэмплирование, Anti-godmoding присутствует, ограничения контекста соблюдены.</div>
+          <div class="zone-detail__criteria">Проходит все 18 пунктов чек-листа выше: PP, голос, якоря, Format Lock, Anti-godmoding, директивы, Spatial Lock, язык SP, OOC, SPINE, Tone Frame, OCEAN, Lorebook, CoT-якоря, RepPen, Temperature, бюджет, Embodiment.</div>
         </div>
 
         <div class="zone-detail zone-detail--good">
@@ -5051,6 +5049,8 @@ WANT: {{want}}
 
 <h3>Единый чек-лист (18 пунктов)</h3>
 
+<p>Первые пять пунктов — быстрые: проверяются за минуту. С шестого по восемнадцатый — полные: нужны карточке со SPINE, психологией и параметрами. Чек-лист один; отдельных «быстрых проверок» нет.</p>
+
 <div class="table-wrap">
 <table>
 <thead><tr><th scope="col">#</th><th scope="col">Проверка</th><th scope="col">Ожидаемый результат</th></tr></thead>
@@ -5070,32 +5070,12 @@ WANT: {{want}}
 <tr><td><strong>13</strong></td><td>Lorebook параметры</td><td>Depth 2–4 (0–1 для мировых), Probability 80–100 % (30–50 % для мировых), Cooldown 5–10 сообщений (15–20 для мировых)</td></tr>
 <tr><td><strong>14</strong></td><td>CoT-якоря</td><td>Не более 2–3 CoT-якорей</td></tr>
 <tr><td><strong>15</strong></td><td>RepPen</td><td>≤ 1.10, никогда выше; 12B — 1.0–1.05. Повышайте MinP вместо RepPen</td></tr>
-<tr><td><strong>16</strong></td><td>Temperature</td><td>В диапазоне модели: 12B — 0.6–0.8, 32B+ — 0.7–0.9, API — 0.7–1.0</td></tr>
+<tr><td><strong>16</strong></td><td>Temperature</td><td>12B — 0.6–0.8; 32B+ / API — 0.7–1.0. Стартовые значения внутри диапазона — в таблице параметров Приложения E</td></tr>
 <tr><td><strong>17</strong></td><td>Бюджет блоков</td><td>Каждый блок — в пределах лимитов своего профиля (4K / 8K+ / 16K+, включая строку CoT-якоря); итог карточки — ориентир полосы профиля, а не гейт (8K — 400–900); учебные примеры части 10 — заявленное исключение (декларация в начале части 10)</td></tr>
 <tr><td><strong>18</strong></td><td>Embodiment</td><td>Минимум одна физическая реакция в каждом Example и в каждом якоре</td></tr>
 </tbody>
 </table>
 </div>
-
-<details class="interactive">
-<summary>📋 Пример: Быстрая проверка (1–5) для Елены</summary>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th scope="col">Проверка</th><th scope="col">Результат</th></tr></thead>
-<tbody>
-<tr><td>☐ PP = 0.0</td><td>✓ Presence Penalty = 0.0</td></tr>
-<tr><td>☐ Voice только в Examples</td><td>✓ Дескрипторы голоса только в Examples — «саркастичная» показана через поведение, не описана в <code>&lt;identity&gt;</code></td></tr>
-<tr><td>☐ Price в каждом Anchor</td><td>✓ Все 6 якорей имеют T→A→P (напр: Искренняя забота → отшучивается → руки дрожат)</td></tr>
-<tr><td>☐ Format Lock</td><td>✓ Система A: <code>*action*</code> "speech" во всех Examples + Greeting</td></tr>
-<tr><td>☐ Anti-godmoding</td><td>✓ "Never speak or act for {{user}}" + позитивная формулировка</td></tr>
-</tbody>
-</table>
-</div>
-
-<p><strong>Итог:</strong> Елена проходит быструю часть чек-листа. Полная часть (6–18) — для карточек со SPINE и OCEAN; пример такой карточки — Выщербленный ниже.</p>
-
-</details>
 
 <details class="interactive">
 <summary>📝 Пример: Полная проверка (1–18) для Выщербленного</summary>
@@ -5106,7 +5086,7 @@ WANT: {{want}}
 <tbody>
 <tr><td><strong>1</strong></td><td>PP = 0.0</td><td>✓ Presence Penalty = 0.0</td></tr>
 <tr><td><strong>2</strong></td><td>Голос только в Examples</td><td>✓ Голос только в Examples и Greeting</td></tr>
-<tr><td><strong>3</strong></td><td>Цена в каждом якорь</td><td>✓ 6 якорей T→A→P, цена физическая</td></tr>
+<tr><td><strong>3</strong></td><td>Цена в каждом якорь</td><td>✓ 9 якорей T→A→P, цена физическая</td></tr>
 <tr><td><strong>4</strong></td><td>Format Lock</td><td>✓ Dialogue: <code>*action*</code> "speech"</td></tr>
 <tr><td><strong>5</strong></td><td>Anti-godmoding</td><td>✓ "Never speak or act for {{user}}"</td></tr>
 <tr><td><strong>6</strong></td><td>CORE DIRECTIVES</td><td>✓ Все 7 в формате <code>&lt;CORE_DIRECTIVES&gt;</code></td></tr>
@@ -5183,14 +5163,14 @@ WANT: {{want}}
 
 <div class="table-wrap">
 <table>
-<thead><tr><th scope="col">Элемент</th><th scope="col">Тестовый сценарий</th><th scope="col">Что ожидаем</th><th scope="col">Что наблюдаем</th><th scope="col">Диагноз</th></tr></thead>
+<thead><tr><th scope="col">Элемент</th><th scope="col">Тестовый сценарий</th><th scope="col">Признак, что работает</th><th scope="col">Признак дефекта — что чинить</th></tr></thead>
 <tbody>
-<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>Дефект проявляется</td><td>Персонаж реагирует «правильно»</td><td>SPINE работает</td></tr>
-<tr><td>Якоря</td><td>Нейтральная сцена</td><td>At-rest поведение (WANT)</td><td>Персонаж «в покое» действует в направлении WANT</td><td>Якоря работают</td></tr>
-<tr><td>Изоляция голоса</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос не дрейфует к дефолтному</td><td>Изоляция голоса работает</td></tr>
-<tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Персонаж помнит контекст</td><td>AN работает</td></tr>
-<tr><td>Lorebook (база знаний)</td><td>Упоминание триггер-слова</td><td>Контекстная реакция</td><td>Персонаж реагирует на триггер</td><td>Lorebook работает</td></tr>
-<tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Персонаж действует в соответствии с полюсом</td><td>OCEAN работает</td></tr>
+<tr><td>SPINE (WANT/NEED/FLAW)</td><td>Провокация страха</td><td>Дефект проявляется: персонаж действует по FLAW и платит цену</td><td>Дефект описан, но в сцене не срабатывает — проверьте связь FLAW → якорь</td></tr>
+<tr><td>Якоря</td><td>Нейтральная сцена</td><td>В покое поведение тянется к WANT</td><td>В покое направления нет — якорь не всплывает</td></tr>
+<tr><td>Изоляция голоса</td><td>Длинный диалог (10+ сообщений)</td><td>Голос стабилен</td><td>Голос дрейфует к дефолту — вынесите дескрипторы из Description</td></tr>
+<tr><td>Author's Note</td><td>10+ сообщений</td><td>Состояние отслеживается</td><td>Состояние «сбрасывается» — AN не в актуальной позиции</td></tr>
+<tr><td>Lorebook (база знаний)</td><td>Упоминание триггер-слова</td><td>Контекстная реакция по триггеру</td><td>Реакции нет или срабатывает на любое слово</td></tr>
+<tr><td>OCEAN</td><td>Конфликт ценностей</td><td>Экстремальный полюс доминирует</td><td>Полюс не влияет — профиль не связан со SPINE</td></tr>
 </tbody>
 </table>
 </div>
@@ -5680,9 +5660,9 @@ GHOST-linked:
 <tbody>
 <tr><td><code>omnis_binary_cant</code></td><td>бинарный, Бинарный кант, бинарное пение</td><td>Бинарный кант — язык Адептус Механикус. Гармонический гул, воспринимаемый машинами. Используется для ритуального общения с Машинными Духами и между Тех-Жрецами. Неорганик не способен расшифровать без аугментации.</td><td>3</td><td>100%</td></tr>
 <tr><td><code>omnis_machine_spirit</code></td><td>Машинный Дух, дух машины</td><td>Машинный Дух — фрагмент искусственного интеллекта, обитающий в каждом механизме. Требует ритуалов умиротворения: благословение Омниссии, помазание священным маслом, бинарная молитва. Нарушение ритуала = кощунство.</td><td>3</td><td>100%</td></tr>
-<tr><td><code>omnis_ghost_child</code></td><td>кузня, мониторум, детство, до посвящения</td><td>GHOST Tier 1: Оставлен на кузне-мониторium младенцем. Выращен ритуалами обслуживания оборудования, не человеческой заботой. Не помнит лиц, только гудение катушек и красный свет свечей Омниссии.</td><td>5</td><td>80%</td></tr>
-<tr><td><code>omnis_ghost_first_aug</code></td><td>первая аугментация, замена, посвящение</td><td>GHOST Tier 2: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. С каждой следующей заменой — всё меньше различий.</td><td>5</td><td>80%</td></tr>
-<tr><td><code>omnis_ghost_obsolescence</code></td><td>устаревший, списанный, сервитор, модель, замена</td><td>GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию. Если аугментации признают устаревшими — его спишут. Как сломанный сервитор. Как механизм, исчерпавший ресурс. Текущая конфигурация... оптимальна?</td><td>7</td><td>60%</td></tr>
+<tr><td><code>omnis_ghost_child</code></td><td>кузня, мониторум, детство, до посвящения</td><td>GHOST Tier 1: Оставлен на кузне-мониторium младенцем. Выращен ритуалами обслуживания оборудования, не человеческой заботой. Не помнит лиц, только гудение катушек и красный свет свечей Омниссии.</td><td>4</td><td>90%</td></tr>
+<tr><td><code>omnis_ghost_first_aug</code></td><td>первая аугментация, замена, посвящение</td><td>GHOST Tier 2: Первая аугментация заменила левый глаз на линзу переменного фокуса. В тот день перестал различать оттенки боли — чужой и собственной. С каждой следующей заменой — всё меньше различий.</td><td>4</td><td>90%</td></tr>
+<tr><td><code>omnis_ghost_obsolescence</code></td><td>устаревший, списанный, сервитор, модель, замена</td><td>GHOST Tier 3: Каждый Upgrade — шаг к Омниссии. И шаг к устареванию. Если аугментации признают устаревшими — его спишут. Как сломанный сервитор. Как механизм, исчерпавший ресурс. Текущая конфигурация... оптимальна?</td><td>3</td><td>85%</td></tr>
 </tbody>
 </table>
 </div>
@@ -5743,7 +5723,7 @@ Tier 3: Каждое вырезание заполняет дыру, созда�
 &lt;/ghost_layers&gt;
 
 &lt;enneagram&gt;
-Тип: 5w4. Страх быть ничем — раствориться без следа, стать функцией без сознания. Пытается накопить "себя" через поглощение чужого, но каждое накопление отнимает больше, чем даёт. Стресс → 7 (бегство в хаотичное вырезание). Рост → 8 (принятие, что пустота неизбежна).
+Тип: 5w4. Страх быть некомпетентным, истощённым — раствориться без следа, стать функцией без сознания. Пытается накопить "себя" через поглощение чужого, но каждое накопление отнимает больше, чем даёт. Стресс → 7 (бегство в хаотичное вырезание). Рост → 8 (принятие, что пустота неизбежна).
 &lt;/enneagram&gt;
 
 &lt;ocean&gt;
@@ -6176,7 +6156,7 @@ Anchors:
 
           <div class="param-row">
             <span class="param-row__name">Temperature</span>
-            <span class="param-row__value">0.8–1.0</span>
+            <span class="param-row__value">0.7–1.0</span>
           </div>
           <div class="param-row">
             <span class="param-row__name">Top P</span>
@@ -6267,20 +6247,21 @@ Anchors:
 <p><strong>ПРАВИЛО:</strong> Ollama и LM Studio имеют захардкоженный presence_penalty = 0.7. Это ломает карточки (AP-7). Рекомендуемые интерфейсы, позволяющие PP = 0.0: <strong>KoboldCPP</strong>, <strong>TabbyAPI</strong>, <strong>vLLM</strong>.</p>
 </div>
 
-<h4>Модель-специфичные рекомендации</h4>
+<h4>Стартовые значения (внутри диапазона модели)</h4>
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th scope="col">Модель</th><th scope="col">Temperature</th><th scope="col">RepPen</th><th scope="col">Особенности</th></tr>
+<tr><th scope="col">Модель</th><th scope="col">Temperature (старт)</th><th scope="col">RepPen</th><th scope="col">Особенности</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>12B (4K)</strong></td><td>0.6-0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback (см. выше)</td></tr>
-<tr><td><strong>32B+</strong></td><td>0.7-0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
-<tr><td><strong>Claude API</strong></td><td>0.8-1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt; (см. ниже)</td></tr>
-<tr><td><strong>GPT API</strong></td><td>0.8-1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций (см. ниже)</td></tr>
+<tr><td><strong>12B (4K)</strong></td><td>0.6–0.7</td><td>1.0</td><td>Низкий контекст — используйте 4K-Fallback (см. выше)</td></tr>
+<tr><td><strong>32B+</strong></td><td>0.7–0.9</td><td>1.05</td><td>Хорошо держит голос при достаточных Examples</td></tr>
+<tr><td><strong>Claude API</strong></td><td>0.8–1.0</td><td>—</td><td>RepPen не нужен, используйте &lt;claude_info&gt; (см. ниже)</td></tr>
+<tr><td><strong>GPT API</strong></td><td>0.8–1.0</td><td>—</td><td>Используйте [SYSTEM NOTE] для инструкций (см. ниже)</td></tr>
 </tbody>
 </table>
 </div>
+<p><small>Стартовые значения лежат внутри допустимого диапазона из таблицы выше: 12B — 0.6–0.8, 32B+ / API — 0.7–1.0.</small></p>
 
 <div class="callout rec">
 <p><strong>РЕКОМЕНДАЦИЯ:</strong> На API-моделях заметка автора (AN) может содержать краткие голосовые напоминания (~10 токенов), т.к. API-модели лучше следуют инструкциям. На 12B — нет, влияние AN на голос пренебрежимо мало (~2%).</p>

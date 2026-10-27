@@ -433,7 +433,7 @@ def main():
         if colapi is None:
             err("E17 embed: API column block not found")
         else:
-            for needle in (">0.8–1.0</span>", "N/A", ">40–100</span>", ">0.0"):
+            for needle in (">0.7–1.0</span>", "N/A", ">40–100</span>", ">0.0"):  # iter 203: API Temperature = the canonical «32B+ / API» range 0.7–1.0
                 if needle not in colapi:
                     err(f"E17 API column: value missing: {needle}")
         if e17_text.count('param-row__value">0.0 <span class="danger-marker"') != 3:
