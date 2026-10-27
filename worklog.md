@@ -5,6 +5,23 @@
 
 ---
 
+Task ID: iter-198-audit-close
+Agent: lead
+Task: owner: «продолжай работу и закрой задачи» — the seven items left in `_scratch/audit-2026-10-28/REPORT.md` (#26, #32, #33, #34, #35, #36, #37), content + canon paired, then close the audit package.
+
+BASE: 6a9b8034
+
+Work Log:
+- 0: Preflight — worktree clean after iter-197. Located all seven in canon and master before editing; found that canon already owned the Russian labels the §7A.12 sub-budget table printed in English, so master was aligned to canon (canon wins) rather than inventing wording.
+- 1: **Claims without evidence.** §1.1 «Разница измерима» → «разница в предсказуемости поведения, а не в стиле описания» (the chapter's own percentages are empirical orientirs); §1.2 «она собирается по всем главам» → «её элементы разбираются по частям, а целиком она собрана в части 10»; §7A.1 «единственная её часть, которую модель видит всегда» → «её инструкционный слой: он действует непрерывно, независимо от длины диалога» (SP is not unique — §7B puts Description in every response); §8 «~90% ошибок сборки» → «самые частые ошибки сборки» (no sample, no method).
+- 2: **Greeting range unified to its owner.** §7B «50-100» and the §9.5 per-block scan «50-100» → **40–100** with §7A.12 named; a card built from the owner table no longer fails the checklist.
+- 3: **Glossary claim made honest** — §0.1 «Все термины собраны в панели «Глоссарий»» → «45 ключевых терминов собраны…», matching the registry's 45 articles. The three missing entries (Script Tax, Pattern Matcher, Quality Grade) are recorded as the one remaining backlog row: they need registry articles + `migration_map_v2.md` provenance + the parity gate's 26 C + 55 T coverage, which is a data change, not a text edit.
+- 4: **DEC-16 glosses.** §7A.12 sub-budget labels «OCEAN profile / Enneagram type / MBTI (optional)» → «Профиль OCEAN / Тип эннеаграммы / MBTI (опционально)» (canon already had these — master had drifted); Appendix E's minimal 4K SP (English executable) gained one Russian sentence stating what the block says and that English stays canonical for execution.
+- 5: **Gates re-pointed, never weakened:** sync `P2-7-syn-08` follows the rewritten §8 synthesis paragraph — 87/87 kept.
+- 6: **Verification (full battery after the last edit):** build **61 sections** · hash `8b3a917d` (unchanged — content only) · tests **91/91** · validate 12 gates + **133 redirects** · validate:master **12/12, 0 warnings** · sync **87/87** · 8 parity gates PASS · reader-path PASS · browser proofs `verify-prerender` 6/6 + `verify-reading-rail` 15/15 · qa csp/bundle/contrast/seo PASS · doc-versions exit 0 · english **1** / syntax **224** (baselines exact) · lint 0 · version:check 9.2.6 · 20 artifact assertions (10 strings present, 10 absent) in `dist/index.html` + root fallback.
+
+Verification: green (step 6). Audit package CLOSED.
+
 Task ID: iter-197-truth-pass-2
 Agent: lead
 Task: owner: «так коммить все и продолжай работу если осталась» — the deferred half of the same audit (items #15, #16, #18, #19, #20) plus the two hygiene findings. Content + canon, paired.

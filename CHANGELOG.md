@@ -6,6 +6,14 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 198 — the audit's last seven items: unmeasured claims, one budget range, and the missing Russian.
+
+- **Claims without evidence removed or repaired:** §1.1 «Разница измерима» → «разница в предсказуемости поведения»; §1.2 «собирается по всем главам» → «элементы разбираются по частям, целиком — в части 10»; §7A.1 no longer calls SP the only block the model always sees (§7B puts Description in every response) — it is the always-on instruction layer; §8's «~90% ошибок сборки» loses a percentage that had no sample behind it.
+- **Greeting 50–100 → 40–100** in §7B and §9.5, matching §7A.12, the declared owner.
+- **Glossary claim = its real size:** §0.1 says «45 ключевых терминов» (the registry has 45 articles). Script Tax / Pattern Matcher / Quality Grade stay a recorded backlog row — they need registry articles + migration provenance + a parity-coverage change, not a text edit.
+- **DEC-16 glosses:** the §7A.12 sub-budget table returns to canon's Russian labels («Профиль OCEAN», «Тип эннеаграммы», «MBTI (опционально)»); Appendix E's minimal 4K SP gains a Russian sentence next to the English executable block.
+- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · master 12/12, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
+
 ### iter 197 — the deferred half of the truth pass: budget self-claims, the 4K-fallback label, four divergences.
 
 - **§9.5 п.17** stopped claiming «✓ блоки в пределах лимитов; итог — в диапазоне 400–900» for the expert card (its Examples are full scenes, ~1 000–1 600 tokens against an «≤80 per example» orientir) and now reports what the card is. **Part 10's budget pointer** states the same and tells the reader to trim Examples when copying.
