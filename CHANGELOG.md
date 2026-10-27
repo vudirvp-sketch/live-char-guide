@@ -6,6 +6,15 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 206 — leftover reader-facing findings.
+
+- **Vocabulary ≠ context:** Appendix E's «Размер словаря» row no longer prints Claude 200K / GPT-4 128K / Gemini 1M+ (context windows); API = vocabularies unpublished, models multilingual.
+- **«Пять блоков» named:** Part 0 = 4 required + 1 add-on; Part 1 = 4 blocks + anchors tag + optional Lorebook; §7A.12 = 5 table rows (4 blocks + anchors row inside the Description budget).
+- **CoT ceiling one number:** §6 / §9 / checklist = 1–2, max 2.
+- **Bilingual prompt blocks split:** OOC Protection and Immersion Boundary are English-only inside the executable block, Russian beside it; OOC cost claim ~25 tokens.
+- **Marina:** the third Lorebook example's contact renamed Ольга — one Marina in the guide.
+- **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
+
 ### iter 205 — support surfaces: a real no-JS glossary page and an honest OCEAN widget.
 
 - **No-JS glossary page:** full document (head, title, palette styles, back link, measured term count); 48 term arrows now point at `../index.html#<id>` instead of a dead `#<id>`.
@@ -22,17 +31,11 @@
 - **Glossary:** panel + no-JS page escaped definitions and converted markdown backticks to `<code>`; `<anchors>` is text now, not an element, on both surfaces.
 - **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
 
-### iter 203 — Part 9 becomes one instrument; the numeric contradictions close.
+### iter 203 — Part 9 one checklist, honest scenario map, AP-11 out of E13, one Temperature model (detail: git + STATUS).
 
-- **One checklist:** the «Быстрая проверка 1–5» block is deleted (strict subset of the 18-item checklist; 5-point Editorial check recorded). The reader-path gate now counts the 18 numbered rows instead of the deleted block's ☐ boxes.
-- **Scenario map:** the inverted confirmation table («ожидаем/наблюдаем/диагноз», constant verdict) is replaced by a two-signal map — works vs fails — for SPINE / anchors / voice / AN / Lorebook / OCEAN.
-- **AP-11 leaves E13:** voice mixing is not a cause of single-character drift; badge and mapping rows removed (it stays in the Part 8 catalog). Diagnostics gate AP set re-pointed.
-- **Temperature one model:** E17 API column 0.8–1.0 → **0.7–1.0** (canonical 32B+/API); model-specific table retitled «Стартовые значения (внутри диапазона модели)»; §9.5 item 16 = 12B 0.6–0.8 / 32B+ и API 0.7–1.0.
-- **Card truths:** Elena's WANT = §4 wording everywhere; type-5 fear = canonical «некомпетентным, истощённым»; Omnis Lorebook Depth 4/4/3, Probability 90/90/85 %.
-- **Counts:** Vysh 6 → 9 anchors; «все 18 проверок» enumerates 18; Part 5 trigger categories match the table.
-- **Verified:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync **87/87** · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
+### iter 202 — the budget widget computes the printed profile model (detail: git + STATUS).
 
-### iter 202 — the budget widget now computes the model the text prints.
+ the budget widget now computes the model the text prints.
 
 - **Profile-aware:** a profile selector (4K-Fallback / 8K+ / 16K+) switches the per-block windows (4K = the 4K-Fallback spec; 8K/16K+ = the §7A.12 Min/Max windows) and the total band (410–540 / 400–900 / 740–1140) is an orientir in the tooltip, never a verdict.
 - **Per-block status:** ✓ в лимите · ⚠ выше · ▲ ниже, with the limit in each chip's tooltip.

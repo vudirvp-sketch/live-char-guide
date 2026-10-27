@@ -5,6 +5,23 @@
 
 ---
 
+Task ID: iter-206-leftover-findings
+Agent: lead
+Task: the reader-facing findings left after iterations A–E — vocabulary vs context, the three meanings of «пять блоков», the CoT ceiling, the bilingual executable blocks and the Marina contradiction.
+
+BASE: 3cbbe7e0
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `3cbbe7e0`; re-read the audit's §4.9/§4.10 leftovers against the published text.
+- 1: **Appendix E category error:** the «Размер словаря» row listed Claude 200K / GPT-4 128K / Gemini 1M+ — context windows, not vocabularies. Row renamed «Размер словаря (не контекст)»; API cell = «Не публикуется вендорами; модели мультиязычны — Script Tax низкий». Canon mirror updated.
+- 2: **«Пять блоков» disambiguated:** Part 0 = «четыре обязательных блока и один надстраиваемый»; Part 1 = four required + anchors-tag-inside-Description + optional Lorebook; §7A.12 = five TABLE ROWS (four blocks + the anchors row, which rides the Description budget). Canon mirrors updated.
+- 3: **CoT ceiling:** §6 rule «не более 2–3 CoT-якорей» → «1–2, максимум 2»; §9 symptom row «2–3» → «1–2»; checklist item 14 «не более 2–3» → «не более 2» (master + canon). The cards already used 2.
+- 4: **Bilingual executable blocks:** OOC Protection and Immersion Boundary had English + Russian inside one `<pre><code>`; now English-only inside the block with the Russian translation as `<small>` beside it (DEC-16), and the OOC cost claim corrected ~15 → ~25 tokens (the old number counted the English half only).
+- 5: **Marina:** the third Lorebook example («контакт Елены») described a person Elena «почти доверяла» under the name of the editor who stole her story; renamed to Ольга (key + content, master + canon) — the guide now has exactly one Marina.
+- 6: **Verification:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
+
+Verification: green. Remaining audit item = S6 (§7A.7 deletion) — owner-gated redirect change.
+
 Task ID: iter-205-support-and-notation
 Agent: lead
 Task: audit v2 iteration E — the no-JS glossary page, the OCEAN widget's boundary/copy defects, and the last section-glyph debt in comments.
@@ -76,23 +93,9 @@ Task ID: iters 196–199 (one-line summaries, condensed)
 Agent: lead
 Task: the audit package closure before iter 200 — 196 the truth pass over the first screen and the budget claims; 197 the deferred half (budget self-claims, the 4K label, single-fact divergences); 198 the last seven audit items (unmeasured claims, one Greeting range, English labels); 199 the glossary grows to 48 entries with honest native provenance (DEC-38). Detail: `git` + `STATUS.md`.
 
-Task ID: iter-201-truth-pass
+Task ID: iters 201–202 (one-line summaries, condensed)
 Agent: lead
-Task: owner: «какие решения? делай как качественно и правильно ало. продолжай работу.» — the v2-audit decisions are delegated, so they are taken and executed: four reader-visible contradictions, the budget model, and the dead `§`-notation (source: `_scratch/lcg-audit/AUDIT-REPORT-v2.md` §4–§5).
-
-BASE: 82f92d4d
-
-Work Log:
-- 0: Preflight — worktree clean, HEAD `82f92d4d` (iter 200). Re-read the audit's verified inventory (`AUDIT-REPORT-v2.md`, `verify-*.md`) and measured the current state first-hand: 57 reader-visible `§` labels (41 master + 5 widget + 11 glossary), 15 `h2` / 69 `h3` / 108 `h4` / 6 `h5`, 10 internal links.
-- 1: **Anchors — one truth (commit `b28efc98`).** Appendix E's РУЛЕ is the norm; the §0.2 skeleton and all four cards now place `<anchors>` at the end of `[DESCRIPTION]` (text moved verbatim), and 9 sync points follow: §10.0 index cell, Part 1 caption/sub-panel/table (E01 keeps its Examples-zone *drawing*), §7A.9 + the "separate Anchors field" sentence, §7A.1 "not part of SP" line, §7A.12 anchors-row note, glossary article (wrong "§1.4" target deleted), §0.2 "Examples" table cell. Counter and FLAW-linked wording fixed: 3–5 **base** anchors, six for Elena.
-- 2: **Elena + Format Lock (same commit).** Stress table row split on E (N 60–70: E<30 avoidant / E≥30 reactive), the cautious-zone sentence added, the «2 значения в осторожной зоне» observation corrected to 3 (A=38, C=65, N=68) in master+canon. Format Lock: the glyph paragraph (free, uniform inside a card), Omnis's `[ВНУТРЕННИЙ_МОНОЛОГ]` → `[INTERNAL]` (5 lines, master+canon), the §9.5 checklist row re-quoted in ASCII.
-- 3: **Budget model (commit `64a66f97`).** §7A.12: «Мин» = block floor, separate 4K profile; 4K-Fallback = the single 4K spec with its total (410–540); CoT-anchor row 50/60/80; the five size classes (<400 · 400–900 · 900–1500 · 1500–2500 · >2500) printed; the profile bands (4K 410–540 / 8K 400–900 / 16K+ 740–1140 / ceiling 1400–2060); Script Tax stated in two units in §7A.12 and Appendix E; sub-budget rule says anchors ride inside Description (floor on 8K). Consumers re-said honestly: part_01 8K-profile line, §7A.13 step 6, the Elena budget table, §9.5 item 17, the Vysh result («17 из 18 — п.17 заявленное исключение»), the §10.0 declaration (Examples *and* CoT anchors). No card shortened.
-- 4: **`§`-notation retired + sequence fixes + headings.** A scan script (`_scratch/lcg-audit/scan_sections_targets.py`) inventories every visible label; 57 removed via an exact replacement map (`fix_sections_iter201c.py`, no regex guessing — a miss aborts the run), canon mirrors applied in two rounds. Sequence: §0.2 gets the five SPINE glosses + «Presence Penalty (PP)» + «одна система разметки — действия и речь записаны одинаково» (S1); §2.2's anchor-count table speaks plain language (S2); §3.4 stops requiring Format Lock before it is defined (S3); §9.5 item 13 gets its own numbers (S4); the wrong "Tier 1–3 из Part 10" address dies (S7). Headings: 46 section titles h3→h2, their 100 h4→h3, 6 h5→h4 — **61/123/14, zero skipped levels** (`fix_headings_iter201e.py`). Appendix E's opening no longer claims to be read "once before assembly".
-- 5: **Law + decision.** Fence #11 rewritten (navigation = TOC/rail; local reminder beats a back-link; a link only to a reference surface, text = visible name, never a number; `§` banned on every reader surface). **DEC-39** records the four truths, the budget model, the `§` retirement, and the two deferred audit items (S5 contradicts DEC-27's boundary and the local six-question table; S6 is an owner-gated `data/anchor-redirects.json` change).
-- 6: **Gates re-pointed, never weakened.** Six literal anchors moved to the new content: 5 sync probes (`KI#30-7a`, `P0-12`, `P1-5`, `P2-12a`, `P2-12c` — heading level and the removed `§`-pointer) and 6 parity anchors (`core_directives` per-directive headings h4→h3; `token_budget` glossary deferral by name now that `§` is banned from the glossary; `diagnostics` E13 sub-heading; `voice` E16 badge note; `sampling` AP-5 fix line). Same invariants, each re-point disclosed in the script comment.
-- 7: **Verification (full battery after the last edit):** build **61 sections** · hash `8b3a917d` (shell untouched) · tests **91/91** · validate 12 gates + **133 redirects** · validate:master **13/13, 0 warnings** · sync **87/87** · **8 parity gates PASS** · reader-path PASS · qa csp/bundle/contrast/seo PASS · doc-versions exit 0 · english **1** / syntax **224** (baselines exact) · lint 0 · version:check 9.2.6.
-
-Verification: green (step 7). Deferred with reasons: audit S5, S6; the remaining audit work is iterations C–E (budget widget, Part 9/numbers, support), listed in `STATUS.md` Next step.
+Task: 201 the v2-audit truth pass (anchors in Description, anchor count, Elena stress type, Format Lock glyph, profile budgets, §-notation to zero, h2/h3, fence #11 amended, DEC-39); 202 the profile-aware budget widget (selector, per-block status, Greeting, anchors inside Description). Detail: git + STATUS.
 
 Task ID: iter-200-cleanup-and-ki-close
 Agent: lead
