@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Live Character Guide - Shell v9.2.6 -->
-<!-- Build: 55aea5f8 -->
-<!-- Generated: 2026-10-25T22:04:41.991Z -->
+<!-- Build: 517d2245 -->
+<!-- Generated: 2026-10-27T06:28:22.325Z -->
 <!-- Unified: All content at maximum depth, no layer selection -->
 <html lang="ru">
 <head>
@@ -72,15 +72,22 @@
   <!-- KI#16 fix (iter 19): externalized inline script → widgets/js-flag.js for CSP compliance -->
   <script src="lib/js-flag.js"></script>
 </head>
-<body>
+<body class="theme-dark">
   <!-- Loading overlay -->
   <div id="loading-overlay" class="loading-overlay hidden">
     <div class="loading-spinner"></div>
     <div class="loading-text">Загрузка...</div>
   </div>
 
-  <!-- Main content area (auto-loaded, no modal) -->
-  <main id="content" data-prerendered="true"><!--
+  <!-- Main content area (auto-loaded, no modal).
+       iter-193: the reading layout — TOC rail | content | tool dock — is a grid
+       built by CSS (.layout-grid); #content stays the sole content container. -->
+  <div class="layout-grid" id="layout-grid">
+    <!-- READING RAIL: persistent TOC (variant A, iter-193). Populated by
+         buildRailTOC() in lazy-loader.js from the same section model as the
+         TOC panel. Hidden below 1220px; the reading bar takes over. -->
+    <nav class="toc-rail" id="toc-rail" aria-label="Содержание"></nav>
+    <main id="content" data-prerendered="true"><!--
   Part 0: Перед стартом — Как читать этот гайд и TL;DR
   Live Character Guide v9.2 Master HTML
 
@@ -6376,6 +6383,22 @@ Anchors:
 
 </section>
 </main>
+    <!-- TOOL DOCK: the former floating FAB group, docked to the grid (iter-193) -->
+    <div class="tool-dock" id="tool-dock" role="toolbar" aria-label="Инструменты"></div>
+  </div>
+
+  <!-- READING BAR: sticky «Part › Section» header for narrow screens
+       (iter-193). Under 1220px the rail hides and this bar shows the current
+       position + progress; the ☰ sheet opens the full TOC. -->
+  <div class="reading-bar" id="reading-bar" hidden>
+    <button class="reading-bar-btn" id="reading-bar-btn" aria-expanded="false" aria-controls="toc-rail-sheet">
+      <span class="reading-bar-crumb" id="reading-bar-crumb">Содержание</span>
+      <span class="reading-bar-pct" id="reading-bar-pct">0%</span>
+      <span aria-hidden="true">☰</span>
+    </button>
+    <div class="reading-bar-fill" id="reading-bar-fill" role="progressbar" aria-label="Прогресс чтения" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    <nav class="reading-sheet" id="toc-rail-sheet" aria-label="Содержание"></nav>
+  </div>
   <noscript>
     <div style="padding:2em;text-align:center;color:var(--text,#E8E8E8);font-family:sans-serif;">
       <h1>Live Character Guide</h1>
@@ -6384,16 +6407,15 @@ Anchors:
     </div>
   </noscript>
 
-  <!-- GLOSSARY SIDE TAB -->
-  <div class="glossary-tab" id="glossary-tab" tabindex="0" role="button" aria-label="Открыть глоссарий">📖 Глоссарий</div>
-
-  <!-- FAB BUTTONS GROUP -->
+  <!-- FAB BUTTONS GROUP (moved into .tool-dock by lazy-loader.js, iter-193).
+       Kept as the source markup for the buttons + the no-JS/JS-off fallback;
+       the dock re-parents them on init. -->
   <div class="fab-group hidden" id="fab-group">
-    <button class="fab-btn" id="fab-theme" title="Тема (Тёмная ↔ Светлая)" aria-label="Переключить тему" type="button" data-theme="oled">
-      <span class="theme-icon-light" hidden="">☀️</span>
-      <span class="theme-icon-oled">🌙</span>
-    </button>
-    <button class="fab-btn" id="fab-width" aria-label="Toggle content width" title="Ширина контента" type="button" aria-pressed="false">↔</button>
+    <!-- iter-194: the soft-dark theme is the default (body.theme-dark in the
+         <body> tag, so the first paint is already #0f1218, no OLED→dark flash);
+         the cycle OLED → soft-dark → light stays three-state (DEC-35).
+         The single glyph ◐ replaces the sun/moon pair. -->
+    <button class="fab-btn" id="fab-theme" title="Тема (Тёмная → Светлая → OLED)" aria-label="Сменить тему" type="button" data-theme="dark">◐</button>
     <button class="fab-btn" id="fab-scratchpad" aria-label="Open scratchpad" title="Блокнот для записей" type="button">📝</button>
     <button class="fab-btn" id="fab-glossary" aria-label="Open glossary" title="Глоссарий" type="button">📖</button>
     <button class="fab-btn" id="fab-toc" title="Содержание" aria-label="Открыть содержание" type="button">📑</button>
@@ -6454,7 +6476,6 @@ Anchors:
   <script src="widgets/ocean-insight.js"></script>
     <script src="widgets/mbti-composer.js"></script>
     <!-- VS Widget Scripts -->
-  <script src="interactions/vs-mini-map.js"></script>
   <script src="interactions/vs-scroll-observer.js"></script>
   <script src="interactions/vs-e10-enneagram.js"></script>
   <script src="interactions/vs-e13-diagnostic.js"></script>

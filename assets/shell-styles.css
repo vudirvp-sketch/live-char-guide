@@ -46,12 +46,14 @@
   --radius-md: 0.5em;
   --radius-lg: 1em;
 
-  /* Base theme colors (OLED default — light theme overrides these) */
+  /* Base theme colors (OLED default — soft-dark/theme-light override these).
+     iter-193: OLED stays available as the third cycle state (DEC-35);
+     the recommended long-reading default is the soft dark (body.theme-dark). */
   --bg: #000000;
   --bg-surface: #0a0a0a;
   --bg-elevated: #111111;
   --text: #E8E8E8;
-  --text-muted: #B0B0B0;
+  --text-muted: #9aa4b5;   /* iter-193: 7.5:1 on #000 (was #B0B0B0); muted UI copy legible on OLED */
   --accent: #38bdf8;
   --accent-soft: rgba(56, 189, 248, 0.15);
   --border: #1a1a1a;
@@ -66,7 +68,9 @@
   /* Typography */
   --font-sans: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Liberation Sans", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-  --max-width: min(1000px, 85ch);
+  /* iter-193 reading typography: 72ch ≈ 17px base ≈ 68–73 Cyrillic chars/line.
+     iter-194: the ↔ width toggle is retired — this measure is fixed. */
+  --max-width: min(72ch, 1000px);
   --spacing: clamp(1rem, 2.5vw, 1.5rem);
 
   /* Layout variables */
@@ -85,8 +89,7 @@
   --panel-z-base: 1000;
   --panel-transition: 200ms ease;
 
-  /* Z-index hierarchy */
-  --z-glossary-tab: 999;
+  /* Z-index hierarchy (iter-193: --z-glossary-tab retired with the side tab) */
   --z-fab-group: 1000;
   --z-panel: 1001;
   --z-progress: 1002;
@@ -109,7 +112,7 @@
   --border-active: #1a1e28;   /* OLED active border */
   --text-primary:  #e2e6ed;   /* Основной текст (аналог shell --text: #E8E8E8) */
   --text-secondary:#8b95a8;   /* Вторичный текст (WCAG AA ~6.5:1 на --bg-deep) */
-  --text-muted:    #6b7590;   /* Приглушённый текст (WCAG AA 4.6:1 на --bg-deep. НЕ для критичной инфо) */
+  --text-muted: #6b7590;   /* Приглушённый текст VS (4.6:1 на --bg-deep. НЕ для критичной инфо; iter-193: shell --text-muted поднят до #9aa4b5, VS-токен frozen by DEC-19) */
   --accent-cyan:   #3cc8ff;   /* Основной акцент VS (аналог shell --accent: #38bdf8, но ярче) */
   --accent-violet: #8b5cf6;   /* Вторичный акцент (личность/психология) */
   --accent-amber:  #f0a040;   /* Третичный акцент (предупреждение) */
@@ -345,9 +348,30 @@ body.theme-light {
   --bg-surface-light: #ffffff;
   --bg-elevated-light: #f3f4f6;
   --text-light: #1a1a1a;
-  --text-muted-light: #6b7280;
-  --accent-light: #0284c7;
+  --text-muted-light: #5b6472;   /* iter-193: 5.9:1 on #fafafa (was #6b7280, 4.7:1) */
+  --accent: #0369a1;   /* iter-193: 5.7:1 on #fafafa (was #0284c7, 3.9:1) */
+  --accent-light: #0369a1;
   --border-light: #e5e7eb;
+}
+
+/* Default (no class) = OLED/dark — :root values apply automatically.
+   iter-193 (DEC-35): three themes — OLED (no class), soft dark
+   (body.theme-dark), light (body.theme-light). The soft-dark palette
+   (#0f1218 / #d9dde4) is the recommended default for long reading:
+   ~13.8:1 contrast without the #000 glow harshness. */
+body.theme-dark {
+  --bg: #0f1218;
+  --bg-surface: #151a22;
+  --bg-elevated: #1b212b;
+  --text: #d9dde4;
+  --text-muted: #9aa4b5;
+  --accent: #4cc2f7;
+  --accent-soft: rgba(76, 194, 247, 0.13);
+  --border: #272e3b;
+  --code-bg: #10141b;
+  --table-header: #151a22;
+  --table-row-alt: #12161d;
+  color-scheme: dark;
 }
 
 /* === LIGHT THEME === */
@@ -386,7 +410,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  line-height: 1.65;
+  line-height: 1.7;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -394,18 +418,22 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   min-height: 100vh;
+  font-kerning: normal;
 }
 
 /* Typography */
 h1, h2, h3, h4 { color: var(--text); margin: 2.2em 0 0.8em; line-height: 1.25; font-weight: 600; }
-h1 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5em; letter-spacing: -0.02em; }
-h2 { font-size: 1.6rem; color: var(--accent); letter-spacing: -0.01em; }
-h3 { font-size: 1.25rem; letter-spacing: -0.005em; }
+h1 { font-size: 2rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5em; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-size: 1.6rem; color: var(--accent); letter-spacing: -0.01em; text-wrap: balance; }
+h3 { font-size: 1.25rem; letter-spacing: -0.005em; text-wrap: balance; }
 h4 { font-size: 1.1rem; }
-p { margin: 0.8em 0; }
+p { margin: 0 0 0.9em; text-wrap: pretty; }
 hr { border: none; border-top: 1px solid var(--border); margin: 2.5em 0; clear: both; }
 a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
 a:hover { border-bottom-style: solid; }
+/* iter-193: tabular figures in tables; hyphens for narrow screens */
+table { font-variant-numeric: tabular-nums; }
+@media (max-width: 700px) { #content p, #content li { hyphens: auto; } }
 
 /* Lists */
 ul, ol { margin: 0.8em 0; padding-left: 1.6em; }
@@ -553,7 +581,6 @@ body.theme-light .ocean-node-high { color: #ef4444; }
 body.theme-light .vs-embed { background: #ffffff; border-color: #e5e7eb; }
 body.theme-light .vs-panel { background: #ffffff; border-color: #e5e7eb; }
 body.theme-light .vs-element-title { color: #1a1d24; }
-body.theme-light .vs-mini-map { background: #ffffff; border-color: #e5e7eb; }
 
 /* Tags — v9: only .tag.core remains; .opt, .risk, .advanced removed (Phase 2.4) */
 .tag { display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.75em; font-weight: 600; margin-right: 0.4em; }
@@ -653,6 +680,302 @@ body.theme-light .vs-mini-map { background: #ffffff; border-color: #e5e7eb; }
 
 #content.content-hidden {
   display: none;
+}
+
+/* === READING LAYOUT (iter-193): rail | content | dock === */
+/* From ≥1220px the guide reads as a symmetric composition: persistent TOC
+   rail on the left, text column in the middle, tool dock on the right.
+   Below that, the rail hides and the sticky reading bar takes over.
+   NB cascade order: the ≥1220px override block lives AFTER the base
+   component rules below (equal specificity — later wins). */
+.layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  margin: 0 auto;
+  gap: 0 48px;
+  align-items: start;
+}
+
+/* --- TOC RAIL (base: hidden; the wide-screen block turns it on) --- */
+.toc-rail {
+  display: none;
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  align-self: start;
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  scrollbar-width: thin;
+  padding: 16px 14px 16px 0;
+  font-size: 0.88rem;
+}
+
+.toc-rail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 8px;
+  font-weight: 600;
+  color: var(--text);
+}
+.toc-rail-head .toc-rail-pct {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.toc-rail-progress {
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 8px 12px;
+}
+.toc-rail-progress b {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+}
+
+/* --- TOOL DOCK --- */
+.tool-dock {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 16px;
+  z-index: var(--z-fab-group);
+}
+.tool-dock .fab-btn {
+  width: 44px;
+  height: 44px;
+  font-size: 1.05rem;
+}
+/* Under 1220px the dock leaves the grid and floats bottom-right as before. */
+@media (max-width: 1219px) {
+  .tool-dock {
+    position: fixed;
+    top: auto;
+    bottom: 2rem;
+    right: 1rem;
+    padding-top: 0;
+  }
+}
+
+/* --- READING BAR (narrow screens) --- */
+.reading-bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: var(--z-progress, 1002);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  margin: calc(-1 * var(--spacing)) calc(-1 * var(--spacing)) var(--spacing);
+}
+.reading-bar[hidden] { display: none; }
+.reading-bar-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  cursor: pointer;
+  text-align: left;
+}
+.reading-bar-crumb {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-muted);
+}
+.reading-bar-crumb b { color: var(--text); font-weight: 600; }
+.reading-bar-pct {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.reading-bar-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: transparent;
+  pointer-events: none;
+}
+.reading-bar-fill::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: var(--reading-progress, 0%);
+  background: var(--accent);
+}
+/* ☰ sheet: the full TOC, opened from the bar */
+.reading-sheet {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  max-height: 68vh;
+  overflow: auto;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+  padding: 10px 16px 16px;
+  font-size: 0.9rem;
+}
+.reading-bar.open .reading-sheet { display: block; }
+
+/* --- RAIL TREE (shared markup with the reading sheet) --- */
+.rail-list { list-style: none; margin: 0; padding: 0; }
+.rail-list .rail-part { margin: 0; }
+.rail-part-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+.rail-part-row:hover { background: var(--bg-elevated); }
+.rail-part-link {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: none;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.rail-part-num {
+  min-width: 2em;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.rail-part-num::before { content: "Ч. "; font-weight: 400; }
+.rail-chev {
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 26px;
+  height: 28px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.rail-part.open > .rail-part-row .rail-chev { transform: rotate(90deg); }
+.rail-part-progress {
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 8px 2px;
+  opacity: 0;
+}
+.rail-part.on .rail-part-progress { opacity: 1; }
+.rail-part-progress b {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+}
+.rail-part.on > .rail-part-row .rail-part-link { color: var(--accent); }
+.rail-sections {
+  list-style: none;
+  display: none;
+  margin: 2px 0 8px 20px;
+  padding: 0;
+  border-left: 1px solid var(--border);
+}
+.rail-part.open > .rail-sections { display: block; }
+.rail-sections a {
+  position: relative;
+  display: block;
+  padding: 4px 8px 4px 14px;
+  line-height: 1.35;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: none;
+  border-radius: 0 6px 6px 0;
+}
+.rail-sections a::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: -4px;
+  top: 0.8em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+}
+.rail-sections a.read::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  opacity: 0.5;
+}
+.rail-sections a:hover { background: var(--bg-elevated); color: var(--text); }
+.rail-sections a.on {
+  color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+.rail-sections a.on::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  opacity: 1;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+/* light theme: rail dots need the light bg for the hollow ring */
+body.theme-light .rail-sections a::before { background: var(--bg); }
+/* Sheet variant: no part-progress rails, tighter spacing */
+.reading-sheet .rail-part-progress { display: none; }
+
+/* --- WIDE-SCREEN OVERRIDE (≥1220px): the 3-zone composition.
+   Lives AFTER the base rules above on purpose — .toc-rail's base
+   display:none and this block have equal specificity, so order decides. */
+@media (min-width: 1220px) {
+  body { max-width: none; padding-left: 0; padding-right: 0; }
+  .layout-grid {
+    grid-template-columns: 250px minmax(0, var(--max-width)) 56px;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+    /* iter-194: the composition is centred in the viewport. Before it hugged the
+       left padding edge, so at 1920px the left gutter was 36px and the right one
+       783px (text 276px left of centre). The 1100px of tracks still fit the
+       1147px available at the 1220px breakpoint, so this cannot overflow. */
+    justify-content: center;
+  }
+  /* Explicit placement: the rail may leave the flow (📑), the text must not move. */
+  #content { grid-column: 2; }
+  .tool-dock { grid-column: 3; }
+  .toc-rail { display: block; }
+  .reading-bar { display: none !important; }
+  /* 📑 rail toggle: the rail leaves the flow, the three tracks stay put */
+  body.rail-hidden .toc-rail { display: none; }
+}
+
+/* Theme icon rules — obsolete sun/moon pair removed (iter-193, single ◐ glyph) */
+
+/* Print: rail/dock/bar never print */
+@media print {
+  .toc-rail, .tool-dock, .reading-bar { display: none !important; }
 }
 
 /* === PANEL SYSTEM === */
@@ -880,11 +1203,6 @@ body.theme-light .vs-mini-map { background: #ffffff; border-color: #e5e7eb; }
   right: max(1rem, calc((100vw - 1000px) / 2 - 3.5rem));
 }
 
-/* In wide mode, content is ~1100px — recalculate to keep FABs outside */
-body.content-wide .fab-group {
-  right: max(1rem, calc((100vw - 1100px) / 2 - 3.5rem));
-}
-
 .fab-btn {
   width: 44px;
   height: 44px;
@@ -907,12 +1225,8 @@ body.content-wide .fab-group {
   transform: scale(1.1);
 }
 
-/* Theme icons — dark (moon) default, light (sun) */
-body:not(.theme-light) .theme-icon-light { display: none; }
-body:not(.theme-light) .theme-icon-oled { display: inline !important; }
-body.theme-light .theme-icon-oled { display: none; }
-body.theme-light .theme-icon-light { display: inline !important; }
-body.theme-light .theme-icon-light[hidden] { display: inline !important; }
+/* Theme icons — dark (moon) default, light (sun) [retired iter-193: single ◐ glyph cycles three themes] */
+body.theme-dark, body.theme-light { /* no-op anchor: keeps selector count honest */ }
 
 /* === INTERACTIVE DETAILS === */
 details.interactive {
@@ -1009,55 +1323,9 @@ body.theme-light .load-error strong { color: #dc2626; }
 .fab-group { right: 1rem; bottom: 1rem; }
 }
 
-/* === CONTENT WIDTH TOGGLE === */
-body.content-wide {
-  --max-width: min(1100px, 95ch);
-}
-
-body.content-wide .table-wrap,
-body.content-wide pre {
-  max-width: calc(100vw - 4rem);
-}
-
-/* === GLOSSARY SIDE TAB === */
-.glossary-tab {
-  position: fixed;
-  right: 0;
-  top: 40%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  padding: 0.8em 0.35em;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-right: none;
-  border-radius: 6px 0 0 6px;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  z-index: var(--z-glossary-tab);
-  transition: all var(--transition-fast);
-  letter-spacing: 0.05em;
-  user-select: none;
-}
-
-.glossary-tab:hover {
-  background: var(--accent-soft);
-  color: var(--accent);
-  padding-right: 0.5em;
-}
-
-.glossary-tab:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
-}
-
-@media (max-width: 768px) {
-.glossary-tab {
-    display: none;  /* Hidden on mobile - accessible via FAB button */
-  }
-}
+/* === GLOSSARY SIDE TAB — RETIRED (iter-193, DEC-35): the vertical edge tab
+   duplicated the dock 📖 button and added a third floating element. The
+   glossary opens from the dock; the styles are removed with the markup. */
 
 /* === PANEL TEXTAREA === */
 .panel-textarea {
@@ -2979,7 +3247,9 @@ table[data-vh-model="API"] tbody td:nth-child(4) {
 @media print {
 /* Hide fixed/interactive elements */
 .fab-group,
-.glossary-tab,
+.tool-dock,
+.toc-rail,
+.reading-bar,
 .panel,
 .loading-overlay,
 .progress-bar,
@@ -5625,64 +5895,6 @@ pre, table { page-break-inside: auto; }
    Интеграция визуальной системы в shell
    ============================================ */
 
-/* === VS MINI-MAP (глобальная навигация) === */
-.vs-mini-map {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em 1em;
-  padding: 0.5em 1em;
-  background: var(--vs-bg-surface, var(--bg-surface));
-  border: 1px solid var(--vs-border, var(--border));
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 2em;
-  align-items: center;
-}
-.vs-mini-map__section {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-}
-.vs-mini-map__section-label {
-  font-weight: 500;
-  color: var(--text-secondary, var(--text-muted));
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-right: 4px;
-}
-.vs-mini-map__el {
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: color 0.15s, background 0.15s;
-}
-.vs-mini-map__el:hover,
-.vs-mini-map__el:focus-visible {
-  color: var(--text-secondary, var(--text-muted));
-  background: var(--vs-bg-elevated, var(--bg-elevated));
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-.vs-mini-map__el--active {
-  color: var(--accent-cyan, var(--accent));
-  background: rgba(60,200,255,0.1);
-  position: relative;
-}
-.vs-mini-map__el--active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent-cyan, var(--accent));
-}
-
 /* === VS CONTAINER === */
 .vs-embed {
   margin: 2em 0;
@@ -5844,8 +6056,4 @@ body.theme-light .vs-panel {
 }
 body.theme-light .vs-element-title {
   color: #1a1d24;
-}
-body.theme-light .vs-mini-map {
-  background: #ffffff;
-  border-color: #e5e7eb;
 }

@@ -4,6 +4,19 @@
 > Full history is in `git log`.
 > Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [9.2.6] — 2026-10-27
+
+### iter 194 — reading-layout corrections: **the wide composition is centred, two dead controls are gone (the E01–E18 mini-map nav and the ↔ width toggle), and soft dark is the default theme.**
+
+- **Centring (owner: «весь текст смещён влево, тогда как справа пустота»).** The ≥1220px `.layout-grid` gained `justify-content: center`: measured before 36px left / 783px right gutter at 1920px (text 276px left of centre), after equal gutters at 1280/1440/1920/2560 (90/90 · 170/170 · 410/410 · 730/730) with the 72ch measure and 0 horizontal scroll untouched. `#content { grid-column: 2 }` + `.tool-dock { grid-column: 3 }` pin the zones and the `body.rail-hidden` two-column re-template is deleted — hiding the rail with 📑 no longer moves the text (708–1406px @1920 before and after).
+- **Retired: the E01–E18 `.vs-mini-map` nav.** It was injected on every page load by `interactions/vs-mini-map.js`, duplicated the reading rail, and `VsMiniMap.setActive` had no caller (the scrollspy never highlighted it). Script deleted, script tag + init call + ~60 lines of `.vs-mini-map*` CSS removed; `interactions/` 5 → 4 scripts.
+- **Retired: the ↔ `#fab-width` toggle — not fixed.** `body.content-wide` restated `--max-width` byte-identically and a child cannot outgrow its grid track, so the button only flipped `aria-pressed`; `.table-wrap` already scrolls and `pre` already wraps, so nothing was clipped without it. Dock 6 → 5 buttons; handler, CSS and the `content-width` storage key removed.
+- **Default theme = soft dark.** `<body class="theme-dark">` in the shell markup (first paint `#0f1218` — no OLED flash) and `initTheme()` defaults to `'dark'` instead of `prefers-color-scheme`; the closed three-state cycle (dark → light → oled → dark) and a stored preference are unchanged.
+- **Gates.** `tests/test-shell-layout.mjs` 11 → 15 invariants; `tools/verify-reading-rail.mjs` 12 → 15 browser proofs — including the repair of the composition check that ended in `Math.abs(...) > -1` (always true, which is why the 783px dead gutter shipped green) plus new checks for the default-theme boot, the 5-button dock and the retired nav.
+- **Verification:** build 62 sections · hash `2b6ac682` → `517d2245` · tests **91/91** · validate 12 gates + **132 redirects** · validate:master **12/12, 0 warnings** · qa:csp PASS · browser 15/15, 0 page errors · english **1** / syntax **224** · lint 0.
+
+### iter 193 — the reading layout: **persistent TOC rail | 72ch text | tool dock ≥1220px, a sticky «Часть › Раздел» bar below, a three-theme ◐ cycle and reading-graded contrast** (DEC-35; shell infrastructure only, zero content edits). Full detail: `worklog.md` iter-193 + DEC-35.
+
 ## [9.2.6] — 2026-10-25
 
 ### iter 190 — v4-9 + v4-10 + v4 FINAL: **chapters 9–10 and appendices A/B closed the whole v4 track — the guide now carries 10 internal links (270 at track start) and 62 sections (68 at track start).**

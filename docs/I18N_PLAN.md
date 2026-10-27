@@ -158,21 +158,20 @@ and text nodes:
 | `src/shell/lib/widget-utils.js` | **16** (all data-derived) | 5 `TRAIT_NAMES` + 10 pole descriptions + 1 validation message |
 | `src/shell/widgets/persona-voice-hierarchy.js` | **13** (7 canon-derived: row label + 6 §3.2 notes) | chrome + canon prose |
 | `src/shell/interactions/vs-e10-enneagram.js` | **5** | `«Тип N — <name>»` (names come from `enneagram.json`) |
-| `src/shell/interactions/vs-mini-map.js` | **5** | visual-system group labels + aria |
 | `vs-e13-diagnostic.js`, `vs-e16-author-note.js`, `vs-scroll-observer.js`, `js-flag.js` | **0** | no user-facing Russian |
-| **Total** | **179 occurrences · 159 unique · 7,478 chars** | ≈ **1,050 words** of chrome |
+| **Total** | **174 occurrences · 154 unique · ≈7,399 chars** | ≈ **1,040 words** of chrome (was 179 / 159 / 7,478 — the retired `vs-mini-map` contributed 5 strings / 79 chars, iter-194) |
 
 Split that matters for the plan:
 
-- **136 pure chrome strings** → the dictionary (`src/shell/i18n/<lang>.json`).
+- **131 pure chrome strings** → the dictionary (`src/shell/i18n/<lang>.json`).
 - **23 canon/data-derived strings** → move to the localized data layer (`data/<lang>/ocean.json`
   etc.), *not* the dictionary — otherwise the widget would carry a second copy of canon values
   (fence: one canonical presentation).
 - Plus **618 data-layer values** (§2.2) and the generated no-JS glossary heading
   (`scripts/build-unified.mjs:174` hardcodes `Глоссарий`) and `src/404.html` (Russian only).
 
-**Answer to "how many UI strings": 159 unique / 179 occurrences / 7,478 characters (≈1,050 words),
-of which 136 are pure chrome.** That is one translator-day, not one translator-week — the
+**Answer to "how many UI strings": 154 unique / 174 occurrences / ≈7,399 characters (≈1,040 words),
+of which 131 are pure chrome** (the retired `vs-mini-map` took 5 chrome strings / 79 chars with it, iter-194). That is one translator-day, not one translator-week — the
 "chrome" bucket is genuinely small; the cost of the programme is entirely in content.
 
 ---
@@ -653,8 +652,8 @@ node -e "const fs=require('fs');for(const f of fs.readdirSync('src/master').filt
 #    src/shell/index.html 34 (26 attrs + 8 text nodes) · lazy-loader.js 35 ·
 #    widgets/mbti-composer.js 42 · widgets/ocean-insight.js 29 · lib/widget-utils.js 16 ·
 #    widgets/persona-voice-hierarchy.js 13 · interactions/vs-e10-enneagram.js 5 ·
-#    interactions/vs-mini-map.js 5 · others 0
-#    → 179 occurrences · 159 unique · 7,478 chars of unique text
+#    others 0   (iter-194: interactions/vs-mini-map.js 5 retired with the nav)
+#    → 174 occurrences · 154 unique · ≈7,399 chars of unique text
 #    (script: state-machine comment stripper + literal regex; same method as the table in §3)
 
 # 4. Data layer

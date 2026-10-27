@@ -270,7 +270,9 @@ def main():
 
     # ================= REFERENCE =================
     # R1 — entry: runtime panel + no-JS page + the generated data layer
-    for marker in ("id=\"glossary-tab\"", "id=\"glossary-panel\"", "id=\"glossary-content\""):
+    # iter-193 (DEC-33): the glossary side tab is retired; the dock's 📖
+    # button (id="fab-glossary") is the single entry point to the same panel.
+    for marker in ("id=\"fab-glossary\"", "id=\"glossary-panel\"", "id=\"glossary-content\""):
         if marker not in shell_index:
             err(f"REFERENCE R1: shell glossary surface missing: {marker}")
     for fn in ("loadGlossaryContent", "glossary-link"):

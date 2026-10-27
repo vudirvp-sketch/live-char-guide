@@ -764,6 +764,7 @@
         initInteractiveElements();
         generateTOC();
         initActivePartHighlighting();
+        buildRailTOC();
         handleAnchor();
       }
       console.log('[LazyLoader] Part recovered on retry:', file);
@@ -801,6 +802,7 @@
         initInteractiveElements();
         generateTOC();
         initActivePartHighlighting();
+        buildRailTOC();
         handleAnchor();
         loadGlossaryContent();
         handleLegacyAnchor();
@@ -868,6 +870,7 @@
       initInteractiveElements();
       generateTOC();
       initActivePartHighlighting();
+      buildRailTOC();
       handleAnchor();
       loadGlossaryContent();
       handleLegacyAnchor();
@@ -1161,6 +1164,282 @@
   }
 
   // ============================================================================
+  // READING RAIL (iter-193): persistent TOC + scrollspy + reading bar
+  // ============================================================================
+
+  // Ordered nav model shared by the rail and the reading-bar sheet: one entry
+  // per rendered section that carries data-toc-nav, in DOM order, with its
+  // Part grouping (part key + authored title). Mirrors generateTOC()'s
+  // grouping logic (same regexes) without re-deriving from the DOM twice.
+  function collectNavModel() {
+    const parts = [];          // [{ key, title, sections: [{id, label, el}] }]
+    const byKey = new Map();
+    const sections = $$('section[data-section]');
+    sections.forEach(section => {
+      if (section.hasAttribute('data-toc-exclude') || section.id === 'glossary') return;
+      if (!section.hasAttribute('data-toc-nav')) return;
+      const sectionId = section.getAttribute('data-section') || section.id;
+
+      let partKey;
+      const partMatch = sectionId.match(/^p(\d+[ab]?)_/);
+      if (partMatch) {
+        partKey = partMatch[1];
+      } else if (sectionId.startsWith('appendix_')) {
+        partKey = 'appendices';
+      } else {
+        return; // same filter as generateTOC()
+      }
+
+      let group = byKey.get(partKey);
+      if (!group) {
+        group = { key: partKey, title: null, firstSection: section, sections: [] };
+        byKey.set(partKey, group);
+        parts.push(group);
+      }
+      // Appendix group label — the same «Приложения» convention as generateTOC()
+      if (partKey === 'appendices' && !group.title) group.title = 'Приложения';
+      // Part title: data-part-title on the Part's first section (partTitleOf rule)
+      if (!group.title) {
+        const authored = (section.getAttribute('data-part-title') || '').trim();
+        if (authored) group.title = authored;
+      }
+
+      const ownHeading = section.querySelector('h2, h3');
+      let label;
+      if (ownHeading) {
+        label = ownHeading.textContent.replace(/^(?:\u00a7\s*)?\d+(?:\.\d+)+[.:]?\s*/, '').trim();
+      } else {
+        label = sectionId.replace(/^p\d+[ab]?_/, '').replace(/_/g, ' ');
+      }
+      group.sections.push({ id: section.id, label, el: section });
+    });
+    // Part title fallback: data-part-title on the first section of the Part
+    // (partTitleOf rule); appendices already carry their label above.
+    parts.forEach(g => { if (!g.title) g.title = partTitleOf(g.firstSection, g.key) || ('Part ' + g.key.toUpperCase()); });
+    return parts;
+  }
+
+  function railTreeHtml(parts, opts) {
+    const { sheet } = opts || {};
+    let html = '<ul class="rail-list">';
+    parts.forEach(part => {
+      const partId = part.key === 'appendices' ? 'appendices' : part.key;
+      html += `<li class="rail-part" data-rail-part="${partId}">`;
+      html += `<div class="rail-part-row"><a class="rail-part-link" href="#${part.firstSection.id}">` +
+              `<i class="rail-part-num">${partId === 'appendices' ? 'A–E' : partId}</i>` +
+              `<span>${part.title}</span></a>` +
+              `<button class="rail-chev" type="button" aria-label="Показать разделы части «${part.title}»">▸</button></div>`;
+      if (!sheet) html += `<div class="rail-part-progress" aria-hidden="true"><b></b></div>`;
+      html += '<ul class="rail-sections">';
+      part.sections.forEach(s => {
+        html += `<li><a href="#${s.id}" data-rail-target="${s.id}">${s.label}</a></li>`;
+      });
+      html += '</ul></li>';
+    });
+    html += '</ul>';
+    return html;
+  }
+
+  let railState = null; // { parts, flat, current, openParts:Set, built }
+
+  function buildRailTOC() {
+    const rail = $('#toc-rail');
+    const sheet = $('#toc-rail-sheet');
+    const parts = collectNavModel();
+    if (!parts.length) return;
+
+    const flat = [];
+    parts.forEach(p => p.sections.forEach(s => flat.push({ part: p, ...s })));
+
+    if (rail) {
+      rail.innerHTML =
+        '<div class="toc-rail-head"><span>Содержание</span><span class="toc-rail-pct">0%</span></div>' +
+        '<div class="toc-rail-progress" aria-hidden="true"><b></b></div>' +
+        railTreeHtml(parts, { sheet: false });
+    }
+    if (sheet) {
+      sheet.innerHTML = railTreeHtml(parts, { sheet: true });
+    }
+
+    railState = {
+      parts,
+      flat,
+      current: -1,
+      openParts: new Set(),     // user-toggled parts (override the auto-current)
+      manualOpen: new Set(),    // parts the reader explicitly expanded
+      built: true
+    };
+
+    // Chevron toggles: track manual open/close state per part
+    $$('.rail-chev').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const li = btn.closest('.rail-part');
+        if (!li || !railState) return;
+        const key = li.dataset.railPart;
+        if (railState.manualOpen.has(key)) railState.manualOpen.delete(key);
+        else railState.manualOpen.add(key);
+        li.classList.toggle('open', railState.manualOpen.has(key));
+      });
+    });
+
+    updateRailFromScroll();
+  }
+
+  // Scrollspy: highlight the section occupying the top third of the viewport.
+  // Same «line» heuristic as the demo: 0.3 * innerHeight; bottom-of-page pins
+  // the last section. Updates: .on for the active section link, .read for the
+  // sections before it, the current part's expansion + progress bar, the
+  // rail's global % read, and the reading-bar crumb/fill.
+  function updateRailFromScroll() {
+    if (!railState || !railState.built) return;
+    const { flat, parts } = railState;
+
+    const line = window.innerHeight * 0.3;
+    let k = 0;
+    for (let i = 0; i < flat.length; i++) {
+      const el = flat[i].el;
+      if (!el) continue;
+      if (el.getBoundingClientRect().top <= line) k = i;
+    }
+    const docEl = document.documentElement;
+    if (window.scrollY + window.innerHeight >= docEl.scrollHeight - 4) k = flat.length - 1;
+
+    if (k !== railState.current) {
+      railState.current = k;
+      const cur = flat[k];
+      const curPartKey = cur ? cur.part.key : null;
+
+      // section links: .on for current, .read for everything before it
+      $$('[data-rail-target]').forEach(a => {
+        const idx = flat.findIndex(s => s.id === a.dataset.railTarget);
+        if (idx < 0) return;
+        a.classList.toggle('on', idx === k);
+        a.classList.toggle('read', idx < k);
+      });
+
+      // part rows: .on for the active part; expand the active part unless the
+      // reader manually closed it; manually-opened parts stay open
+      parts.forEach(p => {
+        const li = document.querySelector(`.rail-part[data-rail-part="${p.key}"]`);
+        if (!li) return;
+        const isActive = p.key === curPartKey;
+        li.classList.toggle('on', isActive);
+        const open = isActive || railState.manualOpen.has(p.key);
+        li.classList.toggle('open', open);
+      });
+
+      // reading-bar crumb: «Part › Section»
+      if (cur) {
+        const crumb = $('#reading-bar-crumb');
+        const partLabel = cur.part.key === 'appendices' ? 'Приложения' : 'Часть ' + cur.part.key;
+        if (crumb) crumb.innerHTML = `${partLabel} › <b>${cur.label}</b>`;
+      }
+    }
+
+    // global % read + bar fill (cheap, runs on scroll)
+    const scrollable = Math.max(1, docEl.scrollHeight - window.innerHeight);
+    const g = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    const pct = Math.round(g * 100);
+
+    document.querySelectorAll('.toc-rail-pct').forEach(el => { el.textContent = pct + '%'; });
+    document.querySelectorAll('.toc-rail-progress b').forEach(el => { el.style.width = (g * 100) + '%'; });
+
+    const fill = $('#reading-bar-fill');
+    if (fill) {
+      fill.style.setProperty('--reading-progress', pct + '%');
+      fill.setAttribute('aria-valuenow', String(pct));
+    }
+    const barPct = $('#reading-bar-pct');
+    if (barPct) barPct.textContent = pct + '%';
+
+    // part progress inside the rail: fraction of the active part scrolled
+    const cur = flat[k];
+    if (cur && cur.el) {
+      const r = cur.el.getBoundingClientRect();
+      const top = document.querySelector(`.rail-part[data-rail-part="${cur.part.key}"] .rail-part-progress b`);
+      if (top) {
+        const pr = cur.el.getBoundingClientRect();
+        const partTop = pr.top;
+        const partHeight = Math.max(1, pr.height);
+        const pp = Math.min(1, Math.max(0, (line - partTop) / partHeight));
+        top.style.width = (pp * 100) + '%';
+      }
+      void r;
+    }
+  }
+
+  function initReadingRail() {
+    buildRailTOC();
+
+    // Scrollspy wiring: rAF-throttled, passive, also on resize
+    let railTick = false;
+    const requestRailUpdate = () => {
+      if (!railTick) {
+        railTick = true;
+        window.requestAnimationFrame(() => {
+          railTick = false;
+          updateRailFromScroll();
+        });
+      }
+    };
+    window.addEventListener('scroll', requestRailUpdate, { passive: true });
+    window.addEventListener('resize', requestRailUpdate);
+
+    // Reading bar visibility: ≥1220px the rail covers navigation — the bar
+    // stays hidden. Below that, unhide it.
+    const bar = $('#reading-bar');
+    const mql = window.matchMedia('(min-width: 1220px)');
+    const applyBarVisibility = () => {
+      if (!bar) return;
+      bar.hidden = mql.matches;
+      if (bar.hidden) bar.classList.remove('open');
+    };
+    applyBarVisibility();
+    mql.addEventListener('change', applyBarVisibility);
+
+    // ☰ sheet toggle
+    const barBtn = $('#reading-bar-btn');
+    if (barBtn && bar) {
+      barBtn.addEventListener('click', () => {
+        const open = bar.classList.toggle('open');
+        barBtn.setAttribute('aria-expanded', String(open));
+      });
+    }
+
+    // Rail links: smooth scroll + close the sheet; manualOpen is preserved so
+    // the tree does not snap shut on navigation
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-rail-target], a.rail-part-link');
+      if (!a) return;
+      e.preventDefault();
+      const id = a.dataset.railTarget || (a.getAttribute('href') || '').slice(1);
+      const target = id && document.getElementById(id);
+      if (target) {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }
+      const sBar = $('#reading-bar');
+      if (sBar && sBar.classList.contains('open')) {
+        sBar.classList.remove('open');
+        $('#reading-bar-btn')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // rail toggle (📑): hide/show the left rail on wide screens
+    const fabTocRail = $('#fab-toc');
+    if (fabTocRail) {
+      fabTocRail.title = 'Содержание';
+      const applyRailPref = () => {
+        const hidden = storage.get('rail-hidden') === true;
+        document.body.classList.toggle('rail-hidden', hidden);
+      };
+      applyRailPref();
+    }
+  }
+
+  // ============================================================================
   // ACTIVE PART HIGHLIGHTING (FIX-07, P3)
   // ============================================================================
 
@@ -1286,9 +1565,7 @@
 
     // === VISUAL SYSTEM WIDGETS ===
     // Инициализация VS-виджетов после загрузки контента
-    if (window.VsMiniMap && typeof window.VsMiniMap.init === 'function') {
-      window.VsMiniMap.init();
-    }
+    // (iter-194: the E01–E18 mini-map nav is retired — the reading rail owns TOC)
 
     // VS Scroll-анимации через IntersectionObserver
     initVsScrollAnimations();
@@ -1348,59 +1625,35 @@
     const toggle = $('#fab-theme');
     if (!toggle) return;
 
-    const iconMoon = toggle.querySelector('.theme-icon-oled');
-    const iconSun  = toggle.querySelector('.theme-icon-light');
-
+    // DEC-35: three-state cycle — soft dark (body.theme-dark, the default since
+    // iter-194) → light (body.theme-light) → OLED (no class) → back. Legacy
+    // stored values map onto the cycle: 'oled' stays OLED. A visitor with no
+    // stored preference starts in soft dark — the body already carries the class
+    // in the markup, so the first paint needs no JS.
     function applyTheme(theme) {
-      // Default (no class) = OLED/dark — :root values apply automatically.
-      // Only theme-light needs explicit class.
+      document.body.classList.remove('theme-dark', 'theme-light');
       if (theme === 'light') {
         document.body.classList.add('theme-light');
-        if (iconSun)  iconSun.hidden = false;
-        if (iconMoon) iconMoon.hidden = true;
-      } else {
-        document.body.classList.remove('theme-light');
-        if (iconMoon) iconMoon.hidden = false;
-        if (iconSun)  iconSun.hidden = true;
-      }
+      } else if (theme === 'dark') {
+        document.body.classList.add('theme-dark');
+      } // 'oled' → no class (the :root default)
       toggle.setAttribute('data-theme', theme);
     }
 
-    // Backward-compatible: 'oled' stored value treated as default (no class)
     let stored = localStorage.getItem('theme');
-    if (!stored || (stored !== 'light' && stored !== 'oled')) {
-      stored = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'oled';
+    if (!['oled', 'dark', 'light'].includes(stored)) {
+      // iter-194: soft dark is the default (the soft-dark palette is the
+      // recommended long-reading surface); OLED and light stay one click away.
+      stored = 'dark';
     }
-    
+
     applyTheme(stored);
 
     toggle.addEventListener('click', () => {
       const current = toggle.getAttribute('data-theme') || 'oled';
-      const next = current === 'oled' ? 'light' : 'oled';
+      const next = { oled: 'dark', dark: 'light', light: 'oled' }[current] || 'oled';
       applyTheme(next);
       localStorage.setItem('theme', next);
-    });
-  }
-
-  // ============================================================================
-  // WIDTH TOGGLE
-  // ============================================================================
-
-  function initWidthToggle() {
-    const btn = $('#fab-width');
-    if (!btn) return;
-
-    // Load saved preference
-    const saved = localStorage.getItem('content-width');
-    if (saved === 'wide') {
-      document.body.classList.add('content-wide');
-      btn.setAttribute('aria-pressed', 'true');
-    }
-
-    btn.addEventListener('click', () => {
-      const isWide = document.body.classList.toggle('content-wide');
-      btn.setAttribute('aria-pressed', isWide ? 'true' : 'false');
-      localStorage.setItem('content-width', isWide ? 'wide' : 'normal');
     });
   }
 
@@ -1422,7 +1675,6 @@
   // ============================================================================
 
   function initGlossary() {
-    const glossaryTab = $('#glossary-tab');
     const fabGlossary = $('#fab-glossary');
     const glossaryPanel = $('#glossary-panel');
 
@@ -1436,21 +1688,8 @@
       });
     }
 
-    // Glossary tab click
-    glossaryTab?.addEventListener('click', () => {
-      const panel = panelInstances['glossary-panel'];
-      if (panel) {
-        panel.toggle();
-        panel.focus();
-      }
-    });
-
-    glossaryTab?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        glossaryTab.click();
-      }
-    });
+    // iter-193: the vertical side tab is retired (DEC-35) — the dock 📖 button
+    // is the single glossary entry point.
 
     // FAB glossary click
     fabGlossary?.addEventListener('click', () => {
@@ -1739,11 +1978,21 @@
       });
     }
 
+    // iter-193: 📑 is dual-mode (DEC-35). ≥1220px the persistent rail IS the
+    // TOC, so 📑 toggles the rail's visibility (body.rail-hidden). Below
+    // 1220px the rail is display:none, so 📑 opens the classic floating TOC
+    // panel. The click handler decides by the same media query the CSS uses.
     fabToc?.addEventListener('click', () => {
-      const panel = panelInstances['toc-panel'];
-      if (panel) {
-        panel.toggle();
-        panel.focus();
+      const wide = window.matchMedia('(min-width: 1220px)').matches;
+      if (wide) {
+        const hidden = !(document.body.classList.toggle('rail-hidden'));
+        storage.set('rail-hidden', hidden);
+      } else {
+        const panel = panelInstances['toc-panel'];
+        if (panel) {
+          panel.toggle();
+          panel.focus();
+        }
       }
     });
 
@@ -1787,6 +2036,13 @@
   function showFABs() {
     const fabs = $('#fab-group');
     if (fabs) fabs.classList.remove('hidden');
+    // iter-193: dock the FAB buttons into the grid's tool column (DEC-35).
+    // The buttons keep their ids/handlers; the fab-group itself stays hidden
+    // (it was only ever a positioning wrapper — the dock owns layout now).
+    const dock = $('#tool-dock');
+    if (dock && fabs) {
+      [...fabs.children].forEach(btn => dock.appendChild(btn));
+    }
   }
 
   // ============================================================================
@@ -1824,10 +2080,10 @@
     handleLegacyAnchor();
 
     initTheme();
-    initWidthToggle();
     initScrollTop();
     initPanels();
     initGlossary();
+    initReadingRail();
     initHashChangeListener();
 
     // Keyboard: close panels on Escape
