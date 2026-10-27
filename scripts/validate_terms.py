@@ -103,7 +103,10 @@ def validate_file(file_path: Path, glossary: Dict) -> List[Dict]:
         canonical_matches = list(canonical_pattern.finditer(content))
         
         for prohibited_term in prohibited:
-            pattern = re.compile(re.escape(prohibited_term), re.IGNORECASE)
+            # KI#90 (fixed iter 200): match on WORD BOUNDARIES. Without them a variant
+            # could match inside a longer word; with only IGNORECASE an ordinary prose
+            # word («хочет» as a verb, not the WANT label) reddened CI.
+            pattern = re.compile(r"(?<!\w)" + re.escape(prohibited_term) + r"(?!\w)", re.IGNORECASE)
             matches = list(pattern.finditer(content))
             
             for match in matches:

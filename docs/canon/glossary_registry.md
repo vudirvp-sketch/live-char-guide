@@ -216,7 +216,7 @@ migration_status: v2 canonical term record (iter 133) — the SOLE glossary surf
 **Желание (WANT)** — осознанное желание персонажа — то, что он думает, что ему нужно. Внешняя цель, которую персонаж может сформулировать. WANT совместим с LIE: персонаж не видит противоречия между своим желанием и своей ложной установкой. Часто противоречит NEED, создавая нарративное напряжение.
 
 → `[ref: part_04.md §4.5 — Желание (WANT)]`
-→ `[meta: sources=C-26+T-54; lang=ru; home=p4_need; aliases=WANT, Want, Желание; deprecated=Хочет, ХОЧУ; prohibited=ХОЧУ, Хочет]`
+→ `[meta: sources=C-26+T-54; lang=ru; home=p4_need; aliases=WANT, Want, Желание; deprecated=Хочет, ХОЧУ; prohibited=ХОЧУ]`
 
 ### Заражение голоса (Voice Contamination)
 

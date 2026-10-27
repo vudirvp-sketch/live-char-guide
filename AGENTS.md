@@ -142,6 +142,7 @@ python3 scripts/audit_enneagram_parity.py     # MUST PASS (Enneagram §5.3 canon
 python3 scripts/audit_diagnostics_parity.py   # MUST PASS (Diagnostics §9.3 canonical ↔ E13 visual presentation parity — DEC-20/mig-3; § numbering iter 173)
 python3 scripts/audit_voice_parity.py        # MUST PASS (Voice §3.2 canonical ↔ E07 ↔ widget constants parity — DEC-21/voice-cluster)
 python3 scripts/audit_sampling_parity.py     # MUST PASS (Sampling Appendix E «Параметры генерации» canonical ↔ E17 ↔ E12/§9.x hints — DEC-22 + DEC-27 owner move, iter 172)
+python3 scripts/audit_ocean_parity.py       # MUST PASS (OCEAN §5.1 canonical thresholds 30/70 + ceilings 2/3/4/5 ↔ data/ocean.json ↔ widget literals — KI#92 closed iter 200)
 ```
 
 > The aggregate `pnpm run qa` exits 1 by design (english/syntax baselines). Judge gates

@@ -721,6 +721,61 @@ async function checkWidgetContainers(allSections) {
 }
 
 // ============================================================================
+// CHECK 13: HTML tag balance in every master file (KI#87)
+// ============================================================================
+// Trace: iter 184 found 7 stray `</div>` + 4 stray `</p>` left by span-replacements
+// across part_01/part_04/part_07a — and the whole battery stayed green, because no
+// check looked at tag counts. A spliced edit is exactly the failure mode we ship by
+// accident, so this gate counts the container tags per file and fails on any delta.
+// Void elements (`<br>`, `<img>`, …) and self-closing tags are excluded; SVG-only
+// tags are excluded too (they legitimately self-close in ways a counter can't judge).
+const CONTAINER_TAGS = [
+  'div', 'section', 'p', 'article', 'aside', 'nav', 'main', 'header', 'footer',
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'caption', 'colgroup',
+  'ul', 'ol', 'li', 'dl', 'dt', 'dd',
+  'details', 'summary', 'pre', 'code', 'blockquote', 'figure', 'figcaption',
+  'span', 'a', 'strong', 'em', 'b', 'i', 'small', 'mark', 'abbr', 'cite', 'q',
+  'sub', 'sup', 'u', 'var', 'kbd', 'samp', 'time', 'output',
+  'button', 'label', 'form', 'fieldset', 'legend', 'select', 'option', 'optgroup',
+];
+
+async function checkTagBalance(allContent) {
+  console.log('\n📋 Check 13: HTML tag balance in every master file (KI#87)...');
+
+  let errorCount = 0;
+  const tagAlternation = CONTAINER_TAGS.join('|');
+
+  for (const { file, content } of allContent) {
+    const stripped = content.replace(/<!--[\s\S]*?-->/g, '');
+    const counts = new Map();
+    const tagRe = new RegExp(`<(/?)(${tagAlternation})\\b([^>]*)>`, 'gi');
+    let match;
+
+    while ((match = tagRe.exec(stripped)) !== null) {
+      const isClose = match[1] === '/';
+      const tag = match[2].toLowerCase();
+      const attrs = match[3] || '';
+      if (!isClose && /\/\s*$/.test(attrs)) continue; // self-closing
+      counts.set(tag, (counts.get(tag) || 0) + (isClose ? -1 : 1));
+    }
+
+    const unbalanced = [...counts.entries()].filter(([, delta]) => delta !== 0).sort();
+    for (const [tag, delta] of unbalanced) {
+      errors.push(`${file}: unbalanced <${tag}> (${delta > 0 ? '+' : ''}${delta})`);
+      errorCount++;
+    }
+    if (unbalanced.length === 0) log('PASS', `${file}: every container tag is balanced`);
+  }
+
+  if (errorCount === 0) {
+    log('INFO', 'No unbalanced container tags in any master file');
+  }
+
+  return errorCount;
+}
+
+// ============================================================================
 // MAIN
 // ============================================================================
 
@@ -748,6 +803,7 @@ async function main() {
   totalErrors += await checkIMP28(allSections, sectionIds);
   totalErrors += await checkCalloutEmoji(allContent);
   totalErrors += await checkWidgetContainers(allSections);
+  totalErrors += await checkTagBalance(allContent);
 
   // Summary
   console.log('\n' + '='.repeat(60));
@@ -768,7 +824,7 @@ async function main() {
   }
 
   if (errors.length === 0) {
-    console.log('\n✅ Unified validation PASSED (all 12 checks)');
+    console.log('\n✅ Unified validation PASSED (all 13 checks)');
   } else {
     console.log(`\n❌ Unified validation FAILED with ${errors.length} error(s)`);
     process.exit(1);

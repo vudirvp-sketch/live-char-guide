@@ -443,7 +443,11 @@ CANON_H3_HEADING_RE = re.compile(r"^###\s+.+?$", re.MULTILINE)
 CANON_HORIZONTAL_RULE_RE = re.compile(r"^---+\s*$", re.MULTILINE)
 
 # Patterns for extracting paragraphs from master HTML.
-P_TAG_RE = re.compile(r"<p[^>]*>(.*?)</p>", re.IGNORECASE | re.DOTALL)
+# KI#79 (fixed iter 200): `<p[^>]*>` also matched `<pre>`, `<path>` and `<picture>` — a
+# paragraph match could open on a `<pre>` and run to the next literal `</p>`, absorbing
+# code blocks into one blob. `\b` after the tag name makes `<p>`/`<p class=…>` match and
+# `<pre…>` not (no word boundary between "p" and "r").
+P_TAG_RE = re.compile(r"<p\b[^>]*>(.*?)</p>", re.IGNORECASE | re.DOTALL)
 LI_TAG_RE = re.compile(r"<li[^>]*>(.*?)</li>", re.IGNORECASE | re.DOTALL)
 TD_TAG_RE = re.compile(r"<t[dh][^>]*>(.*?)</t[dh]>", re.IGNORECASE | re.DOTALL)
 

@@ -1,5 +1,7 @@
 # I18N_PLAN — Interface & content language switching (RU default + EN, N-language ready)
 
+> **Historical record — frozen at its commit.** Numbers, § numbers and paths below are a snapshot, not current state. Current values are computed by the build and the gates — see `AGENT_NAVIGATION.md` §11. Never align the guide or a gate to this document.
+
 > **Status:** PROPOSED (design only — no repository behaviour changes with this document).
 > **Date:** 2026-10-26
 > **Version context:** 9.2.6, iteration 190 (v4 restructure track closed).

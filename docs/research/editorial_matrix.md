@@ -1,5 +1,7 @@
 # Editorial Matrix — Live Character Guide
 
+> **Historical record — frozen at its commit.** Numbers, § numbers and paths below are a snapshot, not current state. Current values are computed by the build and the gates — see `AGENT_NAVIGATION.md` §11. Never align the guide or a gate to this document.
+
 > **Phases A + B: full guide coverage (Parts 0–10 + 4 appendices).** Block-level editorial audit per
 > `PLAN.md` row `ed-matrix` and `docs/research/editorial_research_en.md` §32 (matrix spec), §24
 > (repeat classification), §22 (functional-load test), §20 (useful-repetition whitelist).

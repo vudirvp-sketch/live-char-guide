@@ -1,5 +1,7 @@
 # Content Restructure Plan — Live Character Guide
 
+> **Historical record — frozen at its commit.** Numbers, § numbers and paths below are a snapshot, not current state. Current values are computed by the build and the gates — see `AGENT_NAVIGATION.md` §11. Never align the guide or a gate to this document.
+
 > **Version:** 1.0 (iter 6 — analytical/reconnaissance pass)
 > **Date:** 2026-06-23
 > **Author:** main agent (iter 6)

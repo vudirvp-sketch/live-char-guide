@@ -34,7 +34,7 @@
 ## 2. Build Pipeline
 
 ```
-docs/canon/glossary_registry.md  (canonical term record — 45 entries, iter 133+)
+docs/canon/glossary_registry.md  (canonical term record — 48 entries, iter 133+)
         ↓
 scripts/generate_glossary.mjs   →   data/glossary.json  (generated — NEVER hand-edit)
         ↓
@@ -277,7 +277,7 @@ Versions are synchronized in 4 places: `package.json`, `src/VERSION`, `data/char
 | `docs/terminology_dictionary.md` | On adding new terms. |
 | `docs/character_bible.md` | On changes to canonical characters. |
 | `docs/canon/_README.md` | On changes to Canon rules. |
-| `docs/canon/glossary_registry.md` | On glossary term changes — the v2 canonical term record (45 entries; `data/glossary.json` is generated from it, DEC-17/18). |
+| `docs/canon/glossary_registry.md` | On glossary term changes — the v2 canonical term record (48 entries = 45 migration-derived + 3 native, DEC-38; `data/glossary.json` is generated from it, DEC-17/18). |
 | `docs/canon/part_NN.md` | On creating/updating the Canonical Guide Spec for a Part. |
 | `docs/research/guide_analysis_consolidated.md` | Consolidated guide analysis (iter 73+). 12 sections: contradictions C1–C15, duplicates D1–D20, checklists, prioritized proposals P1/P2/P3. |
 | `docs/research/research_plan.md` | Verification and edit plan iter 74+ (Phases 1–5). |
@@ -353,6 +353,38 @@ One fact — one owner. Everyone else links; a copy is a link or a one-line summ
 
 Update rule: if a fact must appear in two documents, the second occurrence is a link.
 If ownership of a fact changes, update this table in the same iteration.
+
+---
+
+## 11. Authoritative vs Historical (read before trusting a number)
+
+Two kinds of documents live here, and mixing them up is how a guide starts lying about itself.
+
+**Authoritative — act on them.** True as of HEAD; a change here is a change to the thing.
+- `STATUS.md` (state, KIs, Next step) · `PLAN.md` (backlog) · `AGENTS.md` (operating law) · this file · `DECISIONS.md` (standing decisions)
+- `docs/canon/part_NN.md` — content source of truth · `docs/canon/glossary_registry.md` — the term record · `src/master/*.html` — derived HTML
+- `data/*.json` machine layers (`glossary.json` and `enneagram.json` are GENERATED — never hand-edit) · `parts/manifest.json` (built)
+- `docs/content_map.md`, `docs/components.md`, `docs/architecture.md` — maps of the current system
+
+**Historical — records, never facts to restore.** True at their commit; numbers frozen by definition.
+- `docs/RESTRUCTURE_V3_PLAN.md`, `docs/RESTRUCTURE_V4_PLAN.md` — closed tracks · `docs/CONTENT_RESTRUCTURE_PLAN.md` (iter 6)
+- `docs/research/**` — evidence at its date: `migration_map_v2.md` (§5.1 dispositions are RATIFIED, DEC-17/18; it extends only by an owner act — DEC-38), `editorial_matrix.md`, the owner-gate packages, the intakes
+- `docs/I18N_PLAN.md`, `docs/PROMOTION_PLAN.md`, `docs/PROMOTION_SEO.md`, `docs/promotion/**` — proposals measured against an older corpus
+- `worklog.md`, `CHANGELOG.md` (history by definition) · per-character bibles (narrative canon, dated)
+
+**The rule.** A count, a § number or a path in a historical document is a **measurement at a commit**, not an instruction. Never align the guide, a gate or a value to it — if the two disagree, `STATUS.md` and the code that generates the value win. Current values are computed, not remembered:
+
+| Value | Read it from |
+|---|---|
+| Parts / sections | `parts/manifest.json` (and `validate-master` prints both) |
+| Legacy redirects | `data/anchor-redirects.json` (`SHELL-REDIRECTS` gate) |
+| Glossary terms | `docs/canon/glossary_registry.md` → `data/glossary.json` (`audit_glossary_parity`) |
+| Budget values | §7A.12 (`audit_token_budget_parity`); nobody else prints totals |
+| OCEAN thresholds/ceilings | §5.1 (`audit_ocean_parity`) |
+| Enneagram values | §5.3 (`audit_enneagram_parity`) |
+| Sampling values | Appendix E (`audit_sampling_parity`) |
+| Version | `pnpm run version:check` (4 places) |
+| Difficulty/reader-path metadata | `python scripts/readerpath_audit_iter164.py` (prints measured counts) |
 
 ---
 

@@ -1,5 +1,7 @@
 # PROMOTION_PLAN — making the guide findable
 
+> **Historical record — frozen at its commit.** Numbers, § numbers and paths below are a snapshot, not current state. Current values are computed by the build and the gates — see `AGENT_NAVIGATION.md` §11. Never align the guide or a gate to this document.
+
 > Scope: repository presentation, search visibility, distribution, and the language-switcher decision.
 > This is a **roadmap + decision log**, not an implementation record. Detailed technical proposals live in:
 > [`PROMOTION_SEO.md`](./PROMOTION_SEO.md) (indexing, metadata, search engines) ·

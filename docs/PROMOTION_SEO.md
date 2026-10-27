@@ -1,5 +1,7 @@
 # PROMOTION_SEO — Practical Discoverability Plan
 
+> **Historical record — frozen at its commit.** Numbers, § numbers and paths below are a snapshot, not current state. Current values are computed by the build and the gates — see `AGENT_NAVIGATION.md` §11. Never align the guide or a gate to this document.
+
 > **Status:** plan (no code changed by this document). Owner: repository owner. Agent-executable parts marked `agent`.
 > **Site:** https://vudirvp-sketch.github.io/live-char-guide/ · **Repo:** https://github.com/vudirvp-sketch/live-char-guide
 > **Measured against:** `HEAD 6605b87`, version `9.2.6`, 62 sections, 13 part fragments + 2 appendix fragments,

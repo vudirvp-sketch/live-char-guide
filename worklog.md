@@ -5,6 +5,26 @@
 
 ---
 
+Task ID: iter-200-cleanup-and-ki-close
+Agent: lead
+Task: owner: «давай от мусора избавимся, чтобы он не путал агента и тебя. и почини что нужно. главное уяснить что актуально а что уже нет.» — delete junk, fix the four open KIs (gate gaps + tool defects), and write down the authoritative/historical split.
+
+BASE: 35d1d0a1
+
+Work Log:
+- 0: Preflight — worktree clean. Inventoried before touching anything: scanned every script for references (no true orphans), counted references for every doc under docs/ (two zero-reference files, both historical), and read the four open KI rows plus KI#86 in full.
+- 1: **Junk deleted (2 files, both untracked):** `_tmp_measure.py` (ad-hoc part_08 word counter from an earlier iteration) and `live-char-guide-preview-iter194.html` (1 MB single-file review snapshot — «a REVIEW artifact, not the deliverable», regenerable from `dist/`). Confirmed unreferenced first.
+- 2: **KI#79 fixed** — `audit_canon_master_drift.py` `P_TAG_RE`: `<p[^>]*>` → `<p\b[^>]*>`, so `<pre>`/`<path>`/`<picture>` no longer open a paragraph match. Actionable drift **91 → 87**; the four absorbed code-block blobs are gone.
+- 3: **KI#90 fixed** — `validate_terms.py` now matches `prohibited` variants on word boundaries (`(?<!\w)…(?!\w)`), and the ordinary verb «Хочет» left the WANT entry's prohibited list in `glossary_registry.md` (regenerated `data/glossary.json`). `validate_terms.py` green; a prose «хочет» can no longer redden CI.
+- 4: **KI#87 fixed** — new **Check 13** in `validate-master.mjs`: per-file container-tag balance (comments stripped, self-closing + SVG excluded, one PASS line per file, error names the file and the delta). **First run found three real defects no gate had caught:** `part_02` one extra `</td>` (Price table), `part_03` and `part_06` a doubled `</li>` each. Fixed all three; Check 13 green; summary now «all 13 checks».
+- 5: **KI#92 fixed** — new `scripts/audit_ocean_parity.py` (10 checks): §5.1 rule/pole-table thresholds ↔ ceilings ladder ↔ ceilings table ↔ §5.1's own НАБЛЮДЕНИЕ 8K figure ↔ `data/ocean.json` (`extremum_thresholds`, five trait thresholds, the `(extreme)` numbers in four forecast triggers) ↔ `ocean-insight` fallback + state/label literals, plus "the widget reads `extremum_thresholds`". **Negative-tested** by drifting `high` to 75 (FAIL with a precise message) and restoring the file. Added to the mandated list in `AGENTS.md` → **8 cluster gates**.
+- 6: **«Что актуально, а что нет» written down** — `AGENT_NAVIGATION.md` **§11 Authoritative vs Historical**: the two classes, the rule («a count, a § number or a path in a historical document is a measurement at a commit, not an instruction — never align the guide, a gate or a value to it»), and a table mapping each live value to where it is computed. Six documents that carry frozen numbers got a banner pointing at §11 (`I18N_PLAN`, `PROMOTION_PLAN`, `PROMOTION_SEO`, `CONTENT_RESTRUCTURE_PLAN`, `research/migration_map_v2.md`, `research/editorial_matrix.md`). This is also KI#86's disposition: label the ratified research, do not rewrite it.
+- 7: **KI lifecycle enforced** — deleted KI#85/#88/#89/#91 (closed >2 iterations ago per the rule); closed KI#79/#86/#87/#90/#92 with their evidence. **Zero open KIs.** `PLAN.md`'s `ki-79` backlog row removed with the fix.
+- 8: **Invariants re-pinned:** `validate:master` **13/13** in the new-agent paragraph; «8 cluster gates ×8 PASS»; the mandated-gates sentence lists `audit_ocean_parity.py`; glossary counts 45 → 48 in `AGENT_NAVIGATION` §1/§7 and the STATUS invariant.
+- 9: **Verification (full battery after the last edit):** build **61 sections** · hash `8b3a917d` · tests **91/91** · validate 12 gates + **133 redirects** · validate:master **13/13, 0 warnings** · sync **87/87** · **8** parity gates PASS (incl. the new OCEAN gate) · reader-path PASS (59/59, 48-term) · browser proofs `verify-prerender` 6/6 + `verify-reading-rail` 15/15 · qa csp/bundle/contrast/seo PASS · doc-versions exit 0 · english **1** / syntax **224** (baselines exact) · lint 0 · version:check 9.2.6 · drift informational exit 0 at **87** actionable.
+
+Verification: green (step 9). Zero open KIs; zero deferred items.
+
 Task ID: iter-199-glossary-native
 Agent: lead
 Task: owner: «доделывай все и пуш в репозиторий проекта» — the last open audit row (#34): the glossary claimed completeness while three named systems had no entry. Data change, not a text edit.

@@ -6,6 +6,17 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 200 — cleanup, four KIs closed, and the authoritative/historical split written down.
+
+- **Junk deleted:** `_tmp_measure.py` and a 1 MB `live-char-guide-preview-iter194.html` review snapshot — both untracked, both regenerable, both unreferenced.
+- **KI#79 (drift tool):** `P_TAG_RE` `<p[^>]*>` → `<p\b[^>]*>` — it no longer swallows `<pre>`/`<path>`/`<picture>`; actionable drift re-baselined 91 → 87.
+- **KI#90 (term gate):** word-boundary matching for `prohibited` variants + the ordinary verb «Хочет» removed from the WANT list — prose «хочет» no longer trips CI.
+- **KI#87 (tag balance):** `validate-master` **Check 13** (13 checks). Its first run found three real strays that every previous gate passed: part_02 an extra `</td>`, part_03 and part_06 a doubled `</li>`.
+- **KI#92 (OCEAN):** new `scripts/audit_ocean_parity.py` — §5.1 thresholds + ceilings ↔ `data/ocean.json` ↔ widget literals, negative-tested; **8 cluster gates** now.
+- **What is current vs history:** `AGENT_NAVIGATION.md` **§11** states the rule (a historical number is a measurement, never an instruction) and maps every live value to where it is computed; six stale-number docs carry a frozen-record banner (KI#86 closed this way — the ratified map is labelled, not rewritten).
+- **Lifecycle:** four long-closed KIs deleted, five closed with evidence — **zero open KIs**.
+- **Verified:** build 61 sections · tests **91/91** · validate 12 gates + 133 redirects · master **13/13**, 0 warnings · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser 6/6 + 15/15 · english **1** / syntax **224** · lint 0.
+
 ### iter 199 — the glossary now covers the three systems it names (48 entries).
 
 - **Three native entries added:** `Класс качества (Quality Grade)` (§3.3), `Плата за письменность (Script Tax)` (§7A.12), `Сопоставитель паттернов (Pattern Matcher)` (§7A.4) — Russian heads with the English identifier in parentheses (DEC-16), each with aliases and a link to its owning section. Registry 45 → 48, `data/glossary.json` regenerated, no-JS page carries all three.

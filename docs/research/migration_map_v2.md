@@ -1,5 +1,7 @@
 # Migration Map v2 — Live Character Guide (living registry)
 
+> **Historical record — frozen at its commit.** Numbers, § numbers and paths below are a snapshot, not current state. Current values are computed by the build and the gates — see `AGENT_NAVIGATION.md` §11. Never align the guide or a gate to this document.
+
 > **Owner of the question "куда попал каждый существенный смысл v1 и почему?"**
 > This registry is the Phase-3 artifact of the v1 → v2 migration
 > (owner directive, chat 2026-09-14; track context:
