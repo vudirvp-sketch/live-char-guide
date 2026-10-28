@@ -2,7 +2,7 @@
 canonical_for: `src/master/part_07a.html` (884 строки, 12 секций)
 vs_embedded: E08 (CORE DIRECTIVES), E16 (Author's Note Mechanics), E17 (Sampling Parameters), E02 (Assembly Pipeline)
 vs_cross_ref: E07 (Voice Hierarchy) — referenced inside E16; embedded in Part 3 (`p3_influence_hierarchy`)
-sections: `p7a_system_prompt`, `p7a_core_directives`, `p7a_tone_frame`, `p7a_format_lock`, `p7a_authors_note`, `p7a_sampling_params`, `p7a_model_checklist`, `p7a_ooc_protection`, `p7a_xml_tags`, `p7a_api_blocks`, `p7a_token_budget`, `p7a_assembly_pipeline`
+sections: `p7a_system_prompt`, `p7a_core_directives`, `p7a_tone_frame`, `p7a_format_lock`, `p7a_authors_note`, `p7a_sampling_params`, `p7a_ooc_protection`, `p7a_xml_tags`, `p7a_api_blocks`, `p7a_token_budget`, `p7a_assembly_pipeline`
 last_synced: 2026-10-24 (iter 189 — v4-8 chapters 7-8: §7A.11 absorbed into §7A.12; §7A.13 = six-step table + one per-card budget)
 migration_status: ✅ MIGRATED (iter 11)
 ---
@@ -219,7 +219,7 @@ Format Lock:
 
 [VS: E16 — Author's Note Mechanics. Вертикальный timeline: message stream с инъекцией `[AN]` в позицию 3–5 сообщений от конца. Position indicator: длина 100–200 токенов, частота каждые 5–10 сообщений. Template A/B toggle: A (3 секции, без GHOST) для простых персонажей; B (4 секции, с GHOST-activation) для персонажей с GHOST Layers. Cross-references на E07 (Voice Hierarchy — AN влияет на голос ~2–5%, диапазон = мин–макс строки AN по моделям, исходные значения — §3.2), E05 (SPINE — Template B GHOST-activation), E06 (GHOST Layers), E02 (Assembly Pipeline — шаг инъекции AN). Замещает текстовое описание механики AN и параметров.]
 
-> **Примечание об E07 (иерархии влияния голоса):** E07 не является отдельным VS-EMBED в Part 7A — оно встроено в Part 3 (`p3_influence_hierarchy`). Здесь E07 только упомянуто из E16 как индикатор того, что AN влияет на голос модели в диапазоне ~2–5% (мин–макс строки AN по моделям — `[ref: part_03.md §3.2 — Иерархия влияния на голос]`). На 12B влияние AN на голос пренебрежимо мало (~2%), на API доходит до ~5% (см. §7A.7).
+> **Примечание об E07 (иерархии влияния голоса):** E07 не является отдельным VS-EMBED в Part 7A — оно встроено в Part 3 (`p3_influence_hierarchy`). Здесь E07 только упомянуто из E16 как индикатор того, что AN влияет на голос модели в диапазоне ~2–5% (мин–макс строки AN по моделям — `[ref: part_03.md §3.2 — Иерархия влияния на голос]`). На 12B влияние AN на голос пренебрежимо мало (~2%), на API доходит до ~5% (см. Приложение E).
 
 ### Параметры AN
 
@@ -312,16 +312,6 @@ data-section: p7a_sampling_params
 
 ---
 
-## 7A.7 Чеклист по типу модели
-
-data-section: p7a_model_checklist
-
-<!-- difficulty: INTERMEDIATE -->
-
-Сводная таблица возможностей по типу модели (голос, XML, уровень CoT, язык SP, Anti-godmoding) — [ref: appendix_model_params.md — возможности моделей]. Решение по карточке принимается по этой строке один раз — на шаге выбора модели ([ref: part_01.md §1.6 — профиль сборки]); в конвейере сборки она больше не повторяется.
-
----
-
 ## 7A.8 OOC-защита (OOC Protection)
 
 `data-section: p7a_ooc_protection`
@@ -364,7 +354,7 @@ delusion. The character doubles down on reality.
 <!-- difficulty: EXPERT -->
 <!-- canonical: XML Tags in Description -->
 
-Структурирование Description через XML-теги для API моделей (32B+ и API; на 12B XML нестабилен — см. §7A.7). `<anchors>` размещён внутри Description как XML-тег: отдельного поля Anchors у типового фронтенда нет. Если фронтенд такое поле предлагает — якоря идут в него. На схеме E01 якоря показаны в Examples-зоне, потому что задают поведение, а Examples — голос.
+Структурирование Description через XML-теги для API моделей (32B+ и API; на 12B XML нестабилен — см. Приложение E). `<anchors>` размещён внутри Description как XML-тег: отдельного поля Anchors у типового фронтенда нет. Если фронтенд такое поле предлагает — якоря идут в него. На схеме E01 якоря показаны в Examples-зоне, потому что задают поведение, а Examples — голос.
 
 ### Структура
 

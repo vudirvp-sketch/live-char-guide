@@ -86,7 +86,6 @@
         "p7a_format_lock",
         "p7a_authors_note",
         "p7a_sampling_params",
-        "p7a_model_checklist",
         "p7a_ooc_protection",
         "p7a_xml_tags",
         "p7a_api_blocks",

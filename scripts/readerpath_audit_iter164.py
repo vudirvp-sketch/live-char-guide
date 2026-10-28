@@ -151,8 +151,8 @@ def main():
         if built != entry["anchors"]:
             err(f"LEARN L2: {entry['file']} renders {built} != manifest {entry['anchors']}")
     total = sum(len(e["anchors"]) for e in manifest["parts"] + manifest["appendices"])
-    if total != 61:
-        err(f"LEARN L2: rendering section count {total} != 61 "
+    if total != 60:
+        err(f"LEARN L2: rendering section count {total} != 60 "
             "(v3 stage 3: Part 8 16->2, Part 9 11->7, Part 10 4->5; stage 4a: "
             "Parts 2/3/4/5/6 de-duplicated; stage 4b/F-19: Appendix C deleted; "
             "v4-7: Part 7B 5->3; v4-8: §7A.11 4K-Fallback absorbed into §7A.12; "
@@ -244,7 +244,7 @@ def main():
                 err(f"BUILD B2: §7A.12 lost «{token}» (budget table / 4K profile / calculator range)")
 
     # B3 — default visibility: value tables + capability checklist + templates
-    for sid in ("p7a_sampling_params", "p7a_model_checklist"):
+    for sid in ("p7a_sampling_params",):  # iter 208 (S6): p7a_model_checklist retired -> redirect
         if section(m07a, sid) is None or section(b07a, sid) is None:
             err(f"BUILD B3: §7A value/checklist surface {sid} missing")
     # F-20 (iter 178): the ШАБЛОН chip is retired — the copyable template surface is the

@@ -102,7 +102,7 @@ This document is the **single source of truth** for "where does concept X live."
 | Format Lock | `p7a_format_lock` | §7A.4 | Rule | Output formatting rules |
 | Author's Note (AN) | `p7a_authors_note` | §7A.5 | Template+Rules | Short instruction after SP |
 | Sampling parameters | `p7a_sampling_params` | §7A.6 | Pointer | Two hard constraints stay inline (PP = 0.0, RepPen ≤ 1.10); tables, per-model recs, interfaces → Appendix E (iter 172) |
-| Model Type Checklist | `p7a_model_checklist` | §7A.7 | Pointer | Capability rows live in Appendix E (merged with the old Appendix B table, iter 172) |
+| Model Type Checklist | `p7a_model_checklist` | §7A.7 | **RETIRED (iter 208, S6)** | Rule moved to §1.6; id is a legacy redirect → `p1_prebuild_checklist`; capability rows live in Appendix E (iter 172) |
 | OOC Protection | `p7a_ooc_protection` | §7A.8 | Technique | Anti-OOC mechanisms |
 | XML tags | `p7a_xml_tags` | §7A.9 | Full treatment | `<identity>`, `<appearance>`, etc. |
 | API blocks | `p7a_api_blocks` | §7A.10 | Pointer (collapsed) | «Если вы на API» disclosure; templates → Appendix E (iter 172) |

@@ -5,6 +5,24 @@
 
 ---
 
+Task ID: iter-208-s6-retire-7a7
+Agent: lead
+Task: audit v2 S6 on the owner's explicit approval («разрешаю») — retire §7A.7 (`p7a_model_checklist`) to a legacy redirect, move its rule into §1.6, and bring the corpus to 60.
+
+BASE: b79cc230
+
+Work Log:
+- 0: Preflight — worktree clean, HEAD `b79cc230`; owner approval received in chat («разрешаю короче») — the `data/anchor-redirects.json` stop-condition is satisfied.
+- 1: **Rule moved** to §1.6 «Профиль сборки» as local prose («Решение по модели принимается здесь, один раз: строка таблицы возможностей в Приложении E выбирается по профилю сборки — в конвейере сборки она больше не повторяется»), deliberately without a link so reader-path B2's self-contained profile holds.
+- 2: **Section deleted** from master + canon; canon's two stale «см. §7A.7» pointers now read «см. Приложение E»; canon front-matter section list drops the id.
+- 3: **Legacy redirect** `p7a_model_checklist` → `p1_prebuild_checklist` in `data/anchor-redirects.json` (generated date bumped). SHELL-REDIRECTS: **134 redirects, all live, no chains**.
+- 4: **Gates re-pointed, not weakened:** `audit_sampling_parity.py` — §7A.6 slice now ends at `## 7A.8`, the old §7A.7 pointer block became a negative guard, and the §1.6 check requires the moved rule + Appendix E mention; `audit_voice_parity.py` — the §7A.7 block became the same absence guard (the AN-claim check against Appendix E stays); `readerpath_audit_iter164.py` — corpus 61 → 60, wiring list drops the id.
+- 5: **Counts where current-state:** meta description «60 разделов», README 60, AGENT_NAVIGATION 60 + link inventory corrected to 4 Appendix-E pointers; content_map marks the id RETIRED; PLAN row S6 = executed; DEC-40 records the owner approval and the hash move.
+- 6: **Verification:** build **60 sections** · hash `8b3a917d` → **`336a4fc6`** (shell meta) · tests **91/91** · validate 12 gates + **134 redirects** · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · csp/bundle/seo/doc-versions PASS · english **1** / syntax **224** · lint 0 · version 9.2.6.
+- 7: **Browser proof:** `#p7a_model_checklist` → URL rewritten to `#p1_prebuild_checklist`; 60 sections; no retired section in the DOM; TOC has no «Чеклист по типу модели»; the §1.6 rule renders.
+
+Verification: green. The v2 audit has no open item left; S5 rejected (DEC-39), S9 UNCLEAR in PLAN a2-E.
+
 Task ID: iter-207-ocean-widget-cleanup
 Agent: lead
 Task: audit v2 support S7/S8 — the OCEAN widget's forecast was not named in prose and a dead `enneagram:ocean-suggest` branch promised a retired function.
@@ -38,37 +56,9 @@ Work Log:
 
 Verification: green. Remaining audit item = S6 (§7A.7 deletion) — owner-gated redirect change.
 
-Task ID: iter-205-support-and-notation
+Task ID: iters 204–205 (one-line summaries, condensed)
 Agent: lead
-Task: audit v2 iteration E — the no-JS glossary page, the OCEAN widget's boundary/copy defects, and the last section-glyph debt in comments.
-
-BASE: b26ded80
-
-Work Log:
-- 0: Preflight — worktree clean, HEAD `b26ded80`. Read `generateGlossaryHTML()` (fragment-only), the OCEAN widget's state/copy functions, and counted the remaining § glyphs (25 master + 30 shell/widget, all inside comments).
-- 1: **Glossary page** (`scripts/build-unified.mjs`): emits `<!DOCTYPE html>` with `<head>` (charset, viewport, title, description), palette styles matching the guide's soft dark, «← Live Character Guide» back link, measured term count, and `href="../index.html#<anchor>"` per term (was `#<anchor>` — dead on a standalone page). The `no-js-only` marker is kept (reader-path gate anchor). Browser: 48 terms, 48 refs, styled page, working back link.
-- 2: **OCEAN widget** (`ocean-insight.js`): `<= 30`/`>= 70` → `< 30`/`> 70` in `getState`, `getTraitLabel`, `countExtrema`, the forecast and the extrema summary; `generateCopyText` returns the canonical compact `<ocean>…</ocean>` tag instead of a narrative list. Browser-proofs: 30/70 = «Умеренная», 29 = low label, 71 = high label; captured copy = `<ocean>O:72 C:65 E:41 A:38 N:68</ocean>`.
-- 3: **Notation debt**: removed the remaining 55 `§` glyphs from master HTML comments and shell/widget JS comments (comments only — visible text was already at zero since iter 201); `audit_enneagram_parity.py` accepts the glyph-free E10 derivation reference.
-- 4: **Verify:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
-- 5: **Deliberately not done:** regenerating the six missing E-prototypes (E01/E07/E08/E10/E12/E17) — DEC-19 freezes `visual-system/` as design artifacts, every embed is live with no 404, and the audit classes it maintenance; the OCEAN widget's Enneagram forecast declaration and static `high/low` labels stay recorded in `PLAN.md` a2-E.
-
-Verification: green. S6 (§7A.7 deletion) remains an owner-gated redirect call.
-
-Task ID: iter-204-visuals-glossary
-Agent: lead
-Task: audit v2 iteration D2 — the three visual defects the v1/v2 audit measured (E04 funnel widths, E07 clipped strip, E08 badge) and the glossary rendering defect (markdown backticks + a live `<anchors>` tag on both reader surfaces).
-
-BASE: e3d36281
-
-Work Log:
-- 0: Preflight — worktree clean, HEAD `e3d36281`. Located the embeds: E04 in `part_02` (`.funnel-stack`), E07 SVG in `part_03`, E08 SVG in `part_07a`; the funnel rules ship TWICE (`vs-styles.css` + `shell/styles.css`), so both were patched.
-- 1: **E04.** `nth-of-type` counts all `div` siblings of the stack (link-back = 1, bar = 2, arrow = 3, …), and the rules targeted `1/3/5/7` — the link-back and arrows, never a bar. Re-pointed to `2/4/6/8` for widths and transition delays in both files. Browser: bar widths 600/510/420/330 px = **100/85/70/55 %**.
-- 2: **E07.** The last `rect.bar-rect` was `y=410 h=12` → bottom 422 inside `viewBox="0 0 780 420"`; moved to `y=408`. Browser: all 16 strip rects end ≤ 420, last one exactly 420.
-- 3: **E08.** Directive 7's `<text class="model-badge">[Model ↗]</text>` lacked `text-anchor` (directive 6's had `end`), so it overflowed the node frame; added `text-anchor="end"`. Browser `getBBox`: text right 625, frame right 630.
-- 4: **Glossary rendering.** `data/glossary.json` definitions are plain text with markdown backticks; the panel (`loadGlossaryContent`) and the no-JS generator (`build-unified.mjs` → `parts/glossary.html`) both interpolated them as HTML — hence literal backticks and a real `<anchors>` element. Both now escape (`& < > " '`) and then convert `` `x` `` → `<code>x</code>`. Browser-proved on the panel and on `/parts/glossary.html`: `&lt;anchors&gt;` in the DOM, zero `anchors` elements, `<code>` present, no backticks in text.
-- 5: **Verification:** build 61 sections · hash `8b3a917d` · tests **91/91** · validate 12 gates + 133 redirects · validate:master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
-
-Verification: green. Remaining: iteration E (no-JS glossary page styling, OCEAN widget, prototypes).
+Task: 204 the last audit visuals (E04 funnel 100/85/70/55 %, E07 strip inside the viewBox, E08 badge anchor) + glossary escaping on both surfaces; 205 support (real no-JS glossary page, strict OCEAN 30/70 + `<ocean>` copy, notation debt to zero). Detail: git + STATUS.
 
 Task ID: iter-203-part9-numbers
 Agent: lead

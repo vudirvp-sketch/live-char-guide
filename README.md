@@ -2,7 +2,7 @@
 
 **Инженерный конвейер для карточек персонажей LLM.** Не сборник промптов, а процесс: SPINE (психологический каркас) → якоря поведения → изоляция голоса → системный промпт → готовая карточка. Для моделей 12B–32B+, совместимо с SillyTavern.
 
-[**→ Открыть гайд**](https://vudirvp-sketch.github.io/live-char-guide/) · 12 частей · 61 раздел · 4 полные карточки-примера · v9.2.6
+[**→ Открыть гайд**](https://vudirvp-sketch.github.io/live-char-guide/) · 12 частей · 60 разделов · 4 полные карточки-примера · v9.2.6
 
 [![Deploy](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/vudirvp-sketch/live-char-guide/actions/workflows/deploy-pages.yml)
 [![Version](https://img.shields.io/github/package-json/v/vudirvp-sketch/live-char-guide)](package.json)
@@ -127,7 +127,7 @@ Issues и PR — приветствуются: [issues](https://github.com/vudir
 
 ## English summary
 
-**Live Character Guide** is a Russian-language engineering guide for building LLM roleplay character cards (SillyTavern-compatible, 12B–32B+ models). It treats the card as a behavioural engine: SPINE (psychological skeleton) → behavioural anchors → voice isolation → system prompt → finished card. 12 parts, 61 sections, 4 complete worked cards, plus a diagnostics track. Static HTML/CSS/vanilla JS, built by Node scripts, deployed to GitHub Pages.
+**Live Character Guide** is a Russian-language engineering guide for building LLM roleplay character cards (SillyTavern-compatible, 12B–32B+ models). It treats the card as a behavioural engine: SPINE (psychological skeleton) → behavioural anchors → voice isolation → system prompt → finished card. 12 parts, 60 sections, 4 complete worked cards, plus a diagnostics track. Static HTML/CSS/vanilla JS, built by Node scripts, deployed to GitHub Pages.
 
 → <https://vudirvp-sketch.github.io/live-char-guide/>
 

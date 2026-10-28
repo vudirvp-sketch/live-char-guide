@@ -244,7 +244,7 @@ def main():
     master_appe = read(MASTER_APPE)
 
     # ---------- 1. Canonical record (Appendix E, SW-1 since iter 172) ----------
-    sec76 = md_section(canon7a, r"^## 7A\.6 ", r"^## 7A\.7 ")
+    sec76 = md_section(canon7a, r"^## 7A\.6 ", r"^## 7A\.8 ")  # iter 208: §7A.7 retired
     if sec76 is None:
         err("canon §7A.6 section not found")
         return finish()
@@ -295,18 +295,10 @@ def main():
                  "[VS: E17] marker + PP rules ×2 + model-specific point recs ×4; "
                  "§7A.6 keeps the two hard constraints + a pointer")
 
-    # ---------- 2. Canon §7A.7 (S-b) pointer + Appendix E capability rows ----------
-    sec77 = md_section(canon7a, r"^## 7A\.7 ", r"^## 7A\.8 ")
-    if sec77 is None:
-        err("canon §7A.7 section not found")
-    else:
-        for param in ("Temperature", "Presence Penalty", "RepPen"):
-            if re.search(rf"^\| {re.escape(param)} \|", sec77, re.MULTILINE):
-                err(f"canon §7A.7: param row still present: {param}")
-        if parse_canon_table(sec77, 4):
-            err("canon §7A.7: capability table must live in Appendix E now")
-        if "[ref: appendix_model_params.md — возможности моделей]" not in sec77:
-            err("canon §7A.7: pointer to Appendix E missing")
+    # ---------- 2. §7A.7 is RETIRED (iter 208, S6) — its rule lives in §1.6 ----------
+    if "## 7A.7 " in canon7a or "p7a_model_checklist" in canon7a:
+        err("canon: the retired §7A.7 / p7a_model_checklist is back "
+            "(S6 moved its rule to §1.6 and left a redirect)")
 
     cap_rows = parse_canon_table(canon_appe, 4)
 
@@ -375,20 +367,19 @@ def main():
     notes.append("master §7A.6 mirror: two hard constraints + Appendix E pointer; "
                  "no value table")
 
-    # ---------- 4. Master §7A.7 pointer mirror ----------
-    m77 = html_section(master7a, "p7a_model_checklist")
-    if m77 is None:
-        err("master: p7a_model_checklist section not found")
-    else:
-        if 'href="#appendix_model_params"' not in m77:
-            err("master §7A.7: Appendix E pointer link missing")
-        if "<th>Параметр</th>" in m77 or "<th>Temperature</th>" in m77 \
-                or "<th>Возможность</th>" in m77:
-            err("master §7A.7: param/capability table must not reappear")
-        if "CoT Tier 0" in m77:
-            err("master §7A.7: capability bullets must be gone (Appendix E owns them)")
-    notes.append("master §7A.7 mirror: pointer only (capability table lives in "
-                 "Appendix E)")
+    # ---------- 4. The one-time model decision lives in §1.6 (iter 208, S6) ----------
+    if "p7a_model_checklist" in master7a:
+        err("master: the retired p7a_model_checklist section is back "
+            "(S6 moved its rule to §1.6 and left a redirect)")
+    m16 = html_section(read(REPO / "src" / "master" / "part_01.html"),
+                       "p1_prebuild_checklist")
+    if m16 is None:
+        err("master §1.6: p1_prebuild_checklist section not found")
+    elif "Решение по модели" not in m16 or "Приложении E" not in m16:
+        err("master §1.6: the one-time model-decision rule + Appendix E pointer "
+            "are missing (moved here by S6)")
+    notes.append("model decision: §1.6 carries the one-time rule + Appendix E "
+                 "pointer; §7A.7 retired to a redirect")
 
     # ---------- 5. E17 embed (S-c) ----------
     e17 = re.search(

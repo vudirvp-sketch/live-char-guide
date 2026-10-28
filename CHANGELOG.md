@@ -6,6 +6,15 @@
 
 ## [9.2.6] — 2026-10-27
 
+### iter 208 — S6 executed on owner approval: §7A.7 retired, corpus 60.
+
+- **§7A.7 («Чеклист по типу модели») deleted** from master and canon; its one rule now lives in §1.6 «Профиль сборки» as local prose (no link — the profile stays self-contained).
+- **Legacy redirect** `p7a_model_checklist` → `p1_prebuild_checklist`; **134 redirects**, all live, no chains; TOC clean.
+- **Gates re-pointed:** sampling/voice now assert the section is absent; reader-path expects **60** and drops the id from its wiring list; §1.6 check requires the moved rule + Appendix E mention.
+- **Current-state counts updated:** meta «60 разделов», README 60, AGENT_NAVIGATION 60, content_map marks the id RETIRED; DEC-40 records the owner approval.
+- **Hash moved** `8b3a917d` → `336a4fc6` (shell meta description; DEC-05).
+- **Verified:** build **60 sections** · tests 91/91 · validate 12 gates + **134 redirects** · master 13/13 · sync 87/87 · 8 parity gates PASS · reader-path PASS · browser redirect + 60-section DOM · english 1 / syntax 224 · lint 0.
+
 ### iter 207 — OCEAN widget: dead suggestion branch removed, forecast named in prose.
 
 - **Dead branch removed:** `enneagram:ocean-suggest` subscription, hidden «Применить предложение Enneagram» button and its handler — the emitter was retired in v3, so the function never existed.
@@ -22,13 +31,7 @@
 - **Marina:** the third Lorebook example's contact renamed Ольга — one Marina in the guide.
 - **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · english **1** / syntax **224** · lint 0.
 
-### iter 205 — support surfaces: a real no-JS glossary page and an honest OCEAN widget.
-
-- **No-JS glossary page:** full document (head, title, palette styles, back link, measured term count); 48 term arrows now point at `../index.html#<id>` instead of a dead `#<id>`.
-- **OCEAN widget:** strict §5.1 boundaries (`< 30` / `> 70`, so 30 and 70 are cautious-zone edges, not extremes) in state, labels, extrema count and forecast; «Copy for card» copies the canonical `<ocean>O:… C:… E:… A:… N:…</ocean>` tag instead of a narrative list.
-- **Notation debt:** remaining 55 `§` glyphs in master/shell comments removed; enneagram gate accepts the glyph-free derivation ref.
-- **Deliberately not done:** E-prototype regeneration (DEC-19 frozen artifacts; all embeds live) — recorded in `PLAN.md` a2-E.
-- **Verified:** build 61 sections · tests **91/91** · validate 12 + 133 redirects · master **13/13** · sync 87/87 · 8 parity gates PASS · reader-path PASS · lint 0.
+### iter 205 — support: real no-JS glossary page, strict OCEAN boundaries, notation debt zero (detail: git + STATUS).
 
 ### iter 204 — the audit visuals and the glossary render honestly.
 

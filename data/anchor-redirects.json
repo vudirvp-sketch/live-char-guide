@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22T00:00:00.000Z",
+  "generated": "2026-10-28T00:00:00.000Z",
   "description": "Anchor redirects for legacy URLs (v5.12 anchors and earlier v9 ids) -> current section ids. Used by lazy-loader.js handleLegacyAnchor(). Every target MUST be a live manifest anchor: no dead targets, no chains, no self-maps, no key shadowing a live id (enforced by the SHELL-REDIRECTS gate in scripts/validate-artifact.mjs). Source of truth for the legacy v5.12 anchors: docs/migration_map.md v3.2 (2026-04-22), archived — deleted in iter 3 (d317c108), recoverable from git history.",
   "redirects": {
     "01_intro": "p1_card_overview",
@@ -134,6 +134,7 @@
     "p7a_4k_fallback": "p7a_token_budget",
     "p9_symptom_table": "p9_basic_checklist",
     "p9_one_change_rule": "p9_test_scenarios",
-    "p1_top3_problems": "p9_basic_checklist"
+    "p1_top3_problems": "p9_basic_checklist",
+    "p7a_model_checklist": "p1_prebuild_checklist"
   }
 }

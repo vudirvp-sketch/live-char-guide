@@ -357,19 +357,12 @@ def main():
             err("canon §7A.5: AN-12B note not re-framed (Option A)")
         if "мин–макс строки AN" not in sec75:
             err("canon §7A.5: E16 range derivation sentence missing")
-    # v3 stage 2 (iter 172): the AN-и-голос claim moved out of §7A.7 into
-    # Appendix E (model/runtime layer). §7A.7 is a pointer now; the re-framed
-    # wording must live in the appendix (canon + master), and must NOT be
-    # duplicated back into §7A.7.
-    sec77 = md_section(canon7a, r"^## 7A\.7 ", r"^## 7A\.8 ")
-    if sec77 is None:
-        err("canon §7A.7 section not found")
-    else:
-        if "appendix_model_params.md" not in sec77:
-            err("canon §7A.7: pointer to Appendix E missing")
-        if RE_FRAME in sec77:
-            err("canon §7A.7: the AN-и-голос claim is back in §7A.7 "
-                "(it must live in Appendix E only)")
+    # v3 stage 2 (iter 172) moved the AN-и-голос claim out of §7A.7 into Appendix E;
+    # iter 208 (S6) retired §7A.7 entirely (rule -> §1.6, id -> redirect). The claim
+    # must live in the appendix only and the retired section must not come back.
+    if "## 7A.7 " in canon7a or "p7a_model_checklist" in canon7a:
+        err("canon: the retired §7A.7 / p7a_model_checklist is back "
+            "(S6 moved its rule to §1.6)")
     cappe = read(CANON_APPE)
     mappe = read(MASTER_APPE)
     if RE_FRAME not in cappe:
